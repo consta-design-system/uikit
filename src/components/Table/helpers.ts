@@ -23,6 +23,7 @@ export type Position = {
   rowSpan?: number;
   level: number;
   gridIndex: number;
+  isFirst?: boolean;
   topHeaderGridIndex: number;
   smallTextSize?: boolean;
   height?: number;
@@ -30,6 +31,8 @@ export type Position = {
 
 export type Header<T extends TableRow> = TableColumn<T> & {
   position: Position;
+  colId?: number;
+  parentId?: number;
 };
 
 export type HeaderData<T extends TableRow> = {
@@ -140,14 +143,15 @@ const getLastChildrenCount = <T extends TableRow>(
 export const transformColumns = <T extends TableRow>(
   columns: Array<TableColumn<T>>,
   maxLevel: number,
-): Array<TableColumn<T> & { position: Position }>[] => {
+): Array<Header<T>>[] => {
   const stack = [{ columns, index: 0 }];
-  const headersArr: Array<TableColumn<T> & { position: Position }>[] = [];
+  const headersArr: Array<Header<T>>[] = [];
+  let col = 0;
 
   while (stack.length) {
     const level = stack.length - 1;
     const node = stack[level];
-    const item: TableColumn<T> = node.columns[node.index];
+    const item = node.columns[node.index] as Header<T>;
 
     if (item) {
       if (!headersArr[level]) headersArr[level] = [];
@@ -156,8 +160,13 @@ export const transformColumns = <T extends TableRow>(
       const gridIndex = prevItem
         ? prevItem.position.gridIndex + (prevItem.position.colSpan || 1)
         : 0;
+      const mainId = level === 0 ? col++ : item.colId ?? 0;
 
-      const handledItem: TableColumn<T> & { position: Position } = {
+      const handledItem: TableColumn<T> & {
+        position: Position;
+        colId?: number;
+        parentId?: number;
+      } = {
         ...item,
         position: {
           topHeaderGridIndex,
@@ -165,6 +174,10 @@ export const transformColumns = <T extends TableRow>(
           level,
         },
       };
+
+      if (level === 0) {
+        handledItem.colId = mainId;
+      }
 
       if (!handledItem.columns) {
         handledItem.position.rowSpan = maxLevel - level;
@@ -175,7 +188,14 @@ export const transformColumns = <T extends TableRow>(
           handledItem.columns,
         );
         headersArr[level].push(handledItem);
-        stack.push({ columns: handledItem.columns, index: 0 });
+        stack.push({
+          columns: handledItem.columns.map((el) => ({
+            ...el,
+            colId: col++,
+            parentId: mainId,
+          })),
+          index: 0,
+        });
       }
     } else {
       stack.pop();
@@ -184,6 +204,21 @@ export const transformColumns = <T extends TableRow>(
   }
 
   return headersArr;
+};
+
+const getIsFirst = <T extends TableRow>(
+  columns: Header<T>[],
+  column: Header<T>,
+): boolean => {
+  const { colId, parentId, position, accessor } = column;
+  if (position.level === 0) {
+    return colId === 0;
+  }
+  const parent = columns.find((el) => el.colId === parentId);
+  return !!(
+    parent?.columns?.[0]?.accessor === accessor &&
+    (parent ? getIsFirst(columns, parent) : false)
+  );
 };
 
 /**
@@ -213,13 +248,15 @@ export const useHeaderData = <T extends TableRow>(
   )
     .filter(isNotNil)
     .map((ref) => ref.getBoundingClientRect().height);
+
   const flattenedHeaders = headers
     .flat()
     .filter((column: TableColumn<T>) => !column.hidden)
-    .map((column, index) => ({
+    .map((column, index, array) => ({
       ...column,
       position: {
         ...column.position,
+        isFirst: getIsFirst(array, column),
         smallTextSize:
           headers.length > 1 && column.position.level === headers.length - 1,
         height: headerColumnsHeights[index] || 0,
@@ -368,7 +405,6 @@ export const transformRows = <T extends TableRow>(
 ): TableTreeRow<T>[] => {
   const stack = [{ rows, index: 0 }];
   const rowsArr: TableTreeRow<T>[] = [];
-
   while (stack.length) {
     const level = stack.length - 1;
     const node = stack[level];
@@ -377,7 +413,7 @@ export const transformRows = <T extends TableRow>(
     if (item) {
       const handledItem: TableTreeRow<T> = {
         ...item,
-        level,
+        options: { level },
         rows: item.rows && [...item.rows],
       };
 
@@ -409,4 +445,36 @@ export function getMergedArray<TYPE>(mainArr: TYPE[], mergeArr: TYPE[]) {
     resultArr.push(mergeArr[i] ?? mainArr[i]);
   }
   return resultArr;
+}
+
+export function calulateColSpans<T extends TableRow>(
+  columns: TableColumn<T>[],
+  row: TableTreeRow<T>,
+) {
+  const spans: number[] = [];
+  let counter = 0;
+  const { length } = columns;
+  const getAvailableSpan = (span: number, size: number) => {
+    if (size + span > length) return length - size - span;
+    return span;
+  };
+  columns.forEach((column) => {
+    const { colSpan } = column;
+    const size = spans.length > 1 ? spans.reduce((a, b) => a + b) : 0;
+    if (typeof colSpan === 'number' || typeof colSpan === 'function') {
+      const span = typeof colSpan === 'number' ? colSpan : colSpan(row);
+      if (counter === 0) {
+        spans.push(getAvailableSpan(span, size));
+      } else {
+        spans.push(getAvailableSpan(span - counter || 0, size));
+      }
+      counter = span - counter > 0 ? span - 1 : counter - span;
+    } else if (counter !== 0) {
+      spans.push(0);
+      counter--;
+    } else {
+      spans.push(getAvailableSpan(1, size));
+    }
+  });
+  return spans;
 }

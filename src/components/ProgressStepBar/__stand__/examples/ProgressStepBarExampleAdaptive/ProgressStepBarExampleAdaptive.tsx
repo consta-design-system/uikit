@@ -1,3 +1,4 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { ProgressStepBar } from '../../../ProgressStepBar';
@@ -30,13 +31,13 @@ const steps = [
 
 export const ProgressStepBarExampleAdaptive = () => {
   return (
-    <div style={{ maxWidth: 200 }}>
+    <Example col={1} style={{ maxWidth: 200 }}>
       <ProgressStepBar
         size="s"
         direction="horizontal"
         steps={steps}
         activeStepIndex={2}
       />
-    </div>
+    </Example>
   );
 };

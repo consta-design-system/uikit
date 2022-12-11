@@ -5,11 +5,7 @@ import { ContextMenuExampleSubMenu } from './examples/ContextMenuExampleSubMenu/
 import { ContextMenuExampleOutsideClick } from './examples/ContextMenuExampleOutsideClick/ContextMenuExampleOutsideClick';
 import { ContextMenuExampleSide } from './examples/ContextMenuExampleSide/ContextMenuExampleSide';
 import { ContextMenuExampleGroups } from './examples/ContextMenuExampleGroups/ContextMenuExampleGroups';
-import {
-  ContextMenuExampleSizeS,
-  ContextMenuExampleSizeL,
-  ContextMenuExampleSizeM,
-} from './examples/ContextMenuExampleSize/ContextMenuExampleSize';
+import { ContextMenuExampleSize } from './examples/ContextMenuExampleSize/ContextMenuExampleSize';
 
 ```tsx
 import { ContextMenu } from '@consta/uikit/ContextMenuDeprecated';
@@ -21,7 +17,7 @@ import { ContextMenu } from '@consta/uikit/ContextMenuDeprecated';
   - [Сделать активным](#сделать-пункт-меню-активным)
   - [Заблокировать](#заблокировать-пункт-меню)
   - [Добавить дополнительные элементы](#добавить-дополнительные-элементы)
-  - [Группы пунктов](#группы-пунктов-меню)
+  - [Группы пунктов](#группы-пунктов)
 - [Размер меню](#размер-меню)
 - [Второй уровень меню](#второй-уровень-меню)
 - [Закрыть по клику за пределами](#закрыть-меню-по-клику-по-внешней-области)
@@ -135,6 +131,7 @@ function renderRightSide(
 export const ContextMenuExampleSide = () => {
   const [items, setItems] = useState(menuItems);
   const ref = useRef(null);
+  const [isOpen, setIsOpen] = useFlag();
 
   const getLabel = (item: Item) => item.name;
 
@@ -151,16 +148,18 @@ export const ContextMenuExampleSide = () => {
 
   return (
     <>
-      <Button iconLeft={IconAdd} ref={ref} />
-      <ContextMenu
-        items={items}
-        getLabel={getLabel}
-        anchorRef={ref}
-        direction="downStartLeft"
-        getLeftSideBar={renderLeftSide}
-        getRightSideBar={(item) => renderRightSide(item, onChange)}
-        possibleDirections={['upStartLeft', 'downStartLeft']}
-      />
+      <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toogle} />
+      {isOpen && (
+        <ContextMenu
+          items={items}
+          getLabel={getLabel}
+          anchorRef={ref}
+          direction="downStartLeft"
+          getLeftSideBar={renderLeftSide}
+          getRightSideBar={(item) => renderRightSide(item, onChange)}
+          possibleDirections={['upStartLeft', 'downStartLeft']}
+        />
+      )}
     </>
   );
 };
@@ -222,22 +221,23 @@ const sortGroup = (a: number | string, b: number | string) => {
 
 export const ContextMenuExampleGroups = () => {
   const ref = useRef(null);
+  const [isOpen, setIsOpen] = useFlag();
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleGroups()])}
-    >
-      <Button iconLeft={IconAdd} ref={ref} />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item.name}
-        getGroupId={(item) => item.group}
-        getGroupLabel={(id) => groups.find((group) => group.id === id)?.name}
-        anchorRef={ref}
-        direction="downStartLeft"
-        possibleDirections={['upStartLeft', 'downStartLeft']}
-        sortGroup={sortGroup}
-      />
-    </StoryBookExample>
+    <>
+      <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toogle} />
+      {isOpen && (
+        <ContextMenu
+          items={items}
+          getLabel={(item) => item.name}
+          getGroupId={(item) => item.group}
+          getGroupLabel={(id) => groups.find((group) => group.id === id)?.name}
+          anchorRef={ref}
+          direction="downStartLeft"
+          possibleDirections={['upStartLeft', 'downStartLeft']}
+          sortGroup={sortGroup}
+        />
+      )}
+    </>
   );
 };
 ```
@@ -248,9 +248,7 @@ export const ContextMenuExampleGroups = () => {
 
 За размер компонента отвечает свойство `size`. Варианты: `'s'`, `'m'`, `'l'`.
 
-<ContextMenuExampleSizeS />
-<ContextMenuExampleSizeM />
-<ContextMenuExampleSizeL />
+<ContextMenuExampleSize />
 
 ## Второй уровень меню
 
@@ -299,34 +297,21 @@ const items: Item[] = [
   },
 ];
 
-const cnContextMenuExampleSubMenu = cn('ContextMenuExampleSubMenu');
-
 export const ContextMenuExampleSubMenu = () => {
-  const ref1 = useRef(null);
-  const ref2 = useRef(null);
+  const ref = useRef(null);
+  const [open, setOpen] = useFlag();
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleSubMenu()])}
-    >
-      <Button iconLeft={IconAdd} ref={ref1} />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item.name}
-        anchorRef={ref1}
-        direction="downStartRight"
-        subMenuDirection="leftStartUp"
-        getSubItems={(item) => item.menu}
-      />
-      <Button iconLeft={IconAdd} ref={ref2} />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item.name}
-        anchorRef={ref2}
-        direction="downStartLeft"
-        subMenuDirection="rightStartUp"
-        getSubItems={(item) => item.menu}
-      />
-    </StoryBookExample>
+    <>
+      <Button iconLeft={IconAdd} ref={ref} onClick={setOpen.toogle} />
+      {open && (
+        <ContextMenu
+          items={items}
+          getLabel={(item) => item.name}
+          anchorRef={ref}
+          getSubItems={(item) => item.menu}
+        />
+      )}
+    </>
   );
 };
 ```

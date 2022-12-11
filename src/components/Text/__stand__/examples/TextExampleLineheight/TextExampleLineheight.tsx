@@ -18,7 +18,7 @@ export const TextExampleLineheight = () => {
             view="ghost"
             className={wp.decorator({ 'indent-b': 'xs' })}
           >
-            {`line-height=&quot;${item}&quot;`}
+            {`line-height="${item}"`}
           </Text>
           <Text lineHeight={item}>
             Съешь ещё этих мягких французских булок, да выпей же чаю.

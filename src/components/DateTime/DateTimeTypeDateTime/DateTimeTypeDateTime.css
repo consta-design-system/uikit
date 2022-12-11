@@ -14,7 +14,7 @@
       top: 0;
       left:
         calc(
-          (var(--control-height-s) + (var(--space-3xs) * 2)) * 7 + var(--space-s) +
+          (var(--control-height-s) + (var(--space-3xs) * 2)) * 7 + var(--space-l) +
           var(--root-padding-left)
         );
       display: block;
@@ -26,11 +26,13 @@
 
   &-Date {
     &_withTime {
-      padding-right: var(--space-s);
+      box-sizing: initial;
+      padding-right: var(--space-l);
     }
   }
 
   &-Time {
+    box-sizing: initial;
     padding-left: var(--space-s);
   }
 }

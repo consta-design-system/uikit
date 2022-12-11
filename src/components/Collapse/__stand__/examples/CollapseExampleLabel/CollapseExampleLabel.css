@@ -1,0 +1,5 @@
+.CollapseExampleLabel {
+  &-Badge {
+    margin-left: var(--space-xs);
+  }
+}

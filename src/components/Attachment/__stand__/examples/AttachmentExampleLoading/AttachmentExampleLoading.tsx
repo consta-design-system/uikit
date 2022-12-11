@@ -1,19 +1,12 @@
-import './AttachmentExampleLoading.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
-import { cn } from '../../../../../utils/bem';
-import { Attachment } from '../../../Attachment';
-
-const cnAttachmentExampleLoading = cn('AttachmentExampleLoading');
+import { Attachment } from '##/components/Attachment';
 
 export const AttachmentExampleLoading = () => {
   return (
-    <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
+    <Example>
       <Attachment
-        className={cnAttachmentExampleLoading()}
         fileName="Инструкция по сборке марсохода"
         fileExtension="docx"
         fileDescription="25,5 Mб 19.07.2020, 21:12"
@@ -21,6 +14,6 @@ export const AttachmentExampleLoading = () => {
         loading
         loadingProgress={70}
       />
-    </div>
+    </Example>
   );
 };

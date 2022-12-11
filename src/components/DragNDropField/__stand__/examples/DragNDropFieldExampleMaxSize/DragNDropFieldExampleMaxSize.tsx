@@ -1,11 +1,6 @@
-import './DragNDropFieldExampleMaxSize.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cn } from '##/utils/bem';
-
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 import imageFile from './images/too_big_file.png';
@@ -19,12 +14,8 @@ const image = {
   alt: 'Ошибка: файл слишком большой',
 };
 
-const cnDragNDropFieldExampleMaxSize = cn('DragNDropFieldExampleMaxSize');
-
 export const DragNDropFieldExampleMaxSize = () => (
-  <StoryBookExample
-    className={cnDocsDecorator('Section', [cnDragNDropFieldExampleMaxSize()])}
-  >
+  <Example>
     <div>
       <DragNDropField
         maxSize={1 * 1024 * 1024}
@@ -34,15 +25,13 @@ export const DragNDropFieldExampleMaxSize = () => (
         <Text>размером 1 Мб или меньше</Text>
       </DragNDropField>
     </div>
-  </StoryBookExample>
+  </Example>
 );
 
 export const DragNDropFieldExampleMaxSizeError = () => (
-  <StoryBookExample
-    className={cnDocsDecorator('Section', [cnDragNDropFieldExampleMaxSize()])}
-  >
+  <Example>
     <div>
       <img src={image.src} alt={image.alt} />
     </div>
-  </StoryBookExample>
+  </Example>
 );

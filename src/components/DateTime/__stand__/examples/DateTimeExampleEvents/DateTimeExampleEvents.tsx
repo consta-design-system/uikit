@@ -1,9 +1,8 @@
+import { Example } from '@consta/stand';
 import { addDays, startOfWeek } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { DateTime } from '../../../DateTime';
 
 const events = [
@@ -14,8 +13,8 @@ const events = [
 
 export const DateTimeExampleEvents = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <DateTime events={events} />
-    </StoryBookExample>
+    </Example>
   );
 };

@@ -1,0 +1,66 @@
+```tsx
+import { useComponentBreakpoints } from '@consta/uikit/useComponentBreakpoints';
+```
+
+Хук `useComponentBreakpoints` подписывается на изменение ширины компонента и возвращает набор контрольных точек (брейкпоинтов).
+
+```tsx
+export const Example = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const breakpoints = useComponentBreakpoints(ref, { xs: 100, s: 400, m: 600 });
+  // type breakpoints = Record<"xs" | "s" | "m", boolean>
+
+  return <div ref={ref}>...code</div>;
+};
+```
+
+### getLastPoint
+
+Хелпер `getLastPoint` возвращает последний пересечённый брейкпоинт,
+его удобно использовать, когда рендер компонента зависит от одной точки.
+
+> Если точек несколько, отсортируйте их по возрастанию
+
+Например, так:
+
+```tsx
+import {
+  useComponentBreakpoints,
+  getLastPoint,
+} from '@consta/uikit/useComponentBreakpoints';
+
+const map = {
+  s: ComponentOne,
+  m: ComponentTwo,
+  l: ComponentTree,
+};
+
+const lastPoint = getLastPoint(
+  useComponentBreakpoints(ref, { m: 300, l: 500 }),
+);
+
+const Component = map[lastPoint || s];
+```
+
+Или так:
+
+```tsx
+import {
+  useComponentBreakpoints,
+  getLastPoint,
+} from '@consta/uikit/useComponentBreakpoints';
+
+const breakpoint = getLastPoint(
+  useComponentBreakpoints(ref, { m: 300, l: 500 }),
+);
+
+<div ref={ref} className={cnComponent({ breakpoint })} />;
+```
+
+## Свойства
+
+| Аргумент | Тип и значения                                             | По умолчанию | Описание                |
+| -------- | ---------------------------------------------------------- | ------------ | ----------------------- |
+| `ref`    | `React.RefObject<HTMLElement` &#124; `SVGGraphicsElement>` | -            | Ссылка на элемент       |
+| `map`    | `Record<POINTS, number>`                                   | -            | Набор контрольных точек |

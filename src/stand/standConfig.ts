@@ -9,7 +9,7 @@ export const { createStand } = createConfig({
   id: 'uikit',
   groups: [
     {
-      title: 'О дизайн-системе',
+      title: 'Документация',
       id: 'about',
     },
     {
@@ -29,26 +29,20 @@ export const { createStand } = createConfig({
       title: 'Hooks',
       id: 'hooks',
     },
-    {
-      title: 'Тематизация',
-      id: 'theme',
-    },
-    {
-      title: 'Как работать с Consta',
-      id: 'workflow',
-    },
-    {
-      title: 'Кастомизация',
-      id: 'custom',
-    },
-    {
-      title: 'Правила и справочники',
-      id: 'reference',
-    },
   ],
-  group: 'библиотеки компонентов',
+  group: 'Основные библиотеки',
   image,
   description,
   standPageDecoration,
   repositoryUrl: 'https://github.com/consta-design-system/uikit',
+  order: 1,
+  standTabs: [
+    // табы по умолчанию
+    { id: '', label: 'Обзор' },
+    { id: 'dev', label: 'Разработчикам' },
+    { id: 'design', label: 'Дизайнерам', figma: true },
+    { id: 'sandbox', label: 'Песочница', sandbox: true },
+    // свои табы
+    { id: 'use', label: 'Как использовать' },
+  ],
 });

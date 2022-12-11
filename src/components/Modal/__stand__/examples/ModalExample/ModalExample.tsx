@@ -1,9 +1,8 @@
 import './ModalExample.css';
 
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { Text } from '../../../../Text/Text';
@@ -15,14 +14,16 @@ export const ModalExample = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Button
-        size="m"
-        view="primary"
-        label="Открыть модальное окно"
-        width="default"
-        onClick={(): void => setIsModalOpen(true)}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="Открыть модальное окно"
+          width="default"
+          onClick={(): void => setIsModalOpen(true)}
+        />
+      </Example>
       <Modal
         className={cnModalExample('Modal')}
         isOpen={isModalOpen}
@@ -54,7 +55,7 @@ export const ModalExample = () => {
           />
         </div>
       </Modal>
-    </div>
+    </>
   );
 };
 
@@ -62,14 +63,16 @@ export const ModalExampleTop = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Button
-        size="m"
-        view="primary"
-        label="Окно сверху"
-        width="default"
-        onClick={(): void => setIsModalOpen(true)}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="Окно сверху"
+          width="default"
+          onClick={(): void => setIsModalOpen(true)}
+        />
+      </Example>
       <Modal
         className={cnModalExample('Modal')}
         isOpen={isModalOpen}
@@ -99,7 +102,7 @@ export const ModalExampleTop = () => {
           />
         </div>
       </Modal>
-    </StoryBookExample>
+    </>
   );
 };
 
@@ -107,14 +110,16 @@ export const ModalExampleCenter = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Button
-        size="m"
-        view="primary"
-        label="Окно по центру"
-        width="default"
-        onClick={(): void => setIsModalOpen(true)}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="Окно по центру"
+          width="default"
+          onClick={(): void => setIsModalOpen(true)}
+        />
+      </Example>
       <Modal
         className={cnModalExample('Modal')}
         isOpen={isModalOpen}
@@ -143,7 +148,7 @@ export const ModalExampleCenter = () => {
           />
         </div>
       </Modal>
-    </StoryBookExample>
+    </>
   );
 };
 
@@ -151,14 +156,16 @@ export const ModalExampleNoOverlay = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Button
-        size="m"
-        view="primary"
-        label="Без подложки"
-        width="default"
-        onClick={(): void => setIsModalOpen(true)}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="Без подложки"
+          width="default"
+          onClick={(): void => setIsModalOpen(true)}
+        />
+      </Example>
       <Modal
         className={cnModalExample('Modal')}
         isOpen={isModalOpen}
@@ -187,6 +194,6 @@ export const ModalExampleNoOverlay = () => {
           />
         </div>
       </Modal>
-    </div>
+    </>
   );
 };

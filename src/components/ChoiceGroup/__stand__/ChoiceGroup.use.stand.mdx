@@ -1,0 +1,27 @@
+import {
+  ChoiceGroupExample,
+  ChoiceGroupExampleText,
+} from './examples/ChoiceGroupExampleText/ChoiceGroupExampleText';
+import {
+  ChoiceGroupExampleSwitchPolar,
+  ChoiceGroupExampleSwitchMode,
+  ChoiceGroupExampleSwitchLetters,
+} from './examples/ChoiceGroupExampleSwitch/ChoiceGroupExampleSwitch';
+
+## Как использовать
+
+Не стоит использовать в одной группе **больше шести** кнопок.
+
+Не используйте `ChoiceGroup` для навигации верхнего уровня, например, в шапке сайта.
+
+Можно использовать в качестве переключателя:
+
+<ChoiceGroupExampleSwitchPolar />
+<ChoiceGroupExampleSwitchLetters />
+<ChoiceGroupExampleSwitchMode />
+
+## Как писать тексты
+
+Согласуйте текст на кнопке с заголовком и между собой. Так просто лучше читается, а значит, проще понять смысл.
+
+<ChoiceGroupExampleText />

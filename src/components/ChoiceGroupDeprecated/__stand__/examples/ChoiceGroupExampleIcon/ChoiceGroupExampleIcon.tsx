@@ -1,15 +1,12 @@
-import './ChoiceGroupExampleIcon.css';
-
 import { IconComponent } from '@consta/icons/Icon';
 import { IconCamera } from '@consta/icons/IconCamera';
 import { IconPhoto } from '@consta/icons/IconPhoto';
 import { IconRing } from '@consta/icons/IconRing';
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { ChoiceGroup } from '../../../ChoiceGroupDeprecated';
 
 type Item = {
@@ -37,7 +34,7 @@ const cnChoiceGroupExampleIcon = cn('ChoiceGroupExampleIcon');
 export const ChoiceGroupExampleIcon = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ChoiceGroup
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -57,6 +54,6 @@ export const ChoiceGroupExampleIcon = () => {
         name="ChoiceGroupExampleIcon"
         className={cnChoiceGroupExampleIcon()}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

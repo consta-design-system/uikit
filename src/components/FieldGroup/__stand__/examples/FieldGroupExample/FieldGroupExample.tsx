@@ -1,7 +1,7 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Button } from '../../../../Button/Button';
 import { Select } from '../../../../Select/Select';
 import { TextField } from '../../../../TextField/TextField';
@@ -10,7 +10,7 @@ import { FieldGroup } from '../../../FieldGroup';
 
 export const FieldGroupExample = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <FieldGroup form="round" className={cnMixSpace({ mB: 's' })}>
         <TextField placeholder="TextField" />
         <Select
@@ -22,6 +22,6 @@ export const FieldGroupExample = () => {
         />
         <Button label="Button" />
       </FieldGroup>
-    </div>
+    </Example>
   );
 };

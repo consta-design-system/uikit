@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Combobox } from '../../../Combobox';
 
 type Item = {
@@ -28,7 +27,7 @@ export function ComboboxExampleCreate() {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Combobox
         placeholder="Выберите вариант"
         items={list}
@@ -38,6 +37,6 @@ export function ComboboxExampleCreate() {
           setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
         }
       />
-    </StoryBookExample>
+    </Example>
   );
 }

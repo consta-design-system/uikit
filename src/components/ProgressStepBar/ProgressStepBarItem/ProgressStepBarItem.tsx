@@ -3,6 +3,9 @@ import './ProgressStepBarItem.css';
 import { IconComponent } from '@consta/icons/Icon';
 import React, { useRef } from 'react';
 
+import { useForkRef } from '##/hooks/useForkRef';
+import { useMouseLeave } from '##/hooks/useMouseLeave';
+
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
@@ -54,7 +57,7 @@ const renderPointContent = (
 
   const Icon = point;
 
-  return <Icon size="xs" />;
+  return <Icon className={cnProgressStepBarItem('PointIcon')} size="xs" />;
 };
 
 export const ProgressStepBarItem: ProgressStepBarItemComponent =
@@ -68,41 +71,42 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
       progress,
       direction,
       size,
-      pointRef,
+      pointRef: pointRefProp,
       onClick,
       position = propPositionDefault,
       tooltipZIndex,
       ...otherProps
     } = props;
 
-    const [
-      isTooltipVisible,
-      { on: setTooltipVisible, off: setTooltipUnVisible },
-    ] = useFlag();
+    const [isTooltipVisible, setTooltipVisible] = useFlag();
 
     const anchorRef = useRef<HTMLDivElement>(null);
+    const tooltipRef = useRef<HTMLDivElement>(null);
+    const pointRef = useRef<HTMLButtonElement>(null);
+
+    const pointForkedRef = useForkRef([pointRef, pointRefProp]);
 
     const pointProps = {
-      onMouseEnter: setTooltipVisible,
-      onMouseLeave: setTooltipUnVisible,
+      onMouseEnter: setTooltipVisible.on,
       className: cnProgressStepBarItem(
         'Point',
         {
           size,
+          pointer: !!onClick,
         },
-        [cnMixFocus()],
+        [onClick ? cnMixFocus() : undefined],
       ),
       children: size !== 'xs' && renderPointContent(point, size, progress),
-    };
-
-    const pointButtonProps = {
-      ref: pointRef as React.RefObject<HTMLButtonElement>,
+      ref: pointForkedRef,
       onClick,
     };
 
-    const pointDivButton = {
-      ref: pointRef as React.RefObject<HTMLDivElement>,
-    };
+    useMouseLeave({
+      isActive: isTooltipVisible,
+      refs: [anchorRef, pointRef, tooltipRef],
+      handler: setTooltipVisible.off,
+      debounce: 100,
+    });
 
     return (
       <>
@@ -116,11 +120,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
           })}
           {...otherProps}
         >
-          {onClick ? (
-            <button type="button" {...pointButtonProps} {...pointProps} />
-          ) : (
-            <div {...pointProps} {...pointDivButton} />
-          )}
+          <button tabIndex={-1} type="button" {...pointProps} />
           {(label || content) && (
             <div
               className={cnProgressStepBarItem('Content', {
@@ -132,8 +132,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
                   className={cnProgressStepBarItem('Label')}
                   ref={anchorRef}
                   size={size}
-                  onMouseEnter={setTooltipVisible}
-                  onMouseLeave={setTooltipUnVisible}
+                  onMouseEnter={setTooltipVisible.on}
                   lineHeight={size === 's' ? 'xs' : size}
                   view="primary"
                 >
@@ -146,10 +145,12 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
         </div>
         {tooltipContent && isTooltipVisible && (
           <Tooltip
+            ref={tooltipRef}
             anchorRef={label || content ? anchorRef : pointRef}
             className={cnProgressStepBarItem('Tooltip')}
             direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
             style={{ zIndex: tooltipZIndex }}
+            isInteractive
             possibleDirections={
               direction === 'horizontal'
                 ? possibleHorizontalDirections

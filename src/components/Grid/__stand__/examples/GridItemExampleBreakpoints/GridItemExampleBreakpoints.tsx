@@ -1,9 +1,8 @@
 import './GridItemExampleBreakpoints.css';
 
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
 import { Grid, GridItem } from '../../../Grid';
 
@@ -11,7 +10,7 @@ const cnGridItemExampleBreakpoints = cn('GridItemExampleBreakpoints');
 
 export function GridItemExampleBreakpoints() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Grid className={cnGridItemExampleBreakpoints()} cols="3" gap="xl">
         <GridItem
           className={cnGridItemExampleBreakpoints('Item', { color: 'blue' })}
@@ -43,6 +42,6 @@ export function GridItemExampleBreakpoints() {
         <GridItem className={cnGridItemExampleBreakpoints('Item')}>6</GridItem>
         <GridItem className={cnGridItemExampleBreakpoints('Item')}>7</GridItem>
       </Grid>
-    </StoryBookExample>
+    </Example>
   );
 }

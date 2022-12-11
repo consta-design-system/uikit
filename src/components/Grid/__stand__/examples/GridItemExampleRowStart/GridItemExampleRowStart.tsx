@@ -1,9 +1,8 @@
 import './GridItemExampleRowStart.css';
 
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
 import { Grid, GridItem } from '../../../Grid';
 
@@ -11,7 +10,7 @@ const cnGridItemExampleRowStart = cn('GridItemExampleRowStart');
 
 export function GridItemExampleRowStart() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Grid className={cnGridItemExampleRowStart()} cols="2" gap="xl">
         <GridItem className={cnGridItemExampleRowStart('Item')}>1</GridItem>
         <GridItem className={cnGridItemExampleRowStart('Item')}>2</GridItem>
@@ -22,6 +21,6 @@ export function GridItemExampleRowStart() {
           4
         </GridItem>
       </Grid>
-    </StoryBookExample>
+    </Example>
   );
 }

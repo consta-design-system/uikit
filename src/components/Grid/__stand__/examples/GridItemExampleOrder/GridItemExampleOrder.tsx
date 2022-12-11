@@ -1,9 +1,8 @@
 import './GridItemExampleOrder.css';
 
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
 import { Grid, GridItem } from '../../../Grid';
 
@@ -11,7 +10,7 @@ const cnGridItemExampleOrder = cn('GridItemExampleOrder');
 
 export function GridItemExampleOrder() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Grid className={cnGridItemExampleOrder()} cols="3" gap="xl">
         <GridItem className={cnGridItemExampleOrder('Item')}>1</GridItem>
         <GridItem className={cnGridItemExampleOrder('Item')}>2</GridItem>
@@ -24,6 +23,6 @@ export function GridItemExampleOrder() {
         </GridItem>
         <GridItem className={cnGridItemExampleOrder('Item')}>6</GridItem>
       </Grid>
-    </StoryBookExample>
+    </Example>
   );
 }

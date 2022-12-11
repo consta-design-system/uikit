@@ -5,6 +5,8 @@
   color: var(--color-typo-primary);
   background-color: var(--color-bg-default);
   grid-row-end: var(--row-span);
+  grid-column-start: var(--table-cell-col-start);
+  grid-column-end: var(--table-cell-col-end);
 
   &_withoutBorder {
     border: none;

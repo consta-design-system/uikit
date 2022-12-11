@@ -27,6 +27,7 @@ import {
 } from './filtering';
 import { TableHeader } from './Header/TableHeader';
 import {
+  calulateColSpans,
   createSortingState,
   getColumnLeftOffset,
   getColumnsSize,
@@ -138,8 +139,9 @@ export type TableRow = {
 };
 
 export type TableTreeRow<T extends TableRow> = {
-  level: number;
-  parentId?: string;
+  options: {
+    level: number;
+  };
 } & T;
 
 export type TableFilters<T extends TableRow> = Filters<T>;
@@ -154,6 +156,7 @@ type ColumnBase<T extends TableRow> = ValueOf<{
   [K in keyof T]: {
     accessor: K extends string ? K : never;
     sortable?: boolean;
+    colSpan?: number | ((row: T) => number);
     sortByField?: keyof T;
     order?: OrderType;
     sortFn?(a: T[K], b: T[K]): number;
@@ -678,7 +681,7 @@ const InternalTable = <T extends TableRow>(
     const withCollapseButton = Boolean(row.rows?.length) && columnIdx === 0;
 
     const baseProps = {
-      level: row.level,
+      level: row.options.level,
       isExpandedByDefault: isExpandedRowsByDefault,
     };
 
@@ -811,29 +814,29 @@ const InternalTable = <T extends TableRow>(
 
     if (
       mergeCells &&
-      ((rowsData[rowIdx - 1] && previousCell !== currentCell) || rowIdx === 0)
+      ((rowsData[rowIdx - 1] && previousCell !== currentCell) ||
+        rowIdx === 0 ||
+        (previousCell === currentCell && rowsData[rowIdx - 1]?.rows))
     ) {
-      for (let i = rowIdx; i < rowsData.length; i++) {
-        if (rowsData[i + 1]) {
-          const nextCell = getComparisonValue(rowsData[i + 1][accessor!]);
-
-          if (currentCell === nextCell) {
-            result.rowSpan++;
+      if (!row.rows) {
+        for (let i = rowIdx; i < rowsData.length; i++) {
+          if (rowsData[i + 1]) {
+            const nextCell = getComparisonValue(rowsData[i + 1][accessor!]);
+            if (currentCell === nextCell && !rowsData[i].rows) {
+              result.rowSpan++;
+            } else {
+              break;
+            }
           } else {
             break;
           }
-        } else {
-          break;
         }
       }
-
       if (result.rowSpan > 1) {
         result.style['--row-span'] = `span ${result.rowSpan}`;
       }
-
       result.show = true;
     }
-
     if (!mergeCells) {
       result.show = true;
     }
@@ -956,6 +959,8 @@ const InternalTable = <T extends TableRow>(
       {rowsData.length > 0 ? (
         rowsData.map((row, rowIdx) => {
           const nth = (rowIdx + 1) % 2 === 0 ? 'even' : 'odd';
+          const columns = columnsWithMetaData(lowHeaders);
+          const spans = calulateColSpans(columns, row);
           return (
             <div
               key={row.id}
@@ -968,84 +973,91 @@ const InternalTable = <T extends TableRow>(
               onMouseLeave={handleRowHover(undefined)}
               onClick={(e) => onRowClick && onRowClick({ id: row.id, e })}
             >
-              {columnsWithMetaData(lowHeaders).map(
-                (column: TableColumn<T>, columnIdx: number) => {
-                  const { show, style, rowSpan } = getTableCellProps(
-                    row,
-                    rowIdx,
-                    column,
-                    columnIdx,
-                  );
-                  if (show) {
-                    return (
-                      <TableCell
-                        type="content"
-                        key={column.accessor}
-                        ref={(ref: HTMLDivElement | null) => {
-                          cellsRefs.current[`${columnIdx}-${row.id}`] = ref;
-                          setRef(setBoundaryRef(columnIdx, rowIdx), ref);
-                        }}
-                        style={style}
-                        wrapperClassName={cnTable('ContentCell', {
-                          isActive: activeRow ? activeRow.id === row.id : false,
-                          isDarkned: activeRow
-                            ? activeRow.id !== undefined &&
-                              activeRow.id !== row.id
-                            : false,
-                          isMerged: column.mergeCells && rowSpan > 1,
-                        })}
-                        className={getAdditionalClassName?.({
-                          column,
-                          row,
-                          isActive: activeRow ? activeRow.id === row.id : false,
-                        })}
-                        wrap={getCellWrap?.(row)}
-                        onContextMenu={(e: React.SyntheticEvent) =>
-                          handleCellClick({
-                            e,
-                            type: 'contextMenu',
-                            columnIdx,
-                            rowId: row.id,
-                            ref: {
-                              current:
-                                cellsRefs.current[`${columnIdx}-${row.id}`],
-                            },
-                          })
-                        }
-                        onClick={(e: React.SyntheticEvent): void => {
-                          handleSelectRow({ id: row.id, e });
+              {columns.map((column: TableColumn<T>, columnIdx: number) => {
+                const { show, style, rowSpan } = getTableCellProps(
+                  row,
+                  rowIdx,
+                  column,
+                  columnIdx,
+                );
+                const colSpan = spans[columnIdx];
+                const start =
+                  columnIdx > 0
+                    ? spans.slice(0, columnIdx).reduce((a, b) => a + b) + 1
+                    : 1;
+                if (show && colSpan > 0) {
+                  return (
+                    <TableCell
+                      type="content"
+                      key={column.accessor}
+                      ref={(ref: HTMLDivElement | null) => {
+                        cellsRefs.current[`${columnIdx}-${row.id}`] = ref;
+                        setRef(setBoundaryRef(columnIdx, rowIdx), ref);
+                      }}
+                      style={{
+                        ...style,
+                        ['--table-cell-col-start' as string]: start,
+                        ['--table-cell-col-end' as string]: start + colSpan,
+                      }}
+                      wrapperClassName={cnTable('ContentCell', {
+                        isActive: activeRow ? activeRow.id === row.id : false,
+                        isDarkned: activeRow
+                          ? activeRow.id !== undefined &&
+                            activeRow.id !== row.id
+                          : false,
+                        isMerged: column.mergeCells && rowSpan > 1,
+                      })}
+                      className={getAdditionalClassName?.({
+                        column,
+                        row,
+                        isActive: activeRow ? activeRow.id === row.id : false,
+                      })}
+                      wrap={getCellWrap?.(row)}
+                      onContextMenu={(e: React.SyntheticEvent) =>
+                        handleCellClick({
+                          e,
+                          type: 'contextMenu',
+                          columnIdx,
+                          rowId: row.id,
+                          ref: {
+                            current:
+                              cellsRefs.current[`${columnIdx}-${row.id}`],
+                          },
+                        })
+                      }
+                      onClick={(e: React.SyntheticEvent): void => {
+                        handleSelectRow({ id: row.id, e });
 
-                          handleCellClick({
-                            e,
-                            type: 'click',
-                            columnIdx,
-                            rowId: row.id,
-                            ref: {
-                              current:
-                                cellsRefs.current[`${columnIdx}-${row.id}`],
-                            },
-                          });
-                        }}
-                        column={column}
-                        verticalAlign={verticalAlign}
-                        isClickable={!!isRowsClickable}
-                        showVerticalShadow={
-                          showVerticalCellShadow &&
-                          // eslint-disable-next-line no-unsafe-optional-chaining
-                          column?.position!.gridIndex! +
-                            (column?.position!.colSpan || 1) ===
-                            stickyColumnsGrid
-                        }
-                        isBorderTop={rowIdx > 0 && borderBetweenRows}
-                        isBorderLeft={columnIdx > 0 && borderBetweenColumns}
-                      >
-                        {renderCell(column, row, columnIdx)}
-                      </TableCell>
-                    );
-                  }
-                  return null;
-                },
-              )}
+                        handleCellClick({
+                          e,
+                          type: 'click',
+                          columnIdx,
+                          rowId: row.id,
+                          ref: {
+                            current:
+                              cellsRefs.current[`${columnIdx}-${row.id}`],
+                          },
+                        });
+                      }}
+                      column={column}
+                      verticalAlign={verticalAlign}
+                      isClickable={!!isRowsClickable}
+                      showVerticalShadow={
+                        showVerticalCellShadow &&
+                        // eslint-disable-next-line no-unsafe-optional-chaining
+                        column?.position!.gridIndex! +
+                          (column?.position!.colSpan || 1) ===
+                          stickyColumnsGrid
+                      }
+                      isBorderTop={rowIdx > 0 && borderBetweenRows}
+                      isBorderLeft={columnIdx > 0 && borderBetweenColumns}
+                    >
+                      {renderCell(column, row, columnIdx)}
+                    </TableCell>
+                  );
+                }
+                return null;
+              })}
             </div>
           );
         })

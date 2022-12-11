@@ -24,7 +24,7 @@ import { Theme } from '@consta/uikit/Theme';
 - [Пресеты](#пресеты)
   - [Пресеты в Consta](#пресеты-в-consta)
   - [Цветовые схемы в пресете](#цветовые-схемы-в-пресете)
-  - [Кастомный пресет](##LIBS.LIB.STAND/lib:uikit/stand:theme-createpreset)
+  - [Кастомный пресет](##LIBS.LIB.STAND/lib:portal/stand:theme-createpreset)
 - [Подключение темы](#как-подключить-тему)
   - [Для всего проекта](#как-подключить-основную-тему)
   - [Для отдельного блока](#как-использовать-тему-для-отдельного-блока)
@@ -207,11 +207,11 @@ $color-base-normal: #56b9f2; /* Цвет нейтральный */
 > - Модификатор: `_font`
 > - CSS: [\_font / Theme_font_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_font/Theme_font_gpnDefault.css)
 
-В дизайн-системе используются нативные шрифты. Мы ориентируемся на самый популярный шрифт у наших пользователей — Segoe UI.
+Мы ориентируемся на самый популярный шрифт у наших пользователей — Inter.
 
 ```css
---font-primary: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+--font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu',
+  'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 --font-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 font-family: var(--font-primary);
 ```
@@ -422,7 +422,7 @@ export const presetGpnDefault: ThemePreset = {
 
 Вы можете создать свой пресет — по тем же принципам, по которым организованы пресеты в дизайн-системе.
 
-[Как создать свой пресет](##LIBS.LIB.STAND/lib:uikit/stand:theme--createpreset)
+[Как создать свой пресет](##LIBS.LIB.STAND/lib:portal/stand:theme--createpreset)
 
 ## Как подключить тему
 

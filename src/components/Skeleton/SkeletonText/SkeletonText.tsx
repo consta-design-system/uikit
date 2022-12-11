@@ -2,13 +2,14 @@ import './SkeletonText.css';
 
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
 import {
   TextPropLineHeight,
   textPropLineHeightDefault,
   TextPropSize,
   textPropSizeDefault,
-} from '../../Text/Text';
+} from '##/components/Text';
+import { cn } from '##/utils/bem';
+
 import { SkeletonBrick } from '../Skeleton';
 
 type SkeletonTextProps = {
@@ -16,6 +17,28 @@ type SkeletonTextProps = {
   rows: number;
   fontSize?: TextPropSize;
   lineHeight?: TextPropLineHeight;
+};
+
+const cnSkeletonText = cn('SkeletonText');
+
+export const getRowWidth = (
+  idx: number,
+  total: number,
+): React.ComponentProps<typeof SkeletonBrick>['height'] => {
+  if (idx === total - 1) {
+    return '50%';
+  }
+
+  switch (idx % 3) {
+    case 0:
+      return '100%';
+    case 1:
+      return '85%';
+    case 2:
+      return '93%';
+  }
+
+  return '100%';
 };
 
 export const SkeletonText: React.FC<SkeletonTextProps> = ({
@@ -46,26 +69,4 @@ export const SkeletonText: React.FC<SkeletonTextProps> = ({
       ))}
     </div>
   );
-};
-
-const cnSkeletonText = cn('SkeletonText');
-
-export const getRowWidth = (
-  idx: number,
-  total: number,
-): React.ComponentProps<typeof SkeletonBrick>['height'] => {
-  if (idx === total - 1) {
-    return '50%';
-  }
-
-  switch (idx % 3) {
-    case 0:
-      return '100%';
-    case 1:
-      return '85%';
-    case 2:
-      return '93%';
-  }
-
-  return '100%';
 };

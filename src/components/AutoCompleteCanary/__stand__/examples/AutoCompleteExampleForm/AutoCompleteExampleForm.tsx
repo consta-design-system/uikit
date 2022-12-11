@@ -1,8 +1,7 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { AutoComplete } from '##/components/AutoCompleteCanary/AutoCompleteCanary';
-import { cnDocsDecorator } from '##/uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
+import { AutoComplete } from '##/components/AutoCompleteCanary';
 
 type Item = {
   label: string;
@@ -27,7 +26,7 @@ const items: Item[] = [
 export const AutoCompleteExampleForm = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <AutoComplete
         type="text"
         placeholder="Форма round"
@@ -44,14 +43,14 @@ export const AutoCompleteExampleForm = () => {
         items={items}
         onChange={({ value }) => setValue(value)}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const AutoCompleteExampleDropdownForm = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <AutoComplete
         type="text"
         placeholder="Форма списка round"
@@ -68,6 +67,6 @@ export const AutoCompleteExampleDropdownForm = () => {
         items={items}
         onChange={({ value }) => setValue(value)}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

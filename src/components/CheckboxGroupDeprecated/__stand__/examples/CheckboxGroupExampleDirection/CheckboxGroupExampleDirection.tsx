@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Item, items } from '../../../__mocks__/data.mock';
 import { CheckboxGroup } from '../../../CheckboxGroupDeprecated';
 
@@ -9,7 +8,7 @@ export function CheckboxGroupExampleRow() {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <CheckboxGroup
         value={value}
         items={items}
@@ -18,7 +17,7 @@ export function CheckboxGroupExampleRow() {
         onChange={({ value }) => setValue(value)}
         direction="row"
       />
-    </StoryBookExample>
+    </Example>
   );
 }
 
@@ -26,7 +25,7 @@ export function CheckboxGroupExampleColumn() {
   const [value, setValue] = React.useState<Item[] | null>(null);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <CheckboxGroup
         value={value}
         items={items}
@@ -35,6 +34,6 @@ export function CheckboxGroupExampleColumn() {
         onChange={({ value }) => setValue(value)}
         direction="column"
       />
-    </StoryBookExample>
+    </Example>
   );
 }

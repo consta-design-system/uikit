@@ -1,21 +1,14 @@
-import './AttachmentExampleBasics.css';
-
 import { IconClose } from '@consta/icons/IconClose';
 import { IconTrash } from '@consta/icons/IconTrash';
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
-import { cn } from '../../../../../utils/bem';
-import { Attachment } from '../../../Attachment';
-
-const cnAttachmentExampleBasics = cn('AttachmentExampleBasics');
+import { Attachment } from '##/components/Attachment';
 
 export const AttachmentExampleBasicsLoading = () => {
   return (
-    <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
+    <Example>
       <Attachment
-        className={cnAttachmentExampleBasics()}
         fileName="Инструкция по сборке марсохода"
         fileExtension="pdf"
         loading
@@ -28,15 +21,14 @@ export const AttachmentExampleBasicsLoading = () => {
           console.log('onButtonClick');
         }}
       />
-    </div>
+    </Example>
   );
 };
 
 export const AttachmentExampleBasicsError = () => {
   return (
-    <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
+    <Example>
       <Attachment
-        className={cnAttachmentExampleBasics()}
         fileName="Инструкция по сборке марсохода"
         fileExtension="pdf"
         errorText="Файл слишком большой, максимум 100 ТБ"
@@ -48,15 +40,14 @@ export const AttachmentExampleBasicsError = () => {
           console.log('onButtonClick');
         }}
       />
-    </div>
+    </Example>
   );
 };
 
 export const AttachmentExampleBasicsLoaded = () => {
   return (
-    <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
+    <Example>
       <Attachment
-        className={cnAttachmentExampleBasics()}
         fileName="Инструкция по сборке марсохода"
         fileExtension="pdf"
         fileDescription="1,5 Mб • 21.02.2051, 14:12"
@@ -68,20 +59,19 @@ export const AttachmentExampleBasicsLoaded = () => {
           console.log('onButtonClick');
         }}
       />
-    </div>
+    </Example>
   );
 };
 
 export const AttachmentExampleBasicsLink = () => {
   return (
-    <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
+    <Example>
       <Attachment
-        className={cnAttachmentExampleBasics()}
         fileName="Инструкция по сборке марсохода"
         fileExtension="pdf"
         fileDescription="1,5 Mб • 21.02.2051, 14:12"
         onClick={() => console.log('onClick')}
       />
-    </div>
+    </Example>
   );
 };

@@ -1,9 +1,8 @@
 import './PopoverExample.css';
 
+import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { Text } from '../../../../Text/Text';
@@ -19,14 +18,16 @@ export const PopoverPositionedByCoordsExample = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <div
-        className={cnPopoverExample({ for: 'anchor' })}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={() => setPosition(undefined)}
-      >
-        <Text>Область, в которой работает отслеживание мышки</Text>
-      </div>
+    <>
+      <Example col={1}>
+        <div
+          className={cnPopoverExample({ for: 'position' })}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setPosition(undefined)}
+        >
+          <Text>Область, в которой работает отслеживание мышки</Text>
+        </div>
+      </Example>
       <Popover
         direction="upCenter"
         spareDirection="downStartLeft"
@@ -37,7 +38,7 @@ export const PopoverPositionedByCoordsExample = () => {
         position={position}
       >
         {(direction) => (
-          <div className={cnPopoverExample('Content')}>
+          <div className={cnPopoverExample('Content', { for: 'position' })}>
             <Text size="xs">
               Это содержимое поповера: здесь может быть что угодно, например,
               этот текст.
@@ -46,7 +47,7 @@ export const PopoverPositionedByCoordsExample = () => {
           </div>
         )}
       </Popover>
-    </StoryBookExample>
+    </>
   );
 };
 
@@ -59,15 +60,17 @@ export const PopoverPositionedByAnchorExample = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <div className={cnPopoverExample()}>
-        <Button
-          label="Нажмите меня"
-          type="button"
-          onClick={handleClickOnAnchor}
-          ref={anchorRef}
-        />
-      </div>
+    <>
+      <Example>
+        <div className={cnPopoverExample()}>
+          <Button
+            label="Нажмите меня"
+            type="button"
+            onClick={handleClickOnAnchor}
+            ref={anchorRef}
+          />
+        </div>
+      </Example>
       {isPopoverVisible && (
         <Popover
           direction="upCenter"
@@ -87,6 +90,6 @@ export const PopoverPositionedByAnchorExample = () => {
           </div>
         </Popover>
       )}
-    </StoryBookExample>
+    </>
   );
 };

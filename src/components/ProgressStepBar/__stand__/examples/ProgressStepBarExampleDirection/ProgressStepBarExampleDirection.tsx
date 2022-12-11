@@ -1,3 +1,4 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { ProgressStepBar } from '../../../ProgressStepBar';
@@ -30,22 +31,26 @@ const steps = [
 
 export const ProgressStepBarExampleDirectionHorizontal = () => {
   return (
-    <ProgressStepBar
-      size="s"
-      direction="horizontal"
-      steps={steps}
-      activeStepIndex={2}
-    />
+    <Example col={1}>
+      <ProgressStepBar
+        size="s"
+        direction="horizontal"
+        steps={steps}
+        activeStepIndex={2}
+      />
+    </Example>
   );
 };
 
 export const ProgressStepBarExampleDirectionVerical = () => {
   return (
-    <ProgressStepBar
-      size="s"
-      direction="vertical"
-      steps={steps}
-      activeStepIndex={2}
-    />
+    <Example col={1}>
+      <ProgressStepBar
+        size="s"
+        direction="vertical"
+        steps={steps}
+        activeStepIndex={2}
+      />
+    </Example>
   );
 };

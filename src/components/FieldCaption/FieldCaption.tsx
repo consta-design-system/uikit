@@ -18,9 +18,9 @@ export const FieldCaption = forwardRefWithAs<FieldCaptionProps>(
 
     return (
       <Text
+        {...otherProps}
         view={status || 'secondary'}
         className={cnFieldCaption(null, [className])}
-        {...otherProps}
         ref={ref}
         size="xs"
         lineHeight="2xs"

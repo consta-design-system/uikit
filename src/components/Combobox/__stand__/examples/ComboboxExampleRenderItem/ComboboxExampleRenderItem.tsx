@@ -1,9 +1,8 @@
 import './ComboboxExampleRenderItem.css';
 
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
 import { Badge } from '../../../../Badge/Badge';
 import { Combobox } from '../../../Combobox';
@@ -74,7 +73,7 @@ const searchFunction = (item: Item, searchValue: string): boolean => {
 export function ComboboxExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Combobox
         placeholder="Выберите вариант"
         items={items}
@@ -103,6 +102,6 @@ export function ComboboxExampleRenderItem() {
           </div>
         )}
       />
-    </StoryBookExample>
+    </Example>
   );
 }

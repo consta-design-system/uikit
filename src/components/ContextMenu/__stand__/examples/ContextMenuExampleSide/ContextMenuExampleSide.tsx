@@ -1,9 +1,8 @@
 import { IconComponent } from '@consta/icons/Icon';
 import { IconInfo } from '@consta/icons/IconInfo';
+import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Badge } from '../../../../Badge/Badge';
 import { Button } from '../../../../Button/Button';
 import { Switch } from '../../../../Switch/Switch';
@@ -80,8 +79,10 @@ export const ContextMenuExampleSide = () => {
   };
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <>
+      <Example>
+        <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      </Example>
       <ContextMenu
         isOpen={isOpen}
         items={items}
@@ -89,6 +90,6 @@ export const ContextMenuExampleSide = () => {
         getItemLeftSide={renderLeftSide}
         getItemRightSide={(item) => renderRightSide(item, onChange)}
       />
-    </StoryBookExample>
+    </>
   );
 };

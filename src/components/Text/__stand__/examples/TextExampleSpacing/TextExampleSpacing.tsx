@@ -18,7 +18,7 @@ export const TextExampleSpacing = () => {
             view="ghost"
             className={wp.decorator({ 'indent-b': 'xs' })}
           >
-            {`spacing=&quot;${item}&quot;`}
+            {`spacing="${item}"`}
           </Text>
           <Text spacing={item}>
             Съешь ещё этих мягких французских булок, да выпей же чаю.

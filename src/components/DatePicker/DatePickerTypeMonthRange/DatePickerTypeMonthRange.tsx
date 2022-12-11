@@ -31,6 +31,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> =
       locale,
       dropdownForm,
       onFocus,
+      dropdownClassName,
       onBlur,
       leftSide,
       rightSide,
@@ -188,6 +189,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> =
           value={props.value || undefined}
           view={dateTimeView}
           events={events}
+          className={dropdownClassName}
           locale={locale}
           minDate={props.minDate}
           maxDate={props.maxDate}

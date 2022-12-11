@@ -1,13 +1,11 @@
-import './ContextMenuExampleSide.css';
-
 import { IconComponent } from '@consta/icons/Icon';
 import { IconAdd } from '@consta/icons/IconAdd';
 import { IconInfo } from '@consta/icons/IconInfo';
+import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '../../../../../utils/bem';
+import { useFlag } from '##/hooks/useFlag';
+
 import { Badge } from '../../../../Badge/Badge';
 import { Button } from '../../../../Button/Button';
 import { Switch } from '../../../../Switch/Switch';
@@ -40,8 +38,6 @@ const menuItems: Item[] = [
   },
 ];
 
-const cnContextMenuExampleSide = cn('ContextMenuExampleSide');
-
 function renderLeftSide(item: Item): React.ReactNode {
   const Icon = item.icon;
   return <Icon size="s" />;
@@ -71,6 +67,7 @@ function renderRightSide(
 export const ContextMenuExampleSide = () => {
   const [items, setItems] = useState(menuItems);
   const ref = useRef(null);
+  const [isOpen, setIsOpen] = useFlag();
 
   const getLabel = (item: Item) => item.name;
 
@@ -86,19 +83,21 @@ export const ContextMenuExampleSide = () => {
   };
 
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleSide()])}
-    >
-      <Button iconLeft={IconAdd} ref={ref} />
-      <ContextMenu
-        items={items}
-        getLabel={getLabel}
-        anchorRef={ref}
-        direction="downStartLeft"
-        getLeftSideBar={renderLeftSide}
-        getRightSideBar={(item) => renderRightSide(item, onChange)}
-        possibleDirections={['upStartLeft', 'downStartLeft']}
-      />
-    </StoryBookExample>
+    <>
+      <Example>
+        <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toogle} />
+      </Example>
+      {isOpen && (
+        <ContextMenu
+          items={items}
+          getLabel={getLabel}
+          anchorRef={ref}
+          direction="downStartLeft"
+          getLeftSideBar={renderLeftSide}
+          getRightSideBar={(item) => renderRightSide(item, onChange)}
+          possibleDirections={['upStartLeft', 'downStartLeft']}
+        />
+      )}
+    </>
   );
 };

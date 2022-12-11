@@ -140,6 +140,7 @@ const AutoCompleteRender = <
         onChange={onChange}
         value={value}
         style={style}
+        size={size}
         {...otherProps}
       />
       <SelectDropdown

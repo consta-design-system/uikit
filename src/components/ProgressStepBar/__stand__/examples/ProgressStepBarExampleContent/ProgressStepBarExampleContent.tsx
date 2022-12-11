@@ -2,6 +2,7 @@ import './ProgressStepBarExampleContent.css';
 
 import { IconDinosaur } from '@consta/icons/IconDinosaur';
 import { IconSettings } from '@consta/icons/IconSettings';
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { cn } from '../../../../../utils/bem';
@@ -18,7 +19,7 @@ const StepContent = () => {
       <Tag
         mode="button"
         onClick={() => console.log()}
-        label=""
+        label="Настройки"
         icon={IconSettings}
       />
     </div>
@@ -64,5 +65,9 @@ export const ProgressStepBarExampleContent = () => {
     },
   ];
 
-  return <ProgressStepBar steps={steps} activeStepIndex={2} size="m" />;
+  return (
+    <Example col={1}>
+      <ProgressStepBar steps={steps} activeStepIndex={2} size="m" />
+    </Example>
+  );
 };

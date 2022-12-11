@@ -1,6 +1,4 @@
 .Collapse {
-  --horizontal-space: 0;
-
   &_size {
     &_2xs {
       --vertical-space: var(--space-2xs);
@@ -38,56 +36,6 @@
     }
   }
 
-  &_horizontalSpace {
-    &_3xs {
-      --horizontal-space: var(--space-3xs);
-    }
-
-    &_2xs {
-      --horizontal-space: var(--space-2xs);
-    }
-
-    &_xs {
-      --horizontal-space: var(--space-xs);
-    }
-
-    &_s {
-      --horizontal-space: var(--space-s);
-    }
-
-    &_m {
-      --horizontal-space: var(--space-m);
-    }
-
-    &_l {
-      --horizontal-space: var(--space-l);
-    }
-
-    &_xl {
-      --horizontal-space: var(--space-xl);
-    }
-
-    &_2xl {
-      --horizontal-space: var(--space-2xl);
-    }
-
-    &_3xl {
-      --horizontal-space: var(--space-3xl);
-    }
-
-    &_4xl {
-      --horizontal-space: var(--space-4xl);
-    }
-
-    &_5xl {
-      --horizontal-space: var(--space-5xl);
-    }
-
-    &_6xl {
-      --horizontal-space: var(--space-6xl);
-    }
-  }
-
   &_view {
     &_secondary {
       color: var(--color-typo-secondary);
@@ -122,7 +70,7 @@
     transition-timing-function: cubic-bezier(0.7, 0, 0.5, 1);
 
     &_isOpen {
-      max-height: 200vh;
+      max-height: var(--collapse-body-max-height);
     }
 
     &_divider {

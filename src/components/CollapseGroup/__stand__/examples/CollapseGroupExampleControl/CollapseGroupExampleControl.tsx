@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { items } from '../../../__mocks__/mock.data';
 import { CollapseGroup } from '../../../CollapseGroup';
 
@@ -10,12 +10,12 @@ export const CollapseGroupExampleControl = () => {
   const [opened, setOpened] = useState<number[] | null>(defaultOpened);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example>
       <CollapseGroup
         items={items}
         opened={opened}
         onOpen={({ value }) => setOpened(value)}
       />
-    </div>
+    </Example>
   );
 };

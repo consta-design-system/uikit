@@ -1,7 +1,8 @@
 import { useLayoutEffect, useState } from 'react';
 
-type Map<POINTS extends string> = Record<POINTS, number>;
-type Returned<POINTS extends string> = Record<POINTS, boolean>;
+import { isEq } from './isEq';
+import { mapping } from './mapping';
+import { Map, Returned } from './types';
 
 const defaultPoints = [
   '5xs',
@@ -35,35 +36,6 @@ const defaultMap: Map<DefaultPoints> = {
   '3xl': 2000,
   '4xl': 2200,
   '5xl': 2400,
-};
-
-const mapping = <POINTS extends string>(
-  width: number,
-  map: Map<POINTS>,
-): Returned<POINTS> => {
-  const points = {} as Returned<POINTS>;
-
-  for (const key in map) {
-    if (Object.prototype.hasOwnProperty.call(map, key)) {
-      points[key] = width >= map[key];
-    }
-  }
-
-  return points;
-};
-
-const isEq = <POINTS extends string>(
-  state: Returned<POINTS>,
-  newState: Returned<POINTS>,
-) => {
-  let eq = true;
-  for (const key in newState) {
-    if (state[key] !== newState[key]) {
-      eq = false;
-      return eq;
-    }
-  }
-  return eq;
 };
 
 export const useBreakpoints = <POINTS extends string = DefaultPoints>(

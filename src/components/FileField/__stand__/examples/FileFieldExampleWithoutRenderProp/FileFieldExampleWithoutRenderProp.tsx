@@ -1,27 +1,26 @@
 import { IconAdd } from '@consta/icons/IconAdd';
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Text } from '../../../../Text/Text';
 import { FileField } from '../../../FileField';
 
 export function FileFieldExampleWithoutRenderProp() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <FileField id="FileFieldExampleWithoutRenderProp">
         <Text>Нажми меня</Text>
       </FileField>
-    </StoryBookExample>
+    </Example>
   );
 }
 
 export function FileFieldExampleWithoutRenderPropIcon() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <FileField id="FileFieldExampleWithoutRenderPropIcon">
         <IconAdd view="alert" />
       </FileField>
-    </StoryBookExample>
+    </Example>
   );
 }

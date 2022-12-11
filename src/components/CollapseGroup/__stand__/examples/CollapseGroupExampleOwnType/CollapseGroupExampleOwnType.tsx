@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Badge } from '../../../../Badge/Badge';
 import { OwnItem, ownItems } from '../../../__mocks__/mock.data';
 import { CollapseGroup } from '../../../CollapseGroup';
@@ -14,13 +13,13 @@ const getItemRightSide = (item: OwnItem) => (
 
 export const CollapseGroupExampleOwnType = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <CollapseGroup
         items={ownItems}
         getItemLabel={getItemLabel}
         getItemContent={getItemContent}
         getItemRightSide={getItemRightSide}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

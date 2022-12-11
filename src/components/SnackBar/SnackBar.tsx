@@ -9,7 +9,11 @@ import { cnForCssTransition } from '../../utils/cnForCssTransition';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { getItem, withDefaultGetters } from './helper';
 import { SnackBarItem } from './SnackBarItem/SnackBarItem';
-import { SnackBarComponent, SnackBarProps } from './types';
+import {
+  SnackBarComponent,
+  snackBarPropFormDefault,
+  SnackBarProps,
+} from './types';
 
 export const cnSnackBar = cn('SnackBar');
 
@@ -23,6 +27,7 @@ const SnackBarRender = (
   const {
     items,
     className,
+    form = snackBarPropFormDefault,
     getItemKey,
     getItemActions,
     getItemAutoClose,
@@ -52,6 +57,7 @@ const SnackBarRender = (
             >
               <SnackBarItem
                 ref={refs[index]}
+                form={form}
                 className={cnSnackBar('Item')}
                 {...getItem(item, props)}
               />

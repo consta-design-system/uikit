@@ -1,17 +1,17 @@
+import './LoaderExampleSize.css';
+
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { cn } from '##/utils/bem';
+
 import { Loader } from '../../../Loader';
 
-export const LoaderExampleSizeM = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <Loader size="m" />
-  </StoryBookExample>
-);
+const cnLoaderExampleSize = cn('LoaderExampleSize');
 
-export const LoaderExampleSizeS = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+export const LoaderExampleSize = () => (
+  <Example className={cnLoaderExampleSize()}>
+    <Loader size="m" />
     <Loader size="s" />
-  </StoryBookExample>
+  </Example>
 );

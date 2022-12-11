@@ -25,6 +25,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
       dropdownForm,
       onFocus,
       onBlur,
+      dropdownClassName,
       leftSide,
       rightSide,
       currentVisibleDate: currentVisibleDateProp,
@@ -182,6 +183,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
           view={dateTimeView}
           events={events}
           locale={locale}
+          className={dropdownClassName}
           minDate={props.minDate}
           maxDate={props.maxDate}
           form={dropdownForm}

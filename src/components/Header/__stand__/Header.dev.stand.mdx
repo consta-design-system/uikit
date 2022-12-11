@@ -49,7 +49,7 @@ Header формируется из независимых модулей. Это
 - [логин](#логин) — `HeaderLogin`
 
 Вы можете использовать все модули или только некоторые,
-можете добавить свои (но сначала прочитайте, [как это правильно сделать и оформить](##LIBS.LIB.STAND/lib:uikit/stand:custom-contribute).
+можете добавить свои (но сначала прочитайте, [как это правильно сделать и оформить](##LIBS.LIB.STAND/lib:portal/stand:custom-contribute)).
 
 Каждый модуль нужно обернуть в контейнер `<HeaderModule></HeaderModule>`. Например, вот так:
 
@@ -86,8 +86,6 @@ Header состоит из левой и правой части — `leftSide` 
 
 [Посмотреть все свойства HeaderModule](#свойства-headermodule)
 
-<HeaderFullExample />
-
 ```tsx
 <Header
   leftSide={
@@ -107,6 +105,8 @@ Header состоит из левой и правой части — `leftSide` 
 />
 ```
 
+<HeaderFullExample />
+
 [Посмотреть все свойства Header](#свойства-header)
 
 ## Логотип
@@ -120,8 +120,6 @@ Header состоит из левой и правой части — `leftSide` 
 Лучше всего располагать `HeaderLogo` в самом левой части шапки.
 Левее него может быть только кнопка «бургера» (для меню в мобильной версии).
 
-<HeaderWithLogoExample />
-
 ```ts
 <HeaderModule>
   <HeaderLogo>
@@ -131,6 +129,8 @@ Header состоит из левой и правой части — `leftSide` 
   </HeaderLogo>
 </HeaderModule>
 ```
+
+<HeaderWithLogoExample />
 
 Если используете текстовое название, проверьте, что оно не слишком длинное.
 Если не влезает, можно сократить или перенести на другую строку.
@@ -166,13 +166,13 @@ Header состоит из левой и правой части — `leftSide` 
 Подчёркивающий элемент, который обозначает активный пункт, всегда по центру
 и не может быть больше 40px.
 
-<HeaderMenuExample />
-
 ```ts
 <HeaderModule indent="l">
   <HeaderMenu items={menuItems} />
 </HeaderModule>
 ```
+
+<HeaderMenuExample />
 
 [Посмотреть все свойства HeaderMenu](#свойства-headermenu)
 
@@ -190,8 +190,6 @@ Header состоит из левой и правой части — `leftSide` 
 
 В основе модуля — компонент [Button](##LIBS.LIB.STAND/lib:uikit/stand:components-button-stable) в модификациях: `view_clear`, `size_m`, `onlyicon`, `form_round` с [иконкой](##LIBS.LIB/lib:icons) размера `m`.
 
-<HeaderButtonExample />
-
 ```ts
 <HeaderModule indent="s">
   <HeaderButton iconLeft={IconDiamond} />
@@ -204,6 +202,8 @@ Header состоит из левой и правой части — `leftSide` 
 </HeaderModule>
 ```
 
+<HeaderButtonExample />
+
 [Посмотреть все свойства HeaderButton](#свойства-headerbutton)
 
 ## Логин и пользователь
@@ -211,9 +211,7 @@ Header состоит из левой и правой части — `leftSide` 
 Чтобы показать кнопку логина и информацию об авторизованном пользователе, используйте модуль `HeaderLogin`.
 Лучше всего располагать его последним в правой части шапки.
 
-<HeaderLoginExample />
-
-```ts
+```tsx
 <HeaderModule indent="s">
   <HeaderLogin
     isLogged={isLogged}
@@ -224,6 +222,8 @@ Header состоит из левой и правой части — `leftSide` 
   />
 </HeaderModule>
 ```
+
+<HeaderLoginExample />
 
 ### Внешний вид
 

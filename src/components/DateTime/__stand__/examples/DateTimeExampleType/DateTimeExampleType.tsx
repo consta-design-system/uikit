@@ -1,45 +1,44 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { DateTime } from '../../../DateTime';
 
 export const DateTimeExampleTypeYear = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <DateTime type="year" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const DateTimeExampleTypeMonth = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <DateTime type="month" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const DateTimeExampleTypeDate = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <DateTime type="date" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const DateTimeExampleTypeDateTime = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <DateTime type="date-time" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const DateTimeExampleTypeTime = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <DateTime type="time" />
-    </StoryBookExample>
+    </Example>
   );
 };

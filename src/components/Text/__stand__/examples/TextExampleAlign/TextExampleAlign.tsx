@@ -26,7 +26,7 @@ export const TextExampleAlign = () => {
             align={item}
             className={wp.decorator({ 'indent-b': 'xs' })}
           >
-            {`align=&quot;${item}&quot;`}
+            {`align="${item}"`}
           </Text>
           <Text align={item}>Просто текст</Text>
         </div>

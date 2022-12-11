@@ -52,6 +52,7 @@ export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent =
         {renderItem(firstItem, 'first', true, false, firstItemRef)}
         <BreadcrumbsMore
           size={size}
+          key={cnBreadcrumbsFitModeDropdown('More')}
           getItemHref={getItemHref}
           getItemIcon={getItemIcon}
           getItemLabel={getItemLabel}
