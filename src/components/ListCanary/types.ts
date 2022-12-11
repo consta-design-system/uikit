@@ -151,3 +151,11 @@ export type ListAddItemProps = PropsWithHTMLAttributesAndRef<
   },
   HTMLDivElement
 >;
+
+export type ListWrapperProps = PropsWithHTMLAttributesAndRef<
+  {
+    size?: ListPropSize;
+    form?: ListPropForm;
+  },
+  HTMLDivElement
+>;

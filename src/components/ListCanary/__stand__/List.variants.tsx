@@ -1,8 +1,13 @@
+import './List.variants.css';
+
 import { useBoolean, useSelect } from '@consta/stand';
 import React, { useState } from 'react';
 
+import { cn } from '##/utils/bem';
+
 import { basicItems, groups } from '../__mocks__/mock.data';
 import { List } from '../ListCanary';
+import { ListWrapper } from '../ListWrapper';
 import {
   DefaultListItem,
   defaultListPropForm,
@@ -10,6 +15,8 @@ import {
   listPropForm,
   listPropSize,
 } from '../types';
+
+const cnListVariant = cn('ListVariant');
 
 const Variants = () => {
   const form = useSelect('form', listPropForm, defaultListPropForm);
@@ -51,14 +58,38 @@ const Variants = () => {
 
   if (multiple) {
     return (
+      <ListWrapper size={size} form={form} className={cnListVariant()}>
+        <List
+          form={form}
+          className={cnListVariant('Content')}
+          disabled={disabled}
+          value={multipleValue}
+          isLoading={isLoading}
+          onChange={({ value }) => setMultipleValue(value)}
+          size={size}
+          multiple
+          items={basicItems}
+          groups={withGroups ? groups : undefined}
+          getItemDisabled={getItemDisabled}
+          getItemLeftIcon={getItemLeftIcon}
+          getItemLeftSide={getItemLeftSide}
+          getItemRightIcon={getItemRightIcon}
+          getItemRightSide={getItemRightSide}
+        />
+      </ListWrapper>
+    );
+  }
+
+  return (
+    <ListWrapper size={size} form={form} className={cnListVariant()}>
       <List
         form={form}
         disabled={disabled}
-        value={multipleValue}
+        className={cnListVariant('Content')}
+        value={value}
         isLoading={isLoading}
-        onChange={({ value }) => setMultipleValue(value)}
+        onChange={({ value }) => setValue(value)}
         size={size}
-        multiple
         items={basicItems}
         groups={withGroups ? groups : undefined}
         getItemDisabled={getItemDisabled}
@@ -67,25 +98,7 @@ const Variants = () => {
         getItemRightIcon={getItemRightIcon}
         getItemRightSide={getItemRightSide}
       />
-    );
-  }
-
-  return (
-    <List
-      form={form}
-      disabled={disabled}
-      value={value}
-      isLoading={isLoading}
-      onChange={({ value }) => setValue(value)}
-      size={size}
-      items={basicItems}
-      groups={withGroups ? groups : undefined}
-      getItemDisabled={getItemDisabled}
-      getItemLeftIcon={getItemLeftIcon}
-      getItemLeftSide={getItemLeftSide}
-      getItemRightIcon={getItemRightIcon}
-      getItemRightSide={getItemRightSide}
-    />
+    </ListWrapper>
   );
 };
 

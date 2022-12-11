@@ -2,8 +2,8 @@ import './List.css';
 
 import React, { forwardRef, useRef } from 'react';
 
+import { useForkRef } from '##/hooks/useForkRef';
 import { isOptionForCreate, useSelect } from '##/hooks/useSelect';
-import { cnMixList } from '##/mixs/MixList';
 import { cn } from '##/utils/bem';
 import { fabricIndex } from '##/utils/fabricIndex';
 
@@ -114,41 +114,38 @@ const ListRender = <
 
   return (
     <div
-      ref={ref}
-      className={cnMixList({ form, size }, [cnList(), className])}
-      role="listbox"
+      className={cnList({ size }, [className])}
+      ref={useForkRef([ref, containerRef])}
       {...getKeyProps()}
       {...otherProps}
     >
-      <div className={cnList('Content')} ref={containerRef}>
-        {visibleItems.map((group) => {
-          if (isOptionForCreate(group)) {
-            return null;
-          }
-          return (
-            <React.Fragment key={group.key}>
-              {group.group && (
-                <ListGroupLabel
-                  size={size}
-                  label={getGroupLabel(group.group)}
-                  rightSide={getGroupRightSide(group.group)}
-                />
-              )}
-              {group.items.map((item, index) => {
-                return (
-                  <React.Fragment key={`${group.key}-${index}`}>
-                    {(renderItem ?? renderItemDefault)({
-                      item,
-                      ...getOptionProps({ index: getIndex(), item }),
-                    })}
-                  </React.Fragment>
-                );
-              })}
-            </React.Fragment>
-          );
-        })}
-        {isLoading && <ListLoader size={size} />}
-      </div>
+      {visibleItems.map((group) => {
+        if (isOptionForCreate(group)) {
+          return null;
+        }
+        return (
+          <React.Fragment key={group.key}>
+            {group.group && (
+              <ListGroupLabel
+                size={size}
+                label={getGroupLabel(group.group)}
+                rightSide={getGroupRightSide(group.group)}
+              />
+            )}
+            {group.items.map((item, index) => {
+              return (
+                <React.Fragment key={`${group.key}-${index}`}>
+                  {(renderItem ?? renderItemDefault)({
+                    item,
+                    ...getOptionProps({ index: getIndex(), item }),
+                  })}
+                </React.Fragment>
+              );
+            })}
+          </React.Fragment>
+        );
+      })}
+      {isLoading && <ListLoader size={size} />}
     </div>
   );
 };

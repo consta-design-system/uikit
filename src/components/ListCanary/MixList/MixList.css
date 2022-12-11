@@ -7,7 +7,6 @@
     var(--control-border-width) solid
     var(--color-control-bg-border-default);
   outline: none;
-  box-shadow: var(--shadow-layer);
 
   &_form {
     &_default {
@@ -21,6 +20,10 @@
     &_round {
       border-radius: var(--space-xl);
     }
+  }
+
+  &_shadow {
+    box-shadow: var(--shadow-layer);
   }
 
   &_size {
