@@ -46,7 +46,7 @@ const stepsExample = [
 const Variants = () => {
   const size = useSelect('size', propSize, propSizeDefault);
   const direction = useSelect('direction', propDirection, propDirectionDefault);
-  const activeStepIndex = useSelect('activeStepIndex', [0, 1, 2, 3], 3);
+  const activeStepIndex = useSelect('activeStepIndex', [-1, 0, 1, 2, 3], 3);
 
   return (
     <ProgressStepBar
