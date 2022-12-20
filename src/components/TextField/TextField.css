@@ -423,6 +423,10 @@
       margin: 0;
     }
 
+    &[type='password']::-ms-reveal {
+      display: none;
+    }
+
     &[type='number'] {
       -moz-appearance: textfield;
     }
