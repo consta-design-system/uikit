@@ -70,6 +70,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
           {...otherProps}
           ref={fieldRef}
           onFocus={onFocusHandler}
+          locale={locale}
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}

@@ -156,6 +156,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> =
         <DatePickerFieldTypeMonthRange
           {...fieldProps}
           ref={ref}
+          locale={locale}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
           startFieldInputRef={useForkRef([startFieldInputRef, inputRef?.[0]])}

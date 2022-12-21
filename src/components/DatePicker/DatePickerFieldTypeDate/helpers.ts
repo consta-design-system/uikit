@@ -1,4 +1,4 @@
-import { format, isValid, parse } from 'date-fns';
+import { format, isValid, Locale, parse } from 'date-fns';
 import IMask from 'imask';
 import { useCallback, useEffect, useRef } from 'react';
 
@@ -37,6 +37,7 @@ export type DatePickerFieldTypeDateProps = PropsWithHTMLAttributes<
     size?: TextFieldPropSize;
     view?: TextFieldPropView;
     form?: TextFieldPropForm;
+    locale?: Locale;
     status?: TextFieldPropStatus;
     width?: TextFieldPropWidth;
     onFocus?: React.FocusEventHandler<HTMLElement>;

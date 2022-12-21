@@ -22,6 +22,7 @@ export const DatePickerFieldTypeDate = React.forwardRef<
     format: formatProp = datePickerPropFormatTypeDate,
     separator = datePickerPropSeparatorDefault,
     placeholder = datePickerPropPlaceholderTypeDate,
+    locale,
     onChange,
     onError,
     minDate = minDateDefault,
@@ -104,7 +105,7 @@ export const DatePickerFieldTypeDate = React.forwardRef<
   // при изменении value, нужно обновить stringValue
   useEffect(() => {
     if (value && isValid(value)) {
-      setStringValue(format(value, formatProp));
+      setStringValue(format(value, formatProp, { locale }));
     } else if (stringValue?.length === formatProp.length) {
       // если количество введенных символов меньше чем в формате маски
       // то не нужно мешать вводу с клавиатуры

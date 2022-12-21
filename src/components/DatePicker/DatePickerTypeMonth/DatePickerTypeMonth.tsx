@@ -85,6 +85,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
         <DatePickerFieldTypeMonth
           {...otherProps}
           ref={fieldRef}
+          locale={locale}
           onFocus={onFocusHandler}
         />
         <DatePickerDropdown

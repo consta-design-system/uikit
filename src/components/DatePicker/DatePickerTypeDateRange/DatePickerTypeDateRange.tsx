@@ -160,6 +160,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
         <DatePickerFieldTypeDateRange
           {...fieldProps}
           ref={ref}
+          locale={locale}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
           startFieldInputRef={useForkRef([startFieldInputRef, inputRef?.[0]])}

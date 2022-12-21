@@ -149,6 +149,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
         <DatePickerFieldTypeYearRange
           {...fieldProps}
           ref={ref}
+          locale={locale}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
           startFieldInputRef={useForkRef([startFieldInputRef, inputRef?.[0]])}

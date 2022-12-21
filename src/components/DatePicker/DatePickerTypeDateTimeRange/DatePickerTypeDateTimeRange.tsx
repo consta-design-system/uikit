@@ -142,6 +142,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           ref={ref}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
+          locale={locale}
           startFieldInputRef={useForkRef([startFieldInputRef, inputRef?.[0]])}
           endFieldInputRef={useForkRef([endFieldInputRef, inputRef?.[1]])}
           startFieldOnFocus={startFieldOnFocusHandler}

@@ -27,6 +27,7 @@ export const DatePickerFieldTypeMonth = React.forwardRef<
     minDate = minDateDefault,
     maxDate = maxDateDefault,
     value,
+    locale,
     inputRef: inputRefProp,
     ...otherProps
   } = props;
@@ -102,7 +103,7 @@ export const DatePickerFieldTypeMonth = React.forwardRef<
   // при изменении value, нужно обновить stringValue
   useEffect(() => {
     if (value && isValid(value)) {
-      setStringValue(format(value, formatProp));
+      setStringValue(format(value, formatProp, { locale }));
     } else if (stringValue?.length === formatProp.length) {
       // если количество введенных символов меньше чем в формате маски
       // то не нужно мешать вводу с клавиатуры

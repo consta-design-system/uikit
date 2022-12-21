@@ -4,6 +4,7 @@ import {
   addSeconds,
   format,
   isValid,
+  Locale,
   parse,
   startOfDay,
   startOfHour,
@@ -49,6 +50,7 @@ export type DatePickerFieldTypeDateTimeProps = PropsWithHTMLAttributes<
     onError?: DatePickerPropOnError;
     id?: string;
     name?: string;
+    locale?: Locale;
     disabled?: boolean;
     size?: TextFieldPropSize;
     view?: TextFieldPropView;

@@ -1,4 +1,4 @@
-import { format, isValid, parse } from 'date-fns';
+import { format, isValid, Locale, parse } from 'date-fns';
 import IMask from 'imask';
 import { useEffect, useRef } from 'react';
 
@@ -26,6 +26,7 @@ export type DatePickerFieldTypeYearProps = PropsWithHTMLAttributes<
     onChange?: DatePickerFieldTypeYearPropOnChange;
     onError?: DatePickerPropOnError;
     id?: string;
+    locale?: Locale;
     name?: string;
     disabled?: boolean;
     size?: TextFieldPropSize;

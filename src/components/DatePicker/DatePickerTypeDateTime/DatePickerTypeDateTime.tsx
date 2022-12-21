@@ -101,6 +101,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
         <DatePickerFieldTypeDateTime
           {...otherProps}
           ref={fieldRef}
+          locale={locale}
           onFocus={onFocusHandler}
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}

@@ -1,4 +1,4 @@
-import { format, isValid, parse } from 'date-fns';
+import { format, isValid, Locale, parse } from 'date-fns';
 import IMask from 'imask';
 import { useCallback, useEffect, useRef } from 'react';
 
@@ -35,6 +35,7 @@ export type DatePickerFieldTypeMonthProps = PropsWithHTMLAttributes<
     disabled?: boolean;
     size?: TextFieldPropSize;
     view?: TextFieldPropView;
+    locale?: Locale;
     form?: TextFieldPropForm;
     status?: TextFieldPropStatus;
     width?: TextFieldPropWidth;
