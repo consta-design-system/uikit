@@ -47,7 +47,7 @@ export const MixPopoverAnimateExample = () => {
 
   return (
     <>
-      <Button label="Нажми" onClick={setOpen.toogle} ref={buttonRef} />
+      <Button label="Нажми" onClick={setOpen.toggle} ref={buttonRef} />
       <Transition
         in={open}
         unmountOnExit
@@ -98,7 +98,7 @@ export const MixPopoverAnimateExampleForCssTransition = () => {
 
   return (
     <>
-      <Button label="Нажми" onClick={setOpen.toogle} ref={buttonRef} />
+      <Button label="Нажми" onClick={setOpen.toggle} ref={buttonRef} />
       <CSSTransition
         in={open}
         unmountOnExit

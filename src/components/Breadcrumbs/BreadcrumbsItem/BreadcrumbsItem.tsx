@@ -113,7 +113,7 @@ function BreadcrumbsItemRender<ITEM>(
           {subMenu && (
             <button
               ref={buttonRef}
-              onClick={setOpen.toogle}
+              onClick={setOpen.toggle}
               type="button"
               className={cnBreadcrumbsItem('SelectButton')}
             >

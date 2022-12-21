@@ -23,7 +23,7 @@ const TabsMoreItemsRender = (
   ref: React.Ref<HTMLDivElement>,
 ) => {
   const { items, renderItem, getItemLabel, getItemChecked, height } = props;
-  const [isOpen, { off, toogle }] = useFlag(false);
+  const [isOpen, { off, toggle }] = useFlag(false);
   const buttonRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
   const [direction, setDirection] = useState<Direction>('downStartLeft');
@@ -44,7 +44,7 @@ const TabsMoreItemsRender = (
           view="ghost"
           onlyIcon
           iconLeft={IconMeatball}
-          onClick={toogle}
+          onClick={toggle}
         />
       </div>
       <Transition

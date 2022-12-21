@@ -116,7 +116,7 @@ function BreadcrumbsMoreRender<ITEM>(
         label="..."
         size={iconSize}
         ref={buttonRef}
-        onClick={setOpen.toogle}
+        onClick={setOpen.toggle}
       />
       <ContextMenu
         items={items}

@@ -7,7 +7,7 @@ type Flag = [
   {
     on: () => void;
     off: () => void;
-    toogle: () => void;
+    toggle: () => void;
   },
 ];
 
@@ -16,14 +16,14 @@ export const useFlag = (initial = false): Flag => {
 
   const on = useCallback(() => setState(true), []);
   const off = useCallback(() => setState(false), []);
-  const toogle = useCallback(() => setState(not), []);
+  const toggle = useCallback(() => setState(not), []);
 
   return [
     state,
     {
       on,
       off,
-      toogle,
+      toggle,
     },
   ];
 };

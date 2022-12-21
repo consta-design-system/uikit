@@ -52,7 +52,7 @@ export const ContextMenuExampleSubMenu = () => {
   return (
     <>
       <Example>
-        <Button iconLeft={IconAdd} ref={ref} onClick={setOpen.toogle} />
+        <Button iconLeft={IconAdd} ref={ref} onClick={setOpen.toggle} />
       </Example>
       {open && (
         <ContextMenu

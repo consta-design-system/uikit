@@ -38,7 +38,10 @@ import { Button } from '@consta/uikit/Button';
 import { Direction, Popover } from '@consta/uikit/Popover';
 import { useFlag } from '@consta/uikit/useFlag';
 
-import { cnMixPopoverAnimate, animateTimeout } from '@consta/uikit/MixPopoverAnimate';
+import {
+  cnMixPopoverAnimate,
+  animateTimeout,
+} from '@consta/uikit/MixPopoverAnimate';
 
 export const MixPopoverAnimateExample = () => {
   const [open, setOpen] = useFlag();
@@ -48,8 +51,13 @@ export const MixPopoverAnimateExample = () => {
 
   return (
     <>
-      <Button label="Нажми" onClick={setOpen.toogle} ref={buttonRef} />
-      <Transition in={open} unmountOnExit timeout={animateTimeout} nodeRef={popoverRef}>
+      <Button label="Нажми" onClick={setOpen.toggle} ref={buttonRef} />
+      <Transition
+        in={open}
+        unmountOnExit
+        timeout={animateTimeout}
+        nodeRef={popoverRef}
+      >
         {(animate) => {
           return (
             <Popover
@@ -94,7 +102,7 @@ export const MixPopoverAnimateExampleForCssTransition = () => {
 
   return (
     <>
-      <Button label="Нажми" onClick={setOpen.toogle} ref={buttonRef} />
+      <Button label="Нажми" onClick={setOpen.toggle} ref={buttonRef} />
       <CSSTransition
         in={open}
         unmountOnExit
@@ -102,7 +110,12 @@ export const MixPopoverAnimateExampleForCssTransition = () => {
         timeout={animateTimeout}
         nodeRef={popoverRef}
       >
-        <Popover offset={8} anchorRef={buttonRef} ref={popoverRef} direction="downStartLeft">
+        <Popover
+          offset={8}
+          anchorRef={buttonRef}
+          ref={popoverRef}
+          direction="downStartLeft"
+        >
           я появился плавно <br /> c анимацией 🔥
         </Popover>
       </CSSTransition>
