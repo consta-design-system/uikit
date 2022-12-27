@@ -1,18 +1,12 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Switch } from '../../../Switch';
 
 const emptyFunction = () => {};
 
 export const SwitchExampleAlign = () => (
-  <StoryBookExample
-    className={cnDocsDecorator('Section', [
-      wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-    ])}
-  >
+  <Example col={{ 1: 0, 2: 460 }}>
     <Switch
       align="center"
       checked
@@ -25,5 +19,5 @@ export const SwitchExampleAlign = () => (
       label="Длинный текст переключателя с выравниванием по верху, записанный в несколько строк"
       onChange={emptyFunction}
     />
-  </StoryBookExample>
+  </Example>
 );

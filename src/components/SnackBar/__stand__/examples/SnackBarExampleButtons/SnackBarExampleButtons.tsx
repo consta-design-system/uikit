@@ -1,12 +1,7 @@
-import './SnackBarExampleButtons.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cn } from '../../../../../utils/bem';
 import { SnackBar } from '../../../SnackBar';
-
-const cnSnackBarExampleButtons = cn('SnackBarExampleButtons');
 
 type Item = {
   key: string;
@@ -32,12 +27,8 @@ const getActions = (item: Item) =>
 
 export const SnackBarExampleButtons: React.FC = () => {
   return (
-    <div className={cnSnackBarExampleButtons('', [cnDocsDecorator('Section')])}>
-      <SnackBar
-        className={cnSnackBarExampleButtons('SnackBar')}
-        items={items}
-        getItemActions={getActions}
-      />
-    </div>
+    <Example col={1}>
+      <SnackBar items={items} getItemActions={getActions} />
+    </Example>
   );
 };

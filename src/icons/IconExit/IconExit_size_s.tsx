@@ -7,5 +7,4 @@ const IconExitSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="m15 8-3 3V9H5V7h7V5l3 3Z" />
   </svg>
 );
-
 export default IconExitSizeS;

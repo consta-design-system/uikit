@@ -17,5 +17,4 @@ const IconLeafSizeXs = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 );
-
 export default IconLeafSizeXs;

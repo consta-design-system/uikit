@@ -1,17 +1,15 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Timer } from '../../../Timer';
 
 export function TimerExampleSize() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <Timer size="2xl" seconds={5} progress={80} />
-      <Timer size="xl" seconds={5} progress={80} />
-      <Timer size="l" seconds={5} progress={80} />
-      <Timer size="m" seconds={5} progress={80} />
-      <Timer size="s" seconds={5} progress={80} />
-    </StoryBookExample>
+    <Example
+      getItemNode={(item) => item}
+      items={(['s', 'm', 'l', 'xl', '2xl'] as const).map((size) => (
+        <Timer size={size} seconds={5} progress={80} />
+      ))}
+    />
   );
 }

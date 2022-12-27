@@ -10,5 +10,4 @@ const IconMBUSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconMBUSizeM;

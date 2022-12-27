@@ -10,5 +10,4 @@ const IconEyeCloseSizeM = (props: SVGProps<SVGSVGElement>) => (
     <path d="m4.901 19.998-1.414-1.414L19.043 3.028l1.414 1.414z" />
   </svg>
 );
-
 export default IconEyeCloseSizeM;

@@ -1,12 +1,11 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { items } from '../../../__mocks__/mock.data';
 import { Steps } from '../../../StepsDeprecated';
 
 export const ExampleStepsCompleted = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example col={1}>
     <Steps
       items={items}
       getLabel={(item) => item.label}
@@ -14,5 +13,5 @@ export const ExampleStepsCompleted = () => (
       value={items[1]}
       onChange={() => {}}
     />
-  </StoryBookExample>
+  </Example>
 );

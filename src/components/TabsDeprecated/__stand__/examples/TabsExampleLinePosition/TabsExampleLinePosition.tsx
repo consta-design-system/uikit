@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Tabs, tabsLinePositions } from '../../../TabsDeprecated';
 
 type Item = string;
@@ -11,16 +10,13 @@ const items: Item[] = ['Первый', 'Второй', 'Третий'];
 export const TabsExampleLinePosition = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <div>
+    <Example col={{ 1: 0, 2: 600 }}>
       {tabsLinePositions.map((linePosition) => (
         <div key={linePosition} style={{ marginBottom: 'var(--space-l)' }}>
           <p>
             <code>linePosition=&quot;{linePosition}&quot;</code>
           </p>
-          <StoryBookExample
-            className={cnDocsDecorator('Section')}
-            style={{ marginBottom: 'var(--space-xl)' }}
-          >
+          <div style={{ marginBottom: 'var(--space-xl)' }}>
             <Tabs
               value={value}
               onChange={({ value }) => setValue(value)}
@@ -28,9 +24,9 @@ export const TabsExampleLinePosition = () => {
               getLabel={(item) => item}
               linePosition={linePosition}
             />
-          </StoryBookExample>
+          </div>
         </div>
       ))}
-    </div>
+    </Example>
   );
 };

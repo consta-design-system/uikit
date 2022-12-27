@@ -1,22 +1,17 @@
-import './MixCardExampleBorder.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Text } from '##/components/Text/Text';
-import { cn } from '##/utils/bem';
 
 import { cnMixCard } from '../../../MixCard';
 
-const cnMixCardExampleForm = cn('MixCardExampleBorder');
-
 export const MixCardExampleBorder = () => {
   return (
-    <div className={cnMixCardExampleForm()}>
+    <Example col={{ 1: 0, 2: 700 }}>
       <div
         className={cnMixCard({
           verticalSpace: 'xl',
           horizontalSpace: '3xl',
-          status: 'success',
           form: 'round',
           shadow: false,
           border: true,
@@ -28,7 +23,6 @@ export const MixCardExampleBorder = () => {
         className={cnMixCard({
           verticalSpace: 'xl',
           horizontalSpace: '3xl',
-          status: 'success',
           form: 'round',
           shadow: false,
           border: false,
@@ -36,6 +30,6 @@ export const MixCardExampleBorder = () => {
       >
         <Text>Карточка без границы</Text>
       </div>
-    </div>
+    </Example>
   );
 };

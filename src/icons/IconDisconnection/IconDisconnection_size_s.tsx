@@ -13,5 +13,4 @@ const IconDisconnectionSizeS = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 );
-
 export default IconDisconnectionSizeS;

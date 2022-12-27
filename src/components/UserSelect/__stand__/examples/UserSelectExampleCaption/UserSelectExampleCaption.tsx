@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { UserSelect } from '../../../UserSelect';
 
 type Item = {
@@ -32,46 +32,38 @@ const items: Item[] = [
 export function UserSelectExampleCaption() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <>
-      <StoryBookExample>
-        <UserSelect
-          items={items}
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          status="success"
-          placeholder="Статус success"
-          caption="Это подпись"
-        />
-      </StoryBookExample>
-      <StoryBookExample>
-        <UserSelect
-          items={items}
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          status="alert"
-          placeholder="Статус alert"
-          caption="Это подпись"
-        />
-      </StoryBookExample>
-      <StoryBookExample>
-        <UserSelect
-          items={items}
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          status="warning"
-          placeholder="Статус warning"
-          caption="Это подпись"
-        />
-      </StoryBookExample>
-      <StoryBookExample>
-        <UserSelect
-          items={items}
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          placeholder="Обычное поле"
-          caption="Это подпись"
-        />
-      </StoryBookExample>
-    </>
+    <Example col={1}>
+      <UserSelect
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        status="success"
+        placeholder="Статус success"
+        caption="Это подпись"
+      />
+      <UserSelect
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        status="alert"
+        placeholder="Статус alert"
+        caption="Это подпись"
+      />
+      <UserSelect
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        status="warning"
+        placeholder="Статус warning"
+        caption="Это подпись"
+      />
+      <UserSelect
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Обычное поле"
+        caption="Это подпись"
+      />
+    </Example>
   );
 }

@@ -1,9 +1,8 @@
 import './ThemeExampleColors.css';
 
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { cn } from '../../../../../utils/bem';
 import { Text } from '../../../../Text/Text';
 import {
@@ -17,63 +16,64 @@ const cnExampleColors = cn('ThemeExampleColors');
 
 export const ThemeExampleColors = () => {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'xs-columns': 3 }),
-        wp.decorator({ 'indent-b': 's' }),
-      ])}
-    >
-      <Text align="center" weight="bold">
-        Default
-      </Text>
-      <Text align="center" weight="bold">
-        Dark
-      </Text>
-      <Text align="center" weight="bold">
-        Display
-      </Text>
-      <Theme preset={presetGpnDefault} className={cnExampleColors()}>
-        <div className={cnExampleColors('Card')}>
-          <div className={cnExampleColors('Content')}>
-            <div className={cnExampleColors('Text')} />
-            <div className={cnExampleColors('Text')} />
-            <div className={cnExampleColors('Text')} />
-            <div className={cnExampleColors('Text')} />
+    <Example col={{ 1: 0, 3: 800 }}>
+      <>
+        <Text align="center" weight="bold">
+          Default
+        </Text>
+        <Theme preset={presetGpnDefault} className={cnExampleColors()}>
+          <div className={cnExampleColors('Card')}>
+            <div className={cnExampleColors('Content')}>
+              <div className={cnExampleColors('Text')} />
+              <div className={cnExampleColors('Text')} />
+              <div className={cnExampleColors('Text')} />
+              <div className={cnExampleColors('Text')} />
+            </div>
+            <div className={cnExampleColors('Controls')}>
+              <div className={cnExampleColors('Button')} />
+              <div className={cnExampleColors('Button')} />
+            </div>
           </div>
-          <div className={cnExampleColors('Controls')}>
-            <div className={cnExampleColors('Button')} />
-            <div className={cnExampleColors('Button')} />
+        </Theme>
+      </>
+      <>
+        <Text align="center" weight="bold">
+          Dark
+        </Text>
+        <Theme preset={presetGpnDark} className={cnExampleColors()}>
+          <div className={cnExampleColors('Card')}>
+            <div className={cnExampleColors('Content')}>
+              <div className={cnExampleColors('Text')} />
+              <div className={cnExampleColors('Text')} />
+              <div className={cnExampleColors('Text')} />
+              <div className={cnExampleColors('Text')} />
+            </div>
+            <div className={cnExampleColors('Controls')}>
+              <div className={cnExampleColors('Button')} />
+              <div className={cnExampleColors('Button')} />
+            </div>
           </div>
-        </div>
-      </Theme>
-      <Theme preset={presetGpnDark} className={cnExampleColors()}>
-        <div className={cnExampleColors('Card')}>
-          <div className={cnExampleColors('Content')}>
-            <div className={cnExampleColors('Text')} />
-            <div className={cnExampleColors('Text')} />
-            <div className={cnExampleColors('Text')} />
-            <div className={cnExampleColors('Text')} />
+        </Theme>
+      </>
+      <>
+        <Text align="center" weight="bold">
+          Display
+        </Text>
+        <Theme preset={presetGpnDisplay} className={cnExampleColors()}>
+          <div className={cnExampleColors('Card')}>
+            <div className={cnExampleColors('Content')}>
+              <div className={cnExampleColors('Text')} />
+              <div className={cnExampleColors('Text')} />
+              <div className={cnExampleColors('Text')} />
+              <div className={cnExampleColors('Text')} />
+            </div>
+            <div className={cnExampleColors('Controls')}>
+              <div className={cnExampleColors('Button')} />
+              <div className={cnExampleColors('Button')} />
+            </div>
           </div>
-          <div className={cnExampleColors('Controls')}>
-            <div className={cnExampleColors('Button')} />
-            <div className={cnExampleColors('Button')} />
-          </div>
-        </div>
-      </Theme>
-      <Theme preset={presetGpnDisplay} className={cnExampleColors()}>
-        <div className={cnExampleColors('Card')}>
-          <div className={cnExampleColors('Content')}>
-            <div className={cnExampleColors('Text')} />
-            <div className={cnExampleColors('Text')} />
-            <div className={cnExampleColors('Text')} />
-            <div className={cnExampleColors('Text')} />
-          </div>
-          <div className={cnExampleColors('Controls')}>
-            <div className={cnExampleColors('Button')} />
-            <div className={cnExampleColors('Button')} />
-          </div>
-        </div>
-      </Theme>
-    </div>
+        </Theme>
+      </>
+    </Example>
   );
 };

@@ -10,5 +10,4 @@ const IconQuestionSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconQuestionSizeM;

@@ -10,5 +10,4 @@ const IconBarrierSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconBarrierSizeXs;

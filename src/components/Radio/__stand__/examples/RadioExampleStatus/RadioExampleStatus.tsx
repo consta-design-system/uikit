@@ -1,13 +1,12 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Radio } from '../../../Radio';
 
 const emptyFunction = () => {};
 
 export const RadioExampleStatus = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <Radio label="Radio" onChange={emptyFunction} checked={undefined} />
     <Radio label="Checked" onChange={emptyFunction} checked />
     <Radio
@@ -17,5 +16,5 @@ export const RadioExampleStatus = () => (
       disabled
     />
     <Radio label="Checked Disabled" onChange={emptyFunction} checked disabled />
-  </StoryBookExample>
+  </Example>
 );

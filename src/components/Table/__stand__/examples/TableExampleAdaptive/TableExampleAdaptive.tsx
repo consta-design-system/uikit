@@ -1,9 +1,8 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { useBreakpoints } from '../../../../../hooks/useBreakpoints/useBreakpoints';
 import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Badge } from '../../../../Badge/Badge';
 import { Card } from '../../../../Card/Card';
 import { Text } from '../../../../Text/Text';
@@ -54,12 +53,9 @@ const columns: TableColumn<typeof rowsProf[number]>[] = [
 
 export function TableExampleAdaptiveScroll() {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section')}
-      style={{ maxWidth: 500 }}
-    >
+    <Example col={1} style={{ maxWidth: 500 }}>
       <Table columns={columns} rows={rowsProf} />
-    </StoryBookExample>
+    </Example>
   );
 }
 

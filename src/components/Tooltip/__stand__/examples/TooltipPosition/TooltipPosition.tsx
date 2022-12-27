@@ -1,5 +1,6 @@
 import './TooltipPosition.css';
 
+import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
 import { Button } from '##/components/Button/Button';
@@ -23,13 +24,16 @@ export const TooltipPositionedCoords = () => {
 
   return (
     <>
-      <div
-        className={cnTooltipPosition({ for: 'anchor' })}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={() => setPosition(undefined)}
-      >
-        <Text>Область, в которой работает отслеживание мышки</Text>
-      </div>
+      <Example col={1}>
+        <div
+          className={cnTooltipPosition({ for: 'anchor' })}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => setPosition(undefined)}
+        >
+          <Text>Область, в которой работает отслеживание мышки</Text>
+        </div>
+      </Example>
+
       <Tooltip
         direction="upCenter"
         spareDirection="downStartLeft"
@@ -50,14 +54,16 @@ export const TooltipPositionedAnchor = () => {
 
   return (
     <>
-      <div className={cnTooltipPosition()}>
-        <Button
-          label="Нажми меня"
-          type="button"
-          onClick={setIsTooltipVisible.toogle}
-          ref={anchorRef}
-        />
-      </div>
+      <Example col={1}>
+        <div className={cnTooltipPosition()}>
+          <Button
+            label="Нажми меня"
+            type="button"
+            onClick={setIsTooltipVisible.toogle}
+            ref={anchorRef}
+          />
+        </div>
+      </Example>
       {isTooltipVisible && (
         <Tooltip
           direction="upCenter"

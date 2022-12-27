@@ -99,5 +99,4 @@ const ResponsesImageNothingFound = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default ResponsesImageNothingFound;

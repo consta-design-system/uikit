@@ -11,5 +11,4 @@ const IconLineAndBarChartSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M4.5 6h1v5h-1V6ZM2.5 8h1v3h-1V8ZM7.5 7h-1v4h1V7ZM8.5 6h1v5h-1V6Z" />
   </svg>
 );
-
 export default IconLineAndBarChartSizeXs;

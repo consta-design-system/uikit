@@ -1,5 +1,6 @@
 import './ThemeTogglerExampleQuantity.css';
 
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
@@ -18,17 +19,19 @@ const GetThemeTogglerExampleQuantity = (items: ThemeType[]): JSX.Element => {
   const [value, setValue] = useState<ThemeType>(exampleThemesTwo[0]);
 
   return (
-    <Theme
-      preset={value.theme}
-      className={cnThemeTogglerExample('', [cnDocsDecorator('Section')])}
-    >
-      <ThemeToggler
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        direction="downStartLeft"
-      />
-    </Theme>
+    <Example col={1}>
+      <Theme
+        preset={value.theme}
+        className={cnThemeTogglerExample('', [cnDocsDecorator('Section')])}
+      >
+        <ThemeToggler
+          items={items}
+          value={value}
+          onChange={({ value }) => setValue(value)}
+          direction="downStartLeft"
+        />
+      </Theme>
+    </Example>
   );
 };
 

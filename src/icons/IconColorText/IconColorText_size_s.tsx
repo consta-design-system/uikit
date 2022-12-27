@@ -11,5 +11,4 @@ const IconColorTextSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M16 14H0v2h16v-2z" />
   </svg>
 );
-
 export default IconColorTextSizeS;

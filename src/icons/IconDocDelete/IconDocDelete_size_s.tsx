@@ -10,5 +10,4 @@ const IconDocDeleteSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconDocDeleteSizeS;

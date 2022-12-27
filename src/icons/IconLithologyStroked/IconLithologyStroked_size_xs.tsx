@@ -11,5 +11,4 @@ const IconLithologyStrokedSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconLithologyStrokedSizeXs;

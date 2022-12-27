@@ -1,16 +1,12 @@
-import './MixCardExampleShadow.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Text } from '../../../../../components/Text/Text';
-import { cn } from '../../../../../utils/bem';
 import { cnMixCard } from '../../../MixCard';
-
-const cnMixCardExampleForm = cn('MixCardExampleShadow');
 
 export const MixCardExampleShadow = () => {
   return (
-    <div className={cnMixCardExampleForm()}>
+    <Example col={{ 1: 0, 2: 700 }}>
       <div
         className={cnMixCard({
           verticalSpace: 'xl',
@@ -33,6 +29,6 @@ export const MixCardExampleShadow = () => {
       >
         <Text>Карточка без тени</Text>
       </div>
-    </div>
+    </Example>
   );
 };

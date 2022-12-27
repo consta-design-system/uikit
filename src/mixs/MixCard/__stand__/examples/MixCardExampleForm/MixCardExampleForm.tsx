@@ -1,16 +1,12 @@
-import './MixCardExampleForm.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Text } from '../../../../../components/Text/Text';
-import { cn } from '../../../../../utils/bem';
 import { cnMixCard } from '../../../MixCard';
-
-const cnMixCardExampleForm = cn('MixCardExampleForm');
 
 export const MixCardExampleForm = () => {
   return (
-    <div className={cnMixCardExampleForm()}>
+    <Example col={{ 1: 0, 2: 700 }}>
       <div
         className={cnMixCard({
           verticalSpace: 'xl',
@@ -31,6 +27,6 @@ export const MixCardExampleForm = () => {
       >
         <Text>round</Text>
       </div>
-    </div>
+    </Example>
   );
 };

@@ -1,17 +1,13 @@
-import './SliderExampleStatus.css';
-
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cn } from '../../../../../utils/bem';
 import { Slider } from '../../../Slider';
-
-const cnSliderExampleStatus = cn('SliderExampleStatus');
 
 export const SliderExampleStatus = () => {
   const [value, setValue] = useState<number>(20);
 
   return (
-    <div className={cnSliderExampleStatus()}>
+    <Example col={1}>
       <Slider
         range={false}
         label={`Значение ${value}`}
@@ -43,6 +39,6 @@ export const SliderExampleStatus = () => {
         onChange={({ value }) => setValue(value)}
         value={value}
       />
-    </div>
+    </Example>
   );
 };

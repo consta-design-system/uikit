@@ -79,14 +79,20 @@ export const MixPopoverArrowExample = () => {
       <Button label="Открыть" onClick={setOpen.toogle} ref={buttonRef} />
       {open && (
         <Popover
-          className="MixPopoverArrowExample"
+          className={cnMixPopoverArrowExample()}
           anchorRef={buttonRef}
           direction="downCenter"
           arrowOffset={16}
           offset={14}
         >
-          <Text>Стрелочка по центру сверху</Text>
-          <div className={cnMixPopoverArrow({ direction: 'downCenter' })} />
+          {(direction) => {
+            return (
+              <>
+                <Text>Позиция - {direction}</Text>
+                <div className={cnMixPopoverArrow({ direction })} />
+              </>
+            );
+          }}
         </Popover>
       )}
     </>

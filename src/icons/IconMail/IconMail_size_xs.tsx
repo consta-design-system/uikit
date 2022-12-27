@@ -7,5 +7,4 @@ const IconMailSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M11 4.719 6 7.576 1 4.719V9a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.719z" />
   </svg>
 );
-
 export default IconMailSizeXs;

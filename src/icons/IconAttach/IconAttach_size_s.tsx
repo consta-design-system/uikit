@@ -10,5 +10,4 @@ const IconAttachSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconAttachSizeS;

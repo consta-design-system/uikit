@@ -11,5 +11,4 @@ const IconGroupingSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconGroupingSizeXs;

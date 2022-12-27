@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleView = () => {
@@ -9,7 +8,7 @@ export const TextFieldExampleView = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField
         view="default"
         placeholder="Самое обычное поле"
@@ -22,7 +21,7 @@ export const TextFieldExampleView = () => {
         value={value}
         onChange={handleChange}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -31,13 +30,13 @@ export const TextFieldExampleViewDisabled = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField
         placeholder="Неактивное поле"
         disabled
         value={value}
         onChange={handleChange}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

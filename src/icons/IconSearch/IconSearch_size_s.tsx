@@ -10,5 +10,4 @@ const IconSearchSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconSearchSizeS;

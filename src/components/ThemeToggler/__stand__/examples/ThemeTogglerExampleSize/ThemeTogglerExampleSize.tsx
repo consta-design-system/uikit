@@ -1,5 +1,6 @@
 import './ThemeTogglerExampleSize.css';
 
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
@@ -17,39 +18,28 @@ export const GetThemeTogglerExample = (items: ThemeType[]): JSX.Element => {
   const [value, setValue] = useState<ThemeType>(exampleThemesThree[0]);
 
   return (
-    <Theme
-      preset={value.theme}
-      className={cnThemeTogglerExample('', [cnDocsDecorator('Section')])}
-    >
-      <ThemeToggler
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        direction="downStartLeft"
-        size="xs"
-      />
-      <ThemeToggler
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        direction="downStartLeft"
-        size="s"
-      />
-      <ThemeToggler
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        direction="downStartLeft"
-        size="m"
-      />
-      <ThemeToggler
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        direction="downStartLeft"
-        size="l"
-      />
-    </Theme>
+    <Example
+      col={{ 1: 0, 2: 300, 4: 600 }}
+      separately
+      items={(['xs', 's', 'm', 'l'] as const).map((size) => ({
+        label: `size="${size}"`,
+        node: (
+          <Theme
+            preset={value.theme}
+            className={cnThemeTogglerExample('', [cnDocsDecorator('Section')])}
+          >
+            <ThemeToggler
+              items={items}
+              value={value}
+              onChange={({ value }) => setValue(value)}
+              direction="downStartLeft"
+              key={size}
+              size={size}
+            />
+          </Theme>
+        ),
+      }))}
+    />
   );
 };
 

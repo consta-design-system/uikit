@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Table, TableColumn } from '../../../Table';
 
 const rows = [
@@ -22,8 +21,8 @@ const columns: TableColumn<typeof rows[number]>[] = [
 
 export function TableExampleIsResizable() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Table columns={columns} rows={rows} isResizable />
-    </StoryBookExample>
+    </Example>
   );
 }

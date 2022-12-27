@@ -6,5 +6,4 @@ const IconPauseSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M7 2H3v12h4V2zm6 0H9v12h4V2z" />
   </svg>
 );
-
 export default IconPauseSizeS;

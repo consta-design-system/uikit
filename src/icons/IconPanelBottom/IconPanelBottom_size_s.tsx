@@ -11,5 +11,4 @@ const IconPanelBottomSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconPanelBottomSizeS;

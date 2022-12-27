@@ -25,5 +25,4 @@ const FileIconJsonSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default FileIconJsonSizeM;

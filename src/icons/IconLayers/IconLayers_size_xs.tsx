@@ -8,5 +8,4 @@ const IconLayersSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="m2.051 7.75-.828.388a.4.4 0 0 0 0 .724l4.438 2.079a.8.8 0 0 0 .678 0l4.438-2.079a.4.4 0 0 0 0-.724l-.828-.388-3.61 1.69a.8.8 0 0 1-.678 0L2.05 7.75z" />
   </svg>
 );
-
 export default IconLayersSizeXs;

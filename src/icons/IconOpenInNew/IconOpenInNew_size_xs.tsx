@@ -7,5 +7,4 @@ const IconOpenInNewSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M5 3v1H2v6h6V7h1v4H1V3h4z" />
   </svg>
 );
-
 export default IconOpenInNewSizeXs;

@@ -6,5 +6,4 @@ const IconMeatballSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M10 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM6 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM1 6a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
   </svg>
 );
-
 export default IconMeatballSizeXs;

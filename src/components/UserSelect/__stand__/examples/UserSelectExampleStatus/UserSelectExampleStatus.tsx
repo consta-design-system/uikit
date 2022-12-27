@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { UserSelect } from '../../../UserSelect';
 
 type Item = {
@@ -34,7 +33,7 @@ export const UserSelectExampleStatus = () => {
   const [value, setValue] = useState<Item | null>();
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <UserSelect
         placeholder="default"
         caption="default"
@@ -70,6 +69,6 @@ export const UserSelectExampleStatus = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

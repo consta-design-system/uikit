@@ -7,5 +7,4 @@ const IconMicSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M3 7a5.002 5.002 0 0 0 4 4.9V15h2v-3.1A5.002 5.002 0 0 0 13 7h-1a4 4 0 0 1-8 0H3z" />
   </svg>
 );
-
 export default IconMicSizeS;

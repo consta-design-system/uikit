@@ -1,13 +1,17 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { IconPropSize } from '../../../../Icon';
 import { IconBag } from '../../../../IconBag/IconBag';
 
+const sizes: IconPropSize[] = ['xs', 's', 'm', 'l'];
+
 export const IconExampleSize = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <IconBag size="xs" />
-    <IconBag size="s" />
-    <IconBag size="m" />
-  </StoryBookExample>
+  <Example
+    col={{ 1: 0, 2: 240, 4: 420 }}
+    items={sizes}
+    separately
+    getItemNode={(size) => <IconBag size={size} />}
+    getItemDescription={(size) => `size="${size}"`}
+  />
 );

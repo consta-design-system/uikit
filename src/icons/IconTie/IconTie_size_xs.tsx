@@ -10,5 +10,4 @@ const IconTieSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconTieSizeXs;

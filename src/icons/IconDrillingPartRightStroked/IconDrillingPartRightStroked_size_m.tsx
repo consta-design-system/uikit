@@ -10,5 +10,4 @@ const IconDrillingPartRightStrokedSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconDrillingPartRightStrokedSizeM;

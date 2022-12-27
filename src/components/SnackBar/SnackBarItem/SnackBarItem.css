@@ -72,7 +72,7 @@
     flex: 1;
   }
 
-  &-CloseButton {
+  &-CloseButton.Button {
     position: absolute;
     top: var(--space-2xs);
     right: var(--space-2xs);

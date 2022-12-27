@@ -6,5 +6,4 @@ const IconUploadSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M1 10v1h10v-1H1zm5.501-1V2.914L8.86 5.28l.707-.707L6 1 2.46 4.538l.707.707L5.5 2.915V9h1z" />
   </svg>
 );
-
 export default IconUploadSizeXs;

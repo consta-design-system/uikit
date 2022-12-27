@@ -1,13 +1,13 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Slider } from '../../../Slider';
 
 export const SliderExampleTooltip = () => {
   const [value, setValue] = useState<[number, number]>([20, 50]);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Slider
         step={5}
         range
@@ -16,6 +16,6 @@ export const SliderExampleTooltip = () => {
         value={value}
         withTooltip
       />
-    </div>
+    </Example>
   );
 };

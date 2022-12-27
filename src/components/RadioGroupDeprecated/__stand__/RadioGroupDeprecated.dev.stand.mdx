@@ -229,7 +229,7 @@ function RadioGroupExampleSize() {
   const [value, setValue] = React.useState<string | null>(simpleItems[0]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <RadioGroup
         value={value}
         items={simpleItems}
@@ -246,7 +246,7 @@ function RadioGroupExampleSize() {
         direction="row"
         size="l"
       />
-    </StoryBookExample>
+    </Example>
   );
 }
 ```
@@ -264,7 +264,7 @@ function RadioGroupExampleView() {
   const [value, setValue] = React.useState<string | null>(simpleItems[0]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <RadioGroup
         value={value}
         items={simpleItems}
@@ -281,7 +281,7 @@ function RadioGroupExampleView() {
         direction="row"
         view="ghost"
       />
-    </StoryBookExample>
+    </Example>
   );
 }
 ```

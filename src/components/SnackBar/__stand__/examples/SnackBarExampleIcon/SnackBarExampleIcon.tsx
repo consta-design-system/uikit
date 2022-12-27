@@ -1,14 +1,9 @@
-import './SnackBarExampleIcon.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { IconDisconnection } from '../../../../../icons/IconDisconnection/IconDisconnection';
 import { IconMoon } from '../../../../../icons/IconMoon/IconMoon';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cn } from '../../../../../utils/bem';
 import { SnackBar } from '../../../SnackBar';
-
-const cnSnackBarExampleIcon = cn('SnackBarExampleIcon');
 
 type Item = {
   key: string;
@@ -38,12 +33,8 @@ const getIcon = (item: Item) => {
 
 export const SnackBarExampleIcon = () => {
   return (
-    <div className={cnSnackBarExampleIcon('', [cnDocsDecorator('Section')])}>
-      <SnackBar
-        className={cnSnackBarExampleIcon('SnackBar')}
-        items={items}
-        getItemIcon={getIcon}
-      />
-    </div>
+    <Example col={1}>
+      <SnackBar items={items} getItemIcon={getIcon} />
+    </Example>
   );
 };

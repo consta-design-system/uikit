@@ -10,5 +10,4 @@ const IconLithologyFilledSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconLithologyFilledSizeS;

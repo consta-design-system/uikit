@@ -6,5 +6,4 @@ const IconSortUpSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M6 5H2V3h4v2zM2 7v2h8V7H2zm0 6h12v-2H2v2z" />
   </svg>
 );
-
 export default IconSortUpSizeS;

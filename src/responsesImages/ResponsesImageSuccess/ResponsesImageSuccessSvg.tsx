@@ -57,5 +57,4 @@ const ResponsesImageSuccess = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default ResponsesImageSuccess;

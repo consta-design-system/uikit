@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { simpleItems } from '../../../__mocks__/data.mock';
 import { RadioGroup } from '../../../RadioGroup';
 
@@ -9,7 +8,7 @@ export const RadioGroupExampleView = () => {
   const [value, setValue] = React.useState<string | null>(simpleItems[0]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={{ 0: 1, 2: 760 }}>
       <RadioGroup
         value={value}
         items={simpleItems}
@@ -26,6 +25,6 @@ export const RadioGroupExampleView = () => {
         direction="row"
         view="ghost"
       />
-    </StoryBookExample>
+    </Example>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ResponsesExit as ResponsesImageExit } from '../../responsesImages/ResponsesExit/ResponsesExit';
+import { ResponsesImageExit } from '../../responsesImages/ResponsesImageExit/ResponsesImageExit';
 import { Button } from '../Button/Button';
 import { createResponses } from '../Responses/createResponses';
 

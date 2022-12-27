@@ -1,18 +1,12 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Radio } from '../../../Radio';
 
 const emptyFunction = () => {};
 
 export const RadioExampleAlign = () => (
-  <StoryBookExample
-    className={cnDocsDecorator('Section', [
-      wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-    ])}
-  >
+  <Example col={{ 1: 0, 2: 500 }}>
     <Radio
       align="center"
       checked
@@ -25,5 +19,5 @@ export const RadioExampleAlign = () => (
       label="Длинный текст для радиокнопки с выравниванием по верху, тут несколько строк"
       onChange={emptyFunction}
     />
-  </StoryBookExample>
+  </Example>
 );

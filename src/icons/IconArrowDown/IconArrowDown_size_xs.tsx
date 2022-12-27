@@ -10,5 +10,4 @@ const IconArrowDownSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconArrowDownSizeXs;

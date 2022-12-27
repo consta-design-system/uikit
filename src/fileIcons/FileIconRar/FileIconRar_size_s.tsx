@@ -17,5 +17,4 @@ const FileIconRarSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default FileIconRarSizeS;

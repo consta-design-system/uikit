@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleStatus = () => {
@@ -9,7 +8,7 @@ export const TextFieldExampleStatus = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField
         onChange={handleChange}
         value={value}
@@ -33,6 +32,6 @@ export const TextFieldExampleStatus = () => {
         value={value}
         placeholder="Обычное поле"
       />
-    </StoryBookExample>
+    </Example>
   );
 };

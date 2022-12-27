@@ -10,5 +10,4 @@ const IconKernStrokedSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconKernStrokedSizeXs;

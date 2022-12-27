@@ -11,5 +11,4 @@ const IconColorFillSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M10 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM12 11H0v1h12v-1Z" />
   </svg>
 );
-
 export default IconColorFillSizeXs;

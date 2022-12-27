@@ -10,5 +10,4 @@ const IconWellPipeSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconWellPipeSizeS;

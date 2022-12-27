@@ -1,16 +1,18 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
-import { Text } from '../../../Text';
+import { Text, textPropFontStyle } from '../../../Text';
 
 export const TextExampleStyle = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
-        fontStyle=&quot;italic&quot;
-      </Text>
-      <Text fontStyle="italic">Просто текст</Text>
-    </div>
+    <Example
+      col={{ 1: 0 }}
+      separately
+      items={textPropFontStyle.map((fontStyle) => ({
+        label: `fontStyle="${fontStyle}"`,
+        status: 'system',
+        node: <Text fontStyle={fontStyle}>Просто текст</Text>,
+      }))}
+    />
   );
 };

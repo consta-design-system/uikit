@@ -21,5 +21,4 @@ const FileIconAviSizeM = (props: SVGProps<SVGSVGElement>) => (
     <path d="M15 7h-1v3l1 2h1l1-2V7h-1v3h-1V7Z" fill="#fff" />
   </svg>
 );
-
 export default FileIconAviSizeM;

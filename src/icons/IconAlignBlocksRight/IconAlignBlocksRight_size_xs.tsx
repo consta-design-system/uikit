@@ -10,5 +10,4 @@ const IconAlignBlocksRightSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconAlignBlocksRightSizeXs;

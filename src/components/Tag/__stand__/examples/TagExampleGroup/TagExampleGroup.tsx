@@ -1,11 +1,10 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Tag } from '../../../Tag';
 
 export const TagExampleGroup = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <Tag onClick={() => {}} label="Марс" group="1" />
     <Tag onClick={() => {}} label="земля" group="2" />
     <Tag onClick={() => {}} label="Земля" group="1" />
@@ -14,5 +13,5 @@ export const TagExampleGroup = () => (
     <Tag onClick={() => {}} label="огонь" group="2" />
     <Tag onClick={() => {}} label="Нептун" group="1" />
     <Tag onClick={() => {}} label="Церера" group="1" />
-  </StoryBookExample>
+  </Example>
 );

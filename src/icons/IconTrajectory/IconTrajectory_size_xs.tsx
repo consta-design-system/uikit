@@ -7,5 +7,4 @@ const IconTrajectorySizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M9 3h2v1H9v4H8V4H4V3h4V1h1v2Z" />
   </svg>
 );
-
 export default IconTrajectorySizeXs;

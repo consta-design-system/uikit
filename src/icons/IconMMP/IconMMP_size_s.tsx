@@ -10,5 +10,4 @@ const IconMMPSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconMMPSizeS;

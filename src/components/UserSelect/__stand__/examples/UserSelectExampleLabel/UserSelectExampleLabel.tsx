@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { UserSelect } from '../../../UserSelect';
 
 type Item = {
@@ -33,7 +32,7 @@ const items: Item[] = [
 export function UserSelectExampleLabel() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <UserSelect
         label="Пользователь"
         caption={value?.label}
@@ -42,34 +41,30 @@ export function UserSelectExampleLabel() {
         onChange={({ value }) => setValue(value)}
         placeholder="Выберите пользователя"
       />
-    </div>
+    </Example>
   );
 }
 
 export function UserSelectExampleLabelPosition() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <>
-      <StoryBookExample>
-        <UserSelect
-          items={items}
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          placeholder="Здесь лейбл сверху"
-          label="Лейбл"
-          labelPosition="top"
-        />
-      </StoryBookExample>
-      <StoryBookExample>
-        <UserSelect
-          items={items}
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          placeholder="Здесь лейбл слева"
-          label="Лейбл"
-          labelPosition="left"
-        />
-      </StoryBookExample>
-    </>
+    <Example col={1}>
+      <UserSelect
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Здесь лейбл сверху"
+        label="Лейбл"
+        labelPosition="top"
+      />
+      <UserSelect
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        placeholder="Здесь лейбл слева"
+        label="Лейбл"
+        labelPosition="left"
+      />
+    </Example>
   );
 }

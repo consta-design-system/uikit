@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleTypeText = () => {
@@ -8,14 +8,14 @@ export const TextFieldExampleTypeText = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample>
+    <Example col={1}>
       <TextField
         onChange={handleChange}
         value={value}
         type="text"
         placeholder="Одна строчка"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -24,7 +24,7 @@ export const TextFieldExampleTypeTextarea = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample>
+    <Example col={1}>
       <TextField
         onChange={handleChange}
         value={value}
@@ -33,7 +33,7 @@ export const TextFieldExampleTypeTextarea = () => {
         rows={3}
         placeholder="Несколько строчек"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -42,7 +42,7 @@ export const TextFieldExampleTypeNumber = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample>
+    <Example col={1}>
       <TextField
         onChange={handleChange}
         value={value}
@@ -50,7 +50,7 @@ export const TextFieldExampleTypeNumber = () => {
         step="2"
         placeholder="Здесь цифры"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -59,13 +59,13 @@ export const TextFieldExampleTypePassword = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample>
+    <Example col={1}>
       <TextField
         onChange={handleChange}
         value={value}
         type="password"
         placeholder="Пароль"
       />
-    </StoryBookExample>
+    </Example>
   );
 };

@@ -11,5 +11,4 @@ const IconTargetSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconTargetSizeS;

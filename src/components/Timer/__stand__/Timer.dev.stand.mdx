@@ -37,12 +37,12 @@ import { Timer } from '@consta/uikit/Timer';
 
 За размер таймера отвечает свойство `size`.
 
-```ts
-<Timer size="2xl" seconds={5} progress={80} />
-<Timer size="xl" seconds={5} progress={80} />
-<Timer size="l" seconds={5} progress={80} />
-<Timer size="m" seconds={5} progress={80} />
+```tsx
 <Timer size="s" seconds={5} progress={80} />
+<Timer size="m" seconds={5} progress={80} />
+<Timer size="l" seconds={5} progress={80} />
+<Timer size="xl" seconds={5} progress={80} />
+<Timer size="2xl" seconds={5} progress={80} />
 ```
 
 <TimerExampleSize />
@@ -51,14 +51,12 @@ import { Timer } from '@consta/uikit/Timer';
 
 Вы можете указать процент заполнения прогрессбара в процентах в свойстве `progress`.
 
-```ts
-<StoryBookExample className={cnDocsDecorator('Section')}>
-  <Timer size="m" seconds={5} />
-  <Timer size="m" seconds={5} progress={20} />
-  <Timer size="m" seconds={5} progress={40} />
-  <Timer size="m" seconds={5} progress={60} />
-  <Timer size="m" seconds={5} progress={80} />
-</StoryBookExample>
+```tsx
+<Timer size="m" seconds={5} />
+<Timer size="m" seconds={5} progress={20} />
+<Timer size="m" seconds={5} progress={40} />
+<Timer size="m" seconds={5} progress={60} />
+<Timer size="m" seconds={5} progress={80} />
 ```
 
 <TimerExampleProgress />

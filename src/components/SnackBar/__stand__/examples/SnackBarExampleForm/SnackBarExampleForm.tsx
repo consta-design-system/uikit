@@ -1,8 +1,7 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { SnackBar } from '##/components/SnackBar/SnackBar';
-import { cnDocsDecorator } from '##/uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
 
 type Item = {
   key: string;
@@ -20,10 +19,10 @@ const items: Item[] = [
 
 export const SnackBarExampleForm = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <SnackBar items={items} form="default" />
       <SnackBar items={items} form="round" />
       <SnackBar items={items} form="brick" />
-    </StoryBookExample>
+    </Example>
   );
 };

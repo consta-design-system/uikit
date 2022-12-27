@@ -1,13 +1,13 @@
 import './SkeletonExampleAvatar.css';
 
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { cn } from '../../../../../utils/bem';
 import { SkeletonCircle, SkeletonText } from '../../../Skeleton';
 
 export const SkeletonExampleAvatar = () => (
-  <StoryBookExample>
+  <Example>
     <div className={cnSkeletonExampleAvatar()}>
       <SkeletonCircle className={cnSkeletonExampleAvatar('Avatar')} size={32} />
       <SkeletonText
@@ -17,7 +17,7 @@ export const SkeletonExampleAvatar = () => (
         lineHeight="s"
       />
     </div>
-  </StoryBookExample>
+  </Example>
 );
 
 const cnSkeletonExampleAvatar = cn('SkeletonExampleAvatar');

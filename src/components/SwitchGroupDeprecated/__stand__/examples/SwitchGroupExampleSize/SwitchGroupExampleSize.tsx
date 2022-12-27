@@ -1,52 +1,34 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { SwitchGroup } from '../../../SwitchGroupDeprecated';
 
-type Item = {
-  name: string;
-  disabled?: boolean;
-};
-
-const items: Item[] = [
-  { name: 'Тёмная тема' },
-  { name: 'Розовый текст' },
-  { name: 'Мигающие заголовки' },
+const items = [
+  { label: 'Тёмная тема' },
+  { label: 'Розовый текст' },
+  { label: 'Мигающие заголовки' },
 ];
 
-export function SwitchGroupExampleSizeM() {
-  const [value, setValue] = React.useState<Item[] | null>(null);
+export const SwitchGroupExampleSize = () => {
+  const [value, setValue] = React.useState<typeof items | null>([items[0]]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <SwitchGroup
-        value={value}
-        items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleSizeM"
-        size="m"
-      />
-    </StoryBookExample>
+    <Example
+      col={{ 1: 0, 2: 800 }}
+      separately
+      items={(['m', 'l'] as const).map((size) => ({
+        label: `size="${size}"`,
+        node: (
+          <SwitchGroup
+            value={value}
+            items={items}
+            getLabel={(item) => item.label}
+            onChange={({ value }) => setValue(value)}
+            name={`SwitchGroupExampleSize${size}`}
+            size={size}
+          />
+        ),
+      }))}
+    />
   );
-}
-
-export function SwitchGroupExampleSizeL() {
-  const [value, setValue] = React.useState<Item[] | null>(null);
-
-  return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <SwitchGroup
-        value={value}
-        items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleSizeL"
-        size="l"
-      />
-    </StoryBookExample>
-  );
-}
+};

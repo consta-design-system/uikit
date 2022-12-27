@@ -1,3 +1,4 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Text } from '../../../../../components/Text/Text';
@@ -5,7 +6,7 @@ import { cnMixCard } from '../../../MixCard';
 
 export const MixCardExampleSpace = () => {
   return (
-    <>
+    <Example col={{ 1: 0, 2: 700 }}>
       <div
         className={cnMixCard({
           verticalSpace: 'xs',
@@ -26,6 +27,6 @@ export const MixCardExampleSpace = () => {
       >
         <Text>Отступы 5xl</Text>
       </div>
-    </>
+    </Example>
   );
 };

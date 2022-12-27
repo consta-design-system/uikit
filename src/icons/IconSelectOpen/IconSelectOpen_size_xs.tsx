@@ -6,5 +6,4 @@ const IconSelectOpenSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M6 3.5 10 8H2l4-4.5z" />
   </svg>
 );
-
 export default IconSelectOpenSizeXs;

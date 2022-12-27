@@ -10,5 +10,4 @@ const IconDocFilledSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconDocFilledSizeM;

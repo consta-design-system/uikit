@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { SwitchGroup } from '../../../SwitchGroupDeprecated';
 
 type Item = {
@@ -15,38 +14,27 @@ const items: Item[] = [
   { name: 'Мигающие заголовки' },
 ];
 
-export function SwitchGroupExampleRow() {
-  const [value, setValue] = React.useState<Item[] | null>(null);
+export const SwitchGroupExampleDirection = () => {
+  const [value, setValue] = React.useState<Item[] | null>([items[0]]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <SwitchGroup
-        value={value}
-        items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleRow"
-        direction="row"
-      />
-    </StoryBookExample>
+    <Example
+      col={{ 1: 0, 2: 800 }}
+      separately
+      items={(['column', 'row'] as const).map((direction) => ({
+        label: `direction="${direction}"`,
+        node: (
+          <SwitchGroup
+            value={value}
+            items={items}
+            getLabel={(item) => item.name}
+            getDisabled={(item) => item.disabled}
+            onChange={({ value }) => setValue(value)}
+            name={`SwitchGroupExample${direction}`}
+            direction={direction}
+          />
+        ),
+      }))}
+    />
   );
-}
-
-export function SwitchGroupExampleColumn() {
-  const [value, setValue] = React.useState<Item[] | null>(null);
-
-  return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <SwitchGroup
-        value={value}
-        items={items}
-        getLabel={(item) => item.name}
-        getDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleColumn"
-        direction="column"
-      />
-    </StoryBookExample>
-  );
-}
+};
