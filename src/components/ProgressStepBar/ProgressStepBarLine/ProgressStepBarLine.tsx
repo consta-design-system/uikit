@@ -47,11 +47,12 @@ const getActiveLineSize = (
   lines: Line[],
   lineSize: number,
 ) => {
-  if (typeof activeStepIndex !== 'number') {
+  const active = activeStepIndex ? Math.max(activeStepIndex - 1, 0) : undefined;
+  if (typeof active !== 'number' || active === 0) {
     return 0;
   }
 
-  return lines[activeStepIndex] ? lines[activeStepIndex].size : lineSize;
+  return lines[active] ? lines[active].size : lineSize;
 };
 
 export const ProgressStepBarLine = (props: ProgressStepBarLineProps) => {
