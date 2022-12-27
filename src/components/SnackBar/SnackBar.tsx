@@ -3,8 +3,6 @@ import './SnackBar.css';
 import React, { forwardRef } from 'react';
 import { Transition, TransitionGroup } from 'react-transition-group';
 
-import { cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
-
 import { useRefs } from '../../hooks/useRefs/useRefs';
 import { cn } from '../../utils/bem';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
@@ -57,9 +55,7 @@ const SnackBarRender = (
               <SnackBarItem
                 ref={refs[index]}
                 form={form}
-                className={cnSnackBar('Item', [
-                  cnMixPopoverAnimate({ animate }),
-                ])}
+                className={cnSnackBar('Item', { animate })}
                 {...getItem(item, props)}
               />
             )}

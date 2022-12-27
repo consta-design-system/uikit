@@ -30,11 +30,7 @@
         transform: scale(1);
       }
 
-      &_exiting {
-        opacity: 1;
-        transform: scale(1);
-      }
-
+      &_exiting,
       &_exited {
         opacity: 0;
         transform: scale(0.5);
