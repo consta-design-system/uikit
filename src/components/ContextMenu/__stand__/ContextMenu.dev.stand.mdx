@@ -10,6 +10,7 @@ import { ContextMenuExampleIcon } from './examples/ContextMenuExampleIcon/Contex
 import { ContextMenuExampleSize } from './examples/ContextMenuExampleSize/ContextMenuExampleSize';
 import { ContextMenuExampleDefault } from './examples/ContextMenuExampleDefault/ContextMenuExampleDefault';
 import { ContextMenuExampleDisabled } from './examples/ContextMenuExampleDisabled/ContextMenuExampleDisabled';
+import { ContextMenuExampleOnClick } from './examples/ContextMenuExampleOnClick/ContextMenuExampleOnClick';
 
 ```tsx
 import { ContextMenu } from '@consta/uikit/ContextMenu';
@@ -22,6 +23,7 @@ import { ContextMenu } from '@consta/uikit/ContextMenu';
 - [Статус пункта меню](#статус-пункта-меню)
 - [Заблокировать](#заблокировать-пункт-меню)
 - [Иконка](#иконка)
+- [Кастомный эвент](#кастомный-эвент)
 - [Добавить дополнительные элементы](#добавить-дополнительные-элементы)
 - [Второй уровень меню](#второй-уровень-меню)
 - [Группы пунктов](#группы-пунктов-меню)
@@ -211,6 +213,66 @@ export const ContextMenuExampleIcon = () => {
 ```
 
 <ContextMenuExampleIcon />
+
+## Кастомный эвент
+
+В тех случаях когда по нажатию на конкретный элемент меню должно прроисходить определенное действие, вы можете определить поле `onClick`
+для элемента или определить функцию `getItemOnClick`.
+
+```tsx
+import React, { useRef, useState } from 'react';
+
+import { Button } from '@consta/uikit/Button';
+import { ContextMenu } from '@consta/uikit/ContextMenu';
+
+type Item = {
+  label: string;
+  event?: () => void;
+};
+
+const items: Item[] = [
+  {
+    label: 'Пункт 1',
+  },
+  {
+    label: 'Пункт 2',
+    event: () => alert('Нажатие на второй пункт'),
+  },
+  {
+    label: 'Пункт 3',
+  },
+];
+
+export const ContextMenuExampleOnClick = () => {
+  const ref = useRef<HTMLButtonElement>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const getItemOnClick = (item: Item) => {
+    if (item.event) {
+      return item.event;
+    }
+    return () => alert(item.label);
+  };
+
+  return (
+    <>
+      <Example>
+        <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+      </Example>
+      <ContextMenu
+        isOpen={isOpen}
+        items={items}
+        anchorRef={ref}
+        getItemOnClick={getItemOnClick}
+        onClickOutside={() => setIsOpen(false)}
+        direction="downStartLeft"
+      />
+    </>
+  );
+};
+```
+
+<ContextMenuExampleOnClick />
 
 ## Добавить дополнительные элементы
 
@@ -595,7 +657,7 @@ type Direction =
 | [`getItemLabel`](#текст-пункта)                                | `(item: ITEM) => string`                                                          | -                | Результат функции используется в качестве названия пункта меню. Если не указано свойство `getItemKey`, то используется в качестве уникального ключа пункта меню      |
 | [`getItemSubItems?`](#второй-уровень-меню)                     | `(item: ITEM) => ITEM[]\|undefined`                                               | -                | Результат функции используется как пункты меню второго уровня                                                                                                        |
 | [`getItemStatus?`](#статус-пунка-меню)                         | `(item: ITEM) => 'alert'\|'warning'\|'success'\|undefined`                        | -                | Результат функции используется как статус пункта меню                                                                                                                |
-| `getItemOnClick?`                                              | `(item: ITEM) => React.EventHandler<React.MouseEvent<HTMLDivElement>>\|undefined` | -                | Действие по клику на пункт меню                                                                                                                                      |
+| [`getItemOnClick?`](#кастомный-эвент)                          | `(item: ITEM) => React.EventHandler<React.MouseEvent<HTMLDivElement>>\|undefined` | -                | Действие по клику на пункт меню                                                                                                                                      |
 | `getItemAs?`                                                   | `(item: ITEM) => keyof JSX.IntrinsicElements\|undefined`                          | -                | Результат функции возвращает то, каким образом будет отрисовываться пункт меню                                                                                       |
 | `getItemAttributes?`                                           | `(item: ITEM) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements]\|undefined`   | -                | Результат функции возвращает HTML-атрибуты, которые используются в пункте меню                                                                                       |
 | `getItemGroupId?`                                              | `(item: ITEM) => number\|undefined`                                               | -                | Результат функции возвращает идентификатор группы, к которой относится пункт меню                                                                                    |
