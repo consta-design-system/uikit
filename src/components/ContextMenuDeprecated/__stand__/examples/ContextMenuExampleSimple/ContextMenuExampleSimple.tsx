@@ -16,7 +16,7 @@ export const ContextMenuExampleSimple = () => {
   return (
     <>
       <Example>
-        <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toogle} />
+        <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toggle} />
       </Example>
       {isOpen && (
         <ContextMenu

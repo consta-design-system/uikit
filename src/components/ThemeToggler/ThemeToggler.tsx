@@ -57,7 +57,7 @@ const ThemeTogglerRender = (
 
   const onButtonClick = (e: React.MouseEvent<Element, MouseEvent>) => {
     if (items.length > 2) {
-      setIsOpen.toogle();
+      setIsOpen.toggle();
     } else {
       getOnChange(items[getChecked(items[0]) ? 1 : 0])(e);
     }

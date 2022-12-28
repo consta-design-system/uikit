@@ -105,7 +105,7 @@ export const TextFieldRender = <TYPE extends string>(
   const handleEyeClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.stopPropagation();
-      setPasswordVisuble.toogle();
+      setPasswordVisuble.toggle();
       inputRef.current?.focus();
     },
     [],

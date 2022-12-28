@@ -169,7 +169,7 @@ const Variants = () => {
       <Button
         label="Откройте контекстное меню"
         ref={ref}
-        onClick={setIsOpen.toogle}
+        onClick={setIsOpen.toggle}
         iconRight={isOpen ? IconSelectOpen : IconSelect}
       />
       <ContextMenu

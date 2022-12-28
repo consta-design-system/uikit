@@ -17,7 +17,7 @@ export const MixPopoverArrowExample = () => {
 
   return (
     <>
-      <Button label="Открыть" onClick={setOpen.toogle} ref={buttonRef} />
+      <Button label="Открыть" onClick={setOpen.toggle} ref={buttonRef} />
       {open && (
         <Popover
           className={cnMixPopoverArrowExample()}

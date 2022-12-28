@@ -54,7 +54,7 @@ export const TooltipPositionedAnchor = () => {
         <Button
           label="Нажми меня"
           type="button"
-          onClick={setIsTooltipVisible.toogle}
+          onClick={setIsTooltipVisible.toggle}
           ref={anchorRef}
         />
       </div>

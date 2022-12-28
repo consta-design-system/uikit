@@ -148,7 +148,7 @@ export const ContextMenuExampleSide = () => {
 
   return (
     <>
-      <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toogle} />
+      <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toggle} />
       {isOpen && (
         <ContextMenu
           items={items}
@@ -224,7 +224,7 @@ export const ContextMenuExampleGroups = () => {
   const [isOpen, setIsOpen] = useFlag();
   return (
     <>
-      <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toogle} />
+      <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toggle} />
       {isOpen && (
         <ContextMenu
           items={items}
@@ -302,7 +302,7 @@ export const ContextMenuExampleSubMenu = () => {
   const [open, setOpen] = useFlag();
   return (
     <>
-      <Button iconLeft={IconAdd} ref={ref} onClick={setOpen.toogle} />
+      <Button iconLeft={IconAdd} ref={ref} onClick={setOpen.toggle} />
       {open && (
         <ContextMenu
           items={items}

@@ -24,7 +24,7 @@ export const ModalExampleZIndex = () => {
           view="primary"
           label="Открыть модальное окно"
           width="default"
-          onClick={setIsModalOpen.toogle}
+          onClick={setIsModalOpen.toggle}
         />
       </Example>
       <Modal
@@ -52,7 +52,7 @@ export const ModalExampleZIndex = () => {
           view="primary"
           label="Открыть вложенное модальное окно"
           width="default"
-          onClick={setIsModal2Open.toogle}
+          onClick={setIsModal2Open.toggle}
         />
         <Modal
           className={cnMixSpace({ p: 'm' })}
