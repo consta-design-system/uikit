@@ -1,9 +1,9 @@
 import './UserSelectItem.css';
 
+import { IconCheck } from '@consta/icons/IconCheck';
 import React, { useRef } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { IconCheck } from '../../../icons/IconCheck/IconCheck';
 import { cn } from '../../../utils/bem';
 import { cnForCssTransition } from '../../../utils/cnForCssTransition';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';

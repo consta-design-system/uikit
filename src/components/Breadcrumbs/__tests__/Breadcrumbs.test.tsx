@@ -1,9 +1,9 @@
+import { IconComponent } from '@consta/icons/Icon';
+import { IconCamera } from '@consta/icons/IconCamera';
+import { IconUser } from '@consta/icons/IconUser';
 import { render, screen } from '@testing-library/react';
 import * as React from 'react';
 
-import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconCamera } from '../../../icons/IconCamera/IconCamera';
-import { IconUser } from '../../../icons/IconUser/IconUser';
 import { Breadcrumbs } from '../Breadcrumbs';
 import { cnBreadcrumbsItem } from '../BreadcrumbsItem/BreadcrumbsItem';
 
@@ -97,7 +97,7 @@ describe('Компонент Breadcrumbs (Canary)', () => {
       const links = getLinks();
 
       items.forEach((page, i) => {
-        expect(!!links[i].querySelector('.Icon')).toEqual(!!page.icon);
+        expect(!!links[i].querySelector('.icons--Icon')).toEqual(!!page.icon);
       });
     });
 

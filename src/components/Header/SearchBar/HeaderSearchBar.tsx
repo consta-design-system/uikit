@@ -1,8 +1,8 @@
 import './HeaderSearchBar.css';
 
+import { IconSearchStroked } from '@consta/icons/IconSearchStroked';
 import React, { FormEventHandler } from 'react';
 
-import { IconSearch } from '../../../icons/IconSearch/IconSearch';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import {
@@ -70,7 +70,7 @@ export const HeaderSearchBar: React.FC<SearchBarProps> = ({
         width="full"
         value={value}
         onChange={onChange}
-        leftSide={IconSearch}
+        leftSide={IconSearchStroked}
       />
     </form>
   );

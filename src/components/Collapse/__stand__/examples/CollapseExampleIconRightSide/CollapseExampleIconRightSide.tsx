@@ -1,10 +1,10 @@
+import { IconAlert } from '@consta/icons/IconAlert';
+import { IconSettings } from '@consta/icons/IconSettings';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { Badge } from '##/components/Badge';
 import { Button } from '##/components/Button';
-import { IconAlert } from '##/icons/IconAlert';
-import { IconSettings } from '##/icons/IconSettings';
 
 import { content } from '../../../__mocks__/mock.data';
 import { Collapse } from '../../../Collapse';

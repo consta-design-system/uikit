@@ -1,9 +1,9 @@
 import './Breadcrumbs.css';
 
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
+import { IconArrowRight } from '@consta/icons/IconArrowRight';
 import React, { useMemo } from 'react';
 
-import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
-import { IconArrowRight } from '../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';

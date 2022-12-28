@@ -1,10 +1,10 @@
 import './BreadcrumbsItem.css';
 
+import { IconArrowRight } from '@consta/icons/IconArrowRight';
+import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
-import { IconSelect } from '../../../icons/IconSelect/IconSelect';
 import { cnMixSpace } from '../../../mixs/MixSpace/MixSpace';
 import { cn } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';

@@ -1,8 +1,8 @@
+import { IconCheck } from '@consta/icons/IconCheck';
+import { IconClose } from '@consta/icons/IconClose';
 import { useSelect } from '@consta/stand';
 import React from 'react';
 
-import { IconCheck } from '../../../icons/IconCheck/IconCheck';
-import { IconClose } from '../../../icons/IconClose/IconClose';
 import {
   propDirection,
   propDirectionDefault,

@@ -1,6 +1,6 @@
+import { IconComponent, IconProps, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
-import { IconComponent, IconProps, IconPropSize } from '##/icons/Icon';
 import {
   PropsWithHTMLAttributes,
   PropsWithHTMLAttributesAndRef,

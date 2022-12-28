@@ -1,10 +1,10 @@
 import './AutoCompleteExampleRenderItem.css';
 
+import { IconEdit } from '@consta/icons/IconEdit';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { AutoComplete } from '##/components/AutoCompleteCanary';
-import { IconEdit } from '##/icons/IconEdit';
 import { cn } from '##/utils/bem';
 
 const cnAutoCompleteExampleRenderItem = cn('AutoCompleteExampleRenderItem');

@@ -1,10 +1,10 @@
 import '../SelectComponents/Select.css';
 
+import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
-import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect, COMPONENT_NAME } from '../SelectComponents/cnSelect';
 import { defaultLabelForEmptyItems } from '../SelectComponents/helpers';

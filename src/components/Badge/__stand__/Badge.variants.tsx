@@ -1,7 +1,7 @@
+import { IconUser } from '@consta/icons/IconUser';
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React from 'react';
 
-import { IconUser } from '../../../icons/IconUser/IconUser';
 import {
   Badge,
   badgePropForm,

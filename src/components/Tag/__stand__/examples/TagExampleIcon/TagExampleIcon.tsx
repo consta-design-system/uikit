@@ -1,7 +1,7 @@
+import { IconMoon } from '@consta/icons/IconMoon';
+import { IconSun } from '@consta/icons/IconSun';
 import React from 'react';
 
-import { IconMoon } from '../../../../../icons/IconMoon/IconMoon';
-import { IconSun } from '../../../../../icons/IconSun/IconSun';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Tag } from '../../../Tag';

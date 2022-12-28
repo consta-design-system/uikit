@@ -1,7 +1,7 @@
+import { IconSettings } from '@consta/icons/IconSettings';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React, { useEffect, useState } from 'react';
 
-import { IconSettings } from '../../../icons/IconSettings/IconSettings';
 import { defaultPropSize, propSize, propStatus } from '../helper';
 import { Slider } from '../Slider';
 

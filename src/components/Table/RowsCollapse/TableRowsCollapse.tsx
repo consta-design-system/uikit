@@ -1,9 +1,9 @@
 import './TableRowsCollapse.css';
 
+import { IconArrowDown } from '@consta/icons/IconArrowDown';
+import { IconArrowUp } from '@consta/icons/IconArrowUp';
 import React from 'react';
 
-import { IconArrowDown } from '../../../icons/IconArrowDown/IconArrowDown';
-import { IconArrowUp } from '../../../icons/IconArrowUp/IconArrowUp';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 

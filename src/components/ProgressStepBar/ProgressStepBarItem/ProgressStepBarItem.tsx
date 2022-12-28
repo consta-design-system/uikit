@@ -1,12 +1,12 @@
 import './ProgressStepBarItem.css';
 
+import { IconComponent } from '@consta/icons/Icon';
 import React, { useRef } from 'react';
 
 import { useForkRef } from '##/hooks/useForkRef';
 import { useMouseLeave } from '##/hooks/useMouseLeave';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { IconComponent } from '../../../icons/Icon/Icon';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
 import { Direction } from '../../Popover/Popover';

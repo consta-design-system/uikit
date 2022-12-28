@@ -1,7 +1,7 @@
+import { IconAttach } from '@consta/icons/IconAttach';
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { IconAttach } from '../../../icons/IconAttach/IconAttach';
 import {
   tagBasePropGroupNumberValue,
   tagBasePropSize,

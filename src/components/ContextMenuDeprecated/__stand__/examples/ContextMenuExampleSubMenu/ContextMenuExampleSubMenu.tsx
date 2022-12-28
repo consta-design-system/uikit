@@ -1,9 +1,9 @@
+import { IconAdd } from '@consta/icons/IconAdd';
 import { Example } from '@consta/stand';
 import React, { useRef } from 'react';
 
 import { useFlag } from '##/hooks/useFlag';
 
-import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenuDeprecated';
 

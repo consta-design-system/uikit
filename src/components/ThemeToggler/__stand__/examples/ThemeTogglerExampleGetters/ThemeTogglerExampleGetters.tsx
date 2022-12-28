@@ -1,12 +1,12 @@
 import './ThemeTogglerExampleGetters.css';
 
+import { IconLightningBolt } from '@consta/icons/IconLightningBolt';
+import { IconMoon } from '@consta/icons/IconMoon';
+import { IconSun } from '@consta/icons/IconSun';
 import React, { useState } from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { IconLightningBolt } from '../../../../../icons/IconLightningBolt/IconLightningBolt';
-import { IconMoon } from '../../../../../icons/IconMoon/IconMoon';
-import { IconSun } from '../../../../../icons/IconSun/IconSun';
 import {
   presetGpnDark,
   presetGpnDefault,

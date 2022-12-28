@@ -1,9 +1,9 @@
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import { format, isValid, parse } from 'date-fns';
 import IMask from 'imask';
 import { useCallback, useEffect, useRef } from 'react';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
-import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import {
   TextFieldPropForm,

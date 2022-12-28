@@ -1,11 +1,10 @@
+import { IconBackward } from '@consta/icons/IconBackward';
+import { IconCalendar } from '@consta/icons/IconCalendar';
+import { IconFilter } from '@consta/icons/IconFilter';
+import { IconForward } from '@consta/icons/IconForward';
+import { IconHamburger } from '@consta/icons/IconHamburger';
 import { Example } from '@consta/stand';
 import React from 'react';
-
-import { IconBackward } from '##/icons/IconBackward';
-import { IconCalendar } from '##/icons/IconCalendar';
-import { IconFilter } from '##/icons/IconFilter';
-import { IconForward } from '##/icons/IconForward';
-import { IconHamburger } from '##/icons/IconHamburger';
 
 import { Button } from '../../../Button';
 

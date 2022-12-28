@@ -1,12 +1,12 @@
 import './TabsMoreItems.css';
 
+import { IconMeatball } from '@consta/icons/IconMeatball';
 import FocusTrap from 'focus-trap-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
-import { IconMeatball } from '../../../icons/IconMeatball/IconMeatball';
 import {
   animateTimeout,
   cnMixPopoverAnimate,

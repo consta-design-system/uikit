@@ -1,4 +1,8 @@
 /* eslint-disable no-unused-vars */
+import { IconComponent } from '@consta/icons/Icon';
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconKebab } from '@consta/icons/IconKebab';
+import { IconTrash } from '@consta/icons/IconTrash';
 import { useText } from '@consta/stand';
 import React, { useState } from 'react';
 
@@ -10,10 +14,6 @@ import {
   TableProps,
   TableRow,
 } from '##/components/Table/Table';
-import { IconComponent } from '##/icons/Icon';
-import { IconAdd } from '##/icons/IconAdd';
-import { IconKebab } from '##/icons/IconKebab';
-import { IconTrash } from '##/icons/IconTrash';
 import { putBefore, updateAt } from '##/utils/array';
 import { isNumber } from '##/utils/type-guards';
 

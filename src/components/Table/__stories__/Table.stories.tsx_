@@ -4,7 +4,7 @@ import './Table.stories.css';
 import { boolean, number, object, select, text } from '@storybook/addon-knobs';
 import React, { useState } from 'react';
 
-import { IconCopy } from '../../../icons/IconCopy/IconCopy';
+import { IconCopy } from '@consta/icons/IconCopy';
 import { updateAt } from '../../../utils/array';
 import {
   callbackWithSelector,

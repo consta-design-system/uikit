@@ -1,9 +1,9 @@
+import { IconClose } from '@consta/icons/IconClose';
+import { IconTrash } from '@consta/icons/IconTrash';
 import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Attachment } from '##/components/Attachment';
-import { IconClose } from '##/icons/IconClose';
-import { IconTrash } from '##/icons/IconTrash';
 
 export const AttachmentExampleBasicsLoading = () => {
   return (

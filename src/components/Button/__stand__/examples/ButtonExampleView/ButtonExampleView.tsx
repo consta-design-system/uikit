@@ -1,14 +1,13 @@
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconBookmarkStroked } from '@consta/icons/IconBookmarkStroked';
+import { IconChatStroked as IconChat } from '@consta/icons/IconChatStroked';
+import { IconCopy } from '@consta/icons/IconCopy';
+import { IconEdit } from '@consta/icons/IconEdit';
+import { IconForward } from '@consta/icons/IconForward';
+import { IconFunnel } from '@consta/icons/IconFunnel';
+import { IconSettings } from '@consta/icons/IconSettings';
 import { Example } from '@consta/stand';
 import React from 'react';
-
-import { IconAdd } from '##/icons/IconAdd';
-import { IconBookmarkStroked } from '##/icons/IconBookmarkStroked';
-import { IconChatStroked as IconChat } from '##/icons/IconChatStroked';
-import { IconCopy } from '##/icons/IconCopy';
-import { IconEdit } from '##/icons/IconEdit';
-import { IconForward } from '##/icons/IconForward';
-import { IconFunnel } from '##/icons/IconFunnel';
-import { IconSettings } from '##/icons/IconSettings';
 
 import { Button } from '../../../Button';
 

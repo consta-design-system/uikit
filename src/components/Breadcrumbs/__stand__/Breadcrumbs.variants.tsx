@@ -1,15 +1,15 @@
 import './Breadcrumbs.variants.css';
 
+import { IconComponent } from '@consta/icons/Icon';
+import { IconBag } from '@consta/icons/IconBag';
+import { IconBook } from '@consta/icons/IconBook';
+import { IconDocFilled } from '@consta/icons/IconDocFilled';
+import { IconHome } from '@consta/icons/IconHome';
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconBag } from '../../../icons/IconBag/IconBag';
-import { IconBook } from '../../../icons/IconBook/IconBook';
-import { IconDocFilled } from '../../../icons/IconDocFilled/IconDocFilled';
-import { IconHome } from '../../../icons/IconHome/IconHome';
 import {
   breadcrumbPropFitMode,
   breadcrumbPropFitModeDefault,

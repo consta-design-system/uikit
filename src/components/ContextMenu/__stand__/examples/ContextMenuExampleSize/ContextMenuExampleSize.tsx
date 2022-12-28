@@ -1,7 +1,7 @@
+import { IconAdd } from '@consta/icons/IconAdd';
 import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
-import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenu';
 

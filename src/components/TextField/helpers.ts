@@ -1,6 +1,6 @@
+import { IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
-import { IconPropSize } from '../../icons/Icon/Icon';
 import { TextFieldPropSize } from './types';
 
 export const sizeMap: Record<TextFieldPropSize, IconPropSize> = {

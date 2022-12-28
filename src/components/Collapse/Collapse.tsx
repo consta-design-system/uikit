@@ -1,12 +1,12 @@
 import './Collapse.css';
 
+import { IconPropSize } from '@consta/icons/Icon';
+import { IconArrowDown } from '@consta/icons/IconArrowDown';
 import React, { useRef } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { IconPropSize } from '../../icons/Icon/Icon';
-import { IconArrowDown } from '../../icons/IconArrowDown/IconArrowDown';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';

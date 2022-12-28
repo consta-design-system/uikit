@@ -1,8 +1,7 @@
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconRemove } from '@consta/icons/IconRemove';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
-
-import { IconAdd } from '##/icons/IconAdd/IconAdd';
-import { IconRemove } from '##/icons/IconRemove/IconRemove';
 
 import { content } from '../../../__mocks__/mock.data';
 import { Collapse } from '../../../Collapse';

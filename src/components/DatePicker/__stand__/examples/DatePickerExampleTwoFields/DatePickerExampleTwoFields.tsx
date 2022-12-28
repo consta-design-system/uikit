@@ -1,8 +1,8 @@
+import { IconBackward } from '@consta/icons/IconBackward';
+import { IconForward } from '@consta/icons/IconForward';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { IconBackward } from '../../../../../icons/IconBackward/IconBackward';
-import { IconForward } from '../../../../../icons/IconForward/IconForward';
 import { DatePicker } from '../../../DatePicker';
 
 export const DatePickerExampleTwoIcons = () => {

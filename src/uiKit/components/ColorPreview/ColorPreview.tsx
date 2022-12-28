@@ -2,10 +2,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import './ColorPreview.css';
 
+import { IconCopy } from '@consta/icons/IconCopy';
 import React from 'react';
 
 import { Text } from '../../../components/Text/Text';
-import { IconCopy } from '../../../icons/IconCopy/IconCopy';
 import { cn } from '../../cn';
 import * as wp from '../../whitepaper/whitepaper';
 

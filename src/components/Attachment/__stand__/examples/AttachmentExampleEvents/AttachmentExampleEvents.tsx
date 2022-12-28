@@ -1,8 +1,8 @@
+import { IconTrash } from '@consta/icons/IconTrash';
 import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Attachment } from '##/components/Attachment';
-import { IconTrash } from '##/icons/IconTrash/IconTrash';
 
 export const AttachmentExampleEvents = () => {
   return (
