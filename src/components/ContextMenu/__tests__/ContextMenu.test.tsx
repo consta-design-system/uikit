@@ -52,7 +52,7 @@ function getSide(index = 0, sideIndex = 0) {
   ];
 }
 function getIcon(index = 0, sideIndex = 0) {
-  return getSide(index, sideIndex).querySelectorAll('.Icon')[0];
+  return getSide(index, sideIndex).querySelectorAll('.icons--Icon')[0];
 }
 
 function getGroups() {

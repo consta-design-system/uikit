@@ -97,7 +97,7 @@ describe('Компонент Breadcrumbs (Canary)', () => {
       const links = getLinks();
 
       items.forEach((page, i) => {
-        expect(!!links[i].querySelector('.Icon')).toEqual(!!page.icon);
+        expect(!!links[i].querySelector('.icons--Icon')).toEqual(!!page.icon);
       });
     });
 
