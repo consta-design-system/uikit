@@ -1,15 +1,14 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { File } from '../../../File';
 
 export const FileExampleExtension = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <File extension="doc" />
     <File extension="docx" />
     <File extension="jpg" />
     <File extension="mov" />
     <File extension="BlaBla" />
-  </StoryBookExample>
+  </Example>
 );

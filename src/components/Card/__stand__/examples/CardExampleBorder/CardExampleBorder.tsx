@@ -1,12 +1,12 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { Text } from '../../../../Text/Text';
-import { Card } from '../../../Card';
+import { Card } from '##/components/Card';
+import { Text } from '##/components/Text/';
 
 export const CardExampleBorder = () => {
   return (
-    <StoryBookExample>
+    <Example>
       <Card
         verticalSpace="2xl"
         horizontalSpace="2xl"
@@ -24,6 +24,6 @@ export const CardExampleBorder = () => {
       >
         <Text>Карточка без границы</Text>
       </Card>
-    </StoryBookExample>
+    </Example>
   );
 };

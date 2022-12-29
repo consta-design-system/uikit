@@ -1,9 +1,9 @@
 import './SnackBarExampleIcon.css';
 
+import { IconDisconnection } from '@consta/icons/IconDisconnection';
+import { IconMoon } from '@consta/icons/IconMoon';
 import React from 'react';
 
-import { IconDisconnection } from '../../../../../icons/IconDisconnection/IconDisconnection';
-import { IconMoon } from '../../../../../icons/IconMoon/IconMoon';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { SnackBar } from '../../../SnackBar';

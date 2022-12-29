@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 import imageFile from './images/wrong_file_format.png';
@@ -16,7 +15,7 @@ const image = {
 };
 
 export const DragNDropFieldExampleAcceptDoc = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <div>
       <DragNDropField
         accept={['.doc', '.docx']}
@@ -28,11 +27,11 @@ export const DragNDropFieldExampleAcceptDoc = () => (
         </Text>
       </DragNDropField>
     </div>
-  </StoryBookExample>
+  </Example>
 );
 
 export const DragNDropFieldExampleAcceptImage = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <div>
       <DragNDropField
         accept="image/*"
@@ -45,13 +44,13 @@ export const DragNDropFieldExampleAcceptImage = () => (
         </Text>
       </DragNDropField>
     </div>
-  </StoryBookExample>
+  </Example>
 );
 
 export const DragNDropFieldExampleAcceptError = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <div>
       <img src={image.src} alt={image.alt} />
     </div>
-  </StoryBookExample>
+  </Example>
 );

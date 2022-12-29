@@ -1,8 +1,7 @@
+import { Example } from '@consta/stand';
 import frLocale from 'date-fns/locale/fr';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { DateTime } from '../../../DateTime';
 
 const dateTimeLocale = {
@@ -16,8 +15,8 @@ const dateTimeLocale = {
 
 export const DateTimeExampleLocale = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <DateTime type="date-time" locale={dateTimeLocale} />
-    </StoryBookExample>
+    </Example>
   );
 };

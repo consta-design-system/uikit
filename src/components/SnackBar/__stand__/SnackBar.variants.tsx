@@ -1,16 +1,16 @@
 import './SnackBar.variants.css';
 
+import { IconComponent } from '@consta/icons/Icon';
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconAlert } from '@consta/icons/IconAlert';
+import { IconProcessing } from '@consta/icons/IconProcessing';
+import { IconRing } from '@consta/icons/IconRing';
+import { IconThumbUp } from '@consta/icons/IconThumbUp';
 import { useBoolean, useSelect } from '@consta/stand';
 import React, { useReducer } from 'react';
 
 import { Button } from '##/components/Button/Button';
 import { Text } from '##/components/Text/Text';
-import { IconComponent } from '##/icons/Icon/Icon';
-import { IconAdd } from '##/icons/IconAdd/IconAdd';
-import { IconAlert } from '##/icons/IconAlert/IconAlert';
-import { IconProcessing } from '##/icons/IconProcessing/IconProcessing';
-import { IconRing } from '##/icons/IconRing/IconRing';
-import { IconThumbUp } from '##/icons/IconThumbUp/IconThumbUp';
 import { cn } from '##/utils/bem';
 
 import { SnackBar } from '../SnackBar';

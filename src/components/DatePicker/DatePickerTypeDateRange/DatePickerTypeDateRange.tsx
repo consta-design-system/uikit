@@ -42,6 +42,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
       onChangeCurrentVisibleDate,
       renderAdditionalControls,
       inputRef,
+      dropdownClassName,
       name,
       ...fieldProps
     } = props;
@@ -186,6 +187,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
           type="date"
           ref={calendarRef}
           anchorRef={startFieldRef}
+          className={dropdownClassName}
           isOpen={calendarVisible}
           onChangeCurrentVisibleDate={setCurrentVisibleDate}
           currentVisibleDate={currentVisibleDate}

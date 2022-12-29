@@ -1,7 +1,7 @@
+import { IconSun } from '@consta/icons/IconSun';
 import { fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
-import { IconSun } from '../../../icons/IconSun/IconSun';
 import { getByMap } from '../../../utils/getByMap';
 import { Badge } from '../../Badge/Badge';
 import { cnCollapse, sizeIconMap } from '../../Collapse/Collapse';

@@ -1,7 +1,7 @@
+import { IconAdd } from '@consta/icons/IconAdd';
 import { fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
-import { IconAdd } from '../../../icons/IconAdd/IconAdd';
 import {
   cnTextField,
   TextField,

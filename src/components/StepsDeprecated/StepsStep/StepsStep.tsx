@@ -1,9 +1,9 @@
 import './StepsStep.css';
 
+import { IconPropSize } from '@consta/icons/Icon';
+import { IconCheck } from '@consta/icons/IconCheck';
 import React from 'react';
 
-import { IconPropSize } from '../../../icons/Icon/Icon';
-import { IconCheck } from '../../../icons/IconCheck/IconCheck';
 import { cn } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';
 import { StepsPropSize } from '../StepsDeprecated';

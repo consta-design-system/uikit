@@ -1723,10 +1723,15 @@
   resolved "https://registry.yarnpkg.com/@consta/header/-/header-1.0.0.tgz#95e3db57857a10aad4c5214c39884630495fc970"
   integrity sha512-JM/JWRxsbBnh2a8Wn99ly8ub0Rrwf17IolU3TFTJd8uj1230n3P5kbdfPXdVMnq38i16k1fD6ubxenLN0612YQ==
 
-"@consta/stand@^0.0.77":
-  version "0.0.77"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.77.tgz#776ff944062dd95849995ef2e6e78c6cc3830723"
-  integrity sha512-VOah/qZn5uPx6L+oy0BgkT55WtuqVRSh7ZonOYHtrWW+YlO25DPfKBfPxy46xAENLPbwcDwy+2QTbewN9Cj//A==
+"@consta/icons@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.0.2.tgz#96269b3538bc63d1fbc92d6b803e497b572f1689"
+  integrity sha512-ZEJlBP0/eQYkO9k71+nv2NsL21w+ftsxwxIh9xuqAOHeLYc5yI2ZxZaqaawgGMK/m5QG4UiX3qMqXYzolRpaXg==
+
+"@consta/stand@^0.0.90":
+  version "0.0.90"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.90.tgz#ba658bdd267bf98ce9c888fa183334a663b9d23b"
+  integrity sha512-Ji1/eHu1BsOaT15cTZ+9VGORWdbX44iz1I71diQZNum2yUoSOve587Oeb8NhwyPCzXk6uJaGKXzXiNazLq0uwQ==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"

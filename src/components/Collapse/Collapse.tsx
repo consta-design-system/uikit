@@ -1,12 +1,12 @@
 import './Collapse.css';
 
+import { IconPropSize } from '@consta/icons/Icon';
+import { IconArrowDown } from '@consta/icons/IconArrowDown';
 import React, { useRef } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { IconPropSize } from '../../icons/Icon/Icon';
-import { IconArrowDown } from '../../icons/IconArrowDown/IconArrowDown';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
@@ -84,8 +84,13 @@ export const Collapse: CollapseComponent = React.forwardRef<
   return (
     <div
       ref={useForkRef([ref, collapseRef])}
-      className={cnCollapse({ size, view, horizontalSpace }, [className])}
-      style={style}
+      className={cnCollapse({ size, view }, [className])}
+      style={{
+        ...style,
+        ['--horizontal-space' as string]: horizontalSpace
+          ? `var(--space-${horizontalSpace})`
+          : 0,
+      }}
     >
       <div
         className={cnCollapse('Label', {

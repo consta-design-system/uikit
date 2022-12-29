@@ -1,9 +1,9 @@
 import './Attachment.variants.css';
 
+import { IconTrash } from '@consta/icons/IconTrash';
 import { useBoolean, useNumber, useText } from '@consta/stand';
 import React from 'react';
 
-import { IconTrash } from '##/icons/IconTrash/IconTrash';
 import { cn } from '##/utils/bem';
 
 import { Attachment } from '../Attachment';

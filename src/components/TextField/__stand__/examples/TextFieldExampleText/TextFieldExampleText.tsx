@@ -1,6 +1,6 @@
+import { IconDiamond } from '@consta/icons/IconDiamond';
 import React, { useState } from 'react';
 
-import { IconDiamond } from '../../../../../icons/IconDiamond/IconDiamond';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { TextField } from '../../../TextField';

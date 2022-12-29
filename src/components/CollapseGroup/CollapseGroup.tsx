@@ -1,6 +1,6 @@
+import { IconArrowDown } from '@consta/icons/IconArrowDown';
 import React, { forwardRef } from 'react';
 
-import { IconArrowDown } from '../../icons/IconArrowDown/IconArrowDown';
 import {
   Collapse,
   collapsePropCloseDirectionIconDefault,

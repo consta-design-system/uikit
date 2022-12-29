@@ -19,7 +19,7 @@ export function useScrollElements<ITEM>(
   }, [items]);
 
   const scrollTo = (index: number) => {
-    const currentRef = refs[index];
+    const currentRef = refs[Math.max(index, 0)];
     const container = currentRef.current?.parentElement;
     if (currentRef.current && container) {
       const defaultPadding =
@@ -27,7 +27,7 @@ export function useScrollElements<ITEM>(
           ? container.offsetLeft
           : 0;
       let scrollLeft = currentRef.current.offsetLeft - defaultPadding;
-      if (index === 0) {
+      if (index <= 0) {
         scrollLeft = 0;
       } else if (index === refs.length - 1) {
         scrollLeft = container.scrollWidth;

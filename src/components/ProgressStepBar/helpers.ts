@@ -1,6 +1,6 @@
+import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
-import { IconComponent } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
@@ -98,9 +98,7 @@ export type ProgressStepBarItemProps = {
   direction: PropDirection;
   size: PropSize;
   onClick?: (e: React.MouseEvent) => void;
-  pointRef?:
-    | React.RefObject<HTMLButtonElement>
-    | React.RefObject<HTMLDivElement>;
+  pointRef?: React.RefObject<HTMLButtonElement>;
 };
 
 export const cnProgressStepBar = cn('ProgressStepBar');

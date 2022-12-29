@@ -1,6 +1,6 @@
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import { Locale } from 'date-fns';
 
-import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { DateRange } from '../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { DateTimePropView, dateTimePropViewDefault } from '../DateTime/helpers';
@@ -109,6 +109,7 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
       id?: string;
       name?: DatePickerPropName<TYPE>;
       disabled?: boolean;
+      dropdownClassName?: string;
       size?: TextFieldPropSize;
       view?: TextFieldPropView;
       form?: TextFieldPropForm;

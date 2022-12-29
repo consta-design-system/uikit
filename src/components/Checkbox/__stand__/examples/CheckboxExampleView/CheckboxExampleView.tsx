@@ -1,16 +1,10 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Checkbox } from '../../../Checkbox';
 
 export const CheckboxExampleView = () => (
-  <StoryBookExample
-    className={cnDocsDecorator('Section', [
-      wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-    ])}
-  >
+  <Example>
     <Checkbox
       view="primary"
       checked
@@ -23,5 +17,5 @@ export const CheckboxExampleView = () => (
       label="Второстепенный чекбокс"
       onChange={() => console.log('onChange')}
     />
-  </StoryBookExample>
+  </Example>
 );

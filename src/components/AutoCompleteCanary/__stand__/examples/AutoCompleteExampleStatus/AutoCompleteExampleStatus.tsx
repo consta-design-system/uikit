@@ -1,8 +1,7 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { AutoComplete } from '##/components/AutoCompleteCanary/AutoCompleteCanary';
-import { cnDocsDecorator } from '##/uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
 
 type Item = {
   label: string;
@@ -26,7 +25,7 @@ const items: Item[] = [
 export const AutoCompleteExampleStatus = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={{ 1: 0, 2: 600, 4: 800 }}>
       <AutoComplete
         type="text"
         placeholder="default"
@@ -34,6 +33,7 @@ export const AutoCompleteExampleStatus = () => {
         value={value}
         items={items}
         onChange={({ value }) => setValue(value)}
+        width="full"
       />
       <AutoComplete
         type="text"
@@ -43,6 +43,7 @@ export const AutoCompleteExampleStatus = () => {
         caption="alert"
         status="alert"
         onChange={({ value }) => setValue(value)}
+        width="full"
       />
       <AutoComplete
         type="text"
@@ -52,6 +53,7 @@ export const AutoCompleteExampleStatus = () => {
         caption="warning"
         status="warning"
         onChange={({ value }) => setValue(value)}
+        width="full"
       />
       <AutoComplete
         type="text"
@@ -61,7 +63,8 @@ export const AutoCompleteExampleStatus = () => {
         caption="success"
         status="success"
         onChange={({ value }) => setValue(value)}
+        width="full"
       />
-    </StoryBookExample>
+    </Example>
   );
 };

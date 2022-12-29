@@ -1,7 +1,7 @@
+import { IconAllDone } from '@consta/icons/IconAllDone';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { IconAllDone } from '../../../icons/IconAllDone/IconAllDone';
 import { cn } from '../../../utils/bem';
 import { cnText } from '../../Text/Text';
 import { exampleItems as items, groups } from '../__mocks__/mock.data';
@@ -52,7 +52,7 @@ function getSide(index = 0, sideIndex = 0) {
   ];
 }
 function getIcon(index = 0, sideIndex = 0) {
-  return getSide(index, sideIndex).querySelectorAll('.Icon')[0];
+  return getSide(index, sideIndex).querySelectorAll('.icons--Icon')[0];
 }
 
 function getGroups() {

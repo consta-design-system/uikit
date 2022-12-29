@@ -1,15 +1,10 @@
-import './BreadcrumbsExample.css';
-
+import { IconCards } from '@consta/icons/IconCards';
+import { IconDrag } from '@consta/icons/IconDrag';
+import { IconHand } from '@consta/icons/IconHand';
+import { IconLeaf } from '@consta/icons/IconLeaf';
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cn } from '##/utils/bem';
-
-import { IconCards } from '../../../../../icons/IconCards/IconCards';
-import { IconDrag } from '../../../../../icons/IconDrag/IconDrag';
-import { IconHand } from '../../../../../icons/IconHand/IconHand';
-import { IconLeaf } from '../../../../../icons/IconLeaf/IconLeaf';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Breadcrumbs, DefaultItem } from '../../../Breadcrumbs';
 
 const pages = [
@@ -115,57 +110,45 @@ const pagesLongLabels = [
 
 const pagesSimple = ['Главная', 'Страница 1', 'Страница 2', 'Страница 3'];
 
-const cnBreadcrumbsExample = cn('BreadcrumbsExample');
-
 const onItemClick = (props: { item: DefaultItem; e: React.MouseEvent }) => {
   props.e.preventDefault();
 };
 
 export const BreadcrumbsCustomType = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
-    >
+    <Example col={1}>
       <Breadcrumbs items={pagesSimple} getItemLabel={(item) => item} />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExample = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
-    >
+    <Example col={1}>
       <Breadcrumbs items={pagesNoIcon} size="m" onItemClick={onItemClick} />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleActive = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
-    >
+    <Example col={1}>
       <Breadcrumbs items={pagesNoIcon} size="m" onItemClick={onItemClick} />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleSubMenu = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
-    >
+    <Example col={1}>
       <Breadcrumbs items={pagesSubMenu} size="m" onItemClick={onItemClick} />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleFitMode = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
-    >
+    <Example col={1}>
       <Breadcrumbs
         items={pagesLongLabels}
         onItemClick={onItemClick}
@@ -176,53 +159,47 @@ export const BreadcrumbsExampleFitMode = () => {
         onItemClick={onItemClick}
         fitMode="scroll"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleIcons = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
-    >
+    <Example col={1}>
       <Breadcrumbs items={pages} size="m" onItemClick={onItemClick} />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleIconRoot = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
-    >
+    <Example col={1}>
       <Breadcrumbs
         items={pagesNoIcon}
         size="m"
         onlyIconRoot
         onItemClick={onItemClick}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExamplelastItemIsLink = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnBreadcrumbsExample()])}
-    >
+    <Example col={1}>
       <Breadcrumbs
         items={pagesNoIcon}
         size="m"
         lastItemIsLink
         onItemClick={onItemClick}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const BreadcrumbsExampleSize = () => {
   return (
-    <StoryBookExample className={cnBreadcrumbsExample()}>
+    <Example col={1}>
       <Breadcrumbs
         items={pages}
         size="xs"
@@ -247,6 +224,6 @@ export const BreadcrumbsExampleSize = () => {
         onlyIconRoot
         onItemClick={onItemClick}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

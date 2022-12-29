@@ -1,11 +1,10 @@
 import './AutoCompleteExampleRenderItem.css';
 
+import { IconEdit } from '@consta/icons/IconEdit';
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { AutoComplete } from '##/components/AutoCompleteCanary/AutoCompleteCanary';
-import { IconEdit } from '##/icons/IconEdit';
-import { cnDocsDecorator } from '##/uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
+import { AutoComplete } from '##/components/AutoCompleteCanary';
 import { cn } from '##/utils/bem';
 
 const cnAutoCompleteExampleRenderItem = cn('AutoCompleteExampleRenderItem');
@@ -33,7 +32,7 @@ const items: Item[] = [
 export const AutoCompleteExampleRenderItem = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <AutoComplete
         type="text"
         value={value}
@@ -56,6 +55,6 @@ export const AutoCompleteExampleRenderItem = () => {
         )}
         onChange={({ value }) => setValue(value)}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

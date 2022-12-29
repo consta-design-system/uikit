@@ -1,9 +1,9 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { withTooltip } from '../../../../../hocs/withTooltip/withTooltip';
 import { useFlag } from '../../../../../hooks/useFlag/useFlag';
 import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Button } from '../../../../Button/Button';
 import { Select } from '../../../../Select/Select';
 import { Modal } from '../../../Modal';
@@ -17,14 +17,16 @@ export const ModalExampleZIndex = () => {
   const [isModal2Open, setIsModal2Open] = useFlag();
 
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Button
-        size="m"
-        view="primary"
-        label="Открыть модальное окно"
-        width="default"
-        onClick={setIsModalOpen.toogle}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="Открыть модальное окно"
+          width="default"
+          onClick={setIsModalOpen.toggle}
+        />
+      </Example>
       <Modal
         className={cnMixSpace({ p: 'm' })}
         isOpen={isModalOpen}
@@ -42,7 +44,7 @@ export const ModalExampleZIndex = () => {
           placeholder="Один или два"
         />
         <ButtonWithTooltip
-          className={cnMixSpace({ mB: 'm', mR: '6xl' })}
+          className={cnMixSpace({ mB: 'm', mR: 'm' })}
           label="Нажмите, и появится тултип"
         />
         <Button
@@ -50,7 +52,7 @@ export const ModalExampleZIndex = () => {
           view="primary"
           label="Открыть вложенное модальное окно"
           width="default"
-          onClick={setIsModal2Open.toogle}
+          onClick={setIsModal2Open.toggle}
         />
         <Modal
           className={cnMixSpace({ p: 'm' })}
@@ -73,6 +75,6 @@ export const ModalExampleZIndex = () => {
           />
         </Modal>
       </Modal>
-    </div>
+    </>
   );
 };

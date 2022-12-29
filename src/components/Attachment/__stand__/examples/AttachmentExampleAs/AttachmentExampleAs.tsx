@@ -1,24 +1,18 @@
-import './AttachmentExampleAs.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cn } from '../../../../../utils/bem';
-import { Attachment } from '../../../Attachment';
-
-const cnAttachmentExampleAs = cn('AttachmentExampleAs');
+import { Attachment } from '##/components/Attachment';
 
 export const AttachmentExampleAs = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example>
       <Attachment
         as="a"
         href="https://www.youtube.com/watch?v=dAZKu_ojb14"
-        className={cnAttachmentExampleAs()}
         fileName="Вести с марса"
         fileExtension="mov"
         fileDescription="Нажми меня"
       />
-    </div>
+    </Example>
   );
 };

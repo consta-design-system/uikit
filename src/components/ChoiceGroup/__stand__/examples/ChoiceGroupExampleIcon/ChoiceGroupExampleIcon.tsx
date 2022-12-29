@@ -1,15 +1,10 @@
-import './ChoiceGroupExampleIcon.css';
-
+import { IconComponent } from '@consta/icons/Icon';
+import { IconCamera } from '@consta/icons/IconCamera';
+import { IconPhoto } from '@consta/icons/IconPhoto';
+import { IconRing } from '@consta/icons/IconRing';
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cn } from '##/utils/bem';
-
-import { IconComponent } from '../../../../../icons/Icon/Icon';
-import { IconCamera } from '../../../../../icons/IconCamera/IconCamera';
-import { IconPhoto } from '../../../../../icons/IconPhoto/IconPhoto';
-import { IconRing } from '../../../../../icons/IconRing/IconRing';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { ChoiceGroup } from '../../../ChoiceGroup';
 
 type Item = {
@@ -32,12 +27,10 @@ const items: Item[] = [
   },
 ];
 
-const cnChoiceGroupExampleIcon = cn('ChoiceGroupExampleIcon');
-
 export const ChoiceGroupExampleIcon = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ChoiceGroup
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -45,7 +38,6 @@ export const ChoiceGroupExampleIcon = () => {
         getItemLabel={(item) => item.name}
         getItemIcon={(item) => item.icon}
         name="ChoiceGroupExampleIcon"
-        className={cnChoiceGroupExampleIcon()}
       />
       <ChoiceGroup
         value={value}
@@ -55,8 +47,7 @@ export const ChoiceGroupExampleIcon = () => {
         getItemIcon={(item) => item.icon}
         onlyIcon
         name="ChoiceGroupExampleIcon"
-        className={cnChoiceGroupExampleIcon()}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

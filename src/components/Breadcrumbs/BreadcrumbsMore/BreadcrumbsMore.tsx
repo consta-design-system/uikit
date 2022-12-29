@@ -81,10 +81,6 @@ function BreadcrumbsMoreRender<ITEM>(
 
   useEffect(setOpen.off, [items]);
 
-  if (!items.length) {
-    return null;
-  }
-
   const onItemClick = ({
     e,
     item,
@@ -120,7 +116,7 @@ function BreadcrumbsMoreRender<ITEM>(
         label="..."
         size={iconSize}
         ref={buttonRef}
-        onClick={setOpen.toogle}
+        onClick={setOpen.toggle}
       />
       <ContextMenu
         items={items}

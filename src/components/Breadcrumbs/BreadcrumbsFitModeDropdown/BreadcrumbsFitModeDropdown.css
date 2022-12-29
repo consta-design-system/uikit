@@ -16,4 +16,10 @@
       --breadcrumbs-item-width: 30%;
     }
   }
+
+  &-Item {
+    &_removed.BreadcrumbsItem {
+      display: none;
+    }
+  }
 }

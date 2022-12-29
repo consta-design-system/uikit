@@ -1,9 +1,9 @@
 import './Button.css';
 
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React, { useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';

@@ -72,7 +72,7 @@ export const getMonthTitleAbbreviated = (
   date: Date,
   locale: Locale,
 ): string => {
-  const title = format(date, 'MMM', { locale });
+  const title = format(date, 'LLL', { locale });
 
   if (title[title.length - 1] === '.') {
     return title.substr(0, title.length - 1);

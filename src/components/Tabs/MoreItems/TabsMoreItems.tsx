@@ -1,12 +1,12 @@
 import './TabsMoreItems.css';
 
+import { IconMeatball } from '@consta/icons/IconMeatball';
 import FocusTrap from 'focus-trap-react';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
-import { IconMeatball } from '../../../icons/IconMeatball/IconMeatball';
 import {
   animateTimeout,
   cnMixPopoverAnimate,
@@ -23,7 +23,7 @@ const TabsMoreItemsRender = (
   ref: React.Ref<HTMLDivElement>,
 ) => {
   const { items, renderItem, getItemLabel, getItemChecked, height } = props;
-  const [isOpen, { off, toogle }] = useFlag(false);
+  const [isOpen, { off, toggle }] = useFlag(false);
   const buttonRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
   const [direction, setDirection] = useState<Direction>('downStartLeft');
@@ -44,7 +44,7 @@ const TabsMoreItemsRender = (
           view="ghost"
           onlyIcon
           iconLeft={IconMeatball}
-          onClick={toogle}
+          onClick={toggle}
         />
       </div>
       <Transition

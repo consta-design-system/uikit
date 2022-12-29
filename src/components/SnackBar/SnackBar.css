@@ -13,33 +13,25 @@
     }
 
     &_animate {
-      &_appear,
-      &_enter,
-      &_exit,
-      &_appearActive,
-      &_enterActive,
-      &_exitActive {
+      &_entered,
+      &_entering,
+      &_exiting,
+      &_exited {
         transition: transform 0.2s, opacity 0.2s;
       }
 
-      &_appear,
-      &_enter {
+      &_entering {
         opacity: 0;
         transform: scale(0.5);
       }
 
-      &_appearActive,
-      &_enterActive {
+      &_entered {
         opacity: 1;
         transform: scale(1);
       }
 
-      &_exit {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      &_exitActive {
+      &_exiting,
+      &_exited {
         opacity: 0;
         transform: scale(0.5);
       }

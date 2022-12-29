@@ -1,7 +1,7 @@
+import { IconCamera } from '@consta/icons/IconCamera';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import {
   Badge,
   badgePropForm,

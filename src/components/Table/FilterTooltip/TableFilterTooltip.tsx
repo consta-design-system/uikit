@@ -1,9 +1,9 @@
 import './TableFilterTooltip.css';
 
+import { IconFunnel } from '@consta/icons/IconFunnel';
 import React, { useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { IconFunnel } from '../../../icons/IconFunnel/IconFunnel';
 import {
   animateTimeout,
   cnMixPopoverAnimate,

@@ -113,7 +113,7 @@
   }
 
   & .ProgressStepBarItem-PointText,
-  & .Icon {
+  & .ProgressStepBarItem-PointIcon {
     color: var(--progress-step-bar-item-point-content-color);
   }
 
@@ -135,7 +135,7 @@
     border-radius: calc(var(--progress-step-bar-item-point-size) * 0.5);
     transition: background-color 0.3s;
 
-    &[type*='button'] {
+    &_pointer {
       cursor: pointer;
     }
   }

@@ -1,5 +1,6 @@
 import './CalendarSlider.css';
 
+import { IconForward } from '@consta/icons/IconForward';
 import {
   addMonths,
   addYears,
@@ -13,7 +14,6 @@ import {
 import ruLocale from 'date-fns/locale/ru';
 import React, { useEffect, useRef } from 'react';
 
-import { IconForward } from '../../../icons/IconForward/IconForward';
 import { range } from '../../../utils/array';
 import { cn } from '../../../utils/bem';
 import { DateRange } from '../../../utils/types/Date';

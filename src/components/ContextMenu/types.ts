@@ -1,5 +1,6 @@
+import { IconComponent } from '@consta/icons/Icon';
+
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
-import { IconComponent } from '../../icons/Icon/Icon';
 import { PropsWithAsAttributes } from '../../utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Direction, PopoverPropOffset, Position } from '../Popover/Popover';

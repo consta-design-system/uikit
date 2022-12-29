@@ -1,31 +1,13 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Badge } from '../../../Badge';
 
 export const BadgeExampleSize = () => (
-  <div className={cnDocsDecorator('Section', [cnDocsExample()])}>
-    <Badge
-      size="xs"
-      label="Badge xs"
-      className={wp.decorator({ 'indent-r': 'm' })}
-    />
-    <Badge
-      size="s"
-      label="Badge s"
-      className={wp.decorator({ 'indent-r': 'm' })}
-    />
-    <Badge
-      size="m"
-      label="Badge m"
-      className={wp.decorator({ 'indent-r': 'm' })}
-    />
-    <Badge
-      size="l"
-      label="Badge l"
-      className={wp.decorator({ 'indent-r': 'm' })}
-    />
-  </div>
+  <Example>
+    <Badge size="xs" label="Badge xs" />
+    <Badge size="s" label="Badge s" />
+    <Badge size="m" label="Badge m" />
+    <Badge size="l" label="Badge l" />
+  </Example>
 );

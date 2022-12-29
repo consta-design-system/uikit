@@ -1,12 +1,12 @@
 import './Table.css';
 
+import { IconSortDown } from '@consta/icons/IconSortDown';
+import { IconSortUp } from '@consta/icons/IconSortUp';
+import { IconUnsort } from '@consta/icons/IconUnsort';
 import React, { useEffect, useMemo } from 'react';
 
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { IconSortDown } from '../../icons/IconSortDown/IconSortDown';
-import { IconSortUp } from '../../icons/IconSortUp/IconSortUp';
-import { IconUnsort } from '../../icons/IconUnsort/IconUnsort';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
 import { cn } from '../../utils/bem';
 import { setRef } from '../../utils/setRef';
@@ -448,11 +448,24 @@ const InternalTable = <T extends TableRow>(
         columnsElementsWidths,
         resizedColumnWidths,
       );
-      // Выставляю в undefined так как если вычеслять значение для последней колонки так,
-      // чтобы заполнялось все свободное пространство, при изменении ширины таблицы в меньшую сторону
-      // ширина последней колонки изменяться не будет, а так она будет css'ом проставляться в auto
+      // Выставляю в undefined для того, чтобы колонка, для кторой не определена ширина выставлялась в auto
+      // Если ее нет то заполняю недостающее пространство в последней колонке
       if ((overallColumnsWidth ?? tableWidth) < tableWidth) {
-        resultArr[resultArr.length - 1] = undefined;
+        let autoSetted = false;
+        for (let i = columns.length - 1; i > 0; i--) {
+          const { width } = columns[i];
+          if (!(width && width > 0)) {
+            resultArr[i] = undefined;
+            autoSetted = true;
+            return;
+          }
+        }
+        if (!autoSetted && overallColumnsWidth) {
+          resultArr[resultArr.length - 1] =
+            (resultArr[resultArr.length - 1] ?? 0) +
+            tableWidth -
+            overallColumnsWidth;
+        }
       }
       return setResizedColumnWidths(resultArr);
     }

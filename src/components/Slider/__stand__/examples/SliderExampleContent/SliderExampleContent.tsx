@@ -1,6 +1,6 @@
+import { IconSettings } from '@consta/icons/IconSettings';
 import React, { useState } from 'react';
 
-import { IconSettings } from '../../../../../icons/IconSettings/IconSettings';
 import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Slider } from '../../../Slider';
 

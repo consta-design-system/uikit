@@ -1,9 +1,9 @@
 import './ChoiceGroup.css';
 
+import { IconPropSize } from '@consta/icons/Icon';
 import React, { forwardRef } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
-import { IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { withDefaultGetters } from './helper';

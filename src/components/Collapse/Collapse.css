@@ -1,6 +1,4 @@
 .Collapse {
-  --horizontal-space: 0;
-
   &_size {
     &_2xs {
       --vertical-space: var(--space-2xs);
@@ -35,56 +33,6 @@
       --elements-offset: var(--space-s);
       --body-offset-up: var(--space-s);
       --body-offset-bottom: var(--space-xl);
-    }
-  }
-
-  &_horizontalSpace {
-    &_3xs {
-      --horizontal-space: var(--space-3xs);
-    }
-
-    &_2xs {
-      --horizontal-space: var(--space-2xs);
-    }
-
-    &_xs {
-      --horizontal-space: var(--space-xs);
-    }
-
-    &_s {
-      --horizontal-space: var(--space-s);
-    }
-
-    &_m {
-      --horizontal-space: var(--space-m);
-    }
-
-    &_l {
-      --horizontal-space: var(--space-l);
-    }
-
-    &_xl {
-      --horizontal-space: var(--space-xl);
-    }
-
-    &_2xl {
-      --horizontal-space: var(--space-2xl);
-    }
-
-    &_3xl {
-      --horizontal-space: var(--space-3xl);
-    }
-
-    &_4xl {
-      --horizontal-space: var(--space-4xl);
-    }
-
-    &_5xl {
-      --horizontal-space: var(--space-5xl);
-    }
-
-    &_6xl {
-      --horizontal-space: var(--space-6xl);
     }
   }
 

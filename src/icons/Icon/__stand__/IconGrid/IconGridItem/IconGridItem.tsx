@@ -1,9 +1,9 @@
 import './IconGridItem.css';
 
+import { IconComponent, IconProps } from '@consta/icons/Icon';
 import React from 'react';
 
 import { Text } from '##/components/Text';
-import { IconComponent, IconProps } from '##/icons/Icon';
 import { cn } from '##/utils/bem';
 
 export type IconsItemProps = {

@@ -1,8 +1,8 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { ChoiceGroup } from '../../../ChoiceGroup';
+import { cnChoiceGroupExampleFitMode } from '../ChoiceGroupExampleFitMode';
 
 type Item = string;
 
@@ -17,7 +17,7 @@ const items: Item[] = [
 export const ChoiceGroupExampleTextOverflow = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <ChoiceGroup
         style={{ maxWidth: 600 }}
         value={value}
@@ -26,7 +26,8 @@ export const ChoiceGroupExampleTextOverflow = () => {
         getItemLabel={(item) => item}
         name="ChoiceGroupExampleTextOverflow"
         truncate
+        className={cnChoiceGroupExampleFitMode()}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

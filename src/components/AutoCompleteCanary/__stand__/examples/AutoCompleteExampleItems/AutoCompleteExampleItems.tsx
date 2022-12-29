@@ -1,14 +1,13 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { basicItems } from '##/components/AutoCompleteCanary/__mocks__/data.mock';
 import { AutoComplete } from '##/components/AutoCompleteCanary/AutoCompleteCanary';
-import { cnDocsDecorator } from '##/uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
 
 export const AutoCompleteExampleItems = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <AutoComplete
         type="text"
         placeholder="Введите значение"
@@ -18,6 +17,6 @@ export const AutoCompleteExampleItems = () => {
         getItemLabel={(item) => item}
         onChange={({ value }) => setValue(value)}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

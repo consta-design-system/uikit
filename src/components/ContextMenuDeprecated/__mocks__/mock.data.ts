@@ -1,9 +1,10 @@
-import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconAllDone } from '../../../icons/IconAllDone/IconAllDone';
-import { IconAttach } from '../../../icons/IconAttach/IconAttach';
-import { IconBag } from '../../../icons/IconBag/IconBag';
-import { IconEye } from '../../../icons/IconEye/IconEye';
-import { IconSun } from '../../../icons/IconSun/IconSun';
+import { IconComponent } from '@consta/icons/Icon';
+import { IconAllDone } from '@consta/icons/IconAllDone';
+import { IconAttach } from '@consta/icons/IconAttach';
+import { IconBag } from '@consta/icons/IconBag';
+import { IconEye } from '@consta/icons/IconEye';
+import { IconSun } from '@consta/icons/IconSun';
+
 import { BadgePropStatus } from '../../Badge/Badge';
 import { ContextMenuAccent } from '../helpers';
 

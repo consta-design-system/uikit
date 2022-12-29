@@ -1,8 +1,8 @@
+import { cnIcon } from '@consta/icons/Icon';
+import { IconAttach } from '@consta/icons/IconAttach';
 import { fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
-import { cnIcon } from '../../../icons/Icon/Icon';
-import { IconAttach } from '../../../icons/IconAttach/IconAttach';
 import {
   cnTagBase,
   TagBase,

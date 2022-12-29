@@ -1,7 +1,7 @@
+import { IconLeaf } from '@consta/icons/IconLeaf';
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import * as React from 'react';
 
-import { IconLeaf } from '../../../icons/IconLeaf/IconLeaf';
 import {
   Informer,
   informerPropSiseDefault,

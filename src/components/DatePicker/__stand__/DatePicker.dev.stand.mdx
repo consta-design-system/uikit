@@ -368,8 +368,8 @@ export const DatePickerExampleFormat = () => {
 ##### Пример с разными иконками и подсказками для левого и правого поля
 
 ```tsx
-import { IconForward } from '../../../../../icons/IconForward/IconForward';
-import { IconBackward } from '../../../../../icons/IconBackward/IconBackward';
+import { IconForward } from '@consta/icons/IconForward';
+import { IconBackward } from '@consta/icons/IconBackward';
 
 export const DatePickerExampleTwoIcons = () => {
   const [value, setValue] = useState<[Date?, Date?] | null>(null);
@@ -620,4 +620,5 @@ type DatePickerPropOnError = (
 | [`multiplicityHours?`](#интервал-при-выборе-времени)                                       | `number`                                                                                                                                                                                                                                                    | 1                     | Интервал для вывода часов (1 — показать все часы, 0 — убрать часы)                                                                    |
 | [`renderAdditionalControls?`](##LIBS.LIB.STAND/lib:uikit/stand:components-DateTime-stable) | `DateTimeAdditionalControlRenderProp`                                                                                                                                                                                                                       | -                     | Дополнительные конторолы для выбора даты                                                                                              |
 | `className?`                                                                               | `string`                                                                                                                                                                                                                                                    | -                     | Дополнительный CSS-класс                                                                                                              |
+| `dropdownClassName?`                                                                       | `string`                                                                                                                                                                                                                                                    | -                     | Дополнительный CSS-класс для выпадающего блока                                                                                        |
 | `ref?`                                                                                     | `React.Ref<HTMLDivElement>`                                                                                                                                                                                                                                 | -                     | Ссылка на корневой DOM-элемент компонента                                                                                             |

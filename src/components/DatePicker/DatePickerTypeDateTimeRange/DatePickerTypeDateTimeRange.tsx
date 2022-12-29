@@ -43,6 +43,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       inputRef,
       name,
       multiplicityMinutes,
+      dropdownClassName,
       multiplicitySeconds,
       multiplicityHours,
       ...fieldProps
@@ -167,6 +168,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           ref={calendarRef}
           anchorRef={startFieldRef}
           isOpen={calendarVisible}
+          className={dropdownClassName}
           onChangeCurrentVisibleDate={setCurrentVisibleDate}
           currentVisibleDate={currentVisibleDate}
           value={props.value || undefined}

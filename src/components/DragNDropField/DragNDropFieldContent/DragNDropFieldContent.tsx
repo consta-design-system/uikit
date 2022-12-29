@@ -1,8 +1,8 @@
 import './DragNDropFieldContent.css';
 
+import { IconAttach } from '@consta/icons/IconAttach';
 import React from 'react';
 
-import { IconAttach } from '../../../icons/IconAttach/IconAttach';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';

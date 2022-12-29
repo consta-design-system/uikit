@@ -1,6 +1,6 @@
+import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
-import { IconComponent } from '##/icons/Icon';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { RenderItemProps } from '../SelectComponents/types';

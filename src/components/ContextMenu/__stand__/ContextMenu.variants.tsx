@@ -1,13 +1,13 @@
 import './ContextMenu.variants.css';
 
+import { IconSelect } from '@consta/icons/IconSelect';
+import { IconSelectOpen } from '@consta/icons/IconSelectOpen';
 import { useBoolean, useSelect } from '@consta/stand';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { cn } from '##/utils/bem';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { IconSelect } from '../../../icons/IconSelect/IconSelect';
-import { IconSelectOpen } from '../../../icons/IconSelectOpen/IconSelectOpen';
 import { Badge } from '../../Badge/Badge';
 import { Button } from '../../Button/Button';
 import { Switch } from '../../Switch/Switch';
@@ -169,7 +169,7 @@ const Variants = () => {
       <Button
         label="Откройте контекстное меню"
         ref={ref}
-        onClick={setIsOpen.toogle}
+        onClick={setIsOpen.toggle}
         iconRight={isOpen ? IconSelectOpen : IconSelect}
       />
       <ContextMenu

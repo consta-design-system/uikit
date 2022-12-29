@@ -1,13 +1,12 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Button } from '../../../../Button/Button';
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 
 export const DragNDropFieldExampleRenderProps = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <div>
       <DragNDropField onDropFiles={(files) => console.log(files)}>
         {({ openFileDialog }) => (
@@ -20,23 +19,23 @@ export const DragNDropFieldExampleRenderProps = () => (
         )}
       </DragNDropField>
     </div>
-  </StoryBookExample>
+  </Example>
 );
 
 export const DragNDropFieldExampleChildren = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <div>
       <DragNDropField onDropFiles={(files) => console.log(files)}>
         <Text>Здесь просто текст</Text>
       </DragNDropField>
     </div>
-  </StoryBookExample>
+  </Example>
 );
 
 export const DragNDropFieldExampleEmpty = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <div>
       <DragNDropField onDropFiles={(files) => console.log(files)} />
     </div>
-  </StoryBookExample>
+  </Example>
 );

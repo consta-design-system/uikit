@@ -1,135 +1,72 @@
-import './ButtonExampleView.css';
-
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconBookmarkStroked } from '@consta/icons/IconBookmarkStroked';
+import { IconChatStroked as IconChat } from '@consta/icons/IconChatStroked';
+import { IconCopy } from '@consta/icons/IconCopy';
+import { IconEdit } from '@consta/icons/IconEdit';
+import { IconForward } from '@consta/icons/IconForward';
+import { IconFunnel } from '@consta/icons/IconFunnel';
+import { IconSettings } from '@consta/icons/IconSettings';
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cn } from '##/utils/bem';
-
-import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
-import { IconBookmarkStroked } from '../../../../../icons/IconBookmarkStroked/IconBookmarkStroked';
-import { IconChatStroked as IconChat } from '../../../../../icons/IconChatStroked/IconChatStroked';
-import { IconCopy } from '../../../../../icons/IconCopy/IconCopy';
-import { IconEdit } from '../../../../../icons/IconEdit/IconEdit';
-import { IconForward } from '../../../../../icons/IconForward/IconForward';
-import { IconFunnel } from '../../../../../icons/IconFunnel/IconFunnel';
-import { IconSettings } from '../../../../../icons/IconSettings/IconSettings';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Button } from '../../../Button';
-
-const cnButtonExampleView = cn('ButtonExampleView');
 
 export const ButtonExampleViewPrimary = () => {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.decorator({ distribute: 'left' }),
-        cnButtonExampleView(),
-      ])}
-    >
-      <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button label="Войти" />
-      </div>
-      <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button label="Продолжить" iconRight={IconForward} />
-      </div>
-      <div className={cnDocsExample()}>
-        <Button label="Добавить" iconRight={IconAdd} onlyIcon />
-      </div>
-    </div>
+    <Example col={{ 1: 0, flex: 600 }}>
+      <Button label="Войти" />
+      <Button label="Продолжить" iconRight={IconForward} />
+      <Button label="Добавить" iconRight={IconAdd} onlyIcon />
+    </Example>
   );
 };
 
 export const ButtonExampleViewSecondary = () => {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.decorator({ distribute: 'left' }),
-        cnButtonExampleView(),
-      ])}
-    >
-      <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button view="secondary" label="Читать далее" />
-      </div>
-      <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button view="secondary" label="Комментировать" iconLeft={IconChat} />
-      </div>
-      <div className={cnDocsExample()}>
-        <Button
-          view="secondary"
-          label="Редактировать"
-          iconRight={IconEdit}
-          onlyIcon
-        />
-      </div>
-    </div>
+    <Example col={{ 1: 0, flex: 600 }}>
+      <Button view="secondary" label="Читать далее" />
+      <Button view="secondary" label="Комментировать" iconLeft={IconChat} />
+      <Button
+        view="secondary"
+        label="Редактировать"
+        iconRight={IconEdit}
+        onlyIcon
+      />
+    </Example>
   );
 };
 
 export const ButtonExampleViewGhost = () => {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.decorator({ distribute: 'left' }),
-        cnButtonExampleView(),
-      ])}
-    >
-      <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button view="ghost" label="Отмена" />
-      </div>
-      <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button view="ghost" label="Настройки" iconLeft={IconSettings} />
-      </div>
-      <div className={cnDocsExample()}>
-        <Button view="ghost" label="Фильтр" iconLeft={IconFunnel} onlyIcon />
-      </div>
-    </div>
+    <Example col={{ 1: 0, flex: 600 }}>
+      <Button view="ghost" label="Отмена" />
+      <Button view="ghost" label="Настройки" iconLeft={IconSettings} />
+      <Button view="ghost" label="Фильтр" iconLeft={IconFunnel} onlyIcon />
+    </Example>
   );
 };
 
 export const ButtonExampleViewClear = () => {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.decorator({ distribute: 'left' }),
-        cnButtonExampleView(),
-      ])}
-    >
-      <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button view="clear" label="Развернуть" />
-      </div>
-      <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button view="clear" label="Скопировать" iconLeft={IconCopy} />
-      </div>
-      <div className={cnDocsExample()}>
-        <Button
-          view="clear"
-          label="Добавить в Избранное"
-          iconLeft={IconBookmarkStroked}
-          onlyIcon
-        />
-      </div>
-    </div>
+    <Example col={{ 1: 0, flex: 600 }}>
+      <Button view="clear" label="Развернуть" />
+      <Button view="clear" label="Скопировать" iconLeft={IconCopy} />
+      <Button
+        view="clear"
+        label="Добавить в Избранное"
+        iconLeft={IconBookmarkStroked}
+        onlyIcon
+      />
+    </Example>
   );
 };
 
 export const ButtonExampleViewDisabled = () => {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.decorator({ distribute: 'left' }),
-        cnButtonExampleView(),
-      ])}
-    >
-      <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button disabled label="Войти" />
-      </div>
-      <div className={cnDocsExample(null, [wp.decorator({ 'indent-r': 's' })])}>
-        <Button disabled label="Продолжить" iconRight={IconForward} />
-      </div>
-      <div className={cnDocsExample()}>
-        <Button disabled label="Добавить" iconRight={IconAdd} onlyIcon />
-      </div>
-    </div>
+    <Example col={{ 1: 0, flex: 600 }}>
+      <Button disabled label="Войти" />
+      <Button disabled label="Продолжить" iconRight={IconForward} />
+      <Button disabled label="Добавить" iconRight={IconAdd} onlyIcon />
+    </Example>
   );
 };

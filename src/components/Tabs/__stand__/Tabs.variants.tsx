@@ -1,11 +1,11 @@
+import { IconComponent } from '@consta/icons/Icon';
+import { IconCamera } from '@consta/icons/IconCamera';
+import { IconPhone } from '@consta/icons/IconPhone';
+import { IconPhoto } from '@consta/icons/IconPhoto';
+import { IconRing } from '@consta/icons/IconRing';
 import { useBoolean, useSelect } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconCamera } from '../../../icons/IconCamera/IconCamera';
-import { IconPhone } from '../../../icons/IconPhone/IconPhone';
-import { IconPhoto } from '../../../icons/IconPhoto/IconPhoto';
-import { IconRing } from '../../../icons/IconRing/IconRing';
 import {
   Tabs,
   tabsDefaultFitMode,

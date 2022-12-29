@@ -1,68 +1,55 @@
-import './ContextMenuExampleSize.css';
-
+import { Example } from '@consta/stand';
 import React, { useRef } from 'react';
 
-import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '../../../../../utils/bem';
+import { useFlag } from '##/hooks/useFlag';
+
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenuDeprecated';
 
 const items: string[] = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
 
-const cnContextMenuExampleSize = cn('ContextMenuExampleSize');
+export const ContextMenuExampleSize = () => {
+  const refS = useRef(null);
+  const refM = useRef(null);
+  const refL = useRef(null);
 
-export const ContextMenuExampleSizeS = () => {
-  const ref = useRef(null);
+  const [isOpenS, setIsOpenS] = useFlag();
+  const [isOpenM, setIsOpenM] = useFlag();
+  const [isOpenL, setIsOpenL] = useFlag();
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleSize()])}
-    >
-      <Button iconLeft={IconAdd} ref={ref} label="Меню размера S" />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item}
-        anchorRef={ref}
-        direction="downStartLeft"
-        size="s"
-      />
-    </StoryBookExample>
-  );
-};
-
-export const ContextMenuExampleSizeM = () => {
-  const ref = useRef(null);
-  return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleSize()])}
-    >
-      <Button iconLeft={IconAdd} ref={ref} label="Меню размера M" />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item}
-        anchorRef={ref}
-        direction="downStartLeft"
-        size="m"
-      />
-    </StoryBookExample>
-  );
-};
-
-export const ContextMenuExampleSizeL = () => {
-  const ref = useRef(null);
-  return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [cnContextMenuExampleSize()])}
-    >
-      <Button iconLeft={IconAdd} ref={ref} label="Меню размера L" />
-      <ContextMenu
-        items={items}
-        getLabel={(item) => item}
-        anchorRef={ref}
-        direction="downStartLeft"
-        size="l"
-      />
-    </StoryBookExample>
+    <>
+      <Example>
+        <Button ref={refS} label="Меню размера S" onClick={setIsOpenS.toggle} />
+        <Button ref={refM} label="Меню размера M" onClick={setIsOpenM.toggle} />
+        <Button ref={refL} label="Меню размера L" onClick={setIsOpenL.toggle} />
+      </Example>
+      {isOpenS && (
+        <ContextMenu
+          items={items}
+          getLabel={(item) => item}
+          anchorRef={refS}
+          direction="downStartLeft"
+          size="s"
+        />
+      )}
+      {isOpenM && (
+        <ContextMenu
+          items={items}
+          getLabel={(item) => item}
+          anchorRef={refM}
+          direction="downStartLeft"
+          size="m"
+        />
+      )}
+      {isOpenL && (
+        <ContextMenu
+          items={items}
+          getLabel={(item) => item}
+          anchorRef={refL}
+          direction="downStartLeft"
+          size="l"
+        />
+      )}
+    </>
   );
 };

@@ -1,11 +1,11 @@
 import './TabsFitModeScrollWrapper.css';
 
+import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
+import { IconArrowRight } from '@consta/icons/IconArrowRight';
 import React from 'react';
 
 import { useResizeObserved } from '../../../hooks/useResizeObserved/useResizeObserved';
 import { useScrollPosition } from '../../../hooks/useScrollPosition/useScrollPosition';
-import { IconArrowLeft } from '../../../icons/IconArrowLeft/IconArrowLeft';
-import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { getTabsWidth, TabsFitModeWrapperProps } from '../helpers';

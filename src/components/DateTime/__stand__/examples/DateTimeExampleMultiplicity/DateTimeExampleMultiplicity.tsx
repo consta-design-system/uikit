@@ -1,18 +1,17 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { DateTime } from '../../../DateTime';
 
 export const DateTimeExampleMultiplicity = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <DateTime
         type="time"
         multiplicityHours={2}
         multiplicityMinutes={5}
         multiplicitySeconds={0}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

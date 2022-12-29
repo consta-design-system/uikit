@@ -265,7 +265,9 @@ export const Popover = forwardRef<HTMLDivElement, Props>(
       if (previousDirectionRef.current !== direction) {
         if (
           previousDirectionRef.current &&
-          !bannedDirections.includes(previousDirectionRef.current)
+          !bannedDirections.includes(previousDirectionRef.current) &&
+          !bannedDirections.includes(direction) &&
+          direction !== spareDirection
         ) {
           setBannedDirections((state) =>
             previousDirectionRef.current
