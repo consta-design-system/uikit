@@ -1,44 +1,33 @@
 import './List.css';
 
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
-import { useForkRef } from '##/hooks/useForkRef';
-import { isOptionForCreate, useSelect } from '##/hooks/useSelect';
+import { useRefs } from '##/hooks/useRefs';
 import { cn } from '##/utils/bem';
-import { fabricIndex } from '##/utils/fabricIndex';
+import { getGroups } from '##/utils/getGroups';
 
 import { withDefaultGetters } from './helper';
 import { ListGroupLabel } from './ListGroupLabel/ListGroupLabel';
 import { ListItem } from './ListItem/ListItem';
 import { ListLoader } from './ListLoader/ListLoader';
 import {
-  DefaultListGroup,
   DefaultListItem,
   defaultListPropForm,
   defaultListPropSize,
   ListComponent,
-  ListPropOnChange,
   ListPropRenderItem,
   ListProps,
 } from './types';
 
 export const cnList = cn('List');
 
-const ListRender = <
-  ITEM = DefaultListItem,
-  GROUP = DefaultListGroup,
-  MULTIPLE extends boolean = false,
->(
-  props: ListProps<ITEM, GROUP, MULTIPLE>,
-  ref: React.Ref<HTMLDivElement>,
-) => {
+const ListRender = (props: ListProps, ref: React.Ref<HTMLDivElement>) => {
   const {
     items,
     isLoading,
     className,
-    groups,
-    value,
-    onChange: onChangeProp,
+    onItemClick,
+    groups: groupsProp,
     disabled,
     getItemLabel,
     getItemLeftIcon,
@@ -46,12 +35,15 @@ const ListRender = <
     getItemRightIcon,
     getItemRightSide,
     getItemKey,
+    getItemAs,
+    getItemAttributes,
     getItemGroupKey,
     getItemDisabled,
+    getItemActive,
+    getItemOnClick,
     getGroupKey,
     getGroupLabel,
     getGroupRightSide,
-    multiple = false,
     renderItem,
     form = defaultListPropForm,
     onBlur,
@@ -60,32 +52,16 @@ const ListRender = <
     ...otherProps
   } = withDefaultGetters(props);
 
-  const onChange: ListPropOnChange<ITEM, MULTIPLE> = (params) => {
-    onChangeProp?.(params);
-  };
+  const groups = useMemo(
+    () => getGroups(items, getItemGroupKey, groupsProp, getGroupKey, undefined),
+    [groupsProp, items],
+  );
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  type ITEM = typeof items[number];
 
-  const { visibleItems, getOptionProps, getKeyProps } = useSelect({
-    items,
-    groups,
-    value,
-    onChange,
-    dropdownRef: containerRef,
-    controlRef: { current: null },
-    disabled,
-    getItemLabel,
-    getItemKey,
-    getGroupKey,
-    getItemGroupKey,
-    getItemDisabled,
-    multiple,
-    onBlur,
-    onFocus,
-  });
+  const refs = useRefs<HTMLDivElement>(items.length);
 
-  const renderItemDefault: ListPropRenderItem<ITEM> = (props) => {
-    const { item, active, hovered, onClick, onMouseEnter } = props;
+  const renderItemDefault: ListPropRenderItem<ITEM> = (item) => {
     const params: Omit<DefaultListItem, 'id'> = {
       label: getItemLabel(item),
       disabled: getItemDisabled(item) || disabled,
@@ -93,36 +69,32 @@ const ListRender = <
       leftIcon: getItemLeftIcon(item),
       rightSide: getItemRightSide(item),
       rightIcon: getItemRightIcon(item),
+      active: getItemActive(item),
+      as: getItemAs(item) ?? 'div',
+    };
+
+    const onClick = getItemOnClick(item);
+
+    const handleClick: React.MouseEventHandler<HTMLElement> = (e) => {
+      onClick?.(e);
+      onItemClick?.({ e, item });
     };
 
     return (
       <ListItem
         {...params}
-        multiple={multiple}
         size={size}
-        active={active}
+        onClick={handleClick}
         indent={form === 'round' ? 'increased' : 'normal'}
-        hovered={hovered}
-        onClick={onClick}
-        onMouseEnter={onMouseEnter}
+        {...(getItemAttributes(item) ?? {})}
+        ref={refs[items.indexOf(item)]}
       />
     );
   };
 
-  const getIndex = fabricIndex(-1);
-  containerRef.current?.focus();
-
   return (
-    <div
-      className={cnList({ size }, [className])}
-      ref={useForkRef([ref, containerRef])}
-      {...getKeyProps()}
-      {...otherProps}
-    >
-      {visibleItems.map((group) => {
-        if (isOptionForCreate(group)) {
-          return null;
-        }
+    <div className={cnList({ size }, [className])} ref={ref} {...otherProps}>
+      {groups.map((group) => {
         return (
           <React.Fragment key={group.key}>
             {group.group && (
@@ -135,10 +107,7 @@ const ListRender = <
             {group.items.map((item, index) => {
               return (
                 <React.Fragment key={`${group.key}-${index}`}>
-                  {(renderItem ?? renderItemDefault)({
-                    item,
-                    ...getOptionProps({ index: getIndex(), item }),
-                  })}
+                  {(renderItem ?? renderItemDefault)(item)}
                 </React.Fragment>
               );
             })}

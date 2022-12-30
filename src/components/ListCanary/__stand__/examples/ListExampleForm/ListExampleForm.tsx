@@ -1,14 +1,8 @@
-import './ListExampleForm.css';
+import { Example } from '@consta/stand';
+import React from 'react';
 
-import React, { useState } from 'react';
-
-import { List } from '##/components/ListCanary';
+import { cnMixList, List } from '##/components/ListCanary';
 import { Text } from '##/components/Text';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '##/utils/bem';
-
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 
 type Item = {
   label: string;
@@ -30,44 +24,21 @@ const items: Item[] = [
   },
 ];
 
-const cnListExampleForm = cn('ListExampleForm');
-
 export const ListExampleForm = () => {
-  const [value, setValue] = useState<Item | null>(null);
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [
-        wp.decorator({ distribute: 'left' }),
-        cnListExampleForm(),
-      ])}
-    >
+    <Example col={{ 1: 0, flex: 600 }}>
       <div>
         <Text>default</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          form="default"
-        />
+        <List items={items} form="default" className={cnMixList({})} />
       </div>
       <div>
         <Text>round</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          form="round"
-        />
+        <List items={items} form="round" className={cnMixList({})} />
       </div>
       <div>
         <Text>brick</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          form="brick"
-        />
+        <List items={items} form="brick" className={cnMixList({})} />
       </div>
-    </StoryBookExample>
+    </Example>
   );
 };

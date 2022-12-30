@@ -6,4 +6,3 @@ export * from './ListItem';
 export * from './ListLoader';
 export * from './ListGroupLabel';
 export * from './MixList';
-export * from './ListWrapper';

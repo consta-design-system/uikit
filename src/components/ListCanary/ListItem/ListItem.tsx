@@ -2,11 +2,17 @@ import './ListItem.css';
 
 import React, { forwardRef } from 'react';
 
-import { Checkbox } from '##/components/Checkbox';
-import { IconPropSize } from '##/icons/Icon';
+import { Text } from '##/components/Text';
+import { IconComponent, IconPropSize } from '##/icons/Icon';
 import { cn } from '##/utils/bem';
+import { getByMap } from '##/utils/getByMap';
 
-import { defaultListPropSize, ListItemProps, ListPropSize } from '../types';
+import {
+  defaultListPropSize,
+  ListItemComponent,
+  ListItemProps,
+  ListPropSize,
+} from '../types';
 
 export const cnListItem = cn('ListItem');
 
@@ -17,74 +23,86 @@ const iconSizeMap: Record<ListPropSize, IconPropSize> = {
   l: 's',
 };
 
-export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
-  (props, ref) => {
-    const {
-      size = defaultListPropSize,
-      multiple,
-      active,
-      label,
-      indent,
-      hovered,
-      disabled,
-      className,
-      leftSide,
-      rightSide,
-      rightIcon: RightIcon,
-      leftIcon: LeftIcon,
-      onClick,
-      onKeyDown,
-      ...otherProps
-    } = props;
+const renderSide = (
+  side: React.ReactNode,
+  position: 'left' | 'right',
+  size: ListPropSize,
+  icon: IconComponent | undefined,
+) => {
+  const sides = side ? [...(Array.isArray(side) ? side : [side])] : [];
+  if (icon) {
+    const Icon = icon;
+    const render = <Icon size={getByMap(iconSizeMap, size)} />;
+    if (position === 'left') {
+      sides.push(render);
+    }
+    if (position === 'right') {
+      sides.unshift(render);
+    }
+  }
+  return sides.map((item, index) => (
+    <div
+      className={cnListItem('Slot', {
+        position,
+      })}
+      key={cnListItem('Slot', {
+        position,
+        index,
+      })}
+    >
+      {item}
+    </div>
+  ));
+};
 
-    const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
-      if (!disabled) {
-        onClick?.(e);
-      }
-    };
+const ListItemRender = (
+  props: ListItemProps,
+  ref: React.Ref<HTMLDivElement>,
+) => {
+  const {
+    size = defaultListPropSize,
+    active,
+    label,
+    indent,
+    disabled,
+    className,
+    leftSide,
+    rightSide,
+    rightIcon,
+    leftIcon,
+    as = 'div',
+    onClick,
+    onKeyDown,
+    ...otherProps
+  } = props;
 
-    return (
-      <div
-        {...otherProps}
-        ref={ref}
-        className={cnListItem(
-          { active, hovered, multiple, size, indent, disabled },
-          [className],
-        )}
-        onClick={handleClick}
-        aria-selected={active}
-        onKeyDown={onKeyDown}
-        tabIndex={0}
-        aria-disabled={disabled}
-        role="option"
-      >
-        <div className={cnListItem('Block', { position: 'left' })}>
-          {leftSide}
-          {LeftIcon && (
-            <LeftIcon size={iconSizeMap[size]} className={cnListItem('Icon')} />
-          )}
-          {multiple && (
-            <Checkbox
-              size={size}
-              disabled={disabled}
-              checked={active}
-              className={cnListItem('Checkbox')}
-            />
-          )}
-          <span className={cnListItem('Label')}>{label}</span>
-        </div>
-        {(rightSide || RightIcon) && (
-          <div className={cnListItem('Block', { position: 'right' })}>
-            {RightIcon && (
-              <RightIcon
-                className={cnListItem('Icon')}
-                size={iconSizeMap[size]}
-              />
-            )}
-            {rightSide}
-          </div>
-        )}
-      </div>
-    );
-  },
-);
+  const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    if (!disabled) {
+      onClick?.(e);
+    }
+  };
+
+  return (
+    <Text
+      className={cnListItem({ active, size, indent, disabled }, [className])}
+      as={as}
+      onClick={handleClick}
+      lineHeight="xs"
+      size={size}
+      ref={ref}
+      {...otherProps}
+    >
+      {renderSide(leftSide, 'left', size, leftIcon)}
+      {!rightIcon && !rightIcon && !leftSide && !leftIcon ? (
+        label
+      ) : (
+        <span className={cnListItem('Slot', { position: 'center' })}>
+          {label}
+        </span>
+      )}
+      {renderSide(rightSide, 'right', size, rightIcon)}
+    </Text>
+  );
+};
+
+export const ListItem = forwardRef(ListItemRender) as ListItemComponent;

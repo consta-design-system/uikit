@@ -7,7 +7,6 @@ import { ListExampleForm } from './examples/ListExampleForm/ListExampleForm';
 import { ListExampleDisabled } from './examples/ListExampleDisabled/ListExampleDisabled';
 import { ListExampleGroups } from './examples/ListExampleGroups/ListExampleGroups';
 import { ListExampleRenderItem } from './examples/ListExampleRenderItem/ListExampleRenderItem';
-import { ListExampleMultiple } from './examples/ListExampleMultiple/ListExampleMultiple';
 import { ListExampleCustomTypes } from './examples/ListExampleCustomTypes/ListExampleCustomTypes';
 import { ListExampleDisabledItem } from './examples/ListExampleDisabledItem/ListExampleDisabledItem';
 
@@ -21,7 +20,6 @@ import { List } from '@consta/uikit/ListCanary';
   - [Варианты](#варианты)
   - [Выбранное значение](#выбранное-значение)
   - [Неактивный вариант](#неактивный-элемент-списка)
-  - [Несколько вариантов](#несколько-вариантов)
   - [Группы вариантов](#группы-вариантов)
 - [Размер](#размер)
 - [Форма](#форма)
@@ -48,6 +46,9 @@ import { List } from '@consta/uikit/ListCanary';
 - `leftIcon` — иконка слева,
 - `rightSide` — контент справа,
 - `rightIcon` — иконка справа,
+- `as` - HTML-тэг компонента
+- `attributes` - атрибуты эдемента
+- `onClick` - событие по нажатию на эдемент
 
 Вы можете сделать [кастомный тип данных для элементов списка](#кастомный-элемент-списка) и использовать его.
 
@@ -61,8 +62,8 @@ import { List } from '@consta/uikit/ListCanary';
 Выбор варианта срабатывает по клику мыши или по нажатию `Enter` на клавиатуре.
 
 ```tsx
-import React, { useState } from 'react';
-import { List } from '@consta/uikit/ListCanary';
+import React from 'react';
+import { cnMixList, List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
@@ -85,14 +86,7 @@ const items: Item[] = [
 ];
 
 function ListExampleItems() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <List
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-    />
-  );
+  return <List items={items} className={cnMixList({})} />;
 }
 ```
 
@@ -103,8 +97,8 @@ function ListExampleItems() {
 Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов), можете добавить своё свойство.
 
 ```tsx
-import React, { useState } from 'react';
-import { List } from '@consta/uikit/ListCanary';
+import React from 'react';
+import { cnMixList, List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
@@ -131,64 +125,17 @@ const items: Item[] = [
 ];
 
 function ListExampleDisabledItem() {
-  const [value, setValue] = useState<Item | null>();
   return (
     <List
       placeholder="Выберите вариант"
       items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
+      className={cnMixList({})}
     />
   );
 }
 ```
 
 <ListExampleDisabledItem />
-
-### Несколько вариантов
-
-По умолчанию из списка можно выбрать только одного пользователя. Чтобы выбрать нескольких, добавьте `multiple`.
-
-> В этом случае `value` становится массивом, а в `onChange` передаётся массив выбранных элементов.
-
-```tsx
-import React, { useState } from 'react';
-import { List } from '@consta/uikit/ListCanary';
-
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-function ListExampleMultiple() {
-  const [value, setValue] = useState<Item[] | null>();
-  return (
-    <List
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      multiple
-    />
-  );
-}
-```
-
-<ListExampleMultiple />
 
 ### Группы вариантов
 
@@ -199,8 +146,8 @@ function ListExampleMultiple() {
 - `rightSide` — контент справа.
 
 ```tsx
-import React, { useState } from 'react';
-import { List } from '@consta/uikit/ListCanary';
+import React from 'react';
+import { cnMixList, List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
@@ -263,15 +210,7 @@ const items: Item[] = [
 ];
 
 function ListExampleGroups() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <List
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      groups={groups}
-    />
-  );
+  return <List items={items} className={cnMixList({})} groups={groups} />;
 }
 ```
 
@@ -284,8 +223,8 @@ function ListExampleGroups() {
 Компонент занимает всю ширину родительского блока.
 
 ```tsx
-import React, { useState } from 'react';
-import { List } from '@consta/uikit/ListCanary';
+import React from 'react';
+import { cnMixList, List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
@@ -308,44 +247,23 @@ const items: Item[] = [
 ];
 
 const ListExampleSize = () => {
-  const [value, setValue] = useState<Item | null>(null);
   return (
     <>
       <div>
         <Text>xs</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          size="xs"
-        />
+        <List items={items} size="xs" className={cnMixList({})} />
       </div>
       <div>
         <Text>s</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          size="s"
-        />
+        <List items={items} className={cnMixList({})} size="s" />
       </div>
       <div>
         <Text>m</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          size="m"
-        />
+        <List className={cnMixList({})} items={items} size="m" />
       </div>
       <div>
         <Text>l</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          size="l"
-        />
+        <List className={cnMixList({})} items={items} size="l" />
       </div>
     </>
   );
@@ -359,8 +277,8 @@ const ListExampleSize = () => {
 За форму селекта отвечает свойство `form`. Варианты: `default`, `brick`, `round`. По умолчанию `default`.
 
 ```tsx
-import React, { useState } from 'react';
-import { List } from '@consta/uikit/ListCanary';
+import React from 'react';
+import { cnMixList, List } from '@consta/uikit/ListCanary';
 import { Text } from '@consta/uikit/Text';
 type Item = {
   label: string;
@@ -383,35 +301,19 @@ const items: Item[] = [
 ];
 
 const ListExampleForm = () => {
-  const [value, setValue] = useState<Item | null>(null);
   return (
     <>
       <div>
         <Text>default</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          form="default"
-        />
+        <List className={cnMixList({})} items={items} form="default" />
       </div>
       <div>
         <Text>round</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          form="round"
-        />
+        <List className={cnMixList({})} items={items} form="round" />
       </div>
       <div>
         <Text>brick</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          form="brick"
-        />
+        <List className={cnMixList({})} items={items} form="brick" />
       </div>
     </>
   );
@@ -425,8 +327,8 @@ const ListExampleForm = () => {
 Чтобы сделать весь комбобокс неактивным, добавьте `disabled`.
 
 ```tsx
-import React, { useState } from 'react';
-import { List } from '@consta/uikit/ListCanary';
+import React from 'react';
+import { cnMixList, List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
@@ -449,15 +351,7 @@ const items: Item[] = [
 ];
 
 function ListExampleDisabled() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <List
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      disabled
-    />
-  );
+  return <List items={items} disabled className={cnMixList({})} />;
 }
 ```
 
@@ -475,10 +369,9 @@ function ListExampleDisabled() {
 #### Пример с кастомным элементом списка и своей функцией поиска
 
 ```tsx
-import React, { useState } from 'react';
+import React from 'react';
 import { Badge } from '@consta/uikit/Badge';
-import { cn } from '../../../../../utils/bem';
-import { List } from '@consta/uikit/ListCanary';
+import { cnMixList, List } from '@consta/uikit/ListCanary';
 
 import { cn } from '@bem-react/classname';
 
@@ -523,21 +416,12 @@ const mapStatus = {
 } as const;
 
 function ListExampleRenderItem() {
-  const [value, setValue] = useState<Item | null>();
   return (
     <List
       items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
-        <div
-          className={cnListExampleRenderItem('Item', { active, hovered })}
-          role="option"
-          aria-selected={active}
-          aria-hidden="true"
-          onMouseEnter={onMouseEnter}
-          onClick={onClick}
-        >
+      className={cnMixList({})}
+      renderItem={(item) => (
+        <div className={cnListExampleRenderItem('Item')}>
           {item.label}
           {item.status && (
             <Badge
@@ -561,7 +445,7 @@ function ListExampleRenderItem() {
 
 Вы можете использовать кастомные типы данных для элементов списка (items) и групп (groups) — они могут отличаться от [DefaultListItem](#свойства) и [DefaultListGroup](#свойства).
 
-В этом случае нужно использовать геттеры `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getItemLeftSide`, `getItemLeftIcon`, `getItemRightSide`, `getItemRightIcon`, `getGroupLabel`, `getGroupKey`, `getGroupRightSide`, чтобы компонент понимал, откуда брать данные.
+В этом случае нужно использовать геттеры `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getItemLeftSide`, `getItemLeftIcon`, `getItemRightSide`, `getItemRightIcon`, `getItemActive`, `getItemAs`, `getItemAttributes`, `getGroupLabel`, `getGroupKey`, `getGroupRightSide`, чтобы компонент понимал, откуда брать данные.
 
 #### Геттеры по умолчанию
 
@@ -574,6 +458,9 @@ const defaultGetItemLeftIcon = (item) => item.leftIcon;
 const defaultGetItemLeftSide = (item) => item.leftSide;
 const defaultGetItemRightIcon = (item) => item.rightIcon;
 const defaultGetItemRightSide = (item) => item.rightSide;
+const defaultGetItemActive = (item) => item.active;
+const defaultGetItemAs = (item) => item.as;
+const defaultGetItemAttributes = (item) => item.attributes;
 const defaultGetGroupKey = (group) => group.id;
 const defaultGetGroupLabel = (group) => group.label;
 const defaultGetGroupRightSide = (group) => group.rightSide;
@@ -582,16 +469,14 @@ const defaultGetGroupRightSide = (group) => group.rightSide;
 #### Пример с кастомным Item
 
 ```tsx
-import React, { useState } from 'react';
-import { List } from '@consta/uikit/ListCanary';
+import React from 'react';
+import { cnMixList, List } from '@consta/uikit/ListCanary';
 
 function ListExampleCustomTypes() {
-  const [value, setValue] = useState<string | null>();
   return (
     <List
       items={['Первый', 'Второй', 'Третий']}
-      value={value}
-      onChange={({ value }) => setValue(value)}
+      className={cnMixList({})}
       getItemKey={(item) => item}
       getItemLabel={(item) => item}
     />
@@ -604,7 +489,12 @@ function ListExampleCustomTypes() {
 ## Импорт
 
 ```tsx
-import { List } from '@consta/uikit/ListCanary';
+import {
+  cnMixList,
+  List,
+  ListItem,
+  ListAddItem,
+} from '@consta/uikit/ListCanary';
 ```
 
 ## Свойства
@@ -625,21 +515,18 @@ type DefaultListItem = {
   leftIcon?: IconComponent;
   rightSide?: React.ReactNode;
   rightIcon?: IconComponent;
+  active?: boolean;
+  as?: keyof JSX.IntrinsicElements;
+  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
+  onClick?: React.MouseEventHandler;
 };
 
-type ListPropValue<ITEM, MULTIPLE extends boolean> =
-  | (MULTIPLE extends true ? ITEM[] : ITEM)
-  | null
-  | undefined;
-
-type ListPropOnChange<ITEM, MULTIPLE extends boolean> = (props: {
-  value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
-  e: React.SyntheticEvent;
+type ListPropOnItemClick<ITEM> = (params: {
+  e: React.MouseEvent;
+  item: ITEM;
 }) => void;
 
-type ListPropRenderItem<ITEM> = (
-  props: RenderItemProps<ITEM>,
-) => React.ReactElement | null;
+type ListPropRenderItem<ITEM> = (item: ITEM) => React.ReactElement | null;
 
 // ITEMS
 type ListPropGetItemKey<ITEM> = (item: ITEM) => string | number;
@@ -654,6 +541,16 @@ type ListPropGetItemRightSide<ITEM> = (
   item: ITEM,
 ) => React.ReactNode | undefined;
 type ListPropGetItemRightIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
+type ListPropGetItemActive<ITEM> = (item: ITEM) => boolean | undefined;
+type ListPropGetItemAs<ITEM> = (
+  item: ITEM,
+) => keyof JSX.IntrinsicElements | undefined;
+type ListPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements] | undefined;
+type ListPropGetItemOnClick<ITEM> = (
+  item: ITEM,
+) => React.MouseEventHandler | undefined;
 
 // GROUPS
 type ListPropGetGroupKey<GROUP> = (item: GROUP) => string | number;
@@ -668,23 +565,25 @@ type ListPropGetGroupRightSide<GROUP> = (
 | [`disabled?`](#отключение-поля-ввода)                   | `boolean`                                              | -                            | Делает компонент недоступным                                           |
 | [`size?`](#размер)                                      | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                        | Размер компонента                                                      |
 | [`form?`](#форма)                                       | `default`, `brick`, `round`                            | `default`                    | Форма компонента                                                       |
+| `onItemClick?`                                          | `ListPropOnItemClick<ITEM>`                            | -                            | Функция обработчик события нажатия на элемент                          |
 | [`items`](#варианты)                                    | `ITEM[]`                                               | -                            | Варианты                                                               |
-| [`value?`](#значение)                                   | `PropValue<ITEM,MULTIPLE>`                             | -                            | Значение селекта                                                       |
-| [`onChange?`](#onchange)                                | `PropOnChange<ITEM,MULTIPLE>`                          | -                            | Обработчик события изменения значения компонента                       |
-| [`multiple?`](#множественный-выбор)                     | `boolean`                                              | `fasle`                      | Указатель множественного выбора                                        |
 | [`groups?`](#группировка-списка)                        | `GROUP[]`                                              | -                            | Группы                                                                 |
-| [`renderItem?`](#свое-представление-элемента-списка)    | `PropRenderItem<ITEM>`                                 | рендер по умолчанию          | Рендер-функция для элемента списка                                     |
-| [`getItemLabel?`](#свои-тип-данных-items-и-groups)      | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`       | Функция для определения названия элемента                              |
-| [`getItemKey?`](#свои-тип-данных-items-и-groups)        | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`          | Функция для определения уникального ключа элемента                     |
-| [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)   | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`     | Функция для определения ключа группы, к которой будет привязан элемент |
-| [`getItemDisabled?`](#свои-тип-данных-items-и-groups)   | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled`    | Функция для определения состояния `disabled`                           |
-| [`getItemLeftIcon?`](#свои-тип-данных-items-и-groups)   | `PropGetItemLeftIcon<ITEM>`                            | `(item) => item.leftIcon`    | Функция для определения левой иконки                                   |
-| [`getItemLeftSide?`](#свои-тип-данных-items-и-groups)   | `PropGetItemLeftSide<ITEM>`                            | `(item) => item.leftSide`    | Функция для определения контента с левой стороны                       |
-| [`getItemRightIcon?`](#свои-тип-данных-items-и-groups)  | `PropGetItemRightIcon<ITEM>`                           | `(item) => item.rightIcon`   | Функция для определения правой иконки                                  |
-| [`getItemRightSide?`](#свои-тип-данных-items-и-groups)  | `PropGetItemRightSideITEM>`                            | `(item) => item.rightSide`   | Функция для определения контента с правой стороны                      |
-| [`getGroupLabel?`](#свои-тип-данных-items-и-groups)     | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`        | Функция для определения названия группы                                |
-| [`getGroupKey?`](#свои-тип-данных-items-и-groups)       | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`     | Функция для определения уникального ключа группы                       |
-| [`getGroupRightSide?`](#свои-тип-данных-items-и-groups) | `PropGetGroupRightSide<GROUP>`                         | `(group) => group.rightSide` | Функция для определения контента с правой стороны                      |
+| [`renderItem?`](#свое-представление-элемента-списка)    | `ListPropRenderItem<ITEM>`                             | рендер по умолчанию          | Рендер-функция для элемента списка                                     |
+| [`getItemLabel?`](#свои-тип-данных-items-и-groups)      | `ListPropGetItemLabel<ITEM>`                           | `(item) => item.label`       | Функция для определения названия элемента                              |
+| [`getItemKey?`](#свои-тип-данных-items-и-groups)        | `ListPropGetItemKey<ITEM>`                             | `(item) => item.id`          | Функция для определения уникального ключа элемента                     |
+| [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemGroupKey<ITEM>`                        | `(item) => item.groupId`     | Функция для определения ключа группы, к которой будет привязан элемент |
+| [`getItemDisabled?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemDisabled<ITEM>`                        | `(item) => item.disabled`    | Функция для определения состояния `disabled`                           |
+| [`getItemLeftIcon?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemLeftIcon<ITEM>`                        | `(item) => item.leftIcon`    | Функция для определения левой иконки                                   |
+| [`getItemLeftSide?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemLeftSide<ITEM>`                        | `(item) => item.leftSide`    | Функция для определения контента с левой стороны                       |
+| [`getItemRightIcon?`](#свои-тип-данных-items-и-groups)  | `ListPropGetItemRightIcon<ITEM>`                       | `(item) => item.rightIcon`   | Функция для определения правой иконки                                  |
+| [`getItemRightSide?`](#свои-тип-данных-items-и-groups)  | `ListPropGetItemRightSide<ITEM>`                       | `(item) => item.rightSide`   | Функция для определения контента с правой стороны                      |
+| `getItemOnClick?`                                       | `ListPropGetItemOnClick<ITEM>`                         | `(item) => item.onClick`     | Функция обработчик события нажатия на элемент                          |
+| `getItemActive?`                                        | `ListPropGetItemActive<ITEM>`                          | `(item) => item.active`      | Функция для определения активен ли элемент                             |
+| `getItemRightAs?`                                       | `ListPropGetItemAs<ITEM>`                              | `(item) => item.as`          | Функция для определения HTML-тега для рендера элемента                 |
+| `getItemRightAttributes?`                               | `ListPropGetItemAtrributes<ITEM>`                      | `(item) => item.attributes`  | Функция для определения атрибутов элемента                             |
+| [`getGroupLabel?`](#свои-тип-данных-items-и-groups)     | `ListPropGetGroupKey<GROUP>`                           | `(group) => group.id`        | Функция для определения названия группы                                |
+| [`getGroupKey?`](#свои-тип-данных-items-и-groups)       | `ListPropGetGroupLabel<GROUP>`                         | `(group) => group.label`     | Функция для определения уникального ключа группы                       |
+| [`getGroupRightSide?`](#свои-тип-данных-items-и-groups) | `ListPropGetGroupRightSide<GROUP>`                     | `(group) => group.rightSide` | Функция для определения контента с правой стороны                      |
 | `isLoading?`                                            | `boolean`                                              | -                            | При `true` будет отображаться лоудер загрузки                          |
 | `onBlur?`                                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                            | Обработчик события `blur`                                              |
 | `onFocus?`                                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                            | Обработчик события `focus`                                             |

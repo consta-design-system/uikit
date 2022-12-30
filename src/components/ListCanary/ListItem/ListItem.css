@@ -7,15 +7,18 @@
   box-sizing: border-box;
   width: 100%;
   padding: var(--list-item-vertical-space) var(--list-item-horizontal-space);
-  color: var(--list-item-color);
   background: var(--color-control-bg-clear);
   word-wrap: break-word;
   cursor: pointer;
   transition: color 0.3s;
+  gap: var(--space-xs);
+
+  &.Text {
+    color: var(--list-item-color);
+  }
 
   &_size {
     &_xs {
-      --list-item-font-size: var(--size-text-xs);
       --list-item-vertical-space: calc(var(--control-space-s) / 4);
       --list-item-horizontal-space: calc(var(--control-space-s) / 2);
 
@@ -25,7 +28,6 @@
     }
 
     &_s {
-      --list-item-font-size: var(--size-text-s);
       --list-item-vertical-space: calc(var(--control-space-s) / 4);
       --list-item-horizontal-space: calc(var(--control-space-s) / 2);
 
@@ -35,7 +37,6 @@
     }
 
     &_m {
-      --list-item-font-size: var(--size-text-m);
       --list-item-vertical-space: calc(var(--control-space-s) / 2);
       --list-item-horizontal-space: var(--control-space-xs);
 
@@ -45,7 +46,6 @@
     }
 
     &_l {
-      --list-item-font-size: var(--size-text-l);
       --list-item-vertical-space: calc(var(--control-space-s) / 2);
       --list-item-horizontal-space: var(--control-space-xs);
 
@@ -53,6 +53,21 @@
         --list-item-horizontal-space: var(--control-space-m);
       }
     }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--space-3xs);
+    background-color: transparent;
+    transition: background-color 0.2 ease-in;
+  }
+
+  &_active::before {
+    background-color: var(--list-item-color);
   }
 
   &_active {
@@ -64,23 +79,8 @@
     cursor: auto;
   }
 
-  &_hovered {
+  &:hover {
     background-color: var(--color-control-bg-clear-hover);
-  }
-
-  &:not(&_multiple)::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: var(--space-3xs);
-    background-color: transparent;
-    transition: background-color 0.2 ease-in;
-  }
-
-  &:not(&_multiple)&_active::before {
-    background-color: var(--list-item-color);
   }
 
   &-Icon {
@@ -88,20 +88,23 @@
   }
 
   &-Label {
-    font-size: var(--list-item-font-size);
-    line-height: var(--line-height-text-xs);
+    flex: 1;
     word-wrap: break-word;
   }
 
-  &-Block {
-    display: inline-flex;
-    justify-content: center;
+  &-Slot {
+    display: flex;
     align-items: center;
-    gap: var(--space-s);
 
-    &_position_left {
-      & > .ListItem-Label:not(:first-child) {
-        margin-left: calc(0 - var(--space-2xs));
+    &_position {
+      &_left,
+      &_right {
+        flex: 0;
+        width: max-content;
+      }
+
+      &_center {
+        flex: 1;
       }
     }
   }

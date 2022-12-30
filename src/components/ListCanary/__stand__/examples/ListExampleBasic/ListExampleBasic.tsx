@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { Example } from '@consta/stand';
+import React from 'react';
 
-import { List } from '##/components/ListCanary/ListCanary';
+import { cnMixList, List } from '##/components/ListCanary';
 
 type Item = { id: number; label: string };
 const items: Item[] = [
@@ -18,12 +19,9 @@ const items: Item[] = [
   },
 ];
 export const ListExampleBasic = () => {
-  const [value, setValue] = useState<Item | null>(null);
   return (
-    <List
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-    />
+    <Example>
+      <List items={items} className={cnMixList({})} />
+    </Example>
   );
 };

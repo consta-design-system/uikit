@@ -1,14 +1,8 @@
-import './ListExampleSize.css';
+import { Example } from '@consta/stand';
+import React from 'react';
 
-import React, { useState } from 'react';
-
-import { List } from '##/components/ListCanary';
+import { cnMixList, List } from '##/components/ListCanary';
 import { Text } from '##/components/Text';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
-import { cn } from '##/utils/bem';
-
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 
 type Item = {
   label: string;
@@ -30,53 +24,25 @@ const items: Item[] = [
   },
 ];
 
-const cnListExampleSize = cn('ListExampleSize');
-
 export const ListExampleSize = () => {
-  const [value, setValue] = useState<Item | null>(null);
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [
-        wp.decorator({ distribute: 'left' }),
-        cnListExampleSize(),
-      ])}
-    >
+    <Example col={{ 1: 0, flex: 600 }}>
       <div>
         <Text>xs</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          size="xs"
-        />
+        <List items={items} size="xs" className={cnMixList({})} />
       </div>
       <div>
         <Text>s</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          size="s"
-        />
+        <List items={items} size="s" className={cnMixList({})} />
       </div>
       <div>
         <Text>m</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          size="m"
-        />
+        <List items={items} size="m" className={cnMixList({})} />
       </div>
       <div>
         <Text>l</Text>
-        <List
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          size="l"
-        />
+        <List items={items} size="l" className={cnMixList({})} />
       </div>
-    </StoryBookExample>
+    </Example>
   );
 };

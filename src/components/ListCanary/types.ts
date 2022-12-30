@@ -1,9 +1,8 @@
 import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
+import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
-
-import { RenderItemProps } from '../SelectComponents/types';
 
 export const listPropForm = ['default', 'brick', 'round'] as const;
 export type ListPropForm = typeof listPropForm[number];
@@ -23,31 +22,31 @@ export type DefaultListItem = {
   id: string | number;
   label: string;
   disabled?: boolean;
+  active?: boolean;
   groupId?: string | number;
   leftSide?: React.ReactNode;
   leftIcon?: IconComponent;
   rightSide?: React.ReactNode;
   rightIcon?: IconComponent;
+  onClick?: React.MouseEventHandler;
+  as?: keyof JSX.IntrinsicElements;
+  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
 };
 
-export type ListPropValue<ITEM, MULTIPLE extends boolean> =
-  | (MULTIPLE extends true ? ITEM[] : ITEM)
-  | null
-  | undefined;
-
-export type ListPropOnChange<ITEM, MULTIPLE extends boolean> = (props: {
-  value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
-  e: React.SyntheticEvent;
+export type ListPropOnItemClick<ITEM> = (params: {
+  e: React.MouseEvent;
+  item: ITEM;
 }) => void;
 
 export type ListPropRenderItem<ITEM> = (
-  props: RenderItemProps<ITEM>,
+  item: ITEM,
 ) => React.ReactElement | null;
 
 // ITEMS
 export type ListPropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type ListPropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type ListPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+export type ListPropGetItemActive<ITEM> = (item: ITEM) => boolean | undefined;
 export type ListPropGetItemGroupId<ITEM> = (
   item: ITEM,
 ) => string | number | undefined;
@@ -63,6 +62,15 @@ export type ListPropGetItemRightSide<ITEM> = (
 export type ListPropGetItemRightIcon<ITEM> = (
   item: ITEM,
 ) => IconComponent | undefined;
+export type ListPropGetItemAs<ITEM> = (
+  item: ITEM,
+) => keyof JSX.IntrinsicElements | undefined;
+export type ListPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements] | undefined;
+export type ListPropGetItemOnClick<ITEM> = (
+  item: ITEM,
+) => React.MouseEventHandler | undefined;
 
 // GROUPS
 export type ListPropGetGroupKey<GROUP> = (item: GROUP) => string | number;
@@ -74,23 +82,24 @@ export type ListPropGetGroupRightSide<GROUP> = (
 export type ListProps<
   ITEM = DefaultListItem,
   GROUP = DefaultListGroup,
-  MULTIPLE extends boolean = false,
 > = PropsWithHTMLAttributesAndRef<
   {
     size?: ListPropSize;
     form?: ListPropForm;
-    multiple?: MULTIPLE;
-    value?: ListPropValue<ITEM, MULTIPLE>;
-    onChange?: ListPropOnChange<ITEM, MULTIPLE>;
     items: ITEM[];
+    onItemClick?: ListPropOnItemClick<ITEM>;
     getItemKey?: ListPropGetItemKey<ITEM>;
     getItemLabel?: ListPropGetItemLabel<ITEM>;
     getItemDisabled?: ListPropGetItemDisabled<ITEM>;
+    getItemActive?: ListPropGetItemActive<ITEM>;
     getItemLeftSide?: ListPropGetItemLeftSide<ITEM>;
     getItemLeftIcon?: ListPropGetItemLeftIcon<ITEM>;
     getItemRightSide?: ListPropGetItemRightSide<ITEM>;
     getItemRightIcon?: ListPropGetItemRightIcon<ITEM>;
     getItemGroupKey?: ListPropGetItemGroupId<ITEM>;
+    getItemOnClick?: ListPropGetItemOnClick<ITEM>;
+    getItemAs?: ListPropGetItemAs<ITEM>;
+    getItemAttributes?: ListPropGetItemAttributes<ITEM>;
     renderItem?: ListPropRenderItem<ITEM>;
     groups?: GROUP[];
     getGroupKey?: ListPropGetGroupKey<GROUP>;
@@ -114,24 +123,27 @@ export type ListProps<
     ? {}
     : { getGroupKey: ListPropGetGroupKey<GROUP> });
 
-export type ListComponent = <
-  ITEM = DefaultListItem,
-  GROUP = DefaultListGroup,
-  MULTIPLE extends boolean = false,
->(
-  props: ListProps<ITEM, GROUP, MULTIPLE>,
+export type ListComponent = <ITEM = DefaultListItem, GROUP = DefaultListGroup>(
+  props: ListProps<ITEM, GROUP>,
 ) => React.ReactElement | null;
 
-export type ListItemProps = PropsWithHTMLAttributesAndRef<
-  Omit<DefaultListItem, 'id' | 'groupId'> & {
-    active?: boolean;
-    hovered?: boolean;
-    multiple?: boolean;
-    size?: ListPropSize;
-    indent?: 'normal' | 'increased';
-  },
-  HTMLDivElement
->;
+export type ListItemProps<AS extends keyof JSX.IntrinsicElements = 'div'> =
+  PropsWithAsAttributes<
+    Omit<DefaultListItem, 'id' | 'groupId' | 'attributes' | 'onClick'> & {
+      active?: boolean;
+      size?: ListPropSize;
+      indent?: 'normal' | 'increased';
+    },
+    AS
+  > &
+    React.RefAttributes<HTMLDivElement>;
+
+export type ListItemComponent = <
+  AS extends keyof JSX.IntrinsicElements = 'div',
+>(
+  props: ListItemProps<AS>,
+  ref: React.Ref<HTMLElement>,
+) => React.ReactElement | null;
 
 export type ListGroupLabelProps = PropsWithHTMLAttributesAndRef<
   {

@@ -1,11 +1,10 @@
 import './ListExampleRenderItem.css';
 
-import React, { useState } from 'react';
+import { Example } from '@consta/stand';
+import React from 'react';
 
 import { Badge } from '##/components/Badge';
-import { List } from '##/components/ListCanary/ListCanary';
-import { cnDocsDecorator } from '##/uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
+import { cnMixList, List } from '##/components/ListCanary';
 import { cn } from '##/utils/bem';
 
 const cnListExampleRenderItem = cn('ListExampleRenderItem');
@@ -49,22 +48,13 @@ const mapStatus = {
 } as const;
 
 export const ListExampleRenderItem = () => {
-  const [value, setValue] = useState<Item | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <List
-        value={value}
-        onChange={({ value }) => setValue(value)}
+        className={cnListExampleRenderItem(null, [cnMixList({})])}
         items={items}
-        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
-          <div
-            className={cnListExampleRenderItem('Item', { active, hovered })}
-            role="option"
-            aria-selected={active}
-            aria-hidden="true"
-            onMouseEnter={onMouseEnter}
-            onClick={onClick}
-          >
+        renderItem={(item) => (
+          <div className={cnListExampleRenderItem('Item')}>
             {item.label}
             {item.status && (
               <Badge
@@ -78,6 +68,6 @@ export const ListExampleRenderItem = () => {
           </div>
         )}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

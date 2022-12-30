@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { Example } from '@consta/stand';
+import React from 'react';
 
-import { List } from '##/components/ListCanary';
+import { cnMixList, List } from '##/components/ListCanary';
 import { Text } from '##/components/Text';
-import { cnDocsDecorator } from '##/uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
 
 type Item = {
   label: string;
@@ -66,15 +65,9 @@ const items: Item[] = [
 ];
 
 export const ListExampleGroups = () => {
-  const [value, setValue] = useState<Item | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <List
-        value={value}
-        items={items}
-        groups={groups}
-        onChange={({ value }) => setValue(value)}
-      />
-    </StoryBookExample>
+    <Example>
+      <List className={cnMixList({})} items={items} groups={groups} />
+    </Example>
   );
 };

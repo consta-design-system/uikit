@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import { Example } from '@consta/stand';
+import React from 'react';
 
-import { List } from '##/components/ListCanary/ListCanary';
-import { cnDocsDecorator } from '##/uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '##/uiKit/components/StoryBookExample/StoryBookExample';
+import { cnMixList, List } from '##/components/ListCanary';
 
 export const ListExampleCustomTypes = () => {
-  const [value, setValue] = useState<string | null>(null);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <List
-        value={value}
-        onChange={({ value }) => setValue(value)}
+        className={cnMixList({})}
         items={['Первый', 'Второй', 'Третий']}
         getItemKey={(item) => item}
         getItemLabel={(item) => item}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

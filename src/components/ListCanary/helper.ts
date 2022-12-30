@@ -4,12 +4,16 @@ import {
   ListPropGetGroupKey,
   ListPropGetGroupLabel,
   ListPropGetGroupRightSide,
+  ListPropGetItemActive,
+  ListPropGetItemAs,
+  ListPropGetItemAttributes,
   ListPropGetItemDisabled,
   ListPropGetItemGroupId,
   ListPropGetItemKey,
   ListPropGetItemLabel,
   ListPropGetItemLeftIcon,
   ListPropGetItemLeftSide,
+  ListPropGetItemOnClick,
   ListPropGetItemRightIcon,
   ListPropGetItemRightSide,
   ListProps,
@@ -22,6 +26,8 @@ const defaultGetItemLabel: ListPropGetItemLabel<DefaultListItem> = (item) =>
 const defaultGetItemDisabled: ListPropGetItemDisabled<DefaultListItem> = (
   item,
 ) => item.disabled;
+const defaultGetItemActive: ListPropGetItemActive<DefaultListItem> = (item) =>
+  item.active;
 const defaultGetItemGroupKey: ListPropGetItemGroupId<DefaultListItem> = (
   item,
 ) => item.groupId;
@@ -37,6 +43,12 @@ const defaultGetItemRightSide: ListPropGetItemRightSide<DefaultListItem> = (
 const defaultGetItemRightIcon: ListPropGetItemRightIcon<DefaultListItem> = (
   item,
 ) => item.rightIcon;
+const defaultGetItemAs: ListPropGetItemAs<DefaultListItem> = (item) => item.as;
+const defaultGetItemAttributes: ListPropGetItemAttributes<DefaultListItem> = (
+  item,
+) => item.attributes;
+const defaultGetItemOnClick: ListPropGetItemOnClick<DefaultListItem> = (item) =>
+  item.onClick;
 
 const defaultGetGroupKey: ListPropGetGroupKey<DefaultListGroup> = (group) =>
   group.id;
@@ -46,35 +58,26 @@ const defaultGetGroupRightSide: ListPropGetGroupRightSide<DefaultListGroup> = (
   group,
 ) => group.rightSide;
 
-export const isMultipleParams = <ITEM, GROUP>(
-  props: ListProps<ITEM, GROUP, boolean>,
-): props is ListProps<ITEM, GROUP, true> => {
-  return !!props.multiple;
-};
-
-export const isNotMultipleParams = <ITEM, GROUP>(
-  props: ListProps<ITEM, GROUP, boolean>,
-): props is ListProps<ITEM, GROUP, false> => {
-  return !props.multiple;
-};
-
 export function withDefaultGetters<
   ITEM = DefaultListItem,
   GROUP = DefaultListGroup,
-  MULTIPLE extends boolean = false,
->(props: ListProps<ITEM, GROUP, MULTIPLE>) {
+>(props: ListProps<ITEM, GROUP>) {
   return {
     ...props,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
     getItemKey: props.getItemKey || defaultGetItemKey,
     getItemGroupKey: props.getItemGroupKey || defaultGetItemGroupKey,
+    getItemActive: props.getItemActive || defaultGetItemActive,
     getItemDisabled: props.getItemDisabled || defaultGetItemDisabled,
     getItemLeftSide: props.getItemLeftSide || defaultGetItemLeftSide,
     getItemLeftIcon: props.getItemLeftIcon || defaultGetItemLeftIcon,
     getItemRightSide: props.getItemRightSide || defaultGetItemRightSide,
     getItemRightIcon: props.getItemRightIcon || defaultGetItemRightIcon,
+    getItemOnClick: props.getItemOnClick || defaultGetItemOnClick,
     getGroupLabel: props.getGroupLabel || defaultGetGroupLabel,
     getGroupKey: props.getGroupKey || defaultGetGroupKey,
     getGroupRightSide: props.getGroupRightSide || defaultGetGroupRightSide,
+    getItemAs: props.getItemAs || defaultGetItemAs,
+    getItemAttributes: props.getItemAttributes || defaultGetItemAttributes,
   };
 }
