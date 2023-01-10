@@ -1,10 +1,10 @@
+import { IconComponent } from '@consta/icons/Icon';
+import { IconAllDone } from '@consta/icons/IconAllDone';
+import { IconAttach } from '@consta/icons/IconAttach';
+import { IconBag } from '@consta/icons/IconBag';
 import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
-import { IconComponent } from '../../../../../icons/Icon/Icon';
-import { IconAllDone } from '../../../../../icons/IconAllDone/IconAllDone';
-import { IconAttach } from '../../../../../icons/IconAttach/IconAttach';
-import { IconBag } from '../../../../../icons/IconBag/IconBag';
 import { Button } from '../../../../Button/Button';
 import { ContextMenu } from '../../../ContextMenu';
 

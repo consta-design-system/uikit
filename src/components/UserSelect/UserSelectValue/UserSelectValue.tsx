@@ -1,8 +1,8 @@
 import './UserSelectValue.css';
 
+import { IconClose } from '@consta/icons/IconClose';
 import React from 'react';
 
-import { IconClose } from '../../../icons/IconClose/IconClose';
 import { cn } from '../../../utils/bem';
 import { User } from '../../User/User';
 

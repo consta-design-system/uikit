@@ -1,5 +1,27 @@
 # Changelog
 
+## v4.6.3 (28/12/2022)
+Самое важное:
+- добавлена документация для `useComponentSize`
+- в useFlag исправили опечатку в методе `toggle`
+- в ProgressLine исправили проброс `classname`
+- все компоненты теперь используют иконки из `@consta/icons`
+- в `DateTime` исправили падеж названия месяцев
+- исправили логику отображения линии в `ProgressStepBar`
+---
+
+- [docs(useComponentSize): fix orthography](https://github.com/consta-design-system/uikit/commit/2cf35abc4fed15bfb25470a56d984c2b34672ca6) - [@N1MBER](https://github.com/N1MBER)
+- [fix(useFlag): rewrite toogle to toggle (#2836)](https://github.com/consta-design-system/uikit/commit/0d0e7be682f268c45b0f29a2629b24244a013fec) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ProgressLine): fix classname (#2844)](https://github.com/consta-design-system/uikit/commit/a29961f94cf086e7914b8d44691a666bdfda401d) - [@N1MBER](https://github.com/N1MBER)
+- [refactor(Icons): rewrite uikit icons to icons from @consta/icons (#2818)](https://github.com/consta-design-system/uikit/commit/991e0da199ab52e581dc55ca33bde5a537a61c8f) - [@N1MBER](https://github.com/N1MBER)
+- [docs(ContextMenu): add example of usage getItemOnClick (#2838)](https://github.com/consta-design-system/uikit/commit/a9667b84fb2ed86cf6b81e3b064cf8ca9085de4c) - [@N1MBER](https://github.com/N1MBER)
+- [fix(DateTime): fix month name (#2835)](https://github.com/consta-design-system/uikit/commit/56d1e22caa2b6085c93db842423603c8af764874) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Snackbar, UserSelect): rewrite CssTransition to Transition (#2806)](https://github.com/consta-design-system/uikit/commit/ac4c086be881f18c1725a9a16592ebca5c05e659) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ProgressStepBar): fix line width for activeIndex (#2831)](https://github.com/consta-design-system/uikit/commit/e03047754dfed66245a37ab27072e0bf6fc3c89b) - [@N1MBER](https://github.com/N1MBER)
+- [docs(useComponentSize): add documentation for useComponentSize hook and also add sandbox for it (#2815)](https://github.com/consta-design-system/uikit/commit/14b9ea8faefba56892dc28fd3200d4906cfdb6ec) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.6.2 (23/12/2022)
 Самое важное:
 - Скрыли браузерный "глаз" в `TextField` c `type="password"`
@@ -413,20 +435,3 @@ UserSelectDeprecated
 
 - [feat(fonts): add Inter (#2290)](https://github.com/consta-design-system/uikit/commit/ce494da31323a3e85c799d6c65131e8b2a24871f) - [@gizeasy](https://github.com/gizeasy)
 - [docs(review): add MixPlot and agGridAdapter (#2289)](https://github.com/consta-design-system/uikit/commit/d445c058c4f6085ad962775e54a850d635d16d6c) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v3.22.0 (04/05/2022)
-Самое важное:
-
-- в `DatePicker` добавили новые типы "month" и "month-range". Они позволяют выбирать дату или диапазон дат с точностью до месяца.
-- Обновлена документация, добавлены разделы про адаптивность компоненов.
---- 
-
-- [docs(Table): add adaptive section (#2278)](https://github.com/consta-design-system/uikit/commit/997a3e7594f8c4331599615734c2a0653ed3df46) - [@arhayka](https://github.com/arhayka)
-- [docs(Header): fix typo in doc Heder —> Header (#2275)](https://github.com/consta-design-system/uikit/commit/e42f4287a8fca24143eceaf6d7e036e68cbcfd21) - [@arhayka](https://github.com/arhayka)
-- [docs(ProgressStepBar): add adaptive section (#2270)](https://github.com/consta-design-system/uikit/commit/3c455be69f53aeacf01769daff107f6df3fc8f27) - [@arhayka](https://github.com/arhayka)
-- [fix(Select): fix height on multiple mode (#2267)](https://github.com/consta-design-system/uikit/commit/09ea6155c48a685286469bf586dd861b2056e7b2) - [@N1MBER](https://github.com/N1MBER)
-- [feat(DatePickerTypeMonth): add new types month and month-range (#2265)](https://github.com/consta-design-system/uikit/commit/23af903b43fcd346d20a6d4c700ae978f5b1bcac) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Steps): add adaptive (#2266)](https://github.com/consta-design-system/uikit/commit/e3d366c0b3fb6c37e093ff5139c00e99ec9950e0) - [@arhayka](https://github.com/arhayka)
-- [docs(Snackbar): add adaptive section (#2261)](https://github.com/consta-design-system/uikit/commit/7007668663c11e1d572cd3c8d6513448e3332296) - [@arhayka](https://github.com/arhayka)

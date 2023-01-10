@@ -1,8 +1,8 @@
+import { IconComponent } from '@consta/icons/Icon';
+import { IconInfo } from '@consta/icons/IconInfo';
 import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
-import { IconComponent } from '../../../../../icons/Icon/Icon';
-import { IconInfo } from '../../../../../icons/IconInfo/IconInfo';
 import { Badge } from '../../../../Badge/Badge';
 import { Button } from '../../../../Button/Button';
 import { Switch } from '../../../../Switch/Switch';

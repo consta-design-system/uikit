@@ -1,11 +1,11 @@
+import { IconComponent } from '@consta/icons/Icon';
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconInfo } from '@consta/icons/IconInfo';
 import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
 import { useFlag } from '##/hooks/useFlag';
 
-import { IconComponent } from '../../../../../icons/Icon/Icon';
-import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
-import { IconInfo } from '../../../../../icons/IconInfo/IconInfo';
 import { Badge } from '../../../../Badge/Badge';
 import { Button } from '../../../../Button/Button';
 import { Switch } from '../../../../Switch/Switch';
@@ -85,7 +85,7 @@ export const ContextMenuExampleSide = () => {
   return (
     <>
       <Example>
-        <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toogle} />
+        <Button iconLeft={IconAdd} ref={ref} onClick={setIsOpen.toggle} />
       </Example>
       {isOpen && (
         <ContextMenu

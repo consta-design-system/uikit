@@ -69,42 +69,28 @@
     border-radius: 50%;
 
     &_animate {
-      &_appear,
-      &_appearActive,
-      &_appearDone,
-      &_enter,
-      &_enterActive,
-      &_enterDone,
-      &_exit,
-      &_exitActive,
-      &_exitDone {
+      &_entering,
+      &_entered,
+      &_exiting,
+      &_exited {
         transition: 0.2s ease;
         transition-property: opacity, transform;
       }
 
-      &_appear,
-      &_enter {
-        opacity: 0;
-        transform: scale(0.25);
-      }
-
-      &_enterActive,
-      &_appearActive,
-      &_appearDone,
-      &_enterDone {
+      &_entering,
+      &_entered {
         opacity: 1;
         transform: scale(1);
       }
 
-      &_exit {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      &_exitActive,
-      &_exitDone {
+      &_exiting {
         opacity: 0;
         transform: scale(0.25);
+      }
+
+      &_exited {
+        opacity: 0;
+        transform: scale(0);
       }
     }
   }

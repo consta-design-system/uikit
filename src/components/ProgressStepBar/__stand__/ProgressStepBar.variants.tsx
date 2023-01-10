@@ -1,8 +1,8 @@
+import { IconCheck } from '@consta/icons/IconCheck';
+import { IconClose } from '@consta/icons/IconClose';
 import { useSelect } from '@consta/stand';
 import React from 'react';
 
-import { IconCheck } from '../../../icons/IconCheck/IconCheck';
-import { IconClose } from '../../../icons/IconClose/IconClose';
 import {
   propDirection,
   propDirectionDefault,
@@ -46,7 +46,7 @@ const stepsExample = [
 const Variants = () => {
   const size = useSelect('size', propSize, propSizeDefault);
   const direction = useSelect('direction', propDirection, propDirectionDefault);
-  const activeStepIndex = useSelect('activeStepIndex', [0, 1, 2, 3], 3);
+  const activeStepIndex = useSelect('activeStepIndex', [-1, 0, 1, 2, 3], 3);
 
   return (
     <ProgressStepBar

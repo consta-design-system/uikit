@@ -1,4 +1,5 @@
-import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
+
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type ChoiceGroupDefaultItem = {

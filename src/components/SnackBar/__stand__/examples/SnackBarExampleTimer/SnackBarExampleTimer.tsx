@@ -1,12 +1,12 @@
 import './SnackBarExampleTimer.css';
 
+import { IconComponent } from '@consta/icons/Icon';
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconAlert } from '@consta/icons/IconAlert';
+import { IconRing } from '@consta/icons/IconRing';
 import { Example } from '@consta/stand';
 import React, { useReducer } from 'react';
 
-import { IconComponent } from '../../../../../icons/Icon/Icon';
-import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
-import { IconAlert } from '../../../../../icons/IconAlert/IconAlert';
-import { IconRing } from '../../../../../icons/IconRing/IconRing';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { SnackBar } from '../../../SnackBar';

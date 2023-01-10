@@ -31,7 +31,7 @@ const Variants = () => {
         <Button
           label="Нажмите меня"
           type="button"
-          onClick={setOpen.toogle}
+          onClick={setOpen.toggle}
           ref={anchorRef}
         />
       </div>

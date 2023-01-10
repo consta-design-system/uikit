@@ -1,9 +1,9 @@
 import './Informer.css';
 
 import { classnames } from '@bem-react/classnames';
+import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
-import { IconComponent } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { Text } from '../Text/Text';

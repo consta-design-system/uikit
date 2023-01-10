@@ -1,7 +1,8 @@
-import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconLightningBolt } from '../../../icons/IconLightningBolt/IconLightningBolt';
-import { IconMoon } from '../../../icons/IconMoon/IconMoon';
-import { IconSun } from '../../../icons/IconSun/IconSun';
+import { IconComponent } from '@consta/icons/Icon';
+import { IconLightningBolt } from '@consta/icons/IconLightningBolt';
+import { IconMoon } from '@consta/icons/IconMoon';
+import { IconSun } from '@consta/icons/IconSun';
+
 import { presetGpnDisplay } from '../../Theme/presets/presetGpnDisplay';
 import {
   presetGpnDark,

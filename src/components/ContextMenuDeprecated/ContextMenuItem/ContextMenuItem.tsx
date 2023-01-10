@@ -1,8 +1,8 @@
 import './ContextMenuItem.css';
 
+import { IconArrowRight } from '@consta/icons/IconArrowRight';
 import React, { forwardRef } from 'react';
 
-import { IconArrowRight } from '../../../icons/IconArrowRight/IconArrowRight';
 import { cn } from '../../../utils/bem';
 import { Text } from '../../Text/Text';
 import {

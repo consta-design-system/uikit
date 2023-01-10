@@ -1,8 +1,8 @@
+import { IconSelect } from '@consta/icons/IconSelect';
+import { IconUser } from '@consta/icons/IconUser';
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React from 'react';
 
-import { IconSelect } from '../../../icons/IconSelect/IconSelect';
-import { IconUser } from '../../../icons/IconUser/IconUser';
 import {
   Button,
   buttonPropForm,

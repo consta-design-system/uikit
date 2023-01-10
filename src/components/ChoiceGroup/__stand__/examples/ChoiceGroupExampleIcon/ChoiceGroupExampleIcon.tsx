@@ -1,10 +1,9 @@
+import { IconComponent } from '@consta/icons/Icon';
+import { IconCamera } from '@consta/icons/IconCamera';
+import { IconPhoto } from '@consta/icons/IconPhoto';
+import { IconRing } from '@consta/icons/IconRing';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
-
-import { IconComponent } from '##/icons/Icon';
-import { IconCamera } from '##/icons/IconCamera';
-import { IconPhoto } from '##/icons/IconPhoto';
-import { IconRing } from '##/icons/IconRing';
 
 import { ChoiceGroup } from '../../../ChoiceGroup';
 

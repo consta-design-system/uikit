@@ -1,7 +1,7 @@
+import { IconDiamond } from '@consta/icons/IconDiamond';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { IconDiamond } from '../../../../../icons/IconDiamond/IconDiamond';
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleTextPlaceholder = () => {

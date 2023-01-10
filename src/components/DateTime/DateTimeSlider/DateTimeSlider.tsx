@@ -1,8 +1,8 @@
 import './DateTimeSlider.css';
 
+import { IconForward } from '@consta/icons/IconForward';
 import React from 'react';
 
-import { IconForward } from '../../../icons/IconForward/IconForward';
 import { cn } from '../../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../../Button/Button';

@@ -1,8 +1,8 @@
+import { IconMoon } from '@consta/icons/IconMoon';
+import { IconSun } from '@consta/icons/IconSun';
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { IconMoon } from '../../../../../icons/IconMoon/IconMoon';
-import { IconSun } from '../../../../../icons/IconSun/IconSun';
 import { Tag } from '../../../Tag';
 
 export const TagExampleIcon = () => (

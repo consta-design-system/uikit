@@ -1,8 +1,8 @@
+import { IconDisconnection } from '@consta/icons/IconDisconnection';
+import { IconMoon } from '@consta/icons/IconMoon';
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { IconDisconnection } from '../../../../../icons/IconDisconnection/IconDisconnection';
-import { IconMoon } from '../../../../../icons/IconMoon/IconMoon';
 import { SnackBar } from '../../../SnackBar';
 
 type Item = {

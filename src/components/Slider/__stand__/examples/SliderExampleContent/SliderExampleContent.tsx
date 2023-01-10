@@ -1,7 +1,7 @@
+import { IconSettings } from '@consta/icons/IconSettings';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { IconSettings } from '../../../../../icons/IconSettings/IconSettings';
 import { Slider } from '../../../Slider';
 
 export const SliderExampleContent = () => {

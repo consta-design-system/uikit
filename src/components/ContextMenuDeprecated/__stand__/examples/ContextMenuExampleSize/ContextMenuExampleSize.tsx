@@ -19,9 +19,9 @@ export const ContextMenuExampleSize = () => {
   return (
     <>
       <Example>
-        <Button ref={refS} label="Меню размера S" onClick={setIsOpenS.toogle} />
-        <Button ref={refM} label="Меню размера M" onClick={setIsOpenM.toogle} />
-        <Button ref={refL} label="Меню размера L" onClick={setIsOpenL.toogle} />
+        <Button ref={refS} label="Меню размера S" onClick={setIsOpenS.toggle} />
+        <Button ref={refM} label="Меню размера M" onClick={setIsOpenM.toggle} />
+        <Button ref={refL} label="Меню размера L" onClick={setIsOpenL.toggle} />
       </Example>
       {isOpenS && (
         <ContextMenu

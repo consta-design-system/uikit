@@ -1,10 +1,10 @@
 import './Steps.variants.css';
 
+import { IconBackward } from '@consta/icons/IconBackward';
+import { IconForward } from '@consta/icons/IconForward';
 import { useSelect } from '@consta/stand';
 import React from 'react';
 
-import { IconBackward } from '../../../icons/IconBackward/IconBackward';
-import { IconForward } from '../../../icons/IconForward/IconForward';
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';

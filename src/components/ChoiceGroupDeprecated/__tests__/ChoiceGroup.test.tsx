@@ -1,8 +1,8 @@
+import { IconComponent } from '@consta/icons/Icon';
+import { IconCamera } from '@consta/icons/IconCamera';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconCamera } from '../../../icons/IconCamera/IconCamera';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import {
   ChoiceGroup,

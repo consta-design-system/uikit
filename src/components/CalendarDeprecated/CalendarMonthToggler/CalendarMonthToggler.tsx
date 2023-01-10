@@ -1,8 +1,8 @@
 import './CalendarMonthToggler.css';
 
+import { IconForward } from '@consta/icons/IconForward';
 import React from 'react';
 
-import { IconForward } from '../../../icons/IconForward/IconForward';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Button } from '../../Button/Button';

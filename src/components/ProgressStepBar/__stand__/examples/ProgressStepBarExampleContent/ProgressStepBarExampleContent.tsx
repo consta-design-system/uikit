@@ -1,10 +1,10 @@
 import './ProgressStepBarExampleContent.css';
 
+import { IconDinosaur } from '@consta/icons/IconDinosaur';
+import { IconSettings } from '@consta/icons/IconSettings';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { IconDinosaur } from '../../../../../icons/IconDinosaur/IconDinosaur';
-import { IconSettings } from '../../../../../icons/IconSettings/IconSettings';
 import { cn } from '../../../../../utils/bem';
 import { Tag } from '../../../../Tag/Tag';
 import { ProgressStepBar } from '../../../ProgressStepBar';

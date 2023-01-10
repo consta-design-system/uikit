@@ -1,10 +1,10 @@
 import './Tabs.css';
 
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React, { createRef, useMemo } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserved';
-import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { TabsFitModeDropdownWrapper } from './FitModeDropdownWrapper/TabsFitModeDropdownWrapper';

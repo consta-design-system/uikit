@@ -1,9 +1,9 @@
 import './TagBase.css';
 
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
+import { IconClose } from '@consta/icons/IconClose';
 import React from 'react';
 
-import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
-import { IconClose } from '../../icons/IconClose/IconClose';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';

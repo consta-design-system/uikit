@@ -1,7 +1,7 @@
+import { IconComponent, IconProps } from '@consta/icons/Icon';
 import React, { forwardRef, useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { IconComponent, IconProps } from '../../icons/Icon/Icon';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { TagBase } from '../TagBase/TagBase';
 

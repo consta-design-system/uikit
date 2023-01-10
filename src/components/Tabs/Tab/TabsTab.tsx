@@ -1,8 +1,8 @@
 import './TabsTab.css';
 
+import { IconPropSize } from '@consta/icons/Icon';
 import React, { forwardRef } from 'react';
 
-import { IconPropSize } from '../../../icons/Icon/Icon';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';

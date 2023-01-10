@@ -27,7 +27,7 @@ export const MixPopoverAnimateExampleRenderFn = () => {
         <Button
           className={cnMixPopoverAnimateExample('Button')}
           label="Нажми"
-          onClick={setOpen.toogle}
+          onClick={setOpen.toggle}
           ref={buttonRef}
         />
       </Example>
@@ -68,7 +68,7 @@ export const MixPopoverAnimateExampleForCssTransition = () => {
         <Button
           className={cnMixPopoverAnimateExample('Button')}
           label="Нажми"
-          onClick={setOpen.toogle}
+          onClick={setOpen.toggle}
           ref={buttonRef}
         />
       </Example>

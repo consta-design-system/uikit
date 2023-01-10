@@ -1,14 +1,14 @@
 import './ChoiceGroup.variants.css';
 
+import { IconComponent } from '@consta/icons/Icon';
+import { IconCamera } from '@consta/icons/IconCamera';
+import { IconCopy } from '@consta/icons/IconCopy';
+import { IconFavoriteStroked } from '@consta/icons/IconFavoriteStroked';
 import { useBoolean, useSelect } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { IconComponent } from '../../../icons/Icon/Icon';
-import { IconCamera } from '../../../icons/IconCamera/IconCamera';
-import { IconCopy } from '../../../icons/IconCopy/IconCopy';
-import { IconFavorite } from '../../../icons/IconFavorite/IconFavorite';
 import {
   ChoiceGroup,
   choiceGroupDefaultForm,
@@ -39,7 +39,7 @@ const items: Item[] = [
   },
   {
     label: 'три',
-    icon: IconFavorite,
+    icon: IconFavoriteStroked,
     disabled: true,
   },
   {

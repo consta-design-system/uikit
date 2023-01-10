@@ -1,7 +1,7 @@
+import { IconAdd } from '@consta/icons/IconAdd';
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { IconAdd } from '../../../../../icons/IconAdd/IconAdd';
 import { Text } from '../../../../Text/Text';
 import { FileField } from '../../../FileField';
 

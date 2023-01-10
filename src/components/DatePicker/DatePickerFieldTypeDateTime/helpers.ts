@@ -1,3 +1,4 @@
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import {
   addHours,
   addMinutes,
@@ -13,7 +14,6 @@ import IMask from 'imask';
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
-import { IconComponent, IconPropSize } from '../../../icons/Icon/Icon';
 import { leapYear } from '../../../utils/date';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import {

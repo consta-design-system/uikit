@@ -1,13 +1,13 @@
 import './Collapse.variants.css';
 
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconRemove } from '@consta/icons/IconRemove';
+import { IconSun } from '@consta/icons/IconSun';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { IconAdd } from '../../../icons/IconAdd/IconAdd';
-import { IconRemove } from '../../../icons/IconRemove/IconRemove';
-import { IconSun } from '../../../icons/IconSun/IconSun';
 import { getByMap } from '../../../utils/getByMap';
 import { Badge } from '../../Badge/Badge';
 import {

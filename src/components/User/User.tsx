@@ -1,9 +1,9 @@
 import './User.css';
 
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
+import { IconSelect } from '@consta/icons/IconSelect';
 import React from 'react';
 
-import { IconComponent, IconPropSize } from '../../icons/Icon/Icon';
-import { IconSelect } from '../../icons/IconSelect/IconSelect';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';

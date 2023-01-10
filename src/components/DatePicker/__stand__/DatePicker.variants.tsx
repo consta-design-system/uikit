@@ -1,5 +1,6 @@
 import './DatePicker.variants.css';
 
+import { IconCalendar } from '@consta/icons/IconCalendar';
 import { useBoolean, useDate, useSelect, useText } from '@consta/stand';
 import { addDays, Locale, startOfWeek } from 'date-fns';
 import enUSLocale from 'date-fns/locale/en-US';
@@ -22,7 +23,6 @@ import {
   textFieldPropView,
   textFieldPropViewDefault,
 } from '##/components/TextField/TextField';
-import { IconCalendar } from '##/icons/IconCalendar/IconCalendar';
 import { cn } from '##/utils/bem';
 import { maxDateDefault, minDateDefault } from '##/utils/date';
 import { getByMap } from '##/utils/getByMap';

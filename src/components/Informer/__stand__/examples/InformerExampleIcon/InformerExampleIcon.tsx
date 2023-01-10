@@ -1,8 +1,8 @@
+import { IconThumbUp } from '@consta/icons/IconThumbUp';
+import { IconTie } from '@consta/icons/IconTie';
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { IconThumbUp } from '../../../../../icons/IconThumbUp/IconThumbUp';
-import { IconTie } from '../../../../../icons/IconTie/IconTie';
 import { cnDocsExample } from '../../../../../uiKit/components/DocsExample/DocsExample';
 import { Informer } from '../../../Informer';
 

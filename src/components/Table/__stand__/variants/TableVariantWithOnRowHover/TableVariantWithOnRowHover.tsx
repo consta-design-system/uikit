@@ -1,9 +1,9 @@
+import { IconCopy } from '@consta/icons/IconCopy';
 import React, { useState } from 'react';
 
 import { Button } from '##/components/Button/Button';
 import { tableData } from '##/components/Table/__mock__/data.mock';
 import { Table, TableColumn } from '##/components/Table/Table';
-import { IconCopy } from '##/icons/IconCopy/IconCopy';
 
 import { useVariants } from '../useVariants/useVariants';
 

@@ -1,9 +1,9 @@
 import './CollapseIcon.css';
 
+import { cnIcon } from '@consta/icons/Icon';
 import React, { useRef } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { cnIcon } from '##/icons/Icon';
 import { cn } from '##/utils/bem';
 
 import { CollapseIconProps } from '../types';

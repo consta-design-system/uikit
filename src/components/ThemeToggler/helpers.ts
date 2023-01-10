@@ -1,4 +1,5 @@
-import { IconPropSize } from '../../icons/Icon/Icon';
+import { IconPropSize } from '@consta/icons/Icon';
+
 import { ContextMenuPropSize } from '../ContextMenu';
 import {
   ThemeTogglerItemDefault,

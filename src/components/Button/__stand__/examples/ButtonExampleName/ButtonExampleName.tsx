@@ -1,11 +1,11 @@
+import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
+import { IconArrowRight } from '@consta/icons/IconArrowRight';
+import { IconEdit } from '@consta/icons/IconEdit';
 import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Button } from '##/components/Button';
 import { Text } from '##/components/Text';
-import { IconArrowLeft } from '##/icons/IconArrowLeft';
-import { IconArrowRight } from '##/icons/IconArrowRight';
-import { IconEdit } from '##/icons/IconEdit';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cnDocsExample } from '##/uiKit/components/DocsExample';
 

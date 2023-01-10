@@ -1,8 +1,8 @@
 import './TableSelectedOptionsList.css';
 
+import { IconClose } from '@consta/icons/IconClose';
 import React from 'react';
 
-import { IconClose } from '../../../icons/IconClose/IconClose';
 import { cn } from '../../../utils/bem';
 import { isNotNil, isNumber } from '../../../utils/type-guards';
 import { Button } from '../../Button/Button';

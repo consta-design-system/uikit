@@ -26,6 +26,7 @@ const ProgressLineRender = (
     size = 'm',
     value,
     style,
+    className,
     steps,
     getItemLabel,
     ...otherProps
@@ -58,10 +59,13 @@ const ProgressLineRender = (
   const containerProps = {
     ...otherProps,
     ref: useForkRef([ref, containerRef]),
-    className: cnProgressLine({
-      size,
-      mode,
-    }),
+    className: cnProgressLine(
+      {
+        size,
+        mode,
+      },
+      [className],
+    ),
     style: {
       ...style,
       ['--progress-line-value' as string]: `${getProgress(value ?? 0)}`,
