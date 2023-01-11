@@ -1,5 +1,15 @@
 # Changelog
 
+## v4.6.4 (11/01/2023)
+Самое важное:
+- адаптировали все примеры под мобильные устройства
+
+---
+
+- [docs: adaptive docs examples (#2848)](https://github.com/consta-design-system/uikit/commit/93726bb8c507d8fc3a369be13272da2ffa458c0f) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.6.3 (28/12/2022)
 Самое важное:
 - добавлена документация для `useComponentSize`
@@ -424,14 +434,3 @@ UserSelectDeprecated
 - [fix(Slider): fix detecting of active line (#2298)](https://github.com/consta-design-system/uikit/commit/5037568da0431d3eb2400d8cb8c4526abcb2f320) - [@N1MBER](https://github.com/N1MBER)
 - [fix(File): fixed file extensions (#2301)](https://github.com/consta-design-system/uikit/commit/7a5194a0217d82f24d92648c092b32de1be415fc) - [@gizeasy](https://github.com/gizeasy)
 - [docs(new font): new font instructions for designers (#2295)](https://github.com/consta-design-system/uikit/commit/09a781476fb38c1ab2596e4805d603e121568f6d) - [@kolebayev](https://github.com/kolebayev)
-
---------------------
-
-## v3.23.0 (11/05/2022)
-Самое важное:
-- Добавили шрифт `Inter` в библиотеку, вы можете его попробовать на своем проекте.
-- Добавили в обзор `MixPlot` и `ag-grid-adapter`.
----
-
-- [feat(fonts): add Inter (#2290)](https://github.com/consta-design-system/uikit/commit/ce494da31323a3e85c799d6c65131e8b2a24871f) - [@gizeasy](https://github.com/gizeasy)
-- [docs(review): add MixPlot and agGridAdapter (#2289)](https://github.com/consta-design-system/uikit/commit/d445c058c4f6085ad962775e54a850d635d16d6c) - [@arhayka](https://github.com/arhayka)
