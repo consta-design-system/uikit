@@ -1,35 +1,18 @@
-import './TextExampleSize.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cn } from '##/utils/bem';
-
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Text, textPropSize } from '../../../Text';
-
-const cnTextExampleSize = cn('TextExampleSize');
 
 export const TextExampleSize = () => {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' }),
-        cnTextExampleSize(),
-      ])}
-    >
-      {textPropSize.map((item, index) => (
-        <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text
-            size="s"
-            view="ghost"
-            className={wp.decorator({ 'indent-b': 'm' })}
-          >
-            {`size="${item}"`}
-          </Text>
-          <Text size={item}>Просто текст</Text>
-        </div>
-      ))}
-    </div>
+    <Example
+      col={{ 1: 0, flex: 800 }}
+      separately
+      items={textPropSize.map((size) => ({
+        label: `size="${size}"`,
+        status: 'system',
+        node: <Text size={size}>Просто текст</Text>,
+      }))}
+    />
   );
 };

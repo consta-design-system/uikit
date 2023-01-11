@@ -6,5 +6,4 @@ const IconAlignBlocksLeftSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M4 2H2v12h2V2zm1 2h10v3H5V4zm0 5h7v3H5V9z" />
   </svg>
 );
-
 export default IconAlignBlocksLeftSizeS;

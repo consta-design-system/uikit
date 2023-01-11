@@ -1,12 +1,12 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Select } from '../../../Select';
 
 export const SelectExampleCustomTypes = () => {
   const [value, setValue] = useState<string | null>();
   return (
-    <div className={cnDocsDecorator('Section', { indent: 'bottom' })}>
+    <Example col={1}>
       <Select
         placeholder="Выберите значение"
         items={['Первый', 'Второй', 'Третий']}
@@ -15,7 +15,7 @@ export const SelectExampleCustomTypes = () => {
         getItemKey={(item) => item}
         getItemLabel={(item) => item}
       />
-    </div>
+    </Example>
   );
 };
 
@@ -48,7 +48,7 @@ export const groups: string[] = [
 export const SelectExampleCustomTypesWithGroups = () => {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Select
         placeholder="Выберите значение"
         items={items}
@@ -61,6 +61,6 @@ export const SelectExampleCustomTypesWithGroups = () => {
         getGroupKey={(group: string) => group}
         getGroupLabel={(group: string) => group}
       />
-    </div>
+    </Example>
   );
 };

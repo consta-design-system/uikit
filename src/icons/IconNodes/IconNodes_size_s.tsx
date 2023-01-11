@@ -7,5 +7,4 @@ const IconNodesSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M16 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM2 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
   </svg>
 );
-
 export default IconNodesSizeS;

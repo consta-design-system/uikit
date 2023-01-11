@@ -11,5 +11,4 @@ const IconStorageSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconStorageSizeM;

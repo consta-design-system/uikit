@@ -10,5 +10,4 @@ const IconDataNullSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconDataNullSizeXs;

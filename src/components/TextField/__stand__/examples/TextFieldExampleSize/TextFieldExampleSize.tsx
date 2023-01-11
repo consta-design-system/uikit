@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleSize = () => {
@@ -9,7 +8,7 @@ export const TextFieldExampleSize = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <div>
         <TextField
           size="xs"
@@ -42,7 +41,7 @@ export const TextFieldExampleSize = () => {
           value={value}
         />
       </div>
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -51,14 +50,14 @@ export const TextFieldExampleSizeWidth = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField
         width="full"
         placeholder="Страшно широкое поле"
         onChange={handleChange}
         value={value}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -69,7 +68,7 @@ export const TextFieldExampleSizeRows = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField
         type="textarea"
         rows={7}
@@ -77,7 +76,7 @@ export const TextFieldExampleSizeRows = () => {
         onChange={handleChange}
         value={value}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -88,7 +87,7 @@ export const TextFieldExampleSizeMinRows = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField
         type="textarea"
         minRows={13}
@@ -96,6 +95,6 @@ export const TextFieldExampleSizeMinRows = () => {
         onChange={handleChange}
         value={value}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

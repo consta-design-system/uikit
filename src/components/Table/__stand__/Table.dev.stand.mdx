@@ -876,9 +876,9 @@ export function TableExampleSort() {
   ];
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Table columns={columns} rows={rows} />
-    </StoryBookExample>
+    </Example>
   );
 }
 ```
@@ -951,9 +951,9 @@ export function TableExampleOnSortBy() {
     }));
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Table rows={rows} columns={columns} onSortBy={setSortSetting} />
-    </StoryBookExample>
+    </Example>
   );
 }
 ```
@@ -1000,9 +1000,9 @@ const filters: TableFilters<typeof rows[number]> = [
 
 export function TableExampleFilter() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Table columns={columns} rows={rows} filters={filters} />
-    </StoryBookExample>
+    </Example>
   );
 }
 ```

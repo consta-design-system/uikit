@@ -1,18 +1,23 @@
 .SnackBarExampleTimer {
-  display: flex;
-  flex-direction: row;
-  height: 200px;
-
-  @media screen and (max-width: 600px) {
-    flex-direction: column-reverse;
-  }
-
   &-SnackBar {
+    position: fixed;
+    z-index: 10;
+    right: 10px;
+    bottom: 10px;
     overflow: auto;
     flex: none;
-    max-width: 400px;
+    width: 100%;
     padding-right: var(--space-xs);
     padding-left: var(--space-xs);
+
+    @media (min-width: 800px) {
+      position: static;
+      z-index: auto;
+      right: auto;
+      bottom: auto;
+      max-width: 400px;
+      height: 100%;
+    }
   }
 
   &-Buttons {

@@ -1,11 +1,11 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Text } from '../../../Text';
 
 export const TextExampleCombinedWeightAndStyle = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example>
       <Text
         as="div"
         align="left"
@@ -24,6 +24,6 @@ export const TextExampleCombinedWeightAndStyle = () => {
         </Text>
         должны вноситься по регламенту в сроки, указанные Центром Разработок.
       </Text>
-    </div>
+    </Example>
   );
 };

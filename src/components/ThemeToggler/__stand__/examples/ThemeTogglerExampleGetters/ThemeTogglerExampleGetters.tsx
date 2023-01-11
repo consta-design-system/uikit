@@ -3,6 +3,7 @@ import './ThemeTogglerExampleGetters.css';
 import { IconLightningBolt } from '@consta/icons/IconLightningBolt';
 import { IconMoon } from '@consta/icons/IconMoon';
 import { IconSun } from '@consta/icons/IconSun';
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { cn } from '##/utils/bem';
@@ -45,16 +46,21 @@ export const ThemeTogglerExampleGetters = () => {
   const [value, setValue] = useState<Item>(items[0]);
 
   return (
-    <Theme preset={getTheme(value)} className={cnThemeTogglerExampleGetters()}>
-      <ThemeToggler
-        items={items}
-        value={value}
-        getItemLabel={(item) => item}
-        getItemKey={(item) => item}
-        getItemIcon={getItemIcon}
-        onChange={({ value }) => setValue(value)}
-        direction="downStartLeft"
-      />
-    </Theme>
+    <Example col={1}>
+      <Theme
+        preset={getTheme(value)}
+        className={cnThemeTogglerExampleGetters()}
+      >
+        <ThemeToggler
+          items={items}
+          value={value}
+          getItemLabel={(item) => item}
+          getItemKey={(item) => item}
+          getItemIcon={getItemIcon}
+          onChange={({ value }) => setValue(value)}
+          direction="downStartLeft"
+        />
+      </Theme>
+    </Example>
   );
 };

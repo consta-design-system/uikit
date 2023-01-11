@@ -1,45 +1,22 @@
-import './TextExampleWeight.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cn } from '##/utils/bem';
-
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
-import { Text, TextPropWeight } from '../../../Text';
-
-const cnTextExampleWeight = cn('TextExampleWeight');
+import { Text, textPropWeight } from '../../../Text';
 
 export const TextExampleWeight = () => {
-  const weight: Array<TextPropWeight> = [
-    'black',
-    'bold',
-    'semibold',
-    'regular',
-    'light',
-    'thin',
-  ];
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'xs-columns': 3, 'col-gap': 'full', 'row-gap': 'full' }),
-        cnTextExampleWeight(),
-      ])}
-    >
-      {weight.map((item, index) => (
-        <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text
-            size="s"
-            view="ghost"
-            className={wp.decorator({ 'indent-b': 'xs' })}
-          >
-            {`weight="${item}"`}
-          </Text>
-          <Text size="l" weight={item}>
+    <Example
+      col={{ 1: 0, 2: 400, 3: 600, 4: 800 }}
+      separately
+      items={textPropWeight.map((weight) => ({
+        label: `weight="${weight}"`,
+        status: 'system',
+        node: (
+          <Text size="l" weight={weight}>
             Просто текст
           </Text>
-        </div>
-      ))}
-    </div>
+        ),
+      }))}
+    />
   );
 };

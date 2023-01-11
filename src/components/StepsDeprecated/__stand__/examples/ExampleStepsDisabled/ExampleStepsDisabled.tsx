@@ -1,14 +1,13 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { items } from '../../../__mocks__/mock.data';
 import { Steps } from '../../../StepsDeprecated';
 
 const emptyFunction = () => {};
 
 export const ExampleStepsDisabled = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example col={1}>
     <Steps
       items={items}
       getLabel={(item) => item.label}
@@ -16,5 +15,5 @@ export const ExampleStepsDisabled = () => (
       value={items[2]}
       onChange={emptyFunction}
     />
-  </StoryBookExample>
+  </Example>
 );

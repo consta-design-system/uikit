@@ -10,5 +10,4 @@ const IconChatFilledSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconChatFilledSizeXs;

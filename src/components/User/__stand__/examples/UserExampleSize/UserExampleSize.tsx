@@ -1,25 +1,18 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { User } from '../../../User';
 
 export const UserExampleSize = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <div>
-      <User name="Серж Послоян" info="Размер S" view="ghost" size="s" />
-    </div>
-    <div>
-      <User name="Серж Послоян" info="Размер M" view="ghost" size="m" />
-    </div>
-    <div>
-      <User name="Серж Послоян" info="Размер L" view="ghost" size="l" />
-    </div>
-  </StoryBookExample>
+  <Example>
+    <User name="Серж Послоян" info="Размер S" view="ghost" size="s" />
+    <User name="Серж Послоян" info="Размер M" view="ghost" size="m" />
+    <User name="Серж Послоян" info="Размер L" view="ghost" size="l" />
+  </Example>
 );
 
 export const UserExampleSizeWidth = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <User name="Серж Послоян" info="В ширину блока" view="ghost" width="full" />
-  </StoryBookExample>
+  </Example>
 );

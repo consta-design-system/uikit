@@ -11,5 +11,4 @@ const IconPressureStrokedSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconPressureStrokedSizeXs;

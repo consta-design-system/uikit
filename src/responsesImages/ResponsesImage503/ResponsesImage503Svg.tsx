@@ -84,5 +84,4 @@ const ResponsesImage503 = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default ResponsesImage503;

@@ -1,5 +1,6 @@
 import './MixPopoverAnimateExample.css';
 
+import { Example } from '@consta/stand';
 import React, { useRef } from 'react';
 import { CSSTransition, Transition } from 'react-transition-group';
 
@@ -22,12 +23,14 @@ export const MixPopoverAnimateExampleRenderFn = () => {
 
   return (
     <>
-      <Button
-        className={cnMixPopoverAnimateExample('Button')}
-        label="Нажми"
-        onClick={setOpen.toggle}
-        ref={buttonRef}
-      />
+      <Example>
+        <Button
+          className={cnMixPopoverAnimateExample('Button')}
+          label="Нажми"
+          onClick={setOpen.toggle}
+          ref={buttonRef}
+        />
+      </Example>
       <Transition
         in={open}
         unmountOnExit
@@ -61,12 +64,14 @@ export const MixPopoverAnimateExampleForCssTransition = () => {
 
   return (
     <>
-      <Button
-        className={cnMixPopoverAnimateExample('Button')}
-        label="Нажми"
-        onClick={setOpen.toggle}
-        ref={buttonRef}
-      />
+      <Example>
+        <Button
+          className={cnMixPopoverAnimateExample('Button')}
+          label="Нажми"
+          onClick={setOpen.toggle}
+          ref={buttonRef}
+        />
+      </Example>
       <CSSTransition
         in={open}
         unmountOnExit

@@ -10,5 +10,4 @@ const IconWideScreenSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconWideScreenSizeS;

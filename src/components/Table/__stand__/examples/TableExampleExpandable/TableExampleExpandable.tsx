@@ -1,3 +1,4 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Table, TableColumn, TableRow } from '../../../Table';
@@ -102,15 +103,17 @@ const expandableRowsData: Row[] = [
 
 export const TableExampleExpandable = () => {
   return (
-    <Table
-      columns={columns}
-      rows={expandableRowsData}
-      borderBetweenColumns
-      borderBetweenRows
-      isResizable={false}
-      stickyColumns={0}
-      headerVerticalAlign="center"
-      verticalAlign="top"
-    />
+    <Example col={1}>
+      <Table
+        columns={columns}
+        rows={expandableRowsData}
+        borderBetweenColumns
+        borderBetweenRows
+        isResizable={false}
+        stickyColumns={0}
+        headerVerticalAlign="center"
+        verticalAlign="top"
+      />
+    </Example>
   );
 };

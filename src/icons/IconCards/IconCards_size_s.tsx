@@ -6,5 +6,4 @@ const IconCardsSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M7 1H1v6h6V1zm0 8H1v6h6V9zm2-8h6v6H9V1zm6 8H9v6h6V9z" />
   </svg>
 );
-
 export default IconCardsSizeS;

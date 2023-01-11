@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleRequired = () => {
@@ -8,7 +8,7 @@ export const TextFieldExampleRequired = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample>
+    <Example col={1}>
       <TextField
         label="Поле раз"
         onChange={handleChange}
@@ -24,6 +24,6 @@ export const TextFieldExampleRequired = () => {
         type="text"
         placeholder="Необязательное"
       />
-    </StoryBookExample>
+    </Example>
   );
 };

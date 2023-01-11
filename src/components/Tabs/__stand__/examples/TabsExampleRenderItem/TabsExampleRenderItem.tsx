@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Badge, BadgePropStatus } from '../../../../Badge/Badge';
 import { cnTabsTab, Tabs } from '../../../Tabs';
 
@@ -12,18 +11,18 @@ const items: Item[] = ['Один', 'Два', 'Три'];
 export const TabsExampleRenderItem = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
         getItemLabel={(item) => item}
         size="m"
-        renderItem={({ label, checked, onChange }) => (
+        renderItem={({ label, checked, onChange, size }) => (
           <button
             type="button"
             onClick={onChange}
-            className={cnTabsTab({ checked })}
+            className={cnTabsTab({ checked, size })}
           >
             <span
               style={{ marginRight: 'var(--space-m)' }}
@@ -36,7 +35,7 @@ export const TabsExampleRenderItem = () => {
           </button>
         )}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -67,18 +66,18 @@ const itemsBadge: ItemBadge[] = [
 export const TabsExampleRenderItemBadge = () => {
   const [value, setValue] = useState<ItemBadge | null>(itemsBadge[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={itemsBadge}
         getItemLabel={(item) => item.text}
         size="m"
-        renderItem={({ item, onChange, checked }) => (
+        renderItem={({ item, onChange, checked, size }) => (
           <button
             type="button"
             onClick={onChange}
-            className={cnTabsTab({ checked })}
+            className={cnTabsTab({ checked, size })}
           >
             {item.text}
             <Badge
@@ -90,6 +89,6 @@ export const TabsExampleRenderItemBadge = () => {
           </button>
         )}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

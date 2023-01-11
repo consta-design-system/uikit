@@ -4,9 +4,9 @@ import { IconComponent } from '@consta/icons/Icon';
 import { IconAdd } from '@consta/icons/IconAdd';
 import { IconAlert } from '@consta/icons/IconAlert';
 import { IconRing } from '@consta/icons/IconRing';
+import { Example } from '@consta/stand';
 import React, { useReducer } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { SnackBar } from '../../../SnackBar';
@@ -76,7 +76,7 @@ export const SnackBarExampleTimer: React.FC = () => {
   React.useEffect(() => handleNormalAdd(), []);
 
   return (
-    <div className={cnSnackBarExampleTimer('', [cnDocsDecorator('Section')])}>
+    <Example col={2}>
       <div className={cnSnackBarExampleTimer('Buttons')}>
         <Button
           className={cnSnackBarExampleTimer('ButtonAdd')}
@@ -111,6 +111,6 @@ export const SnackBarExampleTimer: React.FC = () => {
         getItemIcon={getItemIcon}
         getItemAutoClose={() => 5}
       />
-    </div>
+    </Example>
   );
 };

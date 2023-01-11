@@ -10,5 +10,4 @@ const IconYandexDzenSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconYandexDzenSizeM;

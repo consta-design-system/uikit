@@ -1,18 +1,14 @@
-import './TextFieldExampleLabel.css';
-
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cn } from '../../../../../utils/bem';
 import { TextField } from '../../../TextField';
-
-const cnTextFieldExampleLabel = cn('TextFieldExampleLabel');
 
 export const TextFieldExampleLabel = () => {
   const [value, setValue] = useState<string | null>(null);
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <div className={cnTextFieldExampleLabel()}>
+    <Example col={1}>
       <TextField
         onChange={handleChange}
         value={value}
@@ -27,6 +23,6 @@ export const TextFieldExampleLabel = () => {
         label="Лейбл"
         labelPosition="left"
       />
-    </div>
+    </Example>
   );
 };

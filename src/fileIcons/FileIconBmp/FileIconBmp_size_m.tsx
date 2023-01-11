@@ -29,5 +29,4 @@ const FileIconBmpSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default FileIconBmpSizeM;

@@ -6,5 +6,4 @@ const IconDownSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M4.898 9.188 2.252 6.54l-.707.707 3.853 3.854 3.854-3.854-.707-.707-2.647 2.647v-7.29h-1v7.29z" />
   </svg>
 );
-
 export default IconDownSizeXs;

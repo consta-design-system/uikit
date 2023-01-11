@@ -10,5 +10,4 @@ const IconTrashSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconTrashSizeXs;

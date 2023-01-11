@@ -6,5 +6,4 @@ const IconUnsortSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M2 3h12v2H2V3zm0 8h8v2H2v-2zm4-4H2v2h4V7z" />
   </svg>
 );
-
 export default IconUnsortSizeS;

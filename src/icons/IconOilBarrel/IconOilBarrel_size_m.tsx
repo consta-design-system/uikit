@@ -11,5 +11,4 @@ const IconOilBarrelSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconOilBarrelSizeM;

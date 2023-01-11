@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { UserSelect } from '../../../UserSelect';
 
 type Item = {
@@ -33,7 +33,7 @@ export function UserSelectExampleCreate() {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <UserSelect
         placeholder="Выберите пользователя"
         items={list}
@@ -43,7 +43,7 @@ export function UserSelectExampleCreate() {
           setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
         }
       />
-    </div>
+    </Example>
   );
 }
 
@@ -51,7 +51,7 @@ export function UserSelectExampleCreateCustomLabel() {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <UserSelect
         placeholder="Выберите пользователя"
         items={list}
@@ -62,6 +62,6 @@ export function UserSelectExampleCreateCustomLabel() {
         }
         labelForCreate="Добавить"
       />
-    </div>
+    </Example>
   );
 }

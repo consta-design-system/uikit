@@ -7,5 +7,4 @@ const IconKernFilledSizeM = (props: SVGProps<SVGSVGElement>) => (
     <path d="M4 4.5C4 2.567 7.582 1 12 1s8 1.567 8 3.5S16.418 8 12 8 4 6.433 4 4.5Z" />
   </svg>
 );
-
 export default IconKernFilledSizeM;

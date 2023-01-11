@@ -14,5 +14,4 @@ const IconAllDoneSizeXs = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 );
-
 export default IconAllDoneSizeXs;

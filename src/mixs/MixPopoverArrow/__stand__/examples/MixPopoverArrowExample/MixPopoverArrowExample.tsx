@@ -1,5 +1,6 @@
 import './MixPopoverArrowExample.css';
 
+import { Example } from '@consta/stand';
 import React, { useRef } from 'react';
 
 import { Button } from '../../../../../components/Button/Button';
@@ -17,7 +18,9 @@ export const MixPopoverArrowExample = () => {
 
   return (
     <>
-      <Button label="Открыть" onClick={setOpen.toggle} ref={buttonRef} />
+      <Example>
+        <Button label="Открыть" onClick={setOpen.toggle} ref={buttonRef} />
+      </Example>
       {open && (
         <Popover
           className={cnMixPopoverArrowExample()}
@@ -26,8 +29,14 @@ export const MixPopoverArrowExample = () => {
           arrowOffset={16}
           offset={14}
         >
-          <Text>Стрелочка по центру сверху</Text>
-          <div className={cnMixPopoverArrow({ direction: 'downCenter' })} />
+          {(direction) => {
+            return (
+              <>
+                <Text>Позиция - {direction}</Text>
+                <div className={cnMixPopoverArrow({ direction })} />
+              </>
+            );
+          }}
         </Popover>
       )}
     </>

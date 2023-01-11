@@ -10,5 +10,4 @@ const IconCloseSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconCloseSizeS;

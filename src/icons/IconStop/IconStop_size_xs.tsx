@@ -6,5 +6,4 @@ const IconStopSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M2 3h7v7H2z" />
   </svg>
 );
-
 export default IconStopSizeXs;

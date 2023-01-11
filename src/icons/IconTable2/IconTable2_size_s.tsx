@@ -10,5 +10,4 @@ const IconTable2SizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconTable2SizeS;

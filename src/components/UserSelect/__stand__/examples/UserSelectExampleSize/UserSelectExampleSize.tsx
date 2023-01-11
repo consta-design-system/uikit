@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { UserSelect } from '../../../UserSelect';
 
 type Item = {
@@ -33,34 +32,28 @@ const items: Item[] = [
 export function UserSelectExampleSize() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <StoryBookExample>
-        <UserSelect
-          placeholder="Размер s"
-          size="s"
-          items={items}
-          value={value}
-          onChange={({ value }) => setValue(value)}
-        />
-      </StoryBookExample>
-      <StoryBookExample>
-        <UserSelect
-          placeholder="Размер m"
-          size="m"
-          items={items}
-          value={value}
-          onChange={({ value }) => setValue(value)}
-        />
-      </StoryBookExample>
-      <StoryBookExample>
-        <UserSelect
-          placeholder="Размер l"
-          size="l"
-          items={items}
-          value={value}
-          onChange={({ value }) => setValue(value)}
-        />
-      </StoryBookExample>
-    </div>
+    <Example col={1}>
+      <UserSelect
+        placeholder="Размер s"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <UserSelect
+        placeholder="Размер m"
+        size="m"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <UserSelect
+        placeholder="Размер l"
+        size="l"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </Example>
   );
 }

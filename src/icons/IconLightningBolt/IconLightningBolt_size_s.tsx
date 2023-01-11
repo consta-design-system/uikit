@@ -6,5 +6,4 @@ const IconLightningBoltSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M12 0H5.5L3 10l3.361-.747L4 16h.5L13 5l-3.85.7L12 0z" />
   </svg>
 );
-
 export default IconLightningBoltSizeS;

@@ -5,7 +5,7 @@ import { DragNDropField } from '../../../DragNDropField';
 
 export const DragNDropFieldExampleErrorMessages = () => {
   return (
-    <Example>
+    <Example col={1}>
       <DragNDropField
         onDropFiles={(files) => console.log(files)}
         maxSize={10}

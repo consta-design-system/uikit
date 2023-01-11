@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleStepArray = () => {
@@ -8,7 +8,7 @@ export const TextFieldExampleStepArray = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample>
+    <Example col={1}>
       <TextField
         onChange={handleChange}
         value={value}
@@ -17,6 +17,6 @@ export const TextFieldExampleStepArray = () => {
         min="0"
         max="100"
       />
-    </StoryBookExample>
+    </Example>
   );
 };

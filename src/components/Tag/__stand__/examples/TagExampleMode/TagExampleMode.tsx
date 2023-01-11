@@ -1,14 +1,13 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Tag } from '../../../Tag';
 
 export const TagExampleMode = () => {
   const [checked, setChecked] = useState(false);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <Tag onClick={() => {}} mode="button" label="Button" />
       <Tag mode="link" label="Link" href="#" />
       <Tag
@@ -18,6 +17,6 @@ export const TagExampleMode = () => {
         checked={checked}
       />
       <Tag onCancel={() => {}} mode="cancel" label="Cancel" />
-    </StoryBookExample>
+    </Example>
   );
 };

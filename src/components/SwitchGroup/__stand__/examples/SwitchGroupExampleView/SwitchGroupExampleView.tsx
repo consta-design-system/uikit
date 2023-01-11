@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { SwitchGroup } from '../../../SwitchGroup';
 
 type Item = {
@@ -15,38 +14,26 @@ const items: Item[] = [
   { name: 'Мигающие заголовки' },
 ];
 
-export const SwitchGroupExampleViewGhost = () => {
-  const [value, setValue] = React.useState<Item[] | null>(null);
+export const SwitchGroupExampleView = () => {
+  const [value, setValue] = React.useState<Item[] | null>([items[0]]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <SwitchGroup
-        value={value}
-        items={items}
-        getItemLabel={(item) => item.name}
-        getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleViewGhost"
-        view="ghost"
-      />
-    </StoryBookExample>
-  );
-};
-
-export const SwitchGroupExampleViewPrimary = () => {
-  const [value, setValue] = React.useState<Item[] | null>(null);
-
-  return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <SwitchGroup
-        value={value}
-        items={items}
-        getItemLabel={(item) => item.name}
-        getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleViewPrimary"
-        view="primary"
-      />
-    </StoryBookExample>
+    <Example
+      col={{ 1: 0, 2: 800 }}
+      separately
+      items={(['primary', 'ghost'] as const).map((view) => ({
+        label: `view="${view}"`,
+        node: (
+          <SwitchGroup
+            value={value}
+            getItemLabel={(item) => item.name}
+            items={items}
+            onChange={({ value }) => setValue(value)}
+            name={`SwitchGroupExampleView${view}`}
+            view={view}
+          />
+        ),
+      }))}
+    />
   );
 };

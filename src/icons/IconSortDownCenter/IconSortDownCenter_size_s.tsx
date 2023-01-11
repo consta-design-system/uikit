@@ -6,5 +6,4 @@ const IconSortDownCenterSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M2 3h12v2H2V3zm2 4h8v2H4V7zm6 4H6v2h4v-2z" />
   </svg>
 );
-
 export default IconSortDownCenterSizeS;

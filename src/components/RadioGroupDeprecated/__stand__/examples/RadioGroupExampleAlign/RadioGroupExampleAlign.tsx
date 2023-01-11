@@ -1,8 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { alignItems, simpleItems } from '../../../__mocks__/data.mock';
 import { RadioGroup } from '../../../RadioGroupDeprecated';
 
@@ -10,11 +8,7 @@ export function RadioGroupExampleAlign() {
   const [value, setValue] = React.useState<string | null>(alignItems[0]);
 
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-      ])}
-    >
+    <Example>
       <RadioGroup
         value={value}
         items={alignItems}
@@ -29,7 +23,7 @@ export function RadioGroupExampleAlign() {
         onChange={({ value }) => setValue(value)}
         align="center"
       />
-    </StoryBookExample>
+    </Example>
   );
 }
 
@@ -37,7 +31,7 @@ export function RadioGroupExampleColumn() {
   const [value, setValue] = React.useState<string | null>(simpleItems[0]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <RadioGroup
         value={value}
         items={simpleItems}
@@ -45,7 +39,7 @@ export function RadioGroupExampleColumn() {
         onChange={({ value }) => setValue(value)}
         direction="column"
       />
-    </StoryBookExample>
+    </Example>
   );
 }
 
@@ -53,7 +47,7 @@ export function RadioGroupExampleRow() {
   const [value, setValue] = React.useState<string | null>(simpleItems[0]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <RadioGroup
         value={value}
         items={simpleItems}
@@ -61,6 +55,6 @@ export function RadioGroupExampleRow() {
         onChange={({ value }) => setValue(value)}
         direction="row"
       />
-    </StoryBookExample>
+    </Example>
   );
 }

@@ -10,5 +10,4 @@ const IconRulerSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconRulerSizeM;

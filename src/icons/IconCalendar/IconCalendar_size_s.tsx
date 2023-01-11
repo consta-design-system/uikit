@@ -10,5 +10,4 @@ const IconCalendarSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconCalendarSizeS;

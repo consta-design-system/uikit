@@ -6,5 +6,4 @@ const IconCollapseSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M10 2H8v6H2v2h4v4h2V8h6V6h-4V2z" />
   </svg>
 );
-
 export default IconCollapseSizeS;

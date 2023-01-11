@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Table, TableColumn } from '../../../Table';
 
 const rows = [
@@ -80,7 +79,7 @@ const columnsAlignRight: TableColumn<typeof rows[number]>[] = [
 
 export function TableExampleVerticalAlign() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Table
         columns={columns}
         rows={rowsProf}
@@ -102,13 +101,13 @@ export function TableExampleVerticalAlign() {
         borderBetweenRows
         borderBetweenColumns
       />
-    </StoryBookExample>
+    </Example>
   );
 }
 
 export function TableExampleAlignLeft() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Table
         columns={columnsAlignLeft}
         rows={rows}
@@ -116,13 +115,13 @@ export function TableExampleAlignLeft() {
         borderBetweenRows
         borderBetweenColumns
       />
-    </StoryBookExample>
+    </Example>
   );
 }
 
 export function TableExampleAlignCenter() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Table
         columns={columnsAlignCenter}
         rows={rows}
@@ -130,13 +129,13 @@ export function TableExampleAlignCenter() {
         borderBetweenRows
         borderBetweenColumns
       />
-    </StoryBookExample>
+    </Example>
   );
 }
 
 export function TableExampleAlignRight() {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Table
         columns={columnsAlignRight}
         rows={rows}
@@ -144,6 +143,6 @@ export function TableExampleAlignRight() {
         borderBetweenRows
         borderBetweenColumns
       />
-    </StoryBookExample>
+    </Example>
   );
 }

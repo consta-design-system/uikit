@@ -79,5 +79,4 @@ const ResponsesImage403 = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default ResponsesImage403;

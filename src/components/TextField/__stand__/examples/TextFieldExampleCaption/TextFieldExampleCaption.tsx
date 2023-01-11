@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleCaption = () => {
@@ -9,7 +8,7 @@ export const TextFieldExampleCaption = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField
         onChange={handleChange}
         value={value}
@@ -37,6 +36,6 @@ export const TextFieldExampleCaption = () => {
         placeholder="Обычное поле"
         caption="Это подпись"
       />
-    </StoryBookExample>
+    </Example>
   );
 };

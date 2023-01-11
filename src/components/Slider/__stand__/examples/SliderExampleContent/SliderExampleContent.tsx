@@ -1,14 +1,14 @@
 import { IconSettings } from '@consta/icons/IconSettings';
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Slider } from '../../../Slider';
 
 export const SliderExampleContent = () => {
   const [value, setValue] = useState<[number, number]>([20, 50]);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Slider
         value={value}
         range
@@ -20,6 +20,6 @@ export const SliderExampleContent = () => {
         rightSide={IconSettings}
         onChange={({ value }) => setValue(value)}
       />
-    </div>
+    </Example>
   );
 };

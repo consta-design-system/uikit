@@ -1,5 +1,6 @@
 import './ThemeTogglerExampleDefault.css';
 
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { cn } from '##/utils/bem';
@@ -17,13 +18,15 @@ export const ThemeTogglerExampleDefault = () => {
   const [value, setValue] = useState<ThemeType>(exampleThemesThree[0]);
 
   return (
-    <Theme preset={value.theme} className={cnThemeTogglerExampleDefault()}>
-      <ThemeToggler
-        items={exampleThemesThree}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        direction="downStartLeft"
-      />
-    </Theme>
+    <Example col={1}>
+      <Theme preset={value.theme} className={cnThemeTogglerExampleDefault()}>
+        <ThemeToggler
+          items={exampleThemesThree}
+          value={value}
+          onChange={({ value }) => setValue(value)}
+          direction="downStartLeft"
+        />
+      </Theme>
+    </Example>
   );
 };

@@ -6,5 +6,4 @@ const IconAddSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M9 2H7v5H2v2h5v5h2V9h5V7H9V2z" />
   </svg>
 );
-
 export default IconAddSizeS;

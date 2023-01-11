@@ -7,5 +7,4 @@ const IconAllDoneSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="m4.243 7.914 1.312-1.312 2.93 3.228L14.6 3.281l1.38 1.38-7.495 7.999-4.242-4.746z" />
   </svg>
 );
-
 export default IconAllDoneSizeS;

@@ -1,22 +1,19 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { simpleItems as items } from '../../../__mocks__/mock.data';
 import { Steps } from '../../../Steps';
 
 const emptyFunction = () => {};
 
 export const ExampleStepsAdaptive = () => (
-  <StoryBookExample
-    className={cnDocsDecorator('Section')}
-    style={{ maxWidth: 200 }}
-  >
+  <Example col={1}>
     <Steps
+      style={{ maxWidth: 300 }}
       items={items}
       value={items[1]}
       getItemLabel={(item) => item}
       onChange={emptyFunction}
     />
-  </StoryBookExample>
+  </Example>
 );

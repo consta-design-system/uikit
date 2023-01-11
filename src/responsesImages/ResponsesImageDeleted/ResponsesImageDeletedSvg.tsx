@@ -63,5 +63,4 @@ const ResponsesImageDeleted = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default ResponsesImageDeleted;

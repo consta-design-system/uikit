@@ -10,5 +10,4 @@ const IconWarningSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconWarningSizeM;

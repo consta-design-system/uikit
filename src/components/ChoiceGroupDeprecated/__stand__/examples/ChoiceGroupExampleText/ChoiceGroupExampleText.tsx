@@ -1,7 +1,8 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsExample } from '##/uiKit/components/DocsExample/DocsExample';
+import { Text } from '##/components/Text';
+import { cnMixSpace } from '##/mixs/MixSpace';
 
 import { ChoiceGroup } from '../../../ChoiceGroupDeprecated';
 
@@ -14,33 +15,48 @@ const itemsSimple: Item[] = ['один', 'два', 'три', 'четыре', 'п
 export const ChoiceGroupExampleText = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <Example col={{ 1: 0, 2: 760 }}>
-      <div className={cnDocsExample()}>
-        <p className={cnDocsExample('Caption')}>Отображение</p>
-        <ChoiceGroup
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={itemsWrong}
-          getLabel={(item) => item}
-          name="ChoiceGroupExampleText"
-        />
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>
-          Неправильно
-        </p>
-      </div>
-
-      <div className={cnDocsExample()}>
-        <p className={cnDocsExample('Caption')}>Как показывать товары</p>
-        <ChoiceGroup
-          value={value}
-          onChange={({ value }) => setValue(value)}
-          items={items}
-          getLabel={(item) => item}
-          name="ChoiceGroupExampleText"
-        />
-        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
-      </div>
-    </Example>
+    <Example
+      col={{ 1: 0, 2: 760 }}
+      separately
+      items={[
+        {
+          label: 'Неправильно',
+          status: 'error',
+          node: (
+            <>
+              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+                Отображение
+              </Text>
+              <ChoiceGroup
+                value={value}
+                onChange={({ value }) => setValue(value)}
+                items={itemsWrong}
+                getLabel={(item) => item}
+                name="ChoiceGroupExampleText"
+              />
+            </>
+          ),
+        },
+        {
+          label: 'Правильно',
+          status: 'success',
+          node: (
+            <>
+              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+                Как показывать товары
+              </Text>
+              <ChoiceGroup
+                value={value}
+                onChange={({ value }) => setValue(value)}
+                items={items}
+                getLabel={(item) => item}
+                name="ChoiceGroupExampleText"
+              />
+            </>
+          ),
+        },
+      ]}
+    />
   );
 };
 

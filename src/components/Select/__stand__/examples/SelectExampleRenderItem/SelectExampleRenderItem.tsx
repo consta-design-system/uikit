@@ -1,8 +1,8 @@
 import './SelectExampleRenderItem.css';
 
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Select } from '../../../Select';
 
@@ -31,7 +31,7 @@ const items: Item[] = [
 export const SelectExampleRenderItem = () => {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Select
         placeholder="Выберите значение"
         items={items}
@@ -50,6 +50,6 @@ export const SelectExampleRenderItem = () => {
           </div>
         )}
       />
-    </div>
+    </Example>
   );
 };

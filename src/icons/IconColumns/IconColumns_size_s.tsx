@@ -6,5 +6,4 @@ const IconColumnsSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M6 14h4V2H6v12zm-5 0h4V2H1v12zM11 2v12h4V2h-4z" />
   </svg>
 );
-
 export default IconColumnsSizeS;

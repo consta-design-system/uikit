@@ -7,5 +7,4 @@ const IconCopySizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M2 4a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z" />
   </svg>
 );
-
 export default IconCopySizeXs;

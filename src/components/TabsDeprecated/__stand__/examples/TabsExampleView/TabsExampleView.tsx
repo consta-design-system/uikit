@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Tabs } from '../../../TabsDeprecated';
 
 type Item = string;
@@ -11,7 +10,7 @@ const items: Item[] = ['один', 'два', 'три'];
 export const TabsExampleView = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
@@ -26,6 +25,6 @@ export const TabsExampleView = () => {
         getLabel={(item) => item}
         view="clear"
       />
-    </StoryBookExample>
+    </Example>
   );
 };

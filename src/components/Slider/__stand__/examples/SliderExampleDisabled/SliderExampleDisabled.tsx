@@ -1,13 +1,13 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Slider } from '../../../Slider';
 
 export const SliderExampleDisabled = () => {
   const [value, setValue] = useState<number>(20);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Slider
         disabled
         label={`Значение ${value}`}
@@ -15,6 +15,6 @@ export const SliderExampleDisabled = () => {
         value={value}
         range={false}
       />
-    </div>
+    </Example>
   );
 };

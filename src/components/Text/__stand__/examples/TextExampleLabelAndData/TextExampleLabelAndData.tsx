@@ -1,13 +1,12 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Text } from '../../../Text';
 
 export const TextExampleLabelAndData = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <div className={wp.decorator({ 'indent-b': 'm' })}>
+    <Example>
+      <>
         <Text
           as="div"
           align="left"
@@ -29,8 +28,8 @@ export const TextExampleLabelAndData = () => {
         >
           Иванов Дмитрий Петрович
         </Text>
-      </div>
-      <div className={wp.decorator({ 'indent-b': 'm' })}>
+      </>
+      <>
         <Text
           as="div"
           align="left"
@@ -52,8 +51,8 @@ export const TextExampleLabelAndData = () => {
         >
           Главный по тарелочкам
         </Text>
-      </div>
-      <div className={wp.decorator({ 'indent-b': 'm' })}>
+      </>
+      <>
         <Text
           as="div"
           align="left"
@@ -75,7 +74,7 @@ export const TextExampleLabelAndData = () => {
         >
           Группа столовой посуды и хрусталя
         </Text>
-      </div>
-    </div>
+      </>
+    </Example>
   );
 };

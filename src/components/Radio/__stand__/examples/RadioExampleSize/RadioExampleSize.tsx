@@ -1,13 +1,12 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Radio } from '../../../Radio';
 
 const emptyFunction = () => {};
 
 export const RadioExampleSize = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <Radio
       size="m"
       label="Размер m"
@@ -20,5 +19,5 @@ export const RadioExampleSize = () => (
       onChange={emptyFunction}
       checked={undefined}
     />
-  </StoryBookExample>
+  </Example>
 );

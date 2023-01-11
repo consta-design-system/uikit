@@ -38,28 +38,28 @@ import { cnMixCard } from '@consta/uikit/MixCard';
 По умолчанию — `'xs'`.
 
 ```tsx
-export const MixCardExampleForm = () => {
+export const MixCardExampleSpace = () => {
   return (
     <>
       <div
         className={cnMixCard({
           verticalSpace: 'xs',
           horizontalSpace: 'xs',
-          form: 'square',
+          form: 'round',
           shadow: true,
         })}
       >
-        <Text>Отступы 'xs'</Text>
+        <Text>Отступы xs</Text>
       </div>
       <div
         className={cnMixCard({
           verticalSpace: '5xl',
           horizontalSpace: '5xl',
-          form: 'square',
+          form: 'round',
           shadow: true,
         })}
       >
-        <Text>Отступы '5xl'</Text>
+        <Text>Отступы 5xl</Text>
       </div>
     </>
   );
@@ -190,11 +190,11 @@ export const MixCardExampleShadow = () => {
 ```tsx
 export const MixCardExampleBorder = () => {
   return (
-    <div
+    <>
+      <div
         className={cnMixCard({
           verticalSpace: 'xl',
           horizontalSpace: '3xl',
-          status: 'success',
           form: 'round',
           shadow: false,
           border: true,
@@ -206,7 +206,6 @@ export const MixCardExampleBorder = () => {
         className={cnMixCard({
           verticalSpace: 'xl',
           horizontalSpace: '3xl',
-          status: 'success',
           form: 'round',
           shadow: false,
           border: false,
@@ -214,9 +213,9 @@ export const MixCardExampleBorder = () => {
       >
         <Text>Карточка без границы</Text>
       </div>
+    </>
   );
 };
-
 ```
 
 <MixCardExampleBorder />

@@ -6,5 +6,4 @@ const IconStrikethroughSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M7 14h2v-4H7v4zM3 2v2h4v2h2V4h4V2H3zM2 9h12V7H2v2z" />
   </svg>
 );
-
 export default IconStrikethroughSizeS;

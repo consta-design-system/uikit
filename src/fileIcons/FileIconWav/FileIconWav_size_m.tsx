@@ -23,5 +23,4 @@ const FileIconWavSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default FileIconWavSizeM;

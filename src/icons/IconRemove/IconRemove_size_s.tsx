@@ -6,5 +6,4 @@ const IconRemoveSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M2 7h12v2H2z" />
   </svg>
 );
-
 export default IconRemoveSizeS;

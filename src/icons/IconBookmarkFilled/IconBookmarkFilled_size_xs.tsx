@@ -10,5 +10,4 @@ const IconBookmarkFilledSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconBookmarkFilledSizeXs;

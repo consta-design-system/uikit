@@ -7,5 +7,4 @@ const IconLinkSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M11 7H5v2h6V7z" />
   </svg>
 );
-
 export default IconLinkSizeS;

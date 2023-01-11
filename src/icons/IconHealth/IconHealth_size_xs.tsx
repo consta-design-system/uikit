@@ -10,5 +10,4 @@ const IconHealthSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconHealthSizeXs;
