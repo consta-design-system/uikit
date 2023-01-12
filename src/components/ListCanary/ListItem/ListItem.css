@@ -18,6 +18,10 @@
 
   &_interactive {
     cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-control-bg-clear-hover);
+    }
   }
 
   &_size {
@@ -80,10 +84,6 @@
   &_disabled {
     --list-item-color: var(--color-control-typo-disable);
     cursor: auto;
-  }
-
-  &:hover {
-    background-color: var(--color-control-bg-clear-hover);
   }
 
   &-Icon {

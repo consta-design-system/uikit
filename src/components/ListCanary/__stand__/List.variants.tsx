@@ -57,6 +57,7 @@ const Variants = () => {
       isLoading={isLoading}
       size={size}
       items={basicItems}
+      onItemClick={({ item }) => console.log(item.label)}
       groups={withGroups ? groups : undefined}
       getItemDisabled={getItemDisabled}
       getItemLeftIcon={getItemLeftIcon}

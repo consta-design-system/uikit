@@ -84,7 +84,7 @@ const ListRender = (props: ListProps, ref: React.Ref<HTMLDivElement>) => {
       <ListItem
         {...params}
         size={size}
-        onClick={handleClick}
+        onClick={onClick || onItemClick ? handleClick : undefined}
         indent={form === 'round' ? 'increased' : 'normal'}
         {...(getItemAttributes(item) ?? {})}
         ref={refs[items.indexOf(item)]}
