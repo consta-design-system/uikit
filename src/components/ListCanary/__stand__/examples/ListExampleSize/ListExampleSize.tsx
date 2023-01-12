@@ -1,8 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { List } from '##/components/ListCanary';
-import { Text } from '##/components/Text';
+import { List, ListPropSize } from '##/components/ListCanary';
 
 type Item = {
   label: string;
@@ -24,25 +23,15 @@ const items: Item[] = [
   },
 ];
 
+const sizes: ListPropSize[] = ['xs', 's', 'm', 'l'];
+
 export const ListExampleSize = () => {
   return (
-    <Example col={{ 1: 0, flex: 600 }}>
-      <div>
-        <Text>xs</Text>
-        <List items={items} size="xs" />
-      </div>
-      <div>
-        <Text>s</Text>
-        <List items={items} size="s" />
-      </div>
-      <div>
-        <Text>m</Text>
-        <List items={items} size="m" />
-      </div>
-      <div>
-        <Text>l</Text>
-        <List items={items} size="l" />
-      </div>
-    </Example>
+    <Example
+      col={{ 1: 0, [sizes.length]: 600 }}
+      items={sizes}
+      getItemDescription={(size) => `size="${size}"`}
+      getItemNode={(size) => <List size={size} items={items} />}
+    />
   );
 };

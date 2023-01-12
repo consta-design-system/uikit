@@ -4,7 +4,7 @@ export default createStand({
   title: 'List',
   id: 'List',
   group: 'components',
-  description: 'Список. Компонент для выбора и отображения элементов списка.',
+  description: 'Список. Компонент для отображения элементов списка.',
   version: '4.5.1',
   status: 'canary',
   figma:

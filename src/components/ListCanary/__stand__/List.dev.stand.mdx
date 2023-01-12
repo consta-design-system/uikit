@@ -251,22 +251,10 @@ const items: Item[] = [
 const ListExampleSize = () => {
   return (
     <>
-      <div>
-        <Text>xs</Text>
-        <List items={items} size="xs" />
-      </div>
-      <div>
-        <Text>s</Text>
-        <List items={items} size="s" />
-      </div>
-      <div>
-        <Text>m</Text>
-        <List items={items} size="m" />
-      </div>
-      <div>
-        <Text>l</Text>
-        <List items={items} size="l" />
-      </div>
+      <List items={items} size="xs" />
+      <List items={items} size="s" />
+      <List items={items} size="m" />
+      <List items={items} size="l" />
     </>
   );
 };
@@ -305,18 +293,9 @@ const items: Item[] = [
 const ListExampleForm = () => {
   return (
     <>
-      <div>
-        <Text>default</Text>
-        <List items={items} form="default" />
-      </div>
-      <div>
-        <Text>round</Text>
-        <List items={items} form="round" />
-      </div>
-      <div>
-        <Text>brick</Text>
-        <List items={items} form="brick" />
-      </div>
+      <List items={items} form="default" />
+      <List items={items} form="round" />
+      <List items={items} form="brick" />
     </>
   );
 };

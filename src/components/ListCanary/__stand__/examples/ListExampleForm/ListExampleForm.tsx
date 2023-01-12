@@ -1,8 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { List } from '##/components/ListCanary';
-import { Text } from '##/components/Text';
+import { List, ListPropForm } from '##/components/ListCanary';
 
 type Item = {
   label: string;
@@ -24,21 +23,14 @@ const items: Item[] = [
   },
 ];
 
+const forms: ListPropForm[] = ['default', 'round', 'brick'];
 export const ListExampleForm = () => {
   return (
-    <Example col={{ 1: 0, flex: 600 }}>
-      <div>
-        <Text>default</Text>
-        <List items={items} form="default" />
-      </div>
-      <div>
-        <Text>round</Text>
-        <List items={items} form="round" />
-      </div>
-      <div>
-        <Text>brick</Text>
-        <List items={items} form="brick" />
-      </div>
-    </Example>
+    <Example
+      col={{ 1: 0, flex: 600 }}
+      items={forms}
+      getItemDescription={(form) => `form="${form}"`}
+      getItemNode={(form) => <List items={items} form={form} />}
+    />
   );
 };

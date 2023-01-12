@@ -9,12 +9,15 @@
   padding: var(--list-item-vertical-space) var(--list-item-horizontal-space);
   background: var(--color-control-bg-clear);
   word-wrap: break-word;
-  cursor: pointer;
   transition: color 0.3s;
   gap: var(--space-xs);
 
   &.Text {
     color: var(--list-item-color);
+  }
+
+  &_interactive {
+    cursor: pointer;
   }
 
   &_size {

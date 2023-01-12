@@ -76,15 +76,15 @@ const ListItemRender = (
     ...otherProps
   } = props;
 
-  const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    if (!disabled) {
-      onClick?.(e);
-    }
-  };
+  const handleClick: React.MouseEventHandler<HTMLDivElement> | undefined =
+    onClick && !disabled ? onClick : undefined;
 
   return (
     <Text
-      className={cnListItem({ active, size, indent, disabled }, [className])}
+      className={cnListItem(
+        { active, size, indent, disabled, interactive: !!handleClick },
+        [className],
+      )}
       as={as}
       onClick={handleClick}
       lineHeight="xs"
