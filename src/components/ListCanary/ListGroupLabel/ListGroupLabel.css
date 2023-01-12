@@ -15,25 +15,25 @@
 
   &_size {
     &_xs {
-      --list-group-label-font-size: var(--size-text-s);
+      --list-group-label-font-size: var(--size-text-2xs);
       --list-group-label-padding: var(--space-s) 0 calc(var(--space-2xs) * 1.5);
       --list-group-label-horizontal-margin: var(--space-xs);
     }
 
     &_s {
-      --list-group-label-font-size: var(--size-text-xs);
+      --list-group-label-font-size: var(--size-text-2xs);
       --list-group-label-padding: var(--space-m) 0 var(--space-2xs);
       --list-group-label-horizontal-margin: var(--space-xs);
     }
 
     &_m {
-      --list-group-label-font-size: var(--size-text-2xs);
+      --list-group-label-font-size: var(--size-text-xs);
       --list-group-label-padding: var(--space-m) 0 var(--space-xs);
       --list-group-label-horizontal-margin: var(--space-s);
     }
 
     &_l {
-      --list-group-label-font-size: var(--size-text-2xs);
+      --list-group-label-font-size: var(--size-text-s);
       --list-group-label-padding: var(--space-l) 0 var(--space-s);
       --list-group-label-horizontal-margin: var(--space-s);
     }

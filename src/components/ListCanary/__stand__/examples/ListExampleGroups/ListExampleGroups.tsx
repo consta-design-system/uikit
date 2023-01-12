@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnMixList, List } from '##/components/ListCanary';
+import { List } from '##/components/ListCanary';
 import { Text } from '##/components/Text';
 
 type Item = {
@@ -67,7 +67,7 @@ const items: Item[] = [
 export const ListExampleGroups = () => {
   return (
     <Example>
-      <List className={cnMixList({})} items={items} groups={groups} />
+      <List items={items} groups={groups} />
     </Example>
   );
 };

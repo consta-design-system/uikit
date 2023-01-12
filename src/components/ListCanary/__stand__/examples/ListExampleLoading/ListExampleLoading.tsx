@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnMixList, List } from '##/components/ListCanary';
+import { List } from '##/components/ListCanary';
 
 type Item = {
   label: string;
@@ -25,8 +25,8 @@ const items: Item[] = [
 export const ListExampleLoading = () => {
   return (
     <Example col={{ 1: 0, flex: 600 }}>
-      <List items={items} isLoading className={cnMixList({})} />
-      <List items={[] as Item[]} isLoading className={cnMixList({})} />
+      <List items={items} isLoading />
+      <List items={[] as Item[]} isLoading />
     </Example>
   );
 };

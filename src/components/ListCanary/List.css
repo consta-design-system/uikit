@@ -1,8 +1,5 @@
 .List {
-  width: 100%;
-  height: 100%;
   padding: var(--list-space) 0;
-  line-height: 120%;
 
   &_size {
     &_xs {

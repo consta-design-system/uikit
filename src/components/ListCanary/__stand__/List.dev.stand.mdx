@@ -9,6 +9,10 @@ import { ListExampleGroups } from './examples/ListExampleGroups/ListExampleGroup
 import { ListExampleRenderItem } from './examples/ListExampleRenderItem/ListExampleRenderItem';
 import { ListExampleCustomTypes } from './examples/ListExampleCustomTypes/ListExampleCustomTypes';
 import { ListExampleDisabledItem } from './examples/ListExampleDisabledItem/ListExampleDisabledItem';
+import { ListItemExample } from './examples/ListItemExample/ListItemExample';
+import { ListGroupLabelExample } from './examples/ListGroupLabelExample/ListGroupLabelExample';
+import { ListAddItemExample } from './examples/ListAddItemExample/ListAddItemExample';
+import { ListLoaderExample } from './examples/ListLoaderExample/ListLoaderExample';
 
 ```tsx
 import { List } from '@consta/uikit/ListCanary';
@@ -27,6 +31,10 @@ import { List } from '@consta/uikit/ListCanary';
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
   - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-групп-и-вариантов)
+- [Элемент списка](#элемент-списка)
+- [Загрузчик](#Загрузчик)
+- [Заголовок группы](#заголовок-группы)
+- [Компонент для добавления элемента](#компонент-для-добавления-элемента)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 
@@ -63,7 +71,7 @@ import { List } from '@consta/uikit/ListCanary';
 
 ```tsx
 import React from 'react';
-import { cnMixList, List } from '@consta/uikit/ListCanary';
+import { List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
@@ -86,7 +94,7 @@ const items: Item[] = [
 ];
 
 function ListExampleItems() {
-  return <List items={items} className={cnMixList({})} />;
+  return <List items={items} />;
 }
 ```
 
@@ -98,7 +106,7 @@ function ListExampleItems() {
 
 ```tsx
 import React from 'react';
-import { cnMixList, List } from '@consta/uikit/ListCanary';
+import { List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
@@ -125,13 +133,7 @@ const items: Item[] = [
 ];
 
 function ListExampleDisabledItem() {
-  return (
-    <List
-      placeholder="Выберите вариант"
-      items={items}
-      className={cnMixList({})}
-    />
-  );
+  return <List placeholder="Выберите вариант" items={items} />;
 }
 ```
 
@@ -147,7 +149,7 @@ function ListExampleDisabledItem() {
 
 ```tsx
 import React from 'react';
-import { cnMixList, List } from '@consta/uikit/ListCanary';
+import { List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
@@ -210,7 +212,7 @@ const items: Item[] = [
 ];
 
 function ListExampleGroups() {
-  return <List items={items} className={cnMixList({})} groups={groups} />;
+  return <List items={items} groups={groups} />;
 }
 ```
 
@@ -224,7 +226,7 @@ function ListExampleGroups() {
 
 ```tsx
 import React from 'react';
-import { cnMixList, List } from '@consta/uikit/ListCanary';
+import { List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
@@ -251,19 +253,19 @@ const ListExampleSize = () => {
     <>
       <div>
         <Text>xs</Text>
-        <List items={items} size="xs" className={cnMixList({})} />
+        <List items={items} size="xs" />
       </div>
       <div>
         <Text>s</Text>
-        <List items={items} className={cnMixList({})} size="s" />
+        <List items={items} size="s" />
       </div>
       <div>
         <Text>m</Text>
-        <List className={cnMixList({})} items={items} size="m" />
+        <List items={items} size="m" />
       </div>
       <div>
         <Text>l</Text>
-        <List className={cnMixList({})} items={items} size="l" />
+        <List items={items} size="l" />
       </div>
     </>
   );
@@ -278,7 +280,7 @@ const ListExampleSize = () => {
 
 ```tsx
 import React from 'react';
-import { cnMixList, List } from '@consta/uikit/ListCanary';
+import { List } from '@consta/uikit/ListCanary';
 import { Text } from '@consta/uikit/Text';
 type Item = {
   label: string;
@@ -305,15 +307,15 @@ const ListExampleForm = () => {
     <>
       <div>
         <Text>default</Text>
-        <List className={cnMixList({})} items={items} form="default" />
+        <List items={items} form="default" />
       </div>
       <div>
         <Text>round</Text>
-        <List className={cnMixList({})} items={items} form="round" />
+        <List items={items} form="round" />
       </div>
       <div>
         <Text>brick</Text>
-        <List className={cnMixList({})} items={items} form="brick" />
+        <List items={items} form="brick" />
       </div>
     </>
   );
@@ -328,7 +330,7 @@ const ListExampleForm = () => {
 
 ```tsx
 import React from 'react';
-import { cnMixList, List } from '@consta/uikit/ListCanary';
+import { List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
@@ -351,7 +353,7 @@ const items: Item[] = [
 ];
 
 function ListExampleDisabled() {
-  return <List items={items} disabled className={cnMixList({})} />;
+  return <List items={items} disabled />;
 }
 ```
 
@@ -371,9 +373,9 @@ function ListExampleDisabled() {
 ```tsx
 import React from 'react';
 import { Badge } from '@consta/uikit/Badge';
-import { cnMixList, List } from '@consta/uikit/ListCanary';
+import { List } from '@consta/uikit/ListCanary';
 
-import { cn } from '@bem-react/classname';
+import { cn } from '@bem-react/className';
 
 const cnListExampleRenderItem = cn('ListExampleRenderItem');
 
@@ -419,7 +421,6 @@ function ListExampleRenderItem() {
   return (
     <List
       items={items}
-      className={cnMixList({})}
       renderItem={(item) => (
         <div className={cnListExampleRenderItem('Item')}>
           {item.label}
@@ -470,13 +471,12 @@ const defaultGetGroupRightSide = (group) => group.rightSide;
 
 ```tsx
 import React from 'react';
-import { cnMixList, List } from '@consta/uikit/ListCanary';
+import { List } from '@consta/uikit/ListCanary';
 
 function ListExampleCustomTypes() {
   return (
     <List
       items={['Первый', 'Второй', 'Третий']}
-      className={cnMixList({})}
       getItemKey={(item) => item}
       getItemLabel={(item) => item}
     />
@@ -486,12 +486,122 @@ function ListExampleCustomTypes() {
 
 <ListExampleCustomTypes />
 
+## Элемент списка
+
+Если вам необходимо использовать элемент списка отдельно от компонента `List`, вы можете
+импортировать к себе компонент `ListItem`.
+
+```tsx
+<ListItem label="Пункт меню" active />
+```
+
+<ListItemExample />
+
+### Импорт
+
+```tsx
+import { ListItem } from '@consta/uikit/ListCanary';
+```
+
+### Свойства
+
+| Свойство     | Тип или варианты значения     | По умолчанию | Описание                        |
+| ------------ | ----------------------------- | ------------ | ------------------------------- |
+| `size?`      | `'xs', 's', 'm', 'l'`         | `m`          | Размер компонента               |
+| `label`      | `string`                      | -            | Название элемента               |
+| `disabled?`  | `boolean`                     | -            | Делает элемент неактивным       |
+| `active?`    | `boolean`                     | -            | Помечает элемент как активный   |
+| `leftSide?`  | `React.ReactNode`             | -            | Контент слева                   |
+| `leftIcon?`  | `IconComponent`               | -            | Иконка слева                    |
+| `rightSide?` | `React.ReactNode`             | -            | Контент справа                  |
+| `rightIcon?` | `IconComponent`               | -            | Иконка справа                   |
+| `onClick?`   | `React.MouseEventHandler`     | -            | Событие по нажатию на элемент   |
+| `as?`        | `keyof JSX.IntrinsicElements` | -            | HTML-тэг компонента             |
+| `indent?`    | `'increased', 'normal'`       | -            | Контролирует внутренние отступы |
+| `className?` | `string`                      | -            | Дополнительный CSS-класс        |
+
+## Загрузчик
+
+Данный компонент представляет из себя пункт меню с компонентом `Loader`.
+
+```tsx
+<ListLoader size="m" />
+```
+
+<ListLoaderExample />
+
+### Импорт
+
+```tsx
+import { ListLoader } from '@consta/uikit/ListCanary';
+```
+
+### Свойства
+
+| Свойство     | Тип или варианты значения | По умолчанию | Описание                 |
+| ------------ | ------------------------- | ------------ | ------------------------ |
+| `size?`      | `'xs', 's', 'm', 'l'`     | `m`          | Размер компонента        |
+| `className?` | `string`                  | -            | Дополнительный CSS-класс |
+
+## Заголовок группы
+
+Данный компонент представляет из себя отдельный заголовок группы.
+
+```tsx
+<ListGroupLabel label="Заголовок" rightSide={<Badge label="Example" />} />
+```
+
+<ListGroupLabelExample />
+
+### Импорт
+
+```tsx
+import { ListGroupLabel } from '@consta/uikit/ListCanary';
+```
+
+### Свойства
+
+| Свойство     | Тип или варианты значения | По умолчанию | Описание                        |
+| ------------ | ------------------------- | ------------ | ------------------------------- |
+| `size?`      | `'xs', 's', 'm', 'l'`     | `m`          | Размер компонента               |
+| `label?`     | `string`                  | -            | Заголовок группы                |
+| `disabled?`  | `boolean`                 | -            | Делает элемент неактивным       |
+| `indent?`    | `'increased', 'normal'`   | -            | Контролирует внутренние отступы |
+| `onClick?`   | `React.MouseEventHandler` | -            | Событие по нажатию на элемент   |
+| `className?` | `string`                  | -            | Дополнительный CSS-класс        |
+
+## Компонент для добавления элемента
+
+Данный компонент представляет из себя элемент-кнопку при помощи которой можно добавить новый элемент списка.
+
+```tsx
+<ListAddItem label="Добавить" onClick={() => alert('onClick')} />
+```
+
+<ListAddItemExample />
+
+### Импорт
+
+```tsx
+import { ListAddItem } from '@consta/uikit/ListCanary';
+```
+
+### Свойства
+
+| Свойство     | Тип или варианты значения | По умолчанию | Описание                 |
+| ------------ | ------------------------- | ------------ | ------------------------ |
+| `size?`      | `'xs', 's', 'm', 'l'`     | `m`          | Размер компонента        |
+| `label?`     | `string`                  | -            | Заголовок группы         |
+| `rightSide?` | `React.ReactNode`         | -            | Контент справа           |
+| `className?` | `string`                  | -            | Дополнительный CSS-класс |
+
 ## Импорт
 
 ```tsx
 import {
   cnMixList,
   List,
+  ListGroupLabel,
   ListItem,
   ListAddItem,
 } from '@consta/uikit/ListCanary';

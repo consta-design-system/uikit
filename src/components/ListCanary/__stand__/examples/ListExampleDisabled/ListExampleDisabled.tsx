@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnMixList, List } from '##/components/ListCanary';
+import { List } from '##/components/ListCanary';
 
 type Item = {
   label: string;
@@ -26,7 +26,7 @@ const items: Item[] = [
 export const ListExampleDisabled = () => {
   return (
     <Example>
-      <List className={cnMixList({})} items={items} disabled />
+      <List items={items} disabled />
     </Example>
   );
 };

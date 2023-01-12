@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnMixList, List } from '##/components/ListCanary';
+import { List } from '##/components/ListCanary';
 import { Text } from '##/components/Text';
 
 type Item = {
@@ -29,19 +29,19 @@ export const ListExampleSize = () => {
     <Example col={{ 1: 0, flex: 600 }}>
       <div>
         <Text>xs</Text>
-        <List items={items} size="xs" className={cnMixList({})} />
+        <List items={items} size="xs" />
       </div>
       <div>
         <Text>s</Text>
-        <List items={items} size="s" className={cnMixList({})} />
+        <List items={items} size="s" />
       </div>
       <div>
         <Text>m</Text>
-        <List items={items} size="m" className={cnMixList({})} />
+        <List items={items} size="m" />
       </div>
       <div>
         <Text>l</Text>
-        <List items={items} size="l" className={cnMixList({})} />
+        <List items={items} size="l" />
       </div>
     </Example>
   );

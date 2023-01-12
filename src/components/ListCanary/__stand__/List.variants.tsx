@@ -7,7 +7,6 @@ import { cn } from '##/utils/bem';
 
 import { basicItems, groups } from '../__mocks__/mock.data';
 import { List } from '../ListCanary';
-import { cnMixList } from '../MixList';
 import {
   DefaultListItem,
   defaultListPropForm,
@@ -54,9 +53,7 @@ const Variants = () => {
     <List
       form={form}
       disabled={disabled}
-      className={cnListVariant('Content', [
-        cnMixList({ size, form, shadow: true }),
-      ])}
+      className={cnListVariant('Content')}
       isLoading={isLoading}
       size={size}
       items={basicItems}

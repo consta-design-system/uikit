@@ -4,7 +4,7 @@ import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Badge } from '##/components/Badge';
-import { cnMixList, List } from '##/components/ListCanary';
+import { List } from '##/components/ListCanary';
 import { cn } from '##/utils/bem';
 
 const cnListExampleRenderItem = cn('ListExampleRenderItem');
@@ -51,7 +51,7 @@ export const ListExampleRenderItem = () => {
   return (
     <Example>
       <List
-        className={cnListExampleRenderItem(null, [cnMixList({})])}
+        className={cnListExampleRenderItem()}
         items={items}
         renderItem={(item) => (
           <div className={cnListExampleRenderItem('Item')}>
