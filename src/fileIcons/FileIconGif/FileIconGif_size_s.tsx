@@ -23,5 +23,4 @@ const FileIconGifSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default FileIconGifSizeS;

@@ -1,8 +1,4 @@
 .MixPopoverAnimateExample {
-  &-Button {
-    margin-bottom: var(--space-m);
-  }
-
   &-Popover {
     padding: var(--space-m);
     background: var(--color-bg-default);

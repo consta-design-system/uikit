@@ -6,5 +6,4 @@ const IconCursorMouseSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M4.485 11 3 1.5l7.5 5.317-3.789.803L4.485 11z" />
   </svg>
 );
-
 export default IconCursorMouseSizeXs;

@@ -1,15 +1,6 @@
 import { MdxMenu } from '@consta/stand';
 
-import {
-  IconExampleViewAlert,
-  IconExampleViewLink,
-  IconExampleViewBrand,
-  IconExampleViewGhost,
-  IconExampleViewPrimary,
-  IconExampleViewSuccess,
-  IconExampleViewWarning,
-  IconExampleViewSecondary,
-} from './examples/IconExampleView/IconExampleView';
+import { IconExampleView } from './examples/IconExampleView/IconExampleView';
 import { IconExampleSize } from './examples/IconExampleSize/IconExampleSize';
 
 ```tsx
@@ -30,13 +21,11 @@ import { Icon } from '@consta/uikit/Icon';
 
 За вид иконки отвечает свойство `view`.
 
-| `'alert'`                | `'brand'`                | `'ghost'`                | `'link'`                | `'primary'`                | `'secondary'`                | `'success'`                | `'warning'`                |
-| ------------------------ | ------------------------ | ------------------------ | ----------------------- | -------------------------- | ---------------------------- | -------------------------- | -------------------------- |
-| <IconExampleViewAlert /> | <IconExampleViewBrand /> | <IconExampleViewGhost /> | <IconExampleViewLink /> | <IconExampleViewPrimary /> | <IconExampleViewSecondary /> | <IconExampleViewSuccess /> | <IconExampleViewWarning /> |
+<IconExampleView />
 
 ## Размер
 
-За размер иконки отвечает свойство `size`. Варианты: `'xs'`, `'s'`, `'m'`.
+За размер иконки отвечает свойство `size`. Варианты: `'xs'`, `'s'`, `'m'`, `'l'`.
 
 <IconExampleSize />
 
@@ -50,7 +39,7 @@ import { Icon } from '@consta/uikit/Icon';
 
 | Свойство                | Тип                                                                                             | По умолчанию | Описание                                  |
 | ----------------------- | ----------------------------------------------------------------------------------------------- | ------------ | ----------------------------------------- |
-| [`size?` ](#размер)     | `'xs'`, `'s'`, `'m'`                                                                            | `'m'`        | Размер                                    |
+| [`size?` ](#размер)     | `'xs'`, `'s'`, `'m'` , `'l'`                                                                    | `'m'`        | Размер                                    |
 | [`view?`](#внешний-вид) | `'alert'`, `'brand'`, `'ghost'`, `'link'`, `'primary'`, `'secondary'`, `'success'`, `'warning'` | -            | Вид иконки                                |
 | `className?`            | `string`                                                                                        | -            | Дополнительный CSS-класс                  |
 | `ref?`                  | `React.Ref<HTMLSpanElement>`                                                                    | -            | Ссылка на корневой DOM-элемент компонента |

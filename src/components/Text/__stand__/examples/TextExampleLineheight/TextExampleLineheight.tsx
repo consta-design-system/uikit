@@ -1,30 +1,22 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { Text, textPropLineHeight } from '../../../Text';
 
 export const TextExampleLineheight = () => {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'xs-columns': 2, 'col-gap': 'full', 'row-gap': 'full' }),
-      ])}
-    >
-      {textPropLineHeight.map((item, index) => (
-        <div key={index} className={wp.tplGrid('fraction', { row: 'third' })}>
-          <Text
-            size="s"
-            view="ghost"
-            className={wp.decorator({ 'indent-b': 'xs' })}
-          >
-            {`line-height="${item}"`}
-          </Text>
-          <Text lineHeight={item}>
+    <Example
+      col={{ 1: 0, 2: 600, 3: 800 }}
+      separately
+      items={textPropLineHeight.map((lineHeight) => ({
+        label: `lineHeight="${lineHeight}"`,
+        status: 'system',
+        node: (
+          <Text lineHeight={lineHeight}>
             Съешь ещё этих мягких французских булок, да выпей же чаю.
           </Text>
-        </div>
-      ))}
-    </div>
+        ),
+      }))}
+    />
   );
 };

@@ -7,5 +7,4 @@ const IconShuffleSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="m1.707 1 3.586 3.586-.707.707L1 1.707 1.707 1zm7.896 7.896L7.414 6.707l-.707.707 2.19 2.19L7.5 11H11V7.5L9.603 8.896z" />
   </svg>
 );
-
 export default IconShuffleSizeXs;

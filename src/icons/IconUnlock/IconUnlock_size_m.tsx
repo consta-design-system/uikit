@@ -10,5 +10,4 @@ const IconUnlockSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconUnlockSizeM;

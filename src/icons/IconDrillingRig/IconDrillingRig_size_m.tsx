@@ -11,5 +11,4 @@ const IconDrillingRigSizeM = (props: SVGProps<SVGSVGElement>) => (
     <path d="M6 12H4v2h2v-2zm12 0h2v2h-2v-2zM1.7 19h2.332l-2.4 4H1v-2.833L1.7 19zm1.6 4h2.332l2.4-4H5.7l-2.4 4zm4 0h2.332l2.4-4H9.7l-2.4 4zm4 0h2.332l2.4-4H13.7l-2.4 4zm4 0h2.332l2.4-4H17.7l-2.4 4zm4 0h2.332L23 20.72V19h-1.3l-2.4 4z" />
   </svg>
 );
-
 export default IconDrillingRigSizeM;

@@ -12,5 +12,4 @@ const IconLithologyStrokedSizeM = (props: SVGProps<SVGSVGElement>) => (
     <path d="M11 11h2v2h-2v-2ZM14 14h2v2h-2v-2ZM17 17h2v2h-2v-2ZM17 11h2v2h-2v-2ZM5 17h2v2H5v-2Z" />
   </svg>
 );
-
 export default IconLithologyStrokedSizeM;

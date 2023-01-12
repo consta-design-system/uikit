@@ -17,5 +17,4 @@ const IconWarningSizeS = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 );
-
 export default IconWarningSizeS;

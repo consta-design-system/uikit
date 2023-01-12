@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Button } from '../../../../Button/Button';
 import { simpleItems as items } from '../../../__mocks__/mock.data';
 import { Steps } from '../../../StepsDeprecated';
@@ -19,7 +18,7 @@ export const ExampleStepsContent = () => {
   const onChange = ({ value }: { value: string }) => setActiveStep(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Steps
         items={items}
         getLabel={getLabel}
@@ -37,6 +36,6 @@ export const ExampleStepsContent = () => {
         onClick={handleNext}
         disabled={activeStepIndex === items.length - 1}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

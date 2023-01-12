@@ -63,5 +63,4 @@ const ResponsesImageEmptyBox = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default ResponsesImageEmptyBox;

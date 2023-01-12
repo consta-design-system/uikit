@@ -1,5 +1,6 @@
 import './ExampleUseHideElementsInLine.css';
 
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Tag } from '../../../../../components/Tag/Tag';
@@ -26,29 +27,31 @@ export const ExampleUseHideElementsInLine = () => {
     useHideElementsInLine(items);
 
   return (
-    <div ref={wrapperRef} className={cnExampleUseHideElementsInLine()}>
-      {items.map((item, index) => {
-        return (
-          <Tag
-            className={cnExampleUseHideElementsInLine('Tag', {
-              display: !visibleItems[index] && 'hidden',
-            })}
-            key={index}
-            label={item}
-            ref={itemsRefs[index]}
-            mode="info"
-          />
-        );
-      })}
-      <Tag
-        className={cnExampleUseHideElementsInLine('Tag', {
-          display: !hiddenItems.length && 'none',
+    <Example col={1}>
+      <div ref={wrapperRef} className={cnExampleUseHideElementsInLine()}>
+        {items.map((item, index) => {
+          return (
+            <Tag
+              className={cnExampleUseHideElementsInLine('Tag', {
+                display: !visibleItems[index] && 'hidden',
+              })}
+              key={index}
+              label={item}
+              ref={itemsRefs[index]}
+              mode="info"
+            />
+          );
         })}
-        key="more"
-        label={`+${hiddenItems.length}`}
-        ref={moreRef}
-        mode="info"
-      />
-    </div>
+        <Tag
+          className={cnExampleUseHideElementsInLine('Tag', {
+            display: !hiddenItems.length && 'none',
+          })}
+          key="more"
+          label={`+${hiddenItems.length}`}
+          ref={moreRef}
+          mode="info"
+        />
+      </div>
+    </Example>
   );
 };

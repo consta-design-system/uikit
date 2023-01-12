@@ -10,7 +10,7 @@ import { Button } from '../../../Button';
 
 export const ButtonExampleIconBasic = () => {
   return (
-    <Example col={{ 1: 0, flex: 600 }}>
+    <Example>
       <Button label="Назад" iconLeft={IconBackward} />
       <Button label="Вперёд" iconRight={IconForward} />
     </Example>
@@ -19,7 +19,7 @@ export const ButtonExampleIconBasic = () => {
 
 export const ButtonExampleIconOnly = () => {
   return (
-    <Example col={{ 1: 0, flex: 600 }}>
+    <Example>
       <Button label="Назад" view="ghost" iconLeft={IconHamburger} onlyIcon />
       <Button label="Назад" view="ghost" iconLeft={IconCalendar} onlyIcon />
       <Button label="Вперёд" view="ghost" iconRight={IconFilter} onlyIcon />

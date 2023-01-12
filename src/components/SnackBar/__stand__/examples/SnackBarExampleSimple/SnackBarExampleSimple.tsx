@@ -1,13 +1,8 @@
-import './SnackBarExampleSimple.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { cn } from '../../../../../utils/bem';
 import { SnackBar } from '../../../SnackBar';
 import { SnackBarItemDefault } from '../../../types';
-
-const cnSnackBarExampleSimple = cn('SnackBarExampleSimple');
 
 const items: SnackBarItemDefault[] = [
   {
@@ -39,8 +34,8 @@ const items: SnackBarItemDefault[] = [
 
 export const SnackBarExampleSimple = () => {
   return (
-    <div className={cnSnackBarExampleSimple('', [cnDocsDecorator('Section')])}>
-      <SnackBar className={cnSnackBarExampleSimple('SnackBar')} items={items} />
-    </div>
+    <Example col={1}>
+      <SnackBar items={items} />
+    </Example>
   );
 };

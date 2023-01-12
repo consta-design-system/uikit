@@ -6,5 +6,4 @@ const IconHamburgerSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M11 3H1V2h10v1zm0 3H1V5h10v1zM1 9h10V8H1v1z" />
   </svg>
 );
-
 export default IconHamburgerSizeXs;

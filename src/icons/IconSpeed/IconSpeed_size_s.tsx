@@ -7,5 +7,4 @@ const IconSpeedSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M7.332 10.34c.615.429 1.45.294 1.864-.3.415-.596 2.016-5.264 2.016-5.264S7.385 7.893 6.97 8.487c-.415.595-.253 1.425.362 1.853Z" />
   </svg>
 );
-
 export default IconSpeedSizeS;

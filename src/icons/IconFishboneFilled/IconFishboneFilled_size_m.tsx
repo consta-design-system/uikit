@@ -13,5 +13,4 @@ const IconFishboneFilledSizeM = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 );
-
 export default IconFishboneFilledSizeM;

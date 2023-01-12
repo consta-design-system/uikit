@@ -11,73 +11,95 @@ import { cnDocsExample } from '##/uiKit/components/DocsExample';
 
 export const ButtonExampleNameSemantics = () => {
   return (
-    <Example col={{ 1: 0, 2: 800 }}>
-      <div>
-        <p className={cnDocsExample('Caption')}>Ракета к запуску готова.</p>
-        <Button label="OK" />
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>
-          Неправильно
-        </p>
-        <p className={cnDocsExample('Subscription')}>
-          Непонятно, что будет, если нажать на кнопку. Скорее всего, ничего, но
-          это не точно.
-        </p>
-      </div>
-      <div>
-        <p className={cnDocsExample('Caption')}>Ракета к запуску готова.</p>
-        <Button label="Запустить" />
-        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
-        <p className={cnDocsExample('Subscription')}>
-          Понятно, что если нажать на кнопку, ракета отправится в полёт.
-        </p>
-      </div>
-    </Example>
+    <Example
+      col={{ 1: 0, 2: 800 }}
+      separately
+      items={[
+        {
+          label: 'Неправильно',
+          description:
+            'Непонятно, что будет, если нажать на кнопку. Скорее всего, ничего, но это не точно.',
+          status: 'error',
+          node: (
+            <div>
+              <Text className={cnMixSpace({ mB: 'm' })}>
+                Ракета к запуску готова.
+              </Text>
+              <Button label="OK" />
+            </div>
+          ),
+        },
+        {
+          label: 'Правильно',
+          description:
+            'Понятно, что если нажать на кнопку, ракета отправится в полёт.',
+          status: 'success',
+          node: (
+            <div>
+              <Text className={cnMixSpace({ mB: 'm' })}>
+                Ракета к запуску готова.
+              </Text>
+              <Button label="Запустить" />
+            </div>
+          ),
+        },
+      ]}
+    />
   );
 };
 
 export const ButtonExampleNameVerb = () => {
   return (
-    <Example col={{ 1: 0, 2: 800 }}>
-      <div>
-        <div style={{ display: 'flex', gap: 'var(--space-l)' }}>
-          <Button label="Поиск" />
-          <Button label="Искать" />
-        </div>
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>
-          Неправильно
-        </p>
-        <p className={cnDocsExample('Subscription')}>
-          Предлагаем поискать, но результат не гарантируем.
-        </p>
-      </div>
-      <div>
-        <Button label="Найти" />
-        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
-        <p className={cnDocsExample('Subscription')}>
-          Внимание на результат: обязательно найдём то, что вы ищете.
-        </p>
-      </div>
-    </Example>
+    <Example
+      col={{ 1: 0, 2: 800 }}
+      separately
+      items={[
+        {
+          label: 'Неправильно',
+          description: 'Предлагаем поискать, но результат не гарантируем.',
+          status: 'error',
+          node: (
+            <div style={{ display: 'flex', gap: 'var(--space-l)' }}>
+              <Button label="Поиск" />
+              <Button label="Искать" />
+            </div>
+          ),
+        },
+        {
+          label: 'Правильно',
+          description:
+            'Внимание на результат: обязательно найдём то, что вы ищете.',
+          status: 'success',
+          node: <Button label="Найти" />,
+        },
+      ]}
+    />
   );
 };
 
 export const ButtonExampleNameSingleLine = () => {
   return (
-    <Example col={{ 1: 0, 2: 800 }}>
-      <div>
-        <Button
-          label="Скачать файл презентации"
-          style={{ width: '200px', whiteSpace: 'normal', height: 'auto' }}
-        />
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>
-          Неправильно
-        </p>
-      </div>
-      <div>
-        <Button label="Скачать" className={cnMixSpace({ mB: '3xl' })} />
-        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
-      </div>
-    </Example>
+    <Example
+      col={{ 1: 0, 2: 800 }}
+      separately
+      items={[
+        {
+          label: 'Неправильно',
+          status: 'error',
+          node: (
+            <Button
+              label="Скачать файл презентации"
+              style={{ width: '200px', whiteSpace: 'normal', height: 'auto' }}
+            />
+          ),
+        },
+        {
+          label: 'Правильно',
+          status: 'success',
+          node: <Button label="Скачать" />,
+        },
+      ]}
+    />
   );
 };
 
@@ -108,43 +130,67 @@ export const ButtonExampleNameOverflow = () => {
 
 export const ButtonExampleNameTooBig = () => {
   return (
-    <Example col={{ 1: 0, 2: 800 }}>
-      <div className={cnDocsExample()}>
-        <Button label="Отредактировать больничный лист" />
-      </div>
-      <div className={cnDocsExample()}>
-        <Button
-          label="Отредактировать больничный лист"
-          style={{ width: '240px' }}
-        />
-        <p className={cnDocsExample('Status', { view: 'wrong' })}>
-          Неправильно
-        </p>
-      </div>
-      <div className={cnDocsExample()}>
-        <div>
-          <Text size="l" weight="bold" lineHeight="l">
-            Больничный лист
-          </Text>
-          <Button label="Редактировать" size="s" />
-        </div>
-      </div>
-      <div className={cnDocsExample()}>
-        <div>
-          <Text size="l" weight="bold" lineHeight="l">
-            Больничный лист
-          </Text>
-          <Button
-            label="Редактировать"
-            iconRight={IconEdit}
-            size="s"
-            iconSize="s"
-            onlyIcon
-          />
-        </div>
-        <p className={cnDocsExample('Status', { view: 'right' })}>Правильно</p>
-      </div>
-    </Example>
+    <Example
+      col={{ 1: 0, 2: 800 }}
+      separately
+      items={[
+        {
+          label: 'Неправильно',
+          status: 'error',
+          node: <Button label="Отредактировать больничный лист" />,
+        },
+        {
+          label: 'Неправильно',
+          status: 'error',
+          node: (
+            <Button
+              label="Отредактировать больничный лист"
+              style={{ width: '240px' }}
+            />
+          ),
+        },
+        {
+          label: 'Правильно',
+          status: 'success',
+          node: (
+            <>
+              <Text
+                className={cnMixSpace({ mB: 'm' })}
+                size="l"
+                weight="bold"
+                lineHeight="l"
+              >
+                Больничный лист
+              </Text>
+              <Button label="Редактировать" size="s" />
+            </>
+          ),
+        },
+        {
+          label: 'Правильно',
+          status: 'success',
+          node: (
+            <>
+              <Text
+                className={cnMixSpace({ mB: 'm' })}
+                size="l"
+                weight="bold"
+                lineHeight="l"
+              >
+                Больничный лист
+              </Text>
+              <Button
+                label="Редактировать"
+                iconRight={IconEdit}
+                size="s"
+                iconSize="s"
+                onlyIcon
+              />
+            </>
+          ),
+        },
+      ]}
+    />
   );
 };
 
@@ -159,17 +205,17 @@ export const ButtonExampleNameNavigation = () => {
 
 export const ButtonExampleNameAgreement = () => {
   return (
-    <Example>
+    <Example col={{ 1: 0, 2: 800 }} separately>
       <div>
-        <p className={cnDocsExample('Caption')}>
+        <Text className={cnMixSpace({ mB: 'm' })}>
           Мы используем куки! Без них всё сломается :(
-        </p>
+        </Text>
         <Button label="Понятно" />
       </div>
       <div>
-        <p className={cnDocsExample('Caption')}>
+        <Text className={cnMixSpace({ mB: 'm' })}>
           Примите лиценизонное соглашение, ну пожалуйста.
-        </p>
+        </Text>
         <Button label="Принимаю" />
       </div>
     </Example>

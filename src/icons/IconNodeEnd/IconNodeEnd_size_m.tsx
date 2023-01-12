@@ -7,5 +7,4 @@ const IconNodeEndSizeM = (props: SVGProps<SVGSVGElement>) => (
     <path d="M3 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" />
   </svg>
 );
-
 export default IconNodeEndSizeM;

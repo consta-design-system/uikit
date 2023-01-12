@@ -10,5 +10,4 @@ const IconFlagStrokedSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconFlagStrokedSizeXs;

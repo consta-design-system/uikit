@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Tabs } from '../../../TabsDeprecated';
 
 const items = ['Таб номер один', 'Таб номер два', 'Таб номер три'];
@@ -9,7 +8,7 @@ const items = ['Таб номер один', 'Таб номер два', 'Таб
 export const TabsExampleFitModeDropdown = () => {
   const [value, setValue] = useState(items[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       {[300, 200, 100].map((width) => (
         <div key={width} style={{ width }}>
           <Tabs
@@ -21,6 +20,6 @@ export const TabsExampleFitModeDropdown = () => {
           />
         </div>
       ))}
-    </StoryBookExample>
+    </Example>
   );
 };

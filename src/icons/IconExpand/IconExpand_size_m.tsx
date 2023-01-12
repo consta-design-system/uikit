@@ -10,5 +10,4 @@ const IconExpandSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconExpandSizeM;

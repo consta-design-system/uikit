@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Tabs } from '../../../Tabs';
 
 const items = ['Таб номер один', 'Таб номер два', 'Таб номер три'];
@@ -9,7 +8,7 @@ const items = ['Таб номер один', 'Таб номер два', 'Таб
 export const TabsExampleFitModeScroll = () => {
   const [value, setValue] = useState(items[0]);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <div style={{ width: 250 }}>
         <Tabs
           fitMode="scroll"
@@ -19,6 +18,6 @@ export const TabsExampleFitModeScroll = () => {
           getItemLabel={(item) => item}
         />
       </div>
-    </StoryBookExample>
+    </Example>
   );
 };

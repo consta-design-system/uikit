@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Button } from '../../../../Button/Button';
 import { Responses403 } from '../../../../Responses403/Responses403';
 import { Responses404 } from '../../../../Responses404/Responses404';
@@ -17,140 +16,137 @@ import { ResponsesSuccess } from '../../../../ResponsesSuccess/ResponsesSuccess'
 
 export const ExampleResponses403 = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Responses403 size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponses404 = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Responses404 size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponses500 = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Responses500 size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponses503 = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Responses503 size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesConnectionError = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ResponsesConnectionError size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesEmptyBox = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ResponsesEmptyBox size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesEmptyPockets = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ResponsesEmptyPockets size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesDeleted = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ResponsesDeleted size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesNothingFound = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ResponsesNothingFound size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesSuccess = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ResponsesSuccess size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesText = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ResponsesSuccess
         size="m"
         title="Всё готово"
         description="Можно двигаться дальше: сначала два шага направо, потом четыре налево, и всё — только вперёд!"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesActions = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ResponsesSuccess
         size="m"
         title="Всё готово"
         description="Можно двигаться дальше: сначала два шага направо, потом четыре налево, и всё — только вперёд!"
         actions={<Button size="m" view="ghost" label="Ура, я уже бегу" />}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesSizeM = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Responses404 size="m" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesSizeL = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Responses404 size="l" />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesExit = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <ResponsesExit />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const ExampleResponsesAdaptive = () => {
   return (
-    <StoryBookExample
-      className={cnDocsDecorator('Section')}
-      style={{ width: 300 }}
-    >
+    <Example col={1}>
       <ResponsesExit />
-    </StoryBookExample>
+    </Example>
   );
 };

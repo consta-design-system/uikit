@@ -10,5 +10,4 @@ const IconCancelSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconCancelSizeXs;

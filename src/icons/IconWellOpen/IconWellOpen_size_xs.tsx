@@ -10,5 +10,4 @@ const IconWellOpenSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconWellOpenSizeXs;

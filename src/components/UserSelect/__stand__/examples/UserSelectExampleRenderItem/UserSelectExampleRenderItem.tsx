@@ -1,8 +1,8 @@
 import './UserSelectExampleRenderItem.css';
 
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Badge } from '../../../../Badge/Badge';
 import { User } from '../../../../User/User';
@@ -82,7 +82,7 @@ const searchFunction = (item: Item, searchValue: string): boolean => {
 export function UserSelectExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <UserSelect
         placeholder="Выберите пользователя"
         items={items}
@@ -115,6 +115,6 @@ export function UserSelectExampleRenderItem() {
           </div>
         )}
       />
-    </div>
+    </Example>
   );
 }

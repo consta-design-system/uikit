@@ -1,16 +1,18 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
-import { Text } from '../../../Text';
+import { Text, textPropTransform } from '../../../Text';
 
 export const TextExampleTransform = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Text size="s" view="ghost" className={wp.decorator({ 'indent-b': 'm' })}>
-        transform=&quot;uppercase&quot;
-      </Text>
-      <Text transform="uppercase">Просто текст</Text>
-    </div>
+    <Example
+      col={{ 1: 0 }}
+      separately
+      items={textPropTransform.map((transform) => ({
+        label: `transform="${transform}"`,
+        status: 'system',
+        node: <Text transform={transform}>Просто текст</Text>,
+      }))}
+    />
   );
 };

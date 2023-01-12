@@ -7,5 +7,4 @@ const IconSmileSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M4.562 10.044a4 4 0 0 0 6.86.026l-1.36-.823a2.41 2.41 0 0 1-4.133-.016l-1.367.813ZM9 6h2v2H9V6ZM5 6h2v2H5V6Z" />
   </svg>
 );
-
 export default IconSmileSizeS;

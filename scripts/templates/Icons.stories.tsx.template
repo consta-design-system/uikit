@@ -1,12 +1,9 @@
-import './IconGrid.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { cn } from '##/utils/bem';
 
 #imports#
-
-import { IconGridItem } from './IconGridItem';
 
 const icons = {
   #icons#
@@ -18,12 +15,22 @@ const cnIconGrid = cn('IconGrid');
 
 const names = Object.keys(icons).sort() as Name[];
 
+const getItemStatus = () => 'system' as const;
+const getItemDescription = (name: Name) => name;
+const getItemNode = (name: Name) => {
+  const Icon = icons[name];
+  return <Icon />;
+};
+
 export function IconGrid() {
   return (
-    <div className={cnIconGrid()}>
-      {names.map((name) => (
-        <IconGridItem key={name} name={name} icon={icons[name]} />
-      ))}
-    </div>
+    <Example
+      className={cnIconGrid()}
+      col={{ 1: 0, 2: 500, 3: 700, 4: 890 }}
+      getItemStatus={getItemStatus}
+      getItemNode={getItemNode}
+      getItemDescription={getItemDescription}
+      items={names}
+    />
   );
 }

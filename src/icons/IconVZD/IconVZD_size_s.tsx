@@ -11,5 +11,4 @@ const IconVZDSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconVZDSizeS;

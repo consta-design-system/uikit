@@ -8,7 +8,7 @@ import { DragNDropField } from '../../../DragNDropField';
 export const DragNDropFieldExampleOnDropFiles = () => {
   const [files, setFiles] = React.useState<File[]>([]);
   return (
-    <Example>
+    <Example col={1}>
       <div>
         <DragNDropField multiple onDropFiles={setFiles}>
           <Text>Перетяните файлы сюда</Text>

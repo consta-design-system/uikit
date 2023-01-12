@@ -1,53 +1,17 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
+import { iconPropView } from '../../../../Icon';
 import { IconBag } from '../../../../IconBag/IconBag';
 
-export const IconExampleViewAlert = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <IconBag view="alert" />
-  </StoryBookExample>
-);
+const views = [...iconPropView];
 
-export const IconExampleViewBrand = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <IconBag view="brand" />
-  </StoryBookExample>
-);
-
-export const IconExampleViewGhost = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <IconBag view="ghost" />
-  </StoryBookExample>
-);
-
-export const IconExampleViewLink = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <IconBag view="link" />
-  </StoryBookExample>
-);
-
-export const IconExampleViewPrimary = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <IconBag view="primary" />
-  </StoryBookExample>
-);
-
-export const IconExampleViewSecondary = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <IconBag view="secondary" />
-  </StoryBookExample>
-);
-
-export const IconExampleViewWarning = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <IconBag view="warning" />
-  </StoryBookExample>
-);
-
-export const IconExampleViewSuccess = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
-    <IconBag view="success" />
-  </StoryBookExample>
+export const IconExampleView = () => (
+  <Example
+    col={{ 1: 0, 2: 320, 3: 500, 4: 700, 5: 890 }}
+    items={views}
+    separately
+    getItemNode={(view) => <IconBag view={view} />}
+    getItemDescription={(view) => `view="${view}"`}
+  />
 );

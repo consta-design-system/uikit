@@ -1,15 +1,14 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { withColSpan } from '##/components/Table/__mock__/data.mock';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Table } from '../../../Table';
 
 export const TableExampleRowSpan = () => {
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Table {...withColSpan} borderBetweenRows borderBetweenColumns />
-    </StoryBookExample>
+    </Example>
   );
 };

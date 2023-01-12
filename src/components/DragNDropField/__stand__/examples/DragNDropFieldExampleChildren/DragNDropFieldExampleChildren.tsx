@@ -6,36 +6,30 @@ import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 
 export const DragNDropFieldExampleRenderProps = () => (
-  <Example>
-    <div>
-      <DragNDropField onDropFiles={(files) => console.log(files)}>
-        {({ openFileDialog }) => (
-          <>
-            <Text>Пример с Render Props,</Text>
-            <Text>открывает окно для выбора файла из дочернего контента</Text>
-            <br />
-            <Button onClick={openFileDialog} label="Выбрать файл" />
-          </>
-        )}
-      </DragNDropField>
-    </div>
+  <Example col={1}>
+    <DragNDropField onDropFiles={(files) => console.log(files)}>
+      {({ openFileDialog }) => (
+        <>
+          <Text>Пример с Render Props,</Text>
+          <Text>открывает окно для выбора файла из дочернего контента</Text>
+          <br />
+          <Button onClick={openFileDialog} label="Выбрать файл" />
+        </>
+      )}
+    </DragNDropField>
   </Example>
 );
 
 export const DragNDropFieldExampleChildren = () => (
-  <Example>
-    <div>
-      <DragNDropField onDropFiles={(files) => console.log(files)}>
-        <Text>Здесь просто текст</Text>
-      </DragNDropField>
-    </div>
+  <Example col={1}>
+    <DragNDropField onDropFiles={(files) => console.log(files)}>
+      <Text>Здесь просто текст</Text>
+    </DragNDropField>
   </Example>
 );
 
 export const DragNDropFieldExampleEmpty = () => (
-  <Example>
-    <div>
-      <DragNDropField onDropFiles={(files) => console.log(files)} />
-    </div>
+  <Example col={1}>
+    <DragNDropField onDropFiles={(files) => console.log(files)} />
   </Example>
 );

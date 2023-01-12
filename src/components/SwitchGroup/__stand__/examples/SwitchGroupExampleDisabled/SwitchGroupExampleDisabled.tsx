@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { SwitchGroup } from '../../../SwitchGroup';
 
 type Item = {
@@ -16,10 +15,10 @@ const items: Item[] = [
 ];
 
 export const SwitchGroupExampleDisabled = () => {
-  const [value, setValue] = React.useState<Item[] | null>(null);
+  const [value, setValue] = React.useState<Item[] | null>([items[0]]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <SwitchGroup
         value={value}
         items={items}
@@ -27,15 +26,15 @@ export const SwitchGroupExampleDisabled = () => {
         onChange={({ value }) => setValue(value)}
         name="SwitchGroupExampleDisabled"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
 export const SwitchGroupExampleDisabledGroup = () => {
-  const [value, setValue] = React.useState<Item[] | null>(null);
+  const [value, setValue] = React.useState<Item[] | null>([items[0]]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example>
       <SwitchGroup
         value={value}
         items={items}
@@ -44,6 +43,6 @@ export const SwitchGroupExampleDisabledGroup = () => {
         name="SwitchGroupExampleDisabledGroup"
         disabled
       />
-    </StoryBookExample>
+    </Example>
   );
 };

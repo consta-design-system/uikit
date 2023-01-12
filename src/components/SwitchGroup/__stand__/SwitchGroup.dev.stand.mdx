@@ -1,20 +1,11 @@
 import { MdxMenu } from '@consta/stand';
-import {
-  SwitchGroupExampleSizeM,
-  SwitchGroupExampleSizeL,
-} from './examples/SwitchGroupExampleSize/SwitchGroupExampleSize';
+import { SwitchGroupExampleSize } from './examples/SwitchGroupExampleSize/SwitchGroupExampleSize';
 import {
   SwitchGroupExampleDisabled,
   SwitchGroupExampleDisabledGroup,
 } from './examples/SwitchGroupExampleDisabled/SwitchGroupExampleDisabled';
-import {
-  SwitchGroupExampleRow,
-  SwitchGroupExampleColumn,
-} from './examples/SwitchGroupExampleDirection/SwitchGroupExampleDirection';
-import {
-  SwitchGroupExampleViewGhost,
-  SwitchGroupExampleViewPrimary,
-} from './examples/SwitchGroupExampleView/SwitchGroupExampleView';
+import { SwitchGroupExampleDirection } from './examples/SwitchGroupExampleDirection/SwitchGroupExampleDirection';
+import { SwitchGroupExampleView } from './examples/SwitchGroupExampleView/SwitchGroupExampleView';
 
 ```tsx
 import { SwitchGroup } from '@consta/uikit/SwitchGroup';
@@ -81,9 +72,7 @@ export function SwitchGroupExampleDisabled() {
 - `column` — в столбик, друг под другом (работает по умолчанию),
 - `row` — на одной строке.
 
-| `direction="column"`         | `direction="row"`         |
-| ---------------------------- | ------------------------- |
-| <SwitchGroupExampleColumn /> | <SwitchGroupExampleRow /> |
+<SwitchGroupExampleDirection />
 
 ## Состояние
 
@@ -158,17 +147,13 @@ export function SwitchGroupExampleDisabledGroup() {
 
 За размер отвечает свойство `size`. Варианты: `'m'`, `'l'`, по умолчанию `'m'`.
 
-| `size="m"`                  | `size="l"`                  |
-| --------------------------- | --------------------------- |
-| <SwitchGroupExampleSizeM /> | <SwitchGroupExampleSizeL /> |
+<SwitchGroupExampleSize />
 
 ## Внешний вид
 
 Всего в дизайн-системе два вида групп переключателей: `primary` и `ghost`. За это отвечает свойство `view` (отличия видны, когда переключатель включен).
 
-| `view="primary"`                  | `view="ghost"`                  |
-| --------------------------------- | ------------------------------- |
-| <SwitchGroupExampleViewPrimary /> | <SwitchGroupExampleViewGhost /> |
+<SwitchGroupExampleView />
 
 ## Импорт
 

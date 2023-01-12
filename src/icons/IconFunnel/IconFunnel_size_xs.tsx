@@ -6,5 +6,4 @@ const IconFunnelSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M11 2H1v.586a1 1 0 0 0 .293.707l3.414 3.414A1 1 0 0 1 5 7.414V11l2-1V7.414a1 1 0 0 1 .293-.707l3.414-3.414A1 1 0 0 0 11 2.586V2z" />
   </svg>
 );
-
 export default IconFunnelSizeXs;

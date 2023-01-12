@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Button } from '../../../../Button/Button';
 import { TextField } from '../../../TextField';
 
@@ -9,7 +8,7 @@ export const TextFieldExampleFormBasic = () => {
   const [value, setValue] = useState<string | null>(null);
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField
         placeholder="Форма default"
         value={value}
@@ -27,7 +26,7 @@ export const TextFieldExampleFormBasic = () => {
         value={value}
         onChange={handleChange}
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -35,7 +34,7 @@ export function TextFieldExampleFormHybrid() {
   const [value, setValue] = useState<string | null>(null);
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <div>
         <TextField
           placeholder="Электронная почта"
@@ -46,6 +45,6 @@ export function TextFieldExampleFormHybrid() {
         />
         <Button form="brickRound" label="Подписаться" />
       </div>
-    </StoryBookExample>
+    </Example>
   );
 }

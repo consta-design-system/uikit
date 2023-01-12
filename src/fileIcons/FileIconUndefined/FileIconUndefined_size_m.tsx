@@ -10,5 +10,4 @@ const FileIconUndefinedSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default FileIconUndefinedSizeM;

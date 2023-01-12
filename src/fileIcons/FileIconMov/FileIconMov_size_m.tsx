@@ -24,5 +24,4 @@ const FileIconMovSizeM = (props: SVGProps<SVGSVGElement>) => (
     <path d="M19 7h1v3h1V7h1v3l-1 2h-1l-1-2V7Z" fill="#fff" />
   </svg>
 );
-
 export default FileIconMovSizeM;

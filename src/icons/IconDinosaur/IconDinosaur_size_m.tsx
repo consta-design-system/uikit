@@ -10,5 +10,4 @@ const IconDinosaurSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconDinosaurSizeM;

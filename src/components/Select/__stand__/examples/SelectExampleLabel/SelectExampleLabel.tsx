@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Select } from '../../../Select';
 
 type Item = {
@@ -26,7 +26,7 @@ const items: Item[] = [
 export const SelectExampleLabel = () => {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Select
         label="Значение"
         caption={value?.label}
@@ -35,6 +35,6 @@ export const SelectExampleLabel = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
       />
-    </div>
+    </Example>
   );
 };

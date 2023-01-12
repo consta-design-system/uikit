@@ -1,5 +1,5 @@
 .ExampleUseHideElementsInLine {
-  margin-bottom: var(--space-l);
+  max-width: 700px;
 
   &-Tag {
     margin-right: var(--space-xs);

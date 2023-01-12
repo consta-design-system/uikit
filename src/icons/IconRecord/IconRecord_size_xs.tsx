@@ -6,5 +6,4 @@ const IconRecordSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <rect x={4} y={4} width={4} height={4} rx={2} />
   </svg>
 );
-
 export default IconRecordSizeXs;

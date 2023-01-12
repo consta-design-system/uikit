@@ -1,16 +1,12 @@
-import './MixCardExampleStates.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Text } from '../../../../../components/Text/Text';
-import { cn } from '../../../../../utils/bem';
 import { cnMixCard } from '../../../MixCard';
-
-const cnMixCardExampleStates = cn('MixCardExampleStates');
 
 export const MixCardExampleStates = () => {
   return (
-    <div className={cnMixCardExampleStates()}>
+    <Example col={{ 1: 0, 2: 400, 3: 600 }}>
       <div
         className={cnMixCard({
           verticalSpace: 'xl',
@@ -44,6 +40,6 @@ export const MixCardExampleStates = () => {
       >
         <Text>success</Text>
       </div>
-    </div>
+    </Example>
   );
 };

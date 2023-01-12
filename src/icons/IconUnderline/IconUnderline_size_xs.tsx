@@ -6,5 +6,4 @@ const IconUnderlineSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M1 11h10v1H1v-1ZM8 1v5a2 2 0 1 1-4 0V1H2v5a4 4 0 1 0 8 0V1H8Z" />
   </svg>
 );
-
 export default IconUnderlineSizeXs;

@@ -1,13 +1,13 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Slider } from '../../../Slider';
 
 export const SliderExampleViewDefault = () => {
   const [value, setValue] = useState<number>(20);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Slider
         view="default"
         label={`Значение ${value}`}
@@ -15,7 +15,7 @@ export const SliderExampleViewDefault = () => {
         value={value}
         range={false}
       />
-    </div>
+    </Example>
   );
 };
 
@@ -23,7 +23,7 @@ export const SliderExampleViewDivision = () => {
   const [value, setValue] = useState<number>(20);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Slider
         view="division"
         step={10}
@@ -32,6 +32,6 @@ export const SliderExampleViewDivision = () => {
         onChange={({ value }) => setValue(value)}
         value={value}
       />
-    </div>
+    </Example>
   );
 };

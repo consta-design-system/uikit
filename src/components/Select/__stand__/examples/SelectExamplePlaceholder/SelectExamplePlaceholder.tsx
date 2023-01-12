@@ -1,6 +1,6 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Select } from '../../../Select';
 
 type Item = {
@@ -26,13 +26,13 @@ const items: Item[] = [
 export const SelectExamplePlaceholder = () => {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Select
         placeholder="Выберите значение"
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
       />
-    </div>
+    </Example>
   );
 };

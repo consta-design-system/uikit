@@ -6,5 +6,4 @@ const IconWellPipeSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M4 11V3H3V1h2v10H4ZM9 1v2H8v8H7V1h2Z" />
   </svg>
 );
-
 export default IconWellPipeSizeXs;

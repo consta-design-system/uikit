@@ -1,13 +1,12 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { Switch } from '../../../Switch';
 
 const emptyFunction = () => {};
 
 export const SwitchExampleStatus = () => (
-  <StoryBookExample className={cnDocsDecorator('Section')}>
+  <Example>
     <Switch label="Switch" checked={false} onChange={emptyFunction} />
     <Switch label="Checked" checked onChange={emptyFunction} />
     <Switch
@@ -16,5 +15,5 @@ export const SwitchExampleStatus = () => (
       checked={false}
       onChange={emptyFunction}
     />
-  </StoryBookExample>
+  </Example>
 );

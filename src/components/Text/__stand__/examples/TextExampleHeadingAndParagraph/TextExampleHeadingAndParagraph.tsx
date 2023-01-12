@@ -1,11 +1,11 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Text } from '../../../Text';
 
 export const TextExampleHeadingAndParagraph = () => {
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example>
       <Text
         as="div"
         align="left"
@@ -34,6 +34,6 @@ export const TextExampleHeadingAndParagraph = () => {
         про абзацы? Мы видим, что обычно в абзацах несколько предложений. И в
         таком случае каждый абзац служит для выделения своей микротемы.
       </Text>
-    </div>
+    </Example>
   );
 };

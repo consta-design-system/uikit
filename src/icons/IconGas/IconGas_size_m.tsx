@@ -10,5 +10,4 @@ const IconGasSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconGasSizeM;

@@ -23,5 +23,4 @@ const FileIconMp4SizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default FileIconMp4SizeS;

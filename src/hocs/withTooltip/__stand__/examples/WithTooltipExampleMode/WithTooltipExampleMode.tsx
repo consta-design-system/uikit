@@ -1,9 +1,7 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Button } from '../../../../../components/Button/Button';
-import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import * as wp from '../../../../../uiKit/whitepaper/whitepaper';
 import { withTooltip } from '../../../withTooltip';
 
 const ButtonWithTooltipModeMouseover = withTooltip({
@@ -18,19 +16,9 @@ const ButtonWithTooltipModeClick = withTooltip({
 
 export const WithTooltipExampleMode = () => {
   return (
-    <div
-      className={cnDocsDecorator('Section', [
-        wp.tplGrid({ 'ratio': '1-1', 'col-gap': 'full' }),
-      ])}
-    >
-      <ButtonWithTooltipModeMouseover
-        label="Наведите на меня мышку"
-        className={cnMixSpace({ m: 'm' })}
-      />
-      <ButtonWithTooltipModeClick
-        label="Нажмите меня"
-        className={cnMixSpace({ m: 'm' })}
-      />
-    </div>
+    <Example>
+      <ButtonWithTooltipModeMouseover label="Наведите на меня мышку" />
+      <ButtonWithTooltipModeClick label="Нажмите меня" />
+    </Example>
   );
 };

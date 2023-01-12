@@ -10,5 +10,4 @@ const IconDocBlankSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconDocBlankSizeXs;

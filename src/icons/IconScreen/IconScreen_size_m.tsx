@@ -10,5 +10,4 @@ const IconScreenSizeM = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconScreenSizeM;

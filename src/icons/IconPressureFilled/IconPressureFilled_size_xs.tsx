@@ -10,5 +10,4 @@ const IconPressureFilledSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconPressureFilledSizeXs;

@@ -13,5 +13,4 @@ const IconSunSizeXs = (props: SVGProps<SVGSVGElement>) => (
     </g>
   </svg>
 );
-
 export default IconSunSizeXs;

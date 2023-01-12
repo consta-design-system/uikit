@@ -13,5 +13,4 @@ const IconIncidentSizeXs = (props: SVGProps<SVGSVGElement>) => (
     </defs>
   </svg>
 );
-
 export default IconIncidentSizeXs;

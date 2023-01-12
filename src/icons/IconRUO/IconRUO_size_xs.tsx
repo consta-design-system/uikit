@@ -10,5 +10,4 @@ const IconRUOSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconRUOSizeXs;

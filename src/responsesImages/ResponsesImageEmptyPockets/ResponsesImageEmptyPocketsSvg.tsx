@@ -105,5 +105,4 @@ const ResponsesImageEmptyPockets = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default ResponsesImageEmptyPockets;

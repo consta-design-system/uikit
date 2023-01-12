@@ -1,7 +1,6 @@
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { SwitchGroup } from '../../../SwitchGroup';
 import { SwitchGroupDefaultItem } from '../../../types';
 
@@ -11,38 +10,27 @@ const items = [
   { label: 'Мигающие заголовки' },
 ];
 
-export const SwitchGroupExampleSizeM = () => {
-  const [value, setValue] = React.useState<SwitchGroupDefaultItem[] | null>(
-    null,
-  );
+export const SwitchGroupExampleSize = () => {
+  const [value, setValue] = React.useState<SwitchGroupDefaultItem[] | null>([
+    items[0],
+  ]);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <SwitchGroup
-        value={value}
-        items={items}
-        onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleSizeM"
-        size="m"
-      />
-    </StoryBookExample>
-  );
-};
-
-export const SwitchGroupExampleSizeL = () => {
-  const [value, setValue] = React.useState<SwitchGroupDefaultItem[] | null>(
-    null,
-  );
-
-  return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
-      <SwitchGroup
-        value={value}
-        items={items}
-        onChange={({ value }) => setValue(value)}
-        name="SwitchGroupExampleSizeL"
-        size="l"
-      />
-    </StoryBookExample>
+    <Example
+      col={{ 1: 0, 2: 800 }}
+      separately
+      items={(['m', 'l'] as const).map((size) => ({
+        label: `size="${size}"`,
+        node: (
+          <SwitchGroup
+            value={value}
+            items={items}
+            onChange={({ value }) => setValue(value)}
+            name={`SwitchGroupExampleSize${size}`}
+            size={size}
+          />
+        ),
+      }))}
+    />
   );
 };

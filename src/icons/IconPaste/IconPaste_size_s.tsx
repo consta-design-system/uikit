@@ -8,5 +8,4 @@ const IconPasteSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M5 8V7h6v1H5zm4 3v-1H5v1h4z" />
   </svg>
 );
-
 export default IconPasteSizeS;

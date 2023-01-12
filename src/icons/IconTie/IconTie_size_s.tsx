@@ -6,5 +6,4 @@ const IconTieSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M10 0H6l1.348 2.697L5 13.5 8 16l3-2.5L8.652 2.697 10 0z" />
   </svg>
 );
-
 export default IconTieSizeS;

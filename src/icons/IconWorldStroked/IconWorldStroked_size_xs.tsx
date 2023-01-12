@@ -10,5 +10,4 @@ const IconWorldStrokedSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconWorldStrokedSizeXs;

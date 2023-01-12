@@ -1,8 +1,7 @@
 import { IconDiamond } from '@consta/icons/IconDiamond';
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
-import { StoryBookExample } from '../../../../../uiKit/components/StoryBookExample/StoryBookExample';
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleTextPlaceholder = () => {
@@ -10,13 +9,13 @@ export const TextFieldExampleTextPlaceholder = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField
         value={value}
         onChange={handleChange}
         placeholder="Здесь только цифры"
       />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -25,9 +24,9 @@ export const TextFieldExampleTextValue = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField value={value} onChange={handleChange} />
-    </StoryBookExample>
+    </Example>
   );
 };
 
@@ -36,10 +35,10 @@ export const TextFieldExampleTextLeft = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField leftSide="куда" value={value} onChange={handleChange} />
       <TextField leftSide="кому" value={value} onChange={handleChange} />
-    </StoryBookExample>
+    </Example>
   );
 };
 export const TextFieldExampleTextRight = () => {
@@ -47,13 +46,13 @@ export const TextFieldExampleTextRight = () => {
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
-    <StoryBookExample className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <TextField
         leftSide={IconDiamond}
         rightSide="карат"
         value={value}
         onChange={handleChange}
       />
-    </StoryBookExample>
+    </Example>
   );
 };

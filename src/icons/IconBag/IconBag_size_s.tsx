@@ -11,5 +11,4 @@ const IconBagSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="M1 7.023V13a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7.023L8.667 8.9a2.75 2.75 0 0 1-1.334 0L1 7.023z" />
   </svg>
 );
-
 export default IconBagSizeS;

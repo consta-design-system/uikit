@@ -6,5 +6,4 @@ const IconStorageSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M12 4H0V2a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2zM1 5h3v1h4V5h3v5a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5z" />
   </svg>
 );
-
 export default IconStorageSizeXs;

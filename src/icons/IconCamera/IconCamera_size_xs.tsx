@@ -10,5 +10,4 @@ const IconCameraSizeXs = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconCameraSizeXs;

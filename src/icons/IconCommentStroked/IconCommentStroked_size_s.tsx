@@ -10,5 +10,4 @@ const IconCommentStrokedSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconCommentStrokedSizeS;

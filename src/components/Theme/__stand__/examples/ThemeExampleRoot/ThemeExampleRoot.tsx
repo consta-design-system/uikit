@@ -1,8 +1,8 @@
 import './ThemeExampleRoot.css';
 
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Switch, SwitchProps } from '../../../../Switch/Switch';
 import {
@@ -30,15 +30,14 @@ export const ThemeExampleRoot: React.FC = () => {
     setTheme(checked ? 'gpnDark' : 'gpnDefault');
 
   return (
-    <Theme
-      preset={getPreset(theme)}
-      className={cnExampleRoot('', [cnDocsDecorator('Section')])}
-    >
-      <Switch
-        label="Dark Mode"
-        onChange={handleChange}
-        checked={theme === 'gpnDark'}
-      />
-    </Theme>
+    <Example col={1}>
+      <Theme preset={getPreset(theme)} className={cnExampleRoot('')}>
+        <Switch
+          label="Dark Mode"
+          onChange={handleChange}
+          checked={theme === 'gpnDark'}
+        />
+      </Theme>
+    </Example>
   );
 };

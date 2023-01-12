@@ -313,7 +313,7 @@ const items: Item[] = [
 export function SelectExampleStatus() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Select
         placeholder="default"
         caption="default"
@@ -519,7 +519,7 @@ const items: Item[] = [
 export function SelectExampleLabel() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Select
         label="Значение"
         caption={value?.label}

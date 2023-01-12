@@ -1,13 +1,13 @@
+import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { Slider } from '../../../Slider';
 
 export const SliderExampleStepSingle = () => {
   const [value, setValue] = useState<number>(20);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Slider
         view="division"
         step={10}
@@ -16,7 +16,7 @@ export const SliderExampleStepSingle = () => {
         value={value}
         range={false}
       />
-    </div>
+    </Example>
   );
 };
 
@@ -24,7 +24,7 @@ export const SliderExampleStepArray = () => {
   const [value, setValue] = useState<number>(20);
 
   return (
-    <div className={cnDocsDecorator('Section')}>
+    <Example col={1}>
       <Slider
         view="division"
         step={[15, 40, 70]}
@@ -33,6 +33,6 @@ export const SliderExampleStepArray = () => {
         value={value}
         range={false}
       />
-    </div>
+    </Example>
   );
 };

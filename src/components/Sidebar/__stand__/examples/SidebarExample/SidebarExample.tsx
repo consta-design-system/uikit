@@ -1,8 +1,8 @@
 import './SidebarExample.css';
 
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { Text } from '../../../../Text/Text';
@@ -13,14 +13,16 @@ const cnSidebarExample = cn('SidebarExample');
 export const SidebarExample = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Button
-        size="m"
-        view="primary"
-        label="Открыть сайдбар"
-        width="default"
-        onClick={() => setIsSidebarOpen(true)}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="Открыть сайдбар"
+          width="default"
+          onClick={() => setIsSidebarOpen(true)}
+        />
+      </Example>
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
@@ -131,24 +133,23 @@ export const SidebarExample = () => {
           />
         </Sidebar.Actions>
       </Sidebar>
-    </div>
+    </>
   );
 };
 
 export const SidebarExampleLeft = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   return (
-    <div
-      className={cnDocsDecorator('Section')}
-      style={{ marginBottom: 'var(--space-m)' }}
-    >
-      <Button
-        size="m"
-        view="primary"
-        label="position=left"
-        width="default"
-        onClick={() => setIsSidebarOpen(true)}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="position=left"
+          width="default"
+          onClick={() => setIsSidebarOpen(true)}
+        />
+      </Example>
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
@@ -193,24 +194,23 @@ export const SidebarExampleLeft = () => {
           />
         </Sidebar.Actions>
       </Sidebar>
-    </div>
+    </>
   );
 };
 
 export const SidebarExampleRight = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   return (
-    <div
-      className={cnDocsDecorator('Section')}
-      style={{ marginBottom: 'var(--space-m)' }}
-    >
-      <Button
-        size="m"
-        view="primary"
-        label="position=right"
-        width="default"
-        onClick={() => setIsSidebarOpen(true)}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="position=right"
+          width="default"
+          onClick={() => setIsSidebarOpen(true)}
+        />
+      </Example>
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
@@ -255,24 +255,23 @@ export const SidebarExampleRight = () => {
           />
         </Sidebar.Actions>
       </Sidebar>
-    </div>
+    </>
   );
 };
 
 export const SidebarExampleTop = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   return (
-    <div
-      className={cnDocsDecorator('Section')}
-      style={{ marginBottom: 'var(--space-m)' }}
-    >
-      <Button
-        size="m"
-        view="primary"
-        label="position=top"
-        width="default"
-        onClick={() => setIsSidebarOpen(true)}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="position=top"
+          width="default"
+          onClick={() => setIsSidebarOpen(true)}
+        />
+      </Example>
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
@@ -317,21 +316,23 @@ export const SidebarExampleTop = () => {
           />
         </Sidebar.Actions>
       </Sidebar>
-    </div>
+    </>
   );
 };
 
 export const SidebarExampleBottom = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Button
-        size="m"
-        view="primary"
-        label="position=bottom"
-        width="default"
-        onClick={() => setIsSidebarOpen(true)}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="position=bottom"
+          width="default"
+          onClick={() => setIsSidebarOpen(true)}
+        />
+      </Example>
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
@@ -376,21 +377,23 @@ export const SidebarExampleBottom = () => {
           />
         </Sidebar.Actions>
       </Sidebar>
-    </div>
+    </>
   );
 };
 
 export const SidebarExampleNoOverlay = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
   return (
-    <div className={cnDocsDecorator('Section')}>
-      <Button
-        size="m"
-        view="primary"
-        label="Без подложки"
-        width="default"
-        onClick={() => setIsSidebarOpen(true)}
-      />
+    <>
+      <Example>
+        <Button
+          size="m"
+          view="primary"
+          label="Без подложки"
+          width="default"
+          onClick={() => setIsSidebarOpen(true)}
+        />
+      </Example>
       <Sidebar
         className={cnSidebarExample('Sidebar')}
         isOpen={isSidebarOpen}
@@ -436,6 +439,6 @@ export const SidebarExampleNoOverlay = () => {
           />
         </Sidebar.Actions>
       </Sidebar>
-    </div>
+    </>
   );
 };

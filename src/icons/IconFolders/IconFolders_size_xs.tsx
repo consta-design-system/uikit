@@ -7,5 +7,4 @@ const IconFoldersSizeXs = (props: SVGProps<SVGSVGElement>) => (
     <path d="M1 4a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1H2a1 1 0 0 1-1-1V4z" />
   </svg>
 );
-
 export default IconFoldersSizeXs;

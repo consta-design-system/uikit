@@ -6,5 +6,4 @@ const IconEditSizeS = (props: SVGProps<SVGSVGElement>) => (
     <path d="m14 5-3-3-1.414 1.414 3 3L14 5zm-2.121 2.121-3-3L2 11v3h3l6.879-6.879z" />
   </svg>
 );
-
 export default IconEditSizeS;

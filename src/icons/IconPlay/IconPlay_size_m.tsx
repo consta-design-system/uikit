@@ -6,5 +6,4 @@ const IconPlaySizeM = (props: SVGProps<SVGSVGElement>) => (
     <path d="M18 12 6 19V5l12 7z" />
   </svg>
 );
-
 export default IconPlaySizeM;

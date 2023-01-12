@@ -1,8 +1,6 @@
-import './SnackBarExampleStatus.css';
-
+import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cnDocsDecorator } from '../../../../../uiKit/components/DocsDecorator/DocsDecorator';
 import { cn } from '../../../../../utils/bem';
 import { SnackBar } from '../../../SnackBar';
 
@@ -44,12 +42,12 @@ const getStatus = (item: Item) => {
 
 export const SnackBarExampleStatus: React.FC = () => {
   return (
-    <div className={cnSnackBarExampleStatus('', [cnDocsDecorator('Section')])}>
+    <Example col={1}>
       <SnackBar
         className={cnSnackBarExampleStatus('SnackBar')}
         items={items}
         getItemStatus={getStatus}
       />
-    </div>
+    </Example>
   );
 };

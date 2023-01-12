@@ -10,5 +10,4 @@ const IconArrowUpSizeS = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-
 export default IconArrowUpSizeS;
