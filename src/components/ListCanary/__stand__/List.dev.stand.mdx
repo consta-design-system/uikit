@@ -22,7 +22,6 @@ import { List } from '@consta/uikit/ListCanary';
 
 - [Содержимое](#содержимое-списка)
   - [Варианты](#варианты)
-  - [Выбранное значение](#выбранное-значение)
   - [Неактивный вариант](#неактивный-элемент-списка)
   - [Группы вариантов](#группы-вариантов)
 - [Размер](#размер)
@@ -32,7 +31,7 @@ import { List } from '@consta/uikit/ListCanary';
   - [Кастомный элемент списка](#кастомный-элемент-списка)
   - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-групп-и-вариантов)
 - [Элемент списка](#элемент-списка)
-- [Загрузчик](#Загрузчик)
+- [Загрузчик](#загрузчик)
 - [Заголовок группы](#заголовок-группы)
 - [Компонент для добавления элемента](#компонент-для-добавления-элемента)
 - [Импорт](#импорт)
@@ -46,63 +45,25 @@ import { List } from '@consta/uikit/ListCanary';
 
 Элементы выпадающего списка можно описать в массиве `items`. Тип свойства `items` по умолчанию равен [DefaultListItem](#свойства). Что внутри:
 
-- `label` — название элемента списка, лучше писать с заглавной буквы, точка не нужна,
-- `id` — уникальный ключ элемента,
-- `groupId` — идентификатор [группы](#группы-вариантов), в которую входит этот элемент (если список разбит на группы),
-- `disabled` — отмечает [неактивные элементы](#неактивный-элемент-списка).
-- `leftSide` — контент слева,
-- `leftIcon` — иконка слева,
-- `rightSide` — контент справа,
-- `rightIcon` — иконка справа,
-- `as` - HTML-тэг компонента
-- `attributes` - атрибуты эдемента
-- `onClick` - событие по нажатию на эдемент
+- `label` — название элемента списка писать с заглавной буквы
+- `id` — уникальный ключ элемента
+- `groupId` — идентификатор [группы](#группы-вариантов), в которую входит этот элемент
+- `disabled` — отмечает [неактивные элементы](#неактивный-элемент-списка)
+- `leftSide` — контент с левой стороны
+- `leftIcon` — иконка с левой стороны
+- `rightSide` — контент с правой стороны
+- `rightIcon` — иконка с правой стороны
+- `as` - HTML-тег компонента
+- `attributes` - атрибуты элемента
+- `onClick` - событие при клике на элементе
 
-Вы можете сделать [кастомный тип данных для элементов списка](#кастомный-элемент-списка) и использовать его.
-
-### Выбранное значение
-
-Выбранное значение задаётся в свойстве `value`. Тип свойства `value` по умолчанию равен [DefaultListItem](#свойства).
-
-Чтобы получить значение, которое пользователь выбрал из списка, используйте `onChange`. Этот обработчик срабатывает при выборе варианта или при очистке поля ввода
-и возвращает значение из массива `items` и событие выбора.
-
-Выбор варианта срабатывает по клику мыши или по нажатию `Enter` на клавиатуре.
-
-```tsx
-import React from 'react';
-import { List } from '@consta/uikit/ListCanary';
-
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-function ListExampleItems() {
-  return <List items={items} />;
-}
-```
+Вы можете сделать [кастомный тип данных](#кастомный-элемент-списка) и использовать его.
 
 <ListExampleItems />
 
 ### Неактивный элемент списка
 
-Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов), можете добавить своё свойство.
+Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Можете добавить другое свойство, если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов).
 
 ```tsx
 import React from 'react';
@@ -143,9 +104,9 @@ function ListExampleDisabledItem() {
 
 Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultListGroup](#свойства). Что внутри:
 
-- `label` — название группы,
-- `id` — уникальный ключ,
-- `rightSide` — контент справа.
+- `label` — название группы
+- `id` — уникальный ключ
+- `rightSide` — контент с правой стороны
 
 ```tsx
 import React from 'react';
@@ -220,7 +181,7 @@ function ListExampleGroups() {
 
 ## Размер
 
-За размер компонента отвечает свойство `size`. Варианты: `xs`, `s` , `m` , `l` , по умолчанию `m`.
+За размер компонента отвечает свойство `size`. Возможные значения: `xs`, `s` , `m` , `l`. Значение по умолчанию `m`.
 
 Компонент занимает всю ширину родительского блока.
 
@@ -264,7 +225,7 @@ const ListExampleSize = () => {
 
 ## Форма
 
-За форму селекта отвечает свойство `form`. Варианты: `default`, `brick`, `round`. По умолчанию `default`.
+За форму списка отвечает свойство `form`. Возможные значения: `default`, `brick`, `round`. Значение по умолчанию `default`.
 
 ```tsx
 import React from 'react';
@@ -305,7 +266,7 @@ const ListExampleForm = () => {
 
 ## Неактивный список
 
-Чтобы сделать весь комбобокс неактивным, добавьте `disabled`.
+Чтобы сделать весь список неактивным, добавьте `disabled`.
 
 ```tsx
 import React from 'react';
@@ -347,7 +308,7 @@ function ListExampleDisabled() {
 
 > У корневого DOM-элемента должно быть свойство role="option".
 
-#### Пример с кастомным элементом списка и своей функцией поиска
+#### Пример с кастомным элементом списка
 
 ```tsx
 import React from 'react';
@@ -425,7 +386,7 @@ function ListExampleRenderItem() {
 
 Вы можете использовать кастомные типы данных для элементов списка (items) и групп (groups) — они могут отличаться от [DefaultListItem](#свойства) и [DefaultListGroup](#свойства).
 
-В этом случае нужно использовать геттеры `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getItemLeftSide`, `getItemLeftIcon`, `getItemRightSide`, `getItemRightIcon`, `getItemActive`, `getItemAs`, `getItemAttributes`, `getGroupLabel`, `getGroupKey`, `getGroupRightSide`, чтобы компонент понимал, откуда брать данные.
+Чтобы компонент понимал откуда брать данные, нужно использовать геттеры `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getItemLeftSide`, `getItemLeftIcon`, `getItemRightSide`, `getItemRightIcon`, `getItemActive`, `getItemAs`, `getItemAttributes`, `getGroupLabel`, `getGroupKey`, `getGroupRightSide`.
 
 #### Геттеры по умолчанию
 
@@ -467,8 +428,7 @@ function ListExampleCustomTypes() {
 
 ## Элемент списка
 
-Если вам необходимо использовать элемент списка отдельно от компонента `List`, вы можете
-импортировать к себе компонент `ListItem`.
+Если необходимо использовать элемент списка отдельно от компонента `List`, импортируйте компонент `ListItem`.
 
 ```tsx
 <ListItem label="Пункт меню" active />
@@ -490,18 +450,18 @@ import { ListItem } from '@consta/uikit/ListCanary';
 | `label`      | `string`                      | -            | Название элемента               |
 | `disabled?`  | `boolean`                     | -            | Делает элемент неактивным       |
 | `active?`    | `boolean`                     | -            | Помечает элемент как активный   |
-| `leftSide?`  | `React.ReactNode`             | -            | Контент слева                   |
-| `leftIcon?`  | `IconComponent`               | -            | Иконка слева                    |
-| `rightSide?` | `React.ReactNode`             | -            | Контент справа                  |
-| `rightIcon?` | `IconComponent`               | -            | Иконка справа                   |
-| `onClick?`   | `React.MouseEventHandler`     | -            | Событие по нажатию на элемент   |
+| `leftSide?`  | `React.ReactNode`             | -            | Контент с левой стороны         |
+| `leftIcon?`  | `IconComponent`               | -            | Иконка с левой стороны          |
+| `rightSide?` | `React.ReactNode`             | -            | Контент с правой стороны        |
+| `rightIcon?` | `IconComponent`               | -            | Иконка с правой стороны         |
+| `onClick?`   | `React.MouseEventHandler`     | -            | Событие при клике на элемент    |
 | `as?`        | `keyof JSX.IntrinsicElements` | -            | HTML-тэг компонента             |
 | `indent?`    | `'increased', 'normal'`       | -            | Контролирует внутренние отступы |
 | `className?` | `string`                      | -            | Дополнительный CSS-класс        |
 
 ## Загрузчик
 
-Данный компонент представляет из себя пункт меню с компонентом `Loader`.
+Пункт меню с компонентом `Loader`.
 
 ```tsx
 <ListLoader size="m" />
@@ -524,7 +484,7 @@ import { ListLoader } from '@consta/uikit/ListCanary';
 
 ## Заголовок группы
 
-Данный компонент представляет из себя отдельный заголовок группы.
+Отдельный заголовок группы.
 
 ```tsx
 <ListGroupLabel label="Заголовок" rightSide={<Badge label="Example" />} />
@@ -546,7 +506,7 @@ import { ListGroupLabel } from '@consta/uikit/ListCanary';
 | `label?`     | `string`                  | -            | Заголовок группы                |
 | `disabled?`  | `boolean`                 | -            | Делает элемент неактивным       |
 | `indent?`    | `'increased', 'normal'`   | -            | Контролирует внутренние отступы |
-| `onClick?`   | `React.MouseEventHandler` | -            | Событие по нажатию на элемент   |
+| `onClick?`   | `React.MouseEventHandler` | -            | Событие при клике на элемент    |
 | `className?` | `string`                  | -            | Дополнительный CSS-класс        |
 
 ## Компонент для добавления элемента
@@ -571,7 +531,7 @@ import { ListAddItem } from '@consta/uikit/ListCanary';
 | ------------ | ------------------------- | ------------ | ------------------------ |
 | `size?`      | `'xs', 's', 'm', 'l'`     | `m`          | Размер компонента        |
 | `label?`     | `string`                  | -            | Заголовок группы         |
-| `rightSide?` | `React.ReactNode`         | -            | Контент справа           |
+| `rightSide?` | `React.ReactNode`         | -            | Контент с правой стороны |
 | `className?` | `string`                  | -            | Дополнительный CSS-класс |
 
 ## Импорт
@@ -654,7 +614,7 @@ type ListPropGetGroupRightSide<GROUP> = (
 | [`disabled?`](#отключение-поля-ввода)                   | `boolean`                                              | -                            | Делает компонент недоступным                                           |
 | [`size?`](#размер)                                      | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                        | Размер компонента                                                      |
 | [`form?`](#форма)                                       | `default`, `brick`, `round`                            | `default`                    | Форма компонента                                                       |
-| `onItemClick?`                                          | `ListPropOnItemClick<ITEM>`                            | -                            | Функция обработчик события нажатия на элемент                          |
+| `onItemClick?`                                          | `ListPropOnItemClick<ITEM>`                            | -                            | Функция обработчика события по клику на элемент                        |
 | [`items`](#варианты)                                    | `ITEM[]`                                               | -                            | Варианты                                                               |
 | [`groups?`](#группировка-списка)                        | `GROUP[]`                                              | -                            | Группы                                                                 |
 | [`renderItem?`](#свое-представление-элемента-списка)    | `ListPropRenderItem<ITEM>`                             | рендер по умолчанию          | Рендер-функция для элемента списка                                     |
@@ -662,21 +622,20 @@ type ListPropGetGroupRightSide<GROUP> = (
 | [`getItemKey?`](#свои-тип-данных-items-и-groups)        | `ListPropGetItemKey<ITEM>`                             | `(item) => item.id`          | Функция для определения уникального ключа элемента                     |
 | [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemGroupKey<ITEM>`                        | `(item) => item.groupId`     | Функция для определения ключа группы, к которой будет привязан элемент |
 | [`getItemDisabled?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemDisabled<ITEM>`                        | `(item) => item.disabled`    | Функция для определения состояния `disabled`                           |
-| [`getItemLeftIcon?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemLeftIcon<ITEM>`                        | `(item) => item.leftIcon`    | Функция для определения левой иконки                                   |
+| [`getItemLeftIcon?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemLeftIcon<ITEM>`                        | `(item) => item.leftIcon`    | Функция для определения иконки с левой стороны                         |
 | [`getItemLeftSide?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemLeftSide<ITEM>`                        | `(item) => item.leftSide`    | Функция для определения контента с левой стороны                       |
-| [`getItemRightIcon?`](#свои-тип-данных-items-и-groups)  | `ListPropGetItemRightIcon<ITEM>`                       | `(item) => item.rightIcon`   | Функция для определения правой иконки                                  |
+| [`getItemRightIcon?`](#свои-тип-данных-items-и-groups)  | `ListPropGetItemRightIcon<ITEM>`                       | `(item) => item.rightIcon`   | Функция для определения иконки с правой стороны                        |
 | [`getItemRightSide?`](#свои-тип-данных-items-и-groups)  | `ListPropGetItemRightSide<ITEM>`                       | `(item) => item.rightSide`   | Функция для определения контента с правой стороны                      |
-| `getItemOnClick?`                                       | `ListPropGetItemOnClick<ITEM>`                         | `(item) => item.onClick`     | Функция обработчик события нажатия на элемент                          |
-| `getItemActive?`                                        | `ListPropGetItemActive<ITEM>`                          | `(item) => item.active`      | Функция для определения активен ли элемент                             |
-| `getItemRightAs?`                                       | `ListPropGetItemAs<ITEM>`                              | `(item) => item.as`          | Функция для определения HTML-тега для рендера элемента                 |
+| `getItemOnClick?`                                       | `ListPropGetItemOnClick<ITEM>`                         | `(item) => item.onClick`     | Функция для определения обработчика события при клике на элемент       |
+| `getItemActive?`                                        | `ListPropGetItemActive<ITEM>`                          | `(item) => item.active`      | Функция для определения активности элемента                            |
+| `getItemRightAs?`                                       | `ListPropGetItemAs<ITEM>`                              | `(item) => item.as`          | Функция определения HTML-тега для рендера элемента                     |
 | `getItemRightAttributes?`                               | `ListPropGetItemAtrributes<ITEM>`                      | `(item) => item.attributes`  | Функция для определения атрибутов элемента                             |
 | [`getGroupLabel?`](#свои-тип-данных-items-и-groups)     | `ListPropGetGroupKey<GROUP>`                           | `(group) => group.id`        | Функция для определения названия группы                                |
 | [`getGroupKey?`](#свои-тип-данных-items-и-groups)       | `ListPropGetGroupLabel<GROUP>`                         | `(group) => group.label`     | Функция для определения уникального ключа группы                       |
 | [`getGroupRightSide?`](#свои-тип-данных-items-и-groups) | `ListPropGetGroupRightSide<GROUP>`                     | `(group) => group.rightSide` | Функция для определения контента с правой стороны                      |
-| `isLoading?`                                            | `boolean`                                              | -                            | При `true` будет отображаться лоудер загрузки                          |
+| `isLoading?`                                            | `boolean`                                              | -                            | При `true` будет отображаться [ListLoader](#загрузчик)                 |
 | `onBlur?`                                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                            | Обработчик события `blur`                                              |
 | `onFocus?`                                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                            | Обработчик события `focus`                                             |
-| `ariaLabel?`                                            | `string`                                               | -                            | `aria` атрибут для поля ввода                                          |
 | `name?`                                                 | `string`                                               | -                            | Имя поля ввода                                                         |
 | `className?`                                            | `string`                                               | -                            | Дополнительный CSS-класс                                               |
 | `ref?`                                                  | `React.Ref<HTMLDivElement>`                            | -                            | Ссылка на корневой DOM-элемент компонента                              |
