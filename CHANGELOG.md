@@ -1,5 +1,18 @@
 # Changelog
 
+## v4.7.0 (16/01/2023)
+Самое важное:
+
+- Добавили компонент `List`. Он войдёт во все компоненты, где используются списки `Select`, `ContextMenu` и другие. На его основе можно создавать свои списки.
+- Для `Radio` и `RadioGroup` добавили `s` и `xs` размеры.
+
+---
+
+- [feat(ListCanary): add new component (#2809)](https://github.com/consta-design-system/uikit/commit/ffd8c5b372bab17adc4b296893cabf95cd8c3d1d) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Radio): add `s`, `xs` sizes (#2859)](https://github.com/consta-design-system/uikit/commit/49b02311ced080d1cfcbc1b1bf4575e8de95f95b) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.6.4 (11/01/2023)
 Самое важное:
 - адаптировали все примеры под мобильные устройства
@@ -418,19 +431,3 @@ UserSelectDeprecated
 - [fix(getGroups): fixed calculate groups with groupId = 0 (#2322)](https://github.com/consta-design-system/uikit/commit/05a79381264b136533bdc355b964d8da5e32d37d) - [@gizeasy](https://github.com/gizeasy)
 - [fix(Popover): fixed calculate position (#2321)](https://github.com/consta-design-system/uikit/commit/718bcd4dafb0347f649056463052a543a372824a) - [@gizeasy](https://github.com/gizeasy)
 - [refactor(DatePicker): refactor renderAdditionalControls and useCurrentVisibleDate (#2318)](https://github.com/consta-design-system/uikit/commit/e556a36bbb96bb3213a91802caaaa3d4c38262a6) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.23.1 (18/05/2022)
-Самое важное:
-- Выпустили обновленный Steps (с флагом `Canary`) — использование геттеров теперь не обязательно.
-- Добавили инструкцию по подключению шрифта Inter для дизайнеров, можете посмотреть, как [внедрить](https://uikit.consta.design/?path=/docs/new-font--page) его в свой проект.
-- Исправили ошибку с названием файлов в `File`.
-- Исправили баг в `Slider` на крайних значениях.
-
----
-
-- [feat(StepsCanary): add new canary component (#2268)](https://github.com/consta-design-system/uikit/commit/5a084690e87f81aaf087e60caf85516861abdd23) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Slider): fix detecting of active line (#2298)](https://github.com/consta-design-system/uikit/commit/5037568da0431d3eb2400d8cb8c4526abcb2f320) - [@N1MBER](https://github.com/N1MBER)
-- [fix(File): fixed file extensions (#2301)](https://github.com/consta-design-system/uikit/commit/7a5194a0217d82f24d92648c092b32de1be415fc) - [@gizeasy](https://github.com/gizeasy)
-- [docs(new font): new font instructions for designers (#2295)](https://github.com/consta-design-system/uikit/commit/09a781476fb38c1ab2596e4805d603e121568f6d) - [@kolebayev](https://github.com/kolebayev)
