@@ -8,7 +8,7 @@ import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
-export const radioPropSize = ['m', 'l'] as const;
+export const radioPropSize = ['m', 'l', 's', 'xs'] as const;
 export type RadioPropSize = typeof radioPropSize[number];
 export const radioPropSizeDefault: RadioPropSize = radioPropSize[0];
 
@@ -26,7 +26,7 @@ export type RadioPropOnChange = (object: {
 }) => void;
 
 export type Props = {
-  checked: boolean | undefined;
+  checked?: boolean;
   size?: RadioPropSize;
   view?: RadioPropView;
   align?: RadioPropAlign;

@@ -1,23 +1,13 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Radio } from '../../../Radio';
+import { Radio, RadioPropSize } from '../../../Radio';
 
-const emptyFunction = () => {};
+const items: RadioPropSize[] = ['l', 'm', 's', 'xs'];
 
 export const RadioExampleSize = () => (
-  <Example>
-    <Radio
-      size="m"
-      label="Размер m"
-      onChange={emptyFunction}
-      checked={undefined}
-    />
-    <Radio
-      size="l"
-      label="Размер l"
-      onChange={emptyFunction}
-      checked={undefined}
-    />
-  </Example>
+  <Example
+    items={items}
+    getItemNode={(size) => <Radio size={size} label={`Размер ${size}`} />}
+  />
 );

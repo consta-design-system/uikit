@@ -35,7 +35,7 @@ const Variants = () => {
   const onChange = ({ value }: { value: Item }) => setValue(value);
 
   return (
-    <form>
+    <form style={direction === 'column' ? { maxWidth: 200 } : undefined}>
       <RadioGroup
         align={align}
         value={value}
