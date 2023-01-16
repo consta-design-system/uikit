@@ -1,5 +1,3 @@
-import { cn } from '##/utils/bem';
-
 import {
   DefaultListGroup,
   DefaultListItem,
@@ -83,21 +81,3 @@ export function withDefaultGetters<
     getItemAttributes: props.getItemAttributes || defaultGetItemAttributes,
   };
 }
-
-type ListBoxProps = {
-  shadow?: boolean;
-  size?: 'xs' | 's' | 'm' | 'l';
-  form?: 'round' | 'default' | 'brick';
-};
-
-type CnListBox = (
-  props: ListBoxProps,
-  classNames?: Array<string | undefined>,
-) => string;
-
-const cnList = cn('ListBox');
-
-export const cnListBox: CnListBox = (props, classNames) => {
-  const { shadow = true, form = 'default', size = 's' } = props;
-  return cnList({ shadow, form, size }, classNames);
-};

@@ -83,11 +83,11 @@ const ListRender = (props: ListProps, ref: React.Ref<HTMLDivElement>) => {
     return (
       <ListItem
         {...params}
+        {...(getItemAttributes(item) ?? {})}
+        ref={refs[items.indexOf(item)]}
         size={size}
         onClick={onClick || onItemClick ? handleClick : undefined}
         indent={indent}
-        {...(getItemAttributes(item) ?? {})}
-        ref={refs[items.indexOf(item)]}
       />
     );
   };

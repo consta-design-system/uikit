@@ -43,20 +43,21 @@ const Variants = () => {
   };
 
   return (
-    <List
-      disabled={disabled}
-      className={cnListVariant('Content')}
-      isLoading={isLoading}
-      size={size}
-      items={basicItems}
-      onItemClick={({ item }) => console.log(item.label)}
-      groups={withGroups ? groups : undefined}
-      getItemDisabled={getItemDisabled}
-      getItemLeftIcon={getItemLeftIcon}
-      getItemLeftSide={getItemLeftSide}
-      getItemRightIcon={getItemRightIcon}
-      getItemRightSide={getItemRightSide}
-    />
+    <div className={cnListVariant()}>
+      <List
+        disabled={disabled}
+        isLoading={isLoading}
+        size={size}
+        items={basicItems}
+        onItemClick={({ item }) => console.log(item.label)}
+        groups={withGroups ? groups : undefined}
+        getItemDisabled={getItemDisabled}
+        getItemLeftIcon={getItemLeftIcon}
+        getItemLeftSide={getItemLeftSide}
+        getItemRightIcon={getItemRightIcon}
+        getItemRightSide={getItemRightSide}
+      />
+    </div>
   );
 };
 

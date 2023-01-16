@@ -4,6 +4,7 @@ import React, { forwardRef } from 'react';
 
 import { cn } from '##/utils/bem';
 
+import { cnListItemGrid, renderSlot } from '../ListItemGrid';
 import { defaultListPropSize, ListGroupLabelProps } from '../types';
 
 const cnListGroupLabel = cn('ListGroupLabel');
@@ -21,11 +22,17 @@ export const ListGroupLabel = forwardRef<HTMLDivElement, ListGroupLabelProps>(
     return (
       <div
         ref={ref}
-        className={cnListGroupLabel({ size }, [className])}
+        className={cnListGroupLabel({ size }, [cnListItemGrid(), className])}
         {...otherProps}
       >
-        {label}
-        {rightSide}
+        {!rightSide ? (
+          label
+        ) : (
+          <span className={cnListItemGrid('Slot', { position: 'center' })}>
+            {label}
+          </span>
+        )}
+        {renderSlot(rightSide, 'right', size, undefined)}
       </div>
     );
   },

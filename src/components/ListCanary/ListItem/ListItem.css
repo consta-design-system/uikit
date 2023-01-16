@@ -1,16 +1,9 @@
 .ListItem {
   --list-item-color: var(--color-typo-primary);
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
   padding: var(--list-item-vertical-space) var(--list-item-horizontal-space);
   background: var(--color-control-bg-clear);
-  word-wrap: break-word;
   transition: color 0.3s;
-  gap: var(--space-xs);
 
   &.Text {
     color: var(--list-item-color);
@@ -93,22 +86,5 @@
   &-Label {
     flex: 1;
     word-wrap: break-word;
-  }
-
-  &-Slot {
-    display: flex;
-    align-items: center;
-
-    &_position {
-      &_left,
-      &_right {
-        flex: 0;
-        width: max-content;
-      }
-
-      &_center {
-        flex: 1;
-      }
-    }
   }
 }

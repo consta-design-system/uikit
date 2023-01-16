@@ -3,57 +3,16 @@ import './ListItem.css';
 import React, { forwardRef } from 'react';
 
 import { Text } from '##/components/Text';
-import { IconComponent, IconPropSize } from '##/icons/Icon';
 import { cn } from '##/utils/bem';
-import { getByMap } from '##/utils/getByMap';
 
+import { cnListItemGrid, renderSlot } from '../ListItemGrid';
 import {
   defaultListPropSize,
   ListItemComponent,
   ListItemProps,
-  ListPropSize,
 } from '../types';
 
 export const cnListItem = cn('ListItem');
-
-const iconSizeMap: Record<ListPropSize, IconPropSize> = {
-  xs: 'xs',
-  s: 'xs',
-  m: 's',
-  l: 's',
-};
-
-const renderSide = (
-  side: React.ReactNode,
-  position: 'left' | 'right',
-  size: ListPropSize,
-  icon: IconComponent | undefined,
-) => {
-  const sides = side ? [...(Array.isArray(side) ? side : [side])] : [];
-  if (icon) {
-    const Icon = icon;
-    const render = <Icon size={getByMap(iconSizeMap, size)} />;
-    if (position === 'left') {
-      sides.push(render);
-    }
-    if (position === 'right') {
-      sides.unshift(render);
-    }
-  }
-  return sides.map((item, index) => (
-    <div
-      className={cnListItem('Slot', {
-        position,
-      })}
-      key={cnListItem('Slot', {
-        position,
-        index,
-      })}
-    >
-      {item}
-    </div>
-  ));
-};
 
 const ListItemRender = (
   props: ListItemProps,
@@ -83,7 +42,7 @@ const ListItemRender = (
     <Text
       className={cnListItem(
         { active, size, indent, disabled, interactive: !!handleClick },
-        [className],
+        [cnListItemGrid(), className],
       )}
       as={as}
       onClick={handleClick}
@@ -92,15 +51,15 @@ const ListItemRender = (
       ref={ref}
       {...otherProps}
     >
-      {renderSide(leftSide, 'left', size, leftIcon)}
+      {renderSlot(leftSide, 'left', size, leftIcon)}
       {!rightIcon && !rightIcon && !leftSide && !leftIcon ? (
         label
       ) : (
-        <span className={cnListItem('Slot', { position: 'center' })}>
+        <span className={cnListItemGrid('Slot', { position: 'center' })}>
           {label}
         </span>
       )}
-      {renderSide(rightSide, 'right', size, rightIcon)}
+      {renderSlot(rightSide, 'right', size, rightIcon)}
     </Text>
   );
 };
