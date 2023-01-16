@@ -14,45 +14,45 @@
   &_size {
     &_xs {
       --list-add-item-font-size: var(--size-text-xs);
-      --list-add-item-verical-space: calc(var(--control-space-m) / 4);
-      --list-add-item-horizontal-space: calc(var(--control-space-s) / 2);
+      --list-add-item-verical-space: calc(var(--space-l) / 4);
+      --list-add-item-horizontal-space: var(--space-xs);
       --list-add-item-icon-margin: var(--space-3xs);
 
       &.ListItem_indent_increased {
-        --list-add-item-horizontal-space: var(--control-space-xs);
+        --list-add-item-horizontal-space: var(--space-s);
       }
     }
 
     &_s {
       --list-add-item-font-size: var(--size-text-s);
-      --list-add-item-verical-space: calc(var(--control-space-m) / 4);
-      --list-add-item-horizontal-space: calc(var(--control-space-s) / 2);
+      --list-add-item-verical-space: calc(var(--space-l) / 4);
+      --list-add-item-horizontal-space: var(--space-xs);
       --list-add-item-icon-margin: var(--space-2xs);
 
       &.ListItem_indent_increased {
-        --list-add-item-horizontal-space: var(--control-space-xs);
+        --list-add-item-horizontal-space: var(--space-s);
       }
     }
 
     &_m {
       --list-add-item-font-size: var(--size-text-m);
-      --list-add-item-verical-space: calc(var(--control-space-m) / 2);
-      --list-add-item-horizontal-space: var(--control-space-xs);
+      --list-add-item-verical-space: calc(var(--space-l) / 2);
+      --list-add-item-horizontal-space: var(--space-s);
       --list-add-item-icon-margin: var(--space-xs);
 
       &.ListItem_indent_increased {
-        --list-add-item-horizontal-space: var(--control-space-s);
+        --list-add-item-horizontal-space: var(--space-m);
       }
     }
 
     &_l {
       --list-add-item-font-size: var(--size-text-l);
-      --list-add-item-verical-space: var(--control-space-xs);
-      --list-add-item-horizontal-space: var(--control-space-xs);
+      --list-add-item-verical-space: var(--space-s);
+      --list-add-item-horizontal-space: var(--space-s);
       --list-add-item-icon-margin: var(--space-xs);
 
       &.ListItem_indent_increased {
-        --list-add-item-horizontal-space: var(--control-space-m);
+        --list-add-item-horizontal-space: var(--space-l);
       }
     }
   }

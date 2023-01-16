@@ -12,7 +12,7 @@ import { ListItem } from './ListItem/ListItem';
 import { ListLoader } from './ListLoader/ListLoader';
 import {
   DefaultListItem,
-  defaultListPropForm,
+  defaultListPropIndent,
   defaultListPropSize,
   ListComponent,
   ListPropRenderItem,
@@ -45,7 +45,7 @@ const ListRender = (props: ListProps, ref: React.Ref<HTMLDivElement>) => {
     getGroupLabel,
     getGroupRightSide,
     renderItem,
-    form = defaultListPropForm,
+    indent = defaultListPropIndent,
     onBlur,
     onFocus,
     size = defaultListPropSize,
@@ -85,7 +85,7 @@ const ListRender = (props: ListProps, ref: React.Ref<HTMLDivElement>) => {
         {...params}
         size={size}
         onClick={onClick || onItemClick ? handleClick : undefined}
-        indent={form === 'round' ? 'increased' : 'normal'}
+        indent={indent}
         {...(getItemAttributes(item) ?? {})}
         ref={refs[items.indexOf(item)]}
       />

@@ -7,18 +7,11 @@ import { cn } from '##/utils/bem';
 
 import { basicItems, groups } from '../__mocks__/mock.data';
 import { List } from '../ListCanary';
-import {
-  DefaultListItem,
-  defaultListPropForm,
-  defaultListPropSize,
-  listPropForm,
-  listPropSize,
-} from '../types';
+import { DefaultListItem, defaultListPropSize, listPropSize } from '../types';
 
 const cnListVariant = cn('ListVariant');
 
 const Variants = () => {
-  const form = useSelect('form', listPropForm, defaultListPropForm);
   const size = useSelect('size', listPropSize, defaultListPropSize);
   const withGroups = useBoolean('withGroups', false);
   const disabled = useBoolean('disabled', false);
@@ -51,7 +44,6 @@ const Variants = () => {
 
   return (
     <List
-      form={form}
       disabled={disabled}
       className={cnListVariant('Content')}
       isLoading={isLoading}

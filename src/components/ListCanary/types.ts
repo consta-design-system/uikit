@@ -4,13 +4,13 @@ import React from 'react';
 import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
-export const listPropForm = ['default', 'brick', 'round'] as const;
-export type ListPropForm = typeof listPropForm[number];
-export const defaultListPropForm = listPropForm[0];
-
 export const listPropSize = ['m', 'xs', 's', 'l'] as const;
 export type ListPropSize = typeof listPropSize[number];
 export const defaultListPropSize = listPropSize[0];
+
+export const listPropIndent = ['normal', 'increased'] as const;
+export type ListPropIndent = typeof listPropIndent[number];
+export const defaultListPropIndent = listPropIndent[0];
 
 export type DefaultListGroup = {
   id: string | number;
@@ -85,8 +85,8 @@ export type ListProps<
 > = PropsWithHTMLAttributesAndRef<
   {
     size?: ListPropSize;
-    form?: ListPropForm;
     items: ITEM[];
+    indent?: ListPropIndent;
     onItemClick?: ListPropOnItemClick<ITEM>;
     getItemKey?: ListPropGetItemKey<ITEM>;
     getItemLabel?: ListPropGetItemLabel<ITEM>;
@@ -158,16 +158,8 @@ export type ListAddItemProps = PropsWithHTMLAttributesAndRef<
   {
     size?: ListPropSize;
     label?: React.ReactNode;
-    indent?: 'normal' | 'increased';
+    indent?: ListPropIndent;
     disabled?: boolean;
-  },
-  HTMLDivElement
->;
-
-export type ListWrapperProps = PropsWithHTMLAttributesAndRef<
-  {
-    size?: ListPropSize;
-    form?: ListPropForm;
   },
   HTMLDivElement
 >;

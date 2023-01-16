@@ -14,25 +14,19 @@
 
   &_size {
     &_xs {
-      --loader-height:
-        calc(
-          var(--control-space-m) / 2 + var(--control-text-size-xs)
-        );
+      --loader-height: calc(var(--space-l) / 2 + var(--size-text-xs));
     }
 
     &_s {
-      --loader-height: calc(5 * var(--control-space-m) / 4);
+      --loader-height: calc(5 * var(--space-l) / 4);
     }
 
     &_m {
-      --loader-height: calc(7 * var(--control-space-m) / 4);
+      --loader-height: calc(7 * var(--space-l) / 4);
     }
 
     &_l {
-      --loader-height:
-        calc(
-          var(--control-space-m) + var(--control-text-size-l)
-        );
+      --loader-height: calc(var(--space-l) + var(--size-text-l));
     }
   }
 

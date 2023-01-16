@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { List, ListPropForm } from '##/components/ListCanary';
+import { List, ListPropIndent } from '##/components/ListCanary';
 
 type Item = {
   label: string;
@@ -23,14 +23,15 @@ const items: Item[] = [
   },
 ];
 
-const forms: ListPropForm[] = ['default', 'round', 'brick'];
-export const ListExampleForm = () => {
+const indents: ListPropIndent[] = ['increased', 'normal'];
+
+export const ListExampleIndent = () => {
   return (
     <Example
       col={{ 1: 0, flex: 600 }}
-      items={forms}
-      getItemDescription={(form) => `form="${form}"`}
-      getItemNode={(form) => <List items={items} form={form} />}
+      items={indents}
+      getItemDescription={(indent) => `indent="${indent}"`}
+      getItemNode={(indent) => <List items={items} indent={indent} />}
     />
   );
 };

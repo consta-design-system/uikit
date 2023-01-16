@@ -3,7 +3,7 @@ import { MdxMenu } from '@consta/stand';
 import { ListExampleItems } from './examples/ListExampleItems/ListExampleItems';
 import { ListExampleLoading } from './examples/ListExampleLoading/ListExampleLoading';
 import { ListExampleSize } from './examples/ListExampleSize/ListExampleSize';
-import { ListExampleForm } from './examples/ListExampleForm/ListExampleForm';
+import { ListExampleIndent } from './examples/ListExampleIndent/ListExampleIndent';
 import { ListExampleDisabled } from './examples/ListExampleDisabled/ListExampleDisabled';
 import { ListExampleGroups } from './examples/ListExampleGroups/ListExampleGroups';
 import { ListExampleRenderItem } from './examples/ListExampleRenderItem/ListExampleRenderItem';
@@ -25,7 +25,7 @@ import { List } from '@consta/uikit/ListCanary';
   - [Неактивный вариант](#неактивный-элемент-списка)
   - [Группы вариантов](#группы-вариантов)
 - [Размер](#размер)
-- [Форма](#форма)
+- [Отступы](#отступы)
 - [Неактивный список](#неактивный-список)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
@@ -43,7 +43,7 @@ import { List } from '@consta/uikit/ListCanary';
 
 ### Варианты
 
-Элементы выпадающего списка можно описать в массиве `items`. Тип свойства `items` по умолчанию равен [DefaultListItem](#свойства). Что внутри:
+Элементы выпадающего списка можно описать в массиве `items`. Тип свойства `items` по умолчанию равен [DefaultListItem](#свойства). Значения:
 
 - `label` — название элемента списка писать с заглавной буквы
 - `id` — уникальный ключ элемента
@@ -102,7 +102,7 @@ function ListExampleDisabledItem() {
 
 ### Группы вариантов
 
-Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultListGroup](#свойства). Что внутри:
+Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultListGroup](#свойства). Значения:
 
 - `label` — название группы
 - `id` — уникальный ключ
@@ -223,9 +223,9 @@ const ListExampleSize = () => {
 
 <ListExampleSize />
 
-## Форма
+## Отступы
 
-За форму списка отвечает свойство `form`. Возможные значения: `default`, `brick`, `round`. Значение по умолчанию `default`.
+За отступы элемента списка отвечает свойство `indent`. Если указать `increased`, то горизонтальный отступ будет увеличен. Значение по умолчанию `normal`.
 
 ```tsx
 import React from 'react';
@@ -251,18 +251,17 @@ const items: Item[] = [
   },
 ];
 
-const ListExampleForm = () => {
+const ListExampleIndent = () => {
   return (
     <>
-      <List items={items} form="default" />
-      <List items={items} form="round" />
-      <List items={items} form="brick" />
+      <List items={items} indent="increased" />
+      <List items={items} indent="normal" />
     </>
   );
 };
 ```
 
-<ListExampleForm />
+<ListExampleIndent />
 
 ## Неактивный список
 
@@ -455,7 +454,7 @@ import { ListItem } from '@consta/uikit/ListCanary';
 | `rightSide?` | `React.ReactNode`             | -            | Контент с правой стороны        |
 | `rightIcon?` | `IconComponent`               | -            | Иконка с правой стороны         |
 | `onClick?`   | `React.MouseEventHandler`     | -            | Событие при клике на элемент    |
-| `as?`        | `keyof JSX.IntrinsicElements` | -            | HTML-тэг компонента             |
+| `as?`        | `keyof JSX.IntrinsicElements` | -            | HTML-тег компонента             |
 | `indent?`    | `'increased', 'normal'`       | -            | Контролирует внутренние отступы |
 | `className?` | `string`                      | -            | Дополнительный CSS-класс        |
 
@@ -613,7 +612,7 @@ type ListPropGetGroupRightSide<GROUP> = (
 | ------------------------------------------------------- | ------------------------------------------------------ | ---------------------------- | ---------------------------------------------------------------------- |
 | [`disabled?`](#отключение-поля-ввода)                   | `boolean`                                              | -                            | Делает компонент недоступным                                           |
 | [`size?`](#размер)                                      | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                        | Размер компонента                                                      |
-| [`form?`](#форма)                                       | `default`, `brick`, `round`                            | `default`                    | Форма компонента                                                       |
+| [`indent?`](#отступы)                                   | `increased`, `normal`                                  | `normal`                     | Отступы компонента                                                     |
 | `onItemClick?`                                          | `ListPropOnItemClick<ITEM>`                            | -                            | Функция обработчика события по клику на элемент                        |
 | [`items`](#варианты)                                    | `ITEM[]`                                               | -                            | Варианты                                                               |
 | [`groups?`](#группировка-списка)                        | `GROUP[]`                                              | -                            | Группы                                                                 |
