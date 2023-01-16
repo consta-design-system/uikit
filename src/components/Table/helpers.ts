@@ -45,8 +45,19 @@ export type HeaderData<T extends TableRow> = {
   resizerTopOffsets: Array<number>;
 };
 
-export const getColumnsSize = (sizes: ColumnWidth[]): string => {
-  return sizes.map((s) => (isNumber(s) ? `${s}px` : `auto`)).join(' ');
+export const getColumnsSize = (sizes: ColumnWidth[], width: number): string => {
+  const arr: Array<number | undefined> = [];
+  let length = 0;
+  sizes.forEach((size) => {
+    if (isNumber(size)) {
+      const colSize = Math.min(width - length, size);
+      length += colSize;
+      arr.push(colSize);
+    } else {
+      arr.push(undefined);
+    }
+  });
+  return arr.map((s) => (isNumber(s) ? `${s}px` : `auto`)).join(' ');
 };
 
 export const getColumnLeftOffset = ({

@@ -667,7 +667,10 @@ const InternalTable = <T extends TableRow>(
   const rowsData = getSlicedRows(flatRowsData);
 
   const tableStyle: React.CSSProperties & TableCSSCustomProperty = {
-    '--table-grid-template-columns': getColumnsSize(resizedColumnWidths),
+    '--table-grid-template-columns': getColumnsSize(
+      resizedColumnWidths,
+      tableWidth,
+    ),
     '--table-width': `${tableWidth}px`,
   };
 
