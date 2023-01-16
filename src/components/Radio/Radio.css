@@ -7,8 +7,8 @@
   &-Input {
     position: relative;
     box-sizing: border-box;
-    width: var(--box-size);
-    height: var(--box-size);
+    width: var(--radio-size);
+    height: var(--radio-size);
     margin: 0;
     border: var(--control-border-width) solid;
     border-radius: 50%;
@@ -20,11 +20,11 @@
     &::before {
       content: '';
       position: absolute;
-      top: calc(50% - var(--box-size) / 2);
-      left: calc(50% - var(--box-size) / 2);
+      top: calc(50% - var(--radio-size) / 2);
+      left: calc(50% - var(--radio-size) / 2);
       box-sizing: border-box;
-      width: var(--box-size);
-      height: var(--box-size);
+      width: var(--radio-size);
+      height: var(--radio-size);
       border-radius: 50%;
       opacity: 0;
       transition: background-color 0.15s, opacity 0.15s, transform 0.15s;
@@ -33,22 +33,34 @@
   }
 
   &-Label {
-    margin-left: var(--offset);
+    margin-left: var(--radio-offset);
     color: var(--color-control-typo-default);
     font-size: var(--radio-font-size);
   }
 
   &_size {
+    &_xs {
+      --radio-font-size: var(--control-text-size-xs);
+      --radio-size: var(--control-box-size-s);
+      --radio-offset: var(--space-xs);
+    }
+
+    &_s {
+      --radio-font-size: var(--control-text-size-s);
+      --radio-size: var(--control-box-size-s);
+      --radio-offset: var(--space-xs);
+    }
+
     &_m {
       --radio-font-size: var(--control-text-size-m);
-      --box-size: var(--control-box-size-m);
-      --offset: var(--space-xs);
+      --radio-size: var(--control-box-size-m);
+      --radio-offset: var(--space-xs);
     }
 
     &_l {
       --radio-font-size: var(--control-text-size-l);
-      --box-size: var(--control-box-size-l);
-      --offset: var(--space-s);
+      --radio-size: var(--control-box-size-l);
+      --radio-offset: var(--space-s);
     }
   }
 

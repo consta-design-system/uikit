@@ -10,7 +10,7 @@ export type RadioGroupDirection = typeof radioGroupDirections[number];
 export const radioGroupDefaultDirection: RadioGroupDirection =
   radioGroupDirections[0];
 
-export const radioGroupSizes = ['m', 'l'] as const;
+export const radioGroupSizes = ['m', 'l', 'xs', 's'] as const;
 export type RadioGroupPropSize = typeof radioGroupSizes[number];
 export const radioGroupDefaultSize: RadioGroupPropSize = radioGroupSizes[0];
 
