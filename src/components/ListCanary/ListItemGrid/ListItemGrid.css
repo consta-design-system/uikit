@@ -1,0 +1,24 @@
+.ListItemGrid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  gap: var(--space-xs);
+  word-wrap: break-word;
+
+  &-Slot {
+    display: flex;
+    align-items: center;
+
+    &_position {
+      &_left,
+      &_right {
+        width: max-content;
+      }
+
+      &_center {
+        flex: 1;
+      }
+    }
+  }
+}

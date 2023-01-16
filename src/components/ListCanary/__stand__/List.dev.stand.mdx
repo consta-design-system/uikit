@@ -1,0 +1,640 @@
+import { MdxMenu } from '@consta/stand';
+
+import { ListExampleItems } from './examples/ListExampleItems/ListExampleItems';
+import { ListExampleLoading } from './examples/ListExampleLoading/ListExampleLoading';
+import { ListExampleSize } from './examples/ListExampleSize/ListExampleSize';
+import { ListExampleIndent } from './examples/ListExampleIndent/ListExampleIndent';
+import { ListExampleDisabled } from './examples/ListExampleDisabled/ListExampleDisabled';
+import { ListExampleGroups } from './examples/ListExampleGroups/ListExampleGroups';
+import { ListExampleRenderItem } from './examples/ListExampleRenderItem/ListExampleRenderItem';
+import { ListExampleCustomTypes } from './examples/ListExampleCustomTypes/ListExampleCustomTypes';
+import { ListExampleDisabledItem } from './examples/ListExampleDisabledItem/ListExampleDisabledItem';
+import { ListItemExample } from './examples/ListItemExample/ListItemExample';
+import { ListGroupLabelExample } from './examples/ListGroupLabelExample/ListGroupLabelExample';
+import { ListAddItemExample } from './examples/ListAddItemExample/ListAddItemExample';
+import { ListLoaderExample } from './examples/ListLoaderExample/ListLoaderExample';
+
+```tsx
+import { List } from '@consta/uikit/ListCanary';
+```
+
+<MdxMenu>
+
+- [Содержимое](#содержимое-списка)
+  - [Варианты](#варианты)
+  - [Неактивный вариант](#неактивный-элемент-списка)
+  - [Группы вариантов](#группы-вариантов)
+- [Размер](#размер)
+- [Отступы](#отступы)
+- [Неактивный список](#неактивный-список)
+- [Кастомизация](#кастомизация)
+  - [Кастомный элемент списка](#кастомный-элемент-списка)
+  - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-групп-и-вариантов)
+- [Элемент списка](#элемент-списка)
+- [Загрузчик](#загрузчик)
+- [Заголовок группы](#заголовок-группы)
+- [Компонент для добавления элемента](#компонент-для-добавления-элемента)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+
+</MdxMenu>
+
+## Содержимое
+
+### Варианты
+
+Элементы выпадающего списка можно описать в массиве `items`. Тип свойства `items` по умолчанию равен [DefaultListItem](#свойства). Значения:
+
+- `label` — название элемента списка писать с заглавной буквы
+- `id` — уникальный ключ элемента
+- `groupId` — идентификатор [группы](#группы-вариантов), в которую входит этот элемент
+- `disabled` — отмечает [неактивные элементы](#неактивный-элемент-списка)
+- `leftSide` — контент с левой стороны
+- `leftIcon` — иконка с левой стороны
+- `rightSide` — контент с правой стороны
+- `rightIcon` — иконка с правой стороны
+- `as` - HTML-тег компонента
+- `attributes` - атрибуты элемента
+- `onClick` - событие при клике на элементе
+
+Вы можете сделать [кастомный тип данных](#кастомный-элемент-списка) и использовать его.
+
+<ListExampleItems />
+
+### Неактивный элемент списка
+
+Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Можете добавить другое свойство, если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов).
+
+```tsx
+import React from 'react';
+import { List } from '@consta/uikit/ListCanary';
+
+type Item = {
+  label: string;
+  id: number;
+  disabled: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый — этот вариант не выбрать',
+    id: 1,
+    disabled: true,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+    disabled: false,
+  },
+  {
+    label: 'Третий — и этот тоже не выбрать',
+    id: 3,
+    disabled: true,
+  },
+];
+
+function ListExampleDisabledItem() {
+  return <List placeholder="Выберите вариант" items={items} />;
+}
+```
+
+<ListExampleDisabledItem />
+
+### Группы вариантов
+
+Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultListGroup](#свойства). Значения:
+
+- `label` — название группы
+- `id` — уникальный ключ
+- `rightSide` — контент с правой стороны
+
+```tsx
+import React from 'react';
+import { List } from '@consta/uikit/ListCanary';
+
+type Item = {
+  label: string;
+  id: number;
+  groupId: number;
+};
+
+type Group = {
+  label: string;
+  id: number;
+  rightSide?: React.ReactNode;
+};
+
+const groups: Group[] = [
+  {
+    id: 1,
+    label: 'Первая группа',
+    rightSide: (
+      <Text view="brand" size="2xs">
+        Все результаты
+      </Text>
+    ),
+  },
+  {
+    id: 2,
+    label: 'Вторая группа',
+  },
+  {
+    id: 3,
+    label: 'Третья группа',
+  },
+];
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+    groupId: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+    groupId: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+    groupId: 1,
+  },
+  {
+    label: 'Четвертый',
+    id: 4,
+    groupId: 3,
+  },
+  {
+    label: 'Пятый',
+    id: 5,
+    groupId: 2,
+  },
+];
+
+function ListExampleGroups() {
+  return <List items={items} groups={groups} />;
+}
+```
+
+<ListExampleGroups />
+
+## Размер
+
+За размер компонента отвечает свойство `size`. Возможные значения: `xs`, `s` , `m` , `l`. Значение по умолчанию `m`.
+
+Компонент занимает всю ширину родительского блока.
+
+```tsx
+import React from 'react';
+import { List } from '@consta/uikit/ListCanary';
+
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const ListExampleSize = () => {
+  return (
+    <>
+      <List items={items} size="xs" />
+      <List items={items} size="s" />
+      <List items={items} size="m" />
+      <List items={items} size="l" />
+    </>
+  );
+};
+```
+
+<ListExampleSize />
+
+## Отступы
+
+За отступы элемента списка отвечает свойство `indent`. Если указать `increased`, то горизонтальный отступ будет увеличен. Значение по умолчанию `normal`.
+
+```tsx
+import React from 'react';
+import { List } from '@consta/uikit/ListCanary';
+import { Text } from '@consta/uikit/Text';
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const ListExampleIndent = () => {
+  return (
+    <>
+      <List items={items} indent="increased" />
+      <List items={items} indent="normal" />
+    </>
+  );
+};
+```
+
+<ListExampleIndent />
+
+## Неактивный список
+
+Чтобы сделать весь список неактивным, добавьте `disabled`.
+
+```tsx
+import React from 'react';
+import { List } from '@consta/uikit/ListCanary';
+
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+function ListExampleDisabled() {
+  return <List items={items} disabled />;
+}
+```
+
+<ListExampleDisabled />
+
+## Кастомизация
+
+### Кастомный элемент списка
+
+Чтобы создать свое представление элементов списка, используйте свойство `renderItem`.
+Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
+
+> У корневого DOM-элемента должно быть свойство role="option".
+
+#### Пример с кастомным элементом списка
+
+```tsx
+import React from 'react';
+import { Badge } from '@consta/uikit/Badge';
+import { List } from '@consta/uikit/ListCanary';
+
+import { cn } from '@bem-react/className';
+
+const cnListExampleRenderItem = cn('ListExampleRenderItem');
+
+type Item = {
+  label: string;
+  id: number;
+  status?: 'repairs' | 'serviceable';
+};
+
+const items: Item[] = [
+  {
+    label: 'Принтер',
+    id: 1,
+    status: 'repairs',
+  },
+  {
+    label: 'Монитор',
+    id: 2,
+    status: 'serviceable',
+  },
+  {
+    label: 'Ноутбук',
+    id: 3,
+    status: 'serviceable',
+  },
+  {
+    label: 'Стол',
+    id: 4,
+  },
+];
+
+const mapLabel = {
+  repairs: 'На ремонте',
+  serviceable: 'Исправен',
+} as const;
+
+const mapStatus = {
+  repairs: 'error',
+  serviceable: 'success',
+} as const;
+
+function ListExampleRenderItem() {
+  return (
+    <List
+      items={items}
+      renderItem={(item) => (
+        <div className={cnListExampleRenderItem('Item')}>
+          {item.label}
+          {item.status && (
+            <Badge
+              className={cnListExampleRenderItem('Badge')}
+              as="span"
+              size="s"
+              label={mapLabel[item.status]}
+              status={mapStatus[item.status]}
+            />
+          )}
+        </div>
+      )}
+    />
+  );
+}
+```
+
+<ListExampleRenderItem />
+
+### Кастомные типы данных для групп и вариантов
+
+Вы можете использовать кастомные типы данных для элементов списка (items) и групп (groups) — они могут отличаться от [DefaultListItem](#свойства) и [DefaultListGroup](#свойства).
+
+Чтобы компонент понимал откуда брать данные, нужно использовать геттеры `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getItemLeftSide`, `getItemLeftIcon`, `getItemRightSide`, `getItemRightIcon`, `getItemActive`, `getItemAs`, `getItemAttributes`, `getGroupLabel`, `getGroupKey`, `getGroupRightSide`.
+
+#### Геттеры по умолчанию
+
+```ts
+const defaultGetItemKey = (item) => item.id;
+const defaultGetItemLabel = (item) => item.label;
+const defaultGetItemGroupKey = (item) => item.groupId;
+const defaultGetItemDisabled = (item) => item.disabled;
+const defaultGetItemLeftIcon = (item) => item.leftIcon;
+const defaultGetItemLeftSide = (item) => item.leftSide;
+const defaultGetItemRightIcon = (item) => item.rightIcon;
+const defaultGetItemRightSide = (item) => item.rightSide;
+const defaultGetItemActive = (item) => item.active;
+const defaultGetItemAs = (item) => item.as;
+const defaultGetItemAttributes = (item) => item.attributes;
+const defaultGetGroupKey = (group) => group.id;
+const defaultGetGroupLabel = (group) => group.label;
+const defaultGetGroupRightSide = (group) => group.rightSide;
+```
+
+#### Пример с кастомным Item
+
+```tsx
+import React from 'react';
+import { List } from '@consta/uikit/ListCanary';
+
+function ListExampleCustomTypes() {
+  return (
+    <List
+      items={['Первый', 'Второй', 'Третий']}
+      getItemKey={(item) => item}
+      getItemLabel={(item) => item}
+    />
+  );
+}
+```
+
+<ListExampleCustomTypes />
+
+## Элемент списка
+
+Если необходимо использовать элемент списка отдельно от компонента `List`, импортируйте компонент `ListItem`.
+
+```tsx
+<ListItem label="Пункт меню" active />
+```
+
+<ListItemExample />
+
+### Импорт
+
+```tsx
+import { ListItem } from '@consta/uikit/ListCanary';
+```
+
+### Свойства
+
+| Свойство     | Тип или варианты значения     | По умолчанию | Описание                        |
+| ------------ | ----------------------------- | ------------ | ------------------------------- |
+| `size?`      | `'xs', 's', 'm', 'l'`         | `m`          | Размер компонента               |
+| `label`      | `string`                      | -            | Название элемента               |
+| `disabled?`  | `boolean`                     | -            | Делает элемент неактивным       |
+| `active?`    | `boolean`                     | -            | Помечает элемент как активный   |
+| `leftSide?`  | `React.ReactNode`             | -            | Контент с левой стороны         |
+| `leftIcon?`  | `IconComponent`               | -            | Иконка с левой стороны          |
+| `rightSide?` | `React.ReactNode`             | -            | Контент с правой стороны        |
+| `rightIcon?` | `IconComponent`               | -            | Иконка с правой стороны         |
+| `onClick?`   | `React.MouseEventHandler`     | -            | Событие при клике на элемент    |
+| `as?`        | `keyof JSX.IntrinsicElements` | -            | HTML-тег компонента             |
+| `indent?`    | `'increased', 'normal'`       | -            | Контролирует внутренние отступы |
+| `className?` | `string`                      | -            | Дополнительный CSS-класс        |
+
+## Загрузчик
+
+Пункт меню с компонентом `Loader`.
+
+```tsx
+<ListLoader size="m" />
+```
+
+<ListLoaderExample />
+
+### Импорт
+
+```tsx
+import { ListLoader } from '@consta/uikit/ListCanary';
+```
+
+### Свойства
+
+| Свойство     | Тип или варианты значения | По умолчанию | Описание                 |
+| ------------ | ------------------------- | ------------ | ------------------------ |
+| `size?`      | `'xs', 's', 'm', 'l'`     | `m`          | Размер компонента        |
+| `className?` | `string`                  | -            | Дополнительный CSS-класс |
+
+## Заголовок группы
+
+Отдельный заголовок группы.
+
+```tsx
+<ListGroupLabel label="Заголовок" rightSide={<Badge label="Example" />} />
+```
+
+<ListGroupLabelExample />
+
+### Импорт
+
+```tsx
+import { ListGroupLabel } from '@consta/uikit/ListCanary';
+```
+
+### Свойства
+
+| Свойство     | Тип или варианты значения | По умолчанию | Описание                        |
+| ------------ | ------------------------- | ------------ | ------------------------------- |
+| `size?`      | `'xs', 's', 'm', 'l'`     | `m`          | Размер компонента               |
+| `label?`     | `string`                  | -            | Заголовок группы                |
+| `disabled?`  | `boolean`                 | -            | Делает элемент неактивным       |
+| `indent?`    | `'increased', 'normal'`   | -            | Контролирует внутренние отступы |
+| `onClick?`   | `React.MouseEventHandler` | -            | Событие при клике на элемент    |
+| `className?` | `string`                  | -            | Дополнительный CSS-класс        |
+
+## Компонент для добавления элемента
+
+Данный компонент представляет из себя элемент-кнопку при помощи которой можно добавить новый элемент списка.
+
+```tsx
+<ListAddItem label="Добавить" onClick={() => alert('onClick')} />
+```
+
+<ListAddItemExample />
+
+### Импорт
+
+```tsx
+import { ListAddItem } from '@consta/uikit/ListCanary';
+```
+
+### Свойства
+
+| Свойство     | Тип или варианты значения | По умолчанию | Описание                 |
+| ------------ | ------------------------- | ------------ | ------------------------ |
+| `size?`      | `'xs', 's', 'm', 'l'`     | `m`          | Размер компонента        |
+| `label?`     | `string`                  | -            | Заголовок группы         |
+| `rightSide?` | `React.ReactNode`         | -            | Контент с правой стороны |
+| `className?` | `string`                  | -            | Дополнительный CSS-класс |
+
+## Импорт
+
+```tsx
+import {
+  cnMixList,
+  List,
+  ListGroupLabel,
+  ListItem,
+  ListAddItem,
+} from '@consta/uikit/ListCanary';
+```
+
+## Свойства
+
+```tsx
+type DefaultListGroup = {
+  id: string | number;
+  label: string;
+  rightSide?: React.ReactNode;
+};
+
+type DefaultListItem = {
+  id: string | number;
+  label: string;
+  disabled?: boolean;
+  groupId?: string | number;
+  leftSide?: React.ReactNode;
+  leftIcon?: IconComponent;
+  rightSide?: React.ReactNode;
+  rightIcon?: IconComponent;
+  active?: boolean;
+  as?: keyof JSX.IntrinsicElements;
+  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
+  onClick?: React.MouseEventHandler;
+};
+
+type ListPropOnItemClick<ITEM> = (params: {
+  e: React.MouseEvent;
+  item: ITEM;
+}) => void;
+
+type ListPropRenderItem<ITEM> = (item: ITEM) => React.ReactElement | null;
+
+// ITEMS
+type ListPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type ListPropGetItemLabel<ITEM> = (item: ITEM) => string;
+type ListPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+type ListPropGetItemGroupId<ITEM> = (item: ITEM) => string | number | undefined;
+type ListPropGetItemLeftSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | undefined;
+type ListPropGetItemLeftIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
+type ListPropGetItemRightSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | undefined;
+type ListPropGetItemRightIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
+type ListPropGetItemActive<ITEM> = (item: ITEM) => boolean | undefined;
+type ListPropGetItemAs<ITEM> = (
+  item: ITEM,
+) => keyof JSX.IntrinsicElements | undefined;
+type ListPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements] | undefined;
+type ListPropGetItemOnClick<ITEM> = (
+  item: ITEM,
+) => React.MouseEventHandler | undefined;
+
+// GROUPS
+type ListPropGetGroupKey<GROUP> = (item: GROUP) => string | number;
+type ListPropGetGroupLabel<GROUP> = (item: GROUP) => string;
+type ListPropGetGroupRightSide<GROUP> = (
+  item: GROUP,
+) => React.ReactNode | undefined;
+```
+
+| Свойство                                                | Тип или варианты значения                              | По умолчанию                 | Описание                                                               |
+| ------------------------------------------------------- | ------------------------------------------------------ | ---------------------------- | ---------------------------------------------------------------------- |
+| [`disabled?`](#отключение-поля-ввода)                   | `boolean`                                              | -                            | Делает компонент недоступным                                           |
+| [`size?`](#размер)                                      | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                        | Размер компонента                                                      |
+| [`indent?`](#отступы)                                   | `increased`, `normal`                                  | `normal`                     | Отступы компонента                                                     |
+| `onItemClick?`                                          | `ListPropOnItemClick<ITEM>`                            | -                            | Функция обработчика события по клику на элемент                        |
+| [`items`](#варианты)                                    | `ITEM[]`                                               | -                            | Варианты                                                               |
+| [`groups?`](#группировка-списка)                        | `GROUP[]`                                              | -                            | Группы                                                                 |
+| [`renderItem?`](#свое-представление-элемента-списка)    | `ListPropRenderItem<ITEM>`                             | рендер по умолчанию          | Рендер-функция для элемента списка                                     |
+| [`getItemLabel?`](#свои-тип-данных-items-и-groups)      | `ListPropGetItemLabel<ITEM>`                           | `(item) => item.label`       | Функция для определения названия элемента                              |
+| [`getItemKey?`](#свои-тип-данных-items-и-groups)        | `ListPropGetItemKey<ITEM>`                             | `(item) => item.id`          | Функция для определения уникального ключа элемента                     |
+| [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemGroupKey<ITEM>`                        | `(item) => item.groupId`     | Функция для определения ключа группы, к которой будет привязан элемент |
+| [`getItemDisabled?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemDisabled<ITEM>`                        | `(item) => item.disabled`    | Функция для определения состояния `disabled`                           |
+| [`getItemLeftIcon?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemLeftIcon<ITEM>`                        | `(item) => item.leftIcon`    | Функция для определения иконки с левой стороны                         |
+| [`getItemLeftSide?`](#свои-тип-данных-items-и-groups)   | `ListPropGetItemLeftSide<ITEM>`                        | `(item) => item.leftSide`    | Функция для определения контента с левой стороны                       |
+| [`getItemRightIcon?`](#свои-тип-данных-items-и-groups)  | `ListPropGetItemRightIcon<ITEM>`                       | `(item) => item.rightIcon`   | Функция для определения иконки с правой стороны                        |
+| [`getItemRightSide?`](#свои-тип-данных-items-и-groups)  | `ListPropGetItemRightSide<ITEM>`                       | `(item) => item.rightSide`   | Функция для определения контента с правой стороны                      |
+| `getItemOnClick?`                                       | `ListPropGetItemOnClick<ITEM>`                         | `(item) => item.onClick`     | Функция для определения обработчика события при клике на элемент       |
+| `getItemActive?`                                        | `ListPropGetItemActive<ITEM>`                          | `(item) => item.active`      | Функция для определения активности элемента                            |
+| `getItemRightAs?`                                       | `ListPropGetItemAs<ITEM>`                              | `(item) => item.as`          | Функция определения HTML-тега для рендера элемента                     |
+| `getItemRightAttributes?`                               | `ListPropGetItemAtrributes<ITEM>`                      | `(item) => item.attributes`  | Функция для определения атрибутов элемента                             |
+| [`getGroupLabel?`](#свои-тип-данных-items-и-groups)     | `ListPropGetGroupKey<GROUP>`                           | `(group) => group.id`        | Функция для определения названия группы                                |
+| [`getGroupKey?`](#свои-тип-данных-items-и-groups)       | `ListPropGetGroupLabel<GROUP>`                         | `(group) => group.label`     | Функция для определения уникального ключа группы                       |
+| [`getGroupRightSide?`](#свои-тип-данных-items-и-groups) | `ListPropGetGroupRightSide<GROUP>`                     | `(group) => group.rightSide` | Функция для определения контента с правой стороны                      |
+| `isLoading?`                                            | `boolean`                                              | -                            | При `true` будет отображаться [ListLoader](#загрузчик)                 |
+| `onBlur?`                                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                            | Обработчик события `blur`                                              |
+| `onFocus?`                                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                            | Обработчик события `focus`                                             |
+| `name?`                                                 | `string`                                               | -                            | Имя поля ввода                                                         |
+| `className?`                                            | `string`                                               | -                            | Дополнительный CSS-класс                                               |
+| `ref?`                                                  | `React.Ref<HTMLDivElement>`                            | -                            | Ссылка на корневой DOM-элемент компонента                              |
