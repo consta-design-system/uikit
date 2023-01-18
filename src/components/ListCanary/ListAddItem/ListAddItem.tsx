@@ -2,19 +2,36 @@ import './ListAddItem.css';
 
 import React, { forwardRef } from 'react';
 
+import { Text } from '##/components/Text';
 import { IconPropSize } from '##/icons/Icon';
 import { IconAdd } from '##/icons/IconAdd';
+import { cnMixSpace, Space } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
+import { mapHorisontalSpase, mapHorisontalSpaseIncreased } from '../maps';
 import { defaultListPropSize, ListAddItemProps, ListPropSize } from '../types';
 
 const cnListAddItem = cn('ListAddItem');
 
-const iconSizeMap: Record<ListPropSize, IconPropSize> = {
+const mapIconSize: Record<ListPropSize, IconPropSize> = {
   xs: 'xs',
   s: 'xs',
   m: 's',
   l: 's',
+};
+
+const mapVerticalPadding: Record<ListPropSize, Space> = {
+  xs: '2xs',
+  s: '2xs',
+  m: 'xs',
+  l: 's',
+};
+
+const mapIconGap: Record<ListPropSize, Space> = {
+  xs: '3xs',
+  s: '2xs',
+  m: 'xs',
+  l: 'xs',
 };
 
 export const ListAddItem = forwardRef<HTMLDivElement, ListAddItemProps>(
@@ -24,20 +41,36 @@ export const ListAddItem = forwardRef<HTMLDivElement, ListAddItemProps>(
       className,
       disabled,
       label,
+      indent,
       ...otherProps
     } = props;
     return (
-      <div
-        className={cnListAddItem({ size, disabled }, [className])}
-        ref={ref}
+      <Text
         {...otherProps}
+        size={size}
+        className={cnListAddItem({ disabled }, [
+          cnMixSpace({
+            mH:
+              indent === 'increased'
+                ? mapHorisontalSpaseIncreased[size]
+                : mapHorisontalSpase[size],
+            pV: mapVerticalPadding[size],
+          }),
+          className,
+        ])}
+        ref={ref}
+        lineHeight="xs"
       >
         <IconAdd
-          className={cnListAddItem('AddIcon')}
-          size={iconSizeMap[size]}
+          className={cnListAddItem('AddIcon', [
+            cnMixSpace({
+              mR: mapIconGap[size],
+            }),
+          ])}
+          size={mapIconSize[size]}
         />
         {label}
-      </div>
+      </Text>
     );
   },
 );

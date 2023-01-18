@@ -1,7 +1,6 @@
 .ListItem {
   --list-item-color: var(--color-typo-primary);
   position: relative;
-  padding: var(--list-item-vertical-space) var(--list-item-horizontal-space);
   background: var(--color-control-bg-clear);
   transition: color 0.3s;
 
@@ -14,44 +13,6 @@
 
     &:hover {
       background-color: var(--color-control-bg-clear-hover);
-    }
-  }
-
-  &_size {
-    &_xs {
-      --list-item-vertical-space: var(--space-2xs);
-      --list-item-horizontal-space: var(--space-xs);
-
-      &.ListItem_indent_increased {
-        --list-item-horizontal-space: var(--space-s);
-      }
-    }
-
-    &_s {
-      --list-item-vertical-space: var(--space-2xs);
-      --list-item-horizontal-space: var(--space-xs);
-
-      &.ListItem_indent_increased {
-        --list-item-horizontal-space: var(--space-s);
-      }
-    }
-
-    &_m {
-      --list-item-vertical-space: var(--space-xs);
-      --list-item-horizontal-space: var(--space-s);
-
-      &.ListItem_indent_increased {
-        --list-item-horizontal-space: var(--space-m);
-      }
-    }
-
-    &_l {
-      --list-item-vertical-space: var(--space-xs);
-      --list-item-horizontal-space: var(--space-s);
-
-      &.ListItem_indent_increased {
-        --list-item-horizontal-space: var(--space-l);
-      }
     }
   }
 
@@ -81,10 +42,5 @@
 
   &-Icon {
     color: var(--list-item-color);
-  }
-
-  &-Label {
-    flex: 1;
-    word-wrap: break-word;
   }
 }

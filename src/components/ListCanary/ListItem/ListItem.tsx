@@ -3,16 +3,26 @@ import './ListItem.css';
 import React, { forwardRef } from 'react';
 
 import { Text } from '##/components/Text';
+import { cnMixSpace, Space } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
 import { cnListItemGrid, renderSlot } from '../ListItemGrid';
+import { mapHorisontalSpase, mapHorisontalSpaseIncreased } from '../maps';
 import {
   defaultListPropSize,
   ListItemComponent,
   ListItemProps,
+  ListPropSize,
 } from '../types';
 
 export const cnListItem = cn('ListItem');
+
+const mapVerticalPadding: Record<ListPropSize, Space> = {
+  xs: '2xs',
+  s: '2xs',
+  m: 'xs',
+  l: 'xs',
+};
 
 const ListItemRender = (
   props: ListItemProps,
@@ -40,16 +50,23 @@ const ListItemRender = (
 
   return (
     <Text
-      className={cnListItem(
-        { active, size, indent, disabled, interactive: !!handleClick },
-        [cnListItemGrid(), className],
-      )}
+      {...otherProps}
+      className={cnListItem({ active, disabled, interactive: !!handleClick }, [
+        cnMixSpace({
+          pH:
+            indent === 'increased'
+              ? mapHorisontalSpaseIncreased[size]
+              : mapHorisontalSpase[size],
+          pV: mapVerticalPadding[size],
+        }),
+        cnListItemGrid(),
+        className,
+      ])}
       as={as}
       onClick={handleClick}
       lineHeight="xs"
       size={size}
       ref={ref}
-      {...otherProps}
     >
       {renderSlot(leftSide, 'left', size, leftIcon)}
       {!rightIcon && !rightIcon && !leftSide && !leftIcon ? (

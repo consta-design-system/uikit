@@ -14,7 +14,7 @@ export const defaultListPropIndent = listPropIndent[0];
 
 export type DefaultListGroup = {
   id: string | number;
-  label: string;
+  label?: string;
   rightSide?: React.ReactNode;
 };
 
@@ -74,7 +74,7 @@ export type ListPropGetItemOnClick<ITEM> = (
 
 // GROUPS
 export type ListPropGetGroupKey<GROUP> = (item: GROUP) => string | number;
-export type ListPropGetGroupLabel<GROUP> = (item: GROUP) => string;
+export type ListPropGetGroupLabel<GROUP> = (item: GROUP) => string | undefined;
 export type ListPropGetGroupRightSide<GROUP> = (
   item: GROUP,
 ) => React.ReactNode | undefined;
@@ -116,9 +116,6 @@ export type ListProps<
   (ITEM extends { id: DefaultListItem['id'] }
     ? {}
     : { getItemKey: ListPropGetItemKey<ITEM> }) &
-  (GROUP extends { label: DefaultListGroup['label'] }
-    ? {}
-    : { getGroupLabel: ListPropGetGroupLabel<GROUP> }) &
   (GROUP extends { id: DefaultListGroup['id'] }
     ? {}
     : { getGroupKey: ListPropGetGroupKey<GROUP> });
@@ -148,8 +145,17 @@ export type ListItemComponent = <
 export type ListGroupLabelProps = PropsWithHTMLAttributesAndRef<
   {
     size?: ListPropSize;
-    label?: string;
+    label: string;
+    indent?: ListPropIndent;
     rightSide?: React.ReactNode;
+  },
+  HTMLDivElement
+>;
+
+export type ListDividerProps = PropsWithHTMLAttributesAndRef<
+  {
+    size?: ListPropSize;
+    indent?: ListPropIndent;
   },
   HTMLDivElement
 >;

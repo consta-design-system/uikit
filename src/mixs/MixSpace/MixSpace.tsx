@@ -2,7 +2,7 @@ import './MixSpace.css';
 
 import { cn } from '../../utils/bem';
 
-type PropSpace =
+export type Space =
   | 0
   | 'auto'
   | 'm'
@@ -19,31 +19,31 @@ type PropSpace =
   | '6xl';
 
 type Props = {
-  p?: PropSpace;
-  m?: PropSpace;
-  pV?: PropSpace;
-  pH?: PropSpace;
-  mV?: PropSpace;
-  mH?: PropSpace;
-  mT?: PropSpace;
-  mL?: PropSpace;
-  mR?: PropSpace;
-  mB?: PropSpace;
-  pT?: PropSpace;
-  pL?: PropSpace;
-  pR?: PropSpace;
-  pB?: PropSpace;
+  p?: Space;
+  m?: Space;
+  pV?: Space;
+  pH?: Space;
+  mV?: Space;
+  mH?: Space;
+  mT?: Space;
+  mL?: Space;
+  mR?: Space;
+  mB?: Space;
+  pT?: Space;
+  pL?: Space;
+  pR?: Space;
+  pB?: Space;
 };
 
 type SpaceProps = {
-  pT?: PropSpace;
-  pL?: PropSpace;
-  pR?: PropSpace;
-  pB?: PropSpace;
-  mT?: PropSpace;
-  mL?: PropSpace;
-  mR?: PropSpace;
-  mB?: PropSpace;
+  pT?: Space;
+  pL?: Space;
+  pR?: Space;
+  pB?: Space;
+  mT?: Space;
+  mL?: Space;
+  mR?: Space;
+  mB?: Space;
 };
 
 type CnSpace = (

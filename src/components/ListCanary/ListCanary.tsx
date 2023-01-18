@@ -1,15 +1,15 @@
-import './List.css';
-
 import React, { forwardRef, useMemo } from 'react';
 
 import { useRefs } from '##/hooks/useRefs';
+import { cnMixSpace, Space } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 import { getGroups } from '##/utils/getGroups';
 
 import { withDefaultGetters } from './helper';
-import { ListGroupLabel } from './ListGroupLabel/ListGroupLabel';
-import { ListItem } from './ListItem/ListItem';
-import { ListLoader } from './ListLoader/ListLoader';
+import { ListDivider } from './ListDivider';
+import { ListGroupLabel } from './ListGroupLabel';
+import { ListItem } from './ListItem';
+import { ListLoader } from './ListLoader';
 import {
   DefaultListItem,
   defaultListPropIndent,
@@ -17,9 +17,35 @@ import {
   ListComponent,
   ListPropRenderItem,
   ListProps,
+  ListPropSize,
 } from './types';
 
 export const cnList = cn('List');
+
+const mapGroupVerticalSpase: Record<ListPropSize, Space> = {
+  xs: '2xs',
+  s: '2xs',
+  m: 'xs',
+  l: 'xs',
+};
+
+const renderHeader = (
+  label: string | undefined,
+  first: boolean,
+  size: ListPropSize,
+  rightSide: React.ReactNode,
+): React.ReactNode | null => {
+  console.log(label);
+  if (label) {
+    return <ListGroupLabel size={size} label={label} rightSide={rightSide} />;
+  }
+
+  if (!label && !first) {
+    return <ListDivider size={size} />;
+  }
+
+  return null;
+};
 
 const ListRender = (props: ListProps, ref: React.Ref<HTMLDivElement>) => {
   const {
@@ -92,17 +118,25 @@ const ListRender = (props: ListProps, ref: React.Ref<HTMLDivElement>) => {
     );
   };
 
+  console.log(groups);
+
   return (
-    <div className={cnList({ size }, [className])} ref={ref} {...otherProps}>
-      {groups.map((group) => {
+    <div
+      {...otherProps}
+      className={cnList(null, [
+        cnMixSpace({ pV: mapGroupVerticalSpase[size] }),
+        className,
+      ])}
+      ref={ref}
+    >
+      {groups.map((group, groupIndex) => {
         return (
           <React.Fragment key={group.key}>
-            {group.group && (
-              <ListGroupLabel
-                size={size}
-                label={getGroupLabel(group.group)}
-                rightSide={getGroupRightSide(group.group)}
-              />
+            {renderHeader(
+              group.group && getGroupLabel(group.group),
+              groupIndex === 0,
+              size,
+              group.group && getGroupRightSide(group.group),
             )}
             {group.items.map((item, index) => {
               return (

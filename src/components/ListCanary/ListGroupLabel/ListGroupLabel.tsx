@@ -2,12 +2,31 @@ import './ListGroupLabel.css';
 
 import React, { forwardRef } from 'react';
 
+import { Text, TextPropSize } from '##/components/Text';
+import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
 import { cnListItemGrid, renderSlot } from '../ListItemGrid';
-import { defaultListPropSize, ListGroupLabelProps } from '../types';
+import {
+  mapGroupVerticalSpaseBottom,
+  mapGroupVerticalSpaseTop,
+  mapHorisontalSpase,
+  mapHorisontalSpaseIncreased,
+} from '../maps';
+import {
+  defaultListPropSize,
+  ListGroupLabelProps,
+  ListPropSize,
+} from '../types';
 
 const cnListGroupLabel = cn('ListGroupLabel');
+
+const mapFontSize: Record<ListPropSize, TextPropSize> = {
+  xs: '2xs',
+  s: '2xs',
+  m: 'xs',
+  l: 's',
+};
 
 export const ListGroupLabel = forwardRef<HTMLDivElement, ListGroupLabelProps>(
   (props, ref) => {
@@ -15,15 +34,32 @@ export const ListGroupLabel = forwardRef<HTMLDivElement, ListGroupLabelProps>(
       rightSide,
       size = defaultListPropSize,
       label,
+      indent,
       className,
       ...otherProps
     } = props;
 
     return (
-      <div
-        ref={ref}
-        className={cnListGroupLabel({ size }, [cnListItemGrid(), className])}
+      <Text
         {...otherProps}
+        ref={ref}
+        className={cnListGroupLabel(null, [
+          cnListItemGrid(),
+          cnMixSpace({
+            mH:
+              indent === 'increased'
+                ? mapHorisontalSpaseIncreased[size]
+                : mapHorisontalSpase[size],
+            pT: mapGroupVerticalSpaseTop[size],
+            pB: mapGroupVerticalSpaseBottom[size],
+          }),
+          className,
+        ])}
+        size={mapFontSize[size]}
+        view="secondary"
+        lineHeight="xs"
+        spacing="xs"
+        transform="uppercase"
       >
         {!rightSide ? (
           label
@@ -33,7 +69,7 @@ export const ListGroupLabel = forwardRef<HTMLDivElement, ListGroupLabelProps>(
           </span>
         )}
         {renderSlot(rightSide, 'right', size, undefined)}
-      </div>
+      </Text>
     );
   },
 );
