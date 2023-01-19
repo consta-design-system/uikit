@@ -18,7 +18,7 @@ import { TableColumn, TableRow } from '../Table';
 
 describe('getColumnsSize', () => {
   it('получение размера колонок', () => {
-    const result = getColumnsSize([150, undefined], 200);
+    const result = getColumnsSize([150, undefined]);
 
     expect(result).toEqual('150px auto');
   });
