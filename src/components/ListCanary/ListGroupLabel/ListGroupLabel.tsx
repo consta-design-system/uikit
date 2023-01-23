@@ -19,7 +19,7 @@ import {
   ListPropSize,
 } from '../types';
 
-const cnListGroupLabel = cn('ListGroupLabel');
+export const cnListGroupLabel = cn('ListGroupLabel');
 
 const mapFontSize: Record<ListPropSize, TextPropSize> = {
   xs: '2xs',
@@ -36,6 +36,7 @@ export const ListGroupLabel = forwardRef<HTMLDivElement, ListGroupLabelProps>(
       label,
       indent,
       className,
+      space,
       ...otherProps
     } = props;
 
@@ -45,14 +46,16 @@ export const ListGroupLabel = forwardRef<HTMLDivElement, ListGroupLabelProps>(
         ref={ref}
         className={cnListGroupLabel(null, [
           cnListItemGrid(),
-          cnMixSpace({
-            mH:
-              indent === 'increased'
-                ? mapHorisontalSpaseIncreased[size]
-                : mapHorisontalSpase[size],
-            pT: mapGroupVerticalSpaseTop[size],
-            pB: mapGroupVerticalSpaseBottom[size],
-          }),
+          cnMixSpace(
+            space || {
+              mH:
+                indent === 'increased'
+                  ? mapHorisontalSpaseIncreased[size]
+                  : mapHorisontalSpase[size],
+              pT: mapGroupVerticalSpaseTop[size],
+              pB: mapGroupVerticalSpaseBottom[size],
+            },
+          ),
           className,
         ])}
         size={mapFontSize[size]}

@@ -39,9 +39,11 @@ const ListItemRender = (
     rightSide,
     rightIcon,
     leftIcon,
-    as = 'div',
+    as,
+    checked,
     onClick,
-    onKeyDown,
+    status,
+    space,
     ...otherProps
   } = props;
 
@@ -51,25 +53,31 @@ const ListItemRender = (
   return (
     <Text
       {...otherProps}
-      className={cnListItem({ active, disabled, interactive: !!handleClick }, [
-        cnMixSpace({
-          pH:
-            indent === 'increased'
-              ? mapHorisontalSpaseIncreased[size]
-              : mapHorisontalSpase[size],
-          pV: mapVerticalPadding[size],
-        }),
-        cnListItemGrid(),
-        className,
-      ])}
+      className={cnListItem(
+        { active, disabled, checked, interactive: !!handleClick },
+        [
+          cnMixSpace(
+            space || {
+              pH:
+                indent === 'increased'
+                  ? mapHorisontalSpaseIncreased[size]
+                  : mapHorisontalSpase[size],
+              pV: mapVerticalPadding[size],
+            },
+          ),
+          cnListItemGrid(),
+          className,
+        ],
+      )}
       as={as}
       onClick={handleClick}
       lineHeight="xs"
       size={size}
       ref={ref}
+      view={status}
     >
       {renderSlot(leftSide, 'left', size, leftIcon)}
-      {!rightIcon && !rightIcon && !leftSide && !leftIcon ? (
+      {!rightIcon && !rightSide && !leftSide && !leftIcon ? (
         label
       ) : (
         <span className={cnListItemGrid('Slot', { position: 'center' })}>

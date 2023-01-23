@@ -13,7 +13,7 @@ import {
 } from '../maps';
 import { defaultListPropSize, ListDividerProps } from '../types';
 
-const cnListDivider = cn('ListDivider');
+export const cnListDivider = cn('ListDivider');
 
 export const ListDivider = forwardRef<HTMLDivElement, ListDividerProps>(
   (props, ref) => {
@@ -21,6 +21,7 @@ export const ListDivider = forwardRef<HTMLDivElement, ListDividerProps>(
       size = defaultListPropSize,
       indent,
       className,
+      space,
       ...otherProps
     } = props;
 
@@ -29,14 +30,16 @@ export const ListDivider = forwardRef<HTMLDivElement, ListDividerProps>(
         {...otherProps}
         ref={ref}
         className={cnListDivider(null, [
-          cnMixSpace({
-            mH:
-              indent === 'increased'
-                ? mapHorisontalSpaseIncreased[size]
-                : mapHorisontalSpase[size],
-            mT: mapGroupVerticalSpaseTop[size],
-            mB: mapGroupVerticalSpaseBottom[size],
-          }),
+          cnMixSpace(
+            space || {
+              mH:
+                indent === 'increased'
+                  ? mapHorisontalSpaseIncreased[size]
+                  : mapHorisontalSpase[size],
+              mT: mapGroupVerticalSpaseTop[size],
+              mB: mapGroupVerticalSpaseBottom[size],
+            },
+          ),
           className,
         ])}
       />

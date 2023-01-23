@@ -3,16 +3,14 @@ import './ContextMenu.css';
 import React, { useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { useFlag } from '../../hooks/useFlag/useFlag';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import {
-  animateTimeout,
-  cnMixPopoverAnimate,
-} from '../../mixs/MixPopoverAnimate/MixPopoverAnimate';
-import { cn } from '../../utils/bem';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { Direction } from '../Popover/Popover';
-import { ContextMenuLevels } from './ContextMenuLevels/ContextMenuLevels';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { Direction } from '##/components/Popover';
+import { useFlag } from '##/hooks/useFlag';
+import { useForkRef } from '##/hooks/useForkRef';
+import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
+import { cn } from '##/utils/bem';
+
+import { ContextMenuLevels } from './ContextMenuLevels';
 import { ContextMenuComponent, ContextMenuProps } from './types';
 
 const cnContextMenu = cn('ContextMenuCanary');

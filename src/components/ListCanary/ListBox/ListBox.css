@@ -1,0 +1,47 @@
+.ListBox {
+  overflow: auto;
+  box-sizing: border-box;
+  background: var(--color-bg-default);
+
+  &_size {
+    &_xs {
+      --list-box-control-height: var(--control-height-xs);
+    }
+
+    &_s {
+      --list-box-control-height: var(--control-height-s);
+    }
+
+    &_m {
+      --list-box-control-height: var(--control-height-m);
+    }
+
+    &_l {
+      --list-box-control-height: var(--control-height-l);
+    }
+  }
+
+  &_form {
+    &_default {
+      border-radius: var(--control-radius);
+    }
+
+    &_brick {
+      border-radius: 0;
+    }
+
+    &_round {
+      border-radius: calc(var(--list-box-control-height) * 0.5);
+    }
+  }
+
+  &_border {
+    border:
+      var(--control-border-width) solid
+      var(--color-control-bg-border-default);
+  }
+
+  &_shadow {
+    box-shadow: var(--shadow-layer);
+  }
+}

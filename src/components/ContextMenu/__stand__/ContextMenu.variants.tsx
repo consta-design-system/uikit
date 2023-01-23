@@ -15,9 +15,11 @@ import { exampleItems, groups, Item } from '../__mocks__/mock.data';
 import { ContextMenu } from '../ContextMenu';
 import {
   contextMenuDefaultSize,
+  contextMenuForm,
   ContextMenuPropGetItemDisabled,
   ContextMenuPropSize,
   contextMenuSizes,
+  defaultContextMenuForm,
 } from '../types';
 
 function renderRightSide(
@@ -61,6 +63,7 @@ const Variants = () => {
     useSelect('size', contextMenuSizes, contextMenuDefaultSize) ||
     contextMenuDefaultSize;
   const disabled = useBoolean('disabledLastItem', false);
+  const form = useSelect('form', contextMenuForm, defaultContextMenuForm);
   const withGroup = useBoolean('withGroup', false);
   const withGroupLabel = useBoolean('withGroupLabel', false);
   const withSubMenu = useBoolean('withSubMenu', false);
@@ -182,6 +185,7 @@ const Variants = () => {
         getItemDisabled={getItemDisabled}
         getItemLeftIcon={getItemLeftIcon}
         getItemRightIcon={getItemRightIcon}
+        getItemStatus={() => undefined}
         anchorRef={ref}
         getItemRightSide={getItemRightSide}
         getItemLeftSide={getItemLeftSide}
@@ -190,6 +194,7 @@ const Variants = () => {
         onClickOutside={setIsOpen.off}
         offset="xs"
         style={{ zIndex: 100 }}
+        form={form}
       />
     </div>
   );

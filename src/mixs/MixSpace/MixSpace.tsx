@@ -18,7 +18,7 @@ export type Space =
   | '5xl'
   | '6xl';
 
-type Props = {
+export type MixSpaceProps = {
   p?: Space;
   m?: Space;
   pV?: Space;
@@ -35,26 +35,9 @@ type Props = {
   pB?: Space;
 };
 
-type SpaceProps = {
-  pT?: Space;
-  pL?: Space;
-  pR?: Space;
-  pB?: Space;
-  mT?: Space;
-  mL?: Space;
-  mR?: Space;
-  mB?: Space;
-};
+type CnMixSpace = (props: MixSpaceProps) => string;
 
-type CnSpace = (
-  elemNameOrBlockMods?: SpaceProps | string | null,
-  elemModsOrBlockMix?: SpaceProps | Array<string | undefined> | null,
-  elemMix?: Array<string | undefined>,
-) => string;
-
-type CnMixSpace = (props: Props) => string;
-
-const cnSpace: CnSpace = cn('MixSpace');
+const cnSpace = cn('MixSpace');
 
 export const cnMixSpace: CnMixSpace = (props) => {
   const { p, m, pV, pH, mV, mH, mT, mL, mR, mB, pT, pL, pR, pB } = props;

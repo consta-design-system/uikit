@@ -1,46 +1,23 @@
 import './ContextMenuLevel.css';
 
-import React, { createRef, forwardRef, useEffect, useMemo } from 'react';
+import { IconArrowRight } from '@consta/icons/IconArrowRight';
+import React, { forwardRef, useEffect } from 'react';
 
-import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { cn } from '../../../utils/bem';
-import { getByMap } from '../../../utils/getByMap';
-import { getGroups } from '../../../utils/getGroups';
-import { Popover } from '../../Popover/Popover';
-import { Text } from '../../Text/Text';
-import { ContextMenuItem } from '../ContextMenuItem/ContextMenuItem';
-import { getItemIndex, sizeMapHeader } from '../helpers';
+import { cnListBox, iconSizeMap, List } from '##/components/ListCanary';
+import { Popover } from '##/components/Popover';
+import { useDebounce } from '##/hooks/useDebounce';
+import { useFlag } from '##/hooks/useFlag/useFlag';
+import { useRefs } from '##/hooks/useRefs/useRefs';
+import { cn } from '##/utils/bem';
+
 import {
   contextMenuDefaultSize,
+  ContextMenuItemDefault,
   ContextMenuLevelComponent,
   ContextMenuLevelProps,
-  ContextMenuPropSize,
 } from '../types';
 
 export const cnContextMenuLevel = cn('ContextMenuLevelCanary');
-
-const renderHeader = (
-  groupLabel: string | number | undefined,
-  first: boolean,
-  size: ContextMenuPropSize = contextMenuDefaultSize,
-): React.ReactNode | null => {
-  if (!groupLabel) {
-    if (first) {
-      return null;
-    }
-    return <div className={cnContextMenuLevel('Divider', { size })} />;
-  }
-  return (
-    <Text
-      view="secondary"
-      transform="uppercase"
-      className={cnContextMenuLevel('Header', { size, first })}
-      size={getByMap(sizeMapHeader, size)}
-    >
-      {groupLabel}
-    </Text>
-  );
-};
 
 let timers: ReturnType<typeof setTimeout>[] = [];
 export function clearTimers() {
@@ -49,10 +26,11 @@ export function clearTimers() {
   }
   timers = [];
 }
+
 const closeDelay = 300;
 
-const ContextMenuLevelRender = <ITEM, GROUP>(
-  props: ContextMenuLevelProps<ITEM, GROUP>,
+const ContextMenuLevelRender = (
+  props: ContextMenuLevelProps,
   ref: React.Ref<HTMLDivElement>,
 ) => {
   const {
@@ -60,6 +38,7 @@ const ContextMenuLevelRender = <ITEM, GROUP>(
     items,
     groups: groupsProp,
     className,
+    form = 'default',
     // Свойства относящиеся к меню
     levelDepth,
     activeItem,
@@ -93,34 +72,23 @@ const ContextMenuLevelRender = <ITEM, GROUP>(
     // Геттеры для GROUP
     getGroupLabel,
     getGroupId,
+
     ...otherProps
   } = props;
 
   const [hovered, setHovered] = useFlag(false);
+  // скрываем блок пока не найдем тоную позицию для оображения
+  const [visible, setVisible] = useFlag(false);
 
-  const groups = getGroups<ITEM, GROUP>(
-    items,
-    getItemGroupId,
-    groupsProp,
-    getGroupId,
-    sortGroup && ((a, b) => sortGroup(a.key, b.key)),
+  const setVisibleTrue = useDebounce(setVisible.on, 20);
+
+  const getKey = (item: ContextMenuItemDefault) =>
+    (getItemKey(item) || getItemLabel(item)).toString();
+
+  const itemsRefs = useRefs<HTMLDivElement, string[]>(
+    items.map((item) => getKey(item)),
+    [groupsProp],
   );
-
-  const constructItemRefs: () => Record<
-    string,
-    React.RefObject<HTMLDivElement>
-  > = () => {
-    const refs: Record<string, React.RefObject<HTMLDivElement>> = {};
-
-    for (const group of groups) {
-      for (let i = 0; i < items.length; i++) {
-        refs[getItemIndex(group.key, i)] = createRef<HTMLDivElement>();
-      }
-    }
-    return refs;
-  };
-
-  const itemsRefs = useMemo(constructItemRefs, [items, groupsProp]);
 
   useEffect(() => {
     if (levelDepth !== 0 && !hovered && hoveredParenLevel < levelDepth) {
@@ -133,87 +101,102 @@ const ContextMenuLevelRender = <ITEM, GROUP>(
     return () => clearTimeout(timers[levelDepth]);
   }, [hovered, hoveredParenLevel]);
 
-  const onMouseEnter = (item: ITEM, itemIndex: string) => {
-    const subMenu = getItemSubMenu(item);
-    const disabled = getItemDisabled(item);
-    if (Array.isArray(subMenu) && !disabled) {
-      addLevel({
-        level: levelDepth + 1,
-        items: subMenu,
-        anchorRef: itemsRefs[itemIndex],
-        activeItem: itemIndex,
-      });
-      setHoveredParenLevel(levelDepth + 1);
-    } else {
-      setHoveredParenLevel(levelDepth);
-    }
-  };
+  const onMouseEnter =
+    (
+      item: ContextMenuItemDefault,
+    ): JSX.IntrinsicElements['div']['onMouseEnter'] =>
+    (e) => {
+      const subMenu = getItemSubMenu(item);
+      const disabled = getItemDisabled(item);
+      const onMouseEnter = getItemAttributes(item)
+        ?.onMouseEnter as JSX.IntrinsicElements['div']['onMouseEnter'];
+
+      onMouseEnter?.(e);
+
+      if (Array.isArray(subMenu) && !disabled) {
+        const key = getKey(item);
+        addLevel({
+          level: levelDepth + 1,
+          items: subMenu,
+          anchorRef: itemsRefs[key],
+          activeItem: key,
+        });
+        setHoveredParenLevel(levelDepth + 1);
+      } else {
+        setHoveredParenLevel(levelDepth);
+      }
+    };
 
   return (
     <Popover
       anchorRef={anchorRef}
       className={cnContextMenuLevel(
-        { firstLevel: levelDepth === 0, direction },
-        [className],
+        { firstLevel: levelDepth === 0, direction, visible },
+        [cnListBox({ size, form, border: true, shadow: true }), className],
       )}
       possibleDirections={possibleDirections}
       spareDirection={spareDirection}
       direction={direction}
       offset={offset}
-      onSetDirection={onSetDirection}
+      onSetDirection={(item) => {
+        setVisibleTrue();
+        onSetDirection?.(item);
+      }}
       onMouseEnter={setHovered.on}
       onMouseLeave={setHovered.off}
       ref={ref}
       {...otherProps}
     >
-      {groups.map((group, groupIndex) => {
-        return (
-          <div
-            className={cnContextMenuLevel('Group', { size })}
-            key={group.key}
-          >
-            {renderHeader(
-              group.group && getGroupLabel(group.group),
-              groupIndex === 0,
-              size,
-            )}
-            {group.items.map((item, index) => {
-              const itemIndex = getItemIndex(group.key, index);
-              const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
-                if (!getItemDisabled(item)) {
-                  if (typeof getItemOnClick(item) === 'function') {
-                    getItemOnClick(item)?.({ e, item });
-                  }
-                  if (typeof onItemClick === 'function') {
-                    onItemClick?.({ e, item });
-                  }
-                }
-              };
-              return (
-                <ContextMenuItem
-                  label={getItemLabel(item)}
-                  rightSide={getItemRightSide(item)}
-                  rightIcon={getItemRightIcon(item)}
-                  leftSide={getItemLeftSide(item)}
-                  leftIcon={getItemLeftIcon(item)}
-                  status={getItemStatus(item)}
-                  key={cnContextMenuLevel('Item', { groupIndex, index })}
-                  disabled={getItemDisabled(item)}
-                  onClick={onClick}
-                  as={getItemAs(item)}
-                  {...(getItemAttributes(item) ?? {})}
-                  ref={itemsRefs[itemIndex]}
-                  className={cnContextMenuLevel('Item')}
-                  onMouseEnter={() => onMouseEnter(item, itemIndex)}
-                  active={activeItem === itemIndex}
-                  size={size}
-                  withSubMenu={!!getItemSubMenu(item)}
-                />
-              );
-            })}
-          </div>
-        );
-      })}
+      <List
+        size={size}
+        items={items}
+        getItemLabel={getItemLabel}
+        onItemClick={
+          onItemClick
+            ? (item, { e }) =>
+                onItemClick({ item, e: e as React.MouseEvent<HTMLDivElement> })
+            : undefined
+        }
+        sortGroup={sortGroup ? (a, b) => sortGroup(a.key, b.key) : undefined}
+        getItemOnClick={
+          getItemOnClick
+            ? (item) => (e) =>
+                getItemOnClick(item)?.({
+                  e: e as React.MouseEvent<HTMLDivElement>,
+                  item,
+                })
+            : undefined
+        }
+        getItemAs={getItemAs}
+        getItemAttributes={(item) =>
+          ({
+            ...getItemAttributes(item),
+            onMouseEnter: onMouseEnter(item),
+          } as JSX.IntrinsicElements[keyof JSX.IntrinsicElements])
+        }
+        getItemGroupKey={getItemGroupId}
+        getItemLeftIcon={getItemLeftIcon}
+        getItemRightIcon={getItemRightIcon}
+        getItemLeftSide={getItemLeftSide}
+        getItemRightSide={(item) => {
+          const side = getItemRightSide(item);
+          if (!getItemSubMenu(item)) {
+            return side;
+          }
+
+          const sides: React.ReactNode[] = Array.isArray(side) ? side : [side];
+          sides.push(<IconArrowRight size={iconSizeMap[size]} />);
+          return sides;
+        }}
+        getGroupKey={getGroupId}
+        getGroupLabel={getGroupLabel}
+        getItemDisabled={getItemDisabled}
+        getItemStatus={getItemStatus}
+        getItemRef={(item) => itemsRefs[getKey(item)]}
+        groups={groupsProp}
+        getItemActive={(item) => getKey(item) === activeItem}
+        indent={form === 'round' ? 'increased' : 'normal'}
+      />
     </Popover>
   );
 };

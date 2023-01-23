@@ -1,7 +1,6 @@
 import { MdxMenu } from '@consta/stand';
 
 import { ListExampleItems } from './examples/ListExampleItems/ListExampleItems';
-import { ListExampleLoading } from './examples/ListExampleLoading/ListExampleLoading';
 import { ListExampleSize } from './examples/ListExampleSize/ListExampleSize';
 import { ListExampleIndent } from './examples/ListExampleIndent/ListExampleIndent';
 import { ListExampleDisabled } from './examples/ListExampleDisabled/ListExampleDisabled';
@@ -13,6 +12,11 @@ import { ListItemExample } from './examples/ListItemExample/ListItemExample';
 import { ListGroupLabelExample } from './examples/ListGroupLabelExample/ListGroupLabelExample';
 import { ListAddItemExample } from './examples/ListAddItemExample/ListAddItemExample';
 import { ListLoaderExample } from './examples/ListLoaderExample/ListLoaderExample';
+import { ListExampleChecked } from './examples/ListExampleChecked/ListExampleChecked';
+import { ListExampleAdditionalElements } from './examples/ListExampleAdditionalElements/ListExampleAdditionalElements';
+import { ListExampleSpace } from './examples/ListExampleSpace/ListExampleSpace';
+import { ListExampleAdditionalClassName } from './examples/ListExampleAdditionalClassName/ListExampleAdditionalClassName';
+import { ListExampleListBox } from './examples/ListExampleListBox/ListExampleListBox';
 
 ```tsx
 import { List } from '@consta/uikit/ListCanary';
@@ -21,19 +25,24 @@ import { List } from '@consta/uikit/ListCanary';
 <MdxMenu>
 
 - [Содержимое](#содержимое-списка)
-  - [Варианты](#варианты)
-  - [Неактивный вариант](#неактивный-элемент-списка)
-  - [Группы вариантов](#группы-вариантов)
+  - [Элементы списка](#элементы-списка)
+  - [Неактивный элемент списка](#неактивный-элемент-списка)
+  - [Выбранный элемент списка](#выбранный-элемент-списка)
+  - [Дополниельное наполнение](#дополниельное-наполнение)
+  - [Группировка](#группировка)
 - [Размер](#размер)
 - [Отступы](#отступы)
 - [Неактивный список](#неактивный-список)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
   - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-групп-и-вариантов)
-- [Элемент списка](#элемент-списка)
-- [Загрузчик](#загрузчик)
-- [Заголовок группы](#заголовок-группы)
-- [Компонент для добавления элемента](#компонент-для-добавления-элемента)
+  - [Кастомные отсупы](#кастомные-отсупы)
+  - [Дополнительный класс](#дополнительный-класс)
+- [Элемент списка (ListItem)](#элемент-списка-listitem)
+- [Индикатор загрузки (ListLoader)](#индикатор-загрузки-listloader)
+- [Заголовок группы (ListGroupLabel)](#заголовок-группы-listgrouplabel)
+- [Компонент для добавления элемента (ListAddItem)](#компонент-для-добавления-элемента-listadditem)
+- [Коробка (ListBox)](#коробка-listbox)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 
@@ -41,20 +50,17 @@ import { List } from '@consta/uikit/ListCanary';
 
 ## Содержимое
 
-### Варианты
+### Элементы списка
 
 Элементы выпадающего списка можно описать в массиве `items`. Тип свойства `items` по умолчанию равен [DefaultListItem](#свойства). Значения:
 
 - `label` — название элемента списка писать с заглавной буквы
-- `id` — уникальный ключ элемента
 - `groupId` — идентификатор [группы](#группы-вариантов), в которую входит этот элемент
 - `disabled` — отмечает [неактивные элементы](#неактивный-элемент-списка)
 - `leftSide` — контент с левой стороны
 - `leftIcon` — иконка с левой стороны
 - `rightSide` — контент с правой стороны
 - `rightIcon` — иконка с правой стороны
-- `as` - HTML-тег компонента
-- `attributes` - атрибуты элемента
 - `onClick` - событие при клике на элементе
 
 Вы можете сделать [кастомный тип данных](#кастомный-элемент-списка) и использовать его.
@@ -100,13 +106,114 @@ function ListExampleDisabledItem() {
 
 <ListExampleDisabledItem />
 
-### Группы вариантов
+### Выбранный элемент списка
 
-Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultListGroup](#свойства). Значения:
+Для того чтобы пометить элемент списка как выбранный укажите в элементе `checked: true` или укажите через [`getItemChecked`](#кастомные-типы-данных-для-групп-и-вариантов)
 
-- `label` — название группы
+```tsx
+import React, { useState } from 'react';
+
+import { List } from '@consta/uikit/ListCanary';
+
+const items: string[] = ['Первый', 'Второй', 'Третий'];
+
+const getItemLabel = (item: string) => item;
+
+export const ListExampleBasic = () => {
+  const [checked, setChecked] = useState(items[0]);
+
+  return (
+    <List
+      items={items}
+      getItemLabel={getItemLabel}
+      getItemChecked={(item) => checked === item}
+      onItemClick={setChecked}
+    />
+  );
+};
+```
+
+<ListExampleChecked />
+
+### Дополниельное наполнение
+
+В элемент списка можно добавить иконку и произволное наполнение.
+Укажите в элементе `leftIcon`, `rightIcon`, `leftSide`, `rightSide`
+или укажите через
+[`getItemLeftIcon`](#кастомные-типы-данных-для-групп-и-вариантов),
+[`getItemRightIcon`](#кастомные-типы-данных-для-групп-и-вариантов),
+[`getItemLeftSide`](#кастомные-типы-данных-для-групп-и-вариантов),
+[`getItemRightSide`](#кастомные-типы-данных-для-групп-и-вариантов).
+
+Если в качестве значение в `leftSide` и `rightSide` указать массив
+то отсупы между элементами проставится автомаически
+
+```tsx
+import { IconComponent } from '@consta/icons/Icon';
+import { IconClose } from '@consta/icons/IconClose';
+import { IconUser } from '@consta/icons/IconUser';
+import React from 'react';
+
+import { Badge } from '@consta/uikit/Badge';
+import { List } from '@consta/uikit/ListCanary';
+
+type Item = {
+  label: string;
+  leftIcon: IconComponent;
+  work: 'дома' | 'в офисе' | 'не работает';
+};
+
+const items: Item[] = [
+  {
+    label: 'Андрей',
+    leftIcon: IconUser,
+    work: 'дома',
+  },
+  {
+    label: 'Иван',
+    leftIcon: IconUser,
+    work: 'в офисе',
+  },
+  {
+    label: 'Дементий',
+    leftIcon: IconClose,
+    work: 'не работает',
+  },
+];
+
+export const ListExampleAdditionalElements = () => {
+  return (
+    <List
+      items={items}
+      getItemRightSide={(item) => (
+        <Badge
+          label={item.work}
+          size="s"
+          status={item.work === 'не работает' ? 'warning' : 'success'}
+        />
+      )}
+      onItemClick={(item) => alert(`${item.label} ${item.work}`)}
+    />
+  );
+};
+```
+
+<ListExampleAdditionalElements />
+
+### Группировка
+
+Чтобы разбить элементы списка на группы, укажите признак присвоения группы к элемненту,
+`groupId` в `items` или через свойство `getItemGroupKey`.
+
+Если необходимо расставить заголовки для групп, то передайте массив групп в свойство `groups`.
+Тип свойства `groups` по умолчанию равен [DefaultListGroup](#свойства). Значения:
+
 - `id` — уникальный ключ
+- `label` — название группы
 - `rightSide` — контент с правой стороны
+
+`rightSide` может принимать `React.ReactNode` если передать массивом,
+то отступы между передвнными элеменами расавятся автомаически.
 
 ```tsx
 import React from 'react';
@@ -173,7 +280,13 @@ const items: Item[] = [
 ];
 
 function ListExampleGroups() {
-  return <List items={items} groups={groups} />;
+  return (
+    <List
+      items={items}
+      groups={groups}
+      onItemClick={(item) => alert(item.label)}
+    />
+  );
 }
 ```
 
@@ -181,7 +294,8 @@ function ListExampleGroups() {
 
 ## Размер
 
-За размер компонента отвечает свойство `size`. Возможные значения: `xs`, `s` , `m` , `l`. Значение по умолчанию `m`.
+За размер компонента отвечает свойство `size`.
+Возможные значения: `xs`, `s` , `m` , `l`. Значение по умолчанию `m`.
 
 Компонент занимает всю ширину родительского блока.
 
@@ -191,22 +305,19 @@ import { List } from '@consta/uikit/ListCanary';
 
 type Item = {
   label: string;
-  id: number;
 };
 
 const items: Item[] = [
   {
     label: 'Первый',
-    id: 1,
   },
   {
     label: 'Второй',
-    id: 2,
   },
   {
     label: 'Третий',
-    id: 3,
   },
+];
 ];
 
 const ListExampleSize = () => {
@@ -226,6 +337,8 @@ const ListExampleSize = () => {
 ## Отступы
 
 За отступы элемента списка отвечает свойство `indent`. Если указать `increased`, то горизонтальный отступ будет увеличен. Значение по умолчанию `normal`.
+
+Отступы зависят от свойсва `size`.
 
 ```tsx
 import React from 'react';
@@ -305,8 +418,6 @@ function ListExampleDisabled() {
 Чтобы создать свое представление элементов списка, используйте свойство `renderItem`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
-> У корневого DOM-элемента должно быть свойство role="option".
-
 #### Пример с кастомным элементом списка
 
 ```tsx
@@ -385,22 +496,153 @@ function ListExampleRenderItem() {
 
 Вы можете использовать кастомные типы данных для элементов списка (items) и групп (groups) — они могут отличаться от [DefaultListItem](#свойства) и [DefaultListGroup](#свойства).
 
-Чтобы компонент понимал откуда брать данные, нужно использовать геттеры `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getItemLeftSide`, `getItemLeftIcon`, `getItemRightSide`, `getItemRightIcon`, `getItemActive`, `getItemAs`, `getItemAttributes`, `getGroupLabel`, `getGroupKey`, `getGroupRightSide`.
+Чтобы компонент понимал откуда брать данные, нужно использовать геттеры
+`getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`,
+`getItemLeftSide`, `getItemLeftIcon`, `getItemRightSide`, `getItemRightIcon`,
+`getItemActive`, `getItemAs`, `getItemAttributes`, `getGroupLabel`, `getGroupKey`, `getGroupRightSide`.
+
+### Кастомные отсупы
+
+Компонент позволяет поменять отсупы элементов `ListItem`, `ListGroupLabel`, `ListDivider`,
+через `itemSpase`, `groupLabelSpase`, `dividerSpase` соответсвенно.
+
+Свойства принимают объект как в [MixSpace](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable).
+Если необходимо убрать отсупы то передайте пустой объект `{}`
+
+```tsx
+// Без отступов
+<List
+  items={items}
+  groups={groups}
+  onItemClick={(item) => alert(item.label)}
+  itemSpase={{}}
+  groupLabelSpase={{}}
+  dividerSpase={{}}
+/>
+
+// С кастомными отступами, без заголовков групп
+<List
+  items={items}
+  groups={groups}
+  onItemClick={(item) => alert(item.label)}
+  itemSpase={{ p: 's' }}
+  dividerSpase={{ mH: 's' }}
+  getGroupLabel={() => undefined}
+/>
+
+
+// С кастомными отступами, с заголовками групп
+<List
+  items={items}
+  groups={groups}
+  onItemClick={(item) => alert(item.label)}
+  itemSpase={{ p: 's' }}
+  groupLabelSpase={{ mH: 's', pT: 's', pB: '2xs' }}
+  dividerSpase={{ mH: 's' }}
+/>
+```
+
+<ListExampleSpace />
+
+### Дополнительный класс
+
+Есть возможность прокинуть дополнительный класс для каждого элемента списка.
+
+```tsx
+type Item = { label: string; marker: 'red' | 'green' };
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    marker: 'red',
+  },
+  {
+    label: 'Второй',
+    marker: 'green',
+  },
+  {
+    label: 'Третий',
+    marker: 'red',
+  },
+];
+
+const cnListExampleAdditionalClassName = cn('ListExampleAdditionalClassName');
+
+export const ListExampleAdditionalClassName = () => {
+  const [checked, setChecked] = useState<Item | undefined>(undefined);
+
+  return (
+    <List
+      onItemClick={setChecked}
+      items={items}
+      getItemAdditionalClassName={({ marker, label }) =>
+        cnListExampleAdditionalClassName('Item', {
+          marker,
+          checked: checked?.label === label,
+        })
+      }
+    />
+  );
+};
+```
+
+```css
+.ListItem.ListExampleAdditionalClassName-Item {
+  --list-item-color: var(--color-typo-primary);
+  --marker-size: calc(var(--space-xs) - var(--space-3xs));
+
+  border-radius: var(--control-radius);
+  background: var(--list-item-bg);
+  position: relative;
+
+  &:hover {
+    --list-item-bg: var(--color-control-bg-clear-hover);
+  }
+
+  &::before {
+    top: var(--space-2xs);
+    left: auto;
+    right: var(--space-2xs);
+    bottom: auto;
+    height: var(--marker-size);
+    width: var(--marker-size);
+    background: var(--my-list-item-marker-color);
+    opacity: 1;
+    border-radius: 50%;
+  }
+
+  &_marker {
+    &_red {
+      --my-list-item-marker-color: var(--color-bg-alert);
+    }
+    &_green {
+      --my-list-item-marker-color: var(--color-bg-success);
+    }
+  }
+
+  &_checked {
+    --list-item-bg: var(--color-control-bg-clear-hover);
+    --list-item-color: var(--color-typo-brand);
+  }
+}
+```
+
+<ListExampleAdditionalClassName />
 
 #### Геттеры по умолчанию
 
 ```ts
-const defaultGetItemKey = (item) => item.id;
 const defaultGetItemLabel = (item) => item.label;
-const defaultGetItemGroupKey = (item) => item.groupId;
 const defaultGetItemDisabled = (item) => item.disabled;
-const defaultGetItemLeftIcon = (item) => item.leftIcon;
-const defaultGetItemLeftSide = (item) => item.leftSide;
-const defaultGetItemRightIcon = (item) => item.rightIcon;
-const defaultGetItemRightSide = (item) => item.rightSide;
 const defaultGetItemActive = (item) => item.active;
-const defaultGetItemAs = (item) => item.as;
-const defaultGetItemAttributes = (item) => item.attributes;
+const defaultGetItemChecked = (item) => item.checked;
+const defaultGetItemStatus = (item) => item.status;
+const defaultGetItemGroupKey = (item) => item.groupId;
+const defaultGetItemLeftSide = (item) => item.leftSide;
+const defaultGetItemLeftIcon = (item) => item.leftIcon;
+const defaultGetItemRightSide = (item) => item.rightSide;
+const defaultGetItemRightIcon = (item) => item.rightIcon;
+const defaultGetItemOnClick = (item) => item.onClick;
 const defaultGetGroupKey = (group) => group.id;
 const defaultGetGroupLabel = (group) => group.label;
 const defaultGetGroupRightSide = (group) => group.rightSide;
@@ -416,7 +658,6 @@ function ListExampleCustomTypes() {
   return (
     <List
       items={['Первый', 'Второй', 'Третий']}
-      getItemKey={(item) => item}
       getItemLabel={(item) => item}
     />
   );
@@ -425,7 +666,7 @@ function ListExampleCustomTypes() {
 
 <ListExampleCustomTypes />
 
-## Элемент списка
+## Элемент списка (ListItem)
 
 Если необходимо использовать элемент списка отдельно от компонента `List`, импортируйте компонент `ListItem`.
 
@@ -456,9 +697,10 @@ import { ListItem } from '@consta/uikit/ListCanary';
 | `onClick?`   | `React.MouseEventHandler`     | -            | Событие при клике на элемент    |
 | `as?`        | `keyof JSX.IntrinsicElements` | -            | HTML-тег компонента             |
 | `indent?`    | `'increased', 'normal'`       | -            | Контролирует внутренние отступы |
+| `space?`     | `MixSpaceProps`               | -            | Задает кастомный отступ         |
 | `className?` | `string`                      | -            | Дополнительный CSS-класс        |
 
-## Загрузчик
+## Индикатор загрузки (ListLoader)
 
 Пункт меню с компонентом `Loader`.
 
@@ -481,7 +723,7 @@ import { ListLoader } from '@consta/uikit/ListCanary';
 | `size?`      | `'xs', 's', 'm', 'l'`     | `m`          | Размер компонента        |
 | `className?` | `string`                  | -            | Дополнительный CSS-класс |
 
-## Заголовок группы
+## Заголовок группы (ListGroupLabel)
 
 Отдельный заголовок группы.
 
@@ -505,10 +747,10 @@ import { ListGroupLabel } from '@consta/uikit/ListCanary';
 | `label?`     | `string`                  | -            | Заголовок группы                |
 | `disabled?`  | `boolean`                 | -            | Делает элемент неактивным       |
 | `indent?`    | `'increased', 'normal'`   | -            | Контролирует внутренние отступы |
-| `onClick?`   | `React.MouseEventHandler` | -            | Событие при клике на элемент    |
+| `space?`     | `MixSpaceProps`           | -            | Задает кастомный отступ         |
 | `className?` | `string`                  | -            | Дополнительный CSS-класс        |
 
-## Компонент для добавления элемента
+## Компонент для добавления элемента (ListAddItem)
 
 Данный компонент представляет из себя элемент-кнопку при помощи которой можно добавить новый элемент списка.
 
@@ -533,85 +775,167 @@ import { ListAddItem } from '@consta/uikit/ListCanary';
 | `rightSide?` | `React.ReactNode`         | -            | Контент с правой стороны |
 | `className?` | `string`                  | -            | Дополнительный CSS-класс |
 
-## Импорт
+## Коробка (ListBox)
+
+Стандартный враппер для списка.
 
 ```tsx
+const items: string[] = ['Первый', 'Второй', 'Третий'];
+
+const getItemLabel = (item: string) => item;
+
+export const ListExampleListBox = () => {
+  return (
+    <ListBox form="round" shadow border>
+      <List
+        getItemLabel={getItemLabel}
+        items={items}
+        onItemClick={(item) => alert(item)}
+      />
+    </ListBox>
+  );
+};
+```
+
+<ListExampleListBox />
+
+### Импорт
+
+```tsx
+import { ListBox } from '@consta/uikit/ListCanary';
+```
+
+### Свойства
+
+| Свойство     | Тип или варианты значения     | По умолчанию | Описание                 |
+| ------------ | ----------------------------- | ------------ | ------------------------ |
+| `size?`      | `'xs', 's', 'm', 'l'`         | `m`          | Размер компонента        |
+| `form?`      | `'default', 'brick', 'round'` | -            | Форма                    |
+| `border?`    | `boolean`                     | -            | Включает обводку         |
+| `shadow?`    | `boolean`                     | -            | Включает тень            |
+| `className?` | `string`                      | -            | Дополнительный CSS-класс |
+
+## Импорт
+
+```ts
 import {
-  cnMixList,
+  ListBox,
   List,
   ListGroupLabel,
   ListItem,
   ListAddItem,
+  ListDivider,
 } from '@consta/uikit/ListCanary';
 ```
 
 ## Свойства
 
 ```tsx
-type DefaultListGroup = {
+export type DefaultListGroup = {
   id: string | number;
-  label: string;
+  label?: string;
   rightSide?: React.ReactNode;
 };
 
-type DefaultListItem = {
-  id: string | number;
-  label: string;
+export type DefaultListItem = {
+  label: string | number;
   disabled?: boolean;
+  active?: boolean;
+  checked?: boolean;
+  status?: ListPropStatus;
   groupId?: string | number;
   leftSide?: React.ReactNode;
   leftIcon?: IconComponent;
   rightSide?: React.ReactNode;
   rightIcon?: IconComponent;
-  active?: boolean;
-  as?: keyof JSX.IntrinsicElements;
-  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
   onClick?: React.MouseEventHandler;
 };
 
-type ListPropOnItemClick<ITEM> = (params: {
-  e: React.MouseEvent;
-  item: ITEM;
-}) => void;
+export type ListPropOnItemClick<ITEM> = (
+  item: ITEM,
+  params: {
+    e: React.MouseEvent;
+    item: ITEM;
+  },
+) => void;
 
-type ListPropRenderItem<ITEM> = (item: ITEM) => React.ReactElement | null;
+export type ListPropRenderItem<ITEM> = (
+  item: ITEM,
+) => React.ReactElement | null;
 
 // ITEMS
-type ListPropGetItemKey<ITEM> = (item: ITEM) => string | number;
-type ListPropGetItemLabel<ITEM> = (item: ITEM) => string;
-type ListPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
-type ListPropGetItemGroupId<ITEM> = (item: ITEM) => string | number | undefined;
-type ListPropGetItemLeftSide<ITEM> = (
+
+export type ListPropGetItemLabel<ITEM> = (item: ITEM) => string | number;
+
+export type ListPropGetItemAdditionalClassName<ITEM> = (item: ITEM) => string;
+
+export type ListPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+
+export type ListPropGetItemActive<ITEM> = (item: ITEM) => boolean | undefined;
+
+export type ListPropGetItemChecked<ITEM> = (item: ITEM) => boolean | undefined;
+
+export type ListPropGetItemStatus<ITEM> = (
+  item: ITEM,
+) => ListPropStatus | undefined;
+
+export type ListPropGetItemGroupId<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+
+export type ListPropGetItemLeftSide<ITEM> = (
   item: ITEM,
 ) => React.ReactNode | undefined;
-type ListPropGetItemLeftIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
-type ListPropGetItemRightSide<ITEM> = (
+
+export type ListPropGetItemLeftIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+
+export type ListPropGetItemRightSide<ITEM> = (
   item: ITEM,
 ) => React.ReactNode | undefined;
-type ListPropGetItemRightIcon<ITEM> = (item: ITEM) => IconComponent | undefined;
-type ListPropGetItemActive<ITEM> = (item: ITEM) => boolean | undefined;
-type ListPropGetItemAs<ITEM> = (
+
+export type ListPropGetItemRightIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+
+export type ListPropGetItemAs<ITEM> = (
   item: ITEM,
 ) => keyof JSX.IntrinsicElements | undefined;
-type ListPropGetItemAttributes<ITEM> = (
+
+export type ListPropGetItemAttributes<ITEM> = (
   item: ITEM,
 ) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements] | undefined;
-type ListPropGetItemOnClick<ITEM> = (
+
+export type ListPropGetItemOnClick<ITEM> = (
   item: ITEM,
 ) => React.MouseEventHandler | undefined;
 
+export type ListPropSortGroup<ITEM, GROUP> = (
+  a: Group<ITEM, GROUP>,
+  b: Group<ITEM, GROUP>,
+) => number;
+
 // GROUPS
-type ListPropGetGroupKey<GROUP> = (item: GROUP) => string | number;
-type ListPropGetGroupLabel<GROUP> = (item: GROUP) => string;
-type ListPropGetGroupRightSide<GROUP> = (
+export type ListPropGetGroupKey<GROUP> = (item: GROUP) => string | number;
+export type ListPropGetGroupAdditionalClassName<GROUP> = (
+  item: GROUP,
+) => string;
+
+export type ListPropGetGroupLabel<GROUP> = (item: GROUP) => string | undefined;
+export type ListPropGetGroupRightSide<GROUP> = (
   item: GROUP,
 ) => React.ReactNode | undefined;
+
+export type ListPropGetItemRef<ITEM> = (
+  item: ITEM,
+) => React.RefObject<HTMLElement> | undefined;
 ```
 
 | Свойство                                                | Тип или варианты значения                              | По умолчанию                 | Описание                                                               |
 | ------------------------------------------------------- | ------------------------------------------------------ | ---------------------------- | ---------------------------------------------------------------------- |
-| [`disabled?`](#отключение-поля-ввода)                   | `boolean`                                              | -                            | Делает компонент недоступным                                           |
 | [`size?`](#размер)                                      | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                        | Размер компонента                                                      |
+| [`disabled?`](#отключение-поля-ввода)                   | `boolean`                                              | -                            | Делает компонент недоступным                                           |
 | [`indent?`](#отступы)                                   | `increased`, `normal`                                  | `normal`                     | Отступы компонента                                                     |
 | `onItemClick?`                                          | `ListPropOnItemClick<ITEM>`                            | -                            | Функция обработчика события по клику на элемент                        |
 | [`items`](#варианты)                                    | `ITEM[]`                                               | -                            | Варианты                                                               |

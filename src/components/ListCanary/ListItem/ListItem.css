@@ -10,10 +10,11 @@
 
   &_interactive {
     cursor: pointer;
+  }
 
-    &:hover {
-      background-color: var(--color-control-bg-clear-hover);
-    }
+  &_active,
+  &_interactive:hover {
+    background: var(--color-control-bg-clear-hover);
   }
 
   &::before {
@@ -23,24 +24,21 @@
     left: 0;
     bottom: 0;
     width: var(--space-3xs);
-    background-color: transparent;
-    transition: background-color 0.2 ease-in;
+    background-color: var(--color-control-typo-secondary);
+    opacity: 0;
+    transition: opacity 0.2s;
   }
 
-  &_active::before {
-    background-color: var(--list-item-color);
-  }
-
-  &_active {
+  &_checked {
     --list-item-color: var(--color-control-typo-secondary);
+
+    &::before {
+      opacity: 1;
+    }
   }
 
   &_disabled {
     --list-item-color: var(--color-control-typo-disable);
     cursor: auto;
-  }
-
-  &-Icon {
-    color: var(--list-item-color);
   }
 }

@@ -7,7 +7,12 @@ import { cn } from '##/utils/bem';
 
 import { basicItems, groups } from '../__mocks__/mock.data';
 import { List } from '../ListCanary';
-import { defaultListPropSize, listPropSize } from '../types';
+import {
+  defaultListPropIndent,
+  defaultListPropSize,
+  listPropIndent,
+  listPropSize,
+} from '../types';
 
 const cnListVariant = cn('ListVariant');
 
@@ -18,10 +23,11 @@ const conditionalGetter = (conditional: boolean) =>
 
 const Variants = () => {
   const size = useSelect('size', listPropSize, defaultListPropSize);
+  const indent = useSelect('indent', listPropIndent, defaultListPropIndent);
+  const isInteractive = useBoolean('isInteractive', true);
   const withGroups = useBoolean('withGroups', false);
   const groupsWithLabel = useBoolean('groupsWithLabel', true, withGroups);
   const disabled = useBoolean('disabled', false);
-  const isLoading = useBoolean('isLoading', false);
   const withLeftSide = useBoolean('withLeftSide', false);
   const withLeftIcon = useBoolean('withLeftIcon', false);
   const withRightSide = useBoolean('withRightSide', false);
@@ -32,10 +38,11 @@ const Variants = () => {
     <div className={cnListVariant()}>
       <List
         disabled={disabled}
-        isLoading={isLoading}
         size={size}
         items={basicItems}
-        onItemClick={({ item }) => console.log(item.label)}
+        onItemClick={
+          isInteractive ? (item) => console.log(item.label) : undefined
+        }
         groups={withGroups ? groups : undefined}
         getItemGroupKey={conditionalGetter(withGroups)}
         getGroupLabel={conditionalGetter(groupsWithLabel)}
@@ -44,6 +51,7 @@ const Variants = () => {
         getItemLeftSide={conditionalGetter(withLeftSide)}
         getItemRightIcon={conditionalGetter(withRightIcon)}
         getItemRightSide={conditionalGetter(withRightSide)}
+        indent={indent}
       />
     </div>
   );
