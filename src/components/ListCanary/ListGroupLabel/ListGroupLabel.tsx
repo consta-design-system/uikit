@@ -34,7 +34,7 @@ export const ListGroupLabel = forwardRef<HTMLDivElement, ListGroupLabelProps>(
       rightSide,
       size = defaultListPropSize,
       label,
-      indent,
+      innerOffset,
       className,
       space,
       ...otherProps
@@ -49,7 +49,7 @@ export const ListGroupLabel = forwardRef<HTMLDivElement, ListGroupLabelProps>(
           cnMixSpace(
             space || {
               mH:
-                indent === 'increased'
+                innerOffset === 'increased'
                   ? mapHorisontalSpaseIncreased[size]
                   : mapHorisontalSpase[size],
               pT: mapGroupVerticalSpaseTop[size],

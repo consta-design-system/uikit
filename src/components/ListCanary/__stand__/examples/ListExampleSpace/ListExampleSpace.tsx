@@ -93,7 +93,6 @@ export const ListExampleSpace = () => {
               onItemClick={(item) => alert(item.label)}
               itemSpase={{ p: 's' }}
               groupLabelSpase={{ mH: 's', pT: 's', pB: '2xs' }}
-              dividerSpase={{ mH: 's' }}
             />
           ),
         },

@@ -62,7 +62,6 @@ const Variants = () => {
   const size =
     useSelect('size', contextMenuSizes, contextMenuDefaultSize) ||
     contextMenuDefaultSize;
-  const disabled = useBoolean('disabledLastItem', false);
   const form = useSelect('form', contextMenuForm, defaultContextMenuForm);
   const withGroup = useBoolean('withGroup', false);
   const withGroupLabel = useBoolean('withGroupLabel', false);
@@ -71,6 +70,7 @@ const Variants = () => {
   const withLeftSide = useBoolean('withLeftSide', false);
   const withRightIcon = useBoolean('withRightIcon', false);
   const withRightSide = useBoolean('withRightSide', false);
+  const disabled = useBoolean('withDisabledItems', false);
 
   const [items, setItems] = useState<Item[]>(exampleItems);
 

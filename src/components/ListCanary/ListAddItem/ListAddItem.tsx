@@ -1,10 +1,10 @@
 import './ListAddItem.css';
 
+import { IconPropSize } from '@consta/icons/Icon';
+import { IconAdd } from '@consta/icons/IconAdd';
 import React, { forwardRef } from 'react';
 
 import { Text } from '##/components/Text';
-import { IconPropSize } from '##/icons/Icon';
-import { IconAdd } from '##/icons/IconAdd';
 import { cnMixSpace, Space } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
@@ -41,7 +41,7 @@ export const ListAddItem = forwardRef<HTMLDivElement, ListAddItemProps>(
       className,
       disabled,
       label,
-      indent,
+      innerOffset,
       ...otherProps
     } = props;
     return (
@@ -51,7 +51,7 @@ export const ListAddItem = forwardRef<HTMLDivElement, ListAddItemProps>(
         className={cnListAddItem({ disabled }, [
           cnMixSpace({
             mH:
-              indent === 'increased'
+              innerOffset === 'increased'
                 ? mapHorisontalSpaseIncreased[size]
                 : mapHorisontalSpase[size],
             pV: mapVerticalPadding[size],

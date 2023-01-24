@@ -1,6 +1,6 @@
 .ListAddItem {
   --list-add-item-color: var(--color-control-typo-default);
-  display: inline-flex;
+  display: flex;
   align-items: center;
   color: var(--list-add-item-color);
   border-bottom: 1px solid var(--color-control-bg-border-default);
@@ -12,7 +12,6 @@
   }
 
   &-AddIcon {
-    margin-right: var(--list-add-item-icon-margin);
     color: var(--list-add-item-color);
   }
 }

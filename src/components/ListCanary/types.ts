@@ -10,9 +10,9 @@ export const listPropSize = ['m', 'xs', 's', 'l'] as const;
 export type ListPropSize = typeof listPropSize[number];
 export const defaultListPropSize = listPropSize[0];
 
-export const listPropIndent = ['normal', 'increased'] as const;
-export type ListPropIndent = typeof listPropIndent[number];
-export const defaultListPropIndent = listPropIndent[0];
+export const listPropInnerOffset = ['normal', 'increased'] as const;
+export type ListPropInnerOffset = typeof listPropInnerOffset[number];
+export const defaultListPropInnerOffset = listPropInnerOffset[0];
 
 export const listPropStatus = ['alert', 'success', 'warning'] as const;
 export type ListPropStatus = typeof listPropStatus[number];
@@ -124,7 +124,7 @@ export type ListPropGetItemRef<ITEM> = (
 export type ListProps<ITEM = DefaultListItem, GROUP = DefaultListGroup> = {
   size?: ListPropSize;
   items: ITEM[];
-  indent?: ListPropIndent;
+  innerOffset?: ListPropInnerOffset;
   itemSpase?: MixSpaceProps;
   groupLabelSpase?: MixSpaceProps;
   dividerSpase?: MixSpaceProps;
@@ -167,7 +167,7 @@ export type ListItemProps<AS extends keyof JSX.IntrinsicElements = 'div'> =
   PropsWithAsAttributes<
     Omit<DefaultListItem, 'id' | 'groupId' | 'attributes' | 'onClick'> & {
       size?: ListPropSize;
-      indent?: 'normal' | 'increased';
+      innerOffset?: 'normal' | 'increased';
       space?: MixSpaceProps;
     },
     AS
@@ -185,7 +185,7 @@ export type ListGroupLabelProps = PropsWithHTMLAttributesAndRef<
   {
     size?: ListPropSize;
     label: string;
-    indent?: ListPropIndent;
+    innerOffset?: ListPropInnerOffset;
     rightSide?: React.ReactNode;
     space?: MixSpaceProps;
   },
@@ -195,7 +195,7 @@ export type ListGroupLabelProps = PropsWithHTMLAttributesAndRef<
 export type ListDividerProps = PropsWithHTMLAttributesAndRef<
   {
     size?: ListPropSize;
-    indent?: ListPropIndent;
+    innerOffset?: ListPropInnerOffset;
     space?: MixSpaceProps;
   },
   HTMLDivElement
@@ -215,7 +215,7 @@ export type ListAddItemProps = PropsWithHTMLAttributesAndRef<
   {
     size?: ListPropSize;
     label?: React.ReactNode;
-    indent?: ListPropIndent;
+    innerOffset?: ListPropInnerOffset;
     disabled?: boolean;
   },
   HTMLDivElement

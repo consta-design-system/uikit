@@ -19,7 +19,7 @@ export const ListDivider = forwardRef<HTMLDivElement, ListDividerProps>(
   (props, ref) => {
     const {
       size = defaultListPropSize,
-      indent,
+      innerOffset,
       className,
       space,
       ...otherProps
@@ -33,7 +33,7 @@ export const ListDivider = forwardRef<HTMLDivElement, ListDividerProps>(
           cnMixSpace(
             space || {
               mH:
-                indent === 'increased'
+                innerOffset === 'increased'
                   ? mapHorisontalSpaseIncreased[size]
                   : mapHorisontalSpase[size],
               mT: mapGroupVerticalSpaseTop[size],

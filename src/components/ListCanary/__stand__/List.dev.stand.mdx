@@ -2,7 +2,7 @@ import { MdxMenu } from '@consta/stand';
 
 import { ListExampleItems } from './examples/ListExampleItems/ListExampleItems';
 import { ListExampleSize } from './examples/ListExampleSize/ListExampleSize';
-import { ListExampleIndent } from './examples/ListExampleIndent/ListExampleIndent';
+import { ListExampleInnerOffset } from './examples/ListExampleInnerOffset/ListExampleInnerOffset';
 import { ListExampleDisabled } from './examples/ListExampleDisabled/ListExampleDisabled';
 import { ListExampleGroups } from './examples/ListExampleGroups/ListExampleGroups';
 import { ListExampleRenderItem } from './examples/ListExampleRenderItem/ListExampleRenderItem';
@@ -28,15 +28,15 @@ import { List } from '@consta/uikit/ListCanary';
   - [Элементы списка](#элементы-списка)
   - [Неактивный элемент списка](#неактивный-элемент-списка)
   - [Выбранный элемент списка](#выбранный-элемент-списка)
-  - [Дополниельное наполнение](#дополниельное-наполнение)
+  - [Дополнительные элементы](#дополнительные-элементы)
   - [Группировка](#группировка)
 - [Размер](#размер)
 - [Отступы](#отступы)
 - [Неактивный список](#неактивный-список)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
-  - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-групп-и-вариантов)
-  - [Кастомные отсупы](#кастомные-отсупы)
+  - [Кастомные типы данных для групп и вариантов](#Кастомные-типы-данных-для-групп-и-вариантов)
+  - [Кастомные отступы](#кастомные-отступы)
   - [Дополнительный класс](#дополнительный-класс)
 - [Элемент списка (ListItem)](#элемент-списка-listitem)
 - [Индикатор загрузки (ListLoader)](#индикатор-загрузки-listloader)
@@ -69,7 +69,7 @@ import { List } from '@consta/uikit/ListCanary';
 
 ### Неактивный элемент списка
 
-Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Можете добавить другое свойство, если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов).
+Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Можете добавить другое свойство, если используете [кастомный тип `items`](#Кастомные-типы-данных-для-групп-и-вариантов).
 
 ```tsx
 import React from 'react';
@@ -108,7 +108,7 @@ function ListExampleDisabledItem() {
 
 ### Выбранный элемент списка
 
-Для того чтобы пометить элемент списка как выбранный укажите в элементе `checked: true` или укажите через [`getItemChecked`](#кастомные-типы-данных-для-групп-и-вариантов)
+Для того, чтобы пометить элемент списка как выбранный, укажите в элементе `checked: true` или укажите через [`getItemChecked`](#Кастомные-типы-данных-для-групп-и-вариантов)
 
 ```tsx
 import React, { useState } from 'react';
@@ -135,18 +135,18 @@ export const ListExampleBasic = () => {
 
 <ListExampleChecked />
 
-### Дополниельное наполнение
+### Дополнительные элементы
 
 В элемент списка можно добавить иконку и произволное наполнение.
 Укажите в элементе `leftIcon`, `rightIcon`, `leftSide`, `rightSide`
 или укажите через
-[`getItemLeftIcon`](#кастомные-типы-данных-для-групп-и-вариантов),
-[`getItemRightIcon`](#кастомные-типы-данных-для-групп-и-вариантов),
-[`getItemLeftSide`](#кастомные-типы-данных-для-групп-и-вариантов),
-[`getItemRightSide`](#кастомные-типы-данных-для-групп-и-вариантов).
+[`getItemLeftIcon`](#Кастомные-типы-данных-для-групп-и-вариантов),
+[`getItemRightIcon`](#Кастомные-типы-данных-для-групп-и-вариантов),
+[`getItemLeftSide`](#Кастомные-типы-данных-для-групп-и-вариантов),
+[`getItemRightSide`](#Кастомные-типы-данных-для-групп-и-вариантов).
 
-Если в качестве значение в `leftSide` и `rightSide` указать массив
-то отсупы между элементами проставится автомаически
+Если в качестве значения в `leftSide` и `rightSide` указать массив,
+то отступы между элементами проставятся автоматически.
 
 ```tsx
 import { IconComponent } from '@consta/icons/Icon';
@@ -202,8 +202,8 @@ export const ListExampleAdditionalElements = () => {
 
 ### Группировка
 
-Чтобы разбить элементы списка на группы, укажите признак присвоения группы к элемненту,
-`groupId` в `items` или через свойство `getItemGroupKey`.
+Чтобы разбить элементы списка на группы,
+укажите признак присвоения группы к элементу `groupId` в `items` или через свойство `getItemGroupKey`.
 
 Если необходимо расставить заголовки для групп, то передайте массив групп в свойство `groups`.
 Тип свойства `groups` по умолчанию равен [DefaultListGroup](#свойства). Значения:
@@ -212,8 +212,8 @@ export const ListExampleAdditionalElements = () => {
 - `label` — название группы
 - `rightSide` — контент с правой стороны
 
-`rightSide` может принимать `React.ReactNode` если передать массивом,
-то отступы между передвнными элеменами расавятся автомаически.
+`rightSide` может принимать `React.ReactNode` Если передать массивом,
+то отступы между переданными элементами расставятся автоматически.
 
 ```tsx
 import React from 'react';
@@ -336,9 +336,9 @@ const ListExampleSize = () => {
 
 ## Отступы
 
-За отступы элемента списка отвечает свойство `indent`. Если указать `increased`, то горизонтальный отступ будет увеличен. Значение по умолчанию `normal`.
+За отступы элемента списка отвечает свойство `innerOffset`. Если указать `increased`, то горизонтальный отступ будет увеличен. Значение по умолчанию `normal`.
 
-Отступы зависят от свойсва `size`.
+Отступы зависят от свойства `size`.
 
 ```tsx
 import React from 'react';
@@ -364,17 +364,17 @@ const items: Item[] = [
   },
 ];
 
-const ListExampleIndent = () => {
+const ListExampleInnerOffset = () => {
   return (
     <>
-      <List items={items} indent="increased" />
-      <List items={items} indent="normal" />
+      <List items={items} innerOffset="increased" />
+      <List items={items} innerOffset="normal" />
     </>
   );
 };
 ```
 
-<ListExampleIndent />
+<ListExampleInnerOffset />
 
 ## Неактивный список
 
@@ -494,20 +494,20 @@ function ListExampleRenderItem() {
 
 ### Кастомные типы данных для групп и вариантов
 
-Вы можете использовать кастомные типы данных для элементов списка (items) и групп (groups) — они могут отличаться от [DefaultListItem](#свойства) и [DefaultListGroup](#свойства).
+Вы можете использовать Кастомные типы данных для элементов списка (items) и групп (groups) — они могут отличаться от [DefaultListItem](#свойства) и [DefaultListGroup](#свойства).
 
 Чтобы компонент понимал откуда брать данные, нужно использовать геттеры
 `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`,
 `getItemLeftSide`, `getItemLeftIcon`, `getItemRightSide`, `getItemRightIcon`,
 `getItemActive`, `getItemAs`, `getItemAttributes`, `getGroupLabel`, `getGroupKey`, `getGroupRightSide`.
 
-### Кастомные отсупы
+### Кастомные отступы
 
-Компонент позволяет поменять отсупы элементов `ListItem`, `ListGroupLabel`, `ListDivider`,
-через `itemSpase`, `groupLabelSpase`, `dividerSpase` соответсвенно.
+Компонент позволяет поменять отступы элементов `ListItem`, `ListGroupLabel`, `ListDivider`,
+через `itemSpase`, `groupLabelSpase`, `dividerSpase` соответственно.
 
 Свойства принимают объект как в [MixSpace](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable).
-Если необходимо убрать отсупы то передайте пустой объект `{}`
+Если необходимо убрать отступы, то передайте пустой объект `{}`.
 
 ```tsx
 // Без отступов
@@ -538,7 +538,6 @@ function ListExampleRenderItem() {
   onItemClick={(item) => alert(item.label)}
   itemSpase={{ p: 's' }}
   groupLabelSpase={{ mH: 's', pT: 's', pB: '2xs' }}
-  dividerSpase={{ mH: 's' }}
 />
 ```
 
@@ -684,21 +683,21 @@ import { ListItem } from '@consta/uikit/ListCanary';
 
 ### Свойства
 
-| Свойство     | Тип или варианты значения     | По умолчанию | Описание                        |
-| ------------ | ----------------------------- | ------------ | ------------------------------- |
-| `size?`      | `'xs', 's', 'm', 'l'`         | `m`          | Размер компонента               |
-| `label`      | `string`                      | -            | Название элемента               |
-| `disabled?`  | `boolean`                     | -            | Делает элемент неактивным       |
-| `active?`    | `boolean`                     | -            | Помечает элемент как активный   |
-| `leftSide?`  | `React.ReactNode`             | -            | Контент с левой стороны         |
-| `leftIcon?`  | `IconComponent`               | -            | Иконка с левой стороны          |
-| `rightSide?` | `React.ReactNode`             | -            | Контент с правой стороны        |
-| `rightIcon?` | `IconComponent`               | -            | Иконка с правой стороны         |
-| `onClick?`   | `React.MouseEventHandler`     | -            | Событие при клике на элемент    |
-| `as?`        | `keyof JSX.IntrinsicElements` | -            | HTML-тег компонента             |
-| `indent?`    | `'increased', 'normal'`       | -            | Контролирует внутренние отступы |
-| `space?`     | `MixSpaceProps`               | -            | Задает кастомный отступ         |
-| `className?` | `string`                      | -            | Дополнительный CSS-класс        |
+| Свойство       | Тип или варианты значения     | По умолчанию | Описание                        |
+| -------------- | ----------------------------- | ------------ | ------------------------------- |
+| `size?`        | `'xs', 's', 'm', 'l'`         | `m`          | Размер компонента               |
+| `label`        | `string`                      | -            | Название элемента               |
+| `disabled?`    | `boolean`                     | -            | Делает элемент неактивным       |
+| `active?`      | `boolean`                     | -            | Помечает элемент как активный   |
+| `leftSide?`    | `React.ReactNode`             | -            | Контент с левой стороны         |
+| `leftIcon?`    | `IconComponent`               | -            | Иконка с левой стороны          |
+| `rightSide?`   | `React.ReactNode`             | -            | Контент с правой стороны        |
+| `rightIcon?`   | `IconComponent`               | -            | Иконка с правой стороны         |
+| `onClick?`     | `React.MouseEventHandler`     | -            | Событие при клике на элемент    |
+| `as?`          | `keyof JSX.IntrinsicElements` | -            | HTML-тег компонента             |
+| `innerOffset?` | `'increased', 'normal'`       | -            | Контролирует внутренние отступы |
+| `space?`       | `MixSpaceProps`               | -            | Задает кастомный отступ         |
+| `className?`   | `string`                      | -            | Дополнительный CSS-класс        |
 
 ## Индикатор загрузки (ListLoader)
 
@@ -741,14 +740,14 @@ import { ListGroupLabel } from '@consta/uikit/ListCanary';
 
 ### Свойства
 
-| Свойство     | Тип или варианты значения | По умолчанию | Описание                        |
-| ------------ | ------------------------- | ------------ | ------------------------------- |
-| `size?`      | `'xs', 's', 'm', 'l'`     | `m`          | Размер компонента               |
-| `label?`     | `string`                  | -            | Заголовок группы                |
-| `disabled?`  | `boolean`                 | -            | Делает элемент неактивным       |
-| `indent?`    | `'increased', 'normal'`   | -            | Контролирует внутренние отступы |
-| `space?`     | `MixSpaceProps`           | -            | Задает кастомный отступ         |
-| `className?` | `string`                  | -            | Дополнительный CSS-класс        |
+| Свойство       | Тип или варианты значения | По умолчанию | Описание                        |
+| -------------- | ------------------------- | ------------ | ------------------------------- |
+| `size?`        | `'xs', 's', 'm', 'l'`     | `m`          | Размер компонента               |
+| `label?`       | `string`                  | -            | Заголовок группы                |
+| `disabled?`    | `boolean`                 | -            | Делает элемент неактивным       |
+| `innerOffset?` | `'increased', 'normal'`   | -            | Контролирует внутренние отступы |
+| `space?`       | `MixSpaceProps`           | -            | Задает кастомный отступ         |
+| `className?`   | `string`                  | -            | Дополнительный CSS-класс        |
 
 ## Компонент для добавления элемента (ListAddItem)
 
@@ -936,7 +935,7 @@ export type ListPropGetItemRef<ITEM> = (
 | ------------------------------------------------------- | ------------------------------------------------------ | ---------------------------- | ---------------------------------------------------------------------- |
 | [`size?`](#размер)                                      | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                        | Размер компонента                                                      |
 | [`disabled?`](#отключение-поля-ввода)                   | `boolean`                                              | -                            | Делает компонент недоступным                                           |
-| [`indent?`](#отступы)                                   | `increased`, `normal`                                  | `normal`                     | Отступы компонента                                                     |
+| [`innerOffset?`](#отступы)                              | `increased`, `normal`                                  | `normal`                     | Отступы компонента                                                     |
 | `onItemClick?`                                          | `ListPropOnItemClick<ITEM>`                            | -                            | Функция обработчика события по клику на элемент                        |
 | [`items`](#варианты)                                    | `ITEM[]`                                               | -                            | Варианты                                                               |
 | [`groups?`](#группировка-списка)                        | `GROUP[]`                                              | -                            | Группы                                                                 |

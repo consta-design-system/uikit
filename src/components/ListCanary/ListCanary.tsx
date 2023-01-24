@@ -9,7 +9,7 @@ import { ListDivider } from './ListDivider';
 import { ListGroupLabel } from './ListGroupLabel';
 import { ListItem } from './ListItem';
 import {
-  defaultListPropIndent,
+  defaultListPropInnerOffset,
   defaultListPropSize,
   ListComponent,
   ListPropRenderItem,
@@ -77,7 +77,7 @@ export const List: ListComponent = (props) => {
     getGroupRightSide,
     getGroupAdditionalClassName,
     renderItem,
-    indent = defaultListPropIndent,
+    innerOffset = defaultListPropInnerOffset,
     size = defaultListPropSize,
     sortGroup,
   } = withDefaultGetters(props);
@@ -115,7 +115,7 @@ export const List: ListComponent = (props) => {
       as: getItemAs?.(item),
       size,
       onClick: handleClick,
-      indent,
+      innerOffset,
       ref: (getItemRef?.(item) as React.RefObject<HTMLDivElement>) || undefined,
       space: itemSpase,
       className: getItemAdditionalClassName?.(item),

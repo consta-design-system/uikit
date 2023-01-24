@@ -32,7 +32,7 @@ const ListItemRender = (
     size = defaultListPropSize,
     active,
     label,
-    indent,
+    innerOffset,
     disabled,
     className,
     leftSide,
@@ -59,7 +59,7 @@ const ListItemRender = (
           cnMixSpace(
             space || {
               pH:
-                indent === 'increased'
+                innerOffset === 'increased'
                   ? mapHorisontalSpaseIncreased[size]
                   : mapHorisontalSpase[size],
               pV: mapVerticalPadding[size],

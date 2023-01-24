@@ -195,7 +195,7 @@ const ContextMenuLevelRender = (
         getItemRef={(item) => itemsRefs[getKey(item)]}
         groups={groupsProp}
         getItemActive={(item) => getKey(item) === activeItem}
-        indent={form === 'round' ? 'increased' : 'normal'}
+        innerOffset={form === 'round' ? 'increased' : 'normal'}
       />
     </Popover>
   );

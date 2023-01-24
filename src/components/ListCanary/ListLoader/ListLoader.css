@@ -1,8 +1,6 @@
 .ListLoader {
   box-sizing: border-box;
-  width: 100%;
   height: var(--loader-height);
-  padding-left: var(--space-l);
   cursor: wait;
 
   &-Container {
