@@ -1,0 +1,4 @@
+.ListDivider {
+  height: var(--control-border-width);
+  background: var(--color-control-bg-border-default);
+}

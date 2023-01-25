@@ -1,31 +1,21 @@
-import './SelectGroupLabel.css';
-
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
+import { ListGroupLabel } from '##/components/ListCanary';
+
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { PropSize } from '../types';
 
 type SelectGroupLabelProps = PropsWithHTMLAttributes<
   {
-    label?: string;
+    label: string;
     size: PropSize;
     indent: 'normal' | 'increased';
   },
   HTMLDivElement
 >;
 
-export const cnSelectGroupLabel = cn('SelectGroupLabel');
-
 export const SelectGroupLabel: React.FC<SelectGroupLabelProps> = (props) => {
-  const { className, label, size, indent, ...otherProps } = props;
+  const { indent, ...otherProps } = props;
 
-  return (
-    <div
-      {...otherProps}
-      className={cnSelectGroupLabel({ size, indent }, [className])}
-    >
-      {label}
-    </div>
-  );
+  return <ListGroupLabel {...otherProps} innerOffset={indent} />;
 };

@@ -1,7 +1,6 @@
 .ListItem {
   --list-item-color: var(--color-typo-primary);
   position: relative;
-  padding: var(--list-item-vertical-space) var(--list-item-horizontal-space);
   background: var(--color-control-bg-clear);
   transition: color 0.3s;
 
@@ -11,48 +10,11 @@
 
   &_interactive {
     cursor: pointer;
-
-    &:hover {
-      background-color: var(--color-control-bg-clear-hover);
-    }
   }
 
-  &_size {
-    &_xs {
-      --list-item-vertical-space: var(--space-2xs);
-      --list-item-horizontal-space: var(--space-xs);
-
-      &.ListItem_indent_increased {
-        --list-item-horizontal-space: var(--space-s);
-      }
-    }
-
-    &_s {
-      --list-item-vertical-space: var(--space-2xs);
-      --list-item-horizontal-space: var(--space-xs);
-
-      &.ListItem_indent_increased {
-        --list-item-horizontal-space: var(--space-s);
-      }
-    }
-
-    &_m {
-      --list-item-vertical-space: var(--space-xs);
-      --list-item-horizontal-space: var(--space-s);
-
-      &.ListItem_indent_increased {
-        --list-item-horizontal-space: var(--space-m);
-      }
-    }
-
-    &_l {
-      --list-item-vertical-space: var(--space-xs);
-      --list-item-horizontal-space: var(--space-s);
-
-      &.ListItem_indent_increased {
-        --list-item-horizontal-space: var(--space-l);
-      }
-    }
+  &_active,
+  &_interactive:hover {
+    background: var(--color-control-bg-clear-hover);
   }
 
   &::before {
@@ -62,29 +24,21 @@
     left: 0;
     bottom: 0;
     width: var(--space-3xs);
-    background-color: transparent;
-    transition: background-color 0.2 ease-in;
+    background-color: var(--color-control-typo-secondary);
+    opacity: 0;
+    transition: opacity 0.2s;
   }
 
-  &_active::before {
-    background-color: var(--list-item-color);
-  }
-
-  &_active {
+  &_checked {
     --list-item-color: var(--color-control-typo-secondary);
+
+    &::before {
+      opacity: 1;
+    }
   }
 
   &_disabled {
     --list-item-color: var(--color-control-typo-disable);
     cursor: auto;
-  }
-
-  &-Icon {
-    color: var(--list-item-color);
-  }
-
-  &-Label {
-    flex: 1;
-    word-wrap: break-word;
   }
 }

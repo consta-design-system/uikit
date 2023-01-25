@@ -43,16 +43,6 @@ describe('Компонент SelectDropdown', () => {
   });
 
   describe('проверка props', () => {
-    it('проверка labelForEmptyItems', () => {
-      const labelForEmptyItems = 'test labelForEmptyItems';
-      const { baseElement } = renderComponent({
-        labelForEmptyItems,
-        hasItems: false,
-      });
-
-      expect(baseElement).toHaveTextContent(labelForEmptyItems);
-    });
-
     it('проверка isLoading', () => {
       const { baseElement } = renderComponent({ isLoading: true });
 

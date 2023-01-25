@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { useHideElementsInLine } from '../../hooks/useHideElementsInLine/useHideElementsInLine';
 import { useRefs } from '../../hooks/useRefs/useRefs';
@@ -6,7 +6,6 @@ import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserv
 
 const useReadyToHideItems = <ITEM>(items: ITEM[]) =>
   useMemo(() => {
-    console.log(items);
     const returnedItems = [...items];
     const first = returnedItems.shift();
     const last = returnedItems.pop();
@@ -48,12 +47,7 @@ const getCompression = (componentWidth: number) => {
 export const useElements = <ITEM>(items: ITEM[]) => {
   const [firstItem, readyToHideItems, lastItem] = useReadyToHideItems(items);
 
-  console.log(readyToHideItems);
-
-  const noHideElementsRef = useRefs(2) as [
-    React.RefObject<HTMLLIElement>,
-    React.RefObject<HTMLLIElement>,
-  ];
+  const noHideElementsRef = useRefs<HTMLLIElement>(2);
 
   const noHideElementsSize = useResizeObserved(noHideElementsRef, (el) =>
     el

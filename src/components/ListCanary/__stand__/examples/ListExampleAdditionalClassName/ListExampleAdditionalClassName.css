@@ -1,0 +1,38 @@
+.ListItem.ListExampleAdditionalClassName-Item {
+  --list-item-color: var(--color-typo-primary);
+  --marker-size: calc(var(--space-xs) - var(--space-3xs));
+  position: relative;
+  background: var(--list-item-bg);
+  border-radius: var(--control-radius);
+
+  &:hover {
+    --list-item-bg: var(--color-control-bg-clear-hover);
+  }
+
+  &::before {
+    top: var(--space-2xs);
+    right: var(--space-2xs);
+    left: auto;
+    bottom: auto;
+    width: var(--marker-size);
+    height: var(--marker-size);
+    background: var(--my-list-item-marker-color);
+    border-radius: 50%;
+    opacity: 1;
+  }
+
+  &_marker {
+    &_red {
+      --my-list-item-marker-color: var(--color-bg-alert);
+    }
+
+    &_green {
+      --my-list-item-marker-color: var(--color-bg-success);
+    }
+  }
+
+  &_checked {
+    --list-item-bg: var(--color-control-bg-clear-hover);
+    --list-item-color: var(--color-typo-brand);
+  }
+}

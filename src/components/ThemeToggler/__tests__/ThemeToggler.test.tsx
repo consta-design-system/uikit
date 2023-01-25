@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { cnContextMenuItem } from '../../ContextMenu/ContextMenuItem/ContextMenuItem';
+import { cnListItem } from '../../ListCanary';
 import { exampleThemesThree, exampleThemesTwo } from '../__mocks__/data.mock';
 import { ThemeToggler } from '../ThemeToggler';
 import { ThemeTogglerProps } from '../types';
@@ -34,20 +34,12 @@ function getRender() {
   return screen.getByTestId(testId);
 }
 
-// function getOutside() {
-//   return screen.getByTestId('outside');
-// }
-
-// function outsideClick() {
-//   fireEvent.mouseDown(getOutside());
-// }
-
 function toggleClick() {
   fireEvent.click(getRender());
 }
 
 function getItems() {
-  return document.querySelectorAll(`.${cnContextMenuItem()}`);
+  return document.querySelectorAll(`.${cnListItem()}`);
 }
 
 function getItem(index = 0) {
@@ -111,21 +103,6 @@ describe('Компонент ThemeToggler', () => {
         expect.objectContaining(exampleThemesThree[0]),
       );
     });
-
-    // Исправить
-    // it('список закрывается по клику за пределами', () => {
-    //   renderComponent({});
-
-    //   toggleClick();
-
-    //   const item = getItem();
-
-    //   expect(item).toBeInTheDocument();
-
-    //   outsideClick();
-
-    //   expect(item).not.toBeInTheDocument();
-    // });
   });
 
   describe('проверка className', () => {

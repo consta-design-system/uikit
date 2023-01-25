@@ -1,6 +1,6 @@
 import { Direction, Position } from './Popover';
 
-type Size = Pick<ClientRect, 'width' | 'height'>;
+type Size = Pick<DOMRect, 'width' | 'height'>;
 
 type PositionsByDirection = Record<Direction, NonNullable<Position>>;
 

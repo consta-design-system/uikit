@@ -8,9 +8,8 @@ import {
 import * as React from 'react';
 
 import { cn } from '../../../utils/bem';
+import { cnListGroupLabel, cnListItem } from '../../ListCanary';
 import { cnSelect } from '../../SelectComponents/cnSelect';
-import { cnSelectGroupLabel } from '../../SelectComponents/SelectGroupLabel/SelectGroupLabel';
-import { cnSelectItem } from '../../SelectComponents/SelectItem/SelectItem';
 import { cnSelectLoader } from '../../SelectComponents/SelectLoader/SelectLoader';
 import { propForm } from '../../SelectComponents/types';
 import { groups, items } from '../__mocks__/data.mock';
@@ -75,13 +74,13 @@ function getInput() {
   return getRender().querySelector(`.${cnSelect('FakeField')}`) as HTMLElement;
 }
 function getItems() {
-  return getItemsList().querySelectorAll(`.${cnSelectItem()}`);
+  return getItemsList().querySelectorAll(`.${cnListItem()}`);
 }
 function getRenderItems() {
   return getItemsList().querySelectorAll(`.${cnRenderItem()}`);
 }
 function getGroups() {
-  return getItemsList().querySelectorAll(`.${cnSelectGroupLabel()}`);
+  return getItemsList().querySelectorAll(`.${cnListGroupLabel()}`);
 }
 function getItem(index = 1) {
   return getItems()[index];
@@ -141,7 +140,7 @@ describe('Компонент Select', () => {
     inputClick();
     animateDelay();
 
-    expect(getItem(index)).toHaveClass(cnSelectItem({ active: true }));
+    expect(getItem(index)).toHaveClass(cnListItem({ checked: true }));
   });
 
   it('открывается и закрывается по клику', () => {

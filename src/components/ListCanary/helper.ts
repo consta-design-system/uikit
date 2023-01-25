@@ -5,22 +5,19 @@ import {
   ListPropGetGroupLabel,
   ListPropGetGroupRightSide,
   ListPropGetItemActive,
-  ListPropGetItemAs,
-  ListPropGetItemAttributes,
+  ListPropGetItemChecked,
   ListPropGetItemDisabled,
   ListPropGetItemGroupId,
-  ListPropGetItemKey,
   ListPropGetItemLabel,
   ListPropGetItemLeftIcon,
   ListPropGetItemLeftSide,
   ListPropGetItemOnClick,
   ListPropGetItemRightIcon,
   ListPropGetItemRightSide,
+  ListPropGetItemStatus,
   ListProps,
 } from './types';
 
-const defaultGetItemKey: ListPropGetItemKey<DefaultListItem> = (item) =>
-  item.id;
 const defaultGetItemLabel: ListPropGetItemLabel<DefaultListItem> = (item) =>
   item.label;
 const defaultGetItemDisabled: ListPropGetItemDisabled<DefaultListItem> = (
@@ -28,6 +25,10 @@ const defaultGetItemDisabled: ListPropGetItemDisabled<DefaultListItem> = (
 ) => item.disabled;
 const defaultGetItemActive: ListPropGetItemActive<DefaultListItem> = (item) =>
   item.active;
+const defaultGetItemChecked: ListPropGetItemChecked<DefaultListItem> = (item) =>
+  item.checked;
+const defaultGetItemStatus: ListPropGetItemStatus<DefaultListItem> = (item) =>
+  item.status;
 const defaultGetItemGroupKey: ListPropGetItemGroupId<DefaultListItem> = (
   item,
 ) => item.groupId;
@@ -43,10 +44,7 @@ const defaultGetItemRightSide: ListPropGetItemRightSide<DefaultListItem> = (
 const defaultGetItemRightIcon: ListPropGetItemRightIcon<DefaultListItem> = (
   item,
 ) => item.rightIcon;
-const defaultGetItemAs: ListPropGetItemAs<DefaultListItem> = (item) => item.as;
-const defaultGetItemAttributes: ListPropGetItemAttributes<DefaultListItem> = (
-  item,
-) => item.attributes;
+
 const defaultGetItemOnClick: ListPropGetItemOnClick<DefaultListItem> = (item) =>
   item.onClick;
 
@@ -65,19 +63,18 @@ export function withDefaultGetters<
   return {
     ...props,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
-    getItemKey: props.getItemKey || defaultGetItemKey,
     getItemGroupKey: props.getItemGroupKey || defaultGetItemGroupKey,
     getItemActive: props.getItemActive || defaultGetItemActive,
+    getItemChecked: props.getItemChecked || defaultGetItemChecked,
     getItemDisabled: props.getItemDisabled || defaultGetItemDisabled,
     getItemLeftSide: props.getItemLeftSide || defaultGetItemLeftSide,
     getItemLeftIcon: props.getItemLeftIcon || defaultGetItemLeftIcon,
     getItemRightSide: props.getItemRightSide || defaultGetItemRightSide,
     getItemRightIcon: props.getItemRightIcon || defaultGetItemRightIcon,
+    getItemStatus: props.getItemStatus || defaultGetItemStatus,
     getItemOnClick: props.getItemOnClick || defaultGetItemOnClick,
     getGroupLabel: props.getGroupLabel || defaultGetGroupLabel,
     getGroupKey: props.getGroupKey || defaultGetGroupKey,
     getGroupRightSide: props.getGroupRightSide || defaultGetGroupRightSide,
-    getItemAs: props.getItemAs || defaultGetItemAs,
-    getItemAttributes: props.getItemAttributes || defaultGetItemAttributes,
   };
 }

@@ -67,7 +67,11 @@ const items: Item[] = [
 export const ListExampleGroups = () => {
   return (
     <Example>
-      <List items={items} groups={groups} />
+      <List
+        items={items}
+        groups={groups}
+        onItemClick={(item) => alert(item.label)}
+      />
     </Example>
   );
 };

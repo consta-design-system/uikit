@@ -8,7 +8,6 @@ export const ListExampleCustomTypes = () => {
     <Example>
       <List
         items={['Первый', 'Второй', 'Третий']}
-        getItemKey={(item) => item}
         getItemLabel={(item) => item}
       />
     </Example>

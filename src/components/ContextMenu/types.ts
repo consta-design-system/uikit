@@ -1,5 +1,11 @@
 import { IconComponent } from '@consta/icons/Icon';
 
+import {
+  defaultListPropForm,
+  ListPropForm,
+  listPropForm,
+} from '##/components/ListCanary';
+
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
 import { PropsWithAsAttributes } from '../../utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
@@ -12,6 +18,10 @@ export const contextMenuDefaultSize: ContextMenuPropSize = contextMenuSizes[0];
 export const contextMenuStatus = ['alert', 'success', 'warning'] as const;
 export type ContextMenuStatus = typeof contextMenuStatus[number];
 export const contextMenuDefaultStatus: ContextMenuStatus = contextMenuStatus[0];
+
+export const contextMenuForm = listPropForm;
+export type ContextMenuForm = ListPropForm;
+export const defaultContextMenuForm = defaultListPropForm;
 
 export const contextMenuPropSubMenuDirections = [
   'rightStartUp',
@@ -56,39 +66,51 @@ export type ContextMenuPropSortGroup = (
 ) => number;
 
 export type ContextMenuPropGetItemLabel<ITEM> = (item: ITEM) => string | number;
+
 export type ContextMenuPropGetItemRightSide<ITEM> = (
   item: ITEM,
 ) => React.ReactNode | undefined;
+
 export type ContextMenuPropGetItemLeftSide<ITEM> = (
   item: ITEM,
 ) => React.ReactNode | undefined;
+
 export type ContextMenuPropGetItemSubMenu<ITEM> = (
   item: ITEM,
 ) => ITEM[] | undefined;
+
 export type ContextMenuPropGetItemStatus<ITEM> = (
   item: ITEM,
 ) => ContextMenuStatus | undefined;
+
 export type ContextMenuPropGetItemKey<ITEM> = (
   item: ITEM,
 ) => string | number | undefined;
+
 export type ContextMenuPropGetItemOnClick<ITEM> = (
   item: ITEM,
 ) => ContextMenuPropOnClick<ITEM> | undefined;
+
 export type ContextMenuPropGetItemDisabled<ITEM> = (
   item: ITEM,
 ) => boolean | undefined;
+
 export type ContextMenuPropGetItemAs<ITEM> = (
   item: ITEM,
 ) => keyof JSX.IntrinsicElements | undefined;
+
 export type ContextMenuPropGetItemAttributes<ITEM> = (
   item: ITEM,
 ) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements] | undefined;
+
 export type ContextMenuPropGetItemGroupId<ITEM> = (
   item: ITEM,
 ) => number | undefined;
+
 export type ContextMenuPropGetItemRightIcon<ITEM> = (
   item: ITEM,
 ) => IconComponent | undefined;
+
 export type ContextMenuPropGetItemLeftIcon<ITEM> = (
   item: ITEM,
 ) => IconComponent | undefined;
@@ -162,6 +184,7 @@ export type ContextMenuProps<
     onSetDirection?: (direction: Direction) => void;
     onClickOutside?: ClickOutsideHandler;
     isOpen?: boolean;
+    form?: ContextMenuForm;
   } & MappersItem<ITEM> &
     MappersGroup<GROUP> &
     PositioningProps,
@@ -181,7 +204,10 @@ export type ContextMenuComponent = <
   props: ContextMenuProps<ITEM, GROUP>,
 ) => React.ReactElement | null;
 
-export type ContextMenuLevelProps<ITEM, GROUP> = Omit<
+export type ContextMenuLevelProps<
+  ITEM = ContextMenuItemDefault,
+  GROUP = ContextMenuGroupDefault,
+> = Omit<
   ContextMenuProps<ITEM, GROUP>,
   | 'subMenuDirection'
   | 'onClickOutside'

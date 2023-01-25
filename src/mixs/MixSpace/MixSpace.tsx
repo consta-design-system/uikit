@@ -2,7 +2,7 @@ import './MixSpace.css';
 
 import { cn } from '../../utils/bem';
 
-type PropSpace =
+export type Space =
   | 0
   | 'auto'
   | 'm'
@@ -18,43 +18,26 @@ type PropSpace =
   | '5xl'
   | '6xl';
 
-type Props = {
-  p?: PropSpace;
-  m?: PropSpace;
-  pV?: PropSpace;
-  pH?: PropSpace;
-  mV?: PropSpace;
-  mH?: PropSpace;
-  mT?: PropSpace;
-  mL?: PropSpace;
-  mR?: PropSpace;
-  mB?: PropSpace;
-  pT?: PropSpace;
-  pL?: PropSpace;
-  pR?: PropSpace;
-  pB?: PropSpace;
+export type MixSpaceProps = {
+  p?: Space;
+  m?: Space;
+  pV?: Space;
+  pH?: Space;
+  mV?: Space;
+  mH?: Space;
+  mT?: Space;
+  mL?: Space;
+  mR?: Space;
+  mB?: Space;
+  pT?: Space;
+  pL?: Space;
+  pR?: Space;
+  pB?: Space;
 };
 
-type SpaceProps = {
-  pT?: PropSpace;
-  pL?: PropSpace;
-  pR?: PropSpace;
-  pB?: PropSpace;
-  mT?: PropSpace;
-  mL?: PropSpace;
-  mR?: PropSpace;
-  mB?: PropSpace;
-};
+type CnMixSpace = (props: MixSpaceProps) => string;
 
-type CnSpace = (
-  elemNameOrBlockMods?: SpaceProps | string | null,
-  elemModsOrBlockMix?: SpaceProps | Array<string | undefined> | null,
-  elemMix?: Array<string | undefined>,
-) => string;
-
-type CnMixSpace = (props: Props) => string;
-
-const cnSpace: CnSpace = cn('MixSpace');
+const cnSpace = cn('MixSpace');
 
 export const cnMixSpace: CnMixSpace = (props) => {
   const { p, m, pV, pH, mV, mH, mT, mL, mR, mB, pT, pL, pR, pB } = props;

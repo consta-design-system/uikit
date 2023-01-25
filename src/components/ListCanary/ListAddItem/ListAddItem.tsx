@@ -1,43 +1,44 @@
-import './ListAddItem.css';
-
+import { IconAdd } from '@consta/icons/IconAdd';
 import React, { forwardRef } from 'react';
 
-import { IconPropSize } from '##/icons/Icon';
-import { IconAdd } from '##/icons/IconAdd';
-import { cn } from '##/utils/bem';
-
-import { defaultListPropSize, ListAddItemProps, ListPropSize } from '../types';
-
-const cnListAddItem = cn('ListAddItem');
-
-const iconSizeMap: Record<ListPropSize, IconPropSize> = {
-  xs: 'xs',
-  s: 'xs',
-  m: 's',
-  l: 's',
-};
+import { ListDivider, ListItem } from '..';
+import {
+  mapGroupVerticalSpaseBottom,
+  mapHorisontalSpase,
+  mapHorisontalSpaseIncreased,
+} from '../maps';
+import { defaultListPropSize, ListAddItemProps } from '../types';
 
 export const ListAddItem = forwardRef<HTMLDivElement, ListAddItemProps>(
   (props, ref) => {
     const {
       size = defaultListPropSize,
-      className,
-      disabled,
-      label,
+      innerOffset,
+      underLine,
       ...otherProps
     } = props;
+
+    const horisontalSpase =
+      innerOffset === 'increased'
+        ? mapHorisontalSpaseIncreased[size]
+        : mapHorisontalSpase[size];
+
     return (
-      <div
-        className={cnListAddItem({ size, disabled }, [className])}
-        ref={ref}
-        {...otherProps}
-      >
-        <IconAdd
-          className={cnListAddItem('AddIcon')}
-          size={iconSizeMap[size]}
+      <>
+        <ListItem
+          {...otherProps}
+          size={size}
+          ref={ref}
+          leftIcon={IconAdd}
+          space={{
+            pH: horisontalSpase,
+            pV: mapGroupVerticalSpaseBottom[size],
+          }}
         />
-        {label}
-      </div>
+        {underLine && (
+          <ListDivider size={size} space={{ mH: horisontalSpase }} />
+        )}
+      </>
     );
   },
 );

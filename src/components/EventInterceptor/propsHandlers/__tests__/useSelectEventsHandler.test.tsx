@@ -2,9 +2,9 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { act, renderHook } from '@testing-library/react-hooks';
 import React, { createRef } from 'react';
 
+import { cnListItem } from '../../../ListCanary';
 import { Select, SelectProps } from '../../../Select/Select';
 import { cnSelect } from '../../../SelectComponents/cnSelect';
-import { cnSelectItem } from '../../../SelectComponents/SelectItem/SelectItem';
 import {
   eventInterceptorMap,
   EventInterceptorProvider,
@@ -60,7 +60,7 @@ function getItemsList() {
 }
 
 function getItems() {
-  return getItemsList().querySelectorAll(`.${cnSelectItem()}`);
+  return getItemsList().querySelectorAll(`.${cnListItem()}`);
 }
 
 function getItem(index = 1) {

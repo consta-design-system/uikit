@@ -11,29 +11,24 @@ const cnListExampleRenderItem = cn('ListExampleRenderItem');
 
 type Item = {
   label: string;
-  id: number;
   status?: 'repairs' | 'serviceable';
 };
 
 const items: Item[] = [
   {
     label: 'Принтер',
-    id: 1,
     status: 'repairs',
   },
   {
     label: 'Монитор',
-    id: 2,
     status: 'serviceable',
   },
   {
     label: 'Ноутбук',
-    id: 3,
     status: 'serviceable',
   },
   {
     label: 'Стол',
-    id: 4,
   },
 ];
 
@@ -51,7 +46,6 @@ export const ListExampleRenderItem = () => {
   return (
     <Example>
       <List
-        className={cnListExampleRenderItem()}
         items={items}
         renderItem={(item) => (
           <div className={cnListExampleRenderItem('Item')}>

@@ -5,59 +5,85 @@ import React from 'react';
 
 import { cn } from '##/utils/bem';
 
+import { List, ListAddItem, ListBox, ListLoader } from '..';
 import { basicItems, groups } from '../__mocks__/mock.data';
-import { List } from '../ListCanary';
-import { DefaultListItem, defaultListPropSize, listPropSize } from '../types';
+import {
+  defaultListPropInnerOffset,
+  defaultListPropSize,
+  listPropInnerOffset,
+  listPropSize,
+} from '../types';
 
 const cnListVariant = cn('ListVariant');
 
+const getUndefined = () => undefined;
+
+const conditionalGetter = (conditional: boolean) =>
+  conditional ? undefined : getUndefined;
+
+const Box: React.FC<{
+  withListBox?: boolean;
+  children?: React.ReactNode;
+}> = ({ withListBox, children }) => {
+  if (withListBox) {
+    return (
+      <ListBox className={cnListVariant()} form="default" border shadow>
+        {children}
+      </ListBox>
+    );
+  }
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <div className={cnListVariant()}>{children}</div>;
+};
+
 const Variants = () => {
   const size = useSelect('size', listPropSize, defaultListPropSize);
+  const withListBox = useBoolean('withListBox', false);
+  const innerOffset = useSelect(
+    'innerOffset',
+    listPropInnerOffset,
+    defaultListPropInnerOffset,
+  );
+  const isInteractive = useBoolean('isInteractive', true);
   const withGroups = useBoolean('withGroups', false);
+  const groupsWithLabel = useBoolean('groupsWithLabel', true, withGroups);
   const disabled = useBoolean('disabled', false);
-  const isLoading = useBoolean('isLoading', false);
   const withLeftSide = useBoolean('withLeftSide', false);
   const withLeftIcon = useBoolean('withLeftIcon', false);
   const withRightSide = useBoolean('withRightSide', false);
   const withRightIcon = useBoolean('withRightIcon', false);
   const withDisabledItems = useBoolean('withDisabledItems', false);
-
-  const getItemLeftIcon = (item: DefaultListItem) => {
-    return withLeftIcon ? item.leftIcon : undefined;
-  };
-
-  const getItemLeftSide = (item: DefaultListItem) => {
-    return withLeftSide ? item.leftSide : undefined;
-  };
-
-  const getItemRightIcon = (item: DefaultListItem) => {
-    return withRightIcon ? item.rightIcon : undefined;
-  };
-
-  const getItemRightSide = (item: DefaultListItem) => {
-    return withRightSide ? item.rightSide : undefined;
-  };
-
-  const getItemDisabled = (item: DefaultListItem) => {
-    return withDisabledItems ? item.disabled : undefined;
-  };
+  const withLoader = useBoolean('withLoader', false);
+  const withListAddItem = useBoolean('withListAddItem', false);
 
   return (
-    <div className={cnListVariant()}>
+    <Box withListBox={withListBox}>
+      {withListAddItem && (
+        <ListAddItem
+          label="Добавить"
+          size={size}
+          innerOffset={innerOffset}
+          underLine
+          onClick={() => alert('Добавить')}
+        />
+      )}
       <List
         disabled={disabled}
-        isLoading={isLoading}
         size={size}
         items={basicItems}
-        onItemClick={({ item }) => console.log(item.label)}
+        onItemClick={isInteractive ? (item) => alert(item.label) : undefined}
         groups={withGroups ? groups : undefined}
-        getItemDisabled={getItemDisabled}
-        getItemLeftIcon={getItemLeftIcon}
-        getItemLeftSide={getItemLeftSide}
-        getItemRightIcon={getItemRightIcon}
-        getItemRightSide={getItemRightSide}
+        getItemGroupKey={conditionalGetter(withGroups)}
+        getGroupLabel={conditionalGetter(groupsWithLabel)}
+        getItemDisabled={conditionalGetter(withDisabledItems)}
+        getItemLeftIcon={conditionalGetter(withLeftIcon)}
+        getItemLeftSide={conditionalGetter(withLeftSide)}
+        getItemRightIcon={conditionalGetter(withRightIcon)}
+        getItemRightSide={conditionalGetter(withRightSide)}
+        innerOffset={innerOffset}
       />
-    </div>
+      {withLoader && <ListLoader size={size} innerOffset={innerOffset} />}
+    </Box>
   );
 };
 

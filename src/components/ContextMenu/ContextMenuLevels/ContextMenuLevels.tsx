@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
-import { useRefs } from '../../../hooks/useRefs/useRefs';
-import { Direction, directions } from '../../Popover/Popover';
-import {
-  clearTimers,
-  ContextMenuLevel,
-} from '../ContextMenuLevel/ContextMenuLevel';
+import { Direction, directions } from '##/components/Popover';
+import { useClickOutside } from '##/hooks/useClickOutside';
+import { useForkRef } from '##/hooks/useForkRef';
+import { useRefs } from '##/hooks/useRefs';
+
+import { clearTimers, ContextMenuLevel } from '../ContextMenuLevel';
 import { getLevels, withDefaultGetters } from '../helpers';
 import {
   AddLevel,

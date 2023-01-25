@@ -1,4 +1,4 @@
-type Group<ITEM, GROUP> = {
+export type Group<ITEM, GROUP> = {
   items: ITEM[];
   key: string | number;
   group?: GROUP;

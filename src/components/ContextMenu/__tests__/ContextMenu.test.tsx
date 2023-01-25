@@ -2,11 +2,10 @@ import { IconAllDone } from '@consta/icons/IconAllDone';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
+import { cnListGroupLabel, cnListItem, cnListItemGrid } from '../../ListCanary';
 import { cnText } from '../../Text/Text';
 import { exampleItems as items, groups } from '../__mocks__/mock.data';
 import { ContextMenu } from '../ContextMenu';
-import { cnContextMenuLevel } from '../ContextMenuLevel/ContextMenuLevel';
 import {
   ContextMenuGroupDefault,
   ContextMenuItemDefault,
@@ -15,8 +14,6 @@ import {
 
 const testId = 'ContextMenuCanary';
 const additionalClass = 'additionalClass';
-
-const cnContextMenuItem = cn('ContextMenuItem');
 
 const renderComponent = (
   props: ContextMenuProps<ContextMenuItemDefault, ContextMenuGroupDefault> | {},
@@ -39,7 +36,7 @@ function getRender() {
 }
 
 function getItems() {
-  return getRender().querySelectorAll(`.${cnContextMenuItem()}`);
+  return getRender().querySelectorAll(`.${cnListItem()}`);
 }
 
 function getItem(index = 0) {
@@ -47,7 +44,7 @@ function getItem(index = 0) {
 }
 
 function getSide(index = 0, sideIndex = 0) {
-  return getItem(index).querySelectorAll(`.${cnContextMenuItem('Slot')}`)[
+  return getItem(index).querySelectorAll(`.${cnListItemGrid('Slot')}`)[
     sideIndex
   ];
 }
@@ -56,15 +53,11 @@ function getIcon(index = 0, sideIndex = 0) {
 }
 
 function getGroups() {
-  return getRender().querySelectorAll(`.${cnContextMenuLevel('Group')}`);
+  return getRender().querySelectorAll(`.${cnListGroupLabel()}`);
 }
 
 function getGroup(index = 0) {
   return getGroups()[index];
-}
-
-function getGroupHeader(index = 0) {
-  return getGroup(index).querySelector(`.${cnContextMenuLevel('Header')}`);
 }
 
 describe('Компонент ContextMenu', () => {
@@ -96,7 +89,7 @@ describe('Компонент ContextMenu', () => {
     describe('проверка getGroupLabel', () => {
       it('label совпадает', () => {
         renderComponent({ groups });
-        expect(getGroupHeader()?.textContent).toEqual(groups[0].label);
+        expect(getGroup()?.textContent).toEqual(groups[0].label);
       });
     });
     describe('проверка getItemOnClick', () => {
@@ -130,7 +123,7 @@ describe('Компонент ContextMenu', () => {
           getItemOnClick: (item) => () => handleChange(item),
         });
 
-        expect(getItem()).toHaveClass(cnContextMenuItem({ disabled: true }));
+        expect(getItem()).toHaveClass(cnListItem({ disabled: true }));
 
         fireEvent.click(getItem());
         expect(handleChange).toHaveBeenCalledTimes(0);
@@ -144,7 +137,7 @@ describe('Компонент ContextMenu', () => {
         });
 
         expect(getSide()).toHaveClass(
-          cnContextMenuItem('Slot', { position: 'left' }),
+          cnListItemGrid('Slot', { position: 'left' }),
         );
       });
     });
@@ -156,7 +149,7 @@ describe('Компонент ContextMenu', () => {
         });
 
         expect(getSide(0, 2)).toHaveClass(
-          cnContextMenuItem('Slot', { position: 'right' }),
+          cnListItemGrid('Slot', { position: 'right' }),
         );
       });
     });

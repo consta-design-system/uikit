@@ -4,10 +4,15 @@ import { IconCheck } from '@consta/icons/IconCheck';
 import React, { useRef } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { cn } from '../../../utils/bem';
-import { cnForCssTransition } from '../../../utils/cnForCssTransition';
-import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
-import { Avatar } from '../../Avatar/Avatar';
+import { Avatar } from '##/components/Avatar/Avatar';
+import {
+  mapHorisontalSpase,
+  mapHorisontalSpaseIncreased,
+  mapItemVerticalPadding,
+} from '##/components/ListCanary';
+import { cnMixSpace } from '##/mixs/MixSpace';
+import { cn } from '##/utils/bem';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 type UserSelectItemProps = PropsWithHTMLAttributes<
   {
@@ -25,11 +30,6 @@ type UserSelectItemProps = PropsWithHTMLAttributes<
 >;
 
 export const cnUserSelectItem = cn('UserSelectItem');
-
-const cnUserSelectItemCheckIconCssTransition = cnForCssTransition(
-  cnUserSelectItem,
-  'CheckIcon',
-);
 
 export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
   const {
@@ -52,6 +52,13 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
     <div
       {...otherProps}
       className={cnUserSelectItem({ active, hovered, size, indent, disable }, [
+        cnMixSpace({
+          pH:
+            indent === 'increased'
+              ? mapHorisontalSpaseIncreased[size]
+              : mapHorisontalSpase[size],
+          pV: mapItemVerticalPadding[size],
+        }),
         className,
       ])}
       aria-selected={active}
@@ -64,13 +71,7 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
           name={label}
         />
         {multiple && (
-          <Transition
-            in={active}
-            unmountOnExit
-            classNames={cnUserSelectItemCheckIconCssTransition}
-            timeout={200}
-            nodeRef={iconRef}
-          >
+          <Transition in={active} unmountOnExit timeout={200} nodeRef={iconRef}>
             {(animate) => (
               <IconCheck
                 className={cnUserSelectItem('CheckIcon', { animate })}
