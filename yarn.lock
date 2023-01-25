@@ -1728,16 +1728,21 @@
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.0.2.tgz#96269b3538bc63d1fbc92d6b803e497b572f1689"
   integrity sha512-ZEJlBP0/eQYkO9k71+nv2NsL21w+ftsxwxIh9xuqAOHeLYc5yI2ZxZaqaawgGMK/m5QG4UiX3qMqXYzolRpaXg==
 
-"@consta/stand@^0.0.95":
-  version "0.0.95"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.95.tgz#831a04d13da0d34df0b5ab145039a35c978bcf4b"
-  integrity sha512-mQBzUmojTaS91/fIa1n707I7fOKISwbfTCMbiT4Pq0ynn6Ev2/EqEcDttwD9RyAE7CiG6Tqmyt1smVDTIchHDw==
+"@consta/icons@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.1.1.tgz#454461a9acf3dc8b42e1654b4298e5f929c42937"
+  integrity sha512-55NsjyaXFuYyr6CiptXuFMe/AUd7HMs8IgSaOGfV+wbMbSVg88u8dwJ5km3sPaHNFiD0vg8FNqGFc1F37K18zQ==
+
+"@consta/stand@^0.0.97":
+  version "0.0.97"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.97.tgz#4dfbd923269c87023e9885d5a650b613ce586467"
+  integrity sha512-x2UBnBAkZDMpdl3p3e9JZQOM530/BcAz+4VPazKzfCjff9gbKf6MEGEqR52bbS4niavMuDlRtVBD4v2z8I4t4Q==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"
     "@consta/header" "^1.0.0"
-    "@consta/icons" "^0.0.2"
-    "@consta/uikit" "^4.6.3"
+    "@consta/icons" "^0.1.1"
+    "@consta/uikit" "^4.7.1"
     "@mdx-js/loader" "^2.1.5"
     "@mdx-js/react" "^2.1.5"
     "@oclif/command" "^1.8.16"
@@ -1805,10 +1810,10 @@
     webpack-manifest-plugin "^4.0.2"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/uikit@^4.6.3":
-  version "4.6.3"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-4.6.3.tgz#272179694c7d876e9a39aa40cc975e1d945ce01a"
-  integrity sha512-JGIDkkGOhE5YQb15lOHprs7PzFxqsc0iyrOebmGvcyOexbYeLOPFkV3MKdnUloY0/eg2swEBjNAeD3guTJ+PUw==
+"@consta/uikit@^4.7.1":
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-4.7.1.tgz#1c5728514142d484bbcf2632707e06922a3facc6"
+  integrity sha512-oq4C9qtwixjHLP3yQAwWD5zSdPlrlxTwNuXuYHHCmdhPiZb689OVtOiByEgJ0K3ap0AyCOrB7FWONKS1DDdCFw==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"

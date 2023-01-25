@@ -16,7 +16,7 @@
   "dependencies": {
     "@bem-react/classname": "^1.5.12",
     "@bem-react/classnames": "^1.3.10",
-    "@consta/icons": "^0.0.2",
+    "@consta/icons": "^0.1.1",
     "compute-scroll-into-view": "^1.0.17",
     "date-fns": "^2.29.1",
     "focus-trap-react": "8.7.0",
@@ -107,7 +107,7 @@
     "@babel/preset-typescript": "^7.18.6",
     "@bem/sdk.naming.cell.match": "^0.1.3",
     "@bem/sdk.naming.presets": "^0.2.3",
-    "@consta/stand": "^0.0.95",
+    "@consta/stand": "^0.0.97",
     "@mdx-js/loader": "^2.1.5",
     "@oclif/command": "^1.8.16",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
