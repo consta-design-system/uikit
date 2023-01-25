@@ -2,7 +2,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: var(--vertical-space) var(--horizontal-space);
   color: var(--color-control-typo-default);
   background-color: var(--color-control-bg-clear);
   font-size: var(--font-size);
@@ -10,24 +9,18 @@
 
   &_size {
     &_s {
-      --horizontal-space: calc(var(--control-space-s) * 0.5);
-      --vertical-space: calc(var(--control-space-s) * 0.25);
       --font-size: var(--control-text-size-s);
       --sub-info-space: var(--space-xs);
       --sub-label-font-size: var(--size-text-2xs);
     }
 
     &_m {
-      --horizontal-space: calc(var(--control-space-m) * 0.5);
-      --vertical-space: calc(var(--control-space-s) * 0.5);
       --font-size: var(--control-text-size-m);
       --sub-info-space: var(--space-s);
       --sub-label-font-size: var(--size-text-xs);
     }
 
     &_l {
-      --horizontal-space: calc(var(--control-space-l) * 0.5);
-      --vertical-space: calc(var(--control-space-s) * 0.5);
       --font-size: var(--control-text-size-l);
       --sub-info-space: var(--space-s);
       --sub-label-font-size: var(--size-text-s);

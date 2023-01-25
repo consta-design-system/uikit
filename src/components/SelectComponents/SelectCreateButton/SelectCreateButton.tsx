@@ -2,8 +2,10 @@ import './SelectCreateButton.css';
 
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
-import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
+import { ListAddItem } from '##/components/ListCanary';
+import { cn } from '##/utils/bem';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
+
 import { PropSize } from '../types';
 
 type SelectCreateButtonProps = PropsWithHTMLAttributes<
@@ -35,15 +37,19 @@ export const SelectCreateButton: React.FC<SelectCreateButtonProps> = (
   } = props;
 
   return (
-    <div
+    <ListAddItem
       {...otherProps}
-      className={cnSelectCreateButton({ active, hovered, size, indent }, [
-        className,
-      ])}
+      className={cnSelectCreateButton(null, [className])}
       aria-selected={active}
       role="option"
-    >
-      {labelForCreate} «<b>{inputValue}</b>»
-    </div>
+      active={hovered}
+      size={size}
+      innerOffset={indent}
+      label={
+        <>
+          {labelForCreate} «<b>{inputValue}</b>»
+        </>
+      }
+    />
   );
 };

@@ -3,7 +3,7 @@ import './ContextMenuLevel.css';
 import { IconArrowRight } from '@consta/icons/IconArrowRight';
 import React, { forwardRef, useEffect } from 'react';
 
-import { cnListBox, iconSizeMap, List } from '##/components/ListCanary';
+import { cnListBox, List, mapIconSize } from '##/components/ListCanary';
 import { Popover } from '##/components/Popover';
 import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag/useFlag';
@@ -185,7 +185,7 @@ const ContextMenuLevelRender = (
           }
 
           const sides: React.ReactNode[] = Array.isArray(side) ? side : [side];
-          sides.push(<IconArrowRight size={iconSizeMap[size]} />);
+          sides.push(<IconArrowRight size={mapIconSize[size]} />);
           return sides;
         }}
         getGroupKey={getGroupId}

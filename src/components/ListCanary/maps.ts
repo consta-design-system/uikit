@@ -1,3 +1,5 @@
+import { IconPropSize } from '@consta/icons/Icon';
+
 import { Space } from '##/mixs/MixSpace';
 
 import { ListPropSize } from './types';
@@ -27,5 +29,19 @@ export const mapGroupVerticalSpaseBottom: Record<ListPropSize, Space> = {
   xs: '2xs',
   s: '2xs',
   m: 'xs',
+  l: 's',
+};
+
+export const mapItemVerticalPadding: Record<ListPropSize, Space> = {
+  xs: '2xs',
+  s: '2xs',
+  m: 'xs',
+  l: 'xs',
+};
+
+export const mapIconSize: Record<ListPropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 'xs',
+  m: 's',
   l: 's',
 };

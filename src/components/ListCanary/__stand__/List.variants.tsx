@@ -59,15 +59,19 @@ const Variants = () => {
   return (
     <Box withListBox={withListBox}>
       {withListAddItem && (
-        <ListAddItem label="Добавить" size={size} innerOffset={innerOffset} />
+        <ListAddItem
+          label="Добавить"
+          size={size}
+          innerOffset={innerOffset}
+          underLine
+          onClick={() => alert('Добавить')}
+        />
       )}
       <List
         disabled={disabled}
         size={size}
         items={basicItems}
-        onItemClick={
-          isInteractive ? (item) => console.log(item.label) : undefined
-        }
+        onItemClick={isInteractive ? (item) => alert(item.label) : undefined}
         groups={withGroups ? groups : undefined}
         getItemGroupKey={conditionalGetter(withGroups)}
         getGroupLabel={conditionalGetter(groupsWithLabel)}
@@ -78,7 +82,7 @@ const Variants = () => {
         getItemRightSide={conditionalGetter(withRightSide)}
         innerOffset={innerOffset}
       />
-      {withLoader && <ListLoader size={size} />}
+      {withLoader && <ListLoader size={size} innerOffset={innerOffset} />}
     </Box>
   );
 };

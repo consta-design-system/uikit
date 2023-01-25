@@ -1,11 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import {
-  cnSelectCreateButton,
-  SelectCreateButton,
-} from '../SelectCreateButton/SelectCreateButton';
-import { propSize } from '../types';
+import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 
 type Props = React.ComponentProps<typeof SelectCreateButton>;
 
@@ -43,34 +39,6 @@ describe('Компонент SelectCreateButton', () => {
       renderComponent({ ...defaultProps, inputValue });
 
       expect(getRender()).toHaveTextContent(inputValue);
-    });
-    it('должен иметь класс при active = true', () => {
-      renderComponent({ ...defaultProps, active: true });
-
-      expect(getRender()).toHaveClass(cnSelectCreateButton({ active: true }));
-    });
-    it('должен иметь класс при hovered = true', () => {
-      renderComponent({ ...defaultProps, hovered: true });
-
-      expect(getRender()).toHaveClass(cnSelectCreateButton({ hovered: true }));
-    });
-
-    describe('проверка size', () => {
-      propSize.forEach((size) => {
-        it(`должен иметь класс для size = ${size}`, () => {
-          renderComponent({ ...defaultProps, size });
-          expect(getRender()).toHaveClass(cnSelectCreateButton({ size }));
-        });
-      });
-    });
-
-    describe('проверка indent', () => {
-      (['normal', 'increased'] as const).forEach((indent) => {
-        it(`должен иметь класс для indent = ${indent}`, () => {
-          renderComponent({ ...defaultProps, indent });
-          expect(getRender()).toHaveClass(cnSelectCreateButton({ indent }));
-        });
-      });
     });
   });
 });

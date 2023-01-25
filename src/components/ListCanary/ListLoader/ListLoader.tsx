@@ -18,7 +18,7 @@ import {
 const cnListLoader = cn('ListLoader');
 
 type Props = PropsWithHTMLAttributesAndRef<
-  { size: ListPropSize; innerOffset: ListPropInnerOffset },
+  { size?: ListPropSize; innerOffset?: ListPropInnerOffset },
   HTMLDivElement
 >;
 

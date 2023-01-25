@@ -8,8 +8,8 @@ import {
 import * as React from 'react';
 
 import { cn } from '../../../utils/bem';
+import { cnListGroupLabel } from '../../ListCanary';
 import { cnSelect } from '../../SelectComponents/cnSelect';
-import { cnSelectGroupLabel } from '../../SelectComponents/SelectGroupLabel/SelectGroupLabel';
 import { groups, items } from '../__mocks__/data.mock';
 import { DefaultGroup, DefaultItem } from '../helpers';
 import {
@@ -84,7 +84,7 @@ function getRenderItems() {
   return getItemsList().querySelectorAll(`.${cnRenderItem()}`);
 }
 function getGroups() {
-  return getItemsList().querySelectorAll(`.${cnSelectGroupLabel()}`);
+  return getItemsList().querySelectorAll(`.${cnListGroupLabel()}`);
 }
 function getItem(index = 0) {
   return getItems()[index];

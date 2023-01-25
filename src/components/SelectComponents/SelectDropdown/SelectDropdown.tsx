@@ -4,6 +4,13 @@ import React, { Fragment, useMemo, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 
 import {
+  cnListBox,
+  ListItem,
+  mapVerticalSpase,
+} from '##/components/ListCanary';
+import { cnMixSpace } from '##/mixs/MixSpace';
+
+import {
   GetOptionPropsResult,
   isOptionForCreate,
   OptionForCreate,
@@ -17,7 +24,6 @@ import { cn } from '../../../utils/bem';
 import { fabricIndex } from '../../../utils/fabricIndex';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Popover } from '../../Popover/Popover';
-import { Text } from '../../Text/Text';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
 import { SelectLoader } from '../SelectLoader/SelectLoader';
@@ -117,14 +123,19 @@ export const SelectDropdown: SelectDropdown = (props) => {
             offset="2xs"
             ref={popoverRef}
             role="listbox"
-            className={cnSelectDropdown({ form, size }, [
-              className,
+            className={cnSelectDropdown(null, [
+              cnListBox({ size, form, border: true, shadow: true }),
               cnMixPopoverAnimate({ animate }),
+              className,
             ])}
             equalAnchorWidth
           >
             <div
-              className={cnSelectDropdown('List', { size, form })}
+              className={cnSelectDropdown('List', [
+                cnMixSpace({
+                  pV: mapVerticalSpase[size],
+                }),
+              ])}
               ref={dropdownRef}
             >
               {isLoading && (
@@ -165,14 +176,22 @@ export const SelectDropdown: SelectDropdown = (props) => {
                 );
               })}
               {!isLoading && hasItems && notFound && labelForNotFound && (
-                <Text className={cnSelectDropdown('LabelForNotFound')}>
+                <ListItem
+                  size={size}
+                  label={labelForNotFound}
+                  innerOffset={indent}
+                >
                   {labelForNotFound}
-                </Text>
+                </ListItem>
               )}
               {!isLoading && !hasItems && labelForEmptyItems && (
-                <Text className={cnSelectDropdown('LabelForEmptyItems')}>
+                <ListItem
+                  size={size}
+                  label={labelForNotFound}
+                  innerOffset={indent}
+                >
                   {labelForEmptyItems}
-                </Text>
+                </ListItem>
               )}
             </div>
           </Popover>

@@ -1,76 +1,44 @@
-import './ListAddItem.css';
-
-import { IconPropSize } from '@consta/icons/Icon';
 import { IconAdd } from '@consta/icons/IconAdd';
 import React, { forwardRef } from 'react';
 
-import { Text } from '##/components/Text';
-import { cnMixSpace, Space } from '##/mixs/MixSpace';
-import { cn } from '##/utils/bem';
-
-import { mapHorisontalSpase, mapHorisontalSpaseIncreased } from '../maps';
-import { defaultListPropSize, ListAddItemProps, ListPropSize } from '../types';
-
-const cnListAddItem = cn('ListAddItem');
-
-const mapIconSize: Record<ListPropSize, IconPropSize> = {
-  xs: 'xs',
-  s: 'xs',
-  m: 's',
-  l: 's',
-};
-
-const mapVerticalPadding: Record<ListPropSize, Space> = {
-  xs: '2xs',
-  s: '2xs',
-  m: 'xs',
-  l: 's',
-};
-
-const mapIconGap: Record<ListPropSize, Space> = {
-  xs: '3xs',
-  s: '2xs',
-  m: 'xs',
-  l: 'xs',
-};
+import { ListDivider, ListItem } from '..';
+import {
+  mapGroupVerticalSpaseBottom,
+  mapHorisontalSpase,
+  mapHorisontalSpaseIncreased,
+} from '../maps';
+import { defaultListPropSize, ListAddItemProps } from '../types';
 
 export const ListAddItem = forwardRef<HTMLDivElement, ListAddItemProps>(
   (props, ref) => {
     const {
       size = defaultListPropSize,
-      className,
-      disabled,
-      label,
       innerOffset,
+      underLine,
       ...otherProps
     } = props;
+
+    const horisontalSpase =
+      innerOffset === 'increased'
+        ? mapHorisontalSpaseIncreased[size]
+        : mapHorisontalSpase[size];
+
     return (
-      <Text
-        {...otherProps}
-        size={size}
-        className={cnListAddItem({ disabled }, [
-          cnMixSpace({
-            mH:
-              innerOffset === 'increased'
-                ? mapHorisontalSpaseIncreased[size]
-                : mapHorisontalSpase[size],
-            pV: mapVerticalPadding[size],
-          }),
-          className,
-        ])}
-        ref={ref}
-        lineHeight="xs"
-      >
-        <IconAdd
-          className={cnListAddItem('AddIcon', [
-            cnMixSpace({
-              mR: mapIconGap[size],
-            }),
-          ])}
-          size={mapIconSize[size]}
+      <>
+        <ListItem
+          {...otherProps}
+          size={size}
+          ref={ref}
+          leftIcon={IconAdd}
+          space={{
+            pH: horisontalSpase,
+            pV: mapGroupVerticalSpaseBottom[size],
+          }}
         />
-        {label}
-      </Text>
+        {underLine && (
+          <ListDivider size={size} space={{ mH: horisontalSpase }} />
+        )}
+      </>
     );
   },
 );

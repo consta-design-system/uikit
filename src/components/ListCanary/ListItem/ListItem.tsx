@@ -3,26 +3,22 @@ import './ListItem.css';
 import React, { forwardRef } from 'react';
 
 import { Text } from '##/components/Text';
-import { cnMixSpace, Space } from '##/mixs/MixSpace';
+import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
 import { cnListItemGrid, renderSlot } from '../ListItemGrid';
-import { mapHorisontalSpase, mapHorisontalSpaseIncreased } from '../maps';
+import {
+  mapHorisontalSpase,
+  mapHorisontalSpaseIncreased,
+  mapItemVerticalPadding,
+} from '../maps';
 import {
   defaultListPropSize,
   ListItemComponent,
   ListItemProps,
-  ListPropSize,
 } from '../types';
 
 export const cnListItem = cn('ListItem');
-
-const mapVerticalPadding: Record<ListPropSize, Space> = {
-  xs: '2xs',
-  s: '2xs',
-  m: 'xs',
-  l: 'xs',
-};
 
 const ListItemRender = (
   props: ListItemProps,
@@ -62,7 +58,7 @@ const ListItemRender = (
                 innerOffset === 'increased'
                   ? mapHorisontalSpaseIncreased[size]
                   : mapHorisontalSpase[size],
-              pV: mapVerticalPadding[size],
+              pV: mapItemVerticalPadding[size],
             },
           ),
           cnListItemGrid(),

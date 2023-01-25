@@ -28,7 +28,7 @@ export type DefaultListGroup = {
 };
 
 export type DefaultListItem = {
-  label: string | number;
+  label: React.ReactNode;
   disabled?: boolean;
   active?: boolean;
   checked?: boolean;
@@ -55,7 +55,7 @@ export type ListPropRenderItem<ITEM> = (
 
 // ITEMS
 
-export type ListPropGetItemLabel<ITEM> = (item: ITEM) => string | number;
+export type ListPropGetItemLabel<ITEM> = (item: ITEM) => React.ReactNode;
 
 export type ListPropGetItemAdditionalClassName<ITEM> = (item: ITEM) => string;
 
@@ -214,9 +214,10 @@ export type ListBoxProps = PropsWithHTMLAttributesAndRef<
 export type ListAddItemProps = PropsWithHTMLAttributesAndRef<
   {
     size?: ListPropSize;
-    label?: React.ReactNode;
+    label: React.ReactNode;
     innerOffset?: ListPropInnerOffset;
-    disabled?: boolean;
+    active?: boolean;
+    underLine?: boolean;
   },
   HTMLDivElement
 >;

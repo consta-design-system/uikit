@@ -2,17 +2,11 @@ import './ListItemGrid.css';
 
 import React from 'react';
 
-import { IconComponent, IconPropSize } from '##/icons/Icon';
+import { IconComponent } from '##/icons/Icon';
 import { cn } from '##/utils/bem';
 
+import { mapIconSize } from '../maps';
 import { ListPropSize } from '../types';
-
-export const iconSizeMap: Record<ListPropSize, IconPropSize> = {
-  xs: 'xs',
-  s: 'xs',
-  m: 's',
-  l: 's',
-};
 
 export const cnListItemGrid = cn('ListItemGrid');
 
@@ -27,7 +21,7 @@ export const renderSlot = (
     : [];
   if (icon) {
     const Icon = icon;
-    const render = <Icon size={iconSizeMap[size]} />;
+    const render = <Icon size={mapIconSize[size]} />;
     if (position === 'left') {
       sides.push(render);
     }

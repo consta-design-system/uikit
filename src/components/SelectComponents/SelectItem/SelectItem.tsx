@@ -2,8 +2,9 @@ import './SelectItem.css';
 
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
-import { getByMap } from '../../../utils/getByMap';
+import { ListItem } from '##/components/ListCanary';
+import { cn } from '##/utils/bem';
+
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Checkbox, CheckboxPropSize } from '../../Checkbox/Checkbox';
 import { PropSize } from '../types';
@@ -21,14 +22,14 @@ export type SelectItemProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export const cnSelectItem = cn('SelectItem');
-
 const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
   xs: 'm',
   s: 'm',
   m: 'l',
   l: 'l',
 };
+
+export const cnSelectItem = cn('SelectItem');
 
 export const SelectItem: React.FC<SelectItemProps> = (props) => {
   const {
@@ -44,24 +45,23 @@ export const SelectItem: React.FC<SelectItemProps> = (props) => {
   } = props;
 
   return (
-    <div
+    <ListItem
       {...otherProps}
-      className={cnSelectItem(
-        { active, hovered, multiple, size, indent, disabled },
-        [className],
-      )}
+      className={cnSelectItem(null, [className])}
       aria-selected={active}
       aria-disabled={disabled}
       role="option"
+      label={label}
+      innerOffset={indent}
+      size={size}
+      active={hovered}
+      checked={!multiple && active}
+      disabled={disabled}
+      leftSide={
+        multiple && <Checkbox checked={active} size={sizeCheckboxMap[size]} />
+      }
     >
-      {multiple && (
-        <Checkbox
-          className={cnSelectItem('Checkbox')}
-          checked={active}
-          size={getByMap(sizeCheckboxMap, size)}
-        />
-      )}
       {label}
-    </div>
+    </ListItem>
   );
 };

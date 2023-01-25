@@ -1,70 +1,9 @@
 .SelectDropdown {
-  overflow: hidden;
-  box-sizing: border-box;
   min-width: 220px;
-  margin: -1px 0 -1px;
-  background: var(--color-bg-default);
-  border:
-    var(--control-border-width) solid
-    var(--color-control-bg-border-default);
   outline: none;
-  box-shadow: var(--shadow-layer);
-  font-size: var(--font-size);
-
-  &_size {
-    &_xs {
-      --input-height: var(--control-height-xs);
-      --font-size: var(--control-text-size-xs);
-      --input-space: calc(var(--control-space-xs) * 0.5);
-      --list-spase: var(--space-2xs);
-    }
-
-    &_s {
-      --input-height: var(--control-height-s);
-      --font-size: var(--control-text-size-s);
-      --input-space: calc(var(--control-space-s) * 0.5);
-      --list-spase: var(--space-2xs);
-    }
-
-    &_m {
-      --input-height: var(--control-height-m);
-      --font-size: var(--control-text-size-m);
-      --input-space: calc(var(--control-space-m) * 0.5);
-      --list-spase: var(--space-xs);
-    }
-
-    &_l {
-      --input-height: var(--control-height-l);
-      --font-size: var(--control-text-size-l);
-      --input-space: calc(var(--control-space-l) * 0.5);
-      --list-spase: var(--space-xs);
-    }
-  }
-
-  &_form {
-    &_default {
-      border-radius: var(--control-radius);
-    }
-
-    &_brick {
-      border-radius: 0;
-    }
-
-    &_round {
-      border-radius: calc(var(--input-height) * 0.5);
-    }
-  }
-
-  &-LabelForNotFound,
-  &-LabelForEmptyItems {
-    padding: 0 var(--space-xs);
-  }
 
   &-List {
-    overflow-y: auto;
-    width: 100%;
+    overflow: auto;
     max-height: 200px;
-    padding: var(--list-spase) 0;
-    line-height: 120%;
   }
 }
