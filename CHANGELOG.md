@@ -1,5 +1,17 @@
 # Changelog
 
+## v4.7.1 (25/01/2023)
+- Доработали компонент `List` и дополнили документацию
+- Заменили собственные списки компонентов `AutoComplete`, `Combobox`, `Select`, `UserSelect`, `ContextMenu` на компонент `List`. Теперь списки будут выглядеть везде одинаково, а бандл станет меньше.
+- В `Table` описали ограничения по использованию `getCellWrap`
+
+---
+
+- [feat: migration to List (#2865)](https://github.com/consta-design-system/uikit/commit/6cdf164522150b31d4d6c6f30b34d8e3d661e2db) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Table): add description for getCellWrap](https://github.com/consta-design-system/uikit/commit/004bcb9b5015ab90c3ffe65a7db385f2d2e8642e) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.7.0 (16/01/2023)
 Самое важное:
 
@@ -413,21 +425,3 @@ UserSelectDeprecated
 - [test(useKeys): add tests to useKeys (#2328)](https://github.com/consta-design-system/uikit/commit/513d786d923d0369af0819bda3098bdb9f61385f) - [@loel001](https://github.com/loel001)
 - [test(Select): add tests to Select (#2329)](https://github.com/consta-design-system/uikit/commit/50d9f45273c78313c8696ebdc5786d2443d625d4) - [@loel001](https://github.com/loel001)
 - [fix(Popover): fixed change position (#2335)](https://github.com/consta-design-system/uikit/commit/2503a1c455182ef4954d8589a1ae07429f941ab8) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.24.0 (25/05/2022)
-- Добавили RadioGroup(Canary), ChoiceGroup(Canary), CheckBoxGroup(Canary), SwichGroup(Canary) и Tabs(Canary). Всё те же компоненты, только теперь без обязательных геттеров
-- Доработали документацию
-- Исправили несколько багов
-
----
-
-- [feat(RadioGroupCanary): add RadioGroupCanary (#2313)](https://github.com/consta-design-system/uikit/commit/08c3bcb552cbebdd01a5e870f370aaa548c9e31b) - [@N1MBER](https://github.com/N1MBER)
-- [feat(ChoiceGroupCanary): add ChoiceGroupCanary (#2312)](https://github.com/consta-design-system/uikit/commit/04cee6482933b27f7af6ef75a7c729ca6f0c02a3) - [@N1MBER](https://github.com/N1MBER)
-- [feat(CheckboxGroupCanary): add CheckboxGroupCanary (#2311)](https://github.com/consta-design-system/uikit/commit/afec05578c46184cdf6a447d2d455fb3eef35d3b) - [@N1MBER](https://github.com/N1MBER)
-- [feat(SwitchGroupCanary): add SwitchGroupCanary (#2310)](https://github.com/consta-design-system/uikit/commit/f1f4d12544dc405cdd9c188207437643e173b07b) - [@N1MBER](https://github.com/N1MBER)
-- [feat(TabsCanary): add TabsCanary (#2309)](https://github.com/consta-design-system/uikit/commit/6037cfc8fdc9afb56b1527bde6367e2842d4287a) - [@N1MBER](https://github.com/N1MBER)
-- [fix(getGroups): fixed calculate groups with groupId = 0 (#2322)](https://github.com/consta-design-system/uikit/commit/05a79381264b136533bdc355b964d8da5e32d37d) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Popover): fixed calculate position (#2321)](https://github.com/consta-design-system/uikit/commit/718bcd4dafb0347f649056463052a543a372824a) - [@gizeasy](https://github.com/gizeasy)
-- [refactor(DatePicker): refactor renderAdditionalControls and useCurrentVisibleDate (#2318)](https://github.com/consta-design-system/uikit/commit/e556a36bbb96bb3213a91802caaaa3d4c38262a6) - [@gizeasy](https://github.com/gizeasy)
