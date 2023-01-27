@@ -5,10 +5,15 @@
       0,
       var(--mix-dropdown-animate-space)
     );
+  --mix-dropdown-animate-timeout: 0.2s;
+  --mix-dropdown-animate-trasition:
+    opacity var(--mix-dropdown-animate-timeout),
+    transform var(--mix-dropdown-animate-timeout);
 
   &_animate {
     &_exit {
       opacity: 1;
+      pointer-events: none;
       transform: translate(0);
     }
 
@@ -38,116 +43,7 @@
     &_exitActive,
     &_enterActive,
     &_exitDone {
-      transition: opacity 0.2s, transform 0.2s;
-    }
-  }
-
-  &.Popover_direction,
-  &_direction {
-    &_downCenter,
-    &_downRight,
-    &_downLeft,
-    &_downStartLeft,
-    &_downStartRight {
-      --mix-dropdown-animate-transform:
-        translate(
-          0,
-          var(--mix-dropdown-animate-space)
-        );
-    }
-
-    &_upCenter,
-    &_upRight,
-    &_upLeft,
-    &_upStartLeft,
-    &_upStartRight {
-      --mix-dropdown-animate-transform:
-        translate(
-          0,
-          calc(-1 * var(--mix-dropdown-animate-space))
-        );
-    }
-
-    &_leftUp,
-    &_leftCenter,
-    &_leftDown,
-    &_leftStartUp,
-    &_leftStartDown {
-      --mix-dropdown-animate-transform:
-        translate(
-          calc(-1 * var(--mix-dropdown-animate-space)),
-          0
-        );
-    }
-
-    &_rightUp,
-    &_rightCenter,
-    &_rightDown,
-    &_rightStartUp,
-    &_rightStartDown {
-      --mix-dropdown-animate-transform:
-        translate(
-          var(--mix-dropdown-animate-space),
-          0
-        );
-    }
-  }
-}
-
-.MixPopoverAnimate_direction {
-  &_downCenter,
-  &_downRight,
-  &_downLeft,
-  &_downStartLeft,
-  &_downStartRight {
-    &.Popover {
-      --mix-dropdown-animate-transform:
-        translate(
-          0,
-          var(--mix-dropdown-animate-space)
-        );
-    }
-  }
-
-  &_upCenter,
-  &_upRight,
-  &_upLeft,
-  &_upStartLeft,
-  &_upStartRight {
-    &.Popover {
-      --mix-dropdown-animate-transform:
-        translate(
-          0,
-          var(--mix-dropdown-animate-space)
-        );
-    }
-  }
-
-  &_leftUp,
-  &_leftCenter,
-  &_leftDown,
-  &_leftStartUp,
-  &_leftStartDown {
-    &.Popover {
-      --mix-dropdown-animate-transform:
-        translate(
-          0,
-          var(--mix-dropdown-animate-space)
-        );
-    }
-  }
-
-  &_rightUp,
-  &_rightCenter,
-  &_rightDown,
-  &_rightStartUp,
-  &_rightStartDown {
-    &.Popover {
-      --mix-dropdown-animate-transform:
-        translate(
-          0,
-          var(--mix-dropdown-animate-space)
-        );
+      transition: var(--mix-dropdown-animate-trasition);
     }
   }
 }

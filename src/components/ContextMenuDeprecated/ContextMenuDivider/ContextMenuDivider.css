@@ -1,4 +1,4 @@
-.ContextMenuDivider {
+.ContextMenuDividerDeprecated {
   --vertical-space: 0;
   height: var(--control-border-width);
   margin: var(--vertical-space) var(--space-s);

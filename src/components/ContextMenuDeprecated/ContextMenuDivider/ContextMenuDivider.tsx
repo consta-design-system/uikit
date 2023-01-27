@@ -5,7 +5,7 @@ import React from 'react';
 import { cn } from '../../../utils/bem';
 import { contextMenuDefaultSize, ContextMenuPropSize } from '../helpers';
 
-const cnContextMenuDivider = cn('ContextMenuDivider');
+const cnContextMenuDivider = cn('ContextMenuDividerDeprecated');
 
 export const ContextMenuDivider: React.FC<{
   size?: ContextMenuPropSize;

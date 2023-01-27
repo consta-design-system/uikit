@@ -1,23 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Transition, TransitionGroup } from 'react-transition-group';
 
-import { Direction, directions } from '##/components/Popover';
+import { Direction } from '##/components/Popover';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useForkRef } from '##/hooks/useForkRef';
+import { useMutableRef } from '##/hooks/useMutableRef';
 import { useRefs } from '##/hooks/useRefs';
+import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 
 import { clearTimers, ContextMenuLevel } from '../ContextMenuLevel';
 import { getLevels, withDefaultGetters } from '../helpers';
 import {
   AddLevel,
-  ContextMenuComponent,
+  ContextMenuItemDefault,
+  ContextMenuLevelsComponent,
+  ContextMenuLevelsProps,
   contextMenuPropDefaultSubMenuDirection,
-  ContextMenuProps,
   contextMenuPropSubMenuDirections,
   Level,
 } from '../types';
+import { useSize } from './useSize';
 
 const ContextMenuLevelsRender = (
-  propsComponent: ContextMenuProps,
+  propsComponent: ContextMenuLevelsProps,
   ref: React.Ref<HTMLDivElement>,
 ) => {
   const props = withDefaultGetters(propsComponent);
@@ -26,7 +31,7 @@ const ContextMenuLevelsRender = (
     anchorRef,
     position,
     direction,
-    possibleDirections = directions,
+    possibleDirections,
     offset,
     onClickOutside,
     getItemKey,
@@ -36,12 +41,19 @@ const ContextMenuLevelsRender = (
     spareDirection,
     subMenuDirection:
       subMenuDirectionProp = contextMenuPropDefaultSubMenuDirection,
+    isMobile,
+    isOpen,
+    setComponentSize,
+    enableAnimationBack,
+    disableAnimationBack,
     ...otherProps
   } = props;
 
+  const isOpenRef = useMutableRef(isOpen);
+
   type Item = typeof items[number];
 
-  const defaultLevels: Level<Item>[] = [
+  const defaultLevels: Level<ContextMenuItemDefault>[] = [
     {
       items,
       anchorRef,
@@ -49,10 +61,12 @@ const ContextMenuLevelsRender = (
       direction,
       possibleDirections,
       offset,
-    } as Level<Item>,
+    },
   ];
 
-  const [levels, setLevels] = useState<Level<Item>[]>(defaultLevels);
+  const [levels, setLevels] = useState<
+    Level<ContextMenuItemDefault & { isParent?: boolean }>[]
+  >(isMobile ? defaultLevels : []);
   const [subMenuDirection, setSubMenuDirection] =
     useState<Direction>(subMenuDirectionProp);
   const [hoveredParenLevel, setHoveredParenLevel] = useState<number>(-1);
@@ -64,8 +78,10 @@ const ContextMenuLevelsRender = (
     items,
     anchorRef,
     activeItem,
+    parent,
   }) => {
-    const newLevels = [...levels];
+    const newLevels: Level<ContextMenuItemDefault & { isParent?: boolean }>[] =
+      [...levels];
     const oldDirection =
       newLevels[level] && newLevels.length - level > 1
         ? newLevels[level].direction
@@ -79,19 +95,26 @@ const ContextMenuLevelsRender = (
     newLevels.splice(level);
     newLevels.push({
       items,
-      anchorRef,
-      direction: oldDirection || subMenuDirection,
-      possibleDirections: contextMenuPropSubMenuDirections,
-      position: undefined,
+      anchorRef: isMobile ? props.anchorRef : anchorRef,
+      direction: isMobile ? props.direction : oldDirection || subMenuDirection,
+      possibleDirections: isMobile
+        ? props.possibleDirections
+        : contextMenuPropSubMenuDirections,
+      position: isMobile ? props.position : undefined,
+      offset: isMobile ? props.offset : undefined,
+      parent,
     });
-    setLevels(newLevels);
+
+    isOpenRef.current ? setLevels(newLevels) : setLevels([]);
   };
 
   const deleteLevel = (level: number) => {
+    enableAnimationBack();
     const newLevels = [...levels];
     newLevels.splice(level);
     newLevels[level - 1] = { ...newLevels[level - 1], activeItem: undefined };
     setLevels(newLevels);
+    disableAnimationBack();
   };
 
   useClickOutside({
@@ -119,41 +142,69 @@ const ContextMenuLevelsRender = (
     setLevels(defaultLevels);
   }, [position]);
 
+  useEffect(() => {
+    setLevels(isOpen ? defaultLevels : []);
+  }, [isOpen]);
+
+  useSize(levelsRefs, setComponentSize, isMobile);
+
   return (
-    <>
-      {levels.map((level, index) => (
-        <ContextMenuLevel
-          {...otherProps}
-          {...level}
-          key={`ContextMenu-${index}`}
-          style={{
-            ...style,
-            ...{
-              zIndex:
-                typeof style?.zIndex === 'number'
-                  ? style.zIndex + 1
-                  : undefined,
-            },
-          }}
-          levelDepth={index}
-          getItemLabel={getItemLabel}
-          addLevel={addLevel}
-          deleteLevel={deleteLevel}
-          onSetDirection={
-            index > 0 ? setSubMenuDirection : props.onSetDirection
-          }
-          hoveredParenLevel={hoveredParenLevel}
-          setHoveredParenLevel={setHoveredParenLevel}
-          getItemSubMenu={getItemSubMenu}
-          getItemKey={getItemKey}
-          ref={index === 0 ? firstLevelRef : levelsRefs[index]}
-          spareDirection={index === 0 ? spareDirection : 'rightStartUp'}
-        />
-      ))}
-    </>
+    <TransitionGroup component={Fragment}>
+      {levels.map((level, index) => {
+        const key = `${index}-${level.parent ? getItemKey(level.parent) : ''}`;
+
+        const last = index !== levels.length - 1;
+
+        if (isMobile && last) {
+          return <Fragment key={index} />;
+        }
+
+        return (
+          <Transition
+            key={key}
+            timeout={animateTimeout}
+            nodeRef={levelsRefs[index]}
+          >
+            {(animate) => (
+              <ContextMenuLevel
+                {...otherProps}
+                {...level}
+                key={`${index}-${level.parent ? getItemKey(level.parent) : ''}`}
+                isMobile={isMobile}
+                isOpen={isOpen}
+                style={{
+                  ...style,
+                  ...{
+                    zIndex:
+                      typeof style?.zIndex === 'number'
+                        ? style.zIndex + 1
+                        : undefined,
+                  },
+                }}
+                levelDepth={index}
+                getItemLabel={getItemLabel}
+                addLevel={addLevel}
+                deleteLevel={deleteLevel}
+                onSetDirection={
+                  index > 0 ? setSubMenuDirection : props.onSetDirection
+                }
+                hoveredParenLevel={hoveredParenLevel}
+                setHoveredParenLevel={setHoveredParenLevel}
+                getItemSubMenu={getItemSubMenu}
+                getItemKey={getItemKey}
+                ref={index === 0 ? firstLevelRef : levelsRefs[index]}
+                spareDirection={index === 0 ? spareDirection : 'rightStartUp'}
+                parent={isMobile ? level.parent : undefined}
+                animate={animate}
+              />
+            )}
+          </Transition>
+        );
+      })}
+    </TransitionGroup>
   );
 };
 
 export const ContextMenuLevels = React.forwardRef(
   ContextMenuLevelsRender,
-) as ContextMenuComponent;
+) as ContextMenuLevelsComponent;

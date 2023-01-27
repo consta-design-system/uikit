@@ -1,19 +1,14 @@
-import './ContextMenu.css';
-
-import React, { useRef, useState } from 'react';
-import { Transition } from 'react-transition-group';
+import React, { useState } from 'react';
 
 import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
-import { Direction } from '##/components/Popover';
+import { ComponentSize } from '##/hooks/useComponentSize';
+import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag';
-import { useForkRef } from '##/hooks/useForkRef';
-import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
-import { cn } from '##/utils/bem';
+import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 
 import { ContextMenuLevels } from './ContextMenuLevels';
+import { ContextMenuWrapper } from './ContextMenuWrapper';
 import { ContextMenuComponent, ContextMenuProps } from './types';
-
-const cnContextMenu = cn('ContextMenuCanary');
 
 export const COMPONENT_NAME = 'ContextMenu' as const;
 
@@ -21,50 +16,33 @@ const ContextMenuRender = (
   props: ContextMenuProps,
   ref: React.Ref<HTMLDivElement>,
 ) => {
-  const nodeRef = useRef<HTMLDivElement>(null);
-  const levelRef = useForkRef([ref, nodeRef]);
+  const rest = usePropsHandler(COMPONENT_NAME, props, ref);
 
-  const { isOpen, className, onSetDirection, ...otherProps } = usePropsHandler(
-    COMPONENT_NAME,
-    props,
-    levelRef,
-  );
-  const [playAnimation, setPlayAnimation] = useFlag();
-  const [eventsNone, setEventsNone] = useFlag(true);
-  const [direction, setDirection] = useState<Direction | undefined>(
-    props.direction,
-  );
+  const [componentSize, setComponentSize] = useState<ComponentSize>({
+    width: 240,
+    height: 100,
+  });
 
-  const handleSetDirection = (d: Direction) => {
-    setDirection(d);
-    onSetDirection?.(d);
-  };
+  const [animationBack, setAnimationBack] = useFlag();
+  const disableAnimationBack = useDebounce(
+    setAnimationBack.off,
+    animateTimeout,
+  );
 
   return (
-    <Transition
-      in={isOpen}
-      unmountOnExit
-      timeout={animateTimeout}
-      onEntered={setEventsNone.off}
-      onEnter={setPlayAnimation.off}
-      onExit={() => {
-        setPlayAnimation.on();
-        setEventsNone.on();
-      }}
-      nodeRef={nodeRef}
+    <ContextMenuWrapper
+      {...rest}
+      animationBack={animationBack}
+      style={componentSize}
     >
-      {(animate) => (
-        <ContextMenuLevels
-          {...otherProps}
-          ref={levelRef}
-          onSetDirection={handleSetDirection}
-          className={cnContextMenu('Level', { playAnimation, eventsNone }, [
-            className,
-            cnMixPopoverAnimate({ animate, direction }),
-          ])}
-        />
-      )}
-    </Transition>
+      <ContextMenuLevels
+        {...rest}
+        setComponentSize={setComponentSize}
+        ref={ref}
+        enableAnimationBack={setAnimationBack.on}
+        disableAnimationBack={disableAnimationBack}
+      />
+    </ContextMenuWrapper>
   );
 };
 

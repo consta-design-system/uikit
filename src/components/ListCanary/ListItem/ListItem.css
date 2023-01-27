@@ -2,6 +2,7 @@
   --list-item-color: var(--color-typo-primary);
   position: relative;
   background: var(--color-control-bg-clear);
+  text-decoration: none;
   transition: color 0.3s;
 
   &.Text {

@@ -1,0 +1,11 @@
+.ContextMenuWrapper {
+  overflow: hidden;
+  width: 240px;
+}
+
+.MixPopoverAnimate.ContextMenuWrapper {
+  --mix-dropdown-animate-trasition:
+    opacity var(--mix-dropdown-animate-timeout),
+    transform var(--mix-dropdown-animate-timeout),
+    height var(--mix-dropdown-animate-timeout);
+}

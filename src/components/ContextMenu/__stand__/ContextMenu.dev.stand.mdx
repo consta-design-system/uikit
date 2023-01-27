@@ -11,6 +11,7 @@ import { ContextMenuExampleSize } from './examples/ContextMenuExampleSize/Contex
 import { ContextMenuExampleDefault } from './examples/ContextMenuExampleDefault/ContextMenuExampleDefault';
 import { ContextMenuExampleDisabled } from './examples/ContextMenuExampleDisabled/ContextMenuExampleDisabled';
 import { ContextMenuExampleOnClick } from './examples/ContextMenuExampleOnClick/ContextMenuExampleOnClick';
+import { ContextMenuExampleMobile } from './examples/ContextMenuExampleMobile/ContextMenuExampleMobile';
 
 ```tsx
 import { ContextMenu } from '@consta/uikit/ContextMenu';
@@ -29,6 +30,7 @@ import { ContextMenu } from '@consta/uikit/ContextMenu';
 - [Группы пунктов](#группы-пунктов-меню)
 - [Размер меню](#размер-меню)
 - [Закрыть по клику за пределами](#закрыть-меню-по-клику-по-внешней-области)
+- [Мобильный вид](#мобильный-вид)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример](#пример)
@@ -568,6 +570,34 @@ export const ContextMenuExampleOutsideClick = () => {
 
 <ContextMenuExampleOutsideClick />
 
+## Мобильный вид
+
+Включите мобильный вид через свойство `isMobile` и сможете полноценно пользоваться
+многоуровневым меню на усройсвах с маленьким экраном.
+
+```tsx
+const ContextMenuExampleMobile = () => {
+  const buttonRef = useRef(null);
+  const [isOpen, setIsOpen] = useFlag();
+  return (
+    <>
+      <Button ref={buttonRef} label="Открыть" onClick={setIsOpen.toggle} />
+      <ContextMenu
+        isOpen={isOpen}
+        items={exampleItems}
+        groups={groups}
+        anchorRef={buttonRef}
+        onClickOutside={setIsOpen.off}
+        direction="upStartLeft"
+        isMobile
+      />
+    </>
+  );
+};
+```
+
+<ContextMenuExampleMobile />
+
 ## Импорт
 
 ```tsx
@@ -670,6 +700,7 @@ type Direction =
 | [`getGroupId?`](#группы-пунктов-меню)                          | `(group: GROUP) => number`                                                        | -                | Результат функции используется в качестве ключа группы                                                                                                               |
 | [`getGroupLabel?`](#группы-пунктов-меню)                       | `(group: GROUP) => string\|undefined`                                             | -                | Результат функции используется как заголовок группы                                                                                                                  |
 | [`sortGroup?`](#группы-пунктов-меню)                           | `(a: string, number; b: string, number) => number;`                               | -                | Функция сортировки групп                                                                                                                                             |
+| [`isMobile?`](#мобильный-вид)                                  | `boolean`                                                                         | -                | Включает мобильный вид                                                                                                                                               |
 | `className?`                                                   | `string`                                                                          | -                | Дополнительный CSS-класс для каждого уровня меню                                                                                                                     |
 
 ## Пример

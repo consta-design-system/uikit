@@ -84,7 +84,7 @@ export const MixPopoverAnimateExampleForCssTransition = () => {
           offset="xs"
           anchorRef={buttonRef}
           ref={popoverRef}
-          direction="upStartLeft"
+          direction="downStartLeft"
         >
           я появился плавно <br /> c анимацией 🔥
         </Popover>
