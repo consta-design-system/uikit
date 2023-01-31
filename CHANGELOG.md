@@ -1,5 +1,15 @@
 # Changelog
 
+## v4.8.0 (31/01/2023)
+Самое важное:
+- Добавили мобильный вид в `ContextMenu` и переработали анимацию раскрытия вложенных меню.
+---
+
+- [feat(ContextMenu): mobile view added (#2872)](https://github.com/consta-design-system/uikit/commit/a46494848d343ed2020bc61cdd37e33ef23394e9) - [@gizeasy](https://github.com/gizeasy)
+- [chore(deps): update @consta/icons and @consta/stand](https://github.com/consta-design-system/uikit/commit/3e08155f0dbf660418afce22a179cd8525231c27) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.7.1 (25/01/2023)
 - Доработали компонент `List` и дополнили документацию
 - Заменили собственные списки компонентов `AutoComplete`, `Combobox`, `Select`, `UserSelect`, `ContextMenu` на компонент `List`. Теперь списки будут выглядеть везде одинаково, а бандл станет меньше.
@@ -406,22 +416,3 @@ UserSelectDeprecated
 В пакете `v3.24.1` была критическая ошибка, используйте `v3.24.2`
 
 ---
---------------------
-
-## v3.24.1 (01/06/2022)
-Самое важное:
-- В `DragNDropField` добавили возможность локализации
-- Обновили тесты для `Table`, `DateTime`, `useKeys`, `Select`
-- Обновили документацию
-
----
-
-- [test(Table): add tests to Table (#2330)](https://github.com/consta-design-system/uikit/commit/653998a80a4b3c50c31bf2605b90a7de5c6dd96c) - [@vebessonova](https://github.com/vebessonova)
-- [feat(DragNDropField): add locale (#2314)](https://github.com/consta-design-system/uikit/commit/35ff97c63b41034712db1d208b208b029691d0f5) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Responses): add link to gpn-responses (#2346)](https://github.com/consta-design-system/uikit/commit/9eac0e09dc82199b959b3736bab4661620238d3d) - [@arhayka](https://github.com/arhayka)
-- [docs(Table): add links to other tables (#2345)](https://github.com/consta-design-system/uikit/commit/d8e4de56d5ff1f22027e3621297d6819b6a58abc) - [@arhayka](https://github.com/arhayka)
-- [docs(Header): add links to other headers (#2344)](https://github.com/consta-design-system/uikit/commit/0800da60c7a248ee79135de12f9c921763dccb28) - [@arhayka](https://github.com/arhayka)
-- [test(DateTime): add tests to DateTime (#2337)](https://github.com/consta-design-system/uikit/commit/1964cb7cf30e286c0fd4f274406edaa57209e767) - [@loel001](https://github.com/loel001)
-- [test(useKeys): add tests to useKeys (#2328)](https://github.com/consta-design-system/uikit/commit/513d786d923d0369af0819bda3098bdb9f61385f) - [@loel001](https://github.com/loel001)
-- [test(Select): add tests to Select (#2329)](https://github.com/consta-design-system/uikit/commit/50d9f45273c78313c8696ebdc5786d2443d625d4) - [@loel001](https://github.com/loel001)
-- [fix(Popover): fixed change position (#2335)](https://github.com/consta-design-system/uikit/commit/2503a1c455182ef4954d8589a1ae07429f941ab8) - [@gizeasy](https://github.com/gizeasy)
