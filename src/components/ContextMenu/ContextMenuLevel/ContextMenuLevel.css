@@ -1,20 +1,79 @@
-.ContextMenuLevelCanary {
+.Popover.ContextMenuLevel-Desktop {
   visibility: hidden;
   width: 240px;
 
-  &:not(&_firstLevel)&_direction {
-    &_rightStartUp,
-    &_leftStartUp {
+  &:not(&_firstLevel)&:not(&_isMobile) {
+    &.MixPopoverAnimate_animate_entered.Popover_direction_rightStartUp,
+    &.MixPopoverAnimate_animate_entered.Popover_direction_leftStartUp,
+    &.MixPopoverAnimate_animate_entering.Popover_direction_rightStartUp,
+    &.MixPopoverAnimate_animate_entering.Popover_direction_leftStartUp {
       transform: translateY(calc(-1 * (var(--space-xs) + 1px)));
     }
 
-    &_rightStartDown,
-    &_leftStartDown {
+    &.MixPopoverAnimate_animate_entered.Popover_direction_rightStartDown,
+    &.MixPopoverAnimate_animate_entered.Popover_direction_leftStartDown,
+    &.MixPopoverAnimate_animate_entering.Popover_direction_rightStartDown,
+    &.MixPopoverAnimate_animate_entering.Popover_direction_leftStartDown {
       transform: translateY(calc(var(--space-xs) + 1px));
     }
   }
 
   &_visible {
     visibility: visible;
+  }
+}
+
+.ContextMenuLevel-Mobile {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 240px;
+}
+
+.ContextMenuWrapper_innerAnimation {
+  & .ContextMenuLevel-Mobile {
+    &_animate {
+      &_exited,
+      &_entering,
+      &_entered,
+      &_exiting {
+        pointer-events: none;
+        transition: transform 0.2s, opacity 0.2s;
+      }
+
+      &_entered {
+        pointer-events: all;
+      }
+
+      &_entered,
+      &_entering {
+        opacity: 1;
+        transform: translate(0);
+      }
+
+      &_exited {
+        opacity: 0;
+        transform: translate(100%);
+      }
+
+      &_exiting {
+        opacity: 0;
+        transform: translate(-100%);
+      }
+    }
+  }
+
+  &.ContextMenuWrapper_animationBack .ContextMenuLevel-Mobile {
+    &_animate {
+      &_exited {
+        transform: translate(-100%);
+      }
+
+      &_exiting {
+        transform: translate(100%);
+      }
+    }
   }
 }

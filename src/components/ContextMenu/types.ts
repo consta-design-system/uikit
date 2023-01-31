@@ -5,10 +5,15 @@ import {
   ListPropForm,
   listPropForm,
 } from '##/components/ListCanary';
+import { ComponentSize } from '##/hooks/useComponentSize';
+import { Animate } from '##/mixs/MixPopoverAnimate';
 
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
 import { PropsWithAsAttributes } from '../../utils/types/PropsWithAsAttributes';
-import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
+import {
+  PropsWithHTMLAttributes,
+  PropsWithHTMLAttributesAndRef,
+} from '../../utils/types/PropsWithHTMLAttributes';
 import { Direction, PopoverPropOffset, Position } from '../Popover/Popover';
 
 export const contextMenuSizes = ['m', 'xs', 's', 'l'] as const;
@@ -157,12 +162,17 @@ export type Level<ITEM> = {
   direction?: Direction;
   possibleDirections?: readonly Direction[];
   offset?: PopoverPropOffset;
-} & PositioningProps;
+  parent?: ITEM;
+  anchorRef?: React.RefObject<HTMLElement>;
+  position?: Position;
+};
 
 export type AddLevel<ITEM> = (params: {
   level: number;
   items: ITEM[];
+  parent?: ITEM;
   anchorRef?: React.RefObject<HTMLElement>;
+  position?: Position;
   activeItem: string;
 }) => void;
 
@@ -185,6 +195,7 @@ export type ContextMenuProps<
     onClickOutside?: ClickOutsideHandler;
     isOpen?: boolean;
     form?: ContextMenuForm;
+    isMobile?: boolean;
   } & MappersItem<ITEM> &
     MappersGroup<GROUP> &
     PositioningProps,
@@ -196,6 +207,22 @@ export type ContextMenuProps<
   (ITEM extends { label: ContextMenuItemDefault['label'] }
     ? {}
     : { getItemLabel: ContextMenuPropGetItemLabel<ITEM> });
+
+export type ContextMenuLevelsProps<
+  ITEM = ContextMenuItemDefault,
+  GROUP = ContextMenuGroupDefault,
+> = ContextMenuProps<ITEM, GROUP> & {
+  setComponentSize: React.Dispatch<React.SetStateAction<ComponentSize>>;
+  disableAnimationBack: () => void;
+  enableAnimationBack: () => void;
+};
+
+export type ContextMenuLevelsComponent = <
+  ITEM = ContextMenuItemDefault,
+  GROUP = ContextMenuGroupDefault,
+>(
+  props: ContextMenuLevelsProps<ITEM, GROUP>,
+) => React.ReactElement | null;
 
 export type ContextMenuComponent = <
   ITEM = ContextMenuItemDefault,
@@ -211,9 +238,14 @@ export type ContextMenuLevelProps<
   ContextMenuProps<ITEM, GROUP>,
   | 'subMenuDirection'
   | 'onClickOutside'
+  | 'setComponentSize'
+  | 'animationBack'
+  | 'disableAnimationBack'
+  | 'enableAnimationBack'
   | keyof MappersItem<ITEM>
   | keyof MappersGroup<GROUP>
 > & {
+  parent?: ITEM;
   levelDepth: number;
   addLevel: AddLevel<ITEM>;
   deleteLevel: (level: number) => void;
@@ -221,6 +253,7 @@ export type ContextMenuLevelProps<
   onSetDirection?: (direction: Direction) => void;
   hoveredParenLevel: number;
   setHoveredParenLevel: (level: number) => void;
+  animate: Animate;
 } & Required<MappersItem<ITEM>> &
   Required<MappersGroup<GROUP>>;
 
@@ -254,3 +287,44 @@ export type GetLevelsParams<ITEM> = {
   getItemSubMenu: ContextMenuPropGetItemSubMenu<ITEM>;
   getItemKey: ContextMenuPropGetItemKey<ITEM>;
 };
+
+export type ContextMenuWrapperProps = PropsWithHTMLAttributes<
+  {
+    children: React.ReactNode;
+    isOpen?: boolean;
+    isMobile?: boolean;
+    form?: ContextMenuForm;
+    onClickOutside?: ClickOutsideHandler;
+    spareDirection?: Direction;
+    possibleDirections?: readonly Direction[];
+    size?: ContextMenuPropSize;
+    direction?: Direction;
+    offset?: PopoverPropOffset;
+    anchorRef?: React.RefObject<HTMLElement>;
+    position?: Position;
+    onSetDirection?: (direction: Direction) => void;
+    className?: string;
+    animationBack?: boolean;
+  },
+  HTMLDivElement
+>;
+
+export type ContextMenuLevelWrapperProps = PropsWithHTMLAttributesAndRef<
+  {
+    children: React.ReactNode;
+    isOpen?: boolean;
+    isMobile?: boolean;
+    form?: ContextMenuForm;
+    onClickOutside?: ClickOutsideHandler;
+    spareDirection?: Direction;
+    possibleDirections?: readonly Direction[];
+    size?: ContextMenuPropSize;
+    direction?: Direction;
+    offset?: PopoverPropOffset;
+    anchorRef?: React.RefObject<HTMLElement>;
+    position?: Position;
+    onSetDirection?: (direction: Direction) => void;
+    classname?: string;
+  },
+  HTMLDivElement
+>;

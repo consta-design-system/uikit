@@ -39,11 +39,10 @@ import {
   animateTimeout,
 } from '@consta/uikit/MixPopoverAnimate';
 
-export const MixPopoverAnimateExample = () => {
+export const MixPopoverAnimateExampleRenderFn = () => {
   const [open, setOpen] = useFlag();
   const popoverRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [direction, setDirection] = useState<Direction | undefined>();
 
   return (
     <>
@@ -57,12 +56,11 @@ export const MixPopoverAnimateExample = () => {
         {(animate) => {
           return (
             <Popover
-              className={cnMixPopoverAnimate({ direction, animate })}
-              offset={8}
+              className={cnMixPopoverAnimate({ animate })}
+              offset="xs"
               anchorRef={buttonRef}
               ref={popoverRef}
               direction="downStartLeft"
-              onSetDirection={setDirection}
             >
               я появился плавно <br /> c анимацией 🔥
             </Popover>

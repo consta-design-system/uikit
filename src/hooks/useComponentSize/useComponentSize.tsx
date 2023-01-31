@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 
 import { useResizeObserved } from '../useResizeObserved/useResizeObserved';
 
-type ComponentSize = {
+export type ComponentSize = {
   width: number;
   height: number;
 };
 
-const getElementSize = (
+export const getElementSize = (
   el: HTMLElement | SVGGraphicsElement | null,
 ): ComponentSize => {
   if (!el) {

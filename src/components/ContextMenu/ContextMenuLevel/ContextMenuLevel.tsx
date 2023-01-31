@@ -1,15 +1,25 @@
 import './ContextMenuLevel.css';
 
+import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
 import { IconArrowRight } from '@consta/icons/IconArrowRight';
 import React, { forwardRef, useEffect } from 'react';
 
-import { cnListBox, List, mapIconSize } from '##/components/ListCanary';
-import { Popover } from '##/components/Popover';
+import {
+  cnListBox,
+  List,
+  ListDivider,
+  ListItem,
+  mapIconSize,
+  mapVerticalSpase,
+} from '##/components/ListCanary';
 import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag/useFlag';
 import { useRefs } from '##/hooks/useRefs/useRefs';
+import { cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
+import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
+import { ContextMenuLevelWrapper } from '../ContextMenuLevelWrapper';
 import {
   contextMenuDefaultSize,
   ContextMenuItemDefault,
@@ -17,7 +27,7 @@ import {
   ContextMenuLevelProps,
 } from '../types';
 
-export const cnContextMenuLevel = cn('ContextMenuLevelCanary');
+export const cnContextMenuLevel = cn('ContextMenuLevel');
 
 let timers: ReturnType<typeof setTimeout>[] = [];
 export function clearTimers() {
@@ -39,6 +49,7 @@ const ContextMenuLevelRender = (
     groups: groupsProp,
     className,
     form = 'default',
+    animate,
     // Свойства относящиеся к меню
     levelDepth,
     activeItem,
@@ -48,6 +59,10 @@ const ContextMenuLevelRender = (
     hoveredParenLevel,
     sortGroup,
     onItemClick,
+    isOpen,
+    parent,
+    isMobile,
+
     // Свойства для поповера
     direction,
     possibleDirections,
@@ -72,14 +87,12 @@ const ContextMenuLevelRender = (
     // Геттеры для GROUP
     getGroupLabel,
     getGroupId,
-
     ...otherProps
   } = props;
 
   const [hovered, setHovered] = useFlag(false);
-  // скрываем блок пока не найдем тоную позицию для оображения
-  const [visible, setVisible] = useFlag(false);
 
+  const [visible, setVisible] = useFlag(false);
   const setVisibleTrue = useDebounce(setVisible.on, 20);
 
   const getKey = (item: ContextMenuItemDefault) =>
@@ -101,62 +114,98 @@ const ContextMenuLevelRender = (
     return () => clearTimeout(timers[levelDepth]);
   }, [hovered, hoveredParenLevel]);
 
-  const onMouseEnter =
-    (
-      item: ContextMenuItemDefault,
-    ): JSX.IntrinsicElements['div']['onMouseEnter'] =>
-    (e) => {
-      const subMenu = getItemSubMenu(item);
-      const disabled = getItemDisabled(item);
-      const onMouseEnter = getItemAttributes(item)
-        ?.onMouseEnter as JSX.IntrinsicElements['div']['onMouseEnter'];
+  useEffect(() => {
+    if (!isOpen) {
+      clearTimeout(timers[levelDepth]);
+    }
+  }, [isOpen]);
 
-      onMouseEnter?.(e);
+  const addCurrentLevel = (item: ContextMenuItemDefault) => {
+    const subMenu = getItemSubMenu(item);
+    const disabled = getItemDisabled(item);
 
-      if (Array.isArray(subMenu) && !disabled) {
-        const key = getKey(item);
-        addLevel({
-          level: levelDepth + 1,
-          items: subMenu,
-          anchorRef: itemsRefs[key],
-          activeItem: key,
-        });
-        setHoveredParenLevel(levelDepth + 1);
-      } else {
-        setHoveredParenLevel(levelDepth);
-      }
-    };
+    if (Array.isArray(subMenu) && !disabled) {
+      const key = getKey(item);
+      addLevel({
+        level: levelDepth + 1,
+        items: subMenu,
+        anchorRef: itemsRefs[key],
+        activeItem: key,
+        parent: item,
+      });
+      setHoveredParenLevel(levelDepth + 1);
+    } else {
+      setHoveredParenLevel(levelDepth);
+    }
+  };
+
+  const onMouseEnter = isMobile
+    ? undefined
+    : (
+          item: ContextMenuItemDefault,
+        ): JSX.IntrinsicElements['div']['onMouseEnter'] =>
+        (e) => {
+          addCurrentLevel(item);
+          const onMouseEnter = getItemAttributes(item)
+            ?.onMouseEnter as JSX.IntrinsicElements['div']['onMouseEnter'];
+
+          onMouseEnter?.(e);
+        };
+
+  const firstLevel = levelDepth === 0;
 
   return (
-    <Popover
+    <ContextMenuLevelWrapper
       anchorRef={anchorRef}
-      className={cnContextMenuLevel(
-        { firstLevel: levelDepth === 0, direction, visible },
-        [cnListBox({ size, form, border: true, shadow: true }), className],
-      )}
+      className={
+        isMobile
+          ? cnContextMenuLevel('Mobile', { animate }, [className])
+          : cnContextMenuLevel('Desktop', { firstLevel, visible }, [
+              cnListBox({ size, form, border: true, shadow: true }),
+              cnMixSpace({
+                pV: mapVerticalSpase[size],
+              }),
+              cnMixPopoverAnimate({ animate }),
+              firstLevel ? className : undefined,
+            ])
+      }
       possibleDirections={possibleDirections}
       spareDirection={spareDirection}
       direction={direction}
       offset={offset}
       onSetDirection={(item) => {
+        // скрываем блок пока не найдем точную позицию для оображения
         setVisibleTrue();
         onSetDirection?.(item);
       }}
       onMouseEnter={setHovered.on}
       onMouseLeave={setHovered.off}
       ref={ref}
+      isMobile={isMobile}
       {...otherProps}
     >
+      {parent && (
+        <>
+          <ListItem
+            label={getItemLabel(parent)}
+            size={size}
+            leftIcon={IconArrowLeft}
+            onClick={() => deleteLevel(levelDepth)}
+          />
+          <ListDivider size={size} space={{ mV: mapVerticalSpase[size] }} />
+        </>
+      )}
       <List
         size={size}
         items={items}
         getItemLabel={getItemLabel}
-        onItemClick={
-          onItemClick
-            ? (item, { e }) =>
-                onItemClick({ item, e: e as React.MouseEvent<HTMLDivElement> })
-            : undefined
-        }
+        onItemClick={(item, { e }) => {
+          isMobile && addCurrentLevel(item);
+          onItemClick?.({
+            item,
+            e: e as React.MouseEvent<HTMLDivElement>,
+          });
+        }}
         sortGroup={sortGroup ? (a, b) => sortGroup(a.key, b.key) : undefined}
         getItemOnClick={
           getItemOnClick
@@ -168,11 +217,14 @@ const ContextMenuLevelRender = (
             : undefined
         }
         getItemAs={getItemAs}
-        getItemAttributes={(item) =>
-          ({
-            ...getItemAttributes(item),
-            onMouseEnter: onMouseEnter(item),
-          } as JSX.IntrinsicElements[keyof JSX.IntrinsicElements])
+        getItemAttributes={
+          onMouseEnter
+            ? (item) =>
+                ({
+                  ...getItemAttributes(item),
+                  onMouseEnter: onMouseEnter(item),
+                } as JSX.IntrinsicElements[keyof JSX.IntrinsicElements])
+            : getItemAttributes
         }
         getItemGroupKey={getItemGroupId}
         getItemLeftIcon={getItemLeftIcon}
@@ -197,7 +249,7 @@ const ContextMenuLevelRender = (
         getItemActive={(item) => getKey(item) === activeItem}
         innerOffset={form === 'round' ? 'increased' : 'normal'}
       />
-    </Popover>
+    </ContextMenuLevelWrapper>
   );
 };
 

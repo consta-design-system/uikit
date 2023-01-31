@@ -1,4 +1,4 @@
-.ContextMenuGroupHeader {
+.ContextMenuGroupHeaderDeprecated {
   --top-space: 0;
   --bottom-space: 0;
   margin: 0 var(--space-s);

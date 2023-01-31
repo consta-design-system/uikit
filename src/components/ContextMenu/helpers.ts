@@ -1,10 +1,8 @@
-import { IconPropSize } from '@consta/icons/Icon';
-
 import { isNotNil } from '../../utils/type-guards';
-import { TextPropSize } from '../Text/Text';
 import {
   ContextMenuGroupDefault,
   ContextMenuItemDefault,
+  ContextMenuLevelsProps,
   ContextMenuPropGetGroupId,
   ContextMenuPropGetGroupLabel,
   ContextMenuPropGetItemAs,
@@ -20,11 +18,8 @@ import {
   ContextMenuPropGetItemRightSide,
   ContextMenuPropGetItemStatus,
   ContextMenuPropGetItemSubMenu,
-  ContextMenuProps,
-  ContextMenuPropSize,
   GetLevelsParams,
   Level,
-  MappersGroup,
 } from './types';
 
 const defaultGetItemKey: ContextMenuPropGetItemKey<ContextMenuItemDefault> = (
@@ -75,7 +70,7 @@ const defaultGetGroupLabel: ContextMenuPropGetGroupLabel<
 > = (group) => group.label;
 
 export function withDefaultGetters<ITEM, GROUP>(
-  props: ContextMenuProps<ITEM, GROUP>,
+  props: ContextMenuLevelsProps<ITEM, GROUP>,
 ) {
   return {
     ...props,
@@ -96,17 +91,6 @@ export function withDefaultGetters<ITEM, GROUP>(
     getGroupLabel: props.getGroupLabel || defaultGetGroupLabel,
   };
 }
-
-export const getGroup = <GROUP>(
-  group: GROUP,
-  props: Required<MappersGroup<GROUP>>,
-) => {
-  const { getGroupId, getGroupLabel } = props;
-  return {
-    id: getGroupId(group),
-    name: getGroupLabel(group),
-  };
-};
 
 const findItem = <ITEM>(
   params: Omit<GetLevelsParams<ITEM>, 'levels'> & {
@@ -153,21 +137,4 @@ export const getLevels = <ITEM>(
       )
       .filter(isNotNil),
   }));
-};
-
-export const getItemIndex = (groupId: number | string, itemIndex: number) =>
-  `${groupId}-${itemIndex}`;
-
-export const sizeMapHeader: Record<ContextMenuPropSize, TextPropSize> = {
-  xs: '2xs',
-  s: '2xs',
-  m: 'xs',
-  l: 's',
-};
-
-export const sizeMapIcon: Record<ContextMenuPropSize, IconPropSize> = {
-  xs: 'xs',
-  s: 's',
-  m: 's',
-  l: 's',
 };

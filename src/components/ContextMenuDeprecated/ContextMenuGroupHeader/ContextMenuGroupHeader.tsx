@@ -7,7 +7,7 @@ import { getByMap } from '../../../utils/getByMap';
 import { Text, TextPropSize } from '../../Text/Text';
 import { contextMenuDefaultSize, ContextMenuPropSize } from '../helpers';
 
-export const cnContextMenuGroupHeader = cn('ContextMenuGroupHeader');
+export const cnContextMenuGroupHeader = cn('ContextMenuGroupHeaderDeprecated');
 
 const sizeMap: Record<ContextMenuPropSize, TextPropSize> = {
   s: '2xs',

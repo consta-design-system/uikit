@@ -14,7 +14,7 @@ import {
   ContextMenuPropSize,
 } from '../helpers';
 
-export const cnContextMenuLevel = cn('ContextMenuLevel');
+export const cnContextMenuLevel = cn('ContextMenuLevelDeprecated');
 
 function renderHeader(
   groupLabel: string | number | undefined,

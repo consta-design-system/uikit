@@ -71,6 +71,7 @@ const Variants = () => {
   const withRightIcon = useBoolean('withRightIcon', false);
   const withRightSide = useBoolean('withRightSide', false);
   const disabled = useBoolean('withDisabledItems', false);
+  const isMobile = useBoolean('isMobile', false);
 
   const [items, setItems] = useState<Item[]>(exampleItems);
 
@@ -195,6 +196,7 @@ const Variants = () => {
         offset="xs"
         style={{ zIndex: 100 }}
         form={form}
+        isMobile={isMobile}
       />
     </div>
   );
