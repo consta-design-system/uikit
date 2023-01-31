@@ -1723,26 +1723,21 @@
   resolved "https://registry.yarnpkg.com/@consta/header/-/header-1.0.0.tgz#95e3db57857a10aad4c5214c39884630495fc970"
   integrity sha512-JM/JWRxsbBnh2a8Wn99ly8ub0Rrwf17IolU3TFTJd8uj1230n3P5kbdfPXdVMnq38i16k1fD6ubxenLN0612YQ==
 
-"@consta/icons@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.0.2.tgz#96269b3538bc63d1fbc92d6b803e497b572f1689"
-  integrity sha512-ZEJlBP0/eQYkO9k71+nv2NsL21w+ftsxwxIh9xuqAOHeLYc5yI2ZxZaqaawgGMK/m5QG4UiX3qMqXYzolRpaXg==
-
 "@consta/icons@^0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.1.1.tgz#454461a9acf3dc8b42e1654b4298e5f929c42937"
   integrity sha512-55NsjyaXFuYyr6CiptXuFMe/AUd7HMs8IgSaOGfV+wbMbSVg88u8dwJ5km3sPaHNFiD0vg8FNqGFc1F37K18zQ==
 
-"@consta/stand@^0.0.97":
-  version "0.0.97"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.97.tgz#4dfbd923269c87023e9885d5a650b613ce586467"
-  integrity sha512-x2UBnBAkZDMpdl3p3e9JZQOM530/BcAz+4VPazKzfCjff9gbKf6MEGEqR52bbS4niavMuDlRtVBD4v2z8I4t4Q==
+"@consta/stand@^0.0.98":
+  version "0.0.98"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.98.tgz#8dbb989ca7683f0806f35585254a36582df236dc"
+  integrity sha512-EBy1RGSd/f7o1CIkHdB72BbYelof93Dw2BRmv6dvo9tPhwz1sbZN56yrThXKk6ou5cDHV1iFS1bu3h0Tqzbmcw==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"
     "@consta/header" "^1.0.0"
     "@consta/icons" "^0.1.1"
-    "@consta/uikit" "^4.7.1"
+    "@consta/uikit" "^4.8.0"
     "@mdx-js/loader" "^2.1.5"
     "@mdx-js/react" "^2.1.5"
     "@oclif/command" "^1.8.16"
@@ -1810,14 +1805,14 @@
     webpack-manifest-plugin "^4.0.2"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/uikit@^4.7.1":
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-4.7.1.tgz#1c5728514142d484bbcf2632707e06922a3facc6"
-  integrity sha512-oq4C9qtwixjHLP3yQAwWD5zSdPlrlxTwNuXuYHHCmdhPiZb689OVtOiByEgJ0K3ap0AyCOrB7FWONKS1DDdCFw==
+"@consta/uikit@^4.8.0":
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-4.8.0.tgz#7901a2b4af51032c29f709ef7d377c4a7063a3a1"
+  integrity sha512-yu81EySk+Xz+Hm51Io/ERCIeZsnRND0ExS+4CBwU02zI2YsXR0i3oUIi3ts0aM+kl7f1CP3Dy5OVJ3/97Eev4g==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"
-    "@consta/icons" "^0.0.2"
+    "@consta/icons" "^0.1.1"
     compute-scroll-into-view "^1.0.17"
     date-fns "^2.29.1"
     focus-trap-react "8.7.0"
