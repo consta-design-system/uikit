@@ -29,7 +29,7 @@ export type AvatarGroupProps<ITEM = AvatarGroupDefaultItem> =
     {
       children?: never;
       items?: ITEM[];
-      visibleCount?: number;
+      visibleCount?: number | 'auto';
       getItemUrl?: AvatarGroupPropGetItemUrl<ITEM>;
       getItemName?: AvatarGroupPropGetItemName<ITEM>;
       size?: AvatarGroupPropSize;
