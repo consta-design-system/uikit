@@ -63,5 +63,7 @@ export const useHideElementsInLine = <
     visibleMap: map,
     elementsRefs,
     parentRef,
+    elementsSizes,
+    parentSize,
   };
 };
