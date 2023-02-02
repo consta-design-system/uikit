@@ -1,16 +1,18 @@
 import './Attachment.variants.css';
 
 import { IconTrash } from '@consta/icons/IconTrash';
-import { useBoolean, useNumber, useText } from '@consta/stand';
+import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React from 'react';
 
 import { cn } from '##/utils/bem';
 
 import { Attachment } from '../Attachment';
+import { attachmentPropSize, attachmentPropSizeDefault } from '../types';
 
 const cnAttachmentVariants = cn('AttachmentVariants');
 
 const Variants = () => {
+  const size = useSelect('size', attachmentPropSize, attachmentPropSizeDefault);
   const fileName = useText('fileName', 'Приложенный документ');
   const fileDescription = useText(
     'fileDescription',
@@ -27,6 +29,7 @@ const Variants = () => {
     <Attachment
       className={cnAttachmentVariants()}
       loading={loading}
+      size={size}
       loadingText={loadingText}
       fileName={fileName}
       loadingProgress={loadingProgress}

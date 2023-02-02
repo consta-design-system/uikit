@@ -12,6 +12,7 @@ import { AttachmentExampleDescription } from './examples/AttachmentExampleDescri
 import { AttachmentExampleIcon } from './examples/AttachmentExampleIcon/AttachmentExampleIcon';
 import { AttachmentExampleName } from './examples/AttachmentExampleName/AttachmentExampleName';
 import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentExampleAs';
+import { AttachmentExampleSize } from './examples/AttachmentExampleSize/AttachmentExampleSize';
 
 ```tsx
 import { Attachment } from '@consta/uikit/Attachment';
@@ -29,6 +30,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 - [Обработка событий](#обработка-событий)
   - [По клику на кнопку](#по-клику-на-кнопку)
   - [По клику на компонент](#по-клику-на-компонент)
+- [Размер](#размер)
 - [Тег для компонента](#тег-для-компонента)
 - [Импорт](#импорт)
 - [Список свойств](#список-свойств)
@@ -201,6 +203,31 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 <AttachmentExampleEvents />
 
+## Размер
+
+За размер компонента отвечает свойство `size`.
+Возможные значения: `xs`, `s` и `m`. Значение по умолчанию `s`.
+
+```tsx
+<Attachment
+  size="xs"
+  fileName="Инструкция по сборке марсохода"
+  fileExtension="pdf"
+/>
+<Attachment
+  size="s"
+  fileName="Инструкция по сборке марсохода"
+  fileExtension="pdf"
+/>
+<Attachment
+  size="m"
+  fileName="Инструкция по сборке марсохода"
+  fileExtension="pdf"
+/>
+```
+
+<AttachmentExampleSize />
+
 ## Тег для компонента
 
 Свойство `as` отвечает за тег, в который `Attachment` оборачивается в HTML-документе.
@@ -229,6 +256,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 | Свойство                                  | Тип                                     | По умолчанию | Описание                                                         |
 | ----------------------------------------- | --------------------------------------- | ------------ | ---------------------------------------------------------------- |
+| [`size?`](#размер)                        | `'xs', 's', 'm'`                        | `'s'`        | Размер компонента                                                |
 | [`fileName`](#название)                   | `string`                                | -            | Название файла файла                                             |
 | [`fileDescription`](#описание)            | `string`                                | -            | Описание файла файла                                             |
 | [`fileExtension`](#иконка)                | `string`                                | -            | Расширение файла файла                                           |

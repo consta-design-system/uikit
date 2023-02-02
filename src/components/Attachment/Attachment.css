@@ -3,15 +3,15 @@
   flex-direction: row;
   box-sizing: border-box;
   width: 100%;
-  padding: var(--space-2xs) var(--space-xs);
+  padding: var(--space-xs);
   background: var(--color-control-bg-clear);
   border-radius: var(--control-radius);
   text-decoration: none;
-  transition: background 0.2s ease;
+  transition: background-color 0.2s ease;
 
   &-File {
     flex: none;
-    margin: var(--space-2xs) var(--space-xs) var(--space-2xs) 0;
+    margin-right: var(--space-xs);
     transition: opacity 0.2s;
 
     &_error {
@@ -28,8 +28,11 @@
   &-Content {
     overflow: hidden;
     flex: 1;
-    margin-top: var(--space-3xs);
     word-wrap: break-word;
+
+    & > .Text:not(:first-child) {
+      margin-top: var(--space-2xs);
+    }
 
     &:not(:last-child) {
       margin-right: var(--space-xs);
@@ -45,8 +48,6 @@
   }
 
   &_withOnButtonAction {
-    padding: var(--space-2xs) var(--space-2xs) var(--space-2xs) var(--space-xs);
-
     &:hover &-Button {
       opacity: 1;
     }
