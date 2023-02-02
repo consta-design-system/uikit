@@ -19,20 +19,26 @@ type Props = {
   size?: AvatarPropSize;
   form?: AvatarPropForm;
   children?: never;
+  monochrome?: boolean;
 };
 
 export const cnAvatar = cn('Avatar');
 
 const MAX_COLOR_INDEX = 17;
 
-function getRandomInt(max: number) {
+const getRandomInt = (max: number) => {
   return Math.floor(Math.random() * Math.floor(max));
-}
+};
 
 export const getColorIndexForName = (
   name: string | undefined,
-  maxIndex: number | undefined = MAX_COLOR_INDEX,
+  maxIndex: number = MAX_COLOR_INDEX,
+  monochrome?: boolean,
 ) => {
+  if (monochrome) {
+    return MAX_COLOR_INDEX + 1;
+  }
+
   let index = 0;
 
   if (name) {
@@ -68,26 +74,33 @@ export const Avatar = forwardRefWithAs<Props>((props, ref) => {
     form = avatarPropFormDefault,
     url,
     name,
+    monochrome,
+    style,
     ...otherProps
   } = props;
   const Tag = as as string;
-  const showImage = Boolean(url);
   const initials = useMemo(() => getInitialsForName(name), [name]);
-  const colorIndex = useMemo(() => getColorIndexForName(name), [name]);
+  const colorIndex = useMemo(
+    () => getColorIndexForName(name, MAX_COLOR_INDEX, monochrome),
+    [name, monochrome],
+  );
 
   return (
     <Tag
       {...otherProps}
       style={
-        !showImage
-          ? { '--avatar-color': `var(--avatar-color-${colorIndex})` }
-          : {}
+        !url
+          ? { ...style, '--avatar-color': `var(--avatar-color-${colorIndex})` }
+          : style
       }
-      className={cnAvatar({ size, form }, [className])}
+      className={cnAvatar(
+        { size, form, monochrome: url ? monochrome : undefined },
+        [className],
+      )}
       ref={ref}
     >
-      {showImage && <img className={cnAvatar('Image')} src={url} alt={name} />}
-      {!showImage && initials}
+      {url && <img className={cnAvatar('Image')} src={url} alt={name} />}
+      {!url && initials}
     </Tag>
   );
 });

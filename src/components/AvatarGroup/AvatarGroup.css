@@ -1,5 +1,7 @@
 .AvatarGroup {
   display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
   width: 100%;
 
   &_size {
@@ -24,7 +26,7 @@
     flex: none;
     box-shadow: 0 0 0 var(--space-3xs) var(--color-bg-default);
 
-    &:not(:first-child) {
+    &:not(:last-child) {
       margin-left: calc(-1 * var(--avatar-group-margin));
     }
   }
@@ -34,6 +36,7 @@
     position: absolute;
     left: -300vw;
     visibility: hidden;
+    pointer-events: none;
   }
 
   &-More.Avatar {

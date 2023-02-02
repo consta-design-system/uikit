@@ -18,6 +18,9 @@
   --avatar-color-15: #00a352;
   --avatar-color-16: #1abc1a;
   --avatar-color-17: #6fb80a;
+
+  /* последний цвет должен быть для модификации _monochrome */
+  --avatar-color-18: #70788b;
   overflow: hidden;
   width: var(--avatar-size);
   height: var(--avatar-size);
@@ -30,6 +33,7 @@
   line-height: var(--avatar-size);
   text-align: center;
   letter-spacing: 0.1em;
+  filter: grayscale(0%);
 
   &_size {
     &_xs {
@@ -65,6 +69,10 @@
     &_default {
       border-radius: var(--control-radius);
     }
+  }
+
+  &_monochrome {
+    filter: grayscale(100%);
   }
 
   &-Image {
