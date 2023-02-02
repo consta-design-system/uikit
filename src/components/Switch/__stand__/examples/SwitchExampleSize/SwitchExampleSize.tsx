@@ -7,6 +7,7 @@ const emptyFunction = () => {};
 
 export const SwitchExampleSize = () => (
   <Example>
+    <Switch size="xs" label="Размер XS" checked onChange={emptyFunction} />
     <Switch size="s" label="Размер S" checked onChange={emptyFunction} />
     <Switch
       size="m"

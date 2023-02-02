@@ -5,6 +5,17 @@
   cursor: pointer;
 
   &_size {
+    &_xs {
+      --box-width: 20px;
+      --box-height: 12px;
+      --switch-font-size: var(--control-text-size-xs);
+      --offset: var(--space-2xs);
+
+      .Switch-Input::before {
+        transform: translateX(-8px);
+      }
+    }
+
     &_s {
       --box-width: 28px;
       --box-height: 16px;
