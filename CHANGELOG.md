@@ -1,5 +1,21 @@
 # Changelog
 
+## v4.9.0 (02/02/2023)
+Самое важное:
+
+- Теперь `AvatarGroup` может подстраивать количество аватарок под ширину родителя.
+- В `Attachment` добавили свойство `size`.
+
+---
+
+- [feat(AvatarGroup): add visibleCount='auto' (#2881)](https://github.com/consta-design-system/uikit/commit/7e985b0d6c6a4d6f17815f214c980d0bac817ca7) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Attachment): add prop size (#2882)](https://github.com/consta-design-system/uikit/commit/2e05b41020520fb1d9244d16f55bad6ca1a8a831) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Table): fix bug with excluding in calculations previous state (#2877)](https://github.com/consta-design-system/uikit/commit/685024043045074fe01af43a4835801a390b1f98) - [@N1MBER](https://github.com/N1MBER)
+- [docs(sandbox): add links to sandbox for a few components and hooks (#2876)](https://github.com/consta-design-system/uikit/commit/d3f9450afb472c6a24963b07000cab6619305ab3) - [@N1MBER](https://github.com/N1MBER)
+- [chore(deps): update @consta/stand](https://github.com/consta-design-system/uikit/commit/9cd4a1569a6975eb83c502705647fc246ca53499) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.8.0 (31/01/2023)
 Самое важное:
 - Добавили мобильный вид в `ContextMenu` и переработали анимацию раскрытия вложенных меню.
@@ -408,11 +424,3 @@ UserSelectDeprecated
 - [docs(DragNDropField): edit docs for local (#2360)](https://github.com/consta-design-system/uikit/commit/9cdeddcb7cfb37d46588c5f7cfdfcfa883285fcc) - [@arhayka](https://github.com/arhayka)
 - [feat(DragNDropField): add disabled (#2358)](https://github.com/consta-design-system/uikit/commit/6929db5f81db17db8faa0f380804cce51c9191aa) - [@gizeasy](https://github.com/gizeasy)
 - [feat(TextField): add type password and resech (#2355)](https://github.com/consta-design-system/uikit/commit/b3230fabff9e9e107004931d453e4e09c3118668) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.24.2 (02/06/2022)
-Самое важное:
-В пакете `v3.24.1` была критическая ошибка, используйте `v3.24.2`
-
----
