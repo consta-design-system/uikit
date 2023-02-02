@@ -33,11 +33,14 @@ const AvatarGroupRender = (
     ...otherProps
   } = withDefaultGetters(props);
 
-  const { elementsRefs, parentRef, visibleMap } = useHideElementsInLine(
-    items.length + 1,
-  );
+  const elementsLength = items.length + 1;
 
-  const avatarGroupRef = useForkRef([parentRef, ref]);
+  const { elementsRefs, parentRef, visibleMap } = useHideElementsInLine(
+    elementsLength,
+    elementsLength - 1,
+    0,
+    [visibleCount],
+  );
 
   const autoMode = visibleCount === 'auto';
 
@@ -46,7 +49,7 @@ const AvatarGroupRender = (
   return (
     <div
       className={cnAvatarGroup({ size })}
-      ref={avatarGroupRef}
+      ref={useForkRef([parentRef, ref])}
       {...otherProps}
     >
       {itemsForRender.map((item, index) => {
@@ -68,10 +71,10 @@ const AvatarGroupRender = (
         <div
           className={cnAvatar({ size, form }, [
             cnAvatarGroup('More', {
-              hidden: !visibleMap[items.length] && autoMode,
+              hidden: !visibleMap[elementsLength - 1] && autoMode,
             }),
           ])}
-          ref={elementsRefs[items.length]}
+          ref={elementsRefs[elementsLength - 1]}
         >
           {`+${
             autoMode ? getHiddenCount(visibleMap) : items.length - visibleCount

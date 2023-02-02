@@ -22,8 +22,9 @@ export const useHideElementsInLine = <
   length: number,
   moreIndex = length - 1,
   busy = 0,
+  deps: unknown[] = [],
 ) => {
-  const elementsRefs = useRefs<ELEMENT>(length);
+  const elementsRefs = useRefs<ELEMENT>(length, deps);
   const parentRef = useRef<PARENT>(null);
   const parentSize = useComponentSize(parentRef).width;
   const elementsSizes = useResizeObserved(elementsRefs, (el) => {
