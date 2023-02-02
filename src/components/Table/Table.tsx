@@ -713,7 +713,11 @@ const InternalTable = <T extends TableRow>(
     };
   };
 
-  const getExpandedRows = (rows: T[], defaultExpandAll?: boolean): string[] => {
+  const getExpandedRows = (
+    rows: T[],
+    depth: number,
+    defaultExpandAll?: boolean,
+  ): string[] => {
     let expandedIds: string[] = [];
     rows.forEach((row) => {
       if (
@@ -723,19 +727,26 @@ const InternalTable = <T extends TableRow>(
         expandedIds.push(row.id);
       }
       if (row.rows) {
-        const ids = getExpandedRows(row.rows as T[], defaultExpandAll);
+        const ids = getExpandedRows(
+          row.rows as T[],
+          depth + 1,
+          defaultExpandAll,
+        );
         expandedIds = [...expandedIds, ...ids];
         if (ids.length > 0 && expandedIds.indexOf(row.id) === -1) {
           expandedIds.push(row.id);
         }
       }
     });
-    return expandedIds;
+    return [
+      ...(depth === 0 ? expandedRowIds : []),
+      ...expandedIds.filter((id) => expandedRowIds.indexOf(id) === -1),
+    ];
   };
 
   useEffect(() => {
     if (rows) {
-      setExpandedRowIds(getExpandedRows(rows, defaultExpandAll));
+      setExpandedRowIds(getExpandedRows(rows, 0, defaultExpandAll));
     }
   }, [rows, defaultExpandAll]);
 
