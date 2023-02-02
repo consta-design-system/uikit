@@ -1,4 +1,4 @@
-import { useNumber, useSelect } from '@consta/stand';
+import { useBoolean, useNumber, useSelect } from '@consta/stand';
 import React from 'react';
 
 import { avatarGroupItems } from '../__mocks__/mock.data';
@@ -11,7 +11,8 @@ import {
 } from '../AvatarGroup';
 
 const Variants = () => {
-  const visibleCount = useNumber('visibleCount', 4);
+  const visibleCountAuto = useBoolean('visibleCountAuto');
+  const visibleCount = useNumber('visibleCount', 4, !visibleCountAuto);
 
   const size = useSelect(
     'size',
@@ -27,7 +28,7 @@ const Variants = () => {
 
   return (
     <AvatarGroup
-      visibleCount={visibleCount}
+      visibleCount={visibleCountAuto ? 'auto' : visibleCount}
       items={avatarGroupItems}
       size={size}
       form={form}

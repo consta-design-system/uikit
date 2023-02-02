@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
-import { useHideElementsInLine } from '../../hooks/useHideElementsInLine/useHideElementsInLine';
-import { useRefs } from '../../hooks/useRefs/useRefs';
-import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserved';
+import { useHideElementsInLine } from '##/hooks/useHideElementsInLineCanary';
+import { useRefs } from '##/hooks/useRefs';
+import { useResizeObserved } from '##/hooks/useResizeObserved';
 
 const useReadyToHideItems = <ITEM>(items: ITEM[]) =>
   useMemo(() => {
@@ -16,13 +16,13 @@ const getLastWidth = (
   wrapperWidth: number,
   fistWidth: number,
   itemsDimensions: number[],
-  hiddenItems: unknown[],
+  visibleMap: boolean[],
 ) => {
   const widthExceptLast =
     fistWidth +
     itemsDimensions.reduce(
       (previous, current, currentIndex) =>
-        previous + (hiddenItems[currentIndex] ? 0 : current),
+        previous + (!visibleMap[currentIndex] ? 0 : current),
       0,
     );
 
@@ -62,35 +62,41 @@ export const useElements = <ITEM>(items: ITEM[]) => {
     0,
   );
 
-  const { itemsDimensions, wrapperWidth, ...hideElementsInLineResult } =
-    useHideElementsInLine<ITEM, HTMLLIElement, HTMLUListElement>(
-      readyToHideItems,
+  const { elementsSizes, parentSize, visibleMap, parentRef, elementsRefs } =
+    useHideElementsInLine<HTMLLIElement, HTMLUListElement>(
+      readyToHideItems.length + 1,
+      0,
       noHideElementsSizeSum,
-      true,
     );
 
-  const elementsSizeSum =
-    noHideElementsSizeSum +
-    itemsDimensions.reduce((previous, current) => previous + current, 0);
-
   const lastWidth = getLastWidth(
-    wrapperWidth,
+    parentSize,
     noHideElementsSize[0],
-    itemsDimensions,
-    hideElementsInLineResult.hiddenItems,
+    elementsSizes,
+    visibleMap,
   );
 
-  const compression = getCompression(wrapperWidth);
+  const compression = getCompression(parentSize);
+
+  const hiddenItems = visibleMap
+    .map((element, index) => {
+      if (!element && index !== 0) {
+        return items[index];
+      }
+    })
+    .filter((item) => Boolean(item)) as ITEM[];
 
   return {
     firstItem,
     lastItem,
     readyToHideItems,
+    hiddenItems,
+    visibleMap,
     firstItemRef: noHideElementsRef[0],
     lastItemRef: noHideElementsRef[1],
     lastWidth,
     compression,
-    elementsSizeSum,
-    ...hideElementsInLineResult,
+    parentRef,
+    elementsRefs,
   };
 };

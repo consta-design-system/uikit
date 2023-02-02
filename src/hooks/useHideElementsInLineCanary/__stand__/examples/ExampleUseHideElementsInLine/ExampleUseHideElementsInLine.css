@@ -1,0 +1,17 @@
+.ExampleUseHideElementsInLine {
+  max-width: 700px;
+
+  &-Tag {
+    margin-right: var(--space-xs);
+
+    &_hidden.TagBase {
+      position: absolute;
+      left: -300vw;
+      visibility: hidden;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

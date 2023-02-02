@@ -30,17 +30,17 @@ export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent =
       firstItem,
       lastItem,
       readyToHideItems,
+      visibleMap,
+      elementsRefs,
+      parentRef,
       hiddenItems,
-      itemsRefs,
-      wrapperRef,
-      moreRef,
       firstItemRef,
       lastItemRef,
       lastWidth,
       compression,
     } = useElements(items);
 
-    const rootRef = useForkRef([ref, wrapperRef]);
+    const rootRef = useForkRef([ref, parentRef]);
 
     return (
       <ul
@@ -60,7 +60,7 @@ export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent =
           onItemClick={onItemClick}
           getItemSubMenu={getItemSubMenu}
           items={hiddenItems}
-          ref={moreRef}
+          ref={elementsRefs[0]}
           className={cnBreadcrumbsFitModeDropdown('Item', {
             removed: hiddenItems.length <= 0,
           })}
@@ -71,8 +71,8 @@ export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent =
             index,
             false,
             false,
-            itemsRefs[index],
-            !!hiddenItems[index],
+            elementsRefs[index + 1],
+            !visibleMap[index + 1],
           ),
         )}
         {renderItem(lastItem, 'last', false, true, lastItemRef)}
