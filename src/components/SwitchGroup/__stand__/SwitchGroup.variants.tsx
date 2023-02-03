@@ -1,16 +1,16 @@
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
+import {
+  switchPropSize,
+  switchPropSizeDefault,
+  switchPropView,
+  switchPropViewDefault,
+} from '##/components/Switch/types';
+
 import { cn } from '../../../utils/bem';
 import { SwitchGroup } from '../SwitchGroup';
-import {
-  switchGroupDefaultDirection,
-  switchGroupDefaultSize,
-  switchGroupDefaultView,
-  switchGroupDirections,
-  switchGroupSizes,
-  switchGroupViews,
-} from '../types';
+import { switchGroupDefaultDirection, switchGroupDirections } from '../types';
 
 const cnSwitchGroupVariants = cn('SwitchGroupVariants');
 
@@ -28,8 +28,8 @@ const items: Item[] = [
 ];
 
 const Variants = () => {
-  const size = useSelect('size', switchGroupSizes, switchGroupDefaultSize);
-  const view = useSelect('view', switchGroupViews, switchGroupDefaultView);
+  const size = useSelect('size', switchPropSize, switchPropSizeDefault);
+  const view = useSelect('view', switchPropView, switchPropViewDefault);
   const direction = useSelect(
     'direction',
     switchGroupDirections,

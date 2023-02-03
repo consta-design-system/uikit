@@ -4,13 +4,15 @@ import React, { forwardRef } from 'react';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { cn } from '../../utils/bem';
-import { Switch } from '../Switch/Switch';
+import {
+  Switch,
+  switchPropSizeDefault,
+  switchPropViewDefault,
+} from '../Switch';
 import { withDefaultGetters } from './helpers';
 import {
   SwitchGroupComponent,
   switchGroupDefaultDirection,
-  switchGroupDefaultSize,
-  switchGroupDefaultView,
   SwitchGroupProps,
 } from './types';
 
@@ -28,8 +30,8 @@ const SwitchGroupRender = (
     onChange,
     name,
     direction = switchGroupDefaultDirection,
-    size = switchGroupDefaultSize,
-    view = switchGroupDefaultView,
+    size = switchPropSizeDefault,
+    view = switchPropViewDefault,
     disabled = false,
     className,
     ...otherProps
