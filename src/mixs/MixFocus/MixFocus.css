@@ -1,4 +1,8 @@
 .MixFocus {
+  --mix-focus-color-one: var(--color-control-bg-focus);
+  --mix-focus-color-two: var(--color-control-bg-active);
+  --mix-focus-animation: Animation--MixFocus 0.5s ease-in;
+
   &:not(.MixFocus_before):focus,
   &:not(.MixFocus_before):focus:hover,
   &:not(.MixFocus_before)[class*='_focus'],
@@ -8,8 +12,8 @@
   &_before[class*='_focus']::before,
   &_before[class*='_focus']:hover::before {
     outline: none;
-    box-shadow: 0 0 0 3px var(--color-control-bg-focus);
-    animation: Animation--MixFocus 0.5s ease-in;
+    box-shadow: 0 0 0 3px var(--mix-focus-color-one);
+    animation: var(--mix-focus-animation);
   }
 
   &:not(.MixFocus_before):focus:active,
@@ -20,18 +24,18 @@
   &_before:focus:active:hover::before,
   &_before[class*='_focus']:active::before,
   &_before[class*='_focus']:active:hover::before {
-    animation-name: none !important;
+    animation: none;
   }
 }
 
 @keyframes Animation--MixFocus {
   from {
     box-shadow:
-      0 0 0 0 var(--color-control-bg-focus),
-      0 0 0 0 var(--color-control-bg-active);
+      0 0 0 0 var(--mix-focus-color-one),
+      0 0 0 0 var(--mix-focus-color-two);
   }
 
   to {
-    box-shadow: 0 0 0 3px var(--color-control-bg-focus), 0 0 0 6px transparent;
+    box-shadow: 0 0 0 3px var(--mix-focus-color-one), 0 0 0 6px transparent;
   }
 }
