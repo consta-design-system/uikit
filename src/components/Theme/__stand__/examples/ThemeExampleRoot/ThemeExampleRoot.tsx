@@ -4,7 +4,7 @@ import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { cn } from '../../../../../utils/bem';
-import { Switch, SwitchProps } from '../../../../Switch/Switch';
+import { Switch, SwitchProps } from '../../../../Switch';
 import {
   presetGpnDark,
   presetGpnDefault,

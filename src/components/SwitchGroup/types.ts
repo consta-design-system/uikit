@@ -1,4 +1,5 @@
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
+import { SwitchPropSize, SwitchPropView } from '../Switch/types';
 
 export type SwitchGroupDefaultItem = {
   label: string;
@@ -9,14 +10,6 @@ export const switchGroupDirections = ['column', 'row'] as const;
 export type SwitchGroupDirection = typeof switchGroupDirections[number];
 export const switchGroupDefaultDirection: SwitchGroupDirection =
   switchGroupDirections[0];
-
-export const switchGroupSizes = ['m', 'l'] as const;
-export type SwitchGroupPropSize = typeof switchGroupSizes[number];
-export const switchGroupDefaultSize: SwitchGroupPropSize = switchGroupSizes[0];
-
-export const switchGroupViews = ['primary', 'ghost'] as const;
-export type SwitchGroupPropView = typeof switchGroupViews[number];
-export const switchGroupDefaultView: SwitchGroupPropView = switchGroupViews[0];
 
 export type SwitchGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type SwitchGroupPropGetItemDisabled<ITEM> = (
@@ -36,8 +29,8 @@ export type SwitchGroupProps<ITEM = SwitchGroupDefaultItem> =
       }) => void;
       name: string;
       direction?: SwitchGroupDirection;
-      size?: SwitchGroupPropSize;
-      view?: SwitchGroupPropView;
+      size?: SwitchPropSize;
+      view?: SwitchPropView;
       disabled?: boolean;
       className?: string;
     },

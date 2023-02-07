@@ -1,15 +1,15 @@
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
 
+import { Switch } from '../Switch';
 import {
-  Switch,
   switchPropAlign,
   switchPropAlignDefault,
   switchPropSize,
   switchPropSizeDefault,
   switchPropView,
   switchPropViewDefault,
-} from '../Switch';
+} from '../types';
 
 const Variants = () => {
   const disabled = useBoolean('disabled', false);
