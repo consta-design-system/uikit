@@ -34,6 +34,7 @@ export type AvatarGroupProps<ITEM = AvatarGroupDefaultItem> =
       getItemName?: AvatarGroupPropGetItemName<ITEM>;
       size?: AvatarGroupPropSize;
       form?: AvatarGroupPropForm;
+      monochrome?: boolean;
     },
     HTMLDivElement
   >;

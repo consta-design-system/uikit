@@ -5,8 +5,8 @@ import { Avatar } from '../../../Avatar';
 
 export const AvatarExampleForm = () => (
   <Example>
-    <Avatar form="round" name="Геннадий Куст" />
-    <Avatar form="default" name="Геннадий Куст" />
-    <Avatar form="brick" name="Геннадий Куст" />
+    <Avatar form="round" name="Вадим Матвеев" />
+    <Avatar form="default" name="Вадим Матвеев" />
+    <Avatar form="brick" name="Вадим Матвеев" />
   </Example>
 );

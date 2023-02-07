@@ -26,12 +26,15 @@ const Variants = () => {
     avatarGroupPropFormDefault,
   );
 
+  const monochrome = useBoolean('monochrome');
+
   return (
     <AvatarGroup
       visibleCount={visibleCountAuto ? 'auto' : visibleCount}
       items={avatarGroupItems}
       size={size}
       form={form}
+      monochrome={monochrome}
     />
   );
 };

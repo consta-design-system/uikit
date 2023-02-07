@@ -30,21 +30,25 @@ const AvatarGroupRender = (
     visibleCount = 4,
     getItemName,
     getItemUrl,
+    monochrome,
     ...otherProps
   } = withDefaultGetters(props);
 
-  const elementsLength = items.length + 1;
+  const itemLenght = items.length;
+  const elementsLength = itemLenght + 1;
 
   const { elementsRefs, parentRef, visibleMap } = useHideElementsInLine(
     elementsLength,
-    elementsLength - 1,
+    0,
     0,
     [visibleCount],
   );
 
   const autoMode = visibleCount === 'auto';
 
-  const itemsForRender = autoMode ? items : items.slice(0, visibleCount);
+  const itemsForRender = autoMode
+    ? [...items].reverse()
+    : [...items].slice(0, visibleCount).reverse();
 
   return (
     <div
@@ -52,6 +56,20 @@ const AvatarGroupRender = (
       ref={useForkRef([parentRef, ref])}
       {...otherProps}
     >
+      {(autoMode || itemLenght > visibleCount) && (
+        <div
+          className={cnAvatar({ size, form }, [
+            cnAvatarGroup('More', {
+              hidden: !visibleMap[0] && autoMode,
+            }),
+          ])}
+          ref={elementsRefs[0]}
+        >
+          {`+${
+            autoMode ? getHiddenCount(visibleMap) : itemLenght - visibleCount
+          }`}
+        </div>
+      )}
       {itemsForRender.map((item, index) => {
         return (
           <Avatar
@@ -59,28 +77,15 @@ const AvatarGroupRender = (
             url={getItemUrl(item)}
             name={getItemName(item)}
             className={cnAvatarGroup('Avatar', {
-              hidden: !visibleMap[index] && autoMode,
+              hidden: !visibleMap[index + 1] && autoMode,
             })}
             size={size}
             form={form}
-            ref={elementsRefs[index]}
+            ref={elementsRefs[index + 1]}
+            monochrome={monochrome}
           />
         );
       })}
-      {(autoMode || items.length > visibleCount) && (
-        <div
-          className={cnAvatar({ size, form }, [
-            cnAvatarGroup('More', {
-              hidden: !visibleMap[elementsLength - 1] && autoMode,
-            }),
-          ])}
-          ref={elementsRefs[elementsLength - 1]}
-        >
-          {`+${
-            autoMode ? getHiddenCount(visibleMap) : items.length - visibleCount
-          }`}
-        </div>
-      )}
     </div>
   );
 };

@@ -1,13 +1,19 @@
 import { AvatarGroupDefaultItem } from '../types';
+import image1 from './image.jpeg';
+import image2 from './image2.png';
 
 export const avatarGroupItems: AvatarGroupDefaultItem[] = [
   {
-    name: 'Вадим Матвеев',
+    name: 'Лидия Индриксон',
     url: '',
   },
   {
-    name: 'Лидия Индриксон',
-    url: '',
+    name: 'Вадим Матвеев',
+    url: image1,
+  },
+  {
+    name: 'Виталий Алтуфьев',
+    url: image2,
   },
   {
     name: 'Геннадий Морозов',
@@ -20,10 +26,6 @@ export const avatarGroupItems: AvatarGroupDefaultItem[] = [
   {
     name: 'Георгий Калинин',
     url: '',
-  },
-  {
-    name: 'Виталий Алтуфьев',
-    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
   },
   {
     name: 'Вадим Матвеев',
