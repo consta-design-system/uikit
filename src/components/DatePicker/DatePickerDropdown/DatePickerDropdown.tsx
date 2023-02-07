@@ -77,6 +77,9 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef(
       isOpen,
       className,
       zIndex,
+      tabIndex = 0,
+      onFocus,
+      onBlur,
       renderAdditionalControls,
       ...otherProps
     } = props;
@@ -108,7 +111,10 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef(
         {(animate) => {
           return (
             <Popover
+              onFocus={onFocus}
+              onBlur={onBlur}
               ref={ref}
+              tabIndex={tabIndex}
               anchorRef={anchorRef}
               className={cnDatePickerDropdown({ form }, [
                 className,

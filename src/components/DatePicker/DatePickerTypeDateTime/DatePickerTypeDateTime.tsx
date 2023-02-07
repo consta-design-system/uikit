@@ -3,7 +3,6 @@ import startOfMonth from 'date-fns/startOfMonth';
 import React, { forwardRef, useEffect, useRef } from 'react';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateTime } from '../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime';
@@ -17,6 +16,7 @@ import {
   DatePickerTypeComponent,
 } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
+import { useDropdownVisible } from '../useDropdownVisible';
 
 export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
   forwardRef((props, ref) => {
@@ -26,6 +26,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
       locale,
       dropdownForm,
       onFocus,
+      onBlur,
       dropdownClassName,
       currentVisibleDate: currentVisibleDateProp,
       onChangeCurrentVisibleDate,
@@ -47,7 +48,14 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
     const fieldRef = useRef<HTMLDivElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
 
-    const [calendarVisible, setCalendarVisible] = useFlag(false);
+    const {
+      calendarVisible,
+      blocks: {
+        start: { onFocus: onFocusHandler, onBlur: onBlurHandler },
+        dropdown: { onBlur: onDropdownBlur, onFocus: onDropdownFocus },
+      },
+      close,
+    } = useDropdownVisible(onFocus, onBlur);
 
     const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
       currentVisibleDate: currentVisibleDateProp,
@@ -58,11 +66,6 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
       onChangeCurrentVisibleDate,
       calendarVisible,
     });
-
-    const onFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
-      onFocus && onFocus(e);
-      setCalendarVisible.on();
-    };
 
     useEffect(() => {
       if (ref) {
@@ -93,7 +96,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
     useClickOutside({
       isActive: calendarVisible,
       ignoreClicksInsideRefs: [fieldRef, calendarRef],
-      handler: setCalendarVisible.off,
+      handler: close,
     });
 
     return (
@@ -102,6 +105,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
           {...otherProps}
           ref={fieldRef}
           onFocus={onFocusHandler}
+          onBlur={onBlurHandler}
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
@@ -124,6 +128,8 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
           renderAdditionalControls={renderAdditionalControls}
           onChangeCurrentVisibleDate={setCurrentVisibleDate}
           multiplicityHours={multiplicityHours}
+          onFocus={onDropdownFocus}
+          onBlur={onDropdownBlur}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
           zIndex={getDropdownZIndex(props.style)}
