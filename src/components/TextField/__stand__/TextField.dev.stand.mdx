@@ -32,6 +32,12 @@ import { TextFieldExampleRequired } from './examples/TextFieldExampleRequired/Te
 import { TextFieldExampleStepArray } from './examples/TextFieldExampleStepArray/TextFieldExampleStepArray';
 import { TextFieldExampleIncrementButtons } from './examples/TextFieldExampleIncrementButtons/TextFieldExampleIncrementButtons';
 import { TextFieldExampleWithClearButton } from './examples/TextFieldExampleWithClearButton/TextFieldExampleWithClearButton';
+import {
+  TextFieldExampleMaskAmount,
+  TextFieldExampleMaskPhone,
+  TextFieldExampleMaskPassport,
+  TextFieldExampleMaskBankAccount,
+} from './examples/TextFieldExampleMask/TextFieldExampleMask';
 
 ```tsx
 import { TextField } from '@consta/uikit/TextField';
@@ -58,6 +64,11 @@ import { TextField } from '@consta/uikit/TextField';
   - [Размер шрифта, высота, отступы](#размер-поля)
   - [Строки и колонки](#строки-и-колонки)
   - [Минимальная и максимальная высота](#минимальная-и-максимальная-высота)
+- [Маскированние](#маскирование)
+  - [Сумма](#сумма)
+  - [Телефон](#телефон)
+  - [Паспорт](#паспорт)
+  - [Банковский счет](#банковский-счет)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -439,6 +450,204 @@ export const TextFieldExampleWtihClearButton = () => {
 ```
 
 <TextFieldExampleSizeMinRows />
+
+## Маскированние
+
+Для того чтобы использовать маски вместе с компонентом `TextField` необходимо импортировать пакет `imask`.
+
+### Сумма
+
+```tsx
+import IMask from 'imask';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { TextField } from '@consta/uikit/TextField';
+
+export const TextFieldExampleMaskAmount = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const imaskRef = useRef<IMask.InputMask<IMask.MaskedNumberOptions> | null>(
+    null,
+  );
+  useEffect(() => {
+    if (inputRef.current) {
+      imaskRef.current = IMask(inputRef.current, {
+        mask: Number,
+        min: 0,
+        scale: 2,
+        thousandsSeparator: ' ',
+        radix: ',',
+        padFractionalZeros: true,
+        normalizeZeros: true,
+        mapToRadix: ['.'],
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    imaskRef.current?.on('accept', () =>
+      setValue(imaskRef.current?.value || null),
+    );
+    return () => {
+      imaskRef.current?.off('accept', () =>
+        setValue(imaskRef.current?.value || null),
+      );
+    };
+  }, []);
+
+  return (
+    <TextField
+      value={value}
+      label="Сумма"
+      placeholder="0"
+      inputRef={inputRef}
+    />
+  );
+};
+```
+
+<TextFieldExampleMaskAmount />
+
+### Телефон
+
+```tsx
+import IMask from 'imask';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { TextField } from '@consta/uikit/TextField';
+
+export const TextFieldExampleMaskPhone = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const mask = '+{7}(000)000-00-00';
+  const imaskRef = useRef<IMask.InputMask<IMask.MaskedPatternOptions> | null>(
+    null,
+  );
+  useEffect(() => {
+    if (inputRef.current) {
+      imaskRef.current = IMask(inputRef.current, {
+        mask,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    imaskRef.current?.on('accept', () =>
+      setValue(imaskRef.current?.value || null),
+    );
+    return () => {
+      imaskRef.current?.off('accept', () =>
+        setValue(imaskRef.current?.value || null),
+      );
+    };
+  }, []);
+
+  return (
+    <TextField
+      value={value}
+      label="Телефон"
+      placeholder="+7(999)999-99-99"
+      inputRef={inputRef}
+    />
+  );
+};
+```
+
+<TextFieldExampleMaskPhone />
+
+### Паспорт
+
+```tsx
+import IMask from 'imask';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { TextField } from '@consta/uikit/TextField';
+
+export const TextFieldExampleMaskPassport = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const mask = '00 00 000000';
+  const imaskRef = useRef<IMask.InputMask<IMask.MaskedPatternOptions> | null>(
+    null,
+  );
+  useEffect(() => {
+    if (inputRef.current) {
+      imaskRef.current = IMask(inputRef.current, {
+        mask,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    imaskRef.current?.on('accept', () =>
+      setValue(imaskRef.current?.value || null),
+    );
+    return () => {
+      imaskRef.current?.off('accept', () =>
+        setValue(imaskRef.current?.value || null),
+      );
+    };
+  }, []);
+
+  return (
+    <TextField
+      value={value}
+      label="Пасспорт"
+      placeholder="00 00 000000"
+      inputRef={inputRef}
+    />
+  );
+};
+```
+
+<TextFieldExampleMaskPassport />
+
+### Банковский счет
+
+```tsx
+import IMask from 'imask';
+import React, { useEffect, useRef, useState } from 'react';
+
+import { TextField } from '@consta/uikit/TextField';
+
+export const TextFieldExampleMaskBankAccount = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const mask = '0000 0000 0000 0000';
+  const imaskRef = useRef<IMask.InputMask<IMask.MaskedPatternOptions> | null>(
+    null,
+  );
+  useEffect(() => {
+    if (inputRef.current) {
+      imaskRef.current = IMask(inputRef.current, {
+        mask,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    imaskRef.current?.on('accept', () =>
+      setValue(imaskRef.current?.value || null),
+    );
+    return () => {
+      imaskRef.current?.off('accept', () =>
+        setValue(imaskRef.current?.value || null),
+      );
+    };
+  }, []);
+
+  return (
+    <TextField
+      value={value}
+      label="Номер карты"
+      placeholder="1111 1111 1111 1111"
+      inputRef={inputRef}
+    />
+  );
+};
+```
+
+<TextFieldExampleMaskBankAccount />
 
 ## Импорт
 
