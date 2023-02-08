@@ -1,5 +1,19 @@
 # Changelog
 
+## v4.10.0 (08/02/2023)
+Самое важное:
+
+- В `Avatar` и  `AvatarGroup` добавили модификацию `_monochrome`, для случаев, когда цветные аватарки не подходят
+- В `Switch` добавили размер `xs` 
+- В `SwitchGroup` добавили размеры `xs` и `s`
+---
+
+- [feat(Avatar): add monochrome (#2885)](https://github.com/consta-design-system/uikit/commit/ee47022e27daf152411f75a84a1f632bafa3cd28) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Switch): add new size (#2884)](https://github.com/consta-design-system/uikit/commit/0b9112dc2a0f0fa9343e83552b661c4ae994f202) - [@N1MBER](https://github.com/N1MBER)
+- [feat(MixFocus): add vars (#2889)](https://github.com/consta-design-system/uikit/commit/e94e6464c815dd933a48d6b39f71082b043881fe) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.9.0 (02/02/2023)
 Самое важное:
 
@@ -404,23 +418,3 @@ UserSelectDeprecated
 
 ## v3.24.4 (08/06/2022)
 - [refactor(DragNDropField): refactor locale (#2361)](https://github.com/consta-design-system/uikit/commit/15fbb25839545c6ab6a2be82f23addd65eb82f26) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.24.3 (08/06/2022)
-Самое важное:
-- В `TextField` появился функционал "показать пароль" при `_type_password`
-- В `DragNDropField` добавили модификацию `_disabled`
-- В `DatePicker` добавили крестик очистки поля ввода
----
-
-- [fix(TextField): fixed bugs](https://github.com/consta-design-system/uikit/commit/07721120c0c5274305f9bc095d321def34ac483c) - [@gizeasy](https://github.com/gizeasy)
-- [refactor(Popover): refactor (#2374)](https://github.com/consta-design-system/uikit/commit/175b420ce331ccb9eb39363591f6351306cd859d) - [@gizeasy](https://github.com/gizeasy)
-- [feat(DatePicker): add withClearButton (#2365)](https://github.com/consta-design-system/uikit/commit/bdcf2bbd3578157faa61d87af454234234afe3d2) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Popover): fixed memory leak (#2367)](https://github.com/consta-design-system/uikit/commit/dcfab8341b0d96b9816dd6328e14a86b0de1a993) - [@gizeasy](https://github.com/gizeasy)
-- [fix(fonts): fix export fonts (#2368)](https://github.com/consta-design-system/uikit/commit/44c0063c33476b7433c0e5e55adb64ff70599e1f) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Grid): edit example in doc (#2364)](https://github.com/consta-design-system/uikit/commit/5c3600bba36d475eb0b4d6145f004c335155a43d) - [@arhayka](https://github.com/arhayka)
-- [fix(Table): add export SortByProps (#2356)](https://github.com/consta-design-system/uikit/commit/6eb4737765f711d5a6e0114d161a921e99f62869) - [@gizeasy](https://github.com/gizeasy)
-- [docs(DragNDropField): edit docs for local (#2360)](https://github.com/consta-design-system/uikit/commit/9cdeddcb7cfb37d46588c5f7cfdfcfa883285fcc) - [@arhayka](https://github.com/arhayka)
-- [feat(DragNDropField): add disabled (#2358)](https://github.com/consta-design-system/uikit/commit/6929db5f81db17db8faa0f380804cce51c9191aa) - [@gizeasy](https://github.com/gizeasy)
-- [feat(TextField): add type password and resech (#2355)](https://github.com/consta-design-system/uikit/commit/b3230fabff9e9e107004931d453e4e09c3118668) - [@gizeasy](https://github.com/gizeasy)
