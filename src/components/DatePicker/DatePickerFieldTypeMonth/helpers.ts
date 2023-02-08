@@ -1,7 +1,9 @@
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
-import { format, isValid, parse } from 'date-fns';
+import { format, isValid, isWithinInterval, parse } from 'date-fns';
 import IMask from 'imask';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+
+import { useIMask } from '##/components/TextField';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
@@ -64,25 +66,88 @@ export type DatePickerFieldTypeMonthProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export const useImask = (
-  formatProp: string,
-  separator: string,
-  inputRef: React.RefObject<HTMLInputElement>,
-  stringValue: string | null,
-  onError: DatePickerPropOnError | undefined,
-  handleChanhe: (props: { e: Event; value: string | null }) => void,
-) => {
-  const imaskRef = useRef<IMask.InputMask<IMask.MaskedDateOptions> | null>(
-    null,
-  );
-  const onErrorRef = useMutableRef(onError);
-  const handleChanheRef = useMutableRef(handleChanhe);
+type UsePickerProps = {
+  value?: Date | null;
+  onChange?: DatePickerFieldTypeMonthPropOnChange;
+  onError?: DatePickerPropOnError;
+  format: string;
+  separator: string;
+  minDate: Date;
+  maxDate: Date;
+};
 
-  // задаем маску и сохраняем обьект маски в ref
-  // обнавляем при смене формата
-  useEffect(() => {
-    if (inputRef.current) {
-      imaskRef.current = IMask(inputRef.current, {
+export const usePicker = (props: UsePickerProps) => {
+  const {
+    value,
+    onChange,
+    onError,
+    format: formatProp,
+    separator,
+    maxDate,
+    minDate,
+  } = props;
+  const onChangeRef = useMutableRef(onChange);
+  const valueRef = useMutableRef(value);
+  const onErrorRef = useMutableRef(onError);
+
+  const [stringValue, setStringValue] = useState<string | null>(
+    value && isValid(value) ? format(value, formatProp) : null,
+  );
+  const stringValueRef = useMutableRef(stringValue);
+
+  const handleChange = useCallback(
+    ({ e, value: stringValue }: { e: Event; value: string | null }) => {
+      if (stringValueRef.current === stringValue) {
+        return;
+      }
+      setStringValue(stringValue);
+      const onChange = onChangeRef.current;
+      const value = valueRef.current;
+      if (onChange) {
+        if (!stringValue) {
+          if (value) {
+            onChange({ e, value: null });
+          }
+          return;
+        }
+        const [MM, yyyy] = getPartsDate(
+          stringValue,
+          formatProp,
+          separator,
+          false,
+          ['MM', 'yyyy'],
+        );
+        if (MM && yyyy) {
+          const date = parse(
+            `${MM}${datePickerPropSeparatorDefault}${yyyy}`,
+            datePickerPropFormatTypeMonth,
+            new Date(),
+          );
+          if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
+            onErrorRef.current?.({
+              type: datePickerErrorTypes[0],
+              stringValue,
+              MM,
+              yyyy,
+              date,
+            });
+            if (value) {
+              onChange({ e, value: null });
+            }
+            return;
+          }
+          onChange({ e, value: date });
+        } else if (value) {
+          onChange({ e, value: null });
+        }
+      }
+    },
+    [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
+  );
+
+  const options: IMask.InputMask<IMask.MaskedDateOptions> = useMemo(
+    () =>
+      ({
         mask: Date,
         pattern: formatProp,
         blocks: {
@@ -99,8 +164,8 @@ export const useImask = (
         },
         lazy: true,
         autofix: true,
-        format: (date) => format(date, formatProp),
-        parse: (string) => parse(string, formatProp, new Date()),
+        format: (date: Date) => format(date, formatProp),
+        parse: (string: string) => parse(string, formatProp, new Date()),
         validate: (string: string) => {
           const [MM, yyyy] = getPartsDate(
             string,
@@ -109,7 +174,6 @@ export const useImask = (
             false,
             ['MM', 'yyyy'],
           );
-
           if (
             MM &&
             yyyy &&
@@ -131,29 +195,34 @@ export const useImask = (
 
             return false;
           }
-
           return true;
         },
         // проблема в типах IMask
-      }) as unknown as IMask.InputMask<IMask.MaskedDateOptions>;
+      } as unknown as IMask.InputMask<IMask.MaskedDateOptions>),
+    [formatProp, separator],
+  );
+
+  const { inputRef } = useIMask({
+    value: stringValue,
+    onChange: handleChange,
+    maskOptions: options,
+  });
+
+  // при изменении value, нужно обновить stringValue
+  useEffect(() => {
+    if (value && isValid(value)) {
+      setStringValue(format(value, formatProp));
+    } else if (stringValue?.length === formatProp.length) {
+      // если количество введенных символов меньше чем в формате маски
+      // то не нужно мешать вводу с клавиатуры
+      // если дата была введена полностью и value пришел null,
+      // то можно считать что поле нуждается в очистке
+      setStringValue('');
     }
-  }, [formatProp, separator]);
+  }, [value?.getTime()]);
 
-  // Нужно для синхранизации value c Imask,
-  // так как value мы можем задать через пропс без самого ввода,
-  // и Imask требует ручной синхронихации в этом случае
-  const onAcept = useCallback((e: Event) => {
-    handleChanheRef.current({ e, value: imaskRef.current?.value || null });
-  }, []);
-
-  useEffect(() => {
-    imaskRef.current?.on('accept', onAcept);
-    return () => {
-      imaskRef.current?.off('accept', onAcept);
-    };
-  }, []);
-
-  useEffect(() => {
-    imaskRef.current?.updateValue();
-  }, [stringValue]);
+  return {
+    stringValue,
+    inputRef,
+  };
 };
