@@ -5,23 +5,35 @@
   overflow: hidden;
   width: var(--progress-step-bar-line-width);
   height: var(--progress-step-bar-line-height);
-  background: var(--line-background);
+  border-radius: var(--space-xs);
 
   &_direction {
     &_horizontal {
-      --progress-step-bar-line-top: var(--progress-step-bar-line-padding);
-      --progress-step-bar-line-left: 0;
-      --progress-step-bar-line-width: var(--line-size);
+      --progress-step-bar-line-top:
+        calc(
+          var(--progress-step-bar-line-padding) + var(--progress-step-bar-offset)
+        );
+      --progress-step-bar-line-left: var(--progress-step-bar-offset);
+      --progress-step-bar-line-width:
+        calc(
+          var(--line-size) - 4 * var(--progress-step-bar-offset)
+        );
       --progress-step-bar-line-height: var(--progress-step-bar-line-size);
       --progress-step-bar-line-after-top: 0;
       --progress-step-bar-line-after-left: var(--line-active-size);
     }
 
     &_vertical {
-      --progress-step-bar-line-top: 0;
-      --progress-step-bar-line-left: var(--progress-step-bar-line-padding);
+      --progress-step-bar-line-top: var(--progress-step-bar-offset);
+      --progress-step-bar-line-left:
+        calc(
+          var(--progress-step-bar-line-padding) + var(--progress-step-bar-offset)
+        );
       --progress-step-bar-line-width: var(--progress-step-bar-line-size);
-      --progress-step-bar-line-height: var(--line-size);
+      --progress-step-bar-line-height:
+        calc(
+          var(--line-size) - var(--progress-step-bar-offset)
+        );
       --progress-step-bar-line-after-top: var(--line-active-size);
       --progress-step-bar-line-after-left: 0;
     }
@@ -62,5 +74,11 @@
     bottom: 0;
     background: var(--color-bg-system);
     transition: left 0.3s, top 0.3s;
+  }
+
+  &-Svg {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }

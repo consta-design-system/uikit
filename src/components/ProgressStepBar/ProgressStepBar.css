@@ -1,12 +1,23 @@
 .ProgressStepBar {
+  --progress-step-bar-offset: 0;
   display: inline-flex;
   width: 100%;
   max-width: 100%;
+
+  &_isOverflow {
+    --progress-step-bar-offset: var(--space-2xs);
+
+    & .ProgressStepBar-List_direction_horizontal {
+      overflow-x: scroll;
+      overflow-y: visible;
+    }
+  }
 
   &-List {
     position: relative;
     display: flex;
     justify-content: space-between;
+    padding: var(--progress-step-bar-offset);
 
     &::-webkit-scrollbar {
       display: none;
@@ -14,8 +25,6 @@
 
     &_direction {
       &_horizontal {
-        overflow-x: scroll;
-        overflow-y: visible;
         flex-direction: row;
 
         &:not(.ProgressStepBar-List_overflow) {
@@ -24,8 +33,6 @@
       }
 
       &_vertical {
-        overflow-x: visible;
-        overflow-y: scroll;
         flex-direction: column;
 
         &:not(.ProgressStepBar-List_overflow) {
@@ -38,11 +45,11 @@
   &-Button {
     &_side {
       &_left {
-        margin-right: var(--space-xs);
+        margin-right: var(--space-2xs);
       }
 
       &_right {
-        margin-left: var(--space-xs);
+        margin-left: var(--space-2xs);
       }
     }
   }

@@ -150,7 +150,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
             className={cnProgressStepBarItem('Tooltip')}
             direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
             style={{ zIndex: tooltipZIndex }}
-            isInteractive
+            isInteractive={false}
             possibleDirections={
               direction === 'horizontal'
                 ? possibleHorizontalDirections
