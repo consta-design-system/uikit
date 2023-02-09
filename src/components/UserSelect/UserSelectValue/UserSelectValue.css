@@ -4,6 +4,10 @@
     margin-bottom: calc(var(--space-s) / 4);
   }
 
+  &_disabled {
+    opacity: 0.6;
+  }
+
   &:not(&_multiple) {
     &.User {
       &:hover {

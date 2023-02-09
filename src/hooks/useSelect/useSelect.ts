@@ -365,8 +365,17 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   };
 
   const clearValue = (e: React.SyntheticEvent) => {
-    params.onChange({ value: null, e });
     !withoutClearSearch && setSearch('');
+    if (isMultipleParams(params)) {
+      const results = value?.filter((item) => getItemDisabled?.(item));
+      params.onChange({
+        value: results && results.length > 0 ? results : null,
+        e,
+      });
+    }
+    if (isNotMultipleParams(params)) {
+      params.onChange({ value: null, e });
+    }
   };
 
   const getHandleRemoveValue = (item: ITEM) => (e: React.SyntheticEvent) =>

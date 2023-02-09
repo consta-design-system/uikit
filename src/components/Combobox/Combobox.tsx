@@ -155,7 +155,8 @@ const ComboboxRender = <
         label={getItemLabel(item)}
         key={getItemKey(item)}
         size={size}
-        handleRemove={disabled ? undefined : handleRemove}
+        disabled={disabled || getItemDisabled(item)}
+        handleRemove={handleRemove}
       />
     );
   };
