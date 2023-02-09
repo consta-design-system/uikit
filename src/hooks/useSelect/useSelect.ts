@@ -551,12 +551,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     }
   }, [searchValueProp]);
 
-  useEffect(() => {
-    if (searchValue) {
-      setOpen(true);
-    }
-  }, [searchValue]);
-
   return {
     isOpen,
     isFocused,
