@@ -9,7 +9,7 @@ export const TextFieldExampleMaskAmount = () => {
 
   const { inputRef } = useIMask({
     value,
-    onChange: ({ value }) => setValue(value),
+    onChange: setValue,
     maskOptions: {
       mask: Number,
       min: 0,
@@ -41,7 +41,7 @@ export const TextFieldExampleMaskPhone = () => {
 
   const { inputRef } = useIMask({
     value,
-    onChange: ({ value }) => setValue(value),
+    onChange: setValue,
     maskOptions: '+{7}(000)000-00-00',
   });
 
@@ -62,7 +62,7 @@ export const TextFieldExampleMaskPassport = () => {
 
   const { inputRef } = useIMask({
     value,
-    onChange: ({ value }) => setValue(value),
+    onChange: setValue,
     maskOptions: '00 00 000000',
   });
 
@@ -83,7 +83,7 @@ export const TextFieldExampleMaskBankAccount = () => {
 
   const { inputRef } = useIMask({
     value,
-    onChange: ({ value }) => setValue(value),
+    onChange: setValue,
     maskOptions: '0000 0000 0000 0000',
   });
 

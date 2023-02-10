@@ -204,7 +204,7 @@ export const usePicker = (props: UsePickerProps) => {
 
   const { inputRef } = useIMask({
     value: stringValue,
-    onChange: handleChange,
+    onChange: (_val, params) => handleChange?.(params),
     maskOptions: options,
   });
 

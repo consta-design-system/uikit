@@ -5,7 +5,10 @@ import { useMutableRef } from '##/hooks/useMutableRef';
 
 type Props<MASK extends IMask.AnyMaskedOptions> = {
   value?: string | null;
-  onChange?: (params: { e: Event; value: string | null }) => void;
+  onChange?: (
+    value: string | null,
+    params: { e: Event; value: string | null },
+  ) => void;
   maskOptions: string | MASK;
 };
 export function useIMask<MASK extends IMask.AnyMaskedOptions>(
@@ -39,7 +42,8 @@ export function useIMask<MASK extends IMask.AnyMaskedOptions>(
   // так как value мы можем задать через пропс без самого ввода,
   // и Imask требует ручной синхронихации в этом случае
   const onAcept = useCallback((e: Event) => {
-    handleChanheRef.current?.({ e, value: imaskRef.current?.value || null });
+    const value = imaskRef.current?.value || null;
+    handleChanheRef.current?.(value, { e, value });
   }, []);
 
   useEffect(() => {
