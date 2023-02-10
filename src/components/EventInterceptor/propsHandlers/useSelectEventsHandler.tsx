@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { useFlag } from '##/hooks/useFlag';
 
 import { defaultGetItemLabel, SelectProps } from '../../Select/helpers';
 import { EventInterceptorHandler } from '../EventInterceptor';
@@ -9,26 +11,35 @@ export const useSelectEventsHandler = <PROPS extends SelectProps>(
   ref: React.RefObject<HTMLDivElement | null>,
 ) => {
   const newProps: PROPS = { ...props };
+  const [valueChanged, setValueChanged] = useFlag();
 
-  React.useEffect(() => {
-    if (newProps.value) {
-      const value = {
-        component: 'Select' as const,
-        event: 'change',
-        options: {
-          placeholder: newProps.placeholder,
-          label: newProps.getItemLabel
-            ? newProps.getItemLabel(newProps.value)
-            : defaultGetItemLabel(newProps.value),
-          value: newProps.value,
-          pageURL: window.location.href,
-          DOMRef: ref.current,
-          props: newProps,
-        },
-      };
-      handler!(value);
-    }
+  useEffect(() => {
+    setValueChanged.on();
   }, [newProps.value]);
 
-  return props as PROPS;
+  newProps.onFocus = (...onfocusArgs) => {
+    setValueChanged.off();
+    return props.onFocus?.(...onfocusArgs);
+  };
+
+  newProps.onBlur = (...onBlurArgs) => {
+    const value = {
+      component: 'Select' as const,
+      event: 'change',
+      options: {
+        placeholder: newProps.placeholder,
+        label: newProps.value
+          ? (newProps.getItemLabel ?? defaultGetItemLabel)(newProps.value)
+          : undefined,
+        value: newProps.value,
+        pageURL: window.location.href,
+        DOMRef: ref.current,
+        props: newProps,
+      },
+    };
+    valueChanged && handler!(value);
+    return props.onBlur?.(...onBlurArgs);
+  };
+
+  return newProps;
 };
