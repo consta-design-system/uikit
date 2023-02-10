@@ -58,7 +58,13 @@ export const SelectItem: React.FC<SelectItemProps> = (props) => {
       checked={!multiple && active}
       disabled={disabled}
       leftSide={
-        multiple && <Checkbox checked={active} size={sizeCheckboxMap[size]} />
+        multiple && (
+          <Checkbox
+            checked={active}
+            disabled={disabled}
+            size={sizeCheckboxMap[size]}
+          />
+        )
       }
     >
       {label}

@@ -29,6 +29,10 @@
 
   &_disable {
     color: var(--color-control-typo-disable);
+
+    & .UserSelectItem-AvatarContainer {
+      opacity: 0.6;
+    }
   }
 
   &_hovered {

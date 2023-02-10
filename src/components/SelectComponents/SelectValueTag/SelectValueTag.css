@@ -1,4 +1,4 @@
-.SelectValueTag {
+.TagBase.SelectValueTag {
   margin: 0 var(--tag-space) var(--tag-space) 0;
 
   .TagBase-Label {
@@ -6,6 +6,11 @@
   }
 
   &_disabled {
-    opacity: 0.8;
+    background-color: var(--color-control-bg-disable);
+    pointer-events: none;
+
+    & > * {
+      color: var(--color-control-typo-disable);
+    }
   }
 }

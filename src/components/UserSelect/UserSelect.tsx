@@ -175,7 +175,7 @@ const UserSelectRender = <
         size={size}
         handleRemove={handleRemove}
         multiple={multiple}
-        disabled={disabled}
+        disabled={disabled || getItemDisabled(item)}
       />
     );
   };
