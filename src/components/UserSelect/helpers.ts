@@ -86,6 +86,7 @@ export type UserSelectProps<
     labelForCreate?: string;
     labelForEmptyItems?: string;
     searchFunction?: PropSearchFunction<ITEM>;
+    searchValue?: string;
     multiple?: MULTIPLE;
     value?: PropValue<ITEM, MULTIPLE>;
     onChange: PropOnChange<ITEM, MULTIPLE>;

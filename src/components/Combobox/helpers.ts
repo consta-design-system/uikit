@@ -83,6 +83,7 @@ export type ComboboxProps<
     labelForCreate?: string;
     labelForEmptyItems?: string;
     searchFunction?: PropSearchFunction<ITEM>;
+    searchValue?: string;
     multiple?: MULTIPLE;
     value?: PropValue<ITEM, MULTIPLE>;
     groups?: GROUP[];
