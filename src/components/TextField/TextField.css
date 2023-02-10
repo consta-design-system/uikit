@@ -99,10 +99,9 @@
       color: var(--color-control-typo-default);
 
       &.TextField-InputContainer_disabled {
-        pointer-events: none;
-
         & .TextField-Input {
           color: var(--color-control-typo-disable);
+          pointer-events: all;
 
           &:-webkit-autofill,
           &:-webkit-autofill:hover,
@@ -208,10 +207,10 @@
         --clear-button-color: var(--color-control-typo-disable);
         background: var(--color-control-bg-disable);
         border-color: var(--color-control-bg-border-disable);
-        pointer-events: none;
 
         & .TextField-Input {
           color: var(--color-control-typo-disable);
+          pointer-events: all;
         }
 
         & .TextField-Input::placeholder {
