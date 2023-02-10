@@ -95,7 +95,11 @@ describe('useBasicSelectEventsHandler', () => {
       props = result.current;
     });
 
-    expect(props).toEqual(defaultProps);
+    expect(props).toEqual({
+      ...defaultProps,
+      onBlur: expect.any(Function),
+      onFocus: expect.any(Function),
+    });
   });
 
   it('при изменении опции вызывается eventHandler', () => {
@@ -109,10 +113,13 @@ describe('useBasicSelectEventsHandler', () => {
       });
     });
 
+    const input = getInput();
+
     inputClick();
     animateDelay();
 
     fireEvent.click(getItem(1));
+    fireEvent.blur(input);
 
     inputClick();
     animateDelay();
@@ -120,6 +127,6 @@ describe('useBasicSelectEventsHandler', () => {
     fireEvent.click(getItem(0));
 
     expect(fakeHandler).toHaveBeenCalled();
-    expect(fakeHandler).toHaveBeenCalledTimes(2);
+    expect(fakeHandler).toHaveBeenCalledTimes(1);
   });
 });
