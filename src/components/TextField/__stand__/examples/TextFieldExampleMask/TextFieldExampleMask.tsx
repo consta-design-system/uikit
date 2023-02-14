@@ -1,3 +1,5 @@
+import './TextFieldExampleMask.css';
+
 import { Example } from '@consta/stand';
 import IMask from 'imask';
 import React, { useState } from 'react';
@@ -5,6 +7,9 @@ import React, { useState } from 'react';
 import { Button } from '##/components/Button';
 import { TextField } from '##/components/TextField/TextField';
 import { useIMask } from '##/components/TextField/useIMask';
+import { cn } from '##/utils/bem';
+
+const cnTextFieldExampleMask = cn('TextFieldExampleMask');
 
 export const TextFieldExampleMaskAmount = () => {
   const [value, setValue] = useState<string | null>(null);
@@ -114,16 +119,18 @@ export const TextFieldExampleMaskPipe = () => {
 
   return (
     <Example>
-      <TextField
-        value={value}
-        label="Телефон"
-        placeholder="+7(999)999-99-99"
-        inputRef={inputRef}
-      />
-      <Button
-        label="Изменить"
-        onClick={() => setValue(IMask.pipe('79121', { mask }))}
-      />
+      <div className={cnTextFieldExampleMask()}>
+        <TextField
+          value={value}
+          label="Телефон"
+          placeholder="+7(999)999-99-99"
+          inputRef={inputRef}
+        />
+        <Button
+          label="Изменить"
+          onClick={() => setValue(IMask.pipe('79121', { mask }))}
+        />
+      </div>
     </Example>
   );
 };
