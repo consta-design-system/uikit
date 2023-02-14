@@ -32,6 +32,13 @@ import { TextFieldExampleRequired } from './examples/TextFieldExampleRequired/Te
 import { TextFieldExampleStepArray } from './examples/TextFieldExampleStepArray/TextFieldExampleStepArray';
 import { TextFieldExampleIncrementButtons } from './examples/TextFieldExampleIncrementButtons/TextFieldExampleIncrementButtons';
 import { TextFieldExampleWithClearButton } from './examples/TextFieldExampleWithClearButton/TextFieldExampleWithClearButton';
+import {
+  TextFieldExampleMaskAmount,
+  TextFieldExampleMaskPhone,
+  TextFieldExampleMaskPassport,
+  TextFieldExampleMaskBankAccount,
+  TextFieldExampleMaskPipe,
+} from './examples/TextFieldExampleMask/TextFieldExampleMask';
 
 ```tsx
 import { TextField } from '@consta/uikit/TextField';
@@ -58,6 +65,13 @@ import { TextField } from '@consta/uikit/TextField';
   - [Размер шрифта, высота, отступы](#размер-поля)
   - [Строки и колонки](#строки-и-колонки)
   - [Минимальная и максимальная высота](#минимальная-и-максимальная-высота)
+- [Маскированние](#маскирование)
+  - [Изменения из вне](#изменения-из-вне)
+  - [Примеры](#примеры)
+    - [Сумма](#сумма)
+    - [Телефон](#телефон)
+    - [Паспорт](#паспорт)
+    - [Банковский счет](#банковский-счет)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -440,10 +454,202 @@ export const TextFieldExampleWtihClearButton = () => {
 
 <TextFieldExampleSizeMinRows />
 
+## Маскирование
+
+Для того чтобы использовать маски вместе с компонентом `TextField` необходимо импортировать хук `useIMask`.
+
+Данный хук принимает три параметра:
+
+- значение
+- функцию обработчик изменений
+- опции для маски
+
+Подробное описание по составлению собственных масок можно найти в документации к [imask](https://imask.js.org/guide.html).
+
+| Свойство    | Тип                                                                                                              | По умолчанию | Описание           |
+| ----------- | ---------------------------------------------------------------------------------------------------------------- | ------------ | ------------------ |
+| value       | `string, null`                                                                                                   | -            | Значение           |
+| onChange    | `(value: string`<code>&#124;</code>`null, params: { e: Event, value: string`<code>&#124;</code>`null }) => void` | -            | Функция обработчик |
+| maskOptions | `string`<code>&#124;</code>`MASK extends IMask.AnyMaskedOptions`                                                 | -            | Параметры маски    |
+
+### Изменения из вне
+
+В случае когда значение `TextField` может меняться из вне (изменения происходят не из поля ввода), необходимо использовать функцию [`IMask.pipe`](https://imask.js.org/guide.html#pipe),
+для преобразования значения под формат маски
+
+```tsx
+import IMask from 'imask';
+import React, { useState } from 'react';
+
+import { TextField, useIMask } from '@consta/uikit/TextField';
+
+export const TextFieldExampleMaskPipe = () => {
+  const [value, setValue] = useState<string | null>(null);
+
+  const mask = '+{7}(000)000-00-00';
+
+  const { inputRef } = useIMask({
+    value,
+    onChange: setValue,
+    maskOptions: mask,
+  });
+
+  return (
+    <>
+      <TextField
+        value={value}
+        label="Телефон"
+        placeholder="+7(999)999-99-99"
+        inputRef={inputRef}
+      />
+      <Button
+        label="Изменить"
+        onClick={() => setValue(IMask.pipe('79121', { mask }))}
+      />
+    </>
+  );
+};
+```
+
+<TextFieldExampleMaskPipe />
+
+### Примеры
+
+#### Сумма
+
+```tsx
+import IMask from 'imask';
+import React, { useState } from 'react';
+
+import { TextField, useIMask } from '@consta/uikit/TextField';
+
+export const TextFieldExampleMaskAmount = () => {
+  const [value, setValue] = useState<string | null>(null);
+
+  const { inputRef } = useIMask({
+    value,
+    onChange: setValue,
+    maskOptions: {
+      mask: Number,
+      min: 0,
+      scale: 2,
+      thousandsSeparator: ' ',
+      radix: ',',
+      padFractionalZeros: true,
+      autofix: true,
+      lazy: true,
+      normalizeZeros: true,
+      mapToRadix: ['.'],
+    },
+  });
+
+  return (
+    <TextField
+      value={value}
+      label="Сумма"
+      placeholder="0"
+      inputRef={inputRef}
+    />
+  );
+};
+```
+
+<TextFieldExampleMaskAmount />
+
+#### Телефон
+
+```tsx
+import IMask from 'imask';
+import React, { useState } from 'react';
+
+import { TextField, useIMask } from '@consta/uikit/TextField';
+
+export const TextFieldExampleMaskPhone = () => {
+  const [value, setValue] = useState<string | null>(null);
+
+  const { inputRef } = useIMask({
+    value,
+    onChange: setValue,
+    maskOptions: '+{7}(000)000-00-00',
+  });
+
+  return (
+    <TextField
+      value={value}
+      label="Телефон"
+      placeholder="+7(999)999-99-99"
+      inputRef={inputRef}
+    />
+  );
+};
+```
+
+<TextFieldExampleMaskPhone />
+
+#### Паспорт
+
+```tsx
+import IMask from 'imask';
+import React, { useState } from 'react';
+
+import { TextField, useIMask } from '@consta/uikit/TextField';
+
+export const TextFieldExampleMaskPassport = () => {
+  const [value, setValue] = useState<string | null>(null);
+
+  const { inputRef } = useIMask({
+    value,
+    onChange: setValue,
+    maskOptions: '00 00 000000',
+  });
+
+  return (
+    <TextField
+      value={value}
+      label="Пасспорт"
+      placeholder="00 00 000000"
+      inputRef={inputRef}
+    />
+  );
+};
+```
+
+<TextFieldExampleMaskPassport />
+
+#### Банковский счет
+
+```tsx
+import IMask from 'imask';
+import React, { useState } from 'react';
+
+import { TextField, useIMask } from '@consta/uikit/TextField';
+
+export const TextFieldExampleMaskBankAccount = () => {
+  const [value, setValue] = useState<string | null>(null);
+
+  const { inputRef } = useIMask({
+    value,
+    onChange: setValue,
+    maskOptions: '0000 0000 0000 0000',
+  });
+
+  return (
+    <TextField
+      value={value}
+      label="Номер карты"
+      placeholder="1111 1111 1111 1111"
+      inputRef={inputRef}
+    />
+  );
+};
+```
+
+<TextFieldExampleMaskBankAccount />
+
 ## Импорт
 
 ```tsx
-import { TextField } from '@consta/uikit/TextField';
+import { TextField, useIMask } from '@consta/uikit/TextField';
 ```
 
 ## Свойства
