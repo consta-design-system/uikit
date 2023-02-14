@@ -1,6 +1,8 @@
 import { Example } from '@consta/stand';
+import IMask from 'imask';
 import React, { useState } from 'react';
 
+import { Button } from '##/components/Button';
 import { TextField } from '##/components/TextField/TextField';
 import { useIMask } from '##/components/TextField/useIMask';
 
@@ -94,6 +96,33 @@ export const TextFieldExampleMaskBankAccount = () => {
         label="Номер карты"
         placeholder="1111 1111 1111 1111"
         inputRef={inputRef}
+      />
+    </Example>
+  );
+};
+
+export const TextFieldExampleMaskPipe = () => {
+  const [value, setValue] = useState<string | null>(null);
+
+  const mask = '+{7}(000)000-00-00';
+
+  const { inputRef } = useIMask({
+    value,
+    onChange: setValue,
+    maskOptions: mask,
+  });
+
+  return (
+    <Example>
+      <TextField
+        value={value}
+        label="Телефон"
+        placeholder="+7(999)999-99-99"
+        inputRef={inputRef}
+      />
+      <Button
+        label="Изменить"
+        onClick={() => setValue(IMask.pipe('79121', { mask }))}
       />
     </Example>
   );

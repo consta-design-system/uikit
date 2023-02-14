@@ -37,6 +37,7 @@ import {
   TextFieldExampleMaskPhone,
   TextFieldExampleMaskPassport,
   TextFieldExampleMaskBankAccount,
+  TextFieldExampleMaskPipe,
 } from './examples/TextFieldExampleMask/TextFieldExampleMask';
 
 ```tsx
@@ -65,10 +66,12 @@ import { TextField } from '@consta/uikit/TextField';
   - [Строки и колонки](#строки-и-колонки)
   - [Минимальная и максимальная высота](#минимальная-и-максимальная-высота)
 - [Маскированние](#маскирование)
-  - [Сумма](#сумма)
-  - [Телефон](#телефон)
-  - [Паспорт](#паспорт)
-  - [Банковский счет](#банковский-счет)
+  - [Изменения из вне](#изменения-из-вне)
+  - [Примеры](#примеры)
+    - [Сумма](#сумма)
+    - [Телефон](#телефон)
+    - [Паспорт](#паспорт)
+    - [Банковский счет](#банковский-счет)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -453,9 +456,66 @@ export const TextFieldExampleWtihClearButton = () => {
 
 ## Маскирование
 
-Для того чтобы использовать маски вместе с компонентом `TextField` необходимо импортировать пакет `imask`.
+Для того чтобы использовать маски вместе с компонентом `TextField` необходимо импортировать хук `useIMask`.
 
-### Сумма
+Данный хук принимает три параметра:
+
+- значение
+- функцию обработчик изменений
+- опции для маски
+
+Подробное описание по составлению собственных масок можно найти в документации к [imask](https://imask.js.org/guide.html).
+
+| Свойство    | Тип                                                                                                              | По умолчанию | Описание           |
+| ----------- | ---------------------------------------------------------------------------------------------------------------- | ------------ | ------------------ |
+| value       | `string, null`                                                                                                   | -            | Значение           |
+| onChange    | `(value: string`<code>&#124;</code>`null, params: { e: Event, value: string`<code>&#124;</code>`null }) => void` | -            | Функция обработчик |
+| maskOptions | `string`<code>&#124;</code>`MASK extends IMask.AnyMaskedOptions`                                                 | -            | Параметры маски    |
+
+### Изменения из вне
+
+В случае когда значение `TextField` может меняться из вне (изменения происходят не из поля ввода), необходимо использовать функцию [`IMask.pipe`](https://imask.js.org/guide.html#pipe),
+для преобразования значения под формат маски
+
+```tsx
+import IMask from 'imask';
+import React, { useState } from 'react';
+
+import { TextField, useIMask } from '@consta/uikit/TextField';
+
+export const TextFieldExampleMaskPipe = () => {
+  const [value, setValue] = useState<string | null>(null);
+
+  const mask = '+{7}(000)000-00-00';
+
+  const { inputRef } = useIMask({
+    value,
+    onChange: setValue,
+    maskOptions: mask,
+  });
+
+  return (
+    <>
+      <TextField
+        value={value}
+        label="Телефон"
+        placeholder="+7(999)999-99-99"
+        inputRef={inputRef}
+      />
+      <Button
+        label="Изменить"
+        onClick={() => setValue(IMask.pipe('79121', { mask }))}
+      />
+    </>
+  );
+};
+```
+
+<TextFieldExampleMaskPipe />
+
+### Примеры
+
+#### Сумма
 
 ```tsx
 import IMask from 'imask';
@@ -496,7 +556,7 @@ export const TextFieldExampleMaskAmount = () => {
 
 <TextFieldExampleMaskAmount />
 
-### Телефон
+#### Телефон
 
 ```tsx
 import IMask from 'imask';
@@ -526,7 +586,7 @@ export const TextFieldExampleMaskPhone = () => {
 
 <TextFieldExampleMaskPhone />
 
-### Паспорт
+#### Паспорт
 
 ```tsx
 import IMask from 'imask';
@@ -556,7 +616,7 @@ export const TextFieldExampleMaskPassport = () => {
 
 <TextFieldExampleMaskPassport />
 
-### Банковский счет
+#### Банковский счет
 
 ```tsx
 import IMask from 'imask';

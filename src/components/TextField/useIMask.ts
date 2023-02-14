@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useMutableRef } from '##/hooks/useMutableRef';
 
 type Props<MASK extends IMask.AnyMaskedOptions> = {
-  value?: string | null;
+  value: string | null;
   onChange?: (
     value: string | null,
     params: { e: Event; value: string | null },
