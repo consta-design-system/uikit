@@ -99,6 +99,7 @@ export type ProgressStepBarItemProps = {
   size: PropSize;
   onClick?: (e: React.MouseEvent) => void;
   pointRef?: React.RefObject<HTMLButtonElement>;
+  className?: string;
 };
 
 export const cnProgressStepBar = cn('ProgressStepBar');
@@ -179,4 +180,44 @@ export const getLineSize: (
     else size = activeElementPosition.x - containerPosition.x;
   }
   return size;
+};
+
+const getRefSize = (ref: React.RefObject<HTMLElement>) => {
+  if (ref.current) {
+    const { width, height } = ref.current.getBoundingClientRect();
+    return [width, height];
+  }
+  return [0, 0];
+};
+
+export const calculateLines = (
+  refs: React.RefObject<HTMLElement>[],
+  direction: PropDirection,
+) => {
+  const sizes: number[] = [];
+  refs.forEach((ref, index) => {
+    if (index !== refs.length - 1) {
+      const firstSize = getRefSize(ref);
+      const secondSize = getRefSize(refs[index + 1]);
+      let size = 0;
+      if (index === 0) {
+        size =
+          direction === 'horizontal'
+            ? firstSize[0] + secondSize[0] / 2
+            : firstSize[1];
+      } else if (index === refs.length - 2) {
+        size =
+          direction === 'horizontal'
+            ? firstSize[0] / 2 + secondSize[0]
+            : firstSize[1];
+      } else {
+        size =
+          direction === 'horizontal'
+            ? firstSize[0] / 2 + secondSize[0] / 2
+            : firstSize[1];
+      }
+      sizes.push(size);
+    }
+  });
+  return sizes;
 };

@@ -18,10 +18,10 @@ import { useScrollElements } from '../../hooks/useScrollElements/useScrollElemen
 import { Button } from '../Button/Button';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import {
+  calculateLines,
   cnProgressStepBar,
   DefaultItem,
   getItemPosition,
-  getLineSize,
   Line,
   ProgressStepBarComponent,
   ProgressStepBarItemProps,
@@ -60,7 +60,6 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), containerRef);
 
-  const [lines, setLines] = useState<Line[]>([]);
   const [visibleIndex, setVisibleIndex] = useState<number>(
     activeStepIndex || 0,
   );
@@ -79,18 +78,17 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     [steps.length],
   );
 
-  useEffect(() => {
-    if (steps.length > 0) {
-      const linesArray: Line[] = [];
-      steps.forEach((step, index) => {
-        if (index !== steps.length - 1)
-          linesArray.push({
-            status: getItemLineStatus(step) || 'normal',
-            size: getLineSize(containerRef, stepsRef[index + 1], direction),
-          });
-      });
-      setLines(linesArray);
-    }
+  const lines = useMemo(() => {
+    const linesArray: Line[] = [];
+    const sizes = calculateLines(refs, direction);
+    steps.forEach((step, index) => {
+      if (index !== steps.length - 1)
+        linesArray.push({
+          status: getItemLineStatus(step) || 'normal',
+          size: sizes[index] ?? 0,
+        });
+    });
+    return linesArray;
   }, [activeStepIndex, steps, direction, size, width, height]);
 
   useEffect(() => {
@@ -137,6 +135,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
       position: getItemPosition(index, steps.length),
       pointRef: stepsRef[index] as React.RefObject<HTMLButtonElement>,
       direction,
+      className: cnProgressStepBar('Item'),
       onClick: onClick || onItemClickHandler,
       key: cnProgressStepBar({ index }),
       tooltipZIndex:
@@ -150,7 +149,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     <div
       {...otherProps}
       style={style}
-      className={cnProgressStepBar(null, [className])}
+      className={cnProgressStepBar({ isOverflow }, [className])}
       ref={useForkRef([ref, containerRef])}
     >
       {isOverflow && direction !== 'vertical' && (
