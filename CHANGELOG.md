@@ -1,5 +1,22 @@
 # Changelog
 
+## v4.11.0 (16/02/2023)
+Самое важное:
+
+- В `TextField` добавлена документация по использованию масок
+- В `Combobox`, `AutoComplete` и `UserSelect` добавлена возможность программно управлять значением поиска 
+
+---
+
+- [docs(ChoiceGroup): update link to sandbox (#2910)](https://github.com/consta-design-system/uikit/commit/9575b7d4860bd6977dad9e6e8e3c4305c0b56f9b) - [@N1MBER](https://github.com/N1MBER)
+- [feat(ProgressStepBar): rewrite line rendering and fix bug with hidden outline (#2900)](https://github.com/consta-design-system/uikit/commit/7f8d1e12bc6381c5a17802d0b7d739c4028e7f60) - [@N1MBER](https://github.com/N1MBER)
+- [docs(TextField): add examples with imask usage (#2890)](https://github.com/consta-design-system/uikit/commit/0559e3ba5c6cab499eac3e95c76cefbb8cfa6ced) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Selects): fix logic of choicing disabled items (#2901)](https://github.com/consta-design-system/uikit/commit/f98ee2985677150f446c8d1cd263be0b8c70fdc1) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Selects): add searchValue prop (#2898)](https://github.com/consta-design-system/uikit/commit/e526359e713cdb34e788a6003c8488d8f0de9770) - [@N1MBER](https://github.com/N1MBER)
+- [fix(TextField): fix bug with scroll on disabled textarea (#2897)](https://github.com/consta-design-system/uikit/commit/060eb2259fad7622f5850de87e8087cee2324825) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.10.0 (08/02/2023)
 Самое важное:
 
@@ -413,8 +430,3 @@ UserSelectDeprecated
 - [fix(DateTime): fixed multiplicity (#2389)](https://github.com/consta-design-system/uikit/commit/fd2fc46f3f0da6b6df419460522a12f8e5ff1e0a) - [@gizeasy](https://github.com/gizeasy)
 - [fix(Sidebar): fixed rootClassName (#2387)](https://github.com/consta-design-system/uikit/commit/406baed6caaaf72bae44d80054a15ff640bc8873) - [@gizeasy](https://github.com/gizeasy)
 - [feat(FieldGroup): add FieldGroup](https://github.com/consta-design-system/uikit/commit/40fee71989c9c1c4603e3b65cb132a4f418fa24a) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.24.4 (08/06/2022)
-- [refactor(DragNDropField): refactor locale (#2361)](https://github.com/consta-design-system/uikit/commit/15fbb25839545c6ab6a2be82f23addd65eb82f26) - [@gizeasy](https://github.com/gizeasy)
