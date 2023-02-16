@@ -76,6 +76,7 @@ const ComboboxRender = <
     getGroupKey,
     getGroupLabel,
     renderItem,
+    searchValue: searchValueProp,
     renderValue: renderValueProp,
     onCreate,
     inputRef: inputRefProp,
@@ -119,6 +120,7 @@ const ComboboxRender = <
     getItemLabel,
     getItemKey,
     getGroupKey,
+    searchValue: searchValueProp,
     getItemGroupKey,
     getItemDisabled,
     multiple,
@@ -155,7 +157,8 @@ const ComboboxRender = <
         label={getItemLabel(item)}
         key={getItemKey(item)}
         size={size}
-        handleRemove={disabled ? undefined : handleRemove}
+        disabled={disabled || getItemDisabled(item)}
+        handleRemove={handleRemove}
       />
     );
   };

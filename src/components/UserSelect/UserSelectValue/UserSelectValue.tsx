@@ -25,7 +25,7 @@ export const UserSelectValue: React.FC<UserValueProps> = (props) => {
 
   return (
     <User
-      className={cnUserSelectValue({ multiple, size })}
+      className={cnUserSelectValue({ multiple, size, disabled })}
       avatarUrl={avatarUrl}
       name={label}
       info={subLabel}

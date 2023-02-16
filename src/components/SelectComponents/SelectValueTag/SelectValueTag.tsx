@@ -9,28 +9,22 @@ type SelectValueTagProps = {
   label: string;
   size: 's' | 'm' | 'l';
   children?: never;
+  disabled?: boolean;
   handleRemove?: (e: React.SyntheticEvent) => void;
 };
 
 export const cnSelectValueTag = cn('SelectValueTag');
 
 export const SelectValueTag: React.FC<SelectValueTagProps> = (props) => {
-  const { handleRemove, size, label } = props;
+  const { handleRemove = () => {}, size, label, disabled } = props;
 
-  return handleRemove ? (
+  return (
     <Tag
-      className={cnSelectValueTag({ size })}
+      className={cnSelectValueTag({ size, disabled })}
       label={label}
       mode="cancel"
       onCancel={handleRemove}
       size={size}
-    />
-  ) : (
-    <Tag
-      className={cnSelectValueTag({ size, disabled: true })}
-      label={label}
-      size={size}
-      mode="info"
     />
   );
 };

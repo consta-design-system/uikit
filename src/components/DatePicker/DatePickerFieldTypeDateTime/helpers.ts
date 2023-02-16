@@ -5,13 +5,16 @@ import {
   addSeconds,
   format,
   isValid,
+  isWithinInterval,
   parse,
   startOfDay,
   startOfHour,
   startOfMinute,
 } from 'date-fns';
 import IMask from 'imask';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+
+import { useIMask } from '##/components/TextField';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { leapYear } from '../../../utils/date';
@@ -30,7 +33,9 @@ import {
 } from '../../TextField/TextField';
 import {
   datePickerPropFormatTypeDate,
+  datePickerPropFormatTypeDateTime,
   datePickerPropSeparatorDefault,
+  getParts,
   getPartsDate,
   getTimeEnum,
 } from '../helpers';
@@ -84,192 +89,275 @@ export type DatePickerFieldTypeDateTimeProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export const useImask = (
-  formatProp: string,
-  separator: string,
-  multiplicityHours: number | undefined,
-  multiplicitySeconds: number | undefined,
-  multiplicityMinutes: number | undefined,
-  inputRef: React.RefObject<HTMLInputElement>,
-  stringValue: string | null,
-  onError: DatePickerPropOnError | undefined,
-  handleChanhe: (props: { e: Event; value: string | null }) => void,
-) => {
-  const imaskRef = useRef<IMask.InputMask<IMask.MaskedDateOptions> | null>(
-    null,
-  );
+type UsePickerProps = {
+  value?: Date | null;
+  onChange?: DatePickerFieldTypeDateTimePropOnChange;
+  onError?: DatePickerPropOnError;
+  format: string;
+  separator: string;
+  minDate: Date;
+  maxDate: Date;
+  multiplicityHours: number | undefined;
+  multiplicitySeconds: number | undefined;
+  multiplicityMinutes: number | undefined;
+};
+
+export const usePicker = (props: UsePickerProps) => {
+  const {
+    value,
+    onChange,
+    onError,
+    format: formatProp,
+    separator,
+    maxDate,
+    minDate,
+    multiplicityHours,
+    multiplicityMinutes,
+    multiplicitySeconds,
+  } = props;
+  const onChangeRef = useMutableRef(onChange);
+  const valueRef = useMutableRef(value);
   const onErrorRef = useMutableRef(onError);
-  const handleChanheRef = useMutableRef(handleChanhe);
 
-  // задаем маску и сохраняем обьект маски в ref
-  // обнавляем при смене формата
-  useEffect(() => {
-    if (!inputRef.current) {
-      return;
-    }
+  const [stringValue, setStringValue] = useState<string | null>(
+    value && isValid(value) ? format(value, formatProp) : null,
+  );
+  const stringValueRef = useMutableRef(stringValue);
 
-    imaskRef.current = IMask(inputRef.current, {
-      mask: Date,
-      pattern: formatProp,
-      blocks: {
-        yyyy: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 9999,
-        },
-        MM: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 12,
-        },
-        dd: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 31,
-        },
-        HH:
-          multiplicityHours && multiplicityHours > 1
-            ? {
-                mask: IMask.MaskedEnum,
-                enum: getTimeEnum(
-                  24,
-                  multiplicityHours,
-                  startOfDay,
-                  addHours,
-                  getLabelHours,
-                ),
-              }
-            : {
-                mask: IMask.MaskedRange,
-                from: 0,
-                to: 23,
-              },
-        mm:
-          multiplicityMinutes && multiplicityMinutes > 1
-            ? {
-                mask: IMask.MaskedEnum,
-                enum: getTimeEnum(
-                  60,
-                  multiplicityMinutes,
-                  startOfHour,
-                  addMinutes,
-                  getLabelMinutes,
-                ),
-              }
-            : {
-                mask: IMask.MaskedRange,
-                from: 0,
-                to: 59,
-              },
-        ss:
-          multiplicitySeconds && multiplicitySeconds > 1
-            ? {
-                mask: IMask.MaskedEnum,
-                enum: getTimeEnum(
-                  60,
-                  multiplicitySeconds,
-                  startOfMinute,
-                  addSeconds,
-                  getLabelSeconds,
-                ),
-              }
-            : {
-                mask: IMask.MaskedRange,
-                from: 0,
-                to: 59,
-              },
-      },
-      lazy: true,
-      autofix: true,
-      format: (date) => format(date, formatProp),
-      parse: (string) => parse(string, formatProp, new Date()),
-      validate: (string: string) => {
-        const [dd, MM, yyyy, HH, mm, ss] = getPartsDate(
-          string,
+  const formatParts = useMemo(
+    () => getParts(formatProp, separator, true),
+    [formatProp, separator],
+  );
+
+  const handleChange = useCallback(
+    ({ e, value: stringValue }: { e: Event; value: string | null }) => {
+      if (stringValueRef.current === stringValue) {
+        return;
+      }
+
+      setStringValue(stringValue);
+      const onChange = onChangeRef.current;
+      const value = valueRef.current;
+
+      if (onChange) {
+        if (!stringValue) {
+          if (value) {
+            onChange({ e, value: null });
+          }
+          return;
+        }
+
+        const partsDate = getPartsDate(
+          stringValue,
           formatProp,
           separator,
           true,
           ['dd', 'MM', 'yyyy', 'HH', 'mm', 'ss'],
         );
 
-        if (
-          dd &&
-          MM &&
-          !isValid(
-            parse(
-              `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${leapYear}`,
-              datePickerPropFormatTypeDate,
-              new Date(),
-            ),
-          )
-        ) {
-          onErrorRef.current?.({
-            type: datePickerErrorTypes[1],
-            stringValue: string,
-            dd,
-            MM,
-            yyyy,
-            HH,
-            mm,
-            ss,
-          });
+        const [dd, MM, yyyy, HH, mm, ss] = partsDate;
 
-          return false;
+        if (partsDate.filter((item) => !!item).length === formatParts.length) {
+          const date = parse(
+            `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy} ${
+              HH || '00'
+            }:${mm || '00'}:${ss || '00'}`,
+            datePickerPropFormatTypeDateTime,
+            new Date(),
+          );
+          if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
+            onErrorRef.current?.({
+              type: datePickerErrorTypes[0],
+              stringValue,
+              dd,
+              MM,
+              yyyy,
+              date,
+              HH,
+              mm,
+              ss,
+            });
+
+            if (value) {
+              onChange({ e, value: null });
+            }
+            return;
+          }
+          onChange({ e, value: date });
+        } else if (value) {
+          onChange({ e, value: null });
         }
+      }
+    },
+    [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
+  );
 
-        if (
-          dd &&
-          MM &&
-          yyyy &&
-          !isValid(
-            parse(
-              `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy}`,
-              datePickerPropFormatTypeDate,
-              new Date(),
-            ),
-          )
-        ) {
-          onErrorRef.current?.({
-            type: datePickerErrorTypes[1],
-            stringValue: string,
-            dd,
-            MM,
-            yyyy,
-            HH,
-            mm,
-            ss,
-          });
+  const options: IMask.InputMask<IMask.MaskedDateOptions> = useMemo(
+    () =>
+      ({
+        mask: Date,
+        pattern: formatProp,
+        blocks: {
+          yyyy: {
+            mask: IMask.MaskedRange,
+            from: 1,
+            to: 9999,
+          },
+          MM: {
+            mask: IMask.MaskedRange,
+            from: 1,
+            to: 12,
+          },
+          dd: {
+            mask: IMask.MaskedRange,
+            from: 1,
+            to: 31,
+          },
+          HH:
+            multiplicityHours && multiplicityHours > 1
+              ? {
+                  mask: IMask.MaskedEnum,
+                  enum: getTimeEnum(
+                    24,
+                    multiplicityHours,
+                    startOfDay,
+                    addHours,
+                    getLabelHours,
+                  ),
+                }
+              : {
+                  mask: IMask.MaskedRange,
+                  from: 0,
+                  to: 23,
+                },
+          mm:
+            multiplicityMinutes && multiplicityMinutes > 1
+              ? {
+                  mask: IMask.MaskedEnum,
+                  enum: getTimeEnum(
+                    60,
+                    multiplicityMinutes,
+                    startOfHour,
+                    addMinutes,
+                    getLabelMinutes,
+                  ),
+                }
+              : {
+                  mask: IMask.MaskedRange,
+                  from: 0,
+                  to: 59,
+                },
+          ss:
+            multiplicitySeconds && multiplicitySeconds > 1
+              ? {
+                  mask: IMask.MaskedEnum,
+                  enum: getTimeEnum(
+                    60,
+                    multiplicitySeconds,
+                    startOfMinute,
+                    addSeconds,
+                    getLabelSeconds,
+                  ),
+                }
+              : {
+                  mask: IMask.MaskedRange,
+                  from: 0,
+                  to: 59,
+                },
+        },
+        lazy: true,
+        autofix: true,
+        format: (date: Date) => format(date, formatProp),
+        parse: (string: string) => parse(string, formatProp, new Date()),
+        validate: (string: string) => {
+          const [dd, MM, yyyy, HH, mm, ss] = getPartsDate(
+            string,
+            formatProp,
+            separator,
+            true,
+            ['dd', 'MM', 'yyyy', 'HH', 'mm', 'ss'],
+          );
+          if (
+            dd &&
+            MM &&
+            !isValid(
+              parse(
+                `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${leapYear}`,
+                datePickerPropFormatTypeDate,
+                new Date(),
+              ),
+            )
+          ) {
+            onErrorRef.current?.({
+              type: datePickerErrorTypes[1],
+              stringValue: string,
+              dd,
+              MM,
+              yyyy,
+              HH,
+              mm,
+              ss,
+            });
+            return false;
+          }
+          if (
+            dd &&
+            MM &&
+            yyyy &&
+            !isValid(
+              parse(
+                `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy}`,
+                datePickerPropFormatTypeDate,
+                new Date(),
+              ),
+            )
+          ) {
+            onErrorRef.current?.({
+              type: datePickerErrorTypes[1],
+              stringValue: string,
+              dd,
+              MM,
+              yyyy,
+              HH,
+              mm,
+              ss,
+            });
+            return false;
+          }
+          return true;
+        },
+        // проблема в типах IMask
+      } as unknown as IMask.InputMask<IMask.MaskedDateOptions>),
+    [
+      formatProp,
+      separator,
+      multiplicityHours,
+      multiplicitySeconds,
+      multiplicityMinutes,
+    ],
+  );
 
-          return false;
-        }
+  const { inputRef } = useIMask({
+    value: stringValue,
+    onChange: (_val, params) => handleChange?.(params),
+    maskOptions: options,
+  });
 
-        return true;
-      },
-      // проблема в типах IMask
-    }) as unknown as IMask.InputMask<IMask.MaskedDateOptions>;
-  }, [
-    formatProp,
-    separator,
-    multiplicityHours,
-    multiplicitySeconds,
-    multiplicityMinutes,
-  ]);
-
-  // Нужно для синхранизации value c Imask,
-  // так как value мы можем задать через пропс без самого ввода,
-  // и Imask требует ручной синхронихации в этом случае
-  const onAcept = useCallback((e: Event) => {
-    handleChanheRef.current({ e, value: imaskRef.current?.value || null });
-  }, []);
-
+  // при изменении value, нужно обновить stringValue
   useEffect(() => {
-    imaskRef.current?.on('accept', onAcept);
-    return () => {
-      imaskRef.current?.off('accept', onAcept);
-    };
-  }, []);
+    if (value && isValid(value)) {
+      setStringValue(format(value, formatProp));
+    } else if (stringValue?.length === formatProp.length) {
+      // если количество введенных символов меньше чем в формате маски
+      // то не нужно мешать вводу с клавиатуры
+      // если дата была введена полностью и value пришел null,
+      // то можно считать что поле нуждается в очистке
+      setStringValue('');
+    }
+  }, [value?.getTime()]);
 
-  useEffect(() => {
-    imaskRef.current?.updateValue();
-  }, [stringValue]);
+  return {
+    stringValue,
+    inputRef,
+  };
 };
