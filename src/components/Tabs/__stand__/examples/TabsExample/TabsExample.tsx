@@ -3,19 +3,19 @@ import React, { useState } from 'react';
 
 import { Tabs } from '../../../Tabs';
 
-type Item = string;
+const items: string[] = ['Один', 'Два', 'Три'];
 
-const items: Item[] = ['Один', 'Два', 'Три'];
+const getItemLabel = (label: string) => label;
 
 export const TabsExample = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
+  const [value, setValue] = useState<string | null>(items[0]);
   return (
     <Example col={1}>
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemLabel={(item) => item}
+        getItemLabel={getItemLabel}
       />
     </Example>
   );

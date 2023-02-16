@@ -5,15 +5,14 @@ import FocusTrap from 'focus-trap-react';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
-import {
-  animateTimeout,
-  cnMixPopoverAnimate,
-} from '../../../mixs/MixPopoverAnimate/MixPopoverAnimate';
-import { cn } from '../../../utils/bem';
-import { Button } from '../../Button/Button';
-import { Direction, Popover } from '../../Popover/Popover';
+import { Button } from '##/components/Button';
+import { ListBox } from '##/components/ListCanary';
+import { Direction, Popover } from '##/components/Popover/Popover';
+import { useFlag } from '##/hooks/useFlag';
+import { useForkRef } from '##/hooks/useForkRef';
+import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
+import { cn } from '##/utils/bem';
+
 import { TabsMoreItemsComponent, TabsMoreItemsProps } from '../types';
 
 const cnTabsMoreItems = cn('TabsMoreItems');
@@ -22,14 +21,15 @@ const TabsMoreItemsRender = (
   props: TabsMoreItemsProps,
   ref: React.Ref<HTMLDivElement>,
 ) => {
-  const { items, renderItem, getItemLabel, getItemChecked, height } = props;
-  const [isOpen, { off, toggle }] = useFlag(false);
+  const { items, renderItem, getItemLabel, getItemChecked, height, size } =
+    props;
+  const [open, setOpen] = useFlag(false);
   const buttonRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
   const [direction, setDirection] = useState<Direction>('downStartLeft');
 
   useEffect(() => {
-    items.length === 0 && off();
+    items.length === 0 && setOpen.off();
   }, [items]);
 
   return (
@@ -44,11 +44,11 @@ const TabsMoreItemsRender = (
           view="ghost"
           onlyIcon
           iconLeft={IconMeatball}
-          onClick={toggle}
+          onClick={setOpen.toggle}
         />
       </div>
       <Transition
-        in={isOpen}
+        in={open}
         unmountOnExit
         nodeRef={popoverRef}
         timeout={animateTimeout}
@@ -83,10 +83,16 @@ const TabsMoreItemsRender = (
                   return !isClickInsideButton;
                 },
                 allowOutsideClick: true,
-                onDeactivate: off,
+                onDeactivate: setOpen.off,
               }}
             >
-              <div className={cnTabsMoreItems('Content')}>
+              <ListBox
+                shadow
+                border
+                size={size}
+                form="default"
+                className={cnTabsMoreItems('Content')}
+              >
                 {items.map((item) => (
                   <div
                     key={getItemLabel(item)}
@@ -94,10 +100,10 @@ const TabsMoreItemsRender = (
                       active: getItemChecked(item),
                     })}
                   >
-                    {renderItem(item, off)}
+                    {renderItem(item, setOpen.off, true)}
                   </div>
                 ))}
-              </div>
+              </ListBox>
             </FocusTrap>
           </Popover>
         )}

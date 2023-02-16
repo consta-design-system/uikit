@@ -1,4 +1,4 @@
-import { IconComponent } from '@consta/icons/Icon';
+import { cnIcon, IconComponent } from '@consta/icons/Icon';
 import { IconCamera } from '@consta/icons/IconCamera';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
@@ -77,9 +77,7 @@ function getItem(index = 0) {
 }
 
 function getIcon(index = 0) {
-  return getRender().querySelectorAll(`.${cnTabsTab('Icon')}`)[
-    index
-  ] as HTMLSpanElement;
+  return getRender().querySelectorAll(`.${cnIcon()}`)[index] as HTMLSpanElement;
 }
 
 describe('Компонент Tabs', () => {

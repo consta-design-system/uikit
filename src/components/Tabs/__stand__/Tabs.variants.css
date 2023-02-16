@@ -1,0 +1,5 @@
+.Badge.TabsVariants-Badge_disabled,
+.Badge.Badge_status_system.TabsVariants-Badge_disabled {
+  color: var(--color-control-typo-disable);
+  background: var(--color-control-bg-disable);
+}

@@ -40,6 +40,7 @@ const ListItemRender = (
     onClick,
     status,
     space,
+    iconSize,
     ...otherProps
   } = props;
 
@@ -72,7 +73,7 @@ const ListItemRender = (
       ref={ref}
       view={status}
     >
-      {renderSlot(leftSide, 'left', size, leftIcon)}
+      {renderSlot(leftSide, 'left', size, leftIcon, iconSize)}
       {!rightIcon && !rightSide && !leftSide && !leftIcon ? (
         label
       ) : (
@@ -80,7 +81,7 @@ const ListItemRender = (
           {label}
         </span>
       )}
-      {renderSlot(rightSide, 'right', size, rightIcon)}
+      {renderSlot(rightSide, 'right', size, rightIcon, iconSize)}
     </Text>
   );
 };

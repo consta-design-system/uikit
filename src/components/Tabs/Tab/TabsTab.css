@@ -1,70 +1,48 @@
-.TabsTab {
+.Text.ListItem.TabsTab {
   --tab-indent: var(--space-m);
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: var(--tab-padding) 0;
   color: var(--color-typo-secondary);
   background-color: transparent;
   border: none;
-  font-family: var(--font);
-  font-size: var(--tab-font-size);
-  line-height: var(--size-text-2xl);
   text-align: left;
-  cursor: pointer;
   transition: color 0.2s;
 
-  &_size {
-    &_xs {
-      --only-icon-size: var(--space-m);
-      --tab-padding: calc(calc(var(--space-xs) - var(--space-3xs)) / 2);
-      --tab-font-size: var(--size-text-xs);
-    }
-
-    &_s {
-      --only-icon-size: var(--space-l);
-      --tab-padding: calc(var(--space-xs) - var(--space-3xs));
-      --tab-font-size: var(--size-text-s);
-    }
-
-    &_m {
-      --only-icon-size: var(--space-xl);
-      --tab-padding: calc(calc(var(--space-m) - var(--space-3xs)) / 2);
-      --tab-font-size: var(--size-text-m);
-    }
+  &:not(&_renderInDropdown) {
+    line-height: var(--size-text-2xl);
   }
 
-  &_checked,
-  &:hover {
+  &_checked:not(&_disabled),
+  &:hover:not(&_disabled) {
     color: var(--color-typo-primary);
   }
 
-  /* Увеличиваем область клика и фокуса */
-  &::before {
+  &:not(&_renderInDropdown)&::before {
     content: '';
     position: absolute;
     top: 0;
+
+    /* Увеличиваем область клика и фокуса */
     right: calc(-1 * var(--space-2xs));
     left: calc(-1 * var(--space-2xs));
     bottom: 0;
     display: block;
+    width: auto;
+    background: transparent;
     border-radius: var(--control-radius);
+    opacity: 1;
+  }
+
+  &_disabled {
+    color: var(--color-control-typo-disable);
   }
 
   &:focus {
     outline: none;
   }
 
-  &-Icon {
-    flex-shrink: 0;
-  }
-
-  &:not(&_onlyIcon) &-Icon {
-    margin-right: calc(var(--tab-indent) * 0.5);
-  }
-
   &_onlyIcon {
     justify-content: center;
-    width: var(--only-icon-size);
   }
 }

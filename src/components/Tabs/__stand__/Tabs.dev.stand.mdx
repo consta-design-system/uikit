@@ -10,6 +10,8 @@ import {
 import { TabsExampleLinePosition } from './examples/TabsExampleLinePosition/TabsExampleLinePosition';
 import { TabsExampleFitModeDropdown } from './examples/TabsExampleFitModeDropdown/TabsExampleFitModeDropdown';
 import { TabsExampleFitModeScroll } from './examples/TabsExampleFitModeScroll/TabsExampleFitModeScroll';
+import { TabsExampleSide } from './examples/TabsExampleSide/TabsExampleSide';
+import { TabsExampleDisabled } from './examples/TabsExampleDisabled/TabsExampleDisabled';
 
 ```tsx
 import { Tabs } from '@consta/uikit/Tabs';
@@ -18,13 +20,15 @@ import { Tabs } from '@consta/uikit/Tabs';
 <MdxMenu>
 
 - [Табы](#табы)
+  - [Тип табов по умолчанию](#тип-табов-по-умолчанию)
   - [Текст](#текст-для-таба)
   - [Иконки](#иконки)
+  - [Дополнительный контент](#дополнительный-контент)
+  - [Не акивные элементы](#не-акивные-элементы)
 - [Размер](#размер-табов)
 - [Рамка](#рамка)
 - [Расположение табов и линии](#расположение-табов-и-линии)
 - [Адаптивность](#адаптивность)
-- [Кастомизация](#кастомизация)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 - [Пример использования](#пример)
@@ -36,44 +40,60 @@ import { Tabs } from '@consta/uikit/Tabs';
 Создайте массив с информацией о табах и укажите его имя в свойстве `items`.
 Для каждого таба нужно добавить текст (он же — уникальный ключ). Можно добавить [иконку](#иконки), но не обязательно.
 
+### Тип табов по умолчанию
+
+По умолчантю используется следующий тип, но компонент может принимать произвольный тип.
+
+```tsx
+type TabsItemDefault = {
+  label: string | number;
+  leftIcon?: IconComponent;
+  rightIcon?: IconComponent;
+  rightSide?: React.ReactNode;
+  leftSide?: React.ReactNode;
+  disabled?: boolean;
+};
+```
+
+`label`, `leftIcon`, `rightIcon`, `rightSide`, `leftSide`, `disabled` для элемента компонент будет опимисично брать операясь на тип по умолчанию.
+Так же имеется возможность указать компоненту другое место хранения свойст таба.
+
 ### Текст для таба
 
-Текст для таба нужно добавить в `items` и получить с помощью функции `getItemLabel`.
+По умолчанию компонент берет текст для таба из [`ITEM['label']`](#тип-табов-по-умолчанию).
+Вы можете использовать свой тип `ITEM` и указать компоненту откуда брать текст с помошью `getItemLabel`
 
 Хорошо, если текст будет коротким и лаконичным, а табы — примерно одинаковой длины.
 
-<TabsExample />
-
 ```tsx
-mport React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Tabs } from '@consta/uikit/Tabs';
 
-type Item = string;
+const items: string[] = ['Один', 'Два', 'Три'];
 
-const items: Item[] = ['Один', 'Два', 'Три'];
+const getItemLabel = (label: string) => label;
 
 export const TabsExample = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
+  const [value, setValue] = useState<string | null>(items[0]);
   return (
-    <>
-      <Tabs
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        items={items}
-        getItemLabel={(item) => item}
-      />
-    </>
+    <Tabs
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      items={items}
+      getItemLabel={getItemLabel}
+    />
   );
 };
 ```
 
+<TabsExample />
+
 ### Иконки
 
-Чтобы добавить иконки, используйте функцию `getItemIcon`. В неё нужно передать название элемента массива c иконкой.
+По умолчанию компонент берет иконки из [`ITEM['leftIcon']`](#тип-табов-по-умолчанию) или [`ITEM['rightIcon']`](#тип-табов-по-умолчанию).
+Вы можете использовать свой тип `ITEM` и указать компоненту откуда брать иконки с помошью `getItemLeftIcon` или `getItemRightIcon`.
 
 Добавьте `onlyIcon`, чтобы убрать текст и оставить только иконку (текст будет показываться по наведению).
-
-<TabsExampleIcon />
 
 ```tsx
 import React, { useState } from 'react';
@@ -83,24 +103,26 @@ import { IconRing } from '@consta/uikit/IconRing';
 import { IconCamera } from '@consta/uikit/IconCamera';
 
 type Item = {
-  name: string;
-  image?: IconComponent;
+  label: string;
+  image: IconComponent;
 };
 
-const items = [
+const items: Item[] = [
   {
-    name: 'Первый',
+    label: 'Первый',
     image: IconPhoto,
   },
   {
-    name: 'Второй',
+    label: 'Второй',
     image: IconRing,
   },
   {
-    name: 'Третий вариант',
+    label: 'Третий вариант',
     image: IconCamera,
   },
 ];
+
+const getItemIcon = (item: Item) => item.image;
 
 export const TabsExampleIcon = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
@@ -110,15 +132,19 @@ export const TabsExampleIcon = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemLabel={(item) => item.name}
-        getItemIcon={(item) => item.image}
+        getItemLeftIcon={getItemIcon}
       />
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemLabel={(item) => item.name}
-        getItemIcon={(item) => item.image}
+        getItemRightIcon={getItemIcon}
+      />
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getItemLeftIcon={getItemIcon}
         onlyIcon
       />
     </>
@@ -126,13 +152,133 @@ export const TabsExampleIcon = () => {
 };
 ```
 
+<TabsExampleIcon />
+
+### Дополнительный контент
+
+Вы можете указать дополнительный контент для таба слева и справа.
+
+По умолчанию компонент берет дополнительный контент из [`ITEM['leftSide']`](#тип-табов-по-умолчанию) или [`ITEM['rightSide']`](#тип-табов-по-умолчанию).
+Вы можете использовать свой тип `ITEM` и указать компоненту откуда брать дополнительный контент с помошью `getItemLeftSide` или `getItemRightSide`.
+
+Если передать массив элементов то отступы между элементами дополнительно контента расставятся автоматически.
+
+```tsx
+import React, { useState } from 'react';
+import { Badge } from '@consta/uikit/Badge';
+import { Button } from '@consta/uikit/Button';
+import { Example } from '@consta/stand';
+import { IconRestart } from '@consta/icons/IconRestart';
+import { Tabs } from '@consta/uikit/Tabs';
+
+type Item = {
+  label: string;
+  status: 'success' | 'error';
+};
+
+const items: Item[] = [
+  {
+    label: 'typescript test',
+    status: 'success',
+  },
+  {
+    label: 'unit test',
+    status: 'error',
+  },
+  {
+    label: 'build test',
+    status: 'success',
+  },
+];
+
+const getItemRightSide = ({ status }: Item) => [
+  <Badge size="xs" status={status} label={status} />,
+  status === 'error' && (
+    <Button
+      tabIndex={0}
+      as="span"
+      label="Rerun"
+      iconLeft={IconRestart}
+      view="ghost"
+      size="xs"
+      onlyIcon
+    />
+  ),
+];
+
+export const TabsExampleSide = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
+  return (
+    <Example col={1}>
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getItemRightSide={getItemRightSide}
+        fitMode="scroll"
+      />
+    </Example>
+  );
+};
+```
+
+<TabsExampleSide />
+
+## Не акивные элементы
+
+Вы можете отключить как все табы используя свойство `disabled`
+так и отдельный элемент указав `disabled` у элемента или используя `getItemDisabled`
+
+```tsx
+import { Example } from '@consta/stand';
+import React, { useState } from 'react';
+import { Tabs } from '@consta/uikit/Tabs';
+
+type Item = {
+  label: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Один',
+  },
+  {
+    label: 'Два',
+    disabled: true,
+  },
+  {
+    label: 'Три',
+  },
+];
+
+export const TabsExampleDisabled = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
+  return (
+    <>
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+      />
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        disabled
+      />
+    </>
+  );
+};
+```
+
+<TabsExampleDisabled />
+
 ## Размер табов
 
 Свойство `size` меняет размер шрифта, отступы между элементами и другие связанные с ними параметры.
 
 Есть три размера — `xs`, `s` и `m` (основной, включен по умолчанию).
-
-<TabsExampleSize />
 
 ```tsx
 import React, { useState } from 'react';
@@ -172,14 +318,14 @@ export const TabsExampleSize = () => {
 };
 ```
 
+<TabsExampleSize />
+
 ## Рамка
 
 За внешний вид табов отвечает свойство `view`. Есть два варианта:
 
 - `bordered` — с рамкой (используется по умолчанию),
 - `clear` — без рамки.
-
-<TabsExampleView />
 
 ```tsx
 import React, { useState } from 'react';
@@ -211,6 +357,8 @@ export const TabsExampleView = () => {
   );
 };
 ```
+
+<TabsExampleView />
 
 ## Расположение табов и линии
 
@@ -249,8 +397,6 @@ export const TabsExampleView = () => {
 
 #### Пример кастомных табов с иконкой
 
-<TabsExampleRenderItem />
-
 ```tsx
 import React, { useState } from 'react';
 import { Tabs, cnTabsTab } from '@consta/uikit/Tabs';
@@ -285,9 +431,9 @@ export const TabsExampleRenderItem = () => {
 };
 ```
 
-#### Пример кастомных табов с бейджиком
+<TabsExampleRenderItem />
 
-<TabsExampleRenderItemBadge />
+#### Пример кастомных табов с бейджиком
 
 ```tsx
 import React, { useState } from 'react';
@@ -348,6 +494,8 @@ export const TabsExampleRenderItemBadge = () => {
 };
 ```
 
+<TabsExampleRenderItemBadge />
+
 ## Импорт
 
 ```tsx
@@ -396,10 +544,9 @@ type RenderItem<ITEM, ELEMENT> = (props: {
 
 ## Пример
 
-```ts
-// src/App.ts
+```tsx
 import React, { useState } from 'react';
-import { Tabs } from '@consta/uikit/TabsCanary';
+import { Tabs } from '@consta/uikit/Tabs';
 
 type Item = string;
 
