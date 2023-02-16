@@ -75,6 +75,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
       onClick,
       position = propPositionDefault,
       tooltipZIndex,
+      className,
       ...otherProps
     } = props;
 
@@ -112,12 +113,15 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
       <>
         <div
           ref={ref}
-          className={cnProgressStepBarItem({
-            direction,
-            position,
-            status: status || propStatusDefault,
-            size,
-          })}
+          className={cnProgressStepBarItem(
+            {
+              direction,
+              position,
+              status: status || propStatusDefault,
+              size,
+            },
+            [className],
+          )}
           {...otherProps}
         >
           <button tabIndex={-1} type="button" {...pointProps} />

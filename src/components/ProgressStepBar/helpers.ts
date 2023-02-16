@@ -99,6 +99,7 @@ export type ProgressStepBarItemProps = {
   size: PropSize;
   onClick?: (e: React.MouseEvent) => void;
   pointRef?: React.RefObject<HTMLButtonElement>;
+  className?: string;
 };
 
 export const cnProgressStepBar = cn('ProgressStepBar');

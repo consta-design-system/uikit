@@ -31,6 +31,10 @@
         &:not(.ProgressStepBar-List_overflow) {
           min-width: 100%;
         }
+
+        & .ProgressStepBar-Item:not(:last-child) {
+          padding-right: var(--space-xs);
+        }
       }
 
       &_vertical {
