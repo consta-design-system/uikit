@@ -1,0 +1,11 @@
+.TooltipPosition {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  &_for_anchor {
+    min-height: 200px;
+    background: var(--color-bg-secondary);
+  }
+}

@@ -1,0 +1,38 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-default)"
+  />
+  <path
+    opacity="0.9"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M51.7692 24C50.2398 24 49 25.2398 49 26.7692V53.0769C49 54.6063 50.2398 55.8462 51.7692 55.8462L95.8461 55.8462L100 60L104.154 55.8462L148.231 55.8462C149.76 55.8462 151 54.6063 151 53.0769V26.7692C151 25.2398 149.76 24 148.231 24H51.7692Z"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    width="60"
+    height="18"
+    rx="2"
+    transform="matrix(1 0 0 -1 70 81)"
+    fill="var(--color-control-typo-placeholder)"
+  />
+  <path
+    d="M1 81H38C39.1046 81 40 80.1046 40 79V65C40 63.8954 39.1046 63 38 63H1V81Z"
+    fill="var(--color-bg-system)"
+  />
+  <path
+    d="M156 79C156 80.1046 156.895 81 158 81H199V63H158C156.895 63 156 63.8954 156 65V79Z"
+    fill="var(--color-bg-system)"
+  />
+  <path
+    d="M196 119C197.657 119 199 117.657 199 116L199 93L0.999999 93L1 116C1 117.657 2.34314 119 4 119L196 119Z"
+    fill="var(--color-control-bg-ghost)"
+  />
+</svg>
