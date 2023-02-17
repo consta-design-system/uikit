@@ -46,6 +46,7 @@ export const TabsTab = forwardRef<HTMLButtonElement, TabsTabProps>(
           role="tab"
           type="button"
           onClick={checked ? undefined : onChange}
+          title={label}
         >
           {Icon && <Icon size={getByMap(mapIconSize, size, iconSize)} />}
         </button>

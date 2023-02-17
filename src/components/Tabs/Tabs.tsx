@@ -1,6 +1,8 @@
 import './Tabs.css';
 
-import React, { createRef, forwardRef, useMemo } from 'react';
+import React, { forwardRef } from 'react';
+
+import { useRefs } from '##/hooks/useRefs';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserved';
@@ -66,11 +68,12 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
 
   const tabsDirection = getTabsDirection(linePosition);
   const isVertical = tabsDirection === 'vertical';
-  const tabRefs = useMemo(
-    () =>
-      new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
-    [items, fitMode, isVertical],
-  );
+  const tabRefs = useRefs<HTMLDivElement>(items.length, [
+    items,
+    fitMode,
+    isVertical,
+  ]);
+
   const tabsDimensions = useResizeObserved(
     tabRefs,
     (el): TabDimensions => ({

@@ -51,26 +51,26 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
             cnTabsFitModeDropdownWrapper('Tab', { hidden: isItemHidden(idx) }),
         })}
       </div>
-      {hiddenItems.length > 0 && (
-        <div
-          ref={moreItemsRef}
-          className={cnTabsFitModeDropdownWrapper('MoreItems')}
-          style={{
-            /* В Safari скрытые табы с абсолютом продолжают растягивать контейнер,
+      <div
+        ref={moreItemsRef}
+        className={cnTabsFitModeDropdownWrapper('MoreItems', {
+          hidden: !hiddenItems.length,
+        })}
+        style={{
+          /* В Safari скрытые табы с абсолютом продолжают растягивать контейнер,
             поэтому приходится позиционировать кнопку абсолютом */
-            left: visibleTabsWidth,
-          }}
-        >
-          <TabsMoreItems
-            items={hiddenItems}
-            renderItem={renderItem}
-            getItemLabel={getItemLabel}
-            getItemChecked={getItemChecked}
-            height={maxTabHeight}
-            size={size}
-          />
-        </div>
-      )}
+          left: hiddenItems.length ? visibleTabsWidth : undefined,
+        }}
+      >
+        <TabsMoreItems
+          items={hiddenItems}
+          renderItem={renderItem}
+          getItemLabel={getItemLabel}
+          getItemChecked={getItemChecked}
+          height={maxTabHeight}
+          size={size}
+        />
+      </div>
     </div>
   );
 };

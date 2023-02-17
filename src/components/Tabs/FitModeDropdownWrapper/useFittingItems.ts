@@ -20,12 +20,7 @@ export const useFittingItems = ({
   const { width: moreItemsWidth } = useComponentSize(moreItemsRef);
 
   const fittingItemsCount = React.useMemo(
-    () =>
-      getFittingItemsCount({
-        tabsDimensions,
-        totalWidth: containerWidth,
-        moreItemsWidth,
-      }),
+    () => getFittingItemsCount(tabsDimensions, containerWidth, moreItemsWidth),
     [tabsDimensions, containerWidth, moreItemsWidth],
   );
 
@@ -38,15 +33,11 @@ export const useFittingItems = ({
   };
 };
 
-export const getFittingItemsCount = ({
-  tabsDimensions,
-  totalWidth,
-  moreItemsWidth,
-}: {
-  tabsDimensions: TabDimensions[];
-  totalWidth: number;
-  moreItemsWidth: number;
-}): number => {
+export const getFittingItemsCount = (
+  tabsDimensions: TabDimensions[],
+  totalWidth: number,
+  moreItemsWidth: number,
+): number => {
   if (!totalWidth) {
     return tabsDimensions.length;
   }

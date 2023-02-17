@@ -15,8 +15,7 @@ export const useRefs = <T, E extends number | string[] = number>(
     if (isNotNumber(elements)) {
       const obj: Record<string, React.RefObject<T>> = {};
       for (let index = 0; index < elements.length; index++) {
-        const key = elements[index];
-        obj[key] = createRef<T>();
+        obj[elements[index]] = createRef<T>();
       }
 
       return obj as Return<T, E>;
