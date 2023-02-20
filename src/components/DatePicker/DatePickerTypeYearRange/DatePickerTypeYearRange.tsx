@@ -1,8 +1,7 @@
 import { addYears, startOfDecade } from 'date-fns';
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import {
   DatePickerDropdown,
@@ -15,6 +14,7 @@ import {
   DatePickerTypeComponent,
 } from '../types';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
+import { useDropdownVisible } from '../useDropdownVisible';
 
 export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
   forwardRef((props, ref) => {
@@ -42,12 +42,19 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
     const endFieldInputRef = useRef<HTMLInputElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
 
-    const [fieldFocused, setFieldFocused] = useState<'start' | 'end' | false>(
-      false,
-    );
+    const {
+      calendarVisible,
+      blocks: {
+        start: { onFocus: onStartFocus, onBlur: onStartBlur },
+        dropdown: { onBlur: onDropdownBlur, onFocus: onDropdownFocus },
+        end: { onFocus: onEndFocus, onBlur: onEndBlur },
+      },
+      close,
+      fieldType,
+    } = useDropdownVisible(onFocus, onBlur);
 
-    const startFocused = fieldFocused === 'start';
-    const endFocused = fieldFocused === 'end';
+    const startFocused = fieldType === 'start';
+    const endFocused = fieldType === 'end';
 
     const hadleChange: DatePickerDropdownPropOnChange = ({ e, value }) => {
       if (startFocused) {
@@ -64,8 +71,6 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
       }
     };
 
-    const [calendarVisible, setCalendarVisible] = useFlag(false);
-
     const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
       currentVisibleDate: currentVisibleDateProp,
       maxDate: props.maxDate,
@@ -75,24 +80,6 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
       onChangeCurrentVisibleDate,
       calendarVisible,
     });
-
-    const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) =>
-      Array.isArray(onBlur) ? onBlur[0]?.(e) : onBlur?.(e);
-
-    const endFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) =>
-      Array.isArray(onBlur) ? onBlur[1]?.(e) : onBlur?.(e);
-
-    const startFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
-      setFieldFocused('start');
-      setCalendarVisible.on();
-      Array.isArray(onFocus) ? onFocus[0]?.(e) : onFocus?.(e);
-    };
-
-    const endFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
-      setFieldFocused('end');
-      setCalendarVisible.on();
-      Array.isArray(onFocus) ? onFocus[1]?.(e) : onFocus?.(e);
-    };
 
     // эфект для того чтобы календарь переключался при вводе с клавиатуры
     useEffect(() => {
@@ -138,10 +125,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
     useClickOutside({
       isActive: calendarVisible,
       ignoreClicksInsideRefs: [startFieldRef, endFieldRef, calendarRef],
-      handler: () => {
-        setFieldFocused(false);
-        setCalendarVisible.off();
-      },
+      handler: close,
     });
 
     return (
@@ -153,8 +137,8 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
           endFieldRef={endFieldRef}
           startFieldInputRef={useForkRef([startFieldInputRef, inputRef?.[0]])}
           endFieldInputRef={useForkRef([endFieldInputRef, inputRef?.[1]])}
-          startFieldOnFocus={startFieldOnFocusHandler}
-          endFieldOnFocus={endFieldOnFocusHandler}
+          startFieldOnFocus={onStartFocus}
+          endFieldOnFocus={onEndFocus}
           startFieldLeftSide={
             Array.isArray(leftSide) ? leftSide?.[0] : leftSide
           }
@@ -165,8 +149,8 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
           endFieldRightSide={
             Array.isArray(rightSide) ? rightSide?.[1] : rightSide
           }
-          startFieldOnBlur={startFieldOnBlurHandler}
-          endFieldOnBlur={endFieldOnBlurHandler}
+          startFieldOnBlur={onStartBlur}
+          endFieldOnBlur={onEndBlur}
           startFocused={startFocused}
           endFocused={endFocused}
           startFieldName={Array.isArray(name) ? name[0] : `${name}_start`}
@@ -184,6 +168,8 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
           events={events}
           locale={locale}
           className={dropdownClassName}
+          onFocus={onDropdownFocus}
+          onBlur={onDropdownBlur}
           minDate={props.minDate}
           maxDate={props.maxDate}
           form={dropdownForm}
