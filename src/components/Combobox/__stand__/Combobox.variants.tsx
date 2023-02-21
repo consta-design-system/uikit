@@ -13,14 +13,20 @@ import {
   propStatus,
   propView,
 } from '../../SelectComponents/types';
+import { Combobox } from '..';
 import { groups, Item, items } from '../__mocks__/data.mock';
-import { Combobox } from '../Combobox';
+
+const getUndefined = () => undefined;
+
+const conditionalGetter = (conditional: boolean) =>
+  conditional ? undefined : getUndefined;
 
 const cnComboboxVariants = cn('ComboboxVariants');
 
 const Variants = () => {
   const disabled = useBoolean('disabled', false);
-  const size = useSelect('size', ['m', 's', 'l'], defaultPropSize);
+  const itemsDisabled = useBoolean('itemsDisabled', false);
+  const size = useSelect('size', ['m', 's', 'l', 'xs'], defaultPropSize);
   const view = useSelect('view', propView, defaultPropView);
   const form = useSelect('form', propForm, defaultPropForm);
   const required = useBoolean('required', false);
@@ -57,6 +63,7 @@ const Variants = () => {
           label={label}
           labelPosition={labelPosition}
           caption={caption}
+          getItemDisabled={conditionalGetter(itemsDisabled)}
         />
       </div>
     );
@@ -80,6 +87,7 @@ const Variants = () => {
         label={label}
         labelPosition={labelPosition}
         caption={caption}
+        getItemDisabled={conditionalGetter(itemsDisabled)}
       />
     </div>
   );
