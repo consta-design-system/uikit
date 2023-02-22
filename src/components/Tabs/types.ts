@@ -10,6 +10,15 @@ export type TabDimensions = {
 
 export type TabsItemDefault = {
   label: string | number;
+  leftIcon?: IconComponent;
+  rightIcon?: IconComponent;
+  rightSide?: React.ReactNode;
+  leftSide?: React.ReactNode;
+  disabled?: boolean;
+
+  /**
+   * @deprecated since version 4.11.0 use leftIcon
+   */
   icon?: IconComponent;
 };
 
@@ -34,6 +43,11 @@ export type TabsPropGetItemChecked<ITEM> = (item: ITEM) => boolean | undefined;
 export type TabsPropGetItemIcon<ITEM> = (
   item: ITEM,
 ) => IconComponent | undefined;
+export type TabsPropGetItemSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | undefined;
+
+export type TabsPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 
 export type TabsPropOnChange<ITEM> = (props: {
   e: React.MouseEvent;
@@ -44,12 +58,12 @@ export type RenderItemProps<ITEM> = {
   item: ITEM;
   onChange: React.MouseEventHandler;
   checked: boolean;
-  label: string;
-  icon?: IconComponent;
   size: TabsPropSize;
   iconSize?: IconPropSize;
   onlyIcon?: boolean;
-};
+  label: string;
+  renderInDropdown?: boolean;
+} & Omit<TabsItemDefault, 'label'>;
 
 export type RenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
@@ -63,6 +77,7 @@ export type TabsFitModeWrapperProps<ITEM> = {
   renderItem: (item: ITEM) => React.ReactNode;
   renderItemsList: RenderItemsListProp;
   tabRefs: Array<React.RefObject<HTMLElement>>;
+  size: TabsPropSize;
 };
 
 export type TabsProps<ITEM = TabsItemDefault> = PropsWithHTMLAttributesAndRef<
@@ -73,11 +88,21 @@ export type TabsProps<ITEM = TabsItemDefault> = PropsWithHTMLAttributesAndRef<
     iconSize?: IconPropSize;
     items: ITEM[];
     value?: ITEM | null;
-    getItemIcon?: TabsPropGetItemIcon<ITEM>;
     getItemLabel?: TabsPropGetItemLabel<ITEM>;
+    getItemLeftIcon?: TabsPropGetItemIcon<ITEM>;
+    getItemRightIcon?: TabsPropGetItemIcon<ITEM>;
+    getItemLeftSide?: TabsPropGetItemSide<ITEM>;
+    getItemRightSide?: TabsPropGetItemSide<ITEM>;
+    getItemDisabled?: TabsPropGetItemDisabled<ITEM>;
     children?: never;
     onChange: TabsPropOnChange<ITEM>;
     renderItem?: RenderItem<ITEM>;
+    disabled?: boolean;
+
+    /**
+     * @deprecated since version 4.11.0 use getItemLeftIcon
+     */
+    getItemIcon?: TabsPropGetItemIcon<ITEM>;
   } & (
     | {
         linePosition?: Extract<TabsPropLinePosition, 'bottom' | 'top'>;
@@ -101,24 +126,29 @@ export type TabsComponent = <ITEM>(
 ) => React.ReactElement | null;
 
 export type TabsTabProps = {
-  size: TabsPropSize;
-  onlyIcon?: boolean;
-  icon?: IconComponent;
-  iconSize?: IconPropSize;
-  label: string;
+  onChange: React.MouseEventHandler;
   checked: boolean;
-  onChange: React.MouseEventHandler<HTMLButtonElement>;
+  size: TabsPropSize;
+  iconSize?: IconPropSize;
+  onlyIcon?: boolean;
   className?: string;
-};
+  label: string;
+  renderInDropdown?: boolean;
+} & Omit<TabsItemDefault, 'label'>;
 
 export type TabsMoreItemsProps<ITEM = TabsItemDefault> =
   PropsWithHTMLAttributesAndRef<
     {
       items: ITEM[];
-      renderItem: (item: ITEM, onClick: () => void) => React.ReactNode;
+      renderItem: (
+        item: ITEM,
+        onClick: () => void,
+        renderInDropdown?: boolean,
+      ) => React.ReactNode;
       getItemLabel: TabsPropGetItemLabel<ITEM>;
       getItemChecked: TabsPropGetItemChecked<ITEM>;
       height: number;
+      size: TabsPropSize;
     } & React.RefAttributes<HTMLDivElement>,
     HTMLDivElement
   >;

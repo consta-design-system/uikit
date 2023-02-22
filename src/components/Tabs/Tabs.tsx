@@ -1,6 +1,8 @@
 import './Tabs.css';
 
-import React, { createRef, forwardRef, useMemo } from 'react';
+import React, { forwardRef } from 'react';
+
+import { useRefs } from '##/hooks/useRefs';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserved';
@@ -29,8 +31,8 @@ export const cnTabs = cn('Tabs');
 function renderItemDefault<ITEM>(
   props: RenderItemProps<ITEM>,
 ): React.ReactElement {
-  const { onChange, ...otherProps } = props;
-  return <TabsTab {...otherProps} onChange={onChange} />;
+  const { item, ...otherProps } = props;
+  return <TabsTab {...otherProps} />;
 }
 
 const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
@@ -48,6 +50,12 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
     onChange,
     iconSize,
     renderItem: renderItemProp = renderItemDefault,
+    getItemLeftIcon,
+    getItemLeftSide,
+    getItemRightIcon,
+    getItemRightSide,
+    getItemDisabled,
+    disabled,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -60,11 +68,12 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
 
   const tabsDirection = getTabsDirection(linePosition);
   const isVertical = tabsDirection === 'vertical';
-  const tabRefs = useMemo(
-    () =>
-      new Array(items.length).fill(null).map(() => createRef<HTMLDivElement>()),
-    [items, fitMode, isVertical],
-  );
+  const tabRefs = useRefs<HTMLDivElement>(items.length, [
+    items,
+    fitMode,
+    isVertical,
+  ]);
+
   const tabsDimensions = useResizeObserved(
     tabRefs,
     (el): TabDimensions => ({
@@ -80,7 +89,11 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
 
   const activeTabIdx = items.findIndex(getChecked);
 
-  const renderItem = (item: typeof items[number], onClick?: () => void) =>
+  const renderItem = (
+    item: typeof items[number],
+    onClick?: () => void,
+    renderInDropdown?: boolean,
+  ) =>
     renderItemProp({
       item,
       onChange: (...args) => {
@@ -89,10 +102,16 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
       },
       checked: getChecked(item),
       label: getItemLabel(item).toString(),
-      icon: getItemIcon?.(item),
+      icon: getItemIcon(item),
+      leftIcon: getItemLeftIcon(item),
+      rightIcon: getItemRightIcon(item),
+      leftSide: getItemLeftSide(item),
+      rightSide: getItemRightSide(item),
+      disabled: disabled || getItemDisabled(item),
       onlyIcon,
       size,
       iconSize,
+      renderInDropdown,
     });
 
   const renderItemsList: RenderItemsListProp = ({
@@ -111,7 +130,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
           {renderItem(item)}
         </div>
       ))}
-      {withRunningLine && (
+      {withRunningLine && !disabled && (
         <TabsRunningLine
           linePosition={linePosition}
           tabsDimensions={tabsDimensions}
@@ -137,6 +156,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
         getItemLabel={getItemLabel}
         getItemChecked={getChecked}
         items={items}
+        size={size}
       />
       {view === 'bordered' && <TabsBorderLine linePosition={linePosition} />}
     </div>

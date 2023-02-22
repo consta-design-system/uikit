@@ -10,6 +10,8 @@ import {
 import { TabsExampleLinePosition } from './examples/TabsExampleLinePosition/TabsExampleLinePosition';
 import { TabsExampleFitModeDropdown } from './examples/TabsExampleFitModeDropdown/TabsExampleFitModeDropdown';
 import { TabsExampleFitModeScroll } from './examples/TabsExampleFitModeScroll/TabsExampleFitModeScroll';
+import { TabsExampleSide } from './examples/TabsExampleSide/TabsExampleSide';
+import { TabsExampleDisabled } from './examples/TabsExampleDisabled/TabsExampleDisabled';
 
 ```tsx
 import { Tabs } from '@consta/uikit/Tabs';
@@ -18,12 +20,17 @@ import { Tabs } from '@consta/uikit/Tabs';
 <MdxMenu>
 
 - [Табы](#табы)
+  - [Тип табов по умолчанию](#тип-табов-по-умолчанию)
   - [Текст](#текст-для-таба)
   - [Иконки](#иконки)
+  - [Дополнительный контент](#дополнительный-контент)
+  - [Неактивные элементы](#неактивные-элементы)
 - [Размер](#размер-табов)
 - [Рамка](#рамка)
 - [Расположение табов и линии](#расположение-табов-и-линии)
 - [Адаптивность](#адаптивность)
+  - [Выпадающий список](#выпадающий-список)
+  - [Прокрутка](#прокрутка)
 - [Кастомизация](#кастомизация)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
@@ -36,44 +43,61 @@ import { Tabs } from '@consta/uikit/Tabs';
 Создайте массив с информацией о табах и укажите его имя в свойстве `items`.
 Для каждого таба нужно добавить текст (он же — уникальный ключ). Можно добавить [иконку](#иконки), но не обязательно.
 
+### Тип табов по умолчанию
+
+По умолчанию используется тип 'TabsItemDefault'. Однако компонент может принимать и произвольный тип.
+
+```tsx
+type TabsItemDefault = {
+  label: string | number;
+  leftIcon?: IconComponent;
+  rightIcon?: IconComponent;
+  rightSide?: React.ReactNode;
+  leftSide?: React.ReactNode;
+  disabled?: boolean;
+};
+```
+
+Свойства `label`, `leftIcon`, `rightIcon`, `rightSide`, `leftSide`, `disabled`
+компонент будет оптимистично брать опираясь на тип по умолчанию.
+Можно указать компоненту другое место хранения свойств таба.
+
 ### Текст для таба
 
-Текст для таба нужно добавить в `items` и получить с помощью функции `getItemLabel`.
+По умолчанию компонент берет текст для таба из [`ITEM['label']`](#тип-табов-по-умолчанию).
+Вы можете использовать свой тип `ITEM` и указать компоненту откуда брать текст с помошью `getItemLabel`
 
 Хорошо, если текст будет коротким и лаконичным, а табы — примерно одинаковой длины.
 
-<TabsExample />
-
 ```tsx
-mport React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Tabs } from '@consta/uikit/Tabs';
 
-type Item = string;
+const items: string[] = ['Один', 'Два', 'Три'];
 
-const items: Item[] = ['Один', 'Два', 'Три'];
+const getItemLabel = (label: string) => label;
 
 export const TabsExample = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
+  const [value, setValue] = useState<string | null>(items[0]);
   return (
-    <>
-      <Tabs
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        items={items}
-        getItemLabel={(item) => item}
-      />
-    </>
+    <Tabs
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      items={items}
+      getItemLabel={getItemLabel}
+    />
   );
 };
 ```
 
+<TabsExample />
+
 ### Иконки
 
-Чтобы добавить иконки, используйте функцию `getItemIcon`. В неё нужно передать название элемента массива c иконкой.
+По умолчанию компонент берет иконки из [`ITEM['leftIcon']`](#тип-табов-по-умолчанию) или [`ITEM['rightIcon']`](#тип-табов-по-умолчанию).
+Вы можете использовать свой тип `ITEM` и указать компоненту откуда брать иконки с помошью `getItemLeftIcon` или `getItemRightIcon`.
 
 Добавьте `onlyIcon`, чтобы убрать текст и оставить только иконку (текст будет показываться по наведению).
-
-<TabsExampleIcon />
 
 ```tsx
 import React, { useState } from 'react';
@@ -83,24 +107,26 @@ import { IconRing } from '@consta/uikit/IconRing';
 import { IconCamera } from '@consta/uikit/IconCamera';
 
 type Item = {
-  name: string;
-  image?: IconComponent;
+  label: string;
+  image: IconComponent;
 };
 
-const items = [
+const items: Item[] = [
   {
-    name: 'Первый',
+    label: 'Первый',
     image: IconPhoto,
   },
   {
-    name: 'Второй',
+    label: 'Второй',
     image: IconRing,
   },
   {
-    name: 'Третий вариант',
+    label: 'Третий вариант',
     image: IconCamera,
   },
 ];
+
+const getItemIcon = (item: Item) => item.image;
 
 export const TabsExampleIcon = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
@@ -110,15 +136,19 @@ export const TabsExampleIcon = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemLabel={(item) => item.name}
-        getItemIcon={(item) => item.image}
+        getItemLeftIcon={getItemIcon}
       />
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemLabel={(item) => item.name}
-        getItemIcon={(item) => item.image}
+        getItemRightIcon={getItemIcon}
+      />
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getItemLeftIcon={getItemIcon}
         onlyIcon
       />
     </>
@@ -126,13 +156,133 @@ export const TabsExampleIcon = () => {
 };
 ```
 
+<TabsExampleIcon />
+
+### Дополнительный контент
+
+Вы можете указать дополнительный контент для таба слева и справа.
+
+По умолчанию компонент берет дополнительный контент из [`ITEM['leftSide']`](#тип-табов-по-умолчанию) или [`ITEM['rightSide']`](#тип-табов-по-умолчанию).
+Вы можете использовать свой тип `ITEM` и указать компоненту откуда брать дополнительный контент с помошью `getItemLeftSide` или `getItemRightSide`.
+
+Если передать массив элементов, то отступы, между элементами дополнительного контента, расставятся автоматически.
+
+```tsx
+import React, { useState } from 'react';
+import { Badge } from '@consta/uikit/Badge';
+import { Button } from '@consta/uikit/Button';
+import { Example } from '@consta/stand';
+import { IconRestart } from '@consta/icons/IconRestart';
+import { Tabs } from '@consta/uikit/Tabs';
+
+type Item = {
+  label: string;
+  status: 'success' | 'error';
+};
+
+const items: Item[] = [
+  {
+    label: 'typescript test',
+    status: 'success',
+  },
+  {
+    label: 'unit test',
+    status: 'error',
+  },
+  {
+    label: 'build test',
+    status: 'success',
+  },
+];
+
+const getItemRightSide = ({ status }: Item) => [
+  <Badge size="xs" status={status} label={status} />,
+  status === 'error' && (
+    <Button
+      tabIndex={0}
+      as="span"
+      label="Rerun"
+      iconLeft={IconRestart}
+      view="ghost"
+      size="xs"
+      onlyIcon
+    />
+  ),
+];
+
+export const TabsExampleSide = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
+  return (
+    <Example col={1}>
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getItemRightSide={getItemRightSide}
+        fitMode="scroll"
+      />
+    </Example>
+  );
+};
+```
+
+<TabsExampleSide />
+
+## Неактивные элементы
+
+Вы можете отключить как все табы, используя свойство disabled,
+так и отдельный элемент, указав disabled у элемента или используя getItemDisabled.
+
+```tsx
+import { Example } from '@consta/stand';
+import React, { useState } from 'react';
+import { Tabs } from '@consta/uikit/Tabs';
+
+type Item = {
+  label: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Один',
+  },
+  {
+    label: 'Два',
+    disabled: true,
+  },
+  {
+    label: 'Три',
+  },
+];
+
+export const TabsExampleDisabled = () => {
+  const [value, setValue] = useState<Item | null>(items[0]);
+  return (
+    <>
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+      />
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        disabled
+      />
+    </>
+  );
+};
+```
+
+<TabsExampleDisabled />
+
 ## Размер табов
 
 Свойство `size` меняет размер шрифта, отступы между элементами и другие связанные с ними параметры.
 
-Есть три размера — `xs`, `s` и `m` (основной, включен по умолчанию).
-
-<TabsExampleSize />
+Может лучше так: Есть три размера — `xs`, `s` и `m`. Основной размер m, включен по умолчанию.
 
 ```tsx
 import React, { useState } from 'react';
@@ -172,14 +322,14 @@ export const TabsExampleSize = () => {
 };
 ```
 
+<TabsExampleSize />
+
 ## Рамка
 
 За внешний вид табов отвечает свойство `view`. Есть два варианта:
 
 - `bordered` — с рамкой (используется по умолчанию),
 - `clear` — без рамки.
-
-<TabsExampleView />
 
 ```tsx
 import React, { useState } from 'react';
@@ -211,6 +361,8 @@ export const TabsExampleView = () => {
   );
 };
 ```
+
+<TabsExampleView />
 
 ## Расположение табов и линии
 
@@ -247,10 +399,6 @@ export const TabsExampleView = () => {
 
 Чтобы сделать кастомные табы, используйте свойство `renderItem`.
 
-#### Пример кастомных табов с иконкой
-
-<TabsExampleRenderItem />
-
 ```tsx
 import React, { useState } from 'react';
 import { Tabs, cnTabsTab } from '@consta/uikit/Tabs';
@@ -285,68 +433,7 @@ export const TabsExampleRenderItem = () => {
 };
 ```
 
-#### Пример кастомных табов с бейджиком
-
-<TabsExampleRenderItemBadge />
-
-```tsx
-import React, { useState } from 'react';
-
-import { Badge, BadgePropStatus } from '@consta/uikit/Badge';
-import { cnTabsTab, Tabs } from '@consta/uikit/Tabs';
-
-type ItemBadge = {
-  text: string;
-  badgeStatus: BadgePropStatus;
-  badgeCount: number;
-};
-
-const itemsBadge: ItemBadge[] = [
-  {
-    text: 'Открыто',
-    badgeStatus: 'normal',
-    badgeCount: 10,
-  },
-  {
-    text: 'Сделано',
-    badgeStatus: 'success',
-    badgeCount: 5,
-  },
-  {
-    text: 'Закрыто',
-    badgeStatus: 'error',
-    badgeCount: 2,
-  },
-];
-
-export const TabsExampleRenderItemBadge = () => {
-  const [value, setValue] = useState<ItemBadge | null>(itemsBadge[0]);
-  return (
-    <Tabs
-      value={value}
-      onChange={({ value }) => setValue(value)}
-      items={itemsBadge}
-      getItemLabel={(item) => item.text}
-      size="m"
-      renderItem={({ item, onChange, checked }) => (
-        <button
-          type="button"
-          onClick={onChange}
-          className={cnTabsTab({ checked })}
-        >
-          {item.text}
-          <Badge
-            status={item.badgeStatus}
-            label={item.badgeCount.toString()}
-            size="s"
-            style={{ marginLeft: 'var(--space-s)' }}
-          />
-        </button>
-      )}
-    />
-  );
-};
-```
+<TabsExampleRenderItem />
 
 ## Импорт
 
@@ -378,28 +465,32 @@ type RenderItem<ITEM, ELEMENT> = (props: {
 }) => React.ReactElement | null;
 ```
 
-| Свойство                                       | Тип                                        | По умолчанию | Описание                                                                                                                                                                             |
-| ---------------------------------------------- | ------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `items`                                        | `ITEM[]`                                   | -            | Массив элементов с данными для табов (текст, иконка)                                                                                                                                 |
-| `value`                                        | `ITEM`, `null`                             | -            | Значение                                                                                                                                                                             |
-| [`getItemLabe?l`](#текст-для-таба)             | `(item: ITEM) => string, number`           | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента                                                                                             |
-| [`getItemIcon?`](#иконки)                      | `(item: ITEM) => IconComponent, undefined` | -            | Функция для формирования иконки                                                                                                                                                      |
-| [`onlyIcon?`](#иконки)                         | `boolean`                                  | -            | Показывать только иконку                                                                                                                                                             |
-| [`size?`](#размер-табов)                       | `'s', 'm'`                                 | `'m'`        | Размер компонента                                                                                                                                                                    |
-| [`view?`](#рамка)                              | `'bordered', 'clear'`                      | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                                                                                                            |
-| [`linePosition?`](#расположение-табов-и-линии) | `'bottom', 'top', 'left', 'right'`         | `'bottom'`   | Расположение табов (вертикальные или горизонатльные) и линии, которая отмечает активный таб                                                                                          |
-| [`fitMode?`](#адаптивность)                    | `'dropdown', 'scroll'`                     | `'dropdown'` | Способ сворачивания табов при нехватке места: выпадающий список или прокрутка. Доступен только для горизонтального направления табов (когда `linePosition` = `'bottom'` или `'top'`) |
-| `onChange`                                     | `OnChange`                                 | -            | Действие при выборе элемента                                                                                                                                                         |
-| `className?`                                   | `string`                                   | -            | Дополнительный CSS-класс                                                                                                                                                             |
-| [`renderItem?`](#кастомизация)                 | `RenderItem`                               | -            | Функция рендера элемента                                                                                                                                                             |
-| `ref?`                                         | `React.Ref<HTMLDivElement>`                | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                                                      |
+| Свойство                                       | Тип                                          | По умолчанию | Описание                                                                                                                                                                             |
+| ---------------------------------------------- | -------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `items`                                        | `ITEM[]`                                     | -            | Массив элементов с данными для табов (текст, иконка)                                                                                                                                 |
+| `value`                                        | `ITEM`, `null`                               | -            | Значение                                                                                                                                                                             |
+| [`getItemLabel?`](#текст-для-таба)             | `(item: ITEM) => string, number`             | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента                                                                                             |
+| [`getItemLeftIcon?`](#иконки)                  | `(item: ITEM) => IconComponent, undefined`   | -            | Функция для формирования иконки слева                                                                                                                                                |
+| [`getItemRightIcon?`](#иконки)                 | `(item: ITEM) => IconComponent, undefined`   | -            | Функция для формирования иконки справа                                                                                                                                               |
+| [`getItemLeftSide?`](#дополнительный-контент)  | `(item: ITEM) => React.ReactNode, undefined` | -            | Функция для формирования дополнительного контента слева                                                                                                                              |
+| [`getItemRightSide?`](#дополнительный-контент) | `(item: ITEM) => React.ReactNode, undefined` | -            | Функция для формирования дополнительного контента справа                                                                                                                             |
+| [`getItemDisabled?`](#неактивные-элементы)     | `(item: ITEM) => boolean, undefined`         | -            | Функция указывает на состояние активности элемента                                                                                                                                   |
+| [`onlyIcon?`](#иконки)                         | `boolean`                                    | -            | Показывать только иконку                                                                                                                                                             |
+| [`size?`](#размер-табов)                       | `'s', 'm'`                                   | `'m'`        | Размер компонента                                                                                                                                                                    |
+| [`view?`](#рамка)                              | `'bordered', 'clear'`                        | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                                                                                                            |
+| [`linePosition?`](#расположение-табов-и-линии) | `'bottom', 'top', 'left', 'right'`           | `'bottom'`   | Расположение табов (вертикальные или горизонатльные) и линии, которая отмечает активный таб                                                                                          |
+| [`fitMode?`](#адаптивность)                    | `'dropdown', 'scroll'`                       | `'dropdown'` | Способ сворачивания табов при нехватке места: выпадающий список или прокрутка. Доступен только для горизонтального направления табов (когда `linePosition` = `'bottom'` или `'top'`) |
+| `onChange`                                     | `OnChange`                                   | -            | Действие при выборе элемента                                                                                                                                                         |
+| `className?`                                   | `string`                                     | -            | Дополнительный CSS-класс                                                                                                                                                             |
+| [`renderItem?`](#кастомизация)                 | `RenderItem`                                 | -            | Функция рендера элемента                                                                                                                                                             |
+| [`disabled?`](#неактивные-элементы)            | `boolean, undefined`                         | -            | Неактивные все элементы                                                                                                                                                              |
+| `ref?`                                         | `React.Ref<HTMLDivElement>`                  | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                                                      |
 
 ## Пример
 
-```ts
-// src/App.ts
+```tsx
 import React, { useState } from 'react';
-import { Tabs } from '@consta/uikit/TabsCanary';
+import { Tabs } from '@consta/uikit/Tabs';
 
 type Item = string;
 

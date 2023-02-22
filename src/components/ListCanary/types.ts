@@ -1,4 +1,4 @@
-import { IconComponent } from '@consta/icons/Icon';
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
 import { MixSpaceProps } from '##/mixs/MixSpace';
@@ -169,16 +169,15 @@ export type ListItemProps<AS extends keyof JSX.IntrinsicElements = 'div'> =
       size?: ListPropSize;
       innerOffset?: 'normal' | 'increased';
       space?: MixSpaceProps;
+      iconSize?: IconPropSize;
     },
     AS
-  > &
-    React.RefAttributes<HTMLDivElement>;
+  >;
 
 export type ListItemComponent = <
   AS extends keyof JSX.IntrinsicElements = 'div',
 >(
   props: ListItemProps<AS>,
-  ref: React.Ref<HTMLElement>,
 ) => React.ReactElement | null;
 
 export type ListGroupLabelProps = PropsWithHTMLAttributesAndRef<

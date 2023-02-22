@@ -8,24 +8,26 @@ import React, { useState } from 'react';
 import { Tabs } from '../../../Tabs';
 
 type Item = {
-  name: string;
-  image?: IconComponent;
+  label: string;
+  image: IconComponent;
 };
 
 const items: Item[] = [
   {
-    name: 'Первый',
+    label: 'Первый',
     image: IconPhoto,
   },
   {
-    name: 'Второй',
+    label: 'Второй',
     image: IconRing,
   },
   {
-    name: 'Третий вариант',
+    label: 'Третий вариант',
     image: IconCamera,
   },
 ];
+
+const getItemIcon = (item: Item) => item.image;
 
 export const TabsExampleIcon = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
@@ -35,15 +37,19 @@ export const TabsExampleIcon = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemLabel={(item) => item.name}
-        getItemIcon={(item) => item.image}
+        getItemLeftIcon={getItemIcon}
       />
       <Tabs
         value={value}
         onChange={({ value }) => setValue(value)}
         items={items}
-        getItemLabel={(item) => item.name}
-        getItemIcon={(item) => item.image}
+        getItemRightIcon={getItemIcon}
+      />
+      <Tabs
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        items={items}
+        getItemLeftIcon={getItemIcon}
         onlyIcon
       />
     </Example>

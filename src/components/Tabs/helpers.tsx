@@ -8,8 +8,10 @@ import {
   TabsFitModeWrapperProps,
   TabsItemDefault,
   TabsPropFitMode,
+  TabsPropGetItemDisabled,
   TabsPropGetItemIcon,
   TabsPropGetItemLabel,
+  TabsPropGetItemSide,
   TabsPropLinePosition,
   TabsProps,
 } from './types';
@@ -41,12 +43,28 @@ const defaultGetItemLabel: TabsPropGetItemLabel<TabsItemDefault> = (item) =>
   item.label;
 const defaultGetItemIcon: TabsPropGetItemIcon<TabsItemDefault> = (item) =>
   item.icon;
+const defaultGetItemLeftIcon: TabsPropGetItemIcon<TabsItemDefault> = (item) =>
+  item.leftIcon;
+const defaultGetItemRightIcon: TabsPropGetItemIcon<TabsItemDefault> = (item) =>
+  item.rightIcon;
+const defaultGetItemLeftSide: TabsPropGetItemSide<TabsItemDefault> = (item) =>
+  item.leftSide;
+const defaultGetItemRightSide: TabsPropGetItemSide<TabsItemDefault> = (item) =>
+  item.rightSide;
+const defaultGetItemDisable: TabsPropGetItemDisabled<TabsItemDefault> = (
+  item,
+) => item.disabled;
 
 export const withDefaultGetters = (props: TabsProps) => {
   return {
     ...props,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
     getItemIcon: props.getItemIcon || defaultGetItemIcon,
+    getItemLeftIcon: props.getItemLeftIcon || defaultGetItemLeftIcon,
+    getItemRightIcon: props.getItemRightIcon || defaultGetItemRightIcon,
+    getItemLeftSide: props.getItemLeftSide || defaultGetItemLeftSide,
+    getItemRightSide: props.getItemRightSide || defaultGetItemRightSide,
+    getItemDisabled: props.getItemDisabled || defaultGetItemDisable,
   };
 };
 
