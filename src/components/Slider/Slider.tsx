@@ -3,17 +3,21 @@ import './Slider.css';
 import { IconPropSize } from '@consta/icons/Icon';
 import React, { forwardRef, useRef } from 'react';
 
-import { useFlag } from '../../hooks/useFlag/useFlag';
-import { useSortSteps } from '../../hooks/useSortSteps/useSortSteps';
-import { cn } from '../../utils/bem';
-import { getByMap } from '../../utils/getByMap';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { FieldCaption } from '../FieldCaption/FieldCaption';
-import { FieldLabel } from '../FieldLabel/FieldLabel';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { FieldCaption } from '##/components/FieldCaption';
+import { FieldLabel } from '##/components/FieldLabel';
+import { useFlag } from '##/hooks/useFlag';
+import { useSortSteps } from '##/hooks/useSortSteps';
+import { cn } from '##/utils/bem';
+
 import {
   defaultPropSize,
   defaultTooltipFormatter,
-  isNotRangeParams,
+  getIcon,
+  getMaxForStartField,
+  getMinForEndField,
+  getOnChandgeForInput,
+  getValueForInput,
   PropSize,
   SliderComponent,
   SliderProps,
@@ -36,7 +40,7 @@ const sizeMap: Record<PropSize, IconPropSize> = {
 
 export const COMPONENT_NAME = 'Slider' as const;
 
-const SliderRender = <RANGE extends boolean>(
+const SliderRender = <RANGE extends boolean = false>(
   props: SliderProps<RANGE>,
   ref: React.Ref<HTMLDivElement>,
 ) => {
@@ -66,17 +70,13 @@ const SliderRender = <RANGE extends boolean>(
   } = usePropsHandler(COMPONENT_NAME, props, sliderRef);
 
   const [isHovered, { on, off }] = useFlag(false);
-
   const leftButtonRef = useRef<HTMLButtonElement>(null);
   const rightButtonRef = useRef<HTMLButtonElement>(null);
-
   const sortedSteps = useSortSteps({ step: stepProp, min, max });
   const step = stepProp ? sortedSteps : Math.abs((max - min) / 100);
-
-  const IconRight = rightSide;
-  const IconLeft = props.leftSide !== 'input' && props.leftSide;
-
-  const iconSize = getByMap(sizeMap, size);
+  const IconRight = getIcon(rightSide);
+  const IconLeft = getIcon(leftSide);
+  const iconSize = sizeMap[size];
 
   const {
     onKeyPress,
@@ -136,25 +136,23 @@ const SliderRender = <RANGE extends boolean>(
         </FieldLabel>
       )}
       <div className={cnSlider('Container')}>
-        {leftSide === 'input' && isNotRangeParams(props) && (
+        {(leftSide === 'input' || IconLeft) && (
           <div className={cnSlider('Side', { position: 'left' })}>
-            <SliderInput
-              value={props.value}
-              onChange={(params) =>
-                isNotRangeParams(props) && props.onChange?.(params)
-              }
-              size={size}
-              min={min}
-              max={max}
-              status={status}
-              step={step}
-              disabled={disabled}
-            />
-          </div>
-        )}
-        {IconLeft && (
-          <div className={cnSlider('Side', { position: 'left' })}>
-            <IconLeft size={iconSize ?? undefined} view="secondary" />
+            {leftSide === 'input' && (
+              <SliderInput
+                value={getValueForInput(props, 0)}
+                onChange={getOnChandgeForInput(props, 0)}
+                size={size}
+                min={min}
+                max={getMaxForStartField(props)}
+                status={status}
+                step={step}
+                disabled={disabled}
+              />
+            )}
+            {IconLeft && (
+              <IconLeft size={iconSize ?? undefined} view="secondary" />
+            )}
           </div>
         )}
         <div {...containerProps}>
@@ -192,9 +190,21 @@ const SliderRender = <RANGE extends boolean>(
             />
           ))}
         </div>
-        {IconRight && (
+        {(rightSide === 'input' || IconRight) && (
           <div className={cnSlider('Side', { position: 'right' })}>
-            <IconRight size={iconSize} view="secondary" />
+            {rightSide === 'input' && (
+              <SliderInput
+                value={getValueForInput(props, 1)}
+                onChange={getOnChandgeForInput(props, 1)}
+                size={size}
+                min={getMinForEndField(props)}
+                max={max}
+                status={status}
+                step={step}
+                disabled={disabled}
+              />
+            )}
+            {IconRight && <IconRight size={iconSize} view="secondary" />}
           </div>
         )}
       </div>

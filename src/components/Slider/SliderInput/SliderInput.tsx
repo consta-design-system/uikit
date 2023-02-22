@@ -11,7 +11,7 @@ type Props = Omit<
   TextFieldProps<'number'>,
   'value' | 'onChange' | 'min' | 'max' | 'step'
 > & {
-  value: number;
+  value?: number;
   step?: number | number[];
   min?: number;
   max?: number;
@@ -32,7 +32,7 @@ export const SliderInput = (props: Props) => {
   } = props;
 
   const [currentValue, setCurrentValue] = useState<string | null>(
-    value.toString(),
+    value?.toString() || null,
   );
 
   const handleChange = ({ e, value }: TextFieldOnChangeArguments) => {
@@ -48,7 +48,7 @@ export const SliderInput = (props: Props) => {
     setCurrentValue(validatedValue.toString());
   };
 
-  useEffect(() => setCurrentValue(value.toString()), [value]);
+  useEffect(() => setCurrentValue(value?.toString() || null), [value]);
 
   return (
     <TextField
