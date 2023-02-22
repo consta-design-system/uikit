@@ -303,7 +303,7 @@ export function useSlider<RANGE extends boolean>(
 
   useEffect(() => {
     if (isRangeParams(props)) {
-      props.value.forEach((val, index) => {
+      props.value?.forEach((val, index) => {
         setTooltipPosition(
           getActiveValue(val, activeButton.current),
           index === 0 ? 0 : 1,

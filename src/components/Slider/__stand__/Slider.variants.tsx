@@ -11,7 +11,8 @@ const sideMap = {
 } as const;
 
 const Variants = () => {
-  const disabled = useBoolean('disabled', false);
+  const range = useBoolean('range');
+  const disabled = useBoolean('disabled');
   const label = useText('label', 'Лейбл');
   const caption = useText('caption', 'Подпись');
   const status = useSelect('status', propStatus);
@@ -19,18 +20,17 @@ const Variants = () => {
   const min = useNumber('min', -20);
   const max = useNumber('max', 80);
   const step = useNumber('step', 1);
-  const range = useBoolean('range', false);
-  const withTooltip = useBoolean('withTooltip', false);
+  const withTooltip = useBoolean('withTooltip');
   const withFormatter = useBoolean(
     'withFormatter',
     false,
     Boolean(withTooltip),
   );
-  const steparray = useBoolean('steparray', false);
+  const steparray = useBoolean('steparray');
 
   const view = useSelect('view', ['default', 'division'], 'default');
   const leftSide = useSelect('leftSide', ['input', 'icon']);
-  const rightSide = useSelect('rightSide', ['icon']);
+  const rightSide = useSelect('rightSide', ['input', 'icon']);
 
   const [value, setValue] = useState<number | [number, number]>(
     range ? [10, 40] : 50,
@@ -46,8 +46,11 @@ const Variants = () => {
   }, [steparray, step]);
 
   useEffect(() => {
-    if (range) setValue([10, 40]);
-    else setValue(50);
+    if (range) {
+      setValue([10, 40]);
+    } else {
+      setValue(50);
+    }
   }, [range]);
 
   return (

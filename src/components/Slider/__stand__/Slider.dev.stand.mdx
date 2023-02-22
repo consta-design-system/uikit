@@ -13,7 +13,10 @@ import { SliderExampleTooltip } from './examples/SliderExampleTooltip/SliderExam
 import { SliderExampleTooltipFormatter } from './examples/SliderExampleTooltipFormatter/SliderExampleTooltipFormatter';
 import { SliderExampleLabel } from './examples/SliderExampleLabel/SliderExampleLabel';
 import { SliderExampleDisabled } from './examples/SliderExampleDisabled/SliderExampleDisabled';
-import { SliderExampleContent } from './examples/SliderExampleContent/SliderExampleContent';
+import {
+  SliderExampleContent,
+  SliderExampleContentInputLeftAndRight,
+} from './examples/SliderExampleContent/SliderExampleContent';
 import { SliderExampleSize } from './examples/SliderExampleSize/SliderExampleSize';
 import { SliderExampleStatus } from './examples/SliderExampleStatus/SliderExampleStatus';
 import { SliderExampleMinMax } from './examples/SliderExampleMinMax/SliderExampleMinMax';
@@ -243,20 +246,19 @@ export const SliderExampleLabel = () => {
 Слева и справа от ползунка можно добавить дополнительные элементы — иконку и поле ввода,
 за это отвечают свойства `leftSide` и `rightSide`.
 
-У свойства `leftSide` может быть только одно значение — `input`. Если его указать, слева от слайда появится поле ввода со значением, выбранным на слайдере. Если значение в поле поменять,
+Если его указать `input`, слева и/или справа от слайда появится поле ввода со значением, выбранным на слайдере. Если значение в поле поменять,
 ползунок на слайдере подвинется (в тот момент, когда поле потеряет фокус).
 
-С помощью `rightSide` можно добавить справа от слайдера любую [иконку](##LIBS.LIB/lib:icons).
+Также можно добавить любую [иконку](##LIBS.LIB/lib:icons).
 
 ```tsx
 export const SliderExampleContent = () => {
-  const [value, setValue] = useState<number[]>([20, 50]);
-  const left = <IconSettings view="secondary" />;
+  const [value, setValue] = useState<number>(20);
+
   return (
     <Slider
       value={value}
-      range
-      label={`Значение ${value[0]}-${value[1]}`}
+      label={`Значение ${value}`}
       withTooltip
       step={5}
       view="division"
@@ -269,6 +271,29 @@ export const SliderExampleContent = () => {
 ```
 
 <SliderExampleContent />
+
+Используйе поля ввода с обоих сорон только в применением модификации `range`
+
+```tsx
+export const SliderExampleContentInputLeftAndRight = () => {
+  const [value, setValue] = useState<[number, number]>([20, 50]);
+
+  return (
+    <Slider
+      step={5}
+      range
+      label={`Значение ${value[0]}-${value[1]}`}
+      view="division"
+      onChange={({ value }) => setValue(value)}
+      value={value}
+      leftSide="input"
+      rightSide="input"
+    />
+  );
+};
+```
+
+<SliderExampleContentInputLeftAndRight />
 
 ### Неактивный ползунок
 
@@ -468,5 +493,5 @@ type PropToolipFormatter = (value: number | undefined) => string;
 | [`min?`](#минимальное-и-максимальное-значения)         | `number`                                        | `0`          | Минимальное значение                             |
 | [`max?`](#минимальное-и-максимальное-значения)         | `number`                                        | `100`        | Максимальное значение                            |
 | [`leftSide?`](#иконка-и-поле-ввода)                    | `'input'` <code>&#124;</code> `IconComponent`   | -            | Элемент слева от компонента (иконка)             |
-| [`rightSide?`](#иконка-и-поле-ввода)                   | `IconComponent`                                 | -            | Элемент справа от компонента (поле ввода)        |
+| [`rightSide?`](#иконка-и-поле-ввода)                   | `'input'` <code>&#124;</code> `IconComponent`   | -            | Элемент справа от компонента (поле ввода)        |
 | `className?`                                           | `string`                                        | -            | Дополнительный CSS-класс                         |

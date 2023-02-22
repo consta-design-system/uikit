@@ -28,6 +28,8 @@ export type PropOnChange<RANGE> = (prop: {
 
 type PropToolipFormatter = (value: number | undefined) => string;
 
+type Side = IconComponent | 'input';
+
 type Props<RANGE extends boolean = false> = {
   className?: string;
   step?: number | number[];
@@ -44,9 +46,9 @@ type Props<RANGE extends boolean = false> = {
   max?: number;
   onChange?: PropOnChange<RANGE>;
   onAfterChange?: PropOnChange<RANGE>;
-  leftSide?: IconComponent | 'input';
+  leftSide?: Side;
   tooltipFormatter?: PropToolipFormatter;
-  rightSide?: IconComponent;
+  rightSide?: Side;
 };
 
 export type Line = {
@@ -92,19 +94,15 @@ export type SliderProps<RANGE extends boolean> = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export type SliderComponent = <RANGE extends boolean>(
+export type SliderComponent = <RANGE extends boolean = false>(
   props: SliderProps<RANGE>,
 ) => React.ReactElement | null;
 
-export const isRangeParams = (
-  params: Props<boolean>,
-): params is Props<true> => {
+const isRangeParams = (params: Props<boolean>): params is Props<true> => {
   return !!params.range;
 };
 
-export const isNotRangeParams = (
-  params: Props<boolean>,
-): params is Props<false> => {
+const isNotRangeParams = (params: Props<boolean>): params is Props<false> => {
   return !params.range;
 };
 
@@ -115,3 +113,59 @@ export type TrackPosition = {
   x: number;
   y: number;
 } | null;
+
+export const getValueForInput = (
+  props: SliderProps<boolean>,
+  field: 0 | 1,
+): number => {
+  if (isRangeParams(props)) {
+    return props.value[field];
+  }
+  return props.value as number;
+};
+
+type GetOnChandgeForInputReturned = (props: {
+  e?: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
+  value: number;
+}) => void;
+
+export const getOnChandgeForInput =
+  (props: SliderProps<boolean>, field: 0 | 1): GetOnChandgeForInputReturned =>
+  ({ e, value }) => {
+    if (!props.onChange) {
+      return;
+    }
+    if (isNotRangeParams(props)) {
+      props.onChange({ e, value });
+    }
+    if (isRangeParams(props)) {
+      props.onChange({
+        e,
+        value: field ? [props.value[0], value] : [value, props.value[1]],
+      });
+    }
+  };
+
+export const getIcon = (side?: Side) => {
+  if (side !== 'input') {
+    return side;
+  }
+};
+
+export const getMaxForStartField = (props: SliderProps<boolean>) => {
+  if (isNotRangeParams(props)) {
+    return props.max;
+  }
+  if (isRangeParams(props)) {
+    return props.value[1];
+  }
+};
+
+export const getMinForEndField = (props: SliderProps<boolean>) => {
+  if (isNotRangeParams(props)) {
+    return props.min;
+  }
+  if (isRangeParams(props)) {
+    return props.value[0];
+  }
+};
