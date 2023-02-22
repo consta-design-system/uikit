@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { Slider } from '../../../Slider';
+import { Slider } from '../../..';
 
 export const SliderExampleRange = () => {
   const [value, setValue] = useState<[number, number]>([20, 50]);
