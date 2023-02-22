@@ -7,7 +7,7 @@ import { Tag } from '../../Tag/Tag';
 
 type SelectValueTagProps = {
   label: string;
-  size: 's' | 'm' | 'l';
+  size: 's' | 'm' | 'l' | 'xs';
   children?: never;
   disabled?: boolean;
   handleRemove?: (e: React.SyntheticEvent) => void;

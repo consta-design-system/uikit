@@ -22,6 +22,10 @@
     }
 
     &_combobox {
+      &.Select_size_xs {
+        --select-element-height: calc(var(--space-m) + var(--space-3xs));
+      }
+
       &.Select_size_s {
         --select-element-height: var(--space-xl);
       }
@@ -36,6 +40,10 @@
     }
 
     &_select {
+      &.Select_size_xs {
+        --select-element-height: calc(var(--space-m) + var(--space-3xs));
+      }
+
       &.Select_size_s {
         --select-element-height: var(--space-xl);
       }
@@ -55,6 +63,14 @@
       --input-height: var(--control-height-xs);
       --input-space: calc(var(--control-space-xs) * 0.5);
       --input-font-size: var(--control-text-size-xs);
+      --tag-space:
+        calc(
+          (var(--space-xs) - 1px) / 2 - var(--control-border-width)
+        );
+      --input-max-height:
+        calc(
+          4 * var(--tag-space) + 4.5 * var(--select-element-height)
+        );
     }
 
     &_s {

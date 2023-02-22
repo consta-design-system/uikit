@@ -63,7 +63,7 @@ export type ComboboxProps<
     disabled?: boolean;
     form?: PropForm;
     dropdownForm?: 'default' | 'brick' | 'round';
-    size?: Exclude<PropSize, 'xs'>;
+    size?: PropSize;
     view?: PropView;
     placeholder?: string;
     ariaLabel?: string;
