@@ -95,6 +95,18 @@ import { Table } from '@consta/uikit/Table';
 
 Формат строки: `{ идентификатор колонки (accessor): 'содержимое ячейки'}`
 
+Все объекты строк дожны наследовать тип `TableRow`:
+
+```tsx
+export type TableRow = {
+  id: string;
+  defaultExpand?: boolean;
+  rows?: TableRow[];
+};
+```
+
+> То есть `id` является обязательным полем
+
 Если пропустить в строке ячейку, она останется пустой.
 
 ```tsx
@@ -253,11 +265,11 @@ const columns: TableColumn<typeof rows[number]>[] = [
 
 ```tsx
 const rows = [
-  { person: 'Винни Пух', food: 'Мёд' },
-  { person: 'Пятачок', food: 'Мёд' },
-  { person: 'Ослик Иа', food: 'Чертополох' },
-  { person: 'Крошка Ру', food: 'Рыбий жир' },
-  { person: 'Кристофер Робин', food: 'Мёд' },
+  { id: '1', person: 'Винни Пух', food: 'Мёд' },
+  { id: '2', person: 'Пятачок', food: 'Мёд' },
+  { id: '3', person: 'Ослик Иа', food: 'Чертополох' },
+  { id: '4', person: 'Крошка Ру', food: 'Рыбий жир' },
+  { id: '5', person: 'Кристофер Робин', food: 'Мёд' },
 ];
 
 const columns: TableColumn<typeof rows[number]>[] = [
