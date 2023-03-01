@@ -32,6 +32,8 @@ const CollapseGroupRender: CollapseGroupRenderFunction = (props, ref) => {
     iconPosition = collapsePropIconPositionDefault,
     directionIcon = collapsePropDirectionIconDefault,
     closeDirectionIcon = collapsePropCloseDirectionIconDefault,
+    iconView,
+    isAccordion,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -52,6 +54,7 @@ const CollapseGroupRender: CollapseGroupRenderFunction = (props, ref) => {
             divider={divider}
             isOpen={getChecked(index)}
             onClick={getOnChange(index)}
+            iconView={iconView}
             {...(iconPosition === 'left'
               ? {
                   iconPosition,

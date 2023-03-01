@@ -5,9 +5,7 @@ import { IconRemove } from '@consta/icons/IconRemove';
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
-import { cn } from '##/utils/bem';
-
-import { Badge } from '../../Badge/Badge';
+import { Badge } from '##/components/Badge';
 import {
   collapsePropCloseDirectionIconDefault,
   collapsePropDirectionIcon,
@@ -15,13 +13,17 @@ import {
   collapsePropHorizontalSpace,
   collapsePropIconPosition,
   collapsePropIconPositionDefault,
+  collapsePropIconView,
+  collapsePropIconViewDefault,
   collapsePropSize,
   collapsePropSizeDefault,
   collapsePropView,
   collapsePropViewDefault,
-} from '../../Collapse/Collapse';
+} from '##/components/Collapse';
+import { cn } from '##/utils/bem';
+
+import { CollapseGroup } from '..';
 import { Item, items } from '../__mocks__/mock.data';
-import { CollapseGroup } from '../CollapseGroup';
 
 const cnCollapseGroupVariants = cn('CollapseGroupVariants');
 
@@ -30,6 +32,11 @@ const Variants = () => {
   const hoverEffect = useBoolean('hoverEffect', false);
   const isAccordion = useBoolean('isAccordion', false);
   const view = useSelect('view', collapsePropView, collapsePropViewDefault);
+  const iconView = useSelect(
+    'iconView',
+    collapsePropIconView,
+    collapsePropIconViewDefault,
+  );
   const divider = useBoolean('divider', false);
   const horizontalSpace = useSelect(
     'horizontalSpace',
@@ -73,6 +80,7 @@ const Variants = () => {
           view={view}
           divider={divider}
           horizontalSpace={horizontalSpace}
+          iconView={iconView}
           {...(iconPosition === 'left'
             ? {
                 iconPosition,
