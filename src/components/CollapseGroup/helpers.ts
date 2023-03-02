@@ -1,13 +1,14 @@
 import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
-import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import {
   CollapseIconPropDirection,
   CollapsePropHorizontalSpace,
+  CollapsePropIconView,
   CollapsePropSize,
   CollapsePropView,
-} from '../Collapse/Collapse';
+} from '##/components/Collapse';
+import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export type DefaultItem = {
   label: React.ReactNode;
@@ -49,6 +50,7 @@ export type CollapseGroupProps<
     opened?: CollapseGroupPropOpened<IS_ACCORDION>;
     getItemLabel?: CollapseGroupPropGetItemLabel<ITEM>;
     getItemContent?: CollapseGroupPropGetItemContent<ITEM>;
+    iconView?: CollapsePropIconView;
   } & (
     | {
         closeIcon: IconComponent;

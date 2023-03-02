@@ -1,8 +1,18 @@
 .CollapseIcon {
-  color: var(--color-typo-primary);
+  color: var(--icon-color);
   transition: transform 0.3s;
   transition-timing-function: cubic-bezier(0.7, 0, 0.5, 1);
   transform: var(--direction-transform);
+
+  &_view {
+    &_clear {
+      --icon-color: var(--color-typo-primary);
+    }
+
+    &_ghost {
+      --icon-color: var(--color-control-typo-ghost);
+    }
+  }
 
   &_direction {
     &_up {
@@ -99,5 +109,25 @@
 
   &-Wrapper {
     position: relative;
+  }
+
+  &-Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--button-size);
+    height: var(--button-size);
+    background: var(--color-control-bg-ghost);
+    border-radius: 50%;
+
+    &_size {
+      &_xs {
+        --button-size: var(--control-height-xs);
+      }
+
+      &_s {
+        --button-size: var(--control-height-s);
+      }
+    }
   }
 }

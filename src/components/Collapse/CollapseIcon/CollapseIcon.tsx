@@ -11,6 +11,27 @@ import { CollapseIconProps } from '../types';
 const cnCollapseIcon = cn('CollapseIcon');
 const animateTimeout = 300;
 
+const CollapseIconButton = ({
+  children,
+  className,
+  size,
+}: {
+  children?: React.ReactNode;
+  className?: string;
+  size: CollapseIconProps['size'];
+}) => {
+  return (
+    <div className={cnCollapseIcon('Button', { size }, [className])}>
+      {children}
+    </div>
+  );
+};
+
+const GuardFragment = (props: { children?: React.ReactNode }) => (
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  <>{props.children}</>
+);
+
 export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
   const {
     size,
@@ -20,57 +41,73 @@ export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
     closeDirection,
     isOpen,
     className,
+    view,
     ...otherProps
   } = props;
 
   const iconRef = useRef<HTMLSpanElement>(null);
   const closeIconRef = useRef<HTMLSpanElement>(null);
 
-  if (CloseIcon) {
+  const Wrapper = view === 'ghost' ? CollapseIconButton : GuardFragment;
+  const wrapperClassName = view === 'ghost' ? className : undefined;
+  const renderIconClassName = view === 'clear' ? className : undefined;
+
+  const renderIcon = () => {
+    if (CloseIcon) {
+      return (
+        <span
+          className={cnCollapseIcon('Wrapper', [
+            cnIcon({ size }),
+            renderIconClassName,
+          ])}
+        >
+          <Transition
+            in={!isOpen}
+            unmountOnExit
+            timeout={animateTimeout}
+            nodeRef={iconRef}
+          >
+            {(animate) => (
+              <Icon
+                {...otherProps}
+                className={cnCollapseIcon({ animate, view })}
+                size={size}
+                ref={iconRef}
+              />
+            )}
+          </Transition>
+          <Transition
+            in={isOpen}
+            unmountOnExit
+            timeout={animateTimeout}
+            nodeRef={closeIconRef}
+          >
+            {(animate) => (
+              <CloseIcon
+                {...otherProps}
+                className={cnCollapseIcon({ animate, view })}
+                size={size}
+                ref={closeIconRef}
+              />
+            )}
+          </Transition>
+        </span>
+      );
+    }
     return (
-      <span
-        className={cnCollapseIcon('Wrapper', [cnIcon({ size }), className])}
-      >
-        <Transition
-          in={!isOpen}
-          unmountOnExit
-          timeout={animateTimeout}
-          nodeRef={iconRef}
-        >
-          {(animate) => (
-            <Icon
-              {...otherProps}
-              className={cnCollapseIcon({ animate })}
-              size={size}
-              ref={iconRef}
-            />
-          )}
-        </Transition>
-        <Transition
-          in={isOpen}
-          unmountOnExit
-          timeout={animateTimeout}
-          nodeRef={closeIconRef}
-        >
-          {(animate) => (
-            <CloseIcon
-              {...otherProps}
-              className={cnCollapseIcon({ animate })}
-              size={size}
-              ref={closeIconRef}
-            />
-          )}
-        </Transition>
-      </span>
+      <Icon
+        {...otherProps}
+        className={cnCollapseIcon({ isOpen, direction, closeDirection, view }, [
+          renderIconClassName,
+        ])}
+        size={size}
+      />
     );
-  }
+  };
+
   return (
-    <Icon
-      {...otherProps}
-      className={cnCollapseIcon({ isOpen, direction, closeDirection }, [
-        className,
-      ])}
-      size={size}
-    />
+    <Wrapper size={size} className={wrapperClassName}>
+      {renderIcon()}
+    </Wrapper>
   );
 };

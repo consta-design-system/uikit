@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { useChoiceGroupIndexed } from '../../hooks/useChoiceGroupIndexed/useChoiceGroupIndexed';
+import { useChoiceGroupIndexed } from '##/hooks/useChoiceGroupIndexed';
+
 import {
   CollapseGroupPropOnOpen,
   CollapseGroupPropOpened,

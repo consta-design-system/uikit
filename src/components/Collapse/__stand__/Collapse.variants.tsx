@@ -16,6 +16,8 @@ import {
   collapsePropDirectionIcon,
   collapsePropDirectionIconDefault,
   collapsePropHorizontalSpace,
+  collapsePropIconView,
+  collapsePropIconViewDefault,
   collapsePropSize,
   collapsePropSizeDefault,
   collapsePropView,
@@ -37,11 +39,15 @@ const Variants = () => {
   const maxHeight = useNumber('maxHeight');
   const hoverEffect = useBoolean('hoverEffect', false);
   const view = useSelect('view', collapsePropView, collapsePropViewDefault);
+  const iconView = useSelect(
+    'iconView',
+    collapsePropIconView,
+    collapsePropIconViewDefault,
+  );
   const divider = useBoolean('divider', false);
   const horizontalSpace = useSelect(
     'horizontalSpace',
     collapsePropHorizontalSpace,
-    collapsePropHorizontalSpace[0],
   );
   const rightSide = useBoolean('rightSide', false);
   const directionIcon = useSelect(
@@ -76,6 +82,7 @@ const Variants = () => {
         maxContentHeight={maxHeight}
         horizontalSpace={horizontalSpace}
         style={{ maxWidth: 300 }}
+        iconView={iconView}
         {...(iconPosition === 'left'
           ? {
               iconPosition,

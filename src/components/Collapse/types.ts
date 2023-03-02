@@ -1,4 +1,4 @@
-import { IconComponent, IconProps, IconPropSize } from '@consta/icons/Icon';
+import { IconComponent, IconProps } from '@consta/icons/Icon';
 import React from 'react';
 
 import {
@@ -50,8 +50,9 @@ export type CollapseIconPropDirection =
 
 export type CollapseIconProps = PropsWithHTMLAttributes<
   {
-    size: IconPropSize;
+    size: 'xs' | 's';
     icon: React.FC<IconProps>;
+    view: CollapsePropIconView;
     isOpen?: boolean;
     cildren?: never;
     closeIcon?: React.FC<IconProps>;
@@ -66,6 +67,10 @@ export const collapsePropDirectionIconDefault = collapsePropDirectionIcon[0];
 export const collapsePropCloseDirectionIconDefault =
   collapsePropDirectionIcon[2];
 
+export const collapsePropIconView = ['clear', 'ghost'] as const;
+export const collapsePropIconViewDefault = collapsePropIconView[0];
+export type CollapsePropIconView = typeof collapsePropIconView[number];
+
 export type CollapseProps = PropsWithHTMLAttributesAndRef<
   {
     size?: CollapsePropSize;
@@ -77,6 +82,7 @@ export type CollapseProps = PropsWithHTMLAttributesAndRef<
     horizontalSpace?: CollapsePropHorizontalSpace;
     hoverEffect?: boolean;
     isOpen?: boolean;
+    iconView?: CollapsePropIconView;
   } & (
     | {
         closeIcon?: IconComponent;

@@ -7,6 +7,7 @@ import { CollapseExampleSize } from './examples/CollapseExampleSize/CollapseExam
 import { CollapseExampleIconPosition } from './examples/CollapseExampleIconPosition/CollapseExampleIconPosition';
 import { CollapseExampleIconDivider } from './examples/CollapseExampleIconDivider/CollapseExampleIconDivider';
 import { CollapseExampleLabel } from './examples/CollapseExampleLabel/CollapseExampleLabel';
+import { CollapseExampleIconView } from './examples/CollapseExampleIconView/CollapseExampleIconView';
 import {
   CollapseExampleIconRightSideBadge,
   CollapseExampleIconRightSideButton,
@@ -27,6 +28,7 @@ import { Collapse } from '@consta/uikit/Collapse';
   - [Разделитель](#разделитель)
   - [Дополнительный элемент](#дополнительный-элемент)
 - [Иконка](#иконка)
+  - [Внешний вид](#внешний-вид-иконки)
   - [Замена иконки](#замена-иконки)
   - [Расположение иконки](#расположение-иконки)
   - [Направление иконки](#направление-иконки)
@@ -174,6 +176,12 @@ export const CollapseExampleIconRightSideButton = () => {
 ## Иконка
 
 По умолчанию у коллапса иконка-стрелочка: `IconArrowDown` — в закрытом виде, `IconArrowUp` — в открытом.
+
+### Внешний вид иконки
+
+Вы можете изменить внешний вид иконки.
+
+<CollapseExampleIconView />
 
 ### Замена иконки
 
@@ -359,6 +367,7 @@ import { Collapse } from '@consta/uikit/Collapse';
 | [`label`](#заголовок)                        | `React.ReactNode`                                                                                  | -               | Заголовок коллапса                                                          |
 | [`size?`](#размер)                           | `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`                                                               | `'m'`           | Размер                                                                      |
 | [`view?`](#внешний-вид)                      | `'primary'`, `'secondary'`                                                                         | `'primary'`     | Внешний вид                                                                 |
+| [`iconView?`](#внешний-вид-иконки)           | `'clear'`, `'ghost'`                                                                               | `'clear'`       | Внешний вид иконки разворота                                                |
 | [`hoverEffect?`](#подсветка)                 | `boolean`                                                                                          | -               | Подсвечивает заголовок при наведении                                        |
 | [`divider?`](#разделитель)                   | `boolean`                                                                                          | -               | Добавляет разделитель между заголовком и содержимым                         |
 | [`horizontalSpace?`](#отступы)               | `'6xl'`, `'5xl'`, `'4xl'`, `'3xl'`, `'2xl'`, `'xl'`, `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`, `'3xs'` | -               | Устанавливает боковые отступы                                               |

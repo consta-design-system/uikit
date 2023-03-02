@@ -1,4 +1,6 @@
 .Collapse {
+  color: var(--collapse-color);
+
   &_size {
     &_2xs {
       --vertical-space: var(--space-2xs);
@@ -37,8 +39,14 @@
   }
 
   &_view {
+    &_primary {
+      --collapse-color: var(--color-typo-primary);
+      --collapse-bg-hover: var(--color-control-bg-clear-hover);
+    }
+
     &_secondary {
-      color: var(--color-typo-secondary);
+      --collapse-color: var(--color-typo-secondary);
+      --collapse-bg-hover: var(--color-control-bg-ghost-hover);
     }
   }
 
@@ -52,7 +60,7 @@
 
     &_hoverEffect {
       &:hover {
-        background: var(--color-control-bg-clear-hover);
+        background: var(--collapse-bg-hover);
       }
     }
 

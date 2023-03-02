@@ -1,14 +1,12 @@
 import './Collapse.css';
 
-import { IconPropSize } from '@consta/icons/Icon';
 import { IconArrowDown } from '@consta/icons/IconArrowDown';
 import React, { useRef } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
+import { useForkRef } from '##/hooks/useForkRef/useForkRef';
+import { cn } from '##/utils/bem';
 
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { cn } from '../../utils/bem';
-import { getByMap } from '../../utils/getByMap';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { Text } from '../Text/Text';
 import { CollapseIcon } from './CollapseIcon/CollapseIcon';
@@ -17,6 +15,7 @@ import {
   collapsePropCloseDirectionIconDefault,
   collapsePropDirectionIconDefault,
   collapsePropIconPositionDefault,
+  collapsePropIconViewDefault,
   CollapseProps,
   CollapsePropSize,
   collapsePropSizeDefault,
@@ -27,7 +26,7 @@ export const COMPONENT_NAME = 'Collapse' as const;
 
 export const cnCollapse = cn('Collapse');
 
-export const sizeIconMap: Record<CollapsePropSize, IconPropSize> = {
+export const sizeIconMap: Record<CollapsePropSize, 'xs' | 's'> = {
   '2xs': 'xs',
   'xs': 'xs',
   's': 'xs',
@@ -78,6 +77,7 @@ export const Collapse: CollapseComponent = React.forwardRef<
     directionIcon = collapsePropDirectionIconDefault,
     closeDirectionIcon = collapsePropCloseDirectionIconDefault,
     style,
+    iconView = collapsePropIconViewDefault,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, collapseRef);
 
@@ -96,17 +96,19 @@ export const Collapse: CollapseComponent = React.forwardRef<
         className={cnCollapse('Label', {
           hoverEffect,
           iconPosition,
+          view,
         })}
         {...otherProps}
       >
         <CollapseIcon
           className={cnCollapse('Icon', { position: iconPosition })}
-          size={getByMap(sizeIconMap, size)}
+          size={sizeIconMap[size]}
           icon={icon}
           closeIcon={closeIcon}
           isOpen={isOpen}
           direction={directionIcon}
           closeDirection={closeDirectionIcon}
+          view={iconView}
         />
         {typeof label === 'object' ? (
           <div className={cnCollapse('LabelText')}>{label}</div>
