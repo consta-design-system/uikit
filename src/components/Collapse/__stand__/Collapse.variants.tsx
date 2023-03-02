@@ -48,7 +48,6 @@ const Variants = () => {
   const horizontalSpace = useSelect(
     'horizontalSpace',
     collapsePropHorizontalSpace,
-    collapsePropHorizontalSpace[0],
   );
   const rightSide = useBoolean('rightSide', false);
   const directionIcon = useSelect(
