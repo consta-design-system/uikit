@@ -1,5 +1,14 @@
 # Changelog
 
+## v4.13.0 (02/03/2023)
+Добавили в `Collapse` свойство `iconView`, позволяющее менять вариант отображения иконки разворота
+
+---
+
+- [feat(Collapse): add iconView (#2932)](https://github.com/consta-design-system/uikit/commit/5806bc992bf79fa89d89047636c6dda470d29ac5) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.12.0 (22/02/2023)
 Самое важное:
 
@@ -422,19 +431,3 @@ UserSelectDeprecated
 - [docs(FieldGroup): edit docs (#2412)](https://github.com/consta-design-system/uikit/commit/b92aaa4707158809333e188f399485d655bc4aeb) - [@arhayka](https://github.com/arhayka)
 - [feat(MixCard): add border prop to mixin (#2416)](https://github.com/consta-design-system/uikit/commit/fcc736b78b422b3d143eff2ecde74796748e5ac3) - [@N1MBER](https://github.com/N1MBER)
 - [chore(storybook): add automatisation for publish stand (#2398)](https://github.com/consta-design-system/uikit/commit/5c0214fbd997d932fb69708f1e5ae9bb3386897f) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v3.26.0 (22/06/2022)
-Самое важное:
-
-- Добавили новый компонент `ProgressLine`, для отображения статуса загрузки
-- В `TextField` добавили события по нажатию кнопок
-
----
-
-- [fix(TextField): fixed disabled (#2409)](https://github.com/consta-design-system/uikit/commit/4d54487ed5d023b8cc65f7168cbb44cc09894f59) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Slider): fix work of slider on a big and small values (#2382)](https://github.com/consta-design-system/uikit/commit/50ffaf64c01627c0cb0d45fa44b512f293515a2a) - [@N1MBER](https://github.com/N1MBER)
-- [feat(TextField): add onKey events for input and add incrementButtons (#2394)](https://github.com/consta-design-system/uikit/commit/fe892b020af944ecc1b46255ac480170951b79f2) - [@N1MBER](https://github.com/N1MBER)
-- [fix(User): fix word wrap (#2395)](https://github.com/consta-design-system/uikit/commit/11ba66ec0ff73a6a8e7180a740c520dc10934b1d) - [@N1MBER](https://github.com/N1MBER)
-- [feat(ProgressLine): add ProgressLine component (#2383)](https://github.com/consta-design-system/uikit/commit/77e844e2e34c82d698e7b95b685480b8ef9dea74) - [@N1MBER](https://github.com/N1MBER)
