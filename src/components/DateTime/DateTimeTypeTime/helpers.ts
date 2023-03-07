@@ -15,8 +15,13 @@ import { useMemo } from 'react';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { range } from '../../../utils/array';
-import { isInMinMaxDade } from '../../../utils/date';
-import { getLabelHours, getLabelMinutes, getLabelSeconds } from '../helpers';
+import { isDisableDate, isInMinMaxDate } from '../../../utils/date';
+import {
+  DateTimePropDisableDates,
+  getLabelHours,
+  getLabelMinutes,
+  getLabelSeconds,
+} from '../helpers';
 
 export const dateTimeTimePropLocaleDefault = {
   hours: 'Час',
@@ -37,7 +42,7 @@ type ResultItem = {
 };
 
 const getItemData = (
-  length: number,
+  timeType: 'hours' | 'minutes' | 'seconds',
   multiplicity = 1,
   startOfUnits: (date: Date) => Date,
   startOfUnit: (date: Date) => Date,
@@ -47,8 +52,10 @@ const getItemData = (
   value?: Date,
   minDate?: Date,
   maxDate?: Date,
+  disableDates?: DateTimePropDisableDates,
   onChangeRef?: React.MutableRefObject<DateTimeTimePropOnChange | undefined>,
 ): ResultItem[] => {
+  const length = timeType === 'hours' ? 24 : 60;
   const numbers = range(multiplicity ? Math.ceil(length / multiplicity) : 0);
 
   if (numbers.length === 0) {
@@ -61,13 +68,9 @@ const getItemData = (
     const date = addUnits(startDate, number * multiplicity);
     const label = getItemLabel(date);
     const selected = value ? getItemLabel(date) === getItemLabel(value) : false;
-    const disabled = !isInMinMaxDade(
-      date,
-      minDate,
-      maxDate,
-      startOfUnit,
-      endOfUnit,
-    );
+    const disabled =
+      !isInMinMaxDate(date, minDate, maxDate, startOfUnit, endOfUnit) ||
+      isDisableDate({ date, disableDates, mode: 'time', timeType });
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) =>
       !disabled && onChangeRef?.current?.({ e, value: date });
 
@@ -88,13 +91,14 @@ export const useTimeItems = (
   onChange?: DateTimeTimePropOnChange,
   minDate?: Date,
   maxDate?: Date,
+  disableDates?: DateTimePropDisableDates,
 ): ResultItem[][] => {
   const onChangeRef = useMutableRef(onChange);
 
   return useMemo(
     () => [
       getItemData(
-        24,
+        'hours',
         multiplicityHours,
         startOfDay,
         startOfHour,
@@ -104,10 +108,11 @@ export const useTimeItems = (
         value,
         minDate,
         maxDate,
+        disableDates,
         onChangeRef,
       ),
       getItemData(
-        60,
+        'minutes',
         multiplicityMinutes,
         startOfHour,
         startOfMinute,
@@ -117,10 +122,11 @@ export const useTimeItems = (
         value,
         minDate,
         maxDate,
+        disableDates,
         onChangeRef,
       ),
       getItemData(
-        60,
+        'seconds',
         multiplicitySeconds,
         startOfMinute,
         startOfSecond,
@@ -130,6 +136,7 @@ export const useTimeItems = (
         value,
         minDate,
         maxDate,
+        disableDates,
         onChangeRef,
       ),
     ],
@@ -140,6 +147,7 @@ export const useTimeItems = (
       multiplicityHours,
       multiplicityMinutes,
       multiplicitySeconds,
+      disableDates,
     ],
   );
 };

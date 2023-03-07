@@ -18,3 +18,4 @@ export * from './getCentury';
 export * from './startOfCentury';
 export * from './endOfCentury';
 export * from './isEqualDate';
+export * from './isDisableDate';

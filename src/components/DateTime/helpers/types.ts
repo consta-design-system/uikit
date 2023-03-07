@@ -15,6 +15,8 @@ export const dateTimePropType = [
 export type DateTimePropType = typeof dateTimePropType[number];
 export const dateTimePropTypeDefault = dateTimePropType[0];
 
+export type DateTimePropDisableDates = Array<Date | { min: Date; max: Date }>;
+
 export type СapableRangeType = 'date' | 'month' | 'year' | 'date-time';
 
 export type DateTimePropValue<TYPE> = TYPE extends СapableRangeType
@@ -64,6 +66,7 @@ export type DateTimeProps<TYPE extends DateTimePropType = 'date'> =
       view?: TYPE extends СapableRangeType ? DateTimePropView : 'classic';
       locale?: DateTimePropLocale;
       children?: never;
+      disableDates?: DateTimePropDisableDates;
       onChangeCurrentVisibleDate?: (date: Date) => void;
       multiplicitySeconds?: number;
       multiplicityMinutes?: number;

@@ -13,12 +13,12 @@ import {
 import React from 'react';
 
 import { range } from '../../../utils/array';
-import { isInMinMaxDade } from '../../../utils/date';
+import { isDisableDate, isInMinMaxDate } from '../../../utils/date';
 import { DateRange } from '../../../utils/types/Date';
 import { DateTimeCellPropRange } from '../DateTimeCell/DateTimeCell';
 import { isDateInRange } from './isDateInRange';
 import { isEqualDay } from './isEqualDay';
-import { HandleSelectDate } from './types';
+import { DateTimePropDisableDates, HandleSelectDate } from './types';
 
 const isSelected = ({
   date,
@@ -47,6 +47,7 @@ export const getDaysOfMonth = (props: {
   date: Date;
   locale: Locale;
   handleDayClick?: HandleSelectDate;
+  disableDates?: DateTimePropDisableDates;
   value?: Date | DateRange;
   events?: Date[];
   minDate?: Date;
@@ -60,8 +61,16 @@ export const getDaysOfMonth = (props: {
   event?: boolean;
   current?: boolean;
 }[] => {
-  const { date, locale, handleDayClick, value, events, minDate, maxDate } =
-    props;
+  const {
+    date,
+    locale,
+    handleDayClick,
+    value,
+    events,
+    minDate,
+    maxDate,
+    disableDates,
+  } = props;
   const currentMonth = date.getMonth();
   const startDate = startOfWeek(startOfMonth(date), { locale });
   const endDate = endOfWeek(addWeeks(startDate, 5), { locale });
@@ -70,13 +79,9 @@ export const getDaysOfMonth = (props: {
   return range(diffDays).map((index) => {
     const date = addDays(startDate, index);
     const label = format(date, 'd');
-    const disabled = !isInMinMaxDade(
-      date,
-      minDate,
-      maxDate,
-      startOfDay,
-      endOfDay,
-    );
+    const disabled =
+      !isInMinMaxDate(date, minDate, maxDate, startOfDay, endOfDay) ||
+      isDisableDate({ date, disableDates, mode: 'date' });
     const onClick =
       !disabled && handleDayClick
         ? (e: React.MouseEvent<HTMLButtonElement>) =>
