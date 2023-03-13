@@ -1,13 +1,10 @@
 import './Select.variants.css';
 
+import { IconQuestion } from '@consta/icons/IconQuestion';
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
 
 import { cn } from '../../../utils/bem';
-// import {
-//   eventInterceptorMap,
-//   EventInterceptorProvider,
-// } from '../../EventInterceptor/EventInterceptor';
 import {
   defaultPropForm,
   defaultPropSize,
@@ -43,6 +40,7 @@ const Variants = () => {
   const status = useSelect('status', propStatus);
   const caption = useText('caption', 'Подпись');
   const label = useText('label', 'Заголовок');
+  const withLabelIcon = useBoolean('withLabelIcon', false);
   const labelPosition = useSelect('labelPosition', ['top', 'left'], 'top');
   const placeholder = useText('placeholder', 'Выберите цвет');
   const withGroups = useBoolean('withGroups', false);
@@ -59,6 +57,7 @@ const Variants = () => {
         disabled={disabled}
         view={view}
         form={form}
+        labelIcon={withLabelIcon ? IconQuestion : undefined}
         required={required}
         status={status}
         placeholder={placeholder}

@@ -1,5 +1,6 @@
 import './Combobox.variants.css';
 
+import { IconQuestion } from '@consta/icons/IconQuestion';
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
 
@@ -37,6 +38,7 @@ const Variants = () => {
   const placeholder = useText('placeholder', 'Placeholder');
   const withGroups = useBoolean('withGroups', false);
   const isLoading = useBoolean('isLoading', false);
+  const withLabelIcon = useBoolean('withLabelIcon', false);
 
   const [value, setValue] = useState<Item | null>(null);
   const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);
@@ -55,6 +57,7 @@ const Variants = () => {
           status={status}
           placeholder={placeholder}
           items={items}
+          labelIcon={withLabelIcon ? IconQuestion : undefined}
           value={valueMultiple}
           onChange={({ value }) => setValueMultiple(value)}
           groups={withGroups ? groups : []}
@@ -75,6 +78,7 @@ const Variants = () => {
         size={size}
         disabled={disabled}
         view={view}
+        labelIcon={withLabelIcon ? IconQuestion : undefined}
         form={form}
         isLoading={isLoading}
         required={required}

@@ -13,7 +13,10 @@ import {
   SelectExampleCustomTypes,
   SelectExampleCustomTypesWithGroups,
 } from './examples/SelectExampleCustomTypes/SelectExampleCustomTypes';
-import { SelectExampleLabel } from './examples/SelectExampleLabel/SelectExampleLabel';
+import {
+  SelectExampleLabel,
+  SelectExampleLabelIcon,
+} from './examples/SelectExampleLabel/SelectExampleLabel';
 import { SelectExampleStatus } from './examples/SelectExampleStatus/SelectExampleStatus';
 
 ```tsx
@@ -534,6 +537,14 @@ export function SelectExampleLabel() {
 ```
 
 <SelectExampleLabel />
+
+Также к лейблу можно добавить иконку используя свойство `labelIcon`.
+
+```tsx
+<Select label="Значение" labelIcon={IconQuestion}>
+```
+
+<SelectExampleLabelIcon />
 
 ## Неактивный выпадающий список
 

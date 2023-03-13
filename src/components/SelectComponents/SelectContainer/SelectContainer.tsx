@@ -1,3 +1,4 @@
+import { IconComponent } from '@consta/icons/Icon';
 import React, { forwardRef } from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
@@ -25,6 +26,7 @@ export type SelectContainerProps = PropsWithHTMLAttributesAndRef<
     required?: boolean;
     status?: PropStatus;
     label?: string;
+    labelIcon?: IconComponent;
     type?: 'select' | 'combobox' | 'userselect';
     labelPosition?: 'top' | 'left';
     caption?: string;
@@ -48,6 +50,7 @@ export const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(
       type = 'select',
       labelPosition = 'top',
       label,
+      labelIcon,
       caption,
       ...otherProps
     } = props;
@@ -59,6 +62,7 @@ export const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(
       >
         {label && (
           <FieldLabel
+            icon={labelIcon}
             required={required}
             className={cnSelect('Label', { labelPosition })}
             size={size}

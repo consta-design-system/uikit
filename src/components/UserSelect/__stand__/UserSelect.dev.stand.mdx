@@ -22,6 +22,7 @@ import {
 import {
   UserSelectExampleLabel,
   UserSelectExampleLabelPosition,
+  UserSelectExampleLabelIcon,
 } from './examples/UserSelectExampleLabel/UserSelectExampleLabel';
 import { UserSelectExampleStatus } from './examples/UserSelectExampleStatus/UserSelectExampleStatus';
 
@@ -180,6 +181,18 @@ export function UserSelectExamplePlaceholder() {
 ```
 
 <UserSelectExampleLabelPosition />
+
+Также к лейблу можно xдобавить иконку используя свойство `labelIcon`.
+
+```tsx
+<UserSelect
+  label="Пользователь"
+  placeholder="Выберите пользователя"
+  labelIcon={IconUser}
+/>
+```
+
+<UserSelectExampleLabelIcon />
 
 ### Подпись
 
@@ -1164,6 +1177,7 @@ export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`placeholder?`](#подсказка)                                        | `string`                                               | -                                                             | Подсказка, отображается, когда вариант не выбран                       |
 | [`label?`](#лейбл)                                                  | `string`                                               | -                                                             | Лейбл                                                                  |
 | [`labelPosition?`](#лейбл)                                          | `'top', 'left'`                                        | `'top'`                                                       | Положение лейбла по отношению к полю                                   |
+| [`labelIcon?`](#лейбл)                                              | `IconComponent`                                        | -                                                             | Иконка слева от лейбла                                                 |
 | [`caption?`](#подпись)                                              | `string`                                               | -                                                             | Подпись                                                                |
 | [`items`](#варианты)                                                | `ITEM[]`                                               | -                                                             | Варианты                                                               |
 | [`value?`](#выбранное-значение)                                     | `PropValue<ITEM,MULTIPLE>`                             | -                                                             | Выбранное значение                                                     |

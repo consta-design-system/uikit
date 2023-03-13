@@ -1,6 +1,30 @@
 .FieldLabel {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+
   &-Star {
     margin-left: var(--space-3xs);
     color: var(--color-bg-alert);
+  }
+
+  &-Icon {
+    &_size {
+      &_xs {
+        margin-right: var(--space-2xs);
+      }
+
+      &_s {
+        margin-right: var(--space-2xs);
+      }
+
+      &_m {
+        margin-right: calc(var(--space-2xs) + var(--space-3xs));
+      }
+
+      &_l {
+        margin-right: var(--space-xs);
+      }
+    }
   }
 }

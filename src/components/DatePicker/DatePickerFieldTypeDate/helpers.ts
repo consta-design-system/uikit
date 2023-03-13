@@ -60,6 +60,7 @@ export type DatePickerFieldTypeDateProps = PropsWithHTMLAttributes<
     maxDate?: Date;
     focused?: boolean;
     label?: string;
+    labelIcon?: IconComponent;
     caption?: string;
     labelPosition?: 'top' | 'left';
     withClearButton?: boolean;

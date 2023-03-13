@@ -80,6 +80,7 @@ export const TextFieldRender = <TYPE extends string>(
     tabIndex,
     ariaLabel,
     label,
+    labelIcon,
     inputContainerRef,
     labelPosition = 'top',
     caption,
@@ -243,6 +244,7 @@ export const TextFieldRender = <TYPE extends string>(
     >
       {label && (
         <FieldLabel
+          icon={labelIcon}
           required={required}
           className={cnTextField('Label', { labelPosition })}
           size={size}

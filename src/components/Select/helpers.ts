@@ -1,3 +1,4 @@
+import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
@@ -79,6 +80,7 @@ export type SelectProps<
     getGroupLabel?: PropGetGroupLabel<GROUP>;
     getGroupKey?: PropGetGroupKey<GROUP>;
     label?: string;
+    labelIcon?: IconComponent;
     labelPosition?: 'top' | 'left';
     caption?: string;
   },

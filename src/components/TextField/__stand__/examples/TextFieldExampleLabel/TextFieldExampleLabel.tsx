@@ -1,3 +1,4 @@
+import { IconQuestion } from '@consta/icons/IconQuestion';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
@@ -22,6 +23,23 @@ export const TextFieldExampleLabel = () => {
         placeholder="Здесь лейбл слева"
         label="Лейбл"
         labelPosition="left"
+      />
+    </Example>
+  );
+};
+
+export const TextFieldExampleLabelIcon = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+
+  return (
+    <Example col={1}>
+      <TextField
+        onChange={handleChange}
+        value={value}
+        labelIcon={IconQuestion}
+        placeholder="Здесь лейбл сверху"
+        label="Лейбл"
       />
     </Example>
   );

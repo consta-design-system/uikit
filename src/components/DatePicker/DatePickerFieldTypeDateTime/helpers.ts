@@ -82,6 +82,7 @@ export type DatePickerFieldTypeDateTimeProps = PropsWithHTMLAttributes<
     multiplicityMinutes?: number;
     multiplicityHours?: number;
     label?: string;
+    labelIcon?: IconComponent;
     caption?: string;
     labelPosition?: 'top' | 'left';
     withClearButton?: boolean;

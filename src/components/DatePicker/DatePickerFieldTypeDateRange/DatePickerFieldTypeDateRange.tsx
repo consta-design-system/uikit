@@ -50,6 +50,7 @@ export const DatePickerFieldTypeDateRange = forwardRef<
     startFocused,
     endFocused,
     label,
+    labelIcon,
     labelPosition,
     caption,
     width,
@@ -98,6 +99,7 @@ export const DatePickerFieldTypeDateRange = forwardRef<
           required={required}
           className={cnDatePickerMixRangeField('Label', { labelPosition })}
           size={size}
+          icon={labelIcon}
         >
           {label}
         </FieldLabel>
