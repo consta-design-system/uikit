@@ -156,6 +156,7 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
           onClick={onIconRightClick}
           iconRight={IconRight}
           onlyIcon
+          type="button"
           view="clear"
           size={getByMap(buttonSizeMap, size)}
           form="round"
