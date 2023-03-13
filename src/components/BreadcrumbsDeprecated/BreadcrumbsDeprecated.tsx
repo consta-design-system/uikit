@@ -110,7 +110,13 @@ export const Breadcrumbs: Breadcrumbs = React.forwardRef((props, ref) => {
           >
             {Icon &&
               (onlyIconRoot && isFirst ? (
-                <Button view="clear" onlyIcon iconLeft={Icon} size={iconSize} />
+                <Button
+                  type="button"
+                  view="clear"
+                  onlyIcon
+                  iconLeft={Icon}
+                  size={iconSize}
+                />
               ) : (
                 <Icon className={cnBreadcrumbs('Icon')} size={iconSize} />
               ))}

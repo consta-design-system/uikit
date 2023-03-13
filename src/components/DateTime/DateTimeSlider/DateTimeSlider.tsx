@@ -53,6 +53,7 @@ export const DateTimeSlider: React.FC<DateTimeSliderProps> = (props) => {
         className={cnDateTimeSlider('Button', { direction: 'prev' })}
         view="ghost"
         iconLeft={IconForward}
+        type="button"
         onClick={onPrev}
       />
       <div
@@ -112,6 +113,7 @@ export const DateTimeSlider: React.FC<DateTimeSliderProps> = (props) => {
       <Button
         className={cnDateTimeSlider('Button', { direction: 'next' })}
         view="ghost"
+        type="button"
         iconLeft={IconForward}
         onClick={onNext}
       />

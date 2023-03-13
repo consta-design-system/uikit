@@ -140,6 +140,7 @@ export const SnackBarItemRender = (
           view="clear"
           iconLeft={IconClose}
           form="round"
+          type="button"
           size="xs"
           onClick={handleClose}
         />

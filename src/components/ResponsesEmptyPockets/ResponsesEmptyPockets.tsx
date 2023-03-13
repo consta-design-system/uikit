@@ -9,5 +9,5 @@ export const ResponsesEmptyPockets = createResponses({
   image: ResponsesImageEmptyPockets,
   title: 'Здесь пока ничего нет',
   description: 'Будьте первым, добавьте что-нибудь красивое',
-  actions: <Button label="Добавить что-нибудь" />,
+  actions: <Button type="button" label="Добавить что-нибудь" />,
 });

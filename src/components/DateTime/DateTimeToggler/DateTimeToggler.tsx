@@ -44,6 +44,7 @@ export const DateTimeToggler: React.FC<DateTimeTogglerProps> = (props) => {
     >
       {prevOnClick && (
         <Button
+          type="button"
           className={cnDateTimeToggler('Button', { direction: 'prev' })}
           onClick={prevOnClick}
           iconLeft={IconForward}
@@ -61,6 +62,7 @@ export const DateTimeToggler: React.FC<DateTimeTogglerProps> = (props) => {
       />
       {nextOnClick && (
         <Button
+          type="button"
           className={cnDateTimeToggler('Button', { direction: 'next' })}
           onClick={nextOnClick}
           iconLeft={IconForward}

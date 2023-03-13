@@ -13,6 +13,7 @@ export const TableVariantWithOnRowHover = () => {
     ...row,
     button: (
       <Button
+        type="button"
         view="ghost"
         size="xs"
         iconLeft={IconCopy}

@@ -71,6 +71,7 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
           view="clear"
           onlyIcon
           size="xs"
+          type="button"
           className={cnSteps('Button', { side: 'left' })}
           onClick={(e) => changeStep(e, true)}
         />
@@ -101,6 +102,7 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
           view="clear"
           onlyIcon
           size="xs"
+          type="button"
           className={cnSteps('Button', { side: 'right' })}
           onClick={(e) => changeStep(e, false)}
         />

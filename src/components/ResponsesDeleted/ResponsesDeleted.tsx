@@ -12,11 +12,12 @@ export const ResponsesDeleted = createResponses({
   actions: (
     <>
       <Button
+        type="button"
         label="Вернуть на место"
         view="ghost"
         style={{ marginRight: 'var(--space-m)' }}
       />
-      <Button label="Отлично!" view="ghost" />
+      <Button type="button" label="Отлично!" view="ghost" />
     </>
   ),
 });

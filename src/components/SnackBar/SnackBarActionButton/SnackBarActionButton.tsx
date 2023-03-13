@@ -26,6 +26,7 @@ export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (
           className={cnSnackBarActionButton()}
           key={`${cnSnackBarActionButton()}-${index}`}
           size="s"
+          type="button"
           view="ghost"
           label={item.label}
           onClick={item.onClick}

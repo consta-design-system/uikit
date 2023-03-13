@@ -49,6 +49,7 @@ export const TabsMoreItems: TabsMoreItems = React.forwardRef(
         >
           <Button
             size="xs"
+            type="button"
             view="ghost"
             onlyIcon
             iconLeft={IconMeatball}

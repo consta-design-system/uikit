@@ -75,6 +75,7 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
             <Button
               key={buttonTo}
               view="clear"
+              type="button"
               size="xs"
               onlyIcon
               disabled={

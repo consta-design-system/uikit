@@ -9,5 +9,5 @@ export const ResponsesEmptyBox = createResponses({
   image: ResponsesImageEmptyBox,
   title: 'Здесь пока ничего нет',
   description: 'Будьте первым, добавьте что-нибудь полезное',
-  actions: <Button label="Добавить что-нибудь" />,
+  actions: <Button type="button" label="Добавить что-нибудь" />,
 });

@@ -113,6 +113,7 @@ function BreadcrumbsMoreRender<ITEM>(
       <Button
         className={cnBreadcrumbsMore('Button')}
         view="clear"
+        type="button"
         label="..."
         size={iconSize}
         ref={buttonRef}
