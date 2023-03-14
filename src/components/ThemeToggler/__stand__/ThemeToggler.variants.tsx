@@ -3,9 +3,11 @@ import './ThemeToggler.variants.css';
 import { useSelect } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cn } from '../../../utils/bem';
-import { directions } from '../../Popover/Popover';
-import { Theme } from '../../Theme/Theme';
+import { buttonPropView } from '##/components/Button';
+import { directions } from '##/components/Popover';
+import { Theme } from '##/components/Theme';
+import { cn } from '##/utils/bem';
+
 import {
   exampleThemesThree,
   exampleThemesTwo,
@@ -23,8 +25,8 @@ const Variants = () => {
     themeTogglerPropSizeDefault,
   );
   const themes = useSelect('number of themes', ['two', 'three'], 'two');
+  const view = useSelect('view', buttonPropView, 'clear');
   const direction = useSelect('direction', directions, 'downStartLeft');
-  // const possibleDirections: object('possibleDirections', directions);
 
   const themeArray = themes === 'two' ? exampleThemesTwo : exampleThemesThree;
   const [value, setValue] = useState<ThemeType>(themeArray[0]);
@@ -37,7 +39,7 @@ const Variants = () => {
         value={value}
         onChange={({ value }) => setValue(value)}
         direction={direction}
-        // possibleDirections={possibleDirections}
+        view={view}
       />
     </Theme>
   );
