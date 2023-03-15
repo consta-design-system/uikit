@@ -1,13 +1,13 @@
 import { IconCheck } from '@consta/icons/IconCheck';
 import React, { forwardRef, useRef } from 'react';
 
-import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
-import { useFlag } from '../../hooks/useFlag/useFlag';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { getByMap } from '../../utils/getByMap';
-import { Button } from '../Button/Button';
-import { ContextMenu } from '../ContextMenu/ContextMenu';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
+import { Button } from '##/components/Button';
+import { ContextMenu } from '##/components/ContextMenu';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { useChoiceGroup } from '##/hooks/useChoiceGroup';
+import { useFlag } from '##/hooks/useFlag';
+import { useForkRef } from '##/hooks/useForkRef';
+
 import { contextMenuSizeMap, iconSizeMap, withDefaultGetters } from './helpers';
 import {
   ThemeTogglerComponent,
@@ -35,6 +35,7 @@ const ThemeTogglerRender = (
     direction,
     possibleDirections,
     style,
+    view = 'clear',
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), buttonRef);
 
@@ -49,8 +50,8 @@ const ThemeTogglerRender = (
 
   type Item = typeof items[number];
 
-  const iconSize = getByMap(iconSizeMap, size);
-  const contextMenuSize = getByMap(contextMenuSizeMap, size);
+  const iconSize = iconSizeMap[size];
+  const contextMenuSize = contextMenuSizeMap[size];
 
   const getButtonIcon = () =>
     getItemIcon(items.find((theme) => getChecked(theme)) ?? items[0]);
@@ -90,7 +91,7 @@ const ThemeTogglerRender = (
         onClick={onButtonClick}
         onlyIcon
         size={size}
-        view="clear"
+        view={view}
         style={style}
       />
       {items.length > 2 && (
