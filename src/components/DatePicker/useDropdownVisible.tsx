@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-
-import { useFlag } from '##/hooks/useFlag';
+import { useReducer } from 'react';
 
 type UseDropdownVisiblePropOnFocus =
   | [
@@ -33,67 +31,109 @@ type UseDropdownVisible = (
   onBlur?: UseDropdownVisiblePropOnFocus,
 ) => UseDropdownVisibleResult;
 
-export const useDropdownVisible: UseDropdownVisible = (onFocus, onBlur) => {
-  const [fieldFocused, setFieldFocused] = useFlag();
-  const [fieldType, setFieldType] = useState<FieldType>();
-  const [dropdownFocused, setDropdownFocused] = useFlag(false);
+type State = {
+  fieldFocused: boolean;
+  dropdownFocused: boolean;
+  fieldType: FieldType;
+  calendarVisible: boolean;
+};
 
-  const [calendarVisible, setCalendarVisible] = useFlag();
-
-  useEffect(() => {
-    if (dropdownFocused || fieldFocused) {
-      setCalendarVisible.on();
-    } else {
-      setCalendarVisible.off();
+type Action =
+  | {
+      type: 'focus';
+      field: FieldType | 'dropdown';
     }
-  }, [fieldFocused, dropdownFocused]);
+  | {
+      type: 'blur';
+      field: FieldType | 'dropdown';
+    }
+  | {
+      type: 'close';
+    };
 
-  const onStartFocus = (e: React.FocusEvent<HTMLElement>) => {
-    setFieldType('start');
-    setFieldFocused.on();
-    Array.isArray(onFocus) ? onFocus[0]?.(e) : onFocus?.(e);
-  };
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'focus': {
+      return {
+        ...state,
+        calendarVisible: true,
+        ...(action.field !== 'dropdown'
+          ? {
+              fieldType: action.field,
+              fieldFocused: true,
+            }
+          : {
+              dropdownFocused: true,
+            }),
+      };
+    }
+    case 'close': {
+      return {
+        ...state,
+        calendarVisible: false,
+        fieldFocused: false,
+        fieldType: undefined,
+      };
+    }
+    case 'blur': {
+      const setKey =
+        action.field === 'dropdown' ? 'dropdownFocused' : 'fieldFocused';
+      const anotherKey =
+        action.field !== 'dropdown' ? 'dropdownFocused' : 'fieldFocused';
+      return {
+        ...state,
+        calendarVisible: state[anotherKey],
+        [setKey]: false,
+      };
+    }
+  }
+};
 
-  const onEndFocus = (e: React.FocusEvent<HTMLElement>) => {
-    setFieldType('end');
-    setFieldFocused.on();
-    Array.isArray(onFocus) ? onFocus[1]?.(e) : onFocus?.(e);
-  };
+export const useDropdownVisible: UseDropdownVisible = (onFocus, onBlur) => {
+  const [
+    { fieldFocused, dropdownFocused, calendarVisible, fieldType },
+    dispatch,
+  ] = useReducer(reducer, {
+    fieldFocused: false,
+    fieldType: undefined,
+    dropdownFocused: false,
+    calendarVisible: false,
+  });
 
-  const onStartBlur = (e: React.FocusEvent<HTMLElement>) => {
-    Array.isArray(onBlur) ? onBlur[0]?.(e) : onBlur?.(e);
-    setFieldFocused.off();
-  };
+  const onFieldFocus =
+    (field: FieldType) => (e: React.FocusEvent<HTMLElement>) => {
+      dispatch({ type: 'focus', field });
+      Array.isArray(onFocus)
+        ? onFocus[field === 'start' ? 0 : 1]?.(e)
+        : onFocus?.(e);
+    };
 
-  const onEndBlur = (e: React.FocusEvent<HTMLElement>) => {
-    Array.isArray(onBlur) ? onBlur[1]?.(e) : onBlur?.(e);
-    setFieldFocused.off();
-  };
-
-  const close = () => {
-    setCalendarVisible.off();
-    setFieldFocused.off();
-    setDropdownFocused.off();
-  };
+  const onFieldBlur =
+    (field: FieldType) => (e: React.FocusEvent<HTMLElement>) => {
+      dispatch({ type: 'blur', field });
+      Array.isArray(onBlur)
+        ? onBlur[field === 'start' ? 0 : 1]?.(e)
+        : onBlur?.(e);
+    };
 
   return {
     calendarVisible,
-    close,
+    close: () => dispatch({ type: 'close' }),
     blocks: {
       start: {
         flag: fieldFocused,
-        onFocus: onStartFocus,
-        onBlur: onStartBlur,
+        onFocus: onFieldFocus('start'),
+        onBlur: onFieldBlur('start'),
       },
       end: {
         flag: fieldFocused,
-        onFocus: onEndFocus,
-        onBlur: onEndBlur,
+        onFocus: onFieldFocus('end'),
+        onBlur: onFieldBlur('end'),
       },
       dropdown: {
         flag: dropdownFocused,
-        onFocus: () => setDropdownFocused.on(),
-        onBlur: () => setDropdownFocused.off(),
+        onFocus: () => dispatch({ type: 'focus', field: 'dropdown' }),
+        onBlur: () => dispatch({ type: 'blur', field: 'dropdown' }),
       },
     },
     fieldType,

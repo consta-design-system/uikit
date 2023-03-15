@@ -41,6 +41,9 @@ export const DatePickerFieldTypeMonth = React.forwardRef<
     <TextField
       {...otherProps}
       type="text"
+      onChange={({ e, value }) =>
+        value === null && onChange?.({ e: e.nativeEvent, value })
+      }
       inputContainerRef={ref}
       inputRef={useForkRef([inputRef, inputRefProp])}
       value={stringValue}
