@@ -175,6 +175,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
         {(currPage > 1 || minified) && (
           <div className={cnPagination('PrevPage')}>
             <Button
+              type="button"
               className={cnPagination('ItemLeft', {
                 minified,
                 show: currPage > 1,
@@ -197,6 +198,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
           <div className={cnPagination('Pages')}>
             {isStartDots && (
               <Button
+                type="button"
                 className={cnPagination('Item', { isActive: currPage === 1 })}
                 style={{ width: itemWidth }}
                 label="1"
@@ -219,6 +221,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
             )}
             {pages.map((page) => (
               <Button
+                type="button"
                 key={page}
                 className={cnPagination('Item', {
                   isActive: currPage === page,
@@ -244,6 +247,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
             )}
             {isEndDots && (
               <Button
+                type="button"
                 className={cnPagination('Item', {
                   isActive: currPage === totalPages,
                 })}
@@ -278,6 +282,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
         {(currPage < totalPages || minified) && (
           <div className={cnPagination('NextPage')}>
             <Button
+              type="button"
               className={cnPagination('ItemRight', {
                 minified,
                 show: currPage < totalPages,

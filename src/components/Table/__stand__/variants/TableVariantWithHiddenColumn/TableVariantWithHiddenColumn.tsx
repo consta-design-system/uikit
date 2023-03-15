@@ -36,6 +36,7 @@ export const TableVariantWithHiddenColumn = () => {
   return (
     <div>
       <Button
+        type="button"
         label={isHidden ? 'Показать колонку' : 'Скрыть колонку'}
         onClick={handleClick}
       />

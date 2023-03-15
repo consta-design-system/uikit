@@ -244,6 +244,7 @@ export const TableHeader = <T extends TableRow>({
                 >
                   {column.sortable && (
                     <Button
+                      type="button"
                       size="xs"
                       iconSize="s"
                       view="clear"

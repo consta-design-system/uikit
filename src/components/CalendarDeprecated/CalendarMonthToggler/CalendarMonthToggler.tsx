@@ -42,6 +42,7 @@ export const CalendarMonthToggler: React.FC<CalendarMonthTogglerProps> = (
           onClick={prevOnClick}
           iconLeft={IconForward}
           size="s"
+          type="button"
           view="clear"
           iconSize="s"
         />
@@ -56,6 +57,7 @@ export const CalendarMonthToggler: React.FC<CalendarMonthTogglerProps> = (
           onClick={nextOnClick}
           iconLeft={IconForward}
           size="s"
+          type="button"
           view="clear"
           iconSize="s"
         />

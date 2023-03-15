@@ -92,6 +92,7 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
       <div className={cnTextFilter('Controls')}>
         <Button
           size="m"
+          type="button"
           form="brick"
           label="Выбрать все"
           view="clear"
@@ -101,6 +102,7 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
         <Button
           size="m"
           form="brick"
+          type="button"
           label="Сбросить"
           view="clear"
           onClick={resetHandler}

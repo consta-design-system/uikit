@@ -42,12 +42,14 @@ export const TableFilterContainer: React.FC<TableFilterContainerProps> = ({
       {children}
       <div className={cnTableFilterContainer('Buttons')}>
         <Button
+          type="button"
           label={cancelButtonLabel}
           size="s"
           view="ghost"
           onClick={onCancel}
         />
         <Button
+          type="button"
           label={confirmButtonLabel}
           size="s"
           view="primary"

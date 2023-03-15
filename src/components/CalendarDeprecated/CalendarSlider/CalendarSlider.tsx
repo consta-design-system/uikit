@@ -161,6 +161,7 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
       <Button
         className={cnCalendarSlider('Button', { direction: 'prev' })}
         view="ghost"
+        type="button"
         iconLeft={IconForward}
         onClick={handlePrev}
       />
@@ -228,6 +229,7 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
       <Button
         className={cnCalendarSlider('Button', { direction: 'next' })}
         view="ghost"
+        type="button"
         iconLeft={IconForward}
         onClick={handleNext}
       />

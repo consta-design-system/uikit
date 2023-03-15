@@ -9,5 +9,5 @@ export const ResponsesNothingFound = createResponses({
   image: ResponsesImageNothingFound,
   title: 'Ничего не найдено',
   description: 'Попробуйте сформулировать запрос по-другому',
-  actions: <Button label="Вернуться назад" view="ghost" />,
+  actions: <Button type="button" label="Вернуться назад" view="ghost" />,
 });

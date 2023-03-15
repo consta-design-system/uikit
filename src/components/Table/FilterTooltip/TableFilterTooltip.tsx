@@ -49,6 +49,7 @@ export const TableFilterTooltip: React.FC<Props> = ({
   return (
     <>
       <Button
+        type="button"
         ref={buttonRef}
         size="xs"
         iconSize="s"
