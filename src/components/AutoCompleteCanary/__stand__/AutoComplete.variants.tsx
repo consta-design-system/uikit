@@ -28,9 +28,7 @@ import { AutoComplete } from '../AutoCompleteCanary';
 const cnAutoCompleteVariants = cn('AutoCompleteVariants');
 
 const Variants = () => {
-  const type = useSelect('type', ['text', 'textarea', 'email'], 'text');
-  const minRows = useNumber('minRows', 1, type === 'textarea');
-  const maxRows = useNumber('maxRows', 5, type === 'textarea');
+  const type = useSelect('type', ['text', 'email'], 'text');
   const width = useSelect(
     'width',
     textFieldPropWidth,
@@ -96,8 +94,6 @@ const Variants = () => {
       required={required}
       withClearButton={withClearButton}
       maxLength={maxLength}
-      minRows={minRows}
-      maxRows={maxRows}
       placeholder={placeholder}
       onChange={handleChange}
       labelIcon={withLabelIcon ? IconQuestion : undefined}

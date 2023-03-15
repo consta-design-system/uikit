@@ -75,6 +75,12 @@ const buttonSizeMap: Record<UserPropSize, ButtonPropSize> = {
   l: 's',
 };
 
+const nameSizeMap: Record<UserPropSize, TextPropSize> = {
+  s: 'xs',
+  m: 's',
+  l: 'm',
+};
+
 export const User = forwardRefWithAs<Props>((props, ref) => {
   const {
     as = 'div',
@@ -117,7 +123,7 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
           {name && (
             <Text
               className={cnUser('Name')}
-              size={size}
+              size={nameSizeMap[size]}
               view="primary"
               lineHeight="2xs"
             >

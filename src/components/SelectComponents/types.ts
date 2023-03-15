@@ -6,15 +6,17 @@ export const defaultPropSize = propSize[0];
 
 export const propForm = [
   'default',
-  'brick',
-  'round',
-  'clearRound',
-  'roundClear',
-  'clearDefault',
   'defaultClear',
   'defaultBrick',
+  'brick',
   'brickDefault',
   'brickClear',
+  'brickRound',
+  'round',
+  'roundClear',
+  'roundBrick',
+  'clearRound',
+  'clearDefault',
   'clearBrick',
   'clearClear',
 ] as const;

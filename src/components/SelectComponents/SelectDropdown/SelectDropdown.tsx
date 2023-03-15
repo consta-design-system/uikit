@@ -23,7 +23,7 @@ import {
 import { cn } from '../../../utils/bem';
 import { fabricIndex } from '../../../utils/fabricIndex';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
-import { Popover } from '../../Popover/Popover';
+import { Popover, PopoverPropOffset } from '../../Popover/Popover';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
 import { SelectLoader } from '../SelectLoader/SelectLoader';
@@ -40,6 +40,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   getOptionProps(props: OptionProps<ITEM>): GetOptionPropsResult;
   form: SelectDropdownPropForm;
   isOpen: boolean;
+  offset?: PopoverPropOffset | 'none';
   isLoading?: boolean;
   renderItem: (props: RenderItemProps<ITEM>) => JSX.Element | null;
   visibleItems: (
@@ -78,6 +79,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     hasItems = true,
     form,
     isOpen,
+    offset: offsetProp = 'none',
     renderItem,
     visibleItems,
     isLoading,
@@ -100,6 +102,8 @@ export const SelectDropdown: SelectDropdown = (props) => {
     );
   }, [visibleItems]);
 
+  const offset = offsetProp === 'none' ? undefined : offsetProp;
+
   return (
     <Transition
       in={isOpen}
@@ -120,7 +124,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
               'downStartRight',
               'upStartRight',
             ]}
-            offset="2xs"
+            offset={offset}
             ref={popoverRef}
             role="listbox"
             className={cnSelectDropdown(null, [
