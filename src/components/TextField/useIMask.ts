@@ -19,6 +19,14 @@ export function useIMask<MASK extends IMask.AnyMaskedOptions>(
   const imaskRef = useRef<IMask.InputMask<MASK> | null>(null);
   const handleChanheRef = useMutableRef(onChange);
 
+  // Нужно для синхранизации value c Imask,
+  // так как value мы можем задать через пропс без самого ввода,
+  // и Imask требует ручной синхронихации в этом случае
+  const onAcept = useCallback((e: Event) => {
+    const value = imaskRef.current?.value || null;
+    handleChanheRef.current?.(value, { e, value });
+  }, []);
+
   useEffect(() => {
     if (inputRef.current) {
       const options = (
@@ -33,18 +41,10 @@ export function useIMask<MASK extends IMask.AnyMaskedOptions>(
   }, [inputRef.current, maskOptions]);
 
   useEffect(() => {
-    return () => {
-      imaskRef.current?.destroy();
-    };
-  }, []);
-
-  // Нужно для синхранизации value c Imask,
-  // так как value мы можем задать через пропс без самого ввода,
-  // и Imask требует ручной синхронихации в этом случае
-  const onAcept = useCallback((e: Event) => {
-    const value = imaskRef.current?.value || null;
-    handleChanheRef.current?.(value, { e, value });
-  }, []);
+    if (imaskRef.current && inputRef.current && imaskRef.current.el) {
+      imaskRef.current.updateValue();
+    }
+  }, [value]);
 
   useEffect(() => {
     imaskRef.current?.on('accept', onAcept);
@@ -54,8 +54,10 @@ export function useIMask<MASK extends IMask.AnyMaskedOptions>(
   }, []);
 
   useEffect(() => {
-    imaskRef.current?.updateValue();
-  }, [value]);
+    return () => {
+      imaskRef.current?.destroy();
+    };
+  }, []);
 
   return {
     inputRef,
