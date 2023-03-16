@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.14.2 (16/03/2023)
+- [fix(useIMask): fixed updateValue (#2958)](https://github.com/consta-design-system/uikit/commit/afaaa13201285d44ba8300192e460b0fccd93708) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.14.0 (15/03/2023)
 В `ThemeToggler` добавили свойство `view` по аналогии с `Button`.
 
@@ -415,16 +420,3 @@ UserSelectDeprecated
 - [docs(Popover): change examples (#2437)](https://github.com/consta-design-system/uikit/commit/ee76227db9da51bfbd3253009f58618d095540e5) - [@arhayka](https://github.com/arhayka)
 - [docs(Badge): add how to use section (#2435)](https://github.com/consta-design-system/uikit/commit/637abfb52282ce81f21b12daaf22a917dff6192c) - [@arhayka](https://github.com/arhayka)
 - [fix(Table): fix wrap text on cell (#2425)](https://github.com/consta-design-system/uikit/commit/99ae1052eb18aea07432d8d982940e16236c1343) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v3.26.2 (06/07/2022)
-Самое важное:
-
-- Добавлены новые иконки, а также исправлены размеры для уже существующих
-- Добавлен размер шрифта `medium` в `Text`
-
----
-
-- [feat(Icons): add new icons and sizes (#2429)](https://github.com/consta-design-system/uikit/commit/6f668c9bef5b81e52948454366160fb3d2f8a1ba) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Fonts): add new font weight ](https://github.com/consta-design-system/uikit/commit/bb44e76fb9a10f16efade19663e54b9d07b9fe06) - [@N1MBER](https://github.com/N1MBER)
