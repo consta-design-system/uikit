@@ -10,6 +10,7 @@ import { basicItems, groups } from '../__mocks__/mock.data';
 import {
   defaultListPropInnerOffset,
   defaultListPropSize,
+  ListPropForm,
   listPropInnerOffset,
   listPropSize,
 } from '../types';
@@ -24,10 +25,11 @@ const conditionalGetter = (conditional: boolean) =>
 const Box: React.FC<{
   withListBox?: boolean;
   children?: React.ReactNode;
-}> = ({ withListBox, children }) => {
+  form?: ListPropForm;
+}> = ({ withListBox, children, form = 'default' }) => {
   if (withListBox) {
     return (
-      <ListBox className={cnListVariant()} form="default" border shadow>
+      <ListBox className={cnListVariant()} form={form} border shadow>
         {children}
       </ListBox>
     );
@@ -45,6 +47,7 @@ const Variants = () => {
     defaultListPropInnerOffset,
   );
   const isInteractive = useBoolean('isInteractive', true);
+  const form = useSelect('form', ['default', 'brick', 'round'], undefined);
   const withGroups = useBoolean('withGroups', false);
   const groupsWithLabel = useBoolean('groupsWithLabel', true, withGroups);
   const disabled = useBoolean('disabled', false);
@@ -57,7 +60,7 @@ const Variants = () => {
   const withListAddItem = useBoolean('withListAddItem', false);
 
   return (
-    <Box withListBox={withListBox}>
+    <Box withListBox={withListBox} form={form}>
       {withListAddItem && (
         <ListAddItem
           label="Добавить"

@@ -35,6 +35,11 @@ const Variants = () => {
     textFieldPropWidthDefault,
   );
   const form = useSelect('form', textFieldPropForm, textFieldPropFormDefault);
+  const dropdownForm = useSelect(
+    'dropdownForm',
+    ['default', 'brick', 'round'],
+    undefined,
+  );
   const status = useSelect('status', textFieldPropStatus);
   const size = useSelect('size', textFieldPropSize, textFieldPropSizeDefault);
   const view = useSelect('view', textFieldPropView, textFieldPropViewDefault);
@@ -89,6 +94,7 @@ const Variants = () => {
       view={view}
       className={cnAutoCompleteVariants()}
       items={items}
+      dropdownForm={dropdownForm}
       groups={withGroups ? groups : []}
       type={type}
       required={required}

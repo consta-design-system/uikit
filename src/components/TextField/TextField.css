@@ -12,24 +12,32 @@
 
   &_size {
     &_xs {
+      --label-offset: var(--space-2xs);
+      --caption-offset: var(--space-2xs);
       --input-height: var(--control-height-xs);
       --input-font-size: var(--control-text-size-xs);
       --input-space: calc(var(--control-space-xs) * 0.5);
     }
 
     &_s {
+      --label-offset: var(--space-2xs);
+      --caption-offset: var(--space-2xs);
       --input-height: var(--control-height-s);
       --input-font-size: var(--control-text-size-s);
       --input-space: calc(var(--control-space-s) * 0.5);
     }
 
     &_m {
+      --label-offset: var(--space-xs);
+      --caption-offset: var(--space-xs);
       --input-height: var(--control-height-m);
       --input-font-size: var(--control-text-size-m);
       --input-space: calc(var(--control-space-m) * 0.5);
     }
 
     &_l {
+      --label-offset: var(--space-xs);
+      --caption-offset: var(--space-xs);
       --input-height: var(--control-height-l);
       --input-font-size: var(--control-text-size-l);
       --input-space: calc(var(--control-space-l) * 0.5);
@@ -41,7 +49,7 @@
       flex-direction: column;
 
       & > *:not(:last-child) {
-        margin-bottom: var(--space-xs);
+        margin-bottom: var(--label-offset);
       }
     }
 
@@ -66,7 +74,7 @@
     width: 100%;
 
     & .TextField-Caption {
-      margin-top: var(--space-2xs);
+      margin-top: var(--caption-offset);
       margin-left: var(--caption-margin-left);
     }
   }

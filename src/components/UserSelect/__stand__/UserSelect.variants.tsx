@@ -35,6 +35,11 @@ const Variants = () => {
   const size = useSelect('size', ['m', 's', 'l'], defaultPropSize);
   const view = useSelect('view', propView, defaultPropView);
   const form = useSelect('form', propForm, defaultPropForm);
+  const dropdownForm = useSelect(
+    'dropdownForm',
+    ['default', 'brick', 'round'],
+    undefined,
+  );
   const status = useSelect('status', propStatus);
   const caption = useText('caption', 'Подпись');
   const required = useBoolean('required', false);
@@ -90,6 +95,7 @@ const Variants = () => {
           disabled={disabled}
           view={view}
           form={form}
+          dropdownForm={dropdownForm}
           status={status}
           labelIcon={withLabelIcon ? IconQuestion : undefined}
           placeholder={placeholder}
@@ -120,6 +126,7 @@ const Variants = () => {
         status={status}
         value={value}
         isLoading={isLoading}
+        dropdownForm={dropdownForm}
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? groups : []}
         multiple={false}
@@ -144,6 +151,7 @@ const Variants = () => {
         required={required}
         placeholder={placeholder}
         items={myItems}
+        dropdownForm={dropdownForm}
         value={valueCustomRender}
         onChange={({ value }) => setValueCustomRender(value)}
         groups={withGroups ? myGroup : []}

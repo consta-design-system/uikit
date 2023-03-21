@@ -60,6 +60,8 @@
 
   &_size {
     &_xs {
+      --label-offset: var(--space-2xs);
+      --caption-offset: var(--space-2xs);
       --round-offset: calc(var(--space-3xs) + var(--space-2xs));
       --input-height: var(--control-height-xs);
       --input-space: calc(var(--control-space-xs) * 0.5);
@@ -75,6 +77,8 @@
     }
 
     &_s {
+      --label-offset: var(--space-2xs);
+      --caption-offset: var(--space-2xs);
       --round-offset: calc(var(--space-2xs));
       --input-height: var(--control-height-s);
       --input-space: calc(var(--control-space-s) * 0.5);
@@ -87,6 +91,8 @@
     }
 
     &_m {
+      --label-offset: var(--space-xs);
+      --caption-offset: var(--space-xs);
       --round-offset: calc(var(--space-3xs) + var(--space-2xs));
       --input-height: var(--control-height-m);
       --input-space: calc(var(--control-space-m) * 0.5);
@@ -99,6 +105,8 @@
     }
 
     &_l {
+      --label-offset: var(--space-xs);
+      --caption-offset: var(--space-xs);
       --round-offset: calc(var(--space-xs));
       --input-height: var(--control-height-l);
       --input-space: calc(var(--control-space-l) * 0.5);
@@ -113,7 +121,7 @@
       flex-direction: column;
 
       & > *:not(:last-child) {
-        margin-bottom: var(--space-xs);
+        margin-bottom: var(--label-offset);
       }
     }
 
@@ -138,7 +146,7 @@
     width: 100%;
 
     & .Select-Caption {
-      margin-top: var(--space-2xs);
+      margin-top: var(--caption-offset);
       margin-left: var(--caption-margin-left);
     }
   }
