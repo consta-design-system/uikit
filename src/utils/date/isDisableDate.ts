@@ -127,6 +127,6 @@ export const isDisableDate = <TYPE extends DateTimePropType>(params: {
   return !!disableDates.find((compareDate) =>
     compareDate instanceof Date
       ? isEqualDates(compareDate, date, mode, timeType)
-      : isInRange(date, compareDate.min, compareDate.max, mode, timeType),
+      : isInRange(date, compareDate[0], compareDate[1], mode, timeType),
   );
 };

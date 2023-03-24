@@ -15,7 +15,7 @@ export const dateTimePropType = [
 export type DateTimePropType = typeof dateTimePropType[number];
 export const dateTimePropTypeDefault = dateTimePropType[0];
 
-export type DateTimePropDisableDates = Array<Date | { min: Date; max: Date }>;
+export type DateTimePropDisableDates = Array<Date | [Date, Date]>;
 
 export type СapableRangeType = 'date' | 'month' | 'year' | 'date-time';
 

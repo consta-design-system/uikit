@@ -9,10 +9,10 @@ const getDisableDates = () => {
   const month = date.getMonth();
   const day = date.getDate();
   return [
-    {
-      min: new Date(year, month, day, 12, 34, 20),
-      max: new Date(year, month, day, 16, 10, 41),
-    },
+    [
+      new Date(year, month, day, 12, 34, 20),
+      new Date(year, month, day, 16, 10, 41),
+    ] as [Date, Date],
   ];
 };
 
