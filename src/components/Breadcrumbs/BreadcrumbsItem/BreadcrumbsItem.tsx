@@ -99,7 +99,13 @@ function BreadcrumbsItemRender<ITEM>(
           >
             {Icon &&
               (onlyIcon ? (
-                <Button view="clear" onlyIcon iconLeft={Icon} size={iconSize} />
+                <Button
+                  type="button"
+                  view="clear"
+                  onlyIcon
+                  iconLeft={Icon}
+                  size={iconSize}
+                />
               ) : (
                 <Icon
                   className={cnBreadcrumbsItem('Icon', [

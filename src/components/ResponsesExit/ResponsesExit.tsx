@@ -9,5 +9,5 @@ export const ResponsesExit = createResponses({
   image: ResponsesImageExit,
   title: 'Вы вышли из системы ',
   description: 'Хотите вернуться?',
-  actions: <Button label="Войти снова" />,
+  actions: <Button type="button" label="Войти снова" />,
 });

@@ -9,5 +9,5 @@ export const Responses404 = createResponses({
   image: ResponsesImage404,
   title: 'Такой страницы нет',
   description: 'Возможно, эту страницу уже удалили, или в вашей ссылке ошибка',
-  actions: <Button label="Вернуться назад" view="ghost" />,
+  actions: <Button type="button" label="Вернуться назад" view="ghost" />,
 });

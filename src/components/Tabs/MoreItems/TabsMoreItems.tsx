@@ -41,6 +41,7 @@ const TabsMoreItemsRender = (
       >
         <Button
           size="xs"
+          type="button"
           view="ghost"
           onlyIcon
           iconLeft={IconMeatball}

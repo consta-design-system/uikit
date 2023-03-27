@@ -1,8 +1,9 @@
 import React, { forwardRef, useRef } from 'react';
 
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { getByMap } from '../../utils/getByMap';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { useForkRef } from '##/hooks/useForkRef/useForkRef';
+import { getByMap } from '##/utils/getByMap';
+
 import { DateTimeTypeDate } from './DateTimeTypeDate/DateTimeTypeDate';
 import { DateTimeTypeDateTime } from './DateTimeTypeDateTime/DateTimeTypeDateTime';
 import { DateTimeTypeMonth } from './DateTimeTypeMonth/DateTimeTypeMonth';

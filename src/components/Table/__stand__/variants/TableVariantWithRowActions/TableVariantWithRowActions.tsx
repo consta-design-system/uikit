@@ -319,6 +319,7 @@ export const TableVariantWithRowActions = () => {
           return (
             <>
               <Button
+                type="button"
                 ref={menuProps.ref}
                 size="xs"
                 view="clear"

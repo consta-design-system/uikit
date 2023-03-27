@@ -1,7 +1,8 @@
 import { IconComponent } from '@consta/icons/Icon';
 
-import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { Direction } from '../Popover/Popover';
+import { ButtonPropView } from '##/components/Button';
+import { Direction } from '##/components/Popover';
+import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const themeTogglerPropSize = ['m', 'l', 's', 'xs'] as const;
 export type ThemeTogglerPropSize = typeof themeTogglerPropSize[number];
@@ -36,6 +37,7 @@ export type ThemeTogglerProps<ITEM = ThemeTogglerItemDefault> =
       direction?: Direction;
       possibleDirections?: readonly Direction[];
       children?: never;
+      view?: ButtonPropView;
     },
     HTMLButtonElement
   > &
