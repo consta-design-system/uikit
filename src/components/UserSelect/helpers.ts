@@ -1,3 +1,4 @@
+import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
@@ -100,6 +101,7 @@ export type UserSelectProps<
     getGroupLabel?: PropGetGroupLabel<GROUP>;
     getGroupKey?: PropGetGroupKey<GROUP>;
     label?: string;
+    labelIcon?: IconComponent;
     caption?: string;
     labelPosition?: 'top' | 'left';
   },

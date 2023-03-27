@@ -1,5 +1,6 @@
 import './UserSelect.variants.css';
 
+import { IconQuestion } from '@consta/icons/IconQuestion';
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
 
@@ -38,6 +39,7 @@ const Variants = () => {
   const caption = useText('caption', 'Подпись');
   const required = useBoolean('required', false);
   const label = useText('label', 'Заголовок');
+  const withLabelIcon = useBoolean('withLabelIcon', false);
   const labelPosition = useSelect('labelPosition', ['top', 'left'], 'top');
   const placeholder = useText('placeholder', 'Подсказка');
   const withGroups = useBoolean('withGroups', false);
@@ -89,6 +91,7 @@ const Variants = () => {
           view={view}
           form={form}
           status={status}
+          labelIcon={withLabelIcon ? IconQuestion : undefined}
           placeholder={placeholder}
           items={items}
           isLoading={isLoading}
@@ -120,6 +123,7 @@ const Variants = () => {
         onChange={({ value }) => setValue(value)}
         groups={withGroups ? groups : []}
         multiple={false}
+        labelIcon={withLabelIcon ? IconQuestion : undefined}
         label={label}
         labelPosition={labelPosition}
         caption={caption}
@@ -179,6 +183,7 @@ const Variants = () => {
         getItemSubLabel={(item) => item.email}
         searchFunction={searchFunction}
         label={label}
+        labelIcon={withLabelIcon ? IconQuestion : undefined}
         isLoading={isLoading}
         labelPosition={labelPosition}
         caption={caption}

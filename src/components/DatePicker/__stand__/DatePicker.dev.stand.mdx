@@ -5,7 +5,10 @@ import { DatePickerExampleOnError } from './examples/DatePickerExampleOnError/Da
 import { DatePickerExampleFormat } from './examples/DatePickerExampleFormat/DatePickerExampleFormat';
 import { DatePickerExampleAdditionalControls } from './examples/DatePickerExampleAdditionalControls/DatePickerExampleAdditionalControls';
 import { DatePickerExampleStatus } from './examples/DatePickerExampleStatus/DatePickerExampleStatus';
-import { DatePickerExampleLabel } from './examples/DatePickerExampleLabel/DatePickerExampleLabel';
+import {
+  DatePickerExampleLabel,
+  DatePickerExampleLabelIcon,
+} from './examples/DatePickerExampleLabel/DatePickerExampleLabel';
 import { DatePickerExampleRequired } from './examples/DatePickerExampleRequired/DatePickerExampleRequired';
 import { DatePickerExampleCaption } from './examples/DatePickerExampleCaption/DatePickerExampleCaption';
 import {
@@ -313,6 +316,14 @@ export const DatePickerExampleFormat = () => {
 
 <DatePickerExampleLabel />
 
+Также к лейблу можно добавить иконку используя свойство `labelIcon`.
+
+```tsx
+<DatePicker label="Лейбл" labelIcon={IconQuestion} />
+```
+
+<DatePickerExampleLabelIcon />
+
 ### Подпись
 
 Под полем можно добавить подпись — например, чтобы показать информацию о его состоянии.
@@ -587,6 +598,7 @@ type DatePickerPropOnError = (
 | [`value?`](#выбор-даты)                                                                    | `DatePickerPropValue<TYPE>`                                                                                                                                                                                                                                 | -                     | Выбранная дата или период                                                                                                             |
 | [`type?`](#тип-дата-или-период)                                                            | `'date'` &#124; `'date-range'` &#124; `'date-time'` &#124; `'date-time-range'` &#124; `'time'` &#124; `'month'` &#124; `'month-range'` &#124; `'year'` &#124; `'year-range'`                                                                                | `date`                | Тип календаря: выбор даты, времени или выбор периода                                                                                  |
 | [`label?`](#лейбл)                                                                         | `string`                                                                                                                                                                                                                                                    | -                     | Лейбл к полю ввода                                                                                                                    |
+| [`labelIcon?`](#лейбл)                                                                     | `IconComponent`                                                                                                                                                                                                                                             | -                     | Иконка слева от лейбла                                                                                                                |
 | [`labelPosition?`](#лейбл)                                                                 | `'top'` &#124; `'left'`                                                                                                                                                                                                                                     | `'top'`               | Положение лейбла относительно поля                                                                                                    |
 | [`caption?`](#подпись)                                                                     | `string`                                                                                                                                                                                                                                                    | -                     | Подпись под полем ввода                                                                                                               |
 | `name?`                                                                                    | `DatePickerPropName<TYPE>`                                                                                                                                                                                                                                  | -                     | Имя поля ввода                                                                                                                        |

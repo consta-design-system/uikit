@@ -117,6 +117,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     iconSize?: IconPropSize;
     children?: never;
     label?: string;
+    labelIcon?: IconComponent;
     caption?: string;
     labelPosition?: 'top' | 'left';
     focused?: boolean;

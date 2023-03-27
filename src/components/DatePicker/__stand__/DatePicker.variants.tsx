@@ -1,6 +1,7 @@
 import './DatePicker.variants.css';
 
 import { IconCalendar } from '@consta/icons/IconCalendar';
+import { IconQuestion } from '@consta/icons/IconQuestion';
 import { useBoolean, useDate, useSelect, useText } from '@consta/stand';
 import { addDays, Locale, startOfWeek } from 'date-fns';
 import enUSLocale from 'date-fns/locale/en-US';
@@ -58,6 +59,7 @@ const Variants = () => {
   const withClearButton = useBoolean('withClearButton', false);
   const withAdditionalControls = useBoolean('with additional controls', false);
   const label = useText('label', 'Заголовок');
+  const withLabelIcon = useBoolean('withLabelIcon', false);
   const labelPosition = useSelect(
     'labelPosition',
     ['top', 'left'],
@@ -121,6 +123,7 @@ const Variants = () => {
       labelPosition={labelPosition}
       caption={caption}
       required={required}
+      labelIcon={withLabelIcon ? IconQuestion : undefined}
       value={value}
       status={status}
       view={view}

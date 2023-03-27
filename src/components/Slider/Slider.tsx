@@ -61,6 +61,7 @@ const SliderRender = <RANGE extends boolean = false>(
     withTooltip,
     range = false,
     label,
+    labelIcon,
     status,
     caption,
     tooltipFormatter = defaultTooltipFormatter,
@@ -131,7 +132,7 @@ const SliderRender = <RANGE extends boolean = false>(
       {...otherProps}
     >
       {label && (
-        <FieldLabel className={cnSlider('Label')} size={size}>
+        <FieldLabel icon={labelIcon} className={cnSlider('Label')} size={size}>
           {label}
         </FieldLabel>
       )}

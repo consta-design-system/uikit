@@ -131,6 +131,7 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
       leftSide?: DatePickerPropSide<TYPE>;
       rightSide?: DatePickerPropSide<TYPE>;
       label?: string;
+      labelIcon?: IconComponent;
       caption?: string;
       labelPosition?: 'top' | 'left';
       onChangeCurrentVisibleDate?: (date: Date) => void;

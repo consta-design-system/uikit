@@ -39,6 +39,7 @@ type Props<RANGE extends boolean = false> = {
   withTooltip?: boolean;
   value: SliderValue<RANGE>;
   label?: string;
+  labelIcon?: IconComponent;
   caption?: string;
   status?: PropStatus;
   min?: number;

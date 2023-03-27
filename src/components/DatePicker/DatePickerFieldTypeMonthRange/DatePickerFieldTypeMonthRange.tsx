@@ -50,6 +50,7 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
     startFocused,
     endFocused,
     label,
+    labelIcon,
     labelPosition,
     caption,
     width,
@@ -95,6 +96,7 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
     >
       {label && (
         <FieldLabel
+          icon={labelIcon}
           required={required}
           className={cnDatePickerMixRangeField('Label', { labelPosition })}
           size={size}

@@ -11,7 +11,10 @@ import {
 } from './examples/SliderExampleStep/SliderExampleStep';
 import { SliderExampleTooltip } from './examples/SliderExampleTooltip/SliderExampleTooltip';
 import { SliderExampleTooltipFormatter } from './examples/SliderExampleTooltipFormatter/SliderExampleTooltipFormatter';
-import { SliderExampleLabel } from './examples/SliderExampleLabel/SliderExampleLabel';
+import {
+  SliderExampleLabel,
+  SliderExampleLabelIcon,
+} from './examples/SliderExampleLabel/SliderExampleLabel';
 import { SliderExampleDisabled } from './examples/SliderExampleDisabled/SliderExampleDisabled';
 import {
   SliderExampleContent,
@@ -240,6 +243,14 @@ export const SliderExampleLabel = () => {
 ```
 
 <SliderExampleLabel />
+
+Также к лейблу можно добавить иконку используя свойство `labelIcon`.
+
+```tsx
+<Slider step={5} range label="Пример" labelIcon={IconQuestion} />
+```
+
+<SliderExampleLabelIcon />
 
 ### Иконка и поле ввода
 
@@ -484,6 +495,7 @@ type PropToolipFormatter = (value: number | undefined) => string;
 | [`size?`](#размер)                                     | `'xs'`, `'s'` , `'m'` , `'l'`                   | `'m'`        | Размер компонента                                |
 | [`step?`](#ограничение-значений-которые-можно-выбрать) | `number` <code>&#124;</code> `[number, number]` | `1`          | Шаг для перемещения ползунка или набор значений  |
 | [`range?`](#одно-значение-или-диапазон)                | `boolean`                                       | -            | Выбор диапазона                                  |
+| [`labelIcon?`](#лейбл-и-подпись)                       | `IconComponent`                                 | -            | Иконка слева от лейбла                           |
 | [`label?`](#лейбл-и-подпись)                           | `string`                                        | -            | Лейбл                                            |
 | [`caption?`](#лейбл-и-подпись)                         | `string`                                        | -            | Подпись                                          |
 | [`value?`](#одно-значение-или-диапазон)                | `SliderValue<RANGE>`                            | -            | Значение или массив значений                     |

@@ -1,3 +1,4 @@
+import { IconQuestion } from '@consta/icons/IconQuestion';
 import { IconSettings } from '@consta/icons/IconSettings';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React, { useEffect, useState } from 'react';
@@ -14,6 +15,7 @@ const Variants = () => {
   const range = useBoolean('range');
   const disabled = useBoolean('disabled');
   const label = useText('label', 'Лейбл');
+  const withLabelIcon = useBoolean('withLabelIcon', false);
   const caption = useText('caption', 'Подпись');
   const status = useSelect('status', propStatus);
   const size = useSelect('size', propSize, defaultPropSize);
@@ -64,6 +66,7 @@ const Variants = () => {
       label={label}
       caption={caption}
       status={status}
+      labelIcon={withLabelIcon ? IconQuestion : undefined}
       withTooltip={withTooltip}
       step={stepValue}
       view={view}

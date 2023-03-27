@@ -1,3 +1,4 @@
+import { IconQuestion } from '@consta/icons/IconQuestion';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
@@ -31,6 +32,21 @@ export const SelectExampleLabel = () => {
         label="Значение"
         caption={value?.label}
         placeholder="Выберите значение"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </Example>
+  );
+};
+
+export const SelectExampleLabelIcon = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Example col={1}>
+      <Select
+        label="Значение"
+        labelIcon={IconQuestion}
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}

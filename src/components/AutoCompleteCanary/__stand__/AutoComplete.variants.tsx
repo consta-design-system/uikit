@@ -1,6 +1,7 @@
 import './AutoComplete.variants.css';
 
 import { IconPhoto } from '@consta/icons/IconPhoto';
+import { IconQuestion } from '@consta/icons/IconQuestion';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React, { useMemo, useState } from 'react';
 
@@ -44,6 +45,7 @@ const Variants = () => {
   const withClearButton = useBoolean('withClearButton', false);
   const caption = useText('caption', 'Подпись');
   const label = useText('label', 'Заголовок');
+  const withLabelIcon = useBoolean('withLabelIcon', false);
   const labelPosition = useSelect('labelPosition', ['top', 'left'], 'top');
   const maxLength = useNumber('maxLength', 200);
 
@@ -98,6 +100,7 @@ const Variants = () => {
       maxRows={maxRows}
       placeholder={placeholder}
       onChange={handleChange}
+      labelIcon={withLabelIcon ? IconQuestion : undefined}
       leftSide={leftSide}
       rightSide={rightSide}
       disabled={disabled}
