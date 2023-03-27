@@ -3,6 +3,8 @@ import './FieldLabel.css';
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
+import { cnMixSpace, Space } from '##/mixs/MixSpace';
+
 import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { Text } from '../Text/Text';
@@ -18,9 +20,16 @@ type FieldLabelProps = {
 const cnFieldLabel = cn('FieldLabel');
 
 const iconSizeMap: Record<FieldLabelPropSize, IconPropSize> = {
-  xs: 's',
+  xs: 'xs',
   s: 's',
   m: 's',
+  l: 's',
+};
+
+const iconSpaceMap: Record<FieldLabelPropSize, Space> = {
+  xs: '2xs',
+  s: '2xs',
+  m: '2xs',
   l: 'xs',
 };
 
@@ -45,7 +54,9 @@ export const FieldLabel = forwardRefWithAs<FieldLabelProps>((props, ref) => {
     >
       {Icon && (
         <Icon
-          className={cnFieldLabel('Icon', { size })}
+          className={cnFieldLabel('Icon', [
+            cnMixSpace({ mR: iconSpaceMap[size] }),
+          ])}
           size={iconSizeMap[size]}
           view="secondary"
         />
