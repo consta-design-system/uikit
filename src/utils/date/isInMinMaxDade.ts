@@ -23,7 +23,7 @@ const isMinMax = (date: Date, minDate?: Date, maxDate?: Date): boolean => {
   return true;
 };
 
-export const isInMinMaxDade = (
+export const isInMinMaxDate = (
   date: Date,
   minDate?: Date,
   maxDate?: Date,

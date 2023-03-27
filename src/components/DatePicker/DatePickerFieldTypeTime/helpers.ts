@@ -287,6 +287,11 @@ export const usePicker = (props: UsePickerProps) => {
     maskOptions: options,
   });
 
+  const clearValue = (e: Event) => {
+    setStringValue(null);
+    onChange?.({ e, value: null });
+  };
+
   // при изменении value, нужно обновить stringValue
   useEffect(() => {
     if (value && isValid(value)) {
@@ -303,5 +308,6 @@ export const usePicker = (props: UsePickerProps) => {
   return {
     stringValue,
     inputRef,
+    clearValue,
   };
 };

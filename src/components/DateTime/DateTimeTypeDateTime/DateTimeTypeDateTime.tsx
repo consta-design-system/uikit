@@ -27,6 +27,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> =
       minDate,
       maxDate,
       events,
+      disableDates,
       locale,
       onChangeCurrentVisibleDate,
       multiplicitySeconds,
@@ -81,6 +82,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> =
           onChange={onDateChange}
           onChangeRange={onDateChangeRange}
           minDate={minDate}
+          disableDates={disableDates}
           maxDate={maxDate}
           events={events}
           locale={locale}
@@ -93,6 +95,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> =
             onChange={onTimeChange}
             minDate={minDate}
             maxDate={maxDate}
+            disableDates={disableDates}
             locale={locale}
             multiplicitySeconds={multiplicitySeconds}
             multiplicityMinutes={multiplicityMinutes}
