@@ -28,6 +28,7 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef(
       minDate,
       maxDate,
       value,
+      disableDates,
       onChange,
       onChangeRange,
       currentVisibleDate: currentVisibleDateProp,
@@ -86,6 +87,7 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef(
 
     const pageOneDaysOfMonth = getDaysOfMonth({
       date: currentVisibleDate,
+      disableDates,
       handleDayClick: handleSelectDate,
       value,
       events,

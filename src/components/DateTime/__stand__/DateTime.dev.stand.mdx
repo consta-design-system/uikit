@@ -26,6 +26,8 @@ import { DateTimeExampleLocale } from './examples/DateTimeExampleLocale/DateTime
 
 import { DateTimeExampleEvents } from './examples/DateTimeExampleEvents/DateTimeExampleEvents';
 
+import { DateTimeExampleDisableDates } from './examples/DateTimeExampleDisableDates/DateTimeExampleDisableDates';
+
 ```tsx
 import { DateTime } from '@consta/uikit/DateTime';
 ```
@@ -155,15 +157,18 @@ export const DateTimeExamplePeriod = () => {
 
 ### Ограничение выбора
 
-Можно установить диапазон, в котором пользователь может выбрать дату в календаре.
+Можно установить диапазон, в котором пользователь будет выбирать дату в календаре.
 
 Начало диапазона укажите в свойстве `minDate`, конец — в свойстве `maxDate`.
+
+Если необходимо задать интервал или конкретные даты, недоступные для выбора, определите свойство `disableDates`
 
 ##### Календарь с диапазоном дат
 
 ```tsx
 import { startOfWeek } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
+import { DateTime } from '@consta/uikit/DateTime';
 
 const minDate = startOfWeek(new Date(), { locale: ruLocale });
 const maxDate = new Date();
@@ -183,6 +188,41 @@ export const DateTimeExampleDateMin = () => {
 ```
 
 <DateTimeExampleDateMin />
+
+##### Календарь с отключенным интервалом
+
+```tsx
+import React, { useState } from 'react';
+import { DateTime } from '@consta/uikit/DateTime';
+
+const getDisableDates = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  return [
+    [
+      new Date(year, month, day, 12, 34, 20),
+      new Date(year, month, day, 16, 10, 41),
+    ],
+  ];
+};
+
+export const DateTimeExampleDisableDates = () => {
+  const [value, setValue] = useState<Date | undefined>();
+
+  return (
+    <DateTime
+      type="date-time"
+      value={value}
+      disableDates={getDisableDates()}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+};
+```
+
+<DateTimeExampleDisableDates />
 
 ### Какой месяц показывать
 
@@ -314,6 +354,7 @@ type LocaleWords = {
 };
 
 export type DateTimePropLocale = Locale & LocaleWords;
+export type DateTimePropDisableDates = Array<Date | [Date, Date]>;
 ```
 
 | Свойство                                         | Тип или варианты значения                              | По умолчанию | Описание                                                                  |
@@ -321,6 +362,7 @@ export type DateTimePropLocale = Locale & LocaleWords;
 | [`view?`](#внешний-вид)                          | `'classic'`, `'book'`, `'slider'`                      | `'classic'`  | Вид календаря                                                             |
 | [`type?`](#тип-календаря)                        | `'date'`, `'month'`, `'year'`, `'time'`, `'date-time'` | `'date'`     | Тип календаря                                                             |
 | [`value?`](#выбор-даты)                          | `DateTimePropValue`                                    | -            | Выбранная дата или диапазон дат                                           |
+| [`disableDates?`](#ограничение-выбора)           | `DateTimePropDisableDates`                             | -            | Интервал или время недоступное для выбора                                 |
 | [`minDate?`](#ограничение-выбора)                | `Date`                                                 | -            | Ограничение выбора дат по меньшей дате                                    |
 | [`maxDate?`](#ограничение-выбора)                | `Date`                                                 | -            | Ограничение выбора дат по большей дате                                    |
 | [`events?`](#события-на-календаре)               | `Date[]`                                               | -            | События                                                                   |

@@ -19,6 +19,7 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef(
       onChange,
       maxDate,
       minDate,
+      disableDates,
       multiplicityHours = 1,
       multiplicityMinutes = 1,
       multiplicitySeconds = 1,
@@ -47,6 +48,7 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef(
       onChange,
       minDate,
       maxDate,
+      disableDates,
     );
 
     const [hours, minutes, seconds] = time;
