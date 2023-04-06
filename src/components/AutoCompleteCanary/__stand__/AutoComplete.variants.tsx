@@ -28,15 +28,18 @@ import { AutoComplete } from '../AutoCompleteCanary';
 const cnAutoCompleteVariants = cn('AutoCompleteVariants');
 
 const Variants = () => {
-  const type = useSelect('type', ['text', 'textarea', 'email'], 'text');
-  const minRows = useNumber('minRows', 1, type === 'textarea');
-  const maxRows = useNumber('maxRows', 5, type === 'textarea');
+  const type = useSelect('type', ['text', 'email'], 'text');
   const width = useSelect(
     'width',
     textFieldPropWidth,
     textFieldPropWidthDefault,
   );
   const form = useSelect('form', textFieldPropForm, textFieldPropFormDefault);
+  const dropdownForm = useSelect(
+    'dropdownForm',
+    ['default', 'brick', 'round'],
+    undefined,
+  );
   const status = useSelect('status', textFieldPropStatus);
   const size = useSelect('size', textFieldPropSize, textFieldPropSizeDefault);
   const view = useSelect('view', textFieldPropView, textFieldPropViewDefault);
@@ -91,13 +94,12 @@ const Variants = () => {
       view={view}
       className={cnAutoCompleteVariants()}
       items={items}
+      dropdownForm={dropdownForm}
       groups={withGroups ? groups : []}
       type={type}
       required={required}
       withClearButton={withClearButton}
       maxLength={maxLength}
-      minRows={minRows}
-      maxRows={maxRows}
       placeholder={placeholder}
       onChange={handleChange}
       labelIcon={withLabelIcon ? IconQuestion : undefined}

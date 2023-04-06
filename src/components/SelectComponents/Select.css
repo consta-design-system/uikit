@@ -60,6 +60,9 @@
 
   &_size {
     &_xs {
+      --label-offset: var(--space-2xs);
+      --caption-offset: var(--space-2xs);
+      --round-offset: calc(var(--space-3xs) + var(--space-2xs));
       --input-height: var(--control-height-xs);
       --input-space: calc(var(--control-space-xs) * 0.5);
       --input-font-size: var(--control-text-size-xs);
@@ -74,6 +77,9 @@
     }
 
     &_s {
+      --label-offset: var(--space-2xs);
+      --caption-offset: var(--space-2xs);
+      --round-offset: calc(var(--space-2xs));
       --input-height: var(--control-height-s);
       --input-space: calc(var(--control-space-s) * 0.5);
       --input-font-size: var(--control-text-size-s);
@@ -85,6 +91,9 @@
     }
 
     &_m {
+      --label-offset: var(--space-xs);
+      --caption-offset: var(--space-xs);
+      --round-offset: calc(var(--space-3xs) + var(--space-2xs));
       --input-height: var(--control-height-m);
       --input-space: calc(var(--control-space-m) * 0.5);
       --input-font-size: var(--control-text-size-m);
@@ -96,6 +105,9 @@
     }
 
     &_l {
+      --label-offset: var(--space-xs);
+      --caption-offset: var(--space-xs);
+      --round-offset: calc(var(--space-xs));
       --input-height: var(--control-height-l);
       --input-space: calc(var(--control-space-l) * 0.5);
       --input-font-size: var(--control-text-size-l);
@@ -109,7 +121,7 @@
       flex-direction: column;
 
       & > *:not(:last-child) {
-        margin-bottom: var(--space-xs);
+        margin-bottom: var(--label-offset);
       }
     }
 
@@ -134,7 +146,7 @@
     width: 100%;
 
     & .Select-Caption {
-      margin-top: var(--space-2xs);
+      margin-top: var(--caption-offset);
       margin-left: var(--caption-margin-left);
     }
   }
@@ -184,7 +196,7 @@
 
     &_form {
       &_round .Select-Control {
-        padding-left: calc(var(--input-space) * 1.6);
+        padding-left: var(--round-offset);
         border-radius: calc(var(--input-height) / 2);
       }
 
@@ -217,17 +229,16 @@
       }
 
       &_roundBrick .Select-Control {
-        padding-left: calc(var(--input-space) * 1.6);
+        padding-left: var(--round-offset);
         border-radius:
           calc(var(--input-height) / 2) 0 0
           calc(var(--input-height) / 2);
       }
 
       &_brickRound .Select-Control {
-        padding-right: calc(var(--input-space) * 1.6);
         border-radius:
-          0 calc(var(--input-height) / 2) 99rem
-          calc(var(--input-height) / 2);
+          0 calc(var(--input-height) / 2)
+          calc(var(--input-height) / 2) 0;
       }
 
       &_brickClear .Select-Control {
@@ -241,7 +252,6 @@
       }
 
       &_clearRound .Select-Control {
-        padding-right: calc(var(--input-space) * 1.6);
         border-left-width: 0;
         border-radius:
           0 calc(var(--input-height) / 2)
@@ -249,7 +259,7 @@
       }
 
       &_roundClear .Select-Control {
-        padding-left: calc(var(--input-space) * 1.6);
+        padding-left: var(--round-offset);
         border-right-width: 0;
         border-radius:
           calc(var(--input-height) / 2) 0 0
@@ -398,7 +408,7 @@
     width: var(--input-height);
     margin: 0;
     padding: 0;
-    color: var(--color-control-typo-disable);
+    color: var(--color-control-typo-placeholder);
     background-color: transparent;
     border: none;
     text-align: center;

@@ -244,7 +244,7 @@ export function useAutoComplete<ITEM, GROUP>(
   };
 
   return {
-    isOpen: isOpen && hasItems,
+    isOpen: !!(isOpen && hasItems && searchValue && searchValue?.trim() !== ''),
     visibleItems,
     getOptionProps,
     handleInputFocus,

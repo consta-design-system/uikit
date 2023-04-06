@@ -30,6 +30,11 @@ const Variants = () => {
   const size = useSelect('size', ['m', 's', 'l', 'xs'], defaultPropSize);
   const view = useSelect('view', propView, defaultPropView);
   const form = useSelect('form', propForm, defaultPropForm);
+  const dropdownForm = useSelect(
+    'dropdownForm',
+    ['default', 'brick', 'round'],
+    undefined,
+  );
   const required = useBoolean('required', false);
   const caption = useText('caption', 'Хорошо подумайте, это важно');
   const label = useText('label', 'Здесь можно выбрать цвет');
@@ -55,6 +60,7 @@ const Variants = () => {
           form={form}
           required={required}
           status={status}
+          dropdownForm={dropdownForm}
           placeholder={placeholder}
           items={items}
           labelIcon={withLabelIcon ? IconQuestion : undefined}
@@ -82,6 +88,7 @@ const Variants = () => {
         form={form}
         isLoading={isLoading}
         required={required}
+        dropdownForm={dropdownForm}
         status={status || undefined}
         placeholder={placeholder}
         items={items}

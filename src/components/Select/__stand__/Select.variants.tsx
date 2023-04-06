@@ -36,6 +36,11 @@ const Variants = () => {
   const size = useSelect('size', propSize, defaultPropSize);
   const view = useSelect('view', propView, defaultPropView);
   const form = useSelect('form', propForm, defaultPropForm);
+  const dropdownForm = useSelect(
+    'dropdownForm',
+    ['default', 'brick', 'round'],
+    undefined,
+  );
   const required = useBoolean('required', false);
   const status = useSelect('status', propStatus);
   const caption = useText('caption', 'Подпись');
@@ -83,6 +88,7 @@ const Variants = () => {
         required={required}
         form={form}
         status={status}
+        dropdownForm={dropdownForm}
         placeholder={placeholder}
         items={myData}
         value={value2}
