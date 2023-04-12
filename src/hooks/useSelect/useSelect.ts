@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-import { getGroups } from '../../utils/getGroups';
+import {
+  CountedGroup,
+  getCountedGroups,
+  getGroups,
+  SelectAllItem,
+} from '../../utils/getGroups';
 import { useClickOutside } from '../useClickOutside/useClickOutside';
 import { useDebounce } from '../useDebounce/useDebounce';
 import { KeyHandler, useKeys } from '../useKeys/useKeys';
@@ -45,6 +50,7 @@ export type SelectProps<ITEM, GROUP, MULTIPLE extends boolean> = {
   dropdownRef: React.MutableRefObject<HTMLDivElement | null>;
   controlRef: React.MutableRefObject<HTMLDivElement | null>;
   disabled?: boolean;
+  selectAll?: boolean;
   getItemLabel: (item: ITEM) => string;
   getItemKey: (item: ITEM) => string | number;
   getItemDisabled?: (item: ITEM) => boolean | undefined;
@@ -61,7 +67,7 @@ export type SelectProps<ITEM, GROUP, MULTIPLE extends boolean> = {
 
 export type OptionProps<ITEM> = {
   index: number;
-  item: ITEM | OptionForCreate;
+  item: ITEM | OptionForCreate | SelectAllItem;
 };
 
 export type GetOptionPropsResult = {
@@ -106,6 +112,14 @@ export const isOptionForCreate = <ITEM, GROUP>(
   );
 };
 
+export const isOptionForSelectAll = <ITEM, GROUP>(
+  params: SelectAllItem | Group<ITEM, GROUP> | ITEM,
+): params is SelectAllItem => {
+  return (
+    params && Object.prototype.hasOwnProperty.call(params, '__optionSelctAll')
+  );
+};
+
 export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   params: SelectProps<ITEM, GROUP, MULTIPLE>,
 ) {
@@ -120,6 +134,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     searchFunction,
     getItemGroupKey,
     groups,
+    selectAll = false,
     getGroupKey,
     sortGroups,
     getItemDisabled,
@@ -183,19 +198,28 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   }, [items, resolvedSearchValue]);
 
   const visibleItems = useMemo(() => {
-    const resultGroups = getGroups(
-      filteredOptions,
-      groups?.length ? getItemGroupKey : undefined,
-      groups,
-      getGroupKey,
-      sortGroups,
+    const resultGroups = getCountedGroups(
+      getGroups(
+        filteredOptions,
+        groups?.length ? getItemGroupKey : undefined,
+        groups,
+        getGroupKey,
+        sortGroups,
+      ),
+      isMultipleParams(params) ? params.value : [],
+      selectAll,
+      getItemKey,
+      getItemDisabled,
     );
 
     return optionForCreate ? [optionForCreate, ...resultGroups] : resultGroups;
   }, [
+    value,
+    selectAll,
     filteredOptions,
     groups,
     getItemGroupKey,
+    getItemDisabled,
     getGroupKey,
     sortGroups,
     optionForCreate,
@@ -225,6 +249,9 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
           continue;
         }
         for (const item of group.items) {
+          if (isOptionForSelectAll(item)) {
+            return index;
+          }
           if (getItemKey(item) === getItemKey(value[0])) {
             return index;
           }
@@ -341,6 +368,38 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     !withoutClearSearch && setSearch('');
   };
 
+  const onChangeAll = (parametrs: {
+    e: React.SyntheticEvent;
+    items: ITEM[];
+  }) => {
+    const { e, items } = parametrs;
+    if (isMultipleParams(params)) {
+      const nonDisabledItems = getItemDisabled
+        ? items.filter((item) => !getItemDisabled(item))
+        : items;
+
+      const currentGroupValues: ITEM[] = [];
+      const withoutGroupValues: ITEM[] = [];
+      value.forEach((el) => {
+        if (
+          nonDisabledItems.find((item) => getItemKey(el) === getItemKey(item))
+        ) {
+          currentGroupValues.push(el);
+        } else {
+          withoutGroupValues.push(el);
+        }
+      });
+      if (currentGroupValues.length === nonDisabledItems.length) {
+        params.onChange({ value: withoutGroupValues, e });
+      } else {
+        params.onChange({
+          e,
+          value: [...withoutGroupValues, ...nonDisabledItems],
+        });
+      }
+    }
+  };
+
   const onCreate = (e: React.SyntheticEvent, label: string) => {
     params.onCreate && params.onCreate({ e, label });
     setOpen(false);
@@ -401,25 +460,41 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
         e.preventDefault();
       }
 
-      const getItem = (index: number) => {
+      const getData = (
+        index: number,
+      ): [
+        CountedGroup<ITEM, GROUP> | undefined,
+        SelectAllItem | OptionForCreate | ITEM | undefined,
+      ] => {
         let couter = 0;
         for (const group of visibleItems) {
           if (isOptionForCreate(group)) {
             couter++;
-            return group;
+            return [undefined, group];
           }
           if (group.items.length + couter > index) {
-            return group.items[index - couter];
+            return [group, group.items[index - couter]];
           }
           couter += group.items.length;
         }
-        return undefined;
+        return [undefined, undefined];
       };
 
-      const item = getItem(highlightedIndex);
+      const [group, item] = getData(highlightedIndex);
 
       if (isOptionForCreate(item)) {
         onCreate(e, item.label);
+        return;
+      }
+
+      if (isOptionForSelectAll(item)) {
+        onChangeAll({
+          e,
+          items:
+            (group?.items.filter(
+              (el) => !isOptionForSelectAll(el),
+            ) as ITEM[]) ?? [],
+        });
         return;
       }
 
@@ -476,6 +551,34 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
         active: false,
         hovered: index === highlightedIndex,
         key: '__optionForCreate',
+      };
+    }
+    if (isOptionForSelectAll(item)) {
+      const getItems = (): ITEM[] => {
+        for (const group of visibleItems) {
+          if (isOptionForCreate(group)) {
+            break;
+          }
+          if (group.key === item.groupKey) {
+            return (
+              (group?.items.filter(
+                (el) => !isOptionForSelectAll(el),
+              ) as ITEM[]) ?? []
+            );
+          }
+        }
+        return [];
+      };
+      return {
+        onClick: (e: React.SyntheticEvent) => {
+          onChangeAll({ e, items: getItems() });
+        },
+        onMouseEnter: () => {
+          highlightIndex(index, false);
+        },
+        active: false,
+        hovered: index === highlightedIndex,
+        key: '__optionForSelectAll',
       };
     }
     const key = getItemKey(item);

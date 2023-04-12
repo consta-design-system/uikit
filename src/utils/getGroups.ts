@@ -4,7 +4,21 @@ export type Group<ITEM, GROUP> = {
   group?: GROUP;
   groupIndex: number;
 };
+
+export type SelectAllItem = {
+  checkedCount: number;
+  totalCount: number;
+  groupKey: string | number;
+  __optionSelctAll: true;
+};
+
+export type CountedGroup<ITEM, GROUP> = Omit<Group<ITEM, GROUP>, 'items'> & {
+  items: Array<SelectAllItem | ITEM>;
+};
+
 type GetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
+type GetItemKey<ITEM> = (item: ITEM) => string | number | undefined;
+type GetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 type GetGroupKey<GROUP> = (item: GROUP) => string | number | undefined;
 type SortGroups<ITEM, GROUP> = (
   a: Group<ITEM, GROUP>,
@@ -86,4 +100,38 @@ export function getGroups<ITEM, GROUP>(
   }
 
   return resultGroups;
+}
+
+export function getCountedGroups<ITEM, GROUP>(
+  groups: GetGroupsResult<ITEM, GROUP>,
+  values: ITEM[] | undefined | null,
+  selectAll: boolean,
+  getItemKey: GetItemKey<ITEM>,
+  getItemDisabled?: GetItemDisabled<ITEM>,
+): CountedGroup<ITEM, GROUP>[] {
+  const copyGroups: CountedGroup<ITEM, GROUP>[] = [...groups];
+  if (selectAll) {
+    groups.forEach((group, index) => {
+      let totalCount = 0;
+      let checkedCount = 0;
+      group.items.forEach((item) => {
+        if (!(getItemDisabled && getItemDisabled?.(item))) {
+          totalCount += 1;
+        }
+        if (values?.find((el) => getItemKey(item) === getItemKey(el))) {
+          checkedCount += 1;
+        }
+      });
+      copyGroups[index].items = [
+        {
+          __optionSelctAll: true,
+          totalCount,
+          groupKey: group.key,
+          checkedCount,
+        },
+        ...copyGroups[index].items,
+      ];
+    });
+  }
+  return copyGroups;
 }

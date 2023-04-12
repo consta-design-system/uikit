@@ -19,6 +19,7 @@ import {
 import { ComboboxExampleLabel } from './examples/ComboboxExampleLabel/ComboboxExampleLabel';
 import { ComboboxExampleStatus } from './examples/ComboboxExampleStatus/ComboboxExampleStatus';
 import { ComboboxExampleOnInputChange } from './examples/ComboboxExampleOnInputChange/ComboboxExampleOnInputChange';
+import { ComboboxExampleSelectAll } from './examples/ComboboxExampleSelectAll/ComboboxExampleSelectAll';
 
 ```tsx
 import { Combobox } from '@consta/uikit/Combobox';
@@ -41,6 +42,7 @@ import { Combobox } from '@consta/uikit/Combobox';
 - [Поиск](#поиск)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Создание новых вариантов](#создание-новых-вариантов)
+- [Выбор всех элементов](#выбор-всех-элементов)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
   - [Кастомное выбранное значение](#кастомное-выбранное-значение)
@@ -756,6 +758,86 @@ export function ComboboxExampleCreate() {
 
 <ComboboxExampleCreate />
 
+## Выбор всех элементов
+
+Для того чтобы выбрать все елементы в группе если группы определены или все элементы в целом, необходимо определить флаг `selectAll`.
+
+```tsx
+import React, { useState } from 'react';
+import { Combobox } from '@consta/uikit/Combobox';
+
+type Item = {
+  label: string;
+  id: number;
+  groupId: number;
+};
+
+type Group = {
+  label: string;
+  id: number;
+};
+
+const groups: Group[] = [
+  {
+    id: 1,
+    label: 'Первая группа',
+  },
+  {
+    id: 2,
+    label: 'Вторая группа',
+  },
+  {
+    id: 3,
+    label: 'Третья группа',
+  },
+];
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+    groupId: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+    groupId: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+    groupId: 1,
+  },
+  {
+    label: 'Четвертый',
+    id: 4,
+    groupId: 3,
+  },
+  {
+    label: 'Пятый',
+    id: 5,
+    groupId: 2,
+  },
+];
+
+export const ComboboxExampleSelectAll = () => {
+  const [value, setValue] = useState<Item[] | null>();
+  return (
+    <Combobox
+      placeholder="Выберите варианты"
+      items={items}
+      value={value}
+      multiple
+      selectAll
+      onChange={({ value }) => setValue(value)}
+      groups={groups}
+    />
+  );
+};
+```
+
+<ComboboxExampleSelectAll />
+
 ## Кастомизация
 
 ### Кастомный элемент списка
@@ -1086,7 +1168,7 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`items`](#варианты)                                      | `ITEM[]`                                                                                          | -                                                             | Варианты                                                               |
 | [`value?`](#значение)                                     | `PropValue<ITEM,MULTIPLE>`                                                                        | -                                                             | Значение селекта                                                       |
 | [`onChange?`](#onchange)                                  | `PropOnChange<ITEM,MULTIPLE>`                                                                     | -                                                             | Обработчик события изменения значения компонента                       |
-| [`multiple?`](#множественный-выбор)                       | `boolean`                                                                                         | `fasle`                                                       | Указатель множественного выбора                                        |
+| [`multiple?`](#множественный-выбор)                       | `boolean`                                                                                         | `false`                                                       | Указатель множественного выбора                                        |
 | [`groups?`](#группировка-списка)                          | `GROUP[]`                                                                                         | -                                                             | Группы                                                                 |
 | [`onInputChange?`](#поиск)                                | `(args: e: React.ChangeEvent; id?: string, number; name?: string; value: string, null;) => void;` | -                                                             | Функция для получения значения поля ввода                              |
 | [`searchFunction?`](#поиск)                               | `PropSearchFunction<ITEM>`                                                                        | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                         |
@@ -1104,6 +1186,7 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | `labelForEmptyItems?`                                     | `string`                                                                                          | `Список пуст`                                                 | Текст, который нужно показать, если в списке нет значений              |
 | [`labelForNotFound?`](#поиск)                             | `string`                                                                                          | `Не найдено`                                                  | Текст, который нужно показать, если при поиске ничего не нашлось       |
 | [`labelForCreate?`](#создание-новых-вариантов)            | `string`                                                                                          | `+`                                                           | Текст для кнопки, по которой можно добавить элемент в список           |
+| [`selectAll?`](#выбор-всех-элементов)                     | `boolean`                                                                                         | `false`                                                       | Добавляет пункт списка с возможностью выбора всех элементов            |
 | `onBlur?`                                                 | `(event?: React.FocusEvent<HTMLInputElement>) => void`                                            | -                                                             | Обработчик события `blur`                                              |
 | `onFocus?`                                                | `(event?: React.FocusEvent<HTMLInputElement>) => void`                                            | -                                                             | Обработчик события `focus`                                             |
 | `ariaLabel?`                                              | `string`                                                                                          | -                                                             | `aria` атрибут для поля ввода                                          |
