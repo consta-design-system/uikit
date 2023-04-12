@@ -559,6 +559,11 @@ export function ComboboxExampleForm() {
 
 За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
 
+Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
+поля с разными статусами и разной формы будут выглядет одинаково.
+
+> Для создания hover эфекта для view="`clear`" управляйте внешним видом контейнера, в котором находится Combobox
+
 ```tsx
 import React, { useState } from 'react';
 import { Combobox } from '@consta/uikit/Combobox';
