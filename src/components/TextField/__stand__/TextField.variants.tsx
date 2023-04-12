@@ -56,6 +56,8 @@ const Variants = () => {
   const leftSideText = useText('leftSideText', 'from');
   const rightSideType = useSelect('rightSideType', ['icon', 'text']);
   const rightSideText = useText('rightSideText', 'm²');
+  const outsideContentType = useSelect('outsideContentType', ['icon', 'text']);
+  const outsideContentText = useText('outsideContentText', 'm²');
 
   const [value, setValue] = useState<string | null | undefined>(undefined);
 
@@ -69,11 +71,18 @@ const Variants = () => {
     icon: IconPhoto,
   };
 
+  const outsideContentSelect = {
+    text: outsideContentText,
+    icon: IconPhoto,
+  };
+
   const stepArray = ['10', '50', '100'];
   const numberStepArray = stepArray.map((val) => Number(val));
 
   const leftSide = leftSideType && leftSideSelect[leftSideType];
   const rightSide = rightSideType && rightSideSelect[rightSideType];
+  const outsideContent =
+    outsideContentType && outsideContentSelect[outsideContentType];
 
   const handleChange = ({ value }: { value: string | null }) => {
     setValue(value);
@@ -102,6 +111,7 @@ const Variants = () => {
       onChange={handleChange}
       leftSide={leftSide}
       rightSide={rightSide}
+      outsideContent={outsideContent}
       disabled={disabled}
       label={label}
       caption={caption}

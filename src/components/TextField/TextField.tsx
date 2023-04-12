@@ -1,5 +1,6 @@
 import './TextField.css';
 
+import { IconComponent } from '@consta/icons/Icon';
 import { IconClose } from '@consta/icons/IconClose';
 import { IconEye } from '@consta/icons/IconEye';
 import { IconEyeClose } from '@consta/icons/IconEyeClose';
@@ -79,6 +80,7 @@ export const TextFieldRender = <TYPE extends string>(
     step = 1,
     tabIndex,
     ariaLabel,
+    outsideContent,
     label,
     labelIcon,
     inputContainerRef,
@@ -113,10 +115,6 @@ export const TextFieldRender = <TYPE extends string>(
   );
 
   const textarea = type === 'textarea';
-  const LeftIcon = leftSide;
-  const RightIcon = rightSide;
-  const leftSideIsString = isString(leftSide);
-  const rightSideIsString = isString(rightSide);
   const iconSize = getByMap(sizeMap, size, iconSizeProp);
 
   const sortedSteps = useSortSteps({
@@ -235,6 +233,32 @@ export const TextFieldRender = <TYPE extends string>(
     }
   }, [passwordVisible]);
 
+  const renderSide = (
+    content: IconComponent | string | undefined,
+    side: 'left' | 'right' | 'outside',
+  ) => {
+    if (!content) {
+      return null;
+    }
+    const IconContent = content;
+    const contentIsString = isString(content);
+    return (
+      <div
+        className={cnTextField('Side', {
+          position: side,
+          type: contentIsString ? 'string' : 'icon',
+        })}
+        title={typeof content === 'string' ? content : undefined}
+      >
+        {contentIsString ? (
+          content
+        ) : (
+          <IconContent className={cnTextField('Icon')} size={iconSize} />
+        )}
+      </div>
+    );
+  };
+
   return (
     <div
       className={cnTextField({ labelPosition, size, view, width }, [className])}
@@ -253,96 +277,76 @@ export const TextFieldRender = <TYPE extends string>(
         </FieldLabel>
       )}
       <div className={cnTextField('Body')}>
-        <div
-          ref={inputContainerRef}
-          className={cnTextField('InputContainer', {
-            view,
-            form,
-            status: status || state,
-            disabled,
-            type,
-            focus: focus || focused,
-            withValue: !!value,
-          })}
-        >
-          {LeftIcon && (
-            <div
-              className={cnTextField('Side', {
-                position: 'left',
-                type: leftSideIsString ? 'string' : 'icon',
-              })}
-              title={typeof leftSide === 'string' ? leftSide : undefined}
-            >
-              {leftSideIsString ? (
-                leftSide
-              ) : (
-                <LeftIcon className={cnTextField('Icon')} size={iconSize} />
-              )}
-            </div>
-          )}
-          {textarea ? (
-            <TextAreaAutoSize {...commonProps} {...textareaProps} />
-          ) : (
-            <input {...commonProps} {...inputProps} />
-          )}
+        <div className={cnTextField('Wrapper')}>
+          <div
+            ref={inputContainerRef}
+            className={cnTextField('InputContainer', {
+              view,
+              form,
+              status: status || state,
+              disabled,
+              type,
+              focus: focus || focused,
+              withValue: !!value,
+            })}
+          >
+            {renderSide(leftSide, 'left')}
+            {textarea ? (
+              <TextAreaAutoSize {...commonProps} {...textareaProps} />
+            ) : (
+              <input {...commonProps} {...inputProps} />
+            )}
 
-          {type === 'number' && incrementButtons && (
-            <div className={cnTextField('Counter')}>
+            {type === 'number' && incrementButtons && (
+              <div className={cnTextField('Counter')}>
+                <button
+                  onFocus={handleFocus}
+                  onClick={(e) => changeNumberValue(e, true)}
+                  type="button"
+                  className={cnTextField('CounterButton')}
+                >
+                  <IconSelectOpen size="xs" />
+                </button>
+                <button
+                  onFocus={handleFocus}
+                  onClick={(e) => changeNumberValue(e, false)}
+                  type="button"
+                  className={cnTextField('CounterButton')}
+                >
+                  <IconSelect size="xs" />
+                </button>
+              </div>
+            )}
+
+            {value && withClearButton && type !== 'number' && (
               <button
-                onFocus={handleFocus}
-                onClick={(e) => changeNumberValue(e, true)}
                 type="button"
-                className={cnTextField('CounterButton')}
+                disabled={disabled}
+                onClick={handleClear}
+                className={cnTextField('ClearButton')}
               >
-                <IconSelectOpen size="xs" />
+                <IconClose
+                  size="xs"
+                  className={cnTextField('ClearButtonIcon')}
+                />
               </button>
+            )}
+
+            {type === 'password' && value && (
               <button
-                onFocus={handleFocus}
-                onClick={(e) => changeNumberValue(e, false)}
+                className={cnTextField('ClearButton')}
                 type="button"
-                className={cnTextField('CounterButton')}
+                onClick={handleEyeClick}
               >
-                <IconSelect size="xs" />
+                <Eye className={cnTextField('Icon')} size={iconSize} />
               </button>
-            </div>
-          )}
+            )}
 
-          {value && withClearButton && type !== 'number' && (
-            <button
-              type="button"
-              disabled={disabled}
-              onClick={handleClear}
-              className={cnTextField('ClearButton')}
-            >
-              <IconClose size="xs" className={cnTextField('ClearButtonIcon')} />
-            </button>
-          )}
-
-          {type === 'password' && value && (
-            <button
-              className={cnTextField('ClearButton')}
-              type="button"
-              onClick={handleEyeClick}
-            >
-              <Eye className={cnTextField('Icon')} size={iconSize} />
-            </button>
-          )}
-
-          {RightIcon && type !== 'number' && type !== 'password' && (
-            <div
-              className={cnTextField('Side', {
-                position: 'right',
-                type: rightSideIsString ? 'string' : 'icon',
-              })}
-              title={typeof rightSide === 'string' ? rightSide : undefined}
-            >
-              {rightSideIsString ? (
-                rightSide
-              ) : (
-                <RightIcon className={cnTextField('Icon')} size={iconSize} />
-              )}
-            </div>
-          )}
+            {type !== 'number' &&
+              type !== 'password' &&
+              renderSide(rightSide, 'right')}
+          </div>
+          {renderSide(outsideContent, 'outside')}
         </div>
         {caption && (
           <FieldCaption

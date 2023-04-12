@@ -56,3 +56,20 @@ export const TextFieldExampleTextRight = () => {
     </Example>
   );
 };
+
+export const TextFieldExampleTextOutside = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+
+  return (
+    <Example col={1}>
+      <TextField
+        label="Площадь"
+        outsideContent="m²"
+        value={value}
+        type="number"
+        onChange={handleChange}
+      />
+    </Example>
+  );
+};

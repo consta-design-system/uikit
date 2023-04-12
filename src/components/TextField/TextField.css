@@ -85,6 +85,16 @@
     }
   }
 
+  &-Wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    /* & > *:not(:last-child) {
+      margin-right: var(--input-space);
+    } */
+  }
+
   &-InputContainer {
     position: relative;
     display: inline-flex;
@@ -464,6 +474,14 @@
 
       &_right {
         margin-left: var(--input-space);
+      }
+
+      &_outside {
+        margin-left: var(--input-space);
+
+        &.TextField-Side_type_string {
+          color: var(--color-control-typo-placeholder);
+        }
       }
     }
 

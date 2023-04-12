@@ -5,6 +5,7 @@ import {
   TextFieldExampleTextValue,
   TextFieldExampleTextLeft,
   TextFieldExampleTextRight,
+  TextFieldExampleTextOutside,
 } from './examples/TextFieldExampleText/TextFieldExampleText';
 import {
   TextFieldExampleSize,
@@ -223,6 +224,20 @@ const App = () => {
 ```
 
 <TextFieldExampleTextRight />
+
+Также вы можете добавить текст или иконку справа от поля ввода. Подходит для числовых полей ввода
+
+```tsx
+<TextField
+  outsideContent="m²"
+  value={value}
+  label="Площадь"
+  type="number"
+  onChange={handleChange}
+/>
+```
+
+<TextFieldExampleTextOutside />
 
 ### Лейбл
 

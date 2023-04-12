@@ -103,6 +103,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     placeholder?: string;
     leftSide?: string | IconComponent;
     rightSide?: string | IconComponent;
+    outsideContent?: string | IconComponent;
     withClearButton?: boolean;
     autoComplete?: AutoCompete;
     max?: number | string;
