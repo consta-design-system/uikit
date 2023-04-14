@@ -760,7 +760,7 @@ export function ComboboxExampleCreate() {
 
 ## Выбор всех элементов
 
-Для того чтобы выбрать все елементы в группе если группы определены или все элементы в целом, необходимо определить флаг `selectAll`.
+Для того чтобы выбрать все элементы в группе, если группы определены, или все элементы в целом, необходимо определить флаг `selectAll`.
 
 ```tsx
 import React, { useState } from 'react';
@@ -1167,7 +1167,7 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`caption?`](#лейбл-и-подпись)                            | `string`                                                                                          | -                                                             | Подпись                                                                |
 | [`items`](#варианты)                                      | `ITEM[]`                                                                                          | -                                                             | Варианты                                                               |
 | [`value?`](#значение)                                     | `PropValue<ITEM,MULTIPLE>`                                                                        | -                                                             | Значение селекта                                                       |
-| [`onChange?`](#onchange)                                  | `PropOnChange<ITEM,MULTIPLE>`                                                                     | -                                                             | Обработчик события изменения значения компонента                       |
+| [`onChange?`](#onchange)                                  | `PropOnChange<ITEM,MULTIPLE>`                                                                     | -                                                             | Событие связанное с изменением значения компонента                     |
 | [`multiple?`](#множественный-выбор)                       | `boolean`                                                                                         | `false`                                                       | Указатель множественного выбора                                        |
 | [`groups?`](#группировка-списка)                          | `GROUP[]`                                                                                         | -                                                             | Группы                                                                 |
 | [`onInputChange?`](#поиск)                                | `(args: e: React.ChangeEvent; id?: string, number; name?: string; value: string, null;) => void;` | -                                                             | Функция для получения значения поля ввода                              |
