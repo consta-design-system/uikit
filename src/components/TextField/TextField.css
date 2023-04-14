@@ -2,6 +2,7 @@
   --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
   --counter-button-icon-color: var(--color-control-typo-ghost);
   --counter-button-background: transparent;
+  --counter-offset: 0;
   --clear-button-color: var(--color-control-typo-clear);
   position: relative;
   display: inline-flex;
@@ -17,6 +18,12 @@
       --input-height: var(--control-height-xs);
       --input-font-size: var(--control-text-size-xs);
       --input-space: calc(var(--control-space-xs) * 0.5);
+
+      & .TextField-InputContainer_form_round,
+      & .TextField-InputContainer_form_brickRound,
+      & .TextField-InputContainer_form_clearRound {
+        --counter-offset: calc(var(--space-xs) - var(--space-3xs));
+      }
     }
 
     &_s {
@@ -25,6 +32,12 @@
       --input-height: var(--control-height-s);
       --input-font-size: var(--control-text-size-s);
       --input-space: calc(var(--control-space-s) * 0.5);
+
+      & .TextField-InputContainer_form_round,
+      & .TextField-InputContainer_form_brickRound,
+      & .TextField-InputContainer_form_clearRound {
+        --counter-offset: var(--space-xs);
+      }
     }
 
     &_m {
@@ -33,6 +46,12 @@
       --input-height: var(--control-height-m);
       --input-font-size: var(--control-text-size-m);
       --input-space: calc(var(--control-space-m) * 0.5);
+
+      & .TextField-InputContainer_form_round,
+      & .TextField-InputContainer_form_brickRound,
+      & .TextField-InputContainer_form_clearRound {
+        --counter-offset: calc(var(--space-s) - var(--space-3xs));
+      }
     }
 
     &_l {
@@ -41,6 +60,12 @@
       --input-height: var(--control-height-l);
       --input-font-size: var(--control-text-size-l);
       --input-space: calc(var(--control-space-l) * 0.5);
+
+      & .TextField-InputContainer_form_round,
+      & .TextField-InputContainer_form_brickRound,
+      & .TextField-InputContainer_form_clearRound {
+        --counter-offset: var(--space-s);
+      }
     }
   }
 
@@ -357,6 +382,7 @@
     flex-direction: column;
     width: var(--space-xl);
     height: calc(var(--input-height) - (var(--control-border-width) * 2));
+    margin-right: var(--counter-offset);
   }
 
   &-CounterButton {
