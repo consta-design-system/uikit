@@ -9,10 +9,12 @@ import {
   mapVerticalSpase,
 } from '##/components/ListCanary';
 import { cnMixSpace } from '##/mixs/MixSpace';
+import { SelectAllItem } from '##/utils/getGroups';
 
 import {
   GetOptionPropsResult,
   isOptionForCreate,
+  isOptionForSelectAll,
   OptionForCreate,
   OptionProps,
 } from '../../../hooks/useSelect/useSelect';
@@ -26,6 +28,7 @@ import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttribu
 import { Popover, PopoverPropOffset } from '../../Popover/Popover';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
+import { SelectItemAll } from '../SelectItemAll/SelectSelectAll';
 import { SelectLoader } from '../SelectLoader/SelectLoader';
 import { PropSize, RenderItemProps } from '../types';
 
@@ -46,10 +49,12 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   visibleItems: (
     | OptionForCreate
     | {
-        items: ITEM[];
+        items: Array<SelectAllItem | ITEM>;
         key: string | number;
         group?: GROUP;
         groupIndex: number;
+        checkedCount?: number;
+        totalCount?: number;
       }
   )[];
   getGroupLabel?: (group: GROUP) => string;
@@ -167,6 +172,23 @@ export const SelectDropdown: SelectDropdown = (props) => {
                       />
                     )}
                     {group.items.map((item, i) => {
+                      if (isOptionForSelectAll(item)) {
+                        return (
+                          <SelectItemAll
+                            indent={indent}
+                            size={size}
+                            {...getOptionProps({ index: getIndex(), item })}
+                            intermediate={
+                              item.checkedCount && item.totalCount
+                                ? item.checkedCount !== item.totalCount
+                                : false
+                            }
+                            checked={item.checkedCount === item.totalCount}
+                            countItems={item.checkedCount}
+                            total={item.totalCount}
+                          />
+                        );
+                      }
                       return (
                         <Fragment key={`${group.key}-${i}`}>
                           {renderItem({

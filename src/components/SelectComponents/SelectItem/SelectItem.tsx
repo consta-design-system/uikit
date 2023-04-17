@@ -22,7 +22,7 @@ export type SelectItemProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
+export const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
   xs: 'm',
   s: 'm',
   m: 'l',

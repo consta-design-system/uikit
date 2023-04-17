@@ -102,6 +102,13 @@ export type ComboboxProps<
   },
   HTMLDivElement
 > &
+  (MULTIPLE extends true
+    ? {
+        selectAll?: boolean;
+      }
+    : {
+        selectAll?: never;
+      }) &
   (ITEM extends { label: DefaultItem['label'] }
     ? {}
     : { getItemLabel: PropGetItemLabel<ITEM> }) &
