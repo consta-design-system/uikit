@@ -43,6 +43,7 @@ const Variants = () => {
   const placeholder = useText('placeholder', 'Placeholder');
   const withGroups = useBoolean('withGroups', false);
   const isLoading = useBoolean('isLoading', false);
+  const selectAll = useBoolean('selectAll', false);
   const withLabelIcon = useBoolean('withLabelIcon', false);
 
   const [value, setValue] = useState<Item | null>(null);
@@ -57,6 +58,7 @@ const Variants = () => {
           size={size}
           disabled={disabled}
           view={view}
+          selectAll={selectAll}
           form={form}
           required={required}
           status={status}
