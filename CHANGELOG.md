@@ -1,5 +1,23 @@
 # Changelog
 
+## v4.15.0 (17/04/2023)
+Самое важное:
+- Теперь в поле ввода можно установить иконку слева от заголовка.
+- `DatePicker`. Исправлена работа кнопки «Очистить».
+- `DateTime`. Добавлена возможность указывать произвольные даты.
+
+---
+
+- [chore: update @consta/stand](https://github.com/consta-design-system/uikit/commit/7b0ca0d675759519388bf4c40b217325f04a8104) - [@gizeasy](https://github.com/gizeasy)
+- [feat(TextField): add margin to counter buttons for round forms (#2990)](https://github.com/consta-design-system/uikit/commit/e30b594c9b641b319a3d220cfcac0af7be16c1e0) - [@N1MBER](https://github.com/N1MBER)
+- [docs(Selects): add fragments to docs about view clear (#2989)](https://github.com/consta-design-system/uikit/commit/a3b69f8c4e4d840b0e8819d0e2ad475f7884845b) - [@N1MBER](https://github.com/N1MBER)
+- [feat(FieldLabel): added prop icon (#2960)](https://github.com/consta-design-system/uikit/commit/d0ca7ddd8595178c3d7c71cac24cfa5369cd04cf) - [@N1MBER](https://github.com/N1MBER)
+- [feat(FieldLabel): added prop icon (#2949)](https://github.com/consta-design-system/uikit/commit/70c4ffbfc10ae4003816758d60a1aa3f0a117508) - [@N1MBER](https://github.com/N1MBER)
+- [fix(DatePicker): fix clearButton (#2968)](https://github.com/consta-design-system/uikit/commit/1e5731b85b8b78adeaa88c87678926f186fe3402) - [@N1MBER](https://github.com/N1MBER)
+- [feat(DateTime): add prop disableDates (#2940)](https://github.com/consta-design-system/uikit/commit/53f1fa766eb604f174525fc5d8d20ef5361eb674) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.14.2 (16/03/2023)
 - [fix(useIMask): fixed updateValue (#2958)](https://github.com/consta-design-system/uikit/commit/afaaa13201285d44ba8300192e460b0fccd93708) - [@gizeasy](https://github.com/gizeasy)
 
@@ -407,16 +425,3 @@ UserSelectDeprecated
 - [docs(Button): add too big label example (#2442)](https://github.com/consta-design-system/uikit/commit/76cd5c5252516a0dabcec9c12b54908918eb9871) - [@arhayka](https://github.com/arhayka)
 - [docs(Breadcrumbs): fix misprint (#2445)](https://github.com/consta-design-system/uikit/commit/7b8962c81a642f63f57e0bae8b3c35f2e39458be) - [@arhayka](https://github.com/arhayka)
 - [docs(Theme): add shadows description (#2447)](https://github.com/consta-design-system/uikit/commit/fd6696fbf3c766ddbb0f2f27eefe4c4b37290a02) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v3.26.3 (21/07/2022)
-Самое важное:
-- В Table добавили возможность обрезать текст в ячейке.
-- Доработали документацию
-
----
-
-- [docs(Popover): change examples (#2437)](https://github.com/consta-design-system/uikit/commit/ee76227db9da51bfbd3253009f58618d095540e5) - [@arhayka](https://github.com/arhayka)
-- [docs(Badge): add how to use section (#2435)](https://github.com/consta-design-system/uikit/commit/637abfb52282ce81f21b12daaf22a917dff6192c) - [@arhayka](https://github.com/arhayka)
-- [fix(Table): fix wrap text on cell (#2425)](https://github.com/consta-design-system/uikit/commit/99ae1052eb18aea07432d8d982940e16236c1343) - [@N1MBER](https://github.com/N1MBER)
