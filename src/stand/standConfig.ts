@@ -1,7 +1,6 @@
 import { createConfig } from '@consta/stand';
 
 import image from './ConstaImage.png';
-import description from './description.mdx';
 import { StandPageDecoration as standPageDecoration } from './standPageDecoration';
 
 export const { createStand } = createConfig({
@@ -32,7 +31,8 @@ export const { createStand } = createConfig({
   ],
   group: 'Основные библиотеки',
   image,
-  description,
+  description:
+    'Библиотека компонентов для разработки интерфейсов цифровых продуктов. Здесь собрано самое основное: кнопки, чекбоксы, инпуты, модальные элементы и многое другое.',
   standPageDecoration,
   repositoryUrl: 'https://github.com/consta-design-system/uikit',
   order: 1,
