@@ -39,7 +39,7 @@ export const defaultSelectDropdownPropForm = selectDropdownform[0];
 type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   size: PropSize;
   controlRef: React.MutableRefObject<HTMLDivElement | null>;
-  dropdownRef: React.MutableRefObject<HTMLDivElement | null>;
+  dropdownRef: React.Ref<HTMLDivElement>;
   getOptionProps(props: OptionProps<ITEM>): GetOptionPropsResult;
   form: SelectDropdownPropForm;
   isOpen: boolean;

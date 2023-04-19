@@ -71,14 +71,14 @@ export type ComboboxProps<
     status?: PropStatus;
     isLoading?: boolean;
     dropdownClassName?: string;
-    dropdownRef?: React.RefObject<HTMLDivElement>;
+    dropdownRef?: React.Ref<HTMLDivElement>;
     name?: string;
     renderItem?: PropRenderItem<ITEM>;
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onCreate?: (props: { e: React.SyntheticEvent; label: string }) => void;
-    inputRef?: React.RefObject<HTMLInputElement>;
+    inputRef?: React.Ref<HTMLInputElement>;
     labelForNotFound?: string;
     required?: boolean;
     labelForCreate?: string;

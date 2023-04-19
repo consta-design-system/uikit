@@ -62,7 +62,7 @@ const ComboboxRender = <
     ariaLabel,
     id,
     required,
-    dropdownRef = defaultDropdownRef,
+    dropdownRef,
     form = defaultPropForm,
     view = defaultPropView,
     size = defaultPropSize,
@@ -116,7 +116,7 @@ const ComboboxRender = <
     value,
     onChange,
     selectAll,
-    dropdownRef,
+    dropdownRef: defaultDropdownRef,
     controlRef,
     disabled,
     getItemLabel,
@@ -307,7 +307,7 @@ const ComboboxRender = <
         size={size}
         controlRef={controlRef}
         getOptionProps={getOptionProps}
-        dropdownRef={dropdownRef}
+        dropdownRef={useForkRef([dropdownRef, defaultDropdownRef])}
         form={dropdownForm}
         className={dropdownClassName}
         renderItem={renderItem || renderItemDefault}
