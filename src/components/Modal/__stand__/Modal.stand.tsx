@@ -8,6 +8,7 @@ export default createStand({
   version: '1.10.0',
   status: 'stable',
   sandbox: 'modal-lsp1ut',
+  alias: ['окно', 'модальное', 'всплывающее'],
   figma:
     'https://www.figma.com/embed?embed_host=uikit.consta.design&url=https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=6263%3A117289',
   order: 10,

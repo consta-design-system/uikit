@@ -5,6 +5,7 @@ export default createStand({
   id: 'useComponentSize',
   group: 'hooks',
   description: 'Отслеживанние размера элемента.',
+  alias: ['хук', 'выбор', 'список'],
   version: '3.0.0',
   status: 'stable',
   sandbox: 'usecomponentsize-stvz5g',

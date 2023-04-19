@@ -8,5 +8,6 @@ export default createStand({
   version: '0.1.0',
   status: 'stable',
   sandbox: 'popover-m9sjn5',
+  alias: ['окно', 'позиционирование', 'поповер'],
   order: 10,
 });

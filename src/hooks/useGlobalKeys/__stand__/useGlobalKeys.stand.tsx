@@ -7,6 +7,7 @@ export default createStand({
   description: 'Хук для перехвата нажатия клавиш.',
   version: '3.3.0',
   status: 'stable',
+  alias: ['хук', 'клавиша', 'нажатие'],
   sandbox: 'useglobalkeys-ljhoet',
   order: 10,
 });
