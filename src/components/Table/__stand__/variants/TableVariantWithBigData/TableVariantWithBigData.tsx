@@ -8,10 +8,6 @@ import { useVariants } from '../useVariants/useVariants';
 export const TableVariantWithBigData = () => {
   const { rows, columns } = generateData(5000, 5);
   const props = useVariants({ rows, columns });
-  return (
-    <Table
-      {...props}
-      lazyLoad={{ maxVisibleRows: 210, scrollableEl: window }}
-    />
-  );
+
+  return <Table {...props} lazyLoad={{ maxVisibleRows: 150 }} />;
 };
