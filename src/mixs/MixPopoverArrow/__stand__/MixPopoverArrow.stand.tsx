@@ -7,5 +7,6 @@ export default createStand({
   version: '3.18.0',
   status: 'stable',
   sandbox: 'mixpopoverarrow-ciqb9x',
+  alias: ['миксин', 'стрелочка', 'принадлежность'],
   order: 10,
 });

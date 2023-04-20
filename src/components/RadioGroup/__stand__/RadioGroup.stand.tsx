@@ -8,6 +8,7 @@ export default createStand({
   version: '1.10.9',
   status: 'stable',
   sandbox: 'radiogroup-uo5898',
+  alias: ['поле', 'ввод', 'радиокнопка', 'группа'],
   figma:
     'https://www.figma.com/embed?embed_host=uikit.consta.design&url=https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=57%3A1655',
   order: 10,

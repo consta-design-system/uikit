@@ -5,6 +5,7 @@ export default createStand({
   id: 'useChoiceGroup',
   group: 'hooks',
   description: 'Отслеживанние размера экрана.',
+  alias: ['хук', 'выбор', 'список'],
   version: '1.7.0',
   status: 'stable',
   sandbox: 'usechoicegroup-bzsfsl',

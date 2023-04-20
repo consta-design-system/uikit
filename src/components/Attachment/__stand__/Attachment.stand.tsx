@@ -6,6 +6,7 @@ export default createStand({
   group: 'components',
   description: 'Показывает загрузку файла или уже загруженный файл.',
   version: '3.2.0',
+  alias: ['файл', 'файлы', 'вложение', 'вложения', 'загрузка'],
   status: 'stable',
   sandbox: 'attachment-t66jd4',
   figma:

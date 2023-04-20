@@ -5,6 +5,7 @@ export default createStand({
   id: 'useRefs',
   group: 'hooks',
   description: 'Хук для создания  массива ссылок.',
+  alias: ['хук', 'ссылка', 'сслыки', 'массив'],
   version: '3.15.0',
   status: 'stable',
   sandbox: 'useref-8h5862',

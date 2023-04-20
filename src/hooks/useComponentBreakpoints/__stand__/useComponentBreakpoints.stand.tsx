@@ -5,6 +5,7 @@ export default createStand({
   id: 'useComponentBreakpoints',
   group: 'hooks',
   description: 'Отслеживанние размера компонента.',
+  alias: ['хук', 'выбор', 'список'],
   version: '4.4.0',
   status: 'stable',
   sandbox: 'usecomponentbreakpoints-lkww7y',

@@ -5,6 +5,7 @@ export default createStand({
   id: 'useDebounce',
   group: 'hooks',
   description: 'Хук для таймаута функций.',
+  alias: ['хук', 'таймаут', 'задержка'],
   version: '1.9.0',
   status: 'stable',
   sandbox: 'usedebounce-jodp65',
