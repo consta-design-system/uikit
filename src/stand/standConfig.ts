@@ -1,4 +1,4 @@
-import { createConfig } from '@consta/stand';
+import { createConfig, ListCardBig, ListCardList } from '@consta/stand';
 
 import image from './ConstaImage.png';
 import { StandPageDecoration as standPageDecoration } from './standPageDecoration';
@@ -14,19 +14,22 @@ export const { createStand } = createConfig({
     {
       title: 'Компоненты',
       id: 'components',
-      view: 'card',
+      renderList: ListCardBig,
     },
     {
       title: 'Миксины',
       id: 'mixs',
+      renderList: ListCardList,
     },
     {
       title: 'Hocs',
       id: 'hocs',
+      renderList: ListCardList,
     },
     {
       title: 'Hooks',
       id: 'hooks',
+      renderList: ListCardList,
     },
   ],
   group: 'Библиотеки',
