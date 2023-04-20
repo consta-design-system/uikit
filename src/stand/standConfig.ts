@@ -29,10 +29,10 @@ export const { createStand } = createConfig({
       id: 'hooks',
     },
   ],
-  group: 'Основные библиотеки',
+  group: 'Библиотеки',
   image,
   description:
-    'Библиотека компонентов для разработки интерфейсов цифровых продуктов. Здесь собрано самое основное: кнопки, чекбоксы, инпуты, модальные элементы и многое другое.',
+    'Основная библиотека интерфейсных компонентов: от простых контролов до хуков и миксинов',
   standPageDecoration,
   repositoryUrl: 'https://github.com/consta-design-system/uikit',
   order: 1,
