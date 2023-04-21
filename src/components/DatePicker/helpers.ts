@@ -75,7 +75,7 @@ export const getTimeEnum = (
 export const getFormForStart = (form: TextFieldPropForm) => getForm(form, 0, 2);
 export const getFormForEnd = (form: TextFieldPropForm) => getForm(form, 1, 2);
 
-const getPartDate = (
+export const getPartDate = (
   formatArray: string[],
   stringArray: string[],
   marker: string,

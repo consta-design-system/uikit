@@ -15,8 +15,9 @@ import {
   TextFieldPropWidth,
 } from '../../TextField/TextField';
 import {
-  datePickerPropFormatTypeMonth,
   datePickerPropSeparatorDefault,
+  getPartDate,
+  getParts,
   getPartsDate,
 } from '../helpers';
 import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
@@ -111,20 +112,27 @@ export const usePicker = (props: UsePickerProps) => {
           }
           return;
         }
-        const [MM, yyyy] = getPartsDate(
-          stringValue,
-          formatProp,
-          separator,
-          false,
-          ['MM', 'yyyy'],
-        );
-        if (MM && yyyy) {
+
+        const formatArray = getParts(formatProp, separator, false);
+        const valueArray = getParts(stringValue, separator, false);
+        const validArray = formatArray
+          .map((marker) => getPartDate(formatArray, valueArray, marker))
+          .filter((item) => Boolean(item));
+
+        if (formatArray.length === validArray.length) {
           const date = parse(
-            `${MM}${datePickerPropSeparatorDefault}${yyyy}`,
-            datePickerPropFormatTypeMonth,
+            valueArray.join(datePickerPropSeparatorDefault),
+            formatArray.join(datePickerPropSeparatorDefault),
             new Date(),
           );
           if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
+            const [MM, yyyy] = getPartsDate(
+              stringValue,
+              formatProp,
+              separator,
+              false,
+              ['MM', 'yyyy'],
+            );
             onErrorRef.current?.({
               type: datePickerErrorTypes[0],
               stringValue,
@@ -168,34 +176,39 @@ export const usePicker = (props: UsePickerProps) => {
         format: (date: Date) => format(date, formatProp),
         parse: (string: string) => parse(string, formatProp, new Date()),
         validate: (string: string) => {
-          const [MM, yyyy] = getPartsDate(
-            string,
-            formatProp,
-            separator,
-            false,
-            ['MM', 'yyyy'],
-          );
+          const formatArray = getParts(formatProp, separator, false);
+          const valueArray = getParts(string, separator, false);
+          const validArray = formatArray
+            .map((marker) => getPartDate(formatArray, valueArray, marker))
+            .filter((item) => Boolean(item));
+
           if (
-            MM &&
-            yyyy &&
+            formatArray.length === validArray.length &&
             !isValid(
               parse(
-                `${MM}${datePickerPropSeparatorDefault}${yyyy}`,
-                datePickerPropFormatTypeMonth,
+                valueArray.join(datePickerPropSeparatorDefault),
+                formatArray.join(datePickerPropSeparatorDefault),
                 new Date(),
               ),
             )
           ) {
-            onError &&
-              onErrorRef.current?.({
-                type: datePickerErrorTypes[1],
-                stringValue: string,
-                MM,
-                yyyy,
-              });
+            const [MM, yyyy] = getPartsDate(
+              string,
+              formatProp,
+              separator,
+              false,
+              ['MM', 'yyyy'],
+            );
 
+            onErrorRef.current?.({
+              type: datePickerErrorTypes[1],
+              stringValue: string,
+              MM,
+              yyyy,
+            });
             return false;
           }
+
           return true;
         },
         // проблема в типах IMask
