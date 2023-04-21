@@ -1,5 +1,20 @@
 # Changelog
 
+## v4.16.0 (21/04/2023)
+Самое важное:
+- В `Combobox` появилась возможность добавления опции "Выбрать все"
+
+---
+
+- [docs: edit stand config](https://github.com/consta-design-system/uikit/commit/981ce6ec98bef41c018a22d80042cffcafe838b8) - [@gizeasy](https://github.com/gizeasy)
+- [docs: edit description (#3007)](https://github.com/consta-design-system/uikit/commit/ff1a27fbffa6fc1f07f54583a6eba032131e8925) - [@BagenovA](https://github.com/BagenovA)
+- [fix(Table): example fixed (#3005)](https://github.com/consta-design-system/uikit/commit/e17258d029282b4a9024f88eba2ff7197856385c) - [@gizeasy](https://github.com/gizeasy)
+- [docs: add aliases (#3002)](https://github.com/consta-design-system/uikit/commit/0e4c1aa1852a353ebbcd20116213211e0c90fd49) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Combobox): fixed type dropdownRef (#3000)](https://github.com/consta-design-system/uikit/commit/c8cd834ff32218d7f63f9a62ce83c2a2da482972) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Combobox): add prop selectAll (#2993)](https://github.com/consta-design-system/uikit/commit/b3f9daae7e0e3f061745f37bd1ff686fe2d94343) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.15.0 (17/04/2023)
 Самое важное:
 - Теперь в поле ввода можно установить иконку слева от заголовка.
@@ -417,11 +432,3 @@ UserSelectDeprecated
 - [fix(Steps): fix crush with using google translate (#2458)](https://github.com/consta-design-system/uikit/commit/f1062cfc215aa4044492346d9eeebcf111de04d5) - [@N1MBER](https://github.com/N1MBER)
 - [fix(Collapse): fix bug with color of icon on dark theme (#2454)](https://github.com/consta-design-system/uikit/commit/3dac567f3cab77fc96a221d2c9b5e8ed55c611d9) - [@N1MBER](https://github.com/N1MBER)
 - [docs(common): update libraries lists and review (#2451)](https://github.com/consta-design-system/uikit/commit/1c6e6fb4e583658f111217033f92533103b234b5) - [@arhayka](https://github.com/arhayka)
-
---------------------
-
-## v3.26.4 (27/07/2022)
-- [docs(about): add important links (#2443)](https://github.com/consta-design-system/uikit/commit/208d5fe5d3c5e3c6021c537f3c40bbccfcf0f595) - [@arhayka](https://github.com/arhayka)
-- [docs(Button): add too big label example (#2442)](https://github.com/consta-design-system/uikit/commit/76cd5c5252516a0dabcec9c12b54908918eb9871) - [@arhayka](https://github.com/arhayka)
-- [docs(Breadcrumbs): fix misprint (#2445)](https://github.com/consta-design-system/uikit/commit/7b8962c81a642f63f57e0bae8b3c35f2e39458be) - [@arhayka](https://github.com/arhayka)
-- [docs(Theme): add shadows description (#2447)](https://github.com/consta-design-system/uikit/commit/fd6696fbf3c766ddbb0f2f27eefe4c4b37290a02) - [@arhayka](https://github.com/arhayka)
