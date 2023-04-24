@@ -30,12 +30,7 @@ import {
   TextFieldPropView,
   TextFieldPropWidth,
 } from '../../TextField/TextField';
-import {
-  datePickerPropFormatTypeTime,
-  getParts,
-  getPartsDate,
-  getTimeEnum,
-} from '../helpers';
+import { getPartDate, getParts, getPartsDate, getTimeEnum } from '../helpers';
 import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
 
 type DatePickerFieldTypeTimePropOnChange = (props: {
@@ -122,11 +117,6 @@ export const usePicker = (props: UsePickerProps) => {
   );
   const stringValueRef = useMutableRef(stringValue);
 
-  const formatParts = useMemo(
-    () => getParts(formatProp, ':'),
-    [formatProp, separator],
-  );
-
   const handleChange = useCallback(
     ({ e, value: stringValue }: { e: Event; value: string | null }) => {
       if (stringValueRef.current === stringValue) {
@@ -142,20 +132,29 @@ export const usePicker = (props: UsePickerProps) => {
           }
           return;
         }
-        const partsTime = getPartsDate(stringValue, formatProp, ':', false, [
-          'HH',
-          'mm',
-          'ss',
-        ]);
 
-        const [HH, mm, ss] = partsTime;
-        if (partsTime.filter((item) => !!item).length === formatParts.length) {
+        const formatArray = getParts(formatProp, separator, false);
+        const valueArray = getParts(stringValue, separator, false);
+        const validArray = formatArray
+          .map((marker) => getPartDate(formatArray, valueArray, marker))
+          .filter((item) => Boolean(item));
+
+        if (formatArray.length === validArray.length) {
           const date = parse(
-            `${HH}:${mm}:${ss}`,
-            datePickerPropFormatTypeTime,
+            valueArray.join(':'),
+            formatArray.join(':'),
             value || new Date(),
           );
+
           if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
+            const [HH, mm, ss] = getPartsDate(
+              stringValue,
+              formatProp,
+              ':',
+              false,
+              ['HH', 'mm', 'ss'],
+            );
+
             onErrorRef.current?.({
               type: datePickerErrorTypes[0],
               stringValue,
@@ -242,23 +241,24 @@ export const usePicker = (props: UsePickerProps) => {
         format: (date: Date) => format(date, formatProp),
         parse: (string: string) => parse(string, formatProp, new Date()),
         validate: (string: string) => {
-          const [HH, mm, ss] = getPartsDate(string, formatProp, ':', false, [
-            'HH',
-            'mm',
-            'ss',
-          ]);
+          const formatArray = getParts(formatProp, separator, false);
+          const valueArray = getParts(string, separator, false);
+          const validArray = formatArray
+            .map((marker) => getPartDate(formatArray, valueArray, marker))
+            .filter((item) => Boolean(item));
+
           if (
-            HH &&
-            mm &&
-            ss &&
+            formatArray.length === validArray.length &&
             !isValid(
-              parse(
-                `${HH}:${mm}:${ss}`,
-                datePickerPropFormatTypeTime,
-                new Date(),
-              ),
+              parse(valueArray.join(':'), formatArray.join(':'), new Date()),
             )
           ) {
+            const [HH, mm, ss] = getPartsDate(string, formatProp, ':', false, [
+              'HH',
+              'mm',
+              'ss',
+            ]);
+
             onErrorRef.current?.({
               type: datePickerErrorTypes[1],
               stringValue: string,
@@ -268,6 +268,7 @@ export const usePicker = (props: UsePickerProps) => {
             });
             return false;
           }
+
           return true;
         },
         // проблема в типах IMask
