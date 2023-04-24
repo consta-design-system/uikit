@@ -85,6 +85,7 @@ export type SliderPointProps = PropsWithHTMLAttributes<
     onKeyPress?: (e: React.KeyboardEvent, typeButton?: ActiveButton) => void;
     onHover?: (hovered: boolean) => void;
     position: number;
+    active?: boolean;
     tooltipZIndex?: number;
   },
   HTMLButtonElement
@@ -99,11 +100,15 @@ export type SliderComponent = <RANGE extends boolean = false>(
   props: SliderProps<RANGE>,
 ) => React.ReactElement | null;
 
-const isRangeParams = (params: Props<boolean>): params is Props<true> => {
+export const isRangeParams = (
+  params: Props<boolean>,
+): params is Props<true> => {
   return !!params.range;
 };
 
-const isNotRangeParams = (params: Props<boolean>): params is Props<false> => {
+export const isNotRangeParams = (
+  params: Props<boolean>,
+): params is Props<false> => {
   return !params.range;
 };
 
@@ -169,4 +174,21 @@ export const getMinForEndField = (props: SliderProps<boolean>) => {
   if (isRangeParams(props)) {
     return props.value[0];
   }
+};
+
+export const getValidStep = (
+  min: number,
+  max: number,
+  step?: number | number[],
+) => {
+  if (step) {
+    if (Array.isArray(step)) {
+      return step;
+    }
+    if (step <= 0) {
+      return 1;
+    }
+    return step;
+  }
+  return Math.abs((max - min) / 100);
 };

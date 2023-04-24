@@ -41,6 +41,7 @@ export const SliderPoint = (props: SliderPointProps) => {
     focused,
     popoverPosition,
     buttonRef,
+    active,
     handlePress,
     onKeyPress,
     tooltipFormatter,
@@ -105,7 +106,7 @@ export const SliderPoint = (props: SliderPointProps) => {
       <button
         type="button"
         aria-label={`${buttonLabel}-button`}
-        className={cnSliderPoint({ hovered, disabled }, [
+        className={cnSliderPoint({ hovered, disabled, active }, [
           !disabled ? cnMixFocus() : '',
         ])}
         onMouseOver={() => handleMouseAction(true)}

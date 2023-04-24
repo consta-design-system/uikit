@@ -113,13 +113,17 @@ export const getValidValue = (
       if (Math.abs(value) < 1) {
         return Number(value.toFixed(division ? division.length : 0));
       }
-      const roundValue =
-        Math.round(
-          Number(value.toFixed(division ? division.length : 0)) / stepValue,
-        ) * stepValue;
-      if (roundValue > max) return max;
-      if (roundValue < min) return min;
-      return Number(roundValue.toFixed(division ? division.length : 0));
+      if (value < min) return min;
+      for (let i = min; i <= max; i += stepValue) {
+        if (value >= i && value < i + stepValue) {
+          return Number(
+            (value < i + stepValue / 2 ? i : i + stepValue).toFixed(
+              division ? division.length : 0,
+            ),
+          );
+        }
+      }
+      return max;
     }
     let resultValue = value;
     step.forEach((stepPoint, index) => {

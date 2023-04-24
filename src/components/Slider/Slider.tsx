@@ -1,7 +1,7 @@
 import './Slider.css';
 
 import { IconPropSize } from '@consta/icons/Icon';
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useRef, useState } from 'react';
 
 import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
 import { FieldCaption } from '##/components/FieldCaption';
@@ -17,7 +17,9 @@ import {
   getMaxForStartField,
   getMinForEndField,
   getOnChandgeForInput,
+  getValidStep,
   getValueForInput,
+  isRangeParams,
   PropSize,
   SliderComponent,
   SliderProps,
@@ -70,10 +72,15 @@ const SliderRender = <RANGE extends boolean = false>(
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, sliderRef);
 
+  const [focusIndex, setFocusIndex] = useState<number | undefined>();
   const [isHovered, { on, off }] = useFlag(false);
   const leftButtonRef = useRef<HTMLButtonElement>(null);
   const rightButtonRef = useRef<HTMLButtonElement>(null);
-  const sortedSteps = useSortSteps({ step: stepProp, min, max });
+  const sortedSteps = useSortSteps({
+    step: getValidStep(min, max, stepProp),
+    min,
+    max,
+  });
   const step = stepProp ? sortedSteps : Math.abs((max - min) / 100);
   const IconRight = getIcon(rightSide);
   const IconLeft = getIcon(leftSide);
@@ -142,9 +149,12 @@ const SliderRender = <RANGE extends boolean = false>(
             {leftSide === 'input' && (
               <SliderInput
                 value={getValueForInput(props, 0)}
+                onFocus={() => setFocusIndex(0)}
+                onBlur={() => setFocusIndex(undefined)}
                 onChange={getOnChandgeForInput(props, 0)}
                 size={size}
                 min={min}
+                inputMode="numeric"
                 max={getMaxForStartField(props)}
                 status={status}
                 step={step}
@@ -164,32 +174,49 @@ const SliderRender = <RANGE extends boolean = false>(
             disabled={disabled}
             view={view}
           />
-          {currentValue.map((val, index) => (
-            <SliderPoint
-              hovered={isHovered || typeof activeButton === 'number'}
-              buttonRef={leftButtonRef}
-              popoverPosition={popoverPosition[index]}
-              onKeyPress={onKeyPress}
-              onFocus={onFocus}
-              handlePress={handlePress}
-              disabled={disabled}
-              position={buttonPositions[index]}
-              focused={activeButton === index}
-              buttonLabel={index as ActiveButton}
-              withTooltip={withTooltip}
-              onHover={changeHovered}
-              tooltipFormatter={tooltipFormatter}
-              value={val}
-              role="slider"
-              aria-valuemin={min}
-              aria-valuemax={max}
-              aria-valuenow={val}
-              tooltipZIndex={
-                typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined
+          {currentValue.map((val, index) => {
+            let isActive = true;
+            if (
+              currentValue.length > 1 &&
+              currentValue[0] === currentValue[1]
+            ) {
+              if (index === 0 && val === min) {
+                isActive = false;
               }
-              key={cnSlider('Point', { index })}
-            />
-          ))}
+              if (index === 1 && val === max) {
+                isActive = false;
+              }
+            }
+            return (
+              <SliderPoint
+                hovered={isHovered || typeof activeButton === 'number'}
+                buttonRef={leftButtonRef}
+                popoverPosition={popoverPosition[index]}
+                onKeyPress={onKeyPress}
+                onFocus={onFocus}
+                handlePress={handlePress}
+                disabled={disabled}
+                active={isActive}
+                position={buttonPositions[index]}
+                focused={activeButton === index || focusIndex === index}
+                buttonLabel={index as ActiveButton}
+                withTooltip={withTooltip}
+                onHover={changeHovered}
+                tooltipFormatter={tooltipFormatter}
+                value={val}
+                role="slider"
+                aria-valuemin={min}
+                aria-valuemax={max}
+                aria-valuenow={val}
+                tooltipZIndex={
+                  typeof style?.zIndex === 'number'
+                    ? style.zIndex + 1
+                    : undefined
+                }
+                key={cnSlider('Point', { index })}
+              />
+            );
+          })}
         </div>
         {(rightSide === 'input' || IconRight) && (
           <div className={cnSlider('Side', { position: 'right' })}>
@@ -197,9 +224,12 @@ const SliderRender = <RANGE extends boolean = false>(
               <SliderInput
                 value={getValueForInput(props, 1)}
                 onChange={getOnChandgeForInput(props, 1)}
+                onBlur={() => setFocusIndex(undefined)}
                 size={size}
                 min={getMinForEndField(props)}
                 max={max}
+                onFocus={() => setFocusIndex(isRangeParams(props) ? 1 : 0)}
+                inputMode="numeric"
                 status={status}
                 step={step}
                 disabled={disabled}

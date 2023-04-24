@@ -21,6 +21,10 @@
 
     &_active {
       --slider-line-color: var(--color-control-bg-primary);
+
+      &.SliderLine-Line_disabled {
+        --slider-line-color: var(--color-bg-border);
+      }
     }
 
     &_hovered.SliderLine-Line_active {

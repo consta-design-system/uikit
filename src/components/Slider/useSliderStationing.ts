@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { useComponentSize } from '##/hooks/useComponentSize';
+
 import { Line, PropView } from './helper';
 import { COUNT_STEPS } from './useSlider/useSlider';
 
@@ -54,6 +56,8 @@ export const useSliderStationing: UseSliderStationing = (
 ) => {
   const [lineSizes, setLineSizes] = useState<Line[]>([]);
   const [buttonPositions, setButtonPositions] = useState<number[]>([]);
+
+  const { width, height } = useComponentSize(sliderLineRef);
 
   const calcualtedStep = useMemo(() => {
     if (!Array.isArray(step)) {
@@ -163,7 +167,7 @@ export const useSliderStationing: UseSliderStationing = (
   useEffect(() => {
     setLineSizes(calculateLines());
     setButtonPositions(calculateButtonPositions());
-  }, [value, min, max, range, calcualtedStep, view]);
+  }, [value, min, max, range, calcualtedStep, view, width, height]);
 
   return {
     lineSizes,
