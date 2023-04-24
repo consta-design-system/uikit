@@ -36,8 +36,6 @@
     }
 
     &_round {
-      padding-right: calc(var(--button-space) * 1.2);
-      padding-left: calc(var(--button-space) * 1.2);
       border-radius: 99rem;
     }
 
@@ -50,12 +48,10 @@
     }
 
     &_brickRound {
-      padding-right: calc(var(--button-space) * 1.2);
       border-radius: 0 99rem 99rem 0;
     }
 
     &_roundBrick {
-      padding-left: calc(var(--button-space) * 1.2);
       border-radius: 99rem 0 0 99rem;
     }
   }
@@ -64,25 +60,29 @@
     &_xs {
       --button-height: var(--control-height-xs);
       --button-font-size: var(--control-text-size-xs);
-      --button-space: var(--control-space-xs);
+      --button-space: calc(var(--control-space-xs) - var(--space-3xs));
+      --button-icon-indent: var(--space-xs);
     }
 
     &_s {
       --button-height: var(--control-height-s);
       --button-font-size: var(--control-text-size-s);
-      --button-space: var(--control-space-s);
+      --button-space: var(--control-space-xs);
+      --button-icon-indent: calc(var(--space-s) - var(--space-3xs));
     }
 
     &_m {
       --button-height: var(--control-height-m);
       --button-font-size: var(--control-text-size-m);
-      --button-space: var(--control-space-m);
+      --button-space: var(--control-space-s);
+      --button-icon-indent: calc(var(--space-m) - var(--space-3xs));
     }
 
     &_l {
       --button-height: var(--control-height-l);
       --button-font-size: var(--control-text-size-l);
-      --button-space: var(--control-space-l);
+      --button-space: var(--control-space-m);
+      --button-icon-indent: var(--space-l);
     }
   }
 
@@ -156,6 +156,7 @@
   }
 
   &_onlyIcon {
+    --button-icon-indent: 0;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -164,7 +165,6 @@
   }
 
   &_withIcon {
-    --icon-indent: calc(var(--button-space) * 0.7);
     display: inline-flex;
     align-items: center;
   }
@@ -175,11 +175,11 @@
 
     &_position {
       &_left {
-        margin-right: var(--icon-indent);
+        margin-right: var(--button-icon-indent);
       }
 
       &_right {
-        margin-left: var(--icon-indent);
+        margin-left: var(--button-icon-indent);
       }
     }
   }

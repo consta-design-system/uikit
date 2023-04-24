@@ -1,5 +1,5 @@
 .MixPopoverArrow {
-  --popover-arrow-size: 10px;
+  --popover-arrow-size: 6px;
   --popover-arrow-offset: 6px;
   position: absolute;
   border: var(--popover-arrow-size) solid transparent;

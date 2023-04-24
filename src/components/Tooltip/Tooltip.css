@@ -1,7 +1,6 @@
 .Tooltip {
   --tooltip-bg-color: var(--color-bg-default);
   --popover-arrow-bg-color: var(--tooltip-bg-color);
-  --tooltip-bg-opacity: 0.9;
 
   &_status {
     &_alert {
@@ -22,8 +21,6 @@
   }
 
   &[class*='status'] {
-    --tooltip-bg-opacity: 1;
-
     & .Tooltip-Content {
       text-shadow: var(--shadow-group);
     }
@@ -38,7 +35,6 @@
     bottom: 0;
     background: var(--tooltip-bg-color);
     border-radius: var(--control-radius);
-    opacity: var(--tooltip-bg-opacity);
     box-shadow: var(--shadow-layer);
   }
 
@@ -59,9 +55,5 @@
     &_size_l {
       max-width: 400px;
     }
-  }
-
-  &-Arrow {
-    opacity: var(--tooltip-bg-opacity);
   }
 }
