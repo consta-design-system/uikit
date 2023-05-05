@@ -289,15 +289,15 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   }, 300);
 
   const setSearch = React.useCallback(
-    (value: string) => {
+    (value: string | undefined) => {
       setState(
         (old) => ({
           ...old,
-          searchValue: value,
+          searchValue: value || '',
         }),
         actions.setSearch,
       );
-      setResolvedSearch(value);
+      setResolvedSearch(value || '');
     },
     [setState, setResolvedSearch],
   );
@@ -419,7 +419,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
     if (multiple) {
       inputRef.current?.focus();
-      !withoutClearSearch && setSearch('');
     }
   };
 
@@ -658,9 +657,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   };
 
   useEffect(() => {
-    if (searchValueProp) {
-      setSearch(searchValueProp);
-    }
+    setSearch(searchValueProp);
   }, [searchValueProp]);
 
   return {

@@ -20,6 +20,7 @@ import { ComboboxExampleLabel } from './examples/ComboboxExampleLabel/ComboboxEx
 import { ComboboxExampleStatus } from './examples/ComboboxExampleStatus/ComboboxExampleStatus';
 import { ComboboxExampleOnInputChange } from './examples/ComboboxExampleOnInputChange/ComboboxExampleOnInputChange';
 import { ComboboxExampleSelectAll } from './examples/ComboboxExampleSelectAll/ComboboxExampleSelectAll';
+import { ComboboxExampleSearchValue } from './examples/ComboboxExampleSearchValue/ComboboxExampleSearchValue';
 
 ```tsx
 import { Combobox } from '@consta/uikit/Combobox';
@@ -47,6 +48,7 @@ import { Combobox } from '@consta/uikit/Combobox';
   - [Кастомный элемент списка](#кастомный-элемент-списка)
   - [Кастомное выбранное значение](#кастомное-выбранное-значение)
   - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-групп-и-вариантов)
+- [Контролируемое значение поля ввода](#контролируемое-значение-поля-ввода)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 
@@ -1104,6 +1106,44 @@ export function ComboboxExampleCustomTypesWithGroups() {
 ```
 
 <ComboboxExampleCustomTypesWithGroups />
+
+## Контролируемое значение поля ввода
+
+Для того, чтобы программным путем изменить значение поля ввода, используйте `searchValue`.
+
+```tsx
+export function ComboboxExampleSearchValue() {
+  const [value, setValue] = useState<Item[] | null>();
+  const [searchValue, setSearchValue] = useState<string | undefined>();
+
+  return (
+    <>
+      <Combobox
+        className={cnMixSpace({ mB: 'm' })}
+        placeholder="Выберите вариант"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+        searchValue={searchValue}
+        multiple
+      />
+      <Button
+        className={cnMixSpace({ mR: 'm' })}
+        label="Второй"
+        onClick={() => setSearchValue('Второй')}
+      />
+      <Button
+        className={cnMixSpace({ mR: 'm' })}
+        label="Первый"
+        onClick={() => setSearchValue('Первый')}
+      />
+      <Button label="Очистить" onClick={() => setSearchValue(undefined)} />
+    </>
+  );
+}
+```
+
+<ComboboxExampleSearchValue />
 
 ## Импорт
 
