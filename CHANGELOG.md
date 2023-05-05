@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.17.1 (05/05/2023)
+- [fix(Combobox): fix update serchValue (#3030)](https://github.com/consta-design-system/uikit/commit/ab41caac40ca84c74eed84a38cc95cc5bbd66627) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.17.0 (27/04/2023)
 Самое важное:
 
@@ -415,14 +420,3 @@ UserSelectDeprecated
 
 - [docs(Button): fix misprint, describe icon size (#2590)](https://github.com/consta-design-system/uikit/commit/12efe41277802741581f2f6e48d08fd1f89163e2) - [@arhayka](https://github.com/arhayka)
 - [feat(Tabs): add xs size and fix colors (#2481)](https://github.com/consta-design-system/uikit/commit/ae6ec2cfb446c591dfd8a51eb4cbeaaecc493912) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v3.28.0 (10/08/2022)
-Самое важное:
-- Разработали компонент `AvatarGroup`, теперь есть возможность показывать аватарки, группируя их.
-- Доработали документацию
----
-
-- [docs(review): added new images (#2479)](https://github.com/consta-design-system/uikit/commit/fb475f9f495ff2cba6fbf4182ef064954c3284c1) - [@gizeasy](https://github.com/gizeasy)
-- [feat(AvatarGroup): add component for avatar grouping (#2471)](https://github.com/consta-design-system/uikit/commit/e9c3a6094eb952f7719c269a9296fbbc6b37ad3f) - [@N1MBER](https://github.com/N1MBER)
