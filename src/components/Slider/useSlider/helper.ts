@@ -21,6 +21,7 @@ export type UseSliderProps<RANGE extends boolean = false> = {
   step?: number | number[];
   onChange?: PropOnChange<RANGE>;
   onAfterChange?: PropOnChange<RANGE>;
+  containerRef: React.RefObject<HTMLDivElement>;
   sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement>;
   buttonRefs: React.RefObject<HTMLButtonElement>[];
 };

@@ -7,6 +7,7 @@ import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler'
 import { FieldCaption } from '##/components/FieldCaption';
 import { FieldLabel } from '##/components/FieldLabel';
 import { useFlag } from '##/hooks/useFlag';
+import { useForkRef } from '##/hooks/useForkRef';
 import { useSortSteps } from '##/hooks/useSortSteps';
 import { cn } from '##/utils/bem';
 
@@ -74,6 +75,7 @@ const SliderRender = <RANGE extends boolean = false>(
 
   const [focusIndex, setFocusIndex] = useState<number | undefined>();
   const [isHovered, { on, off }] = useFlag(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const leftButtonRef = useRef<HTMLButtonElement>(null);
   const rightButtonRef = useRef<HTMLButtonElement>(null);
   const sortedSteps = useSortSteps({
@@ -104,6 +106,7 @@ const SliderRender = <RANGE extends boolean = false>(
     onChange,
     onAfterChange,
     sliderRef,
+    containerRef,
     buttonRefs: [leftButtonRef, rightButtonRef],
   });
 
@@ -133,7 +136,7 @@ const SliderRender = <RANGE extends boolean = false>(
 
   return (
     <div
-      ref={ref}
+      ref={useForkRef([ref, containerRef])}
       className={cnSlider({ size }, [className])}
       style={style}
       {...otherProps}

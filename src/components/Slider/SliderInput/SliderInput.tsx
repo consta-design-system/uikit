@@ -1,8 +1,4 @@
-import './SliderInput.css';
-
 import React, { useEffect, useState } from 'react';
-
-import { cn } from '##/utils/bem';
 
 import {
   TextField,
@@ -25,17 +21,13 @@ type Props = Omit<
   }) => void;
 };
 
-const cnSliderInput = cn('SliderInput');
-
 export const SliderInput = (props: Props) => {
   const {
     value,
     onChange,
     min = 0,
-    className,
     max = 100,
     step = 1,
-    size = 'm',
     ...otherProps
   } = props;
 
@@ -65,8 +57,6 @@ export const SliderInput = (props: Props) => {
       min={min}
       max={max}
       step={step}
-      size={size}
-      className={cnSliderInput({ size }, [className])}
       onChange={handleChange}
       value={currentValue}
       {...otherProps}

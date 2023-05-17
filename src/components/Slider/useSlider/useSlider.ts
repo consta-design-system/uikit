@@ -7,6 +7,8 @@ import React, {
   useState,
 } from 'react';
 
+import { useClickOutside } from '##/hooks/useClickOutside';
+
 import { useComponentSize } from '../../../hooks/useComponentSize/useComponentSize';
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { SliderValue, TrackPosition } from '../helper';
@@ -38,6 +40,7 @@ export function useSlider<RANGE extends boolean>(
     onChange,
     onAfterChange,
     sliderRef,
+    containerRef,
     buttonRefs,
   } = props;
 
@@ -62,12 +65,22 @@ export function useSlider<RANGE extends boolean>(
   );
   const [leftPopover, setLeftPopover] = useState<TrackPosition>(null);
   const [rightPopover, setRightPopover] = useState<TrackPosition>(null);
+  const [currentButton, setCurrentButton] = useState<ActiveButton | null>(null);
 
   const activeButton: MutableRefObject<ActiveButton | null> = useRef(null);
 
   const sizeSlider = useComponentSize(sliderRef);
 
   const lastValue = useMutableRef(currentValue);
+
+  useClickOutside({
+    isActive: true,
+    ignoreClicksInsideRefs: [containerRef],
+    handler: () => {
+      setCurrentButton(null);
+      activeButton.current = null;
+    },
+  });
 
   useEffect(() => {
     if (disabled) {
@@ -96,6 +109,7 @@ export function useSlider<RANGE extends boolean>(
     if (JSON.stringify(value) !== JSON.stringify(currentValue)) {
       setCurrentValue(value);
       setTooltipPosition(getActiveValue(value, activeButton.current), 0);
+      setCurrentButton(null);
       activeButton.current = null;
     }
   }, [value]);
@@ -174,6 +188,8 @@ export function useSlider<RANGE extends boolean>(
         typeof typeButton === 'number' &&
         typeof currentValue !== 'undefined'
       ) {
+        event.preventDefault();
+        event.stopPropagation();
         let stepIncrement = !Array.isArray(step) ? step || 1 : 1;
         let validKeyCode = false;
         const changedValue = getActiveValue(currentValue, typeButton);
@@ -282,6 +298,7 @@ export function useSlider<RANGE extends boolean>(
     e: React.FocusEvent | React.MouseEvent,
     button: ActiveButton,
   ) => {
+    setCurrentButton(button);
     activeButton.current = button;
   };
 
@@ -328,6 +345,7 @@ export function useSlider<RANGE extends boolean>(
       if (isNotRangeParams(props) && typeof lastValue.current === 'number') {
         props.onChange?.({ e, value: lastValue.current });
       }
+      setCurrentButton(null);
       activeButton.current = null;
     },
     [lastValue, value, onChange, handleTouchMove],
@@ -336,6 +354,7 @@ export function useSlider<RANGE extends boolean>(
   const handlePress = useCallback(
     (typeButton: ActiveButton) => {
       if (!disabled) {
+        setCurrentButton(typeButton);
         activeButton.current = typeButton;
         controlListeners('add');
       }
@@ -348,7 +367,7 @@ export function useSlider<RANGE extends boolean>(
     onFocus,
     handlePress,
     onSliderClick,
-    activeButton: activeButton.current,
+    activeButton: currentButton,
     popoverPosition: [leftPopover, rightPopover],
     currentValue: Array.isArray(currentValue) ? currentValue : [currentValue],
   };
