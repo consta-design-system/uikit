@@ -107,8 +107,20 @@ export function useSlider<RANGE extends boolean>(
 
   useEffect(() => {
     if (JSON.stringify(value) !== JSON.stringify(currentValue)) {
-      setCurrentValue(value);
-      setTooltipPosition(getActiveValue(value, activeButton.current), 0);
+      if (Array.isArray(value) && Array.isArray(currentValue)) {
+        if (
+          !(
+            currentValue.indexOf(value[0]) !== -1 &&
+            currentValue.indexOf(value[1]) !== -1
+          )
+        ) {
+          setCurrentValue(value);
+          setTooltipPosition(getActiveValue(value, activeButton.current), 0);
+        }
+      } else {
+        setCurrentValue(value);
+        setTooltipPosition(getActiveValue(value, activeButton.current), 0);
+      }
       setCurrentButton(null);
       activeButton.current = null;
     }

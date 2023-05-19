@@ -178,18 +178,23 @@ const SliderRender = <RANGE extends boolean = false>(
             view={view}
           />
           {currentValue.map((val, index) => {
-            let isActive = true;
-            if (
+            // let isActive = true;
+            // if (
+            //   currentValue.length > 1 &&
+            //   currentValue[0] === currentValue[1]
+            // ) {
+            //   if (index === 0 && val === min) {
+            //     isActive = false;
+            //   }
+            //   if (index === 1 && val === max) {
+            //     isActive = false;
+            //   }
+            // }
+            const topLayer =
               currentValue.length > 1 &&
-              currentValue[0] === currentValue[1]
-            ) {
-              if (index === 0 && val === min) {
-                isActive = false;
-              }
-              if (index === 1 && val === max) {
-                isActive = false;
-              }
-            }
+              currentValue[0] === currentValue[1] &&
+              val === max &&
+              index === 0;
             return (
               <SliderPoint
                 hovered={isHovered || typeof activeButton === 'number'}
@@ -199,7 +204,7 @@ const SliderRender = <RANGE extends boolean = false>(
                 onFocus={onFocus}
                 handlePress={handlePress}
                 disabled={disabled}
-                active={isActive}
+                active={topLayer}
                 position={buttonPositions[index]}
                 focused={activeButton === index || focusIndex === index}
                 buttonLabel={index as ActiveButton}

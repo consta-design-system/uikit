@@ -24,7 +24,9 @@
     cursor: auto;
   }
 
-  &_active {
+  &_active,
+  &:hover,
+  &:focus {
     z-index: 1;
   }
 

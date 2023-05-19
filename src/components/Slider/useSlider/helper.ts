@@ -183,20 +183,10 @@ export const getNewValue = (
   max: number,
   activeButton: ActiveButton,
 ): number | [number, number] => {
-  let maxRangeValue = max;
-  let minRangeValue = min;
-  if (Array.isArray(currentValue)) {
-    const [left, right] = currentValue;
-    if (activeButton === 1) {
-      minRangeValue = left;
-    } else {
-      maxRangeValue = right;
-    }
-  }
   const analyzedValue = getValidValue(
     analyzeDivisionValue(changedValue, step, min, max),
-    minRangeValue,
-    maxRangeValue,
+    min,
+    max,
     step,
   );
   if (Array.isArray(currentValue)) {
