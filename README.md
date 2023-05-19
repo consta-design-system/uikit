@@ -78,7 +78,7 @@ $ yarn build
 # Сборка стенда
 $ yarn stand:build
 
-# Запуск тесов
+# Запуск тестов
 $ yarn test
 ```
 
