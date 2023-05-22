@@ -1,5 +1,14 @@
 # Changelog
 
+## v4.17.2 (22/05/2023)
+Запускать локальный сервер разработки и сборку пакетов теперь можно и на ОС Windows. 
+
+---
+
+- [chore: configure build for windows (#3051)](https://github.com/consta-design-system/uikit/commit/e533ecef0f7392d091616e24922a458fa0f73c85) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.17.1 (05/05/2023)
 - [fix(Combobox): fix update serchValue (#3030)](https://github.com/consta-design-system/uikit/commit/ab41caac40ca84c74eed84a38cc95cc5bbd66627) - [@gizeasy](https://github.com/gizeasy)
 
@@ -410,13 +419,3 @@ BasicSelectDeprecated
 ComboboxDeprecated
 MultiCombobobxDeprecated
 UserSelectDeprecated
-
---------------------
-
-## v3.29.0 (23/08/2022)
-Самое важное:
-- в `Tabs` добавили `xs` размер
----
-
-- [docs(Button): fix misprint, describe icon size (#2590)](https://github.com/consta-design-system/uikit/commit/12efe41277802741581f2f6e48d08fd1f89163e2) - [@arhayka](https://github.com/arhayka)
-- [feat(Tabs): add xs size and fix colors (#2481)](https://github.com/consta-design-system/uikit/commit/ae6ec2cfb446c591dfd8a51eb4cbeaaecc493912) - [@N1MBER](https://github.com/N1MBER)
