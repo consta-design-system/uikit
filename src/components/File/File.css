@@ -6,20 +6,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: var(--loader-size);
-    height: var(--loader-size);
+    width: var(--space-m);
+    height: var(--space-m);
     background-color: var(--color-control-bg-ghost);
     border-radius: 50%;
-
-    &_size {
-      &_s {
-        --loader-size: 16px;
-      }
-
-      &_m {
-        --loader-size: 24px;
-      }
-    }
   }
 
   &-Progress {
