@@ -23,6 +23,7 @@ const CheckboxGroupRender = (
   const {
     value = null,
     items,
+    getItemKey,
     getItemLabel,
     getItemDisabled,
     onChange,
@@ -37,7 +38,7 @@ const CheckboxGroupRender = (
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
-    getKey: getItemLabel,
+    getKey: (item) => getItemKey(item) ?? getItemLabel(item),
     callBack: onChange,
     multiple: true,
   });
@@ -50,7 +51,7 @@ const CheckboxGroupRender = (
     >
       {items.map((item) => (
         <Checkbox
-          key={getItemLabel(item)}
+          key={getItemKey(item) ?? getItemLabel(item)}
           label={getItemLabel(item)}
           size={size}
           view={view}

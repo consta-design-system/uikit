@@ -1,6 +1,7 @@
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type CheckboxGroupDefaultItem = {
+  key?: string | number;
   label: string;
   disabled?: boolean;
 };
@@ -20,6 +21,9 @@ export type CheckboxGroupPropView = typeof checkboxGroupViews[number];
 export const checkboxGroupDefaultView: CheckboxGroupPropView =
   checkboxGroupViews[0];
 
+export type CheckboxGroupPropGetItemKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
 export type CheckboxGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type CheckboxGroupPropGetItemDisabled<ITEM> = (
   item: ITEM,
@@ -30,6 +34,7 @@ export type CheckboxGroupProps<ITEM = CheckboxGroupDefaultItem> =
     {
       value?: ITEM[] | null;
       items: ITEM[];
+      getItemKey?: CheckboxGroupPropGetItemKey<ITEM>;
       getItemLabel?: CheckboxGroupPropGetItemLabel<ITEM>;
       getItemDisabled?: CheckboxGroupPropGetItemDisabled<ITEM>;
       onChange: (props: {
