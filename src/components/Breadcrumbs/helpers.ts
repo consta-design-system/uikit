@@ -35,6 +35,6 @@ export function withDefaultGetters(props: BreadcrumbsProps) {
 export const iconSizeMap = {
   xs: 'xs',
   s: 'xs',
-  m: 'xs',
-  l: 'm',
+  m: 's',
+  l: 's',
 } as const;
