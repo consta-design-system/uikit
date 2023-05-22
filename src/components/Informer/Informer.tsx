@@ -4,6 +4,8 @@ import { classnames } from '@bem-react/classnames';
 import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
+import { cnMixSpace } from '##/mixs/MixSpace';
+
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { Text } from '../Text/Text';
@@ -16,7 +18,6 @@ export const informerPropViewDefault: InformerPropView = informerPropView[0];
 export const informerPropStatus = [
   'success',
   'system',
-  'alert',
   'alert',
   'warning',
 ] as const;
@@ -70,19 +71,24 @@ export const Informer = React.forwardRef<HTMLDivElement, InformerProps>(
             status,
             withIcon,
           },
-          [className],
+          [className, cnMixSpace({ p: size })],
         )}
         ref={ref}
       >
         {Icon && <Icon className={cnInformer('Icon')} size="s" />}
         <div className={cnInformer('Content')}>
           {title && (
-            <Text className={cnInformer('Title')} weight="bold" size={size}>
+            <Text
+              lineHeight="xs"
+              className={cnInformer('Title', [cnMixSpace({ mB: '2xs' })])}
+              weight="bold"
+              size={size}
+            >
               {title}
             </Text>
           )}
           {label ? (
-            <Text className={cnInformer('Label')} size={size}>
+            <Text lineHeight="xs" className={cnInformer('Label')} size={size}>
               {label}
             </Text>
           ) : (
