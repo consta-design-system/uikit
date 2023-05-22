@@ -4,6 +4,8 @@ import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import { IconSelect } from '@consta/icons/IconSelect';
 import React from 'react';
 
+import { cnMixSpace, Space } from '##/mixs/MixSpace';
+
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
@@ -81,6 +83,12 @@ const nameSizeMap: Record<UserPropSize, TextPropSize> = {
   l: 'm',
 };
 
+const nameOffsetMap: Record<UserPropSize, Space> = {
+  s: 0,
+  m: '3xs',
+  l: '2xs',
+};
+
 export const User = forwardRefWithAs<Props>((props, ref) => {
   const {
     as = 'div',
@@ -122,7 +130,9 @@ export const User = forwardRefWithAs<Props>((props, ref) => {
         <div className={cnUser('Block')}>
           {name && (
             <Text
-              className={cnUser('Name')}
+              className={cnUser('Name', [
+                cnMixSpace({ mB: nameOffsetMap[size] }),
+              ])}
               size={nameSizeMap[size]}
               view="primary"
               lineHeight="2xs"

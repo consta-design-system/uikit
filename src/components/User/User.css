@@ -13,6 +13,7 @@
 
   &-Icon {
     flex: none;
+    color: var(--color-control-typo-clear);
   }
 
   &-IconRightButton {
