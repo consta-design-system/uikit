@@ -3,20 +3,19 @@
   display: inline-flex;
   flex: 1;
   align-items: center;
-  padding: var(--space-xs) 0;
+  padding: var(--space-xs) var(--step-text-padding-right) var(--space-xs) 0;
   color: var(--color-control-typo-ghost);
   background-color: transparent;
   border: none;
   font-family: var(--font);
+  font-size: var(--step-text-size);
   line-height: var(--line-height-text-s);
+  line-height: var(--step-text-line-height);
   text-align: left;
   white-space: nowrap;
   cursor: pointer;
   transition: color 0.2s, font-weight 0.2s;
-
-  &-Icon {
-    margin-right: var(--space-2xs);
-  }
+  gap: var(--space-2xs);
 
   &::after {
     content: '';
@@ -42,12 +41,22 @@
   }
 
   &_size {
+    &_xs {
+      --step-text-size: var(--size-text-s);
+      --step-text-padding-right: var(--space-xs);
+      --step-text-line-height: var(--line-height-text-xs);
+    }
+
     &_m {
-      font-size: var(--size-text-m);
+      --step-text-padding-right: var(--space-s);
+      --step-text-size: var(--size-text-m);
+      --step-text-line-height: var(--line-height-text-s);
     }
 
     &_l {
-      font-size: var(--size-text-l);
+      --step-text-padding-right: var(--space-s);
+      --step-text-size: var(--size-text-l);
+      --step-text-line-height: var(--line-height-text-s);
     }
   }
 

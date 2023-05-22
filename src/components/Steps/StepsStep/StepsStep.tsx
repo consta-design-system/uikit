@@ -13,6 +13,7 @@ export const cnStepsStep = cn('StepsStep');
 type Props = {
   size: StepsPropSize;
   label: string;
+  step?: number;
   active?: boolean;
   disabled?: boolean;
   completed?: boolean;
@@ -36,6 +37,7 @@ export const StepsStep = React.forwardRef<HTMLButtonElement, Props>(
       completed = false,
       skipped = false,
       onChange,
+      step = 1,
       className,
     } = props;
 
@@ -54,8 +56,10 @@ export const StepsStep = React.forwardRef<HTMLButtonElement, Props>(
         title={label}
         onClick={clickHandler}
       >
-        {completed && (
+        {completed ? (
           <IconCheck className={cnStepsStep('Icon')} size={iconSize} />
+        ) : (
+          step
         )}
         <span>{label}</span>
       </button>
