@@ -10,6 +10,10 @@ export const collapsePropSize = ['m', 'l', 's', 'xs', '2xs'] as const;
 export type CollapsePropSize = typeof collapsePropSize[number];
 export const collapsePropSizeDefault = collapsePropSize[0];
 
+export const collapsePropForm = ['brick', 'default', 'round'] as const;
+export type CollapsePropForm = typeof collapsePropForm[number];
+export const collapsePropFormDefault = collapsePropForm[0];
+
 export const collapsePropView = ['primary', 'secondary'] as const;
 export type CollapsePropView = typeof collapsePropView[number];
 export const collapsePropViewDefault = collapsePropView[0];
@@ -75,6 +79,7 @@ export type CollapseProps = PropsWithHTMLAttributesAndRef<
   {
     size?: CollapsePropSize;
     icon?: IconComponent;
+    form?: CollapsePropForm;
     view?: CollapsePropView;
     divider?: boolean;
     label: React.ReactNode;

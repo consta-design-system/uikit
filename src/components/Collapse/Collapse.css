@@ -55,6 +55,7 @@
     flex-direction: row;
     align-items: center;
     padding: var(--vertical-space) var(--horizontal-space);
+    border-radius: var(--collapse-label-radius);
     cursor: pointer;
     transition: background 0.3s;
 
@@ -67,6 +68,20 @@
     &_iconPosition {
       &_right {
         flex-direction: row-reverse;
+      }
+    }
+
+    &_form {
+      &_brick {
+        --collapse-label-radius: 0;
+      }
+
+      &_default {
+        --collapse-label-radius: var(--control-radius);
+      }
+
+      &_round {
+        --collapse-label-radius: var(--space-3xl);
       }
     }
   }

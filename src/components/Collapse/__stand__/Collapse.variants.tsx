@@ -15,6 +15,8 @@ import {
   collapsePropCloseDirectionIconDefault,
   collapsePropDirectionIcon,
   collapsePropDirectionIconDefault,
+  collapsePropForm,
+  collapsePropFormDefault,
   collapsePropHorizontalSpace,
   collapsePropIconView,
   collapsePropIconViewDefault,
@@ -29,6 +31,7 @@ const cnCollapseVariants = cn('CollapseVariants');
 
 const Variants = () => {
   const size = useSelect('size', collapsePropSize, collapsePropSizeDefault);
+  const form = useSelect('form', collapsePropForm, collapsePropFormDefault);
   const label = useText('label', 'Заголовок');
   const children = useText(
     'children',
@@ -74,6 +77,7 @@ const Variants = () => {
       <Collapse
         size={size}
         label={label || ''}
+        form={form}
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
         hoverEffect={hoverEffect}

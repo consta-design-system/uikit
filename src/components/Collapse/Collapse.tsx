@@ -14,6 +14,7 @@ import {
   CollapseComponent,
   collapsePropCloseDirectionIconDefault,
   collapsePropDirectionIconDefault,
+  collapsePropFormDefault,
   collapsePropIconPositionDefault,
   collapsePropIconViewDefault,
   CollapseProps,
@@ -66,6 +67,7 @@ export const Collapse: CollapseComponent = React.forwardRef<
     className,
     maxContentHeight,
     isOpen,
+    form = collapsePropFormDefault,
     children,
     hoverEffect,
     divider,
@@ -97,6 +99,7 @@ export const Collapse: CollapseComponent = React.forwardRef<
           hoverEffect,
           iconPosition,
           view,
+          form,
         })}
         {...otherProps}
       >
