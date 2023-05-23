@@ -35,6 +35,10 @@
     }
   }
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   &_size {
     &_xs {
       --progress-step-bar-item-point-size: var(--space-xs);
@@ -54,30 +58,21 @@
 
   &_position {
     &_start {
-      flex: 1;
-
-      &.ProgressStepBarItem_direction_horizontal,
-      & .ProgressStepBarItem-Content {
+      &.ProgressStepBarItem_direction_horizontal {
         align-items: flex-start;
         text-align: left;
       }
     }
 
     &_center {
-      flex: 2;
-
-      &.ProgressStepBarItem_direction_horizontal,
-      & .ProgressStepBarItemr-Content {
+      &.ProgressStepBarItem_direction_horizontal {
         align-items: center;
         text-align: center;
       }
     }
 
     &_end {
-      flex: 1;
-
-      &.ProgressStepBarItem_direction_horizontal,
-      & .ProgressStepBarItem-Content {
+      &.ProgressStepBarItem_direction_horizontal {
         align-items: flex-end;
         text-align: right;
       }
@@ -92,22 +87,34 @@
 
     &_normal {
       --progress-step-bar-item-point-background: var(--color-bg-normal);
-      --progress-step-bar-item-point-content-color: var(--color-bg-default);
+      --progress-step-bar-item-point-content-color:
+        var(
+          --color-control-typo-primary
+        );
     }
 
     &_success {
       --progress-step-bar-item-point-background: var(--color-bg-success);
-      --progress-step-bar-item-point-content-color: var(--color-bg-default);
+      --progress-step-bar-item-point-content-color:
+        var(
+          --color-control-typo-primary
+        );
     }
 
     &_warning {
       --progress-step-bar-item-point-background: var(--color-bg-warning);
-      --progress-step-bar-item-point-content-color: var(--color-bg-default);
+      --progress-step-bar-item-point-content-color:
+        var(
+          --color-control-typo-primary
+        );
     }
 
     &_alert {
       --progress-step-bar-item-point-background: var(--color-bg-alert);
-      --progress-step-bar-item-point-content-color: var(--color-bg-default);
+      --progress-step-bar-item-point-content-color:
+        var(
+          --color-control-typo-primary
+        );
     }
   }
 
@@ -139,8 +146,8 @@
     }
   }
 
-  &-PointText {
-    color: var(--color-typo-secondary);
+  &-PointText.Text {
+    line-height: var(--size-text-xs);
     transition: color 0.3s;
   }
 
