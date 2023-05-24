@@ -1,0 +1,25 @@
+.SliderInput {
+  width: var(--slider-input-width);
+
+  & .TextField-Input {
+    min-width: auto;
+  }
+
+  &_size {
+    &_l {
+      --slider-input-width: 118px;
+    }
+
+    &_m {
+      --slider-input-width: 118px;
+    }
+
+    &_s {
+      --slider-input-width: 106px;
+    }
+
+    &_xs {
+      --slider-input-width: 88px;
+    }
+  }
+}
