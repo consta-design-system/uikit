@@ -36,7 +36,12 @@ type Props = {
   status?: BadgePropStatus;
   form?: BadgePropForm;
   minified?: boolean;
+  /**
+   * @deprecated since version 4.17.2 iconLeft
+   */
   icon?: IconComponent;
+  iconLeft?: IconComponent;
+  iconRight?: IconComponent;
   label?: string;
   children?: never;
 };
@@ -50,6 +55,8 @@ export const Badge = forwardRefWithAs<Props>((props, ref) => {
     status = badgePropStatusDefault,
     form = badgePropFormDefault,
     icon,
+    iconLeft,
+    iconRight,
     minified,
     label,
     as = 'div',
@@ -63,7 +70,8 @@ export const Badge = forwardRefWithAs<Props>((props, ref) => {
     status !== 'system' && view === 'filled'
       ? classnames(props.className, themeClassNames.color.accent)
       : props.className;
-  const Icon = icon;
+  const IconLeft = iconLeft ?? icon;
+  const IconRight = iconRight;
   const withIcon = !!icon;
 
   if (minified) {
@@ -83,14 +91,9 @@ export const Badge = forwardRefWithAs<Props>((props, ref) => {
       className={cnBadge({ size, view, status, form, withIcon }, [className])}
       ref={ref}
     >
-      {Icon ? (
-        <>
-          <Icon size="xs" className={cnBadge('Icon')} />
-          {label}
-        </>
-      ) : (
-        label
-      )}
+      {IconLeft && <IconLeft size="xs" className={cnBadge('Icon')} />}
+      {label}
+      {IconRight && <IconRight size="xs" className={cnBadge('Icon')} />}
     </Tag>
   );
 });
