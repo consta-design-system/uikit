@@ -34,7 +34,9 @@ export const DateTimeTypeYear: DateTimeTypeComponent<'year'> = forwardRef(
       view = dateTimePropViewDefault,
       onMove,
       onChangeCurrentVisibleDate,
-
+      multiplicityHours,
+      multiplicityMinutes,
+      multiplicitySeconds,
       ...otherProps
     } = props;
 
