@@ -2,6 +2,8 @@ import './DragNDropFieldTooltip.css';
 
 import React from 'react';
 
+import { cnMixSpace } from '##/mixs/MixSpace';
+
 import { cn } from '../../../utils/bem';
 import { Text } from '../../Text/Text';
 import { Tooltip } from '../../Tooltip/Tooltip';
@@ -31,11 +33,15 @@ export const DragNDropFieldTooltip: React.FC<DragNDropFieldTooltipProps> = ({
       isInteractive={false}
       onClickOutside={() => setIsHidden(true)}
     >
-      <Text size="s">
+      <Text size="s" className={cnDragNDropFieldTooltip('Text')}>
         {errors.length === 1 ? (
           errors[0]
         ) : (
-          <ul className={cnDragNDropFieldTooltip('List')}>
+          <ul
+            className={cnDragNDropFieldTooltip('List', [
+              cnMixSpace({ pL: 'xl' }),
+            ])}
+          >
             {errors.map((error) => (
               <li key={error}>{error}</li>
             ))}
