@@ -213,7 +213,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
               {!isLoading && !hasItems && labelForEmptyItems && (
                 <ListItem
                   size={size}
-                  label={labelForNotFound}
+                  label={labelForEmptyItems}
                   innerOffset={indent}
                 >
                   {labelForEmptyItems}
