@@ -1,7 +1,7 @@
 import './ProgressStepBarItem.css';
 
 import { IconComponent } from '@consta/icons/Icon';
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 
 import { useForkRef } from '##/hooks/useForkRef';
 import { useMouseLeave } from '##/hooks/useMouseLeave';
@@ -102,6 +102,32 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
       onClick,
     };
 
+    const { tooltipDirection, possibleDirections, spareDirection } = useMemo<{
+      tooltipDirection: Direction;
+      possibleDirections: Direction[];
+      spareDirection: Direction;
+    }>(() => {
+      if (direction === 'vertical') {
+        return {
+          tooltipDirection: 'leftUp',
+          possibleDirections: possibleVerticalDirections,
+          spareDirection: 'rightCenter',
+        };
+      }
+      let spareDirection: Direction = 'downCenter';
+      if (position === 'start') {
+        spareDirection = 'rightCenter';
+      }
+      if (position === 'end') {
+        spareDirection = 'leftCenter';
+      }
+      return {
+        tooltipDirection: 'downCenter',
+        possibleDirections: possibleHorizontalDirections,
+        spareDirection,
+      };
+    }, [direction, position]);
+
     useMouseLeave({
       isActive: isTooltipVisible,
       refs: [anchorRef, pointRef, tooltipRef],
@@ -150,16 +176,13 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
         {tooltipContent && isTooltipVisible && (
           <Tooltip
             ref={tooltipRef}
-            anchorRef={label || content ? anchorRef : pointRef}
+            anchorRef={pointRef}
             className={cnProgressStepBarItem('Tooltip')}
-            direction={direction === 'horizontal' ? 'downCenter' : 'leftUp'}
+            direction={tooltipDirection}
             style={{ zIndex: tooltipZIndex }}
             isInteractive={false}
-            possibleDirections={
-              direction === 'horizontal'
-                ? possibleHorizontalDirections
-                : possibleVerticalDirections
-            }
+            possibleDirections={possibleDirections}
+            spareDirection={spareDirection}
           >
             {tooltipContent}
           </Tooltip>
