@@ -32,7 +32,6 @@
   font-weight: var(--font-weight-text-semibold);
   line-height: var(--avatar-size);
   text-align: center;
-  letter-spacing: 0.1em;
   filter: grayscale(0%);
 
   &_size {
