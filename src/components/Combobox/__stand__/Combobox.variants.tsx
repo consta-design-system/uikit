@@ -43,12 +43,12 @@ const Variants = () => {
   const placeholder = useText('placeholder', 'Placeholder');
   const withGroups = useBoolean('withGroups', false);
   const isLoading = useBoolean('isLoading', false);
-  const selectAll = useBoolean('selectAll', false);
+  const multiple = useBoolean('multiple', false);
+  const selectAll = useBoolean('selectAll', false, multiple);
   const withLabelIcon = useBoolean('withLabelIcon', false);
 
   const [value, setValue] = useState<Item | null>(null);
   const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);
-  const multiple = useBoolean('multiple', false);
 
   if (multiple) {
     return (
