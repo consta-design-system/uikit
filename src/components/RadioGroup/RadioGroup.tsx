@@ -25,6 +25,7 @@ const RadioGroupRender = (
     value = null,
     items,
     getItemLabel,
+    getItemKey,
     getItemDisabled,
     onChange,
     name,
@@ -39,7 +40,7 @@ const RadioGroupRender = (
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
-    getKey: getItemLabel,
+    getKey: (item) => getItemKey(item) ?? getItemLabel(item),
     callBack: onChange,
     multiple: false,
   });
@@ -53,7 +54,7 @@ const RadioGroupRender = (
       {items.map((item) => (
         <Radio
           align={align}
-          key={getItemLabel(item)}
+          key={getItemKey(item) ?? getItemLabel(item)}
           label={getItemLabel(item)}
           size={size}
           view={view}
