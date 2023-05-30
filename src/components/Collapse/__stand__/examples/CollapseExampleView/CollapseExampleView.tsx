@@ -11,16 +11,16 @@ export const CollapseExampleView = () => {
   return (
     <Example col={1}>
       <Collapse
-        label="Primary"
-        view="primary"
+        label="Clear"
+        view="clear"
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
       >
         {content}
       </Collapse>
       <Collapse
-        label="Secondary"
-        view="secondary"
+        label="Ghost"
+        view="ghost"
         isOpen={isOpenTwo}
         onClick={() => setOpenTwo(!isOpenTwo)}
       >

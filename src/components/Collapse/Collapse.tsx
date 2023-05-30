@@ -20,6 +20,7 @@ import {
   CollapseProps,
   CollapsePropSize,
   collapsePropSizeDefault,
+  CollapsePropView,
   collapsePropViewDefault,
 } from './types';
 
@@ -52,6 +53,13 @@ const getMaxHeight = (height: number, maxHeight?: number | string) => {
   return `${height}px`;
 };
 
+const collapseViewMap: Record<CollapsePropView, 'clear' | 'ghost'> = {
+  clear: 'clear',
+  ghost: 'ghost',
+  primary: 'clear',
+  secondary: 'ghost',
+};
+
 export const Collapse: CollapseComponent = React.forwardRef<
   HTMLDivElement,
   CollapseProps
@@ -63,7 +71,7 @@ export const Collapse: CollapseComponent = React.forwardRef<
   const {
     label,
     size = collapsePropSizeDefault,
-    view = collapsePropViewDefault,
+    view: viewProp = collapsePropViewDefault,
     className,
     maxContentHeight,
     isOpen,
@@ -83,6 +91,8 @@ export const Collapse: CollapseComponent = React.forwardRef<
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, collapseRef);
 
+  const view = collapseViewMap[viewProp];
+
   return (
     <div
       ref={useForkRef([ref, collapseRef])}
@@ -91,7 +101,7 @@ export const Collapse: CollapseComponent = React.forwardRef<
         ...style,
         ['--horizontal-space' as string]: horizontalSpace
           ? `var(--space-${horizontalSpace})`
-          : 0,
+          : `0px`,
       }}
     >
       <div
@@ -116,7 +126,7 @@ export const Collapse: CollapseComponent = React.forwardRef<
         {typeof label === 'object' ? (
           <div className={cnCollapse('LabelText')}>{label}</div>
         ) : (
-          <Text className={cnCollapse('LabelText')} view={view} size={size}>
+          <Text className={cnCollapse('LabelText')} size={size}>
             {label}
           </Text>
         )}

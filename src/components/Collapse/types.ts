@@ -14,7 +14,12 @@ export const collapsePropForm = ['brick', 'default', 'round'] as const;
 export type CollapsePropForm = typeof collapsePropForm[number];
 export const collapsePropFormDefault = collapsePropForm[0];
 
-export const collapsePropView = ['primary', 'secondary'] as const;
+export const collapsePropView = [
+  'clear',
+  'ghost',
+  'primary',
+  'secondary',
+] as const;
 export type CollapsePropView = typeof collapsePropView[number];
 export const collapsePropViewDefault = collapsePropView[0];
 

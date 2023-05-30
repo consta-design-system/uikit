@@ -276,8 +276,8 @@ export const CollapseExampleIconCustomIconDirection = () => {
 
 У коллапса два варианта отображения:
 
-- `primary` — используется по умолчанию,
-- `secondary` — подходит, чтобы сделать коллапс не таким заметным.
+- `clear` — используется по умолчанию,
+- `ghost` — подходит, чтобы сделать коллапс более заметным.
 
 ```tsx
 export const CollapseExampleView = () => {
@@ -287,16 +287,16 @@ export const CollapseExampleView = () => {
   return (
     <div>
       <Collapse
-        label="Primary"
-        view="primary"
+        label="Clear"
+        view="clear"
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
       >
         {content}
       </Collapse>
       <Collapse
-        label="Secondary"
-        view="secondary"
+        label="Ghost"
+        view="ghost"
         isOpen={isOpenTwo}
         onClick={() => setOpenTwo(!isOpenTwo)}
       >
@@ -422,7 +422,7 @@ import { Collapse } from '@consta/uikit/Collapse';
 | [`label`](#заголовок)                        | `React.ReactNode`                                                                                  | -               | Заголовок коллапса                                                          |
 | [`size?`](#размер)                           | `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`                                                               | `'m'`           | Размер                                                                      |
 | [`form?`](#форма)                            | `'default'`, `'brick'`, `'round'`                                                                  | `'brick'`       | Форма компонента                                                            |
-| [`view?`](#внешний-вид)                      | `'primary'`, `'secondary'`                                                                         | `'primary'`     | Внешний вид                                                                 |
+| [`view?`](#внешний-вид)                      | `'clear'`, `'ghost'`, `'primary'`, `'secondary'`                                                   | `'clear'`       | Внешний вид                                                                 |
 | [`iconView?`](#внешний-вид-иконки)           | `'clear'`, `'ghost'`                                                                               | `'clear'`       | Внешний вид иконки разворота                                                |
 | [`hoverEffect?`](#подсветка)                 | `boolean`                                                                                          | -               | Подсвечивает заголовок при наведении                                        |
 | [`divider?`](#разделитель)                   | `boolean`                                                                                          | -               | Добавляет разделитель между заголовком и содержимым                         |
