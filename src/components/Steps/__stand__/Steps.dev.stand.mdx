@@ -209,6 +209,7 @@ export const ExampleStepsContent = () => {
 ```tsx
 export const Items: string[] = ['Главное', 'Важное', 'Необязательное'];
 
+<Steps size="s" items={items} getItemLabel={(item) => item} value={items[1]} />;
 <Steps size="m" items={items} getItemLabel={(item) => item} value={items[1]} />;
 <Steps size="l" items={items} getItemLabel={(item) => item} value={items[1]} />;
 ```
@@ -258,5 +259,5 @@ type StepsItemDefault = {
 | [`getItemCompleted?`](#пройденные-шаги) | `StepsPropGetSkipped`   | -            | Получает флаг завершен ли шаг                                                        |
 | [`getItemSkipped?`](#пропущенные-шаги)  | `StepsPropGetCompleted` | -            | Получает флаг пропущен ли шаг                                                        |
 | `onChange`                              | `StepsPropOnChange`     | -            | Меняет шаги                                                                          |
-| [`size?`](#размер)                      | `'m', 'l'`              | `'m'`        | Размер элементов компонента                                                          |
+| [`size?`](#размер)                      | `'m', 's', 'l'`         | `'m'`        | Размер элементов компонента                                                          |
 | `className?`                            | `string`                | -            | Дополнительные CSS-классы для компонента                                             |

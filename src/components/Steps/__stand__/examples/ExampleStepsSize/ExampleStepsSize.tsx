@@ -9,6 +9,13 @@ const emptyFunction = () => {};
 export const ExampleStepsSize = () => (
   <Example col={1}>
     <Steps
+      size="s"
+      items={items}
+      getItemLabel={(item) => item}
+      value={items[1]}
+      onChange={emptyFunction}
+    />
+    <Steps
       size="m"
       items={items}
       getItemLabel={(item) => item}

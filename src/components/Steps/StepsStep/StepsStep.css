@@ -41,7 +41,7 @@
   }
 
   &_size {
-    &_xs {
+    &_s {
       --step-text-size: var(--size-text-s);
       --step-text-padding-right: var(--space-xs);
       --step-text-line-height: var(--line-height-text-xs);

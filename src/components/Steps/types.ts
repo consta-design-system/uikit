@@ -1,6 +1,6 @@
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
-export const stepsSizes = ['m', 'l'] as const;
+export const stepsSizes = ['m', 's', 'l'] as const;
 export type StepsPropSize = typeof stepsSizes[number];
 export const stepsDefaultSize: StepsPropSize = stepsSizes[0];
 

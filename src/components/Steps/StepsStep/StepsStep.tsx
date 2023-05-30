@@ -24,6 +24,7 @@ type Props = {
 
 const sizeMap: Record<StepsPropSize, IconPropSize> = {
   m: 'xs',
+  s: 'xs',
   l: 's',
 };
 
