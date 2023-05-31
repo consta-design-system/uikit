@@ -6,8 +6,7 @@ import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
 import {
-  mapGroupVerticalSpaseBottom,
-  mapGroupVerticalSpaseTop,
+  mapDividerVerticalSpace,
   mapHorisontalSpase,
   mapHorisontalSpaseIncreased,
 } from '../maps';
@@ -36,8 +35,7 @@ export const ListDivider = forwardRef<HTMLDivElement, ListDividerProps>(
                 innerOffset === 'increased'
                   ? mapHorisontalSpaseIncreased[size]
                   : mapHorisontalSpase[size],
-              mT: mapGroupVerticalSpaseTop[size],
-              mB: mapGroupVerticalSpaseBottom[size],
+              mV: mapDividerVerticalSpace[size],
             },
           ),
           className,
