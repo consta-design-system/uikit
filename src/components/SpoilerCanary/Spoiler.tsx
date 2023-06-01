@@ -11,7 +11,7 @@ import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 import { Text } from '../Text';
 import { defaultSpoilerPropSize, SpoilerProps, SpoilerPropSize } from './types';
 
-const cnSpoiler = cnCanary('Spoiler');
+export const cnSpoiler = cnCanary('Spoiler');
 
 const spoilerIconSizeMap: Record<SpoilerPropSize, IconPropSize> = {
   l: 'm',
