@@ -3,16 +3,18 @@ import './DragNDropField.css';
 import React, { forwardRef, useRef } from 'react';
 import { DropzoneOptions, useDropzone } from 'react-dropzone';
 
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { useMutableRef } from '../../hooks/useMutableRef/useMutableRef';
-import { cn } from '../../utils/bem';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { Text } from '../Text/Text';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { Text } from '##/components/Text/Text';
+import { useForkRef } from '##/hooks/useForkRef/useForkRef';
+import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
+import { cn } from '##/utils/bem';
+import { isRenderProp } from '##/utils/isRenderProp';
+
 import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldContent';
 import { DragNDropFieldTooltip } from './DragNDropFieldTooltip/DragNDropFieldTooltip';
 import { getErrorsList } from './getErrorsList';
 import { withdefaultLocale } from './locale';
-import { DragNDropFieldChildrenRenderProp, DragNDropFieldProps } from './types';
+import { DragNDropFieldProps } from './types';
 
 const cnDragNDropField = cn('DragNDropField');
 
@@ -112,10 +114,5 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
     );
   },
 );
-
-const isRenderProp = (
-  children: React.ReactNode | DragNDropFieldChildrenRenderProp,
-): children is DragNDropFieldChildrenRenderProp =>
-  typeof children === 'function';
 
 export * from './types';
