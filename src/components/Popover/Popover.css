@@ -5,4 +5,12 @@
   visibility: var(--popover-visibility);
   width: var(--popover-width);
   pointer-events: var(--popover-pointer-events);
+
+  &_notVisible {
+    position: absolute;
+    top: -100vh;
+    left: -100vw;
+    visibility: hidden;
+    pointer-events: none;
+  }
 }
