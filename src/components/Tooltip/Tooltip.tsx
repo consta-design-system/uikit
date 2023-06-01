@@ -43,6 +43,7 @@ export type TooltipProps = PropsWithJsxAttributes<
     children: React.ReactNode;
     onClickOutside?: ClickOutsideHandler;
     className?: string;
+    offset?: number;
     onSetDirection?: (direction: Direction) => void;
   } & PositioningProps
 >;
@@ -64,6 +65,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
       status,
       onSetDirection: onSetDirectionProp,
       style,
+      offset = 0,
       ...rest
     } = props;
     const { theme } = useTheme();
@@ -104,7 +106,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
         <Popover
           {...rest}
           arrowOffset={ARROW_OFFSET + ARROW_SIZE}
-          offset={ARROW_SIZE + 4}
+          offset={ARROW_SIZE + 4 + offset}
           onSetDirection={onSetDirection}
           ref={ref}
           className={cnTooltip({ status }, [className])}
