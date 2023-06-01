@@ -17,19 +17,19 @@ import { SliderPointProps, TrackPosition } from '../helper';
 const cnSliderPoint = cn('SliderPoint');
 
 const getTooltipPosition = (
-  popoverPosition: TrackPosition,
-  buttonRef: React.RefObject<HTMLButtonElement>,
+  popoverPosition?: TrackPosition,
+  buttonRef?: React.RefObject<HTMLButtonElement>,
 ) => {
   if (popoverPosition && buttonRef && buttonRef.current) {
     const { y, height } = buttonRef.current.getBoundingClientRect();
     return {
-      x: popoverPosition.x,
-      y: y - height + 30,
+      x: Math.round(popoverPosition.x),
+      y: Math.round(y - height + 22),
     };
   }
+
   return { x: 0, y: 0 };
 };
-
 export const SliderPoint = (props: SliderPointProps) => {
   const {
     hovered,
@@ -50,7 +50,7 @@ export const SliderPoint = (props: SliderPointProps) => {
     ...otherProps
   } = props;
 
-  const [tooltipVisible, { on, off }] = useFlag(false);
+  const [tooltipVisible, setTooltipVisible] = useFlag(false);
 
   const { theme } = useTheme();
 
@@ -65,25 +65,21 @@ export const SliderPoint = (props: SliderPointProps) => {
 
   const tooltipThemeClassNames = generateThemeClassNames(tooltipTheme);
 
-  useEffect(() => {
-    focused ? on() : off();
-  }, [focused]);
-
   const handleFocus = (
     e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
   ) => {
     if (!disabled) {
       onFocus?.(e, buttonLabel);
-      on();
+      setTooltipVisible.on();
     }
   };
 
   const handleMouseAction = (enter: boolean) => {
     if (!disabled) {
       onHover?.(enter);
-      enter && on();
-      if (enter) on();
-      if (!enter && !focused) off();
+      enter && setTooltipVisible.on();
+      if (enter) setTooltipVisible.on();
+      if (!enter && !focused) setTooltipVisible.off();
     }
   };
 
@@ -94,11 +90,20 @@ export const SliderPoint = (props: SliderPointProps) => {
   ) => {
     if (!disabled) {
       onFocus?.(e, null);
-      off();
+      setTooltipVisible.off();
     }
   };
 
   const pointRef = useRef<HTMLButtonElement>(null);
+
+  const tooltipPosition = getTooltipPosition(
+    popoverPosition,
+    buttonRef || pointRef,
+  );
+
+  useEffect(() => {
+    focused ? setTooltipVisible.on() : setTooltipVisible.off();
+  }, [focused]);
 
   return (
     <>
@@ -132,14 +137,17 @@ export const SliderPoint = (props: SliderPointProps) => {
           }}
         >
           <Tooltip
-            position={getTooltipPosition(
-              popoverPosition,
-              buttonRef || pointRef,
-            )}
+            position={tooltipPosition}
             className={cnSliderPoint('Tooltip')}
             direction="downCenter"
-            possibleDirections={['downCenter', 'leftDown', 'rightDown']}
+            possibleDirections={[
+              'downCenter',
+              'leftDown',
+              'rightDown',
+              'upCenter',
+            ]}
             style={{ zIndex: tooltipZIndex }}
+            offset={8}
           >
             {tooltipFormatter ? tooltipFormatter(value) : value}
           </Tooltip>
