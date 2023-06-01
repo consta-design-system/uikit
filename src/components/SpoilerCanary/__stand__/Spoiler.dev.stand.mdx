@@ -1,0 +1,144 @@
+import { MdxMenu } from '@consta/stand';
+import { SpoilerExampleLabel } from './examples/SpoilerExampleLabel/SpoilerExampleLabel';
+import { SpoilerExampleType } from './examples/SpoilerExampleType/SpoilerExampleType';
+import { SpoilerExampleIcon } from './examples/SpoilerExampleIcon/SpoilerExampleIcon';
+import { SpoilerExampleMode } from './examples/SpoilerExampleMode/SpoilerExampleMode';
+import { SpoilerExampleSize } from './examples/SpoilerExampleSize/SpoilerExampleSize';
+
+```tsx
+import { Spoiler } from '@consta/uikit/SpoilerCanary';
+```
+
+<MdxMenu>
+
+- [Содержимое](#содержимое)
+  - [Тип](#тип)
+  - [Лейбл](#лейбл)
+  - [Иконки](#иконки)
+- [Внешний вид](#внешний-вид)
+- [Размер](#размер)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+
+</MdxMenu>
+
+## Содержимое
+
+### Тип
+
+Компонент показывает разный контент в зависимости от свойства `type`, оно может быть двух видов:
+
+- `more` — раскрыть содержимое,
+- `less` — скрыть содержимое
+
+```tsx
+const SpoilerExampleType = () => {
+  return (
+    <>
+      <Spoiler type="more" />
+      <Spoiler type="less" />
+    </>
+  );
+};
+```
+
+<SpoilerExampleType />
+
+### Лейбл
+
+Лейбл к компоненту можно указать через свойства `moreLabel` и `lessLabel`, для раскрытия и скрытия содержимого соответственно.
+
+```tsx
+const SpoilerExampleLabel = () => {
+  const [type, setType] = useState<'more' | 'less'>('more');
+
+  return (
+    <Spoiler
+      type={type}
+      lessLabel="Скрыть"
+      moreLabel="Показать"
+      onClick={() => setType(type === 'less' ? 'more' : 'less')}
+    />
+  );
+};
+```
+
+<SpoilerExampleLabel />
+
+### Иконки
+
+Для переопределения иконок определите свойства `moreIcon` и `lessIcon`, для раскрытия и скрытия содержимого соответственно.
+
+```tsx
+const SpoilerExampleIcon = () => {
+  const [type, setType] = useState<'more' | 'less'>('more');
+
+  return (
+    <Spoiler
+      type={type}
+      lessIcon={IconRemove}
+      moreIcon={IconQuestion}
+      onClick={() => setType(type === 'less' ? 'more' : 'less')}
+    />
+  );
+};
+```
+
+<SpoilerExampleIcon />
+
+## Внешний вид
+
+Есть два вида модификации компонента `inner` и `external`.
+
+> При модификации `inner`, скрывается иконка и появляется нижнее подчеркивание
+
+```tsx
+const SpoilerExampleMode = () => {
+  return (
+    <>
+      <Spoiler mode="inner" />
+      <Spoiler mode="external" />
+    </>
+  );
+};
+```
+
+<SpoilerExampleMode />
+
+## Размер
+
+За размер отвечает свойство `size`. Варианты: `'l'`, `'m'`, `'s'`, `'xs'`, по умолчанию: `'m'`.
+
+```tsx
+export const SpoilerExampleSize = () => {
+  return (
+    <>
+      <Spoiler size="l" />
+      <Spoiler size="m" />
+      <Spoiler size="s" />
+      <Spoiler size="xs" />
+    </>
+  );
+};
+```
+
+<SpoilerExampleSize />
+
+## Импорт
+
+```tsx
+import { Spoiler } from '@consta/uikit/SpoilerCanary';
+```
+
+## Свойства
+
+| Свойство                | Тип                         | По умолчанию        | Описание                             |
+| ----------------------- | --------------------------- | ------------------- | ------------------------------------ |
+| [`type?`](#тип)         | `'more'`, `'less'`          | `'more'`            | Тип контента скрыт / раскрыт         |
+| [`mode?`](#внешний-вид) | `'inner'`, `'external'`     | `'external'`        | Модификация внешнего вида компонента |
+| [`lessLabel?`](#лейбл)  | `string`                    | `'Показать меньше'` | Текст для раскрытия                  |
+| [`moreLabel?`](#лейбл)  | `string`                    | `'Показать больше'` | Текст для скрытия                    |
+| [`lessIcon?`](#иконки)  | `IconComponent`             | `'Показать больше'` | Иконка для раскрытия                 |
+| [`moreIcon?`](#иконки)  | `IconComponent`             | `'Показать больше'` | Иконка для скрытия                   |
+| [`size?`](#размер)      | `'l'`, `'m'`, `'s'`, `'xs'` | `'m'`               | Размер компонента                    |
+| `className?`            | `string`                    | -                   | Дополнительные CSS-классы            |
