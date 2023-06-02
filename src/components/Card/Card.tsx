@@ -1,5 +1,3 @@
-import './Card.css';
-
 import React, { useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
