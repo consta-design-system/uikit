@@ -38,7 +38,7 @@ export const { createStand } = createConfig({
     'Основная библиотека интерфейсных компонентов: от простых контролов до хуков и миксинов',
   standPageDecoration,
   repositoryUrl: 'https://github.com/consta-design-system/uikit',
-  figmaUrl: 'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit',
+  figmaUrl: 'https://www.figma.com/community/file/853774806786762374',
   order: 1,
   standTabs: [
     // табы по умолчанию
