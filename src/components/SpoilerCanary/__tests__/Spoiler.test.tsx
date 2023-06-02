@@ -89,7 +89,7 @@ describe('Компонент Spoiler', () => {
       });
     });
 
-    describe('проверка тэга', () => {
+    describe('проверка тега', () => {
       const tags = ['a', 'div', 'span'] as const;
       tags.forEach((el) => {
         it(`должен рендериться как <${el}>`, () => {
