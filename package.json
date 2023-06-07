@@ -16,7 +16,7 @@
   "dependencies": {
     "@bem-react/classname": "^1.5.12",
     "@bem-react/classnames": "^1.3.10",
-    "@consta/icons": "^0.1.1",
+    "@consta/icons": "^0.5.2",
     "compute-scroll-into-view": "^1.0.17",
     "date-fns": "^2.29.1",
     "focus-trap-react": "8.7.0",

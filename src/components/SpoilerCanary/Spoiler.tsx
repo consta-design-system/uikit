@@ -1,5 +1,6 @@
 import './Spoiler.css';
 
+import { AnimateIconSwitcher } from '@consta/icons/AnimateIconSwitcher';
 import { IconArrowDown } from '@consta/icons/IconArrowDown';
 import { IconArrowUp } from '@consta/icons/IconArrowUp';
 import React from 'react';
@@ -36,8 +37,6 @@ export const Spoiler = forwardRefWithAs<SpoilerProps>((props, ref) => {
 
   const Tag = as as string;
 
-  const Icon = type === 'more' ? moreIcon : lessIcon;
-
   return (
     <Tag
       ref={ref}
@@ -48,7 +47,13 @@ export const Spoiler = forwardRefWithAs<SpoilerProps>((props, ref) => {
         {type === 'more' ? moreLabel : lessLabel}
       </Text>
       {mode === 'external' && (
-        <Icon size={spoilerIconSizeMap[size]} className={cnSpoiler('Icon')} />
+        <AnimateIconSwitcher
+          startIcon={moreIcon}
+          endIcon={lessIcon}
+          active={type === 'less'}
+          size={spoilerIconSizeMap[size]}
+          className={cnSpoiler('Icon')}
+        />
       )}
     </Tag>
   );
