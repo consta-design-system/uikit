@@ -100,8 +100,8 @@
       }
 
       &.Button_disabled {
-        --button-bg-color: var(--color-control-bg-border-disable);
-        --button-color: var(--color-control-typo-disable);
+        --button-bg-color-disable: var(--color-control-bg-border-disable);
+        --button-color-disable: var(--color-control-typo-disable);
       }
     }
 
@@ -116,8 +116,8 @@
       }
 
       &.Button_disabled {
-        --button-bg-color: var(--color-control-bg-disable);
-        --button-color: var(--color-control-typo-disable);
+        --button-bg-color-disable: var(--color-control-bg-disable);
+        --button-color-disable: var(--color-control-typo-disable);
       }
     }
 
@@ -132,8 +132,8 @@
       }
 
       &.Button_disabled {
-        --button-bg-color: var(--color-control-bg-disable);
-        --button-color: var(--color-control-typo-disable);
+        --button-bg-color-disable: var(--color-control-bg-disable);
+        --button-color-disable: var(--color-control-typo-disable);
       }
     }
 
@@ -151,9 +151,9 @@
       }
 
       &.Button_disabled {
-        --button-bg-color: var(--color-control-bg-secondary);
-        --button-color: var(--color-control-typo-disable);
-        --button-border: var(--color-control-typo-disable);
+        --button-bg-color-disable: var(--color-control-bg-secondary);
+        --button-color-disable: var(--color-control-typo-disable);
+        --button-border-disable: var(--color-control-typo-disable);
       }
     }
   }
@@ -164,6 +164,9 @@
       --button-color: transparent;
       --button-bg-color: var(--color-control-bg-disable);
       --button-border: transparent;
+      --button-color-disable: transparent;
+      --button-bg-color-disable: var(--color-control-bg-disable);
+      --button-border-disable: transparent;
       cursor: not-allowed;
       pointer-events: none;
     }
@@ -173,6 +176,12 @@
     &_full {
       width: 100%;
     }
+  }
+
+  &_disabled {
+    color: var(--button-color-disable);
+    background-color: var(--button-bg-color-disable);
+    border-color: var(--button-border-disable);
   }
 
   &_onlyIcon {
