@@ -3,11 +3,11 @@ import React from 'react';
 
 import { Spoiler } from '##/components/SpoilerCanary/Spoiler';
 
-export const SpoilerExampleType = () => {
+export const SpoilerExampleOpen = () => {
   return (
     <Example>
-      <Spoiler type="more" />
-      <Spoiler type="less" />
+      <Spoiler />
+      <Spoiler open />
     </Example>
   );
 };

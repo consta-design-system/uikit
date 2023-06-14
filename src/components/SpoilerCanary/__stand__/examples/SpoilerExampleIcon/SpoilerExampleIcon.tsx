@@ -1,20 +1,21 @@
 import { IconQuestion } from '@consta/icons/IconQuestion';
 import { IconRemove } from '@consta/icons/IconRemove';
 import { Example } from '@consta/stand';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Spoiler } from '##/components/SpoilerCanary/Spoiler';
+import { useFlag } from '##/hooks/useFlag';
 
 export const SpoilerExampleIcon = () => {
-  const [type, setType] = useState<'more' | 'less'>('more');
+  const [isOpen, setIsOpen] = useFlag();
 
   return (
     <Example>
       <Spoiler
-        type={type}
+        open={isOpen}
         lessIcon={IconRemove}
         moreIcon={IconQuestion}
-        onClick={() => setType(type === 'less' ? 'more' : 'less')}
+        onClick={setIsOpen.toggle}
       />
     </Example>
   );

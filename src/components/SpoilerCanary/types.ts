@@ -10,6 +10,5 @@ export type SpoilerProps = {
   lessIcon?: IconComponent;
   moreLabel?: string;
   moreIcon?: IconComponent;
-  type?: 'more' | 'less';
-  mode?: 'inner' | 'external';
+  open?: boolean;
 };

@@ -1,8 +1,6 @@
 import './Spoiler.css';
 
 import { AnimateIconSwitcher } from '@consta/icons/AnimateIconSwitcher';
-import { IconArrowDown } from '@consta/icons/IconArrowDown';
-import { IconArrowUp } from '@consta/icons/IconArrowUp';
 import React from 'react';
 
 import { IconPropSize } from '##/icons/Icon';
@@ -24,33 +22,35 @@ const spoilerIconSizeMap: Record<SpoilerPropSize, IconPropSize> = {
 export const Spoiler = forwardRefWithAs<SpoilerProps>((props, ref) => {
   const {
     size = defaultSpoilerPropSize,
-    lessIcon = IconArrowUp,
+    lessIcon,
     lessLabel = 'Показать меньше',
-    moreIcon = IconArrowDown,
+    moreIcon,
     moreLabel = 'Показать больше',
-    mode = 'external',
     className,
-    type = 'more',
+    open,
     as = 'div',
     ...otherProps
   } = props;
+
+  const underline = !(lessIcon || moreIcon);
 
   const Tag = as as string;
 
   return (
     <Tag
       ref={ref}
-      className={cnSpoiler({ underline: mode === 'inner', size }, [className])}
+      className={cnSpoiler({ underline, size }, [className])}
       {...otherProps}
     >
       <Text className={cnSpoiler('Label')} size={size} as="span">
-        {type === 'more' ? moreLabel : lessLabel}
+        {open ? lessLabel : moreLabel}
       </Text>
-      {mode === 'external' && (
+      {!underline && (
         <AnimateIconSwitcher
           startIcon={moreIcon}
           endIcon={lessIcon}
-          active={type === 'less'}
+          active={open}
+          endDirection={lessIcon ? undefined : 180}
           size={spoilerIconSizeMap[size]}
           className={cnSpoiler('Icon')}
         />

@@ -1,3 +1,4 @@
+import { IconArrowDown } from '@consta/icons/IconArrowDown';
 import { render, screen } from '@testing-library/react';
 import * as React from 'react';
 
@@ -37,55 +38,47 @@ describe('Компонент Spoiler', () => {
       });
     });
 
-    describe('проверка mode', () => {
-      it('проверка отсутствия иконки в mode="inner"', () => {
-        const { baseElement } = renderComponent({ mode: 'inner' });
-
-        const icon = getIcon(baseElement);
-
-        expect(icon).toBeNull();
-      });
-
-      it('проверка наличия подчеркивания в mode="inner"', () => {
-        renderComponent({ mode: 'inner' });
-
-        const spoiler = screen.getByTestId(testId);
-
-        expect(spoiler).toHaveClass(cnSpoiler({ underline: true }));
-      });
-
-      it('проверка наличия иконки в mode="external"', () => {
-        const { baseElement } = renderComponent({ mode: 'external' });
-
-        const icon = getIcon(baseElement);
-
-        expect(icon).toBeValid();
-      });
-
-      it('проверка отсутствия подчеркивания в mode="external"', () => {
-        renderComponent({ mode: 'external' });
-
-        const spoiler = screen.getByTestId(testId);
-
-        expect(spoiler).toHaveClass(cnSpoiler({ underline: false }));
-      });
-    });
-
-    describe('проверка type', () => {
-      it('проверка текста в type="more"', () => {
-        const { baseElement } = renderComponent({ type: 'more' });
+    describe('проверка open', () => {
+      it('проверка текста при open="false"', () => {
+        const { baseElement } = renderComponent({});
 
         const label = getSpan(baseElement);
 
         expect(label).toHaveTextContent('Показать больше');
       });
 
-      it('проверка текста в type="less"', () => {
-        const { baseElement } = renderComponent({ type: 'less' });
+      it('проверка текста при open="true"', () => {
+        const { baseElement } = renderComponent({ open: true });
 
         const label = getSpan(baseElement);
 
         expect(label).toHaveTextContent('Показать меньше');
+      });
+    });
+
+    describe('проверка иконок', () => {
+      it('проверка наличия подчеркивания при отсутствии иконки', () => {
+        renderComponent({});
+
+        const spoiler = screen.getByTestId(testId);
+
+        expect(spoiler).toHaveClass(cnSpoiler({ underline: true }));
+      });
+
+      it('проверка отсутствия подчеркивания при наличии иконки', () => {
+        renderComponent({ moreIcon: IconArrowDown });
+
+        const spoiler = screen.getByTestId(testId);
+
+        expect(spoiler).toHaveClass(cnSpoiler({ underline: false }));
+      });
+
+      it('проверка наличия иконки', () => {
+        const { baseElement } = renderComponent({ moreIcon: IconArrowDown });
+
+        const icon = getIcon(baseElement);
+
+        expect(icon).toBeValid();
       });
     });
 
@@ -103,7 +96,7 @@ describe('Компонент Spoiler', () => {
     });
 
     describe('должен отображать текст', () => {
-      it('должен отображать текст в type="more"', () => {
+      it('должен отображать текст при open="false"', () => {
         const labelText = 'Показать';
 
         const { baseElement } = renderComponent({ moreLabel: labelText });
@@ -113,12 +106,12 @@ describe('Компонент Spoiler', () => {
         expect(label).toHaveTextContent(labelText);
       });
 
-      it('должен отображать текст в type="less"', () => {
+      it('должен отображать текст при open="true"', () => {
         const labelText = 'Скрыть';
 
         const { baseElement } = renderComponent({
           lessLabel: labelText,
-          type: 'less',
+          open: true,
         });
 
         const label = getSpan(baseElement);
