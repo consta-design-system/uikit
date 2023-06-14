@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React, { RefObject, useLayoutEffect } from 'react';
 
 export const useResizeObserved = <
   ELEMENT extends HTMLElement | SVGGraphicsElement,
@@ -13,11 +13,11 @@ export const useResizeObserved = <
 
   // Храним маппер в рефке, чтобы если его передадут инлайн-функцией, это не вызвало бесконечные перерендеры
   const mapperRef = React.useRef(mapper);
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     mapperRef.current = mapper;
   }, [mapper]);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
       setDimensions(refs.map((ref) => mapperRef.current(ref.current)));
     });
