@@ -1,5 +1,4 @@
 .Popover.ContextMenuLevel-Desktop {
-  visibility: hidden;
   width: 240px;
 
   &:not(&_firstLevel)&:not(&_isMobile) {
@@ -16,10 +15,6 @@
     &.MixPopoverAnimate_animate_entering.Popover_direction_leftStartDown {
       transform: translateY(calc(var(--space-xs) + 1px));
     }
-  }
-
-  &_visible {
-    visibility: visible;
   }
 }
 

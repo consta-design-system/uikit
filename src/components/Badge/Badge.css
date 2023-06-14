@@ -12,6 +12,7 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   flex-wrap: nowrap;
+  gap: var(--space-2xs);
 
   &_size {
     &_xs {
@@ -155,7 +156,6 @@
   }
 
   &-Icon {
-    margin-right: var(--space-2xs);
     font-size: 0;
     line-height: 1em;
     flex-shrink: 0;

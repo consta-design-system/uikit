@@ -12,7 +12,6 @@ import {
   mapIconSize,
   mapVerticalSpase,
 } from '##/components/ListCanary';
-import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag/useFlag';
 import { useRefs } from '##/hooks/useRefs/useRefs';
 import { cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
@@ -92,9 +91,6 @@ const ContextMenuLevelRender = (
 
   const [hovered, setHovered] = useFlag(false);
 
-  const [visible, setVisible] = useFlag(false);
-  const setVisibleTrue = useDebounce(setVisible.on, 20);
-
   const getKey = (item: ContextMenuItemDefault) =>
     (getItemKey(item) || getItemLabel(item)).toString();
 
@@ -160,7 +156,7 @@ const ContextMenuLevelRender = (
       className={
         isMobile
           ? cnContextMenuLevel('Mobile', { animate }, [className])
-          : cnContextMenuLevel('Desktop', { firstLevel, visible }, [
+          : cnContextMenuLevel('Desktop', { firstLevel }, [
               cnListBox({ size, form, border: true, shadow: true }),
               cnMixSpace({
                 pV: mapVerticalSpase[size],
@@ -173,11 +169,7 @@ const ContextMenuLevelRender = (
       spareDirection={spareDirection}
       direction={direction}
       offset={offset}
-      onSetDirection={(item) => {
-        // скрываем блок пока не найдем точную позицию для оображения
-        setVisibleTrue();
-        onSetDirection?.(item);
-      }}
+      onSetDirection={onSetDirection}
       onMouseEnter={setHovered.on}
       onMouseLeave={setHovered.off}
       ref={ref}

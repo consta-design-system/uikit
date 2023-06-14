@@ -24,7 +24,7 @@ const getActiveLineSize = (
     return 0;
   }
 
-  return lineSizes.splice(0, active).reduce((a, b) => a + b);
+  return lineSizes.splice(0, active).reduce((a, b) => a + b, 0);
 };
 
 type PathItem = {

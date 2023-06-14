@@ -1,4 +1,4 @@
-import { useSelect, useText } from '@consta/stand';
+import { useNumber, useSelect, useText } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
 import { Button } from '##/components/Button/Button';
@@ -25,6 +25,7 @@ const Variants = () => {
   const status = useSelect('status', tooltipPropStatus);
 
   const children = useText('children', 'Текст тултипа');
+  const offset = useNumber('offset', 0);
 
   const handleClickOnAnchor = () => {
     setIsTooltipVisible(!isTooltipVisible);
@@ -45,6 +46,7 @@ const Variants = () => {
           direction={direction}
           spareDirection={spareDirection}
           status={status}
+          offset={offset}
         >
           {children}
         </Tooltip>

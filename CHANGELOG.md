@@ -1,5 +1,51 @@
 # Changelog
 
+## v4.19.0 (02/06/2023)
+Самое важное: 
+- В `Popover` решили проблему резких скачков при появлении элемента.
+- В `Tooltip` добавили свойство `offset`.
+
+---
+
+- [docs(standConfig): add figmaUrl (#3074)](https://github.com/consta-design-system/uikit/commit/94459d029f5b4dec19a7d8d4766be3e55e0bf774) - [@gizeasy](https://github.com/gizeasy)
+- [fix(ProgressStepBar): reduce of empty array with no initial value (#3094)](https://github.com/consta-design-system/uikit/commit/271f9bf816534df38ea16311a54a8c3c82673176) - [@vladimir-skikh](https://github.com/vladimir-skikh)
+- [docs(Card): fix as description (#3096)](https://github.com/consta-design-system/uikit/commit/0ec2e152bedf84d7ccfcd1fb1a8a240db7751df3) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Slider): fix tooltip position](https://github.com/consta-design-system/uikit/commit/1a12e8919018383cb35fd6785b5a7e7ec24075bf) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Tooltip): add offset prop](https://github.com/consta-design-system/uikit/commit/103c6efae29b0139052536e08b491b75eb4b5969) - [@gizeasy](https://github.com/gizeasy)
+- [refactor(DragNDropField): removed isRenderProp](https://github.com/consta-design-system/uikit/commit/9605b5dff8d0766e3342a9c27002bb8985d8d773) - [@gizeasy](https://github.com/gizeasy)
+- [refactor(ContextMenu): removed animation fix](https://github.com/consta-design-system/uikit/commit/63b8b29af23fbabbfa0e8f944f2764680064fdc2) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Popover): fixed twitching during positioning](https://github.com/consta-design-system/uikit/commit/d0611087d89d1082154d4613ad1877161b1f8eb1) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v4.18.0 (31/05/2023)
+Самое важное:
+- Исправили расхождения с дизайном в компонентах `List`, `Checkbox`, `Informer`, `RadioGroup`, `CheckboxGroup`, `File`, `Breadcrumbs`, `ProgressStepBar`, `User`.
+- В `Badge` добавили возможность ставить иконку справа.
+- В `RadioGroup` и `CheckboxGroup` добавили возможность указывать ключ.
+
+---
+
+- [fix(List): fix discrepancies between desigh and code for list divider (#3087)](https://github.com/consta-design-system/uikit/commit/1ecf9f2fed368069227711261e55b9be364eb651) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Checkbox): fix arrow position (#3088)](https://github.com/consta-design-system/uikit/commit/77a29f962191775ac1624a8186c5b51cac231765) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Badge): added the ability to specify the icon on the right and left side (#3077)](https://github.com/consta-design-system/uikit/commit/f4f038d33b5b70f74f19d26b3c2a072403377097) - [@N1MBER](https://github.com/N1MBER)
+- [docs(ProgressStepBar): add content to variants example (#3084)](https://github.com/consta-design-system/uikit/commit/93008e86d6dbf90d0ea0efd0e34f7b3530664da8) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ProgressStepBar): reduce of empty array with no initial value (#3082)](https://github.com/consta-design-system/uikit/commit/219b14208d8d1564f13929e8a994e41c3435f62f) - [@vladimir-skikh](https://github.com/vladimir-skikh)
+- [fix(Informer): fix discrepancies between design and code (#3053)](https://github.com/consta-design-system/uikit/commit/ad97a676c1b80b0304e17dbe64fd1e133958fd04) - [@N1MBER](https://github.com/N1MBER)
+- [fix(SnackBar): fix variants (#3054)](https://github.com/consta-design-system/uikit/commit/3761ff2ba56beeb0f96e78a9aa62aa9a42e29729) - [@N1MBER](https://github.com/N1MBER)
+- [feat(RadioGroup): fix styles and add keys props (#3056)](https://github.com/consta-design-system/uikit/commit/2c49effdafd893b3b4587d70186995cdd3afc18d) - [@N1MBER](https://github.com/N1MBER)
+- [fix(File): fix spin size (#3057)](https://github.com/consta-design-system/uikit/commit/353fae631c09fb62a31f834edc48ba74289eddf3) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Breadcrumbs): fix discrepancies between design and code (#3058)](https://github.com/consta-design-system/uikit/commit/d998131fb8598925357bc53105b08310063d63cd) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ProgressStepBar): fix discrepancies between design and code and also fix bugs (#3061)](https://github.com/consta-design-system/uikit/commit/874cb6e5e1f748db8cecb3c022c891ef07bd02e2) - [@N1MBER](https://github.com/N1MBER)
+- [fix(User): fix discrepancies between design and code (#3060)](https://github.com/consta-design-system/uikit/commit/d641d3ef9e2103179afc2405b9e488b2f3a82a9d) - [@N1MBER](https://github.com/N1MBER)
+- [fix(DragNDropField): fix tooltip content wrap (#3076)](https://github.com/consta-design-system/uikit/commit/3a361eca621f1c8444eeb520462da9a9d994968b) - [@N1MBER](https://github.com/N1MBER)
+- [fix(SelectDropown): fix labelForEmptyItems (#3078)](https://github.com/consta-design-system/uikit/commit/3fa869e1ff5971613427948611c4dcce387678c3) - [@N1MBER](https://github.com/N1MBER)
+- [fix(DateTime): fig bug with useless props (#3079)](https://github.com/consta-design-system/uikit/commit/d3e3c05a03741ea5a4cbf0b5fcfff18c0697d0b6) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Tabs): fix styles break (#3083)](https://github.com/consta-design-system/uikit/commit/36cbc53f75a9900579cd600c9f69837064ce1c76) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Combobox): selectAll conditional by multiple in variants](https://github.com/consta-design-system/uikit/commit/d9064e3399a1d057b165ecb38de33b9292767828) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.17.2 (22/05/2023)
 Запускать локальный сервер разработки и сборку пакетов теперь можно и на ОС Windows. 
 
@@ -363,59 +409,3 @@
 - [docs(File): add block for extensions with icon (#2702)](https://github.com/consta-design-system/uikit/commit/380d1920a940ae542342fdd672a85e4a12ea5206) - [@N1MBER](https://github.com/N1MBER)
 - [docs: version, links, readme (#2692)](https://github.com/consta-design-system/uikit/commit/d8bc024f3c67900f7e5c04d0763649ecd43e1341) - [@arhayka](https://github.com/arhayka)
 - [chore(deps): update @consta/stand version (#2680)](https://github.com/consta-design-system/uikit/commit/0c112b270496d4979cf6cb93d2040c2f4b59857d) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.1.0 (04/10/2022)
-Самое важное:
-- В таблице появилась возможность отображать строки сразу раскрытыми
-- Обновили стенд
-
----
-
-- [chore(deps): remove mdx-loader (#2669)](https://github.com/consta-design-system/uikit/commit/1ce33557ca03590383452c24b2d44d22b319f7dc) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deps): update @consta/stand (#2668)](https://github.com/consta-design-system/uikit/commit/c75ffa7d63665b307de197df57cb937cf5759590) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Table): add new props to table props and table row for expands rows (#2667)](https://github.com/consta-design-system/uikit/commit/7b9635d76729c13d30a098a506088aefe4a0a8ce) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.0.1 (28/09/2022)
-Очень большое и важное обновление: поднимаем версию, выкладываем новый стенд.
-Сами компоненты не меняются, зато:
-
-- все Canary версии становятся стабильными,
-- все стабильные, которые были на их месте, превращаются в Deprecated,
-- все устаревшие версии удаляются из библиотеки.
-
-А ещё шрифт Inter становится основным, если вы его специально подключали, нужно удалить.
-Если используете какие-то из этих компонентов, поменяйте импорты при обновлении библиотеки:
-
-Canary —> Stable
-BreadcrumbsCanary —> Breadcrumbs
-CheckboxGroupCanary -> CheckboxGroup
-ChoiceGroupCanary -> ChoiceGroup
-ContextMenuCanary -> ContextMenu
-RadioGroupCanary -> RadioGroup
-StepsCanary -> Steps
-SwitchGroupCanary —> SwitchGroup
-TabsCanary —> Tabs
-
-Stable —> Deprecated
-
-Breadcrumbs —> BreadcrumbsDeprecated
-
-Сalendar -> СalendarDepricated
-CheckboxGroup -> CheckboxGroupDeprecated
-ChoiceGroup -> ChoiceGroupDeprecated
-ContextMenu -> ContextMenuDeprecated
-RadioGroup -> RadioGroupDeprecated
-Steps -> StepsDeprecated
-SwitchGroup —> SwitchGroupDeprecated 
-Tabs —> TabsDeprecated
-
-Удалены:
-
-BasicSelectDeprecated
-ComboboxDeprecated
-MultiCombobobxDeprecated
-UserSelectDeprecated
