@@ -1,13 +1,8 @@
 .ListItem {
-  --list-item-color: var(--color-typo-primary);
   position: relative;
   background: var(--color-control-bg-clear);
   text-decoration: none;
   transition: color 0.3s;
-
-  &.Text {
-    color: var(--list-item-color);
-  }
 
   &_interactive {
     cursor: pointer;
@@ -30,16 +25,16 @@
     transition: opacity 0.2s;
   }
 
-  &_checked {
-    --list-item-color: var(--color-control-typo-secondary);
+  &_checked.Text {
+    color: var(--color-control-typo-secondary);
 
     &::before {
       opacity: 1;
     }
   }
 
-  &_disabled {
-    --list-item-color: var(--color-control-typo-disable);
+  &_disabled.Text {
+    color: var(--color-control-typo-disable);
     cursor: auto;
   }
 }
