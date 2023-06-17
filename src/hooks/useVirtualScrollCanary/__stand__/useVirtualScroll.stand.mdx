@@ -49,7 +49,7 @@ const UseVirtualScrollExampleVirtual = () => {
 ```tsx
 const SIZE = 500;
 
-export const UseVirtualScrollExampleInfinity = () => {
+const UseVirtualScrollExampleInfinity = () => {
   const [length, setLength] = useState<number>(SIZE);
 
   const items = useMemo(
@@ -57,10 +57,7 @@ export const UseVirtualScrollExampleInfinity = () => {
     [length],
   );
 
-  const { listRefs, scrollElementRef, slice, spaceTop } = useVirtualScroll<
-    HTMLDivElement,
-    HTMLDivElement
-  >({
+  const { listRefs, scrollElementRef, slice, spaceTop } = useVirtualScroll({
     length: items.length,
     isActive: true,
     onScrollToBottom: () => {
@@ -69,25 +66,23 @@ export const UseVirtualScrollExampleInfinity = () => {
   });
 
   return (
-    <Example col={1}>
-      <ListBox
-        ref={scrollElementRef}
-        border
-        className={cnUseVirtualScrollExample()}
-      >
-        <div style={{ marginTop: spaceTop }}>
-          {items.slice(...slice).map((item, index) => {
-            return (
-              <ListItem
-                key={`${index}${spaceTop}`}
-                ref={listRefs[slice[0] + index]}
-                label={`Element ${item}`}
-              />
-            );
-          })}
-        </div>
-      </ListBox>
-    </Example>
+    <ListBox
+      ref={scrollElementRef}
+      border
+      className={cnUseVirtualScrollExample()}
+    >
+      <div style={{ marginTop: spaceTop }}>
+        {items.slice(...slice).map((item, index) => {
+          return (
+            <ListItem
+              key={`${index}${slice[0]}${slice[1]}`}
+              ref={listRefs[slice[0] + index]}
+              label={`Element ${item}`}
+            />
+          );
+        })}
+      </div>
+    </ListBox>
   );
 };
 ```

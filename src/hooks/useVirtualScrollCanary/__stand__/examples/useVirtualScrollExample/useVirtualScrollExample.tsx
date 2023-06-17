@@ -50,10 +50,7 @@ export const UseVirtualScrollExampleInfinity = () => {
     [length],
   );
 
-  const { listRefs, scrollElementRef, slice, spaceTop } = useVirtualScroll<
-    HTMLDivElement,
-    HTMLDivElement
-  >({
+  const { listRefs, scrollElementRef, slice, spaceTop } = useVirtualScroll({
     length: items.length,
     isActive: true,
     onScrollToBottom: () => {
