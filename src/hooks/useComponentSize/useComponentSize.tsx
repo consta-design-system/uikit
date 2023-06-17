@@ -1,26 +1,9 @@
 import { useMemo } from 'react';
 
-import { useResizeObserved } from '../useResizeObserved/useResizeObserved';
+import { useResizeObserved } from '##/hooks/useResizeObserved';
 
-export type ComponentSize = {
-  width: number;
-  height: number;
-};
-
-export const getElementSize = (
-  el: HTMLElement | SVGGraphicsElement | null,
-): ComponentSize => {
-  if (!el) {
-    return { width: 0, height: 0 };
-  }
-
-  const { width, height } = el.getBoundingClientRect();
-
-  return {
-    width: Math.floor(width),
-    height: Math.floor(height),
-  };
-};
+import { getElementSize } from './getElementSize';
+import { ComponentSize } from './types';
 
 export function useComponentSize(
   ref: React.RefObject<HTMLElement | SVGGraphicsElement>,
@@ -30,6 +13,5 @@ export function useComponentSize(
     // Если реф начал указывать на другой элемент, нужно обновить подписки
     [ref.current],
   );
-  const [componentSize] = useResizeObserved(refs, getElementSize);
-  return componentSize;
+  return useResizeObserved(refs, getElementSize)[0];
 }
