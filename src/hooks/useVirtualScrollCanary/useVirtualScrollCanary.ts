@@ -71,8 +71,8 @@ export const useVirtualScroll = <
   }, [...visiblePosition, sizes, length, isActive]);
 
   useEffect(() => {
-    if (isActive && bounds[1][1] + 1 >= length) {
-      onScrollToBottomRef.current?.(length);
+    if (onScrollToBottomRef.current && isActive && bounds[1][1] + 1 >= length) {
+      onScrollToBottomRef.current(length);
     }
   }, [bounds[1][1], length, isActive]);
 
