@@ -80,8 +80,8 @@ export const useVirtualScroll = <
     listRefs,
     scrollElementRef,
     slice: [
-      bounds[1][0] === 0 ? bounds[1][0] : bounds[1][0] + 1,
-      bounds[1][1] === 0 ? bounds[1][1] : bounds[1][1] + 1,
+      bounds[1][0] === 0 ? 0 : bounds[1][0] + 1,
+      bounds[1][1] === 0 ? 0 : bounds[1][1] + 1,
     ],
     spaceTop: bounds[0][0],
   };
