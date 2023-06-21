@@ -255,9 +255,9 @@ type StepsItemDefault = {
 | [`value`](#активный-шаг)                | `Item`                  | -            | Номер шага                                                                           |
 | [`items`](#шаги)                        | `Item[]`                | -            | Массив с шагами                                                                      |
 | [`getItemLabel`](#шаги)                 | `StepsPropGetLabel`     | -            | Получает название для шага. Также используется в качестве уникального ключа элемента |
-| [`getItemDisabled?`](#недоступные-шаги) | `StepsPropGetDisabled`  | -            | Получает флаг недоступен ли шаг                                                      |
-| [`getItemCompleted?`](#пройденные-шаги) | `StepsPropGetSkipped`   | -            | Получает флаг завершен ли шаг                                                        |
-| [`getItemSkipped?`](#пропущенные-шаги)  | `StepsPropGetCompleted` | -            | Получает флаг пропущен ли шаг                                                        |
+| [`getItemDisabled?`](#недоступные-шаги) | `StepsPropGetDisabled`  | -            | Определяет флаг недоступен ли шаг                                                    |
+| [`getItemCompleted?`](#пройденные-шаги) | `StepsPropGetSkipped`   | -            | Определяет флаг завершен ли шаг                                                      |
+| [`getItemSkipped?`](#пропущенные-шаги)  | `StepsPropGetCompleted` | -            | Определяет флаг пропущен ли шаг                                                      |
 | `onChange`                              | `StepsPropOnChange`     | -            | Меняет шаги                                                                          |
 | [`size?`](#размер)                      | `'m', 's', 'l'`         | `'m'`        | Размер элементов компонента                                                          |
 | `className?`                            | `string`                | -            | Дополнительные CSS-классы для компонента                                             |

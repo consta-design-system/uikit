@@ -65,7 +65,7 @@ describe('Компонент Steps', () => {
     });
 
     describe('проверка getLabel', () => {
-      it('лэйбл совпадает', () => {
+      it('лейбл совпадает', () => {
         renderComponent({});
         expect(getItems()[0].querySelector('span')?.textContent).toEqual(
           `${items[0].label}`,
