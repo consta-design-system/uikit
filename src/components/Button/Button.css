@@ -1,5 +1,6 @@
 .Button {
-  --button-bg-color: transparent;
+  --button-loader-color: var(--button-color);
+  --button-cursor: pointer;
   position: relative;
   display: inline-block;
   overflow: hidden;
@@ -18,7 +19,7 @@
   white-space: nowrap;
   text-decoration: none;
   text-overflow: ellipsis;
-  cursor: pointer;
+  cursor: var(--button-cursor);
   transition:
     background-color 0.15s ease,
     border-color 0.15s ease,
@@ -28,8 +29,9 @@
   flex-shrink: 0;
   -webkit-appearance: none;
 
-  &:hover {
+  &:not(.Button_loading):not(.Button_disabled):hover {
     color: var(--button-color-hover);
+    background: var(--button-bg-color-hover);
   }
 
   &_form {
@@ -91,84 +93,50 @@
   &_view {
     &_clear {
       --button-bg-color: var(--color-control-bg-clear);
+      --button-bg-color-hover: var(--color-control-bg-clear-hover);
       --button-color: var(--color-control-typo-clear);
       --button-color-hover: var(--color-control-typo-clear-hover);
       --button-border: transparent;
-
-      &:hover {
-        --button-bg-color: var(--color-control-bg-clear-hover);
-      }
-
-      &.Button_disabled {
-        --button-bg-color-disable: var(--color-control-bg-border-disable);
-        --button-color-disable: var(--color-control-typo-disable);
-      }
+      --button-bg-color-disable: var(--color-control-bg-border-disable);
+      --button-color-disable: var(--color-control-typo-disable);
     }
 
     &_ghost {
       --button-bg-color: var(--color-control-bg-ghost);
+      --button-bg-color-hover: var(--color-control-bg-ghost-hover);
       --button-color: var(--color-control-typo-ghost);
       --button-color-hover: var(--color-control-typo-ghost-hover);
       --button-border: transparent;
-
-      &:hover {
-        --button-bg-color: var(--color-control-bg-ghost-hover);
-      }
-
-      &.Button_disabled {
-        --button-bg-color-disable: var(--color-control-bg-disable);
-        --button-color-disable: var(--color-control-typo-disable);
-      }
+      --button-bg-color-disable: var(--color-control-bg-disable);
+      --button-color-disable: var(--color-control-typo-disable);
     }
 
     &_primary {
       --button-bg-color: var(--color-control-bg-primary);
+      --button-bg-color-hover: var(--color-control-bg-primary-hover);
       --button-color: var(--color-control-typo-primary);
       --button-color-hover: var(--color-control-typo-primary-hover);
       --button-border: transparent;
-
-      &:hover {
-        --button-bg-color: var(--color-control-bg-primary-hover);
-      }
-
-      &.Button_disabled {
-        --button-bg-color-disable: var(--color-control-bg-disable);
-        --button-color-disable: var(--color-control-typo-disable);
-      }
+      --button-bg-color-disable: var(--color-control-bg-disable);
+      --button-color-disable: var(--color-control-typo-disable);
     }
 
     &_secondary {
       --button-bg-color: var(--color-control-bg-secondary);
+      --button-bg-color-hover: var(--color-control-bg-clear);
       --button-color: var(--color-control-typo-secondary);
-      --button-border: var(--color-control-bg-border-secondary);
       --button-color-hover: var(--color-control-typo-secondary-hover);
+      --button-border: var(--color-control-bg-border-secondary);
+      --button-border-hover: var(--color-control-bg-border-secondary-hover);
+      --button-bg-color-disable: var(--color-control-bg-secondary);
+      --button-color-disable: var(--color-control-typo-disable);
+      --button-border-disable: var(--color-control-typo-disable);
       border: var(--control-border-width) solid var(--button-border);
       line-height: calc(var(--button-height) - var(--control-border-width) * 2);
 
-      &:hover {
-        --button-bg-color: var(--color-control-bg-secondary-hover);
-        --button-border: var(--color-control-bg-border-secondary-hover);
+      &:not(.Button_loading):not(.Button_disabled):hover {
+        border-color: var(--button-border-hover);
       }
-
-      &.Button_disabled {
-        --button-bg-color-disable: var(--color-control-bg-secondary);
-        --button-color-disable: var(--color-control-typo-disable);
-        --button-border-disable: var(--color-control-typo-disable);
-      }
-    }
-  }
-
-  &_loading {
-    &,
-    &.Button_disabled {
-      --button-color: transparent;
-      --button-bg-color: var(--color-control-bg-disable);
-      --button-border: transparent;
-      --button-color-disable: transparent;
-      --button-bg-color-disable: var(--color-control-bg-disable);
-      --button-border-disable: transparent;
-      cursor: not-allowed;
-      pointer-events: none;
     }
   }
 
@@ -179,6 +147,8 @@
   }
 
   &_disabled {
+    --button-loader-color: var(--button-color-disable);
+    --button-cursor: not-allowed;
     color: var(--button-color-disable);
     background-color: var(--button-bg-color-disable);
     border-color: var(--button-border-disable);
@@ -221,8 +191,18 @@
     flex-shrink: 1;
   }
 
-  &_loading &-Loader {
-    --loaderBackgroundColor: var(--color-control-typo-disable);
-    position: absolute;
+  &_loading {
+    --button-cursor: wait;
+    color: transparent;
+
+    &.Button_disabled {
+      --button-cursor: not-allowed;
+      color: transparent;
+    }
+
+    & .Button-Loader {
+      --loaderBackgroundColor: var(--button-loader-color);
+      position: absolute;
+    }
   }
 }
