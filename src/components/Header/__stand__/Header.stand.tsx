@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description: 'Шапка. Блок с меню, поиском и аватаркой.',
   version: '0.1.0',
-  status: 'stable',
+  status: 'deprecated',
   sandbox: 'header-n86qkh',
   alias: ['шапка', 'навигация', 'меню', 'логотип'],
   figma:
