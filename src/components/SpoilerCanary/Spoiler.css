@@ -1,0 +1,21 @@
+.canary--Spoiler {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-control-typo-secondary);
+  cursor: pointer;
+  transition: color 0.3s;
+  gap: var(--space-xs);
+
+  &:hover {
+    color: var(--color-control-typo-secondary-hover);
+  }
+
+  &_underline {
+    text-decoration: underline;
+  }
+
+  &-Label.Text {
+    color: currentColor;
+  }
+}

@@ -1,0 +1,11 @@
+.SpoilerVariants {
+  &-Text {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s;
+
+    &_open {
+      max-height: 200px;
+    }
+  }
+}
