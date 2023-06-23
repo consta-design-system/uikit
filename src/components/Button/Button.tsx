@@ -168,7 +168,6 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
       tabIndex={tabIndex}
       title={title}
       ref={useForkRef([ref, buttonRef])}
-      {...(Tag === 'button' ? { disabled: disabled || loading } : {})}
     >
       {IconOnly && <IconOnly className={cnButton('Icon')} size={iconSize} />}
       {!IconOnly &&
