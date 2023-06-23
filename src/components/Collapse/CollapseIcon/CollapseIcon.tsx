@@ -1,13 +1,15 @@
 import './CollapseIcon.css';
 
-import { AnimateIconSwitcher } from '@consta/icons/AnimateIconSwitcher';
-import React from 'react';
+import { cnIcon } from '@consta/icons/Icon';
+import React, { useRef } from 'react';
+import { Transition } from 'react-transition-group';
 
 import { cn } from '##/utils/bem';
 
-import { CollapseIconPropDirection, CollapseIconProps } from '../types';
+import { CollapseIconProps } from '../types';
 
 const cnCollapseIcon = cn('CollapseIcon');
+const animateTimeout = 300;
 
 const CollapseIconButton = ({
   children,
@@ -30,17 +32,6 @@ const GuardFragment = (props: { children?: React.ReactNode }) => (
   <>{props.children}</>
 );
 
-const directionsMap: Record<CollapseIconPropDirection, number> = {
-  up: 0,
-  right: 90,
-  down: 180,
-  left: 270,
-  upRight: 45,
-  downRight: 135,
-  downLeft: 225,
-  upLeft: 315,
-};
-
 export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
   const {
     size,
@@ -54,29 +45,69 @@ export const CollapseIcon: React.FC<CollapseIconProps> = (props) => {
     ...otherProps
   } = props;
 
+  const iconRef = useRef<HTMLSpanElement>(null);
+  const closeIconRef = useRef<HTMLSpanElement>(null);
+
   const Wrapper = view === 'ghost' ? CollapseIconButton : GuardFragment;
   const wrapperClassName = view === 'ghost' ? className : undefined;
   const renderIconClassName = view === 'clear' ? className : undefined;
 
+  const renderIcon = () => {
+    if (CloseIcon) {
+      return (
+        <span
+          className={cnCollapseIcon('Wrapper', [
+            cnIcon({ size }),
+            renderIconClassName,
+          ])}
+        >
+          <Transition
+            in={!isOpen}
+            unmountOnExit
+            timeout={animateTimeout}
+            nodeRef={iconRef}
+          >
+            {(animate) => (
+              <Icon
+                {...otherProps}
+                className={cnCollapseIcon({ animate, view })}
+                size={size}
+                ref={iconRef}
+              />
+            )}
+          </Transition>
+          <Transition
+            in={isOpen}
+            unmountOnExit
+            timeout={animateTimeout}
+            nodeRef={closeIconRef}
+          >
+            {(animate) => (
+              <CloseIcon
+                {...otherProps}
+                className={cnCollapseIcon({ animate, view })}
+                size={size}
+                ref={closeIconRef}
+              />
+            )}
+          </Transition>
+        </span>
+      );
+    }
+    return (
+      <Icon
+        {...otherProps}
+        className={cnCollapseIcon({ isOpen, direction, closeDirection, view }, [
+          renderIconClassName,
+        ])}
+        size={size}
+      />
+    );
+  };
+
   return (
     <Wrapper size={size} className={wrapperClassName}>
-      <AnimateIconSwitcher
-        startIcon={Icon}
-        endIcon={CloseIcon}
-        transition={300}
-        size={size}
-        active={isOpen}
-        className={cnCollapseIcon({ view }, [renderIconClassName])}
-        startDirection={
-          !CloseIcon && direction ? directionsMap[direction] : undefined
-        }
-        endDirection={
-          !CloseIcon && closeDirection
-            ? directionsMap[closeDirection]
-            : undefined
-        }
-        {...otherProps}
-      />
+      {renderIcon()}
     </Wrapper>
   );
 };

@@ -14,7 +14,7 @@ module.exports = {
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
   transformIgnorePatterns: [
     // Транспайлим библиотеки на es-модулях в commonjs-модули
-    `<rootDir>/node_modules/(?!(@consta)/).+\\.(js|jsx|ts|tsx)`,
+    `<rootDir>/node_modules/(?!(@consta/icons)/).+\\.(js|jsx|ts|tsx)`,
   ],
   collectCoverageFrom: ['**/*.{ts,tsx}', '!**/*.stories.tsx'],
   testEnvironment: 'jsdom',
