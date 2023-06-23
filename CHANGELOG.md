@@ -1,5 +1,21 @@
 # Changelog
 
+## v4.20.0 (23/06/2023)
+Самое важное:
+- в `Button` изменили визуальный стиль модификаторов `_disabled` и `_loading`
+- добавили useVirtualScroll, для создания списков с виртуальным скроллом
+
+---
+
+- [feat(AutoComplete): improvement searchFunction (#3118)](https://github.com/consta-design-system/uikit/commit/92322a78329edb42f0734dafda7fd98a3571fc77) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Button): update disabled styles (#3104)](https://github.com/consta-design-system/uikit/commit/eb2f6ebac0fc01db3621c65d91e56867372bd60e) - [@N1MBER](https://github.com/N1MBER)
+- [chore(deps-dev): bump semver from 7.3.7 to 7.5.2 (#3116)](https://github.com/consta-design-system/uikit/commit/5a4308a84cc917c130d0f31b75c8ad1ded072595) - [@dependabot](https://github.com/dependabot[bot])
+- [feat(useVirtualScroll): add hook (#3108)](https://github.com/consta-design-system/uikit/commit/b5165123aa7bcf213dba5570ec12d01242623905) - [@gizeasy](https://github.com/gizeasy)
+- [fix(List): fixed _status (#3109)](https://github.com/consta-design-system/uikit/commit/6ee3cd309745391c00183b394f07bdbaa5935a13) - [@gizeasy](https://github.com/gizeasy)
+- [chore(deps): update](https://github.com/consta-design-system/uikit/commit/7e1f33cf081dda14a4b1aa54c72ff4cdad266982) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.19.0 (02/06/2023)
 Самое важное: 
 - В `Popover` решили проблему резких скачков при появлении элемента.
@@ -389,23 +405,3 @@
 
 ## v4.2.1 (26/10/2022)
 - [fix(selects): select, Combobox, UserSelect fixed dropdown](https://github.com/consta-design-system/uikit/commit/5fb149684e1e12d71088ce85164dba1eaeb7d248) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.2.0 (19/10/2022)
-Самое важное:
-- Добавили новый компонент — AutoComplete
-- Исправили баг с репозицией ContextMenu
-- Написали статью о том, как выбрать таблицу для проекта
-
----
-
-- [docs(TableComparison): write how to choose table (#2710)](https://github.com/consta-design-system/uikit/commit/92507e66684bb46cb50ac6f3a6304400dd7ec2c6) - [@arhayka](https://github.com/arhayka)
-- [feat(AutoComplete): add new Component (#2693)](https://github.com/consta-design-system/uikit/commit/6783a321481649eb60ac0aab81f00521c897d085) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Variants): add missing variants for components (#2676)](https://github.com/consta-design-system/uikit/commit/9c77708c93a033c9a5f163ecfbcd996300990b51) - [@N1MBER](https://github.com/N1MBER)
-- [fix(ContextMenu): fixed reposition (#2706)](https://github.com/consta-design-system/uikit/commit/dc2331e67575816fece73d63db00f8d0f64b54a4) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Layout): fix border on layout examples (#2705)](https://github.com/consta-design-system/uikit/commit/0483b4018030a3cdfddbec2023b6a1385faba5f1) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Select): fix height of item with empty row (#2704)](https://github.com/consta-design-system/uikit/commit/0b6534a94b7e0ad1c0e60bb8f8c233b4bf39e145) - [@N1MBER](https://github.com/N1MBER)
-- [docs(File): add block for extensions with icon (#2702)](https://github.com/consta-design-system/uikit/commit/380d1920a940ae542342fdd672a85e4a12ea5206) - [@N1MBER](https://github.com/N1MBER)
-- [docs: version, links, readme (#2692)](https://github.com/consta-design-system/uikit/commit/d8bc024f3c67900f7e5c04d0763649ecd43e1341) - [@arhayka](https://github.com/arhayka)
-- [chore(deps): update @consta/stand version (#2680)](https://github.com/consta-design-system/uikit/commit/0c112b270496d4979cf6cb93d2040c2f4b59857d) - [@gizeasy](https://github.com/gizeasy)
