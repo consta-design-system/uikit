@@ -74,23 +74,26 @@ export function useAutoComplete<ITEM, GROUP>(
   const [isOpen, setIsOpen] = useFlag();
   const [highlightedIndex, setHighlightedIndex] = useState<number>(0);
 
-  const searchFunctionDefault = (item: ITEM, searchValue: string) =>
-    getItemLabel(item)
-      .toLocaleLowerCase()
-      .indexOf(searchValue.toLocaleLowerCase()) !== -1;
-
-  const filteredOptions = useMemo(() => {
-    if (searchValue && searchValue.trim() !== '') {
-      const fiteredOptions = items.filter((item) =>
-        searchFunction
-          ? searchFunction(item, searchValue)
-          : searchFunctionDefault(item, searchValue),
-      );
-
-      return fiteredOptions;
+  const searchFunctionDefault = (item: ITEM, searchValue: string) => {
+    if (!searchValue) {
+      return false;
     }
-    return items;
-  }, [items, searchValue]);
+    return (
+      getItemLabel(item)
+        .toLocaleLowerCase()
+        .indexOf(searchValue.toLocaleLowerCase()) !== -1
+    );
+  };
+
+  const filteredOptions = useMemo(
+    () =>
+      items.filter((item) =>
+        searchFunction
+          ? searchFunction(item, searchValue || '')
+          : searchFunctionDefault(item, searchValue || ''),
+      ),
+    [searchValue],
+  );
 
   const visibleItems = useMemo(() => {
     const resultGroups = getGroups(
@@ -244,7 +247,7 @@ export function useAutoComplete<ITEM, GROUP>(
   };
 
   return {
-    isOpen: !!(isOpen && hasItems && searchValue && searchValue?.trim() !== ''),
+    isOpen: Boolean(isOpen && hasItems),
     visibleItems,
     getOptionProps,
     handleInputFocus,
