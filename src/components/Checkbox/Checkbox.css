@@ -136,7 +136,6 @@
     &::before {
       content: '';
       position: absolute;
-      z-index: 1;
       top: calc(calc(var(--checkbox-size) - 1px) / 2);
       left: calc(calc(var(--checkbox-size) - 6px) / 5);
       box-sizing: border-box;
