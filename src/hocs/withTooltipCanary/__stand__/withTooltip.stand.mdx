@@ -1,0 +1,225 @@
+import { MdxMenu } from '@consta/stand';
+import { WithTooltipExampleProps } from './examples/WithTooltipExampleProps/WithTooltipExampleProps';
+import { WithTooltipExampleText } from './examples/WithTooltipExampleText/WithTooltipExampleText';
+import { WithTooltipExampleMode } from './examples/WithTooltipExampleMode/WithTooltipExampleMode';
+import { WithTooltipExampleSize } from './examples/WithTooltipExampleSize/WithTooltipExampleSize';
+import { WithTooltipExampleProvider } from './examples/WithTooltipExampleProvider/WithTooltipExampleProvider';
+
+```tsx
+import { withTooltip } from '@consta/uikit/withTooltipCanaryCanary';
+```
+
+<MdxMenu>
+
+- [Что это](#что-это-такое)
+- [Пример использования](#пример-использования)
+- [Провайдер](#провайдер)
+- [Как задать свойства](#как-задать-свойства)
+- [Режим работы](#режим-работы)
+- [Свойства тултипа](#свойства-тултипа)
+  - [Содержимое](#содержимое)
+  - [Ширина](#ширина)
+  - [Другие свойства](#другие-свойства)
+- [Импорт](#импорт)
+- [Список свойств](#список-свойств)
+
+</MdxMenu>
+
+## Что это такое
+
+C помощью `withTooltip` можно добавить `Tooltip` к любому компоненту,
+который умеет обрабатывать события из списка ниже:
+
+```ts
+onClick?: (() => void) | React.EventHandler<React.MouseEvent>;
+onMouseEnter?: (() => void) | React.MouseEventHandler;
+onMouseLeave?: (() => void) | React.MouseEventHandler;
+```
+
+## Пример использования
+
+Напирмер, `withTooltip` можно добавить к обычному тексту (заданному в компоненте `Text`).
+
+```tsx
+import { withTooltip } from '@consta/uikit/withTooltipCanary';
+import { Text } from '@consta/uikit/Text';
+
+const TextWithTooltip = withTooltip(Text, { content: 'Тултип' });
+
+export const WithTooltipExampleText = () => {
+  return (
+    <TextWithTooltip
+      size="l"
+      as="a"
+      href="#"
+      view="brand"
+      decoration="underline"
+    >
+      На мне появится тултип
+    </TextWithTooltip>
+  );
+};
+```
+
+<WithTooltipExampleText />
+
+### Провайдер
+
+Для того чтобы в рантайме переопределить свойства тултипа используйте провайдер `TooltipPropsProvider`. Он принимает все те же параметры что и HOC.
+
+```tsx
+import {
+  withTooltip,
+  TooltipPropsProvider,
+} from '@consta/uikit/withTooltipCanary';
+import { Button } from '@consta/uikit/Button';
+
+const ButtonWithTooltip = withTooltip(Button);
+
+export const WithTooltipExampleProvider = () => {
+  return (
+    <TooltipPropsProvider content="Какой-то текст" size="s">
+      <ButtonWithTooltip label="Наведите на меня мышку" />
+    </TooltipPropsProvider>
+  );
+};
+```
+
+<WithTooltipExampleProvider />
+
+### Как задать свойства
+
+Свойства тултипа можно задать двумя способами:
+
+- в самом HOC,
+- в провайдере, поставляемом вместе с HOC.
+
+Свойства, заданные в компоненте, будут главнее.
+
+```tsx
+import {
+  withTooltip,
+  TooltipPropsProvider,
+} from '@consta/uikit/withTooltipCanary';
+import { Button } from '@consta/uikit/Button';
+
+const ButtonWithTooltip = withTooltip(Button, { content: 'Тултип сверху' });
+
+export const WithTooltipExampleProps = () => {
+  return (
+    <>
+      <ButtonWithTooltip label="Кнопка без свойств" />
+      <TooltipPropsProvider content="Тултип снизу" direction="downCenter">
+        <ButtonWithTooltip label="Свойство описано в кнопке" />
+      </TooltipPropsProvider>
+    </>
+  );
+};
+```
+
+<WithTooltipExampleProps />
+
+### Режим работы
+
+Свойство `mode` отвечает за режим работы. Варианты:
+
+- `mouseover` — тултип появляется по наведению на компонент, к которому добавлен (работает по умолчанию),
+
+- `click` — тултип появляется по клику.
+
+```tsx
+import { withTooltip } from '@consta/uikit/withTooltipCanary';
+import { Button } from '@consta/uikit/Button';
+
+const ButtonWithTooltipModeMouseover = withTooltip(Button, {
+  content: 'Тултип по наведению',
+  mode: 'mouseover',
+});
+
+const ButtonWithTooltipModeClick = withTooltip(Button, {
+  content: 'Тултип по клику',
+  mode: 'click',
+});
+
+export const WithTooltipExampleProps = () => {
+  return (
+    <>
+      <ButtonWithTooltipModeMouseover label="Наведите на меня мышку" />
+      <ButtonWithTooltipModeClick label="Нажмите меня" />
+    </>
+  );
+};
+```
+
+<WithTooltipExampleMode />
+
+## Свойства тултипа
+
+### Содержимое
+
+Содержимое тултипа задаётся в свойстве `content`.
+
+### Ширина
+
+Свойство `size` определяет ширину тултипа. Варианты: `'s'`, `'m'`, `'l'`, по умолчанию `'m'`.
+
+```tsx
+const ButtonWithTooltipS = withTooltip(Button, {
+  content:
+    'Это тултип, размер S. А это очень длинный текст, который нужен, чтобы показать, какой ширины получится тултип',
+  size: 's',
+});
+
+const ButtonWithTooltipM = withTooltip(Button, {
+  content:
+    'Тултип, размер M. А это очень длинный текст, который нужен, чтобы показать, какой ширины получится тултип',
+  size: 'm',
+});
+
+const ButtonWithTooltipL = withTooltip(Button, {
+  content:
+    'Тултип, размер L. А это очень длинный текст, который нужен, чтобы показать, какой ширины получится тултип',
+  size: 'l',
+});
+
+export const WithTooltipExampleSize = () => {
+  return (
+    <>
+      <ButtonWithTooltipS label="S" />
+      <ButtonWithTooltipM label="M" />
+      <ButtonWithTooltipL label="L" />
+    </>
+  );
+};
+```
+
+<WithTooltipExampleSize />
+
+### Другие свойства
+
+Остальные свойства тултипа — например, направление разворачивания, задаются так же, как у компонента [Popover](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable).
+
+## Импорт
+
+```tsx
+import {
+  withTooltip,
+  TooltipPropsProvider,
+} from '@consta/uikit/withTooltipCanary';
+```
+
+## Свойства
+
+| Свойство                 | Тип или варианты значения | По умолчанию      | Описание                                                                                                              |
+| ------------------------ | ------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [`size`](#ширина)        | `'s', 'm', 'l'`           | '`m`'             | Максимальная ширина тултипа                                                                                           |
+| [`content`](#содержимое) | `React.ReactNode`         | —                 | Контент тултипа                                                                                                       |
+| [`mode`](#режим-работы)  | `'mouseover', 'click`     | `'mouseover'`     | Режим работы                                                                                                          |
+| `closeOnClickOutside`    | `boolean`                 | `true`            | Скрывает тултип по клику за пределами компонента и тултипа. Работает только при `mode = click`                        |
+| `appearTimeout`          | `number`                  | `400`             | Сколько миллисекунд нужно держать курсор на компоненте, чтобы появился тултип. Работает только при `mode = mouseover` |
+| `exitTimeout`            | `number`                  | `200`             | Сколько миллисекунд нужно держать курсор на компоненте, чтобы тултип исчез. Работает только при `mode = mouseover`    |
+| `direction?`             | `Direction`               | `'upCenter'`      | см. [Popover](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable)                                             |
+| `possibleDirections?`    | `Direction[]`             | `Direction`       | см. [Popover](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable)                                             |
+| `spareDirection?`        | `Direction`               | `'downStartLeft'` | см. [Popover](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable)                                             |
+| `isInteractive?`         | `boolean`                 | `true`            | см. [Popover](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable)                                             |
+| `equalAnchorWidth?`      | `boolean`                 | `fasle`           | см. [Popover](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable)                                             |
