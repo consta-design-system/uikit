@@ -184,7 +184,6 @@
     }
 
     &_view_default.Select-SelectContainer_focused .Select-Control {
-      z-index: 1;
       border-color: var(--color-control-bg-border-focus);
       outline: none;
     }
