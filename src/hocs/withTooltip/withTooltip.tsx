@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+
+import { useFlag } from '##/hooks/useFlag';
 
 import {
   Tooltip,
@@ -55,9 +57,7 @@ function clearTooltips(currentRef: ClearTooltipRef, removeCurrent?: boolean) {
         if (ref.current.timer) {
           clearTimeout(ref.current.timer);
         }
-        if (ref.current.closeFunction) {
-          ref.current.closeFunction();
-        }
+        ref.current.closeFunction?.();
       }
     }
     closeFunctions.splice(0);
@@ -66,16 +66,16 @@ function clearTooltips(currentRef: ClearTooltipRef, removeCurrent?: boolean) {
 }
 
 export function withTooltip(hocProps?: TooltipProps) {
-  return function <
-    COMPONENT_TYPE extends
-      | React.ComponentType<React.PropsWithRef<ComponentProps>>
-      | ((props: ComponentProps) => React.ReactElement | null),
-    COMPONENT_PROPS extends ComponentProps,
-  >(Component: COMPONENT_TYPE) {
+  return function <COMPONENT_TYPE, COMPONENT_PROPS extends ComponentProps>(
+    Component: COMPONENT_TYPE,
+  ) {
     return React.forwardRef<HTMLElement, WithTooltipProps<COMPONENT_PROPS>>(
       (props, ref) => {
         const {
           tooltipProps: tooltipPropsFromComponent = {},
+          onClick: onClickProp,
+          onMouseEnter: onMouseEnterProp,
+          onMouseLeave: onMouseLeaveProp,
           ...componentProps
         } = props;
         const tooltipProps: TooltipProps = {
@@ -88,13 +88,12 @@ export function withTooltip(hocProps?: TooltipProps) {
           closeOnClickOutside = true,
           appearTimeout = appearTimeoutDefault,
           exitTimeout = exitTimeoutDefault,
-          style,
           ...otherTooltipProps
         } = tooltipProps;
 
-        const [visible, setVisible] = useState<boolean>(false);
-        const componentRef = useRef<HTMLElement | null>(null);
-        const tooltipRef = useRef<HTMLDivElement | null>(null);
+        const [visible, setVisible] = useFlag();
+        const componentRef = useRef<HTMLElement>(null);
+        const tooltipRef = useRef<HTMLDivElement>(null);
         const clearRef = useRef<ClearTooltip>({});
 
         const clearTimer = () => {
@@ -105,19 +104,13 @@ export function withTooltip(hocProps?: TooltipProps) {
 
         const setExitTimer = () => {
           if (mode === 'mouseover' && visible) {
-            clearRef.current.timer = setTimeout(
-              () => setVisible(false),
-              exitTimeout,
-            );
+            clearRef.current.timer = setTimeout(setVisible.off, exitTimeout);
           }
         };
 
         const setAppearTimer = () => {
           if (mode === 'mouseover' && !visible) {
-            clearRef.current.timer = setTimeout(
-              () => setVisible(true),
-              appearTimeout,
-            );
+            clearRef.current.timer = setTimeout(setVisible.on, appearTimeout);
           }
         };
 
@@ -128,23 +121,21 @@ export function withTooltip(hocProps?: TooltipProps) {
 
         useEffect(() => {
           if (visible) {
-            clearRef.current.closeFunction = () => setVisible(false);
+            clearRef.current.closeFunction = setVisible.off;
             clearTooltips(clearRef);
           }
         }, [visible]);
 
         const onClick = (e: React.MouseEvent) => {
           if (mode === 'click') {
-            setVisible(!visible);
+            setVisible.toggle();
           }
-          if (props.onClick) {
-            props?.onClick(e);
-          }
+          onClickProp?.(e);
         };
 
         const onClickOutside = () => {
           if (mode === 'click' && closeOnClickOutside) {
-            setVisible(false);
+            setVisible.off();
           }
         };
 
@@ -153,36 +144,28 @@ export function withTooltip(hocProps?: TooltipProps) {
             clearTimer();
             setAppearTimer();
           }
-
-          if (props.onMouseEnter) {
-            props.onMouseEnter(e);
-          }
+          onMouseEnterProp?.(e);
         };
 
         const onMouseLeave = (e: React.MouseEvent) => {
           clearTimer();
           setExitTimer();
-          if (props.onMouseLeave) {
-            props.onMouseLeave(e);
-          }
+          onMouseLeaveProp?.(e);
         };
 
         const tooltipOnMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
           clearTimer();
-          if (otherTooltipProps.onMouseEnter) {
-            otherTooltipProps.onMouseEnter(e);
-          }
+          otherTooltipProps.onMouseEnter?.(e);
         };
 
         const tooltipOnMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
           clearTimer();
           setExitTimer();
-          if (otherTooltipProps.onMouseLeave) {
-            otherTooltipProps.onMouseLeave(e);
-          }
+          otherTooltipProps.onMouseLeave?.(e);
         };
 
-        const Anchor = Component as React.ComponentType<COMPONENT_PROPS>;
+        const Anchor =
+          Component as unknown as React.ComponentType<COMPONENT_PROPS>;
 
         return (
           <>
@@ -192,7 +175,6 @@ export function withTooltip(hocProps?: TooltipProps) {
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
               ref={useForkRef([componentRef, ref])}
-              style={style}
             />
             {visible && (
               <Tooltip
@@ -202,11 +184,6 @@ export function withTooltip(hocProps?: TooltipProps) {
                 onClickOutside={onClickOutside}
                 onMouseEnter={tooltipOnMouseEnter}
                 onMouseLeave={tooltipOnMouseLeave}
-                style={
-                  typeof style?.zIndex === 'number'
-                    ? { zIndex: style.zIndex + 1 }
-                    : undefined
-                }
               >
                 {content}
               </Tooltip>

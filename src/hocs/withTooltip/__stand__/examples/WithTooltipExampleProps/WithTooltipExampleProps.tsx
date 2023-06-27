@@ -1,7 +1,8 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Button } from '../../../../../components/Button/Button';
+import { Button } from '##/components/Button/Button';
+
 import { withTooltip } from '../../../withTooltip';
 
 const ButtonWithTooltip = withTooltip({ content: 'Тултип сверху' })(Button);
