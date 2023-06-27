@@ -13,7 +13,7 @@ export const WithTooltipExampleProps = () => {
     <Example>
       <ButtonWithTooltip label="Кнопка без свойств" />
       <TooltipPropsProvider content="Тултип снизу" direction="downCenter">
-        <ButtonWithTooltip label="Свойство описано в кнопке" />
+        <ButtonWithTooltip label="Свойство описано в провайдере" />
       </TooltipPropsProvider>
     </Example>
   );

@@ -11,7 +11,7 @@ import { withTooltip } from '@consta/uikit/withTooltipCanaryCanary';
 
 <MdxMenu>
 
-- [Что это](#что-это-такое)
+- [Что такое тултип](#что-это-такое)
 - [Пример использования](#пример-использования)
 - [Провайдер](#провайдер)
 - [Как задать свойства](#как-задать-свойства)
@@ -38,7 +38,7 @@ onMouseLeave?: (() => void) | React.MouseEventHandler;
 
 ## Пример использования
 
-Напирмер, `withTooltip` можно добавить к обычному тексту (заданному в компоненте `Text`).
+Например, `withTooltip` можно добавить к обычному тексту (заданному в компоненте `Text`).
 
 ```tsx
 import { withTooltip } from '@consta/uikit/withTooltipCanary';
@@ -55,7 +55,7 @@ export const WithTooltipExampleText = () => {
       view="brand"
       decoration="underline"
     >
-      На мне появится тултип
+      Здесь появится тултип
     </TextWithTooltip>
   );
 };
@@ -110,7 +110,7 @@ export const WithTooltipExampleProps = () => {
     <>
       <ButtonWithTooltip label="Кнопка без свойств" />
       <TooltipPropsProvider content="Тултип снизу" direction="downCenter">
-        <ButtonWithTooltip label="Свойство описано в кнопке" />
+        <ButtonWithTooltip label="Свойство описано в провайдере" />
       </TooltipPropsProvider>
     </>
   );

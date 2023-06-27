@@ -10,7 +10,7 @@ export const WithTooltipExampleText = () => {
   return (
     <Example>
       <TextWithTooltip size="l" as="a" view="brand" decoration="underline">
-        На мне появится тултип
+        Здесь появится тултип
       </TextWithTooltip>
     </Example>
   );
