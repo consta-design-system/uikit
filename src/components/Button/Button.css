@@ -20,7 +20,6 @@
   text-decoration: none;
   text-overflow: ellipsis;
   cursor: var(--button-cursor);
-  pointer-events: all;
   transition:
     background-color 0.15s ease,
     border-color 0.15s ease,
