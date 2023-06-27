@@ -65,7 +65,6 @@ export const withTooltip = <COMPONENT_TYPE,>(
       closeOnClickOutside = true,
       appearTimeout = appearTimeoutDefault,
       exitTimeout = exitTimeoutDefault,
-      style,
       ...otherTooltipProps
     } = { ...(hocProps ?? {}), ...contextProps };
 
@@ -153,12 +152,11 @@ export const withTooltip = <COMPONENT_TYPE,>(
     return (
       <>
         <Anchor
-          {...(otherProps as WithTooltipComponentProps)}
+          {...otherProps} // Разворачиваются свойства компонента
           onClick={onClick}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           ref={useForkRef([componentRef, ref])}
-          style={style}
         />
         {visible && (
           <Tooltip
@@ -168,11 +166,6 @@ export const withTooltip = <COMPONENT_TYPE,>(
             onClickOutside={onClickOutside}
             onMouseEnter={tooltipOnMouseEnter}
             onMouseLeave={tooltipOnMouseLeave}
-            style={
-              typeof style?.zIndex === 'number'
-                ? { zIndex: style.zIndex + 1 }
-                : undefined
-            }
           >
             {content}
           </Tooltip>

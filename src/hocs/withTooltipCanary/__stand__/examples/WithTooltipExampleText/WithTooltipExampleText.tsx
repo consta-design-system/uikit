@@ -1,7 +1,8 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Text } from '../../../../../components/Text/Text';
+import { Text } from '##/components/Text/Text';
+
 import { withTooltip } from '../../../withTooltip';
 
 const TextWithTooltip = withTooltip(Text, { content: 'Тултип' });

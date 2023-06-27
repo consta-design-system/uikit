@@ -1,7 +1,8 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Button } from '../../../../../components/Button/Button';
+import { Button } from '##/components/Button/Button';
+
 import { TooltipPropsProvider } from '../../../context';
 import { withTooltip } from '../../../withTooltip';
 

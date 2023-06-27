@@ -1,9 +1,9 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
+import { Button } from '##/components/Button/Button';
 import { TooltipPropsProvider } from '##/hocs/withTooltipCanary/context';
 
-import { Button } from '../../../../../components/Button/Button';
 import { withTooltip } from '../../../withTooltip';
 
 const ButtonWithTooltip = withTooltip(Button, { content: 'Тултип сверху' });
