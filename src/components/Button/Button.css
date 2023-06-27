@@ -174,16 +174,6 @@
     align-items: center;
   }
 
-  &_disabled,
-  &_loading {
-    &.MixFocus:not(.MixFocus_before) {
-      &:focus,
-      &:focus:hover {
-        box-shadow: none;
-      }
-    }
-  }
-
   &-Icon {
     display: block;
     flex-shrink: 0;

@@ -163,7 +163,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
           withIcon,
           onlyIcon: !!IconOnly,
         },
-        [cnMixFocus(), className],
+        [!(disabled || loading) ? cnMixFocus() : undefined, className],
       )}
       tabIndex={tabIndex}
       title={title}
