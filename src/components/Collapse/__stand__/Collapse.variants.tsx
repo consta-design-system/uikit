@@ -42,16 +42,16 @@ const Variants = () => {
   const maxHeight = useNumber('maxHeight');
   const hoverEffect = useBoolean('hoverEffect', false);
   const view = useSelect('view', collapsePropView, collapsePropViewDefault);
+  const horizontalSpace = useSelect(
+    'horizontalSpace',
+    collapsePropHorizontalSpace,
+  );
   const iconView = useSelect(
     'iconView',
     collapsePropIconView,
     collapsePropIconViewDefault,
   );
   const divider = useBoolean('divider', false);
-  const horizontalSpace = useSelect(
-    'horizontalSpace',
-    collapsePropHorizontalSpace,
-  );
   const rightSide = useBoolean('rightSide', false);
   const directionIcon = useSelect(
     'directionIcon',

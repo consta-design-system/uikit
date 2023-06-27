@@ -84,9 +84,7 @@
       }
 
       &_round {
-        --collapse-label-padding:
-          var(--vertical-space)
-          calc(var(--horizontal-space) + var(--space-2xs));
+        --collapse-label-padding: var(--vertical-space) var(--horizontal-space);
         --collapse-label-radius: var(--space-3xl);
       }
     }
