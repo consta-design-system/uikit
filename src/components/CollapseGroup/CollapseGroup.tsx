@@ -5,6 +5,7 @@ import {
   Collapse,
   collapsePropCloseDirectionIconDefault,
   collapsePropDirectionIconDefault,
+  collapsePropFormDefault,
   collapsePropIconPositionDefault,
   collapsePropSizeDefault,
   collapsePropViewDefault,
@@ -23,6 +24,7 @@ const CollapseGroupRender: CollapseGroupRenderFunction = (props, ref) => {
     getItemContent,
     size = collapsePropSizeDefault,
     view = collapsePropViewDefault,
+    form = collapsePropFormDefault,
     hoverEffect,
     divider,
     icon = IconArrowDown,
@@ -48,6 +50,7 @@ const CollapseGroupRender: CollapseGroupRenderFunction = (props, ref) => {
             key={index}
             size={size}
             view={view}
+            form={form}
             horizontalSpace={horizontalSpace}
             icon={icon}
             hoverEffect={hoverEffect}
