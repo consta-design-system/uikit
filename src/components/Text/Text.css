@@ -216,6 +216,22 @@
     &_warning {
       color: var(--color-typo-warning);
     }
+
+    &_system {
+      color: var(--color-typo-system);
+    }
+
+    &_normal {
+      color: var(--color-typo-normal);
+    }
+
+    &_caution {
+      color: var(--color-typo-caution);
+    }
+
+    &_critical {
+      color: var(--color-typo-critical);
+    }
   }
 
   &_weight {
