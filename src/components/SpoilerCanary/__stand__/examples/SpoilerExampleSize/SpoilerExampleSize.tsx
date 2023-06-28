@@ -3,19 +3,19 @@ import React from 'react';
 
 import { Spoiler } from '##/components/SpoilerCanary/Spoiler';
 import { SpoilerPropSize } from '##/components/SpoilerCanary/types';
-import { useFlag } from '##/hooks/useFlag';
 
 const items: SpoilerPropSize[] = ['l', 'm', 's', 'xs'];
 
 export const SpoilerExampleSize = () => {
-  const [isOpen, setIsOpen] = useFlag();
-
   return (
     <Example
       col={{ 1: 0, 2: 400 }}
       items={items}
       getItemNode={(size) => (
-        <Spoiler open={isOpen} onClick={setIsOpen.toggle} size={size} />
+        <Spoiler
+          fullText="Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верхушке которого еле держалось готовое вот-вот окончательно сползти одеяло. Его многочисленные, убого тонкие по сравнению с остальным телом ножки беспомощно копошились у него перед глазами. «Что со мной случилось?» – подумал он."
+          size={size}
+        />
       )}
       getItemDescription={(size) => `size = ${size}`}
     />

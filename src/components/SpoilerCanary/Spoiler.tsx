@@ -1,60 +1,78 @@
 import './Spoiler.css';
 
-import { AnimateIconSwitcher } from '@consta/icons/AnimateIconSwitcher';
-import React from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
-import { IconPropSize } from '##/icons/Icon';
+import { useFlag } from '##/hooks/useFlag';
+import { cnMixSpace, Space } from '##/mixs/MixSpace';
 import { cnCanary } from '##/utils/bem';
-import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
 import { Text } from '../Text';
+import { SpoilerButton } from './SpoilerButton';
 import { defaultSpoilerPropSize, SpoilerProps, SpoilerPropSize } from './types';
 
 export const cnSpoiler = cnCanary('Spoiler');
 
-const spoilerIconSizeMap: Record<SpoilerPropSize, IconPropSize> = {
-  l: 'm',
-  m: 's',
-  s: 's',
+const spoilerOffsetMap: Record<SpoilerPropSize, Space> = {
   xs: 'xs',
+  s: 's',
+  m: 'm',
+  l: 'm',
 };
 
-export const Spoiler = forwardRefWithAs<SpoilerProps>((props, ref) => {
-  const {
-    size = defaultSpoilerPropSize,
-    lessIcon,
-    lessLabel = 'Показать меньше',
-    moreIcon,
-    moreLabel = 'Показать больше',
-    className,
-    open,
-    as = 'div',
-    ...otherProps
-  } = props;
+export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
+  (props, ref) => {
+    const {
+      mode = 'blur',
+      preview,
+      maxHeight = 96,
+      fullText,
+      size = defaultSpoilerPropSize,
+      lessIcon,
+      lessLabel,
+      moreIcon,
+      moreLabel,
+      className,
+      ...otherProps
+    } = props;
 
-  const underline = !(lessIcon || moreIcon);
+    const [isOpen, setIsOpen] = useFlag();
 
-  const Tag = as as string;
+    const content = useMemo(() => {
+      if (mode === 'blur' || isOpen) {
+        return fullText;
+      }
+      return (
+        <>
+          {preview}
+          ...
+        </>
+      );
+    }, [mode, isOpen, preview, fullText]);
 
-  return (
-    <Tag
-      ref={ref}
-      className={cnSpoiler({ underline, size }, [className])}
-      {...otherProps}
-    >
-      <Text className={cnSpoiler('Label')} size={size} as="span">
-        {open ? lessLabel : moreLabel}
-      </Text>
-      {!underline && (
-        <AnimateIconSwitcher
-          startIcon={moreIcon}
-          endIcon={lessIcon}
-          active={open}
-          endDirection={lessIcon ? undefined : 180}
-          size={spoilerIconSizeMap[size]}
-          className={cnSpoiler('Icon')}
+    return (
+      <div ref={ref} className={cnSpoiler(null, [className])} {...otherProps}>
+        <Text
+          className={cnSpoiler('Wrapper', { mode, open: isOpen })}
+          size={size}
+          style={{
+            ['--spoiler-content-height' as string]: `${maxHeight}px`,
+          }}
+        >
+          {content}
+        </Text>
+        <SpoilerButton
+          className={cnSpoiler('Button', [
+            cnMixSpace({ mT: spoilerOffsetMap[size] }),
+          ])}
+          lessIcon={lessIcon}
+          lessLabel={lessLabel}
+          moreIcon={moreIcon}
+          moreLabel={moreLabel}
+          onClick={setIsOpen.toggle}
+          open={isOpen}
+          size={size}
         />
-      )}
-    </Tag>
-  );
-});
+      </div>
+    );
+  },
+);

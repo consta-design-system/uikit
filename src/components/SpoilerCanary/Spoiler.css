@@ -1,21 +1,35 @@
 .canary--Spoiler {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-control-typo-secondary);
-  cursor: pointer;
-  transition: color 0.3s;
-  gap: var(--space-xs);
+  width: 100%;
 
-  &:hover {
-    color: var(--color-control-typo-secondary-hover);
-  }
+  &-Wrapper {
+    --spoiler-content-max-heigt: max-content;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-height: var(--spoiler-content-max-heigt);
 
-  &_underline {
-    text-decoration: underline;
-  }
+    &_mode {
+      &_blur {
+        &:not(.canary--Spoiler-Wrapper_open) {
+          --spoiler-content-max-heigt: var(--spoiler-content-height);
 
-  &-Label.Text {
-    color: currentColor;
+          &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            height: min(100%, var(--space-6xl));
+            background:
+              linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0) 0%,
+                var(--color-bg-default) 100%
+              );
+            pointer-events: none;
+          }
+        }
+      }
+    }
   }
 }
