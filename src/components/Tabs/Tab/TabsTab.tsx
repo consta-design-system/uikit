@@ -2,15 +2,10 @@ import './TabsTab.css';
 
 import React, { forwardRef } from 'react';
 
-import {
-  ListItem,
-  mapIconSize,
-  mapItemVerticalPadding,
-} from '##/components/ListCanary';
+import { ListItem, mapItemVerticalPadding } from '##/components/ListCanary';
 import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixFocus } from '##/mixs/MixFocus';
 import { cn } from '##/utils/bem';
-import { getByMap } from '##/utils/getByMap';
 
 import { TabsTabComponent, TabsTabProps } from '../types';
 
@@ -42,28 +37,6 @@ const TabsTabRender = (
 
   const currentRef = useForkRef([ref, tabRef]);
 
-  if (onlyIcon) {
-    const Icon = leftIcon || rightIcon || icon;
-
-    return (
-      <Tag
-        className={cnTabsTab({ size, checked, onlyIcon, renderInDropdown }, [
-          cnMixFocus({ before: true }),
-          className,
-        ])}
-        role="tab"
-        type="button"
-        onClick={checked ? undefined : onChange}
-        title={label}
-        tabIndex={disabled ? -1 : undefined}
-        ref={currentRef}
-        {...otherProps}
-      >
-        {Icon && <Icon size={getByMap(mapIconSize, size, iconSize)} />}
-      </Tag>
-    );
-  }
-
   return (
     <ListItem
       as={Tag}
@@ -76,12 +49,12 @@ const TabsTabRender = (
       tabIndex={disabled ? -1 : undefined}
       ref={currentRef}
       title={onlyIcon ? label.toString() : undefined}
-      label={label}
+      label={onlyIcon ? undefined : label.toString()}
       onClick={checked ? undefined : onChange}
-      leftIcon={leftIcon || icon}
-      leftSide={leftSide}
-      rightIcon={rightIcon}
-      rightSide={rightSide}
+      leftIcon={onlyIcon ? leftIcon || icon || rightIcon : leftIcon || icon}
+      leftSide={onlyIcon ? undefined : leftSide}
+      rightIcon={onlyIcon ? undefined : rightIcon}
+      rightSide={onlyIcon ? undefined : rightSide}
       iconSize={iconSize}
       disabled={disabled}
       size={size}
