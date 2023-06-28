@@ -50,7 +50,11 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
     }, [mode, isOpen, preview, fullText]);
 
     return (
-      <div ref={ref} className={cnSpoiler(null, [className])} {...otherProps}>
+      <div
+        ref={ref}
+        className={cnSpoiler({ size }, [className])}
+        {...otherProps}
+      >
         <Text
           className={cnSpoiler('Wrapper', { mode, open: isOpen })}
           size={size}

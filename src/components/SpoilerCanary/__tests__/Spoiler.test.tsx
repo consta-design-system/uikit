@@ -1,9 +1,12 @@
-import { IconArrowDown } from '@consta/icons/IconArrowDown';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
+
+import { cnCanary } from '##/utils/bem';
 
 import { cnSpoiler, Spoiler } from '../Spoiler';
 import { spolierPropSize } from '../types';
+
+const cnSpoilerButton = cnCanary('SpoilerButton');
 
 type SpoilerProps = React.ComponentProps<typeof Spoiler>;
 
@@ -12,12 +15,12 @@ const testId = 'spoiler';
 const renderComponent = (props: SpoilerProps = {}) =>
   render(<Spoiler data-testid={testId} {...props} />);
 
-const getIcon = (base: Element) => {
-  return base.querySelector(`.${cnSpoiler('Icon')}`) as Element;
+const getButton = (base: Element) => {
+  return base.querySelector(`.${cnSpoilerButton()}`) as Element;
 };
 
 const getSpan = (base: Element) => {
-  return base.querySelector(`.${cnSpoiler('Label')}`) as Element;
+  return base.querySelector(`.${cnSpoilerButton('Label')}`) as Element;
 };
 
 describe('Компонент Spoiler', () => {
@@ -48,50 +51,15 @@ describe('Компонент Spoiler', () => {
       });
 
       it('проверка текста при open="true"', () => {
-        const { baseElement } = renderComponent({ open: true });
+        const { baseElement } = renderComponent({});
 
-        const label = getSpan(baseElement);
+        const button = getButton(baseElement);
+
+        fireEvent.click(button);
+
+        const label = getSpan(button);
 
         expect(label).toHaveTextContent('Показать меньше');
-      });
-    });
-
-    describe('проверка иконок', () => {
-      it('проверка наличия подчеркивания при отсутствии иконки', () => {
-        renderComponent({});
-
-        const spoiler = screen.getByTestId(testId);
-
-        expect(spoiler).toHaveClass(cnSpoiler({ underline: true }));
-      });
-
-      it('проверка отсутствия подчеркивания при наличии иконки', () => {
-        renderComponent({ moreIcon: IconArrowDown });
-
-        const spoiler = screen.getByTestId(testId);
-
-        expect(spoiler).toHaveClass(cnSpoiler({ underline: false }));
-      });
-
-      it('проверка наличия иконки', () => {
-        const { baseElement } = renderComponent({ moreIcon: IconArrowDown });
-
-        const icon = getIcon(baseElement);
-
-        expect(icon).toBeValid();
-      });
-    });
-
-    describe('проверка тега', () => {
-      const tags = ['a', 'div', 'span'] as const;
-      tags.forEach((el) => {
-        it(`должен рендериться как <${el}>`, () => {
-          renderComponent({ as: el });
-
-          const spoiler = screen.getByTestId(testId);
-
-          expect(spoiler.tagName).toEqual(el.toUpperCase());
-        });
       });
     });
 
@@ -101,7 +69,9 @@ describe('Компонент Spoiler', () => {
 
         const { baseElement } = renderComponent({ moreLabel: labelText });
 
-        const label = getSpan(baseElement);
+        const button = getButton(baseElement);
+
+        const label = getSpan(button);
 
         expect(label).toHaveTextContent(labelText);
       });
@@ -111,8 +81,11 @@ describe('Компонент Spoiler', () => {
 
         const { baseElement } = renderComponent({
           lessLabel: labelText,
-          open: true,
         });
+
+        const button = getButton(baseElement);
+
+        fireEvent.click(button);
 
         const label = getSpan(baseElement);
 
