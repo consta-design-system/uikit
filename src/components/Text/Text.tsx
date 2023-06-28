@@ -48,15 +48,18 @@ export type TextPropType = typeof textPropType[number];
 
 export const textPropView = [
   'primary',
-  'alert',
+  'secondary',
   'brand',
   'ghost',
   'link',
   'linkMinor',
-  'primary',
-  'secondary',
+  'system',
+  'normal',
   'success',
   'warning',
+  'alert',
+  'caution',
+  'critical',
 ] as const;
 export type TextPropView = typeof textPropView[number];
 export const textPropViewDefault: TextPropView = textPropView[0];
