@@ -92,7 +92,7 @@ export function useAutoComplete<ITEM, GROUP>(
           ? searchFunction(item, searchValue || '')
           : searchFunctionDefault(item, searchValue || ''),
       ),
-    [searchValue],
+    [searchValue, items],
   );
 
   const visibleItems = useMemo(() => {
