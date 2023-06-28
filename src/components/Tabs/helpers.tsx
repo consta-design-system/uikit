@@ -8,9 +8,12 @@ import {
   TabsFitModeWrapperProps,
   TabsItemDefault,
   TabsPropFitMode,
+  TabsPropGetItemAs,
+  TabsPropGetItemAttributes,
   TabsPropGetItemDisabled,
   TabsPropGetItemIcon,
   TabsPropGetItemLabel,
+  TabsPropGetItemRef,
   TabsPropGetItemSide,
   TabsPropLinePosition,
   TabsProps,
@@ -54,6 +57,12 @@ const defaultGetItemRightSide: TabsPropGetItemSide<TabsItemDefault> = (item) =>
 const defaultGetItemDisable: TabsPropGetItemDisabled<TabsItemDefault> = (
   item,
 ) => item.disabled;
+const defaultGetItemAs: TabsPropGetItemAs<TabsItemDefault> = (item) => item.as;
+const defaultGetItemAttributes: TabsPropGetItemAttributes<TabsItemDefault> = (
+  item,
+) => item.attributes;
+const defaultGetItemRef: TabsPropGetItemRef<TabsItemDefault> = (item) =>
+  item.ref;
 
 export const withDefaultGetters = (props: TabsProps) => {
   return {
@@ -65,6 +74,9 @@ export const withDefaultGetters = (props: TabsProps) => {
     getItemLeftSide: props.getItemLeftSide || defaultGetItemLeftSide,
     getItemRightSide: props.getItemRightSide || defaultGetItemRightSide,
     getItemDisabled: props.getItemDisabled || defaultGetItemDisable,
+    getItemAs: props.getItemAs || defaultGetItemAs,
+    getItemAttributes: props.getItemAttributes || defaultGetItemAttributes,
+    getItemRef: props.getItemRef || defaultGetItemRef,
   };
 };
 
