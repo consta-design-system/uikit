@@ -13,7 +13,7 @@ import {
   withDefaultGetters,
 } from './helpers';
 import { TabsBorderLine, TabsRunningLine } from './Line/TabsLine';
-import { cnTabsTab, TabsTab } from './Tab/TabsTab';
+import { TabsTab } from './Tab/TabsTab';
 import {
   RenderItemProps,
   RenderItemsListProp,
@@ -170,7 +170,5 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
 };
 
 export const Tabs = forwardRef(TabsRender) as TabsComponent;
-
-export { TabsTab, cnTabsTab };
 
 export * from './types';

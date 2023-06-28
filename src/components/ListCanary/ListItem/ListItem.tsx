@@ -74,13 +74,13 @@ const ListItemRender = (
       view={status}
     >
       {renderSlot(leftSide, 'left', size, leftIcon, iconSize)}
-      {!rightIcon && !rightSide && !leftSide && !leftIcon ? (
-        label
-      ) : (
-        <span className={cnListItemGrid('Slot', { position: 'center' })}>
-          {label}
-        </span>
-      )}
+      {!rightIcon && !rightSide && !leftSide && !leftIcon
+        ? label
+        : label && (
+            <span className={cnListItemGrid('Slot', { position: 'center' })}>
+              {label}
+            </span>
+          )}
       {renderSlot(rightSide, 'right', size, rightIcon, iconSize)}
     </Text>
   );

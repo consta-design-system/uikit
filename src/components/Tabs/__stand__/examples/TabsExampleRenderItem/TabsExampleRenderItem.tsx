@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cnTabsTab, Tabs } from '../../../Tabs';
+import { cnTabsTab, Tabs } from '##/components/Tabs';
 
 type Item = string;
 
