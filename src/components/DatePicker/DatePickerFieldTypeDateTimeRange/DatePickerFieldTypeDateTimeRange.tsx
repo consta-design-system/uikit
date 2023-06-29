@@ -34,6 +34,7 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
     required,
     tabIndex,
     ariaLabel,
+    id,
     iconSize,
     format,
     separator,
@@ -96,9 +97,11 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
       {label && (
         <FieldLabel
           icon={labelIcon}
+          as="label"
           required={required}
           className={cnDatePickerMixRangeField('Label', { labelPosition })}
           size={size}
+          htmlFor={id}
         >
           {label}
         </FieldLabel>
@@ -111,6 +114,7 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
             ref={startFieldRef}
             leftSide={startFieldLeftSide}
             rightSide={startFieldRightSide}
+            id={id}
             form={getFormForStart(form)}
             value={value?.[0]}
             onChange={handleStartDateChange}

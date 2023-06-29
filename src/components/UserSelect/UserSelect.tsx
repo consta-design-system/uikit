@@ -142,6 +142,8 @@ const UserSelectRender = <
     searchFunction: searchFunction || searchFunctionDefault,
   });
 
+  const inputId = id ? `${id}-input` : id;
+
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter } = props;
 
@@ -209,6 +211,7 @@ const UserSelectRender = <
           {...getKeyProps()}
           type="text"
           name={name}
+          id={inputId}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           aria-label={ariaLabel}
@@ -234,6 +237,7 @@ const UserSelectRender = <
         disabled={disabled}
         size={size}
         required={required}
+        id={inputId}
         view={view}
         type="userselect"
         form={form}
