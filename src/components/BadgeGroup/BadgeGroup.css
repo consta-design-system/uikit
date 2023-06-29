@@ -1,0 +1,25 @@
+.BadgeGroup {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--badge-group-gap);
+  flex-wrap: wrap;
+
+  &_size {
+    &_l {
+      --badge-group-gap: var(--space-xs);
+    }
+
+    &_m {
+      --badge-group-gap: var(--space-xs);
+    }
+
+    &_s {
+      --badge-group-gap: var(--space-2xs);
+    }
+
+    &_xs {
+      --badge-group-gap: var(--space-2xs);
+    }
+  }
+}
