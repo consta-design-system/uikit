@@ -411,6 +411,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (!disabled && !(!multiple && value.length > 0)) {
       setSearch(e.target.value);
+      setOpen(true);
     }
   };
 
