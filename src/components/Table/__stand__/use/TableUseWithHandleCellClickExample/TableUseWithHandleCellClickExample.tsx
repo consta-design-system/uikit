@@ -64,7 +64,7 @@ export const TableUseWithHandleCellClickExample = () => {
 
   return (
     <div className={cnTableUse()}>
-      <Text>Клик правой клавишей мыши, для вызова контексного меню</Text>
+      <Text>Клик правой клавишей мыши, для вызова контекстного меню</Text>
       <Table
         rows={rows}
         columns={columns}

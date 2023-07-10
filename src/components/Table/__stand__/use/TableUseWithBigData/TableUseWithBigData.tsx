@@ -20,7 +20,7 @@ export const TableUseWithBigData = () => {
   const params = generateData(5000, 5);
 
   return (
-    <div className={cnTableUse()}>
+    <div className={cnTableUse({ fixedSize: true })}>
       <Table
         {...(params as TableProps<Item>)}
         filters={tableData.filters}
