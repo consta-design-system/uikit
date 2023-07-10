@@ -132,6 +132,8 @@ const ComboboxRender = <
     searchFunction,
   });
 
+  const inputId = id ? `${id}-input` : id;
+
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter } = props;
 
@@ -212,6 +214,7 @@ const ComboboxRender = <
           {...getKeyProps()}
           type="text"
           name={name}
+          id={inputId}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           aria-label={ariaLabel}
@@ -242,6 +245,7 @@ const ComboboxRender = <
         ref={ref}
         type="combobox"
         style={style}
+        id={inputId}
         {...otherProps}
       >
         <div

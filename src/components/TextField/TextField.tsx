@@ -250,6 +250,8 @@ export const TextFieldRender = <TYPE extends string>(
     >
       {label && (
         <FieldLabel
+          as="label"
+          htmlFor={id?.toString()}
           icon={labelIcon}
           required={required}
           className={cnTextField('Label', { labelPosition })}

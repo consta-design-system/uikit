@@ -28,6 +28,7 @@ export const DatePickerFieldTypeYearRange = forwardRef<
     endFieldName,
     disabled,
     size,
+    id,
     view,
     status,
     autoFocus,
@@ -98,6 +99,8 @@ export const DatePickerFieldTypeYearRange = forwardRef<
         <FieldLabel
           icon={labelIcon}
           required={required}
+          as="label"
+          htmlFor={id}
           className={cnDatePickerMixRangeField('Label', { labelPosition })}
           size={size}
         >
@@ -108,6 +111,7 @@ export const DatePickerFieldTypeYearRange = forwardRef<
         <div className={cnDatePickerMixRangeField('Fields')}>
           <DatePickerFieldTypeYear
             {...commonProps}
+            id={id}
             inputRef={startFieldInputRef}
             ref={startFieldRef}
             leftSide={startFieldLeftSide}

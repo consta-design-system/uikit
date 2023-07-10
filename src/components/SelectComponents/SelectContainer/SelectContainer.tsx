@@ -46,6 +46,7 @@ export const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(
       children,
       status,
       focused,
+      id,
       multiple,
       type = 'select',
       labelPosition = 'top',
@@ -63,7 +64,9 @@ export const SelectContainer = forwardRef<HTMLDivElement, SelectContainerProps>(
         {label && (
           <FieldLabel
             icon={labelIcon}
+            as="label"
             required={required}
+            htmlFor={id}
             className={cnSelect('Label', { labelPosition })}
             size={size}
           >
