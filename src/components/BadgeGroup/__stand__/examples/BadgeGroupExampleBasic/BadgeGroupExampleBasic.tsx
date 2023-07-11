@@ -39,7 +39,7 @@ const badges: BadgeGroupDefaultItem[] = [
 export const BadgeGroupExampleBasic = () => {
   return (
     <Example>
-      <BadgeGroup items={badges} />
+      <BadgeGroup style={{ width: 600 }} items={badges} />
     </Example>
   );
 };

@@ -39,6 +39,7 @@ export const BadgeGroupExampleItems = () => {
   return (
     <Example>
       <BadgeGroup
+        style={{ width: 600 }}
         items={[...items]}
         getItemKey={(item) => item.text}
         getItemLabel={(item) => item.text}

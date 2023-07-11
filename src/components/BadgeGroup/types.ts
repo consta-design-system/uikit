@@ -57,6 +57,7 @@ export type BadgeGroupProps<ITEM = BadgeGroupDefaultItem> =
   PropsWithHTMLAttributesAndRef<
     {
       items: ITEM[];
+      fitMode?: 'reduction' | 'wrap';
       getItemKey?: BadgeGroupPropGetItemKey<ITEM>;
       getItemLabel?: BadgeGroupPropGetItemLabel<ITEM>;
       getItemStatus?: BadgeGroupPropGetItemStatus<ITEM>;

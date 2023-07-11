@@ -1,7 +1,9 @@
 import './BadgeGroup.css';
 
+import { useHideElementsInLine } from '@consta/uikit/useHideElementsInLine';
 import React, { forwardRef } from 'react';
 
+import { useForkRef } from '##/hooks/useForkRef';
 import { cn } from '##/utils/bem';
 
 import {
@@ -9,7 +11,7 @@ import {
   badgePropFormDefault,
   badgePropSizeDefault,
 } from '../Badge/Badge';
-import { withDefaultGetters } from './helper';
+import { forkRef, withDefaultGetters } from './helper';
 import { BadgeGroupComponent, BadgeGroupProps } from './types';
 
 const cnBadgeGroup = cn('BadgeGroup');
@@ -20,6 +22,7 @@ const BadgeGroupRender = (
 ) => {
   const {
     items,
+    fitMode = 'reduction',
     getItemAs,
     getItemAttributes,
     getItemIconLeft,
@@ -36,13 +39,16 @@ const BadgeGroupRender = (
     ...otherProps
   } = withDefaultGetters(props);
 
+  const { visibleItems, itemsRefs, wrapperRef, hiddenItems, moreRef } =
+    useHideElementsInLine(items);
+
   return (
     <div
-      ref={ref}
-      className={cnBadgeGroup({ size }, [className])}
+      ref={useForkRef([ref, wrapperRef])}
+      className={cnBadgeGroup({ size, fitMode }, [className])}
       {...otherProps}
     >
-      {items.map((item) => {
+      {items.map((item, index) => {
         const as = getItemAs(item);
         return (
           <Badge
@@ -54,13 +60,31 @@ const BadgeGroupRender = (
             iconLeft={getItemIconLeft(item)}
             iconRight={getItemIconRight(item)}
             as={as}
-            ref={getItemRef(item)}
+            ref={forkRef([itemsRefs[index], getItemRef(item)])}
             view={getItemView(item)}
             status={getItemStatus(item)}
+            className={cnBadgeGroup('Badge', {
+              hidden: fitMode === 'reduction' ? !visibleItems[index] : false,
+            })}
             {...(getItemAttributes(item) ?? {})}
           />
         );
       })}
+      {fitMode === 'reduction' && (
+        <Badge
+          className={cnBadgeGroup('Badge', {
+            hidden: hiddenItems.length <= 0,
+            zero: hiddenItems.length <= 0,
+          })}
+          key="more"
+          label={`+${hiddenItems.length}`}
+          status="system"
+          form={form}
+          size={size}
+          view="filled"
+          ref={moreRef}
+        />
+      )}
     </div>
   );
 };

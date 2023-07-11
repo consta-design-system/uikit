@@ -59,6 +59,7 @@ const badges: BadgeGroupDefaultItem[] = [
 const Variants = () => {
   const minified = useBoolean('minified', false);
   const size = useSelect('size', badgePropSize, badgePropSizeDefault);
+  const fitMode = useSelect('fitMode', ['reduction', 'wrap'], 'reduction');
 
   const form = useSelect(
     'form',
@@ -74,9 +75,11 @@ const Variants = () => {
       items={badges}
       size={size}
       form={form}
+      fitMode={fitMode}
       minified={minified}
       getItemIconLeft={(item) => (iconLeft ? item.iconLeft : undefined)}
       getItemIconRight={(item) => (iconRight ? item.iconRight : undefined)}
+      style={{ width: 600 }}
     />
   );
 };
