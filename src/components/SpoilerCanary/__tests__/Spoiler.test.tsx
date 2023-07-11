@@ -12,7 +12,7 @@ type SpoilerProps = React.ComponentProps<typeof Spoiler>;
 
 const testId = 'spoiler';
 
-const renderComponent = (props: SpoilerProps = {}) =>
+const renderComponent = (props: SpoilerProps) =>
   render(<Spoiler data-testid={testId} {...props} />);
 
 const getButton = (base: Element) => {
@@ -32,7 +32,7 @@ describe('Компонент Spoiler', () => {
     describe('проверка size', () => {
       spolierPropSize.forEach((size) => {
         it(`присваивает класс для size=${size}`, () => {
-          renderComponent({ size });
+          renderComponent({ size, children: 'Test' });
 
           const spoiler = screen.getByTestId(testId);
 
@@ -43,7 +43,7 @@ describe('Компонент Spoiler', () => {
 
     describe('проверка open', () => {
       it('проверка текста при open="false"', () => {
-        const { baseElement } = renderComponent({});
+        const { baseElement } = renderComponent({ children: 'Test' });
 
         const label = getSpan(baseElement);
 
@@ -51,7 +51,7 @@ describe('Компонент Spoiler', () => {
       });
 
       it('проверка текста при open="true"', () => {
-        const { baseElement } = renderComponent({});
+        const { baseElement } = renderComponent({ children: 'Test' });
 
         const button = getButton(baseElement);
 
@@ -67,7 +67,10 @@ describe('Компонент Spoiler', () => {
       it('должен отображать текст при open="false"', () => {
         const labelText = 'Показать';
 
-        const { baseElement } = renderComponent({ moreLabel: labelText });
+        const { baseElement } = renderComponent({
+          moreLabel: labelText,
+          children: 'Test',
+        });
 
         const button = getButton(baseElement);
 
@@ -81,6 +84,7 @@ describe('Компонент Spoiler', () => {
 
         const { baseElement } = renderComponent({
           lessLabel: labelText,
+          children: 'Test',
         });
 
         const button = getButton(baseElement);
