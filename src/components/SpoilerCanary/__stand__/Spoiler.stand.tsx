@@ -9,6 +9,6 @@ export default createStand({
   status: 'canary',
   alias: ['текст', 'список'],
   figma:
-    'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?type=design&node-id=122771%3A358766&t=exHMZDesj7Vfu8u9-1',
+    'https://www.figma.com/file/xfuh9fLo3qFOICWtnrmQQ1/Consta-UI-Kit-(Community)?type=design&node-id=122771-358250&mode=design',
   order: 10,
 });

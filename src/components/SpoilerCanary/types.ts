@@ -26,7 +26,6 @@ export type SpoilerProps = Omit<
       lessIcon?: IconComponent;
       moreLabel?: string;
       moreIcon?: IconComponent;
-      fullText?: React.ReactNode;
     },
     HTMLDivElement
   >,
@@ -34,13 +33,15 @@ export type SpoilerProps = Omit<
 > &
   (
     | {
-        mode?: 'dots';
-        preview?: React.ReactNode;
+        preview: React.ReactNode;
+        fullText: React.ReactNode;
         maxHeight?: never;
+        children?: never;
       }
     | {
-        mode?: 'blur';
         preview?: never;
+        fullText?: never;
+        children: React.ReactNode;
         maxHeight?: number;
       }
   );

@@ -1,12 +1,12 @@
 import './Spoiler.css';
 
-import React, { forwardRef, useMemo } from 'react';
+import React, { forwardRef } from 'react';
 
+import { Text } from '##/components/Text';
 import { useFlag } from '##/hooks/useFlag';
 import { cnMixSpace, Space } from '##/mixs/MixSpace';
 import { cnCanary } from '##/utils/bem';
 
-import { Text } from '../Text';
 import { SpoilerButton } from './SpoilerButton';
 import { defaultSpoilerPropSize, SpoilerProps, SpoilerPropSize } from './types';
 
@@ -19,16 +19,29 @@ const spoilerOffsetMap: Record<SpoilerPropSize, Space> = {
   l: 'm',
 };
 
+const getContent = (props: SpoilerProps, isOpen: boolean) => {
+  if (props.children) {
+    return {
+      mode: 'blur',
+      content: props.children,
+    };
+  }
+  return {
+    mode: 'dots',
+    content: isOpen ? props.fullText : props.preview,
+  };
+};
+
 export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
   (props, ref) => {
     const {
-      mode = 'blur',
       preview,
       maxHeight = 96,
       fullText,
       size = defaultSpoilerPropSize,
       lessIcon,
       lessLabel,
+      children,
       moreIcon,
       moreLabel,
       className,
@@ -37,17 +50,7 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
 
     const [isOpen, setIsOpen] = useFlag();
 
-    const content = useMemo(() => {
-      if (mode === 'blur' || isOpen) {
-        return fullText;
-      }
-      return (
-        <>
-          {preview}
-          ...
-        </>
-      );
-    }, [mode, isOpen, preview, fullText]);
+    const { mode, content } = getContent(props, isOpen);
 
     return (
       <div
