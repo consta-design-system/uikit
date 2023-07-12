@@ -27,6 +27,8 @@
     }
 
     &_reduction {
+      display: inline-flex;
+
       & > *:not(.BadgeGroup-Badge_zero) {
         margin-right: var(--badge-group-gap);
 

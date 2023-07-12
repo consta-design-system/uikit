@@ -70,6 +70,8 @@ export type BadgeGroupProps<ITEM = BadgeGroupDefaultItem> =
       form?: BadgePropForm;
       size?: BadgePropSize;
       minified?: boolean;
+      moreRef?: React.RefObject<HTMLDivElement>;
+      moreAttributes?: Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
     },
     HTMLDivElement
   > &

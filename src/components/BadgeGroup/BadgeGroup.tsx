@@ -1,9 +1,9 @@
 import './BadgeGroup.css';
 
-import { useHideElementsInLine } from '@consta/uikit/useHideElementsInLine';
 import React, { forwardRef } from 'react';
 
 import { useForkRef } from '##/hooks/useForkRef';
+import { useHideElementsInLine } from '##/hooks/useHideElementsInLine';
 import { cn } from '##/utils/bem';
 
 import {
@@ -36,11 +36,20 @@ const BadgeGroupRender = (
     size = badgePropSizeDefault,
     form = badgePropFormDefault,
     className,
+    moreRef: moreRefProp,
+    moreAttributes,
     ...otherProps
   } = withDefaultGetters(props);
 
-  const { visibleItems, itemsRefs, wrapperRef, hiddenItems, moreRef } =
-    useHideElementsInLine(items);
+  const {
+    visibleItems,
+    itemsRefs,
+    wrapperRef,
+    hiddenItems,
+    moreRef: hideMoreRef,
+  } = useHideElementsInLine(items);
+
+  const moreRef = useForkRef([hideMoreRef, moreRefProp]);
 
   return (
     <div
@@ -83,6 +92,7 @@ const BadgeGroupRender = (
           size={size}
           view="filled"
           ref={moreRef}
+          {...moreAttributes}
         />
       )}
     </div>

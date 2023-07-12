@@ -1,3 +1,5 @@
+import './BadgeGroup.variants.css';
+
 import { IconAlert } from '@consta/icons/IconAlert';
 import { IconCheck } from '@consta/icons/IconCheck';
 import { IconEdit } from '@consta/icons/IconEdit';
@@ -7,6 +9,7 @@ import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
 import { IconWarning } from '##/icons/IconWarning';
+import { cn } from '##/utils/bem';
 
 import {
   badgePropForm,
@@ -15,6 +18,8 @@ import {
   badgePropSizeDefault,
 } from '../../Badge';
 import { BadgeGroup, BadgeGroupDefaultItem } from '../BadgeGroup';
+
+const cnBadgeGroupVariants = cn('BadgeGroupVariants');
 
 const badges: BadgeGroupDefaultItem[] = [
   {
@@ -79,7 +84,7 @@ const Variants = () => {
       minified={minified}
       getItemIconLeft={(item) => (iconLeft ? item.iconLeft : undefined)}
       getItemIconRight={(item) => (iconRight ? item.iconRight : undefined)}
-      style={{ width: 600 }}
+      className={cnBadgeGroupVariants()}
     />
   );
 };
