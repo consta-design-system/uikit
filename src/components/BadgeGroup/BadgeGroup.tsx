@@ -22,7 +22,7 @@ const BadgeGroupRender = (
 ) => {
   const {
     items,
-    fitMode = 'reduction',
+    fitMode = 'wrap',
     getItemAs,
     getItemAttributes,
     getItemIconLeft,
