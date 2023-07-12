@@ -66,12 +66,6 @@
       }
     }
 
-    &_iconPosition {
-      &_right {
-        flex-direction: row-reverse;
-      }
-    }
-
     &_form {
       &_brick {
         --collapse-label-padding: var(--vertical-space) var(--horizontal-space);
