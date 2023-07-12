@@ -87,12 +87,8 @@ const Variants = () => {
         horizontalSpace={horizontalSpace}
         style={{ maxWidth: 300 }}
         iconView={iconView}
-        {...(iconPosition === 'left'
-          ? {
-              iconPosition,
-              rightSide: rightSide ? defaultRightSide : undefined,
-            }
-          : { iconPosition })}
+        iconPosition={iconPosition}
+        rightSide={rightSide ? defaultRightSide : undefined}
         {...(withCustomIcon
           ? {
               icon: IconAdd,

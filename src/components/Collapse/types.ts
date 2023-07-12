@@ -93,6 +93,8 @@ export type CollapseProps = PropsWithHTMLAttributesAndRef<
     hoverEffect?: boolean;
     isOpen?: boolean;
     iconView?: CollapsePropIconView;
+    rightSide?: React.ReactNode;
+    iconPosition?: 'left' | 'right';
   } & (
     | {
         closeIcon?: IconComponent;
@@ -104,17 +106,7 @@ export type CollapseProps = PropsWithHTMLAttributesAndRef<
         directionIcon?: CollapseIconPropDirection;
         closeDirectionIcon?: CollapseIconPropDirection;
       }
-  ) &
-    (
-      | {
-          iconPosition?: 'left';
-          rightSide?: React.ReactNode;
-        }
-      | {
-          iconPosition?: 'right';
-          rightSide?: never;
-        }
-    ),
+  ),
   HTMLDivElement
 >;
 

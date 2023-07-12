@@ -93,6 +93,17 @@ export const Collapse: CollapseComponent = React.forwardRef<
 
   const view = collapseViewMap[viewProp];
 
+  const iconProps = {
+    className: cnCollapse('Icon', { position: iconPosition }),
+    size: sizeIconMap[size],
+    icon,
+    closeIcon,
+    isOpen,
+    direction: directionIcon,
+    closeDirection: closeDirectionIcon,
+    view: iconView,
+  };
+
   return (
     <div
       ref={useForkRef([ref, collapseRef])}
@@ -107,22 +118,12 @@ export const Collapse: CollapseComponent = React.forwardRef<
       <div
         className={cnCollapse('Label', {
           hoverEffect,
-          iconPosition,
           view,
           form,
         })}
         {...otherProps}
       >
-        <CollapseIcon
-          className={cnCollapse('Icon', { position: iconPosition })}
-          size={sizeIconMap[size]}
-          icon={icon}
-          closeIcon={closeIcon}
-          isOpen={isOpen}
-          direction={directionIcon}
-          closeDirection={closeDirectionIcon}
-          view={iconView}
-        />
+        {iconPosition === 'left' && <CollapseIcon {...iconProps} />}
         {typeof label === 'object' ? (
           <div className={cnCollapse('LabelText')}>{label}</div>
         ) : (
@@ -130,7 +131,8 @@ export const Collapse: CollapseComponent = React.forwardRef<
             {label}
           </Text>
         )}
-        {iconPosition === 'left' && renderSide(rightSide)}
+        {renderSide(rightSide)}
+        {iconPosition === 'right' && <CollapseIcon {...iconProps} />}
       </div>
       <div
         style={{
