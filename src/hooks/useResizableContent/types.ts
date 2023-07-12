@@ -1,0 +1,25 @@
+import React from 'react';
+
+export type UseResizableContentPropDirection = 'vertical' | 'horizontal';
+
+export type UseResizableContentRef = {
+  ref: React.RefObject<HTMLElement>;
+  maxHeight?: number;
+  minHeight?: number;
+  maxWidth?: number;
+  minWidth?: number;
+};
+
+type UseResizableContentProps = {
+  refs: Array<UseResizableContentRef | React.RefObject<HTMLElement>>;
+  direction?: UseResizableContentPropDirection;
+  container: React.RefObject<HTMLElement>;
+};
+
+export type UseResizableContent = (props: UseResizableContentProps) => {
+  handlers: Array<{
+    onMouseDown: React.MouseEventHandler;
+    onTouchStart: React.TouchEventHandler;
+  }>;
+  sizes: Array<{ width?: number; height?: number }>;
+};
