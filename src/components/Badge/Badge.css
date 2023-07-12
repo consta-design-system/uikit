@@ -48,6 +48,10 @@
     &_round {
       border-radius: 99em;
 
+      &.Badge_size_xs {
+        padding: 0 var(--space-xs);
+      }
+
       &.Badge_size_s {
         padding: 0 var(--space-xs);
       }

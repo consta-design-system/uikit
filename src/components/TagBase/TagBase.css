@@ -58,7 +58,7 @@
 
   &_size {
     &_xs {
-      --tag-base-height: calc(var(--space-m) + var(--space-3xs));
+      --tag-base-height: var(--space-l);
       --tag-base-spaсe: var(--space-2xs);
       --tag-base-font-size: var(--size-text-2xs);
     }
