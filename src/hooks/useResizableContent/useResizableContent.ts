@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import { trackPosition } from '##/components/Slider/useSlider/helper';
 
@@ -31,13 +37,17 @@ const getRefsSizes = (
   });
 
 export const useResizableContent: UseResizableContent = (props) => {
-  const { refs, direction = 'horizontal', container } = props;
+  const { blocks, direction = 'horizontal', container } = props;
 
   const activeIndex: React.MutableRefObject<number | null> = useRef(null);
 
   const [sizes, setSizes] = useState<
     Array<{ width?: number; height?: number }>
-  >(getRefsSizes(refs, direction));
+  >(getRefsSizes(blocks, direction));
+
+  useEffect(() => {
+    setSizes(getRefsSizes(blocks, direction));
+  }, [blocks.length, direction]);
 
   const { width: containerWidth, height: containerHeight } =
     useComponentSize(container);
@@ -63,8 +73,8 @@ export const useResizableContent: UseResizableContent = (props) => {
       .reduce((val, a) => (val ?? 0) + (a ?? 0), 0);
 
   const getBlockMaxSizes = (index: number) => {
-    if (!Object.prototype.hasOwnProperty.call(refs[index], 'current')) {
-      const el = refs[index] as UseResizableContentRef;
+    if (!Object.prototype.hasOwnProperty.call(blocks[index], 'current')) {
+      const el = blocks[index] as UseResizableContentRef;
       return [
         direction === 'horizontal' ? el.minWidth : el.minHeight,
         direction === 'horizontal' ? el.maxWidth : el.maxHeight,
@@ -141,10 +151,6 @@ export const useResizableContent: UseResizableContent = (props) => {
     }
   };
 
-  useEffect(() => {
-    setSizes(getRefsSizes(refs, direction));
-  }, [refs.length, direction]);
-
   const handleRelease = useCallback(() => {
     controlListeners('remove');
     activeIndex.current = null;
@@ -158,11 +164,17 @@ export const useResizableContent: UseResizableContent = (props) => {
     [handleTouchMove, sizes],
   );
 
+  const handlers = useMemo(
+    () =>
+      Array.from({ length: blocks.length - 1 }).map((_el, index) => ({
+        onMouseDown: () => handlePress(index),
+        onTouchStart: () => handlePress(index),
+      })),
+    [blocks.length, handlePress],
+  );
+
   return {
-    handlers: Array.from({ length: refs.length - 1 }).map((_el, index) => ({
-      onMouseDown: () => handlePress(index),
-      onTouchStart: () => handlePress(index),
-    })),
+    handlers,
     sizes,
   };
 };

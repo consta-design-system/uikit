@@ -11,7 +11,7 @@ export type UseResizableContentRef = {
 };
 
 type UseResizableContentProps = {
-  refs: Array<UseResizableContentRef | React.RefObject<HTMLElement>>;
+  blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement>>;
   direction?: UseResizableContentPropDirection;
   container: React.RefObject<HTMLElement>;
 };

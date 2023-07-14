@@ -1,21 +1,19 @@
 import './UseResizableContentBasic.css';
 
 import { Example } from '@consta/stand';
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 
+import { useRefs } from '##/hooks/useRefs';
 import { useResizableContent } from '##/hooks/useResizableContent/useResizableContent';
 import { cn } from '##/utils/bem';
 
 const cnUseResizableContentBasic = cn('UseResizableContentBasic');
 
 export const UseResizableContentBasic = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const block1 = useRef<HTMLDivElement>(null);
-  const block2 = useRef<HTMLDivElement>(null);
-  const block3 = useRef<HTMLDivElement>(null);
+  const [containerRef, block1, block2, block3] = useRefs<HTMLDivElement>(4);
 
   const { sizes, handlers } = useResizableContent({
-    refs: [{ ref: block1, minWidth: 100 }, block2, block3],
+    blocks: [{ ref: block1, minWidth: 100 }, block2, block3],
     direction: 'horizontal',
     container: containerRef,
   });

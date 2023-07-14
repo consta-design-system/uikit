@@ -1,28 +1,31 @@
 import './UseResizableContentLayout.css';
 
 import { Example } from '@consta/stand';
-import React, { useRef } from 'react';
+import React from 'react';
 
+import { useRefs } from '##/hooks/useRefs';
 import { useResizableContent } from '##/hooks/useResizableContent/useResizableContent';
 import { cn } from '##/utils/bem';
 
 const cnUseResizableContentLayout = cn('UseResizableContentLayout');
 
 export const UseResizableContentLayout = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const horizontalBlock1 = useRef<HTMLDivElement>(null);
-  const horizontalBlock2 = useRef<HTMLDivElement>(null);
-  const verticalBlock1 = useRef<HTMLDivElement>(null);
-  const verticalBlock2 = useRef<HTMLDivElement>(null);
+  const [
+    containerRef,
+    horizontalBlock1,
+    horizontalBlock2,
+    verticalBlock1,
+    verticalBlock2,
+  ] = useRefs<HTMLDivElement>(5);
 
   const { sizes: hSizes, handlers: hHandlers } = useResizableContent({
-    refs: [horizontalBlock1, horizontalBlock2],
+    blocks: [horizontalBlock1, horizontalBlock2],
     direction: 'horizontal',
     container: containerRef,
   });
 
   const { sizes: vSizes, handlers: vHandlers } = useResizableContent({
-    refs: [verticalBlock1, verticalBlock2],
+    blocks: [verticalBlock1, verticalBlock2],
     direction: 'vertical',
     container: containerRef,
   });
@@ -54,7 +57,6 @@ export const UseResizableContentLayout = () => {
             className={cnUseResizableContentLayout('Block')}
             style={vSizes[0]}
           >
-            {' '}
             <p>ФИЛЬТРЫ</p>
           </div>
           <div
