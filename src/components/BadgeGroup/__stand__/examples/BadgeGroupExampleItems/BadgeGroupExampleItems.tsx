@@ -35,16 +35,20 @@ const items: Item[] = [
   },
 ];
 
+const getItemLabel = (item: Item) => item.text;
+const getItemView = (item: Item) => item.form;
+const getItemStatus = (item: Item) => item.color;
+
 export const BadgeGroupExampleItems = () => {
   return (
     <Example>
       <BadgeGroup
         style={{ width: 600 }}
-        items={[...items]}
-        getItemKey={(item) => item.text}
-        getItemLabel={(item) => item.text}
-        getItemView={(item) => item.form}
-        getItemStatus={(item) => item.color}
+        items={items}
+        getItemKey={getItemLabel}
+        getItemLabel={getItemLabel}
+        getItemView={getItemView}
+        getItemStatus={getItemStatus}
       />
     </Example>
   );
