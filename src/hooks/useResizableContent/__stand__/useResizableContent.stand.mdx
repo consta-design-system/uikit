@@ -6,14 +6,22 @@ import { useResizableContent } from '@consta/uikit/useResizableContent';
 
 С помощью хука `useResizableContent` размеры блоков в контейнере можно сделать изменяемыми.
 
+> Для избежания пересоздания внутринних функций хука, мемоизируйте входные параметры.
+
 ```tsx
 export const UseResizableContentBasic = () => {
   const [containerRef, block1, block2, block3] = useRefs<HTMLDivElement>(4);
 
+  const blocks = useMemo(
+    () => [{ ref: block1, minWidth: 100 }, block2, block3],
+    [block1, block2, block3],
+  );
+
   const { sizes, handlers } = useResizableContent({
-    blocks: [{ ref: block1, minWidth: 100 }, block2, block3],
+    blocks,
     direction: 'horizontal',
     container: containerRef,
+    isActive: true,
   });
 
   const toddlerPositions = useMemo(() => {
@@ -65,3 +73,4 @@ type UseResizableContentRef = {
 | `blocks`     | `Array<UseResizableContentRef`<code>&#124;</code>`React.RefObject<HTMLElement>>` | -              | Ссылки на изменяемые элементы                 |
 | `direction?` | `'horizontal', 'vertical'`                                                       | `'horizontal'` | Направление в котором может изменяться размер |
 | `container`  | `React.RefObject<HTMLElement>`                                                   | -              | Ссылка на контейнер                           |
+| `isActive?`  | `boolean`                                                                        | `false`        | Включает хук                                  |

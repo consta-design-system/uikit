@@ -16,6 +16,7 @@ type UseResizableContentProps = {
   blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement>>;
   direction?: UseResizableContentPropDirection;
   container: React.RefObject<HTMLElement>;
+  isActive?: boolean;
 };
 
 export type UseResizableContent = (props: UseResizableContentProps) => {

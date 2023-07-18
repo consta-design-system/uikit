@@ -10,17 +10,13 @@ import { getCalcaulatedSizes, getRefsSizes } from './helpers';
 import { UseResizableContent, UseResizableContentSize } from './types';
 
 export const useResizableContent: UseResizableContent = (props) => {
-  const { blocks, direction = 'horizontal', container } = props;
+  const { blocks, direction = 'horizontal', container, isActive } = props;
 
   const activeIndex: React.MutableRefObject<number | null> = useRef(null);
 
   const [sizes, setSizes] = useState<UseResizableContentSize[]>(
     getRefsSizes(blocks, direction),
   );
-
-  useEffect(() => {
-    setSizes(getRefsSizes(blocks, direction));
-  }, [blocks.length, direction]);
 
   const controlListeners = useCallback((type: 'add' | 'remove') => {
     const method = type === 'add' ? 'addEventListener' : 'removeEventListener';
@@ -33,7 +29,7 @@ export const useResizableContent: UseResizableContent = (props) => {
   const handleTouchMove = useCallback(
     (event: MouseEvent | TouchEvent | Event) => {
       const index = activeIndex.current;
-      if (typeof index === 'number') {
+      if (typeof index === 'number' && isActive) {
         setSizes((copy) => {
           const copySizes = [...copy];
           const [left, right] = getCalcaulatedSizes({
@@ -50,7 +46,7 @@ export const useResizableContent: UseResizableContent = (props) => {
         });
       }
     },
-    [],
+    [container, direction, blocks, isActive],
   );
 
   const handleRelease = useCallback(() => {
@@ -69,8 +65,14 @@ export const useResizableContent: UseResizableContent = (props) => {
         onMouseDown: () => handlePress(index),
         onTouchStart: () => handlePress(index),
       })),
-    [blocks.length, handlePress],
+    [blocks, direction, container, isActive],
   );
+
+  useEffect(() => {
+    if (isActive) {
+      setSizes(getRefsSizes(blocks, direction));
+    }
+  }, [blocks, direction, isActive]);
 
   return {
     handlers,

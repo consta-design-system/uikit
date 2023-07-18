@@ -1,7 +1,7 @@
 import './UseResizableContentGrid.css';
 
 import { Example } from '@consta/stand';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useRefs } from '##/hooks/useRefs';
 import { useResizableContent } from '##/hooks/useResizableContent/useResizableContent';
@@ -18,16 +18,28 @@ export const UseResizableContentGrid = () => {
     verticalBlock2,
   ] = useRefs<HTMLDivElement>(5);
 
+  const blocks1 = useMemo(
+    () => [horizontalBlock1, horizontalBlock2],
+    [horizontalBlock1, horizontalBlock2],
+  );
+
+  const blocks2 = useMemo(
+    () => [verticalBlock1, verticalBlock2],
+    [verticalBlock1, verticalBlock2],
+  );
+
   const { sizes: hSizes, handlers: hHandlers } = useResizableContent({
-    blocks: [horizontalBlock1, horizontalBlock2],
+    blocks: blocks1,
     direction: 'horizontal',
     container: verticalBlock1,
+    isActive: true,
   });
 
   const { sizes: vSizes, handlers: vHandlers } = useResizableContent({
-    blocks: [verticalBlock1, verticalBlock2],
+    blocks: blocks2,
     direction: 'vertical',
     container: containerRef,
+    isActive: true,
   });
 
   return (

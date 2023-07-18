@@ -12,10 +12,16 @@ const cnUseResizableContentBasic = cn('UseResizableContentBasic');
 export const UseResizableContentBasic = () => {
   const [containerRef, block1, block2, block3] = useRefs<HTMLDivElement>(4);
 
+  const blocks = useMemo(
+    () => [{ ref: block1, minWidth: 100 }, block2, block3],
+    [block1, block2, block3],
+  );
+
   const { sizes, handlers } = useResizableContent({
-    blocks: [{ ref: block1, minWidth: 100 }, block2, block3],
+    blocks,
     direction: 'horizontal',
     container: containerRef,
+    isActive: true,
   });
 
   const toddlerPositions = useMemo(() => {
