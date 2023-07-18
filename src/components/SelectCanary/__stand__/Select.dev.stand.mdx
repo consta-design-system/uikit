@@ -1,0 +1,868 @@
+import { MdxMenu } from '@consta/stand';
+import { SelectExampleItems } from './examples/SelectExampleItems/SelectExampleItems';
+import { SelectExamplePlaceholder } from './examples/SelectExamplePlaceholder/SelectExamplePlaceholder';
+import { SelectExampleSize } from './examples/SelectExampleSize/SelectExampleSize';
+import { SelectExampleForm } from './examples/SelectExampleForm/SelectExampleForm';
+import { SelectExampleView } from './examples/SelectExampleView/SelectExampleView';
+import { SelectExampleRenderItem } from './examples/SelectExampleRenderItem/SelectExampleRenderItem';
+import { SelectExampleRenderValue } from './examples/SelectExampleRenderValue/SelectExampleRenderValue';
+import { SelectExampleDisabled } from './examples/SelectExampleDisabled/SelectExampleDisabled';
+import { SelectExampleDisabledItem } from './examples/SelectExampleDisabledItem/SelectExampleDisabledItem';
+import { SelectExampleGroups } from './examples/SelectExampleGroups/SelectExampleGroups';
+import {
+  SelectExampleCustomTypes,
+  SelectExampleCustomTypesWithGroups,
+} from './examples/SelectExampleCustomTypes/SelectExampleCustomTypes';
+import {
+  SelectExampleLabel,
+  SelectExampleLabelIcon,
+} from './examples/SelectExampleLabel/SelectExampleLabel';
+import { SelectExampleStatus } from './examples/SelectExampleStatus/SelectExampleStatus';
+
+```tsx
+import { Select } from '@consta/uikit/Select';
+```
+
+<MdxMenu>
+
+- [Содержимое](#содержимое-списка)
+  - [Варианты](#варианты)
+  - [Выбранное значение](#выбранное-значение)
+  - [Подсказка](#подсказка)
+  - [Неактивный вариант](#неактивный-элемент-списка)
+  - [Группы вариантов](#группы-вариантов)
+- [Статус](#статус-поля)
+- [Размер](#размер)
+- [Форма](#форма)
+- [Внешний вид](#внешний-вид)
+- [Лейбл и подпись](#лейбл-и-подпись)
+- [Неактивный выпадающий список](#неактивный-выпадающий-список)
+- [Кастомизация](#кастомизация)
+  - [Кастомный элемент списка](#кастомный-элемент-списка)
+  - [Кастомное выбранное значение](#кастомное-выбранное-значение)
+  - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-вариантов-и-групп)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+
+</MdxMenu>
+
+## Содержимое списка
+
+### Варианты
+
+Элементы выпадающего списка можно описать в массиве `items`. Тип свойства `items` по умолчанию равен [DefaultItem](#свойства). Что внутри:
+
+- `label` — название элемента списка, лучше писать с заглавной буквы, точка не нужна,
+- `id` — уникальный ключ элемента,
+- `groupId` — идентификатор [группы](#группы-вариантов), в которую входит этот элемент (если список разбит на группы),
+- `disabled` — отмечает [неактивные элементы](#неактивные-варианты).
+
+Вы можете сделать [кастомный тип данных для элементов списка](#кастомные-типы-данных-для-вариантов-и-групп) и использовать его.
+
+```tsx
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+```
+
+### Выбранное значение
+
+Выбранное значение задаётся в свойстве `value`. Тип свойства `value` по умолчанию равен [DefaultItem](#свойства).
+
+Чтобы получить значение, которое пользователь выбрал из списка, используйте `onChange`. Этот обработчик срабатывает при выборе варианта или при очистке поля ввода
+и возвращает значение из массива `items` и событие выбора.
+
+Выбор варианта срабатывает по клику мыши или по нажатию `Enter` на клавиатуре.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleItems() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+<SelectExampleItems />
+
+### Подсказка
+
+Подсказка, которая видна, когда ни один вариант не выбран, задаётся в свойстве `placeholder`.
+Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов, один из которых нужно выбрать.
+
+Если не знаете, что написать в подсказке, используйте универсальное **Выберите**.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExamplePlaceholder() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+<SelectExamplePlaceholder />
+
+### Неактивный элемент списка
+
+Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов), можете добавить своё свойство.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+  disabled: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+    disabled: true,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+    disabled: false,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+    disabled: true,
+  },
+];
+
+export function SelectExampleDisabledItem() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+<SelectExampleDisabledItem />
+
+### Группы вариантов
+
+Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultGroup](#свойства). Что внутри:
+
+- `label` — название группы,
+- `id` — уникальный ключ.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+  groupId: number;
+};
+
+type Group = {
+  label: string;
+  id: number;
+};
+
+const groups: Group[] = [
+  {
+    id: 1,
+    label: 'Первая группа',
+  },
+  {
+    id: 2,
+    label: 'Вторая группа',
+  },
+  {
+    id: 3,
+    label: 'Третья группа',
+  },
+];
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+    groupId: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+    groupId: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+    groupId: 1,
+  },
+  {
+    label: 'Четвертый',
+    id: 4,
+    groupId: 3,
+  },
+  {
+    label: 'Пятый',
+    id: 5,
+    groupId: 2,
+  },
+];
+
+export function SelectExampleGroups() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      groups={groups}
+    />
+  );
+}
+```
+
+<SelectExampleGroups />
+
+## Статус поля
+
+С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
+отметить правильно заполненные поля.
+
+За статус отвечает свойство `status`. Если оно не указано, поле будет обычным.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleStatus() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Example col={1}>
+      <Select
+        placeholder="default"
+        caption="default"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="alert"
+        caption="alert"
+        status="alert"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="warning"
+        caption="warning"
+        status="warning"
+        size="s"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+      <Select
+        placeholder="success"
+        caption="success"
+        size="s"
+        status="success"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </div>
+  );
+}
+```
+
+<SelectExampleStatus />
+
+## Размер
+
+За размер компонента отвечает свойство `size`. Варианты: `xs`, `s` , `m` , `l` , по умолчанию `m`.
+
+Компонент занимает всю ширину родительского блока.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleSize() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Размер xs"
+      size="xs"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+<SelectExampleSize />
+
+## Форма
+
+За форму селекта отвечает свойство `form`. Варианты:
+`default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`,
+по умолчанию `default`.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleForm() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Форма round"
+      form="round"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+    <Select
+      placeholder="Форма brickDefault"
+      form="brickDefault"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+<SelectExampleForm />
+
+## Внешний вид
+
+За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
+
+Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
+поля с разными статусами и разной формы будут выглядет одинаково.
+
+> Для создания hover эфекта для view="`clear`" управляйте внешним видом контейнера, в котором находится Select
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleView() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      view="clear"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
+```
+
+<SelectExampleView />
+
+## Лейбл и подпись
+
+Лейбл к компоненту можно добавить через свойство `label`, а за его позиционирование отвечает
+свойство `labelPosition`. Подпись можно добавить через свойство `caption`.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleLabel() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Example col={1}>
+      <Select
+        label="Значение"
+        caption={value?.label}
+        placeholder="Выберите значение"
+        items={items}
+        value={value}
+        onChange={({ value }) => setValue(value)}
+      />
+    </div>
+  );
+}
+```
+
+<SelectExampleLabel />
+
+Также к лейблу можно добавить иконку используя свойство `labelIcon`.
+
+```tsx
+<Select label="Значение" labelIcon={IconQuestion}>
+```
+
+<SelectExampleLabelIcon />
+
+## Неактивный выпадающий список
+
+Чтобы сделать список неактивным, добавьте `disabled`.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleDisabled() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      disabled
+    />
+  );
+}
+```
+
+<SelectExampleDisabled />
+
+## Кастомизация
+
+### Кастомный элемент списка
+
+Сделать кастомное представление для элементов списка можно с помощью свойства `renderItem`.
+Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
+
+> У корневого DOM-элемента должно быть свойство `role="option"`.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const cnSelectExampleRenderItem = cn('SelectExampleRenderItem');
+
+export function SelectExampleRenderItem() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+        <div
+          className={cnSelectExampleRenderItem('Item', { active, hovered })}
+          role="option"
+          aria-selected={active}
+          onMouseEnter={onMouseEnter}
+          onClick={onClick}
+        >
+          {item.label}
+        </div>
+      )}
+    />
+  );
+}
+```
+
+<SelectExampleRenderItem />
+
+### Кастомное выбранное значение
+
+Сделать кастомное представление для выбранного значения можно с помощью свойства `renderValue`.
+Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export function SelectExampleRenderValue() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      renderValue={({ item }) => (
+        <div>
+          <span role="img" aria-label="Panda">
+            🐼
+          </span>{' '}
+          — {item.name}
+        </div>
+      )}
+    />
+  );
+}
+```
+
+<SelectExampleRenderValue />
+
+### Кастомные типы данных для вариантов и групп
+
+Вы можете использовать кастомные типы данных для элементов списка (`items`) и групп (`groups`) — они могут отличаться от [DefaultItem](#свойства) и [DefaultGroup](#свойства).
+
+В этом случае нужно использовать геттеры
+`getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getGroupLabel`, `getGroupKey`, чтобы компонент понимал, откуда брать данные.
+
+> Если геттеры не указаны, используются геттеры по умолчанию, которые могут не подойти к вашим типам данных.
+
+#### Геттеры по умолчанию
+
+```ts
+const defaultGetItemKey = (item) => item.id;
+const defaultGetItemLabel = (item) => item.label;
+const defaultGetItemGroupKey = (item) => item.groupId;
+const defaultGetItemDisabled = (item) => item.disabled;
+const defaultGetGroupKey = (group) => group.id;
+const defaultGetGroupLabel = (group) => group.label;
+```
+
+#### Пример с кастомным Item
+
+```tsx
+export function SelectExampleCustomTypes() {
+  const [value, setValue] = useState<string | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={['Первый', 'Второй', 'Третий']}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      getItemKey={(item) => item}
+      getItemLabel={(item) => item}
+    />
+  );
+}
+```
+
+<SelectExampleCustomTypes />
+
+#### Пример с кастомными Item и Group
+
+```tsx
+export type Item = {
+  name: string;
+  group: string;
+};
+
+export const items: Item[] = [
+  { name: 'Первый', group: 'Первая группа' },
+  { name: 'Второй', group: 'Третья группа' },
+  { name: 'Третий', group: 'Вторая группа' },
+  { name: 'Четвертый', group: 'Первая группа' },
+  { name: 'Пятый', group: 'Первая группа' },
+  { name: 'Шестой', group: 'Третья группа' },
+  { name: 'Седьмой', group: 'Первая группа' },
+  { name: 'Восьмой', group: 'Вторая группа' },
+  { name: 'Девятый', group: 'Третья группа' },
+  { name: 'Десятый', group: 'Вторая группа' },
+];
+
+export const groups: string[] = [
+  'Первая группа',
+  'Вторая группа',
+  'Третья группа',
+];
+
+export function SelectExampleCustomTypesWithGroups() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      groups={groups}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      getItemKey={(item) => item.name}
+      getItemLabel={(item) => item.name}
+      getItemGroupKey={(item) => item.group}
+      getGroupKey={(group) => group}
+      getGroupLabel={(group) => group}
+    />
+  );
+}
+```
+
+<SelectExampleCustomTypesWithGroups />
+
+## Импорт
+
+```tsx
+import { Select } from '@consta/uikit/Select';
+```
+
+## Свойства
+
+```tsx
+type DefaultItem = {
+  label: string;
+  id: string | number;
+  groupId?: string | number;
+  disabled?: boolean;
+};
+
+type DefaultGroup = {
+  label: string;
+  id: string | number;
+};
+
+type PropOnChange<ITEM = DefaultItem> = (props: {
+  value: ITEM | null;
+  e: React.SyntheticEvent;
+}) => void;
+
+type PropRenderItem<ITEM = DefaultItem> = (props: {
+  item: ITEM;
+  active: boolean;
+  hovered: boolean;
+  onClick: React.ReactEventHandler;
+  onMouseEnter: React.ReactEventHandler;
+}) => React.ReactElement | null;
+
+type PropRenderValue<ITEM> = (props: {
+  item: ITEM;
+}) => React.ReactElement | null;
+
+type PropGetItemLabel<ITEM> = (item: ITEM) => string;
+type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
+type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
+type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
+```
+
+| Свойство                                                           | Тип или варианты значения                              | По умолчанию              | Описание                                                               |
+| ------------------------------------------------------------------ | ------------------------------------------------------ | ------------------------- | ---------------------------------------------------------------------- |
+| [`view?`](#внешний-вид)                                            | `default` , `clear`                                    | `default`                 | Внешний вид компонента                                                 |
+| [`disabled?`](#неактивный-выпадающий-список)                       | `boolean`                                              | -                         | Делает компонент неактивным                                            |
+| [`status?`](#статус-поля)                                          | `'', 'alert', 'success', 'warning'`                    | `' '`                     | Тип поля                                                               |
+| [`size?`](#размер)                                                 | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                     | Размер компонента                                                      |
+| [`form?`](#форма)                                                  | `default`, `brick`, `round`                            | `default`                 | Форма компонента                                                       |
+| [`placeholder?`](#подсказка)                                       | `string`                                               | -                         | Подсказка. Отображается, когда вариант не выбран                       |
+| [`label?`](#лейбл-и-подпись)                                       | `string`                                               | -                         | Лейбл                                                                  |
+| [`labelPosition?`](#лейбл-и-подпись)                               | `'top', 'left'`                                        | `'top'`                   | Положение лейбла                                                       |
+| [`caption?`](#лейбл-и-подпись)                                     | `string`                                               | -                         | Подпись                                                                |
+| [`items`](#варианты)                                               | `ITEM[]`                                               | -                         | Варианты                                                               |
+| [`value?`](#выбранное-значение)                                    | `ITEM`, `null`                                         | -                         | Выбранное значение                                                     |
+| [`onChange?`](#выбранное-значение)                                 | `PropOnChange<ITEM>`                                   | -                         | Обработчик события изменения значения компонента                       |
+| [`groups?`](#группы-вариантов)                                     | `GROUP[]`                                              | -                         | Группы вариантов                                                       |
+| [`renderItem?`](#кастомный-элемент-списка)                         | `PropRenderItem<ITEM>`                                 | рендер по умолчанию       | Рендер-функция для элемента списка                                     |
+| [`renderValue?`](#кастомное-выбранное-значение)                    | `PropRenderValue<ITEM>`                                | рендер по умолчанию       | Рендер-функция для выбранного значения                                 |
+| [`getItemLabel?`](#)                                               | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`    | Функция для определения названия элемента                              |
+| [`getItemKey?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`       | Функция для определения уникального ключа элемента                     |
+| [`getItemGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп) | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`  | Функция для определения ключа группы, к которой будет привязан элемент |
+| [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп) | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)              |
+| [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)   | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`     | Функция для определения названия группы                                |
+| [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)     | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`  | Функция для определения уникального ключа группы                       |
+| `isLoading?`                                                       | `boolean`                                              | -                         | При `true` будет отображаться лоудер загрузки                          |
+| `required?`                                                        | `boolean`                                              | -                         | Нужно заполнить                                                        |
+| `labelForEmptyItems?`                                              | `string`                                               | `Список пуст`             | Текст для случая, когда в списке нет значений                          |
+| `onBlur?`                                                          | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `blur`                                              |
+| `onFocus?`                                                         | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `focus`                                             |
+| `ariaLabel?`                                                       | `string`                                               | -                         | `aria` атрибут для поля ввода                                          |
+| `name?`                                                            | `string`                                               | -                         | Имя поля ввода                                                         |
+| `className?`                                                       | `string`                                               | -                         | Дополнительный CSS-класс                                               |
+| `dropdownClassName?`                                               | `string`                                               | -                         | Дополнительный CSS-класс для выпадающего блока                         |
+| `ref?`                                                             | `React.Ref<HTMLDivElement>`                            | -                         | Ссылка на корневой DOM-элемент компонента                              |

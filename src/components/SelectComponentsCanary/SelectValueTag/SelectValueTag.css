@@ -1,0 +1,23 @@
+.TagBase.SelectValueTag {
+  margin: 0 var(--tag-space) var(--tag-space) 0;
+
+  &.TagBase_size_s,
+  &.TagBase_size_m,
+  &.TagBase_size_l {
+    height: calc(var(--tag-base-height) - var(--space-3xs));
+    line-height: calc(var(--tag-base-height) - var(--space-3xs));
+  }
+
+  .TagBase-Label {
+    word-break: break-word;
+  }
+
+  &_disabled {
+    background-color: var(--color-control-bg-disable);
+    pointer-events: none;
+
+    & > * {
+      color: var(--color-control-typo-disable);
+    }
+  }
+}
