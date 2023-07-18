@@ -24,7 +24,7 @@ const getTooltipPosition = (
     const { y, height } = buttonRef.current.getBoundingClientRect();
     return {
       x: Math.round(popoverPosition.x),
-      y: Math.round(y - height + 22),
+      y: Math.round(y + height / 2),
     };
   }
 
@@ -142,13 +142,15 @@ export const SliderPoint = (props: SliderPointProps) => {
             className={cnSliderPoint('Tooltip')}
             direction="downCenter"
             possibleDirections={[
+              'leftCenter',
+              'rightCenter',
               'downCenter',
               'leftDown',
               'rightDown',
               'upCenter',
             ]}
             style={{ zIndex: tooltipZIndex }}
-            offset={8}
+            offset={10}
           >
             {tooltipFormatter ? tooltipFormatter(value) : value}
           </Tooltip>
