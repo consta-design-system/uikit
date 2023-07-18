@@ -4,7 +4,7 @@ export default createStand({
   title: 'useResizableContent',
   id: 'useResizableContent',
   group: 'hooks',
-  description: 'Хук для создания  массива ссылок.',
+  description: 'Хук для динамического изменения размера контента.',
   alias: ['хук', 'ссылка', 'сслыки', 'массив'],
   version: '3.15.0',
   status: 'canary',
