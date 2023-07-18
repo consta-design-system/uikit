@@ -4,7 +4,7 @@ import { Example } from '@consta/stand';
 import React, { useMemo } from 'react';
 
 import { useRefs } from '##/hooks/useRefs';
-import { useResizableContent } from '##/hooks/useResizableContent/useResizableContent';
+import { useResizableContent } from '##/hooks/useResizableContentCanary/useResizableContent';
 import { cn } from '##/utils/bem';
 
 const cnUseResizableContentLayout = cn('UseResizableContentLayout');

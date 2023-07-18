@@ -28,7 +28,6 @@
   &-Toddler {
     position: absolute;
     background: var(--color-bg-brand);
-    cursor: col-resize;
 
     &_direction {
       &_vertical {
@@ -36,6 +35,7 @@
         bottom: -4px;
         width: 100%;
         height: var(--space-xs);
+        cursor: row-resize;
       }
 
       &_horizontal {
@@ -43,6 +43,7 @@
         right: -4px;
         width: var(--space-xs);
         height: 100%;
+        cursor: col-resize;
       }
     }
   }

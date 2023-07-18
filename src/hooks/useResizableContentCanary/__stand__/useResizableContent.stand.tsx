@@ -7,7 +7,7 @@ export default createStand({
   description: 'Хук для создания  массива ссылок.',
   alias: ['хук', 'ссылка', 'сслыки', 'массив'],
   version: '3.15.0',
-  status: 'stable',
+  status: 'canary',
   sandbox: 'useref-8h5862',
   order: 10,
 });

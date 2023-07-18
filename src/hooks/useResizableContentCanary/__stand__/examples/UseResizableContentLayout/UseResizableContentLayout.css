@@ -42,19 +42,20 @@
     position: absolute;
     z-index: 1;
     background: var(--color-bg-brand);
-    cursor: col-resize;
 
     &_direction {
       &_vertical {
         left: 0;
         width: 100%;
         height: var(--space-xs);
+        cursor: row-resize;
       }
 
       &_horizontal {
         top: 0;
         width: var(--space-xs);
         height: 100%;
+        cursor: col-resize;
       }
     }
   }

@@ -46,7 +46,7 @@ export const useResizableContent: UseResizableContent = (props) => {
         });
       }
     },
-    [container, direction, blocks, isActive],
+    [container, direction, blocks],
   );
 
   const handleRelease = useCallback(() => {
