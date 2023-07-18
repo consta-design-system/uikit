@@ -10,6 +10,8 @@ export type UseResizableContentRef = {
   minWidth?: number;
 };
 
+export type UseResizableContentSize = { width?: number; height?: number };
+
 type UseResizableContentProps = {
   blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement>>;
   direction?: UseResizableContentPropDirection;
@@ -21,5 +23,5 @@ export type UseResizableContent = (props: UseResizableContentProps) => {
     onMouseDown: React.MouseEventHandler;
     onTouchStart: React.TouchEventHandler;
   }>;
-  sizes: Array<{ width?: number; height?: number }>;
+  sizes: UseResizableContentSize[];
 };

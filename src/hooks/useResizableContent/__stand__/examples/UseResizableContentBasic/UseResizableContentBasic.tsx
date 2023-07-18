@@ -56,6 +56,7 @@ export const UseResizableContentBasic = () => {
         {toddlerPositions.map((left, index) => (
           <div
             style={{ left }}
+            key={cnUseResizableContentBasic('Toddler', { index })}
             className={cnUseResizableContentBasic('Toddler')}
             {...handlers[index]}
           />
