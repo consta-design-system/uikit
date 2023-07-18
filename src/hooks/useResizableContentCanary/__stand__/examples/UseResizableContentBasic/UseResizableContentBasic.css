@@ -1,0 +1,29 @@
+.UseResizableContentBasic {
+  position: relative;
+  display: flex;
+  width: 600px;
+  height: 600px;
+
+  &-Block {
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: calc(100% / 3);
+    border: 1px solid var(--color-bg-border);
+  }
+
+  & p {
+    user-select: none;
+  }
+
+  &-Toddler {
+    position: absolute;
+    top: 0;
+    width: var(--space-xs);
+    height: 100%;
+    background: var(--color-bg-brand);
+    cursor: col-resize;
+  }
+}
