@@ -73,14 +73,18 @@ const items: Item[] = [
   },
 ];
 
+const getItemLabel = (item: Item) => item.text;
+const getItemView = (item: Item) => item.form;
+const getItemStatus = (item: Item) => item.color;
+
 export const BadgeGroupExampleItems = () => {
   return (
     <BadgeGroup
       items={[...items]}
-      getItemKey={(item) => item.text}
-      getItemLabel={(item) => item.text}
-      getItemView={(item) => item.form}
-      getItemStatus={(item) => item.color}
+      getItemKey={getItemLabel}
+      getItemLabel={getItemLabel}
+      getItemView={getItemView}
+      getItemStatus={getItemStatus}
     />
   );
 };
