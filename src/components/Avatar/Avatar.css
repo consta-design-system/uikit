@@ -32,28 +32,27 @@
   font-weight: var(--font-weight-text-semibold);
   line-height: var(--avatar-size);
   text-align: center;
-  letter-spacing: 0.1em;
   filter: grayscale(0%);
 
   &_size {
     &_xs {
-      --avatar-size: 20px;
-      --avatar-font-size: 6px;
+      --avatar-size: var(--space-l);
+      --avatar-font-size: calc(var(--size-text-xs) / 2);
     }
 
     &_s {
-      --avatar-size: 24px;
-      --avatar-font-size: 8px;
+      --avatar-size: var(--space-xl);
+      --avatar-font-size: calc(var(--size-text-m) / 2);
     }
 
     &_m {
-      --avatar-size: 32px;
-      --avatar-font-size: 10px;
+      --avatar-size: var(--space-2xl);
+      --avatar-font-size: var(--size-text-2xs);
     }
 
     &_l {
-      --avatar-size: 40px;
-      --avatar-font-size: 14px;
+      --avatar-size: var(--space-3xl);
+      --avatar-font-size: var(--size-text-s);
     }
   }
 

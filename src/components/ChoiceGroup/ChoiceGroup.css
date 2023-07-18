@@ -39,24 +39,28 @@
       --choice-height: var(--control-height-xs);
       --choice-font-size: var(--control-text-size-xs);
       --choice-space: var(--control-space-xs);
+      --choice-space-indent: calc(var(--control-space-xs) + var(--space-3xs));
     }
 
     &_s {
       --choice-height: var(--control-height-s);
       --choice-font-size: var(--control-text-size-s);
       --choice-space: var(--control-space-s);
+      --choice-space-indent: var(--control-space-m);
     }
 
     &_m {
       --choice-height: var(--control-height-m);
       --choice-font-size: var(--control-text-size-m);
       --choice-space: var(--control-space-m);
+      --choice-space-indent: var(--control-space-l);
     }
 
     &_l {
       --choice-height: var(--control-height-l);
       --choice-font-size: var(--control-text-size-l);
       --choice-space: var(--control-space-l);
+      --choice-space-indent: calc(var(--control-space-l) + var(--space-2xs));
     }
   }
 
@@ -87,11 +91,8 @@
       --divider-align-self: center;
 
       .ChoiceGroup-Label {
-        padding-right:
-          calc(
-            var(--choice-space) * 1.2 + var(--control-border-width)
-          );
-        padding-left: calc(var(--choice-space) * 1.2);
+        padding-right: var(--choice-space-indent);
+        padding-left: var(--choice-space-indent);
       }
     }
   }

@@ -1,6 +1,7 @@
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type RadioGroupDefaultItem = {
+  key?: string | number;
   label: string;
   disabled?: boolean;
 };
@@ -23,6 +24,9 @@ export type RadioGroupPropAlign = typeof radioGroupPropAlign[number];
 export const radioGroupPropAlignDefault: RadioGroupPropAlign =
   radioGroupPropAlign[0];
 
+export type RadioGroupPropGetItemKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
 export type RadioGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type RadioGroupPropGetItemDisabled<ITEM> = (
   item: ITEM,
@@ -34,6 +38,7 @@ export type RadioGroupProps<ITEM = RadioGroupDefaultItem> =
       align?: RadioGroupPropAlign;
       value?: ITEM | null;
       items: ITEM[];
+      getItemKey?: RadioGroupPropGetItemKey<ITEM>;
       getItemLabel?: RadioGroupPropGetItemLabel<ITEM>;
       getItemDisabled?: RadioGroupPropGetItemDisabled<ITEM>;
       onChange: (props: {

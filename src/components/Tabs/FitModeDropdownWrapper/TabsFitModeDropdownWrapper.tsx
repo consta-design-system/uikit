@@ -29,10 +29,14 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
   });
   const hiddenItems = items.filter((_item, idx) => isItemHidden(idx));
   const maxTabHeight: number = React.useMemo(() => {
+    if (!tabRefs.length) {
+      return 0;
+    }
     return Math.max(
       ...tabRefs.map((tabRef) => tabRef.current?.offsetHeight ?? 0),
     );
   }, [tabsDimensions]);
+
   const checkedItemIsHidden = hiddenItems.some(getItemChecked);
   const visibleTabsWidth = getTabsWidth(
     tabsDimensions.filter((_td, idx) => !isItemHidden(idx)),

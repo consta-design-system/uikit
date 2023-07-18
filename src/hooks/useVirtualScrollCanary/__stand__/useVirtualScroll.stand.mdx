@@ -1,0 +1,107 @@
+import {
+  UseVirtualScrollExampleInfinity,
+  UseVirtualScrollExampleVirtual,
+} from './examples/useVirtualScrollExample/useVirtualScrollExample';
+
+```tsx
+import { useVirtualScroll } from '@consta/uikit/useVirtualScroll';
+```
+
+Хук для огранизации виртуального и бесконечного скроллинга.
+
+# Виртуальный скролл
+
+```tsx
+const items = new Array(10000).fill(null).map((_, i) => i + 1);
+
+const UseVirtualScrollExampleVirtual = () => {
+  const { listRefs, scrollElementRef, slice, spaceTop } = useVirtualScroll({
+    length: items.length,
+    isActive: true,
+  });
+
+  return (
+      <ListBox
+        ref={scrollElementRef}
+        border
+        className={cnUseVirtualScrollExample()}
+      >
+        <div style={{ marginTop: spaceTop }}>
+          {items.slice(...slice).map((item, index) => {
+            return (
+              <ListItem
+                key={`${index}${spaceTop}`}
+                ref={listRefs[slice[0] + index]}
+                label={`Element ${item}`}
+              />
+            );
+          })}
+        </div>
+    </Example>
+  );
+};
+```
+
+<UseVirtualScrollExampleVirtual />
+
+# Бесконечный скролл
+
+```tsx
+const SIZE = 500;
+
+const UseVirtualScrollExampleInfinity = () => {
+  const [length, setLength] = useState<number>(SIZE);
+
+  const items = useMemo(
+    () => new Array(length).fill(null).map((_, i) => i + 1),
+    [length],
+  );
+
+  const { listRefs, scrollElementRef, slice, spaceTop } = useVirtualScroll({
+    length: items.length,
+    isActive: true,
+    onScrollToBottom: () => {
+      setLength((state) => state + SIZE);
+    },
+  });
+
+  return (
+    <ListBox
+      ref={scrollElementRef}
+      border
+      className={cnUseVirtualScrollExample()}
+    >
+      <div style={{ marginTop: spaceTop }}>
+        {items.slice(...slice).map((item, index) => {
+          return (
+            <ListItem
+              key={`${index}${slice[0]}${slice[1]}`}
+              ref={listRefs[slice[0] + index]}
+              label={`Element ${item}`}
+            />
+          );
+        })}
+      </div>
+    </ListBox>
+  );
+};
+```
+
+<UseVirtualScrollExampleInfinity />
+
+## Свойства
+
+| Параметры           | Тип                      | По умолчанию | Описание                                            |
+| ------------------- | ------------------------ | ------------ | --------------------------------------------------- |
+| `length`            | `number`                 | -            | Длина массива элементов                             |
+| `onScrollToBottom?` | `(index:number) => void` | -            | Колбек, срабатывающий при прокрутке списка до конца |
+| `isActive?`         | `boolean`                | -            | Активность хука                                     |
+
+## Результат
+
+| Параметры           | Тип                               | Описание                                                |
+| ------------------- | --------------------------------- | ------------------------------------------------------- |
+| `listRefs`          | `React.RefObject<ITEM_ELEMENT>[]` | Массив ссылок на элементы списка                        |
+| `scrollElementRef?` | `React.RefObject<SCROLL_ELEMENT>` | Ссылка на скролл-контейнер                              |
+| `slice?`            | `[number,number]`                 | Индексы указывающие на начало и конец видимых элементов |
+| `spaceTop?`         | `number`                          | Отступ сверху                                           |

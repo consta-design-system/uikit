@@ -45,3 +45,10 @@ export const mapIconSize: Record<ListPropSize, IconPropSize> = {
   m: 's',
   l: 's',
 };
+
+export const mapDividerVerticalSpace: Record<ListPropSize, Space> = {
+  l: 'm',
+  m: 's',
+  s: 'xs',
+  xs: '2xs',
+};

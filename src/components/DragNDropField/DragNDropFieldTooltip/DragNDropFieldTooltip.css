@@ -1,5 +1,5 @@
 .DragNDropFieldTooltip {
-  &-List {
-    padding-left: var(--space-xl);
+  &-Text {
+    word-break: break-word;
   }
 }

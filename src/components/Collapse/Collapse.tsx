@@ -14,11 +14,13 @@ import {
   CollapseComponent,
   collapsePropCloseDirectionIconDefault,
   collapsePropDirectionIconDefault,
+  collapsePropFormDefault,
   collapsePropIconPositionDefault,
   collapsePropIconViewDefault,
   CollapseProps,
   CollapsePropSize,
   collapsePropSizeDefault,
+  CollapsePropView,
   collapsePropViewDefault,
 } from './types';
 
@@ -51,6 +53,13 @@ const getMaxHeight = (height: number, maxHeight?: number | string) => {
   return `${height}px`;
 };
 
+const collapseViewMap: Record<CollapsePropView, 'clear' | 'ghost'> = {
+  clear: 'clear',
+  ghost: 'ghost',
+  primary: 'clear',
+  secondary: 'ghost',
+};
+
 export const Collapse: CollapseComponent = React.forwardRef<
   HTMLDivElement,
   CollapseProps
@@ -62,10 +71,11 @@ export const Collapse: CollapseComponent = React.forwardRef<
   const {
     label,
     size = collapsePropSizeDefault,
-    view = collapsePropViewDefault,
+    view: viewProp = collapsePropViewDefault,
     className,
     maxContentHeight,
     isOpen,
+    form = collapsePropFormDefault,
     children,
     hoverEffect,
     divider,
@@ -81,6 +91,19 @@ export const Collapse: CollapseComponent = React.forwardRef<
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, collapseRef);
 
+  const view = collapseViewMap[viewProp];
+
+  const iconProps = {
+    className: cnCollapse('Icon', { position: iconPosition }),
+    size: sizeIconMap[size],
+    icon,
+    closeIcon,
+    isOpen,
+    direction: directionIcon,
+    closeDirection: closeDirectionIcon,
+    view: iconView,
+  };
+
   return (
     <div
       ref={useForkRef([ref, collapseRef])}
@@ -89,35 +112,27 @@ export const Collapse: CollapseComponent = React.forwardRef<
         ...style,
         ['--horizontal-space' as string]: horizontalSpace
           ? `var(--space-${horizontalSpace})`
-          : 0,
+          : `0px`,
       }}
     >
       <div
         className={cnCollapse('Label', {
           hoverEffect,
-          iconPosition,
           view,
+          form,
         })}
         {...otherProps}
       >
-        <CollapseIcon
-          className={cnCollapse('Icon', { position: iconPosition })}
-          size={sizeIconMap[size]}
-          icon={icon}
-          closeIcon={closeIcon}
-          isOpen={isOpen}
-          direction={directionIcon}
-          closeDirection={closeDirectionIcon}
-          view={iconView}
-        />
+        {iconPosition === 'left' && <CollapseIcon {...iconProps} />}
         {typeof label === 'object' ? (
           <div className={cnCollapse('LabelText')}>{label}</div>
         ) : (
-          <Text className={cnCollapse('LabelText')} view={view} size={size}>
+          <Text className={cnCollapse('LabelText')} size={size}>
             {label}
           </Text>
         )}
-        {iconPosition === 'left' && renderSide(rightSide)}
+        {renderSide(rightSide)}
+        {iconPosition === 'right' && <CollapseIcon {...iconProps} />}
       </div>
       <div
         style={{

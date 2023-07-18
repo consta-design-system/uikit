@@ -35,6 +35,9 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef(
       locale = ruLocale,
       className,
       view = dateTimePropViewDefault,
+      multiplicityHours,
+      multiplicityMinutes,
+      multiplicitySeconds,
       onMove,
       onChangeCurrentVisibleDate,
       ...otherProps

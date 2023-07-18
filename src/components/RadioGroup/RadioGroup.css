@@ -21,11 +21,11 @@
 
   &_size {
     &_xs {
-      --offset: var(--space-3xs);
+      --offset: var(--space-2xs);
     }
 
     &_s {
-      --offset: var(--space-2xs);
+      --offset: var(--space-xs);
     }
 
     &_m {

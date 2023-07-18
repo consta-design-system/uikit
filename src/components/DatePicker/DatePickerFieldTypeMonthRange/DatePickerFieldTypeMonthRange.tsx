@@ -36,6 +36,7 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
     required,
     tabIndex,
     ariaLabel,
+    id,
     iconSize,
     format,
     separator,
@@ -97,6 +98,8 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
       {label && (
         <FieldLabel
           icon={labelIcon}
+          as="label"
+          htmlFor={id}
           required={required}
           className={cnDatePickerMixRangeField('Label', { labelPosition })}
           size={size}
@@ -115,6 +118,7 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
             form={getFormForStart(form)}
             value={value?.[0]}
             onChange={handleStartDateChange}
+            id={id}
             onFocus={startFieldOnFocus}
             onBlur={startFieldOnBlur}
             focused={startFocused}

@@ -17,7 +17,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useIMask } from '##/components/TextField';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
-import { leapYear } from '../../../utils/date';
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import {
   getLabelHours,
@@ -32,9 +31,8 @@ import {
   TextFieldPropWidth,
 } from '../../TextField/TextField';
 import {
-  datePickerPropFormatTypeDate,
-  datePickerPropFormatTypeDateTime,
   datePickerPropSeparatorDefault,
+  getPartDate,
   getParts,
   getPartsDate,
   getTimeEnum,
@@ -125,11 +123,6 @@ export const usePicker = (props: UsePickerProps) => {
   );
   const stringValueRef = useMutableRef(stringValue);
 
-  const formatParts = useMemo(
-    () => getParts(formatProp, separator, true),
-    [formatProp, separator],
-  );
-
   const handleChange = useCallback(
     ({ e, value: stringValue }: { e: Event; value: string | null }) => {
       if (stringValueRef.current === stringValue) {
@@ -148,25 +141,28 @@ export const usePicker = (props: UsePickerProps) => {
           return;
         }
 
-        const partsDate = getPartsDate(
-          stringValue,
-          formatProp,
-          separator,
-          true,
-          ['dd', 'MM', 'yyyy', 'HH', 'mm', 'ss'],
-        );
+        const formatArray = getParts(formatProp, separator, false);
+        const valueArray = getParts(stringValue, separator, false);
+        const validArray = formatArray
+          .map((marker) => getPartDate(formatArray, valueArray, marker))
+          .filter((item) => Boolean(item));
 
-        const [dd, MM, yyyy, HH, mm, ss] = partsDate;
-
-        if (partsDate.filter((item) => !!item).length === formatParts.length) {
+        if (formatArray.length === validArray.length) {
           const date = parse(
-            `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy} ${
-              HH || '00'
-            }:${mm || '00'}:${ss || '00'}`,
-            datePickerPropFormatTypeDateTime,
+            valueArray.join(datePickerPropSeparatorDefault),
+            formatArray.join(datePickerPropSeparatorDefault),
             new Date(),
           );
+
           if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
+            const [dd, MM, yyyy, HH, mm, ss] = getPartsDate(
+              stringValue,
+              formatProp,
+              separator,
+              true,
+              ['dd', 'MM', 'yyyy', 'HH', 'mm', 'ss'],
+            );
+
             onErrorRef.current?.({
               type: datePickerErrorTypes[0],
               stringValue,
@@ -271,24 +267,30 @@ export const usePicker = (props: UsePickerProps) => {
         format: (date: Date) => format(date, formatProp),
         parse: (string: string) => parse(string, formatProp, new Date()),
         validate: (string: string) => {
-          const [dd, MM, yyyy, HH, mm, ss] = getPartsDate(
-            string,
-            formatProp,
-            separator,
-            true,
-            ['dd', 'MM', 'yyyy', 'HH', 'mm', 'ss'],
-          );
+          const formatArray = getParts(formatProp, separator, false);
+          const valueArray = getParts(string, separator, false);
+          const validArray = formatArray
+            .map((marker) => getPartDate(formatArray, valueArray, marker))
+            .filter((item) => Boolean(item));
+
           if (
-            dd &&
-            MM &&
+            formatArray.length === validArray.length &&
             !isValid(
               parse(
-                `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${leapYear}`,
-                datePickerPropFormatTypeDate,
+                valueArray.join(datePickerPropSeparatorDefault),
+                formatArray.join(datePickerPropSeparatorDefault),
                 new Date(),
               ),
             )
           ) {
+            const [dd, MM, yyyy, HH, mm, ss] = getPartsDate(
+              string,
+              formatProp,
+              separator,
+              true,
+              ['dd', 'MM', 'yyyy', 'HH', 'mm', 'ss'],
+            );
+
             onErrorRef.current?.({
               type: datePickerErrorTypes[1],
               stringValue: string,
@@ -301,30 +303,7 @@ export const usePicker = (props: UsePickerProps) => {
             });
             return false;
           }
-          if (
-            dd &&
-            MM &&
-            yyyy &&
-            !isValid(
-              parse(
-                `${dd}${datePickerPropSeparatorDefault}${MM}${datePickerPropSeparatorDefault}${yyyy}`,
-                datePickerPropFormatTypeDate,
-                new Date(),
-              ),
-            )
-          ) {
-            onErrorRef.current?.({
-              type: datePickerErrorTypes[1],
-              stringValue: string,
-              dd,
-              MM,
-              yyyy,
-              HH,
-              mm,
-              ss,
-            });
-            return false;
-          }
+
           return true;
         },
         // проблема в типах IMask

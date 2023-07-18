@@ -175,8 +175,10 @@ export const TextFieldRender = <TYPE extends string>(
     onKeyDownProp?.(e);
     if (type === 'number' && typeof flag === 'boolean' && !disabled) {
       e.preventDefault();
-      onChange?.({
+      onChangeRef.current?.({
         e,
+        id,
+        name,
         value: getValueByStep(sortedSteps, value, flag, min, max),
       });
     }
@@ -207,6 +209,8 @@ export const TextFieldRender = <TYPE extends string>(
   const handleClear = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     onChangeRef.current?.({
       e,
+      id,
+      name,
       value: null,
     });
   }, []);
@@ -215,8 +219,10 @@ export const TextFieldRender = <TYPE extends string>(
     e: React.MouseEvent<HTMLButtonElement>,
     isIncrement = true,
   ) => {
-    onChange?.({
+    onChangeRef.current?.({
       e,
+      id,
+      name,
       value: getValueByStep(sortedSteps, value, isIncrement, min, max),
     });
   };
@@ -244,6 +250,8 @@ export const TextFieldRender = <TYPE extends string>(
     >
       {label && (
         <FieldLabel
+          as="label"
+          htmlFor={id?.toString()}
           icon={labelIcon}
           required={required}
           className={cnTextField('Label', { labelPosition })}

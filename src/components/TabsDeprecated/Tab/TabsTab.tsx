@@ -4,11 +4,11 @@ import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React, { forwardRef } from 'react';
 
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
-import { cn } from '../../../utils/bem';
+import { cnDeprecated } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';
 import { TabsPropSize } from '../TabsDeprecated';
 
-export const cnTabsTab = cn('TabsTab');
+export const cnTabsTab = cnDeprecated('TabsTab');
 
 type Props = {
   size: TabsPropSize;

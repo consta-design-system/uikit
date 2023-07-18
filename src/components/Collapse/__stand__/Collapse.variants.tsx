@@ -15,6 +15,8 @@ import {
   collapsePropCloseDirectionIconDefault,
   collapsePropDirectionIcon,
   collapsePropDirectionIconDefault,
+  collapsePropForm,
+  collapsePropFormDefault,
   collapsePropHorizontalSpace,
   collapsePropIconView,
   collapsePropIconViewDefault,
@@ -29,6 +31,7 @@ const cnCollapseVariants = cn('CollapseVariants');
 
 const Variants = () => {
   const size = useSelect('size', collapsePropSize, collapsePropSizeDefault);
+  const form = useSelect('form', collapsePropForm, collapsePropFormDefault);
   const label = useText('label', 'Заголовок');
   const children = useText(
     'children',
@@ -39,16 +42,16 @@ const Variants = () => {
   const maxHeight = useNumber('maxHeight');
   const hoverEffect = useBoolean('hoverEffect', false);
   const view = useSelect('view', collapsePropView, collapsePropViewDefault);
+  const horizontalSpace = useSelect(
+    'horizontalSpace',
+    collapsePropHorizontalSpace,
+  );
   const iconView = useSelect(
     'iconView',
     collapsePropIconView,
     collapsePropIconViewDefault,
   );
   const divider = useBoolean('divider', false);
-  const horizontalSpace = useSelect(
-    'horizontalSpace',
-    collapsePropHorizontalSpace,
-  );
   const rightSide = useBoolean('rightSide', false);
   const directionIcon = useSelect(
     'directionIcon',
@@ -74,6 +77,7 @@ const Variants = () => {
       <Collapse
         size={size}
         label={label || ''}
+        form={form}
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
         hoverEffect={hoverEffect}
@@ -83,12 +87,8 @@ const Variants = () => {
         horizontalSpace={horizontalSpace}
         style={{ maxWidth: 300 }}
         iconView={iconView}
-        {...(iconPosition === 'left'
-          ? {
-              iconPosition,
-              rightSide: rightSide ? defaultRightSide : undefined,
-            }
-          : { iconPosition })}
+        iconPosition={iconPosition}
+        rightSide={rightSide ? defaultRightSide : undefined}
         {...(withCustomIcon
           ? {
               icon: IconAdd,

@@ -98,6 +98,8 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     onFocus,
   });
 
+  const inputId = id ? `${id}-input` : id;
+
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter } = props;
 
@@ -139,6 +141,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
         required={required}
         ref={ref}
         style={style}
+        id={inputId}
         {...restProps}
       >
         <div
@@ -154,6 +157,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
                 {...getKeyProps()}
                 type="button"
                 name={name}
+                id={inputId}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
                 aria-label={ariaLabel}

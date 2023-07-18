@@ -3,6 +3,7 @@ import React from 'react';
 
 import {
   CollapseIconPropDirection,
+  CollapsePropForm,
   CollapsePropHorizontalSpace,
   CollapsePropIconView,
   CollapsePropSize,
@@ -43,6 +44,7 @@ export type CollapseGroupProps<
     icon?: IconComponent;
     divider?: boolean;
     size?: CollapsePropSize;
+    form?: CollapsePropForm;
     view?: CollapsePropView;
     horizontalSpace?: CollapsePropHorizontalSpace;
     hoverEffect?: boolean;

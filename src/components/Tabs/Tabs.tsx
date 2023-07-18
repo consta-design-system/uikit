@@ -13,7 +13,7 @@ import {
   withDefaultGetters,
 } from './helpers';
 import { TabsBorderLine, TabsRunningLine } from './Line/TabsLine';
-import { cnTabsTab, TabsTab } from './Tab/TabsTab';
+import { TabsTab } from './Tab/TabsTab';
 import {
   RenderItemProps,
   RenderItemsListProp,
@@ -31,8 +31,8 @@ export const cnTabs = cn('Tabs');
 function renderItemDefault<ITEM>(
   props: RenderItemProps<ITEM>,
 ): React.ReactElement {
-  const { item, ...otherProps } = props;
-  return <TabsTab {...otherProps} />;
+  const { item, attributes = {}, ...otherProps } = props;
+  return <TabsTab {...attributes} {...otherProps} />;
 }
 
 const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
@@ -46,6 +46,9 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
     fitMode = tabsDefaultFitMode,
     onlyIcon,
     getItemIcon,
+    getItemAs,
+    getItemAttributes,
+    getItemRef,
     getItemLabel,
     onChange,
     iconSize,
@@ -112,6 +115,9 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
       size,
       iconSize,
       renderInDropdown,
+      as: getItemAs(item) || 'button',
+      tabRef: getItemRef(item),
+      attributes: getItemAttributes(item),
     });
 
   const renderItemsList: RenderItemsListProp = ({
@@ -164,7 +170,5 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
 };
 
 export const Tabs = forwardRef(TabsRender) as TabsComponent;
-
-export { TabsTab, cnTabsTab };
 
 export * from './types';

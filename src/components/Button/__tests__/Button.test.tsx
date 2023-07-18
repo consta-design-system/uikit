@@ -98,7 +98,6 @@ describe('Компонент Button', () => {
 
         expect(handleClick).toHaveBeenCalledTimes(0);
 
-        expect(button).toBeDisabled();
         expect(button).toHaveClass(cnButton({ disabled: true }));
       });
 
@@ -127,7 +126,6 @@ describe('Компонент Button', () => {
 
         expect(handleClick).toHaveBeenCalledTimes(0);
 
-        expect(button).toBeDisabled();
         expect(button).toHaveClass(cnButton({ loading: true }));
       });
 

@@ -1,3 +1,4 @@
+import { IconDinosaur } from '@consta/icons/IconDinosaur';
 import { IconUser } from '@consta/icons/IconUser';
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React from 'react';
@@ -31,7 +32,8 @@ const Variants = () => {
     badgePropFormDefault,
     !minified,
   );
-  const icon = useBoolean('icon', false, !minified);
+  const iconLeft = useBoolean('iconLeft', false, !minified);
+  const iconRight = useBoolean('iconRight', false, !minified);
 
   return (
     <Badge
@@ -41,7 +43,8 @@ const Variants = () => {
       status={status}
       form={form}
       minified={minified}
-      icon={icon ? IconUser : undefined}
+      iconLeft={iconLeft ? IconUser : undefined}
+      iconRight={iconRight ? IconDinosaur : undefined}
     />
   );
 };

@@ -1,14 +1,19 @@
 .SnackBarVariants {
   display: flex;
+  overflow: auto;
   flex-direction: row;
   width: 100%;
   height: calc(100vh - var(--space-3xl));
+  max-height: 100%;
   margin-right: calc(-1 * var(--space-xs));
   margin-left: calc(-1 * var(--space-xs));
+  flex-wrap: wrap-reverse;
+  row-gap: var(--space-s);
 
   &-SnackBar {
     overflow: auto;
     flex: none;
+    max-height: 100%;
   }
 
   &-Buttons {

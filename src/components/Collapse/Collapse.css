@@ -1,5 +1,5 @@
 .Collapse {
-  color: var(--collapse-color);
+  color: var(--color-typo-primary);
 
   &_size {
     &_2xs {
@@ -39,13 +39,13 @@
   }
 
   &_view {
-    &_primary {
-      --collapse-color: var(--color-typo-primary);
+    &_clear {
+      --collapse-bg: transparent;
       --collapse-bg-hover: var(--color-control-bg-clear-hover);
     }
 
-    &_secondary {
-      --collapse-color: var(--color-typo-secondary);
+    &_ghost {
+      --collapse-bg: var(--color-control-bg-ghost);
       --collapse-bg-hover: var(--color-control-bg-ghost-hover);
     }
   }
@@ -54,7 +54,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: var(--vertical-space) var(--horizontal-space);
+    padding: var(--collapse-label-padding);
+    background: var(--collapse-bg);
+    border-radius: var(--collapse-label-radius);
     cursor: pointer;
     transition: background 0.3s;
 
@@ -64,9 +66,20 @@
       }
     }
 
-    &_iconPosition {
-      &_right {
-        flex-direction: row-reverse;
+    &_form {
+      &_brick {
+        --collapse-label-padding: var(--vertical-space) var(--horizontal-space);
+        --collapse-label-radius: 0;
+      }
+
+      &_default {
+        --collapse-label-padding: var(--vertical-space) var(--horizontal-space);
+        --collapse-label-radius: var(--control-radius);
+      }
+
+      &_round {
+        --collapse-label-padding: var(--vertical-space) var(--horizontal-space);
+        --collapse-label-radius: var(--space-3xl);
       }
     }
   }

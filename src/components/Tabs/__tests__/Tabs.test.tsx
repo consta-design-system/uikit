@@ -11,7 +11,7 @@ import {
   TabsProps as Props,
   tabsSizes,
   tabsViews,
-} from '../Tabs';
+} from '..';
 
 const testId = cnTabs();
 

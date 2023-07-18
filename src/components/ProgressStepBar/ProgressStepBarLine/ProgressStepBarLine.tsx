@@ -24,7 +24,7 @@ const getActiveLineSize = (
     return 0;
   }
 
-  return lineSizes.splice(0, active).reduce((a, b) => a + b);
+  return lineSizes.splice(0, active).reduce((a, b) => a + b, 0);
 };
 
 type PathItem = {
@@ -58,7 +58,7 @@ const getPathParams = (lines: Line[], direction: PropDirection) => {
 
 export const ProgressStepBarLine = (props: ProgressStepBarLineProps) => {
   const { lines, activeStepIndex, size, direction, ...otherProps } = props;
-  const lineSize = lines.map(({ size }) => size).reduce((a, b) => a + b);
+  const lineSize = lines.map(({ size }) => size).reduce((a, b) => a + b, 0);
   const activeLineSize = getActiveLineSize(activeStepIndex, lines);
 
   return (

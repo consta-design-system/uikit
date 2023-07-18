@@ -1,6 +1,8 @@
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
+import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
+
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 export type TabDimensions = {
@@ -15,6 +17,9 @@ export type TabsItemDefault = {
   rightSide?: React.ReactNode;
   leftSide?: React.ReactNode;
   disabled?: boolean;
+  as?: keyof JSX.IntrinsicElements;
+  ref?: React.RefObject<HTMLElement>;
+  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
 
   /**
    * @deprecated since version 4.11.0 use leftIcon
@@ -47,6 +52,16 @@ export type TabsPropGetItemSide<ITEM> = (
   item: ITEM,
 ) => React.ReactNode | undefined;
 
+export type TabsPropGetItemAs<ITEM> = (
+  item: ITEM,
+) => keyof JSX.IntrinsicElements | undefined;
+export type TabsPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => TabsItemDefault['attributes'];
+export type TabsPropGetItemRef<ITEM> = (
+  item: ITEM,
+) => React.RefObject<HTMLElement> | undefined;
+
 export type TabsPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 
 export type TabsPropOnChange<ITEM> = (props: {
@@ -62,8 +77,9 @@ export type RenderItemProps<ITEM> = {
   iconSize?: IconPropSize;
   onlyIcon?: boolean;
   label: string;
+  tabRef?: React.RefObject<HTMLElement>;
   renderInDropdown?: boolean;
-} & Omit<TabsItemDefault, 'label'>;
+} & Omit<TabsItemDefault, 'label' | 'ref'>;
 
 export type RenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
@@ -94,6 +110,9 @@ export type TabsProps<ITEM = TabsItemDefault> = PropsWithHTMLAttributesAndRef<
     getItemLeftSide?: TabsPropGetItemSide<ITEM>;
     getItemRightSide?: TabsPropGetItemSide<ITEM>;
     getItemDisabled?: TabsPropGetItemDisabled<ITEM>;
+    getItemAs?: TabsPropGetItemAs<ITEM>;
+    getItemAttributes?: TabsPropGetItemAttributes<ITEM>;
+    getItemRef?: TabsPropGetItemRef<ITEM>;
     children?: never;
     onChange: TabsPropOnChange<ITEM>;
     renderItem?: RenderItem<ITEM>;
@@ -125,16 +144,27 @@ export type TabsComponent = <ITEM>(
   props: TabsProps<ITEM>,
 ) => React.ReactElement | null;
 
-export type TabsTabProps = {
-  onChange: React.MouseEventHandler;
-  checked: boolean;
-  size: TabsPropSize;
-  iconSize?: IconPropSize;
-  onlyIcon?: boolean;
-  className?: string;
-  label: string;
-  renderInDropdown?: boolean;
-} & Omit<TabsItemDefault, 'label'>;
+export type TabsTabProps<AS extends keyof JSX.IntrinsicElements = 'button'> =
+  PropsWithAsAttributes<
+    {
+      onChange: React.MouseEventHandler;
+      checked: boolean;
+      size: TabsPropSize;
+      iconSize?: IconPropSize;
+      onlyIcon?: boolean;
+      className?: string;
+      label: string;
+      tabRef?: React.RefObject<HTMLElement>;
+      renderInDropdown?: boolean;
+    } & Omit<TabsItemDefault, 'label' | 'ref' | 'attributes'>,
+    AS
+  >;
+
+export type TabsTabComponent = <
+  AS extends keyof JSX.IntrinsicElements = 'button',
+>(
+  props: TabsTabProps<AS>,
+) => React.ReactElement | null;
 
 export type TabsMoreItemsProps<ITEM = TabsItemDefault> =
   PropsWithHTMLAttributesAndRef<

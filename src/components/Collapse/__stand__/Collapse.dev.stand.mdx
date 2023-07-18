@@ -3,6 +3,7 @@ import { MdxMenu } from '@consta/stand';
 import { CollapseExampleView } from './examples/CollapseExampleView/CollapseExampleView';
 import { CollapseExampleSpace } from './examples/CollapseExampleSpace/CollapseExampleSpace';
 import { CollapseExampleHover } from './examples/CollapseExampleHover/CollapseExampleHover';
+import { CollapseExampleForm } from './examples/CollapseExampleForm/CollapseExampleForm';
 import { CollapseExampleSize } from './examples/CollapseExampleSize/CollapseExampleSize';
 import { CollapseExampleIconPosition } from './examples/CollapseExampleIconPosition/CollapseExampleIconPosition';
 import { CollapseExampleIconDivider } from './examples/CollapseExampleIconDivider/CollapseExampleIconDivider';
@@ -33,6 +34,7 @@ import { Collapse } from '@consta/uikit/Collapse';
   - [Расположение иконки](#расположение-иконки)
   - [Направление иконки](#направление-иконки)
 - [Внешний вид](#внешний-вид)
+- [Форма](#форма)
 - [Размер](#размер)
 - [Отступы](#отступы)
 - [Импорт](#импорт)
@@ -120,7 +122,7 @@ export const CollapseExampleIconDivider = () => {
 
 Справа от заголовка можно добавить иконку, бейджик, кнопку, текст или что-то ещё. Это поможет выделить коллапсы или разбить на группы.
 
-За дополнительный элемент отвечает свойство `rightSide`. Его можно использовать, только если иконка у коллапса расположена слева.
+За дополнительный элемент отвечает свойство `rightSide`.
 
 ```tsx
 export const CollapseExampleIconRightSideBadge = () => {
@@ -274,8 +276,8 @@ export const CollapseExampleIconCustomIconDirection = () => {
 
 У коллапса два варианта отображения:
 
-- `primary` — используется по умолчанию,
-- `secondary` — подходит, чтобы сделать коллапс не таким заметным.
+- `clear` — используется по умолчанию,
+- `ghost` — подходит, чтобы сделать коллапс более заметным.
 
 ```tsx
 export const CollapseExampleView = () => {
@@ -285,16 +287,16 @@ export const CollapseExampleView = () => {
   return (
     <div>
       <Collapse
-        label="Primary"
-        view="primary"
+        label="Clear"
+        view="clear"
         isOpen={isOpen}
         onClick={() => setOpen(!isOpen)}
       >
         {content}
       </Collapse>
       <Collapse
-        label="Secondary"
-        view="secondary"
+        label="Ghost"
+        view="ghost"
         isOpen={isOpenTwo}
         onClick={() => setOpenTwo(!isOpenTwo)}
       >
@@ -306,6 +308,59 @@ export const CollapseExampleView = () => {
 ```
 
 <CollapseExampleView />
+
+## Форма
+
+У коллапса три варианта форм:
+
+- `brick` — используется по умолчанию,
+- `default` — добавляет скругление граням,
+- `round` — делает грани круглыми.
+
+```tsx
+export const CollapseExampleForm = () => {
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const [isOpenTwo, setOpenTwo] = useState<boolean>(false);
+  const [isOpenThree, setIsOpenThree] = useState<boolean>(false);
+
+  return (
+    <div>
+      <Collapse
+        label="Brick"
+        form="brick"
+        hoverEffect
+        horizontalSpace="m"
+        isOpen={isOpen}
+        onClick={() => setOpen(!isOpen)}
+      >
+        {content}
+      </Collapse>
+      <Collapse
+        label="Default"
+        form="default"
+        hoverEffect
+        horizontalSpace="m"
+        isOpen={isOpenTwo}
+        onClick={() => setOpenTwo(!isOpenTwo)}
+      >
+        {content}
+      </Collapse>
+      <Collapse
+        label="Round"
+        form="round"
+        horizontalSpace="m"
+        hoverEffect
+        isOpen={isOpenThree}
+        onClick={() => setIsOpenThree(!isOpenTwo)}
+      >
+        {content}
+      </Collapse>
+    </div>
+  );
+};
+```
+
+<CollapseExampleForm />
 
 ## Размер
 
@@ -366,7 +421,8 @@ import { Collapse } from '@consta/uikit/Collapse';
 | -------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------- |
 | [`label`](#заголовок)                        | `React.ReactNode`                                                                                  | -               | Заголовок коллапса                                                          |
 | [`size?`](#размер)                           | `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`                                                               | `'m'`           | Размер                                                                      |
-| [`view?`](#внешний-вид)                      | `'primary'`, `'secondary'`                                                                         | `'primary'`     | Внешний вид                                                                 |
+| [`form?`](#форма)                            | `'default'`, `'brick'`, `'round'`                                                                  | `'brick'`       | Форма компонента                                                            |
+| [`view?`](#внешний-вид)                      | `'clear'`, `'ghost'`, `'primary'`, `'secondary'`                                                   | `'clear'`       | Внешний вид                                                                 |
 | [`iconView?`](#внешний-вид-иконки)           | `'clear'`, `'ghost'`                                                                               | `'clear'`       | Внешний вид иконки разворота                                                |
 | [`hoverEffect?`](#подсветка)                 | `boolean`                                                                                          | -               | Подсвечивает заголовок при наведении                                        |
 | [`divider?`](#разделитель)                   | `boolean`                                                                                          | -               | Добавляет разделитель между заголовком и содержимым                         |

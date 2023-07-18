@@ -9,13 +9,15 @@
       --checkbox-font-size: var(--control-text-size-xs);
       --checkbox-size: var(--control-box-size-s);
       --checkbox-offset: var(--space-xs);
+      --checkbox-intermidate-width: calc(var(--space-xs) - var(--space-3xs));
       --checkbox-arrow-width: calc(3 * var(--space-3xs) / 4);
     }
 
     &_s {
       --checkbox-font-size: var(--control-text-size-s);
-      --checkbox-size: var(--control-box-size-s);
+      --checkbox-size: calc(var(--control-box-size-s) + var(--space-3xs));
       --checkbox-offset: var(--space-xs);
+      --checkbox-intermidate-width: var(--space-xs);
       --checkbox-arrow-width: calc(3 * var(--space-3xs) / 4);
     }
 
@@ -23,6 +25,7 @@
       --checkbox-font-size: var(--control-text-size-m);
       --checkbox-size: var(--control-box-size-m);
       --checkbox-offset: var(--space-xs);
+      --checkbox-intermidate-width: calc(var(--space-s) - var(--space-3xs));
       --checkbox-arrow-width: var(--space-3xs);
     }
 
@@ -30,6 +33,7 @@
       --checkbox-font-size: var(--control-text-size-l);
       --checkbox-size: var(--control-box-size-l);
       --checkbox-offset: var(--space-s);
+      --checkbox-intermidate-width: calc(var(--space-m) - var(--space-3xs));
       --checkbox-arrow-width: var(--space-3xs);
     }
   }
@@ -63,11 +67,13 @@
       border-color: var(--checkbox-checked-border);
 
       &::before {
+        width: var(--checkbox-intermidate-width);
+        height: var(--space-3xs);
         background-color: var(--checkbox-checked-check);
         border: none;
         opacity: 1;
         transition: opacity 0.15s, transform 0.15s, background-color 0.08s 0.04s;
-        transform: rotate(0) scale(1, 0.48) translate(0, -50%);
+        transform: rotate(0) translate(0, -50%);
       }
     }
   }
@@ -119,6 +125,7 @@
     position: relative;
     box-sizing: border-box;
     width: var(--checkbox-size);
+    max-width: var(--checkbox-size);
     height: var(--checkbox-size);
     margin: 0;
     padding: 0;
@@ -135,9 +142,8 @@
     &::before {
       content: '';
       position: absolute;
-      z-index: 1;
-      top: calc(var(--checkbox-size) / 2 - 1px);
-      left: calc(var(--checkbox-size) / 5 - 1px);
+      top: calc(calc(var(--checkbox-size) - 1px) / 2);
+      left: calc(calc(var(--checkbox-size) - 6px) / 5);
       box-sizing: border-box;
       width: calc(var(--checkbox-size) * 0.6);
       height: calc(var(--checkbox-size) * 0.35);

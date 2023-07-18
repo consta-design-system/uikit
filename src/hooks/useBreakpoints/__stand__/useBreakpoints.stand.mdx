@@ -56,3 +56,26 @@ const breakpoint = getLastPoint(useBreakpoints({ m: 300, l: 500 }));
 | Аргумент | Тип и значения           | По умолчанию | Описание                |
 | -------- | ------------------------ | ------------ | ----------------------- |
 | `map?`   | `Record<POINTS, number>` | -            | Набор контрольных точек |
+
+### createMods
+
+Хелпер `addPrefix` добавляет префикс для наименований брейкпоинтов для дальнейшего использования их в функции `cn`
+
+```tsx
+import { useBreakpoints, addPrefix } from '@consta/uikit/useBreakpoints';
+
+const breakpoints = useBreakpoints({ l: 500, xl: 800, 2xl:1000 });
+
+
+<div className={cnComponent(addPrefix(breakpoints))} />;
+
+// Component Component_breakpointL Component_breakpointXl Component_breakpoint2xl
+
+```
+
+## Свойства
+
+| Аргумент      | Тип и значения            | По умолчанию   | Описание                                      |
+| ------------- | ------------------------- | -------------- | --------------------------------------------- |
+| `breakpoints` | `Record<string, boolean>` | -              | Брейкпоинты, возвращаемые из `useBreakpoints` |
+| `prefix`      | `string`                  | `'breakpoint'` | Префикс наименования модификатора             |

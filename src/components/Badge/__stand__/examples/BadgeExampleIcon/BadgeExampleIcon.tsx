@@ -7,7 +7,7 @@ import { Badge } from '../../../Badge';
 
 export const BadgeExampleIcon = () => (
   <Example>
-    <Badge icon={IconCheck} status="success" label="Съедобно" />
-    <Badge icon={IconClose} status="error" label="Отрава" />
+    <Badge iconLeft={IconCheck} status="success" label="Съедобно" />
+    <Badge iconRight={IconClose} status="error" label="Отрава" />
   </Example>
 );

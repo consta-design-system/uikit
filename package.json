@@ -1,6 +1,6 @@
 {
   "name": "@consta/uikit",
-  "version": "4.16.0",
+  "version": "4.22.0",
   "keywords": [
     "ui-kit",
     "design-system",
@@ -16,7 +16,7 @@
   "dependencies": {
     "@bem-react/classname": "^1.5.12",
     "@bem-react/classnames": "^1.3.10",
-    "@consta/icons": "^0.1.1",
+    "@consta/icons": "^0.5.2",
     "compute-scroll-into-view": "^1.0.17",
     "date-fns": "^2.29.1",
     "focus-trap-react": "8.7.0",
@@ -53,19 +53,19 @@
     "unit": "jest",
     "unit:watch": "jest --watch",
     "unit:clear": "jest --clearCache",
-    "build:css": "NODE_ENV=buildProduction postcss 'src/**/*.css' --base src --dir dist/__internal__/src/",
-    "build:js": "NODE_ENV=buildProduction BUILDING_JS=true babel --extensions '.ts,.tsx' --config-file ./babel.config.js --source-maps --out-dir dist/__internal__/src/ ./src",
-    "build:types": "NODE_ENV=buildProduction ttsc --declaration --outDir dist/__internal__/src/ --emitDeclarationOnly -p tsconfig.build.json",
+    "build:css": "cross-env NODE_ENV=buildProduction postcss 'src/**/*.css' --base src --dir dist/__internal__/src/",
+    "build:js": "cross-env NODE_ENV=buildProduction BUILDING_JS=true babel --extensions '.ts,.tsx' --config-file ./babel.config.js --source-maps --out-dir dist/__internal__/src/ ./src",
+    "build:types": "cross-env NODE_ENV=buildProduction ttsc --declaration --outDir dist/__internal__/src/ --emitDeclarationOnly -p tsconfig.build.json",
     "build:package.json": "node scripts/prepare-package-json.js",
     "build:reexports": "node scripts/generateReExports.js --config=scripts/generateReExportsConfig.js",
-    "build:docs": "cp README.md dist/README.md",
-    "build": "rm -rf dist && yarn build:css && yarn build:js && yarn build:types && yarn build:package.json && yarn build:docs && yarn build:reexports",
+    "build:copy-assets": "node scripts/copyAssets.js",
+    "build": "yarn rm:dist && yarn build:css && yarn build:js && yarn build:types && yarn build:package.json && yarn build:copy-assets && yarn build:reexports",
     "stand:generate": "node node_modules/@consta/stand/scripts/standGenerate.js --config=scripts/config.js",
-    "stand:build": "rm -rf ./build && yarn stand:generate && NODE_ENV=production webpack --mode production --config node_modules/@consta/stand/webpack.config.js",
-    "stand:start": "NODE_ENV=development webpack serve --open --progress --mode development --hot --progress --config node_modules/@consta/stand/webpack.config.js",
-    "stand:dev": "NODE_ENV=standDevelopment webpack serve --open --progress --mode development --hot --progress --config node_modules/@consta/stand/webpack.config.js",
+    "stand:build": "yarn rm:build && yarn stand:generate && cross-env NODE_ENV=production webpack --mode production --config node_modules/@consta/stand/webpack.config.js",
+    "stand:start": "cross-env NODE_ENV=development webpack serve --open --progress --mode development --hot --progress --config node_modules/@consta/stand/webpack.config.js",
     "start": "yarn stand:generate && yarn stand:start",
-    "start:dev": "yarn stand:generate && yarn stand:dev"
+    "rm:dist": "node ./scripts/rm.js --path=./dist",
+    "rm:build": "node ./scripts/rm.js --path=./build"
   },
   "config": {
     "commitizen": {
@@ -97,6 +97,7 @@
     }
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "@babel/cli": "^7.18.9",
     "@babel/core": "^7.17.9",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.7",
@@ -107,7 +108,7 @@
     "@babel/preset-typescript": "^7.18.6",
     "@bem/sdk.naming.cell.match": "^0.1.3",
     "@bem/sdk.naming.presets": "^0.2.3",
-    "@consta/stand": "^0.0.102",
+    "@consta/stand": "^0.0.112",
     "@mdx-js/loader": "^2.1.5",
     "@oclif/command": "^1.8.16",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
@@ -182,7 +183,7 @@
     "router5": "^8.0.1",
     "router5-plugin-browser": "^8.0.1",
     "sass-loader": "^12.3.0",
-    "semver": "^7.3.5",
+    "semver": "^7.5.2",
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.3.1",
     "stylelint": "^10.1.0",

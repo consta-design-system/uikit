@@ -12,6 +12,7 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   flex-wrap: nowrap;
+  gap: var(--space-2xs);
 
   &_size {
     &_xs {
@@ -46,6 +47,10 @@
 
     &_round {
       border-radius: 99em;
+
+      &.Badge_size_xs {
+        padding: 0 var(--space-xs);
+      }
 
       &.Badge_size_s {
         padding: 0 var(--space-xs);
@@ -155,7 +160,6 @@
   }
 
   &-Icon {
-    margin-right: var(--space-2xs);
     font-size: 0;
     line-height: 1em;
     flex-shrink: 0;

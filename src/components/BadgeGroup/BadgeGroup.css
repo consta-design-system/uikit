@@ -1,0 +1,57 @@
+.BadgeGroup {
+  &_size {
+    &_l {
+      --badge-group-gap: var(--space-xs);
+    }
+
+    &_m {
+      --badge-group-gap: var(--space-xs);
+    }
+
+    &_s {
+      --badge-group-gap: var(--space-2xs);
+    }
+
+    &_xs {
+      --badge-group-gap: var(--space-2xs);
+    }
+  }
+
+  &_fitMode {
+    &_wrap {
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--badge-group-gap);
+    }
+
+    &_reduction {
+      display: inline-flex;
+
+      & > *:not(.BadgeGroup-Badge_zero) {
+        margin-right: var(--badge-group-gap);
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  &-Badge {
+    &.Badge {
+      position: initial;
+    }
+
+    &_hidden.Badge {
+      position: absolute;
+      left: -300vw;
+      visibility: hidden;
+    }
+
+    &_zero.Badge {
+      display: none;
+    }
+  }
+}

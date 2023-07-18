@@ -3,23 +3,20 @@ import './Popover.css';
 import React, { forwardRef, useEffect, useLayoutEffect, useMemo } from 'react';
 
 import {
-  ClickOutsideHandler,
-  useClickOutside,
-} from '../../hooks/useClickOutside/useClickOutside';
-import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { cn } from '../../utils/bem';
-import { isNumber, isString } from '../../utils/type-guards';
-import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
-import {
   PortalWithTheme,
   usePortalContext,
-} from '../PortalWithTheme/PortalWithTheme';
-import { useTheme } from '../Theme/Theme';
+} from '##/components/PortalWithTheme';
+import { useTheme } from '##/components/Theme/Theme';
+import { ClickOutsideHandler, useClickOutside } from '##/hooks/useClickOutside';
+import { useComponentSize } from '##/hooks/useComponentSize';
+import { useForkRef } from '##/hooks/useForkRef';
+import { cn } from '##/utils/bem';
+import { isRenderProp } from '##/utils/isRenderProp';
+import { isNumber, isString } from '##/utils/type-guards';
+import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
+
 import { getComputedPositionAndDirection } from './helpers';
 import { usePopoverReposition } from './usePopoverReposition';
-
-export { usePopoverReposition };
 
 /**
  * Стороны упорядочены по приоритету:
@@ -146,10 +143,6 @@ const getOffset = (
   return 0;
 };
 
-const isRenderProp = (
-  children: React.ReactNode | ChildrenRenderProp,
-): children is ChildrenRenderProp => typeof children === 'function';
-
 /**
  * Подписчик на PortalWithThemeProvider
  * получает рефы всех вложенных порталов в модалку
@@ -241,7 +234,7 @@ export const Popover = forwardRef<HTMLDivElement, Props>(
       spareDirection,
     });
 
-    useLayoutEffect(() => onSetDirection?.(direction), [direction]);
+    useEffect(() => onSetDirection?.(direction), [direction]);
 
     useEffect(updateAnchorClientRect, [anchorSize]);
 
@@ -284,28 +277,36 @@ export const Popover = forwardRef<HTMLDivElement, Props>(
 
     useLayoutEffect(resetBannedDirections, [props]);
 
+    const notVisible = !position || !height || !width;
+
     return (
       <PortalWithTheme
         {...otherProps}
         preset={theme}
-        className={cnPopover({ direction }, [className])}
+        className={cnPopover({ direction, notVisible }, [className])}
         container={window.document.body}
         ref={useForkRef([ref, componentRef])}
         style={{
           ...style,
-          ['--popover-top' as string]: `${
-            (position?.y || 0) + window.scrollY
-          }px`,
-          ['--popover-left' as string]: `${
-            (position?.x || 0) + window.scrollX
-          }px`,
-          [`--popover-width` as string]: equalAnchorWidth
-            ? `${anchorSize.width}px`
-            : undefined,
-          [`--popover-pointer-events` as string]: isInteractive
-            ? undefined
-            : 'none',
-          [`--popover-visibility` as string]: position ? undefined : 'hidden',
+          ...(notVisible
+            ? {}
+            : {
+                ['--popover-top' as string]: `${
+                  (position?.y || 0) + window.scrollY
+                }px`,
+                ['--popover-left' as string]: `${
+                  (position?.x || 0) + window.scrollX
+                }px`,
+                [`--popover-width` as string]: equalAnchorWidth
+                  ? `${anchorSize.width}px`
+                  : undefined,
+                [`--popover-pointer-events` as string]: isInteractive
+                  ? undefined
+                  : 'none',
+                [`--popover-visibility` as string]: position
+                  ? undefined
+                  : 'hidden',
+              }),
         }}
       >
         <ContextConsumer

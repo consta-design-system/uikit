@@ -1,5 +1,6 @@
 import './BreadcrumbsMore.css';
 
+import { IconMeatball } from '@consta/icons/IconMeatball';
 import React, { forwardRef, useEffect, useRef } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
@@ -114,7 +115,8 @@ function BreadcrumbsMoreRender<ITEM>(
         className={cnBreadcrumbsMore('Button')}
         view="clear"
         type="button"
-        label="..."
+        onlyIcon
+        iconLeft={IconMeatball}
         size={iconSize}
         ref={buttonRef}
         onClick={setOpen.toggle}

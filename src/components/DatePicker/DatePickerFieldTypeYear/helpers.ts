@@ -14,7 +14,12 @@ import {
   TextFieldPropView,
   TextFieldPropWidth,
 } from '../../TextField/TextField';
-import { datePickerPropFormatTypeYear, getPartsDate } from '../helpers';
+import {
+  datePickerPropSeparatorDefault,
+  getPartDate,
+  getParts,
+  getPartsDate,
+} from '../helpers';
 import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
 
 type DatePickerFieldTypeYearPropOnChange = (props: {
@@ -111,17 +116,27 @@ export const usePicker = (props: UsePickerProps) => {
           return;
         }
 
-        const [yyyy] = getPartsDate(stringValue, formatProp, separator, false, [
-          'yyyy',
-        ]);
+        const formatArray = getParts(formatProp, separator, false);
+        const valueArray = getParts(stringValue, separator, false);
+        const validArray = formatArray
+          .map((marker) => getPartDate(formatArray, valueArray, marker))
+          .filter((item) => Boolean(item));
 
-        if (yyyy) {
+        if (formatArray.length === validArray.length) {
           const date = parse(
-            `${yyyy}`,
-            datePickerPropFormatTypeYear,
+            valueArray.join(datePickerPropSeparatorDefault),
+            formatArray.join(datePickerPropSeparatorDefault),
             new Date(),
           );
           if (!isWithinInterval(date, { start: minDate, end: maxDate })) {
+            const [yyyy] = getPartsDate(
+              stringValue,
+              formatProp,
+              separator,
+              false,
+              ['yyyy'],
+            );
+
             onErrorRef.current?.({
               type: datePickerErrorTypes[0],
               stringValue,
@@ -160,21 +175,32 @@ export const usePicker = (props: UsePickerProps) => {
         format: (date: Date) => format(date, formatProp),
         parse: (string: string) => parse(string, formatProp, new Date()),
         validate: (string: string) => {
-          const [yyyy] = getPartsDate(string, formatProp, separator, false, [
-            'yyyy',
-          ]);
+          const formatArray = getParts(formatProp, separator, false);
+          const valueArray = getParts(string, separator, false);
+          const validArray = formatArray
+            .map((marker) => getPartDate(formatArray, valueArray, marker))
+            .filter((item) => Boolean(item));
 
           if (
-            yyyy &&
-            !isValid(parse(`${yyyy}`, datePickerPropFormatTypeYear, new Date()))
+            formatArray.length === validArray.length &&
+            !isValid(
+              parse(
+                valueArray.join(datePickerPropSeparatorDefault),
+                formatArray.join(datePickerPropSeparatorDefault),
+                new Date(),
+              ),
+            )
           ) {
-            onError &&
-              onError({
-                type: datePickerErrorTypes[1],
-                stringValue: string,
-                yyyy,
-              });
+            const [yyyy] = getPartsDate(string, formatProp, separator, false, [
+              'yyyy',
+            ]);
 
+            onErrorRef.current?.({
+              type: datePickerErrorTypes[1],
+              stringValue: string,
+
+              yyyy,
+            });
             return false;
           }
 

@@ -82,11 +82,8 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
             key={index}
             ref={refs[index] as React.RefObject<HTMLButtonElement>}
             className={cnSteps('Item')}
-            label={
-              getItemCompleted?.(item)
-                ? getItemLabel(item)
-                : `${index + 1} ${getItemLabel(item)}`
-            }
+            label={getItemLabel(item)}
+            step={index + 1}
             size={size}
             active={activeStep === index}
             onChange={getOnChange(item)}
