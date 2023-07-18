@@ -29,7 +29,7 @@ export const useResizableContent: UseResizableContent = (props) => {
   const handleTouchMove = useCallback(
     (event: MouseEvent | TouchEvent | Event) => {
       const index = activeIndex.current;
-      if (typeof index === 'number' && isActive) {
+      if (typeof index === 'number') {
         setSizes((copy) => {
           const copySizes = [...copy];
           const [left, right] = getCalcaulatedSizes({
@@ -62,8 +62,8 @@ export const useResizableContent: UseResizableContent = (props) => {
   const handlers = useMemo(
     () =>
       Array.from({ length: blocks.length - 1 }).map((_el, index) => ({
-        onMouseDown: () => handlePress(index),
-        onTouchStart: () => handlePress(index),
+        onMouseDown: () => (isActive ? handlePress(index) : undefined),
+        onTouchStart: () => (isActive ? handlePress(index) : undefined),
       })),
     [blocks, direction, container, isActive],
   );
@@ -73,6 +73,10 @@ export const useResizableContent: UseResizableContent = (props) => {
       setSizes(getRefsSizes(blocks, direction));
     }
   }, [blocks, direction, isActive]);
+
+  useEffect(() => {
+    !isActive && handleRelease();
+  }, [isActive]);
 
   return {
     handlers,
