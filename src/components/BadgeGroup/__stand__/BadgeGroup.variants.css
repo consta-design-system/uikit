@@ -1,0 +1,3 @@
+.BadgeGroupVariants {
+  width: min(calc(100% - var(--space-2xl)), 600px);
+}
