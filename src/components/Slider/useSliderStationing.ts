@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { useComponentSize } from '##/hooks/useComponentSize';
+
 import { Line, PropView } from './helper';
 import { COUNT_STEPS } from './useSlider/useSlider';
 
@@ -55,6 +57,8 @@ export const useSliderStationing: UseSliderStationing = (
   const [lineSizes, setLineSizes] = useState<Line[]>([]);
   const [buttonPositions, setButtonPositions] = useState<number[]>([]);
 
+  const { width, height } = useComponentSize(sliderLineRef);
+
   const calcualtedStep = useMemo(() => {
     if (!Array.isArray(step)) {
       const val = Math.abs((max - min) / COUNT_STEPS);
@@ -81,7 +85,8 @@ export const useSliderStationing: UseSliderStationing = (
             active: false,
           });
         } else if (Array.isArray(value) && value) {
-          const endPointArray = [...value];
+          const [minValue, maxValue] = [Math.min(...value), Math.max(...value)];
+          const endPointArray = [minValue, maxValue];
           endPointArray.unshift(min);
           endPointArray.push(max);
           for (let i = 0; i < endPointArray.length - 1; i++) {
@@ -90,8 +95,8 @@ export const useSliderStationing: UseSliderStationing = (
                 ((endPointArray[i + 1] - endPointArray[i]) / absoluteSize) *
                 100,
               active:
-                endPointArray[i] >= value[0] &&
-                endPointArray[i + 1] <= value[1],
+                endPointArray[i] >= minValue &&
+                endPointArray[i + 1] <= maxValue,
             });
           }
         } else {
@@ -107,8 +112,8 @@ export const useSliderStationing: UseSliderStationing = (
             active:
               (typeof value === 'number' || Array.isArray(value)) &&
               (range && Array.isArray(value)
-                ? stepSize.max > value[0] &&
-                  stepSize.min < value[value.length - 1]
+                ? stepSize.max > Math.min(...value) &&
+                  stepSize.min < Math.max(...value)
                 : stepSize.max <= value),
           });
         });
@@ -163,7 +168,7 @@ export const useSliderStationing: UseSliderStationing = (
   useEffect(() => {
     setLineSizes(calculateLines());
     setButtonPositions(calculateButtonPositions());
-  }, [value, min, max, range, calcualtedStep, view]);
+  }, [value, min, max, range, calcualtedStep, view, width, height]);
 
   return {
     lineSizes,

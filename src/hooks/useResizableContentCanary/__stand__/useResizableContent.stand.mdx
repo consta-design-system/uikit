@@ -1,0 +1,76 @@
+import { UseResizableContentBasic } from './examples/UseResizableContentBasic/UseResizableContentBasic';
+
+```tsx
+import { useResizableContent } from '@consta/uikit/useResizableContentCanary';
+```
+
+С помощью хука `useResizableContent` размеры блоков в контейнере можно сделать изменяемыми.
+
+> Для избежания пересоздания внутринних функций хука, мемоизируйте входные параметры.
+
+```tsx
+export const UseResizableContentBasic = () => {
+  const [containerRef, block1, block2, block3] = useRefs<HTMLDivElement>(4);
+
+  const blocks = useMemo(
+    () => [{ ref: block1, minWidth: 100 }, block2, block3],
+    [block1, block2, block3],
+  );
+
+  const { sizes, handlers } = useResizableContent({
+    blocks,
+    direction: 'horizontal',
+    container: containerRef,
+    isActive: true,
+  });
+
+  const toddlerPositions = useMemo(() => {
+    return handlers.map((_el, index) => {
+      return (
+        sizes
+          .slice(0, index + 1)
+          .map((el) => el.width ?? 0)
+          .reduce((val, a) => val + a, 0) - 4
+      );
+    });
+  }, [sizes]);
+
+  return (
+    <div ref={containerRef}>
+      <div style={sizes[0]} ref={block1}>
+        <p>BLOCK1</p>
+      </div>
+      <div style={sizes[1]} ref={block2}>
+        <p>BLOCK2</p>
+      </div>
+      <div style={sizes[2]} ref={block3}>
+        <p>BLOCK3</p>
+      </div>
+      {toddlerPositions.map((left, index) => (
+        <div style={{ left }} {...handlers[index]} />
+      ))}
+    </div>
+  );
+};
+```
+
+<UseResizableContentBasic />
+
+## Свойства
+
+```tsx
+type UseResizableContentRef = {
+  ref: React.RefObject<HTMLElement>;
+  maxHeight?: number;
+  minHeight?: number;
+  maxWidth?: number;
+  minWidth?: number;
+};
+```
+
+| Аргумент     | Тип и значения                                                                   | По умолчанию   | Описание                                      |
+| ------------ | -------------------------------------------------------------------------------- | -------------- | --------------------------------------------- |
+| `blocks`     | `Array<UseResizableContentRef`<code>&#124;</code>`React.RefObject<HTMLElement>>` | -              | Ссылки на изменяемые элементы                 |
+| `direction?` | `'horizontal', 'vertical'`                                                       | `'horizontal'` | Направление в котором может изменяться размер |
+| `container`  | `React.RefObject<HTMLElement>`                                                   | -              | Ссылка на контейнер                           |
+| `isActive?`  | `boolean`                                                                        | `false`        | Включает хук                                  |

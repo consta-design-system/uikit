@@ -21,6 +21,7 @@ export type UseSliderProps<RANGE extends boolean = false> = {
   step?: number | number[];
   onChange?: PropOnChange<RANGE>;
   onAfterChange?: PropOnChange<RANGE>;
+  containerRef: React.RefObject<HTMLDivElement>;
   sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement>;
   buttonRefs: React.RefObject<HTMLButtonElement>[];
 };
@@ -113,13 +114,17 @@ export const getValidValue = (
       if (Math.abs(value) < 1) {
         return Number(value.toFixed(division ? division.length : 0));
       }
-      const roundValue =
-        Math.round(
-          Number(value.toFixed(division ? division.length : 0)) / stepValue,
-        ) * stepValue;
-      if (roundValue > max) return max;
-      if (roundValue < min) return min;
-      return Number(roundValue.toFixed(division ? division.length : 0));
+      if (value < min) return min;
+      for (let i = min; i <= max; i += stepValue) {
+        if (value >= i && value < i + stepValue) {
+          return Number(
+            (value < i + stepValue / 2 ? i : i + stepValue).toFixed(
+              division ? division.length : 0,
+            ),
+          );
+        }
+      }
+      return max;
     }
     let resultValue = value;
     step.forEach((stepPoint, index) => {
@@ -178,20 +183,10 @@ export const getNewValue = (
   max: number,
   activeButton: ActiveButton,
 ): number | [number, number] => {
-  let maxRangeValue = max;
-  let minRangeValue = min;
-  if (Array.isArray(currentValue)) {
-    const [left, right] = currentValue;
-    if (activeButton === 1) {
-      minRangeValue = left;
-    } else {
-      maxRangeValue = right;
-    }
-  }
   const analyzedValue = getValidValue(
     analyzeDivisionValue(changedValue, step, min, max),
-    minRangeValue,
-    maxRangeValue,
+    min,
+    max,
     step,
   );
   if (Array.isArray(currentValue)) {

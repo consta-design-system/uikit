@@ -1,6 +1,6 @@
 .SliderPoint {
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   top: 0;
   left: var(--slider-button-left);
   display: flex;
@@ -22,6 +22,12 @@
   &_disabled {
     border-color: var(--color-control-bg-ghost);
     cursor: auto;
+  }
+
+  &_active,
+  &:hover,
+  &:focus {
+    z-index: 1;
   }
 
   &-Tooltip {

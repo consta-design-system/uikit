@@ -15,7 +15,7 @@ const Variants = () => {
   const range = useBoolean('range');
   const disabled = useBoolean('disabled');
   const label = useText('label', 'Лейбл');
-  const withLabelIcon = useBoolean('withLabelIcon', false);
+  const withLabelIcon = useBoolean('withLabelIcon');
   const caption = useText('caption', 'Подпись');
   const status = useSelect('status', propStatus);
   const size = useSelect('size', propSize, defaultPropSize);

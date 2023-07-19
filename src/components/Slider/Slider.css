@@ -4,6 +4,7 @@
   display: inline-flex;
   flex-direction: column;
   width: 100%;
+  touch-action: none;
 
   &_size {
     &_xs {
