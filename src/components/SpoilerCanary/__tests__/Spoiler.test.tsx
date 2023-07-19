@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { cnCanary } from '##/utils/bem';
 
-import { cnSpoiler, Spoiler } from '../Spoiler';
+import { cnSpoiler, Spoiler } from '..';
 import { spolierPropSize } from '../types';
 
 const cnSpoilerButton = cnCanary('SpoilerButton');

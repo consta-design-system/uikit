@@ -1,2 +1,2 @@
-export * from './Spoiler';
+export * from './SpoilerCanary';
 export * from './SpoilerButton';

@@ -3,7 +3,7 @@ import { IconRemove } from '@consta/icons/IconRemove';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React from 'react';
 
-import { Spoiler } from '../Spoiler';
+import { Spoiler } from '..';
 import { defaultSpoilerPropSize, spolierPropSize } from '../types';
 
 const Variants = () => {

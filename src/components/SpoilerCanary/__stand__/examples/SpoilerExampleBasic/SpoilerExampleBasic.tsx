@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Spoiler } from '##/components/SpoilerCanary/Spoiler';
+import { Spoiler } from '##/components/SpoilerCanary';
 
 export const SpoilerExampleBasic = () => {
   return (
