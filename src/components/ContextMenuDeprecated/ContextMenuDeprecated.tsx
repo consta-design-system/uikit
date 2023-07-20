@@ -109,7 +109,7 @@ export const ContextMenu: ContextMenuComponent = forwardRef((props, ref) => {
   useClickOutside({
     isActive: !!onClickOutside,
     ignoreClicksInsideRefs: [...levelsRefs, anchorRef || { current: null }],
-    handler: (e) => onClickOutside && onClickOutside(e),
+    handler: onClickOutside,
   });
 
   useEffect(() => {
