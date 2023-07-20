@@ -117,7 +117,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
       timeout={animateTimeout}
     >
       {(animate) => {
-        const getIndex = fabricIndex(-1);
+        const getIndex = fabricIndex();
         return (
           <Popover
             {...otherProps}

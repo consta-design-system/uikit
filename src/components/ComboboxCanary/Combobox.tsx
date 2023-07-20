@@ -84,7 +84,6 @@ const ComboboxRender = <
     labelForNotFound = defaultlabelForNotFound,
     labelForCreate = defaultlabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
-    onInputChange,
     searchFunction,
     selectAll,
     isLoading,
@@ -94,6 +93,7 @@ const ComboboxRender = <
     virtualScroll,
     onScrollToBottom,
     onOpen,
+    onSearchValueChange,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -136,6 +136,7 @@ const ComboboxRender = <
     onCreate,
     searchFunction,
     onOpen,
+    onSearchValueChange,
   });
 
   const inputId = id ? `${id}-input` : id;
@@ -190,12 +191,6 @@ const ComboboxRender = <
 
   const inputRefForRender = useForkRef([inputRef, inputRefProp]);
 
-  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleInputChange(e);
-    const { value } = e.target;
-    !disabled && onInputChange?.({ e, id, name, value: value || null });
-  };
-
   const renderControlValue = () => {
     const width = multiple
       ? getInputWidth(controlInnerRef, helperInputFakeElement)
@@ -225,7 +220,7 @@ const ComboboxRender = <
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           aria-label={ariaLabel}
-          onChange={handleChangeValue}
+          onChange={handleInputChange}
           ref={inputRefForRender}
           className={cnSelect('Input', {
             size,

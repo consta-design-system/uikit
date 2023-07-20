@@ -31,7 +31,7 @@ export function ComboboxExampleDisabled() {
         placeholder="Здесь ничего выбрать не получится"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         disabled
       />
     </Example>

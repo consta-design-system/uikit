@@ -35,7 +35,7 @@ export const ComboboxExampleVirtualScroll = () => {
         placeholder="У меня очень большой список"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         groups={groups}
         multiple
         selectAll

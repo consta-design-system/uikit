@@ -10,6 +10,7 @@ import React, {
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useDebounce } from '##/hooks/useDebounce';
 import { KeyHandler, useKeys } from '##/hooks/useKeys';
+import { useMutableRef } from '##/hooks/useMutableRef';
 import { usePrevious } from '##/hooks/usePrevious';
 import { useRefs } from '##/hooks/useRefs';
 import {
@@ -66,15 +67,15 @@ export type SelectProps<ITEM, GROUP, MULTIPLE extends boolean> = {
   getItemKey: (item: ITEM) => string | number;
   getItemDisabled?: (item: ITEM) => boolean | undefined;
   searchFunction?: (item: ITEM, searchValue: string) => boolean;
-  onCreate?: (props: { e: React.SyntheticEvent; label: string }) => void;
+  onCreate?: (label: string, props: { e: React.SyntheticEvent }) => void;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   multiple: boolean;
   searchValue?: string;
-  withoutClearSearch?: boolean;
   onChange: OnChangeProp<ITEM, MULTIPLE>;
   value: ValueProp<ITEM, MULTIPLE>;
   onOpen?: () => void;
+  onSearchValueChange?: (value: string) => void;
 };
 
 export type OptionProps<ITEM> = {
@@ -141,8 +142,6 @@ export const isOptionForSelectAll = <ITEM>(
   );
 };
 
-const emptyArray: [] = [];
-
 export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   params: SelectProps<ITEM, GROUP, MULTIPLE>,
 ) {
@@ -164,18 +163,21 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     onFocus,
     onBlur,
     searchValue: searchValueProp,
-    withoutClearSearch,
     onOpen,
+    onSearchValueChange,
   } = params;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isFocused, setIsFocused] = useState(false);
 
-  const value =
-    (params.value &&
-      (Array.isArray(params.value) ? params.value : [params.value])) ||
-    emptyArray;
+  const value = useMemo(
+    () =>
+      (params.value &&
+        (Array.isArray(params.value) ? params.value : [params.value])) ||
+      [],
+    [params.value],
+  );
 
   const [
     {
@@ -187,6 +189,8 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     },
     setState,
   ] = useHoistedState(initialState);
+
+  const onSearchValueChangeRef = useMutableRef(onSearchValueChange);
 
   const searchFunctionDefault = (item: ITEM, searchValue: string) =>
     getItemLabel(item)
@@ -400,8 +404,8 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     if (isNotMultipleParams(params)) {
       params.onChange(item, { e });
       setOpen(false);
+      setSearch('');
     }
-    !withoutClearSearch && setSearch('');
   };
 
   const onChangeAll = (parametrs: {
@@ -436,9 +440,9 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   };
 
   const onCreate = (e: React.SyntheticEvent, label: string) => {
-    params.onCreate && params.onCreate({ e, label });
+    params.onCreate && params.onCreate(label, { e });
     setOpen(false);
-    !withoutClearSearch && setSearch('');
+    setSearch('');
   };
 
   // Handlers
@@ -459,7 +463,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   };
 
   const clearValue = (e: React.SyntheticEvent) => {
-    !withoutClearSearch && setSearch('');
     if (isMultipleParams(params)) {
       const results = value?.filter((item) => getItemDisabled?.(item));
       params.onChange(results && results.length > 0 ? results : null, {
@@ -469,6 +472,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     if (isNotMultipleParams(params)) {
       params.onChange(null, { e });
     }
+    setSearch('');
   };
 
   const getHandleRemoveValue = (item: ITEM) => (e: React.SyntheticEvent) =>
@@ -707,6 +711,10 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       onOpen?.();
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    onSearchValueChangeRef.current?.(searchValue);
+  }, [searchValue]);
 
   return {
     isOpen,

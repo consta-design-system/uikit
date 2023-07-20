@@ -4,11 +4,11 @@ import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
 import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { defaultLabelForEmptyItems } from '##/components/SelectComponents/helpers';
 import {
   cnSelect,
   COMPONENT_NAME,
-} from '##/components/SelectComponents/cnSelect';
-import { defaultLabelForEmptyItems } from '##/components/SelectComponents/helpers';
+} from '##/components/SelectComponentsCanary/cnSelect';
 import { SelectContainer } from '##/components/SelectComponentsCanary/SelectContainer';
 import { SelectDropdown } from '##/components/SelectComponentsCanary/SelectDropdown';
 import { SelectItem } from '##/components/SelectComponentsCanary/SelectItem';

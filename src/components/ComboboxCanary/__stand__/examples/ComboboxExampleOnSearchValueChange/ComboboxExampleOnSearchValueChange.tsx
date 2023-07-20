@@ -1,8 +1,8 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { Text } from '../../../../Text/Text';
-import { Combobox } from '../../../Combobox';
+import { Combobox } from '##/components/ComboboxCanary';
+import { Text } from '##/components/Text';
 
 type Item = {
   label: string;
@@ -24,9 +24,9 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleOnInputChange() {
+export function ComboboxExampleOnSearchValueChange() {
   const [value, setValue] = useState<Item | null>();
-  const [search, setSearch] = useState<string | undefined | null>();
+  const [search, setSearch] = useState<string>('');
   return (
     <Example col={1}>
       <Text size="l">Значение поиска: {search ?? 'Пусто'}</Text>
@@ -34,8 +34,8 @@ export function ComboboxExampleOnInputChange() {
         placeholder="Выберите вариант"
         items={items}
         value={value}
-        onInputChange={({ value }) => setSearch(value)}
-        onChange={({ value }) => setValue(value)}
+        onSearchValueChange={setSearch}
+        onChange={setValue}
       />
     </Example>
   );

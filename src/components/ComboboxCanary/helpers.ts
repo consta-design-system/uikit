@@ -8,7 +8,6 @@ import {
   PropView,
   RenderItemProps,
 } from '##/components/SelectComponentsCanary/types';
-import { TextFieldPropOnChange } from '##/components/TextField';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export type DefaultItem = {
@@ -79,7 +78,7 @@ export type ComboboxProps<
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
-    onCreate?: (props: { e: React.SyntheticEvent; label: string }) => void;
+    onCreate?: (label: string, props: { e: React.SyntheticEvent }) => void;
     inputRef?: React.Ref<HTMLInputElement>;
     labelForNotFound?: string;
     required?: boolean;
@@ -90,7 +89,6 @@ export type ComboboxProps<
     multiple?: MULTIPLE;
     value?: PropValue<ITEM, MULTIPLE>;
     groups?: GROUP[];
-    onInputChange?: TextFieldPropOnChange;
     getItemLabel?: PropGetItemLabel<ITEM>;
     getItemKey?: PropGetItemKey<ITEM>;
     getItemGroupKey?: PropGetItemGroupKey<ITEM>;
@@ -103,6 +101,7 @@ export type ComboboxProps<
     labelPosition?: 'top' | 'left';
     virtualScroll?: boolean;
     onScrollToBottom?: () => void;
+    onSearchValueChange?: (value: string) => void;
     onOpen?: () => void;
   },
   HTMLDivElement

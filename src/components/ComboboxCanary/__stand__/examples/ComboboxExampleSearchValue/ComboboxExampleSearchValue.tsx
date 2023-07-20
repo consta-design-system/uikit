@@ -46,7 +46,7 @@ export function ComboboxExampleSearchValue() {
           placeholder="Выберите вариант"
           items={items}
           value={value}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           searchValue={searchValue}
           multiple
         />

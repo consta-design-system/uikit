@@ -219,7 +219,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
             equalAnchorWidth
           >
             <div
-              className={cnSelectDropdown('List', [
+              className={cnSelectDropdown('ScrollContainer', [
                 cnMixSpace({
                   pV: mapVerticalSpase[size],
                 }),
@@ -228,7 +228,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
             >
               {isLoading && !isListShowed && <SelectLoader />}
               <div
-                className={cnSelectDropdown('ListWrapper', { scrolled })}
+                className={cnSelectDropdown('List', { scrolled })}
                 style={{ marginTop: spaceTop }}
               >
                 {visibleItems.map((group) => {

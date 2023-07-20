@@ -78,7 +78,7 @@ export function ComboboxExampleRenderItem() {
         placeholder="Выберите вариант"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         searchFunction={searchFunction}
         renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
           <div

@@ -65,7 +65,7 @@ export const ComboboxExampleSelectAll = () => {
         placeholder="Выберите варианты"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         multiple
         selectAll
         groups={groups}

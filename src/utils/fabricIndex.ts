@@ -1,4 +1,4 @@
-export const fabricIndex = (start = 0) => {
+export const fabricIndex = (start = -1) => {
   let index: number = start;
 
   return () => {

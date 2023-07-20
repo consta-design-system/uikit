@@ -84,7 +84,7 @@ export const ComboboxExampleIsLoading = () => {
         placeholder="Загружу данные после того как по мне кликнут"
         items={data}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         multiple
         onOpen={onOpen}
         isLoading={isLoading}
@@ -96,7 +96,7 @@ export const ComboboxExampleIsLoading = () => {
 
 export const ComboboxExampleIsLoadingOnScrollBottom = () => {
   const [value, setValue] = useState<Item[] | null>();
-  const [searchValue, setSearchValue] = useState<string>();
+  const [searchValue, setSearchValue] = useState<string>('');
   const [data, isLoading, onOpen] = useMockLoadData(searchValue);
 
   return (
@@ -105,14 +105,14 @@ export const ComboboxExampleIsLoadingOnScrollBottom = () => {
         placeholder="Загружу данные после того как по мне кликнут"
         items={data}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         multiple
         onOpen={onOpen}
         isLoading={isLoading}
         virtualScroll
         onScrollToBottom={searchValue ? undefined : onOpen}
         searchFunction={() => true}
-        onInputChange={({ value }) => setSearchValue(value || '')}
+        onSearchValueChange={setSearchValue}
       />
     </Example>
   );

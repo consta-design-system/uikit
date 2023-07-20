@@ -1,4 +1,4 @@
-.TagBase.SelectValueTag {
+.TagBase.canary--SelectValueTag {
   margin: 0 var(--tag-space) var(--tag-space) 0;
 
   &.TagBase_size_s,
