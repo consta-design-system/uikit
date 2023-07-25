@@ -32,7 +32,7 @@ export const AutoCompleteExamplePlaceholder = () => {
         placeholder="Введите значение"
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

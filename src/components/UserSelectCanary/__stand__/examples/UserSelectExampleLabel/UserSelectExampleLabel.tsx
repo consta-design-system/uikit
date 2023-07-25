@@ -2,7 +2,7 @@ import { IconUser } from '@consta/icons/IconUser';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { UserSelect } from '../../../UserSelect';
+import { UserSelect } from '../../../UserSelectCanary';
 
 type Item = {
   label: string;
@@ -39,7 +39,7 @@ export function UserSelectExampleLabel() {
         caption={value?.label}
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         placeholder="Выберите пользователя"
       />
     </Example>
@@ -56,7 +56,7 @@ export function UserSelectExampleLabelIcon() {
         caption={value?.label}
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         placeholder="Выберите пользователя"
       />
     </Example>
@@ -70,7 +70,7 @@ export function UserSelectExampleLabelPosition() {
       <UserSelect
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         placeholder="Здесь лейбл сверху"
         label="Лейбл"
         labelPosition="top"
@@ -78,7 +78,7 @@ export function UserSelectExampleLabelPosition() {
       <UserSelect
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         placeholder="Здесь лейбл слева"
         label="Лейбл"
         labelPosition="left"

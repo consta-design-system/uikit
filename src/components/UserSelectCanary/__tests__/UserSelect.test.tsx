@@ -16,7 +16,7 @@ import {
   defaultGetItemLabel,
   UserSelect,
   UserSelectProps,
-} from '../UserSelect';
+} from '../UserSelectCanary';
 import { cnUserSelectItem } from '../UserSelectItem/UserSelectItem';
 import { cnUserSelectValue } from '../UserSelectValue/UserSelectValue';
 

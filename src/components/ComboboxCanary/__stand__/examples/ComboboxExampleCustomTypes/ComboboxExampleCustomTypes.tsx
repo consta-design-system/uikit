@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { Combobox } from '../../../Combobox';
+import { Combobox } from '../../../ComboboxCanary';
 
 export function ComboboxExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();

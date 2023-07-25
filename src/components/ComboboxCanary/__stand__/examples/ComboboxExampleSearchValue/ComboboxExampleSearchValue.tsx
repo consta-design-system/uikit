@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Button } from '##/components/Button';
 import { cnMixSpace } from '##/mixs/MixSpace';
 
-import { Combobox } from '../../../Combobox';
+import { Combobox } from '../../../ComboboxCanary';
 
 type Item = {
   label: string;

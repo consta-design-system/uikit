@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag';
 
-import { Combobox } from '../../../Combobox';
+import { Combobox } from '../../../ComboboxCanary';
 
 type Item = {
   label: string;
@@ -76,7 +76,7 @@ const useMockLoadData = (
 
 export const ComboboxExampleIsLoading = () => {
   const [value, setValue] = useState<Item[] | null>();
-  const [data, isLoading, onOpen] = useMockLoadData();
+  const [data, isLoading, onDropdownOpen] = useMockLoadData();
 
   return (
     <Example col={1}>
@@ -86,7 +86,7 @@ export const ComboboxExampleIsLoading = () => {
         value={value}
         onChange={setValue}
         multiple
-        onOpen={onOpen}
+        onDropdownOpen={onDropdownOpen}
         isLoading={isLoading}
         virtualScroll
       />
@@ -97,7 +97,7 @@ export const ComboboxExampleIsLoading = () => {
 export const ComboboxExampleIsLoadingOnScrollBottom = () => {
   const [value, setValue] = useState<Item[] | null>();
   const [searchValue, setSearchValue] = useState<string>('');
-  const [data, isLoading, onOpen] = useMockLoadData(searchValue);
+  const [data, isLoading, onDropdownOpen] = useMockLoadData(searchValue);
 
   return (
     <Example col={1}>
@@ -107,10 +107,10 @@ export const ComboboxExampleIsLoadingOnScrollBottom = () => {
         value={value}
         onChange={setValue}
         multiple
-        onOpen={onOpen}
+        onDropdownOpen={onDropdownOpen}
         isLoading={isLoading}
         virtualScroll
-        onScrollToBottom={searchValue ? undefined : onOpen}
+        onScrollToBottom={searchValue ? undefined : onDropdownOpen}
         searchFunction={() => true}
         onSearchValueChange={setSearchValue}
       />

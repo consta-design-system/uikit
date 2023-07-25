@@ -1,4 +1,4 @@
-import '##/components/SelectComponentsCanary/Select.css';
+import '##/components/SelectComponents/Select.css';
 
 import { IconClose } from '@consta/icons/IconClose';
 import { IconSelect } from '@consta/icons/IconSelect';
@@ -14,6 +14,8 @@ import {
 } from '##/components/SelectComponentsCanary/helpers';
 import { SelectContainer } from '##/components/SelectComponentsCanary/SelectContainer';
 import { SelectDropdown } from '##/components/SelectComponentsCanary/SelectDropdown';
+import { SelectItem } from '##/components/SelectComponentsCanary/SelectItem';
+import { SelectValueTag } from '##/components/SelectComponentsCanary/SelectValueTag';
 import {
   defaultPropForm,
   defaultPropSize,
@@ -24,28 +26,25 @@ import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixFocus } from '##/mixs/MixFocus';
 
 import {
+  ComboboxComponent,
+  ComboboxProps,
   DefaultGroup,
   DefaultItem,
   isMultipleParams,
   isNotMultipleParams,
   PropRenderItem,
   PropRenderValue,
-  searchCompare,
-  UserSelectComponent,
-  UserSelectProps,
   withDefaultGetters,
 } from './helpers';
-import { UserSelectItem } from './UserSelectItem/UserSelectItem';
-import { UserSelectValue } from './UserSelectValue/UserSelectValue';
 
-export const COMPONENT_NAME = 'UserSelect' as const;
+export const COMPONENT_NAME = 'Combobox' as const;
 
-const UserSelectRender = <
+const ComboboxRender = <
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
   MULTIPLE extends boolean = false,
 >(
-  props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
+  props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
   ref: React.Ref<HTMLDivElement>,
 ) => {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
@@ -63,47 +62,40 @@ const UserSelectRender = <
     disabled,
     ariaLabel,
     id,
-    isLoading,
     required,
-    dropdownRef = defaultDropdownRef,
+    dropdownRef,
     form = defaultPropForm,
     view = defaultPropView,
     size = defaultPropSize,
     dropdownClassName,
-    searchValue: searchValueProp,
     name,
     groups = [],
-    getItemKey,
     getItemLabel,
-    getItemSubLabel,
-    getItemAvatarUrl,
+    getItemKey,
     getItemGroupKey,
     getItemDisabled,
     getGroupKey,
     getGroupLabel,
     renderItem,
+    searchValue: searchValueProp,
     renderValue: renderValueProp,
     onCreate,
     inputRef: inputRefProp,
     labelForNotFound = defaultlabelForNotFound,
     labelForCreate = defaultlabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
-    multiple = false,
     searchFunction,
+    selectAll,
+    isLoading,
+    multiple = false,
     style,
     dropdownForm = 'default',
-    ...restProps
+    virtualScroll,
+    onScrollToBottom,
+    onDropdownOpen,
+    onSearchValueChange,
+    ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
-
-  const searchFunctionDefault = (item: ITEM, searchValue: string): boolean => {
-    const searchOfLabel = searchCompare(searchValue, getItemLabel(item));
-
-    if (searchOfLabel) {
-      return searchOfLabel;
-    }
-
-    return searchCompare(searchValue, getItemSubLabel(item));
-  };
 
   const {
     getKeyProps,
@@ -122,68 +114,80 @@ const UserSelectRender = <
     getHandleRemoveValue,
     notFound,
     hasItems,
+    optionsRefs,
   } = useSelect({
     items,
     groups,
     value,
     onChange,
-    dropdownRef,
+    selectAll,
+    dropdownRef: defaultDropdownRef,
     controlRef,
     disabled,
     getItemLabel,
     getItemKey,
     getGroupKey,
-    getItemGroupKey,
     searchValue: searchValueProp,
+    getItemGroupKey,
     getItemDisabled,
     multiple,
     onBlur,
     onFocus,
     onCreate,
-    searchFunction: searchFunction || searchFunctionDefault,
+    searchFunction,
+    onDropdownOpen,
+    onSearchValueChange,
   });
 
   const inputId = id ? `${id}-input` : id;
 
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
-    const { item, active, hovered, onClick, onMouseEnter } = props;
+    const { item, active, hovered, onClick, onMouseEnter, ref } = props;
 
     return (
-      <UserSelectItem
+      <SelectItem
         label={getItemLabel(item)}
-        subLabel={getItemSubLabel(item)}
-        avatarUrl={getItemAvatarUrl(item)}
         active={active}
         hovered={hovered}
+        multiple={multiple}
         size={size}
         indent={dropdownForm === 'round' ? 'increased' : 'normal'}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
-        disable={getItemDisabled(item)}
-        multiple={multiple}
+        disabled={getItemDisabled(item)}
+        ref={ref}
       />
     );
   };
 
-  const renderValueDefault: PropRenderValue<ITEM> = ({
+  const renderValueDefaultMultiple: PropRenderValue<ITEM> = ({
     item,
     handleRemove,
   }) => {
     return (
-      <UserSelectValue
+      <SelectValueTag
         label={getItemLabel(item)}
-        subLabel={getItemSubLabel(item)}
-        avatarUrl={getItemAvatarUrl(item)}
         key={getItemKey(item)}
         size={size}
-        handleRemove={handleRemove}
-        multiple={multiple}
         disabled={disabled || getItemDisabled(item)}
+        handleRemove={handleRemove}
       />
     );
   };
 
-  const renderValue = renderValueProp || renderValueDefault;
+  const renderValueDefaultNotMultiple: PropRenderValue<ITEM> = (props) => {
+    const valueLable = getItemLabel(props.item);
+
+    return (
+      <span className={cnSelect('ControlValue')} title={valueLable}>
+        {valueLable}
+      </span>
+    );
+  };
+
+  const renderValue =
+    renderValueProp ||
+    (multiple ? renderValueDefaultMultiple : renderValueDefaultNotMultiple);
 
   const inputRefForRender = useForkRef([inputRef, inputRefProp]);
 
@@ -222,7 +226,6 @@ const UserSelectRender = <
             size,
             hide: !multiple && !!value,
             multiple,
-            isUserSelect: true,
           })}
           value={searchValue}
           style={{ width }}
@@ -237,15 +240,15 @@ const UserSelectRender = <
         focused={isFocused}
         disabled={disabled}
         size={size}
-        required={required}
-        id={inputId}
         view={view}
-        type="userselect"
+        required={required}
         form={form}
-        multiple
+        multiple={multiple}
         ref={ref}
+        type="combobox"
         style={style}
-        {...restProps}
+        id={inputId}
+        {...otherProps}
       >
         <div
           className={cnSelect('Control', { hasInput: true })}
@@ -263,9 +266,7 @@ const UserSelectRender = <
           >
             <div className={cnSelect('ControlValueContainer')}>
               {multiple ? (
-                <div
-                  className={cnSelect('ControlValue', { isUserSelect: true })}
-                >
+                <div className={cnSelect('ControlValue')}>
                   {renderControlValue()}
                 </div>
               ) : (
@@ -312,18 +313,21 @@ const UserSelectRender = <
         size={size}
         controlRef={controlRef}
         getOptionProps={getOptionProps}
-        dropdownRef={dropdownRef}
+        dropdownRef={useForkRef([dropdownRef, defaultDropdownRef])}
         form={dropdownForm}
-        isLoading={isLoading}
         className={dropdownClassName}
         renderItem={renderItem || renderItemDefault}
         getGroupLabel={getGroupLabel}
         visibleItems={visibleItems}
         labelForNotFound={labelForNotFound}
         labelForCreate={labelForCreate}
+        isLoading={isLoading}
+        labelForEmptyItems={labelForEmptyItems}
         notFound={notFound}
         hasItems={hasItems}
-        labelForEmptyItems={labelForEmptyItems}
+        itemsRefs={optionsRefs}
+        virtualScroll={virtualScroll}
+        onScrollToBottom={onScrollToBottom}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }
@@ -334,6 +338,4 @@ const UserSelectRender = <
   );
 };
 
-export const UserSelect = forwardRef(UserSelectRender) as UserSelectComponent;
-
-export * from './helpers';
+export const Combobox = forwardRef(ComboboxRender) as ComboboxComponent;

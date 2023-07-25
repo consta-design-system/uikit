@@ -10,6 +10,8 @@ import { UserSelectExampleGroups } from './examples/UserSelectExampleGroups/User
 import { UserSelectExampleRenderItem } from './examples/UserSelectExampleRenderItem/UserSelectExampleRenderItem';
 import { UserSelectExampleRenderValue } from './examples/UserSelectExampleRenderValue/UserSelectExampleRenderValue';
 import { UserSelectExampleView } from './examples/UserSelectExampleView/UserSelectExampleView';
+import { UserSelectExampleVirtualScroll } from './examples/UserSelectExampleVirtualScroll/UserSelectExampleVirtualScroll';
+import { UserSelectExampleIsLoading } from './examples/UserSelectExampleIsLoading/UserSelectExampleIsLoading';
 import {
   UserSelectExampleCreate,
   UserSelectExampleCreateCustomLabel,
@@ -45,6 +47,8 @@ import { UserSelect } from '@consta/uikit/UserSelect';
 - [Размер](#размер)
 - [Форма](#форма)
 - [Внешний вид](#внешний-вид)
+- [Виртуализация списка](#виртуализация-списка)
+- [Индикация загрузки](#индикация-загрузки)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Поиск](#поиск)
 - [Создание новых пользователей](#создание-новых-пользователей)
@@ -108,13 +112,7 @@ const items: Item[] = [
 
 export function UserSelectExampleItems() {
   const [value, setValue] = useState<Item | null>();
-  return (
-    <UserSelect
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-    />
-  );
+  return <UserSelect items={items} value={value} onChange={setValue} />;
 }
 ```
 
@@ -161,7 +159,7 @@ export function UserSelectExamplePlaceholder() {
       placeholder="Это подсказка"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 }
@@ -264,16 +262,14 @@ const items: Item[] = [
 export function UserSelectExampleLabel() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <UserSelect
-        label="Пользователь"
-        caption={value?.label}
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        placeholder="Выберите пользователя"
-      />
-    </Example>
+    <UserSelect
+      label="Пользователь"
+      caption={value?.label}
+      items={items}
+      value={value}
+      onChange={setValue}
+      placeholder="Выберите пользователя"
+    />
   );
 }
 ```
@@ -322,7 +318,7 @@ export function UserSelectExampleDisabledItem() {
       placeholder="Выберите пользователя"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 }
@@ -366,15 +362,13 @@ const items: Item[] = [
 export function UserSelectExampleMultiple() {
   const [value, setValue] = useState<Item[] | null>();
   return (
-    <Example col={1}>
-      <UserSelect
-        placeholder="Выберите одного или несколько"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        multiple
-      />
-    </Example>
+    <UserSelect
+      placeholder="Выберите одного или несколько"
+      items={items}
+      value={value}
+      onChange={setValue}
+      multiple
+    />
   );
 }
 ```
@@ -442,7 +436,7 @@ export function UserSelectExampleGroups() {
       placeholder="Выберите пользователя"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       groups={groups}
     />
   );
@@ -495,7 +489,7 @@ export const UserSelectExampleStatus = () => {
         caption="default"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <UserSelect
         placeholder="alert"
@@ -503,7 +497,7 @@ export const UserSelectExampleStatus = () => {
         status="alert"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <UserSelect
         placeholder="warning"
@@ -511,7 +505,7 @@ export const UserSelectExampleStatus = () => {
         status="warning"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <UserSelect
         placeholder="success"
@@ -519,7 +513,7 @@ export const UserSelectExampleStatus = () => {
         status="success"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </>
   );
@@ -569,21 +563,21 @@ export function UserSelectExampleSize() {
     size="s"
     items={items}
     value={value}
-    onChange={({ value }) => setValue(value)}
+    onChange={setValue}
   />
   <UserSelect
     placeholder="Размер m"
     size="m"
     items={items}
     value={value}
-    onChange={({ value }) => setValue(value)}
+    onChange={setValue}
   />
   <UserSelect
     placeholder="Размер l"
     size="l"
     items={items}
     value={value}
-    onChange={({ value }) => setValue(value)}
+    onChange={setValue}
   />
   );
 }
@@ -631,7 +625,7 @@ export function UserSelectExampleForm() {
       form="round"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 }
@@ -683,13 +677,160 @@ export function UserSelectExampleView() {
       view="clear"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 }
 ```
 
 <UserSelectExampleView />
+
+## Виртуализация списка
+
+Если список элементов очень большой то стоит использовать виртуализацию скрола.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+  groupId: number;
+};
+
+type Group = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = new Array(100000).fill(null).map((_, i) => ({
+  label: `Опция ${i + 1}`,
+  groupId: Math.floor(i / 100) + 1,
+  id: i,
+}));
+
+const groups: Group[] = new Array(items.length / 100)
+  .fill(null)
+  .map((_, i) => ({
+    id: i + 1,
+    label: `Группа ${i + 1}`,
+  }));
+
+export const UserSelectExampleVirtualScroll = () => {
+  const [value, setValue] = useState<Item[] | null>();
+  return (
+    <UserSelect
+      placeholder="У меня очень большой список"
+      items={items}
+      value={value}
+      onChange={setValue}
+      groups={groups}
+      multiple
+      virtualScroll
+    />
+  );
+};
+```
+
+<UserSelectExampleVirtualScroll />
+
+## Индикация загрузки
+
+Для отображения индикации загрузки укажите параметр `isLoading`
+
+Пример ниже показывает как можно загрузить данные после того как расскрыли список.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const useMockLoadData = (
+  searchValue = '',
+  timeout = 2000,
+): [Item[], boolean, () => void] => {
+  const [isLoading, setIsLoading] = useFlag();
+  const [isStart, setIsStart] = useFlag();
+  const [lenght, setLenght] = useState<number>(0);
+  const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
+
+  const items = useMemo(() => {
+    if (searchValue) {
+      return new Array(10000)
+        .fill(null)
+        .map((_, i) => ({
+          label: `Опция ${i + 1}`,
+          id: i,
+        }))
+        .filter(
+          (item) =>
+            item.label
+              .toLocaleLowerCase()
+              .indexOf(searchValue.toLocaleLowerCase()) !== -1,
+        );
+    }
+    return new Array(lenght).fill(null).map((_, i) => ({
+      label: `Опция ${i + 1}`,
+      id: i,
+    }));
+  }, [lenght, searchValue]);
+
+  useEffect(() => {
+    setIsLoading.on();
+    isLoadingOffDebounce();
+  }, [searchValue]);
+
+  useEffect(() => {
+    if (isStart) {
+      setIsLoading.on();
+    }
+
+    const timeoutNumber = setTimeout(() => {
+      if (isStart) {
+        setLenght((state) => state + 100);
+        setIsLoading.off();
+        setIsStart.off();
+      }
+    }, timeout);
+
+    return () => {
+      clearTimeout(timeoutNumber);
+    };
+  }, [isStart]);
+
+  useEffect(() => {
+    return () => {
+      setIsLoading.off();
+      setIsStart.off();
+    };
+  }, []);
+
+  return [searchValue && isLoading ? [] : items, isLoading, setIsStart.on];
+};
+
+export const UserSelectExampleIsLoading = () => {
+  const [value, setValue] = useState<Item[] | null>();
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [data, isLoading, onDropdownOpen] = useMockLoadData(searchValue);
+
+  return (
+    <UserSelect
+      placeholder="Загружу данные после того как по мне кликнут"
+      items={data}
+      value={value}
+      onChange={setValue}
+      multiple
+      onDropdownOpen={onDropdownOpen}
+      isLoading={isLoading}
+      virtualScroll
+      onScrollToBottom={searchValue ? undefined : onDropdownOpen}
+      searchFunction={() => true}
+      onSearchValueChange={setSearchValue}
+    />
+  );
+};
+```
+
+<UserSelectExampleIsLoading />
 
 ## Неактивный выпадающий список
 
@@ -729,7 +870,7 @@ export function UserSelectExampleDisabled() {
       placeholder="Выберите пользователя"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       disabled
     />
   );
@@ -783,8 +924,8 @@ export function UserSelectExampleCreate() {
       placeholder="Выберите пользователя"
       items={list}
       value={value}
-      onChange={({ value }) => setValue(value)}
-      onCreate={({ label }) =>
+      onChange={setValue}
+      onCreate={(label) =>
         setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
       }
     />
@@ -805,8 +946,8 @@ export function UserSelectExampleCreate() {
       placeholder="Выберите пользователя"
       items={list}
       value={value}
-      onChange={({ value }) => setValue(value)}
-      onCreate={({ label }) =>
+      onChange={setValue}
+      onCreate={(label) =>
         setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
       }
       labelForCreate="Добавить"
@@ -903,40 +1044,39 @@ const searchFunction = (item: Item, searchValue: string): boolean => {
 export function UserSelectExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <UserSelect
-        placeholder="Выберите пользователя"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        searchFunction={searchFunction}
-        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
-          <div
-            className={cnUserSelectExampleRenderItem('Item', {
-              active,
-              hovered,
-            })}
-            role="option"
-            aria-selected={active}
-            aria-hidden
-            onMouseEnter={onMouseEnter}
-            onClick={onClick}
-          >
-            <User
-              className={cnUserSelectExampleRenderItem('User')}
-              name={item.label}
-              avatarUrl={item.avatarUrl}
-              info={item.subLabel}
-            />
-            <Badge
-              status={mapStatus[item.status]}
-              label={mapLabel[item.status]}
-              size="s"
-            />
-          </div>
-        )}
-      />
-    </Example>
+    <UserSelect
+      placeholder="Выберите пользователя"
+      items={items}
+      value={value}
+      onChange={setValue}
+      searchFunction={searchFunction}
+      renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
+        <div
+          className={cnUserSelectExampleRenderItem('Item', {
+            active,
+            hovered,
+          })}
+          role="option"
+          aria-selected={active}
+          aria-hidden
+          onMouseEnter={onMouseEnter}
+          onClick={onClick}
+          ref={ref}
+        >
+          <User
+            className={cnUserSelectExampleRenderItem('User')}
+            name={item.label}
+            avatarUrl={item.avatarUrl}
+            info={item.subLabel}
+          />
+          <Badge
+            status={mapStatus[item.status]}
+            label={mapLabel[item.status]}
+            size="s"
+          />
+        </div>
+      )}
+    />
   );
 }
 ```
@@ -994,29 +1134,27 @@ const mapStatus = {
 export function UserSelectExampleRenderValue() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <UserSelect
-        placeholder="Выберите пользователя"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        renderValue={({ item }) => (
-          <div className={cnUserSelectExampleRenderValue('Item')}>
-            <User
-              className={cnUserSelectExampleRenderValue('User')}
-              name={item.label}
-              avatarUrl={item.avatarUrl}
-              info={item.subLabel}
-            />
-            <Badge
-              status={mapStatus[item.status]}
-              label={mapLabel[item.status]}
-              size="s"
-            />
-          </div>
-        )}
-      />
-    </Example>
+    <UserSelect
+      placeholder="Выберите пользователя"
+      items={items}
+      value={value}
+      onChange={setValue}
+      renderValue={({ item }) => (
+        <div className={cnUserSelectExampleRenderValue('Item')}>
+          <User
+            className={cnUserSelectExampleRenderValue('User')}
+            name={item.label}
+            avatarUrl={item.avatarUrl}
+            info={item.subLabel}
+          />
+          <Badge
+            status={mapStatus[item.status]}
+            label={mapLabel[item.status]}
+            size="s"
+          />
+        </div>
+      )}
+    />
   );
 }
 ```
@@ -1057,7 +1195,7 @@ export function UserSelectExampleCustomTypes() {
       placeholder="Выберите пользователя"
       items={['Андрей Андреев', 'Егор Егоров', 'Михаил Михалков']}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       getItemKey={(item) => item}
       getItemLabel={(item) => item}
     />
@@ -1087,21 +1225,19 @@ const items: Item[] = [
 export function UserSelectExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <UserSelect
-        placeholder="Выберите пользователя"
-        items={items}
-        groups={groups}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        getItemKey={(item) => `${item.firstName} ${item.lastName}`}
-        getItemLabel={(item) => `${item.firstName} ${item.lastName}`}
-        getItemSubLabel={(item) => item.group}
-        getItemGroupKey={(item) => item.group}
-        getGroupKey={(group) => group}
-        getGroupLabel={(group) => group}
-      />
-    </Example>
+    <UserSelect
+      placeholder="Выберите пользователя"
+      items={items}
+      groups={groups}
+      value={value}
+      onChange={setValue}
+      getItemKey={(item) => `${item.firstName} ${item.lastName}`}
+      getItemLabel={(item) => `${item.firstName} ${item.lastName}`}
+      getItemSubLabel={(item) => item.group}
+      getItemGroupKey={(item) => item.group}
+      getGroupKey={(group) => group}
+      getGroupLabel={(group) => group}
+    />
   );
 }
 ```

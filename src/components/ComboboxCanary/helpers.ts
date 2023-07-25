@@ -102,7 +102,7 @@ export type ComboboxProps<
     virtualScroll?: boolean;
     onScrollToBottom?: () => void;
     onSearchValueChange?: (value: string) => void;
-    onOpen?: () => void;
+    onDropdownOpen?: () => void;
   },
   HTMLDivElement
 > &

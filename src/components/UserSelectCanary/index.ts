@@ -1,1 +1,1 @@
-export * from './UserSelect';
+export * from './UserSelectCanary';

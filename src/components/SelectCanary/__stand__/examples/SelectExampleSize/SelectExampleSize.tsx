@@ -1,8 +1,9 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
+import { Select } from '##/components/SelectCanary';
+
 import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
-import { Select } from '../../../Select';
 
 type Item = {
   label: string;
@@ -34,7 +35,7 @@ export const SelectExampleSize = () => {
         size="xs"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Select
         className={cnMixSpace({ mB: 'm' })}
@@ -42,7 +43,7 @@ export const SelectExampleSize = () => {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Select
         className={cnMixSpace({ mB: 'm' })}
@@ -50,7 +51,7 @@ export const SelectExampleSize = () => {
         size="m"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Select
         className={cnMixSpace({ mB: 'm' })}
@@ -58,7 +59,7 @@ export const SelectExampleSize = () => {
         size="l"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

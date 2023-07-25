@@ -17,7 +17,7 @@ export const AutoCompleteExampleGroups = () => {
         value={value}
         items={items}
         groups={groups}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

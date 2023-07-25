@@ -34,7 +34,7 @@ export const AutoCompleteExampleDisabled = () => {
         disabled
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

@@ -316,7 +316,7 @@ const items: Item[] = [
 export function SelectExampleStatus() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
+    <>
       <Select
         placeholder="default"
         caption="default"
@@ -352,7 +352,7 @@ export function SelectExampleStatus() {
         value={value}
         onChange={({ value }) => setValue(value)}
       />
-    </div>
+    </>
   );
 }
 ```
@@ -527,16 +527,14 @@ const items: Item[] = [
 export function SelectExampleLabel() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <Select
-        label="Значение"
-        caption={value?.label}
-        placeholder="Выберите значение"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-      />
-    </div>
+    <Select
+      label="Значение"
+      caption={value?.label}
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
   );
 }
 ```

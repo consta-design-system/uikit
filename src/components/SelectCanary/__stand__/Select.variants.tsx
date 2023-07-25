@@ -23,7 +23,7 @@ import {
   myGroup,
   MyItem,
 } from '../__mocks__/data.mock';
-import { Select } from '../Select';
+import { Select } from '../SelectCanary';
 
 const cnSelectVariants = cnCanary('SelectVariants');
 
@@ -70,7 +70,7 @@ const Variants = () => {
         items={items}
         isLoading={isLoading}
         value={value1}
-        onChange={({ value }) => setValue1(value)}
+        onChange={setValue1}
         groups={withGroups ? groups : []}
         label={label}
         labelPosition={labelPosition}
@@ -94,9 +94,9 @@ const Variants = () => {
         items={myData}
         value={value2}
         isLoading={isLoading}
-        onChange={({ value }) => setValue2(value)}
+        onChange={setValue2}
         groups={withGroups ? myGroup : []}
-        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+        renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
           <div
             className={cnSelectVariants('MyItem', { active, hovered })}
             role="option"
@@ -105,6 +105,7 @@ const Variants = () => {
             aria-hidden="true"
             onMouseEnter={onMouseEnter}
             onClick={onClick}
+            ref={ref}
           >
             {item.name}
           </div>

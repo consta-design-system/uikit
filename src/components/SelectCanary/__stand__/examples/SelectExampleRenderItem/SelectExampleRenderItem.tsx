@@ -3,8 +3,9 @@ import './SelectExampleRenderItem.css';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
+import { Select } from '##/components/SelectCanary';
+
 import { cn } from '../../../../../utils/bem';
-import { Select } from '../../../Select';
 
 const cnSelectExampleRenderItem = cn('SelectExampleRenderItem');
 
@@ -36,15 +37,15 @@ export const SelectExampleRenderItem = () => {
         placeholder="Выберите значение"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
-        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+        onChange={setValue}
+        renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
           <div
             className={cnSelectExampleRenderItem('Item', { active, hovered })}
-            role="option"
             aria-selected={active}
             aria-hidden="true"
             onMouseEnter={onMouseEnter}
             onClick={onClick}
+            ref={ref}
           >
             {item.label}
           </div>

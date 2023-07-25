@@ -31,13 +31,13 @@ export const AutoCompleteExampleType = () => {
         type="text"
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <AutoComplete
         type="textarea"
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );
@@ -51,7 +51,7 @@ export const AutoCompleteExampleTypeEmail = () => {
         type="email"
         value={value}
         items={getMailItems(value)}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

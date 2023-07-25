@@ -936,14 +936,14 @@ export function ComboboxExampleRenderItem() {
       value={value}
       onChange={({ value }) => setValue(value)}
       searchFunction={searchFunction}
-      renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+      renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
         <div
           className={cnComboboxExampleRenderItem('Item', { active, hovered })}
-          role="option"
           aria-selected={active}
           aria-hidden="true"
           onMouseEnter={onMouseEnter}
           onClick={onClick}
+          ref={ref}
         >
           {item.label}
           {item.status && (

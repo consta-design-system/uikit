@@ -13,7 +13,7 @@ import { cnSelect } from '../../SelectComponents/cnSelect';
 import { cnSelectLoader } from '../../SelectComponents/SelectLoader/SelectLoader';
 import { propForm } from '../../SelectComponents/types';
 import { groups, items } from '../__mocks__/data.mock';
-import { defaultGetItemLabel, Select, SelectProps } from '../Select';
+import { defaultGetItemLabel, Select, SelectProps } from '../SelectCanary';
 
 const animationDuration = 200;
 const testId = 'Select';

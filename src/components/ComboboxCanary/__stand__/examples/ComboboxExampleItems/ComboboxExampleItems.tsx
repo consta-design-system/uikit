@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { Combobox } from '../../../Combobox';
+import { Combobox } from '../../../ComboboxCanary';
 
 type Item = {
   label: string;

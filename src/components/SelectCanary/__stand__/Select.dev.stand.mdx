@@ -9,6 +9,8 @@ import { SelectExampleRenderValue } from './examples/SelectExampleRenderValue/Se
 import { SelectExampleDisabled } from './examples/SelectExampleDisabled/SelectExampleDisabled';
 import { SelectExampleDisabledItem } from './examples/SelectExampleDisabledItem/SelectExampleDisabledItem';
 import { SelectExampleGroups } from './examples/SelectExampleGroups/SelectExampleGroups';
+import { SelectExampleVirtualScroll } from './examples/SelectExampleVirtualScroll/SelectExampleVirtualScroll';
+import { SelectExampleIsLoading } from './examples/SelectExampleIsLoading/SelectExampleIsLoading';
 import {
   SelectExampleCustomTypes,
   SelectExampleCustomTypesWithGroups,
@@ -35,6 +37,8 @@ import { Select } from '@consta/uikit/Select';
 - [Размер](#размер)
 - [Форма](#форма)
 - [Внешний вид](#внешний-вид)
+- [Виртуализация списка](#виртуализация-списка)
+- [Индикация загрузки](#индикация-загрузки)
 - [Лейбл и подпись](#лейбл-и-подпись)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Кастомизация](#кастомизация)
@@ -108,13 +112,7 @@ const items: Item[] = [
 
 export function SelectExampleItems() {
   const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      items={items}
-      value={value}
-      onChange={({ value }) => setValue(value)}
-    />
-  );
+  return <Select items={items} value={value} onChange={setValue} />;
 }
 ```
 
@@ -155,7 +153,7 @@ export function SelectExamplePlaceholder() {
       placeholder="Выберите значение"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 }
@@ -199,7 +197,7 @@ export function SelectExampleDisabledItem() {
       placeholder="Выберите значение"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 }
@@ -276,7 +274,7 @@ export function SelectExampleGroups() {
       placeholder="Выберите значение"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       groups={groups}
     />
   );
@@ -316,14 +314,14 @@ const items: Item[] = [
 export function SelectExampleStatus() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
+    <>
       <Select
         placeholder="default"
         caption="default"
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Select
         placeholder="alert"
@@ -332,7 +330,7 @@ export function SelectExampleStatus() {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Select
         placeholder="warning"
@@ -341,7 +339,7 @@ export function SelectExampleStatus() {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Select
         placeholder="success"
@@ -350,9 +348,9 @@ export function SelectExampleStatus() {
         status="success"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
-    </div>
+    </>
   );
 }
 ```
@@ -394,7 +392,7 @@ export function SelectExampleSize() {
       size="xs"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 }
@@ -437,14 +435,14 @@ export function SelectExampleForm() {
       form="round"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
     <Select
       placeholder="Форма brickDefault"
       form="brickDefault"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 }
@@ -490,13 +488,67 @@ export function SelectExampleView() {
       view="clear"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 }
 ```
 
 <SelectExampleView />
+
+## Виртуализация списка
+
+Если список элементов очень большой то стоит использовать виртуализацию скрола.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+  groupId: number;
+};
+
+type Group = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = new Array(100000).fill(null).map((_, i) => ({
+  label: `Опция ${i + 1}`,
+  groupId: Math.floor(i / 100) + 1,
+  id: i,
+}));
+
+const groups: Group[] = new Array(items.length / 100)
+  .fill(null)
+  .map((_, i) => ({
+    id: i + 1,
+    label: `Группа ${i + 1}`,
+  }));
+
+export const SelectExampleVirtualScroll = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="У меня очень большой список"
+      items={items}
+      value={value}
+      onChange={setValue}
+      groups={groups}
+      virtualScroll
+    />
+  );
+};
+```
+
+<SelectExampleVirtualScroll />
+
+# Индикация загрузки
+
+Для отображения индикации загрузки укажите параметр `isLoading`
+
+Пример ниже показывает как можно загрузить данные после того как расскрыли список.
+
+<SelectExampleIsLoading />
 
 ## Лейбл и подпись
 
@@ -527,16 +579,14 @@ const items: Item[] = [
 export function SelectExampleLabel() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <Select
-        label="Значение"
-        caption={value?.label}
-        placeholder="Выберите значение"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-      />
-    </div>
+    <Select
+      label="Значение"
+      caption={value?.label}
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={setValue}
+    />
   );
 }
 ```
@@ -583,7 +633,7 @@ export function SelectExampleDisabled() {
       placeholder="Выберите значение"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       disabled
     />
   );
@@ -631,14 +681,14 @@ export function SelectExampleRenderItem() {
       placeholder="Выберите значение"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
-      renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+      onChange={setValue}
+      renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
         <div
           className={cnSelectExampleRenderItem('Item', { active, hovered })}
-          role="option"
           aria-selected={active}
           onMouseEnter={onMouseEnter}
           onClick={onClick}
+          ref={ref}
         >
           {item.label}
         </div>
@@ -683,7 +733,7 @@ export function SelectExampleRenderValue() {
       placeholder="Выберите значение"
       items={items}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       renderValue={({ item }) => (
         <div>
           <span role="img" aria-label="Panda">
@@ -729,7 +779,7 @@ export function SelectExampleCustomTypes() {
       placeholder="Выберите значение"
       items={['Первый', 'Второй', 'Третий']}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       getItemKey={(item) => item}
       getItemLabel={(item) => item}
     />
@@ -774,7 +824,7 @@ export function SelectExampleCustomTypesWithGroups() {
       items={items}
       groups={groups}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       getItemKey={(item) => item.name}
       getItemLabel={(item) => item.name}
       getItemGroupKey={(item) => item.group}
@@ -808,18 +858,21 @@ type DefaultGroup = {
   id: string | number;
 };
 
-type PropOnChange<ITEM = DefaultItem> = (props: {
-  value: ITEM | null;
-  e: React.SyntheticEvent;
-}) => void;
+type PropOnChange<ITEM = DefaultItem> = (
+  value: ITEM | null,
+  props: {
+    e: React.SyntheticEvent;
+  },
+) => void;
 
-type PropRenderItem<ITEM = DefaultItem> = (props: {
+type RenderItemProps<ITEM> = {
   item: ITEM;
   active: boolean;
   hovered: boolean;
-  onClick: React.ReactEventHandler;
-  onMouseEnter: React.ReactEventHandler;
-}) => React.ReactElement | null;
+  onClick: (e: React.SyntheticEvent) => void;
+  onMouseEnter: (e: React.SyntheticEvent) => void;
+  ref: React.Ref<HTMLDivElement>;
+};
 
 type PropRenderValue<ITEM> = (props: {
   item: ITEM;
@@ -856,7 +909,10 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп) | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)              |
 | [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)   | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`     | Функция для определения названия группы                                |
 | [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)     | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`  | Функция для определения уникального ключа группы                       |
-| `isLoading?`                                                       | `boolean`                                              | -                         | При `true` будет отображаться лоудер загрузки                          |
+| `isLoading?`                                                       | `boolean`                                              | -                         | При `true` будет отображаться лоадер загрузки                          |
+| `virtualScroll?`                                                   | `boolean`                                              | -                         | Включает виртуализацию скролла                                         |
+| `onScrollToBottom?`                                                | `() => void`                                           | -                         | Колбэк сработает при сроое до конца списка                             |
+| `onDropdownOpen?`                                                  | `() => void`                                           | -                         | Колбэк сработает при при открытии дропдауна                            |
 | `required?`                                                        | `boolean`                                              | -                         | Нужно заполнить                                                        |
 | `labelForEmptyItems?`                                              | `string`                                               | `Список пуст`             | Текст для случая, когда в списке нет значений                          |
 | `onBlur?`                                                          | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `blur`                                              |

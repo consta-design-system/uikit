@@ -4,11 +4,11 @@ import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
 import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
-import { defaultLabelForEmptyItems } from '##/components/SelectComponents/helpers';
 import {
   cnSelect,
   COMPONENT_NAME,
 } from '##/components/SelectComponentsCanary/cnSelect';
+import { defaultLabelForEmptyItems } from '##/components/SelectComponentsCanary/helpers';
 import { SelectContainer } from '##/components/SelectComponentsCanary/SelectContainer';
 import { SelectDropdown } from '##/components/SelectComponentsCanary/SelectDropdown';
 import { SelectItem } from '##/components/SelectComponentsCanary/SelectItem';
@@ -34,7 +34,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
   props: SelectProps<ITEM, GROUP>,
   ref: React.Ref<HTMLDivElement>,
 ) => {
-  const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
+  const defaultDropdownRef = useRef<HTMLDivElement>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
 
   const {
@@ -48,7 +48,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     disabled,
     ariaLabel,
     id,
-    dropdownRef = defaultDropdownRef,
+    dropdownRef,
     form = defaultPropForm,
     view = defaultPropView,
     size = defaultPropSize,
@@ -68,6 +68,9 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     inputRef: inputRefProp,
     style,
     dropdownForm = 'default',
+    onDropdownOpen,
+    onScrollToBottom,
+    virtualScroll,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -84,12 +87,13 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     handleInputClick,
     notFound,
     hasItems,
+    optionsRefs,
   } = useSelect<ITEM, GROUP, false>({
     items,
     groups,
     value,
     onChange,
-    dropdownRef,
+    dropdownRef: defaultDropdownRef,
     controlRef,
     disabled,
     getItemLabel,
@@ -100,12 +104,13 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     multiple: false,
     onBlur,
     onFocus,
+    onDropdownOpen,
   });
 
   const inputId = id ? `${id}-input` : id;
 
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
-    const { item, active, hovered, onClick, onMouseEnter } = props;
+    const { item, active, hovered, onClick, onMouseEnter, ref } = props;
 
     return (
       <SelectItem
@@ -118,6 +123,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
         onClick={onClick}
         onMouseEnter={onMouseEnter}
         disabled={getItemDisabled(item)}
+        ref={ref}
       />
     );
   };
@@ -198,7 +204,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
         size={size}
         controlRef={controlRef}
         getOptionProps={getOptionProps}
-        dropdownRef={dropdownRef}
+        dropdownRef={useForkRef([dropdownRef, defaultDropdownRef])}
         form={dropdownForm}
         className={dropdownClassName}
         renderItem={renderItem || renderItemDefault}
@@ -208,6 +214,9 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
         isLoading={isLoading}
         labelForEmptyItems={labelForEmptyItems}
         hasItems={hasItems}
+        itemsRefs={optionsRefs}
+        virtualScroll={virtualScroll}
+        onScrollToBottom={onScrollToBottom}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

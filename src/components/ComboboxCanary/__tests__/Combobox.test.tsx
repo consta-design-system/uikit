@@ -12,7 +12,11 @@ import { cnListGroupLabel, cnListItem } from '../../ListCanary';
 import { cnSelect } from '../../SelectComponents/cnSelect';
 import { cnSelectValueTag } from '../../SelectComponents/SelectValueTag/SelectValueTag';
 import { groups, items } from '../__mocks__/data.mock';
-import { Combobox, ComboboxProps, defaultGetItemLabel } from '../Combobox';
+import {
+  Combobox,
+  ComboboxProps,
+  defaultGetItemLabel,
+} from '../ComboboxCanary';
 import { DefaultGroup, DefaultItem } from '../helpers';
 
 const animationDuration = 200;

@@ -3,9 +3,9 @@ import './ComboboxExampleRenderItem.css';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cn } from '../../../../../utils/bem';
-import { Badge } from '../../../../Badge/Badge';
-import { Combobox } from '../../../Combobox';
+import { Badge } from '##/components/Badge';
+import { Combobox } from '##/components/ComboboxCanary';
+import { cn } from '##/utils/bem';
 
 const cnComboboxExampleRenderItem = cn('ComboboxExampleRenderItem');
 

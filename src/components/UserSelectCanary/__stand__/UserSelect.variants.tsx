@@ -13,7 +13,7 @@ import {
   propView,
 } from '##/components/SelectComponentsCanary/types';
 import { Text } from '##/components/Text';
-import { UserSelect } from '##/components/UserSelect';
+import { UserSelect } from '##/components/UserSelectCanary';
 import { cnCanary } from '##/utils/bem';
 
 import {
@@ -103,7 +103,7 @@ const Variants = () => {
           items={items}
           isLoading={isLoading}
           value={valueMultiple}
-          onChange={({ value }) => setValueMultiple(value)}
+          onChange={setValueMultiple}
           groups={withGroups ? groups : []}
           multiple
           label={label}
@@ -128,7 +128,7 @@ const Variants = () => {
         value={value}
         isLoading={isLoading}
         dropdownForm={dropdownForm}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         groups={withGroups ? groups : []}
         multiple={false}
         labelIcon={withLabelIcon ? IconQuestion : undefined}
@@ -154,9 +154,9 @@ const Variants = () => {
         items={myItems}
         dropdownForm={dropdownForm}
         value={valueCustomRender}
-        onChange={({ value }) => setValueCustomRender(value)}
+        onChange={setValueCustomRender}
         groups={withGroups ? myGroup : []}
-        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+        renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
           <div
             className={cnUserSelectVariants('MyItem', { active, hovered })}
             role="option"
@@ -165,6 +165,7 @@ const Variants = () => {
             aria-hidden="true"
             onMouseEnter={onMouseEnter}
             onClick={onClick}
+            ref={ref}
           >
             {item.name}
             <Text view="secondary" size="xs">
@@ -213,9 +214,9 @@ const Variants = () => {
         items={list}
         value={value}
         isLoading={isLoading}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         groups={withGroups ? groups : []}
-        onCreate={({ label }) =>
+        onCreate={(label) =>
           setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
         }
         label={label}

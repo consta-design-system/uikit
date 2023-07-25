@@ -8,7 +8,7 @@ import {
   PropStatus,
   PropView,
   RenderItemProps,
-} from '../SelectComponents/types';
+} from '../SelectComponentsCanary/types';
 
 export type DefaultItem = {
   label: string;
@@ -49,7 +49,7 @@ export type SelectProps<
 > = PropsWithHTMLAttributesAndRef<
   {
     items: ITEM[];
-    onChange: (props: { value: ITEM | null; e: React.SyntheticEvent }) => void;
+    onChange: (value: ITEM | null, props: { e: React.SyntheticEvent }) => void;
     disabled?: boolean;
     form?: PropForm;
     dropdownForm?: 'default' | 'brick' | 'round';
@@ -57,7 +57,6 @@ export type SelectProps<
     view?: PropView;
     status?: PropStatus;
     focused?: boolean;
-    multiple?: boolean;
     placeholder?: string;
     ariaLabel?: string;
     dropdownClassName?: string;
@@ -83,6 +82,9 @@ export type SelectProps<
     labelIcon?: IconComponent;
     labelPosition?: 'top' | 'left';
     caption?: string;
+    virtualScroll?: boolean;
+    onScrollToBottom?: () => void;
+    onDropdownOpen?: () => void;
   },
   HTMLDivElement
 > &

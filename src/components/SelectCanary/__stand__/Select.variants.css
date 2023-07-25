@@ -1,5 +1,5 @@
 .canary--SelectVariants {
-  &.Select {
+  &.canary--SelectVariants {
     position: absolute;
     top: var(--space-l);
     width: 100%;

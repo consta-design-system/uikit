@@ -8,7 +8,7 @@ import {
   PropStatus,
   PropView,
   RenderItemProps,
-} from '../SelectComponents/types';
+} from '../SelectComponentsCanary/types';
 
 export type DefaultItem = {
   label: string;
@@ -41,10 +41,12 @@ export type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 
 type PropSearchFunction<ITEM> = (item: ITEM, searchValue: string) => boolean;
-type PropOnChange<ITEM, MULTIPLE extends boolean> = (props: {
-  value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
-  e: React.SyntheticEvent;
-}) => void;
+type PropOnChange<ITEM, MULTIPLE extends boolean> = (
+  value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
+  props: {
+    e: React.SyntheticEvent;
+  },
+) => void;
 type PropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)
   | null
@@ -81,7 +83,7 @@ export type UserSelectProps<
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
-    onCreate?: (props: { e: React.SyntheticEvent; label: string }) => void;
+    onCreate?: (label: string, props: { e: React.SyntheticEvent }) => void;
     inputRef?: React.RefObject<HTMLInputElement>;
     labelForNotFound?: string;
     labelForCreate?: string;
@@ -104,6 +106,10 @@ export type UserSelectProps<
     labelIcon?: IconComponent;
     caption?: string;
     labelPosition?: 'top' | 'left';
+    virtualScroll?: boolean;
+    onScrollToBottom?: () => void;
+    onSearchValueChange?: (value: string) => void;
+    onDropdownOpen?: () => void;
   },
   HTMLDivElement
 > &

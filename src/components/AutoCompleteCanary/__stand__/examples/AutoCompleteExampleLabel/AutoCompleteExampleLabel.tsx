@@ -31,7 +31,7 @@ export const AutoCompleteExampleLabel = () => {
         label="Введите значение"
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

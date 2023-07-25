@@ -1,4 +1,4 @@
-import '##/components/SelectComponents/Select.css';
+import '##/components/SelectComponentsCanary/Select.css';
 
 import { IconClose } from '@consta/icons/IconClose';
 import { IconSelect } from '@consta/icons/IconSelect';
@@ -14,8 +14,6 @@ import {
 } from '##/components/SelectComponentsCanary/helpers';
 import { SelectContainer } from '##/components/SelectComponentsCanary/SelectContainer';
 import { SelectDropdown } from '##/components/SelectComponentsCanary/SelectDropdown';
-import { SelectItem } from '##/components/SelectComponentsCanary/SelectItem';
-import { SelectValueTag } from '##/components/SelectComponentsCanary/SelectValueTag';
 import {
   defaultPropForm,
   defaultPropSize,
@@ -26,25 +24,28 @@ import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixFocus } from '##/mixs/MixFocus';
 
 import {
-  ComboboxComponent,
-  ComboboxProps,
   DefaultGroup,
   DefaultItem,
   isMultipleParams,
   isNotMultipleParams,
   PropRenderItem,
   PropRenderValue,
+  searchCompare,
+  UserSelectComponent,
+  UserSelectProps,
   withDefaultGetters,
 } from './helpers';
+import { UserSelectItem } from './UserSelectItem/UserSelectItem';
+import { UserSelectValue } from './UserSelectValue/UserSelectValue';
 
-export const COMPONENT_NAME = 'Combobox' as const;
+export const COMPONENT_NAME = 'UserSelect' as const;
 
-const ComboboxRender = <
+const UserSelectRender = <
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
   MULTIPLE extends boolean = false,
 >(
-  props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
+  props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
   ref: React.Ref<HTMLDivElement>,
 ) => {
   const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
@@ -62,40 +63,51 @@ const ComboboxRender = <
     disabled,
     ariaLabel,
     id,
+    isLoading,
     required,
-    dropdownRef,
+    dropdownRef = defaultDropdownRef,
     form = defaultPropForm,
     view = defaultPropView,
     size = defaultPropSize,
     dropdownClassName,
+    searchValue: searchValueProp,
     name,
     groups = [],
-    getItemLabel,
     getItemKey,
+    getItemLabel,
+    getItemSubLabel,
+    getItemAvatarUrl,
     getItemGroupKey,
     getItemDisabled,
     getGroupKey,
     getGroupLabel,
     renderItem,
-    searchValue: searchValueProp,
     renderValue: renderValueProp,
     onCreate,
     inputRef: inputRefProp,
     labelForNotFound = defaultlabelForNotFound,
     labelForCreate = defaultlabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
-    searchFunction,
-    selectAll,
-    isLoading,
     multiple = false,
+    searchFunction,
     style,
     dropdownForm = 'default',
-    virtualScroll,
     onScrollToBottom,
-    onOpen,
     onSearchValueChange,
-    ...otherProps
+    onDropdownOpen,
+    virtualScroll,
+    ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
+
+  const searchFunctionDefault = (item: ITEM, searchValue: string): boolean => {
+    const searchOfLabel = searchCompare(searchValue, getItemLabel(item));
+
+    if (searchOfLabel) {
+      return searchOfLabel;
+    }
+
+    return searchCompare(searchValue, getItemSubLabel(item));
+  };
 
   const {
     getKeyProps,
@@ -120,23 +132,22 @@ const ComboboxRender = <
     groups,
     value,
     onChange,
-    selectAll,
-    dropdownRef: defaultDropdownRef,
+    dropdownRef,
     controlRef,
     disabled,
     getItemLabel,
     getItemKey,
     getGroupKey,
-    searchValue: searchValueProp,
     getItemGroupKey,
+    searchValue: searchValueProp,
     getItemDisabled,
     multiple,
     onBlur,
     onFocus,
     onCreate,
-    searchFunction,
-    onOpen,
+    searchFunction: searchFunction || searchFunctionDefault,
     onSearchValueChange,
+    onDropdownOpen,
   });
 
   const inputId = id ? `${id}-input` : id;
@@ -145,49 +156,42 @@ const ComboboxRender = <
     const { item, active, hovered, onClick, onMouseEnter, ref } = props;
 
     return (
-      <SelectItem
+      <UserSelectItem
         label={getItemLabel(item)}
+        subLabel={getItemSubLabel(item)}
+        avatarUrl={getItemAvatarUrl(item)}
         active={active}
         hovered={hovered}
-        multiple={multiple}
         size={size}
         indent={dropdownForm === 'round' ? 'increased' : 'normal'}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
-        disabled={getItemDisabled(item)}
+        disable={getItemDisabled(item)}
+        multiple={multiple}
         ref={ref}
       />
     );
   };
 
-  const renderValueDefaultMultiple: PropRenderValue<ITEM> = ({
+  const renderValueDefault: PropRenderValue<ITEM> = ({
     item,
     handleRemove,
   }) => {
     return (
-      <SelectValueTag
+      <UserSelectValue
         label={getItemLabel(item)}
+        subLabel={getItemSubLabel(item)}
+        avatarUrl={getItemAvatarUrl(item)}
         key={getItemKey(item)}
         size={size}
-        disabled={disabled || getItemDisabled(item)}
         handleRemove={handleRemove}
+        multiple={multiple}
+        disabled={disabled || getItemDisabled(item)}
       />
     );
   };
 
-  const renderValueDefaultNotMultiple: PropRenderValue<ITEM> = (props) => {
-    const valueLable = getItemLabel(props.item);
-
-    return (
-      <span className={cnSelect('ControlValue')} title={valueLable}>
-        {valueLable}
-      </span>
-    );
-  };
-
-  const renderValue =
-    renderValueProp ||
-    (multiple ? renderValueDefaultMultiple : renderValueDefaultNotMultiple);
+  const renderValue = renderValueProp || renderValueDefault;
 
   const inputRefForRender = useForkRef([inputRef, inputRefProp]);
 
@@ -226,6 +230,7 @@ const ComboboxRender = <
             size,
             hide: !multiple && !!value,
             multiple,
+            isUserSelect: true,
           })}
           value={searchValue}
           style={{ width }}
@@ -240,15 +245,15 @@ const ComboboxRender = <
         focused={isFocused}
         disabled={disabled}
         size={size}
-        view={view}
         required={required}
-        form={form}
-        multiple={multiple}
-        ref={ref}
-        type="combobox"
-        style={style}
         id={inputId}
-        {...otherProps}
+        view={view}
+        type="userselect"
+        form={form}
+        multiple
+        ref={ref}
+        style={style}
+        {...restProps}
       >
         <div
           className={cnSelect('Control', { hasInput: true })}
@@ -266,7 +271,9 @@ const ComboboxRender = <
           >
             <div className={cnSelect('ControlValueContainer')}>
               {multiple ? (
-                <div className={cnSelect('ControlValue')}>
+                <div
+                  className={cnSelect('ControlValue', { isUserSelect: true })}
+                >
                   {renderControlValue()}
                 </div>
               ) : (
@@ -313,29 +320,31 @@ const ComboboxRender = <
         size={size}
         controlRef={controlRef}
         getOptionProps={getOptionProps}
-        dropdownRef={useForkRef([dropdownRef, defaultDropdownRef])}
+        dropdownRef={dropdownRef}
         form={dropdownForm}
+        isLoading={isLoading}
         className={dropdownClassName}
         renderItem={renderItem || renderItemDefault}
         getGroupLabel={getGroupLabel}
         visibleItems={visibleItems}
         labelForNotFound={labelForNotFound}
         labelForCreate={labelForCreate}
-        isLoading={isLoading}
-        labelForEmptyItems={labelForEmptyItems}
         notFound={notFound}
         hasItems={hasItems}
+        labelForEmptyItems={labelForEmptyItems}
+        itemsRefs={optionsRefs}
+        onScrollToBottom={onScrollToBottom}
+        virtualScroll={virtualScroll}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }
             : undefined
         }
-        itemsRef={optionsRefs}
-        virtualScroll={virtualScroll}
-        onScrollToBottom={onScrollToBottom}
       />
     </>
   );
 };
 
-export const Combobox = forwardRef(ComboboxRender) as ComboboxComponent;
+export const UserSelect = forwardRef(UserSelectRender) as UserSelectComponent;
+
+export * from './helpers';

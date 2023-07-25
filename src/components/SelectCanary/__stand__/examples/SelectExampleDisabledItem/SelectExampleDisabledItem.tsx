@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { Select } from '../../../Select';
+import { Select } from '##/components/SelectCanary';
 
 type Item = {
   label: string;
@@ -35,7 +35,7 @@ export const SelectExampleDisabledItem = () => {
         placeholder="Выберите значение"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description:
     'Выпадающий список с поиском. Можно выбрать один или несколько вариантов.',
-  version: '1.9.0',
+  version: '4.24.0',
   status: 'canary',
   sandbox: 'combobox-dg4whk',
   alias: ['поле', 'ввод', 'инпут', 'выбор', 'список', 'лист'],

@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { UserSelect } from '../../../UserSelect';
+import { UserSelect } from '../../../UserSelectCanary';
 
 type Item = {
   label: string;
@@ -36,7 +36,7 @@ export function UserSelectExampleCaption() {
       <UserSelect
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         status="success"
         placeholder="Статус success"
         caption="Это подпись"
@@ -44,7 +44,7 @@ export function UserSelectExampleCaption() {
       <UserSelect
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         status="alert"
         placeholder="Статус alert"
         caption="Это подпись"
@@ -52,7 +52,7 @@ export function UserSelectExampleCaption() {
       <UserSelect
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         status="warning"
         placeholder="Статус warning"
         caption="Это подпись"
@@ -60,7 +60,7 @@ export function UserSelectExampleCaption() {
       <UserSelect
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         placeholder="Обычное поле"
         caption="Это подпись"
       />

@@ -31,14 +31,14 @@ export const AutoCompleteExampleView = () => {
         value={value}
         view="default"
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <AutoComplete
         type="text"
         value={value}
         items={items}
         view="clear"
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

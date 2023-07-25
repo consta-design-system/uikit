@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { UserSelect } from '../../../UserSelect';
+import { UserSelect } from '../../../UserSelectCanary';
 
 type Item = {
   label: string;
@@ -40,7 +40,7 @@ export const UserSelectExampleStatus = () => {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <UserSelect
         placeholder="alert"
@@ -49,7 +49,7 @@ export const UserSelectExampleStatus = () => {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <UserSelect
         placeholder="warning"
@@ -58,7 +58,7 @@ export const UserSelectExampleStatus = () => {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <UserSelect
         placeholder="success"
@@ -67,7 +67,7 @@ export const UserSelectExampleStatus = () => {
         status="success"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { cn } from '../../../../../utils/bem';
 import { Badge } from '../../../../Badge/Badge';
 import { User } from '../../../../User/User';
-import { UserSelect } from '../../../UserSelect';
+import { UserSelect } from '../../../UserSelectCanary';
 
 const cnUserSelectExampleRenderItem = cn('UserSelectExampleRenderItem');
 
@@ -87,9 +87,9 @@ export function UserSelectExampleRenderItem() {
         placeholder="Выберите пользователя"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         searchFunction={searchFunction}
-        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+        renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
           <div
             className={cnUserSelectExampleRenderItem('Item', {
               active,
@@ -100,6 +100,7 @@ export function UserSelectExampleRenderItem() {
             aria-hidden
             onMouseEnter={onMouseEnter}
             onClick={onClick}
+            ref={ref}
           >
             <User
               className={cnUserSelectExampleRenderItem('User')}

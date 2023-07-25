@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { UserSelect } from '../../../UserSelect';
+import { UserSelect } from '../../../UserSelectCanary';
 
 type Item = {
   label: string;
@@ -36,7 +36,7 @@ export function UserSelectExampleItems() {
       <UserSelect
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         placeholder="Выберите пользователя"
       />
     </Example>

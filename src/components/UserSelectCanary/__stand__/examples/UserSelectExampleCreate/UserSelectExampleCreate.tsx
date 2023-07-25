@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { UserSelect } from '../../../UserSelect';
+import { UserSelect } from '../../../UserSelectCanary';
 
 type Item = {
   label: string;
@@ -38,8 +38,8 @@ export function UserSelectExampleCreate() {
         placeholder="Выберите пользователя"
         items={list}
         value={value}
-        onChange={({ value }) => setValue(value)}
-        onCreate={({ label }) =>
+        onChange={setValue}
+        onCreate={(label) =>
           setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
         }
       />
@@ -56,8 +56,8 @@ export function UserSelectExampleCreateCustomLabel() {
         placeholder="Выберите пользователя"
         items={list}
         value={value}
-        onChange={({ value }) => setValue(value)}
-        onCreate={({ label }) =>
+        onChange={setValue}
+        onCreate={(label) =>
           setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
         }
         labelForCreate="Добавить"

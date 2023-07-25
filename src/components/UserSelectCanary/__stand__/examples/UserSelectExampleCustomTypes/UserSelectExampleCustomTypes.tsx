@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { UserSelect } from '../../../UserSelect';
+import { UserSelect } from '../../../UserSelectCanary';
 
 export function UserSelectExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
@@ -11,7 +11,7 @@ export function UserSelectExampleCustomTypes() {
         placeholder="Выберите пользователя"
         items={['Андрей Андреев', 'Егор Егоров', 'Михаил Михайлов']}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         getItemKey={(item) => item}
         getItemLabel={(item) => item}
       />
@@ -44,7 +44,7 @@ export function UserSelectExampleCustomTypesWithGroups() {
         items={items}
         groups={groups}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         getItemKey={(item) => `${item.firstName} ${item.lastName}`}
         getItemLabel={(item) => `${item.firstName} ${item.lastName}`}
         getItemGroupKey={(item) => item.group}

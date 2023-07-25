@@ -74,7 +74,7 @@ export type SelectProps<ITEM, GROUP, MULTIPLE extends boolean> = {
   searchValue?: string;
   onChange: OnChangeProp<ITEM, MULTIPLE>;
   value: ValueProp<ITEM, MULTIPLE>;
-  onOpen?: () => void;
+  onDropdownOpen?: () => void;
   onSearchValueChange?: (value: string) => void;
 };
 
@@ -163,7 +163,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     onFocus,
     onBlur,
     searchValue: searchValueProp,
-    onOpen,
+    onDropdownOpen,
     onSearchValueChange,
   } = params;
 
@@ -708,7 +708,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
   useEffect(() => {
     if (isOpen) {
-      onOpen?.();
+      onDropdownOpen?.();
     }
   }, [isOpen]);
 

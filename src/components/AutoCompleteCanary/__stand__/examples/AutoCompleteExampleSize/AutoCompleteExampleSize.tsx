@@ -33,7 +33,7 @@ export const AutoCompleteExampleSize = () => {
         size="xs"
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         width="full"
       />
       <AutoComplete
@@ -42,7 +42,7 @@ export const AutoCompleteExampleSize = () => {
         value={value}
         items={items}
         size="s"
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         width="full"
       />
       <AutoComplete
@@ -51,7 +51,7 @@ export const AutoCompleteExampleSize = () => {
         value={value}
         items={items}
         size="m"
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         width="full"
       />
       <AutoComplete
@@ -60,7 +60,7 @@ export const AutoCompleteExampleSize = () => {
         value={value}
         items={items}
         size="l"
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         width="full"
       />
     </Example>

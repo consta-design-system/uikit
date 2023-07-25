@@ -69,7 +69,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   labelForEmptyItems?: string;
   notFound?: boolean;
   hasItems?: boolean;
-  itemsRef: React.RefObject<HTMLDivElement>[];
+  itemsRefs: React.RefObject<HTMLDivElement>[];
   virtualScroll?: boolean;
   onScrollToBottom?: () => void;
 }>;
@@ -129,7 +129,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     isLoading,
     getGroupLabel,
     notFound,
-    itemsRef,
+    itemsRefs,
     virtualScroll,
     onScrollToBottom,
     ...otherProps
@@ -240,7 +240,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                         labelForCreate={labelForCreate}
                         inputValue={group.label}
                         indent={indent}
-                        ref={itemsRef[index]}
+                        ref={itemsRefs[index]}
                         {...getOptionProps({
                           index,
                           item: group,
@@ -276,7 +276,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                               <SelectItemAll
                                 ref={forkRef([
                                   listRefs[virtualIndex],
-                                  itemsRef[index],
+                                  itemsRefs[index],
                                 ])}
                                 indent={indent}
                                 size={size}
@@ -305,7 +305,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                                 {renderItem({
                                   ref: forkRef([
                                     listRefs[virtualIndex],
-                                    itemsRef[index],
+                                    itemsRefs[index],
                                   ]),
                                   item,
                                   ...getOptionProps({
