@@ -33,7 +33,6 @@ export const AutoCompleteExampleStatus = () => {
         value={value}
         items={items}
         onChange={setValue}
-        width="full"
       />
       <AutoComplete
         type="text"
@@ -43,7 +42,6 @@ export const AutoCompleteExampleStatus = () => {
         caption="alert"
         status="alert"
         onChange={setValue}
-        width="full"
       />
       <AutoComplete
         type="text"
@@ -53,7 +51,6 @@ export const AutoCompleteExampleStatus = () => {
         caption="warning"
         status="warning"
         onChange={setValue}
-        width="full"
       />
       <AutoComplete
         type="text"
@@ -63,7 +60,6 @@ export const AutoCompleteExampleStatus = () => {
         caption="success"
         status="success"
         onChange={setValue}
-        width="full"
       />
     </Example>
   );

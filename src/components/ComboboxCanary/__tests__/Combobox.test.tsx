@@ -7,16 +7,13 @@ import {
 } from '@testing-library/react';
 import * as React from 'react';
 
-import { cn } from '../../../utils/bem';
-import { cnListGroupLabel, cnListItem } from '../../ListCanary';
-import { cnSelect } from '../../SelectComponents/cnSelect';
-import { cnSelectValueTag } from '../../SelectComponents/SelectValueTag/SelectValueTag';
+import { cnListGroupLabel, cnListItem } from '##/components/ListCanary';
+import { cnSelect } from '##/components/SelectComponentsCanary/cnSelect';
+import { cnSelectValueTag } from '##/components/SelectComponentsCanary/SelectValueTag/SelectValueTag';
+import { cn } from '##/utils/bem';
+
+import { Combobox, ComboboxProps, defaultGetItemLabel } from '..';
 import { groups, items } from '../__mocks__/data.mock';
-import {
-  Combobox,
-  ComboboxProps,
-  defaultGetItemLabel,
-} from '../ComboboxCanary';
 import { DefaultGroup, DefaultItem } from '../helpers';
 
 const animationDuration = 200;
@@ -255,9 +252,9 @@ describe('Компонент Combobox', () => {
 
     expect(handleChange).toHaveBeenCalled();
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith(
-      expect.objectContaining({ value: items[elementIndex] }),
-    );
+    expect(handleChange).toHaveBeenCalledWith(items[elementIndex], {
+      e: expect.any(Object),
+    });
   });
 
   it('проверка onChange при multiple = true', () => {
@@ -279,11 +276,9 @@ describe('Компонент Combobox', () => {
 
     expect(handleChange).toHaveBeenCalled();
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith(
-      expect.objectContaining({
-        value: [items[elementIndex]],
-      }),
-    );
+    expect(handleChange).toHaveBeenCalledWith([items[elementIndex]], {
+      e: expect.any(Object),
+    });
   });
 
   it('вызывается onFocus', () => {

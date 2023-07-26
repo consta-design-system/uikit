@@ -7,11 +7,12 @@ import {
 } from '@testing-library/react';
 import * as React from 'react';
 
-import { cn } from '../../../utils/bem';
-import { cnListGroupLabel, cnListItem } from '../../ListCanary';
-import { cnSelect } from '../../SelectComponents/cnSelect';
-import { cnSelectLoader } from '../../SelectComponents/SelectLoader/SelectLoader';
-import { propForm } from '../../SelectComponents/types';
+import { cnListGroupLabel, cnListItem } from '##/components/ListCanary';
+import { cnSelect } from '##/components/SelectComponentsCanary/cnSelect';
+import { cnSelectLoader } from '##/components/SelectComponentsCanary/SelectLoader/SelectLoader';
+import { propForm } from '##/components/SelectComponentsCanary/types';
+import { cn } from '##/utils/bem';
+
 import { groups, items } from '../__mocks__/data.mock';
 import { defaultGetItemLabel, Select, SelectProps } from '../SelectCanary';
 
@@ -233,9 +234,9 @@ describe('Компонент Select', () => {
 
     expect(handleChange).toHaveBeenCalled();
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith(
-      expect.objectContaining({ value: items[elementIndex] }),
-    );
+    expect(handleChange).toHaveBeenCalledWith(items[elementIndex], {
+      e: expect.any(Object),
+    });
   });
 
   it('вызывается onFocus', () => {
@@ -340,6 +341,7 @@ describe('Компонент Select', () => {
     act(() => {
       renderComponent({
         ...defaultProps,
+        items: [],
         isLoading,
       });
     });

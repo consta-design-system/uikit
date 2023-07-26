@@ -19,6 +19,7 @@ const defaultProps: Props = {
   renderItem: () => <div>Element</div>,
   visibleItems: [],
   getOptionProps: jest.fn(),
+  itemsRefs: [],
 };
 
 const renderComponent = (props: Partial<Props>) => {

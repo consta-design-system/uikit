@@ -1,4 +1,4 @@
-.UserSelectValue {
+.canary--UserSelectValue {
   &_multiple {
     margin-right: var(--space-xs);
     margin-bottom: calc(var(--space-s) / 4);

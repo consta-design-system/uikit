@@ -34,7 +34,6 @@ export const AutoCompleteExampleSize = () => {
         value={value}
         items={items}
         onChange={setValue}
-        width="full"
       />
       <AutoComplete
         type="text"
@@ -43,7 +42,6 @@ export const AutoCompleteExampleSize = () => {
         items={items}
         size="s"
         onChange={setValue}
-        width="full"
       />
       <AutoComplete
         type="text"
@@ -52,7 +50,6 @@ export const AutoCompleteExampleSize = () => {
         items={items}
         size="m"
         onChange={setValue}
-        width="full"
       />
       <AutoComplete
         type="text"
@@ -61,7 +58,6 @@ export const AutoCompleteExampleSize = () => {
         items={items}
         size="l"
         onChange={setValue}
-        width="full"
       />
     </Example>
   );

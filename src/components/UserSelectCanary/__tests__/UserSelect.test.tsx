@@ -7,9 +7,10 @@ import {
 } from '@testing-library/react';
 import * as React from 'react';
 
-import { cn } from '../../../utils/bem';
-import { cnListGroupLabel } from '../../ListCanary';
-import { cnSelect } from '../../SelectComponents/cnSelect';
+import { cnListGroupLabel } from '##/components/ListCanary';
+import { cnSelect } from '##/components/SelectComponentsCanary/cnSelect';
+import { cn } from '##/utils/bem';
+
 import { groups, items } from '../__mocks__/data.mock';
 import { DefaultGroup, DefaultItem } from '../helpers';
 import {
@@ -256,9 +257,9 @@ describe('Компонент UserSelect', () => {
 
     expect(handleChange).toHaveBeenCalled();
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith(
-      expect.objectContaining({ value: items[elementIndex] }),
-    );
+    expect(handleChange).toHaveBeenCalledWith(items[elementIndex], {
+      e: expect.any(Object),
+    });
   });
 
   it('проверка onChange при multiple = true', () => {
@@ -280,11 +281,9 @@ describe('Компонент UserSelect', () => {
 
     expect(handleChange).toHaveBeenCalled();
     expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(handleChange).toHaveBeenCalledWith(
-      expect.objectContaining({
-        value: [items[elementIndex]],
-      }),
-    );
+    expect(handleChange).toHaveBeenCalledWith([items[elementIndex]], {
+      e: expect.any(Object),
+    });
   });
 
   it('вызывается onFocus', () => {
