@@ -215,6 +215,7 @@ export function useAutoComplete<ITEM, GROUP>(
   };
 
   const optionsRefs = useRefs<HTMLDivElement>(filteredOptions.length, [isOpen]);
+
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (!disabled) {
       if (!isOpen) {

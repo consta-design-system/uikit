@@ -118,9 +118,9 @@ const ContextMenuLevelsRender = (
   };
 
   useClickOutside({
-    isActive: !!onClickOutside,
+    isActive: onClickOutside && isOpen,
     ignoreClicksInsideRefs: [...levelsRefs, anchorRef || { current: null }],
-    handler: (e) => onClickOutside?.(e),
+    handler: onClickOutside,
   });
 
   useEffect(() => {
