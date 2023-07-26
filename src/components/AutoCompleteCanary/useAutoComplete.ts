@@ -241,9 +241,7 @@ export function useAutoComplete<ITEM, GROUP>(
   useClickOutside({
     isActive: isOpen,
     ignoreClicksInsideRefs: [dropdownRef, controlRef],
-    handler: () => {
-      setIsOpen.off();
-    },
+    handler: setIsOpen.off,
   });
 
   useEffect(() => {
