@@ -1,34 +1,62 @@
 .canary--Spoiler {
   width: 100%;
 
-  &-Wrapper {
-    --spoiler-content-max-heigt: max-content;
+  &-Content {
     position: relative;
     overflow: hidden;
-    width: 100%;
-    max-height: var(--spoiler-content-max-heigt);
+    width: var(--spoiler-content-width, 100%);
 
     &_mode {
       &_blur {
-        &:not(.canary--Spoiler-Wrapper_open) {
-          --spoiler-content-max-heigt: var(--spoiler-content-height);
+        max-height: var(--spoiler-content-max-height, auto);
 
-          &::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            height: min(100%, var(--space-6xl));
-            background:
-              linear-gradient(
-                to bottom,
-                rgba(0, 0, 0, 0) 0%,
-                var(--color-bg-default) 100%
-              );
-            pointer-events: none;
-          }
+        &::after {
+          content: '';
+          position: absolute;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          height: min(100%, var(--space-6xl));
+          background:
+            linear-gradient(
+              to bottom,
+              rgba(0, 0, 0, 0) 0%,
+              var(--color-bg-default) 100%
+            );
+          pointer-events: none;
         }
+      }
+
+      &_clamp {
+        -webkit-line-clamp: var(--spoiler-content-clamp, none);
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+      }
+    }
+
+    &_hidden {
+      position: fixed;
+      top: -300vh;
+      left: -300vw;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  &-ButtonWrapper {
+    display: flex;
+
+    &_align {
+      &_left {
+        justify-content: left;
+      }
+
+      &_center {
+        justify-content: center;
+      }
+
+      &_right {
+        justify-content: right;
       }
     }
   }

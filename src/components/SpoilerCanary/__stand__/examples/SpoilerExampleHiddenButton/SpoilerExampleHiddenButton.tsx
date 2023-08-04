@@ -1,12 +1,24 @@
 import { Example } from '@consta/stand';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Spoiler } from '##/components/SpoilerCanary';
+import { TextField, TextFieldPropOnChange } from '##/components/TextField';
 
-export const SpoilerExampleBasic = () => {
+export const SpoilerExampleHiddenButton = () => {
+  const [clamp, setClamp] = useState(4);
+  const onChange: TextFieldPropOnChange = useCallback(
+    ({ value }) => setClamp(Number(value)),
+    [],
+  );
   return (
     <Example col={1}>
-      <Spoiler clamp={3}>
+      <TextField
+        type="number"
+        label="Максимальное количество строк"
+        value={clamp.toString()}
+        onChange={onChange}
+      />
+      <Spoiler clamp={clamp}>
         Проснувшись однажды утром после беспокойного сна, Грегор Замза
         обнаружил, что он у себя в постели превратился в страшное насекомое.
         Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову,
@@ -15,6 +27,12 @@ export const SpoilerExampleBasic = () => {
         одеяло. Его многочисленные, убого тонкие по сравнению с остальным телом
         ножки беспомощно копошились у него перед глазами. «Что со мной
         случилось?» – подумал он.
+      </Spoiler>
+      <Spoiler clamp={clamp}>
+        Проснувшись однажды утром после беспокойного сна, Грегор Замза
+        обнаружил, что он у себя в постели превратился в страшное насекомое.
+        Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову,
+        свой коричневый, выпуклый, разделенный дугообразными чешуйками живот.
       </Spoiler>
     </Example>
   );

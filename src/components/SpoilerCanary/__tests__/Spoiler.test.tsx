@@ -1,99 +1,110 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
-import { cnCanary } from '##/utils/bem';
+import * as useResizeObserved from '##/hooks/useResizeObserved/useResizeObserved';
 
-import { cnSpoiler, Spoiler } from '..';
+import { cnSpoiler, cnSpoilerButton, Spoiler } from '..';
 import { spolierPropSize } from '../types';
-
-const cnSpoilerButton = cnCanary('SpoilerButton');
 
 type SpoilerProps = React.ComponentProps<typeof Spoiler>;
 
 const testId = 'spoiler';
 
-const renderComponent = (props: SpoilerProps) =>
-  render(<Spoiler data-testid={testId} {...props} />);
-
-const getButton = (base: Element) => {
-  return base.querySelector(`.${cnSpoilerButton()}`) as Element;
+export type ComponentSize = {
+  width: number;
+  height: number;
 };
 
-const getSpan = (base: Element) => {
-  return base.querySelector(`.${cnSpoilerButton('Label')}`) as Element;
+const defaultSizes: ComponentSize[] = [
+  { width: 100, height: 200 },
+  { width: 100, height: 300 },
+  { width: 100, height: 200 },
+];
+
+const renderComponent = (props: SpoilerProps) => {
+  return render(<Spoiler data-testid={testId} {...props} />);
 };
+
+const getRender = () => screen.getByTestId(testId);
+
+const getButton = () =>
+  getRender().querySelector(`.${cnSpoilerButton()}`) as Element;
+
+const getButtonLabel = () =>
+  getRender().querySelector(`.${cnSpoilerButton('Label')}`) as Element;
+
+const moksProps = {
+  children:
+    'Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый,разделенный дугообразными чешуйками живот, на верхушке которого еле держалосьготовое вот-вот окончательно сползти одеяло. Его многочисленные, убого тонкиепо сравнению с остальным телом ножки беспомощно копошились у него передглазами. «Что со мной случилось?» – подумал он.',
+  clamp: 1,
+  moreLabel: 'Показать',
+  lessLabel: 'Скрыть',
+  style: { width: 50 },
+};
+
+afterEach(() => {
+  // restore the spy created with spyOn
+  jest.restoreAllMocks();
+});
 
 describe('Компонент Spoiler', () => {
+  const setMockUseResizeObserved = (sizes: ComponentSize[]): void => {
+    jest.spyOn(useResizeObserved, 'useResizeObserved').mockReturnValue(sizes);
+  };
+
   it('должен рендериться без ошибок', () => {
     expect(renderComponent).not.toThrow();
+  });
+
+  describe('проверка присутствия кнопки', () => {
+    it('кнопка не должна отображатся если высота превью схожа с высотой полного текста', () => {
+      setMockUseResizeObserved([
+        { width: 100, height: 200 },
+        { width: 100, height: 200 },
+        { width: 100, height: 200 },
+      ]);
+      renderComponent(moksProps);
+
+      expect(getButton()).toEqual(null);
+    });
+    it('кнопка должна отображатся если высота превью меньше высоты полного текста', () => {
+      setMockUseResizeObserved(defaultSizes);
+      renderComponent(moksProps);
+
+      expect(getButton()).toHaveClass(cnSpoilerButton());
+    });
   });
 
   describe('проверка props', () => {
     describe('проверка size', () => {
       spolierPropSize.forEach((size) => {
         it(`присваивает класс для size=${size}`, () => {
-          renderComponent({ size, children: 'Test' });
+          setMockUseResizeObserved(defaultSizes);
+          renderComponent({ ...moksProps, size });
 
-          const spoiler = screen.getByTestId(testId);
-
-          expect(spoiler).toHaveClass(cnSpoiler({ size }));
+          expect(getRender()).toHaveClass(cnSpoiler({ size }));
         });
       });
     });
 
-    describe('проверка open', () => {
+    describe('проверка moreLabel', () => {
       it('проверка текста при open="false"', () => {
-        const { baseElement } = renderComponent({ children: 'Test' });
+        setMockUseResizeObserved(defaultSizes);
+        renderComponent(moksProps);
 
-        const label = getSpan(baseElement);
-
-        expect(label).toHaveTextContent('Показать больше');
-      });
-
-      it('проверка текста при open="true"', () => {
-        const { baseElement } = renderComponent({ children: 'Test' });
-
-        const button = getButton(baseElement);
-
-        fireEvent.click(button);
-
-        const label = getSpan(button);
-
-        expect(label).toHaveTextContent('Показать меньше');
+        expect(getButtonLabel()).toHaveTextContent(moksProps.moreLabel);
       });
     });
+    describe('проверка lessLabel', () => {
+      it('проверка текста при open="true"', () => {
+        setMockUseResizeObserved(defaultSizes);
+        renderComponent(moksProps);
 
-    describe('должен отображать текст', () => {
-      it('должен отображать текст при open="false"', () => {
-        const labelText = 'Показать';
-
-        const { baseElement } = renderComponent({
-          moreLabel: labelText,
-          children: 'Test',
-        });
-
-        const button = getButton(baseElement);
-
-        const label = getSpan(button);
-
-        expect(label).toHaveTextContent(labelText);
-      });
-
-      it('должен отображать текст при open="true"', () => {
-        const labelText = 'Скрыть';
-
-        const { baseElement } = renderComponent({
-          lessLabel: labelText,
-          children: 'Test',
-        });
-
-        const button = getButton(baseElement);
+        const button = getButton();
 
         fireEvent.click(button);
 
-        const label = getSpan(baseElement);
-
-        expect(label).toHaveTextContent(labelText);
+        expect(getButtonLabel()).toHaveTextContent(moksProps.lessLabel);
       });
     });
   });
