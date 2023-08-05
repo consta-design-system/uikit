@@ -1,0 +1,131 @@
+import { MdxMenu } from '@consta/stand';
+import {
+  ExampleUseStylePropsGetVar,
+  ExampleUseStylePropsGetProp,
+  ExampleUseStylePropsGetProps,
+  ExampleUseStylePropsGetVars,
+} from './examples/ExampleUseStyleProps/ExampleUseStyleProps';
+
+Этот хук позволяет получить значение CSS свойств. Хук имеет подписку на изменение темы, и всегда возвразает актуальные свойства.
+
+```tsx
+export { useStyleProps } from '@consta/uikit/useStyleProps';
+```
+
+<MdxMenu>
+
+- [Примеры](#примеры)
+- [Типы](#типы)
+- [getStyleProps](#getstyleprops)
+
+</MdxMenu>
+
+## Примеры
+
+Пример показывает как получить одно свойство:
+
+```tsx
+export const ExampleUseStylePropsGetProp = () => {
+  const [ref, color] = useStyleProps('color');
+
+  return <div ref={ref}>color: {color};</div>;
+};
+```
+
+<ExampleUseStylePropsGetProp />
+
+Пример показывает как получить несколько свойств:
+
+```tsx
+export const ExampleUseStylePropsGetProps = () => {
+  const [ref, { color, font }] = useStyleProps(['color', 'font'] as const);
+
+  return (
+    <div ref={ref}>
+      <div>color: {color};</div>
+      <div>font: {font};</div>
+    </div>
+  );
+};
+```
+
+<ExampleUseStylePropsGetProps />
+
+Пример показывает как получить `css` переменную в контексте которой находится элемент:
+
+```tsx
+export const ExampleUseStylePropsGetVar = () => {
+  const [ref, colorBgDefault] = useStyleProps('--color-bg-default');
+
+  return <div ref={ref}>--color-bg-default: {colorBgDefault};</div>;
+};
+```
+
+<ExampleUseStylePropsGetVar />
+
+Пример показывает как получить `css` переменные в контексте которых находится элемент:
+
+```tsx
+export const ExampleUseStylePropsGetVars = () => {
+  const [ref, vars] = useStyleProps([
+    '--color-bg-default',
+    '--space-m',
+    '--size-text-m',
+  ] as const);
+
+  return (
+    <div ref={ref}>
+      <div>--color-bg-default: {vars['--color-bg-default']};</div>
+      <div>--space-m: {vars['--space-m']};</div>
+      <div>--size-text-m: {vars['--space-m']};</div>
+    </div>
+  );
+};
+```
+
+<ExampleUseStylePropsGetVars />
+
+## Типы
+
+Если передать название `css` свойства, то результатом будет его значение, если же передать массив названий - результатом будет объект `{key:value}`
+
+```ts
+type Value<V extends string | string[] | readonly string[]> = V extends string[]
+  ? Record<V[number], string>
+  : V extends readonly string[]
+  ? Record<V[number], string>
+  : string;
+
+type UseStyleProps = <
+  Element extends HTMLElement | SVGElement = HTMLDivElement,
+  StyleProps extends string | string[] | readonly string[] = string,
+>(
+  props: StyleProps,
+) => [React.RefObject<Element>, Value<StyleProps>];
+```
+
+## getStyleProps
+
+`getStyleProps` делает все тоже самое что и `useStyleProps` за исключением подписки на изменение темы.
+
+```tsx
+export { getStyleProps } from '@consta/uikit/useStyleProps';
+```
+
+Если передать название `css` свойства, то результатом будет его значение, если же передать массив названий - результатом будет объект `{key:value}`
+
+```ts
+type Value<V extends string | string[] | readonly string[]> = V extends string[]
+  ? Record<V[number], string>
+  : V extends readonly string[]
+  ? Record<V[number], string>
+  : string;
+
+type GetStyleProps = <
+  Element extends HTMLElement | SVGElement = HTMLDivElement,
+  StyleProps extends string | string[] | readonly string[] = string,
+>(
+  element: HTMLElement | SVGElement,
+  cssVar: StyleProps,
+) => [React.RefObject<Element>, Value<StyleProps>];
+```

@@ -1,10 +1,10 @@
 import { createStand } from '##/stand/standConfig';
 
 export default createStand({
-  title: 'useThemeVars',
-  id: 'useThemeVars',
+  title: 'useStyleProps',
+  id: 'useStyleProps',
   group: 'hooks',
-  description: 'Хук для получения переменных темы.',
+  description: 'Хук для получения переменых элемента.',
   alias: [
     'хук',
     'тема',
@@ -16,9 +16,9 @@ export default createStand({
     'размеры',
     'тень',
     'тени',
+    'переменные',
   ],
-  version: '1.11.10',
-  status: 'deprecated',
-  sandbox: 'usethemevars-j54pt6',
+  version: '4.24.0',
+  status: 'canary',
   order: 10,
 });
