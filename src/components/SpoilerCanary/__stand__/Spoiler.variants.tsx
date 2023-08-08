@@ -13,16 +13,16 @@ import {
 
 const Variants = () => {
   const size = useSelect('size', spolierPropSize, defaultSpoilerPropSize);
-  const mode = useSelect('mode', ['toggle', 'blur', 'clamp'], 'clamp');
+  const mode = useSelect('mode', ['toggle', 'blur', 'lineClamp'], 'lineClamp');
   const maxHeight = useNumber('maxHeight', 96, mode === 'blur') || 0;
-  const clamp = useNumber('clamp', 4, mode === 'clamp') || 0;
+  const lineClamp = useNumber('lineClamp', 4, mode === 'lineClamp') || 0;
   const preview = useText(
     'preview',
-    'Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять...',
+    'Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое...',
     mode === 'toggle',
   );
-  const fullText = useText(
-    'fullText',
+  const content = useText(
+    'content',
     'Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верхушке которого еле держалось готовое вот-вот окончательно сползти одеяло. Его многочисленные, убого тонкие по сравнению с остальным телом ножки беспомощно копошились у него перед глазами. «Что со мной случилось?» – подумал он.',
   );
 
@@ -51,10 +51,10 @@ const Variants = () => {
     defaultSpoilerPropButtonAlign,
   );
 
-  if (mode === 'clamp') {
+  if (mode === 'lineClamp') {
     return (
       <Spoiler
-        clamp={clamp}
+        lineClamp={lineClamp}
         lessLabel={lessLabel}
         moreLabel={moreLabel}
         moreIcon={withIcons ? IconAdd : undefined}
@@ -63,7 +63,7 @@ const Variants = () => {
         buttonIndent={buttonIndent}
         buttonAlign={buttonAlign}
       >
-        {fullText}
+        {content}
       </Spoiler>
     );
   }
@@ -80,7 +80,7 @@ const Variants = () => {
         buttonIndent={buttonIndent}
         buttonAlign={buttonAlign}
       >
-        {fullText}
+        {content}
       </Spoiler>
     );
   }
@@ -89,7 +89,7 @@ const Variants = () => {
     <Spoiler
       size={size}
       preview={preview}
-      fullText={fullText}
+      content={content}
       lessLabel={lessLabel}
       moreLabel={moreLabel}
       moreIcon={withIcons ? IconAdd : undefined}

@@ -12,7 +12,7 @@ export const SpoilerExampleSize = () => {
       col={1}
       items={items}
       getItemNode={(size) => (
-        <Spoiler clamp={3} size={size}>
+        <Spoiler lineClamp={3} size={size}>
           Проснувшись однажды утром после беспокойного сна, Грегор Замза
           обнаружил, что он у себя в постели превратился в страшное насекомое.
           Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову,

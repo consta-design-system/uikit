@@ -5,9 +5,9 @@ import { Spoiler } from '##/components/SpoilerCanary';
 import { TextField, TextFieldPropOnChange } from '##/components/TextField';
 
 export const SpoilerExampleHiddenButton = () => {
-  const [clamp, setClamp] = useState(4);
+  const [lineClamp, setLineClamp] = useState(4);
   const onChange: TextFieldPropOnChange = useCallback(
-    ({ value }) => setClamp(Number(value)),
+    ({ value }) => setLineClamp(Number(value)),
     [],
   );
   return (
@@ -15,10 +15,10 @@ export const SpoilerExampleHiddenButton = () => {
       <TextField
         type="number"
         label="Максимальное количество строк"
-        value={clamp.toString()}
+        value={lineClamp.toString()}
         onChange={onChange}
       />
-      <Spoiler clamp={clamp}>
+      <Spoiler lineClamp={lineClamp}>
         Проснувшись однажды утром после беспокойного сна, Грегор Замза
         обнаружил, что он у себя в постели превратился в страшное насекомое.
         Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову,
@@ -28,7 +28,7 @@ export const SpoilerExampleHiddenButton = () => {
         ножки беспомощно копошились у него перед глазами. «Что со мной
         случилось?» – подумал он.
       </Spoiler>
-      <Spoiler clamp={clamp}>
+      <Spoiler lineClamp={lineClamp}>
         Проснувшись однажды утром после беспокойного сна, Грегор Замза
         обнаружил, что он у себя в постели превратился в страшное насекомое.
         Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову,

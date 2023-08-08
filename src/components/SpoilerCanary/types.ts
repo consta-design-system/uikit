@@ -41,25 +41,25 @@ export type SpoilerProps = Omit<
   (
     | {
         preview: React.ReactNode;
-        fullText: React.ReactNode;
+        content: React.ReactNode;
         maxHeight?: never;
         children?: never;
-        clamp?: never;
+        lineClamp?: never;
       }
     | {
         preview?: never;
-        fullText?: never;
+        content?: never;
         children: React.ReactNode;
         maxHeight: number;
-        clamp?: never;
+        lineClamp?: never;
       }
     | {
         preview?: never;
-        fullText?: never;
+        content?: never;
         children: React.ReactNode;
         maxHeight?: never;
-        clamp: number;
+        lineClamp: number;
       }
   );
 
-export type SpoilerMode = 'clamp' | 'blur' | 'toggle';
+export type SpoilerMode = 'lineClamp' | 'blur' | 'toggle';
