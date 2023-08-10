@@ -3,11 +3,19 @@ import { createRef, useMemo } from 'react';
 const isNotNumber = <T>(value: T): value is Exclude<T, number> =>
   typeof value !== 'number';
 
-type Return<T, E extends number | string[]> = E extends string[]
+type Return<
+  T,
+  E extends number | string[] | readonly string[],
+> = E extends string[]
+  ? Record<E[number], React.RefObject<T>>
+  : E extends readonly string[]
   ? Record<E[number], React.RefObject<T>>
   : Array<React.RefObject<T>>;
 
-export const useRefs = <T, E extends number | string[] = number>(
+export const useRefs = <
+  T,
+  E extends number | string[] | readonly string[] = number,
+>(
   elements: E,
   deps: unknown[] = [],
 ): Return<T, E> =>
