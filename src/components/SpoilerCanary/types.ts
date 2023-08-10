@@ -4,9 +4,9 @@ import React from 'react';
 import { Space } from '##/mixs/MixSpace';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
-export const spolierPropSize = ['m', 'xs', 's', 'l'] as const;
+export const spolierPropSize = ['xs', 's', 'm', 'l'] as const;
 export type SpoilerPropSize = typeof spolierPropSize[number];
-export const defaultSpoilerPropSize = spolierPropSize[0];
+export const defaultSpoilerPropSize = 'm';
 
 export const spolierPropButtonAlign = ['left', 'center', 'right'] as const;
 export type SpoilerPropButtonAlign = typeof spolierPropButtonAlign[number];
