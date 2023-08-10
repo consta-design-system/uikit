@@ -4,7 +4,7 @@ export default createStand({
   title: 'useStyleProps',
   id: 'useStyleProps',
   group: 'hooks',
-  description: 'Хук для получения переменых элемента.',
+  description: 'Хук для получения css свойств элемента.',
   alias: [
     'хук',
     'тема',
