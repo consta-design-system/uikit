@@ -30,16 +30,16 @@ const spoilerOffsetMap: Record<SpoilerPropSize, Space> = {
 };
 
 const getContent = (
-  { children, fullText, preview, clamp }: SpoilerProps,
+  { children, content, preview, lineClamp }: SpoilerProps,
   isOpen: boolean,
 ): [SpoilerMode, React.ReactNode, React.ReactNode] => {
-  if (clamp) {
-    return ['clamp', children, children];
+  if (lineClamp) {
+    return ['lineClamp', children, children];
   }
   if (children) {
     return ['blur', children, children];
   }
-  return ['toggle', preview, fullText];
+  return ['toggle', preview, content];
 };
 
 export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
@@ -47,7 +47,7 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
     const {
       preview,
       maxHeight,
-      fullText,
+      content,
       size = defaultSpoilerPropSize,
       lessIcon,
       lessLabel,
@@ -55,7 +55,7 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
       moreIcon,
       moreLabel,
       className,
-      clamp,
+      lineClamp,
       buttonIndent,
       buttonAlign = defaultSpoilerPropButtonAlign,
       style,
@@ -78,8 +78,8 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
           ...(typeof maxHeight === 'number' && {
             ['--spoiler-content-max-height' as string]: `${maxHeight}px`,
           }),
-          ...(typeof clamp === 'number' && {
-            ['--spoiler-content-clamp' as string]: clamp,
+          ...(typeof lineClamp === 'number' && {
+            ['--spoiler-content-line-clamp' as string]: lineClamp,
           }),
           ...(typeof sizes[2].width === 'number' && {
             ['--spoiler-content-width' as string]: `${sizes[2].width}px`,

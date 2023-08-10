@@ -27,8 +27,8 @@
         }
       }
 
-      &_clamp {
-        -webkit-line-clamp: var(--spoiler-content-clamp, none);
+      &_lineClamp {
+        -webkit-line-clamp: var(--spoiler-content-line-clamp, none);
         -webkit-box-orient: vertical;
         display: -webkit-box;
       }

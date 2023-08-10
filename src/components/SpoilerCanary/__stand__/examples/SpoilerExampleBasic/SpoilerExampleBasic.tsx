@@ -6,7 +6,7 @@ import { Spoiler } from '##/components/SpoilerCanary';
 export const SpoilerExampleBasic = () => {
   return (
     <Example col={1}>
-      <Spoiler clamp={3}>
+      <Spoiler lineClamp={3}>
         Проснувшись однажды утром после беспокойного сна, Грегор Замза
         обнаружил, что он у себя в постели превратился в страшное насекомое.
         Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову,
