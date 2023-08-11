@@ -6,9 +6,11 @@ import React, {
   useState,
 } from 'react';
 
+import { scrollToIndex } from '##/components/SelectComponentsCanary/useSelect/helpers';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useFlag } from '##/hooks/useFlag';
 import { KeyHandler, useKeys } from '##/hooks/useKeys';
+import { useRefs } from '##/hooks/useRefs';
 import { getGroups } from '##/utils/getGroups';
 
 type IndexForHighlight = number | ((oldIndex: number) => number);
@@ -36,11 +38,13 @@ type UseAutoCompleteProps<ITEM, GROUP> = {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   searchValue?: string;
   onChange: OnChangeProp<ITEM>;
+  isLoading?: boolean;
 };
 
 type OptionProps<ITEM> = {
   index: number;
   item: ITEM;
+  keyPrefix: number;
 };
 
 type GetOptionPropsResult = {
@@ -68,6 +72,7 @@ export function useAutoComplete<ITEM, GROUP>(
     onFocus,
     onBlur,
     searchValue,
+    isLoading,
   } = params;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -209,18 +214,7 @@ export function useAutoComplete<ITEM, GROUP>(
     };
   };
 
-  useClickOutside({
-    isActive: isOpen,
-    ignoreClicksInsideRefs: [dropdownRef, controlRef],
-    handler: setIsOpen.off,
-  });
-
-  useEffect(() => {
-    if (disabled) {
-      setIsOpen.off();
-      inputRef.current?.blur();
-    }
-  }, [disabled]);
+  const optionsRefs = useRefs<HTMLDivElement>(filteredOptions.length, [isOpen]);
 
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (!disabled) {
@@ -244,8 +238,29 @@ export function useAutoComplete<ITEM, GROUP>(
     }
   };
 
+  useClickOutside({
+    isActive: isOpen,
+    ignoreClicksInsideRefs: [dropdownRef, controlRef],
+    handler: setIsOpen.off,
+  });
+
+  useEffect(() => {
+    if (disabled) {
+      setIsOpen.off();
+      inputRef.current?.blur();
+    }
+  }, [disabled]);
+
+  useEffect(() => {
+    if (filteredOptions.length > 0) {
+      scrollToIndex(highlightedIndex, dropdownRef, optionsRefs, () =>
+        highlightIndex(0),
+      );
+    }
+  }, [highlightedIndex]);
+
   return {
-    isOpen: Boolean(isOpen && hasItems),
+    isOpen: Boolean(isOpen && (isLoading ? true : hasItems)),
     visibleItems,
     getOptionProps,
     handleInputFocus,
@@ -253,5 +268,6 @@ export function useAutoComplete<ITEM, GROUP>(
     inputRef,
     getKeyProps,
     hasItems,
+    optionsRefs,
   };
 }

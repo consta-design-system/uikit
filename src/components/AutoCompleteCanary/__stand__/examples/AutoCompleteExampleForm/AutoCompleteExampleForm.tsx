@@ -33,7 +33,7 @@ export const AutoCompleteExampleForm = () => {
         form="round"
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <AutoComplete
         type="text"
@@ -41,7 +41,7 @@ export const AutoCompleteExampleForm = () => {
         form="defaultBrick"
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );
@@ -57,7 +57,7 @@ export const AutoCompleteExampleDropdownForm = () => {
         dropdownForm="round"
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <AutoComplete
         type="text"
@@ -65,7 +65,7 @@ export const AutoCompleteExampleDropdownForm = () => {
         dropdownForm="brick"
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

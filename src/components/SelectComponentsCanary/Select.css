@@ -1,0 +1,557 @@
+.canary--Select {
+  --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+
+  &_type {
+    &_userselect {
+      &.canary--Select_size_s {
+        --select-element-height: var(--space-xl);
+      }
+
+      &.canary--Select_size_m {
+        --select-element-height: calc(var(--space-2xl) - var(--space-3xs));
+      }
+
+      &.canary--Select_size_l {
+        --select-element-height: calc(var(--space-3xl) - var(--space-2xs));
+      }
+    }
+
+    &_combobox {
+      &.canary--Select_size_xs {
+        --select-element-height: calc(var(--space-m) + var(--space-3xs));
+      }
+
+      &.canary--Select_size_s {
+        --select-element-height: var(--space-xl);
+      }
+
+      &.canary--Select_size_m {
+        --select-element-height: calc(var(--space-2xl) - var(--space-2xs));
+      }
+
+      &.canary--Select_size_l {
+        --select-element-height: var(--space-2xl);
+      }
+    }
+
+    &_select {
+      &.canary--Select_size_xs {
+        --select-element-height: calc(var(--space-m) + var(--space-3xs));
+      }
+
+      &.canary--Select_size_s {
+        --select-element-height: var(--space-xl);
+      }
+
+      &.canary--Select_size_m {
+        --select-element-height: calc(var(--space-2xl) - var(--space-2xs));
+      }
+
+      &.canary--Select_size_l {
+        --select-element-height: var(--space-2xl);
+      }
+    }
+  }
+
+  &_size {
+    &_xs {
+      --label-offset: var(--space-2xs);
+      --caption-offset: var(--space-2xs);
+      --round-offset: calc(var(--space-3xs) + var(--space-2xs));
+      --input-height: var(--control-height-xs);
+      --input-space: calc(var(--control-space-xs) * 0.5);
+      --input-font-size: var(--control-text-size-xs);
+      --tag-space:
+        calc(
+          (var(--space-xs) - 1px) / 2 - var(--control-border-width)
+        );
+      --input-max-height:
+        calc(
+          4 * var(--tag-space) + 4.5 * var(--select-element-height)
+        );
+    }
+
+    &_s {
+      --label-offset: var(--space-2xs);
+      --caption-offset: var(--space-2xs);
+      --round-offset: calc(var(--space-2xs));
+      --input-height: var(--control-height-s);
+      --input-space: calc(var(--control-space-s) * 0.5);
+      --input-font-size: var(--control-text-size-s);
+      --tag-space: calc(var(--space-xs) / 2 - var(--control-border-width));
+      --input-max-height:
+        calc(
+          4 * var(--tag-space) + 4.5 * var(--select-element-height)
+        );
+    }
+
+    &_m {
+      --label-offset: var(--space-xs);
+      --caption-offset: var(--space-xs);
+      --round-offset: calc(var(--space-3xs) + var(--space-2xs));
+      --input-height: var(--control-height-m);
+      --input-space: calc(var(--control-space-m) * 0.5);
+      --input-font-size: var(--control-text-size-m);
+      --tag-space: calc(var(--space-s) / 2 - var(--control-border-width));
+      --input-max-height:
+        calc(
+          4 * var(--tag-space) + 4.5 * calc(var(--space-2xl) - var(--space-2xs))
+        );
+    }
+
+    &_l {
+      --label-offset: var(--space-xs);
+      --caption-offset: var(--space-xs);
+      --round-offset: calc(var(--space-xs));
+      --input-height: var(--control-height-l);
+      --input-space: calc(var(--control-space-l) * 0.5);
+      --input-font-size: var(--control-text-size-l);
+      --tag-space: calc(var(--space-m) / 2 - var(--control-border-width));
+      --input-max-height: calc(4 * var(--tag-space) + 4.5 * var(--space-2xl));
+    }
+  }
+
+  &_labelPosition {
+    &_top {
+      flex-direction: column;
+
+      & > *:not(:last-child) {
+        margin-bottom: var(--label-offset);
+      }
+    }
+
+    &_left {
+      flex-direction: row;
+
+      & .canary--Select-Label {
+        display: inline-flex;
+        align-items: center;
+        height: var(--input-height);
+      }
+
+      & > *:not(:last-child) {
+        margin-right: var(--space-s);
+      }
+    }
+  }
+
+  &-Body {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+
+    & .canary--Select-Caption {
+      margin-top: var(--caption-offset);
+      margin-left: var(--caption-margin-left);
+    }
+  }
+
+  &-SelectContainer {
+    --container-border-color: var(--color-control-bg-border-default);
+    position: relative;
+    display: flex;
+    width: 100%;
+
+    &_status {
+      &_alert {
+        --container-border-color: var(--color-bg-alert);
+      }
+
+      &_success {
+        --container-border-color: var(--color-bg-success);
+      }
+
+      &_warning {
+        --container-border-color: var(--color-bg-warning);
+      }
+    }
+
+    &_view_default .canary--Select-Control {
+      padding: 0;
+      color: var(--color-control-typo-default);
+      background: var(--color-control-bg-default);
+      border: var(--control-border-width) solid var(--container-border-color);
+      border-radius: var(--control-radius);
+
+      &:hover {
+        border-color: var(--color-control-bg-border-default-hover);
+      }
+    }
+
+    &_view_default.canary--Select-SelectContainer_focused .canary--Select-Control {
+      border-color: var(--color-control-bg-border-focus);
+      outline: none;
+    }
+
+    &_multiple .canary--Select-Control {
+      height: auto;
+      min-height: var(--input-height);
+    }
+
+    &_form {
+      &_round .canary--Select-Control {
+        padding-left: var(--round-offset);
+        border-radius: calc(var(--input-height) / 2);
+      }
+
+      &_brick .canary--Select-Control {
+        border-radius: 0;
+      }
+
+      &_clear .canary--Select-Control {
+        border-width: 0;
+        border-bottom-width: var(--control-border-width);
+        border-radius: 0;
+      }
+
+      &_defaultClear .canary--Select-Control {
+        border-right-width: 0;
+        border-radius: var(--control-radius) 0 0 var(--control-radius);
+      }
+
+      &_clearDefault .canary--Select-Control {
+        border-left-width: 0;
+        border-radius: 0 var(--control-radius) var(--control-radius) 0;
+      }
+
+      &_defaultBrick .canary--Select-Control {
+        border-radius: var(--control-radius) 0 0 var(--control-radius);
+      }
+
+      &_brickDefault .canary--Select-Control {
+        border-radius: 0 var(--control-radius) var(--control-radius) 0;
+      }
+
+      &_roundBrick .canary--Select-Control {
+        padding-left: var(--round-offset);
+        border-radius:
+          calc(var(--input-height) / 2) 0 0
+          calc(var(--input-height) / 2);
+      }
+
+      &_brickRound .canary--Select-Control {
+        border-radius:
+          0 calc(var(--input-height) / 2)
+          calc(var(--input-height) / 2) 0;
+      }
+
+      &_brickClear .canary--Select-Control {
+        border-right-width: 0;
+        border-radius: 0;
+      }
+
+      &_clearBrick .canary--Select-Control {
+        border-left-width: 0;
+        border-radius: 0;
+      }
+
+      &_clearRound .canary--Select-Control {
+        border-left-width: 0;
+        border-radius:
+          0 calc(var(--input-height) / 2)
+          calc(var(--input-height) / 2) 0;
+      }
+
+      &_roundClear .canary--Select-Control {
+        padding-left: var(--round-offset);
+        border-right-width: 0;
+        border-radius:
+          calc(var(--input-height) / 2) 0 0
+          calc(var(--input-height) / 2);
+      }
+
+      &_clearClear .canary--Select-Control {
+        border-width: 0;
+        border-top-width: var(--control-border-width);
+        border-bottom-width: var(--control-border-width);
+        border-radius: 0;
+      }
+    }
+
+    &_view_default.canary--Select-SelectContainer_form_clear.canary--Select-SelectContainer_focused .canary--Select-Control,
+    &_view_default.canary--Select-SelectContainer_form_clearClear.canary--Select-SelectContainer_focused .canary--Select-Control {
+      box-shadow:
+        var(--control-border-width) 0
+        var(--color-control-bg-border-focus),
+        calc(-1 * var(--control-border-width)) 0
+        var(--color-control-bg-border-focus);
+    }
+
+    &_view_default.canary--Select-SelectContainer_form_defaultClear.canary--Select-SelectContainer_focused .canary--Select-Control,
+    &_view_default.canary--Select-SelectContainer_form_brickClear.canary--Select-SelectContainer_focused .canary--Select-Control,
+    &_view_default.canary--Select-SelectContainer_form_roundClear.canary--Select-SelectContainer_focused .canary--Select-Control {
+      box-shadow:
+        var(--control-border-width) 0
+        var(--color-control-bg-border-focus);
+    }
+
+    &_view_default.canary--Select-SelectContainer_form_clearDefault.canary--Select-SelectContainer_focused .canary--Select-Control,
+    &_view_default.canary--Select-SelectContainer_form_clearBrick.canary--Select-SelectContainer_focused .canary--Select-Control,
+    &_view_default.canary--Select-SelectContainer_form_clearRound.canary--Select-SelectContainer_focused .canary--Select-Control {
+      box-shadow:
+        calc(-1 * var(--control-border-width)) 0
+        var(--color-control-bg-border-focus);
+    }
+
+    &_view_default.canary--Select-SelectContainer_disabled .canary--Select-Control {
+      color: var(--color-control-typo-disable);
+      background: var(--color-control-bg-disable);
+      border-color: var(--color-control-bg-border-disable);
+      pointer-events: none;
+    }
+
+    &_view_clear .canary--Select-Control,
+    &_view_clear .canary--Select-Control:hover,
+    &_view_clear .canary--Select-Control:focus {
+      padding: 0;
+      color: var(--color-control-typo-default);
+
+      &.canary--Select-SelectContainer_disabled {
+        pointer-events: none;
+
+        & .canary--Select-Control {
+          color: var(--color-control-typo-disable);
+        }
+      }
+    }
+
+    &_view_clear.canary--Select-SelectContainer_disabled .canary--Select-Control {
+      pointer-events: none;
+    }
+
+    &_view_default .canary--Select-ControlValueContainer {
+      padding: 0 0 0 var(--input-space);
+    }
+
+    &_form_round &-IndicatorsDropdown {
+      border-radius:
+        0 calc(var(--input-height) / 2)
+        calc(var(--input-height) / 2) 0;
+    }
+
+    &_multiple .canary--Select-ControlValueContainer {
+      position: relative;
+      display: flex;
+      box-sizing: border-box;
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: 1;
+    }
+
+    &_multiple .canary--Select-ControlValue {
+      overflow-x: visible;
+      overflow-y: auto;
+      max-height:
+        calc(
+          4 * var(--tag-space) + 4.5 * var(--select-element-height)
+        );
+      padding-top: calc(var(--tag-space) - var(--control-border-width));
+      white-space: normal;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    &_multiple .canary--Select-ControlValue_isUserSelect {
+      display: flex;
+      padding-top: calc(var(--space-s) / 4);
+      flex-wrap: wrap;
+    }
+  }
+
+  &_view_clear {
+    --caption-margin-left: 0;
+  }
+
+  &-Delimiter {
+    width: 1px;
+    background-color: var(--color-control-bg-border-default);
+  }
+
+  &-Control {
+    display: inline-flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--input-height);
+    padding: 0;
+    color: currentColor;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-primary);
+    font-weight: var(--font-weight-text-regular);
+    line-height: calc(var(--input-height) - var(--control-border-width));
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &-Indicators {
+    display: flex;
+    height: 100%;
+  }
+
+  &-IndicatorsDropdown {
+    display: block;
+    width: var(--input-height);
+    margin: 0;
+    padding: 0;
+    color: var(--color-control-typo-placeholder);
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &-ControlInner {
+    position: relative;
+    width: 100%;
+  }
+
+  &-ControlValueContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    min-height: calc(var(--input-height) - 2px);
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    font-size: var(--input-font-size);
+    line-height: calc(var(--input-height) - 2px);
+    text-align: left;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &-Control[aria-expanded='true'] &-IndicatorsDropdown {
+    transform: rotate(180deg);
+  }
+
+  &-ControlValue,
+  &-Placeholder {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &-Placeholder {
+    padding-right: var(--input-space);
+    color: var(--color-control-typo-placeholder);
+    font-size: var(--input-font-size);
+    text-align: left;
+    pointer-events: none;
+
+    &_isHidden {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  &-Control_hasInput &-Placeholder {
+    position: absolute;
+    top: 0;
+    width: calc(100% - var(--input-space));
+    background-color: transparent;
+    line-height: calc(var(--input-height) - 2px);
+  }
+
+  &-DropdownIndicatorIcon {
+    position: relative;
+    top: 1px;
+  }
+
+  &-ClearIndicator {
+    margin: 0;
+    padding: 0 var(--space-xs);
+    color: var(--color-control-typo-clear);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  &-ClearIndicatorIcon {
+    position: relative;
+    top: 1px;
+  }
+
+  &-Input {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: calc(var(--input-height) - 2px);
+
+    &_hide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      opacity: 0;
+    }
+
+    &_multiple {
+      display: inline-flex;
+      min-width: 10px;
+      height: calc(var(--input-height) - (var(--control-border-width) * 2));
+      margin-top: calc(var(--tag-space) * -1);
+      line-height: 1;
+      line-height:
+        calc(
+          var(--input-height) - (var(--control-border-width) * 2)
+        );
+    }
+
+    &_multiple.canary--Select-Input_isUserSelect {
+      margin-top: calc(var(--space-s) / 4 * -1);
+    }
+  }
+
+  &-FakeField {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+  }
+
+  &-HelperInputFakeElement {
+    position: absolute;
+    top: 0;
+    display: inline-block;
+    visibility: hidden;
+    overflow: hidden;
+    height: 0;
+    font-size: var(--input-font-size);
+    white-space: nowrap;
+  }
+}

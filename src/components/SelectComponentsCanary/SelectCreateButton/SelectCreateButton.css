@@ -1,0 +1,5 @@
+.ListItem.canary--SelectCreateButton {
+  &:hover:not(.ListItem_active) {
+    background: transparent;
+  }
+}

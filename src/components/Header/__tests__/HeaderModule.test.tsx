@@ -21,7 +21,7 @@ describe('Компонент HeaderModule', () => {
   });
   describe('проверка props', () => {
     describe('проверка className', () => {
-      it(`Дополнительный className присваевается`, () => {
+      it(`Присваивается дополнительный className`, () => {
         const className = 'className';
 
         renderComponent({ className });

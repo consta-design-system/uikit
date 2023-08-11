@@ -1,0 +1,45 @@
+.UserSelectExampleRenderItem {
+  &-Item {
+    --text-color: var(--color-control-typo-default);
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: var(--space-xs) var(--space-s);
+    color: var(--text-color);
+
+    &_hovered {
+      background-color: var(--color-control-bg-clear-hover);
+    }
+
+    &_active {
+      --text-color: var(--color-control-typo-secondary);
+    }
+
+    &_disabled {
+      --text-color: var(--color-control-typo-disable);
+    }
+
+    &_active::before {
+      background-color: var(--text-color);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: transparent;
+      transition: background-color 0.2s ease-in;
+    }
+  }
+
+  &-Badge {
+    margin-left: var(--space-m);
+  }
+
+  &-User.User:hover {
+    background: transparent;
+  }
+}

@@ -13,8 +13,6 @@ import {
   textFieldPropStatus,
   textFieldPropView,
   textFieldPropViewDefault,
-  textFieldPropWidth,
-  textFieldPropWidthDefault,
 } from '##/components/TextField';
 import { cn } from '##/utils/bem';
 
@@ -29,11 +27,6 @@ const cnAutoCompleteVariants = cn('AutoCompleteVariants');
 
 const Variants = () => {
   const type = useSelect('type', ['text', 'email'], 'text');
-  const width = useSelect(
-    'width',
-    textFieldPropWidth,
-    textFieldPropWidthDefault,
-  );
   const form = useSelect('form', textFieldPropForm, textFieldPropFormDefault);
   const dropdownForm = useSelect(
     'dropdownForm',
@@ -73,10 +66,6 @@ const Variants = () => {
   const leftSide = leftSideType && leftSideSelect[leftSideType];
   const rightSide = rightSideType && rightSideSelect[rightSideType];
 
-  const handleChange = ({ value }: { value: string | null }) => {
-    setValue(value);
-  };
-
   const items = useMemo(() => {
     if (type === 'email') {
       return getMailItems(value);
@@ -87,7 +76,6 @@ const Variants = () => {
   return (
     <AutoComplete
       value={value}
-      width={width}
       form={form}
       status={status}
       size={size}
@@ -101,7 +89,7 @@ const Variants = () => {
       withClearButton={withClearButton}
       maxLength={maxLength}
       placeholder={placeholder}
-      onChange={handleChange}
+      onChange={setValue}
       labelIcon={withLabelIcon ? IconQuestion : undefined}
       leftSide={leftSide}
       rightSide={rightSide}
