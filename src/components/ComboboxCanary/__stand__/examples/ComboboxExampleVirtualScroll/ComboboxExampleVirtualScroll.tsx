@@ -32,7 +32,7 @@ export const ComboboxExampleVirtualScroll = () => {
   return (
     <Example col={1}>
       <Combobox
-        placeholder="У меня очень большой список"
+        placeholder="Чтобы посмотреть весь список, скрольте вниз"
         items={items}
         value={value}
         onChange={setValue}

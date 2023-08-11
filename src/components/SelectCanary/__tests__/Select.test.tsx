@@ -118,7 +118,7 @@ describe('Компонент Select', () => {
     expect(renderComponent).not.toThrow();
   });
 
-  it(`Дополнительный className присваевается`, () => {
+  it(`Присваивается дополнительный className`, () => {
     const className = 'className';
 
     renderComponent({ ...defaultProps, className });

@@ -82,7 +82,7 @@ export const UserSelectExampleIsLoading = () => {
   return (
     <Example col={1}>
       <UserSelect
-        placeholder="Загружу данные после того как по мне кликнут"
+        placeholder="Кликните по полю ввода, чтобы данные загрузились"
         items={data}
         value={value}
         onChange={setValue}

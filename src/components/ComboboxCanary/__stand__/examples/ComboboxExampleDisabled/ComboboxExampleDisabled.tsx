@@ -28,7 +28,7 @@ export function ComboboxExampleDisabled() {
   return (
     <Example col={1}>
       <Combobox
-        placeholder="Здесь ничего выбрать не получится"
+        placeholder="Здесь не получится ничего выбрать"
         items={items}
         value={value}
         onChange={setValue}

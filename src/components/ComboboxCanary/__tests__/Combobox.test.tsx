@@ -104,7 +104,7 @@ describe('Компонент Combobox', () => {
     expect(() => renderComponent(defaultProps)).not.toThrow();
   });
 
-  it(`Дополнительный className присваевается`, () => {
+  it(`Присваивается дополнительный className`, () => {
     const className = 'className';
 
     renderComponent({ ...defaultProps, className });

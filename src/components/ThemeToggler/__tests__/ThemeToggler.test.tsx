@@ -106,7 +106,7 @@ describe('Компонент ThemeToggler', () => {
   });
 
   describe('проверка className', () => {
-    it(`дополнительный className присваевается`, () => {
+    it(`Присваивается дополнительный className`, () => {
       const className = 'className';
 
       renderComponent({ className });

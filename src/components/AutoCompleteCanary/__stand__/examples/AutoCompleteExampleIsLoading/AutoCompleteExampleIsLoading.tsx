@@ -83,7 +83,7 @@ export const AutoCompleteExampleIsLoading = () => {
   return (
     <Example col={1}>
       <AutoComplete
-        placeholder="Загружу данные после того как по мне кликнут"
+        placeholder="Кликните по полю ввода, чтобы данные загрузились"
         items={data}
         value={value}
         onChange={setValue}
@@ -112,7 +112,7 @@ export const AutoCompleteExampleOnScrollBottom = () => {
   return (
     <Example col={1}>
       <AutoComplete
-        placeholder="Загружу данные после того как по мне кликнут"
+        placeholder="Кликните по полю ввода, чтобы данные загрузились"
         items={data}
         value={value}
         onChange={setValue}

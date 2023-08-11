@@ -114,7 +114,7 @@ export function ComboboxExampleItems() {
       items={items}
       value={value}
       onChange={setValue}
-      placeholder="Выберите что-нибудь хорошее"
+      placeholder="Выберите нужный элемент из списка"
     />
   );
 }
@@ -211,7 +211,7 @@ export function ComboboxExampleLabel() {
       items={items}
       value={value}
       onChange={setValue}
-      placeholder="Выберите что-нибудь хорошее"
+      placeholder="Выберите нужный элемент из списка"
     />
   );
 }
@@ -573,7 +573,7 @@ export function ComboboxExampleForm() {
 Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
 поля с разными статусами и разной формы будут выглядет одинаково.
 
-> Для создания hover эфекта для view="`clear`" управляйте внешним видом контейнера, в котором находится Combobox
+> Для создания hover эффекта для view="`clear`" управляйте внешним видом контейнера, в котором находится Combobox
 
 ```tsx
 import React, { useState } from 'react';
@@ -654,7 +654,7 @@ export function ComboboxExampleDisabled() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
-      placeholder="Здесь ничего выбрать не получится"
+      placeholder="Здесь не получится ничего выбрать"
       items={items}
       value={value}
       onChange={setValue}
@@ -719,7 +719,7 @@ export function ComboboxExampleOnSearchValueChange() {
 
 ## Виртуализация списка
 
-Если список элементов очень большой то стоит использовать виртуализацию скрола.
+Если список элементов очень большой, то стоит использовать виртуализацию скрола.
 
 ```tsx
 type Item = {
@@ -750,7 +750,7 @@ export const ComboboxExampleVirtualScroll = () => {
   const [value, setValue] = useState<Item[] | null>();
   return (
     <Combobox
-      placeholder="У меня очень большой список"
+      placeholder="Чтобы посмотреть весь список, скрольте вниз"
       items={items}
       value={value}
       onChange={setValue}
@@ -769,7 +769,7 @@ export const ComboboxExampleVirtualScroll = () => {
 
 Для отображения индикации загрузки укажите параметр `isLoading`
 
-Пример ниже показывает как можно загрузить данные после того как расскрыли список.
+Пример ниже показывает, как можно загрузить данные после раскрытия списка.
 
 ```tsx
 type Item = {
@@ -827,7 +827,7 @@ export const ComboboxExampleIsLoading = () => {
 
   return (
     <Combobox
-      placeholder="Загружу данные после того как по мне кликнут"
+      placeholder="Кликните по полю ввода, чтобы данные загрузились"
       items={data}
       value={value}
       onChange={setValue}
@@ -920,7 +920,7 @@ export const ComboboxExampleIsLoadingOnScrollBottom = () => {
 
   return (
     <Combobox
-      placeholder="Загружу данные после того как по мне кликнут"
+      placeholder="Кликните по полю ввода, чтобы данные загрузились"
       items={data}
       value={value}
       onChange={setValue}

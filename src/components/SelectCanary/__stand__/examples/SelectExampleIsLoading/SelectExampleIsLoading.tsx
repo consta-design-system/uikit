@@ -81,7 +81,7 @@ export const SelectExampleIsLoading = () => {
   return (
     <Example col={1}>
       <Select
-        placeholder="Загружу данные после того как по мне кликнут"
+        placeholder="Кликните по полю ввода, чтобы данные загрузились"
         items={data}
         value={value}
         onChange={setValue}

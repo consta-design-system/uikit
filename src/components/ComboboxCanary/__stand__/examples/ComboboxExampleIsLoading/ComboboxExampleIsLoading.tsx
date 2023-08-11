@@ -81,7 +81,7 @@ export const ComboboxExampleIsLoading = () => {
   return (
     <Example col={1}>
       <Combobox
-        placeholder="Загружу данные после того как по мне кликнут"
+        placeholder="Кликните по полю ввода, чтобы данные загрузились"
         items={data}
         value={value}
         onChange={setValue}
@@ -102,7 +102,7 @@ export const ComboboxExampleIsLoadingOnScrollBottom = () => {
   return (
     <Example col={1}>
       <Combobox
-        placeholder="Загружу данные после того как по мне кликнут"
+        placeholder="Кликните по полю ввода, чтобы данные загрузились"
         items={data}
         value={value}
         onChange={setValue}

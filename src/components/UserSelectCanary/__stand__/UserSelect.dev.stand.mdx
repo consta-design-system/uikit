@@ -194,7 +194,7 @@ export function UserSelectExamplePlaceholder() {
 
 ### Подпись
 
-Под полем можно добавить подпись — например, чтобы показать информацию о его состоянии.
+Под полем можно добавить подпись, например, чтобы показать информацию о его состоянии.
 За подпись отвечает свойство `caption`, оно наследует
 [статус поля](#статус-поля) и стилизуется в соответствии с ним.
 
@@ -640,7 +640,7 @@ export function UserSelectExampleForm() {
 Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
 поля с разными статусами и разной формы будут выглядет одинаково.
 
-> Для создания hover эфекта для view="`clear`" управляйте внешним видом контейнера, в котором находится UserSelect
+> Для создания hover эффекта для view="`clear`" управляйте внешним видом контейнера, в котором находится UserSelect
 
 ```tsx
 type Item = {
@@ -687,7 +687,7 @@ export function UserSelectExampleView() {
 
 ## Виртуализация списка
 
-Если список элементов очень большой то стоит использовать виртуализацию скрола.
+Если список элементов очень большой, то стоит использовать виртуализацию скрола.
 
 ```tsx
 type Item = {
@@ -718,7 +718,7 @@ export const UserSelectExampleVirtualScroll = () => {
   const [value, setValue] = useState<Item[] | null>();
   return (
     <UserSelect
-      placeholder="У меня очень большой список"
+      placeholder="Чтобы посмотреть весь список, скрольте вниз"
       items={items}
       value={value}
       onChange={setValue}
@@ -736,7 +736,7 @@ export const UserSelectExampleVirtualScroll = () => {
 
 Для отображения индикации загрузки укажите параметр `isLoading`
 
-Пример ниже показывает как можно загрузить данные после того как расскрыли список.
+Пример ниже показывает, как можно загрузить данные после раскрытия списка.
 
 ```tsx
 type Item = {
@@ -814,7 +814,7 @@ export const UserSelectExampleIsLoading = () => {
 
   return (
     <UserSelect
-      placeholder="Загружу данные после того как по мне кликнут"
+      placeholder="Кликните по полю ввода, чтобы данные загрузились"
       items={data}
       value={value}
       onChange={setValue}
@@ -1208,7 +1208,7 @@ export function UserSelectExampleCustomTypes() {
 #### Пример с кастомными Item и Group
 
 ```tsx
-const groups = ['Отдел разработкки', 'Отдел закупок'];
+const groups = ['Отдел разработки', 'Отдел закупок'];
 
 type Item = {
   firstName: string;
@@ -1217,8 +1217,8 @@ type Item = {
 };
 
 const items: Item[] = [
-  { firstName: 'Андрей', lastName: 'Андреев', group: 'Отдел разработкки' },
-  { firstName: 'Егор', lastName: 'Егоров', group: 'Отдел разработкки' },
+  { firstName: 'Андрей', lastName: 'Андреев', group: 'Отдел разработки' },
+  { firstName: 'Егор', lastName: 'Егоров', group: 'Отдел разработки' },
   { firstName: 'Михаил', lastName: 'Михайлов', group: 'Отдел закупок' },
 ];
 

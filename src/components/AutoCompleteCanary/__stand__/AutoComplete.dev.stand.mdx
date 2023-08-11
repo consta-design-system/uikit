@@ -635,7 +635,7 @@ const AutoCompleteExampleView = () => {
 
 ## Виртуализация списка
 
-Если список элементов очень большой то стоит использовать виртуализацию скрола.
+Если список элементов очень большой, то стоит использовать виртуализацию скрола.
 
 ```tsx
 import { Example } from '@consta/stand';
@@ -671,7 +671,7 @@ export const AutoCompleteExampleVirtualScroll = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
     <AutoComplete
-      placeholder="У меня очень большой список"
+      placeholder="Чтобы посмотреть весь список, скрольте вниз"
       items={items}
       value={value}
       onChange={setValue}
@@ -698,7 +698,7 @@ export const AutoCompleteExampleVirtualScroll = () => {
 
 Для отображения индикации загрузки укажите параметр `isLoading`
 
-Пример ниже показывает как можно загрузить данные после того как расскрыли список.
+Пример ниже показывает, как можно загрузить данные после раскрытия списка.
 Этот функционаол стоит использовать когда список сильно большой
 
 ```tsx
@@ -778,7 +778,7 @@ export const AutoCompleteExampleIsLoading = () => {
 
   return (
     <AutoComplete
-      placeholder="Загружу данные после того как по мне кликнут"
+      placeholder="Кликните по полю ввода, чтобы данные загрузились"
       items={data}
       value={value}
       onChange={setValue}
@@ -876,7 +876,7 @@ export const AutoCompleteExampleOnScrollBottom = () => {
 
   return (
     <AutoComplete
-      placeholder="Загружу данные после того как по мне кликнут"
+      placeholder="Кликните по полю ввода, чтобы данные загрузились"
       items={data}
       value={value}
       onChange={setValue}
