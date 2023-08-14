@@ -39,6 +39,9 @@ type UseAutoCompleteProps<ITEM, GROUP> = {
   searchValue?: string;
   onChange: OnChangeProp<ITEM>;
   isLoading?: boolean;
+  dropdownOpen?: boolean;
+  onDropdownOpen?: (isOpen: boolean) => void;
+  ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
 };
 
 type OptionProps<ITEM> = {
@@ -73,6 +76,9 @@ export function useAutoComplete<ITEM, GROUP>(
     onBlur,
     searchValue,
     isLoading,
+    dropdownOpen,
+    onDropdownOpen,
+    ignoreOutsideClicksRefs,
   } = params;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -218,9 +224,8 @@ export function useAutoComplete<ITEM, GROUP>(
 
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (!disabled) {
-      if (!isOpen) {
-        setIsOpen.on();
-      }
+      setIsOpen.toggle();
+
       if (typeof onFocus === 'function') {
         onFocus(e);
       }
@@ -240,7 +245,11 @@ export function useAutoComplete<ITEM, GROUP>(
 
   useClickOutside({
     isActive: isOpen,
-    ignoreClicksInsideRefs: [dropdownRef, controlRef],
+    ignoreClicksInsideRefs: [
+      dropdownRef,
+      controlRef,
+      ...(ignoreOutsideClicksRefs || []),
+    ],
     handler: setIsOpen.off,
   });
 
@@ -257,7 +266,22 @@ export function useAutoComplete<ITEM, GROUP>(
         highlightIndex(0),
       );
     }
+    setIsOpen.on();
   }, [highlightedIndex]);
+
+  useEffect(() => {
+    onDropdownOpen?.(isOpen);
+  }, [isOpen]);
+
+  useEffect(() => {
+    setIsOpen.set(dropdownOpen || false);
+  }, [dropdownOpen]);
+
+  useEffect(() => {
+    if (searchValue) {
+      setIsOpen.on();
+    }
+  }, [searchValue]);
 
   return {
     isOpen: Boolean(isOpen && (isLoading ? true : hasItems)),

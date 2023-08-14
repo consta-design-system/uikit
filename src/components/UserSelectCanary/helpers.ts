@@ -109,7 +109,9 @@ export type UserSelectProps<
     virtualScroll?: boolean;
     onScrollToBottom?: () => void;
     onSearchValueChange?: (value: string) => void;
-    onDropdownOpen?: () => void;
+    onDropdownOpen?: (isOpen: boolean) => void;
+    dropdownOpen?: boolean;
+    ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
   },
   HTMLDivElement
 > &

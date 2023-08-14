@@ -69,6 +69,9 @@ const AutoCompleteRender = <
     className,
     virtualScroll,
     onScrollToBottom,
+    onDropdownOpen,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -119,6 +122,9 @@ const AutoCompleteRender = <
     onFocus,
     searchFunction,
     isLoading,
+    onDropdownOpen,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
   });
 
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
@@ -154,7 +160,8 @@ const AutoCompleteRender = <
         inputRef={useForkRef([inputRef, inputControlRef])}
         onBlur={handleInputBlur}
         inputContainerRef={useForkRef([containerRef, inputContainerRef])}
-        onFocus={handleInputFocus}
+        // onFocus={handleInputFocus}
+        onClick={handleInputFocus}
         onChange={handleInputChange}
         value={value}
         style={style}

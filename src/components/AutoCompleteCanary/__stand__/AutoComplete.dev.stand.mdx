@@ -16,6 +16,7 @@ import {
 } from './examples/AutoCompleteExampleType/AutoCompleteExampleType';
 import { AutoCompleteExampleView } from './examples/AutoCompleteExampleView/AutoCompleteExampleView';
 import { AutoCompleteExampleVirtualScroll } from './examples/AutoCompleteExampleVirtualScroll/AutoCompleteExampleVirtualScroll';
+import { AutoCompleteExampleDropdownOpen } from './examples/AutoCompleteExampleDropdownOpen/AutoCompleteExampleDropdownOpen';
 import {
   AutoCompleteExampleIsLoading,
   AutoCompleteExampleOnScrollBottom,
@@ -44,6 +45,7 @@ import { AutoComplete } from '@consta/uikit/AutoCompleteCanary';
 - [Виртуализация списка](#виртуализация-списка)
 - [Индикация загрузки](#индикация-загрузки)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
+- [Управление состоянием выподающего списка](#управление-состоянием-выподающего-списка)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
 - [Импорт](#импорт)
@@ -938,6 +940,16 @@ const AutoCompleteExampleDisabled = () => {
 ```
 
 <AutoCompleteExampleDisabled />
+
+## Управление состоянием выподающего списка
+
+Для управлением состояния выподающего списка используйте следующие свойства:
+
+- `dropdownOpen` - флаг открыт/закрыт
+- `onDropdownOpen` - колбек отрабатывающий каждый раз при открытии/закрытии
+- `ignoreClicksInsideRefs` - список ссылок на элементы по которым игнорируется клики
+
+<AutoCompleteExampleDropdownOpen />
 
 # Кастомизация
 

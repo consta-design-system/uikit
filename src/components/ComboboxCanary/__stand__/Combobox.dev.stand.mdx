@@ -22,6 +22,7 @@ import { ComboboxExampleOnSearchValueChange } from './examples/ComboboxExampleOn
 import { ComboboxExampleSelectAll } from './examples/ComboboxExampleSelectAll/ComboboxExampleSelectAll';
 import { ComboboxExampleSearchValue } from './examples/ComboboxExampleSearchValue/ComboboxExampleSearchValue';
 import { ComboboxExampleVirtualScroll } from './examples/ComboboxExampleVirtualScroll/ComboboxExampleVirtualScroll';
+import { ComboboxExampleDropdownOpen } from './examples/ComboboxExampleDropdownOpen/ComboboxExampleDropdownOpen';
 import {
   ComboboxExampleIsLoading,
   ComboboxExampleIsLoadingOnScrollBottom,
@@ -51,6 +52,7 @@ import { Combobox } from '@consta/uikit/ComboboxCanary';
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Создание новых вариантов](#создание-новых-вариантов)
 - [Выбор всех элементов](#выбор-всех-элементов)
+- [Управление состоянием выподающего списка](#управление-состоянием-выподающего-списка)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
   - [Кастомное выбранное значение](#кастомное-выбранное-значение)
@@ -107,7 +109,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleItems() {
+function ComboboxExampleItems() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -153,7 +155,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExamplePlaceholder() {
+function ComboboxExamplePlaceholder() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -202,7 +204,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleLabel() {
+function ComboboxExampleLabel() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -251,7 +253,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleDisabledItem() {
+function ComboboxExampleDisabledItem() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -296,7 +298,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleMultiple() {
+function ComboboxExampleMultiple() {
   const [value, setValue] = useState<Item[] | null>();
   return (
     <Combobox
@@ -377,7 +379,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleGroups() {
+function ComboboxExampleGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -424,7 +426,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleStatus() {
+function ComboboxExampleStatus() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -498,7 +500,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleSize() {
+function ComboboxExampleSize() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -543,7 +545,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleForm() {
+function ComboboxExampleForm() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -599,7 +601,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleView() {
+function ComboboxExampleView() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -650,7 +652,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleDisabled() {
+function ComboboxExampleDisabled() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -697,7 +699,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleOnSearchValueChange() {
+function ComboboxExampleOnSearchValueChange() {
   const [value, setValue] = useState<Item | null>();
   const [search, setSearch] = useState<string>('');
   return (
@@ -746,7 +748,7 @@ const groups: Group[] = new Array(items.length / 100)
     label: `Группа ${i + 1}`,
   }));
 
-export const ComboboxExampleVirtualScroll = () => {
+const ComboboxExampleVirtualScroll = () => {
   const [value, setValue] = useState<Item[] | null>();
   return (
     <Combobox
@@ -821,7 +823,7 @@ const useMockLoadData = (
   return [items, isLoading, setIsStart.on];
 };
 
-export const ComboboxExampleIsLoading = () => {
+const ComboboxExampleIsLoading = () => {
   const [value, setValue] = useState<Item[] | null>();
   const [data, isLoading, onDropdownOpen] = useMockLoadData();
 
@@ -913,10 +915,13 @@ const useMockLoadData = (
   return [searchValue && isLoading ? [] : items, isLoading, setIsStart.on];
 };
 
-export const ComboboxExampleIsLoadingOnScrollBottom = () => {
+const ComboboxExampleIsLoadingOnScrollBottom = () => {
   const [value, setValue] = useState<Item[] | null>();
-  const [searchValue, setSearchValue] = useState<string>();
-  const [data, isLoading, onDropdownOpen] = useMockLoadData(searchValue);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [data, isLoading, load] = useMockLoadData(searchValue);
+  const onDropdownOpen = useCallback((open: boolean) => {
+    open && load();
+  }, []);
 
   return (
     <Combobox
@@ -928,7 +933,7 @@ export const ComboboxExampleIsLoadingOnScrollBottom = () => {
       onDropdownOpen={onDropdownOpen}
       isLoading={isLoading}
       virtualScroll
-      onScrollToBottom={searchValue ? undefined : onDropdownOpen}
+      onScrollToBottom={searchValue ? undefined : load}
       searchFunction={() => true}
       onSearchValueChange={setSearchValue}
     />
@@ -966,7 +971,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleCreate() {
+function ComboboxExampleCreate() {
   const [value, setValue] = useState<Item | null>();
   const [list, setList] = useState<Item[]>(items);
   return (
@@ -1052,7 +1057,7 @@ const items: Item[] = [
   },
 ];
 
-export const ComboboxExampleSelectAll = () => {
+const ComboboxExampleSelectAll = () => {
   const [value, setValue] = useState<Item[] | null>();
   return (
     <Combobox
@@ -1069,6 +1074,81 @@ export const ComboboxExampleSelectAll = () => {
 ```
 
 <ComboboxExampleSelectAll />
+
+## Управление состоянием выподающего списка
+
+Для управлением состояния выподающего списка используйте следующие свойства:
+
+- `dropdownOpen` - флаг открыт/закрыт
+- `onDropdownOpen` - колбек отрабатывающий каждый раз при открытии/закрытии
+- `ignoreOutsideClicksRefs` - список ссылок на элементы по которым игнорируется клики
+
+```tsx
+type Item = {
+  label: string;
+  id: number | string;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const Icon = withAnimateSwitcherHOC({
+  startIcon: IconArrowDown,
+  startDirection: 0,
+  endDirection: 180,
+});
+
+const ComboboxExampleDropdownOpen = () => {
+  const [value, setValue] = useState<Item | null>();
+  const [open, setOpen] = useFlag();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onDropdownOpen = useCallback((open: boolean) => {
+    setOpen.set(open);
+    if (open) {
+      inputRef.current?.focus();
+    }
+  }, []);
+
+  return (
+    <AnimateIconSwitcherProvider active={open}>
+      <FieldGroup>
+        <Button
+          ref={buttonRef}
+          label={open ? 'Закрыть' : 'Открыть'}
+          onClick={setOpen.toggle}
+          iconLeft={Icon}
+          onlyIcon
+        />
+        <Combobox
+          inputRef={inputRef}
+          placeholder="Выберите вариант"
+          items={items}
+          value={value}
+          onChange={setValue}
+          dropdownOpen={open}
+          onDropdownOpen={onDropdownOpen}
+          ignoreOutsideClicksRefs={[buttonRef]}
+        />
+      </FieldGroup>
+    </AnimateIconSwitcherProvider>
+  );
+};
+```
+
+<ComboboxExampleDropdownOpen />
 
 ## Кастомизация
 
@@ -1135,10 +1215,7 @@ const mapStatus = {
   serviceable: 'success',
 } as const;
 
-export const searchCompare = (
-  searchValue: string,
-  compare?: string,
-): boolean => {
+const searchCompare = (searchValue: string, compare?: string): boolean => {
   if (!compare) {
     return false;
   }
@@ -1158,7 +1235,7 @@ const searchFunction = (item: Item, searchValue: string): boolean => {
   return searchCompare(searchValue, item.status && mapLabel[item.status]);
 };
 
-export function ComboboxExampleRenderItem() {
+function ComboboxExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -1224,7 +1301,7 @@ const items: Item[] = [
   },
 ];
 
-export function ComboboxExampleRenderValue() {
+function ComboboxExampleRenderValue() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -1270,7 +1347,7 @@ const defaultGetGroupLabel = (group) => group.label;
 import React, { useState } from 'react';
 import { Combobox } from '@consta/uikit/ComboboxCanary';
 
-export function ComboboxExampleCustomTypes() {
+function ComboboxExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
     <Combobox
@@ -1293,12 +1370,12 @@ export function ComboboxExampleCustomTypes() {
 import React, { useState } from 'react';
 import { Combobox } from '@consta/uikit/ComboboxCanary';
 
-export type Item = {
+type Item = {
   name: string;
   group: string;
 };
 
-export const items: Item[] = [
+const items: Item[] = [
   { name: 'Первый', group: 'Первая группа' },
   { name: 'Второй', group: 'Третья группа' },
   { name: 'Третий', group: 'Вторая группа' },
@@ -1311,13 +1388,9 @@ export const items: Item[] = [
   { name: 'Десятый', group: 'Вторая группа' },
 ];
 
-export const groups: string[] = [
-  'Первая группа',
-  'Вторая группа',
-  'Третья группа',
-];
+const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
 
-export function ComboboxExampleCustomTypesWithGroups() {
+function ComboboxExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Combobox
@@ -1343,7 +1416,7 @@ export function ComboboxExampleCustomTypesWithGroups() {
 Для того, чтобы программным путем изменить значение поля ввода, используйте `searchValue`.
 
 ```tsx
-export function ComboboxExampleSearchValue() {
+function ComboboxExampleSearchValue() {
   const [value, setValue] = useState<Item[] | null>();
   const [searchValue, setSearchValue] = useState<string | undefined>();
 
@@ -1431,49 +1504,51 @@ type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 ```
 
-| Свойство                                                  | Тип или варианты значения                                      | По умолчанию                                                  | Описание                                                               |
-| --------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| [`view?`](#внешний-вид)                                   | `default` , `clear`                                            | `default`                                                     | Внешний вид компонента                                                 |
-| [`disabled?`](#отключение-поля-ввода)                     | `boolean`                                                      | -                                                             | Делает компонент недоступным                                           |
-| [`status?`](#статус-поля)                                 | `'', 'alert', 'success', 'warning'`                            | `' '`                                                         | Тип поля                                                               |
-| [`size?`](#размер)                                        | `'xs'`, `'s'` , `'m'` , `'l'`                                  | `'m'`                                                         | Размер компонента                                                      |
-| [`form?`](#форма)                                         | `default`, `brick`, `round`                                    | `default`                                                     | Форма компонента                                                       |
-| [`placeholder?`](#подсказка)                              | `string`                                                       | -                                                             | Подсказка, отображается, когда вариант не выбран                       |
-| [`label?`](#лейбл-и-подпись)                              | `string`                                                       | -                                                             | Лейбл                                                                  |
-| [`labelIcon?`](#лейбл-и-подпись)                          | `IconComponent`                                                | -                                                             | Иконка слева от лейбла                                                 |
-| [`labelPosition?`](#лейбл-и-подпись)                      | `'top', 'left'`                                                | `'top'`                                                       | Положение лейбла                                                       |
-| [`caption?`](#лейбл-и-подпись)                            | `string`                                                       | -                                                             | Подпись                                                                |
-| [`items`](#варианты)                                      | `ITEM[]`                                                       | -                                                             | Варианты                                                               |
-| [`value?`](#значение)                                     | `PropValue<ITEM,MULTIPLE>`                                     | -                                                             | Значение селекта                                                       |
-| [`onChange?`](#onchange)                                  | `PropOnChange<ITEM,MULTIPLE>`                                  | -                                                             | Событие связанное с изменением значения компонента                     |
-| [`multiple?`](#множественный-выбор)                       | `boolean`                                                      | `false`                                                       | Указатель множественного выбора                                        |
-| [`groups?`](#группировка-списка)                          | `GROUP[]`                                                      | -                                                             | Группы                                                                 |
-| [`onSearchValueChange?`](#поиск)                          | `(value: string) => void;`                                     | -                                                             | Функция для получения значения строки поиска                           |
-| [`searchFunction?`](#поиск)                               | `PropSearchFunction<ITEM>`                                     | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                         |
-| [`renderItem?`](#свое-представление-элемента-списка)      | `PropRenderItem<ITEM>`                                         | рендер по умолчанию                                           | Рендер-функция для элемента списка                                     |
-| [`renderValue?`](#свое-представление-выбранного-значения) | `PropRenderValue<ITEM>`                                        | рендер по умолчанию                                           | Рендер-функция для элемента значения                                   |
-| [`getItemLabel?`](#свои-тип-данных-items-и-groups)        | `PropGetItemLabel<ITEM>`                                       | `(item) => item.label`                                        | Функция для определения названия элемента                              |
-| [`getItemKey?`](#свои-тип-данных-items-и-groups)          | `PropGetItemKey<ITEM>`                                         | `(item) => item.id`                                           | Функция для определения уникального ключа элемента                     |
-| [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)     | `PropGetItemGroupKey<ITEM>`                                    | `(item) => item.groupId`                                      | Функция для определения ключа группы, к которой будет привязан элемент |
-| [`getItemDisabled?`](#свои-тип-данных-items-и-groups)     | `PropGetItemDisabled<ITEM>`                                    | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                           |
-| [`getGroupLabel?`](#свои-тип-данных-items-и-groups)       | `PropGetGroupKey<GROUP>`                                       | `(group) => group.id`                                         | Функция для определения названия группы                                |
-| [`getGroupKey?`](#свои-тип-данных-items-и-groups)         | `PropGetGroupLabel<GROUP>`                                     | `(group) => group.label`                                      | Функция для определения уникального ключа группы                       |
-| `isLoading?`                                              | `boolean`                                                      | -                                                             | При `true` будет отображаться лоудер загрузки                          |
-| `required?`                                               | `boolean`                                                      | -                                                             | Нужно заполнить                                                        |
-| `searchValue?`                                            | `string`                                                       | -                                                             | Значение поля ввода                                                    |
-| `labelForEmptyItems?`                                     | `string`                                                       | `Список пуст`                                                 | Текст, который нужно показать, если в списке нет значений              |
-| [`labelForNotFound?`](#поиск)                             | `string`                                                       | `Не найдено`                                                  | Текст, который нужно показать, если при поиске ничего не нашлось       |
-| [`labelForCreate?`](#создание-новых-вариантов)            | `string`                                                       | `+`                                                           | Текст для кнопки, по которой можно добавить элемент в список           |
-| [`selectAll?`](#выбор-всех-элементов)                     | `boolean`                                                      | `false`                                                       | Добавляет пункт списка с возможностью выбора всех элементов            |
-| `onBlur?`                                                 | `(event?: React.FocusEvent<HTMLInputElement>) => void`         | -                                                             | Обработчик события `blur`                                              |
-| `onFocus?`                                                | `(event?: React.FocusEvent<HTMLInputElement>) => void`         | -                                                             | Обработчик события `focus`                                             |
-| `onCreate?`                                               | `() => void;`                                                  | -                                                             | Событие по клику на кнопку 'Создать'                                   |
-| `onScrollToBottom?`                                       | `(label: string, props: { e: React.SyntheticEvent }) => void;` | -                                                             | Событие срабатывает когда доскролили список до конца                   |
-| `onSearchValueChange?`                                    | `(value: string) => void;`                                     | -                                                             | Событие срабатывает при изменении значения поиска                      |
-| `onDropdownOpen?`                                         | `() => void;`                                                  | -                                                             | Событие срабатывает при открытии списка                                |
-| `virtualScroll?`                                          | `boolean`                                                      | -                                                             | Включает виртуализацию скролла                                         |
-| `ariaLabel?`                                              | `string`                                                       | -                                                             | `aria` атрибут для поля ввода                                          |
-| `name?`                                                   | `string`                                                       | -                                                             | Имя поля ввода                                                         |
-| `className?`                                              | `string`                                                       | -                                                             | Дополнительный CSS-класс                                               |
-| `dropdownClassName?`                                      | `string`                                                       | -                                                             | Дополнительный CSS-класс для выпадающего блока                         |
-| `ref?`                                                    | `React.Ref<HTMLDivElement>`                                    | -                                                             | Ссылка на корневой DOM-элемент компонента                              |
+| Свойство                                                                | Тип или варианты значения                                     | По умолчанию                                                  | Описание                                                                  |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| [`view?`](#внешний-вид)                                                 | `default` , `clear`                                           | `default`                                                     | Внешний вид компонента                                                    |
+| [`disabled?`](#отключение-поля-ввода)                                   | `boolean`                                                     | -                                                             | Делает компонент недоступным                                              |
+| [`status?`](#статус-поля)                                               | `'', 'alert', 'success', 'warning'`                           | `' '`                                                         | Тип поля                                                                  |
+| [`size?`](#размер)                                                      | `'xs'`, `'s'` , `'m'` , `'l'`                                 | `'m'`                                                         | Размер компонента                                                         |
+| [`form?`](#форма)                                                       | `default`, `brick`, `round`                                   | `default`                                                     | Форма компонента                                                          |
+| [`placeholder?`](#подсказка)                                            | `string`                                                      | -                                                             | Подсказка, отображается, когда вариант не выбран                          |
+| [`label?`](#лейбл-и-подпись)                                            | `string`                                                      | -                                                             | Лейбл                                                                     |
+| [`labelIcon?`](#лейбл-и-подпись)                                        | `IconComponent`                                               | -                                                             | Иконка слева от лейбла                                                    |
+| [`labelPosition?`](#лейбл-и-подпись)                                    | `'top', 'left'`                                               | `'top'`                                                       | Положение лейбла                                                          |
+| [`caption?`](#лейбл-и-подпись)                                          | `string`                                                      | -                                                             | Подпись                                                                   |
+| [`items`](#варианты)                                                    | `ITEM[]`                                                      | -                                                             | Варианты                                                                  |
+| [`value?`](#значение)                                                   | `PropValue<ITEM,MULTIPLE>`                                    | -                                                             | Значение селекта                                                          |
+| [`onChange?`](#onchange)                                                | `PropOnChange<ITEM,MULTIPLE>`                                 | -                                                             | Событие связанное с изменением значения компонента                        |
+| [`multiple?`](#множественный-выбор)                                     | `boolean`                                                     | `false`                                                       | Указатель множественного выбора                                           |
+| [`groups?`](#группировка-списка)                                        | `GROUP[]`                                                     | -                                                             | Группы                                                                    |
+| [`onSearchValueChange?`](#поиск)                                        | `(value: string) => void`                                     | -                                                             | Функция для получения значения строки поиска                              |
+| [`searchFunction?`](#поиск)                                             | `PropSearchFunction<ITEM>`                                    | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                            |
+| [`renderItem?`](#свое-представление-элемента-списка)                    | `PropRenderItem<ITEM>`                                        | рендер по умолчанию                                           | Рендер-функция для элемента списка                                        |
+| [`renderValue?`](#свое-представление-выбранного-значения)               | `PropRenderValue<ITEM>`                                       | рендер по умолчанию                                           | Рендер-функция для элемента значения                                      |
+| [`getItemLabel?`](#свои-тип-данных-items-и-groups)                      | `PropGetItemLabel<ITEM>`                                      | `(item) => item.label`                                        | Функция для определения названия элемента                                 |
+| [`getItemKey?`](#свои-тип-данных-items-и-groups)                        | `PropGetItemKey<ITEM>`                                        | `(item) => item.id`                                           | Функция для определения уникального ключа элемента                        |
+| [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)                   | `PropGetItemGroupKey<ITEM>`                                   | `(item) => item.groupId`                                      | Функция для определения ключа группы, к которой будет привязан элемент    |
+| [`getItemDisabled?`](#свои-тип-данных-items-и-groups)                   | `PropGetItemDisabled<ITEM>`                                   | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                              |
+| [`getGroupLabel?`](#свои-тип-данных-items-и-groups)                     | `PropGetGroupKey<GROUP>`                                      | `(group) => group.id`                                         | Функция для определения названия группы                                   |
+| [`getGroupKey?`](#свои-тип-данных-items-и-groups)                       | `PropGetGroupLabel<GROUP>`                                    | `(group) => group.label`                                      | Функция для определения уникального ключа группы                          |
+| [`isLoading?`](#индикация-загрузки)                                     | `boolean`                                                     | -                                                             | При `true` будет отображаться лоадер загрузки                             |
+| `required?`                                                             | `boolean`                                                     | -                                                             | Нужно заполнить                                                           |
+| `searchValue?`                                                          | `string`                                                      | -                                                             | Значение поля ввода                                                       |
+| `labelForEmptyItems?`                                                   | `string`                                                      | `Список пуст`                                                 | Текст, который нужно показать, если в списке нет значений                 |
+| [`labelForNotFound?`](#поиск)                                           | `string`                                                      | `Не найдено`                                                  | Текст, который нужно показать, если при поиске ничего не нашлось          |
+| [`labelForCreate?`](#создание-новых-вариантов)                          | `string`                                                      | `+`                                                           | Текст для кнопки, по которой можно добавить элемент в список              |
+| [`selectAll?`](#выбор-всех-элементов)                                   | `boolean`                                                     | `false`                                                       | Добавляет пункт списка с возможностью выбора всех элементов               |
+| `onBlur?`                                                               | `(event?: React.FocusEvent<HTMLInputElement>) => void`        | -                                                             | Обработчик события `blur`                                                 |
+| `onFocus?`                                                              | `(event?: React.FocusEvent<HTMLInputElement>) => void`        | -                                                             | Обработчик события `focus`                                                |
+| `onCreate?`                                                             | `() => void;`                                                 | -                                                             | Событие по клику на кнопку 'Создать'                                      |
+| `onScrollToBottom?`                                                     | `(label: string, props: { e: React.SyntheticEvent }) => void` | -                                                             | Событие срабатывает когда доскролили список до конца                      |
+| `onSearchValueChange?`                                                  | `(value: string) => void;`                                    | -                                                             | Событие срабатывает при изменении значения поиска                         |
+| `virtualScroll?`                                                        | `boolean`                                                     | -                                                             | Включает виртуализацию скролла                                            |
+| `ariaLabel?`                                                            | `string`                                                      | -                                                             | `aria` атрибут для поля ввода                                             |
+| `name?`                                                                 | `string`                                                      | -                                                             | Имя поля ввода                                                            |
+| `className?`                                                            | `string`                                                      | -                                                             | Дополнительный CSS-класс                                                  |
+| `dropdownClassName?`                                                    | `string`                                                      | -                                                             | Дополнительный CSS-класс для выпадающего блока                            |
+| [`onDropdownOpen?`](#управление-состоянием-выподающего-списка)          | `(open: boolean) => void;`                                    | -                                                             | Событие срабатывает при открытии списка                                   |
+| [`dropdownOpen?` ](#управление-состоянием-выподающего-списка)           | `boolean`                                                     | -                                                             | Состояние открыт/закрыт выподающего списка                                |
+| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выподающего-списка) | `ReadonlyArray<React.RefObject<HTMLElement>>`                 | -                                                             | Ссылки на элементы с которые нужно игнорировать при кликах вне компонента |
+| `ref?`                                                                  | `React.Ref<HTMLDivElement>`                                   | -                                                             | Ссылка на корневой DOM-элемент компонента                                 |

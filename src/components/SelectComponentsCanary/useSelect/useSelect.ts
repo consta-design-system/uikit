@@ -74,8 +74,10 @@ export type SelectProps<ITEM, GROUP, MULTIPLE extends boolean> = {
   searchValue?: string;
   onChange: OnChangeProp<ITEM, MULTIPLE>;
   value: ValueProp<ITEM, MULTIPLE>;
-  onDropdownOpen?: () => void;
+  dropdownOpen?: boolean;
+  onDropdownOpen?: (isOpen: boolean) => void;
   onSearchValueChange?: (value: string) => void;
+  ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
 };
 
 export type OptionProps<ITEM> = {
@@ -165,6 +167,8 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     searchValue: searchValueProp,
     onDropdownOpen,
     onSearchValueChange,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
   } = params;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -636,7 +640,11 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
   useClickOutside({
     isActive: isOpen,
-    ignoreClicksInsideRefs: [dropdownRef, controlRef],
+    ignoreClicksInsideRefs: [
+      dropdownRef,
+      controlRef,
+      ...(ignoreOutsideClicksRefs || []),
+    ],
     handler: () => {
       setOpen(false);
     },
@@ -707,14 +715,16 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   }, [resolvedSearchValue]);
 
   useEffect(() => {
-    if (isOpen) {
-      onDropdownOpen?.();
-    }
+    onDropdownOpen?.(isOpen);
   }, [isOpen]);
 
   useEffect(() => {
     onSearchValueChangeRef.current?.(searchValue);
   }, [searchValue]);
+
+  useEffect(() => {
+    setOpen(dropdownOpen || false);
+  }, [dropdownOpen]);
 
   return {
     isOpen,

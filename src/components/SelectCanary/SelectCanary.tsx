@@ -71,6 +71,8 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     onDropdownOpen,
     onScrollToBottom,
     virtualScroll,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -105,6 +107,8 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     onBlur,
     onFocus,
     onDropdownOpen,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
   });
 
   const inputId = id ? `${id}-input` : id;

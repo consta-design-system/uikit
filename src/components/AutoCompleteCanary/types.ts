@@ -61,6 +61,9 @@ export type AutoCompleteProps<
   onChange?: AutoCompletePropOnChange;
   virtualScroll?: boolean;
   onScrollToBottom?: () => void;
+  onDropdownOpen?: (isOpen: boolean) => void;
+  dropdownOpen?: boolean;
+  ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
 } & Omit<
   TextFieldProps<TYPE>,
   'max' | 'min' | 'step' | 'incrementButtons' | 'onChange' | 'width'
