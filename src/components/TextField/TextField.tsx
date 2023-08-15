@@ -319,6 +319,7 @@ export const TextFieldRender = <TYPE extends string>(
             <button
               type="button"
               disabled={disabled}
+              tabIndex={-1}
               onClick={handleClear}
               className={cnTextField('ClearButton')}
             >

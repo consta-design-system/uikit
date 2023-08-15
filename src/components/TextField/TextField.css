@@ -435,6 +435,7 @@
   &-ClearButtonIcon {
     position: relative;
     top: 1px;
+    color: var(--color-control-typo-placeholder);
   }
 
   &-Input {
