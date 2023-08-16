@@ -5,10 +5,10 @@ import { IconCheck } from '@consta/icons/IconCheck';
 import { IconEdit } from '@consta/icons/IconEdit';
 import { IconInfo } from '@consta/icons/IconInfo';
 import { IconQuestion } from '@consta/icons/IconQuestion';
+import { IconWarning } from '@consta/icons/IconWarning';
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
-import { IconWarning } from '##/icons/IconWarning';
 import { cn } from '##/utils/bem';
 
 import {

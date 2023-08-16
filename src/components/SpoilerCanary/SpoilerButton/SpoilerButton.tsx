@@ -1,10 +1,10 @@
 import './SpoilerButton.css';
 
 import { AnimateIconSwitcher } from '@consta/icons/AnimateIconSwitcher';
+import { IconArrowDown } from '@consta/icons/IconArrowDown';
 import React from 'react';
 
 import { IconPropSize } from '##/icons/Icon';
-import { IconArrowDown } from '##/icons/IconArrowDown';
 import { cnCanary } from '##/utils/bem';
 import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
