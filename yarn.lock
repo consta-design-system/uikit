@@ -1733,10 +1733,10 @@
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.7.0.tgz#3598732b9ec5a22d586f8eb06c38603e86e74576"
   integrity sha512-+z96Ams4ZnOeZtNhsVQpsarlpmv7wNDA+sfu3AVvAP0h+K7zCPU7BYcQppek71najQkxqpsngjznB7G8IbA4RA==
 
-"@consta/icons@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.8.0.tgz#a2453f3dcf19a693a8ec21c80ee2236b569d6fa5"
-  integrity sha512-PGGuoJtxAEHxB7WSpP+BgcRK7c21/iyalQpis4j/x9DrBKye3VWu421Tngx0h4eH38zpMMASeiK+WbO19xLXiw==
+"@consta/icons@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.9.0.tgz#6f5af9e85176b545c9032ffd0fbfa0386e08dae3"
+  integrity sha512-a8etwnWHbiKSUirXPD1pAKt+jdYmP1wexn2tLsIQRUNPlZdvUDmq0gpWOKh6TrEW2AThn4ClYPfgefkFyzcjfw==
 
 "@consta/stand@^0.0.118":
   version "0.0.118"

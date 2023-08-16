@@ -1,5 +1,5 @@
 import { Example } from '@consta/stand';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag';
@@ -77,7 +77,10 @@ const useMockLoadData = (
 export const UserSelectExampleIsLoading = () => {
   const [value, setValue] = useState<Item[] | null>();
   const [searchValue, setSearchValue] = useState<string>('');
-  const [data, isLoading, onDropdownOpen] = useMockLoadData(searchValue);
+  const [data, isLoading, load] = useMockLoadData(searchValue);
+  const onDropdownOpen = useCallback((open: boolean) => {
+    open && load();
+  }, []);
 
   return (
     <Example col={1}>
@@ -90,7 +93,7 @@ export const UserSelectExampleIsLoading = () => {
         onDropdownOpen={onDropdownOpen}
         isLoading={isLoading}
         virtualScroll
-        onScrollToBottom={searchValue ? undefined : onDropdownOpen}
+        onScrollToBottom={searchValue ? undefined : load}
         searchFunction={() => true}
         onSearchValueChange={setSearchValue}
       />

@@ -96,6 +96,8 @@ const UserSelectRender = <
     onSearchValueChange,
     onDropdownOpen,
     virtualScroll,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -148,6 +150,8 @@ const UserSelectRender = <
     searchFunction: searchFunction || searchFunctionDefault,
     onSearchValueChange,
     onDropdownOpen,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
   });
 
   const inputId = id ? `${id}-input` : id;
@@ -286,6 +290,7 @@ const UserSelectRender = <
               <button
                 type="button"
                 onClick={clearValue}
+                tabIndex={-1}
                 className={cnSelect('ClearIndicator', [cnMixFocus()])}
               >
                 <IconClose

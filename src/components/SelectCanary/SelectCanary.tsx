@@ -71,6 +71,8 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     onDropdownOpen,
     onScrollToBottom,
     virtualScroll,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -105,6 +107,8 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     onBlur,
     onFocus,
     onDropdownOpen,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
   });
 
   const inputId = id ? `${id}-input` : id;
@@ -165,7 +169,8 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
             <div className={cnSelect('ControlValueContainer')}>
               <input
                 {...getKeyProps()}
-                type="button"
+                className={cnSelect('FakeField')}
+                type="text"
                 name={name}
                 id={inputId}
                 onFocus={handleInputFocus}
@@ -173,7 +178,6 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
                 aria-label={ariaLabel}
                 onClick={handleInputClick}
                 ref={useForkRef([inputRef, inputRefProp])}
-                className={cnSelect('FakeField')}
                 readOnly
               />
               {value && renderValue({ item: value })}

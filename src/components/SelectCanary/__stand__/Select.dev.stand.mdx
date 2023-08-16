@@ -11,6 +11,7 @@ import { SelectExampleDisabledItem } from './examples/SelectExampleDisabledItem/
 import { SelectExampleGroups } from './examples/SelectExampleGroups/SelectExampleGroups';
 import { SelectExampleVirtualScroll } from './examples/SelectExampleVirtualScroll/SelectExampleVirtualScroll';
 import { SelectExampleIsLoading } from './examples/SelectExampleIsLoading/SelectExampleIsLoading';
+import { SelectExampleDropdownOpen } from './examples/SelectExampleDropdownOpen/SelectExampleDropdownOpen';
 import {
   SelectExampleCustomTypes,
   SelectExampleCustomTypesWithGroups,
@@ -41,6 +42,7 @@ import { Select } from '@consta/uikit/Select';
 - [Индикация загрузки](#индикация-загрузки)
 - [Лейбл и подпись](#лейбл-и-подпись)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
+- [Управление состоянием выподающего списка](#управление-состоянием-выподающего-списка)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
   - [Кастомное выбранное значение](#кастомное-выбранное-значение)
@@ -110,7 +112,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleItems() {
+function SelectExampleItems() {
   const [value, setValue] = useState<Item | null>();
   return <Select items={items} value={value} onChange={setValue} />;
 }
@@ -146,7 +148,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExamplePlaceholder() {
+function SelectExamplePlaceholder() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -190,7 +192,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleDisabledItem() {
+function SelectExampleDisabledItem() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -267,7 +269,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleGroups() {
+function SelectExampleGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -311,7 +313,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleStatus() {
+function SelectExampleStatus() {
   const [value, setValue] = useState<Item | null>();
   return (
     <>
@@ -384,7 +386,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleSize() {
+function SelectExampleSize() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -427,7 +429,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleForm() {
+function SelectExampleForm() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -480,7 +482,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleView() {
+function SelectExampleView() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -525,7 +527,7 @@ const groups: Group[] = new Array(items.length / 100)
     label: `Группа ${i + 1}`,
   }));
 
-export const SelectExampleVirtualScroll = () => {
+const SelectExampleVirtualScroll = () => {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -547,6 +549,97 @@ export const SelectExampleVirtualScroll = () => {
 Для отображения индикации загрузки укажите параметр `isLoading`
 
 Пример ниже показывает, как можно загрузить данные после раскрытия списка.
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const useMockLoadData = (
+  searchValue = '',
+  timeout = 2000,
+): [Item[], boolean, () => void] => {
+  const [isLoading, setIsLoading] = useFlag();
+  const [isStart, setIsStart] = useFlag();
+  const [lenght, setLenght] = useState<number>(0);
+  const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
+
+  const items = useMemo(() => {
+    if (searchValue) {
+      return new Array(10000)
+        .fill(null)
+        .map((_, i) => ({
+          label: `Опция ${i + 1}`,
+          id: i,
+        }))
+        .filter(
+          (item) =>
+            item.label
+              .toLocaleLowerCase()
+              .indexOf(searchValue.toLocaleLowerCase()) !== -1,
+        );
+    }
+    return new Array(lenght).fill(null).map((_, i) => ({
+      label: `Опция ${i + 1}`,
+      id: i,
+    }));
+  }, [lenght, searchValue]);
+
+  useEffect(() => {
+    setIsLoading.on();
+    isLoadingOffDebounce();
+  }, [searchValue]);
+
+  useEffect(() => {
+    if (isStart) {
+      setIsLoading.on();
+    }
+
+    const timeoutNumber = setTimeout(() => {
+      if (isStart) {
+        setLenght((state) => state + 100);
+        setIsLoading.off();
+        setIsStart.off();
+      }
+    }, timeout);
+
+    return () => {
+      clearTimeout(timeoutNumber);
+    };
+  }, [isStart]);
+
+  useEffect(() => {
+    return () => {
+      setIsLoading.off();
+      setIsStart.off();
+    };
+  }, []);
+
+  return [searchValue && isLoading ? [] : items, isLoading, setIsStart.on];
+};
+
+const SelectExampleIsLoading = () => {
+  const [value, setValue] = useState<Item | null>();
+  const [data, isLoading, load] = useMockLoadData();
+  const onDropdownOpen = useCallback((open: boolean) => {
+    open && load();
+  }, []);
+
+  return (
+    <Select
+      placeholder="Кликните по полю ввода, чтобы данные загрузились"
+      items={data}
+      value={value}
+      onChange={setValue}
+      onDropdownOpen={onDropdownOpen}
+      isLoading={isLoading}
+      virtualScroll
+      onScrollToBottom={load}
+    />
+  );
+};
+```
 
 <SelectExampleIsLoading />
 
@@ -576,7 +669,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleLabel() {
+function SelectExampleLabel() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -626,7 +719,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleDisabled() {
+function SelectExampleDisabled() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -641,6 +734,81 @@ export function SelectExampleDisabled() {
 ```
 
 <SelectExampleDisabled />
+
+## Управление состоянием выподающего списка
+
+Для управлением состояния выподающего списка используйте следующие свойства:
+
+- `dropdownOpen` - флаг открыт/закрыт
+- `onDropdownOpen` - колбек отрабатывающий каждый раз при открытии/закрытии
+- `ignoreClicksInsideRefs` - список ссылок на элементы по которым игнорируется клики
+
+```tsx
+type Item = {
+  label: string;
+  id: number | string;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const Icon = withAnimateSwitcherHOC({
+  startIcon: IconArrowDown,
+  startDirection: 0,
+  endDirection: 180,
+});
+
+const SelectExampleDropdownOpen = () => {
+  const [value, setValue] = useState<Item | null>();
+  const [open, setOpen] = useFlag();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onDropdownOpen = useCallback((open: boolean) => {
+    setOpen.set(open);
+    if (open) {
+      inputRef.current?.focus();
+    }
+  }, []);
+
+  return (
+    <AnimateIconSwitcherProvider active={open}>
+      <FieldGroup>
+        <Button
+          ref={buttonRef}
+          label={open ? 'Закрыть' : 'Открыть'}
+          onClick={setOpen.toggle}
+          iconLeft={Icon}
+          onlyIcon
+        />
+        <Select
+          inputRef={inputRef}
+          placeholder="Выберите вариант"
+          items={items}
+          value={value}
+          onChange={setValue}
+          dropdownOpen={open}
+          onDropdownOpen={onDropdownOpen}
+          ignoreClicksInsideRefs={[buttonRef]}
+        />
+      </FieldGroup>
+    </AnimateIconSwitcherProvider>
+  );
+};
+```
+
+<SelectExampleDropdownOpen />
 
 ## Кастомизация
 
@@ -674,7 +842,7 @@ const items: Item[] = [
 
 const cnSelectExampleRenderItem = cn('SelectExampleRenderItem');
 
-export function SelectExampleRenderItem() {
+function SelectExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -726,7 +894,7 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleRenderValue() {
+function SelectExampleRenderValue() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -772,7 +940,7 @@ const defaultGetGroupLabel = (group) => group.label;
 #### Пример с кастомным Item
 
 ```tsx
-export function SelectExampleCustomTypes() {
+function SelectExampleCustomTypes() {
   const [value, setValue] = useState<string | null>();
   return (
     <Select
@@ -792,12 +960,12 @@ export function SelectExampleCustomTypes() {
 #### Пример с кастомными Item и Group
 
 ```tsx
-export type Item = {
+type Item = {
   name: string;
   group: string;
 };
 
-export const items: Item[] = [
+const items: Item[] = [
   { name: 'Первый', group: 'Первая группа' },
   { name: 'Второй', group: 'Третья группа' },
   { name: 'Третий', group: 'Вторая группа' },
@@ -810,13 +978,9 @@ export const items: Item[] = [
   { name: 'Десятый', group: 'Вторая группа' },
 ];
 
-export const groups: string[] = [
-  'Первая группа',
-  'Вторая группа',
-  'Третья группа',
-];
+const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
 
-export function SelectExampleCustomTypesWithGroups() {
+function SelectExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
     <Select
@@ -886,39 +1050,41 @@ type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 ```
 
-| Свойство                                                           | Тип или варианты значения                              | По умолчанию              | Описание                                                               |
-| ------------------------------------------------------------------ | ------------------------------------------------------ | ------------------------- | ---------------------------------------------------------------------- |
-| [`view?`](#внешний-вид)                                            | `default` , `clear`                                    | `default`                 | Внешний вид компонента                                                 |
-| [`disabled?`](#неактивный-выпадающий-список)                       | `boolean`                                              | -                         | Делает компонент неактивным                                            |
-| [`status?`](#статус-поля)                                          | `'', 'alert', 'success', 'warning'`                    | `' '`                     | Тип поля                                                               |
-| [`size?`](#размер)                                                 | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                     | Размер компонента                                                      |
-| [`form?`](#форма)                                                  | `default`, `brick`, `round`                            | `default`                 | Форма компонента                                                       |
-| [`placeholder?`](#подсказка)                                       | `string`                                               | -                         | Подсказка. Отображается, когда вариант не выбран                       |
-| [`label?`](#лейбл-и-подпись)                                       | `string`                                               | -                         | Лейбл                                                                  |
-| [`labelPosition?`](#лейбл-и-подпись)                               | `'top', 'left'`                                        | `'top'`                   | Положение лейбла                                                       |
-| [`caption?`](#лейбл-и-подпись)                                     | `string`                                               | -                         | Подпись                                                                |
-| [`items`](#варианты)                                               | `ITEM[]`                                               | -                         | Варианты                                                               |
-| [`value?`](#выбранное-значение)                                    | `ITEM`, `null`                                         | -                         | Выбранное значение                                                     |
-| [`onChange?`](#выбранное-значение)                                 | `PropOnChange<ITEM>`                                   | -                         | Обработчик события изменения значения компонента                       |
-| [`groups?`](#группы-вариантов)                                     | `GROUP[]`                                              | -                         | Группы вариантов                                                       |
-| [`renderItem?`](#кастомный-элемент-списка)                         | `PropRenderItem<ITEM>`                                 | рендер по умолчанию       | Рендер-функция для элемента списка                                     |
-| [`renderValue?`](#кастомное-выбранное-значение)                    | `PropRenderValue<ITEM>`                                | рендер по умолчанию       | Рендер-функция для выбранного значения                                 |
-| [`getItemLabel?`](#)                                               | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`    | Функция для определения названия элемента                              |
-| [`getItemKey?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`       | Функция для определения уникального ключа элемента                     |
-| [`getItemGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп) | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`  | Функция для определения ключа группы, к которой будет привязан элемент |
-| [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп) | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)              |
-| [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)   | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`     | Функция для определения названия группы                                |
-| [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)     | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`  | Функция для определения уникального ключа группы                       |
-| `isLoading?`                                                       | `boolean`                                              | -                         | При `true` будет отображаться лоадер загрузки                          |
-| `virtualScroll?`                                                   | `boolean`                                              | -                         | Включает виртуализацию скролла                                         |
-| `onScrollToBottom?`                                                | `() => void`                                           | -                         | Колбэк сработает при сроое до конца списка                             |
-| `onDropdownOpen?`                                                  | `() => void`                                           | -                         | Колбэк сработает при при открытии дропдауна                            |
-| `required?`                                                        | `boolean`                                              | -                         | Нужно заполнить                                                        |
-| `labelForEmptyItems?`                                              | `string`                                               | `Список пуст`             | Текст для случая, когда в списке нет значений                          |
-| `onBlur?`                                                          | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `blur`                                              |
-| `onFocus?`                                                         | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `focus`                                             |
-| `ariaLabel?`                                                       | `string`                                               | -                         | `aria` атрибут для поля ввода                                          |
-| `name?`                                                            | `string`                                               | -                         | Имя поля ввода                                                         |
-| `className?`                                                       | `string`                                               | -                         | Дополнительный CSS-класс                                               |
-| `dropdownClassName?`                                               | `string`                                               | -                         | Дополнительный CSS-класс для выпадающего блока                         |
-| `ref?`                                                             | `React.Ref<HTMLDivElement>`                            | -                         | Ссылка на корневой DOM-элемент компонента                              |
+| Свойство                                                                | Тип или варианты значения                              | По умолчанию              | Описание                                                                  |
+| ----------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------- | ------------------------------------------------------------------------- |
+| [`view?`](#внешний-вид)                                                 | `default` , `clear`                                    | `default`                 | Внешний вид компонента                                                    |
+| [`disabled?`](#неактивный-выпадающий-список)                            | `boolean`                                              | -                         | Делает компонент неактивным                                               |
+| [`status?`](#статус-поля)                                               | `'', 'alert', 'success', 'warning'`                    | `' '`                     | Тип поля                                                                  |
+| [`size?`](#размер)                                                      | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                     | Размер компонента                                                         |
+| [`form?`](#форма)                                                       | `default`, `brick`, `round`                            | `default`                 | Форма компонента                                                          |
+| [`placeholder?`](#подсказка)                                            | `string`                                               | -                         | Подсказка. Отображается, когда вариант не выбран                          |
+| [`label?`](#лейбл-и-подпись)                                            | `string`                                               | -                         | Лейбл                                                                     |
+| [`labelPosition?`](#лейбл-и-подпись)                                    | `'top', 'left'`                                        | `'top'`                   | Положение лейбла                                                          |
+| [`caption?`](#лейбл-и-подпись)                                          | `string`                                               | -                         | Подпись                                                                   |
+| [`items`](#варианты)                                                    | `ITEM[]`                                               | -                         | Варианты                                                                  |
+| [`value?`](#выбранное-значение)                                         | `ITEM`, `null`                                         | -                         | Выбранное значение                                                        |
+| [`onChange?`](#выбранное-значение)                                      | `PropOnChange<ITEM>`                                   | -                         | Обработчик события изменения значения компонента                          |
+| [`groups?`](#группы-вариантов)                                          | `GROUP[]`                                              | -                         | Группы вариантов                                                          |
+| [`renderItem?`](#кастомный-элемент-списка)                              | `PropRenderItem<ITEM>`                                 | рендер по умолчанию       | Рендер-функция для элемента списка                                        |
+| [`renderValue?`](#кастомное-выбранное-значение)                         | `PropRenderValue<ITEM>`                                | рендер по умолчанию       | Рендер-функция для выбранного значения                                    |
+| [`getItemLabel?`](#)                                                    | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`    | Функция для определения названия элемента                                 |
+| [`getItemKey?`](#кастомные-типы-данных-для-вариантов-и-групп)           | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`       | Функция для определения уникального ключа элемента                        |
+| [`getItemGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`  | Функция для определения ключа группы, к которой будет привязан элемент    |
+| [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)                 |
+| [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)        | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`     | Функция для определения названия группы                                   |
+| [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)          | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`  | Функция для определения уникального ключа группы                          |
+| `isLoading?`                                                            | `boolean`                                              | -                         | При `true` будет отображаться лоадер загрузки                             |
+| `virtualScroll?`                                                        | `boolean`                                              | -                         | Включает виртуализацию скролла                                            |
+| `onScrollToBottom?`                                                     | `() => void`                                           | -                         | Колбэк сработает при сроое до конца списка                                |
+| `required?`                                                             | `boolean`                                              | -                         | Нужно заполнить                                                           |
+| `labelForEmptyItems?`                                                   | `string`                                               | `Список пуст`             | Текст для случая, когда в списке нет значений                             |
+| `onBlur?`                                                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `blur`                                                 |
+| `onFocus?`                                                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `focus`                                                |
+| `ariaLabel?`                                                            | `string`                                               | -                         | `aria` атрибут для поля ввода                                             |
+| `name?`                                                                 | `string`                                               | -                         | Имя поля ввода                                                            |
+| `className?`                                                            | `string`                                               | -                         | Дополнительный CSS-класс                                                  |
+| `dropdownClassName?`                                                    | `string`                                               | -                         | Дополнительный CSS-класс для выпадающего блока                            |
+| [`onDropdownOpen?`](#управление-состоянием-выподающего-списка)          | `(open: boolean) => void;`                             | -                         | Событие срабатывает при открытии списка                                   |
+| [`dropdownOpen?` ](#управление-состоянием-выподающего-списка)           | `boolean`                                              | -                         | Состояние открыт/закрыт выподающего списка                                |
+| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выподающего-списка) | `ReadonlyArray<React.RefObject<HTMLElement>>`          | -                         | Ссылки на элементы с которые нужно игнорировать при кликах вне компонента |
+| `ref?`                                                                  | `React.Ref<HTMLDivElement>`                            | -                         | Ссылка на корневой DOM-элемент компонента                                 |

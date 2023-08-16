@@ -8,6 +8,7 @@ type Flag = [
     on: () => void;
     off: () => void;
     toggle: () => void;
+    set: (flag: boolean) => void;
     /**
      * @deprecated since version 4.6.3 toggle()
      */
@@ -29,6 +30,7 @@ export const useFlag = (initial = false): Flag => {
       on,
       off,
       toggle,
+      set: setState,
       toogle,
     },
   ];

@@ -23,7 +23,6 @@ import {
 } from '##/components/SelectComponentsCanary/types';
 import { useSelect } from '##/components/SelectComponentsCanary/useSelect';
 import { useForkRef } from '##/hooks/useForkRef';
-import { cnMixFocus } from '##/mixs/MixFocus';
 
 import {
   ComboboxComponent,
@@ -94,6 +93,8 @@ const ComboboxRender = <
     onScrollToBottom,
     onDropdownOpen,
     onSearchValueChange,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -137,6 +138,8 @@ const ComboboxRender = <
     searchFunction,
     onDropdownOpen,
     onSearchValueChange,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
   });
 
   const inputId = id ? `${id}-input` : id;
@@ -279,7 +282,8 @@ const ComboboxRender = <
               <button
                 type="button"
                 onClick={clearValue}
-                className={cnSelect('ClearIndicator', [cnMixFocus()])}
+                tabIndex={-1}
+                className={cnSelect('ClearIndicator')}
               >
                 <IconClose
                   size="xs"

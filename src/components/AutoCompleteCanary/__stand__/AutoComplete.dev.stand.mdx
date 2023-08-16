@@ -16,6 +16,7 @@ import {
 } from './examples/AutoCompleteExampleType/AutoCompleteExampleType';
 import { AutoCompleteExampleView } from './examples/AutoCompleteExampleView/AutoCompleteExampleView';
 import { AutoCompleteExampleVirtualScroll } from './examples/AutoCompleteExampleVirtualScroll/AutoCompleteExampleVirtualScroll';
+import { AutoCompleteExampleDropdownOpen } from './examples/AutoCompleteExampleDropdownOpen/AutoCompleteExampleDropdownOpen';
 import {
   AutoCompleteExampleIsLoading,
   AutoCompleteExampleOnScrollBottom,
@@ -44,6 +45,7 @@ import { AutoComplete } from '@consta/uikit/AutoCompleteCanary';
 - [Виртуализация списка](#виртуализация-списка)
 - [Индикация загрузки](#индикация-загрузки)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
+- [Управление состоянием выподающего списка](#управление-состоянием-выподающего-списка)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
 - [Импорт](#импорт)
@@ -64,7 +66,7 @@ import { AutoComplete } from '@consta/uikit/AutoCompleteCanary';
 Элементы выпадающего списка, то есть подсказки, можно описать в объекте `items` типа [DefaultItem](#свойства). Что внутри:
 
 - `label` — название элемента списка,
-- `id` — уникальный ключ элемента,
+- `id` — уникальный ключ элемента,
 - `groupId` — идентификатор [группы](#группы-подсказок), в которую входит этот элемент (если список разбит на группы).
 
 Вы можете создать [кастомный тип данных для подсказок](#кастомный-элемент-списка) и использовать его.
@@ -938,6 +940,93 @@ const AutoCompleteExampleDisabled = () => {
 ```
 
 <AutoCompleteExampleDisabled />
+
+## Управление состоянием выподающего списка
+
+Для управлением состояния выподающего списка используйте следующие свойства:
+
+- `dropdownOpen` - флаг открыт/закрыт
+- `onDropdownOpen` - колбек отрабатывающий каждый раз при открытии/закрытии
+- `ignoreClicksInsideRefs` - список ссылок на элементы по которым игнорируется клики
+
+```tsx
+type Item = {
+  label: string;
+  id: number | string;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const Icon = withAnimateSwitcherHOC({
+  startIcon: IconArrowDown,
+  startDirection: 0,
+  endDirection: 180,
+});
+
+export const AutoCompleteExampleDropdownOpen = () => {
+  const [value, setValue] = useState<string | null>();
+  const [open, setOpen] = useFlag();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onDropdownOpen = useCallback((open: boolean) => {
+    setOpen.set(open);
+    if (open) {
+      inputRef.current?.focus();
+    }
+  }, []);
+
+  return (
+    <Example col={1}>
+      <AnimateIconSwitcherProvider active={open}>
+        <FieldGroup>
+          <Button
+            ref={buttonRef}
+            label={open ? 'Закрыть' : 'Открыть'}
+            onClick={setOpen.toggle}
+            iconLeft={Icon}
+            onlyIcon
+          />
+          <AutoComplete
+            inputRef={inputRef}
+            placeholder="Выберите вариант"
+            items={items}
+            value={value}
+            onChange={setValue}
+            dropdownOpen={open}
+            onDropdownOpen={onDropdownOpen}
+            ignoreOutsideClicksRefs={[buttonRef]}
+            searchFunction={(item, searchValue) => {
+              if (!searchValue) {
+                return true;
+              }
+              return (
+                item.label
+                  .toLocaleLowerCase()
+                  .indexOf(searchValue.toLocaleLowerCase()) !== -1
+              );
+            }}
+          />
+        </FieldGroup>
+      </AnimateIconSwitcherProvider>
+    </Example>
+  );
+};
+```
+
+<AutoCompleteExampleDropdownOpen />
 
 # Кастомизация
 

@@ -84,7 +84,9 @@ export type SelectProps<
     caption?: string;
     virtualScroll?: boolean;
     onScrollToBottom?: () => void;
-    onDropdownOpen?: () => void;
+    onDropdownOpen?: (isOpen: boolean) => void;
+    dropdownOpen?: boolean;
+    ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
   },
   HTMLDivElement
 > &
