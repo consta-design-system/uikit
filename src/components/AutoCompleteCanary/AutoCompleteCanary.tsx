@@ -160,7 +160,6 @@ const AutoCompleteRender = <
         inputRef={useForkRef([inputRef, inputControlRef])}
         onBlur={handleInputBlur}
         inputContainerRef={useForkRef([containerRef, inputContainerRef])}
-        // onFocus={handleInputFocus}
         onClick={handleInputFocus}
         onChange={handleInputChange}
         value={value}

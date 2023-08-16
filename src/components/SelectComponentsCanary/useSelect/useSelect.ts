@@ -543,15 +543,20 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       if (item) {
         onChange(e, item);
       }
+    } else {
+      setOpen(true);
     }
   };
 
-  const Escape = (): void => {
+  const Escape: KeyHandler = (): void => {
     setOpen(false);
   };
 
-  const Tab = (): void => {
-    setOpen(false);
+  const Tab: KeyHandler = (_, e): void => {
+    if (isOpen) {
+      e.preventDefault();
+      setOpen(false);
+    }
   };
 
   const Backspace: KeyHandler = (_, e): void => {

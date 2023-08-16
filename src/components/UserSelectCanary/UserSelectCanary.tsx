@@ -290,6 +290,7 @@ const UserSelectRender = <
               <button
                 type="button"
                 onClick={clearValue}
+                tabIndex={-1}
                 className={cnSelect('ClearIndicator', [cnMixFocus()])}
               >
                 <IconClose

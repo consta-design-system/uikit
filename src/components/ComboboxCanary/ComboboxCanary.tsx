@@ -23,7 +23,6 @@ import {
 } from '##/components/SelectComponentsCanary/types';
 import { useSelect } from '##/components/SelectComponentsCanary/useSelect';
 import { useForkRef } from '##/hooks/useForkRef';
-import { cnMixFocus } from '##/mixs/MixFocus';
 
 import {
   ComboboxComponent,
@@ -283,7 +282,8 @@ const ComboboxRender = <
               <button
                 type="button"
                 onClick={clearValue}
-                className={cnSelect('ClearIndicator', [cnMixFocus()])}
+                tabIndex={-1}
+                className={cnSelect('ClearIndicator')}
               >
                 <IconClose
                   size="xs"

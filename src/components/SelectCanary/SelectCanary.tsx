@@ -169,7 +169,8 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
             <div className={cnSelect('ControlValueContainer')}>
               <input
                 {...getKeyProps()}
-                type="button"
+                className={cnSelect('FakeField')}
+                type="text"
                 name={name}
                 id={inputId}
                 onFocus={handleInputFocus}
@@ -177,7 +178,6 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
                 aria-label={ariaLabel}
                 onClick={handleInputClick}
                 ref={useForkRef([inputRef, inputRefProp])}
-                className={cnSelect('FakeField')}
                 readOnly
               />
               {value && renderValue({ item: value })}

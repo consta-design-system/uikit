@@ -148,13 +148,19 @@ export function useAutoComplete<ITEM, GROUP>(
   // Prop Getters
 
   const ArrowUp: KeyHandler = (_, e): void => {
-    e.preventDefault();
-    highlightIndex((old) => old - 1);
+    if (!disabled) {
+      e.preventDefault();
+      setIsOpen.on();
+      highlightIndex((old) => old - 1);
+    }
   };
 
   const ArrowDown: KeyHandler = (_, e): void => {
-    e.preventDefault();
-    highlightIndex((old) => old + 1);
+    if (!disabled) {
+      e.preventDefault();
+      setIsOpen.on();
+      highlightIndex((old) => old + 1);
+    }
   };
 
   const Enter: KeyHandler = (_, e): void => {
@@ -179,15 +185,20 @@ export function useAutoComplete<ITEM, GROUP>(
       if (item) {
         onChange(e, item);
       }
+    } else {
+      setIsOpen.on();
     }
   };
 
-  const Escape = (): void => {
+  const Escape: KeyHandler = (): void => {
     setIsOpen.off();
   };
 
-  const Tab = (): void => {
-    setIsOpen.off();
+  const Tab: KeyHandler = (_, e): void => {
+    if (isOpen) {
+      e.preventDefault();
+      setIsOpen.off();
+    }
   };
 
   const getKeyProps = useKeys({
