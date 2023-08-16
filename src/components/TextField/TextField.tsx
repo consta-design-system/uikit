@@ -1,6 +1,6 @@
 import './TextField.css';
 
-import { IconClose } from '@consta/icons/IconClose';
+import { IconClear } from '@consta/icons/IconClear';
 import { IconEye } from '@consta/icons/IconEye';
 import { IconEyeClose } from '@consta/icons/IconEyeClose';
 import { IconSelect } from '@consta/icons/IconSelect';
@@ -319,10 +319,14 @@ export const TextFieldRender = <TYPE extends string>(
             <button
               type="button"
               disabled={disabled}
+              tabIndex={-1}
               onClick={handleClear}
               className={cnTextField('ClearButton')}
             >
-              <IconClose size="xs" className={cnTextField('ClearButtonIcon')} />
+              <IconClear
+                size={sizeMap[size]}
+                className={cnTextField('ClearButtonIcon')}
+              />
             </button>
           )}
 
