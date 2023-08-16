@@ -42,20 +42,20 @@ export const SpoilerButton = forwardRefWithAs<SpoilerButtonProps>(
 
     return (
       <Tag
-        ref={ref}
-        className={cnSpoilerButton({ size }, [className])}
         {...otherProps}
+        className={cnSpoilerButton({ size }, [className])}
+        ref={ref}
       >
         <Text className={cnSpoilerButton('Label')} size={size} as="span">
           {open ? lessLabel : moreLabel}
         </Text>
         <AnimateIconSwitcher
+          className={cnSpoilerButton('Icon')}
           startIcon={moreIcon}
           endIcon={lessIcon}
           active={open}
           endDirection={lessIcon ? undefined : 180}
           size={spoilerIconSizeMap[size]}
-          className={cnSpoilerButton('Icon')}
         />
       </Tag>
     );

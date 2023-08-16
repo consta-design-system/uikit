@@ -1,11 +1,16 @@
 import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
+import { Space } from '##/mixs/MixSpace';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
-export const spolierPropSize = ['m', 'xs', 's', 'l'] as const;
+export const spolierPropSize = ['xs', 's', 'm', 'l'] as const;
 export type SpoilerPropSize = typeof spolierPropSize[number];
-export const defaultSpoilerPropSize = spolierPropSize[0];
+export const defaultSpoilerPropSize = 'm';
+
+export const spolierPropButtonAlign = ['left', 'center', 'right'] as const;
+export type SpoilerPropButtonAlign = typeof spolierPropButtonAlign[number];
+export const defaultSpoilerPropButtonAlign = spolierPropButtonAlign[0];
 
 export type SpoilerModeProp = 'dots' | 'blur';
 
@@ -26,6 +31,8 @@ export type SpoilerProps = Omit<
       lessIcon?: IconComponent;
       moreLabel?: string;
       moreIcon?: IconComponent;
+      buttonIndent?: Space;
+      buttonAlign?: SpoilerPropButtonAlign;
     },
     HTMLDivElement
   >,
@@ -34,14 +41,25 @@ export type SpoilerProps = Omit<
   (
     | {
         preview: React.ReactNode;
-        fullText: React.ReactNode;
+        content: React.ReactNode;
         maxHeight?: never;
         children?: never;
+        lineClamp?: never;
       }
     | {
         preview?: never;
-        fullText?: never;
+        content?: never;
         children: React.ReactNode;
-        maxHeight?: number;
+        maxHeight: number;
+        lineClamp?: never;
+      }
+    | {
+        preview?: never;
+        content?: never;
+        children: React.ReactNode;
+        maxHeight?: never;
+        lineClamp: number;
       }
   );
+
+export type SpoilerMode = 'lineClamp' | 'blur' | 'toggle';

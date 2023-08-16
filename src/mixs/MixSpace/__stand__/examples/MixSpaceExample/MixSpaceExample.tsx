@@ -1,9 +1,9 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Button } from '../../../../../components/Button/Button';
-import { Text } from '../../../../../components/Text/Text';
-import { cnMixSpace } from '../../../MixSpace';
+import { Button } from '##/components/Button/Button';
+import { Text } from '##/components/Text/Text';
+import { cnMixSpace } from '##/mixs/MixSpace';
 
 export const MixSpaceExampleButtonWithoutSpaces = () => {
   return (

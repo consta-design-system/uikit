@@ -196,7 +196,7 @@ export function UserSelectExamplePlaceholder() {
 
 ### Подпись
 
-Под полем можно добавить подпись — например, чтобы показать информацию о его состоянии.
+Под полем можно добавить подпись, например, чтобы показать информацию о его состоянии.
 За подпись отвечает свойство `caption`, оно наследует
 [статус поля](#статус-поля) и стилизуется в соответствии с ним.
 
@@ -264,16 +264,14 @@ const items: Item[] = [
 export function UserSelectExampleLabel() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <UserSelect
-        label="Пользователь"
-        caption={value?.label}
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        placeholder="Выберите пользователя"
-      />
-    </Example>
+    <UserSelect
+      label="Пользователь"
+      caption={value?.label}
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      placeholder="Выберите пользователя"
+    />
   );
 }
 ```
@@ -366,15 +364,13 @@ const items: Item[] = [
 export function UserSelectExampleMultiple() {
   const [value, setValue] = useState<Item[] | null>();
   return (
-    <Example col={1}>
-      <UserSelect
-        placeholder="Выберите одного или несколько"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        multiple
-      />
-    </Example>
+    <UserSelect
+      placeholder="Выберите одного или несколько"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      multiple
+    />
   );
 }
 ```
@@ -646,7 +642,7 @@ export function UserSelectExampleForm() {
 Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
 поля с разными статусами и разной формы будут выглядет одинаково.
 
-> Для создания hover эфекта для view="`clear`" управляйте внешним видом контейнера, в котором находится UserSelect
+> Для создания hover эффекта для view="`clear`" управляйте внешним видом контейнера, в котором находится UserSelect
 
 ```tsx
 type Item = {
@@ -903,40 +899,38 @@ const searchFunction = (item: Item, searchValue: string): boolean => {
 export function UserSelectExampleRenderItem() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <UserSelect
-        placeholder="Выберите пользователя"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        searchFunction={searchFunction}
-        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
-          <div
-            className={cnUserSelectExampleRenderItem('Item', {
-              active,
-              hovered,
-            })}
-            role="option"
-            aria-selected={active}
-            aria-hidden
-            onMouseEnter={onMouseEnter}
-            onClick={onClick}
-          >
-            <User
-              className={cnUserSelectExampleRenderItem('User')}
-              name={item.label}
-              avatarUrl={item.avatarUrl}
-              info={item.subLabel}
-            />
-            <Badge
-              status={mapStatus[item.status]}
-              label={mapLabel[item.status]}
-              size="s"
-            />
-          </div>
-        )}
-      />
-    </Example>
+    <UserSelect
+      placeholder="Выберите пользователя"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      searchFunction={searchFunction}
+      renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+        <div
+          className={cnUserSelectExampleRenderItem('Item', {
+            active,
+            hovered,
+          })}
+          role="option"
+          aria-selected={active}
+          aria-hidden
+          onMouseEnter={onMouseEnter}
+          onClick={onClick}
+        >
+          <User
+            className={cnUserSelectExampleRenderItem('User')}
+            name={item.label}
+            avatarUrl={item.avatarUrl}
+            info={item.subLabel}
+          />
+          <Badge
+            status={mapStatus[item.status]}
+            label={mapLabel[item.status]}
+            size="s"
+          />
+        </div>
+      )}
+    />
   );
 }
 ```
@@ -994,29 +988,27 @@ const mapStatus = {
 export function UserSelectExampleRenderValue() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <UserSelect
-        placeholder="Выберите пользователя"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        renderValue={({ item }) => (
-          <div className={cnUserSelectExampleRenderValue('Item')}>
-            <User
-              className={cnUserSelectExampleRenderValue('User')}
-              name={item.label}
-              avatarUrl={item.avatarUrl}
-              info={item.subLabel}
-            />
-            <Badge
-              status={mapStatus[item.status]}
-              label={mapLabel[item.status]}
-              size="s"
-            />
-          </div>
-        )}
-      />
-    </Example>
+    <UserSelect
+      placeholder="Выберите пользователя"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      renderValue={({ item }) => (
+        <div className={cnUserSelectExampleRenderValue('Item')}>
+          <User
+            className={cnUserSelectExampleRenderValue('User')}
+            name={item.label}
+            avatarUrl={item.avatarUrl}
+            info={item.subLabel}
+          />
+          <Badge
+            status={mapStatus[item.status]}
+            label={mapLabel[item.status]}
+            size="s"
+          />
+        </div>
+      )}
+    />
   );
 }
 ```
@@ -1070,7 +1062,7 @@ export function UserSelectExampleCustomTypes() {
 #### Пример с кастомными Item и Group
 
 ```tsx
-const groups = ['Отдел разработкки', 'Отдел закупок'];
+const groups = ['Отдел разработки', 'Отдел закупок'];
 
 type Item = {
   firstName: string;
@@ -1079,29 +1071,27 @@ type Item = {
 };
 
 const items: Item[] = [
-  { firstName: 'Андрей', lastName: 'Андреев', group: 'Отдел разработкки' },
-  { firstName: 'Егор', lastName: 'Егоров', group: 'Отдел разработкки' },
+  { firstName: 'Андрей', lastName: 'Андреев', group: 'Отдел разработки' },
+  { firstName: 'Егор', lastName: 'Егоров', group: 'Отдел разработки' },
   { firstName: 'Михаил', lastName: 'Михайлов', group: 'Отдел закупок' },
 ];
 
 export function UserSelectExampleCustomTypesWithGroups() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <UserSelect
-        placeholder="Выберите пользователя"
-        items={items}
-        groups={groups}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        getItemKey={(item) => `${item.firstName} ${item.lastName}`}
-        getItemLabel={(item) => `${item.firstName} ${item.lastName}`}
-        getItemSubLabel={(item) => item.group}
-        getItemGroupKey={(item) => item.group}
-        getGroupKey={(group) => group}
-        getGroupLabel={(group) => group}
-      />
-    </Example>
+    <UserSelect
+      placeholder="Выберите пользователя"
+      items={items}
+      groups={groups}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      getItemKey={(item) => `${item.firstName} ${item.lastName}`}
+      getItemLabel={(item) => `${item.firstName} ${item.lastName}`}
+      getItemSubLabel={(item) => item.group}
+      getItemGroupKey={(item) => item.group}
+      getGroupKey={(group) => group}
+      getGroupLabel={(group) => group}
+    />
   );
 }
 ```

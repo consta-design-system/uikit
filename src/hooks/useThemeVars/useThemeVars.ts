@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useMemo } from 'react';
 
-import { cnTheme, useTheme } from '../../components/Theme/Theme';
-import { defaultVars } from './helpers';
+import { cnTheme, useTheme } from '##/components/Theme/Theme';
+import { getStyleProps } from '##/hooks/useStyleProps';
 
-export { defaultVars } from './helpers';
+import { defaultVars } from './helpers';
 
 export type Vars = {
   readonly color: {
@@ -37,26 +37,22 @@ type UseThemeVarsOptions<T> = {
   deps?: [];
 };
 
-const getVars = <T extends string>(
-  cssVars: readonly T[],
-  element: HTMLDivElement,
-): { [key in T]: string } => {
-  const vars: { [key in T]: string } = {} as { [key in T]: string };
-
-  const style = getComputedStyle(element);
-
-  for (let i = 0; i < cssVars.length; i++) {
-    vars[cssVars[i]] = style.getPropertyValue(cssVars[i]).trim();
+const addElements = (...array: {}[]): HTMLDivElement[] => {
+  const elements: HTMLDivElement[] = [];
+  for (let index = 0; index < array.length; index++) {
+    const mods = array[index];
+    const element = document.createElement('div');
+    element.setAttribute('class', cnTheme(mods));
+    document.body.append(element);
+    elements.push(element);
   }
-
-  return vars;
+  return elements;
 };
 
-const addElement = (mods: {}): HTMLDivElement => {
-  const element = document.createElement('div');
-  element.setAttribute('class', cnTheme(mods));
-  document.body.append(element);
-  return element;
+const removeElements = (array: HTMLDivElement[]) => {
+  for (let index = 0; index < array.length; index++) {
+    document.body.removeChild(array[index]);
+  }
 };
 
 export const useThemeVars = <T extends Vars = typeof defaultVars>(
@@ -67,38 +63,29 @@ export const useThemeVars = <T extends Vars = typeof defaultVars>(
   const { theme } = useTheme();
 
   return useMemo(() => {
-    const elementPrimary = addElement({
-      ...theme,
-      color: theme.color.primary,
-    });
-    const elementAccent = addElement({ color: theme.color.accent });
-    const elementInvert = addElement({ color: theme.color.invert });
-
-    const themeVars: ThemeVars<T> = {
-      color: {
-        primary: getVars<T['color']['primary'][number]>(
-          variables.color.primary,
-          elementPrimary,
-        ),
-        accent: getVars<T['color']['accent'][number]>(
-          variables.color.accent,
-          elementAccent,
-        ),
-        invert: getVars<T['color']['invert'][number]>(
-          variables.color.invert,
-          elementInvert,
-        ),
+    const elements = addElements(
+      {
+        ...theme,
+        color: theme.color.primary,
       },
-      control: getVars<T['control'][number]>(variables.control, elementPrimary),
-      font: getVars<T['font'][number]>(variables.font, elementPrimary),
-      size: getVars<T['size'][number]>(variables.size, elementPrimary),
-      space: getVars<T['space'][number]>(variables.space, elementPrimary),
-      shadow: getVars<T['shadow'][number]>(variables.shadow, elementPrimary),
-    };
+      { color: theme.color.accent },
+      { color: theme.color.invert },
+    );
 
-    document.body.removeChild(elementPrimary);
-    document.body.removeChild(elementAccent);
-    document.body.removeChild(elementInvert);
+    const themeVars = {
+      color: {
+        primary: getStyleProps(elements[0], variables.color.primary),
+        accent: getStyleProps(elements[1], variables.color.accent),
+        invert: getStyleProps(elements[2], variables.color.invert),
+      },
+      control: getStyleProps(elements[0], variables.control),
+      font: getStyleProps(elements[0], variables.font),
+      size: getStyleProps(elements[0], variables.size),
+      space: getStyleProps(elements[0], variables.space),
+      shadow: getStyleProps(elements[0], variables.shadow),
+    } as ThemeVars<T>;
+
+    removeElements(elements);
 
     return themeVars;
   }, [

@@ -4,8 +4,7 @@ export default createStand({
   title: 'UserSelect',
   id: 'UserSelect',
   group: 'components',
-  description:
-    'Выпадающий список пользователей, позволяет выбирать пользователей из списка.',
+  description: 'Выпадающий список пользователей с возможностью их выбора',
   version: '1.12.0',
   status: 'stable',
   sandbox: 'userselect-tl1sro',

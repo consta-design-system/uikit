@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PropRenderItem } from '##/components/Select';
+import { PropRenderItem } from '##/components/SelectCanary';
 import { TextFieldProps } from '##/components/TextField';
 
 export type AutoCompleteItemDefault = {
@@ -31,6 +31,15 @@ export type AutoCompletePropSearchFunction<ITEM> = (
   searchValue: string,
 ) => boolean;
 
+export type AutoCompletePropOnChange = (
+  value: string | null,
+  props: {
+    e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
+    id?: string;
+    name?: string;
+  },
+) => void;
+
 export type AutoCompleteProps<
   TYPE extends string,
   ITEM = AutoCompleteItemDefault,
@@ -49,7 +58,13 @@ export type AutoCompleteProps<
   getItemGroupKey?: AutoCompletePropGetItemGroupId<ITEM>;
   getGroupLabel?: AutoCompletePropGetGroupLabel<GROUP>;
   getGroupKey?: AutoCompletePropGetGroupId<GROUP>;
-} & Omit<TextFieldProps<TYPE>, 'max' | 'min' | 'step' | 'incrementButtons'> &
+  onChange?: AutoCompletePropOnChange;
+  virtualScroll?: boolean;
+  onScrollToBottom?: () => void;
+} & Omit<
+  TextFieldProps<TYPE>,
+  'max' | 'min' | 'step' | 'incrementButtons' | 'onChange' | 'width'
+> &
   (ITEM extends { label: AutoCompleteItemDefault['label'] }
     ? {}
     : {

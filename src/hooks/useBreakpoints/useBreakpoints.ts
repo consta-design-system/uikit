@@ -1,6 +1,7 @@
 import { useLayoutEffect, useState } from 'react';
 
-import { isEq } from './isEq';
+import { isEq } from '##/utils/object';
+
 import { mapping } from './mapping';
 import { Map, Returned } from './types';
 

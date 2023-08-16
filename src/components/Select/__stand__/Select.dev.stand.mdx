@@ -316,7 +316,7 @@ const items: Item[] = [
 export function SelectExampleStatus() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
+    <>
       <Select
         placeholder="default"
         caption="default"
@@ -352,7 +352,7 @@ export function SelectExampleStatus() {
         value={value}
         onChange={({ value }) => setValue(value)}
       />
-    </div>
+    </>
   );
 }
 ```
@@ -459,7 +459,7 @@ export function SelectExampleForm() {
 Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
 поля с разными статусами и разной формы будут выглядет одинаково.
 
-> Для создания hover эфекта для view="`clear`" управляйте внешним видом контейнера, в котором находится Select
+> Для создания hover эффекта для view="`clear`" управляйте внешним видом контейнера, в котором находится Select
 
 ```tsx
 type Item = {
@@ -527,16 +527,14 @@ const items: Item[] = [
 export function SelectExampleLabel() {
   const [value, setValue] = useState<Item | null>();
   return (
-    <Example col={1}>
-      <Select
-        label="Значение"
-        caption={value?.label}
-        placeholder="Выберите значение"
-        items={items}
-        value={value}
-        onChange={({ value }) => setValue(value)}
-      />
-    </div>
+    <Select
+      label="Значение"
+      caption={value?.label}
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={({ value }) => setValue(value)}
+    />
   );
 }
 ```

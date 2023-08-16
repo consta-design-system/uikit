@@ -1,9 +1,9 @@
 import { useLayoutEffect, useState } from 'react';
 
-import { isEq } from '##/hooks/useBreakpoints/isEq';
 import { mapping } from '##/hooks/useBreakpoints/mapping';
 import { Map, Returned } from '##/hooks/useBreakpoints/types';
 import { useMutableRef } from '##/hooks/useMutableRef';
+import { isEq } from '##/utils/object/isEq';
 
 const getWidth = (ref: React.RefObject<HTMLElement | SVGGraphicsElement>) =>
   ref.current?.getBoundingClientRect().width || 0;

@@ -37,7 +37,7 @@ export const AutoCompleteExampleRenderItem = () => {
         type="text"
         value={value}
         items={items}
-        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+        renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
           <div
             className={cnAutoCompleteExampleRenderItem('Item', {
               active,
@@ -48,12 +48,13 @@ export const AutoCompleteExampleRenderItem = () => {
             aria-hidden="true"
             onMouseEnter={onMouseEnter}
             onClick={onClick}
+            ref={ref}
           >
             <IconEdit />
             {item.label}
           </div>
         )}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );
