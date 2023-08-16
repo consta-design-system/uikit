@@ -1,5 +1,26 @@
 # Changelog
 
+## v4.25.0 (16/08/2023)
+Добавлены компоненты `Combobox[canary]`, `Select[canary]`, `UserSelect[canary]` и изменен `AutoComplete[canary]`. В них появились/изменились следующие функциональности:
+
+- Добавили возможность виртуального скролла
+- Изменили API свойств `onChandge`, `onCreate`, `renderItem`. [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3188)
+- Добавили свойства для управления выпадающим списком. [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3204)
+- Изменили взаимодействие с клавиатуры. [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3204)
+
+⚠️ Ломающие изменения:
+
+- В `AutoComplete[canary]` изменились свойства `onChandge` и `renderItem`. [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3188)
+
+---
+
+- [feat(Selects): add props for control dropdown open/close state (#3204)](https://github.com/consta-design-system/uikit/commit/2f7f40fd7f322e990f38ce5d88efd80667d6ed7d) - [@gizeasy](https://github.com/gizeasy)
+- [fix(TextField): fix clear button (#3199)](https://github.com/consta-design-system/uikit/commit/6a42c23eff6dd6e6600e1418406d37c419d614bd) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Button): fix border for secondary view (#3206)](https://github.com/consta-design-system/uikit/commit/67a97a42a9c15f3473fe8df28c4434c10057171b) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Selects): add canary Selects (#3188)](https://github.com/consta-design-system/uikit/commit/1ea3c340dc03b10fdf9f395d239fcf88b67b469a) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.24.0 (10/08/2023)
 Самое важное:
 - В `Spoiler` добавили возможность указывать количество строк, ниже которых текст сворачивается.
@@ -399,21 +420,3 @@
 - [fix(Table): make a nested rows mergable without parent row (#2795)](https://github.com/consta-design-system/uikit/commit/1657da4a9e66a48282da0e3d53d1f32eabd56d54) - [@N1MBER](https://github.com/N1MBER)
 - [docs: add how to use tab (#2803)](https://github.com/consta-design-system/uikit/commit/85e165ce922783108137921fd1b2b249811a135e) - [@arhayka](https://github.com/arhayka)
 - [fix(Skeleton): fixed style (#2802)](https://github.com/consta-design-system/uikit/commit/e37e851186afe804cfb50c60a90416965067be4b) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.5.0 (30/11/2022)
-Самое важное
-- В Checkbox добавлены размеры `s` и `xs`
-- В CheckboxGroup добавлены размеры `s` и `xs`
-- В Table исправлен баг с неверным отображением бордера
-- Доработана докуменация
-
----
-
-- [docs(Theme): edit docs about fonts](https://github.com/consta-design-system/uikit/commit/9356c051873fb30ce9d10ec5f9e6b6416a69ef44) - [@gizeasy](https://github.com/gizeasy)
-- [feat(CheckboxGroup): add s and xs sizes (#2800)](https://github.com/consta-design-system/uikit/commit/8ef40e4d65d0eac2f2e5a6073385119dfc3716ad) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Table): fix border on multi level header (#2797)](https://github.com/consta-design-system/uikit/commit/2f6a382b4e89a886f3b94e413bd36132df443e80) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Checkbox): add 's' and 'xs' size (#2790)](https://github.com/consta-design-system/uikit/commit/a4b50e6195682df18dbad13685d0c80a32f31d81) - [@N1MBER](https://github.com/N1MBER)
-- [docs: add how to use tab (#2799)](https://github.com/consta-design-system/uikit/commit/4fe6084492db080c4f188152c16817a45f5dad5d) - [@arhayka](https://github.com/arhayka)
-- [docs(useBreakpoints): edit doc (#2798)](https://github.com/consta-design-system/uikit/commit/afd6d2385a207545eb51c5b35e94d6bf6e5abce5) - [@arhayka](https://github.com/arhayka)
