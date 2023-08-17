@@ -44,6 +44,7 @@ export type Props = {
   tabIndex?: number;
   inputRef?: React.Ref<HTMLInputElement>;
   children?: never;
+  formId?: string;
   for?: string;
   inputId?: string;
 };
@@ -70,6 +71,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
       onChange,
       onFocus,
       onBlur,
+      formId,
       readOnly,
       required,
       step,
@@ -102,6 +104,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
           onBlur={onBlur}
           readOnly={readOnly}
           required={required}
+          form={formId}
           step={step}
           id={inputId}
           tabIndex={tabIndex}

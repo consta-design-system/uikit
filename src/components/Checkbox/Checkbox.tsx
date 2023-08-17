@@ -45,6 +45,7 @@ type Props = {
   inputRef?: React.Ref<HTMLInputElement>;
   children?: never;
   for?: string;
+  formId?: string;
   inputId?: string;
 };
 
@@ -70,6 +71,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
       onChange,
       onFocus,
       onBlur,
+      formId,
       readOnly,
       required,
       step,
@@ -104,6 +106,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
           onFocus={onFocus}
           onBlur={onBlur}
           readOnly={readOnly}
+          form={formId}
           required={required}
           step={step}
           tabIndex={tabIndex}

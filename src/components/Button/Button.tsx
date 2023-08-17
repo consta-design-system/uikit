@@ -89,6 +89,7 @@ export type Props = {
   iconRight?: IconComponent;
   onlyIcon?: boolean;
   iconSize?: IconPropSize;
+  formId?: string;
   title?: string;
   children?: never;
 };
@@ -126,6 +127,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
     disabled,
     loading,
     tabIndex,
+    formId,
     as = 'button',
     onlyIcon,
     iconSize: iconSizeProp,
@@ -165,6 +167,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
         },
         [!(disabled || loading) ? cnMixFocus() : undefined, className],
       )}
+      form={formId}
       tabIndex={tabIndex}
       title={title}
       ref={useForkRef([ref, buttonRef])}

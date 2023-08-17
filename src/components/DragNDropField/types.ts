@@ -49,6 +49,7 @@ export type DragNDropFieldProps = PropsWithHTMLAttributes<
     children?: React.ReactNode | DragNDropFieldChildrenRenderProp;
     locale?: DragNDropFieldPropLocale;
     disabled?: boolean;
+    formId?: string;
   },
   HTMLDivElement
 >;

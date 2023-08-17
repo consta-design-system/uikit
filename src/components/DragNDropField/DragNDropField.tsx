@@ -33,6 +33,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
       children = DragNDropFieldContent,
       locale: localeProp,
       disabled,
+      formId,
       onClick,
       ...otherProps
     } = usePropsHandler(COMPONENT_NAME, props, dragNDropFieldRef);
@@ -100,7 +101,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
     return (
       <>
         <div {...rootProps} ref={useForkRef([ref, rootRef, dragNDropFieldRef])}>
-          <input {...getInputProps()} />
+          <input {...getInputProps()} form={formId} />
           {isDragActive ? (
             <Text view="secondary" size="s" align="center">
               Перетащите файлы сюда

@@ -60,6 +60,7 @@ export type AutoCompleteProps<
   getGroupKey?: AutoCompletePropGetGroupId<GROUP>;
   onChange?: AutoCompletePropOnChange;
   virtualScroll?: boolean;
+  formId?: string;
   onScrollToBottom?: () => void;
 } & Omit<
   TextFieldProps<TYPE>,

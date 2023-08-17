@@ -52,6 +52,7 @@ const AutoCompleteRender = <
     onBlur,
     inputRef,
     onFocus,
+    formId,
     dropdownRef = defaultDropdownRef,
     dropdownClassName,
     dropdownForm = 'default',
@@ -149,6 +150,7 @@ const AutoCompleteRender = <
         id={id}
         className={cnAutoComplete(null, [className])}
         name={name}
+        formId={formId}
         disabled={disabled}
         ref={useForkRef([controlRef, ref])}
         inputRef={useForkRef([inputRef, inputControlRef])}
