@@ -1,8 +1,0 @@
-<svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-  <path
-    fill-rule="evenodd"
-    clip-rule="evenodd"
-    d="M2 2C1.44772 2 1 2.44772 1 3V7C1 7.55228 1.44772 8 2 8H5V9H4V10H8V9H7V8H10C10.5523 8 11 7.55228 11 7V3C11 2.44772 10.5523 2 10 2H2ZM10 3H2V7H10V3Z"
-    fill="black"
-  />
-</svg>
