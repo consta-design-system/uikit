@@ -1,0 +1,66 @@
+import { MdxMenu } from '@consta/stand';
+import { WithDefaultPropsExample } from './examples/WithDefaultPropsExample/WithDefaultPropsExample';
+
+```tsx
+import { withDefaultProps } from '@consta/uikit/withDefaultProps';
+```
+
+<MdxMenu>
+
+- [Что это](#что-это-такое)
+- [Пример использования](#пример-использования)
+- [Импорт](#импорт)
+
+</MdxMenu>
+
+## Что это такое
+
+При помощи хока `withDefaultProps` можно создать компонент, который будет иметь определенные по умолчанию свойства.
+
+Первым аргументом хок принимает компонент, а вторым те свойства которые вы хотите определить по умолчанию.
+
+## Пример использования
+
+```tsx
+import React from 'react';
+import { IconDinosaur } from '@consta/icons/IconDinosaur';
+import { Button } from '@consta/uikit/Button';
+import { Text } from '@consta/uikit/Text';
+import { TextField } from '@consta/uikit/TextField';
+import { withDefaultProps } from '@consta/uikit/withDefaultProps';
+
+const CustomButton = withDefaultProps(Button, {
+  size: 'm',
+  view: 'secondary',
+  iconLeft: IconDinosaur,
+});
+
+const CustomText = withDefaultProps(Text, {
+  size: 'xl',
+  view: 'alert',
+  weight: 'semibold',
+});
+
+const CustomTextField = withDefaultProps(TextField, {
+  size: 'xs',
+  view: 'ghost',
+  form: 'brick',
+  label: 'Поле ввода',
+});
+
+export const WithDefaultPropsExample = () => (
+  <>
+    <CustomButton label="Это кнопка" />
+    <CustomText>Пример</CustomText>
+    <CustomTextField />
+  </>
+);
+```
+
+<WithDefaultPropsExample />
+
+## Импорт
+
+```tsx
+import { withDefaultProps } from '@consta/uikit/withDefaultProps';
+```
