@@ -1,15 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 
-import { PropRenderItem } from '##/components/Select';
-import { SelectDropdown } from '##/components/SelectComponents/SelectDropdown/SelectDropdown';
-import { SelectItem } from '##/components/SelectComponents/SelectItem/SelectItem';
+import { PropRenderItem } from '##/components/SelectCanary';
 import {
   defaultPropForm,
   defaultPropSize,
   defaultPropView,
 } from '##/components/SelectComponents/types';
-import { TextField } from '##/components/TextField/TextField';
+import { SelectDropdown } from '##/components/SelectComponentsCanary/SelectDropdown';
+import { SelectItem } from '##/components/SelectComponentsCanary/SelectItem';
+import {
+  TextField,
+  TextFieldPropOnChange,
+} from '##/components/TextField/TextField';
 import { useForkRef } from '##/hooks/useForkRef';
+import { useMutableRef } from '##/hooks/useMutableRef';
 import { cnCanary } from '##/utils/bem';
 
 import { withDefaultGetters } from './helpers';
@@ -63,20 +67,35 @@ const AutoCompleteRender = <
     id,
     name,
     className,
+    virtualScroll,
+    onScrollToBottom,
+    onDropdownOpen,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
     ...otherProps
   } = withDefaultGetters(props);
 
-  const handleSelectChange = ({
-    e,
-    value,
-  }: {
-    value: ITEM | null;
-    e: React.SyntheticEvent;
-  }) => {
-    const copyEvent = { ...e } as React.KeyboardEvent;
-    const newValue = (value ? getItemLabel(value) : value) as string;
-    onChange?.({ e: copyEvent, value: newValue, id, name });
-  };
+  const onChangeRef = useMutableRef(onChange);
+
+  const handleSelectChange = useCallback(
+    ({ e, value }: { value: ITEM | null; e: React.SyntheticEvent }) => {
+      const copyEvent = { ...e } as React.KeyboardEvent;
+      const newValue = (value ? getItemLabel(value) : value) as string;
+      onChangeRef.current?.(newValue, {
+        e: copyEvent,
+        id: id?.toString(),
+        name,
+      });
+    },
+    [id, name],
+  );
+
+  const handleInputChange: TextFieldPropOnChange = useCallback(
+    ({ value, id, name, e }) => {
+      onChangeRef.current?.(value, { id: id?.toString(), name, e });
+    },
+    [],
+  );
 
   const {
     getOptionProps,
@@ -86,11 +105,11 @@ const AutoCompleteRender = <
     handleInputFocus,
     handleInputBlur,
     inputRef: inputControlRef,
+    optionsRefs,
   } = useAutoComplete({
     items,
     groups,
-    onChange: ({ e, value }) =>
-      handleSelectChange({ e, value: Array.isArray(value) ? value[0] : value }),
+    onChange: handleSelectChange,
     dropdownRef,
     controlRef,
     disabled,
@@ -102,10 +121,14 @@ const AutoCompleteRender = <
     onBlur,
     onFocus,
     searchFunction,
+    isLoading,
+    onDropdownOpen,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
   });
 
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
-    const { item, active, hovered, onClick, onMouseEnter } = props;
+    const { item, active, hovered, onClick, onMouseEnter, ref } = props;
 
     return (
       <SelectItem
@@ -118,6 +141,7 @@ const AutoCompleteRender = <
         indent={dropdownForm === 'round' ? 'increased' : 'normal'}
         onClick={onClick}
         onMouseEnter={onMouseEnter}
+        ref={ref}
       />
     );
   };
@@ -136,11 +160,12 @@ const AutoCompleteRender = <
         inputRef={useForkRef([inputRef, inputControlRef])}
         onBlur={handleInputBlur}
         inputContainerRef={useForkRef([containerRef, inputContainerRef])}
-        onFocus={handleInputFocus}
-        onChange={onChange}
+        onClick={handleInputFocus}
+        onChange={handleInputChange}
         value={value}
         style={style}
         size={size}
+        width="full"
         {...otherProps}
       />
       <SelectDropdown
@@ -156,11 +181,14 @@ const AutoCompleteRender = <
         visibleItems={visibleItems}
         isLoading={isLoading}
         hasItems={items.length !== 0}
+        itemsRefs={optionsRefs}
+        virtualScroll
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }
             : undefined
         }
+        onScrollToBottom={onScrollToBottom}
       />
     </>
   );

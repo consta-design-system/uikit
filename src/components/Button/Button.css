@@ -154,6 +154,7 @@
     --button-loader-color: var(--button-color-disable);
     --button-cursor: not-allowed;
     --button-color-hover: var(--button-color-disable);
+    --button-border-hover: var(--button-color-disable);
     --button-bg-color-hover: var(--button-bg-color-disable);
     color: var(--button-color-disable);
     background-color: var(--button-bg-color-disable);

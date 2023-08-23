@@ -891,11 +891,7 @@ export function TableExampleSort() {
     },
   ];
 
-  return (
-    <Example col={1}>
-      <Table columns={columns} rows={rows} />
-    </Example>
-  );
+  return <Table columns={columns} rows={rows} />;
 }
 ```
 
@@ -966,11 +962,7 @@ export function TableExampleOnSortBy() {
       date: item.date.toString(),
     }));
 
-  return (
-    <Example col={1}>
-      <Table rows={rows} columns={columns} onSortBy={setSortSetting} />
-    </Example>
-  );
+  return <Table rows={rows} columns={columns} onSortBy={setSortSetting} />;
 }
 ```
 
@@ -1015,11 +1007,7 @@ const filters: TableFilters<typeof rows[number]> = [
 ];
 
 export function TableExampleFilter() {
-  return (
-    <Example col={1}>
-      <Table columns={columns} rows={rows} filters={filters} />
-    </Example>
-  );
+  return <Table columns={columns} rows={rows} filters={filters} />;
 }
 ```
 

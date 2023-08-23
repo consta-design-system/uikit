@@ -5,7 +5,7 @@ export default createStand({
   id: 'AutoComplete',
   group: 'components',
   description: 'Поле для ввода текста с поиском по возможным значениям.',
-  version: '4.0.3',
+  version: '4.24.0',
   status: 'canary',
   alias: ['поле', 'ввод', 'инпут', 'коррекция', 'выбор', 'список', 'лист'],
   sandbox: 'autocomplete-7qm1vl',

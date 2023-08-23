@@ -32,8 +32,7 @@ export const AutoCompleteExampleStatus = () => {
         caption="default"
         value={value}
         items={items}
-        onChange={({ value }) => setValue(value)}
-        width="full"
+        onChange={setValue}
       />
       <AutoComplete
         type="text"
@@ -42,8 +41,7 @@ export const AutoCompleteExampleStatus = () => {
         placeholder="alert"
         caption="alert"
         status="alert"
-        onChange={({ value }) => setValue(value)}
-        width="full"
+        onChange={setValue}
       />
       <AutoComplete
         type="text"
@@ -52,8 +50,7 @@ export const AutoCompleteExampleStatus = () => {
         placeholder="warning"
         caption="warning"
         status="warning"
-        onChange={({ value }) => setValue(value)}
-        width="full"
+        onChange={setValue}
       />
       <AutoComplete
         type="text"
@@ -62,8 +59,7 @@ export const AutoCompleteExampleStatus = () => {
         placeholder="success"
         caption="success"
         status="success"
-        onChange={({ value }) => setValue(value)}
-        width="full"
+        onChange={setValue}
       />
     </Example>
   );

@@ -215,15 +215,13 @@ const getItemRightSide = ({ status }: Item) => [
 export const TabsExampleSide = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <Example col={1}>
-      <Tabs
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        items={items}
-        getItemRightSide={getItemRightSide}
-        fitMode="scroll"
-      />
-    </Example>
+    <Tabs
+      value={value}
+      onChange={({ value }) => setValue(value)}
+      items={items}
+      getItemRightSide={getItemRightSide}
+      fitMode="scroll"
+    />
   );
 };
 ```

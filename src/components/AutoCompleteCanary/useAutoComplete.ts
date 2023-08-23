@@ -6,9 +6,11 @@ import React, {
   useState,
 } from 'react';
 
+import { scrollToIndex } from '##/components/SelectComponentsCanary/useSelect/helpers';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useFlag } from '##/hooks/useFlag';
 import { KeyHandler, useKeys } from '##/hooks/useKeys';
+import { useRefs } from '##/hooks/useRefs';
 import { getGroups } from '##/utils/getGroups';
 
 type IndexForHighlight = number | ((oldIndex: number) => number);
@@ -36,11 +38,16 @@ type UseAutoCompleteProps<ITEM, GROUP> = {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   searchValue?: string;
   onChange: OnChangeProp<ITEM>;
+  isLoading?: boolean;
+  dropdownOpen?: boolean;
+  onDropdownOpen?: (isOpen: boolean) => void;
+  ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
 };
 
 type OptionProps<ITEM> = {
   index: number;
   item: ITEM;
+  keyPrefix: number;
 };
 
 type GetOptionPropsResult = {
@@ -68,6 +75,10 @@ export function useAutoComplete<ITEM, GROUP>(
     onFocus,
     onBlur,
     searchValue,
+    isLoading,
+    dropdownOpen,
+    onDropdownOpen,
+    ignoreOutsideClicksRefs,
   } = params;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -137,13 +148,19 @@ export function useAutoComplete<ITEM, GROUP>(
   // Prop Getters
 
   const ArrowUp: KeyHandler = (_, e): void => {
-    e.preventDefault();
-    highlightIndex((old) => old - 1);
+    if (!disabled) {
+      e.preventDefault();
+      setIsOpen.on();
+      highlightIndex((old) => old - 1);
+    }
   };
 
   const ArrowDown: KeyHandler = (_, e): void => {
-    e.preventDefault();
-    highlightIndex((old) => old + 1);
+    if (!disabled) {
+      e.preventDefault();
+      setIsOpen.on();
+      highlightIndex((old) => old + 1);
+    }
   };
 
   const Enter: KeyHandler = (_, e): void => {
@@ -168,15 +185,20 @@ export function useAutoComplete<ITEM, GROUP>(
       if (item) {
         onChange(e, item);
       }
+    } else {
+      setIsOpen.on();
     }
   };
 
-  const Escape = (): void => {
+  const Escape: KeyHandler = (): void => {
     setIsOpen.off();
   };
 
-  const Tab = (): void => {
-    setIsOpen.off();
+  const Tab: KeyHandler = (_, e): void => {
+    if (isOpen) {
+      e.preventDefault();
+      setIsOpen.off();
+    }
   };
 
   const getKeyProps = useKeys({
@@ -209,24 +231,12 @@ export function useAutoComplete<ITEM, GROUP>(
     };
   };
 
-  useClickOutside({
-    isActive: isOpen,
-    ignoreClicksInsideRefs: [dropdownRef, controlRef],
-    handler: setIsOpen.off,
-  });
-
-  useEffect(() => {
-    if (disabled) {
-      setIsOpen.off();
-      inputRef.current?.blur();
-    }
-  }, [disabled]);
+  const optionsRefs = useRefs<HTMLDivElement>(filteredOptions.length, [isOpen]);
 
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (!disabled) {
-      if (!isOpen) {
-        setIsOpen.on();
-      }
+      setIsOpen.toggle();
+
       if (typeof onFocus === 'function') {
         onFocus(e);
       }
@@ -244,8 +254,48 @@ export function useAutoComplete<ITEM, GROUP>(
     }
   };
 
+  useClickOutside({
+    isActive: isOpen,
+    ignoreClicksInsideRefs: [
+      dropdownRef,
+      controlRef,
+      ...(ignoreOutsideClicksRefs || []),
+    ],
+    handler: setIsOpen.off,
+  });
+
+  useEffect(() => {
+    if (disabled) {
+      setIsOpen.off();
+      inputRef.current?.blur();
+    }
+  }, [disabled]);
+
+  useEffect(() => {
+    if (filteredOptions.length > 0) {
+      scrollToIndex(highlightedIndex, dropdownRef, optionsRefs, () =>
+        highlightIndex(0),
+      );
+    }
+    setIsOpen.on();
+  }, [highlightedIndex]);
+
+  useEffect(() => {
+    onDropdownOpen?.(isOpen);
+  }, [isOpen]);
+
+  useEffect(() => {
+    setIsOpen.set(dropdownOpen || false);
+  }, [dropdownOpen]);
+
+  useEffect(() => {
+    if (searchValue) {
+      setIsOpen.on();
+    }
+  }, [searchValue]);
+
   return {
-    isOpen: Boolean(isOpen && hasItems),
+    isOpen: Boolean(isOpen && (isLoading ? true : hasItems)),
     visibleItems,
     getOptionProps,
     handleInputFocus,
@@ -253,5 +303,6 @@ export function useAutoComplete<ITEM, GROUP>(
     inputRef,
     getKeyProps,
     hasItems,
+    optionsRefs,
   };
 }

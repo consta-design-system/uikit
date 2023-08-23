@@ -1,8 +1,8 @@
+import { IconCheck } from '@consta/icons/IconCheck';
+import { IconDinosaur } from '@consta/icons/IconDinosaur';
 import React from 'react';
 
 import { Badge } from '##/components/Badge';
-import { IconCheck } from '##/icons/IconCheck';
-import { IconDinosaur } from '##/icons/IconDinosaur';
 
 import { DefaultListGroup, DefaultListItem } from '../types';
 

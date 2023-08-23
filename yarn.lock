@@ -1723,31 +1723,31 @@
   resolved "https://registry.yarnpkg.com/@consta/header/-/header-1.2.1.tgz#5c8cf9edf5d70730a5882d5b6ef9d7ba4c89b55b"
   integrity sha512-Cn4WExCIwIn3BX9JrTPd1UDZd/CUWVan//o46feB9x15+JKSD2+szh2RzhzWhHb7HLyIWtvC9zQYBwmFPWRUlg==
 
-"@consta/icons@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.1.1.tgz#454461a9acf3dc8b42e1654b4298e5f929c42937"
-  integrity sha512-55NsjyaXFuYyr6CiptXuFMe/AUd7HMs8IgSaOGfV+wbMbSVg88u8dwJ5km3sPaHNFiD0vg8FNqGFc1F37K18zQ==
-
-"@consta/icons@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.4.2.tgz#a1dc89ffd62643bd798ebf6db6af52ae154e376b"
-  integrity sha512-lXZhWRTkjlubVLUDCSGnVyW1ikTTFkhvqM6HEcI+dGwtcrxvB2QwcMxlBG0eQARFWdX4rSmHXp0ebbYxfnTa0Q==
-
 "@consta/icons@^0.5.2":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.5.2.tgz#eaa529818adf2fe5dd167f3749b87fdf31c6da5f"
   integrity sha512-Q5j+aCs/uzR8JbiN/UYpQ8FbxC22rUVAvEIzfAum4B8rl7FkiIguYvHjfFesuQCocj1OR0HJHIGkfKycR9e9LQ==
 
-"@consta/stand@^0.0.112":
-  version "0.0.112"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.112.tgz#0d42a79ac11909b24c103fdc823b320ef0aa9858"
-  integrity sha512-461IbhfEhT7MManjl/QTbRVE/b+fA8mw+hHUZ1r03SqXxzm9RZ4/m0vp8G2IBy5HazAgvmZmDP0jmMembsTDdQ==
+"@consta/icons@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.7.0.tgz#3598732b9ec5a22d586f8eb06c38603e86e74576"
+  integrity sha512-+z96Ams4ZnOeZtNhsVQpsarlpmv7wNDA+sfu3AVvAP0h+K7zCPU7BYcQppek71najQkxqpsngjznB7G8IbA4RA==
+
+"@consta/icons@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-0.9.0.tgz#6f5af9e85176b545c9032ffd0fbfa0386e08dae3"
+  integrity sha512-a8etwnWHbiKSUirXPD1pAKt+jdYmP1wexn2tLsIQRUNPlZdvUDmq0gpWOKh6TrEW2AThn4ClYPfgefkFyzcjfw==
+
+"@consta/stand@^0.0.118":
+  version "0.0.118"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.118.tgz#eab08843be7aeab70c5971247f25e40caf395395"
+  integrity sha512-tqUhri0xzSr37Of58dUKEEefhIGCU2CBtASp75tCAP/IJ2/CRrxlZRoNGYS9zcdqvx9QMMmUkzpL1OWiyK5shg==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"
     "@consta/header" "^1.2.1"
-    "@consta/icons" "^0.4.2"
-    "@consta/uikit" "^4.19.0"
+    "@consta/icons" "^0.7.0"
+    "@consta/uikit" "^4.23.1"
     "@mdx-js/loader" "^2.3.0"
     "@mdx-js/react" "^2.3.0"
     "@oclif/command" "^1.8.22"
@@ -1814,14 +1814,14 @@
     webpack-manifest-plugin "^5.0.0"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/uikit@^4.19.0":
-  version "4.19.0"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-4.19.0.tgz#5af71e9e238baed710f0065c46d4f72b0fc8ff01"
-  integrity sha512-CCYXglU3OgHOu4aAnrWSeTJSUdviLd1441O0IFFN0KAbUUK8kaGzuUoZOj4xHLJsjxYDVP9TA8a81VJJ0YaCnQ==
+"@consta/uikit@^4.23.1":
+  version "4.23.1"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-4.23.1.tgz#0d2002568da420ac589a08d9a525e60d1a296c0c"
+  integrity sha512-KaHTNGXBZ5Dx1+oVyHV2ulLFdyUapkQ3DbMxLk/h1e9b2sQIBZCeHiNSVB4kHBfC7PTm36Rxhjua+lurAmCvyw==
   dependencies:
     "@bem-react/classname" "^1.5.12"
     "@bem-react/classnames" "^1.3.10"
-    "@consta/icons" "^0.1.1"
+    "@consta/icons" "^0.5.2"
     compute-scroll-into-view "^1.0.17"
     date-fns "^2.29.1"
     focus-trap-react "8.7.0"
@@ -16934,9 +16934,9 @@ wildcard@^2.0.0:
   integrity sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==
 
 word-wrap@^1.0.3, word-wrap@^1.2.3, word-wrap@~1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
-  integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.4.tgz#cb4b50ec9aca570abd1f52f33cd45b6c61739a9f"
+  integrity sha512-2V81OA4ugVo5pRo46hAoD2ivUJx8jXmWXfUkY4KFNw0hEptvN0QfH3K4nHiwzGeKl5rFKedV48QVoqYavy4YpA==
 
 workbox-background-sync@6.5.4:
   version "6.5.4"

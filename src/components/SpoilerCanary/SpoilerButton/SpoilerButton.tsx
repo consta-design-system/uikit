@@ -1,10 +1,10 @@
 import './SpoilerButton.css';
 
 import { AnimateIconSwitcher } from '@consta/icons/AnimateIconSwitcher';
+import { IconArrowDown } from '@consta/icons/IconArrowDown';
 import React from 'react';
 
 import { IconPropSize } from '##/icons/Icon';
-import { IconArrowDown } from '##/icons/IconArrowDown';
 import { cnCanary } from '##/utils/bem';
 import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
@@ -42,20 +42,20 @@ export const SpoilerButton = forwardRefWithAs<SpoilerButtonProps>(
 
     return (
       <Tag
-        ref={ref}
-        className={cnSpoilerButton({ size }, [className])}
         {...otherProps}
+        className={cnSpoilerButton({ size }, [className])}
+        ref={ref}
       >
         <Text className={cnSpoilerButton('Label')} size={size} as="span">
           {open ? lessLabel : moreLabel}
         </Text>
         <AnimateIconSwitcher
+          className={cnSpoilerButton('Icon')}
           startIcon={moreIcon}
           endIcon={lessIcon}
           active={open}
           endDirection={lessIcon ? undefined : 180}
           size={spoilerIconSizeMap[size]}
-          className={cnSpoilerButton('Icon')}
         />
       </Tag>
     );

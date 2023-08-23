@@ -107,7 +107,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       Array.isArray(onFocus) ? onFocus[1]?.(e) : onFocus?.(e);
     };
 
-    // эфект для того чтобы календарь переключался при вводе с клавиатуры
+    // эффект для того чтобы календарь переключался при вводе с клавиатуры
     useEffect(() => {
       if (props.value?.[0] && startFocused) {
         const newVisibleDate = startOfMonth(props.value[0]);

@@ -1,6 +1,6 @@
 import './MixSpace.css';
 
-import { cn } from '../../utils/bem';
+import { cn } from '##/utils/bem';
 
 export type Space =
   | 0
@@ -39,10 +39,23 @@ type CnMixSpace = (props: MixSpaceProps) => string;
 
 const cnSpace = cn('MixSpace');
 
-export const cnMixSpace: CnMixSpace = (props) => {
-  const { p, m, pV, pH, mV, mH, mT, mL, mR, mB, pT, pL, pR, pB } = props;
-
-  return cnSpace({
+export const cnMixSpace: CnMixSpace = ({
+  p,
+  m,
+  pV,
+  pH,
+  mV,
+  mH,
+  mT,
+  mL,
+  mR,
+  mB,
+  pT,
+  pL,
+  pR,
+  pB,
+}) =>
+  cnSpace({
     pT: pT || pV || p,
     pL: pL || pH || p,
     pR: pR || pH || p,
@@ -52,4 +65,3 @@ export const cnMixSpace: CnMixSpace = (props) => {
     mR: mR || mH || m,
     mB: mB || mV || m,
   });
-};
