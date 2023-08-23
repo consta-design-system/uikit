@@ -1,0 +1,121 @@
+.BookmarkTabs {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  height: var(--bookmark-tabs-tab-size);
+  white-space: nowrap;
+  flex-wrap: nowrap;
+
+  &_fitMode_scroll .BookmarkTabs-Wrapper {
+    overflow-x: auto;
+  }
+
+  &-Wrapper {
+    display: inline-flex;
+    overflow: hidden;
+    width: max-content;
+    max-width: 100%;
+  }
+
+  &-List {
+    display: inline-flex;
+    width: max-content;
+    max-width: var(--bookmarks-list-width);
+    height: var(--bookmark-tabs-tab-size);
+
+    & > .BookmarkTabsTab {
+      flex: 1;
+
+      &:not(.BookmarkTabsTab_form_round.BookmarkTabsTab_active):not(.BookmarkTabsTab_form_round:has(+ .BookmarkTabsTab_active))::after {
+        content: '';
+        position: absolute;
+        top: var(--bookmark-divider-top);
+        right: 0;
+        width: 1px;
+        height: var(--bookmark-divider-height);
+        background: var(--color-bg-border);
+      }
+    }
+
+    &:has(+ .BookmarkTabs-List
+  > .BookmarkTabsTab:first-child.BookmarkTabsTab_active) {
+      & > .BookmarkTabsTab_form_round:last-child::after {
+        display: none;
+      }
+    }
+
+    &:last-child {
+      & > .BookmarkTabsTab:last-child::after {
+        display: none;
+      }
+    }
+  }
+
+  &_form {
+    &_brick {
+      --bookmark-divider-height: 100%;
+      --bookmark-divider-top: 0;
+    }
+
+    &_round {
+      --bookmark-divider-top: calc(var(--space-l) / 2);
+      --bookmark-divider-height: calc(100% - var(--space-l));
+    }
+  }
+
+  &_size {
+    &_s {
+      --bookmark-tabs-tab-size: var(--space-2xl);
+    }
+
+    &_m {
+      --bookmark-tabs-tab-size: var(--space-3xl);
+    }
+  }
+
+  &_view {
+    &_ghost {
+      background: var(--color-bg-secondary);
+    }
+  }
+
+  &-Empty {
+    flex: auto;
+    border-bottom: 1px solid var(--color-bg-border);
+  }
+
+  &-Button {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: var(--bookmark-tabs-tab-size);
+    min-height: var(--bookmark-tabs-tab-size);
+    border-bottom: 1px solid var(--color-bg-border);
+
+    &_type_add::before {
+      content: '';
+      position: absolute;
+      top: var(--bookmark-divider-top);
+      left: 0;
+      width: 1px;
+      height: var(--bookmark-divider-height);
+      background: var(--color-bg-border);
+    }
+  }
+
+  &-Block {
+    width: max-content;
+    max-width: 100%;
+  }
+
+  &-ScrollControls {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    & > * {
+      border-right: 1px solid var(--color-bg-border);
+    }
+  }
+}
