@@ -65,11 +65,8 @@ export const useBookmarkTabs = <ITEM>(props: UseBookmarkTabsProps<ITEM>) => {
         controlSize * ((withAddButton ? 1 : 0) + (showControls ? 2 : 0)) -
         fixedWidth
       : 0;
-
-    const itemSize = otherWidth
-      ? `${otherWidth / length}px`
-      : `${MAX_TAB_SIZE}px`;
-    return Array.from({ length }).fill(itemSize);
+    const itemSize = `${otherWidth ? otherWidth / length : MAX_TAB_SIZE}px`;
+    return Array.from<string>({ length }).fill(itemSize);
   }, [containerWidth, width, otherTabs, showControls]);
 
   useEffect(
