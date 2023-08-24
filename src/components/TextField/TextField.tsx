@@ -147,7 +147,7 @@ export const TextFieldRender = <TYPE extends string>(
 
   const commonProps = {
     'className': cnTextField('Input'),
-    'value': value || '',
+    'value': value ?? '',
     'onChange': handleChange,
     maxLength,
     disabled,
@@ -315,7 +315,7 @@ export const TextFieldRender = <TYPE extends string>(
             </div>
           )}
 
-          {value && withClearButton && type !== 'number' && (
+          {!!value && withClearButton && type !== 'number' && (
             <button
               type="button"
               disabled={disabled}
@@ -330,7 +330,7 @@ export const TextFieldRender = <TYPE extends string>(
             </button>
           )}
 
-          {type === 'password' && value && (
+          {type === 'password' && !!value && (
             <button
               className={cnTextField('ClearButton')}
               type="button"
