@@ -96,6 +96,10 @@
 
     &_divider {
       border-bottom: 1px solid var(--color-bg-border);
+
+      &:not(.Collapse-Body_isOpen) {
+        margin-top: -1px;
+      }
     }
   }
 
