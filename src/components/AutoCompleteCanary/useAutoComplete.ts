@@ -195,7 +195,7 @@ export function useAutoComplete<ITEM, GROUP>(
   };
 
   const Tab: KeyHandler = (_, e): void => {
-    if (isOpen) {
+    if (isOpen && hasItems) {
       e.preventDefault();
       setIsOpen.off();
     }
