@@ -1,5 +1,17 @@
 # Changelog
 
+## v4.26.0 (30/08/2023)
+Добавлен новый компонент `BookmarkTabs` - табы в виде вкладок
+
+---
+
+- [feat(BookmarkTabs): add new component (#3224)](https://github.com/consta-design-system/uikit/commit/734ddbb6dd1c3f6d615c93df9c1d0788a533b690) - [@N1MBER](https://github.com/N1MBER)
+- [fix(useAutoComplete): fix Tab two times when enter own custom  value (#3232)](https://github.com/consta-design-system/uikit/commit/299df63b8b00a7a569bf8c57ceaca1aa1c4e7a68) - [@vitaliidasaev](https://github.com/vitaliidasaev)
+- [fix(Collapse): fix collapse height (#3226)](https://github.com/consta-design-system/uikit/commit/979763a8bc7d9e34cbddae3eed5e9bbdffa287ed) - [@N1MBER](https://github.com/N1MBER)
+- [fix(TextField): fix value checking (#3228)](https://github.com/consta-design-system/uikit/commit/8a5317dc779c3fc34f4b7c076aca0525cc08a8be) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.25.0 (16/08/2023)
 Добавлены компоненты `Combobox[canary]`, `Select[canary]`, `UserSelect[canary]` и изменен `AutoComplete[canary]`. В них появились/изменились следующие функциональности:
 
@@ -408,15 +420,3 @@
 ---
 
 - [feat(DatePicker): add prop dropdownClassName (#2810)](https://github.com/consta-design-system/uikit/commit/469e9d33eb98dc13e176a0c44dcd7868a6826786) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.5.1 (02/12/2022)
-Самое важное:
-- В `Table` исправлена группировка в дочерних элементах
-
----
-
-- [fix(Table): make a nested rows mergable without parent row (#2795)](https://github.com/consta-design-system/uikit/commit/1657da4a9e66a48282da0e3d53d1f32eabd56d54) - [@N1MBER](https://github.com/N1MBER)
-- [docs: add how to use tab (#2803)](https://github.com/consta-design-system/uikit/commit/85e165ce922783108137921fd1b2b249811a135e) - [@arhayka](https://github.com/arhayka)
-- [fix(Skeleton): fixed style (#2802)](https://github.com/consta-design-system/uikit/commit/e37e851186afe804cfb50c60a90416965067be4b) - [@gizeasy](https://github.com/gizeasy)
