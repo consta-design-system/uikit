@@ -75,6 +75,8 @@ const BookmarkTabsRender = (
     showControls,
     wrapperRef,
     containerRef,
+    controlsRef,
+    addButtonRef,
     navigate,
     sizes,
   } = useBookmarkTabs({
@@ -120,7 +122,7 @@ const BookmarkTabsRender = (
       {...otherProps}
     >
       {showControls && (
-        <div className={cnBookmarkTabs('ScrollControls')}>
+        <div ref={controlsRef} className={cnBookmarkTabs('ScrollControls')}>
           <div className={cnBookmarkTabs('Button')}>
             <Button
               view="clear"
@@ -176,7 +178,10 @@ const BookmarkTabsRender = (
         </div>
       </div>
       {onCreate && (
-        <div className={cnBookmarkTabs('Button', { type: 'add' })}>
+        <div
+          ref={addButtonRef}
+          className={cnBookmarkTabs('Button', { type: 'add' })}
+        >
           <Button
             view="clear"
             size="xs"

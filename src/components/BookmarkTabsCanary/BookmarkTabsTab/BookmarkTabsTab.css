@@ -1,6 +1,6 @@
 .BookmarkTabsTab {
-  --bookmark-tabs-tab-close-size: 0;
-  --bookmark-tabs-tab-right-icon-size: 0;
+  --bookmark-tabs-tab-close-size: calc(0 * 1px);
+  --bookmark-tabs-tab-right-icon-size: calc(0 * 1px);
   position: relative;
   display: inline-flex;
   overflow: hidden;
@@ -23,7 +23,8 @@
   cursor: pointer;
   transition: background-color 0.3s, box-shadow 0.3s;
 
-  &:hover {
+  &:hover,
+  &:focus {
     --bookmark-tabs-tab-color: var(--color-control-typo-ghost-hover);
     background-color: var(--color-control-bg-ghost-hover);
   }
@@ -33,7 +34,7 @@
   }
 
   &:not(.BookmarkTabsTab_withLeftIcon) {
-    --bookmark-tabs-tab-left-icon-size: 0;
+    --bookmark-tabs-tab-left-icon-size: calc(0 * 1px);
   }
 
   &_withCloseButton {

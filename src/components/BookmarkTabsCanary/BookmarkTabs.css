@@ -6,15 +6,21 @@
   white-space: nowrap;
   flex-wrap: nowrap;
 
-  &_fitMode_scroll .BookmarkTabs-Wrapper {
-    overflow-x: auto;
-  }
-
   &-Wrapper {
     display: inline-flex;
-    overflow: hidden;
+    overflow-x: auto;
     width: max-content;
     max-width: 100%;
+
+    &::-webkit-scrollbar:horizontal {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    &::-webkit-scrollbar-thumb:horizontal {
+      display: none;
+    }
   }
 
   &-List {

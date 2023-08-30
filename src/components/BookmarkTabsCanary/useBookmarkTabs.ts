@@ -1,7 +1,5 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useLayoutEffect, useMemo, useState } from 'react';
 
-import { useComponentSize } from '##/hooks/useComponentSize';
-import { useDebounce } from '##/hooks/useDebounce';
 import { useRefs } from '##/hooks/useRefs';
 
 import {
@@ -21,24 +19,22 @@ type UseBookmarkTabsProps<ITEM = BookmarkTabsItemDefault> = {
 const MAX_TAB_SIZE = 200;
 
 export const useBookmarkTabs = <ITEM>(props: UseBookmarkTabsProps<ITEM>) => {
-  const { items, getItemFixed, fitMode, withAddButton, size } = props;
+  const { items, getItemFixed, fitMode } = props;
 
   const refs = useRefs<HTMLElement>(items.length);
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const fixedTabsRef = useRef<HTMLDivElement>(null);
-  const otherTabsRef = useRef<HTMLDivElement>(null);
+  const [
+    wrapperRef,
+    containerRef,
+    fixedTabsRef,
+    otherTabsRef,
+    controlsRef,
+    addButtonRef,
+  ] = useRefs<HTMLDivElement>(6);
 
-  const controlSize = size === 'm' ? 40 : 32;
-
-  const { width: containerWidth } = useComponentSize(containerRef);
-  const { width: fixedWidth } = useComponentSize(fixedTabsRef);
-  const { width } = useComponentSize(wrapperRef);
+  const [sizes, setSizes] = useState<string[]>([]);
 
   const [showControls, setShowControls] = useState(false);
-  const [showControlsDebounced, setShowControlsDebounced] = useState(false);
-  const debounceSetShowControls = useDebounce(setShowControls, 200);
 
   const { fixedTabs, otherTabs } = useMemo(() => {
     const fixedTabs: ITEM[] = [];
@@ -57,30 +53,6 @@ export const useBookmarkTabs = <ITEM>(props: UseBookmarkTabsProps<ITEM>) => {
       otherTabs,
     };
   }, [items, getItemFixed]);
-
-  const sizes = useMemo(() => {
-    const { length } = otherTabs;
-    const otherWidth = containerWidth
-      ? containerWidth -
-        controlSize * ((withAddButton ? 1 : 0) + (showControls ? 2 : 0)) -
-        fixedWidth
-      : 0;
-    const itemSize = `${otherWidth ? otherWidth / length : MAX_TAB_SIZE}px`;
-    return Array.from<string>({ length }).fill(itemSize);
-  }, [containerWidth, width, otherTabs, showControls]);
-
-  useEffect(
-    () => debounceSetShowControls(showControlsDebounced),
-    [showControlsDebounced],
-  );
-
-  useLayoutEffect(() => {
-    setShowControlsDebounced(
-      (fixedTabsRef.current?.scrollWidth ?? 0) +
-        (otherTabsRef.current?.scrollWidth ?? 0) >
-        containerWidth - controlSize * 1 && fitMode !== 'scroll',
-    );
-  }, [width, fixedTabs.length, otherTabs.length, fitMode]);
 
   const navigate = (type: 'next' | 'prev') => {
     const container = wrapperRef.current;
@@ -107,6 +79,56 @@ export const useBookmarkTabs = <ITEM>(props: UseBookmarkTabsProps<ITEM>) => {
     }
   };
 
+  useLayoutEffect(() => {
+    const refs = [
+      containerRef,
+      fixedTabsRef,
+      wrapperRef,
+      otherTabsRef,
+      controlsRef,
+    ];
+    const resizeObserver = new ResizeObserver(() => {
+      const containerWidth = containerRef.current?.offsetWidth ?? 0;
+      const fixedWidth = fixedTabsRef.current?.offsetWidth ?? 0;
+
+      const showControls =
+        (fixedTabsRef.current?.scrollWidth ?? 0) +
+          (otherTabsRef.current?.scrollWidth ?? 0) >
+          containerWidth - (addButtonRef.current?.offsetWidth ?? 0) &&
+        fitMode !== 'scroll';
+
+      const otherWidth =
+        containerWidth -
+        (controlsRef.current?.offsetWidth ?? 0) -
+        (addButtonRef.current?.offsetWidth ?? 0) -
+        fixedWidth;
+
+      const itemSize = `${
+        otherWidth
+          ? Math.min(otherWidth / otherTabs.length, MAX_TAB_SIZE)
+          : MAX_TAB_SIZE
+      }px`;
+      setSizes(Array.from<string>({ length: otherTabs.length }).fill(itemSize));
+      setShowControls(showControls);
+    });
+
+    for (const ref of refs) {
+      ref.current && resizeObserver.observe(ref.current);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [
+    otherTabs.length,
+    fixedTabs.length,
+    fitMode,
+    wrapperRef.current,
+    containerRef.current,
+    fixedTabsRef.current,
+    controlsRef.current,
+  ]);
+
   return {
     refs,
     containerRef,
@@ -118,5 +140,7 @@ export const useBookmarkTabs = <ITEM>(props: UseBookmarkTabsProps<ITEM>) => {
     otherTabs,
     navigate,
     sizes,
+    controlsRef,
+    addButtonRef,
   };
 };
