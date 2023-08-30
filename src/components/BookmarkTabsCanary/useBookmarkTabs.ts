@@ -11,7 +11,7 @@ import {
 type UseBookmarkTabsProps<ITEM = BookmarkTabsItemDefault> = {
   items: ITEM[];
   getItemFixed: BookmarkTabsPropGetItemFixed<ITEM>;
-  fitMode?: 'scroll' | 'buttons';
+  withNavigationButtons?: boolean;
   withAddButton?: boolean;
   size: BookmarkTabsPropSize;
 };
@@ -19,7 +19,7 @@ type UseBookmarkTabsProps<ITEM = BookmarkTabsItemDefault> = {
 const MAX_TAB_SIZE = 200;
 
 export const useBookmarkTabs = <ITEM>(props: UseBookmarkTabsProps<ITEM>) => {
-  const { items, getItemFixed, fitMode } = props;
+  const { items, getItemFixed, withNavigationButtons } = props;
 
   const refs = useRefs<HTMLElement>(items.length);
 
@@ -95,7 +95,7 @@ export const useBookmarkTabs = <ITEM>(props: UseBookmarkTabsProps<ITEM>) => {
         (fixedTabsRef.current?.scrollWidth ?? 0) +
           (otherTabsRef.current?.scrollWidth ?? 0) >
           containerWidth - (addButtonRef.current?.offsetWidth ?? 0) &&
-        fitMode !== 'scroll';
+        !!withNavigationButtons;
 
       const otherWidth =
         containerWidth -
@@ -122,7 +122,7 @@ export const useBookmarkTabs = <ITEM>(props: UseBookmarkTabsProps<ITEM>) => {
   }, [
     otherTabs.length,
     fixedTabs.length,
-    fitMode,
+    withNavigationButtons,
     wrapperRef.current,
     containerRef.current,
     fixedTabsRef.current,

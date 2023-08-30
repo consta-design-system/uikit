@@ -19,11 +19,6 @@ export type BookmarkTabsPropView = typeof bookmarkTabsPropView[number];
 export const bookmarkTabsPropViewDefault: BookmarkTabsPropView =
   bookmarkTabsPropView[0];
 
-export const bookmarkTabsPropFitMode = ['scroll', 'buttons'] as const;
-export type BookmarkTabsPropFitMode = typeof bookmarkTabsPropFitMode[number];
-export const bookmarkTabsPropFitModeDefault: BookmarkTabsPropFitMode =
-  bookmarkTabsPropFitMode[0];
-
 export type BookmarkTabsItemDefault = {
   key: string | number;
   label?: string | number;
@@ -100,7 +95,7 @@ export type BookmarkTabsProps<ITEM = BookmarkTabsItemDefault> =
       getItemRef?: BookmarkTabsPropGetItemRef<ITEM>;
       getItemAttributes?: BookmarkTabsPropGetItemAttributes<ITEM>;
       children?: never;
-      fitMode?: BookmarkTabsPropFitMode;
+      withNavigationButtons?: boolean;
       onCreate?: React.MouseEventHandler;
       onRemove?: (item: ITEM, params: { e: React.MouseEvent }) => void;
       onChange?: BookmarkTabsPropOnChange<ITEM>;

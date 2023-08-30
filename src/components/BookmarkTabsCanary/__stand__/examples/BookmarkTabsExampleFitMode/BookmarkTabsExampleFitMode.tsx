@@ -78,7 +78,6 @@ export const BookmarkTabsExampleFitModeScroll = () => {
         style={{
           width: 600,
         }}
-        fitMode="scroll"
         items={items}
         value={value}
         onChange={setValue}
@@ -96,7 +95,7 @@ export const BookmarkTabsExampleFitModeButtons = () => {
         style={{
           width: 600,
         }}
-        fitMode="buttons"
+        withNavigationButtons
         items={items}
         value={value}
         onChange={setValue}

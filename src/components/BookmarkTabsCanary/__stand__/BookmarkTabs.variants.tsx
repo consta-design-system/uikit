@@ -1,4 +1,5 @@
 import { IconGitHub } from '@consta/icons/IconGitHub';
+import { IconMic } from '@consta/icons/IconMic';
 import { useBoolean, useSelect } from '@consta/stand';
 import React, { useState } from 'react';
 
@@ -31,7 +32,7 @@ const Variants = () => {
     bookmarkTabsPropForm,
     bookmarkTabsPropFormDefault,
   );
-  const fitMode = useSelect('fitMode', ['scroll', 'buttons'], 'buttons');
+  const withNavigationButtons = useBoolean('withNavigationButtons');
   const withAddButton = useBoolean('withAddButton', true);
   const withCloseButton = useBoolean('withCloseButton', true);
 
@@ -60,10 +61,10 @@ const Variants = () => {
       size={size}
       form={form}
       value={value}
-      fitMode={fitMode}
+      withNavigationButtons={withNavigationButtons}
       onChange={setValue}
       view={view}
-      getItemRightIcon={() => IconGitHub}
+      getItemRightIcon={() => IconMic}
       onRemove={withCloseButton ? onRemove : undefined}
       onCreate={withAddButton ? onCreate : undefined}
     />

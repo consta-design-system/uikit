@@ -31,8 +31,6 @@ import { BookmarkTabs } from '@consta/uikit/BookmarkTabsCanary';
 - [Внешний вид](#внешний-вид)
 - [Форма](#форма-табов)
 - [Адаптивность](#адаптивность)
-  - [Скролл](#скролл)
-  - [Кнопки](#Кнопки)
 - [Добавление новых табов](#добавление-новых-табов)
 - [Удаление табов](#удаление-табов)
 - [Кастомизация](#кастомизация)
@@ -387,17 +385,17 @@ export const BookmarkTabsExampleForm = () => {
 
 ## Адаптивность
 
-Табы заполняют всю доступную ширину. Если что-то не помещается, появляются кнопки прокрутки либо скролл. Это можно настроить с помощью `fitMode`.
+Табы заполняют всю доступную ширину. Если что-то не помещается, появляется скролл. Появление контролов навигации по табам можно настроить с помощью `withNavigationButtons`.
 
 ### Скролл
 
-Чтобы появилась прокрутка, используйте `fitMode="scroll"` (работает по умолчанию)..
+По умолчанию кнопок нет и если табы не умещаются появляется скролл.
 
 <BookmarkTabsExampleFitModeScroll />
 
 ### Кнопки
 
-Чтобы добавить выпадающий список, используйте `fitMode="buttons"`.
+Чтобы добавить контролы, используйте `withNavigationButtons={true}`.
 
 <BookmarkTabsExampleFitModeButtons />
 
@@ -552,7 +550,7 @@ export const BookmarkTabsExampleRenderItem = () => {
       value={value}
       getItemKey={(item) => item}
       onChange={setValue}
-      getItemFixed={() => false}
+      getItemFаixed={() => false}
       renderItem={({
         item,
         onClick,
@@ -607,11 +605,6 @@ export const bookmarkTabsPropView = ['ghost', 'clear'] as const;
 export type BookmarkTabsPropView = typeof bookmarkTabsPropView[number];
 export const bookmarkTabsPropViewDefault: BookmarkTabsPropView =
   bookmarkTabsPropView[0];
-
-export const bookmarkTabsPropFitMode = ['scroll', 'buttons'] as const;
-export type BookmarkTabsPropFitMode = typeof bookmarkTabsPropFitMode[number];
-export const bookmarkTabsPropFitModeDefault: BookmarkTabsPropFitMode =
-  bookmarkTabsPropFitMode[0];
 
 export type BookmarkTabsItemDefault = {
   key: string | number;
@@ -678,7 +671,7 @@ export type BookmarkTabsPropRenderItem<ITEM> = (
 | [`size?`](#размер-табов)                     | `'s', 'm'`                                              | `'m'`        | Размер компонента                                                     |
 | [`view?`](#внешний-вид)                      | `'ghost', 'clear'`                                      | `'ghost'`    | Внешний вид компонента                                                |
 | [`form?`](#форма-табов)                      | `'brick', 'round'`                                      | `'brick'`    | Форма компонента                                                      |
-| [`fitMode?`](#адаптивность)                  | `'scroll', 'buttons'`                                   | `'scroll'`   | Тип поведения компонента при большом количестве табов                 |
+| [`withNavigationButtons?`](#адаптивность)    | `boolean`                                               | -            | Флаг отображаются ли кнопки навигации по табам                        |
 | `items`                                      | `ITEM[]`                                                | -            | Массив элементов с данными для табов                                  |
 | `value`                                      | `ITEM`, `null`                                          | -            | Значение                                                              |
 | `onChange`                                   | `BookmarkTabsPropOnChange`                              | -            | Действие при выборе элемента                                          |

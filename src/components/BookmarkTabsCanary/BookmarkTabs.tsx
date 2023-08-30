@@ -14,7 +14,6 @@ import { BookmarkTabsTab } from './BookmarkTabsTab';
 import { withDefaultGetters } from './helper';
 import {
   BookmarkTabsComponent,
-  bookmarkTabsPropFitModeDefault,
   bookmarkTabsPropFormDefault,
   BookmarkTabsProps,
   bookmarkTabsPropSizeDefault,
@@ -54,7 +53,7 @@ const BookmarkTabsRender = (
     size = bookmarkTabsPropSizeDefault,
     form = bookmarkTabsPropFormDefault,
     view = bookmarkTabsPropViewDefault,
-    fitMode = bookmarkTabsPropFitModeDefault,
+    withNavigationButtons,
     className,
     id,
     ...otherProps
@@ -83,7 +82,7 @@ const BookmarkTabsRender = (
     items,
     getItemFixed,
     size,
-    fitMode,
+    withNavigationButtons,
     withAddButton: !!onCreate,
   });
 
@@ -97,7 +96,7 @@ const BookmarkTabsRender = (
   ) =>
     renderItemProp({
       item,
-      onClick: (e) => onChange?.(item, { e, id }),
+      onClick: (e) => onChange?.(item, { e }),
       active: getItemActive(item),
       label: getItemLabel(item),
       leftIcon: getItemLeftIcon(item),
@@ -116,7 +115,7 @@ const BookmarkTabsRender = (
 
   return (
     <div
-      className={cnBookmarkTabs({ size, view, form, fitMode }, [className])}
+      className={cnBookmarkTabs({ size, view, form }, [className])}
       ref={useForkRef([ref, containerRef])}
       id={id}
       {...otherProps}

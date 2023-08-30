@@ -24,7 +24,7 @@
   transition: background-color 0.3s, box-shadow 0.3s;
 
   &:hover,
-  &:focus {
+  &:not(.BookmarkTabsTab_active):focus {
     --bookmark-tabs-tab-color: var(--color-control-typo-ghost-hover);
     background-color: var(--color-control-bg-ghost-hover);
   }
