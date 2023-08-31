@@ -23,6 +23,7 @@ import {
   DatePickerExampleTypeMonthRange,
 } from './examples/DatePickerExampleType/DatePickerExampleType';
 import { DatePickerExampleMulti } from './examples/DatePickerExampleMulti/DatePickerExampleMulti';
+import { DatePickerExampleDropdownOpen } from './examples/DatePickerExampleDropdownOpen/DatePickerExampleDropdownOpen';
 import { DatePickerExampleTwoIcons } from './examples/DatePickerExampleTwoFields/DatePickerExampleTwoFields';
 import { DatePickerExampleWithClearButton } from './examples/DatePickerExampleWithClearButton/DatePickerExampleWithClearButton';
 
@@ -47,6 +48,7 @@ import { DatePicker } from '@consta/uikit/DatePicker';
   - [Два поля ввода](#два-поля-ввода-свойства-и-события)
   - [Кнопка для очистки поля](#кнопка-для-очистки-поля)
 - [Дополнительные контролы](#дополнительные-контролы)
+- [Управление состоянием выподающего списка](#управление-состоянием-выподающего-списка)
 - [Обработка ошибок](#обработка-ошибок)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
@@ -443,6 +445,60 @@ export const DatePickerExampleAdditionalControls = () => {
 
 <DatePickerExampleAdditionalControls />
 
+## Управление состоянием выподающего списка
+
+Для управлением состояния выподающего списка используйте следующие свойства:
+
+- `dropdownOpen` - флаг открыт/закрыт
+- `onDropdownOpen` - колбек отрабатывающий каждый раз при открытии/закрытии
+- `ignoreOutsideClicksRefs` - список ссылок на элементы по которым игнорируется клики
+
+```tsx
+const Icon = withAnimateSwitcherHOC({
+  startIcon: IconArrowDown,
+  startDirection: 0,
+  endDirection: 180,
+});
+
+const DatePickerExampleDropdownOpen = () => {
+  const [value, setValue] = useState<Item | null>();
+  const [open, setOpen] = useFlag();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onDropdownOpen = useCallback((open: boolean) => {
+    setOpen.set(open);
+    if (open) {
+      inputRef.current?.focus();
+    }
+  }, []);
+
+  return (
+    <AnimateIconSwitcherProvider active={open}>
+      <FieldGroup>
+        <Button
+          ref={buttonRef}
+          label={open ? 'Закрыть' : 'Открыть'}
+          onClick={setOpen.toggle}
+          iconLeft={Icon}
+          onlyIcon
+        />
+        <DatePicker
+          inputRef={inputRef}
+          placeholder="Выберите вариант"
+          value={value}
+          onChange={({ value }) => setValue(value)}
+          dropdownOpen={open}
+          onDropdownOpen={onDropdownOpen}
+          ignoreOutsideClicksRefs={[buttonRef]}
+        />
+      </FieldGroup>
+    </AnimateIconSwitcherProvider>
+  );
+};
+```
+
+<DatePickerExampleDropdownOpen />
+
 ## Обработка ошибок
 
 Вы можете отследить ошибки, которые могут возникнуть у пользователя при вводе даты,
@@ -633,4 +689,7 @@ type DatePickerPropOnError = (
 | [`renderAdditionalControls?`](##LIBS.LIB.STAND/lib:uikit/stand:components-DateTime-stable) | `DateTimeAdditionalControlRenderProp`                                                                                                                                                                                                                       | -                     | Дополнительные конторолы для выбора даты                                                                                              |
 | `className?`                                                                               | `string`                                                                                                                                                                                                                                                    | -                     | Дополнительный CSS-класс                                                                                                              |
 | `dropdownClassName?`                                                                       | `string`                                                                                                                                                                                                                                                    | -                     | Дополнительный CSS-класс для выпадающего блока                                                                                        |
+| [`onDropdownOpen?`](#управление-состоянием-выподающего-списка)                             | `(open: boolean) => void;`                                                                                                                                                                                                                                  | -                     | Событие срабатывает при открытии списка                                                                                               |
+| [`dropdownOpen?` ](#управление-состоянием-выподающего-списка)                              | `boolean`                                                                                                                                                                                                                                                   | -                     | Состояние открыт/закрыт выподающего списка                                                                                            |
+| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выподающего-списка)                    | `ReadonlyArray<React.RefObject<HTMLElement>>`                                                                                                                                                                                                               | -                     | Ссылки на элементы с которые нужно игнорировать при кликах вне компонента                                                             |
 | `ref?`                                                                                     | `React.Ref<HTMLDivElement>`                                                                                                                                                                                                                                 | -                     | Ссылка на корневой DOM-элемент компонента                                                                                             |

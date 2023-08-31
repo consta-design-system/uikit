@@ -3,7 +3,6 @@ import startOfYear from 'date-fns/startOfYear';
 import React, { forwardRef, useEffect, useRef } from 'react';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { setRef } from '../../../utils/setRef';
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeMonth } from '../DatePickerFieldTypeMonth/DatePickerFieldTypeMonth';
@@ -12,6 +11,7 @@ import {
   datePickerPropDateTimeViewDefault,
   DatePickerTypeComponent,
 } from '../types';
+import { useCalendarVisible } from '../useCalendarVisible';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
@@ -22,17 +22,22 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
       locale,
       dropdownForm,
       dropdownClassName,
-      onFocus,
       currentVisibleDate: currentVisibleDateProp,
       onChangeCurrentVisibleDate,
       renderAdditionalControls,
+      onDropdownOpen,
+      dropdownOpen,
+      ignoreOutsideClicksRefs,
       ...otherProps
     } = props;
 
     const fieldRef = useRef<HTMLDivElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
 
-    const [calendarVisible, setCalendarVisible] = useFlag(false);
+    const [calendarVisible, setCalendarVisible] = useCalendarVisible({
+      dropdownOpen,
+      onDropdownOpen,
+    });
 
     const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
       currentVisibleDate: currentVisibleDateProp,
@@ -43,11 +48,6 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
       onChangeCurrentVisibleDate,
       calendarVisible,
     });
-
-    const onFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
-      onFocus && onFocus(e);
-      setCalendarVisible.on();
-    };
 
     useEffect(() => {
       if (ref) {
@@ -76,7 +76,11 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
 
     useClickOutside({
       isActive: calendarVisible,
-      ignoreClicksInsideRefs: [fieldRef, calendarRef],
+      ignoreClicksInsideRefs: [
+        fieldRef,
+        calendarRef,
+        ...(ignoreOutsideClicksRefs ?? []),
+      ],
       handler: setCalendarVisible.off,
     });
 
@@ -85,7 +89,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
         <DatePickerFieldTypeMonth
           {...otherProps}
           ref={fieldRef}
-          onFocus={onFocusHandler}
+          onClick={setCalendarVisible.on}
         />
         <DatePickerDropdown
           ref={calendarRef}

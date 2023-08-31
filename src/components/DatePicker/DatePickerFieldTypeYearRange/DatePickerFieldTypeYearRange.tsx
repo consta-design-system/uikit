@@ -42,8 +42,10 @@ export const DatePickerFieldTypeYearRange = forwardRef<
     separator,
     minDate,
     maxDate,
+    startFieldOnClick,
     startFieldOnBlur,
     startFieldOnFocus,
+    endFieldOnClick,
     endFieldOnBlur,
     endFieldOnFocus,
     startFieldRef,
@@ -118,6 +120,7 @@ export const DatePickerFieldTypeYearRange = forwardRef<
             rightSide={startFieldRightSide}
             form={getFormForStart(form)}
             value={value?.[0]}
+            onClick={startFieldOnClick}
             onChange={handleStartDateChange}
             onFocus={startFieldOnFocus}
             onBlur={startFieldOnBlur}
@@ -133,6 +136,7 @@ export const DatePickerFieldTypeYearRange = forwardRef<
             rightSide={endFieldRightSide}
             form={getFormForEnd(form)}
             value={value?.[1]}
+            onClick={endFieldOnClick}
             onChange={handleEndDateChange}
             onFocus={endFieldOnFocus}
             onBlur={endFieldOnBlur}

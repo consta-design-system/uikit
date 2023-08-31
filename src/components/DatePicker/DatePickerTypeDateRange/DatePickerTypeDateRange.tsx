@@ -9,7 +9,6 @@ import React, {
 } from 'react';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import {
   DatePickerDropdown,
@@ -25,6 +24,7 @@ import {
   datePickerPropDateTimeViewDefault,
   DatePickerTypeComponent,
 } from '../types';
+import { useCalendarVisible } from '../useCalendarVisible';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
@@ -44,6 +44,9 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
       inputRef,
       dropdownClassName,
       name,
+      onDropdownOpen,
+      dropdownOpen,
+      ignoreOutsideClicksRefs,
       ...fieldProps
     } = props;
 
@@ -75,7 +78,10 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
       }
     };
 
-    const [calendarVisible, setCalendarVisible] = useFlag(false);
+    const [calendarVisible, setCalendarVisible] = useCalendarVisible({
+      dropdownOpen,
+      onDropdownOpen,
+    });
 
     const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
       currentVisibleDate: currentVisibleDateProp,
@@ -95,13 +101,11 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
 
     const startFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
       setFieldFocused('start');
-      setCalendarVisible.on();
       Array.isArray(onFocus) ? onFocus[0]?.(e) : onFocus?.(e);
     };
 
     const endFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
       setFieldFocused('end');
-      setCalendarVisible.on();
       Array.isArray(onFocus) ? onFocus[1]?.(e) : onFocus?.(e);
     };
 
@@ -148,7 +152,12 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
 
     useClickOutside({
       isActive: calendarVisible,
-      ignoreClicksInsideRefs: [startFieldRef, endFieldRef, calendarRef],
+      ignoreClicksInsideRefs: [
+        startFieldRef,
+        endFieldRef,
+        calendarRef,
+        ...(ignoreOutsideClicksRefs ?? []),
+      ],
       handler: useCallback(() => {
         setFieldFocused(false);
         setCalendarVisible.off();
@@ -177,6 +186,8 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
             Array.isArray(rightSide) ? rightSide?.[1] : rightSide
           }
           startFieldOnBlur={startFieldOnBlurHandler}
+          startFieldOnClick={setCalendarVisible.on}
+          endFieldOnClick={setCalendarVisible.on}
           endFieldOnBlur={endFieldOnBlurHandler}
           startFocused={startFocused}
           endFocused={endFocused}
