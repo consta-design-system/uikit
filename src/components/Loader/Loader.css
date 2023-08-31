@@ -4,55 +4,40 @@
       --loaderBackgroundColor,
       var(--color-control-bg-primary)
     );
-  position: relative;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: calc(100% - var(--loader-size));
-  transform: translate(-50%, -50%);
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: calc(50% - (var(--loader-size) * 0.5));
-    left: calc(50% - (var(--loader-size) * 2.5));
-    width: var(--loader-size);
-    height: var(--loader-size);
-    background: var(--backgroundColor);
-    border-radius: 50%;
-    animation: loader 1s ease infinite;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: calc(50% - (var(--loader-size) * 0.5));
-    left: calc(50% + (var(--loader-size) * 1.5));
-    width: var(--loader-size);
-    height: var(--loader-size);
-    background: var(--backgroundColor);
-    border-radius: 50%;
-    animation: loader 1s -0.36s ease infinite;
-  }
+  display: inline-flex;
+  gap: var(--loader-gap);
 
   &-Dot {
-    position: absolute;
-    top: calc(50% - (var(--loader-size) * 0.5));
-    left: calc(50% - (var(--loader-size) * 0.5));
     width: var(--loader-size);
     height: var(--loader-size);
     background: var(--backgroundColor);
     border-radius: 50%;
-    animation: loader 1s -0.18s ease infinite;
+    animation: var(--loader-dot-animation);
+
+    &_side {
+      &_left {
+        --loader-dot-animation: loader 1s ease infinite;
+      }
+
+      &_center {
+        --loader-dot-animation: loader 1s -0.18s ease infinite;
+      }
+
+      &_right {
+        --loader-dot-animation: loader 1s -0.36s ease infinite;
+      }
+    }
   }
 
   &_size {
     &_s {
-      --loader-size: 4px;
+      --loader-size: var(--space-2xs);
+      --loader-gap: var(--space-2xs);
     }
 
     &_m {
-      --loader-size: 8px;
+      --loader-size: var(--space-xs);
+      --loader-gap: calc(var(--space-xs) - var(--space-3xs));
     }
   }
 }

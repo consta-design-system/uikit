@@ -18,6 +18,8 @@ export type LoaderProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
 export const cnLoader = cn('Loader');
 
+const sides = ['left', 'center', 'right'];
+
 export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
   (props, ref) => {
     const { className, size = loaderPropSizeDefault, ...otherProps } = props;
@@ -27,7 +29,12 @@ export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
         ref={ref}
         className={cnLoader({ size }, [className])}
       >
-        <div className={cnLoader('Dot')} />
+        {sides.map((side, index) => (
+          <div
+            key={cnLoader('Dot', { index })}
+            className={cnLoader('Dot', { side })}
+          />
+        ))}
       </div>
     );
   },
