@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { BookmarkTabs } from '##/components/BookmarkTabsCanary/BookmarkTabs';
+import { BookmarkTabs } from '##/components/BookmarkTabsCanary';
 import {
   BookmarkTabsItemDefault,
   BookmarkTabsPropForm,

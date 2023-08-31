@@ -5,7 +5,7 @@ import { IconRing } from '@consta/icons/IconRing';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { BookmarkTabs } from '##/components/BookmarkTabsCanary/BookmarkTabs';
+import { BookmarkTabs } from '##/components/BookmarkTabsCanary';
 
 type Item = {
   label: string;

@@ -2,8 +2,10 @@ import { IconGitHub } from '@consta/icons/IconGitHub';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { BookmarkTabs } from '##/components/BookmarkTabsCanary/BookmarkTabs';
-import { BookmarkTabsItemDefault } from '##/components/BookmarkTabsCanary/types';
+import {
+  BookmarkTabs,
+  BookmarkTabsItemDefault,
+} from '##/components/BookmarkTabsCanary';
 
 export const items: BookmarkTabsItemDefault[] = [
   {

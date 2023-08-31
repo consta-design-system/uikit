@@ -7,7 +7,7 @@ import { Button } from '##/components/Button';
 import { Text } from '##/components/Text';
 import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixSpace } from '##/mixs/MixSpace';
-import { cn } from '##/utils/bem';
+import { cnCanary as cn } from '##/utils/bem';
 
 import { BookmarkTabsTabComponent, BookmarkTabsTabProps } from '../types';
 

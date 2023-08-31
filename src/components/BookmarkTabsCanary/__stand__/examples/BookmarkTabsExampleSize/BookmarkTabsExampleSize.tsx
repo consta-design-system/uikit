@@ -1,11 +1,11 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { BookmarkTabs } from '##/components/BookmarkTabsCanary/BookmarkTabs';
 import {
+  BookmarkTabs,
   BookmarkTabsItemDefault,
   BookmarkTabsPropSize,
-} from '##/components/BookmarkTabsCanary/types';
+} from '##/components/BookmarkTabsCanary';
 
 const items: BookmarkTabsItemDefault[] = [
   {
