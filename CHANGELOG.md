@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.26.1 (31/08/2023)
+- [fix(BookmarkTabs): reexport fix (#3237)](https://github.com/consta-design-system/uikit/commit/e87278371c3ba513d2efa5b674262be6d9a275c4) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.26.0 (30/08/2023)
 Добавлен новый компонент `BookmarkTabs` - табы в виде вкладок
 
@@ -410,13 +415,3 @@
 
 ## v4.6.1 (09/12/2022)
 - [docs: adaptive examples (#2817)](https://github.com/consta-design-system/uikit/commit/4778c61861ab1290590fe9b46855f7a8a15792f6) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.6.0 (07/12/2022)
-Самое важное:
-- В `DatePicker` добавили свойство `dropdownClassName` для установки произвольного класса всплывающего окна.
-
----
-
-- [feat(DatePicker): add prop dropdownClassName (#2810)](https://github.com/consta-design-system/uikit/commit/469e9d33eb98dc13e176a0c44dcd7868a6826786) - [@N1MBER](https://github.com/N1MBER)
