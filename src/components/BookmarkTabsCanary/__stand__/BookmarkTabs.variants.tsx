@@ -3,7 +3,7 @@ import { IconMic } from '@consta/icons/IconMic';
 import { useBoolean, useSelect } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { BookmarkTabs } from '##/components/BookmarkTabsCanary/BookmarkTabs';
+import { BookmarkTabs } from '##/components/BookmarkTabsCanary';
 
 import { items } from '../__mocks__/mock.data';
 import {

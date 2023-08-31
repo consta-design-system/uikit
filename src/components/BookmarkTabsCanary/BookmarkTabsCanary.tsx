@@ -7,7 +7,7 @@ import React, { forwardRef } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
-import { cn } from '##/utils/bem';
+import { cnCanary as cn } from '##/utils/bem';
 
 import { Button } from '../Button';
 import { BookmarkTabsTab } from './BookmarkTabsTab';

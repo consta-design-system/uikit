@@ -1,4 +1,4 @@
-.BookmarkTabs {
+.canary--BookmarkTabs {
   display: flex;
   width: 100%;
   max-width: 100%;
@@ -29,10 +29,10 @@
     max-width: var(--bookmarks-list-width);
     height: var(--bookmark-tabs-tab-size);
 
-    & > .BookmarkTabsTab {
+    & > .canary--BookmarkTabsTab {
       flex: 1;
 
-      &:not(.BookmarkTabsTab_form_round.BookmarkTabsTab_active):not(.BookmarkTabsTab_form_round:has(+ .BookmarkTabsTab_active))::after {
+      &:not(.canary--BookmarkTabsTab_form_round.canary--BookmarkTabsTab_active):not(.canary--BookmarkTabsTab_form_round:has(+ .canary--BookmarkTabsTab_active))::after {
         content: '';
         position: absolute;
         top: var(--bookmark-divider-top);
@@ -43,15 +43,15 @@
       }
     }
 
-    &:has(+ .BookmarkTabs-List
-  > .BookmarkTabsTab:first-child.BookmarkTabsTab_active) {
-      & > .BookmarkTabsTab_form_round:last-child::after {
+    &:has(+ .canary--BookmarkTabs-List
+  > .canary--BookmarkTabsTab:first-child.canary--BookmarkTabsTab_active) {
+      & > .canary--BookmarkTabsTab_form_round:last-child::after {
         display: none;
       }
     }
 
     &:last-child {
-      & > .BookmarkTabsTab:last-child::after {
+      & > .canary--BookmarkTabsTab:last-child::after {
         display: none;
       }
     }

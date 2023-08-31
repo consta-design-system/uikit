@@ -5,8 +5,10 @@ import { IconRing } from '@consta/icons/IconRing';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { BookmarkTabs } from '##/components/BookmarkTabsCanary/BookmarkTabs';
-import { BookmarkTabsItemDefault } from '##/components/BookmarkTabsCanary/types';
+import {
+  BookmarkTabs,
+  BookmarkTabsItemDefault,
+} from '##/components/BookmarkTabsCanary';
 
 const items: BookmarkTabsItemDefault[] = [
   {
