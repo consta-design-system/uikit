@@ -12,6 +12,7 @@ type UseKeysProps = {
   ref?: React.RefObject<HTMLElement>;
   keys?: KeyHandlers;
   isActive?: boolean;
+  eventType?: 'keypress' | 'keydown' | 'keyup';
 };
 
 const getKeyHandler = (keys: KeyHandlers) => {
@@ -21,7 +22,7 @@ const getKeyHandler = (keys: KeyHandlers) => {
 };
 
 export const useKeysRef = (params: UseKeysProps) => {
-  const { ref, keys, isActive = true } = params;
+  const { ref, keys, isActive = true, eventType = 'keydown' } = params;
 
   const onKeyDown = useCallback(
     (e: Event) => {
@@ -34,10 +35,10 @@ export const useKeysRef = (params: UseKeysProps) => {
   );
 
   useEffect(() => {
-    ref?.current?.addEventListener('keydown', onKeyDown);
+    ref?.current?.addEventListener(eventType, onKeyDown);
 
     return () => {
-      ref?.current?.removeEventListener('keydown', onKeyDown);
+      ref?.current?.removeEventListener(eventType, onKeyDown);
     };
-  }, [ref, keys, isActive]);
+  }, [ref, keys, isActive, eventType]);
 };
