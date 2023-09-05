@@ -5,6 +5,7 @@
       var(--color-control-bg-primary)
     );
   display: inline-flex;
+  padding: calc(var(--loader-size) * 0.25);
   gap: var(--loader-gap);
 
   &-Dot {
