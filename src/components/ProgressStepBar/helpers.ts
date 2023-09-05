@@ -209,7 +209,7 @@ export const calculateLines = (
       size =
         direction === 'horizontal'
           ? firstSize[0] / 2 + secondSize[0]
-          : firstSize[1];
+          : firstSize[1] + 2;
     } else {
       size =
         direction === 'horizontal'
