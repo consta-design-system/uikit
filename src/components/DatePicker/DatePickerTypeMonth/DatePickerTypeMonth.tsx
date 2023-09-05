@@ -17,6 +17,7 @@ import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
   (props, ref) => {
     const {
+      onChange,
       events,
       dateTimeView = datePickerPropDateTimeViewDefault,
       locale,
@@ -91,6 +92,10 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
         <DatePickerFieldTypeMonth
           {...otherProps}
           ref={fieldRef}
+          onChange={(date) => {
+            onChange?.(date);
+            setCalendarVisible.on();
+          }}
           inputRef={inputRef}
           onClick={setCalendarVisible.on}
         />

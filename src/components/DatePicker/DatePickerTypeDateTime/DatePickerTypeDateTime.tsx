@@ -21,6 +21,7 @@ import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
   forwardRef((props, ref) => {
     const {
+      onChange,
       events,
       dateTimeView = datePickerPropDateTimeViewDefault,
       locale,
@@ -107,6 +108,10 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
         <DatePickerFieldTypeDateTime
           {...otherProps}
           ref={fieldRef}
+          onChange={(date) => {
+            onChange?.(date);
+            setCalendarVisible.on();
+          }}
           inputRef={inputRef}
           onClick={setCalendarVisible.on}
           multiplicityHours={multiplicityHours}
