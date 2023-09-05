@@ -2,6 +2,8 @@ import './SliderPoint.css';
 
 import React, { useEffect, useRef } from 'react';
 
+import { Direction } from '##/components/Popover';
+
 import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
@@ -30,6 +32,16 @@ const getTooltipPosition = (
 
   return { x: 0, y: 0 };
 };
+
+const defaultPossibleDirections: Direction[] = [
+  'leftCenter',
+  'rightCenter',
+  'downCenter',
+  'leftDown',
+  'rightDown',
+  'upCenter',
+];
+
 export const SliderPoint = (props: SliderPointProps) => {
   const {
     hovered,
@@ -47,6 +59,8 @@ export const SliderPoint = (props: SliderPointProps) => {
     tooltipFormatter,
     buttonLabel,
     onFocus,
+    tooltipDirection = 'downCenter',
+    tooltipPossibleDirections = defaultPossibleDirections,
     tooltipZIndex,
     ...otherProps
   } = props;
@@ -140,15 +154,8 @@ export const SliderPoint = (props: SliderPointProps) => {
           <Tooltip
             position={tooltipPosition}
             className={cnSliderPoint('Tooltip')}
-            direction="downCenter"
-            possibleDirections={[
-              'leftCenter',
-              'rightCenter',
-              'downCenter',
-              'leftDown',
-              'rightDown',
-              'upCenter',
-            ]}
+            direction={tooltipDirection}
+            possibleDirections={tooltipPossibleDirections}
             style={{ zIndex: tooltipZIndex }}
             offset={10}
           >

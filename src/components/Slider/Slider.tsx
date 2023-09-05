@@ -64,6 +64,8 @@ const SliderRender = <RANGE extends boolean = false>(
     withTooltip,
     range = false,
     label,
+    tooltipDirection,
+    tooltipPossibleDirections,
     labelIcon,
     status,
     caption,
@@ -178,18 +180,6 @@ const SliderRender = <RANGE extends boolean = false>(
             view={view}
           />
           {currentValue.map((val, index) => {
-            // let isActive = true;
-            // if (
-            //   currentValue.length > 1 &&
-            //   currentValue[0] === currentValue[1]
-            // ) {
-            //   if (index === 0 && val === min) {
-            //     isActive = false;
-            //   }
-            //   if (index === 1 && val === max) {
-            //     isActive = false;
-            //   }
-            // }
             const topLayer =
               currentValue.length > 1 &&
               currentValue[0] === currentValue[1] &&
@@ -202,6 +192,8 @@ const SliderRender = <RANGE extends boolean = false>(
                 popoverPosition={popoverPosition[index]}
                 onKeyPress={onKeyPress}
                 onFocus={onFocus}
+                tooltipDirection={tooltipDirection}
+                tooltipPossibleDirections={tooltipPossibleDirections}
                 handlePress={handlePress}
                 disabled={disabled}
                 active={topLayer}
