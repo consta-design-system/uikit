@@ -45,10 +45,12 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
 
     const fieldRef = useRef<HTMLDivElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      startRef: inputRef,
     });
 
     useEffect(() => {
@@ -72,6 +74,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
         <DatePickerFieldTypeTime
           {...otherProps}
           ref={fieldRef}
+          inputRef={inputRef}
           onClick={setCalendarVisible.on}
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}

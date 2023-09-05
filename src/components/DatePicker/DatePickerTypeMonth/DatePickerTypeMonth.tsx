@@ -33,10 +33,12 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
 
     const fieldRef = useRef<HTMLDivElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      startRef: inputRef,
     });
 
     const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
@@ -89,6 +91,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
         <DatePickerFieldTypeMonth
           {...otherProps}
           ref={fieldRef}
+          inputRef={inputRef}
           onClick={setCalendarVisible.on}
         />
         <DatePickerDropdown

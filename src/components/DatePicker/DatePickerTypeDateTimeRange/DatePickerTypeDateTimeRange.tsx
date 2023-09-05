@@ -83,6 +83,8 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      startRef: startFieldInputRef,
+      endRef: endFieldInputRef,
     });
 
     const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({

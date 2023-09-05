@@ -26,16 +26,19 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef(
       renderAdditionalControls,
       onDropdownOpen,
       dropdownOpen,
+      disabled,
       ignoreOutsideClicksRefs,
       ...otherProps
     } = props;
 
     const fieldRef = useRef<HTMLDivElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      startRef: inputRef,
     });
 
     const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
@@ -89,6 +92,8 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef(
         <DatePickerFieldTypeYear
           {...otherProps}
           ref={fieldRef}
+          inputRef={inputRef}
+          disabled={disabled}
           onClick={setCalendarVisible.on}
         />
         <DatePickerDropdown
