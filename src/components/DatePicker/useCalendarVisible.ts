@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { useFlag } from '##/hooks/useFlag';
-import { KeyHandler, useKeysRef } from '##/hooks/useKeysRef';
+import { KeyHandlers, useKeysRef } from '##/hooks/useKeysRef';
 
 type UseCalendarVisibleParams = {
   onDropdownOpen?: (isOpen: boolean) => void;
@@ -20,9 +20,9 @@ export const useCalendarVisible = (
 
   const [calendarVisible, setCalendarVisible] = useFlag(false);
 
-  const ArrowHandler: KeyHandler = (_, e) => {
+  const ArrowHandler = (e: KeyboardEvent) => {
     e.preventDefault();
-    !disabled && setCalendarVisible.on();
+    setCalendarVisible.on();
   };
 
   const Escape = () => {
@@ -33,14 +33,14 @@ export const useCalendarVisible = (
     !disabled && setCalendarVisible.on();
   };
 
-  const Tab: KeyHandler = (_, e): void => {
+  const Tab = (e: KeyboardEvent) => {
     if (calendarVisible) {
       e.preventDefault();
       setCalendarVisible.off();
     }
   };
 
-  const handlers = {
+  const keys: KeyHandlers = {
     ArrowUp: ArrowHandler,
     ArrowDown: ArrowHandler,
     PageUp: ArrowHandler,
@@ -52,8 +52,8 @@ export const useCalendarVisible = (
     Tab,
   };
 
-  useKeysRef(startRef, handlers);
-  useKeysRef(endRef, handlers);
+  useKeysRef({ ref: startRef, keys, isActive: !disabled });
+  useKeysRef({ ref: endRef, keys, isActive: !disabled });
 
   useEffect(() => {
     !disabled && onDropdownOpen?.(calendarVisible);
