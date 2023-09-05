@@ -1,17 +1,15 @@
-import './LoaderExampleSize.css';
-
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cn } from '##/utils/bem';
-
 import { Loader } from '../../../LoaderCanary';
+import { LoaderPropSize } from '../../../types';
 
-const cnLoaderExampleSize = cn('LoaderExampleSize');
+const sizes: LoaderPropSize[] = ['s', 'm'];
 
 export const LoaderExampleSize = () => (
-  <Example className={cnLoaderExampleSize()}>
-    <Loader size="m" />
-    <Loader size="s" />
-  </Example>
+  <Example
+    items={sizes}
+    getItemNode={(size) => <Loader size={size} />}
+    getItemDescription={(size) => `size="${size}"`}
+  />
 );

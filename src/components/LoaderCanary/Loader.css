@@ -1,4 +1,4 @@
-.Loader {
+.canary--Loader {
   --backgroundColor:
     var(
       --loaderBackgroundColor,

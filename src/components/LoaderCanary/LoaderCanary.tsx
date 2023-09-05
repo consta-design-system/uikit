@@ -2,10 +2,10 @@ import './Loader.css';
 
 import React from 'react';
 
-import { cn } from '../../utils/bem';
+import { cnCanary } from '../../utils/bem';
 import { LoaderProps, loaderPropSizeDefault } from './types';
 
-export const cnLoader = cn('Loader');
+export const cnLoader = cnCanary('Loader');
 
 const sides = ['left', 'center', 'right'];
 
