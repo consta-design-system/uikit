@@ -195,7 +195,7 @@ export const calculateLines = (
   direction: PropDirection,
 ) => {
   const sizes: number[] = [];
-  for (let i = 0; i < refs.length - 2; i++) {
+  for (let i = 0; i < refs.length - 1; i++) {
     const ref = refs[i];
     const firstSize = getRefSize(ref);
     const secondSize = getRefSize(refs[i + 1]);
