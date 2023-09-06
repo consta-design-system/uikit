@@ -1,4 +1,5 @@
 import { IconComponent } from '@consta/icons/Icon';
+import React from 'react';
 
 import { DateRange } from '../../../utils/types/Date';
 import { DatePickerFieldTypeDateProps } from '../DatePickerFieldTypeDate/helpers';
@@ -32,6 +33,8 @@ export type DatePickerFieldTypeDateRangeProps = Omit<
   endFieldRef?: React.Ref<HTMLDivElement>;
   startFieldOnFocus?: React.FocusEventHandler<HTMLElement>;
   endFieldOnFocus?: React.FocusEventHandler<HTMLElement>;
+  startFieldOnClick?: React.MouseEventHandler<HTMLElement>;
+  endFieldOnClick?: React.MouseEventHandler<HTMLElement>;
   startFieldOnBlur?: React.FocusEventHandler<HTMLElement>;
   endFieldOnBlur?: React.FocusEventHandler<HTMLElement>;
   startFocused?: boolean;

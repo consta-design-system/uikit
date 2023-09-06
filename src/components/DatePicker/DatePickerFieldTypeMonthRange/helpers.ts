@@ -32,6 +32,8 @@ export type DatePickerFieldTypeMonthRangeProps = Omit<
   endFieldRef?: React.Ref<HTMLDivElement>;
   startFieldOnFocus?: React.FocusEventHandler<HTMLElement>;
   endFieldOnFocus?: React.FocusEventHandler<HTMLElement>;
+  startFieldOnClick?: React.MouseEventHandler<HTMLElement>;
+  endFieldOnClick?: React.MouseEventHandler<HTMLElement>;
   startFieldOnBlur?: React.FocusEventHandler<HTMLElement>;
   endFieldOnBlur?: React.FocusEventHandler<HTMLElement>;
   startFocused?: boolean;

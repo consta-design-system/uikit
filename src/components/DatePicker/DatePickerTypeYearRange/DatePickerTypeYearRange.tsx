@@ -2,7 +2,6 @@ import { addYears, startOfDecade } from 'date-fns';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
 import {
   DatePickerDropdown,
@@ -14,11 +13,13 @@ import {
   datePickerPropDateTimeViewDefault,
   DatePickerTypeComponent,
 } from '../types';
+import { useCalendarVisible } from '../useCalendarVisible';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
 export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
   forwardRef((props, ref) => {
     const {
+      onChange,
       events,
       dateTimeView = datePickerPropDateTimeViewDefault,
       locale,
@@ -33,6 +34,9 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
       renderAdditionalControls,
       inputRef,
       name,
+      onDropdownOpen,
+      dropdownOpen,
+      ignoreOutsideClicksRefs,
       ...fieldProps
     } = props;
 
@@ -64,7 +68,12 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
       }
     };
 
-    const [calendarVisible, setCalendarVisible] = useFlag(false);
+    const [calendarVisible, setCalendarVisible] = useCalendarVisible({
+      dropdownOpen,
+      onDropdownOpen,
+      startRef: startFieldInputRef,
+      endRef: endFieldInputRef,
+    });
 
     const [currentVisibleDate, setCurrentVisibleDate] = useCurrentVisibleDate({
       currentVisibleDate: currentVisibleDateProp,
@@ -84,13 +93,11 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
 
     const startFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
       setFieldFocused('start');
-      setCalendarVisible.on();
       Array.isArray(onFocus) ? onFocus[0]?.(e) : onFocus?.(e);
     };
 
     const endFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
       setFieldFocused('end');
-      setCalendarVisible.on();
       Array.isArray(onFocus) ? onFocus[1]?.(e) : onFocus?.(e);
     };
 
@@ -137,7 +144,12 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
 
     useClickOutside({
       isActive: calendarVisible,
-      ignoreClicksInsideRefs: [startFieldRef, endFieldRef, calendarRef],
+      ignoreClicksInsideRefs: [
+        startFieldRef,
+        endFieldRef,
+        calendarRef,
+        ...(ignoreOutsideClicksRefs ?? []),
+      ],
       handler: () => {
         setFieldFocused(false);
         setCalendarVisible.off();
@@ -151,6 +163,10 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
           ref={ref}
           startFieldRef={startFieldRef}
           endFieldRef={endFieldRef}
+          onChange={(date) => {
+            onChange?.(date);
+            setCalendarVisible.on();
+          }}
           startFieldInputRef={useForkRef([startFieldInputRef, inputRef?.[0]])}
           endFieldInputRef={useForkRef([endFieldInputRef, inputRef?.[1]])}
           startFieldOnFocus={startFieldOnFocusHandler}
@@ -169,6 +185,8 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
           endFieldOnBlur={endFieldOnBlurHandler}
           startFocused={startFocused}
           endFocused={endFocused}
+          startFieldOnClick={setCalendarVisible.on}
+          endFieldOnClick={setCalendarVisible.on}
           startFieldName={Array.isArray(name) ? name[0] : `${name}_start`}
           endFieldName={Array.isArray(name) ? name[1] : `${name}_end`}
         />
