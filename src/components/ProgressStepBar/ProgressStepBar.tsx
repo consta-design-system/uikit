@@ -6,6 +6,7 @@ import React, {
   createRef,
   forwardRef,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -63,6 +64,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
   const [visibleIndex, setVisibleIndex] = useState<number>(
     activeStepIndex || 0,
   );
+  const [lines, setLines] = useState<Line[]>([]);
 
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -78,9 +80,10 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     [steps.length],
   );
 
-  const lines = useMemo(() => {
+  useLayoutEffect(() => {
     const linesArray: Line[] = [];
     const sizes = calculateLines(refs, direction);
+
     steps.forEach((step, index) => {
       if (index !== steps.length - 1)
         linesArray.push({
@@ -88,7 +91,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
           size: sizes[index] ?? 0,
         });
     });
-    return linesArray;
+    setLines(linesArray);
   }, [activeStepIndex, steps, direction, size, width, height]);
 
   useEffect(() => {
