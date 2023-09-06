@@ -16,27 +16,91 @@
 
   &_size {
     &_xs {
-      --badge-size: var(--control-box-size-m);
-      --badge-text-size: calc(var(--size-text-m) / 2);
-      padding: 0 var(--space-2xs);
+      &:not(.Badge_counter.Badge_minified) {
+        &.Badge_form_round {
+          padding: 0 var(--space-2xs);
+        }
+
+        &.Badge_form_default {
+          padding: 0 var(--space-xs);
+        }
+      }
+
+      &:not(.Badge_minified) {
+        --badge-size: var(--control-box-size-m);
+        --badge-text-size: calc(var(--size-text-m) / 2);
+      }
+
+      &.Badge_minified {
+        --badge-size: 10px;
+        --badge-border-size: 2px;
+      }
     }
 
     &_s {
-      --badge-size: var(--control-box-size-l);
-      --badge-text-size: var(--size-text-2xs);
-      padding: 0 var(--space-2xs);
+      &:not(.Badge_counter.Badge_minified) {
+        &.Badge_form_round {
+          padding: 0 var(--space-2xs);
+        }
+
+        &.Badge_form_default {
+          padding: 0 var(--space-xs);
+        }
+      }
+
+      &:not(.Badge_minified) {
+        --badge-size: var(--control-box-size-l);
+        --badge-text-size: var(--size-text-2xs);
+      }
+
+      &.Badge_minified {
+        --badge-size: 16px;
+        --badge-border-size: 3px;
+      }
     }
 
     &_m {
-      --badge-size: var(--control-height-xs);
-      --badge-text-size: var(--size-text-xs);
-      padding: 0 var(--space-xs);
+      &:not(.Badge_counter.Badge_minified) {
+        &.Badge_form_round {
+          padding: 0 var(--space-s);
+        }
+
+        &.Badge_form_default {
+          padding: 0 var(--space-xs);
+        }
+      }
+
+      &:not(.Badge_minified) {
+        --badge-size: var(--control-height-xs);
+        --badge-text-size: var(--size-text-xs);
+      }
+
+      &.Badge_minified {
+        --badge-size: 24px;
+        --badge-border-size: 4px;
+      }
     }
 
     &_l {
-      --badge-size: var(--control-height-s);
-      --badge-text-size: var(--size-text-s);
-      padding: 0 var(--space-xs);
+      &:not(.Badge_counter.Badge_minified) {
+        &.Badge_form_round {
+          padding: 0 var(--space-m);
+        }
+
+        &.Badge_form_default {
+          padding: 0 var(--space-xs);
+        }
+      }
+
+      &:not(.Badge_minified) {
+        --badge-size: var(--control-height-s);
+        --badge-text-size: var(--size-text-s);
+      }
+
+      &.Badge_minified {
+        --badge-size: 32px;
+        --badge-border-size: 5px;
+      }
     }
   }
 
@@ -47,22 +111,6 @@
 
     &_round {
       border-radius: 99em;
-
-      &.Badge_size_xs {
-        padding: 0 var(--space-xs);
-      }
-
-      &.Badge_size_s {
-        padding: 0 var(--space-xs);
-      }
-
-      &.Badge_size_m {
-        padding: 0 var(--space-s);
-      }
-
-      &.Badge_size_l {
-        padding: 0 var(--space-m);
-      }
     }
   }
 
@@ -102,10 +150,8 @@
       color: var(--color-typo-primary);
       background: var(--badge-bg-color);
 
-      &.Badge_status {
-        &_system {
-          color: var(--color-typo-secondary);
-        }
+      &.Badge_status_system {
+        color: var(--color-typo-secondary);
       }
     }
 
@@ -113,50 +159,27 @@
       color: var(--badge-text-color);
       box-shadow: inset 0 0 0 1px var(--badge-border-color);
 
-      &.Badge_status {
-        &_system {
-          --badge-text-color: var(--color-typo-system);
-        }
+      &.Badge_status_system {
+        --badge-text-color: var(--color-typo-system);
       }
     }
   }
 
   &_minified {
-    --badge-text-size: 0;
+    width: var(--badge-size);
+    height: var(--badge-size);
+    padding: 0;
     background: transparent;
+    border: var(--badge-border-size) solid transparent;
     border-radius: 50%;
+    box-shadow: inset 0 0 0 var(--badge-size) var(--badge-bg-color);
+  }
 
-    &.Badge_size_xs {
-      width: 10px;
-      height: 10px;
-      padding: 0;
-      border: 2px solid transparent;
-      box-shadow: inset 0 0 0 10px var(--badge-bg-color);
-    }
-
-    &.Badge_size_s {
-      width: 16px;
-      height: 16px;
-      padding: 0;
-      border: 3px solid transparent;
-      box-shadow: inset 0 0 0 10px var(--badge-bg-color);
-    }
-
-    &.Badge_size_m {
-      width: 24px;
-      height: 24px;
-      padding: 0;
-      border: 4px solid transparent;
-      box-shadow: inset 0 0 0 12px var(--badge-bg-color);
-    }
-
-    &.Badge_size_l {
-      width: 32px;
-      height: 32px;
-      padding: 0;
-      border: 5px solid transparent;
-      box-shadow: inset 0 0 0 14px var(--badge-bg-color);
-    }
+  &_counter {
+    justify-content: center;
+    width: var(--badge-size);
+    padding: 0;
+    text-align: center;
   }
 
   &-Icon {
