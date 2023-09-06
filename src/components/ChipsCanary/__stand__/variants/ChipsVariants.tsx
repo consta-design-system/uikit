@@ -40,6 +40,8 @@ export const ChipsVariants = () => {
       activeView={activeView}
       size={size}
       interactive={interactive}
+      onItemRightIconClick={() => console.log('onItemRightIconClick')}
+      onItemClick={() => console.log('onItemClick')}
     />
   );
 };

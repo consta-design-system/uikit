@@ -28,7 +28,7 @@ const iconSizeMap: Record<ChipsPropSize, IconPropSize> = {
 
 export const ChipsItem = forwardRefWithAs<ChipsItemProps>((props, ref) => {
   const {
-    as,
+    as = 'span',
     label,
     size = chipsPropSizeDefault,
     status,
@@ -41,6 +41,7 @@ export const ChipsItem = forwardRefWithAs<ChipsItemProps>((props, ref) => {
     iconRight: IconRight,
     onRightIconClick,
     onKeyUp: onKeyUpProp,
+    tabIndex,
     ...otherProps
   } = props;
 
@@ -50,21 +51,32 @@ export const ChipsItem = forwardRefWithAs<ChipsItemProps>((props, ref) => {
   const onKeyUp = useKeys({
     keys: {
       Enter: () => {
-        iconButtonRef.current?.focus();
+        if (iconButtonRef && onRightIconClick) {
+          iconButtonRef.current?.focus();
+        } else {
+          componentRef.current?.focus();
+          componentRef.current?.click();
+        }
       },
       Escape: () => {
+        if (iconButtonRef && onRightIconClick) {
+          componentRef.current?.focus();
+        }
+      },
+      Space: () => {
         componentRef.current?.focus();
+        componentRef.current?.click();
       },
     },
     onEvent: onKeyUpProp,
-    isActive: Boolean(interactive && iconButtonRef && onRightIconClick),
+    isActive: Boolean(interactive),
   });
 
   const iconProps: ComponentProps<IconComponent> = {
     size: iconSizeMap[size],
   };
 
-  const iconButtonProps: ComponentProps<IconComponent<'button'>> =
+  const iconButtonProps: ComponentProps<IconComponent> =
     IconRight && onRightIconClick
       ? {
           as: 'button',
@@ -72,10 +84,12 @@ export const ChipsItem = forwardRefWithAs<ChipsItemProps>((props, ref) => {
           className: cnChip('IconButton', [cnMixFocus()]),
           ref: iconButtonRef,
           tabIndex: -1,
+          role: 'button',
+          // onKeyUp: onKeyUpIconButton,
         }
       : {};
 
-  const Tag = (as || (interactive ? 'button' : 'span')) as string;
+  const Tag = as as string;
 
   return (
     <Tag
@@ -86,6 +100,8 @@ export const ChipsItem = forwardRefWithAs<ChipsItemProps>((props, ref) => {
       )}
       ref={useForkRef([componentRef, ref])}
       onKeyUp={onKeyUp}
+      tabIndex={interactive ? tabIndex || 0 : undefined}
+      role={interactive ? 'button' : undefined}
     >
       {status && <Badge status={status} size={iconSizeMap[size]} minified />}
       {!status && IconLeft && <IconLeft {...iconProps} />}

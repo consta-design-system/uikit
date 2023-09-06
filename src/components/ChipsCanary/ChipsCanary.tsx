@@ -24,7 +24,7 @@ const ChipsRender = (props: ChipsProps, ref: React.Ref<HTMLDivElement>) => {
     className,
     interactive,
     onItemClick,
-    onItemOnRightIconClick,
+    onItemRightIconClick,
     activeView,
     size,
     ...otherProps
@@ -45,9 +45,9 @@ const ChipsRender = (props: ChipsProps, ref: React.Ref<HTMLDivElement>) => {
                 : undefined
             }
             onRightIconClick={
-              onItemOnRightIconClick
+              onItemRightIconClick
                 ? (e: React.MouseEvent) =>
-                    onItemOnRightIconClick(item, { e, index })
+                    onItemRightIconClick(item, { e, index })
                 : undefined
             }
             label={getItemLabel(item)}

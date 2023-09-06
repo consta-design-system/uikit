@@ -56,7 +56,7 @@ const ChipsChoiceRender = (
     <Chips
       {...otherProps}
       ref={ref}
-      onItemOnRightIconClick={getUndefined}
+      onItemRightIconClick={getUndefined}
       onItemClick={(item, { e }) => getOnChange(item)(e)}
       getItemIconRight={getUndefined}
       getItemAttributes={getUndefined}

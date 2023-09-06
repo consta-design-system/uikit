@@ -57,9 +57,6 @@ export type ChipsPropGetItemAs<ITEM> = (item: ITEM) => ChipsDefaultItem['as'];
 export type ChipsPropGetItemAttributes<ITEM> = (
   item: ITEM,
 ) => ChipsDefaultItem['attributes'];
-export type ChipsPropGetItemOnRightIconClick<ITEM> = (
-  item: ITEM,
-) => ChipsDefaultItem['onRightIconClick'];
 export type ChipsPropGetItemActive<ITEM> = (
   item: ITEM,
 ) => ChipsDefaultItem['active'];
@@ -67,7 +64,7 @@ export type ChipsPropOnItemClick<ITEM> = (
   item: ITEM,
   props: { e: React.MouseEvent; index: number },
 ) => void;
-export type ChipsPropOnItemOnRightIconClick<ITEM> = (
+export type ChipsPropItemOnRightIconClick<ITEM> = (
   item: ITEM,
   props: { e: React.MouseEvent; index: number },
 ) => void;
@@ -85,10 +82,9 @@ export type ChipsProps<ITEM = ChipsDefaultItem> = PropsWithHTMLAttributesAndRef<
     getItemRef?: ChipsPropGetItemRef<ITEM>;
     getItemAs?: ChipsPropGetItemAs<ITEM>;
     getItemAttributes?: ChipsPropGetItemAttributes<ITEM>;
-    getItemOnRightIconClick?: ChipsPropGetItemOnRightIconClick<ITEM>;
     getItemActive?: ChipsPropGetItemActive<ITEM>;
     onItemClick?: ChipsPropOnItemClick<ITEM>;
-    onItemOnRightIconClick?: ChipsPropOnItemOnRightIconClick<ITEM>;
+    onItemRightIconClick?: ChipsPropItemOnRightIconClick<ITEM>;
   },
   HTMLDivElement
 > &

@@ -17,6 +17,7 @@ export const getKeyHandler = (
   keys: KeyHandlers,
 ): React.KeyboardEventHandler => {
   return (e: React.KeyboardEvent) => {
+    console.log(e.code);
     (keys[e.code as KeyCode] || keys[e.key as KeyCode])?.(e);
   };
 };
