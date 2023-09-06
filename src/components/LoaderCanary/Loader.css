@@ -1,0 +1,50 @@
+.canary--Loader {
+  --backgroundColor:
+    var(
+      --loaderBackgroundColor,
+      var(--color-control-bg-primary)
+    );
+  display: inline-flex;
+  padding: calc(var(--loader-size) * 0.25);
+  gap: var(--loader-gap);
+
+  &-Dot {
+    width: var(--loader-size);
+    height: var(--loader-size);
+    background: var(--backgroundColor);
+    border-radius: 50%;
+    animation: var(--loader-dot-animation);
+
+    &_side {
+      &_left {
+        --loader-dot-animation: loader 1s ease infinite;
+      }
+
+      &_center {
+        --loader-dot-animation: loader 1s -0.18s ease infinite;
+      }
+
+      &_right {
+        --loader-dot-animation: loader 1s -0.36s ease infinite;
+      }
+    }
+  }
+
+  &_size {
+    &_s {
+      --loader-size: var(--space-2xs);
+      --loader-gap: var(--space-2xs);
+    }
+
+    &_m {
+      --loader-size: var(--space-xs);
+      --loader-gap: calc(var(--space-xs) - var(--space-3xs));
+    }
+  }
+}
+
+@keyframes loader {
+  50% {
+    transform: scale(1.5);
+  }
+}
