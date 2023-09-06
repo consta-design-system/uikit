@@ -1,5 +1,3 @@
-import { setRef } from '##/utils/setRef';
-
 import {
   BadgeGroupDefaultItem,
   BadgeGroupPropGetItemAs,
@@ -56,16 +54,3 @@ export function withDefaultGetters<ITEM>(props: BadgeGroupProps<ITEM>) {
     getItemAttributes: props.getItemAttributes || defaultGetItemAttributes,
   };
 }
-
-export const forkRef = <T>(
-  refs: (React.Ref<T> | undefined)[],
-): React.RefCallback<T> | null => {
-  if (!refs.length) {
-    return null;
-  }
-  return (refValue) => {
-    for (const ref of refs) {
-      setRef(ref as React.MutableRefObject<T>, refValue);
-    }
-  };
-};
