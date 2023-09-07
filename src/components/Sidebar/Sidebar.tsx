@@ -10,6 +10,7 @@ import {
 import { useTheme } from '##/components/Theme/Theme';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useGlobalKeys } from '##/hooks/useGlobalKeys';
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
@@ -69,7 +70,10 @@ const SidebarContent: React.FC<SidebarContentProps> = ({
   children,
   ...rest
 }) => (
-  <div className={cnSidebar('Content', null, [className])} {...rest}>
+  <div
+    className={cnSidebar('Content', [className, cnMixScrollBar()])}
+    {...rest}
+  >
     {children}
   </div>
 );
@@ -79,7 +83,7 @@ const SidebarActions: React.FC<SidebarActionsProps> = ({
   children,
   ...rest
 }) => (
-  <div className={cnSidebar('Actions', null, [className])} {...rest}>
+  <div className={cnSidebar('Actions', [className])} {...rest}>
     {children}
   </div>
 );

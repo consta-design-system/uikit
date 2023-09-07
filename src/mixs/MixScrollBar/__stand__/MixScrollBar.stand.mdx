@@ -1,0 +1,41 @@
+import { MixScrollBarExample } from './examples/MixScrollBarExample/MixScrollBarExample';
+
+```tsx
+import { cnMixScrollBar } from '@consta/uikit/MixScrollBar';
+```
+
+С помощью миксина `MixScrollBar` можно стилизовать скроллбар для элементов с прокруткой.
+
+## Импорт
+
+```tsx
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+```
+
+## Список свойств
+
+| Свойство | Тип или варианты значения  | По умолчанию | Описание          |
+| -------- | -------------------------- | ------------ | ----------------- |
+| `size?`  | `'3xs','2xs','xs','s','m'` | `'xs'`       | Размер скроллбара |
+
+## Пример использования
+
+```tsx
+import React from 'react';
+
+import { Text } from '@consta/uikit/Text';
+import { cnMixScrollBar } from '@consta/uikit/MixScrollBar';
+import { cn } from '##/utils/bem';
+
+const cnMixScrollBarExample = cn('MixScrollBarExample');
+
+export const MixScrollBarExample = () => {
+  return (
+    <div className={cnMixScrollBarExample(null, [cnMixScrollBar()])}>
+      <div className={cnMixScrollBarExample('Block')} />
+    </div>
+  );
+};
+```
+
+<MixScrollBarExample />
