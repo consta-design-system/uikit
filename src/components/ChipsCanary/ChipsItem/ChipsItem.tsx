@@ -26,87 +26,86 @@ const iconSizeMap: Record<ChipsPropSize, IconPropSize> = {
   xs: 'xs',
 };
 
-export const ChipsItem = forwardRefWithAs<ChipsItemProps>((props, ref) => {
-  const {
-    as = 'span',
-    label,
-    size = chipsPropSizeDefault,
-    status,
-    activeView = chipsPropActiveViewDefault,
-    className,
-    interactive,
-    style,
-    active,
-    iconLeft: IconLeft,
-    iconRight: IconRight,
-    onRightIconClick,
-    onKeyUp: onKeyUpProp,
-    tabIndex,
-    ...otherProps
-  } = props;
+export const ChipsItem = forwardRefWithAs<ChipsItemProps, 'span'>(
+  (props, ref) => {
+    const {
+      as = 'span',
+      label,
+      size = chipsPropSizeDefault,
+      status,
+      activeView = chipsPropActiveViewDefault,
+      className,
+      interactive,
+      style,
+      active,
+      iconLeft: IconLeft,
+      iconRight: IconRight,
+      onRightIconClick,
+      onKeyUp: onKeyUpProp,
+      tabIndex,
+      ...otherProps
+    } = props;
 
-  const componentRef = useRef<HTMLElement>(null);
-  const iconButtonRef = useRef<HTMLButtonElement>(null);
+    const componentRef = useRef<HTMLElement>(null);
+    const iconButtonRef = useRef<HTMLButtonElement>(null);
 
-  const onKeyUp = useKeys({
-    keys: {
-      Enter: () => {
-        if (iconButtonRef && onRightIconClick) {
-          iconButtonRef.current?.focus();
-        } else {
-          componentRef.current?.focus();
+    const onKeyUp = useKeys({
+      keys: {
+        Enter: () => {
+          if (iconButtonRef && onRightIconClick) {
+            iconButtonRef.current?.focus();
+          } else {
+            componentRef.current?.click();
+          }
+        },
+        Escape: () => {
+          if (iconButtonRef && onRightIconClick) {
+            componentRef.current?.focus();
+          }
+        },
+        Space: () => {
           componentRef.current?.click();
-        }
+        },
       },
-      Escape: () => {
-        if (iconButtonRef && onRightIconClick) {
-          componentRef.current?.focus();
-        }
-      },
-      Space: () => {
-        componentRef.current?.focus();
-        componentRef.current?.click();
-      },
-    },
-    onEvent: onKeyUpProp,
-    isActive: Boolean(interactive),
-  });
+      onEvent: onKeyUpProp,
+      isActive: !!interactive,
+    });
 
-  const iconProps: ComponentProps<IconComponent> = {
-    size: iconSizeMap[size],
-  };
+    const iconProps: ComponentProps<IconComponent> = {
+      size: iconSizeMap[size],
+    };
 
-  const iconButtonProps: ComponentProps<IconComponent> =
-    IconRight && onRightIconClick
-      ? {
-          as: 'button',
-          onClick: onRightIconClick,
-          className: cnChip('IconButton', [cnMixFocus()]),
-          ref: iconButtonRef,
-          tabIndex: -1,
-          role: 'button',
-          // onKeyUp: onKeyUpIconButton,
-        }
-      : {};
+    const iconButtonProps: ComponentProps<IconComponent> =
+      IconRight && onRightIconClick
+        ? {
+            as: 'button',
+            onClick: onRightIconClick,
+            className: cnChip('IconButton', [cnMixFocus()]),
+            ref: iconButtonRef,
+            tabIndex: -1,
+            role: 'button',
+          }
+        : {};
 
-  const Tag = as as string;
+    const Tag = as as string;
 
-  return (
-    <Tag
-      {...otherProps}
-      className={cnChip(
-        { size, interactive, activeView, active, status: Boolean(status) },
-        [interactive ? cnMixFocus() : undefined, className],
-      )}
-      ref={useForkRef([componentRef, ref])}
-      onKeyUp={onKeyUp}
-      tabIndex={interactive ? tabIndex || 0 : undefined}
-      role={interactive ? 'button' : undefined}
-    >
-      {status && <Badge status={status} size={iconSizeMap[size]} minified />}
-      {!status && IconLeft && <IconLeft {...iconProps} />}
-      {label}
-      {IconRight && <IconRight {...iconProps} {...iconButtonProps} />}
-    </Tag>
-  );
-});
+    return (
+      <Tag
+        {...otherProps}
+        className={cnChip(
+          { size, interactive, activeView, active, status: Boolean(status) },
+          [interactive ? cnMixFocus() : undefined, className],
+        )}
+        ref={useForkRef([componentRef, ref])}
+        onKeyUp={onKeyUp}
+        tabIndex={interactive ? tabIndex || 0 : undefined}
+        role={interactive ? 'button' : undefined}
+      >
+        {status && <Badge status={status} size={iconSizeMap[size]} minified />}
+        {!status && IconLeft && <IconLeft {...iconProps} />}
+        {label}
+        {IconRight && <IconRight {...iconProps} {...iconButtonProps} />}
+      </Tag>
+    );
+  },
+);

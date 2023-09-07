@@ -1,11 +1,15 @@
+import './ChipsWithContextMenuExample.css';
+
+import { AnimateIconSwitcherProvider } from '@consta/icons/AnimateIconSwitcherProvider';
 import { IconCheck } from '@consta/icons/IconCheck';
 import { IconSelect } from '@consta/icons/IconSelect';
+import { withAnimateSwitcherHOC } from '@consta/icons/withAnimateSwitcherHOC';
 import { Example } from '@consta/stand';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
-import { Chips } from '##/components/ChipsCanary/ChipsCanary';
+import { ChipsItem } from '##/components/ChipsCanary/';
 import { ContextMenu } from '##/components/ContextMenu';
-import { useRefs } from '##/hooks/useRefs';
+import { cn } from '##/utils/bem';
 
 const filters = [
   ['Нефть', 'Газ', 'Жидкость'],
@@ -14,47 +18,81 @@ const filters = [
 ];
 
 const getItemLabel = (item: string) => item;
-const getItemIconRight = () => IconSelect;
+
+type ChipsItemWithMenuProps = {
+  value: string;
+  menu: string[];
+  isOpen: boolean;
+  onChange: (item: string) => void;
+  onClick: React.MouseEventHandler<HTMLSpanElement>;
+  onClickOutside: (event: MouseEvent) => void;
+};
+
+const ChipsItemIcon = withAnimateSwitcherHOC({
+  startIcon: IconSelect,
+  startDirection: 0,
+  endDirection: 180,
+});
+
+const cnChipsWithContextMenuExample = cn('ChipsWithContextMenuExample');
+
+const ChipsItemWithMenu = (props: ChipsItemWithMenuProps) => {
+  const { value, menu, onChange, isOpen, onClick, onClickOutside } = props;
+  const ref = useRef<HTMLSpanElement>(null);
+
+  return (
+    <>
+      <AnimateIconSwitcherProvider active={isOpen}>
+        <ChipsItem
+          onClick={onClick}
+          ref={ref}
+          label={value}
+          iconRight={ChipsItemIcon}
+          interactive
+        />
+      </AnimateIconSwitcherProvider>
+      <ContextMenu
+        anchorRef={ref}
+        items={menu}
+        getItemLabel={getItemLabel}
+        isOpen={isOpen}
+        onClickOutside={onClickOutside}
+        onItemClick={({ item }) => onChange(item)}
+        getItemRightIcon={(item) => (item === value ? IconCheck : undefined)}
+        direction="downStartLeft"
+        offset="2xs"
+      />
+    </>
+  );
+};
 
 export const ChipsWithContextMenuExample = () => {
   const [values, setValues] = useState(filters.map((item) => item[0]));
   const [activeMenu, setActiveMenu] = useState(-1);
-  const refs = useRefs<HTMLButtonElement>(filters.length);
 
   return (
     <Example col={1}>
-      <Chips
-        items={values}
-        getItemIconRight={getItemIconRight}
-        getItemLabel={getItemLabel}
-        getItemRef={(_, index) => refs[index]}
-        onItemClick={(_, { index }) => setActiveMenu(index)}
-        interactive
-      />
-      {filters.map((filter, index) => {
-        return (
-          <ContextMenu
-            key={index}
-            anchorRef={refs[index]}
-            items={filter}
-            getItemLabel={getItemLabel}
-            isOpen={activeMenu === index}
-            onClickOutside={() => setActiveMenu(-1)}
-            onItemClick={({ item }) => {
-              setValues((state) => {
-                const newState = [...state];
-                newState[index] = item;
-                return newState;
-              });
-            }}
-            getItemRightIcon={(item) =>
-              item === values[index] ? IconCheck : undefined
-            }
-            direction="downStartLeft"
-            offset="2xs"
-          />
-        );
-      })}
+      <div className={cnChipsWithContextMenuExample()}>
+        {filters.map((item, index) => {
+          return (
+            <ChipsItemWithMenu
+              key={index}
+              value={values[index]}
+              menu={filters[index]}
+              onChange={(item) => {
+                setValues((state) => {
+                  const newState = [...state];
+                  newState[index] = item;
+                  return newState;
+                });
+              }}
+              onClickOutside={() => setActiveMenu(-1)}
+              onClick={() => setActiveMenu(index)}
+              isOpen={activeMenu === index}
+            />
+          );
+        })}
+      </div>
     </Example>
   );
 };

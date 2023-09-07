@@ -49,10 +49,7 @@ export type ChipsPropGetItemIconLeft<ITEM> = (
 export type ChipsPropGetItemIconRight<ITEM> = (
   item: ITEM,
 ) => ChipsDefaultItem['iconRight'];
-export type ChipsPropGetItemRef<ITEM> = (
-  item: ITEM,
-  index: number,
-) => ChipsDefaultItem['ref'];
+export type ChipsPropGetItemRef<ITEM> = (item: ITEM) => ChipsDefaultItem['ref'];
 export type ChipsPropGetItemAs<ITEM> = (item: ITEM) => ChipsDefaultItem['as'];
 export type ChipsPropGetItemAttributes<ITEM> = (
   item: ITEM,
@@ -62,11 +59,11 @@ export type ChipsPropGetItemActive<ITEM> = (
 ) => ChipsDefaultItem['active'];
 export type ChipsPropOnItemClick<ITEM> = (
   item: ITEM,
-  props: { e: React.MouseEvent; index: number },
+  props: { e: React.MouseEvent },
 ) => void;
 export type ChipsPropItemOnRightIconClick<ITEM> = (
   item: ITEM,
-  props: { e: React.MouseEvent; index: number },
+  props: { e: React.MouseEvent },
 ) => void;
 
 export type ChipsProps<ITEM = ChipsDefaultItem> = PropsWithHTMLAttributesAndRef<
