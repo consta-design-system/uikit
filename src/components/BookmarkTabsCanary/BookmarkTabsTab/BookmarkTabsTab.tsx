@@ -15,13 +15,13 @@ export const cnBookmarkTabsTab = cn('BookmarkTabsTab');
 
 const BookmarkTabsTabRender = (
   props: BookmarkTabsTabProps,
-  ref: React.Ref<HTMLButtonElement>,
+  ref: React.Ref<HTMLDivElement>,
 ) => {
   const {
     label,
     leftIcon: LeftIcon,
     rightIcon: RightIcon,
-    as: Tag = 'button',
+    as: Tag = 'div',
     onClick,
     size,
     form,
@@ -52,8 +52,7 @@ const BookmarkTabsTabRender = (
         },
         [className],
       )}
-      role="tab"
-      type="button"
+      role="button"
       onClick={onClick}
       ref={useForkRef([ref, tabRef, controlRef])}
       style={{
@@ -88,7 +87,6 @@ const BookmarkTabsTabRender = (
             <Button
               size="xs"
               onlyIcon
-              as="div"
               view="clear"
               className={cnBookmarkTabsTab('Button', [
                 cnMixSpace({ mL: 'xs' }),

@@ -114,7 +114,7 @@ export type BookmarkTabsComponent = <ITEM>(
 ) => React.ReactElement | null;
 
 export type BookmarkTabsTabProps<
-  AS extends keyof JSX.IntrinsicElements = 'button',
+  AS extends keyof JSX.IntrinsicElements = 'div',
 > = PropsWithAsAttributes<
   {
     size: BookmarkTabsPropSize;
@@ -132,7 +132,7 @@ export type BookmarkTabsTabProps<
   Omit<BookmarkTabsItemDefault, 'key' | 'attributes' | 'ref'>;
 
 export type BookmarkTabsTabComponent = <
-  AS extends keyof JSX.IntrinsicElements = 'button',
+  AS extends keyof JSX.IntrinsicElements = 'div',
 >(
   props: BookmarkTabsTabProps<AS>,
 ) => React.ReactElement | null;
