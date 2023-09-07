@@ -1,5 +1,23 @@
 # Changelog
 
+## v4.27.0 (06/09/2023)
+Самое важное:
+
+- `Badge` теперь можно использовать в качестве счетчика(`counter`)
+- В `DatePicker` изменили взаимодействие с клавиатуры и добавили свойства для управления выпадающим списком.  [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3204)
+- Добавили `Loader[Canary]` и переработали в нем позиционирование компонента.
+- В `Slider` добавили свойства для управления позиционированием тултипа.
+
+---
+
+- [feat(Badge): add counter mod (#3240)](https://github.com/consta-design-system/uikit/commit/f4655dc62241c95688909351b76a18fc4d879da8) - [@gizeasy](https://github.com/gizeasy)
+- [feat(DatePicker): add new props: dropdownOpen, onDropdownOpen, ignoreOutsideClicksRefs (#3238)](https://github.com/consta-design-system/uikit/commit/30c100e25756bd21f1835061311890835a25bf53) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Loader): rewrite styles and layout (#3239)](https://github.com/consta-design-system/uikit/commit/a745c55f6d2149859b3012d2c1f5021c766b2fd7) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ProgressStepBar): fix refs problem (#3247)](https://github.com/consta-design-system/uikit/commit/5f3baf693070797671565836dbd7980f2842a690) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Slider): add new props: tooltipDirection & tooltipPossibleDirections (#3246)](https://github.com/consta-design-system/uikit/commit/9cec9491781a2359ff777ab9ccc6718ab51cfcd8) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.26.1 (31/08/2023)
 - [fix(BookmarkTabs): reexport fix (#3237)](https://github.com/consta-design-system/uikit/commit/e87278371c3ba513d2efa5b674262be6d9a275c4) - [@gizeasy](https://github.com/gizeasy)
 
@@ -410,8 +428,3 @@
 
 - [fix(TextField): hide browser eye on type='password' (#2833)](https://github.com/consta-design-system/uikit/commit/660efb121cc50b918b697e7f43ed379b8334be3f) - [@N1MBER](https://github.com/N1MBER)
 - [fix(Table): fix column width detecting (#2820)](https://github.com/consta-design-system/uikit/commit/dfc58779c92ed2fdf0c9d54756400306e33f7142) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.6.1 (09/12/2022)
-- [docs: adaptive examples (#2817)](https://github.com/consta-design-system/uikit/commit/4778c61861ab1290590fe9b46855f7a8a15792f6) - [@gizeasy](https://github.com/gizeasy)

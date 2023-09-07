@@ -40,8 +40,10 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
     separator,
     minDate,
     maxDate,
+    startFieldOnClick,
     startFieldOnBlur,
     startFieldOnFocus,
+    endFieldOnClick,
     endFieldOnBlur,
     endFieldOnFocus,
     startFieldRef,
@@ -117,6 +119,7 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
             id={id}
             form={getFormForStart(form)}
             value={value?.[0]}
+            onClick={startFieldOnClick}
             onChange={handleStartDateChange}
             onFocus={startFieldOnFocus}
             onBlur={startFieldOnBlur}
@@ -132,6 +135,7 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
             rightSide={endFieldRightSide}
             form={getFormForEnd(form)}
             value={value?.[1]}
+            onClick={endFieldOnClick}
             onChange={handleEndDateChange}
             onFocus={endFieldOnFocus}
             onBlur={endFieldOnBlur}

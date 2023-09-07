@@ -9,7 +9,7 @@ export const getOutside = () => screen.getByTestId(outsideId);
 export const getDropdown = () => screen.getByRole('listbox');
 export const getInput = () =>
   getRender().querySelector(`input.TextField-Input`) as Element;
-export const inputFocus = () => fireEvent.focus(getInput());
+export const inputFocus = () => fireEvent.click(getInput());
 export const inputChange = (value: string) => {
   const input = getInput();
   fireEvent.focus(input);

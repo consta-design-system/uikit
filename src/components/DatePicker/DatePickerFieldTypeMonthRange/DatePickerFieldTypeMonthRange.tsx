@@ -42,8 +42,10 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
     separator,
     minDate,
     maxDate,
+    startFieldOnClick,
     startFieldOnBlur,
     startFieldOnFocus,
+    endFieldOnClick,
     endFieldOnBlur,
     endFieldOnFocus,
     startFieldRef,
@@ -119,6 +121,7 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
             value={value?.[0]}
             onChange={handleStartDateChange}
             id={id}
+            onClick={startFieldOnClick}
             onFocus={startFieldOnFocus}
             onBlur={startFieldOnBlur}
             focused={startFocused}
@@ -133,6 +136,7 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
             rightSide={endFieldRightSide}
             form={getFormForEnd(form)}
             value={value?.[1]}
+            onClick={endFieldOnClick}
             onChange={handleEndDateChange}
             onFocus={endFieldOnFocus}
             onBlur={endFieldOnBlur}

@@ -2,6 +2,7 @@ import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { Direction } from '../Popover';
 import { ActiveButton } from './useSlider/helper';
 
 export const propStatus = ['alert', 'warning', 'success'] as const;
@@ -50,6 +51,8 @@ type Props<RANGE extends boolean = false> = {
   leftSide?: Side;
   tooltipFormatter?: PropToolipFormatter;
   rightSide?: Side;
+  tooltipDirection?: Direction;
+  tooltipPossibleDirections?: Direction[];
 };
 
 export type Line = {
@@ -87,6 +90,8 @@ export type SliderPointProps = PropsWithHTMLAttributes<
     position: number;
     active?: boolean;
     tooltipZIndex?: number;
+    tooltipDirection?: Direction;
+    tooltipPossibleDirections?: Direction[];
   },
   HTMLButtonElement
 >;

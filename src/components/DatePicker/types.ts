@@ -141,6 +141,9 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
       multiplicityHours?: number;
       isMobile?: number;
       withClearButton?: boolean;
+      onDropdownOpen?: (isOpen: boolean) => void;
+      dropdownOpen?: boolean;
+      ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
     },
     HTMLDivElement
   >;
