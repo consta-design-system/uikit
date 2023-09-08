@@ -246,6 +246,7 @@ export type ContextMenuLevelProps<
   | keyof MappersGroup<GROUP>
 > & {
   parent?: ITEM;
+  activeLevelDepth: number;
   levelDepth: number;
   addLevel: AddLevel<ITEM>;
   deleteLevel: (level: number) => void;

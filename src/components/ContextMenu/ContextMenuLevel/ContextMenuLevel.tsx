@@ -2,7 +2,7 @@ import './ContextMenuLevel.css';
 
 import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
 import { IconArrowRight } from '@consta/icons/IconArrowRight';
-import React, { forwardRef, useEffect } from 'react';
+import React, { forwardRef, useEffect, useMemo } from 'react';
 
 import {
   cnListBox,
@@ -13,7 +13,6 @@ import {
   mapVerticalSpase,
 } from '##/components/ListCanary';
 import { useFlag } from '##/hooks/useFlag/useFlag';
-import { useRefs } from '##/hooks/useRefs/useRefs';
 import { cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
@@ -25,6 +24,7 @@ import {
   ContextMenuLevelComponent,
   ContextMenuLevelProps,
 } from '../types';
+import { useMenuNavigation } from '../useMenuNavigation';
 
 export const cnContextMenuLevel = cn('ContextMenuLevel');
 
@@ -51,6 +51,7 @@ const ContextMenuLevelRender = (
     animate,
     // Свойства относящиеся к меню
     levelDepth,
+    activeLevelDepth,
     activeItem,
     addLevel,
     deleteLevel,
@@ -77,9 +78,9 @@ const ContextMenuLevelRender = (
     getItemStatus,
     getItemDisabled,
     getItemKey,
-    getItemOnClick,
+    getItemOnClick: getItemOnClickProp,
     getItemAs,
-    getItemAttributes,
+    getItemAttributes: getItemAttributesProp,
     getItemGroupId,
     getItemLeftIcon,
     getItemRightIcon,
@@ -93,11 +94,6 @@ const ContextMenuLevelRender = (
 
   const getKey = (item: ContextMenuItemDefault) =>
     (getItemKey(item) || getItemLabel(item)).toString();
-
-  const itemsRefs = useRefs<HTMLDivElement, string[]>(
-    items.map((item) => getKey(item)),
-    [groupsProp],
-  );
 
   useEffect(() => {
     if (levelDepth !== 0 && !hovered && hoveredParenLevel < levelDepth) {
@@ -135,20 +131,51 @@ const ContextMenuLevelRender = (
     }
   };
 
+  const { refs, onKeyDown } = useMenuNavigation({
+    items,
+    getItemSubMenu,
+    addLevel: addCurrentLevel,
+    active: activeLevelDepth === levelDepth,
+    deleteLevel: () => deleteLevel(levelDepth),
+  });
+
+  const itemsRefs = useMemo(() => {
+    return items
+      .map((item) => getKey(item))
+      .reduce((a, v, index) => ({ ...a, [v]: refs[index] }), {}) as Record<
+      string,
+      React.RefObject<HTMLDivElement>
+    >;
+  }, [groupsProp, refs]);
+
+  const getItemOnClick = getItemOnClickProp
+    ? (item: ContextMenuItemDefault) => (e: React.MouseEvent) => {
+        getItemOnClickProp(item)?.({
+          e: e as React.MouseEvent<HTMLDivElement>,
+          item,
+        });
+      }
+    : undefined;
+
   const onMouseEnter = isMobile
     ? undefined
-    : (
-          item: ContextMenuItemDefault,
-        ): JSX.IntrinsicElements['div']['onMouseEnter'] =>
+    : (item: ContextMenuItemDefault): React.MouseEventHandler<HTMLDivElement> =>
         (e) => {
           addCurrentLevel(item);
-          const onMouseEnter = getItemAttributes(item)
+          const onMouseEnter = getItemAttributesProp(item)
             ?.onMouseEnter as JSX.IntrinsicElements['div']['onMouseEnter'];
 
           onMouseEnter?.(e);
         };
 
   const firstLevel = levelDepth === 0;
+
+  const getItemAttributes = (item: ContextMenuItemDefault) =>
+    ({
+      ...getItemAttributesProp(item),
+      tabIndex: 0,
+      onMouseEnter: onMouseEnter?.(item),
+    } as JSX.IntrinsicElements[keyof JSX.IntrinsicElements]);
 
   return (
     <ContextMenuLevelWrapper
@@ -169,6 +196,7 @@ const ContextMenuLevelRender = (
       spareDirection={spareDirection}
       direction={direction}
       offset={offset}
+      onKeyDown={onKeyDown}
       onSetDirection={onSetDirection}
       onMouseEnter={setHovered.on}
       onMouseLeave={setHovered.off}
@@ -181,6 +209,7 @@ const ContextMenuLevelRender = (
           <ListItem
             label={getItemLabel(parent)}
             size={size}
+            tabIndex={0}
             leftIcon={IconArrowLeft}
             onClick={() => deleteLevel(levelDepth)}
           />
@@ -199,25 +228,9 @@ const ContextMenuLevelRender = (
           });
         }}
         sortGroup={sortGroup ? (a, b) => sortGroup(a.key, b.key) : undefined}
-        getItemOnClick={
-          getItemOnClick
-            ? (item) => (e) =>
-                getItemOnClick(item)?.({
-                  e: e as React.MouseEvent<HTMLDivElement>,
-                  item,
-                })
-            : undefined
-        }
+        getItemOnClick={getItemOnClick}
         getItemAs={getItemAs}
-        getItemAttributes={
-          onMouseEnter
-            ? (item) =>
-                ({
-                  ...getItemAttributes(item),
-                  onMouseEnter: onMouseEnter(item),
-                } as JSX.IntrinsicElements[keyof JSX.IntrinsicElements])
-            : getItemAttributes
-        }
+        getItemAttributes={getItemAttributes}
         getItemGroupKey={getItemGroupId}
         getItemLeftIcon={getItemLeftIcon}
         getItemRightIcon={getItemRightIcon}

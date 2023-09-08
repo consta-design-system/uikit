@@ -109,12 +109,14 @@ const ContextMenuLevelsRender = (
   };
 
   const deleteLevel = (level: number) => {
-    enableAnimationBack();
-    const newLevels = [...levels];
-    newLevels.splice(level);
-    newLevels[level - 1] = { ...newLevels[level - 1], activeItem: undefined };
-    setLevels(newLevels);
-    disableAnimationBack();
+    if (level > 0) {
+      enableAnimationBack();
+      const newLevels = [...levels];
+      newLevels.splice(level);
+      newLevels[level - 1] = { ...newLevels[level - 1], activeItem: undefined };
+      setLevels(newLevels);
+      disableAnimationBack();
+    }
   };
 
   useClickOutside({
@@ -181,6 +183,7 @@ const ContextMenuLevelsRender = (
                         : undefined,
                   },
                 }}
+                activeLevelDepth={levels.length - 1}
                 levelDepth={index}
                 getItemLabel={getItemLabel}
                 addLevel={addLevel}
