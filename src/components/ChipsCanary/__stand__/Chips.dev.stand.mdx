@@ -1,7 +1,54 @@
+import { MdxMenu } from '@consta/stand';
+
 import { ChipsWithContextMenuExample } from './examples/ChipsWithContextMenuExample/ChipsWithContextMenuExample';
 
 ```ts
 import { Chips } from '@consta/uikit/ChipsCanary';
 ```
 
+<MdxMenu>
+
+- [Содержимое](#содержимое)
+- [Расположение чекбоксов](#расположение-чекбоксов)
+- [Неактивный чекбокс](#неактивный-чекбокс)
+- [Неактивная группа чекбоксов](#неактивная-группа-чекбоксов)
+- [Размер](#размер)
+- [Внешний вид](#внешний-вид)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+
+</MdxMenu>
+
 <ChipsWithContextMenuExample />
+
+## Содержимое
+
+Содерживое можно передать в поле `items` в объекте типа [`ChipsDefaultItem`](#свойства). Что можно указать:
+
+- лейбл — в поле `label` или с помощью функции `getItemLabel`,
+- статус — в поле `status` или с помощью функции `getItemStatus`,
+- исконка справа — в поле `iconRight` или с помощью функции `getItemIconRight`,
+- иконка слева — в поле `iconLeft` или с помощью функции `getItemIconLeft`,
+- HTML-тег — в поле `as` или с помощью функции `getItemAs`,
+- дополнительные атрибуты — в поле `attributes` или с помощью функции `getItemAttributes`,
+- статус активности — в поле `active` или с помощью функции `getItemActive`,
+
+> Одновременно можно использовать либо `iconLeft` или `status`
+
+## Cвойства
+
+```tsx
+export type ChipsDefaultItem = {
+  iconLeft?: IconComponent;
+  iconRight?: IconComponent;
+  status?: ChipsPropStatus;
+  label: string;
+  active?: boolean;
+  as?: keyof JSX.IntrinsicElements;
+  ref?: React.RefObject<HTMLElement>;
+  attributes?: Omit<
+    JSX.IntrinsicElements[keyof JSX.IntrinsicElements],
+    'children' | 'ref'
+  >;
+};
+```

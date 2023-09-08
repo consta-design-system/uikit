@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
+import { useMutableRef } from '##/hooks/useMutableRef';
 import { KeyCode } from '##/utils/types/KeyCode';
 
 export type KeyHandlers = Partial<
@@ -9,36 +10,26 @@ export type KeyHandlers = Partial<
 };
 
 type UseKeysProps = {
-  ref?: React.RefObject<HTMLElement>;
-  keys?: KeyHandlers;
+  ref: React.RefObject<HTMLElement>;
+  keys: KeyHandlers;
   isActive?: boolean;
   eventType?: 'keypress' | 'keydown' | 'keyup';
 };
 
-const getKeyHandler = (keys: KeyHandlers) => {
-  return (e: KeyboardEvent) => {
-    (keys[e.code as KeyCode] || keys[e.key as KeyCode])?.(e);
-  };
-};
-
 export const useKeysRef = (params: UseKeysProps) => {
-  const { ref, keys, isActive = true, eventType = 'keydown' } = params;
+  const { ref, keys, isActive = false, eventType = 'keydown' } = params;
 
-  const onKeyDown = useCallback(
-    (e: Event) => {
-      if (keys && isActive) {
-        const event = e as unknown as KeyboardEvent;
-        getKeyHandler(keys)(event);
-      }
-    },
-    [keys, isActive],
-  );
+  const fn = useMutableRef((e: KeyboardEvent) => {
+    if (isActive) {
+      (keys[e.code as KeyCode] || keys[e.key as KeyCode])?.(e);
+    }
+  });
 
   useEffect(() => {
-    ref?.current?.addEventListener(eventType, onKeyDown);
+    ref?.current?.addEventListener(eventType, fn.current);
 
     return () => {
-      ref?.current?.removeEventListener(eventType, onKeyDown);
+      ref?.current?.removeEventListener(eventType, fn.current);
     };
-  }, [ref, keys, isActive, eventType]);
+  }, [ref?.current, eventType]);
 };

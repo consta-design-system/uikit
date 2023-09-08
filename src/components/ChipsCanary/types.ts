@@ -16,12 +16,12 @@ export type ChipsPropStatus = typeof badgePropStatus[number];
 export type ChipsItemProps = {
   size?: ChipsPropSize;
   activeView?: ChipsPropActiveView;
+  interactive?: boolean;
+  onRightIconClick?: React.MouseEventHandler<HTMLButtonElement>;
   iconLeft?: IconComponent;
   iconRight?: IconComponent;
   status?: ChipsPropStatus;
-  onRightIconClick?: React.MouseEventHandler<HTMLButtonElement>;
   label: string;
-  interactive?: boolean;
   active?: boolean;
   as?: keyof JSX.IntrinsicElements;
   ref?: React.RefObject<HTMLElement>;
@@ -33,7 +33,7 @@ export type ChipsItemProps = {
 
 export type ChipsDefaultItem = Omit<
   ChipsItemProps,
-  'size' | 'activeView' | 'interactive'
+  'size' | 'activeView' | 'interactive' | 'onRightIconClick'
 >;
 
 // export type ChipsPropGetItemKey<ITEM> = (item: ITEM) => ChipsDefaultItem['key'];

@@ -13,21 +13,12 @@ type UseKeysProps = {
   isActive: boolean;
 };
 
-export const getKeyHandler = (
-  keys: KeyHandlers,
-): React.KeyboardEventHandler => {
-  return (e: React.KeyboardEvent) => {
-    console.log(e.code);
-    (keys[e.code as KeyCode] || keys[e.key as KeyCode])?.(e);
-  };
-};
-
 export const useKeys = (props: UseKeysProps): React.KeyboardEventHandler => {
   const propsRef = useMutableRef(props);
   return useCallback((e) => {
     const { isActive, keys, onEvent } = propsRef.current;
     if (isActive) {
-      getKeyHandler(keys)(e);
+      (keys[e.code as KeyCode] || keys[e.key as KeyCode])?.(e);
     }
     onEvent?.(e);
   }, []);
