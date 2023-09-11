@@ -159,6 +159,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
           width,
           form: mapStableForm[form],
           loading,
+          disabled,
           withIcon,
           onlyIcon: !!IconOnly,
         },
