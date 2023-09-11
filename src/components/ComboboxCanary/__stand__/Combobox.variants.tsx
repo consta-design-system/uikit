@@ -45,6 +45,7 @@ const Variants = () => {
   const isLoading = useBoolean('isLoading', false);
   const multiple = useBoolean('multiple', false);
   const selectAll = useBoolean('selectAll', false, multiple);
+  const allSelectedAllLabel = useText('allSelectedAllLabel', 'Все', multiple);
   const withLabelIcon = useBoolean('withLabelIcon', false);
 
   const [value, setValue] = useState<Item | null>(null);
@@ -62,6 +63,7 @@ const Variants = () => {
           form={form}
           required={required}
           status={status}
+          allSelectedAllLabel={allSelectedAllLabel}
           dropdownForm={dropdownForm}
           placeholder={placeholder}
           items={items}

@@ -13,6 +13,7 @@ type UseKeysProps = {
   ref?: React.RefObject<HTMLElement>;
   keys: KeyHandlers;
   isActive?: boolean;
+  eventHandler?: (event: KeyboardEvent) => void;
   eventType?: 'keypress' | 'keydown' | 'keyup';
 };
 
