@@ -10,7 +10,7 @@ export type KeyHandlers = Partial<
 };
 
 type UseKeysProps = {
-  ref: React.RefObject<HTMLElement>;
+  ref?: React.RefObject<HTMLElement>;
   keys: KeyHandlers;
   isActive?: boolean;
   eventType?: 'keypress' | 'keydown' | 'keyup';

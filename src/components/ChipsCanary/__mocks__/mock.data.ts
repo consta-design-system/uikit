@@ -3,15 +3,12 @@ import { IconDinosaur } from '@consta/icons/IconDinosaur';
 
 import { ChipsDefaultItem } from '..';
 
-const onRightIconClick = () => alert('Кликнул по крестику');
-
 export const items: ChipsDefaultItem[] = [
   {
     label: 'Python',
     status: 'success',
     iconLeft: IconDinosaur,
     iconRight: IconClose,
-    onRightIconClick,
     active: false,
   },
   {
@@ -19,7 +16,6 @@ export const items: ChipsDefaultItem[] = [
     status: 'warning',
     iconLeft: IconDinosaur,
     iconRight: IconClose,
-    onRightIconClick,
     active: true,
   },
   {
@@ -27,7 +23,6 @@ export const items: ChipsDefaultItem[] = [
     status: 'normal',
     iconLeft: IconDinosaur,
     iconRight: IconClose,
-    onRightIconClick,
     active: false,
   },
 ];
