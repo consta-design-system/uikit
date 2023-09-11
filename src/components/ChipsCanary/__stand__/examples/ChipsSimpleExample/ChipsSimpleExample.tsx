@@ -1,31 +1,58 @@
-import { ChipsPropStatus } from '##/components/ChipsCanary';
+import { IconBag } from '@consta/icons/IconBag';
+import { IconDiamond } from '@consta/icons/IconDiamond';
+import { IconDinosaur } from '@consta/icons/IconDinosaur';
+import { Example } from '@consta/stand';
+import React from 'react';
 
-type Item = {
-  text: string;
-  color: ChipsPropStatus;
-};
+import { Chips, ChipsDefaultItem } from '##/components/ChipsCanary';
 
-export const items: Item[] = [
+export const items = ['Согласован', 'Ожидает', 'Новый', 'Черновик', 'Отказано'];
+export const items2: ChipsDefaultItem[] = [
   {
-    text: 'Согласован',
-    color: 'success',
+    iconLeft: IconDinosaur,
+    label: 'Динозавр',
   },
   {
-    text: 'ожидает',
-    color: 'warning',
+    iconLeft: IconBag,
+    label: 'Портфель',
   },
   {
-    text: 'новый',
-    color: 'normal',
-  },
-  {
-    text: 'черновик',
-    color: 'system',
-  },
-  {
-    text: 'отказано',
-    color: 'error',
+    iconLeft: IconDiamond,
+    label: 'Бриллиант',
   },
 ];
 
-export const ChipsSimpleExample = () => {};
+export const items3: ChipsDefaultItem[] = [
+  {
+    status: 'success',
+    label: 'Согласован',
+  },
+  {
+    status: 'warning',
+    label: 'Ожидает',
+  },
+  {
+    status: 'error',
+    label: 'Отказано',
+  },
+];
+
+const getItemLabel = (item: string) => item;
+
+export const ChipsSimpleExample = () => (
+  <Example>
+    <Chips items={items} getItemLabel={getItemLabel} />
+  </Example>
+);
+
+export const ChipsSimpleExample2 = () => (
+  <Example>
+    <Chips items={items2} />
+  </Example>
+);
+
+export const ChipsSimpleExample3 = () => (
+  <Example>
+    <Chips items={items3} />
+  </Example>
+);

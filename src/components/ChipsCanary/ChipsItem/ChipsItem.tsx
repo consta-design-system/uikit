@@ -1,7 +1,7 @@
 import './ChipsItem.css';
 
-import { IconComponent, IconPropSize } from '@consta/icons/Icon';
-import React, { ComponentProps, useRef } from 'react';
+import { IconPropSize } from '@consta/icons/Icon';
+import React, { useRef } from 'react';
 
 import { Badge } from '##/components/Badge';
 import { useForkRef } from '##/hooks/useForkRef';
@@ -71,22 +71,6 @@ export const ChipsItem = forwardRefWithAs<ChipsItemProps, 'span'>(
       isActive: !!interactive,
     });
 
-    const iconProps: ComponentProps<IconComponent> = {
-      size: iconSizeMap[size],
-    };
-
-    const iconButtonProps: ComponentProps<IconComponent> =
-      IconRight && onRightIconClick
-        ? {
-            as: 'button',
-            onClick: onRightIconClick,
-            className: cnChip('IconButton', [cnMixFocus()]),
-            ref: iconButtonRef,
-            tabIndex: -1,
-            role: 'button',
-          }
-        : {};
-
     const Tag = as as string;
 
     return (
@@ -102,9 +86,24 @@ export const ChipsItem = forwardRefWithAs<ChipsItemProps, 'span'>(
         role={interactive ? 'button' : undefined}
       >
         {status && <Badge status={status} size={iconSizeMap[size]} minified />}
-        {!status && IconLeft && <IconLeft {...iconProps} />}
+        {!status && IconLeft && <IconLeft size={iconSizeMap[size]} />}
         {label}
-        {IconRight && <IconRight {...iconProps} {...iconButtonProps} />}
+        {IconRight && (
+          <IconRight
+            size={iconSizeMap[size]}
+            {...(onRightIconClick
+              ? {
+                  as: 'button',
+                  role: 'button',
+                  type: 'button',
+                  onClick: onRightIconClick,
+                  className: cnChip('IconButton', [cnMixFocus()]),
+                  ref: iconButtonRef,
+                  tabIndex: -1,
+                }
+              : {})}
+          />
+        )}
       </Tag>
     );
   },

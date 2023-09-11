@@ -23,18 +23,19 @@ export type ChipsItemProps = {
   status?: ChipsPropStatus;
   label: string;
   active?: boolean;
-  as?: keyof JSX.IntrinsicElements;
-  ref?: React.RefObject<HTMLElement>;
-  attributes?: Omit<
-    JSX.IntrinsicElements[keyof JSX.IntrinsicElements],
-    'children' | 'ref'
-  >;
 };
 
 export type ChipsDefaultItem = Omit<
   ChipsItemProps,
   'size' | 'activeView' | 'interactive' | 'onRightIconClick'
->;
+> & {
+  attributes?: Omit<
+    JSX.IntrinsicElements[keyof JSX.IntrinsicElements],
+    'children' | 'ref'
+  >;
+  as?: keyof JSX.IntrinsicElements;
+  ref?: React.RefObject<HTMLElement>;
+};
 
 // export type ChipsPropGetItemKey<ITEM> = (item: ITEM) => ChipsDefaultItem['key'];
 export type ChipsPropGetItemStatus<ITEM> = (
@@ -88,7 +89,7 @@ export type ChipsProps<ITEM = ChipsDefaultItem> = PropsWithHTMLAttributesAndRef<
   (ITEM extends { label: string }
     ? {}
     : {
-        getItemLabel?: ChipsPropGetItemLabel<ITEM>;
+        getItemLabel: ChipsPropGetItemLabel<ITEM>;
       });
 
 export type ChipsComponent = <ITEM = ChipsDefaultItem>(
