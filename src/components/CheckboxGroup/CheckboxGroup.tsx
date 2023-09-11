@@ -26,6 +26,7 @@ const CheckboxGroupRender = (
     getItemKey,
     getItemLabel,
     getItemDisabled,
+    getItemAttributes,
     onChange,
     name,
     direction = checkboxGroupDefaultDirection,
@@ -33,6 +34,7 @@ const CheckboxGroupRender = (
     view = checkboxGroupDefaultView,
     disabled = false,
     className,
+    getItemRef,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -49,19 +51,24 @@ const CheckboxGroupRender = (
       ref={ref}
       className={cnCheckboxGroup({ direction, size, view }, [className])}
     >
-      {items.map((item) => (
-        <Checkbox
-          key={getItemKey(item) ?? getItemLabel(item)}
-          label={getItemLabel(item)}
-          size={size}
-          view={view}
-          name={name}
-          disabled={disabled || getItemDisabled?.(item)}
-          checked={getChecked(item)}
-          onChange={({ e }) => getOnChange(item)(e)}
-          className={cnCheckboxGroup('Item')}
-        />
-      ))}
+      {items.map((item) => {
+        const { className, ...atributes } = getItemAttributes(item) ?? {};
+        return (
+          <Checkbox
+            key={getItemKey(item) ?? getItemLabel(item)}
+            label={getItemLabel(item)}
+            size={size}
+            view={view}
+            name={name}
+            ref={getItemRef(item)}
+            disabled={disabled || getItemDisabled?.(item)}
+            checked={getChecked(item)}
+            onChange={({ e }) => getOnChange(item)(e)}
+            className={cnCheckboxGroup('Item', [className])}
+            {...atributes}
+          />
+        );
+      })}
     </div>
   );
 };
