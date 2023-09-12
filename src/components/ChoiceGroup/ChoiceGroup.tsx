@@ -45,10 +45,12 @@ const ChoiceGroupRender = (
     getItemLabel,
     onChange,
     getItemIcon,
+    getItemAttributes,
+    getItemRef,
+    getItemDisabled,
     name,
     className,
     disabled = false,
-    getItemDisabled,
     truncate,
     ...otherProps
   } = withDefaultGetters(props);
@@ -81,6 +83,7 @@ const ChoiceGroupRender = (
       {items.map((item, idx) => {
         const itemChecked = getChecked(item);
         const itemDisabled = !!getItemDisabled && getItemDisabled(item);
+        const attributes = getItemAttributes(item) ?? {};
         return (
           <React.Fragment key={getItemLabel(item)}>
             {idx > 0 && (
@@ -99,8 +102,10 @@ const ChoiceGroupRender = (
               iconSize={iconSize}
               multiple={multiple}
               onlyIcon={onlyIcon}
+              ref={getItemRef(item)}
               name={name}
               disabled={disabled || itemDisabled}
+              {...attributes}
             />
           </React.Fragment>
         );
