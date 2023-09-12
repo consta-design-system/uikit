@@ -12,7 +12,7 @@ import {
   chipsPropSizeDefault,
 } from '../../types';
 
-export const ChipsChoiseVariants = () => {
+export const ChipsChoiceVariants = () => {
   const size = useSelect('size', chipsPropSize, chipsPropSizeDefault);
   const multiple = useBoolean('multiple');
   const getItemStatus = useDefaultGetter('withStatus');

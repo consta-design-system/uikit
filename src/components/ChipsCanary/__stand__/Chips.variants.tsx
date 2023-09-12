@@ -1,13 +1,13 @@
 import { useSelect } from '@consta/stand';
 import React from 'react';
 
-import { ChipsChoiseVariants } from './variants/ChipsChoiseVariants';
+import { ChipsChoiceVariants } from './variants/ChipsChoiceVariants';
 import { ChipsItemVariant } from './variants/ChipsItemVariant';
 import { ChipsVariants } from './variants/ChipsVariants';
 
 const componentsMap = {
+  ChipsChoice: ChipsChoiceVariants,
   Chips: ChipsVariants,
-  ChipsChoise: ChipsChoiseVariants,
   ChipsItem: ChipsItemVariant,
 } as const;
 
