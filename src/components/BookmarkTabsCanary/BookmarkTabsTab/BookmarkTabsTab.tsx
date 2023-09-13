@@ -1,7 +1,7 @@
 import './BookmarkTabsTab.css';
 
 import { IconClose } from '@consta/icons/IconClose';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
 import { Button } from '##/components/Button';
 import { Text } from '##/components/Text';
@@ -30,12 +30,35 @@ const BookmarkTabsTabRender = (
     tabRef,
     controlRef,
     onClose,
+    onKeyDown: onKeyDownProp,
     view,
     className,
     tabWidth = '100%',
     style,
     ...otherProps
   } = props;
+
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const tagRef = useRef<HTMLDivElement>(null);
+
+  const onCloseKeydown: React.KeyboardEventHandler = (e) => {
+    const { code } = e;
+    if (code === 'Tab' || code === 'Escape') {
+      e.stopPropagation();
+      e.preventDefault();
+      tagRef?.current?.focus();
+    }
+  };
+
+  const onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
+    const { code } = e;
+    onKeyDownProp?.(e);
+    if (onClose && code === 'Enter') {
+      e.stopPropagation();
+      e.preventDefault();
+      closeButtonRef.current?.focus();
+    }
+  };
 
   return (
     <Tag
@@ -54,7 +77,8 @@ const BookmarkTabsTabRender = (
       )}
       role="button"
       onClick={onClick}
-      ref={useForkRef([ref, tabRef, controlRef])}
+      onKeyDown={onKeyDown}
+      ref={useForkRef([ref, tabRef, controlRef, tagRef])}
       style={{
         ['--bookmarks-tab-width' as string]: tabWidth,
         ...style,
@@ -87,7 +111,10 @@ const BookmarkTabsTabRender = (
             <Button
               size="xs"
               onlyIcon
+              ref={closeButtonRef}
               view="clear"
+              onKeyDown={onCloseKeydown}
+              tabIndex={-1}
               className={cnBookmarkTabsTab('Button', [
                 cnMixSpace({ mL: 'xs' }),
               ])}
