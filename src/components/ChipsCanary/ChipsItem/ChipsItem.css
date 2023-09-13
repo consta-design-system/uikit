@@ -31,22 +31,6 @@
     padding:
       0 var(--chip-space) 0
       calc((var(--chip-height) / 2) - (var(--chip-badge-size) / 2));
-
-    &:has(> .Badge_size_xs) {
-      --chip-badge-size: 10px;
-    }
-
-    &:has(> .Badge_size_s) {
-      --chip-badge-size: 16px;
-    }
-
-    &:has(> .Badge_size_m) {
-      --chip-badge-size: 24px;
-    }
-
-    &:has(> .Badge_size_l) {
-      --chip-badge-size: 32px;
-    }
   }
 
   &_active {
@@ -73,24 +57,28 @@
       --chip-height: var(--control-height-xs);
       --chip-text-size: var(--control-text-size-xs);
       --chip-space: var(--space-xs);
+      --chip-badge-size: 10px;
     }
 
     &_s {
       --chip-height: var(--control-height-s);
       --chip-text-size: var(--control-text-size-s);
       --chip-space: var(--space-s);
+      --chip-badge-size: 16px;
     }
 
     &_m {
       --chip-height: var(--control-height-m);
       --chip-text-size: var(--control-text-size-m);
       --chip-space: var(--space-m);
+      --chip-badge-size: 16px;
     }
 
     &_l {
       --chip-height: var(--control-height-l);
       --chip-text-size: var(--control-text-size-l);
       --chip-space: var(--space-l);
+      --chip-badge-size: 24px;
     }
   }
 
