@@ -9,8 +9,7 @@
   }
 
   &_active,
-  &_interactive:hover,
-  &:focus {
+  &_interactive:hover {
     background: var(--color-control-bg-clear-hover);
   }
 

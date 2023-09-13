@@ -13,6 +13,7 @@ import {
   mapVerticalSpase,
 } from '##/components/ListCanary';
 import { useFlag } from '##/hooks/useFlag/useFlag';
+import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
@@ -72,7 +73,7 @@ const ContextMenuLevelRender = (
     anchorRef,
     // Геттеры для ITEM
     getItemLabel,
-    getItemRightSide,
+    getItemRightSide: getItemRightSideProp,
     getItemLeftSide,
     getItemSubMenu,
     getItemStatus,
@@ -90,27 +91,12 @@ const ContextMenuLevelRender = (
     ...otherProps
   } = props;
 
+  const firstLevel = levelDepth === 0;
+
   const [hovered, setHovered] = useFlag(false);
 
   const getKey = (item: ContextMenuItemDefault) =>
     (getItemKey(item) || getItemLabel(item)).toString();
-
-  useEffect(() => {
-    if (levelDepth !== 0 && !hovered && hoveredParenLevel < levelDepth) {
-      clearTimeout(timers[levelDepth]);
-      timers[levelDepth] = setTimeout(
-        () => deleteLevel(levelDepth),
-        closeDelay,
-      );
-    }
-    return () => clearTimeout(timers[levelDepth]);
-  }, [hovered, hoveredParenLevel]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      clearTimeout(timers[levelDepth]);
-    }
-  }, [isOpen]);
 
   const addCurrentLevel = (item: ContextMenuItemDefault) => {
     const subMenu = getItemSubMenu(item);
@@ -131,7 +117,14 @@ const ContextMenuLevelRender = (
     }
   };
 
-  const { refs, onKeyDown } = useMenuNavigation({
+  const {
+    refs,
+    onKeyDown,
+    activeIndex,
+    setActiveIndex,
+    setDirection,
+    containerRef,
+  } = useMenuNavigation({
     items,
     getItemSubMenu,
     addLevel: addCurrentLevel,
@@ -148,6 +141,24 @@ const ContextMenuLevelRender = (
     >;
   }, [groupsProp, refs]);
 
+  const activeKey = useMemo(() => {
+    const item = items[activeIndex];
+    return item ? getKey(item) : undefined;
+  }, [items, activeIndex]);
+
+  const onMouseEnter = isMobile
+    ? undefined
+    : (item: ContextMenuItemDefault): React.MouseEventHandler<HTMLDivElement> =>
+        (e) => {
+          addCurrentLevel(item);
+          const onMouseEnter = getItemAttributesProp(item)
+            ?.onMouseEnter as JSX.IntrinsicElements['div']['onMouseEnter'];
+          setActiveIndex(items.indexOf(item));
+          onMouseEnter?.(e);
+        };
+
+  // GETTERS
+
   const getItemOnClick = getItemOnClickProp
     ? (item: ContextMenuItemDefault) => (e: React.MouseEvent) => {
         getItemOnClickProp(item)?.({
@@ -157,25 +168,55 @@ const ContextMenuLevelRender = (
       }
     : undefined;
 
-  const onMouseEnter = isMobile
-    ? undefined
-    : (item: ContextMenuItemDefault): React.MouseEventHandler<HTMLDivElement> =>
-        (e) => {
-          addCurrentLevel(item);
-          const onMouseEnter = getItemAttributesProp(item)
-            ?.onMouseEnter as JSX.IntrinsicElements['div']['onMouseEnter'];
-
-          onMouseEnter?.(e);
-        };
-
-  const firstLevel = levelDepth === 0;
-
   const getItemAttributes = (item: ContextMenuItemDefault) =>
     ({
       ...getItemAttributesProp(item),
       tabIndex: 0,
       onMouseEnter: onMouseEnter?.(item),
     } as JSX.IntrinsicElements[keyof JSX.IntrinsicElements]);
+
+  const getItemActive = (item: ContextMenuItemDefault) => {
+    const key = getKey(item);
+    return key === activeItem || key === activeKey;
+  };
+
+  const getItemRightSide = (item: ContextMenuItemDefault) => {
+    const side = getItemRightSideProp(item);
+    if (!getItemSubMenu(item)) {
+      return side;
+    }
+
+    const sides: React.ReactNode[] = Array.isArray(side) ? side : [side];
+    sides.push(<IconArrowRight size={mapIconSize[size]} />);
+    return sides;
+  };
+
+  // EFFECTS
+
+  useEffect(() => {
+    if (levelDepth !== activeLevelDepth) {
+      setActiveIndex(-1);
+    } else {
+      containerRef.current?.focus();
+    }
+  }, [levelDepth, activeLevelDepth]);
+
+  useEffect(() => {
+    if (levelDepth !== 0 && !hovered && hoveredParenLevel < levelDepth) {
+      clearTimeout(timers[levelDepth]);
+      timers[levelDepth] = setTimeout(
+        () => deleteLevel(levelDepth),
+        closeDelay,
+      );
+    }
+    return () => clearTimeout(timers[levelDepth]);
+  }, [hovered, hoveredParenLevel]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      clearTimeout(timers[levelDepth]);
+    }
+  }, [isOpen]);
 
   return (
     <ContextMenuLevelWrapper
@@ -196,11 +237,15 @@ const ContextMenuLevelRender = (
       spareDirection={spareDirection}
       direction={direction}
       offset={offset}
+      tabIndex={0}
       onKeyDown={onKeyDown}
-      onSetDirection={onSetDirection}
+      onSetDirection={(direction) => {
+        onSetDirection?.(direction);
+        setDirection(direction);
+      }}
       onMouseEnter={setHovered.on}
       onMouseLeave={setHovered.off}
-      ref={ref}
+      ref={useForkRef([ref, containerRef])}
       isMobile={isMobile}
       {...otherProps}
     >
@@ -235,23 +280,19 @@ const ContextMenuLevelRender = (
         getItemLeftIcon={getItemLeftIcon}
         getItemRightIcon={getItemRightIcon}
         getItemLeftSide={getItemLeftSide}
-        getItemRightSide={(item) => {
-          const side = getItemRightSide(item);
-          if (!getItemSubMenu(item)) {
-            return side;
-          }
-
-          const sides: React.ReactNode[] = Array.isArray(side) ? side : [side];
-          sides.push(<IconArrowRight size={mapIconSize[size]} />);
-          return sides;
-        }}
+        getItemRightSide={getItemRightSide}
         getGroupKey={getGroupId}
         getGroupLabel={getGroupLabel}
         getItemDisabled={getItemDisabled}
         getItemStatus={getItemStatus}
+        getItemActive={getItemActive}
+        getItemAdditionalClassName={(item) =>
+          cnContextMenuLevel('Item', {
+            active: getKey(item) === activeItem,
+          })
+        }
         getItemRef={(item) => itemsRefs[getKey(item)]}
         groups={groupsProp}
-        getItemActive={(item) => getKey(item) === activeItem}
         innerOffset={form === 'round' ? 'increased' : 'normal'}
       />
     </ContextMenuLevelWrapper>
