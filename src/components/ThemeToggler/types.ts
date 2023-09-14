@@ -38,6 +38,7 @@ export type ThemeTogglerProps<ITEM = ThemeTogglerItemDefault> =
       possibleDirections?: readonly Direction[];
       children?: never;
       view?: ButtonPropView;
+      animateTransition?: number;
     },
     HTMLButtonElement
   > &

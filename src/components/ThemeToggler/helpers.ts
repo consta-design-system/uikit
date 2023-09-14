@@ -23,7 +23,7 @@ const defaultGetItemIcon: ThemeTogglerPropGetItemIcon<
 export function withDefaultGetters(props: ThemeTogglerProps) {
   return {
     ...props,
-    getItemKey: props.getItemKey || props.getItemLabel || defaultGetItemKey,
+    getItemKey: props.getItemKey || defaultGetItemKey,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
     getItemIcon: props.getItemIcon || defaultGetItemIcon,
   };

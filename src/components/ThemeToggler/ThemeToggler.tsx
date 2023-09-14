@@ -1,5 +1,7 @@
+import { AnimateIconBaseProvider } from '@consta/icons/AnimateIconBaseProvider';
 import { IconCheck } from '@consta/icons/IconCheck';
-import React, { forwardRef, useRef } from 'react';
+import { withAnimateBaseHOC } from '@consta/icons/withAnimateBaseHOC';
+import React, { forwardRef, useMemo, useRef } from 'react';
 
 import { Button } from '##/components/Button';
 import { ContextMenu } from '##/components/ContextMenu';
@@ -7,10 +9,13 @@ import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler'
 import { useChoiceGroup } from '##/hooks/useChoiceGroup';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
+import { useMutableRef } from '##/hooks/useMutableRef';
 
 import { contextMenuSizeMap, iconSizeMap, withDefaultGetters } from './helpers';
 import {
   ThemeTogglerComponent,
+  ThemeTogglerItemDefault,
+  ThemeTogglerPropGetItemKey,
   ThemeTogglerProps,
   themeTogglerPropSizeDefault,
 } from './types';
@@ -36,25 +41,35 @@ const ThemeTogglerRender = (
     possibleDirections,
     style,
     view = 'clear',
+    animateTransition,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), buttonRef);
 
   const [isOpen, setIsOpen] = useFlag(false);
 
+  const getItemIconRef = useMutableRef(getItemIcon);
+
+  const getKey: ThemeTogglerPropGetItemKey<ThemeTogglerItemDefault> = (item) =>
+    getItemKey(item) || getItemLabel(item);
+
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
-    getKey: getItemKey || getItemLabel,
+    getKey,
     callBack: onChange,
     multiple: false,
   });
 
-  type Item = typeof items[number];
+  const ButtonIcon = useMemo(
+    () =>
+      withAnimateBaseHOC({
+        icons: items.map(getItemIconRef.current),
+        transition: animateTransition,
+      }),
+    [items.map(getKey).join('-')],
+  );
 
   const iconSize = iconSizeMap[size];
   const contextMenuSize = contextMenuSizeMap[size];
-
-  const getButtonIcon = () =>
-    getItemIcon(items.find((theme) => getChecked(theme)) ?? items[0]);
 
   const onButtonClick = (e: React.MouseEvent<Element, MouseEvent>) => {
     if (items.length > 2) {
@@ -64,7 +79,7 @@ const ThemeTogglerRender = (
     }
   };
 
-  const renderIcons = (item: Item) => {
+  const renderIcons = (item: ThemeTogglerItemDefault) => {
     const Icon = getItemIcon(item);
 
     if (Icon) {
@@ -72,11 +87,13 @@ const ThemeTogglerRender = (
     }
   };
 
-  const renderChecks = (item: Item) => {
+  const renderChecks = (item: ThemeTogglerItemDefault) => {
     if (getChecked(item)) {
       return <IconCheck size={iconSize} />;
     }
   };
+
+  const animateIconIndex = items.findIndex((theme) => getChecked(theme));
 
   if (items.length <= 1) {
     return null;
@@ -84,16 +101,20 @@ const ThemeTogglerRender = (
 
   return (
     <>
-      <Button
-        {...otherProps}
-        ref={buttonRef}
-        iconLeft={getButtonIcon()}
-        onClick={onButtonClick}
-        onlyIcon
-        size={size}
-        view={view}
-        style={style}
-      />
+      <AnimateIconBaseProvider
+        activeIndex={animateIconIndex >= 0 ? animateIconIndex : 0}
+      >
+        <Button
+          {...otherProps}
+          ref={buttonRef}
+          iconLeft={ButtonIcon}
+          onClick={onButtonClick}
+          onlyIcon
+          size={size}
+          view={view}
+          style={style}
+        />
+      </AnimateIconBaseProvider>
       {items.length > 2 && (
         <ContextMenu
           isOpen={isOpen}
