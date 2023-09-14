@@ -27,8 +27,8 @@ export const cnBookmarkTabs = cn('BookmarkTabs');
 const renderItemDefault = <ITEM,>(
   props: BookmarkTabsRenderItemProps<ITEM>,
 ): React.ReactElement => {
-  const { item: _item, attributes = {}, ...otherProps } = props;
-  return <BookmarkTabsTab {...attributes} {...otherProps} />;
+  const { item: _item, attributes = {}, as, ...otherProps } = props;
+  return <BookmarkTabsTab {...attributes} {...otherProps} as={as} />;
 };
 
 const BookmarkTabsRender = (
