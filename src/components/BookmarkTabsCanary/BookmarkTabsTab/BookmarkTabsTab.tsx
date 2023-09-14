@@ -43,10 +43,13 @@ const BookmarkTabsTabRender = (
 
   const onCloseKeydown: React.KeyboardEventHandler = (e) => {
     const { code } = e;
+    e.stopPropagation();
+    e.preventDefault();
     if (code === 'Tab' || code === 'Escape') {
-      e.stopPropagation();
-      e.preventDefault();
       tagRef?.current?.focus();
+    }
+    if (code === 'Enter' || code === 'Space') {
+      onClose?.(e);
     }
   };
 
