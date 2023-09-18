@@ -191,12 +191,15 @@ const ContextMenuLevelRender = (
     return sides;
   };
 
+  const onMouseLeave: React.MouseEventHandler = () => {
+    setHovered.off();
+    setActiveIndex(-1);
+  };
+
   // EFFECTS
 
   useEffect(() => {
-    if (levelDepth !== activeLevelDepth) {
-      setActiveIndex(-1);
-    } else {
+    if (levelDepth === activeLevelDepth) {
       containerRef.current?.focus();
     }
   }, [levelDepth, activeLevelDepth]);
@@ -244,7 +247,7 @@ const ContextMenuLevelRender = (
         setDirection(direction);
       }}
       onMouseEnter={setHovered.on}
-      onMouseLeave={setHovered.off}
+      onMouseLeave={onMouseLeave}
       ref={useForkRef([ref, containerRef])}
       isMobile={isMobile}
       {...otherProps}

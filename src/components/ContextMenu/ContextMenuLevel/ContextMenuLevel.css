@@ -19,7 +19,7 @@
 }
 
 .ContextMenuLevel {
-  &-Item:not(.ContextMenuLevel-Item_active) {
+  &-Item:not(.ContextMenuLevel-Item_active):not(:focus) {
     &.ListItem_interactive:hover {
       background: transparent;
     }
