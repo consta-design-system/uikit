@@ -3,6 +3,7 @@ import React from 'react';
 
 import { MixSpaceProps } from '##/mixs/MixSpace';
 import { Group } from '##/utils/getGroups';
+import { AsAttributes, AsTags } from '##/utils/types/AsTags';
 import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
@@ -89,13 +90,11 @@ export type ListPropGetItemRightIcon<ITEM> = (
   item: ITEM,
 ) => IconComponent | undefined;
 
-export type ListPropGetItemAs<ITEM> = (
-  item: ITEM,
-) => keyof JSX.IntrinsicElements | undefined;
+export type ListPropGetItemAs<ITEM> = (item: ITEM) => AsTags | undefined;
 
 export type ListPropGetItemAttributes<ITEM> = (
   item: ITEM,
-) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements] | undefined;
+) => AsAttributes | undefined;
 
 export type ListPropGetItemOnClick<ITEM> = (
   item: ITEM,
@@ -163,20 +162,17 @@ export type ListComponent = <ITEM = DefaultListItem, GROUP = DefaultListGroup>(
   props: ListProps<ITEM, GROUP>,
 ) => React.ReactElement | null;
 
-export type ListItemProps<AS extends keyof JSX.IntrinsicElements = 'div'> =
-  PropsWithAsAttributes<
-    Omit<DefaultListItem, 'id' | 'groupId' | 'attributes' | 'onClick'> & {
-      size?: ListPropSize;
-      innerOffset?: 'normal' | 'increased';
-      space?: MixSpaceProps;
-      iconSize?: IconPropSize;
-    },
-    AS
-  >;
+export type ListItemProps<AS extends AsTags = 'div'> = PropsWithAsAttributes<
+  Omit<DefaultListItem, 'id' | 'groupId' | 'attributes' | 'onClick'> & {
+    size?: ListPropSize;
+    innerOffset?: 'normal' | 'increased';
+    space?: MixSpaceProps;
+    iconSize?: IconPropSize;
+  },
+  AS
+>;
 
-export type ListItemComponent = <
-  AS extends keyof JSX.IntrinsicElements = 'div',
->(
+export type ListItemComponent = <AS extends AsTags = 'div'>(
   props: ListItemProps<AS>,
 ) => React.ReactElement | null;
 

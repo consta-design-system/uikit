@@ -30,8 +30,8 @@
   -webkit-appearance: none;
 
   &:not(.Button_loading):hover,
-  &:not(.Button_disabled):hover,
-  &:not(.Button_disabled):not(.Button_loading):hover {
+  &:not(:disabled):hover,
+  &:not(:disabled):not(.Button_loading):hover {
     color: var(--button-color-hover);
     background: var(--button-bg-color-hover);
   }
@@ -137,8 +137,8 @@
       line-height: calc(var(--button-height) - var(--control-border-width) * 2);
 
       &:not(.Button_loading):hover,
-      &:not(.Button_disabled):hover,
-      &:not(.Button_disabled):not(.Button_loading):hover {
+      &:not(:disabled):hover,
+      &:not(:disabled):not(.Button_loading):hover {
         border-color: var(--button-border-hover);
       }
     }
@@ -150,7 +150,7 @@
     }
   }
 
-  &_disabled {
+  &:disabled {
     --button-loader-color: var(--button-color-disable);
     --button-cursor: not-allowed;
     --button-color-hover: var(--button-color-disable);
@@ -202,12 +202,12 @@
     --button-cursor: wait;
     color: transparent;
 
-    &:not(.Button_disabled) {
+    &:not(:disabled) {
       --button-color-hover: transparent;
       --button-bg-color-hover: var(--button-bg-color);
     }
 
-    &.Button_disabled {
+    &:disabled {
       --button-cursor: not-allowed;
       color: transparent;
     }

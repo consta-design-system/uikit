@@ -11,9 +11,8 @@ import { useTheme } from '##/components/Theme/Theme';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useGlobalKeys } from '##/hooks/useGlobalKeys';
 import { cn } from '##/utils/bem';
+import { AsTagAttribute } from '##/utils/types/AsTags';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
-
-type DivProps = JSX.IntrinsicElements['div'];
 
 const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
 type SidebarPropPosition = typeof sidebarPropPosition[number];
@@ -103,7 +102,9 @@ const ContextConsumer: React.FC<{
   return children as React.ReactElement;
 };
 
-interface SidebarComponent extends React.FC<SidebarProps>, DivProps {
+interface SidebarComponent
+  extends React.FC<SidebarProps>,
+    AsTagAttribute<'div'> {
   Content: typeof SidebarContent;
   Actions: typeof SidebarActions;
 }

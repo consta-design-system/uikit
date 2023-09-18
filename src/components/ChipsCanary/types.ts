@@ -1,6 +1,7 @@
 import { IconComponent } from '@consta/icons/Icon';
 
 import { badgePropStatus } from '##/components/Badge';
+import { AsAttributes, AsTags } from '##/utils/types/AsTags';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const chipsPropSize = ['xs', 's', 'm', 'l'] as const;
@@ -29,11 +30,8 @@ export type ChipsDefaultItem = Omit<
   ChipsItemProps,
   'size' | 'activeView' | 'interactive' | 'onRightIconClick'
 > & {
-  attributes?: Omit<
-    JSX.IntrinsicElements[keyof JSX.IntrinsicElements],
-    'children' | 'ref'
-  >;
-  as?: keyof JSX.IntrinsicElements;
+  attributes?: Omit<AsAttributes, 'children' | 'ref'>;
+  as?: AsTags;
   ref?: React.RefObject<HTMLElement>;
 };
 
