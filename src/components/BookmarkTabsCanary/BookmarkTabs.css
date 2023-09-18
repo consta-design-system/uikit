@@ -31,29 +31,6 @@
 
     & > .canary--BookmarkTabsTab {
       flex: 1;
-
-      &:not(.canary--BookmarkTabsTab_form_round.canary--BookmarkTabsTab_active):not(.canary--BookmarkTabsTab_form_round:has(+ .canary--BookmarkTabsTab_active))::after {
-        content: '';
-        position: absolute;
-        top: var(--bookmark-divider-top);
-        right: 0;
-        width: 1px;
-        height: var(--bookmark-divider-height);
-        background: var(--color-bg-border);
-      }
-    }
-
-    &:has(+ .canary--BookmarkTabs-List
-  > .canary--BookmarkTabsTab:first-child.canary--BookmarkTabsTab_active) {
-      & > .canary--BookmarkTabsTab_form_round:last-child::after {
-        display: none;
-      }
-    }
-
-    &:last-child {
-      & > .canary--BookmarkTabsTab:last-child::after {
-        display: none;
-      }
     }
   }
 
