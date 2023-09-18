@@ -91,6 +91,7 @@ export type Props = {
   iconSize?: IconPropSize;
   title?: string;
   children?: never;
+  type?: 'button' | 'reset' | 'submit';
 };
 
 export const COMPONENT_NAME = 'Button' as const;
@@ -125,6 +126,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
     onClick,
     disabled,
     loading,
+    type = 'button',
     tabIndex,
     as = 'button',
     onlyIcon,
@@ -152,19 +154,21 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
     <Tag
       {...otherProps}
       onClick={onClick ? handleClick : undefined}
+      type={type}
       className={cnButton(
         {
           size,
           view,
           width,
           form: mapStableForm[form],
-          disabled,
           loading,
+          disabled,
           withIcon,
           onlyIcon: !!IconOnly,
         },
         [!(disabled || loading) ? cnMixFocus() : undefined, className],
       )}
+      disabled={disabled}
       tabIndex={tabIndex}
       title={title}
       ref={useForkRef([ref, buttonRef])}
