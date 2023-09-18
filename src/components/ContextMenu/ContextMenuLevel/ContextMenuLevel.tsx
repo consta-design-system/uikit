@@ -154,6 +154,7 @@ const ContextMenuLevelRender = (
           addCurrentLevel(item);
           const onMouseEnter = getItemAttributesProp(item)
             ?.onMouseEnter as AsTagAttribute<'div'>['onMouseEnter'];
+          setActiveIndex(items.indexOf(item));
           onMouseEnter?.(e);
         };
 
