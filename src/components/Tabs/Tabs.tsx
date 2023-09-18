@@ -31,8 +31,8 @@ export const cnTabs = cn('Tabs');
 function renderItemDefault<ITEM>(
   props: RenderItemProps<ITEM>,
 ): React.ReactElement {
-  const { item, attributes = {}, ...otherProps } = props;
-  return <TabsTab {...attributes} {...otherProps} />;
+  const { item, attributes = {}, as, ...otherProps } = props;
+  return <TabsTab {...attributes} {...otherProps} as={as} />;
 }
 
 const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
