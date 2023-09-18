@@ -17,7 +17,7 @@ import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
-import { AsTagAttribute } from '##/utils/types/AsTags';
+import { AsAttributes, AsTagAttribute } from '##/utils/types/AsTags';
 
 import { ContextMenuLevelWrapper } from '../ContextMenuLevelWrapper';
 import {
@@ -173,7 +173,7 @@ const ContextMenuLevelRender = (
       ...getItemAttributesProp(item),
       tabIndex: 0,
       onMouseEnter: onMouseEnter?.(item),
-    } as JSX.IntrinsicElements[keyof JSX.IntrinsicElements]);
+    } as AsAttributes);
 
   const getItemActive = (item: ContextMenuItemDefault) => {
     const key = getKey(item);
