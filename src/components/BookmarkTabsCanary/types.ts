@@ -70,6 +70,7 @@ export type BookmarkTabsRenderItemProps<ITEM> = {
   size: BookmarkTabsPropSize;
   form: BookmarkTabsPropForm;
   view: BookmarkTabsPropView;
+  bordered?: boolean;
   tabWidth?: string;
   tabRef?: React.RefObject<HTMLElement>;
   controlRef?: React.RefObject<HTMLElement>;
@@ -122,6 +123,7 @@ export type BookmarkTabsTabProps<AS extends AsTags = 'button'> =
       view: BookmarkTabsPropView;
       active?: boolean;
       tabWidth?: string;
+      bordered?: boolean;
       tabRef?: React.RefObject<HTMLElement>;
       controlRef?: React.RefObject<HTMLElement>;
       fixed?: boolean;
