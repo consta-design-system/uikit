@@ -1,9 +1,9 @@
-import { getFittingItemsCount } from '../useFittingItems';
+import { getFittingItems } from '../useFittingItems';
 
-describe('getFittingItemsCount', () => {
-  it('возвращает 3, если размеры пока неизвестны', () => {
+describe('getFittingItems', () => {
+  it('возвращает 3 индекса, если размеры пока неизвестны', () => {
     expect(
-      getFittingItemsCount(
+      getFittingItems(
         [
           {
             size: 0,
@@ -21,12 +21,12 @@ describe('getFittingItemsCount', () => {
         0,
         0,
       ),
-    ).toBe(3);
+    ).toBe([0, 1, 2]);
   });
 
-  it('возвращает 3, если вмещаются все айтемы', () => {
+  it('возвращает 3 индекса, если вмещаются все айтемы', () => {
     expect(
-      getFittingItemsCount(
+      getFittingItems(
         [
           {
             size: 100,
@@ -44,12 +44,12 @@ describe('getFittingItemsCount', () => {
         100 + 10 + 100 + 10 + 100,
         50,
       ),
-    ).toBe(3);
+    ).toBe([0, 1, 2]);
   });
 
-  it('возвращает 2, если вмещаются 2 айтема и разворачивалка', () => {
+  it('возвращает первые два индекса, если вмещаются 2 айтема и разворачивалка', () => {
     expect(
-      getFittingItemsCount(
+      getFittingItems(
         [
           {
             size: 100,
@@ -67,12 +67,12 @@ describe('getFittingItemsCount', () => {
         100 + 10 + 100 + 10 + 50,
         50,
       ),
-    ).toBe(2);
+    ).toBe([0, 1]);
   });
 
-  it('возвращает 1, если вмещаются 1 айтем и разворачивалка', () => {
+  it('возвращает первый индекс, если вмещаются 1 айтем и разворачивалка', () => {
     expect(
-      getFittingItemsCount(
+      getFittingItems(
         [
           {
             size: 100,
@@ -90,12 +90,12 @@ describe('getFittingItemsCount', () => {
         100 + 10 + 50,
         50,
       ),
-    ).toBe(1);
+    ).toBe([0]);
   });
 
-  it('возвращает 0, если вмещается только разворачивалка', () => {
+  it('возвращает сортированные два индекса, если вмещаются 2 айтема и разворачивалка', () => {
     expect(
-      getFittingItemsCount(
+      getFittingItems(
         [
           {
             size: 100,
@@ -110,9 +110,10 @@ describe('getFittingItemsCount', () => {
             gap: 10,
           },
         ],
-        100 + 10 + 50 - 1,
+        100 + 10 + 100 + 10 + 50,
         50,
+        2,
       ),
-    ).toBe(0);
+    ).toBe([0, 2]);
   });
 });

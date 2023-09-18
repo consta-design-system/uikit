@@ -45,7 +45,7 @@ const TabsTabRender = (
         className,
       ])}
       role="tab"
-      type="button"
+      buttonType="button"
       tabIndex={disabled ? -1 : undefined}
       ref={currentRef}
       title={onlyIcon ? label.toString() : undefined}

@@ -170,6 +170,7 @@ export type ListItemProps<AS extends keyof JSX.IntrinsicElements = 'div'> =
       innerOffset?: 'normal' | 'increased';
       space?: MixSpaceProps;
       iconSize?: IconPropSize;
+      buttonType?: 'button' | 'submit' | 'reset';
     },
     AS
   >;

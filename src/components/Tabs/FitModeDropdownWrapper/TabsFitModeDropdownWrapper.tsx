@@ -22,11 +22,16 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
 }: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => {
   const ref = React.useRef<HTMLDivElement>(null);
   const moreItemsRef = React.useRef<HTMLDivElement>(null);
-  const { isItemHidden } = useFittingItems({
+
+  const activeIndex = items.findIndex(getItemChecked);
+
+  const { visibleIndexes, isItemHidden } = useFittingItems({
     tabsDimensions,
     containerRef: ref,
     moreItemsRef,
+    activeIndex,
   });
+
   const hiddenItems = items.filter((_item, idx) => isItemHidden(idx));
   const maxTabHeight: number = React.useMemo(() => {
     if (!tabRefs.length) {
@@ -37,7 +42,6 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
     );
   }, [tabsDimensions]);
 
-  const checkedItemIsHidden = hiddenItems.some(getItemChecked);
   const visibleTabsWidth = getTabsWidth(
     tabsDimensions.filter((_td, idx) => !isItemHidden(idx)),
   );
@@ -50,7 +54,8 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
     >
       <div className={cnTabsFitModeDropdownWrapper('Tabs')}>
         {renderItemsList({
-          withRunningLine: !checkedItemIsHidden,
+          visibleIndexes,
+          withRunningLine: true,
           getTabClassName: (idx) =>
             cnTabsFitModeDropdownWrapper('Tab', { hidden: isItemHidden(idx) }),
         })}

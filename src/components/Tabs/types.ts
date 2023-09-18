@@ -188,6 +188,7 @@ export type TabsMoreItemsComponent = <ITEM>(
 ) => React.ReactElement | null;
 
 export type RenderItemsListProp = (props: {
+  visibleIndexes?: number[];
   withRunningLine?: boolean;
   getTabClassName?: (idx: number) => string | undefined;
 }) => React.ReactNode;
