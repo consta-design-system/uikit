@@ -127,7 +127,7 @@ export type BookmarkTabsTabProps<AS extends AsTags = 'button'> =
       tabRef?: React.RefObject<HTMLElement>;
       controlRef?: React.RefObject<HTMLElement>;
       fixed?: boolean;
-      onClose?: React.MouseEventHandler;
+      onClose?: React.ReactEventHandler;
     },
     AS
   > &
