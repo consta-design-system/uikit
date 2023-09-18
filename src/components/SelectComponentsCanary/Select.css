@@ -397,6 +397,10 @@
     }
   }
 
+  &-SelectAll.Text {
+    line-height: calc(var(--input-height) - var(--space-3xs));
+  }
+
   &-Indicators {
     display: flex;
     height: 100%;

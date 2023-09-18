@@ -1,6 +1,7 @@
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
+import { AsAttributes, AsTags } from '##/utils/types/AsTags';
 import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
@@ -17,9 +18,9 @@ export type TabsItemDefault = {
   rightSide?: React.ReactNode;
   leftSide?: React.ReactNode;
   disabled?: boolean;
-  as?: keyof JSX.IntrinsicElements;
+  as?: AsTags;
   ref?: React.RefObject<HTMLElement>;
-  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
+  attributes?: AsAttributes;
 
   /**
    * @deprecated since version 4.11.0 use leftIcon
@@ -52,9 +53,7 @@ export type TabsPropGetItemSide<ITEM> = (
   item: ITEM,
 ) => React.ReactNode | undefined;
 
-export type TabsPropGetItemAs<ITEM> = (
-  item: ITEM,
-) => keyof JSX.IntrinsicElements | undefined;
+export type TabsPropGetItemAs<ITEM> = (item: ITEM) => AsTags | undefined;
 export type TabsPropGetItemAttributes<ITEM> = (
   item: ITEM,
 ) => TabsItemDefault['attributes'];
@@ -144,25 +143,22 @@ export type TabsComponent = <ITEM>(
   props: TabsProps<ITEM>,
 ) => React.ReactElement | null;
 
-export type TabsTabProps<AS extends keyof JSX.IntrinsicElements = 'button'> =
-  PropsWithAsAttributes<
-    {
-      onChange: React.MouseEventHandler;
-      checked: boolean;
-      size: TabsPropSize;
-      iconSize?: IconPropSize;
-      onlyIcon?: boolean;
-      className?: string;
-      label: string;
-      tabRef?: React.RefObject<HTMLElement>;
-      renderInDropdown?: boolean;
-    } & Omit<TabsItemDefault, 'label' | 'ref' | 'attributes'>,
-    AS
-  >;
+export type TabsTabProps<AS extends AsTags = 'button'> = PropsWithAsAttributes<
+  {
+    onChange: React.MouseEventHandler;
+    checked: boolean;
+    size: TabsPropSize;
+    iconSize?: IconPropSize;
+    onlyIcon?: boolean;
+    className?: string;
+    label: string;
+    tabRef?: React.RefObject<HTMLElement>;
+    renderInDropdown?: boolean;
+  } & Omit<TabsItemDefault, 'label' | 'ref' | 'attributes'>,
+  AS
+>;
 
-export type TabsTabComponent = <
-  AS extends keyof JSX.IntrinsicElements = 'button',
->(
+export type TabsTabComponent = <AS extends AsTags = 'button'>(
   props: TabsTabProps<AS>,
 ) => React.ReactElement | null;
 

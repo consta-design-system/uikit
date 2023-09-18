@@ -111,9 +111,11 @@ export type ComboboxProps<
   (MULTIPLE extends true
     ? {
         selectAll?: boolean;
+        allSelectedAllLabel?: string;
       }
     : {
         selectAll?: never;
+        allSelectedAllLabel?: never;
       }) &
   (ITEM extends { label: DefaultItem['label'] }
     ? {}

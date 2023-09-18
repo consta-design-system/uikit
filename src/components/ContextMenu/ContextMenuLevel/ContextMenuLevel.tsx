@@ -17,6 +17,7 @@ import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
+import { AsTagAttribute } from '##/utils/types/AsTags';
 
 import { ContextMenuLevelWrapper } from '../ContextMenuLevelWrapper';
 import {
@@ -148,12 +149,11 @@ const ContextMenuLevelRender = (
 
   const onMouseEnter = isMobile
     ? undefined
-    : (item: ContextMenuItemDefault): React.MouseEventHandler<HTMLDivElement> =>
+    : (item: ContextMenuItemDefault): AsTagAttribute<'div'>['onMouseEnter'] =>
         (e) => {
           addCurrentLevel(item);
           const onMouseEnter = getItemAttributesProp(item)
-            ?.onMouseEnter as JSX.IntrinsicElements['div']['onMouseEnter'];
-          setActiveIndex(items.indexOf(item));
+            ?.onMouseEnter as AsTagAttribute<'div'>['onMouseEnter'];
           onMouseEnter?.(e);
         };
 

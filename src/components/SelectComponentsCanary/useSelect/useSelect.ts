@@ -274,6 +274,21 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
   const hasItems = items.length !== 0;
 
+  const allItemsSelected = useMemo(() => {
+    if (isNotMultipleParams(params)) {
+      return false;
+    }
+    if (selectAll) {
+      return (
+        items.filter((el) =>
+          value.find((item) => getItemKey(item) === getItemKey(el)),
+        ).length === items.length
+      );
+    }
+
+    return false;
+  }, [selectAll, multiple, value, items]);
+
   const getSelectedOptionIndex = (): number => {
     let index = 0;
     if (value.length > 0) {
@@ -750,6 +765,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     getHandleRemoveValue,
     notFound,
     hasItems,
+    allItemsSelected,
     optionsRefs,
   };
 }

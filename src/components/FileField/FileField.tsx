@@ -2,13 +2,15 @@ import './FileField.css';
 
 import React, { useRef } from 'react';
 
+import { AsTags } from '##/utils/types/AsTags';
+
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cnMixVisuallyHidden } from '../../mixs/MixVisuallyHidden/MixVisuallyHidden';
 import { cn } from '../../utils/bem';
 import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
-type ComponentProps = { role: string; as: keyof JSX.IntrinsicElements };
+type ComponentProps = { role: string; as: AsTags };
 
 type RenderFn = (props: ComponentProps) => React.ReactNode;
 

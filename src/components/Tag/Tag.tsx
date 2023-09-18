@@ -1,6 +1,8 @@
 import { IconComponent, IconProps } from '@consta/icons/Icon';
 import React, { forwardRef, useRef } from 'react';
 
+import { AsTagAttribute, AsTags } from '##/utils/types/AsTags';
+
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { TagBase } from '../TagBase/TagBase';
@@ -73,19 +75,17 @@ type PropsWithModeInfo = CommonProps & {
 
 type Props<ROLE extends TagPropMode = 'button'> = ROLE extends 'button'
   ? PropsWithModeButton &
-      Omit<JSX.IntrinsicElements['button'], keyof PropsWithModeButton>
+      Omit<AsTagAttribute<'button'>, keyof PropsWithModeButton>
   : {} & ROLE extends 'check'
   ? PropsWithModeCheck &
-      Omit<JSX.IntrinsicElements['button'], keyof PropsWithModeCheck>
+      Omit<AsTagAttribute<'button'>, keyof PropsWithModeCheck>
   : {} & ROLE extends 'cancel'
   ? PropsWithModeCancel &
-      Omit<JSX.IntrinsicElements['span'], keyof PropsWithModeCancel>
+      Omit<AsTagAttribute<'span'>, keyof PropsWithModeCancel>
   : {} & ROLE extends 'link'
-  ? PropsWithModeLink &
-      Omit<JSX.IntrinsicElements['a'], keyof PropsWithModeLink>
+  ? PropsWithModeLink & Omit<AsTagAttribute<'a'>, keyof PropsWithModeLink>
   : {} & ROLE extends 'info'
-  ? PropsWithModeInfo &
-      Omit<JSX.IntrinsicElements['span'], keyof PropsWithModeInfo>
+  ? PropsWithModeInfo & Omit<AsTagAttribute<'span'>, keyof PropsWithModeInfo>
   : {};
 
 type TagRender = <ROLE extends TagPropMode>(
@@ -108,7 +108,7 @@ export function getParams(
   onClick?: TagBaseProps['onClick'];
   onCancel?: TagBaseProps['onCancel'];
   withAction?: TagBaseProps['withAction'];
-  as: keyof JSX.IntrinsicElements;
+  as: AsTags;
 } {
   switch (mode) {
     case 'button':

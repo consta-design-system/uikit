@@ -1,9 +1,18 @@
+import React from 'react';
+
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
+
+type CheckboxGroupPropAttributes = Omit<
+  JSX.IntrinsicElements['label'],
+  'ref' | 'onChange' | 'onFocus' | 'children' | 'onBlur'
+>;
 
 export type CheckboxGroupDefaultItem = {
   key?: string | number;
   label: string;
   disabled?: boolean;
+  attributes?: CheckboxGroupPropAttributes;
+  ref?: React.RefObject<HTMLLabelElement>;
 };
 
 export const checkboxGroupDirections = ['column', 'row'] as const;
@@ -28,6 +37,12 @@ export type CheckboxGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type CheckboxGroupPropGetItemDisabled<ITEM> = (
   item: ITEM,
 ) => boolean | undefined;
+export type CheckboxGroupPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => CheckboxGroupPropAttributes | undefined;
+export type CheckboxGroupPropGetItemRef<ITEM> = (
+  item: ITEM,
+) => React.RefObject<HTMLLabelElement> | undefined;
 
 export type CheckboxGroupProps<ITEM = CheckboxGroupDefaultItem> =
   PropsWithHTMLAttributesAndRef<
@@ -37,6 +52,8 @@ export type CheckboxGroupProps<ITEM = CheckboxGroupDefaultItem> =
       getItemKey?: CheckboxGroupPropGetItemKey<ITEM>;
       getItemLabel?: CheckboxGroupPropGetItemLabel<ITEM>;
       getItemDisabled?: CheckboxGroupPropGetItemDisabled<ITEM>;
+      getItemAttributes?: CheckboxGroupPropGetItemAttributes<ITEM>;
+      getItemRef?: CheckboxGroupPropGetItemRef<ITEM>;
       onChange: (props: {
         e: React.ChangeEvent<HTMLInputElement>;
         value: ITEM[] | null;

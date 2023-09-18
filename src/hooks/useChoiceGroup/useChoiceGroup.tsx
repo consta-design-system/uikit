@@ -11,12 +11,12 @@ type UseChoiceGroupValues<ITEM, EVENT> = {
   getChecked: GetChecked<ITEM>;
 };
 
-type CallbackWithMultiple<ITEM, EVENT> = (props: {
+export type CallbackWithMultiple<ITEM, EVENT> = (props: {
   e: EVENT;
   value: ITEM[] | null;
 }) => void;
 
-type CallbackWithoutMultiple<ITEM, EVENT> = (props: {
+export type CallbackWithoutMultiple<ITEM, EVENT> = (props: {
   e: EVENT;
   value: ITEM;
 }) => void;

@@ -1,6 +1,7 @@
 import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
+import { AsAttributes, AsTags } from '##/utils/types/AsTags';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 import {
@@ -17,12 +18,9 @@ export type BadgeGroupDefaultItem = {
   label?: string;
   iconLeft?: IconComponent;
   iconRight?: IconComponent;
-  as?: keyof JSX.IntrinsicElements;
+  as?: AsTags;
   ref?: React.RefObject<HTMLElement>;
-  attributes?: Omit<
-    JSX.IntrinsicElements[keyof JSX.IntrinsicElements],
-    'children' | 'ref'
-  >;
+  attributes?: Omit<AsAttributes, 'children' | 'ref'>;
 };
 
 export type BadgeGroupPropGetItemKey<ITEM> = (
