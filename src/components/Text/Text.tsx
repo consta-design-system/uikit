@@ -100,7 +100,6 @@ export type TextProps = {
   weight?: TextPropWeight;
   width?: TextPropWidth;
   truncate?: boolean;
-  buttonType?: 'button' | 'submit' | 'reset';
 };
 
 export const cnText = cn('Text');
@@ -125,7 +124,6 @@ export const Text = forwardRefWithAs<TextProps>((props, ref) => {
     className,
     children,
     truncate = false,
-    buttonType,
     ...otherProps
   } = props;
 
@@ -134,7 +132,6 @@ export const Text = forwardRefWithAs<TextProps>((props, ref) => {
   return (
     <Tag
       {...otherProps}
-      type={buttonType}
       className={cnText(
         {
           align,
