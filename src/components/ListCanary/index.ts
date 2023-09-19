@@ -8,3 +8,4 @@ export * from './ListItemGrid';
 export * from './ListBox';
 export * from './ListDivider';
 export * from './maps';
+export * from './renderHeader';

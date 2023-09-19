@@ -24,6 +24,7 @@ import {
 import { useSelect } from '##/components/SelectComponentsCanary/useSelect';
 import { useForkRef } from '##/hooks/useForkRef';
 
+import { Text } from '../Text';
 import {
   ComboboxComponent,
   ComboboxProps,
@@ -76,6 +77,7 @@ const ComboboxRender = <
     getGroupKey,
     getGroupLabel,
     renderItem,
+    allSelectedAllLabel = 'Все',
     searchValue: searchValueProp,
     renderValue: renderValueProp,
     onCreate,
@@ -116,6 +118,7 @@ const ComboboxRender = <
     notFound,
     hasItems,
     optionsRefs,
+    allItemsSelected,
   } = useSelect({
     items,
     groups,
@@ -237,6 +240,22 @@ const ComboboxRender = <
     );
   };
 
+  const renderValueList = () => {
+    if (allItemsSelected) {
+      return (
+        <Text size={size} className={cnSelect('SelectAll')}>
+          {allSelectedAllLabel}
+        </Text>
+      );
+    }
+    if (multiple) {
+      return (
+        <div className={cnSelect('ControlValue')}>{renderControlValue()}</div>
+      );
+    }
+    return renderControlValue();
+  };
+
   return (
     <>
       <SelectContainer
@@ -268,13 +287,7 @@ const ComboboxRender = <
             aria-hidden="true"
           >
             <div className={cnSelect('ControlValueContainer')}>
-              {multiple ? (
-                <div className={cnSelect('ControlValue')}>
-                  {renderControlValue()}
-                </div>
-              ) : (
-                renderControlValue()
-              )}
+              {renderValueList()}
             </div>
           </div>
           <span className={cnSelect('Indicators')}>

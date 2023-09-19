@@ -52,8 +52,15 @@ export const useCalendarVisible = (
     Tab,
   };
 
-  useKeysRef({ ref: startRef, keys, isActive: !disabled });
-  useKeysRef({ ref: endRef, keys, isActive: !disabled });
+  const eventHandler = (e: KeyboardEvent) => {
+    const { key } = e;
+    if (key !== 'Tab' && key !== 'Escape') {
+      setCalendarVisible.on();
+    }
+  };
+
+  useKeysRef({ ref: startRef, keys, eventHandler, isActive: !disabled });
+  useKeysRef({ ref: endRef, keys, eventHandler, isActive: !disabled });
 
   useEffect(() => {
     !disabled && onDropdownOpen?.(calendarVisible);

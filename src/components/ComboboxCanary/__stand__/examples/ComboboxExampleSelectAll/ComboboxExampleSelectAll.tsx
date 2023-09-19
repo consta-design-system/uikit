@@ -63,6 +63,7 @@ export const ComboboxExampleSelectAll = () => {
     <Example col={1}>
       <Combobox
         placeholder="Выберите варианты"
+        allSelectedAllLabel="Все варианты"
         items={items}
         value={value}
         onChange={setValue}

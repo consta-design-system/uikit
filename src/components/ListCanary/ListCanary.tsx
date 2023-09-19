@@ -1,52 +1,19 @@
 import React, { useMemo } from 'react';
 
-import { MixSpaceProps } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 import { getGroups } from '##/utils/getGroups';
 
 import { withDefaultGetters } from './helper';
-import { ListDivider } from './ListDivider';
-import { ListGroupLabel } from './ListGroupLabel';
 import { ListItem } from './ListItem';
+import { renderHeader } from './renderHeader';
 import {
   defaultListPropInnerOffset,
   defaultListPropSize,
   ListComponent,
   ListPropRenderItem,
-  ListPropSize,
 } from './types';
 
 export const cnList = cn('List');
-
-const renderHeader = (
-  label: string | undefined,
-  first: boolean,
-  size: ListPropSize,
-  rightSide: React.ReactNode,
-  labelSpace: MixSpaceProps | undefined,
-  dividerSpase: MixSpaceProps | undefined,
-  className: string | undefined,
-): React.ReactNode | null => {
-  if (label) {
-    return (
-      <ListGroupLabel
-        size={size}
-        label={label}
-        rightSide={rightSide}
-        space={labelSpace}
-        className={className}
-      />
-    );
-  }
-
-  if (!label && !first) {
-    return (
-      <ListDivider size={size} space={dividerSpase} className={className} />
-    );
-  }
-
-  return null;
-};
 
 export const List: ListComponent = (props) => {
   const {

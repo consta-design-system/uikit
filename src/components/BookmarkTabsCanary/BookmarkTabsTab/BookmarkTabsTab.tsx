@@ -33,6 +33,7 @@ const BookmarkTabsTabRender = (
     onKeyDown: onKeyDownProp,
     view,
     className,
+    bordered,
     tabWidth = '100%',
     style,
     ...otherProps
@@ -72,6 +73,7 @@ const BookmarkTabsTabRender = (
           view,
           active,
           fixed,
+          bordered,
           withCloseButton: !!onClose,
           withLeftIcon: !!LeftIcon,
           withRightIcon: !!RightIcon,
