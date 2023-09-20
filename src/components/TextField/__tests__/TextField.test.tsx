@@ -9,7 +9,6 @@ import {
   textFieldPropSize,
   textFieldPropStatus,
   textFieldPropView,
-  textFieldPropWidth,
 } from '../TextField';
 
 type TextFieldProps = React.ComponentProps<typeof TextField>;
@@ -90,14 +89,6 @@ describe('Компонент Button', () => {
         it(`присваивает класс для view=${view}`, () => {
           renderComponent({ view });
           expect(getRender()).toHaveClass(cnTextField({ view }));
-        });
-      });
-    });
-    describe('проверка width', () => {
-      textFieldPropWidth.forEach((width) => {
-        it(`присваивает класс для width=${width}`, () => {
-          renderComponent({ width });
-          expect(getRender()).toHaveClass(cnTextField({ width }));
         });
       });
     });

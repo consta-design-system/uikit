@@ -12,7 +12,6 @@ import {
   TextFieldPropStatus,
   TextFieldPropValue,
   TextFieldPropView,
-  TextFieldPropWidth,
 } from '../../TextField/TextField';
 import { EventInterceptorHandler } from '../EventInterceptor';
 
@@ -30,7 +29,6 @@ export type Props = {
   view?: TextFieldPropView;
   form?: TextFieldPropForm;
   state?: TextFieldPropStatus;
-  width?: TextFieldPropWidth;
   onFocus?: React.FocusEventHandler<HTMLElement>;
   onBlur?: React.FocusEventHandler<HTMLElement>;
   autoFocus?: boolean;

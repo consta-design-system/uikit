@@ -30,7 +30,6 @@ import {
   TextFieldProps,
   textFieldPropSizeDefault,
   textFieldPropViewDefault,
-  textFieldPropWidthDefault,
 } from './types';
 
 export const COMPONENT_NAME = 'TextField' as const;
@@ -62,7 +61,6 @@ export const TextFieldRender = <TYPE extends string>(
     form = textFieldPropFormDefault,
     state,
     status,
-    width = textFieldPropWidthDefault,
     onBlur,
     onFocus,
     autoFocus = false,
@@ -243,7 +241,7 @@ export const TextFieldRender = <TYPE extends string>(
 
   return (
     <div
-      className={cnTextField({ labelPosition, size, view, width }, [className])}
+      className={cnTextField({ labelPosition, size, view }, [className])}
       ref={useForkRef([ref, textFieldRef])}
       {...rootProps}
       {...otherProps}

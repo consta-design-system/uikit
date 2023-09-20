@@ -6,10 +6,7 @@
   --clear-button-color: var(--color-control-typo-clear);
   position: relative;
   display: inline-flex;
-
-  &_width_full {
-    width: 100%;
-  }
+  width: 100%;
 
   &_size {
     &_xs {
