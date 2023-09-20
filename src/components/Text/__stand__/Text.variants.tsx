@@ -14,7 +14,6 @@ import {
   textPropSizeDefault,
   textPropSpacing,
   textPropTransform,
-  textPropType,
   textPropView,
   textPropViewDefault,
   textPropWeight,
@@ -36,7 +35,6 @@ const Variants = () => {
   const spacing = useSelect('spacing', textPropSpacing);
   const fontStyle = useSelect('fontStyle', textPropFontStyle);
   const transform = useSelect('transform', textPropTransform);
-  const type = useSelect('type', textPropType);
   const view = useSelect('View', textPropView, textPropViewDefault);
   const weight = useSelect('weight', textPropWeight);
   const truncate = useBoolean('truncate', false);
@@ -58,7 +56,6 @@ const Variants = () => {
       spacing={spacing}
       fontStyle={fontStyle}
       transform={transform}
-      type={type}
       view={view}
       weight={weight}
       truncate={truncate}

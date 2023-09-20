@@ -131,8 +131,9 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
   HTMLDivElement
 > &
   TextFieldPropsTextareaType<TYPE> &
-  TextFieldPropRightSide<TYPE>;
+  TextFieldPropRightSide<TYPE> &
+  React.RefAttributes<HTMLDivElement>;
 
 export type TextFieldComponent = <TYPE extends string>(
-  props: TextFieldProps<TYPE> & React.RefAttributes<HTMLElement>,
+  props: TextFieldProps<TYPE>,
 ) => React.ReactElement | null;

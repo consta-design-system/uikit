@@ -1,58 +1,78 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useComponentSize } from '../../../hooks/useComponentSize/useComponentSize';
-import { getTabsWidth } from '../helpers';
 import { TabDimensions } from '../types';
 
 export const useFittingItems = ({
   tabsDimensions,
   containerRef,
   moreItemsRef,
+  activeIndex,
 }: {
   tabsDimensions: TabDimensions[];
   containerRef: React.RefObject<HTMLElement>;
   moreItemsRef: React.RefObject<HTMLElement>;
+  activeIndex?: number;
 }): {
-  fittingItemsCount: number;
+  visibleIndexes: number[];
   isItemHidden: (idx: number) => boolean;
 } => {
   const { width: containerWidth } = useComponentSize(containerRef);
   const { width: moreItemsWidth } = useComponentSize(moreItemsRef);
 
-  const fittingItemsCount = React.useMemo(
-    () => getFittingItemsCount(tabsDimensions, containerWidth, moreItemsWidth),
-    [tabsDimensions, containerWidth, moreItemsWidth],
+  const visibleIndexes = useMemo(
+    () =>
+      getFittingItems(
+        tabsDimensions,
+        containerWidth,
+        moreItemsWidth,
+        activeIndex,
+      ),
+    [tabsDimensions, containerWidth, moreItemsWidth, activeIndex],
   );
 
   return {
-    fittingItemsCount,
+    visibleIndexes,
     isItemHidden: React.useCallback(
-      (idx) => idx >= fittingItemsCount,
-      [fittingItemsCount],
+      (idx) => !visibleIndexes.includes(idx),
+      [visibleIndexes],
     ),
   };
 };
 
-export const getFittingItemsCount = (
+export const getFittingItems = (
   tabsDimensions: TabDimensions[],
   totalWidth: number,
   moreItemsWidth: number,
-): number => {
+  activeIndex?: number,
+): number[] => {
   if (!totalWidth) {
-    return tabsDimensions.length;
+    return Array.from<number>({ length: tabsDimensions.length }).map(
+      (_el, index) => index,
+    );
   }
-
+  let width =
+    typeof activeIndex === 'number' && activeIndex > -1
+      ? tabsDimensions[activeIndex].size + tabsDimensions[activeIndex].gap
+      : 0;
+  const arr: number[] = [];
   for (const [idx, tabDimensions] of tabsDimensions.entries()) {
-    const isLastItem = idx === tabsDimensions.length - 1;
-    const previousTabsDimensions = tabsDimensions.slice(0, idx);
-    const width =
-      tabDimensions.size +
-      getTabsWidth(previousTabsDimensions) +
-      (isLastItem ? 0 : tabDimensions.gap + moreItemsWidth);
-    if (width > totalWidth) {
-      return idx;
+    if (idx !== activeIndex) {
+      const isLastItem = idx === tabsDimensions.length - 1;
+      width += tabDimensions.size + (isLastItem ? 0 : tabDimensions.gap);
+      if (width + moreItemsWidth > totalWidth) {
+        if (activeIndex && !arr.includes(activeIndex)) {
+          arr.push(activeIndex);
+        }
+        return arr;
+      }
+      arr.push(idx);
+    } else {
+      arr.push(activeIndex);
     }
   }
 
-  return tabsDimensions.length;
+  return Array.from<number>({ length: tabsDimensions.length }).map(
+    (_el, index) => index,
+  );
 };

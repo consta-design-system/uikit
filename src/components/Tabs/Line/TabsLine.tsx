@@ -1,9 +1,8 @@
 import './TabsLine.css';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { cn } from '../../../utils/bem';
-import { getTabsWidth } from '../helpers';
 import { TabDimensions, TabsPropLinePosition } from '../types';
 
 const cnTabsLine = cn('TabsLine');
@@ -17,11 +16,23 @@ export const TabsBorderLine: React.FC<{
 export const TabsRunningLine: React.FC<{
   linePosition: TabsPropLinePosition;
   activeTabIdx: number;
+  visibleIndexes?: number[];
   tabsDimensions: TabDimensions[];
-}> = ({ linePosition, activeTabIdx, tabsDimensions }) => {
-  const previousTabsDimensions = tabsDimensions.slice(0, activeTabIdx);
+}> = ({ linePosition, activeTabIdx, tabsDimensions, visibleIndexes }) => {
   const size = tabsDimensions[activeTabIdx]?.size ?? 0;
-  const offset = getTabsWidth(previousTabsDimensions);
+
+  const offset = useMemo(
+    () =>
+      tabsDimensions.reduce(
+        (a, v, index) =>
+          a +
+          (visibleIndexes?.includes(index) && index < activeTabIdx
+            ? v.size + v.gap
+            : 0),
+        0,
+      ),
+    [tabsDimensions, visibleIndexes, activeTabIdx],
+  );
 
   return (
     <TabsLine

@@ -17,6 +17,7 @@ import { useRefs } from '##/hooks/useRefs/useRefs';
 import { cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
+import { AsAttributes, AsTagAttribute } from '##/utils/types/AsTags';
 
 import { ContextMenuLevelWrapper } from '../ContextMenuLevelWrapper';
 import {
@@ -137,13 +138,11 @@ const ContextMenuLevelRender = (
 
   const onMouseEnter = isMobile
     ? undefined
-    : (
-          item: ContextMenuItemDefault,
-        ): JSX.IntrinsicElements['div']['onMouseEnter'] =>
+    : (item: ContextMenuItemDefault): AsTagAttribute<'div'>['onMouseEnter'] =>
         (e) => {
           addCurrentLevel(item);
           const onMouseEnter = getItemAttributes(item)
-            ?.onMouseEnter as JSX.IntrinsicElements['div']['onMouseEnter'];
+            ?.onMouseEnter as AsTagAttribute<'div'>['onMouseEnter'];
 
           onMouseEnter?.(e);
         };
@@ -215,7 +214,7 @@ const ContextMenuLevelRender = (
                 ({
                   ...getItemAttributes(item),
                   onMouseEnter: onMouseEnter(item),
-                } as JSX.IntrinsicElements[keyof JSX.IntrinsicElements])
+                } as AsAttributes)
             : getItemAttributes
         }
         getItemGroupKey={getItemGroupId}

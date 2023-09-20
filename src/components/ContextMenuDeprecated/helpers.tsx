@@ -1,3 +1,5 @@
+import { AsAttributes, AsTags } from '##/utils/types/AsTags';
+
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
 import { PropsWithAsAttributes } from '../../utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
@@ -37,12 +39,10 @@ export type ContextMenuPropSortGroup = (
 export type ContextMenuPropGetItemOnClick<ITEM> = (
   item: ITEM,
 ) => React.EventHandler<React.MouseEvent> | undefined;
-export type ContextMenuPropGetItemAs<ITEM> = (
-  item: ITEM,
-) => keyof JSX.IntrinsicElements;
+export type ContextMenuPropGetItemAs<ITEM> = (item: ITEM) => AsTags;
 export type ContextMenuPropGetItemHTMLAttributes<ITEM> = (
   item: ITEM,
-) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
+) => AsAttributes;
 
 export const contextMenuPropSubMenuDirections = [
   'rightStartUp',
@@ -117,22 +117,21 @@ type ContextMenuLevelProps<ITEM> = Omit<
   'subMenuDirection' | 'getKey' | 'onClickOutside' | 'isOpen'
 >;
 
-export type ContextMenuItemProps<
-  AS extends keyof JSX.IntrinsicElements = 'div',
-> = PropsWithAsAttributes<
-  {
-    label: string | number;
-    rightSide?: React.ReactNode;
-    leftSide?: React.ReactNode;
-    size?: ContextMenuPropSize;
-    active?: boolean;
-    withSubMenu: boolean;
-    accent?: ContextMenuAccent;
-    disabled?: boolean;
-  },
-  AS
-> &
-  React.RefAttributes<HTMLDivElement>;
+export type ContextMenuItemProps<AS extends AsTags = 'div'> =
+  PropsWithAsAttributes<
+    {
+      label: string | number;
+      rightSide?: React.ReactNode;
+      leftSide?: React.ReactNode;
+      size?: ContextMenuPropSize;
+      active?: boolean;
+      withSubMenu: boolean;
+      accent?: ContextMenuAccent;
+      disabled?: boolean;
+    },
+    AS
+  > &
+    React.RefAttributes<HTMLDivElement>;
 
 export type Level<ITEM> = {
   items: ITEM[];
@@ -142,9 +141,7 @@ export type Level<ITEM> = {
   offset?: PopoverPropOffset;
 } & PositioningProps;
 
-export type ContextMenuItemComponent = <
-  AS extends keyof JSX.IntrinsicElements = 'div',
->(
+export type ContextMenuItemComponent = <AS extends AsTags = 'div'>(
   props: ContextMenuItemProps<AS>,
   ref: React.Ref<HTMLElement>,
 ) => React.ReactElement | null;

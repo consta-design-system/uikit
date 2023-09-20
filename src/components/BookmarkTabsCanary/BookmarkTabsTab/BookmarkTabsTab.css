@@ -70,8 +70,20 @@
     }
   }
 
+  &_bordered::after {
+    content: '';
+    position: absolute;
+    top: var(--bookmark-divider-top);
+    right: 0;
+    width: 1px;
+    height: var(--bookmark-divider-height);
+    background: var(--color-bg-border);
+  }
+
   &_form {
     &_round {
+      --bookmark-divider-top: calc(var(--space-l) / 2);
+      --bookmark-divider-height: calc(100% - var(--space-l));
       border-radius: var(--space-xs) var(--space-xs) 0 0;
 
       &.canary--BookmarkTabsTab_active {
@@ -80,6 +92,11 @@
         border-left: 1px solid var(--color-bg-border);
         border-right: 1px solid var(--color-bg-border);
       }
+    }
+
+    &_brick {
+      --bookmark-divider-height: 100%;
+      --bookmark-divider-top: 0;
     }
   }
 

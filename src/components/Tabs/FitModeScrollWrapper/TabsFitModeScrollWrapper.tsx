@@ -95,6 +95,7 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
         ref={scrollContainerRef}
       >
         {renderItemsList({
+          visibleIndexes: Array.from(Array(items.length).keys()),
           getTabClassName: (idx) =>
             cnTabsFitModeScrollWrapper('Tab', {
               noMargin: idx === items.length - 1,

@@ -3,7 +3,7 @@ import './BookmarkTabs.css';
 import { IconAdd } from '@consta/icons/IconAdd';
 import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
 import { IconArrowRight } from '@consta/icons/IconArrowRight';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
@@ -27,8 +27,8 @@ export const cnBookmarkTabs = cn('BookmarkTabs');
 const renderItemDefault = <ITEM,>(
   props: BookmarkTabsRenderItemProps<ITEM>,
 ): React.ReactElement => {
-  const { item: _item, attributes = {}, ...otherProps } = props;
-  return <BookmarkTabsTab {...attributes} {...otherProps} />;
+  const { item: _item, attributes = {}, as, ...otherProps } = props;
+  return <BookmarkTabsTab {...attributes} {...otherProps} as={as} />;
 };
 
 const BookmarkTabsRender = (
@@ -92,6 +92,7 @@ const BookmarkTabsRender = (
     item: Item,
     fixed: boolean,
     controlRef: React.RefObject<HTMLElement>,
+    bordered: boolean,
     tabWidth?: string,
   ) =>
     renderItemProp({
@@ -106,12 +107,21 @@ const BookmarkTabsRender = (
       tabRef: getItemRef(item),
       controlRef,
       fixed,
+      bordered,
       onClose: onRemove ? (e) => onRemove(item, { e }) : undefined,
       size,
       view,
       form,
       tabWidth,
     });
+
+  const borderedIndexes = useMemo(() => {
+    const arr = [...fixedTabs, ...otherTabs];
+    const activeIndex = value ? arr.indexOf(value) : -1;
+    return Array.from(Array(arr.length - 1).keys()).filter((el) =>
+      form === 'round' ? el !== activeIndex && el !== activeIndex - 1 : true,
+    );
+  }, [fixedTabs, otherTabs, value, form]);
 
   return (
     <div
@@ -153,7 +163,12 @@ const BookmarkTabsRender = (
         >
           {fixedTabs.map((item, index) => (
             <React.Fragment key={getItemKey(item)}>
-              {renderItem(item, true, refs[index])}
+              {renderItem(
+                item,
+                true,
+                refs[index],
+                borderedIndexes.includes(index),
+              )}
             </React.Fragment>
           ))}
         </div>
@@ -170,6 +185,7 @@ const BookmarkTabsRender = (
                 item,
                 false,
                 refs[fixedTabs.length + index],
+                borderedIndexes.includes(fixedTabs.length + index),
                 sizes[index],
               )}
             </React.Fragment>

@@ -1,4 +1,5 @@
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
+import React from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
@@ -6,6 +7,11 @@ export type ChoiceGroupDefaultItem = {
   label: string;
   icon?: IconComponent;
   disabled?: boolean;
+  attributes?: Omit<
+    JSX.IntrinsicElements['label'],
+    'ref' | 'onChange' | 'children'
+  >;
+  ref?: React.RefObject<HTMLLabelElement>;
 };
 
 export const choiceGroupForms = ['default', 'brick', 'round'] as const;
@@ -32,6 +38,14 @@ export type ChoiceGroupPropGetItemIcon<ITEM> = (
 export type ChoiceGroupPropGetItemDisabled<ITEM> = (
   item: ITEM,
 ) => boolean | undefined;
+export type ChoiceGroupPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) =>
+  | Omit<JSX.IntrinsicElements['label'], 'ref' | 'onChange' | 'children'>
+  | undefined;
+export type ChoiceGroupPropGetItemRef<ITEM> = (
+  item: ITEM,
+) => React.RefObject<HTMLLabelElement> | undefined;
 
 export type ChoiceGroupPropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)
@@ -56,6 +70,8 @@ export type ChoiceGroupProps<
     items: ITEM[];
     getItemLabel?: ChoiceGroupPropGetItemLabel<ITEM>;
     getItemIcon?: ChoiceGroupPropGetItemIcon<ITEM>;
+    getItemAttributes?: ChoiceGroupPropGetItemAttributes<ITEM>;
+    getItemRef?: ChoiceGroupPropGetItemRef<ITEM>;
     name: string;
     disabled?: boolean;
     getItemDisabled?: ChoiceGroupPropGetItemDisabled<ITEM>;
