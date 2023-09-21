@@ -1,32 +1,12 @@
 import './GridItem.css';
 
-import { classnames } from '@bem-react/classnames';
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
-import { forwardRefWithAs } from '../../../utils/types/PropsWithAsAttributes';
+import { cn } from '##/utils/bem';
+import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
+
+import { GridItemProps } from '../types';
 import { useBreakpoints } from '../useBreakpoints';
-
-type Breakpoint = {
-  col?: number | string;
-  colStart?: number | string;
-  row?: number | string;
-  rowStart?: number | string;
-  order?: number | string;
-};
-
-type BreakpointsProps = {
-  'xs'?: Breakpoint;
-  's'?: Breakpoint;
-  'm'?: Breakpoint;
-  'l'?: Breakpoint;
-  'xl'?: Breakpoint;
-  '2xl'?: Breakpoint;
-};
-
-export type GridItemProps = Breakpoint & {
-  breakpoints?: BreakpointsProps;
-};
 
 export const cnGridItem = cn('GridItem');
 
@@ -51,16 +31,15 @@ export const GridItem = forwardRefWithAs<GridItemProps>((props, ref) => {
   return (
     <Tag
       {...otherProps}
-      className={classnames(
-        cnGridItem({
+      className={cnGridItem(
+        {
           col,
           colStart,
           row,
           rowStart,
           order,
-        }),
-        breakpointsCn,
-        className,
+        },
+        [breakpointsCn, className],
       )}
       ref={ref}
     >

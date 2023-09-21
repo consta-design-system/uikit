@@ -1,159 +1,170 @@
 @define-mixin breakpoint {
   &col {
     &_1 {
-      --col-end: 1;
+      --grid-item-col-end: 1;
     }
 
     &_2 {
-      --col-end: 2;
+      --grid-item-col-end: 2;
     }
 
     &_3 {
-      --col-end: 3;
+      --grid-item-col-end: 3;
     }
 
     &_4 {
-      --col-end: 4;
+      --grid-item-col-end: 4;
     }
 
     &_5 {
-      --col-end: 5;
+      --grid-item-col-end: 5;
     }
 
     &_6 {
-      --col-end: 6;
+      --grid-item-col-end: 6;
     }
 
     &_7 {
-      --col-end: 7;
+      --grid-item-col-end: 7;
     }
 
     &_8 {
-      --col-end: 8;
+      --grid-item-col-end: 8;
     }
 
     &_9 {
-      --col-end: 9;
+      --grid-item-col-end: 9;
     }
 
     &_10 {
-      --col-end: 10;
+      --grid-item-col-end: 10;
     }
 
     &_11 {
-      --col-end: 11;
+      --grid-item-col-end: 11;
     }
 
     &_12 {
-      --col-end: 12;
+      --grid-item-col-end: 12;
     }
   }
 
   &colStart {
     &_1 {
-      --col-start: 1 / span;
+      --grid-item-col-start: 1 / span;
     }
 
     &_2 {
-      --col-start: 2 / span;
+      --grid-item-col-start: 2 / span;
     }
 
     &_3 {
-      --col-start: 3 / span;
+      --grid-item-col-start: 3 / span;
     }
 
     &_4 {
-      --col-start: 4 / span;
+      --grid-item-col-start: 4 / span;
     }
 
     &_5 {
-      --col-start: 5 / span;
+      --grid-item-col-start: 5 / span;
     }
 
     &_6 {
-      --col-start: 6 / span;
+      --grid-item-col-start: 6 / span;
     }
 
     &_7 {
-      --col-start: 7 / span;
+      --grid-item-col-start: 7 / span;
     }
 
     &_8 {
-      --col-start: 8 / span;
+      --grid-item-col-start: 8 / span;
     }
 
     &_9 {
-      --col-start: 9 / span;
+      --grid-item-col-start: 9 / span;
     }
 
     &_10 {
-      --col-start: 10 / span;
+      --grid-item-col-start: 10 / span;
     }
 
     &_11 {
-      --col-start: 11 / span;
+      --grid-item-col-start: 11 / span;
     }
 
     &_12 {
-      --col-start: 12 / span;
+      --grid-item-col-start: 12 / span;
     }
   }
 
   &row {
     &_1 {
-      --row-end: 1;
+      --grid-item-row-end: 1;
     }
 
     &_2 {
-      --row-end: 2;
+      --grid-item-row-end: 2;
     }
 
     &_3 {
-      --row-end: 3;
+      --grid-item-row-end: 3;
     }
 
     &_4 {
-      --row-end: 4;
+      --grid-item-row-end: 4;
     }
   }
 
   &rowStart {
     &_1 {
-      --row-start: 1 / span;
+      --grid-item-row-start: 1 / span;
     }
 
     &_2 {
-      --row-start: 2 / span;
+      --grid-item-row-start: 2 / span;
     }
 
     &_3 {
-      --row-start: 3 / span;
+      --grid-item-row-start: 3 / span;
     }
 
     &_4 {
-      --row-start: 4 / span;
+      --grid-item-row-start: 4 / span;
     }
   }
 
   &order {
     &_-1 {
-      order: -1;
+      --gird-item-order: -1;
     }
 
     &_0 {
-      order: 0;
+      --gird-item-order: 0;
     }
 
     &_1 {
-      order: 1;
+      --gird-item-order: 1;
     }
   }
 }
 
 .GridItem {
   min-width: 0;
-  grid-column: var(--col-start, span) var(--col-end, 1);
-  grid-row: var(--row-start, span) var(--row-end, 1);
+
+  &[class*='col_'] {
+    grid-column: var(--grid-item-col-start, span) var(--grid-item-col-end, 1);
+  }
+
+  &[class*='row_'],
+  &[class*='rowStart_'] {
+    grid-row: var(--grid-item-row-start, span) var(--grid-item-row-end, 1);
+  }
+
+  &[class*='order_'] {
+    order: var(--gird-item-order);
+  }
 
   &_ {
     @mixin breakpoint;

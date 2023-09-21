@@ -1,7 +1,7 @@
 import { ClassNameFormatter } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
 
-import { isEmpty } from '../../utils/object';
+import { isEmpty } from '##/utils/object';
 
 type Breakpoint = Record<string, string | number | undefined>;
 export type Breakpoints = Record<string, Breakpoint | undefined>;

@@ -1,229 +1,229 @@
 @define-mixin breakpoint {
   &cols {
     &_1 {
-      --cols: 1;
+      --grid-cols: 1;
     }
 
     &_2 {
-      --cols: 2;
+      --grid-cols: 2;
     }
 
     &_3 {
-      --cols: 3;
+      --grid-cols: 3;
     }
 
     &_4 {
-      --cols: 4;
+      --grid-cols: 4;
     }
 
     &_5 {
-      --cols: 5;
+      --grid-cols: 5;
     }
 
     &_6 {
-      --cols: 6;
+      --grid-cols: 6;
     }
 
     &_7 {
-      --cols: 7;
+      --grid-cols: 7;
     }
 
     &_8 {
-      --cols: 8;
+      --grid-cols: 8;
     }
 
     &_9 {
-      --cols: 9;
+      --grid-cols: 9;
     }
 
     &_10 {
-      --cols: 10;
+      --grid-cols: 10;
     }
 
     &_11 {
-      --cols: 11;
+      --grid-cols: 11;
     }
 
     &_12 {
-      --cols: 12;
+      --grid-cols: 12;
     }
   }
 
   &xAlign {
     &_left {
-      justify-items: start;
+      --grid-justify-items: start;
     }
 
     &_center {
-      justify-items: center;
+      --grid-justify-items: center;
     }
 
     &_right {
-      justify-items: end;
+      --grid-justify-items: end;
     }
   }
 
   &yAlign {
     &_top {
-      align-items: start;
+      --grid-align-items: start;
     }
 
     &_center {
-      align-items: center;
+      --grid-align-items: center;
     }
 
     &_bottom {
-      align-items: end;
+      --grid-align-items: end;
     }
   }
 
   &gap {
     &_0 {
-      grid-gap: 0;
+      --grid-gap: 0;
     }
 
     &_2xs {
-      grid-gap: var(--space-2xs);
+      --grid-gap: var(--space-2xs);
     }
 
     &_xs {
-      grid-gap: var(--space-xs);
+      --grid-gap: var(--space-xs);
     }
 
     &_s {
-      grid-gap: var(--space-s);
+      --grid-gap: var(--space-s);
     }
 
     &_m {
-      grid-gap: var(--space-m);
+      --grid-gap: var(--space-m);
     }
 
     &_l {
-      grid-gap: var(--space-l);
+      --grid-gap: var(--space-l);
     }
 
     &_xl {
-      grid-gap: var(--space-xl);
+      --grid-gap: var(--space-xl);
     }
 
     &_2xl {
-      grid-gap: var(--space-2xl);
+      --grid-gap: var(--space-2xl);
     }
 
     &_3xl {
-      grid-gap: var(--space-3xl);
+      --grid-gap: var(--space-3xl);
     }
 
     &_4xl {
-      grid-gap: var(--space-4xl);
+      --grid-gap: var(--space-4xl);
     }
 
     &_5xl {
-      grid-gap: var(--space-5xl);
+      --grid-gap: var(--space-5xl);
     }
 
     &_6xl {
-      grid-gap: var(--space-6xl);
+      --grid-gap: var(--space-6xl);
     }
   }
 
   &colGap {
     &_0 {
-      grid-column-gap: 0;
+      --grid-column-gap: 0;
     }
 
     &_2xs {
-      grid-column-gap: var(--space-2xs);
+      --grid-column-gap: var(--space-2xs);
     }
 
     &_xs {
-      grid-column-gap: var(--space-xs);
+      --grid-column-gap: var(--space-xs);
     }
 
     &_s {
-      grid-column-gap: var(--space-s);
+      --grid-column-gap: var(--space-s);
     }
 
     &_m {
-      grid-column-gap: var(--space-m);
+      --grid-column-gap: var(--space-m);
     }
 
     &_l {
-      grid-column-gap: var(--space-l);
+      --grid-column-gap: var(--space-l);
     }
 
     &_xl {
-      grid-column-gap: var(--space-xl);
+      --grid-column-gap: var(--space-xl);
     }
 
     &_2xl {
-      grid-column-gap: var(--space-2xl);
+      --grid-column-gap: var(--space-2xl);
     }
 
     &_3xl {
-      grid-column-gap: var(--space-3xl);
+      --grid-column-gap: var(--space-3xl);
     }
 
     &_4xl {
-      grid-column-gap: var(--space-4xl);
+      --grid-column-gap: var(--space-4xl);
     }
 
     &_5xl {
-      grid-column-gap: var(--space-5xl);
+      --grid-column-gap: var(--space-5xl);
     }
 
     &_6xl {
-      grid-column-gap: var(--space-6xl);
+      --grid-column-gap: var(--space-6xl);
     }
   }
 
   &rowGap {
     &_0 {
-      grid-row-gap: 0;
+      --grid-row-gap: 0;
     }
 
     &_2xs {
-      grid-row-gap: var(--space-2xs);
+      --grid-row-gap: var(--space-2xs);
     }
 
     &_xs {
-      grid-row-gap: var(--space-xs);
+      --grid-row-gap: var(--space-xs);
     }
 
     &_s {
-      grid-row-gap: var(--space-s);
+      --grid-row-gap: var(--space-s);
     }
 
     &_m {
-      grid-row-gap: var(--space-m);
+      --grid-row-gap: var(--space-m);
     }
 
     &_l {
-      grid-row-gap: var(--space-l);
+      --grid-row-gap: var(--space-l);
     }
 
     &_xl {
-      grid-row-gap: var(--space-xl);
+      --grid-row-gap: var(--space-xl);
     }
 
     &_2xl {
-      grid-row-gap: var(--space-2xl);
+      --grid-row-gap: var(--space-2xl);
     }
 
     &_3xl {
-      grid-row-gap: var(--space-3xl);
+      --grid-row-gap: var(--space-3xl);
     }
 
     &_4xl {
-      grid-row-gap: var(--space-4xl);
+      --grid-row-gap: var(--space-4xl);
     }
 
     &_5xl {
-      grid-row-gap: var(--space-5xl);
+      --grid-row-gap: var(--space-5xl);
     }
 
     &_6xl {
-      grid-row-gap: var(--space-6xl);
+      --grid-row-gap: var(--space-6xl);
     }
   }
 }
@@ -231,7 +231,30 @@
 .Grid {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
+
+  &[class*='cols_'] {
+    grid-template-columns: repeat(var(--grid-cols, 1), minmax(0, 1fr));
+  }
+
+  &[class*='xAlign_'] {
+    justify-items: var(--grid-justify-items);
+  }
+
+  &[class*='yAlign_'] {
+    align-items: var(--grid-align-items);
+  }
+
+  &[class*='rowGap_'] {
+    row-gap: var(--grid-row-gap);
+  }
+
+  &[class*='colGap_'] {
+    column-gap: var(--grid-column-gap);
+  }
+
+  &[class*='gap'] {
+    gap: var(--grid-gap);
+  }
 
   &_ {
     @mixin breakpoint;
