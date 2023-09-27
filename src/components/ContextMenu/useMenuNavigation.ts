@@ -14,10 +14,22 @@ type UseMenuNavigationProps<ITEM = ContextMenuItemDefault> = {
   getItemSubMenu: ContextMenuPropGetSubItems<ITEM>;
   active: boolean;
   addLevel: (item: ITEM) => void;
+  onEsc?: React.KeyboardEventHandler;
+  level?: number;
+  isMobile?: boolean;
 };
 
 export const useMenuNavigation = (props: UseMenuNavigationProps) => {
-  const { items, addLevel, deleteLevel, active, getItemSubMenu } = props;
+  const {
+    items,
+    addLevel,
+    deleteLevel,
+    active,
+    getItemSubMenu,
+    level = 0,
+    onEsc,
+    isMobile,
+  } = props;
 
   const [activeIndex, setActiveIndex] = useState(-1);
 
@@ -26,6 +38,8 @@ export const useMenuNavigation = (props: UseMenuNavigationProps) => {
   const refs = useRefs<HTMLDivElement>(items.length);
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const parentRef = useRef<HTMLDivElement>(null);
 
   const previousFlag = usePrevious(active);
 
@@ -36,16 +50,14 @@ export const useMenuNavigation = (props: UseMenuNavigationProps) => {
   useLayoutEffect(() => {
     setTimeout(
       () => {
-        activeIndex >= 0 && refs[activeIndex].current?.focus();
+        (activeIndex >= 0 ? refs[activeIndex] : parentRef).current?.focus();
       },
       previousFlag ? animateTimeout : 0,
     );
   }, [active]);
 
   useEffect(() => {
-    if (activeIndex >= 0) {
-      refs[activeIndex].current?.focus();
-    }
+    (activeIndex >= 0 ? refs[activeIndex] : parentRef).current?.focus();
   }, [activeIndex]);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
@@ -54,9 +66,20 @@ export const useMenuNavigation = (props: UseMenuNavigationProps) => {
     const { code } = e;
 
     if (code === 'ArrowUp') {
-      setActiveIndex(Math.max(activeIndex - 1, 0));
+      if (isMobile) {
+        if (activeIndex - 1 < 0) {
+          parentRef && parentRef.current?.focus();
+        }
+        setActiveIndex(activeIndex - 1);
+      } else {
+        setActiveIndex(Math.max(activeIndex - 1, 0));
+      }
     }
     if (code === 'ArrowRight' && activeIndex >= 0) {
+      if (isMobile) {
+        !!getItemSubMenu(items[activeIndex]) && addLevel(items[activeIndex]);
+        return;
+      }
       if (direction?.includes('left') && !getItemSubMenu(items[activeIndex])) {
         deleteLevel();
       } else {
@@ -67,22 +90,30 @@ export const useMenuNavigation = (props: UseMenuNavigationProps) => {
       setActiveIndex(Math.min(activeIndex + 1, items.length - 1));
     }
     if (code === 'ArrowLeft') {
-      if (direction?.includes('right')) {
+      if (direction?.includes('right') || isMobile) {
         deleteLevel();
       }
     }
-    if (code === 'Enter' && activeIndex >= 0) {
-      if (getItemSubMenu(items[activeIndex])) {
-        addLevel(items[activeIndex]);
+    if (code === 'Enter') {
+      if (activeIndex >= 0) {
+        if (getItemSubMenu(items[activeIndex])) {
+          addLevel(items[activeIndex]);
+        } else {
+          refs[activeIndex].current?.click();
+        }
       } else {
-        refs[activeIndex].current?.click();
+        parentRef.current?.click();
       }
     }
-    if (code === 'Space' && activeIndex >= 0) {
-      refs[activeIndex].current?.click();
+    if (code === 'Space') {
+      (activeIndex >= 0 ? refs[activeIndex] : parentRef).current?.click();
     }
     if (code === 'Escape') {
-      deleteLevel();
+      if (level === 0) {
+        onEsc?.(e);
+      } else {
+        deleteLevel();
+      }
     }
   };
 
@@ -92,6 +123,7 @@ export const useMenuNavigation = (props: UseMenuNavigationProps) => {
     onKeyDown,
     setActiveIndex,
     setDirection,
+    parentRef,
     containerRef,
   };
 };

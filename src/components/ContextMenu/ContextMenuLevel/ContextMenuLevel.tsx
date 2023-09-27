@@ -9,6 +9,7 @@ import {
   List,
   ListDivider,
   ListItem,
+  ListPropOnItemClick,
   mapIconSize,
   mapVerticalSpase,
 } from '##/components/ListCanary';
@@ -60,7 +61,8 @@ const ContextMenuLevelRender = (
     setHoveredParenLevel,
     hoveredParenLevel,
     sortGroup,
-    onItemClick,
+    onItemClick: onItemClickProp,
+    onEsc,
     isOpen,
     parent,
     isMobile,
@@ -118,12 +120,18 @@ const ContextMenuLevelRender = (
     }
   };
 
+  const handleEscClick: React.KeyboardEventHandler = (e) => {
+    onEsc?.(e);
+    anchorRef?.current?.focus();
+  };
+
   const {
     refs,
     onKeyDown,
     activeIndex,
     setActiveIndex,
     setDirection,
+    parentRef,
     containerRef,
   } = useMenuNavigation({
     items,
@@ -131,6 +139,9 @@ const ContextMenuLevelRender = (
     addLevel: addCurrentLevel,
     active: activeLevelDepth === levelDepth,
     deleteLevel: () => deleteLevel(levelDepth),
+    onEsc: handleEscClick,
+    level: levelDepth,
+    isMobile,
   });
 
   const itemsRefs = useMemo(() => {
@@ -197,6 +208,20 @@ const ContextMenuLevelRender = (
     setActiveIndex(-1);
   };
 
+  const onItemClick: ListPropOnItemClick<ContextMenuItemDefault> = (
+    item,
+    { e },
+  ) => {
+    if (isMobile) {
+      addCurrentLevel(item);
+      setActiveIndex(items.indexOf(item));
+    }
+    onItemClickProp?.({
+      item,
+      e: e as React.MouseEvent<HTMLDivElement>,
+    });
+  };
+
   // EFFECTS
 
   useEffect(() => {
@@ -259,8 +284,13 @@ const ContextMenuLevelRender = (
             label={getItemLabel(parent)}
             size={size}
             tabIndex={0}
+            ref={parentRef}
             leftIcon={IconArrowLeft}
             onClick={() => deleteLevel(levelDepth)}
+            active={activeIndex === -1}
+            className={cnContextMenuLevel('Item', {
+              active: activeIndex === -1,
+            })}
           />
           <ListDivider size={size} space={{ mV: mapVerticalSpase[size] }} />
         </>
@@ -269,13 +299,7 @@ const ContextMenuLevelRender = (
         size={size}
         items={items}
         getItemLabel={getItemLabel}
-        onItemClick={(item, { e }) => {
-          isMobile && addCurrentLevel(item);
-          onItemClick?.({
-            item,
-            e: e as React.MouseEvent<HTMLDivElement>,
-          });
-        }}
+        onItemClick={onItemClick}
         sortGroup={sortGroup ? (a, b) => sortGroup(a.key, b.key) : undefined}
         getItemOnClick={getItemOnClick}
         getItemAs={getItemAs}
