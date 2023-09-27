@@ -115,7 +115,7 @@ export type BookmarkTabsComponent = <ITEM>(
   props: BookmarkTabsProps<ITEM>,
 ) => React.ReactElement | null;
 
-export type BookmarkTabsTabProps<AS extends AsTags = 'button'> =
+export type BookmarkTabsTabProps<AS extends AsTags = 'div'> =
   PropsWithAsAttributes<
     {
       size: BookmarkTabsPropSize;
@@ -133,6 +133,6 @@ export type BookmarkTabsTabProps<AS extends AsTags = 'button'> =
   > &
     Omit<BookmarkTabsItemDefault, 'key' | 'attributes' | 'ref'>;
 
-export type BookmarkTabsTabComponent = <AS extends AsTags = 'button'>(
+export type BookmarkTabsTabComponent = <AS extends AsTags = 'div'>(
   props: BookmarkTabsTabProps<AS>,
 ) => React.ReactElement | null;

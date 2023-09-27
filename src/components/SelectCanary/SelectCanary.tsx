@@ -19,6 +19,7 @@ import {
 } from '##/components/SelectComponentsCanary/types';
 import { useSelect } from '##/components/SelectComponentsCanary/useSelect';
 import { useForkRef } from '##/hooks/useForkRef';
+import { isNotNil } from '##/utils/type-guards';
 
 import {
   DefaultGroup,
@@ -180,8 +181,8 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
                 ref={useForkRef([inputRef, inputRefProp])}
                 readOnly
               />
-              {value && renderValue({ item: value })}
-              {(typeof value === 'undefined' || value === null) && placeholder && (
+              {isNotNil(value) && renderValue({ item: value })}
+              {!isNotNil(value) && placeholder && (
                 <span className={cnSelect('Placeholder')} title="placeholder">
                   {placeholder}
                 </span>
