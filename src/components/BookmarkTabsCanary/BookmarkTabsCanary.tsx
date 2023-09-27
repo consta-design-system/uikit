@@ -146,6 +146,7 @@ const BookmarkTabsRender = (
             <Button
               view="clear"
               size="xs"
+              type="button"
               onClick={() => navigate('next')}
               iconLeft={IconArrowRight}
               onlyIcon
@@ -200,6 +201,7 @@ const BookmarkTabsRender = (
           <Button
             view="clear"
             size="xs"
+            type="button"
             onClick={onCreate}
             iconLeft={IconAdd}
             onlyIcon
