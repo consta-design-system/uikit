@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ResponsesImageEmptyBox } from '../../responsesImages/ResponsesImageEmptyBox/ResponsesImageEmptyBox';
-import { Button } from '../Button/Button';
-import { createResponses } from '../Responses/createResponses';
+import { Button } from '##/components/Button';
+import { createResponses } from '##/components/Responses/createResponses';
+import { ResponsesImageEmptyBox } from '##/responsesImages/ResponsesImageEmptyBox/ResponsesImageEmptyBox';
 
 export const ResponsesEmptyBox = createResponses({
   name: 'ResponsesEmptyBox',
