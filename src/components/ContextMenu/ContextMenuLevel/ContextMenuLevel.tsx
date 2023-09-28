@@ -225,12 +225,6 @@ const ContextMenuLevelRender = (
   // EFFECTS
 
   useEffect(() => {
-    if (levelDepth === activeLevelDepth) {
-      containerRef.current?.focus();
-    }
-  }, [levelDepth, activeLevelDepth]);
-
-  useEffect(() => {
     if (levelDepth !== 0 && !hovered && hoveredParenLevel < levelDepth) {
       clearTimeout(timers[levelDepth]);
       timers[levelDepth] = setTimeout(

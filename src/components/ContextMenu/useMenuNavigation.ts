@@ -44,7 +44,7 @@ export const useMenuNavigation = (props: UseMenuNavigationProps) => {
   const previousFlag = usePrevious(active);
 
   useLayoutEffect(() => {
-    setTimeout(() => containerRef.current?.focus(), animateTimeout);
+    setTimeout(() => containerRef.current?.focus(), animateTimeout * 2);
   }, []);
 
   useLayoutEffect(() => {
@@ -52,12 +52,25 @@ export const useMenuNavigation = (props: UseMenuNavigationProps) => {
       () => {
         (activeIndex >= 0 ? refs[activeIndex] : parentRef).current?.focus();
       },
-      previousFlag ? animateTimeout : 0,
+      previousFlag ? animateTimeout * 2 : 0,
     );
+    if (active) {
+      setTimeout(
+        () => {
+          containerRef.current?.focus();
+        },
+        isMobile ? animateTimeout : 0,
+      );
+    }
   }, [active]);
 
   useEffect(() => {
-    (activeIndex >= 0 ? refs[activeIndex] : parentRef).current?.focus();
+    setTimeout(
+      () => {
+        (activeIndex >= 0 ? refs[activeIndex] : parentRef).current?.focus();
+      },
+      isMobile ? animateTimeout : 0,
+    );
   }, [activeIndex]);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
