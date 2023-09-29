@@ -1,8 +1,8 @@
 import './ListItemGrid.css';
 
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
-import { IconComponent, IconPropSize } from '##/icons/Icon';
 import { cn } from '##/utils/bem';
 import { getByMap } from '##/utils/getByMap';
 import { isNotNil } from '##/utils/type-guards';

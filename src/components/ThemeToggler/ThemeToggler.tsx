@@ -90,6 +90,7 @@ const ThemeTogglerRender = (
         iconLeft={getButtonIcon()}
         onClick={onButtonClick}
         onlyIcon
+        type="button"
         size={size}
         view={view}
         style={style}
