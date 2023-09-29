@@ -165,7 +165,6 @@ const AutoCompleteRender = <
         value={value}
         style={style}
         size={size}
-        width="full"
         {...otherProps}
       />
       <SelectDropdown

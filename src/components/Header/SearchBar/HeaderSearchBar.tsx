@@ -67,7 +67,6 @@ export const HeaderSearchBar: React.FC<SearchBarProps> = ({
         name={cnHeaderSearchBar('Input')}
         placeholder={placeholder}
         size="m"
-        width="full"
         value={value}
         onChange={onChange}
         leftSide={IconSearchStroked}

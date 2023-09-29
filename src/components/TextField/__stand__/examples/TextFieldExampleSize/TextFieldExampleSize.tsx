@@ -45,22 +45,6 @@ export const TextFieldExampleSize = () => {
   );
 };
 
-export const TextFieldExampleSizeWidth = () => {
-  const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
-
-  return (
-    <Example col={1}>
-      <TextField
-        width="full"
-        placeholder="Страшно широкое поле"
-        onChange={handleChange}
-        value={value}
-      />
-    </Example>
-  );
-};
-
 export const TextFieldExampleSizeRows = () => {
   const [value, setValue] = useState<string | null>(
     'Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим',

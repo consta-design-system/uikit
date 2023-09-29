@@ -56,7 +56,6 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
     labelIcon,
     labelPosition,
     caption,
-    width,
     withClearButton,
     ...otherProps
   } = props;
@@ -91,10 +90,9 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
   return (
     <div
       {...otherProps}
-      className={cnDatePickerMixRangeField(
-        { view, labelPosition, width, size },
-        [className],
-      )}
+      className={cnDatePickerMixRangeField({ view, labelPosition, size }, [
+        className,
+      ])}
       ref={ref}
     >
       {label && (

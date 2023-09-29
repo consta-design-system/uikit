@@ -46,11 +46,6 @@ export const textFieldPropFormDefault: TextFieldPropForm = textFieldPropForm[0];
 export const textFieldPropStatus = ['alert', 'success', 'warning'] as const;
 export type TextFieldPropStatus = typeof textFieldPropStatus[number];
 
-export const textFieldPropWidth = ['default', 'full'] as const;
-export type TextFieldPropWidth = typeof textFieldPropWidth[number];
-export const textFieldPropWidthDefault: TextFieldPropWidth =
-  textFieldPropWidth[0];
-
 export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
   ?
       | {
@@ -95,7 +90,6 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     form?: TextFieldPropForm;
     state?: TextFieldPropStatus;
     status?: TextFieldPropStatus;
-    width?: TextFieldPropWidth;
     onFocus?: React.FocusEventHandler<HTMLElement>;
     onBlur?: React.FocusEventHandler<HTMLElement>;
     incrementButtons?: boolean;

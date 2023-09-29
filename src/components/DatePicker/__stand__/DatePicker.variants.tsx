@@ -117,7 +117,6 @@ const Variants = () => {
     <DatePicker
       className={cnDatePickerVariants()}
       type={type}
-      width="full"
       form={form}
       label={label}
       labelPosition={labelPosition}
