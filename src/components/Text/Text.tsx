@@ -43,9 +43,6 @@ export const textPropSizeDefault: TextPropSize = textPropSize[0];
 export const textPropSpacing = ['xs', 's', 'm', 'l'] as const;
 export type TextPropSpacing = typeof textPropSpacing[number];
 
-export const textPropType = ['blockquote', 'p', 'h3', 'h2', 'h1'] as const;
-export type TextPropType = typeof textPropType[number];
-
 export const textPropView = [
   'primary',
   'secondary',
@@ -95,7 +92,6 @@ export type TextProps = {
   spacing?: TextPropSpacing;
   fontStyle?: TextPropFontStyle;
   transform?: TextPropTransform;
-  type?: TextPropType;
   view?: TextPropView;
   weight?: TextPropWeight;
   width?: TextPropWidth;
@@ -117,7 +113,6 @@ export const Text = forwardRefWithAs<TextProps>((props, ref) => {
     spacing,
     fontStyle,
     transform,
-    type,
     view = textPropViewDefault,
     weight,
     width,
@@ -144,7 +139,6 @@ export const Text = forwardRefWithAs<TextProps>((props, ref) => {
           spacing,
           fontStyle,
           transform,
-          type,
           view,
           weight,
           width,

@@ -4,13 +4,16 @@
   text-decoration: none;
   transition: color 0.3s;
 
-  &_interactive {
-    cursor: pointer;
+  &_active {
+    background: var(--color-bg-stripe);
   }
 
-  &_active,
-  &_interactive:hover {
-    background: var(--color-control-bg-clear-hover);
+  &_interactive {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--color-control-bg-clear-hover);
+    }
   }
 
   &::before {

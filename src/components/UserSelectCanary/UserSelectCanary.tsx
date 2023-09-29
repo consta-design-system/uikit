@@ -22,6 +22,7 @@ import {
 import { useSelect } from '##/components/SelectComponentsCanary/useSelect';
 import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixFocus } from '##/mixs/MixFocus';
+import { isNotNil } from '##/utils/type-guards';
 
 import {
   DefaultGroup,
@@ -211,9 +212,9 @@ const UserSelectRender = <
             renderValue({ item, handleRemove: getHandleRemoveValue(item) }),
           )}
         {isNotMultipleParams(props) &&
-          props.value &&
+          isNotNil(props.value) &&
           renderValue({ item: props.value })}
-        {(!value || (Array.isArray(value) && value.length === 0)) &&
+        {(!isNotNil(value) || (Array.isArray(value) && value.length === 0)) &&
           !searchValue &&
           placeholder && (
             <span className={cnSelect('Placeholder')} title="placeholder">
@@ -232,7 +233,7 @@ const UserSelectRender = <
           ref={inputRefForRender}
           className={cnSelect('Input', {
             size,
-            hide: !multiple && !!value,
+            hide: !multiple && isNotNil(value),
             multiple,
             isUserSelect: true,
           })}
@@ -286,7 +287,7 @@ const UserSelectRender = <
             </div>
           </div>
           <span className={cnSelect('Indicators')}>
-            {value && (
+            {isNotNil(value) && (
               <button
                 type="button"
                 onClick={clearValue}

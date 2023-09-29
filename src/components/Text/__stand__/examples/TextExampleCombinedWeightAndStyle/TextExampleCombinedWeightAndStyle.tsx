@@ -13,7 +13,6 @@ export const TextExampleCombinedWeightAndStyle = () => {
         lineHeight="l"
         size="m"
         view="primary"
-        type="p"
       >
         <Text as="span" fontStyle="italic">
           Примечание.&nbsp;
