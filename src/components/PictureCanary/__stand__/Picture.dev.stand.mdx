@@ -1,0 +1,173 @@
+import { MdxMenu } from '@consta/stand';
+import { PictureExample } from './examples/PictureExample/PictureExample';
+import { PictureExampleGetImageSettings } from './examples/PictureExampleGetImageSettings/PictureExampleGetImageSettings';
+import { PictureExampleResizeMode } from './examples/PictureExampleResizeMode/PictureExampleResizeMode';
+
+```tsx
+import { Picture } from '@consta/uikit/PictureCanary';
+```
+
+<MdxMenu>
+
+- [Изображения](#изображения)
+- [Функция определения свойств](#функция-определения-свойств)
+- [Адаптивность](#адаптивность)
+- [Список свойств](#свойства)
+
+</MdxMenu>
+
+## Изображения
+
+Для того чтобы указать исходные изображения или изображение необходимо определить свойство `src`. Оно может принимать как строку, так и объект ключ - значение,
+где ключ содержит в себе параметры изображения.
+
+```tsx
+<Picture
+  alt={alt}
+  title={title}
+  resizeMode={resizeMode}
+  src={{
+    'gpnDefault--0--1x': GPNHeroImageSmall1xDefault,
+    'gpnDefault--0--2x': GPNHeroImageSmall2xDefault,
+    'gpnDefault--0--4x': GPNHeroImageSmall3xDefault,
+    'gpnDefault--720--1x': GPNHeroImageBig1xDefault,
+    'gpnDefault--720--2x': GPNHeroImageBig2xDefault,
+    'gpnDefault--720--4x': GPNHeroImageBig3xDefault,
+    'gpnDisplay--0--1x': GPNHeroImageSmall1xDisplay,
+    'gpnDisplay--0--2x': GPNHeroImageSmall2xDisplay,
+    'gpnDisplay--0--4x': GPNHeroImageSmall3xDisplay,
+    'gpnDisplay--720--1x': GPNHeroImageBig1xDisplay,
+    'gpnDisplay--720--2x': GPNHeroImageBig2xDisplay,
+    'gpnDisplay--720--4x': GPNHeroImageBig3xDisplay,
+    'gpnDark--0--1x': GPNHeroImageSmall1xDark,
+    'gpnDark--0--2x': GPNHeroImageSmall2xDark,
+    'gpnDark--0--4x': GPNHeroImageSmall3xDark,
+    'gpnDark--720--1x': GPNHeroImageBig1xDark,
+    'gpnDark--720--2x': GPNHeroImageBig2xDark,
+    'gpnDark--720--4x': GPNHeroImageBig3xDark,
+  }}
+/>
+```
+
+<PictureExample />
+
+По умолчанию первым параметром указывается название темы, вторым разрешение, начиная с которого изображение будет отображаться, а на третьем дескриптор (физическая ширина картинки или плотность пикселей устройства DPR)
+
+## Функция определения свойств
+
+Если вы используете свой метод именования ключей, тогда определите свойство `getImageSettings`. Эта функция принимает ключ и возвращает объект:
+
+- `theme` - тема для которой показывается картинка,
+- `size` - размер, начиная с которого изображение отображается,
+- `descriptor` - дескриптор
+
+```tsx
+const themeMap: Record<string, string> = {
+  default: 'gpnDefault',
+  display: 'gpnDisplay',
+  dark: 'gpnDark',
+};
+
+export const PictureExampleGetImageSettings = () => {
+  const getImageSettings = (key: string) => {
+    const parts = key.split('_');
+    return {
+      theme: themeMap[parts[0]],
+      size: Number(parts[1].replace(/[^0-9.]+/g, '')),
+      descriptor: parts[2],
+    };
+  };
+
+  return (
+    <Picture
+      src={{
+        default_0px_1x: GPNHeroImageSmall1xDefault,
+        default_0px_2x: GPNHeroImageSmall2xDefault,
+        default_0px_4x: GPNHeroImageSmall3xDefault,
+        default_720px_1x: GPNHeroImageBig1xDefault,
+        default_720px_2x: GPNHeroImageBig2xDefault,
+        default_720px_4x: GPNHeroImageBig3xDefault,
+        display_0px_1x: GPNHeroImageSmall1xDisplay,
+        display_0px_2x: GPNHeroImageSmall2xDisplay,
+        display_0px_4x: GPNHeroImageSmall3xDisplay,
+        display_720px_1x: GPNHeroImageBig1xDisplay,
+        display_720px_2x: GPNHeroImageBig2xDisplay,
+        display_720px_4x: GPNHeroImageBig3xDisplay,
+        dark_0px_1x: GPNHeroImageSmall1xDark,
+        dark_0px_2x: GPNHeroImageSmall2xDark,
+        dark_0px_4x: GPNHeroImageSmall3xDark,
+        dark_720px_1x: GPNHeroImageBig1xDark,
+        dark_720px_2x: GPNHeroImageBig2xDark,
+        dark_720px_4x: GPNHeroImageBig3xDark,
+      }}
+      getImageSettings={getImageSettings}
+    />
+  );
+};
+```
+
+<PictureExampleGetImageSettings />
+
+## Адаптивность
+
+Отображать значение по разрешению можно в двух режимах: в зависимости от ширины экрана `window` и в зависимости от ширины компонента `component`.
+
+```tsx
+export const PictureExampleResizeMode = () => {
+  const getImageSettings = (key: string) => {
+    if (key === 'dark') {
+      return {
+        size: 0,
+      };
+    }
+    return {
+      size: 700,
+    };
+  };
+
+  return (
+    <>
+      <Picture
+        src={{
+          dark: ImageDark,
+          light: ImageLight,
+        }}
+        resizeMode="window"
+        getImageSettings={getImageSettings}
+      />
+      <Picture
+        src={{
+          dark: ImageDark,
+          light: ImageLight,
+        }}
+        resizeMode="component"
+        getImageSettings={getImageSettings}
+      />
+    </>
+  );
+};
+```
+
+<PictureExampleResizeMode />
+
+## Cвойства
+
+```tsx
+export type PicturePropGetImageSettings = (image: string) => {
+  theme?: string;
+  size?: number;
+  descriptor?: string;
+};
+
+export type PicturePropSrc = string | Record<string, string>;
+```
+
+| Свойство                                            | Тип                           | По умолчанию              | Описание                                          |
+| --------------------------------------------------- | ----------------------------- | ------------------------- | ------------------------------------------------- |
+| [`src?`](#изображения)                              | `PicturePropSrc`              | -                         | Изображение или объект с изображениями            |
+| [`getImageSettings?`](#функция-определения-свойств) | `PicturePropGetImageSettings` | `defaultGetImageSettings` | Функция получения параметров отображения картинки |
+| [`resizeMode?`](#адаптивность)                      | `'window', 'component'`       | `'window'`                | Режим адаптивности                                |
+| `alt?`                                              | `string`                      | -                         | Альтернативное текстовое описание изображения     |
+| `title?`                                            | `string`                      | -                         | Отображаемая подзказка                            |
+| `className?`                                        | `string`                      | -                         | Дополнительный CSS-класс                          |
+| `ref`                                               | `React.Ref<HTMLDivElement>`   | -                         | Ссылка на корневой DOM-элемент этого компонента   |
