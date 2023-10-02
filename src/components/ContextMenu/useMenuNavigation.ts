@@ -83,10 +83,8 @@ export const useMenuNavigation = (props: UseMenuNavigationProps) => {
         if (activeIndex - 1 < 0) {
           parentRef && parentRef.current?.focus();
         }
-        setActiveIndex(activeIndex - 1);
-      } else {
-        setActiveIndex(Math.max(activeIndex - 1, 0));
       }
+      setActiveIndex(Math.max(activeIndex - 1, isMobile ? -1 : 0));
     }
     if (code === 'ArrowRight' && activeIndex >= 0) {
       if (isMobile) {
