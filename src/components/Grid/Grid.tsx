@@ -5,8 +5,8 @@ import React from 'react';
 import { cn } from '##/utils/bem';
 import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
+import { normalizeAlign, normalizeGap, useGridBreakpoints } from './helpers';
 import { GridProps } from './types';
-import { useBreakpoints } from './useBreakpoints';
 
 export const cnGrid = cn('Grid');
 
@@ -22,27 +22,33 @@ export const Grid = forwardRefWithAs<GridProps>((props, ref) => {
     className,
     children,
     breakpoints,
+    style,
+    breakpointsForRef,
     ...otherProps
   } = props;
 
-  const Tag = as as string;
+  const mods = useGridBreakpoints(
+    {
+      0: { cols, xAlign, yAlign, gap, colGap, rowGap },
+      ...breakpoints,
+    },
+    breakpointsForRef,
+  );
 
-  const breakpointsCn = useBreakpoints(cnGrid, breakpoints);
+  const Tag = as as string;
 
   return (
     <Tag
       {...otherProps}
-      className={cnGrid(
-        {
-          cols,
-          gap,
-          colGap,
-          rowGap,
-          xAlign,
-          yAlign,
-        },
-        [breakpointsCn, className],
-      )}
+      className={cnGrid(mods, [className])}
+      style={{
+        ...style,
+        ['--grid-cols' as string]: mods.cols,
+        ['--grid-col-gap' as string]: normalizeGap(mods.colGap || mods.gap),
+        ['--grid-row-gap' as string]: normalizeGap(mods.rowGap || mods.gap),
+        ['--grid-x-align' as string]: normalizeAlign(mods.xAlign),
+        ['--grid-y-align' as string]: normalizeAlign(mods.yAlign),
+      }}
       ref={ref}
     >
       {children}

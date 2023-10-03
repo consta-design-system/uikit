@@ -13,7 +13,7 @@ const cnGridExampleGap = cn('GridExampleGap');
 export function GridExampleGap() {
   return (
     <Example col={1}>
-      <Grid className={cnGridExampleGap()} cols="2" gap="xl">
+      <Grid className={cnGridExampleGap()} cols={2} gap="xl">
         <GridItem className={cnGridExampleGap('Item')}>1</GridItem>
         <GridItem className={cnGridExampleGap('Item')}>2</GridItem>
         <GridItem className={cnGridExampleGap('Item')}>3</GridItem>
@@ -26,7 +26,7 @@ export function GridExampleGap() {
 export function GridExampleColGap() {
   return (
     <Example col={1}>
-      <Grid className={cnGridExampleGap()} cols="2" colGap="xl">
+      <Grid className={cnGridExampleGap()} cols={2} colGap="xl">
         <GridItem className={cnGridExampleGap('Item')}>1</GridItem>
         <GridItem className={cnGridExampleGap('Item')}>2</GridItem>
         <GridItem className={cnGridExampleGap('Item')}>3</GridItem>
@@ -39,7 +39,7 @@ export function GridExampleColGap() {
 export function GridExampleRowGap() {
   return (
     <Example col={1}>
-      <Grid className={cnGridExampleGap()} cols="2" rowGap="xl">
+      <Grid className={cnGridExampleGap()} cols={2} rowGap="xl">
         <GridItem className={cnGridExampleGap('Item')}>1</GridItem>
         <GridItem className={cnGridExampleGap('Item')}>2</GridItem>
         <GridItem className={cnGridExampleGap('Item')}>3</GridItem>

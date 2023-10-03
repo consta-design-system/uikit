@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description:
     'Модульная сетка. Отвечает за расположение содержимого на странице.',
-  version: '1.1.18',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'grid-jysz8l',
   alias: ['сетка', 'структура', 'разметка', 'колонки', 'строки'],

@@ -22,9 +22,9 @@ const cnGridVariants = cn('GridVariants');
 
 const Variants = () => {
   const cols = useSelect('cols', colsArr, 6);
-  const gap = useSelect('gap', gridPropGap, 0);
-  const colGap = useSelect('colGap', gridPropGap, 0);
-  const rowGap = useSelect('rowGap', gridPropGap, 0);
+  const gap = useSelect('gap', gridPropGap);
+  const colGap = useSelect('colGap', gridPropGap);
+  const rowGap = useSelect('rowGap', gridPropGap);
   const xAlign = useSelect('xAlign', gridPropXAlign);
   const yAlign = useSelect('yAlign', gridPropYAlign);
   const itemsCount = useNumber('itemsCount', 30);

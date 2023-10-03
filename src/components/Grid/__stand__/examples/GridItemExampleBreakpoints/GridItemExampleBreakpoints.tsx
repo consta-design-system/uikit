@@ -13,12 +13,12 @@ const cnGridItemExampleBreakpoints = cn('GridItemExampleBreakpoints');
 export function GridItemExampleBreakpoints() {
   return (
     <Example col={1}>
-      <Grid className={cnGridItemExampleBreakpoints()} cols="3" gap="xl">
+      <Grid className={cnGridItemExampleBreakpoints()} cols={3} gap="xl">
         <GridItem
           className={cnGridItemExampleBreakpoints('Item', { color: 'blue' })}
-          row="1"
+          row={1}
           breakpoints={{
-            m: {
+            800: {
               row: 3,
             },
           }}
@@ -28,10 +28,10 @@ export function GridItemExampleBreakpoints() {
         <GridItem className={cnGridItemExampleBreakpoints('Item')}>2</GridItem>
         <GridItem
           className={cnGridItemExampleBreakpoints('Item', { color: 'green' })}
-          order="-1"
-          row="3"
+          order={-1}
+          row={3}
           breakpoints={{
-            m: {
+            800: {
               order: 0,
               row: 1,
             },

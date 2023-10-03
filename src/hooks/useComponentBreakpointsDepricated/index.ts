@@ -1,2 +1,2 @@
-export * from './useComponentBreakpoints';
+export * from './useComponentBreakpointsDepricated';
 export * from '##/hooks/useBreakpoints/getLastPoint';

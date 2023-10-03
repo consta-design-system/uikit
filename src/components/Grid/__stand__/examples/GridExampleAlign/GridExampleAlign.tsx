@@ -15,7 +15,7 @@ export function GridExampleAlign() {
     <Example col={1}>
       <Grid
         className={cnGridExampleAlign()}
-        cols="2"
+        cols={1}
         gap="xl"
         xAlign="center"
         yAlign="center"

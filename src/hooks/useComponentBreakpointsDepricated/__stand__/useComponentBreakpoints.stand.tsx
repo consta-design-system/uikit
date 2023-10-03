@@ -7,7 +7,7 @@ export default createStand({
   description: 'Отслеживанние размера компонента.',
   alias: ['хук', 'выбор', 'список'],
   version: '4.4.0',
-  status: 'stable',
+  status: 'deprecated',
   sandbox: 'usecomponentbreakpoints-lkww7y',
   order: 10,
 });
