@@ -13,7 +13,7 @@ export function GridExampleBreakpoints() {
     <Example col={1}>
       <Grid
         className={cnGridExampleBreakpoints()}
-        cols="1"
+        cols={1}
         gap="xl"
         breakpoints={{
           480: {
