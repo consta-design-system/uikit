@@ -7,6 +7,19 @@
   &-Block {
     width: 100%;
     height: 800px;
-    background: var(--color-bg-brand);
+
+    &_color {
+      &_red {
+        background: var(--color-bg-alert);
+      }
+
+      &_yellow {
+        background: var(--color-bg-caution);
+      }
+
+      &_green {
+        background: var(--color-bg-success);
+      }
+    }
   }
 }

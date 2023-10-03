@@ -1,45 +1,43 @@
 .MixScrollBar {
   &_size {
-    &_3xs {
+    &_xs {
       --scrollbar-size: var(--space-3xs);
     }
 
-    &_2xs {
+    &_s {
       --scrollbar-size: var(--space-2xs);
     }
 
-    &_xs {
-      --scrollbar-size: var(--space-xs);
-    }
-
-    &_s {
-      --scrollbar-size: var(--space-s);
-    }
-
     &_m {
-      --scrollbar-size: var(--space-s);
+      --scrollbar-size: var(--space-xs);
     }
   }
 
-  *::-webkit-scrollbar {
+  &_invisible {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &::-webkit-scrollbar {
     width: var(--scrollbar-size);
     height: var(--scrollbar-size);
   }
 
-  *::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track {
     background-color: var(--color-scroll-bg);
   }
 
-  *::-webkit-scrollbar-corner {
+  &::-webkit-scrollbar-corner {
     background-color: var(--color-scroll-bg);
   }
 
-  *::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     background-color: var(--color-scroll-thumb);
-    border-radius: 4px;
+    border-radius: var(--space-2xs);
   }
 
-  *::-webkit-scrollbar-thumb:hover {
+  &::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-scroll-thumb-hover);
   }
 }
