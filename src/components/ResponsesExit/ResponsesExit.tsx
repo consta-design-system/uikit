@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ResponsesImageExit } from '../../responsesImages/ResponsesImageExit/ResponsesImageExit';
-import { Button } from '../Button/Button';
-import { createResponses } from '../Responses/createResponses';
+import { Button } from '##/components/Button';
+import { createResponses } from '##/components/Responses/createResponses';
+import { ResponsesImageExit } from '##/responsesImages/ResponsesImageExit/ResponsesImageExit';
 
 export const ResponsesExit = createResponses({
   name: 'ResponsesExit',
