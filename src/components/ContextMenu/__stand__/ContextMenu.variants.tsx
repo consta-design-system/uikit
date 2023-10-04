@@ -193,6 +193,7 @@ const Variants = () => {
         size={size}
         sortGroup={sortGroup}
         onClickOutside={setIsOpen.off}
+        onEsc={setIsOpen.off}
         offset="xs"
         style={{ zIndex: 100 }}
         form={form}

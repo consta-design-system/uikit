@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ResponsesImage403 } from '../../responsesImages/ResponsesImage403/ResponsesImage403';
-import { Button } from '../Button/Button';
-import { createResponses } from '../Responses/createResponses';
+import { Button } from '##/components/Button';
+import { createResponses } from '##/components/Responses/createResponses';
+import { ResponsesImage403 } from '##/responsesImages/ResponsesImage403/ResponsesImage403';
 
 export const Responses403 = createResponses({
   name: 'Responses403',

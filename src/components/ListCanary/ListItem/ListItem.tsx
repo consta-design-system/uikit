@@ -2,7 +2,7 @@ import './ListItem.css';
 
 import React, { forwardRef } from 'react';
 
-import { cnText } from '##/components/Text';
+import { cnText, textPropViewDefault } from '##/components/Text';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
@@ -38,7 +38,7 @@ const ListItemRender = (
     as: Tag = 'div',
     checked,
     onClick,
-    status,
+    status = textPropViewDefault,
     space,
     iconSize,
     ...otherProps
