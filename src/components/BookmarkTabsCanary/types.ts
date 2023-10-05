@@ -64,6 +64,7 @@ export type BookmarkTabsPropOnChange<ITEM> = (
 
 export type BookmarkTabsRenderItemProps<ITEM> = {
   item: ITEM;
+  hovered?: boolean;
   onClick: React.MouseEventHandler;
   active?: boolean;
   onClose?: React.MouseEventHandler;
@@ -118,6 +119,7 @@ export type BookmarkTabsComponent = <ITEM>(
 export type BookmarkTabsTabProps<AS extends AsTags = 'div'> =
   PropsWithAsAttributes<
     {
+      hovered?: boolean;
       size: BookmarkTabsPropSize;
       form: BookmarkTabsPropForm;
       view: BookmarkTabsPropView;

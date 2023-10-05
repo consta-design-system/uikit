@@ -3,7 +3,7 @@ import './BookmarkTabs.css';
 import { IconAdd } from '@consta/icons/IconAdd';
 import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
 import { IconArrowRight } from '@consta/icons/IconArrowRight';
-import React, { forwardRef, useMemo } from 'react';
+import React, { forwardRef, useMemo, useState } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
@@ -54,10 +54,13 @@ const BookmarkTabsRender = (
     form = bookmarkTabsPropFormDefault,
     view = bookmarkTabsPropViewDefault,
     withNavigationButtons,
+    onMouseLeave: onMouseLeaveProp,
     className,
     id,
     ...otherProps
   } = withDefaultGetters(props);
+
+  const [higlightedIndex, setHighlitedIndex] = useState<number | null>(null);
 
   type Item = typeof items[number];
 
@@ -93,27 +96,41 @@ const BookmarkTabsRender = (
     fixed: boolean,
     controlRef: React.RefObject<HTMLElement>,
     bordered: boolean,
+    index: number,
     tabWidth?: string,
-  ) =>
-    renderItemProp({
-      item,
-      onClick: (e) => onChange?.(item, { e }),
-      active: getItemActive(item),
-      label: getItemLabel(item),
-      leftIcon: getItemLeftIcon(item),
-      rightIcon: getItemRightIcon(item),
-      as: getItemAs(item) ?? 'button',
-      attributes: getItemAttributes(item),
-      tabRef: getItemRef(item),
-      controlRef,
-      fixed,
-      bordered,
-      onClose: onRemove ? (e) => onRemove(item, { e }) : undefined,
-      size,
-      view,
-      form,
-      tabWidth,
-    });
+  ) => (
+    <div
+      className={cnBookmarkTabs('Tab')}
+      onMouseEnter={() => setHighlitedIndex(index)}
+      onFocus={() => setHighlitedIndex(index)}
+    >
+      {renderItemProp({
+        item,
+        onClick: (e) => onChange?.(item, { e }),
+        active: getItemActive(item),
+        label: getItemLabel(item),
+        leftIcon: getItemLeftIcon(item),
+        rightIcon: getItemRightIcon(item),
+        as: getItemAs(item) ?? 'button',
+        attributes: getItemAttributes(item),
+        tabRef: getItemRef(item),
+        controlRef,
+        fixed,
+        bordered,
+        onClose: onRemove ? (e) => onRemove(item, { e }) : undefined,
+        size,
+        view,
+        hovered: higlightedIndex === index,
+        form,
+        tabWidth,
+      })}
+    </div>
+  );
+
+  const onMouseLeave: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    onMouseLeaveProp?.(e);
+    setHighlitedIndex(null);
+  };
 
   const borderedIndexes = useMemo(() => {
     const arr = [...fixedTabs, ...otherTabs];
@@ -128,6 +145,7 @@ const BookmarkTabsRender = (
       className={cnBookmarkTabs({ size, view, form }, [className])}
       ref={useForkRef([ref, containerRef])}
       id={id}
+      onMouseLeave={onMouseLeave}
       {...otherProps}
     >
       {showControls && (
@@ -169,6 +187,7 @@ const BookmarkTabsRender = (
                 true,
                 refs[index],
                 borderedIndexes.includes(index),
+                index,
               )}
             </React.Fragment>
           ))}
@@ -180,17 +199,21 @@ const BookmarkTabsRender = (
           className={cnBookmarkTabs('List')}
           ref={otherTabsRef}
         >
-          {otherTabs.map((item, index) => (
-            <React.Fragment key={getItemKey(item)}>
-              {renderItem(
-                item,
-                false,
-                refs[fixedTabs.length + index],
-                borderedIndexes.includes(fixedTabs.length + index),
-                sizes[index],
-              )}
-            </React.Fragment>
-          ))}
+          {otherTabs.map((item, index) => {
+            const { length } = fixedTabs;
+            return (
+              <React.Fragment key={getItemKey(item)}>
+                {renderItem(
+                  item,
+                  false,
+                  refs[length + index],
+                  borderedIndexes.includes(length + index),
+                  length + index,
+                  sizes[index],
+                )}
+              </React.Fragment>
+            );
+          })}
         </div>
       </div>
       {onCreate && (

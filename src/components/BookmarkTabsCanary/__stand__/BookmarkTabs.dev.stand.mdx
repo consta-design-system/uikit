@@ -525,6 +525,7 @@ export const BookmarkTabsExampleOnRemove = () => {
 - `controlRef` - ссылка на элемент (необходимо прикрепить к элементу для скролла по эдементам);
 - `label` - лейбл;
 - `fixed` - флаг, зафиксирован ли элемент;
+- `hovered` - флаг, наведен ли курсор на элемент;
 - `leftIcon` - иконка слева;
 - `rightIcon` - иконка справа;
 - `as` - HTML-тег ренедера;
@@ -557,15 +558,24 @@ export const BookmarkTabsExampleRenderItem = () => {
         active,
         tabWidth,
         size,
+        bordered,
         form,
         view,
+        hovered,
         controlRef,
       }) => (
         <button
           type="button"
           onClick={onClick}
           ref={controlRef as React.RefObject<HTMLButtonElement>}
-          className={cnBookmarkTabsTab({ active, size, form, view })}
+          className={cnBookmarkTabsTab({
+            active,
+            size,
+            form,
+            view,
+            hovered,
+            bordered,
+          })}
           style={{
             ['--bookmarks-tab-width' as string]: tabWidth,
           }}
@@ -657,6 +667,8 @@ export type BookmarkTabsRenderItemProps<ITEM> = {
   form: BookmarkTabsPropForm;
   view: BookmarkTabsPropView;
   tabWidth?: string;
+  hovered?: boolean;
+  bordered?: boolean;
   tabRef?: React.RefObject<HTMLElement>;
   controlRef?: React.RefObject<HTMLElement>;
 } & Omit<BookmarkTabsItemDefault, 'key' | 'ref'>;
