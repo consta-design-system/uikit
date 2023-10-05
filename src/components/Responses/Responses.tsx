@@ -2,7 +2,8 @@ import './Responses.css';
 
 import React from 'react';
 
-import { ResponsesImageProps } from '../../responsesImages/ResponsesImage/ResponsesImage';
+import { ResponsesImageProps } from '##/responsesImages/ResponsesImage/ResponsesImage';
+
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 

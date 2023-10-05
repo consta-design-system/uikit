@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { ResponsesImageProps } from '../../responsesImages/ResponsesImage/ResponsesImage';
+import { ResponsesImageProps } from '##/responsesImages/ResponsesImage/ResponsesImage';
+
 import { cnResponses, Responses, ResponsesProps } from './Responses';
 
 type CreateResponsesArguments = {

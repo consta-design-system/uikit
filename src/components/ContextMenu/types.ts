@@ -195,6 +195,7 @@ export type ContextMenuProps<
     isOpen?: boolean;
     form?: ContextMenuForm;
     isMobile?: boolean;
+    onEsc?: React.KeyboardEventHandler;
   } & MappersItem<ITEM> &
     MappersGroup<GROUP> &
     PositioningProps,
@@ -245,6 +246,7 @@ export type ContextMenuLevelProps<
   | keyof MappersGroup<GROUP>
 > & {
   parent?: ITEM;
+  activeLevelDepth: number;
   levelDepth: number;
   addLevel: AddLevel<ITEM>;
   deleteLevel: (level: number) => void;
@@ -252,6 +254,7 @@ export type ContextMenuLevelProps<
   onSetDirection?: (direction: Direction) => void;
   hoveredParenLevel: number;
   setHoveredParenLevel: (level: number) => void;
+  onEsc?: React.KeyboardEventHandler;
   animate: Animate;
 } & Required<MappersItem<ITEM>> &
   Required<MappersGroup<GROUP>>;
@@ -308,9 +311,7 @@ export type ContextMenuWrapperProps = PropsWithHTMLAttributes<
 export type ContextMenuLevelWrapperProps = PropsWithHTMLAttributesAndRef<
   {
     children: React.ReactNode;
-    isOpen?: boolean;
     isMobile?: boolean;
-    form?: ContextMenuForm;
     onClickOutside?: ClickOutsideHandler;
     spareDirection?: Direction;
     possibleDirections?: readonly Direction[];
@@ -320,7 +321,6 @@ export type ContextMenuLevelWrapperProps = PropsWithHTMLAttributesAndRef<
     anchorRef?: React.RefObject<HTMLElement>;
     position?: Position;
     onSetDirection?: (direction: Direction) => void;
-    classname?: string;
   },
   HTMLDivElement
 >;

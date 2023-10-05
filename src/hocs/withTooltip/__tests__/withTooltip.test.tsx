@@ -1,13 +1,14 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
-import { Button } from '../../../components/Button/Button';
+import { Button } from '##/components/Button';
 import {
   appearTimeoutDefault,
   exitTimeoutDefault,
   TooltipProps,
   withTooltip,
-} from '../withTooltip';
+} from '##/hocs/withTooltip';
+import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 
 const testId = 'withTooltip';
 const tooltipRole = 'Tooltip';
@@ -43,38 +44,51 @@ describe('HOC withTooltip', () => {
   it('открывается/закрывается по наведению с задержкой', () => {
     jest.useFakeTimers();
     act(() => {
-      renderComponent({});
+      renderComponent({ content: 'mouseover' });
     });
 
     const component = getComponent();
 
     fireEvent.mouseEnter(component);
+
     act(() => {
-      jest.advanceTimersByTime(appearTimeoutDefault);
+      jest.advanceTimersByTime(appearTimeoutDefault + animateTimeout);
     });
 
     const tooltip = getTooltip();
     expect(tooltip).not.toBeNull();
 
     fireEvent.mouseLeave(component);
+
     act(() => {
-      jest.advanceTimersByTime(exitTimeoutDefault);
+      jest.advanceTimersByTime(exitTimeoutDefault + animateTimeout);
     });
 
-    const tooltipUnVisible = getTooltips();
+    const tooltipUnVisible = getTooltip();
 
-    expect(tooltipUnVisible).toEqual([]);
+    expect(tooltipUnVisible).toHaveClass(
+      cnMixPopoverAnimate({ animate: 'exiting' }),
+    );
   });
   it('открывается/закрывается по onClick компонента', () => {
-    renderComponent({ mode: 'click' });
+    jest.useFakeTimers();
+    act(() => {
+      renderComponent({ mode: 'click', content: 'click' });
+    });
 
     const component = getComponent();
     fireEvent.click(component);
+    act(() => {
+      jest.advanceTimersByTime(animateTimeout);
+    });
 
     const tooltip = getTooltip();
     expect(tooltip).not.toBeNull();
 
     fireEvent.click(component);
+    act(() => {
+      jest.advanceTimersByTime(animateTimeout);
+    });
 
     const tooltipUnVisible = getTooltips();
 

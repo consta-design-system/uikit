@@ -1,0 +1,12 @@
+.MixFlexExample {
+  width: 500px;
+  min-height: 200px;
+  padding: var(--space-m);
+  border: 1px solid var(--color-bg-border);
+
+  &-Block {
+    min-width: var(--space-6xl);
+    min-height: var(--space-6xl);
+    background: var(--color-bg-brand);
+  }
+}

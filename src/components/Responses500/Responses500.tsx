@@ -1,5 +1,5 @@
-import { ResponsesImage500 } from '../../responsesImages/ResponsesImage500/ResponsesImage500';
-import { createResponses } from '../Responses/createResponses';
+import { createResponses } from '##/components/Responses/createResponses';
+import { ResponsesImage500 } from '##/responsesImages/ResponsesImage500/ResponsesImage500';
 
 export const Responses500 = createResponses({
   name: 'Responses500',
