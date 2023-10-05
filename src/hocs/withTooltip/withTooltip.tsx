@@ -19,9 +19,9 @@ export const appearTimeoutDefault = 400;
 export const exitTimeoutDefault = 200;
 
 type ComponentProps = {
-  onClick?: (() => void) | React.EventHandler<React.MouseEvent>;
-  onMouseEnter?: (() => void) | React.MouseEventHandler;
-  onMouseLeave?: (() => void) | React.MouseEventHandler;
+  onClick?: React.MouseEventHandler;
+  onMouseEnter?: React.MouseEventHandler;
+  onMouseLeave?: React.MouseEventHandler;
 };
 
 export type TooltipProps = Omit<TooltipComponentProps, 'children' | 'ref'> & {
@@ -183,6 +183,8 @@ export function withTooltip(hocProps?: TooltipProps) {
       },
     ) as unknown as
       | COMPONENT_TYPE
-      | React.ComponentType<WithTooltipProps<COMPONENT_PROPS>>;
+      | React.ComponentType<{
+          tooltipProps?: TooltipProps;
+        }>;
   };
 }
