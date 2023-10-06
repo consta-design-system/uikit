@@ -522,13 +522,12 @@ export const BookmarkTabsExampleOnRemove = () => {
 - `view` - внешний вид;
 - `tabWidth` - ширина таба;
 - `tabRef` - ссылка на элемент (ref в `BookmarkTabsItemDefault`);
-- `controlRef` - ссылка на элемент (необходимо прикрепить к элементу для скролла по эдементам);
 - `label` - лейбл;
 - `fixed` - флаг, зафиксирован ли элемент;
 - `hovered` - флаг, наведен ли курсор на элемент;
 - `leftIcon` - иконка слева;
 - `rightIcon` - иконка справа;
-- `as` - HTML-тег ренедера;
+- `as` - HTML-тег рендера;
 - `attributes` - дополнительные атрибуты.
 
 ```tsx
@@ -562,12 +561,10 @@ export const BookmarkTabsExampleRenderItem = () => {
         form,
         view,
         hovered,
-        controlRef,
       }) => (
         <button
           type="button"
           onClick={onClick}
-          ref={controlRef as React.RefObject<HTMLButtonElement>}
           className={cnBookmarkTabsTab({
             active,
             size,
@@ -670,7 +667,6 @@ export type BookmarkTabsRenderItemProps<ITEM> = {
   hovered?: boolean;
   bordered?: boolean;
   tabRef?: React.RefObject<HTMLElement>;
-  controlRef?: React.RefObject<HTMLElement>;
 } & Omit<BookmarkTabsItemDefault, 'key' | 'ref'>;
 
 export type BookmarkTabsPropRenderItem<ITEM> = (

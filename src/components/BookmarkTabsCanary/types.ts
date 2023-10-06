@@ -74,7 +74,6 @@ export type BookmarkTabsRenderItemProps<ITEM> = {
   bordered?: boolean;
   tabWidth?: string;
   tabRef?: React.RefObject<HTMLElement>;
-  controlRef?: React.RefObject<HTMLElement>;
 } & Omit<BookmarkTabsItemDefault, 'key' | 'ref'>;
 
 export type BookmarkTabsPropRenderItem<ITEM> = (
@@ -127,7 +126,6 @@ export type BookmarkTabsTabProps<AS extends AsTags = 'div'> =
       tabWidth?: string;
       bordered?: boolean;
       tabRef?: React.RefObject<HTMLElement>;
-      controlRef?: React.RefObject<HTMLElement>;
       fixed?: boolean;
       onClose?: React.ReactEventHandler;
     },

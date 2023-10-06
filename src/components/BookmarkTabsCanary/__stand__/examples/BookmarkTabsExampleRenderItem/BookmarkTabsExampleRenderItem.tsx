@@ -35,12 +35,10 @@ export const BookmarkTabsExampleRenderItem = () => {
           bordered,
           form,
           view,
-          controlRef,
         }) => (
           <button
             type="button"
             onClick={onClick}
-            ref={controlRef as React.RefObject<HTMLButtonElement>}
             className={cnBookmarkTabsTab({
               active,
               size,

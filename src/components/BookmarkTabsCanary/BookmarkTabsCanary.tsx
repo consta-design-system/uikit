@@ -94,7 +94,7 @@ const BookmarkTabsRender = (
   const renderItem = (
     item: Item,
     fixed: boolean,
-    controlRef: React.RefObject<HTMLElement>,
+    controlRef: React.RefObject<HTMLDivElement>,
     bordered: boolean,
     index: number,
     tabWidth?: string,
@@ -103,6 +103,7 @@ const BookmarkTabsRender = (
       className={cnBookmarkTabs('Tab')}
       onMouseEnter={() => setHighlitedIndex(index)}
       onFocus={() => setHighlitedIndex(index)}
+      ref={controlRef}
     >
       {renderItemProp({
         item,
@@ -111,10 +112,9 @@ const BookmarkTabsRender = (
         label: getItemLabel(item),
         leftIcon: getItemLeftIcon(item),
         rightIcon: getItemRightIcon(item),
-        as: getItemAs(item) ?? 'button',
+        as: getItemAs(item) ?? 'div',
         attributes: getItemAttributes(item),
         tabRef: getItemRef(item),
-        controlRef,
         fixed,
         bordered,
         onClose: onRemove ? (e) => onRemove(item, { e }) : undefined,

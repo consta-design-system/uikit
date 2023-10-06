@@ -29,7 +29,6 @@ const BookmarkTabsTabRender = (
     fixed,
     tabRef,
     hovered,
-    controlRef,
     onClose,
     onKeyDown: onKeyDownProp,
     view,
@@ -85,7 +84,7 @@ const BookmarkTabsTabRender = (
       role="button"
       onClick={onClick}
       onKeyDown={onKeyDown}
-      ref={useForkRef([ref, tabRef, controlRef, tagRef])}
+      ref={useForkRef([ref, tabRef, tagRef])}
       style={{
         ['--bookmarks-tab-width' as string]: tabWidth,
         ...style,
