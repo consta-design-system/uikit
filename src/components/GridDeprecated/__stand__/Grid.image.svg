@@ -1,0 +1,120 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect
+    x="30"
+    y="18"
+    width="88"
+    height="8"
+    transform="rotate(90 30 18)"
+    fill="var(--color-bg-border)"
+  />
+  <rect
+    x="48"
+    y="18"
+    width="88"
+    height="8"
+    transform="rotate(90 48 18)"
+    fill="var(--color-bg-border)"
+  />
+  <rect
+    x="66"
+    y="18"
+    width="88"
+    height="8"
+    transform="rotate(90 66 18)"
+    fill="var(--color-bg-border)"
+  />
+  <rect
+    x="84"
+    y="18"
+    width="88"
+    height="8"
+    transform="rotate(90 84 18)"
+    fill="var(--color-bg-border)"
+  />
+  <rect
+    x="102"
+    y="18"
+    width="88"
+    height="8"
+    transform="rotate(90 102 18)"
+    fill="var(--color-bg-border)"
+  />
+  <rect
+    x="120"
+    y="18"
+    width="88"
+    height="8"
+    transform="rotate(90 120 18)"
+    fill="var(--color-bg-border)"
+  />
+  <rect
+    x="138"
+    y="18"
+    width="88"
+    height="8"
+    transform="rotate(90 138 18)"
+    fill="var(--color-bg-border)"
+  />
+  <rect
+    x="156"
+    y="18"
+    width="88"
+    height="8"
+    transform="rotate(90 156 18)"
+    fill="var(--color-bg-border)"
+  />
+  <rect
+    x="174"
+    y="18"
+    width="88"
+    height="8"
+    transform="rotate(90 174 18)"
+    fill="var(--color-bg-border)"
+  />
+  <g opacity="0.4">
+    <rect
+      x="174"
+      y="33"
+      width="58"
+      height="44"
+      transform="rotate(90 174 33)"
+      fill="var(--color-bg-link)"
+    />
+  </g>
+  <g opacity="0.4">
+    <rect
+      x="120"
+      y="67"
+      width="24"
+      height="98"
+      transform="rotate(90 120 67)"
+      fill="var(--color-bg-link)"
+    />
+  </g>
+  <g opacity="0.4">
+    <rect
+      x="66"
+      y="33"
+      width="24"
+      height="44"
+      transform="rotate(90 66 33)"
+      fill="var(--color-bg-link)"
+    />
+  </g>
+  <g opacity="0.4">
+    <rect
+      x="120"
+      y="33"
+      width="24"
+      height="44"
+      transform="rotate(90 120 33)"
+      fill="var(--color-bg-link)"
+    />
+  </g>
+</svg>
