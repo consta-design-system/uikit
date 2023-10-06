@@ -44,7 +44,7 @@ export const ChoiceGroupExampleAdaptiveScroll = () => {
 const items2: string[] = ['один', 'два', 'три', 'четыре', 'пять'];
 
 export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
-  const { desktop } = useBreakpoints({ desktop: 800 });
+  const { desktop } = useBreakpoints({ map: { desktop: 800 }, isActive: true });
   const [value, setValue] = useState(items2[0]);
   const onChandge = useCallback(
     ({ value }: { value: string }) => setValue(value),
