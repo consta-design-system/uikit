@@ -5,6 +5,7 @@ import React, { useMemo, useState } from 'react';
 
 import { ListBox, ListItem } from '##/components/ListCanary';
 import { useVirtualScroll } from '##/hooks/useVirtualScrollCanary';
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
 
 const cnUseVirtualScrollExample = cn('UseVirtualScrollExample');
@@ -22,7 +23,7 @@ export const UseVirtualScrollExampleVirtual = () => {
       <ListBox
         ref={scrollElementRef}
         border
-        className={cnUseVirtualScrollExample()}
+        className={cnUseVirtualScrollExample(null, [cnMixScrollBar()])}
       >
         <div style={{ marginTop: spaceTop }}>
           {items.slice(...slice).map((item, index) => {

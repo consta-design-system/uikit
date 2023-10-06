@@ -5,6 +5,8 @@ import { IconSortUp } from '@consta/icons/IconSortUp';
 import { IconUnsort } from '@consta/icons/IconUnsort';
 import React, { useEffect, useMemo } from 'react';
 
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
+
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { sortBy as sortByDefault, updateAt } from '../../utils/array';
@@ -883,7 +885,7 @@ const InternalTable = <T extends TableRow>(
           zebraStriped,
           withBorderBottom: !filteredData.length,
         },
-        [className],
+        [className, cnMixScrollBar()],
       )}
       style={tableStyle}
       onScroll={handleScroll}
