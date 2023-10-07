@@ -1400,19 +1400,19 @@ import { UserSelect } from '@consta/uikit/UserSelect';
 ## Свойства
 
 ```tsx
-type DefaultItem = {
+type UserSelectItemDefault = {
   label: string;
   id: string | number;
   groupId?: string | number;
   disabled?: boolean;
 };
 
-type DefaultGroup = {
+type UserSelectGroupDefault = {
   label: string;
   id: string | number;
 };
 
-type PropOnChange<ITEM, MULTIPLE extends boolean> = (
+type UserSelectPropOnChange<ITEM, MULTIPLE extends boolean> = (
   value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
   props: {
     value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
@@ -1420,7 +1420,7 @@ type PropOnChange<ITEM, MULTIPLE extends boolean> = (
   },
 ) => void;
 
-type PropRenderItem<ITEM = DefaultItem> = (props: {
+type UserSelectPropRenderItem<ITEM = UserSelectItemDefault> = (props: {
   item: ITEM;
   active: boolean;
   hovered: boolean;
@@ -1428,34 +1428,45 @@ type PropRenderItem<ITEM = DefaultItem> = (props: {
   onMouseEnter: React.ReactEventHandler;
 }) => React.ReactElement | null;
 
-type PropValue<ITEM, MULTIPLE extends boolean> =
+type UserSelectPropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)
   | null
   | undefined;
 
-type PropRenderValue<ITEM> = (props: {
+type UserSelectPropRenderValue<ITEM> = (props: {
   item: ITEM;
 }) => React.ReactElement | null;
 
-type PropSearchFunction<ITEM> = (item: ITEM, searchValue: string) => boolean;
+type UserSelectPropSearchFunction<ITEM> = (
+  item: ITEM,
+  searchValue: string,
+) => boolean;
 
-export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type UserSelectPropGetItemLabel<ITEM> = (item: ITEM) => string;
 
-export type PropGetItemSubLabel<ITEM> = (item: ITEM) => string | undefined;
+export type UserSelectPropGetItemSubLabel<ITEM> = (
+  item: ITEM,
+) => string | undefined;
 
-export type PropGetItemAvatarUrl<ITEM> = (item: ITEM) => string | undefined;
+export type UserSelectPropGetItemAvatarUrl<ITEM> = (
+  item: ITEM,
+) => string | undefined;
 
-export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
+export type UserSelectPropGetItemKey<ITEM> = (item: ITEM) => string | number;
 
-export type PropGetItemGroupKey<ITEM> = (
+export type UserSelectPropGetItemGroupKey<ITEM> = (
   item: ITEM,
 ) => string | number | undefined;
 
-export type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+export type UserSelectPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
 
-export type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
+export type UserSelectPropGetGroupKey<GROUP> = (
+  group: GROUP,
+) => string | number;
 
-export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
+export type UserSelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 ```
 
 | Свойство                                                                | Тип или варианты значения                              | По умолчанию                                                  | Описание                                                                  |
@@ -1471,21 +1482,21 @@ export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`labelIcon?`](#лейбл)                                                  | `IconComponent`                                        | -                                                             | Иконка слева от лейбла                                                    |
 | [`caption?`](#подпись)                                                  | `string`                                               | -                                                             | Подпись                                                                   |
 | [`items`](#варианты)                                                    | `ITEM[]`                                               | -                                                             | Варианты                                                                  |
-| [`value?`](#выбранное-значение)                                         | `PropValue<ITEM,MULTIPLE>`                             | -                                                             | Выбранное значение                                                        |
-| [`onChange?`](#выбранное-значение)                                      | `PropOnChange<ITEM,MULTIPLE>`                          | -                                                             | Обработчик события изменения значения компонента                          |
+| [`value?`](#выбранное-значение)                                         | `UserSelectPropValue<ITEM,MULTIPLE>`                   | -                                                             | Выбранное значение                                                        |
+| [`onChange?`](#выбранное-значение)                                      | `UserSelectPropOnChange<ITEM,MULTIPLE>`                | -                                                             | Обработчик события изменения значения компонента                          |
 | [`multiple?`](#несколько-вариантов)                                     | `boolean`                                              | `fasle`                                                       | Показывает, что можно выбрать несколько вариантов                         |
 | [`groups?`](#группы-вариантов)                                          | `GROUP[]`                                              | -                                                             | Группы                                                                    |
-| [`searchFunction?`](#поиск)                                             | `PropSearchFunction<ITEM>`                             | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                            |
-| [`renderItem?`](#кастомный-элемент-списка)                              | `PropRenderItem<ITEM>`                                 | рендер по умолчанию                                           | Рендер-функция для элемента списка                                        |
-| [`renderValue?`](#кастомное-выбранное-значение)                         | `PropRenderValue<ITEM>`                                | рендер по умолчанию                                           | Рендер-функция для элемента выбранного значения                           |
-| [`getItemLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)         | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`                                        | Функция для определения названия элемента                                 |
-| [`getItemKey?`](#кастомные-типы-данных-для-групп-и-вариантов)           | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`                                           | Функция для определения уникального ключа элемента                        |
-| [`getItemSubLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)      | `PropGetItemSubLabel<ITEM>`                            | `(item) => item.subLabel`                                     | Функция для определения подписи элемента                                  |
-| [`getItemAvatarUrl?`](#кастомные-типы-данных-для-групп-и-вариантов)     | `PropGetItemAvatarUrl<ITEM>`                           | `(item) => item.avatarUrl`                                    | Функция для определения аватарки элемента                                 |
-| [`getItemGroupKey?`](#кастомные-типы-данных-для-групп-и-вариантов)      | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`                                      | Функция для определения ключа группы, к которой будет привязан элемент    |
-| [`getItemDisabled?`](#кастомные-типы-данных-для-групп-и-вариантов)      | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                              |
-| [`getGroupLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)        | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`                                         | Функция для определения названия группы                                   |
-| [`getGroupKey?`](#кастомные-типы-данных-для-групп-и-вариантов)          | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`                                      | Функция для определения уникального ключа группы                          |
+| [`searchFunction?`](#поиск)                                             | `UserSelectPropSearchFunction<ITEM>`                   | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                            |
+| [`renderItem?`](#кастомный-элемент-списка)                              | `UserSelectPropRenderItem<ITEM>`                       | рендер по умолчанию                                           | Рендер-функция для элемента списка                                        |
+| [`renderValue?`](#кастомное-выбранное-значение)                         | `UserSelectPropRenderValue<ITEM>`                      | рендер по умолчанию                                           | Рендер-функция для элемента выбранного значения                           |
+| [`getItemLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)         | `UserSelectPropGetItemLabel<ITEM>`                     | `(item) => item.label`                                        | Функция для определения названия элемента                                 |
+| [`getItemKey?`](#кастомные-типы-данных-для-групп-и-вариантов)           | `UserSelectPropGetItemKey<ITEM>`                       | `(item) => item.id`                                           | Функция для определения уникального ключа элемента                        |
+| [`getItemSubLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)      | `UserSelectPropGetItemSubLabel<ITEM>`                  | `(item) => item.subLabel`                                     | Функция для определения подписи элемента                                  |
+| [`getItemAvatarUrl?`](#кастомные-типы-данных-для-групп-и-вариантов)     | `UserSelectPropGetItemAvatarUrl<ITEM>`                 | `(item) => item.avatarUrl`                                    | Функция для определения аватарки элемента                                 |
+| [`getItemGroupKey?`](#кастомные-типы-данных-для-групп-и-вариантов)      | `UserSelectPropGetItemGroupKey<ITEM>`                  | `(item) => item.groupId`                                      | Функция для определения ключа группы, к которой будет привязан элемент    |
+| [`getItemDisabled?`](#кастомные-типы-данных-для-групп-и-вариантов)      | `UserSelectPropGetItemDisabled<ITEM>`                  | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                              |
+| [`getGroupLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)        | `UserSelectPropGetGroupKey<GROUP>`                     | `(group) => group.id`                                         | Функция для определения названия группы                                   |
+| [`getGroupKey?`](#кастомные-типы-данных-для-групп-и-вариантов)          | `UserSelectPropGetGroupLabel<GROUP>`                   | `(group) => group.label`                                      | Функция для определения уникального ключа группы                          |
 | `isLoading?`                                                            | `boolean`                                              | -                                                             | При `true` будет отображаться лоудер загрузки                             |
 | `required?`                                                             | `boolean`                                              | -                                                             | Нужно заполнить                                                           |
 | `searchValue?`                                                          | `string`                                               | -                                                             | Значение поля ввода                                                       |

@@ -3,7 +3,11 @@ import { IconSettings } from '@consta/icons/IconSettings';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React, { useEffect, useState } from 'react';
 
-import { defaultPropSize, propSize, propStatus } from '../helper';
+import {
+  sliderPropSize,
+  sliderPropSizeDefault,
+  sliderPropStatus,
+} from '../helper';
 import { Slider } from '../Slider';
 
 const sideMap = {
@@ -17,8 +21,8 @@ const Variants = () => {
   const label = useText('label', 'Лейбл');
   const withLabelIcon = useBoolean('withLabelIcon');
   const caption = useText('caption', 'Подпись');
-  const status = useSelect('status', propStatus);
-  const size = useSelect('size', propSize, defaultPropSize);
+  const status = useSelect('status', sliderPropStatus);
+  const size = useSelect('size', sliderPropSize, sliderPropSizeDefault);
   const min = useNumber('min', -20);
   const max = useNumber('max', 80);
   const step = useNumber('step', 1);

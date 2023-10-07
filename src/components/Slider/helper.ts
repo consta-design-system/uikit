@@ -5,15 +5,15 @@ import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttribut
 import { Direction } from '../Popover';
 import { ActiveButton } from './useSlider/helper';
 
-export const propStatus = ['alert', 'warning', 'success'] as const;
-export type PropStatus = typeof propStatus[number];
-export const defaultPropStatus = propStatus[0];
+export const sliderPropStatus = ['alert', 'warning', 'success'] as const;
+export type SliderPropStatus = typeof sliderPropStatus[number];
+export const sliderPropStatusDefault = sliderPropStatus[0];
 
-export type PropView = 'default' | 'division';
+export type SliderPropView = 'default' | 'division';
 
-export const propSize = ['s', 'xs', 'm', 'l'] as const;
-export type PropSize = typeof propSize[number];
-export const defaultPropSize: PropSize = propSize[0];
+export const sliderPropSize = ['s', 'xs', 'm', 'l'] as const;
+export type SliderPropSize = typeof sliderPropSize[number];
+export const sliderPropSizeDefault: SliderPropSize = sliderPropSize[0];
 
 export type SliderValue<RANGE> = RANGE extends true ? [number, number] : number;
 
@@ -30,14 +30,14 @@ export type SliderPropOnChange<RANGE> = (
   },
 ) => void;
 
-type PropToolipFormatter = (value: number | undefined) => string;
+type SliderPropToolipFormatter = (value: number | undefined) => string;
 
 type Side = IconComponent | 'input';
 
 type Props<RANGE extends boolean = false> = {
   className?: string;
   step?: number | number[];
-  view?: PropView;
+  view?: SliderPropView;
   disabled?: boolean;
   range?: RANGE;
   withTooltip?: boolean;
@@ -45,14 +45,14 @@ type Props<RANGE extends boolean = false> = {
   label?: string;
   labelIcon?: IconComponent;
   caption?: string;
-  status?: PropStatus;
+  status?: SliderPropStatus;
   min?: number;
-  size?: PropSize;
+  size?: SliderPropSize;
   max?: number;
   onChange?: SliderPropOnChange<RANGE>;
   onAfterChange?: SliderPropOnChange<RANGE>;
   leftSide?: Side;
-  tooltipFormatter?: PropToolipFormatter;
+  tooltipFormatter?: SliderPropToolipFormatter;
   rightSide?: Side;
   tooltipDirection?: Direction;
   tooltipPossibleDirections?: Direction[];
@@ -65,7 +65,7 @@ export type Line = {
 };
 
 export type SliderLineProps = {
-  view?: PropView;
+  view?: SliderPropView;
   lines: Line[];
   disabled?: boolean;
   hovered?: boolean;
@@ -83,7 +83,7 @@ export type SliderPointProps = PropsWithHTMLAttributes<
     buttonLabel?: ActiveButton;
     buttonRef?: React.RefObject<HTMLButtonElement>;
     popoverPosition?: TrackPosition;
-    tooltipFormatter?: PropToolipFormatter;
+    tooltipFormatter?: SliderPropToolipFormatter;
     onFocus?: (
       e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
       button: ActiveButton,
@@ -120,7 +120,7 @@ export const isNotRangeParams = (
   return !params.range;
 };
 
-export const defaultTooltipFormatter: PropToolipFormatter = (value) =>
+export const defaultTooltipFormatter: SliderPropToolipFormatter = (value) =>
   value?.toString() || '';
 
 export type TrackPosition = {

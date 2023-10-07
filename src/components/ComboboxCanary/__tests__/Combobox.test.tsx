@@ -14,7 +14,7 @@ import { cn } from '##/utils/bem';
 
 import { Combobox, ComboboxProps, defaultGetItemLabel } from '..';
 import { groups, items } from '../__mocks__/data.mock';
-import { DefaultGroup, DefaultItem } from '../helpers';
+import { ComboboxGroupDefault, ComboboxItemDefault } from '../helpers';
 
 const animationDuration = 200;
 const testId = 'Combobox';
@@ -29,8 +29,8 @@ const defaultProps: ComboboxProps = {
 };
 
 function renderComponent<
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
+  ITEM = ComboboxItemDefault,
+  GROUP = ComboboxGroupDefault,
   MULTIPLE extends boolean = false,
 >(props: ComboboxProps<ITEM, GROUP, MULTIPLE>): RenderResult {
   return render(

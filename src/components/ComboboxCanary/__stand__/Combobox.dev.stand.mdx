@@ -1461,19 +1461,19 @@ import { Combobox } from '@consta/uikit/ComboboxCanary';
 ## Свойства
 
 ```tsx
-type DefaultItem = {
+type ComboboxItemDefault = {
   label: string;
   id: string | number;
   groupId?: string | number;
   disabled?: boolean;
 };
 
-type DefaultGroup = {
+type ComboboxGroupDefault = {
   label: string;
   id: string | number;
 };
 
-type PropOnChange<ITEM, MULTIPLE extends boolean> = (
+type ComboboxPropOnChange<ITEM, MULTIPLE extends boolean> = (
   value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
   props: {
     e: React.SyntheticEvent;
@@ -1481,7 +1481,7 @@ type PropOnChange<ITEM, MULTIPLE extends boolean> = (
   },
 ) => void;
 
-type PropRenderItem<ITEM = DefaultItem> = (props: {
+type ComboboxPropRenderItem<ITEM = DefaultItem> = (props: {
   item: ITEM;
   active: boolean;
   hovered: boolean;
@@ -1489,25 +1489,30 @@ type PropRenderItem<ITEM = DefaultItem> = (props: {
   onMouseEnter: React.ReactEventHandler;
 }) => React.ReactElement | null;
 
-type PropValue<ITEM, MULTIPLE extends boolean> =
+type ComboboxPropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)
   | null
   | undefined;
 
-type PropRenderValue<ITEM> = (props: {
+type ComboboxPropRenderValue<ITEM> = (props: {
   item: ITEM;
 }) => React.ReactElement | null;
 
-type PropSearchFunction<ITEM> = (item: ITEM, searchValue: string) => boolean;
+type ComboboxPropSearchFunction<ITEM> = (
+  item: ITEM,
+  searchValue: string,
+) => boolean;
 
-type PropGetItemLabel<ITEM> = (item: ITEM) => string;
-type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
-type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
-type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
-type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
-type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
+type ComboboxPropGetItemLabel<ITEM> = (item: ITEM) => string;
+type ComboboxPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type ComboboxPropGetItemGroupKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+type ComboboxPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+type ComboboxPropGetGroupKey<GROUP> = (group: GROUP) => string | number;
+type ComboboxPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 
-type PropOnCreate = (
+type ComboboxPropOnCreate = (
   label: string,
   props: { e: React.SyntheticEvent; label: string },
 ) => void;
@@ -1526,20 +1531,20 @@ type PropOnCreate = (
 | [`labelPosition?`](#лейбл-и-подпись)                                    | `'top', 'left'`                                        | `'top'`                                                       | Положение лейбла                                                                      |
 | [`caption?`](#лейбл-и-подпись)                                          | `string`                                               | -                                                             | Подпись                                                                               |
 | [`items`](#варианты)                                                    | `ITEM[]`                                               | -                                                             | Варианты                                                                              |
-| [`value?`](#значение)                                                   | `PropValue<ITEM,MULTIPLE>`                             | -                                                             | Значение селекта                                                                      |
-| [`onChange?`](#onchange)                                                | `PropOnChange<ITEM,MULTIPLE>`                          | -                                                             | Событие связанное с изменением значения компонента                                    |
+| [`value?`](#значение)                                                   | `ComboboxPropValue<ITEM,MULTIPLE>`                     | -                                                             | Значение селекта                                                                      |
+| [`onChange?`](#onchange)                                                | `ComboboxPropOnChange<ITEM,MULTIPLE>`                  | -                                                             | Событие связанное с изменением значения компонента                                    |
 | [`multiple?`](#множественный-выбор)                                     | `boolean`                                              | `false`                                                       | Указатель множественного выбора                                                       |
 | [`groups?`](#группировка-списка)                                        | `GROUP[]`                                              | -                                                             | Группы                                                                                |
 | [`onSearchValueChange?`](#поиск)                                        | `(value: string) => void`                              | -                                                             | Функция для получения значения строки поиска                                          |
-| [`searchFunction?`](#поиск)                                             | `PropSearchFunction<ITEM>`                             | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                                        |
-| [`renderItem?`](#свое-представление-элемента-списка)                    | `PropRenderItem<ITEM>`                                 | рендер по умолчанию                                           | Рендер-функция для элемента списка                                                    |
-| [`renderValue?`](#свое-представление-выбранного-значения)               | `PropRenderValue<ITEM>`                                | рендер по умолчанию                                           | Рендер-функция для элемента значения                                                  |
-| [`getItemLabel?`](#свои-тип-данных-items-и-groups)                      | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`                                        | Функция для определения названия элемента                                             |
-| [`getItemKey?`](#свои-тип-данных-items-и-groups)                        | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`                                           | Функция для определения уникального ключа элемента                                    |
-| [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)                   | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`                                      | Функция для определения ключа группы, к которой будет привязан элемент                |
-| [`getItemDisabled?`](#свои-тип-данных-items-и-groups)                   | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                                          |
-| [`getGroupLabel?`](#свои-тип-данных-items-и-groups)                     | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`                                         | Функция для определения названия группы                                               |
-| [`getGroupKey?`](#свои-тип-данных-items-и-groups)                       | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`                                      | Функция для определения уникального ключа группы                                      |
+| [`searchFunction?`](#поиск)                                             | `ComboboxPropSearchFunction<ITEM>`                     | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                                        |
+| [`renderItem?`](#свое-представление-элемента-списка)                    | `ComboboxPropRenderItem<ITEM>`                         | рендер по умолчанию                                           | Рендер-функция для элемента списка                                                    |
+| [`renderValue?`](#свое-представление-выбранного-значения)               | `ComboboxPropRenderValue<ITEM>`                        | рендер по умолчанию                                           | Рендер-функция для элемента значения                                                  |
+| [`getItemLabel?`](#свои-тип-данных-items-и-groups)                      | `ComboboxPropGetItemLabel<ITEM>`                       | `(item) => item.label`                                        | Функция для определения названия элемента                                             |
+| [`getItemKey?`](#свои-тип-данных-items-и-groups)                        | `ComboboxPropGetItemKey<ITEM>`                         | `(item) => item.id`                                           | Функция для определения уникального ключа элемента                                    |
+| [`getItemGroupKey?`](#свои-тип-данных-items-и-groups)                   | `ComboboxPropGetItemGroupKey<ITEM>`                    | `(item) => item.groupId`                                      | Функция для определения ключа группы, к которой будет привязан элемент                |
+| [`getItemDisabled?`](#свои-тип-данных-items-и-groups)                   | `ComboboxPropGetItemDisabled<ITEM>`                    | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                                          |
+| [`getGroupLabel?`](#свои-тип-данных-items-и-groups)                     | `ComboboxPropGetGroupKey<GROUP>`                       | `(group) => group.id`                                         | Функция для определения названия группы                                               |
+| [`getGroupKey?`](#свои-тип-данных-items-и-groups)                       | `ComboboxPropGetGroupLabel<GROUP>`                     | `(group) => group.label`                                      | Функция для определения уникального ключа группы                                      |
 | [`isLoading?`](#индикация-загрузки)                                     | `boolean`                                              | -                                                             | При `true` будет отображаться лоадер загрузки                                         |
 | `required?`                                                             | `boolean`                                              | -                                                             | Нужно заполнить                                                                       |
 | `searchValue?`                                                          | `string`                                               | -                                                             | Значение поля ввода                                                                   |
@@ -1550,7 +1555,7 @@ type PropOnCreate = (
 | [`allSelectedAllLabel?`](#выбор-всех-элементов)                         | `string`                                               | `Все`                                                         | Текст отображаемый при выборе всех элементов (работает только при `selectAll="true"`) |
 | `onBlur?`                                                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `blur`                                                             |
 | `onFocus?`                                                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `focus`                                                            |
-| `onCreate?`                                                             | `PropOnCreate`                                         | -                                                             | Событие по клику на кнопку 'Создать'                                                  |
+| `onCreate?`                                                             | `ComboboxPropOnCreate`                                 | -                                                             | Событие по клику на кнопку 'Создать'                                                  |
 | `onScrollToBottom?`                                                     | `() => void`                                           | -                                                             | Событие срабатывает когда доскролили список до конца                                  |
 | `onSearchValueChange?`                                                  | `(value: string) => void;`                             | -                                                             | Событие срабатывает при изменении значения поиска                                     |
 | `virtualScroll?`                                                        | `boolean`                                              | -                                                             | Включает виртуализацию скролла                                                        |

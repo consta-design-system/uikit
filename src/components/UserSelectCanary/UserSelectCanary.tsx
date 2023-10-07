@@ -25,14 +25,14 @@ import { cnMixFocus } from '##/mixs/MixFocus';
 import { isNotNil } from '##/utils/type-guards';
 
 import {
-  DefaultGroup,
-  DefaultItem,
   isMultipleParams,
   isNotMultipleParams,
-  PropRenderItem,
-  PropRenderValue,
   searchCompare,
   UserSelectComponent,
+  UserSelectGroupDefault,
+  UserSelectItemDefault,
+  UserSelectPropRenderItem,
+  UserSelectPropRenderValue,
   UserSelectProps,
   withDefaultGetters,
 } from './helpers';
@@ -42,8 +42,8 @@ import { UserSelectValue } from './UserSelectValue/UserSelectValue';
 export const COMPONENT_NAME = 'UserSelect' as const;
 
 const UserSelectRender = <
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
+  ITEM = UserSelectItemDefault,
+  GROUP = UserSelectGroupDefault,
   MULTIPLE extends boolean = false,
 >(
   props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
@@ -157,7 +157,7 @@ const UserSelectRender = <
 
   const inputId = id ? `${id}-input` : id;
 
-  const renderItemDefault: PropRenderItem<ITEM> = (props) => {
+  const renderItemDefault: UserSelectPropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter, ref } = props;
 
     return (
@@ -178,7 +178,7 @@ const UserSelectRender = <
     );
   };
 
-  const renderValueDefault: PropRenderValue<ITEM> = ({
+  const renderValueDefault: UserSelectPropRenderValue<ITEM> = ({
     item,
     handleRemove,
   }) => {

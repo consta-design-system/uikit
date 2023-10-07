@@ -10,7 +10,7 @@ import {
   RenderItemProps,
 } from '../SelectComponentsCanary/types';
 
-export type DefaultItem = {
+export type UserSelectItemDefault = {
   label: string;
   id: string | number;
   subLabel?: string;
@@ -19,50 +19,61 @@ export type DefaultItem = {
   disabled?: boolean;
 };
 
-export type DefaultGroup = {
+export type UserSelectGroupDefault = {
   label: string;
   id: string | number;
 };
 
-type RenderValueProps<ITEM> = {
+type UserSelectRenderValueProps<ITEM> = {
   item: ITEM;
   handleRemove?: (e: React.SyntheticEvent) => void;
 };
 
-export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
-export type PropGetItemSubLabel<ITEM> = (item: ITEM) => string | undefined;
-export type PropGetItemAvatarUrl<ITEM> = (item: ITEM) => string | undefined;
-export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
-export type PropGetItemGroupKey<ITEM> = (
+export type UserSelectPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type UserSelectPropGetItemSubLabel<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+export type UserSelectPropGetItemAvatarUrl<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+export type UserSelectPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+export type UserSelectPropGetItemGroupKey<ITEM> = (
   item: ITEM,
 ) => string | number | undefined;
-export type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
-export type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
-export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
+export type UserSelectPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+export type UserSelectPropGetGroupKey<GROUP> = (
+  group: GROUP,
+) => string | number;
+export type UserSelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 
-type PropSearchFunction<ITEM> = (item: ITEM, searchValue: string) => boolean;
-type PropOnChange<ITEM, MULTIPLE extends boolean> = (
+type UserSelectPropSearchFunction<ITEM> = (
+  item: ITEM,
+  searchValue: string,
+) => boolean;
+type UserSelectPropOnChange<ITEM, MULTIPLE extends boolean> = (
   value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
   props: {
     e: React.SyntheticEvent;
     value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
   },
 ) => void;
-type PropValue<ITEM, MULTIPLE extends boolean> =
+type UserSelectPropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)
   | null
   | undefined;
 
-export type PropRenderItem<ITEM> = (
+export type UserSelectPropRenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
 ) => React.ReactElement | null;
-export type PropRenderValue<ITEM> = (
-  props: RenderValueProps<ITEM>,
+export type UserSelectPropRenderValue<ITEM> = (
+  props: UserSelectRenderValueProps<ITEM>,
 ) => React.ReactElement | null;
 
 export type UserSelectProps<
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
+  ITEM = UserSelectItemDefault,
+  GROUP = UserSelectGroupDefault,
   MULTIPLE extends boolean = false,
 > = PropsWithHTMLAttributesAndRef<
   {
@@ -80,8 +91,8 @@ export type UserSelectProps<
     items: ITEM[];
     required?: boolean;
     isLoading?: boolean;
-    renderItem?: PropRenderItem<ITEM>;
-    renderValue?: PropRenderValue<ITEM>;
+    renderItem?: UserSelectPropRenderItem<ITEM>;
+    renderValue?: UserSelectPropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onCreate?: (label: string, props: { e: React.SyntheticEvent }) => void;
@@ -89,20 +100,20 @@ export type UserSelectProps<
     labelForNotFound?: string;
     labelForCreate?: string;
     labelForEmptyItems?: string;
-    searchFunction?: PropSearchFunction<ITEM>;
+    searchFunction?: UserSelectPropSearchFunction<ITEM>;
     searchValue?: string;
     multiple?: MULTIPLE;
-    value?: PropValue<ITEM, MULTIPLE>;
-    onChange: PropOnChange<ITEM, MULTIPLE>;
+    value?: UserSelectPropValue<ITEM, MULTIPLE>;
+    onChange: UserSelectPropOnChange<ITEM, MULTIPLE>;
     groups?: GROUP[];
-    getItemLabel?: PropGetItemLabel<ITEM>;
-    getItemSubLabel?: PropGetItemSubLabel<ITEM>;
-    getItemAvatarUrl?: PropGetItemAvatarUrl<ITEM>;
-    getItemKey?: PropGetItemKey<ITEM>;
-    getItemGroupKey?: PropGetItemGroupKey<ITEM>;
-    getItemDisabled?: PropGetItemDisabled<ITEM>;
-    getGroupLabel?: PropGetGroupLabel<GROUP>;
-    getGroupKey?: PropGetGroupKey<GROUP>;
+    getItemLabel?: UserSelectPropGetItemLabel<ITEM>;
+    getItemSubLabel?: UserSelectPropGetItemSubLabel<ITEM>;
+    getItemAvatarUrl?: UserSelectPropGetItemAvatarUrl<ITEM>;
+    getItemKey?: UserSelectPropGetItemKey<ITEM>;
+    getItemGroupKey?: UserSelectPropGetItemGroupKey<ITEM>;
+    getItemDisabled?: UserSelectPropGetItemDisabled<ITEM>;
+    getGroupLabel?: UserSelectPropGetGroupLabel<GROUP>;
+    getGroupKey?: UserSelectPropGetGroupKey<GROUP>;
     label?: string;
     labelIcon?: IconComponent;
     caption?: string;
@@ -116,47 +127,52 @@ export type UserSelectProps<
   },
   HTMLDivElement
 > &
-  (ITEM extends { label: DefaultItem['label'] }
+  (ITEM extends { label: UserSelectItemDefault['label'] }
     ? {}
-    : { getItemLabel: PropGetItemLabel<ITEM> }) &
-  (ITEM extends { id: DefaultItem['id'] }
+    : { getItemLabel: UserSelectPropGetItemLabel<ITEM> }) &
+  (ITEM extends { id: UserSelectItemDefault['id'] }
     ? {}
-    : { getItemKey: PropGetItemKey<ITEM> }) &
-  (GROUP extends { label: DefaultGroup['label'] }
+    : { getItemKey: UserSelectPropGetItemKey<ITEM> }) &
+  (GROUP extends { label: UserSelectGroupDefault['label'] }
     ? {}
-    : { getGroupLabel: PropGetGroupLabel<GROUP> }) &
-  (GROUP extends { id: DefaultGroup['id'] }
+    : { getGroupLabel: UserSelectPropGetGroupLabel<GROUP> }) &
+  (GROUP extends { id: UserSelectGroupDefault['id'] }
     ? {}
-    : { getGroupKey: PropGetGroupKey<GROUP> });
+    : { getGroupKey: UserSelectPropGetGroupKey<GROUP> });
 
 export type UserSelectComponent = <
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
+  ITEM = UserSelectItemDefault,
+  GROUP = UserSelectGroupDefault,
   MULTIPLE extends boolean = false,
 >(
   props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
 ) => React.ReactElement | null;
 
-export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
-export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) =>
-  item.label;
-export const defaultGetItemSubLabel: PropGetItemSubLabel<DefaultItem> = (
-  item,
-) => item.subLabel;
-export const defaultGetItemAvatarUrl: PropGetItemAvatarUrl<DefaultItem> = (
-  item,
-) => item.avatarUrl;
-export const defaultGetItemGroupKey: PropGetItemGroupKey<DefaultItem> = (
-  item,
-) => item.groupId;
-export const defaultGetItemDisabled: PropGetItemDisabled<DefaultItem> = (
-  item,
-) => item.disabled;
+export const defaultGetItemKey: UserSelectPropGetItemKey<
+  UserSelectItemDefault
+> = (item) => item.id;
+export const defaultGetItemLabel: UserSelectPropGetItemLabel<
+  UserSelectItemDefault
+> = (item) => item.label;
+export const defaultGetItemSubLabel: UserSelectPropGetItemSubLabel<
+  UserSelectItemDefault
+> = (item) => item.subLabel;
+export const defaultGetItemAvatarUrl: UserSelectPropGetItemAvatarUrl<
+  UserSelectItemDefault
+> = (item) => item.avatarUrl;
+export const defaultGetItemGroupKey: UserSelectPropGetItemGroupKey<
+  UserSelectItemDefault
+> = (item) => item.groupId;
+export const defaultGetItemDisabled: UserSelectPropGetItemDisabled<
+  UserSelectItemDefault
+> = (item) => item.disabled;
 
-export const defaultGetGroupKey: PropGetGroupKey<DefaultGroup> = (group) =>
-  group.id;
-export const defaultGetGroupLabel: PropGetGroupLabel<DefaultGroup> = (group) =>
-  group.label;
+export const defaultGetGroupKey: UserSelectPropGetGroupKey<
+  UserSelectGroupDefault
+> = (group) => group.id;
+export const defaultGetGroupLabel: UserSelectPropGetGroupLabel<
+  UserSelectGroupDefault
+> = (group) => group.label;
 
 export const isMultipleParams = <ITEM, GROUP>(
   params: UserSelectProps<ITEM, GROUP, boolean>,
@@ -171,8 +187,8 @@ export const isNotMultipleParams = <ITEM, GROUP>(
 };
 
 export function withDefaultGetters<
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
+  ITEM = UserSelectItemDefault,
+  GROUP = UserSelectGroupDefault,
   MULTIPLE extends boolean = false,
 >(props: UserSelectProps<ITEM, GROUP, MULTIPLE>) {
   return {

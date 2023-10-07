@@ -28,21 +28,21 @@ import { isNotNil } from '##/utils/type-guards';
 import { Text } from '../Text';
 import {
   ComboboxComponent,
+  ComboboxGroupDefault,
+  ComboboxItemDefault,
+  ComboboxPropRenderItem,
+  ComboboxPropRenderValue,
   ComboboxProps,
-  DefaultGroup,
-  DefaultItem,
   isMultipleParams,
   isNotMultipleParams,
-  PropRenderItem,
-  PropRenderValue,
   withDefaultGetters,
 } from './helpers';
 
 export const COMPONENT_NAME = 'Combobox' as const;
 
 const ComboboxRender = <
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
+  ITEM = ComboboxItemDefault,
+  GROUP = ComboboxGroupDefault,
   MULTIPLE extends boolean = false,
 >(
   props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
@@ -148,7 +148,7 @@ const ComboboxRender = <
 
   const inputId = id ? `${id}-input` : id;
 
-  const renderItemDefault: PropRenderItem<ITEM> = (props) => {
+  const renderItemDefault: ComboboxPropRenderItem<ITEM> = (props) => {
     const { item, active, hovered, onClick, onMouseEnter, ref } = props;
 
     return (
@@ -167,7 +167,7 @@ const ComboboxRender = <
     );
   };
 
-  const renderValueDefaultMultiple: PropRenderValue<ITEM> = ({
+  const renderValueDefaultMultiple: ComboboxPropRenderValue<ITEM> = ({
     item,
     handleRemove,
   }) => {
@@ -182,7 +182,9 @@ const ComboboxRender = <
     );
   };
 
-  const renderValueDefaultNotMultiple: PropRenderValue<ITEM> = (props) => {
+  const renderValueDefaultNotMultiple: ComboboxPropRenderValue<ITEM> = (
+    props,
+  ) => {
     const valueLable = getItemLabel(props.item);
 
     return (

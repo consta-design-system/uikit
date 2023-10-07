@@ -485,7 +485,7 @@ export type SliderPropOnChange<RANGE> = (
   },
 ) => void;
 
-type PropToolipFormatter = (value: number | undefined) => string;
+type SliderPropToolipFormatter = (value: number | undefined) => string;
 ```
 
 | Свойство                                               | Тип или варианты значения                                                 | По умолчанию | Описание                                         |
@@ -503,7 +503,7 @@ type PropToolipFormatter = (value: number | undefined) => string;
 | [`onChange?`](#одно-значение-или-диапазон)             | `SliderPropOnChange<RANGE>`                                               | -            | Обработчик события изменения значения компонента |
 | [`onAfterChange?`](#одно-значение-или-диапазон)        | `SliderPropOnChange<RANGE>`                                               | -            | Обработчик процесса изменения значения           |
 | [`withTooltip?`](#тултип-с-подсказкой)                 | `boolean`                                                                 | -            | Нужно ли показывать тултип                       |
-| [`tooltipFormatter?`](#кастомная-подсказка)            | `PropToolipFormatter`                                                     | -            | Метод для форматирования текста в тултипе        |
+| [`tooltipFormatter?`](#кастомная-подсказка)            | `SliderPropToolipFormatter`                                               | -            | Метод для форматирования текста в тултипе        |
 | `tooltipDirection?`                                    | [`Direction`](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable) | -            | Позиция тултипа по умолчанию                     |
 | `tooltipPossibleDirections?`                           | [`Direction`](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable) | -            | Возможные позиции тултипа                        |
 | [`min?`](#минимальное-и-максимальное-значения)         | `number`                                                                  | `0`          | Минимальное значение                             |

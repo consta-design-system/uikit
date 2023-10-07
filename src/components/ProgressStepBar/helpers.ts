@@ -4,62 +4,83 @@ import React from 'react';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
-export const propSize = ['s', 'xs', 'm'] as const;
-export type PropSize = typeof propSize[number];
-export const propSizeDefault = propSize[0];
+export const progressStepBarPropSize = ['s', 'xs', 'm'] as const;
+export type ProgressStepBarPropSize = typeof progressStepBarPropSize[number];
+export const progressStepBarPropSizeDefault = progressStepBarPropSize[0];
 
-export const propDirection = ['horizontal', 'vertical'] as const;
-export type PropDirection = typeof propDirection[number];
-export const propDirectionDefault = propDirection[0];
+export const progressStepBarPropDirection = ['horizontal', 'vertical'] as const;
+export type ProgressStepBarPropDirection =
+  typeof progressStepBarPropDirection[number];
+export const progressStepBarPropDirectionDefault =
+  progressStepBarPropDirection[0];
 
-export const propStatus = ['normal', 'success', 'warning', 'alert'] as const;
-export type PropStatus = typeof propStatus[number];
-export const propStatusDefault = propStatus[0];
+export const progressStepBarPropStatus = [
+  'normal',
+  'success',
+  'warning',
+  'alert',
+] as const;
+export type ProgressStepBarPropStatus =
+  typeof progressStepBarPropStatus[number];
+export const progressStepBarPropStatusDefault = progressStepBarPropStatus[0];
 
-export const pointNumbersMap = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
-export type PointNumbersMap = typeof pointNumbersMap[number];
+export const progressStepBarPointNumbersMap = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+] as const;
+export type ProgressStepBarPointNumbersMap =
+  typeof progressStepBarPointNumbersMap[number];
 
-export const propPosition = ['center', 'start', 'end'] as const;
-export type PropPosition = typeof propPosition[number];
-export const propPositionDefault: PropPosition = propPosition[0];
+export const progressStepBarPropPosition = ['center', 'start', 'end'] as const;
+export type ProgressStepBarPropPosition =
+  typeof progressStepBarPropPosition[number];
+export const progressStepBarPropPositionDefault: ProgressStepBarPropPosition =
+  progressStepBarPropPosition[0];
 
-export type PropGetItemLabel<ITEM> = (item: ITEM) => string | undefined;
-export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
-export type PropGetItemTooltipContent<ITEM> = (
+export type ProgressStepBarPropGetItemLabel<ITEM> = (
   item: ITEM,
 ) => string | undefined;
-export type PropGetItemLineStatus<ITEM> = (
+export type ProgressStepBarPropGetItemKey<ITEM> = (
   item: ITEM,
-) => PropStatus | undefined;
-export type PropGetItemPoint<ITEM> = (
+) => string | number;
+export type ProgressStepBarPropGetItemTooltipContent<ITEM> = (
   item: ITEM,
-) => PointNumbersMap | IconComponent | undefined;
-export type PropGetItemProgress<ITEM> = (item: ITEM) => boolean | undefined;
-export type PropGetItemContent<ITEM> = (
+) => string | undefined;
+export type ProgressStepBarPropGetItemLineStatus<ITEM> = (
+  item: ITEM,
+) => ProgressStepBarPropStatus | undefined;
+export type ProgressStepBarPropGetItemPoint<ITEM> = (
+  item: ITEM,
+) => ProgressStepBarPointNumbersMap | IconComponent | undefined;
+export type ProgressStepBarPropGetItemProgress<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+export type ProgressStepBarPropGetItemContent<ITEM> = (
   item: ITEM,
 ) => React.ReactNode | undefined;
-export type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
-export type PropGetItemOnClick<ITEM> = (
+export type ProgressStepBarPropGetItemStatus<ITEM> = (
+  item: ITEM,
+) => ProgressStepBarPropStatus | undefined;
+export type ProgressStepBarPropGetItemOnClick<ITEM> = (
   item: ITEM,
 ) => React.EventHandler<React.MouseEvent> | undefined;
 
-export type DefaultItem = {
+export type ProgressStepBarItemDefault = {
   label?: string;
   tooltipContent?: string;
-  lineStatus?: PropStatus;
-  point?: PointNumbersMap | IconComponent;
-  status?: PropStatus;
+  lineStatus?: ProgressStepBarPropStatus;
+  point?: ProgressStepBarPointNumbersMap | IconComponent;
+  status?: ProgressStepBarPropStatus;
   progress?: boolean;
   content?: React.ReactNode;
   onClick?: React.EventHandler<React.MouseEvent>;
 };
 
 export type Line = {
-  status: PropStatus;
+  status: ProgressStepBarPropStatus;
   size: number;
 };
 
-export type PropOnItemClick<ITEM> = (
+export type ProgressStepBarPropOnItemClick<ITEM> = (
   item: ITEM,
   props: {
     e: React.MouseEvent;
@@ -68,40 +89,40 @@ export type PropOnItemClick<ITEM> = (
   },
 ) => void;
 
-export type ProgressStepBarProps<ITEM = DefaultItem> =
+export type ProgressStepBarProps<ITEM = ProgressStepBarItemDefault> =
   PropsWithHTMLAttributesAndRef<
     {
       steps: ITEM[];
-      direction?: PropDirection;
-      size?: PropSize;
+      direction?: ProgressStepBarPropDirection;
+      size?: ProgressStepBarPropSize;
       activeStepIndex?: number;
-      onItemClick?: PropOnItemClick<ITEM>;
-      getItemLabel?: PropGetItemLabel<ITEM>;
-      getItemLineStatus?: PropGetItemLineStatus<ITEM>;
-      getItemTooltipContent?: PropGetItemTooltipContent<ITEM>;
-      getItemPoint?: PropGetItemPoint<ITEM>;
-      getItemProgress?: PropGetItemProgress<ITEM>;
-      getItemContent?: PropGetItemContent<ITEM>;
-      getItemStatus?: PropGetItemStatus<ITEM>;
-      getItemOnClick?: PropGetItemOnClick<ITEM>;
+      onItemClick?: ProgressStepBarPropOnItemClick<ITEM>;
+      getItemLabel?: ProgressStepBarPropGetItemLabel<ITEM>;
+      getItemLineStatus?: ProgressStepBarPropGetItemLineStatus<ITEM>;
+      getItemTooltipContent?: ProgressStepBarPropGetItemTooltipContent<ITEM>;
+      getItemPoint?: ProgressStepBarPropGetItemPoint<ITEM>;
+      getItemProgress?: ProgressStepBarPropGetItemProgress<ITEM>;
+      getItemContent?: ProgressStepBarPropGetItemContent<ITEM>;
+      getItemStatus?: ProgressStepBarPropGetItemStatus<ITEM>;
+      getItemOnClick?: ProgressStepBarPropGetItemOnClick<ITEM>;
     },
     HTMLDivElement
   > &
-    (ITEM extends { label: DefaultItem['label'] }
+    (ITEM extends { label: ProgressStepBarItemDefault['label'] }
       ? {}
-      : { getItemLabel: PropGetItemLabel<ITEM> });
+      : { getItemLabel: ProgressStepBarPropGetItemLabel<ITEM> });
 
 export type ProgressStepBarItemProps = {
   content?: React.ReactNode;
   label?: string;
-  point?: PointNumbersMap | IconComponent;
+  point?: ProgressStepBarPointNumbersMap | IconComponent;
   progress?: boolean;
-  status?: PropStatus | 'system';
+  status?: ProgressStepBarPropStatus | 'system';
   tooltipContent?: string;
   tooltipZIndex?: number;
-  position?: PropPosition;
-  direction: PropDirection;
-  size: PropSize;
+  position?: ProgressStepBarPropPosition;
+  direction: ProgressStepBarPropDirection;
+  size: ProgressStepBarPropSize;
   onClick?: (e: React.MouseEvent) => void;
   pointRef?: React.RefObject<HTMLButtonElement>;
   className?: string;
@@ -109,27 +130,32 @@ export type ProgressStepBarItemProps = {
 
 export const cnProgressStepBar = cn('ProgressStepBar');
 
-export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) =>
-  item.label;
-export const defaultGetItemTooltipContent: PropGetItemTooltipContent<
-  DefaultItem
+export const defaultGetItemLabel: ProgressStepBarPropGetItemLabel<
+  ProgressStepBarItemDefault
+> = (item) => item.label;
+export const defaultGetItemTooltipContent: ProgressStepBarPropGetItemTooltipContent<
+  ProgressStepBarItemDefault
 > = (item) => item.tooltipContent;
-export const defaultGetItemPoint: PropGetItemPoint<DefaultItem> = (item) =>
-  item.point;
-export const defaultGetItemLineStatus: PropGetItemLineStatus<DefaultItem> = (
-  item,
-) => item.lineStatus;
-export const defaultGetItemProgress: PropGetItemProgress<DefaultItem> = (
-  item,
-) => item.progress;
-export const defaultGetItemContent: PropGetItemContent<DefaultItem> = (item) =>
-  item.content;
-export const defaultGetItemStatus: PropGetItemStatus<DefaultItem> = (item) =>
-  item.status;
-export const defaultGetItemOnClick: PropGetItemOnClick<DefaultItem> = (item) =>
-  item.onClick;
+export const defaultGetItemPoint: ProgressStepBarPropGetItemPoint<
+  ProgressStepBarItemDefault
+> = (item) => item.point;
+export const defaultGetItemLineStatus: ProgressStepBarPropGetItemLineStatus<
+  ProgressStepBarItemDefault
+> = (item) => item.lineStatus;
+export const defaultGetItemProgress: ProgressStepBarPropGetItemProgress<
+  ProgressStepBarItemDefault
+> = (item) => item.progress;
+export const defaultGetItemContent: ProgressStepBarPropGetItemContent<
+  ProgressStepBarItemDefault
+> = (item) => item.content;
+export const defaultGetItemStatus: ProgressStepBarPropGetItemStatus<
+  ProgressStepBarItemDefault
+> = (item) => item.status;
+export const defaultGetItemOnClick: ProgressStepBarPropGetItemOnClick<
+  ProgressStepBarItemDefault
+> = (item) => item.onClick;
 
-export type ProgressStepBarComponent = <ITEM = DefaultItem>(
+export type ProgressStepBarComponent = <ITEM = ProgressStepBarItemDefault>(
   props: ProgressStepBarProps<ITEM>,
 ) => React.ReactElement | null;
 
@@ -156,7 +182,7 @@ export function withDefaultGetters<ITEM>(props: ProgressStepBarProps<ITEM>) {
 }
 
 export const getItemPosition = (index: number, lendth: number) => {
-  let position: PropPosition = 'center';
+  let position: ProgressStepBarPropPosition = 'center';
   if (index === lendth - 1) position = 'end';
   if (index === 0) position = 'start';
 
@@ -166,7 +192,7 @@ export const getItemPosition = (index: number, lendth: number) => {
 export const getLineSize: (
   container: React.RefObject<HTMLElement>,
   activeElement: React.RefObject<HTMLElement>,
-  direction: PropDirection,
+  direction: ProgressStepBarPropDirection,
 ) => number = (container, activeElement, direction) => {
   let size = 0;
   if (
@@ -197,7 +223,7 @@ const getRefSize = (ref: React.RefObject<HTMLElement>) => {
 
 export const calculateLines = (
   refs: React.RefObject<HTMLElement>[],
-  direction: PropDirection,
+  direction: ProgressStepBarPropDirection,
 ) => {
   const sizes: number[] = [];
   for (let i = 0; i < refs.length - 1; i++) {

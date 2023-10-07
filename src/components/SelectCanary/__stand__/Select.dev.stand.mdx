@@ -1010,19 +1010,19 @@ import { Select } from '@consta/uikit/Select';
 ## Свойства
 
 ```tsx
-type DefaultItem = {
+type SelectItemDefault = {
   label: string;
   id: string | number;
   groupId?: string | number;
   disabled?: boolean;
 };
 
-type DefaultGroup = {
+type SelectGroupDefault = {
   label: string;
   id: string | number;
 };
 
-type PropOnChange<ITEM = DefaultItem> = (
+type SelectPropOnChange<ITEM = SelectItemDefault> = (
   value: ITEM | null,
   props: {
     e: React.SyntheticEvent;
@@ -1030,7 +1030,7 @@ type PropOnChange<ITEM = DefaultItem> = (
   },
 ) => void;
 
-type RenderItemProps<ITEM> = {
+type SelectRenderItemProps<ITEM> = {
   item: ITEM;
   active: boolean;
   hovered: boolean;
@@ -1039,16 +1039,18 @@ type RenderItemProps<ITEM> = {
   ref: React.Ref<HTMLDivElement>;
 };
 
-type PropRenderValue<ITEM> = (props: {
+type SelectPropRenderValue<ITEM> = (props: {
   item: ITEM;
 }) => React.ReactElement | null;
 
-type PropGetItemLabel<ITEM> = (item: ITEM) => string;
-type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
-type PropGetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
-type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
-type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
-type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
+type SelectPropGetItemLabel<ITEM> = (item: ITEM) => string;
+type SelectPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type SelectPropGetItemGroupKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+type SelectPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+type SelectPropGetGroupKey<GROUP> = (group: GROUP) => string | number;
+type SelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 ```
 
 | Свойство                                                                | Тип или варианты значения                              | По умолчанию              | Описание                                                                  |
@@ -1064,16 +1066,16 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`caption?`](#лейбл-и-подпись)                                          | `string`                                               | -                         | Подпись                                                                   |
 | [`items`](#варианты)                                                    | `ITEM[]`                                               | -                         | Варианты                                                                  |
 | [`value?`](#выбранное-значение)                                         | `ITEM`, `null`                                         | -                         | Выбранное значение                                                        |
-| [`onChange?`](#выбранное-значение)                                      | `PropOnChange<ITEM>`                                   | -                         | Обработчик события изменения значения компонента                          |
+| [`onChange?`](#выбранное-значение)                                      | `SelectPropOnChange<ITEM>`                             | -                         | Обработчик события изменения значения компонента                          |
 | [`groups?`](#группы-вариантов)                                          | `GROUP[]`                                              | -                         | Группы вариантов                                                          |
-| [`renderItem?`](#кастомный-элемент-списка)                              | `PropRenderItem<ITEM>`                                 | рендер по умолчанию       | Рендер-функция для элемента списка                                        |
-| [`renderValue?`](#кастомное-выбранное-значение)                         | `PropRenderValue<ITEM>`                                | рендер по умолчанию       | Рендер-функция для выбранного значения                                    |
-| [`getItemLabel?`](#)                                                    | `PropGetItemLabel<ITEM>`                               | `(item) => item.label`    | Функция для определения названия элемента                                 |
-| [`getItemKey?`](#кастомные-типы-данных-для-вариантов-и-групп)           | `PropGetItemKey<ITEM>`                                 | `(item) => item.id`       | Функция для определения уникального ключа элемента                        |
-| [`getItemGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `PropGetItemGroupKey<ITEM>`                            | `(item) => item.groupId`  | Функция для определения ключа группы, к которой будет привязан элемент    |
-| [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)                 |
-| [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)        | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`     | Функция для определения названия группы                                   |
-| [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)          | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`  | Функция для определения уникального ключа группы                          |
+| [`renderItem?`](#кастомный-элемент-списка)                              | `SelectPropRenderItem<ITEM>`                           | рендер по умолчанию       | Рендер-функция для элемента списка                                        |
+| [`renderValue?`](#кастомное-выбранное-значение)                         | `SelectPropRenderValue<ITEM>`                          | рендер по умолчанию       | Рендер-функция для выбранного значения                                    |
+| [`getItemLabel?`](#)                                                    | `SelectPropGetItemLabel<ITEM>`                         | `(item) => item.label`    | Функция для определения названия элемента                                 |
+| [`getItemKey?`](#кастомные-типы-данных-для-вариантов-и-групп)           | `SelectPropGetItemKey<ITEM>`                           | `(item) => item.id`       | Функция для определения уникального ключа элемента                        |
+| [`getItemGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `SelectPropGetItemGroupKey<ITEM>`                      | `(item) => item.groupId`  | Функция для определения ключа группы, к которой будет привязан элемент    |
+| [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `SelectPropGetItemDisabled<ITEM>`                      | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)                 |
+| [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)        | `SelectPropGetGroupKey<GROUP>`                         | `(group) => group.id`     | Функция для определения названия группы                                   |
+| [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)          | `SelectPropGetGroupLabel<GROUP>`                       | `(group) => group.label`  | Функция для определения уникального ключа группы                          |
 | `isLoading?`                                                            | `boolean`                                              | -                         | При `true` будет отображаться лоадер загрузки                             |
 | `virtualScroll?`                                                        | `boolean`                                              | -                         | Включает виртуализацию скролла                                            |
 | `onScrollToBottom?`                                                     | `() => void`                                           | -                         | Колбэк сработает при сроое до конца списка                                |

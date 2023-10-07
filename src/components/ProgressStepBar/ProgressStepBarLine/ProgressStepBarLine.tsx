@@ -3,12 +3,16 @@ import './ProgressStepBarLine.css';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
-import { Line, PropDirection, PropSize } from '../helpers';
+import {
+  Line,
+  ProgressStepBarPropDirection,
+  ProgressStepBarPropSize,
+} from '../helpers';
 
 type ProgressStepBarLineProps = {
   lines: Line[];
-  size: PropSize;
-  direction: PropDirection;
+  size: ProgressStepBarPropSize;
+  direction: ProgressStepBarPropDirection;
   activeStepIndex?: number;
 };
 
@@ -34,7 +38,10 @@ type PathItem = {
   x: number;
   y: number;
 };
-const getPathParams = (lines: Line[], direction: PropDirection) => {
+const getPathParams = (
+  lines: Line[],
+  direction: ProgressStepBarPropDirection,
+) => {
   const paths: PathItem[] = [];
   let width = 0;
   lines.forEach(({ size, status }) => {

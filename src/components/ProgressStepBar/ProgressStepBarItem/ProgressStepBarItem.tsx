@@ -14,10 +14,10 @@ import { ProgressSpin } from '../../ProgressSpin/ProgressSpin';
 import { Text } from '../../Text/Text';
 import { Tooltip } from '../../Tooltip/Tooltip';
 import {
-  PointNumbersMap,
   ProgressStepBarItemComponent,
-  propPositionDefault,
-  propStatusDefault,
+  ProgressStepBarPointNumbersMap,
+  progressStepBarPropPositionDefault,
+  progressStepBarPropStatusDefault,
 } from '../helpers';
 
 const cnProgressStepBarItem = cn('ProgressStepBarItem');
@@ -36,7 +36,7 @@ const possibleHorizontalDirections: Direction[] = [
 ];
 
 const renderPointContent = (
-  point: PointNumbersMap | IconComponent | undefined,
+  point: ProgressStepBarPointNumbersMap | IconComponent | undefined,
   size: 'm' | 's',
   progress: boolean | undefined,
 ) => {
@@ -73,7 +73,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
       size,
       pointRef: pointRefProp,
       onClick,
-      position = propPositionDefault,
+      position = progressStepBarPropPositionDefault,
       tooltipZIndex,
       className,
       ...otherProps
@@ -143,7 +143,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
             {
               direction,
               position,
-              status: status || propStatusDefault,
+              status: status || progressStepBarPropStatusDefault,
               size,
             },
             [className],

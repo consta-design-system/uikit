@@ -12,7 +12,7 @@ import { cnSelect } from '##/components/SelectComponentsCanary/cnSelect';
 import { cn } from '##/utils/bem';
 
 import { groups, items } from '../__mocks__/data.mock';
-import { DefaultGroup, DefaultItem } from '../helpers';
+import { UserSelectGroupDefault, UserSelectItemDefault } from '../helpers';
 import {
   defaultGetItemLabel,
   UserSelect,
@@ -34,8 +34,8 @@ const defaultProps: UserSelectProps = {
 };
 
 function renderComponent<
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
+  ITEM = UserSelectItemDefault,
+  GROUP = UserSelectGroupDefault,
   MULTIPLE extends boolean = false,
 >(props: UserSelectProps<ITEM, GROUP, MULTIPLE>): RenderResult {
   return render(

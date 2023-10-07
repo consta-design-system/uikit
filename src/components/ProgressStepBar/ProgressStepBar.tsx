@@ -21,14 +21,14 @@ import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import {
   calculateLines,
   cnProgressStepBar,
-  DefaultItem,
   getItemPosition,
   Line,
   ProgressStepBarComponent,
+  ProgressStepBarItemDefault,
   ProgressStepBarItemProps,
+  progressStepBarPropDirectionDefault,
   ProgressStepBarProps,
-  propDirectionDefault,
-  propSizeDefault,
+  progressStepBarPropSizeDefault,
   withDefaultGetters,
 } from './helpers';
 import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
@@ -36,7 +36,7 @@ import { ProgressStepBarLine } from './ProgressStepBarLine/ProgressStepBarLine';
 
 export const COMPONENT_NAME = 'ProgressStepBar' as const;
 
-function ProgressStepBarRender<ITEM = DefaultItem>(
+function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
   props: ProgressStepBarProps<ITEM>,
   ref: React.Ref<HTMLDivElement>,
 ) {
@@ -44,8 +44,8 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
 
   const {
     steps = [],
-    direction = propDirectionDefault,
-    size = propSizeDefault,
+    direction = progressStepBarPropDirectionDefault,
+    size = progressStepBarPropSizeDefault,
     className,
     activeStepIndex,
     onItemClick,

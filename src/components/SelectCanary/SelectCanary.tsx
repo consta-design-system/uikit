@@ -22,16 +22,16 @@ import { useForkRef } from '##/hooks/useForkRef';
 import { isNotNil } from '##/utils/type-guards';
 
 import {
-  DefaultGroup,
-  DefaultItem,
   PropRenderItem,
   PropRenderValue,
   SelectComponent,
+  SelectGroupDefault,
+  SelectItemDefault,
   SelectProps,
   withDefaultGetters,
 } from './helpers';
 
-const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
+const SelectRender = <ITEM = SelectItemDefault, GROUP = SelectGroupDefault>(
   props: SelectProps<ITEM, GROUP>,
   ref: React.Ref<HTMLDivElement>,
 ) => {

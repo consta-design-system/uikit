@@ -14,10 +14,10 @@ import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
 import {
-  propDirection,
-  propDirectionDefault,
-  propSize,
-  propSizeDefault,
+  progressStepBarPropDirection,
+  progressStepBarPropDirectionDefault,
+  progressStepBarPropSize,
+  progressStepBarPropSizeDefault,
 } from '../helpers';
 import { ProgressStepBar } from '../ProgressStepBar';
 
@@ -75,8 +75,16 @@ const stepsExample = [
 ];
 
 const Variants = () => {
-  const size = useSelect('size', propSize, propSizeDefault);
-  const direction = useSelect('direction', propDirection, propDirectionDefault);
+  const size = useSelect(
+    'size',
+    progressStepBarPropSize,
+    progressStepBarPropSizeDefault,
+  );
+  const direction = useSelect(
+    'direction',
+    progressStepBarPropDirection,
+    progressStepBarPropDirectionDefault,
+  );
   const activeStepIndex = useSelect('activeStepIndex', [-1, 0, 1, 2, 3], 3);
   const withContent = useBoolean('withContent');
 
