@@ -7,7 +7,10 @@ import { useFlag } from '../../../hooks/useFlag/useFlag';
 import { cn } from '../../../utils/bem';
 import { getByMap } from '../../../utils/getByMap';
 import { Button } from '../../Button/Button';
-import { ContextMenu } from '../../ContextMenu/ContextMenu';
+import {
+  ContextMenu,
+  ContextMenuPropOnItemClick,
+} from '../../ContextMenu/ContextMenu';
 import { BreadcrumbsItem } from '../BreadcrumbsItem/BreadcrumbsItem';
 import { iconSizeMap } from '../helpers';
 import {
@@ -68,7 +71,7 @@ function BreadcrumbsMoreRender<ITEM>(
     getItemHref,
     getItemIcon,
     getItemLabel,
-    getItemOnClick: getItemOnClickProp,
+    getItemOnClick,
     getItemSubMenu,
     onItemClick: onItemClickProp,
     ...otherProps
@@ -82,22 +85,10 @@ function BreadcrumbsMoreRender<ITEM>(
 
   useEffect(setOpen.off, [items]);
 
-  const onItemClick = ({
-    e,
-    item,
-  }: {
-    e: React.MouseEvent<HTMLDivElement>;
-    item: ITEM;
-  }) => {
-    onItemClickProp?.({ e, item });
-    getItemOnClickProp?.(item)?.(e);
+  const onItemClick: ContextMenuPropOnItemClick<ITEM> = (item, { e }) => {
+    onItemClickProp?.(item, { e, item });
+    getItemOnClick?.(item)?.(e);
   };
-
-  const getItemOnClick =
-    (element: ITEM) =>
-    ({ e }: { e: React.MouseEvent<HTMLDivElement> }) => {
-      return getItemOnClickProp?.(element)?.(e);
-    };
 
   return (
     <BreadcrumbsItem

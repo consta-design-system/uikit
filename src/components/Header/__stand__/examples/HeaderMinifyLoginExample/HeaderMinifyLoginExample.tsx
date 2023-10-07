@@ -16,17 +16,13 @@ import {
   HeaderModule,
   HeaderSearchBar,
 } from '../../../Header';
-import {
-  SearchBarPropOnChange,
-  SearchBarPropOnSearch,
-} from '../../../SearchBar/HeaderSearchBar';
+import { SearchBarPropOnSearch } from '../../../SearchBar/HeaderSearchBar';
 
 const cnExample = cn('HeaderMinifyLoginExample');
 
 export function HeaderMinifyLoginExample() {
   const [value, setValue] = useState<string | null>(null);
   const [authorized, setAuthorized] = useState<boolean>(false);
-  const handleChange: SearchBarPropOnChange = ({ value }) => setValue(value);
   // eslint-disable-next-line no-alert
   const handleSearch: SearchBarPropOnSearch = ({ value }) =>
     alert(`Произведен поиск, запрос - ${value} `);
@@ -66,7 +62,7 @@ export function HeaderMinifyLoginExample() {
                 placeholder="я ищу"
                 label="поиск"
                 value={value}
-                onChange={handleChange}
+                onChange={setValue}
                 onSearch={handleSearch}
               />
             </HeaderModule>

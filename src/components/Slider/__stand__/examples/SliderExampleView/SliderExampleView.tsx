@@ -11,7 +11,7 @@ export const SliderExampleViewDefault = () => {
       <Slider
         view="default"
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         range={false}
       />
@@ -29,7 +29,7 @@ export const SliderExampleViewDivision = () => {
         step={10}
         range={false}
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
       />
     </Example>

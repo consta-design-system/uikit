@@ -1,10 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { Chips } from '##/components/ChipsCanary';
-import {
-  CallbackWithoutMultiple,
-  useChoiceGroup,
-} from '##/hooks/useChoiceGroup';
+import { useChoiceGroup } from '##/hooks/useChoiceGroup';
 
 import { defaultGetItemLabel } from '../helpers';
 import {
@@ -32,11 +29,6 @@ const ChipsChoiceRender = (
     ...otherProps
   } = props;
 
-  const callBack: CallbackWithoutMultiple<
-    ChipsChoiceDefaultItem,
-    React.MouseEvent
-  > = ({ value, e }) => onChange(value, { e });
-
   const { getOnChange, getChecked } = useChoiceGroup<
     ChipsChoiceDefaultItem,
     React.MouseEvent
@@ -46,7 +38,7 @@ const ChipsChoiceRender = (
       return typeof key !== undefined && key ? key : getItemLabel(item);
     },
     value: value as ChipsChoiceDefaultItem,
-    callBack,
+    callBack: onChange,
     multiple: multiple as false,
     // привел к типам из-за того что
     // TS не понимает что параметры для не Multiple и Multiple не могут прийти одновременно

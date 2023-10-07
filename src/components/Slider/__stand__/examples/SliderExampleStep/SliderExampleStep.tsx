@@ -12,7 +12,7 @@ export const SliderExampleStepSingle = () => {
         view="division"
         step={10}
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         range={false}
       />
@@ -29,7 +29,7 @@ export const SliderExampleStepArray = () => {
         view="division"
         step={[15, 40, 70]}
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         range={false}
       />

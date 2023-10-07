@@ -40,6 +40,7 @@ type PropOnChange<ITEM, MULTIPLE extends boolean> = (
   value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
   props: {
     e: React.SyntheticEvent;
+    value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
   },
 ) => void;
 type PropValue<ITEM, MULTIPLE extends boolean> =
@@ -53,6 +54,11 @@ export type PropRenderItem<ITEM> = (
 export type PropRenderValue<ITEM> = (
   props: RenderValueProps<ITEM>,
 ) => React.ReactElement | null;
+
+type PropOnCreate = (
+  label: string,
+  props: { e: React.SyntheticEvent; label: string },
+) => void;
 
 export type ComboboxProps<
   ITEM = DefaultItem,
@@ -78,7 +84,7 @@ export type ComboboxProps<
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
-    onCreate?: (label: string, props: { e: React.SyntheticEvent }) => void;
+    onCreate?: PropOnCreate;
     inputRef?: React.Ref<HTMLInputElement>;
     labelForNotFound?: string;
     required?: boolean;

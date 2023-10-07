@@ -128,7 +128,7 @@ const Variants = () => {
       view={view}
       disabled={disabled}
       size={size}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       leftSide={icon}
       events={events}
       locale={getByMap(localeMap, locale)}

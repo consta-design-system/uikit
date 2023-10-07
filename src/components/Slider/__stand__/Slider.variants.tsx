@@ -73,7 +73,7 @@ const Variants = () => {
       tooltipFormatter={withFormatter ? (value) => `${value}%` : undefined}
       leftSide={leftSide && sideMap[leftSide]}
       rightSide={rightSide && sideMap[rightSide]}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 };

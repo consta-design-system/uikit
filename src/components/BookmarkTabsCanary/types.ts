@@ -80,6 +80,11 @@ export type BookmarkTabsPropRenderItem<ITEM> = (
   props: BookmarkTabsRenderItemProps<ITEM>,
 ) => React.ReactElement | null;
 
+export type BookmarkTabsPropOnRemove<ITEM> = (
+  item: ITEM,
+  params: { e: React.MouseEvent; item: ITEM },
+) => void;
+
 export type BookmarkTabsProps<ITEM = BookmarkTabsItemDefault> =
   PropsWithHTMLAttributesAndRef<
     {
@@ -99,7 +104,7 @@ export type BookmarkTabsProps<ITEM = BookmarkTabsItemDefault> =
       children?: never;
       withNavigationButtons?: boolean;
       onCreate?: React.MouseEventHandler;
-      onRemove?: (item: ITEM, params: { e: React.MouseEvent }) => void;
+      onRemove?: BookmarkTabsPropOnRemove<ITEM>;
       onChange?: BookmarkTabsPropOnChange<ITEM>;
       renderItem?: BookmarkTabsPropRenderItem<ITEM>;
     },

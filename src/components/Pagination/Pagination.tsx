@@ -8,7 +8,7 @@ import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 import { Button } from '../Button/Button';
 import { Text } from '../Text/Text';
-import { TextField, TextFieldOnChangeArguments } from '../TextField/TextField';
+import { TextField, TextFieldPropOnChange } from '../TextField/TextField';
 import { getPaginationInfo } from './helpers';
 
 export const paginationForms = ['default', 'round', 'brick'] as const;
@@ -109,8 +109,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
     changePage(page);
   };
 
-  const handleChange = (args: TextFieldOnChangeArguments) => {
-    const { value } = args;
+  const handleChange: TextFieldPropOnChange = (value) => {
     const pageNumber = Number(value);
 
     if (pageNumber > totalPages || Number.isNaN(pageNumber)) return;

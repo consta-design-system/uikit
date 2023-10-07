@@ -127,20 +127,21 @@ export function useSlider<RANGE extends boolean>(
   }, [value]);
 
   useEffect(() => {
-    onChange?.({
-      value: Array.isArray(currentValue)
-        ? ([
-            getNewValue(currentValue[0], currentValue[0], step, min, max, 0),
-            getNewValue(currentValue[1], currentValue[1], step, min, max, 1),
-          ] as SliderValue<RANGE>)
-        : (getNewValue(
-            currentValue,
-            currentValue,
-            step,
-            min,
-            max,
-            0,
-          ) as SliderValue<RANGE>),
+    const newValue = Array.isArray(currentValue)
+      ? ([
+          getNewValue(currentValue[0], currentValue[0], step, min, max, 0),
+          getNewValue(currentValue[1], currentValue[1], step, min, max, 1),
+        ] as SliderValue<RANGE>)
+      : (getNewValue(
+          currentValue,
+          currentValue,
+          step,
+          min,
+          max,
+          0,
+        ) as SliderValue<RANGE>);
+    onChange?.(newValue, {
+      value: newValue,
     });
   }, [step]);
 
@@ -160,7 +161,7 @@ export function useSlider<RANGE extends boolean>(
     if (isRangeParams(props)) {
       if (props.value[0] > props.value[1]) {
         const newValue: SliderValue<true> = [props.value[1], props.value[1]];
-        props.onChange?.({ value: newValue });
+        props.onChange?.(newValue, { value: newValue });
       }
     }
   }, []);
@@ -181,13 +182,13 @@ export function useSlider<RANGE extends boolean>(
         min,
         max,
         activeButton.current,
-      );
+      ) as SliderValue<RANGE>;
       if (newValue !== value) {
         setCurrentValue(newValue);
         setTooltipPosition(getActiveValue(newValue, 0), 0);
-        onChange?.({
+        onChange?.(newValue, {
           e,
-          value: newValue as SliderValue<RANGE>,
+          value: newValue,
         });
       }
     }
@@ -254,12 +255,12 @@ export function useSlider<RANGE extends boolean>(
             min,
             max,
             typeButton,
-          );
+          ) as SliderValue<RANGE>;
           setCurrentValue(newValue);
           setTooltipPosition(getActiveValue(newValue, typeButton), typeButton);
-          onChange?.({
+          onChange?.(newValue, {
             e: event,
-            value: newValue as SliderValue<RANGE>,
+            value: newValue,
           });
         }
       }
@@ -320,12 +321,12 @@ export function useSlider<RANGE extends boolean>(
   ) => {
     const button = typeButton || activeButton.current;
     if (typeof button === 'number') {
-      const position = changePosition(event);
+      const position = changePosition(event) as SliderValue<RANGE>;
       const oldValue: number = getActiveValue(currentValue, button);
       const newValue: number = getActiveValue(position, button);
       setCurrentValue(position);
       if (oldValue !== newValue) {
-        onAfterChange?.({ e: event, value: position as SliderValue<RANGE> });
+        onAfterChange?.(position, { e: event, value: position });
       }
     }
   };
@@ -352,10 +353,10 @@ export function useSlider<RANGE extends boolean>(
         const copyValues = [...lastValue.current].sort(
           (a, b) => Number(a) - Number(b),
         ) as SliderValue<true>;
-        props.onChange?.({ e, value: copyValues });
+        props.onChange?.(copyValues, { e, value: copyValues });
       }
       if (isNotRangeParams(props) && typeof lastValue.current === 'number') {
-        props.onChange?.({ e, value: lastValue.current });
+        props.onChange?.(lastValue.current, { e, value: lastValue.current });
       }
       setCurrentButton(null);
       activeButton.current = null;

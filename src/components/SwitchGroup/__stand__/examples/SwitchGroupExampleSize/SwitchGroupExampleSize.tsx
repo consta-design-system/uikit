@@ -25,7 +25,7 @@ export const SwitchGroupExampleSize = () => {
           <SwitchGroup
             value={value}
             items={items}
-            onChange={({ value }) => setValue(value)}
+            onChange={setValue}
             name={`SwitchGroupExampleSize${size}`}
             size={size}
           />

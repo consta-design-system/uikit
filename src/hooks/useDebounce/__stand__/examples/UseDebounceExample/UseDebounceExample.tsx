@@ -23,7 +23,7 @@ export const UseDebounceExample = () => {
         <TextField
           className={cnUseDebounceExample('SearchField')}
           value={value}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           placeholder="Поиск"
         />
         <Text className={cnUseDebounceExample('SearchField')}>

@@ -98,8 +98,8 @@ const Variants = () => {
       size={size}
       onlyIconRoot={onlyIconRoot}
       fitMode={fitMode}
-      onItemClick={(props) => {
-        props.e.preventDefault();
+      onItemClick={(_item, { e }) => {
+        e.preventDefault();
       }}
       getItemSubMenu={(item) => (withSubMenu ? item.subMenu : undefined)}
       lastItemIsLink={lastItemIsLink}

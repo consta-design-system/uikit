@@ -11,7 +11,7 @@ export const DatePickerExampleMulti = () => {
       <DatePicker
         type="date-time"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         multiplicityHours={2}
         multiplicityMinutes={15}
         multiplicitySeconds={5}

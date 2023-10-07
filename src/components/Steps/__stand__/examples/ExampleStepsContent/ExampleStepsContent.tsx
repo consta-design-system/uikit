@@ -15,7 +15,6 @@ export const ExampleStepsContent = () => {
 
   const handleNext = () => setActiveStep(items[activeStepIndex + 1]);
   const handlePrev = () => setActiveStep(items[activeStepIndex - 1]);
-  const onChange = ({ value }: { value: string }) => setActiveStep(value);
 
   return (
     <Example col={1}>
@@ -23,7 +22,7 @@ export const ExampleStepsContent = () => {
         items={items}
         getItemLabel={getLabel}
         value={activeStep}
-        onChange={onChange}
+        onChange={setActiveStep}
       />
       <div>{getContent(activeStepIndex)}</div>
       <Button

@@ -300,22 +300,31 @@ type PropGetItemStatus<ITEM> = (item: ITEM) => PropStatus | undefined;
 type PropGetItemOnClick<ITEM> = (
   item: ITEM,
 ) => React.EventHandler<React.MouseEvent> | undefined;
+
+type PropOnItemClick<ITEM> = (
+  item: ITEM,
+  props: {
+    e: React.MouseEvent;
+    item: ITEM;
+    index: number;
+  },
+) => void;
 ```
 
-| Свойство                            | Тип или варианты значения                                              | По умолчанию                    | Описание                                                    |
-| ----------------------------------- | ---------------------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------- |
-| [`steps`](#элементы)                | `ITEM[]`                                                               | -                               | Шаги                                                        |
-| [`direction?`](#ориентация)         | `'horizontal'` &#124; `'verical'`                                      | `'horizontal'`                  | Ориентация                                                  |
-| [`size?`](#размер)                  | `'xs'` &#124; `'s'` &#124; `'m'`                                       | `'s'`                           | Размер                                                      |
-| [`activeStepIndex?`](#активный-шаг) | `string` &#124; `number`                                               | -                               | Номер активного шага (по порядку), у первого шага номер `0` |
-| `onItemClick?`                      | `(props: { e: React.MouseEvent; item: ITEM; index: number }) => void;` | -                               | Функция для события нажатия на определенный шаг             |
-| `getItemLabel?`                     | `PropGetItemLabel<ITEM>`                                               | `(item) => item.label`          | Функция для определения названия шага                       |
-| `getItemLineStatus?`                | `PropGetItemLineStatus<ITEM>`                                          | `(item) => item.lineStatus`     | Функция для определения статуса линии                       |
-| `getItemTooltipContent?`            | `PropGetItemTooltipContent<ITEM>`                                      | `(item) => item.tooltipContent` | Функция для определения содержимого тултипа                 |
-| `getItemPoint?`                     | `PropGetItemPoint<ITEM>`                                               | `(item) => item.point`          | Функция для определения внутреннего контента шага           |
-| `getItemProgress?`                  | `PropGetItemProgress<ITEM>`                                            | `(item) => item.progress`       | Функция определяет, находится ли шаг в прогрессе            |
-| `getItemContent?`                   | `PropGetItemContent<ITEM>;`                                            | `(item) => item.content`        | Функция для получения контента                              |
-| `getItemStatus?`                    | `PropGetItemStatus<ITEM>`                                              | `(item) => item.status`         | Функция для определения статуса шага                        |
-| `getItemClick?`                     | `PropGetItemOnClick<ITEM>`                                             | `(item) => item.onClick`        | Функция для определения клика нажития на шаг                |
-| `ref?`                              | `React.Ref<HTMLDivElement>`                                            | -                               | Ссылка на основной контейнер                                |
-| `className?`                        | `string`                                                               | -                               | Дополнительный CSS-класс                                    |
+| Свойство                            | Тип или варианты значения         | По умолчанию                    | Описание                                                    |
+| ----------------------------------- | --------------------------------- | ------------------------------- | ----------------------------------------------------------- |
+| [`steps`](#элементы)                | `ITEM[]`                          | -                               | Шаги                                                        |
+| [`direction?`](#ориентация)         | `'horizontal'` &#124; `'verical'` | `'horizontal'`                  | Ориентация                                                  |
+| [`size?`](#размер)                  | `'xs'` &#124; `'s'` &#124; `'m'`  | `'s'`                           | Размер                                                      |
+| [`activeStepIndex?`](#активный-шаг) | `string` &#124; `number`          | -                               | Номер активного шага (по порядку), у первого шага номер `0` |
+| `onItemClick?`                      | `PropOnItemClick`                 | -                               | Функция для события нажатия на определенный шаг             |
+| `getItemLabel?`                     | `PropGetItemLabel<ITEM>`          | `(item) => item.label`          | Функция для определения названия шага                       |
+| `getItemLineStatus?`                | `PropGetItemLineStatus<ITEM>`     | `(item) => item.lineStatus`     | Функция для определения статуса линии                       |
+| `getItemTooltipContent?`            | `PropGetItemTooltipContent<ITEM>` | `(item) => item.tooltipContent` | Функция для определения содержимого тултипа                 |
+| `getItemPoint?`                     | `PropGetItemPoint<ITEM>`          | `(item) => item.point`          | Функция для определения внутреннего контента шага           |
+| `getItemProgress?`                  | `PropGetItemProgress<ITEM>`       | `(item) => item.progress`       | Функция определяет, находится ли шаг в прогрессе            |
+| `getItemContent?`                   | `PropGetItemContent<ITEM>;`       | `(item) => item.content`        | Функция для получения контента                              |
+| `getItemStatus?`                    | `PropGetItemStatus<ITEM>`         | `(item) => item.status`         | Функция для определения статуса шага                        |
+| `getItemClick?`                     | `PropGetItemOnClick<ITEM>`        | `(item) => item.onClick`        | Функция для определения клика нажития на шаг                |
+| `ref?`                              | `React.Ref<HTMLDivElement>`       | -                               | Ссылка на основной контейнер                                |
+| `className?`                        | `string`                          | -                               | Дополнительный CSS-класс                                    |

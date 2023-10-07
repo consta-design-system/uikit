@@ -37,6 +37,7 @@ export type AutoCompletePropOnChange = (
     e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
     id?: string;
     name?: string;
+    value: string | null;
   },
 ) => void;
 

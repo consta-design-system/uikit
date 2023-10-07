@@ -20,10 +20,13 @@ export const checkboxPropAlign = ['center', 'top'] as const;
 export type CheckboxPropAlign = typeof checkboxPropAlign[number];
 export const checkboxPropAlignDefault: CheckboxPropAlign = checkboxPropAlign[0];
 
-export type CheckboxPropOnChange = (object: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  checked: boolean;
-}) => void;
+export type CheckboxPropOnChange = (
+  checked: boolean,
+  params: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    checked: boolean;
+  },
+) => void;
 
 type Props = {
   checked: boolean | undefined;
@@ -81,7 +84,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       if (onChange) {
-        onChange({ e, checked: !checked });
+        onChange(!checked, { e, checked: !checked });
       }
     };
 

@@ -689,7 +689,7 @@ function SelectExampleLabel() {
 Также к лейблу можно добавить иконку используя свойство `labelIcon`.
 
 ```tsx
-<Select label="Значение" labelIcon={IconQuestion}>
+<Select label="Значение" labelIcon={IconQuestion} />
 ```
 
 <SelectExampleLabelIcon />
@@ -1026,6 +1026,7 @@ type PropOnChange<ITEM = DefaultItem> = (
   value: ITEM | null,
   props: {
     e: React.SyntheticEvent;
+    value: ITEM | null;
   },
 ) => void;
 

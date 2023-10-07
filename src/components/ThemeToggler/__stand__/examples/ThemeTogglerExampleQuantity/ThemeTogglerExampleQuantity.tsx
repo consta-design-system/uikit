@@ -27,7 +27,7 @@ const GetThemeTogglerExampleQuantity = (items: ThemeType[]): JSX.Element => {
         <ThemeToggler
           items={items}
           value={value}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           direction="downStartLeft"
         />
       </Theme>

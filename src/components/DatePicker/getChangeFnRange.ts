@@ -4,7 +4,10 @@ import isEqual from 'date-fns/isEqual';
 import { DateRange } from '../../utils/types/Date';
 import { datePickerErrorTypes, DatePickerPropOnError } from './types';
 
-type OnChange = (props: { e: Event; value: DateRange | null }) => void;
+type OnChange = (
+  value: DateRange | null,
+  props: { e: Event; value: DateRange | null },
+) => void;
 
 const handleChange = (
   e: Event,
@@ -19,38 +22,38 @@ const handleChange = (
 
   if (start && end) {
     if (isBefore(start, end) || isEqual(start, end)) {
-      onChange({ e, value: [start, end] });
+      onChange([start, end], { e, value: [start, end] });
       return;
     }
-    onChange({ e, value: [start, undefined] });
+    onChange([start, undefined], { e, value: [start, undefined] });
     onError && onError({ type: datePickerErrorTypes[2], date: [start, end] });
     return;
   }
 
   if (start) {
-    onChange({ e, value: [start, undefined] });
+    onChange([start, undefined], { e, value: [start, undefined] });
     return;
   }
 
   if (end) {
-    onChange({ e, value: [undefined, end] });
+    onChange([undefined, end], { e, value: [undefined, end] });
     return;
   }
 
-  onChange({ e, value: null });
+  onChange(null, { e, value: null });
 };
 
 export const getChangeFnRange = (
   onChange: OnChange | undefined,
   onError: DatePickerPropOnError | undefined,
-  value: DateRange | null | undefined,
+  currentValue: DateRange | null | undefined,
 ) => {
   return [
-    (props: { e: Event; value: Date | null }) => {
-      handleChange(props.e, props.value, value?.[1], onChange, onError);
+    (value: Date | null, props: { e: Event }) => {
+      handleChange(props.e, value, currentValue?.[1], onChange, onError);
     },
-    (props: { e: Event; value: Date | null }) => {
-      handleChange(props.e, value?.[0], props.value, onChange, onError);
+    (value: Date | null, props: { e: Event }) => {
+      handleChange(props.e, currentValue?.[0], value, onChange, onError);
     },
   ] as const;
 };

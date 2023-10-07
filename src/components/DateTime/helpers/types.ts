@@ -23,16 +23,22 @@ export type DateTimePropValue<TYPE> = TYPE extends СapableRangeType
   ? Date | DateRange
   : Date;
 
-export type DateTimePropOnChange = (props: {
-  value: Date;
-  e: React.MouseEvent<HTMLButtonElement>;
-}) => void;
+export type DateTimePropOnChange = (
+  value: Date,
+  props: {
+    value: Date;
+    e: React.MouseEvent<HTMLButtonElement>;
+  },
+) => void;
 
 export type DateTimePropOnChangeRange<TYPE> = TYPE extends СapableRangeType
-  ? (props: {
-      value: DateRange;
-      e: React.MouseEvent<HTMLButtonElement>;
-    }) => void
+  ? (
+      value: DateRange,
+      props: {
+        value: DateRange;
+        e: React.MouseEvent<HTMLButtonElement>;
+      },
+    ) => void
   : never;
 
 type LocaleWords = {
@@ -85,7 +91,10 @@ export type DateTimeTypeComponent<TYPE extends DateTimePropType> = (
   props: Omit<DateTimeProps<TYPE>, 'type'>,
 ) => React.ReactElement | null;
 
-export type HandleSelectDate = (props: {
-  value: Date;
-  e: React.MouseEvent<HTMLButtonElement>;
-}) => void;
+export type HandleSelectDate = (
+  value: Date,
+  props: {
+    value: Date;
+    e: React.MouseEvent<HTMLButtonElement>;
+  },
+) => void;

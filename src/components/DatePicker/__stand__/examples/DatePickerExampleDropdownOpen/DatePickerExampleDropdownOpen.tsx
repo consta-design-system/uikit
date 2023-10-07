@@ -42,7 +42,7 @@ export const DatePickerExampleDropdownOpen = () => {
             inputRef={inputRef}
             placeholder="Выберите вариант"
             value={value}
-            onChange={({ value }) => setValue(value)}
+            onChange={setValue}
             dropdownOpen={open}
             onDropdownOpen={onDropdownOpen}
             ignoreOutsideClicksRefs={[buttonRef]}

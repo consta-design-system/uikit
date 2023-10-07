@@ -15,17 +15,13 @@ import {
   HeaderModule,
   HeaderSearchBar,
 } from '../../../Header';
-import {
-  SearchBarPropOnChange,
-  SearchBarPropOnSearch,
-} from '../../../SearchBar/HeaderSearchBar';
+import { SearchBarPropOnSearch } from '../../../SearchBar/HeaderSearchBar';
 
 const cnExample = cn('HeaderWithoutMenuExample');
 
 export function HeaderWithoutMenuExample() {
   const [value, setValue] = useState<string | null>(null);
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  const handleChange: SearchBarPropOnChange = ({ value }) => setValue(value);
   // eslint-disable-next-line no-alert
   const handleSearch: SearchBarPropOnSearch = ({ value }) =>
     alert(`Произведен поиск, запрос - ${value} `);
@@ -49,7 +45,7 @@ export function HeaderWithoutMenuExample() {
                 placeholder="я ищу"
                 label="поиск"
                 value={value}
-                onChange={handleChange}
+                onChange={setValue}
                 onSearch={handleSearch}
               />
             </HeaderModule>

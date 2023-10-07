@@ -26,7 +26,7 @@ const cnExampleRoot = cn('ThemeExampleRoot');
 
 export const ThemeExampleRoot: React.FC = () => {
   const [theme, setTheme] = useState<ThemeName>('gpnDefault');
-  const handleChange: SwitchProps['onChange'] = ({ checked }) =>
+  const handleChange: SwitchProps['onChange'] = (checked) =>
     setTheme(checked ? 'gpnDark' : 'gpnDefault');
 
   return (

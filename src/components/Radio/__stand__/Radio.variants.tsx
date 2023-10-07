@@ -20,10 +20,6 @@ const Variants = () => {
 
   const [checked, setChecked] = React.useState<boolean>(false);
 
-  const handleChange = ({ checked }: { checked: boolean }): void => {
-    setChecked(checked);
-  };
-
   return (
     <Radio
       checked={checked}
@@ -32,7 +28,7 @@ const Variants = () => {
       view={view}
       label={label}
       align={align}
-      onChange={handleChange}
+      onChange={setChecked}
     />
   );
 };

@@ -10,7 +10,7 @@ export const SliderExampleMinMax = () => {
     <Example col={1}>
       <Slider
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         range={false}
         min={20}

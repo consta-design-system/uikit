@@ -5,7 +5,6 @@ import { TextField } from '../../../TextField';
 
 export const TextFieldExampleView = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
@@ -13,13 +12,13 @@ export const TextFieldExampleView = () => {
         view="default"
         placeholder="Самое обычное поле"
         value={value}
-        onChange={handleChange}
+        onChange={setValue}
       />
       <TextField
         view="clear"
         placeholder="Незаметное поле"
         value={value}
-        onChange={handleChange}
+        onChange={setValue}
       />
     </Example>
   );
@@ -27,7 +26,6 @@ export const TextFieldExampleView = () => {
 
 export const TextFieldExampleViewDisabled = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
@@ -35,7 +33,7 @@ export const TextFieldExampleViewDisabled = () => {
         placeholder="Неактивное поле"
         disabled
         value={value}
-        onChange={handleChange}
+        onChange={setValue}
       />
     </Example>
   );

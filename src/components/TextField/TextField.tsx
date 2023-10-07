@@ -128,7 +128,12 @@ export const TextFieldRender = <TYPE extends string>(
   > = useCallback(
     (e) => {
       !disabled &&
-        onChangeRef.current?.({ e, id, name, value: e.target.value || null });
+        onChangeRef.current?.(e.target.value || null, {
+          e,
+          id,
+          name,
+          value: e.target.value || null,
+        });
     },
     [id, name, disabled],
   );
@@ -173,11 +178,12 @@ export const TextFieldRender = <TYPE extends string>(
     onKeyDownProp?.(e);
     if (type === 'number' && typeof flag === 'boolean' && !disabled) {
       e.preventDefault();
-      onChangeRef.current?.({
+      const newValue = getValueByStep(sortedSteps, value, flag, min, max);
+      onChangeRef.current?.(newValue, {
         e,
         id,
         name,
-        value: getValueByStep(sortedSteps, value, flag, min, max),
+        value: newValue,
       });
     }
   };
@@ -205,7 +211,7 @@ export const TextFieldRender = <TYPE extends string>(
   };
 
   const handleClear = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    onChangeRef.current?.({
+    onChangeRef.current?.(null, {
       e,
       id,
       name,
@@ -217,11 +223,12 @@ export const TextFieldRender = <TYPE extends string>(
     e: React.MouseEvent<HTMLButtonElement>,
     isIncrement = true,
   ) => {
-    onChangeRef.current?.({
+    const newValue = getValueByStep(sortedSteps, value, isIncrement, min, max);
+    onChangeRef.current?.(newValue, {
       e,
       id,
       name,
-      value: getValueByStep(sortedSteps, value, isIncrement, min, max),
+      value: newValue,
     });
   };
 

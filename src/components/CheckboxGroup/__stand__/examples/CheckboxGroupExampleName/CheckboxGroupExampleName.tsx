@@ -31,7 +31,7 @@ export const CheckboxGroupExampleName = () => {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="CheckboxGroup"
       />
     </Example>
@@ -59,7 +59,7 @@ export const CheckboxGroupExampleHead = () => {
                 items={itemsHead}
                 getItemLabel={(item) => item.name}
                 getItemDisabled={(item) => item.disabled}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
                 name="CheckboxGroup"
               />
             </>
@@ -78,7 +78,7 @@ export const CheckboxGroupExampleHead = () => {
                 items={itemsHead2}
                 getItemLabel={(item) => item.name}
                 getItemDisabled={(item) => item.disabled}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
                 name="CheckboxGroup"
               />
             </>
@@ -103,7 +103,7 @@ export const CheckboxExampleGroupHead3 = () => {
           items={itemsHead}
           getItemLabel={(item) => item.name}
           getItemDisabled={(item) => item.disabled}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           name="CheckboxGroup"
         />
       </>
@@ -128,7 +128,7 @@ export const CheckboxGroupExampleNeg = () => {
               items={itemsNeg}
               getItemLabel={(item) => item.name}
               getItemDisabled={(item) => item.disabled}
-              onChange={({ value }) => setValue(value)}
+              onChange={setValue}
               name="CheckboxGroup"
             />
           ),
@@ -142,7 +142,7 @@ export const CheckboxGroupExampleNeg = () => {
               items={itemsNeg2}
               getItemLabel={(item) => item.name}
               getItemDisabled={(item) => item.disabled}
-              onChange={({ value }) => setValue(value)}
+              onChange={setValue}
               name="CheckboxGroup"
             />
           ),
@@ -173,7 +173,7 @@ export const CheckboxGroupExampleGeneral = () => {
                 items={itemsGen}
                 getItemLabel={(item) => item.name}
                 getItemDisabled={(item) => item.disabled}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
                 name="CheckboxGroup"
               />
             </>
@@ -192,7 +192,7 @@ export const CheckboxGroupExampleGeneral = () => {
                 items={itemsGen2}
                 getItemLabel={(item) => item.name}
                 getItemDisabled={(item) => item.disabled}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
                 name="CheckboxGroup"
                 className={cnMixSpace({ mB: 's' })}
               />

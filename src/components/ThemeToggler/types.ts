@@ -9,10 +9,13 @@ export type ThemeTogglerPropSize = typeof themeTogglerPropSize[number];
 export const themeTogglerPropSizeDefault: ThemeTogglerPropSize =
   themeTogglerPropSize[0];
 
-export type ThemeTogglerPropSetValue<ITEM> = (props: {
-  e: React.MouseEvent;
-  value: ITEM;
-}) => void;
+export type ThemeTogglerPropOnChange<ITEM> = (
+  value: ITEM,
+  props: {
+    e: React.MouseEvent;
+    value: ITEM;
+  },
+) => void;
 export type ThemeTogglerPropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type ThemeTogglerPropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type ThemeTogglerPropGetItemIcon<ITEM> = (item: ITEM) => IconComponent;
@@ -30,7 +33,7 @@ export type ThemeTogglerProps<ITEM = ThemeTogglerItemDefault> =
       className?: string;
       items: ITEM[];
       value: ITEM;
-      onChange: ThemeTogglerPropSetValue<ITEM>;
+      onChange: ThemeTogglerPropOnChange<ITEM>;
       getItemKey?: ThemeTogglerPropGetItemKey<ITEM>;
       getItemLabel?: ThemeTogglerPropGetItemLabel<ITEM>;
       getItemIcon?: ThemeTogglerPropGetItemIcon<ITEM>;

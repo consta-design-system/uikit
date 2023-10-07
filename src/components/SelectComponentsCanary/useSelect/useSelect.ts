@@ -40,6 +40,7 @@ type OnChangeProp<ITEM, MULTIPLE extends boolean> = (
   value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
   props: {
     e: React.SyntheticEvent;
+    value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
   },
 ) => void;
 
@@ -67,7 +68,10 @@ export type SelectProps<ITEM, GROUP, MULTIPLE extends boolean> = {
   getItemKey: (item: ITEM) => string | number;
   getItemDisabled?: (item: ITEM) => boolean | undefined;
   searchFunction?: (item: ITEM, searchValue: string) => boolean;
-  onCreate?: (label: string, props: { e: React.SyntheticEvent }) => void;
+  onCreate?: (
+    label: string,
+    props: { e: React.SyntheticEvent; label: string },
+  ) => void;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   multiple: boolean;
@@ -402,8 +406,10 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       const newValue = params.value?.filter(
         (item) => getItemKey(item) !== getItemKey(valueItem),
       );
-      params.onChange(newValue?.length ? newValue : null, {
+      const val = newValue?.length ? newValue : null;
+      params.onChange(val, {
         e,
+        value: val,
       });
     }
   };
@@ -418,10 +424,11 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       )
         ? value.filter((value) => getItemKey(value) !== getItemKey(item))
         : [...value, item];
-      params.onChange(newValue.length ? newValue : null, { e });
+      const val = newValue?.length ? newValue : null;
+      params.onChange(val, { e, value: val });
     }
     if (isNotMultipleParams(params)) {
-      params.onChange(item, { e });
+      params.onChange(item, { e, value: item });
       setOpen(false);
       setSearch('');
     }
@@ -449,17 +456,19 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
         }
       });
       if (currentGroupValues.length === nonDisabledItems.length) {
-        params.onChange(withoutGroupValues, { e });
+        params.onChange(withoutGroupValues, { e, value: withoutGroupValues });
       } else {
-        params.onChange([...withoutGroupValues, ...nonDisabledItems], {
+        const val = [...withoutGroupValues, ...nonDisabledItems];
+        params.onChange(val, {
           e,
+          value: val,
         });
       }
     }
   };
 
   const onCreate = (e: React.SyntheticEvent, label: string) => {
-    params.onCreate && params.onCreate(label, { e });
+    params.onCreate && params.onCreate(label, { e, label });
     setOpen(false);
     setSearch('');
   };
@@ -484,12 +493,14 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   const clearValue = (e: React.SyntheticEvent) => {
     if (isMultipleParams(params)) {
       const results = value?.filter((item) => getItemDisabled?.(item));
-      params.onChange(results && results.length > 0 ? results : null, {
+      const val = results && results.length > 0 ? results : null;
+      params.onChange(val, {
         e,
+        value: val,
       });
     }
     if (isNotMultipleParams(params)) {
-      params.onChange(null, { e });
+      params.onChange(null, { e, value: null });
     }
     setSearch('');
   };

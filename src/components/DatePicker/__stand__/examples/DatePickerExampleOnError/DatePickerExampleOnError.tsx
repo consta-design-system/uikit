@@ -18,7 +18,7 @@ export const DatePickerExampleOnError = () => {
   const [value, setValue] = useState<[Date?, Date?] | null>(null);
   const [error, setError] = useState<string | undefined>();
 
-  const onChange: DatePickerPropOnChange<'date-range'> = ({ value }) => {
+  const onChange: DatePickerPropOnChange<'date-range'> = (value) => {
     setValue(value);
     setError(undefined);
   };

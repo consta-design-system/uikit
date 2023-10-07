@@ -23,7 +23,7 @@ export const ThemeTogglerExampleDefault = () => {
         <ThemeToggler
           items={exampleThemesThree}
           value={value}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           direction="downStartLeft"
         />
       </Theme>

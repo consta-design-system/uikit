@@ -17,15 +17,18 @@ export const defaultPropSize: PropSize = propSize[0];
 
 export type SliderValue<RANGE> = RANGE extends true ? [number, number] : number;
 
-export type PropOnChange<RANGE> = (prop: {
-  e?:
-    | Event
-    | React.TouchEvent
-    | React.MouseEvent
-    | React.KeyboardEvent
-    | React.ChangeEvent;
-  value: SliderValue<RANGE>;
-}) => void;
+export type SliderPropOnChange<RANGE> = (
+  value: SliderValue<RANGE>,
+  prop: {
+    e?:
+      | Event
+      | React.TouchEvent
+      | React.MouseEvent
+      | React.KeyboardEvent
+      | React.ChangeEvent;
+    value: SliderValue<RANGE>;
+  },
+) => void;
 
 type PropToolipFormatter = (value: number | undefined) => string;
 
@@ -46,8 +49,8 @@ type Props<RANGE extends boolean = false> = {
   min?: number;
   size?: PropSize;
   max?: number;
-  onChange?: PropOnChange<RANGE>;
-  onAfterChange?: PropOnChange<RANGE>;
+  onChange?: SliderPropOnChange<RANGE>;
+  onAfterChange?: SliderPropOnChange<RANGE>;
   leftSide?: Side;
   tooltipFormatter?: PropToolipFormatter;
   rightSide?: Side;
@@ -147,12 +150,15 @@ export const getOnChandgeForInput =
       return;
     }
     if (isNotRangeParams(props)) {
-      props.onChange({ e, value });
+      props.onChange(value, { e, value });
     }
     if (isRangeParams(props)) {
-      props.onChange({
+      const newValue: SliderValue<true> = field
+        ? [props.value[0], value]
+        : [value, props.value[1]];
+      props.onChange(newValue, {
         e,
-        value: field ? [props.value[0], value] : [value, props.value[1]],
+        value: newValue,
       });
     }
   };

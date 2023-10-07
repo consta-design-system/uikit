@@ -43,7 +43,7 @@ const Variants = () => {
     setSkippedSteps([...skippedSteps, activeStep]);
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const handleChange = ({ value }: { value: SimpleItem | null }) => {
+  const handleChange = (value: SimpleItem | null) => {
     setSkippedSteps([...skippedSteps, activeStep]);
     setActiveStep(getStepIndex(value));
   };

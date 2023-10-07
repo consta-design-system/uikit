@@ -13,7 +13,7 @@ export const DatePickerExampleFormat = () => {
         separator="/"
         placeholder="ММ/ДД/ГГГГ ЧЧ:ММ"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

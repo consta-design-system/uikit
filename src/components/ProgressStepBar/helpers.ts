@@ -59,6 +59,15 @@ export type Line = {
   size: number;
 };
 
+export type PropOnItemClick<ITEM> = (
+  item: ITEM,
+  props: {
+    e: React.MouseEvent;
+    item: ITEM;
+    index: number;
+  },
+) => void;
+
 export type ProgressStepBarProps<ITEM = DefaultItem> =
   PropsWithHTMLAttributesAndRef<
     {
@@ -66,11 +75,7 @@ export type ProgressStepBarProps<ITEM = DefaultItem> =
       direction?: PropDirection;
       size?: PropSize;
       activeStepIndex?: number;
-      onItemClick?: (props: {
-        e: React.MouseEvent;
-        item: ITEM;
-        index: number;
-      }) => void;
+      onItemClick?: PropOnItemClick<ITEM>;
       getItemLabel?: PropGetItemLabel<ITEM>;
       getItemLineStatus?: PropGetItemLineStatus<ITEM>;
       getItemTooltipContent?: PropGetItemTooltipContent<ITEM>;

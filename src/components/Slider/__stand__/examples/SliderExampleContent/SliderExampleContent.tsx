@@ -17,7 +17,7 @@ export const SliderExampleContent = () => {
         view="division"
         leftSide="input"
         rightSide={IconSettings}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );
@@ -33,7 +33,7 @@ export const SliderExampleContentInputLeftAndRight = () => {
         range
         view="division"
         label={`Значение ${value[0]}-${value[1]}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         leftSide="input"
         rightSide="input"

@@ -70,7 +70,7 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef(
           locale={locale}
           events={events}
           view={view}
-          onChange={({ value }) => {
+          onChange={(value) => {
             setCurrentVisibleDate(value);
             off();
           }}

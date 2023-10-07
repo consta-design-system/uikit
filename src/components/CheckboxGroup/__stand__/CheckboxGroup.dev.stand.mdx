@@ -47,9 +47,10 @@ return (
     items={items}
     getItemLabel={(item) => item.name}
     getItemDisabled={(item) => item.disabled}
-    onChange={({ value }) => setValue(value)}
+    onChange={setValue}
     name={'CheckboxGroup'}
   />
+);
 ```
 
 **Выберите номер**
@@ -88,7 +89,7 @@ function CheckboxGroupExampleRow() {
       items={items}
       getItemLabel={(item) => item.name}
       getItemDisabled={(item) => item.disabled}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       direction="column"
     />
   );
@@ -122,7 +123,7 @@ function CheckboxGroupExampleRow() {
       items={items}
       getItemLabel={(item) => item.name}
       getItemDisabled={(item) => item.disabled}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       direction="row"
     />
   );
@@ -162,7 +163,7 @@ function CheckboxGroupExampleDisabled() {
       items={items}
       getItemLabel={(item) => item.name}
       getItemDisabled={(item) => item.disabled}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       direction="row"
       disabled
     />
@@ -200,7 +201,7 @@ function CheckboxGroupExampleSize() {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="CheckboxGroup"
         direction="row"
         size="m"
@@ -210,7 +211,7 @@ function CheckboxGroupExampleSize() {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="CheckboxGroup"
         direction="row"
         size="l"
@@ -253,7 +254,7 @@ function CheckboxGroupExampleView() {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="CheckboxGroup"
         direction="row"
         view="primary"
@@ -266,7 +267,7 @@ function CheckboxGroupExampleView() {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="CheckboxGroup"
         direction="row"
         view="ghost"
@@ -292,31 +293,65 @@ type CheckboxGroupPropAttributes = Omit<
   'ref' | 'onChange' | 'onFocus' | 'children' | 'onBlur'
 >;
 
-type CheckboxGroupDefaultItem = {
+export type CheckboxGroupDefaultItem = {
+  key?: string | number;
   label: string;
   disabled?: boolean;
   attributes?: CheckboxGroupPropAttributes;
   ref?: React.RefObject<HTMLLabelElement>;
 };
 
-type OnChange = (props: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  value: ITEM[] | null;
-}) => void;
+export const checkboxGroupDirections = ['column', 'row'] as const;
+export type CheckboxGroupDirection = typeof checkboxGroupDirections[number];
+export const checkboxGroupDefaultDirection: CheckboxGroupDirection =
+  checkboxGroupDirections[0];
+
+export const checkboxGroupSizes = ['m', 'xs', 's', 'l'] as const;
+export type CheckboxGroupPropSize = typeof checkboxGroupSizes[number];
+export const checkboxGroupDefaultSize: CheckboxGroupPropSize =
+  checkboxGroupSizes[0];
+
+export const checkboxGroupViews = ['primary', 'ghost'] as const;
+export type CheckboxGroupPropView = typeof checkboxGroupViews[number];
+export const checkboxGroupDefaultView: CheckboxGroupPropView =
+  checkboxGroupViews[0];
+
+export type CheckboxGroupPropGetItemKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+export type CheckboxGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type CheckboxGroupPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+export type CheckboxGroupPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => CheckboxGroupPropAttributes | undefined;
+export type CheckboxGroupPropGetItemRef<ITEM> = (
+  item: ITEM,
+) => React.RefObject<HTMLLabelElement> | undefined;
+
+export type CheckboxGroupPropOnChange<ITEM> = (
+  value: ITEM[] | null,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    value: ITEM[] | null;
+  },
+) => void;
 ```
 
-| Свойство                                    | Тип                                                 | По умолчанию | Описание                                                                                                |
-| ------------------------------------------- | --------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------- |
-| `value`                                     | `ITEM[]`                                            | —            | Значение                                                                                                |
-| [`items`](#содержимое)                      | `ITEM[]`                                            | —            | Элементы                                                                                                |
-| [`getItemLabel?`](#содержимое)              | `(item: ITEM) => string`                            | —            | Функция для формирования текста для чекбоксов. Также используется в качестве уникального ключа элемента |
-| [`getItemDisabled?`](#неактивный-чекбокс)   | `(item: ITEM) => boolean`                           | —            | Функция для определения disabled состояния чекбокса                                                     |
-| `getItemAttributes?`                        | `(item: ITEM) => CheckboxGroupPropAttributes`       | —            | Функция для получения дополнительных атрибутов элемента                                                 |
-| `getItemRef?`                               | `(item: ITEM) => React.RefObject<HTMLLabelElement>` | —            | Функция для получения ссылки на чебкокс                                                                 |
-| `onChange`                                  | `OnChange`                                          | —            | Действие при выборе элемента                                                                            |
-| `name`                                      | `string`                                            | —            | Имя `<input>`, указывается для доступности                                                              |
-| [`direction?`](#расположение-чекбоксов)     | `'column', 'row'`                                   | `'column'`   | Направление чекбоксов                                                                                   |
-| [`disabled?`](#неактивная-группа-чекбоксов) | `boolean`                                           | `false`      | Делает группу чекбоксов неактивной                                                                      |
-| [`size?`](#размер)                          | `'m', 'l'`                                          | `'m'`        | Размер группы чекбоксов                                                                                 |
-| [`view?`](#внешний-вид)                     | `'primary', 'ghost'`                                | `'primary'`  | Внешний вид                                                                                             |
-| `className?`                                | `string`                                            | —            | Дополнительные CSS-классы                                                                               |
+| Свойство                                    | Тип                                  | По умолчанию | Описание                                                                                                |
+| ------------------------------------------- | ------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------- |
+| `value`                                     | `ITEM[]`                             | —            | Значение                                                                                                |
+| [`items`](#содержимое)                      | `ITEM[]`                             | —            | Элементы                                                                                                |
+| `getItemKey?`                               | `CheckboxGroupPropGetItemKey`        | —            | Функция для формирования ключей для чекбоксов. а                                                        |
+| [`getItemLabel?`](#содержимое)              | `CheckboxGroupPropGetItemLabel`      | —            | Функция для формирования текста для чекбоксов. Также используется в качестве уникального ключа элемента |
+| [`getItemDisabled?`](#неактивный-чекбокс)   | `CheckboxGroupPropGetItemDisabled`   | —            | Функция для определения disabled состояния чекбокса                                                     |
+| `getItemAttributes?`                        | `CheckboxGroupPropGetItemAttributes` | —            | Функция для получения дополнительных атрибутов элемента                                                 |
+| `getItemRef?`                               | `CheckboxGroupPropGetItemRef`        | —            | Функция для получения ссылки на чебкокс                                                                 |
+| `onChange?`                                 | `CheckboxGroupPropOnChange`          | —            | Действие при выборе элемента                                                                            |
+| `name`                                      | `string`                             | —            | Имя `<input>`, указывается для доступности                                                              |
+| [`direction?`](#расположение-чекбоксов)     | `'column', 'row'`                    | `'column'`   | Направление чекбоксов                                                                                   |
+| [`disabled?`](#неактивная-группа-чекбоксов) | `boolean`                            | `false`      | Делает группу чекбоксов неактивной                                                                      |
+| [`size?`](#размер)                          | `'m', 'l'`                           | `'m'`        | Размер группы чекбоксов                                                                                 |
+| [`view?`](#внешний-вид)                     | `'primary', 'ghost'`                 | `'primary'`  | Внешний вид                                                                                             |
+| `className?`                                | `string`                             | —            | Дополнительные CSS-классы                                                                               |

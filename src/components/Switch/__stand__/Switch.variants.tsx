@@ -20,9 +20,6 @@ const Variants = () => {
 
   const [checked, setChecked] = useState<boolean>(false);
 
-  const handleChange = ({ checked }: { checked: boolean }) =>
-    setChecked(checked);
-
   return (
     <form>
       <Switch
@@ -32,7 +29,7 @@ const Variants = () => {
         view={view}
         label={label}
         align={align}
-        onChange={handleChange}
+        onChange={setChecked}
       />
     </form>
   );

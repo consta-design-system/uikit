@@ -42,7 +42,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       if (onChange) {
-        onChange({ e, checked: !checked });
+        onChange(!checked, { e, checked: !checked });
       }
     };
 

@@ -108,7 +108,7 @@ const BookmarkTabsRender = (
       controlRef,
       fixed,
       bordered,
-      onClose: onRemove ? (e) => onRemove(item, { e }) : undefined,
+      onClose: onRemove ? (e) => onRemove(item, { e, item }) : undefined,
       size,
       view,
       form,

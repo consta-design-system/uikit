@@ -3,15 +3,21 @@ import React from 'react';
 
 import { useChoiceGroup } from '../useChoiceGroup';
 
-type CallbackWithMultiple<ITEM, EVENT> = (props: {
-  e?: EVENT;
-  value: ITEM[] | null;
-}) => void;
+type CallbackWithMultiple<ITEM, EVENT> = (
+  value: ITEM[] | null,
+  props: {
+    e?: EVENT;
+    value: ITEM[] | null;
+  },
+) => void;
 
-type CallbackWithoutMultiple<ITEM, EVENT> = (props: {
-  e?: EVENT;
-  value: ITEM;
-}) => void;
+type CallbackWithoutMultiple<ITEM, EVENT> = (
+  value: ITEM,
+  props: {
+    e?: EVENT;
+    value: ITEM;
+  },
+) => void;
 
 const getDefaultProps = (
   valueProp: number | undefined,
@@ -59,7 +65,7 @@ describe('Хук useChoiceGroup', () => {
       let variable = -1;
       const { result } = renderHook(() =>
         useChoiceGroup(
-          getDefaultProps(-1, ({ value }) => {
+          getDefaultProps(-1, (value) => {
             variable = value;
           }),
         ),
@@ -85,7 +91,7 @@ describe('Хук useChoiceGroup', () => {
       let variable: number[] | null = [-1];
       const { result } = renderHook(() =>
         useChoiceGroup(
-          getDefaultMultipleProps([-1], ({ value }) => {
+          getDefaultMultipleProps([-1], (value) => {
             variable = value;
           }),
         ),

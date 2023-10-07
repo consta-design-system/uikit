@@ -57,7 +57,7 @@ const ChipsItemWithMenu = (props: ChipsItemWithMenuProps) => {
         getItemLabel={getItemLabel}
         isOpen={isOpen}
         onClickOutside={onClickOutside}
-        onItemClick={({ item }) => onChange(item)}
+        onItemClick={onChange}
         getItemRightIcon={(item) => (item === value ? IconCheck : undefined)}
         direction="downStartLeft"
         offset="2xs"

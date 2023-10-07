@@ -5,7 +5,6 @@ import { TextField } from '../../../TextField';
 
 export const TextFieldExampleSize = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
@@ -13,7 +12,7 @@ export const TextFieldExampleSize = () => {
         <TextField
           size="xs"
           placeholder="Размер XS"
-          onChange={handleChange}
+          onChange={setValue}
           value={value}
         />
       </div>
@@ -21,7 +20,7 @@ export const TextFieldExampleSize = () => {
         <TextField
           size="s"
           placeholder="Размер S"
-          onChange={handleChange}
+          onChange={setValue}
           value={value}
         />
       </div>
@@ -29,7 +28,7 @@ export const TextFieldExampleSize = () => {
         <TextField
           size="m"
           placeholder="Размер M"
-          onChange={handleChange}
+          onChange={setValue}
           value={value}
         />
       </div>
@@ -37,7 +36,7 @@ export const TextFieldExampleSize = () => {
         <TextField
           size="l"
           placeholder="Размер L"
-          onChange={handleChange}
+          onChange={setValue}
           value={value}
         />
       </div>
@@ -49,7 +48,6 @@ export const TextFieldExampleSizeRows = () => {
   const [value, setValue] = useState<string | null>(
     'Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим',
   );
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
@@ -57,7 +55,7 @@ export const TextFieldExampleSizeRows = () => {
         type="textarea"
         rows={7}
         cols={50}
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
       />
     </Example>
@@ -68,7 +66,6 @@ export const TextFieldExampleSizeMinRows = () => {
   const [value, setValue] = useState<string | null>(
     'Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим',
   );
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
@@ -76,7 +73,7 @@ export const TextFieldExampleSizeMinRows = () => {
         type="textarea"
         minRows={13}
         cols={25}
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
       />
     </Example>

@@ -54,9 +54,9 @@ const BreadcrumbsRender = (
       return;
     }
 
-    const handleClick: BreadcrumbsPropOnItemClick<Item> = ({ e, item }) => {
+    const handleClick: BreadcrumbsPropOnItemClick<Item> = (item, { e }) => {
       getItemOnClick?.(item)?.(e);
-      onItemClick?.({ e, item });
+      onItemClick?.(item, { e, item });
     };
 
     return (

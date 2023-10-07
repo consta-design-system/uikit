@@ -14,7 +14,7 @@ export const TabsExampleFitModeDropdown = () => {
           <Tabs
             fitMode="dropdown"
             value={value}
-            onChange={({ value }) => setValue(value)}
+            onChange={setValue}
             items={items}
             getItemLabel={(item) => item}
           />

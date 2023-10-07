@@ -21,10 +21,13 @@ import {
 } from '../helpers';
 import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
 
-type DatePickerFieldTypeDatePropOnChange = (props: {
-  e: Event;
-  value: Date | null;
-}) => void;
+type DatePickerFieldTypeDatePropOnChange = (
+  value: Date | null,
+  props: {
+    e: Event;
+    value: Date | null;
+  },
+) => void;
 
 export type DatePickerFieldTypeDateProps = PropsWithHTMLAttributes<
   {
@@ -106,7 +109,7 @@ export const usePicker = (props: UsePickerProps) => {
       if (onChange) {
         if (!stringValue) {
           if (value) {
-            onChange({ e, value: null });
+            onChange(null, { e, value: null });
           }
           return;
         }
@@ -142,14 +145,14 @@ export const usePicker = (props: UsePickerProps) => {
               date,
             });
             if (value) {
-              onChange({ e, value: null });
+              onChange(null, { e, value: null });
             }
 
             return;
           }
-          onChange({ e, value: date });
+          onChange(date, { e, value: date });
         } else if (value) {
-          onChange({ e, value: null });
+          onChange(null, { e, value: null });
         }
       }
     },
@@ -232,7 +235,7 @@ export const usePicker = (props: UsePickerProps) => {
 
   const clearValue = (e: Event) => {
     setStringValue(null);
-    onChange?.({ e, value: null });
+    onChange?.(null, { e, value: null });
   };
 
   // при изменении value, нужно обновить stringValue

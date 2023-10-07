@@ -119,7 +119,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
 
     const onItemClickHandler = onItemClick
       ? (e: React.MouseEvent<Element, MouseEvent>) => {
-          onItemClick({ e, item, index });
+          onItemClick(item, { e, item, index });
           onClick?.(e);
         }
       : undefined;

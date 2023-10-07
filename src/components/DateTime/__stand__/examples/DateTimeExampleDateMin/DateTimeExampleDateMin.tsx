@@ -18,7 +18,7 @@ export const DateTimeExampleDateMin = () => {
         minDate={minDate}
         maxDate={maxDate}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

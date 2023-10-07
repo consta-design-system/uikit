@@ -43,13 +43,18 @@ export type PropRenderValue<ITEM> = (
   props: RenderValueProps<ITEM>,
 ) => React.ReactElement | null;
 
+export type SelectPropOnChange<ITEM> = (
+  value: ITEM | null,
+  props: { e: React.SyntheticEvent; value: ITEM | null },
+) => void;
+
 export type SelectProps<
   ITEM = DefaultItem,
   GROUP = DefaultGroup,
 > = PropsWithHTMLAttributesAndRef<
   {
     items: ITEM[];
-    onChange: (value: ITEM | null, props: { e: React.SyntheticEvent }) => void;
+    onChange: SelectPropOnChange<ITEM>;
     disabled?: boolean;
     form?: PropForm;
     dropdownForm?: 'default' | 'brick' | 'round';

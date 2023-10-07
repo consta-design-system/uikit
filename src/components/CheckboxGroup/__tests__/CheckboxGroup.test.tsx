@@ -8,10 +8,13 @@ type Item = {
   name: string;
   disabled?: boolean;
 };
-type OnChange = (props: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  value: Item[] | null;
-}) => void;
+type OnChange = (
+  value: Item[] | null,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    value: Item[] | null;
+  },
+) => void;
 
 const testId = 'CheckboxGroupCanary';
 
@@ -104,9 +107,10 @@ describe('Компонент CheckboxGroup', () => {
         fireEvent.click(item);
 
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ value: [items[0]] }),
-        );
+        expect(handleChange).toHaveBeenCalledWith([items[0]], {
+          e: expect.any(Object),
+          value: [items[0]],
+        });
       });
     });
 

@@ -21,9 +21,6 @@ const Variants = () => {
 
   const [checked, setChecked] = React.useState<boolean>(false);
 
-  const handleChange = ({ checked }: { checked: boolean }) =>
-    setChecked(checked);
-
   return (
     <Checkbox
       disabled={disabled}
@@ -31,7 +28,7 @@ const Variants = () => {
       size={size}
       view={view}
       label={label}
-      onChange={handleChange}
+      onChange={setChecked}
       checked={checked}
       align={align}
     />

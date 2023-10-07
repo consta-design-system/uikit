@@ -58,11 +58,11 @@ export type ChipsPropGetItemActive<ITEM> = (
 ) => ChipsDefaultItem['active'];
 export type ChipsPropOnItemClick<ITEM> = (
   item: ITEM,
-  props: { e: React.MouseEvent },
+  props: { e: React.MouseEvent; item: ITEM },
 ) => void;
 export type ChipsPropItemOnRightIconClick<ITEM> = (
   item: ITEM,
-  props: { e: React.MouseEvent },
+  props: { e: React.MouseEvent; item: ITEM },
 ) => void;
 
 export type ChipsProps<ITEM = ChipsDefaultItem> = PropsWithHTMLAttributesAndRef<

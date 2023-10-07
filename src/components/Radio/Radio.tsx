@@ -20,10 +20,13 @@ export const radioPropAlign = ['center', 'top'] as const;
 export type RadioPropAlign = typeof radioPropAlign[number];
 export const radioPropAlignDefault: RadioPropAlign = radioPropAlign[0];
 
-export type RadioPropOnChange = (object: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  checked: boolean;
-}) => void;
+export type RadioPropOnChange = (
+  checked: boolean,
+  params: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    checked: boolean;
+  },
+) => void;
 
 export type Props = {
   checked?: boolean;
@@ -81,7 +84,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       if (onChange) {
-        onChange({ e, checked: !checked });
+        onChange(!checked, { e, checked: !checked });
       }
     };
 

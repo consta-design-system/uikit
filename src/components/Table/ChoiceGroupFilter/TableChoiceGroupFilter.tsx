@@ -37,10 +37,6 @@ export const TableChoiceGroupFilter: React.FC<Props> = ({
 
   const choiceGroupItems = useMemo(() => [defaultValue, ...items], [items]);
 
-  const onChange = ({ value }: { value: Item }) => {
-    setValue(value);
-  };
-
   return (
     <TableFilterContainer
       title={title}
@@ -52,7 +48,7 @@ export const TableChoiceGroupFilter: React.FC<Props> = ({
         items={choiceGroupItems}
         getItemLabel={(item) => item.name}
         name="choiceGroup"
-        onChange={onChange}
+        onChange={setValue}
         value={value?.value ? value : defaultValue}
         className={cnChoiceGroupFilter()}
       />

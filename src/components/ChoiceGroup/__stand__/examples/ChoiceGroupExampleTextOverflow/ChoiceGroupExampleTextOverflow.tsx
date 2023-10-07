@@ -21,7 +21,7 @@ export const ChoiceGroupExampleTextOverflow = () => {
       <ChoiceGroup
         style={{ maxWidth: 600 }}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         name="ChoiceGroupExampleTextOverflow"

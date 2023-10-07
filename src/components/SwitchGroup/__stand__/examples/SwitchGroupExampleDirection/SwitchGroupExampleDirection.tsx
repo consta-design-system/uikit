@@ -29,7 +29,7 @@ export const SwitchGroupExampleDirection = () => {
             items={items}
             getItemLabel={(item) => item.name}
             getItemDisabled={(item) => item.disabled}
-            onChange={({ value }) => setValue(value)}
+            onChange={setValue}
             name={`SwitchGroupExample${direction}`}
             direction={direction}
           />

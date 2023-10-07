@@ -6,19 +6,18 @@ import { TextField } from '../../../TextField';
 
 export const TextFieldExampleLabel = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         placeholder="Здесь лейбл сверху"
         label="Лейбл"
         labelPosition="top"
       />
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         placeholder="Здесь лейбл слева"
         label="Лейбл"
@@ -30,12 +29,11 @@ export const TextFieldExampleLabel = () => {
 
 export const TextFieldExampleLabelIcon = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         labelIcon={IconQuestion}
         placeholder="Здесь лейбл сверху"

@@ -45,13 +45,10 @@ type PropsWithModeLink = CommonProps & {
 
 type PropsWithModeCheck = CommonProps & {
   mode: 'check';
-  onChange: ({
-    e,
-    checked,
-  }: {
-    e?: React.MouseEvent;
-    checked: boolean;
-  }) => void;
+  onChange: (
+    checked: boolean,
+    params: { e?: React.MouseEvent; checked: boolean },
+  ) => void;
   checked: boolean;
   onClick?: never;
   onCancel?: never;
@@ -130,7 +127,8 @@ export function getParams(
         view: checked ? 'filled' : 'stroked',
         onClick:
           typeof onChange === 'function'
-            ? (e: React.MouseEvent) => onChange({ e, checked: !checked })
+            ? (e: React.MouseEvent) =>
+                onChange(!checked, { e, checked: !checked })
             : undefined,
         as: 'button',
         withAction: true,

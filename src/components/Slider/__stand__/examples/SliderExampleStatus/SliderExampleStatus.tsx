@@ -12,7 +12,7 @@ export const SliderExampleStatus = () => {
         range={false}
         label={`Значение ${value}`}
         caption="Статус alert"
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         status="alert"
       />
@@ -20,7 +20,7 @@ export const SliderExampleStatus = () => {
         range={false}
         label={`Значение ${value}`}
         caption="Статус warning"
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         status="warning"
       />
@@ -28,7 +28,7 @@ export const SliderExampleStatus = () => {
         range={false}
         label={`Значение ${value}`}
         caption="Статус success"
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         status="success"
       />
@@ -36,7 +36,7 @@ export const SliderExampleStatus = () => {
         range={false}
         label={`Значение ${value}`}
         caption="Обычный ползунок"
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
       />
     </Example>

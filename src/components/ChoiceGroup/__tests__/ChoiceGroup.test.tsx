@@ -46,10 +46,13 @@ const renderComponent = (props: {
   view?: ChoiceGroupProps['view'];
   form?: ChoiceGroupProps['form'];
   onlyIcon?: ChoiceGroupProps['onlyIcon'];
-  onChange?: (props: {
-    e: React.ChangeEvent<HTMLInputElement>;
-    value: Item | null;
-  }) => void;
+  onChange?: (
+    value: Item | null,
+    props: {
+      e: React.ChangeEvent<HTMLInputElement>;
+      value: Item | null;
+    },
+  ) => void;
   disabled?: boolean;
   getItemDisabled?: (item: Item) => boolean | undefined;
 }) => {
@@ -79,10 +82,13 @@ const renderComponentMultiple = (props: {
   view?: ChoiceGroupProps['view'];
   form?: ChoiceGroupProps['form'];
   onlyIcon?: ChoiceGroupProps['onlyIcon'];
-  onChange?: (props: {
-    e: React.ChangeEvent<HTMLInputElement>;
-    value: Item[] | null;
-  }) => void;
+  onChange?: (
+    value: Item[] | null,
+    props: {
+      e: React.ChangeEvent<HTMLInputElement>;
+      value: Item[] | null;
+    },
+  ) => void;
   value?: Item[];
 }) => {
   const { items = elements, ...otherProps } = props;
@@ -223,9 +229,10 @@ describe('Компонент ChoiceGroup', () => {
 
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ value: elements[elementIndex] }),
-        );
+        expect(handleChange).toHaveBeenCalledWith(elements[elementIndex], {
+          e: expect.any(Object),
+          value: elements[elementIndex],
+        });
       });
       it('клик по выбраному элементу, не должен вызвать callback', () => {
         const handleChange = jest.fn();
@@ -254,9 +261,11 @@ describe('Компонент ChoiceGroup', () => {
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({
+          [defaultValue, elements[elementIndex]],
+          {
+            e: expect.any(Object),
             value: [defaultValue, elements[elementIndex]],
-          }),
+          },
         );
       });
       it(`клик по выбраному элементу (всего выбран 1 элемент), должен вызвать callback c ожидаемыми параметрами`, () => {
@@ -270,9 +279,10 @@ describe('Компонент ChoiceGroup', () => {
 
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ value: null }),
-        );
+        expect(handleChange).toHaveBeenCalledWith(null, {
+          e: expect.any(Object),
+          value: null,
+        });
       });
       it(`клик по выбраному элементу (всего выбрано 2 элемента), должен вызвать callback c ожидаемыми параметрами`, () => {
         const handleChange = jest.fn();
@@ -289,9 +299,10 @@ describe('Компонент ChoiceGroup', () => {
 
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ value: [defaultValue] }),
-        );
+        expect(handleChange).toHaveBeenCalledWith([defaultValue], {
+          e: expect.any(Object),
+          value: [defaultValue],
+        });
       });
     });
 

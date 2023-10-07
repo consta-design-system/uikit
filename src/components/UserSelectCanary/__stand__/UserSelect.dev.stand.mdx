@@ -1412,10 +1412,13 @@ type DefaultGroup = {
   id: string | number;
 };
 
-type PropOnChange<ITEM, MULTIPLE extends boolean> = (props: {
-  value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
-  e: React.SyntheticEvent;
-}) => void;
+type PropOnChange<ITEM, MULTIPLE extends boolean> = (
+  value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
+  props: {
+    value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
+    e: React.SyntheticEvent;
+  },
+) => void;
 
 type PropRenderItem<ITEM = DefaultItem> = (props: {
   item: ITEM;

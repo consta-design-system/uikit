@@ -138,14 +138,14 @@ export const BookmarkTabsExampleIcon = () => {
     <>
       <BookmarkTabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemKey={getItemLabel}
         getItemLeftIcon={getItemIcon}
       />
       <BookmarkTabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemKey={getItemLabel}
         getItemRightIcon={getItemIcon}
@@ -664,30 +664,35 @@ export type BookmarkTabsRenderItemProps<ITEM> = {
 export type BookmarkTabsPropRenderItem<ITEM> = (
   props: BookmarkTabsRenderItemProps<ITEM>,
 ) => React.ReactElement | null;
+
+export type BookmarkTabsPropOnRemove<ITEM> = (
+  item: ITEM,
+  params: { e: React.MouseEvent; item: ITEM },
+) => void;
 ```
 
-| Свойство                                     | Тип                                                     | По умолчанию | Описание                                                              |
-| -------------------------------------------- | ------------------------------------------------------- | ------------ | --------------------------------------------------------------------- |
-| [`size?`](#размер-табов)                     | `'s', 'm'`                                              | `'m'`        | Размер компонента                                                     |
-| [`view?`](#внешний-вид)                      | `'ghost', 'clear'`                                      | `'ghost'`    | Внешний вид компонента                                                |
-| [`form?`](#форма-табов)                      | `'brick', 'round'`                                      | `'brick'`    | Форма компонента                                                      |
-| [`withNavigationButtons?`](#адаптивность)    | `boolean`                                               | -            | Флаг отображаются ли кнопки навигации по табам                        |
-| `items`                                      | `ITEM[]`                                                | -            | Массив элементов с данными для табов                                  |
-| `value`                                      | `ITEM`, `null`                                          | -            | Значение                                                              |
-| `onChange`                                   | `BookmarkTabsPropOnChange`                              | -            | Действие при выборе элемента                                          |
-| [`getItemKey?`](#табы)                       | `BookmarkTabsPropGetItemKey`                            | -            | Функция для получения уникального ключа                               |
-| [`getItemLabel?`](#текст-таба)               | `BookmarkTabsPropGetItemLabel`                          | -            | Функция для получения текста таба.                                    |
-| [`getItemLeftIcon?`](#иконки)                | `BookmarkTabsPropGetItemLeftIcon`                       | -            | Функция для получения иконки слева                                    |
-| [`getItemRightIcon?`](#иконки)               | `BookmarkTabsPropGetItemRightIcon`                      | -            | Функция для получения иконки справа                                   |
-| [`getItemFixed?`](#зафиксированные-элементы) | `BookmarkTabsPropGetItemFixed`                          | -            | Функция для получения флага зафиксирован ли таб                       |
-| [`getItemAs?`](#рендеринг)                   | `BookmarkTabsPropGetItemAs`                             | -            | Функция для получения HTML-тега, которым будет отрисовываться элемент |
-| [`getItemAttributes?`](#рендеринг)           | `BookmarkTabsPropGetItemAttributes`                     | -            | Функция для получения HTML-атрибутов, которые используются в элементе |
-| `getItemRef?`                                | `BookmarkTabsPropGetItemRef`                            | -            | Функция для получения ссылки на элемент                               |
-| [`onCreate?`](#добавление-новых-табов)       | `React.MouseEventHandler`                               | -            | Действие по нажатию на кнопку с "+"                                   |
-| [`onRemove?`](#удаление-табов)               | `(item: ITEM, params: { e: React.MouseEvent }) => void` | -            | Событие при удалении элемента                                         |
-| [`renderItem?`](#кастомизация)               | `BookmarkTabsPropRenderItem`                            | -            | Функция рендера элемента                                              |
-| `className?`                                 | `string`                                                | -            | Дополнительный CSS-класс                                              |
-| `ref?`                                       | `React.Ref<HTMLDivElement>`                             | -            | Ссылка на корневой DOM-элемент этого компонента                       |
+| Свойство                                     | Тип                                 | По умолчанию | Описание                                                              |
+| -------------------------------------------- | ----------------------------------- | ------------ | --------------------------------------------------------------------- |
+| [`size?`](#размер-табов)                     | `'s', 'm'`                          | `'m'`        | Размер компонента                                                     |
+| [`view?`](#внешний-вид)                      | `'ghost', 'clear'`                  | `'ghost'`    | Внешний вид компонента                                                |
+| [`form?`](#форма-табов)                      | `'brick', 'round'`                  | `'brick'`    | Форма компонента                                                      |
+| [`withNavigationButtons?`](#адаптивность)    | `boolean`                           | -            | Флаг отображаются ли кнопки навигации по табам                        |
+| `items`                                      | `ITEM[]`                            | -            | Массив элементов с данными для табов                                  |
+| `value`                                      | `ITEM`, `null`                      | -            | Значение                                                              |
+| `onChange`                                   | `BookmarkTabsPropOnChange`          | -            | Действие при выборе элемента                                          |
+| [`getItemKey?`](#табы)                       | `BookmarkTabsPropGetItemKey`        | -            | Функция для получения уникального ключа                               |
+| [`getItemLabel?`](#текст-таба)               | `BookmarkTabsPropGetItemLabel`      | -            | Функция для получения текста таба.                                    |
+| [`getItemLeftIcon?`](#иконки)                | `BookmarkTabsPropGetItemLeftIcon`   | -            | Функция для получения иконки слева                                    |
+| [`getItemRightIcon?`](#иконки)               | `BookmarkTabsPropGetItemRightIcon`  | -            | Функция для получения иконки справа                                   |
+| [`getItemFixed?`](#зафиксированные-элементы) | `BookmarkTabsPropGetItemFixed`      | -            | Функция для получения флага зафиксирован ли таб                       |
+| [`getItemAs?`](#рендеринг)                   | `BookmarkTabsPropGetItemAs`         | -            | Функция для получения HTML-тега, которым будет отрисовываться элемент |
+| [`getItemAttributes?`](#рендеринг)           | `BookmarkTabsPropGetItemAttributes` | -            | Функция для получения HTML-атрибутов, которые используются в элементе |
+| `getItemRef?`                                | `BookmarkTabsPropGetItemRef`        | -            | Функция для получения ссылки на элемент                               |
+| [`onCreate?`](#добавление-новых-табов)       | `React.MouseEventHandler`           | -            | Действие по нажатию на кнопку с "+"                                   |
+| [`onRemove?`](#удаление-табов)               | `BookmarkTabsPropOnRemove`          | -            | Событие при удалении элемента                                         |
+| [`renderItem?`](#кастомизация)               | `BookmarkTabsPropRenderItem`        | -            | Функция рендера элемента                                              |
+| `className?`                                 | `string`                            | -            | Дополнительный CSS-класс                                              |
+| `ref?`                                       | `React.Ref<HTMLDivElement>`         | -            | Ссылка на корневой DOM-элемент этого компонента                       |
 
 ## Пример
 

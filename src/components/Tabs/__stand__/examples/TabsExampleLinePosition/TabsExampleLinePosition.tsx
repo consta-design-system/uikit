@@ -19,7 +19,7 @@ export const TabsExampleLinePosition = () => {
       getItemNode={(linePosition) => (
         <Tabs
           value={value}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           items={items}
           getItemLabel={(item) => item}
           linePosition={linePosition}

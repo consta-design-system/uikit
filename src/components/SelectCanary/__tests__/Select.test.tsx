@@ -236,6 +236,7 @@ describe('Компонент Select', () => {
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChange).toHaveBeenCalledWith(items[elementIndex], {
       e: expect.any(Object),
+      value: items[elementIndex],
     });
   });
 

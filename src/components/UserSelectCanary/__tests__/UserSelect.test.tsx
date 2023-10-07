@@ -259,6 +259,7 @@ describe('Компонент UserSelect', () => {
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChange).toHaveBeenCalledWith(items[elementIndex], {
       e: expect.any(Object),
+      value: items[elementIndex],
     });
   });
 
@@ -283,6 +284,7 @@ describe('Компонент UserSelect', () => {
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChange).toHaveBeenCalledWith([items[elementIndex]], {
       e: expect.any(Object),
+      value: [items[elementIndex]],
     });
   });
 

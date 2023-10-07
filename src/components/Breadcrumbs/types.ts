@@ -23,10 +23,13 @@ export type BreadcrumbsPropGetItemSubMenu<ITEM> = (
 export type BreadcrumbsPropGetItemOnClick<ITEM> = (
   item: ITEM,
 ) => React.MouseEventHandler | undefined;
-export type BreadcrumbsPropOnItemClick<ITEM> = (props: {
-  item: ITEM;
-  e: React.MouseEvent;
-}) => void;
+export type BreadcrumbsPropOnItemClick<ITEM> = (
+  item: ITEM,
+  props: {
+    item: ITEM;
+    e: React.MouseEvent;
+  },
+) => void;
 
 export type DefaultItem = {
   label: string;

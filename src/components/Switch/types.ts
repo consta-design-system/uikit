@@ -12,10 +12,13 @@ export const switchPropAlign = ['center', 'top'] as const;
 export type SwitchPropAlign = typeof switchPropAlign[number];
 export const switchPropAlignDefault: SwitchPropAlign = switchPropAlign[0];
 
-export type SwitchPropOnChange = (object: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  checked: boolean;
-}) => void;
+export type SwitchPropOnChange = (
+  checked: boolean,
+  params: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    checked: boolean;
+  },
+) => void;
 
 export type SwitchProps = PropsWithHTMLAttributes<
   {

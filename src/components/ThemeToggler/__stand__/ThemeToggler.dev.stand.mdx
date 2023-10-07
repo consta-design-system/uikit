@@ -83,7 +83,7 @@ export const ThemeTogglerExampleGetters = () => {
         getItemKey={(item) => item}
         getItemLabel={(item) => item}
         getItemIcon={getItemIcon}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         direction="downStartLeft"
       />
     </Theme>
@@ -128,8 +128,24 @@ import { ThemeToggler } from '@consta/uikit/ThemeToggler';
 ## Свойства
 
 ```tsx
+export const themeTogglerPropSize = ['m', 'l', 's', 'xs'] as const;
+export type ThemeTogglerPropSize = typeof themeTogglerPropSize[number];
+export const themeTogglerPropSizeDefault: ThemeTogglerPropSize =
+  themeTogglerPropSize[0];
+
+export type ThemeTogglerPropOnChange<ITEM> = (
+  value: ITEM,
+  props: {
+    e: React.MouseEvent;
+    value: ITEM;
+  },
+) => void;
+export type ThemeTogglerPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+export type ThemeTogglerPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type ThemeTogglerPropGetItemIcon<ITEM> = (item: ITEM) => IconComponent;
+
 export type ThemeTogglerItemDefault = {
-  key?: string | number;
+  key: string;
   label: string;
   icon: IconComponent;
 };
@@ -140,11 +156,11 @@ export type ThemeTogglerItemDefault = {
 | [`size?`](#размер-переключателя)           | `'xs'`, `'s'`, `'m'`, `'l'`                | `'m'`          | Размер переключателя                                                                                                                                      |
 | [`items`](#содержимое)                     | `ITEM[]`                                   | -              | Массив тем для выбора                                                                                                                                     |
 | [`value`](#содержимое)                     | `ITEM`                                     | -              | Текущая тема                                                                                                                                              |
-| `onChange`                                 | `(arg: T) => void`                         | -              | Функция для изменения                                                                                                                                     |
+| `onChange`                                 | `ThemeTogglerPropOnChange`                 | -              | Функция для изменения                                                                                                                                     |
 | `view`                                     | `'clear', 'primary', 'secondary', 'ghost'` | `'clear'`      | Внешний вид, см. [Button](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-button-stable/tab:dev/hash:внешний-вид)                                         |
-| [`getItemKey?`](#содержимое)               | `(arg: T) => string OR number`             | `getItemLabel` | Функция для получения ключа, уникального для каждой переданной темы. Если опустить это свойство, то вместо этой функции будет использована `getItemLabel` |
-| [`getItemLabel?`](#содержимое)             | `(arg: T) => string`                       | -              | Функция для получения названия темы                                                                                                                       |
-| [`getItemIcon?`](#содержимое)              | `(arg: T) => IconComponent`                | -              | Функция для получения иконки темы в формате компонента                                                                                                    |
+| [`getItemKey?`](#содержимое)               | `ThemeTogglerPropGetItemKey`               | `getItemLabel` | Функция для получения ключа, уникального для каждой переданной темы. Если опустить это свойство, то вместо этой функции будет использована `getItemLabel` |
+| [`getItemLabel?`](#содержимое)             | `ThemeTogglerPropGetItemLabel`             | -              | Функция для получения названия темы                                                                                                                       |
+| [`getItemIcon?`](#содержимое)              | `ThemeTogglerPropGetItemIcon`              | -              | Функция для получения иконки темы в формате компонента                                                                                                    |
 | [`direction?`](#контекстное-меню)          | `Direction`                                | -              | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания) (только если тем больше двух)       |
 | [`possibleDirections?`](#контекстное-меню) | `Direction[]`                              | -              | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания) (только если тем больше двух)       |
 | `className?`                               | `string`                                   | -              | Дополнительный CSS-класс для контейнера (если тем всего две) или для кнопки (если тем больше двух)                                                        |
@@ -189,7 +205,7 @@ const Examle = () => {
       <ThemeToggler
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         direction="downStartLeft"
       />
     </Theme>

@@ -8,11 +8,7 @@ export const DatePickerExampleWithClearButton = () => {
 
   return (
     <Example col={1}>
-      <DatePicker
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        withClearButton
-      />
+      <DatePicker value={value} onChange={setValue} withClearButton />
     </Example>
   );
 };

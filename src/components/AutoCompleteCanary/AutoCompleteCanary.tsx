@@ -85,14 +85,15 @@ const AutoCompleteRender = <
         e: copyEvent,
         id: id?.toString(),
         name,
+        value: newValue,
       });
     },
     [id, name],
   );
 
   const handleInputChange: TextFieldPropOnChange = useCallback(
-    ({ value, id, name, e }) => {
-      onChangeRef.current?.(value, { id: id?.toString(), name, e });
+    (value, { id, name, e }) => {
+      onChangeRef.current?.(value, { id: id?.toString(), name, e, value });
     },
     [],
   );

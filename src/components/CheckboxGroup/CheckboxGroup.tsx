@@ -63,7 +63,7 @@ const CheckboxGroupRender = (
             ref={getItemRef(item)}
             disabled={disabled || getItemDisabled?.(item)}
             checked={getChecked(item)}
-            onChange={({ e }) => getOnChange(item)(e)}
+            onChange={(_value, { e }) => getOnChange(item)(e)}
             className={cnCheckboxGroup('Item', [className])}
             {...atributes}
           />

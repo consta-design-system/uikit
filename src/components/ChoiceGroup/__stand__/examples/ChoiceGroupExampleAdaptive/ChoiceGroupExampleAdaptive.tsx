@@ -1,7 +1,7 @@
 import './ChoiceGroupExampleAdaptiveScroll.css';
 
 import { Example } from '@consta/stand';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useBreakpoints } from '##/hooks/useBreakpoints';
 import { cn } from '##/utils/bem';
@@ -46,10 +46,6 @@ const items2: string[] = ['один', 'два', 'три', 'четыре', 'пя�
 export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
   const { desktop } = useBreakpoints({ desktop: 800 });
   const [value, setValue] = useState(items2[0]);
-  const onChandge = useCallback(
-    ({ value }: { value: string }) => setValue(value),
-    [],
-  );
 
   if (desktop) {
     return (
@@ -61,7 +57,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
           getItemLabel={getItemLabel}
           form="round"
           value={value}
-          onChange={onChandge}
+          onChange={setValue}
         />
       </Example>
     );
@@ -75,7 +71,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
         getItemLabel={getItemLabel}
         value={value}
         className={cnChoiceGroupExampleAdaptiveScroll('Component')}
-        onChange={onChandge}
+        onChange={setValue}
       />
     </Example>
   );

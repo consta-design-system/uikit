@@ -7,7 +7,7 @@ import { TextField, TextFieldPropOnChange } from '##/components/TextField';
 export const SpoilerExampleHiddenButton = () => {
   const [lineClamp, setLineClamp] = useState(4);
   const onChange: TextFieldPropOnChange = useCallback(
-    ({ value }) => setLineClamp(Number(value)),
+    (value) => setLineClamp(Number(value)),
     [],
   );
   return (

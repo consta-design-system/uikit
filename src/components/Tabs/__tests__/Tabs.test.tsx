@@ -162,9 +162,10 @@ describe('Компонент Tabs', () => {
 
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ value: items[elementIndex] }),
-        );
+        expect(handleChange).toHaveBeenCalledWith(items[elementIndex], {
+          e: expect.any(Object),
+          value: items[elementIndex],
+        });
       });
       it('клик по выбраному элементу, не должен вызвать callback', () => {
         const handleChange = jest.fn();

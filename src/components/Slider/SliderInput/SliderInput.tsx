@@ -6,7 +6,7 @@ import { cn } from '##/utils/bem';
 
 import {
   TextField,
-  TextFieldOnChangeArguments,
+  TextFieldPropOnChange,
   TextFieldProps,
 } from '../../TextField/TextField';
 import { getValidValue, isValidValue } from '../useSlider/helper';
@@ -43,7 +43,7 @@ export const SliderInput = (props: Props) => {
     value?.toString() || null,
   );
 
-  const handleChange = ({ e, value }: TextFieldOnChangeArguments) => {
+  const handleChange: TextFieldPropOnChange = (value, { e }) => {
     setCurrentValue(value);
     if (isValidValue(Number(value), min, max, step)) {
       onChange?.({ value: Number(value), e });

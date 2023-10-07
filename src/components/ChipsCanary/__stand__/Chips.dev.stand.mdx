@@ -189,29 +189,29 @@ export type ChipsPropGetItemActive<ITEM> = (
 ) => ChipsDefaultItem['active'];
 export type ChipsPropOnItemClick<ITEM> = (
   item: ITEM,
-  props: { e: React.MouseEvent },
+  props: { e: React.MouseEvent; item: ITEM },
 ) => void;
 export type ChipsPropItemOnRightIconClick<ITEM> = (
   item: ITEM,
-  props: { e: React.MouseEvent },
+  props: { e: React.MouseEvent; item: ITEM },
 ) => void;
 ```
 
-| Свойство                                   | Тип или варианты значения                              | По умолчанию | Описание                                         |
-| ------------------------------------------ | ------------------------------------------------------ | ------------ | ------------------------------------------------ |
-| [`items?`](#содержимое)                    | `ITEM[]`                                               | -            | Содержимое                                       |
-| [`interactive?`](#взаимодействие)          | `boolean`                                              | -            | Включает фокус и ховер эффекты                   |
-| [`onItemClick?`](#взаимодействие)          | `(item: ITEM, props: { e: React.MouseEvent }) => void` | -            | Событие клика по элементу                        |
-| [`onItemRightIconClick?`](#взаимодействие) | `(item: ITEM, props: { e: React.MouseEvent }) => void` | -            | Событие клика по иконки справа                   |
-| `activeView?`                              | `'primary'` &#124; `'secondary'`                       | `'primary'`  | Вид активного элемента                           |
-| [`getItemStatus?`](#содержимое)            | `ChipsPropGetItemStatus`                               | -            | Функция указывает статус элемента                |
-| [`getItemLabel?`](#содержимое)             | `ChipsPropGetItemLabel`                                | -            | Функция указывает лейбл элемента                 |
-| [`getItemIconLeft?`](#содержимое)          | `ChipsPropGetItemIconLeft`                             | -            | Функция указывает иконку слева элемента          |
-| [`getItemIconRight?`](#содержимое)         | `ChipsPropGetItemIconRight`                            | -            | Функция указывает иконку справа элемента         |
-| [`getItemRef?`](#содержимое)               | `ChipsPropGetItemRef`                                  | -            | Функция указывает ссылку на элемент              |
-| [`getItemAs?`](#содержимое)                | `ChipsPropGetItemAs`                                   | -            | Функция указывает HTML-тег элемента              |
-| [`getItemAttributes?`](#содержимое)        | `ChipsPropGetItemAttributes`                           | -            | Функция указывает HTML атрибуты элемента         |
-| [`getItemActive?`](#содержимое)            | `ChipsPropGetItemActive`                               | -            | Функция указывает на признак активности элемента |
+| Свойство                                   | Тип или варианты значения        | По умолчанию | Описание                                         |
+| ------------------------------------------ | -------------------------------- | ------------ | ------------------------------------------------ |
+| [`items?`](#содержимое)                    | `ITEM[]`                         | -            | Содержимое                                       |
+| [`interactive?`](#взаимодействие)          | `boolean`                        | -            | Включает фокус и ховер эффекты                   |
+| [`onItemClick?`](#взаимодействие)          | `ChipsPropOnItemClick`           | -            | Событие клика по элементу                        |
+| [`onItemRightIconClick?`](#взаимодействие) | `ChipsPropItemOnRightIconClick`  | -            | Событие клика по иконки справа                   |
+| `activeView?`                              | `'primary'` &#124; `'secondary'` | `'primary'`  | Вид активного элемента                           |
+| [`getItemStatus?`](#содержимое)            | `ChipsPropGetItemStatus`         | -            | Функция указывает статус элемента                |
+| [`getItemLabel?`](#содержимое)             | `ChipsPropGetItemLabel`          | -            | Функция указывает лейбл элемента                 |
+| [`getItemIconLeft?`](#содержимое)          | `ChipsPropGetItemIconLeft`       | -            | Функция указывает иконку слева элемента          |
+| [`getItemIconRight?`](#содержимое)         | `ChipsPropGetItemIconRight`      | -            | Функция указывает иконку справа элемента         |
+| [`getItemRef?`](#содержимое)               | `ChipsPropGetItemRef`            | -            | Функция указывает ссылку на элемент              |
+| [`getItemAs?`](#содержимое)                | `ChipsPropGetItemAs`             | -            | Функция указывает HTML-тег элемента              |
+| [`getItemAttributes?`](#содержимое)        | `ChipsPropGetItemAttributes`     | -            | Функция указывает HTML атрибуты элемента         |
+| [`getItemActive?`](#содержимое)            | `ChipsPropGetItemActive`         | -            | Функция указывает на признак активности элемента |
 
 ## ChipsItem
 

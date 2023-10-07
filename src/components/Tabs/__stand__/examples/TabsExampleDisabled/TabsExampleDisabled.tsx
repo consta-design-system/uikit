@@ -25,17 +25,8 @@ export const TabsExampleDisabled = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
     <Example col={1}>
-      <Tabs
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        items={items}
-      />
-      <Tabs
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        items={items}
-        disabled
-      />
+      <Tabs value={value} onChange={setValue} items={items} />
+      <Tabs value={value} onChange={setValue} items={items} disabled />
     </Example>
   );
 };
