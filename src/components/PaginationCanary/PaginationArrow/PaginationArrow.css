@@ -1,0 +1,34 @@
+.PaginationArrow {
+  &-Caption {
+    &_orientation {
+      &_start {
+        margin-right: var(--pagination-arrow-caption-ofset);
+      }
+
+      &_end {
+        margin-left: var(--pagination-arrow-caption-ofset);
+      }
+    }
+
+    &_size {
+      &_xs {
+        --pagination-arrow-caption-ofset:
+          calc(
+            var(--space-xs) + var(--space-3xs)
+          );
+      }
+
+      &_s {
+        --pagination-arrow-caption-ofset: var(--space-m);
+      }
+
+      &_m {
+        --pagination-arrow-caption-ofset: var(--space-m);
+      }
+
+      &_l {
+        --pagination-arrow-caption-ofset: var(--space-l);
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+.PaginationItem {
+  --pagination-item-bg: transparent;
+  width: var(--pagination-item-size);
+  height: var(--pagination-item-size);
+  background: var(--pagination-item-bg);
+  font-size: var(--pagination-item-font-size);
+  line-height: var(--space-m);
+  transition: background-color 0.3s;
+
+  &_clickable {
+    cursor: pointer;
+
+    &:hover {
+      --pagination-item-bg: var(--color-control-bg-clear-hover);
+    }
+
+    &.PaginationItem_active {
+      --pagination-item-bg: var(--color-control-bg-ghost);
+
+      &:hover {
+        --pagination-item-bg: var(--color-control-bg-ghost-hover);
+      }
+    }
+  }
+
+  &_size {
+    &_xs {
+      --pagination-item-size: var(--space-xl);
+      --pagination-item-font-size: var(--size-text-xs);
+    }
+
+    &_s {
+      --pagination-item-size: var(--space-2xl);
+      --pagination-item-font-size: var(--size-text-s);
+    }
+
+    &_m {
+      --pagination-item-size: var(--space-3xl);
+      --pagination-item-font-size: var(--size-text-m);
+    }
+
+    &_l {
+      --pagination-item-size: var(--space-4xl);
+      --pagination-item-font-size: var(--size-text-l);
+    }
+  }
+
+  &_form {
+    &_default {
+      border-radius: var(--space-2xs);
+    }
+
+    &_round {
+      border-radius: 50%;
+    }
+  }
+}
