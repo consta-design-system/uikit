@@ -68,7 +68,7 @@ export const getPagesArray = (params: {
 
   const visibleCount = Math.min(visibleCountProp, totalPages);
 
-  const delta = 2; // Количество элементов которое нужно пройти чтоб появилось многоточие
+  const delta = 2; // Количество элементов, которое нужно пройти для появления многоточия
   const offset = 0; // Количество страниц перед выбранной
 
   const showFirst =

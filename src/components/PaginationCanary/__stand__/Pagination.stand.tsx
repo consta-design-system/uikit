@@ -4,7 +4,7 @@ export default createStand({
   title: 'Pagination',
   id: 'Pagination',
   group: 'components',
-  description: 'Пагинация. Можно выбрать страницу.',
+  description: 'Пагинация. Компонент для нумерации страниц и их выбора',
   version: '4.32.0',
   status: 'canary',
   alias: ['страница', 'навигация', 'страницы', 'пагинация'],
