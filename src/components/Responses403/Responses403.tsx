@@ -10,5 +10,10 @@ export const Responses403 = createResponses({
   title: 'Нет доступа',
   description:
     'Если вы уверены, что вам нужна эта страница, запросите доступ у администратора',
-  actions: <Button type="button" label="Запросить доступ" view="ghost" />,
+  actions: (
+    <>
+      <Button type="button" label="Запросить доступ" view="primary" />
+      <Button type="button" label="Вернуться назад" view="ghost" />
+    </>
+  ),
 });
