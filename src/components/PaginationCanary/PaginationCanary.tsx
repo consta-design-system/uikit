@@ -39,7 +39,7 @@ const PaginationRender = <TYPE extends PaginationPropType>(
 ) => {
   const {
     items: itemsProp = 0,
-    value: valueProp = 0,
+    value: valueProp,
     onChange,
     size = paginationPropSizeDefault,
     form = paginationPropFormDefault,
@@ -56,7 +56,7 @@ const PaginationRender = <TYPE extends PaginationPropType>(
     ...otherProps
   } = props;
 
-  const value = Math.max(valueProp, 0);
+  const value = Math.max(valueProp ?? 0, 0);
   const items = Math.max(itemsProp, 0);
   const visibleCount = visibleCountProp
     ? Math.max(visibleCountProp, 1)
@@ -157,7 +157,7 @@ const PaginationRender = <TYPE extends PaginationPropType>(
     <nav
       className={cnPagination({ size, form }, [
         className,
-        cnMixFlex({ wrap: 'nowrap', gap: '3xs' }),
+        cnMixFlex({ wrap: 'nowrap', gap: type === 'input' ? 'xs' : '3xs' }),
       ])}
       ref={navRef}
       {...otherProps}
@@ -194,7 +194,7 @@ const PaginationRender = <TYPE extends PaginationPropType>(
           form={form}
           size={size}
           total={items}
-          value={value}
+          value={!valueProp ? undefined : value}
           onChange={onChange}
           getTotalLabel={getTotalLabel}
         />

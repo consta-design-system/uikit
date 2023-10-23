@@ -22,7 +22,7 @@ const Variants = () => {
   const visibleCount = useNumber('visibleCount', 7);
   const form = useSelect('form', paginationPropForm, paginationPropFormDefault);
   const size = useSelect('size', paginationPropSize, paginationPropSizeDefault);
-  const type = useSelect('type', paginationPropType, 'input');
+  const type = useSelect('type', paginationPropType, 'default');
   const showFirstPage = useBoolean('showFirstPage', true);
   const showLastPage = useBoolean('showLastPage', true);
   const withOuterMastArrows = useBoolean('withOuterMastArrows', true);

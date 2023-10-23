@@ -209,7 +209,7 @@ export type PaginationArrowProps = PropsWithHTMLAttributes<
   HTMLButtonElement
 >;
 
-export type PaginationItemProps<AS extends AsTags = 'div'> =
+export type PaginationItemProps<AS extends AsTags = 'button'> =
   PropsWithAsAttributes<
     {
       form?: PaginationPropForm;
@@ -221,7 +221,7 @@ export type PaginationItemProps<AS extends AsTags = 'div'> =
     AS
   >;
 
-export type PaginationItemComponent = <AS extends AsTags = 'div'>(
+export type PaginationItemComponent = <AS extends AsTags = 'button'>(
   props: PaginationItemProps<AS>,
 ) => React.ReactElement | null;
 

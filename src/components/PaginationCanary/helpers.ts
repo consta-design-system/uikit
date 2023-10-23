@@ -84,6 +84,7 @@ export const getPagesArray = (params: {
     pages.push({
       key: 1,
       page: 1,
+      clickable: true,
       label: '1',
     });
     pages.push({
@@ -117,6 +118,7 @@ export const getPagesArray = (params: {
       page: fixedIndex,
       label: fixedIndex.toString(),
       active: fixedIndex === currentPage,
+      clickable: true,
     });
   }
 
@@ -131,6 +133,7 @@ export const getPagesArray = (params: {
       key: totalPages,
       page: totalPages,
       label: totalPages.toString(),
+      clickable: true,
     });
   }
 

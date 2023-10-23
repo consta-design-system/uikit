@@ -17,10 +17,10 @@ const cnPaginationItem = cn('PaginationItem');
 
 const PaginationItemRender = (
   props: PaginationItemProps,
-  ref: React.Ref<HTMLDivElement>,
+  ref: React.Ref<HTMLButtonElement>,
 ) => {
   const {
-    as = 'div',
+    as = 'button',
     label,
     active,
     clickable = true,
@@ -41,6 +41,7 @@ const PaginationItemRender = (
         cnMixFlex({ align: 'center', justify: 'center', flex: 'inline-flex' }),
         cnMixFocus(),
       ])}
+      // @ts-ignore Так как иначе ругается на ref из-за того что может быть как div так и button
       ref={ref}
     >
       {label}

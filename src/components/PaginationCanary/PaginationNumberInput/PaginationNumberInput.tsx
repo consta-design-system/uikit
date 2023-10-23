@@ -1,6 +1,6 @@
 import './PaginationNumberInput.css';
 
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useState } from 'react';
 
 import { Text } from '##/components/Text';
 import { TextField, useIMask } from '##/components/TextField';
@@ -53,8 +53,12 @@ export const PaginationNumberInput = forwardRef<
       return;
     }
     setStringValue(stringValue);
-
     const onChange = onChangeRef.current;
+
+    if (stringValue === null) {
+      return;
+    }
+
     const value = valueRef.current;
 
     const pageNumber = Number(stringValue);
@@ -74,11 +78,7 @@ export const PaginationNumberInput = forwardRef<
     maskOptions: {
       mask: Number,
       scale: 0,
-      thousandsSeparator: '',
-      padFractionalZeros: false,
-      normalizeZeros: false,
-      radix: ',',
-      mapToRadix: ['.'],
+      thousandsSeparator: ' ',
       min: 1,
       max: total,
     },
@@ -89,6 +89,27 @@ export const PaginationNumberInput = forwardRef<
       setStringValue(value?.toString() ?? null);
     }
   }, [value]);
+
+  const handleKeyDown: React.KeyboardEventHandler = useCallback(
+    (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        return;
+      }
+      e.stopPropagation();
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setStringValue((value) =>
+          Math.min(Number(value) + 1, total).toString(),
+        );
+        return;
+      }
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setStringValue((value) => Math.max(Number(value) - 1, 1).toString());
+      }
+    },
+    [total],
+  );
 
   return (
     <div
@@ -104,6 +125,7 @@ export const PaginationNumberInput = forwardRef<
         size={size}
         form={form}
         inputRef={inputRef}
+        onKeyDown={handleKeyDown}
         className={cnPaginationNumberInput('Input')}
       />
       {isNotNil(total) && (

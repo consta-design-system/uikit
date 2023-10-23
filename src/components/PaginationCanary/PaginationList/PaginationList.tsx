@@ -72,8 +72,10 @@ const PaginationListRender = <ITEM extends PaginationBaseItemDefault>(
       ])}
       {...otherProps}
     >
-      {items.map((item, index) => (
-        <React.Fragment key={cnPaginationList('Item', { index })}>
+      {items.map((item) => (
+        <React.Fragment
+          key={cnPaginationList('Item', { key: getItemKey(item) })}
+        >
           {renderItem(item)}
         </React.Fragment>
       ))}

@@ -2,7 +2,10 @@
   --pagination-item-bg: transparent;
   width: var(--pagination-item-size);
   height: var(--pagination-item-size);
+  margin: 0;
+  color: var(--color-control-typo-ghost);
   background: var(--pagination-item-bg);
+  border: none;
   font-size: var(--pagination-item-font-size);
   line-height: var(--space-m);
   transition: background-color 0.3s;
