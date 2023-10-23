@@ -64,6 +64,7 @@ export type BookmarkTabsPropOnChange<ITEM> = (
 
 export type BookmarkTabsRenderItemProps<ITEM> = {
   item: ITEM;
+  hovered?: boolean;
   onClick: React.MouseEventHandler;
   active?: boolean;
   onClose?: React.MouseEventHandler;
@@ -73,7 +74,6 @@ export type BookmarkTabsRenderItemProps<ITEM> = {
   bordered?: boolean;
   tabWidth?: string;
   tabRef?: React.RefObject<HTMLElement>;
-  controlRef?: React.RefObject<HTMLElement>;
 } & Omit<BookmarkTabsItemDefault, 'key' | 'ref'>;
 
 export type BookmarkTabsPropRenderItem<ITEM> = (
@@ -118,6 +118,7 @@ export type BookmarkTabsComponent = <ITEM>(
 export type BookmarkTabsTabProps<AS extends AsTags = 'div'> =
   PropsWithAsAttributes<
     {
+      hovered?: boolean;
       size: BookmarkTabsPropSize;
       form: BookmarkTabsPropForm;
       view: BookmarkTabsPropView;
@@ -125,7 +126,6 @@ export type BookmarkTabsTabProps<AS extends AsTags = 'div'> =
       tabWidth?: string;
       bordered?: boolean;
       tabRef?: React.RefObject<HTMLElement>;
-      controlRef?: React.RefObject<HTMLElement>;
       fixed?: boolean;
       onClose?: React.ReactEventHandler;
     },
