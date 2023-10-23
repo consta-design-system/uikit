@@ -65,6 +65,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         {(animate) => (
           <ThemeContext.Provider value={value}>
             <Popover
+              {...otherProps}
               arrowOffset={ARROW_OFFSET + ARROW_SIZE}
               offset={ARROW_SIZE + ARROW_OFFSET / 2 + offset}
               onSetDirection={onSetDirection}
@@ -78,7 +79,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 ['--popover-arrow-offset' as string]: `${ARROW_OFFSET}px`,
                 ...style,
               }}
-              {...otherProps}
             >
               <div className={cnTooltip('Background')} />
               <div
