@@ -15,7 +15,7 @@ export const ResponsesDeleted = createResponses({
       <Button
         type="button"
         label="Вернуть на место"
-        className={cnMixSpace({ mL: 's' })}
+        className={cnMixSpace({ mR: 's' })}
       />
       <Button type="button" label="Отлично!" view="ghost" />
     </>

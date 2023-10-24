@@ -17,7 +17,7 @@ export const Responses403 = createResponses({
         type="button"
         label="Запросить доступ"
         view="primary"
-        className={cnMixSpace({ mL: 's' })}
+        className={cnMixSpace({ mR: 's' })}
       />
       <Button type="button" label="Вернуться назад" view="ghost" />
     </>
