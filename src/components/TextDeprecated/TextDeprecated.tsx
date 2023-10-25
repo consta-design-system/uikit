@@ -2,7 +2,7 @@ import './Text.css';
 
 import React from 'react';
 
-import { cn } from '../../utils/bem';
+import { cnDeprecated } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 
 export const textPropAlign = ['left', 'center', 'right'] as const;
@@ -98,7 +98,7 @@ export type TextProps = {
   truncate?: boolean;
 };
 
-export const cnText = cn('Text');
+export const cnText = cnDeprecated('Text');
 
 export const Text = forwardRefWithAs<TextProps>((props, ref) => {
   const {
@@ -108,17 +108,17 @@ export const Text = forwardRefWithAs<TextProps>((props, ref) => {
     decoration,
     display,
     font,
-    lineHeight,
-    size,
+    lineHeight = textPropLineHeightDefault,
+    size = textPropSizeDefault,
     spacing,
     fontStyle,
     transform,
-    view,
+    view = textPropViewDefault,
     weight,
     width,
     className,
     children,
-    truncate,
+    truncate = false,
     ...otherProps
   } = props;
 
