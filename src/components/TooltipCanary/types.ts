@@ -1,5 +1,5 @@
 import { ClickOutsideHandler } from '##/hooks/useClickOutside/useClickOutside';
-import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
+import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
 import { Direction, PositioningProps } from '../Popover/Popover';
 
@@ -15,7 +15,7 @@ export const tooltipPropStatus = [
 ] as const;
 export type TooltipPropStatus = typeof tooltipPropStatus[number];
 
-export type TooltipProps = PropsWithHTMLAttributesAndRef<
+export type TooltipProps = PropsWithJsxAttributes<
   {
     isOpen?: boolean;
     size?: TooltipPropSize;
@@ -29,6 +29,5 @@ export type TooltipProps = PropsWithHTMLAttributesAndRef<
     className?: string;
     offset?: number;
     onSetDirection?: (direction: Direction) => void;
-  } & PositioningProps,
-  HTMLDivElement
+  } & PositioningProps
 >;
