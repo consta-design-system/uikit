@@ -19,12 +19,13 @@ const cnPaginationVariants = cn('PaginationVariants');
 
 const Variants = () => {
   const pages = useNumber('totalPages', 15);
-  const visibleCount = useNumber('visibleCount', 7);
   const form = useSelect('form', paginationPropForm, paginationPropFormDefault);
   const size = useSelect('size', paginationPropSize, paginationPropSizeDefault);
   const type = useSelect('type', paginationPropType, 'default');
-  const showFirstPage = useBoolean('showFirstPage', true);
-  const showLastPage = useBoolean('showLastPage', true);
+  const showFirstPage = useBoolean('showFirstPage', true, type === 'default');
+  const showLastPage = useBoolean('showLastPage', true, type === 'default');
+  const visibleCount = useNumber('visibleCount', 7, type === 'default');
+
   const withOuterMastArrows = useBoolean('withOuterMastArrows', true);
   const arrowsType = useSelect(
     'arrowsType',
