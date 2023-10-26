@@ -1,16 +1,13 @@
 import React, { useCallback, useRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import {
   Tooltip,
   TooltipProps as TooltipComponentProps,
-} from '##/components/Tooltip';
+} from '##/components/TooltipCanary';
 import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
 import { useMutableRef } from '##/hooks/useMutableRef';
-import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
-import { isNotNil } from '##/utils/type-guards';
 
 export const withTooltipPropMode = ['mouseover', 'click'] as const;
 export const withTooltipPropModeDefault = withTooltipPropMode[0];
@@ -64,7 +61,6 @@ export function withTooltip(hocProps?: TooltipProps) {
 
         const [visible, setVisible] = useFlag();
         const acnortRef = useRef<HTMLElement>(null);
-        const tooltipRef = useRef<HTMLDivElement>(null);
 
         const hoverStateRef = useRef<HoverState>({
           tooltip: false,
@@ -151,32 +147,17 @@ export function withTooltip(hocProps?: TooltipProps) {
               onMouseLeave={acnorOnMouseLeave}
               ref={useForkRef([acnortRef, ref])}
             />
-            {isNotNil(content) && (
-              <Transition
-                in={visible}
-                unmountOnExit
-                timeout={animateTimeout}
-                nodeRef={tooltipRef}
-              >
-                {(animate) => {
-                  return (
-                    <Tooltip
-                      {...otherTooltipProps}
-                      className={cnMixPopoverAnimate({ animate }, [
-                        otherTooltipProps.className,
-                      ])}
-                      ref={tooltipRef}
-                      anchorRef={acnortRef}
-                      onClickOutside={tooltipOnClickOutside}
-                      onMouseEnter={tooltipOnMouseEnter}
-                      onMouseLeave={tooltipOnMouseLeave}
-                    >
-                      {content}
-                    </Tooltip>
-                  );
-                }}
-              </Transition>
-            )}
+            <Tooltip
+              {...otherTooltipProps}
+              isOpen={visible && !!content}
+              className={otherTooltipProps.className}
+              anchorRef={acnortRef}
+              onClickOutside={tooltipOnClickOutside}
+              onMouseEnter={tooltipOnMouseEnter}
+              onMouseLeave={tooltipOnMouseLeave}
+            >
+              {content}
+            </Tooltip>
           </>
         );
         // привел к типам, так как прокинутый компонент может иметь джененрики и они потеряются за хоком
