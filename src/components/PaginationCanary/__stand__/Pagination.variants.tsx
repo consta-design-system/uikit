@@ -33,7 +33,7 @@ const Variants = () => {
     'withHotkey',
   );
 
-  const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const [currentPage, setCurrentPage] = React.useState<number>(14);
 
   const hotKeys: [PaginationPropHotKey, PaginationPropHotKey] = [
     {

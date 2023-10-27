@@ -51,6 +51,81 @@ export const withDefaultGetters = (props: PaginationBaseProps) => ({
   getItemRef: props.getItemRef ?? defaultGetItemRef,
 });
 
+const getMinVisibleCount = (showFirstPage: boolean, showLastPage: boolean) => {
+  if (showFirstPage || showLastPage) {
+    return 5;
+  }
+  if (showFirstPage && showLastPage) {
+    return 7;
+  }
+
+  return 3;
+};
+
+const range = (start: number, end: number) =>
+  Array.from({ length: Math.abs(end - start + 1) }).map((_el, i) =>
+    Math.floor(start + i),
+  );
+
+const generateArr = (params: {
+  page: number;
+  count: number;
+  visibleCount: number;
+  showFirstPage?: boolean;
+  showLastPage?: boolean;
+}) => {
+  const {
+    count,
+    page,
+    showFirstPage = false,
+    showLastPage = false,
+    visibleCount: visibleCountProp,
+  } = params;
+
+  let visibleCount = visibleCountProp;
+
+  const minVisibleCount = getMinVisibleCount(showFirstPage, showLastPage);
+
+  if (minVisibleCount >= count) {
+    visibleCount = count;
+  } else {
+    visibleCount = Math.min(count, Math.max(visibleCountProp, minVisibleCount));
+  }
+
+  const boundaryStart = showFirstPage ? 2 : 0;
+  const boundaryEnd = showLastPage ? 2 : 0;
+
+  const res = [];
+
+  const siblingsStart =
+    Math.floor((visibleCount - boundaryEnd - boundaryStart) / 2) || 0;
+  const siblingsEnd =
+    Math.floor((visibleCount - boundaryEnd - boundaryStart - 1) / 2) || 0;
+
+  let start = 1;
+  let end = count;
+
+  if (visibleCount - boundaryEnd >= page + siblingsEnd) {
+    end = visibleCount - (showLastPage ? 2 : 0);
+  } else if (page - siblingsStart > count - visibleCount + boundaryStart) {
+    start = count - visibleCount + (showFirstPage ? 3 : 1);
+  } else {
+    start = page - siblingsStart;
+    end = page + siblingsEnd;
+  }
+
+  if (showFirstPage && start !== 1) {
+    res.push(1, '...');
+  }
+  res.push(...range(Math.floor(start), Math.floor(end)));
+
+  if (showLastPage && end !== count) {
+    res.push('...', count);
+  }
+
+  return res;
+};
+
 export const getPagesArray = (params: {
   currentPage: number;
   totalPages: number;
@@ -58,86 +133,20 @@ export const getPagesArray = (params: {
   showFirstPage?: boolean;
   showLastPage?: boolean;
 }): PaginationItem[] => {
-  const {
-    totalPages,
-    currentPage,
-    showFirstPage,
-    showLastPage,
-    visibleCount: visibleCountProp,
-  } = params;
+  const { totalPages, currentPage, ...rest } = params;
 
-  const visibleCount = Math.min(visibleCountProp, totalPages);
+  const count = Math.max(totalPages, 1);
+  const page = Math.min(count, Math.max(1, currentPage));
 
-  const delta = 2; // Количество элементов, которое нужно пройти для появления многоточия
-  const offset = 0; // Количество страниц перед выбранной
-
-  const showFirst =
-    showFirstPage && visibleCount < totalPages && currentPage > delta + offset;
-  const showLast =
-    showLastPage &&
-    visibleCount < totalPages &&
-    currentPage + visibleCount - (showFirst ? 2 : 0) - delta < totalPages;
-
-  const pages: PaginationItem[] = [];
-
-  if (showFirst) {
-    pages.push({
-      key: 1,
-      page: 1,
-      clickable: true,
-      label: '1',
-    });
-    pages.push({
-      key: 2,
-      page: 2,
-      clickable: false,
-      label: '...',
-    });
-  }
-
-  const stopPage = Math.min(
-    currentPage <= delta
-      ? visibleCount - (showLast ? 2 : 0)
-      : Math.max(currentPage, 1) -
-          offset +
-          visibleCount -
-          (showLast ? 2 : 0) -
-          (showFirst ? 2 : 0) -
-          1,
-    totalPages - (showLast ? 2 : 0),
-  );
-  const startPage =
-    currentPage + visibleCount - (showFirst ? 2 : 0) - delta < totalPages
-      ? Math.max(currentPage <= delta ? 1 : currentPage, 1) - offset
-      : totalPages - visibleCount + (showFirst ? 2 : 0) + 1;
-
-  for (let i = startPage; i <= stopPage; i++) {
-    const fixedIndex = Number(i.toFixed());
-    pages.push({
-      key: fixedIndex,
-      page: fixedIndex,
-      label: fixedIndex.toString(),
-      active: fixedIndex === currentPage,
-      clickable: true,
-    });
-  }
-
-  if (showLast) {
-    pages.push({
-      key: totalPages - 1,
-      page: totalPages - 1,
-      label: '...',
-      clickable: false,
-    });
-    pages.push({
-      key: totalPages,
-      page: totalPages,
-      label: totalPages.toString(),
-      clickable: true,
-    });
-  }
-
-  return pages;
+  return generateArr({ page, count, ...rest }).map((el, i) => {
+    return {
+      key: typeof el === 'string' ? totalPages + i : el,
+      label: el.toString(),
+      page: typeof el === 'string' ? i : el,
+      active: typeof el === 'number' ? el === page : false,
+      clickable: typeof el !== 'number',
+    };
+  });
 };
 
 export const paginationArrowIconsMap: Record<

@@ -56,9 +56,8 @@ const PaginationListRender = <ITEM extends PaginationBaseItemDefault>(
         onClick={handleClick}
         label={getItemLabel(item)}
         active={active}
-        clickable={getItemClickable?.(item)}
         ref={getItemRef?.(item)}
-        as={getItemAs?.(item)}
+        as={getItemClickable?.(item) ? 'div' : getItemAs?.(item)}
       />
     );
   };

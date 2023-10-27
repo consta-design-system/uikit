@@ -38,7 +38,7 @@ const PaginationRender = <TYPE extends PaginationPropType>(
   ref: React.Ref<HTMLDivElement>,
 ) => {
   const {
-    items: itemsProp = 0,
+    items = 0,
     value: valueProp,
     onChange,
     size = paginationPropSizeDefault,
@@ -51,18 +51,14 @@ const PaginationRender = <TYPE extends PaginationPropType>(
     hotKeys,
     showFirstPage,
     showLastPage,
-    visibleCount: visibleCountProp,
+    visibleCount,
     className,
     ...otherProps
   } = props;
 
   const value = Math.max(valueProp ?? 0, 0);
-  const items = Math.max(itemsProp, 0);
-  const visibleCount = visibleCountProp
-    ? Math.max(visibleCountProp, 1)
-    : undefined;
 
-  const renderButton = (
+  const renderArrow = (
     item: PaginationPropArrow,
     type: PaginationArrowTypes,
     ref: React.Ref<HTMLButtonElement> | undefined,
@@ -118,14 +114,7 @@ const PaginationRender = <TYPE extends PaginationPropType>(
       onChange?.(newValue, { e, value: newValue });
     };
 
-  const {
-    pages,
-    wrapperRef,
-    nextButtonRef,
-    lastButtonRef,
-    firstButtonRef,
-    prevButtonRef,
-  } = usePaginationItems({
+  const { pages, wrapperRef, buttonRefs } = usePaginationItems({
     showFirstPage,
     showLastPage,
     items,
@@ -163,18 +152,18 @@ const PaginationRender = <TYPE extends PaginationPropType>(
       {...otherProps}
     >
       {outerMostArrows?.[0] &&
-        renderButton(
+        renderArrow(
           outerMostArrows[0],
           'first',
-          firstButtonRef,
+          buttonRefs[0],
           undefined,
           handleButtonClick('first'),
         )}
       {arrows?.[0] &&
-        renderButton(
+        renderArrow(
           arrows[0],
           'previous',
-          prevButtonRef,
+          buttonRefs[1],
           hotKeys?.[0],
           handleButtonClick('previous'),
         )}
@@ -200,18 +189,18 @@ const PaginationRender = <TYPE extends PaginationPropType>(
         />
       )}
       {arrows?.[1] &&
-        renderButton(
+        renderArrow(
           arrows[1],
           'next',
-          nextButtonRef,
+          buttonRefs[2],
           hotKeys?.[1],
           handleButtonClick('next'),
         )}
       {outerMostArrows?.[1] &&
-        renderButton(
+        renderArrow(
           outerMostArrows[1],
           'last',
-          lastButtonRef,
+          buttonRefs[3],
           undefined,
           handleButtonClick('last'),
         )}

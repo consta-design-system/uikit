@@ -2,6 +2,7 @@ import './PaginationBase.css';
 
 import React, { forwardRef } from 'react';
 
+import { useRefs } from '##/hooks/useRefs';
 import { cnMixFlex } from '##/mixs/MixFlex';
 import { cn } from '##/utils/bem';
 
@@ -48,7 +49,11 @@ const PaginationBaseRender = (
     ...otherProps
   } = withDefaultGetters(props);
 
-  const { prevButtonRef, nextButtonRef } = usePaginationKeys({
+  const [prevButtonRef, nextButtonRef] = useRefs<HTMLButtonElement>(2);
+
+  usePaginationKeys({
+    prevButtonRef,
+    nextButtonRef,
     containerEventListener,
     hotKeys,
   });

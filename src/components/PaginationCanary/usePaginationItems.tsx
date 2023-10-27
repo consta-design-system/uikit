@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
+import { useRefs } from '##/hooks/useRefs';
+import { useResizeObserved } from '##/hooks/useResizeObserved';
 
 import { getPagesArray } from './helpers';
 import {
@@ -28,6 +30,8 @@ export const itemSizeMap: Record<PaginationPropSize, number> = {
   xs: 24,
 };
 
+const getElementSize = (el: HTMLElement | null) => el?.offsetWidth ?? 0;
+
 export const usePaginationItems = (props: UsePaginationItemsProps) => {
   const {
     visibleCount,
@@ -43,30 +47,33 @@ export const usePaginationItems = (props: UsePaginationItemsProps) => {
   const [maxVisiblePages, setMaxVisiblePages] = useState(7);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const firstButtonRef = useRef<HTMLButtonElement>(null);
-  const lastButtonRef = useRef<HTMLButtonElement>(null);
+  const refs = useRefs<HTMLButtonElement>(4);
 
-  const { prevButtonRef, nextButtonRef } = usePaginationKeys({
+  const [firstWidth, prevWidth, nextWidth, lastWidth] = useResizeObserved(
+    refs,
+    getElementSize,
+  );
+
+  usePaginationKeys({
     containerEventListener,
     hotKeys,
+    prevButtonRef: refs[1],
+    nextButtonRef: refs[2],
   });
-
-  const { width: firstWidth } = useComponentSize(firstButtonRef);
-  const { width: prevWidth } = useComponentSize(prevButtonRef);
-  const { width: nextWidth } = useComponentSize(nextButtonRef);
-  const { width: lastWidth } = useComponentSize(lastButtonRef);
 
   const { width } = useComponentSize(wrapperRef);
 
   useEffect(() => {
     setMaxVisiblePages(
       Math.max(
-        (width - firstWidth - prevWidth - nextWidth - lastWidth) /
-          (itemSizeMap[size] + 2),
+        Math.floor(
+          (width - firstWidth - prevWidth - nextWidth - lastWidth) /
+            (itemSizeMap[size] + 2),
+        ),
         3 + (showFirstPage ? 2 : 0) + (showLastPage ? 2 : 0),
       ),
     );
-  }, [firstWidth, prevWidth, nextWidth, lastWidth, width, size]);
+  }, [pages, firstWidth, prevWidth, nextWidth, lastWidth, width, size]);
 
   useEffect(() => {
     setPages(
@@ -88,10 +95,7 @@ export const usePaginationItems = (props: UsePaginationItemsProps) => {
   ]);
 
   return {
-    prevButtonRef,
-    nextButtonRef,
-    lastButtonRef,
-    firstButtonRef,
+    buttonRefs: refs,
     wrapperRef,
     pages,
   };

@@ -10,19 +10,19 @@
   line-height: var(--space-m);
   transition: background-color 0.3s;
 
-  &_clickable {
+  &:not(div) {
     cursor: pointer;
 
     &:hover {
       --pagination-item-bg: var(--color-control-bg-clear-hover);
     }
+  }
 
-    &.PaginationItem_active {
-      --pagination-item-bg: var(--color-control-bg-ghost);
+  &_active {
+    --pagination-item-bg: var(--color-control-bg-ghost);
 
-      &:hover {
-        --pagination-item-bg: var(--color-control-bg-ghost-hover);
-      }
+    &:hover {
+      --pagination-item-bg: var(--color-control-bg-ghost-hover);
     }
   }
 

@@ -1,41 +1,47 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
 import { PaginationPropHotKey } from './types';
 
 type UsePaginationKeysParams = {
   containerEventListener?: HTMLElement | Window;
   hotKeys?: [PaginationPropHotKey?, PaginationPropHotKey?];
+  nextButtonRef?: React.RefObject<HTMLElement>;
+  prevButtonRef?: React.RefObject<HTMLElement>;
 };
 
 export const usePaginationKeys = (params: UsePaginationKeysParams) => {
-  const { containerEventListener = window, hotKeys } = params;
-
-  const [keys, setKeys] = useState<string[]>([]);
-
-  const nextButtonRef = useRef<HTMLButtonElement>(null);
-  const prevButtonRef = useRef<HTMLButtonElement>(null);
+  const {
+    containerEventListener = window,
+    hotKeys,
+    nextButtonRef,
+    prevButtonRef,
+  } = params;
+  const keys: React.MutableRefObject<string[]> = useRef([]);
+  const hotKeysRef = useRef(hotKeys ?? []);
 
   const keyUpListener: EventListener = (event) => {
     const { key } = event as KeyboardEvent;
-
-    setKeys((prevState) => prevState.filter((hotKey) => hotKey !== key));
+    keys.current = keys.current.filter((hotKey) => hotKey !== key);
   };
 
-  const keyDownListener: EventListener = (event) => {
-    const { key } = event as KeyboardEvent;
+  const keyDownListener: EventListener = useCallback(
+    (event) => {
+      const { key } = event as KeyboardEvent;
 
-    const [start, end] = hotKeys ?? [];
+      const [start, end] = hotKeysRef.current;
 
-    if (start?.keys.includes(key) || end?.keys.includes(key)) {
-      const newKeys = [...keys, key];
-      if (end?.keys.every((hotKey) => newKeys.includes(hotKey))) {
-        nextButtonRef.current?.click();
-      } else if (start?.keys.every((hotKey) => newKeys.includes(hotKey))) {
-        prevButtonRef.current?.click();
+      if (start?.keys.includes(key) || end?.keys.includes(key)) {
+        const newKeys = [...keys.current, key];
+        if (end?.keys.every((hotKey) => newKeys.includes(hotKey))) {
+          nextButtonRef?.current?.click();
+        } else if (start?.keys.every((hotKey) => newKeys.includes(hotKey))) {
+          prevButtonRef?.current?.click();
+        }
+        keys.current = newKeys;
       }
-      setKeys(newKeys);
-    }
-  };
+    },
+    [hotKeys],
+  );
 
   useLayoutEffect(() => {
     containerEventListener.addEventListener('keydown', keyDownListener);
@@ -44,10 +50,11 @@ export const usePaginationKeys = (params: UsePaginationKeysParams) => {
       containerEventListener.removeEventListener('keydown', keyDownListener);
       containerEventListener.removeEventListener('keyup', keyUpListener);
     };
-  }, [nextButtonRef, prevButtonRef, containerEventListener, keys]);
+  }, [nextButtonRef, prevButtonRef, containerEventListener]);
 
-  return {
-    prevButtonRef,
-    nextButtonRef,
-  };
+  useEffect(() => {
+    if (hotKeys) {
+      hotKeysRef.current = hotKeys;
+    }
+  }, [hotKeys]);
 };
