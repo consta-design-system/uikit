@@ -13,6 +13,7 @@ import { AttachmentExampleIcon } from './examples/AttachmentExampleIcon/Attachme
 import { AttachmentExampleName } from './examples/AttachmentExampleName/AttachmentExampleName';
 import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentExampleAs';
 import { AttachmentExampleSize } from './examples/AttachmentExampleSize/AttachmentExampleSize';
+import { AttachmentExampleWithIcon } from './examples/AttachmentExampleWithIcon/AttachmentExampleWithIcon';
 
 ```tsx
 import { Attachment } from '@consta/uikit/Attachment';
@@ -22,6 +23,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 - [Свойства файла](#свойства-файла)
   - [Иконка](#иконка)
+    - [Скрыть иконку](#скрыть-иконку)
   - [Название](#название)
   - [Описание](#описание)
 - [Загрузка файла](#загрузка-файла)
@@ -60,6 +62,27 @@ import { Attachment } from '@consta/uikit/Attachment';
 <AttachmentExampleIcon />
 
 Рядом с иконкой можно разместить информацию о файле.
+
+#### Скрыть иконку
+
+Для того чтобы скрыть иконку укажите значение свойства `withIcon` в `false`.
+
+```tsx
+<Attachment
+  withIcon={true}
+  fileName="Файл"
+  fileExtension="jpg"
+  fileDescription="14 Мб 01.04.2020, 07:01"
+/>
+<Attachment
+  withIcon={false}
+  fileName="Файл"
+  fileExtension="jpg"
+  fileDescription="14 Мб 01.04.2020, 07:01"
+/>
+```
+
+<AttachmentExampleWithIcon />
 
 ### Название
 
@@ -257,9 +280,10 @@ import { Attachment } from '@consta/uikit/Attachment';
 | Свойство                                  | Тип                                     | По умолчанию | Описание                                                         |
 | ----------------------------------------- | --------------------------------------- | ------------ | ---------------------------------------------------------------- |
 | [`size?`](#размер)                        | `'xs', 's', 'm'`                        | `'s'`        | Размер компонента                                                |
-| [`fileName`](#название)                   | `string`                                | -            | Название файла файла                                             |
-| [`fileDescription`](#описание)            | `string`                                | -            | Описание файла файла                                             |
-| [`fileExtension`](#иконка)                | `string`                                | -            | Расширение файла файла                                           |
+| [`fileName`](#название)                   | `string`                                | -            | Название файла                                                   |
+| [`fileDescription`](#описание)            | `string`                                | -            | Описание файла                                                   |
+| [`fileExtension`](#иконка)                | `string`                                | -            | Расширение иконки файла                                          |
+| [`withIcon`](#скрыть-иконку)              | `boolean`                               | `true`       | Отображается ли иконка файла                                     |
 | [`loading`](#загрузка-файла)              | `boolean`                               | -            | Прелоадер загрузки                                               |
 | [`loadingProgress`](#индикаторы-загрузки) | `number`                                | -            | Степень загрузки файла в процентах                               |
 | [`loadingText`](#индикаторы-загрузки)     | `string`                                | `'Loading'`  | Текст, который видно во время загрузки                           |
