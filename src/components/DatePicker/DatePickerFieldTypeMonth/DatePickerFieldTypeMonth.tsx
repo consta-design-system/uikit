@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
-import { maxDateDefault, minDateDefault } from '../../../utils/date';
-import { TextField } from '../../TextField/TextField';
+import { TextField } from '##/components/TextField';
+import { useForkRef } from '##/hooks/useForkRef/useForkRef';
+import { maxDateDefault, minDateDefault } from '##/utils/date';
+
 import {
   datePickerPropFormatTypeMonth,
   datePickerPropPlaceholderTypeMonth,
@@ -24,10 +25,11 @@ export const DatePickerFieldTypeMonth = React.forwardRef<
     maxDate = maxDateDefault,
     value,
     inputRef: inputRefProp,
+    defaultValue,
     ...otherProps
   } = props;
 
-  const { stringValue, inputRef, clearValue } = usePicker({
+  const inputRef = usePicker({
     value,
     format,
     separator,
@@ -41,10 +43,8 @@ export const DatePickerFieldTypeMonth = React.forwardRef<
     <TextField
       {...otherProps}
       type="text"
-      onChange={({ e, value }) => value === null && clearValue(e.nativeEvent)}
       inputContainerRef={ref}
       inputRef={useForkRef([inputRef, inputRefProp])}
-      value={stringValue}
       placeholder={placeholder}
     />
   );

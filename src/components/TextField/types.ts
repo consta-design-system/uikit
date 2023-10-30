@@ -64,6 +64,10 @@ export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
       maxRows?: never;
     };
 
+type InputRef<TYPE> = TYPE extends 'textarea'
+  ? { inputRef?: React.Ref<HTMLTextAreaElement> }
+  : { inputRef?: React.Ref<HTMLInputElement> };
+
 export type TextFieldPropRightSide<TYPE extends string> = TYPE extends
   | 'number'
   | 'password'
@@ -78,6 +82,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
   {
     className?: string;
     value?: TextFieldPropValue;
+    defaultValue?: TextFieldPropValue;
     cols?: number;
     onChange?: TextFieldPropOnChange;
     id?: TextFieldPropId;
@@ -106,7 +111,6 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     step?: number | string | number[];
     tabIndex?: number;
     inputContainerRef?: React.Ref<HTMLDivElement>;
-    inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
     ariaLabel?: string;
     iconSize?: IconPropSize;
     children?: never;
@@ -124,6 +128,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
   },
   HTMLDivElement
 > &
+  InputRef<TYPE> &
   TextFieldPropsTextareaType<TYPE> &
   TextFieldPropRightSide<TYPE> &
   React.RefAttributes<HTMLDivElement>;

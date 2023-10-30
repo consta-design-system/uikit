@@ -39,7 +39,7 @@ import {
   TextFieldExampleMaskPhone,
   TextFieldExampleMaskPassport,
   TextFieldExampleMaskBankAccount,
-  TextFieldExampleMaskPipe,
+  TextFieldExampleMaskSetValue,
 } from './examples/TextFieldExampleMask/TextFieldExampleMask';
 
 ```tsx
@@ -68,7 +68,7 @@ import { TextField } from '@consta/uikit/TextField';
   - [Строки и колонки](#строки-и-колонки)
   - [Минимальная и максимальная высота](#минимальная-и-максимальная-высота)
 - [Маскирование](#маскирование)
-  - [Изменения извне](#изменения-извне)
+  - [Как работает useIMask](#как-работает-useimask)
   - [Примеры](#примеры)
     - [Сумма](#сумма)
     - [Телефон](#телефон)
@@ -463,99 +463,106 @@ export const TextFieldExampleWtihClearButton = () => {
 
 ## Маскирование
 
-Для того чтобы использовать маски вместе с компонентом `TextField` необходимо импортировать хук `useIMask`.
-
-Данный хук принимает три параметра:
-
-- значение
-- функцию обработчик изменений
-- опции для маски
-
+Для того чтобы использовать маски вместе с компонентом `TextField` необходимо импортировать хук [useIMask](https://github.com/uNmAnNeR/imaskjs/tree/master/packages/react-imask#using-hook).
 Подробное описание по составлению собственных масок можно найти в документации к [imask](https://imask.js.org/guide.html).
 
-| Свойство    | Тип                                                                                                              | По умолчанию | Описание           |
-| ----------- | ---------------------------------------------------------------------------------------------------------------- | ------------ | ------------------ |
-| value       | `string, null`                                                                                                   | -            | Значение           |
-| onChange    | `(value: string`<code>&#124;</code>`null, params: { e: Event, value: string`<code>&#124;</code>`null }) => void` | -            | Функция обработчик |
-| maskOptions | `string`<code>&#124;</code>`MASK extends IMask.AnyMaskedOptions`                                                 | -            | Параметры маски    |
+### Как работает useIMask
 
-### Изменения извне
-
-Когда значение `TextField` меняется извне (не из поля ввода), необходимо использовать функцию [IMask.pipe](https://imask.js.org/guide.html#pipe), для преобразования значения под формат маски.
+Значение `TextField` или любого другого `<input/>` меняется через хук со связкой с полем через `ref`.
+Для того чтобы указать значение в момент первого рендера используйте `defaultValue`.
+Для того чтобы изменить поле програмно используйтете `setValue` из хука.
 
 ```tsx
-import IMask from 'imask';
-import React, { useState } from 'react';
+import { ReactMaskOpts, useIMask } from 'react-imask';
+import React, { memo } from 'react';
+import { IconRevert } from '@consta/icons/IconRevert';
+import { Text } from '@consta/uikit/Text';
+import { TextField } from '@consta/uikit/TextFieldCanary';
+import { FieldGroup } from '@consta/uikit/FieldGroup';
+import { FieldLabel } from '@consta/uikit/FieldLabel';
+import { Button } from '@consta/uikit/Button';
 
-import { TextField, useIMask } from '@consta/uikit/TextField';
+const TextFieldMemo = memo(TextField);
+const defaultValue = '9876543210';
 
-export const TextFieldExampleMaskPipe = () => {
-  const [value, setValue] = useState<string | null>(null);
-
-  const mask = '+{7}(000)000-00-00';
-
-  const { inputRef } = useIMask({
-    value,
-    onChange: setValue,
-    maskOptions: mask,
+export const TextFieldExampleMaskSetValue = () => {
+  const { ref, setValue } = useIMask<HTMLInputElement, ReactMaskOpts>({
+    mask: '+{7}(000)000-00-00',
   });
 
   return (
-    <>
-      <TextField
-        value={value}
-        label="Телефон"
-        placeholder="+7(999)999-99-99"
-        inputRef={inputRef}
-      />
-      <Button
-        label="Изменить"
-        onClick={() => setValue(IMask.pipe('79121', { mask }))}
-      />
-    </>
+    <Example>
+      <>
+        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Телефон</FieldLabel>
+        <FieldGroup>
+          <TextFieldMemo
+            placeholder="+7(999)999-99-99"
+            inputRef={ref}
+            defaultValue={defaultValue}
+          />
+          <Button
+            iconLeft={IconRevert}
+            onClick={() => setValue(defaultValue)}
+            title="Сбросить"
+          />
+        </FieldGroup>
+      </>
+    </Example>
   );
 };
 ```
 
-<TextFieldExampleMaskPipe />
+<TextFieldExampleMaskSetValue />
 
 ### Примеры
 
 #### Сумма
 
 ```tsx
-import IMask from 'imask';
-import React, { useState } from 'react';
+import { ReactMaskOpts, useIMask } from 'react-imask';
+import React, { memo } from 'react';
+import { Text } from '@consta/uikit/Text';
+import { TextField } from '@consta/uikit/TextFieldCanary';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
 
-import { TextField, useIMask } from '@consta/uikit/TextField';
+const TextFieldMemo = memo(TextField);
 
 export const TextFieldExampleMaskAmount = () => {
-  const [value, setValue] = useState<string | null>(null);
-
-  const { inputRef } = useIMask({
-    value,
-    onChange: setValue,
-    maskOptions: {
-      mask: Number,
-      min: 0,
-      scale: 2,
-      thousandsSeparator: ' ',
-      radix: ',',
-      padFractionalZeros: true,
-      autofix: true,
-      lazy: true,
-      normalizeZeros: true,
-      mapToRadix: ['.'],
-    },
+  const { ref, value, unmaskedValue } = useIMask<
+    HTMLInputElement,
+    ReactMaskOpts
+  >({
+    mask: Number,
+    min: 0,
+    scale: 2,
+    thousandsSeparator: ' ',
+    radix: ',',
+    padFractionalZeros: true,
+    autofix: true,
+    lazy: true,
+    normalizeZeros: true,
+    mapToRadix: ['.'],
   });
 
   return (
-    <TextField
-      value={value}
-      label="Сумма"
-      placeholder="0"
-      inputRef={inputRef}
-    />
+    <Example>
+      <TextFieldMemo
+        defaultValue="1000000"
+        label="Сумма"
+        placeholder="0"
+        inputRef={ref}
+      />
+      <>
+        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
+        <Text>{value}</Text>
+      </>
+      <>
+        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
+          UnmaskedValue
+        </FieldLabel>
+        <Text>{unmaskedValue}</Text>
+      </>
+    </Example>
   );
 };
 ```
@@ -565,27 +572,41 @@ export const TextFieldExampleMaskAmount = () => {
 #### Телефон
 
 ```tsx
-import IMask from 'imask';
-import React, { useState } from 'react';
+import { ReactMaskOpts, useIMask } from 'react-imask';
+import React, { memo } from 'react';
+import { Text } from '@consta/uikit/Text';
+import { TextField } from '@consta/uikit/TextFieldCanary';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
 
-import { TextField, useIMask } from '@consta/uikit/TextField';
+const TextFieldMemo = memo(TextField);
 
 export const TextFieldExampleMaskPhone = () => {
-  const [value, setValue] = useState<string | null>(null);
-
-  const { inputRef } = useIMask({
-    value,
-    onChange: setValue,
-    maskOptions: '+{7}(000)000-00-00',
+  const { ref, value, unmaskedValue } = useIMask<
+    HTMLInputElement,
+    ReactMaskOpts
+  >({
+    mask: '+{7}(000)000-00-00',
   });
 
   return (
-    <TextField
-      value={value}
-      label="Телефон"
-      placeholder="+7(999)999-99-99"
-      inputRef={inputRef}
-    />
+    <Example col={{ 1: 0, 3: 700 }}>
+      <TextFieldMemo
+        label="Телефон"
+        placeholder="+7(999)999-99-99"
+        inputRef={ref}
+        defaultValue="9876543210"
+      />
+      <>
+        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
+        <Text>{value}</Text>
+      </>
+      <>
+        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
+          UnmaskedValue
+        </FieldLabel>
+        <Text>{unmaskedValue}</Text>
+      </>
+    </Example>
   );
 };
 ```
@@ -595,27 +616,41 @@ export const TextFieldExampleMaskPhone = () => {
 #### Паспорт
 
 ```tsx
-import IMask from 'imask';
-import React, { useState } from 'react';
+import { ReactMaskOpts, useIMask } from 'react-imask';
+import React, { memo } from 'react';
+import { Text } from '@consta/uikit/Text';
+import { TextField } from '@consta/uikit/TextFieldCanary';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
 
-import { TextField, useIMask } from '@consta/uikit/TextField';
+const TextFieldMemo = memo(TextField);
 
 export const TextFieldExampleMaskPassport = () => {
-  const [value, setValue] = useState<string | null>(null);
-
-  const { inputRef } = useIMask({
-    value,
-    onChange: setValue,
-    maskOptions: '00 00 000000',
+  const { ref, value, unmaskedValue } = useIMask<
+    HTMLInputElement,
+    ReactMaskOpts
+  >({
+    mask: '00 00 000000',
   });
 
   return (
-    <TextField
-      value={value}
-      label="Пасспорт"
-      placeholder="00 00 000000"
-      inputRef={inputRef}
-    />
+    <Example col={{ 1: 0, 3: 700 }}>
+      <TextFieldMemo
+        label="Пасспорт"
+        placeholder="00 00 000000"
+        defaultValue="1234567890"
+        inputRef={ref}
+      />
+      <>
+        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
+        <Text>{value}</Text>
+      </>
+      <>
+        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
+          UnmaskedValue
+        </FieldLabel>
+        <Text>{unmaskedValue}</Text>
+      </>
+    </Example>
   );
 };
 ```
@@ -625,27 +660,41 @@ export const TextFieldExampleMaskPassport = () => {
 #### Банковский счет
 
 ```tsx
-import IMask from 'imask';
-import React, { useState } from 'react';
+import { ReactMaskOpts, useIMask } from 'react-imask';
+import React, { memo } from 'react';
+import { Text } from '@consta/uikit/Text';
+import { TextField } from '@consta/uikit/TextFieldCanary';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
 
-import { TextField, useIMask } from '@consta/uikit/TextField';
+const TextFieldMemo = memo(TextField);
 
 export const TextFieldExampleMaskBankAccount = () => {
-  const [value, setValue] = useState<string | null>(null);
-
-  const { inputRef } = useIMask({
-    value,
-    onChange: setValue,
-    maskOptions: '0000 0000 0000 0000',
+  const { ref, value, unmaskedValue } = useIMask<
+    HTMLInputElement,
+    ReactMaskOpts
+  >({
+    mask: '0000 0000 0000 0000',
   });
 
   return (
-    <TextField
-      value={value}
-      label="Номер карты"
-      placeholder="1111 1111 1111 1111"
-      inputRef={inputRef}
-    />
+    <Example col={{ 1: 0, 3: 700 }}>
+      <TextFieldMemo
+        label="Номер карты"
+        placeholder="1111 1111 1111 1111"
+        defaultValue="1111222233334444"
+        inputRef={ref}
+      />
+      <>
+        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
+        <Text>{value}</Text>
+      </>
+      <>
+        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
+          UnmaskedValue
+        </FieldLabel>
+        <Text>{unmaskedValue}</Text>
+      </>
+    </Example>
   );
 };
 ```
@@ -684,7 +733,8 @@ import { TextField, useIMask } from '@consta/uikit/TextField';
 | [`form?`](#форма)                                     | `'default', 'brick', 'round', 'clearRound', 'roundClear', 'clearDefault', 'defaultClear', 'defaultBrick', 'brickDefault', 'brickClear', 'clearBrick', 'clearClear'`, | `'default'`  | Форма поля                                                                                                                                   |
 | [`leftSide?`](#дополнительная-информация)             | `IconComponent, string`                                                                                                                                              | -            | Иконка или текст слева, внутри поля                                                                                                          |
 | [`rightSide?`](#дополнительная-информация)            | `IconComponent, string`                                                                                                                                              | -            | Иконка или текст справа, внутри поля. Не работает с `type='number'`                                                                          |
-| [`value?`](#значение)                                 | `string`, `null`                                                                                                                                                     | -            | Предустановленное значение в поле                                                                                                            |
+| [`value?`](#значение)                                 | `string`, `null`                                                                                                                                                     | -            | Значение в поле                                                                                                                              |
+| [`defaultValue?`]                                     | `string`, `null`                                                                                                                                                     | -            | Предустановленное значение в поле                                                                                                            |
 | [`placeholder?`](#подсказка)                          | `string`                                                                                                                                                             | -            | Подсказка внутри поля                                                                                                                        |
 | `id?`                                                 | `string`                                                                                                                                                             | -            | ID поля в DOM                                                                                                                                |
 | `name?`                                               | `string`                                                                                                                                                             | -            | Имя поля в DOM                                                                                                                               |
