@@ -23,7 +23,7 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
   const [
     { isScrollable, width: containerWidth, paddingLeft: containerPaddingLeft },
   ] = useResizeObserved(
-    React.useMemo(() => [scrollContainerRef], [scrollContainerRef]),
+    React.useMemo(() => [scrollContainerRef], [scrollContainerRef, items]),
     (el) => ({
       isScrollable: el && el.scrollWidth > el.offsetWidth,
       width: el?.offsetWidth ?? 0,
