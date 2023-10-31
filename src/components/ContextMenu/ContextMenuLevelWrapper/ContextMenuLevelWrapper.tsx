@@ -18,6 +18,14 @@ export const ContextMenuLevelWrapper = forwardRef(
       children,
       className,
       size = contextMenuDefaultSize,
+      onClickOutside,
+      spareDirection,
+      possibleDirections,
+      direction,
+      offset,
+      anchorRef,
+      position,
+      onSetDirection,
       ...otherProps
     } = props;
 
@@ -31,6 +39,7 @@ export const ContextMenuLevelWrapper = forwardRef(
               }),
             ])}
             ref={ref}
+            {...otherProps}
           >
             {children}
           </div>
@@ -39,7 +48,19 @@ export const ContextMenuLevelWrapper = forwardRef(
     }
 
     return (
-      <Popover {...otherProps} ref={ref} className={className}>
+      <Popover
+        {...otherProps}
+        ref={ref}
+        className={className}
+        onClickOutside={onClickOutside}
+        spareDirection={spareDirection}
+        possibleDirections={possibleDirections}
+        direction={direction}
+        offset={offset}
+        anchorRef={anchorRef}
+        position={position}
+        onSetDirection={onSetDirection}
+      >
         {children}
       </Popover>
     );

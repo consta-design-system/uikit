@@ -3,8 +3,10 @@ import './GridExampleAlign.css';
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { cn } from '../../../../../utils/bem';
-import { Grid, GridItem } from '../../../Grid';
+import { cn } from '##/utils/bem';
+
+import { Grid } from '../../../Grid';
+import { GridItem } from '../../../GridItem';
 
 const cnGridExampleAlign = cn('GridExampleAlign');
 
@@ -13,7 +15,7 @@ export function GridExampleAlign() {
     <Example col={1}>
       <Grid
         className={cnGridExampleAlign()}
-        cols="2"
+        cols={1}
         gap="xl"
         xAlign="center"
         yAlign="center"

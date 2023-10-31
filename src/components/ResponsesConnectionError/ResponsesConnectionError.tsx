@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ResponsesImageConnectionError } from '../../responsesImages/ResponsesImageConnectionError/ResponsesImageConnectionError';
-import { Button } from '../Button/Button';
-import { createResponses } from '../Responses/createResponses';
+import { Button } from '##/components/Button';
+import { createResponses } from '##/components/Responses/createResponses';
+import { ResponsesImageConnectionError } from '##/responsesImages/ResponsesImageConnectionError/ResponsesImageConnectionError';
 
 export const ResponsesConnectionError = createResponses({
   name: 'ResponsesConnectionError',

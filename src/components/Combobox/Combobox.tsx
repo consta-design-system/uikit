@@ -4,6 +4,8 @@ import { IconClose } from '@consta/icons/IconClose';
 import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
+import { isNotNil } from '##/utils/type-guards';
+
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
@@ -201,9 +203,9 @@ const ComboboxRender = <
             renderValue({ item, handleRemove: getHandleRemoveValue(item) }),
           )}
         {isNotMultipleParams(props) &&
-          props.value &&
+          isNotNil(props.value) &&
           renderValue({ item: props.value })}
-        {(!value || (Array.isArray(value) && value.length === 0)) &&
+        {(!isNotNil(value) || (Array.isArray(value) && value.length === 0)) &&
           !searchValue &&
           placeholder && (
             <span className={cnSelect('Placeholder')} title="placeholder">
@@ -222,7 +224,7 @@ const ComboboxRender = <
           ref={inputRefForRender}
           className={cnSelect('Input', {
             size,
-            hide: !multiple && !!value,
+            hide: !multiple && isNotNil(value),
             multiple,
           })}
           value={searchValue}
@@ -273,7 +275,7 @@ const ComboboxRender = <
             </div>
           </div>
           <span className={cnSelect('Indicators')}>
-            {value && (
+            {isNotNil(value) && (
               <button
                 type="button"
                 onClick={clearValue}

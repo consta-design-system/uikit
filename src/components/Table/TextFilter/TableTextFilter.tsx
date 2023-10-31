@@ -85,7 +85,6 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
           leftSide={IconSearchStroked}
           size="s"
           placeholder="Найти в списке"
-          width="full"
           className={cnTextFilter('Searchbar')}
         />
       )}

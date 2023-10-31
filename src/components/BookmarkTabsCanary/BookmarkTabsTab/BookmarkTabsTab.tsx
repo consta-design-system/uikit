@@ -117,6 +117,7 @@ const BookmarkTabsTabRender = (
               size="xs"
               onlyIcon
               ref={closeButtonRef}
+              type="button"
               view="clear"
               onKeyDown={onCloseKeydown}
               tabIndex={-1}

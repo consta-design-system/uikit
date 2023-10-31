@@ -12,8 +12,6 @@ import {
   textFieldPropStatus,
   textFieldPropView,
   textFieldPropViewDefault,
-  textFieldPropWidth,
-  textFieldPropWidthDefault,
 } from '../TextField';
 
 const Variants = () => {
@@ -33,11 +31,6 @@ const Variants = () => {
   );
   const min = useNumber('min', 0, Boolean(incrementButtons));
   const max = useNumber('max', 150, Boolean(incrementButtons));
-  const width = useSelect(
-    'width',
-    textFieldPropWidth,
-    textFieldPropWidthDefault,
-  );
   const form = useSelect('form', textFieldPropForm, textFieldPropFormDefault);
   const status = useSelect('status', textFieldPropStatus);
   const size = useSelect('size', textFieldPropSize, textFieldPropSizeDefault);
@@ -82,7 +75,6 @@ const Variants = () => {
   return (
     <TextField
       value={value}
-      width={width}
       form={form}
       status={status}
       size={size}

@@ -28,7 +28,6 @@ import {
   TextFieldPropSize,
   TextFieldPropStatus,
   TextFieldPropView,
-  TextFieldPropWidth,
 } from '../../TextField/TextField';
 import {
   datePickerPropSeparatorDefault,
@@ -57,7 +56,6 @@ export type DatePickerFieldTypeDateTimeProps = PropsWithHTMLAttributes<
     view?: TextFieldPropView;
     form?: TextFieldPropForm;
     status?: TextFieldPropStatus;
-    width?: TextFieldPropWidth;
     onFocus?: React.FocusEventHandler<HTMLElement>;
     onBlur?: React.FocusEventHandler<HTMLElement>;
     autoFocus?: boolean;

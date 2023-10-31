@@ -1,0 +1,402 @@
+import { MdxMenu } from '@consta/stand';
+
+import { GridExampleCols } from './examples/GridExampleCols/GridExampleCols';
+import { GridExampleAlign } from './examples/GridExampleAlign/GridExampleAlign';
+import { GridExampleBreakpoints } from './examples/GridExampleBreakpoints/GridExampleBreakpoints';
+import { GridItemExampleCol } from './examples/GridItemExampleCol/GridItemExampleCol';
+import { GridItemExampleColStart } from './examples/GridItemExampleColStart/GridItemExampleColStart';
+import { GridItemExampleRow } from './examples/GridItemExampleRow/GridItemExampleRow';
+import { GridItemExampleRowStart } from './examples/GridItemExampleRowStart/GridItemExampleRowStart';
+import { GridItemExampleOrder } from './examples/GridItemExampleOrder/GridItemExampleOrder';
+import { GridItemExampleBreakpoints } from './examples/GridItemExampleBreakpoints/GridItemExampleBreakpoints';
+import {
+  GridExampleGap,
+  GridExampleColGap,
+  GridExampleRowGap,
+} from './examples/GridExampleGap/GridExampleGap';
+
+```tsx
+import { Grid, GridItem } from '@consta/uikit/Grid';
+```
+
+<MdxMenu>
+
+- [Сетка (Grid)](#сетка-grid)
+  - [Колонки](#колонки)
+  - [Отступы](#отступы)
+  - [Выравнивание внутри ячеек](#выравнивание-внутри-ячеек)
+  - [Breakpoints](#контрольные-точки-для-сетки)
+- [Элемент сетки (GridItem)](#элемент-сетки-griditem)
+  - [Количество колонок](#количество-колонок)
+  - [С какой колонки начинать](#с-какой-колонки-начинать)
+  - [Количество строк](#количество-строк)
+  - [С какой строки начинать](#с-какой-строки-начинать)
+  - [Порядок элементов](#порядок-элементов)
+  - [Breakpoints](#контрольные-точки-для-элемента-сетки)
+- [Адаптивность](#адаптивность)
+- [Импорт](#импорт)
+- [Свойства Grid](#свойства-grid)
+- [Свойства GridItem](#свойства-griditem)
+
+</MdxMenu>
+
+## Сетка (Grid)
+
+Сетку можно настроить: указать количество колонок и отступы между ними, добавить выравнивание.
+
+### Колонки
+
+Чтобы добавить колонки, используйте свойство `cols`.
+
+```tsx
+<Grid cols="2">
+  <GridItem>1</GridItem>
+  <GridItem>2</GridItem>
+  <GridItem>3</GridItem>
+  <GridItem>4</GridItem>
+</Grid>
+```
+
+### Отступы
+
+Вы можете регулировать отступы вокруг строк и колонок:
+
+- за все отступы в таблице отвечает свойство `gap`,
+- за отступы вокруг колонки — `colGap`,
+- за отступы вокруг строки — `rowGap`.
+
+Значения, указанные в `colGap` и `rowGap`, главнее и переопределяют то, что вы указали в `gap`.
+
+```tsx
+<Grid gap="xl" cols="2">
+  <GridItem>1</GridItem>
+  <GridItem>2</GridItem>
+  <GridItem>3</GridItem>
+  <GridItem>4</GridItem>
+</Grid>
+```
+
+<GridExampleGap />
+
+```tsx
+<Grid colGap="xl" cols="2">
+  <GridItem>1</GridItem>
+  <GridItem>2</GridItem>
+  <GridItem>3</GridItem>
+  <GridItem>4</GridItem>
+</Grid>
+```
+
+<GridExampleColGap />
+
+```tsx
+<Grid rowGap="xl" cols="2">
+  <GridItem>1</GridItem>
+  <GridItem>2</GridItem>
+  <GridItem>3</GridItem>
+  <GridItem>4</GridItem>
+</Grid>
+```
+
+<GridExampleRowGap />
+
+### Выравнивание внутри ячеек
+
+Содержимое ячеек можно выровнять:
+
+- по горизонтали с помощью `xAlign`, варианты — `'left'`, `'center'`, `'right'`,
+- по вертикали с помощью `yAlign`, варианты — `'top'` , `'center'` , `'bottom'`.
+
+```tsx
+<Grid cols="2" gap="xl" xAlign="center" yAlign="center">
+  <GridItem>1</GridItem>
+  <GridItem>2</GridItem>
+  <GridItem>3</GridItem>
+  <GridItem>4</GridItem>
+</Grid>
+```
+
+<GridExampleAlign />
+
+### Контрольные точки для сетки
+
+Контрольные точки (breakpoints) нужны, чтобы задавать свойства сетки в зависимости от ширины экрана.
+
+У сетки есть такие контрольные точки:
+
+- `xs`: >= 360px
+- `s`: >= 640px
+- `m`: >= 1024px
+- `l`: >= 1280px
+- `xl`: >= 1440px
+- `2xl`: >= 1920px
+
+В этом примере Grid будет вести себя так:
+
+- `>= 0px`: cols="1" gap="xl"
+- `>= 360px`: cols="1" gap="2xl"
+- `>= 1024px`: cols="2" gap="2xl"
+
+```tsx
+export function GridExampleBreakpoints() {
+  return (
+    <Grid
+      cols="1"
+      gap="xl"
+      breakpoints={{
+        xs: {
+          gap: '2xl',
+        },
+        m: {
+          cols: 2,
+          gap: 'xl',
+        },
+      }}
+    >
+      <GridItem>1</GridItem>
+      <GridItem>2</GridItem>
+      <GridItem>3</GridItem>
+      <GridItem>4</GridItem>
+    </Grid>
+  );
+}
+```
+
+<GridExampleBreakpoints />
+
+## Элемент сетки (GridItem)
+
+Элемент сетки — это условный квадратик, в котором можно разместить контент. Он может занимать одну строчку или несколько, одну или несколько колонок и двигаться по сетке.
+
+### Количество колонок
+
+Чтобы задать количество колонок, которое занимает элемент сетки, используйте свойство `col`.
+
+```tsx
+<Grid cols="2" gap="xl">
+  <GridItem col="2">1</GridItem>
+  <GridItem>2</GridItem>
+  <GridItem>3</GridItem>
+  <GridItem col="2">4</GridItem>
+  <GridItem>5</GridItem>
+  <GridItem>6</GridItem>
+</Grid>
+```
+
+<GridItemExampleCol />
+
+### С какой колонки начинать
+
+Чтобы сместить элемент в нужную колонку, используйте свойство `colStart`.
+
+```tsx
+<Grid cols="3" gap="xl">
+  <GridItem>1</GridItem>
+  <GridItem colStart="3">2</GridItem>
+  <GridItem>3</GridItem>
+  <GridItem colStart="3">4</GridItem>
+</Grid>
+```
+
+<GridItemExampleColStart />
+
+### Количество строк
+
+Чтобы задать количество строк, которое занимает элемент, используйте свойство `row`.
+
+```tsx
+<Grid cols="2" gap="xl">
+  <GridItem>1</GridItem>
+  <GridItem row="3">2</GridItem>
+  <GridItem>3</GridItem>
+  <GridItem>4</GridItem>
+  <GridItem>5</GridItem>
+  <GridItem>6</GridItem>
+</Grid>
+```
+
+<GridItemExampleRow />
+
+### С какой строки начинать
+
+Чтобы сместить элемент в нужную строку, используйте свойство `rowStart`.
+
+```tsx
+<Grid cols="2" gap="xl">
+  <GridItem>1</GridItem>
+  <GridItem>2</GridItem>
+  <GridItem rowStart="3">3</GridItem>
+  <GridItem rowStart="3">4</GridItem>
+</Grid>
+```
+
+<GridItemExampleRowStart />
+
+### Порядок элементов
+
+Двигать элемент относительно других элементов в сетке можно с помощью свойства `order`:
+
+- `order = -1` - подвинуть в начало,
+- `order = 1` - подвинуть в конец,
+- `order = 0` - оставить на месте.
+
+```tsx
+<Grid cols="3" gap="xl">
+  <GridItem>1</GridItem>
+  <GridItem>2</GridItem>
+  <GridItem order="1">3</GridItem>
+  <GridItem>4</GridItem>
+  <GridItem order="-1">5</GridItem>
+  <GridItem>6</GridItem>
+</Grid>
+```
+
+<GridItemExampleOrder />
+
+### Контрольные точки для элемента сетки
+
+Контрольные точки (breakpoints) нужны, чтобы задавать свойства для элемента сетки в зависимости от ширины экрана.
+
+У элемента сетки есть такие контрольные точки:
+
+- `xs`: >= 360px
+- `s`: >= 640px
+- `m`: >= 1024px
+- `l`: >= 1280px
+- `xl`: >= 1440px
+- `2xl`: >= 1920px
+
+```tsx
+<Grid cols="3" gap="xl">
+  <GridItem
+    style={{ background: 'rgb(87, 188, 255)' }} // синяя ячейка
+    row="1"
+    breakpoints={{
+      m: {
+        row: 3,
+      },
+    }}
+  >
+    1
+  </GridItem>
+  <GridItem>2</GridItem>
+  <GridItem
+    style={{ background: '#36acaa' }} // зелёная ячейка
+    order="-1"
+    row="3"
+    breakpoints={{
+      m: {
+        order: 0,
+        row: 1,
+      },
+    }}
+  >
+    3
+  </GridItem>
+  <GridItem>4</GridItem>
+  <GridItem>5</GridItem>
+  <GridItem>6</GridItem>
+  <GridItem>7</GridItem>
+</Grid>
+```
+
+<GridItemExampleBreakpoints />
+
+## Адаптивность
+
+Сетка работает по принципу Mobile First, то есть исходит от меньшего разрешения в сторону большего. Например, если контрольные точки не указаны, заданные правила будут распространяться от минимальной ширины экрана к большей ширине.
+
+На контрольных точках можно менять [любые параметры сетки](#контрольные-точки-для-сетки) или [её отдельных элементов](#контрольные-точки-для-элемента-сетки).
+
+## Импорт
+
+```tsx
+import { Grid, GridItem } from '@consta/uikit/Grid';
+```
+
+## Свойства Grid
+
+```tsx
+type Gap =
+  | 0
+  | '0'
+  | '2xs'
+  | 'xs'
+  | 's'
+  | 'm'
+  | 'l'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl';
+
+type XAlign = 'left' | 'center' | 'right';
+
+type YAlign = 'top' | 'center' | 'bottom';
+
+type Breakpoint = {
+  cols?: Cols;
+  gap?: Gap;
+  colGap?: Gap;
+  rowGap?: Gap;
+  xAlign?: XAlign;
+  yAlign?: YAlign;
+};
+
+type Breakpoints = {
+  'xs'?: Breakpoint;
+  's'?: Breakpoint;
+  'm'?: Breakpoint;
+  'l'?: Breakpoint;
+  'xl'?: Breakpoint;
+  '2xl'?: Breakpoint;
+};
+```
+
+| Свойство                                       | Тип                         | По умолчанию | Описание                                                                        |
+| ---------------------------------------------- | --------------------------- | ------------ | ------------------------------------------------------------------------------- |
+| [`cols?`](#колонки)                            | `number, string`            | -            | Количество колонок (1..12)                                                      |
+| [`gap?`](#отступы)                             | `Gap`                       | -            | Размер отступов между колонками и строками                                      |
+| [`colGap?`](#отступы)                          | `Gap`                       | -            | Размер отступов между колонками                                                 |
+| [`rowGap?`](#отступы)                          | `Gap`                       | -            | Размер отступов между строками                                                  |
+| [`xAlign?`](#выравнивание-внутри-ячеек)        | `'left', 'center','right'`  | -            | Выравнивание по горизонтали                                                     |
+| [`yAlign?`](#выравнивание-внутри-ячеек)        | `'top', 'center', 'bottom'` | -            | Выравнивание по вертикали                                                       |
+| [`breakpoints?`](#контрольные-точки-для-сетки) | `Breakpoints`               | -            | Контрольные точки (breakpoints), задают свойства в зависимости от ширины экрана |
+| `className?`                                   | `string`                    | -            | Дополнительный CSS-класс                                                        |
+| `as?`                                          | `React.ElementType`         | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM                |
+| `ref?`                                         | `React.Ref<HTMLDivElement>` | -            | Ссылка на DOM-элемент компонента                                                |
+
+## Свойства GridItem
+
+```tsx
+type Breakpoint = {
+  col?: number | string;
+  colStart?: number | string;
+  row?: number | string;
+  rowStart?: number | string;
+  order?: number | string;
+};
+
+type Breakpoints = {
+  'xs'?: Breakpoint;
+  's'?: Breakpoint;
+  'm'?: Breakpoint;
+  'l'?: Breakpoint;
+  'xl'?: Breakpoint;
+  '2xl'?: Breakpoint;
+};
+```
+
+| Свойство                                                | Тип                         | По умолчанию | Описание                                                                                  |
+| ------------------------------------------------------- | --------------------------- | ------------ | ----------------------------------------------------------------------------------------- |
+| [`col?`](#количество-колонок)                           | `number`, `string`          | -            | Количество колонок, которое занимает элемент (1..12)                                      |
+| [`colStart?`](#с-какой-колонки-начинать)                | `number`, `string`          | -            | Сдвиг элемента в нужную колонку (1..12)                                                   |
+| [`row?`](#количество-строк)                             | `number`, `string`          | -            | Количество строк, которое занимает элемент (1..4)                                         |
+| [`rowStart?`](#с-какой-строки-начинать)                 | `number`, `string`          | -            | Сдвиг элемента в нужную строку (1..4)                                                     |
+| [`order?`](#порядок-элементов)                          | `number`, `string`          | -            | Порядок элементов относительно друг друга, можно сдвинуть в начало или в конец (-1, 0, 1) |
+| [`breakpoints?`](#контрольные-точки-для-элемента-сетки) | `Breakpoints`               | -            | Контрольные точки (breakpoints), задают свойства в зависимости от ширины экрана           |
+| `className?`                                            | `string`                    | -            | Дополнительный CSS-класс                                                                  |
+| `as?`                                                   | `React.ElementType`         | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM                          |
+| `ref?`                                                  | `React.Ref<HTMLDivElement>` | -            | Ссылка на DOM-элемент компонента                                                          |

@@ -3,6 +3,8 @@ import '../SelectComponents/Select.css';
 import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
+import { isNotNil } from '##/utils/type-guards';
+
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
@@ -166,8 +168,8 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
                 className={cnSelect('FakeField')}
                 readOnly
               />
-              {value && renderValue({ item: value })}
-              {(typeof value === 'undefined' || value === null) && placeholder && (
+              {isNotNil(value) && renderValue({ item: value })}
+              {!isNotNil(value) && placeholder && (
                 <span className={cnSelect('Placeholder')} title="placeholder">
                   {placeholder}
                 </span>
