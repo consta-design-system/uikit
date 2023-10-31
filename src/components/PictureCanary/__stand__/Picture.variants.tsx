@@ -1,5 +1,5 @@
 import { useSelect, useText } from '@consta/stand';
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { Picture } from '##/components/PictureCanary';
 
@@ -27,11 +27,13 @@ const Variants = () => {
   const title = useText('title', 'Заголовок');
   const alt = useText('alt', 'Заголовок');
 
+  const ref = useRef<HTMLDivElement>(null);
+
   return (
     <Picture
       alt={alt}
       title={title}
-      resizeMode={resizeMode}
+      resizeContainer={resizeMode === 'window' ? undefined : ref}
       src={{
         'gpnDefault--0--1x': GPNHeroImageSmall1xDefault,
         'gpnDefault--0--2x': GPNHeroImageSmall2xDefault,

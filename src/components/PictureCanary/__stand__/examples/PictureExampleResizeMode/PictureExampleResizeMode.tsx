@@ -1,7 +1,7 @@
 import './PictureExampleResizeMode.css';
 
 import { Example } from '@consta/stand';
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { cn } from '##/utils/bem';
 
@@ -12,6 +12,8 @@ import { Picture } from '../../../PictureCanary';
 const cnPictureExampleResizeMode = cn('PictureExampleResizeMode');
 
 export const PictureExampleResizeMode = () => {
+  const ref = useRef<HTMLImageElement>(null);
+
   return (
     <Example
       items={['window', 'component'] as ('window' | 'component')[]}
@@ -27,7 +29,8 @@ export const PictureExampleResizeMode = () => {
             dark: ImageDark,
             light: ImageLight,
           }}
-          resizeMode={mode}
+          ref={mode === 'component' ? ref : undefined}
+          resizeContainer={mode === 'component' ? ref : undefined}
           getImageSettings={(key) => {
             if (key === 'dark') {
               return {

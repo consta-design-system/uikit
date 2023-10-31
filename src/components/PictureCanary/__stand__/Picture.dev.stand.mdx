@@ -125,6 +125,8 @@ export const PictureExampleResizeMode = () => {
     };
   };
 
+  const componentRef = useRef<HTMLImageElement>(null);
+
   return (
     <>
       <Picture
@@ -132,7 +134,7 @@ export const PictureExampleResizeMode = () => {
           dark: ImageDark,
           light: ImageLight,
         }}
-        resizeMode="window"
+        resizeContainer={window}
         getImageSettings={getImageSettings}
       />
       <Picture
@@ -140,7 +142,8 @@ export const PictureExampleResizeMode = () => {
           dark: ImageDark,
           light: ImageLight,
         }}
-        resizeMode="component"
+        ref={componentRef}
+        resizeContainer={componentRef}
         getImageSettings={getImageSettings}
       />
     </>
@@ -162,12 +165,12 @@ export type PicturePropGetImageSettings = (image: string) => {
 export type PicturePropSrc = string | Record<string, string>;
 ```
 
-| Свойство                                            | Тип                           | По умолчанию              | Описание                                          |
-| --------------------------------------------------- | ----------------------------- | ------------------------- | ------------------------------------------------- |
-| [`src?`](#изображения)                              | `PicturePropSrc`              | -                         | Изображение или объект с изображениями            |
-| [`getImageSettings?`](#функция-определения-свойств) | `PicturePropGetImageSettings` | `defaultGetImageSettings` | Функция получения параметров отображения картинки |
-| [`resizeMode?`](#адаптивность)                      | `'window', 'component'`       | `'window'`                | Режим адаптивности                                |
-| `alt?`                                              | `string`                      | -                         | Альтернативное текстовое описание изображения     |
-| `title?`                                            | `string`                      | -                         | Отображаемая подзказка                            |
-| `className?`                                        | `string`                      | -                         | Дополнительный CSS-класс                          |
-| `ref`                                               | `React.Ref<HTMLDivElement>`   | -                         | Ссылка на корневой DOM-элемент этого компонента   |
+| Свойство                                            | Тип                              | По умолчанию              | Описание                                                   |
+| --------------------------------------------------- | -------------------------------- | ------------------------- | ---------------------------------------------------------- |
+| [`src?`](#изображения)                              | `PicturePropSrc`                 | -                         | Изображение или объект с изображениями                     |
+| [`getImageSettings?`](#функция-определения-свойств) | `PicturePropGetImageSettings`    | `defaultGetImageSettings` | Функция получения параметров отображения картинки          |
+| [`resizeContainer?`](#адаптивность)                 | `Window, React.Ref<HTMLElement>` | `window`                  | Контейнер, относительно которого просчитываем адаптивность |
+| `alt?`                                              | `string`                         | -                         | Альтернативное текстовое описание изображения              |
+| `title?`                                            | `string`                         | -                         | Отображаемая подзказка                                     |
+| `className?`                                        | `string`                         | -                         | Дополнительный CSS-класс                                   |
+| `ref`                                               | `React.Ref<HTMLDivElement>`      | -                         | Ссылка на корневой DOM-элемент этого компонента            |

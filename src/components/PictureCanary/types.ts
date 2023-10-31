@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export type PicturePropGetImageSettings = (image: string) => {
@@ -13,7 +15,9 @@ export type PictureProps = PropsWithHTMLAttributesAndRef<
     alt?: string;
     src: PicturePropSrc;
     getImageSettings?: PicturePropGetImageSettings;
-    resizeMode?: 'component' | 'window';
+    resizeContainer?:
+      | Window
+      | React.RefObject<HTMLElement | SVGGraphicsElement>;
   },
   HTMLImageElement
 >;

@@ -1,6 +1,6 @@
-import React, { forwardRef, useMemo, useRef } from 'react';
+import React, { forwardRef, useMemo } from 'react';
 
-import { getLastPoint, useBreakpoints } from '##/hooks/useBreakpointsCanary';
+import { getLastPoint, useBreakpoints } from '##/hooks/useBreakpoints';
 import { cnCanary } from '##/utils/bem';
 
 import { useTheme } from '../Theme';
@@ -15,14 +15,12 @@ export const Picture = forwardRef<HTMLImageElement, PictureProps>(
       alt = '',
       src: srcProp,
       getImageSettings = defaultGetImageSettings,
-      resizeMode = 'window',
+      resizeContainer = window,
       className,
       ...otherProps
     } = props;
 
     const { theme } = useTheme();
-
-    const componentRef = useRef<HTMLDivElement>(null);
 
     const convertedImages: Array<{
       theme?: string;
@@ -48,7 +46,8 @@ export const Picture = forwardRef<HTMLImageElement, PictureProps>(
       getLastPoint(
         useBreakpoints({
           map: sizes,
-          container: resizeMode === 'component' ? componentRef : undefined,
+          isActive: true,
+          ref: resizeContainer instanceof Window ? undefined : resizeContainer,
         }),
       ),
     );
