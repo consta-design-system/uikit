@@ -13,6 +13,7 @@ import { AttachmentExampleIcon } from './examples/AttachmentExampleIcon/Attachme
 import { AttachmentExampleName } from './examples/AttachmentExampleName/AttachmentExampleName';
 import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentExampleAs';
 import { AttachmentExampleSize } from './examples/AttachmentExampleSize/AttachmentExampleSize';
+import { AttachmentExampleWithIcon } from './examples/AttachmentExampleWithIcon/AttachmentExampleWithIcon';
 
 ```tsx
 import { Attachment } from '@consta/uikit/Attachment';
@@ -22,6 +23,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 - [Свойства файла](#свойства-файла)
   - [Иконка](#иконка)
+    - [Скрыть иконку](#скрыть-иконку)
   - [Название](#название)
   - [Описание](#описание)
 - [Загрузка файла](#загрузка-файла)
@@ -61,6 +63,27 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 Рядом с иконкой можно разместить информацию о файле.
 
+#### Скрыть иконку
+
+Для того чтобы скрыть иконку укажите значение свойства `withIcon` в `false`.
+
+```tsx
+<Attachment
+  withIcon
+  fileName="Файл"
+  fileExtension="jpg"
+  fileDescription="14 Мб 01.04.2020, 07:01"
+/>
+<Attachment
+  withIcon={false}
+  fileName="Файл"
+  fileExtension="jpg"
+  fileDescription="14 Мб 01.04.2020, 07:01"
+/>
+```
+
+<AttachmentExampleWithIcon />
+
 ### Название
 
 За название отвечает свойство `fileName`. Сюда можно подставить имя файла, но лучше придумать красивое название, которое будет понятно пользователям.
@@ -72,6 +95,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   className={cnAttachmentExampleList()}
   fileName="Фотография"
   fileExtension="jpg"
+  withIcon
   fileDescription="1,5 Mб 19.07.2020, 16:11"
 />
 
@@ -79,6 +103,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   className={cnAttachmentExampleList()}
   fileName="Скан паспорта"
   fileExtension="pdf"
+  withIcon
   fileDescription="1,5 Mб 19.07.2020, 16:12"
 />
 
@@ -86,6 +111,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   className={cnAttachmentExampleList()}
   fileName="Сопроводительное письмо"
   fileExtension="docx"
+  withIcon
   fileDescription="225 Mб 19.07.2020, 17:15"
 />
 ```
@@ -103,6 +129,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   className={cnAttachmentExampleName()}
   fileName="Файл с нормальным описанием"
   fileExtension="jpg"
+  withIcon
   fileDescription="14 Мб 01.04.2020, 07:01"
 />
 
@@ -110,6 +137,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   className={cnAttachmentExampleName()}
   fileName="Файл с каким попало описанием"
   fileExtension="bzz"
+  withIcon
   fileDescription="Крекс, пекс, фекс"
 />
 ```
@@ -132,6 +160,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 <Attachment
   fileName="Инструкция по сборке марсохода"
   fileExtension="docx"
+  withIcon
   fileDescription="25,5 Mб 19.07.2020, 21:12"
   loadingText="Я ещё не загрузился, уже загружено"
   loading
@@ -153,11 +182,13 @@ import { Attachment } from '@consta/uikit/Attachment';
 <Attachment
   fileName="Марсианский закат"
   fileExtension="jpg"
+  withIcon
   errorText="Фотография не загрузилась"
 />
 <Attachment
   fileName="Марсианский закат"
   fileExtension="jpg"
+  withIcon
   errorText="Файл слишком большой, максимум 100 ТБ"
 />
 ```
@@ -189,6 +220,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 <Attachment
   fileName="my_tale_about_mars_variant_121_final"
   fileExtension="docx"
+  withIcon
   fileDescription="1,5 Mб 21.02.2051, 14:12"
   loadingText="Загрузка"
   buttonIcon={IconTrash}
@@ -213,16 +245,19 @@ import { Attachment } from '@consta/uikit/Attachment';
   size="xs"
   fileName="Инструкция по сборке марсохода"
   fileExtension="pdf"
+  withIcon
 />
 <Attachment
   size="s"
   fileName="Инструкция по сборке марсохода"
   fileExtension="pdf"
+  withIcon
 />
 <Attachment
   size="m"
   fileName="Инструкция по сборке марсохода"
   fileExtension="pdf"
+  withIcon
 />
 ```
 
@@ -240,6 +275,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   href="https://www.youtube.com/watch?v=dAZKu_ojb14"
   fileName="Вести с марса"
   fileExtension="mov"
+  withIcon
   fileDescription="Нажми меня"
 />
 ```
@@ -260,6 +296,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 | [`fileName`](#название)                   | `string`                                | -            | Название файла                                                   |
 | [`fileDescription`](#описание)            | `string`                                | -            | Описание файла                                                   |
 | [`fileExtension`](#иконка)                | `string`                                | -            | Расширение иконки файла                                          |
+| [`withIcon`](#скрыть-иконку)              | `boolean`                               | `true`       | Отображается ли иконка файла                                     |
 | [`loading`](#загрузка-файла)              | `boolean`                               | -            | Прелоадер загрузки                                               |
 | [`loadingProgress`](#индикаторы-загрузки) | `number`                                | -            | Степень загрузки файла в процентах                               |
 | [`loadingText`](#индикаторы-загрузки)     | `string`                                | `'Loading'`  | Текст, который видно во время загрузки                           |
@@ -275,11 +312,11 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 ## Пример
 
-```ts
+```tsx
 import React from 'react';
 import { Attachment } from '@consta/uikit/Attachment';
 
 const App = () => {
-  return <Attachment fileName="Документация" extension="doc" />;
+  return <Attachment fileName="Документация" extension="doc" withIcon />;
 };
 ```

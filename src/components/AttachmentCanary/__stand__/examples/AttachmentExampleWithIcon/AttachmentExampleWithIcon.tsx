@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Attachment } from '##/components/Attachment/Attachment';
+import { Attachment } from '##/components/AttachmentCanary';
 
 export const AttachmentExampleWithIcon = () => {
   return (

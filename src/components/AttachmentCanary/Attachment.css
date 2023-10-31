@@ -1,0 +1,63 @@
+.canary--Attachment {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--space-xs);
+  background: var(--color-control-bg-clear);
+  border-radius: var(--control-radius);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+
+  &-File {
+    flex: none;
+    margin-right: var(--space-xs);
+    transition: opacity 0.2s;
+
+    &_error {
+      opacity: 0.4;
+    }
+  }
+
+  &-Button {
+    flex: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &-Content {
+    overflow: hidden;
+    flex: 1;
+    word-wrap: break-word;
+
+    & > .Text:not(:first-child) {
+      margin-top: var(--space-2xs);
+    }
+
+    &:not(:last-child) {
+      margin-right: var(--space-xs);
+    }
+  }
+
+  &_withAction {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--color-control-bg-clear-hover);
+    }
+  }
+
+  &_withOnButtonAction {
+    &:hover &-Button {
+      opacity: 1;
+    }
+
+    &:hover {
+      background: var(--color-control-bg-clear-hover);
+
+      .Attachment-Button {
+        opacity: 1;
+      }
+    }
+  }
+}

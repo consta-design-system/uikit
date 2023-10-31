@@ -6,7 +6,7 @@ import React from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { Attachment } from '../Attachment';
+import { Attachment } from '../AttachmentCanary';
 import { attachmentPropSize, attachmentPropSizeDefault } from '../types';
 
 const cnAttachmentVariants = cn('AttachmentVariants');
@@ -24,12 +24,14 @@ const Variants = () => {
   const loadingProgress = useNumber('loadingProgress', 70, Boolean(loading));
   const loadingText = useText('loadingText', 'Загрузка', Boolean(loading));
   const withButtonAction = useBoolean('withButtonAction', false);
+  const withIcon = useBoolean('withIcon', false);
 
   return (
     <Attachment
       className={cnAttachmentVariants()}
       loading={loading}
       size={size}
+      withIcon={withIcon}
       loadingText={loadingText}
       fileName={fileName}
       loadingProgress={loadingProgress}
