@@ -8,9 +8,9 @@ import { cn } from '../../utils/bem';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { useTheme } from '../Theme/Theme';
 
-export const badgePropSize = ['m', 'xs', 's', 'l'] as const;
+export const badgePropSize = ['xs', 's', 'm', 'l'] as const;
 export type BadgePropSize = typeof badgePropSize[number];
-export const badgePropSizeDefault: BadgePropSize = badgePropSize[0];
+export const badgePropSizeDefault: BadgePropSize = 'm';
 
 export const badgePropView = ['filled', 'stroked'] as const;
 export type BadgePropView = typeof badgePropView[number];
@@ -48,6 +48,12 @@ type Props = {
 
 export const cnBadge = cn('Badge');
 
+const renderIcon = (Icon: IconComponent | undefined) => {
+  if (Icon) {
+    return <Icon size="xs" className={cnBadge('Icon')} />;
+  }
+};
+
 export const Badge = forwardRefWithAs<Props>((props, ref) => {
   const {
     size = badgePropSizeDefault,
@@ -56,7 +62,7 @@ export const Badge = forwardRefWithAs<Props>((props, ref) => {
     form = badgePropFormDefault,
     icon,
     iconLeft,
-    iconRight,
+    iconRight: IconRight,
     minified,
     label,
     as = 'div',
@@ -71,29 +77,36 @@ export const Badge = forwardRefWithAs<Props>((props, ref) => {
       ? classnames(props.className, themeClassNames.color.accent)
       : props.className;
   const IconLeft = iconLeft ?? icon;
-  const IconRight = iconRight;
-  const withIcon = !!icon;
-
-  if (minified) {
-    return (
-      <Tag
-        {...otherProps}
-        className={cnBadge({ size, status, minified }, [className])}
-        title={label}
-        ref={ref}
-      />
-    );
-  }
+  const counter =
+    [icon, iconLeft, IconRight, label].filter((item) => Boolean(item))
+      .length === 1 && (label?.length || 0) <= 1;
 
   return (
     <Tag
       {...otherProps}
-      className={cnBadge({ size, view, status, form, withIcon }, [className])}
+      className={cnBadge(
+        {
+          size,
+          status,
+          minified,
+          ...(!minified && {
+            view,
+            form,
+            counter,
+          }),
+        },
+        [className],
+      )}
       ref={ref}
+      title={minified && label}
     >
-      {IconLeft && <IconLeft size="xs" className={cnBadge('Icon')} />}
-      {label}
-      {IconRight && <IconRight size="xs" className={cnBadge('Icon')} />}
+      {!minified && (
+        <>
+          {renderIcon(IconLeft)}
+          {label}
+          {renderIcon(IconRight)}
+        </>
+      )}
     </Tag>
   );
 });

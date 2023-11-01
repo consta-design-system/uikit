@@ -17,7 +17,7 @@ import {
 
 const Variants = () => {
   const minified = useBoolean('minified', false);
-  const label = useText('label', 'это бейджик', !minified);
+  const label = useText('label', 'это бейджик');
   const size = useSelect('size', badgePropSize, badgePropSizeDefault);
   const view = useSelect(
     'view',

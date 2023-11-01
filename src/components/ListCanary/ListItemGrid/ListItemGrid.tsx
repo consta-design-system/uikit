@@ -5,6 +5,7 @@ import React from 'react';
 import { IconComponent, IconPropSize } from '##/icons/Icon';
 import { cn } from '##/utils/bem';
 import { getByMap } from '##/utils/getByMap';
+import { isNotNil } from '##/utils/type-guards';
 
 import { mapIconSize } from '../maps';
 import { ListPropSize } from '../types';
@@ -15,14 +16,13 @@ export const renderSlot = (
   side: React.ReactNode,
   position: 'left' | 'right',
   size: ListPropSize,
-  icon?: IconComponent,
+  Icon?: IconComponent,
   iconSize?: IconPropSize,
-) => {
+): React.ReactNode[] => {
   const sides: React.ReactNode[] = side
     ? [...(Array.isArray(side) ? side : [side])]
     : [];
-  if (icon) {
-    const Icon = icon;
+  if (Icon) {
     const render = <Icon size={getByMap(mapIconSize, size, iconSize)} />;
     if (position === 'left') {
       sides.push(render);
@@ -31,17 +31,21 @@ export const renderSlot = (
       sides.unshift(render);
     }
   }
-  return sides.map((item, index) => (
-    <div
-      className={cnListItemGrid('Slot', {
-        position,
-      })}
-      key={cnListItemGrid('Slot', {
-        position,
-        index,
-      })}
-    >
-      {item}
-    </div>
-  ));
+  return sides.map((item, index) => {
+    if (isNotNil(item)) {
+      return (
+        <div
+          className={cnListItemGrid('Slot', {
+            position,
+          })}
+          key={cnListItemGrid('Slot', {
+            position,
+            index,
+          })}
+        >
+          {item}
+        </div>
+      );
+    }
+  });
 };

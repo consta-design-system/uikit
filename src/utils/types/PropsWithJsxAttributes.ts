@@ -1,4 +1,6 @@
-export type PropsWithJsxAttributes<
-  Props,
-  As extends keyof JSX.IntrinsicElements = 'div',
-> = Omit<Props & Omit<JSX.IntrinsicElements[As], keyof Props>, 'css'>;
+import { AsTagAttribute, AsTags } from './AsTags';
+
+export type PropsWithJsxAttributes<Props, As extends AsTags = 'div'> = Omit<
+  Props & Omit<AsTagAttribute<As>, keyof Props>,
+  'css'
+>;

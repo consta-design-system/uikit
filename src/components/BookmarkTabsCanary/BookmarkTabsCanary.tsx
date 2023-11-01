@@ -3,7 +3,7 @@ import './BookmarkTabs.css';
 import { IconAdd } from '@consta/icons/IconAdd';
 import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
 import { IconArrowRight } from '@consta/icons/IconArrowRight';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useMemo, useState } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
@@ -27,8 +27,8 @@ export const cnBookmarkTabs = cn('BookmarkTabs');
 const renderItemDefault = <ITEM,>(
   props: BookmarkTabsRenderItemProps<ITEM>,
 ): React.ReactElement => {
-  const { item: _item, attributes = {}, ...otherProps } = props;
-  return <BookmarkTabsTab {...attributes} {...otherProps} />;
+  const { item: _item, attributes = {}, as, ...otherProps } = props;
+  return <BookmarkTabsTab {...attributes} {...otherProps} as={as} />;
 };
 
 const BookmarkTabsRender = (
@@ -54,10 +54,13 @@ const BookmarkTabsRender = (
     form = bookmarkTabsPropFormDefault,
     view = bookmarkTabsPropViewDefault,
     withNavigationButtons,
+    onMouseLeave: onMouseLeaveProp,
     className,
     id,
     ...otherProps
   } = withDefaultGetters(props);
+
+  const [higlightedIndex, setHighlitedIndex] = useState<number | null>(null);
 
   type Item = typeof items[number];
 
@@ -91,33 +94,58 @@ const BookmarkTabsRender = (
   const renderItem = (
     item: Item,
     fixed: boolean,
-    controlRef: React.RefObject<HTMLElement>,
+    controlRef: React.RefObject<HTMLDivElement>,
+    bordered: boolean,
+    index: number,
     tabWidth?: string,
-  ) =>
-    renderItemProp({
-      item,
-      onClick: (e) => onChange?.(item, { e }),
-      active: getItemActive(item),
-      label: getItemLabel(item),
-      leftIcon: getItemLeftIcon(item),
-      rightIcon: getItemRightIcon(item),
-      as: getItemAs(item) ?? 'button',
-      attributes: getItemAttributes(item),
-      tabRef: getItemRef(item),
-      controlRef,
-      fixed,
-      onClose: onRemove ? (e) => onRemove(item, { e }) : undefined,
-      size,
-      view,
-      form,
-      tabWidth,
-    });
+  ) => (
+    <div
+      className={cnBookmarkTabs('Tab')}
+      onMouseEnter={() => setHighlitedIndex(index)}
+      onFocus={() => setHighlitedIndex(index)}
+      ref={controlRef}
+    >
+      {renderItemProp({
+        item,
+        onClick: (e) => onChange?.(item, { e }),
+        active: getItemActive(item),
+        label: getItemLabel(item),
+        leftIcon: getItemLeftIcon(item),
+        rightIcon: getItemRightIcon(item),
+        as: getItemAs(item) ?? 'div',
+        attributes: getItemAttributes(item),
+        tabRef: getItemRef(item),
+        fixed,
+        bordered,
+        onClose: onRemove ? (e) => onRemove(item, { e }) : undefined,
+        size,
+        view,
+        hovered: higlightedIndex === index,
+        form,
+        tabWidth,
+      })}
+    </div>
+  );
+
+  const onMouseLeave: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    onMouseLeaveProp?.(e);
+    setHighlitedIndex(null);
+  };
+
+  const borderedIndexes = useMemo(() => {
+    const arr = [...fixedTabs, ...otherTabs];
+    const activeIndex = value ? arr.indexOf(value) : -1;
+    return Array.from(Array(arr.length - 1).keys()).filter((el) =>
+      form === 'round' ? el !== activeIndex && el !== activeIndex - 1 : true,
+    );
+  }, [fixedTabs, otherTabs, value, form]);
 
   return (
     <div
       className={cnBookmarkTabs({ size, view, form }, [className])}
       ref={useForkRef([ref, containerRef])}
       id={id}
+      onMouseLeave={onMouseLeave}
       {...otherProps}
     >
       {showControls && (
@@ -136,6 +164,7 @@ const BookmarkTabsRender = (
             <Button
               view="clear"
               size="xs"
+              type="button"
               onClick={() => navigate('next')}
               iconLeft={IconArrowRight}
               onlyIcon
@@ -153,7 +182,13 @@ const BookmarkTabsRender = (
         >
           {fixedTabs.map((item, index) => (
             <React.Fragment key={getItemKey(item)}>
-              {renderItem(item, true, refs[index])}
+              {renderItem(
+                item,
+                true,
+                refs[index],
+                borderedIndexes.includes(index),
+                index,
+              )}
             </React.Fragment>
           ))}
         </div>
@@ -164,16 +199,21 @@ const BookmarkTabsRender = (
           className={cnBookmarkTabs('List')}
           ref={otherTabsRef}
         >
-          {otherTabs.map((item, index) => (
-            <React.Fragment key={getItemKey(item)}>
-              {renderItem(
-                item,
-                false,
-                refs[fixedTabs.length + index],
-                sizes[index],
-              )}
-            </React.Fragment>
-          ))}
+          {otherTabs.map((item, index) => {
+            const { length } = fixedTabs;
+            return (
+              <React.Fragment key={getItemKey(item)}>
+                {renderItem(
+                  item,
+                  false,
+                  refs[length + index],
+                  borderedIndexes.includes(length + index),
+                  length + index,
+                  sizes[index],
+                )}
+              </React.Fragment>
+            );
+          })}
         </div>
       </div>
       {onCreate && (
@@ -184,6 +224,7 @@ const BookmarkTabsRender = (
           <Button
             view="clear"
             size="xs"
+            type="button"
             onClick={onCreate}
             iconLeft={IconAdd}
             onlyIcon

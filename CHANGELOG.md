@@ -1,5 +1,103 @@
 # Changelog
 
+## v4.31.1 (05/10/2023)
+- [fix(withTooltip): fixed types (#3335)](https://github.com/consta-design-system/uikit/commit/40bb234829e346ca2e57801696a78675237b221c) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v4.31.0 (04/10/2023)
+Самое важное:
+- в `ContextMenu` добавили управление с клавиатуры
+-  переписали HOC `withTooltip` и добавили в него анимацию появления тултипа
+- теперь можно отдельно импортировать изображения `Responses`
+-  добавили миксин `MixFlex`
+- добавили в документацию компонента `Slider` описание свойства `onAfterChange`
+
+---
+
+- [feat(ContextMenu): add keyboard navigation (#3259)](https://github.com/consta-design-system/uikit/commit/477c710d274375bae9263d75ad117006ce2b4b53) - [@N1MBER](https://github.com/N1MBER)
+- [fix(List): fixed default color of list items in dark theme (#3324)](https://github.com/consta-design-system/uikit/commit/81308b2b9f55f8ba865ca5b12134ee3493c0486f) - [@levi2ki](https://github.com/levi2ki)
+- [docs(Slider): added description of the onAfterChange property (#3327)](https://github.com/consta-design-system/uikit/commit/c9d3da82acf675f98912d72411ccb1410e37e1cc) - [@N1MBER](https://github.com/N1MBER)
+- [feat(withTooltip): add animate and refactor HOC (#3310)](https://github.com/consta-design-system/uikit/commit/c7dd62e56feb41c18e4a2bf0d11de76afb419dc2) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Responses): added images reexports (#3308)](https://github.com/consta-design-system/uikit/commit/04c832e480d19a08e6c81ad72e3a71eff7bf9a33) - [@gizeasy](https://github.com/gizeasy)
+- [feat(MixFlex): add new mixin (#3294)](https://github.com/consta-design-system/uikit/commit/fda9e848c80ad2ab22ed7da89868bb0499eb2ae5) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
+## v4.30.1 (27/09/2023)
+- [fix(List): fixed background on ListItem (#3300)](https://github.com/consta-design-system/uikit/commit/6b87a1e491836354e17626440e8adcd14f2b414f) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Selects): fix render numbers value (#3297)](https://github.com/consta-design-system/uikit/commit/f129a3482476c59038252295f9a5853c203b12b2) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Button): property type set to all places (#3295)](https://github.com/consta-design-system/uikit/commit/ebec6dba46e0fcc789f0f5714348ab906bfb180d) - [@N1MBER](https://github.com/N1MBER)
+- [docs(List): remove non exist field from documentation (#3296)](https://github.com/consta-design-system/uikit/commit/f70ea5167e2888489215f8336e7dd8cf9c2dc9d2) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
+## v4.30.0 (20/09/2023)
+- [fix(List): fixed render undefined in renderSlot (#3289)](https://github.com/consta-design-system/uikit/commit/78515e8ae5107cc73e4d4f9c84eb6bdf978af8b7) - [@gizeasy](https://github.com/gizeasy)
+- [feat(BookmarkTabs): add tab navigation to close button (#3256)](https://github.com/consta-design-system/uikit/commit/3913dc4397e1d773999ac2e0ace5a825681b7aa0) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
+## v4.29.0 (18/09/2023)
+- В `Tabs` переработали адаптивность, теперь выбранный пункт не скрывается.
+- В компоненты со свойством `as` добавили ограничение на возможные тэги, убрали svg элементы.
+
+---
+
+- [feat(Tabs): rewrite adaptivity logic (#3282)](https://github.com/consta-design-system/uikit/commit/6a9078b18713f24ad4d1680b22b3023df265a010) - [@N1MBER](https://github.com/N1MBER)
+- [fix(BookmarkTabs): remove :has use (#3284)](https://github.com/consta-design-system/uikit/commit/1fabf695f335462ba0b15ec401bf314323df2713) - [@N1MBER](https://github.com/N1MBER)
+- [fix(Button): fix disabled mode (#3253)](https://github.com/consta-design-system/uikit/commit/b3c96e04e18c4be282be43237618477332e53da0) - [@N1MBER](https://github.com/N1MBER)
+- [feat(AsTags): added new type and rewrited component props (#3280)](https://github.com/consta-design-system/uikit/commit/4abb1db609473c58c8efa6047e55859da7178f71) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
+## v4.28.1 (14/09/2023)
+- [feat(List): added reexport renderHeader](https://github.com/consta-design-system/uikit/commit/76cd7cef99b04fb5b297261740aa60d79afb99ab) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v4.28.0 (13/09/2023)
+Самое важное:
+- Добавлены новые компоненты `Chips`, `ChipsItem`, `ChipsChoice`.
+- В `ChoiceGroup`, `CheckboxGroup` добавили свойства `getItemAttributes` и `getItemRef`.
+- В `Combobox` добавили свойство `allSelectedAllLabel`.
+
+---
+
+- [feat(Chips): add components Chips, ChipsItem, ChipsChoice (#3266)](https://github.com/consta-design-system/uikit/commit/9783ae1ca2ba472b59834b7a1754b7ea47baed5d) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Button): fix icon styles (#3269)](https://github.com/consta-design-system/uikit/commit/a19ba2db92c06dc152808a20d675b438f12fd89f) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Switch): fix example (#3264)](https://github.com/consta-design-system/uikit/commit/7df3aa2782f7ffe2f3bc2dae569497759aa661fe) - [@N1MBER](https://github.com/N1MBER)
+- [feat(ChoiceGroup, CheckboxGroup): added props getItemAttributes and getItemRef (#3263)](https://github.com/consta-design-system/uikit/commit/9f8708f63a88d911525980e82f12f5d998d5b518) - [@N1MBER](https://github.com/N1MBER)
+- [docs(Table): fix typo (#3260)](https://github.com/consta-design-system/uikit/commit/4c2336c0686d0a49f1daff77bb4c4ba8692e954c) - [@nevsky118](https://github.com/nevsky118)
+- [fix(TextField): move RefAttributes in TextFieldProps type (#3258)](https://github.com/consta-design-system/uikit/commit/8e87af0e63dd7be87181d6542079f41da7c76664) - [@gizeasy](https://github.com/gizeasy)
+- [fix(DatePicker): fix keyboard events (#3251)](https://github.com/consta-design-system/uikit/commit/9352e4659edc2fd0bf8069e53ba6bfeadc0b0e53) - [@N1MBER](https://github.com/N1MBER)
+- [feat(ComboboxCanary): added new prop allSelectedAllLabel (#3255)](https://github.com/consta-design-system/uikit/commit/b3a6d1cf15fcf46d572c29d7dcbd093e17413180) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
+## v4.27.0 (06/09/2023)
+Самое важное:
+
+- `Badge` теперь можно использовать в качестве счетчика(`counter`)
+- В `DatePicker` изменили взаимодействие с клавиатуры и добавили свойства для управления выпадающим списком.  [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3204)
+- Добавили `Loader[Canary]` и переработали в нем позиционирование компонента.
+- В `Slider` добавили свойства для управления позиционированием тултипа.
+
+---
+
+- [feat(Badge): add counter mod (#3240)](https://github.com/consta-design-system/uikit/commit/f4655dc62241c95688909351b76a18fc4d879da8) - [@gizeasy](https://github.com/gizeasy)
+- [feat(DatePicker): add new props: dropdownOpen, onDropdownOpen, ignoreOutsideClicksRefs (#3238)](https://github.com/consta-design-system/uikit/commit/30c100e25756bd21f1835061311890835a25bf53) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Loader): rewrite styles and layout (#3239)](https://github.com/consta-design-system/uikit/commit/a745c55f6d2149859b3012d2c1f5021c766b2fd7) - [@N1MBER](https://github.com/N1MBER)
+- [fix(ProgressStepBar): fix refs problem (#3247)](https://github.com/consta-design-system/uikit/commit/5f3baf693070797671565836dbd7980f2842a690) - [@N1MBER](https://github.com/N1MBER)
+- [feat(Slider): add new props: tooltipDirection & tooltipPossibleDirections (#3246)](https://github.com/consta-design-system/uikit/commit/9cec9491781a2359ff777ab9ccc6718ab51cfcd8) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
+## v4.26.1 (31/08/2023)
+- [fix(BookmarkTabs): reexport fix (#3237)](https://github.com/consta-design-system/uikit/commit/e87278371c3ba513d2efa5b674262be6d9a275c4) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.26.0 (30/08/2023)
 Добавлен новый компонент `BookmarkTabs` - табы в виде вкладок
 
@@ -310,113 +408,3 @@
 - [feat(Avatar): add monochrome (#2885)](https://github.com/consta-design-system/uikit/commit/ee47022e27daf152411f75a84a1f632bafa3cd28) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Switch): add new size (#2884)](https://github.com/consta-design-system/uikit/commit/0b9112dc2a0f0fa9343e83552b661c4ae994f202) - [@N1MBER](https://github.com/N1MBER)
 - [feat(MixFocus): add vars (#2889)](https://github.com/consta-design-system/uikit/commit/e94e6464c815dd933a48d6b39f71082b043881fe) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.9.0 (02/02/2023)
-Самое важное:
-
-- Теперь `AvatarGroup` может подстраивать количество аватарок под ширину родителя.
-- В `Attachment` добавили свойство `size`.
-
----
-
-- [feat(AvatarGroup): add visibleCount='auto' (#2881)](https://github.com/consta-design-system/uikit/commit/7e985b0d6c6a4d6f17815f214c980d0bac817ca7) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Attachment): add prop size (#2882)](https://github.com/consta-design-system/uikit/commit/2e05b41020520fb1d9244d16f55bad6ca1a8a831) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Table): fix bug with excluding in calculations previous state (#2877)](https://github.com/consta-design-system/uikit/commit/685024043045074fe01af43a4835801a390b1f98) - [@N1MBER](https://github.com/N1MBER)
-- [docs(sandbox): add links to sandbox for a few components and hooks (#2876)](https://github.com/consta-design-system/uikit/commit/d3f9450afb472c6a24963b07000cab6619305ab3) - [@N1MBER](https://github.com/N1MBER)
-- [chore(deps): update @consta/stand](https://github.com/consta-design-system/uikit/commit/9cd4a1569a6975eb83c502705647fc246ca53499) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.8.0 (31/01/2023)
-Самое важное:
-- Добавили мобильный вид в `ContextMenu` и переработали анимацию раскрытия вложенных меню.
----
-
-- [feat(ContextMenu): mobile view added (#2872)](https://github.com/consta-design-system/uikit/commit/a46494848d343ed2020bc61cdd37e33ef23394e9) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deps): update @consta/icons and @consta/stand](https://github.com/consta-design-system/uikit/commit/3e08155f0dbf660418afce22a179cd8525231c27) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.7.1 (25/01/2023)
-- Доработали компонент `List` и дополнили документацию
-- Заменили собственные списки компонентов `AutoComplete`, `Combobox`, `Select`, `UserSelect`, `ContextMenu` на компонент `List`. Теперь списки будут выглядеть везде одинаково, а бандл станет меньше.
-- В `Table` описали ограничения по использованию `getCellWrap`
-
----
-
-- [feat: migration to List (#2865)](https://github.com/consta-design-system/uikit/commit/6cdf164522150b31d4d6c6f30b34d8e3d661e2db) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Table): add description for getCellWrap](https://github.com/consta-design-system/uikit/commit/004bcb9b5015ab90c3ffe65a7db385f2d2e8642e) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.7.0 (16/01/2023)
-Самое важное:
-
-- Добавили компонент `List`. Он войдёт во все компоненты, где используются списки `Select`, `ContextMenu` и другие. На его основе можно создавать свои списки.
-- Для `Radio` и `RadioGroup` добавили `s` и `xs` размеры.
-
----
-
-- [feat(ListCanary): add new component (#2809)](https://github.com/consta-design-system/uikit/commit/ffd8c5b372bab17adc4b296893cabf95cd8c3d1d) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Radio): add `s`, `xs` sizes (#2859)](https://github.com/consta-design-system/uikit/commit/49b02311ced080d1cfcbc1b1bf4575e8de95f95b) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.6.4 (11/01/2023)
-Самое важное:
-- адаптировали все примеры под мобильные устройства
-
----
-
-- [docs: adaptive docs examples (#2848)](https://github.com/consta-design-system/uikit/commit/93726bb8c507d8fc3a369be13272da2ffa458c0f) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.6.3 (28/12/2022)
-Самое важное:
-- добавлена документация для `useComponentSize`
-- в useFlag исправили опечатку в методе `toggle`
-- в ProgressLine исправили проброс `classname`
-- все компоненты теперь используют иконки из `@consta/icons`
-- в `DateTime` исправили падеж названия месяцев
-- исправили логику отображения линии в `ProgressStepBar`
----
-
-- [docs(useComponentSize): fix orthography](https://github.com/consta-design-system/uikit/commit/2cf35abc4fed15bfb25470a56d984c2b34672ca6) - [@N1MBER](https://github.com/N1MBER)
-- [fix(useFlag): rewrite toogle to toggle (#2836)](https://github.com/consta-design-system/uikit/commit/0d0e7be682f268c45b0f29a2629b24244a013fec) - [@N1MBER](https://github.com/N1MBER)
-- [fix(ProgressLine): fix classname (#2844)](https://github.com/consta-design-system/uikit/commit/a29961f94cf086e7914b8d44691a666bdfda401d) - [@N1MBER](https://github.com/N1MBER)
-- [refactor(Icons): rewrite uikit icons to icons from @consta/icons (#2818)](https://github.com/consta-design-system/uikit/commit/991e0da199ab52e581dc55ca33bde5a537a61c8f) - [@N1MBER](https://github.com/N1MBER)
-- [docs(ContextMenu): add example of usage getItemOnClick (#2838)](https://github.com/consta-design-system/uikit/commit/a9667b84fb2ed86cf6b81e3b064cf8ca9085de4c) - [@N1MBER](https://github.com/N1MBER)
-- [fix(DateTime): fix month name (#2835)](https://github.com/consta-design-system/uikit/commit/56d1e22caa2b6085c93db842423603c8af764874) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Snackbar, UserSelect): rewrite CssTransition to Transition (#2806)](https://github.com/consta-design-system/uikit/commit/ac4c086be881f18c1725a9a16592ebca5c05e659) - [@N1MBER](https://github.com/N1MBER)
-- [fix(ProgressStepBar): fix line width for activeIndex (#2831)](https://github.com/consta-design-system/uikit/commit/e03047754dfed66245a37ab27072e0bf6fc3c89b) - [@N1MBER](https://github.com/N1MBER)
-- [docs(useComponentSize): add documentation for useComponentSize hook and also add sandbox for it (#2815)](https://github.com/consta-design-system/uikit/commit/14b9ea8faefba56892dc28fd3200d4906cfdb6ec) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.6.2 (23/12/2022)
-Самое важное:
-- Скрыли браузерный "глаз" в `TextField` c `type="password"`
-- Исправили `getCellWrap` для компонента `Table`
-
----
-
-- [fix(TextField): hide browser eye on type='password' (#2833)](https://github.com/consta-design-system/uikit/commit/660efb121cc50b918b697e7f43ed379b8334be3f) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Table): fix column width detecting (#2820)](https://github.com/consta-design-system/uikit/commit/dfc58779c92ed2fdf0c9d54756400306e33f7142) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.6.1 (09/12/2022)
-- [docs: adaptive examples (#2817)](https://github.com/consta-design-system/uikit/commit/4778c61861ab1290590fe9b46855f7a8a15792f6) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.6.0 (07/12/2022)
-Самое важное:
-- В `DatePicker` добавили свойство `dropdownClassName` для установки произвольного класса всплывающего окна.
-
----
-
-- [feat(DatePicker): add prop dropdownClassName (#2810)](https://github.com/consta-design-system/uikit/commit/469e9d33eb98dc13e176a0c44dcd7868a6826786) - [@N1MBER](https://github.com/N1MBER)

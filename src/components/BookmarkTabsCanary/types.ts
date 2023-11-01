@@ -1,6 +1,7 @@
 import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
+import { AsAttributes, AsTags } from '##/utils/types/AsTags';
 import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
@@ -25,9 +26,9 @@ export type BookmarkTabsItemDefault = {
   leftIcon?: IconComponent;
   rightIcon?: IconComponent;
   fixed?: boolean;
-  as?: keyof JSX.IntrinsicElements;
+  as?: AsTags;
   ref?: React.RefObject<HTMLElement>;
-  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
+  attributes?: AsAttributes;
 };
 
 export type BookmarkTabsPropGetItemKey<ITEM> = (item: ITEM) => string | number;
@@ -45,13 +46,13 @@ export type BookmarkTabsPropGetItemFixed<ITEM> = (
 ) => boolean | undefined;
 export type BookmarkTabsPropGetItemAs<ITEM> = (
   item: ITEM,
-) => keyof JSX.IntrinsicElements | undefined;
+) => AsTags | undefined;
 export type BookmarkTabsPropGetItemRef<ITEM> = (
   item: ITEM,
 ) => React.RefObject<HTMLElement> | undefined;
 export type BookmarkTabsPropGetItemAttributes<ITEM> = (
   item: ITEM,
-) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements] | undefined;
+) => AsAttributes | undefined;
 
 export type BookmarkTabsPropOnChange<ITEM> = (
   value: ITEM,
@@ -63,15 +64,16 @@ export type BookmarkTabsPropOnChange<ITEM> = (
 
 export type BookmarkTabsRenderItemProps<ITEM> = {
   item: ITEM;
+  hovered?: boolean;
   onClick: React.MouseEventHandler;
   active?: boolean;
   onClose?: React.MouseEventHandler;
   size: BookmarkTabsPropSize;
   form: BookmarkTabsPropForm;
   view: BookmarkTabsPropView;
+  bordered?: boolean;
   tabWidth?: string;
   tabRef?: React.RefObject<HTMLElement>;
-  controlRef?: React.RefObject<HTMLElement>;
 } & Omit<BookmarkTabsItemDefault, 'key' | 'ref'>;
 
 export type BookmarkTabsPropRenderItem<ITEM> = (
@@ -113,26 +115,24 @@ export type BookmarkTabsComponent = <ITEM>(
   props: BookmarkTabsProps<ITEM>,
 ) => React.ReactElement | null;
 
-export type BookmarkTabsTabProps<
-  AS extends keyof JSX.IntrinsicElements = 'button',
-> = PropsWithAsAttributes<
-  {
-    size: BookmarkTabsPropSize;
-    form: BookmarkTabsPropForm;
-    view: BookmarkTabsPropView;
-    active?: boolean;
-    tabWidth?: string;
-    tabRef?: React.RefObject<HTMLElement>;
-    controlRef?: React.RefObject<HTMLElement>;
-    fixed?: boolean;
-    onClose?: React.MouseEventHandler;
-  },
-  AS
-> &
-  Omit<BookmarkTabsItemDefault, 'key' | 'attributes' | 'ref'>;
+export type BookmarkTabsTabProps<AS extends AsTags = 'div'> =
+  PropsWithAsAttributes<
+    {
+      hovered?: boolean;
+      size: BookmarkTabsPropSize;
+      form: BookmarkTabsPropForm;
+      view: BookmarkTabsPropView;
+      active?: boolean;
+      tabWidth?: string;
+      bordered?: boolean;
+      tabRef?: React.RefObject<HTMLElement>;
+      fixed?: boolean;
+      onClose?: React.ReactEventHandler;
+    },
+    AS
+  > &
+    Omit<BookmarkTabsItemDefault, 'key' | 'attributes' | 'ref'>;
 
-export type BookmarkTabsTabComponent = <
-  AS extends keyof JSX.IntrinsicElements = 'button',
->(
+export type BookmarkTabsTabComponent = <AS extends AsTags = 'div'>(
   props: BookmarkTabsTabProps<AS>,
 ) => React.ReactElement | null;

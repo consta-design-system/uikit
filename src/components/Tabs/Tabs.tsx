@@ -31,8 +31,8 @@ export const cnTabs = cn('Tabs');
 function renderItemDefault<ITEM>(
   props: RenderItemProps<ITEM>,
 ): React.ReactElement {
-  const { item, attributes = {}, ...otherProps } = props;
-  return <TabsTab {...attributes} {...otherProps} />;
+  const { item, attributes = {}, as, ...otherProps } = props;
+  return <TabsTab {...attributes} {...otherProps} as={as} />;
 }
 
 const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
@@ -122,6 +122,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
 
   const renderItemsList: RenderItemsListProp = ({
     withRunningLine = true,
+    visibleIndexes,
     getTabClassName,
   }) => (
     <div className={cnTabs('List', { direction: tabsDirection, linePosition })}>
@@ -138,6 +139,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
       ))}
       {withRunningLine && !disabled && (
         <TabsRunningLine
+          visibleIndexes={visibleIndexes}
           linePosition={linePosition}
           tabsDimensions={tabsDimensions}
           activeTabIdx={activeTabIdx}

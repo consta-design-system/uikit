@@ -23,7 +23,9 @@ import {
 } from '##/components/SelectComponentsCanary/types';
 import { useSelect } from '##/components/SelectComponentsCanary/useSelect';
 import { useForkRef } from '##/hooks/useForkRef';
+import { isNotNil } from '##/utils/type-guards';
 
+import { Text } from '../Text';
 import {
   ComboboxComponent,
   ComboboxProps,
@@ -76,6 +78,7 @@ const ComboboxRender = <
     getGroupKey,
     getGroupLabel,
     renderItem,
+    allSelectedAllLabel = 'Все',
     searchValue: searchValueProp,
     renderValue: renderValueProp,
     onCreate,
@@ -116,6 +119,7 @@ const ComboboxRender = <
     notFound,
     hasItems,
     optionsRefs,
+    allItemsSelected,
   } = useSelect({
     items,
     groups,
@@ -206,9 +210,9 @@ const ComboboxRender = <
             renderValue({ item, handleRemove: getHandleRemoveValue(item) }),
           )}
         {isNotMultipleParams(props) &&
-          props.value &&
+          isNotNil(props.value) &&
           renderValue({ item: props.value })}
-        {(!value || (Array.isArray(value) && value.length === 0)) &&
+        {(!isNotNil(value) || (Array.isArray(value) && value.length === 0)) &&
           !searchValue &&
           placeholder && (
             <span className={cnSelect('Placeholder')} title="placeholder">
@@ -227,7 +231,7 @@ const ComboboxRender = <
           ref={inputRefForRender}
           className={cnSelect('Input', {
             size,
-            hide: !multiple && !!value,
+            hide: !multiple && isNotNil(value),
             multiple,
           })}
           value={searchValue}
@@ -235,6 +239,22 @@ const ComboboxRender = <
         />
       </>
     );
+  };
+
+  const renderValueList = () => {
+    if (allItemsSelected) {
+      return (
+        <Text size={size} className={cnSelect('SelectAll')}>
+          {allSelectedAllLabel}
+        </Text>
+      );
+    }
+    if (multiple) {
+      return (
+        <div className={cnSelect('ControlValue')}>{renderControlValue()}</div>
+      );
+    }
+    return renderControlValue();
   };
 
   return (
@@ -268,17 +288,11 @@ const ComboboxRender = <
             aria-hidden="true"
           >
             <div className={cnSelect('ControlValueContainer')}>
-              {multiple ? (
-                <div className={cnSelect('ControlValue')}>
-                  {renderControlValue()}
-                </div>
-              ) : (
-                renderControlValue()
-              )}
+              {renderValueList()}
             </div>
           </div>
           <span className={cnSelect('Indicators')}>
-            {value && (
+            {isNotNil(value) && (
               <button
                 type="button"
                 onClick={clearValue}

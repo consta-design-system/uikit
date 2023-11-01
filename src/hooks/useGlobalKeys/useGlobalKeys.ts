@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { KeyCode } from '../../utils/types/KeyCode';
+import { KeyCode } from '##/utils/types/KeyCode';
 
 export type KeyHandlers = Partial<
   Record<KeyCode, (e: KeyboardEvent) => void>

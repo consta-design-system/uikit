@@ -2,9 +2,10 @@ import './Responses.css';
 
 import React from 'react';
 
-import { ResponsesImageProps } from '../../responsesImages/ResponsesImage/ResponsesImage';
-import { cn } from '../../utils/bem';
-import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { cnMixSpace } from '##/mixs/MixSpace';
+import { ResponsesImageProps } from '##/responsesImages/ResponsesImage/ResponsesImage';
+import { cn } from '##/utils/bem';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const responsesPropSize = ['l', 'm'] as const;
 export type ResponsesPropSize = typeof responsesPropSize[number];
@@ -39,12 +40,26 @@ export const Responses = React.forwardRef<HTMLDivElement, ResponsesProps>(
     return (
       <div className={cnResponses({ size }, [className])} ref={ref}>
         <Image className={cnResponses('Image')} />
-        {title && <h1 className={cnResponses('Title')}>{title}</h1>}
+        {title && (
+          <h1
+            className={cnResponses('Title', [cnMixSpace({ mT: 'xl', mB: 0 })])}
+          >
+            {title}
+          </h1>
+        )}
         {description && (
-          <p className={cnResponses('Description')}>{description}</p>
+          <p className={cnResponses('Description', [cnMixSpace({ mT: 'xs' })])}>
+            {description}
+          </p>
         )}
         {actions && (
-          <div className={cnResponses('ButtonsWrapper')}>{actions}</div>
+          <div
+            className={cnResponses('ButtonsWrapper', [
+              cnMixSpace({ mT: 'xl' }),
+            ])}
+          >
+            {actions}
+          </div>
         )}
       </div>
     );

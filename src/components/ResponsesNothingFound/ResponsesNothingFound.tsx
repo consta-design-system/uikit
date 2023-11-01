@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ResponsesImageNothingFound } from '../../responsesImages/ResponsesImageNothingFound/ResponsesImageNothingFound';
-import { Button } from '../Button/Button';
-import { createResponses } from '../Responses/createResponses';
+import { Button } from '##/components/Button';
+import { createResponses } from '##/components/Responses/createResponses';
+import { ResponsesImageNothingFound } from '##/responsesImages/ResponsesImageNothingFound/ResponsesImageNothingFound';
 
 export const ResponsesNothingFound = createResponses({
   name: 'ResponsesNothingFound',

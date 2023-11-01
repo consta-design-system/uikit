@@ -195,29 +195,29 @@ export const calculateLines = (
   direction: PropDirection,
 ) => {
   const sizes: number[] = [];
-  refs.forEach((ref, index) => {
-    if (index !== refs.length - 1) {
-      const firstSize = getRefSize(ref);
-      const secondSize = getRefSize(refs[index + 1]);
-      let size = 0;
-      if (index === 0) {
-        size =
-          direction === 'horizontal'
-            ? firstSize[0] + secondSize[0] / 2
-            : firstSize[1];
-      } else if (index === refs.length - 2) {
-        size =
-          direction === 'horizontal'
-            ? firstSize[0] / 2 + secondSize[0]
-            : firstSize[1];
-      } else {
-        size =
-          direction === 'horizontal'
-            ? firstSize[0] / 2 + secondSize[0] / 2
-            : firstSize[1];
-      }
-      sizes.push(size);
+  for (let i = 0; i < refs.length - 1; i++) {
+    const ref = refs[i];
+    const firstSize = getRefSize(ref);
+    const secondSize = getRefSize(refs[i + 1]);
+    let size = 0;
+    if (i === 0) {
+      size =
+        direction === 'horizontal'
+          ? firstSize[0] + secondSize[0] / 2
+          : firstSize[1];
+    } else if (i === refs.length - 2) {
+      size =
+        direction === 'horizontal'
+          ? firstSize[0] / 2 + secondSize[0]
+          : firstSize[1] + 2;
+    } else {
+      size =
+        direction === 'horizontal'
+          ? firstSize[0] / 2 + secondSize[0] / 2
+          : firstSize[1];
     }
-  });
+    sizes.push(size);
+  }
+
   return sizes;
 };

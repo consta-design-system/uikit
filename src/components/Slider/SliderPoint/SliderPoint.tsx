@@ -2,16 +2,18 @@ import './SliderPoint.css';
 
 import React, { useEffect, useRef } from 'react';
 
-import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
-import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
-import { cn } from '../../../utils/bem';
+import { Direction } from '##/components/Popover';
 import {
   generateThemeClassNames,
   ThemeContext,
   useTheme,
-} from '../../Theme/Theme';
-import { Tooltip } from '../../Tooltip/Tooltip';
+} from '##/components/Theme';
+import { Tooltip } from '##/components/TooltipCanary';
+import { useFlag } from '##/hooks/useFlag/useFlag';
+import { useForkRef } from '##/hooks/useForkRef/useForkRef';
+import { cnMixFocus } from '##/mixs/MixFocus/MixFocus';
+import { cn } from '##/utils/bem';
+
 import { SliderPointProps, TrackPosition } from '../helper';
 
 const cnSliderPoint = cn('SliderPoint');
@@ -30,6 +32,16 @@ const getTooltipPosition = (
 
   return { x: 0, y: 0 };
 };
+
+const defaultPossibleDirections: Direction[] = [
+  'leftCenter',
+  'rightCenter',
+  'downCenter',
+  'leftDown',
+  'rightDown',
+  'upCenter',
+];
+
 export const SliderPoint = (props: SliderPointProps) => {
   const {
     hovered,
@@ -47,6 +59,8 @@ export const SliderPoint = (props: SliderPointProps) => {
     tooltipFormatter,
     buttonLabel,
     onFocus,
+    tooltipDirection = 'downCenter',
+    tooltipPossibleDirections = defaultPossibleDirections,
     tooltipZIndex,
     ...otherProps
   } = props;
@@ -106,6 +120,8 @@ export const SliderPoint = (props: SliderPointProps) => {
     focused ? setTooltipVisible.on() : setTooltipVisible.off();
   }, [focused]);
 
+  const tooltipOpen = !!(tooltipVisible && withTooltip && popoverPosition);
+
   return (
     <>
       <button
@@ -129,33 +145,26 @@ export const SliderPoint = (props: SliderPointProps) => {
         }}
         {...otherProps}
       />
-      {tooltipVisible && withTooltip && popoverPosition && (
-        <ThemeContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
-          value={{
-            theme: tooltipTheme,
-            themeClassNames: tooltipThemeClassNames,
-          }}
+
+      <ThemeContext.Provider
+        // eslint-disable-next-line react/jsx-no-constructed-context-values
+        value={{
+          theme: tooltipTheme,
+          themeClassNames: tooltipThemeClassNames,
+        }}
+      >
+        <Tooltip
+          isOpen={tooltipOpen}
+          position={tooltipPosition}
+          className={cnSliderPoint('Tooltip')}
+          direction={tooltipDirection}
+          possibleDirections={tooltipPossibleDirections}
+          style={{ zIndex: tooltipZIndex }}
+          offset={10}
         >
-          <Tooltip
-            position={tooltipPosition}
-            className={cnSliderPoint('Tooltip')}
-            direction="downCenter"
-            possibleDirections={[
-              'leftCenter',
-              'rightCenter',
-              'downCenter',
-              'leftDown',
-              'rightDown',
-              'upCenter',
-            ]}
-            style={{ zIndex: tooltipZIndex }}
-            offset={10}
-          >
-            {tooltipFormatter ? tooltipFormatter(value) : value}
-          </Tooltip>
-        </ThemeContext.Provider>
-      )}
+          {tooltipFormatter ? tooltipFormatter(value) : value}
+        </Tooltip>
+      </ThemeContext.Provider>
     </>
   );
 };

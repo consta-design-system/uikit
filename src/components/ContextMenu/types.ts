@@ -7,6 +7,7 @@ import {
 } from '##/components/ListCanary';
 import { ComponentSize } from '##/hooks/useComponentSize';
 import { Animate } from '##/mixs/MixPopoverAnimate';
+import { AsAttributes, AsTags } from '##/utils/types/AsTags';
 
 import { ClickOutsideHandler } from '../../hooks/useClickOutside/useClickOutside';
 import { PropsWithAsAttributes } from '../../utils/types/PropsWithAsAttributes';
@@ -61,8 +62,8 @@ export type ContextMenuItemDefault = {
   disabled?: boolean;
   groupId?: number;
   onClick?: ContextMenuPropOnClick<ContextMenuItemDefault>;
-  as?: keyof JSX.IntrinsicElements;
-  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
+  as?: AsTags;
+  attributes?: AsAttributes;
 };
 
 export type ContextMenuPropSortGroup = (
@@ -100,13 +101,11 @@ export type ContextMenuPropGetItemDisabled<ITEM> = (
   item: ITEM,
 ) => boolean | undefined;
 
-export type ContextMenuPropGetItemAs<ITEM> = (
-  item: ITEM,
-) => keyof JSX.IntrinsicElements | undefined;
+export type ContextMenuPropGetItemAs<ITEM> = (item: ITEM) => AsTags | undefined;
 
 export type ContextMenuPropGetItemAttributes<ITEM> = (
   item: ITEM,
-) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements] | undefined;
+) => AsAttributes | undefined;
 
 export type ContextMenuPropGetItemGroupId<ITEM> = (
   item: ITEM,
@@ -196,6 +195,7 @@ export type ContextMenuProps<
     isOpen?: boolean;
     form?: ContextMenuForm;
     isMobile?: boolean;
+    onEsc?: React.KeyboardEventHandler;
   } & MappersItem<ITEM> &
     MappersGroup<GROUP> &
     PositioningProps,
@@ -246,6 +246,7 @@ export type ContextMenuLevelProps<
   | keyof MappersGroup<GROUP>
 > & {
   parent?: ITEM;
+  activeLevelDepth: number;
   levelDepth: number;
   addLevel: AddLevel<ITEM>;
   deleteLevel: (level: number) => void;
@@ -253,6 +254,7 @@ export type ContextMenuLevelProps<
   onSetDirection?: (direction: Direction) => void;
   hoveredParenLevel: number;
   setHoveredParenLevel: (level: number) => void;
+  onEsc?: React.KeyboardEventHandler;
   animate: Animate;
 } & Required<MappersItem<ITEM>> &
   Required<MappersGroup<GROUP>>;
@@ -262,21 +264,18 @@ export type ContextMenuLevelComponent = <ITEM, GROUP>(
   ref: React.Ref<HTMLElement>,
 ) => React.ReactElement | null;
 
-export type ContextMenuItemProps<
-  AS extends keyof JSX.IntrinsicElements = 'div',
-> = PropsWithAsAttributes<
-  Omit<ContextMenuItemDefault, 'onClick' | 'attributes' | 'key'> & {
-    size?: ContextMenuPropSize;
-    active: boolean;
-    withSubMenu: boolean;
-  },
-  AS
-> &
-  React.RefAttributes<HTMLDivElement>;
+export type ContextMenuItemProps<AS extends AsTags = 'div'> =
+  PropsWithAsAttributes<
+    Omit<ContextMenuItemDefault, 'onClick' | 'attributes' | 'key'> & {
+      size?: ContextMenuPropSize;
+      active: boolean;
+      withSubMenu: boolean;
+    },
+    AS
+  > &
+    React.RefAttributes<HTMLDivElement>;
 
-export type ContextMenuItemComponent = <
-  AS extends keyof JSX.IntrinsicElements = 'div',
->(
+export type ContextMenuItemComponent = <AS extends AsTags = 'div'>(
   props: ContextMenuItemProps<AS>,
   ref: React.Ref<HTMLElement>,
 ) => React.ReactElement | null;
@@ -312,9 +311,7 @@ export type ContextMenuWrapperProps = PropsWithHTMLAttributes<
 export type ContextMenuLevelWrapperProps = PropsWithHTMLAttributesAndRef<
   {
     children: React.ReactNode;
-    isOpen?: boolean;
     isMobile?: boolean;
-    form?: ContextMenuForm;
     onClickOutside?: ClickOutsideHandler;
     spareDirection?: Direction;
     possibleDirections?: readonly Direction[];
@@ -324,7 +321,6 @@ export type ContextMenuLevelWrapperProps = PropsWithHTMLAttributesAndRef<
     anchorRef?: React.RefObject<HTMLElement>;
     position?: Position;
     onSetDirection?: (direction: Direction) => void;
-    classname?: string;
   },
   HTMLDivElement
 >;

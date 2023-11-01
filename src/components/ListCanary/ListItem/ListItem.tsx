@@ -2,7 +2,7 @@ import './ListItem.css';
 
 import React, { forwardRef } from 'react';
 
-import { Text } from '##/components/Text';
+import { cnText, textPropViewDefault } from '##/components/Text';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
@@ -35,10 +35,10 @@ const ListItemRender = (
     rightSide,
     rightIcon,
     leftIcon,
-    as,
+    as: Tag = 'div',
     checked,
     onClick,
-    status,
+    status = textPropViewDefault,
     space,
     iconSize,
     ...otherProps
@@ -48,11 +48,16 @@ const ListItemRender = (
     onClick && !disabled ? onClick : undefined;
 
   return (
-    <Text
+    <Tag
       {...otherProps}
       className={cnListItem(
         { active, disabled, checked, interactive: !!handleClick },
         [
+          cnText({
+            lineHeight: 'xs',
+            size,
+            view: status,
+          }),
           cnMixSpace(
             space || {
               pH:
@@ -66,12 +71,8 @@ const ListItemRender = (
           className,
         ],
       )}
-      as={as}
       onClick={handleClick}
-      lineHeight="xs"
-      size={size}
       ref={ref}
-      view={status}
     >
       {renderSlot(leftSide, 'left', size, leftIcon, iconSize)}
       {!rightIcon && !rightSide && !leftSide && !leftIcon
@@ -82,7 +83,7 @@ const ListItemRender = (
             </span>
           )}
       {renderSlot(rightSide, 'right', size, rightIcon, iconSize)}
-    </Text>
+    </Tag>
   );
 };
 

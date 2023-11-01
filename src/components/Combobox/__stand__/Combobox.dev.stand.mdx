@@ -1124,6 +1124,7 @@ export function ComboboxExampleSearchValue() {
         items={items}
         value={value}
         onChange={({ value }) => setValue(value)}
+        onInputChange={({ value }) => setSearchValue(value ?? undefined)}
         searchValue={searchValue}
         multiple
       />
