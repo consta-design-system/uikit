@@ -8,6 +8,7 @@ import { CheckboxGroupExampleSize } from './examples/CheckboxGroupExampleSize/Ch
 import { CheckboxGroupExampleDisabled } from './examples/CheckboxGroupExampleDisabled/CheckboxGroupExampleDisabled';
 import { CheckboxGroupExampleView } from './examples/CheckboxGroupExampleView/CheckboxGroupExampleView';
 import { CheckboxGroupExampleName } from './examples/CheckboxGroupExampleName/CheckboxGroupExampleName';
+import { CheckboxGroupExampleAlign } from './examples/CheckboxGroupExampleAlign/CheckboxGroupExampleAlign';
 
 ```tsx
 import { CheckboxGroup } from '@consta/uikit/CheckboxGroup';
@@ -17,6 +18,7 @@ import { CheckboxGroup } from '@consta/uikit/CheckboxGroup';
 
 - [Содержимое](#содержимое)
 - [Расположение чекбоксов](#расположение-чекбоксов)
+- [Выравнивание](#выравнивание)
 - [Неактивный чекбокс](#неактивный-чекбокс)
 - [Неактивная группа чекбоксов](#неактивная-группа-чекбоксов)
 - [Размер](#размер)
@@ -50,6 +52,7 @@ return (
     onChange={({ value }) => setValue(value)}
     name={'CheckboxGroup'}
   />
+);
 ```
 
 **Выберите номер**
@@ -130,6 +133,28 @@ function CheckboxGroupExampleRow() {
 ```
 
 <CheckboxGroupExampleRow />
+
+## Выравнивание
+
+За выравнивание названия по вертикали по отношению к чекбоксу отвечает свойство `align`. Варианты:
+
+- `center` — чекбокс выровнен по центру контейнера с текстом,
+- `top` — чекбокс выровнен по верхнему краю контейнера с текстом.
+
+```tsx
+<CheckboxGroup
+  value={value}
+  align="top"
+  items={items}
+/>
+<CheckboxGroup
+  value={value}
+  align="center"
+  items={items}
+/>
+```
+
+<CheckboxGroupExampleAlign />
 
 ## Неактивный чекбокс
 
@@ -319,4 +344,5 @@ type OnChange = (props: {
 | [`disabled?`](#неактивная-группа-чекбоксов) | `boolean`                                           | `false`      | Делает группу чекбоксов неактивной                                                                      |
 | [`size?`](#размер)                          | `'m', 'l'`                                          | `'m'`        | Размер группы чекбоксов                                                                                 |
 | [`view?`](#внешний-вид)                     | `'primary', 'ghost'`                                | `'primary'`  | Внешний вид                                                                                             |
+| [`align?`](#выравнивание)                   | `'center', 'top'`                                   | `'center'`   | Выравнивание                                                                                            |
 | `className?`                                | `string`                                            | —            | Дополнительные CSS-классы                                                                               |
