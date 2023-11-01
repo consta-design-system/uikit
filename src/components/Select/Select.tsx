@@ -21,6 +21,7 @@ import {
 import {
   DefaultGroup,
   DefaultItem,
+  iconSizeMap,
   PropRenderItem,
   PropRenderValue,
   SelectComponent,
@@ -184,7 +185,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
               onClick={handleToggleDropdown}
             >
               <IconSelect
-                size="xs"
+                size={iconSizeMap[size]}
                 className={cnSelect('DropdownIndicatorIcon')}
               />
             </button>

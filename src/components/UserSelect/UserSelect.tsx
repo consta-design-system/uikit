@@ -1,6 +1,6 @@
 import '../SelectComponents/Select.css';
 
-import { IconClose } from '@consta/icons/IconClose';
+import { IconClear } from '@consta/icons/IconClear';
 import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
@@ -9,6 +9,7 @@ import { isNotNil } from '##/utils/type-guards';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useSelect } from '../../hooks/useSelect/useSelect';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
+import { clearSizeMap } from '../Combobox';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect } from '../SelectComponents/cnSelect';
 import {
@@ -27,6 +28,7 @@ import {
 import {
   DefaultGroup,
   DefaultItem,
+  iconSizeMap,
   isMultipleParams,
   isNotMultipleParams,
   PropRenderItem,
@@ -281,8 +283,8 @@ const UserSelectRender = <
                 onClick={clearValue}
                 className={cnSelect('ClearIndicator', [cnMixFocus()])}
               >
-                <IconClose
-                  size="xs"
+                <IconClear
+                  size={clearSizeMap[size]}
                   className={cnSelect('ClearIndicatorIcon')}
                 />
               </button>
@@ -295,7 +297,7 @@ const UserSelectRender = <
               onClick={handleToggleDropdown}
             >
               <IconSelect
-                size="xs"
+                size={iconSizeMap[size]}
                 className={cnSelect('DropdownIndicatorIcon')}
               />
             </button>
