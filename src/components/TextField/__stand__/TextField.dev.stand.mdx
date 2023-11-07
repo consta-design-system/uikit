@@ -463,14 +463,14 @@ export const TextFieldExampleWtihClearButton = () => {
 
 ## Маскирование
 
-Для того чтобы использовать маски вместе с компонентом `TextField` необходимо импортировать хук [useIMask](https://github.com/uNmAnNeR/imaskjs/tree/master/packages/react-imask#using-hook).
+Для того, чтобы использовать маски вместе с компонентом `TextField` необходимо импортировать хук [useIMask](https://github.com/uNmAnNeR/imaskjs/tree/master/packages/react-imask#using-hook).
 Подробное описание по составлению собственных масок можно найти в документации к [imask](https://imask.js.org/guide.html).
 
 ### Как работает useIMask
 
 Значение `TextField` или любого другого `<input/>` меняется через хук со связкой с полем через `ref`.
-Для того чтобы указать значение в момент первого рендера используйте `defaultValue`.
-Для того чтобы изменить поле програмно используйтете `setValue` из хука.
+Для того, чтобы указать значение в момент первого рендера, используйте defaultValue.
+Для того, чтобы изменить поле программно, используйтете setValue из хука.
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
@@ -635,7 +635,7 @@ export const TextFieldExampleMaskPassport = () => {
   return (
     <Example col={{ 1: 0, 3: 700 }}>
       <TextFieldMemo
-        label="Пасспорт"
+        label="паспорт"
         placeholder="00 00 000000"
         defaultValue="1234567890"
         inputRef={ref}

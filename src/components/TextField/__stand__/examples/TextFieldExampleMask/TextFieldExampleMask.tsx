@@ -92,7 +92,7 @@ export const TextFieldExampleMaskPassport = () => {
   return (
     <Example col={{ 1: 0, 3: 700 }}>
       <TextFieldMemo
-        label="Пасспорт"
+        label="паспорт"
         placeholder="00 00 000000"
         defaultValue="1234567890"
         inputRef={ref}
