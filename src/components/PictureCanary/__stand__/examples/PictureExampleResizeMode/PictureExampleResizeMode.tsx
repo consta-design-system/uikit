@@ -5,8 +5,8 @@ import React, { useRef } from 'react';
 
 import { cn } from '##/utils/bem';
 
-import ImageDark from '../../../__mocks__/images/Dark/HeroImage_720_1x.jpg';
-import ImageLight from '../../../__mocks__/images/Default/HeroImage_720_1x.jpg';
+import ImageDark from '../../../__mocks__/images/Dark/700 dark.png';
+import ImageLight from '../../../__mocks__/images/Default/700 default.png';
 import { Picture } from '../../../PictureCanary';
 
 const cnPictureExampleResizeMode = cn('PictureExampleResizeMode');
