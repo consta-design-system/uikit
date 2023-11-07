@@ -5,7 +5,7 @@ import React from 'react';
 import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
-export const loaderPropSize = ['m', 's'] as const;
+export const loaderPropSize = ['m', 's', 'xs'] as const;
 export type LoaderPropSize = typeof loaderPropSize[number];
 export const loaderPropSizeDefault: LoaderPropSize = loaderPropSize[0];
 
