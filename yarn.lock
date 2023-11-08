@@ -6832,6 +6832,13 @@ eslint-plugin-flowtype@^8.0.3:
     lodash "^4.17.21"
     string-natural-compare "^3.0.1"
 
+eslint-plugin-id-match@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-id-match/-/eslint-plugin-id-match-0.1.6.tgz#bb4ec1a3169e1d1d2b9d6c621138d11751bcd49a"
+  integrity sha512-4AOx4HiTI67pXmSkN+775lFDRcgfKCJNC3jjBfq+RFCkkVR2I7OysDGoNulRMYhatKdlIpGRb7ML2iByKwGkOA==
+  dependencies:
+    requireindex "~1.1.0"
+
 eslint-plugin-import@^2.25.3, eslint-plugin-import@^2.26.0:
   version "2.26.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.26.0.tgz#f812dc47be4f2b72b478a021605a59fc6fe8b88b"
@@ -14171,6 +14178,11 @@ require-yaml@0.0.1:
   integrity sha512-M6eVEgLPRbeOhgSCnOTtdrOOEQzbXRchg24Xa13c39dMuraFKdI9emUo97Rih0YEFzSICmSKg8w4RQp+rd9pOQ==
   dependencies:
     js-yaml ""
+
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+  integrity sha512-LBnkqsDE7BZKvqylbmn7lTIVdpx4K/QCduRATpO5R+wtPmky/a8pN1bO2D6wXppn1497AJF9mNjqAXr6bdl9jg==
 
 requires-port@^1.0.0:
   version "1.0.0"
