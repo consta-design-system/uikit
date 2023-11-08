@@ -26,7 +26,12 @@ export const UseDebounceExample = () => {
           onChange={({ value }) => setValue(value)}
           placeholder="Поиск"
         />
-        <Text className={cnUseDebounceExample('SearchField')}>
+        <Text
+          view="primary"
+          size="m"
+          lineHeight="m"
+          className={cnUseDebounceExample('SearchField')}
+        >
           Покажем результаты поиска по этому фрагменту: <b>{searchValue}</b>
         </Text>
       </>

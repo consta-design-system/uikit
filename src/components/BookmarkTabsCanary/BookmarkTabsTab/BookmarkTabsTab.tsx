@@ -101,7 +101,13 @@ const BookmarkTabsTabRender = (
       )}
       {!fixed && (
         <>
-          <Text align="left" className={cnBookmarkTabsTab('Label')} size={size}>
+          <Text
+            align="left"
+            className={cnBookmarkTabsTab('Label')}
+            size={size}
+            view="primary"
+            lineHeight="m"
+          >
             {label}
           </Text>
           {RightIcon && (

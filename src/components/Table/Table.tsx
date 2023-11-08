@@ -781,7 +781,9 @@ const InternalTable = <T extends TableRow>(
     placeholder: React.ReactNode,
   ): React.ReactNode => {
     return typeof placeholder === 'string' ? (
-      <Text size="s">{placeholder}</Text>
+      <Text size="s" view="primary" lineHeight="m">
+        {placeholder}
+      </Text>
     ) : (
       placeholder
     );

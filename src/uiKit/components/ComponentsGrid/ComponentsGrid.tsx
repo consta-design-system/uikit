@@ -34,6 +34,7 @@ export const ComponentsGrid: React.FC<ComponentsGridProps> = ({ data }) => {
               lineHeight="xs"
               weight="bold"
               className={cnComponentsGrid('Title')}
+              view="primary"
             >
               {title}
             </Text>

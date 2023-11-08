@@ -71,6 +71,7 @@ export const DateTimeSlider: React.FC<DateTimeSliderProps> = (props) => {
               size="s"
               key={year.label}
               view={year.current ? undefined : 'ghost'}
+              lineHeight="m"
             >
               {year.label}
             </Text>
@@ -101,6 +102,7 @@ export const DateTimeSlider: React.FC<DateTimeSliderProps> = (props) => {
                     size="2xs"
                     view="ghost"
                     align="center"
+                    lineHeight="m"
                   >
                     {item.label}
                   </Text>

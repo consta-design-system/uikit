@@ -49,6 +49,8 @@ const renderPointContent = (
         className={cnProgressStepBarItem('PointText')}
         size={size === 's' ? '2xs' : 'xs'}
         weight="bold"
+        view="primary"
+        lineHeight="m"
       >
         {point}
       </Text>

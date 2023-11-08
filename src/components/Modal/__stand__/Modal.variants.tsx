@@ -50,6 +50,7 @@ const Variants = () => {
             as="p"
             size="s"
             view="secondary"
+            lineHeight="m"
             className={cnModalVariants('Title')}
           >
             Это заголовок модального окна
@@ -58,6 +59,7 @@ const Variants = () => {
             as="p"
             size="m"
             view="primary"
+            lineHeight="m"
             className={cnModalVariants('Body')}
           >
             Это содержимое модального окна. Здесь может быть что угодно: текст,

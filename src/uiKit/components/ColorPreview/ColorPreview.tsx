@@ -54,6 +54,7 @@ export const ColorPreview: React.FC<Props> = ({
           size="m"
           font="mono"
           view="primary"
+          lineHeight="m"
           className={cnColorPreview('Name', [
             wp.decorator({ 'indent-b': '2xs', 'indent-l': '2xs' }),
           ])}
@@ -70,7 +71,7 @@ export const ColorPreview: React.FC<Props> = ({
           }}
         >
           <IconCopy size="xs" />
-          <Text size="s" font="mono">
+          <Text size="s" font="mono" view="primary" lineHeight="m">
             {value}
           </Text>
         </div>
@@ -78,6 +79,7 @@ export const ColorPreview: React.FC<Props> = ({
           as="p"
           size="s"
           view="primary"
+          lineHeight="m"
           className={cnColorPreview('Description', [
             wp.decorator({ 'indent-t': 'none', 'indent-l': '2xs' }),
           ])}

@@ -27,7 +27,9 @@ export const TooltipPositionedCoords = () => {
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setPosition(undefined)}
         >
-          <Text>Область, в которой работает отслеживание мышки</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Область, в которой работает отслеживание мышки
+          </Text>
         </div>
       </Example>
       <Tooltip
@@ -39,7 +41,9 @@ export const TooltipPositionedCoords = () => {
         position={position}
         isInteractive={false}
       >
-        <Text size="xs">Текст тултипа</Text>
+        <Text size="xs" view="primary" lineHeight="m">
+          Текст тултипа
+        </Text>
       </Tooltip>
     </>
   );
@@ -69,7 +73,9 @@ export const TooltipPositionedAnchor = () => {
         size={tooltipPropSizesDefault}
         anchorRef={anchorRef}
       >
-        <Text size="xs">Текст тултипа</Text>
+        <Text size="xs" view="primary" lineHeight="m">
+          Текст тултипа
+        </Text>
       </Tooltip>
     </>
   );

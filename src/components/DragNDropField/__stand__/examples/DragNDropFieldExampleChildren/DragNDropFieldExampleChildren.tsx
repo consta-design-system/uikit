@@ -10,8 +10,12 @@ export const DragNDropFieldExampleRenderProps = () => (
     <DragNDropField onDropFiles={(files) => console.log(files)}>
       {({ openFileDialog }) => (
         <>
-          <Text>Пример с Render Props,</Text>
-          <Text>открывает окно для выбора файла из дочернего контента</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Пример с Render Props,
+          </Text>
+          <Text view="primary" size="m" lineHeight="m">
+            открывает окно для выбора файла из дочернего контента
+          </Text>
           <br />
           <Button onClick={openFileDialog} label="Выбрать файл" />
         </>
@@ -23,7 +27,9 @@ export const DragNDropFieldExampleRenderProps = () => (
 export const DragNDropFieldExampleChildren = () => (
   <Example col={1}>
     <DragNDropField onDropFiles={(files) => console.log(files)}>
-      <Text>Здесь просто текст</Text>
+      <Text view="primary" size="m" lineHeight="m">
+        Здесь просто текст
+      </Text>
     </DragNDropField>
   </Example>
 );

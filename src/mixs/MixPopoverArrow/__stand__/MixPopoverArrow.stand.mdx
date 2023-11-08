@@ -88,7 +88,9 @@ export const MixPopoverArrowExample = () => {
           {(direction) => {
             return (
               <>
-                <Text>Позиция - {direction}</Text>
+                <Text view="primary" size="m" lineHeight="m">
+                  Позиция - {direction}
+                </Text>
                 <div className={cnMixPopoverArrow({ direction })} />
               </>
             );

@@ -51,7 +51,7 @@ export const BookmarkTabsExampleRenderItem = () => {
               ['--bookmarks-tab-width' as string]: tabWidth,
             }}
           >
-            <Text weight="semibold" size="xl">
+            <Text weight="semibold" view="primary" size="xl" lineHeight="m">
               {item}
             </Text>
           </button>

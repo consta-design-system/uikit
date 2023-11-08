@@ -127,7 +127,12 @@ export const Collapse: CollapseComponent = React.forwardRef<
         {typeof label === 'object' ? (
           <div className={cnCollapse('LabelText')}>{label}</div>
         ) : (
-          <Text className={cnCollapse('LabelText')} size={size}>
+          <Text
+            view="primary"
+            className={cnCollapse('LabelText')}
+            size={size}
+            lineHeight="m"
+          >
             {label}
           </Text>
         )}

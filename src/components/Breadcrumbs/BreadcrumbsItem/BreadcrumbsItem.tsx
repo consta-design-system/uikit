@@ -95,6 +95,7 @@ function BreadcrumbsItemRender<ITEM>(
             onClick={handleClick}
             size={size}
             truncate={!onlyIcon}
+            lineHeight="m"
             {...linkProps}
           >
             {Icon &&

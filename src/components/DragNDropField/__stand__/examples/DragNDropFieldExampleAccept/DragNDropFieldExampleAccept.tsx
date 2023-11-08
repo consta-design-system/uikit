@@ -16,8 +16,10 @@ export const DragNDropFieldExampleAcceptDoc = () => (
       accept={['.doc', '.docx']}
       onDropFiles={(files) => console.log(files)}
     >
-      <Text>Сюда можно перетаскивать только DOC и DOCX</Text>
-      <Text view="ghost" font="mono">
+      <Text view="primary" size="m" lineHeight="m" lineHeight="m">
+        Сюда можно перетаскивать только DOC и DOCX
+      </Text>
+      <Text view="ghost" font="mono" size="m" lineHeight="m">
         .doc, .docx
       </Text>
     </DragNDropField>
@@ -30,9 +32,13 @@ export const DragNDropFieldExampleAcceptImage = () => (
       accept="image/*"
       onDropFiles={(files) => console.log(files)}
     >
-      <Text>Сюда можно перетаскивать только картинки,</Text>
-      <Text>зато любые (ну почти)</Text>
-      <Text view="ghost" font="mono">
+      <Text view="primary" size="m" lineHeight="m">
+        Сюда можно перетаскивать только картинки,
+      </Text>
+      <Text view="primary" size="m" lineHeight="m">
+        зато любые (ну почти)
+      </Text>
+      <Text view="ghost" font="mono" lineHeight="m">
         image/*
       </Text>
     </DragNDropField>
