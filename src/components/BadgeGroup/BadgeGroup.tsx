@@ -3,7 +3,7 @@ import './BadgeGroup.css';
 import React, { forwardRef } from 'react';
 
 import { forkRef, useForkRef } from '##/hooks/useForkRef';
-import { useHideElementsInLine } from '##/hooks/useHideElementsInLine';
+import { useHideElementsInLine } from '##/hooks/useHideElementsInLineCanary';
 import { cn } from '##/utils/bem';
 
 import {
@@ -41,19 +41,21 @@ const BadgeGroupRender = (
     ...otherProps
   } = withDefaultGetters(props);
 
-  const {
-    visibleItems,
-    itemsRefs,
-    wrapperRef,
-    hiddenItems,
-    moreRef: hideMoreRef,
-  } = useHideElementsInLine(items);
+  const length = items.length + 1;
+  const moreIndex = length - 1;
 
-  const moreRef = useForkRef([hideMoreRef, moreRefProp]);
+  const { visibleMap, elementsRefs, parentRef } = useHideElementsInLine(
+    length,
+    moreIndex,
+    0,
+    [fitMode, form],
+  );
+
+  const moreRef = useForkRef([elementsRefs[moreIndex], moreRefProp]);
 
   return (
     <div
-      ref={useForkRef([ref, wrapperRef])}
+      ref={useForkRef([ref, parentRef])}
       className={cnBadgeGroup({ size, fitMode }, [className])}
       {...otherProps}
     >
@@ -69,24 +71,23 @@ const BadgeGroupRender = (
             iconLeft={getItemIconLeft(item)}
             iconRight={getItemIconRight(item)}
             as={as}
-            ref={forkRef([itemsRefs[index], getItemRef(item)])}
+            ref={forkRef([elementsRefs[index], getItemRef(item)])}
             view={getItemView(item)}
             status={getItemStatus(item)}
             className={cnBadgeGroup('Badge', {
-              hidden: fitMode === 'reduction' ? !visibleItems[index] : false,
+              hidden: fitMode === 'reduction' ? !visibleMap[index] : false,
             })}
-            {...(getItemAttributes(item) ?? {})}
+            {...getItemAttributes(item)}
           />
         );
       })}
       {fitMode === 'reduction' && (
         <Badge
           className={cnBadgeGroup('Badge', {
-            hidden: hiddenItems.length <= 0,
-            zero: hiddenItems.length <= 0,
+            hidden: !visibleMap[items.length],
           })}
           key="more"
-          label={`+${hiddenItems.length}`}
+          label={`+${visibleMap.filter((item) => !item).length}`}
           status="system"
           form={form}
           size={size}

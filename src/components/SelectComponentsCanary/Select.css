@@ -1,5 +1,6 @@
 .canary--Select {
   --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
+  --clear-button-color: var(--color-control-typo-clear);
   position: relative;
   display: flex;
   justify-content: flex-start;
@@ -299,6 +300,7 @@
     }
 
     &_view_default.canary--Select-SelectContainer_disabled .canary--Select-Control {
+      --clear-button-color: var(--color-control-typo-disable);
       color: var(--color-control-typo-disable);
       background: var(--color-control-bg-disable);
       border-color: var(--color-control-bg-border-disable);
@@ -487,17 +489,26 @@
   }
 
   &-ClearIndicator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(var(--input-height) - (var(--control-border-width) * 2));
     margin: 0;
     padding: 0 var(--space-xs);
-    color: var(--color-control-typo-clear);
+    color: var(--clear-button-color);
     background-color: transparent;
     border: none;
     cursor: pointer;
+
+    &:hover {
+      --clear-button-color: var(--color-control-typo-clear-hover);
+    }
   }
 
   &-ClearIndicatorIcon {
     position: relative;
     top: 1px;
+    color: var(--color-control-typo-placeholder);
   }
 
   &-Input {

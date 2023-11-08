@@ -49,9 +49,5 @@
       left: -300vw;
       visibility: hidden;
     }
-
-    &_zero.Badge {
-      display: none;
-    }
   }
 }
