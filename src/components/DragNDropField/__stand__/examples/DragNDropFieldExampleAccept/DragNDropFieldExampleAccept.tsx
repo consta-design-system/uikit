@@ -16,7 +16,7 @@ export const DragNDropFieldExampleAcceptDoc = () => (
       accept={['.doc', '.docx']}
       onDropFiles={(files) => console.log(files)}
     >
-      <Text view="primary" size="m" lineHeight="m" lineHeight="m">
+      <Text view="primary" size="m" lineHeight="m">
         Сюда можно перетаскивать только DOC и DOCX
       </Text>
       <Text view="ghost" font="mono" size="m" lineHeight="m">

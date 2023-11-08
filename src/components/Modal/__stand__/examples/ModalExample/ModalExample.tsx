@@ -77,7 +77,6 @@ export const ModalExampleTop = () => {
           view="primary"
           label="Окно сверху"
           width="default"
-          lineHeight="m"
           onClick={(): void => setIsModalOpen(true)}
         />
       </Example>
@@ -114,7 +113,6 @@ export const ModalExampleTop = () => {
             label="Ясно-понятно"
             width="default"
             onClick={(): void => setIsModalOpen(false)}
-            lineHeight="m"
           />
         </div>
       </Modal>
@@ -134,7 +132,6 @@ export const ModalExampleCenter = () => {
           label="Окно по центру"
           width="default"
           onClick={(): void => setIsModalOpen(true)}
-          lineHeight="m"
         />
       </Example>
       <Modal
