@@ -95,7 +95,7 @@ const PaginationBaseRender = (
     item,
     { e },
   ) => {
-    onChange?.(item, { e, value: item });
+    onChange?.(item, { e });
   };
 
   return (

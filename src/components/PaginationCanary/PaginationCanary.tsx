@@ -111,7 +111,7 @@ const PaginationRender = <TYPE extends PaginationPropType>(
       if (type === 'next') {
         newValue = Math.min(value + 1, items);
       }
-      onChange?.(newValue, { e, value: newValue });
+      onChange?.(newValue, { e });
     };
 
   const { pages, wrapperRef, buttonRefs } = usePaginationItems({
@@ -130,7 +130,7 @@ const PaginationRender = <TYPE extends PaginationPropType>(
     { e },
   ) => {
     if (page !== value) {
-      onChange?.(page, { e, value: page });
+      onChange?.(page, { e });
     }
   };
 

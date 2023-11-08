@@ -68,7 +68,7 @@ export const PaginationNumberInput = forwardRef<
     }
     if (pageNumber !== value) {
       const newValue = Math.max(Math.min(pageNumber, total), 0);
-      onChange?.(newValue, { e, value: newValue });
+      onChange?.(newValue, { e });
     }
   };
 
@@ -96,16 +96,17 @@ export const PaginationNumberInput = forwardRef<
         return;
       }
       e.stopPropagation();
-      if (e.key === 'ArrowUp') {
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
         e.preventDefault();
-        setStringValue((value) =>
-          Math.min(Number(value) + 1, total).toString(),
+        const value = Math.max(
+          Math.min(
+            Number(stringValueRef.current) + (e.key === 'ArrowUp' ? 1 : -1),
+            total,
+          ),
+          1,
         );
-        return;
-      }
-      if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        setStringValue((value) => Math.max(Number(value) - 1, 1).toString());
+        setStringValue(value.toString());
+        onChange?.(value, { e });
       }
     },
     [total],

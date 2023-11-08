@@ -29,12 +29,12 @@ export type PaginationPropHotKey = { label: string; keys: string[] };
 
 export type PaginationPropOnItemClick<ITEM> = (
   item: ITEM,
-  params: { e: React.MouseEvent; item: ITEM },
+  params: { e: React.MouseEvent },
 ) => void;
 
 export type PaginationPropOnChange<ITEM> = (
   value: ITEM,
-  params: { e: React.MouseEvent | Event; value: ITEM },
+  params: { e: React.MouseEvent | Event | React.KeyboardEvent },
 ) => void;
 
 // ARROWS

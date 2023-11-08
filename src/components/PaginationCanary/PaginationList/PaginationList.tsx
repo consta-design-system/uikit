@@ -41,7 +41,7 @@ const PaginationListRender = <ITEM extends PaginationBaseItemDefault>(
   const renderItem = (item: ITEM) => {
     const handleClick: React.MouseEventHandler = (e) => {
       getItemOnClick?.(item)?.(e);
-      onItemClick?.(item, { e, item });
+      onItemClick?.(item, { e });
     };
 
     const attributes = getItemAttributes?.(item) ?? {};
