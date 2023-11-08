@@ -12,7 +12,6 @@ type OnChange = (
   value: Item[] | null,
   props: {
     e: React.ChangeEvent<HTMLInputElement>;
-    value: Item[] | null;
   },
 ) => void;
 
@@ -109,7 +108,6 @@ describe('Компонент SwitchGroup', () => {
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith([items[0]], {
           e: expect.any(Object),
-          value: [items[0]],
         });
       });
     });

@@ -140,9 +140,7 @@ export function useSlider<RANGE extends boolean>(
           max,
           0,
         ) as SliderValue<RANGE>);
-    onChange?.(newValue, {
-      value: newValue,
-    });
+    onChange?.(newValue, {});
   }, [step]);
 
   useEffect(() => {
@@ -161,7 +159,7 @@ export function useSlider<RANGE extends boolean>(
     if (isRangeParams(props)) {
       if (props.value[0] > props.value[1]) {
         const newValue: SliderValue<true> = [props.value[1], props.value[1]];
-        props.onChange?.(newValue, { value: newValue });
+        props.onChange?.(newValue, {});
       }
     }
   }, []);
@@ -188,7 +186,6 @@ export function useSlider<RANGE extends boolean>(
         setTooltipPosition(getActiveValue(newValue, 0), 0);
         onChange?.(newValue, {
           e,
-          value: newValue,
         });
       }
     }
@@ -260,7 +257,6 @@ export function useSlider<RANGE extends boolean>(
           setTooltipPosition(getActiveValue(newValue, typeButton), typeButton);
           onChange?.(newValue, {
             e: event,
-            value: newValue,
           });
         }
       }
@@ -326,7 +322,7 @@ export function useSlider<RANGE extends boolean>(
       const newValue: number = getActiveValue(position, button);
       setCurrentValue(position);
       if (oldValue !== newValue) {
-        onAfterChange?.(position, { e: event, value: position });
+        onAfterChange?.(position, { e: event });
       }
     }
   };
@@ -353,10 +349,10 @@ export function useSlider<RANGE extends boolean>(
         const copyValues = [...lastValue.current].sort(
           (a, b) => Number(a) - Number(b),
         ) as SliderValue<true>;
-        props.onChange?.(copyValues, { e, value: copyValues });
+        props.onChange?.(copyValues, { e });
       }
       if (isNotRangeParams(props) && typeof lastValue.current === 'number') {
-        props.onChange?.(lastValue.current, { e, value: lastValue.current });
+        props.onChange?.(lastValue.current, { e });
       }
       setCurrentButton(null);
       activeButton.current = null;

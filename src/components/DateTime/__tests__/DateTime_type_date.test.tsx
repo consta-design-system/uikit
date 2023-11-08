@@ -178,7 +178,6 @@ describe('Компонент DateTime_type_date', () => {
         const date = new Date(1970, 0, 1);
         expect(handleClick).toHaveBeenCalledWith(date, {
           e: expect.any(Object),
-          value: date,
         });
       });
     });

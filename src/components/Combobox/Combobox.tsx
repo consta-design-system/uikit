@@ -188,7 +188,7 @@ const ComboboxRender = <
   const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleInputChange(e);
     const { value } = e.target;
-    !disabled && onInputChange?.({ e, id, name, value: value || null });
+    !disabled && onInputChange?.(value || null, { e, id, name });
   };
 
   const renderControlValue = () => {

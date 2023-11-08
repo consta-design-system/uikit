@@ -55,7 +55,6 @@ export type ChoiceGroupPropOnChange<ITEM, MULTIPLE extends boolean> = (
   value: MULTIPLE extends true ? ITEM[] | null : ITEM,
   props: {
     e: React.ChangeEvent<HTMLInputElement>;
-    value: MULTIPLE extends true ? ITEM[] | null : ITEM;
   },
 ) => void;
 

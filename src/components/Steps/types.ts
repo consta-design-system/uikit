@@ -8,7 +8,6 @@ export type StepsPropOnChange<ITEM> = (
   value: ITEM,
   props: {
     e: React.MouseEvent;
-    value: ITEM;
   },
 ) => void;
 

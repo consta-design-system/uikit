@@ -54,7 +54,6 @@ describe('Компонент DateTime_type_dateTime', () => {
       const date = new Date(1970, 0, 9);
       expect(onChange).toHaveBeenLastCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
 
@@ -107,7 +106,6 @@ describe('Компонент DateTime_type_dateTime', () => {
       const date = new Date(2022, 5, 27, 10);
       expect(onChange).toHaveBeenCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
 
@@ -130,7 +128,6 @@ describe('Компонент DateTime_type_dateTime', () => {
       const date = new Date(2022, 5, 27, 11, 15);
       expect(onChange).toHaveBeenCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
 
@@ -153,7 +150,6 @@ describe('Компонент DateTime_type_dateTime', () => {
       const date = new Date(2022, 5, 27, 11, 10, 35);
       expect(onChange).toHaveBeenCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
   });
@@ -199,7 +195,6 @@ describe('Компонент DateTime_type_dateTime', () => {
       const date = new Date(2022, 4, 27, 11, 10, 35);
       expect(onChange).toHaveBeenCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
   });
@@ -234,7 +229,6 @@ describe('Компонент DateTime_type_dateTime', () => {
           const date = new Date(2022, 5, 27, multiplicityHours);
           expect(onChange).toHaveBeenCalledWith(date, {
             e: expect.any(Object),
-            value: date,
           });
         }
       });
@@ -264,7 +258,6 @@ describe('Компонент DateTime_type_dateTime', () => {
 
             expect(onChange).toHaveBeenCalledWith(date, {
               e: expect.any(Object),
-              value: date,
             });
           }
         });
@@ -295,7 +288,6 @@ describe('Компонент DateTime_type_dateTime', () => {
             const date = new Date(2022, 5, 27, 11, 34, multiplicitySeconds);
             expect(onChange).toHaveBeenCalledWith(date, {
               e: expect.any(Object),
-              value: date,
             });
           }
         });

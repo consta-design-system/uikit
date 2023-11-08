@@ -36,7 +36,6 @@ export type RadioGroupPropOnChange<ITEM> = (
   value: ITEM,
   props: {
     e: React.ChangeEvent<HTMLInputElement>;
-    value: ITEM;
   },
 ) => void;
 

@@ -75,7 +75,6 @@ describe('Компонент DateTime_type_time', () => {
       const date = new Date(1970, 0, 1, 11, 0, 0);
       expect(onChange).toHaveBeenCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
 
@@ -94,7 +93,6 @@ describe('Компонент DateTime_type_time', () => {
       const date = new Date(1970, 0, 1, 10, 11, 0);
       expect(onChange).toHaveBeenCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
 
@@ -113,7 +111,6 @@ describe('Компонент DateTime_type_time', () => {
       const date = new Date(1970, 0, 1, 10, 10, 11);
       expect(onChange).toHaveBeenCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
   });
@@ -142,7 +139,6 @@ describe('Компонент DateTime_type_time', () => {
       const date = new Date(1970, 0, 1, 2, 0, 0);
       expect(onChange).toHaveBeenCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
 
@@ -165,7 +161,6 @@ describe('Компонент DateTime_type_time', () => {
       const date = new Date(1970, 0, 1, 10, 2, 0);
       expect(onChange).toHaveBeenCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
 
@@ -188,7 +183,6 @@ describe('Компонент DateTime_type_time', () => {
       const date = new Date(1970, 0, 1, 10, 10, 2);
       expect(onChange).toHaveBeenCalledWith(date, {
         e: expect.any(Object),
-        value: date,
       });
     });
   });

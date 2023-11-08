@@ -118,7 +118,7 @@ describe('Компонент Button', () => {
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(
           value,
-          expect.objectContaining({ value }),
+          expect.objectContaining({ e: expect.any(Object) }),
         );
       });
     });

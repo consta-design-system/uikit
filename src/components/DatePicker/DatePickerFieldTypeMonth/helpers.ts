@@ -25,7 +25,6 @@ type DatePickerFieldTypeMonthPropOnChange = (
   value: Date | null,
   props: {
     e: Event;
-    value: Date | null;
   },
 ) => void;
 
@@ -109,7 +108,7 @@ export const usePicker = (props: UsePickerProps) => {
       if (onChange) {
         if (!stringValue) {
           if (value) {
-            onChange(null, { e, value: null });
+            onChange(null, { e });
           }
           return;
         }
@@ -142,13 +141,13 @@ export const usePicker = (props: UsePickerProps) => {
               date,
             });
             if (value) {
-              onChange(null, { e, value: null });
+              onChange(null, { e });
             }
             return;
           }
-          onChange(date, { e, value: date });
+          onChange(date, { e });
         } else if (value) {
-          onChange(null, { e, value: null });
+          onChange(null, { e });
         }
       }
     },
@@ -225,7 +224,7 @@ export const usePicker = (props: UsePickerProps) => {
 
   const clearValue = (e: Event) => {
     setStringValue(null);
-    onChange?.(null, { e, value: null });
+    onChange?.(null, { e });
   };
 
   // при изменении value, нужно обновить stringValue

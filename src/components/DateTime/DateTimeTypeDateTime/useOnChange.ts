@@ -38,7 +38,6 @@ export const useOnChange = (
     const newValue = set(value, { hours, minutes, seconds });
     onChangeRef.current?.(newValue, {
       e,
-      value: newValue,
     });
   }, []);
 
@@ -51,14 +50,13 @@ export const useOnChange = (
       ];
       onChangeRangeRef.current?.(newValue, {
         e,
-        value: newValue,
       });
     },
     [],
   );
 
   const onTimeChange: DateTimePropOnChange = useCallback((value, { e }) => {
-    onChangeRef.current?.(value, { e, value });
+    onChangeRef.current?.(value, { e });
   }, []);
 
   useEffect(() => setTime(normalizeValue), [normalizeValue?.getTime()]);

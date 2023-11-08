@@ -24,7 +24,6 @@ export type RadioPropOnChange = (
   checked: boolean,
   params: {
     e: React.ChangeEvent<HTMLInputElement>;
-    checked: boolean;
   },
 ) => void;
 
@@ -84,7 +83,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       if (onChange) {
-        onChange(!checked, { e, checked: !checked });
+        onChange(!checked, { e });
       }
     };
 

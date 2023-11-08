@@ -57,14 +57,12 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
         const newValue = normalizeRangeValue([value, props?.value?.[1]]);
         props.onChange?.(newValue, {
           e,
-          value: newValue,
         });
       }
       if (endFocused) {
         const newValue = normalizeRangeValue([props?.value?.[0], value]);
         props.onChange?.(newValue, {
           e,
-          value: newValue,
         });
       }
     };

@@ -50,7 +50,6 @@ const renderComponent = (props: {
     value: Item | null,
     props: {
       e: React.ChangeEvent<HTMLInputElement>;
-      value: Item | null;
     },
   ) => void;
   disabled?: boolean;
@@ -86,7 +85,6 @@ const renderComponentMultiple = (props: {
     value: Item[] | null,
     props: {
       e: React.ChangeEvent<HTMLInputElement>;
-      value: Item[] | null;
     },
   ) => void;
   value?: Item[];
@@ -231,7 +229,6 @@ describe('Компонент ChoiceGroup', () => {
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(elements[elementIndex], {
           e: expect.any(Object),
-          value: elements[elementIndex],
         });
       });
       it('клик по выбраному элементу, не должен вызвать callback', () => {
@@ -264,7 +261,6 @@ describe('Компонент ChoiceGroup', () => {
           [defaultValue, elements[elementIndex]],
           {
             e: expect.any(Object),
-            value: [defaultValue, elements[elementIndex]],
           },
         );
       });
@@ -281,7 +277,6 @@ describe('Компонент ChoiceGroup', () => {
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(null, {
           e: expect.any(Object),
-          value: null,
         });
       });
       it(`клик по выбраному элементу (всего выбрано 2 элемента), должен вызвать callback c ожидаемыми параметрами`, () => {
@@ -301,7 +296,6 @@ describe('Компонент ChoiceGroup', () => {
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith([defaultValue], {
           e: expect.any(Object),
-          value: [defaultValue],
         });
       });
     });

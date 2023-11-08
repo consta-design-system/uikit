@@ -16,7 +16,6 @@ export type SwitchPropOnChange = (
   checked: boolean,
   params: {
     e: React.ChangeEvent<HTMLInputElement>;
-    checked: boolean;
   },
 ) => void;
 

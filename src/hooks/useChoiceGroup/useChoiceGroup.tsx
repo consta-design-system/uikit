@@ -15,7 +15,6 @@ export type CallbackWithMultiple<ITEM, EVENT> = (
   value: ITEM[] | null,
   props: {
     e: EVENT;
-    value: ITEM[] | null;
   },
 ) => void;
 
@@ -23,7 +22,6 @@ export type CallbackWithoutMultiple<ITEM, EVENT> = (
   value: ITEM,
   props: {
     e: EVENT;
-    value: ITEM;
   },
 ) => void;
 
@@ -102,11 +100,11 @@ export function useChoiceGroup<ITEM, EVENT>(
         newValue = props.value ? [...props.value] : [];
         newValue.push(selectedItem);
       }
-      props.callBack?.(newValue, { e, value: newValue });
+      props.callBack?.(newValue, { e });
     }
 
     if (isNotMultiple(props)) {
-      props.callBack?.(selectedItem, { e, value: selectedItem });
+      props.callBack?.(selectedItem, { e });
     }
   };
 

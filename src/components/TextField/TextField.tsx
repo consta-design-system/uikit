@@ -132,7 +132,6 @@ export const TextFieldRender = <TYPE extends string>(
           e,
           id,
           name,
-          value: e.target.value || null,
         });
     },
     [id, name, disabled],
@@ -183,7 +182,6 @@ export const TextFieldRender = <TYPE extends string>(
         e,
         id,
         name,
-        value: newValue,
       });
     }
   };
@@ -215,7 +213,6 @@ export const TextFieldRender = <TYPE extends string>(
       e,
       id,
       name,
-      value: null,
     });
   }, []);
 
@@ -228,7 +225,6 @@ export const TextFieldRender = <TYPE extends string>(
       e,
       id,
       name,
-      value: newValue,
     });
   };
 

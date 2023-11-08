@@ -70,14 +70,12 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
         const newValue = normalizeRangeValue([value, props?.value?.[1]]);
         props.onChange?.(newValue, {
           e,
-          value: newValue,
         });
       }
       if (endFocused) {
         const newValue = normalizeRangeValue([props?.value?.[0], value]);
         props.onChange?.(newValue, {
           e,
-          value: newValue,
         });
       }
     };

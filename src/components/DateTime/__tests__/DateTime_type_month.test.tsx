@@ -176,7 +176,6 @@ describe('Компонент DateTime_type_month', () => {
         const date = new Date(1970, 3);
         expect(handleClick).toHaveBeenCalledWith(date, {
           e: expect.any(Object),
-          value: date,
         });
       });
     });
@@ -224,10 +223,6 @@ describe('Компонент DateTime_type_month', () => {
     dateTimePropView.forEach((view) => {
       it(`onChangeRange отрабатывает при клике на месяц при view="${view}"`, () => {
         const onChangeRange = jest.fn((value, { e }) => {
-          console.warn(value, [
-            value[0] ? new Date(value[0]) : null,
-            value[1] ? new Date(value[1]) : null,
-          ]);
           return [
             value[0] ? new Date(value[0]) : null,
             value[1] ? new Date(value[1]) : null,
@@ -252,12 +247,12 @@ describe('Компонент DateTime_type_month', () => {
         expect(onChangeRange).toHaveBeenNthCalledWith(
           1,
           firstDate,
-          expect.objectContaining({ value: firstDate }),
+          expect.objectContaining({ e: expect.any(Object) }),
         );
         expect(onChangeRange).toHaveBeenNthCalledWith(
           2,
           secondDate,
-          expect.objectContaining({ value: secondDate }),
+          expect.objectContaining({ e: expect.any(Object) }),
         );
       });
     });

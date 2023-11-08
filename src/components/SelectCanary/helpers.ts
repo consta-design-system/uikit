@@ -47,7 +47,7 @@ export type PropRenderValue<ITEM> = (
 
 export type SelectPropOnChange<ITEM> = (
   value: ITEM | null,
-  props: { e: React.SyntheticEvent; value: ITEM | null },
+  props: { e: React.SyntheticEvent },
 ) => void;
 
 export type SelectProps<

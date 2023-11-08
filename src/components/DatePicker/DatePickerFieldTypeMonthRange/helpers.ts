@@ -7,7 +7,6 @@ type DatePickerFieldTypeMonthRangePropOnChange = (
   value: DateRange | null,
   props: {
     e: Event;
-    value: DateRange | null;
   },
 ) => void;
 

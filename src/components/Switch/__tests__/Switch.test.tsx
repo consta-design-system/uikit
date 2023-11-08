@@ -72,7 +72,6 @@ describe('Компонент Switch', () => {
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(true, {
           e: expect.any(Object),
-          checked: true,
         });
       });
     });

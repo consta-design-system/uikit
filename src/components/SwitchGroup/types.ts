@@ -20,7 +20,6 @@ export type SwitchGroupPropOnChange<ITEM> = (
   value: ITEM[] | null,
   props: {
     e: React.ChangeEvent<HTMLInputElement>;
-    value: ITEM[] | null;
   },
 ) => void;
 

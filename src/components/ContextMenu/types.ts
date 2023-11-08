@@ -44,7 +44,6 @@ export type ContextMenuPropOnItemClick<ITEM> = (
   item: ITEM,
   params: {
     e: React.MouseEvent;
-    item: ITEM;
   },
 ) => void;
 

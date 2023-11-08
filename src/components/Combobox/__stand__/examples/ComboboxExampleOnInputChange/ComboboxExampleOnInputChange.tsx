@@ -34,7 +34,7 @@ export function ComboboxExampleOnInputChange() {
         placeholder="Выберите вариант"
         items={items}
         value={value}
-        onInputChange={({ value }) => setSearch(value)}
+        onInputChange={setSearch}
         onChange={({ value }) => setValue(value)}
       />
     </Example>

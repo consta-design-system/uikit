@@ -58,7 +58,6 @@ export type BookmarkTabsPropOnChange<ITEM> = (
   value: ITEM,
   params: {
     e: React.MouseEvent;
-    id?: string;
   },
 ) => void;
 
@@ -82,7 +81,7 @@ export type BookmarkTabsPropRenderItem<ITEM> = (
 
 export type BookmarkTabsPropOnRemove<ITEM> = (
   item: ITEM,
-  params: { e: React.MouseEvent; item: ITEM },
+  params: { e: React.MouseEvent },
 ) => void;
 
 export type BookmarkTabsProps<ITEM = BookmarkTabsItemDefault> =

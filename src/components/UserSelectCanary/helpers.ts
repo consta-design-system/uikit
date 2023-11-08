@@ -56,7 +56,6 @@ type UserSelectPropOnChange<ITEM, MULTIPLE extends boolean> = (
   value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
   props: {
     e: React.SyntheticEvent;
-    value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
   },
 ) => void;
 type UserSelectPropValue<ITEM, MULTIPLE extends boolean> =

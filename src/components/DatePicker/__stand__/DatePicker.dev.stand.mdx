@@ -564,7 +564,6 @@ type DatePickerPropName<TYPE> = TYPE extends Range
 type DatePickerPropOnChange<TYPE> = (
   value: DatePickerPropValue<TYPE>,
   props: {
-    value: DatePickerPropValue<TYPE>;
     e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
   },
 ) => void;

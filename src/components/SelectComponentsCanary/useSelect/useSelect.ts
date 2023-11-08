@@ -40,7 +40,6 @@ type OnChangeProp<ITEM, MULTIPLE extends boolean> = (
   value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
   props: {
     e: React.SyntheticEvent;
-    value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
   },
 ) => void;
 
@@ -409,7 +408,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       const val = newValue?.length ? newValue : null;
       params.onChange(val, {
         e,
-        value: val,
       });
     }
   };
@@ -425,10 +423,10 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
         ? value.filter((value) => getItemKey(value) !== getItemKey(item))
         : [...value, item];
       const val = newValue?.length ? newValue : null;
-      params.onChange(val, { e, value: val });
+      params.onChange(val, { e });
     }
     if (isNotMultipleParams(params)) {
-      params.onChange(item, { e, value: item });
+      params.onChange(item, { e });
       setOpen(false);
       setSearch('');
     }
@@ -456,12 +454,11 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
         }
       });
       if (currentGroupValues.length === nonDisabledItems.length) {
-        params.onChange(withoutGroupValues, { e, value: withoutGroupValues });
+        params.onChange(withoutGroupValues, { e });
       } else {
         const val = [...withoutGroupValues, ...nonDisabledItems];
         params.onChange(val, {
           e,
-          value: val,
         });
       }
     }
@@ -496,11 +493,10 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       const val = results && results.length > 0 ? results : null;
       params.onChange(val, {
         e,
-        value: val,
       });
     }
     if (isNotMultipleParams(params)) {
-      params.onChange(null, { e, value: null });
+      params.onChange(null, { e });
     }
     setSearch('');
   };

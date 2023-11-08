@@ -26,7 +26,6 @@ export type SliderPropOnChange<RANGE> = (
       | React.MouseEvent
       | React.KeyboardEvent
       | React.ChangeEvent;
-    value: SliderValue<RANGE>;
   },
 ) => void;
 
@@ -150,7 +149,7 @@ export const getOnChandgeForInput =
       return;
     }
     if (isNotRangeParams(props)) {
-      props.onChange(value, { e, value });
+      props.onChange(value, { e });
     }
     if (isRangeParams(props)) {
       const newValue: SliderValue<true> = field
@@ -158,7 +157,6 @@ export const getOnChandgeForInput =
         : [value, props.value[1]];
       props.onChange(newValue, {
         e,
-        value: newValue,
       });
     }
   };

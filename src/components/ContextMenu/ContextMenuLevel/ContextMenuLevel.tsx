@@ -213,7 +213,6 @@ const ContextMenuLevelRender = (
       setActiveIndex(items.indexOf(item));
     }
     onItemClickProp?.(item, {
-      item,
       e: e as React.MouseEvent<HTMLDivElement>,
     });
   };

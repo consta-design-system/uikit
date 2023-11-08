@@ -176,7 +176,6 @@ describe('Компонент DateTime_type_year', () => {
 
         expect(handleClick).toHaveBeenCalledWith(new Date(1972, 0), {
           e: expect.any(Object),
-          value: new Date(1972, 0),
         });
       });
     });
@@ -241,7 +240,6 @@ describe('Компонент DateTime_type_year', () => {
 
           expect(onChange).toHaveBeenCalledWith(new Date(2070, 0), {
             e: expect.any(Object),
-            value: new Date(2070, 0),
           });
         } else {
           expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
@@ -255,7 +253,6 @@ describe('Компонент DateTime_type_year', () => {
 
           expect(onChange).toHaveBeenCalledWith(new Date(1980, 0), {
             e: expect.any(Object),
-            value: new Date(1980, 0),
           });
         }
       });
@@ -281,7 +278,6 @@ describe('Компонент DateTime_type_year', () => {
 
           expect(onChange).toHaveBeenCalledWith(new Date(1870, 0), {
             e: expect.any(Object),
-            value: new Date(1870, 0),
           });
         } else {
           expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
@@ -294,7 +290,6 @@ describe('Компонент DateTime_type_year', () => {
           fireEvent.click(newCurrentValue);
           expect(onChange).toHaveBeenCalledWith(new Date(1960, 0), {
             e: expect.any(Object),
-            value: new Date(1960, 0),
           });
         }
       });

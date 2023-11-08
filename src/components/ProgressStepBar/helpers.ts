@@ -84,7 +84,6 @@ export type ProgressStepBarPropOnItemClick<ITEM> = (
   item: ITEM,
   props: {
     e: React.MouseEvent;
-    item: ITEM;
     index: number;
   },
 ) => void;

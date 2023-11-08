@@ -8,10 +8,7 @@ type Item = {
   label: string;
   disabled?: boolean;
 };
-type OnChange = (
-  value: Item | null,
-  props: { e: React.MouseEvent; value: Item | null },
-) => void;
+type OnChange = (value: Item | null, props: { e: React.MouseEvent }) => void;
 
 const testId = 'StepsCanary';
 
@@ -95,7 +92,6 @@ describe('Компонент Steps', () => {
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(items[1], {
           e: expect.any(Object),
-          value: items[1],
         });
       });
     });

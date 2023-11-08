@@ -22,7 +22,7 @@ export function getHandleSelectDate(
 ): HandleSelectDate {
   return (value, { e }) => {
     if (typeof props.onChange === 'function') {
-      props.onChange(value, { e, value });
+      props.onChange(value, { e });
     }
 
     if (typeof props.onChangeRange === 'function') {
@@ -35,14 +35,12 @@ export function getHandleSelectDate(
       if (isDefined(startDate) && props.isEqualUnit(startDate, value)) {
         return props.onChangeRange([endDate, undefined], {
           e,
-          value: [endDate, undefined],
         });
       }
 
       if (isDefined(endDate) && props.isEqualUnit(endDate, value)) {
         return props.onChangeRange([startDate, undefined], {
           e,
-          value: [startDate, undefined],
         });
       }
 
@@ -51,7 +49,6 @@ export function getHandleSelectDate(
           startDate > value ? [value, startDate] : [startDate, value];
         return props.onChangeRange(newValue, {
           e,
-          value: newValue,
         });
       }
 
@@ -60,13 +57,11 @@ export function getHandleSelectDate(
           endDate > value ? [value, endDate] : [endDate, value];
         return props.onChangeRange(newValue, {
           e,
-          value: newValue,
         });
       }
 
       props.onChangeRange([value, undefined], {
         e,
-        value: [value, undefined],
       });
     }
   };

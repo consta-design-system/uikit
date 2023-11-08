@@ -26,7 +26,6 @@ export type DateTimePropValue<TYPE> = TYPE extends СapableRangeType
 export type DateTimePropOnChange = (
   value: Date,
   props: {
-    value: Date;
     e: React.MouseEvent<HTMLButtonElement>;
   },
 ) => void;
@@ -35,7 +34,6 @@ export type DateTimePropOnChangeRange<TYPE> = TYPE extends СapableRangeType
   ? (
       value: DateRange,
       props: {
-        value: DateRange;
         e: React.MouseEvent<HTMLButtonElement>;
       },
     ) => void

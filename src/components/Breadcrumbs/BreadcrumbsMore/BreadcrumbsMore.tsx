@@ -86,7 +86,7 @@ function BreadcrumbsMoreRender<ITEM>(
   useEffect(setOpen.off, [items]);
 
   const onItemClick: ContextMenuPropOnItemClick<ITEM> = (item, { e }) => {
-    onItemClickProp?.(item, { e, item });
+    onItemClickProp?.(item, { e });
     getItemOnClick?.(item)?.(e);
   };
 

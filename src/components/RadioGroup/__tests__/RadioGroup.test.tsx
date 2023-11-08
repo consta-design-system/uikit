@@ -12,7 +12,6 @@ type OnChange = (
   value: Item,
   props: {
     e: React.ChangeEvent<HTMLInputElement>;
-    value: Item;
   },
 ) => void;
 
@@ -108,7 +107,6 @@ describe('Компонент RadioGroup', () => {
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(items[0], {
           e: expect.any(Object),
-          value: items[0],
         });
       });
     });

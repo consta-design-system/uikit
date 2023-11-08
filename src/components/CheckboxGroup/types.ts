@@ -48,7 +48,6 @@ export type CheckboxGroupPropOnChange<ITEM> = (
   value: ITEM[] | null,
   props: {
     e: React.ChangeEvent<HTMLInputElement>;
-    value: ITEM[] | null;
   },
 ) => void;
 

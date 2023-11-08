@@ -24,7 +24,6 @@ export type CheckboxPropOnChange = (
   checked: boolean,
   params: {
     e: React.ChangeEvent<HTMLInputElement>;
-    checked: boolean;
   },
 ) => void;
 
@@ -84,7 +83,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
       if (onChange) {
-        onChange(!checked, { e, checked: !checked });
+        onChange(!checked, { e });
       }
     };
 

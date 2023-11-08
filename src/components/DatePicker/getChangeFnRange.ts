@@ -4,10 +4,7 @@ import isEqual from 'date-fns/isEqual';
 import { DateRange } from '../../utils/types/Date';
 import { datePickerErrorTypes, DatePickerPropOnError } from './types';
 
-type OnChange = (
-  value: DateRange | null,
-  props: { e: Event; value: DateRange | null },
-) => void;
+type OnChange = (value: DateRange | null, props: { e: Event }) => void;
 
 const handleChange = (
   e: Event,
@@ -22,25 +19,25 @@ const handleChange = (
 
   if (start && end) {
     if (isBefore(start, end) || isEqual(start, end)) {
-      onChange([start, end], { e, value: [start, end] });
+      onChange([start, end], { e });
       return;
     }
-    onChange([start, undefined], { e, value: [start, undefined] });
+    onChange([start, undefined], { e });
     onError && onError({ type: datePickerErrorTypes[2], date: [start, end] });
     return;
   }
 
   if (start) {
-    onChange([start, undefined], { e, value: [start, undefined] });
+    onChange([start, undefined], { e });
     return;
   }
 
   if (end) {
-    onChange([undefined, end], { e, value: [undefined, end] });
+    onChange([undefined, end], { e });
     return;
   }
 
-  onChange(null, { e, value: null });
+  onChange(null, { e });
 };
 
 export const getChangeFnRange = (

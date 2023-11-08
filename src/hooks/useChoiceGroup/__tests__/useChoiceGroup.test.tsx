@@ -7,7 +7,6 @@ type CallbackWithMultiple<ITEM, EVENT> = (
   value: ITEM[] | null,
   props: {
     e?: EVENT;
-    value: ITEM[] | null;
   },
 ) => void;
 
@@ -15,7 +14,6 @@ type CallbackWithoutMultiple<ITEM, EVENT> = (
   value: ITEM,
   props: {
     e?: EVENT;
-    value: ITEM;
   },
 ) => void;
 

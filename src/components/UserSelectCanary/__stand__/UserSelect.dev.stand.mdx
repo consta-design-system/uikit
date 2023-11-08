@@ -1415,7 +1415,6 @@ type UserSelectGroupDefault = {
 type UserSelectPropOnChange<ITEM, MULTIPLE extends boolean> = (
   value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
   props: {
-    value: (MULTIPLE extends true ? ITEM[] : ITEM) | null;
     e: React.SyntheticEvent;
   },
 ) => void;

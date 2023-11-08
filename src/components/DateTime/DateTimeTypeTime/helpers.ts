@@ -32,7 +32,6 @@ export const dateTimeTimePropLocaleDefault = {
 type DateTimeTimePropOnChange = (
   value: Date,
   props: {
-    value: Date;
     e: React.MouseEvent<HTMLButtonElement>;
   },
 ) => void;
@@ -75,7 +74,7 @@ const getItemData = (
       !isInMinMaxDate(date, minDate, maxDate, startOfUnit, endOfUnit) ||
       isDisableDate({ date, disableDates, mode: 'time', timeType });
     const onClick = (e: React.MouseEvent<HTMLButtonElement>) =>
-      !disabled && onChangeRef?.current?.(date, { e, value: date });
+      !disabled && onChangeRef?.current?.(date, { e });
 
     return {
       label,

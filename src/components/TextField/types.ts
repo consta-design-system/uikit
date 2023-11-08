@@ -20,7 +20,6 @@ export type TextFieldOnChangeArguments = {
   e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
-  value: TextFieldPropValue;
 };
 
 export const textFieldPropView = ['default', 'clear'] as const;

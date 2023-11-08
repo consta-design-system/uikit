@@ -13,7 +13,6 @@ export type ThemeTogglerPropOnChange<ITEM> = (
   value: ITEM,
   props: {
     e: React.MouseEvent;
-    value: ITEM;
   },
 ) => void;
 export type ThemeTogglerPropGetItemKey<ITEM> = (item: ITEM) => string | number;

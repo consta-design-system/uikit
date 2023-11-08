@@ -44,7 +44,6 @@ export type DatePickerPropValue<TYPE extends DatePickerPropType> =
 export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (
   value: DatePickerPropValue<TYPE>,
   props: {
-    value: DatePickerPropValue<TYPE>;
     e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
   },
 ) => void;

@@ -164,7 +164,6 @@ describe('Компонент Tabs', () => {
         expect(handleChange).toHaveBeenCalledTimes(1);
         expect(handleChange).toHaveBeenCalledWith(items[elementIndex], {
           e: expect.any(Object),
-          value: items[elementIndex],
         });
       });
       it('клик по выбраному элементу, не должен вызвать callback', () => {
