@@ -13,7 +13,7 @@ export const AttachmentExampleSize = () => {
       getItemNode={(size: AttachmentPropSize) => (
         <Attachment
           size={size}
-          withIcon
+          withPictogram
           fileName="Инструкция по сборке марсохода"
           fileExtension="pdf"
           onClick={() => console.log('onClick')}

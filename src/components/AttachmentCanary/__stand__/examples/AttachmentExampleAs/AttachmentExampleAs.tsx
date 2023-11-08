@@ -11,7 +11,7 @@ export const AttachmentExampleAs = () => {
         href="https://www.youtube.com/watch?v=dAZKu_ojb14"
         fileName="Вести с марса"
         fileExtension="mov"
-        withIcon
+        withPictogram
         fileDescription="Нажми меня"
       />
     </Example>

@@ -7,7 +7,7 @@ export const attachmentPropSizeDefault: AttachmentPropSize =
 
 export type AttachmentProps = {
   fileExtension?: string;
-  withIcon?: boolean;
+  withPictogram?: boolean;
   loading?: boolean;
   fileName?: string;
   fileDescription?: string;

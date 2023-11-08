@@ -3,14 +3,14 @@ import React from 'react';
 
 import { Attachment } from '##/components/AttachmentCanary';
 
-export const AttachmentExampleWithIcon = () => {
+export const AttachmentExampleWithPictogram = () => {
   return (
     <Example
       items={[true, false]}
-      getItemDescription={(flag) => `withIcon={${flag}}`}
+      getItemDescription={(flag) => `withPictogram={${flag}}`}
       getItemNode={(flag) => (
         <Attachment
-          withIcon={flag}
+          withPictogram={flag}
           fileName="Файл"
           fileExtension="jpg"
           fileDescription="14 Мб 01.04.2020, 07:01"

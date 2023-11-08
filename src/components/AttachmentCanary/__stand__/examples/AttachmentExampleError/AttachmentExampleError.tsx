@@ -9,13 +9,13 @@ export const AttachmentExampleError = () => {
       <Attachment
         fileName="Марсианский закат"
         fileExtension="jpg"
-        withIcon
+        withPictogram
         errorText="Фотография не загрузилась"
       />
       <Attachment
         fileName="Марсианский закат"
         fileExtension="jpg"
-        withIcon
+        withPictogram
         errorText="Файл слишком большой, максимум 100 ТБ"
       />
     </Example>

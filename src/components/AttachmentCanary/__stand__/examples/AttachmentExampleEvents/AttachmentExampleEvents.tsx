@@ -10,7 +10,7 @@ export const AttachmentExampleEvents = () => {
       <Attachment
         fileName="my_tale_about_mars_final_last_12"
         fileExtension="docx"
-        withIcon
+        withPictogram
         fileDescription="1,5 Mб 21.02.2020, 14:12"
         loadingText="Загрузка"
         buttonIcon={IconTrash}

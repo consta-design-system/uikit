@@ -40,7 +40,7 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
     className,
     as = 'div',
     fileExtension,
-    withIcon,
+    withPictogram,
     loading,
     fileName,
     buttonIcon,
@@ -68,7 +68,7 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
       ])}
       ref={ref}
     >
-      {withIcon && (
+      {withPictogram && (
         <File
           className={cnAttachment('File', { error: Boolean(errorText) })}
           extension={fileExtension}
