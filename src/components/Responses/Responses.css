@@ -21,8 +21,6 @@
 
   &-Title {
     max-width: 350px;
-    margin-top: var(--space-xl);
-    margin-bottom: 0;
     color: var(--color-typo-primary);
     font-size: var(--title-size);
     font-weight: var(--font-weight-text-semibold);
@@ -32,7 +30,6 @@
 
   &-Description {
     max-width: 350px;
-    margin-top: var(--space-xs);
     margin-bottom: 0;
     color: var(--color-typo-ghost);
     font-size: var(--description-size);
@@ -48,7 +45,6 @@
   &-ButtonsWrapper {
     display: flex;
     justify-content: center;
-    margin-top: var(--space-2xl);
   }
 
   &-Button:not(:last-child) {

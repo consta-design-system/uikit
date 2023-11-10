@@ -11,6 +11,7 @@ import { useTheme } from '##/components/Theme/Theme';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useGlobalKeys } from '##/hooks/useGlobalKeys';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
@@ -141,6 +142,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
             className={cnModal('Window', { width, position }, [
               cnMixPopoverAnimate({ animate }),
               className,
+              cnMixScrollBar(),
             ])}
             ref={ref}
           >

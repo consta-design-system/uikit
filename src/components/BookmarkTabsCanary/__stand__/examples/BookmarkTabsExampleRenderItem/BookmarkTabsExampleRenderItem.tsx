@@ -31,15 +31,22 @@ export const BookmarkTabsExampleRenderItem = () => {
           active,
           tabWidth,
           size,
+          hovered,
+          bordered,
           form,
           view,
-          controlRef,
         }) => (
           <button
             type="button"
             onClick={onClick}
-            ref={controlRef as React.RefObject<HTMLButtonElement>}
-            className={cnBookmarkTabsTab({ active, size, form, view })}
+            className={cnBookmarkTabsTab({
+              active,
+              size,
+              form,
+              view,
+              hovered,
+              bordered,
+            })}
             style={{
               ['--bookmarks-tab-width' as string]: tabWidth,
             }}

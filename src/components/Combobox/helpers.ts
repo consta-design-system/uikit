@@ -1,4 +1,4 @@
-import { IconComponent } from '@consta/icons/Icon';
+import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
@@ -172,3 +172,17 @@ export function withDefaultGetters<
     getGroupKey: props.getGroupKey || defaultGetGroupKey,
   };
 }
+
+export const clearSizeMap: Record<PropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 's',
+  m: 's',
+  l: 'm',
+};
+
+export const iconSizeMap: Record<PropSize, IconPropSize> = {
+  xs: 'xs',
+  s: 's',
+  m: 'm',
+  l: 'm',
+};

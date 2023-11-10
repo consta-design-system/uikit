@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cnMixSpace } from '##/mixs/MixSpace';
 
 import { defaultListPropSize, ListBoxProps } from '../types';
@@ -25,6 +26,7 @@ export const ListBox = forwardRef<HTMLDivElement, ListBoxProps>(
           cnMixSpace({
             pV: mapVerticalSpase[size],
           }),
+          cnMixScrollBar(),
           className,
         ])}
       />

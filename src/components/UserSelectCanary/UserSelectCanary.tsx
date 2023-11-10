@@ -1,6 +1,6 @@
 import '##/components/SelectComponentsCanary/Select.css';
 
-import { IconClose } from '@consta/icons/IconClose';
+import { IconClear } from '@consta/icons/IconClear';
 import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
@@ -294,8 +294,8 @@ const UserSelectRender = <
                 tabIndex={-1}
                 className={cnSelect('ClearIndicator', [cnMixFocus()])}
               >
-                <IconClose
-                  size="xs"
+                <IconClear
+                  size={clearSizeMap[size]}
                   className={cnSelect('ClearIndicatorIcon')}
                 />
               </button>
@@ -308,7 +308,7 @@ const UserSelectRender = <
               onClick={handleToggleDropdown}
             >
               <IconSelect
-                size="xs"
+                size={iconSizeMap[size]}
                 className={cnSelect('DropdownIndicatorIcon')}
               />
             </button>

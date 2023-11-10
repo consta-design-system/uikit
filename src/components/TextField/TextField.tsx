@@ -8,16 +8,17 @@ import { IconSelectOpen } from '@consta/icons/IconSelectOpen';
 import React, { forwardRef, useCallback, useEffect } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
-import { useFlag } from '../../hooks/useFlag/useFlag';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { useMutableRef } from '../../hooks/useMutableRef/useMutableRef';
-import { useSortSteps } from '../../hooks/useSortSteps/useSortSteps';
-import { cn } from '../../utils/bem';
-import { getByMap } from '../../utils/getByMap';
-import { isString } from '../../utils/type-guards';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { FieldCaption } from '../FieldCaption/FieldCaption';
-import { FieldLabel } from '../FieldLabel/FieldLabel';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { FieldCaption } from '##/components/FieldCaption/FieldCaption';
+import { FieldLabel } from '##/components/FieldLabel/FieldLabel';
+import { useFlag } from '##/hooks/useFlag/useFlag';
+import { useForkRef } from '##/hooks/useForkRef/useForkRef';
+import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
+import { useSortSteps } from '##/hooks/useSortSteps/useSortSteps';
+import { cn } from '##/utils/bem';
+import { getByMap } from '##/utils/getByMap';
+import { isString } from '##/utils/type-guards';
+
 import {
   getIncrementFlag,
   getTypeForRender,
@@ -46,6 +47,7 @@ export const TextFieldRender = <TYPE extends string>(
     className,
     type = 'text',
     value,
+    defaultValue,
     onChange,
     id,
     name,
@@ -149,7 +151,8 @@ export const TextFieldRender = <TYPE extends string>(
 
   const commonProps = {
     'className': cnTextField('Input'),
-    'value': value ?? '',
+    'value': value ?? undefined,
+    'defaultValue': defaultValue ?? undefined,
     'onChange': handleChange,
     maxLength,
     disabled,
@@ -166,7 +169,7 @@ export const TextFieldRender = <TYPE extends string>(
     onKeyPressCapture,
     onKeyUp,
     onKeyUpCapture,
-    'id': id ? id.toString() : '',
+    'id': id ? id.toString() : undefined,
     'aria-label': ariaLabel,
   };
 

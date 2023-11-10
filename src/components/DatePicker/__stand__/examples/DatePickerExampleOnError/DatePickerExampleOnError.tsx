@@ -2,7 +2,8 @@ import { Example } from '@consta/stand';
 import { format } from 'date-fns';
 import React, { useRef, useState } from 'react';
 
-import { Tooltip } from '../../../../Tooltip/Tooltip';
+import { Tooltip } from '##/components/TooltipCanary';
+
 import {
   DatePicker,
   DatePickerPropOnChange,
@@ -57,11 +58,9 @@ export const DatePickerExampleOnError = () => {
           onError={onError}
         />
       </Example>
-      {error && (
-        <Tooltip status="alert" anchorRef={ref}>
-          {error}
-        </Tooltip>
-      )}
+      <Tooltip isOpen={!!error} status="alert" anchorRef={ref}>
+        {error}
+      </Tooltip>
     </>
   );
 };

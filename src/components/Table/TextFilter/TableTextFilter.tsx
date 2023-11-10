@@ -3,6 +3,8 @@ import './TableTextFilter.css';
 import { IconSearchStroked } from '@consta/icons/IconSearchStroked';
 import React, { useMemo, useState } from 'react';
 
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
+
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { CheckboxGroup } from '../../CheckboxGroup';
@@ -108,7 +110,7 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
           disabled={!filteredItems.length || !isSelected}
         />
       </div>
-      <div className={cnTextFilter('Checkboxes')}>
+      <div className={cnTextFilter('Checkboxes', [cnMixScrollBar()])}>
         {filteredItems.length ? (
           <CheckboxGroup
             items={filteredItems}

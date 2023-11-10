@@ -1,0 +1,397 @@
+import { MdxMenu } from '@consta/stand';
+import { TextExampleAlign } from './examples/TextExampleAlign/TextExampleAlign';
+import { TextExampleCombinedWeightAndStyle } from './examples/TextExampleCombinedWeightAndStyle/TextExampleCombinedWeightAndStyle';
+import { TextExampleDecoration } from './examples/TextExampleDecoration/TextExampleDecoration';
+import { TextExampleHeadingAndParagraph } from './examples/TextExampleHeadingAndParagraph/TextExampleHeadingAndParagraph';
+import { TextExampleLabelAndData } from './examples/TextExampleLabelAndData/TextExampleLabelAndData';
+import { TextExampleLineheight } from './examples/TextExampleLineheight/TextExampleLineheight';
+import { TextExampleSize } from './examples/TextExampleSize/TextExampleSize';
+import { TextExampleSpacing } from './examples/TextExampleSpacing/TextExampleSpacing';
+import { TextExampleStyle } from './examples/TextExampleStyle/TextExampleStyle';
+import { TextExampleTransform } from './examples/TextExampleTransform/TextExampleTransform';
+import { TextExampleView } from './examples/TextExampleView/TextExampleView';
+import { TextExampleTruncate } from './examples/TextExampleTruncate/TextExampleTruncate';
+import { TextExampleCursor } from './examples/TextExampleCursor/TextExampleCursor';
+import { TextExampleWeight } from './examples/TextExampleWeight/TextExampleWeight';
+import { TextExampleFont } from './examples/TextExampleFont/TextExampleFont';
+
+```tsx
+import { Text } from '@consta/uikit/Text';
+```
+
+<MdxMenu>
+
+- [Текст](#текст)
+  - [Цвет](#цвет) `view`
+  - [Размер](#размер) `size`
+  - [Гарнитура](#гарнитура) `font`
+  - [Насыщенность](#насыщенность) `weight`
+  - [Наклон](#наклон) `fontStyle`
+  - [Межбуквенный интервал](#межбуквенный-интервал) `spacing`
+  - [Высота строки](#высота-строки) `lineHeight`
+  - [Курсор](#курсор) `cursor`
+  - [Подчёркивание](#подчёркивание) `decoration`
+  - [Регистр](#регистр) `transform`
+  - [Выравнивание](#выравнивание) `align`
+  - [Слишком длинный текст](#слишком-длинный-текст) `truncate`
+- [Контейнер с текстом](#контейнер-с-текстом)
+  - [Тег для контейнера](#тег-для-контейнера) `as`
+  - [Расположение](#расположение) `display`
+- [Блоки с текстом](#блоки-с-текстом)
+  - [Абзац и заголовок](#абзац-и-заголовок)
+  - [Данные с подсказками](#данные-с-подсказками)
+  - [Форматирование текста](#форматирование-текста-в-абзаце)
+- [Импорт](#импорт)
+- [Все свойства](#свойства)
+- [Пример использования](#пример-использования)
+
+</MdxMenu>
+
+## Текст
+
+### Цвет
+
+`view` отвечает за тип и цвет текста.
+
+```ts
+<Text view="primary">Просто текст</Text> /* основной текст */
+<Text view="secondary">Просто текст</Text> /* дополнительный */
+<Text view="brand">Просто текст</Text> /* цвет бренда */
+<Text view="ghost">Просто текст</Text> /* примечания */
+<Text view="link">Просто текст</Text> /* ссылка */
+<Text view="link-minor">Просто текст</Text> /* дополнительная ссылка */
+<Text view="system">Просто текст</Text> /* системный текст */
+<Text view="normal">Просто текст</Text> /* нейтральный текст */
+<Text view="success">Просто текст</Text> /* успешное действие */
+<Text view="warning">Просто текст</Text> /* предупреждение */
+<Text view="alert">Просто текст</Text> /* ошибка */
+<Text view="caution">Просто текст</Text> /* осторожность */
+<Text view="critical">Просто текст</Text> /* критическая ошибка */
+```
+
+<TextExampleView />
+
+### Размер
+
+`size` отвечает за размер текста.
+
+- По умолчанию в параграфах используется размер `m`.
+- Даже для самых неважных подсказок используйте размер `xs` или больше.
+- `2xs` — только для текста в [верхнем регистре](#регистр).
+
+```ts
+<Text size="2xs">Просто текст</Text>
+<Text size="xs">Просто текст</Text>
+<Text size="s">Просто текст</Text>
+<Text size="m">Просто текст</Text>
+<Text size="l">Просто текст</Text>
+<Text size="xl">Просто текст</Text>
+<Text size="2xl">Просто текст</Text>
+<Text size="3xl">Просто текст</Text>
+<Text size="4xl">Просто текст</Text>
+<Text size="5xl">Просто текст</Text>
+<Text size="6xl">Просто текст</Text>
+```
+
+<TextExampleSize />
+
+### Гарнитура
+
+`font` отвечает за гарнитуру шрифта.
+
+Вы можете выбрать гарнитуру, заданную в системе:
+
+- `primary` меняет шрифт на основной шрифт дизайн-системы,
+- `mono` — на шрифт, заданный как моноширный.
+
+Это нужно, чтобы расставить дополнительные акценты: например, выделить что-то важное
+прямо в тексте.
+
+```ts
+<Text font="primary">Просто текст</Text>
+<Text font="mono">Просто текст</Text>
+```
+
+<TextExampleFont />
+
+### Насыщенность
+
+`weight` отвечает за насыщенность (жирный, полужирный, обычный, светлый и другие варианты).
+
+> Убедитесь, что в шрифте есть насыщенность, которую вы используете. Браузер имитирует
+> насыщенность, которой нет в наборе, но неизвестно, как это будет выглядеть.
+
+```ts
+<Text weight="black">Просто текст</Text>
+<Text weight="bold">Просто текст</Text>
+<Text weight="semibold">Просто текст</Text>
+<Text weight="regular">Просто текст</Text>
+<Text weight="light">Просто текст</Text>
+<Text weight="thin">Просто текст</Text>
+```
+
+<TextExampleWeight />
+
+### Наклон
+
+`fontStyle` меняет наклон шрифта (можно выделить текст курсивом).
+
+```ts
+<Text fontStyle="italic">Просто текст</Text>
+```
+
+<TextExampleStyle />
+
+### Межбуквенный интервал
+
+`spacing` меняет межбуквенный интервал.
+
+```ts
+<Text spacing="xs">
+  Съешь ещё этих мягких французских булок, да выпей же чаю.
+</Text>
+<Text spacing="s">
+  Съешь ещё этих мягких французских булок, да выпей же чаю.
+</Text>
+<Text spacing="m">
+  Съешь ещё этих мягких французских булок, да выпей же чаю.
+</Text>
+<Text spacing="l">
+  Съешь ещё этих мягких французских булок, да выпей же чаю.
+</Text>
+```
+
+<TextExampleSpacing />
+
+### Высота строки
+
+`lineHeight` отвечает за высоту строки.
+
+```ts
+<Text lineHeight="2xs">
+  Съешь ещё этих мягких французских булок, да выпей же чаю.
+</Text>
+<Text lineHeight="xs">
+  Съешь ещё этих мягких французских булок, да выпей же чаю.
+</Text>
+<Text lineHeight="s">
+  Съешь ещё этих мягких французских булок, да выпей же чаю.
+</Text>
+<Text lineHeight="m">
+  Съешь ещё этих мягких французских булок, да выпей же чаю.
+</Text>
+<Text lineHeight="l">
+  Съешь ещё этих мягких французских булок, да выпей же чаю.
+</Text>
+```
+
+<TextExampleLineheight />
+
+### Подчёркивание
+
+`decoration` в значении `underline` подчёркивает текст.
+
+```ts
+<Text decoration="underline">Просто текст</Text>
+```
+
+<TextExampleDecoration />
+
+### Регистр
+
+`transform` в значении `uppercase` переводит текст в верхний регистр.
+
+```ts
+<Text transform="uppercase">Просто текст</Text>
+```
+
+<TextExampleTransform />
+
+### Выравнивание
+
+`align` отвечает за выравнивание текста в контейнере.
+
+```ts
+<Text align="left">Просто текст</Text>
+<Text align="center">Просто текст</Text>
+<Text align="right">Просто текст</Text>
+```
+
+<TextExampleAlign />
+
+### Курсор
+
+`cursor` отвечает за внешний вид курсора при наведении на текст.
+По умолчанию это текстовый курсор, если нужно поменять его на указатель,
+добавьте `cursor="pointer"`.
+
+```ts
+<Text>Это текст с обычным текстовым курсором</Text>
+<Text cursor="pointer">Это текст с курсором-указателем</Text>
+```
+
+<TextExampleCursor />
+
+### Слишком длинный текст
+
+Текст в одну строчку, который может не поместиться в родительский контейнер, можно обрезать с помощью `truncate`. В конце добавляется многоточие.
+
+```ts
+<Text truncate>
+  Очень длинный текст, который должен располагаться на одной строке и не влезает
+  в родительский контейнер.
+</Text>
+```
+
+<TextExampleTruncate />
+
+## Контейнер с текстом
+
+### Тег для контейнера
+
+По умолчанию `Text` представлен в HTML-документе в виде тега `div`. Вы можете его
+переопределить с помощью свойства `as`.
+
+### Расположение
+
+`display` определяет, как будет вести себя контейнер с текстом по отношению к другим элементам
+на странице (как строчный или блочный элемент). Варианты: `block`, `inline-block`, `inline`.
+
+## Блоки с текстом
+
+### Абзац и заголовок
+
+Пример классической конструкции: абзац с заголовком.
+
+```ts
+<Text
+  as="div"
+  align="left"
+  font="sans"
+  lineHeight="l"
+  size="2xl"
+  spacing="m"
+  transform="uppercase"
+  view="primary"
+  weight="bold"
+>
+  Заголовок несет суть
+</Text>
+<Text as="p" align="left" font="serif" lineHeight="s" size="s" view="primary">
+  Абзац — это часть текста между отступами с новой строки. Абзац можно назвать микротекстом.
+  В общей теме могут выделяться и микротемы. При этом каждый абзац раскрывает свою
+  микротему. Что же ещё можно сказать про абзацы? Мы видим, что обычно в абзацах несколько
+  предложений. В таком случае каждый абзац служит для выделения своей микротемы.
+</Text>
+
+```
+
+<TextExampleHeadingAndParagraph />
+
+### Данные с подсказками
+
+Можно использовать в формах с данными.
+
+```ts
+<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary">
+  ФИО
+</Text>
+<Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+  Иванов Дмитрий Петрович
+</Text>
+<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary">
+  Должность
+</Text>
+<Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+  Инженер по бурению
+</Text>
+<Text as="div" align="left" font="sans" lineHeight="l" size="s" view="secondary">
+  Подразделение
+</Text>
+<Text as="div" align="left" font="serif" lineHeight="l" size="l" view="primary">
+  Группа разведки и бурения
+</Text>
+```
+
+<TextExampleLabelAndData />
+
+### Форматирование текста в абзаце
+
+Вы можете выделять отдельные слова, фразы или части фраз с помощью форматирования.
+Например, чтобы обратить внимание на важную информацию, выделить термин, элемент
+интерфейса, прямую речь.
+
+```ts
+<Text as="div" align="left" font="sans" lineHeight="l" size="m" view="primary">
+  <Text as="span" fontStyle="italic">
+    Примечание.&nbsp;
+  </Text>
+  База скважин сформирована на основе отчетов сотрудников. Любые&nbsp;
+  <Text weight="black" as="span">
+    срочные изменения
+  </Text>{' '}
+  должны вноситься по регламенту в сроки, указанные Центром Разработок.
+</Text>
+```
+
+<TextExampleCombinedWeightAndStyle />
+
+## Импорт
+
+```tsx
+import { Text } from '@consta/uikit/Text';
+```
+
+## Свойства
+
+| Свойство                              | Тип                                                                                            | По умолчанию | Описание                                                                  |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------- |
+| [`view?`](#цвет)                      | `'alert', 'brand', 'ghost', 'link', 'linkMinor', 'primary', 'secondary', 'success', 'warning'` | `'primary'`  | Тип и цвет текста                                                         |
+| [`font?`](#гарнитура)                 | `'primary', 'mono'`                                                                            | -            | Гарнитура                                                                 |
+| [`lineHeight?`](#высота-строки)       | `'2xs', 'xs', 's', 'm', 'l'`                                                                   | `'m'`        | Высота строки                                                             |
+| [`spacing?`](#межбуквенный-интервал)  | `'xs', 's', 'm', 'l'`                                                                          | -            | Межбуквенное расстояние                                                   |
+| [`fontStyle?`](#гарнитура)            | `'italic'`                                                                                     | -            | Начертание                                                                |
+| [`weight?`](#насыщенность)            | `'black', 'bold', 'light', 'regular', 'semibold', 'thin'`                                      | -            | Насыщенность                                                              |
+| [`transform?`](#регистр)              | `'uppercase'`                                                                                  | -            | Регистр                                                                   |
+| [`cursor?`](#курсор)                  | `'pointer'`                                                                                    | -            | Отображение курсора                                                       |
+| [`decoration?`](#подчёркивание)       | `'underline'`                                                                                  | -            | Подчеркивание                                                             |
+| [`align?`](#выравнивание)             | `'left', 'center', 'right'`                                                                    | -            | Выравнивание                                                              |
+| [`size?`](#размер)                    | `'2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'`                          | `'m'`        | Размер текста                                                             |
+| [`display?`](#расположение)           | `'block', 'inlineBlock', 'inline'`                                                             | -            | Поведение контейнера с текстом в документе (блочный или строчный элемент) |
+| [`as?`](#тег-для-контейнера)          | `keyof JSX.IntrinsicElements`                                                                  | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM          |
+| [`truncate?`](#слишком-длинный-текст) | `boolean`                                                                                      | `false`      | Видимости текста в блоке                                                  |
+| `className?`                          | `string`                                                                                       | -            | Дополнительный CSS-класс                                                  |
+| `children?`                           | `React.ReactNode`                                                                              | -            | Дочерние компоненты                                                       |
+| `ref?`                                | `React.Ref<HTMLElement>`                                                                       | -            | Ссылка на корневой DOM-элемент этого компонента                           |
+
+## Пример использования
+
+Использование компонента:
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Text } from '@consta/uikit/Text';
+
+export function App() {
+  return (
+    <Text
+      as = 'p'
+      align = 'center'
+      cursor = 'default'
+      decoration = 'none'
+      display = 'block'
+      font = 'mono'
+      lineHeight = '2xs'
+      size = 'm'
+      spacing = 'xs'
+      view = 'primary'
+      weight = 'regular'
+      width = 'default'
+      className = 'custom-class-name'
+    >
+      Текст
+    </>
+  );
+}
+```

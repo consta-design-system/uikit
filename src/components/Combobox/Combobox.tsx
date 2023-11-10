@@ -1,6 +1,6 @@
 import '../SelectComponents/Select.css';
 
-import { IconClose } from '@consta/icons/IconClose';
+import { IconClear } from '@consta/icons/IconClear';
 import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
@@ -27,10 +27,12 @@ import {
   defaultPropView,
 } from '../SelectComponents/types';
 import {
+  clearSizeMap,
   ComboboxComponent,
   ComboboxProps,
   DefaultGroup,
   DefaultItem,
+  iconSizeMap,
   isMultipleParams,
   isNotMultipleParams,
   PropRenderItem,
@@ -281,8 +283,8 @@ const ComboboxRender = <
                 onClick={clearValue}
                 className={cnSelect('ClearIndicator', [cnMixFocus()])}
               >
-                <IconClose
-                  size="xs"
+                <IconClear
+                  size={clearSizeMap[size]}
                   className={cnSelect('ClearIndicatorIcon')}
                 />
               </button>
@@ -295,7 +297,7 @@ const ComboboxRender = <
               onClick={handleToggleDropdown}
             >
               <IconSelect
-                size="xs"
+                size={iconSizeMap[size]}
                 className={cnSelect('DropdownIndicatorIcon')}
               />
             </button>

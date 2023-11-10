@@ -197,7 +197,7 @@ const SelectRender = <ITEM = SelectItemDefault, GROUP = SelectGroupDefault>(
               onClick={handleToggleDropdown}
             >
               <IconSelect
-                size="xs"
+                size={iconSizeMap[size]}
                 className={cnSelect('DropdownIndicatorIcon')}
               />
             </button>

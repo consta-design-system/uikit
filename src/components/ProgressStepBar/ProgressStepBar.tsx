@@ -12,6 +12,8 @@ import React, {
   useState,
 } from 'react';
 
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
+
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useOverflow } from '../../hooks/useOverflow/useOverflow';
@@ -152,7 +154,10 @@ function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
     <div
       {...otherProps}
       style={style}
-      className={cnProgressStepBar({ isOverflow }, [className])}
+      className={cnProgressStepBar({ isOverflow }, [
+        className,
+        cnMixScrollBar(),
+      ])}
       ref={useForkRef([ref, containerRef])}
     >
       {isOverflow && direction !== 'vertical' && (

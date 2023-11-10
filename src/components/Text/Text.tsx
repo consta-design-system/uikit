@@ -108,17 +108,17 @@ export const Text = forwardRefWithAs<TextProps>((props, ref) => {
     decoration,
     display,
     font,
-    lineHeight = textPropLineHeightDefault,
-    size = textPropSizeDefault,
+    lineHeight,
+    size,
     spacing,
     fontStyle,
     transform,
-    view = textPropViewDefault,
+    view,
     weight,
     width,
     className,
     children,
-    truncate = false,
+    truncate,
     ...otherProps
   } = props;
 

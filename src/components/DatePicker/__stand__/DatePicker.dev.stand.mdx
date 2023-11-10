@@ -455,6 +455,10 @@ const DatePickerExampleDropdownOpen = () => {
 #### Пример с обработкой ошибок
 
 ```tsx
+import React, { useState, useRef } from 'react';
+import { DatePicker } from '@consta/uikit/DatePicker';
+import { Tooltip } from '@consta/uikit/TooltipCanary';
+
 const minDate = new Date(2000, 1, 1);
 const maxDate = new Date(2001, 1, 1);
 const formatDate = (date: Date) => format(date, 'dd.MM.yyyy');
@@ -501,11 +505,9 @@ export const DatePickerExampleOnError = () => {
         type="date-range"
         onError={onError}
       />
-      {error && (
-        <Tooltip status="alert" anchorRef={ref}>
-          {error}
-        </Tooltip>
-      )}
+      <Tooltip isOpen={!!error} status="alert" anchorRef={ref}>
+        {error}
+      </Tooltip>
     </>
   );
 };

@@ -138,12 +138,12 @@ $color-base-critical: #33000f;
 
   --color-typo-link-minor:
     color(
-      $color-base-path h(-2) s(-55%) l(+20%)
+      $color-base-path h(-2) l(+26%) a(100%)
     ); /* Цвет второстепенной ссылки */
 
   --color-typo-link-hover:
     color(
-      $color-base-path h(-2) l(+26%) a(100%)
+      $color-base-path h(-2) s(-55%) l(+20%)
     ); /* Цвет ховера ссылки */
 
   /* //////////////////////////////

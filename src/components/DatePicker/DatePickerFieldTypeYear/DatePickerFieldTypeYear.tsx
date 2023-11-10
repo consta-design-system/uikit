@@ -24,10 +24,11 @@ export const DatePickerFieldTypeYear = React.forwardRef<
     maxDate = maxDateDefault,
     value,
     inputRef: inputRefProp,
+    defaultValue,
     ...otherProps
   } = props;
 
-  const { stringValue, inputRef, clearValue } = usePicker({
+  const inputRef = usePicker({
     value,
     minDate,
     maxDate,
@@ -41,10 +42,8 @@ export const DatePickerFieldTypeYear = React.forwardRef<
     <TextField
       {...otherProps}
       type="text"
-      onChange={(value, { e }) => value === null && clearValue(e.nativeEvent)}
       inputContainerRef={ref}
       inputRef={useForkRef([inputRef, inputRefProp])}
-      value={stringValue}
       placeholder={placeholder}
     />
   );

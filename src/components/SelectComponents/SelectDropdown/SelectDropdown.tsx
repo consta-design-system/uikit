@@ -8,6 +8,7 @@ import {
   ListItem,
   mapVerticalSpase,
 } from '##/components/ListCanary';
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { SelectAllItem } from '##/utils/getGroups';
 
@@ -144,6 +145,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                 cnMixSpace({
                   pV: mapVerticalSpase[size],
                 }),
+                cnMixScrollBar(),
               ])}
               ref={dropdownRef}
             >

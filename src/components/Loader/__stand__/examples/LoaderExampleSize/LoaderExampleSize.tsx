@@ -5,13 +5,17 @@ import React from 'react';
 
 import { cn } from '##/utils/bem';
 
-import { Loader } from '../../../Loader';
+import { Loader, LoaderPropSize } from '../../../Loader';
 
 const cnLoaderExampleSize = cn('LoaderExampleSize');
 
+const sizes: LoaderPropSize[] = ['m', 's', 'xs'];
+
 export const LoaderExampleSize = () => (
-  <Example className={cnLoaderExampleSize()}>
-    <Loader size="m" />
-    <Loader size="s" />
-  </Example>
+  <Example
+    items={sizes}
+    getItemDescription={(size) => `size="${size}"`}
+    getItemNode={(size) => <Loader size={size} />}
+    className={cnLoaderExampleSize()}
+  />
 );
