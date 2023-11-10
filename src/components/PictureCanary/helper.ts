@@ -33,3 +33,11 @@ export const getConvertedImages = (
     src: src[key],
   }));
 };
+
+export const getSrcHash = (src: PicturePropSrc) => {
+  if (typeof src === 'string') {
+    return src;
+  }
+
+  return Object.keys(src).join('||');
+};

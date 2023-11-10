@@ -1,13 +1,14 @@
 import React, { forwardRef, useMemo } from 'react';
 
 import { getLastPoint, useBreakpoints } from '##/hooks/useBreakpoints';
-import { cnCanary } from '##/utils/bem';
 
 import { useTheme } from '../Theme';
-import { defaultGetImageSettings, getConvertedImages } from './helper';
+import {
+  defaultGetImageSettings,
+  getConvertedImages,
+  getSrcHash,
+} from './helper';
 import { PictureProps } from './types';
-
-const cnPicture = cnCanary('Picture');
 
 export const Picture = forwardRef<HTMLImageElement, PictureProps>(
   (props, ref) => {
@@ -15,41 +16,37 @@ export const Picture = forwardRef<HTMLImageElement, PictureProps>(
       alt = '',
       src: srcProp,
       getImageSettings = defaultGetImageSettings,
-      resizeContainer = window,
-      className,
+      subscribeToRef,
       ...otherProps
     } = props;
 
     const { theme } = useTheme();
 
-    const convertedImages: Array<{
-      theme?: string;
-      descriptor?: string;
-      src: string;
-      key: string;
-      size?: number;
-    }> = useMemo(
-      () => getConvertedImages(srcProp, getImageSettings),
-      [srcProp],
-    );
-
-    const sizes = useMemo(
-      () =>
-        convertedImages.reduce(
-          (a, { size = 0 }) => ({ ...a, [size]: size }),
-          {},
-        ),
-      [convertedImages],
-    );
+    const [convertedImages, sizes]: [
+      Array<{
+        theme?: string;
+        descriptor?: string;
+        src: string;
+        key: string;
+        size?: number;
+      }>,
+      Record<string, number>,
+    ] = useMemo(() => {
+      const images = getConvertedImages(srcProp, getImageSettings);
+      return [
+        images,
+        images.reduce((a, { size = 0 }) => ({ ...a, [size]: size }), {}),
+      ];
+    }, [getSrcHash(srcProp)]);
 
     const activeImageSize = Number(
       getLastPoint(
         useBreakpoints({
           map: sizes,
           isActive: true,
-          ref: resizeContainer instanceof Window ? undefined : resizeContainer,
+          ref: subscribeToRef,
         }),
-      ),
+      ) ?? -1,
     );
 
     const suitableImages = useMemo(() => {
@@ -70,32 +67,23 @@ export const Picture = forwardRef<HTMLImageElement, PictureProps>(
         });
     }, [activeImageSize, theme, convertedImages]);
 
-    const { src, srcSet } = useMemo(() => {
+    const [src, srcSet] = useMemo(() => {
       if (suitableImages.length === 0) {
-        return {};
+        return [];
       }
       if (suitableImages.length > 1) {
-        return {
-          src: suitableImages[0]?.src,
-          srcSet: suitableImages
+        return [
+          suitableImages[0]?.src,
+          suitableImages
             .map(({ src, descriptor }) => `${src} ${descriptor}`)
             .join(','),
-        };
+        ];
       }
-      return {
-        src: suitableImages[0]?.src,
-      };
+      return [suitableImages[0]?.src];
     }, [suitableImages]);
 
     return src ? (
-      <img
-        alt={alt}
-        src={src}
-        className={cnPicture(null, [className])}
-        srcSet={srcSet}
-        ref={ref}
-        {...otherProps}
-      />
+      <img {...otherProps} ref={ref} alt={alt} src={src} srcSet={srcSet} />
     ) : null;
   },
 );

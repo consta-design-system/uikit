@@ -15,9 +15,7 @@ export type PictureProps = PropsWithHTMLAttributesAndRef<
     alt?: string;
     src: PicturePropSrc;
     getImageSettings?: PicturePropGetImageSettings;
-    resizeContainer?:
-      | Window
-      | React.RefObject<HTMLElement | SVGGraphicsElement>;
+    subscribeToRef?: React.RefObject<HTMLElement | SVGGraphicsElement>;
   },
   HTMLImageElement
 >;
