@@ -3,17 +3,17 @@ import './SliderPoint.css';
 import React, { useEffect, useRef } from 'react';
 
 import { Direction } from '##/components/Popover';
-
-import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
-import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
-import { cn } from '../../../utils/bem';
 import {
   generateThemeClassNames,
   ThemeContext,
   useTheme,
-} from '../../Theme/Theme';
-import { Tooltip } from '../../Tooltip/Tooltip';
+} from '##/components/Theme';
+import { Tooltip } from '##/components/TooltipCanary';
+import { useFlag } from '##/hooks/useFlag/useFlag';
+import { useForkRef } from '##/hooks/useForkRef/useForkRef';
+import { cnMixFocus } from '##/mixs/MixFocus/MixFocus';
+import { cn } from '##/utils/bem';
+
 import { SliderPointProps, TrackPosition } from '../helper';
 
 const cnSliderPoint = cn('SliderPoint');
@@ -120,6 +120,8 @@ export const SliderPoint = (props: SliderPointProps) => {
     focused ? setTooltipVisible.on() : setTooltipVisible.off();
   }, [focused]);
 
+  const tooltipOpen = !!(tooltipVisible && withTooltip && popoverPosition);
+
   return (
     <>
       <button
@@ -143,26 +145,26 @@ export const SliderPoint = (props: SliderPointProps) => {
         }}
         {...otherProps}
       />
-      {tooltipVisible && withTooltip && popoverPosition && (
-        <ThemeContext.Provider
-          // eslint-disable-next-line react/jsx-no-constructed-context-values
-          value={{
-            theme: tooltipTheme,
-            themeClassNames: tooltipThemeClassNames,
-          }}
+
+      <ThemeContext.Provider
+        // eslint-disable-next-line react/jsx-no-constructed-context-values
+        value={{
+          theme: tooltipTheme,
+          themeClassNames: tooltipThemeClassNames,
+        }}
+      >
+        <Tooltip
+          isOpen={tooltipOpen}
+          position={tooltipPosition}
+          className={cnSliderPoint('Tooltip')}
+          direction={tooltipDirection}
+          possibleDirections={tooltipPossibleDirections}
+          style={{ zIndex: tooltipZIndex }}
+          offset={10}
         >
-          <Tooltip
-            position={tooltipPosition}
-            className={cnSliderPoint('Tooltip')}
-            direction={tooltipDirection}
-            possibleDirections={tooltipPossibleDirections}
-            style={{ zIndex: tooltipZIndex }}
-            offset={10}
-          >
-            {tooltipFormatter ? tooltipFormatter(value) : value}
-          </Tooltip>
-        </ThemeContext.Provider>
-      )}
+          {tooltipFormatter ? tooltipFormatter(value) : value}
+        </Tooltip>
+      </ThemeContext.Provider>
     </>
   );
 };

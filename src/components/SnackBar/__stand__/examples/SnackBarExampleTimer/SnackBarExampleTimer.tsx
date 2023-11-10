@@ -7,6 +7,8 @@ import { IconRing } from '@consta/icons/IconRing';
 import { Example } from '@consta/stand';
 import React, { useReducer } from 'react';
 
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
+
 import { cn } from '../../../../../utils/bem';
 import { Button } from '../../../../Button/Button';
 import { SnackBar } from '../../../SnackBar';
@@ -104,7 +106,7 @@ export const SnackBarExampleTimer: React.FC = () => {
         />
       </div>
       <SnackBar
-        className={cnSnackBarExampleTimer('SnackBar')}
+        className={cnSnackBarExampleTimer('SnackBar', [cnMixScrollBar()])}
         items={items}
         onItemClose={(item) => dispatchItems({ type: 'remove', item })}
         getItemShowProgress={getItemShowProgress}

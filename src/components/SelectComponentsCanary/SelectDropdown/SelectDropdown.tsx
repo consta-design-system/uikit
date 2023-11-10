@@ -18,6 +18,7 @@ import {
   animateTimeout,
   cnMixPopoverAnimate,
 } from '##/mixs/MixPopoverAnimate/MixPopoverAnimate';
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cnCanary } from '##/utils/bem';
 import { fabricIndex } from '##/utils/fabricIndex';
@@ -223,6 +224,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                 cnMixSpace({
                   pV: mapVerticalSpase[size],
                 }),
+                cnMixScrollBar(),
               ])}
               ref={dropdownRef}
             >

@@ -4,7 +4,7 @@ import React from 'react';
 import { Loader } from '../../../LoaderCanary';
 import { LoaderPropSize } from '../../../types';
 
-const sizes: LoaderPropSize[] = ['s', 'm'];
+const sizes: LoaderPropSize[] = ['m', 's', 'xs'];
 
 export const LoaderExampleSize = () => (
   <Example

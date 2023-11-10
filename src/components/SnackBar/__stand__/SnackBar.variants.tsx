@@ -11,6 +11,7 @@ import React, { useReducer } from 'react';
 
 import { Button } from '##/components/Button/Button';
 import { Text } from '##/components/Text/Text';
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
 
 import { SnackBar } from '../SnackBar';
@@ -100,7 +101,7 @@ const Variants = () => {
     dispatchItems({ type: 'remove', key: item.key });
 
   return (
-    <div className={cnSnackBarVariants()}>
+    <div className={cnSnackBarVariants(null, [cnMixScrollBar()])}>
       <div className={cnSnackBarVariants('Buttons')}>
         <Button
           className={cnSnackBarVariants('ButtonAdd')}
@@ -149,7 +150,7 @@ const Variants = () => {
         />
       </div>
       <SnackBar
-        className={cnSnackBarVariants('SnackBar')}
+        className={cnSnackBarVariants('SnackBar', [cnMixScrollBar()])}
         items={items}
         form={form}
         getItemIcon={withIcon ? getItemIcon : undefined}
