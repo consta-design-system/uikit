@@ -22,8 +22,8 @@ export type ChoiceGroupPropView = typeof choiceGroupViews[number];
 export const choiceGroupDefaultView: ChoiceGroupPropView = 'primary';
 
 export const choiceGroupWidth = ['default', 'full'] as const;
-export type СhoiceGroupPropWidth = typeof choiceGroupWidth[number];
-export const choiceGroupWidthDefault: СhoiceGroupPropWidth =
+export type ChoiceGroupPropWidth = typeof choiceGroupWidth[number];
+export const choiceGroupWidthDefault: ChoiceGroupPropWidth =
   choiceGroupWidth[0];
 
 export type ChoiceGroupPropGetLabel<ITEM> = (item: ITEM) => string | number;
@@ -48,7 +48,7 @@ type Props<
     size?: ChoiceGroupPropSize;
     form?: ChoiceGroupPropForm;
     view?: ChoiceGroupPropView;
-    width?: СhoiceGroupPropWidth;
+    width?: ChoiceGroupPropWidth;
     onlyIcon?: boolean;
     iconSize?: IconPropSize;
     items: ITEM[];
