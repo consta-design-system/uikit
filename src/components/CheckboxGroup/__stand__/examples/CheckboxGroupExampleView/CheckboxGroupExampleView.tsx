@@ -2,7 +2,7 @@ import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Item, items } from '../../../__mocks__/data.mock';
-import { CheckboxGroup, checkboxGroupViews } from '../../../CheckboxGroup';
+import { CheckboxGroup, checkboxGroupPropViews } from '../../../CheckboxGroup';
 
 export const CheckboxGroupExampleView = () => {
   const [value, setValue] = React.useState<Item[] | null>(null);
@@ -10,7 +10,7 @@ export const CheckboxGroupExampleView = () => {
   return (
     <Example
       col={1}
-      items={checkboxGroupViews.map((view) => ({
+      items={checkboxGroupPropViews.map((view) => ({
         node: (
           <CheckboxGroup
             value={value}
