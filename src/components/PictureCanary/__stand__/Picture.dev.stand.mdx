@@ -1,0 +1,193 @@
+import { MdxMenu } from '@consta/stand';
+import { PictureExample } from './examples/PictureExample/PictureExample';
+import { PictureExampleGetImageSettings } from './examples/PictureExampleGetImageSettings/PictureExampleGetImageSettings';
+import { PictureExampleResizeMode } from './examples/PictureExampleResizeMode/PictureExampleResizeMode';
+
+```tsx
+import { Picture } from '@consta/uikit/PictureCanary';
+```
+
+<MdxMenu>
+
+- [Изображения](#изображения)
+- [Функция определения свойств](#функция-определения-свойств)
+- [Адаптивность](#адаптивность)
+- [Список свойств](#свойства)
+
+</MdxMenu>
+
+## Изображения
+
+Для того чтобы указать исходные изображения или изображение необходимо определить свойство `src`. Оно может принимать как строку, так и объект ключ - значение,
+где ключ содержит в себе параметры изображения.
+
+```tsx
+<Picture
+  alt={alt}
+  title={title}
+  resizeMode={resizeMode}
+  src={{
+    'gpnDefault--1--1x': imageSmall1xDefault,
+    'gpnDefault--1--2x': imageSmall2xDefault,
+    'gpnDefault--1--4x': imageSmall3xDefault,
+    'gpnDefault--500--1x': imageMedium1xDefault,
+    'gpnDefault--500--2x': imageMedium2xDefault,
+    'gpnDefault--500--4x': imageMedium3xDefault,
+    'gpnDefault--1000--1x': imageBig1xDefault,
+    'gpnDefault--1000--2x': imageBig2xDefault,
+    'gpnDefault--1000--4x': imageBig3xDefault,
+    'gpnDisplay--1--1x': imageSmall1xDisplay,
+    'gpnDisplay--1--2x': imageSmall2xDisplay,
+    'gpnDisplay--1--4x': imageSmall3xDisplay,
+    'gpnDisplay--500--1x': imageMedium1xDisplay,
+    'gpnDisplay--500--2x': imageMedium2xDisplay,
+    'gpnDisplay--500--4x': imageMedium3xDisplay,
+    'gpnDisplay--1000--1x': imageBig1xDisplay,
+    'gpnDisplay--1000--2x': imageBig2xDisplay,
+    'gpnDisplay--1000--4x': imageBig3xDisplay,
+    'gpnDark--1--1x': imageSmall1xDark,
+    'gpnDark--1--2x': imageSmall2xDark,
+    'gpnDark--1--4x': imageSmall3xDark,
+    'gpnDark--500--1x': imageMedium1xDark,
+    'gpnDark--500--2x': imageMedium2xDark,
+    'gpnDark--500--4x': imageMedium3xDark,
+    'gpnDark--1000--1x': imageBig1xDark,
+    'gpnDark--1000--2x': imageBig2xDark,
+    'gpnDark--1000--4x': imageBig3xDark,
+  }}
+/>
+```
+
+<PictureExample />
+
+По умолчанию первым параметром указывается название темы, вторым разрешение, начиная с которого изображение будет отображаться, а на третьем дескриптор (физическая ширина картинки или плотность пикселей устройства DPR)
+
+## Функция определения свойств
+
+Если вы используете свой метод именования ключей, тогда определите свойство `getImageSettings`. Эта функция принимает ключ и возвращает объект:
+
+- `theme` - тема для которой показывается картинка,
+- `size` - размер, начиная с которого изображение отображается,
+- `descriptor` - дескриптор
+
+```tsx
+const themeMap: Record<string, string> = {
+  default: 'gpnDefault',
+  display: 'gpnDisplay',
+  dark: 'gpnDark',
+};
+
+export const PictureExampleGetImageSettings = () => {
+  const getImageSettings = (key: string) => {
+    const parts = key.split('_');
+    return {
+      theme: themeMap[parts[0]],
+      size: Number(parts[1].replace(/[^0-9.]+/g, '')),
+      descriptor: parts[2],
+    };
+  };
+
+  return (
+    <Picture
+      src={{
+        default_1px_1x: imageSmall1xDefault,
+        default_1px_2x: imageSmall2xDefault,
+        default_1px_4x: imageSmall3xDefault,
+        default_500px_1x: imageMedium1xDefault,
+        default_500px_2x: imageMedium2xDefault,
+        default_500px_4x: imageMedium3xDefault,
+        default_1000px_1x: imageBig1xDefault,
+        default_1000px_2x: imageBig2xDefault,
+        default_1000px_4x: imageBig3xDefault,
+        display_1px_1x: imageSmall1xDisplay,
+        display_1px_2x: imageSmall2xDisplay,
+        display_1px_4x: imageSmall3xDisplay,
+        display_500px_1x: imageMedium1xDisplay,
+        display_500px_2x: imageMedium2xDisplay,
+        display_500px_4x: imageMedium3xDisplay,
+        display_1000px_1x: imageBig1xDisplay,
+        display_1000px_2x: imageBig2xDisplay,
+        display_1000px_4x: imageBig3xDisplay,
+        dark_1px_1x: imageSmall1xDark,
+        dark_1px_2x: imageSmall2xDark,
+        dark_1px_4x: imageSmall3xDark,
+        dark_500px_1x: imageMedium1xDark,
+        dark_500px_2x: imageMedium2xDark,
+        dark_500px_4x: imageMedium3xDark,
+        dark_1000px_1x: imageBig1xDark,
+        dark_1000px_2x: imageBig2xDark,
+        dark_1000px_4x: imageBig3xDark,
+      }}
+      getImageSettings={getImageSettings}
+    />
+  );
+};
+```
+
+<PictureExampleGetImageSettings />
+
+## Адаптивность
+
+Отображать значение по разрешению можно в двух режимах: в зависимости от ширины экрана `window` и в зависимости от ширины компонента `component`.
+
+```tsx
+export const PictureExampleResizeMode = () => {
+  const getImageSettings = (key: string) => {
+    if (key === 'dark') {
+      return {
+        size: 0,
+      };
+    }
+    return {
+      size: 700,
+    };
+  };
+
+  const componentRef = useRef<HTMLImageElement>(null);
+
+  return (
+    <>
+      <Picture
+        src={{
+          dark: imageDark,
+          light: imageLight,
+        }}
+        getImageSettings={getImageSettings}
+      />
+      <Picture
+        src={{
+          dark: imageDark,
+          light: imageLight,
+        }}
+        ref={componentRef}
+        subscribeToRef={componentRef}
+        getImageSettings={getImageSettings}
+      />
+    </>
+  );
+};
+```
+
+<PictureExampleResizeMode />
+
+## Cвойства
+
+```tsx
+export type PicturePropGetImageSettings = (image: string) => {
+  theme?: string;
+  size?: number;
+  descriptor?: string;
+};
+
+export type PicturePropSrc = string | Record<string, string>;
+```
+
+| Свойство                                            | Тип                             | По умолчанию              | Описание                                                   |
+| --------------------------------------------------- | ------------------------------- | ------------------------- | ---------------------------------------------------------- |
+| [`src?`](#изображения)                              | `PicturePropSrc`                | -                         | Изображение или объект с изображениями                     |
+| [`getImageSettings?`](#функция-определения-свойств) | `PicturePropGetImageSettings`   | `defaultGetImageSettings` | Функция получения параметров отображения картинки          |
+| [`subscribeToRef?`](#адаптивность)                  | `React.RefObject<HTMLElement >` | -                         | Контейнер, относительно которого просчитываем адаптивность |
+| `alt?`                                              | `string`                        | -                         | Альтернативное текстовое описание изображения              |
+| `title?`                                            | `string`                        | -                         | Отображаемая подзказка                                     |
+| `className?`                                        | `string`                        | -                         | Дополнительный CSS-класс                                   |
+| `ref`                                               | `React.Ref<HTMLDivElement>`     | -                         | Ссылка на корневой DOM-элемент этого компонента            |
