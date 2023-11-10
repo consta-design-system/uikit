@@ -2,28 +2,38 @@
 import { useBreakpoints } from '@consta/uikit/useBreakpoints';
 ```
 
-Хук `useBreakpoints` подписывается на изменение ширины экрана и возвращает набор контрольных точек (брейкпоинтов), которые применяются в момент этого изменения.
+Хук `useBreakpoints` подписывается на изменение ширины экрана или элемента и возвращает набор контрольных точек (брейкпоинтов), которые применяются в момент этого изменения.
 
-Если вызвать `useBreakpoints` без аргументов, вернутся стандартные брейкпоинты:
+Подписка на изменение ширины экрана:
 
 ```tsx
-const breakpoints = useBreakpoints();
-// type breakpoints = Record<"5xs" | "4xs" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl" | "5xl", boolean>
+const breakpoints = useBreakpoints({
+  map: { isDesktop: 1000 },
+  isActive: true,
+});
+// type breakpoints = Record<"isDesktop", boolean>
 ```
 
-Можно установить свои брейкпоинты:
+Подписка на изменение ширины элемента:
 
 ```tsx
-const breakpoints = useBreakpoints({ isDesktop: 1000 });
+const ref = useRef<HTMLDivElement>();
+const breakpoints = useBreakpoints({
+  map: { isDesktop: 1000 },
+  ref,
+  isActive: true,
+});
 // type breakpoints = Record<"isDesktop", boolean>
+
+//...//...//
+
+<div ref={ref}>content</div>;
 ```
 
 ### getLastPoint
 
 Хелпер `getLastPoint` возвращает последний пересечённый брейкпоинт,
 его удобно использовать, когда рендер компонента зависит от одной точки.
-
-> Если точек несколько, отсортируйте их по возрастанию
 
 Например, так:
 
@@ -36,7 +46,9 @@ const map = {
   l: ComponentTree,
 };
 
-const lastPoint = getLastPoint(useBreakpoints({ m: 300, l: 500 }));
+const lastPoint = getLastPoint(
+  useBreakpoints({ map: { m: 300, l: 500 }, isActive: true }),
+);
 
 const Component = map[lastPoint || s];
 ```
@@ -46,16 +58,20 @@ const Component = map[lastPoint || s];
 ```tsx
 import { useBreakpoints, getLastPoint } from '@consta/uikit/useBreakpoints';
 
-const breakpoint = getLastPoint(useBreakpoints({ m: 300, l: 500 }));
+const breakpoint = getLastPoint(
+  useBreakpoints({ map: { m: 300, l: 500 }, isActive: true }),
+);
 
 <div className={cnComponent({ breakpoint })} />;
 ```
 
 ## Свойства
 
-| Аргумент | Тип и значения           | По умолчанию | Описание                |
-| -------- | ------------------------ | ------------ | ----------------------- |
-| `map?`   | `Record<POINTS, number>` | -            | Набор контрольных точек |
+| Свойство    | Тип и значения                                                               | По умолчанию | Описание                |
+| ----------- | ---------------------------------------------------------------------------- | ------------ | ----------------------- |
+| `map`       | `Record<POINTS, number>`                                                     | -            | Набор контрольных точек |
+| `isActive?` | boolean                                                                      | -            | Активнойсть хука        |
+| `ref?`      | `React.RefObject<HTMLElement>` &#124; `React.RefObject<SVGGraphicsElement> ` | -            | Ссылка на элемент       |
 
 ### createMods
 
@@ -64,8 +80,7 @@ const breakpoint = getLastPoint(useBreakpoints({ m: 300, l: 500 }));
 ```tsx
 import { useBreakpoints, addPrefix } from '@consta/uikit/useBreakpoints';
 
-const breakpoints = useBreakpoints({ l: 500, xl: 800, 2xl:1000 });
-
+const breakpoints = useBreakpoints({ map: { l: 500, xl: 800, 2xl:1000 }, isActive: true });
 
 <div className={cnComponent(addPrefix(breakpoints))} />;
 

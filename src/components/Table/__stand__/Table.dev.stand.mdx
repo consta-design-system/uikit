@@ -1508,7 +1508,7 @@ const columns: TableColumn<typeof rowsProf[number]>[] = [
 ];
 
 export const TableExampleAdaptiveScrollUseBreakpoints = () => {
-  const { desktop } = useBreakpoints({ desktop: 800 });
+  const { desktop } = useBreakpoints({ map: { desktop: 800 }, isActive: true });
 
   if (desktop) {
     return <Table columns={columns} rows={rowsProf} />;
