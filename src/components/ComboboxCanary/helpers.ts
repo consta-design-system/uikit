@@ -61,7 +61,7 @@ export type ComboboxPropRenderValue<ITEM> = (
 
 type ComboboxPropOnCreate = (
   label: string,
-  props: { e: React.SyntheticEvent; label: string },
+  props: { e: React.SyntheticEvent },
 ) => void;
 
 export type ComboboxProps<

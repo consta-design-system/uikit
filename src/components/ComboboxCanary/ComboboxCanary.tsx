@@ -34,6 +34,7 @@ import {
   ComboboxPropRenderItem,
   ComboboxPropRenderValue,
   ComboboxProps,
+  iconSizeMap,
   isMultipleParams,
   isNotMultipleParams,
   withDefaultGetters,

@@ -25,6 +25,8 @@ import { cnMixFocus } from '##/mixs/MixFocus';
 import { isNotNil } from '##/utils/type-guards';
 
 import {
+  clearSizeMap,
+  iconSizeMap,
   isMultipleParams,
   isNotMultipleParams,
   searchCompare,

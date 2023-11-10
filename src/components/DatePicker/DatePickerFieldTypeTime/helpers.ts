@@ -180,7 +180,7 @@ export const usePicker = (props: UsePickerProps) => {
   const onAccept = useCallback(
     (stringValue: string, maskRef: unknown, e: Event) => {
       if (stringValue?.length !== formatProp.length && valueRef.current) {
-        onChangeRef.current?.({ e, value: null });
+        onChangeRef.current?.(null, { e });
       }
     },
     [formatProp],

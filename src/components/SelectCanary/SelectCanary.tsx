@@ -22,6 +22,7 @@ import { useForkRef } from '##/hooks/useForkRef';
 import { isNotNil } from '##/utils/type-guards';
 
 import {
+  iconSizeMap,
   PropRenderItem,
   PropRenderValue,
   SelectComponent,

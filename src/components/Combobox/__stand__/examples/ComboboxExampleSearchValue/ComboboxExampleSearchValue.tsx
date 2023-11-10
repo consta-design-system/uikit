@@ -48,7 +48,7 @@ export function ComboboxExampleSearchValue() {
           value={value}
           onChange={({ value }) => setValue(value)}
           searchValue={searchValue}
-          onInputChange={({ value }) => setSearchValue(value ?? undefined)}
+          onInputChange={(value) => setSearchValue(value ?? undefined)}
           multiple
         />
         <Button
