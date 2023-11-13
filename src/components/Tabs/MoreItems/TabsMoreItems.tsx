@@ -38,14 +38,19 @@ const TabsMoreItemsRender = (
 
   const handleKeyDown: React.KeyboardEventHandler = useCallback(
     (e) => {
-      e.stopPropagation();
-      e.preventDefault();
+      const preventDefault = () => {
+        e.stopPropagation();
+        e.preventDefault();
+      };
+
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        preventDefault();
         const value = highlightRef.current + (e.key === 'ArrowDown' ? 1 : -1);
         setHighlightIndex(Math.min(Math.max(value, 0), items.length));
         return;
       }
       if (e.key === 'Enter') {
+        preventDefault();
         if (!openRef.current) {
           setIsOpen.on();
           return;
@@ -55,7 +60,8 @@ const TabsMoreItemsRender = (
         setIsOpen.off();
         return;
       }
-      if (e.key === 'Esc') {
+      if (e.key === 'Escape') {
+        preventDefault();
         setIsOpen.off();
       }
     },
