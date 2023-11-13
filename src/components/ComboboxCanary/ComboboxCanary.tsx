@@ -248,7 +248,12 @@ const ComboboxRender = <
   const renderValueList = () => {
     if (allItemsSelected) {
       return (
-        <Text size={size} className={cnSelect('SelectAll')}>
+        <Text
+          view="primary"
+          size={size}
+          className={cnSelect('SelectAll')}
+          lineHeight="m"
+        >
           {allSelectedAllLabel}
         </Text>
       );

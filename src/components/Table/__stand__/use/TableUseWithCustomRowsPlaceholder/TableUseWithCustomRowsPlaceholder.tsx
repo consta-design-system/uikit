@@ -18,7 +18,11 @@ export const TableUseWithCustomRowsPlaceholder = () => {
         rows={[]}
         borderBetweenColumns
         borderBetweenRows
-        emptyRowsPlaceholder={<Text>Данные не найдены</Text>}
+        emptyRowsPlaceholder={
+          <Text view="primary" size="m" lineHeight="m">
+            Данные не найдены
+          </Text>
+        }
       />
     </div>
   );

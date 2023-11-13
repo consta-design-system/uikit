@@ -46,10 +46,10 @@ export function ModalExample() {
         onClickOutside={() => setIsModalOpen(false)}
         onEsc={() => setIsModalOpen(false)}
       >
-        <Text as="p" size="s" view="secondary">
+        <Text as="p" size="s" view="secondary" lineHeight="m">
           Это заголовок модального окна
         </Text>
-        <Text as="p" size="m" view="primary">
+        <Text as="p" size="s" view="secondary" lineHeight="m">
           Это содержимое модального окна. Здесь может быть что угодно: текст,
           изображение, форма или таблица. Всё, что хочется вынести из контекста
           и показать поверх основной страницы.
@@ -96,10 +96,10 @@ export function ModalExampleTop() {
         onClickOutside={() => setIsModalOpen(false)}
         onEsc={() => setIsModalOpen(false)}
       >
-        <Text as="p" size="s" view="secondary">
+        <Text as="p" size="s" view="secondary" lineHeight="m">
           Я окно
         </Text>
-        <Text as="p" size="m" view="primary">
+        <Text as="p" size="s" view="secondary" lineHeight="m">
           Я выше всех!
         </Text>
         <div>
@@ -138,10 +138,10 @@ export function ModalExampleCenter() {
         onClickOutside={() => setIsModalOpen(false)}
         onEsc={() => setIsModalOpen(false)}
       >
-        <Text as="p" size="s" view="secondary">
+        <Text as="p" size="s" view="secondary" lineHeight="m">
           Я окно
         </Text>
-        <Text as="p" size="m" view="primary">
+        <Text as="p" size="s" view="secondary" lineHeight="m">
           Я в самой серединке!
         </Text>
         <div>
@@ -187,10 +187,10 @@ export function ModalExampleNoOverlay() {
         onClickOutside={() => setIsModalOpen(false)}
         onEsc={() => setIsModalOpen(false)}
       >
-        <Text as="p" size="s" view="secondary">
+        <Text as="p" size="s" view="secondary" lineHeight="m">
           Я окно
         </Text>
-        <Text as="p" size="m" view="primary">
+        <Text as="p" size="s" view="secondary" lineHeight="m">
           Я без подложки. Честно-честно.
         </Text>
         <div>

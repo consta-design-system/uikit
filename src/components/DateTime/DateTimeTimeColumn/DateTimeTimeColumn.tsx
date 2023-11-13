@@ -42,7 +42,7 @@ export const DateTimeTimeColumn: React.FC<DateTimeTimeColumnProps> = memo(
     return (
       <div {...otherProps} className={cnDateTimeTimeColumn(null, [className])}>
         <DateTimeCell className={cnDateTimeTimeColumn('Label')}>
-          <Text view="ghost" size="2xs">
+          <Text view="ghost" size="2xs" lineHeight="m">
             {label}
           </Text>
         </DateTimeCell>

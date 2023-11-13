@@ -65,7 +65,7 @@ export const PopoverPositionedByAnchorExample = () => {
           equalAnchorWidth={false}
         >
           <div>
-            <Text size="xs">
+            <Text view="primary" size="xs">
               Это содержимое поповера: здесь может быть что угодно, например,
               этот текст.
             </Text>
@@ -98,7 +98,9 @@ export const PopoverPositionedByCoordsExample = () => {
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setPosition(undefined)}
       >
-        <Text>Область, в которой работает отслеживание мышки</Text>
+        <Text view="primary" size="m">
+          Область, в которой работает отслеживание мышки
+        </Text>
       </div>
       <Popover
         direction="upCenter"
@@ -111,11 +113,13 @@ export const PopoverPositionedByCoordsExample = () => {
       >
         {(direction) => (
           <div>
-            <Text size="xs">
+            <Text view="primary" size="xs">
               Это содержимое поповера: здесь может быть что угодно, например,
               этот текст.
             </Text>
-            <Text size="xs">Направление: {direction}</Text>
+            <Text view="primary" size="xs">
+              Направление: {direction}
+            </Text>
           </div>
         )}
       </Popover>

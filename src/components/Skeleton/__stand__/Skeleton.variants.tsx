@@ -72,7 +72,7 @@ export const Variants = () => {
         {skeletonText}
         <div>
           {new Array(rows).fill(null).map(() => (
-            <Text size={fontSize} lineHeight={lineHeight}>
+            <Text view="primary" size={fontSize} lineHeight={lineHeight}>
               Lorem ipsum
             </Text>
           ))}

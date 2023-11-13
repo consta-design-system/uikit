@@ -25,12 +25,23 @@ export const ComponentsGridItem: React.FC<ComponentsGridItemProps> = ({
     <div className={cnComponentsGridItem()}>
       {Svg && <Svg className={cnComponentsGridItem('Image')} />}
       {name && url && (
-        <Text size="l" as="a" view="link" href={url} target="blank">
+        <Text
+          size="l"
+          as="a"
+          view="link"
+          href={url}
+          target="blank"
+          lineHeight="m"
+        >
           {name}
         </Text>
       )}
 
-      {description && <Text size="s">{description}</Text>}
+      {description && (
+        <Text size="s" view="primary" lineHeight="m">
+          {description}
+        </Text>
+      )}
     </div>
   );
 };

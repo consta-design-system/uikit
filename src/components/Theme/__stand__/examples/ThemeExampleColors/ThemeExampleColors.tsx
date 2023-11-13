@@ -18,7 +18,13 @@ export const ThemeExampleColors = () => {
   return (
     <Example col={{ 1: 0, 3: 800 }}>
       <>
-        <Text align="center" weight="bold">
+        <Text
+          align="center"
+          weight="bold"
+          view="primary"
+          size="m"
+          lineHeight="m"
+        >
           Default
         </Text>
         <Theme preset={presetGpnDefault} className={cnExampleColors()}>
@@ -37,7 +43,13 @@ export const ThemeExampleColors = () => {
         </Theme>
       </>
       <>
-        <Text align="center" weight="bold">
+        <Text
+          align="center"
+          weight="bold"
+          view="primary"
+          size="m"
+          lineHeight="m"
+        >
           Dark
         </Text>
         <Theme preset={presetGpnDark} className={cnExampleColors()}>
@@ -56,7 +68,13 @@ export const ThemeExampleColors = () => {
         </Theme>
       </>
       <>
-        <Text align="center" weight="bold">
+        <Text
+          align="center"
+          weight="bold"
+          view="primary"
+          size="m"
+          lineHeight="m"
+        >
           Display
         </Text>
         <Theme preset={presetGpnDisplay} className={cnExampleColors()}>

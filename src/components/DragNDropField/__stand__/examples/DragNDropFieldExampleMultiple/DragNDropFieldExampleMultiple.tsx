@@ -16,7 +16,9 @@ export const DragNDropFieldExampleSingle = () => (
       multiple={false}
       onDropFiles={(files) => console.log(files)}
     >
-      <Text>Сюда можно перетащить только один файл</Text>
+      <Text view="primary" size="m" lineHeight="m">
+        Сюда можно перетащить только один файл
+      </Text>
     </DragNDropField>
   </Example>
 );
@@ -24,7 +26,9 @@ export const DragNDropFieldExampleSingle = () => (
 export const DragNDropFieldExampleMultiple = () => (
   <Example col={1}>
     <DragNDropField multiple onDropFiles={(files) => console.log(files)}>
-      <Text>Сюда можно перетащить много файлов за раз</Text>
+      <Text view="primary" size="m" lineHeight="m">
+        Сюда можно перетащить много файлов за раз
+      </Text>
     </DragNDropField>
   </Example>
 );

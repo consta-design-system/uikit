@@ -187,7 +187,12 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
               onClick={handleClick(prevPage)}
             />
             {!minified && (
-              <Text className={cnPagination('TipLeft')} size="xs" view="ghost">
+              <Text
+                className={cnPagination('TipLeft')}
+                size="xs"
+                view="ghost"
+                lineHeight="m"
+              >
                 {hotkeys.prevPage.label}
               </Text>
             )}
@@ -214,6 +219,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
                 view="linkMinor"
                 className={cnPagination('More')}
                 style={{ width: itemWidth }}
+                lineHeight="m"
               >
                 ...
               </Text>
@@ -240,6 +246,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
                 view="linkMinor"
                 className={cnPagination('More')}
                 style={{ width: itemWidth }}
+                lineHeight="m"
               >
                 ...
               </Text>
@@ -273,6 +280,7 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
               size={size}
               view="linkMinor"
               className={cnPagination('Total')}
+              lineHeight="m"
             >
               {getLabel(totalPages)}
             </Text>
@@ -294,7 +302,12 @@ export const Pagination: Pagination = React.forwardRef((props, ref) => {
               onClick={handleClick(nextPage)}
             />
             {!minified && (
-              <Text className={cnPagination('TipRight')} size="xs" view="ghost">
+              <Text
+                className={cnPagination('TipRight')}
+                size="xs"
+                view="ghost"
+                lineHeight="m"
+              >
                 {hotkeys.nextPage.label}
               </Text>
             )}

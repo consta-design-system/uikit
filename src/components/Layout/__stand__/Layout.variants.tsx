@@ -27,17 +27,23 @@ const Variants = () => {
   return (
     <Layout direction="column" className={cnLayoutVariants()}>
       <Layout className={cnLayoutVariants('Header')}>
-        <Text>Шапка</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Шапка
+        </Text>
       </Layout>
       <Layout
         direction={direction}
         className={cnLayoutVariants('Content', { direction })}
       >
         <Layout className={cnLayoutVariants('Block')} flex={Number(flexBlock1)}>
-          <Text>Контент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Контент
+          </Text>
         </Layout>
         <Layout className={cnLayoutVariants('Block')} flex={Number(flexBlock2)}>
-          <Text>Контент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Контент
+          </Text>
         </Layout>
       </Layout>
     </Layout>

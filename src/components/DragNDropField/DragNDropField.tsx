@@ -102,7 +102,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
         <div {...rootProps} ref={useForkRef([ref, rootRef, dragNDropFieldRef])}>
           <input {...getInputProps()} />
           {isDragActive ? (
-            <Text view="secondary" size="s" align="center">
+            <Text view="secondary" size="s" align="center" lineHeight="m">
               Перетащите файлы сюда
             </Text>
           ) : (

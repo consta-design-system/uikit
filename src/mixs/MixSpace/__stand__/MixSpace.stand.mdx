@@ -16,9 +16,13 @@ import { cnMixSpace } from '@consta/uikit/MixSpace';
 export const MixSpaceExampleButtonWithoutSpaces = () => {
   return (
     <>
-      <Text>Это текст, он нужен, чтобы показать отступы от кнопки сверху</Text>
+      <Text view="primary" size="m" lineHeight="m">
+        Это текст, он нужен, чтобы показать отступы от кнопки сверху
+      </Text>
       <Button label="Это кнопка без отступов" />
-      <Text>Это текст, он нужен, чтобы показать отступы от кнопки снизу</Text>
+      <Text view="primary" size="m" lineHeight="m">
+        Это текст, он нужен, чтобы показать отступы от кнопки снизу
+      </Text>
     </>
   );
 };
@@ -32,7 +36,9 @@ export const MixSpaceExampleButtonWithoutSpaces = () => {
 export const MixSpaceExampleButtonWithSpaces = () => {
   return (
     <>
-      <Text>Это текст, он нужен, чтобы показать отступы от кнопки сверху</Text>
+      <Text view="primary" size="m" lineHeight="m">
+        Это текст, он нужен, чтобы показать отступы от кнопки сверху
+      </Text>
       <Button
         label="Это кнопка с отступами снаружи"
         className={cnMixSpace({
@@ -40,7 +46,9 @@ export const MixSpaceExampleButtonWithSpaces = () => {
           mT: '3xs',
         })}
       />
-      <Text>Это текст, он нужен, чтобы показать отступы от кнопки снизу</Text>
+      <Text view="primary" size="m" lineHeight="m">
+        Это текст, он нужен, чтобы показать отступы от кнопки снизу
+      </Text>
     </>
   );
 };
@@ -109,7 +117,9 @@ export const MixSpaceExample = () => {
         mT: '3xs',
       })}
     >
-      <Text>Здесь может быть ваш текст</Text>
+      <Text view="primary" size="m" lineHeight="m">
+        Здесь может быть ваш текст
+      </Text>
     </div>
   );
 };

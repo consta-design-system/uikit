@@ -9,11 +9,13 @@ export const MixSpaceExampleButtonWithoutSpaces = () => {
   return (
     <Example>
       <>
-        <Text>
+        <Text view="primary" size="m" lineHeight="m">
           Это текст, он нужен, чтобы показать отступы от кнопки сверху
         </Text>
         <Button label="Это кнопка без отступов" />
-        <Text>Это текст, он нужен, чтобы показать отступы от кнопки снизу</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Это текст, он нужен, чтобы показать отступы от кнопки снизу
+        </Text>
       </>
     </Example>
   );
@@ -23,7 +25,7 @@ export const MixSpaceExampleButtonWithSpaces = () => {
   return (
     <Example>
       <>
-        <Text>
+        <Text view="primary" size="m" lineHeight="m">
           Это текст, он нужен, чтобы показать отступы от кнопки сверху
         </Text>
         <Button
@@ -33,7 +35,9 @@ export const MixSpaceExampleButtonWithSpaces = () => {
             mT: '3xs',
           })}
         />
-        <Text>Это текст, он нужен, чтобы показать отступы от кнопки снизу</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Это текст, он нужен, чтобы показать отступы от кнопки снизу
+        </Text>
       </>
     </Example>
   );

@@ -29,6 +29,8 @@ export const CalendarMonthLabel: React.FC<CalendarMonthLabelProps> = (
       size="s"
       align="center"
       weight="bold"
+      view="primary"
+      lineHeight="m"
     >
       {label}
     </Text>

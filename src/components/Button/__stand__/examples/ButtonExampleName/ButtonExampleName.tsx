@@ -22,7 +22,12 @@ export const ButtonExampleNameSemantics = () => {
           status: 'error',
           node: (
             <div>
-              <Text className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                className={cnMixSpace({ mB: 'm' })}
+                view="primary"
+                size="m"
+                lineHeight="m"
+              >
                 Ракета к запуску готова.
               </Text>
               <Button label="OK" />
@@ -36,7 +41,7 @@ export const ButtonExampleNameSemantics = () => {
           status: 'success',
           node: (
             <div>
-              <Text className={cnMixSpace({ mB: 'm' })}>
+              <Text className={cnMixSpace({ mB: 'm' })} view="primary" size="m">
                 Ракета к запуску готова.
               </Text>
               <Button label="Запустить" />
@@ -159,6 +164,7 @@ export const ButtonExampleNameTooBig = () => {
                 size="l"
                 weight="bold"
                 lineHeight="l"
+                view="primary"
               >
                 Больничный лист
               </Text>
@@ -176,6 +182,7 @@ export const ButtonExampleNameTooBig = () => {
                 size="l"
                 weight="bold"
                 lineHeight="l"
+                view="primary"
               >
                 Больничный лист
               </Text>
@@ -185,6 +192,7 @@ export const ButtonExampleNameTooBig = () => {
                 size="s"
                 iconSize="s"
                 onlyIcon
+                view="primary"
               />
             </>
           ),
@@ -207,13 +215,23 @@ export const ButtonExampleNameAgreement = () => {
   return (
     <Example col={{ 1: 0, 2: 800 }} separately>
       <div>
-        <Text className={cnMixSpace({ mB: 'm' })}>
+        <Text
+          className={cnMixSpace({ mB: 'm' })}
+          view="primary"
+          size="m"
+          lineHeight="m"
+        >
           Мы используем куки! Без них всё сломается :(
         </Text>
         <Button label="Понятно" />
       </div>
       <div>
-        <Text className={cnMixSpace({ mB: 'm' })}>
+        <Text
+          className={cnMixSpace({ mB: 'm' })}
+          view="primary"
+          size="m"
+          lineHeight="m"
+        >
           Примите лиценизонное соглашение, ну пожалуйста.
         </Text>
         <Button label="Принимаю" />

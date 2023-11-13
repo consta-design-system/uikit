@@ -47,6 +47,7 @@ const Variants = () => {
             size="l"
             view="primary"
             weight="semibold"
+            lineHeight="m"
             className={cnSidebarVariants('Title')}
           >
             Заголовок сайдбара
@@ -55,6 +56,7 @@ const Variants = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarVariants('Body')}
           >
             Содержимое сайдбара. Сайдбар — это всплывающее окно, «прилипающее» к
@@ -66,6 +68,7 @@ const Variants = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarVariants('Body')}
           >
             Сайдбар входит в дизайн-систему Consta. В ней несколько библиотек с
@@ -80,6 +83,7 @@ const Variants = () => {
             size="m"
             view="primary"
             weight="semibold"
+            lineHeight="m"
             className={cnSidebarVariants('Title')}
           >
             Особенности дизайн-системы
@@ -88,6 +92,7 @@ const Variants = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarVariants('Body')}
           >
             Гибкая тематизация. Тема определяет внешний вид всего интерфейса —
@@ -99,6 +104,7 @@ const Variants = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarVariants('Body')}
           >
             Семантические переменные. Все параметры темы описаны с помощью
@@ -110,6 +116,7 @@ const Variants = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarVariants('Body')}
           >
             Кастомные блоки и компоненты. В дизайн-системе есть готовые блоки,
@@ -121,6 +128,7 @@ const Variants = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarVariants('Body')}
           >
             Одинаковые сущности в макетах и в коде. Все сущности есть в двух

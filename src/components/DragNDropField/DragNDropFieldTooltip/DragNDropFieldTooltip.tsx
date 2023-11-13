@@ -33,7 +33,12 @@ export const DragNDropFieldTooltip: React.FC<DragNDropFieldTooltipProps> = ({
       isInteractive={false}
       onClickOutside={() => setIsHidden(true)}
     >
-      <Text size="s" className={cnDragNDropFieldTooltip('Text')}>
+      <Text
+        size="s"
+        view="primary"
+        lineHeight="m"
+        className={cnDragNDropFieldTooltip('Text')}
+      >
         {errors.length === 1 ? (
           errors[0]
         ) : (

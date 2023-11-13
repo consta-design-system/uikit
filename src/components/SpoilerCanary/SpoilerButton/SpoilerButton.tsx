@@ -46,7 +46,13 @@ export const SpoilerButton = forwardRefWithAs<SpoilerButtonProps>(
         className={cnSpoilerButton({ size }, [className])}
         ref={ref}
       >
-        <Text className={cnSpoilerButton('Label')} size={size} as="span">
+        <Text
+          className={cnSpoilerButton('Label')}
+          size={size}
+          as="span"
+          lineHeight="m"
+          view="primary"
+        >
           {open ? lessLabel : moreLabel}
         </Text>
         <AnimateIconSwitcher

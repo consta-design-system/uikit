@@ -51,7 +51,13 @@ export const CheckboxGroupExampleHead = () => {
           status: 'error',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                view="primary"
+                size="m"
+                lineHeight="m"
+              >
                 Где деньги?
               </Text>
               <CheckboxGroup
@@ -70,7 +76,13 @@ export const CheckboxGroupExampleHead = () => {
           status: 'success',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                view="primary"
+                size="m"
+                lineHeight="m"
+              >
                 Где деньги?
               </Text>
               <CheckboxGroup
@@ -95,7 +107,13 @@ export const CheckboxExampleGroupHead3 = () => {
   return (
     <Example>
       <>
-        <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+        <Text
+          view="primary"
+          size="m"
+          lineHeight="m"
+          weight="bold"
+          className={cnMixSpace({ mB: 'm' })}
+        >
           Выберите места для хранения денег
         </Text>
         <CheckboxGroup
@@ -165,7 +183,13 @@ export const CheckboxGroupExampleGeneral = () => {
           status: 'error',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                lineHeight="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+              >
                 Каких булок ещё съесть
               </Text>
               <CheckboxGroup
@@ -184,7 +208,13 @@ export const CheckboxGroupExampleGeneral = () => {
           status: 'success',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                lineHeight="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+              >
                 Каких булок ещё съесть
               </Text>
               <CheckboxGroup
