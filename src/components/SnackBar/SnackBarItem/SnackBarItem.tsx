@@ -121,7 +121,12 @@ export const SnackBarItemRender = (
         )}
       <div className={cnSnackBarItem('Content')}>
         {isString(message) || isNumber(message) ? (
-          <Text className={cnSnackBarItem('Message')} lineHeight="s">
+          <Text
+            view="primary"
+            size="m"
+            className={cnSnackBarItem('Message')}
+            lineHeight="s"
+          >
             {message}
           </Text>
         ) : (

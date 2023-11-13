@@ -11,7 +11,9 @@ export const DragNDropFieldExampleOnDropFiles = () => {
     <Example col={1}>
       <div>
         <DragNDropField multiple onDropFiles={setFiles}>
-          <Text>Перетяните файлы сюда</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Перетяните файлы сюда
+          </Text>
         </DragNDropField>
       </div>
       <div>

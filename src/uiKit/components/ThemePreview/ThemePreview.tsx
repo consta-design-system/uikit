@@ -88,6 +88,7 @@ export const ThemePreview: React.FC = () => {
               view="primary"
               weight="bold"
               className={cnMixSpace({ mB: 'xl', mT: '3xl' })}
+              lineHeight="m"
             >
               Цвета фонов
             </Text>
@@ -119,6 +120,7 @@ export const ThemePreview: React.FC = () => {
               view="primary"
               weight="bold"
               className={cnMixSpace({ mB: 'xl', mT: '3xl' })}
+              lineHeight="m"
             >
               Цвета типографики
             </Text>
@@ -151,6 +153,7 @@ export const ThemePreview: React.FC = () => {
               view="primary"
               weight="bold"
               className={cnMixSpace({ mB: 'xl', mT: '3xl' })}
+              lineHeight="m"
             >
               Цвета скроллбара
             </Text>
@@ -182,6 +185,7 @@ export const ThemePreview: React.FC = () => {
               view="primary"
               weight="bold"
               className={cnMixSpace({ mB: 'xl', mT: '3xl' })}
+              lineHeight="m"
             >
               Цвета контролов
             </Text>

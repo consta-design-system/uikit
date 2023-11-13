@@ -36,7 +36,7 @@ const Variants = () => {
       status={status}
       form={form}
     >
-      <Text>
+      <Text view="primary" size="m" lineHeight="m">
         Это карточка, в которой ничего нет, кроме текста. Здесь может быть что
         угодно.
       </Text>

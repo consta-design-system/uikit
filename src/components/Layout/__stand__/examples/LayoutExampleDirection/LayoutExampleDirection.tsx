@@ -14,10 +14,14 @@ export const LayoutExampleDirectionRow = () => {
     <Example col={1}>
       <Layout className={cnLayoutExampleDirection({ direction: 'row' })}>
         <Layout flex={1} className={cnLayoutExampleDirection('Block')}>
-          <Text>Первый блок</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Первый блок
+          </Text>
         </Layout>
         <Layout flex={1} className={cnLayoutExampleDirection('Block')}>
-          <Text>Второй блок</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Второй блок
+          </Text>
         </Layout>
       </Layout>
     </Example>
@@ -32,10 +36,14 @@ export const LayoutExampleDirectionColumn = () => {
         className={cnLayoutExampleDirection({ direction: 'column' })}
       >
         <Layout flex={1} className={cnLayoutExampleDirection('Block')}>
-          <Text>Первый блок</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Первый блок
+          </Text>
         </Layout>
         <Layout flex={1} className={cnLayoutExampleDirection('Block')}>
-          <Text>Второй блок</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Второй блок
+          </Text>
         </Layout>
       </Layout>
     </Example>

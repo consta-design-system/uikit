@@ -8,10 +8,14 @@ export const CardExampleForm = () => {
   return (
     <Example>
       <Card verticalSpace="2xl" horizontalSpace="2xl" form="round">
-        <Text>Круглая карточка</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Круглая карточка
+        </Text>
       </Card>
       <Card verticalSpace="2xl" horizontalSpace="2xl" form="square">
-        <Text>Квадратная карточка</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Квадратная карточка
+        </Text>
       </Card>
     </Example>
   );

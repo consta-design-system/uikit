@@ -10,7 +10,13 @@ const TextWithTooltip = withTooltip({ content: 'Тултип' })(Text);
 export const WithTooltipExampleText = () => {
   return (
     <Example>
-      <TextWithTooltip size="l" as="a" view="brand" decoration="underline">
+      <TextWithTooltip
+        size="l"
+        as="a"
+        view="brand"
+        decoration="underline"
+        lineHeight="m"
+      >
         На мне появится тултип
       </TextWithTooltip>
     </Example>

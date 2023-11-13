@@ -17,7 +17,9 @@ export const MixCardExampleBorder = () => {
           border: true,
         })}
       >
-        <Text>Карточка с границей</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Карточка с границей
+        </Text>
       </div>
       <div
         className={cnMixCard({
@@ -28,7 +30,9 @@ export const MixCardExampleBorder = () => {
           border: false,
         })}
       >
-        <Text>Карточка без границы</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Карточка без границы
+        </Text>
       </div>
     </Example>
   );

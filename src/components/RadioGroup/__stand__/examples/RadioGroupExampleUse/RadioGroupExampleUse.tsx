@@ -36,7 +36,13 @@ export const RadioGroupExampleMore = () => {
           status: 'error',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                lineHeight="m"
+              >
                 Когда получать вести с Марса
               </Text>
               <RadioGroup
@@ -53,7 +59,13 @@ export const RadioGroupExampleMore = () => {
           status: 'success',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                size="m"
+                lineHeight="m"
+              >
                 Когда получать вести с Марса
               </Text>
               <RadioGroup
@@ -84,7 +96,13 @@ export const RadioGroupExampleOne = () => {
           status: 'error',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                lineHeight="m"
+              >
                 Что привезти из космоса
               </Text>
               <RadioGroup
@@ -101,7 +119,13 @@ export const RadioGroupExampleOne = () => {
           status: 'success',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                lineHeight="m"
+              >
                 Как получить посылку
               </Text>
               <RadioGroup
@@ -124,7 +148,13 @@ export const RadioGroupExampleChecked = () => {
   return (
     <Example>
       <>
-        <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+        <Text
+          view="primary"
+          size="m"
+          weight="bold"
+          className={cnMixSpace({ mB: 'm' })}
+          lineHeight="m"
+        >
           Как вас постричь
         </Text>
         <RadioGroup

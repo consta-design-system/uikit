@@ -89,7 +89,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               <div className={cnTooltip('Content', { size })}>
                 {typeof children === 'string' ||
                 typeof children === 'number' ? (
-                  <Text size="xs">{children}</Text>
+                  <Text view="primary" size="m" lineHeight="m">
+                    {children}
+                  </Text>
                 ) : (
                   children
                 )}

@@ -75,7 +75,15 @@ const Variants = () => {
 
     const text = `Сообщение о каком-то событии - ${key}`;
     const message = withComponentInsteadOfText ? (
-      <Text as="a" cursor="pointer" font="mono" weight="bold" size="l">
+      <Text
+        view="primary"
+        as="a"
+        cursor="pointer"
+        font="mono"
+        weight="bold"
+        size="l"
+        lineHeight="m"
+      >
         {text}
       </Text>
     ) : (

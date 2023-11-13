@@ -9,7 +9,7 @@ export const CardExampleSpace = () => {
     <Example col={1}>
       {cardPropSpace.map((item) => (
         <Card verticalSpace={item} horizontalSpace={item}>
-          <Text>{`Отступы '${item}'`}</Text>
+          <Text view="primary" size="m">{`Отступы '${item}'`}</Text>
         </Card>
       ))}
     </Example>

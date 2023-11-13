@@ -24,7 +24,13 @@ export const ChoiceGroupExampleText = () => {
           status: 'error',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                lineHeight="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+              >
                 Отображение
               </Text>
               <ChoiceGroup
@@ -42,7 +48,13 @@ export const ChoiceGroupExampleText = () => {
           status: 'success',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                lineHeight="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+              >
                 Как показывать товары
               </Text>
               <ChoiceGroup
