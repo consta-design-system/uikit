@@ -3,12 +3,14 @@ import React from 'react';
 
 import {
   CheckboxGroup,
+  checkboxGroupDefaultAlign,
   checkboxGroupDefaultDirection,
   checkboxGroupDefaultSize,
   checkboxGroupDefaultView,
-  checkboxGroupDirections,
-  checkboxGroupSizes,
-  checkboxGroupViews,
+  checkboxGroupPropAlign,
+  checkboxGroupPropDirections,
+  checkboxGroupPropSizes,
+  checkboxGroupPropViews,
 } from '../CheckboxGroup';
 
 type Item = {
@@ -25,12 +27,25 @@ const items: Item[] = [
 ];
 
 const Variants = () => {
-  const size = useSelect('size', checkboxGroupSizes, checkboxGroupDefaultSize);
-  const view = useSelect('view', checkboxGroupViews, checkboxGroupDefaultView);
+  const size = useSelect(
+    'size',
+    checkboxGroupPropSizes,
+    checkboxGroupDefaultSize,
+  );
+  const view = useSelect(
+    'view',
+    checkboxGroupPropViews,
+    checkboxGroupDefaultView,
+  );
   const direction = useSelect(
     'direction',
-    checkboxGroupDirections,
+    checkboxGroupPropDirections,
     checkboxGroupDefaultDirection,
+  );
+  const align = useSelect(
+    'align',
+    checkboxGroupPropAlign,
+    checkboxGroupDefaultAlign,
   );
   const disabled = useBoolean('disabled', false);
 
@@ -41,6 +56,7 @@ const Variants = () => {
       <CheckboxGroup
         value={value}
         items={items}
+        align={align}
         onChange={({ value }) => setValue(value)}
         name="CheckboxGroup"
         direction={direction}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
+import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 type CheckboxGroupPropAttributes = Omit<
   JSX.IntrinsicElements['label'],
@@ -15,20 +15,26 @@ export type CheckboxGroupDefaultItem = {
   ref?: React.RefObject<HTMLLabelElement>;
 };
 
-export const checkboxGroupDirections = ['column', 'row'] as const;
-export type CheckboxGroupDirection = typeof checkboxGroupDirections[number];
-export const checkboxGroupDefaultDirection: CheckboxGroupDirection =
-  checkboxGroupDirections[0];
+export const checkboxGroupPropDirections = ['column', 'row'] as const;
+export type CheckboxGroupPropDirection =
+  typeof checkboxGroupPropDirections[number];
+export const checkboxGroupDefaultDirection: CheckboxGroupPropDirection =
+  checkboxGroupPropDirections[0];
 
-export const checkboxGroupSizes = ['m', 'xs', 's', 'l'] as const;
-export type CheckboxGroupPropSize = typeof checkboxGroupSizes[number];
+export const checkboxGroupPropSizes = ['m', 'xs', 's', 'l'] as const;
+export type CheckboxGroupPropSize = typeof checkboxGroupPropSizes[number];
 export const checkboxGroupDefaultSize: CheckboxGroupPropSize =
-  checkboxGroupSizes[0];
+  checkboxGroupPropSizes[0];
 
-export const checkboxGroupViews = ['primary', 'ghost'] as const;
-export type CheckboxGroupPropView = typeof checkboxGroupViews[number];
+export const checkboxGroupPropViews = ['primary', 'ghost'] as const;
+export type CheckboxGroupPropView = typeof checkboxGroupPropViews[number];
 export const checkboxGroupDefaultView: CheckboxGroupPropView =
-  checkboxGroupViews[0];
+  checkboxGroupPropViews[0];
+
+export const checkboxGroupPropAlign = ['center', 'top'] as const;
+export type CheckboxGroupPropAlign = typeof checkboxGroupPropAlign[number];
+export const checkboxGroupDefaultAlign: CheckboxGroupPropAlign =
+  checkboxGroupPropAlign[0];
 
 export type CheckboxGroupPropGetItemKey<ITEM> = (
   item: ITEM,
@@ -59,7 +65,8 @@ export type CheckboxGroupProps<ITEM = CheckboxGroupDefaultItem> =
         value: ITEM[] | null;
       }) => void;
       name?: string;
-      direction?: CheckboxGroupDirection;
+      direction?: CheckboxGroupPropDirection;
+      align?: CheckboxGroupPropAlign;
       size?: CheckboxGroupPropSize;
       view?: CheckboxGroupPropView;
       disabled?: boolean;

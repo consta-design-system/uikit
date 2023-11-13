@@ -13,6 +13,7 @@ import { AttachmentExampleIcon } from './examples/AttachmentExampleIcon/Attachme
 import { AttachmentExampleName } from './examples/AttachmentExampleName/AttachmentExampleName';
 import { AttachmentExampleAs } from './examples/AttachmentExampleAs/AttachmentExampleAs';
 import { AttachmentExampleSize } from './examples/AttachmentExampleSize/AttachmentExampleSize';
+import { AttachmentExampleWithPictogram } from './examples/AttachmentExampleWithPictogram/AttachmentExampleWithPictogram';
 
 ```tsx
 import { Attachment } from '@consta/uikit/Attachment';
@@ -22,6 +23,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 - [Свойства файла](#свойства-файла)
   - [Иконка](#иконка)
+    - [Показать иконку](#показать-иконку)
   - [Название](#название)
   - [Описание](#описание)
 - [Загрузка файла](#загрузка-файла)
@@ -61,6 +63,27 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 Рядом с иконкой можно разместить информацию о файле.
 
+#### Показать иконку
+
+Для того чтобы отобразить пиктограмму укажите значение свойства `withPictogram` в `true`.
+
+```tsx
+<Attachment
+  withPictogram
+  fileName="Файл"
+  fileExtension="jpg"
+  fileDescription="14 Мб 01.04.2020, 07:01"
+/>
+<Attachment
+  withPictogram={false}
+  fileName="Файл"
+  fileExtension="jpg"
+  fileDescription="14 Мб 01.04.2020, 07:01"
+/>
+```
+
+<AttachmentExampleWithPictogram />
+
 ### Название
 
 За название отвечает свойство `fileName`. Сюда можно подставить имя файла, но лучше придумать красивое название, которое будет понятно пользователям.
@@ -72,6 +95,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   className={cnAttachmentExampleList()}
   fileName="Фотография"
   fileExtension="jpg"
+  withPictogram
   fileDescription="1,5 Mб 19.07.2020, 16:11"
 />
 
@@ -79,6 +103,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   className={cnAttachmentExampleList()}
   fileName="Скан паспорта"
   fileExtension="pdf"
+  withPictogram
   fileDescription="1,5 Mб 19.07.2020, 16:12"
 />
 
@@ -86,6 +111,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   className={cnAttachmentExampleList()}
   fileName="Сопроводительное письмо"
   fileExtension="docx"
+  withPictogram
   fileDescription="225 Mб 19.07.2020, 17:15"
 />
 ```
@@ -103,6 +129,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   className={cnAttachmentExampleName()}
   fileName="Файл с нормальным описанием"
   fileExtension="jpg"
+  withPictogram
   fileDescription="14 Мб 01.04.2020, 07:01"
 />
 
@@ -110,6 +137,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   className={cnAttachmentExampleName()}
   fileName="Файл с каким попало описанием"
   fileExtension="bzz"
+  withPictogram
   fileDescription="Крекс, пекс, фекс"
 />
 ```
@@ -132,6 +160,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 <Attachment
   fileName="Инструкция по сборке марсохода"
   fileExtension="docx"
+  withPictogram
   fileDescription="25,5 Mб 19.07.2020, 21:12"
   loadingText="Я ещё не загрузился, уже загружено"
   loading
@@ -153,11 +182,13 @@ import { Attachment } from '@consta/uikit/Attachment';
 <Attachment
   fileName="Марсианский закат"
   fileExtension="jpg"
+  withPictogram
   errorText="Фотография не загрузилась"
 />
 <Attachment
   fileName="Марсианский закат"
   fileExtension="jpg"
+  withPictogram
   errorText="Файл слишком большой, максимум 100 ТБ"
 />
 ```
@@ -189,6 +220,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 <Attachment
   fileName="my_tale_about_mars_variant_121_final"
   fileExtension="docx"
+  withPictogram
   fileDescription="1,5 Mб 21.02.2051, 14:12"
   loadingText="Загрузка"
   buttonIcon={IconTrash}
@@ -213,16 +245,19 @@ import { Attachment } from '@consta/uikit/Attachment';
   size="xs"
   fileName="Инструкция по сборке марсохода"
   fileExtension="pdf"
+  withPictogram
 />
 <Attachment
   size="s"
   fileName="Инструкция по сборке марсохода"
   fileExtension="pdf"
+  withPictogram
 />
 <Attachment
   size="m"
   fileName="Инструкция по сборке марсохода"
   fileExtension="pdf"
+  withPictogram
 />
 ```
 
@@ -240,6 +275,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   href="https://www.youtube.com/watch?v=dAZKu_ojb14"
   fileName="Вести с марса"
   fileExtension="mov"
+  withPictogram
   fileDescription="Нажми меня"
 />
 ```
@@ -260,6 +296,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 | [`fileName`](#название)                   | `string`                                | -            | Название файла                                                   |
 | [`fileDescription`](#описание)            | `string`                                | -            | Описание файла                                                   |
 | [`fileExtension`](#иконка)                | `string`                                | -            | Расширение иконки файла                                          |
+| [`withPictogram`](#показать-иконку)       | `boolean`                               | `true`       | Отображается ли пиктограмма файла                                |
 | [`loading`](#загрузка-файла)              | `boolean`                               | -            | Прелоадер загрузки                                               |
 | [`loadingProgress`](#индикаторы-загрузки) | `number`                                | -            | Степень загрузки файла в процентах                               |
 | [`loadingText`](#индикаторы-загрузки)     | `string`                                | `'Loading'`  | Текст, который видно во время загрузки                           |
@@ -275,11 +312,11 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 ## Пример
 
-```ts
+```tsx
 import React from 'react';
 import { Attachment } from '@consta/uikit/Attachment';
 
 const App = () => {
-  return <Attachment fileName="Документация" extension="doc" />;
+  return <Attachment fileName="Документация" extension="doc" withPictogram />;
 };
 ```
