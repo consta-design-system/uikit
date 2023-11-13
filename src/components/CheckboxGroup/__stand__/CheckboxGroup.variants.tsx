@@ -62,6 +62,7 @@ const Variants = () => {
         size={size}
         view={view}
         disabled={disabled}
+        align={align}
       />
     </form>
   );
