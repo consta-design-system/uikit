@@ -352,27 +352,25 @@ export type PaginationPropArrow =
       disabled?: boolean;
       icon?: IconComponent;
     };
-
-export type PaginationPropOuterMostArrow = boolean | IconComponent;
 ```
 
-| Свойство                                         | Тип                                                             | По умолчанию       | Описание                                                    |
-| ------------------------------------------------ | --------------------------------------------------------------- | ------------------ | ----------------------------------------------------------- |
-| [`value?`](#страницы)                            | `number`                                                        | —                  | Номер текущей страницы                                      |
-| [`items?`](#страницы)                            | `number`                                                        | —                  | Количество страниц                                          |
-| [`visibleCount?`](#количество-элементов)         | `number`                                                        | —                  | Количество отображаемых элементов                           |
-| [`onChange?`](#страницы)                         | `PaginationPropOnChange`                                        | —                  | Функция для смены страницы                                  |
-| `getTotalLabel?`                                 | `(totalPages: number) => string`                                | `из ${totalPages}` | Функция для получения номера страницы из количества страниц |
-| [`showFirstPage?`](#первая-и-последняя-страница) | `boolean`                                                       | -                  | Флаг, отображать ли первый элемент                          |
-| [`showLastPage?`](#первая-и-последняя-страница)  | `boolean`                                                       | -                  | Флаг, отображать ли последний элемент                       |
-| [`form?`](#форма)                                | `'default', 'round', 'brick'`                                   | `'default'`        | Форма элементов компонента                                  |
-| [`size?`](#размер)                               | `'xs', 's', 'm', 'l'`                                           | `'m'`              | Размер элементов компонента                                 |
-| [`type?`](#тип)                                  | `'default', 'input'`                                            | `'default'`        | Тип компонента (кнопки или поле ввода)                      |
-| [`arrows?`](#стрелки)                            | `[PaginationPropArrow?, PaginationPropArrow?]`                  | -                  | Стрелки перемещения по страницам                            |
-| [`outerMostArrows?`](#конец-или-начало)          | `[PaginationPropOuterMostArrow?,PaginationPropOuterMostArrow?]` | -                  | Стрелки перемещения на первую и последнюю страницу          |
-| [`hotKeys?`](#горячие-клавиши)                   | `[PaginationPropHotKey?, PaginationPropHotKey?]`                | -                  | Горячие клавиши для переключения страниц                    |
-| `containerEventListener?`                        | `HTMLElement, Window`                                           | `window`           | Элемент, к которому прикрепляется обработчик нажатия клавиш |
-| `className?`                                     | `string`                                                        | —                  | Дополнительные CSS-классы                                   |
+| Свойство                                         | Тип                                              | По умолчанию       | Описание                                                    |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------ | ----------------------------------------------------------- |
+| [`value?`](#страницы)                            | `number`                                         | —                  | Номер текущей страницы                                      |
+| [`items?`](#страницы)                            | `number`                                         | —                  | Количество страниц                                          |
+| [`visibleCount?`](#количество-элементов)         | `number`                                         | —                  | Количество отображаемых элементов                           |
+| [`onChange?`](#страницы)                         | `PaginationPropOnChange`                         | —                  | Функция для смены страницы                                  |
+| `getTotalLabel?`                                 | `(totalPages: number) => string`                 | `из ${totalPages}` | Функция для получения номера страницы из количества страниц |
+| [`showFirstPage?`](#первая-и-последняя-страница) | `boolean`                                        | -                  | Флаг, отображать ли первый элемент                          |
+| [`showLastPage?`](#первая-и-последняя-страница)  | `boolean`                                        | -                  | Флаг, отображать ли последний элемент                       |
+| [`form?`](#форма)                                | `'default', 'round', 'brick'`                    | `'default'`        | Форма элементов компонента                                  |
+| [`size?`](#размер)                               | `'xs', 's', 'm', 'l'`                            | `'m'`              | Размер элементов компонента                                 |
+| [`type?`](#тип)                                  | `'default', 'input'`                             | `'default'`        | Тип компонента (кнопки или поле ввода)                      |
+| [`arrows?`](#стрелки)                            | `[PaginationPropArrow?, PaginationPropArrow?]`   | -                  | Стрелки перемещения по страницам                            |
+| [`outerMostArrows?`](#конец-или-начало)          | `[PaginationPropArrow?,PaginationPropArrow?]`    | -                  | Стрелки перемещения на первую и последнюю страницу          |
+| [`hotKeys?`](#горячие-клавиши)                   | `[PaginationPropHotKey?, PaginationPropHotKey?]` | -                  | Горячие клавиши для переключения страниц                    |
+| `containerEventListener?`                        | `HTMLElement, Window`                            | `window`           | Элемент, к которому прикрепляется обработчик нажатия клавиш |
+| `className?`                                     | `string`                                         | —                  | Дополнительные CSS-классы                                   |
 
 ## Пример
 
@@ -579,14 +577,6 @@ export type PaginationBasePropArrow =
       onClick?: React.MouseEventHandler;
     };
 
-export type PaginationBasePropOuterMostArrow =
-  | false
-  | {
-      disabled?: boolean;
-      icon?: IconComponent;
-      onClick?: React.MouseEventHandler;
-    };
-
 export type PaginationBaseItemDefault = {
   key: string | number;
   label?: string;
@@ -620,22 +610,22 @@ export type PaginationPropGetItemOnClick<ITEM> = (
 ) => PaginationBaseItemDefault['onClick'];
 ```
 
-| Свойство                                | Тип                                                                      | По умолчанию | Описание                                                              |
-| --------------------------------------- | ------------------------------------------------------------------------ | ------------ | --------------------------------------------------------------------- |
-| `value?`                                | `ITEM`                                                                   | —            | Номер текущей страницы                                                |
-| `items?`                                | `ITEM[]`                                                                 | —            | Количество страниц                                                    |
-| `onChange?`                             | `PaginationPropOnChange`                                                 | —            | Функция для смены страницы                                            |
-| [`form?`](#форма)                       | `'default', 'round', 'brick'`                                            | `'default'`  | Форма элементов компонента                                            |
-| [`size?`](#размер)                      | `'xs', 's', 'm', 'l'`                                                    | `'m'`        | Размер элементов компонента                                           |
-| [`arrows?`](#стрелки)                   | `[PaginationBasePropArrow?, PaginationBasePropArrow?]`                   | -            | Стрелки перемещения по страницам                                      |
-| [`outerMostArrows?`](#конец-или-начало) | `[PaginationBasePropOuterMostArrow?, PaginationBasePropOuterMostArrow?]` | -            | Стрелки перемещения на первую и последнюю страницу                    |
-| [`hotKeys?`](#горячие-клавиши)          | `[PaginationPropHotKey?, PaginationPropHotKey?]`                         | -            | Горячие клавиши для переключения страниц                              |
-| `containerEventListener?`               | `HTMLElement, Window`                                                    | `window`     | Элемент, к которому прикрепляется обработчик нажатия клавиш           |
-| `getItemKey?`                           | `PaginationPropGetItemKey`                                               | -            | Функция для получения уникального ключа                               |
-| `getItemLabel?`                         | `PaginationPropGetItemLabel`                                             | -            | Функция для получения текста элемента                                 |
-| `getItemClickable?`                     | `PaginationPropGetItemClickable`                                         | -            | Функция для получения флага кликабелен ли элемент                     |
-| `getItemOnClick?`                       | `PaginationPropGetItemOnClick`                                           | -            | Функция для получения события нажатия на элемент                      |
-| `getItemAs?`                            | `PaginationPropGetItemAs`                                                | -            | Функция для получения HTML-тега, которым будет отрисовываться элемент |
-| `getItemAttributes?`                    | `PaginationPropGetItemAttributes`                                        | -            | Функция для получения HTML-атрибутов, которые используются в элементе |
-| `getItemRef?`                           | `PaginationPropGetItemRef`                                               | -            | Функция для получения ссылки на элемент                               |
-| `className?`                            | `string`                                                                 | —            | Дополнительные CSS-классы                                             |
+| Свойство                                | Тип                                                    | По умолчанию | Описание                                                              |
+| --------------------------------------- | ------------------------------------------------------ | ------------ | --------------------------------------------------------------------- |
+| `value?`                                | `ITEM`                                                 | —            | Номер текущей страницы                                                |
+| `items?`                                | `ITEM[]`                                               | —            | Количество страниц                                                    |
+| `onChange?`                             | `PaginationPropOnChange`                               | —            | Функция для смены страницы                                            |
+| [`form?`](#форма)                       | `'default', 'round', 'brick'`                          | `'default'`  | Форма элементов компонента                                            |
+| [`size?`](#размер)                      | `'xs', 's', 'm', 'l'`                                  | `'m'`        | Размер элементов компонента                                           |
+| [`arrows?`](#стрелки)                   | `[PaginationBasePropArrow?, PaginationBasePropArrow?]` | -            | Стрелки перемещения по страницам                                      |
+| [`outerMostArrows?`](#конец-или-начало) | `[PaginationBasePropArrow?, PaginationBasePropArrow?]` | -            | Стрелки перемещения на первую и последнюю страницу                    |
+| [`hotKeys?`](#горячие-клавиши)          | `[PaginationPropHotKey?, PaginationPropHotKey?]`       | -            | Горячие клавиши для переключения страниц                              |
+| `containerEventListener?`               | `HTMLElement, Window`                                  | `window`     | Элемент, к которому прикрепляется обработчик нажатия клавиш           |
+| `getItemKey?`                           | `PaginationPropGetItemKey`                             | -            | Функция для получения уникального ключа                               |
+| `getItemLabel?`                         | `PaginationPropGetItemLabel`                           | -            | Функция для получения текста элемента                                 |
+| `getItemClickable?`                     | `PaginationPropGetItemClickable`                       | -            | Функция для получения флага кликабелен ли элемент                     |
+| `getItemOnClick?`                       | `PaginationPropGetItemOnClick`                         | -            | Функция для получения события нажатия на элемент                      |
+| `getItemAs?`                            | `PaginationPropGetItemAs`                              | -            | Функция для получения HTML-тега, которым будет отрисовываться элемент |
+| `getItemAttributes?`                    | `PaginationPropGetItemAttributes`                      | -            | Функция для получения HTML-атрибутов, которые используются в элементе |
+| `getItemRef?`                           | `PaginationPropGetItemRef`                             | -            | Функция для получения ссылки на элемент                               |
+| `className?`                            | `string`                                               | —            | Дополнительные CSS-классы                                             |

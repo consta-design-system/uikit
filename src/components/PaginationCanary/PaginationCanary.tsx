@@ -70,13 +70,13 @@ const PaginationRender = <TYPE extends PaginationPropType>(
     const orientation =
       type === 'first' || type === 'previous' ? 'start' : 'end';
     if (typeof item === 'object') {
-      const { disabled, label, icon = paginationArrowIconsMap[type] } = item;
+      const { label, icon = paginationArrowIconsMap[type] } = item;
 
       return (
         <PaginationArrow
           label={label}
           icon={icon}
-          disabled={disabled || !flag}
+          disabled={!flag}
           size={size}
           form={form}
           ref={ref}

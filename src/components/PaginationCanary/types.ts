@@ -44,7 +44,6 @@ export type PaginationPropArrow =
   | IconComponent
   | {
       label?: string;
-      disabled?: boolean;
       icon?: IconComponent;
     };
 
@@ -57,21 +56,8 @@ export type PaginationBasePropArrow =
       onClick?: React.MouseEventHandler;
     };
 
-export type PaginationBasePropOuterMostArrow =
-  | false
-  | {
-      disabled?: boolean;
-      icon?: IconComponent;
-      onClick?: React.MouseEventHandler;
-    };
-
-export type PaginationPropOuterMostArrow = boolean | IconComponent;
-
 type PaginationArrowsProps = {
-  outerMostArrows?: [
-    PaginationPropOuterMostArrow?,
-    PaginationPropOuterMostArrow?,
-  ];
+  outerMostArrows?: [PaginationPropArrow?, PaginationPropArrow?];
 } & (
   | {
       arrows: [PaginationPropArrow?, PaginationPropArrow?];
@@ -84,10 +70,7 @@ type PaginationArrowsProps = {
 );
 
 type PaginationBaseArrowsProps = {
-  outerMostArrows?: [
-    PaginationBasePropOuterMostArrow?,
-    PaginationBasePropOuterMostArrow?,
-  ];
+  outerMostArrows?: [PaginationBasePropArrow?, PaginationBasePropArrow?];
 } & (
   | {
       arrows: [PaginationBasePropArrow?, PaginationBasePropArrow?];
