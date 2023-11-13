@@ -1,6 +1,8 @@
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React from 'react';
 
+import { useFlag } from '##/hooks/useFlag';
+
 import {
   Checkbox,
   checkboxPropAlign,
@@ -19,7 +21,7 @@ const Variants = () => {
   const align = useSelect('align', checkboxPropAlign, checkboxPropAlignDefault);
   const label = useText('label', 'Отметьте меня');
 
-  const [checked, setChecked] = React.useState<boolean>(false);
+  const [checked, setChecked] = useFlag();
 
   return (
     <Checkbox
@@ -28,7 +30,7 @@ const Variants = () => {
       size={size}
       view={view}
       label={label}
-      onChange={setChecked}
+      onChange={setChecked.toggle}
       checked={checked}
       align={align}
     />

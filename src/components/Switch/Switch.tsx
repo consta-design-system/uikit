@@ -1,6 +1,6 @@
 import './Switch.css';
 
-import React, { ChangeEventHandler, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
@@ -40,12 +40,6 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
       ...otherProps
     } = usePropsHandler(COMPONENT_NAME, props, switchRef);
 
-    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-      if (onChange) {
-        onChange(!checked, { e });
-      }
-    };
-
     return (
       <label
         {...otherProps}
@@ -58,7 +52,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
           className={cnSwitch('Input', [cnMixFocus()])}
           checked={checked}
           disabled={disabled}
-          onChange={handleChange}
+          onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
           readOnly={readOnly}

@@ -35,7 +35,7 @@ export type Props = {
   disabled?: boolean;
   className?: string;
   label?: string;
-  onChange?: RadioPropOnChange;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   name?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -81,12 +81,6 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
       ...otherProps
     } = usePropsHandler(COMPONENT_NAME, props, radioRef);
 
-    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-      if (onChange) {
-        onChange(!checked, { e });
-      }
-    };
-
     return (
       <label
         {...otherProps}
@@ -99,7 +93,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
           className={cnRadio('Input', [cnMixFocus()])}
           checked={checked}
           disabled={disabled}
-          onChange={handleChange}
+          onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
           readOnly={readOnly}

@@ -1,0 +1,76 @@
+<svg
+  width="200"
+  height="120"
+  viewBox="0 0 200 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M0 4C0 1.79086 1.79086 0 4 0H196C198.209 0 200 1.79086 200 4V116C200 118.209 198.209 120 196 120H4C1.79086 120 0 118.209 0 116V4Z"
+    fill="var(--color-bg-default)"
+  />
+  <rect
+    x="164.5"
+    y="52.5"
+    width="15"
+    height="15"
+    rx="7.5"
+    transform="rotate(90 164.5 52.5)"
+    stroke="var(--color-bg-link)"
+  />
+  <rect
+    x="160"
+    y="57"
+    width="6"
+    height="6"
+    rx="3"
+    transform="rotate(90 160 57)"
+    fill="var(--color-bg-link)"
+  />
+  <rect
+    x="127"
+    y="52"
+    width="16"
+    height="16"
+    rx="8"
+    transform="rotate(90 127 52)"
+    fill="var(--color-control-bg-ghost)"
+  />
+  <rect
+    x="126.5"
+    y="52.5"
+    width="15"
+    height="15"
+    rx="7.5"
+    transform="rotate(90 126.5 52.5)"
+    stroke="var(--color-control-bg-border-default)"
+  />
+  <rect
+    x="122"
+    y="57"
+    width="6"
+    height="6"
+    rx="3"
+    transform="rotate(90 122 57)"
+    fill="var(--color-bg-ghost)"
+    fill-opacity="0.8"
+  />
+  <rect
+    x="88"
+    y="52"
+    width="16"
+    height="16"
+    rx="8"
+    transform="rotate(90 88 52)"
+    fill="var(--color-control-bg-ghost)"
+  />
+  <rect
+    x="49.5"
+    y="52.5"
+    width="15"
+    height="15"
+    rx="7.5"
+    transform="rotate(90 49.5 52.5)"
+    stroke="var(--color-control-bg-border-default)"
+  />
+</svg>

@@ -70,9 +70,7 @@ describe('Компонент Radio', () => {
         fireEvent.click(element);
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(true, {
-          e: expect.any(Object),
-        });
+        expect(handleChange).toHaveBeenCalledWith(expect.any(Object));
       });
     });
   });

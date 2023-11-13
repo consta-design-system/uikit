@@ -1,0 +1,177 @@
+.deprecated--Switch {
+  position: relative;
+  display: inline-flex;
+  font-family: var(--font-primary);
+  cursor: pointer;
+
+  &_size {
+    &_xs {
+      --box-width: 20px;
+      --box-height: 12px;
+      --switch-font-size: var(--control-text-size-xs);
+      --offset: var(--space-2xs);
+
+      .Switch-Input::before {
+        transform: translateX(-8px);
+      }
+    }
+
+    &_s {
+      --box-width: 28px;
+      --box-height: 16px;
+      --switch-font-size: var(--control-text-size-s);
+      --offset: var(--space-xs);
+
+      .Switch-Input::before {
+        transform: translateX(-12px);
+      }
+    }
+
+    &_m {
+      --box-width: 36px;
+      --box-height: 20px;
+      --switch-font-size: var(--control-text-size-m);
+      --offset: var(--space-xs);
+
+      .Switch-Input::before {
+        transform: translateX(-16px);
+      }
+    }
+
+    &_l {
+      --box-width: 44px;
+      --box-height: 24px;
+      --switch-font-size: var(--control-text-size-l);
+      --offset: var(--space-s);
+
+      .Switch-Input::before {
+        transform: translateX(-20px);
+      }
+    }
+  }
+
+  &_view {
+    &_primary {
+      &:hover .Switch-Input:not(:checked) {
+        --border-color: var(--color-control-bg-border-default-hover);
+        --background-color: transparent;
+        --content-color: var(--color-control-bg-border-default-hover);
+      }
+
+      .Switch-Input:not(:checked) {
+        --border-color: var(--color-control-bg-border-default);
+        --background-color: transparent;
+        --content-color: var(--color-control-bg-border-default);
+      }
+
+      &:hover .Switch-Input:checked {
+        --border-color: var(--color-control-bg-primary-hover);
+        --background-color: var(--color-control-bg-primary-hover);
+        --content-color: var(--color-control-typo-primary-hover);
+      }
+
+      .Switch-Input:checked {
+        --border-color: var(--color-control-bg-primary);
+        --background-color: var(--color-control-bg-primary);
+        --content-color: var(--color-control-typo-primary);
+      }
+    }
+
+    &_ghost {
+      &:hover .Switch-Input:not(:checked) {
+        --border-color: var(--color-control-bg-border-default-hover);
+        --background-color: transparent;
+        --content-color: var(--color-control-bg-border-default-hover);
+      }
+
+      .Switch-Input:not(:checked) {
+        --border-color: var(--color-control-bg-border-default);
+        --background-color: transparent;
+        --content-color: var(--color-control-bg-border-default);
+      }
+
+      &:hover .Switch-Input:checked {
+        --border-color: var(--color-control-bg-border-default-hover);
+        --background-color: var(--color-control-bg-ghost-hover);
+        --content-color: var(--color-control-typo-ghost-hover);
+      }
+
+      .Switch-Input:checked {
+        --border-color: var(--color-control-bg-border-default);
+        --background-color: var(--color-control-bg-ghost);
+        --content-color: var(--color-control-typo-ghost);
+      }
+    }
+  }
+
+  &-Input {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    width: var(--box-width);
+    height: var(--box-height);
+    margin: 0;
+    background-color: var(--background-color);
+    border: var(--control-border-width) solid var(--border-color);
+    border-radius: 99rem;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      box-sizing: border-box;
+      width: calc(var(--box-height) - var(--control-border-width) * 4);
+      height: calc(var(--box-height) - var(--control-border-width) * 4);
+      background-color: var(--content-color);
+      border-radius: 999rem;
+      transition: transform 0.15s, background-color 0.15s;
+    }
+
+    &:checked {
+      background-color: var(--background-color);
+
+      &::before {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &-Label {
+    margin-left: var(--offset);
+    color: var(--color-control-typo-default);
+    font-size: var(--switch-font-size);
+  }
+
+  &_disabled {
+    pointer-events: none;
+
+    .Switch-Input:disabled {
+      --border-color: transparent;
+      --background-color: var(--color-control-bg-disable);
+      --content-color: var(--color-control-typo-disable);
+    }
+
+    .Switch-Input:disabled ~ .Switch-Label {
+      color: var(--color-control-typo-disable);
+    }
+  }
+
+  &_align {
+    &_center {
+      align-items: center;
+    }
+
+    &_top {
+      align-items: top;
+
+      .Switch-Input {
+        margin-top: 1px;
+      }
+    }
+  }
+}

@@ -59,7 +59,7 @@ const SwitchGroupRender = (
           name={name}
           disabled={disabled || getItemDisabled?.(item)}
           checked={getChecked(item)}
-          onChange={(_checked, { e }) => getOnChange(item)(e)}
+          onChange={getOnChange(item)}
           className={cnSwitchGroup('Item')}
         />
       ))}

@@ -28,7 +28,7 @@ export type SwitchProps = PropsWithHTMLAttributes<
     disabled?: boolean;
     className?: string;
     label?: string;
-    onChange?: SwitchPropOnChange;
+    onChange?: React.ChangeEventHandler<HTMLInputElement>;
     name?: string;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;

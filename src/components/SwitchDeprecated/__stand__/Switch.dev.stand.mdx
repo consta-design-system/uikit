@@ -1,0 +1,115 @@
+import { MdxMenu } from '@consta/stand';
+import { SwitchExampleSize } from './examples/SwitchExampleSize/SwitchExampleSize';
+import { SwitchExampleStatus } from './examples/SwitchExampleStatus/SwitchExampleStatus';
+import { SwitchExampleAlign } from './examples/SwitchExampleAlign/SwitchExampleAlign';
+import { SwitchExampleView } from './examples/SwitchExampleView/SwitchExampleView';
+
+```tsx
+import { Switch } from '@consta/uikit/Switch';
+```
+
+<MdxMenu>
+
+- [Название](#название)
+- [Состояния](#состояния)
+- [Размер](#размер)
+- [Внешний вид](#внешний-вид)
+- [Выравнивание](#выравнивание)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Состояния
+
+Чтобы включить переключатель, добавьте `checked`.
+
+Чтобы сделать переключатель неактивным, добавьте `disabled`.
+
+```tsx
+<Switch label="Switch"/>
+<Switch label="Checked" checked/>
+<Switch label="Disabled" disabled />
+```
+
+<SwitchExampleStatus />
+
+## Размер
+
+За размер переключателя отвечает свойство `size`.
+
+```tsx
+<Switch size="xs" label="Размер XS" checked />
+<Switch size="s" label="Размер S" checked/>
+<Switch size="m" label="Размер М" />
+<Switch size="l" label="Размер L" />
+```
+
+<SwitchExampleSize />
+
+## Внешний вид
+
+Всего в дизайн-системе два типа переключателя: `primary` и `ghost`. За это отвечает свойство `view`.
+
+```tsx
+<Switch view="primary" checked />
+<Switch view="ghost" checked />
+```
+
+<SwitchExampleView />
+
+## Выравнивание
+
+За выравнивание отвечает свойство `align`.
+
+```tsx
+<Switch
+  align="center"
+  label="Длинный текст переключателя с выравниванием по центру, записанный в несколько строк"
+/>
+<Switch
+  align="top"
+  label="Длинный текст переключателя с выравниванием по верху, записанный в несколько строк"
+/>
+```
+
+<SwitchExampleAlign />
+
+## Импорт
+
+```tsx
+import { Switch } from '@consta/uikit/Switch';
+```
+
+## Свойства
+
+| Свойство                  | Тип и значения                                                                   | По умолчанию | Описание                                                                     |
+| ------------------------- | -------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
+| [`label?`](#название)     | `string`                                                                         | -            | Текст рядом с переключателем                                                 |
+| [`size?`](#размер)        | `'xs', 's', 'm', 'l'`                                                            | `'m'`        | Размер переключателя                                                         |
+| [`view?`](#внешний-вид)   | `'primary', 'view'`                                                              | `'primary'`  | Внешний вид                                                                  |
+| [`align?`](#выравнивание) | `'center', 'top'`                                                                | `'center'`   | Выравнивание                                                                 |
+| [`checked`](#состояния)   | `boolean`, `undefined`                                                           | -            | Ставит переключатель в положение **включен**                                 |
+| [`disabled?`](#состояния) | `boolean`                                                                        | -            | Делает переключатель неактивным                                              |
+| `required?`               | `boolean`                                                                        | -            | Такой переключатель обязательно нужно выбрать                                |
+| `autoFocus?`              | `boolean`                                                                        | -            | Переносит фокус на этот переключатель                                        |
+| `tabIndex?`               | `number`                                                                         | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
+| `name?`                   | `string`                                                                         | -            | Имя элемента в DOM                                                           |
+| `onChange?`               | `(checked: boolean, params: {e: React.ChangeEvent<HTMLInputElement> }) => void;` | -            | Действие при смене состояния переключателя                                   |
+| `onFocus?`                | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Действие по фокусу                                                           |
+| `onBlur?`                 | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Действие при потере фокуса                                                   |
+| `inputRef?`               | `React.Ref<HTMLInputElement>`                                                    | -            | Ссылка на DOM-элемент `<input>`                                              |
+| `ref?`                    | `React.Ref<HTMLLabelElement>`                                                    | -            | Ссылка на корневой DOM-элемент этого компонента                              |
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Switch } from '@consta/uikit/Switch';
+
+const App = () => {
+  return <Switch label="Меня можно включать и выключать" />;
+};
+```
