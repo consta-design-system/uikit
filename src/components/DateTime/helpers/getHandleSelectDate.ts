@@ -1,18 +1,18 @@
 import { isDefined } from '../../../utils/type-guards';
 import { DateRange } from '../../../utils/types/Date';
 import {
+  CapableRangeType,
   DateTimePropOnChange,
   DateTimePropOnChangeRange,
   DateTimePropValue,
   HandleSelectDate,
-  СapableRangeType,
 } from './types';
 
 type GetHandleSelectDateProps = {
   isEqualUnit: (date1: Date, date2: Date) => boolean;
-  value?: DateTimePropValue<СapableRangeType>;
+  value?: DateTimePropValue<CapableRangeType>;
   onChange?: DateTimePropOnChange;
-  onChangeRange?: DateTimePropOnChangeRange<СapableRangeType>;
+  onChangeRange?: DateTimePropOnChangeRange<CapableRangeType>;
   minDate?: Date;
   maxDate?: Date;
 };

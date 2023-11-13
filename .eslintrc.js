@@ -34,6 +34,7 @@ module.exports = {
     '@typescript-eslint',
     'simple-import-sort',
     'prettier',
+    'id-match',
   ],
   overrides: [
     {
@@ -119,5 +120,6 @@ module.exports = {
         },
       },
     ],
+    'id-match': ['error', '^[\x00-\x7F]*$'],
   },
 };

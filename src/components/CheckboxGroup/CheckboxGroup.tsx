@@ -8,6 +8,7 @@ import { Checkbox } from '../Checkbox/Checkbox';
 import { withDefaultGetters } from './helper';
 import {
   CheckboxGroupComponent,
+  checkboxGroupDefaultAlign,
   checkboxGroupDefaultDirection,
   checkboxGroupDefaultSize,
   checkboxGroupDefaultView,
@@ -29,6 +30,7 @@ const CheckboxGroupRender = (
     getItemAttributes,
     onChange,
     name,
+    align = checkboxGroupDefaultAlign,
     direction = checkboxGroupDefaultDirection,
     size = checkboxGroupDefaultSize,
     view = checkboxGroupDefaultView,
@@ -57,6 +59,7 @@ const CheckboxGroupRender = (
           <Checkbox
             {...atributes}
             key={getItemKey(item) ?? getItemLabel(item)}
+            align={align}
             label={getItemLabel(item)}
             size={size}
             view={view}
