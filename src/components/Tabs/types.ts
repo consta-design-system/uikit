@@ -64,7 +64,7 @@ export type TabsPropGetItemRef<ITEM> = (
 export type TabsPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 
 export type TabsPropOnChange<ITEM> = (props: {
-  e: React.MouseEvent;
+  e: React.MouseEvent | React.KeyboardEvent;
   value: ITEM;
 }) => void;
 
@@ -91,6 +91,7 @@ export type TabsFitModeWrapperProps<ITEM> = {
   getItemChecked: TabsPropGetItemChecked<ITEM>;
   renderItem: (item: ITEM) => React.ReactNode;
   renderItemsList: RenderItemsListProp;
+  onChange: TabsPropOnChange<ITEM>;
   tabRefs: Array<React.RefObject<HTMLElement>>;
   size: TabsPropSize;
 };
@@ -172,7 +173,7 @@ export type TabsMoreItemsProps<ITEM = TabsItemDefault> =
         renderInDropdown?: boolean,
       ) => React.ReactNode;
       getItemLabel: TabsPropGetItemLabel<ITEM>;
-      getItemChecked: TabsPropGetItemChecked<ITEM>;
+      onChange: TabsPropOnChange<ITEM>;
       height: number;
       size: TabsPropSize;
     } & React.RefAttributes<HTMLDivElement>,

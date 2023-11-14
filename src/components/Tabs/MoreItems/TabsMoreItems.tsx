@@ -1,8 +1,13 @@
 import './TabsMoreItems.css';
 
 import { IconMeatball } from '@consta/icons/IconMeatball';
-import FocusTrap from 'focus-trap-react';
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Transition } from 'react-transition-group';
 
 import { Button } from '##/components/Button';
@@ -21,16 +26,62 @@ const TabsMoreItemsRender = (
   props: TabsMoreItemsProps,
   ref: React.Ref<HTMLDivElement>,
 ) => {
-  const { items, renderItem, getItemLabel, getItemChecked, height, size } =
-    props;
-  const [open, setOpen] = useFlag(false);
+  const { items, renderItem, getItemLabel, height, size, onChange } = props;
+  const [isOpen, setIsOpen] = useFlag(false);
   const buttonRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
   const [direction, setDirection] = useState<Direction>('downStartLeft');
+  const [highlightIndex, setHighlightIndex] = useState(-1);
+
+  const highlightRef: React.MutableRefObject<number> = useRef(-1);
+  const openRef: React.MutableRefObject<boolean> = useRef(false);
+
+  const handleKeyDown: React.KeyboardEventHandler = useCallback(
+    (e) => {
+      const preventDefault = () => {
+        e.stopPropagation();
+        e.preventDefault();
+      };
+
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        preventDefault();
+        const value = highlightRef.current + (e.key === 'ArrowDown' ? 1 : -1);
+        setHighlightIndex(Math.min(Math.max(value, 0), items.length));
+        return;
+      }
+      if (e.key === 'Enter') {
+        preventDefault();
+        if (!openRef.current) {
+          setIsOpen.on();
+          return;
+        }
+        const value = items[highlightRef.current];
+        value && onChange?.({ e, value });
+        setIsOpen.off();
+        return;
+      }
+      if (e.key === 'Escape') {
+        preventDefault();
+        setIsOpen.off();
+      }
+    },
+    [items],
+  );
 
   useEffect(() => {
-    items.length === 0 && setOpen.off();
+    items.length === 0 && setIsOpen.off();
   }, [items]);
+
+  useEffect(() => {
+    highlightRef.current = highlightIndex;
+  }, [highlightIndex]);
+
+  useEffect(() => {
+    openRef.current = isOpen;
+    if (!isOpen) {
+      setHighlightIndex(-1);
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -45,11 +96,12 @@ const TabsMoreItemsRender = (
           view="ghost"
           onlyIcon
           iconLeft={IconMeatball}
-          onClick={setOpen.toggle}
+          onClick={setIsOpen.toggle}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <Transition
-        in={open}
+        in={isOpen}
         unmountOnExit
         nodeRef={popoverRef}
         timeout={animateTimeout}
@@ -60,6 +112,7 @@ const TabsMoreItemsRender = (
             offset={-1}
             ref={popoverRef}
             direction="downStartRight"
+            onClickOutside={setIsOpen.off}
             spareDirection="downStartLeft"
             className={cnTabsMoreItems('Popover', [
               cnMixPopoverAnimate({ animate, direction }),
@@ -74,38 +127,24 @@ const TabsMoreItemsRender = (
               'upCenter',
             ]}
           >
-            <FocusTrap
-              focusTrapOptions={{
-                fallbackFocus: buttonRef.current ?? undefined,
-                clickOutsideDeactivates: (e) => {
-                  const isClickInsideButton = buttonRef.current?.contains(
-                    e.target as Node,
-                  );
-                  return !isClickInsideButton;
-                },
-                allowOutsideClick: true,
-                onDeactivate: setOpen.off,
-              }}
+            <ListBox
+              shadow
+              border
+              size={size}
+              form="default"
+              className={cnTabsMoreItems('Content')}
             >
-              <ListBox
-                shadow
-                border
-                size={size}
-                form="default"
-                className={cnTabsMoreItems('Content')}
-              >
-                {items.map((item) => (
-                  <div
-                    key={getItemLabel(item)}
-                    className={cnTabsMoreItems('Item', {
-                      active: getItemChecked(item),
-                    })}
-                  >
-                    {renderItem(item, setOpen.off, true)}
-                  </div>
-                ))}
-              </ListBox>
-            </FocusTrap>
+              {items.map((item, i) => (
+                <div
+                  key={getItemLabel(item)}
+                  className={cnTabsMoreItems('Item', {
+                    active: highlightIndex === i,
+                  })}
+                >
+                  {renderItem(item, setIsOpen.off, true)}
+                </div>
+              ))}
+            </ListBox>
           </Popover>
         )}
       </Transition>
