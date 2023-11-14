@@ -1,9 +1,10 @@
 import './DragNDropFieldTooltip.css';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Text } from '##/components/Text/Text';
 import { Tooltip } from '##/components/TooltipCanary';
+import { useFlag } from '##/hooks/useFlag';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
@@ -18,20 +19,20 @@ export const DragNDropFieldTooltip: React.FC<DragNDropFieldTooltipProps> = ({
   anchorRef,
   errors,
 }) => {
-  const [isHidden, setIsHidden] = React.useState(false);
+  const [isHidden, setIsOpen] = useFlag();
 
-  React.useEffect(() => {
-    setIsHidden(false);
+  useEffect(() => {
+    setIsOpen[errors.length > 0 ? 'on' : 'off']();
   }, [errors]);
 
   return (
     <Tooltip
-      isOpen={isHidden || errors.length === 0}
+      isOpen={isHidden}
       anchorRef={anchorRef}
       status="alert"
       size="l"
       isInteractive={false}
-      onClickOutside={() => setIsHidden(true)}
+      onClickOutside={setIsOpen.off}
     >
       <Text size="s" className={cnDragNDropFieldTooltip('Text')}>
         {errors.length === 1 ? (

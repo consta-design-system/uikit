@@ -17,6 +17,7 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
   getItemLabel,
   getItemChecked,
   renderItem,
+  onChange,
   renderItemsList,
   size,
 }: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => {
@@ -74,8 +75,8 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
         <TabsMoreItems
           items={hiddenItems}
           renderItem={renderItem}
+          onChange={onChange}
           getItemLabel={getItemLabel}
-          getItemChecked={getItemChecked}
           height={maxTabHeight}
           size={size}
         />

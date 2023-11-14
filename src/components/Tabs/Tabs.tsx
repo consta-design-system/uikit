@@ -158,6 +158,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
     >
       <Wrapper
         tabRefs={tabRefs}
+        onChange={onChange}
         tabsDimensions={tabsDimensions}
         renderItem={renderItem}
         renderItemsList={renderItemsList}
