@@ -29,7 +29,6 @@ export const useHideElementsInLine = <
   const parentSize = useComponentSize(parentRef).width;
   const elementsSizes = useResizeObserved(elementsRefs, (el) => {
     if (el) {
-      console.log(el.offsetWidth);
       const { marginRight, marginLeft } = getComputedStyle(el);
       return (
         parseInt(marginRight, 10) + parseInt(marginLeft, 10) + el.offsetWidth
@@ -40,8 +39,6 @@ export const useHideElementsInLine = <
   });
 
   const map = createMap(length, moreIndex);
-
-  console.log(elementsSizes, parentSize);
 
   const hideByIndex = (index: number) => {
     if (!elementsSizes[index] || index === moreIndex) {
