@@ -4,7 +4,7 @@ import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { getTabsWidth } from '../helpers';
-import { TabsMoreItems } from '../MoreItems/TabsMoreItems';
+import { TabsMoreItems } from '../TabsMoreItems/TabsMoreItems';
 import { TabsFitModeWrapperProps } from '../types';
 import { useFittingItems } from './useFittingItems';
 

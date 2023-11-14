@@ -12,8 +12,8 @@ import {
   getTabsWrapper,
   withDefaultGetters,
 } from './helpers';
-import { TabsBorderLine, TabsRunningLine } from './Line/TabsLine';
-import { TabsTab } from './Tab/TabsTab';
+import { TabsBorderLine, TabsRunningLine } from './TabsLine/TabsLine';
+import { TabsTab } from './TabsTab/TabsTab';
 import {
   RenderItemProps,
   RenderItemsListProp,
