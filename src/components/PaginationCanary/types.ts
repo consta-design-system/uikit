@@ -34,7 +34,7 @@ export type PaginationPropOnItemClick<ITEM> = (
 
 export type PaginationPropOnChange<ITEM> = (
   value: ITEM,
-  params: { e: React.MouseEvent | Event | React.KeyboardEvent },
+  params: { e: React.MouseEvent | React.KeyboardEvent },
 ) => void;
 
 // ARROWS

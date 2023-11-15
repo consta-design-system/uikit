@@ -33,5 +33,6 @@
   &-Total.Text {
     color: var(--color-control-typo-ghost);
     line-height: var(--space-m);
+    white-space: nowrap;
   }
 }

@@ -1,9 +1,10 @@
 import './PaginationNumberInput.css';
 
-import React, { forwardRef, useCallback, useEffect, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useMemo } from 'react';
+import { ReactMaskOpts, useIMask } from 'react-imask';
 
 import { Text } from '##/components/Text';
-import { TextField, useIMask } from '##/components/TextField';
+import { TextField } from '##/components/TextField';
 import { useMutableRef } from '##/hooks/useMutableRef';
 import { cnMixFlex } from '##/mixs/MixFlex';
 import { cn } from '##/utils/bem';
@@ -33,96 +34,77 @@ export const PaginationNumberInput = forwardRef<
     className,
     ...otherProps
   } = props;
-  const onChangeRef = useMutableRef(onChange);
-  const valueRef = useMutableRef(value);
 
-  const [stringValue, setStringValue] = useState<string | null>(
-    value?.toString() ?? null,
-  );
-
-  const stringValueRef = useMutableRef(stringValue);
-
-  const handleChange = ({
-    e,
+  const {
+    ref: inputRef,
     value: stringValue,
-  }: {
-    e: Event;
-    value: string | null;
-  }) => {
-    if (stringValueRef.current === stringValue) {
-      return;
-    }
-    setStringValue(stringValue);
-    const onChange = onChangeRef.current;
-
-    if (stringValue === null) {
-      return;
-    }
-
-    const value = valueRef.current;
-
-    const pageNumber = Number(stringValue);
-
-    if (Number.isNaN(pageNumber)) {
-      return;
-    }
-    if (pageNumber !== value) {
-      const newValue = Math.max(Math.min(pageNumber, total), 0);
-      onChange?.(newValue, { e });
-    }
-  };
-
-  const { inputRef } = useIMask({
-    value: stringValue,
-    onChange: (_val, args) => handleChange(args),
-    maskOptions: {
-      mask: Number,
-      scale: 0,
-      thousandsSeparator: ' ',
-      min: 1,
-      max: total,
-    },
+    setValue: setStringValue,
+  } = useIMask<HTMLInputElement, ReactMaskOpts>({
+    mask: Number,
+    scale: 0,
+    min: 1,
+    max: total,
   });
 
-  useEffect(() => {
-    if (value?.toString() !== stringValue) {
-      setStringValue(value?.toString() ?? null);
-    }
-  }, [value]);
+  const onChangeRef = useMutableRef(onChange);
+  const stringValueRef = useMutableRef(stringValue);
+  const setStringValueRef = useMutableRef(setStringValue);
+
+  const keysMap: Record<string, React.KeyboardEventHandler> = useMemo(() => {
+    return {
+      ArrowUp: (e) => {
+        e.preventDefault();
+        const value = Math.max(
+          Math.min(Number(stringValueRef.current) + 1, total),
+          1,
+        );
+        setStringValueRef.current(value.toString());
+      },
+
+      ArrowDown: (e) => {
+        e.preventDefault();
+        const value = Math.max(
+          Math.min(Number(stringValueRef.current) - 1, total),
+          1,
+        );
+        setStringValueRef.current(value.toString());
+      },
+
+      Enter: (e) => {
+        e.preventDefault();
+        if (Number(stringValueRef.current)) {
+          onChangeRef.current?.(Number(stringValueRef.current), { e });
+        }
+      },
+    };
+  }, [total]);
 
   const handleKeyDown: React.KeyboardEventHandler = useCallback(
     (e) => {
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-        return;
-      }
       e.stopPropagation();
-      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        const value = Math.max(
-          Math.min(
-            Number(stringValueRef.current) + (e.key === 'ArrowUp' ? 1 : -1),
-            total,
-          ),
-          1,
-        );
-        setStringValue(value.toString());
-        onChange?.(value, { e });
-      }
+      keysMap[e.key]?.(e);
     },
-    [total],
+    [keysMap],
   );
+
+  useEffect(() => {
+    const newValue = value?.toString() || '';
+    if (newValue !== stringValueRef.current) {
+      setStringValueRef.current(newValue);
+    }
+  }, [value]);
 
   return (
     <div
+      {...otherProps}
       className={cnPaginationNumberInput({ size }, [
-        className,
         cnMixFlex({ align: 'center', justify: 'center', gap: 'xs' }),
+        className,
       ])}
       ref={ref}
-      {...otherProps}
     >
       <TextField
-        value={stringValue}
+        defaultValue={value ? value.toString() : undefined}
         size={size}
         form={form}
         inputRef={inputRef}
