@@ -1,11 +1,9 @@
-import React from 'react';
-
-import { TabsFitModeDropdownWrapper } from './FitModeDropdownWrapper/TabsFitModeDropdownWrapper';
-import { TabsFitModeScrollWrapper } from './FitModeScrollWrapper/TabsFitModeScrollWrapper';
+import { TabsFitModeDropdownWrapper } from './TabsFitModeDropdownWrapper/TabsFitModeDropdownWrapper';
+import { TabsFitModeScrollWrapper } from './TabsFitModeScrollWrapper/TabsFitModeScrollWrapper';
+import { TabsListWrapper } from './TabsListWrapper';
 import {
   TabDimensions,
   TabsDirection,
-  TabsFitModeWrapperProps,
   TabsItemDefault,
   TabsPropFitMode,
   TabsPropGetItemAs,
@@ -34,7 +32,7 @@ export const getTabsWrapper = (
   fitMode: TabsPropFitMode,
 ) => {
   if (tabsDirection === 'vertical') {
-    return OnlyListWrapper;
+    return TabsListWrapper;
   }
 
   return fitMode === 'scroll'
@@ -79,12 +77,6 @@ export const withDefaultGetters = (props: TabsProps) => {
     getItemRef: props.getItemRef || defaultGetItemRef,
   };
 };
-
-const OnlyListWrapper = <ITEM,>({
-  renderItemsList,
-}: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => (
-  <>{renderItemsList({})}</>
-);
 
 export const getVisibleTabsRange = ({
   tabsDimensions,
