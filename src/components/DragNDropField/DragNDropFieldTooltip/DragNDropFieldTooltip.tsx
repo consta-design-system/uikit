@@ -2,11 +2,10 @@ import './DragNDropFieldTooltip.css';
 
 import React from 'react';
 
+import { Text } from '##/components/Text/Text';
+import { Tooltip } from '##/components/TooltipCanary';
 import { cnMixSpace } from '##/mixs/MixSpace';
-
-import { cn } from '../../../utils/bem';
-import { Text } from '../../Text/Text';
-import { Tooltip } from '../../Tooltip/Tooltip';
+import { cn } from '##/utils/bem';
 
 type DragNDropFieldTooltipProps = {
   anchorRef: React.RefObject<HTMLElement>;
@@ -25,15 +24,21 @@ export const DragNDropFieldTooltip: React.FC<DragNDropFieldTooltipProps> = ({
     setIsHidden(false);
   }, [errors]);
 
-  return isHidden || errors.length === 0 ? null : (
+  return (
     <Tooltip
+      isOpen={isHidden || errors.length === 0}
       anchorRef={anchorRef}
       status="alert"
       size="l"
       isInteractive={false}
       onClickOutside={() => setIsHidden(true)}
     >
-      <Text size="s" className={cnDragNDropFieldTooltip('Text')}>
+      <Text
+        size="s"
+        view="primary"
+        lineHeight="m"
+        className={cnDragNDropFieldTooltip('Text')}
+      >
         {errors.length === 1 ? (
           errors[0]
         ) : (

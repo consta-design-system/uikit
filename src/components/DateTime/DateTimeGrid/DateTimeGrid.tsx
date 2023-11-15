@@ -39,7 +39,13 @@ const renderItem = (
   if (typeof item === 'string') {
     return (
       <DateTimeCell ref={ref} key={cnDateTimeGrid('String', { index, item })}>
-        <Text as="span" view="ghost" size="2xs" transform="uppercase">
+        <Text
+          as="span"
+          view="ghost"
+          size="2xs"
+          transform="uppercase"
+          lineHeight="m"
+        >
           {item}
         </Text>
       </DateTimeCell>

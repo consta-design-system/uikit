@@ -56,7 +56,7 @@ export function HeaderMinifyLoginExample() {
           <>
             <HeaderModule>
               <HeaderLogo>
-                <Text as="p" size="l" weight="bold">
+                <Text view="primary" as="p" size="l" weight="bold">
                   Logotype
                 </Text>
               </HeaderLogo>

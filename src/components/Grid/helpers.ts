@@ -7,17 +7,11 @@ import { isNotNil } from '##/utils/type-guards';
 import { GridPropGap, GridPropXAlign, GridPropYAlign } from './types';
 
 export const normalizeGap = (gap: GridPropGap | undefined) => {
-  if (!isNotNil(gap)) {
-    return undefined;
+  if (typeof gap === 'string') {
+    return `var(--space-${gap})`;
   }
 
-  const number = Number(gap);
-
-  if (!isNaN(number)) {
-    return number.toString();
-  }
-
-  return `var(--space-${gap})`;
+  return gap;
 };
 
 const alignMap = {
@@ -30,13 +24,7 @@ const alignMap = {
 
 export const normalizeAlign = (
   align: GridPropXAlign | GridPropYAlign | undefined,
-) => {
-  if (!isNotNil(align)) {
-    return undefined;
-  }
-
-  return alignMap[align];
-};
+) => (align ? alignMap[align] : undefined);
 
 const calculateBreakpoints = <T extends {}>(
   breakpoints: Record<string, T>,

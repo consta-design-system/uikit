@@ -48,6 +48,7 @@ export function ComboboxExampleSearchValue() {
           value={value}
           onChange={setValue}
           searchValue={searchValue}
+          onSearchValueChange={setSearchValue}
           multiple
         />
         <Button

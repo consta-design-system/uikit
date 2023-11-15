@@ -3,6 +3,7 @@ import './List.variants.css';
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
 
 import { List, ListAddItem, ListBox, ListLoader } from '..';
@@ -29,13 +30,20 @@ const Box: React.FC<{
 }> = ({ withListBox, children, form = 'default' }) => {
   if (withListBox) {
     return (
-      <ListBox className={cnListVariant()} form={form} border shadow>
+      <ListBox
+        className={cnListVariant(null, [cnMixScrollBar()])}
+        form={form}
+        border
+        shadow
+      >
         {children}
       </ListBox>
     );
   }
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <div className={cnListVariant()}>{children}</div>;
+  return (
+    <div className={cnListVariant(null, [cnMixScrollBar()])}>{children}</div>
+  );
 };
 
 const Variants = () => {

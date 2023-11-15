@@ -1,6 +1,6 @@
 import '##/components/SelectComponents/Select.css';
 
-import { IconClose } from '@consta/icons/IconClose';
+import { IconClear } from '@consta/icons/IconClear';
 import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
@@ -27,10 +27,12 @@ import { isNotNil } from '##/utils/type-guards';
 
 import { Text } from '../Text';
 import {
+  clearSizeMap,
   ComboboxComponent,
   ComboboxProps,
   DefaultGroup,
   DefaultItem,
+  iconSizeMap,
   isMultipleParams,
   isNotMultipleParams,
   PropRenderItem,
@@ -244,7 +246,12 @@ const ComboboxRender = <
   const renderValueList = () => {
     if (allItemsSelected) {
       return (
-        <Text size={size} className={cnSelect('SelectAll')}>
+        <Text
+          view="primary"
+          size={size}
+          className={cnSelect('SelectAll')}
+          lineHeight="m"
+        >
           {allSelectedAllLabel}
         </Text>
       );
@@ -299,8 +306,8 @@ const ComboboxRender = <
                 tabIndex={-1}
                 className={cnSelect('ClearIndicator')}
               >
-                <IconClose
-                  size="xs"
+                <IconClear
+                  size={clearSizeMap[size]}
                   className={cnSelect('ClearIndicatorIcon')}
                 />
               </button>
@@ -313,7 +320,7 @@ const ComboboxRender = <
               onClick={handleToggleDropdown}
             >
               <IconSelect
-                size="xs"
+                size={iconSizeMap[size]}
                 className={cnSelect('DropdownIndicatorIcon')}
               />
             </button>

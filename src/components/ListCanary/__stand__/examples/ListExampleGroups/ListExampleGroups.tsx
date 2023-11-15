@@ -21,7 +21,7 @@ const groups: Group[] = [
     id: 1,
     label: 'Первая группа',
     rightSide: (
-      <Text view="brand" size="2xs">
+      <Text view="brand" size="2xs" lineHeight="m">
         Все результаты
       </Text>
     ),

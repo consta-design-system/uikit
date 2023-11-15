@@ -21,7 +21,7 @@ const MAX_TAB_SIZE = 200;
 export const useBookmarkTabs = <ITEM>(props: UseBookmarkTabsProps<ITEM>) => {
   const { items, getItemFixed, withNavigationButtons } = props;
 
-  const refs = useRefs<HTMLElement>(items.length);
+  const refs = useRefs<HTMLDivElement>(items.length);
 
   const [
     wrapperRef,

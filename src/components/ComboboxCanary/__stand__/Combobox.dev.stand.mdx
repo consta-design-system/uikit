@@ -704,7 +704,9 @@ function ComboboxExampleOnSearchValueChange() {
   const [search, setSearch] = useState<string>('');
   return (
     <>
-      <Text size="l">Значение поиска: {search ?? 'Пусто'}</Text>
+      <Text view="primary" size="l" lineHeight="m">
+        Значение поиска: {search ?? 'Пусто'}
+      </Text>
       <Combobox
         placeholder="Выберите вариант"
         items={items}
@@ -1432,6 +1434,7 @@ function ComboboxExampleSearchValue() {
         value={value}
         onChange={setValue}
         searchValue={searchValue}
+        onSearchValueChange={setSearchValue}
         multiple
       />
       <Button

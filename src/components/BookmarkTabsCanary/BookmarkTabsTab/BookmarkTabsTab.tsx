@@ -28,7 +28,7 @@ const BookmarkTabsTabRender = (
     active,
     fixed,
     tabRef,
-    controlRef,
+    hovered,
     onClose,
     onKeyDown: onKeyDownProp,
     view,
@@ -72,6 +72,7 @@ const BookmarkTabsTabRender = (
           form,
           view,
           active,
+          hovered,
           fixed,
           bordered,
           withCloseButton: !!onClose,
@@ -83,7 +84,7 @@ const BookmarkTabsTabRender = (
       role="button"
       onClick={onClick}
       onKeyDown={onKeyDown}
-      ref={useForkRef([ref, tabRef, controlRef, tagRef])}
+      ref={useForkRef([ref, tabRef, tagRef])}
       style={{
         ['--bookmarks-tab-width' as string]: tabWidth,
         ...style,
@@ -100,7 +101,13 @@ const BookmarkTabsTabRender = (
       )}
       {!fixed && (
         <>
-          <Text align="left" className={cnBookmarkTabsTab('Label')} size={size}>
+          <Text
+            align="left"
+            className={cnBookmarkTabsTab('Label')}
+            size={size}
+            view="primary"
+            lineHeight="m"
+          >
             {label}
           </Text>
           {RightIcon && (

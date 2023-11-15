@@ -1,15 +1,13 @@
 import React, { useCallback, useRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import {
   Tooltip,
   TooltipProps as TooltipComponentProps,
-} from '##/components/Tooltip';
+} from '##/components/TooltipCanary';
 import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
 import { useMutableRef } from '##/hooks/useMutableRef';
-import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 
 export const withTooltipPropMode = ['mouseover', 'click'] as const;
 export const withTooltipPropModeDefault = withTooltipPropMode[0];
@@ -19,9 +17,9 @@ export const appearTimeoutDefault = 400;
 export const exitTimeoutDefault = 200;
 
 type ComponentProps = {
-  onClick?: (() => void) | React.EventHandler<React.MouseEvent>;
-  onMouseEnter?: (() => void) | React.MouseEventHandler;
-  onMouseLeave?: (() => void) | React.MouseEventHandler;
+  onClick?: React.MouseEventHandler;
+  onMouseEnter?: React.MouseEventHandler;
+  onMouseLeave?: React.MouseEventHandler;
 };
 
 export type TooltipProps = Omit<TooltipComponentProps, 'children' | 'ref'> & {
@@ -47,10 +45,7 @@ export function withTooltip(hocProps?: TooltipProps) {
   ) {
     return React.forwardRef<HTMLElement, WithTooltipProps<COMPONENT_PROPS>>(
       (props, ref) => {
-        const {
-          tooltipProps: tooltipPropsFromComponent = {},
-          ...componentProps
-        } = props;
+        const { tooltipProps = {}, ...componentProps } = props;
 
         const {
           mode = 'mouseover',
@@ -61,12 +56,11 @@ export function withTooltip(hocProps?: TooltipProps) {
           ...otherTooltipProps
         } = {
           ...hocProps,
-          ...tooltipPropsFromComponent,
+          ...tooltipProps,
         };
 
         const [visible, setVisible] = useFlag();
         const acnortRef = useRef<HTMLElement>(null);
-        const tooltipRef = useRef<HTMLDivElement>(null);
 
         const hoverStateRef = useRef<HoverState>({
           tooltip: false,
@@ -153,36 +147,25 @@ export function withTooltip(hocProps?: TooltipProps) {
               onMouseLeave={acnorOnMouseLeave}
               ref={useForkRef([acnortRef, ref])}
             />
-            <Transition
-              in={visible}
-              unmountOnExit
-              timeout={animateTimeout}
-              nodeRef={tooltipRef}
+            <Tooltip
+              {...otherTooltipProps}
+              isOpen={visible && !!content}
+              className={otherTooltipProps.className}
+              anchorRef={acnortRef}
+              onClickOutside={tooltipOnClickOutside}
+              onMouseEnter={tooltipOnMouseEnter}
+              onMouseLeave={tooltipOnMouseLeave}
             >
-              {(animate) => {
-                return (
-                  <Tooltip
-                    {...otherTooltipProps}
-                    className={cnMixPopoverAnimate({ animate }, [
-                      otherTooltipProps.className,
-                    ])}
-                    ref={tooltipRef}
-                    anchorRef={acnortRef}
-                    onClickOutside={tooltipOnClickOutside}
-                    onMouseEnter={tooltipOnMouseEnter}
-                    onMouseLeave={tooltipOnMouseLeave}
-                  >
-                    {content}
-                  </Tooltip>
-                );
-              }}
-            </Transition>
+              {content}
+            </Tooltip>
           </>
         );
         // привел к типам, так как прокинутый компонент может иметь джененрики и они потеряются за хоком
       },
     ) as unknown as
       | COMPONENT_TYPE
-      | React.ComponentType<WithTooltipProps<COMPONENT_PROPS>>;
+      | React.ComponentType<{
+          tooltipProps?: TooltipProps;
+        }>;
   };
 }

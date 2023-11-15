@@ -29,7 +29,9 @@ export function ComboboxExampleOnSearchValueChange() {
   const [search, setSearch] = useState<string>('');
   return (
     <Example col={1}>
-      <Text size="l">Значение поиска: {search ?? 'Пусто'}</Text>
+      <Text view="primary" size="l" lineHeight="m">
+        Значение поиска: {search ?? 'Пусто'}
+      </Text>
       <Combobox
         placeholder="Выберите вариант"
         items={items}

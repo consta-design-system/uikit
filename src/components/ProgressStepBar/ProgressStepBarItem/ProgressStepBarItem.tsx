@@ -3,16 +3,16 @@ import './ProgressStepBarItem.css';
 import { IconComponent } from '@consta/icons/Icon';
 import React, { useMemo, useRef } from 'react';
 
+import { Direction } from '##/components/Popover';
+import { ProgressSpin } from '##/components/ProgressSpin';
+import { Text } from '##/components/Text';
+import { Tooltip } from '##/components/TooltipCanary';
+import { useFlag } from '##/hooks/useFlag/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
 import { useMouseLeave } from '##/hooks/useMouseLeave';
+import { cnMixFocus } from '##/mixs/MixFocus/MixFocus';
+import { cn } from '##/utils/bem';
 
-import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
-import { cn } from '../../../utils/bem';
-import { Direction } from '../../Popover/Popover';
-import { ProgressSpin } from '../../ProgressSpin/ProgressSpin';
-import { Text } from '../../Text/Text';
-import { Tooltip } from '../../Tooltip/Tooltip';
 import {
   PointNumbersMap,
   ProgressStepBarItemComponent,
@@ -49,6 +49,8 @@ const renderPointContent = (
         className={cnProgressStepBarItem('PointText')}
         size={size === 's' ? '2xs' : 'xs'}
         weight="bold"
+        view="primary"
+        lineHeight="m"
       >
         {point}
       </Text>
@@ -173,20 +175,19 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
             </div>
           )}
         </div>
-        {tooltipContent && isTooltipVisible && (
-          <Tooltip
-            ref={tooltipRef}
-            anchorRef={pointRef}
-            className={cnProgressStepBarItem('Tooltip')}
-            direction={tooltipDirection}
-            style={{ zIndex: tooltipZIndex }}
-            isInteractive={false}
-            possibleDirections={possibleDirections}
-            spareDirection={spareDirection}
-          >
-            {tooltipContent}
-          </Tooltip>
-        )}
+        <Tooltip
+          ref={tooltipRef}
+          isOpen={!!tooltipContent && isTooltipVisible}
+          anchorRef={pointRef}
+          className={cnProgressStepBarItem('Tooltip')}
+          direction={tooltipDirection}
+          style={{ zIndex: tooltipZIndex }}
+          isInteractive={false}
+          possibleDirections={possibleDirections}
+          spareDirection={spareDirection}
+        >
+          {tooltipContent}
+        </Tooltip>
       </>
     );
   });

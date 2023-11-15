@@ -36,6 +36,7 @@ export const SidebarExample = () => {
             size="l"
             view="primary"
             weight="semibold"
+            lineHeight="m"
             className={cnSidebarExample('Title')}
           >
             Заголовок сайдбара
@@ -44,6 +45,7 @@ export const SidebarExample = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarExample('Body')}
           >
             Содержимое сайдбара. Сайдбар — это всплывающее окно, «прилипающее» к
@@ -55,6 +57,7 @@ export const SidebarExample = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarExample('Body')}
           >
             Сайдбар входит в дизайн-систему Consta. В ней несколько библиотек с
@@ -69,6 +72,7 @@ export const SidebarExample = () => {
             size="m"
             view="primary"
             weight="semibold"
+            lineHeight="m"
             className={cnSidebarExample('Title')}
           >
             Особенности дизайн-системы
@@ -77,6 +81,7 @@ export const SidebarExample = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarExample('Body')}
           >
             Гибкая тематизация. Тема определяет внешний вид всего интерфейса —
@@ -88,6 +93,7 @@ export const SidebarExample = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarExample('Body')}
           >
             Семантические переменные. Все параметры темы описаны с помощью
@@ -99,6 +105,7 @@ export const SidebarExample = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarExample('Body')}
           >
             Кастомные блоки и компоненты. В дизайн-системе есть готовые блоки,
@@ -110,6 +117,7 @@ export const SidebarExample = () => {
             as="p"
             size="m"
             view="secondary"
+            lineHeight="m"
             className={cnSidebarExample('Body')}
           >
             Одинаковые сущности в макетах и в коде. Все сущности есть в двух

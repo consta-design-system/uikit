@@ -70,12 +70,12 @@ const breakpoint = getLastPoint(
 | Свойство    | Тип и значения                                                               | По умолчанию | Описание                |
 | ----------- | ---------------------------------------------------------------------------- | ------------ | ----------------------- |
 | `map`       | `Record<POINTS, number>`                                                     | -            | Набор контрольных точек |
-| `isActive?` | boolean                                                                      | -            | Активнойсть хука        |
+| `isActive?` | boolean                                                                      | -            | Активность хука         |
 | `ref?`      | `React.RefObject<HTMLElement>` &#124; `React.RefObject<SVGGraphicsElement> ` | -            | Ссылка на элемент       |
 
 ### createMods
 
-Хелпер `addPrefix` добавляет префикс для наименований брейкпоинтов для дальнейшего использования их в функции `cn`
+Хелпер `addPrefix` добавляет префикс в наименования брейкпоинтов для их дальнейшего использования в функции `cn`
 
 ```tsx
 import { useBreakpoints, addPrefix } from '@consta/uikit/useBreakpoints';

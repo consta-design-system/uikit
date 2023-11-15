@@ -181,6 +181,7 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
                   ? undefined
                   : 'ghost'
               }
+              lineHeight="m"
             >
               {year.label}
             </Text>
@@ -217,6 +218,7 @@ export const CalendarSlider: React.FC<CalendarSliderProps> = (props) => {
                     size="2xs"
                     view="ghost"
                     align="center"
+                    lineHeight="m"
                   >
                     {month.label}
                   </Text>

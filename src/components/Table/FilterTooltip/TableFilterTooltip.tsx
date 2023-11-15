@@ -85,6 +85,7 @@ export const TableFilterTooltip: React.FC<Props> = ({
                   as="div"
                   size="xs"
                   view="primary"
+                  lineHeight="m"
                   className={cnTableFilterTooltip('Title')}
                 >
                   Фильтровать по условию

@@ -14,10 +14,14 @@ export const LayoutExampleBasic = () => {
     <Example col={1}>
       <Layout className={cnLayoutExampleBasic()}>
         <Layout flex={1} className={cnLayoutExampleBasic('Block')}>
-          <Text>Это первый блок</Text>
+          <Text view="primary" size="m">
+            Это первый блок
+          </Text>
         </Layout>
         <Layout flex={2} className={cnLayoutExampleBasic('Block')}>
-          <Text>А это второй блок, он в два раза шире первого</Text>
+          <Text view="primary" size="m">
+            А это второй блок, он в два раза шире первого
+          </Text>
         </Layout>
       </Layout>
     </Example>

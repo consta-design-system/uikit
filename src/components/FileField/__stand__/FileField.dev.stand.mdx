@@ -47,7 +47,7 @@ const App = () => {
 <FileFieldExampleWithoutRenderProp />
 <FileFieldExampleWithoutRenderPropIcon />
 
-```ts
+```tsx
 import React from 'react';
 import { FileField, FileFieldProps } from '@consta/uikit/FileField';
 import { Text } from '@consta/uikit/Text';
@@ -56,7 +56,7 @@ import { IconAdd } from '@consta/uikit/IconAdd';
 const App = () => {
   return (
     <FileField id="FileFieldWithText">
-      <Text>Нажми меня</Text>
+      <Text view="primary" size="m" lineHeight="m">Нажми меня</Text>
     </FileField>
     <FileField id="FileFieldWithIcon">
       <IconAdd view="alert" />

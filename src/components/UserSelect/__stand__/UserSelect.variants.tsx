@@ -166,10 +166,10 @@ const Variants = () => {
             onClick={onClick}
           >
             {item.name}
-            <Text view="secondary" size="xs">
+            <Text view="secondary" size="xs" lineHeight="m">
               {item.email}
             </Text>
-            <Text view="secondary" size="xs">
+            <Text view="secondary" size="xs" lineHeight="m">
               {item.position}
             </Text>
           </div>

@@ -83,12 +83,18 @@ export const Informer = React.forwardRef<HTMLDivElement, InformerProps>(
               className={cnInformer('Title', [cnMixSpace({ mB: '2xs' })])}
               weight="bold"
               size={size}
+              view="primary"
             >
               {title}
             </Text>
           )}
           {label ? (
-            <Text lineHeight="xs" className={cnInformer('Label')} size={size}>
+            <Text
+              lineHeight="xs"
+              view="primary"
+              className={cnInformer('Label')}
+              size={size}
+            >
               {label}
             </Text>
           ) : (

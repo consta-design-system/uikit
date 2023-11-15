@@ -17,9 +17,9 @@ export const dateTimePropTypeDefault = dateTimePropType[0];
 
 export type DateTimePropDisableDates = Array<Date | [Date, Date]>;
 
-export type СapableRangeType = 'date' | 'month' | 'year' | 'date-time';
+export type CapableRangeType = 'date' | 'month' | 'year' | 'date-time';
 
-export type DateTimePropValue<TYPE> = TYPE extends СapableRangeType
+export type DateTimePropValue<TYPE> = TYPE extends CapableRangeType
   ? Date | DateRange
   : Date;
 
@@ -28,7 +28,7 @@ export type DateTimePropOnChange = (props: {
   e: React.MouseEvent<HTMLButtonElement>;
 }) => void;
 
-export type DateTimePropOnChangeRange<TYPE> = TYPE extends СapableRangeType
+export type DateTimePropOnChangeRange<TYPE> = TYPE extends CapableRangeType
   ? (props: {
       value: DateRange;
       e: React.MouseEvent<HTMLButtonElement>;
@@ -63,7 +63,7 @@ export type DateTimeProps<TYPE extends DateTimePropType = 'date'> =
       minDate?: Date;
       maxDate?: Date;
       events?: Date[];
-      view?: TYPE extends СapableRangeType ? DateTimePropView : 'classic';
+      view?: TYPE extends CapableRangeType ? DateTimePropView : 'classic';
       locale?: DateTimePropLocale;
       children?: never;
       disableDates?: DateTimePropDisableDates;

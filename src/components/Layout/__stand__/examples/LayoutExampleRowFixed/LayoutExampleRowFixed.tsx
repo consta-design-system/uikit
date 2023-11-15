@@ -20,10 +20,14 @@ export const LayoutExampleRowFixed = () => {
           flex={1}
           className={cnLayoutExampleRowFixed('Fixed')}
         >
-          <Text>Фиксированный элемент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Фиксированный элемент
+          </Text>
         </Layout>
         <Layout className={cnLayoutExampleRowFixed('Content')} flex={2}>
-          <Text>Контент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Контент
+          </Text>
         </Layout>
         <Layout
           fixed
@@ -33,7 +37,9 @@ export const LayoutExampleRowFixed = () => {
           flex={1}
           className={cnLayoutExampleRowFixed('Fixed')}
         >
-          <Text>Фиксированный элемент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Фиксированный элемент
+          </Text>
         </Layout>
       </Layout>
     </Layout>

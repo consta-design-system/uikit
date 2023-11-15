@@ -26,6 +26,7 @@ export const ContextMenuGroupHeader: React.FC<{
     transform="uppercase"
     className={cnContextMenuGroupHeader({ size, first })}
     size={getByMap(sizeMap, size)}
+    lineHeight="m"
   >
     {label}
   </Text>
