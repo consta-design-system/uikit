@@ -3,7 +3,7 @@ import './DragNDropFieldTooltip.css';
 import React, { useEffect } from 'react';
 
 import { Text } from '##/components/Text/Text';
-import { Tooltip } from '##/components/TooltipCanary';
+import { Tooltip } from '##/components/Tooltip';
 import { useFlag } from '##/hooks/useFlag';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';

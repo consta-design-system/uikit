@@ -51,4 +51,5 @@ export type RenderItemProps<ITEM> = {
   hovered: boolean;
   onClick: (e: React.SyntheticEvent) => void;
   onMouseEnter: (e: React.SyntheticEvent) => void;
+  ref: React.Ref<HTMLDivElement>;
 };

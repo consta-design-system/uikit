@@ -5,7 +5,7 @@ export default createStand({
   id: 'Text',
   group: 'components',
   description: 'Текст. Любые текстовые элементы на странице и стили для них.',
-  version: '1.0.0',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'text-qnu8hp',
   alias: ['текст', 'абзац', 'заголовок', 'пометка', 'описание', 'пояснение'],

@@ -6,7 +6,7 @@ import React, { useMemo, useRef } from 'react';
 import { Direction } from '##/components/Popover';
 import { ProgressSpin } from '##/components/ProgressSpin';
 import { Text } from '##/components/Text';
-import { Tooltip } from '##/components/TooltipCanary';
+import { Tooltip } from '##/components/Tooltip';
 import { useFlag } from '##/hooks/useFlag/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
 import { useMouseLeave } from '##/hooks/useMouseLeave';

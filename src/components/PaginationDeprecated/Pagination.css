@@ -1,0 +1,126 @@
+.deprecated--Pagination {
+  display: flex;
+  width: 100%;
+
+  &_position {
+    &_left {
+      justify-content: flex-start;
+    }
+
+    &_center {
+      justify-content: center;
+    }
+
+    &_right {
+      justify-content: flex-end;
+    }
+  }
+
+  &_size {
+    &_xs {
+      --tip-space: var(--control-space-xs);
+    }
+
+    &_s {
+      --tip-space: var(--control-space-s);
+    }
+
+    &_m {
+      --tip-space: var(--control-space-m);
+    }
+
+    &_l {
+      --tip-space: var(--control-space-l);
+    }
+  }
+
+  &-Pages {
+    display: flex;
+  }
+
+  &-NextPage,
+  &-PrevPage {
+    position: relative;
+  }
+
+  &-TipRight {
+    position: absolute;
+    left: calc(var(--tip-space) + var(--space-xs));
+  }
+
+  &-TipLeft {
+    position: absolute;
+    right: calc(var(--tip-space) + var(--space-xs));
+  }
+
+  &-Item,
+  &-ItemLeft,
+  &-ItemRight {
+    &:not(&_isActive) {
+      background-color: unset;
+    }
+
+    &:hover {
+      background-color: var(--color-control-bg-ghost-hover);
+    }
+  }
+
+  &-ItemLeft {
+    margin-right: var(--space-xs);
+  }
+
+  &-ItemRight {
+    margin-left: var(--space-xs);
+  }
+
+  &-Item.Button {
+    padding: unset;
+
+    &:not(:last-child) {
+      margin-right: var(--space-3xs);
+    }
+  }
+
+  &-More {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: var(--space-3xs);
+  }
+
+  &-Input {
+    max-width: var(--space-6xl);
+    margin-right: var(--space-xs);
+  }
+
+  &-Total {
+    display: flex;
+    align-items: center;
+    color: var(--color-control-typo-ghost);
+  }
+
+  &-ItemLeft,
+  &-ItemRight {
+    &_minified {
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    &_show {
+      .Pagination:hover & {
+        z-index: unset;
+        opacity: 1;
+      }
+    }
+  }
+
+  &:hover {
+    &-ItemLeft,
+    &-ItemRight {
+      &_show {
+        opacity: 1;
+      }
+    }
+  }
+}

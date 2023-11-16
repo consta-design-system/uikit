@@ -1,39 +1,42 @@
-import '../SelectComponents/Select.css';
+import '##/components/SelectComponents/Select.css';
 
 import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
-import { isNotNil } from '##/utils/type-guards';
-
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { useSelect } from '../../hooks/useSelect/useSelect';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { cnSelect, COMPONENT_NAME } from '../SelectComponents/cnSelect';
-import { defaultLabelForEmptyItems } from '../SelectComponents/helpers';
-import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
-import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import {
+  cnSelect,
+  COMPONENT_NAME,
+} from '##/components/SelectComponents/cnSelect';
+import { defaultLabelForEmptyItems } from '##/components/SelectComponents/helpers';
+import { SelectContainer } from '##/components/SelectComponents/SelectContainer';
+import { SelectDropdown } from '##/components/SelectComponents/SelectDropdown';
+import { SelectItem } from '##/components/SelectComponents/SelectItem';
 import {
   defaultPropForm,
   defaultPropSize,
   defaultPropView,
-} from '../SelectComponents/types';
+} from '##/components/SelectComponents/types';
+import { useSelect } from '##/components/SelectComponents/useSelect';
+import { useForkRef } from '##/hooks/useForkRef';
+import { isNotNil } from '##/utils/type-guards';
+
 import {
-  DefaultGroup,
-  DefaultItem,
   iconSizeMap,
   PropRenderItem,
   PropRenderValue,
   SelectComponent,
+  SelectGroupDefault,
+  SelectItemDefault,
   SelectProps,
   withDefaultGetters,
 } from './helpers';
 
-const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
+const SelectRender = <ITEM = SelectItemDefault, GROUP = SelectGroupDefault>(
   props: SelectProps<ITEM, GROUP>,
   ref: React.Ref<HTMLDivElement>,
 ) => {
-  const defaultDropdownRef = useRef<HTMLDivElement | null>(null);
+  const defaultDropdownRef = useRef<HTMLDivElement>(null);
   const controlRef = useRef<HTMLDivElement | null>(null);
 
   const {
@@ -47,7 +50,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     disabled,
     ariaLabel,
     id,
-    dropdownRef = defaultDropdownRef,
+    dropdownRef,
     form = defaultPropForm,
     view = defaultPropView,
     size = defaultPropSize,
@@ -67,6 +70,11 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     inputRef: inputRefProp,
     style,
     dropdownForm = 'default',
+    onDropdownOpen,
+    onScrollToBottom,
+    virtualScroll,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -83,12 +91,13 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     handleInputClick,
     notFound,
     hasItems,
+    optionsRefs,
   } = useSelect<ITEM, GROUP, false>({
     items,
     groups,
     value,
     onChange,
-    dropdownRef,
+    dropdownRef: defaultDropdownRef,
     controlRef,
     disabled,
     getItemLabel,
@@ -99,12 +108,15 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     multiple: false,
     onBlur,
     onFocus,
+    onDropdownOpen,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
   });
 
   const inputId = id ? `${id}-input` : id;
 
   const renderItemDefault: PropRenderItem<ITEM> = (props) => {
-    const { item, active, hovered, onClick, onMouseEnter } = props;
+    const { item, active, hovered, onClick, onMouseEnter, ref } = props;
 
     return (
       <SelectItem
@@ -117,6 +129,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
         onClick={onClick}
         onMouseEnter={onMouseEnter}
         disabled={getItemDisabled(item)}
+        ref={ref}
       />
     );
   };
@@ -158,7 +171,8 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
             <div className={cnSelect('ControlValueContainer')}>
               <input
                 {...getKeyProps()}
-                type="button"
+                className={cnSelect('FakeField')}
+                type="text"
                 name={name}
                 id={inputId}
                 onFocus={handleInputFocus}
@@ -166,7 +180,6 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
                 aria-label={ariaLabel}
                 onClick={handleInputClick}
                 ref={useForkRef([inputRef, inputRefProp])}
-                className={cnSelect('FakeField')}
                 readOnly
               />
               {isNotNil(value) && renderValue({ item: value })}
@@ -197,7 +210,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
         size={size}
         controlRef={controlRef}
         getOptionProps={getOptionProps}
-        dropdownRef={dropdownRef}
+        dropdownRef={useForkRef([dropdownRef, defaultDropdownRef])}
         form={dropdownForm}
         className={dropdownClassName}
         renderItem={renderItem || renderItemDefault}
@@ -207,6 +220,9 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
         isLoading={isLoading}
         labelForEmptyItems={labelForEmptyItems}
         hasItems={hasItems}
+        itemsRefs={optionsRefs}
+        virtualScroll={virtualScroll}
+        onScrollToBottom={onScrollToBottom}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

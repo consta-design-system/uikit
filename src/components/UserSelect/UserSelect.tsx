@@ -1,40 +1,40 @@
-import '../SelectComponents/Select.css';
+import '##/components/SelectComponents/Select.css';
 
 import { IconClear } from '@consta/icons/IconClear';
 import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
-import { isNotNil } from '##/utils/type-guards';
-
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { useSelect } from '../../hooks/useSelect/useSelect';
-import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
-import { clearSizeMap } from '../Combobox';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { cnSelect } from '../SelectComponents/cnSelect';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { cnSelect } from '##/components/SelectComponents/cnSelect';
 import {
   defaultlabelForCreate,
   defaultLabelForEmptyItems,
   defaultlabelForNotFound,
   getInputWidth,
-} from '../SelectComponents/helpers';
-import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
-import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
+} from '##/components/SelectComponents/helpers';
+import { SelectContainer } from '##/components/SelectComponents/SelectContainer';
+import { SelectDropdown } from '##/components/SelectComponents/SelectDropdown';
 import {
   defaultPropForm,
   defaultPropSize,
   defaultPropView,
-} from '../SelectComponents/types';
+} from '##/components/SelectComponents/types';
+import { useSelect } from '##/components/SelectComponents/useSelect';
+import { useForkRef } from '##/hooks/useForkRef';
+import { cnMixFocus } from '##/mixs/MixFocus';
+import { isNotNil } from '##/utils/type-guards';
+
 import {
-  DefaultGroup,
-  DefaultItem,
+  clearSizeMap,
   iconSizeMap,
   isMultipleParams,
   isNotMultipleParams,
-  PropRenderItem,
-  PropRenderValue,
   searchCompare,
   UserSelectComponent,
+  UserSelectGroupDefault,
+  UserSelectItemDefault,
+  UserSelectPropRenderItem,
+  UserSelectPropRenderValue,
   UserSelectProps,
   withDefaultGetters,
 } from './helpers';
@@ -44,8 +44,8 @@ import { UserSelectValue } from './UserSelectValue/UserSelectValue';
 export const COMPONENT_NAME = 'UserSelect' as const;
 
 const UserSelectRender = <
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
+  ITEM = UserSelectItemDefault,
+  GROUP = UserSelectGroupDefault,
   MULTIPLE extends boolean = false,
 >(
   props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
@@ -95,6 +95,12 @@ const UserSelectRender = <
     searchFunction,
     style,
     dropdownForm = 'default',
+    onScrollToBottom,
+    onSearchValueChange,
+    onDropdownOpen,
+    virtualScroll,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -125,6 +131,7 @@ const UserSelectRender = <
     getHandleRemoveValue,
     notFound,
     hasItems,
+    optionsRefs,
   } = useSelect({
     items,
     groups,
@@ -144,12 +151,16 @@ const UserSelectRender = <
     onFocus,
     onCreate,
     searchFunction: searchFunction || searchFunctionDefault,
+    onSearchValueChange,
+    onDropdownOpen,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
   });
 
   const inputId = id ? `${id}-input` : id;
 
-  const renderItemDefault: PropRenderItem<ITEM> = (props) => {
-    const { item, active, hovered, onClick, onMouseEnter } = props;
+  const renderItemDefault: UserSelectPropRenderItem<ITEM> = (props) => {
+    const { item, active, hovered, onClick, onMouseEnter, ref } = props;
 
     return (
       <UserSelectItem
@@ -164,11 +175,12 @@ const UserSelectRender = <
         onMouseEnter={onMouseEnter}
         disable={getItemDisabled(item)}
         multiple={multiple}
+        ref={ref}
       />
     );
   };
 
-  const renderValueDefault: PropRenderValue<ITEM> = ({
+  const renderValueDefault: UserSelectPropRenderValue<ITEM> = ({
     item,
     handleRemove,
   }) => {
@@ -281,6 +293,7 @@ const UserSelectRender = <
               <button
                 type="button"
                 onClick={clearValue}
+                tabIndex={-1}
                 className={cnSelect('ClearIndicator', [cnMixFocus()])}
               >
                 <IconClear
@@ -327,6 +340,9 @@ const UserSelectRender = <
         notFound={notFound}
         hasItems={hasItems}
         labelForEmptyItems={labelForEmptyItems}
+        itemsRefs={optionsRefs}
+        onScrollToBottom={onScrollToBottom}
+        virtualScroll={virtualScroll}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

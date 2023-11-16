@@ -36,7 +36,7 @@ export function UserSelectExampleItems() {
       <UserSelect
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         placeholder="Выберите пользователя"
       />
     </Example>

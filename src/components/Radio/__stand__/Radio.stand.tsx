@@ -5,7 +5,7 @@ export default createStand({
   id: 'Radio',
   group: 'components',
   description: 'Радиокнопка. Разные формы, цвета и размеры.',
-  version: '0.1.0',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'radio-vpxngs',
   alias: ['поле', 'ввод', 'радиокнопка'],

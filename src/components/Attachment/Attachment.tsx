@@ -2,13 +2,13 @@ import './Attachment.css';
 
 import React from 'react';
 
+import { Button } from '##/components/Button';
+import { File } from '##/components/File';
+import { Text, TextPropSize } from '##/components/Text';
 import { FileIconPropSize } from '##/fileIcons/FileIcon/FileIcon';
+import { cn } from '##/utils/bem';
+import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
-import { cn } from '../../utils/bem';
-import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
-import { Button } from '../Button/Button';
-import { File } from '../File/File';
-import { Text, TextPropSize } from '../Text/Text';
 import {
   AttachmentProps,
   AttachmentPropSize,
@@ -34,11 +34,13 @@ const descriptionSizeMap: Record<AttachmentPropSize, TextPropSize> = {
   s: 'xs',
   m: 's',
 };
+
 const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
   const {
     className,
     as = 'div',
     fileExtension,
+    withPictogram,
     loading,
     fileName,
     buttonIcon,
@@ -66,14 +68,16 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
       ])}
       ref={ref}
     >
-      <File
-        className={cnAttachment('File', { error: Boolean(errorText) })}
-        extension={fileExtension}
-        loading={loading}
-        loadingWithProgressSpin
-        loadingProgress={loadingProgress}
-        size={fileSizeMap[size]}
-      />
+      {withPictogram && (
+        <File
+          className={cnAttachment('File', { error: Boolean(errorText) })}
+          extension={fileExtension}
+          loading={loading}
+          loadingWithProgressSpin
+          loadingProgress={loadingProgress}
+          size={fileSizeMap[size]}
+        />
+      )}
       <div className={cnAttachment('Content')}>
         {fileName && (
           <Text

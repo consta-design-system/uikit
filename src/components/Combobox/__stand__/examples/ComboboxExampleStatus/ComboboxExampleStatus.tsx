@@ -33,7 +33,7 @@ export function ComboboxExampleStatus() {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Combobox
         placeholder="alert"
@@ -42,7 +42,7 @@ export function ComboboxExampleStatus() {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Combobox
         placeholder="warning"
@@ -51,7 +51,7 @@ export function ComboboxExampleStatus() {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Combobox
         placeholder="success"
@@ -60,7 +60,7 @@ export function ComboboxExampleStatus() {
         status="success"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

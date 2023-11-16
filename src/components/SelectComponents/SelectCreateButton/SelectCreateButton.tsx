@@ -1,14 +1,14 @@
 import './SelectCreateButton.css';
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { ListAddItem } from '##/components/ListCanary';
-import { cn } from '##/utils/bem';
-import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
+import { cnCanary } from '##/utils/bem';
+import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { PropSize } from '../types';
 
-type SelectCreateButtonProps = PropsWithHTMLAttributes<
+type SelectCreateButtonProps = PropsWithHTMLAttributesAndRef<
   {
     labelForCreate?: string;
     inputValue?: string;
@@ -20,36 +20,37 @@ type SelectCreateButtonProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export const cnSelectCreateButton = cn('SelectCreateButton');
+export const cnSelectCreateButton = cnCanary('SelectCreateButton');
 
-export const SelectCreateButton: React.FC<SelectCreateButtonProps> = (
-  props,
-) => {
-  const {
-    className,
-    labelForCreate,
-    inputValue,
-    active,
-    hovered,
-    size,
-    indent,
-    ...otherProps
-  } = props;
+export const SelectCreateButton: React.FC<SelectCreateButtonProps> = forwardRef(
+  (props, ref) => {
+    const {
+      className,
+      labelForCreate,
+      inputValue,
+      active,
+      hovered,
+      size,
+      indent,
+      ...otherProps
+    } = props;
 
-  return (
-    <ListAddItem
-      {...otherProps}
-      className={cnSelectCreateButton(null, [className])}
-      aria-selected={active}
-      role="option"
-      active={hovered}
-      size={size}
-      innerOffset={indent}
-      label={
-        <>
-          {labelForCreate} «<b>{inputValue}</b>»
-        </>
-      }
-    />
-  );
-};
+    return (
+      <ListAddItem
+        {...otherProps}
+        ref={ref}
+        className={cnSelectCreateButton(null, [className])}
+        aria-selected={active}
+        role="option"
+        active={hovered}
+        size={size}
+        innerOffset={indent}
+        label={
+          <>
+            {labelForCreate} «<b>{inputValue}</b>»
+          </>
+        }
+      />
+    );
+  },
+);

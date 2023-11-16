@@ -8,7 +8,7 @@ import {
 } from '../../utils/getGroups';
 import { useClickOutside } from '../useClickOutside/useClickOutside';
 import { useDebounce } from '../useDebounce/useDebounce';
-import { KeyHandler, useKeys } from '../useKeys/useKeys';
+import { KeyHandler, useKeys } from '../useKeysDepricated/useKeysDepricated';
 import { usePrevious } from '../usePrevious/usePrevious';
 import { scrollToIndex, useHoistedState } from './helpers';
 

@@ -2,13 +2,12 @@ import './ThemePreview.css';
 
 import React, { useReducer } from 'react';
 
+import { useStyleProps } from '##/hooks/useStyleProps';
 import { cnMixSpace } from '##/mixs/MixSpace/MixSpace';
 
 import { SnackBar } from '../../../components/SnackBar/SnackBar';
 import { SnackBarItemDefault } from '../../../components/SnackBar/types';
 import { Text } from '../../../components/Text/Text';
-import { defaultVars } from '../../../hooks/useThemeVars/helpers';
-import { useThemeVars } from '../../../hooks/useThemeVars/useThemeVars';
 import { cn } from '../../cn';
 import * as wp from '../../whitepaper/whitepaper';
 import { ColorPreview } from '../ColorPreview/ColorPreview';
@@ -26,18 +25,69 @@ import {
 
 const cnThemePreview = cn('ThemePreview');
 
-const varsMap = {
-  color: {
-    primary: defaultVars.color.primary,
-    accent: [],
-    invert: [],
-  },
-  control: [],
-  font: [],
-  size: [],
-  space: [],
-  shadow: [],
-} as const;
+const cssColorVars = [
+  '--color-bg-default',
+  '--color-bg-secondary',
+  '--color-bg-brand',
+  '--color-bg-link',
+  '--color-bg-border',
+  '--color-bg-stripe',
+  '--color-bg-ghost',
+  '--color-bg-tone',
+  '--color-bg-soft',
+  '--color-bg-system',
+  '--color-bg-normal',
+  '--color-bg-success',
+  '--color-bg-caution',
+  '--color-bg-warning',
+  '--color-bg-alert',
+  '--color-bg-critical',
+  '--color-typo-primary',
+  '--color-typo-secondary',
+  '--color-typo-ghost',
+  '--color-typo-brand',
+  '--color-typo-system',
+  '--color-typo-normal',
+  '--color-typo-success',
+  '--color-typo-caution',
+  '--color-typo-warning',
+  '--color-typo-alert',
+  '--color-typo-critical',
+  '--color-typo-link',
+  '--color-typo-link-minor',
+  '--color-typo-link-hover',
+  '--color-scroll-bg',
+  '--color-scroll-thumb',
+  '--color-scroll-thumb-hover',
+  '--color-control-bg-default',
+  '--color-control-typo-default',
+  '--color-control-typo-placeholder',
+  '--color-control-bg-border-default',
+  '--color-control-bg-border-default-hover',
+  '--color-control-bg-border-focus',
+  '--color-control-bg-focus',
+  '--color-control-bg-active',
+  '--color-control-bg-primary',
+  '--color-control-bg-primary-hover',
+  '--color-control-typo-primary',
+  '--color-control-typo-primary-hover',
+  '--color-control-bg-secondary',
+  '--color-control-bg-border-secondary',
+  '--color-control-bg-border-secondary-hover',
+  '--color-control-typo-secondary',
+  '--color-control-typo-secondary-hover',
+  '--color-control-bg-ghost',
+  '--color-control-bg-ghost-hover',
+  '--color-control-typo-ghost',
+  '--color-control-typo-ghost-hover',
+  '--color-control-bg-clear',
+  '--color-control-bg-clear-hover',
+  '--color-control-typo-clear',
+  '--color-control-typo-clear-hover',
+  '--color-control-bg-disable',
+  '--color-control-bg-border-disable',
+  '--color-control-typo-disable',
+] as const;
 
 type Action =
   | { type: 'add'; item: SnackBarItemDefault }
@@ -70,14 +120,10 @@ export const ThemePreview: React.FC = () => {
     });
   };
 
-  const vars = useThemeVars({
-    vars: varsMap,
-  });
-
-  const primaryColors = vars.color.primary;
+  const [ref, primaryColors] = useStyleProps(cssColorVars);
 
   return (
-    <div className={wp.layout()}>
+    <div ref={ref} className={wp.layout()}>
       <SnackBar className={cnThemePreview('Snackbar')} items={copiedItems} />
       <div className={wp.layout('content')}>
         <div className={wp.layout('container', { size: 'm' })}>
@@ -100,11 +146,12 @@ export const ThemePreview: React.FC = () => {
               })}
             >
               {bgColors.map((item, index) => {
+                const { color, description } = item;
                 return (
                   <ColorPreview
-                    value={primaryColors[item.color]}
-                    color={item.color}
-                    description={item.description}
+                    value={primaryColors[color]}
+                    color={color}
+                    description={description}
                     key={index}
                     clickHandler={clickHandlerCallback(item)}
                   />

@@ -32,8 +32,8 @@ export function ComboboxExampleCreate() {
         placeholder="Выберите вариант"
         items={list}
         value={value}
-        onChange={({ value }) => setValue(value)}
-        onCreate={({ label }) =>
+        onChange={setValue}
+        onCreate={(label) =>
           setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
         }
       />

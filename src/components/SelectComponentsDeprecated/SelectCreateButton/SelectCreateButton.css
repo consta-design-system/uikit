@@ -1,0 +1,5 @@
+.ListItem.deprecated--SelectCreateButton {
+  &:hover:not(.ListItem_active) {
+    background: transparent;
+  }
+}

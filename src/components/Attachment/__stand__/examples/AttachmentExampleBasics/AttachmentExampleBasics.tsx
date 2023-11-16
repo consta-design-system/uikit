@@ -11,6 +11,7 @@ export const AttachmentExampleBasicsLoading = () => {
       <Attachment
         fileName="Инструкция по сборке марсохода"
         fileExtension="pdf"
+        withPictogram
         loading
         loadingText="Загружено на 51%"
         buttonIcon={IconClose}
@@ -31,6 +32,7 @@ export const AttachmentExampleBasicsError = () => {
       <Attachment
         fileName="Инструкция по сборке марсохода"
         fileExtension="pdf"
+        withPictogram
         errorText="Файл слишком большой, максимум 100 ТБ"
         buttonIcon={IconClose}
         buttonTitle="Отменить"
@@ -50,6 +52,7 @@ export const AttachmentExampleBasicsLoaded = () => {
       <Attachment
         fileName="Инструкция по сборке марсохода"
         fileExtension="pdf"
+        withPictogram
         fileDescription="1,5 Mб • 21.02.2051, 14:12"
         buttonIcon={IconTrash}
         buttonTitle="Удалить"
@@ -69,6 +72,7 @@ export const AttachmentExampleBasicsLink = () => {
       <Attachment
         fileName="Инструкция по сборке марсохода"
         fileExtension="pdf"
+        withPictogram
         fileDescription="1,5 Mб • 21.02.2051, 14:12"
         onClick={() => console.log('onClick')}
       />

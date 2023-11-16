@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Attachment } from '../../../../Attachment/Attachment';
+import { Attachment } from '../../../../AttachmentDeprecated/AttachmentDeprecated';
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 

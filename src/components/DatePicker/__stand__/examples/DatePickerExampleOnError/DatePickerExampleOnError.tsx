@@ -2,7 +2,7 @@ import { Example } from '@consta/stand';
 import { format } from 'date-fns';
 import React, { useRef, useState } from 'react';
 
-import { Tooltip } from '##/components/TooltipCanary';
+import { Tooltip } from '##/components/Tooltip';
 
 import {
   DatePicker,

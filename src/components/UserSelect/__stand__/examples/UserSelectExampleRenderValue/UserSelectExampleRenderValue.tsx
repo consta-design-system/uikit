@@ -58,7 +58,7 @@ export function UserSelectExampleRenderValue() {
         placeholder="Выберите пользователя"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         renderValue={({ item }) => (
           <div className={cnUserSelectExampleRenderValue('Item')}>
             <User

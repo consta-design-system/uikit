@@ -26,6 +26,7 @@ import {
   className={cnAttachmentExampleBasics()}
   fileName="Инструкция по сборке марсохода"
   fileExtension="pdf"
+  withIcon
   loading
   loadingText="Загружено на 51%"
   buttonIcon={IconClose}
@@ -49,6 +50,7 @@ import {
   className={cnAttachmentExampleBasics()}
   fileName="Инструкция по сборке марсохода"
   fileExtension="pdf"
+  withIcon
   errorText="Файл слишком большой, максимум 100 ТБ"
   buttonIcon={IconClose}
   buttonTitle="Отменить"
@@ -71,6 +73,7 @@ import {
   className={cnAttachmentExampleBasics()}
   fileName="Инструкция по сборке марсохода"
   fileExtension="pdf"
+  withIcon
   fileDescription="1,5 Mб • 21.02.2051, 14:12"
   buttonIcon={IconTrash}
   buttonTitle="Удалить"
@@ -86,13 +89,14 @@ import {
 
 ## Просмотр файла
 
-На первый взгляд внешне это состояние не отличается от предыдущего. Разница в том, что тут нет никаких кнопок, так как с самим файлом уже нельзя ничего сделать. В этом случае компонент должен стать ссылкой или кнопкой, по которой открывается или скачивается файл.
+На первый взгляд, это состояние не отличается от предыдущего.. Разница в том, что тут нет никаких кнопок, так как с самим файлом уже нельзя ничего сделать. В этом случае компонент должен стать ссылкой или кнопкой, по которой открывается или скачивается файл.
 
 ```tsx
 <Attachment
   className={cnAttachmentExampleBasics()}
   fileName="Инструкция по сборке марсохода"
   fileExtension="pdf"
+  withIcon
   fileDescription="1,5 Mб • 21.02.2051, 14:12"
   onClick={() => console.log('onClick')}
 />

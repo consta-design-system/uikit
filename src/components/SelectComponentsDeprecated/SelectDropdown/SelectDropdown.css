@@ -1,0 +1,9 @@
+.deprecated--SelectDropdown {
+  min-width: 220px;
+  outline: none;
+
+  &-List {
+    overflow: auto;
+    max-height: 200px;
+  }
+}

@@ -11,11 +11,7 @@ export const CollapseGroupExampleControl = () => {
 
   return (
     <Example>
-      <CollapseGroup
-        items={items}
-        opened={opened}
-        onOpen={({ value }) => setOpened(value)}
-      />
+      <CollapseGroup items={items} opened={opened} onOpen={setOpened} />
     </Example>
   );
 };

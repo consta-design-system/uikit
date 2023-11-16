@@ -6,7 +6,7 @@ import { useForkRef } from '##/hooks/useForkRef';
 import {
   getHiddenCount,
   useHideElementsInLine,
-} from '##/hooks/useHideElementsInLineCanary';
+} from '##/hooks/useHideElementsInLine';
 
 import { cn } from '../../utils/bem';
 import { Avatar, avatarPropFormDefault, cnAvatar } from '../Avatar/Avatar';

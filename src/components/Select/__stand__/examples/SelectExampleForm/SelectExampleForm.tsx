@@ -1,8 +1,9 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
+import { Select } from '##/components/Select';
+
 import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
-import { Select } from '../../../Select';
 
 type Item = {
   label: string;
@@ -34,7 +35,7 @@ export const SelectExampleForm = () => {
         form="round"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Select
         className={cnMixSpace({ mB: 'm' })}
@@ -42,7 +43,7 @@ export const SelectExampleForm = () => {
         form="brickDefault"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

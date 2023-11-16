@@ -38,21 +38,21 @@ export function UserSelectExampleSize() {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <UserSelect
         placeholder="Размер m"
         size="m"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <UserSelect
         placeholder="Размер l"
         size="l"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

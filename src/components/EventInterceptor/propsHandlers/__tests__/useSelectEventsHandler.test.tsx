@@ -3,8 +3,11 @@ import { act, renderHook } from '@testing-library/react-hooks';
 import React, { createRef } from 'react';
 
 import { cnListItem } from '../../../ListCanary';
-import { Select, SelectProps } from '../../../Select/Select';
-import { cnSelect } from '../../../SelectComponents/cnSelect';
+import { cnSelect } from '../../../SelectComponentsDeprecated/cnSelect';
+import {
+  Select,
+  SelectProps,
+} from '../../../SelectDeprecated/SelectDeprecated';
 import {
   eventInterceptorMap,
   EventInterceptorProvider,
