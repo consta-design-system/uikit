@@ -72,7 +72,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
   const tabsDirection = getTabsDirection(linePosition);
   const isVertical = tabsDirection === 'vertical';
   const tabRefs = useRefs<HTMLDivElement>(items.length, [
-    items,
+    items.length,
     fitMode,
     isVertical,
   ]);
@@ -149,6 +149,10 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
   );
 
   const Wrapper = getTabsWrapper(tabsDirection, fitMode);
+
+  if (!items.length) {
+    return null;
+  }
 
   return (
     <div
