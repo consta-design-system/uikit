@@ -1,5 +1,10 @@
 # Changelog
 
+## v4.33.1 (17/11/2023)
+- [fix(Tabs): fixed error at empty items (#3398)](https://github.com/consta-design-system/uikit/commit/525576b95affa97a336a9a2e683eedc8d73f6975) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v4.33.0 (15/11/2023)
 Самое важное:
 
@@ -403,22 +408,3 @@
 ---
 
 - [feat(Collapse): add iconView (#2932)](https://github.com/consta-design-system/uikit/commit/5806bc992bf79fa89d89047636c6dda470d29ac5) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.12.0 (22/02/2023)
-Самое важное:
-
-- В `Slider` появилась возможность добавлять поля ввода с обеих сторон
-- В `Combobox` добавили размер `xs`
-- В `Tabs` теперь есть несколько свойств для добавления иконок и произвольного контента рядом с наименованием
-
----
-
-- [chore(CODEOWNERS): change codeowners](https://github.com/consta-design-system/uikit/commit/e1e587fb5343cac77357e192b16ad4cc44f7fcff) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Table): add accent on id in row (#2915)](https://github.com/consta-design-system/uikit/commit/b96ebae870a965f233c0b54c5353acfa89dbf8d6) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Slider): add `'input'` for `rightSide` (#2924)](https://github.com/consta-design-system/uikit/commit/c574da5621d83d3172a4e69f01cd8c0edfeae7cf) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Combobox): add xs size (#2916)](https://github.com/consta-design-system/uikit/commit/29138db8ce9e081380d0ba3234aef9f93df0e5a5) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Tabs): add new getters (#2911)](https://github.com/consta-design-system/uikit/commit/ff1f6a4fa6d3a62a9f8868a00d2be2cfd9a24e83) - [@gizeasy](https://github.com/gizeasy)
-- [fix(EventInterceptor): fix logic of select handler (#2903)](https://github.com/consta-design-system/uikit/commit/ea33a5a17851b655d5645c84165f0c21963c18a4) - [@N1MBER](https://github.com/N1MBER)
-- [fix(DatePicker): fix bug with dropdown viability on tab click (#2893)](https://github.com/consta-design-system/uikit/commit/6f015eb0c9f117bc820ac67bc67e7959c08f525a) - [@N1MBER](https://github.com/N1MBER)
