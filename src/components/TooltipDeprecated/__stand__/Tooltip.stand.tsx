@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description: 'Тултип. Всплывающее окно.',
   version: '1.5.0',
-  status: 'stable',
+  status: 'deprecated',
   sandbox: 'tooltip-pjejd2',
   alias: ['окно', 'всплывающее', 'тултип', 'пояснение'],
   figma:

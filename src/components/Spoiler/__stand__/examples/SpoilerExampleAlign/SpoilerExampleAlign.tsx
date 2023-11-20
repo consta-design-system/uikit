@@ -1,18 +1,18 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Spoiler } from '##/components/SpoilerCanary';
-import { SpoilerPropSize } from '##/components/SpoilerCanary/types';
+import { Spoiler } from '##/components/Spoiler';
+import { SpoilerPropButtonAlign } from '##/components/Spoiler/types';
 
-const items: SpoilerPropSize[] = ['l', 'm', 's', 'xs'];
+const items: SpoilerPropButtonAlign[] = ['left', 'center', 'right'];
 
-export const SpoilerExampleSize = () => {
+export const SpoilerExampleAlign = () => {
   return (
     <Example
       col={1}
       items={items}
-      getItemNode={(size) => (
-        <Spoiler lineClamp={3} size={size}>
+      getItemNode={(align) => (
+        <Spoiler lineClamp={3} buttonAlign={align}>
           Проснувшись однажды утром после беспокойного сна, Грегор Замза
           обнаружил, что он у себя в постели превратился в страшное насекомое.
           Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову,
@@ -23,7 +23,7 @@ export const SpoilerExampleSize = () => {
           со мной случилось?» – подумал он.
         </Spoiler>
       )}
-      getItemDescription={(size) => `size = ${size}`}
+      getItemDescription={(size) => `buttonAlign = ${size}`}
     />
   );
 };

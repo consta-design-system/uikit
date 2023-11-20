@@ -24,7 +24,7 @@ const Variants = () => {
   const loadingProgress = useNumber('loadingProgress', 70, Boolean(loading));
   const loadingText = useText('loadingText', 'Загрузка', Boolean(loading));
   const withButtonAction = useBoolean('withButtonAction', false);
-  const withPictogram = useBoolean('withPictogram', false);
+  const withPictogram = useBoolean('withPictogram', true);
 
   return (
     <Attachment

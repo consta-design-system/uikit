@@ -9,7 +9,7 @@ import { useForkRef } from '##/hooks/useForkRef';
 import { useRefs } from '##/hooks/useRefs';
 import { useResizeObserved } from '##/hooks/useResizeObserved';
 import { cnMixSpace, Space } from '##/mixs/MixSpace';
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 
 import { SpoilerButton } from './SpoilerButton';
 import {
@@ -20,7 +20,7 @@ import {
   SpoilerPropSize,
 } from './types';
 
-export const cnSpoiler = cnCanary('Spoiler');
+export const cnSpoiler = cn('Spoiler');
 
 const spoilerOffsetMap: Record<SpoilerPropSize, Space> = {
   xs: 'xs',

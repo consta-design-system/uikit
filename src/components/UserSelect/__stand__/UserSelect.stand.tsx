@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description: 'Выпадающий список пользователей с возможностью их выбора',
   version: '1.12.0',
-  status: 'canary',
+  status: 'stable',
   sandbox: 'userselect-tl1sro',
   alias: ['поле', 'ввод', 'список', 'лист', 'пользователь', 'юзер'],
   figma:

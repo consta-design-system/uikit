@@ -5,7 +5,7 @@ import { IconPropSize } from '@consta/icons/Icon';
 import { IconArrowDown } from '@consta/icons/IconArrowDown';
 import React from 'react';
 
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
 import { Text } from '../../Text';
@@ -15,7 +15,7 @@ import {
   SpoilerPropSize,
 } from '../types';
 
-export const cnSpoilerButton = cnCanary('SpoilerButton');
+export const cnSpoilerButton = cn('SpoilerButton');
 
 const spoilerIconSizeMap: Record<SpoilerPropSize, IconPropSize> = {
   l: 'm',

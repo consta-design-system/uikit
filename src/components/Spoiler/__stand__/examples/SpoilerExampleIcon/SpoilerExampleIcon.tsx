@@ -1,12 +1,14 @@
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconRemove } from '@consta/icons/IconRemove';
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Spoiler } from '##/components/SpoilerCanary';
+import { Spoiler } from '##/components/Spoiler';
 
-export const SpoilerExampleLabel = () => {
+export const SpoilerExampleIcon = () => {
   return (
     <Example col={1}>
-      <Spoiler lineClamp={3} lessLabel="Скрыть" moreLabel="Показать">
+      <Spoiler lineClamp={3} lessIcon={IconRemove} moreIcon={IconAdd}>
         Проснувшись однажды утром после беспокойного сна, Грегор Замза
         обнаружил, что он у себя в постели превратился в страшное насекомое.
         Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову,

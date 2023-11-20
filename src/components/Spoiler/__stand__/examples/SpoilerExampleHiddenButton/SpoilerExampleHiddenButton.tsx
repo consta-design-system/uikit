@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useCallback, useState } from 'react';
 
-import { Spoiler } from '##/components/SpoilerCanary';
+import { Spoiler } from '##/components/Spoiler';
 import { TextField, TextFieldPropOnChange } from '##/components/TextField';
 
 export const SpoilerExampleHiddenButton = () => {

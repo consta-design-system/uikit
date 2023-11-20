@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description: 'Скрытие / раскрытие содержимого',
   version: '4.17.2',
-  status: 'canary',
+  status: 'stable',
   alias: ['текст', 'список'],
   figma:
     'https://www.figma.com/file/xfuh9fLo3qFOICWtnrmQQ1/Consta-UI-Kit-(Community)?type=design&node-id=122771-358250&mode=design',
