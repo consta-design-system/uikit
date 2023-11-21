@@ -7,6 +7,6 @@ export default createStand({
   description: 'Хук для создания виртуального скролла.',
   alias: ['хук', 'виртуальный', 'скролл'],
   version: '4.20.0',
-  status: 'canary',
+  status: 'stable',
   order: 10,
 });

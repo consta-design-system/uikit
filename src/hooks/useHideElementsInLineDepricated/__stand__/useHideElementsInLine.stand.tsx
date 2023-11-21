@@ -7,7 +7,7 @@ export default createStand({
   description: 'Хук для сокрытия элементов.',
   alias: ['хук', 'скрыть', 'спрятать'],
   version: '3.15.0',
-  status: 'stable',
+  status: 'deprecated',
   sandbox: 'usehideelementsinline-3mul18',
   order: 10,
 });

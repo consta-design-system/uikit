@@ -6,7 +6,7 @@ export default createStand({
   group: 'hooks',
   description: 'Хук для скрытия элементов.',
   alias: ['хук', 'скрыть', 'спрятать'],
-  version: '4.9.0',
-  status: 'canary',
+  version: '5.0.0',
+  status: 'stable',
   order: 10,
 });

@@ -18,7 +18,7 @@ export default createStand({
     'тени',
     'переменные',
   ],
-  version: '4.24.0',
-  status: 'canary',
+  version: '5.0.0',
+  status: 'stable',
   order: 10,
 });
