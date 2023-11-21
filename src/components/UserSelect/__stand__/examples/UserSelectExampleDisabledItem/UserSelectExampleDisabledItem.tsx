@@ -41,7 +41,7 @@ export function UserSelectExampleDisabledItem() {
         placeholder="Выберите пользователя"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

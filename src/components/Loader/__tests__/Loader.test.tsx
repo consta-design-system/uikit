@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import * as React from 'react';
 
-import { cnLoader, Loader, loaderPropSize } from '../Loader';
+import { cnLoader, Loader } from '../Loader';
+import { loaderPropSize } from '../types';
 
 type FileProps = React.ComponentProps<typeof Loader>;
 

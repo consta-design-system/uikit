@@ -2,7 +2,7 @@ import { Example } from '@consta/stand';
 import React from 'react';
 
 import { Button } from '../../../../Button/Button';
-import { Select } from '../../../../Select/Select';
+import { Select } from '../../../../SelectDeprecated/SelectDeprecated';
 import { TextField } from '../../../../TextField/TextField';
 import { items } from '../../../__mocks__/data.mock';
 import { FieldGroup } from '../../../FieldGroup';

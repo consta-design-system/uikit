@@ -13,7 +13,7 @@ export const DatePickerExampleTwoIcons = () => {
       <DatePicker
         type="date-range"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         leftSide={[IconForward, IconBackward]}
         rightSide={['туда', 'обратно']}
       />

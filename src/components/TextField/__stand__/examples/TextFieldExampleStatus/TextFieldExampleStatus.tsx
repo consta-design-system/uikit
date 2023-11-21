@@ -5,33 +5,28 @@ import { TextField } from '../../../TextField';
 
 export const TextFieldExampleStatus = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         status="success"
         placeholder="Статус success"
       />
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         status="alert"
         placeholder="Статус error"
       />
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         status="warning"
         placeholder="Статус warning"
       />
-      <TextField
-        onChange={handleChange}
-        value={value}
-        placeholder="Обычное поле"
-      />
+      <TextField onChange={setValue} value={value} placeholder="Обычное поле" />
     </Example>
   );
 };

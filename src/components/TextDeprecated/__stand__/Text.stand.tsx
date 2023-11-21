@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description: 'Текст. Любые текстовые элементы на странице и стили для них.',
   version: '1.0.0',
-  status: 'stable',
+  status: 'deprecated',
   sandbox: 'text-qnu8hp',
   alias: ['текст', 'абзац', 'заголовок', 'пометка', 'описание', 'пояснение'],
   figma:

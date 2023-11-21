@@ -13,7 +13,7 @@ export const TabsExampleRenderItem = () => {
     <Example col={1}>
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         size="m"

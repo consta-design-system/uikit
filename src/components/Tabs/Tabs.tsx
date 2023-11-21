@@ -12,8 +12,8 @@ import {
   getTabsWrapper,
   withDefaultGetters,
 } from './helpers';
-import { TabsBorderLine, TabsRunningLine } from './Line/TabsLine';
-import { TabsTab } from './Tab/TabsTab';
+import { TabsBorderLine, TabsRunningLine } from './TabsLine/TabsLine';
+import { TabsTab } from './TabsTab/TabsTab';
 import {
   RenderItemProps,
   RenderItemsListProp,
@@ -72,7 +72,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
   const tabsDirection = getTabsDirection(linePosition);
   const isVertical = tabsDirection === 'vertical';
   const tabRefs = useRefs<HTMLDivElement>(items.length, [
-    items,
+    items.length,
     fitMode,
     isVertical,
   ]);
@@ -150,6 +150,10 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
 
   const Wrapper = getTabsWrapper(tabsDirection, fitMode);
 
+  if (!items.length) {
+    return null;
+  }
+
   return (
     <div
       className={cnTabs({ size, view, direction: tabsDirection }, [className])}
@@ -158,6 +162,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
     >
       <Wrapper
         tabRefs={tabRefs}
+        onChange={onChange}
         tabsDimensions={tabsDimensions}
         renderItem={renderItem}
         renderItemsList={renderItemsList}

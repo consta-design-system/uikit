@@ -24,9 +24,9 @@ export const useChoice = <ITEM, IS_ACCORDION extends boolean>(
 
   const callBack: CollapseGroupPropOnOpen<
     Exclude<typeof props.isAccordion, undefined>
-  > = (params) => {
-    setOpenedKeys(params.value);
-    props.onOpen?.(params);
+  > = (value, params) => {
+    setOpenedKeys(value);
+    props.onOpen?.(value, params);
   };
 
   const choiceGroupIndexedParams: ChoiceGroupIndexedParams = {

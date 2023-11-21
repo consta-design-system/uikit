@@ -49,7 +49,7 @@ export const RadioGroupExampleMore = () => {
                 value={value}
                 items={itemsOne}
                 getItemLabel={(item) => item}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
               />
             </>
           ),
@@ -72,7 +72,7 @@ export const RadioGroupExampleMore = () => {
                 value={valueTwo}
                 items={itemsTwo}
                 getItemLabel={(item) => item}
-                onChange={({ value }) => setValueTwo(value)}
+                onChange={setValueTwo}
               />
             </>
           ),
@@ -109,7 +109,7 @@ export const RadioGroupExampleOne = () => {
                 value={value}
                 items={itemsThree}
                 getItemLabel={(item) => item}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
               />
             </>
           ),
@@ -132,7 +132,7 @@ export const RadioGroupExampleOne = () => {
                 value={valueTwo}
                 items={itemsFour}
                 getItemLabel={(item) => item}
-                onChange={({ value }) => setValueTwo(value)}
+                onChange={setValueTwo}
               />
             </>
           ),
@@ -161,7 +161,7 @@ export const RadioGroupExampleChecked = () => {
           value={value}
           items={itemsChecked}
           getItemLabel={(item) => item}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
         />
       </>
     </Example>

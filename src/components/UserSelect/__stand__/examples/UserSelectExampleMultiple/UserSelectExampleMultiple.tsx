@@ -37,7 +37,7 @@ export function UserSelectExampleMultiple() {
         placeholder="Выберите одного или несколько"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         multiple
       />
     </Example>

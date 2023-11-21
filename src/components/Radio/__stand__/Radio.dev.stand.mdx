@@ -122,7 +122,7 @@ import { Radio } from '@consta/uikit/Radio';
 | `autoFocus?`              | `boolean`                                                                        | -            | Переносит фокус на эту кнопку                                                |
 | `tabIndex?`               | `number`                                                                         | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
 | `name?`                   | `string`                                                                         | -            | Имя для `<input>` в DOM                                                      |
-| `onChange?`               | `(object: {e: React.ChangeEvent<HTMLInputElement>; checked: boolean;}) => void;` | -            | Действие при выборе радиокнопки                                              |
+| `onChange?`               | `(checked: boolean, params: {e: React.ChangeEvent<HTMLInputElement> }) => void;` | -            | Действие при выборе радиокнопки                                              |
 | `onFocus?`                | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Действие по фокусу                                                           |
 | `onBlur?`                 | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Действие при потере фокуса                                                   |
 | `inputId?`                | `string`                                                                         | -            | Идентификатор для инпута                                                     |

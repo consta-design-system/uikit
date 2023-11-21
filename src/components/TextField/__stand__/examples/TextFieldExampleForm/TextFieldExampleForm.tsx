@@ -6,25 +6,25 @@ import { TextField } from '../../../TextField';
 
 export const TextFieldExampleFormBasic = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+
   return (
     <Example col={1}>
       <TextField
         placeholder="Форма default"
         value={value}
-        onChange={handleChange}
+        onChange={setValue}
       />
       <TextField
         form="brick"
         placeholder="Форма brick"
         value={value}
-        onChange={handleChange}
+        onChange={setValue}
       />
       <TextField
         form="round"
         placeholder="Форма round"
         value={value}
-        onChange={handleChange}
+        onChange={setValue}
       />
     </Example>
   );
@@ -32,7 +32,7 @@ export const TextFieldExampleFormBasic = () => {
 
 export function TextFieldExampleFormHybrid() {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+
   return (
     <Example col={1}>
       <div>
@@ -40,7 +40,7 @@ export function TextFieldExampleFormHybrid() {
           placeholder="Электронная почта"
           form="roundClear"
           value={value}
-          onChange={handleChange}
+          onChange={setValue}
           style={{ width: '260px' }}
         />
         <Button form="brickRound" label="Подписаться" />

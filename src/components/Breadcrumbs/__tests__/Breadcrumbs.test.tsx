@@ -46,9 +46,9 @@ const initialProps = {
   getItemLabel: (item: Item) => item.label,
   getItemHref: (item: Item) => item.link,
   getItemIcon: (item: Item) => item.icon,
-  onItemClick: (props: { item: Item; e: React.MouseEvent }) => {
+  onItemClick: (item: Item, props: { e: React.MouseEvent }) => {
     props.e.preventDefault();
-    console.log(props.item.link, props.e);
+    console.log(item.link, props.e);
   },
 };
 

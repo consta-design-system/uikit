@@ -29,7 +29,7 @@ const Variants = () => {
             label={label || ''}
             size={size}
             checked={checked}
-            onChange={({ checked }) => setChecked(checked)}
+            onChange={setChecked}
             group={group}
             icon={Icon}
           />

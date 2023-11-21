@@ -71,7 +71,11 @@ describe('Компонент DateTime_type_time', () => {
       const dateHoursItem = getDateTimeColumnItem(0, 11);
       fireEvent.click(dateHoursItem);
       expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 11, 0, 0));
+
+      const date = new Date(1970, 0, 1, 11, 0, 0);
+      expect(onChange).toHaveBeenCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
 
     it('onChange отрабатывает при клике на минуты', () => {
@@ -85,7 +89,11 @@ describe('Компонент DateTime_type_time', () => {
       const dateMinutesItem = getDateTimeColumnItem(1, 11);
       fireEvent.click(dateMinutesItem);
       expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 10, 11, 0));
+
+      const date = new Date(1970, 0, 1, 10, 11, 0);
+      expect(onChange).toHaveBeenCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
 
     it('onChange отрабатывает при клике на секунды', () => {
@@ -99,7 +107,11 @@ describe('Компонент DateTime_type_time', () => {
       const dateSecondsItem = getDateTimeColumnItem(2, 11);
       fireEvent.click(dateSecondsItem);
       expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 10, 10, 11));
+
+      const date = new Date(1970, 0, 1, 10, 10, 11);
+      expect(onChange).toHaveBeenCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
   });
 
@@ -123,7 +135,11 @@ describe('Компонент DateTime_type_time', () => {
 
       const dateHoursItem = getDateTimeColumnItem(numberColumn, 1);
       fireEvent.click(dateHoursItem);
-      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 2, 0, 0));
+
+      const date = new Date(1970, 0, 1, 2, 0, 0);
+      expect(onChange).toHaveBeenCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
 
     it('проверка multiplicityMinutes и возможности менять минуты', () => {
@@ -141,7 +157,11 @@ describe('Компонент DateTime_type_time', () => {
 
       const dateMinutesItem = getDateTimeColumnItem(numberColumn, 1);
       fireEvent.click(dateMinutesItem);
-      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 10, 2, 0));
+
+      const date = new Date(1970, 0, 1, 10, 2, 0);
+      expect(onChange).toHaveBeenCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
 
     it('проверка multiplicitySeconds и возможности менять секунды', () => {
@@ -159,7 +179,11 @@ describe('Компонент DateTime_type_time', () => {
 
       const dateSecondsItem = getDateTimeColumnItem(numberColumn, 1);
       fireEvent.click(dateSecondsItem);
-      expect(onChange).toHaveReturnedWith(new Date(1970, 0, 1, 10, 10, 2));
+
+      const date = new Date(1970, 0, 1, 10, 10, 2);
+      expect(onChange).toHaveBeenCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
   });
 });

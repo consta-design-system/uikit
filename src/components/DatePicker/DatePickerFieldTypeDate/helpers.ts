@@ -20,10 +20,12 @@ import {
 } from '../helpers';
 import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
 
-type DatePickerFieldTypeDatePropOnChange = (props: {
-  e: Event;
-  value: Date | null;
-}) => void;
+type DatePickerFieldTypeDatePropOnChange = (
+  value: Date | null,
+  props: {
+    e: Event;
+  },
+) => void;
 
 export type DatePickerFieldTypeDateProps = PropsWithHTMLAttributes<
   {
@@ -105,7 +107,7 @@ export const usePicker = (props: UsePickerProps) => {
       if (onChange) {
         if (!stringValue) {
           if (value) {
-            onChange({ e, value: null });
+            onChange(null, { e });
           }
           return;
         }
@@ -141,14 +143,14 @@ export const usePicker = (props: UsePickerProps) => {
               date,
             });
             if (value) {
-              onChange({ e, value: null });
+              onChange(null, { e });
             }
 
             return;
           }
-          onChange({ e, value: date });
+          onChange(date, { e });
         } else if (value) {
-          onChange({ e, value: null });
+          onChange(null, { e });
         }
       }
     },
@@ -158,7 +160,7 @@ export const usePicker = (props: UsePickerProps) => {
   const onAccept = useCallback(
     (stringValue: string, maskRef: unknown, e: Event) => {
       if (stringValue?.length !== formatProp.length && valueRef.current) {
-        onChangeRef.current?.({ e, value: null });
+        onChangeRef.current?.(null, { e });
       }
     },
     [formatProp],

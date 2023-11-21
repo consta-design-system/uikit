@@ -1,5 +1,7 @@
 import { useBoolean, useSelect, useText } from '@consta/stand';
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useFlag } from '##/hooks/useFlag';
 
 import { Switch } from '../Switch';
 import {
@@ -18,10 +20,7 @@ const Variants = () => {
   const align = useSelect('align', switchPropAlign, switchPropAlignDefault);
   const label = useText('label', 'Это переключатель');
 
-  const [checked, setChecked] = useState<boolean>(false);
-
-  const handleChange = ({ checked }: { checked: boolean }) =>
-    setChecked(checked);
+  const [checked, setChecked] = useFlag();
 
   return (
     <form>
@@ -32,7 +31,7 @@ const Variants = () => {
         view={view}
         label={label}
         align={align}
-        onChange={handleChange}
+        onChange={setChecked.toggle}
       />
     </form>
   );

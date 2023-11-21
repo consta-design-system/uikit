@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 
 import { useFlag } from '##/hooks/useFlag';
 
-import { defaultGetItemLabel, SelectProps } from '../../Select/helpers';
+import {
+  defaultGetItemLabel,
+  SelectProps,
+} from '../../SelectDeprecated/helpers';
 import { EventInterceptorHandler } from '../EventInterceptor';
 
 export const useSelectEventsHandler = <PROPS extends SelectProps>(

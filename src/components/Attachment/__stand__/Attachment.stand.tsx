@@ -5,9 +5,9 @@ export default createStand({
   id: 'Attachment',
   group: 'components',
   description: 'Показывает загрузку файла или уже загруженный файл.',
-  version: '3.2.0',
-  alias: ['файл', 'файлы', 'вложение', 'вложения', 'загрузка'],
+  version: '5.0.0',
   status: 'stable',
+  alias: ['файл', 'файлы', 'вложение', 'вложения', 'загрузка'],
   sandbox: 'attachment-t66jd4',
   figma:
     'https://www.figma.com/embed?embed_host=uikit.consta.design&url=https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=43155%3A107678',

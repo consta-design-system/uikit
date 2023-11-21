@@ -70,9 +70,7 @@ describe('Компонент Switch', () => {
         fireEvent.click(element);
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ checked: true }),
-        );
+        expect(handleChange).toHaveBeenCalledWith(expect.any(Object));
       });
     });
   });

@@ -35,7 +35,7 @@ export const ChoiceGroupExampleText = () => {
               </Text>
               <ChoiceGroup
                 value={value}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
                 items={itemsWrong}
                 getItemLabel={(item) => item}
                 name="ChoiceGroupExampleText"
@@ -59,7 +59,7 @@ export const ChoiceGroupExampleText = () => {
               </Text>
               <ChoiceGroup
                 value={value}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
                 items={items}
                 getItemLabel={(item) => item}
                 name="ChoiceGroupExampleText"
@@ -78,7 +78,7 @@ export const ChoiceGroupExample = () => {
     <Example>
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={itemsSimple}
         getItemLabel={(item) => item}
         name="ChoiceGroupExampleText"

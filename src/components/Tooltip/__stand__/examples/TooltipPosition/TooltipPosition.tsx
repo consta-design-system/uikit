@@ -6,10 +6,7 @@ import React, { useRef, useState } from 'react';
 import { Button } from '##/components/Button/Button';
 import { directions, Position } from '##/components/Popover/Popover';
 import { Text } from '##/components/Text/Text';
-import {
-  Tooltip,
-  tooltipPropSizesDefault,
-} from '##/components/Tooltip/Tooltip';
+import { Tooltip, tooltipPropSizesDefault } from '##/components/Tooltip';
 import { useFlag } from '##/hooks/useFlag/useFlag';
 import { cn } from '##/utils/bem';
 
@@ -35,16 +32,16 @@ export const TooltipPositionedCoords = () => {
           </Text>
         </div>
       </Example>
-
       <Tooltip
         direction="upCenter"
+        isOpen
         spareDirection="downStartLeft"
         possibleDirections={directions}
         size={tooltipPropSizesDefault}
         position={position}
         isInteractive={false}
       >
-        <Text view="primary" lineHeight="m" size="xs">
+        <Text size="xs" view="primary" lineHeight="m">
           Текст тултипа
         </Text>
       </Tooltip>
@@ -68,20 +65,18 @@ export const TooltipPositionedAnchor = () => {
           />
         </div>
       </Example>
-      {isTooltipVisible && (
-        <Tooltip
-          direction="upCenter"
-          spareDirection="downStartLeft"
-          possibleDirections={directions}
-          size={tooltipPropSizesDefault}
-          anchorRef={anchorRef}
-        >
-          <Text view="primary" lineHeight="m" size="xs">
-            Текст тултипа
-          </Text>
-          ,
-        </Tooltip>
-      )}
+      <Tooltip
+        isOpen={isTooltipVisible}
+        direction="upCenter"
+        spareDirection="downStartLeft"
+        possibleDirections={directions}
+        size={tooltipPropSizesDefault}
+        anchorRef={anchorRef}
+      >
+        <Text size="xs" view="primary" lineHeight="m">
+          Текст тултипа
+        </Text>
+      </Tooltip>
     </>
   );
 };

@@ -65,7 +65,7 @@ const Variants = () => {
       type={type}
       value={value}
       view={view}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       minDate={minDate}
       maxDate={maxDate}
       events={events}

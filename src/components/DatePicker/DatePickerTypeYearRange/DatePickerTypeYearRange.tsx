@@ -52,17 +52,17 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
     const startFocused = fieldFocused === 'start';
     const endFocused = fieldFocused === 'end';
 
-    const hadleChange: DatePickerDropdownPropOnChange = ({ e, value }) => {
+    const hadleChange: DatePickerDropdownPropOnChange = (value, { e }) => {
       if (startFocused) {
-        props.onChange?.({
+        const newValue = normalizeRangeValue([value, props?.value?.[1]]);
+        props.onChange?.(newValue, {
           e,
-          value: normalizeRangeValue([value, props?.value?.[1]]),
         });
       }
       if (endFocused) {
-        props.onChange?.({
+        const newValue = normalizeRangeValue([props?.value?.[0], value]);
+        props.onChange?.(newValue, {
           e,
-          value: normalizeRangeValue([props?.value?.[0], value]),
         });
       }
     };

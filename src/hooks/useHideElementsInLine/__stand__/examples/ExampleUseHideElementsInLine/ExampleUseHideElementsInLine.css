@@ -4,16 +4,10 @@
   &-Tag {
     margin-right: var(--space-xs);
 
-    &_display {
-      &_hidden.TagBase {
-        position: absolute;
-        left: -300vw;
-        visibility: hidden;
-      }
-
-      &_none.TagBase {
-        display: none;
-      }
+    &_hidden.TagBase {
+      position: absolute;
+      left: -300vw;
+      visibility: hidden;
     }
 
     &:last-child {

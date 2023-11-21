@@ -48,7 +48,7 @@ export const TabsExampleSide = () => {
     <Example col={1}>
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemRightSide={getItemRightSide}
         fitMode="scroll"

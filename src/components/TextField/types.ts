@@ -12,12 +12,14 @@ export const textFieldPropSize = ['m', 'xs', 's', 'l'] as const;
 export type TextFieldPropSize = typeof textFieldPropSize[number];
 export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
 
-export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
+export type TextFieldPropOnChange = (
+  value: TextFieldPropValue,
+  params: TextFieldOnChangeArguments,
+) => void;
 export type TextFieldOnChangeArguments = {
   e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
-  value: TextFieldPropValue;
 };
 
 export const textFieldPropView = ['default', 'clear'] as const;

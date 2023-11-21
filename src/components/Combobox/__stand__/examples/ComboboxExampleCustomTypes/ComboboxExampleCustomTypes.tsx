@@ -11,7 +11,7 @@ export function ComboboxExampleCustomTypes() {
         placeholder="Выберите вариант"
         items={['Первый', 'Второй', 'Третий']}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         getItemKey={(item) => item}
         getItemLabel={(item) => item}
       />
@@ -52,7 +52,7 @@ export function ComboboxExampleCustomTypesWithGroups() {
         items={items}
         groups={groups}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         getItemKey={(item) => item.name}
         getItemLabel={(item) => item.name}
         getItemGroupKey={(item) => item.group}

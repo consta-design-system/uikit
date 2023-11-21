@@ -1,5 +1,5 @@
-.UserSelectVariants {
-  &.UserSelectVariants {
+.canary--UserSelectVariants {
+  &.canary--UserSelectVariants {
     position: absolute;
     top: var(--space-l);
     width: 100%;

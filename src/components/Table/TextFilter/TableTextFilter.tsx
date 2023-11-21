@@ -83,7 +83,7 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
       {withSearch && (
         <TextField
           value={searchValue}
-          onChange={({ value }) => setSearchValue(value)}
+          onChange={setSearchValue}
           leftSide={IconSearchStroked}
           size="s"
           placeholder="Найти в списке"
@@ -116,9 +116,7 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
             items={filteredItems}
             value={checkboxGroupValue}
             getItemLabel={(item) => item.name}
-            onChange={({ value }) => {
-              setCheckboxGroupValue(value);
-            }}
+            onChange={setCheckboxGroupValue}
             name="checkboxGroup"
           />
         ) : (

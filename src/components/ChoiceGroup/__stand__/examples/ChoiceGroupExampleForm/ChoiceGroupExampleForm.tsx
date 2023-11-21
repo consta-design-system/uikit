@@ -14,7 +14,7 @@ export const ChoiceGroupExampleForm = () => {
     <Example col={1}>
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         form="default"
@@ -23,7 +23,7 @@ export const ChoiceGroupExampleForm = () => {
       />
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         form="brick"
@@ -32,7 +32,7 @@ export const ChoiceGroupExampleForm = () => {
       />
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         form="round"

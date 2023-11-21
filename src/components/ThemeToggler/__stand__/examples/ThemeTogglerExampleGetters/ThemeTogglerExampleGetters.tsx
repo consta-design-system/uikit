@@ -57,7 +57,7 @@ export const ThemeTogglerExampleGetters = () => {
           getItemLabel={(item) => item}
           getItemKey={(item) => item}
           getItemIcon={getItemIcon}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           direction="downStartLeft"
         />
       </Theme>

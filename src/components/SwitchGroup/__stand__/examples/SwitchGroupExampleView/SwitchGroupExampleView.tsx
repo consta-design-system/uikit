@@ -28,7 +28,7 @@ export const SwitchGroupExampleView = () => {
             value={value}
             getItemLabel={(item) => item.name}
             items={items}
-            onChange={({ value }) => setValue(value)}
+            onChange={setValue}
             name={`SwitchGroupExampleView${view}`}
             view={view}
           />

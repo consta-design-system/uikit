@@ -2,7 +2,7 @@ import { Example } from '@consta/stand';
 import { format } from 'date-fns';
 import React, { useRef, useState } from 'react';
 
-import { Tooltip } from '##/components/TooltipCanary';
+import { Tooltip } from '##/components/Tooltip';
 
 import {
   DatePicker,
@@ -19,7 +19,7 @@ export const DatePickerExampleOnError = () => {
   const [value, setValue] = useState<[Date?, Date?] | null>(null);
   const [error, setError] = useState<string | undefined>();
 
-  const onChange: DatePickerPropOnChange<'date-range'> = ({ value }) => {
+  const onChange: DatePickerPropOnChange<'date-range'> = (value) => {
     setValue(value);
     setError(undefined);
   };

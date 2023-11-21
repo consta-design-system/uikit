@@ -14,7 +14,7 @@ export const ChoiceGroupExampleSize = () => {
     <Example col={1}>
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         size="xs"
@@ -23,7 +23,7 @@ export const ChoiceGroupExampleSize = () => {
       />
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         size="s"
@@ -32,7 +32,7 @@ export const ChoiceGroupExampleSize = () => {
       />
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         size="m"
@@ -41,7 +41,7 @@ export const ChoiceGroupExampleSize = () => {
       />
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         size="l"

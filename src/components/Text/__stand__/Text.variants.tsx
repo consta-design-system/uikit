@@ -20,11 +20,6 @@ import {
 } from '../Text';
 
 const Variants = () => {
-  const as = useSelect(
-    'as',
-    ['div', 'p', 'a', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-    'p',
-  );
   const align = useSelect('align', textPropAlign);
   const cursor = useSelect('cursor', textPropCursor);
   const decoration = useSelect('decoration', textPropDecoration);
@@ -45,7 +40,7 @@ const Variants = () => {
 
   return (
     <Text
-      as={as}
+      as="p"
       align={align}
       cursor={cursor}
       decoration={decoration}

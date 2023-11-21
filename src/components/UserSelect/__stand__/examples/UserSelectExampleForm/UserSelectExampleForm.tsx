@@ -38,7 +38,7 @@ export function UserSelectExampleForm() {
         form="round"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

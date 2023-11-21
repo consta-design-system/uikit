@@ -5,7 +5,7 @@ export default createStand({
   id: 'RadioGroup',
   group: 'components',
   description: 'Группа радиокнопок.',
-  version: '1.10.9',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'radiogroup-uo5898',
   alias: ['поле', 'ввод', 'радиокнопка', 'группа'],

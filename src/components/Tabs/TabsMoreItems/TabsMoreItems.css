@@ -1,0 +1,22 @@
+.TabsMoreItems {
+  &-Button {
+    display: flex;
+    align-items: center;
+  }
+
+  &-Content {
+    white-space: nowrap;
+  }
+
+  &-Item {
+    padding: 0 var(--space-s);
+
+    &_active {
+      background: var(--color-bg-stripe);
+    }
+
+    & > * {
+      width: 100%;
+    }
+  }
+}

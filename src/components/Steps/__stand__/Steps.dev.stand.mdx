@@ -174,7 +174,6 @@ export const ExampleStepsContent = () => {
 
   const handleNext = () => setActiveStep(items[activeStepIndex + 1]);
   const handlePrev = () => setActiveStep(items[activeStepIndex - 1]);
-  const onChange = ({ value }: { value: string }) => setActiveStep(value);
 
   return (
     <>
@@ -182,7 +181,7 @@ export const ExampleStepsContent = () => {
         items={items}
         getItemLabel={getLabel}
         value={activeStep}
-        onChange={onChange}
+        onChange={setActiveStep}
       />
       <div>{getContent(activeStepIndex)}</div>
       <Button
@@ -232,10 +231,12 @@ import { Steps } from '@consta/uikit/Steps';
 ## Свойства
 
 ```tsx
-type StepsPropOnChange<ITEM> = (props: {
-  e: React.MouseEvent;
-  value: ITEM;
-}) => void;
+type StepsPropOnChange<ITEM> = (
+  value: ITEM,
+  props: {
+    e: React.MouseEvent;
+  },
+) => void;
 
 type StepsPropGetLabel<ITEM> = (item: ITEM) => string;
 type StepsPropGetDisabled<ITEM> = (item: ITEM) => boolean | undefined;

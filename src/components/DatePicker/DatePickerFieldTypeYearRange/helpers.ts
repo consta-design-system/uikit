@@ -3,10 +3,12 @@ import { IconComponent } from '@consta/icons/Icon';
 import { DateRange } from '../../../utils/types/Date';
 import { DatePickerFieldTypeYearProps } from '../DatePickerFieldTypeYear/helpers';
 
-type DatePickerFieldTypeYearRangePropOnChange = (props: {
-  e: Event;
-  value: DateRange | null;
-}) => void;
+type DatePickerFieldTypeYearRangePropOnChange = (
+  value: DateRange | null,
+  props: {
+    e: Event;
+  },
+) => void;
 
 export type DatePickerFieldTypeYearRangeProps = Omit<
   DatePickerFieldTypeYearProps,

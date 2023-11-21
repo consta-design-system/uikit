@@ -32,14 +32,14 @@ export function ComboboxExampleView() {
         view="default"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Combobox
         placeholder="Вид clear"
         view="clear"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

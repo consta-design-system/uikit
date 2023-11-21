@@ -24,12 +24,14 @@ const Variants = () => {
   const loadingProgress = useNumber('loadingProgress', 70, Boolean(loading));
   const loadingText = useText('loadingText', 'Загрузка', Boolean(loading));
   const withButtonAction = useBoolean('withButtonAction', false);
+  const withPictogram = useBoolean('withPictogram', true);
 
   return (
     <Attachment
       className={cnAttachmentVariants()}
       loading={loading}
       size={size}
+      withPictogram={withPictogram}
       loadingText={loadingText}
       fileName={fileName}
       loadingProgress={loadingProgress}

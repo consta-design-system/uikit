@@ -5,12 +5,11 @@ import { TextField } from '../../../TextField';
 
 export const TextFieldExampleTypeText = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         type="text"
         placeholder="Одна строчка"
@@ -21,12 +20,11 @@ export const TextFieldExampleTypeText = () => {
 
 export const TextFieldExampleTypeTextarea = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         type="textarea"
         cols={200}
@@ -39,12 +37,11 @@ export const TextFieldExampleTypeTextarea = () => {
 
 export const TextFieldExampleTypeNumber = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         type="number"
         step="2"
@@ -56,12 +53,11 @@ export const TextFieldExampleTypeNumber = () => {
 
 export const TextFieldExampleTypePassword = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         type="password"
         placeholder="Пароль"

@@ -108,7 +108,7 @@ const ThemeTogglerRender = (
           getItemLeftSide={renderIcons}
           getItemRightSide={renderChecks}
           onClickOutside={setIsOpen.off}
-          onItemClick={(params) => getOnChange(params.item)(params.e)}
+          onItemClick={(item, { e }) => getOnChange(item)(e)}
           size={contextMenuSize}
           style={
             typeof style?.zIndex === 'number'

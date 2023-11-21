@@ -68,10 +68,6 @@ const Variants = () => {
   const leftSide = leftSideType && leftSideSelect[leftSideType];
   const rightSide = rightSideType && rightSideSelect[rightSideType];
 
-  const handleChange = ({ value }: { value: string | null }) => {
-    setValue(value);
-  };
-
   return (
     <TextField
       value={value}
@@ -91,7 +87,7 @@ const Variants = () => {
       minRows={minRows}
       maxRows={maxRows}
       placeholder={placeholder}
-      onChange={handleChange}
+      onChange={setValue}
       leftSide={leftSide}
       rightSide={rightSide}
       disabled={disabled}

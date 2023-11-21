@@ -11,28 +11,28 @@ export const SliderExampleSize = () => {
       <Slider
         range={false}
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         size="xs"
       />
       <Slider
         range={false}
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         size="s"
       />
       <Slider
         range={false}
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         size="m"
       />
       <Slider
         range={false}
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         size="l"
       />

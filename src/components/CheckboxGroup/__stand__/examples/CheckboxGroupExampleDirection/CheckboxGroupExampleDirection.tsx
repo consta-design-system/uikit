@@ -14,7 +14,7 @@ export const CheckboxGroupExampleRow = () => {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         direction="row"
       />
     </Example>
@@ -31,7 +31,7 @@ export const CheckboxGroupExampleColumn = () => {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         direction="column"
       />
     </Example>

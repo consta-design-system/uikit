@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PropOnChange, SliderValue, TrackPosition } from '../helper';
+import { SliderPropOnChange, SliderValue, TrackPosition } from '../helper';
 import { getSteps } from '../useSliderStationing';
 
 export type ActiveButton = 0 | 1 | null | undefined;
@@ -19,8 +19,8 @@ export type UseSliderProps<RANGE extends boolean = false> = {
   min: number;
   max: number;
   step?: number | number[];
-  onChange?: PropOnChange<RANGE>;
-  onAfterChange?: PropOnChange<RANGE>;
+  onChange?: SliderPropOnChange<RANGE>;
+  onAfterChange?: SliderPropOnChange<RANGE>;
   containerRef: React.RefObject<HTMLDivElement>;
   sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement>;
   buttonRefs: React.RefObject<HTMLButtonElement>[];

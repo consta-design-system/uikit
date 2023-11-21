@@ -41,10 +41,12 @@ export type DatePickerPropValue<TYPE extends DatePickerPropType> =
   | (TYPE extends Range ? DateRange : Date)
   | null;
 
-export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (props: {
-  value: DatePickerPropValue<TYPE>;
-  e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
-}) => void;
+export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (
+  value: DatePickerPropValue<TYPE>,
+  props: {
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
+  },
+) => void;
 
 export const datePickerPropDropdownForm = [
   'default',

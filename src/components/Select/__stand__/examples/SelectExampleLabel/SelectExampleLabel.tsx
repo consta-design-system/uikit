@@ -2,7 +2,7 @@ import { IconQuestion } from '@consta/icons/IconQuestion';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { Select } from '../../../Select';
+import { Select } from '##/components/Select';
 
 type Item = {
   label: string;
@@ -34,7 +34,7 @@ export const SelectExampleLabel = () => {
         placeholder="Выберите значение"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );
@@ -49,7 +49,7 @@ export const SelectExampleLabelIcon = () => {
         labelIcon={IconQuestion}
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

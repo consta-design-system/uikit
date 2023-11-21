@@ -5,7 +5,7 @@ export default createStand({
   id: 'Select',
   group: 'components',
   description: 'Выпадающий список. Позволяет выбрать один вариант.',
-  version: '0.1.0',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'select-ixtbcl',
   alias: ['поле', 'ввод', 'выбор', 'список', 'лист'],

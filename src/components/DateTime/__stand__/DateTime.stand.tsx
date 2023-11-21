@@ -5,7 +5,7 @@ export default createStand({
   id: 'DateTime',
   group: 'components',
   description: 'Календарь. Можно выбрать дату или период.',
-  version: '3.6.0',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'datetime-ioox6v',
   alias: ['календарь', 'дата', 'день', 'месяц', 'год', 'время'],

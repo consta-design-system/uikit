@@ -5,13 +5,12 @@ import { TextField } from '../../../TextField';
 
 export const TextFieldExampleRequired = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
       <TextField
         label="Поле раз"
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         type="text"
         placeholder="Обязательное"
@@ -19,7 +18,7 @@ export const TextFieldExampleRequired = () => {
       />
       <TextField
         label="Поле два"
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         type="text"
         placeholder="Необязательное"

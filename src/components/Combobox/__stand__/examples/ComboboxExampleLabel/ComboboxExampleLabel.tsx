@@ -32,7 +32,7 @@ export function ComboboxExampleLabel() {
         caption={value?.label}
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         placeholder="Выберите нужный элемент из списка"
       />
     </Example>

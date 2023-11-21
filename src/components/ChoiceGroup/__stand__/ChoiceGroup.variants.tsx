@@ -80,7 +80,7 @@ const Variants = () => {
           <ChoiceGroup
             items={items}
             value={valueMultiple}
-            onChange={({ value }) => setValueMultiple(value)}
+            onChange={setValueMultiple}
             name="ChoiceGroup"
             multiple
             size={size}
@@ -96,7 +96,7 @@ const Variants = () => {
           <ChoiceGroup
             items={items}
             value={value}
-            onChange={({ value }) => setValue(value)}
+            onChange={setValue}
             name="ChoiceGroup"
             multiple={false}
             size={size}

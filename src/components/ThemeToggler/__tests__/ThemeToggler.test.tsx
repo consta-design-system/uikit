@@ -91,7 +91,7 @@ describe('Компонент ThemeToggler', () => {
       const handleChange = jest.fn();
       renderComponent({
         items: exampleThemesThree,
-        onChange: ({ value }) => handleChange(value),
+        onChange: (value) => handleChange(value),
       });
 
       toggleClick();

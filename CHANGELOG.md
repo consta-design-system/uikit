@@ -1,5 +1,30 @@
 # Changelog
 
+## v4.33.1 (17/11/2023)
+- [fix(Tabs): fixed error at empty items (#3398)](https://github.com/consta-design-system/uikit/commit/525576b95affa97a336a9a2e683eedc8d73f6975) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v4.33.0 (15/11/2023)
+Самое важное:
+
+- Добавили новый компонент `PaginationCanary`, для разбивки на страницы и навигации по результатам поиска.
+- Добавили новый компонент `AttachmentCanary`, для индикатора загрузки файлов.
+- Добавили возможность выравнивания текста для `CheckboxGroup`
+
+---
+
+- [fix(Tabs): fix vertical view (#3394)](https://github.com/consta-design-system/uikit/commit/500040761bc2a9496b4e39760da0fa90b85d4c36) - [@N1MBER](https://github.com/N1MBER)
+- [feat(PaginationCanary): added new canary component (#3355)](https://github.com/consta-design-system/uikit/commit/1cedd46b5394aa58fca9f4e5a319aea83a538a80) - [@N1MBER](https://github.com/N1MBER)
+- [fix(useHideElementsInLine): remove console.log (#3392)](https://github.com/consta-design-system/uikit/commit/ee6f93d01c7be0c8d5d83bcb2eec85df16b6422a) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Tabs): fix keyboard navigation (#3383)](https://github.com/consta-design-system/uikit/commit/f54c094b55313a3134255a9f4d4b370ec9501f2c) - [@N1MBER](https://github.com/N1MBER)
+- [fix(DragNDropField): fixed DragNDropFieldTooltip (#3391)](https://github.com/consta-design-system/uikit/commit/96218216a1610b1ce1491aa6fce2803c907eb9a8) - [@gizeasy](https://github.com/gizeasy)
+- [feat(AttachmentCanary): add new canary component (#3374)](https://github.com/consta-design-system/uikit/commit/0820be95b779e002a9661fd10cf87c6ce404b6a2) - [@N1MBER](https://github.com/N1MBER)
+- [feat(CheckboxGroup): add new prop (#3378)](https://github.com/consta-design-system/uikit/commit/035baa46798c2b3c3bf4eab67f6e4c1fbf556157) - [@N1MBER](https://github.com/N1MBER)
+- [chore(eslint): add ascii plugin and rules (#3384)](https://github.com/consta-design-system/uikit/commit/c08744546f6d026e0f6087f537a6238ca25fc3b7) - [@N1MBER](https://github.com/N1MBER)
+
+--------------------
+
 ## v4.32.0 (08/11/2023)
 Самое важное:
 
@@ -383,39 +408,3 @@
 ---
 
 - [feat(Collapse): add iconView (#2932)](https://github.com/consta-design-system/uikit/commit/5806bc992bf79fa89d89047636c6dda470d29ac5) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.12.0 (22/02/2023)
-Самое важное:
-
-- В `Slider` появилась возможность добавлять поля ввода с обеих сторон
-- В `Combobox` добавили размер `xs`
-- В `Tabs` теперь есть несколько свойств для добавления иконок и произвольного контента рядом с наименованием
-
----
-
-- [chore(CODEOWNERS): change codeowners](https://github.com/consta-design-system/uikit/commit/e1e587fb5343cac77357e192b16ad4cc44f7fcff) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Table): add accent on id in row (#2915)](https://github.com/consta-design-system/uikit/commit/b96ebae870a965f233c0b54c5353acfa89dbf8d6) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Slider): add `'input'` for `rightSide` (#2924)](https://github.com/consta-design-system/uikit/commit/c574da5621d83d3172a4e69f01cd8c0edfeae7cf) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Combobox): add xs size (#2916)](https://github.com/consta-design-system/uikit/commit/29138db8ce9e081380d0ba3234aef9f93df0e5a5) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Tabs): add new getters (#2911)](https://github.com/consta-design-system/uikit/commit/ff1f6a4fa6d3a62a9f8868a00d2be2cfd9a24e83) - [@gizeasy](https://github.com/gizeasy)
-- [fix(EventInterceptor): fix logic of select handler (#2903)](https://github.com/consta-design-system/uikit/commit/ea33a5a17851b655d5645c84165f0c21963c18a4) - [@N1MBER](https://github.com/N1MBER)
-- [fix(DatePicker): fix bug with dropdown viability on tab click (#2893)](https://github.com/consta-design-system/uikit/commit/6f015eb0c9f117bc820ac67bc67e7959c08f525a) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.11.0 (16/02/2023)
-Самое важное:
-
-- В `TextField` добавлена документация по использованию масок
-- В `Combobox`, `AutoComplete` и `UserSelect` добавлена возможность программно управлять значением поиска 
-
----
-
-- [docs(ChoiceGroup): update link to sandbox (#2910)](https://github.com/consta-design-system/uikit/commit/9575b7d4860bd6977dad9e6e8e3c4305c0b56f9b) - [@N1MBER](https://github.com/N1MBER)
-- [feat(ProgressStepBar): rewrite line rendering and fix bug with hidden outline (#2900)](https://github.com/consta-design-system/uikit/commit/7f8d1e12bc6381c5a17802d0b7d739c4028e7f60) - [@N1MBER](https://github.com/N1MBER)
-- [docs(TextField): add examples with imask usage (#2890)](https://github.com/consta-design-system/uikit/commit/0559e3ba5c6cab499eac3e95c76cefbb8cfa6ced) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Selects): fix logic of choicing disabled items (#2901)](https://github.com/consta-design-system/uikit/commit/f98ee2985677150f446c8d1cd263be0b8c70fdc1) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Selects): add searchValue prop (#2898)](https://github.com/consta-design-system/uikit/commit/e526359e713cdb34e788a6003c8488d8f0de9770) - [@N1MBER](https://github.com/N1MBER)
-- [fix(TextField): fix bug with scroll on disabled textarea (#2897)](https://github.com/consta-design-system/uikit/commit/060eb2259fad7622f5850de87e8087cee2324825) - [@N1MBER](https://github.com/N1MBER)

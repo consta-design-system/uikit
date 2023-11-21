@@ -1,0 +1,142 @@
+import { MdxMenu } from '@consta/stand';
+
+import { CheckboxExampleName } from './examples/CheckboxExampleName/CheckboxExampleName';
+import { CheckboxExampleSize } from './examples/CheckboxExampleSize/CheckboxExampleSize';
+import { CheckboxExampleStatus } from './examples/CheckboxExampleStatus/CheckboxExampleStatus';
+import { CheckboxExampleAlign } from './examples/CheckboxExampleAlign/CheckboxExampleAlign';
+import { CheckboxExampleView } from './examples/CheckboxExampleView/CheckboxExampleView';
+
+```tsx
+import { Checkbox } from '@consta/uikit/CheckboxDeprecated';
+```
+
+<MdxMenu>
+
+- [Название](#название)
+- [Состояния](#состояния)
+- [Размер](#размер)
+- [Внешний вид](#внешний-вид)
+- [Выравнивание](#выравнивание)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Название
+
+Название — это надпись рядом с чекбоксом, за него отвечает свойство `label`. Пишется с заглавной буквы, без точки.
+
+```tsx
+<Checkbox label="Это чекбокс" />
+```
+
+<CheckboxExampleName />
+
+## Состояния
+
+Обычный чекбокс — это поле, в котором можно отметить, что пункт выбран (поставить галочку).
+
+Вы можете сделать выбор за пользователя — поставить галочку заранее с помщью свойства `checked`.
+
+В сложном списке может появиться чекбокс с неопределенным статусом — и не выбранный, и не пустой.
+Например, если у чекбокса есть вложенные чекбоксы, и часть из них выбрана, а часть нет.
+Сделать такой можно с помощью свойства `intermediate`.
+
+Если не хотите, чтобы выбор можно было менять, добавьте свойство `disabled`.
+
+```tsx
+<Checkbox label="Checkbox" />
+<Checkbox checked label="Checked" />
+<Checkbox intermediate label="Intermediate" />
+<Checkbox disabled label="Disabled" />
+<Checkbox disabled checked label="Disabled Checked" />
+```
+
+<CheckboxExampleStatus />
+
+## Размер
+
+За размер отвечает свойство `size`. Варианты: `'xs'`, `'s'`, `'m'`, `'l'`, по умолчанию `'m'`.
+
+```tsx
+<Checkbox size="xs" label="Размер xs" />
+<Checkbox size="s" label="Размер s" />
+<Checkbox size="m" label="Размер m" />
+<Checkbox size="l" label="Размер l" />
+```
+
+<CheckboxExampleSize />
+
+## Внешний вид
+
+За внешний вид чекбокса отвечает свойство `view`. Варианты:
+
+- `primary` — акцентный чекбокс (по умолчанию),
+- `ghost` — второстепенный чекбокс.
+
+```tsx
+<Checkbox view="primary" checked label="Акцентный чекбокс" />
+<Checkbox view="ghost" checked label="Второстепенный чекбокс" />
+```
+
+<CheckboxExampleView />
+
+## Выравнивание
+
+За выравнивание названия по вертикали по отношению к чекбоксу отвечает свойство `align`. Варианты:
+
+- `center` — чекбокс выровнен по центру контейнера с текстом,
+- `top` — чекбокс выровнен по верхнему краю контейнера с текстом.
+
+```tsx
+<Checkbox
+  align="center"
+  label="Длинный текст для чекбокса с выравниванием по центру, здесь несколько строк"
+/>
+<Checkbox
+  align="top"
+  label="Длинный текст для чекбокса с выравниванием по верху, здесь несколько строк"
+/>
+```
+
+<CheckboxExampleAlign />
+
+## Импорт
+
+```tsx
+import { Checkbox } from '@consta/uikit/CheckboxDeprecated';
+```
+
+## Свойства
+
+| Свойство                      | Тип                                                                              | По умолчанию | Описание                                                                     |
+| ----------------------------- | -------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
+| [`label?`](#название)         | `string`                                                                         | -            | Надпись рядом с чекбоксом                                                    |
+| [`size?`](#размер)            | `'xs', 's', 'm', 'l'`                                                            | `'m'`        | Размер                                                                       |
+| [`view?`](#внешний-вид)       | `'primary', 'ghost'`                                                             | `'primary'`  | Внешний вид                                                                  |
+| [`align?`](#выравнивание)     | `'center', 'top'`                                                                | `'center'`   | Выравнивание                                                                 |
+| [`checked`](#состояния)       | `boolean`                                                                        | -            | Отмечает, выбран чекбокс или нет (ставит галочку)                            |
+| [`disabled?`](#состояния)     | `boolean`                                                                        | -            | Блокирует чекбокс                                                            |
+| [`intermediate?`](#состояния) | `boolean`                                                                        | -            | Делает чекбокс неопределенным                                                |
+| `name?`                       | `string`                                                                         | -            | Имя `<input>` в DOM                                                          |
+| `onChange?`                   | `(checked: boolean, params: {e: React.ChangeEvent<HTMLInputElement> }) => void;` | -            | Действие при смене состояния чекбокса                                        |
+| `onFocus?`                    | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Событие фокуса                                                               |
+| `onBlur?`                     | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Событие расфокусировки                                                       |
+| `tabIndex?`                   | `number`                                                                         | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
+| `className?`                  | `string`                                                                         | -            | Дополнительный CSS-класс                                                     |
+| `inputRef?`                   | `React.Ref<HTMLInputElement>`                                                    | -            | Ссылка на DOM-элемент `<input>`                                              |
+| `inputId?`                    | `string`                                                                         | -            | Идентификатор для инпута                                                     |
+| `ref?`                        | `React.Ref<HTMLLabelElement>`                                                    | -            | Ссылка на корневой DOM-элемент этого компонента                              |
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Checkbox } from '@consta/uikit/CheckboxDeprecated';
+
+const App = () => {
+  return <Checkbox label="Отметьте меня" />;
+};
+```

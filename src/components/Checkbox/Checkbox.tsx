@@ -20,10 +20,12 @@ export const checkboxPropAlign = ['center', 'top'] as const;
 export type CheckboxPropAlign = typeof checkboxPropAlign[number];
 export const checkboxPropAlignDefault: CheckboxPropAlign = checkboxPropAlign[0];
 
-export type CheckboxPropOnChange = (object: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  checked: boolean;
-}) => void;
+export type CheckboxPropOnChange = (
+  checked: boolean,
+  params: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
 
 type Props = {
   checked: boolean | undefined;
@@ -33,7 +35,7 @@ type Props = {
   disabled?: boolean;
   intermediate?: boolean;
   label?: string;
-  onChange?: CheckboxPropOnChange;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   name?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -79,12 +81,6 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
       ...otherProps
     } = usePropsHandler(COMPONENT_NAME, props, checkboxRef);
 
-    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-      if (onChange) {
-        onChange({ e, checked: !checked });
-      }
-    };
-
     return (
       <label
         {...otherProps}
@@ -100,7 +96,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
           checked={checked}
           id={inputId}
           disabled={disabled}
-          onChange={handleChange}
+          onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
           readOnly={readOnly}

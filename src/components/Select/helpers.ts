@@ -10,46 +10,53 @@ import {
   RenderItemProps,
 } from '../SelectComponents/types';
 
-export type DefaultItem = {
+export type SelectItemDefault = {
   label: string;
   id: string | number;
   groupId?: string | number;
   disabled?: boolean;
 };
 
-export type DefaultGroup = {
+export type SelectGroupDefault = {
   label: string;
   id: string | number;
 };
 
-type PropValue<ITEM> = ITEM | null | undefined;
+type SelectPropValue<ITEM> = ITEM | null | undefined;
 
-type RenderValueProps<ITEM> = {
+type SelectRenderValueProps<ITEM> = {
   item: ITEM;
 };
 
-export type PropGetItemLabel<ITEM> = (item: ITEM) => string;
-export type PropGetItemKey<ITEM> = (item: ITEM) => string | number;
-export type PropGetItemGroupKey<ITEM> = (
+export type SelectPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type SelectPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+export type SelectPropGetItemGroupKey<ITEM> = (
   item: ITEM,
 ) => string | number | undefined;
-export type PropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
-export type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
-export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
+export type SelectPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+export type SelectPropGetGroupKey<GROUP> = (group: GROUP) => string | number;
+export type SelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 export type PropRenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
 ) => React.ReactElement | null;
 export type PropRenderValue<ITEM> = (
-  props: RenderValueProps<ITEM>,
+  props: SelectRenderValueProps<ITEM>,
 ) => React.ReactElement | null;
 
+export type SelectPropOnChange<ITEM> = (
+  value: ITEM | null,
+  props: { e: React.SyntheticEvent },
+) => void;
+
 export type SelectProps<
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
+  ITEM = SelectItemDefault,
+  GROUP = SelectGroupDefault,
 > = PropsWithHTMLAttributesAndRef<
   {
     items: ITEM[];
-    onChange: (props: { value: ITEM | null; e: React.SyntheticEvent }) => void;
+    onChange: SelectPropOnChange<ITEM>;
     disabled?: boolean;
     form?: PropForm;
     dropdownForm?: 'default' | 'brick' | 'round';
@@ -57,7 +64,6 @@ export type SelectProps<
     view?: PropView;
     status?: PropStatus;
     focused?: boolean;
-    multiple?: boolean;
     placeholder?: string;
     ariaLabel?: string;
     dropdownClassName?: string;
@@ -66,57 +72,70 @@ export type SelectProps<
     name?: string;
     isLoading?: boolean;
     labelForEmptyItems?: string;
-    value?: PropValue<ITEM>;
+    value?: SelectPropValue<ITEM>;
     renderItem?: PropRenderItem<ITEM>;
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     inputRef?: React.RefObject<HTMLInputElement>;
     groups?: GROUP[];
-    getItemLabel?: PropGetItemLabel<ITEM>;
-    getItemKey?: PropGetItemKey<ITEM>;
-    getItemGroupKey?: PropGetItemGroupKey<ITEM>;
-    getItemDisabled?: PropGetItemDisabled<ITEM>;
-    getGroupLabel?: PropGetGroupLabel<GROUP>;
-    getGroupKey?: PropGetGroupKey<GROUP>;
+    getItemLabel?: SelectPropGetItemLabel<ITEM>;
+    getItemKey?: SelectPropGetItemKey<ITEM>;
+    getItemGroupKey?: SelectPropGetItemGroupKey<ITEM>;
+    getItemDisabled?: SelectPropGetItemDisabled<ITEM>;
+    getGroupLabel?: SelectPropGetGroupLabel<GROUP>;
+    getGroupKey?: SelectPropGetGroupKey<GROUP>;
     label?: string;
     labelIcon?: IconComponent;
     labelPosition?: 'top' | 'left';
     caption?: string;
+    virtualScroll?: boolean;
+    onScrollToBottom?: () => void;
+    onDropdownOpen?: (isOpen: boolean) => void;
+    dropdownOpen?: boolean;
+    ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
   },
   HTMLDivElement
 > &
-  (ITEM extends { label: DefaultItem['label'] }
+  (ITEM extends { label: SelectItemDefault['label'] }
     ? {}
-    : { getItemLabel: PropGetItemLabel<ITEM> }) &
-  (ITEM extends { id: DefaultItem['id'] }
+    : { getItemLabel: SelectPropGetItemLabel<ITEM> }) &
+  (ITEM extends { id: SelectItemDefault['id'] }
     ? {}
-    : { getItemKey: PropGetItemKey<ITEM> }) &
-  (GROUP extends { label: DefaultGroup['label'] }
+    : { getItemKey: SelectPropGetItemKey<ITEM> }) &
+  (GROUP extends { label: SelectGroupDefault['label'] }
     ? {}
-    : { getGroupLabel: PropGetGroupLabel<GROUP> }) &
-  (GROUP extends { id: DefaultGroup['id'] }
+    : { getGroupLabel: SelectPropGetGroupLabel<GROUP> }) &
+  (GROUP extends { id: SelectGroupDefault['id'] }
     ? {}
-    : { getGroupKey: PropGetGroupKey<GROUP> });
+    : { getGroupKey: SelectPropGetGroupKey<GROUP> });
 
-export type SelectComponent = <ITEM = DefaultItem, GROUP = DefaultGroup>(
+export type SelectComponent = <
+  ITEM = SelectItemDefault,
+  GROUP = SelectGroupDefault,
+>(
   props: SelectProps<ITEM, GROUP>,
 ) => React.ReactElement | null;
 
-export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
-export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) =>
-  item.label;
-export const defaultGetItemGroupKey: PropGetItemGroupKey<DefaultItem> = (
+export const defaultGetItemKey: SelectPropGetItemKey<SelectItemDefault> = (
   item,
-) => item.groupId;
-export const defaultGetItemDisabled: PropGetItemDisabled<DefaultItem> = (
+) => item.id;
+export const defaultGetItemLabel: SelectPropGetItemLabel<SelectItemDefault> = (
   item,
-) => item.disabled;
+) => item.label;
+export const defaultGetItemGroupKey: SelectPropGetItemGroupKey<
+  SelectItemDefault
+> = (item) => item.groupId;
+export const defaultGetItemDisabled: SelectPropGetItemDisabled<
+  SelectItemDefault
+> = (item) => item.disabled;
 
-export const defaultGetGroupKey: PropGetGroupKey<DefaultGroup> = (group) =>
-  group.id;
-export const defaultGetGroupLabel: PropGetGroupLabel<DefaultGroup> = (group) =>
-  group.label;
+export const defaultGetGroupKey: SelectPropGetGroupKey<SelectGroupDefault> = (
+  group,
+) => group.id;
+export const defaultGetGroupLabel: SelectPropGetGroupLabel<
+  SelectGroupDefault
+> = (group) => group.label;
 
 export function withDefaultGetters<ITEM, GROUP>(
   props: SelectProps<ITEM, GROUP>,

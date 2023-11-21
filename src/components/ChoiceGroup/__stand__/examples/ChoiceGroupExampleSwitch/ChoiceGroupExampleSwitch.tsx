@@ -16,7 +16,7 @@ export const ChoiceGroupExampleSwitchPolar = () => {
     <Example>
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={itemsPolar}
         getItemLabel={(item) => item}
         name="ChoiceGroupExampleSwitchPolar"
@@ -32,7 +32,7 @@ export const ChoiceGroupExampleSwitchLetters = () => {
     <Example>
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={itemsLetters}
         getItemLabel={(item) => item}
         name="ChoiceGroupExampleSwitchLetters"
@@ -48,7 +48,7 @@ export const ChoiceGroupExampleSwitchMode = () => {
     <Example>
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={itemsMode}
         getItemLabel={(item) => item}
         name="ChoiceGroupExampleSwitchMode"

@@ -10,15 +10,11 @@ export const DatePickerExampleRequired = () => {
     <Example col={1}>
       <DatePicker
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         label="Обязательное"
         required
       />
-      <DatePicker
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        label="Необязательное"
-      />
+      <DatePicker value={value} onChange={setValue} label="Необязательное" />
     </Example>
   );
 };

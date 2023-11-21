@@ -35,19 +35,19 @@ export const TabsExampleIcon = () => {
     <Example col={1}>
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLeftIcon={getItemIcon}
       />
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemRightIcon={getItemIcon}
       />
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLeftIcon={getItemIcon}
         onlyIcon

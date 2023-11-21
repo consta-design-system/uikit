@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { Select } from '../../../Select';
+import { Select } from '##/components/Select';
 
 export const SelectExampleCustomTypes = () => {
   const [value, setValue] = useState<string | null>();
@@ -11,7 +11,7 @@ export const SelectExampleCustomTypes = () => {
         placeholder="Выберите значение"
         items={['Первый', 'Второй', 'Третий']}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         getItemKey={(item) => item}
         getItemLabel={(item) => item}
       />
@@ -54,7 +54,7 @@ export const SelectExampleCustomTypesWithGroups = () => {
         items={items}
         groups={groups}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         getItemKey={(item) => item.name}
         getItemLabel={(item) => item.name}
         getItemGroupKey={(item) => item.group}
