@@ -16,7 +16,7 @@
   "peerDependencies": {
     "@bem-react/classname": "^1.6.0",
     "@bem-react/classnames": "^1.3.10",
-    "@consta/icons": "^0.11.0",
+    "@consta/icons": "^1.0.0-beta.1",
     "compute-scroll-into-view": "^1.0.17",
     "date-fns": "^2.30.0",
     "react": ">= 16.8.0",
@@ -104,7 +104,7 @@
     "@babel/preset-typescript": "^7.18.6",
     "@bem/sdk.naming.cell.match": "^0.1.3",
     "@bem/sdk.naming.presets": "^0.2.3",
-    "@consta/stand": "^0.0.118",
+    "@consta/stand": "^0.0.133",
     "@mdx-js/loader": "^2.1.5",
     "@oclif/command": "^1.8.16",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
