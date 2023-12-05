@@ -25,7 +25,7 @@ jobs:
       # Устанавливаем Node.JS для сборки приложения
       - uses: actions/setup-node@v1
         with:
-          node-version: '16'
+          node-version: 18
 
       - name: Install yarn
         id: yarn-setup
