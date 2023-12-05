@@ -9,7 +9,7 @@ import {
 Этот хук позволяет получить значение CSS свойств. Хук имеет подписку на изменение темы, и всегда возвращает актуальные свойства.
 
 ```tsx
-export { useStyleProps } from '@consta/uikit/useStyleProps';
+import { useStyleProps } from '@consta/uikit/useStyleProps';
 ```
 
 <MdxMenu>
@@ -109,7 +109,7 @@ type UseStyleProps = <
 `getStyleProps` делает все тоже самое что и `useStyleProps` за исключением подписки на изменение темы.
 
 ```tsx
-export { getStyleProps } from '@consta/uikit/useStyleProps';
+import { getStyleProps } from '@consta/uikit/useStyleProps';
 ```
 
 Если передать название `css` свойства, то результатом будет его значение, если же передать массив названий - результатом будет объект `{key:value}`
