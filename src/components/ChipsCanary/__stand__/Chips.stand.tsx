@@ -4,7 +4,7 @@ export default createStand({
   title: 'Chips',
   id: 'Chips',
   group: 'components',
-  description: 'Компактные элементы, представляющие входные данные. ',
+  description: 'Компактные элементы, которые представляют входные данные. ',
   version: '4.28.0',
   status: 'canary',
   alias: ['Чипы', 'кнопки', 'выбор'],
