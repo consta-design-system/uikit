@@ -1,10 +1,13 @@
-#### Установите пакет
+## Установите зависимости
 
 `yarn add @consta/uikit` или `npm install @consta/uikit`
 
-#### Подключите тему
+Так же установите `peerDependencies` из пакета [`@consta/uikit`](https://github.com/consta-design-system/uikit/blob/master/package.json)
 
-Тему обязательно нужно подключать в корне приложения, так, чтобы все компоненты `@consta/uikit` были вложены в компонент [Theme](##LIBS.LIB.STAND/lib:uikit/stand:components-theme-stable).
+## Подключите тему
+
+Тему обязательно нужно подключать в корне приложения, так,
+чтобы все компоненты `@consta/uikit` были вложены в компонент [Theme](##LIBS.LIB.STAND/lib:uikit/stand:components-theme-stable).
 
 ```tsx
 import React from 'react';
@@ -18,4 +21,4 @@ const App = () => (
 );
 ```
 
-#### Всë!
+## Всë!
