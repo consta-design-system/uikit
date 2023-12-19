@@ -32,8 +32,6 @@ const Variants = () => {
 
   const [value, setValue] = React.useState<Item | null>(null);
 
-  const onChange = ({ value }: { value: Item }) => setValue(value);
-
   return (
     <form style={direction === 'column' ? { maxWidth: 200 } : undefined}>
       <RadioGroup
@@ -42,7 +40,7 @@ const Variants = () => {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={disabledItem ? (item) => item.disabled : undefined}
-        onChange={onChange}
+        onChange={setValue}
         name="RadioGroupVariants"
         direction={direction}
         size={size}

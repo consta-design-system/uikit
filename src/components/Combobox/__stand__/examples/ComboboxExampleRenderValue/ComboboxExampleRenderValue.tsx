@@ -31,7 +31,7 @@ export function ComboboxExampleRenderValue() {
         placeholder="Выберите вариант"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         renderValue={({ item }) => (
           <div>
             <span role="img" aria-label="Panda">

@@ -13,7 +13,7 @@ export const RadioGroupExampleDisabled = () => {
         value={value}
         items={simpleItems}
         getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         disabled
       />
     </Example>
@@ -30,7 +30,7 @@ export const RadioGroupExampleDisabledItem = () => {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

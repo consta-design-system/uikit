@@ -19,11 +19,23 @@ const Variants = () => {
   const getStepContent = (stepNumber: number) => {
     switch (stepNumber) {
       case 0:
-        return <Text view="primary">Содержимое первого шага</Text>;
+        return (
+          <Text view="primary" size="m" lineHeight="m">
+            Содержимое первого шага
+          </Text>
+        );
       case 1:
-        return <Text view="primary">Содержимое второго шага</Text>;
+        return (
+          <Text view="primary" size="m" lineHeight="m">
+            Содержимое второго шага
+          </Text>
+        );
       case 2:
-        return <Text view="brand">Содержимое шага № 3</Text>;
+        return (
+          <Text view="brand" size="m" lineHeight="m">
+            Содержимое шага № 3
+          </Text>
+        );
       default:
         return `unknown ${stepNumber} step`;
     }
@@ -43,7 +55,7 @@ const Variants = () => {
     setSkippedSteps([...skippedSteps, activeStep]);
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const handleChange = ({ value }: { value: SimpleItem | null }) => {
+  const handleChange = (value: SimpleItem | null) => {
     setSkippedSteps([...skippedSteps, activeStep]);
     setActiveStep(getStepIndex(value));
   };

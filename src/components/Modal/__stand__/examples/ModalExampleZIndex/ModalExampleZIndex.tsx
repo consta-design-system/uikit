@@ -5,7 +5,7 @@ import { withTooltip } from '../../../../../hocs/withTooltip/withTooltip';
 import { useFlag } from '../../../../../hooks/useFlag/useFlag';
 import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { Button } from '../../../../Button/Button';
-import { Select } from '../../../../Select/Select';
+import { Select } from '../../../../SelectDeprecated/SelectDeprecated';
 import { Modal } from '../../../Modal';
 
 const ButtonWithTooltip = withTooltip({ mode: 'click', content: 'Я тултип' })(

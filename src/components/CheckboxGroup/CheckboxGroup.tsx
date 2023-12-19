@@ -57,6 +57,7 @@ const CheckboxGroupRender = (
         const { className, ...atributes } = getItemAttributes(item) ?? {};
         return (
           <Checkbox
+            {...atributes}
             key={getItemKey(item) ?? getItemLabel(item)}
             align={align}
             label={getItemLabel(item)}
@@ -66,9 +67,8 @@ const CheckboxGroupRender = (
             ref={getItemRef(item)}
             disabled={disabled || getItemDisabled?.(item)}
             checked={getChecked(item)}
-            onChange={({ e }) => getOnChange(item)(e)}
+            onChange={getOnChange(item)}
             className={cnCheckboxGroup('Item', [className])}
-            {...atributes}
           />
         );
       })}

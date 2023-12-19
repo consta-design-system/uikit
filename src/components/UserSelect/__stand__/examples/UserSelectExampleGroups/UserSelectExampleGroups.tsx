@@ -57,7 +57,7 @@ export function UserSelectExampleGroups() {
         placeholder="Выберите пользователя"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         groups={groups}
       />
     </Example>

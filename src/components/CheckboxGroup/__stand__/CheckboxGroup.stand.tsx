@@ -5,7 +5,7 @@ export default createStand({
   id: 'CheckboxGroup',
   group: 'components',
   description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
-  version: '1.10.11',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'checkboxgroup-vqb15s',
   alias: ['поле', 'галочка', 'ввод', 'чекбокс', 'группа'],

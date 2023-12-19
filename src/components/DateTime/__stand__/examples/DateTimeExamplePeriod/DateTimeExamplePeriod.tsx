@@ -10,7 +10,7 @@ export const DateTimeExamplePeriod = () => {
     <Example>
       <DateTime
         value={rangeValue}
-        onChangeRange={({ value }) => setRangeValue(value)}
+        onChangeRange={setRangeValue}
         view="slider"
       />
     </Example>

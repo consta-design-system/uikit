@@ -12,7 +12,7 @@ export const SliderExampleTooltip = () => {
         step={5}
         range
         label={`Значение ${value[0]}-${value[1]}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         withTooltip
       />

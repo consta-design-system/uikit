@@ -3,7 +3,7 @@ import './DragNDropFieldVariants.css';
 import { useBoolean, useNumber, useText } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
-import { Attachment } from '##/components/Attachment/Attachment';
+import { Attachment } from '##/components/AttachmentDeprecated/AttachmentDeprecated';
 import { cn } from '##/utils/bem';
 
 import { DragNDropField } from '../DragNDropField';

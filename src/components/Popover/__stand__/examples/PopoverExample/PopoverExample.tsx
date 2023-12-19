@@ -25,7 +25,9 @@ export const PopoverPositionedByCoordsExample = () => {
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setPosition(undefined)}
         >
-          <Text>Область, в которой работает отслеживание мышки</Text>
+          <Text size="m" view="primary" lineHeight="m">
+            Область, в которой работает отслеживание мышки
+          </Text>
         </div>
       </Example>
       <Popover
@@ -39,11 +41,13 @@ export const PopoverPositionedByCoordsExample = () => {
       >
         {(direction) => (
           <div className={cnPopoverExample('Content', { for: 'position' })}>
-            <Text size="xs">
+            <Text size="xs" view="primary" lineHeight="m">
               Это содержимое поповера: здесь может быть что угодно, например,
               этот текст.
             </Text>
-            <Text size="xs">Направление: {direction}</Text>
+            <Text size="xs" view="primary" lineHeight="m">
+              Направление: {direction}
+            </Text>
           </div>
         )}
       </Popover>
@@ -83,7 +87,7 @@ export const PopoverPositionedByAnchorExample = () => {
           equalAnchorWidth={false}
         >
           <div className={cnPopoverExample('Content')}>
-            <Text size="xs">
+            <Text size="xs" view="primary" lineHeight="m">
               Это содержимое поповера: здесь может быть что угодно, например,
               этот текст.
             </Text>

@@ -16,7 +16,9 @@ export const MixCardExampleShadow = () => {
           shadow: true,
         })}
       >
-        <Text>Карточка с тенью</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Карточка с тенью
+        </Text>
       </div>
       <div
         className={cnMixCard({
@@ -27,7 +29,9 @@ export const MixCardExampleShadow = () => {
           shadow: false,
         })}
       >
-        <Text>Карточка без тени</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Карточка без тени
+        </Text>
       </div>
     </Example>
   );

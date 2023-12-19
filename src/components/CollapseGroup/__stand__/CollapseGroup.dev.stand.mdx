@@ -178,7 +178,7 @@ const defaultOpened = items.map((_, index) => index);
 const CollapseGroupExampleControl = () => {
   const [opened, setOpened] = useState<number[] | null>(defaultOpened);
 
-  return <CollapseGroup items={items} opened={opened} onOpen={({ value }) => setOpened(value)} />;
+  return <CollapseGroup items={items} opened={opened} onOpen={setOpened} />;
 };
 ```
 

@@ -44,7 +44,7 @@ export const LayoutExampleFixed = () => {
           fixed
           className={cnLayoutExampleFixed('Header')}
         >
-          <Text>Заголовок</Text>
+          <Text view="primary" size="m">Заголовок</Text>
         </Layout>
       )}
       <Layout
@@ -52,10 +52,10 @@ export const LayoutExampleFixed = () => {
         className={cnLayoutExampleFixed('Content', { direction })}
       >
         <Layout className={cnLayoutExampleFixed('Block')} flex={flexBlock1}>
-          <Text>Контент</Text>
+          <Text view="primary" size="m">Контент</Text>
         </Layout>
         <Layout className={cnLayoutExampleFixed('Block')} flex={flexBlock2}>
-          <Text>Контент</Text>
+          <Text view="primary" size="m">Контент</Text>
         </Layout>
       </Layout>
       {verticalAlign === 'bottom' && (
@@ -65,7 +65,7 @@ export const LayoutExampleFixed = () => {
           fixed
           className={cnLayoutExampleFixed('Header')}
         >
-          <Text>Заголовок</Text>
+          <Text view="primary" size="m">Заголовок</Text>
         </Layout>
       )}
     </Layout>

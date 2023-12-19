@@ -3,7 +3,7 @@ import React from 'react';
 
 import { cnMixSpace } from '../../../../../mixs/MixSpace/MixSpace';
 import { Button } from '../../../../Button/Button';
-import { Select } from '../../../../Select/Select';
+import { Select } from '../../../../SelectDeprecated/SelectDeprecated';
 import { TextField } from '../../../../TextField/TextField';
 import { items } from '../../../__mocks__/data.mock';
 import { FieldGroup } from '../../../FieldGroup';

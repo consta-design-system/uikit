@@ -5,7 +5,7 @@ export default createStand({
   id: 'DatePicker',
   group: 'components',
   description: 'Поле, в котором можно выбрать дату или период.',
-  version: '3.7.0',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'datepicker-2q3e43',
   alias: [

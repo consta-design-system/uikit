@@ -9,7 +9,9 @@ export function FileFieldExampleWithoutRenderProp() {
   return (
     <Example>
       <FileField id="FileFieldExampleWithoutRenderProp">
-        <Text>Нажми меня</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Нажми меня
+        </Text>
       </FileField>
     </Example>
   );

@@ -17,7 +17,7 @@ export const CheckboxGroupExampleSize = () => {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="CheckboxGroup"
         direction="row"
         size="m"
@@ -28,7 +28,7 @@ export const CheckboxGroupExampleSize = () => {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="CheckboxGroup"
         direction="row"
         size="l"

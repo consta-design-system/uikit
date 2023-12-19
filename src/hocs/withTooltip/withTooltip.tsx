@@ -3,7 +3,7 @@ import React, { useCallback, useRef } from 'react';
 import {
   Tooltip,
   TooltipProps as TooltipComponentProps,
-} from '##/components/TooltipCanary';
+} from '##/components/Tooltip';
 import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';

@@ -1,66 +1,76 @@
 import './Pagination.variants.css';
 
 import { useBoolean, useNumber, useSelect } from '@consta/stand';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { cn } from '../../../utils/bem';
+import { Pagination } from '../Pagination';
 import {
-  HotKeys,
-  Pagination,
-  paginationDefaultForm,
-  paginationDefaultPosition,
-  paginationDefaultSize,
-  paginationDefaultType,
-  paginationForms,
-  paginationPositions,
-  paginationSizes,
-  paginationTypes,
-} from '../Pagination';
+  PaginationPropArrow,
+  paginationPropForm,
+  paginationPropFormDefault,
+  PaginationPropHotKey,
+  paginationPropSize,
+  paginationPropSizeDefault,
+  paginationPropType,
+} from '../types';
 
 const cnPaginationVariants = cn('PaginationVariants');
 
 const Variants = () => {
-  const pages = useNumber('totalPages', 5);
-  const form = useSelect('form', paginationForms, paginationDefaultForm);
-  const size = useSelect('size', paginationSizes, paginationDefaultSize);
-  const type = useSelect('type', paginationTypes, paginationDefaultType);
+  const pages = useNumber('totalPages', 15);
+  const form = useSelect('form', paginationPropForm, paginationPropFormDefault);
+  const size = useSelect('size', paginationPropSize, paginationPropSizeDefault);
+  const type = useSelect('type', paginationPropType, 'default');
+  const showFirstPage = useBoolean('showFirstPage', true, type === 'default');
+  const showLastPage = useBoolean('showLastPage', true, type === 'default');
+  const visibleCount = useNumber('visibleCount', 7, type === 'default');
 
-  const [currentPage, setCurrentPage] = React.useState<number>(0);
-
-  const minifiedProp = useBoolean('minified', false);
-  const positionProp = useSelect(
-    'position',
-    paginationPositions,
-    paginationDefaultPosition,
+  const withOuterMastArrows = useBoolean('withOuterMastArrows', true);
+  const arrowsType = useSelect(
+    'arrowsType',
+    ['withHotkey', 'icon', 'hidden'],
+    'withHotkey',
   );
 
-  const hotKeys: HotKeys = {
-    prevPage: {
-      label: '← Shift',
-      values: ['Shift', 'ArrowLeft'],
-    },
-    nextPage: {
-      label: 'Shift →',
-      values: ['Shift', 'ArrowRight'],
-    },
-  };
+  const [currentPage, setCurrentPage] = React.useState<number>(14);
 
-  const handleChange = (pageNumber: number): void => {
-    setCurrentPage(pageNumber);
-  };
+  const hotKeys: [PaginationPropHotKey, PaginationPropHotKey] = [
+    {
+      label: '← Shift',
+      keys: ['Shift', 'ArrowLeft'],
+    },
+    {
+      label: 'Shift →',
+      keys: ['Shift', 'ArrowRight'],
+    },
+  ];
+
+  const arrows: [PaginationPropArrow?, PaginationPropArrow?] = useMemo(() => {
+    if (arrowsType === 'hidden') {
+      return [false, false];
+    }
+    if (arrowsType === 'withHotkey') {
+      return [{ label: 'Назад' }, { label: 'Вперёд' }];
+    }
+    return [true, true];
+  }, [arrowsType]);
 
   return (
     <div className={cnPaginationVariants()}>
       <Pagination
-        currentPage={currentPage}
-        onChange={handleChange}
-        totalPages={Number(pages) > 0 ? Number(pages) : 1}
+        value={currentPage}
+        onChange={setCurrentPage}
+        items={pages}
         form={form}
+        visibleCount={visibleCount}
+        showFirstPage={showFirstPage}
+        showLastPage={showLastPage}
         size={size}
+        outerMostArrows={withOuterMastArrows ? [true, true] : undefined}
         type={type}
-        position={positionProp as never}
-        minified={minifiedProp}
-        hotkeys={hotKeys}
+        arrows={arrows}
+        hotKeys={hotKeys}
       />
     </div>
   );

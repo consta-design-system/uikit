@@ -5,7 +5,7 @@ export default createStand({
   id: 'SwitchGroup',
   group: 'components',
   description: 'Группа переключателей.',
-  version: '1.11.4',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'switchgroup-b4cpro',
   alias: ['поле', 'ввод', 'переключатель', 'группа'],

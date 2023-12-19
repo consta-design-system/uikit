@@ -8,16 +8,17 @@ import { IconSelectOpen } from '@consta/icons/IconSelectOpen';
 import React, { forwardRef, useCallback, useEffect } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
-import { useFlag } from '../../hooks/useFlag/useFlag';
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { useMutableRef } from '../../hooks/useMutableRef/useMutableRef';
-import { useSortSteps } from '../../hooks/useSortSteps/useSortSteps';
-import { cn } from '../../utils/bem';
-import { getByMap } from '../../utils/getByMap';
-import { isString } from '../../utils/type-guards';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { FieldCaption } from '../FieldCaption/FieldCaption';
-import { FieldLabel } from '../FieldLabel/FieldLabel';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { FieldCaption } from '##/components/FieldCaption/FieldCaption';
+import { FieldLabel } from '##/components/FieldLabel/FieldLabel';
+import { useFlag } from '##/hooks/useFlag/useFlag';
+import { useForkRef } from '##/hooks/useForkRef/useForkRef';
+import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
+import { useSortSteps } from '##/hooks/useSortSteps/useSortSteps';
+import { cn } from '##/utils/bem';
+import { getByMap } from '##/utils/getByMap';
+import { isString } from '##/utils/type-guards';
+
 import {
   getIncrementFlag,
   getTypeForRender,
@@ -30,7 +31,6 @@ import {
   TextFieldProps,
   textFieldPropSizeDefault,
   textFieldPropViewDefault,
-  textFieldPropWidthDefault,
 } from './types';
 
 export const COMPONENT_NAME = 'TextField' as const;
@@ -47,6 +47,7 @@ export const TextFieldRender = <TYPE extends string>(
     className,
     type = 'text',
     value,
+    defaultValue,
     onChange,
     id,
     name,
@@ -62,7 +63,6 @@ export const TextFieldRender = <TYPE extends string>(
     form = textFieldPropFormDefault,
     state,
     status,
-    width = textFieldPropWidthDefault,
     onBlur,
     onFocus,
     autoFocus = false,
@@ -130,7 +130,11 @@ export const TextFieldRender = <TYPE extends string>(
   > = useCallback(
     (e) => {
       !disabled &&
-        onChangeRef.current?.({ e, id, name, value: e.target.value || null });
+        onChangeRef.current?.(e.target.value || null, {
+          e,
+          id,
+          name,
+        });
     },
     [id, name, disabled],
   );
@@ -147,7 +151,8 @@ export const TextFieldRender = <TYPE extends string>(
 
   const commonProps = {
     'className': cnTextField('Input'),
-    'value': value ?? '',
+    'value': value ?? undefined,
+    'defaultValue': defaultValue ?? undefined,
     'onChange': handleChange,
     maxLength,
     disabled,
@@ -164,7 +169,7 @@ export const TextFieldRender = <TYPE extends string>(
     onKeyPressCapture,
     onKeyUp,
     onKeyUpCapture,
-    'id': id ? id.toString() : '',
+    'id': id ? id.toString() : undefined,
     'aria-label': ariaLabel,
   };
 
@@ -175,11 +180,11 @@ export const TextFieldRender = <TYPE extends string>(
     onKeyDownProp?.(e);
     if (type === 'number' && typeof flag === 'boolean' && !disabled) {
       e.preventDefault();
-      onChangeRef.current?.({
+      const newValue = getValueByStep(sortedSteps, value, flag, min, max);
+      onChangeRef.current?.(newValue, {
         e,
         id,
         name,
-        value: getValueByStep(sortedSteps, value, flag, min, max),
       });
     }
   };
@@ -207,11 +212,10 @@ export const TextFieldRender = <TYPE extends string>(
   };
 
   const handleClear = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    onChangeRef.current?.({
+    onChangeRef.current?.(null, {
       e,
       id,
       name,
-      value: null,
     });
   }, []);
 
@@ -219,11 +223,11 @@ export const TextFieldRender = <TYPE extends string>(
     e: React.MouseEvent<HTMLButtonElement>,
     isIncrement = true,
   ) => {
-    onChangeRef.current?.({
+    const newValue = getValueByStep(sortedSteps, value, isIncrement, min, max);
+    onChangeRef.current?.(newValue, {
       e,
       id,
       name,
-      value: getValueByStep(sortedSteps, value, isIncrement, min, max),
     });
   };
 
@@ -243,7 +247,7 @@ export const TextFieldRender = <TYPE extends string>(
 
   return (
     <div
-      className={cnTextField({ labelPosition, size, view, width }, [className])}
+      className={cnTextField({ labelPosition, size, view }, [className])}
       ref={useForkRef([ref, textFieldRef])}
       {...rootProps}
       {...otherProps}

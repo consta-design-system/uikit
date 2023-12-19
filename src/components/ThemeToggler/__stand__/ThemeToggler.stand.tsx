@@ -5,7 +5,7 @@ export default createStand({
   id: 'ThemeToggler',
   group: 'components',
   description: 'Переключатель темы.',
-  version: '1.11.10',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'themetoggler-4wgsyd',
   alias: ['тема', 'переключатель'],

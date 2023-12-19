@@ -1,0 +1,107 @@
+.UserSelectItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: var(--color-control-typo-default);
+  background-color: var(--color-control-bg-clear);
+  font-size: var(--font-size);
+  cursor: pointer;
+
+  &_size {
+    &_s {
+      --font-size: var(--control-text-size-s);
+      --sub-info-space: var(--space-xs);
+      --sub-label-font-size: var(--size-text-2xs);
+    }
+
+    &_m {
+      --font-size: var(--control-text-size-m);
+      --sub-info-space: var(--space-s);
+      --sub-label-font-size: var(--size-text-xs);
+    }
+
+    &_l {
+      --font-size: var(--control-text-size-l);
+      --sub-info-space: var(--space-s);
+      --sub-label-font-size: var(--size-text-s);
+    }
+  }
+
+  &_disable {
+    color: var(--color-control-typo-disable);
+
+    & .UserSelectItem-AvatarContainer {
+      opacity: 0.6;
+    }
+  }
+
+  &_hovered {
+    background-color: var(--color-control-bg-clear-hover);
+  }
+
+  &_active {
+    color: var(--color-control-typo-secondary);
+  }
+
+  &_indent {
+    &_increased {
+      padding-left: calc(var(--horizontal-space) * 2.6);
+    }
+  }
+
+  &-AvatarContainer {
+    position: relative;
+  }
+
+  &-CheckIcon {
+    position: absolute;
+    right: calc(var(--space-2xs) * -1);
+    bottom: calc(var(--space-2xs) * -1);
+    width: var(--graphics-size-xs);
+    height: var(--graphics-size-xs);
+    padding: 0;
+    color: var(--color-control-bg-default);
+    background-color: var(--color-control-bg-primary);
+    border: 1px solid var(--color-control-bg-default);
+    border-radius: 50%;
+
+    &_animate {
+      &_entering,
+      &_entered,
+      &_exiting,
+      &_exited {
+        transition: 0.2s ease;
+        transition-property: opacity, transform;
+      }
+
+      &_entering,
+      &_entered {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &_exiting {
+        opacity: 0;
+        transform: scale(0.25);
+      }
+
+      &_exited {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
+  }
+
+  &-Info {
+    padding-left: var(--sub-info-space);
+  }
+
+  &-SubLabel {
+    opacity: 0.7;
+    font-size: var(--sub-label-font-size);
+
+    &_disable {
+      opacity: 1;
+    }
+  }
+}

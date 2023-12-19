@@ -12,12 +12,14 @@ export const textFieldPropSize = ['m', 'xs', 's', 'l'] as const;
 export type TextFieldPropSize = typeof textFieldPropSize[number];
 export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
 
-export type TextFieldPropOnChange = (args: TextFieldOnChangeArguments) => void;
+export type TextFieldPropOnChange = (
+  value: TextFieldPropValue,
+  params: TextFieldOnChangeArguments,
+) => void;
 export type TextFieldOnChangeArguments = {
   e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
-  value: TextFieldPropValue;
 };
 
 export const textFieldPropView = ['default', 'clear'] as const;
@@ -46,11 +48,6 @@ export const textFieldPropFormDefault: TextFieldPropForm = textFieldPropForm[0];
 export const textFieldPropStatus = ['alert', 'success', 'warning'] as const;
 export type TextFieldPropStatus = typeof textFieldPropStatus[number];
 
-export const textFieldPropWidth = ['default', 'full'] as const;
-export type TextFieldPropWidth = typeof textFieldPropWidth[number];
-export const textFieldPropWidthDefault: TextFieldPropWidth =
-  textFieldPropWidth[0];
-
 export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
   ?
       | {
@@ -69,6 +66,10 @@ export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
       maxRows?: never;
     };
 
+type InputRef<TYPE> = TYPE extends 'textarea'
+  ? { inputRef?: React.Ref<HTMLTextAreaElement> }
+  : { inputRef?: React.Ref<HTMLInputElement> };
+
 export type TextFieldPropRightSide<TYPE extends string> = TYPE extends
   | 'number'
   | 'password'
@@ -83,6 +84,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
   {
     className?: string;
     value?: TextFieldPropValue;
+    defaultValue?: TextFieldPropValue;
     cols?: number;
     onChange?: TextFieldPropOnChange;
     id?: TextFieldPropId;
@@ -95,7 +97,6 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     form?: TextFieldPropForm;
     state?: TextFieldPropStatus;
     status?: TextFieldPropStatus;
-    width?: TextFieldPropWidth;
     onFocus?: React.FocusEventHandler<HTMLElement>;
     onBlur?: React.FocusEventHandler<HTMLElement>;
     incrementButtons?: boolean;
@@ -112,7 +113,6 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     step?: number | string | number[];
     tabIndex?: number;
     inputContainerRef?: React.Ref<HTMLDivElement>;
-    inputRef?: React.Ref<HTMLTextAreaElement | HTMLInputElement>;
     ariaLabel?: string;
     iconSize?: IconPropSize;
     children?: never;
@@ -130,6 +130,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
   },
   HTMLDivElement
 > &
+  InputRef<TYPE> &
   TextFieldPropsTextareaType<TYPE> &
   TextFieldPropRightSide<TYPE> &
   React.RefAttributes<HTMLDivElement>;

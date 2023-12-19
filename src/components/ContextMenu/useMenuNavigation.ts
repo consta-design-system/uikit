@@ -5,13 +5,12 @@ import { usePrevious } from '##/hooks/usePrevious';
 import { useRefs } from '##/hooks/useRefs';
 import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 
-import { ContextMenuPropGetSubItems } from '../ContextMenuDeprecated/helpers';
-import { ContextMenuItemDefault } from './types';
+import { ContextMenuItemDefault, ContextMenuPropGetItemSubMenu } from './types';
 
 type UseMenuNavigationProps<ITEM = ContextMenuItemDefault> = {
   items: ITEM[];
   deleteLevel: () => void;
-  getItemSubMenu: ContextMenuPropGetSubItems<ITEM>;
+  getItemSubMenu: ContextMenuPropGetItemSubMenu<ITEM>;
   active: boolean;
   addLevel: (item: ITEM) => void;
   onEsc?: React.KeyboardEventHandler;

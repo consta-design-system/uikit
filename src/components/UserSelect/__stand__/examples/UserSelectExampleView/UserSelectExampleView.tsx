@@ -38,7 +38,7 @@ export function UserSelectExampleView() {
         view="clear"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

@@ -13,7 +13,7 @@ export const TabsExampleAs = () => {
     <Example col={1}>
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemAs={() => 'a'}
         getItemAttributes={(item) => ({ href: item })}

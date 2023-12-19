@@ -5,7 +5,7 @@ export default createStand({
   id: 'Loader',
   group: 'components',
   description: 'Прелоадер. Показывает, что информация загружается.',
-  version: '0.1.0',
+  version: '4.27.0',
   status: 'stable',
   sandbox: 'loader-fiypog',
   alias: ['загрузка', 'загрузщик'],

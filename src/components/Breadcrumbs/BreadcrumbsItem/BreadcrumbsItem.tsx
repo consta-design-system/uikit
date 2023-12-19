@@ -66,12 +66,12 @@ function BreadcrumbsItemRender<ITEM>(
       } as const);
 
   const handleClick: React.MouseEventHandler = (e) => {
-    item && onItemClickProp?.({ e, item });
+    item && onItemClickProp?.(item, { e });
   };
 
-  const onItemClick: BreadcrumbsPropOnItemClick<ITEM> = ({ e, item }) => {
+  const onItemClick: BreadcrumbsPropOnItemClick<ITEM> = (item, { e }) => {
     setOpen.off();
-    item && onItemClickProp?.({ e, item });
+    item && onItemClickProp?.(item, { e });
   };
 
   return (
@@ -95,6 +95,7 @@ function BreadcrumbsItemRender<ITEM>(
             onClick={handleClick}
             size={size}
             truncate={!onlyIcon}
+            lineHeight="m"
             {...linkProps}
           >
             {Icon &&

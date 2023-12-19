@@ -32,6 +32,13 @@ export type RadioGroupPropGetItemDisabled<ITEM> = (
   item: ITEM,
 ) => boolean | undefined;
 
+export type RadioGroupPropOnChange<ITEM> = (
+  value: ITEM,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
+
 export type RadioGroupProps<ITEM = RadioGroupDefaultItem> =
   PropsWithHTMLAttributesAndRef<
     {
@@ -41,10 +48,7 @@ export type RadioGroupProps<ITEM = RadioGroupDefaultItem> =
       getItemKey?: RadioGroupPropGetItemKey<ITEM>;
       getItemLabel?: RadioGroupPropGetItemLabel<ITEM>;
       getItemDisabled?: RadioGroupPropGetItemDisabled<ITEM>;
-      onChange: (props: {
-        e: React.ChangeEvent<HTMLInputElement>;
-        value: ITEM;
-      }) => void;
+      onChange?: RadioGroupPropOnChange<ITEM>;
       name?: string;
       direction?: RadioGroupDirection;
       size?: RadioGroupPropSize;

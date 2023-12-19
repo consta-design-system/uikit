@@ -9,7 +9,6 @@ import {
   TextFieldPropSize,
   TextFieldPropStatus,
   TextFieldPropView,
-  TextFieldPropWidth,
 } from '../TextField/TextField';
 
 export const datePickerPropType = [
@@ -42,10 +41,12 @@ export type DatePickerPropValue<TYPE extends DatePickerPropType> =
   | (TYPE extends Range ? DateRange : Date)
   | null;
 
-export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (props: {
-  value: DatePickerPropValue<TYPE>;
-  e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
-}) => void;
+export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (
+  value: DatePickerPropValue<TYPE>,
+  props: {
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
+  },
+) => void;
 
 export const datePickerPropDropdownForm = [
   'default',
@@ -55,10 +56,6 @@ export const datePickerPropDropdownForm = [
 export type DatePickerPropDropdownForm =
   typeof datePickerPropDropdownForm[number];
 export const datePickerPropDropdownFormDefault = datePickerPropDropdownForm[0];
-
-type DatePickerPropWidth<TYPE> = TYPE extends Range
-  ? TextFieldPropWidth
-  : never;
 
 type DatePickerPropInputRef<TYPE> = TYPE extends Range
   ? [React.Ref<HTMLInputElement>?, React.Ref<HTMLInputElement>?]
@@ -127,7 +124,6 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
       format?: string;
       separator?: string;
       dropdownForm?: DatePickerPropDropdownForm;
-      width?: DatePickerPropWidth<TYPE>;
       leftSide?: DatePickerPropSide<TYPE>;
       rightSide?: DatePickerPropSide<TYPE>;
       label?: string;

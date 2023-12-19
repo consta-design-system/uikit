@@ -37,10 +37,14 @@ import { Layout } from '@consta/uikit/Layout';
 ```tsx
 <Layout>
   <Layout flex={1}>
-    <Text>Это первый блок</Text>
+    <Text view="primary" size="m" lineHeight="m">
+      Это первый блок
+    </Text>
   </Layout>
   <Layout flex={2}>
-    <Text>А это второй блок, он в два раза шире первого</Text>
+    <Text view="primary" size="m" lineHeight="m">
+      А это второй блок, он в два раза шире первого
+    </Text>
   </Layout>
 </Layout>
 ```
@@ -59,10 +63,14 @@ export const LayoutExampleDirectionRow = () => {
   return (
     <Layout direction="row">
       <Layout flex={1}>
-        <Text>Первый блок</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Первый блок
+        </Text>
       </Layout>
       <Layout flex={1}>
-        <Text>Второй блок</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Второй блок
+        </Text>
       </Layout>
     </Layout>
   );
@@ -76,10 +84,14 @@ export const LayoutExampleDirectionColumn = () => {
   return (
     <Layout direction="column">
       <Layout flex={1}>
-        <Text>Первый блок</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Первый блок
+        </Text>
       </Layout>
       <Layout flex={1}>
-        <Text>Второй блок</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Второй блок
+        </Text>
       </Layout>
     </Layout>
   );
@@ -122,7 +134,9 @@ export const LayoutExampleAnchor = () => {
   return (
     <Layout direction="column" ref={scrollContainerRef}>
       <Layout>
-        <Text>Заголовок</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Заголовок
+        </Text>
       </Layout>
       <Layout direction="column">
         <Layout
@@ -131,10 +145,14 @@ export const LayoutExampleAnchor = () => {
           scrollContainerRef={scrollContainerRef}
           verticalAlign="top"
         >
-          <Text>Фиксированный элемент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Фиксированный элемент
+          </Text>
         </Layout>
         <Layout>
-          <Text>Контент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Контент
+          </Text>
         </Layout>
         <Layout
           fixed
@@ -142,10 +160,14 @@ export const LayoutExampleAnchor = () => {
           verticalAlign="bottom"
           anchorRef={fixedRef}
         >
-          <Text>Фиксированный элемент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Фиксированный элемент
+          </Text>
         </Layout>
         <Layout>
-          <Text>Контент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Контент
+          </Text>
         </Layout>
       </Layout>
     </Layout>

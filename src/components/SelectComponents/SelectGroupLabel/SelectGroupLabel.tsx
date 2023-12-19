@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { ListGroupLabel } from '##/components/ListCanary';
+import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
-import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { PropSize } from '../types';
 
-type SelectGroupLabelProps = PropsWithHTMLAttributes<
+type SelectGroupLabelProps = PropsWithHTMLAttributesAndRef<
   {
     label: string;
     size: PropSize;
@@ -14,8 +14,8 @@ type SelectGroupLabelProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export const SelectGroupLabel: React.FC<SelectGroupLabelProps> = (props) => {
-  const { indent, ...otherProps } = props;
-
-  return <ListGroupLabel {...otherProps} innerOffset={indent} />;
-};
+export const SelectGroupLabel: React.FC<SelectGroupLabelProps> = forwardRef(
+  ({ indent, ...otherProps }, ref) => (
+    <ListGroupLabel {...otherProps} ref={ref} innerOffset={indent} />
+  ),
+);

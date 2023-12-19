@@ -15,7 +15,9 @@ export const MixCardExampleSpace = () => {
           shadow: true,
         })}
       >
-        <Text>Отступы xs</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Отступы xs
+        </Text>
       </div>
       <div
         className={cnMixCard({
@@ -25,7 +27,9 @@ export const MixCardExampleSpace = () => {
           shadow: true,
         })}
       >
-        <Text>Отступы 5xl</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Отступы 5xl
+        </Text>
       </div>
     </Example>
   );

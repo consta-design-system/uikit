@@ -20,10 +20,12 @@ export const radioPropAlign = ['center', 'top'] as const;
 export type RadioPropAlign = typeof radioPropAlign[number];
 export const radioPropAlignDefault: RadioPropAlign = radioPropAlign[0];
 
-export type RadioPropOnChange = (object: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  checked: boolean;
-}) => void;
+export type RadioPropOnChange = (
+  checked: boolean,
+  params: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
 
 export type Props = {
   checked?: boolean;
@@ -33,7 +35,7 @@ export type Props = {
   disabled?: boolean;
   className?: string;
   label?: string;
-  onChange?: RadioPropOnChange;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   name?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -79,12 +81,6 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
       ...otherProps
     } = usePropsHandler(COMPONENT_NAME, props, radioRef);
 
-    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-      if (onChange) {
-        onChange({ e, checked: !checked });
-      }
-    };
-
     return (
       <label
         {...otherProps}
@@ -97,7 +93,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
           className={cnRadio('Input', [cnMixFocus()])}
           checked={checked}
           disabled={disabled}
-          onChange={handleChange}
+          onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
           readOnly={readOnly}

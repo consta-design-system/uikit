@@ -4,46 +4,30 @@
       --loaderBackgroundColor,
       var(--color-control-bg-primary)
     );
-  position: relative;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: calc(100% - var(--loader-size));
-  transform: translate(-50%, -50%);
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: calc(50% - (var(--loader-size) * 0.5));
-    left: calc(50% - (var(--loader-size) * 2 + var(--loader-gap)));
-    width: var(--loader-size);
-    height: var(--loader-size);
-    background: var(--backgroundColor);
-    border-radius: 50%;
-    animation: loader 1s ease infinite;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: calc(50% - (var(--loader-size) * 0.5));
-    left: calc(50% + (var(--loader-size) + var(--loader-gap)));
-    width: var(--loader-size);
-    height: var(--loader-size);
-    background: var(--backgroundColor);
-    border-radius: 50%;
-    animation: loader 1s -0.36s ease infinite;
-  }
+  display: inline-flex;
+  padding: calc(var(--loader-size) * 0.25);
+  gap: var(--loader-gap);
 
   &-Dot {
-    position: absolute;
-    top: calc(50% - (var(--loader-size) * 0.5));
-    left: calc(50% - (var(--loader-size) * 0.5));
     width: var(--loader-size);
     height: var(--loader-size);
     background: var(--backgroundColor);
     border-radius: 50%;
-    animation: loader 1s -0.18s ease infinite;
+    animation: var(--loader-dot-animation);
+
+    &_side {
+      &_left {
+        --loader-dot-animation: loader 1s ease infinite;
+      }
+
+      &_center {
+        --loader-dot-animation: loader 1s -0.18s ease infinite;
+      }
+
+      &_right {
+        --loader-dot-animation: loader 1s -0.36s ease infinite;
+      }
+    }
   }
 
   &_size {

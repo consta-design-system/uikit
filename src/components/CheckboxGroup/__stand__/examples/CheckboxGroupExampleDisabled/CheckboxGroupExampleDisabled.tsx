@@ -14,7 +14,7 @@ export const CheckboxGroupExampleDisabled = () => {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         direction="row"
         disabled
       />

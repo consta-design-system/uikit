@@ -65,7 +65,7 @@ export function ComboboxExampleGroups() {
         placeholder="Выберите вариант"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         groups={groups}
       />
     </Example>

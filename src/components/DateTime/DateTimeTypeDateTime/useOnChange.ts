@@ -33,30 +33,30 @@ export const useOnChange = (
   const onChangeRangeRef = useMutableRef(onChangeRange);
   const timeRef = useMutableRef(time);
 
-  const onDateChange: DateTimePropOnChange = useCallback(({ e, value }) => {
+  const onDateChange: DateTimePropOnChange = useCallback((value, { e }) => {
     const [hours, minutes, seconds] = getTime(timeRef.current);
-    onChangeRef.current?.({
+    const newValue = set(value, { hours, minutes, seconds });
+    onChangeRef.current?.(newValue, {
       e,
-      value: set(value, { hours, minutes, seconds }),
     });
   }, []);
 
   const onDateChangeRange: DateTimePropOnChangeRange<'date-time'> = useCallback(
-    ({ e, value }) => {
+    (value, { e }) => {
       const [hours, minutes, seconds] = getTime(timeRef.current);
-      onChangeRangeRef.current?.({
+      const newValue: DateRange = [
+        value[0] ? set(value[0], { hours, minutes, seconds }) : undefined,
+        value[1] ? set(value[1], { hours, minutes, seconds }) : undefined,
+      ];
+      onChangeRangeRef.current?.(newValue, {
         e,
-        value: [
-          value[0] ? set(value[0], { hours, minutes, seconds }) : undefined,
-          value[1] ? set(value[1], { hours, minutes, seconds }) : undefined,
-        ],
       });
     },
     [],
   );
 
-  const onTimeChange: DateTimePropOnChange = useCallback(({ e, value }) => {
-    onChangeRef.current?.({ e, value });
+  const onTimeChange: DateTimePropOnChange = useCallback((value, { e }) => {
+    onChangeRef.current?.(value, { e });
   }, []);
 
   useEffect(() => setTime(normalizeValue), [normalizeValue?.getTime()]);

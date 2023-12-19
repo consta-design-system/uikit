@@ -11,13 +11,13 @@ export const DatePickerExampleLabel = () => {
     <Example col={1}>
       <DatePicker
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         label="Лейбл"
         labelPosition="top"
       />
       <DatePicker
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         label="Лейбл"
         labelPosition="left"
       />
@@ -32,7 +32,7 @@ export const DatePickerExampleLabelIcon = () => {
     <Example>
       <DatePicker
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         label="Лейбл"
         labelIcon={IconQuestion}
       />

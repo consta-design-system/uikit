@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Attachment } from '../../../../Attachment/Attachment';
+import { Attachment } from '../../../../AttachmentDeprecated/AttachmentDeprecated';
 import { Text } from '../../../../Text/Text';
 import { DragNDropField } from '../../../DragNDropField';
 
@@ -11,7 +11,9 @@ export const DragNDropFieldExampleOnDropFiles = () => {
     <Example col={1}>
       <div>
         <DragNDropField multiple onDropFiles={setFiles}>
-          <Text>Перетяните файлы сюда</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Перетяните файлы сюда
+          </Text>
         </DragNDropField>
       </div>
       <div>

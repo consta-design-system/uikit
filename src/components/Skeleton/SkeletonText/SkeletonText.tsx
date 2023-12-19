@@ -9,15 +9,18 @@ import {
   textPropSizeDefault,
 } from '##/components/Text';
 import { cn } from '##/utils/bem';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { SkeletonBrick } from '../Skeleton';
 
-type SkeletonTextProps = {
-  className?: string;
-  rows: number;
-  fontSize?: TextPropSize;
-  lineHeight?: TextPropLineHeight;
-};
+type SkeletonTextProps = PropsWithHTMLAttributes<
+  {
+    rows: number;
+    fontSize?: TextPropSize;
+    lineHeight?: TextPropLineHeight;
+  },
+  HTMLDivElement
+>;
 
 const cnSkeletonText = cn('SkeletonText');
 
@@ -41,14 +44,20 @@ export const getRowWidth = (
   return '100%';
 };
 
-export const SkeletonText: React.FC<SkeletonTextProps> = ({
-  className,
-  rows,
-  fontSize = textPropSizeDefault,
-  lineHeight = textPropLineHeightDefault,
-}) => {
+export const SkeletonText: React.FC<SkeletonTextProps> = (
+  props: SkeletonTextProps,
+) => {
+  const {
+    className,
+    rows,
+    fontSize = textPropSizeDefault,
+    lineHeight = textPropLineHeightDefault,
+    ...otherProps
+  } = props;
+
   const varFontSize = `var(--size-text-${fontSize})`;
   const varLineHeight = `var(--line-height-text-${lineHeight})`;
+
   return (
     <div
       className={cnSkeletonText(null, [className])}
@@ -57,6 +66,7 @@ export const SkeletonText: React.FC<SkeletonTextProps> = ({
           чтобы анимация у всех строк запустилась заново */
         rows
       }
+      {...otherProps}
     >
       {new Array(rows).fill(null).map((_v, idx) => (
         <div

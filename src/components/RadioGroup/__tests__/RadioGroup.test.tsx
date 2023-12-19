@@ -8,10 +8,12 @@ type Item = {
   name: string;
   disabled?: boolean;
 };
-type OnChange = (props: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  value: Item;
-}) => void;
+type OnChange = (
+  value: Item,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
 
 const testId = 'RadioGroup';
 
@@ -103,9 +105,9 @@ describe('Компонент RadioGroup', () => {
         fireEvent.click(item);
 
         expect(handleChange).toHaveBeenCalledTimes(1);
-        expect(handleChange).toHaveBeenCalledWith(
-          expect.objectContaining({ value: items[0] }),
-        );
+        expect(handleChange).toHaveBeenCalledWith(items[0], {
+          e: expect.any(Object),
+        });
       });
     });
 

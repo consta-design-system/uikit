@@ -12,8 +12,6 @@ import {
   textFieldPropStatus,
   textFieldPropView,
   textFieldPropViewDefault,
-  textFieldPropWidth,
-  textFieldPropWidthDefault,
 } from '../TextField';
 
 const Variants = () => {
@@ -33,11 +31,6 @@ const Variants = () => {
   );
   const min = useNumber('min', 0, Boolean(incrementButtons));
   const max = useNumber('max', 150, Boolean(incrementButtons));
-  const width = useSelect(
-    'width',
-    textFieldPropWidth,
-    textFieldPropWidthDefault,
-  );
   const form = useSelect('form', textFieldPropForm, textFieldPropFormDefault);
   const status = useSelect('status', textFieldPropStatus);
   const size = useSelect('size', textFieldPropSize, textFieldPropSizeDefault);
@@ -75,14 +68,9 @@ const Variants = () => {
   const leftSide = leftSideType && leftSideSelect[leftSideType];
   const rightSide = rightSideType && rightSideSelect[rightSideType];
 
-  const handleChange = ({ value }: { value: string | null }) => {
-    setValue(value);
-  };
-
   return (
     <TextField
       value={value}
-      width={width}
       form={form}
       status={status}
       size={size}
@@ -99,7 +87,7 @@ const Variants = () => {
       minRows={minRows}
       maxRows={maxRows}
       placeholder={placeholder}
-      onChange={handleChange}
+      onChange={setValue}
       leftSide={leftSide}
       rightSide={rightSide}
       disabled={disabled}

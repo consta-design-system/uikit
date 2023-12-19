@@ -10,12 +10,7 @@ export const TagExampleMode = () => {
     <Example>
       <Tag onClick={() => {}} mode="button" label="Button" />
       <Tag mode="link" label="Link" href="#" />
-      <Tag
-        mode="check"
-        onChange={({ checked }) => setChecked(checked)}
-        label="Check"
-        checked={checked}
-      />
+      <Tag mode="check" onChange={setChecked} label="Check" checked={checked} />
       <Tag onCancel={() => {}} mode="cancel" label="Cancel" />
     </Example>
   );

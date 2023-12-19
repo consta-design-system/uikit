@@ -37,7 +37,7 @@ const Variants = () => {
         size={size}
         items={themeArray}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         direction={direction}
         view={view}
       />

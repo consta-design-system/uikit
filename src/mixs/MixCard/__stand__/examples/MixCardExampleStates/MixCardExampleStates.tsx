@@ -16,7 +16,9 @@ export const MixCardExampleStates = () => {
           shadow: true,
         })}
       >
-        <Text>alert</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          alert
+        </Text>
       </div>
       <div
         className={cnMixCard({
@@ -27,7 +29,9 @@ export const MixCardExampleStates = () => {
           shadow: true,
         })}
       >
-        <Text>warning</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          warning
+        </Text>
       </div>
       <div
         className={cnMixCard({
@@ -38,7 +42,9 @@ export const MixCardExampleStates = () => {
           shadow: true,
         })}
       >
-        <Text>success</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          success
+        </Text>
       </div>
     </Example>
   );

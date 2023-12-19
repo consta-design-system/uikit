@@ -6,13 +6,12 @@ import { TextField } from '../../../TextField';
 
 export const TextFieldExampleTextPlaceholder = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
       <TextField
         value={value}
-        onChange={handleChange}
+        onChange={setValue}
         placeholder="Здесь только цифры"
       />
     </Example>
@@ -21,29 +20,26 @@ export const TextFieldExampleTextPlaceholder = () => {
 
 export const TextFieldExampleTextValue = () => {
   const [value, setValue] = useState<string | null>('стопиццот');
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
-      <TextField value={value} onChange={handleChange} />
+      <TextField value={value} onChange={setValue} />
     </Example>
   );
 };
 
 export const TextFieldExampleTextLeft = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
-      <TextField leftSide="куда" value={value} onChange={handleChange} />
-      <TextField leftSide="кому" value={value} onChange={handleChange} />
+      <TextField leftSide="куда" value={value} onChange={setValue} />
+      <TextField leftSide="кому" value={value} onChange={setValue} />
     </Example>
   );
 };
 export const TextFieldExampleTextRight = () => {
   const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
@@ -51,7 +47,7 @@ export const TextFieldExampleTextRight = () => {
         leftSide={IconDiamond}
         rightSide="карат"
         value={value}
-        onChange={handleChange}
+        onChange={setValue}
       />
     </Example>
   );

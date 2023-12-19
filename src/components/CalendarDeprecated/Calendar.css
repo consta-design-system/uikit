@@ -1,3 +1,0 @@
-.Calendar {
-  --calendar-cell-width: calc(var(--control-height-s) + var(--space-2xs));
-}

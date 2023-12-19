@@ -1,6 +1,8 @@
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React from 'react';
 
+import { useFlag } from '##/hooks/useFlag';
+
 import {
   Radio,
   radioPropAlign,
@@ -18,11 +20,7 @@ const Variants = () => {
   const align = useSelect('align', radioPropAlign, radioPropAlignDefault);
   const label = useText('label', 'Это радиокнопка');
 
-  const [checked, setChecked] = React.useState<boolean>(false);
-
-  const handleChange = ({ checked }: { checked: boolean }): void => {
-    setChecked(checked);
-  };
+  const [checked, setChecked] = useFlag();
 
   return (
     <Radio
@@ -32,7 +30,7 @@ const Variants = () => {
       view={view}
       label={label}
       align={align}
-      onChange={handleChange}
+      onChange={setChecked.toggle}
     />
   );
 };

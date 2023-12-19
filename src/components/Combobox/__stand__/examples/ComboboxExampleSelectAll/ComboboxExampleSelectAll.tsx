@@ -63,9 +63,10 @@ export const ComboboxExampleSelectAll = () => {
     <Example col={1}>
       <Combobox
         placeholder="Выберите варианты"
+        allSelectedAllLabel="Все варианты"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         multiple
         selectAll
         groups={groups}

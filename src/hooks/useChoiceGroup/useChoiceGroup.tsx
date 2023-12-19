@@ -11,26 +11,30 @@ type UseChoiceGroupValues<ITEM, EVENT> = {
   getChecked: GetChecked<ITEM>;
 };
 
-export type CallbackWithMultiple<ITEM, EVENT> = (props: {
-  e: EVENT;
-  value: ITEM[] | null;
-}) => void;
+export type CallbackWithMultiple<ITEM, EVENT> = (
+  value: ITEM[] | null,
+  props: {
+    e: EVENT;
+  },
+) => void;
 
-export type CallbackWithoutMultiple<ITEM, EVENT> = (props: {
-  e: EVENT;
-  value: ITEM;
-}) => void;
+export type CallbackWithoutMultiple<ITEM, EVENT> = (
+  value: ITEM,
+  props: {
+    e: EVENT;
+  },
+) => void;
 
 type PropsWithMultiple<ITEM, EVENT> = {
   multiple: true;
   value: ITEM[] | null;
-  callBack: CallbackWithMultiple<ITEM, EVENT>;
+  callBack?: CallbackWithMultiple<ITEM, EVENT>;
 };
 
 type PropsWithoutMultiple<ITEM, EVENT> = {
   multiple: false;
   value: ITEM | null;
-  callBack: CallbackWithoutMultiple<ITEM, EVENT>;
+  callBack?: CallbackWithoutMultiple<ITEM, EVENT>;
 };
 
 type CommonProps<ITEM> = {
@@ -96,11 +100,11 @@ export function useChoiceGroup<ITEM, EVENT>(
         newValue = props.value ? [...props.value] : [];
         newValue.push(selectedItem);
       }
-      props.callBack({ e, value: newValue });
+      props.callBack?.(newValue, { e });
     }
 
     if (isNotMultiple(props)) {
-      props.callBack({ e, value: selectedItem });
+      props.callBack?.(selectedItem, { e });
     }
   };
 

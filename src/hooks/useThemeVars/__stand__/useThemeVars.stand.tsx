@@ -18,7 +18,7 @@ export default createStand({
     'тени',
   ],
   version: '1.11.10',
-  status: 'deprecated',
+  status: 'stable',
   sandbox: 'usethemevars-j54pt6',
   order: 10,
 });

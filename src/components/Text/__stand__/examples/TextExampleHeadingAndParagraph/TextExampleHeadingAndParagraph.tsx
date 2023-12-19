@@ -16,7 +16,6 @@ export const TextExampleHeadingAndParagraph = () => {
         transform="uppercase"
         view="primary"
         weight="bold"
-        type="h3"
       >
         Заголовок несет суть
       </Text>

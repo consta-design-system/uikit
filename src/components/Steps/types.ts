@@ -4,10 +4,12 @@ export const stepsSizes = ['m', 's', 'l'] as const;
 export type StepsPropSize = typeof stepsSizes[number];
 export const stepsDefaultSize: StepsPropSize = stepsSizes[0];
 
-export type StepsPropOnChange<ITEM> = (props: {
-  e: React.MouseEvent;
-  value: ITEM;
-}) => void;
+export type StepsPropOnChange<ITEM> = (
+  value: ITEM,
+  props: {
+    e: React.MouseEvent;
+  },
+) => void;
 
 export type StepsPropGetLabel<ITEM> = (item: ITEM) => string;
 export type StepsPropGetDisabled<ITEM> = (item: ITEM) => boolean | undefined;

@@ -5,7 +5,7 @@ type ValueNotMultiple<IS_NULLABLE_VALUE> = IS_NULLABLE_VALUE extends true
   ? number | null
   : number;
 
-type UseChoiceGroupIndexedParams<
+export type UseChoiceGroupIndexedParams<
   MULTIPLE extends boolean = false,
   IS_NULLABLE_VALUE extends boolean = false,
   EVENT = React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -16,12 +16,14 @@ type UseChoiceGroupIndexedParams<
         : ValueNotMultiple<IS_NULLABLE_VALUE>)
     | undefined;
   multiple: MULTIPLE;
-  callBack: (props: {
-    e: EVENT;
+  callBack: (
     value: MULTIPLE extends true
       ? ValueMultiple
-      : ValueNotMultiple<IS_NULLABLE_VALUE>;
-  }) => void;
+      : ValueNotMultiple<IS_NULLABLE_VALUE>,
+    props: {
+      e: EVENT;
+    },
+  ) => void;
   isNullableValue?: IS_NULLABLE_VALUE;
 };
 
@@ -69,15 +71,15 @@ export function useChoiceGroupIndexed<
         newValue = [...value];
         newValue.push(index);
       }
-      props.callBack({ e, value: newValue });
+      props.callBack(newValue, { e });
       return;
     }
 
     if (isNotMultiple(props)) {
       if (props.isNullableValue && getChecked(index)) {
-        props.callBack({ e, value: null });
+        props.callBack(null, { e });
       } else {
-        props.callBack({ e, value: index });
+        props.callBack(index, { e });
       }
     }
   };

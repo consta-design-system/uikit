@@ -20,9 +20,9 @@ type GetHandleSelectDateProps = {
 export function getHandleSelectDate(
   props: GetHandleSelectDateProps,
 ): HandleSelectDate {
-  return (callbackProps) => {
+  return (value, { e }) => {
     if (typeof props.onChange === 'function') {
-      props.onChange(callbackProps);
+      props.onChange(value, { e });
     }
 
     if (typeof props.onChangeRange === 'function') {
@@ -32,49 +32,36 @@ export function getHandleSelectDate(
 
       const [startDate, endDate] = currentValue;
 
-      if (
-        isDefined(startDate) &&
-        props.isEqualUnit(startDate, callbackProps.value)
-      ) {
-        return props.onChangeRange({
-          e: callbackProps.e,
-          value: [endDate, undefined],
+      if (isDefined(startDate) && props.isEqualUnit(startDate, value)) {
+        return props.onChangeRange([endDate, undefined], {
+          e,
         });
       }
 
-      if (
-        isDefined(endDate) &&
-        props.isEqualUnit(endDate, callbackProps.value)
-      ) {
-        return props.onChangeRange({
-          e: callbackProps.e,
-          value: [startDate, undefined],
+      if (isDefined(endDate) && props.isEqualUnit(endDate, value)) {
+        return props.onChangeRange([startDate, undefined], {
+          e,
         });
       }
 
       if (isDefined(startDate)) {
-        return props.onChangeRange({
-          e: callbackProps.e,
-          value:
-            startDate > callbackProps.value
-              ? [callbackProps.value, startDate]
-              : [startDate, callbackProps.value],
+        const newValue: DateRange =
+          startDate > value ? [value, startDate] : [startDate, value];
+        return props.onChangeRange(newValue, {
+          e,
         });
       }
 
       if (isDefined(endDate)) {
-        return props.onChangeRange({
-          e: callbackProps.e,
-          value:
-            endDate > callbackProps.value
-              ? [callbackProps.value, endDate]
-              : [endDate, callbackProps.value],
+        const newValue: DateRange =
+          endDate > value ? [value, endDate] : [endDate, value];
+        return props.onChangeRange(newValue, {
+          e,
         });
       }
 
-      props.onChangeRange({
-        e: callbackProps.e,
-        value: [callbackProps.value, undefined],
+      props.onChangeRange([value, undefined], {
+        e,
       });
     }
   };

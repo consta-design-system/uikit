@@ -80,7 +80,7 @@ export const getMonthsOfYear = (props: {
     const onClick =
       !disabled && onChange
         ? (e: React.MouseEvent<HTMLButtonElement>) =>
-            onChange({ e, value: date })
+            onChange(date, { e, value: date })
         : undefined;
     if (getYear(date) === currentYear) {
       return {

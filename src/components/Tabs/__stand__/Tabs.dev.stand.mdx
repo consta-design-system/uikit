@@ -84,7 +84,7 @@ export const TabsExample = () => {
   return (
     <Tabs
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       items={items}
       getItemLabel={getItemLabel}
     />
@@ -136,19 +136,19 @@ export const TabsExampleIcon = () => {
     <>
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLeftIcon={getItemIcon}
       />
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemRightIcon={getItemIcon}
       />
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLeftIcon={getItemIcon}
         onlyIcon
@@ -217,7 +217,7 @@ export const TabsExampleSide = () => {
   return (
     <Tabs
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       items={items}
       getItemRightSide={getItemRightSide}
       fitMode="scroll"
@@ -260,17 +260,8 @@ export const TabsExampleDisabled = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
     <>
-      <Tabs
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        items={items}
-      />
-      <Tabs
-        value={value}
-        onChange={({ value }) => setValue(value)}
-        items={items}
-        disabled
-      />
+      <Tabs value={value} onChange={setValue} items={items} />
+      <Tabs value={value} onChange={setValue} items={items} disabled />
     </>
   );
 };
@@ -297,7 +288,7 @@ export const TabsExampleAs = () => {
   return (
     <Tabs
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       items={items}
       getItemAs={() => 'a'}
       getItemAttributes={(item) => ({ href: item })}
@@ -329,21 +320,21 @@ export const TabsExampleSize = () => {
     <>
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         size="m"
       />
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         size="s"
       />
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         size="xs"
@@ -376,14 +367,14 @@ export const TabsExampleView = () => {
     <>
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         view="bordered"
       />
       <Tabs
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         view="clear"
@@ -443,7 +434,7 @@ export const TabsExampleRenderItem = () => {
   return (
     <Tabs
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       items={items}
       getItemLabel={(item) => item}
       size="m"
@@ -480,10 +471,13 @@ export type TabsItemDefault = {
   icon?: IconComponent;
 };
 
-type OnChange = (props: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  value: ITEM | null;
-}) => void;
+type OnChange<ITEM> = (
+  value: ITEM | null,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    value: ITEM | null;
+  },
+) => void;
 
 type RenderItem<ITEM, ELEMENT> = (props: {
   item: ITEM;
@@ -494,31 +488,101 @@ type RenderItem<ITEM, ELEMENT> = (props: {
   iconSize: IconPropSize;
   onlyIcon?: boolean;
 }) => React.ReactElement | null;
+
+export type TabsItemDefault = {
+  label: string | number;
+  leftIcon?: IconComponent;
+  rightIcon?: IconComponent;
+  rightSide?: React.ReactNode;
+  leftSide?: React.ReactNode;
+  disabled?: boolean;
+  as?: AsTags;
+  ref?: React.RefObject<HTMLElement>;
+  attributes?: AsAttributes;
+};
+
+export const tabsSizes = ['m', 's', 'xs'] as const;
+export type TabsPropSize = typeof tabsSizes[number];
+export const tabsDefaultSize: TabsPropSize = tabsSizes[0];
+
+export const tabsViews = ['bordered', 'clear'] as const;
+export type TabsPropView = typeof tabsViews[number];
+export const tabsDefaultView: TabsPropView = tabsViews[0];
+
+export const tabsLinePositions = ['bottom', 'top', 'left', 'right'] as const;
+export type TabsPropLinePosition = typeof tabsLinePositions[number];
+export const tabsDefaultLinePosition: TabsPropLinePosition = 'bottom';
+
+export const tabsFitModes = ['scroll', 'dropdown'] as const;
+export type TabsPropFitMode = typeof tabsFitModes[number];
+export const tabsDefaultFitMode: TabsPropFitMode = 'dropdown';
+
+export type TabsPropGetItemLabel<ITEM> = (item: ITEM) => string | number;
+export type TabsPropGetItemChecked<ITEM> = (item: ITEM) => boolean | undefined;
+export type TabsPropGetItemIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+export type TabsPropGetItemSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | undefined;
+
+export type TabsPropGetItemAs<ITEM> = (item: ITEM) => AsTags | undefined;
+export type TabsPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => TabsItemDefault['attributes'];
+export type TabsPropGetItemRef<ITEM> = (
+  item: ITEM,
+) => React.RefObject<HTMLElement> | undefined;
+
+export type TabsPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+
+export type TabsPropOnChange<ITEM> = (
+  value: ITEM,
+  props: {
+    e: React.MouseEvent;
+  },
+) => void;
+
+export type RenderItemProps<ITEM> = {
+  item: ITEM;
+  onChange: React.MouseEventHandler;
+  checked: boolean;
+  size: TabsPropSize;
+  iconSize?: IconPropSize;
+  onlyIcon?: boolean;
+  label: string;
+  tabRef?: React.RefObject<HTMLElement>;
+  renderInDropdown?: boolean;
+} & Omit<TabsItemDefault, 'label' | 'ref'>;
+
+export type RenderItem<ITEM> = (
+  props: RenderItemProps<ITEM>,
+) => React.ReactElement | null;
 ```
 
-| Свойство                                       | Тип                                                                             | По умолчанию | Описание                                                                                                                                                                             |
-| ---------------------------------------------- | ------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `items`                                        | `ITEM[]`                                                                        | -            | Массив элементов с данными для табов (текст, иконка)                                                                                                                                 |
-| `value`                                        | `ITEM`, `null`                                                                  | -            | Значение                                                                                                                                                                             |
-| [`getItemLabel?`](#текст-для-таба)             | `(item: ITEM) => string, number`                                                | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента                                                                                             |
-| [`getItemLeftIcon?`](#иконки)                  | `(item: ITEM) => IconComponent, undefined`                                      | -            | Функция для формирования иконки слева                                                                                                                                                |
-| [`getItemRightIcon?`](#иконки)                 | `(item: ITEM) => IconComponent, undefined`                                      | -            | Функция для формирования иконки справа                                                                                                                                               |
-| [`getItemLeftSide?`](#дополнительный-контент)  | `(item: ITEM) => React.ReactNode, undefined`                                    | -            | Функция для формирования дополнительного контента слева                                                                                                                              |
-| [`getItemRightSide?`](#дополнительный-контент) | `(item: ITEM) => React.ReactNode, undefined`                                    | -            | Функция для формирования дополнительного контента справа                                                                                                                             |
-| [`getItemDisabled?`](#неактивные-элементы)     | `(item: ITEM) => boolean, undefined`                                            | -            | Функция указывает на состояние активности элемента                                                                                                                                   |
-| [`getItemAs?`](#рендеринг)                     | `(item: ITEM) => keyof JSX.IntrinsicElements, undefined`                        | -            | Функция для получения HTML-тега, которым будет отрисовываться элемент                                                                                                                |
-| [`getItemAttributes?`](#рендеринг)             | `(item: ITEM) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements], undefined` | -            | Функция для получения HTML-атрибутов, которые используются в элементе                                                                                                                |
-| `getItemRef?`                                  | `(item: ITEM) => React.RefObject<HTMLElement>, undefined`                       | -            | Функция для получения ссылки на элемент                                                                                                                                              |
-| [`onlyIcon?`](#иконки)                         | `boolean`                                                                       | -            | Показывать только иконку                                                                                                                                                             |
-| [`size?`](#размер-табов)                       | `'s', 'm'`                                                                      | `'m'`        | Размер компонента                                                                                                                                                                    |
-| [`view?`](#рамка)                              | `'bordered', 'clear'`                                                           | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                                                                                                            |
-| [`linePosition?`](#расположение-табов-и-линии) | `'bottom', 'top', 'left', 'right'`                                              | `'bottom'`   | Расположение табов (вертикальных или горизонатальных) и линии, которая отмечает активный таб                                                                                         |
-| [`fitMode?`](#адаптивность)                    | `'dropdown', 'scroll'`                                                          | `'dropdown'` | Способ сворачивания табов при нехватке места: выпадающий список или прокрутка. Доступен только для горизонтального направления табов (когда `linePosition` = `'bottom'` или `'top'`) |
-| `onChange`                                     | `OnChange`                                                                      | -            | Действие при выборе элемента                                                                                                                                                         |
-| `className?`                                   | `string`                                                                        | -            | Дополнительный CSS-класс                                                                                                                                                             |
-| [`renderItem?`](#кастомизация)                 | `RenderItem`                                                                    | -            | Функция рендера элемента                                                                                                                                                             |
-| [`disabled?`](#неактивные-элементы)            | `boolean, undefined`                                                            | -            | Неактивны все элементы                                                                                                                                                               |
-| `ref?`                                         | `React.Ref<HTMLDivElement>`                                                     | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                                                      |
+| Свойство                                       | Тип                                | По умолчанию | Описание                                                                                                                                                                             |
+| ---------------------------------------------- | ---------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `items`                                        | `ITEM[]`                           | -            | Массив элементов с данными для табов (текст, иконка)                                                                                                                                 |
+| `value`                                        | `ITEM`, `null`                     | -            | Значение                                                                                                                                                                             |
+| [`getItemLabel?`](#текст-для-таба)             | `TabsPropGetItemLabel`             | -            | Функция для формирования текста таба. Используется в качестве уникального ключа элемента                                                                                             |
+| [`getItemLeftIcon?`](#иконки)                  | `TabsPropGetItemLeftIcon`          | -            | Функция для формирования иконки слева                                                                                                                                                |
+| [`getItemRightIcon?`](#иконки)                 | `TabsPropGetItemRightIcon`         | -            | Функция для формирования иконки справа                                                                                                                                               |
+| [`getItemLeftSide?`](#дополнительный-контент)  | `TabsPropGetItemLeftSide`          | -            | Функция для формирования дополнительного контента слева                                                                                                                              |
+| [`getItemRightSide?`](#дополнительный-контент) | `TabsPropGetItemRightSide`         | -            | Функция для формирования дополнительного контента справа                                                                                                                             |
+| [`getItemDisabled?`](#неактивные-элементы)     | `TabsPropGetItemDisabled`          | -            | Функция указывает на состояние активности элемента                                                                                                                                   |
+| [`getItemAs?`](#рендеринг)                     | `TabsPropGetItemAs`                | -            | Функция для получения HTML-тега, которым будет отрисовываться элемент                                                                                                                |
+| [`getItemAttributes?`](#рендеринг)             | `TabsPropGetItemAttributes`        | -            | Функция для получения HTML-атрибутов, которые используются в элементе                                                                                                                |
+| `getItemRef?`                                  | `TabsPropGetItemRef`               | -            | Функция для получения ссылки на элемент                                                                                                                                              |
+| [`onlyIcon?`](#иконки)                         | `boolean`                          | -            | Показывать только иконку                                                                                                                                                             |
+| [`size?`](#размер-табов)                       | `'s', 'm'`                         | `'m'`        | Размер компонента                                                                                                                                                                    |
+| [`view?`](#рамка)                              | `'bordered', 'clear'`              | `'bordered'` | Внешний вид компонента (с рамкой или без)                                                                                                                                            |
+| [`linePosition?`](#расположение-табов-и-линии) | `'bottom', 'top', 'left', 'right'` | `'bottom'`   | Расположение табов (вертикальных или горизонатальных) и линии, которая отмечает активный таб                                                                                         |
+| [`fitMode?`](#адаптивность)                    | `'dropdown', 'scroll'`             | `'dropdown'` | Способ сворачивания табов при нехватке места: выпадающий список или прокрутка. Доступен только для горизонтального направления табов (когда `linePosition` = `'bottom'` или `'top'`) |
+| `onChange`                                     | `TabsPropOnChange`                 | -            | Действие при выборе элемента                                                                                                                                                         |
+| `className?`                                   | `string`                           | -            | Дополнительный CSS-класс                                                                                                                                                             |
+| [`renderItem?`](#кастомизация)                 | `RenderItem`                       | -            | Функция рендера элемента                                                                                                                                                             |
+| [`disabled?`](#неактивные-элементы)            | `boolean, undefined`               | -            | Неактивны все элементы                                                                                                                                                               |
+| `ref?`                                         | `React.Ref<HTMLDivElement>`        | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                                                      |
 
 ## Пример
 
@@ -535,7 +599,7 @@ export function App() {
   return (
     <Tabs
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       items={items}
       getItemLabel={(item) => item}
     />

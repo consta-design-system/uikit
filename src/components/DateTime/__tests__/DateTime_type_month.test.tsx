@@ -172,7 +172,11 @@ describe('Компонент DateTime_type_month', () => {
         fireEvent.click(DateTimeItem);
 
         expect(handleClick).toHaveBeenCalledTimes(1);
-        expect(handleClick).toHaveReturnedWith(new Date(1970, 3));
+
+        const date = new Date(1970, 3);
+        expect(handleClick).toHaveBeenCalledWith(date, {
+          e: expect.any(Object),
+        });
       });
     });
 
@@ -218,10 +222,12 @@ describe('Компонент DateTime_type_month', () => {
   describe('проверка onChangeRange', () => {
     dateTimePropView.forEach((view) => {
       it(`onChangeRange отрабатывает при клике на месяц при view="${view}"`, () => {
-        const onChangeRange = jest.fn(({ value }) => [
-          value[0] ? new Date(value[0]) : null,
-          value[1] ? new Date(value[1]) : null,
-        ]);
+        const onChangeRange = jest.fn((value, { e }) => {
+          return [
+            value[0] ? new Date(value[0]) : null,
+            value[1] ? new Date(value[1]) : null,
+          ];
+        });
         renderComponent({
           currentVisibleDate: new Date(1970, 0),
           view,
@@ -235,14 +241,19 @@ describe('Компонент DateTime_type_month', () => {
         fireEvent.click(newCurrentValueEnd);
 
         expect(onChangeRange).toHaveBeenCalledTimes(2);
-        expect(onChangeRange).toHaveNthReturnedWith(1, [
-          new Date(1970, 3),
-          null,
-        ]);
-        expect(onChangeRange).toHaveNthReturnedWith(2, [
-          new Date(1970, 5),
-          null,
-        ]);
+
+        const firstDate = [new Date(1970, 3), undefined];
+        const secondDate = [new Date(1970, 5), undefined];
+        expect(onChangeRange).toHaveBeenNthCalledWith(
+          1,
+          firstDate,
+          expect.objectContaining({ e: expect.any(Object) }),
+        );
+        expect(onChangeRange).toHaveBeenNthCalledWith(
+          2,
+          secondDate,
+          expect.objectContaining({ e: expect.any(Object) }),
+        );
       });
     });
   });

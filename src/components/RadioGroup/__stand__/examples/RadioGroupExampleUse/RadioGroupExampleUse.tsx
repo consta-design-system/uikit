@@ -36,14 +36,20 @@ export const RadioGroupExampleMore = () => {
           status: 'error',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                lineHeight="m"
+              >
                 Когда получать вести с Марса
               </Text>
               <RadioGroup
                 value={value}
                 items={itemsOne}
                 getItemLabel={(item) => item}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
               />
             </>
           ),
@@ -53,14 +59,20 @@ export const RadioGroupExampleMore = () => {
           status: 'success',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                size="m"
+                lineHeight="m"
+              >
                 Когда получать вести с Марса
               </Text>
               <RadioGroup
                 value={valueTwo}
                 items={itemsTwo}
                 getItemLabel={(item) => item}
-                onChange={({ value }) => setValueTwo(value)}
+                onChange={setValueTwo}
               />
             </>
           ),
@@ -84,14 +96,20 @@ export const RadioGroupExampleOne = () => {
           status: 'error',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                lineHeight="m"
+              >
                 Что привезти из космоса
               </Text>
               <RadioGroup
                 value={value}
                 items={itemsThree}
                 getItemLabel={(item) => item}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
               />
             </>
           ),
@@ -101,14 +119,20 @@ export const RadioGroupExampleOne = () => {
           status: 'success',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                lineHeight="m"
+              >
                 Как получить посылку
               </Text>
               <RadioGroup
                 value={valueTwo}
                 items={itemsFour}
                 getItemLabel={(item) => item}
-                onChange={({ value }) => setValueTwo(value)}
+                onChange={setValueTwo}
               />
             </>
           ),
@@ -124,14 +148,20 @@ export const RadioGroupExampleChecked = () => {
   return (
     <Example>
       <>
-        <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+        <Text
+          view="primary"
+          size="m"
+          weight="bold"
+          className={cnMixSpace({ mB: 'm' })}
+          lineHeight="m"
+        >
           Как вас постричь
         </Text>
         <RadioGroup
           value={value}
           items={itemsChecked}
           getItemLabel={(item) => item}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
         />
       </>
     </Example>

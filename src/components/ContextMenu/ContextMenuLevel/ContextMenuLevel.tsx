@@ -172,12 +172,8 @@ const ContextMenuLevelRender = (
   // GETTERS
 
   const getItemOnClick = getItemOnClickProp
-    ? (item: ContextMenuItemDefault) => (e: React.MouseEvent) => {
-        getItemOnClickProp(item)?.({
-          e: e as React.MouseEvent<HTMLDivElement>,
-          item,
-        });
-      }
+    ? (item: ContextMenuItemDefault) => (e: React.MouseEvent) =>
+        getItemOnClickProp(item)?.(e as React.MouseEvent<HTMLDivElement>)
     : undefined;
 
   const getItemAttributes = (item: ContextMenuItemDefault) =>
@@ -216,8 +212,7 @@ const ContextMenuLevelRender = (
       addCurrentLevel(item);
       setActiveIndex(items.indexOf(item));
     }
-    onItemClickProp?.({
-      item,
+    onItemClickProp?.(item, {
       e: e as React.MouseEvent<HTMLDivElement>,
     });
   };

@@ -181,7 +181,7 @@ export const DateTimeExampleDateMin = () => {
       minDate={minDate}
       maxDate={maxDate}
       value={value}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 };
@@ -216,7 +216,7 @@ export const DateTimeExampleDisableDates = () => {
       type="date-time"
       value={value}
       disableDates={getDisableDates()}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
     />
   );
 };
@@ -333,16 +333,20 @@ type DateTimePropValue<TYPE> = TYPE extends СapableRangeType
   ? Date | DateRange
   : Date;
 
-type DateTimePropOnChange = (props: {
-  value: Date;
-  e: React.MouseEvent<HTMLButtonElement>;
-}) => void;
+type DateTimePropOnChange = (
+  value: Date,
+  props: {
+    e: React.MouseEvent<HTMLButtonElement>;
+  },
+) => void;
 
 type DateTimePropOnChangeRange<TYPE> = TYPE extends СapableRangeType
-  ? (props: {
-      value: DateRange;
-      e: React.MouseEvent<HTMLButtonElement>;
-    }) => void
+  ? (
+      value: DateRange,
+      props: {
+        e: React.MouseEvent<HTMLButtonElement>;
+      },
+    ) => void
   : never;
 
 type LocaleWords = {

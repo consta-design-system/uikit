@@ -30,7 +30,7 @@ export function ComboboxExampleItems() {
       <Combobox
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         placeholder="Выберите нужный элемент из списка"
       />
     </Example>

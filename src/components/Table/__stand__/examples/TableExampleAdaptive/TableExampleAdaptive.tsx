@@ -60,7 +60,7 @@ export function TableExampleAdaptiveScroll() {
 }
 
 export const TableExampleAdaptiveScrollUseBreakpoints = () => {
-  const { desktop } = useBreakpoints({ desktop: 800 });
+  const { desktop } = useBreakpoints({ map: { desktop: 800 }, isActive: true });
 
   if (desktop) {
     return <Table columns={columns} rows={rowsProf} />;
@@ -76,10 +76,23 @@ export const TableExampleAdaptiveScrollUseBreakpoints = () => {
             className={cnMixSpace({ mB: 'l' })}
             style={{ maxWidth: 400 }}
           >
-            <Text weight="bold" className={cnMixSpace({ mB: 's' })}>
+            <Text
+              weight="bold"
+              view="primary"
+              size="m"
+              lineHeight="m"
+              className={cnMixSpace({ mB: 's' })}
+            >
               {item.name}
             </Text>
-            <Text className={cnMixSpace({ mB: 's' })}>{item.profession}</Text>
+            <Text
+              view="primary"
+              size="m"
+              lineHeight="m"
+              className={cnMixSpace({ mB: 's' })}
+            >
+              {item.profession}
+            </Text>
             <Badge label={item.status} status="system" />
           </Card>
         </div>

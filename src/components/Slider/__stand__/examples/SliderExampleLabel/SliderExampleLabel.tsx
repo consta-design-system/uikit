@@ -16,7 +16,7 @@ export const SliderExampleLabel = () => {
         caption="Выберите значения"
         status="success"
         withTooltip
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
       />
     </Example>
@@ -33,7 +33,7 @@ export const SliderExampleLabelIcon = () => {
         range
         label="Пример"
         labelIcon={IconQuestion}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
       />
     </Example>

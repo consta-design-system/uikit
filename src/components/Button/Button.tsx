@@ -9,7 +9,7 @@ import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { Loader } from '../Loader/Loader';
+import { Loader } from '../LoaderDeprecated/LoaderDeprecated';
 
 export const buttonPropSize = ['m', 'xs', 's', 'l'] as const;
 export type ButtonPropSize = typeof buttonPropSize[number];

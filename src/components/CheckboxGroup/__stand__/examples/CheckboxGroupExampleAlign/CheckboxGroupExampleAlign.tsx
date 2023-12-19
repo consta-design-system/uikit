@@ -25,7 +25,7 @@ export const CheckboxGroupExampleAlign = () => {
           items={items}
           getItemKey={(item) => item}
           getItemLabel={(item) => item}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
         />
       )}
     />

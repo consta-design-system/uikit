@@ -13,14 +13,14 @@ export const RadioGroupExampleAlign = () => {
         value={value}
         items={alignItems}
         getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         align="top"
       />
       <RadioGroup
         value={value}
         items={alignItems}
         getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         align="center"
       />
     </Example>
@@ -36,7 +36,7 @@ export const RadioGroupExampleColumn = () => {
         value={value}
         items={simpleItems}
         getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         direction="column"
       />
     </Example>
@@ -52,7 +52,7 @@ export const RadioGroupExampleRow = () => {
         value={value}
         items={simpleItems}
         getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         direction="row"
       />
     </Example>

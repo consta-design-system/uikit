@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useHideElementsInLine } from '##/hooks/useHideElementsInLineCanary';
+import { useHideElementsInLine } from '##/hooks/useHideElementsInLine';
 import { useRefs } from '##/hooks/useRefs';
 import { useResizeObserved } from '##/hooks/useResizeObserved';
 

@@ -1,0 +1,397 @@
+import { MdxMenu } from '@consta/stand';
+
+import { ChipsWithContextMenuExample } from './examples/ChipsWithContextMenuExample/ChipsWithContextMenuExample';
+import {
+  ChipsSimpleExample,
+  ChipsSimpleExample2,
+  ChipsSimpleExample3,
+} from './examples/ChipsSimpleExample/ChipsSimpleExample';
+import { ChipsSizeExample } from './examples/ChipsSizeExample/ChipsSizeExample';
+import { ChipsInteractiveExample } from './examples/ChipsInteractiveExample/ChipsInteractiveExample';
+import { ChipsChoiceExample } from './examples/ChipsChoiceExample/ChipsChoiceExample';
+
+```ts
+import { Chips } from '@consta/uikit/Chips';
+```
+
+<MdxMenu>
+
+- [Содержимое](#содержимое)
+  - [Пример использования свой тип данных](#пример-использования-свой-тип-данных)
+  - [Пример использования типа ChipsDefaultItem](#пример-использования-типа-chipsdefaultitem)
+  - [Пример отображения статуса](#пример-отображения-статуса)
+- [Размер](#размер)
+- [Взаимодействие](#взаимодействие)
+- [Cвойства](#свойства)
+- [ChipsItem](#chipsitem)
+  - [Свойства ChipsItem](#свойства-chipsitem)
+- [ChipsChoice](#chipschoice)
+  - [Свойства ChipsChoice](#свойства-chipschoice)
+
+</MdxMenu>
+
+## Содержимое
+
+Содерживое можно передать в поле `items` в объекте типа [`ChipsDefaultItem`](#свойства). Что можно указать:
+
+- лейбл — в поле `label` или с помощью функции `getItemLabel`,
+- статус — в поле `status` или с помощью функции `getItemStatus`,
+- исконка справа — в поле `iconRight` или с помощью функции `getItemIconRight`,
+- иконка слева — в поле `iconLeft` или с помощью функции `getItemIconLeft`,
+- HTML-тег — в поле `as` или с помощью функции `getItemAs`,
+- дополнительные атрибуты — в поле `attributes` или с помощью функции `getItemAttributes`,
+- статус активности — в поле `active` или с помощью функции `getItemActive`,
+
+> Одновременно можно использовать либо `iconLeft` или `status`
+
+### Пример использования свой тип данных
+
+```tsx
+export const items = ['Согласован', 'Ожидает', 'Новый', 'Черновик', 'Отказано'];
+
+const getItemLabel = (item: string) => item;
+
+export const ChipsSimpleExample = () => (
+  <Chips items={items} getItemLabel={getItemLabel} />
+);
+```
+
+<ChipsSimpleExample />
+
+### Пример использования типа ChipsDefaultItem
+
+```tsx
+export const items2: ChipsDefaultItem[] = [
+  {
+    iconLeft: IconDinosaur,
+    label: 'Динозавр',
+  },
+  {
+    iconLeft: IconBag,
+    label: 'портфель',
+  },
+  {
+    iconLeft: IconDiamond,
+    label: 'Брелиант',
+  },
+];
+
+export const ChipsSimpleExample2 = () => (
+  <Example>
+    <Chips items={items2} />
+  </Example>
+);
+```
+
+<ChipsSimpleExample2 />
+
+### Пример отображения статуса
+
+```tsx
+export const items3: ChipsDefaultItem[] = [
+  {
+    status: 'success',
+    label: 'Согласован',
+  },
+  {
+    status: 'warning',
+    label: 'Ожидает',
+  },
+  {
+    status: 'error',
+    label: 'Отказано',
+  },
+];
+
+export const ChipsSimpleExample3 = () => (
+  <Example>
+    <Chips items={items3} />
+  </Example>
+);
+```
+
+<ChipsSimpleExample3 />
+
+## Размер
+
+Для того чтобы указать размер используйте свойство `size`, может принимать `xs` | `s` | `m` | `l`.
+
+<ChipsSizeExample />
+
+## Взаимодействие
+
+Для обработки клика по элементу используйте `onItemClick`.
+Для обработки клика по правой иконки
+Так же для того чтобы элементы отображали фокус и ховер эффекты включите свойство `interactive`.
+
+```tsx
+export const items = ['Согласован', 'Ожидает', 'Новый', 'Черновик', 'Отказано'];
+
+const getItemLabel = (item: string) => item;
+
+export const ChipsInteractiveExample = () => (
+  <Example>
+    <Chips
+      items={items}
+      getItemLabel={getItemLabel}
+      interactive
+      onItemClick={(item) => alert(item)}
+      getItemIconRight={() => IconClose}
+      onItemRightIconClick={(item, { e }) => {
+        e.stopPropagation();
+        alert(`${item} - клик по крестику`);
+      }}
+    />
+  </Example>
+);
+```
+
+<ChipsInteractiveExample />
+
+## Cвойства
+
+```tsx
+type ChipsPropStatus = 'normal' | 'system' | 'success' | 'warning' | 'error';
+
+export type ChipsDefaultItem = {
+  iconLeft?: IconComponent;
+  iconRight?: IconComponent;
+  status?: ChipsPropStatus;
+  label: string;
+  active?: boolean;
+  as?: keyof JSX.IntrinsicElements;
+  ref?: React.RefObject<HTMLElement>;
+  attributes?: Omit<
+    JSX.IntrinsicElements[keyof JSX.IntrinsicElements],
+    'children' | 'ref'
+  >;
+};
+
+export type ChipsPropGetItemStatus<ITEM> = (
+  item: ITEM,
+) => ChipsDefaultItem['status'];
+export type ChipsPropGetItemLabel<ITEM> = (
+  item: ITEM,
+) => ChipsDefaultItem['label'];
+export type ChipsPropGetItemIconLeft<ITEM> = (
+  item: ITEM,
+) => ChipsDefaultItem['iconLeft'];
+export type ChipsPropGetItemIconRight<ITEM> = (
+  item: ITEM,
+) => ChipsDefaultItem['iconRight'];
+export type ChipsPropGetItemRef<ITEM> = (item: ITEM) => ChipsDefaultItem['ref'];
+export type ChipsPropGetItemAs<ITEM> = (item: ITEM) => ChipsDefaultItem['as'];
+export type ChipsPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => ChipsDefaultItem['attributes'];
+export type ChipsPropGetItemActive<ITEM> = (
+  item: ITEM,
+) => ChipsDefaultItem['active'];
+export type ChipsPropOnItemClick<ITEM> = (
+  item: ITEM,
+  props: { e: React.MouseEvent },
+) => void;
+export type ChipsPropItemOnRightIconClick<ITEM> = (
+  item: ITEM,
+  props: { e: React.MouseEvent },
+) => void;
+```
+
+| Свойство                                   | Тип или варианты значения        | По умолчанию | Описание                                         |
+| ------------------------------------------ | -------------------------------- | ------------ | ------------------------------------------------ |
+| [`items?`](#содержимое)                    | `ITEM[]`                         | -            | Содержимое                                       |
+| [`interactive?`](#взаимодействие)          | `boolean`                        | -            | Включает фокус и ховер эффекты                   |
+| [`onItemClick?`](#взаимодействие)          | `ChipsPropOnItemClick`           | -            | Событие клика по элементу                        |
+| [`onItemRightIconClick?`](#взаимодействие) | `ChipsPropItemOnRightIconClick`  | -            | Событие клика по иконки справа                   |
+| `activeView?`                              | `'primary'` &#124; `'secondary'` | `'primary'`  | Вид активного элемента                           |
+| [`getItemStatus?`](#содержимое)            | `ChipsPropGetItemStatus`         | -            | Функция указывает статус элемента                |
+| [`getItemLabel?`](#содержимое)             | `ChipsPropGetItemLabel`          | -            | Функция указывает лейбл элемента                 |
+| [`getItemIconLeft?`](#содержимое)          | `ChipsPropGetItemIconLeft`       | -            | Функция указывает иконку слева элемента          |
+| [`getItemIconRight?`](#содержимое)         | `ChipsPropGetItemIconRight`      | -            | Функция указывает иконку справа элемента         |
+| [`getItemRef?`](#содержимое)               | `ChipsPropGetItemRef`            | -            | Функция указывает ссылку на элемент              |
+| [`getItemAs?`](#содержимое)                | `ChipsPropGetItemAs`             | -            | Функция указывает HTML-тег элемента              |
+| [`getItemAttributes?`](#содержимое)        | `ChipsPropGetItemAttributes`     | -            | Функция указывает HTML атрибуты элемента         |
+| [`getItemActive?`](#содержимое)            | `ChipsPropGetItemActive`         | -            | Функция указывает на признак активности элемента |
+
+## ChipsItem
+
+Вы можете взять отдельно элемент чипсов.
+
+Пример чипа с выподающим списком
+
+```tsx
+import './ChipsWithContextMenuExample.css';
+
+import { AnimateIconSwitcherProvider } from '@consta/icons/AnimateIconSwitcherProvider';
+import { IconCheck } from '@consta/icons/IconCheck';
+import { IconSelect } from '@consta/icons/IconSelect';
+import { withAnimateSwitcherHOC } from '@consta/icons/withAnimateSwitcherHOC';
+import { Example } from '@consta/stand';
+import React, { useRef, useState } from 'react';
+
+import { ChipsItem } from '@consta/ChipsCanary';
+import { ContextMenu } from '@consta/ContextMenu';
+import { cn } from '##/utils/bem';
+
+const filters = [
+  ['Нефть', 'Газ', 'Жидкость'],
+  ['За год', 'За квартал', 'За месяц'],
+  ['Все скважены', 'Скважена №1', 'Скважена №2', 'Скважена №3'],
+];
+
+const getItemLabel = (item: string) => item;
+
+type ChipsItemWithMenuProps = {
+  value: string;
+  menu: string[];
+  isOpen: boolean;
+  onChange: (item: string) => void;
+  onClick: React.MouseEventHandler<HTMLSpanElement>;
+  onClickOutside: (event: MouseEvent) => void;
+};
+
+const ChipsItemIcon = withAnimateSwitcherHOC({
+  startIcon: IconSelect,
+  startDirection: 0,
+  endDirection: 180,
+});
+
+const cnChipsWithContextMenuExample = cn('ChipsWithContextMenuExample');
+
+const ChipsItemWithMenu = (props: ChipsItemWithMenuProps) => {
+  const { value, menu, onChange, isOpen, onClick, onClickOutside } = props;
+  const ref = useRef<HTMLSpanElement>(null);
+
+  return (
+    <>
+      <AnimateIconSwitcherProvider active={isOpen}>
+        <ChipsItem
+          onClick={onClick}
+          ref={ref}
+          label={value}
+          iconRight={ChipsItemIcon}
+          interactive
+        />
+      </AnimateIconSwitcherProvider>
+      <ContextMenu
+        anchorRef={ref}
+        items={menu}
+        getItemLabel={getItemLabel}
+        isOpen={isOpen}
+        onClickOutside={onClickOutside}
+        onItemClick={({ item }) => onChange(item)}
+        getItemRightIcon={(item) => (item === value ? IconCheck : undefined)}
+        direction="downStartLeft"
+        offset="2xs"
+      />
+    </>
+  );
+};
+
+export const ChipsWithContextMenuExample = () => {
+  const [values, setValues] = useState(filters.map((item) => item[0]));
+  const [activeMenu, setActiveMenu] = useState(-1);
+
+  return (
+    <Example col={1}>
+      <div className={cnChipsWithContextMenuExample()}>
+        {filters.map((item, index) => {
+          return (
+            <ChipsItemWithMenu
+              key={index}
+              value={values[index]}
+              menu={filters[index]}
+              onChange={(item) => {
+                setValues((state) => {
+                  const newState = [...state];
+                  newState[index] = item;
+                  return newState;
+                });
+              }}
+              onClickOutside={() => setActiveMenu(-1)}
+              onClick={() => setActiveMenu(index)}
+              isOpen={activeMenu === index}
+            />
+          );
+        })}
+      </div>
+    </Example>
+  );
+};
+```
+
+<ChipsWithContextMenuExample />
+
+## Свойства ChipsItem
+
+| Свойство                | Тип или варианты значения                                                           | По умолчанию | Описание                                                         |
+| ----------------------- | ----------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
+| `label`                 | `string`                                                                            | -            | Содержимое                                                       |
+| `interactive?`          | `boolean`                                                                           | -            | Включает фокус и ховер эффекты                                   |
+| `activeView?`           | `'primary'` &#124; `'secondary'`                                                    | `'primary'`  | Вид активного элемента                                           |
+| `onItemRightIconClick?` | `React.MouseEventHandler<HTMLButtonElement>`                                        | -            | Событие клика по иконки справа                                   |
+| `iconLeft?`             | `IconComponent`                                                                     | -            | Иконка слева                                                     |
+| `iconRight?`            | `IconComponent`                                                                     | -            | Иконка справа                                                    |
+| `status?`               | `'normal'` &#124; `'system'` &#124; `'success'` &#124; `'warning'` &#124; `'error'` | -            | Статус                                                           |
+| `active?`               | `boolean`                                                                           | -            | Активный                                                         |
+| `as?`                   | `keyof JSX.IntrinsicElements`                                                       | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
+| `className?`            | `string`                                                                            | -            | Дополнительный CSS-класс (mix)                                   |
+| `ref?`                  | `React.Ref<HTMLElement>`                                                            | -            | Ссылка на корневой DOM-элемент компонента                        |
+
+## ChipsChoice
+
+Компонент построенный на `Chips` c свозможностью выбора элемента.
+
+```tsx
+export const items: ChipsDefaultItem[] = [
+  {
+    status: 'success',
+    label: 'Согласован',
+  },
+  {
+    status: 'warning',
+    label: 'Ожидает',
+  },
+  {
+    status: 'error',
+    label: 'Отказано',
+  },
+];
+
+export const ChipsChoiceExample = () => {
+  const [value, setValue] = useState(items[0]);
+  return (
+    <Example>
+      <ChipsChoice value={value} onChange={setValue} items={items} />
+    </Example>
+  );
+};
+```
+
+<ChipsChoiceExample />
+
+## Свойства ChipsChoice
+
+Имеет все теже самые свойства, кроме:
+
+```tsx
+type ChipsChoicePropOnChange<ITEM, MULTIPLE extends boolean> = (
+  value: MULTIPLE extends true ? ITEM[] | null : ITEM,
+  props: {
+    e: React.MouseEvent;
+  },
+) => void;
+
+type ChipsChoicePropValue<ITEM, MULTIPLE extends boolean> =
+  | (MULTIPLE extends true ? ITEM[] : ITEM)
+  | null;
+```
+
+| Свойство                | Тип или варианты значения | По умолчанию | Описание            |
+| ----------------------- | ------------------------- | ------------ | ------------------- |
+| `onChange?`             | `ChipsChoicePropOnChange` | -            | Событие выбора      |
+| `value?`                | `ChipsChoicePropValue`    | -            | Выбранное значение  |
+| `multiple?`             | `booleam`                 | -            | Множественный выбор |
+| `onItemClick`           | -                         | -            | Отсутствует         |
+| `onItemRightIconClick?` | -                         | -            | Отсутствует         |
+| `getItemActive?`        | -                         | -            | Отсутствует         |

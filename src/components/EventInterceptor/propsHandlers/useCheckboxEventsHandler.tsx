@@ -13,7 +13,7 @@ export const useCheckboxEventsHandler = <P extends CheckboxProps>(
   const newProps: P = { ...props };
 
   newProps.onChange = (...onChangeArgs) => {
-    const [{ checked }] = onChangeArgs;
+    const [checked] = onChangeArgs;
     const value = {
       component: 'Checkbox' as const,
       event: 'change',

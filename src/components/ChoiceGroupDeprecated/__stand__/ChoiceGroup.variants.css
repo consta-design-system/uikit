@@ -1,8 +1,0 @@
-.deprecated--ChoiceGroupVariants {
-  width: 100%;
-
-  &-Component {
-    display: flex;
-    margin: 0 auto;
-  }
-}

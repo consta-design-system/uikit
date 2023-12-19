@@ -4,12 +4,12 @@ import React, { useRef, useState } from 'react';
 import { Button } from '##/components/Button/Button';
 
 import { directions } from '../../Popover/Popover';
+import { Tooltip } from '../Tooltip';
 import {
-  Tooltip,
   tooltipPropSizes,
   tooltipPropSizesDefault,
   tooltipPropStatus,
-} from '../Tooltip';
+} from '../types';
 
 const Variants = () => {
   const anchorRef = useRef<HTMLButtonElement>(null);
@@ -39,18 +39,17 @@ const Variants = () => {
         onClick={handleClickOnAnchor}
         ref={anchorRef}
       />
-      {isTooltipVisible && (
-        <Tooltip
-          size={size}
-          anchorRef={anchorRef}
-          direction={direction}
-          spareDirection={spareDirection}
-          status={status}
-          offset={offset}
-        >
-          {children}
-        </Tooltip>
-      )}
+      <Tooltip
+        isOpen={isTooltipVisible}
+        size={size}
+        anchorRef={anchorRef}
+        direction={direction}
+        spareDirection={spareDirection}
+        status={status}
+        offset={offset}
+      >
+        {children}
+      </Tooltip>
     </>
   );
 };

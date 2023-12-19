@@ -1,50 +1,50 @@
-import '../SelectComponents/Select.css';
+import '##/components/SelectComponents/Select.css';
 
 import { IconClear } from '@consta/icons/IconClear';
 import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useRef } from 'react';
 
-import { isNotNil } from '##/utils/type-guards';
-
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { useSelect } from '../../hooks/useSelect/useSelect';
-import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
-import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { cnSelect } from '../SelectComponents/cnSelect';
+import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
+import { cnSelect } from '##/components/SelectComponents/cnSelect';
 import {
   defaultlabelForCreate,
   defaultLabelForEmptyItems,
   defaultlabelForNotFound,
   getInputWidth,
-} from '../SelectComponents/helpers';
-import { SelectContainer } from '../SelectComponents/SelectContainer/SelectContainer';
-import { SelectDropdown } from '../SelectComponents/SelectDropdown/SelectDropdown';
-import { SelectItem } from '../SelectComponents/SelectItem/SelectItem';
-import { SelectValueTag } from '../SelectComponents/SelectValueTag/SelectValueTag';
+} from '##/components/SelectComponents/helpers';
+import { SelectContainer } from '##/components/SelectComponents/SelectContainer';
+import { SelectDropdown } from '##/components/SelectComponents/SelectDropdown';
+import { SelectItem } from '##/components/SelectComponents/SelectItem';
+import { SelectValueTag } from '##/components/SelectComponents/SelectValueTag';
 import {
   defaultPropForm,
   defaultPropSize,
   defaultPropView,
-} from '../SelectComponents/types';
+} from '##/components/SelectComponents/types';
+import { useSelect } from '##/components/SelectComponents/useSelect';
+import { useForkRef } from '##/hooks/useForkRef';
+import { isNotNil } from '##/utils/type-guards';
+
+import { Text } from '../Text';
 import {
   clearSizeMap,
   ComboboxComponent,
+  ComboboxGroupDefault,
+  ComboboxItemDefault,
+  ComboboxPropRenderItem,
+  ComboboxPropRenderValue,
   ComboboxProps,
-  DefaultGroup,
-  DefaultItem,
   iconSizeMap,
   isMultipleParams,
   isNotMultipleParams,
-  PropRenderItem,
-  PropRenderValue,
   withDefaultGetters,
 } from './helpers';
 
 export const COMPONENT_NAME = 'Combobox' as const;
 
 const ComboboxRender = <
-  ITEM = DefaultItem,
-  GROUP = DefaultGroup,
+  ITEM = ComboboxItemDefault,
+  GROUP = ComboboxGroupDefault,
   MULTIPLE extends boolean = false,
 >(
   props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
@@ -80,6 +80,7 @@ const ComboboxRender = <
     getGroupKey,
     getGroupLabel,
     renderItem,
+    allSelectedAllLabel = 'Все',
     searchValue: searchValueProp,
     renderValue: renderValueProp,
     onCreate,
@@ -87,13 +88,18 @@ const ComboboxRender = <
     labelForNotFound = defaultlabelForNotFound,
     labelForCreate = defaultlabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
-    onInputChange,
     searchFunction,
     selectAll,
     isLoading,
     multiple = false,
     style,
     dropdownForm = 'default',
+    virtualScroll,
+    onScrollToBottom,
+    onDropdownOpen,
+    onSearchValueChange,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -114,6 +120,8 @@ const ComboboxRender = <
     getHandleRemoveValue,
     notFound,
     hasItems,
+    optionsRefs,
+    allItemsSelected,
   } = useSelect({
     items,
     groups,
@@ -134,12 +142,16 @@ const ComboboxRender = <
     onFocus,
     onCreate,
     searchFunction,
+    onDropdownOpen,
+    onSearchValueChange,
+    dropdownOpen,
+    ignoreOutsideClicksRefs,
   });
 
   const inputId = id ? `${id}-input` : id;
 
-  const renderItemDefault: PropRenderItem<ITEM> = (props) => {
-    const { item, active, hovered, onClick, onMouseEnter } = props;
+  const renderItemDefault: ComboboxPropRenderItem<ITEM> = (props) => {
+    const { item, active, hovered, onClick, onMouseEnter, ref } = props;
 
     return (
       <SelectItem
@@ -152,11 +164,12 @@ const ComboboxRender = <
         onClick={onClick}
         onMouseEnter={onMouseEnter}
         disabled={getItemDisabled(item)}
+        ref={ref}
       />
     );
   };
 
-  const renderValueDefaultMultiple: PropRenderValue<ITEM> = ({
+  const renderValueDefaultMultiple: ComboboxPropRenderValue<ITEM> = ({
     item,
     handleRemove,
   }) => {
@@ -171,7 +184,9 @@ const ComboboxRender = <
     );
   };
 
-  const renderValueDefaultNotMultiple: PropRenderValue<ITEM> = (props) => {
+  const renderValueDefaultNotMultiple: ComboboxPropRenderValue<ITEM> = (
+    props,
+  ) => {
     const valueLable = getItemLabel(props.item);
 
     return (
@@ -186,12 +201,6 @@ const ComboboxRender = <
     (multiple ? renderValueDefaultMultiple : renderValueDefaultNotMultiple);
 
   const inputRefForRender = useForkRef([inputRef, inputRefProp]);
-
-  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleInputChange(e);
-    const { value } = e.target;
-    !disabled && onInputChange?.({ e, id, name, value: value || null });
-  };
 
   const renderControlValue = () => {
     const width = multiple
@@ -222,7 +231,7 @@ const ComboboxRender = <
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           aria-label={ariaLabel}
-          onChange={handleChangeValue}
+          onChange={handleInputChange}
           ref={inputRefForRender}
           className={cnSelect('Input', {
             size,
@@ -234,6 +243,27 @@ const ComboboxRender = <
         />
       </>
     );
+  };
+
+  const renderValueList = () => {
+    if (allItemsSelected) {
+      return (
+        <Text
+          view="primary"
+          size={size}
+          className={cnSelect('SelectAll')}
+          lineHeight="m"
+        >
+          {allSelectedAllLabel}
+        </Text>
+      );
+    }
+    if (multiple) {
+      return (
+        <div className={cnSelect('ControlValue')}>{renderControlValue()}</div>
+      );
+    }
+    return renderControlValue();
   };
 
   return (
@@ -267,13 +297,7 @@ const ComboboxRender = <
             aria-hidden="true"
           >
             <div className={cnSelect('ControlValueContainer')}>
-              {multiple ? (
-                <div className={cnSelect('ControlValue')}>
-                  {renderControlValue()}
-                </div>
-              ) : (
-                renderControlValue()
-              )}
+              {renderValueList()}
             </div>
           </div>
           <span className={cnSelect('Indicators')}>
@@ -281,7 +305,8 @@ const ComboboxRender = <
               <button
                 type="button"
                 onClick={clearValue}
-                className={cnSelect('ClearIndicator', [cnMixFocus()])}
+                tabIndex={-1}
+                className={cnSelect('ClearIndicator')}
               >
                 <IconClear
                   size={clearSizeMap[size]}
@@ -327,6 +352,9 @@ const ComboboxRender = <
         labelForEmptyItems={labelForEmptyItems}
         notFound={notFound}
         hasItems={hasItems}
+        itemsRefs={optionsRefs}
+        virtualScroll={virtualScroll}
+        onScrollToBottom={onScrollToBottom}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }
@@ -338,5 +366,3 @@ const ComboboxRender = <
 };
 
 export const Combobox = forwardRef(ComboboxRender) as ComboboxComponent;
-
-export * from './helpers';

@@ -310,27 +310,57 @@ import { RadioGroup } from '@consta/uikit/RadioGroup';
 
 ```tsx
 export type RadioGroupDefaultItem = {
+  key?: string | number;
   label: string;
   disabled?: boolean;
 };
 
-type OnChange = (props: {
-  e: React.ChangeEvent<HTMLInputElement>;
-  value: ITEM;
-}) => void;
+export const radioGroupDirections = ['column', 'row'] as const;
+export type RadioGroupDirection = typeof radioGroupDirections[number];
+export const radioGroupDefaultDirection: RadioGroupDirection =
+  radioGroupDirections[0];
+
+export const radioGroupSizes = ['m', 'l', 'xs', 's'] as const;
+export type RadioGroupPropSize = typeof radioGroupSizes[number];
+export const radioGroupDefaultSize: RadioGroupPropSize = radioGroupSizes[0];
+
+export const radioGroupViews = ['primary', 'ghost'] as const;
+export type RadioGroupPropView = typeof radioGroupViews[number];
+export const radioGroupDefaultView: RadioGroupPropView = radioGroupViews[0];
+
+export const radioGroupPropAlign = ['center', 'top'] as const;
+export type RadioGroupPropAlign = typeof radioGroupPropAlign[number];
+export const radioGroupPropAlignDefault: RadioGroupPropAlign =
+  radioGroupPropAlign[0];
+
+export type RadioGroupPropGetItemKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+export type RadioGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type RadioGroupPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+
+export type RadioGroupPropOnChange<ITEM> = (
+  value: ITEM,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
 ```
 
-| Свойство                                      | Тип                         | По умолчанию | Описание                                                                                    |
-| --------------------------------------------- | --------------------------- | ------------ | ------------------------------------------------------------------------------------------- |
-| [`align`](#выравнивание)                      | `'center', 'top'`           | `'center'`   | Выравнивание                                                                                |
-| `value`                                       | `ITEM`                      | -            | Значение                                                                                    |
-| [`items`](#содержимое)                        | `ITEM[]`                    | -            | Радиокнопки                                                                                 |
-| [`getItemLabel?`](#название-радиокнопки)      | `(item: ITEM) => string`    | -            | Функция формирования текста радиокнопки. Используется в качестве уникального ключа элемента |
-| [`getItemDisabled?`](#неактивная-радиокнопка) | `(item: ITEM) => boolean`   | -            | Функция для определения неактивного состояния радиокнопки                                   |
-| `onChange`                                    | `OnChange`                  | -            | Действие при выборе элемента                                                                |
-| `name`                                        | `string`                    | -            | Имя `<input>`, указывается для доступности                                                  |
-| [`direction?`](#расположение)                 | `'column', 'row'`           | `'column'`   | Направление радиокнопок                                                                     |
-| [`disabled?`](#неактивная-группа-кнопок)      | `boolean`                   | `false`      | Делает группу радиокнопок неактивной                                                        |
-| [`size?`](#размер)                            | `'l'`, `'m'`, `'s'`, `'xs'` | `'m'`        | Размер группы радиокнопок                                                                   |
-| [`view?`](#внешний-вид)                       | `'primary', 'ghost'`        | `'primary'`  | Внешний вид                                                                                 |
-| `className?`                                  | `string`                    | -            | Дополнительные CSS-классы                                                                   |
+| Свойство                                      | Тип                             | По умолчанию | Описание                                                                                    |
+| --------------------------------------------- | ------------------------------- | ------------ | ------------------------------------------------------------------------------------------- |
+| [`align`](#выравнивание)                      | `'center', 'top'`               | `'center'`   | Выравнивание                                                                                |
+| `value`                                       | `ITEM`                          | -            | Значение                                                                                    |
+| [`items`](#содержимое)                        | `ITEM[]`                        | -            | Радиокнопки                                                                                 |
+| `getItemKey?`                                 | `RadioGroupPropGetItemKey`      | -            | Функция формирования ключа радиокнопки.                                                     |
+| [`getItemLabel?`](#название-радиокнопки)      | `RadioGroupPropGetItemLabel`    | -            | Функция формирования текста радиокнопки. Используется в качестве уникального ключа элемента |
+| [`getItemDisabled?`](#неактивная-радиокнопка) | `RadioGroupPropGetItemDisabled` | -            | Функция для определения неактивного состояния радиокнопки                                   |
+| `onChange`                                    | `RadioGroupPropOnChange`        | -            | Действие при выборе элемента                                                                |
+| `name`                                        | `string`                        | -            | Имя `<input>`, указывается для доступности                                                  |
+| [`direction?`](#расположение)                 | `'column', 'row'`               | `'column'`   | Направление радиокнопок                                                                     |
+| [`disabled?`](#неактивная-группа-кнопок)      | `boolean`                       | `false`      | Делает группу радиокнопок неактивной                                                        |
+| [`size?`](#размер)                            | `'l'`, `'m'`, `'s'`, `'xs'`     | `'m'`        | Размер группы радиокнопок                                                                   |
+| [`view?`](#внешний-вид)                       | `'primary', 'ghost'`            | `'primary'`  | Внешний вид                                                                                 |
+| `className?`                                  | `string`                        | -            | Дополнительные CSS-классы                                                                   |

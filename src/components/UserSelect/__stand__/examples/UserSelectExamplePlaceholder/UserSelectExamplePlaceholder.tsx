@@ -37,7 +37,7 @@ export function UserSelectExamplePlaceholder() {
         placeholder="Это подсказка"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

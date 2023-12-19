@@ -14,18 +14,12 @@ import {
   textPropSizeDefault,
   textPropSpacing,
   textPropTransform,
-  textPropType,
   textPropView,
   textPropViewDefault,
   textPropWeight,
 } from '../Text';
 
 const Variants = () => {
-  const as = useSelect(
-    'as',
-    ['div', 'p', 'a', 'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-    'p',
-  );
   const align = useSelect('align', textPropAlign);
   const cursor = useSelect('cursor', textPropCursor);
   const decoration = useSelect('decoration', textPropDecoration);
@@ -36,7 +30,6 @@ const Variants = () => {
   const spacing = useSelect('spacing', textPropSpacing);
   const fontStyle = useSelect('fontStyle', textPropFontStyle);
   const transform = useSelect('transform', textPropTransform);
-  const type = useSelect('type', textPropType);
   const view = useSelect('View', textPropView, textPropViewDefault);
   const weight = useSelect('weight', textPropWeight);
   const truncate = useBoolean('truncate', false);
@@ -47,7 +40,7 @@ const Variants = () => {
 
   return (
     <Text
-      as={as}
+      as="p"
       align={align}
       cursor={cursor}
       decoration={decoration}
@@ -58,7 +51,6 @@ const Variants = () => {
       spacing={spacing}
       fontStyle={fontStyle}
       transform={transform}
-      type={type}
       view={view}
       weight={weight}
       truncate={truncate}

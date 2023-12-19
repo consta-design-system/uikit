@@ -147,29 +147,6 @@
     }
   }
 
-  &_type {
-    &_blockquote {
-      margin-bottom: var(--space-l);
-      margin-left: var(--space-4xl);
-      padding-left: var(--space-m);
-      border-left: var(--space-xxs) solid var(--color-bg-brand);
-    }
-
-    &_h1,
-    &_h2,
-    &_h3 {
-      margin: 2em 0 1em;
-    }
-
-    &_p {
-      margin: 0 0 0.9em;
-
-      &:not(:last-child) {
-        margin-bottom: 0;
-      }
-    }
-  }
-
   &_view {
     &_alert {
       color: var(--color-typo-alert);

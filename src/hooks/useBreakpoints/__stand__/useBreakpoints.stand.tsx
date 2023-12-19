@@ -6,8 +6,7 @@ export default createStand({
   group: 'hooks',
   description: 'Отслеживанние размера экрана.',
   alias: ['хук', 'размер', 'экран'],
-  version: '3.12.0',
+  version: '5.0.0',
   status: 'stable',
-  sandbox: 'usebreakpoints-4hqsc5',
   order: 10,
 });

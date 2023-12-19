@@ -1,0 +1,79 @@
+```tsx
+import { useBreakpoints } from '@consta/uikit/useBreakpointsDepricated';
+```
+
+Хук `useBreakpoints` подписывается на изменение ширины экрана и возвращает набор контрольных точек (брейкпоинтов), которые применяются в момент этого изменения.
+
+Если вызвать `useBreakpoints` без аргументов, вернутся стандартные брейкпоинты:
+
+```tsx
+const breakpoints = useBreakpoints();
+// type breakpoints = Record<"5xs" | "4xs" | "3xs" | "2xs" | "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl" | "4xl" | "5xl", boolean>
+```
+
+Можно установить свои брейкпоинты:
+
+```tsx
+const breakpoints = useBreakpoints({ isDesktop: 1000 });
+// type breakpoints = Record<"isDesktop", boolean>
+```
+
+### getLastPoint
+
+Хелпер `getLastPoint` возвращает последний пересечённый брейкпоинт,
+его удобно использовать, когда рендер компонента зависит от одной точки.
+
+Например, так:
+
+```tsx
+import { useBreakpoints, getLastPoint } from '@consta/uikit/useBreakpoints';
+
+const map = {
+  s: ComponentOne,
+  m: ComponentTwo,
+  l: ComponentTree,
+};
+
+const lastPoint = getLastPoint(useBreakpoints({ m: 300, l: 500 }));
+
+const Component = map[lastPoint || s];
+```
+
+Или:
+
+```tsx
+import { useBreakpoints, getLastPoint } from '@consta/uikit/useBreakpoints';
+
+const breakpoint = getLastPoint(useBreakpoints({ m: 300, l: 500 }));
+
+<div className={cnComponent({ breakpoint })} />;
+```
+
+## Свойства
+
+| Аргумент | Тип и значения           | По умолчанию | Описание                |
+| -------- | ------------------------ | ------------ | ----------------------- |
+| `map?`   | `Record<POINTS, number>` | -            | Набор контрольных точек |
+
+### createMods
+
+Хелпер `addPrefix` добавляет префикс в наименования брейкпоинтов для их дальнейшего использования в функции `cn`
+
+```tsx
+import { useBreakpoints, addPrefix } from '@consta/uikit/useBreakpoints';
+
+const breakpoints = useBreakpoints({ l: 500, xl: 800, 2xl:1000 });
+
+
+<div className={cnComponent(addPrefix(breakpoints))} />;
+
+// Component Component_breakpointL Component_breakpointXl Component_breakpoint2xl
+
+```
+
+## Свойства
+
+| Аргумент      | Тип и значения            | По умолчанию   | Описание                                      |
+| ------------- | ------------------------- | -------------- | --------------------------------------------- |
+| `breakpoints` | `Record<string, boolean>` | -              | Брейкпоинты, возвращаемые из `useBreakpoints` |
+| `prefix`      | `string`                  | `'breakpoint'` | Префикс наименования модификатора             |

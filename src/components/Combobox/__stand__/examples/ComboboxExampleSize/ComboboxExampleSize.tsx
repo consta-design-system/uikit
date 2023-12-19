@@ -32,21 +32,21 @@ export function ComboboxExampleSize() {
         size="s"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Combobox
         placeholder="Размер m"
         size="m"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Combobox
         placeholder="Размер l"
         size="l"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

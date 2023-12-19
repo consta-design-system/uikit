@@ -1,7 +1,8 @@
 import { useSelect } from '@consta/stand';
 import * as React from 'react';
 
-import { Loader, loaderPropSize, loaderPropSizeDefault } from '../Loader';
+import { Loader } from '../Loader';
+import { loaderPropSize, loaderPropSizeDefault } from '../types';
 
 const Variants = () => {
   const size = useSelect('size', loaderPropSize, loaderPropSizeDefault);
