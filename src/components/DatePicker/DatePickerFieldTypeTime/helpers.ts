@@ -11,6 +11,7 @@ import {
   startOfHour,
   startOfMinute,
 } from 'date-fns';
+import { MaskedDate } from 'imask';
 import React, { useCallback, useEffect } from 'react';
 import { IMask, ReactMaskOpts, useIMask } from 'react-imask';
 
@@ -111,8 +112,8 @@ export const usePicker = (props: UsePickerProps) => {
   const valueRef = useMutableRef(value);
   const onErrorRef = useMutableRef(onError);
 
-  const onComplete = useCallback(
-    (stringValue: string, maskRef: unknown, e: Event) => {
+  const onAccept = useCallback(
+    (stringValue: string, maskRef: unknown, e: InputEvent | undefined) => {
       const onChange = onChangeRef.current;
       const value = valueRef.current;
 
@@ -124,7 +125,12 @@ export const usePicker = (props: UsePickerProps) => {
         return;
       }
 
-      if (onChange) {
+      if (stringValue?.length !== formatProp.length && value && e && onChange) {
+        onChange(null, { e });
+        return;
+      }
+
+      if (onChange && e) {
         if (!stringValue) {
           if (value) {
             onChange(null, { e });
@@ -177,28 +183,18 @@ export const usePicker = (props: UsePickerProps) => {
     [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
   );
 
-  const onAccept = useCallback(
-    (stringValue: string, maskRef: unknown, e: Event) => {
-      if (stringValue?.length !== formatProp.length && valueRef.current) {
-        onChangeRef.current?.(null, { e });
-      }
-    },
-    [formatProp],
-  );
-
   const { ref, setValue: setStringValue } = useIMask<
     HTMLInputElement,
     ReactMaskOpts
   >(
     {
-      mask: Date,
+      mask: Date as unknown as MaskedDate,
       pattern: formatProp,
       blocks: {
         HH:
           multiplicityHours && multiplicityHours > 1
             ? {
                 mask: IMask.MaskedEnum,
-                // @ts-ignore
                 enum: getTimeEnum(
                   24,
                   multiplicityHours,
@@ -216,7 +212,6 @@ export const usePicker = (props: UsePickerProps) => {
           multiplicityMinutes && multiplicityMinutes > 1
             ? {
                 mask: IMask.MaskedEnum,
-                // @ts-ignore
                 enum: getTimeEnum(
                   60,
                   multiplicityMinutes,
@@ -234,7 +229,6 @@ export const usePicker = (props: UsePickerProps) => {
           multiplicitySeconds && multiplicitySeconds > 1
             ? {
                 mask: IMask.MaskedEnum,
-                // @ts-ignore
                 enum: getTimeEnum(
                   60,
                   multiplicitySeconds,
@@ -285,7 +279,7 @@ export const usePicker = (props: UsePickerProps) => {
         return true;
       },
     },
-    { onAccept, onComplete },
+    { onAccept },
   );
 
   // при изменении value, нужно обновить stringValue
