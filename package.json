@@ -1,6 +1,6 @@
 {
   "name": "@consta/uikit",
-  "version": "5.0.0-beta.2",
+  "version": "5.0.0",
   "keywords": [
     "ui-kit",
     "design-system",
@@ -16,7 +16,7 @@
   "peerDependencies": {
     "@bem-react/classname": "^1.6.0",
     "@bem-react/classnames": "^1.3.10",
-    "@consta/icons": "^1.0.0-beta.1",
+    "@consta/icons": "^1.0.0",
     "compute-scroll-into-view": "^1.0.17",
     "date-fns": "^2.30.0",
     "react": ">= 16.8.0",
