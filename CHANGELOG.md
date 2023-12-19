@@ -1,5 +1,42 @@
 # Changelog
 
+## v5.0.0 (19/12/2023)
+Новая мажорная версия.
+
+- Сторонние зависимости перенесены в `peerDependencies`. Установить их вы сможете самостоятельно, полный список можете посмотреть [здесь](https://github.com/consta-design-system/uikit/blob/master/package.json) 
+- В `Switch` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте или используйте `SwitchDeprecated`
+- В `SwitchGroup` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
+- Компонент `SwitchGroupDeprecated` удален, используйте `SwitchGroup`
+- `TabsDeprecated `удален, используйте `Tabs`
+- В `Tabs` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
+- В `Text` сброшены свойства по умолчанию. Включите необходимые свойства в проекте или используйте компонент `TextDeprecated`
+- `TextField` изменено взаимодействие с маской. Примеры использования можно найти в документации
+- В `TextField` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
+- В `ThemeToggler` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
+- Компонент `Tooltip` был помечен на удаление и перенесен в `TooltipDeprecated`
+- Компонент `TooltipCanary` помечен как стабильный и перемещен в `Tooltip`
+- Компонент `UserSelect` был помечен на удаление и перенесен в `UserSelectDeprecated`
+- Компонент `UserSelectCanary` помечен как стабильный и перемещен в `UserSelect`
+- `useBreakpoints` помечен на удаление и перенесен в `useBreakpointsDeprecated`
+- `useComponentBreakpoints` помечен на удаление и перенесен в  `useComponentBreakpointsDepricated`
+- Добавлен новый компонент `useBreakpoints`, который объединяет возможности старых `useBreakpoints` и `useComponentBreakpoints`
+- В `useChoiceGroup` изменились аргументы свойства `callBack`, измените реализацию подключения в проекте
+- В `useChoiceGroupIndexed` изменились аргументы свойства `callBack`, измените реализацию подключения в проекте
+- `useHideElementsInLine` помечен на удаление и перенесен в  `useHideElementsInLineDepricated`
+- `useHideElementsInLineCanary` помечен как стабильный и перенесен в `useHideElementsInLine`
+- `useResizableContentCanary` помечен как стабильный и перенесен в  `useResizableContent`
+- `useThemeVars` удален, используйте `useStyleProps`
+-  `useVirtualScrollCanary` помечен как стабильный и перенесен в  `useVirtualScroll`
+
+---
+
+- [feat(v5): update code](https://github.com/consta-design-system/uikit/commit/e196dd77e5c51f82f416a5ba0c70aa669b81607c) - [@gizeasy](https://github.com/gizeasy)
+- [chore(.eslintrc): edit config](https://github.com/consta-design-system/uikit/commit/0de44c0890788e60193bec80291073dc531020b8) - [@gizeasy](https://github.com/gizeasy)
+- [fix: typo (#3404)](https://github.com/consta-design-system/uikit/commit/034d608211aa16216db2f3b56b54f411037281d2) - [@nevsky118](https://github.com/nevsky118)
+- [Docs: fix typos (#3399)](https://github.com/consta-design-system/uikit/commit/ba7f1d6368c411f95a8d5c138861209e66a1bdba) - [@vindi-r](https://github.com/vindi-r)
+
+--------------------
+
 ## v4.33.1 (17/11/2023)
 - [fix(Tabs): fixed error at empty items (#3398)](https://github.com/consta-design-system/uikit/commit/525576b95affa97a336a9a2e683eedc8d73f6975) - [@gizeasy](https://github.com/gizeasy)
 
@@ -399,12 +436,3 @@
 - [fix(DatePicker): revert to old logic (#2957)](https://github.com/consta-design-system/uikit/commit/3a6699c6f193196bd28023271827811d9a7605fd) - [@gizeasy](https://github.com/gizeasy)
 - [chore(deps): bump decode-uri-component from 0.2.0 to 0.2.2 (#2936)](https://github.com/consta-design-system/uikit/commit/d5535465862923180098b120e710633a8897b607) - [@dependabot[bot]](https://github.com/dependabot[bot])
 - [chore(deps): bump loader-utils from 2.0.2 to 2.0.4 (#2935)](https://github.com/consta-design-system/uikit/commit/18aa2f3a66db2ea3834872c4d04157d097a125dc) - [@dependabot[bot]](https://github.com/dependabot[bot])
-
---------------------
-
-## v4.13.0 (02/03/2023)
-Добавили в `Collapse` свойство `iconView`, которое меняет вариант отображения иконки разворота
-
----
-
-- [feat(Collapse): add iconView (#2932)](https://github.com/consta-design-system/uikit/commit/5806bc992bf79fa89d89047636c6dda470d29ac5) - [@gizeasy](https://github.com/gizeasy)
