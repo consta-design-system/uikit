@@ -3,7 +3,7 @@ import './SelectValueTag.css';
 import React from 'react';
 
 import { Tag } from '##/components/Tag';
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 
 type SelectValueTagProps = {
   label: string;
@@ -13,7 +13,7 @@ type SelectValueTagProps = {
   handleRemove?: (e: React.SyntheticEvent) => void;
 };
 
-export const cnSelectValueTag = cnCanary('SelectValueTag');
+export const cnSelectValueTag = cn('SelectValueTag');
 
 export const SelectValueTag: React.FC<SelectValueTagProps> = (props) => {
   const { handleRemove = () => {}, size, label, disabled } = props;

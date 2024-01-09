@@ -11,7 +11,7 @@ import {
   mapItemVerticalPadding,
 } from '##/components/ListCanary';
 import { cnMixSpace } from '##/mixs/MixSpace';
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 type UserSelectItemProps = PropsWithHTMLAttributes<
@@ -29,7 +29,7 @@ type UserSelectItemProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export const cnUserSelectItem = cnCanary('UserSelectItem');
+export const cnUserSelectItem = cn('UserSelectItem');
 
 export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
   (props, ref) => {
