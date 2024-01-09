@@ -1,9 +1,14 @@
 # Changelog
 
+## v5.0.1 (09/01/2024)
+- [fix(Selects): fixed classNames (#3425)](https://github.com/consta-design-system/uikit/commit/b562ca25a6fce40a25b9fcc7bf9b7a819ced6b80) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.0.0 (19/12/2023)
 Новая мажорная версия.
 
-- Сторонние зависимости перенесены в `peerDependencies`. Установить их вы сможете самостоятельно, полный список можете посмотреть [здесь](https://github.com/consta-design-system/uikit/blob/master/package.json) 
+- Сторонние зависимости перенесены в `peerDependencies`. Установить их вы сможете самостоятельно, полный список доступен [здесь](https://github.com/consta-design-system/uikit/blob/master/package.json) 
 - В `Switch` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте или используйте `SwitchDeprecated`
 - В `SwitchGroup` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
 - Компонент `SwitchGroupDeprecated` удален, используйте `SwitchGroup`
@@ -421,18 +426,3 @@
 
 ## v4.14.2 (16/03/2023)
 - [fix(useIMask): fixed updateValue (#2958)](https://github.com/consta-design-system/uikit/commit/afaaa13201285d44ba8300192e460b0fccd93708) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.14.0 (15/03/2023)
-В `ThemeToggler` добавили свойство `view` по аналогии с `Button`.
-
----
-
-- [chore(deps-dev): bump webpack from 5.74.0 to 5.76.0 (#2952)](https://github.com/consta-design-system/uikit/commit/feed5522da3ff75c50533a3fd7ce080e7c6325da) - [@dependabot[bot]](https://github.com/dependabot[bot])
-- [docs(TextField): fixed mistakes in documentation (#2945)](https://github.com/consta-design-system/uikit/commit/39f9bdee4a97fb107e77cd933fc0860cc6e28d2c) - [@N1MBER](https://github.com/N1MBER)
-- [fix(UserSelect): fixed bug with form (#2946)](https://github.com/consta-design-system/uikit/commit/f07d1c5163aee7a9493f244a3c50bc7640e31e30) - [@N1MBER](https://github.com/N1MBER)
-- [feat(ThemeToggler): add view (#2950)](https://github.com/consta-design-system/uikit/commit/8a920ce35001a01067b1660edbaaafd1be220890) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): revert to old logic (#2957)](https://github.com/consta-design-system/uikit/commit/3a6699c6f193196bd28023271827811d9a7605fd) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deps): bump decode-uri-component from 0.2.0 to 0.2.2 (#2936)](https://github.com/consta-design-system/uikit/commit/d5535465862923180098b120e710633a8897b607) - [@dependabot[bot]](https://github.com/dependabot[bot])
-- [chore(deps): bump loader-utils from 2.0.2 to 2.0.4 (#2935)](https://github.com/consta-design-system/uikit/commit/18aa2f3a66db2ea3834872c4d04157d097a125dc) - [@dependabot[bot]](https://github.com/dependabot[bot])
