@@ -3,7 +3,7 @@ import './SelectCreateButton.css';
 import React, { forwardRef } from 'react';
 
 import { ListAddItem } from '##/components/ListCanary';
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { PropSize } from '../types';
@@ -20,7 +20,7 @@ type SelectCreateButtonProps = PropsWithHTMLAttributesAndRef<
   HTMLDivElement
 >;
 
-export const cnSelectCreateButton = cnCanary('SelectCreateButton');
+export const cnSelectCreateButton = cn('SelectCreateButton');
 
 export const SelectCreateButton: React.FC<SelectCreateButtonProps> = forwardRef(
   (props, ref) => {

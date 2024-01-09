@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react';
 
 import { Checkbox, CheckboxPropSize } from '##/components/Checkbox';
 import { ListItem } from '##/components/ListCanary';
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { PropSize } from '../types';
@@ -29,7 +29,7 @@ export const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
   l: 'l',
 };
 
-export const cnSelectItem = cnCanary('SelectItem');
+export const cnSelectItem = cn('SelectItem');
 
 export const SelectItem: React.FC<SelectItemProps> = forwardRef(
   (props, ref) => {

@@ -3,7 +3,7 @@ import './UserSelectValue.css';
 import { IconClose } from '@consta/icons/IconClose';
 import React from 'react';
 
-import { cnCanary } from '../../../utils/bem';
+import { cn } from '../../../utils/bem';
 import { User } from '../../User/User';
 
 type UserValueProps = {
@@ -17,7 +17,7 @@ type UserValueProps = {
   children?: never;
 };
 
-export const cnUserSelectValue = cnCanary('UserSelectValue');
+export const cnUserSelectValue = cn('UserSelectValue');
 
 export const UserSelectValue: React.FC<UserValueProps> = (props) => {
   const { size, label, subLabel, disabled, handleRemove, avatarUrl, multiple } =

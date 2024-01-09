@@ -1,11 +1,9 @@
-.canary--UserSelectVariants {
-  &.canary--UserSelectVariants {
-    position: absolute;
-    top: var(--space-l);
-    width: 100%;
-    max-width: 400px;
-    padding: var(--space-m);
-  }
+.UserSelectVariants {
+  position: absolute;
+  top: var(--space-l);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-m);
 
   &-MyItem {
     --text-color: var(--color-control-typo-default);

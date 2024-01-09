@@ -20,14 +20,14 @@ import {
 } from '##/mixs/MixPopoverAnimate/MixPopoverAnimate';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cnMixSpace } from '##/mixs/MixSpace';
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 import { fabricIndex } from '##/utils/fabricIndex';
 import { SelectAllItem } from '##/utils/getGroups';
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
-import { SelectItemAll } from '../SelectItemAll/SelectSelectAll';
+import { SelectItemAll } from '../SelectItemAll/SelectItemAll';
 import { SelectLoader } from '../SelectLoader/SelectLoader';
 import { PropSize, RenderItemProps } from '../types';
 import {
@@ -79,7 +79,7 @@ type SelectDropdown = <ITEM, GROUP>(
   props: Props<ITEM, GROUP>,
 ) => React.ReactElement | null;
 
-const cnSelectDropdown = cnCanary('SelectDropdown');
+const cnSelectDropdown = cn('SelectDropdown');
 
 const getLenghtElements = <ITEM, GROUP>(
   elements: (

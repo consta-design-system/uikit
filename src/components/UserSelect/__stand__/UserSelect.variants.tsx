@@ -14,7 +14,7 @@ import {
 } from '##/components/SelectComponents/types';
 import { Text } from '##/components/Text';
 import { UserSelect } from '##/components/UserSelect';
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 
 import {
   groups,
@@ -51,7 +51,7 @@ const Variants = () => {
   const withGroups = useBoolean('withGroups', false);
   const isLoading = useBoolean('isLoading', false);
 
-  const cnUserSelectVariants = cnCanary('UserSelectVariants');
+  const cnUserSelectVariants = cn('UserSelectVariants');
 
   const [value, setValue] = useState<Item | null>(null);
   const [valueMultiple, setValueMultiple] = useState<Item[] | null>(null);

@@ -13,7 +13,7 @@ import {
   propStatus,
   propView,
 } from '##/components/SelectComponents/types';
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 
 import {
   groups,
@@ -25,7 +25,7 @@ import {
 } from '../__mocks__/data.mock';
 import { Select } from '../Select';
 
-const cnSelectVariants = cnCanary('SelectVariants');
+const cnSelectVariants = cn('SelectVariants');
 
 const Variants = () => {
   const example = useSelect(
