@@ -27,6 +27,8 @@ export type CheckboxPropOnChange = (
   },
 ) => void;
 
+const checkboxPropOnChangeDefault = () => {};
+
 type Props = {
   checked: boolean | undefined;
   size?: CheckboxPropSize;
@@ -69,7 +71,7 @@ export const Checkbox = React.forwardRef<HTMLLabelElement, CheckboxProps>(
       intermediate = false,
       className,
       label,
-      onChange,
+      onChange = checkboxPropOnChangeDefault,
       onFocus,
       onBlur,
       readOnly,
