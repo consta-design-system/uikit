@@ -8,6 +8,7 @@ import { cn } from '../../utils/bem';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import {
   switchPropAlignDefault,
+  switchPropOnChangeDefault,
   SwitchProps,
   switchPropSizeDefault,
   switchPropViewDefault,
@@ -29,7 +30,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
       disabled,
       className,
       label,
-      onChange,
+      onChange = switchPropOnChangeDefault,
       onFocus,
       onBlur,
       readOnly,
