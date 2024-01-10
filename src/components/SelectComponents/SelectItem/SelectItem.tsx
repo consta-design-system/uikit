@@ -42,6 +42,7 @@ export const SelectItem: React.FC<SelectItemProps> = forwardRef(
       size,
       indent,
       disabled,
+      onClick,
       ...otherProps
     } = props;
 
@@ -59,6 +60,7 @@ export const SelectItem: React.FC<SelectItemProps> = forwardRef(
         active={hovered}
         checked={!multiple && active}
         disabled={disabled}
+        onClick={onClick}
         leftSide={
           multiple && (
             <Checkbox
