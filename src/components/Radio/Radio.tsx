@@ -20,6 +20,8 @@ export const radioPropAlign = ['center', 'top'] as const;
 export type RadioPropAlign = typeof radioPropAlign[number];
 export const radioPropAlignDefault: RadioPropAlign = radioPropAlign[0];
 
+const radioPropOnChangeDefault = () => {};
+
 export type RadioPropOnChange = (
   checked: boolean,
   params: {
@@ -69,7 +71,7 @@ export const Radio = React.forwardRef<HTMLLabelElement, RadioProps>(
       disabled,
       className,
       label,
-      onChange,
+      onChange = radioPropOnChangeDefault,
       onFocus,
       onBlur,
       readOnly,
