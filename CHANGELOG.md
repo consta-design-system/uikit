@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.0.2 (10/01/2024)
+- [fix(Switch): add onChangeDefault](https://github.com/consta-design-system/uikit/commit/d30f834cfadd5b68bb6c9ce78ddf7c0016c64ddb) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Radio): add onChangeDefault](https://github.com/consta-design-system/uikit/commit/f25c771f3b7c3c916a4aa60f3552e5130a05a6f9) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Checkbox): add onChangeDefault (#3428)](https://github.com/consta-design-system/uikit/commit/68e9a6fa7f1c0863919bc1721302f52c5613d67f) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.0.1 (09/01/2024)
 - [fix(Selects): fixed classNames (#3425)](https://github.com/consta-design-system/uikit/commit/b562ca25a6fce40a25b9fcc7bf9b7a819ced6b80) - [@gizeasy](https://github.com/gizeasy)
 
@@ -421,8 +428,3 @@
 - [feat(FieldLabel): added prop icon (#2949)](https://github.com/consta-design-system/uikit/commit/70c4ffbfc10ae4003816758d60a1aa3f0a117508) - [@N1MBER](https://github.com/N1MBER)
 - [fix(DatePicker): fix clearButton (#2968)](https://github.com/consta-design-system/uikit/commit/1e5731b85b8b78adeaa88c87678926f186fe3402) - [@N1MBER](https://github.com/N1MBER)
 - [feat(DateTime): add prop disableDates (#2940)](https://github.com/consta-design-system/uikit/commit/53f1fa766eb604f174525fc5d8d20ef5361eb674) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.14.2 (16/03/2023)
-- [fix(useIMask): fixed updateValue (#2958)](https://github.com/consta-design-system/uikit/commit/afaaa13201285d44ba8300192e460b0fccd93708) - [@gizeasy](https://github.com/gizeasy)
