@@ -1,7 +1,7 @@
 import { IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
-import { TextFieldPropSize } from './types';
+import { TextFieldPropSize, TextFieldPropValue } from './types';
 
 export const sizeMap: Record<TextFieldPropSize, IconPropSize> = {
   xs: 'xs',
@@ -108,3 +108,6 @@ export const getValueByStep = (
       : getValueByStepNumber(steps, value, min, max, isIncrement)
   ).toString();
 };
+
+export const inputValue = (value?: TextFieldPropValue) =>
+  value === null ? '' : value;

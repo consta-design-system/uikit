@@ -23,6 +23,7 @@ import {
   getIncrementFlag,
   getTypeForRender,
   getValueByStep,
+  inputValue,
   sizeMap,
 } from './helpers';
 import {
@@ -71,7 +72,7 @@ export const TextFieldRender = <TYPE extends string>(
     rightSide,
     autoComplete,
     withClearButton,
-    incrementButtons = true,
+    incrementButtons: incrementButtonsProp = true,
     max,
     min,
     readOnly,
@@ -94,12 +95,16 @@ export const TextFieldRender = <TYPE extends string>(
     onKeyPressCapture,
     onKeyUp,
     onKeyUpCapture,
+
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
-  const [focus, setFocus] = useFlag(autoFocus);
-  const [passwordVisible, setPasswordVisuble] = useFlag(false);
 
-  const valueRef = useMutableRef(value);
+  const incrementButtons = type === 'number' ? incrementButtonsProp : false;
+
+  const [focus, setFocus] = useFlag(autoFocus);
+  const [passwordVisible, setPasswordVisuble] = useFlag();
+  const [withValue, setWithValue] = useFlag();
+
   const onClickRef = useMutableRef(onClick);
   const onChangeRef = useMutableRef(onChange);
 
@@ -135,6 +140,12 @@ export const TextFieldRender = <TYPE extends string>(
           id,
           name,
         });
+
+      if (e.target.value) {
+        setWithValue.on();
+      } else {
+        setWithValue.off();
+      }
     },
     [id, name, disabled],
   );
@@ -151,8 +162,8 @@ export const TextFieldRender = <TYPE extends string>(
 
   const commonProps = {
     'className': cnTextField('Input'),
-    'value': value ?? undefined,
-    'defaultValue': defaultValue ?? undefined,
+    'value': inputValue(value),
+    'defaultValue': inputValue(defaultValue),
     'onChange': handleChange,
     maxLength,
     disabled,
@@ -180,12 +191,25 @@ export const TextFieldRender = <TYPE extends string>(
     onKeyDownProp?.(e);
     if (type === 'number' && typeof flag === 'boolean' && !disabled) {
       e.preventDefault();
-      const newValue = getValueByStep(sortedSteps, value, flag, min, max);
+
+      const newValue = getValueByStep(
+        sortedSteps,
+        inputRef.current?.value,
+        flag,
+        min,
+        max,
+      );
+
       onChangeRef.current?.(newValue, {
         e,
         id,
         name,
       });
+
+      if (inputRef.current) {
+        inputRef.current.value = newValue;
+        setWithValue.on();
+      }
     }
   };
 
@@ -217,18 +241,33 @@ export const TextFieldRender = <TYPE extends string>(
       id,
       name,
     });
+
+    if (inputRef.current) {
+      inputRef.current.value = '';
+      setWithValue.off();
+    }
   }, []);
 
   const changeNumberValue = (
     e: React.MouseEvent<HTMLButtonElement>,
     isIncrement = true,
   ) => {
-    const newValue = getValueByStep(sortedSteps, value, isIncrement, min, max);
+    const newValue = getValueByStep(
+      sortedSteps,
+      inputRef.current?.value,
+      isIncrement,
+      min,
+      max,
+    );
     onChangeRef.current?.(newValue, {
       e,
       id,
       name,
     });
+    if (inputRef.current) {
+      inputRef.current.value = newValue;
+      setWithValue.on();
+    }
   };
 
   const rootProps = {
@@ -238,12 +277,15 @@ export const TextFieldRender = <TYPE extends string>(
     }, []),
   };
 
-  // при смене passwordVible, перемещаем курсор в конец строки
   useEffect(() => {
-    if (type === 'password' && inputRef.current) {
-      inputRef.current.selectionStart = valueRef.current?.length || 0;
+    if (inputRef.current && type !== 'number' && withClearButton) {
+      if (inputRef.current?.value) {
+        setWithValue.on();
+      } else {
+        setWithValue.off();
+      }
     }
-  }, [passwordVisible]);
+  }, [inputRef.current, withClearButton, type]);
 
   return (
     <div
@@ -274,7 +316,8 @@ export const TextFieldRender = <TYPE extends string>(
             disabled,
             type,
             focus: focus || focused,
-            withValue: !!value,
+            withValue,
+            incrementButtons: type === 'number' && incrementButtons,
           })}
         >
           {LeftIcon && (
@@ -298,7 +341,7 @@ export const TextFieldRender = <TYPE extends string>(
             <input {...commonProps} {...inputProps} />
           )}
 
-          {type === 'number' && incrementButtons && (
+          {type === 'number' && incrementButtons && !disabled && (
             <div className={cnTextField('Counter')}>
               <button
                 onFocus={handleFocus}
@@ -319,7 +362,7 @@ export const TextFieldRender = <TYPE extends string>(
             </div>
           )}
 
-          {!!value && withClearButton && type !== 'number' && (
+          {!incrementButtons && withValue && withClearButton && !disabled && (
             <button
               type="button"
               disabled={disabled}
@@ -334,7 +377,7 @@ export const TextFieldRender = <TYPE extends string>(
             </button>
           )}
 
-          {type === 'password' && !!value && (
+          {type === 'password' && inputRef.current?.value && (
             <button
               className={cnTextField('ClearButton')}
               type="button"
@@ -344,7 +387,7 @@ export const TextFieldRender = <TYPE extends string>(
             </button>
           )}
 
-          {RightIcon && type !== 'number' && type !== 'password' && (
+          {RightIcon && !incrementButtons && type !== 'password' && (
             <div
               className={cnTextField('Side', {
                 position: 'right',
