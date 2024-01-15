@@ -3,6 +3,6 @@
     position: fixed;
     z-index: 9999;
     right: var(--space-m);
-    bottom: 0;
+    bottom: var(--space-m);
   }
 }
