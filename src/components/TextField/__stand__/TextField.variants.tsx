@@ -37,7 +37,11 @@ const Variants = () => {
   const view = useSelect('view', textFieldPropView, textFieldPropViewDefault);
   const disabled = useBoolean('disabled', false);
   const required = useBoolean('required', false);
-  const withClearButton = useBoolean('withClearButton', true);
+  const withClearButton = useBoolean(
+    'withClearButton',
+    true,
+    !incrementButtons,
+  );
   const caption = useText('caption', 'Подпись');
   const label = useText('label', 'Заголовок');
   const withLabelIcon = useBoolean('withLabelIcon', false);

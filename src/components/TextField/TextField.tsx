@@ -4,7 +4,6 @@ import { IconClear } from '@consta/icons/IconClear';
 import { IconEye } from '@consta/icons/IconEye';
 import { IconEyeClose } from '@consta/icons/IconEyeClose';
 import { IconSelect } from '@consta/icons/IconSelect';
-import { IconSelectOpen } from '@consta/icons/IconSelectOpen';
 import React, { forwardRef, useCallback, useEffect } from 'react';
 import TextAreaAutoSize from 'react-textarea-autosize';
 
@@ -347,9 +346,9 @@ export const TextFieldRender = <TYPE extends string>(
                 onFocus={handleFocus}
                 onClick={(e) => changeNumberValue(e, true)}
                 type="button"
-                className={cnTextField('CounterButton')}
+                className={cnTextField('CounterButton', { fn: 'increment' })}
               >
-                <IconSelectOpen size="xs" />
+                <IconSelect size="xs" />
               </button>
               <button
                 onFocus={handleFocus}

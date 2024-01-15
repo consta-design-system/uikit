@@ -397,6 +397,12 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.15s;
+
+    &_fn {
+      &_increment {
+        transform: rotate(180deg);
+      }
+    }
   }
 
   &-ClearButton,
