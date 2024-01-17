@@ -1,5 +1,14 @@
 # Changelog
 
+## v5.0.3 (17/01/2024)
+- [fix(Combobox): fixed align ClearButton (#3442)](https://github.com/consta-design-system/uikit/commit/bde70e1e70ecd2a9c4ddf3c143d9d88e7fa50747) - [@gizeasy](https://github.com/gizeasy)
+- [fix(TextField): fixed rightSide and clearButton (#3440)](https://github.com/consta-design-system/uikit/commit/fea7954dcdd5e847f31bbb158c78348cf8580aac) - [@gizeasy](https://github.com/gizeasy)
+- [chore: not significant changes (#3454)](https://github.com/consta-design-system/uikit/commit/ca31b3c97b96abd2b8e96af5bb28983588eb5e8f) - [@gizeasy](https://github.com/gizeasy)
+- [fix(EventInterceptor): fix Checkbox events handler (#3451)](https://github.com/consta-design-system/uikit/commit/b89f247a8b5271b1773dd164e3467cbfecb13607) - [@gizeasy](https://github.com/gizeasy)
+- [chore: the trash is cleaned up (#3446)](https://github.com/consta-design-system/uikit/commit/7257b4b5319e386c2758eb8463f341b6506ad0e8) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.0.2 (10/01/2024)
 - [fix(Switch): add onChangeDefault](https://github.com/consta-design-system/uikit/commit/d30f834cfadd5b68bb6c9ce78ddf7c0016c64ddb) - [@gizeasy](https://github.com/gizeasy)
 - [fix(Radio): add onChangeDefault](https://github.com/consta-design-system/uikit/commit/f25c771f3b7c3c916a4aa60f3552e5130a05a6f9) - [@gizeasy](https://github.com/gizeasy)
@@ -410,21 +419,3 @@
 - [docs: add aliases (#3002)](https://github.com/consta-design-system/uikit/commit/0e4c1aa1852a353ebbcd20116213211e0c90fd49) - [@N1MBER](https://github.com/N1MBER)
 - [fix(Combobox): fixed type dropdownRef (#3000)](https://github.com/consta-design-system/uikit/commit/c8cd834ff32218d7f63f9a62ce83c2a2da482972) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Combobox): add prop selectAll (#2993)](https://github.com/consta-design-system/uikit/commit/b3f9daae7e0e3f061745f37bd1ff686fe2d94343) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.15.0 (17/04/2023)
-Самое важное:
-- Теперь в поле ввода можно установить иконку слева от заголовка.
-- `DatePicker`. Исправлена работа кнопки «Очистить».
-- `DateTime`. Добавлена возможность указывать произвольные даты.
-
----
-
-- [chore: update @consta/stand](https://github.com/consta-design-system/uikit/commit/7b0ca0d675759519388bf4c40b217325f04a8104) - [@gizeasy](https://github.com/gizeasy)
-- [feat(TextField): add margin to counter buttons for round forms (#2990)](https://github.com/consta-design-system/uikit/commit/e30b594c9b641b319a3d220cfcac0af7be16c1e0) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Selects): add fragments to docs about view clear (#2989)](https://github.com/consta-design-system/uikit/commit/a3b69f8c4e4d840b0e8819d0e2ad475f7884845b) - [@N1MBER](https://github.com/N1MBER)
-- [feat(FieldLabel): added prop icon (#2960)](https://github.com/consta-design-system/uikit/commit/d0ca7ddd8595178c3d7c71cac24cfa5369cd04cf) - [@N1MBER](https://github.com/N1MBER)
-- [feat(FieldLabel): added prop icon (#2949)](https://github.com/consta-design-system/uikit/commit/70c4ffbfc10ae4003816758d60a1aa3f0a117508) - [@N1MBER](https://github.com/N1MBER)
-- [fix(DatePicker): fix clearButton (#2968)](https://github.com/consta-design-system/uikit/commit/1e5731b85b8b78adeaa88c87678926f186fe3402) - [@N1MBER](https://github.com/N1MBER)
-- [feat(DateTime): add prop disableDates (#2940)](https://github.com/consta-design-system/uikit/commit/53f1fa766eb604f174525fc5d8d20ef5361eb674) - [@N1MBER](https://github.com/N1MBER)
