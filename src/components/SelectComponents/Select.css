@@ -492,7 +492,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: calc(var(--input-height) - (var(--control-border-width) * 2));
+    height: 100%;
+    min-height: calc(var(--input-height) - (var(--control-border-width) * 2));
     margin: 0;
     padding: 0 var(--space-xs);
     color: var(--clear-button-color);
