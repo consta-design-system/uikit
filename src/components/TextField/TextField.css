@@ -338,15 +338,15 @@
 
     &_withValue {
       & .TextField-Side.TextField-Side_type_string {
-        color: var(--color-control-typo-default);
+        color: var(--color-typo-secondary);
       }
 
-      & .TextField-Icon {
+      & .TextField-Side.TextField-Side_type_icon {
         color: var(--color-typo-secondary);
       }
     }
 
-    &_type_number {
+    &_incrementButtons {
       padding-right: 0;
     }
 
@@ -397,13 +397,20 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.15s;
+
+    &_fn {
+      &_increment {
+        transform: rotate(180deg);
+      }
+    }
   }
 
   &-ClearButton,
   &-EyeButton {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
     height: calc(var(--input-height) - (var(--control-border-width) * 2));
     margin: 0;
     margin-left: var(--input-space);
@@ -430,8 +437,6 @@
   }
 
   &-ClearButtonIcon {
-    position: relative;
-    top: 1px;
     color: var(--color-control-typo-placeholder);
   }
 

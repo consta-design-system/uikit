@@ -70,16 +70,6 @@ type InputRef<TYPE> = TYPE extends 'textarea'
   ? { inputRef?: React.Ref<HTMLTextAreaElement> }
   : { inputRef?: React.Ref<HTMLInputElement> };
 
-export type TextFieldPropRightSide<TYPE extends string> = TYPE extends
-  | 'number'
-  | 'password'
-  ? {
-      rightSide?: never;
-    }
-  : {
-      rightSide?: string | IconComponent;
-    };
-
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
   {
     className?: string;
@@ -132,7 +122,6 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
 > &
   InputRef<TYPE> &
   TextFieldPropsTextareaType<TYPE> &
-  TextFieldPropRightSide<TYPE> &
   React.RefAttributes<HTMLDivElement>;
 
 export type TextFieldComponent = <TYPE extends string>(

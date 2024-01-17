@@ -1,7 +1,7 @@
 import { IconPhoto } from '@consta/icons/IconPhoto';
 import { IconQuestion } from '@consta/icons/IconQuestion';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
   TextField,
@@ -29,15 +29,19 @@ const Variants = () => {
     true,
     type === 'number',
   );
-  const min = useNumber('min', 0, Boolean(incrementButtons));
-  const max = useNumber('max', 150, Boolean(incrementButtons));
+  const min = useNumber('min', 0, type === 'number');
+  const max = useNumber('max', 150, type === 'number');
   const form = useSelect('form', textFieldPropForm, textFieldPropFormDefault);
   const status = useSelect('status', textFieldPropStatus);
   const size = useSelect('size', textFieldPropSize, textFieldPropSizeDefault);
   const view = useSelect('view', textFieldPropView, textFieldPropViewDefault);
   const disabled = useBoolean('disabled', false);
   const required = useBoolean('required', false);
-  const withClearButton = useBoolean('withClearButton', false);
+  const withClearButton = useBoolean(
+    'withClearButton',
+    true,
+    !incrementButtons,
+  );
   const caption = useText('caption', 'Подпись');
   const label = useText('label', 'Заголовок');
   const withLabelIcon = useBoolean('withLabelIcon', false);
@@ -49,8 +53,6 @@ const Variants = () => {
   const leftSideText = useText('leftSideText', 'from');
   const rightSideType = useSelect('rightSideType', ['icon', 'text']);
   const rightSideText = useText('rightSideText', 'm²');
-
-  const [value, setValue] = useState<string | null | undefined>(undefined);
 
   const leftSideSelect = {
     text: leftSideText,
@@ -70,7 +72,6 @@ const Variants = () => {
 
   return (
     <TextField
-      value={value}
       form={form}
       status={status}
       size={size}
@@ -87,7 +88,6 @@ const Variants = () => {
       minRows={minRows}
       maxRows={maxRows}
       placeholder={placeholder}
-      onChange={setValue}
       leftSide={leftSide}
       rightSide={rightSide}
       disabled={disabled}
