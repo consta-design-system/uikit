@@ -2,7 +2,7 @@ import './SelectLoader.css';
 
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
+import { cnDeprecated } from '../../../utils/bem';
 import { Loader } from '../../LoaderDeprecated/LoaderDeprecated';
 import { defaultPropSize, PropSize } from '../types';
 
@@ -11,7 +11,7 @@ type Props = {
   size?: PropSize;
 };
 
-export const cnSelectLoader = cn('SelectLoader');
+export const cnSelectLoader = cnDeprecated('SelectLoader');
 
 export const SelectLoader = (props: Props) => {
   const { mode = 'empty', size = defaultPropSize } = props;

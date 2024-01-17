@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { cn } from '../../../../../utils/bem';
 import { Badge } from '../../../../Badge/Badge';
 import { User } from '../../../../User/User';
+import avatarUrl from '../../../__mocks__/avatar_1.jpg';
 import { UserSelect } from '../../../UserSelectDeprecated';
 
 const cnUserSelectExampleRenderItem = cn('UserSelectExampleRenderItem');
@@ -34,7 +35,7 @@ const items: Item[] = [
   {
     label: 'Егор Егоров',
     subLabel: 'igor@icloud.com',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
+    avatarUrl,
     id: 3,
     status: 'inOffice',
   },

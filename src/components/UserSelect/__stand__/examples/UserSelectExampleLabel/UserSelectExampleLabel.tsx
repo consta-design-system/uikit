@@ -2,6 +2,7 @@ import { IconUser } from '@consta/icons/IconUser';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
+import avatarUrl from '../../../__mocks__/avatar_1.jpg';
 import { UserSelect } from '../../../UserSelect';
 
 type Item = {
@@ -25,7 +26,7 @@ const items: Item[] = [
   {
     label: 'Егор Егоров',
     subLabel: 'igor@icloud.com',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
+    avatarUrl,
     id: 3,
   },
 ];

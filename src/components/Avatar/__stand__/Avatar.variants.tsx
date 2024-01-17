@@ -1,7 +1,7 @@
 import { useBoolean, useSelect, useText } from '@consta/stand';
 import React from 'react';
 
-import image from '../__mocks__/image.jpeg';
+import image from '../__mocks__/avatar_1.jpg';
 import {
   Avatar,
   avatarPropForm,

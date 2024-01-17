@@ -23,7 +23,7 @@ import {
   animateTimeout,
   cnMixPopoverAnimate,
 } from '../../../mixs/MixPopoverAnimate/MixPopoverAnimate';
-import { cn } from '../../../utils/bem';
+import { cnDeprecated } from '../../../utils/bem';
 import { fabricIndex } from '../../../utils/fabricIndex';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 import { Popover, PopoverPropOffset } from '../../Popover/Popover';
@@ -70,7 +70,7 @@ type SelectDropdown = <ITEM, GROUP>(
   props: Props<ITEM, GROUP>,
 ) => React.ReactElement | null;
 
-const cnSelectDropdown = cn('SelectDropdown');
+const cnSelectDropdown = cnDeprecated('SelectDropdown');
 
 export const SelectDropdown: SelectDropdown = (props) => {
   const {
