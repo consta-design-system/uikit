@@ -2,7 +2,7 @@ import './SelectValueTag.css';
 
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
+import { cnDeprecated } from '../../../utils/bem';
 import { Tag } from '../../Tag/Tag';
 
 type SelectValueTagProps = {
@@ -13,7 +13,7 @@ type SelectValueTagProps = {
   handleRemove?: (e: React.SyntheticEvent) => void;
 };
 
-export const cnSelectValueTag = cn('SelectValueTag');
+export const cnSelectValueTag = cnDeprecated('SelectValueTag');
 
 export const SelectValueTag: React.FC<SelectValueTagProps> = (props) => {
   const { handleRemove = () => {}, size, label, disabled } = props;

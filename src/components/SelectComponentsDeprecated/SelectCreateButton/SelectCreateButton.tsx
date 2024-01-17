@@ -3,7 +3,7 @@ import './SelectCreateButton.css';
 import React from 'react';
 
 import { ListAddItem } from '##/components/ListCanary';
-import { cn } from '##/utils/bem';
+import { cnDeprecated } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { PropSize } from '../types';
@@ -20,7 +20,7 @@ type SelectCreateButtonProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export const cnSelectCreateButton = cn('SelectCreateButton');
+export const cnSelectCreateButton = cnDeprecated('SelectCreateButton');
 
 export const SelectCreateButton: React.FC<SelectCreateButtonProps> = (
   props,

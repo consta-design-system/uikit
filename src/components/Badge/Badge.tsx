@@ -48,11 +48,8 @@ type Props = {
 
 export const cnBadge = cn('Badge');
 
-const renderIcon = (Icon: IconComponent | undefined) => {
-  if (Icon) {
-    return <Icon size="xs" className={cnBadge('Icon')} />;
-  }
-};
+const renderIcon = (Icon: IconComponent | undefined) =>
+  Icon ? <Icon size="xs" className={cnBadge('Icon')} /> : null;
 
 export const Badge = forwardRefWithAs<Props>((props, ref) => {
   const {
@@ -66,6 +63,7 @@ export const Badge = forwardRefWithAs<Props>((props, ref) => {
     minified,
     label,
     as = 'div',
+    title,
     ...otherProps
   } = props;
 
@@ -98,7 +96,7 @@ export const Badge = forwardRefWithAs<Props>((props, ref) => {
         [className],
       )}
       ref={ref}
-      title={minified && label}
+      title={title || (minified && label)}
     >
       {!minified && (
         <>

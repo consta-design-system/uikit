@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ListItem } from '##/components/ListCanary';
 import { Text, TextPropSize } from '##/components/Text';
-import { cn } from '##/utils/bem';
+import { cnDeprecated } from '##/utils/bem';
 
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Checkbox } from '../../Checkbox/Checkbox';
@@ -22,7 +22,7 @@ export type SelectItemAllProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export const cnSelectItemAll = cn('SelectItemAll');
+export const cnSelectItemAll = cnDeprecated('SelectItemAll');
 
 const textSizeMap: Record<PropSize, TextPropSize> = {
   xs: 's',

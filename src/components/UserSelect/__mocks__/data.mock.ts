@@ -1,3 +1,5 @@
+import avatarUrl from './avatar_1.jpg';
+
 export type Item = {
   label: string;
   subLabel?: string;
@@ -28,7 +30,7 @@ export const items: Item[] = [
   {
     label: 'Егор Егоров',
     subLabel: 'igor@icloud.com',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
+    avatarUrl,
     id: 3,
     groupId: 1,
   },
@@ -88,14 +90,14 @@ export const myItems: MyItem[] = [
   {
     name: 'Андрей Андреев',
     email: 'andrey@gmail.com',
-    avatarUrl: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+    avatarUrl,
     group: myGroup[0],
     position: 'Дизайнер',
   },
   {
     name: 'Иван Иванов',
     email: 'ivan@gmail.com',
-    avatarUrl: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+    avatarUrl,
     group: myGroup[0],
     position: 'Дизайнер',
   },
@@ -108,14 +110,14 @@ export const myItems: MyItem[] = [
   {
     name: 'Борис Борисов',
     email: 'boris@mail.com',
-    avatarUrl: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+    avatarUrl,
     group: myGroup[2],
     position: 'Программист',
   },
   {
     name: 'Кирилл Кириллов',
     email: 'kirill@yandex.ru',
-    avatarUrl: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+    avatarUrl,
     group: myGroup[2],
     position: 'Менеджер',
   },

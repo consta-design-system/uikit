@@ -3,7 +3,7 @@ import './SelectItem.css';
 import React from 'react';
 
 import { ListItem } from '##/components/ListCanary';
-import { cn } from '##/utils/bem';
+import { cnDeprecated } from '##/utils/bem';
 
 import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
 import { Checkbox, CheckboxPropSize } from '../../Checkbox/Checkbox';
@@ -29,7 +29,7 @@ export const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
   l: 'l',
 };
 
-export const cnSelectItem = cn('SelectItem');
+export const cnSelectItem = cnDeprecated('SelectItem');
 
 export const SelectItem: React.FC<SelectItemProps> = (props) => {
   const {
