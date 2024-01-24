@@ -1,4 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-exec < /dev/tty && npx cz --hook || true
+if [ -t 1 ]; then    
+   exec < /dev/tty && npx cz --hook || true
+else
+   echo "https://stackoverflow.com/questions/54531547/sh-shell-script-on-windows-causes-error-dev-tty-no-such-device-or-address"
+fi
