@@ -34,6 +34,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Установка зависимостей
-        run: yarn --frozen-lockfile
+        run: yarn add "install-peers-cli@https://github.com/evless/install-peers-cli#fix-yarn-policies" && yarn --frozen-lockfile
       - name: Тесты
         run: yarn test
