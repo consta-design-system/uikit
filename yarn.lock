@@ -8691,9 +8691,10 @@ inquirer@^3.3.0:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-"install-peers-cli@https://github.com/evless/install-peers-cli#fix-yarn-policies":
+install-peers-cli@2.2.0:
   version "2.2.0"
-  resolved "https://github.com/evless/install-peers-cli#5bc81ba05a4fe914d66e109f23f3a9b8d698aea1"
+  resolved "https://registry.yarnpkg.com/install-peers-cli/-/install-peers-cli-2.2.0.tgz#f76f1ec8ac9fa7f920c05743e011554edad85f8d"
+  integrity sha512-scSNvF49HDOLNm2xLFwST23g/OvfsceiA087bcGBgZP/ZNCrvpSaCn5IrWNZ2XYmFFykXF/6J1Zgm+D/JgRgtA==
   dependencies:
     commander "^2.20.0"
     executioner "^2.0.1"
