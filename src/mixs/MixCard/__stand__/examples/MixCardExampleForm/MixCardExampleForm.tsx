@@ -15,7 +15,9 @@ export const MixCardExampleForm = () => {
           shadow: true,
         })}
       >
-        <Text>square</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          square
+        </Text>
       </div>
       <div
         className={cnMixCard({
@@ -25,7 +27,9 @@ export const MixCardExampleForm = () => {
           shadow: true,
         })}
       >
-        <Text>round</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          round
+        </Text>
       </div>
     </Example>
   );

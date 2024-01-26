@@ -22,7 +22,7 @@ export const RadioGroupExampleSize = () => {
           value={value}
           items={simpleItems}
           getItemLabel={(item) => item}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           className={cnRadioGroupExampleSize()}
           size={size}
         />

@@ -1,0 +1,109 @@
+import { ExampleUseHideElementsInLine } from './examples/ExampleUseHideElementsInLine/ExampleUseHideElementsInLine';
+
+```tsx
+import { useHideElementsInLine } from '@consta/uikit/useHideElementsInLine';
+```
+
+Этот хук может понадобиться в компонентах, часть элементов которых нужно при каких-то условиях скрывать — например, если весь компонент не помещается в родительский контейнер по ширине.
+
+## Аргументы
+
+| Аргумент   | Тип и значения | По умолчанию | Описание                                                                                                                                                                                       |
+| ---------- | -------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `items`    | `ITEM[]`       | -            | Элементы, которые буду скрываться                                                                                                                                                              |
+| `busy?`    | `number`       | `0`          | Пространство, занятое в родительском элементе другими элементами (это пространство нельзя использовать)                                                                                        |
+| `reverse?` | `boolean`      | -            | Показывает, что нужно скрывать элементы справа налево: сначала крайний справа, потом следующий. По умолчанию элементы скрываются слева направо: сначала крайний правый, потом следующий за ним |
+
+## Результат
+
+Возвращается хуком.
+
+| Свойство          | Тип и значения               | Описание                             |
+| ----------------- | ---------------------------- | ------------------------------------ |
+| `visibleItems`    | `ITEM[]`                     | Элементы, которые нужно отобразить   |
+| `hiddenItems`     | `ITEM[]`                     | Элементы, которые нужно скрыть       |
+| `itemsRefs`       | `RefObject<ELEMENT>[]`       | Ссылки на элементы                   |
+| `wrapperRef`      | `RefObject<WRAPPER_ELEMENT>` | Ссылка на родительский элемент       |
+| `moreRef`         | `RefObject<ELEMENT>`         | Ссылка на элемент 'еще'              |
+| `itemsDimensions` | `number[]`                   | Размеры элементов (ширина + отступы) |
+| `wrapperWidth`    | `number`                     | Ширина родительского элемента        |
+
+## Пример
+
+```css
+.ExampleUseHideElementsInLine {
+  max-width: 700px;
+  &-Tag {
+    margin-right: var(--space-xs);
+
+    &_display {
+      &_hidden.TagBase {
+        position: absolute;
+        left: -300vw;
+        visibility: hidden;
+      }
+
+      &_none.TagBase {
+        display: none;
+      }
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+```
+
+```tsx
+const cnExampleUseHideElementsInLine = cn('ExampleUseHideElementsInLine');
+
+const items = [
+  'первый',
+  'второй',
+  'третий',
+  'четвёртый',
+  'пятый',
+  'шестой',
+  'седьмой',
+  'восьмой',
+  'девятый',
+  'десятый',
+];
+
+export const ExampleUseHideElementsInLine = () => {
+  const { itemsRefs, wrapperRef, hiddenItems, moreRef, visibleItems } =
+    useHideElementsInLine(items);
+
+  return (
+    <div ref={wrapperRef} className={cnExampleUseHideElementsInLine()}>
+      {items.map((item, index) => {
+        return (
+          <Tag
+            className={cnExampleUseHideElementsInLine('Tag', {
+              display: !visibleItems[index] && 'hidden',
+            })}
+            key={index}
+            label={item}
+            ref={itemsRefs[index]}
+            mode="info"
+          />
+        );
+      })}
+      <Tag
+        className={cnExampleUseHideElementsInLine('Tag', {
+          display: !hiddenItems.length && 'none',
+        })}
+        key="more"
+        label={`+${hiddenItems.length}`}
+        ref={moreRef}
+        mode="info"
+      />
+    </div>
+  );
+};
+```
+
+<ExampleUseHideElementsInLine />
+
+Ещё использование хука `useHideElementsInLine` можно посмотреть в компоненте [Breadcrumbs](https://github.com/consta-design-system/uikit/blob/dev/src/components/Breadcrumbs/Breadcrumbs.tsx).

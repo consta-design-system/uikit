@@ -1,0 +1,24 @@
+import './SelectLoader.css';
+
+import React from 'react';
+
+import { cnDeprecated } from '../../../utils/bem';
+import { Loader } from '../../LoaderDeprecated/LoaderDeprecated';
+import { defaultPropSize, PropSize } from '../types';
+
+type Props = {
+  mode?: 'empty' | 'blur';
+  size?: PropSize;
+};
+
+export const cnSelectLoader = cnDeprecated('SelectLoader');
+
+export const SelectLoader = (props: Props) => {
+  const { mode = 'empty', size = defaultPropSize } = props;
+
+  return (
+    <div className={cnSelectLoader({ mode, size })}>
+      <Loader className={cnSelectLoader('Loader')} size="s" />
+    </div>
+  );
+};

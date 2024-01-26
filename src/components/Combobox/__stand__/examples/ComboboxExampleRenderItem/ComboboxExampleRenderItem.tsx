@@ -3,9 +3,9 @@ import './ComboboxExampleRenderItem.css';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cn } from '../../../../../utils/bem';
-import { Badge } from '../../../../Badge/Badge';
-import { Combobox } from '../../../Combobox';
+import { Badge } from '##/components/Badge';
+import { Combobox } from '##/components/Combobox';
+import { cn } from '##/utils/bem';
 
 const cnComboboxExampleRenderItem = cn('ComboboxExampleRenderItem');
 
@@ -78,16 +78,16 @@ export function ComboboxExampleRenderItem() {
         placeholder="Выберите вариант"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         searchFunction={searchFunction}
-        renderItem={({ item, active, hovered, onClick, onMouseEnter }) => (
+        renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
           <div
             className={cnComboboxExampleRenderItem('Item', { active, hovered })}
-            role="option"
             aria-selected={active}
             aria-hidden="true"
             onMouseEnter={onMouseEnter}
             onClick={onClick}
+            ref={ref}
           >
             {item.label}
             {item.status && (

@@ -17,10 +17,12 @@ export type DefaultItem = {
   rightSide?: React.ReactNode | React.ReactNode[];
 };
 
-export type CollapseGroupPropOnOpen<IS_ACCORDION> = (params: {
-  e: React.MouseEvent<HTMLDivElement, MouseEvent>;
-  value: (IS_ACCORDION extends true ? number : number[]) | null;
-}) => void;
+export type CollapseGroupPropOnOpen<IS_ACCORDION> = (
+  value: (IS_ACCORDION extends true ? number : number[]) | null,
+  params: {
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>;
+  },
+) => void;
 
 export type CollapseGroupPropOpened<IS_ACCORDION> =
   | (IS_ACCORDION extends true ? number : number[])

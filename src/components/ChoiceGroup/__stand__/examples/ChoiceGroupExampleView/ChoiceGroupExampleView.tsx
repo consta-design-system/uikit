@@ -14,7 +14,7 @@ export const ChoiceGroupExampleView = () => {
     <Example>
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         view="primary"
@@ -23,7 +23,7 @@ export const ChoiceGroupExampleView = () => {
       />
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         view="ghost"
@@ -32,7 +32,7 @@ export const ChoiceGroupExampleView = () => {
       />
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item}
         view="secondary"

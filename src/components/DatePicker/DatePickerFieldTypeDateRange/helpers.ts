@@ -4,10 +4,12 @@ import React from 'react';
 import { DateRange } from '../../../utils/types/Date';
 import { DatePickerFieldTypeDateProps } from '../DatePickerFieldTypeDate/helpers';
 
-type DatePickerFieldTypeDateRangePropOnChange = (props: {
-  e: Event;
-  value: DateRange | null;
-}) => void;
+type DatePickerFieldTypeDateRangePropOnChange = (
+  value: DateRange | null,
+  props: {
+    e: Event;
+  },
+) => void;
 
 export type DatePickerFieldTypeDateRangeProps = Omit<
   DatePickerFieldTypeDateProps,

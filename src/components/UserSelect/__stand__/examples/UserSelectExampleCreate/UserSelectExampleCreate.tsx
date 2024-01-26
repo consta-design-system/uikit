@@ -1,6 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
+import avatarUrl from '../../../__mocks__/avatar_1.jpg';
 import { UserSelect } from '../../../UserSelect';
 
 type Item = {
@@ -24,7 +25,7 @@ const items: Item[] = [
   {
     label: 'Егор Егоров',
     subLabel: 'igor@icloud.com',
-    avatarUrl: 'https://avatars.githubusercontent.com/u/13190808?v=4',
+    avatarUrl,
     id: 3,
   },
 ];
@@ -38,8 +39,8 @@ export function UserSelectExampleCreate() {
         placeholder="Выберите пользователя"
         items={list}
         value={value}
-        onChange={({ value }) => setValue(value)}
-        onCreate={({ label }) =>
+        onChange={setValue}
+        onCreate={(label) =>
           setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
         }
       />
@@ -56,8 +57,8 @@ export function UserSelectExampleCreateCustomLabel() {
         placeholder="Выберите пользователя"
         items={list}
         value={value}
-        onChange={({ value }) => setValue(value)}
-        onCreate={({ label }) =>
+        onChange={setValue}
+        onCreate={(label) =>
           setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
         }
         labelForCreate="Добавить"

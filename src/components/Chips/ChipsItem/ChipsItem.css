@@ -1,0 +1,116 @@
+.ChipsItem {
+  --chip-bg-color: var(--color-control-bg-ghost);
+  --chip-bg-color-hover: var(--color-control-bg-ghost-hover);
+  --chip-color: var(--color-control-typo-ghost);
+  --chip-color-hover: var(--color-control-typo-ghost-hover);
+  --chip-border: transparent;
+  --chip-border-hover: transparent;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height: var(--chip-height);
+  padding: 0 var(--chip-space);
+  color: var(--chip-color);
+  background-color: var(--chip-bg-color);
+  border: var(--control-border-width) solid var(--chip-border);
+  border-radius: 99rem;
+  font-family: inherit;
+  font-size: var(--chip-text-size);
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease,
+    fill 0.15s ease;
+  gap: calc(var(--chip-space) / 2);
+
+  &_status {
+    padding:
+      0 var(--chip-space) 0
+      calc((var(--chip-height) / 2) - (var(--chip-badge-size) / 2));
+  }
+
+  &_active {
+    --chip-bg-color: var(--chip-active-bg-color);
+    --chip-bg-color-hover: var(--chip-active-bg-color-hover);
+    --chip-color: var(--chip-active-color);
+    --chip-color-hover: var(--chip-active-color-hover);
+    --chip-border: var(--chip-active-border);
+    --chip-border-hover: var(--chip-active-border-hover);
+  }
+
+  &_interactive {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--chip-color-hover);
+      background-color: var(--chip-bg-color-hover);
+      border: var(--control-border-width) solid var(--chip-border-hover);
+    }
+  }
+
+  &_size {
+    &_xs {
+      --chip-height: var(--control-height-xs);
+      --chip-text-size: var(--control-text-size-xs);
+      --chip-space: var(--space-xs);
+      --chip-badge-size: 10px;
+    }
+
+    &_s {
+      --chip-height: var(--control-height-s);
+      --chip-text-size: var(--control-text-size-s);
+      --chip-space: var(--space-s);
+      --chip-badge-size: 16px;
+    }
+
+    &_m {
+      --chip-height: var(--control-height-m);
+      --chip-text-size: var(--control-text-size-m);
+      --chip-space: var(--space-m);
+      --chip-badge-size: 16px;
+    }
+
+    &_l {
+      --chip-height: var(--control-height-l);
+      --chip-text-size: var(--control-text-size-l);
+      --chip-space: var(--space-l);
+      --chip-badge-size: 24px;
+    }
+  }
+
+  &_activeView {
+    &_primary {
+      --chip-active-bg-color: var(--color-control-bg-primary);
+      --chip-active-bg-color-hover: var(--color-control-bg-primary-hover);
+      --chip-active-color: var(--color-control-typo-primary);
+      --chip-active-color-hover: var(--color-control-typo-primary-hover);
+      --chip-active-border: transparent;
+      --chip-active-border-hover: transparent;
+    }
+
+    &_secondary {
+      --chip-active-bg-color: var(--color-control-bg-secondary);
+      --chip-active-bg-color-hover: var(--color-control-bg-clear);
+      --chip-active-color: var(--color-control-typo-secondary);
+      --chip-active-color-hover: var(--color-control-typo-secondary-hover);
+      --chip-active-border: var(--color-control-bg-border-secondary);
+      --chip-active-border-hover:
+        var(
+          --color-control-bg-border-secondary-hover
+        );
+    }
+  }
+
+  &-IconButton {
+    padding: 0;
+    color: inherit;
+    background-color: transparent;
+    border: transparent;
+    border-radius: var(--control-radius);
+    cursor: pointer;
+  }
+}

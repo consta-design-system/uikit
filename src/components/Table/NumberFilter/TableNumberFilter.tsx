@@ -51,7 +51,7 @@ export const TableNumberFilter: React.FC<TableNumberFilterProps> = ({
           id="от"
           leftSide="от"
           value={minValue}
-          onChange={(e) => setMinValue(e.value)}
+          onChange={setMinValue}
           form="defaultBrick"
           size="m"
           autoFocus
@@ -61,7 +61,7 @@ export const TableNumberFilter: React.FC<TableNumberFilterProps> = ({
           leftSide="до"
           id="до"
           value={maxValue}
-          onChange={(e) => setMaxValue(e.value)}
+          onChange={setMaxValue}
           form="clearDefault"
           size="m"
         />

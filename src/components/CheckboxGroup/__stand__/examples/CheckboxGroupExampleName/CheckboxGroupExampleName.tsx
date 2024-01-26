@@ -31,7 +31,7 @@ export const CheckboxGroupExampleName = () => {
         items={items}
         getItemLabel={(item) => item.name}
         getItemDisabled={(item) => item.disabled}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="CheckboxGroup"
       />
     </Example>
@@ -51,7 +51,13 @@ export const CheckboxGroupExampleHead = () => {
           status: 'error',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                view="primary"
+                size="m"
+                lineHeight="m"
+              >
                 Где деньги?
               </Text>
               <CheckboxGroup
@@ -59,7 +65,7 @@ export const CheckboxGroupExampleHead = () => {
                 items={itemsHead}
                 getItemLabel={(item) => item.name}
                 getItemDisabled={(item) => item.disabled}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
                 name="CheckboxGroup"
               />
             </>
@@ -70,7 +76,13 @@ export const CheckboxGroupExampleHead = () => {
           status: 'success',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+                view="primary"
+                size="m"
+                lineHeight="m"
+              >
                 Где деньги?
               </Text>
               <CheckboxGroup
@@ -78,7 +90,7 @@ export const CheckboxGroupExampleHead = () => {
                 items={itemsHead2}
                 getItemLabel={(item) => item.name}
                 getItemDisabled={(item) => item.disabled}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
                 name="CheckboxGroup"
               />
             </>
@@ -95,7 +107,13 @@ export const CheckboxExampleGroupHead3 = () => {
   return (
     <Example>
       <>
-        <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+        <Text
+          view="primary"
+          size="m"
+          lineHeight="m"
+          weight="bold"
+          className={cnMixSpace({ mB: 'm' })}
+        >
           Выберите места для хранения денег
         </Text>
         <CheckboxGroup
@@ -103,7 +121,7 @@ export const CheckboxExampleGroupHead3 = () => {
           items={itemsHead}
           getItemLabel={(item) => item.name}
           getItemDisabled={(item) => item.disabled}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           name="CheckboxGroup"
         />
       </>
@@ -128,7 +146,7 @@ export const CheckboxGroupExampleNeg = () => {
               items={itemsNeg}
               getItemLabel={(item) => item.name}
               getItemDisabled={(item) => item.disabled}
-              onChange={({ value }) => setValue(value)}
+              onChange={setValue}
               name="CheckboxGroup"
             />
           ),
@@ -142,7 +160,7 @@ export const CheckboxGroupExampleNeg = () => {
               items={itemsNeg2}
               getItemLabel={(item) => item.name}
               getItemDisabled={(item) => item.disabled}
-              onChange={({ value }) => setValue(value)}
+              onChange={setValue}
               name="CheckboxGroup"
             />
           ),
@@ -165,7 +183,13 @@ export const CheckboxGroupExampleGeneral = () => {
           status: 'error',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                lineHeight="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+              >
                 Каких булок ещё съесть
               </Text>
               <CheckboxGroup
@@ -173,7 +197,7 @@ export const CheckboxGroupExampleGeneral = () => {
                 items={itemsGen}
                 getItemLabel={(item) => item.name}
                 getItemDisabled={(item) => item.disabled}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
                 name="CheckboxGroup"
               />
             </>
@@ -184,7 +208,13 @@ export const CheckboxGroupExampleGeneral = () => {
           status: 'success',
           node: (
             <>
-              <Text weight="bold" className={cnMixSpace({ mB: 'm' })}>
+              <Text
+                view="primary"
+                size="m"
+                lineHeight="m"
+                weight="bold"
+                className={cnMixSpace({ mB: 'm' })}
+              >
                 Каких булок ещё съесть
               </Text>
               <CheckboxGroup
@@ -192,7 +222,7 @@ export const CheckboxGroupExampleGeneral = () => {
                 items={itemsGen2}
                 getItemLabel={(item) => item.name}
                 getItemDisabled={(item) => item.disabled}
-                onChange={({ value }) => setValue(value)}
+                onChange={setValue}
                 name="CheckboxGroup"
                 className={cnMixSpace({ mB: 's' })}
               />

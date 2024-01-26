@@ -50,6 +50,13 @@ export type CheckboxGroupPropGetItemRef<ITEM> = (
   item: ITEM,
 ) => React.RefObject<HTMLLabelElement> | undefined;
 
+export type CheckboxGroupPropOnChange<ITEM> = (
+  value: ITEM[] | null,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
+
 export type CheckboxGroupProps<ITEM = CheckboxGroupDefaultItem> =
   PropsWithHTMLAttributesAndRef<
     {
@@ -60,10 +67,7 @@ export type CheckboxGroupProps<ITEM = CheckboxGroupDefaultItem> =
       getItemDisabled?: CheckboxGroupPropGetItemDisabled<ITEM>;
       getItemAttributes?: CheckboxGroupPropGetItemAttributes<ITEM>;
       getItemRef?: CheckboxGroupPropGetItemRef<ITEM>;
-      onChange: (props: {
-        e: React.ChangeEvent<HTMLInputElement>;
-        value: ITEM[] | null;
-      }) => void;
+      onChange?: CheckboxGroupPropOnChange<ITEM>;
       name?: string;
       direction?: CheckboxGroupPropDirection;
       align?: CheckboxGroupPropAlign;

@@ -8,13 +8,19 @@ export const CardExampleState = () => {
   return (
     <Example>
       <Card verticalSpace="2xl" horizontalSpace="2xl" status="alert">
-        <Text>Опасная карточка</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Опасная карточка
+        </Text>
       </Card>
       <Card verticalSpace="2xl" horizontalSpace="2xl" status="warning">
-        <Text>Тревожная карточка</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Тревожная карточка
+        </Text>
       </Card>
       <Card verticalSpace="2xl" horizontalSpace="2xl" status="success">
-        <Text>Успешная карточка</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Успешная карточка
+        </Text>
       </Card>
     </Example>
   );

@@ -1,6 +1,6 @@
 import './Switch.css';
 
-import React, { ChangeEventHandler, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
@@ -8,6 +8,7 @@ import { cn } from '../../utils/bem';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import {
   switchPropAlignDefault,
+  switchPropOnChangeDefault,
   SwitchProps,
   switchPropSizeDefault,
   switchPropViewDefault,
@@ -29,7 +30,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
       disabled,
       className,
       label,
-      onChange,
+      onChange = switchPropOnChangeDefault,
       onFocus,
       onBlur,
       readOnly,
@@ -39,12 +40,6 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
       inputRef,
       ...otherProps
     } = usePropsHandler(COMPONENT_NAME, props, switchRef);
-
-    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-      if (onChange) {
-        onChange({ e, checked: !checked });
-      }
-    };
 
     return (
       <label
@@ -58,7 +53,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
           className={cnSwitch('Input', [cnMixFocus()])}
           checked={checked}
           disabled={disabled}
-          onChange={handleChange}
+          onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
           readOnly={readOnly}

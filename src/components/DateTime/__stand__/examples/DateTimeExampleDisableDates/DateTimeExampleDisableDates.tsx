@@ -25,7 +25,7 @@ export const DateTimeExampleDisableDates = () => {
         type="date-time"
         value={value}
         disableDates={getDisableDates()}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

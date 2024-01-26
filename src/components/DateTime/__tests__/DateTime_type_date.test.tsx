@@ -174,7 +174,11 @@ describe('Компонент DateTime_type_date', () => {
         fireEvent.click(DateTimeItem);
 
         expect(handleClick).toHaveBeenCalledTimes(1);
-        expect(handleClick).toHaveReturnedWith(new Date(1970, 0, 1));
+
+        const date = new Date(1970, 0, 1);
+        expect(handleClick).toHaveBeenCalledWith(date, {
+          e: expect.any(Object),
+        });
       });
     });
 

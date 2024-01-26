@@ -40,10 +40,12 @@ export type ContextMenuPropSubMenuDirection =
 export const contextMenuPropDefaultSubMenuDirection: ContextMenuPropSubMenuDirection =
   contextMenuPropSubMenuDirections[0];
 
-export type ContextMenuPropOnClick<ITEM> = (params: {
-  e: React.MouseEvent<HTMLDivElement>;
-  item: ITEM;
-}) => void;
+export type ContextMenuPropOnItemClick<ITEM> = (
+  item: ITEM,
+  params: {
+    e: React.MouseEvent;
+  },
+) => void;
 
 export type ContextMenuGroupDefault = {
   label?: string;
@@ -61,7 +63,7 @@ export type ContextMenuItemDefault = {
   status?: ContextMenuStatus;
   disabled?: boolean;
   groupId?: number;
-  onClick?: ContextMenuPropOnClick<ContextMenuItemDefault>;
+  onClick?: React.MouseEventHandler;
   as?: AsTags;
   attributes?: AsAttributes;
 };
@@ -95,7 +97,7 @@ export type ContextMenuPropGetItemKey<ITEM> = (
 
 export type ContextMenuPropGetItemOnClick<ITEM> = (
   item: ITEM,
-) => ContextMenuPropOnClick<ITEM> | undefined;
+) => React.MouseEventHandler | undefined;
 
 export type ContextMenuPropGetItemDisabled<ITEM> = (
   item: ITEM,
@@ -186,7 +188,7 @@ export type ContextMenuProps<
     offset?: PopoverPropOffset;
     groups?: GROUP[];
     sortGroup?: ContextMenuPropSortGroup;
-    onItemClick?: ContextMenuPropOnClick<ITEM>;
+    onItemClick?: ContextMenuPropOnItemClick<ITEM>;
     possibleDirections?: readonly Direction[];
     subMenuDirection?: ContextMenuPropSubMenuDirection;
     spareDirection?: Direction;

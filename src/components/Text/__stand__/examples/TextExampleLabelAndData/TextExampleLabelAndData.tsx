@@ -14,7 +14,6 @@ export const TextExampleLabelAndData = () => {
           lineHeight="l"
           size="s"
           view="secondary"
-          type="p"
         >
           ФИО
         </Text>
@@ -37,7 +36,6 @@ export const TextExampleLabelAndData = () => {
           lineHeight="l"
           size="s"
           view="secondary"
-          type="p"
         >
           Должность
         </Text>
@@ -60,7 +58,6 @@ export const TextExampleLabelAndData = () => {
           lineHeight="l"
           size="s"
           view="secondary"
-          type="p"
         >
           Подразделение
         </Text>

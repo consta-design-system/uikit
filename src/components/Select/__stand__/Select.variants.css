@@ -1,11 +1,9 @@
 .SelectVariants {
-  &.Select {
-    position: absolute;
-    top: var(--space-l);
-    width: 100%;
-    max-width: 400px;
-    padding: var(--space-m);
-  }
+  position: absolute;
+  top: var(--space-l);
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-m);
 
   &-MyItem {
     --text-color: var(--color-control-typo-default);

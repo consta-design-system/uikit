@@ -12,7 +12,6 @@ import { useSortSteps } from '##/hooks/useSortSteps';
 import { cn } from '##/utils/bem';
 
 import {
-  defaultPropSize,
   defaultTooltipFormatter,
   getIcon,
   getMaxForStartField,
@@ -21,9 +20,10 @@ import {
   getValidStep,
   getValueForInput,
   isRangeParams,
-  PropSize,
   SliderComponent,
   SliderProps,
+  SliderPropSize,
+  sliderPropSizeDefault,
 } from './helper';
 import { SliderInput } from './SliderInput/SliderInput';
 import { SliderLine } from './SliderLine/SliderLine';
@@ -34,7 +34,7 @@ import { useSliderStationing } from './useSliderStationing';
 
 const cnSlider = cn('Slider');
 
-const sizeMap: Record<PropSize, IconPropSize> = {
+const sizeMap: Record<SliderPropSize, IconPropSize> = {
   xs: 'xs',
   s: 's',
   m: 'm',
@@ -57,7 +57,7 @@ const SliderRender = <RANGE extends boolean = false>(
     value,
     step: stepProp,
     disabled = false,
-    size = defaultPropSize,
+    size = sliderPropSizeDefault,
     view = 'default',
     leftSide,
     rightSide,

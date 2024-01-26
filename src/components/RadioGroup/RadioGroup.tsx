@@ -61,7 +61,7 @@ const RadioGroupRender = (
           name={name}
           disabled={disabled || (!!getItemDisabled && getItemDisabled(item))}
           checked={getChecked(item)}
-          onChange={({ e }) => getOnChange(item)(e)}
+          onChange={getOnChange(item)}
           className={cnRadioGroup('Item')}
         />
       ))}

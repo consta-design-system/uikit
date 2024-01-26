@@ -11,7 +11,7 @@ export const SliderExampleDisabled = () => {
       <Slider
         disabled
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         range={false}
       />

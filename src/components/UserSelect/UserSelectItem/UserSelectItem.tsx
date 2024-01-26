@@ -1,10 +1,10 @@
 import './UserSelectItem.css';
 
 import { IconCheck } from '@consta/icons/IconCheck';
-import React, { useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { Avatar } from '##/components/Avatar/Avatar';
+import { Avatar } from '##/components/Avatar';
 import {
   mapHorisontalSpase,
   mapHorisontalSpaseIncreased,
@@ -31,69 +31,79 @@ type UserSelectItemProps = PropsWithHTMLAttributes<
 
 export const cnUserSelectItem = cn('UserSelectItem');
 
-export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
-  const {
-    className,
-    label,
-    subLabel,
-    avatarUrl,
-    active,
-    hovered,
-    size,
-    indent,
-    disable,
-    multiple,
-    ...otherProps
-  } = props;
+export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
+  (props, ref) => {
+    const {
+      className,
+      label,
+      subLabel,
+      avatarUrl,
+      active,
+      hovered,
+      size,
+      indent,
+      disable,
+      multiple,
+      ...otherProps
+    } = props;
 
-  const iconRef = useRef<HTMLSpanElement>(null);
+    const iconRef = useRef<HTMLSpanElement>(null);
 
-  return (
-    <div
-      {...otherProps}
-      className={cnUserSelectItem({ active, hovered, size, indent, disable }, [
-        cnMixSpace({
-          pH:
-            indent === 'increased'
-              ? mapHorisontalSpaseIncreased[size]
-              : mapHorisontalSpase[size],
-          pV: mapItemVerticalPadding[size],
-        }),
-        className,
-      ])}
-      aria-selected={active}
-      role="option"
-    >
-      <div className={cnUserSelectItem('AvatarContainer')}>
-        <Avatar
-          className={cnUserSelectItem('Avatar')}
-          url={avatarUrl}
-          name={label}
-        />
-        {multiple && (
-          <Transition in={active} unmountOnExit timeout={200} nodeRef={iconRef}>
-            {(animate) => (
-              <IconCheck
-                className={cnUserSelectItem('CheckIcon', { animate })}
-                ref={iconRef}
-              />
-            )}
-          </Transition>
+    return (
+      <div
+        {...otherProps}
+        className={cnUserSelectItem(
+          { active, hovered, size, indent, disable },
+          [
+            cnMixSpace({
+              pH:
+                indent === 'increased'
+                  ? mapHorisontalSpaseIncreased[size]
+                  : mapHorisontalSpase[size],
+              pV: mapItemVerticalPadding[size],
+            }),
+            className,
+          ],
         )}
-        {!multiple && active && (
-          <IconCheck className={cnUserSelectItem('CheckIcon')} />
+        aria-selected={active}
+        ref={ref}
+      >
+        <div className={cnUserSelectItem('AvatarContainer')}>
+          <Avatar
+            className={cnUserSelectItem('Avatar')}
+            url={avatarUrl}
+            name={label}
+          />
+          {multiple && (
+            <Transition
+              in={active}
+              unmountOnExit
+              timeout={200}
+              nodeRef={iconRef}
+            >
+              {(animate) => (
+                <IconCheck
+                  className={cnUserSelectItem('CheckIcon', { animate })}
+                  ref={iconRef}
+                />
+              )}
+            </Transition>
+          )}
+          {!multiple && active && (
+            <IconCheck className={cnUserSelectItem('CheckIcon')} />
+          )}
+        </div>
+        {!subLabel ? (
+          <div className={cnUserSelectItem('Info')}>{label}</div>
+        ) : (
+          <div className={cnUserSelectItem('Info')}>
+            <div>{label}</div>
+            <div className={cnUserSelectItem('SubLabel', { disable })}>
+              {subLabel}
+            </div>
+          </div>
         )}
       </div>
-      {!subLabel ? (
-        <div className={cnUserSelectItem('Info')}>{label}</div>
-      ) : (
-        <div className={cnUserSelectItem('Info')}>
-          <div>{label}</div>
-          <div className={cnUserSelectItem('SubLabel', { disable })}>
-            {subLabel}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+    );
+  },
+);

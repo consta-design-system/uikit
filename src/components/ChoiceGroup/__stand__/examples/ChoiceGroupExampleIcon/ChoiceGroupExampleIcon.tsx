@@ -33,7 +33,7 @@ export const ChoiceGroupExampleIcon = () => {
     <Example col={1}>
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item.name}
         getItemIcon={(item) => item.icon}
@@ -41,7 +41,7 @@ export const ChoiceGroupExampleIcon = () => {
       />
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item.name}
         getItemIcon={(item) => item.icon}

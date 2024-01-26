@@ -16,8 +16,12 @@ export const DragNDropFieldExampleMaxSize = () => (
       maxSize={1 * 1024 * 1024}
       onDropFiles={(files) => console.log(files)}
     >
-      <Text>Сюда можно перетаскивать файлы</Text>
-      <Text>размером 1 Мб или меньше</Text>
+      <Text view="primary" size="m" lineHeight="m">
+        Сюда можно перетаскивать файлы
+      </Text>
+      <Text view="primary" size="m" lineHeight="m">
+        размером 1 Мб или меньше
+      </Text>
     </DragNDropField>
   </Example>
 );

@@ -12,6 +12,8 @@ import React, {
   useState,
 } from 'react';
 
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
+
 import { useComponentSize } from '../../hooks/useComponentSize/useComponentSize';
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { useOverflow } from '../../hooks/useOverflow/useOverflow';
@@ -21,14 +23,14 @@ import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import {
   calculateLines,
   cnProgressStepBar,
-  DefaultItem,
   getItemPosition,
   Line,
   ProgressStepBarComponent,
+  ProgressStepBarItemDefault,
   ProgressStepBarItemProps,
+  progressStepBarPropDirectionDefault,
   ProgressStepBarProps,
-  propDirectionDefault,
-  propSizeDefault,
+  progressStepBarPropSizeDefault,
   withDefaultGetters,
 } from './helpers';
 import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
@@ -36,7 +38,7 @@ import { ProgressStepBarLine } from './ProgressStepBarLine/ProgressStepBarLine';
 
 export const COMPONENT_NAME = 'ProgressStepBar' as const;
 
-function ProgressStepBarRender<ITEM = DefaultItem>(
+function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
   props: ProgressStepBarProps<ITEM>,
   ref: React.Ref<HTMLDivElement>,
 ) {
@@ -44,8 +46,8 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
 
   const {
     steps = [],
-    direction = propDirectionDefault,
-    size = propSizeDefault,
+    direction = progressStepBarPropDirectionDefault,
+    size = progressStepBarPropSizeDefault,
     className,
     activeStepIndex,
     onItemClick,
@@ -119,7 +121,7 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
 
     const onItemClickHandler = onItemClick
       ? (e: React.MouseEvent<Element, MouseEvent>) => {
-          onItemClick({ e, item, index });
+          onItemClick(item, { e, index });
           onClick?.(e);
         }
       : undefined;
@@ -152,7 +154,10 @@ function ProgressStepBarRender<ITEM = DefaultItem>(
     <div
       {...otherProps}
       style={style}
-      className={cnProgressStepBar({ isOverflow }, [className])}
+      className={cnProgressStepBar({ isOverflow }, [
+        className,
+        cnMixScrollBar(),
+      ])}
       ref={useForkRef([ref, containerRef])}
     >
       {isOverflow && direction !== 'vertical' && (

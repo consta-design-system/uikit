@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { cnLoader } from '../../Loader/Loader';
+import { cnLoader } from '../../LoaderDeprecated/LoaderDeprecated';
 import { cnSelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import {
   SelectDropdown,
@@ -19,6 +19,7 @@ const defaultProps: Props = {
   renderItem: () => <div>Element</div>,
   visibleItems: [],
   getOptionProps: jest.fn(),
+  itemsRefs: [],
 };
 
 const renderComponent = (props: Partial<Props>) => {

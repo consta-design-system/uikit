@@ -13,7 +13,7 @@ import {
   propForm,
   propStatus,
   propView,
-} from '../../SelectComponents/types';
+} from '../../SelectComponentsDeprecated/types';
 import { Combobox } from '..';
 import { groups, Item, items } from '../__mocks__/data.mock';
 
@@ -45,6 +45,7 @@ const Variants = () => {
   const isLoading = useBoolean('isLoading', false);
   const multiple = useBoolean('multiple', false);
   const selectAll = useBoolean('selectAll', false, multiple);
+  const allSelectedAllLabel = useText('allSelectedAllLabel', 'Все', multiple);
   const withLabelIcon = useBoolean('withLabelIcon', false);
 
   const [value, setValue] = useState<Item | null>(null);
@@ -62,12 +63,13 @@ const Variants = () => {
           form={form}
           required={required}
           status={status}
+          allSelectedAllLabel={allSelectedAllLabel}
           dropdownForm={dropdownForm}
           placeholder={placeholder}
           items={items}
           labelIcon={withLabelIcon ? IconQuestion : undefined}
           value={valueMultiple}
-          onChange={({ value }) => setValueMultiple(value)}
+          onChange={setValueMultiple}
           groups={withGroups ? groups : []}
           multiple
           isLoading={isLoading}
@@ -95,7 +97,7 @@ const Variants = () => {
         placeholder={placeholder}
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         groups={withGroups ? groups : []}
         label={label}
         labelPosition={labelPosition}

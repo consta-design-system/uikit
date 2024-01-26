@@ -6,7 +6,7 @@ import React, { useMemo, useRef } from 'react';
 import { Direction } from '##/components/Popover';
 import { ProgressSpin } from '##/components/ProgressSpin';
 import { Text } from '##/components/Text';
-import { Tooltip } from '##/components/TooltipCanary';
+import { Tooltip } from '##/components/Tooltip';
 import { useFlag } from '##/hooks/useFlag/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
 import { useMouseLeave } from '##/hooks/useMouseLeave';
@@ -14,10 +14,10 @@ import { cnMixFocus } from '##/mixs/MixFocus/MixFocus';
 import { cn } from '##/utils/bem';
 
 import {
-  PointNumbersMap,
   ProgressStepBarItemComponent,
-  propPositionDefault,
-  propStatusDefault,
+  ProgressStepBarPointNumbersMap,
+  progressStepBarPropPositionDefault,
+  progressStepBarPropStatusDefault,
 } from '../helpers';
 
 const cnProgressStepBarItem = cn('ProgressStepBarItem');
@@ -36,7 +36,7 @@ const possibleHorizontalDirections: Direction[] = [
 ];
 
 const renderPointContent = (
-  point: PointNumbersMap | IconComponent | undefined,
+  point: ProgressStepBarPointNumbersMap | IconComponent | undefined,
   size: 'm' | 's',
   progress: boolean | undefined,
 ) => {
@@ -49,6 +49,8 @@ const renderPointContent = (
         className={cnProgressStepBarItem('PointText')}
         size={size === 's' ? '2xs' : 'xs'}
         weight="bold"
+        view="primary"
+        lineHeight="m"
       >
         {point}
       </Text>
@@ -73,7 +75,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
       size,
       pointRef: pointRefProp,
       onClick,
-      position = propPositionDefault,
+      position = progressStepBarPropPositionDefault,
       tooltipZIndex,
       className,
       ...otherProps
@@ -143,7 +145,7 @@ export const ProgressStepBarItem: ProgressStepBarItemComponent =
             {
               direction,
               position,
-              status: status || propStatusDefault,
+              status: status || progressStepBarPropStatusDefault,
               size,
             },
             [className],

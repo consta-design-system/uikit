@@ -32,14 +32,14 @@ export function ComboboxExampleForm() {
         form="round"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
       <Combobox
         placeholder="Форма defaultBrick"
         form="defaultBrick"
         items={items}
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
       />
     </Example>
   );

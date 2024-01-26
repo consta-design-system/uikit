@@ -2,14 +2,14 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
 
-import { Line, PropView } from './helper';
+import { Line, SliderPropView } from './helper';
 import { COUNT_STEPS } from './useSlider/useSlider';
 
 type UseSliderStationing = (
   value: number | [number, number] | undefined,
   min: number,
   max: number,
-  view: PropView,
+  view: SliderPropView,
   range: boolean | undefined,
   step: number | number[] | undefined,
   buttonRefs: [

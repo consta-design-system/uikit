@@ -36,11 +36,18 @@ export const ModalExample = () => {
           as="p"
           size="s"
           view="secondary"
+          lineHeight="m"
           className={cnModalExample('Title')}
         >
           Это заголовок модального окна
         </Text>
-        <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
+        <Text
+          as="p"
+          size="m"
+          view="primary"
+          lineHeight="m"
+          className={cnModalExample('Body')}
+        >
           Это содержимое модального окна. Здесь может быть что угодно: текст,
           изображение, форма или таблица. Всё, что хочется вынести из контекста
           и показать поверх основной страницы.
@@ -85,11 +92,18 @@ export const ModalExampleTop = () => {
           as="p"
           size="s"
           view="secondary"
+          lineHeight="m"
           className={cnModalExample('Title')}
         >
           Я окно
         </Text>
-        <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
+        <Text
+          as="p"
+          size="m"
+          view="primary"
+          className={cnModalExample('Body')}
+          lineHeight="m"
+        >
           Я выше всех!
         </Text>
         <div className={cnModalExample('Action')}>
@@ -132,10 +146,17 @@ export const ModalExampleCenter = () => {
           size="s"
           view="secondary"
           className={cnModalExample('Title')}
+          lineHeight="m"
         >
           Я окно
         </Text>
-        <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
+        <Text
+          as="p"
+          size="m"
+          view="primary"
+          className={cnModalExample('Body')}
+          lineHeight="m"
+        >
           Я в самой серединке!
         </Text>
         <div className={cnModalExample('Action')}>
@@ -178,10 +199,17 @@ export const ModalExampleNoOverlay = () => {
           size="s"
           view="secondary"
           className={cnModalExample('Title')}
+          lineHeight="m"
         >
           Я окно
         </Text>
-        <Text as="p" size="m" view="primary" className={cnModalExample('Body')}>
+        <Text
+          as="p"
+          size="m"
+          view="primary"
+          className={cnModalExample('Body')}
+          lineHeight="m"
+        >
           Я без подложки. Честно-честно.
         </Text>
         <div className={cnModalExample('Action')}>

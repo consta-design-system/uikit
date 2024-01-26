@@ -110,8 +110,8 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef(
           maxDate={props.maxDate}
           currentVisibleDate={currentVisibleDate}
           form={dropdownForm}
-          onChange={(params) => {
-            props.onChange?.(params);
+          onChange={(...args) => {
+            props.onChange?.(...args);
             setCalendarVisible.off();
           }}
           renderAdditionalControls={renderAdditionalControls}

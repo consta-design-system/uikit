@@ -47,7 +47,7 @@ const Variants = () => {
           items={items}
           getItemLabel={(item) => item.name}
           getItemDisabled={(item) => item.disabled}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           name={cnSwitchGroupVariants()}
           direction={direction}
           size={size}

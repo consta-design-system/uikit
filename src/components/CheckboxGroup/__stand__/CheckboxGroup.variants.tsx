@@ -56,13 +56,13 @@ const Variants = () => {
       <CheckboxGroup
         value={value}
         items={items}
-        align={align}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="CheckboxGroup"
         direction={direction}
         size={size}
         view={view}
         disabled={disabled}
+        align={align}
       />
     </form>
   );

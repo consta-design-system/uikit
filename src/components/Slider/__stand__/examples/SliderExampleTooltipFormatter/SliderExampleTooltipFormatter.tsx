@@ -13,7 +13,7 @@ export const SliderExampleTooltipFormatter = () => {
         range
         label={`Значение ${value[0]}-${value[1]}`}
         tooltipFormatter={(value) => `${value}%`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
         withTooltip
       />

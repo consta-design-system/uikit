@@ -1,5 +1,63 @@
 # Changelog
 
+## v5.0.3 (17/01/2024)
+- [fix(Combobox): fixed align ClearButton (#3442)](https://github.com/consta-design-system/uikit/commit/bde70e1e70ecd2a9c4ddf3c143d9d88e7fa50747) - [@gizeasy](https://github.com/gizeasy)
+- [fix(TextField): fixed rightSide and clearButton (#3440)](https://github.com/consta-design-system/uikit/commit/fea7954dcdd5e847f31bbb158c78348cf8580aac) - [@gizeasy](https://github.com/gizeasy)
+- [chore: not significant changes (#3454)](https://github.com/consta-design-system/uikit/commit/ca31b3c97b96abd2b8e96af5bb28983588eb5e8f) - [@gizeasy](https://github.com/gizeasy)
+- [fix(EventInterceptor): fix Checkbox events handler (#3451)](https://github.com/consta-design-system/uikit/commit/b89f247a8b5271b1773dd164e3467cbfecb13607) - [@gizeasy](https://github.com/gizeasy)
+- [chore: the trash is cleaned up (#3446)](https://github.com/consta-design-system/uikit/commit/7257b4b5319e386c2758eb8463f341b6506ad0e8) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v5.0.2 (10/01/2024)
+- [fix(Switch): add onChangeDefault](https://github.com/consta-design-system/uikit/commit/d30f834cfadd5b68bb6c9ce78ddf7c0016c64ddb) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Radio): add onChangeDefault](https://github.com/consta-design-system/uikit/commit/f25c771f3b7c3c916a4aa60f3552e5130a05a6f9) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Checkbox): add onChangeDefault (#3428)](https://github.com/consta-design-system/uikit/commit/68e9a6fa7f1c0863919bc1721302f52c5613d67f) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v5.0.1 (09/01/2024)
+- [fix(Selects): fixed classNames (#3425)](https://github.com/consta-design-system/uikit/commit/b562ca25a6fce40a25b9fcc7bf9b7a819ced6b80) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v5.0.0 (19/12/2023)
+Новая мажорная версия.
+
+- Сторонние зависимости перенесены в `peerDependencies`. Установить их вы сможете самостоятельно, полный список доступен [здесь](https://github.com/consta-design-system/uikit/blob/master/package.json) 
+- В `Switch` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте или используйте `SwitchDeprecated`
+- В `SwitchGroup` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
+- Компонент `SwitchGroupDeprecated` удален, используйте `SwitchGroup`
+- `TabsDeprecated `удален, используйте `Tabs`
+- В `Tabs` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
+- В `Text` сброшены свойства по умолчанию. Включите необходимые свойства в проекте или используйте компонент `TextDeprecated`
+- `TextField` изменено взаимодействие с маской. Примеры использования можно найти в документации
+- В `TextField` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
+- В `ThemeToggler` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
+- Компонент `Tooltip` был помечен на удаление и перенесен в `TooltipDeprecated`
+- Компонент `TooltipCanary` помечен как стабильный и перемещен в `Tooltip`
+- Компонент `UserSelect` был помечен на удаление и перенесен в `UserSelectDeprecated`
+- Компонент `UserSelectCanary` помечен как стабильный и перемещен в `UserSelect`
+- `useBreakpoints` помечен на удаление и перенесен в `useBreakpointsDeprecated`
+- `useComponentBreakpoints` помечен на удаление и перенесен в  `useComponentBreakpointsDepricated`
+- Добавлен новый компонент `useBreakpoints`, который объединяет возможности старых `useBreakpoints` и `useComponentBreakpoints`
+- В `useChoiceGroup` изменились аргументы свойства `callBack`, измените реализацию подключения в проекте
+- В `useChoiceGroupIndexed` изменились аргументы свойства `callBack`, измените реализацию подключения в проекте
+- `useHideElementsInLine` помечен на удаление и перенесен в  `useHideElementsInLineDepricated`
+- `useHideElementsInLineCanary` помечен как стабильный и перенесен в `useHideElementsInLine`
+- `useResizableContentCanary` помечен как стабильный и перенесен в  `useResizableContent`
+- `useThemeVars` удален, используйте `useStyleProps`
+-  `useVirtualScrollCanary` помечен как стабильный и перенесен в  `useVirtualScroll`
+
+---
+
+- [feat(v5): update code](https://github.com/consta-design-system/uikit/commit/e196dd77e5c51f82f416a5ba0c70aa669b81607c) - [@gizeasy](https://github.com/gizeasy)
+- [chore(.eslintrc): edit config](https://github.com/consta-design-system/uikit/commit/0de44c0890788e60193bec80291073dc531020b8) - [@gizeasy](https://github.com/gizeasy)
+- [fix: typo (#3404)](https://github.com/consta-design-system/uikit/commit/034d608211aa16216db2f3b56b54f411037281d2) - [@nevsky118](https://github.com/nevsky118)
+- [Docs: fix typos (#3399)](https://github.com/consta-design-system/uikit/commit/ba7f1d6368c411f95a8d5c138861209e66a1bdba) - [@vindi-r](https://github.com/vindi-r)
+
+--------------------
+
 ## v4.33.1 (17/11/2023)
 - [fix(Tabs): fixed error at empty items (#3398)](https://github.com/consta-design-system/uikit/commit/525576b95affa97a336a9a2e683eedc8d73f6975) - [@gizeasy](https://github.com/gizeasy)
 
@@ -361,50 +419,3 @@
 - [docs: add aliases (#3002)](https://github.com/consta-design-system/uikit/commit/0e4c1aa1852a353ebbcd20116213211e0c90fd49) - [@N1MBER](https://github.com/N1MBER)
 - [fix(Combobox): fixed type dropdownRef (#3000)](https://github.com/consta-design-system/uikit/commit/c8cd834ff32218d7f63f9a62ce83c2a2da482972) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Combobox): add prop selectAll (#2993)](https://github.com/consta-design-system/uikit/commit/b3f9daae7e0e3f061745f37bd1ff686fe2d94343) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.15.0 (17/04/2023)
-Самое важное:
-- Теперь в поле ввода можно установить иконку слева от заголовка.
-- `DatePicker`. Исправлена работа кнопки «Очистить».
-- `DateTime`. Добавлена возможность указывать произвольные даты.
-
----
-
-- [chore: update @consta/stand](https://github.com/consta-design-system/uikit/commit/7b0ca0d675759519388bf4c40b217325f04a8104) - [@gizeasy](https://github.com/gizeasy)
-- [feat(TextField): add margin to counter buttons for round forms (#2990)](https://github.com/consta-design-system/uikit/commit/e30b594c9b641b319a3d220cfcac0af7be16c1e0) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Selects): add fragments to docs about view clear (#2989)](https://github.com/consta-design-system/uikit/commit/a3b69f8c4e4d840b0e8819d0e2ad475f7884845b) - [@N1MBER](https://github.com/N1MBER)
-- [feat(FieldLabel): added prop icon (#2960)](https://github.com/consta-design-system/uikit/commit/d0ca7ddd8595178c3d7c71cac24cfa5369cd04cf) - [@N1MBER](https://github.com/N1MBER)
-- [feat(FieldLabel): added prop icon (#2949)](https://github.com/consta-design-system/uikit/commit/70c4ffbfc10ae4003816758d60a1aa3f0a117508) - [@N1MBER](https://github.com/N1MBER)
-- [fix(DatePicker): fix clearButton (#2968)](https://github.com/consta-design-system/uikit/commit/1e5731b85b8b78adeaa88c87678926f186fe3402) - [@N1MBER](https://github.com/N1MBER)
-- [feat(DateTime): add prop disableDates (#2940)](https://github.com/consta-design-system/uikit/commit/53f1fa766eb604f174525fc5d8d20ef5361eb674) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.14.2 (16/03/2023)
-- [fix(useIMask): fixed updateValue (#2958)](https://github.com/consta-design-system/uikit/commit/afaaa13201285d44ba8300192e460b0fccd93708) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.14.0 (15/03/2023)
-В `ThemeToggler` добавили свойство `view` по аналогии с `Button`.
-
----
-
-- [chore(deps-dev): bump webpack from 5.74.0 to 5.76.0 (#2952)](https://github.com/consta-design-system/uikit/commit/feed5522da3ff75c50533a3fd7ce080e7c6325da) - [@dependabot[bot]](https://github.com/dependabot[bot])
-- [docs(TextField): fixed mistakes in documentation (#2945)](https://github.com/consta-design-system/uikit/commit/39f9bdee4a97fb107e77cd933fc0860cc6e28d2c) - [@N1MBER](https://github.com/N1MBER)
-- [fix(UserSelect): fixed bug with form (#2946)](https://github.com/consta-design-system/uikit/commit/f07d1c5163aee7a9493f244a3c50bc7640e31e30) - [@N1MBER](https://github.com/N1MBER)
-- [feat(ThemeToggler): add view (#2950)](https://github.com/consta-design-system/uikit/commit/8a920ce35001a01067b1660edbaaafd1be220890) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): revert to old logic (#2957)](https://github.com/consta-design-system/uikit/commit/3a6699c6f193196bd28023271827811d9a7605fd) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deps): bump decode-uri-component from 0.2.0 to 0.2.2 (#2936)](https://github.com/consta-design-system/uikit/commit/d5535465862923180098b120e710633a8897b607) - [@dependabot[bot]](https://github.com/dependabot[bot])
-- [chore(deps): bump loader-utils from 2.0.2 to 2.0.4 (#2935)](https://github.com/consta-design-system/uikit/commit/18aa2f3a66db2ea3834872c4d04157d097a125dc) - [@dependabot[bot]](https://github.com/dependabot[bot])
-
---------------------
-
-## v4.13.0 (02/03/2023)
-Добавили в `Collapse` свойство `iconView`, которое меняет вариант отображения иконки разворота
-
----
-
-- [feat(Collapse): add iconView (#2932)](https://github.com/consta-design-system/uikit/commit/5806bc992bf79fa89d89047636c6dda470d29ac5) - [@gizeasy](https://github.com/gizeasy)

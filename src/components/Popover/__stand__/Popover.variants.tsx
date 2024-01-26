@@ -44,7 +44,14 @@ const Variants = () => {
           onClickOutside={setOpen.off}
           isInteractive={isInteractive}
         >
-          <Text className={cnPopoverVariants('Content')}>{text}</Text>
+          <Text
+            view="primary"
+            className={cnPopoverVariants('Content')}
+            size="m"
+            lineHeight="m"
+          >
+            {text}
+          </Text>
         </Popover>
       )}
     </>

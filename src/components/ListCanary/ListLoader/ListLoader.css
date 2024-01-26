@@ -28,7 +28,7 @@
     }
   }
 
-  &-Loader.Loader {
+  &-Loader.deprecated--Loader {
     --backgroundColor: var(--color-control-typo-disable);
   }
 }

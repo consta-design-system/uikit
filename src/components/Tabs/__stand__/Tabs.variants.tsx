@@ -122,7 +122,7 @@ const Variants = () => {
         disabledItems,
       )}
       getItemDisabled={conditionalGetter(disabledItems)}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       size={size}
       view={view}
       linePosition={linePosition as 'bottom' | 'top'}

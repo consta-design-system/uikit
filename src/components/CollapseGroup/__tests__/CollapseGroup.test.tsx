@@ -108,9 +108,7 @@ describe('Компонент CollapseGroup', () => {
         fireEvent.click(element);
         expect(handleClick).toHaveBeenCalled();
         expect(handleClick).toHaveBeenCalledTimes(1);
-        expect(handleClick).toHaveBeenCalledWith(
-          expect.objectContaining({ value: [index] }),
-        );
+        expect(handleClick).toHaveBeenCalledWith([0], expect.anything());
       });
     });
   });

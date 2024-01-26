@@ -14,7 +14,9 @@ export const CardExampleBorder = () => {
         shadow={false}
         border
       >
-        <Text>Карточка с границей</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Карточка с границей
+        </Text>
       </Card>
       <Card
         verticalSpace="2xl"
@@ -22,7 +24,9 @@ export const CardExampleBorder = () => {
         status="success"
         shadow={false}
       >
-        <Text>Карточка без границы</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Карточка без границы
+        </Text>
       </Card>
     </Example>
   );

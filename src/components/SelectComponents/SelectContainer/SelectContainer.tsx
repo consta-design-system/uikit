@@ -1,9 +1,10 @@
 import { IconComponent } from '@consta/icons/Icon';
 import React, { forwardRef } from 'react';
 
-import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
-import { FieldCaption } from '../../FieldCaption/FieldCaption';
-import { FieldLabel } from '../../FieldLabel/FieldLabel';
+import { FieldCaption } from '##/components/FieldCaption';
+import { FieldLabel } from '##/components/FieldLabel';
+import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
+
 import { cnSelect } from '../cnSelect';
 import {
   defaultPropForm,

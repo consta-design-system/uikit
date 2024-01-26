@@ -19,7 +19,9 @@ export const LayoutExampleAnchor = () => {
       className={cnLayoutExampleAnchor()}
     >
       <Layout className={cnLayoutExampleAnchor('Header')}>
-        <Text>Заголовок</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Заголовок
+        </Text>
       </Layout>
       <Layout direction="column" className={cnLayoutExampleAnchor('Container')}>
         <Layout
@@ -29,10 +31,14 @@ export const LayoutExampleAnchor = () => {
           verticalAlign="top"
           className={cnLayoutExampleAnchor('FixedBlock')}
         >
-          <Text>Фиксированный элемент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Фиксированный элемент
+          </Text>
         </Layout>
         <Layout className={cnLayoutExampleAnchor('Content')}>
-          <Text>Контент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Контент
+          </Text>
         </Layout>
         <Layout
           fixed
@@ -41,13 +47,19 @@ export const LayoutExampleAnchor = () => {
           anchorRef={fixedRef}
           className={cnLayoutExampleAnchor('FixedBlock')}
         >
-          <Text>Фиксированный элемент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Фиксированный элемент
+          </Text>
         </Layout>
         <Layout className={cnLayoutExampleAnchor('Content')}>
-          <Text>Контент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Контент
+          </Text>
         </Layout>
         <Layout className={cnLayoutExampleAnchor('Content')}>
-          <Text>Контент</Text>
+          <Text view="primary" size="m" lineHeight="m">
+            Контент
+          </Text>
         </Layout>
       </Layout>
     </Layout>

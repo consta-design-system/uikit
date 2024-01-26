@@ -23,10 +23,15 @@ export const UseDebounceExample = () => {
         <TextField
           className={cnUseDebounceExample('SearchField')}
           value={value}
-          onChange={({ value }) => setValue(value)}
+          onChange={setValue}
           placeholder="Поиск"
         />
-        <Text className={cnUseDebounceExample('SearchField')}>
+        <Text
+          view="primary"
+          size="m"
+          lineHeight="m"
+          className={cnUseDebounceExample('SearchField')}
+        >
           Покажем результаты поиска по этому фрагменту: <b>{searchValue}</b>
         </Text>
       </>

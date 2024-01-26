@@ -1,21 +1,13 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
+import url from '../../../__mocks__/avatar_1.jpg';
 import { User } from '../../../User';
 
 export const UserExampleAvatar = () => (
   <Example>
-    <User
-      avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png"
-      name="Роберт Пласт"
-      info="Cейсмик"
-    />
-    <User
-      avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png"
-      name="Роберт Пласт"
-      info="Cейсмик"
-      onlyAvatar
-    />
+    <User avatarUrl={url} name="Роберт Пласт" info="Cейсмик" />
+    <User avatarUrl={url} name="Роберт Пласт" info="Cейсмик" onlyAvatar />
   </Example>
 );
 

@@ -110,7 +110,7 @@ const pagesLongLabels = [
 
 const pagesSimple = ['Главная', 'Страница 1', 'Страница 2', 'Страница 3'];
 
-const onItemClick = (props: { item: DefaultItem; e: React.MouseEvent }) => {
+const onItemClick = (_item: DefaultItem, props: { e: React.MouseEvent }) => {
   props.e.preventDefault();
 };
 

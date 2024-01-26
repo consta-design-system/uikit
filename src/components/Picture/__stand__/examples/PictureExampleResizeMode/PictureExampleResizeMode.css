@@ -1,0 +1,5 @@
+.PictureExampleResizeMode {
+  &-Img {
+    width: 500px;
+  }
+}

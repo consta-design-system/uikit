@@ -29,7 +29,7 @@ export const DatePickerExampleAdditionalControls = () => {
       <DatePicker
         value={value}
         type="date-range"
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         renderAdditionalControls={({ currentVisibleDate }) => (
           <Button
             label="Этот квартал"

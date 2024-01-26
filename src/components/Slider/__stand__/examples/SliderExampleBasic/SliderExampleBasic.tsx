@@ -11,7 +11,7 @@ export const SliderExampleBasic = () => {
       <Slider
         range={false}
         label={`Значение ${value}`}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         value={value}
       />
     </Example>

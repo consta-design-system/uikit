@@ -117,7 +117,6 @@ const Variants = () => {
     <DatePicker
       className={cnDatePickerVariants()}
       type={type}
-      width="full"
       form={form}
       label={label}
       labelPosition={labelPosition}
@@ -129,7 +128,7 @@ const Variants = () => {
       view={view}
       disabled={disabled}
       size={size}
-      onChange={({ value }) => setValue(value)}
+      onChange={setValue}
       leftSide={icon}
       events={events}
       locale={getByMap(localeMap, locale)}

@@ -2,22 +2,14 @@ import './SelectLoader.css';
 
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
-import { Loader } from '../../Loader/Loader';
-import { defaultPropSize, PropSize } from '../types';
-
-type Props = {
-  mode?: 'empty' | 'blur';
-  size?: PropSize;
-};
+import { Loader } from '##/components/LoaderDeprecated';
+import { cn } from '##/utils/bem';
 
 export const cnSelectLoader = cn('SelectLoader');
 
-export const SelectLoader = (props: Props) => {
-  const { mode = 'empty', size = defaultPropSize } = props;
-
+export const SelectLoader = () => {
   return (
-    <div className={cnSelectLoader({ mode, size })}>
+    <div className={cnSelectLoader()}>
       <Loader className={cnSelectLoader('Loader')} size="s" />
     </div>
   );

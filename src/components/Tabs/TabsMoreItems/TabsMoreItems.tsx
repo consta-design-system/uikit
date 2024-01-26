@@ -56,7 +56,7 @@ const TabsMoreItemsRender = (
           return;
         }
         const value = items[highlightRef.current];
-        value && onChange?.({ e, value });
+        value && onChange?.(value, { e });
         setIsOpen.off();
         return;
       }

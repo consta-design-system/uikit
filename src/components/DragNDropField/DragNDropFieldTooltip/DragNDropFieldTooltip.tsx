@@ -3,7 +3,7 @@ import './DragNDropFieldTooltip.css';
 import React, { useEffect } from 'react';
 
 import { Text } from '##/components/Text/Text';
-import { Tooltip } from '##/components/TooltipCanary';
+import { Tooltip } from '##/components/Tooltip';
 import { useFlag } from '##/hooks/useFlag';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
@@ -34,7 +34,12 @@ export const DragNDropFieldTooltip: React.FC<DragNDropFieldTooltipProps> = ({
       isInteractive={false}
       onClickOutside={setIsOpen.off}
     >
-      <Text size="s" className={cnDragNDropFieldTooltip('Text')}>
+      <Text
+        size="s"
+        view="primary"
+        lineHeight="m"
+        className={cnDragNDropFieldTooltip('Text')}
+      >
         {errors.length === 1 ? (
           errors[0]
         ) : (

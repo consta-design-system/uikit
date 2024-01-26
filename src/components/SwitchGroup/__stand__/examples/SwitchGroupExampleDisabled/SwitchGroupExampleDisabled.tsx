@@ -23,7 +23,7 @@ export const SwitchGroupExampleDisabled = () => {
         value={value}
         items={items}
         getItemDisabled={(item) => item.off}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="SwitchGroupExampleDisabled"
       />
     </Example>
@@ -39,7 +39,7 @@ export const SwitchGroupExampleDisabledGroup = () => {
         value={value}
         items={items}
         getItemDisabled={(item) => item.off}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         name="SwitchGroupExampleDisabledGroup"
         disabled
       />

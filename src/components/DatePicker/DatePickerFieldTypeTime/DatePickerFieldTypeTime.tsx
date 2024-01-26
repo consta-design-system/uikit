@@ -27,10 +27,11 @@ export const DatePickerFieldTypeTime = React.forwardRef<
     multiplicityHours,
     multiplicitySeconds,
     multiplicityMinutes,
+    defaultValue,
     ...otherProps
   } = props;
 
-  const { stringValue, inputRef, clearValue } = usePicker({
+  const inputRef = usePicker({
     value,
     onChange,
     onError,
@@ -47,10 +48,8 @@ export const DatePickerFieldTypeTime = React.forwardRef<
     <TextField
       {...otherProps}
       type="text"
-      onChange={({ e, value }) => value === null && clearValue(e.nativeEvent)}
       inputContainerRef={ref}
       inputRef={useForkRef([inputRef, inputRefProp])}
-      value={stringValue}
       placeholder={placeholder}
     />
   );

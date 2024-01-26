@@ -1,20 +1,28 @@
-import { render, RenderResult } from '@testing-library/react';
+import { render, RenderResult, screen } from '@testing-library/react';
 import * as React from 'react';
+
+import { cnSelect } from '##/components/SelectComponents/cnSelect';
 
 import {
   SelectContainer,
   SelectContainerProps,
 } from '../SelectContainer/SelectContainer';
 
+const testId = 'selectContainer';
+
 const renderComponent = (
   props: Omit<SelectContainerProps, 'children'>,
 ): RenderResult => {
   return render(
-    <SelectContainer {...props}>
+    <SelectContainer {...props} data-testid={testId}>
       <div data-testid="content" />
     </SelectContainer>,
   );
 };
+
+const getRender = () => screen.getByTestId(testId);
+const getSelectContainer = () =>
+  getRender().querySelector(`.${cnSelect('SelectContainer')}`);
 
 describe('Компонент Container', () => {
   it('должен рендериться без ошибок', () => {
@@ -22,18 +30,18 @@ describe('Компонент Container', () => {
   });
 
   it('добавляется фокус', () => {
-    const component = renderComponent({ focused: true });
+    renderComponent({ focused: true });
 
-    expect(
-      component.container.querySelector('.Select-SelectContainer'),
-    ).toHaveClass('Select-SelectContainer_focused');
+    expect(getSelectContainer()).toHaveClass(
+      cnSelect('SelectContainer', { focused: true }),
+    );
   });
 
   it('добавляется класс disabled', () => {
-    const component = renderComponent({ disabled: true });
+    renderComponent({ disabled: true });
 
-    expect(
-      component.container.querySelector('.Select-SelectContainer'),
-    ).toHaveClass('Select-SelectContainer_disabled');
+    expect(getSelectContainer()).toHaveClass(
+      cnSelect('SelectContainer', { disabled: true }),
+    );
   });
 });

@@ -1,0 +1,53 @@
+import { MdxMenu } from '@consta/stand';
+import { LoaderExampleSize } from './examples/LoaderExampleSize/LoaderExampleSize';
+
+```tsx
+import { Loader } from '@consta/uikit/LoaderDeprecated';
+```
+
+<MdxMenu>
+
+- [Размер](#размер)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Размер
+
+За размер прелоадера отвечает свойство `size`.
+
+```tsx
+<Loader size="m" />
+<Loader size="s" />
+<Loader size="xs" />
+```
+
+<LoaderExampleSize />
+
+## Импорт
+
+```tsx
+import { Loader } from '@consta/uikit/LoaderDeprecated';
+```
+
+## Свойства
+
+| Свойство           | Тип                         | По умолчанию | Описание                                        |
+| ------------------ | --------------------------- | ------------ | ----------------------------------------------- |
+| [`size?`](#размер) | `'xs', 's', 'm'`            | `'m'`        | Размер прелоадера                               |
+| `className?`       | `string`                    | -            | Дополнительный CSS-класс                        |
+| `ref?`             | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент этого компонента |
+
+## Пример
+
+```ts
+// src/App.ts
+import React from 'react';
+import { Loader } from '@consta/uikit/LoaderDeprecated';
+
+const App = () => {
+  return <Loader />;
+};
+```

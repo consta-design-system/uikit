@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Установка yarn
         id: yarn-setup
@@ -34,6 +34,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Установка зависимостей
-        run: yarn --frozen-lockfile
+        run: yarn add "install-peers-cli@https://github.com/evless/install-peers-cli#fix-yarn-policies" && yarn --frozen-lockfile
       - name: Тесты
         run: yarn test

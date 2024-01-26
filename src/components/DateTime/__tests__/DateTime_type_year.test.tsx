@@ -103,6 +103,7 @@ describe('Компонент DateTime_type_year', () => {
         currentVisibleDate: new Date(1970, 0),
         onChangeCurrentVisibleDate: handleClick,
         view: 'classic',
+        type: 'year',
       });
 
       fireEvent.click(getDateTimeTooglerButtonPrev());
@@ -172,7 +173,10 @@ describe('Компонент DateTime_type_year', () => {
         fireEvent.click(DateTimeItem);
 
         expect(handleClick).toHaveBeenCalledTimes(1);
-        expect(handleClick).toHaveReturnedWith(new Date(1972, 0));
+
+        expect(handleClick).toHaveBeenCalledWith(new Date(1972, 0), {
+          e: expect.any(Object),
+        });
       });
     });
 
@@ -233,7 +237,10 @@ describe('Компонент DateTime_type_year', () => {
 
           const newCurrentValue = getDateTimeItem(1);
           fireEvent.click(newCurrentValue);
-          expect(onChange).toHaveReturnedWith(new Date(2070, 0));
+
+          expect(onChange).toHaveBeenCalledWith(new Date(2070, 0), {
+            e: expect.any(Object),
+          });
         } else {
           expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
 
@@ -243,7 +250,10 @@ describe('Компонент DateTime_type_year', () => {
 
           const newCurrentValue = getDateTimeItem(1);
           fireEvent.click(newCurrentValue);
-          expect(onChange).toHaveReturnedWith(new Date(1980, 0));
+
+          expect(onChange).toHaveBeenCalledWith(new Date(1980, 0), {
+            e: expect.any(Object),
+          });
         }
       });
     });
@@ -265,7 +275,10 @@ describe('Компонент DateTime_type_year', () => {
 
           const newCurrentValue = getDateTimeItem(1);
           fireEvent.click(newCurrentValue);
-          expect(onChange).toHaveReturnedWith(new Date(1870, 0));
+
+          expect(onChange).toHaveBeenCalledWith(new Date(1870, 0), {
+            e: expect.any(Object),
+          });
         } else {
           expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
 
@@ -275,7 +288,9 @@ describe('Компонент DateTime_type_year', () => {
 
           const newCurrentValue = getDateTimeItem(1);
           fireEvent.click(newCurrentValue);
-          expect(onChange).toHaveReturnedWith(new Date(1960, 0));
+          expect(onChange).toHaveBeenCalledWith(new Date(1960, 0), {
+            e: expect.any(Object),
+          });
         }
       });
     });

@@ -2,8 +2,8 @@ import './SelectValueTag.css';
 
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
-import { Tag } from '../../Tag/Tag';
+import { Tag } from '##/components/Tag';
+import { cn } from '##/utils/bem';
 
 type SelectValueTagProps = {
   label: string;

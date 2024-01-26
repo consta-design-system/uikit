@@ -10,7 +10,7 @@ export const DatePickerExampleTypeDate = () => {
       <DatePicker
         type="date"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         style={{ zIndex: 2 }}
       />
     </Example>
@@ -24,7 +24,7 @@ export const DatePickerExampleTypeDateRange = () => {
       <DatePicker
         type="date-range"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         style={{ zIndex: 2 }}
       />
     </Example>
@@ -38,7 +38,7 @@ export const DatePickerExampleTypeDateTime = () => {
       <DatePicker
         type="date-time"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         style={{ zIndex: 2 }}
       />
     </Example>
@@ -52,7 +52,7 @@ export const DatePickerExampleTypeDateTimeRange = () => {
       <DatePicker
         type="date-time-range"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         style={{ zIndex: 2 }}
       />
     </Example>
@@ -66,7 +66,7 @@ export const DatePickerExampleTypeTime = () => {
       <DatePicker
         type="time"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         style={{ zIndex: 2 }}
       />
     </Example>
@@ -80,7 +80,7 @@ export const DatePickerExampleTypeMonth = () => {
       <DatePicker
         type="month"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         style={{ zIndex: 2 }}
       />
     </Example>
@@ -94,7 +94,7 @@ export const DatePickerExampleTypeMonthRange = () => {
       <DatePicker
         type="month-range"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         style={{ zIndex: 2 }}
       />
     </Example>
@@ -108,7 +108,7 @@ export const DatePickerExampleTypeYear = () => {
       <DatePicker
         type="year"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         style={{ zIndex: 2 }}
       />
     </Example>
@@ -122,7 +122,7 @@ export const DatePickerExampleTypeYearRange = () => {
       <DatePicker
         type="year-range"
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         style={{ zIndex: 2 }}
       />
     </Example>

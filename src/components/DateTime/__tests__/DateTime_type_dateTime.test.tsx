@@ -50,7 +50,11 @@ describe('Компонент DateTime_type_dateTime', () => {
       fireEvent.click(dayItem);
 
       expect(onChange).toHaveBeenCalledTimes(2);
-      expect(onChange).toHaveLastReturnedWith(new Date(1970, 0, 9));
+
+      const date = new Date(1970, 0, 9);
+      expect(onChange).toHaveBeenLastCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
 
     it(`onChange отрабатывает в допустимом интервале`, () => {
@@ -97,8 +101,12 @@ describe('Компонент DateTime_type_dateTime', () => {
       const dateHoursItem = getDateTimeColumnItem(0, 10);
       fireEvent.click(dateHoursItem);
 
-      expect(onChange).toHaveReturnedWith(new Date(2022, 5, 27, 10));
       expect(onChange).toHaveBeenCalledTimes(1);
+
+      const date = new Date(2022, 5, 27, 10);
+      expect(onChange).toHaveBeenCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
 
     it(`onChange проверка изменения минут`, () => {
@@ -116,7 +124,11 @@ describe('Компонент DateTime_type_dateTime', () => {
       fireEvent.click(dateMinutesItem);
 
       expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveReturnedWith(new Date(2022, 5, 27, 11, 15));
+
+      const date = new Date(2022, 5, 27, 11, 15);
+      expect(onChange).toHaveBeenCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
 
     it(`onChange проверка изменения секунд`, () => {
@@ -134,7 +146,11 @@ describe('Компонент DateTime_type_dateTime', () => {
       fireEvent.click(dateSecondsItem);
 
       expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveReturnedWith(new Date(2022, 5, 27, 11, 10, 35));
+
+      const date = new Date(2022, 5, 27, 11, 10, 35);
+      expect(onChange).toHaveBeenCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
   });
 
@@ -175,7 +191,11 @@ describe('Компонент DateTime_type_dateTime', () => {
       fireEvent.click(dateSecondsItem);
 
       expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveReturnedWith(new Date(2022, 4, 27, 11, 10, 35));
+
+      const date = new Date(2022, 4, 27, 11, 10, 35);
+      expect(onChange).toHaveBeenCalledWith(date, {
+        e: expect.any(Object),
+      });
     });
   });
 
@@ -206,9 +226,10 @@ describe('Компонент DateTime_type_dateTime', () => {
           const currentHour = getColumnAllItem(0)[1];
           fireEvent.click(currentHour);
 
-          expect(onChange).toHaveReturnedWith(
-            new Date(2022, 5, 27, multiplicityHours),
-          );
+          const date = new Date(2022, 5, 27, multiplicityHours);
+          expect(onChange).toHaveBeenCalledWith(date, {
+            e: expect.any(Object),
+          });
         }
       });
 
@@ -233,10 +254,11 @@ describe('Компонент DateTime_type_dateTime', () => {
 
             const currentMinutes = getColumnAllItem(1)[1];
             fireEvent.click(currentMinutes);
+            const date = new Date(2022, 5, 27, 11, multiplicityMinutes);
 
-            expect(onChange).toHaveReturnedWith(
-              new Date(2022, 5, 27, 11, multiplicityMinutes),
-            );
+            expect(onChange).toHaveBeenCalledWith(date, {
+              e: expect.any(Object),
+            });
           }
         });
       });
@@ -263,9 +285,10 @@ describe('Компонент DateTime_type_dateTime', () => {
             const currentSeconds = getColumnAllItem(2)[1];
             fireEvent.click(currentSeconds);
 
-            expect(onChange).toHaveReturnedWith(
-              new Date(2022, 5, 27, 11, 34, multiplicitySeconds),
-            );
+            const date = new Date(2022, 5, 27, 11, 34, multiplicitySeconds);
+            expect(onChange).toHaveBeenCalledWith(date, {
+              e: expect.any(Object),
+            });
           }
         });
       });

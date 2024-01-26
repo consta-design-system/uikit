@@ -5,7 +5,7 @@ export default createStand({
   id: 'Checkbox',
   group: 'components',
   description: 'Чекбокс. Можно сделать выбор и подтвердить.',
-  version: '0.1.0',
+  version: '5.0.0',
   status: 'stable',
   sandbox: 'checkbox-e8wjsx',
   alias: ['поле', 'галочка', 'ввод', 'чекбокс'],

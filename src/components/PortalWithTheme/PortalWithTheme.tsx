@@ -48,7 +48,7 @@ export const PortalWithTheme = React.forwardRef<HTMLDivElement, Props>(
 
     return ReactDOM.createPortal(
       <PortalWithThemeProvider zIndex={zIndex}>
-        <Theme ref={useForkRef([themeRef, ref])} style={style} {...rest}>
+        <Theme {...rest} ref={useForkRef([themeRef, ref])} style={style}>
           {children}
         </Theme>
       </PortalWithThemeProvider>,

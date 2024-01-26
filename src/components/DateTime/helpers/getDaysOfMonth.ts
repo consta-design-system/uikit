@@ -85,7 +85,7 @@ export const getDaysOfMonth = (props: {
     const onClick =
       !disabled && handleDayClick
         ? (e: React.MouseEvent<HTMLButtonElement>) =>
-            handleDayClick({ e, value: date })
+            handleDayClick(date, { e, value: date })
         : undefined;
 
     if (date.getMonth() === currentMonth) {

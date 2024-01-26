@@ -3,7 +3,7 @@ import './BadgeGroup.css';
 import React, { forwardRef } from 'react';
 
 import { forkRef, useForkRef } from '##/hooks/useForkRef';
-import { useHideElementsInLine } from '##/hooks/useHideElementsInLineCanary';
+import { useHideElementsInLine } from '##/hooks/useHideElementsInLine';
 import { cn } from '##/utils/bem';
 
 import {

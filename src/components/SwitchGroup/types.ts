@@ -16,6 +16,13 @@ export type SwitchGroupPropGetItemDisabled<ITEM> = (
   item: ITEM,
 ) => boolean | undefined;
 
+export type SwitchGroupPropOnChange<ITEM> = (
+  value: ITEM[] | null,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
+
 export type SwitchGroupProps<ITEM = SwitchGroupDefaultItem> =
   PropsWithHTMLAttributesAndRef<
     {
@@ -23,10 +30,7 @@ export type SwitchGroupProps<ITEM = SwitchGroupDefaultItem> =
       items: ITEM[];
       getItemLabel?: SwitchGroupPropGetItemLabel<ITEM>;
       getItemDisabled?: SwitchGroupPropGetItemDisabled<ITEM>;
-      onChange: (props: {
-        e: React.ChangeEvent<HTMLInputElement>;
-        value: ITEM[] | null;
-      }) => void;
+      onChange?: SwitchGroupPropOnChange<ITEM>;
       name: string;
       direction?: SwitchGroupDirection;
       size?: SwitchPropSize;

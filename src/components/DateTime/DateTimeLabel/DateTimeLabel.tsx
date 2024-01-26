@@ -30,6 +30,8 @@ export const DateTimeLabel: React.FC<DateTimeLabelProps> = (props) => {
       align={align}
       weight="bold"
       cursor={cursor}
+      view="primary"
+      lineHeight="m"
     >
       {label}
     </Text>

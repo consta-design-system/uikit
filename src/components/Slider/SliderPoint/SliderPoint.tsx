@@ -8,7 +8,7 @@ import {
   ThemeContext,
   useTheme,
 } from '##/components/Theme';
-import { Tooltip } from '##/components/TooltipCanary';
+import { Tooltip } from '##/components/Tooltip';
 import { useFlag } from '##/hooks/useFlag/useFlag';
 import { useForkRef } from '##/hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '##/mixs/MixFocus/MixFocus';

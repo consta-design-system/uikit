@@ -2,7 +2,7 @@ import './ListLoader.css';
 
 import React, { forwardRef } from 'react';
 
-import { Loader } from '##/components/Loader';
+import { Loader } from '##/components/LoaderDeprecated';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';

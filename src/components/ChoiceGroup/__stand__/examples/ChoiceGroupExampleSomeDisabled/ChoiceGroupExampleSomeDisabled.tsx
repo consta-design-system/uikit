@@ -19,7 +19,7 @@ export const ChoiceGroupExampleSomeDisabled = () => {
     <Example>
       <ChoiceGroup
         value={value}
-        onChange={({ value }) => setValue(value)}
+        onChange={setValue}
         items={items}
         getItemLabel={(item) => item.name}
         name="ChoiceGroupExampleSomeDisabled"

@@ -1,0 +1,18 @@
+.UserSelectValue {
+  &_multiple {
+    margin-right: var(--space-xs);
+    margin-bottom: calc(var(--space-s) / 4);
+  }
+
+  &_disabled {
+    opacity: 0.6;
+  }
+
+  &:not(&_multiple) {
+    &.User {
+      &:hover {
+        background-color: var(--color-control-bg-clear);
+      }
+    }
+  }
+}

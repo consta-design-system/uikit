@@ -5,12 +5,11 @@ import { TextField } from '../../../TextField';
 
 export const TextFieldExampleStepArray = () => {
   const [value, setValue] = useState<string | undefined | null>(undefined);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
   return (
     <Example col={1}>
       <TextField
-        onChange={handleChange}
+        onChange={setValue}
         value={value}
         type="number"
         step={[10, 50, 80]}

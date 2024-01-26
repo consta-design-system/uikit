@@ -3,20 +3,11 @@ import './Loader.css';
 import React from 'react';
 
 import { cn } from '../../utils/bem';
-import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
-
-export const loaderPropSize = ['m', 's', 'xs'] as const;
-export type LoaderPropSize = typeof loaderPropSize[number];
-export const loaderPropSizeDefault: LoaderPropSize = loaderPropSize[0];
-
-type Props = {
-  size?: LoaderPropSize;
-  children?: never;
-};
-
-export type LoaderProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
+import { LoaderProps, loaderPropSizeDefault } from './types';
 
 export const cnLoader = cn('Loader');
+
+const sides = ['left', 'center', 'right'];
 
 export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
   (props, ref) => {
@@ -27,7 +18,12 @@ export const Loader = React.forwardRef<HTMLDivElement, LoaderProps>(
         ref={ref}
         className={cnLoader({ size }, [className])}
       >
-        <div className={cnLoader('Dot')} />
+        {sides.map((side, index) => (
+          <div
+            key={cnLoader('Dot', { index })}
+            className={cnLoader('Dot', { side })}
+          />
+        ))}
       </div>
     );
   },

@@ -7,7 +7,7 @@ export const DatePickerExampleValue = () => {
   const [value, setValue] = useState<Date | null>(null);
   return (
     <Example col={1}>
-      <DatePicker value={value} onChange={({ value }) => setValue(value)} />
+      <DatePicker value={value} onChange={setValue} />
     </Example>
   );
 };

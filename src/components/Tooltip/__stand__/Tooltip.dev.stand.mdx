@@ -5,7 +5,7 @@ import {
 } from './examples/TooltipPosition/TooltipPosition';
 
 ```tsx
-import { Tooltip } from '@consta/uikit/Tooltip';
+import { Tooltip } from '@consta/uikit/TooltipCanary';
 ```
 
 <MdxMenu>
@@ -28,23 +28,49 @@ import { Tooltip } from '@consta/uikit/Tooltip';
 
 ## Размер
 
-За размер тултипа отвечает свойство `size`. Варианты: `s`, `m`, `l`. В зависимости от выбранного размера изменятеся максимальная ширина тултипа.
+За размер тултипа отвечает свойство `size`. Варианты: `s`, `m`, `l`. В зависимости от выбранного размера изменяется максимальная ширина тултипа.
 
 ## Статус
 
-Иногда может быть полезно дополнительно выделить статус сообщения в nултипе, например для сообщения об ошибке. Сделать это можно с помощью свойства `status` со значениями: `normal`, `success`, `warning` и `alert`.
+Иногда можно дополнительно выделить статус сообщения в тултипе, например для уведомления об ошибке. Сделать это можно с помощью свойства `status` со значениями: `normal`, `success`, `warning` и `alert`.
 
 ## Позиционирование тултипа
 
-Для позиционирования тултипа используется компонент [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:способы-позиционирования) и его способы позиционирования — по якорю или по координатам.
+Чтобы открыть тултип определите свойство `isOpen`. Для позиционирования тултипа используется компонент [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:способы-позиционирования) и его способы позиционирования — по якорю или по координатам.
 
 ### По элементу-якорю
 
-```ts
-<Button label="Открыть тултип" type="button" ref={buttonRef} />
-<Tooltip size="s" anchorRef={buttonRef}>
-  Контент тултипа
-</Tooltip>
+```tsx
+export const TooltipPositionedAnchor = () => {
+  const anchorRef = useRef<HTMLButtonElement>(null);
+  const [isTooltipVisible, setIsTooltipVisible] = useFlag();
+
+  return (
+    <>
+      <div className={cnTooltipPosition()}>
+        <Button
+          label="Нажми меня"
+          type="button"
+          onClick={setIsTooltipVisible.toggle}
+          ref={anchorRef}
+        />
+      </div>
+      <Tooltip
+        isOpen={isTooltipVisible}
+        direction="upCenter"
+        spareDirection="downStartLeft"
+        possibleDirections={directions}
+        size={tooltipPropSizesDefault}
+        anchorRef={anchorRef}
+      >
+        <Text view="primary" lineHeight="m" size="xs">
+          Текст тултипа
+        </Text>
+        ,
+      </Tooltip>
+    </>
+  );
+};
 ```
 
 <TooltipPositionedAnchor />
@@ -65,9 +91,12 @@ export const TooltipPositionedCoords = () => {
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setPosition(undefined)}
       >
-        <Text>Область, в которой работает отслеживание мышки</Text>
+        <Text view="primary" size="m" lineHeight="m">
+          Область, в которой работает отслеживание мышки
+        </Text>
       </div>
       <Tooltip
+        isOpen
         direction="upCenter"
         spareDirection="downStartLeft"
         possibleDirections={directions}
@@ -75,7 +104,9 @@ export const TooltipPositionedCoords = () => {
         position={position}
         isInteractive={false}
       >
-        <Text size="xs">Текст тултипа</Text>
+        <Text size="xs" view="primary" lineHeight="m">
+          Текст тултипа
+        </Text>
       </Tooltip>
     </>
   );
@@ -87,13 +118,14 @@ export const TooltipPositionedCoords = () => {
 ## Импорт
 
 ```tsx
-import { Tooltip } from '@consta/uikit/Tooltip';
+import { Tooltip } from '@consta/uikit/TooltipCanary';
 ```
 
 ## Свойства
 
 | Свойство              | Тип или варианты значения                     | По умолчанию            | Описание                                                                                                              |
 | --------------------- | --------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `isOpen?`             | `boolean`                                     | -                       | Состояние тултипа (открыт/закрыт)                                                                                     |
 | `anchorRef?`          | `React.RefObject<HTMLElement>`                | -                       | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                                 |
 | `position?`           | `{ x: number; y: number }` &#124; `undefined` | -                       | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                                 |
 | `size`                | `'s', 'm', 'l'`                               | '`m`'                   | Размер, влияющий на максимальную ширину тултипа                                                                       |
@@ -109,7 +141,7 @@ import { Tooltip } from '@consta/uikit/Tooltip';
 ### Пример
 
 ```ts
-<Tooltip size="s" position={{ x: 100, y: 200 }}>
+<Tooltip isOpen size="s" position={{ x: 100, y: 200 }}>
   Контент тултипа
 </Tooltip>
 ```
