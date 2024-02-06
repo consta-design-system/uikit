@@ -2,7 +2,7 @@ import './PaginationItem.css';
 
 import React, { forwardRef } from 'react';
 
-import { cnMixFlex } from '##/mixs/MixFlex';
+import { cnButton } from '##/components/Button';
 import { cnMixFocus } from '##/mixs/MixFocus';
 import { cn } from '##/utils/bem';
 
@@ -13,7 +13,7 @@ import {
   paginationPropSizeDefault,
 } from '../types';
 
-const cnPaginationItem = cn('PaginationItem');
+export const cnPaginationItem = cn('PaginationItem');
 
 const PaginationItemRender = (
   props: PaginationItemProps,
@@ -27,18 +27,20 @@ const PaginationItemRender = (
     form = paginationPropFormDefault,
     className,
     children,
+    clickable,
     ...otherProps
   } = props;
 
   return (
     <Tag
       {...otherProps}
-      className={cnPaginationItem({ size, form, active }, [
+      className={cnPaginationItem({ active, clickable, size }, [
         className,
-        cnMixFlex({ align: 'center', justify: 'center', flex: 'inline-flex' }),
-        cnMixFocus(),
+        cnButton({ view: 'clear', size, form, onlyIcon: true }),
+        clickable ? cnMixFocus() : undefined,
       ])}
       ref={ref}
+      tabIndex={clickable ? undefined : -1}
     >
       {label}
     </Tag>

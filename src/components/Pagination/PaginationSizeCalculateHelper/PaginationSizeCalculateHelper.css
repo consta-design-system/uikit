@@ -1,0 +1,12 @@
+.PaginationSizeCalculateHelper {
+  position: fixed;
+  top: -1000vh;
+  left: -1000vh;
+  opacity: 0;
+  pointer-events: none;
+
+  &-FakeButtonContainer {
+    display: inline-flex;
+    gap: var(--pagination-gap);
+  }
+}

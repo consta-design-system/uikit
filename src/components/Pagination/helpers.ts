@@ -4,18 +4,15 @@ import { IconArrowLast } from '@consta/icons/IconArrowLast';
 import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
 import { IconArrowRight } from '@consta/icons/IconArrowRight';
 
+import { range } from '##/utils/array';
+
 import {
   PaginationArrowTypes,
   PaginationBaseItemDefault,
-  PaginationBaseProps,
   PaginationItem,
-  PaginationPropGetItemAs,
-  PaginationPropGetItemAttributes,
   PaginationPropGetItemClickable,
   PaginationPropGetItemKey,
   PaginationPropGetItemLabel,
-  PaginationPropGetItemOnClick,
-  PaginationPropGetItemRef,
 } from './types';
 
 export const defaultGetItemLabel: PaginationPropGetItemLabel<
@@ -26,127 +23,304 @@ export const defaultGetItemKey: PaginationPropGetItemKey<
 > = (item) => item.key;
 export const defaultGetItemClickable: PaginationPropGetItemClickable<
   PaginationBaseItemDefault
-> = (item) => item.clickable;
-const defaultGetItemAs: PaginationPropGetItemAs<PaginationBaseItemDefault> = (
-  item,
-) => item.as;
-const defaultGetItemAttributes: PaginationPropGetItemAttributes<
-  PaginationBaseItemDefault
-> = (item) => item.attributes;
-const defaultGetItemRef: PaginationPropGetItemRef<PaginationBaseItemDefault> = (
-  item,
-) => item.ref;
-const defaultGetItemOnClick: PaginationPropGetItemOnClick<
-  PaginationBaseItemDefault
-> = (item) => item.onClick;
+> = (item) => item.clickable ?? true;
 
-export const withDefaultGetters = (props: PaginationBaseProps) => ({
-  ...props,
-  getItemLabel: props.getItemLabel ?? defaultGetItemLabel,
-  getItemKey: props.getItemKey ?? defaultGetItemKey,
-  getItemClickable: props.getItemClickable ?? defaultGetItemClickable,
-  getItemOnClick: props.getItemOnClick ?? defaultGetItemOnClick,
-  getItemAs: props.getItemAs ?? defaultGetItemAs,
-  getItemAttributes: props.getItemAttributes ?? defaultGetItemAttributes,
-  getItemRef: props.getItemRef ?? defaultGetItemRef,
-});
+export const firstPageSeparator = '<_';
+export const lastPageSeparator = '_>';
+export const pageSeparatorLabel = '...';
+export const guardCurrentPage = (
+  currentPage: number | undefined,
+  totalPages: number,
+) => Math.floor(Math.max(1, Math.min(currentPage || 0, totalPages)));
 
-const getMinVisibleCount = (showFirstPage: boolean, showLastPage: boolean) => {
-  if (showFirstPage || showLastPage) {
-    return 5;
-  }
-  if (showFirstPage && showLastPage) {
-    return 7;
-  }
+export const getPagesArrayByVisibleCount = (
+  currentPage: number,
+  totalPages: number,
+  visibleCountProp: number,
+  showFirstPage?: boolean,
+  showLastPage?: boolean,
+): PaginationItem[] => {
+  const visibleCount = Math.floor(Math.min(visibleCountProp, totalPages));
+  const page = guardCurrentPage(currentPage, totalPages);
+  const visibleSegmentStartToCenter = Math.ceil(visibleCount / 2);
+  const visibleSegmentEndToCenter = visibleCount - visibleSegmentStartToCenter;
+  const slideStart = Math.max(0, page - visibleSegmentStartToCenter);
 
-  return 3;
-};
+  return range(visibleCount).map((i) => {
+    const el =
+      i +
+      slideStart +
+      1 -
+      Math.max(0, page + visibleSegmentEndToCenter - totalPages);
 
-const range = (start: number, end: number) =>
-  Array.from({ length: Math.abs(end - start + 1) }).map((_el, i) =>
-    Math.floor(start + i),
-  );
+    if (visibleCount >= 5 && visibleCount < totalPages) {
+      if (showFirstPage && i === 0 && page - visibleSegmentStartToCenter > 0) {
+        return {
+          key: 1,
+          label: '1',
+          clickable: true,
+        };
+      }
+      if (showFirstPage && i === 1 && page - visibleSegmentStartToCenter > 0) {
+        return {
+          key: firstPageSeparator,
+          label: pageSeparatorLabel,
+          clickable: false,
+        };
+      }
+      if (
+        showLastPage &&
+        i === visibleCount - 1 &&
+        page + visibleSegmentEndToCenter < totalPages
+      ) {
+        return {
+          key: totalPages,
+          label: totalPages.toString(),
+          clickable: true,
+        };
+      }
+      if (
+        showLastPage &&
+        i === visibleCount - 2 &&
+        page + visibleSegmentEndToCenter < totalPages
+      ) {
+        return {
+          key: lastPageSeparator,
+          label: pageSeparatorLabel,
+          clickable: false,
+        };
+      }
+    }
 
-const generateArr = (params: {
-  page: number;
-  count: number;
-  visibleCount: number;
-  showFirstPage?: boolean;
-  showLastPage?: boolean;
-}) => {
-  const {
-    count,
-    page,
-    showFirstPage = false,
-    showLastPage = false,
-    visibleCount: visibleCountProp,
-  } = params;
-
-  let visibleCount = visibleCountProp;
-
-  const minVisibleCount = getMinVisibleCount(showFirstPage, showLastPage);
-
-  if (minVisibleCount >= count) {
-    visibleCount = count;
-  } else {
-    visibleCount = Math.min(count, Math.max(visibleCountProp, minVisibleCount));
-  }
-
-  const boundaryStart = showFirstPage ? 2 : 0;
-  const boundaryEnd = showLastPage ? 2 : 0;
-
-  const res = [];
-
-  const siblingsStart =
-    Math.floor((visibleCount - boundaryEnd - boundaryStart) / 2) || 0;
-  const siblingsEnd =
-    Math.floor((visibleCount - boundaryEnd - boundaryStart - 1) / 2) || 0;
-
-  let start = 1;
-  let end = count;
-
-  if (visibleCount - boundaryEnd >= page + siblingsEnd) {
-    end = visibleCount - (showLastPage ? 2 : 0);
-  } else if (page - siblingsStart > count - visibleCount + boundaryStart) {
-    start = count - visibleCount + (showFirstPage ? 3 : 1);
-  } else {
-    start = page - siblingsStart;
-    end = page + siblingsEnd;
-  }
-
-  if (showFirstPage && start !== 1) {
-    res.push(1, '...');
-  }
-  res.push(...range(Math.floor(start), Math.floor(end)));
-
-  if (showLastPage && end !== count) {
-    res.push('...', count);
-  }
-
-  return res;
-};
-
-export const getPagesArray = (params: {
-  currentPage: number;
-  totalPages: number;
-  visibleCount: number;
-  showFirstPage?: boolean;
-  showLastPage?: boolean;
-}): PaginationItem[] => {
-  const { totalPages, currentPage, ...rest } = params;
-
-  const count = Math.max(totalPages, 1);
-  const page = Math.min(count, Math.max(1, currentPage));
-
-  return generateArr({ page, count, ...rest }).map((el, i) => {
     return {
-      key: typeof el === 'string' ? totalPages + i : el,
+      key: el,
       label: el.toString(),
-      page: typeof el === 'string' ? i : el,
-      active: typeof el === 'number' ? el === page : false,
-      clickable: typeof el !== 'number',
+      clickable: true,
     };
   });
+};
+
+type GetPagesArray = (
+  currentPage: number,
+  totalPages: number,
+  visibleCount: number,
+  showFirstPage: boolean,
+  showLastPage: boolean,
+  gap: number,
+  buttonPadding: number,
+  buttonMinWidth: number,
+  maxSymbolSize: number,
+  totalWidth: number,
+) => PaginationItem[];
+
+type GetPagesArrayByWidth = (
+  currentPage: number,
+  totalPages: number,
+  showFirstPage: boolean,
+  showLastPage: boolean,
+  gap: number,
+  buttonPadding: number,
+  buttonMinWidth: number,
+  maxSymbolSize: number,
+  totalWidth: number,
+) => PaginationItem[];
+
+export const getPagesArrayByWidth: GetPagesArrayByWidth = (
+  currentPageArg,
+  totalPages,
+  showFirstPage,
+  showLastPage,
+  gap: number,
+  buttonPadding: number,
+  buttonMinWidth: number,
+  maxSymbolSize: number,
+  totalWidth: number,
+) => {
+  const currentPage = guardCurrentPage(currentPageArg, totalPages);
+
+  let w = totalWidth;
+  // направлеине добавления кнопки, true - влево, false - вправо
+  let direction = false;
+  // индекс добавляемой кнопки относительно от выбранной
+  let leftIndex = 0;
+  let rightIndex = 1;
+  let pages: (PaginationItem & { buttonWidth: number })[] = [];
+
+  const getButtonWidth = (label: number, withGap: boolean) => {
+    return (
+      Math.max(
+        label.toString().length * maxSymbolSize + buttonPadding,
+        buttonMinWidth,
+      ) + (withGap ? gap : 0)
+    );
+  };
+
+  while (w > 0 && pages.length < totalPages) {
+    const add = direction ? currentPage + rightIndex : currentPage - leftIndex;
+
+    const buttonWidth: number = getButtonWidth(add, Boolean(pages.length));
+
+    if (w - buttonWidth >= 0 && add <= totalPages && add >= 1) {
+      const el = {
+        key: add,
+        label: add.toString(),
+        clickable: true,
+        buttonWidth,
+      };
+
+      if (direction) {
+        pages.push(el);
+        rightIndex += 1;
+      } else {
+        pages.unshift(el);
+        leftIndex += 1;
+      }
+    }
+    direction = !direction;
+
+    w -= add <= totalPages && add >= 1 ? buttonWidth : 0;
+  }
+
+  if ((showFirstPage || showLastPage) && pages.length >= 5) {
+    const moreButtonWidth = getButtonWidth(1, true);
+    const firstButtonWidth = getButtonWidth(1, true);
+    const lastButtonWidth = getButtonWidth(totalPages, true);
+
+    let isAddFirstPage = false;
+    let isAddlastPage = false;
+
+    if (showFirstPage && pages[0].key !== 1) {
+      let array = [...pages];
+
+      while (array.length > 3) {
+        if (array[0].key === currentPage) {
+          break;
+        }
+
+        const slicedArray = array.slice(1);
+
+        if (
+          slicedArray
+            .map((el) => el.buttonWidth)
+            .reduce((previous, currentValue) => previous + currentValue) +
+            firstButtonWidth +
+            moreButtonWidth <=
+          totalWidth
+        ) {
+          isAddFirstPage = true;
+          pages = [...slicedArray];
+          break;
+        }
+
+        array = slicedArray;
+      }
+    }
+
+    if (showLastPage && pages[pages.length - 1].key !== totalPages) {
+      let array = [...pages];
+
+      while (array.length > 3) {
+        if (array[array.length - 1].key === totalPages) {
+          break;
+        }
+
+        const slicedArray = array.slice(0, -1);
+
+        if (
+          slicedArray
+            .map((el) => el.buttonWidth)
+            .reduce((previous, currentValue) => previous + currentValue) +
+            lastButtonWidth +
+            moreButtonWidth +
+            (isAddFirstPage ? firstButtonWidth + moreButtonWidth : 0) <=
+          totalWidth
+        ) {
+          isAddlastPage = true;
+          pages = [...slicedArray];
+          break;
+        }
+
+        array = slicedArray;
+      }
+    }
+
+    pages = [
+      ...(isAddFirstPage
+        ? [
+            {
+              key: 1,
+              label: '1',
+              clickable: true,
+              buttonWidth: firstButtonWidth,
+            },
+            {
+              key: firstPageSeparator,
+              label: pageSeparatorLabel,
+              buttonWidth: moreButtonWidth,
+              clickable: false,
+            },
+          ]
+        : []),
+      ...pages,
+      ...(isAddlastPage
+        ? [
+            {
+              key: lastPageSeparator,
+              label: pageSeparatorLabel,
+              buttonWidth: moreButtonWidth,
+              clickable: false,
+            },
+            {
+              key: totalPages,
+              label: totalPages.toString(),
+              clickable: true,
+              buttonWidth: firstButtonWidth,
+            },
+          ]
+        : []),
+    ];
+  }
+
+  const returned: PaginationItem[] = pages.map(({ key, label, clickable }) => ({
+    key,
+    label,
+    clickable,
+  }));
+
+  return returned;
+};
+
+export const getPagesArray: GetPagesArray = (
+  currentPage,
+  totalPages = 1,
+  visibleCount,
+  showFirstPage,
+  showLastPage,
+  gap,
+  buttonPadding,
+  buttonMinWidth,
+  maxSymbolSize,
+  totalWidth,
+) => {
+  return visibleCount
+    ? getPagesArrayByVisibleCount(
+        currentPage,
+        totalPages,
+        visibleCount,
+        showFirstPage,
+        showLastPage,
+      )
+    : getPagesArrayByWidth(
+        currentPage,
+        totalPages,
+        showFirstPage,
+        showLastPage,
+        gap,
+        buttonPadding,
+        buttonMinWidth,
+        maxSymbolSize,
+        totalWidth,
+      );
 };
 
 export const paginationArrowIconsMap: Record<
@@ -158,9 +332,3 @@ export const paginationArrowIconsMap: Record<
   next: IconArrowRight,
   last: IconArrowLast,
 };
-
-export const getListValue = (page: number): PaginationItem => ({
-  key: page,
-  page,
-  label: page.toString(),
-});
