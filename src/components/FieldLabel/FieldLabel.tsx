@@ -52,17 +52,17 @@ export const FieldLabel = forwardRefWithAs<FieldLabelProps>((props, ref) => {
       className={cnFieldLabel(null, [className])}
       ref={ref}
     >
+      {children}
+      {required && <span className={cnFieldLabel('Star')}>*</span>}
       {Icon && (
         <Icon
           className={cnFieldLabel('Icon', [
-            cnMixSpace({ mR: iconSpaceMap[size] }),
+            cnMixSpace({ mL: iconSpaceMap[size] }),
           ])}
           size={iconSizeMap[size]}
           view="secondary"
         />
       )}
-      {children}
-      {required && <span className={cnFieldLabel('Star')}>*</span>}
     </Text>
   );
 });
