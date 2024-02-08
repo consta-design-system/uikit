@@ -3,6 +3,7 @@ import './Tabs.css';
 import React, { forwardRef } from 'react';
 
 import { useRefs } from '##/hooks/useRefs';
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 
 import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
 import { useResizeObserved } from '../../hooks/useResizeObserved/useResizeObserved';
@@ -157,7 +158,10 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
 
   return (
     <div
-      className={cnTabs({ size, view, direction: tabsDirection }, [className])}
+      className={cnTabs({ size, view, direction: tabsDirection }, [
+        className,
+        cnMixScrollBar(),
+      ])}
       ref={ref}
       {...otherProps}
     >
