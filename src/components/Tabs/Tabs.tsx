@@ -44,6 +44,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
     value,
     linePosition = tabsDefaultLinePosition,
     fitMode = tabsDefaultFitMode,
+    withScrollButtons = true,
     onlyIcon,
     getItemIcon,
     getItemAs,
@@ -170,6 +171,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
         getItemChecked={getChecked}
         items={items}
         size={size}
+        withScrollButtons={withScrollButtons}
       />
       {view === 'bordered' && <TabsBorderLine linePosition={linePosition} />}
     </div>

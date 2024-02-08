@@ -18,6 +18,7 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
   items,
   renderItemsList,
   getItemChecked,
+  withScrollButtons,
 }: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [
@@ -69,7 +70,7 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
 
   return (
     <div className={cnTabsFitModeScrollWrapper()}>
-      {isScrollable && (
+      {isScrollable && withScrollButtons && (
         <>
           {(['prev', 'next'] as const).map((buttonTo) => (
             <Button

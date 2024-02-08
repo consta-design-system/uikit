@@ -96,6 +96,7 @@ export type TabsFitModeWrapperProps<ITEM> = {
   onChange: TabsPropOnChange<ITEM>;
   tabRefs: Array<React.RefObject<HTMLElement>>;
   size: TabsPropSize;
+  withScrollButtons?: boolean;
 };
 
 export type TabsProps<ITEM = TabsItemDefault> = PropsWithHTMLAttributesAndRef<
@@ -125,13 +126,22 @@ export type TabsProps<ITEM = TabsItemDefault> = PropsWithHTMLAttributesAndRef<
      */
     getItemIcon?: TabsPropGetItemIcon<ITEM>;
   } & (
-    | {
+    | ({
         linePosition?: Extract<TabsPropLinePosition, 'bottom' | 'top'>;
-        fitMode?: 'dropdown' | 'scroll';
-      }
+      } & (
+        | {
+            fitMode?: 'scroll';
+            withScrollButtons?: boolean;
+          }
+        | {
+            fitMode?: 'dropdown';
+            withScrollButtons?: never;
+          }
+      ))
     | {
         linePosition: Extract<TabsPropLinePosition, 'left' | 'right'>;
         fitMode?: never;
+        withScrollButtons?: never;
       }
   ),
   HTMLDivElement
