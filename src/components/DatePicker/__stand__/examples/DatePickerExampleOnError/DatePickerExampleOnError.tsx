@@ -27,7 +27,7 @@ export const DatePickerExampleOnError = () => {
   const onError: DatePickerPropOnError = (props) => {
     if (props.type === 'outOfRange') {
       setError(
-        `Дата ${formatDate(props.date)} не в ходит в диапазон c ${formatDate(
+        `Дата ${formatDate(props.date)} не входит в диапазон c ${formatDate(
           minDate,
         )} по ${formatDate(maxDate)}`,
       );
