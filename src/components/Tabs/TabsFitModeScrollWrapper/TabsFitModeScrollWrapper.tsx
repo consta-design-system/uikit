@@ -4,6 +4,8 @@ import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
 import { IconArrowRight } from '@consta/icons/IconArrowRight';
 import React from 'react';
 
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
+
 import { useResizeObserved } from '../../../hooks/useResizeObserved/useResizeObserved';
 import { useScrollPosition } from '../../../hooks/useScrollPosition/useScrollPosition';
 import { cn } from '../../../utils/bem';
@@ -92,7 +94,10 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
         </>
       )}
       <div
-        className={cnTabsFitModeScrollWrapper('Content')}
+        className={cnTabsFitModeScrollWrapper(
+          'Content',
+          cnMixScrollBar({ invisible: true }),
+        )}
         ref={scrollContainerRef}
       >
         {renderItemsList({

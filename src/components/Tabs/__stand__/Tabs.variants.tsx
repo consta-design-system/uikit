@@ -105,7 +105,7 @@ const Variants = () => {
   const withScrollButtons = useBoolean(
     'withScrollButtons',
     true,
-    Boolean(fitMode === 'scroll'),
+    fitMode === 'scroll',
   );
 
   const [value, setValue] = useState<TabsItemDefault | null>(items[0]);

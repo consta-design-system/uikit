@@ -160,7 +160,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
     <div
       className={cnTabs({ size, view, direction: tabsDirection }, [
         className,
-        cnMixScrollBar(),
+        cnMixScrollBar({ invisible: true }),
       ])}
       ref={ref}
       {...otherProps}
