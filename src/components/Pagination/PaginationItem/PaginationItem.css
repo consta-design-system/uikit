@@ -5,6 +5,7 @@
   width: auto;
   min-width: var(--button-height);
   padding: 0 var(--pagination-item-ph);
+  transition: none;
 
   &:not(.PaginationItem_clickable) {
     --button-bg-color-hover: transparent;
