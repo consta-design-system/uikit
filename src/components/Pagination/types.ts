@@ -34,7 +34,7 @@ export type PaginationPropOnItemClick<ITEM> = (
 
 export type PaginationPropOnChange<ITEM> = (
   value: ITEM,
-  params: { e: React.MouseEvent | React.KeyboardEvent },
+  params: { e: React.MouseEvent | KeyboardEvent },
 ) => void;
 
 // ARROWS
@@ -69,26 +69,10 @@ type PaginationArrowsProps = {
     }
 );
 
-type PaginationBaseArrowsProps = {
-  outerMostArrows?: [PaginationBasePropArrow?, PaginationBasePropArrow?];
-} & (
-  | {
-      arrows: [PaginationBasePropArrow?, PaginationBasePropArrow?];
-      hotKeys?: [PaginationPropHotKey?, PaginationPropHotKey?];
-    }
-  | {
-      arrows?: never;
-      hotKeys?: never;
-    }
-);
-
-type Props<ITEM> = {
-  form?: PaginationPropForm;
-  size?: PaginationPropSize;
-  containerEventListener?: HTMLElement | Window;
-  value?: ITEM;
-  items?: ITEM extends number ? number : ITEM[];
-  onChange?: PaginationPropOnChange<ITEM>;
+export type PaginationItem = {
+  key: string | number;
+  label: string;
+  clickable: boolean;
 };
 
 export type PaginationProps<TYPE extends PaginationPropType> =
@@ -98,7 +82,16 @@ export type PaginationProps<TYPE extends PaginationPropType> =
       showFirstPage?: boolean;
       showLastPage?: boolean;
       visibleCount?: number;
-    } & Props<number>,
+      form?: PaginationPropForm;
+      size?: PaginationPropSize;
+      containerEventListener?: HTMLElement | Window;
+      value?: number;
+      items?: number;
+      onChange?: PaginationPropOnChange<number>;
+      getItemAs?: PaginationPropGetItemAs<PaginationItem>;
+      getItemAttributes?: PaginationPropGetItemAttributes<PaginationItem>;
+      getItemRef?: PaginationPropGetItemRef<PaginationItem>;
+    },
     HTMLDivElement
   > &
     PaginationArrowsProps &
@@ -111,14 +104,6 @@ export type PaginationProps<TYPE extends PaginationPropType> =
 export type PaginationComponent = <TYPE extends PaginationPropType>(
   props: PaginationProps<TYPE>,
 ) => React.ReactElement | null;
-
-export type PaginationItem = {
-  key: number;
-  label: string;
-  active?: boolean;
-  clickable?: boolean;
-  page: number;
-};
 
 export type PaginationBaseItemDefault = {
   key: string | number;
@@ -154,30 +139,13 @@ export type PaginationPropGetItemOnClick<ITEM> = (
 
 type Mappers<ITEM = PaginationBaseItemDefault> = {
   getItemLabel?: PaginationPropGetItemLabel<ITEM>;
-  getItemKey?: PaginationPropGetItemKey<ITEM>;
+  getItemKey: PaginationPropGetItemKey<ITEM>;
   getItemAs?: PaginationPropGetItemAs<ITEM>;
   getItemAttributes?: PaginationPropGetItemAttributes<ITEM>;
   getItemRef?: PaginationPropGetItemRef<ITEM>;
   getItemClickable?: PaginationPropGetItemClickable<ITEM>;
   getItemOnClick?: PaginationPropGetItemOnClick<ITEM>;
 };
-
-export type PaginationBaseProps<ITEM = PaginationBaseItemDefault> =
-  PropsWithHTMLAttributes<
-    Mappers<ITEM> &
-      Props<ITEM> &
-      PaginationBaseArrowsProps &
-      (ITEM extends { key: PaginationBaseItemDefault['key'] }
-        ? {}
-        : {
-            getItemKey: PaginationPropGetItemKey<ITEM>;
-          }),
-    HTMLDivElement
-  >;
-
-export type PaginationBaseComponent = <ITEM = PaginationBaseItemDefault>(
-  props: PaginationBaseProps<ITEM>,
-) => React.ReactElement | null;
 
 export type PaginationArrowProps = PropsWithHTMLAttributes<
   {
@@ -230,12 +198,7 @@ export type PaginationListProps<ITEM> = PropsWithHTMLAttributesAndRef<
   },
   HTMLDivElement
 > &
-  Mappers<ITEM> &
-  (ITEM extends { label: string }
-    ? {}
-    : {
-        getItemKey: PaginationPropGetItemKey<ITEM>;
-      });
+  Mappers<ITEM>;
 
 export type PaginationListComponent = <ITEM extends PaginationBaseItemDefault>(
   props: PaginationListProps<ITEM>,

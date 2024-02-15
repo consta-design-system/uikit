@@ -1,3 +1,14 @@
 .Pagination {
-  max-width: 100%;
+  display: flex;
+  gap: var(--pagination-gap);
+
+  &_type {
+    &_default {
+      --pagination-gap: var(--space-3xs);
+    }
+
+    &_input {
+      --pagination-gap: var(--space-xs);
+    }
+  }
 }
