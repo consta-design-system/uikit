@@ -81,6 +81,7 @@ function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
         .map(() => createRef<HTMLButtonElement>()),
     [steps.length],
   );
+  const isOverflow = useOverflow({ currentRef: listRef });
 
   useLayoutEffect(() => {
     const linesArray: Line[] = [];
@@ -94,7 +95,7 @@ function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
         });
     });
     setLines(linesArray);
-  }, [activeStepIndex, steps, direction, size, width, height]);
+  }, [activeStepIndex, steps, direction, size, width, height, isOverflow]);
 
   useEffect(() => {
     setVisibleIndex(activeStepIndex || 0);
@@ -147,8 +148,6 @@ function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
         typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined,
     };
   };
-
-  const isOverflow = useOverflow({ currentRef: listRef });
 
   return (
     <div
