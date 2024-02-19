@@ -7,6 +7,7 @@ import React, { forwardRef, useMemo, useState } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
 
 import { Button } from '../Button';
@@ -172,7 +173,13 @@ const BookmarkTabsRender = (
           </div>
         </div>
       )}
-      <div ref={wrapperRef} className={cnBookmarkTabs('Wrapper')}>
+      <div
+        ref={wrapperRef}
+        className={cnBookmarkTabs(
+          'Wrapper',
+          cnMixScrollBar({ invisible: true }),
+        )}
+      >
         <div
           style={{
             ['--bookmarks-list-width' as string]: `max-content`,
