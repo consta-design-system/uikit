@@ -102,6 +102,11 @@ const Variants = () => {
     tabsDefaultFitMode,
     Boolean(linePosition === 'bottom' || linePosition === 'top'),
   );
+  const withScrollButtons = useBoolean(
+    'withScrollButtons',
+    true,
+    fitMode === 'scroll',
+  );
 
   const [value, setValue] = useState<TabsItemDefault | null>(items[0]);
 
@@ -126,7 +131,8 @@ const Variants = () => {
       size={size}
       view={view}
       linePosition={linePosition as 'bottom' | 'top'}
-      fitMode={fitMode}
+      fitMode={fitMode as 'dropdown'}
+      withScrollButtons={withScrollButtons as unknown as undefined}
       onlyIcon={onlyIcon}
       disabled={disabledAll}
     />

@@ -4,6 +4,8 @@ import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
 import { IconArrowRight } from '@consta/icons/IconArrowRight';
 import React from 'react';
 
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
+
 import { useResizeObserved } from '../../../hooks/useResizeObserved/useResizeObserved';
 import { useScrollPosition } from '../../../hooks/useScrollPosition/useScrollPosition';
 import { cn } from '../../../utils/bem';
@@ -18,6 +20,7 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
   items,
   renderItemsList,
   getItemChecked,
+  withScrollButtons,
 }: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [
@@ -69,7 +72,7 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
 
   return (
     <div className={cnTabsFitModeScrollWrapper()}>
-      {isScrollable && (
+      {isScrollable && withScrollButtons && (
         <>
           {(['prev', 'next'] as const).map((buttonTo) => (
             <Button
@@ -91,7 +94,10 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
         </>
       )}
       <div
-        className={cnTabsFitModeScrollWrapper('Content')}
+        className={cnTabsFitModeScrollWrapper(
+          'Content',
+          cnMixScrollBar({ invisible: true }),
+        )}
         ref={scrollContainerRef}
       >
         {renderItemsList({
