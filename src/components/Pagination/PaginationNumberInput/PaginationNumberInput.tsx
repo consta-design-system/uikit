@@ -73,7 +73,9 @@ export const PaginationNumberInput = forwardRef<
       Enter: (e) => {
         e.preventDefault();
         if (Number(stringValueRef.current)) {
-          onChangeRef.current?.(Number(stringValueRef.current), { e });
+          onChangeRef.current?.(Number(stringValueRef.current), {
+            e: e.nativeEvent,
+          });
         }
       },
     };

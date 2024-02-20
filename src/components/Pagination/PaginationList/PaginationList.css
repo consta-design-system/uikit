@@ -1,3 +1,13 @@
 .PaginationList {
+  display: flex;
   width: max-content;
+  gap: var(--pagination-gap);
+}
+
+.PaginationList-Item.Button.PaginationItem {
+  width:
+    calc(
+      var(--pagination-item-label-lenght) * var(--pagination-symbol-size) +
+      var(--pagination-item-ph) * 2
+    );
 }

@@ -2,10 +2,9 @@ import './PaginationList.css';
 
 import React, { forwardRef } from 'react';
 
-import { cnMixFlex } from '##/mixs/MixFlex';
 import { cn } from '##/utils/bem';
 
-import { defaultGetItemLabel } from '../helpers';
+import { defaultGetItemLabel, pageSeparatorLabel } from '../helpers';
 import { PaginationItem } from '../PaginationItem';
 import {
   PaginationBaseItemDefault,
@@ -38,46 +37,37 @@ const PaginationListRender = <ITEM extends PaginationBaseItemDefault>(
     ...otherProps
   } = props;
 
-  const renderItem = (item: ITEM) => {
-    const handleClick: React.MouseEventHandler = (e) => {
-      getItemOnClick?.(item)?.(e);
-      onItemClick?.(item, { e });
-    };
-
-    const attributes = getItemAttributes?.(item) ?? {};
-
-    const active = value ? getItemKey?.(item) === getItemKey?.(value) : false;
-
-    return (
-      <PaginationItem
-        {...attributes}
-        form={form}
-        size={size}
-        onClick={handleClick}
-        label={getItemLabel(item)}
-        active={active}
-        ref={getItemRef?.(item)}
-        as={getItemClickable?.(item) ? 'div' : getItemAs?.(item)}
-      />
-    );
-  };
-
   return (
     <div
-      ref={ref}
-      className={cnPaginationList(null, [
-        className,
-        cnMixFlex({ gap: '3xs', wrap: 'nowrap' }),
-      ])}
       {...otherProps}
+      ref={ref}
+      className={cnPaginationList(null, [className])}
     >
-      {items.map((item) => (
-        <React.Fragment
-          key={cnPaginationList('Item', { key: getItemKey(item) })}
-        >
-          {renderItem(item)}
-        </React.Fragment>
-      ))}
+      {items.map((item) => {
+        const attr = getItemAttributes?.(item) || {};
+        return (
+          <PaginationItem
+            {...attr}
+            className={cnPaginationList('Item', [attr?.className])}
+            form={form}
+            size={size}
+            onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+              getItemOnClick?.(item)?.(e);
+              onItemClick?.(item, { e });
+            }}
+            label={getItemLabel(item)}
+            active={value ? getItemKey?.(item) === getItemKey?.(value) : false}
+            ref={getItemRef?.(item)}
+            as={getItemAs?.(item)}
+            clickable={getItemClickable?.(item)}
+            key={getItemKey(item)}
+            style={{
+              ['--pagination-item-label-lenght' as string]:
+                item.label === pageSeparatorLabel ? 1 : item.label?.length,
+            }}
+          />
+        );
+      })}
     </div>
   );
 };

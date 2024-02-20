@@ -1,5 +1,4 @@
 import { createFileIcon } from '../createFileIcon/createFileIcon';
-
 import FileIconMp4SizeM from './FileIconMp4_size_m';
 import FileIconMp4SizeS from './FileIconMp4_size_s';
 

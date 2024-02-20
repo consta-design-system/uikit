@@ -277,14 +277,8 @@ export const TextFieldRender = <TYPE extends string>(
   };
 
   useEffect(() => {
-    if (inputRef.current && type !== 'number' && withClearButton) {
-      if (inputRef.current?.value) {
-        setWithValue.on();
-      } else {
-        setWithValue.off();
-      }
-    }
-  }, [inputRef.current, withClearButton, type]);
+    setWithValue[inputRef.current?.value ? 'on' : 'off']();
+  }, [inputRef.current?.value]);
 
   return (
     <div
@@ -361,20 +355,24 @@ export const TextFieldRender = <TYPE extends string>(
             </div>
           )}
 
-          {!incrementButtons && withValue && withClearButton && !disabled && (
-            <button
-              type="button"
-              disabled={disabled}
-              tabIndex={-1}
-              onClick={handleClear}
-              className={cnTextField('ClearButton')}
-            >
-              <IconClear
-                size={sizeMap[size]}
-                className={cnTextField('ClearButtonIcon')}
-              />
-            </button>
-          )}
+          {!incrementButtons &&
+            withValue &&
+            withClearButton &&
+            !disabled &&
+            type !== 'number' && (
+              <button
+                type="button"
+                disabled={disabled}
+                tabIndex={-1}
+                onClick={handleClear}
+                className={cnTextField('ClearButton')}
+              >
+                <IconClear
+                  size={sizeMap[size]}
+                  className={cnTextField('ClearButtonIcon')}
+                />
+              </button>
+            )}
 
           {type === 'password' && inputRef.current?.value && (
             <button

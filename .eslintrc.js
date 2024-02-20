@@ -60,7 +60,7 @@ module.exports = {
     'default-param-last': 'off',
     'prettier/prettier': [
       'error',
-      { endOfLine: 'auto' },
+      {},
       {
         usePrettierrc: true,
       },
