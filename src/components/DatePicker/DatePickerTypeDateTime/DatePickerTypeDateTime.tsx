@@ -35,6 +35,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
+      disabled,
       ...otherProps
     } = props;
 
@@ -53,6 +54,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      disabled,
       startRef: inputRef,
     });
 

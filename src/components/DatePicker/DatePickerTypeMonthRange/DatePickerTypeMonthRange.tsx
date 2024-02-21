@@ -43,6 +43,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> =
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
+      disabled,
       ...fieldProps
     } = props;
 
@@ -77,6 +78,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> =
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      disabled,
       startRef: startFieldInputRef,
       endRef: endFieldInputRef,
     });

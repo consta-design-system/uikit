@@ -38,6 +38,7 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef(
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      disabled,
       startRef: inputRef,
     });
 

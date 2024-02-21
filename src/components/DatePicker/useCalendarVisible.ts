@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useFlag } from '##/hooks/useFlag';
+import { Flag } from '##/hooks/useFlag';
 import { KeyHandlers, useKeysRef } from '##/hooks/useKeysRef';
 
 type UseCalendarVisibleParams = {
@@ -10,15 +10,33 @@ type UseCalendarVisibleParams = {
   startRef: React.RefObject<HTMLInputElement>;
   endRef?: React.RefObject<HTMLInputElement>;
 };
-type UseFlagReturn = ReturnType<typeof useFlag>;
+type UseFlagReturn = ReturnType<typeof useFlagWithDisabled>;
 type Return = [UseFlagReturn[0], UseFlagReturn[1]];
+
+const useFlagWithDisabled = (initial = false, disabled?: boolean): Flag => {
+  const [state, setState] = useState(initial);
+  return [
+    state,
+    {
+      on: () => {
+        !disabled && setState(true);
+      },
+      off: () => setState(false),
+      toggle: () => setState((state) => !disabled && !state),
+      set: setState,
+    },
+  ];
+};
 
 export const useCalendarVisible = (
   params: UseCalendarVisibleParams,
 ): Return => {
   const { onDropdownOpen, dropdownOpen, disabled, startRef, endRef } = params;
 
-  const [calendarVisible, setCalendarVisible] = useFlag(false);
+  const [calendarVisible, setCalendarVisible] = useFlagWithDisabled(
+    false,
+    disabled,
+  );
 
   const ArrowHandler = (e: KeyboardEvent) => {
     e.preventDefault();

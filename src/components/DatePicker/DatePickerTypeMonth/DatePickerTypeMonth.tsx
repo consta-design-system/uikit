@@ -28,6 +28,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
+      disabled,
       ...otherProps
     } = props;
 
@@ -38,6 +39,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      disabled,
       startRef: inputRef,
     });
 

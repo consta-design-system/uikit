@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-type Flag = [
+export type Flag = [
   boolean,
   {
     on: () => void;
