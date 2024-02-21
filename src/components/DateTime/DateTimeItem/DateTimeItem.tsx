@@ -6,7 +6,6 @@ import React, { forwardRef } from 'react';
 import { cnMixFocus } from '../../../mixs/MixFocus/MixFocus';
 import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
-import { useTheme } from '../../Theme/Theme';
 
 export type DateTimeItemProps = PropsWithJsxAttributes<
   {
@@ -26,12 +25,9 @@ export const cnDateTimeItem = cn('DateTimeItem');
 export const DateTimeItem = forwardRef<HTMLButtonElement, DateTimeItemProps>(
   (props, ref) => {
     const { label, current, selected, event, disabled, ...otherProps } = props;
-    const { themeClassNames } = useTheme();
 
     const className =
-      selected && !disabled
-        ? classnames(props.className, themeClassNames.color.accent)
-        : props.className;
+      selected && !disabled ? classnames(props.className) : props.className;
 
     return (
       <button
