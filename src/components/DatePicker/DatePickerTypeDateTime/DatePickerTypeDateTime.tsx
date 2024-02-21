@@ -114,6 +114,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
+          disabled={disabled}
         />
         <DatePickerDropdown
           ref={calendarRef}

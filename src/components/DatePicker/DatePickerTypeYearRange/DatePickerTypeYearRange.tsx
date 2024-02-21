@@ -186,6 +186,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
           endFieldOnClick={setCalendarVisible.on}
           startFieldName={Array.isArray(name) ? name[0] : `${name}_start`}
           endFieldName={Array.isArray(name) ? name[1] : `${name}_end`}
+          disabled={disabled}
         />
         <DatePickerDropdown
           type="year"

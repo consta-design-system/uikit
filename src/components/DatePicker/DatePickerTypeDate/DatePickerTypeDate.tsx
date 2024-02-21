@@ -93,6 +93,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef(
       <>
         <DatePickerFieldTypeDate
           {...otherProps}
+          disabled={disabled}
           ref={fieldRef}
           inputRef={inputRef}
           onClick={setCalendarVisible.on}

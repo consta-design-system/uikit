@@ -197,6 +197,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
           endFocused={endFocused}
           startFieldName={getFieldName(name, 0)}
           endFieldName={getFieldName(name, 1)}
+          disabled={disabled}
         />
         <DatePickerDropdown
           type="date"

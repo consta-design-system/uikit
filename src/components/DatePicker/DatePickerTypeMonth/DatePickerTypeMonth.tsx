@@ -95,6 +95,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
           ref={fieldRef}
           inputRef={inputRef}
           onClick={setCalendarVisible.on}
+          disabled={disabled}
         />
         <DatePickerDropdown
           ref={calendarRef}
