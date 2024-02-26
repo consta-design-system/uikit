@@ -491,13 +491,13 @@ function getPreset(themeName: ThemeName): ThemePreset {
 
 const cnRootTheme = cn('RootTheme');
 
-export const RootTheme: React.FC = () => {
+export const ThemeExampleRoot: React.FC = () => {
   const [theme, setTheme] = useState<ThemeName>('gpnDefault');
-  const handleChange = ({ checked }) =>
-    setTheme(checked ? 'gpnDark' : 'gpnDefault');
+  const handleChange: SwitchProps['onChange'] = (e) =>
+    setTheme(e.target.checked ? 'gpnDark' : 'gpnDefault');
 
   return (
-    <Theme preset={getPreset(theme)} className={cnRootTheme()}>
+    <Theme preset={getPreset(theme)} className={cnExampleRoot('')}>
       <Switch
         label="Dark Mode"
         onChange={handleChange}

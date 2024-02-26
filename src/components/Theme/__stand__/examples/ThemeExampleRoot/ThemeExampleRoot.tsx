@@ -3,14 +3,14 @@ import './ThemeExampleRoot.css';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { cn } from '../../../../../utils/bem';
-import { Switch, SwitchProps } from '../../../../Switch';
+import { Switch, SwitchProps } from '##/components/Switch';
 import {
   presetGpnDark,
   presetGpnDefault,
   Theme,
   ThemePreset,
-} from '../../../Theme';
+} from '##/components/Theme';
+import { cn } from '##/utils/bem';
 
 type ThemeName = 'gpnDefault' | 'gpnDark';
 
@@ -26,8 +26,8 @@ const cnExampleRoot = cn('ThemeExampleRoot');
 
 export const ThemeExampleRoot: React.FC = () => {
   const [theme, setTheme] = useState<ThemeName>('gpnDefault');
-  const handleChange: SwitchProps['onChange'] = (checked) =>
-    setTheme(checked ? 'gpnDark' : 'gpnDefault');
+  const handleChange: SwitchProps['onChange'] = (e) =>
+    setTheme(e.target.checked ? 'gpnDark' : 'gpnDefault');
 
   return (
     <Example col={1}>
