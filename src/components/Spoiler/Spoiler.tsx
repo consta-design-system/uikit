@@ -59,10 +59,11 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
       buttonIndent,
       buttonAlign = defaultSpoilerPropButtonAlign,
       style,
+      opened = false,
       ...otherProps
     } = props;
 
-    const [isOpen, setIsOpen] = useFlag();
+    const [isOpen, setIsOpen] = useFlag(opened);
     const [mode, previewContent, fullContent] = getContent(props, isOpen);
     const refs = useRefs<HTMLDivElement>(3);
     const sizes = useResizeObserved(refs, getElementSize);

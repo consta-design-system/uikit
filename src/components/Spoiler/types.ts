@@ -33,6 +33,7 @@ export type SpoilerProps = Omit<
       moreIcon?: IconComponent;
       buttonIndent?: Space;
       buttonAlign?: SpoilerPropButtonAlign;
+      opened?: boolean;
     },
     HTMLDivElement
   >,
