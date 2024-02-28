@@ -28,6 +28,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef(
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
+      disabled,
       ...otherProps
     } = props;
 
@@ -38,6 +39,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef(
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      disabled,
       startRef: inputRef,
     });
 
@@ -91,6 +93,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef(
       <>
         <DatePickerFieldTypeDate
           {...otherProps}
+          disabled={disabled}
           ref={fieldRef}
           inputRef={inputRef}
           onClick={setCalendarVisible.on}

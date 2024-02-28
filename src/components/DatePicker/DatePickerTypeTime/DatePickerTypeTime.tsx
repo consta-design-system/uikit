@@ -32,6 +32,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
+      disabled,
       ...otherProps
     } = props;
 
@@ -50,6 +51,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      disabled,
       startRef: inputRef,
     });
 
@@ -79,6 +81,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
+          disabled={disabled}
         />
         <DatePickerDropdown
           ref={calendarRef}

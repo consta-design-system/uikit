@@ -47,6 +47,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
+      disabled,
       ...fieldProps
     } = props;
 
@@ -81,6 +82,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
     const [calendarVisible, setCalendarVisible] = useCalendarVisible({
       dropdownOpen,
       onDropdownOpen,
+      disabled,
       startRef: startFieldInputRef,
       endRef: endFieldInputRef,
     });
@@ -195,6 +197,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
           endFocused={endFocused}
           startFieldName={getFieldName(name, 0)}
           endFieldName={getFieldName(name, 1)}
+          disabled={disabled}
         />
         <DatePickerDropdown
           type="date"

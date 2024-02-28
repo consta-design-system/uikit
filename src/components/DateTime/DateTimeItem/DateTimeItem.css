@@ -47,8 +47,8 @@
     --item-border-color-hover: transparent;
     --item-event-color: var(--color-control-typo-primary);
     --item-event-color-hover: var(--color-control-typo-primary);
-    --item-text-color: var(--color-typo-primary);
-    --item-text-color-hover: var(--color-typo-primary);
+    --item-text-color: var(--color-control-typo-primary);
+    --item-text-color-hover: var(--color-control-typo-primary-hover);
   }
 
   &:not(&_disabled) {
