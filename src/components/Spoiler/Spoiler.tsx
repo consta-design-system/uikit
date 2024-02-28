@@ -1,6 +1,6 @@
 import './Spoiler.css';
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 
 import { Text } from '##/components/Text';
 import { getElementSize } from '##/hooks/useComponentSize';
@@ -68,6 +68,10 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
     const refs = useRefs<HTMLDivElement>(3);
     const sizes = useResizeObserved(refs, getElementSize);
     const visibleMoreButton = sizes[1].height > sizes[0].height;
+
+    useEffect(() => {
+      setIsOpen.set(opened);
+    }, [opened]);
 
     return (
       <div
