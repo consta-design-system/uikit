@@ -1,7 +1,9 @@
 import React, { forwardRef, useEffect, useRef } from 'react';
 
-import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { setRef } from '../../../utils/setRef';
+import { useClickOutside } from '##/hooks/useClickOutside/useClickOutside';
+import { useForkRef } from '##/hooks/useForkRef';
+import { setRef } from '##/utils/setRef';
+
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeTime } from '../DatePickerFieldTypeTime/DatePickerFieldTypeTime';
 import {
@@ -33,6 +35,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
       dropdownOpen,
       ignoreOutsideClicksRefs,
       disabled,
+      inputRef: inputRefProp,
       ...otherProps
     } = props;
 
@@ -76,7 +79,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
         <DatePickerFieldTypeTime
           {...otherProps}
           ref={fieldRef}
-          inputRef={inputRef}
+          inputRef={useForkRef([inputRef, inputRefProp])}
           onClick={setCalendarVisible.on}
           multiplicityHours={multiplicityHours}
           multiplicitySeconds={multiplicitySeconds}

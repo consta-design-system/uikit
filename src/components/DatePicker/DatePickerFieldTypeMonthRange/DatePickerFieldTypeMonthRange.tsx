@@ -1,7 +1,8 @@
 import React, { forwardRef } from 'react';
 
-import { FieldCaption } from '../../FieldCaption/FieldCaption';
-import { FieldLabel } from '../../FieldLabel/FieldLabel';
+import { FieldCaption } from '##/components/FieldCaption';
+import { FieldLabel } from '##/components/FieldLabel';
+
 import { DatePickerFieldTypeMonth } from '../DatePickerFieldTypeMonth/DatePickerFieldTypeMonth';
 import { cnDatePickerMixRangeField } from '../DatePickerMixRangeField/DatePickerMixRangeField';
 import { getChangeFnRange } from '../getChangeFnRange';

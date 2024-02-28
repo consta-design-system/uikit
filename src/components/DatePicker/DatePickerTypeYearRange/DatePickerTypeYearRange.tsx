@@ -1,8 +1,9 @@
 import { addYears, startOfDecade } from 'date-fns';
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
-import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
+import { useClickOutside } from '##/hooks/useClickOutside';
+import { useForkRef } from '##/hooks/useForkRef';
+
 import {
   DatePickerDropdown,
   DatePickerDropdownPropOnChange,

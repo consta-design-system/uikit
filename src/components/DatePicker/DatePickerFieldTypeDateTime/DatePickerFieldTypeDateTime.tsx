@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
-import { maxDateDefault, minDateDefault } from '../../../utils/date';
-import { TextField } from '../../TextField/TextField';
+import { TextField } from '##/components/TextField';
+import { useForkRef } from '##/hooks/useForkRef';
+import { maxDateDefault, minDateDefault } from '##/utils/date';
+
 import {
   datePickerPropFormatTypeDateTime,
   datePickerPropPlaceholderTypeDateTime,

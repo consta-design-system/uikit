@@ -2,8 +2,9 @@ import './DatePickerAdditionalControls.css';
 
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
-import { PropsWithHTMLAttributes } from '../../../utils/types/PropsWithHTMLAttributes';
+import { cn } from '##/utils/bem';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
+
 import {
   DatePickerAdditionalControlRenderFn,
   DatePickerAdditionalControlRenderProp,
