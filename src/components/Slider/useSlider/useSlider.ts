@@ -8,9 +8,9 @@ import React, {
 } from 'react';
 
 import { useClickOutside } from '##/hooks/useClickOutside';
+import { useComponentSize } from '##/hooks/useComponentSize/useComponentSize';
+import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
 
-import { useComponentSize } from '../../../hooks/useComponentSize/useComponentSize';
-import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { SliderValue, TrackPosition } from '../helper';
 import {
   ActiveButton,
@@ -23,6 +23,7 @@ import {
   trackPosition,
   UseSliderProps,
   UseSliderValues,
+  valueToSring,
 } from './helper';
 
 export const COUNT_STEPS = 250;
@@ -71,7 +72,9 @@ export function useSlider<RANGE extends boolean>(
 
   const sizeSlider = useComponentSize(sliderRef);
 
-  const lastValue = useMutableRef(currentValue);
+  const currentValueRef = useMutableRef(currentValue);
+  const onChangeRef = useMutableRef(onChange);
+  const onAfterChangeRef = useMutableRef(onAfterChange);
 
   useClickOutside({
     isActive: true,
@@ -106,7 +109,7 @@ export function useSlider<RANGE extends boolean>(
   }, [currentValue]);
 
   useEffect(() => {
-    if (JSON.stringify(value) !== JSON.stringify(currentValue)) {
+    if (valueToSring(value) !== valueToSring(currentValue)) {
       if (Array.isArray(value) && Array.isArray(currentValue)) {
         if (
           !(
@@ -140,7 +143,9 @@ export function useSlider<RANGE extends boolean>(
           max,
           0,
         ) as SliderValue<RANGE>);
-    onChange?.(newValue, {});
+    if (valueToSring(newValue) !== valueToSring(currentValue)) {
+      onChangeRef.current?.(newValue, {});
+    }
   }, [step]);
 
   useEffect(() => {
@@ -156,11 +161,9 @@ export function useSlider<RANGE extends boolean>(
   }, [range, typeof value]);
 
   useEffect(() => {
-    if (isRangeParams(props)) {
-      if (props.value[0] > props.value[1]) {
-        const newValue: SliderValue<true> = [props.value[1], props.value[1]];
-        props.onChange?.(newValue, {});
-      }
+    if (isRangeParams(props) && props.value[0] > props.value[1]) {
+      const newValue: SliderValue<true> = [props.value[1], props.value[1]];
+      onChangeRef.current?.(newValue as SliderValue<RANGE>, {});
     }
   }, []);
 
@@ -184,7 +187,7 @@ export function useSlider<RANGE extends boolean>(
       if (newValue !== value) {
         setCurrentValue(newValue);
         setTooltipPosition(getActiveValue(newValue, 0), 0);
-        onChange?.(newValue, {
+        onChangeRef.current?.(newValue, {
           e,
         });
       }
@@ -255,7 +258,7 @@ export function useSlider<RANGE extends boolean>(
           ) as SliderValue<RANGE>;
           setCurrentValue(newValue);
           setTooltipPosition(getActiveValue(newValue, typeButton), typeButton);
-          onChange?.(newValue, {
+          onChangeRef.current?.(newValue, {
             e: event,
           });
         }
@@ -321,8 +324,8 @@ export function useSlider<RANGE extends boolean>(
       const oldValue: number = getActiveValue(currentValue, button);
       const newValue: number = getActiveValue(position, button);
       setCurrentValue(position);
-      if (oldValue !== newValue) {
-        onAfterChange?.(position, { e: event });
+      if (valueToSring(oldValue) !== valueToSring(newValue)) {
+        onAfterChangeRef.current?.(position, { e: event });
       }
     }
   };
@@ -345,19 +348,24 @@ export function useSlider<RANGE extends boolean>(
   const handleRelease = useCallback(
     (e: MouseEvent | TouchEvent | Event) => {
       controlListeners('remove');
-      if (isRangeParams(props) && Array.isArray(lastValue.current)) {
-        const copyValues = [...lastValue.current].sort(
+      if (isRangeParams(props) && Array.isArray(currentValueRef.current)) {
+        const copyValues = [...currentValueRef.current].sort(
           (a, b) => Number(a) - Number(b),
         ) as SliderValue<true>;
-        props.onChange?.(copyValues, { e });
+        onChangeRef.current?.(copyValues as SliderValue<RANGE>, { e });
       }
-      if (isNotRangeParams(props) && typeof lastValue.current === 'number') {
-        props.onChange?.(lastValue.current, { e });
+      if (
+        isNotRangeParams(props) &&
+        typeof currentValueRef.current === 'number'
+      ) {
+        onChangeRef.current?.(currentValueRef.current as SliderValue<RANGE>, {
+          e,
+        });
       }
       setCurrentButton(null);
       activeButton.current = null;
     },
-    [lastValue, value, onChange, handleTouchMove],
+    [value, handleTouchMove],
   );
 
   const handlePress = useCallback(
@@ -368,7 +376,7 @@ export function useSlider<RANGE extends boolean>(
         controlListeners('add');
       }
     },
-    [currentValue, value, onChange, handleTouchMove, disabled],
+    [currentValue, value, handleTouchMove, disabled],
   );
 
   return {
