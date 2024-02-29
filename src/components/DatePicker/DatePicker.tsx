@@ -1,8 +1,9 @@
 import React, { forwardRef, useMemo, useRef } from 'react';
 
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
-import { maxDateDefault, minDateDefault } from '../../utils/date';
-import { getByMap } from '../../utils/getByMap';
+import { useForkRef } from '##/hooks/useForkRef/useForkRef';
+import { maxDateDefault, minDateDefault } from '##/utils/date';
+import { getByMap } from '##/utils/getByMap';
+
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { DatePickerTypeDate } from './DatePickerTypeDate/DatePickerTypeDate';
 import { DatePickerTypeDateRange } from './DatePickerTypeDateRange/DatePickerTypeDateRange';

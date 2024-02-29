@@ -2,8 +2,10 @@ import addMonths from 'date-fns/addMonths';
 import startOfMonth from 'date-fns/startOfMonth';
 import React, { forwardRef, useEffect, useRef } from 'react';
 
-import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { setRef } from '../../../utils/setRef';
+import { useClickOutside } from '##/hooks/useClickOutside';
+import { useForkRef } from '##/hooks/useForkRef';
+import { setRef } from '##/utils/setRef';
+
 import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDate } from '../DatePickerFieldTypeDate/DatePickerFieldTypeDate';
 import { getDropdownZIndex } from '../helpers';
@@ -29,6 +31,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef(
       dropdownOpen,
       ignoreOutsideClicksRefs,
       disabled,
+      inputRef: inputRefProp,
       ...otherProps
     } = props;
 
@@ -95,7 +98,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef(
           {...otherProps}
           disabled={disabled}
           ref={fieldRef}
-          inputRef={inputRef}
+          inputRef={useForkRef([inputRef, inputRefProp])}
           onClick={setCalendarVisible.on}
         />
         <DatePickerDropdown

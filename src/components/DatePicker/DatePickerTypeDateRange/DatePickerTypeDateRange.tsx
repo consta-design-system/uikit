@@ -8,8 +8,9 @@ import React, {
   useState,
 } from 'react';
 
-import { useClickOutside } from '../../../hooks/useClickOutside/useClickOutside';
-import { useForkRef } from '../../../hooks/useForkRef/useForkRef';
+import { useClickOutside } from '##/hooks/useClickOutside';
+import { useForkRef } from '##/hooks/useForkRef';
+
 import {
   DatePickerDropdown,
   DatePickerDropdownPropOnChange,
