@@ -1,7 +1,7 @@
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import { format, isValid, isWithinInterval, parse } from 'date-fns';
 import { MaskedDate } from 'imask';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { IMask, ReactMaskOpts, useIMask } from 'react-imask';
 
 import {
@@ -18,6 +18,7 @@ import {
   getPartDate,
   getParts,
   getPartsDate,
+  useStringValue,
 } from '../helpers';
 import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
 
@@ -163,10 +164,11 @@ export const usePicker = (props: UsePickerProps) => {
     [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
   );
 
-  const { ref, setValue: setStringValue } = useIMask<
-    HTMLInputElement,
-    ReactMaskOpts
-  >(
+  const {
+    ref,
+    setValue: setStringValue,
+    value: stringValue,
+  } = useIMask<HTMLInputElement, ReactMaskOpts>(
     {
       mask: Date as unknown as MaskedDate,
       pattern: formatProp,
@@ -235,12 +237,7 @@ export const usePicker = (props: UsePickerProps) => {
     { onAccept },
   );
 
-  // при изменении value, нужно обновить stringValue
-  useEffect(() => {
-    if (value && isValid(value)) {
-      setStringValue(format(value, formatProp));
-    }
-  }, [value?.getTime()]);
+  useStringValue(value, stringValue, formatProp, separator, setStringValue);
 
   return ref;
 };

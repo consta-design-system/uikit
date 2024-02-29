@@ -1,4 +1,5 @@
-import { startOfToday } from 'date-fns';
+import { format, isValid, parse, startOfToday } from 'date-fns';
+import { useEffect } from 'react';
 
 import { range } from '../../utils/array';
 import { DateRange } from '../../utils/types/Date';
@@ -145,3 +146,38 @@ export const getFieldName = (
 
 export const getDropdownZIndex = (style?: React.CSSProperties) =>
   typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined;
+
+export const useStringValue = (
+  value: Date | undefined | null,
+  stringValue: string,
+  formatProp: string,
+  separator: string,
+  setStringValue: React.Dispatch<string>,
+) => {
+  useEffect(() => {
+    if (value && isValid(value)) {
+      setStringValue(format(value, formatProp));
+    }
+
+    if (!value && stringValue) {
+      const formatArray = getParts(formatProp, separator, false);
+      const valueArray = getParts(stringValue, separator, false);
+      const validArray = formatArray
+        .map((marker) => getPartDate(formatArray, valueArray, marker))
+        .filter((item) => Boolean(item));
+
+      const date =
+        formatArray.length === validArray.length
+          ? parse(
+              valueArray.join(datePickerPropSeparatorDefault),
+              formatArray.join(datePickerPropSeparatorDefault),
+              new Date(),
+            )
+          : undefined;
+
+      if (isValid(date)) {
+        setStringValue('');
+      }
+    }
+  }, [value?.getTime()]);
+};
