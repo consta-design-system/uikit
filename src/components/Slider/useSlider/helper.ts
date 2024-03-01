@@ -227,3 +227,10 @@ export const analyzeDivisionValue = (
   }
   return newValue;
 };
+
+export const valueToSring = (value: number | number[] | undefined | null) => {
+  if (!value) {
+    return '';
+  }
+  return typeof value === 'number' ? value.toString() : value.join('-');
+};
