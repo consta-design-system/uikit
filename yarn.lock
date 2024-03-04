@@ -1773,14 +1773,14 @@
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-1.0.1.tgz#59f51cc421de0ff14ed4308026685e82240d3473"
   integrity sha512-TgN03C5KOzK8eBOx9Kl4GFw1SL+qSILoadWMboXwOiSHuPU7p4ie5z4ZmS7TzUnLOhybZBL3xVsM9UBOpDMKKQ==
 
-"@consta/stand@^0.0.140":
-  version "0.0.140"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.140.tgz#059d008d2dcff2f995cc9af09372ccbbdb3c6d94"
-  integrity sha512-W/ZhuDn8nOU9uMicmQ7d9SmcXmgRfNKoFV3zYwgHwZwHbCXAxo7xGtvkZN2aBmdtwHmtNLKiGmsl6GjcrcuvKQ==
+"@consta/stand@^0.0.141":
+  version "0.0.141"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.141.tgz#2f894f3f05d52c125ea4afd676021730bda65c14"
+  integrity sha512-jEBNvHZ9r7n4SAFcE/nFSqT6e2+ubK/MggKANoy3Wb1EkD/eQ7f8A3X/HxcMXa2GAGB8Drxd8FUeK4svWAFbnw==
   dependencies:
     "@consta/header" "^3.0.0"
     "@consta/icons" "^1.0.1"
-    "@consta/uikit" "^5.0.3"
+    "@consta/uikit" "^5.0.1"
     "@mdx-js/loader" "^2.3.0"
     "@mdx-js/react" "^2.3.0"
     "@oclif/command" "^1.8.22"
@@ -1847,10 +1847,10 @@
     webpack-manifest-plugin "^5.0.0"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/uikit@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.0.3.tgz#54cb0bbb7e792903f42d5ab4b0d8dd43889aeb21"
-  integrity sha512-feQjYQb5gD3jJtXT8xDX6ooD17+hzq8xSf0zy8wfUal08DNAxRWwihkfM+SYsQXXzo+PSfjSDo5Jn4m8gjKXUw==
+"@consta/uikit@^5.0.1":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.1.0.tgz#4c8be03234e027af553d6fa9e82d0c7cf746a060"
+  integrity sha512-fb4tyz+3y/vrXu6jZTDJwhqZ3dVHGXrK7Q4f4bptn7qzbhihJQzhEMEVxxmmk/VWI/RtEmsMFYNoc3NiRgrVJA==
 
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
