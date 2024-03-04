@@ -26,6 +26,7 @@ const ChipsChoiceRender = (
     multiple,
     getItemKey = getItemKeyDefault,
     getItemLabel = defaultGetItemLabel,
+    disabled = false,
     ...otherProps
   } = props;
 
@@ -49,11 +50,12 @@ const ChipsChoiceRender = (
       {...otherProps}
       ref={ref}
       onItemRightIconClick={getUndefined}
-      onItemClick={(item, { e }) => getOnChange(item)(e)}
+      onItemClick={(item, { e }) => !disabled && getOnChange(item)(e)}
       getItemIconRight={getUndefined}
       getItemAttributes={getUndefined}
       getItemActive={getChecked}
-      interactive
+      interactive={!disabled}
+      disabled={disabled}
     />
   );
 };

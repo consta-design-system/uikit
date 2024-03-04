@@ -3,6 +3,7 @@ import {
   ChipsPropGetItemActive,
   ChipsPropGetItemAs,
   ChipsPropGetItemAttributes,
+  ChipsPropGetItemDisabled,
   ChipsPropGetItemIconLeft,
   ChipsPropGetItemIconRight,
   ChipsPropGetItemLabel,
@@ -17,6 +18,9 @@ export const defaultGetItemIconRight: ChipsPropGetItemIconRight<
 export const defaultGetItemActive: ChipsPropGetItemActive<ChipsDefaultItem> = (
   item,
 ) => item.active;
+export const defaultGetItemDisabled: ChipsPropGetItemDisabled<
+  ChipsDefaultItem
+> = (item) => item.disabled;
 export const defaultGetItemIconLeft: ChipsPropGetItemIconLeft<
   ChipsDefaultItem
 > = (item) => item.iconLeft;
@@ -46,5 +50,6 @@ export function withDefaultGetters<ITEM>(props: ChipsProps<ITEM>) {
     getItemAs: props.getItemAs || defaultGetItemAs,
     getItemAttributes: props.getItemAttributes || defaultGetItemAttributes,
     getItemActive: props.getItemActive || defaultGetItemActive,
+    getItemDisabled: props.getItemDisabled || defaultGetItemDisabled,
   };
 }

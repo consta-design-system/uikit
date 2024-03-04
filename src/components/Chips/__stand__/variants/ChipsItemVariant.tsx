@@ -30,6 +30,7 @@ export const ChipsItemVariant = () => {
     active,
   );
   const interactive = useBoolean('interactive');
+  const disabled = useBoolean('disabled');
 
   return (
     <ChipsItem
@@ -41,6 +42,7 @@ export const ChipsItemVariant = () => {
       size={size}
       label={label}
       status={status}
+      disabled={disabled}
     />
   );
 };

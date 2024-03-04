@@ -29,6 +29,7 @@ export const ChipsVariants = () => {
     !getItemActive,
   );
   const interactive = useBoolean('interactive');
+  const disabled = useBoolean('disabled');
 
   return (
     <Chips
@@ -42,6 +43,7 @@ export const ChipsVariants = () => {
       interactive={interactive}
       onItemRightIconClick={() => console.log('onItemRightIconClick')}
       onItemClick={() => console.log('onItemClick')}
+      disabled={disabled}
     />
   );
 };

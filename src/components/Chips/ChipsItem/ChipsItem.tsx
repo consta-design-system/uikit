@@ -35,7 +35,7 @@ export const ChipsItem = forwardRefWithAs<ChipsItemProps, 'span'>(
       status,
       activeView = chipsPropActiveViewDefault,
       className,
-      interactive,
+      interactive: interactiveProp,
       style,
       active,
       iconLeft: IconLeft,
@@ -43,11 +43,13 @@ export const ChipsItem = forwardRefWithAs<ChipsItemProps, 'span'>(
       onRightIconClick,
       onKeyUp: onKeyUpProp,
       tabIndex,
+      disabled = false,
       ...otherProps
     } = props;
 
     const componentRef = useRef<HTMLElement>(null);
     const iconButtonRef = useRef<HTMLButtonElement>(null);
+    const interactive = disabled ? false : interactiveProp;
 
     const onKeyUp = useKeys({
       keys: {
@@ -76,8 +78,16 @@ export const ChipsItem = forwardRefWithAs<ChipsItemProps, 'span'>(
     return (
       <Tag
         {...otherProps}
+        disabled={disabled}
         className={cnChip(
-          { size, interactive, activeView, active, status: Boolean(status) },
+          {
+            size,
+            interactive,
+            activeView,
+            active,
+            disabled,
+            status: Boolean(status),
+          },
           [interactive ? cnMixFocus() : undefined, className],
         )}
         ref={useForkRef([componentRef, ref])}
@@ -91,7 +101,7 @@ export const ChipsItem = forwardRefWithAs<ChipsItemProps, 'span'>(
         {IconRight && (
           <IconRight
             size={iconSizeMap[size]}
-            {...(onRightIconClick
+            {...(onRightIconClick && !disabled
               ? {
                   as: 'button',
                   role: 'button',
