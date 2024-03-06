@@ -60,6 +60,7 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
       buttonAlign = defaultSpoilerPropButtonAlign,
       style,
       opened = false,
+      onOpenButtonClick,
       ...otherProps
     } = props;
 
@@ -72,6 +73,11 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
     useEffect(() => {
       setIsOpen.set(opened);
     }, [opened]);
+
+    const handleClick = (event: React.MouseEvent): void => {
+      setIsOpen.toggle();
+      onOpenButtonClick && onOpenButtonClick(!isOpen, event);
+    };
 
     return (
       <div
@@ -127,7 +133,7 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
               lessLabel={lessLabel}
               moreIcon={moreIcon}
               moreLabel={moreLabel}
-              onClick={setIsOpen.toggle}
+              onClick={handleClick}
               open={isOpen}
               size={size}
             />
