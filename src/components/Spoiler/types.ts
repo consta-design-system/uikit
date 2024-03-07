@@ -33,6 +33,8 @@ export type SpoilerProps = Omit<
       moreIcon?: IconComponent;
       buttonIndent?: Space;
       buttonAlign?: SpoilerPropButtonAlign;
+      opened?: boolean;
+      onOpenButtonClick?: (open: boolean, event: React.MouseEvent) => void;
     },
     HTMLDivElement
   >,

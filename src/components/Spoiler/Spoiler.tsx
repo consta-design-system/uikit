@@ -1,11 +1,12 @@
 import './Spoiler.css';
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useCallback, useEffect } from 'react';
 
 import { Text } from '##/components/Text';
 import { getElementSize } from '##/hooks/useComponentSize';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
+import { useMutableRef } from '##/hooks/useMutableRef';
 import { useRefs } from '##/hooks/useRefs';
 import { useResizeObserved } from '##/hooks/useResizeObserved';
 import { cnMixSpace, Space } from '##/mixs/MixSpace';
@@ -59,14 +60,27 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
       buttonIndent,
       buttonAlign = defaultSpoilerPropButtonAlign,
       style,
+      opened = false,
+      onOpenButtonClick,
       ...otherProps
     } = props;
 
-    const [isOpen, setIsOpen] = useFlag();
+    const [isOpen, setIsOpen] = useFlag(opened);
     const [mode, previewContent, fullContent] = getContent(props, isOpen);
     const refs = useRefs<HTMLDivElement>(3);
     const sizes = useResizeObserved(refs, getElementSize);
     const visibleMoreButton = sizes[1].height > sizes[0].height;
+    const onOpenButtonClickRef = useMutableRef(onOpenButtonClick);
+
+    const handleClick = useCallback((event: React.MouseEvent): void => {
+      setIsOpen.toggle();
+      onOpenButtonClickRef.current &&
+        onOpenButtonClickRef.current(!isOpen, event);
+    }, []);
+
+    useEffect(() => {
+      setIsOpen.set(opened);
+    }, [opened]);
 
     return (
       <div
@@ -122,7 +136,7 @@ export const Spoiler = forwardRef<HTMLDivElement, SpoilerProps>(
               lessLabel={lessLabel}
               moreIcon={moreIcon}
               moreLabel={moreLabel}
-              onClick={setIsOpen.toggle}
+              onClick={handleClick}
               open={isOpen}
               size={size}
             />

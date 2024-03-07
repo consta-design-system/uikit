@@ -18,6 +18,7 @@ import { Spoiler } from '@consta/uikit/Spoiler';
   - [Иконка](#иконка)
   - [Выравнивание](#выравнивание)
 - [Размер](#размер)
+- [Состояние открыто-закрыто](#состояние)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
 
@@ -151,6 +152,10 @@ export const SpoilerExampleHiddenButton = () => {
 
 <SpoilerExampleSize />
 
+## Состояние открыто-закрыто
+
+Состоянием компонента (открыт или закрыт) управляет свойство `opened`. По умолчанию: `false`, компонент закрыт.
+
 ## Импорт
 
 ```tsx
@@ -171,7 +176,9 @@ import { Spoiler } from '@consta/uikit/Spoiler';
 | [`lessIcon?`](#иконка)          | `IconComponent`                                                                                                   | -                   | Иконка для раскрытия                                               |
 | [`moreIcon?`](#иконка)          | `IconComponent`                                                                                                   | `IconArrowDown`     | Иконка для скрытия                                                 |
 | [`size?`](#размер)              | `'l'`, `'m'`, `'s'`, `'xs'`                                                                                       | `'m'`               | Размер компонента                                                  |
+| [`opened?`](#состояние)         | `boolean`                                                                                                         | `false`             | Открыт ли компонент                                                |
 | [`buttonAlign?`](#выравнивание) | `'left'`, `'center'`, `'right'`                                                                                   | `'left'`            | Выравнивание кнопки                                                |
 | `buttonIndent?`                 | `0`, `'auto'`, `'3xs'`, `'2xs'`, `'xs'`, `'s'`, `'m'`, `'l'`, `'xl'`, `'2xl'`, `'3xl'`, `'4xl'`, `'5xl'`, `'6xl'` | -                   | Отступ кнопки от контента, по умолчанию зависит от размера(`size`) |
 | `as`                            | `React.ElementType`                                                                                               | `div`               | HTML-тег для кнопки                                                |
 | `className?`                    | `string`                                                                                                          | -                   | Дополнительные CSS-классы                                          |
+| `onOpenButtonClick?`            | `(open: boolean, event: React.MouseEvent) => void`                                                                | -                   | Срабатывает при клике на кнопку                                    |
