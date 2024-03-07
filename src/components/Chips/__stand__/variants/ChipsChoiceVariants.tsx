@@ -26,7 +26,7 @@ export const ChipsChoiceVariants = () => {
     chipsPropActiveView,
     chipsPropActiveViewDefault,
   );
-
+  const disabled = useBoolean('disabled');
   const [value, setValue] = useState<typeof items[number] | null>(null);
   const [valueMultiple, setValueMultiple] = useState<typeof items | null>(null);
 
@@ -41,6 +41,7 @@ export const ChipsChoiceVariants = () => {
         onChange={setValueMultiple}
         size={size}
         multiple
+        disabled={disabled}
       />
     );
   }
@@ -54,6 +55,7 @@ export const ChipsChoiceVariants = () => {
       value={value}
       onChange={setValue}
       size={size}
+      disabled={disabled}
     />
   );
 };

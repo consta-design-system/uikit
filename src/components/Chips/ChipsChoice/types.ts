@@ -52,6 +52,7 @@ export type ChipsChoiceProps<
     multiple?: MULTIPLE;
     value?: ChipsChoicePropValue<ITEM, MULTIPLE>;
     getItemKey?: ChipsChoicePropGetItemKey<ITEM>;
+    disabled?: boolean;
   },
   HTMLDivElement
 > &

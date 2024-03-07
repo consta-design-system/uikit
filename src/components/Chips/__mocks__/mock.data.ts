@@ -10,6 +10,7 @@ export const items: ChipsDefaultItem[] = [
     iconLeft: IconDinosaur,
     iconRight: IconClose,
     active: false,
+    disabled: true,
   },
   {
     label: 'JavaScript',

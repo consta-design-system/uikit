@@ -24,6 +24,7 @@ export type ChipsItemProps = {
   status?: ChipsPropStatus;
   label: string;
   active?: boolean;
+  disabled?: boolean;
 };
 
 export type ChipsDefaultItem = Omit<
@@ -56,6 +57,9 @@ export type ChipsPropGetItemAttributes<ITEM> = (
 export type ChipsPropGetItemActive<ITEM> = (
   item: ITEM,
 ) => ChipsDefaultItem['active'];
+export type ChipsPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => ChipsDefaultItem['disabled'];
 export type ChipsPropOnItemClick<ITEM> = (
   item: ITEM,
   props: { e: React.MouseEvent },
@@ -71,6 +75,7 @@ export type ChipsProps<ITEM = ChipsDefaultItem> = PropsWithHTMLAttributesAndRef<
     activeView?: ChipsPropActiveView;
     items: ITEM[];
     interactive?: boolean;
+    disabled?: boolean;
     getItemStatus?: ChipsPropGetItemStatus<ITEM>;
     getItemLabel?: ChipsPropGetItemLabel<ITEM>;
     getItemIconLeft?: ChipsPropGetItemIconLeft<ITEM>;
@@ -79,6 +84,7 @@ export type ChipsProps<ITEM = ChipsDefaultItem> = PropsWithHTMLAttributesAndRef<
     getItemAs?: ChipsPropGetItemAs<ITEM>;
     getItemAttributes?: ChipsPropGetItemAttributes<ITEM>;
     getItemActive?: ChipsPropGetItemActive<ITEM>;
+    getItemDisabled?: ChipsPropGetItemDisabled<ITEM>;
     onItemClick?: ChipsPropOnItemClick<ITEM>;
     onItemRightIconClick?: ChipsPropItemOnRightIconClick<ITEM>;
   },

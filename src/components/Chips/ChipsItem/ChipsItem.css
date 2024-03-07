@@ -33,15 +33,6 @@
       calc((var(--chip-height) / 2) - (var(--chip-badge-size) / 2));
   }
 
-  &_active {
-    --chip-bg-color: var(--chip-active-bg-color);
-    --chip-bg-color-hover: var(--chip-active-bg-color-hover);
-    --chip-color: var(--chip-active-color);
-    --chip-color-hover: var(--chip-active-color-hover);
-    --chip-border: var(--chip-active-border);
-    --chip-border-hover: var(--chip-active-border-hover);
-  }
-
   &_interactive {
     cursor: pointer;
 
@@ -90,6 +81,9 @@
       --chip-active-color-hover: var(--color-control-typo-primary-hover);
       --chip-active-border: transparent;
       --chip-active-border-hover: transparent;
+      --chip-active-disabled-bg-color: var(--color-control-bg-secondary);
+      --chip-active-disabled-color: var(--color-control-typo-disable);
+      --chip-active-disabled-border: var(--color-control-typo-disable);
     }
 
     &_secondary {
@@ -102,7 +96,37 @@
         var(
           --color-control-bg-border-secondary-hover
         );
+      --chip-active-disabled-bg-color: var(--color-control-bg-secondary);
+      --chip-active-disabled-color: var(--color-control-typo-disable);
+      --chip-active-disabled-border: var(--color-control-typo-disable);
     }
+  }
+
+  &_disabled {
+    --chip-bg-color: var(--color-control-bg-disable);
+    --chip-bg-color-hover: none;
+    --chip-color: var(--color-control-typo-disable);
+    --chip-color-hover: none;
+    --chip-border: transparent;
+    --chip-border-hover: none;
+  }
+
+  &_active {
+    --chip-bg-color: var(--chip-active-bg-color);
+    --chip-bg-color-hover: var(--chip-active-bg-color-hover);
+    --chip-color: var(--chip-active-color);
+    --chip-color-hover: var(--chip-active-color-hover);
+    --chip-border: var(--chip-active-border);
+    --chip-border-hover: var(--chip-active-border-hover);
+  }
+
+  &_disabled.ChipsItem_active {
+    --chip-bg-color: var(--chip-active-disabled-bg-color);
+    --chip-bg-color-hover: none;
+    --chip-color: var(--chip-active-disabled-color);
+    --chip-color-hover: none;
+    --chip-border: var(--chip-active-disabled-border);
+    --chip-border-hover: none;
   }
 
   &-IconButton {

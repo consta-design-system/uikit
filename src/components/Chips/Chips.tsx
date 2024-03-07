@@ -14,6 +14,7 @@ const ChipsRender = (props: ChipsProps, ref: React.Ref<HTMLDivElement>) => {
   const {
     items,
     getItemActive,
+    getItemDisabled,
     getItemAs,
     getItemAttributes,
     getItemIconLeft,
@@ -27,12 +28,14 @@ const ChipsRender = (props: ChipsProps, ref: React.Ref<HTMLDivElement>) => {
     onItemRightIconClick,
     activeView,
     size,
+    disabled = false,
     ...otherProps
   } = withDefaultGetters(props);
 
   return (
     <div {...otherProps} ref={ref} className={cnChips(null, [className])}>
       {items.map((item, index) => {
+        const itemDisabled = getItemDisabled(item) || disabled;
         return (
           <ChipsItem
             {...getItemAttributes(item)}
@@ -40,12 +43,12 @@ const ChipsRender = (props: ChipsProps, ref: React.Ref<HTMLDivElement>) => {
             size={size}
             activeView={activeView}
             onClick={
-              onItemClick
+              onItemClick && !itemDisabled
                 ? (e: React.MouseEvent) => onItemClick(item, { e })
                 : undefined
             }
             onRightIconClick={
-              onItemRightIconClick
+              onItemRightIconClick && itemDisabled
                 ? (e: React.MouseEvent) => onItemRightIconClick(item, { e })
                 : undefined
             }
@@ -56,7 +59,8 @@ const ChipsRender = (props: ChipsProps, ref: React.Ref<HTMLDivElement>) => {
             iconRight={getItemIconRight(item)}
             ref={getItemRef(item)}
             status={getItemStatus(item)}
-            interactive={interactive}
+            interactive={!itemDisabled && interactive}
+            disabled={itemDisabled}
           />
         );
       })}
