@@ -32,7 +32,7 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     ...otherProps
   } = props;
 
-  const inputRef = usePicker({
+  const [inputRef, onClear] = usePicker({
     onChange,
     value,
     onError,
@@ -52,6 +52,7 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
       inputContainerRef={ref}
       inputRef={useForkRef([inputRef, inputRefProp])}
       placeholder={placeholder}
+      onClear={onClear}
     />
   );
 });

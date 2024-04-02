@@ -1,5 +1,8 @@
 import { format, isValid, parse, startOfToday } from 'date-fns';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useIMask } from 'react-imask';
+
+import { useMutableRef } from '##/hooks/useMutableRef';
 
 import { range } from '../../utils/array';
 import { DateRange } from '../../utils/types/Date';
@@ -147,16 +150,39 @@ export const getFieldName = (
 export const getDropdownZIndex = (style?: React.CSSProperties) =>
   typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined;
 
+type DatePickerFieldTypeDatePropOnChange = (
+  value: Date | null,
+  props: {
+    e: Event;
+  },
+) => void;
+
 export const useStringValue = (
   value: Date | undefined | null,
-  stringValue: string,
   formatProp: string,
   separator: string,
-  setStringValue: React.Dispatch<string>,
+  onChangeRef: React.MutableRefObject<
+    DatePickerFieldTypeDatePropOnChange | undefined
+  >,
+  imaskProps: ReturnType<typeof useIMask>,
 ) => {
+  const stringValue = imaskProps.value;
+
+  const refs = useMutableRef([imaskProps.setValue, value] as const);
+
+  const handleClear: React.MouseEventHandler<HTMLButtonElement> = useCallback(
+    (e) => {
+      refs.current[0]('');
+      if (refs.current[1]) {
+        onChangeRef.current?.(null, { e: e as unknown as Event });
+      }
+    },
+    [],
+  );
+
   useEffect(() => {
     if (value && isValid(value)) {
-      setStringValue(format(value, formatProp));
+      refs.current[0](format(value, formatProp));
     }
 
     if (!value && stringValue) {
@@ -176,8 +202,10 @@ export const useStringValue = (
           : undefined;
 
       if (isValid(date)) {
-        setStringValue('');
+        refs.current[0]('');
       }
     }
   }, [value?.getTime()]);
+
+  return handleClear;
 };
