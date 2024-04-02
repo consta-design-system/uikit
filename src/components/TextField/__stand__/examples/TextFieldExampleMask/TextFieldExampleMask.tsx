@@ -157,6 +157,8 @@ export const TextFieldExampleMaskSetValue = () => {
             placeholder="+7(999)999-99-99"
             inputRef={ref}
             defaultValue={defaultValue}
+            withClearButton
+            onClear={() => setValue('')}
           />
           <Button
             iconLeft={IconRevert}
