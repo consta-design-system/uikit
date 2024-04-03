@@ -1,4 +1,6 @@
 .Switch {
+  --switch-border-gap: calc(var(--control-border-width) * 4);
+  --switch-circle-size: calc(var(--box-height) - var(--switch-border-gap));
   position: relative;
   display: inline-flex;
   font-family: var(--font-primary);
@@ -6,47 +8,27 @@
 
   &_size {
     &_xs {
-      --box-width: 20px;
       --box-height: 12px;
       --switch-font-size: var(--control-text-size-xs);
       --offset: var(--space-2xs);
-
-      .Switch-Input::before {
-        transform: translateX(-8px);
-      }
     }
 
     &_s {
-      --box-width: 28px;
       --box-height: 16px;
       --switch-font-size: var(--control-text-size-s);
       --offset: var(--space-xs);
-
-      .Switch-Input::before {
-        transform: translateX(-12px);
-      }
     }
 
     &_m {
-      --box-width: 36px;
       --box-height: 20px;
       --switch-font-size: var(--control-text-size-m);
       --offset: var(--space-xs);
-
-      .Switch-Input::before {
-        transform: translateX(-16px);
-      }
     }
 
     &_l {
-      --box-width: 44px;
       --box-height: 24px;
       --switch-font-size: var(--control-text-size-l);
       --offset: var(--space-s);
-
-      .Switch-Input::before {
-        transform: translateX(-20px);
-      }
     }
   }
 
@@ -106,9 +88,10 @@
 
   &-Input {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     box-sizing: border-box;
-    width: var(--box-width);
+    width: calc(var(--box-height) * 2 - var(--switch-border-gap));
     height: var(--box-height);
     margin: 0;
     background-color: var(--background-color);
@@ -122,14 +105,17 @@
     &::before {
       content: '';
       position: absolute;
-      top: 1px;
       right: 1px;
       box-sizing: border-box;
-      width: calc(var(--box-height) - var(--control-border-width) * 4);
-      height: calc(var(--box-height) - var(--control-border-width) * 4);
+      width: var(--switch-circle-size);
+      height: var(--switch-circle-size);
       background-color: var(--content-color);
       border-radius: 999rem;
       transition: transform 0.15s, background-color 0.15s;
+      transform:
+        translateX(
+          calc((var(--box-height) - var(--switch-border-gap)) * -1)
+        );
     }
 
     &:checked {
