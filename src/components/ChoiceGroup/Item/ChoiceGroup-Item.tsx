@@ -41,13 +41,12 @@ export const ChoiceGroupItem = forwardRef<HTMLLabelElement, Props>(
 
     return (
       <label
+        {...otherProps}
         className={cnChoiceGroup('Label', { focus, checked, disabled }, [
           cnMixFocus(),
           className,
         ])}
-        title={onlyIcon ? label : undefined}
         ref={ref}
-        {...otherProps}
       >
         <input
           type={multiple ? 'checkbox' : 'radio'}

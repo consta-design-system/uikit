@@ -3,9 +3,10 @@ import './ChoiceGroup.css';
 import { IconPropSize } from '@consta/icons/Icon';
 import React, { forwardRef } from 'react';
 
-import { useChoiceGroup } from '../../hooks/useChoiceGroup/useChoiceGroup';
-import { cn } from '../../utils/bem';
-import { getByMap } from '../../utils/getByMap';
+import { useChoiceGroup } from '##/hooks/useChoiceGroup';
+import { cn } from '##/utils/bem';
+import { getByMap } from '##/utils/getByMap';
+
 import { withDefaultGetters } from './helper';
 import { ChoiceGroupItem } from './Item/ChoiceGroup-Item';
 import {
@@ -80,13 +81,15 @@ const ChoiceGroupRender = (
         [className],
       )}
     >
-      {items.map((item, idx) => {
+      {items.map((item, index) => {
         const itemChecked = getChecked(item);
         const itemDisabled = !!getItemDisabled && getItemDisabled(item);
         const attributes = getItemAttributes(item) ?? {};
+        const label = getItemLabel(item).toString();
+
         return (
-          <React.Fragment key={getItemLabel(item)}>
-            {idx > 0 && (
+          <React.Fragment key={label}>
+            {index > 0 && (
               <div
                 className={cnChoiceGroup('Divider', {
                   checked: itemChecked,
@@ -97,7 +100,7 @@ const ChoiceGroupRender = (
             <ChoiceGroupItem
               onChange={getOnChange(item)}
               checked={itemChecked}
-              label={getItemLabel(item).toString()}
+              label={label}
               icon={getItemIcon && getItemIcon(item)}
               iconSize={iconSize}
               multiple={multiple}
@@ -105,6 +108,7 @@ const ChoiceGroupRender = (
               ref={getItemRef(item)}
               name={name}
               disabled={disabled || itemDisabled}
+              title={onlyIcon || truncate ? label : undefined}
               {...attributes}
             />
           </React.Fragment>
