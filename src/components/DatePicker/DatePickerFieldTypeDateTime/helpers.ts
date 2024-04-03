@@ -193,11 +193,7 @@ export const usePicker = (props: UsePickerProps) => {
     [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
   );
 
-  const {
-    ref,
-    setValue: setStringValue,
-    value: stringValue,
-  } = useIMask<HTMLInputElement, ReactMaskOpts>(
+  const imaskProps = useIMask<HTMLInputElement, ReactMaskOpts>(
     {
       mask: Date as unknown as MaskedDate,
       pattern: formatProp,
@@ -319,7 +315,13 @@ export const usePicker = (props: UsePickerProps) => {
     { onAccept },
   );
 
-  useStringValue(value, stringValue, formatProp, separator, setStringValue);
+  const handleClear = useStringValue(
+    value,
+    formatProp,
+    separator,
+    onChangeRef,
+    imaskProps,
+  );
 
-  return ref;
+  return [imaskProps.ref, handleClear] as const;
 };
