@@ -94,7 +94,7 @@ export const TextFieldRender = <TYPE extends string>(
     onKeyPressCapture,
     onKeyUp,
     onKeyUpCapture,
-
+    onClear,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
 
@@ -364,7 +364,7 @@ export const TextFieldRender = <TYPE extends string>(
                 type="button"
                 disabled={disabled}
                 tabIndex={-1}
-                onClick={handleClear}
+                onClick={onClear || handleClear}
                 className={cnTextField('ClearButton')}
               >
                 <IconClear

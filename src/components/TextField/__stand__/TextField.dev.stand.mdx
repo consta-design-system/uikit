@@ -489,23 +489,23 @@ export const TextFieldExampleMaskSetValue = () => {
   });
 
   return (
-    <Example>
-      <>
-        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Телефон</FieldLabel>
-        <FieldGroup>
-          <TextFieldMemo
-            placeholder="+7(999)999-99-99"
-            inputRef={ref}
-            defaultValue={defaultValue}
-          />
-          <Button
-            iconLeft={IconRevert}
-            onClick={() => setValue(defaultValue)}
-            title="Сбросить"
-          />
-        </FieldGroup>
-      </>
-    </Example>
+    <>
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Телефон</FieldLabel>
+      <FieldGroup>
+        <TextFieldMemo
+          placeholder="+7(999)999-99-99"
+          inputRef={ref}
+          defaultValue={defaultValue}
+          withClearButton
+          onClear={() => setValue('')}
+        />
+        <Button
+          iconLeft={IconRevert}
+          onClick={() => setValue(defaultValue)}
+          title="Сбросить"
+        />
+      </FieldGroup>
+    </>
   );
 };
 ```
@@ -742,6 +742,7 @@ import { TextField, useIMask } from '@consta/uikit/TextField';
 | `onFocus?`                                            | `React.FocusEventHandler<HTMLElement>`                                                                                                                               | -            | Действие по фокусу                                                                                                                           |
 | `onBlur?`                                             | `React.FocusEventHandler<HTMLElement>`                                                                                                                               | -            | Действие при потере фокуса                                                                                                                   |
 | `autoComplete?`                                       | [`AutoCompete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)                                                                           | -            | Автозаполнение поля ввода — аналог HTML-атрибута [`autocomplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) |
+| `onClear?`                                            | `React.MouseEventHandler<HTMLButtonElement>`                                                                                                                         | -            | Функция, которая определяет, как будет удалено значение из поля                                                                              |
 | `onChange?`                                           | `(value: string`<code>&#124;</code>`null, params: {e: React.ChangeEvent; id?: string, number; name?: string; }) => void;`                                            | -            | Действие при изменении текстового поля                                                                                                       |
 | `className?`                                          | `string`                                                                                                                                                             | -            | Дополнительный CSS-класс                                                                                                                     |
 | `inputRef?`                                           | `React.Ref<HTMLTextAreaElement` <code>&#124;</code> `HTMLInputElement>`                                                                                              | -            | Ссылка на DOM-элемент поля ввода                                                                                                             |
