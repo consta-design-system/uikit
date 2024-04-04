@@ -334,45 +334,41 @@ export const TextFieldRender = <TYPE extends string>(
             <input {...commonProps} {...inputProps} />
           )}
 
-          {type === 'number' && incrementButtons && !disabled && (
+          {incrementButtons && !disabled && (
             <div className={cnTextField('Counter')}>
               <button
+                className={cnTextField('CounterButton', { fn: 'increment' })}
                 onFocus={handleFocus}
                 onClick={(e) => changeNumberValue(e, true)}
                 type="button"
-                className={cnTextField('CounterButton', { fn: 'increment' })}
               >
                 <IconSelect size="xs" />
               </button>
               <button
+                className={cnTextField('CounterButton')}
                 onFocus={handleFocus}
                 onClick={(e) => changeNumberValue(e, false)}
                 type="button"
-                className={cnTextField('CounterButton')}
               >
                 <IconSelect size="xs" />
               </button>
             </div>
           )}
 
-          {!incrementButtons &&
-            withValue &&
-            withClearButton &&
-            !disabled &&
-            type !== 'number' && (
-              <button
-                type="button"
-                disabled={disabled}
-                tabIndex={-1}
-                onClick={onClear || handleClear}
-                className={cnTextField('ClearButton')}
-              >
-                <IconClear
-                  size={sizeMap[size]}
-                  className={cnTextField('ClearButtonIcon')}
-                />
-              </button>
-            )}
+          {!incrementButtons && withValue && withClearButton && !disabled && (
+            <button
+              type="button"
+              disabled={disabled}
+              tabIndex={-1}
+              onClick={onClear || handleClear}
+              className={cnTextField('ClearButton')}
+            >
+              <IconClear
+                size={sizeMap[size]}
+                className={cnTextField('ClearButtonIcon')}
+              />
+            </button>
+          )}
 
           {type === 'password' && inputRef.current?.value && (
             <button
