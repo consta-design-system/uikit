@@ -73,6 +73,7 @@ export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
             className={cnUserSelectItem('Avatar')}
             url={avatarUrl}
             name={label}
+            monochrome={disable}
           />
           {multiple && (
             <Transition
