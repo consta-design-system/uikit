@@ -16,91 +16,49 @@
 
   &_size {
     &_xs {
-      &:not(.Badge_counter.Badge_minified) {
-        &.Badge_form_round {
-          padding: 0 var(--space-2xs);
-        }
-
-        &.Badge_form_default {
-          padding: 0 var(--space-xs);
-        }
-      }
-
-      &:not(.Badge_minified) {
-        --badge-size: var(--control-box-size-m);
-        --badge-text-size: calc(var(--size-text-m) / 2);
-      }
-
-      &.Badge_minified {
-        --badge-size: 10px;
-        --badge-border-size: 2px;
-      }
+      --badge-padding-round: var(--space-xs);
+      --badge-padding-default: var(--space-2xs);
+      --badge-size: var(--control-box-size-m);
+      --badge-text-size: calc(var(--size-text-m) / 2);
+      --badge-border-size: 2px;
+      --badge-size-minified: 10px;
     }
 
     &_s {
-      &:not(.Badge_counter.Badge_minified) {
-        &.Badge_form_round {
-          padding: 0 var(--space-2xs);
-        }
-
-        &.Badge_form_default {
-          padding: 0 var(--space-xs);
-        }
-      }
-
-      &:not(.Badge_minified) {
-        --badge-size: var(--control-box-size-l);
-        --badge-text-size: var(--size-text-2xs);
-      }
-
-      &.Badge_minified {
-        --badge-size: 16px;
-        --badge-border-size: 3px;
-      }
+      --badge-padding-round: var(--space-xs);
+      --badge-padding-default: var(--space-2xs);
+      --badge-size: var(--control-box-size-l);
+      --badge-text-size: var(--size-text-2xs);
+      --badge-size-minified: 16px;
+      --badge-border-size: 3px;
     }
 
     &_m {
-      &:not(.Badge_counter.Badge_minified) {
-        &.Badge_form_round {
-          padding: 0 var(--space-s);
-        }
-
-        &.Badge_form_default {
-          padding: 0 var(--space-xs);
-        }
-      }
-
-      &:not(.Badge_minified) {
-        --badge-size: var(--control-height-xs);
-        --badge-text-size: var(--size-text-xs);
-      }
-
-      &.Badge_minified {
-        --badge-size: 24px;
-        --badge-border-size: 4px;
-      }
+      --badge-padding-round: var(--space-s);
+      --badge-padding-default: var(--space-xs);
+      --badge-size: var(--control-height-xs);
+      --badge-text-size: var(--size-text-xs);
+      --badge-size-minified: 24px;
+      --badge-border-size: 4px;
     }
 
     &_l {
-      &:not(.Badge_counter.Badge_minified) {
-        &.Badge_form_round {
-          padding: 0 var(--space-m);
-        }
+      --badge-padding-round: var(--space-m);
+      --badge-padding-default: var(--space-xs);
+      --badge-size: var(--control-height-s);
+      --badge-text-size: var(--size-text-s);
+      --badge-size-minified: 32px;
+      --badge-border-size: 5px;
+    }
+  }
 
-        &.Badge_form_default {
-          padding: 0 var(--space-xs);
-        }
-      }
+  &:not(.Badge_counter.Badge_minified) {
+    &.Badge_form_round {
+      padding: 0 var(--badge-padding-round);
+    }
 
-      &:not(.Badge_minified) {
-        --badge-size: var(--control-height-s);
-        --badge-text-size: var(--size-text-s);
-      }
-
-      &.Badge_minified {
-        --badge-size: 32px;
-        --badge-border-size: 5px;
-      }
+    &.Badge_form_default {
+      padding: 0 var(--badge-padding-default);
     }
   }
 
@@ -165,21 +123,22 @@
     }
   }
 
-  &_minified {
+  &_counter {
+    justify-content: center;
     width: var(--badge-size);
+    padding: 0;
+    text-align: center;
+  }
+
+  &_minified {
+    width: var(--badge-size-minified);
     height: var(--badge-size);
     padding: 0;
     background: transparent;
     border: var(--badge-border-size) solid transparent;
     border-radius: 50%;
     box-shadow: inset 0 0 0 var(--badge-size) var(--badge-bg-color);
-  }
-
-  &_counter {
-    justify-content: center;
-    width: var(--badge-size);
-    padding: 0;
-    text-align: center;
+    line-height: var(--badge-size-minified);
   }
 
   &-Icon {

@@ -45,7 +45,6 @@ const Variants = () => {
       minified={minified}
       iconLeft={iconLeft ? IconUser : undefined}
       iconRight={iconRight ? IconDinosaur : undefined}
-      title="dd"
     />
   );
 };
