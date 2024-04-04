@@ -1,0 +1,34 @@
+.canary--DragNDropField {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 160px;
+  padding: var(--space-l);
+  background: var(--color-control-bg-clear);
+  border: 1px dashed var(--color-control-bg-border-default);
+  border-radius: var(--control-radius);
+
+  &:not(&_disabled) {
+    cursor: pointer;
+  }
+
+  &:hover {
+    background: var(--color-control-bg-clear-hover);
+    border-color: var(--color-control-bg-border-default-hover);
+  }
+
+  &_active {
+    background: var(--color-control-bg-clear-hover);
+    border-color: var(--color-control-bg-border-focus);
+  }
+
+  &_disabled,
+  &_disabled:hover {
+    background: var(--color-control-bg-disable);
+    border-color: transparent;
+  }
+}
