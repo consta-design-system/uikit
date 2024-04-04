@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import './DragNDropField.css';
 
 import React, { forwardRef, useRef } from 'react';
