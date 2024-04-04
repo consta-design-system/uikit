@@ -27,16 +27,13 @@
     }
   }
 
-  &_disable {
-    color: var(--color-control-typo-disable);
-
-    & .UserSelectItem-AvatarContainer {
-      opacity: 0.6;
-    }
-  }
-
   &_hovered {
     background-color: var(--color-control-bg-clear-hover);
+  }
+
+  &_disable {
+    color: var(--color-control-typo-disable);
+    cursor: auto;
   }
 
   &_active {
