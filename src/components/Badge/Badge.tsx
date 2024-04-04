@@ -76,8 +76,8 @@ export const Badge = forwardRefWithAs<Props>((props, ref) => {
       : props.className;
   const IconLeft = iconLeft ?? icon;
   const counter =
-    [icon, iconLeft, IconRight, label].filter((item) => Boolean(item))
-      .length === 1 && (label?.length || 0) <= 1;
+    [icon, iconLeft, IconRight, label].filter(Boolean).length === 1 &&
+    (label?.length || 0) <= 1;
 
   return (
     <Tag
