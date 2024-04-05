@@ -1,5 +1,10 @@
 import { IconComponent } from '@consta/icons/Icon';
-import { Accept, DropEvent, FileRejection } from 'react-dropzone';
+import {
+  Accept,
+  DropEvent,
+  DropzoneState,
+  FileRejection,
+} from 'react-dropzone';
 
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 import { Locale } from './locale';
@@ -11,9 +16,19 @@ export type DragNDropFieldChildrenRenderProp = (
     openFileDialog: () => void;
     locale: Required<DragNDropFieldPropLocale>;
   } & Pick<
-    DragNDropFieldProps,
-    'accept' | 'maxSize' | 'multiple' | 'disabled' | 'minSize' | 'maxFiles'
-  >,
+    DropzoneState,
+    | 'isFocused'
+    | 'isDragActive'
+    | 'isDragAccept'
+    | 'isDragReject'
+    | 'isFileDialogActive'
+    | 'acceptedFiles'
+    | 'fileRejections'
+  > &
+    Pick<
+      DragNDropFieldProps,
+      'accept' | 'maxSize' | 'multiple' | 'disabled' | 'minSize' | 'maxFiles'
+    >,
 ) => React.ReactNode;
 
 export type FileSizes = {

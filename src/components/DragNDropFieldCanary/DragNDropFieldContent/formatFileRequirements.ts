@@ -5,11 +5,6 @@ import { DragNDropFieldProps } from '../DragNDropFieldCanary';
 import { formatFileSize } from '../formatFileSize';
 import { defaultLocale, Locale } from '../locale';
 
-// const formatAccept = (
-//   strs: string[] | string | undefined,
-// ): string | undefined => {
-//   return Array.isArray(strs) ? strs.join(', ') : strs;
-// };
 const formatAccept = (accept: Accept | undefined): string | undefined => {
   return (
     accept &&
@@ -18,6 +13,7 @@ const formatAccept = (accept: Accept | undefined): string | undefined => {
       .join(', ')
   );
 };
+
 const formatSize = (
   prefix: string,
   size: number | undefined,

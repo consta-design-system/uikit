@@ -3,7 +3,8 @@ import './DragNDropFieldContent.css';
 import { IconAttach } from '@consta/icons/IconAttach';
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
+import { cn } from '##/utils/bem';
+
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
 import { DragNDropFieldChildrenRenderProp } from '../DragNDropFieldCanary';
@@ -20,11 +21,16 @@ export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
   openFileDialog,
   locale,
   disabled,
+  isDragActive,
 }) => {
   const requirements = formatFileRequirements(accept, maxSize, minSize, locale);
   const fileText = multiple ? locale.files : locale.file;
 
-  return (
+  return isDragActive ? (
+    <Text view="secondary" size="s" align="center" lineHeight="m">
+      {getText(locale['drag-active-message'], {})}
+    </Text>
+  ) : (
     <>
       <Text
         className={cnDragNDropFieldContent('Text', { disabled })}

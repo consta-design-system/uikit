@@ -24,6 +24,7 @@ export type Locale = {
   'byte'?: string;
   'call-to-action'?: LocaleLabel;
   'action-button'?: LocaleLabel;
+  'drag-active-message'?: string;
 };
 
 export const defaultLocale: Required<Locale> = {
@@ -58,6 +59,7 @@ export const defaultLocale: Required<Locale> = {
   'call-to-action': (props) =>
     `Перетащите ${props.fileText} сюда или загрузите по кнопке`,
   'action-button': (props) => `Выбрать ${props.fileText}`,
+  'drag-active-message': '      Перетащите файлы сюда  ',
 };
 
 export const getText = <PROPS>(

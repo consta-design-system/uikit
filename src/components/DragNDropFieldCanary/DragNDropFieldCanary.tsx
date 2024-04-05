@@ -4,7 +4,6 @@ import React, { forwardRef, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
-import { Text } from '##/components/Text/Text';
 import { useForkRef } from '##/hooks/useForkRef/useForkRef';
 import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
 import { cnCanary } from '##/utils/bem';
@@ -21,6 +20,7 @@ export const COMPONENT_NAME = 'DragNDropField' as const;
 export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
   (props, ref) => {
     const dragNDropFieldRef = useRef<HTMLDivElement>(null);
+
     const {
       accept,
       maxSize,
@@ -41,18 +41,24 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
 
     const locale = withdefaultLocale(localeProp);
 
-    const { getRootProps, getInputProps, isDragActive, rootRef, open } =
-      useDropzone({
-        accept,
-        maxSize: maxSize || undefined,
-        minSize: minSize || undefined,
-        maxFiles: maxFiles || undefined,
-        multiple,
-        disabled,
-        onDropAccepted,
-        onDropRejected,
-        onError,
-      });
+    const {
+      getRootProps,
+      getInputProps,
+      rootRef,
+      open,
+      isDragActive,
+      ...otherStateProps
+    } = useDropzone({
+      accept,
+      maxSize: maxSize || undefined,
+      minSize: minSize || undefined,
+      maxFiles: maxFiles || undefined,
+      multiple,
+      disabled,
+      onDropAccepted,
+      onDropRejected,
+      onError,
+    });
 
     const handleRootClick: React.MouseEventHandler<HTMLDivElement> =
       React.useCallback((e) => {
@@ -80,19 +86,15 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
           openFileDialog: open,
           locale,
           disabled,
+          isDragActive,
+          ...otherStateProps,
         })
       : children;
 
     return (
       <div {...rootProps} ref={useForkRef([ref, rootRef, dragNDropFieldRef])}>
         <input {...getInputProps()} />
-        {isDragActive ? (
-          <Text view="secondary" size="s" align="center" lineHeight="m">
-            Перетащите файлы сюда
-          </Text>
-        ) : (
-          content
-        )}
+        {content}
       </div>
     );
   },

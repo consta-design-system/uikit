@@ -1,4 +1,4 @@
-import './Informer.css';
+import './DragNDropFieldInformer.css';
 
 import { cn } from '@bem-react/classname';
 import { IconPropView } from '@consta/icons/Icon';
@@ -15,24 +15,24 @@ import {
   dragNDropFieldInformerPropStatus,
 } from '../types';
 
-// eslint-disable-next-line no-unused-vars
-const textViewMap: { [key in DragNDropFieldInformerPropStatus]: TextPropView } =
-  {
-    default: 'ghost',
-    alert: 'alert',
-    warning: 'warning',
-  };
-const iconStatusMap: {
-  // eslint-disable-next-line no-unused-vars
-  [key in DragNDropFieldInformerPropStatus]: IconPropView;
-} = { default: 'ghost', alert: 'alert', warning: 'warning' };
+const textViewMap: Record<DragNDropFieldInformerPropStatus, TextPropView> = {
+  default: 'ghost',
+  alert: 'alert',
+  warning: 'warning',
+};
+
+const iconStatusMap: Record<DragNDropFieldInformerPropStatus, IconPropView> = {
+  default: 'ghost',
+  alert: 'alert',
+  warning: 'warning',
+};
 
 type InformerProps = PropsWithHTMLAttributes<
   DragNDropFieldInformerProps,
   HTMLDivElement
 >;
 
-const cnInformer = cn('Informer');
+const cnDragNDropFieldInformer = cn('DragNDropFieldInformer');
 
 const propStatusDefault: DragNDropFieldInformerPropStatus =
   dragNDropFieldInformerPropStatus[0];
@@ -57,7 +57,7 @@ export const DragNDropFieldInformer = React.forwardRef<
   return (
     <div
       {...otherProps}
-      className={cnInformer(
+      className={cnDragNDropFieldInformer(
         {
           status,
         },
@@ -65,28 +65,27 @@ export const DragNDropFieldInformer = React.forwardRef<
       )}
       ref={ref}
     >
-      {loading ? (
+      {loading && (
         <ProgressSpin
           value={typeof loading === 'number' ? loading : undefined}
           animation
           size="m"
-          className={cnInformer('Progress')}
+          className={cnDragNDropFieldInformer('Progress')}
         />
-      ) : (
-        Icon && (
-          <Icon
-            view={iconStatusMap[status]}
-            size="s"
-            className={cnInformer('Icon')}
-          />
-        )
+      )}
+      {!loading && Icon && (
+        <Icon
+          view={iconStatusMap[status]}
+          size="s"
+          className={cnDragNDropFieldInformer('Icon')}
+        />
       )}
       {text ? (
         <Text
           align="left"
           lineHeight="xs"
           size="xs"
-          className={cnInformer('Text')}
+          className={cnDragNDropFieldInformer('Text')}
           view={textViewMap[status]}
         >
           {text}
@@ -102,7 +101,7 @@ export const DragNDropFieldInformer = React.forwardRef<
           view="ghost"
           size="xs"
           label={buttonLabel}
-          className={cnInformer('Button')}
+          className={cnDragNDropFieldInformer('Button')}
         />
       )}
     </div>
