@@ -1553,9 +1553,7 @@ import { Table } from '@consta/uikit/Table';
 type Column = {
   title: React.ReactNode;
   accessor: string;
-  align?: 'left';
-  center;
-  right;
+  align?: 'left' | 'center' | 'right';
   withoutPadding?: boolean;
   width?: number;
   sortable?: boolean;
