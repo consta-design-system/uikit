@@ -34,7 +34,7 @@ const Variants = () => {
   const multiple = useBoolean('multiple', true);
   // const maxFiles = useNumber ('maxFiles', 2, multiple)
   const accept: Accept = {
-    'image/*': ['.png', '.gif', '.jpeg', '.jpg'],
+    '*': ['.png', '.gif', '.jpeg', '.jpg', '.lrcat', 'application/pdf'],
   };
   const maxSize = useNumber('maxSize', 0);
   const minSize = useNumber('minSize', 0);
