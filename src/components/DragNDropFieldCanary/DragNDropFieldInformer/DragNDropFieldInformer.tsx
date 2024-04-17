@@ -1,12 +1,12 @@
 import './DragNDropFieldInformer.css';
 
-import { cn } from '@bem-react/classname';
 import { IconPropView } from '@consta/icons/Icon';
 import React from 'react';
 
 import { Button } from '##/components/Button';
 import { ProgressSpin } from '##/components/ProgressSpin';
 import { Text, TextPropView } from '##/components/Text';
+import { cnCanary } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 import {
@@ -32,7 +32,7 @@ type InformerProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-const cnDragNDropFieldInformer = cn('DragNDropFieldInformer');
+const cnDragNDropFieldInformer = cnCanary('DragNDropFieldInformer');
 
 const propStatusDefault: DragNDropFieldInformerPropStatus =
   dragNDropFieldInformerPropStatus[0];
@@ -100,7 +100,7 @@ export const DragNDropFieldInformer = React.forwardRef<
           onClick={onButtonClick}
           view="ghost"
           size="xs"
-          label={buttonLabel}
+          title={buttonLabel}
           className={cnDragNDropFieldInformer('Button')}
         />
       )}

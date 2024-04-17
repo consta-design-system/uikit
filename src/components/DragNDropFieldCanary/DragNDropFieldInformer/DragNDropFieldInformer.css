@@ -1,9 +1,10 @@
-.DragNDropFieldInformer {
+.canary--DragNDropFieldInformer {
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
+  min-height: var(--space-3xl);
   margin-top: var(--space-xs);
   padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-s);
   color: var(--color-typo-primary);

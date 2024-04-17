@@ -1,0 +1,25 @@
+.canary--DragNDropFieldExampleOnDropRejected {
+  &-DropContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  &-DroppedImage {
+    box-sizing: border-box;
+    border:
+      var(--control-border-width) solid
+      var(--color-control-bg-border-default);
+    border-radius: var(--control-radius);
+    object-fit: cover;
+  }
+
+  &-DroppedItem {
+    width: 108px;
+    height: 108px;
+    min-height: 108px;
+    padding: var(--space-xs);
+  }
+}

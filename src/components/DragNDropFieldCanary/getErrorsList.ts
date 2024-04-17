@@ -1,20 +1,17 @@
 import { ErrorCode, FileError, FileRejection } from 'react-dropzone';
 
-import { isNotNil, isString } from '../../utils/type-guards';
-import { DragNDropFieldPropLocale, FileSizes } from './types';
+import { isNotNil, isString } from '##/utils/type-guards';
 
-const defaultFileSizes: FileSizes = {
-  maxSize: 1024 * 1024 * 1024,
-  minSize: 1,
-};
+import { withDefaultLocale } from './locale';
+import { DragNDropFieldPropLocale, FileSizes } from './types';
 
 const NO_MESSAGE = 'no-message';
 
 const getErrorMessage = (
   error: FileRejection['errors'][number],
   file: File | undefined,
-  sizes: FileSizes,
   locale: DragNDropFieldPropLocale,
+  sizes?: FileSizes,
 ): string => {
   const { code } = error as FileError;
 
@@ -35,18 +32,22 @@ const getErrorMessage = (
 
 export const getErrorsList = (
   fileRejections: FileRejection[],
-  sizes: FileSizes | undefined = defaultFileSizes,
-  locale: Required<DragNDropFieldPropLocale>,
+  locale?: DragNDropFieldPropLocale,
+  sizes?: FileSizes,
 ): string[] => {
   const errorsList: string[] = [];
   let tooManyFilesErrorsCount = 0;
+
+  const localeWithDefault = withDefaultLocale(locale);
 
   for (const rejection of fileRejections) {
     for (const error of rejection.errors) {
       if (error.code === 'too-many-files') {
         tooManyFilesErrorsCount++;
       } else {
-        errorsList.push(getErrorMessage(error, rejection.file, sizes, locale));
+        errorsList.push(
+          getErrorMessage(error, rejection.file, localeWithDefault, sizes),
+        );
       }
     }
   }
@@ -56,15 +57,15 @@ export const getErrorsList = (
       getErrorMessage(
         { code: 'too-many-files', message: '' },
         undefined,
+        localeWithDefault,
         sizes,
-        locale,
       ),
     );
   }
   if (isNotNil(errorsList.find((text) => text === NO_MESSAGE))) {
     const list = errorsList.filter((text) => text !== NO_MESSAGE);
 
-    list.unshift(locale['general-error']);
+    list.unshift(localeWithDefault['general-error']);
     return list;
   }
 

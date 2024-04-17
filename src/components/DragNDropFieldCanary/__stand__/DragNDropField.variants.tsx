@@ -5,11 +5,11 @@ import { IconClose } from '@consta/icons/IconClose';
 import { IconRevert } from '@consta/icons/IconRevert';
 import { IconTrash } from '@consta/icons/IconTrash';
 import { useBoolean, useNumber } from '@consta/stand';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Accept, FileRejection } from 'react-dropzone';
 
 import { Attachment } from '##/components/Attachment';
-import { cn } from '##/utils/bem';
+import { cnCanary } from '##/utils/bem';
 
 import { DragNDropFieldInformer } from '..';
 import {
@@ -17,9 +17,9 @@ import {
   DragNDropFieldInformerPropStatus,
 } from '../DragNDropFieldCanary';
 import { getErrorsList } from '../getErrorsList';
-import { withdefaultLocale } from '../locale';
+import { withDefaultLocale } from '../locale';
 
-const cnDragNDropFieldVariants = cn('DragNDropFieldVariants');
+const cnDragNDropFieldVariants = cnCanary('DragNDropFieldVariants');
 
 const informerButtonIconMap = {
   default: IconClose,
@@ -41,11 +41,6 @@ const Variants = () => {
   const withInformer = useBoolean('withInformer', true);
   const withIcon = useBoolean('withIcon', true, withInformer);
   const loading = useBoolean('loading', false, withInformer);
-  // const loadingProgress = useNumber(
-  //   'loadingProgress',
-  //   70,
-  //   withInformer && loading
-  // );
   const informerWithButton = useBoolean(
     'informerWithButton',
     true,
@@ -55,12 +50,12 @@ const Variants = () => {
   const [filesDropped, setFilesDropped] = useState<File[]>([]);
   const [fileRejections, setFileRejections] = useState<FileRejection[]>([]);
   const [otherError, setOtherError] = useState<Error>();
-  const locale = withdefaultLocale();
+  const locale = withDefaultLocale();
 
-  function handleAccept(filesAccepted: File[]) {
+  const handleAccept = useCallback((filesAccepted: File[]) => {
     const files = [...filesDropped, ...filesAccepted];
     setFilesDropped(files);
-  }
+  }, []);
 
   let status: DragNDropFieldInformerPropStatus = 'default';
   if (otherError) {
@@ -78,7 +73,7 @@ const Variants = () => {
       text = 'Что-то пошло не так';
       break;
     case 'warning':
-      text = getErrorsList(fileRejections, { maxSize, minSize }, locale).join(
+      text = getErrorsList(fileRejections, locale, { maxSize, minSize }).join(
         '; ',
       );
       break;
@@ -103,7 +98,6 @@ const Variants = () => {
         disabled={disabled}
         onError={setOtherError}
         onDropRejected={setFileRejections}
-        // eslint-disable-next-line react/jsx-no-bind
         onDropAccepted={handleAccept}
       >
         {withCustomChildren

@@ -10,7 +10,7 @@ import { cnCanary } from '##/utils/bem';
 import { isRenderProp } from '##/utils/isRenderProp';
 
 import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldContent';
-import { withdefaultLocale } from './locale';
+import { withDefaultLocale } from './locale';
 import { DragNDropFieldProps } from './types';
 
 const cnDragNDropField = cnCanary('DragNDropField');
@@ -26,7 +26,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
       maxSize,
       minSize,
       multiple = false,
-      maxFiles,
+      // maxFiles,
       children = DragNDropFieldContent,
       locale: localeProp,
       disabled,
@@ -39,7 +39,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
 
     const onClickRef = useMutableRef(onClick);
 
-    const locale = withdefaultLocale(localeProp);
+    const locale = withDefaultLocale(localeProp);
 
     const {
       getRootProps,
@@ -52,7 +52,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
       accept,
       maxSize: maxSize || undefined,
       minSize: minSize || undefined,
-      maxFiles: maxFiles || undefined,
+      // maxFiles: maxFiles || undefined,
       multiple,
       disabled,
       onDropAccepted,
@@ -81,7 +81,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
           accept,
           maxSize,
           minSize,
-          maxFiles,
+          // maxFiles,
           multiple,
           openFileDialog: open,
           locale,

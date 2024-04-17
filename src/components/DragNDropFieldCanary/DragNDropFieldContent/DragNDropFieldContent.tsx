@@ -3,7 +3,7 @@ import './DragNDropFieldContent.css';
 import { IconAttach } from '@consta/icons/IconAttach';
 import React from 'react';
 
-import { cn } from '##/utils/bem';
+import { cnCanary } from '##/utils/bem';
 
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
@@ -11,7 +11,7 @@ import { DragNDropFieldChildrenRenderProp } from '../DragNDropFieldCanary';
 import { getText } from '../locale';
 import { formatFileRequirements } from './formatFileRequirements';
 
-const cnDragNDropFieldContent = cn('DragNDropFieldContent');
+const cnDragNDropFieldContent = cnCanary('DragNDropFieldContent');
 
 export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
   accept,
@@ -28,7 +28,7 @@ export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
 
   return isDragActive ? (
     <Text view="secondary" size="s" align="center" lineHeight="m">
-      {getText(locale['drag-active-message'], {})}
+      {getText(locale['drag-active-message'])}
     </Text>
   ) : (
     <>

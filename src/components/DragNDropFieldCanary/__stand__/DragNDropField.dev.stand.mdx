@@ -1,0 +1,545 @@
+import {
+  DragNDropFieldExampleChildren,
+  DragNDropFieldExampleRenderProps,
+  DragNDropFieldExampleEmpty,
+} from './examples/DragNDropFieldExampleChildren/DragNDropFieldExampleChildren';
+import {
+  DragNDropFieldExampleMultiple,
+  DragNDropFieldExampleSingle,
+} from './examples/DragNDropFieldExampleMultiple/DragNDropFieldExampleMultiple';
+import {
+  DragNDropFieldExampleAcceptImage,
+  DragNDropFieldExampleAcceptDoc,
+  DragNDropFieldExampleAcceptDocAndImage,
+} from './examples/DragNDropFieldExampleAccept/DragNDropFieldExampleAccept';
+import { DragNDropFieldExampleMaxSize } from './examples/DragNDropFieldExampleMaxSize/DragNDropFieldExampleMaxSize';
+import {
+  DragNDropFieldExampleOnDropAccepted,
+  DragNDropFieldExampleOnDropAcceptedWithInformer,
+} from './examples/DragNDropFieldExampleOnDropAccepted/DragNDropFieldExampleOnDropAccepted';
+
+import { DragNDropFieldExampleOnDropRejected } from './examples/DragNDropFieldExampleOnDropRejected/DragNDropFieldExampleOnDropRejected';
+import { DragNDropFieldExampleErrorMessages } from './examples/DragNDropFieldExampleErrorMessages/DragNDropFieldExampleErrorMessages';
+import { DragNDropFieldExampleInformer } from './examples/DragNDropFieldExampleInformer/DragNDropFieldExampleInformer';
+
+DragNDropFieldExampleInformer
+
+## Содержимое
+
+`DragNDropField` — компонент-контейнер. Всё, что вы добавите в него,
+пользователь увидит внутри рамки для загрузки файлов.
+
+<DragNDropFieldExampleChildren />
+
+```tsx
+<DragNDropField>
+  <Text>Здесь просто текст</Text>
+</DragNDropField>
+```
+
+<DragNDropFieldExampleRenderProps />
+
+```tsx
+<DragNDropField>
+  {({ openFileDialog }) => (
+    <>
+      <Text>
+        Пример с Render Props, открывает окно для выбора файла из дочернего
+        блока
+      </Text>
+      <br />
+      <Button onClick={openFileDialog} label="Выбрать файл" />
+    </>
+  )}
+</DragNDropField>
+```
+
+Если ничего не добавите, в рамке будет такой текст и кнопка:
+
+<DragNDropFieldExampleEmpty />
+
+## Один или несколько
+
+По умолчанию можно загрузить один файл. Чтобы загрузить несколько, добавьте `multiple`.
+
+<DragNDropFieldExampleMultiple />
+
+```tsx
+<DragNDropField multiple>
+  <Text>Сюда можно перетащить много файлов за раз</Text>
+</DragNDropField>
+```
+
+<DragNDropFieldExampleSingle />
+
+```tsx
+<DragNDropField multiple={false}>
+  <Text>Сюда можно перетащить только один файл</Text>
+</DragNDropField>
+```
+
+Если пользователь попробует перетащить несколько файлов, компонент вернет массив отказов типа FileRejection. Обработать событие можно с помощью onDropRejected.
+Попробуйте перетащить несколько файлов в компонент выше и увидите Alert с ошибкой.
+
+## Типы файлов
+
+Вы можете ограничить типы файлов, за это отвечает свойство `accept`, представляющее собой объект с ключами [типа MIME](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) и массивом расширений файлов в качестве значений.
+Смотрите также [спецификацию] (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file)
+
+Например:
+
+```tsx
+accept: { "image/*": [".png", ".gif", ".jpeg", ".jpg"], }
+```
+
+<DragNDropFieldExampleAcceptImage />
+
+```tsx
+<DragNDropField
+  accept={{ 'image/*': [] }}
+  onDropAccepted={(files) => console.log(files)}
+  onDropRejected={(reject) => {
+    alert(getErrorsList(reject, {}, defaultLocale).join('; '));
+  }}
+>
+  <Text>Сюда можно перетаскивать только картинки, зато любые (ну почти)</Text>
+  <Text view="ghost" font="mono">
+    {`{ 'image/*': [] }`}
+  </Text>
+</DragNDropField>
+```
+
+<DragNDropFieldExampleAcceptDoc />
+
+```tsx
+<DragNDropField
+  accept={{ 'application/*': ['.doc', '.docx'] }}
+  onDropAccepted={(files) => console.log(files)}
+  onDropRejected={(reject) => {
+    alert(getErrorsList(reject, {}, defaultLocale).join('; '));
+  }}
+>
+  <Text>Сюда можно перетаскивать только DOC и DOCX</Text>
+  <Text view="ghost" font="mono">
+    {`{ 'application/*': ['.doc', '.docx'] }`}
+  </Text>
+</DragNDropField>
+```
+
+<DragNDropFieldExampleAcceptDocAndImage />
+
+```tsx
+<DragNDropField
+  accept={{
+    'application/*': ['.doc', '.docx'],
+    'image/*': ['.png', '.gif', '.jpeg', '.jpg'],
+  }}
+  onDropAccepted={(files) => console.log(files)}
+  onDropRejected={(reject) => {
+    alert(getErrorsList(reject, {}, defaultLocale).join('; '));
+  }}
+>
+  <Text view="primary">
+    Сюда можно перетаскивать документы (DOC, DOCX) или изображения (PNG, GIF и
+    JPEG/JPG)
+  </Text>
+  <Text view="ghost" font="mono">
+    {`{ 'application/*': ['.doc', '.docx'],
+        'image/*': ['.png', '.gif', '.jpeg', '.jpg'], }`}
+  </Text>
+</DragNDropField>
+```
+
+Такое тоже сработает:
+
+```tsx
+accept={{ '*': ['.doc', '.docx', '.png', '.gif', '.jpeg', '.jpg'], }}
+```
+
+Если пользователь попробует загрузить файл другого типа, компонент вернет массив отказов типа `FileRejection`.
+Попробуйте перетащить неподходящий файл в компоненты выше и увидите Alert с ошибкой.
+
+Обратите внимание, что типы MIME не определены однозначно на всех платформах. Так, например, файлы CSV на macOS относятся к text/plain, а в Windows - как application/vnd.ms-excel. В некоторых случаях тип MIME может не быть определен вовсе.
+
+## Размер файла
+
+Вы можете ограничить размер файла, за это отвечает `maxSize` и `minSize`. Укажите размер в байтах.
+
+<DragNDropFieldExampleMaxSize />
+
+```tsx
+<DragNDropField maxSize={1 * 1024 * 1024}>
+  <Text>Сюда можно перетаскивать файлы размером 1 Мб или меньше</Text>
+</DragNDropField>
+```
+
+Если пользователь попробует загрузить файл большего размера, компонент вернет массив отказов типа `FileRejection`.
+Попробуйте перетащить неподходящий файл размером больше 1 Мб в компонент выше и увидите Alert с ошибкой.
+
+## Обработка загрузки файлов
+
+Обработать загруженные файлы можно с помощью `onDropAccepted`. Все файлы, удовлетворяющие условиям, будут собраны в масив объектов типа [`File`] (https://developer.mozilla.org/en-US/docs/Web/API/File)
+
+Например, показать название и иконку.
+
+<DragNDropFieldExampleOnDropAccepted />
+
+```tsx
+export function MyComponent() {
+  const [files, setFiles] = React.useState<File[]>([]);
+  return (
+    <>
+      <DragNDropField multiple onDropAccepted={setFiles}>
+        <Text>Перетяните файлы сюда</Text>
+      </DragNDropField>
+      {files.map((file) => (
+        <Attachment
+          key={file.name}
+          fileName={file.name}
+          fileExtension={file.name.match(/\.(?!.*\.)(\w*)/)?.[1]}
+          fileDescription={file.type}
+        />
+      ))}
+    </>
+  );
+}
+```
+
+Кроме того, можно использовать компонент `DragNDropFieldInformer` (TODO сделать якорь), чтобы выводить сообщение о загрузке и лоадер.
+
+<DragNDropFieldExampleOnDropAcceptedWithInformer />
+
+```tsx
+export function MyComponent() {
+  const [files, setFiles] = useState<File[]>([]);
+
+  return (
+    <div>
+      <DragNDropField multiple onDropAccepted={setFiles}>
+        <Text> Перетяните файлы сюда </Text>
+      </DragNDropField>
+      <DragNDropFieldInformer
+        status="default"
+        icon={IconCheck}
+        loading={loading}
+        text={loading ? 'Загрузка...' : `Загружено файлов: ${files.length}`}
+      />
+      <div>
+        {files.map((file, index) => (
+          <Attachment
+            key={index}
+            fileExtension={file.name.match(/\.(?!.*\.)(\w*)/)?.[1]}
+            fileName={file.name}
+            fileDescription={file.type}
+            withPictogram
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+## Обработка ошибок
+
+Если файлы, которые загружает пользователь, не подходят под ограничения, компонент вернет массив отказов типа `FileRejection`, который можно обработать любым удобным способом с помощью `onDropRejected`.
+Другие ошибки компонента можно обработать с помощью `onError`.
+
+Попробуйте перетащить не картинки в компонент ниже, и увидите ошибку в информере. А если перетащите картинки, увидите альтернативный способ представления файлов. `DragNDropField` может быть гибко кастомизирован под ваш дизайн.
+
+<DragNDropFieldExampleOnDropRejected />
+
+```tsx
+export function MyComponent() {
+  const [filesDropped, setFilesDropped] = useState<File[]>([]);
+  const [fileRejections, setFileRejections] = useState<FileRejection[]>([]);
+  const [otherError, setOtherError] = useState<Error>();
+
+  let status: DragNDropFieldInformerPropStatus = 'default';
+  if (otherError) {
+    status = 'alert';
+  } else {
+    status = fileRejections.length > 0 ? 'warning' : 'default';
+  }
+
+  let text: string;
+  switch (status) {
+    case 'default':
+      text = `Картинок загружено: ${filesDropped.length}`;
+      break;
+    case 'alert':
+      text = 'Что-то пошло не так';
+      break;
+    case 'warning':
+      text = getErrorsList(fileRejections).join('; ');
+      break;
+  }
+
+  return (
+    <>
+      <div>
+        {filesDropped.map((file, index) => (
+          <img src={URL.createObjectURL(file)} alt={file.name} key={index} />
+        ))}
+        <DragNDropField
+          multiple
+          accept={{ 'image/*': [] }}
+          onDropAccepted={setFilesDropped}
+          onError={setOtherError}
+          onDropRejected={setFileRejections}
+          title="Перетащите сюда любые картинки"
+        >
+          <IconAdd />
+        </DragNDropField>
+      </div>
+      <DragNDropFieldInformer
+        status={status}
+        icon={status !== 'default' ? IconAlert : IconPhoto}
+        text={text}
+      />
+    </>
+  );
+}
+```
+
+## Генерация сообщений об ошибках
+
+Вы можете генерировать сообщения об ошибках любым удобным способом, основываясь на `FileRejection`, или воспользоваться нашим методом `getErrorsList`.
+Этот метод принимает массив `FileRejection[]` и возвращает массив строк с сообщениями об ошибках.
+
+Кроме того, методу можно передать размеры файлов `sizes?: FileSizes`, если ваш компонент ограничивает минимальный и/или максимальный размер загружаемых фалов. Тогда в сообщениях об ошибке размера будет указано, какой размер нужен.
+
+И методу можно передать объект локализации `locale?: DragNDropFieldPropLocale`, частично или полностью переопределив локализацию по умолчанию. Этот же объект используется для локализации всех текстов в дефолтном наполнении компонента `DragNDropField`, подробнее о его структуре можно прочитать ниже (якорь на локализацию)
+
+##### Пример с переопределением текста ошибки
+
+```tsx
+import {
+  DragNDropField,
+  DragNDropFieldPropLocale,
+  getErrorsList,
+} from '@consta/uikit/DragNDropField';
+
+export const DragNDropFieldExampleErrorMessages = () => {
+  const customLocale: DragNDropFieldPropLocale = {
+    'file-too-large': ({ file }) => `Ой! Похоже ${file.name} слишком большой`,
+  };
+  return (
+    <DragNDropField
+      maxSize={10}
+      onDropAccepted={(files) => console.log(files)}
+      onDropRejected={(reject) => {
+        console.log(reject);
+        alert(
+          getErrorsList(reject, customLocale, {
+            maxSize: 10,
+          }).join('; '),
+        );
+      }}
+    />
+  );
+};
+```
+
+<DragNDropFieldExampleErrorMessages />
+
+## Локализация
+
+Компонент можно локализовать, с помощью свойства `locale: DragNDropFieldPropLocale`, отвечающего за тексты. Есть локализация по умолчанию, ее можно переопределить полностью или частично.
+
+### Параметры locale
+
+'drag-active-message'?: string;
+
+| Свойство              | Тип и значения                | По умолчанию                                                                               | Описание                                                                       |
+| --------------------- | ----------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `call-to-action`      | `LocaleLabel` &#124; `string` | `Перетащите файл сюда или загрузите по кнопке`                                             | Основной текст в окне компонента                                               |
+| `action-button`       | `LocaleLabel` &#124; `string` | `Выбрать файл`                                                                             | Кнопка в окне компонента                                                       |
+| `drag-active-message` | `string`                      | `Перетащите файлы сюда`                                                                    | Текст в окне компонента в момент перетаскивания файлов `(isDragActive===true)` |
+| `file`                | `string`                      | `файл`                                                                                     | Входит в `call-to-action` и `action-button` при `multiple=false`               |
+| `files`               | `string`                      | `файлы`                                                                                    | Входит в `call-to-action` и `action-button` при `multiple=true`                |
+| `fit-files`           | `string`                      | `Подходят файлы {from + размер + единица измерения + before + размер + единица измерения}` | Показывается, если есть ограничения                                            |
+| `from`                | `string`                      | `от`                                                                                       | Показывается, если есть ограничения по размеру, входит в `fit-files`           |
+| `before`              | `string`                      | `до`                                                                                       | Показывается, если есть ограничения по размеру, входит в `fit-files`           |
+
+#### Тексты ошибок
+
+| Свойство            | Тип и значения | По умолчанию                                                                 | Описание                                                      |
+| ------------------- | -------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `file-invalid-type` | `string`       | `{имя файла}: формат файла не подходит ({тип файла})`                        | Ошибка при неподходящем формате файла                         |
+| `file-too-large`    | `string`       | `{имя файла}: файл слишком большой (максимум {размер + единица измерения})`  | Ошибка, если файл больше `max`                                |
+| `file-too-small`    | `string`       | `{имя файла}: файл слишком маленький (минимум {размер + единица измерения})` | Ошибка, если файл меньше `min`                                |
+| `too-many-files`    | `string`       | `Вы перетащили несколько файлов. Выберите один, пожалуйста`                  | Ошибка, если перетащили несколько файлов при `multiple=false` |
+| `general-error`     | `string`       | `{имя файла}: не получилось добавить файл`                                   | Общая ошибка, если файл не загрузился по какой-то причине     |
+
+#### Тексты для единиц измерения
+
+| Свойство   | Тип и значения | По умолчанию |
+| ---------- | -------------- | ------------ |
+| `gigabyte` | `string`       | `Гб`         |
+| `megabyte` | `string`       | `Мб`         |
+| `kilobyte` | `string`       | `Кб`         |
+| `byte`     | `string`       | `байт`       |
+
+## Информер
+
+Компонент `DragNDropFieldInformer` полезен для информирования пользователя о статусе загрузки, вывода ошибок, управления загрузкой.
+
+Свойство `status` отвечает за внешний вид информера: default, alert или warning.
+
+С помощью свойства `icon` можно добавить иконку — любую из [библиотеки иконок](##LIBS.LIB/lib:icons).
+
+Чтобы показать, что файл загружается, используйте свойство `loading`. Тогда вместо иконки файла пользователь увидит прелоадер.
+
+Свойство `text` отвечает за выводимый в основной части информера текст, принимает строку.
+
+Свойства `withButton`, `buttonIcon`, `buttonLabel` и `onButtonClick` отвечают за наличие, внешний вид и поведение кнопки в правой части информера. Обратите внимание, что содержимым кнопки может быть только иконка, текстовое пояснение, если оно необходимо, помещайте в `buttonLabel`, оно буде всплывать при наведении.
+
+```tsx
+<DragNDropFieldInformer status="default" text="Ничего не происходит" />
+
+<DragNDropFieldInformer
+  status="default"
+  icon={IconCancel}
+  text={isLoading ? 'Загрузка...' : 'Загрузка остановлена'}
+  loading={isLoading}
+  withButton
+  buttonIcon={isLoading ? IconClose : IconRevert}
+  buttonLabel={isLoading ? 'Стоп' : 'Заново'}
+  onButtonClick={() => setIsLoading(!isLoading)}
+/>
+
+<DragNDropFieldInformer
+  status="alert"
+  icon={IconAlert}
+  text="Что-то пошло не так"
+/>
+
+<DragNDropFieldInformer
+  status="warning"
+  icon={IconAlert}
+  text="Есть проблемы, нажми на кнопку, чтобы узнать подробнее"
+  withButton
+  buttonIcon={IconInfo}
+  buttonLabel="Подробнее"
+  onButtonClick={() => alert('Здесь список ошибок')}
+/>
+```
+
+<DragNDropFieldExampleInformer />
+
+Свойства `DragNDropFieldInformer`
+
+| Свойство         | Тип или варианты значения           | По умолчанию | Описание                                                                                                             |
+| ---------------- | ----------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `status?`        | `'default'`, `'alert'`, `'warning'` | `'default'`  | Статус информера                                                                                                     |
+| `icon?`          | `IconComponent`                     | -            | Иконка слева                                                                                                         |
+| `loading?`       | `boolean` &#124; `number`           | `false`      | Прелоадер загрузки, числовое значение покажет степень загрузки, значение `true` заставит спинер крутиться бесконечно |
+| `text?`          | `string`                            | -            | Текст сообщения                                                                                                      |
+| `withButton?`    | `boolean`                           | `false`      | Есть ли кнопка справа                                                                                                |
+| `buttonIcon?`    | `IconComponent`                     | -            | Иконка на кнопке                                                                                                     |
+| `buttonLabel?`   | `string`                            | -            | Текст на всплывающей подсказке                                                                                       |
+| `onButtonClick?` | `() => void`                        | -            | Обработчик нажатия на кнопку                                                                                         |
+
+## Импорт
+
+```tsx
+import {
+  DragNDropField,
+  DragNDropFieldInformer,
+  getErrorsList,
+} from '@consta/uikit/DragNDropFieldCanary';
+```
+
+## Свойства
+
+```tsx
+export type DragNDropFieldProps = PropsWithHTMLAttributes<
+  {
+    accept?: Accept;
+    maxSize?: number;
+    minSize?: number;
+    multiple?: boolean;
+    disabled?: boolean;
+    children?: React.ReactNode | DragNDropFieldChildrenRenderProp;
+    locale?: DragNDropFieldPropLocale;
+    onDropAccepted?: <T extends File>(files: T[]) => void;
+    onDropRejected?: (
+      fileRejections: FileRejection[],
+      event: DropEvent,
+    ) => void;
+    onError?: (err: Error) => void;
+  },
+  HTMLDivElement
+>;
+
+export type FileSizes = {
+  minSize?: number;
+  maxSize?: number;
+};
+
+export type DragNDropFieldPropLocale = Locale;
+
+export type LocaleError =
+  | string
+  | ((props: { file: File; sizes?: FileSizes }) => string);
+
+export type LocaleLabel = string | ((props: { fileText: string }) => string);
+
+export type Locale = {
+  'file-invalid-type'?: LocaleError;
+  'file-too-large'?: LocaleError;
+  'file-too-small'?: LocaleError;
+  'too-many-files'?: string;
+  'general-error'?: string;
+  'fit-files'?: string;
+  'file'?: string;
+  'files'?: string;
+  'before'?: string;
+  'from'?: string;
+  'gigabyte'?: string;
+  'megabyte'?: string;
+  'kilobyte'?: string;
+  'byte'?: string;
+  'call-to-action'?: LocaleLabel;
+  'action-button'?: LocaleLabel;
+  'drag-active-message'?: string;
+};
+
+export const dragNDropFieldInformerPropStatus = [
+  'default',
+  'alert',
+  'warning',
+] as const;
+
+export type DragNDropFieldInformerPropStatus =
+  typeof dragNDropFieldInformerPropStatus[number];
+
+export type DragNDropFieldInformerProps = {
+  status?: DragNDropFieldInformerPropStatus;
+  icon?: IconComponent;
+  loading?: boolean | number;
+  text?: string;
+  withButton?: boolean;
+  buttonIcon?: IconComponent;
+  buttonLabel?: string;
+  onButtonClick?: () => void;
+};
+```
+
+Свойства `DragNDropField`
+
+| Свойство                                        | Тип                                                                                   | По умолчанию | Описание                                                                                               |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------ |
+| [`accept?`](#типы-файлов)                       | `Accept`                                                                              | -            | Список разрешённых типов файлов                                                                        |
+| [`maxSize?`](#размер-файла)                     | `number`                                                                              | -            | Максимальный размер файла в байтах                                                                     |
+| [`minSize?`](#размер-файла)                     | `number`                                                                              | -            | Минимальный размер файла в байтах                                                                      |
+| [`multiple?`](#один-или-несколько)              | `boolean`                                                                             | `false`      | Можно ли выбирать сразу несколько файлов                                                               |
+| `disabled?`                                     | `boolean`                                                                             | -            | Отключение поля                                                                                        |
+| [`children?`](#содержимое)                      | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                                      |
+| [`locale?`](#локализация)                       | `Locale`                                                                              | -            | Локализация                                                                                            |
+| [`onDropAccepted?`](#обработка-загрузки-файлов) | `(files: File[]) => void`                                                             | -            | Обработчик события загрузки файлов (если ни один файл не прошел по условиям, событие вызвано не будет) |
+| [`onDropRejected?`](#обработка-ошибок)          | `(fileRejections: FileRejection[], event: DropEvent) => void`                         | -            | Обработчик события отказа файлов (если ни один файл не был отвергнут, событие вызвано не будет)        |
+| [`onError?`](#обработка-ошибок)                 | `(err: Error) => void`                                                                | -            | Обработчик других ошибок                                                                               |
+| `ref?`                                          | `React.Ref<HTMLDivElement>`                                                           | -            | Ссылка на корневой DOM-элемент компонента                                                              |
+| `className?`                                    | `string`                                                                              | -            | Дополнительные CSS-классы для компонента                                                               |
