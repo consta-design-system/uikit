@@ -1,6 +1,6 @@
-import { Locale } from './locale';
+import { DragNDropFieldPropLocale } from './types';
 
-const getUnits = (locale: Required<Locale>) => {
+const getUnits = (locale: Required<DragNDropFieldPropLocale>) => {
   return [
     { value: 1024 * 1024 * 1024, name: locale.gigabyte },
     { value: 1024 * 1024, name: locale.megabyte },
@@ -14,7 +14,7 @@ const floorToDecimals = (num: number, decimals: number): number =>
 
 export const formatFileSize = (
   sizeInBytes: number,
-  locale: Required<Locale>,
+  locale: Required<DragNDropFieldPropLocale>,
 ): string | undefined => {
   const units = getUnits(locale);
   for (const step of units) {

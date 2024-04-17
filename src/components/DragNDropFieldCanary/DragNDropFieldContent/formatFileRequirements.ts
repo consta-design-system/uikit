@@ -1,9 +1,12 @@
 import { Accept } from 'react-dropzone';
 
 import { isNotNil } from '../../../utils/type-guards';
-import { DragNDropFieldProps } from '../DragNDropFieldCanary';
+import {
+  DragNDropFieldPropLocale,
+  DragNDropFieldProps,
+} from '../DragNDropFieldCanary';
 import { formatFileSize } from '../formatFileSize';
-import { defaultLocale, Locale } from '../locale';
+import { defaultLocale } from '../locale';
 
 const formatAccept = (accept: Accept | undefined): string | undefined => {
   return (
@@ -17,14 +20,14 @@ const formatAccept = (accept: Accept | undefined): string | undefined => {
 const formatSize = (
   prefix: string,
   size: number | undefined,
-  locale: Required<Locale>,
+  locale: Required<DragNDropFieldPropLocale>,
 ) => (size ? `${prefix} ${formatFileSize(size, locale)}` : undefined);
 
 export const formatFileRequirements = (
   accept: DragNDropFieldProps['accept'],
   maxSize: DragNDropFieldProps['maxSize'],
   minSize: DragNDropFieldProps['minSize'],
-  locale: Required<Locale> = defaultLocale,
+  locale: Required<DragNDropFieldPropLocale> = defaultLocale,
 ): string => {
   return [
     locale['fit-files'],
