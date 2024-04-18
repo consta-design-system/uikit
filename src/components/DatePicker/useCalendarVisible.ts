@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { Flag, useFlag } from '##/hooks/useFlag';
 import { KeyHandlers, useKeysRef } from '##/hooks/useKeysRef';
@@ -30,7 +30,7 @@ const useFlagWithDisabled = (initial = false, disabled?: boolean): Flag => {
       toggle: () => {
         !disabled && setState.toggle();
       },
-      set: (action: SetStateAction<boolean>) => {
+      set: (action) => {
         !disabled && setState.set(action);
       },
     },
