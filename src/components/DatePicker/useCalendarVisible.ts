@@ -101,15 +101,11 @@ export const useCalendarVisible = (
       isFirstRender.current = false;
       return;
     }
-
     !disabled && onDropdownOpen?.(calendarVisible);
   }, [calendarVisible]);
 
   useEffect(() => {
-    const dropdownOpenStrict = dropdownOpen ?? false;
-    !disabled &&
-      dropdownOpenStrict !== calendarVisible &&
-      setCalendarVisible.set(dropdownOpenStrict);
+    !disabled && setCalendarVisible.set(dropdownOpen ?? false);
   }, [dropdownOpen]);
 
   return [calendarVisible, setCalendarVisible];
