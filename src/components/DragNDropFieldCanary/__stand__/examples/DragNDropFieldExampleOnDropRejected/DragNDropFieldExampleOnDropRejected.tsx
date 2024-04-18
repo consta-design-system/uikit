@@ -25,6 +25,12 @@ export const DragNDropFieldExampleOnDropRejected = () => {
   const [fileRejections, setFileRejections] = useState<FileRejection[]>([]);
   const [otherError, setOtherError] = useState<Error>();
 
+  const handleDrop = (acceptedFiles: File[], rejections: FileRejection[]) => {
+    const files = [...filesDropped, ...acceptedFiles];
+    setFilesDropped(files);
+    setFileRejections(rejections);
+  };
+
   let status: DragNDropFieldInformerPropStatus = 'default';
   if (otherError) {
     status = 'alert';
@@ -62,9 +68,8 @@ export const DragNDropFieldExampleOnDropRejected = () => {
           <DragNDropField
             multiple
             accept={{ 'image/*': [] }}
-            onDropAccepted={setFilesDropped}
             onError={setOtherError}
-            onDropRejected={setFileRejections}
+            onDrop={handleDrop}
             className={cnDragNDropFieldExampleOnDropRejected('DroppedItem')}
             title="Перетащите сюда любые картинки"
           >
@@ -88,54 +93,3 @@ export const DragNDropFieldExampleOnDropRejected = () => {
     </Example>
   );
 };
-
-export function MyComponent() {
-  const [filesDropped, setFilesDropped] = useState<File[]>([]);
-  const [fileRejections, setFileRejections] = useState<FileRejection[]>([]);
-  const [otherError, setOtherError] = useState<Error>();
-
-  let status: DragNDropFieldInformerPropStatus = 'default';
-  if (otherError) {
-    status = 'alert';
-  } else {
-    status = fileRejections.length > 0 ? 'warning' : 'default';
-  }
-
-  let text: string;
-  switch (status) {
-    case 'default':
-      text = `Картинок загружено: ${filesDropped.length}`;
-      break;
-    case 'alert':
-      text = 'Что-то пошло не так';
-      break;
-    case 'warning':
-      text = getErrorsList(fileRejections).join('; ');
-      break;
-  }
-
-  return (
-    <>
-      <div>
-        {filesDropped.map((file, index) => (
-          <img src={URL.createObjectURL(file)} alt={file.name} key={index} />
-        ))}
-        <DragNDropField
-          multiple
-          accept={{ 'image/*': [] }}
-          onDropAccepted={setFilesDropped}
-          onError={setOtherError}
-          onDropRejected={setFileRejections}
-          title="Перетащите сюда любые картинки"
-        >
-          <IconAdd />
-        </DragNDropField>
-      </div>
-      <DragNDropFieldInformer
-        status={status}
-        icon={status !== 'default' ? IconAlert : IconPhoto}
-        text={text}
-      />
-    </>
-  );
-}

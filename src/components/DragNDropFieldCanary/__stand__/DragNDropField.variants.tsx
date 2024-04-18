@@ -5,7 +5,7 @@ import { IconClose } from '@consta/icons/IconClose';
 import { IconRevert } from '@consta/icons/IconRevert';
 import { IconTrash } from '@consta/icons/IconTrash';
 import { useBoolean, useNumber } from '@consta/stand';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Accept, FileRejection } from 'react-dropzone';
 
 import { Attachment } from '##/components/Attachment';
@@ -32,10 +32,14 @@ const Variants = () => {
   const withCustomChildren = useBoolean('С кастомным контентом', false);
   const disabled = useBoolean('disabled', false);
   const multiple = useBoolean('multiple', true);
-  // const maxFiles = useNumber ('maxFiles', 2, multiple)
+
   const accept: Accept = {
-    '*': ['.png', '.gif', '.jpeg', '.jpg', '.lrcat', 'application/pdf'],
+    'application/msword': ['.doc', '.docx'],
+    'image/png': ['.png'],
+    'image/jpeg': ['.jpeg', '.jpg'],
+    'image/gif': ['.gif'],
   };
+
   const maxSize = useNumber('maxSize', 0);
   const minSize = useNumber('minSize', 0);
   const withInformer = useBoolean('withInformer', true);
@@ -52,10 +56,18 @@ const Variants = () => {
   const [otherError, setOtherError] = useState<Error>();
   const locale = withDefaultLocale();
 
-  const handleAccept = useCallback((filesAccepted: File[]) => {
-    const files = [...filesDropped, ...filesAccepted];
+  const handleDrop = (acceptedFiles: File[], rejections: FileRejection[]) => {
+    const files = [...filesDropped, ...acceptedFiles];
     setFilesDropped(files);
-  }, []);
+    setFileRejections(rejections);
+  };
+
+  const handleReset = () => {
+    setFilesDropped([]);
+    setFileRejections([]);
+
+    setOtherError(undefined);
+  };
 
   let status: DragNDropFieldInformerPropStatus = 'default';
   if (otherError) {
@@ -91,14 +103,12 @@ const Variants = () => {
       <DragNDropField
         ref={ref}
         multiple={multiple}
-        // maxFiles={maxFiles}
         accept={accept}
         maxSize={maxSize}
         minSize={minSize}
         disabled={disabled}
         onError={setOtherError}
-        onDropRejected={setFileRejections}
-        onDropAccepted={handleAccept}
+        onDrop={handleDrop}
       >
         {withCustomChildren
           ? ({ openFileDialog }) => (
@@ -131,7 +141,8 @@ const Variants = () => {
           text={text}
           withButton={informerWithButton}
           buttonIcon={informerButtonIconMap[status]}
-          buttonLabel="Нажми меня"
+          buttonLabel="Очистить"
+          onButtonClick={handleReset}
         />
       )}
       <div className={cnDragNDropFieldVariants('AttachmentList')}>

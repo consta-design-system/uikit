@@ -18,16 +18,20 @@ import {
   DragNDropFieldExampleOnDropAcceptedWithInformer,
 } from './examples/DragNDropFieldExampleOnDropAccepted/DragNDropFieldExampleOnDropAccepted';
 
+import {
+  DragNDropFieldExampleCallbackOnDrop,
+  DragNDropFieldExampleCallbackOthers,
+} from './examples/DragNDropFieldExampleCallback/DragNDropFieldExampleCallback';
+
 import { DragNDropFieldExampleOnDropRejected } from './examples/DragNDropFieldExampleOnDropRejected/DragNDropFieldExampleOnDropRejected';
 import { DragNDropFieldExampleErrorMessages } from './examples/DragNDropFieldExampleErrorMessages/DragNDropFieldExampleErrorMessages';
 import { DragNDropFieldExampleInformer } from './examples/DragNDropFieldExampleInformer/DragNDropFieldExampleInformer';
 
-DragNDropFieldExampleInformer
+`DragNDropField` — область для загрузки файлов путем перетаскивания или выбора из диалогового окна.
 
 ## Содержимое
 
-`DragNDropField` — компонент-контейнер. Всё, что вы добавите в него,
-пользователь увидит внутри рамки для загрузки файлов.
+Компонент является контейнером: всё, что вы добавите в него, пользователь увидит внутри рамки для загрузки файлов.
 
 <DragNDropFieldExampleChildren />
 
@@ -54,9 +58,15 @@ DragNDropFieldExampleInformer
 </DragNDropField>
 ```
 
-Если ничего не добавите, в рамке будет такой текст и кнопка:
+Если оставить компонент пустым, в рамке будет содержимое по умолчанию (текст и кнопка):
 
 <DragNDropFieldExampleEmpty />
+
+```tsx
+export const DragNDropFieldExampleEmpty = () => (
+  <DragNDropField onDropAccepted={(files) => console.log(files)} />
+);
+```
 
 ## Один или несколько
 
@@ -79,17 +89,22 @@ DragNDropFieldExampleInformer
 ```
 
 Если пользователь попробует перетащить несколько файлов, компонент вернет массив отказов типа FileRejection. Обработать событие можно с помощью onDropRejected.
+
 Попробуйте перетащить несколько файлов в компонент выше и увидите Alert с ошибкой.
 
 ## Типы файлов
 
 Вы можете ограничить типы файлов, за это отвечает свойство `accept`, представляющее собой объект с ключами [типа MIME](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) и массивом расширений файлов в качестве значений.
-Смотрите также [спецификацию] (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file)
+Смотрите также [спецификацию](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file)
 
 Например:
 
 ```tsx
-accept: { "image/*": [".png", ".gif", ".jpeg", ".jpg"], }
+accept={{
+        'image/png': ['.png'],
+        'image/jpeg': ['.jpeg', '.jpg'],
+        'image/gif': ['.gif'],
+      }}
 ```
 
 <DragNDropFieldExampleAcceptImage />
@@ -113,7 +128,7 @@ accept: { "image/*": [".png", ".gif", ".jpeg", ".jpg"], }
 
 ```tsx
 <DragNDropField
-  accept={{ 'application/*': ['.doc', '.docx'] }}
+  accept={{ 'application/msword': ['.doc', '.docx'] }}
   onDropAccepted={(files) => console.log(files)}
   onDropRejected={(reject) => {
     alert(getErrorsList(reject, {}, defaultLocale).join('; '));
@@ -121,7 +136,7 @@ accept: { "image/*": [".png", ".gif", ".jpeg", ".jpg"], }
 >
   <Text>Сюда можно перетаскивать только DOC и DOCX</Text>
   <Text view="ghost" font="mono">
-    {`{ 'application/*': ['.doc', '.docx'] }`}
+    {`{ 'application/msword': ['.doc', '.docx'] }`}
   </Text>
 </DragNDropField>
 ```
@@ -131,8 +146,10 @@ accept: { "image/*": [".png", ".gif", ".jpeg", ".jpg"], }
 ```tsx
 <DragNDropField
   accept={{
-    'application/*': ['.doc', '.docx'],
-    'image/*': ['.png', '.gif', '.jpeg', '.jpg'],
+    'application/msword': ['.doc', '.docx'],
+    'image/png': ['.png'],
+    'image/jpeg': ['.jpeg', '.jpg'],
+    'image/gif': ['.gif'],
   }}
   onDropAccepted={(files) => console.log(files)}
   onDropRejected={(reject) => {
@@ -144,19 +161,16 @@ accept: { "image/*": [".png", ".gif", ".jpeg", ".jpg"], }
     JPEG/JPG)
   </Text>
   <Text view="ghost" font="mono">
-    {`{ 'application/*': ['.doc', '.docx'],
-        'image/*': ['.png', '.gif', '.jpeg', '.jpg'], }`}
+    {`{ 'application/msword': ['.doc', '.docx'],
+        'image/png': ['.png'],
+        'image/jpeg': ['.jpeg', '.jpg'],
+        'image/gif': ['.gif'],`}
   </Text>
 </DragNDropField>
 ```
 
-Такое тоже сработает:
-
-```tsx
-accept={{ '*': ['.doc', '.docx', '.png', '.gif', '.jpeg', '.jpg'], }}
-```
-
 Если пользователь попробует загрузить файл другого типа, компонент вернет массив отказов типа `FileRejection`.
+
 Попробуйте перетащить неподходящий файл в компоненты выше и увидите Alert с ошибкой.
 
 Обратите внимание, что типы MIME не определены однозначно на всех платформах. Так, например, файлы CSV на macOS относятся к text/plain, а в Windows - как application/vnd.ms-excel. В некоторых случаях тип MIME может не быть определен вовсе.
@@ -174,11 +188,86 @@ accept={{ '*': ['.doc', '.docx', '.png', '.gif', '.jpeg', '.jpg'], }}
 ```
 
 Если пользователь попробует загрузить файл большего размера, компонент вернет массив отказов типа `FileRejection`.
+
 Попробуйте перетащить неподходящий файл размером больше 1 Мб в компонент выше и увидите Alert с ошибкой.
+
+## Колбеки
+
+В компонент можно передать четыре колбека для обработки загруженных файлов и ошибок:
+
+1. onDrop - обработчик события дропа. Файлы принимаются или отвергаются, основываясь на свойствах `accept`, `multiple`, `minSize` и `maxSize`.
+   Заметьте, что колбек будет вызван независимо от того, были файлы приняты или отвергнуты.
+   Если необходимо реагировать на специфический сценарий, используйте `onDropAccepted` или `onDropRejected`.
+
+```tsx
+onDrop?: <T extends File>(
+  acceptedFiles: T[],
+  fileRejections: FileRejection[],
+  event: DropEvent,
+) => void;
+```
+
+<DragNDropFieldExampleCallbackOnDrop />
+
+```tsx
+<DragNDropField
+  accept={{ 'application/msword': ['.doc', '.docx'] }}
+  multiple
+  onDrop={(filesAccepted, filesRejected) => {
+    console.log(filesAccepted);
+    console.log(filesRejected);
+    alert(
+      `Файлов принято: ${filesAccepted.length}. Файлов отвергнуто: ${filesRejected.length} `,
+    );
+  }}
+/>
+```
+
+2. onDropAccepted - вызывается, если хотя бы один файл соответствует всем заданным условиям. Если ни один файл не прошел по условиям, вызван не будет.
+
+```tsx
+onDropAccepted?: <T extends File>(files: T[]) => void;
+```
+
+3. onDropRejected - вызывается, если хотя бы один файл был отвергнут в соответствии с заданными условиями. Если ни один файл не был отвергнут, вызван не будет.
+
+```tsx
+    onDropRejected?: (
+      fileRejections: FileRejection[],
+      event: DropEvent,
+    ) => void;
+```
+
+4. onError - обработчик других ошибок промиссов.
+
+```tsx
+    onError?: (err: Error) => void;
+```
+
+<DragNDropFieldExampleCallbackOthers />
+
+```tsx
+<DragNDropField
+  accept={{ 'application/msword': ['.doc', '.docx'] }}
+  multiple
+  onDropAccepted={(filesAccepted) => {
+    console.log(filesAccepted);
+    alert(`Файлов принято: ${filesAccepted.length}.`);
+  }}
+  onDropRejected={(filesRejected) => {
+    console.log(filesRejected);
+    alert(`Файлов отвергнуто: ${filesRejected.length}.`);
+  }}
+  onError={(error) => {
+    console.log(error);
+    alert(`Ошибка! ${error.message}`);
+  }}
+/>
+```
 
 ## Обработка загрузки файлов
 
-Обработать загруженные файлы можно с помощью `onDropAccepted`. Все файлы, удовлетворяющие условиям, будут собраны в масив объектов типа [`File`] (https://developer.mozilla.org/en-US/docs/Web/API/File)
+Обработать загруженные файлы можно с помощью `onDropAccepted`. Все файлы, удовлетворяющие условиям, будут собраны в масив объектов типа [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File)
 
 Например, показать название и иконку.
 
@@ -247,6 +336,8 @@ export function MyComponent() {
 
 Попробуйте перетащить не картинки в компонент ниже, и увидите ошибку в информере. А если перетащите картинки, увидите альтернативный способ представления файлов. `DragNDropField` может быть гибко кастомизирован под ваш дизайн.
 
+В этом примере реализован механизм накапливания загруженных файлов. Обратите внимания, что компонент не накапливает файлы сам, только возвращает результаты одного дропа для дальнейшей обработки.
+
 <DragNDropFieldExampleOnDropRejected />
 
 ```tsx
@@ -254,6 +345,12 @@ export function MyComponent() {
   const [filesDropped, setFilesDropped] = useState<File[]>([]);
   const [fileRejections, setFileRejections] = useState<FileRejection[]>([]);
   const [otherError, setOtherError] = useState<Error>();
+
+  const handleDrop = (acceptedFiles: File[], rejections: FileRejection[]) => {
+    const files = [...filesDropped, ...acceptedFiles];
+    setFilesDropped(files);
+    setFileRejections(rejections);
+  };
 
   let status: DragNDropFieldInformerPropStatus = 'default';
   if (otherError) {
@@ -284,9 +381,8 @@ export function MyComponent() {
         <DragNDropField
           multiple
           accept={{ 'image/*': [] }}
-          onDropAccepted={setFilesDropped}
+          onDrop={handleDrop}
           onError={setOtherError}
-          onDropRejected={setFileRejections}
           title="Перетащите сюда любые картинки"
         >
           <IconAdd />
@@ -348,8 +444,6 @@ export const DragNDropFieldExampleErrorMessages = () => {
 Компонент можно локализовать, с помощью свойства `locale: DragNDropFieldPropLocale`, отвечающего за тексты. Есть локализация по умолчанию, ее можно переопределить полностью или частично.
 
 ### Параметры locale
-
-'drag-active-message'?: string;
 
 | Свойство              | Тип и значения                | По умолчанию                                                                               | Описание                                                                       |
 | --------------------- | ----------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
@@ -529,17 +623,19 @@ export type DragNDropFieldInformerProps = {
 
 Свойства `DragNDropField`
 
-| Свойство                                        | Тип                                                                                   | По умолчанию | Описание                                                                                               |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------ |
-| [`accept?`](#типы-файлов)                       | `Accept`                                                                              | -            | Список разрешённых типов файлов                                                                        |
-| [`maxSize?`](#размер-файла)                     | `number`                                                                              | -            | Максимальный размер файла в байтах                                                                     |
-| [`minSize?`](#размер-файла)                     | `number`                                                                              | -            | Минимальный размер файла в байтах                                                                      |
-| [`multiple?`](#один-или-несколько)              | `boolean`                                                                             | `false`      | Можно ли выбирать сразу несколько файлов                                                               |
-| `disabled?`                                     | `boolean`                                                                             | -            | Отключение поля                                                                                        |
-| [`children?`](#содержимое)                      | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                                      |
-| [`locale?`](#локализация)                       | `Locale`                                                                              | -            | Локализация                                                                                            |
-| [`onDropAccepted?`](#обработка-загрузки-файлов) | `(files: File[]) => void`                                                             | -            | Обработчик события загрузки файлов (если ни один файл не прошел по условиям, событие вызвано не будет) |
-| [`onDropRejected?`](#обработка-ошибок)          | `(fileRejections: FileRejection[], event: DropEvent) => void`                         | -            | Обработчик события отказа файлов (если ни один файл не был отвергнут, событие вызвано не будет)        |
-| [`onError?`](#обработка-ошибок)                 | `(err: Error) => void`                                                                | -            | Обработчик других ошибок                                                                               |
-| `ref?`                                          | `React.Ref<HTMLDivElement>`                                                           | -            | Ссылка на корневой DOM-элемент компонента                                                              |
-| `className?`                                    | `string`                                                                              | -            | Дополнительные CSS-классы для компонента                                                               |
+| Свойство                                        | Тип                                                                                   | По умолчанию | Описание                                                                                      |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
+| [`accept?`](#типы-файлов)                       | `Accept`                                                                              | -            | Список разрешённых типов файлов                                                               |
+| [`maxSize?`](#размер-файла)                     | `number`                                                                              | -            | Максимальный размер файла в байтах                                                            |
+| [`minSize?`](#размер-файла)                     | `number`                                                                              | -            | Минимальный размер файла в байтах                                                             |
+| [`multiple?`](#один-или-несколько)              | `boolean`                                                                             | `false`      | Можно ли выбирать сразу несколько файлов                                                      |
+| [`maxFiles?`]                                   | `number`                                                                              | -            | Максимальное количество файлов, которые можно загрузить за один раз                           |
+| `disabled?`                                     | `boolean`                                                                             | -            | Отключение поля                                                                               |
+| [`children?`](#содержимое)                      | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | -            | Дочерние элементы                                                                             |
+| [`locale?`](#локализация)                       | `Locale`                                                                              | -            | Локализация                                                                                   |
+| [`onDrop?`](#колбеки)                           | `(acceptedFiles: File[], fileRejections: FileRejection[], event: DropEvent) => void;` | -            | Обработчик события дропа                                                                      |
+| [`onDropAccepted?`](#обработка-загрузки-файлов) | `(files: File[]) => void`                                                             | -            | Обработчик события загрузки файлов (если ни один файл не прошел по условиям, вызван не будет) |
+| [`onDropRejected?`](#обработка-ошибок)          | `(fileRejections: FileRejection[], event: DropEvent) => void`                         | -            | Обработчик события отказа файлов (если ни один файл не был отвергнут, вызван не будет)        |
+| [`onError?`](#обработка-ошибок)                 | `(err: Error) => void`                                                                | -            | Обработчик других ошибок                                                                      |
+| `ref?`                                          | `React.Ref<HTMLDivElement>`                                                           | -            | Ссылка на корневой DOM-элемент компонента                                                     |
+| `className?`                                    | `string`                                                                              | -            | Дополнительные CSS-классы для компонента                                                      |

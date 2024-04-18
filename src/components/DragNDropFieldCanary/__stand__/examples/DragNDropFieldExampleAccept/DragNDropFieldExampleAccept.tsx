@@ -10,7 +10,7 @@ import { Text } from '##/components/Text';
 export const DragNDropFieldExampleAcceptDoc = () => (
   <Example col={1}>
     <DragNDropField
-      accept={{ 'application/*': ['.doc', '.docx'] }}
+      accept={{ 'application/msword': ['.doc', '.docx'] }}
       onDropAccepted={(files) => console.log(files)}
       onDropRejected={(reject) => {
         console.log(reject);
@@ -21,7 +21,7 @@ export const DragNDropFieldExampleAcceptDoc = () => (
         Сюда можно перетаскивать только DOC и DOCX
       </Text>
       <Text view="ghost" font="mono" size="m" lineHeight="m">
-        {`{ 'application/*': ['.doc', '.docx'] }`}
+        {`{ 'application/msword': ['.doc', '.docx'] }`}
       </Text>
     </DragNDropField>
   </Example>
@@ -54,8 +54,10 @@ export const DragNDropFieldExampleAcceptDocAndImage = () => (
   <Example col={1}>
     <DragNDropField
       accept={{
-        'application/*': ['.doc', '.docx'],
-        'image/*': ['.png', '.gif', '.jpeg', '.jpg'],
+        'application/msword': ['.doc', '.docx'],
+        'image/png': ['.png'],
+        'image/jpeg': ['.jpeg', '.jpg'],
+        'image/gif': ['.gif'],
       }}
       onDropAccepted={(files) => console.log(files)}
       onDropRejected={(reject) => {
@@ -70,10 +72,16 @@ export const DragNDropFieldExampleAcceptDocAndImage = () => (
         или изображения (PNG, GIF и JPEG/JPG)
       </Text>
       <Text view="ghost" font="mono" size="m" lineHeight="m">
-        {`{ 'application/*': ['.doc', '.docx'],`}
+        {`{ 'application/msword': ['.doc', '.docx'],`}
       </Text>
       <Text view="ghost" font="mono" size="m" lineHeight="m">
-        {`'image/*': ['.png', '.gif', '.jpeg', '.jpg'], }`}
+        {` 'image/png': ['.png'],`}
+      </Text>
+      <Text view="ghost" font="mono" size="m" lineHeight="m">
+        {`'image/jpeg': ['.jpeg', '.jpg'],`}
+      </Text>
+      <Text view="ghost" font="mono" size="m" lineHeight="m">
+        {` 'image/gif': ['.gif']} `}
       </Text>
     </DragNDropField>
   </Example>

@@ -38,11 +38,16 @@ export type DragNDropFieldProps = PropsWithHTMLAttributes<
     accept?: Accept;
     maxSize?: number;
     minSize?: number;
-    // maxFiles?: number;
+    maxFiles?: number;
     multiple?: boolean;
     disabled?: boolean;
     children?: React.ReactNode | DragNDropFieldChildrenRenderProp;
     locale?: DragNDropFieldPropLocale;
+    onDrop?: <T extends File>(
+      acceptedFiles: T[],
+      fileRejections: FileRejection[],
+      event: DropEvent,
+    ) => void;
     onDropAccepted?: <T extends File>(files: T[]) => void;
     onDropRejected?: (
       fileRejections: FileRejection[],

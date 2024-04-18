@@ -11,8 +11,10 @@ import { defaultLocale } from '../locale';
 const formatAccept = (accept: Accept | undefined): string | undefined => {
   return (
     accept &&
-    Object.values(accept)
-      .map((values) => values.join(', '))
+    Object.entries(accept)
+      .map(([key, values]) => {
+        return values.length > 0 ? values.join(', ') : key;
+      })
       .join(', ')
   );
 };
