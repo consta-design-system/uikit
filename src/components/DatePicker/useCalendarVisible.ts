@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-import { Flag } from '##/hooks/useFlag';
+import { Flag, useFlag } from '##/hooks/useFlag';
 import { KeyHandlers, useKeysRef } from '##/hooks/useKeysRef';
 
 type UseCalendarVisibleParams = {
@@ -14,16 +14,25 @@ type UseFlagReturn = ReturnType<typeof useFlagWithDisabled>;
 type Return = [UseFlagReturn[0], UseFlagReturn[1]];
 
 const useFlagWithDisabled = (initial = false, disabled?: boolean): Flag => {
-  const [state, setState] = useState(initial);
+  const [state, setState] = useFlag(initial);
+
+  useEffect(() => {
+    disabled && setState.off();
+  }, [disabled]);
+
   return [
     state,
     {
       on: () => {
-        !disabled && setState(true);
+        !disabled && setState.on();
       },
-      off: () => setState(false),
-      toggle: () => setState((state) => !disabled && !state),
-      set: setState,
+      off: () => setState.off(),
+      toggle: () => {
+        !disabled && setState.toggle();
+      },
+      set: (action) => {
+        !disabled && setState.set(action);
+      },
     },
   ];
 };
@@ -37,6 +46,7 @@ export const useCalendarVisible = (
     false,
     disabled,
   );
+  const isFirstRender = useRef(true);
 
   const ArrowHandler = (e: KeyboardEvent) => {
     e.preventDefault();
@@ -81,16 +91,22 @@ export const useCalendarVisible = (
   useKeysRef({ ref: endRef, keys, eventHandler, isActive: !disabled });
 
   useEffect(() => {
+    return () => {
+      isFirstRender.current = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     !disabled && onDropdownOpen?.(calendarVisible);
   }, [calendarVisible]);
 
   useEffect(() => {
     !disabled && setCalendarVisible.set(dropdownOpen ?? false);
   }, [dropdownOpen]);
-
-  useEffect(() => {
-    disabled && setCalendarVisible.off();
-  }, [disabled]);
 
   return [calendarVisible, setCalendarVisible];
 };
