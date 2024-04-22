@@ -1,4 +1,5 @@
-const { normalize, dirname, join, relative, resolve } = require('path');
+const { normalize, dirname, relative, resolve } = require('path');
+const { join } = require('./join');
 const {
   readFile,
   writeFile,
