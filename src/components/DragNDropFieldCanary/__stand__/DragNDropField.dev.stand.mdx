@@ -73,14 +73,6 @@ import { DragNDropFieldCanary } from '@consta/uikit/DragNDropFieldCanary';
 | `ref?`                                               | `React.Ref<HTMLDivElement>`                                                           | Ссылка на корневой DOM-элемент компонента                                                     |
 | `className?`                                         | `string`                                                                              | Дополнительные CSS-классы для компонента                                                      |
 
-```tsx
-export const DragNDropFieldExampleEmpty = () => (
-  <DragNDropField onDropAccepted={(files) => console.log(files)} />
-);
-```
-
-<DragNDropFieldExampleEmpty />
-
 # Описание свойств
 
 ## Тип файлов
@@ -99,8 +91,6 @@ accept={{
       }}
 ```
 
-<DragNDropFieldExampleAcceptImage />
-
 ## Размер файла
 
 Чтобы ограничить размер файла, в свойствах `maxSize` и `minSize` укажите размер в байтах.
@@ -113,8 +103,6 @@ accept={{
 </DragNDropField>
 ```
 
-<DragNDropFieldExampleMaxSize />
-
 ## Загрузка одного файла или нескольких
 
 По умолчанию можно загрузить один файл. Чтобы загрузить несколько файлов за раз, добавьте `multiple`.
@@ -126,8 +114,6 @@ accept={{
   <Text>Сюда можно перетащить много файлов</Text>
 </DragNDropField>
 ```
-
-<DragNDropFieldExampleMultiple />
 
 ## Содержимое
 
@@ -149,8 +135,6 @@ accept={{
   )}
 </DragNDropField>
 ```
-
-<DragNDropFieldExampleRenderProps />
 
 ## Локализация
 
