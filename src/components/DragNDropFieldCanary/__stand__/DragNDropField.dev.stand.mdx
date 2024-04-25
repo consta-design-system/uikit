@@ -242,6 +242,29 @@ onDropAccepted?: <T extends File>(files: T[]) => void;
     onError?: (err: Error) => void;
 ```
 
+### Пример
+
+```tsx
+import { DragNDropField } from '@consta/uikit/DragNDropField';
+
+<DragNDropField
+  accept={{ 'application/msword': ['.doc', '.docx'] }}
+  multiple
+  onDropAccepted={(filesAccepted) => {
+    console.log(filesAccepted);
+    alert(`Файлов принято: ${filesAccepted.length}.`);
+  }}
+  onDropRejected={(filesRejected) => {
+    console.log(filesRejected);
+    alert(`Файлов отвергнуто: ${filesRejected.length}.`);
+  }}
+  onError={(error) => {
+    console.log(error);
+    alert(`Ошибка! ${error.message}`);
+  }}
+/>;
+```
+
 ## Генерация сообщений об ошибках
 
 Вы можете генерировать сообщения об ошибках любым удобным способом с помощью `FileRejection` или воспользоваться нашим методом `getErrorsList`.
@@ -251,6 +274,36 @@ onDropAccepted?: <T extends File>(files: T[]) => void;
 
 - размеры файлов `sizes?: FileSizes`, если ваш компонент ограничивает минимальный и/или максимальный размер загружаемых фалов. В сообщениях об ошибке будет указан нужный размер.
 - объект локализации `locale?: DragNDropFieldPropLocale`, частично или полностью переопределив локализацию по умолчанию. Используется для локализации всех текстов в дефолтном наполнении компонента `DragNDropField`. [Подробнее о локализации](#локализация).
+
+Пример:
+
+```tsx
+import {
+  DragNDropField,
+  DragNDropFieldPropLocale,
+  getErrorsList,
+} from '@consta/uikit/DragNDropField';
+
+export const DragNDropFieldExampleErrorMessages = () => {
+  const customLocale: DragNDropFieldPropLocale = {
+    'file-too-large': ({ file }) => `Ой! Похоже ${file.name} слишком большой`,
+  };
+  return (
+    <DragNDropField
+      maxSize={10}
+      onDropAccepted={(files) => console.log(files)}
+      onDropRejected={(reject) => {
+        console.log(reject);
+        alert(
+          getErrorsList(reject, customLocale, {
+            maxSize: 10,
+          }).join('; '),
+        );
+      }}
+    />
+  );
+};
+```
 
 # Информер
 
@@ -266,3 +319,30 @@ onDropAccepted?: <T extends File>(files: T[]) => void;
 | `buttonIcon?`    | `IconComponent`                     | Иконка на кнопке.                                                                                                                                    |
 | `buttonLabel?`   | `string`                            | Текст на всплывающей подсказке.                                                                                                                      |
 | `onButtonClick?` | `() => void`                        | Обработчик нажатия на кнопку.                                                                                                                        |
+
+Пример:
+
+```tsx
+import { DragNDropFieldInformer } from '@consta/uikit/DragNDropField';
+
+<DragNDropFieldInformer
+  status="default"
+  icon={IconCancel}
+  text={isLoading ? 'Загрузка...' : 'Загрузка остановлена'}
+  loading={isLoading}
+  withButton
+  buttonIcon={isLoading ? IconClose : IconRevert}
+  buttonLabel={isLoading ? 'Стоп' : 'Заново'}
+  onButtonClick={() => setIsLoading(!isLoading)}
+/>
+
+<DragNDropFieldInformer
+  status="alert"
+  icon={IconAlert}
+  text="Что-то пошло не так. Нажмите, чтобы узнать подробнее"
+  withButton
+  buttonIcon={IconInfo}
+  buttonLabel="Подробнее"
+  onButtonClick={() => alert('Здесь список ошибок')}
+/>
+```
