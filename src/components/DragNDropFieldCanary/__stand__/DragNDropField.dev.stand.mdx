@@ -31,7 +31,7 @@ import { MdxMenu } from '@consta/stand';
 
 - [Описание свойств](#описание-свойств)
   - [Тип файлов](#тип-файлов)
-  - [Максимальный и минимальный размер](#максимальный-и-минимальный-размер)
+  - [Размер файла](#размер-файла)
   - [Загрузка одного файла или нескольких](#загрузка-одного-файла-или-нескольких)
   - [Содержимое](#содержимое)
   - [Локализация](#локализация)
@@ -48,10 +48,10 @@ import { MdxMenu } from '@consta/stand';
 
 </MdxMenu>
 
-> Чтобы использовать компонент, обновите библиотеку [react-dropzone](https://react-dropzone.js.org/?ref=blog.horizon-ui.com).
+> Чтобы использовать компонент, обновите библиотеку [react-dropzone](https://react-dropzone.js.org/?ref=blog.horizon-ui.com) до версии `^14.2.3`.
 
-```tsx
-import { DragNDropFieldCanary } from '@consta/uikit/DragNDropFieldCanary';
+```ts
+import { DragNDropField } from '@consta/uikit/DragNDropFieldCanary';
 ```
 
 `DragNDropField` — это компонент для загрузки файлов путем перетаскивания их в определенную область или выбора файлов через диалоговое окно.
@@ -61,7 +61,7 @@ import { DragNDropFieldCanary } from '@consta/uikit/DragNDropFieldCanary';
 | [`accept?`](#тип-файлов)                             | `Accept`                                                                              | Список допустимых типов файлов                                                                |
 | [`maxSize?`](#размер-файла)                          | `number`                                                                              | Максимальный размер файла в байтах                                                            |
 | [`minSize?`](#размер-файла)                          | `number`                                                                              | Минимальный размер файла в байтах                                                             |
-| [`multiple?`](#загрузка-одного-файла-или-нескольких) | `boolean`                                                                             | Можно ли выбирать сразу несколько файлов. Значение по умолчанию `false`.                      |
+| [`multiple?`](#загрузка-одного-файла-или-нескольких) | `boolean`                                                                             | Можно ли выбирать сразу несколько файлов. Значение по умолчанию: `false`.                     |
 | `maxFiles?`                                          | `number`                                                                              | Максимальное количество файлов, которые можно загрузить за один раз                           |
 | `disabled?`                                          | `boolean`                                                                             | Отключение поля                                                                               |
 | [`children?`](#содержимое)                           | `React.ReactNode` &#124; `(props: { openFileDialog: () => void }) => React.ReactNode` | Дочерние элементы                                                                             |
@@ -165,12 +165,12 @@ accept={{
 
 ### Тексты для единиц измерения
 
-| Свойство   | Тип      | По умолчанию |
-| ---------- | -------- | ------------ |
-| `gigabyte` | `string` | `Гб`         |
-| `megabyte` | `string` | `Мб`         |
-| `kilobyte` | `string` | `Кб`         |
-| `byte`     | `string` | `байт`       |
+| Свойство | Тип      | По умолчанию |
+| -------- | -------- | ------------ |
+| gigabyte | `string` | `Гб`         |
+| megabyte | `string` | `Мб`         |
+| kilobyte | `string` | `Кб`         |
+| byte     | `string` | `байт`       |
 
 ## Колбеки
 
@@ -212,10 +212,10 @@ onDropAccepted?: <T extends File>(files: T[]) => void;
 Колбек вызывается, если хотя бы один файл был отвергнут в соответствии с заданными условиями. Если файлы, которые загружает пользователь, не подходят под ограничения, компонент вернет массив отказов типа `FileRejection`.
 
 ```tsx
-    onDropRejected?: (
-      fileRejections: FileRejection[],
-      event: DropEvent,
-    ) => void;
+onDropRejected?: (
+  fileRejections: FileRejection[],
+  event: DropEvent,
+) => void;
 ```
 
 ### onError
@@ -223,13 +223,13 @@ onDropAccepted?: <T extends File>(files: T[]) => void;
 Обработчик других ошибок промиссов.
 
 ```tsx
-    onError?: (err: Error) => void;
+onError?: (err: Error) => void;
 ```
 
 ### Пример
 
 ```tsx
-import { DragNDropField } from '@consta/uikit/DragNDropField';
+import { DragNDropField } from '@consta/uikit/DragNDropFieldCanary';
 
 <DragNDropField
   accept={{ 'application/msword': ['.doc', '.docx'] }}
@@ -266,7 +266,7 @@ import {
   DragNDropField,
   DragNDropFieldPropLocale,
   getErrorsList,
-} from '@consta/uikit/DragNDropField';
+} from '@consta/uikit/DragNDropFieldCanary';
 
 export const DragNDropFieldExampleErrorMessages = () => {
   const customLocale: DragNDropFieldPropLocale = {
@@ -293,21 +293,21 @@ export const DragNDropFieldExampleErrorMessages = () => {
 
 Чтобы информировать пользователя о статусе загрузки, выводить ошибки и управлять загрузкой, используйте компонент `DragNDropFieldInformer`.
 
-| Свойство         | Тип                                 | Описание                                                                                                                                             |
-| ---------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `status?`        | `'default'`, `'alert'`, `'warning'` | Статус информера. Значение по умолчанию `default`.                                                                                                   |
-| `icon?`          | `IconComponent`                     | Иконка слева                                                                                                                                         |
-| `loading?`       | `boolean` &#124; `number`           | Прелоадер загрузки, числовое значение покажет степень загрузки, значение `true` заставит спинер крутиться бесконечно. Значение по умолчанию `false`. |
-| `text?`          | `string`                            | Текст сообщения.                                                                                                                                     |
-| `withButton?`    | `boolean`                           | Есть ли кнопка справа. Значение по умолчанию `false`.                                                                                                |
-| `buttonIcon?`    | `IconComponent`                     | Иконка на кнопке.                                                                                                                                    |
-| `buttonLabel?`   | `string`                            | Текст на всплывающей подсказке.                                                                                                                      |
-| `onButtonClick?` | `() => void`                        | Обработчик нажатия на кнопку.                                                                                                                        |
+| Свойство         | Тип                                 | Описание                                                                                                                                              |
+| ---------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `status?`        | `'default'`, `'alert'`, `'warning'` | Статус информера. Значение по умолчанию: `default`.                                                                                                   |
+| `icon?`          | `IconComponent`                     | Иконка слева                                                                                                                                          |
+| `loading?`       | `boolean` &#124; `number`           | Прелоадер загрузки, числовое значение покажет степень загрузки, значение `true` заставит спинер крутиться бесконечно. Значение по умолчанию: `false`. |
+| `text?`          | `string`                            | Текст сообщения.                                                                                                                                      |
+| `withButton?`    | `boolean`                           | Есть ли кнопка справа. Значение по умолчанию: `false`.                                                                                                |
+| `buttonIcon?`    | `IconComponent`                     | Иконка на кнопке.                                                                                                                                     |
+| `buttonLabel?`   | `string`                            | Текст на всплывающей подсказке.                                                                                                                       |
+| `onButtonClick?` | `() => void`                        | Обработчик нажатия на кнопку.                                                                                                                         |
 
 Пример:
 
 ```tsx
-import { DragNDropFieldInformer } from '@consta/uikit/DragNDropField';
+import { DragNDropFieldInformer } from '@consta/uikit/DragNDropFieldCanary';
 
 <DragNDropFieldInformer
   status="default"
