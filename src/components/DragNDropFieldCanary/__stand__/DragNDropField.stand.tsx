@@ -4,7 +4,8 @@ export default createStand({
   title: 'DragNDropField',
   id: 'DragNDropFieldCanary',
   group: 'components',
-  description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
+  description:
+    'Компонент позволяет загружать файлы путем перетаскивания или через диалоговое окно',
   version: '2.1.0',
   status: 'canary',
   sandbox: 'dragndropfield-gst04t',
