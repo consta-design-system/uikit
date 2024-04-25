@@ -11,6 +11,6 @@ export default createStand({
   sandbox: 'dragndropfield-gst04t',
   alias: ['поле', 'ввод', 'файл', 'файлы', 'загрузка', 'выбор'],
   figma:
-    'https://www.figma.com/embed?embed_host=uikit.consta.design&url=https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?node-id=9601%3A151',
+    'https://www.figma.com/file/v9Jkm2GrymD277dIGpRBSH/Consta-UI-Kit?type=design&node-id=32774-0&mode=design',
   order: 10,
 });
