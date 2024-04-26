@@ -25,7 +25,7 @@ const generateReExport = async (src, reexport, ignore, distPath) => {
 
   const components = [];
 
-  const files = await fg(join(src, reexport, '**', '*.ts'), {
+  const files = await fg(join(src, reexport, '**', '*.{ts,tsx}'), {
     ignore,
   });
 
