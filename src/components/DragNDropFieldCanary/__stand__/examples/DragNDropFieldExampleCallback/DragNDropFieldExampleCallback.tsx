@@ -15,15 +15,6 @@ export const DragNDropFieldExampleCallbackOnDrop = () => (
           `Файлов принято: ${filesAccepted.length}. Файлов отвергнуто: ${filesRejected.length} `,
         );
       }}
-    />
-  </Example>
-);
-
-export const DragNDropFieldExampleCallbackOthers = () => (
-  <Example col={1}>
-    <DragNDropField
-      accept={{ 'application/msword': ['.doc', '.docx'] }}
-      multiple
       onDropAccepted={(filesAccepted) => {
         console.log(filesAccepted);
         alert(`Файлов принято: ${filesAccepted.length}.`);

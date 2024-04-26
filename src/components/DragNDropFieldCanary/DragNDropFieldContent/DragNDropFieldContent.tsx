@@ -3,17 +3,17 @@ import './DragNDropFieldContent.css';
 import { IconAttach } from '@consta/icons/IconAttach';
 import React from 'react';
 
+import { Button } from '##/components/Button';
+import { Text } from '##/components/Text';
 import { cnCanary } from '##/utils/bem';
 
-import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
-import { DragNDropFieldChildrenRenderProp } from '../DragNDropFieldCanary';
+import { DragNDropFieldContentProps } from '../DragNDropFieldCanary';
 import { getText } from '../locale';
 import { formatFileRequirements } from './formatFileRequirements';
 
 const cnDragNDropFieldContent = cnCanary('DragNDropFieldContent');
 
-export const DragNDropFieldContent: DragNDropFieldChildrenRenderProp = ({
+export const DragNDropFieldContent: React.FC<DragNDropFieldContentProps> = ({
   accept,
   maxSize,
   minSize,

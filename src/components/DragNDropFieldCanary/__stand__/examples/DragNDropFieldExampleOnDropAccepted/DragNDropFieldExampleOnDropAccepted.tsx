@@ -11,21 +11,19 @@ import {
   DragNDropFieldInformer,
 } from '##/components/DragNDropFieldCanary';
 import { Text } from '##/components/Text';
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 
-const cnDragNDropFieldExampleOnDropAccepted = cnCanary(
-  'DragNDropFieldExampleOnDropFiles',
+const cnDragNDropFieldExampleOnDropAccepted = cn(
+  'DragNDropFieldExampleOnDropAccepted',
 );
 
 export const DragNDropFieldExampleOnDropAccepted = () => {
   const [files, setFiles] = React.useState<File[]>([]);
   return (
     <Example col={1}>
-      <div>
+      <>
         <DragNDropField multiple onDropAccepted={setFiles}>
-          <Text view="primary" size="m" lineHeight="m">
-            Перетяните файлы сюда
-          </Text>
+          <Text>Перетяните файлы сюда</Text>
         </DragNDropField>
         {files.length > 0 && (
           <div
@@ -42,7 +40,7 @@ export const DragNDropFieldExampleOnDropAccepted = () => {
             ))}
           </div>
         )}
-      </div>
+      </>
     </Example>
   );
 };

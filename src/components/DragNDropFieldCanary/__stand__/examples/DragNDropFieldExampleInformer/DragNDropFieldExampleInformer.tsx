@@ -12,7 +12,7 @@ export const DragNDropFieldExampleInformer = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <Example col={1}>
+    <Example col={{ 1: 0, 2: 640 }}>
       <DragNDropFieldInformer status="default" text="Ничего не происходит" />
 
       <DragNDropFieldInformer

@@ -1,33 +1,27 @@
 import './DragNDropField.css';
 
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
 import { useForkRef } from '##/hooks/useForkRef/useForkRef';
 import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
 import { cnCanary } from '##/utils/bem';
-import { isRenderProp } from '##/utils/isRenderProp';
 
-import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldContent';
 import { withDefaultLocale } from './locale';
+import { renderCildren } from './renderCildren';
 import { DragNDropFieldProps } from './types';
 
 const cnDragNDropField = cnCanary('DragNDropField');
 
-export const COMPONENT_NAME = 'DragNDropField' as const;
-
 export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
   (props, ref) => {
-    const dragNDropFieldRef = useRef<HTMLDivElement>(null);
-
     const {
       accept,
       maxSize,
       minSize,
       multiple = false,
       maxFiles,
-      children = DragNDropFieldContent,
+      children,
       locale: localeProp,
       disabled,
       onClick,
@@ -35,8 +29,9 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
       onDropAccepted,
       onDropRejected,
       onError,
+      className,
       ...otherProps
-    } = usePropsHandler(COMPONENT_NAME, props, dragNDropFieldRef);
+    } = props;
 
     const onClickRef = useMutableRef(onClick);
 
@@ -46,7 +41,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
       getRootProps,
       getInputProps,
       rootRef,
-      open,
+      open: openFileDialog,
       isDragActive,
       ...otherStateProps
     } = useDropzone({
@@ -62,41 +57,34 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
       onError,
     });
 
-    const handleRootClick: React.MouseEventHandler<HTMLDivElement> =
-      React.useCallback((e) => {
-        if (e.target !== rootRef.current) {
-          e.stopPropagation();
-        }
-        onClickRef.current?.(e);
-      }, []);
-
-    const rootProps = getRootProps({
-      ...otherProps,
-      className: cnDragNDropField({ active: isDragActive, disabled }, [
-        otherProps.className,
-      ]),
-      onClick: handleRootClick,
-    });
-
-    const content = isRenderProp(children)
-      ? children({
+    return (
+      <div
+        {...getRootProps({
+          ...otherProps,
+          className: cnDragNDropField({ active: isDragActive, disabled }, [
+            className,
+          ]),
+          onClick: useCallback<React.MouseEventHandler<HTMLDivElement>>((e) => {
+            if (e.target !== rootRef.current) {
+              e.stopPropagation();
+            }
+            onClickRef.current?.(e);
+          }, []),
+          ref: useForkRef([ref, rootRef]),
+        })}
+      >
+        <input {...getInputProps()} />
+        {renderCildren(children, {
+          ...otherStateProps,
           accept,
           maxSize,
           minSize,
-          // maxFiles
           multiple,
-          openFileDialog: open,
+          openFileDialog,
           locale,
           disabled,
           isDragActive,
-          ...otherStateProps,
-        })
-      : children;
-
-    return (
-      <div {...rootProps} ref={useForkRef([ref, rootRef, dragNDropFieldRef])}>
-        <input {...getInputProps()} />
-        {content}
+        })}
       </div>
     );
   },

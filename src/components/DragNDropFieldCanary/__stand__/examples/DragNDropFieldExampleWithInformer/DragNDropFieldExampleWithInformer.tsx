@@ -1,4 +1,4 @@
-import './DragNDropFieldExampleOnDropRejected.css';
+import './DragNDropFieldExampleWithInformer.css';
 
 import { IconAdd } from '@consta/icons/IconAdd';
 import { IconAlert } from '@consta/icons/IconAlert';
@@ -14,13 +14,13 @@ import {
   DragNDropFieldInformerPropStatus,
   getErrorsList,
 } from '##/components/DragNDropFieldCanary';
-import { cnCanary } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 
-const cnDragNDropFieldExampleOnDropRejected = cnCanary(
-  'DragNDropFieldExampleOnDropRejected',
+const cnDragNDropFieldExampleWithInformer = cn(
+  'DragNDropFieldExampleWithInformer',
 );
 
-export const DragNDropFieldExampleOnDropRejected = () => {
+export const DragNDropFieldExampleWithInformer = () => {
   const [filesDropped, setFilesDropped] = useState<File[]>([]);
   const [fileRejections, setFileRejections] = useState<FileRejection[]>([]);
   const [otherError, setOtherError] = useState<Error>();
@@ -52,17 +52,17 @@ export const DragNDropFieldExampleOnDropRejected = () => {
   }
   return (
     <Example col={1}>
-      <div>
-        <div className={cnDragNDropFieldExampleOnDropRejected('DropContainer')}>
+      <>
+        <div className={cnDragNDropFieldExampleWithInformer('DropContainer')}>
           {filesDropped.map((file, index) => (
             <img
               src={URL.createObjectURL(file)}
               alt={file.name}
               title={file.name}
               key={index}
-              className={`${cnDragNDropFieldExampleOnDropRejected(
-                'DroppedImage',
-              )} ${cnDragNDropFieldExampleOnDropRejected('DroppedItem')}`}
+              className={cnDragNDropFieldExampleWithInformer('DroppedItem', [
+                cnDragNDropFieldExampleWithInformer('DroppedImage'),
+              ])}
             />
           ))}
           <DragNDropField
@@ -70,7 +70,7 @@ export const DragNDropFieldExampleOnDropRejected = () => {
             accept={{ 'image/*': [] }}
             onError={setOtherError}
             onDrop={handleDrop}
-            className={cnDragNDropFieldExampleOnDropRejected('DroppedItem')}
+            className={cnDragNDropFieldExampleWithInformer('DroppedItem')}
             title="Перетащите сюда любые картинки"
           >
             <IconAdd />
@@ -89,7 +89,7 @@ export const DragNDropFieldExampleOnDropRejected = () => {
             setFileRejections([]);
           }}
         />
-      </div>
+      </>
     </Example>
   );
 };

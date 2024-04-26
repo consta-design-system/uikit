@@ -10,6 +10,7 @@ import {
 import {
   DragNDropFieldExampleAcceptImage,
   DragNDropFieldExampleAcceptDoc,
+  DragNDropFieldExampleAccept,
 } from './examples/DragNDropFieldExampleAccept/DragNDropFieldExampleAccept';
 import { DragNDropFieldExampleMaxSize } from './examples/DragNDropFieldExampleMaxSize/DragNDropFieldExampleMaxSize';
 import {
@@ -22,10 +23,10 @@ import {
   DragNDropFieldExampleCallbackOthers,
 } from './examples/DragNDropFieldExampleCallback/DragNDropFieldExampleCallback';
 
-import { DragNDropFieldExampleOnDropRejected } from './examples/DragNDropFieldExampleOnDropRejected/DragNDropFieldExampleOnDropRejected';
+import { DragNDropFieldExampleWithInformer } from './examples/DragNDropFieldExampleWithInformer/DragNDropFieldExampleWithInformer';
 import { DragNDropFieldExampleErrorMessages } from './examples/DragNDropFieldExampleErrorMessages/DragNDropFieldExampleErrorMessages';
 import { DragNDropFieldExampleInformer } from './examples/DragNDropFieldExampleInformer/DragNDropFieldExampleInformer';
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs, Example } from '@consta/stand';
 
 <MdxMenu>
 
@@ -75,6 +76,60 @@ import { DragNDropField } from '@consta/uikit/DragNDropFieldCanary';
 
 # Описание свойств
 
+## Содержимое
+
+`DragNDropField` — это компонент-контейнер: всё, что вы добавите в этот компонент, пользователь увидит внутри рамки для загрузки файлов.
+`children` может принимать `React.ReactNode` так и рендер функцию
+
+```ts
+type DragNDropFieldChildrenRenderFn = (props: {
+  openFileDialog: () => void;
+  isFocused: boolean;
+  isDragActive: boolean;
+  isDragAccept: boolean;
+  isDragReject: boolean;
+  isFileDialogActive: boolean;
+  acceptedFiles: File[];
+  fileRejections: FileRejection[];
+}) => React.ReactNode;
+```
+
+Примеры:
+
+Пример с `React.ReactNode`
+
+<MdxTabs>
+
+```tsx
+<DragNDropField>
+  <Text>Перетащи сюда файлики</Text>
+</DragNDropField>
+```
+
+<DragNDropFieldExampleChildren />
+
+</MdxTabs>
+
+Пример с рендер функцией. Открывает окно для выбора файла из дочернего блока
+
+<MdxTabs>
+
+```tsx
+<DragNDropField>
+  {({ openFileDialog }) => (
+    <>
+      <Text>Перетащи сюда файлики или выбери их из списка нажав по кнопке</Text>
+      <br />
+      <Button onClick={openFileDialog} label="Выбрать файл" />
+    </>
+  )}
+</DragNDropField>
+```
+
+<DragNDropFieldExampleRenderProps />
+
+</MdxTabs>
+
 ## Тип файлов
 
 Чтобы ограничить тип файлов, используйте свойство `accept`. Это объект с ключами [типа MIME](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) и массивом расширений файлов в качестве значений. Смотрите также [спецификацию](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file).
@@ -83,19 +138,29 @@ import { DragNDropField } from '@consta/uikit/DragNDropFieldCanary';
 
 Пример:
 
+<MdxTabs>
+
 ```tsx
-accept={{
-        'image/png': ['.png'],
-        'image/jpeg': ['.jpeg', '.jpg'],
-        'image/gif': ['.gif'],
-      }}
+<DragNDropField
+  accept={{
+    'image/png': ['.png'],
+    'image/jpeg': ['.jpeg', '.jpg'],
+    'image/gif': ['.gif'],
+  }}
+/>
 ```
+
+<DragNDropFieldExampleAccept />
+
+</MdxTabs>
 
 ## Размер файла
 
 Чтобы ограничить размер файла, в свойствах `maxSize` и `minSize` укажите размер в байтах.
 
-Пример:
+Пример c ограничением максимального размера файла:
+
+<MdxTabs>
 
 ```tsx
 <DragNDropField maxSize={1 * 1024 * 1024}>
@@ -103,11 +168,17 @@ accept={{
 </DragNDropField>
 ```
 
+<DragNDropFieldExampleMaxSize />
+
+</MdxTabs>
+
 ## Загрузка одного файла или нескольких
 
-По умолчанию можно загрузить один файл. Чтобы загрузить несколько файлов за раз, добавьте `multiple`.
+По умолчанию можно загрузить один файл. Чтобы загрузить несколько файлов за раз, укажите свойство `multiple = true`.
 
 Пример:
+
+<MdxTabs>
 
 ```tsx
 <DragNDropField multiple>
@@ -115,32 +186,43 @@ accept={{
 </DragNDropField>
 ```
 
-## Содержимое
+<DragNDropFieldExampleMultiple />
 
-`DragNDropField` — это компонент-контейнер: всё, что вы добавите в этот компонент, пользователь увидит внутри рамки для загрузки файлов.
-
-Пример:
-
-```tsx
-<DragNDropField>
-  {({ openFileDialog }) => (
-    <>
-      <Text>
-        Пример с Render Props. Открывает окно для выбора файла из дочернего
-        блока
-      </Text>
-      <br />
-      <Button onClick={openFileDialog} label="Выбрать файл" />
-    </>
-  )}
-</DragNDropField>
-```
+</MdxTabs>
 
 ## Локализация
 
 Чтобы локализовать компонент, используйте свойство `locale: DragNDropFieldPropLocale`.
 
-### Параметры locale
+```ts
+type LocaleError =
+  | string
+  | ((props: { file: File; sizes?: FileSizes }) => string);
+
+type LocaleLabel = string | ((props: { fileText: string }) => string);
+
+type DragNDropFieldPropLocale = {
+  'file-invalid-type'?: LocaleError;
+  'file-too-large'?: LocaleError;
+  'file-too-small'?: LocaleError;
+  'too-many-files'?: string;
+  'general-error'?: string;
+  'fit-files'?: string;
+  'file'?: string;
+  'files'?: string;
+  'before'?: string;
+  'from'?: string;
+  'gigabyte'?: string;
+  'megabyte'?: string;
+  'kilobyte'?: string;
+  'byte'?: string;
+  'call-to-action'?: LocaleLabel;
+  'action-button'?: LocaleLabel;
+  'drag-active-message'?: string;
+};
+```
+
+### Основные свойства
 
 | Свойство              | Тип                           | По умолчанию                                                                               | Описание                                                                       |
 | --------------------- | ----------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
@@ -172,27 +254,27 @@ accept={{
 | kilobyte | `string` | `Кб`         |
 | byte     | `string` | `байт`       |
 
-## Колбеки
+## Обработка событий
 
 В компонент можно передать четыре колбека для обработки загруженных файлов и ошибок:
 
 | Колбек           | Условие                                                               |
 | ---------------- | --------------------------------------------------------------------- |
-| `onDrop`         | Свойства `accept`, `multiple`, `minSize` и `maxSize`                  |
+| `onDrop`         | Отработает при перетасковании/выбора файлов                           |
 | `onDropAccepted` | Хотя бы один файл соответствует всем заданным условиям.               |
 | `onDropRejected` | Хотя бы один файл был отвергнут в соответствии с заданными условиями. |
 | `onError`        | Другие ошибки                                                         |
 
-Используйте компонент [`DragNDropFieldInformer`](#информер), чтобы выводить сообщение о загрузке и лоадер.
+Используйте компонент [`DragNDropFieldInformer`](#информер), чтобы выводить сообщение о результате обработки событий.
 
 ### onDrop
 
-onDrop — обработчик события дропа. Файлы принимаются или отвергаются, основываясь на свойствах `accept`, `multiple`, `minSize` и `maxSize`.
+`onDrop` — обработчик события дропа. Файлы принимаются или отвергаются, основываясь на свойствах `accept`, `multiple`, `minSize` и `maxSize`.
 
 > Колбек будет вызван независимо от того, были файлы приняты или отвергнуты.
 
-```tsx
-onDrop?: <T extends File>(
+```ts
+type onDrop = <T extends File>(
   acceptedFiles: T[],
   fileRejections: FileRejection[],
   event: DropEvent,
@@ -203,16 +285,16 @@ onDrop?: <T extends File>(
 
 Колбек вызывается, если хотя бы один файл соответствует всем заданным условиям. Если ни один файл не прошел по условиям, вызван не будет. Все файлы, удовлетворяющие условиям, будут собраны в массив объектов типа [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File).
 
-```tsx
-onDropAccepted?: <T extends File>(files: T[]) => void;
+```ts
+type onDropAccepted = <T extends File>(files: T[]) => void;
 ```
 
 ### onDropRejected
 
 Колбек вызывается, если хотя бы один файл был отвергнут в соответствии с заданными условиями. Если файлы, которые загружает пользователь, не подходят под ограничения, компонент вернет массив отказов типа `FileRejection`.
 
-```tsx
-onDropRejected?: (
+```ts
+type onDropRejected = (
   fileRejections: FileRejection[],
   event: DropEvent,
 ) => void;
@@ -222,18 +304,25 @@ onDropRejected?: (
 
 Обработчик других ошибок промиссов.
 
-```tsx
-onError?: (err: Error) => void;
+```ts
+type onError = (err: Error) => void;
 ```
 
 ### Пример
 
-```tsx
-import { DragNDropField } from '@consta/uikit/DragNDropFieldCanary';
+<MdxTabs>
 
+```tsx
 <DragNDropField
   accept={{ 'application/msword': ['.doc', '.docx'] }}
   multiple
+  onDrop={(filesAccepted, filesRejected) => {
+    console.log(filesAccepted);
+    console.log(filesRejected);
+    alert(
+      `Файлов принято: ${filesAccepted.length}. Файлов отвергнуто: ${filesRejected.length} `,
+    );
+  }}
   onDropAccepted={(filesAccepted) => {
     console.log(filesAccepted);
     alert(`Файлов принято: ${filesAccepted.length}.`);
@@ -246,8 +335,12 @@ import { DragNDropField } from '@consta/uikit/DragNDropFieldCanary';
     console.log(error);
     alert(`Ошибка! ${error.message}`);
   }}
-/>;
+/>
 ```
+
+<DragNDropFieldExampleCallbackOnDrop />
+
+</MdxTabs>
 
 ## Генерация сообщений об ошибках
 
@@ -260,6 +353,8 @@ import { DragNDropField } from '@consta/uikit/DragNDropFieldCanary';
 - объект локализации `locale?: DragNDropFieldPropLocale`, частично или полностью переопределив локализацию по умолчанию. Используется для локализации всех текстов в дефолтном наполнении компонента `DragNDropField`. [Подробнее о локализации](#локализация).
 
 Пример:
+
+<MdxTabs>
 
 ```tsx
 import {
@@ -289,9 +384,17 @@ export const DragNDropFieldExampleErrorMessages = () => {
 };
 ```
 
+<DragNDropFieldExampleErrorMessages />
+
+</MdxTabs>
+
 # Информер
 
 Чтобы информировать пользователя о статусе загрузки, выводить ошибки и управлять загрузкой, используйте компонент `DragNDropFieldInformer`.
+
+```tsx
+import { DragNDropFieldInformer } from '@consta/uikit/DragNDropFieldCanary';
+```
 
 | Свойство         | Тип                                 | Описание                                                                                                                                              |
 | ---------------- | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -306,8 +409,10 @@ export const DragNDropFieldExampleErrorMessages = () => {
 
 Пример:
 
+<MdxTabs>
+
 ```tsx
-import { DragNDropFieldInformer } from '@consta/uikit/DragNDropFieldCanary';
+<DragNDropFieldInformer status="default" text="Ничего не происходит" />
 
 <DragNDropFieldInformer
   status="default"
@@ -323,10 +428,134 @@ import { DragNDropFieldInformer } from '@consta/uikit/DragNDropFieldCanary';
 <DragNDropFieldInformer
   status="alert"
   icon={IconAlert}
-  text="Что-то пошло не так. Нажмите, чтобы узнать подробнее"
+  text="Что-то пошло не так"
+/>
+
+<DragNDropFieldInformer
+  status="warning"
+  icon={IconAlert}
+  text="Есть проблемы, нажми на кнопку, чтобы узнать подробнее"
   withButton
   buttonIcon={IconInfo}
   buttonLabel="Подробнее"
   onButtonClick={() => alert('Здесь список ошибок')}
 />
 ```
+
+<DragNDropFieldExampleInformer />
+
+</MdxTabs>
+
+Пример `DragNDropField` с `DragNDropFieldInformer`:
+
+<MdxTabs>
+
+```tsx
+const cnDragNDropFieldExampleWithInformer = cn(
+  'DragNDropFieldExampleWithInformer',
+);
+
+export const DragNDropFieldExampleWithInformer = () => {
+  const [filesDropped, setFilesDropped] = useState<File[]>([]);
+  const [fileRejections, setFileRejections] = useState<FileRejection[]>([]);
+  const [otherError, setOtherError] = useState<Error>();
+
+  const handleDrop = (acceptedFiles: File[], rejections: FileRejection[]) => {
+    const files = [...filesDropped, ...acceptedFiles];
+    setFilesDropped(files);
+    setFileRejections(rejections);
+  };
+
+  let status: DragNDropFieldInformerPropStatus = 'default';
+  if (otherError) {
+    status = 'alert';
+  } else {
+    status = fileRejections.length > 0 ? 'warning' : 'default';
+  }
+
+  let text: string;
+  switch (status) {
+    case 'default':
+      text = `Картинок загружено: ${filesDropped.length}`;
+      break;
+    case 'alert':
+      text = 'Что-то пошло не так';
+      break;
+    case 'warning':
+      text = getErrorsList(fileRejections).join('; ');
+      break;
+  }
+  return (
+    <>
+      <div className={cnDragNDropFieldExampleWithInformer('DropContainer')}>
+        {filesDropped.map((file, index) => (
+          <img
+            src={URL.createObjectURL(file)}
+            alt={file.name}
+            title={file.name}
+            key={index}
+            className={cnDragNDropFieldExampleWithInformer('DroppedItem', [
+              cnDragNDropFieldExampleWithInformer('DroppedImage'),
+            ])}
+          />
+        ))}
+        <DragNDropField
+          multiple
+          accept={{ 'image/*': [] }}
+          onError={setOtherError}
+          onDrop={handleDrop}
+          className={cnDragNDropFieldExampleWithInformer('DroppedItem')}
+          title="Перетащите сюда любые картинки"
+        >
+          <IconAdd />
+        </DragNDropField>
+      </div>
+      <DragNDropFieldInformer
+        status={status}
+        icon={status !== 'default' ? IconAlert : IconPhoto}
+        text={text}
+        withButton
+        buttonLabel="Заново"
+        buttonIcon={IconRevert}
+        onButtonClick={() => {
+          setFilesDropped([]);
+          setOtherError(undefined);
+          setFileRejections([]);
+        }}
+      />
+    </>
+  );
+};
+```
+
+```css
+.DragNDropFieldExampleWithInformer {
+  &-DropContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  &-DroppedImage {
+    box-sizing: border-box;
+    border: var(--control-border-width) solid var(
+        --color-control-bg-border-default
+      );
+    border-radius: var(--control-radius);
+    object-fit: cover;
+  }
+
+  &-DroppedItem {
+    width: 108px;
+    height: 108px;
+    min-height: 108px;
+    padding: var(--space-xs);
+  }
+}
+```
+
+<DragNDropFieldExampleWithInformer />
+
+</MdxTabs>

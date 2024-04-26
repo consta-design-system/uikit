@@ -1,32 +1,33 @@
 import { IconComponent } from '@consta/icons/Icon';
-import {
-  Accept,
-  DropEvent,
-  DropzoneState,
-  FileRejection,
-} from 'react-dropzone';
+import { Accept, DropEvent, FileRejection } from 'react-dropzone';
 
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
-export type DragNDropFieldChildrenRenderProp = (
-  props: {
-    openFileDialog: () => void;
-    locale: Required<DragNDropFieldPropLocale>;
-  } & Pick<
-    DropzoneState,
-    | 'isFocused'
-    | 'isDragActive'
-    | 'isDragAccept'
-    | 'isDragReject'
-    | 'isFileDialogActive'
-    | 'acceptedFiles'
-    | 'fileRejections'
-  > &
-    Pick<
-      DragNDropFieldProps,
-      'accept' | 'maxSize' | 'multiple' | 'disabled' | 'minSize' // | 'maxFiles'
-    >,
-) => React.ReactNode;
+export type DragNDropFieldChildrenRenderFn = (props: {
+  openFileDialog: () => void;
+  isFocused: boolean;
+  isDragActive: boolean;
+  isDragAccept: boolean;
+  isDragReject: boolean;
+  isFileDialogActive: boolean;
+  acceptedFiles: File[];
+  fileRejections: FileRejection[];
+}) => React.ReactNode;
+
+export type DragNDropFieldContentProps = {
+  openFileDialog: () => void;
+  locale: Required<DragNDropFieldPropLocale>;
+  isFocused: boolean;
+  isDragActive: boolean;
+  isDragAccept: boolean;
+  isDragReject: boolean;
+  isFileDialogActive: boolean;
+  acceptedFiles: File[];
+  fileRejections: FileRejection[];
+} & Pick<
+  DragNDropFieldProps,
+  'accept' | 'maxSize' | 'multiple' | 'disabled' | 'minSize'
+>;
 
 export type FileSizes = {
   minSize?: number;
@@ -41,7 +42,7 @@ export type DragNDropFieldProps = PropsWithHTMLAttributes<
     maxFiles?: number;
     multiple?: boolean;
     disabled?: boolean;
-    children?: React.ReactNode | DragNDropFieldChildrenRenderProp;
+    children?: React.ReactNode | DragNDropFieldChildrenRenderFn;
     locale?: DragNDropFieldPropLocale;
     onDrop?: <T extends File>(
       acceptedFiles: T[],
@@ -58,15 +59,13 @@ export type DragNDropFieldProps = PropsWithHTMLAttributes<
   HTMLDivElement
 >;
 
-export type DragNDropFieldPropLocale = Locale;
-
 export type LocaleError =
   | string
   | ((props: { file: File; sizes?: FileSizes }) => string);
 
 export type LocaleLabel = string | ((props: { fileText: string }) => string);
 
-export type Locale = {
+export type DragNDropFieldPropLocale = {
   'file-invalid-type'?: LocaleError;
   'file-too-large'?: LocaleError;
   'file-too-small'?: LocaleError;
