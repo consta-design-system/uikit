@@ -1,0 +1,49 @@
+.canary--DragNDropFieldInformer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--space-xs);
+  padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-s);
+  color: var(--color-typo-primary);
+  background-color: var(--informer-status-bg-color);
+  border: var(--control-border-width) solid var(--informer-status-border-color);
+  border-radius: var(--control-radius);
+
+  &_status {
+    &_default {
+      --informer-status-border-color: var(--color-bg-border);
+      --informer-status-bg-color: var(--color-control-bg-default);
+    }
+
+    &_alert {
+      --informer-status-border-color: var(--color-bg-alert);
+      --informer-status-bg-color: rgba(235, 87, 87, 0.05);
+    }
+
+    &_warning {
+      --informer-status-border-color: var(--color-bg-alert);
+      --informer-status-bg-color: rgba(243, 139, 0, 0.05);
+    }
+  }
+
+  &-Text {
+    width: 100%;
+    min-height: var(--space-xl);
+    align-content: center;
+  }
+
+  &-Progress {
+    margin-right: var(--space-xs);
+    color: var(--informer-status-border-color);
+  }
+
+  &-Button {
+    margin-left: var(--space-xs);
+  }
+
+  &-Icon {
+    margin-right: var(--space-xs);
+  }
+}

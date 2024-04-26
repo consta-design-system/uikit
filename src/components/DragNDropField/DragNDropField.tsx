@@ -12,6 +12,7 @@ import { isRenderProp } from '##/utils/isRenderProp';
 
 import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldContent';
 import { DragNDropFieldTooltip } from './DragNDropFieldTooltip/DragNDropFieldTooltip';
+import { formatAccept } from './formatAccept';
 import { getErrorsList } from './getErrorsList';
 import { withdefaultLocale } from './locale';
 import { DragNDropFieldProps } from './types';
@@ -55,7 +56,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
       rootRef,
       open,
     } = useDropzone({
-      accept: accept?.length ? accept : undefined,
+      accept: formatAccept(accept),
       maxSize: maxSize || undefined,
       minSize: minSize || undefined,
       onDrop: handleDrop,
