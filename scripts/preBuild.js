@@ -39,9 +39,6 @@ class GenerateCommand extends Command {
 
     try {
       await Promise.all([
-        iconsTransformed(ignore, src).then(() =>
-          this.log(logSymbols.success, 'icons copied & transformed'),
-        ),
         iconsFileTransformed(ignore, src).then(() =>
           this.log(logSymbols.success, 'fileIcons copied & transformed'),
         ),

@@ -1,5 +1,6 @@
 const fg = require('fast-glob');
-const { normalize, dirname, join, relative, resolve } = require('path');
+const { normalize, dirname, relative, resolve } = require('path');
+const { join } = require('../join');
 const {
   readFile,
   writeFile,
@@ -26,21 +27,23 @@ const generateReExportsFonts = (
   distPath,
   componentFolder = 'fonts',
 ) => {
-  return fg([join(src, componentFolder, '**', 'index.tsx')], { ignore }).then(async (files) => {
-    const blockDir = join(distPath, 'fonts');
-    const reExports = [];
+  return fg([join(src, componentFolder, '**', 'index.tsx')], { ignore }).then(
+    async (files) => {
+      const blockDir = join(distPath, 'fonts');
+      const reExports = [];
 
-    files.map((fileName) => {
-      const filePath = fileName.replace(normalize(src), '');
-      const entityName = filePath.replace(`/${componentFolder}/`, '');
-      reExports.push(join(distEsSrc, filePath.replace(/\/index\.tsx?$/, '')));
-    });
+      files.map((fileName) => {
+        const filePath = fileName.replace(normalize(src), '');
+        const entityName = filePath.replace(`/${componentFolder}/`, '');
+        reExports.push(join(distEsSrc, filePath.replace(/\/index\.tsx?$/, '')));
+      });
 
-    await ensureDir(blockDir);
+      await ensureDir(blockDir);
 
-    writeFile(join(blockDir, 'index.d.ts'), getESMExportTemplate(reExports));
-    writeFile(join(blockDir, 'index.js'), getESMExportTemplate(reExports));
-  });
+      writeFile(join(blockDir, 'index.d.ts'), getESMExportTemplate(reExports));
+      writeFile(join(blockDir, 'index.js'), getESMExportTemplate(reExports));
+    },
+  );
 };
 
 module.exports = {
