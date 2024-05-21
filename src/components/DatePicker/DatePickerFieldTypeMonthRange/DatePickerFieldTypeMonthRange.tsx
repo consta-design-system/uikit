@@ -32,7 +32,8 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
     view,
     status,
     autoFocus,
-    placeholder,
+    startFieldPlaceholder,
+    endFieldPlaceholder,
     readOnly,
     required,
     tabIndex,
@@ -69,7 +70,6 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
     view,
     status,
     autoFocus,
-    placeholder,
     readOnly,
     required,
     tabIndex,
@@ -125,6 +125,7 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
             onBlur={startFieldOnBlur}
             focused={startFocused}
             name={startFieldName}
+            placeholder={startFieldPlaceholder}
           />
           <DatePickerFieldTypeMonth
             {...commonProps}
@@ -140,6 +141,7 @@ export const DatePickerFieldTypeMonthRange = forwardRef<
             onFocus={endFieldOnFocus}
             onBlur={endFieldOnBlur}
             focused={endFocused}
+            placeholder={endFieldPlaceholder}
           />
         </div>
         {caption && (

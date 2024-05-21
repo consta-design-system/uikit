@@ -21,6 +21,7 @@ export type DatePickerFieldTypeDateTimeRangeProps = Omit<
   | 'onFocus'
   | 'onBlur'
   | 'name'
+  | 'placeholder'
 > & {
   onChange?: DatePickerFieldTypeDateTimeRangePropOnChange;
   value?: DateRange | null;
@@ -45,4 +46,6 @@ export type DatePickerFieldTypeDateTimeRangeProps = Omit<
   currentVisibleDate?: Date;
   startFieldName?: string;
   endFieldName?: string;
+  startFieldPlaceholder?: string;
+  endFieldPlaceholder?: string;
 };
