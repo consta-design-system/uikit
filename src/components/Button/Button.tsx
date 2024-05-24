@@ -1,7 +1,7 @@
 import './Button.css';
 
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
-import React, { useRef, HTMLProps } from 'react';
+import React, { HTMLProps, useRef } from 'react';
 
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
@@ -92,7 +92,7 @@ export type Props = {
   title?: string;
   children?: never;
   type?: 'button' | 'reset' | 'submit';
-  htmlForm?: HTMLProps<HTMLButtonElement>['form']
+  formId?: HTMLProps<HTMLButtonElement>['form'];
 };
 
 export const COMPONENT_NAME = 'Button' as const;
@@ -132,7 +132,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
     as = 'button',
     onlyIcon,
     iconSize: iconSizeProp,
-    htmlForm,
+    formId,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, buttonRef);
 
@@ -156,7 +156,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
     <Tag
       {...otherProps}
       onClick={onClick ? handleClick : undefined}
-      form={htmlForm}
+      form={formId}
       type={type}
       className={cnButton(
         {
