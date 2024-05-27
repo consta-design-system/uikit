@@ -1,7 +1,13 @@
 # Changelog
 
+## v5.3.2 (27/05/2024)
+- [fix(button): add missing html form attribute (#3664)](https://github.com/consta-design-system/uikit/commit/4d8f2ee561b4d519f6dea35718528e6ec5531699) - [@js2me](https://github.com/js2me)
+- [chore(builder): fix build](https://github.com/consta-design-system/uikit/commit/77ca591d8b68a294b1c93a478450c90d91bd1171) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.3.0 (26/04/2024)
-⚠️Перед обновления библиотеки обновите `react-dropzone` до `^14.2.3`
+⚠️Перед обновлением библиотеки обновите `react-dropzone` до версии  `^14.2.3`
 
 Самое важное:
 
@@ -9,9 +15,9 @@
 - В `TextField` добавили колбэк `onClear`.
 - В `ChoiceGroup` при `truncate` на элементах  проставили `title` для вывода подсказок.
 - В `Chips` добавили свойства `disabled` и `getItemDisabled`.
-- В `Spoiler`  добавили контроль состояния открыт/закрыт.
+- В `Spoiler` добавили контроль состояния открыт/закрыт.
 - Повысили стабильность и производительность компонентов.
-- Небольшие правки в документации.
+- Внесли небольшие правки в документацию.
 
 ---
 
@@ -445,16 +451,3 @@
 
 ## v4.17.1 (05/05/2023)
 - [fix(Combobox): fix update serchValue (#3030)](https://github.com/consta-design-system/uikit/commit/ab41caac40ca84c74eed84a38cc95cc5bbd66627) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.17.0 (27/04/2023)
-Самое важное:
-
-- в `useBreakpoints` добавили функцию `addPrefix`. Чтобы при пробросе `breakpoints`, как модификации блока, было удобнее генерировать класснеймы
-- в `DatePicker` исправили валидaцию значения инпута при кастомном формате
-
----
-
-- [feat(useBreakpoints): added helper `addPrefix` (#3025)](https://github.com/consta-design-system/uikit/commit/ec03a288b90ef65b1638fbba6e3572afb8f3ba7a) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): fixed validate mask (#3012)](https://github.com/consta-design-system/uikit/commit/44484f9e1020c8211b96443fe1b235cb3abb2428) - [@gizeasy](https://github.com/gizeasy)
