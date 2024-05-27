@@ -1,7 +1,8 @@
 import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
-import { DateRange } from '../../../utils/types/Date';
+import { DateRange } from '##/utils/types/Date';
+
 import { DatePickerFieldTypeDateProps } from '../DatePickerFieldTypeDate/helpers';
 
 type DatePickerFieldTypeDateRangePropOnChange = (
@@ -22,6 +23,7 @@ export type DatePickerFieldTypeDateRangeProps = Omit<
   | 'onFocus'
   | 'onBlur'
   | 'name'
+  | 'placeholder'
 > & {
   onChange?: DatePickerFieldTypeDateRangePropOnChange;
   value?: DateRange | null;
@@ -46,4 +48,6 @@ export type DatePickerFieldTypeDateRangeProps = Omit<
   currentVisibleDate?: Date;
   startFieldName?: string;
   endFieldName?: string;
+  startFieldPlaceholder?: string;
+  endFieldPlaceholder?: string;
 };

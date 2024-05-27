@@ -41,6 +41,10 @@ export type DatePickerPropValue<TYPE extends DatePickerPropType> =
   | (TYPE extends Range ? DateRange : Date)
   | null;
 
+export type DatePickerPropPlaceholder<TYPE> = TYPE extends Range
+  ? [string?, string?] | string
+  : string;
+
 export type DatePickerPropOnChange<TYPE extends DatePickerPropType> = (
   value: DatePickerPropValue<TYPE>,
   props: {
@@ -114,7 +118,7 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
       onFocus?: DatePickerPropOnFocus<TYPE>;
       onBlur?: DatePickerPropOnFocus<TYPE>;
       autoFocus?: boolean;
-      placeholder?: string;
+      placeholder?: DatePickerPropPlaceholder<TYPE>;
       readOnly?: boolean;
       required?: boolean;
       tabIndex?: number;

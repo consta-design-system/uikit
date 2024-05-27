@@ -16,6 +16,7 @@ export const DatePickerExampleTwoIcons = () => {
         onChange={setValue}
         leftSide={[IconForward, IconBackward]}
         rightSide={['туда', 'обратно']}
+        placeholder={['Начало', 'Конец']}
       />
     </Example>
   );

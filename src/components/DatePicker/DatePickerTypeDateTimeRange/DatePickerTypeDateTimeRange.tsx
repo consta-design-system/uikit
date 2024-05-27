@@ -43,6 +43,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       renderAdditionalControls,
       inputRef,
       name,
+      placeholder,
       multiplicityMinutes,
       dropdownClassName,
       multiplicitySeconds,
@@ -179,6 +180,12 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           startFieldName={getFieldName(name, 0)}
           endFieldName={getFieldName(name, 1)}
           disabled={disabled}
+          startFieldPlaceholder={
+            Array.isArray(placeholder) ? placeholder?.[0] : placeholder
+          }
+          endFieldPlaceholder={
+            Array.isArray(placeholder) ? placeholder?.[1] : placeholder
+          }
         />
         <DatePickerDropdown
           type="date-time"
