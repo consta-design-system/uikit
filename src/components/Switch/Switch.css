@@ -4,29 +4,30 @@
   position: relative;
   display: inline-flex;
   font-family: var(--font-primary);
+  line-height: var(--line-height-text-s);
   cursor: pointer;
 
   &_size {
     &_xs {
-      --box-height: 12px;
+      --box-height: var(--control-box-size-m);
       --switch-font-size: var(--control-text-size-xs);
-      --offset: var(--space-2xs);
+      --offset: var(--space-xs);
     }
 
     &_s {
-      --box-height: 16px;
+      --box-height: var(--control-box-size-m);
       --switch-font-size: var(--control-text-size-s);
       --offset: var(--space-xs);
     }
 
     &_m {
-      --box-height: 20px;
+      --box-height: var(--control-box-size-l);
       --switch-font-size: var(--control-text-size-m);
       --offset: var(--space-xs);
     }
 
     &_l {
-      --box-height: 24px;
+      --box-height: var(--space-xl);
       --switch-font-size: var(--control-text-size-l);
       --offset: var(--space-s);
     }

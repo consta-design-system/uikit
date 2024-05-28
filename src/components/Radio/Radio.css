@@ -2,6 +2,7 @@
   position: relative;
   display: inline-flex;
   font-family: var(--font-sans);
+  line-height: var(--line-height-text-s);
   cursor: pointer;
 
   &-Input {
@@ -41,19 +42,19 @@
   &_size {
     &_xs {
       --radio-font-size: var(--control-text-size-xs);
-      --radio-size: var(--control-box-size-s);
+      --radio-size: var(--control-box-size-m);
       --radio-offset: var(--space-xs);
     }
 
     &_s {
       --radio-font-size: var(--control-text-size-s);
-      --radio-size: var(--control-box-size-s);
+      --radio-size: var(--control-box-size-m);
       --radio-offset: var(--space-xs);
     }
 
     &_m {
       --radio-font-size: var(--control-text-size-m);
-      --radio-size: var(--control-box-size-m);
+      --radio-size: var(--control-box-size-l);
       --radio-offset: var(--space-xs);
     }
 
