@@ -11,6 +11,7 @@
       --checkbox-size: var(--control-box-size-m);
       --checkbox-offset: var(--space-xs);
       --checkbox-arrow-width: calc(3 * var(--space-3xs) / 4);
+      --align-top-margin: 0;
     }
 
     &_s {
@@ -18,6 +19,7 @@
       --checkbox-size: var(--control-box-size-m);
       --checkbox-offset: var(--space-xs);
       --checkbox-arrow-width: calc(3 * var(--space-3xs) / 4);
+      --align-top-margin: var(--space-3xs);
     }
 
     &_m {
@@ -25,6 +27,7 @@
       --checkbox-size: var(--control-box-size-l);
       --checkbox-offset: var(--space-xs);
       --checkbox-arrow-width: var(--space-3xs);
+      --align-top-margin: var(--space-3xs);
     }
 
     &_l {
@@ -32,6 +35,7 @@
       --checkbox-size: var(--control-box-size-l);
       --checkbox-offset: var(--space-s);
       --checkbox-arrow-width: var(--space-3xs);
+      --align-top-margin: var(--space-3xs);
     }
   }
 
@@ -116,7 +120,7 @@
       align-items: top;
 
       .Checkbox-Input {
-        margin-top: var(--space-3xs);
+        margin-top: var(--align-top-margin);
       }
     }
   }

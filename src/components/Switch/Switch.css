@@ -12,24 +12,28 @@
       --box-height: var(--control-box-size-m);
       --switch-font-size: var(--control-text-size-xs);
       --offset: var(--space-xs);
+      --align-top-margin: 0;
     }
 
     &_s {
       --box-height: var(--control-box-size-m);
       --switch-font-size: var(--control-text-size-s);
       --offset: var(--space-xs);
+      --align-top-margin: var(--space-3xs);
     }
 
     &_m {
       --box-height: var(--control-box-size-l);
       --switch-font-size: var(--control-text-size-m);
       --offset: var(--space-xs);
+      --align-top-margin: 0;
     }
 
     &_l {
       --box-height: var(--space-xl);
       --switch-font-size: var(--control-text-size-l);
       --offset: var(--space-s);
+      --align-top-margin: var(--space-3xs);
     }
   }
 
@@ -157,7 +161,7 @@
       align-items: top;
 
       .Switch-Input {
-        margin-top: 1px;
+        margin-top: var(--align-top-margin);
       }
     }
   }
