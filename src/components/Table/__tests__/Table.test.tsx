@@ -776,6 +776,20 @@ describe('Компонент Table', () => {
           fireEvent.click(screen.getByRole('button', { name: /отмена/i }));
           expect(getRows()).toHaveLength(3);
         });
+
+        it.each(Array.from('.*+?^${}()|[]\\'))(
+          'При вводе специального символа %s компонент не падает',
+          (regexPart) => {
+            render(<Table {...props} data-testid={testId} />);
+
+            fireEvent.click(getFilterButtons()[0]);
+            fireEvent.change(screen.getByRole('textbox'), {
+              target: { value: regexPart },
+            });
+
+            expect(screen.getByTestId(testId)).toBeInTheDocument();
+          },
+        );
       });
 
       describe('Проверка TableNumberFilter', () => {
