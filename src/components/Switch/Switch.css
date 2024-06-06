@@ -4,31 +4,36 @@
   position: relative;
   display: inline-flex;
   font-family: var(--font-primary);
+  line-height: var(--line-height-text-s);
   cursor: pointer;
 
   &_size {
     &_xs {
-      --box-height: 12px;
+      --box-height: var(--control-box-size-m);
       --switch-font-size: var(--control-text-size-xs);
-      --offset: var(--space-2xs);
+      --offset: var(--space-xs);
+      --align-top-margin: 0;
     }
 
     &_s {
-      --box-height: 16px;
+      --box-height: var(--control-box-size-m);
       --switch-font-size: var(--control-text-size-s);
       --offset: var(--space-xs);
+      --align-top-margin: var(--space-3xs);
     }
 
     &_m {
-      --box-height: 20px;
+      --box-height: var(--control-box-size-l);
       --switch-font-size: var(--control-text-size-m);
       --offset: var(--space-xs);
+      --align-top-margin: 0;
     }
 
     &_l {
-      --box-height: 24px;
+      --box-height: var(--space-xl);
       --switch-font-size: var(--control-text-size-l);
       --offset: var(--space-s);
+      --align-top-margin: var(--space-3xs);
     }
   }
 
@@ -156,7 +161,7 @@
       align-items: top;
 
       .Switch-Input {
-        margin-top: 1px;
+        margin-top: var(--align-top-margin);
       }
     }
   }
