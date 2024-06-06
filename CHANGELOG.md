@@ -1,5 +1,20 @@
 # Changelog
 
+## v5.4.0 (06/06/2024)
+Самое важное:
+- В `Switch`, `Checkbox` и `Radio` поправили отступы в соответствии с дизайном.
+- В `DatePicker` реализовали возможность добавлять разный текст плейсхолдеров при использовании типа `range`.
+
+---
+
+- [feat(Switch/Checkbox/Radio): update checkmarks proportions (#3667)](https://github.com/consta-design-system/uikit/commit/1cada84cd85a96d49ca643b298bf69b0b6b45dae) - [@Elena-BLZ](https://github.com/Elena-BLZ)
+- [fix(DatePicker): added rounding within min-max (#3673)](https://github.com/consta-design-system/uikit/commit/62991c0b58ff0e8b2f1079b5e84a452200d452da) - [@ZettZet](https://github.com/ZettZet)
+- [fix(tootip): added ref forwarding to Transition (#3672)](https://github.com/consta-design-system/uikit/commit/2c5255c463ee88def0ef19bf364f545158393239) - [@ZettZet](https://github.com/ZettZet)
+- [fix(Table): added test to check sanitize (#3670)](https://github.com/consta-design-system/uikit/commit/c8fd8304446916e9b922e7bd630e7346b4ea4892) - [@ZettZet](https://github.com/ZettZet)
+- [feat(DatePicker): add individual start-end  placeholders for DatePicker in range formats (#3662)](https://github.com/consta-design-system/uikit/commit/9bca9907598f48c9909d83d76df381ae74322570) - [@Elena-BLZ](https://github.com/Elena-BLZ)
+
+--------------------
+
 ## v5.3.2 (27/05/2024)
 - [fix(button): add missing html form attribute (#3664)](https://github.com/consta-design-system/uikit/commit/4d8f2ee561b4d519f6dea35718528e6ec5531699) - [@js2me](https://github.com/js2me)
 - [chore(builder): fix build](https://github.com/consta-design-system/uikit/commit/77ca591d8b68a294b1c93a478450c90d91bd1171) - [@gizeasy](https://github.com/gizeasy)
@@ -446,8 +461,3 @@
 ---
 
 - [chore: configure build for windows (#3051)](https://github.com/consta-design-system/uikit/commit/e533ecef0f7392d091616e24922a458fa0f73c85) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.17.1 (05/05/2023)
-- [fix(Combobox): fix update serchValue (#3030)](https://github.com/consta-design-system/uikit/commit/ab41caac40ca84c74eed84a38cc95cc5bbd66627) - [@gizeasy](https://github.com/gizeasy)
