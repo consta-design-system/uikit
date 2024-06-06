@@ -1,8 +1,9 @@
 import './Tooltip.css';
 
-import React, { forwardRef, useMemo, useState } from 'react';
+import React, { forwardRef, useMemo, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
+import { useForkRef } from '##/hooks/useForkRef';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cnMixPopoverArrow } from '##/mixs/MixPopoverArrow/MixPopoverArrow';
 import { cn } from '##/utils/bem';
@@ -36,6 +37,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ...otherProps
     } = props;
 
+    const contentRef = useRef(null);
+    const contentForkedRef = useForkRef([contentRef, ref]);
+
     const { theme } = useTheme();
 
     const [direction, setDirection] = useState<Direction | undefined>();
@@ -61,7 +65,12 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     }, [generateDeps(theme), status]);
 
     return (
-      <Transition in={isOpen} unmountOnExit timeout={animateTimeout}>
+      <Transition
+        in={isOpen}
+        unmountOnExit
+        timeout={animateTimeout}
+        nodeRef={contentRef}
+      >
         {(animate) => (
           <ThemeContext.Provider value={value}>
             <Popover
@@ -69,7 +78,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               arrowOffset={ARROW_OFFSET + ARROW_SIZE}
               offset={ARROW_SIZE + ARROW_OFFSET / 2 + offset}
               onSetDirection={onSetDirection}
-              ref={ref}
+              ref={contentForkedRef}
               className={cnTooltip({ status }, [
                 className,
                 cnMixPopoverAnimate({ animate }),
