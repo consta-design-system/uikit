@@ -72,7 +72,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   hasItems?: boolean;
   itemsRefs: React.RefObject<HTMLDivElement>[];
   virtualScroll?: boolean;
-  onScrollToBottom?: () => void;
+  onScrollToBottom?: (lenght: number) => void;
 }>;
 
 type SelectDropdown = <ITEM, GROUP>(
@@ -233,7 +233,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                 className={cnSelectDropdown('List', { scrolled })}
                 style={{ marginTop: spaceTop }}
               >
-                {visibleItems.map((group) => {
+                {visibleItems.map((group, groupIndex) => {
                   if (isOptionForCreate(group)) {
                     const index = getIndex();
                     return (
@@ -246,7 +246,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                         {...getOptionProps({
                           index,
                           item: group,
-                          keyPrefix: spaceTop,
+                          keyPrefix: groupIndex,
                         })}
                       />
                     );
@@ -265,7 +265,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                             size={size}
                             indent={indent}
                             ref={listRefs[virtualIndex]}
-                            key={`group${group.key}${spaceTop}`}
+                            key={`group-${group.key}`}
                           />
                         )}
                       {group.items.map((item, i) => {
@@ -285,7 +285,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                                 {...getOptionProps({
                                   index,
                                   item,
-                                  keyPrefix: spaceTop,
+                                  keyPrefix: i,
                                 })}
                                 intermediate={
                                   item.checkedCount && item.totalCount
@@ -313,7 +313,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                                   ...getOptionProps({
                                     index,
                                     item,
-                                    keyPrefix: spaceTop,
+                                    keyPrefix: i,
                                   }),
                                 })}
                               </Fragment>

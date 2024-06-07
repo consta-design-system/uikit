@@ -118,7 +118,7 @@ export type UserSelectProps<
     caption?: string;
     labelPosition?: 'top' | 'left';
     virtualScroll?: boolean;
-    onScrollToBottom?: () => void;
+    onScrollToBottom?: (lenght: number) => void;
     onSearchValueChange?: (value: string) => void;
     onDropdownOpen?: (isOpen: boolean) => void;
     dropdownOpen?: boolean;

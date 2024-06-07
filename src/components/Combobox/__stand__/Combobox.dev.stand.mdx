@@ -921,9 +921,6 @@ const ComboboxExampleIsLoadingOnScrollBottom = () => {
   const [value, setValue] = useState<Item[] | null>();
   const [searchValue, setSearchValue] = useState<string>('');
   const [data, isLoading, load] = useMockLoadData(searchValue);
-  const onDropdownOpen = useCallback((open: boolean) => {
-    open && load();
-  }, []);
 
   return (
     <Combobox
@@ -932,7 +929,6 @@ const ComboboxExampleIsLoadingOnScrollBottom = () => {
       value={value}
       onChange={setValue}
       multiple
-      onDropdownOpen={onDropdownOpen}
       isLoading={isLoading}
       virtualScroll
       onScrollToBottom={searchValue ? undefined : load}
@@ -1558,7 +1554,7 @@ type ComboboxPropOnCreate = (
 | `onBlur?`                                                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `blur`                                                             |
 | `onFocus?`                                                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `focus`                                                            |
 | `onCreate?`                                                             | `ComboboxPropOnCreate`                                 | -                                                             | Событие по клику на кнопку 'Создать'                                                  |
-| `onScrollToBottom?`                                                     | `() => void`                                           | -                                                             | Событие срабатывает когда доскролили список до конца                                  |
+| `onScrollToBottom?`                                                     | `(lenght: number) => void`                             | -                                                             | Событие срабатывает когда доскролили список до конца                                  |
 | `onSearchValueChange?`                                                  | `(value: string) => void;`                             | -                                                             | Событие срабатывает при изменении значения поиска                                     |
 | `virtualScroll?`                                                        | `boolean`                                              | -                                                             | Включает виртуализацию скролла                                                        |
 | `ariaLabel?`                                                            | `string`                                               | -                                                             | `aria` атрибут для поля ввода                                                         |
