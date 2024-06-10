@@ -1,5 +1,5 @@
 .DatePickerMixRangeField {
-  --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
+  --caption-margin-left: var(--control-border-width);
   display: flex;
 
   &_size {
