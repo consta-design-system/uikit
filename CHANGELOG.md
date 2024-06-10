@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.4.1 (10/06/2024)
+- [fix(useVirtualScroll): fixed calculate position and visible items (#3676)](https://github.com/consta-design-system/uikit/commit/5d1096b5b45250de7585997befc2325ea6dd4899) - [@gizeasy](https://github.com/gizeasy)
+- [fix(caption): removed left indentation in components (#3671)](https://github.com/consta-design-system/uikit/commit/80c38e6440dcfe34cf85b583e1cd26f920f90748) - [@ZettZet](https://github.com/ZettZet)
+- [fix(Picture): edit examples (#3675)](https://github.com/consta-design-system/uikit/commit/19d6dee9d6d836c8f3d24aac410b6610e9298919) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.4.0 (06/06/2024)
 Самое важное:
 - В `Switch`, `Checkbox` и `Radio` поправили отступы в соответствии с дизайном.
@@ -452,12 +459,3 @@
 - [fix(DateTime): fig bug with useless props (#3079)](https://github.com/consta-design-system/uikit/commit/d3e3c05a03741ea5a4cbf0b5fcfff18c0697d0b6) - [@N1MBER](https://github.com/N1MBER)
 - [fix(Tabs): fix styles break (#3083)](https://github.com/consta-design-system/uikit/commit/36cbc53f75a9900579cd600c9f69837064ce1c76) - [@gizeasy](https://github.com/gizeasy)
 - [docs(Combobox): selectAll conditional by multiple in variants](https://github.com/consta-design-system/uikit/commit/d9064e3399a1d057b165ecb38de33b9292767828) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.17.2 (22/05/2023)
-Запускать локальный сервер разработки и сборку пакетов теперь можно и на ОС Windows. 
-
----
-
-- [chore: configure build for windows (#3051)](https://github.com/consta-design-system/uikit/commit/e533ecef0f7392d091616e24922a458fa0f73c85) - [@gizeasy](https://github.com/gizeasy)
