@@ -39,6 +39,8 @@ export const Picture = forwardRef<HTMLImageElement, PictureProps>(
       ];
     }, [getSrcHash(srcProp)]);
 
+    console.log(convertedImages, sizes);
+
     const activeImageSize = Number(
       getLastPoint(
         useBreakpoints({
@@ -73,9 +75,9 @@ export const Picture = forwardRef<HTMLImageElement, PictureProps>(
       }
       if (suitableImages.length > 1) {
         return [
-          suitableImages[0]?.src,
+          encodeURI(suitableImages[0]?.src),
           suitableImages
-            .map(({ src, descriptor }) => `${src} ${descriptor}`)
+            .map(({ src, descriptor }) => `${encodeURI(src)} ${descriptor}`)
             .join(','),
         ];
       }
