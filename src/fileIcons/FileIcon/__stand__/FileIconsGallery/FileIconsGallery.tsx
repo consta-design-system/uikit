@@ -17,9 +17,11 @@ import { FileIconPng } from '../../../FileIconPng/FileIconPng';
 import { FileIconPpt } from '../../../FileIconPpt/FileIconPpt';
 import { FileIconRar } from '../../../FileIconRar/FileIconRar';
 import { FileIconRtf } from '../../../FileIconRtf/FileIconRtf';
+import { FileIconSvg } from '../../../FileIconSvg/FileIconSvg';
 import { FileIconTiff } from '../../../FileIconTiff/FileIconTiff';
 import { FileIconTxt } from '../../../FileIconTxt/FileIconTxt';
 import { FileIconUndefined } from '../../../FileIconUndefined/FileIconUndefined';
+import { FileIconVsd } from '../../../FileIconVsd/FileIconVsd';
 import { FileIconWav } from '../../../FileIconWav/FileIconWav';
 import { FileIconXls } from '../../../FileIconXls/FileIconXls';
 import { FileIconZip } from '../../../FileIconZip/FileIconZip';
@@ -43,9 +45,11 @@ const icons = {
   FileIconPpt,
   FileIconRar,
   FileIconRtf,
+  FileIconSvg,
   FileIconTiff,
   FileIconTxt,
   FileIconUndefined,
+  FileIconVsd,
   FileIconWav,
   FileIconXls,
   FileIconZip,
