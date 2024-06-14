@@ -23,6 +23,8 @@ type ComponentProps = {
 };
 
 export type TooltipProps = Omit<TooltipComponentProps, 'children' | 'ref'> & {
+  tooltipContent?: React.ReactNode;
+  /** @deprecated Используйте tooltipContent */
   content?: React.ReactNode;
   mode?: WithTooltipPropMode;
   closeOnClickOutside?: boolean;
@@ -49,6 +51,7 @@ export function withTooltip(hocProps?: TooltipProps) {
 
         const {
           mode = 'mouseover',
+          tooltipContent,
           content,
           closeOnClickOutside = true,
           appearTimeout = appearTimeoutDefault,
@@ -58,6 +61,8 @@ export function withTooltip(hocProps?: TooltipProps) {
           ...hocProps,
           ...tooltipProps,
         };
+
+        const resultContent = tooltipContent ?? content;
 
         const [visible, setVisible] = useFlag();
         const acnortRef = useRef<HTMLElement>(null);
@@ -149,14 +154,14 @@ export function withTooltip(hocProps?: TooltipProps) {
             />
             <Tooltip
               {...otherTooltipProps}
-              isOpen={visible && !!content}
+              isOpen={visible && !!resultContent}
               className={otherTooltipProps.className}
               anchorRef={acnortRef}
               onClickOutside={tooltipOnClickOutside}
               onMouseEnter={tooltipOnMouseEnter}
               onMouseLeave={tooltipOnMouseLeave}
             >
-              {content}
+              {resultContent}
             </Tooltip>
           </>
         );
