@@ -42,7 +42,7 @@
     "lint:js": "eslint --ext .js,.jsx,.tsx,.ts --fix . --quiet",
     "lint:css": "stylelint ./src/**/*.css --fix",
     "lint": "yarn run lint:js && yarn run lint:css",
-    "format:svg": "prettier --write '**/*.svg' --parser html",
+    "format:svg": "prettier --write **/*.svg --parser html",
     "pre-push": "yarn run tsc-dry-run",
     "pre-commit": "yarn run lint-staged",
     "pre-build": "node scripts/preBuild.js --config=scripts/generateReExportsConfig.js",

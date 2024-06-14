@@ -2,35 +2,37 @@ import './File.css';
 
 import React from 'react';
 
+import { ProgressSpin } from '##/components/ProgressSpin';
 import {
   FileIconProps,
   fileIconPropSizeDefault,
-} from '../../fileIcons/FileIcon/FileIcon';
-import { FileIconAvi } from '../../fileIcons/FileIconAvi/FileIconAvi';
-import { FileIconBmp } from '../../fileIcons/FileIconBmp/FileIconBmp';
-import { FileIconCsv } from '../../fileIcons/FileIconCsv/FileIconCsv';
-import { FileIconDoc } from '../../fileIcons/FileIconDoc/FileIconDoc';
-import { FileIconExe } from '../../fileIcons/FileIconExe/FileIconExe';
-import { FileIconGif } from '../../fileIcons/FileIconGif/FileIconGif';
-import { FileIconJpg } from '../../fileIcons/FileIconJpg/FileIconJpg';
-import { FileIconJson } from '../../fileIcons/FileIconJson/FileIconJson';
-import { FileIconLoading } from '../../fileIcons/FileIconLoading/FileIconLoading';
-import { FileIconMov } from '../../fileIcons/FileIconMov/FileIconMov';
-import { FileIconMp3 } from '../../fileIcons/FileIconMp3/FileIconMp3';
-import { FileIconMp4 } from '../../fileIcons/FileIconMp4/FileIconMp4';
-import { FileIconPdf } from '../../fileIcons/FileIconPdf/FileIconPdf';
-import { FileIconPng } from '../../fileIcons/FileIconPng/FileIconPng';
-import { FileIconPpt } from '../../fileIcons/FileIconPpt/FileIconPpt';
-import { FileIconRar } from '../../fileIcons/FileIconRar/FileIconRar';
-import { FileIconRtf } from '../../fileIcons/FileIconRtf/FileIconRtf';
-import { FileIconTiff } from '../../fileIcons/FileIconTiff/FileIconTiff';
-import { FileIconTxt } from '../../fileIcons/FileIconTxt/FileIconTxt';
-import { FileIconUndefined } from '../../fileIcons/FileIconUndefined/FileIconUndefined';
-import { FileIconWav } from '../../fileIcons/FileIconWav/FileIconWav';
-import { FileIconXls } from '../../fileIcons/FileIconXls/FileIconXls';
-import { FileIconZip } from '../../fileIcons/FileIconZip/FileIconZip';
-import { cn } from '../../utils/bem';
-import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
+} from '##/fileIcons/FileIcon/FileIcon';
+import { FileIconAvi } from '##/fileIcons/FileIconAvi/FileIconAvi';
+import { FileIconBmp } from '##/fileIcons/FileIconBmp/FileIconBmp';
+import { FileIconCsv } from '##/fileIcons/FileIconCsv/FileIconCsv';
+import { FileIconDoc } from '##/fileIcons/FileIconDoc/FileIconDoc';
+import { FileIconExe } from '##/fileIcons/FileIconExe/FileIconExe';
+import { FileIconGif } from '##/fileIcons/FileIconGif/FileIconGif';
+import { FileIconJpg } from '##/fileIcons/FileIconJpg/FileIconJpg';
+import { FileIconJson } from '##/fileIcons/FileIconJson/FileIconJson';
+import { FileIconLoading } from '##/fileIcons/FileIconLoading/FileIconLoading';
+import { FileIconMov } from '##/fileIcons/FileIconMov/FileIconMov';
+import { FileIconMp3 } from '##/fileIcons/FileIconMp3/FileIconMp3';
+import { FileIconMp4 } from '##/fileIcons/FileIconMp4/FileIconMp4';
+import { FileIconPdf } from '##/fileIcons/FileIconPdf/FileIconPdf';
+import { FileIconPng } from '##/fileIcons/FileIconPng/FileIconPng';
+import { FileIconPpt } from '##/fileIcons/FileIconPpt/FileIconPpt';
+import { FileIconRar } from '##/fileIcons/FileIconRar/FileIconRar';
+import { FileIconRtf } from '##/fileIcons/FileIconRtf/FileIconRtf';
+import { FileIconSvg } from '##/fileIcons/FileIconSvg/FileIconSvg';
+import { FileIconTiff } from '##/fileIcons/FileIconTiff/FileIconTiff';
+import { FileIconTxt } from '##/fileIcons/FileIconTxt/FileIconTxt';
+import { FileIconUndefined } from '##/fileIcons/FileIconUndefined/FileIconUndefined';
+import { FileIconVsd } from '##/fileIcons/FileIconVsd/FileIconVsd';
+import { FileIconWav } from '##/fileIcons/FileIconWav/FileIconWav';
+import { FileIconXls } from '##/fileIcons/FileIconXls/FileIconXls';
+import { FileIconZip } from '##/fileIcons/FileIconZip/FileIconZip';
+import { cn } from '##/utils/bem';
 
 type Props = {
   extension?: string;
@@ -71,6 +73,9 @@ const mapExtensionToSvg: { [value: string]: React.FC<FileIconProps> } = {
   xls: FileIconXls,
   xlsx: FileIconXls,
   json: FileIconJson,
+  vsd: FileIconVsd,
+  vsdx: FileIconVsd,
+  svg: FileIconSvg,
 };
 
 function getIconByExtension(extension?: string): React.FC<FileIconProps> {
