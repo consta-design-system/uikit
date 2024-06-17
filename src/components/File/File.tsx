@@ -19,6 +19,7 @@ import { FileIconLoading } from '##/fileIcons/FileIconLoading/FileIconLoading';
 import { FileIconMov } from '##/fileIcons/FileIconMov/FileIconMov';
 import { FileIconMp3 } from '##/fileIcons/FileIconMp3/FileIconMp3';
 import { FileIconMp4 } from '##/fileIcons/FileIconMp4/FileIconMp4';
+import { FileIconMsg } from '##/fileIcons/FileIconMsg/FileIconMsg';
 import { FileIconPdf } from '##/fileIcons/FileIconPdf/FileIconPdf';
 import { FileIconPng } from '##/fileIcons/FileIconPng/FileIconPng';
 import { FileIconPpt } from '##/fileIcons/FileIconPpt/FileIconPpt';
@@ -76,6 +77,7 @@ const mapExtensionToSvg: { [value: string]: React.FC<FileIconProps> } = {
   vsd: FileIconVsd,
   vsdx: FileIconVsd,
   svg: FileIconSvg,
+  msg: FileIconMsg,
 };
 
 function getIconByExtension(extension?: string): React.FC<FileIconProps> {

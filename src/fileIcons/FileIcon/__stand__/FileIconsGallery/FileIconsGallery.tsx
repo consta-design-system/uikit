@@ -12,6 +12,7 @@ import { FileIconLoading } from '../../../FileIconLoading/FileIconLoading';
 import { FileIconMov } from '../../../FileIconMov/FileIconMov';
 import { FileIconMp3 } from '../../../FileIconMp3/FileIconMp3';
 import { FileIconMp4 } from '../../../FileIconMp4/FileIconMp4';
+import { FileIconMsg } from '../../../FileIconMsg/FileIconMsg';
 import { FileIconPdf } from '../../../FileIconPdf/FileIconPdf';
 import { FileIconPng } from '../../../FileIconPng/FileIconPng';
 import { FileIconPpt } from '../../../FileIconPpt/FileIconPpt';
@@ -40,6 +41,7 @@ const icons = {
   FileIconMov,
   FileIconMp3,
   FileIconMp4,
+  FileIconMsg,
   FileIconPdf,
   FileIconPng,
   FileIconPpt,
