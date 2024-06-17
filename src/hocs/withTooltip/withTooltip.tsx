@@ -24,7 +24,7 @@ type ComponentProps = {
 
 export type TooltipProps = Omit<TooltipComponentProps, 'children' | 'ref'> & {
   tooltipContent?: React.ReactNode;
-  /** @deprecated Используйте tooltipContent */
+  /** @deprecated use tooltipContent */
   content?: React.ReactNode;
   mode?: WithTooltipPropMode;
   closeOnClickOutside?: boolean;
