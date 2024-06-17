@@ -6,12 +6,12 @@
 
   &_size {
     &_s {
-      width: 21px;
+      width: 24px;
       height: 28px;
     }
 
     &_m {
-      width: 30px;
+      width: 34px;
       height: 40px;
     }
   }
@@ -28,22 +28,21 @@
   &.FileIconExe,
   &.FileIconRar,
   &.FileIconJson,
-  &.FileIconZip {
-    color: #c3cad1;
+  &.FileIconZip,
+  &.FileIconVsd {
+    color: #a2abb4;
   }
 
   &.FileIconAvi,
   &.FileIconMov,
-  &.FileIconMp4 {
-    color: #fcd55f;
-  }
-
+  &.FileIconMp4,
   &.FileIconBmp,
   &.FileIconGif,
   &.FileIconJpg,
   &.FileIconPng,
   &.FileIconPpt,
-  &.FileIconTiff {
+  &.FileIconTiff,
+  &.FileIconSvg {
     color: #ed9254;
   }
 
