@@ -42,7 +42,8 @@
   &.FileIconPng,
   &.FileIconPpt,
   &.FileIconTiff,
-  &.FileIconSvg {
+  &.FileIconSvg,
+  &.FileIconMsg {
     color: #ed9254;
   }
 
