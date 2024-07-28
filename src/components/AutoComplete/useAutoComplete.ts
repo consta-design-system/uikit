@@ -141,6 +141,7 @@ export function useAutoComplete<ITEM, GROUP>(
 
   const onChange = (e: React.SyntheticEvent, item: ITEM) => {
     if (!disabled) {
+      setIsOpen.off();
       params.onChange({ value: item, e });
     }
   };
@@ -289,10 +290,15 @@ export function useAutoComplete<ITEM, GROUP>(
   }, [dropdownOpen]);
 
   useEffect(() => {
-    if (searchValue) {
+    if (
+      searchValue &&
+      filteredOptions.length >= 1 &&
+      getItemLabel(filteredOptions[0]).toLocaleLowerCase() !==
+        searchValue.toLocaleLowerCase()
+    ) {
       setIsOpen.on();
     }
-  }, [searchValue]);
+  }, [searchValue, filteredOptions]);
 
   return {
     isOpen: Boolean(isOpen && (isLoading ? true : hasItems)),
