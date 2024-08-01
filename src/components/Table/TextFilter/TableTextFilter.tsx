@@ -32,6 +32,11 @@ const sanitizeRegex = (futureRegex: string): string =>
     .replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&')
     .replaceAll(/\$/g, '$$$$');
 
+const intersectArrays = (one: Item[], other: Item[]) =>
+  one.filter(({ value: oneValue }) =>
+    other.some(({ value: otherValue }) => oneValue === otherValue),
+  );
+
 export const TableTextFilter: React.FC<TableTextFilterProps> = ({
   items = [],
   withSearch = false,
@@ -46,38 +51,43 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
     (filterValue as Item[]) || items,
   );
 
-  const confirmHandler = () => {
-    setSearchValue(null);
-    onConfirm(checkboxGroupValue === null ? [] : checkboxGroupValue);
-  };
-
-  const resetHandler = () => {
-    setCheckboxGroupValue(null);
-  };
-
   const filteredItems = useMemo(() => {
     if (!searchValue) {
       return items;
     }
 
-    return items.filter(({ name }) => {
-      return name.match(new RegExp(sanitizeRegex(searchValue), 'i'));
-    });
+    const regex = new RegExp(sanitizeRegex(searchValue), 'i');
+
+    return items.filter(({ name }) => name.match(regex));
   }, [searchValue, items]);
 
   const setAll = () => {
     setCheckboxGroupValue(filteredItems);
   };
 
-  const isAllSelected = useMemo(
-    () => filteredItems.length === checkboxGroupValue?.length,
+  const filteredAndChecked = useMemo(
+    () => intersectArrays(filteredItems, checkboxGroupValue ?? []),
     [filteredItems, checkboxGroupValue],
   );
 
-  const isSelected = useMemo(
-    () => checkboxGroupValue?.length,
-    [checkboxGroupValue],
+  const isAllSelected = useMemo(
+    () => filteredItems.length === filteredAndChecked.length,
+    [filteredItems, filteredAndChecked],
   );
+
+  const isSelected = useMemo(
+    () => filteredAndChecked.length,
+    [filteredAndChecked],
+  );
+
+  const confirmHandler = () => {
+    setSearchValue(null);
+    onConfirm(filteredAndChecked);
+  };
+
+  const resetHandler = () => {
+    setCheckboxGroupValue(null);
+  };
 
   return (
     <TableFilterContainer
