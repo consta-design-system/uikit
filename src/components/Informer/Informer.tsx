@@ -52,6 +52,7 @@ export const Informer = React.forwardRef<HTMLDivElement, InformerProps>(
       label,
       title,
       children,
+      style,
       ...otherProps
     } = props;
     const Icon = icon;
@@ -68,11 +69,16 @@ export const Informer = React.forwardRef<HTMLDivElement, InformerProps>(
         className={cnInformer(
           {
             view,
-            status,
             withIcon,
           },
           [className, cnMixSpace({ p: size })],
         )}
+        style={{
+          ...style,
+          ['--informer-status-color' as string]: status
+            ? `var(--color-bg-${status})`
+            : undefined,
+        }}
         ref={ref}
       >
         {Icon && <Icon className={cnInformer('Icon')} size="s" />}

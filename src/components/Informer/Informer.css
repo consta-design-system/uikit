@@ -8,24 +8,6 @@
     flex-wrap: nowrap;
   }
 
-  &_status {
-    &_system {
-      --informer-status-color: var(--color-bg-system);
-    }
-
-    &_alert {
-      --informer-status-color: var(--color-bg-alert);
-    }
-
-    &_warning {
-      --informer-status-color: var(--color-bg-warning);
-    }
-
-    &_success {
-      --informer-status-color: var(--color-bg-success);
-    }
-  }
-
   &_view {
     &_bordered {
       background-color: var(--color-bg-default);
