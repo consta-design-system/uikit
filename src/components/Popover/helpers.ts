@@ -9,6 +9,65 @@ const getPosition = (x: number, y: number): NonNullable<Position> => ({
   y: Math.round(y),
 });
 
+export const getPointPossition = (
+  viewportElement: HTMLElement,
+  positionInDocument: Position,
+  withCustomViewPort: boolean,
+): Position => {
+  if (!positionInDocument) {
+    return undefined;
+  }
+
+  if (!withCustomViewPort) {
+    return positionInDocument;
+  }
+
+  const viewportRect = viewportElement.getBoundingClientRect();
+
+  const position: Position = getPosition(
+    positionInDocument.x - viewportRect.left,
+    positionInDocument.y - viewportRect.top,
+  );
+
+  return position;
+};
+
+export const getRenderPosition = (
+  viewportElement: HTMLElement,
+  position: Position,
+  withCustomViewPort: Boolean,
+  width: number | undefined,
+  height: number | undefined,
+) => {
+  if (!width || !height) {
+    return undefined;
+  }
+
+  if (!withCustomViewPort) {
+    return getPosition(
+      (position?.x || 0) + window.scrollX,
+      (position?.y || 0) + window.scrollY,
+    );
+  }
+
+  const viewportRect = viewportElement.getBoundingClientRect();
+
+  if (
+    !position ||
+    position.x < 0 ||
+    position.y < 0 ||
+    position.x + width > viewportElement.clientWidth ||
+    position.y + height > viewportElement.clientHeight
+  ) {
+    return undefined;
+  }
+
+  return getPosition(
+    (position?.x || 0) + window.scrollX + viewportRect.left,
+    (position?.y || 0) + window.scrollY + viewportRect.top,
+  );
+};
+
 export const getPositionsByDirection = ({
   contentSize,
   anchorSize,
