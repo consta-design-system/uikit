@@ -1,0 +1,55 @@
+import { MdxMenu } from '@consta/stand';
+import { MdxImage } from '@consta/stand';
+import start_example from './images/start_example.image.png';
+import data_input from './images/data_input.image.png';
+import data_search from './images/data_search.image.png';
+
+<MdxMenu>
+
+- [Контекст использования](#контекст-использования)
+- [Лучшие практики](#лучшие-практики)
+- [Похожие компоненты](#похожие-компоненты)
+- [Полезные ссылки](#полезные-ссылки)
+
+</MdxMenu>
+
+Компонент **AutoComplete** используется, когда нужно отобразить список элементов на основе введенных пользователем символов и дать возможность заполнить поле одним из предложенных элементов.
+
+<MdxImage src={start_example} />
+
+# Контекст использования
+
+Используйте **AutoComplete**, когда пользователю будут полезны подсказки по вводу.
+
+**Пример**. Заполнение формы.
+
+<MdxImage src={data_input} />
+
+**Пример**. Поисковый запрос.
+
+<MdxImage src={data_search} />
+
+# Лучшие практики
+
+## Подсказка
+
+Вы можете добавить [подсказку](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-autocomplete-stable/tab:dev/hash:подсказка-в-поле-плейсхолдер) для заполнения поля. Так, например, можно написать "Введите запрос".
+
+## Статус
+
+Отображайте [статус](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-autocomplete-stable/tab:dev/hash:статус-поля) ввода в поле формы. Это покажет пользователю корректность заполнения формы.
+
+## Виртуализация скролла
+
+Если список элементов не умещается полностью, настройте [виртуализацию скролла](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-autocomplete-stable/tab:dev/hash:виртуализация-списка). Так пользователь поймет, что у списка есть продолжение.
+
+# Похожие компоненты
+
+- [Combobox](##LIBS.LIB.STAND/lib:uikit/stand:components-combobox-stable) — выпадающий список с возможностью выбора нескольких элементов. Умеет предлагать подсказки на основе ввода.
+- [Select](##LIBS.LIB.STAND/lib:uikit/stand:components-select-stable) — выпадающий список с возможностью выбора одного элемента.
+
+# Полезные ссылки
+
+- [Редполитика](##LIBS.LIB.STAND/lib:portal/stand:guidelines-editorialpolicy)
+- [Combobox](##LIBS.LIB.STAND/lib:uikit/stand:components-combobox-stable)
+- [Select](##LIBS.LIB.STAND/lib:uikit/stand:components-select-stable)
