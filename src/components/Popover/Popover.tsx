@@ -15,7 +15,11 @@ import { isRenderProp } from '##/utils/isRenderProp';
 import { isNumber, isString } from '##/utils/type-guards';
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
-import { getComputedPositionAndDirection } from './helpers';
+import {
+  getComputedPositionAndDirection,
+  getPointPossition,
+  getRenderPosition,
+} from './helpers';
 import { usePopoverReposition } from './usePopoverReposition';
 
 /**
@@ -90,7 +94,7 @@ export type PositioningProps =
 
 type ChildrenRenderProp = (direction: Direction) => React.ReactNode;
 
-export type Props = PropsWithJsxAttributes<
+export type PopoverProps = PropsWithJsxAttributes<
   {
     direction?: Direction;
     spareDirection?: Direction;
@@ -101,8 +105,11 @@ export type Props = PropsWithJsxAttributes<
     children: React.ReactNode | ChildrenRenderProp;
     onClickOutside?: ClickOutsideHandler;
     onSetDirection?: (direction: Direction) => void;
+    viewportRef?: React.RefObject<HTMLElement>;
   } & PositioningProps
 >;
+
+export type Props = PopoverProps; // удалить при мажере
 
 const getOffset = (
   ref: React.RefObject<HTMLDivElement>,
@@ -169,7 +176,7 @@ const ContextConsumer: React.FC<{
 
 const cnPopover = cn('Popover');
 
-export const Popover = forwardRef<HTMLDivElement, Props>(
+export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (props, componentRef) => {
     const {
       children,
@@ -186,8 +193,13 @@ export const Popover = forwardRef<HTMLDivElement, Props>(
       anchorRef,
       equalAnchorWidth,
       onSetDirection,
+      viewportRef,
       ...otherProps
     } = props;
+
+    // console.log(viewportRef);
+
+    const viewportElement = viewportRef?.current || document.documentElement;
 
     const ref = React.useRef<HTMLDivElement>(null);
     const { theme } = useTheme();
@@ -219,17 +231,21 @@ export const Popover = forwardRef<HTMLDivElement, Props>(
       contentSize: { width, height },
       viewportSize: {
         // Размер вьюпорта без скроллбаров
-        width: document.documentElement.clientWidth,
-        height: document.documentElement.clientHeight,
+        width: viewportElement.clientWidth,
+        height: viewportElement.clientHeight,
       },
       arrowOffset,
       offset,
       direction: passedDirection,
       possibleDirections,
       bannedDirections,
-      position: anchorClientRect
-        ? { x: anchorClientRect.left, y: anchorClientRect.top }
-        : passedPosition,
+      position: getPointPossition(
+        viewportElement,
+        anchorClientRect
+          ? { x: anchorClientRect.left, y: anchorClientRect.top }
+          : passedPosition,
+        !!viewportRef?.current,
+      ),
       anchorSize,
       spareDirection,
     });
@@ -277,7 +293,15 @@ export const Popover = forwardRef<HTMLDivElement, Props>(
 
     useLayoutEffect(resetBannedDirections, [props]);
 
-    const notVisible = !position || !height || !width;
+    const renderPosition = getRenderPosition(
+      viewportElement,
+      position,
+      !!viewportRef?.current,
+      width,
+      height,
+    );
+
+    const notVisible = !renderPosition || !height || !width;
 
     return (
       <PortalWithTheme
@@ -291,12 +315,8 @@ export const Popover = forwardRef<HTMLDivElement, Props>(
           ...(notVisible
             ? {}
             : {
-                ['--popover-top' as string]: `${
-                  (position?.y || 0) + window.scrollY
-                }px`,
-                ['--popover-left' as string]: `${
-                  (position?.x || 0) + window.scrollX
-                }px`,
+                ['--popover-left' as string]: `${renderPosition.x}px`,
+                ['--popover-top' as string]: `${renderPosition.y}px`,
                 [`--popover-width` as string]: equalAnchorWidth
                   ? `${anchorSize.width}px`
                   : undefined,

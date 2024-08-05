@@ -34,6 +34,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       style,
       className,
       children,
+      viewportRef,
       ...otherProps
     } = props;
 
@@ -79,6 +80,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               offset={ARROW_SIZE + ARROW_OFFSET / 2 + offset}
               onSetDirection={onSetDirection}
               ref={contentForkedRef}
+              viewportRef={viewportRef}
               className={cnTooltip({ status }, [
                 className,
                 cnMixPopoverAnimate({ animate }),

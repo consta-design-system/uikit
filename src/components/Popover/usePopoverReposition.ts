@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { useMutableRef } from '../../hooks/useMutableRef/useMutableRef';
+import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
 
 const getAllParents = (element: HTMLElement): readonly Node[] => {
   const mutableParents: Node[] = [];
