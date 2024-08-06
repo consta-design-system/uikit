@@ -1,5 +1,5 @@
 .TextField {
-  --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
+  --caption-margin-left: var(--control-border-width);
   --counter-button-icon-color: var(--color-control-typo-ghost);
   --counter-button-background: transparent;
   --counter-offset: 0;

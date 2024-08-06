@@ -30,7 +30,8 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
     view,
     status,
     autoFocus,
-    placeholder,
+    startFieldPlaceholder,
+    endFieldPlaceholder,
     readOnly,
     required,
     tabIndex,
@@ -68,7 +69,6 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
     size,
     view,
     status,
-    placeholder,
     readOnly,
     required,
     tabIndex,
@@ -125,6 +125,7 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
             focused={startFocused}
             autoFocus={autoFocus}
             name={startFieldName}
+            placeholder={startFieldPlaceholder}
           />
           <DatePickerFieldTypeDateTime
             {...commonProps}
@@ -140,6 +141,7 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
             onBlur={endFieldOnBlur}
             focused={endFocused}
             name={endFieldName}
+            placeholder={endFieldPlaceholder}
           />
         </div>
         {caption && (

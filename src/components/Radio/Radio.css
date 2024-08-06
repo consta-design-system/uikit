@@ -2,6 +2,7 @@
   position: relative;
   display: inline-flex;
   font-family: var(--font-sans);
+  line-height: var(--line-height-text-s);
   cursor: pointer;
 
   &-Input {
@@ -41,26 +42,30 @@
   &_size {
     &_xs {
       --radio-font-size: var(--control-text-size-xs);
-      --radio-size: var(--control-box-size-s);
+      --radio-size: var(--control-box-size-m);
       --radio-offset: var(--space-xs);
+      --align-top-margin: 0;
     }
 
     &_s {
       --radio-font-size: var(--control-text-size-s);
-      --radio-size: var(--control-box-size-s);
+      --radio-size: var(--control-box-size-m);
       --radio-offset: var(--space-xs);
+      --align-top-margin: var(--space-3xs);
     }
 
     &_m {
       --radio-font-size: var(--control-text-size-m);
-      --radio-size: var(--control-box-size-m);
+      --radio-size: var(--control-box-size-l);
       --radio-offset: var(--space-xs);
+      --align-top-margin: var(--space-3xs);
     }
 
     &_l {
       --radio-font-size: var(--control-text-size-l);
       --radio-size: var(--control-box-size-l);
       --radio-offset: var(--space-s);
+      --align-top-margin: var(--space-3xs);
     }
   }
 
@@ -161,7 +166,7 @@
       align-items: top;
 
       .Radio-Input {
-        margin-top: var(--space-3xs);
+        margin-top: var(--align-top-margin);
       }
     }
   }

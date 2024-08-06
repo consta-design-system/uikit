@@ -1,7 +1,46 @@
 # Changelog
 
+## v5.6.1 (17/06/2024)
+- [fix(withTooltip): fixed types(#3684)](https://github.com/consta-design-system/uikit/commit/94a4c201a5a4dce4256610d0ab2fe06a9fc21c74) - [@ZettZet](https://github.com/ZettZet)
+- [feat(File): add .msg icon (#3686)](https://github.com/consta-design-system/uikit/commit/1525600ec6c0683a616e7f165979085997a6f778) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v5.5.0 (14/06/2024)
+- [feat(File): update icons, add .vsd and .svg (#3685)](https://github.com/consta-design-system/uikit/commit/cc5ebe1bd62138f50b59510365611f7261ac8e6e) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v5.4.1 (10/06/2024)
+- [fix(useVirtualScroll): fixed calculate position and visible items (#3676)](https://github.com/consta-design-system/uikit/commit/5d1096b5b45250de7585997befc2325ea6dd4899) - [@gizeasy](https://github.com/gizeasy)
+- [fix(caption): removed left indentation in components (#3671)](https://github.com/consta-design-system/uikit/commit/80c38e6440dcfe34cf85b583e1cd26f920f90748) - [@ZettZet](https://github.com/ZettZet)
+- [fix(Picture): edit examples (#3675)](https://github.com/consta-design-system/uikit/commit/19d6dee9d6d836c8f3d24aac410b6610e9298919) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v5.4.0 (06/06/2024)
+Самое важное:
+- В `Switch`, `Checkbox` и `Radio` поправили отступы в соответствии с дизайном.
+- В `DatePicker` реализовали возможность добавлять разный текст плейсхолдеров при использовании типа `range`.
+
+---
+
+- [feat(Switch/Checkbox/Radio): update checkmarks proportions (#3667)](https://github.com/consta-design-system/uikit/commit/1cada84cd85a96d49ca643b298bf69b0b6b45dae) - [@Elena-BLZ](https://github.com/Elena-BLZ)
+- [fix(DatePicker): added rounding within min-max (#3673)](https://github.com/consta-design-system/uikit/commit/62991c0b58ff0e8b2f1079b5e84a452200d452da) - [@ZettZet](https://github.com/ZettZet)
+- [fix(tootip): added ref forwarding to Transition (#3672)](https://github.com/consta-design-system/uikit/commit/2c5255c463ee88def0ef19bf364f545158393239) - [@ZettZet](https://github.com/ZettZet)
+- [fix(Table): added test to check sanitize (#3670)](https://github.com/consta-design-system/uikit/commit/c8fd8304446916e9b922e7bd630e7346b4ea4892) - [@ZettZet](https://github.com/ZettZet)
+- [feat(DatePicker): add individual start-end  placeholders for DatePicker in range formats (#3662)](https://github.com/consta-design-system/uikit/commit/9bca9907598f48c9909d83d76df381ae74322570) - [@Elena-BLZ](https://github.com/Elena-BLZ)
+
+--------------------
+
+## v5.3.2 (27/05/2024)
+- [fix(button): add missing html form attribute (#3664)](https://github.com/consta-design-system/uikit/commit/4d8f2ee561b4d519f6dea35718528e6ec5531699) - [@js2me](https://github.com/js2me)
+- [chore(builder): fix build](https://github.com/consta-design-system/uikit/commit/77ca591d8b68a294b1c93a478450c90d91bd1171) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.3.0 (26/04/2024)
-⚠️Перед обновления библиотеки обновите `react-dropzone` до `^14.2.3`
+⚠️Перед обновлением библиотеки обновите `react-dropzone` до версии  `^14.2.3`
 
 Самое важное:
 
@@ -9,9 +48,9 @@
 - В `TextField` добавили колбэк `onClear`.
 - В `ChoiceGroup` при `truncate` на элементах  проставили `title` для вывода подсказок.
 - В `Chips` добавили свойства `disabled` и `getItemDisabled`.
-- В `Spoiler`  добавили контроль состояния открыт/закрыт.
+- В `Spoiler` добавили контроль состояния открыт/закрыт.
 - Повысили стабильность и производительность компонентов.
-- Небольшие правки в документации.
+- Внесли небольшие правки в документацию.
 
 ---
 
@@ -385,76 +424,3 @@
 - [feat(useVirtualScroll): add hook (#3108)](https://github.com/consta-design-system/uikit/commit/b5165123aa7bcf213dba5570ec12d01242623905) - [@gizeasy](https://github.com/gizeasy)
 - [fix(List): fixed _status (#3109)](https://github.com/consta-design-system/uikit/commit/6ee3cd309745391c00183b394f07bdbaa5935a13) - [@gizeasy](https://github.com/gizeasy)
 - [chore(deps): update](https://github.com/consta-design-system/uikit/commit/7e1f33cf081dda14a4b1aa54c72ff4cdad266982) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.19.0 (02/06/2023)
-Самое важное: 
-- В `Popover` решили проблему резких скачков при появлении элемента.
-- В `Tooltip` добавили свойство `offset`.
-
----
-
-- [docs(standConfig): add figmaUrl (#3074)](https://github.com/consta-design-system/uikit/commit/94459d029f5b4dec19a7d8d4766be3e55e0bf774) - [@gizeasy](https://github.com/gizeasy)
-- [fix(ProgressStepBar): reduce of empty array with no initial value (#3094)](https://github.com/consta-design-system/uikit/commit/271f9bf816534df38ea16311a54a8c3c82673176) - [@vladimir-skikh](https://github.com/vladimir-skikh)
-- [docs(Card): fix as description (#3096)](https://github.com/consta-design-system/uikit/commit/0ec2e152bedf84d7ccfcd1fb1a8a240db7751df3) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Slider): fix tooltip position](https://github.com/consta-design-system/uikit/commit/1a12e8919018383cb35fd6785b5a7e7ec24075bf) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Tooltip): add offset prop](https://github.com/consta-design-system/uikit/commit/103c6efae29b0139052536e08b491b75eb4b5969) - [@gizeasy](https://github.com/gizeasy)
-- [refactor(DragNDropField): removed isRenderProp](https://github.com/consta-design-system/uikit/commit/9605b5dff8d0766e3342a9c27002bb8985d8d773) - [@gizeasy](https://github.com/gizeasy)
-- [refactor(ContextMenu): removed animation fix](https://github.com/consta-design-system/uikit/commit/63b8b29af23fbabbfa0e8f944f2764680064fdc2) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Popover): fixed twitching during positioning](https://github.com/consta-design-system/uikit/commit/d0611087d89d1082154d4613ad1877161b1f8eb1) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.18.0 (31/05/2023)
-Самое важное:
-- Исправили расхождения с дизайном в компонентах `List`, `Checkbox`, `Informer`, `RadioGroup`, `CheckboxGroup`, `File`, `Breadcrumbs`, `ProgressStepBar`, `User`.
-- В `Badge` добавили возможность ставить иконку справа.
-- В `RadioGroup` и `CheckboxGroup` добавили возможность указывать ключ.
-
----
-
-- [fix(List): fix discrepancies between desigh and code for list divider (#3087)](https://github.com/consta-design-system/uikit/commit/1ecf9f2fed368069227711261e55b9be364eb651) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Checkbox): fix arrow position (#3088)](https://github.com/consta-design-system/uikit/commit/77a29f962191775ac1624a8186c5b51cac231765) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Badge): added the ability to specify the icon on the right and left side (#3077)](https://github.com/consta-design-system/uikit/commit/f4f038d33b5b70f74f19d26b3c2a072403377097) - [@N1MBER](https://github.com/N1MBER)
-- [docs(ProgressStepBar): add content to variants example (#3084)](https://github.com/consta-design-system/uikit/commit/93008e86d6dbf90d0ea0efd0e34f7b3530664da8) - [@N1MBER](https://github.com/N1MBER)
-- [fix(ProgressStepBar): reduce of empty array with no initial value (#3082)](https://github.com/consta-design-system/uikit/commit/219b14208d8d1564f13929e8a994e41c3435f62f) - [@vladimir-skikh](https://github.com/vladimir-skikh)
-- [fix(Informer): fix discrepancies between design and code (#3053)](https://github.com/consta-design-system/uikit/commit/ad97a676c1b80b0304e17dbe64fd1e133958fd04) - [@N1MBER](https://github.com/N1MBER)
-- [fix(SnackBar): fix variants (#3054)](https://github.com/consta-design-system/uikit/commit/3761ff2ba56beeb0f96e78a9aa62aa9a42e29729) - [@N1MBER](https://github.com/N1MBER)
-- [feat(RadioGroup): fix styles and add keys props (#3056)](https://github.com/consta-design-system/uikit/commit/2c49effdafd893b3b4587d70186995cdd3afc18d) - [@N1MBER](https://github.com/N1MBER)
-- [fix(File): fix spin size (#3057)](https://github.com/consta-design-system/uikit/commit/353fae631c09fb62a31f834edc48ba74289eddf3) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Breadcrumbs): fix discrepancies between design and code (#3058)](https://github.com/consta-design-system/uikit/commit/d998131fb8598925357bc53105b08310063d63cd) - [@N1MBER](https://github.com/N1MBER)
-- [fix(ProgressStepBar): fix discrepancies between design and code and also fix bugs (#3061)](https://github.com/consta-design-system/uikit/commit/874cb6e5e1f748db8cecb3c022c891ef07bd02e2) - [@N1MBER](https://github.com/N1MBER)
-- [fix(User): fix discrepancies between design and code (#3060)](https://github.com/consta-design-system/uikit/commit/d641d3ef9e2103179afc2405b9e488b2f3a82a9d) - [@N1MBER](https://github.com/N1MBER)
-- [fix(DragNDropField): fix tooltip content wrap (#3076)](https://github.com/consta-design-system/uikit/commit/3a361eca621f1c8444eeb520462da9a9d994968b) - [@N1MBER](https://github.com/N1MBER)
-- [fix(SelectDropown): fix labelForEmptyItems (#3078)](https://github.com/consta-design-system/uikit/commit/3fa869e1ff5971613427948611c4dcce387678c3) - [@N1MBER](https://github.com/N1MBER)
-- [fix(DateTime): fig bug with useless props (#3079)](https://github.com/consta-design-system/uikit/commit/d3e3c05a03741ea5a4cbf0b5fcfff18c0697d0b6) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Tabs): fix styles break (#3083)](https://github.com/consta-design-system/uikit/commit/36cbc53f75a9900579cd600c9f69837064ce1c76) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Combobox): selectAll conditional by multiple in variants](https://github.com/consta-design-system/uikit/commit/d9064e3399a1d057b165ecb38de33b9292767828) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.17.2 (22/05/2023)
-Запускать локальный сервер разработки и сборку пакетов теперь можно и на ОС Windows. 
-
----
-
-- [chore: configure build for windows (#3051)](https://github.com/consta-design-system/uikit/commit/e533ecef0f7392d091616e24922a458fa0f73c85) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.17.1 (05/05/2023)
-- [fix(Combobox): fix update serchValue (#3030)](https://github.com/consta-design-system/uikit/commit/ab41caac40ca84c74eed84a38cc95cc5bbd66627) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.17.0 (27/04/2023)
-Самое важное:
-
-- в `useBreakpoints` добавили функцию `addPrefix`. Чтобы при пробросе `breakpoints`, как модификации блока, было удобнее генерировать класснеймы
-- в `DatePicker` исправили валидaцию значения инпута при кастомном формате
-
----
-
-- [feat(useBreakpoints): added helper `addPrefix` (#3025)](https://github.com/consta-design-system/uikit/commit/ec03a288b90ef65b1638fbba6e3572afb8f3ba7a) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): fixed validate mask (#3012)](https://github.com/consta-design-system/uikit/commit/44484f9e1020c8211b96443fe1b235cb3abb2428) - [@gizeasy](https://github.com/gizeasy)

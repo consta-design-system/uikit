@@ -45,6 +45,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
       inputRef,
       dropdownClassName,
       name,
+      placeholder,
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
@@ -198,6 +199,12 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
           endFocused={endFocused}
           startFieldName={getFieldName(name, 0)}
           endFieldName={getFieldName(name, 1)}
+          startFieldPlaceholder={
+            Array.isArray(placeholder) ? placeholder?.[0] : placeholder
+          }
+          endFieldPlaceholder={
+            Array.isArray(placeholder) ? placeholder?.[1] : placeholder
+          }
           disabled={disabled}
         />
         <DatePickerDropdown

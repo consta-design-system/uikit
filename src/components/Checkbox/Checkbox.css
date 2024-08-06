@@ -2,39 +2,40 @@
   position: relative;
   display: inline-flex;
   font-family: var(--font-sans);
+  line-height: var(--line-height-text-s);
   cursor: pointer;
 
   &_size {
     &_xs {
       --checkbox-font-size: var(--control-text-size-xs);
-      --checkbox-size: var(--control-box-size-s);
+      --checkbox-size: var(--control-box-size-m);
       --checkbox-offset: var(--space-xs);
-      --checkbox-intermidate-width: calc(var(--space-xs) - var(--space-3xs));
       --checkbox-arrow-width: calc(3 * var(--space-3xs) / 4);
+      --align-top-margin: 0;
     }
 
     &_s {
       --checkbox-font-size: var(--control-text-size-s);
-      --checkbox-size: calc(var(--control-box-size-s) + var(--space-3xs));
+      --checkbox-size: var(--control-box-size-m);
       --checkbox-offset: var(--space-xs);
-      --checkbox-intermidate-width: var(--space-xs);
       --checkbox-arrow-width: calc(3 * var(--space-3xs) / 4);
+      --align-top-margin: var(--space-3xs);
     }
 
     &_m {
       --checkbox-font-size: var(--control-text-size-m);
-      --checkbox-size: var(--control-box-size-m);
+      --checkbox-size: var(--control-box-size-l);
       --checkbox-offset: var(--space-xs);
-      --checkbox-intermidate-width: calc(var(--space-s) - var(--space-3xs));
       --checkbox-arrow-width: var(--space-3xs);
+      --align-top-margin: var(--space-3xs);
     }
 
     &_l {
       --checkbox-font-size: var(--control-text-size-l);
       --checkbox-size: var(--control-box-size-l);
       --checkbox-offset: var(--space-s);
-      --checkbox-intermidate-width: calc(var(--space-m) - var(--space-3xs));
       --checkbox-arrow-width: var(--space-3xs);
+      --align-top-margin: var(--space-3xs);
     }
   }
 
@@ -67,7 +68,16 @@
       border-color: var(--checkbox-checked-border);
 
       &::before {
-        width: var(--checkbox-intermidate-width);
+        --checkbox-intermidate-offset:
+          calc(
+            var(--space-3xs) + var(--control-border-width)
+          );
+        top: calc(calc(var(--checkbox-size) - var(--space-3xs)) / 2);
+        left: var(--space-3xs);
+        width:
+          calc(
+            var(--checkbox-size) - var(--checkbox-intermidate-offset) * 2
+          );
         height: var(--space-3xs);
         background-color: var(--checkbox-checked-check);
         border: none;
@@ -110,7 +120,7 @@
       align-items: top;
 
       .Checkbox-Input {
-        margin-top: var(--space-3xs);
+        margin-top: var(--align-top-margin);
       }
     }
   }

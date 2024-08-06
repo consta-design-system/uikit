@@ -1,16 +1,33 @@
 import { RefObject, useCallback, useEffect } from 'react';
 
 import { getElementSize } from '##/hooks/useComponentSize';
+import { useMutableRef } from '##/hooks/useMutableRef';
+
+export type UseVirtualScrollProps = {
+  length: number;
+  isActive?: boolean;
+  onScrollToBottom?: (index: number) => void;
+};
+
+export type UseVirtualScrollReturn<ITEM_ELEMENT, SCROLL_ELEMENT> = {
+  listRefs: React.RefObject<ITEM_ELEMENT>[];
+  scrollElementRef: React.RefObject<SCROLL_ELEMENT>;
+  slice: [number, number];
+  spaceTop: number;
+};
+
+export type Bounds = [[number, number], [number, number]];
 
 export const defaultItemsCalculationCount = 5;
-const visualGap = 200;
+
+export const arraysIsEq = (arr1: number[], arr2: number[]) =>
+  arr1.join('-') === arr2.join('-');
 
 export const useScroll = (
   ref: RefObject<HTMLElement>,
   fn: () => void,
   isActive: boolean,
 ) => {
-  useEffect(() => (isActive ? fn() : undefined), [ref.current, fn, isActive]);
   useEffect(() => {
     if (isActive) {
       ref.current?.addEventListener('scroll', fn);
@@ -35,17 +52,19 @@ const roundPositionByGap = (position: number, gap: number) => {
 export const getVisiblePosition = (
   top: number,
   height: number,
+  elementMaxSize: number,
 ): [number, number] => {
-  const first = Math.ceil(
-    roundPositionByGap(top - height < 0 ? 0 : top - height, height) - visualGap,
-  );
+  const gap =
+    height > elementMaxSize * defaultItemsCalculationCount
+      ? height * 1.5
+      : elementMaxSize * defaultItemsCalculationCount;
 
-  return [
-    first <= 0 ? 0 : first,
-    Math.ceil(
-      roundPositionByGap(top === 0 ? height : top, height) + height + visualGap,
-    ),
+  const visiblePosition: [number, number] = [
+    Math.ceil(roundPositionByGap(top - gap, height)),
+    Math.ceil(roundPositionByGap(top === 0 ? gap : top + gap, height)),
   ];
+
+  return visiblePosition;
 };
 
 export const calculateSavedSizes = (savedSizes: number[], sizes: number[]) => {
@@ -62,8 +81,11 @@ export const calculateSavedSizes = (savedSizes: number[], sizes: number[]) => {
 export const useCalculateVisiblePosition = (
   scrollElement: HTMLElement | null,
   set: (value: React.SetStateAction<[number, number]>) => void,
-) =>
-  useCallback(() => {
+  elementsSizes: number[],
+) => {
+  const elementMaxSizeRef = useMutableRef(Math.max.apply(null, elementsSizes));
+
+  return useCallback(() => {
     if (!scrollElement) {
       return;
     }
@@ -71,6 +93,7 @@ export const useCalculateVisiblePosition = (
     const visiblePosition = getVisiblePosition(
       scrollElement.scrollTop,
       getElementHeight(scrollElement),
+      elementMaxSizeRef.current,
     );
 
     set((state) => {
@@ -81,6 +104,7 @@ export const useCalculateVisiblePosition = (
       return state;
     });
   }, [scrollElement, set]);
+};
 
 const addCount = (
   pxs: [number, number],
@@ -93,7 +117,7 @@ const addCount = (
 
   let add = defaultItemsCalculationCount;
 
-  while (visiblePosition[1] > pxs[1] + add * average) {
+  while (visiblePosition[1] >= pxs[1] + add * average) {
     add += defaultItemsCalculationCount;
   }
 
@@ -101,23 +125,23 @@ const addCount = (
 };
 
 export const calculateBounds = (
-  savedSize: number[],
-  size: number[],
+  savedSizes: number[],
+  sizes: number[],
   visiblePosition: [number, number],
   length: number,
-) => {
+): Bounds => {
   const pxs: [number, number] = [0, 0];
   const indexs: [number, number] = [0, 0];
 
-  for (let index = 0; index < savedSize.length; index++) {
+  for (let index = 0; index < savedSizes.length; index++) {
     if (visiblePosition[0] > pxs[0]) {
-      pxs[0] += savedSize[index];
-      indexs[0] = index;
+      pxs[0] += savedSizes[index];
+      indexs[0] = index + 1;
     }
 
     if (visiblePosition[1] > pxs[1]) {
-      pxs[1] += savedSize[index];
-      indexs[1] = index;
+      pxs[1] += savedSizes[index];
+      indexs[1] = index + 1;
     }
   }
 
@@ -125,12 +149,12 @@ export const calculateBounds = (
     indexs[1] = defaultItemsCalculationCount;
   }
 
-  if (savedSize.length - 1 >= indexs[1] && size.length !== savedSize.length) {
-    indexs[1] += addCount(pxs, visiblePosition, savedSize);
+  if (sizes.length !== savedSizes.length) {
+    indexs[1] += addCount(pxs, visiblePosition, savedSizes);
   }
 
-  if (indexs[1] - 1 > length) {
-    indexs[1] = length - 1;
+  if (indexs[1] > length) {
+    indexs[1] = length;
   }
 
   return [pxs, indexs];

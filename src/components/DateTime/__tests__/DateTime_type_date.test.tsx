@@ -95,6 +95,32 @@ describe('Компонент DateTime_type_date', () => {
       expect(labels[0]).toHaveTextContent('январь 1970');
       expect(labels[1]).toHaveTextContent('февраль 1970');
     });
+
+    it('Если текущая дата меньше минимальной, отображается минимальная', () => {
+      jest.useFakeTimers('modern');
+      jest.setSystemTime(new Date(2000, 0));
+      renderComponent({
+        minDate: new Date(2001, 0),
+      });
+
+      const label = getDateTimeLabel();
+
+      expect(label).toHaveTextContent('январь 2001');
+      jest.useRealTimers();
+    });
+
+    it('Если текущая дата больше максимальной, отображается максимальная', () => {
+      jest.useFakeTimers('modern');
+      jest.setSystemTime(new Date(2000, 0));
+      renderComponent({
+        maxDate: new Date(1999, 0),
+      });
+
+      const label = getDateTimeLabel();
+
+      expect(label).toHaveTextContent('январь 1999');
+      jest.useRealTimers();
+    });
   });
 
   describe('проверка onChangeCurrentVisibleDate', () => {

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { DateRange } from '../../../utils/types/Date';
-import { isDateInRange } from './isDateInRange';
 
 type GetCurrentVisibleDateProps = {
   currentVisibleDate: Date | undefined;
@@ -14,6 +13,24 @@ type GetCurrentVisibleDateProps = {
 
 export type UseCurrentVisibleDateProps = GetCurrentVisibleDateProps & {
   onChangeCurrentVisibleDate?: (date: Date) => void;
+};
+
+const clampDate = (
+  currentDate: Date,
+  minDate: Date | undefined,
+  maxDate: Date | undefined,
+): Date => {
+  const currentDateTime = currentDate.getTime();
+
+  if (minDate && currentDateTime < minDate.getTime()) {
+    return minDate;
+  }
+
+  if (maxDate && currentDateTime > maxDate.getTime()) {
+    return maxDate;
+  }
+
+  return currentDate;
 };
 
 const calculateCurrentVisibleDate = ({
@@ -38,29 +55,11 @@ const calculateCurrentVisibleDate = ({
     return value;
   }
 
+  // По хорошему было бы неплохо абстрагировать получение текущей даты
+  // чтобы не использовать моки через jest
   const currentDate = new Date();
 
-  if (minDate && maxDate && !isDateInRange(currentDate, [minDate, maxDate])) {
-    return minDate;
-  }
-
-  if (minDate && !maxDate) {
-    const minDateTime = minDate.getTime();
-    const currentDateTime = currentDate.getTime();
-    if (currentDateTime < minDateTime) {
-      return minDate;
-    }
-  }
-
-  if (!minDate && maxDate) {
-    const maxDateTime = maxDate.getTime();
-    const currentDateTime = currentDate.getTime();
-    if (currentDateTime > maxDateTime) {
-      return maxDate;
-    }
-  }
-
-  return currentDate;
+  return clampDate(currentDate, minDate, maxDate);
 };
 
 export const getCurrentVisibleDate = (

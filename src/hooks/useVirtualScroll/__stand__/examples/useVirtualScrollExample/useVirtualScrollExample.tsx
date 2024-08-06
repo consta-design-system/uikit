@@ -29,7 +29,7 @@ export const UseVirtualScrollExampleVirtual = () => {
           {items.slice(...slice).map((item, index) => {
             return (
               <ListItem
-                key={`${index}${spaceTop}`}
+                key={slice[0] + index}
                 ref={listRefs[slice[0] + index]}
                 label={`Element ${item}`}
               />
@@ -70,7 +70,7 @@ export const UseVirtualScrollExampleInfinity = () => {
           {items.slice(...slice).map((item, index) => {
             return (
               <ListItem
-                key={`${index}${slice[0]}${slice[1]}`}
+                key={slice[0] + index}
                 ref={listRefs[slice[0] + index]}
                 label={`Element ${item}`}
               />

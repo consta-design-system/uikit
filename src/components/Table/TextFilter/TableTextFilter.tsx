@@ -27,6 +27,11 @@ type TableTextFilterProps = FilterComponentProps & {
   emptySearchText?: string;
 };
 
+const sanitizeRegex = (futureRegex: string): string =>
+  futureRegex
+    .replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    .replaceAll(/\$/g, '$$$$');
+
 export const TableTextFilter: React.FC<TableTextFilterProps> = ({
   items = [],
   withSearch = false,
@@ -56,7 +61,7 @@ export const TableTextFilter: React.FC<TableTextFilterProps> = ({
     }
 
     return items.filter(({ name }) => {
-      return name.match(new RegExp(`${searchValue}`, 'i'));
+      return name.match(new RegExp(sanitizeRegex(searchValue), 'i'));
     });
   }, [searchValue, items]);
 

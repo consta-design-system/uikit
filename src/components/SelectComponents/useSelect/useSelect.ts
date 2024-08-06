@@ -86,7 +86,7 @@ export type SelectProps<ITEM, GROUP, MULTIPLE extends boolean> = {
 export type OptionProps<ITEM> = {
   index: number;
   item: ITEM | OptionForCreate | SelectAllItem;
-  keyPrefix: number;
+  keyPrefix: string | number;
 };
 
 export type GetOptionPropsResult = {

@@ -1,5 +1,5 @@
 import { Example } from '@consta/stand';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag';
@@ -14,11 +14,21 @@ type Item = {
 const useMockLoadData = (
   searchValue = '',
   timeout = 2000,
-): [Item[], boolean, () => void] => {
+): [Item[], boolean, (offset: number | boolean) => void] => {
+  const lastOffsetRef = useRef(-1);
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
   const [lenght, setLenght] = useState<number>(0);
   const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
+  const load = (offset: number | boolean) => {
+    if (typeof offset === 'number' && lastOffsetRef.current !== offset) {
+      lastOffsetRef.current = offset;
+      setIsStart.on();
+    }
+    if (typeof offset === 'boolean' && offset === true) {
+      setIsStart.on();
+    }
+  };
 
   const items = useMemo(() => {
     if (searchValue) {
@@ -71,7 +81,7 @@ const useMockLoadData = (
     };
   }, []);
 
-  return [searchValue && isLoading ? [] : items, isLoading, setIsStart.on];
+  return [searchValue && isLoading ? [] : items, isLoading, load];
 };
 
 export const ComboboxExampleIsLoading = () => {
@@ -98,9 +108,6 @@ export const ComboboxExampleIsLoadingOnScrollBottom = () => {
   const [value, setValue] = useState<Item[] | null>();
   const [searchValue, setSearchValue] = useState<string>('');
   const [data, isLoading, load] = useMockLoadData(searchValue);
-  const onDropdownOpen = useCallback((open: boolean) => {
-    open && load();
-  }, []);
 
   return (
     <Example col={1}>
@@ -110,7 +117,6 @@ export const ComboboxExampleIsLoadingOnScrollBottom = () => {
         value={value}
         onChange={setValue}
         multiple
-        onDropdownOpen={onDropdownOpen}
         isLoading={isLoading}
         virtualScroll
         onScrollToBottom={searchValue ? undefined : load}

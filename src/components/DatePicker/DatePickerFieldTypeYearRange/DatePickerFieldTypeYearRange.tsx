@@ -33,7 +33,8 @@ export const DatePickerFieldTypeYearRange = forwardRef<
     view,
     status,
     autoFocus,
-    placeholder,
+    startFieldPlaceholder,
+    endFieldPlaceholder,
     readOnly,
     required,
     tabIndex,
@@ -69,7 +70,6 @@ export const DatePickerFieldTypeYearRange = forwardRef<
     view,
     status,
     autoFocus,
-    placeholder,
     readOnly,
     required,
     tabIndex,
@@ -125,6 +125,7 @@ export const DatePickerFieldTypeYearRange = forwardRef<
             onBlur={startFieldOnBlur}
             focused={startFocused}
             name={startFieldName}
+            placeholder={startFieldPlaceholder}
           />
           <DatePickerFieldTypeYear
             {...commonProps}
@@ -140,6 +141,7 @@ export const DatePickerFieldTypeYearRange = forwardRef<
             onFocus={endFieldOnFocus}
             onBlur={endFieldOnBlur}
             focused={endFocused}
+            placeholder={endFieldPlaceholder}
           />
         </div>
         {caption && (

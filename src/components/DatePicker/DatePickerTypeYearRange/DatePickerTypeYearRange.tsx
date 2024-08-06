@@ -34,6 +34,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
       renderAdditionalControls,
       inputRef,
       name,
+      placeholder,
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
@@ -188,6 +189,12 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
           startFieldName={Array.isArray(name) ? name[0] : `${name}_start`}
           endFieldName={Array.isArray(name) ? name[1] : `${name}_end`}
           disabled={disabled}
+          startFieldPlaceholder={
+            Array.isArray(placeholder) ? placeholder?.[0] : placeholder
+          }
+          endFieldPlaceholder={
+            Array.isArray(placeholder) ? placeholder?.[1] : placeholder
+          }
         />
         <DatePickerDropdown
           type="year"

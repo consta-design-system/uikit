@@ -1,5 +1,5 @@
 .Select {
-  --caption-margin-left: calc(var(--input-space) + var(--control-border-width));
+  --caption-margin-left: var(--control-border-width);
   --clear-button-color: var(--color-control-typo-clear);
   position: relative;
   display: flex;

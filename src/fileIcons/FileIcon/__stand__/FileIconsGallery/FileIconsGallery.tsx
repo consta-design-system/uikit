@@ -12,14 +12,17 @@ import { FileIconLoading } from '../../../FileIconLoading/FileIconLoading';
 import { FileIconMov } from '../../../FileIconMov/FileIconMov';
 import { FileIconMp3 } from '../../../FileIconMp3/FileIconMp3';
 import { FileIconMp4 } from '../../../FileIconMp4/FileIconMp4';
+import { FileIconMsg } from '../../../FileIconMsg/FileIconMsg';
 import { FileIconPdf } from '../../../FileIconPdf/FileIconPdf';
 import { FileIconPng } from '../../../FileIconPng/FileIconPng';
 import { FileIconPpt } from '../../../FileIconPpt/FileIconPpt';
 import { FileIconRar } from '../../../FileIconRar/FileIconRar';
 import { FileIconRtf } from '../../../FileIconRtf/FileIconRtf';
+import { FileIconSvg } from '../../../FileIconSvg/FileIconSvg';
 import { FileIconTiff } from '../../../FileIconTiff/FileIconTiff';
 import { FileIconTxt } from '../../../FileIconTxt/FileIconTxt';
 import { FileIconUndefined } from '../../../FileIconUndefined/FileIconUndefined';
+import { FileIconVsd } from '../../../FileIconVsd/FileIconVsd';
 import { FileIconWav } from '../../../FileIconWav/FileIconWav';
 import { FileIconXls } from '../../../FileIconXls/FileIconXls';
 import { FileIconZip } from '../../../FileIconZip/FileIconZip';
@@ -38,14 +41,17 @@ const icons = {
   FileIconMov,
   FileIconMp3,
   FileIconMp4,
+  FileIconMsg,
   FileIconPdf,
   FileIconPng,
   FileIconPpt,
   FileIconRar,
   FileIconRtf,
+  FileIconSvg,
   FileIconTiff,
   FileIconTxt,
   FileIconUndefined,
+  FileIconVsd,
   FileIconWav,
   FileIconXls,
   FileIconZip,
