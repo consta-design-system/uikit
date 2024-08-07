@@ -1,5 +1,19 @@
 # Changelog
 
+## v5.7.0 (07/08/2024)
+Самое важное:
+
+- В `Popover` и `Tooltip` добавили возможность указывать вьюпорт.
+
+---
+
+- [feat(Popover, Tooltip): add viewport (#3719)](https://github.com/consta-design-system/uikit/commit/ccda0ffaa6b021346c847e3c59e512976f59ab8c) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Informer): fixed status examples (#3714)](https://github.com/consta-design-system/uikit/commit/18fcb020caf3a781b78087aec6c40e8ab9ccfbe9) - [@gizeasy](https://github.com/gizeasy)
+- [fix(TableTextFilter): Apply filter based on visible and checked elements (#3712)](https://github.com/consta-design-system/uikit/commit/75eec472115a8e781405808d13f05843dcdaf97f) - [@ZettZet](https://github.com/ZettZet)
+- [fix(Chips): callback fix (#3709)](https://github.com/consta-design-system/uikit/commit/9e223d472b61a3e6291bba5731c3d995776bb114) - [@ZettZet](https://github.com/ZettZet)
+
+--------------------
+
 ## v5.6.1 (17/06/2024)
 - [fix(withTooltip): fixed types(#3684)](https://github.com/consta-design-system/uikit/commit/94a4c201a5a4dce4256610d0ab2fe06a9fc21c74) - [@ZettZet](https://github.com/ZettZet)
 - [feat(File): add .msg icon (#3686)](https://github.com/consta-design-system/uikit/commit/1525600ec6c0683a616e7f165979085997a6f778) - [@gizeasy](https://github.com/gizeasy)
@@ -408,19 +422,3 @@
 - [fix(SelectComponents): remove useless z-index (#3123)](https://github.com/consta-design-system/uikit/commit/9fa85e928fc58ce524241318a51bac39b2492c11) - [@N1MBER](https://github.com/N1MBER)
 - [fix(Checkbox): remove useless z-index (#3122)](https://github.com/consta-design-system/uikit/commit/0f67f1731b7ab36fbd2d94dd7b247e3f5487f545) - [@N1MBER](https://github.com/N1MBER)
 - [docs(Header): marked as deprecated (#3113)](https://github.com/consta-design-system/uikit/commit/03e53a3f0e51774757a0a372d04efc12aa60bf77) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.20.0 (23/06/2023)
-Самое важное:
-- в `Button` изменили визуальный стиль модификаторов `_disabled` и `_loading`
-- добавили useVirtualScroll, для создания списков с виртуальным скроллом
-
----
-
-- [feat(AutoComplete): improvement searchFunction (#3118)](https://github.com/consta-design-system/uikit/commit/92322a78329edb42f0734dafda7fd98a3571fc77) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Button): update disabled styles (#3104)](https://github.com/consta-design-system/uikit/commit/eb2f6ebac0fc01db3621c65d91e56867372bd60e) - [@N1MBER](https://github.com/N1MBER)
-- [chore(deps-dev): bump semver from 7.3.7 to 7.5.2 (#3116)](https://github.com/consta-design-system/uikit/commit/5a4308a84cc917c130d0f31b75c8ad1ded072595) - [@dependabot](https://github.com/dependabot[bot])
-- [feat(useVirtualScroll): add hook (#3108)](https://github.com/consta-design-system/uikit/commit/b5165123aa7bcf213dba5570ec12d01242623905) - [@gizeasy](https://github.com/gizeasy)
-- [fix(List): fixed _status (#3109)](https://github.com/consta-design-system/uikit/commit/6ee3cd309745391c00183b394f07bdbaa5935a13) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deps): update](https://github.com/consta-design-system/uikit/commit/7e1f33cf081dda14a4b1aa54c72ff4cdad266982) - [@gizeasy](https://github.com/gizeasy)
