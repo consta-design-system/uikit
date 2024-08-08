@@ -1,7 +1,9 @@
 import { MdxMenu } from '@consta/stand';
 import { MdxImage } from '@consta/stand';
-import when_blog from './images/when_blog.image.png';
-import when_tasks from './images/when_tasks.image.png';
+import blog from './images/blog.image.png';
+import tasks from './images/tasks.image.png';
+import pc from './images/pc.image.png';
+import start_example from './images/start_example.image.png';
 
 <MdxMenu>
 
@@ -12,7 +14,9 @@ import when_tasks from './images/when_tasks.image.png';
 
 </MdxMenu>
 
-Теги играют важную роль в организации и структурировании контента, с их помощью можно быстро фильтровать и находить информацию. Теги часто применяются в блогах, форумах и других системах управления контентом для обозначения ключевых слов или тем.
+Теги помогают организовать и структурировать контент. С их помощью можно быстро фильтровать и находить информацию. Теги часто применяются в блогах, форумах и других системах управления контентом для обозначения ключевых слов или тем.
+
+<MdxImage src={start_example} />
 
 # Контекст использования
 
@@ -22,9 +26,13 @@ import when_tasks from './images/when_tasks.image.png';
 
 Когда для объекта нужно отобразить категорию, тему или ключевые слова. Это облегчит управление и структурирование данных.
 
+**Пример**. Классификация комплектующих для ПК в интернет-магазине.
+
+<MdxImage src={pc} />
+
 **Пример**. В системе управления задачами теги могут использоваться для классификации задач по направлению работ и категории оборудования.
 
-<MdxImage src={when_tasks} />
+<MdxImage src={tasks} />
 
 ## Метки для поиска и фильтрации
 
@@ -32,7 +40,7 @@ import when_tasks from './images/when_tasks.image.png';
 
 **Пример**. В блогах или в новостных сайтах тегами можно помечать статьи и фильтровать контент по заданным меткам.
 
-<MdxImage src={when_blog} />
+<MdxImage src={blog} />
 
 # Лучшие практики
 
@@ -50,8 +58,8 @@ import when_tasks from './images/when_tasks.image.png';
 
 # Похожие компоненты
 
-- [Chips](##LIBS.LIB.STAND/lib:uikit/stand:components-chips-stable). Элементы фильтрации по заранее заданным категориям или ключевым словам. Используются, когда нужно быстро сузить объем контента, с которым работает пользователь.
-- [Badge](##LIBS.LIB.STAND/lib:uikit/stand:components-badge-stable). Показывает статус процесса. Обычно используется для статусов и выделения состояний чего-нибудь.
+- [Chips](##LIBS.LIB.STAND/lib:uikit/stand:components-chips-stable) — элементы фильтрации по заранее заданным категориям или ключевым словам. Используются, когда нужно быстро сузить объем контента, с которым работает пользователь.
+- [Badge](##LIBS.LIB.STAND/lib:uikit/stand:components-badge-stable) — компонент, который показывает статус процесса. Обычно используется для статусов и выделения различных состояний.
 
 # Полезные ссылки
 
