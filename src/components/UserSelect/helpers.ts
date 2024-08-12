@@ -48,7 +48,7 @@ export type UserSelectPropGetGroupKey<GROUP> = (
 ) => string | number;
 export type UserSelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 
-type UserSelectPropSearchFunction<ITEM> = (
+export type UserSelectPropSearchFunction<ITEM> = (
   item: ITEM,
   searchValue: string,
 ) => boolean;
