@@ -111,6 +111,7 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
       name?: DatePickerPropName<TYPE>;
       disabled?: boolean;
       dropdownClassName?: string;
+      dropdownRef?: React.Ref<HTMLDivElement>;
       size?: TextFieldPropSize;
       view?: TextFieldPropView;
       form?: TextFieldPropForm;

@@ -46,6 +46,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       placeholder,
       multiplicityMinutes,
       dropdownClassName,
+      dropdownRef,
       multiplicitySeconds,
       multiplicityHours,
       onDropdownOpen,
@@ -189,7 +190,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
         />
         <DatePickerDropdown
           type="date-time"
-          ref={calendarRef}
+          ref={useForkRef([dropdownRef, calendarRef])}
           anchorRef={startFieldRef}
           isOpen={calendarVisible}
           className={dropdownClassName}

@@ -23,6 +23,7 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef(
       locale,
       dropdownForm,
       dropdownClassName,
+      dropdownRef,
       currentVisibleDate: currentVisibleDateProp,
       onChangeCurrentVisibleDate,
       renderAdditionalControls,
@@ -101,7 +102,7 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef(
           onClick={setCalendarVisible.on}
         />
         <DatePickerDropdown
-          ref={calendarRef}
+          ref={useForkRef([dropdownRef, calendarRef])}
           anchorRef={fieldRef}
           className={dropdownClassName}
           isOpen={calendarVisible}
