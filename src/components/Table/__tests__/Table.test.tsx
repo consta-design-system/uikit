@@ -790,6 +790,65 @@ describe('Компонент Table', () => {
             expect(screen.getByTestId(testId)).toBeInTheDocument();
           },
         );
+
+        it('Кнопка "Выбрать все" доступна, если есть хотя бы 1 невыделенный отфильтрованный вариант', () => {
+          // Тест ловит случай, когда количество чекнутых элементов равно количеству отфильтрованных
+          // (они не обязательно совпадают): здесь чекнут Peter, а отфильтрован Alex
+          // должно: Выбрать все доступна, сбросить недоступна
+          render(<Table {...props} data-testid={testId} />);
+
+          fireEvent.click(getFilterButtons()[0]);
+          fireEvent.click(screen.getByText(/сбросить/i));
+
+          fireEvent.click(screen.getByRole('checkbox', { name: 'Peter' }));
+          fireEvent.change(screen.getByRole('textbox'), {
+            target: { value: 'l' },
+          });
+
+          expect(screen.getAllByRole('checkbox')).toHaveLength(1);
+          expect(
+            screen.getByRole('button', { name: /выбрать все/i }),
+          ).not.toBeDisabled();
+          expect(
+            screen.getByRole('button', { name: /сбросить/i }),
+          ).toBeDisabled();
+        });
+
+        it('Кнопка "Выбрать все" недоступна, если выбраны все отфильтрованные варианты', () => {
+          // Тест ловит случай, когда количество чекнутых элементов превышает количество отфильтрованных
+          // (они не обязательно совпадают): здесь чекнут Peter и Alex, а отфильтрован Alex
+          // должно: Выбрать все недоступна, сбросить доступна
+          render(<Table {...props} data-testid={testId} />);
+
+          fireEvent.click(getFilterButtons()[0]);
+          fireEvent.click(screen.getByText(/сбросить/i));
+
+          fireEvent.click(screen.getByRole('checkbox', { name: 'Peter' }));
+          fireEvent.change(screen.getByRole('textbox'), {
+            target: { value: 'l' },
+          });
+          fireEvent.click(screen.getByRole('checkbox'));
+
+          expect(
+            screen.getByRole('button', { name: /выбрать все/i }),
+          ).toBeDisabled();
+          expect(
+            screen.getByRole('button', { name: /сбросить/i }),
+          ).not.toBeDisabled();
+        });
+
+        it('Применяется фильтр по отфильтрованным выделенным объектам', () => {
+          render(<Table {...props} data-testid={testId} />);
+
+          fireEvent.click(getFilterButtons()[0]);
+
+          fireEvent.change(screen.getByRole('textbox'), {
+            target: { value: 'l' },
+          });
+          fireEvent.click(screen.getByRole('button', { name: /применить/i }));
+
+          expect(getRows()).toHaveLength(1);
+        });
       });
 
       describe('Проверка TableNumberFilter', () => {

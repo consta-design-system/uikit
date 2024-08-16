@@ -3,10 +3,10 @@ import './PopoverExample.css';
 import { Example } from '@consta/stand';
 import React, { useRef, useState } from 'react';
 
-import { cn } from '../../../../../utils/bem';
-import { Button } from '../../../../Button/Button';
-import { Text } from '../../../../Text/Text';
-import { Popover, Position } from '../../../Popover';
+import { Button } from '##/components/Button';
+import { Popover, Position } from '##/components/Popover';
+import { Text } from '##/components/Text';
+import { cn } from '##/utils/bem';
 
 const cnPopoverExample = cn('PopoverExample');
 

@@ -48,7 +48,7 @@ const ChipsRender = (props: ChipsProps, ref: React.Ref<HTMLDivElement>) => {
                 : undefined
             }
             onRightIconClick={
-              onItemRightIconClick && itemDisabled
+              onItemRightIconClick && !itemDisabled
                 ? (e: React.MouseEvent) => onItemRightIconClick(item, { e })
                 : undefined
             }
