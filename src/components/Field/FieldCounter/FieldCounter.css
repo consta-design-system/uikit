@@ -1,0 +1,18 @@
+.FieldCounter {
+  &-Button {
+    height: calc(var(--field-control-layout-slot-height) / 2);
+    width: var(--space-xl);
+
+    &_counter {
+      &_increment {
+        & .icons--Icon {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    & .icons--Icon {
+      color: var(--color-control-typo-clear);
+    }
+  }
+}

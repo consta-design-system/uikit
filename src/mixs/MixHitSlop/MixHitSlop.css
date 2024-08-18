@@ -1,0 +1,36 @@
+/*
+Переменные задаются из вне
+
+--mix-hit-slop-top 
+--mix-hit-slop-left 
+--mix-hit-slop-right 
+--mix-hit-slop-bottom 
+*/
+
+.MixHitSlop {
+  --mix-hit-slop-inset: var(--mix-hit-slop-top, 0px)
+    var(--mix-hit-slop-right, 0px) var(--mix-hit-slop-bottom, 0px)
+    var(--mix-hit-slop-left, 0px);
+
+  --mix-hit-slop-inset-negative: calc(var(--mix-hit-slop-top, 0px) * -1)
+    calc(var(--mix-hit-slop-right, 0px) * -1)
+    calc(var(--mix-hit-slop-bottom, 0px) * -1)
+    calc(var(--mix-hit-slop-left, 0px) * -1);
+
+  &_mode {
+    &_before,
+    &_after {
+      position: relative;
+    }
+    &_before::before,
+    &_after::after {
+      content: '';
+      position: absolute;
+      inset: var(--mix-hit-slop-inset-negative);
+    }
+    &_reverseMargin {
+      margin: var(--mix-hit-slop-inset-negative);
+      padding: var(--mix-hit-slop-inset);
+    }
+  }
+}

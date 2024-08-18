@@ -1,0 +1,59 @@
+/* 
+Переменные задаются из компонента:
+
+--field-control-layout-border-color
+--field-control-layout-height
+--field-control-layout-space
+--field-control-layout-text-size
+--field-control-layout-border-radius
+--field-control-layout-border-style
+--field-control-layout-padding
+--field-control-layout-bg-color 
+*/
+
+.FieldControlLayout {
+  --field-control-layout-slot-height: calc(
+    var(--field-control-layout-height) - var(--control-border-width) * 2
+  );
+  --field-control-layout-slot-color: var(--color-control-typo-placeholder);
+  --field-control-layout-placeholder-color: var(
+    --color-control-typo-placeholder
+  );
+  --field-control-layout-input-color: var(--color-control-typo-default);
+
+  box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+  padding: var(--field-control-layout-padding);
+  border-style: var(--field-control-layout-border-style);
+  border-width: var(--control-border-width);
+  border-radius: var(--field-control-layout-border-radius);
+  border-color: var(--field-control-layout-border-color);
+  min-height: var(--field-control-layout-height);
+  background-color: var(--field-control-layout-bg-color);
+
+  &_disabled {
+    --field-control-layout-placeholder-color: var(--color-control-typo-disable);
+    --field-control-layout-input-color: var(--color-control-typo-disable);
+    --field-control-layout-slot-color: var(--color-control-typo-disable);
+  }
+
+  &-Slot {
+    color: var(--field-control-layout-slot-color);
+    min-height: var(--field-control-layout-slot-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    font-size: var(--field-control-layout-text-size);
+  }
+
+  &-Container {
+    min-height: var(--field-control-layout-slot-height);
+    display: flex;
+    gap: var(--field-control-layout-space);
+  }
+
+  &-Сhildren {
+    flex: auto;
+  }
+}

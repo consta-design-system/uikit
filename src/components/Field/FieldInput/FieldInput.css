@@ -1,0 +1,18 @@
+.FieldInput {
+  color: var(--field-control-layout-input-color);
+  font-size: var(--field-control-layout-text-size);
+  background: transparent;
+  border: none;
+  outline: none;
+  height: var(--field-control-layout-slot-height);
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--field-control-layout-input-color);
+  }
+
+  &::placeholder {
+    color: var(--field-control-layout-placeholder-color);
+  }
+}
