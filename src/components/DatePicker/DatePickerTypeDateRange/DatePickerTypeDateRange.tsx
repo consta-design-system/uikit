@@ -44,6 +44,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
       renderAdditionalControls,
       inputRef,
       dropdownClassName,
+      dropdownRef,
       name,
       placeholder,
       onDropdownOpen,
@@ -209,7 +210,7 @@ export const DatePickerTypeDateRange: DatePickerTypeComponent<'date-range'> =
         />
         <DatePickerDropdown
           type="date"
-          ref={calendarRef}
+          ref={useForkRef([dropdownRef, calendarRef])}
           anchorRef={startFieldRef}
           className={dropdownClassName}
           isOpen={calendarVisible}

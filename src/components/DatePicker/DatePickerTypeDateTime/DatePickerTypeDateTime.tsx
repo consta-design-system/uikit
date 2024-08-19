@@ -28,6 +28,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
       locale,
       dropdownForm,
       dropdownClassName,
+      dropdownRef,
       currentVisibleDate: currentVisibleDateProp,
       onChangeCurrentVisibleDate,
       multiplicityHours: multiplicityHoursProp,
@@ -120,7 +121,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
           disabled={disabled}
         />
         <DatePickerDropdown
-          ref={calendarRef}
+          ref={useForkRef([dropdownRef, calendarRef])}
           anchorRef={fieldRef}
           isOpen={calendarVisible}
           value={props.value || undefined}
