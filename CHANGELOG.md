@@ -1,12 +1,7 @@
 # Changelog
 
 ## v5.8.0 (19/08/2024)
-Самое важное:
-- в `DatePicker` добавили свойство `dropdownRef` для получения ссылки на элемент выпадающего списка.
-
----
-
-- [fix(AutoComplete): removed dependence on value (#3735)](https://github.com/consta-design-system/uikit/commit/c99fa0451257c137534a0937cf3416b66acdd99e) - [@gizeasy](https://github.com/gizeasy)
+- [fix(AutoComplite): removed dependence on value (#3735)](https://github.com/consta-design-system/uikit/commit/c99fa0451257c137534a0937cf3416b66acdd99e) - [@gizeasy](https://github.com/gizeasy)
 - [feat(DatePicker): add dropdownRef props (#3732)](https://github.com/consta-design-system/uikit/commit/a8added4c415f8f30295ebe8da6f1971f5dc5fb4) - [@KlochkovIUS](https://github.com/KlochkovIUS)
 
 --------------------
