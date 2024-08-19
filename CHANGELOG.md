@@ -1,5 +1,16 @@
 # Changelog
 
+## v5.8.0 (19/08/2024)
+Самое важное:
+- в `DatePicker` добавили свойство `dropdownRef` для получения ссылки на элемент выпадающего списка.
+
+---
+
+- [fix(AutoComplete): removed dependence on value (#3735)](https://github.com/consta-design-system/uikit/commit/c99fa0451257c137534a0937cf3416b66acdd99e) - [@gizeasy](https://github.com/gizeasy)
+- [feat(DatePicker): add dropdownRef props (#3732)](https://github.com/consta-design-system/uikit/commit/a8added4c415f8f30295ebe8da6f1971f5dc5fb4) - [@KlochkovIUS](https://github.com/KlochkovIUS)
+
+--------------------
+
 ## v5.7.0 (07/08/2024)
 Самое важное:
 
@@ -400,25 +411,3 @@
 - [docs(List): fix import example (#3143)](https://github.com/consta-design-system/uikit/commit/83199f3f83ed484cdc732590f834d69d6c1af85f) - [@N1MBER](https://github.com/N1MBER)
 - [docs(Table): fix prop name (#3142)](https://github.com/consta-design-system/uikit/commit/b6c22619631c3d46667020f28b0c2919b3dc5f89) - [@N1MBER](https://github.com/N1MBER)
 - [feat(FieldLabel): change render to as and add htmlFor (#3140)](https://github.com/consta-design-system/uikit/commit/421eeb65a924ae86d62c9cd4d77b3861067decb7) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.21.0 (28/06/2023)
-Самое важное:
-
-- В `Text` добавили новые цвета
-- В `Collapse` добавили свойство `form`
-
----
-
-- [feat(Text): add new colors (#3134)](https://github.com/consta-design-system/uikit/commit/5ab69d77eed0769af07bd56562bf1cf1a899e3b5) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Tabs): fix Infinity height, fix onlyIcon style (#3135)](https://github.com/consta-design-system/uikit/commit/1625495daf3c94c0af167d2eed1936ce8e4b0c6c) - [@gizeasy](https://github.com/gizeasy)
-- [fix(TextField): fix onChange params (#3133)](https://github.com/consta-design-system/uikit/commit/999ed546bb3389d9a90fa2a98ae518e686b2c2f7) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Tabs): added new props (#3126)](https://github.com/consta-design-system/uikit/commit/7da7c2450973332c60c1b187c3b55a4298983f37) - [@N1MBER](https://github.com/N1MBER)
-- [fix(AutoComplete): fix memo filteredOptions (#3130)](https://github.com/consta-design-system/uikit/commit/37c02f72e7d61a466c56d6e1229febdb00d0ce0c) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Collapse): add prop form (#3059)](https://github.com/consta-design-system/uikit/commit/239f57ea439d1013177946bb09d856d325899e4d) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Button): fix mouse events for disabled button (#3120)](https://github.com/consta-design-system/uikit/commit/edf18e885e850e62c6d07980a3f67c91e6c98bdd) - [@N1MBER](https://github.com/N1MBER)
-- [fix(withTooltip): fix types (#3127)](https://github.com/consta-design-system/uikit/commit/87748c2b5b54110c59b617f82740646db3813598) - [@N1MBER](https://github.com/N1MBER)
-- [fix(SelectComponents): remove useless z-index (#3123)](https://github.com/consta-design-system/uikit/commit/9fa85e928fc58ce524241318a51bac39b2492c11) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Checkbox): remove useless z-index (#3122)](https://github.com/consta-design-system/uikit/commit/0f67f1731b7ab36fbd2d94dd7b247e3f5487f545) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Header): marked as deprecated (#3113)](https://github.com/consta-design-system/uikit/commit/03e53a3f0e51774757a0a372d04efc12aa60bf77) - [@N1MBER](https://github.com/N1MBER)
