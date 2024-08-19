@@ -288,12 +288,6 @@ export function useAutoComplete<ITEM, GROUP>(
     setIsOpen.set(dropdownOpen || false);
   }, [dropdownOpen]);
 
-  useEffect(() => {
-    if (searchValue) {
-      setIsOpen.on();
-    }
-  }, [searchValue]);
-
   return {
     isOpen: Boolean(isOpen && (isLoading ? true : hasItems)),
     visibleItems,
