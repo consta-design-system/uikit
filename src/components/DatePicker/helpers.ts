@@ -170,17 +170,19 @@ export const useStringValue = (
 
   const refs = useMutableRef([imaskProps.setValue, value] as const);
 
-  const setStringValueToNull = useCallback(() => {
-    if (imaskProps.ref?.current && imaskProps.maskRef.current) {
-      refs.current[0]('');
-      imaskProps.ref.current.value = '';
+  const setStringValue = useCallback((value: string) => {
+    refs.current[0](value);
+    if (imaskProps.ref?.current) {
+      imaskProps.ref.current.value = value;
+    }
+    if (imaskProps.maskRef.current) {
       imaskProps.maskRef.current.updateValue();
     }
   }, []);
 
   const handleClear: React.MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
-      setStringValueToNull();
+      setStringValue('');
 
       if (refs.current[1]) {
         onChangeRef.current?.(null, { e: e as unknown as Event });
@@ -191,7 +193,7 @@ export const useStringValue = (
 
   useEffect(() => {
     if (value && isValid(value)) {
-      refs.current[0](format(value, formatProp));
+      setStringValue(format(value, formatProp));
     }
 
     if (!value && stringValue) {
@@ -211,7 +213,7 @@ export const useStringValue = (
           : undefined;
 
       if (isValid(date)) {
-        setStringValueToNull();
+        setStringValue('');
       }
     }
   }, [value?.getTime()]);
