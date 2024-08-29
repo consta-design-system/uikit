@@ -75,7 +75,7 @@ export function UserSelectExampleMailInput() {
         items={contacts}
         value={value}
         onChange={setValue}
-        placeholder="Поиск контактов или ввод емайл"
+        placeholder="Поиск контактов или ввод email"
         getItemKey={(item) => item.subLabel || item.label}
         labelForCreate={`Отправить на `}
         multiple

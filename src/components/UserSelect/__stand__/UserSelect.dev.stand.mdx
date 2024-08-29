@@ -897,7 +897,7 @@ export function UserSelectExampleDisabled() {
 
 ### Пример
 
-Есть нейкий список пользователей мы можем выбрать несколько из списка. Также можем добавитть свой email, если он соответствует формату.
+Есть некий список пользователей, в котором можно выбрать несколько пользователей. Также можно добавить новый email в список, если он соответствует формату.
 
 ```tsx
 import { UserSelect } from '##/components/UserSelect';
@@ -973,7 +973,7 @@ export function UserSelectExampleMailInput() {
       items={contacts}
       value={value}
       onChange={setValue}
-      placeholder="Поиск контактов или ввод емайл"
+      placeholder="Поиск контактов или ввод email"
       getItemKey={(item) => item.subLabel || item.label}
       labelForCreate={`Отправить на `}
       multiple
