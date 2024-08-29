@@ -1,8 +1,8 @@
 import { MdxMenu } from '@consta/stand';
 import { MdxImage } from '@consta/stand';
-import start_example from './images/start_example.image.png';
-import data_input from './images/data_input.image.png';
-import data_search from './images/data_search.image.png';
+import start_example from './images/Autocomplete_example_03.jpg';
+import data_input from './images/Autocomplete_example_02.jpg';
+import data_search from './images/Autocomplete_example_01.jpg';
 
 <MdxMenu>
 
@@ -13,13 +13,13 @@ import data_search from './images/data_search.image.png';
 
 </MdxMenu>
 
-Компонент **AutoComplete** используется, когда нужно отобразить список элементов на основе введенных пользователем символов и дать возможность заполнить поле одним из предложенных вариантов.
+Компонент `AutoComplete` используется, когда нужно отобразить список элементов на основе введенных пользователем символов и дать возможность заполнить поле одним из предложенных вариантов.
 
 <MdxImage src={start_example} />
 
 # Контекст использования
 
-Используйте **AutoComplete**, когда пользователю будут полезны подсказки по вводу.
+Используйте `AutoComplete`, когда пользователю будут полезны подсказки по вводу.
 
 **Пример**. Заполнение формы.
 
@@ -33,7 +33,7 @@ import data_search from './images/data_search.image.png';
 
 ## Подсказка
 
-Вы можете добавить [подсказку](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-autocomplete-stable/tab:dev/hash:подсказка-в-поле-плейсхолдер) для заполнения поля. Так, например, можно написать "Введите запрос".
+Вы можете добавить [подсказку(плейсхолдер)](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-autocomplete-stable/tab:dev/hash:подсказка-в-поле-плейсхолдер) для заполнения поля. Так, например, можно написать "Введите запрос".
 
 ## Статус
 
@@ -41,7 +41,7 @@ import data_search from './images/data_search.image.png';
 
 ## Виртуализация скролла
 
-Если список элементов не умещается полностью, настройте [виртуализацию скролла](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-autocomplete-stable/tab:dev/hash:виртуализация-списка). Так пользователь поймет, что у списка есть продолжение.
+Если элементов в списке много, настройте [виртуализацию скролла](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-autocomplete-stable/tab:dev/hash:виртуализация-списка) для лучшей производительности. Так пользователь поймет, что у списка есть продолжение.
 
 # Похожие компоненты
 
