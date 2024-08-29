@@ -38,7 +38,7 @@ export type WithTooltipProps<Props> = Omit<Props, 'tooltipProps'> & {
 
 type HoverState = {
   tooltip: boolean;
-  acnor: boolean;
+  anchor: boolean;
 };
 
 export function withTooltip(hocProps?: TooltipProps) {
@@ -65,11 +65,11 @@ export function withTooltip(hocProps?: TooltipProps) {
         const resultContent = tooltipContent ?? content;
 
         const [visible, setVisible] = useFlag();
-        const acnortRef = useRef<HTMLElement>(null);
+        const anchorRef = useRef<HTMLElement>(null);
 
         const hoverStateRef = useRef<HoverState>({
           tooltip: false,
-          acnor: false,
+          anchor: false,
         });
 
         const mutablePropsRef = useMutableRef([
@@ -85,7 +85,7 @@ export function withTooltip(hocProps?: TooltipProps) {
         const mouseEnterController = useDebounce(
           useCallback(() => {
             mutablePropsRef.current[5] === 'mouseover' &&
-              (hoverStateRef.current.acnor || hoverStateRef.current.tooltip) &&
+              (hoverStateRef.current.anchor || hoverStateRef.current.tooltip) &&
               setVisible.on();
           }, []),
           appearTimeout,
@@ -94,23 +94,23 @@ export function withTooltip(hocProps?: TooltipProps) {
         const mouseLeaveController = useDebounce(
           useCallback(() => {
             mutablePropsRef.current[5] === 'mouseover' &&
-              !hoverStateRef.current.acnor &&
+              !hoverStateRef.current.anchor &&
               !hoverStateRef.current.tooltip &&
               setVisible.off();
           }, []),
           exitTimeout,
         );
 
-        const acnorOnMouseEnter: React.MouseEventHandler<HTMLDivElement> =
+        const anchorOnMouseEnter: React.MouseEventHandler<HTMLDivElement> =
           useCallback((e) => {
-            hoverStateRef.current.acnor = true;
+            hoverStateRef.current.anchor = true;
             mouseEnterController();
             mutablePropsRef.current[0]?.(e);
           }, []);
 
-        const acnorOnMouseLeave: React.MouseEventHandler<HTMLDivElement> =
+        const anchorOnMouseLeave: React.MouseEventHandler<HTMLDivElement> =
           useCallback((e) => {
-            hoverStateRef.current.acnor = false;
+            hoverStateRef.current.anchor = false;
             mouseLeaveController();
             mutablePropsRef.current[1]?.(e);
           }, []);
@@ -135,7 +135,7 @@ export function withTooltip(hocProps?: TooltipProps) {
             setVisible.off();
         }, [mode, closeOnClickOutside]);
 
-        const acnorOnClick: React.MouseEventHandler = useCallback((e) => {
+        const anchorOnClick: React.MouseEventHandler = useCallback((e) => {
           mutablePropsRef.current[5] === 'click' && setVisible.toggle();
           mutablePropsRef.current[4]?.(e);
         }, []);
@@ -147,16 +147,16 @@ export function withTooltip(hocProps?: TooltipProps) {
           <>
             <Anchor
               {...(componentProps as COMPONENT_PROPS)}
-              onClick={acnorOnClick}
-              onMouseEnter={acnorOnMouseEnter}
-              onMouseLeave={acnorOnMouseLeave}
-              ref={useForkRef([acnortRef, ref])}
+              onClick={anchorOnClick}
+              onMouseEnter={anchorOnMouseEnter}
+              onMouseLeave={anchorOnMouseLeave}
+              ref={useForkRef([anchorRef, ref])}
             />
             <Tooltip
               {...otherTooltipProps}
               isOpen={visible && !!resultContent}
               className={otherTooltipProps.className}
-              anchorRef={acnortRef}
+              anchorRef={anchorRef}
               onClickOutside={tooltipOnClickOutside}
               onMouseEnter={tooltipOnMouseEnter}
               onMouseLeave={tooltipOnMouseLeave}
