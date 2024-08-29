@@ -51,10 +51,8 @@ export const getFittingItems = (
       (_el, index) => index,
     );
   }
-  let width =
-    typeof activeIndex === 'number' && activeIndex > -1
-      ? tabsDimensions[activeIndex].size + tabsDimensions[activeIndex].gap
-      : 0;
+  const dimension = tabsDimensions[activeIndex ?? -1];
+  let width = dimension ? dimension.size + dimension.gap : 0;
   const arr: number[] = [];
   for (const [idx, tabDimensions] of tabsDimensions.entries()) {
     if (idx !== activeIndex) {
