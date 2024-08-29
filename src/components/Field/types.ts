@@ -13,9 +13,7 @@ export type FieldPropForm =
   | 'clearRound'
   | 'clearDefault'
   | 'clearBrick'
-  | 'clear'
-  // @deprecated use 'clear'
-  | 'clearClear';
+  | 'clear';
 
 export type FieldPropStatus = 'alert' | 'success' | 'warning';
 export type FieldPropView = 'default' | 'clear';

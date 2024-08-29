@@ -45,7 +45,7 @@ type TextFieldPropsTypeTextarea<TYPE> = TYPE extends 'textarea'
     )
   : {};
 
-type TextFieldPropsTypeNumber<TYPE> = TYPE extends 'textarea'
+type TextFieldPropsTypeNumber<TYPE> = TYPE extends 'number'
   ? {
       max?: number | string;
       min?: number | string;

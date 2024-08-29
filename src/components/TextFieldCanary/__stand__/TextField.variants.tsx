@@ -11,18 +11,18 @@ import {
   FieldInput,
   getFieldIconSize,
 } from '##/components/Field';
+import {
+  fieldPropForm,
+  fieldPropFormDefault,
+  fieldPropSize,
+  fieldPropSizeDefault,
+  fieldPropStatus,
+  fieldPropView,
+  fieldPropViewDefault,
+} from '##/components/Field/__mocks__/variants';
 import { cnMixHitSlop } from '##/mixs/MixHitSlop';
 
-import {
-  TextField,
-  textFieldPropForm,
-  textFieldPropFormDefault,
-  textFieldPropSize,
-  textFieldPropSizeDefault,
-  textFieldPropStatus,
-  textFieldPropView,
-  textFieldPropViewDefault,
-} from '../TextField';
+import { TextFieldTypeText } from '../TextFieldTypeText';
 
 const Variants = () => {
   const type = useSelect(
@@ -41,10 +41,10 @@ const Variants = () => {
   );
   const min = useNumber('min', 0, type === 'number');
   const max = useNumber('max', 150, type === 'number');
-  const form = useSelect('form', textFieldPropForm, textFieldPropFormDefault);
-  const status = useSelect('status', textFieldPropStatus);
-  const size = useSelect('size', textFieldPropSize, textFieldPropSizeDefault);
-  const view = useSelect('view', textFieldPropView, textFieldPropViewDefault);
+  const form = useSelect('form', fieldPropForm, fieldPropFormDefault);
+  const status = useSelect('status', fieldPropStatus);
+  const size = useSelect('size', fieldPropSize, fieldPropSizeDefault);
+  const view = useSelect('view', fieldPropView, fieldPropViewDefault);
   const disabled = useBoolean('disabled', false);
   const required = useBoolean('required', false);
   const withClearButton = useBoolean(
@@ -82,48 +82,14 @@ const Variants = () => {
 
   return (
     <div>
-      <TextField
+      <TextFieldTypeText
         form={form}
         status={status}
         size={size}
         view={view}
-        type={type}
-        labelIcon={withLabelIcon ? IconQuestion : undefined}
-        required={required}
-        step={withStepArray ? numberStepArray : step}
-        min={min}
-        max={max}
-        withClearButton={withClearButton}
-        incrementButtons={incrementButtons}
-        maxLength={maxLength}
-        minRows={minRows}
-        maxRows={maxRows}
-        placeholder={placeholder}
-        leftSide={leftSide}
-        rightSide={rightSide}
         disabled={disabled}
-        label={label}
-        caption={caption}
-        labelPosition={labelPosition}
         style={{ display: 'block' }}
       />
-      <FieldControlLayout
-        form={form}
-        status={status}
-        size={size}
-        view={view}
-        disabled={disabled}
-        style={{ display: 'block' }}
-        leftSide={[
-          <FieldButton className={cnMixHitSlop({ mode: 'after' })}>
-            <IconPhoto size={getFieldIconSize(size || 'm')} />
-          </FieldButton>,
-          'ss',
-        ]}
-        rightSide={['ss', <FieldClearButton size={size} />, <FieldCounter />]}
-      >
-        <FieldInput placeholder="fff" />
-      </FieldControlLayout>
     </div>
   );
 };

@@ -1,6 +1,11 @@
 import React, { forwardRef } from 'react';
 
-import { Fi, FieldControlLayout, getFieldIconSize } from '##/components/Field';
+import {
+  FieldControlLayout,
+  FieldInput,
+  getFieldIconSize,
+  renderSide,
+} from '##/components/Field';
 
 import { TextFieldTypeComponent } from '..';
 
@@ -28,21 +33,11 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
       rightSide,
       autoComplete,
       withClearButton,
-      incrementButtons: incrementButtonsProp = true,
-      max,
-      min,
       readOnly,
       required,
-      step = 1,
       tabIndex,
       ariaLabel,
-      label,
-      labelIcon,
-      inputContainerRef,
-      labelPosition = 'top',
-      caption,
-      iconSize: iconSizeProp,
-      focused,
+      iconSize,
       onClick,
       // onkey props
       onKeyDown: onKeyDownProp,
@@ -54,5 +49,14 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
       onClear,
       ...otherProps
     } = props;
+
+    return (
+      <FieldControlLayout
+        size={size}
+        leftSide={renderSide(leftSide, size, iconSize)}
+      >
+        <FieldInput />
+      </FieldControlLayout>
+    );
   },
 );

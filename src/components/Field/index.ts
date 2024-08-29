@@ -6,4 +6,5 @@ export * from './FieldInput';
 export * from './FieldButton';
 export * from './FieldCounter';
 export * from './FieldClearButton';
+export * from './renderSide';
 export * from './types';
