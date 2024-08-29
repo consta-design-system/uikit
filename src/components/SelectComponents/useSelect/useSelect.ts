@@ -223,7 +223,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       ] as const;
     }
     return [items, undefined] as const;
-  }, [items, resolvedSearchValue]);
+  }, [items, resolvedSearchValue, params.onCreate]);
 
   const visibleItems = useMemo(() => {
     const resultGroups = getCountedGroups(

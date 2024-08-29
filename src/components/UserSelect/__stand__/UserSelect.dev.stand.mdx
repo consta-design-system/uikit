@@ -12,10 +12,6 @@ import { UserSelectExampleRenderValue } from './examples/UserSelectExampleRender
 import { UserSelectExampleView } from './examples/UserSelectExampleView/UserSelectExampleView';
 import { UserSelectExampleVirtualScroll } from './examples/UserSelectExampleVirtualScroll/UserSelectExampleVirtualScroll';
 import { UserSelectExampleIsLoading } from './examples/UserSelectExampleIsLoading/UserSelectExampleIsLoading';
-import {
-  UserSelectExampleCreate,
-  UserSelectExampleCreateCustomLabel,
-} from './examples/UserSelectExampleCreate/UserSelectExampleCreate';
 import { UserSelectExampleMultiple } from './examples/UserSelectExampleMultiple/UserSelectExampleMultiple';
 import {
   UserSelectExampleCustomTypes,
@@ -28,6 +24,7 @@ import {
 } from './examples/UserSelectExampleLabel/UserSelectExampleLabel';
 import { UserSelectExampleStatus } from './examples/UserSelectExampleStatus/UserSelectExampleStatus';
 import { UserSelectExampleDropdownOpen } from './examples/UserSelectExampleDropdownOpen/UserSelectExampleDropdownOpen';
+import { UserSelectExampleMailInput } from './examples/UserSelectExampleMailInput/UserSelectExampleMailInput';
 
 ```tsx
 import { UserSelect } from '@consta/uikit/UserSelect';
@@ -52,7 +49,7 @@ import { UserSelect } from '@consta/uikit/UserSelect';
 - [Индикация загрузки](#индикация-загрузки)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Поиск](#поиск)
-- [Создание новых пользователей](#создание-новых-пользователей)
+- [Создание новых элементов](#создание-новых-элементов)
 - [Управление состоянием выподающего списка](#управление-состоянием-выподающего-списка)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
@@ -892,76 +889,105 @@ export function UserSelectExampleDisabled() {
 
 Если при поиске ничего не нашлось, пользователь увидит сообщение `Не найдено`. Поменять этот текст на любой другой можно в свойстве `labelForNotFound`.
 
-## Создание новых пользователей
+## Создание новых элементов
 
 Если при поиске в поле никого не нашлось, можно показать в селекте кнопку для создания нового значения. Пользователь сможет добавить значение в список, а потом выбрать его. В функцию на вход придёт `label` созданного элемента.
 
 По умолчанию перед значением, которое можно добавить в список, появляется `+`. Его можно поменять на любой другой текст с помощью свойства `labelForCreate`.
 
-##### Пример с плюсом
+### Пример
+
+Есть некий список пользователей, в котором можно выбрать несколько пользователей. Также можно добавить новый email в список, если он соответствует формату.
 
 ```tsx
+import { UserSelect } from '##/components/UserSelect';
+import avatarUrl from '##/components/UserSelect/__mocks__/avatar_1.jpg';
+
 type Item = {
   label: string;
-  id: number | string;
+  subLabel?: string;
+  avatarUrl?: string;
 };
 
 const items: Item[] = [
   {
-    label: 'Первый',
-    id: 1,
+    label: 'Андрей Андреев',
+    subLabel: 'andrey@gmail.com',
   },
   {
-    label: 'Второй',
-    id: 2,
+    label: 'Иван Иванов',
+    subLabel: 'ivan@gmail.com',
   },
   {
-    label: 'Третий',
-    id: 3,
+    label: 'Егор Егоров',
+    subLabel: 'igor@icloud.com',
+    avatarUrl,
   },
 ];
 
-export function UserSelectExampleCreate() {
-  const [value, setValue] = useState<Item | null>();
-  const [list, setList] = useState<Item[]>(items);
+const isEmail = (string: string) => {
+  const pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,8}$/;
+  return pattern.test(string);
+};
+
+export function UserSelectExampleMailInput() {
+  const [contacts, setContacts] = useState<Item[]>(items);
+  const [value, setValue] = useState<Item[] | null>();
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const onCreate = (string: string) => {
+    setContacts((state) => {
+      return [
+        ...state,
+        {
+          label: string,
+        },
+      ];
+    });
+    setValue((state) => {
+      return [
+        ...(Array.isArray(state) ? state : []),
+        {
+          label: string,
+        },
+      ];
+    });
+  };
+
+  const onBlur = () => {
+    if (isEmail(searchValue)) {
+      setValue((state) => {
+        return [
+          ...(Array.isArray(state) ? state : []),
+          {
+            label: searchValue,
+          },
+        ];
+      });
+      setSearchValue('');
+    }
+  };
+
   return (
     <UserSelect
-      placeholder="Выберите пользователя"
-      items={list}
+      items={contacts}
       value={value}
       onChange={setValue}
-      onCreate={(label) =>
-        setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
-      }
+      placeholder="Поиск контактов или ввод email"
+      getItemKey={(item) => item.subLabel || item.label}
+      labelForCreate={`Отправить на `}
+      multiple
+      labelForNotFound="Не найдено, введите email"
+      onCreate={isEmail(searchValue) ? onCreate : undefined}
+      onSearchValueChange={setSearchValue}
+      onBlur={onBlur}
+      searchValue={searchValue}
     />
   );
 }
 ```
 
-<UserSelectExampleCreate />
-
-##### Пример с кастомным текстом
-
-```tsx
-export function UserSelectExampleCreate() {
-  const [value, setValue] = useState<Item | null>();
-  const [list, setList] = useState<Item[]>(items);
-  return (
-    <UserSelect
-      placeholder="Выберите пользователя"
-      items={list}
-      value={value}
-      onChange={setValue}
-      onCreate={(label) =>
-        setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
-      }
-      labelForCreate="Добавить"
-    />
-  );
-}
-```
-
-<UserSelectExampleCreateCustomLabel />
+<UserSelectExampleMailInput />
 
 ## Управление состоянием выподающего списка
 
