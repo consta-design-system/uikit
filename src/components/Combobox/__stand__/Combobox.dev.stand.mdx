@@ -1187,8 +1187,8 @@ export function ComboboxExampleOpenByFocus() {
   };
 
   // Запрещаем всплытие клика c input, чтобы предотвратить рассинхронизацию isOpened
-  // с внутреннем состоянием раскрытия списка. Так как клик по компонету переключает сотояние,
-  // а нам при фокусе нужно не переключекние (toggle) а включение (setTrue)
+  // с внутренним состоянием раскрытия списка. Так как клик по компоненту переключает состояние скрыт/раскрыт,
+  // нам при фокусе требуется не переключение (toggle), а включение (setTrue)
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.onclick = (e) => e.stopPropagation();
@@ -1197,13 +1197,13 @@ export function ComboboxExampleOpenByFocus() {
 
   return (
     <Example col={1}>
-      <Button onClick={handleFocus} label="Програмный фокус на элемент" />
+      <Button onClick={handleFocus} label="Эмулировать фокус на элемент" />
       <Combobox
         inputRef={inputRef}
         items={items}
         value={value}
         onChange={setValue}
-        placeholder="Выберите нужный элемент из списка"
+        placeholder="Выберите элемент"
         dropdownOpen={isOpened}
         onDropdownOpen={setIsOpened.set}
         onFocus={setIsOpened.on}
