@@ -1,5 +1,43 @@
 # Changelog
 
+## v5.9.0 (29/08/2024)
+Самое главное:
+- Добавили в документацию раздел "Как использовать" для компонентов `Select`, `UserSelect`, `AutoComplete`, `Combobox`, `BookmarkTabs`, `SnackBar`, `Chips`, `List`, `Tag` и `ContextMenu`.
+- Для `Combobox` добавили пример, объясняющий, как открывать выпадающий список событию фокуса.
+---
+
+- [docs(Select): how-to-use (#3710)](https://github.com/consta-design-system/uikit/commit/7a472d01c60ed5e639726bdb8bb59d035621cc06) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Combobox): add example: opening by focus (#3727)](https://github.com/consta-design-system/uikit/commit/65b73ab17ba33be1777f55966fcdf2d7d76c6736) - [@gizeasy](https://github.com/gizeasy)
+- [fix(withTooltip): typo (#3747)](https://github.com/consta-design-system/uikit/commit/9fe1709f45bce75a475157c895f711f44869f9ee) - [@nevsky118](https://github.com/nevsky118)
+- [fix(Tabs): fix add tab from last selected (#3737)](https://github.com/consta-design-system/uikit/commit/03b0b58cf2c2f09a7745494781362b46c3f2f9cc) - [@ZettZet](https://github.com/ZettZet)
+- [docs(UserSelect): adit example for create (#3726)](https://github.com/consta-design-system/uikit/commit/e996ea8afa900485225062ad342d8a470358c51c) - [@gizeasy](https://github.com/gizeasy)
+- [docs(AutoComplete): how-to-use (#3721)](https://github.com/consta-design-system/uikit/commit/301192ddd8f15d32b86eb497b2b04ab396280703) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Combobox): how-to-use  (#3725)](https://github.com/consta-design-system/uikit/commit/728ddf7e0df33b3b1e8d40596982a0c307974b1e) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(BookmarkTabs): how-to-use (#3720)](https://github.com/consta-design-system/uikit/commit/5922171da0ac32c58371a79141a55e5e35a8ad73) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(SnackBar): how-to-use (#3705)](https://github.com/consta-design-system/uikit/commit/9fdc3c1302cbf5fe63ae7cd68ee79ef300dc154f) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Chips): how-to-use (#3701)](https://github.com/consta-design-system/uikit/commit/0f2912440b2c474c16860348c32cd787d15c3486) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(List): how-to-use (#3695)](https://github.com/consta-design-system/uikit/commit/12c3b89544162b61ce1878a48d3df4a58e176b3a) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Tag): how-to-use (#3674)](https://github.com/consta-design-system/uikit/commit/01801ec024bcfe0dae27a9a125739f8307dad17d) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(ContextMenu): how-to-use (#3665)](https://github.com/consta-design-system/uikit/commit/e1d350313d11669c6989ad8cfa2f84b0359afcc0) - [@alyonurchick1](https://github.com/alyonurchick1)
+
+--------------------
+
+## v5.8.1 (19/08/2024)
+- [fix(DatePicker): fixed nulling of value (#3736)](https://github.com/consta-design-system/uikit/commit/2e8e85143dc8c67a0313a86b7aa215ed03bf6b64) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v5.8.0 (19/08/2024)
+Самое важное:
+- в `DatePicker` добавили свойство `dropdownRef` для получения ссылки на элемент выпадающего списка.
+
+---
+
+- [fix(AutoComplite): removed dependence on value (#3735)](https://github.com/consta-design-system/uikit/commit/c99fa0451257c137534a0937cf3416b66acdd99e) - [@gizeasy](https://github.com/gizeasy)
+- [feat(DatePicker): add dropdownRef props (#3732)](https://github.com/consta-design-system/uikit/commit/a8added4c415f8f30295ebe8da6f1971f5dc5fb4) - [@KlochkovIUS](https://github.com/KlochkovIUS)
+
+--------------------
+
 ## v5.7.0 (07/08/2024)
 Самое важное:
 
@@ -366,59 +404,3 @@
 
 ## v4.23.1 (19/07/2023)
 - [fix(Spoiler): fixed export from the library](https://github.com/consta-design-system/uikit/commit/f293e6221d3534cf0d099612c44ad9b4d74cc101) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.23.0 (18/07/2023)
-Самое важное:
-
-- добавили хук `useResizableContent`, для динамического изменения размера контента,
-- добавили компонент `BadgeGroup` с помощью которого можно выводить `Badge` в виде списка,
-- добавили компонент `Spoiler`, для скрытия и раскрытия части текста.
-
----
-
-- [fix(Slider): fix slider logic and styles (#3017)](https://github.com/consta-design-system/uikit/commit/b316d699f7084d535821695d8b8a8808a6e9eaf7) - [@N1MBER](https://github.com/N1MBER)
-- [feat(useResizableContent): added new hook for resize elements (#3169)](https://github.com/consta-design-system/uikit/commit/b6d9ea0d49d9d63799dea5210cfc46904d6af41f) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Table): replace code examples to how to use (#3124)](https://github.com/consta-design-system/uikit/commit/b40d110ba58fbdee11a035df297177c164a101c6) - [@N1MBER](https://github.com/N1MBER)
-- [feat(BadgeGroup): add new component (#3141)](https://github.com/consta-design-system/uikit/commit/f9a882dbda7af3210aaaae97dc9f17f01743d19b) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Spoiler): add new component (#3132)](https://github.com/consta-design-system/uikit/commit/4e2c2fba84c607ce6150040c04ae5ec683c84a91) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.22.0 (13/07/2023)
-Самое важное:
-- в `Collapse` убрали ограничение использования `rightSide` при `iconPosition = 'right'`
-- в компонентах где используется TextField, сделали возможным привязать `label` к `input`, достаточно указать `id` компоненту
- 
----
-
-- [fix(Steps): fix discrepancies between design and code (#3055)](https://github.com/consta-design-system/uikit/commit/0345da261e97465d656b001007cac6d8f20cde04) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Collapse): fix rendering of rightSide when iconPosition equla right (#3170)](https://github.com/consta-design-system/uikit/commit/90337ad76d34d981a5088ad2fa73f8b32396d4c3) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Discrepancies): fix style mistakes (#3014)](https://github.com/consta-design-system/uikit/commit/0ddea96fc0e31f15b0a041f3ab45a3f7dd357bb3) - [@N1MBER](https://github.com/N1MBER)
-- [fix(useSelect): open dropdown when typing (#3164)](https://github.com/consta-design-system/uikit/commit/b380882788cc72677964bd4cda819715af6f5462) - [@N1MBER](https://github.com/N1MBER)
-- [docs(List): fix import example (#3143)](https://github.com/consta-design-system/uikit/commit/83199f3f83ed484cdc732590f834d69d6c1af85f) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Table): fix prop name (#3142)](https://github.com/consta-design-system/uikit/commit/b6c22619631c3d46667020f28b0c2919b3dc5f89) - [@N1MBER](https://github.com/N1MBER)
-- [feat(FieldLabel): change render to as and add htmlFor (#3140)](https://github.com/consta-design-system/uikit/commit/421eeb65a924ae86d62c9cd4d77b3861067decb7) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.21.0 (28/06/2023)
-Самое важное:
-
-- В `Text` добавили новые цвета
-- В `Collapse` добавили свойство `form`
-
----
-
-- [feat(Text): add new colors (#3134)](https://github.com/consta-design-system/uikit/commit/5ab69d77eed0769af07bd56562bf1cf1a899e3b5) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Tabs): fix Infinity height, fix onlyIcon style (#3135)](https://github.com/consta-design-system/uikit/commit/1625495daf3c94c0af167d2eed1936ce8e4b0c6c) - [@gizeasy](https://github.com/gizeasy)
-- [fix(TextField): fix onChange params (#3133)](https://github.com/consta-design-system/uikit/commit/999ed546bb3389d9a90fa2a98ae518e686b2c2f7) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Tabs): added new props (#3126)](https://github.com/consta-design-system/uikit/commit/7da7c2450973332c60c1b187c3b55a4298983f37) - [@N1MBER](https://github.com/N1MBER)
-- [fix(AutoComplete): fix memo filteredOptions (#3130)](https://github.com/consta-design-system/uikit/commit/37c02f72e7d61a466c56d6e1229febdb00d0ce0c) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Collapse): add prop form (#3059)](https://github.com/consta-design-system/uikit/commit/239f57ea439d1013177946bb09d856d325899e4d) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Button): fix mouse events for disabled button (#3120)](https://github.com/consta-design-system/uikit/commit/edf18e885e850e62c6d07980a3f67c91e6c98bdd) - [@N1MBER](https://github.com/N1MBER)
-- [fix(withTooltip): fix types (#3127)](https://github.com/consta-design-system/uikit/commit/87748c2b5b54110c59b617f82740646db3813598) - [@N1MBER](https://github.com/N1MBER)
-- [fix(SelectComponents): remove useless z-index (#3123)](https://github.com/consta-design-system/uikit/commit/9fa85e928fc58ce524241318a51bac39b2492c11) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Checkbox): remove useless z-index (#3122)](https://github.com/consta-design-system/uikit/commit/0f67f1731b7ab36fbd2d94dd7b247e3f5487f545) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Header): marked as deprecated (#3113)](https://github.com/consta-design-system/uikit/commit/03e53a3f0e51774757a0a372d04efc12aa60bf77) - [@N1MBER](https://github.com/N1MBER)

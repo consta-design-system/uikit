@@ -33,6 +33,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> =
       dropdownForm,
       onFocus,
       dropdownClassName,
+      dropdownRef,
       onBlur,
       leftSide,
       rightSide,
@@ -205,7 +206,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> =
         />
         <DatePickerDropdown
           type="month"
-          ref={calendarRef}
+          ref={useForkRef([dropdownRef, calendarRef])}
           anchorRef={startFieldRef}
           isOpen={calendarVisible}
           onChangeCurrentVisibleDate={setCurrentVisibleDate}

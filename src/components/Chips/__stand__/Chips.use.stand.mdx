@@ -1,0 +1,80 @@
+import { MdxMenu } from '@consta/stand';
+import { MdxImage } from '@consta/stand';
+import start_example from './images/ChipsItem_example_04.jpg';
+import catalog from './images/ChipsItem_example_02.jpg';
+import status from './images/ChipsItem_example_03.jpg';
+import choice from './images/ChipsItem_example_01.jpg';
+import music from './images/ChipsItem_example_05.jpg';
+
+<MdxMenu>
+
+- [Контекст использования](#контекст-использования)
+- [Лучшие практики](#лучшие-практики)
+- [Похожие компоненты](#похожие-компоненты)
+- [Полезные ссылки](#полезные-ссылки)
+
+</MdxMenu>
+
+Компонент `Chips` отлично подойдет для фильтрации контента по заранее заданным категориям или ключевым словам. Он удобен для интерактивного взаимодействия и компактного отображения метаданных.
+
+<MdxImage src={start_example} />
+
+# Контекст использования
+
+Используйте `Chips`, когда нужно быстро сузить объем контента, с которым работает пользователь.
+
+## Отображение атрибутов или меток
+
+Компонент отлично подойдет, когда нужно показать свойства объекта.
+
+**Пример**. Жанры музыки на карточке песни.
+
+<MdxImage src={music} />
+
+## Категории и фильтры
+
+Используйте `Chips`, когда пользователю нужно фильтровать контент по предустановленным значениям.
+
+**Пример**. Фильтры в каталоге товаров.
+
+<MdxImage src={catalog} />
+
+## Системы рекомендаций
+
+Компонент отлично подходит для сервисов, где необходимо отображать контент в соответствии с категориями, выбранными пользователем ранее. Эти категории можно представить в виде чипсов.
+
+**Пример**. Темы при оформлении подписки на сервис.
+
+<MdxImage src={choice} />
+
+## Настройка элемента в одном окне
+
+Используйте `Chips`, когда пользователю будет удобно настраивать объект, не открывая новое окно.
+
+**Пример**. Статусы заявок
+
+<MdxImage src={status} />
+
+# Лучшие практики
+
+## Иконки для лучшего восприятия
+
+Добавляйте [иконки](##LIBS.LIB.STAND/lib:icons/stand:icons-icon-stable), чтобы пользователь мог быстрее идентифицировать категорию или действие. Используйте иконки, когда они действительно помогают улучшить восприятие информации.
+
+## Понятность и лаконичность
+
+Чипсы должны быть легко читаемыми и понятными. Используйте короткие и точные слова или фразы, чтобы описать контент.
+
+# Похожие компоненты
+
+- [Tag](##LIBS.LIB.STAND/lib:uikit/stand:components-tag-stable) — компонент для маркировки контента.
+- [Badge](##LIBS.LIB.STAND/lib:uikit/stand:components-badge-stable) — компонент для отображения статуса процесса.
+- [Button](##LIBS.LIB.STAND/lib:uikit/stand:components-button-stable) – кнопка.
+
+# Полезные ссылки
+
+- [Редполитика](##LIBS.LIB.STAND/lib:portal/stand:guidelines-editorialpolicy)
+- [Создание иконок](##LIBS.LIB.STAND/lib:portal/stand:contributers-addicons)
+- [Tag](##LIBS.LIB.STAND/lib:uikit/stand:components-tag-stable)
+- [Badge](##LIBS.LIB.STAND/lib:uikit/stand:components-badge-stable)
+- [Button](##LIBS.LIB.STAND/lib:uikit/stand:components-button-stable)

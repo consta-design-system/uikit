@@ -2,12 +2,12 @@ import { format, isValid, parse, startOfToday } from 'date-fns';
 import { useCallback, useEffect } from 'react';
 import { useIMask } from 'react-imask';
 
+import { getForm } from '##/components/FieldGroup';
+import { TextFieldPropForm } from '##/components/TextField';
 import { useMutableRef } from '##/hooks/useMutableRef';
+import { range } from '##/utils/array';
+import { DateRange } from '##/utils/types/Date';
 
-import { range } from '../../utils/array';
-import { DateRange } from '../../utils/types/Date';
-import { getForm } from '../FieldGroup/FieldGroup';
-import { TextFieldPropForm } from '../TextField/TextField';
 import { DatePickerPropType } from './types';
 
 export const datePickerPropSeparatorDefault = '.';
@@ -164,15 +164,26 @@ export const useStringValue = (
   onChangeRef: React.MutableRefObject<
     DatePickerFieldTypeDatePropOnChange | undefined
   >,
-  imaskProps: ReturnType<typeof useIMask>,
+  imaskProps: ReturnType<typeof useIMask<HTMLInputElement>>,
 ) => {
   const stringValue = imaskProps.value;
 
   const refs = useMutableRef([imaskProps.setValue, value] as const);
 
+  const setStringValue = useCallback((value: string) => {
+    refs.current[0](value);
+    if (imaskProps.ref?.current) {
+      imaskProps.ref.current.value = value;
+    }
+    if (imaskProps.maskRef.current) {
+      imaskProps.maskRef.current.updateValue();
+    }
+  }, []);
+
   const handleClear: React.MouseEventHandler<HTMLButtonElement> = useCallback(
     (e) => {
-      refs.current[0]('');
+      setStringValue('');
+
       if (refs.current[1]) {
         onChangeRef.current?.(null, { e: e as unknown as Event });
       }
@@ -182,7 +193,7 @@ export const useStringValue = (
 
   useEffect(() => {
     if (value && isValid(value)) {
-      refs.current[0](format(value, formatProp));
+      setStringValue(format(value, formatProp));
     }
 
     if (!value && stringValue) {
@@ -202,7 +213,7 @@ export const useStringValue = (
           : undefined;
 
       if (isValid(date)) {
-        refs.current[0]('');
+        setStringValue('');
       }
     }
   }, [value?.getTime()]);

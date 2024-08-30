@@ -24,6 +24,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
       locale,
       dropdownForm,
       dropdownClassName,
+      dropdownRef,
       currentVisibleDate: currentVisibleDateProp,
       onChangeCurrentVisibleDate,
       renderAdditionalControls,
@@ -101,7 +102,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
           disabled={disabled}
         />
         <DatePickerDropdown
-          ref={calendarRef}
+          ref={useForkRef([dropdownRef, calendarRef])}
           anchorRef={fieldRef}
           isOpen={calendarVisible}
           value={props.value || undefined}

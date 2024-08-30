@@ -25,6 +25,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
       locale,
       dropdownForm,
       dropdownClassName,
+      dropdownRef,
       multiplicityHours: multiplicityHoursProp,
       multiplicityMinutes: multiplicityMinutesProp,
       multiplicitySeconds: multiplicitySecondsProp,
@@ -87,7 +88,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
           disabled={disabled}
         />
         <DatePickerDropdown
-          ref={calendarRef}
+          ref={useForkRef([dropdownRef, calendarRef])}
           anchorRef={fieldRef}
           isOpen={calendarVisible}
           value={props.value || undefined}
