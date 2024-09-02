@@ -15,7 +15,7 @@ import {
 export const getSlots = (
   side: React.ReactNode | JSX.Element[],
 ): React.ReactNode[] => {
-  return ((Array.isArray(side) ? side : [side]) as []).filter(isNotNil);
+  return ((Array.isArray(side) ? side : [side]) as []).filter((item) => !!item);
 };
 
 const borderToCss = (value: FieldControlLayoutBorderWidthNode) => {

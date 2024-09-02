@@ -1,6 +1,8 @@
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
+import { isDefined, isString } from '##/utils/type-guards';
+
 import { FieldPropSize, getFieldIconSize } from '.';
 
 export const renderSide = (
@@ -8,9 +10,10 @@ export const renderSide = (
   fieldSize: FieldPropSize,
   iconSize: IconPropSize | undefined,
 ) => {
-  if (typeof side === 'function') {
-    const Icon = side;
-    return <Icon size={getFieldIconSize(fieldSize, iconSize)} />;
+  if (isString(side) || !isDefined(side)) {
+    return side;
   }
-  return side;
+
+  const Icon = side;
+  return <Icon size={getFieldIconSize(fieldSize, iconSize)} />;
 };

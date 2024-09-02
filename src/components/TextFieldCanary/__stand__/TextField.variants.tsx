@@ -22,7 +22,7 @@ import {
 } from '##/components/Field/__mocks__/variants';
 import { cnMixHitSlop } from '##/mixs/MixHitSlop';
 
-import { TextFieldTypeText } from '../TextFieldTypeText';
+import { TextField } from '..';
 
 const Variants = () => {
   const type = useSelect(
@@ -82,13 +82,18 @@ const Variants = () => {
 
   return (
     <div>
-      <TextFieldTypeText
+      <TextField
         form={form}
         status={status}
         size={size}
         view={view}
         disabled={disabled}
         style={{ display: 'block' }}
+        leftSide={leftSide}
+        rightSide={rightSide}
+        maxLength={maxLength}
+        withClearButton={withClearButton}
+        placeholder={placeholder}
       />
     </div>
   );

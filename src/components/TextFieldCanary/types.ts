@@ -107,5 +107,5 @@ export type TextFieldComponent = <TYPE extends string>(
 ) => React.ReactElement | null;
 
 export type TextFieldTypeComponent<TYPE extends string> = (
-  props: Omit<TextFieldProps<TYPE>, 'type'>,
+  props: TextFieldProps<TYPE>,
 ) => React.ReactElement | null;

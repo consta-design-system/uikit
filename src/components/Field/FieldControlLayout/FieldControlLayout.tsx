@@ -47,6 +47,8 @@ export const FieldControlLayout = forwardRef<
   const leftSlots = getSlots(leftSide);
   const rightSlots = getSlots(rightSide);
 
+  console.log(rightSlots);
+
   return (
     <div
       {...otherProps}

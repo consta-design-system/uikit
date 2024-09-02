@@ -15,7 +15,7 @@ import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttri
 type FieldClearButtonProps = PropsWithHTMLAttributesAndRef<
   {
     size: FieldPropSize;
-    children: React.ReactNode;
+    children?: never;
   },
   HTMLButtonElement
 >;
