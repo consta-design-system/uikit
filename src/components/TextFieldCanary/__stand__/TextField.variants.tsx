@@ -28,7 +28,7 @@ const Variants = () => {
   const type = useSelect(
     'type',
     ['text', 'number', 'textarea', 'password'],
-    'text',
+    'textarea',
   );
   const minRows = useNumber('minRows', 1, type === 'textarea');
   const maxRows = useNumber('maxRows', 5, type === 'textarea');
@@ -94,6 +94,7 @@ const Variants = () => {
         maxLength={maxLength}
         withClearButton={withClearButton}
         placeholder={placeholder}
+        type={type}
       />
     </div>
   );

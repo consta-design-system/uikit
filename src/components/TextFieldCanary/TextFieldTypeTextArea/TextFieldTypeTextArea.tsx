@@ -3,16 +3,17 @@ import React, { forwardRef } from 'react';
 import {
   FieldClearButton,
   FieldControlLayout,
-  FieldInput,
+  FieldTextArea,
+  FieldTextAreaWrapper,
   renderSide,
 } from '##/components/Field';
 import { useForkRef } from '##/hooks/useForkRef';
 
-import { TextFieldTypeComponent } from '..';
+import { TextFieldTypeComponent } from '../types';
 import { useTextField } from '../useTextField';
 
-export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
-  (props, componentRef) => {
+export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
+  forwardRef((props, componentRef) => {
     const {
       className,
       value,
@@ -61,7 +62,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
       ref,
       inputRef,
       handleClick,
-    } = useTextField({
+    } = useTextField<HTMLTextAreaElement>({
       onClick,
       onChange,
       onBlur,
@@ -91,31 +92,31 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
         disabled={disabled}
         onClick={handleClick}
       >
-        <FieldInput
-          placeholder={placeholder}
-          autoFocus={autoFocus}
-          autoComplete={autoComplete}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          defaultValue={defaultValue || undefined}
-          value={value || undefined}
-          ref={useForkRef([inputRefProp, inputRef])}
-          readOnly={readOnly}
-          tabIndex={tabIndex}
-          aria-label={ariaLabel}
-          onKeyDown={onKeyDown}
-          onKeyDownCapture={onKeyDownCapture}
-          // TODO: разобраться
-          onKeyPress={onKeyPress}
-          onKeyPressCapture={onKeyPressCapture}
-          onKeyUp={onKeyUp}
-          onKeyUpCapture={onKeyUpCapture}
-          maxLength={maxLength}
-          disabled={disabled}
-          type={type}
-        />
+        <FieldTextAreaWrapper size={size}>
+          <FieldTextArea
+            placeholder={placeholder}
+            autoFocus={autoFocus}
+            autoComplete={autoComplete}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            defaultValue={defaultValue || undefined}
+            value={value || undefined}
+            ref={useForkRef([inputRefProp, inputRef])}
+            readOnly={readOnly}
+            tabIndex={tabIndex}
+            aria-label={ariaLabel}
+            onKeyDown={onKeyDown}
+            onKeyDownCapture={onKeyDownCapture}
+            // TODO: разобраться
+            onKeyPress={onKeyPress}
+            onKeyPressCapture={onKeyPressCapture}
+            onKeyUp={onKeyUp}
+            onKeyUpCapture={onKeyUpCapture}
+            maxLength={maxLength}
+            disabled={disabled}
+          />
+        </FieldTextAreaWrapper>
       </FieldControlLayout>
     );
-  },
-);
+  });

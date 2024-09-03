@@ -17,7 +17,7 @@ export const cnFieldInput = cn('FieldInput');
 export const FieldInput = forwardRef<HTMLInputElement, FieldInputProps>(
   ({ className, ...props }, ref) => {
     return (
-      <input ref={ref} className={cnFieldInput(null, [className])} {...props} />
+      <input {...props} ref={ref} className={cnFieldInput(null, [className])} />
     );
   },
 );
