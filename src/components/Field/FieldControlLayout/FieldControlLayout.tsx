@@ -2,7 +2,10 @@ import './FieldControlLayout.css';
 
 import React, { forwardRef } from 'react';
 
+import { getElementSize } from '##/hooks/useComponentSize';
 import { useFlag } from '##/hooks/useFlag';
+import { useRefs } from '##/hooks/useRefs';
+import { useResizeObserved } from '##/hooks/useResizeObserved';
 import { cn } from '##/utils/bem';
 
 import {
@@ -41,13 +44,17 @@ export const FieldControlLayout = forwardRef<
     focused,
     ...otherProps
   } = props;
-
-  const [hovered, setHovered] = useFlag();
-
   const leftSlots = getSlots(leftSide);
   const rightSlots = getSlots(rightSide);
 
-  console.log(rightSlots);
+  const [hovered, setHovered] = useFlag();
+
+  const slotsRefs = useRefs<HTMLDivElement>(2, [
+    !leftSlots.length,
+    !rightSlots.length,
+  ]);
+
+  const slotSizes = useResizeObserved(slotsRefs, getElementSize);
 
   return (
     <div
@@ -78,14 +85,30 @@ export const FieldControlLayout = forwardRef<
           view,
           disabled,
         ),
+        ['--field-control-layout-left-slots-width' as string]: `${slotSizes[0].width}px`,
+        ['--field-control-layout-right-slots-width' as string]: `${slotSizes[1].width}px`,
       }}
       onMouseEnter={setHovered.on}
       onMouseLeave={setHovered.off}
     >
       <div className={cnFieldControlLayout('Container')}>
-        {!!leftSlots.length && leftSlots.map(renderContentSlot)}
+        {!!leftSlots.length && (
+          <div
+            ref={slotsRefs[0]}
+            className={cnFieldControlLayout('Slots', { position: 'left' })}
+          >
+            {leftSlots.map(renderContentSlot)}
+          </div>
+        )}
         <div className={cnFieldControlLayout('Сhildren')}>{children}</div>
-        {!!rightSlots.length && rightSlots.map(renderContentSlot)}
+        {!!rightSlots.length && (
+          <div
+            ref={slotsRefs[1]}
+            className={cnFieldControlLayout('Slots', { position: 'right' })}
+          >
+            {rightSlots.map(renderContentSlot)}
+          </div>
+        )}
       </div>
     </div>
   );

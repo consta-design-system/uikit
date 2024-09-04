@@ -1,4 +1,6 @@
-import React, { RefObject, useLayoutEffect } from 'react';
+import React, { RefObject, useEffect, useLayoutEffect } from 'react';
+
+import { useMutableRef } from '../useMutableRef';
 
 export const useResizeObserved = <
   ELEMENT extends HTMLElement | SVGGraphicsElement,
@@ -7,19 +9,21 @@ export const useResizeObserved = <
   refs: Array<RefObject<ELEMENT>>,
   mapper: (el: ELEMENT | null) => RETURN_TYPE,
 ): RETURN_TYPE[] => {
-  const [dimensions, setDimensions] = React.useState<RETURN_TYPE[]>(() =>
+  const calculateDimensionsRef = useMutableRef(() =>
     refs.map((ref) => mapper(ref.current)),
   );
 
-  // Храним маппер в рефке, чтобы если его передадут инлайн-функцией, это не вызвало бесконечные перерендеры
-  const mapperRef = React.useRef(mapper);
+  const [dimensions, setDimensions] = React.useState<RETURN_TYPE[]>(
+    calculateDimensionsRef.current,
+  );
+
   useLayoutEffect(() => {
-    mapperRef.current = mapper;
-  }, [mapper]);
+    setDimensions(calculateDimensionsRef.current);
+  }, [refs]);
 
   useLayoutEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
-      setDimensions(refs.map((ref) => mapperRef.current(ref.current)));
+      setDimensions(calculateDimensionsRef.current);
     });
 
     for (const ref of refs) {

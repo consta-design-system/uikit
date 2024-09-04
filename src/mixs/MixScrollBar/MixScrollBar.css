@@ -1,43 +1,98 @@
 .MixScrollBar {
+  --scrollbar-resizer-transparent-color: rgba(0, 0, 0, 0);
+  --scrollbar-resizer-color: var(--color-control-typo-placeholder);
+  --scrollbar-resizer-gap: 7;
+  --scrollbar-thumb-color: var(--color-scroll-thumb);
+  --scrollbar-thumb-background: var(--scrollbar-thumb-color) 0%,
+    var(--scrollbar-thumb-color) var(--webkit-scrollbar-size),
+    var(--scrollbar-resizer-transparent-color) var(--webkit-scrollbar-size),
+    var(--scrollbar-resizer-transparent-color) 100%;
+
   &_size {
     &_xs {
-      --scrollbar-size: var(--space-3xs);
+      --webkit-scrollbar-size: var(--space-2xs);
+      --native-scrollbar-size: none;
     }
 
     &_s {
-      --scrollbar-size: var(--space-2xs);
+      --webkit-scrollbar-size: var(--space-xs);
+      --native-scrollbar-size: thin;
     }
 
     &_m {
-      --scrollbar-size: var(--space-xs);
+      --webkit-scrollbar-size: var(--space-s);
+      --native-scrollbar-size: auto;
+    }
+  }
+
+  &_trackSize {
+    &_native {
+      --webkit-scrollbar-width: auto;
+    }
+    &_auto {
+      --webkit-scrollbar-width: var(--webkit-scrollbar-size);
     }
   }
 
   &_invisible {
-    &::-webkit-scrollbar {
-      display: none;
+    --native-scrollbar-size: none;
+    --webkit-scrollbar-display: none;
+  }
+
+  @supports (scrollbar-color: auto) and (not selector(::-webkit-scrollbar)) {
+    & {
+      scrollbar-color: var(--scrollbar-thumb-color) transparent;
+      scrollbar-width: var(--native-scrollbar-size);
     }
   }
 
-  &::-webkit-scrollbar {
-    width: var(--scrollbar-size);
-    height: var(--scrollbar-size);
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: var(--color-scroll-bg);
-  }
-
-  &::-webkit-scrollbar-corner {
-    background-color: var(--color-scroll-bg);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--color-scroll-thumb);
-    border-radius: var(--space-2xs);
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-scroll-thumb-hover);
+  @supports selector(::-webkit-scrollbar) {
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-corner,
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      border: none;
+    }
+    &::-webkit-scrollbar {
+      display: var(--webkit-scrollbar-display, auto);
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 0;
+    }
+    &::-webkit-scrollbar-thumb:vertical {
+      background: linear-gradient(-90deg, var(--scrollbar-thumb-background));
+    }
+    &::-webkit-scrollbar-thumb:horizontal {
+      background: linear-gradient(0deg, var(--scrollbar-thumb-background));
+    }
+    &::-webkit-scrollbar {
+      width: var(--webkit-scrollbar-width);
+      height: var(--webkit-scrollbar-width);
+    }
+    &::-webkit-resizer {
+      background: linear-gradient(
+        -45deg,
+        var(--scrollbar-resizer-transparent-color) 0%,
+        var(--scrollbar-resizer-transparent-color)
+          calc(1% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-color) calc(1% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-color) calc(2% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-transparent-color)
+          calc(2% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-transparent-color)
+          calc(3% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-color) calc(3% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-color) calc(4% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-transparent-color)
+          calc(4% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-transparent-color)
+          calc(5% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-color) calc(5% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-color) calc(6% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-transparent-color)
+          calc(6% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-transparent-color) 100%
+      );
+    }
   }
 }

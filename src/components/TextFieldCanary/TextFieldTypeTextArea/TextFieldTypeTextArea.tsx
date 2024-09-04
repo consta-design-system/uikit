@@ -92,31 +92,29 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
         disabled={disabled}
         onClick={handleClick}
       >
-        <FieldTextAreaWrapper size={size}>
-          <FieldTextArea
-            placeholder={placeholder}
-            autoFocus={autoFocus}
-            autoComplete={autoComplete}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            defaultValue={defaultValue || undefined}
-            value={value || undefined}
-            ref={useForkRef([inputRefProp, inputRef])}
-            readOnly={readOnly}
-            tabIndex={tabIndex}
-            aria-label={ariaLabel}
-            onKeyDown={onKeyDown}
-            onKeyDownCapture={onKeyDownCapture}
-            // TODO: разобраться
-            onKeyPress={onKeyPress}
-            onKeyPressCapture={onKeyPressCapture}
-            onKeyUp={onKeyUp}
-            onKeyUpCapture={onKeyUpCapture}
-            maxLength={maxLength}
-            disabled={disabled}
-          />
-        </FieldTextAreaWrapper>
+        <FieldTextArea
+          placeholder={placeholder}
+          autoFocus={autoFocus}
+          autoComplete={autoComplete}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          defaultValue={defaultValue || undefined}
+          value={value || undefined}
+          ref={useForkRef([inputRefProp, inputRef])}
+          readOnly={readOnly}
+          tabIndex={tabIndex}
+          aria-label={ariaLabel}
+          onKeyDown={onKeyDown}
+          onKeyDownCapture={onKeyDownCapture}
+          // TODO: разобраться
+          onKeyPress={onKeyPress}
+          onKeyPressCapture={onKeyPressCapture}
+          onKeyUp={onKeyUp}
+          onKeyUpCapture={onKeyUpCapture}
+          maxLength={maxLength}
+          disabled={disabled}
+        />
       </FieldControlLayout>
     );
   });

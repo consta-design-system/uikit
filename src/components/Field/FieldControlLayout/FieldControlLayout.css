@@ -37,6 +37,24 @@
     --field-control-layout-slot-color: var(--color-control-typo-disable);
   }
 
+  &-Container {
+    min-height: var(--field-control-layout-slot-height);
+    display: flex;
+  }
+
+  &-Slots {
+    display: flex;
+    gap: var(--field-control-layout-space);
+    &_position {
+      &_left {
+        padding-right: var(--field-control-layout-space);
+      }
+      &_right {
+        padding-left: var(--field-control-layout-space);
+      }
+    }
+  }
+
   &-Slot {
     color: var(--field-control-layout-slot-color);
     min-height: var(--field-control-layout-slot-height);
@@ -45,12 +63,6 @@
     justify-content: center;
     flex: none;
     font-size: var(--field-control-layout-text-size);
-  }
-
-  &-Container {
-    min-height: var(--field-control-layout-slot-height);
-    display: flex;
-    gap: var(--field-control-layout-space);
   }
 
   &-Сhildren {

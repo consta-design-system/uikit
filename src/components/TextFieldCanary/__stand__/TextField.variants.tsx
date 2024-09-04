@@ -81,7 +81,7 @@ const Variants = () => {
   const rightSide = rightSideType && rightSideSelect[rightSideType];
 
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <TextField
         form={form}
         status={status}

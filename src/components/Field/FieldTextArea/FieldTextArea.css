@@ -1,6 +1,9 @@
 .FieldTextArea {
-  --field-textarea-resizer-transparent-color: rgba(0, 0, 0, 0);
-  --field-textarea-resizer-gap: 5;
+  --field-textarea-resive-space: calc(
+    var(--field-control-layout-right-slots-width, 0px) +
+      var(--field-control-layout-space)
+  );
+
   color: var(--field-control-layout-input-color);
   font-size: var(--field-control-layout-text-size);
   background: transparent;
@@ -14,8 +17,9 @@
   padding-top: 0;
   padding-bottom: 0;
   display: block;
-  margin-right: -24px;
-  padding-right: 24px;
+  padding-right: var(--field-textarea-resive-space, 0px);
+  width: calc(100% + var(--field-textarea-resive-space));
+  resize: vertical;
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
@@ -25,90 +29,5 @@
 
   &::placeholder {
     color: var(--field-control-layout-placeholder-color);
-  }
-
-  @supports (scrollbar-color: auto) and (not selector(::-webkit-scrollbar)) {
-    & {
-      scrollbar-color: var(--color-scroll-thumb) transparent;
-      scrollbar-width: thin;
-      scrollbar-gutter: stable both-edges;
-    }
-  }
-  --size: var(--space-3xs);
-  --used-size: var(--size);
-  --thumb: var(--color-scroll-thumb) 0%,
-    var(--color-scroll-thumb) var(--used-size),
-    var(--field-textarea-resizer-transparent-color) var(--used-size),
-    var(--field-textarea-resizer-transparent-color) 100%;
-
-  &:hover {
-    --used-size: calc(var(--size) * 2);
-  }
-
-  @supports selector(::-webkit-scrollbar) {
-    &::-webkit-scrollbar,
-    &::-webkit-scrollbar-corner,
-    &::-webkit-scrollbar-track {
-      background: transparent;
-      border: none;
-    }
-
-    /* &::-webkit-scrollbar:hover {
-      --used-size: 20px;
-    }
-    &::-webkit-scrollbar:hover {
-      -webkit-animation: scrollbig 1s;
-    } */
-
-    &::-webkit-scrollbar-thumb:vertical {
-      background: linear-gradient(-90deg, var(--thumb));
-    }
-    &::-webkit-scrollbar-thumb:horizontal {
-      background: linear-gradient(0deg, var(--thumb));
-    }
-    &::-webkit-scrollbar-thumb {
-      transition: all 0.2s;
-    }
-
-    &::-webkit-scrollbar:hover {
-      --used-size: calc(var(--size) * 2);
-    }
-    /* &::-webkit-scrollbar:hover {
-      
-    } */
-  }
-
-  @supports selector(::-webkit-resizer) {
-    &::-webkit-resizer {
-      background: linear-gradient(
-        -45deg,
-        var(--field-textarea-resizer-transparent-color) 0%,
-        var(--field-textarea-resizer-transparent-color)
-          calc(1% * var(--field-textarea-resizer-gap)),
-        var(--field-control-layout-placeholder-color)
-          calc(1% * var(--field-textarea-resizer-gap)),
-        var(--field-control-layout-placeholder-color)
-          calc(2% * var(--field-textarea-resizer-gap)),
-        var(--field-textarea-resizer-transparent-color)
-          calc(2% * var(--field-textarea-resizer-gap)),
-        var(--field-textarea-resizer-transparent-color)
-          calc(3% * var(--field-textarea-resizer-gap)),
-        var(--field-control-layout-placeholder-color)
-          calc(3% * var(--field-textarea-resizer-gap)),
-        var(--field-control-layout-placeholder-color)
-          calc(4% * var(--field-textarea-resizer-gap)),
-        var(--field-textarea-resizer-transparent-color)
-          calc(4% * var(--field-textarea-resizer-gap)),
-        var(--field-textarea-resizer-transparent-color)
-          calc(5% * var(--field-textarea-resizer-gap)),
-        var(--field-control-layout-placeholder-color)
-          calc(5% * var(--field-textarea-resizer-gap)),
-        var(--field-control-layout-placeholder-color)
-          calc(6% * var(--field-textarea-resizer-gap)),
-        var(--field-textarea-resizer-transparent-color)
-          calc(6% * var(--field-textarea-resizer-gap)),
-        var(--field-textarea-resizer-transparent-color) 100%
-      );
-    }
   }
 }

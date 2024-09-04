@@ -40,7 +40,7 @@ export const FieldTextArea = forwardRef<
       }}
       ref={ref}
       className={cnFieldTextArea({ resizer: !!resize }, [
-        // cnMixScrollBar({ size: 'xs' }),
+        cnMixScrollBar({ size: 'xs', trackSize: 'native' }),
         className,
       ])}
     />
