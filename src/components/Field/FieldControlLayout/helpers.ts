@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { isNotNil } from '##/utils/type-guards';
-
 import { FieldPropForm, FieldPropStatus, FieldPropView } from '../types';
 import {
   borderRadiusMap,

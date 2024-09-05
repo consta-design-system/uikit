@@ -2,6 +2,7 @@ import './TextField.css';
 
 import React, { forwardRef } from 'react';
 
+import { TextFieldTypePassword } from './TextFieldTypePassword';
 import { TextFieldTypeText } from './TextFieldTypeText';
 import { TextFieldTypeTextArea } from './TextFieldTypeTextArea';
 import {
@@ -12,10 +13,13 @@ import {
 
 const typeMap: Record<
   string,
-  TextFieldTypeComponent<'text'> | TextFieldTypeComponent<'textarea'>
+  | TextFieldTypeComponent<'text'>
+  | TextFieldTypeComponent<'textarea'>
+  | TextFieldTypeComponent<'password'>
 > = {
   text: TextFieldTypeText,
   textarea: TextFieldTypeTextArea,
+  password: TextFieldTypePassword,
 };
 
 const TextFieldRender = <TYPE extends string>(

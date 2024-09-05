@@ -52,8 +52,6 @@ export const borderRadiusMap: FieldControlLayoutBorderRadiusMap = {
   brickDefault: borderRadiusVariants[1],
   brickRound: borderRadiusVariants[2],
   clear: borderRadiusVariants[0],
-  // @deprecated use 'clear'
-  clearClear: borderRadiusVariants[0],
   clearBrick: borderRadiusVariants[0],
   clearDefault: borderRadiusVariants[1],
   clearRound: borderRadiusVariants[2],
@@ -79,8 +77,6 @@ export const borderWidthMap: FieldControlLayoutBorderWidthMap = {
   brickDefault: borderWidthVariants[0],
   brickRound: borderWidthVariants[0],
   clear: borderWidthVariants[3],
-  // @deprecated use 'clear'
-  clearClear: borderWidthVariants[3],
   clearBrick: borderWidthVariants[2],
   clearDefault: borderWidthVariants[2],
   clearRound: borderWidthVariants[2],
@@ -105,8 +101,6 @@ export const paddingMap: FieldControlLayoutPaddingMap = {
   brickDefault: paddingVariants[0],
   brickRound: paddingVariants[1],
   clear: paddingVariants[0],
-  // @deprecated use 'clear'
-  clearClear: paddingVariants[0],
   clearBrick: paddingVariants[0],
   clearDefault: paddingVariants[0],
   clearRound: paddingVariants[1],

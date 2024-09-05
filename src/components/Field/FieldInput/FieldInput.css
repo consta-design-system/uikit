@@ -5,6 +5,9 @@
   border: none;
   outline: none;
   height: var(--field-control-layout-slot-height);
+  line-height: var(--field-control-layout-text-line-height);
+  font-size: var(--field-control-layout-text-size);
+  display: block;
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,

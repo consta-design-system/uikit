@@ -1,7 +1,7 @@
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
-import { isDefined, isString } from '##/utils/type-guards';
+import { isString } from '##/utils/type-guards';
 
 import { FieldPropSize, getFieldIconSize } from '.';
 
@@ -9,11 +9,16 @@ export const renderSide = (
   side: string | IconComponent | undefined,
   fieldSize: FieldPropSize,
   iconSize: IconPropSize | undefined,
+  ref?: React.Ref<HTMLSpanElement>,
 ) => {
-  if (isString(side) || !isDefined(side)) {
-    return side;
+  if (!side) {
+    return undefined;
+  }
+
+  if (isString(side)) {
+    return <span ref={ref}>{side}</span>;
   }
 
   const Icon = side;
-  return <Icon size={getFieldIconSize(fieldSize, iconSize)} />;
+  return <Icon ref={ref} size={getFieldIconSize(fieldSize, iconSize)} />;
 };

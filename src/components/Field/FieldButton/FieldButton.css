@@ -1,4 +1,11 @@
 .FieldButton {
+  --field-clear-button-fit-slop: calc(var(--field-control-layout-space) / 2);
+
+  --mix-hit-slop-top: var(--field-clear-button-fit-slop);
+  --mix-hit-slop-left: var(--field-clear-button-fit-slop);
+  --mix-hit-slop-right: var(--field-clear-button-fit-slop);
+  --mix-hit-slop-bottom: var(--field-clear-button-fit-slop);
+
   color: inherit;
   display: flex;
   justify-content: center;

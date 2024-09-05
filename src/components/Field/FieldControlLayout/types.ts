@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 import {
@@ -18,6 +20,8 @@ export type FieldControlLayoutProps = PropsWithHTMLAttributesAndRef<
     rightSide?: React.ReactNode | JSX.Element[];
     children?: React.ReactNode;
     focused?: boolean;
+    leftSlotsRefs?: React.Ref<HTMLDivElement>[];
+    rightSlotsRefs?: React.Ref<HTMLDivElement>[];
   },
   HTMLDivElement
 >;

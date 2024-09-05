@@ -1,16 +1,26 @@
+import './TextFieldTypeTextArea.css';
+
 import React, { forwardRef } from 'react';
+import TextAreaAutoSize from 'react-textarea-autosize';
 
 import {
+  cnFieldInput,
   FieldClearButton,
   FieldControlLayout,
-  FieldTextArea,
-  FieldTextAreaWrapper,
   renderSide,
 } from '##/components/Field';
+import { getElementSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
+import { useRefs } from '##/hooks/useRefs';
+import { useResizeObserved } from '##/hooks/useResizeObserved';
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
+import { cn } from '##/utils/bem';
 
 import { TextFieldTypeComponent } from '../types';
 import { useTextField } from '../useTextField';
+// import {cnFieldInput} from '##/'
+
+export const cnTextFieldTypeTextArea = cn('TextFieldTypeTextArea');
 
 export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
   forwardRef((props, componentRef) => {
@@ -42,6 +52,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       ariaLabel,
       iconSize,
       onClick,
+      resize = 'auto',
       // onkey props
       onKeyDown,
       onKeyDownCapture,
@@ -72,10 +83,45 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       name,
     });
 
+    const rightSlotsRefs = useRefs<HTMLDivElement>(2, [
+      !!rightSide,
+      withClearButton && !disabled && withValue,
+    ]);
+
+    const slotSizes = useResizeObserved(rightSlotsRefs, getElementSize);
+
+    const textAreaProps = {
+      'className': cnTextFieldTypeTextArea('TextArea', { resize }, [
+        cnFieldInput(),
+        cnMixScrollBar({ size: 'xs', trackSize: 'native' }),
+      ]),
+      placeholder,
+      // autoFocus={autoFocus}
+      autoComplete,
+      'onBlur': handleBlur,
+      'onChange': handleChange,
+      'onFocus': handleFocus,
+      'defaultValue': defaultValue || undefined,
+      'value': value || undefined,
+      'ref': useForkRef([inputRefProp, inputRef]),
+      readOnly,
+      tabIndex,
+      'aria-label': ariaLabel,
+      'onKeyDown': onKeyDown,
+      'onKeyDownCapture': onKeyDownCapture,
+      // TODO: разобраться
+      'onKeyPress': onKeyPress,
+      'onKeyPressCapture': onKeyPressCapture,
+      'onKeyUp': onKeyUp,
+      'onKeyUpCapture': onKeyUpCapture,
+      'maxLength': maxLength,
+      'disabled': disabled,
+    };
+
     return (
       <FieldControlLayout
         {...otherProps}
-        className={className}
+        className={cnTextFieldTypeTextArea(null, [className])}
         form={form}
         status={status}
         size={size}
@@ -91,30 +137,20 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
         ref={useForkRef([componentRef, ref])}
         disabled={disabled}
         onClick={handleClick}
+        style={{
+          ['--text-field-textarea-slot-sizes-width' as string]: `${slotSizes
+            .map((item) => item.width)
+            .reduce((a, b) => a + b)}px`,
+          ['--text-field-textarea-slot-sizes-lenght' as string]:
+            slotSizes.filter((item) => !!item.width).length,
+        }}
+        rightSlotsRefs={rightSlotsRefs}
       >
-        <FieldTextArea
-          placeholder={placeholder}
-          autoFocus={autoFocus}
-          autoComplete={autoComplete}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          onFocus={handleFocus}
-          defaultValue={defaultValue || undefined}
-          value={value || undefined}
-          ref={useForkRef([inputRefProp, inputRef])}
-          readOnly={readOnly}
-          tabIndex={tabIndex}
-          aria-label={ariaLabel}
-          onKeyDown={onKeyDown}
-          onKeyDownCapture={onKeyDownCapture}
-          // TODO: разобраться
-          onKeyPress={onKeyPress}
-          onKeyPressCapture={onKeyPressCapture}
-          onKeyUp={onKeyUp}
-          onKeyUpCapture={onKeyUpCapture}
-          maxLength={maxLength}
-          disabled={disabled}
-        />
+        {resize === 'auto' ? (
+          <TextAreaAutoSize {...textAreaProps} />
+        ) : (
+          <textarea {...textAreaProps} />
+        )}
       </FieldControlLayout>
     );
   });

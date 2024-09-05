@@ -70,7 +70,7 @@
       height: var(--webkit-scrollbar-width);
     }
     &::-webkit-resizer {
-      background: linear-gradient(
+      background-image: linear-gradient(
         -45deg,
         var(--scrollbar-resizer-transparent-color) 0%,
         var(--scrollbar-resizer-transparent-color)
@@ -93,6 +93,9 @@
           calc(6% * var(--scrollbar-resizer-gap)),
         var(--scrollbar-resizer-transparent-color) 100%
       );
+
+      background-size: calc(100% - 2px) calc(100% - 2px);
+      background-repeat: no-repeat;
     }
   }
 }

@@ -31,7 +31,10 @@ export type TextFieldPropForm = FieldPropForm;
 export type TextFieldPropStatus = FieldPropStatus;
 
 type TextFieldPropsTypeTextarea<TYPE> = TYPE extends 'textarea'
-  ? { cols?: number } & (
+  ? {
+      cols?: number;
+      resize: boolean | 'auto';
+    } & (
       | {
           minRows?: never;
           maxRows?: never;

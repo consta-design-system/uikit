@@ -1,6 +1,6 @@
-import React, { RefObject, useEffect, useLayoutEffect } from 'react';
+import React, { RefObject, useLayoutEffect } from 'react';
 
-import { useMutableRef } from '../useMutableRef';
+import { useMutableRef } from '##/hooks/useMutableRef';
 
 export const useResizeObserved = <
   ELEMENT extends HTMLElement | SVGGraphicsElement,
