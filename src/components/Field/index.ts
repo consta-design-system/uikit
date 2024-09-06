@@ -6,7 +6,7 @@ export * from './FieldInput';
 export * from './FieldButton';
 export * from './FieldCounter';
 export * from './FieldClearButton';
-export * from './FieldTextAreaWrapper';
 export * from './FieldToggleVisiblePasswordButton';
 export * from './renderSide';
+export * from './FieldButtonStyleReset';
 export * from './types';

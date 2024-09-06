@@ -28,7 +28,7 @@ const Variants = () => {
   const type = useSelect(
     'type',
     ['text', 'number', 'textarea', 'password'],
-    'textarea',
+    'number',
   );
   const minRows = useNumber('minRows', 1, type === 'textarea');
   const maxRows = useNumber('maxRows', 5, type === 'textarea');
@@ -95,6 +95,10 @@ const Variants = () => {
         withClearButton={withClearButton}
         placeholder={placeholder}
         type={type}
+        incrementButtons={incrementButtons}
+        min={min}
+        max={max}
+        step={withStepArray ? numberStepArray : step}
       />
     </div>
   );

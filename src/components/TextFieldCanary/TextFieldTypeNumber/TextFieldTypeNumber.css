@@ -1,0 +1,13 @@
+.TextFieldTypeNumber {
+  &_incrementButtons {
+    padding-right: 0px;
+  }
+  &-Input {
+    width: 100%;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      display: none;
+    }
+    -moz-appearance: textfield;
+  }
+}

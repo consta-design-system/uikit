@@ -1,12 +1,11 @@
-import './FieldLabel.css';
-
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React from 'react';
 
 import { Text } from '##/components/Text/Text';
 import { cnMixSpace, Space } from '##/mixs/MixSpace';
-import { cn } from '##/utils/bem';
 import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
+
+import { cnFieldLabel } from './cnFieldLabel';
 
 export type FieldLabelPropSize = 'xs' | 's' | 'm' | 'l';
 
@@ -15,8 +14,6 @@ type FieldLabelProps = {
   size?: FieldLabelPropSize;
   required?: boolean;
 };
-
-const cnFieldLabel = cn('FieldLabel');
 
 const iconSizeMap: Record<FieldLabelPropSize, IconPropSize> = {
   xs: 'xs',

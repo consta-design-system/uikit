@@ -5,14 +5,4 @@
   --mix-hit-slop-left: var(--field-clear-button-fit-slop);
   --mix-hit-slop-right: var(--field-clear-button-fit-slop);
   --mix-hit-slop-bottom: var(--field-clear-button-fit-slop);
-
-  color: inherit;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
 }

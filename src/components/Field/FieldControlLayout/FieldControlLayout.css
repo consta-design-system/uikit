@@ -49,7 +49,7 @@
 
   &-Slot {
     color: var(--field-control-layout-slot-color);
-    min-height: var(--field-control-layout-slot-height);
+    height: var(--field-control-layout-slot-height);
     display: flex;
     align-items: center;
     justify-content: center;

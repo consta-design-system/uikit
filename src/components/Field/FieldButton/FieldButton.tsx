@@ -1,10 +1,10 @@
-import './FieldButton.css';
-
 import React, { forwardRef } from 'react';
 
 import { cnMixHitSlop } from '##/mixs/MixHitSlop';
-import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
+
+import { cnFieldButtonStyleReset } from '../FieldButtonStyleReset';
+import { cnFieldButton } from './cnFieldButton';
 
 type FieldButtonProps = PropsWithHTMLAttributesAndRef<
   {
@@ -13,8 +13,6 @@ type FieldButtonProps = PropsWithHTMLAttributesAndRef<
   HTMLButtonElement
 >;
 
-export const cnFieldButton = cn('FieldButton');
-
 export const FieldButton = forwardRef<HTMLButtonElement, FieldButtonProps>(
   ({ className, ...props }, ref) => {
     return (
@@ -22,6 +20,7 @@ export const FieldButton = forwardRef<HTMLButtonElement, FieldButtonProps>(
         {...props}
         ref={ref}
         className={cnFieldButton(null, [
+          cnFieldButtonStyleReset(),
           cnMixHitSlop({ mode: 'reverseMargin' }),
           className,
         ])}

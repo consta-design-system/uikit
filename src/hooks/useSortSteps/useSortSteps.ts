@@ -1,20 +1,23 @@
 import { useMemo } from 'react';
 
+import { isDefined, isNumber } from '##/utils/type-guards';
+
 type Props = {
   step?: string | number | number[];
-  min?: number;
-  max?: number;
+  min?: string | number;
+  max?: string | number;
 };
 
-const getIsValidValue = (value: number, min?: number, max?: number) => {
-  return !(
-    (typeof min === 'number' && value < min) ||
-    (typeof max === 'number' && value > max)
-  );
-};
+const getIsValidValue = (value: number, min?: number, max?: number) =>
+  !((isNumber(min) && value < min) || (isNumber(max) && value > max));
 
-export const useSortSteps = (props: Props): number | number[] => {
-  const { step, min, max } = props;
+const guardStep = <T extends string | number | undefined>(step: T) =>
+  (isDefined(step) ? Number(step) : step) as Exclude<T, string>;
+
+export const useSortSteps = (props: Props) => {
+  const { step = 1, min: minProp, max: maxProp } = props;
+  const min = guardStep(minProp);
+  const max = guardStep(maxProp);
 
   const sortedSteps = useMemo(() => {
     if (Array.isArray(step)) {
@@ -30,8 +33,8 @@ export const useSortSteps = (props: Props): number | number[] => {
         .filter((val) => getIsValidValue(val, min, max));
       return Array.from(new Set(sortedArray));
     }
-    return Number(step);
-  }, [step, min, max]);
+    return guardStep(step);
+  }, [Array.isArray(step) ? step.join('-') : step, min, max]);
 
   return sortedSteps;
 };

@@ -111,5 +111,7 @@ export const useTextField = <
     handleClear,
     handleChange,
     handleClick,
+    mutableRefs,
+    setWithValue,
   };
 };

@@ -1,9 +1,8 @@
-import './FieldInput.css';
-
 import React, { forwardRef } from 'react';
 
-import { cn } from '##/utils/bem';
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
+
+import { cnFieldInput } from './cnFieldInput';
 
 type FieldInputProps = PropsWithJsxAttributes<
   {
@@ -11,8 +10,6 @@ type FieldInputProps = PropsWithJsxAttributes<
   },
   'input'
 >;
-
-export const cnFieldInput = cn('FieldInput');
 
 export const FieldInput = forwardRef<HTMLInputElement, FieldInputProps>(
   ({ className, ...props }, ref) => {

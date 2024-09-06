@@ -52,7 +52,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       ariaLabel,
       iconSize,
       onClick,
-      resize = 'auto',
+      resize = true,
       // onkey props
       onKeyDown,
       onKeyDownCapture,

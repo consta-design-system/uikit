@@ -1,10 +1,8 @@
-import './FieldControlLayout.css';
-
 import React, { forwardRef } from 'react';
 
 import { useFlag } from '##/hooks/useFlag';
-import { cn } from '##/utils/bem';
 
+import { cnFieldControlLayout } from './cnFieldControlLayout';
 import {
   getBgColor,
   getBorderColor,
@@ -14,8 +12,6 @@ import {
   getSlots,
 } from './helpers';
 import { FieldControlLayoutProps } from './types';
-
-const cnFieldControlLayout = cn('FieldControlLayout');
 
 const renderContentSlot = (
   node: React.ReactNode,
