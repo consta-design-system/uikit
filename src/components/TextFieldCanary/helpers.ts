@@ -52,6 +52,7 @@ export const getValueByStepNumber = (
   max: number | string | undefined,
   isIncrement: boolean,
 ): number => {
+  console.log(step);
   const minValue = Number(min);
   const maxValue = Number(max);
   const currentValue: number =

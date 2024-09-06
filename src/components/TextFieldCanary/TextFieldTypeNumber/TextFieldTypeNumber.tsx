@@ -14,7 +14,7 @@ import { useSortSteps } from '##/hooks/useSortSteps';
 import { TextFieldTypeComponent } from '../types';
 import { useTextField } from '../useTextField';
 import { cnTextFieldTypeNumber } from './cnTextFieldTypeNumber';
-import { getValueByStep } from './helpers';
+import { getIncrementFlag, getValueByStep } from './helpers';
 
 export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
   (props, componentRef) => {
@@ -82,8 +82,6 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       name,
     });
 
-    console.log(withValue);
-
     const stepsRef = useMutableRef([
       useSortSteps({ step, min, max }),
       min,
@@ -91,8 +89,11 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
     ] as const);
 
     const changeNumberValue = useCallback(
-      (e: React.MouseEvent<HTMLButtonElement>, isIncrement: boolean) => {
-        if (!inputRef.current) {
+      <T extends React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent>(
+        e: T,
+        isIncrement: boolean,
+      ) => {
+        if (!inputRef.current || mutableRefs.current[4]) {
           return;
         }
 
@@ -106,8 +107,8 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
 
         mutableRefs.current[0]?.(newValue, {
           e,
-          id,
-          name,
+          id: mutableRefs.current[5],
+          name: mutableRefs.current[6],
         });
 
         inputRef.current.value = newValue;
@@ -125,6 +126,16 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       (e: React.MouseEvent<HTMLButtonElement>) => changeNumberValue(e, false),
       [],
     );
+
+    const handleInputKeyDown = useCallback((e: React.KeyboardEvent) => {
+      const flag = getIncrementFlag(e);
+
+      // onKeyDown?.(e);
+      if (typeof flag === 'boolean') {
+        e.preventDefault();
+        changeNumberValue(e, flag);
+      }
+    }, []);
 
     return (
       <FieldControlLayout
@@ -167,7 +178,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
           readOnly={readOnly}
           tabIndex={tabIndex}
           aria-label={ariaLabel}
-          onKeyDown={onKeyDown}
+          onKeyDown={handleInputKeyDown}
           onKeyDownCapture={onKeyDownCapture}
           // TODO: разобраться
           onKeyPress={onKeyPress}

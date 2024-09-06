@@ -45,12 +45,14 @@ export const getValueByStepNumber = (
   const currentValue: number =
     (typeof value === 'string' ? Number(value) : 0) +
     Number(step) * (isIncrement ? 1 : -1);
+
   if (!Number.isNaN(minValue) && currentValue <= minValue) {
     return minValue;
   }
   if (!Number.isNaN(maxValue) && currentValue >= maxValue) {
     return maxValue;
   }
+
   return Number(
     currentValue.toFixed(
       Number(
@@ -76,4 +78,13 @@ export const getValueByStep = (
       ? getValueByStepArray(steps, value, isIncrement)
       : getValueByStepNumber(steps, value, min, max, isIncrement)
   ).toString();
+};
+
+export const getIncrementFlag = (
+  event: React.KeyboardEvent,
+): boolean | null => {
+  if (event?.key !== 'ArrowUp' && event?.key !== 'ArrowDown') {
+    return null;
+  }
+  return event?.key === 'ArrowUp';
 };

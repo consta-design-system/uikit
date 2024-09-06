@@ -1,7 +1,4 @@
 .TextFieldTypeNumber {
-  &_incrementButtons {
-    padding-right: 0px;
-  }
   &-Input {
     width: 100%;
     &::-webkit-inner-spin-button,
@@ -9,5 +6,11 @@
       display: none;
     }
     -moz-appearance: textfield;
+  }
+}
+
+.TextFieldTypeNumber_incrementButtons.FieldControlLayout_view_default {
+  &:not(.FieldControlLayout_form_brickRound, .FieldControlLayout_form_clearRound, .FieldControlLayout_form_round) {
+    padding-right: 0px;
   }
 }

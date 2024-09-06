@@ -36,6 +36,9 @@ export const useTextField = <
     onClick,
     onBlur,
     onFocus,
+    disabled,
+    id,
+    name,
   ] as const);
 
   const handleFocus: React.FocusEventHandler<HTMLElement> = useCallback((e) => {
@@ -48,36 +51,33 @@ export const useTextField = <
     mutableRefs.current[2]?.(e);
   }, []);
 
-  const handleClear = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled) {
-        return;
-      }
+  const handleClear = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    if (mutableRefs.current[4]) {
+      return;
+    }
 
-      mutableRefs.current[0]?.(null, {
-        e,
-        id,
-        name,
-      });
+    mutableRefs.current[0]?.(null, {
+      e,
+      id: mutableRefs.current[5],
+      name: mutableRefs.current[6],
+    });
 
-      if (inputRef.current) {
-        inputRef.current.value = '';
-        setWithValue.off();
-      }
-    },
-    [id, name, disabled],
-  );
+    if (inputRef.current) {
+      inputRef.current.value = '';
+      setWithValue.off();
+    }
+  }, []);
 
   const handleChange: React.ChangeEventHandler<INPUT_ELEMENT> = useCallback(
     (e) => {
-      if (disabled) {
+      if (mutableRefs.current[4]) {
         return;
       }
 
       mutableRefs.current[0]?.(e.target.value || null, {
         e,
-        id,
-        name,
+        id: mutableRefs.current[5],
+        name: mutableRefs.current[6],
       });
 
       if (e.target.value) {
@@ -86,7 +86,7 @@ export const useTextField = <
         setWithValue.off();
       }
     },
-    [id, name, disabled],
+    [],
   );
 
   const handleClick = useCallback(
