@@ -18,11 +18,10 @@ import { cn } from '##/utils/bem';
 
 import { TextFieldTypeComponent } from '../types';
 import { useTextField } from '../useTextField';
-// import {cnFieldInput} from '##/'
 
 export const cnTextFieldTypeTextArea = cn('TextFieldTypeTextArea');
 
-export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
+export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
   forwardRef((props, componentRef) => {
     const {
       className,
@@ -56,8 +55,6 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       // onkey props
       onKeyDown,
       onKeyDownCapture,
-      onKeyPress,
-      onKeyPressCapture,
       onKeyUp,
       onKeyUpCapture,
       ...otherProps
@@ -109,9 +106,6 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       'aria-label': ariaLabel,
       'onKeyDown': onKeyDown,
       'onKeyDownCapture': onKeyDownCapture,
-      // TODO: разобраться
-      'onKeyPress': onKeyPress,
-      'onKeyPressCapture': onKeyPressCapture,
       'onKeyUp': onKeyUp,
       'onKeyUpCapture': onKeyUpCapture,
       'maxLength': maxLength,

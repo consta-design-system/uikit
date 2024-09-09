@@ -10,27 +10,37 @@ import {
 import { AutoCompete } from '##/utils/types/AutoComplete';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
-export type TextFieldPropValue = string | null;
+export type TextFieldPropValue<TYPE> = TYPE extends 'textArray'
+  ? string[] | null
+  : string | null;
+
+export type TextFieldPropDafaultValue<TYPE> = TYPE extends 'textArray'
+  ? never
+  : string | null;
+
 export type TextFieldPropName = string;
 export type TextFieldPropId = string | number;
 
 export type TextFieldPropSize = FieldPropSize;
 
-export type TextFieldPropOnChange = (
-  value: TextFieldPropValue,
-  params: TextFieldOnChangeArguments,
-) => void;
-export type TextFieldOnChangeArguments = {
-  e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
+export type TextFieldOnChangeArguments<TYPE> = {
+  e: TYPE extends 'number'
+    ? React.ChangeEvent | React.MouseEvent | React.KeyboardEvent
+    : React.ChangeEvent;
   id?: TextFieldPropId;
   name?: TextFieldPropName;
 };
+
+export type TextFieldPropOnChange<TYPE> = (
+  value: TextFieldPropValue<TYPE>,
+  params: TextFieldOnChangeArguments<TYPE>,
+) => void;
 
 export type TextFieldPropView = FieldPropView;
 export type TextFieldPropForm = FieldPropForm;
 export type TextFieldPropStatus = FieldPropStatus;
 
-type TextFieldPropsTypeTextarea<TYPE> = TYPE extends 'textarea'
+type TextFieldPropsTypetextArea<TYPE> = TYPE extends 'textArea'
   ? {
       cols?: number;
       resize?: boolean | 'auto';
@@ -57,16 +67,16 @@ type TextFieldPropsTypeNumber<TYPE> = TYPE extends 'number'
     }
   : {};
 
-type InputRef<TYPE> = TYPE extends 'textarea'
-  ? { inputRef?: React.Ref<HTMLTextAreaElement> }
-  : { inputRef?: React.Ref<HTMLInputElement> };
+type TextFieldPropInputRef<TYPE> = TYPE extends 'textArea'
+  ? React.Ref<HTMLTextAreaElement>
+  : React.Ref<HTMLInputElement>;
 
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
   {
     className?: string;
-    value?: TextFieldPropValue;
-    defaultValue?: TextFieldPropValue;
-    onChange?: TextFieldPropOnChange;
+    value?: TextFieldPropValue<TYPE>;
+    defaultValue?: TextFieldPropDafaultValue<TYPE>;
+    onChange?: TextFieldPropOnChange<TYPE>;
     id?: TextFieldPropId;
     name?: TextFieldPropName;
     type?: TYPE;
@@ -91,18 +101,16 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
     ariaLabel?: string;
     iconSize?: IconPropSize;
     children?: never;
-    onKeyDownCapture?: React.KeyboardEventHandler;
-    onKeyPress?: React.KeyboardEventHandler;
-    onKeyPressCapture?: React.KeyboardEventHandler;
     onKeyUp?: React.KeyboardEventHandler;
     onKeyUpCapture?: React.KeyboardEventHandler;
     onKeyDown?: React.KeyboardEventHandler;
+    onKeyDownCapture?: React.KeyboardEventHandler;
     onClear?: React.MouseEventHandler<HTMLButtonElement>;
+    inputRef?: TextFieldPropInputRef<TYPE>;
   },
   HTMLDivElement
 > &
-  InputRef<TYPE> &
-  TextFieldPropsTypeTextarea<TYPE> &
+  TextFieldPropsTypetextArea<TYPE> &
   TextFieldPropsTypeNumber<TYPE>;
 
 export type TextFieldComponent = <TYPE extends string>(

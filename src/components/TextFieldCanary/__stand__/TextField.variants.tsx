@@ -1,7 +1,7 @@
 import { IconPhoto } from '@consta/icons/IconPhoto';
 import { IconQuestion } from '@consta/icons/IconQuestion';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   FieldButton,
@@ -25,13 +25,15 @@ import { cnMixHitSlop } from '##/mixs/MixHitSlop';
 import { TextField } from '..';
 
 const Variants = () => {
+  const [value, setValue] = useState<string[] | null>(null);
+
   const type = useSelect(
     'type',
-    ['text', 'number', 'textarea', 'password'],
+    ['text', 'number', 'textArea', 'password', 'textArray'],
     'number',
   );
-  const minRows = useNumber('minRows', 1, type === 'textarea');
-  const maxRows = useNumber('maxRows', 5, type === 'textarea');
+  const minRows = useNumber('minRows', 1, type === 'textArea');
+  const maxRows = useNumber('maxRows', 5, type === 'textArea');
   const step = useNumber('step', 1, type === 'number');
   const withStepArray = useBoolean('withStepArray', false, type === 'number');
   const incrementButtons = useBoolean(
@@ -95,6 +97,7 @@ const Variants = () => {
         withClearButton={withClearButton}
         placeholder={placeholder}
         type={type}
+        value={type === 'textArea' ? value : undefined}
         incrementButtons={incrementButtons}
         min={min}
         max={max}

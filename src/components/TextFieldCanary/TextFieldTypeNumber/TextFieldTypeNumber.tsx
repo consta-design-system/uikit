@@ -53,8 +53,6 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       // onkey props
       onKeyDown,
       onKeyDownCapture,
-      onKeyPress,
-      onKeyPressCapture,
       onKeyUp,
       onKeyUpCapture,
       ...otherProps
@@ -82,10 +80,11 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       name,
     });
 
-    const stepsRef = useMutableRef([
+    const refs = useMutableRef([
       useSortSteps({ step, min, max }),
       min,
       max,
+      onKeyDown,
     ] as const);
 
     const changeNumberValue = useCallback(
@@ -98,11 +97,11 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
         }
 
         const newValue = getValueByStep(
-          stepsRef.current[0],
+          refs.current[0],
           inputRef.current.value,
           isIncrement,
-          stepsRef.current[1],
-          stepsRef.current[2],
+          refs.current[1],
+          refs.current[2],
         );
 
         mutableRefs.current[0]?.(newValue, {
@@ -130,7 +129,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
     const handleInputKeyDown = useCallback((e: React.KeyboardEvent) => {
       const flag = getIncrementFlag(e);
 
-      // onKeyDown?.(e);
+      refs.current[3]?.(e);
       if (typeof flag === 'boolean') {
         e.preventDefault();
         changeNumberValue(e, flag);
@@ -180,9 +179,6 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
           aria-label={ariaLabel}
           onKeyDown={handleInputKeyDown}
           onKeyDownCapture={onKeyDownCapture}
-          // TODO: разобраться
-          onKeyPress={onKeyPress}
-          onKeyPressCapture={onKeyPressCapture}
           onKeyUp={onKeyUp}
           onKeyUpCapture={onKeyUpCapture}
           maxLength={maxLength}

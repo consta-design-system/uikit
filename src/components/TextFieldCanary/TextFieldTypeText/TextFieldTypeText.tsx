@@ -44,8 +44,6 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
       // onkey props
       onKeyDown,
       onKeyDownCapture,
-      onKeyPress,
-      onKeyPressCapture,
       onKeyUp,
       onKeyUpCapture,
       ...otherProps
@@ -106,9 +104,6 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
           aria-label={ariaLabel}
           onKeyDown={onKeyDown}
           onKeyDownCapture={onKeyDownCapture}
-          // TODO: разобраться
-          onKeyPress={onKeyPress}
-          onKeyPressCapture={onKeyPressCapture}
           onKeyUp={onKeyUp}
           onKeyUpCapture={onKeyUpCapture}
           maxLength={maxLength}

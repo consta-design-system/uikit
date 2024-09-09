@@ -13,12 +13,12 @@ import {
 const typeMap: Record<
   string,
   | TextFieldTypeComponent<'text'>
-  | TextFieldTypeComponent<'textarea'>
+  | TextFieldTypeComponent<'textArea'>
   | TextFieldTypeComponent<'password'>
   | TextFieldTypeComponent<'number'>
 > = {
   text: TextFieldTypeText,
-  textarea: TextFieldTypeTextArea,
+  textArea: TextFieldTypeTextArea,
   password: TextFieldTypePassword,
   number: TextFieldTypeNumber,
 };

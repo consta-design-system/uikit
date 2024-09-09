@@ -4,16 +4,14 @@ import {
   FieldClearButton,
   FieldControlLayout,
   FieldInput,
-  FieldToggleVisiblePasswordButton,
   renderSide,
 } from '##/components/Field';
-import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
 
 import { TextFieldTypeComponent } from '..';
 import { useTextField } from '../useTextField';
 
-export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
+export const TextFieldTypeTextArray: TextFieldTypeComponent<'textArray'> =
   forwardRef((props, componentRef) => {
     const {
       className,
@@ -71,8 +69,6 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       name,
     });
 
-    const [visiblePassword, setVisiblePassword] = useFlag();
-
     return (
       <FieldControlLayout
         {...otherProps}
@@ -85,13 +81,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
           withClearButton && !disabled && withValue && (
             <FieldClearButton size={size} onClick={handleClear} />
           ),
-          withValue && (
-            <FieldToggleVisiblePasswordButton
-              size={size}
-              onClick={setVisiblePassword.toggle}
-              active={visiblePassword}
-            />
-          ),
+          renderSide(rightSide, size, iconSize),
         ]}
         focused={focused}
         view={view}
@@ -99,8 +89,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
         disabled={disabled}
         onClick={handleClick}
       >
-        <FieldInput
-          type={visiblePassword ? 'text' : 'password'}
+        {/* <FieldInput
           placeholder={placeholder}
           autoFocus={autoFocus}
           autoComplete={autoComplete}
@@ -119,7 +108,8 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
           onKeyUpCapture={onKeyUpCapture}
           maxLength={maxLength}
           disabled={disabled}
-        />
+          type={type}
+        /> */}
       </FieldControlLayout>
     );
   });
