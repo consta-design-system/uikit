@@ -1,2 +1,47 @@
 .FieldArrayValueInlineControl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--field-array-value-inline-control-items-gap);
+  padding: calc(
+      var(--field-array-value-inline-control-vertical-padding) -
+        var(--field-control-layout-border-width)
+    )
+    0;
+  &-Input {
+    color: var(--field-control-layout-input-color);
+    font-size: var(--field-control-layout-text-size);
+    background: transparent;
+    border: none;
+    outline: none;
+    line-height: 1;
+    font-size: var(--field-control-layout-text-size);
+    display: block;
+    min-width: min(
+      var(--field-array-value-inline-control-input-min-width),
+      100%
+    );
+    flex: 1;
+    line-height: var(--field-array-value-inline-control-input-height);
+    height: var(--field-array-value-inline-control-input-height);
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: var(--field-control-layout-input-color);
+    }
+
+    &::placeholder {
+      color: var(--field-control-layout-placeholder-color);
+    }
+  }
+  &-HelperInputFakeElement {
+    display: inline-block;
+    font-size: var(--field-control-layout-text-size);
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    white-space: nowrap;
+  }
 }

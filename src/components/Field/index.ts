@@ -9,4 +9,6 @@ export * from './FieldClearButton';
 export * from './FieldToggleVisiblePasswordButton';
 export * from './renderSide';
 export * from './FieldButtonStyleReset';
+export * from './FieldArrayValueInlineControl';
+export * from './FieldArrayValueItem';
 export * from './types';

@@ -34,6 +34,7 @@ type PropsWithModeButton = CommonProps & {
   checked?: never;
   onChange?: never;
   onCancel?: never;
+  cancelButtonTabIndex?: never;
 };
 
 type PropsWithModeLink = CommonProps & {
@@ -41,6 +42,7 @@ type PropsWithModeLink = CommonProps & {
   checked?: never;
   onChange?: never;
   onCancel?: never;
+  cancelButtonTabIndex?: never;
 };
 
 type PropsWithModeCheck = CommonProps & {
@@ -52,11 +54,13 @@ type PropsWithModeCheck = CommonProps & {
   checked: boolean;
   onClick?: never;
   onCancel?: never;
+  cancelButtonTabIndex?: never;
 };
 
 type PropsWithModeCancel = CommonProps & {
   mode: 'cancel';
   onCancel: React.MouseEventHandler<HTMLButtonElement>;
+  cancelButtonTabIndex?: number;
   onClick?: never;
   onChange?: never;
   checked?: never;
@@ -68,6 +72,7 @@ type PropsWithModeInfo = CommonProps & {
   onClick?: never;
   onChange?: never;
   checked?: never;
+  cancelButtonTabIndex?: never;
 };
 
 type Props<ROLE extends TagPropMode = 'button'> = ROLE extends 'button'

@@ -25,12 +25,21 @@ import { cnMixHitSlop } from '##/mixs/MixHitSlop';
 import { TextField } from '..';
 
 const Variants = () => {
-  const [value, setValue] = useState<string[] | null>(null);
+  const [value, setValue] = useState<string[] | null>([
+    'Один',
+    'Два',
+    'Три',
+    'Четыре',
+    'Пять',
+    // 'Шесть',
+    // 'Семь',
+    // 'Восемь',
+  ]);
 
   const type = useSelect(
     'type',
     ['text', 'number', 'textArea', 'password', 'textArray'],
-    'number',
+    'textArray',
   );
   const minRows = useNumber('minRows', 1, type === 'textArea');
   const maxRows = useNumber('maxRows', 5, type === 'textArea');
@@ -97,7 +106,8 @@ const Variants = () => {
         withClearButton={withClearButton}
         placeholder={placeholder}
         type={type}
-        value={type === 'textArea' ? value : undefined}
+        value={type === 'textArray' ? value : undefined}
+        onChange={type === 'textArray' ? setValue : undefined}
         incrementButtons={incrementButtons}
         min={min}
         max={max}

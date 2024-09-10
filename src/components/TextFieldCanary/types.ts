@@ -24,9 +24,10 @@ export type TextFieldPropId = string | number;
 export type TextFieldPropSize = FieldPropSize;
 
 export type TextFieldOnChangeArguments<TYPE> = {
-  e: TYPE extends 'number'
+  e: TYPE extends 'number' | 'textArray'
     ? React.ChangeEvent | React.MouseEvent | React.KeyboardEvent
     : React.ChangeEvent;
+  // TODO: Удалить id и name
   id?: TextFieldPropId;
   name?: TextFieldPropName;
 };
