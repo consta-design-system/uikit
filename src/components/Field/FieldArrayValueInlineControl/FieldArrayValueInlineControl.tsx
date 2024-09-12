@@ -75,12 +75,11 @@ const FieldArrayValueInlineControlRender = (
     },
     [],
   );
+  const { width: inputMinWidth } = useComponentSize(fakeInputRef);
 
   useEffect(() => {
     setInputValue(inputRef.current?.value || '');
   }, [inputRef.current?.value]);
-
-  const { width: inputMinWidth } = useComponentSize(fakeInputRef);
 
   return (
     <div

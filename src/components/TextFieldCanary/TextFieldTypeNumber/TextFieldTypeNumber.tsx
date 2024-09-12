@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback } from 'react';
+import React, { forwardRef, useCallback, useMemo } from 'react';
 
 import {
   FieldClearButton,
@@ -8,13 +8,14 @@ import {
   renderSide,
 } from '##/components/Field';
 import { useForkRef } from '##/hooks/useForkRef';
+import { useKeys, UseKeysPropKeys } from '##/hooks/useKeys';
 import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
 import { useSortSteps } from '##/hooks/useSortSteps';
 
 import { TextFieldTypeComponent } from '../types';
 import { useTextField } from '../useTextField';
 import { cnTextFieldTypeNumber } from './cnTextFieldTypeNumber';
-import { getIncrementFlag, getValueByStep } from './helpers';
+import { getValueByStep } from './helpers';
 
 export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
   (props, componentRef) => {
@@ -126,15 +127,25 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       [],
     );
 
-    const handleInputKeyDown = useCallback((e: React.KeyboardEvent) => {
-      const flag = getIncrementFlag(e);
+    const keys: UseKeysPropKeys = useMemo(
+      () => ({
+        ArrowUp: (e) => {
+          e.preventDefault();
+          changeNumberValue(e, true);
+        },
+        ArrowDown: (e) => {
+          e.preventDefault();
+          changeNumberValue(e, false);
+        },
+      }),
+      [],
+    );
 
-      refs.current[3]?.(e);
-      if (typeof flag === 'boolean') {
-        e.preventDefault();
-        changeNumberValue(e, flag);
-      }
-    }, []);
+    const handleInputKeyDown = useKeys({
+      isActive: true,
+      keys,
+      onEvent: refs.current[3],
+    });
 
     return (
       <FieldControlLayout

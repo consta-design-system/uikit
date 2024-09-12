@@ -1,0 +1,17 @@
+.TextFieldTypeTextArray {
+  --text-field-textarray-padding: calc(
+    (var(--text-field-textarray-slot-sizes-lenght) + 1) *
+      var(--field-control-layout-space) +
+      var(--text-field-textarray-slot-sizes-width)
+  );
+  --text-tield-textarray-scroll-wrapper-height: calc(
+    var(--text-tield-textarray-max-height) -
+      (var(--field-control-layout-border-width) * 2)
+  );
+  &-ScrollWrapper {
+    max-height: var(--text-tield-textarray-scroll-wrapper-height);
+    overflow: auto;
+    padding-right: var(--text-field-textarray-padding, 0px);
+    width: calc(100% + var(--text-field-textarray-padding));
+  }
+}

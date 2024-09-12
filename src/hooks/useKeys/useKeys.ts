@@ -3,17 +3,21 @@ import { useCallback } from 'react';
 import { useMutableRef } from '##/hooks/useMutableRef';
 import { KeyCode } from '##/utils/types/KeyCode';
 
-type KeyHandlers = Partial<Record<KeyCode, React.KeyboardEventHandler>> & {
+export type UseKeysPropKeys<ELEMENT = Element> = Partial<
+  Record<KeyCode, React.KeyboardEventHandler<ELEMENT>>
+> & {
   [key: string]: React.KeyboardEventHandler;
 };
 
-type UseKeysProps = {
-  keys: KeyHandlers;
-  onEvent?: React.KeyboardEventHandler;
+export type UseKeysProps<ELEMENT = Element> = {
+  keys: UseKeysPropKeys<ELEMENT>;
+  onEvent?: React.KeyboardEventHandler<ELEMENT>;
   isActive: boolean;
 };
 
-export const useKeys = (props: UseKeysProps): React.KeyboardEventHandler => {
+export const useKeys = <ELEMENT = Element>(
+  props: UseKeysProps<ELEMENT>,
+): React.KeyboardEventHandler<ELEMENT> => {
   const propsRef = useMutableRef(props);
   return useCallback((e) => {
     const { isActive, keys, onEvent } = propsRef.current;

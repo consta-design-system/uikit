@@ -112,6 +112,7 @@ const Variants = () => {
         min={min}
         max={max}
         step={withStepArray ? numberStepArray : step}
+        style={{ maxHeight: 100 }}
       />
     </div>
   );

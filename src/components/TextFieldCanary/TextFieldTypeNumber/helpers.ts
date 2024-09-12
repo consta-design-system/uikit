@@ -79,12 +79,3 @@ export const getValueByStep = (
       : getValueByStepNumber(steps, value, min, max, isIncrement)
   ).toString();
 };
-
-export const getIncrementFlag = (
-  event: React.KeyboardEvent,
-): boolean | null => {
-  if (event?.key !== 'ArrowUp' && event?.key !== 'ArrowDown') {
-    return null;
-  }
-  return event?.key === 'ArrowUp';
-};
