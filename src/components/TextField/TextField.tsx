@@ -12,6 +12,7 @@ import { FieldCaption } from '##/components/FieldCaption/FieldCaption';
 import { FieldLabel } from '##/components/FieldLabel/FieldLabel';
 import { useFlag } from '##/hooks/useFlag/useFlag';
 import { useForkRef } from '##/hooks/useForkRef/useForkRef';
+import { useKeys } from '##/hooks/useKeys';
 import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
 import { useSortSteps } from '##/hooks/useSortSteps/useSortSteps';
 import { cn } from '##/utils/bem';
@@ -19,11 +20,11 @@ import { getByMap } from '##/utils/getByMap';
 import { isString } from '##/utils/type-guards';
 
 import {
-  getIncrementFlag,
   getTypeForRender,
   getValueByStep,
   inputValue,
   sizeMap,
+  stepIsActive,
 } from './helpers';
 import {
   TextFieldComponent,
@@ -185,32 +186,58 @@ export const TextFieldRender = <TYPE extends string>(
 
   const Eye = passwordVisible ? IconEyeClose : IconEye;
 
-  const onKeyDown = (e: React.KeyboardEvent) => {
-    const flag = getIncrementFlag(e);
-    onKeyDownProp?.(e);
-    if (type === 'number' && typeof flag === 'boolean' && !disabled) {
-      e.preventDefault();
+  const onKeyDown = useKeys({
+    isActive: true,
+    keys: {
+      ArrowUp: (e) => {
+        e.preventDefault();
+        if (stepIsActive(step, type, disabled)) {
+          const newValue = getValueByStep(
+            sortedSteps,
+            inputRef.current?.value,
+            true,
+            min,
+            max,
+          );
 
-      const newValue = getValueByStep(
-        sortedSteps,
-        inputRef.current?.value,
-        flag,
-        min,
-        max,
-      );
+          onChangeRef.current?.(newValue, {
+            e,
+            id,
+            name,
+          });
 
-      onChangeRef.current?.(newValue, {
-        e,
-        id,
-        name,
-      });
+          if (inputRef.current) {
+            inputRef.current.value = newValue;
+            setWithValue.on();
+          }
+        }
+      },
+      ArrowDown: (e) => {
+        e.preventDefault();
+        if (stepIsActive(step, type, disabled)) {
+          const newValue = getValueByStep(
+            sortedSteps,
+            inputRef.current?.value,
+            false,
+            min,
+            max,
+          );
 
-      if (inputRef.current) {
-        inputRef.current.value = newValue;
-        setWithValue.on();
-      }
-    }
-  };
+          onChangeRef.current?.(newValue, {
+            e,
+            id,
+            name,
+          });
+
+          if (inputRef.current) {
+            inputRef.current.value = newValue;
+            setWithValue.on();
+          }
+        }
+      },
+    },
+    onEvent: onKeyDownProp,
+  });
 
   const textareaProps = {
     rows,
@@ -334,7 +361,7 @@ export const TextFieldRender = <TYPE extends string>(
             <input {...commonProps} {...inputProps} />
           )}
 
-          {incrementButtons && !disabled && (
+          {incrementButtons && stepIsActive(step, type, disabled) && (
             <div className={cnTextField('Counter')}>
               <button
                 className={cnTextField('CounterButton', { fn: 'increment' })}
