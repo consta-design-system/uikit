@@ -1,5 +1,4 @@
 import { IconPropSize } from '@consta/icons/Icon';
-import React from 'react';
 
 import { TextFieldPropSize, TextFieldPropValue } from './types';
 
@@ -76,15 +75,6 @@ export const getValueByStepNumber = (
   );
 };
 
-export const getIncrementFlag = (
-  event: React.KeyboardEvent,
-): boolean | null => {
-  if (event?.key !== 'ArrowUp' && event?.key !== 'ArrowDown') {
-    return null;
-  }
-  return event?.key === 'ArrowUp';
-};
-
 export const getTypeForRender = (type: string, passwordVible: boolean) => {
   if (type !== 'password') {
     return type;
@@ -111,3 +101,19 @@ export const getValueByStep = (
 
 export const inputValue = (value?: TextFieldPropValue) =>
   value === null ? '' : value;
+
+export const stepIsActive = (
+  step: number | string | number[],
+  type: string,
+  disabled: boolean = false,
+) => {
+  if (type !== 'number' || disabled) {
+    return false;
+  }
+
+  return (
+    (typeof step === 'number' && step > 0) ||
+    (typeof step === 'string' && Number(step) > 0) ||
+    (Array.isArray(step) && !!step.length)
+  );
+};
