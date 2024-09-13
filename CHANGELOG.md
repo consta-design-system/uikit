@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.9.1 (12/09/2024)
+- [fix(TextField): fixed arrowUp and arrowDown handlers (#3752)](https://github.com/consta-design-system/uikit/commit/733ae08423d064b0285bb882df405d1a4e3d62f8) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.9.0 (29/08/2024)
 Самое главное:
 - Добавили в документацию раздел "Как использовать" для компонентов `Select`, `UserSelect`, `AutoComplete`, `Combobox`, `BookmarkTabs`, `SnackBar`, `Chips`, `List`, `Tag` и `ContextMenu`.
@@ -399,8 +404,3 @@
 - [feat(Spoiler): add props clamp, buttonIndent, buttonAlign (#3197)](https://github.com/consta-design-system/uikit/commit/4fde84fea03b213e9f3f56bb2cacb9ca98e54122) - [@gizeasy](https://github.com/gizeasy)
 - [chore: edit deploy config and codeowners (#3194)](https://github.com/consta-design-system/uikit/commit/9dac7be9373b03bcd6558e79901b4846aa17b327) - [@gizeasy](https://github.com/gizeasy)
 - [fix(ContextMenu): fixed an unnecessary call onClickOutside (#3182)](https://github.com/consta-design-system/uikit/commit/b32e95d401c4a83033f8a38f3716fdd4304209e0) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.23.1 (19/07/2023)
-- [fix(Spoiler): fixed export from the library](https://github.com/consta-design-system/uikit/commit/f293e6221d3534cf0d099612c44ad9b4d74cc101) - [@gizeasy](https://github.com/gizeasy)
