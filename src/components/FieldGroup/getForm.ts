@@ -18,6 +18,7 @@ const mapForm: Record<
   clearDefault: ['clearClear', 'brickDefault'],
   clearBrick: ['clearClear', 'brick'],
   clearClear: ['clearClear', 'brickClear'],
+  clear: ['clearClear', 'brickClear'],
 };
 
 export const getForm = (

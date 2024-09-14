@@ -13,12 +13,12 @@ import {
   FieldControlLayout,
   renderSide,
 } from '##/components/Field';
-import { getElementSize, useComponentSize } from '##/hooks/useComponentSize';
+import { useComponentSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
 import { useKeys, UseKeysPropKeys } from '##/hooks/useKeys';
 import { useMutableRef } from '##/hooks/useMutableRef';
 import { useRefs } from '##/hooks/useRefs';
-import { useResizeObserved } from '##/hooks/useResizeObserved';
+import { getElementWidth, useResizeObserved } from '##/hooks/useResizeObserved';
 import { getStyleProps } from '##/hooks/useStyleProps';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 
@@ -39,7 +39,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textArray'> =
       maxLength,
       disabled,
       size = 'm',
-      view,
+      view = 'default',
       form,
       status,
       onBlur,
@@ -63,7 +63,6 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textArray'> =
       onKeyUp,
       onKeyUpCapture,
 
-      incrementButtons,
       ...otherProps
     } = props;
 
@@ -165,7 +164,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textArray'> =
 
     const controlSize = useComponentSize(controllRef);
 
-    const slotSizes = useResizeObserved(rightSlotsRefs, getElementSize);
+    const slotSizes = useResizeObserved(rightSlotsRefs, getElementWidth);
 
     const stylesRoot: Record<'max-height' | 'height', string> | undefined =
       ref.current
@@ -173,7 +172,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textArray'> =
         : undefined;
 
     useEffect(() => {
-      if (controllRef.current && scrollWrapperRef.current) {
+      if (controllRef.current && scrollWrapperRef.current && focused) {
         scrollWrapperRef.current.scrollTo({
           top: controlSize.height,
         });
@@ -204,11 +203,11 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textArray'> =
           ...style,
           ['--text-tield-textarray-max-height' as string]:
             stylesRoot?.['max-height'] || stylesRoot?.height || 'auto',
-          ['--text-field-textarray-slot-sizes-width' as string]: `${slotSizes
-            .map((item) => item.width)
-            .reduce((a, b) => a + b)}px`,
+          ['--text-field-textarray-slot-sizes-width' as string]: `${slotSizes.reduce(
+            (a, b) => a + b,
+          )}px`,
           ['--text-field-textarray-slot-sizes-lenght' as string]:
-            slotSizes.filter((item) => !!item.width).length,
+            slotSizes.filter((width) => !!width).length,
         }}
       >
         <div
@@ -219,7 +218,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textArray'> =
         >
           <FieldArrayValueInlineControl
             size={size}
-            inputRef={inputRef}
+            inputRef={useForkRef([inputRef, inputRefProp])}
             value={value ?? []}
             onInputFocus={handleFocus}
             onInputBlur={handleBlur}

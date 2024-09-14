@@ -26,7 +26,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       maxLength,
       disabled,
       size = 'm',
-      view,
+      view = 'default',
       form,
       status,
       onBlur,

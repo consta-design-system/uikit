@@ -4,6 +4,7 @@ import { useFlag } from '##/hooks/useFlag';
 
 import { cnFieldControlLayout } from './cnFieldControlLayout';
 import {
+  formGuard,
   getBgColor,
   getBorderColor,
   getBorderRadius,
@@ -34,7 +35,7 @@ export const FieldControlLayout = forwardRef<
   const {
     className,
     size = 'm',
-    form = 'default',
+    form: formProp = 'default',
     disabled = false,
     view = 'default',
     status,
@@ -49,6 +50,9 @@ export const FieldControlLayout = forwardRef<
   } = props;
   const leftSlots = getSlots(leftSide);
   const rightSlots = getSlots(rightSide);
+
+  // ToDo: Удалить после того как удалим из всех компоентов "clearClear"
+  const form = formGuard(formProp);
 
   const [hovered, setHovered] = useFlag();
 

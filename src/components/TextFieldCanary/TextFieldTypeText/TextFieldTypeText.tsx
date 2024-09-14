@@ -24,7 +24,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
       maxLength,
       disabled,
       size = 'm',
-      view,
+      view = 'default',
       form,
       status,
       onBlur,

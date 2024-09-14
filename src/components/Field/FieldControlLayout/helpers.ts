@@ -98,3 +98,7 @@ export const getBgColor = (view: FieldPropView, disabled?: boolean) => {
     return 'var(--color-bg-default)';
   }
 };
+
+// ToDo: Удалить после того как удалим из всех компоентов "clearClear"
+export const formGuard = (from: FieldPropForm | 'clearClear'): FieldPropForm =>
+  from === 'clearClear' ? 'clear' : from;

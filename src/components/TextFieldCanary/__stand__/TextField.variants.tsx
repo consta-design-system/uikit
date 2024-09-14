@@ -1,16 +1,7 @@
 import { IconPhoto } from '@consta/icons/IconPhoto';
-import { IconQuestion } from '@consta/icons/IconQuestion';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
 
-import {
-  FieldButton,
-  FieldClearButton,
-  FieldControlLayout,
-  FieldCounter,
-  FieldInput,
-  getFieldIconSize,
-} from '##/components/Field';
 import {
   fieldPropForm,
   fieldPropFormDefault,
@@ -20,9 +11,24 @@ import {
   fieldPropView,
   fieldPropViewDefault,
 } from '##/components/Field/__mocks__/variants';
-import { cnMixHitSlop } from '##/mixs/MixHitSlop';
 
 import { TextField } from '..';
+
+const getStep = (
+  type: string | undefined,
+  withStepArray: boolean,
+  step: number | undefined,
+) => {
+  if (type !== 'number') {
+    return undefined;
+  }
+
+  if (withStepArray) {
+    return [10, 50, 100];
+  }
+
+  return step;
+};
 
 const Variants = () => {
   const [value, setValue] = useState<string[] | null>([
@@ -39,10 +45,9 @@ const Variants = () => {
   const type = useSelect(
     'type',
     ['text', 'number', 'textArea', 'password', 'textArray'],
-    'textArray',
+    'text',
   );
-  const minRows = useNumber('minRows', 1, type === 'textArea');
-  const maxRows = useNumber('maxRows', 5, type === 'textArea');
+
   const step = useNumber('step', 1, type === 'number');
   const withStepArray = useBoolean('withStepArray', false, type === 'number');
   const incrementButtons = useBoolean(
@@ -57,18 +62,10 @@ const Variants = () => {
   const size = useSelect('size', fieldPropSize, fieldPropSizeDefault);
   const view = useSelect('view', fieldPropView, fieldPropViewDefault);
   const disabled = useBoolean('disabled', false);
-  const required = useBoolean('required', false);
-  const withClearButton = useBoolean(
-    'withClearButton',
-    true,
-    !incrementButtons,
-  );
-  const caption = useText('caption', 'Подпись');
-  const label = useText('label', 'Заголовок');
-  const withLabelIcon = useBoolean('withLabelIcon', false);
-  const labelPosition = useSelect('labelPosition', ['top', 'left'], 'top');
-  const maxLength = useNumber('maxLength', 200);
-
+  const withClearButton = useBoolean('withClearButton', true);
+  const minRows = useNumber('minRows', 1, type === 'textArea');
+  const maxRows = useNumber('maxRows', 5, type === 'textArea');
+  const maxLength = useNumber('maxLength', 200, type !== 'number');
   const placeholder = useText('placeholder', 'Подсказка в поле');
   const leftSideType = useSelect('leftSideType', ['icon', 'text']);
   const leftSideText = useText('leftSideText', 'from');
@@ -84,9 +81,6 @@ const Variants = () => {
     text: rightSideText,
     icon: IconPhoto,
   };
-
-  const stepArray = ['10', '50', '100'];
-  const numberStepArray = stepArray.map((val) => Number(val));
 
   const leftSide = leftSideType && leftSideSelect[leftSideType];
   const rightSide = rightSideType && rightSideSelect[rightSideType];
@@ -107,12 +101,13 @@ const Variants = () => {
         placeholder={placeholder}
         type={type}
         value={type === 'textArray' ? value : undefined}
-        onChange={type === 'textArray' ? setValue : undefined}
-        incrementButtons={incrementButtons}
-        min={min}
-        max={max}
-        step={withStepArray ? numberStepArray : step}
-        style={{ maxHeight: 100 }}
+        // onChange={type === 'textArray' ? setValue : undefined}
+        incrementButtons={type === 'number' ? incrementButtons : undefined}
+        min={type === 'number' ? min : undefined}
+        max={type === 'number' ? max : undefined}
+        step={getStep(type, withStepArray, step)}
+        maxRows={type === 'textArray' ? maxRows : undefined}
+        minRows={type === 'textArray' ? minRows : undefined}
       />
     </div>
   );

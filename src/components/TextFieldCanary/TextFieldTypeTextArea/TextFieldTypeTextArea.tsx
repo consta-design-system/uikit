@@ -9,10 +9,9 @@ import {
   FieldControlLayout,
   renderSide,
 } from '##/components/Field';
-import { getElementSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
 import { useRefs } from '##/hooks/useRefs';
-import { useResizeObserved } from '##/hooks/useResizeObserved';
+import { getElementWidth, useResizeObserved } from '##/hooks/useResizeObserved';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
 
@@ -34,7 +33,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
       maxLength,
       disabled,
       size = 'm',
-      view,
+      view = 'default',
       form,
       status,
       onBlur,
@@ -85,7 +84,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
       withClearButton && !disabled && withValue,
     ]);
 
-    const slotSizes = useResizeObserved(rightSlotsRefs, getElementSize);
+    const slotSizes = useResizeObserved(rightSlotsRefs, getElementWidth);
 
     const textAreaProps = {
       'className': cnTextFieldTypeTextArea('TextArea', { resize }, [
@@ -132,11 +131,11 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
         disabled={disabled}
         onClick={handleClick}
         style={{
-          ['--text-field-textarea-slot-sizes-width' as string]: `${slotSizes
-            .map((item) => item.width)
-            .reduce((a, b) => a + b)}px`,
+          ['--text-field-textarea-slot-sizes-width' as string]: `${slotSizes.reduce(
+            (a, b) => a + b,
+          )}px`,
           ['--text-field-textarea-slot-sizes-lenght' as string]:
-            slotSizes.filter((item) => !!item.width).length,
+            slotSizes.filter((width) => !!width).length,
         }}
         rightSlotsRefs={rightSlotsRefs}
       >

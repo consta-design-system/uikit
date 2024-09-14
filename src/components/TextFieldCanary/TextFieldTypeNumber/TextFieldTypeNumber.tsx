@@ -30,7 +30,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       maxLength,
       disabled,
       size = 'm',
-      view,
+      view = 'default',
       form,
       status,
       onBlur,
