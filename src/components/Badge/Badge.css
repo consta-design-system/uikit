@@ -121,6 +121,17 @@
         --badge-text-color: var(--color-typo-system);
       }
     }
+
+    &_transparent {
+      --opacity: 0.1;
+      color: var(--badge-text-color);
+      background: rgb(from var(--badge-bg-color) r g b / var(--opacity));
+
+      &.Badge_status_system {
+        --opacity: 0.3;
+        --badge-text-color: var(--color-typo-secondary);
+      }
+    }
   }
 
   &_counter {
