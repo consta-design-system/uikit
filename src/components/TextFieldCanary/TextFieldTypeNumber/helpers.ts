@@ -79,3 +79,18 @@ export const getValueByStep = (
       : getValueByStepNumber(steps, value, min, max, isIncrement)
   ).toString();
 };
+
+export const stepIsActive = (
+  step: number | string | number[],
+  disabled: boolean = false,
+) => {
+  if (disabled) {
+    return false;
+  }
+
+  return (
+    (typeof step === 'number' && step > 0) ||
+    (typeof step === 'string' && Number(step) > 0) ||
+    (Array.isArray(step) && !!step.length)
+  );
+};

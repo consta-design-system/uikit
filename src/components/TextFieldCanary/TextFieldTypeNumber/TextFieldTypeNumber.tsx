@@ -8,14 +8,14 @@ import {
   renderSide,
 } from '##/components/Field';
 import { useForkRef } from '##/hooks/useForkRef';
-import { useKeys, UseKeysPropKeys } from '##/hooks/useKeys';
+import { useKeys } from '##/hooks/useKeys';
 import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
 import { useSortSteps } from '##/hooks/useSortSteps';
 
 import { TextFieldTypeComponent } from '../types';
 import { useTextField } from '../useTextField';
 import { cnTextFieldTypeNumber } from './cnTextFieldTypeNumber';
-import { getValueByStep } from './helpers';
+import { getValueByStep, stepIsActive } from './helpers';
 
 export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
   (props, componentRef) => {
@@ -81,11 +81,14 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       name,
     });
 
+    const sortSteps = useSortSteps({ step, min, max });
+
     const refs = useMutableRef([
-      useSortSteps({ step, min, max }),
+      sortSteps,
       min,
       max,
       onKeyDown,
+      stepIsActive(sortSteps, disabled),
     ] as const);
 
     const changeNumberValue = useCallback(
@@ -127,25 +130,25 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       [],
     );
 
-    const keys: UseKeysPropKeys = useMemo(
-      () => ({
-        ArrowUp: (e) => {
-          e.preventDefault();
-          changeNumberValue(e, true);
-        },
-        ArrowDown: (e) => {
-          e.preventDefault();
-          changeNumberValue(e, false);
-        },
-      }),
-      [],
+    const handleInputKeyDown = useKeys(
+      useMemo(
+        () => ({
+          isActive: true,
+          keys: {
+            ArrowUp: (e) => {
+              e.preventDefault();
+              refs.current[4] && changeNumberValue(e, true);
+            },
+            ArrowDown: (e) => {
+              e.preventDefault();
+              refs.current[4] && changeNumberValue(e, false);
+            },
+          },
+          onEvent: refs.current[3],
+        }),
+        [],
+      ),
     );
-
-    const handleInputKeyDown = useKeys({
-      isActive: true,
-      keys,
-      onEvent: refs.current[3],
-    });
 
     return (
       <FieldControlLayout
@@ -159,7 +162,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
           withClearButton && !disabled && withValue && !incrementButtons && (
             <FieldClearButton size={size} onClick={handleClear} />
           ),
-          incrementButtons && !disabled && (
+          incrementButtons && refs.current[4] && (
             <FieldCounter
               onIncrementClick={handleIncrementButton}
               onIncrementFocus={handleFocus}
