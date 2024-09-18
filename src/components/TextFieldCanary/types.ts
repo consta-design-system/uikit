@@ -6,7 +6,7 @@ import {
   FieldPropSize,
   FieldPropStatus,
   FieldPropView,
-} from '##/components/Field';
+} from '##/components/FieldComponents';
 import { AutoCompete } from '##/utils/types/AutoComplete';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 

@@ -2,6 +2,7 @@ import { IconPhoto } from '@consta/icons/IconPhoto';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React, { useState } from 'react';
 
+import { FieldWrapper } from '##/components/FieldComponents';
 import {
   fieldPropForm,
   fieldPropFormDefault,
@@ -10,7 +11,7 @@ import {
   fieldPropStatus,
   fieldPropView,
   fieldPropViewDefault,
-} from '##/components/Field/__mocks__/variants';
+} from '##/components/FieldComponents/__mocks__/variants';
 
 import { TextField } from '..';
 
@@ -86,7 +87,16 @@ const Variants = () => {
   const rightSide = rightSideType && rightSideSelect[rightSideType];
 
   return (
-    <div style={{ width: '100%' }}>
+    <FieldWrapper
+      style={{ width: '100%' }}
+      label="Заголовок"
+      required
+      labelIcon={IconPhoto}
+      size="m"
+      side="md"
+      caption="Подпись подпись"
+      counter={[10, 100]}
+    >
       <TextField
         form={form}
         status={status}
@@ -109,7 +119,7 @@ const Variants = () => {
         maxRows={type === 'textArray' ? maxRows : undefined}
         minRows={type === 'textArray' ? minRows : undefined}
       />
-    </div>
+    </FieldWrapper>
   );
 };
 

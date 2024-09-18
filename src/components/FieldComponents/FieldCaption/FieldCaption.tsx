@@ -16,11 +16,11 @@ export const FieldCaption = forwardRefWithAs<FieldCaptionProps>(
     return (
       <Text
         {...otherProps}
-        view={status || 'secondary'}
+        view={status || 'ghost'}
         className={className}
         ref={ref}
         size="xs"
-        lineHeight="2xs"
+        lineHeight="m"
       >
         {children}
       </Text>

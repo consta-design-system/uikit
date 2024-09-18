@@ -8,6 +8,7 @@
   line-height: var(--field-control-layout-text-line-height);
   font-size: var(--field-control-layout-text-size);
   display: block;
+  width: 100%;
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
