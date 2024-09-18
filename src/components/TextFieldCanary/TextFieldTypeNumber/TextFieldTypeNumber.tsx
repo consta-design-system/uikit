@@ -77,8 +77,6 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       onBlur,
       onFocus,
       disabled,
-      id,
-      name,
     });
 
     const sortSteps = useSortSteps({ step, min, max });
@@ -108,11 +106,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
           refs.current[2],
         );
 
-        mutableRefs.current[0]?.(newValue, {
-          e,
-          id: mutableRefs.current[5],
-          name: mutableRefs.current[6],
-        });
+        mutableRefs.current[0]?.(newValue, { e });
 
         inputRef.current.value = newValue;
         setWithValue.on();
@@ -200,6 +194,8 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
           type={type}
           max={max}
           min={min}
+          id={id}
+          name={name}
         />
       </FieldControlLayout>
     );

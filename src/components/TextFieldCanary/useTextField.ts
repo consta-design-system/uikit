@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { useFlag } from '##/hooks/useFlag';
 import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
 
-import { TextFieldPropId, TextFieldPropOnChange } from './types';
+import { TextFieldPropOnChange } from './types';
 
 export const useTextField = <
   INPUT_ELEMENT extends
@@ -15,16 +15,12 @@ export const useTextField = <
   onBlur,
   onFocus,
   disabled,
-  id,
-  name,
 }: {
   onClick: React.MouseEventHandler<HTMLDivElement> | undefined;
-  onChange: TextFieldPropOnChange | undefined;
+  onChange: TextFieldPropOnChange<string> | undefined;
   onBlur: React.FocusEventHandler<HTMLElement> | undefined;
   onFocus: React.FocusEventHandler<HTMLElement> | undefined;
   disabled: boolean | undefined;
-  id: TextFieldPropId | undefined;
-  name: string | undefined;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<INPUT_ELEMENT>(null);
@@ -37,8 +33,6 @@ export const useTextField = <
     onBlur,
     onFocus,
     disabled,
-    id,
-    name,
   ] as const);
 
   const handleFocus: React.FocusEventHandler<HTMLElement> = useCallback((e) => {
@@ -56,11 +50,7 @@ export const useTextField = <
       return;
     }
 
-    mutableRefs.current[0]?.(null, {
-      e,
-      id: mutableRefs.current[5],
-      name: mutableRefs.current[6],
-    });
+    mutableRefs.current[0]?.(null, { e });
 
     if (inputRef.current) {
       inputRef.current.value = '';
@@ -74,11 +64,7 @@ export const useTextField = <
         return;
       }
 
-      mutableRefs.current[0]?.(e.target.value || null, {
-        e,
-        id: mutableRefs.current[5],
-        name: mutableRefs.current[6],
-      });
+      mutableRefs.current[0]?.(e.target.value || null, { e });
 
       if (e.target.value) {
         setWithValue.on();

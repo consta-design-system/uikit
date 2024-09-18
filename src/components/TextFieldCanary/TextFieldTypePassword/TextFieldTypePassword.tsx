@@ -67,8 +67,6 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       onBlur,
       onFocus,
       disabled,
-      id,
-      name,
     });
 
     const [visiblePassword, setVisiblePassword] = useFlag();
@@ -119,6 +117,8 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
           onKeyUpCapture={onKeyUpCapture}
           maxLength={maxLength}
           disabled={disabled}
+          id={id}
+          name={name}
         />
       </FieldControlLayout>
     );

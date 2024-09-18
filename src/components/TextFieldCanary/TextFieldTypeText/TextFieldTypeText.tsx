@@ -65,8 +65,6 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
       onBlur,
       onFocus,
       disabled,
-      id,
-      name,
     });
 
     return (
@@ -109,6 +107,8 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
           maxLength={maxLength}
           disabled={disabled}
           type={type}
+          id={id}
+          name={name}
         />
       </FieldControlLayout>
     );

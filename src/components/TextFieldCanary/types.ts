@@ -19,22 +19,17 @@ export type TextFieldPropDafaultValue<TYPE> = TYPE extends 'textArray'
   : string | null;
 
 export type TextFieldPropName = string;
-export type TextFieldPropId = string | number;
+export type TextFieldPropId = string;
 
 export type TextFieldPropSize = FieldPropSize;
 
-export type TextFieldOnChangeArguments<TYPE> = {
-  e: TYPE extends 'number' | 'textArray'
-    ? React.ChangeEvent | React.MouseEvent | React.KeyboardEvent
-    : React.ChangeEvent;
-  // TODO: Удалить id и name
-  id?: TextFieldPropId;
-  name?: TextFieldPropName;
+export type TextFieldOnChangeArguments = {
+  e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
 };
 
 export type TextFieldPropOnChange<TYPE> = (
   value: TextFieldPropValue<TYPE>,
-  params: TextFieldOnChangeArguments<TYPE>,
+  params: TextFieldOnChangeArguments,
 ) => void;
 
 export type TextFieldPropView = FieldPropView;

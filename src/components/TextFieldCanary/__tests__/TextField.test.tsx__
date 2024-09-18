@@ -2,18 +2,11 @@ import { IconAdd } from '@consta/icons/IconAdd';
 import { fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
-import {
-  cnTextField,
-  TextField,
-  textFieldPropForm,
-  textFieldPropSize,
-  textFieldPropStatus,
-  textFieldPropView,
-} from '../TextField';
+import { TextField } from '../TextField';
 
 type TextFieldProps = React.ComponentProps<typeof TextField>;
 
-const testId = cnTextField();
+const testId = 'textField';
 
 const renderComponent = (props: TextFieldProps = {}) => {
   return render(<TextField data-testid={testId} {...props} />);

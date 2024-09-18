@@ -34,3 +34,7 @@ export const fieldPropStatus: FieldPropStatus[] = [
 
 export const fieldPropView: FieldPropView[] = ['clear', 'default'];
 export const fieldPropViewDefault: FieldPropView = 'default';
+
+export const fieldPropFocused = [true, false];
+export const fieldPropHovered = [true, false];
+export const fieldPropDisabled = [true, false];

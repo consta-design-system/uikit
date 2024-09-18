@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { isNotNil } from '##/utils/type-guards';
+
 import { FieldPropForm, FieldPropStatus, FieldPropView } from '../types';
 import {
   borderRadiusMap,
@@ -13,7 +15,9 @@ import {
 export const getSlots = (
   side: React.ReactNode | JSX.Element[],
 ): React.ReactNode[] => {
-  return ((Array.isArray(side) ? side : [side]) as []).filter((item) => !!item);
+  return ((Array.isArray(side) ? side : [side]) as []).filter(
+    (item) => isNotNil(item) && item !== false,
+  );
 };
 
 const borderToCss = (value: FieldControlLayoutBorderWidthNode) => {

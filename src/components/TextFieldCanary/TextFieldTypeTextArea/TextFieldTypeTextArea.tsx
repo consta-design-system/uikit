@@ -75,8 +75,6 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
       onBlur,
       onFocus,
       disabled,
-      id,
-      name,
     });
 
     const rightSlotsRefs = useRefs<HTMLDivElement>(2, [
@@ -92,7 +90,6 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
         cnMixScrollBar({ size: 'xs', trackSize: 'native' }),
       ]),
       placeholder,
-      // autoFocus={autoFocus}
       autoComplete,
       'onBlur': handleBlur,
       'onChange': handleChange,
@@ -103,12 +100,14 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
       readOnly,
       tabIndex,
       'aria-label': ariaLabel,
-      'onKeyDown': onKeyDown,
-      'onKeyDownCapture': onKeyDownCapture,
-      'onKeyUp': onKeyUp,
-      'onKeyUpCapture': onKeyUpCapture,
-      'maxLength': maxLength,
-      'disabled': disabled,
+      onKeyDown,
+      onKeyDownCapture,
+      onKeyUp,
+      onKeyUpCapture,
+      maxLength,
+      disabled,
+      id,
+      name,
     };
 
     return (
