@@ -216,6 +216,10 @@
       font-weight: var(--font-weight-text-thin);
     }
 
+    &_extralight {
+      font-weight: var(--font-weight-text-extralight);
+    }
+
     &_light {
       font-weight: var(--font-weight-text-light);
     }
@@ -234,6 +238,10 @@
 
     &_bold {
       font-weight: var(--font-weight-text-bold);
+    }
+
+    &_extrabold {
+      font-weight: var(--font-weight-text-extrabold);
     }
 
     &_black {
