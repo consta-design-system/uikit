@@ -14,7 +14,7 @@ type Props = PropsWithHTMLAttributes<
     iconSize?: IconPropSize;
     label: string;
     name: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
+    onChange?: React.ChangeEventHandler<HTMLInputElement>;
     checked: boolean;
     multiple: boolean;
     disabled?: boolean;
