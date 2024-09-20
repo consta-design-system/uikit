@@ -110,20 +110,8 @@ export function useSlider<RANGE extends boolean>(
 
   useEffect(() => {
     if (valueToSring(value) !== valueToSring(currentValue)) {
-      if (Array.isArray(value) && Array.isArray(currentValue)) {
-        if (
-          !(
-            currentValue.indexOf(value[0]) !== -1 &&
-            currentValue.indexOf(value[1]) !== -1
-          )
-        ) {
-          setCurrentValue(value);
-          setTooltipPosition(getActiveValue(value, activeButton.current), 0);
-        }
-      } else {
-        setCurrentValue(value);
-        setTooltipPosition(getActiveValue(value, activeButton.current), 0);
-      }
+      setCurrentValue(value);
+      setTooltipPosition(getActiveValue(value, activeButton.current), 0);
       setCurrentButton(null);
       activeButton.current = null;
     }
@@ -156,6 +144,7 @@ export function useSlider<RANGE extends boolean>(
             getValidValue(props.value[1], min, max, step),
           ] as [number, number])
         : getValidValue(props.value as number, min, max, step);
+
       setCurrentValue(targetValue);
     }
   }, [range, typeof value]);
@@ -256,6 +245,7 @@ export function useSlider<RANGE extends boolean>(
             max,
             typeButton,
           ) as SliderValue<RANGE>;
+
           setCurrentValue(newValue);
           setTooltipPosition(getActiveValue(newValue, typeButton), typeButton);
           onChangeRef.current?.(newValue, {
