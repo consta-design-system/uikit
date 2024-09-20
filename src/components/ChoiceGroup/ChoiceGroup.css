@@ -118,7 +118,6 @@
     font-weight: var(--font-weight-text-regular);
     line-height: calc(var(--choice-height) - var(--control-border-width) * 2);
     text-decoration: none;
-    cursor: pointer;
     transition:
       background-color 0.15s ease,
       box-shadow 0.15s ease,
@@ -145,7 +144,11 @@
     appearance: none;
   }
 
-  &-Label:not(.ChoiceGroup-Label_checked) {
+  &-Label:not(.ChoiceGroup-Label_disabled) {
+    cursor: pointer;
+  }
+
+  &-Label:not(.ChoiceGroup-Label_checked, .ChoiceGroup-Label_disabled) {
     &:hover {
       --choice-group-label-color: var(--color-control-typo-secondary-hover);
     }
@@ -206,7 +209,6 @@
   &-Label_disabled {
     --choice-group-label-color: var(--color-control-typo-disable);
     --choice-group-label-bg-color: var(--color-control-bg-disable);
-    pointer-events: none;
   }
 
   &_disabled {
