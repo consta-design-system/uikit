@@ -5,24 +5,24 @@ import { Text } from '##/components/Text/Text';
 import { cnMixSpace, Space } from '##/mixs/MixSpace';
 import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
+import { FieldPropSize } from '../types';
 import { cnFieldLabel } from './cnFieldLabel';
-
-export type FieldLabelPropSize = 'xs' | 's' | 'm' | 'l';
 
 type FieldLabelProps = {
   icon?: IconComponent;
-  size?: FieldLabelPropSize;
+  size?: FieldPropSize;
   required?: boolean;
+  iconRef?: React.Ref<HTMLSpanElement>;
 };
 
-const iconSizeMap: Record<FieldLabelPropSize, IconPropSize> = {
+const iconSizeMap: Record<FieldPropSize, IconPropSize> = {
   xs: 'xs',
   s: 's',
   m: 's',
   l: 's',
 };
 
-const iconSpaceMap: Record<FieldLabelPropSize, Space> = {
+const iconSpaceMap: Record<FieldPropSize, Space> = {
   xs: '2xs',
   s: '2xs',
   m: '2xs',
@@ -36,6 +36,7 @@ export const FieldLabel = forwardRefWithAs<FieldLabelProps>((props, ref) => {
     children,
     icon: Icon,
     size = 'm',
+    iconRef,
     ...otherProps
   } = props;
 
@@ -52,6 +53,7 @@ export const FieldLabel = forwardRefWithAs<FieldLabelProps>((props, ref) => {
       {required && <span className={cnFieldLabel('Star')}>*</span>}
       {Icon && (
         <Icon
+          ref={iconRef}
           className={cnMixSpace({ mL: iconSpaceMap[size] })}
           size={iconSizeMap[size]}
           view="secondary"

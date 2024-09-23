@@ -1,1 +1,404 @@
-ddd
+import { FieldControlLayoutExampleSimple } from './examples/FieldControlLayoutExampleSimple/FieldControlLayoutExampleSimple';
+import { FieldButtonExampleSimple } from './examples/FieldButtonExampleSimple/FieldButtonExampleSimple';
+import { FieldCaptionExampleSimple } from './examples/FieldCaptionExampleSimple/FieldCaptionExampleSimple';
+import { FieldLabelExampleSimple } from './examples/FieldLabelExampleSimple/FieldLabelExampleSimple';
+import { FieldClearButtonExampleSimple } from './examples/FieldClearButtonExampleSimple/FieldClearButtonExampleSimple';
+import { FieldCounterExampleSimple } from './examples/FieldCounterExampleSimple/FieldCounterExampleSimple';
+import { FieldInputExampleSimple } from './examples/FieldInputExampleSimple/FieldInputExampleSimple';
+import { FieldToggleVisiblePasswordButtonExampleSimple } from './examples/FieldToggleVisiblePasswordButtonExampleSimple/FieldToggleVisiblePasswordButtonExampleSimple';
+import { FieldWrapperExampleSimple } from './examples/FieldWrapperExampleSimple/FieldWrapperExampleSimple';
+
+import { MdxTabs } from '@consta/stand';
+
+## FieldControlLayout
+
+Компонет "Коробка" для размещения в ней контролов поля ввода
+
+<MdxTabs>
+
+```tsx
+import { IconMail } from '@consta/icons/IconMail';
+import React from 'react';
+import {
+  FieldClearButton,
+  FieldControlLayout,
+  getFieldIconSize,
+} from '@consta/uikit/FieldComponents';
+
+export const FieldControlLayoutExampleSimple = () => {
+  const size = 'm';
+
+  return (
+    <FieldControlLayout
+      size={size}
+      leftSide={<IconMail size={getFieldIconSize(size)} />}
+      rightSide={['@company.ru', <FieldClearButton size={size} />]}
+    >
+      <FieldInput />
+    </FieldControlLayout>
+  );
+};
+```
+
+<FieldControlLayoutExampleSimple />
+
+</MdxTabs>
+
+### Свойства FieldControlLayout
+
+```tsx
+type FieldPropSize = 'm' | 'xs' | 's' | 'l';
+type FieldPropForm =
+  | 'default'
+  | 'defaultClear'
+  | 'defaultBrick'
+  | 'brick'
+  | 'brickDefault'
+  | 'brickClear'
+  | 'brickRound'
+  | 'round'
+  | 'roundClear'
+  | 'roundBrick'
+  | 'clearRound'
+  | 'clearDefault'
+  | 'clearBrick'
+  | 'clear';
+
+type FieldPropStatus = 'alert' | 'success' | 'warning';
+type FieldPropView = 'default' | 'clear';
+```
+
+| Свойство          | Тип                                                   | По умолчанию | Описание                                    |
+| ----------------- | ----------------------------------------------------- | ------------ | ------------------------------------------- |
+| `view?`           | `FieldPropView`                                       | `default`    | Внешний вид компонента                      |
+| `disabled?`       | `boolean`                                             | `false`      | Визульное состояние не доступного компонета |
+| `focused?`        | `boolean`                                             | `false`      | Визульное состояние компонета в фокусе      |
+| `status?`         | `FieldPropStatus`                                     | -            | Тип                                         |
+| `size?`           | `FieldPropSize`                                       | `m`          | Размер                                      |
+| `form?`           | `FieldPropForm`                                       | `default`    | Форма                                       |
+| `leftSide?`       | `React.ReactNode` <code>&#124;</code> `JSX.Element[]` | -            | Элементы слева                              |
+| `rightSide?`      | `React.ReactNode` <code>&#124;</code> `JSX.Element[]` | -            | Элементы справа                             |
+| `children?`       | `React.ReactNode`                                     | -            | Элемент по центру                           |
+| `leftSlotsRefs?`  | `React.Ref<HTMLDivElement>[]`                         | -            | Ссылки на слоты элементов в `leftSide`      |
+| `rightSlotsRefs?` | `React.Ref<HTMLDivElement>[]`                         | -            | Ссылки на слоты элементов в `rightSide`     |
+
+## FieldButton
+
+Компонет кнопки для встраивания его в `FieldControlLayout`. Компонет увеличивает область клика вложенного в него элемента
+
+<MdxTabs>
+
+```tsx
+import { IconClear } from '@consta/icons/IconClear';
+import React from 'react';
+import {
+  FieldButton,
+  FieldControlLayout,
+  getFieldIconSize,
+} from '@consta/uikit/FieldComponents';
+
+export const FieldButtonExampleSimple = () => {
+  return (
+    <FieldControlLayout
+      size={size}
+      rightSide={
+        <FieldButton>
+          <IconClear size={getFieldIconSize(size)} />
+        </FieldButton>
+      }
+    />
+  );
+};
+```
+
+<FieldButtonExampleSimple />
+
+</MdxTabs>
+
+### Свойства FieldButton
+
+| Свойство    | Тип               | По умолчанию | Описание          |
+| ----------- | ----------------- | ------------ | ----------------- |
+| `children?` | `React.ReactNode` | -            | Элемент по центру |
+
+## FieldCaption
+
+Подпись для поля ввода
+
+<MdxTabs>
+
+```tsx
+import React from 'react';
+import {
+  FieldCaption,
+  FieldControlLayout,
+} from '@consta/uikit/FieldComponents';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+
+export const FieldCaptionExampleSimple = () => {
+  return (
+    <>
+      <FieldControlLayout className={cnMixSpace({ mB: 'xs' })} />
+      <FieldCaption>Подпись к полю</FieldCaption>
+    </>
+  );
+};
+```
+
+<FieldCaptionExampleSimple />
+
+</MdxTabs>
+
+### Свойства FieldCaption
+
+| Свойство    | Тип                                                                        | По умолчанию | Описание |
+| ----------- | -------------------------------------------------------------------------- | ------------ | -------- |
+| `status?`   | ` 'alert'` <code>&#124;</code> `'success'` <code>&#124;</code> `'warning'` | -            | Статус   |
+| `children?` | `React.ReactNode`                                                          | -            | Ребенок  |
+
+## FieldLabel
+
+Заголовок поля ввода
+
+<MdxTabs>
+
+```tsx
+import { IconComponent } from '@consta/icons/Icon';
+import { IconQuestion } from '@consta/icons/IconQuestion';
+import React from 'react';
+import { FieldControlLayout, FieldLabel } from '@consta/uikit/FieldComponents';
+import { withTooltip } from '@consta/uikit/withTooltip';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+
+const Icon = withTooltip({ mode: 'mouseover', content: 'Подсказка' })(
+  IconQuestion,
+) as IconComponent;
+
+export const FieldLabelExampleSimple = () => {
+  return (
+    <>
+      <FieldLabel
+        icon={Icon}
+        iconRef={iconQuestionRef}
+        className={cnMixSpace({ mB: 'xs' })}
+        required
+      >
+        Заголовок поля
+      </FieldLabel>
+      <FieldControlLayout />
+    </>
+  );
+};
+```
+
+<FieldLabelExampleSimple />
+
+</MdxTabs>
+
+### Свойства FieldLabel
+
+```tsx
+type FieldPropSize = 'm' | 'xs' | 's' | 'l';
+```
+
+| Свойство    | Тип                          | По умолчанию | Описание                                |
+| ----------- | ---------------------------- | ------------ | --------------------------------------- |
+| `icon?`     | `IconComponent`              | -            | Иконка                                  |
+| `size?`     | `FieldPropSize`              | `'m'`        | Размер                                  |
+| `required?` | `boolean`                    | -            | Признак обязательности поля (звездочка) |
+| `iconRef?`  | `React.Ref<HTMLSpanElement>` | -            | Ссылка на иконку                        |
+
+## FieldClearButton
+
+Кнопка удаления значения поля ввода. Готовая кнопка с иконкой и увеличенной областью клика.
+
+<MdxTabs>
+
+```tsx
+import React from 'react';
+import {
+  FieldClearButton,
+  FieldControlLayout,
+} from '@consta/uikit/FieldComponents';
+
+export const FieldClearButtonExampleSimple = () => {
+  return <FieldControlLayout size="m" rightSide={<FieldClearButton />} />;
+};
+```
+
+<FieldClearButtonExampleSimple />
+
+</MdxTabs>
+
+### Свойства FieldClearButton
+
+```tsx
+type FieldPropSize = 'm' | 'xs' | 's' | 'l';
+```
+
+| Свойство | Тип             | По умолчанию | Описание |
+| -------- | --------------- | ------------ | -------- |
+| `size?`  | `FieldPropSize` | `'m'`        | Размер   |
+
+## FieldCounter
+
+<MdxTabs>
+
+```tsx
+import React from 'react';
+import {
+  FieldControlLayout,
+  FieldCounter,
+} from '@consta/uikit/FieldComponents';
+
+export const FieldLabelExampleSimple = () => {
+  return (
+    <FieldControlLayout
+      className={cnFieldCounterExampleSimple()}
+      rightSide={<FieldCounter />}
+    />
+  );
+};
+```
+
+```css
+.FieldCounterExampleSimple.FieldControlLayout_view_default {
+  &:not(.FieldControlLayout_form_brickRound, .FieldControlLayout_form_clearRound, .FieldControlLayout_form_round) {
+    padding-right: 0px;
+  }
+}
+```
+
+<FieldCounterExampleSimple />
+
+</MdxTabs>
+
+### Свойства FieldCounter
+
+| Свойство            | Тип                                          | По умолчанию | Описание                           |
+| ------------------- | -------------------------------------------- | ------------ | ---------------------------------- |
+| `onIncrementClick?` | `React.MouseEventHandler<HTMLButtonElement>` | -            | Событие клика по кнопке инкремента |
+| `onDecrementClick?` | `React.MouseEventHandler<HTMLButtonElement>` | -            | Событие клика по кнопке декремента |
+| `onIncrementFocus?` | `React.MouseEventHandler<HTMLButtonElement>` | -            | Событие фокуса кнопки инкремента   |
+| `onDecrementFocus?` | `React.MouseEventHandler<HTMLButtonElement>` | -            | Событие фокуса кнопке декремента   |
+
+## FieldInput
+
+Стилизованный `input` для помещения его в `FieldControlLayout`.
+
+<MdxTabs>
+
+```tsx
+import React from 'react';
+import { FieldControlLayout, FieldInput } from '@consta/uikit/FieldComponents';
+
+export const FieldInputExampleSimple = () => {
+  return (
+    <FieldControlLayout>
+      <FieldInput placeholder="Поле ввода" />
+    </FieldControlLayout>
+  );
+};
+```
+
+<FieldInputExampleSimple />
+
+</MdxTabs>
+
+# FieldToggleVisiblePasswordButton
+
+Кнопка переключения видимости пароля ("глазик").
+
+<MdxTabs>
+
+```tsx
+import React from 'react';
+import {
+  FieldControlLayout,
+  FieldToggleVisiblePasswordButton,
+} from '@consta/uikit/FieldComponents';
+
+import { useFlag } from '@consta/uikit/useFlag';
+
+export const FieldToggleVisiblePasswordButtonExampleSimple = () => {
+  const [passwordVisible, setPasswordVisible] = useFlag();
+
+  return (
+    <FieldControlLayout
+      rightSide={
+        <FieldToggleVisiblePasswordButton
+          active={passwordVisible}
+          onClick={setPasswordVisible.toggle}
+        />
+      }
+    />
+  );
+};
+```
+
+<FieldToggleVisiblePasswordButtonExampleSimple />
+
+</MdxTabs>
+
+### Свойства FieldToggleVisiblePasswordButton
+
+```tsx
+type FieldPropSize = 'm' | 'xs' | 's' | 'l';
+```
+
+| Свойство | Тип             | По умолчанию | Описание   |
+| -------- | --------------- | ------------ | ---------- |
+| `size?`  | `FieldPropSize` | -            | Размер     |
+| `active` | `boolean`       | -            | Активность |
+
+## FieldWrapper
+
+Обертка полей ввода.
+
+<MdxTabs>
+
+```tsx
+import React from 'react';
+import {
+  FieldControlLayout,
+  FieldWrapper,
+} from '@consta/uikit/FieldComponents';
+
+export const FieldWrapperExampleSimple = () => {
+  return (
+    <FieldWrapper
+      label="Общая площадь"
+      required
+      caption="Должно содержать площадь всех объектов"
+      side="m²"
+    >
+      <FieldControlLayout />
+    </FieldWrapper>
+  );
+};
+```
+
+<FieldWrapperExampleSimple />
+
+</MdxTabs>
+
+### Свойства FieldWrapper
+
+```tsx
+type FieldPropSize = 'm' | 'xs' | 's' | 'l';
+type Counter = string | number | [string | number, string | number];
+```
+
+| Свойство         | Тип                                  | По умолчанию | Описание                              |
+| ---------------- | ------------------------------------ | ------------ | ------------------------------------- |
+| `children?`      | `React.ReactNode`                    | -            | Контрол                               |
+| `size?`          | `FieldPropSize`                      | `'m'`        | Размер                                |
+| `label?`         | `string`                             | -            | Заголовок                             |
+| `labelIcon?`     | `IconComponent`                      | -            | Иконка у заголовка                    |
+| `labelIconRef?`  | `React.Ref<HTMLSpanElement>`         | -            | Ссылка на иконку                      |
+| `labelPosition?` | `'top'` <code>&#124;</code> `'left'` | `'top'`      | Позиция заголовка                     |
+| `caption?`       | `string`                             | -            | Подсказка                             |
+| `required?`      | `boolean`                            | -            | Признак обязательности                |
+| `status?`        | `FieldPropStatus`                    | -            | Статус                                |
+| `side?`          | `React.ReactNode`                    | -            | Дополнительный контент около контрола |
+| `counter?`       | `Counter`                            | -            | Счетчик количества символов           |

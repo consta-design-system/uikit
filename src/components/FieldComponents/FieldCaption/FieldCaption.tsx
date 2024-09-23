@@ -3,10 +3,10 @@ import React from 'react';
 import { Text } from '##/components/Text';
 import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
-export type FieldCaptionPropStatus = 'alert' | 'warning' | 'success';
+import { FieldPropStatus } from '../types';
 
 type FieldCaptionProps = {
-  status?: FieldCaptionPropStatus;
+  status?: FieldPropStatus;
 };
 
 export const FieldCaption = forwardRefWithAs<FieldCaptionProps>(

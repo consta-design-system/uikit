@@ -12,25 +12,26 @@ import { FieldLabel } from '../FieldLabel';
 import { FieldPropSize, FieldPropStatus } from '../types';
 import { cnFieldWrapper } from './cnFieldWrapper';
 
+type Counter = string | number | [string | number, string | number];
+
 type FieldWrapperProps = PropsWithHTMLAttributesAndRef<
   {
     children: React.ReactNode;
     size?: FieldPropSize;
     label?: string;
     labelIcon?: IconComponent;
+    labelIconRef?: React.Ref<HTMLSpanElement>;
+    labelPosition?: 'top' | 'left';
     caption?: string;
     required?: boolean;
     status?: FieldPropStatus;
     side?: React.ReactNode;
-    counter?: string | number | [string | number, string | number];
-    labelPosition?: 'top' | 'left';
+    counter?: Counter;
   },
   HTMLDivElement
 >;
 
-const renderCounter = (
-  counter: Exclude<FieldWrapperProps['counter'], undefined>,
-) => {
+const renderCounter = (counter: Counter) => {
   return (
     <Text view="ghost" size="xs" lineHeight="m">
       {Array.isArray(counter) ? counter.join('/') : counter}
@@ -74,6 +75,7 @@ export const FieldWrapper = forwardRef<HTMLDivElement, FieldWrapperProps>(
       side,
       counter,
       labelPosition = 'top',
+      labelIconRef,
       ...otherProps
     },
     ref,
@@ -93,7 +95,12 @@ export const FieldWrapper = forwardRef<HTMLDivElement, FieldWrapperProps>(
         ])}
       >
         {label && (
-          <FieldLabel size={size} required={required} icon={labelIcon}>
+          <FieldLabel
+            size={size}
+            required={required}
+            icon={labelIcon}
+            iconRef={labelIconRef}
+          >
             {label}
           </FieldLabel>
         )}

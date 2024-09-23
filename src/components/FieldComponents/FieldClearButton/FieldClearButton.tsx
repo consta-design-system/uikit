@@ -10,7 +10,7 @@ import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttri
 
 type FieldClearButtonProps = PropsWithHTMLAttributesAndRef<
   {
-    size: FieldPropSize;
+    size?: FieldPropSize;
     children?: never;
   },
   HTMLButtonElement
@@ -19,7 +19,7 @@ type FieldClearButtonProps = PropsWithHTMLAttributesAndRef<
 export const FieldClearButton = forwardRef<
   HTMLButtonElement,
   FieldClearButtonProps
->(({ size, ...props }, ref) => {
+>(({ size = 'm', ...props }, ref) => {
   return (
     <FieldButton {...props} ref={ref}>
       <IconClear size={getFieldIconSize(size)} />
