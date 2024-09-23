@@ -15,6 +15,7 @@ export const FieldButtonExampleSimple = () => {
       <FieldControlLayout
         size={size}
         rightSide={
+          <FieldButton>
             <IconClear size={getFieldIconSize(size)} />
           </FieldButton>
         }
