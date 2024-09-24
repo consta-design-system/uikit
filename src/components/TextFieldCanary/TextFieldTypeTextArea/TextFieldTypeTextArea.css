@@ -1,5 +1,3 @@
-/* --text-field-textarea-height: свойство для указания высоты котрола */
-
 .TextFieldTypeTextArea {
   --text-field-textarea-padding: calc(
     (var(--text-field-textarea-slot-sizes-lenght) + 1) *
@@ -16,21 +14,27 @@
     --text-field-heigth,
     var(--field-control-layout-height)
   );
-  --text-field-textarea-heigth: calc(
+  --text-field-textarea-heigth-calc: calc(
     var(--text-field-textarea-control-heigth) -
       var(--field-control-layout-border-width) * 2
   );
+  --text-field-textarea-min-heigth: var(--text-field-textarea-heigth-calc);
+
+  &_resize {
+    --text-field-textarea-resize: vertical;
+    &_auto {
+      --text-field-textarea-heigth: var(--text-field-textarea-heigth-calc);
+    }
+  }
+
   &-TextArea {
     padding-right: var(--text-field-textarea-padding, 0px);
     width: calc(100% + var(--text-field-textarea-padding));
     padding-top: var(--text-field-textarea-vertical-padding);
     padding-bottom: var(--text-field-textarea-vertical-padding);
-    min-height: var(--text-field-textarea-heigth);
-    height: var(--text-field-textarea-heigth);
+    min-height: var(--text-field-textarea-min-heigth);
+    height: var(--text-field-textarea-heigth, auto);
     line-height: var(--field-control-layout-text-line-height);
-    resize: none;
-    &_resize {
-      resize: vertical;
-    }
+    resize: var(--text-field-textarea-resize, none);
   }
 }

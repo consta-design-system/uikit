@@ -26,7 +26,7 @@ import { TextFieldTypeComponent } from '../types';
 import { useTextField } from '../useTextField';
 import { cnTextFieldTypeTextArray } from './cnTextFieldTypeTextArray';
 
-export const TextFieldTypeTextArray: TextFieldTypeComponent<'textArray'> =
+export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
   forwardRef((props, componentRef) => {
     const {
       className,

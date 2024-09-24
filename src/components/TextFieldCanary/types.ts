@@ -10,11 +10,11 @@ import {
 import { AutoCompete } from '##/utils/types/AutoComplete';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
-export type TextFieldPropValue<TYPE> = TYPE extends 'textArray'
+export type TextFieldPropValue<TYPE> = TYPE extends 'textarray'
   ? string[] | null
   : string | null;
 
-export type TextFieldPropDafaultValue<TYPE> = TYPE extends 'textArray'
+export type TextFieldPropDafaultValue<TYPE> = TYPE extends 'textarray'
   ? never
   : string | null;
 
@@ -36,9 +36,8 @@ export type TextFieldPropView = FieldPropView;
 export type TextFieldPropForm = FieldPropForm;
 export type TextFieldPropStatus = FieldPropStatus;
 
-type TextFieldPropsTypetextArea<TYPE> = TYPE extends 'textArea'
+type TextFieldPropsTypetextarea<TYPE> = TYPE extends 'textarea'
   ? {
-      cols?: number;
       resize?: boolean | 'auto';
     } & (
       | {
@@ -63,7 +62,7 @@ type TextFieldPropsTypeNumber<TYPE> = TYPE extends 'number'
     }
   : {};
 
-type TextFieldPropInputRef<TYPE> = TYPE extends 'textArea'
+type TextFieldPropInputRef<TYPE> = TYPE extends 'textarea'
   ? React.Ref<HTMLTextAreaElement>
   : React.Ref<HTMLInputElement>;
 
@@ -106,7 +105,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
   },
   HTMLDivElement
 > &
-  TextFieldPropsTypetextArea<TYPE> &
+  TextFieldPropsTypetextarea<TYPE> &
   TextFieldPropsTypeNumber<TYPE>;
 
 export type TextFieldComponent = <TYPE extends string>(

@@ -31,6 +31,12 @@ const getStep = (
   return step;
 };
 
+const resizeMap = {
+  true: true,
+  false: false,
+  auto: 'auto',
+} as const;
+
 const Variants = () => {
   const [value, setValue] = useState<string[] | null>([
     'Один',
@@ -45,10 +51,27 @@ const Variants = () => {
 
   const type = useSelect(
     'type',
-    ['text', 'number', 'textArea', 'password', 'textArray'],
+    ['text', 'number', 'textarea', 'password', 'textarray'],
     'text',
   );
-
+  const resize =
+    useSelect(
+      'resize',
+      ['false', 'true', 'auto'],
+      'false',
+      type === 'textarea',
+    ) || 'false';
+  const rows = useNumber('rows', 3, type === 'textarea' && resize !== 'auto');
+  const minRows = useNumber(
+    'minRows',
+    1,
+    type === 'textarea' && resize === 'auto',
+  );
+  const maxRows = useNumber(
+    'maxRows',
+    5,
+    type === 'textarea' && resize === 'auto',
+  );
   const step = useNumber('step', 1, type === 'number');
   const withStepArray = useBoolean('withStepArray', false, type === 'number');
   const incrementButtons = useBoolean(
@@ -64,8 +87,7 @@ const Variants = () => {
   const view = useSelect('view', fieldPropView, fieldPropViewDefault);
   const disabled = useBoolean('disabled', false);
   const withClearButton = useBoolean('withClearButton', true);
-  const minRows = useNumber('minRows', 1, type === 'textArea');
-  const maxRows = useNumber('maxRows', 5, type === 'textArea');
+
   const maxLength = useNumber('maxLength', 200, type !== 'number');
   const placeholder = useText('placeholder', 'Подсказка в поле');
   const leftSideType = useSelect('leftSideType', ['icon', 'text']);
@@ -110,14 +132,16 @@ const Variants = () => {
         withClearButton={withClearButton}
         placeholder={placeholder}
         type={type}
-        value={type === 'textArray' ? value : undefined}
-        // onChange={type === 'textArray' ? setValue : undefined}
+        value={type === 'textarray' ? value : undefined}
+        // onChange={type === 'textarray' ? setValue : undefined}
         incrementButtons={type === 'number' ? incrementButtons : undefined}
         min={type === 'number' ? min : undefined}
         max={type === 'number' ? max : undefined}
         step={getStep(type, withStepArray, step)}
-        maxRows={type === 'textArray' ? maxRows : undefined}
-        minRows={type === 'textArray' ? minRows : undefined}
+        resize={type === 'textarea' ? resizeMap[resize] : undefined}
+        maxRows={type === 'textarea' && resize === 'auto' ? maxRows : undefined}
+        minRows={type === 'textarea' && resize === 'auto' ? minRows : undefined}
+        rows={type === 'textarea' && resize !== 'auto' ? rows : undefined}
       />
     </FieldWrapper>
   );

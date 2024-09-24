@@ -42,16 +42,15 @@ import {
   TextFieldExampleMaskSetValue,
 } from './examples/TextFieldExampleMask/TextFieldExampleMask';
 
-```tsx
-import { TextField } from '@consta/uikit/TextField';
-```
-
 <MdxMenu>
 
 - [Тип поля](#тип-поля)
+  - [type="text"](#поле-в-одну-строку--type--text-)
+  - [type="textarea"](#поле-в-несколько-строк--type--textarea-)
+  - [type="number"](#поле-для-ввода-чисел--type--number-)
+  - [type="password"](#поле-для-ввода-проля--type--password-)
 - [Содержимое](#содержимое-поля)
   - [Подсказка](#подсказка)
-  - [Предустановленное значение](#предустановленное-значение)
   - [Дополнительная информация](#дополнительная-информация)
   - [Лейбл](#лейбл)
   - [Подпись](#подпись)
@@ -80,20 +79,40 @@ import { TextField } from '@consta/uikit/TextField';
 
 </MdxMenu>
 
+## Импорт
+
+Можно имортировать все типы сразу
+
+```tsx
+import { TextField } from '@consta/uikit/TextField';
+```
+
+Или по каждому типу в отдельности
+
+```tsx
+import {
+  TextFieldTypeNumber,
+  TextFieldTypePassword,
+  TextFieldTypeText,
+  TextFieldTypeTextArea,
+  TextFieldTypeTextArray,
+} from '@consta/uikit/TextField';
+```
+
 ## Тип поля
 
 Свойство `type` определяет тип поля и тег, который будет для него использоваться. Варианты:
 
 - `text` — поле для ввода текста в одну строку,`<input type="text">`.
-- `textArea` — текстовое поле из нескольких строк, `<textarea></textarea>`, можно [регулировать количество строк и колонок](#строки-и-колонки).
+- `textarea` — текстовое поле из нескольких строк, `<textarea></textarea>`, можно [регулировать количество строк и колонок](#строки-и-колонки).
 - `number` — поле для ввода чисел, `<input type="number">`, значение можно менять с помощью кнопок-стрелочек. [Установить шаг](#шаг-набор-значений-и-диапазон) — целое число, на которое стрелочки уменьшают или увеличивают значение, можно в свойстве `step`. [Убрать стрелочки](#шаг-набор-значений-и-диапазон) из поля можно с помощью свойства `incrementButtons`.
 - `password` — маскированное поле для ввода пароля.
-- `textArray` — поле ввода массива строк.
+- `textarray` — поле ввода массива строк.
 
-Здесь описаны основные типы, но вы можете использовать любые `input type`,
+Здесь описаны основные типы, но вы можете использовать любые `<input type="*" />`,
 например, `<input type="email">`.
 
-### Поле в одну строку: `type="text"`
+## Поле в одну строку: `type="text"`
 
 ```tsx
 export const TextFieldExampleTypeText = () => {
@@ -112,7 +131,7 @@ export const TextFieldExampleTypeText = () => {
 
 <TextFieldExampleTypeText />
 
-### Поле в несколько строк: `type="textarea"`
+## Поле в несколько строк: `type="textarea"`
 
 ```tsx
 export const TextFieldExampleTypeTextarea = () => {
@@ -133,7 +152,42 @@ export const TextFieldExampleTypeTextarea = () => {
 
 <TextFieldExampleTypeTextarea />
 
-### Поле для ввода чисел: `type="number"`
+### Строки и колонки
+
+Чтобы добавить большой по объему текст (например, отзыв или комментарий),
+используйте `type="textarea"`. У этого типа поля можно задать высоту и ширину.
+
+Количество колонок (ширину) можно указать в свойстве `cols`,
+а количество строк (высоту) — в `rows`.
+
+```tsx
+<TextField
+  type="textarea"
+  rows={7}
+  cols={50}
+  value="Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим"
+/>
+```
+
+<TextFieldExampleSizeRows />
+
+### Минимальная и максимальная высота
+
+У поля с `type="textarea"` можно задать интервал для высоты (от `minRows` до `maxRows`) и ограничить ширину (`maxLength`).
+Если укажете `rows` и при этом не укажете `minRows` и `maxRows`, оба эти свойства будут равны `rows`.
+
+```tsx
+<TextField
+  type="textarea"
+  minRows={13}
+  cols={25}
+  value="Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим"
+/>
+```
+
+<TextFieldExampleSizeMinRows />
+
+## Поле для ввода чисел: `type="number"`
 
 ```tsx
 export const TextFieldExampleTypeNumber = () => {
@@ -153,7 +207,52 @@ export const TextFieldExampleTypeNumber = () => {
 
 <TextFieldExampleTypeNumber />
 
-### Поле для ввода проля: `type="password"`
+### Шаг, набор значений и диапазон
+
+Для поля ввода с `type=number` можно указать шаг — целое число, на которое можно менять значение в поле с помощью кнопок-стрелочек, или набор значений в виде конечных точек. За это отвечает свойство `step`.
+
+Ограничить диапазон значений, которые меняются по стрелочкам, можно с помощью свойств `min` (минимальное значение) и `max` (максимальное значение).
+
+```tsx
+export const TextFieldExampleStepArray = () => {
+  const [value, setValue] = useState<string | null>(null);
+
+  return (
+    <TextField
+      onChange={setValue}
+      value={value}
+      type="number"
+      step={[10, 50, 80]}
+      min="0"
+      max="100"
+    />
+  );
+};
+```
+
+<TextFieldExampleStepArray />
+
+Убрать стрелочки из поля (или показать их) можно с помощью свойства `incrementButtons`.
+
+```tsx
+export const TextFieldExampleIncrementButtons = () => {
+  const [value, setValue] = useState<string | null>(null);
+  const handleChange = ({ value }: { value: string | null }) => setValue(value);
+
+  return (
+    <TextField
+      onChange={handleChange}
+      value={value}
+      type="number"
+      incrementButtons={false}
+    />
+  );
+};
+```
+
+<TextFieldExampleIncrementButtons />
+
+## Поле для ввода проля: `type="password"`
 
 ```tsx
 export const TextFieldExampleTypePassword = () => {
@@ -219,92 +318,6 @@ const App = () => {
 
 <TextFieldExampleTextRight />
 
-### Лейбл
-
-К полю можно добавить лейбл. За текст отвечает свойство `label`,
-за его расположение — `labelPosition`. Варианты расположения:
-`left` — лейбл слева от поля, `top` — лейбл над полем.
-
-```tsx
-<TextField placeholder="Здесь лейбл сверху" label="Лейбл" labelPosition="top" />
-<TextField placeholder="Здесь лейбл слева" label="Лейбл" labelPosition="left" />
-```
-
-<TextFieldExampleLabel />
-
-Также к лейблу можно добавить иконку используя свойство `labelIcon`.
-
-```tsx
-<TextField
-  placeholder="Здесь лейбл сверху"
-  label="Лейбл"
-  labelIcon={IconQuestion}
-/>
-```
-
-<TextFieldExampleLabelIcon />
-
-### Подпись
-
-Под полем можно добавить подпись, например, чтобы показать информацию о его состоянии.
-За подпись отвечает свойство `caption`, оно наследует
-[статус поля](#статус) и стилизуется в соответствии с ним.
-
-```tsx
-<TextField status="success" placeholder="Статус success" caption="Это подпись" />
-<TextField status="alert" placeholder="Статус alert" caption="Это подпись" />
-<TextField status="warning" placeholder="Статус warning" caption="Это подпись" />
-
-<TextField placeholder="Обычное поле" caption="Это подпись" />
-```
-
-<TextFieldExampleCaption />
-
-### Шаг, набор значений и диапазон
-
-Для поля ввода с `type=number` можно указать шаг — целое число, на которое можно менять значение в поле с помощью кнопок-стрелочек, или набор значений в виде конечных точек. За это отвечает свойство `step`.
-
-Ограничить диапазон значений, которые меняются по стрелочкам, можно с помощью свойств `min` (минимальное значение) и `max` (максимальное значение).
-
-```tsx
-export const TextFieldExampleStepArray = () => {
-  const [value, setValue] = useState<string | null>(null);
-
-  return (
-    <TextField
-      onChange={setValue}
-      value={value}
-      type="number"
-      step={[10, 50, 80]}
-      min="0"
-      max="100"
-    />
-  );
-};
-```
-
-<TextFieldExampleStepArray />
-
-Убрать стрелочки из поля (или показать их) можно с помощью свойства `incrementButtons`.
-
-```tsx
-export const TextFieldExampleIncrementButtons = () => {
-  const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
-
-  return (
-    <TextField
-      onChange={handleChange}
-      value={value}
-      type="number"
-      incrementButtons={false}
-    />
-  );
-};
-```
-
-<TextFieldExampleIncrementButtons />
-
 ### Кнопка для очистки поля
 
 Если вы хотите добавить в поле кнопку, по которой можно его очистить, используйте свойство `withClearButton`. Если в поле есть значение, справа появляется крестик. Нажмите на него — поле станет пустым.
@@ -322,19 +335,7 @@ export const TextFieldExampleWtihClearButton = () => {
 
 <TextFieldExampleWithClearButton />
 
-## Обязательность
-
-Чтобы сделать поле обязательным, добавьте `required`.
-Если у поля есть лейбл, рядом с ним появится маркер обязательности.
-
-```tsx
-<TextField label="Поле раз" type="text" placeholder="Обязательное" required/>
-<TextField label="Поле два" type="text" placeholder="Необязательное" />
-```
-
-<TextFieldExampleRequired />
-
-## Фокус
+## Фокус TODO:провверить
 
 Чтобы поместить в поле фокус, добавьте `autoFocus`.
 
@@ -421,47 +422,12 @@ export const TextFieldExampleWtihClearButton = () => {
 
 <TextFieldExampleSize />
 
-### Строки и колонки
-
-Чтобы добавить большой по объему текст (например, отзыв или комментарий),
-используйте `type="textarea"`. У этого типа поля можно задать высоту и ширину.
-
-Количество колонок (ширину) можно указать в свойстве `cols`,
-а количество строк (высоту) — в `rows`.
-
-```tsx
-<TextField
-  type="textarea"
-  rows={7}
-  cols={50}
-  value="Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим"
-/>
-```
-
-<TextFieldExampleSizeRows />
-
-### Минимальная и максимальная высота
-
-У поля с `type="textarea"` можно задать интервал для высоты (от `minRows` до `maxRows`) и ограничить ширину (`maxLength`).
-Если укажете `rows` и при этом не укажете `minRows` и `maxRows`, оба эти свойства будут равны `rows`.
-
-```tsx
-<TextField
-  type="textarea"
-  minRows={13}
-  cols={25}
-  value="Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим"
-/>
-```
-
-<TextFieldExampleSizeMinRows />
-
 ## Маскирование
 
 Для того, чтобы использовать маски вместе с компонентом `TextField` необходимо импортировать хук [useIMask](https://github.com/uNmAnNeR/imaskjs/tree/master/packages/react-imask#using-hook).
 Подробное описание по составлению собственных масок можно найти в документации к [imask](https://imask.js.org/guide.html).
 
-### Как работает useIMask
+## Как работает useIMask
 
 Значение `TextField` или любого другого `<input/>` меняется через хук со связкой с полем через `ref`.
 Для того, чтобы указать значение в момент первого рендера, используйте defaultValue.
@@ -509,9 +475,9 @@ export const TextFieldExampleMaskSetValue = () => {
 
 <TextFieldExampleMaskSetValue />
 
-### Примеры
+## Примеры
 
-#### Сумма
+### Сумма
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
@@ -564,7 +530,7 @@ export const TextFieldExampleMaskAmount = () => {
 
 <TextFieldExampleMaskAmount />
 
-#### Телефон
+### Телефон
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
@@ -608,7 +574,7 @@ export const TextFieldExampleMaskPhone = () => {
 
 <TextFieldExampleMaskPhone />
 
-#### Паспорт
+### Паспорт
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
@@ -652,7 +618,7 @@ export const TextFieldExampleMaskPassport = () => {
 
 <TextFieldExampleMaskPassport />
 
-#### Банковский счет
+### Банковский счет
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
@@ -695,12 +661,6 @@ export const TextFieldExampleMaskBankAccount = () => {
 ```
 
 <TextFieldExampleMaskBankAccount />
-
-## Импорт
-
-```tsx
-import { TextField, useIMask } from '@consta/uikit/TextField';
-```
 
 ## Свойства
 
@@ -745,17 +705,3 @@ import { TextField, useIMask } from '@consta/uikit/TextField';
 | `inputRef?`                                           | `React.Ref<HTMLTextAreaElement` <code>&#124;</code> `HTMLInputElement>`                                                                                              | -            | Ссылка на DOM-элемент поля ввода                                                                                                             |
 | `inputContainerRef?`                                  | `React.Ref<HTMLDivElement>`                                                                                                                                          | -            | Ссылка на DOM-элемент контейнера поля ввода                                                                                                  |
 | `ref?`                                                | `React.Ref<HTMLDivElement>`                                                                                                                                          | -            | Ссылка на корневой DOM-элемент компонента                                                                                                    |
-
-## Пример
-
-```tsx
-import React, { useState } from 'react';
-import { TextField } from '@consta/uikit/TextField';
-
-const App = () => {
-  const [value, setValue] = useState(null);
-  const handleChange = setValue;
-
-  return <TextField onChange={handleChange} value={value} />;
-};
-```

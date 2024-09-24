@@ -14,16 +14,16 @@ import {
 const typeMap: Record<
   string,
   | TextFieldTypeComponent<'text'>
-  | TextFieldTypeComponent<'textArea'>
+  | TextFieldTypeComponent<'textarea'>
   | TextFieldTypeComponent<'password'>
   | TextFieldTypeComponent<'number'>
-  | TextFieldTypeComponent<'textArray'>
+  | TextFieldTypeComponent<'textarray'>
 > = {
   text: TextFieldTypeText,
-  textArea: TextFieldTypeTextArea,
+  textarea: TextFieldTypeTextArea,
   password: TextFieldTypePassword,
   number: TextFieldTypeNumber,
-  textArray: TextFieldTypeTextArray,
+  textarray: TextFieldTypeTextArray,
 };
 
 const TextFieldRender = <TYPE extends string>(

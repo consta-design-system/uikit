@@ -20,7 +20,7 @@ import { useTextField } from '../useTextField';
 
 export const cnTextFieldTypeTextArea = cn('TextFieldTypeTextArea');
 
-export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
+export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
   forwardRef((props, componentRef) => {
     const {
       className,
@@ -50,7 +50,11 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
       ariaLabel,
       iconSize,
       onClick,
-      resize = true,
+      resize,
+      rows,
+      minRows,
+      maxRows,
+
       // onkey props
       onKeyDown,
       onKeyDownCapture,
@@ -84,8 +88,8 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
 
     const slotSizes = useResizeObserved(rightSlotsRefs, getElementWidth);
 
-    const textAreaProps = {
-      'className': cnTextFieldTypeTextArea('TextArea', { resize }, [
+    const textareaProps = {
+      'className': cnTextFieldTypeTextArea('TextArea', [
         cnFieldInput(),
         cnMixScrollBar({ size: 'xs', trackSize: 'native' }),
       ]),
@@ -110,10 +114,20 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
       name,
     };
 
+    const textAreaNoAutoSizeProps = {
+      rows,
+    };
+
+    const textAreaAutoSizeProps = {
+      minRows,
+      maxRows,
+      rows,
+    };
+
     return (
       <FieldControlLayout
         {...otherProps}
-        className={cnTextFieldTypeTextArea(null, [className])}
+        className={cnTextFieldTypeTextArea({ resize }, [className])}
         form={form}
         status={status}
         size={size}
@@ -139,9 +153,9 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textArea'> =
         rightSlotsRefs={rightSlotsRefs}
       >
         {resize === 'auto' ? (
-          <TextAreaAutoSize {...textAreaProps} />
+          <TextAreaAutoSize {...textareaProps} {...textAreaAutoSizeProps} />
         ) : (
-          <textarea {...textAreaProps} />
+          <textarea {...textareaProps} {...textAreaNoAutoSizeProps} />
         )}
       </FieldControlLayout>
     );
