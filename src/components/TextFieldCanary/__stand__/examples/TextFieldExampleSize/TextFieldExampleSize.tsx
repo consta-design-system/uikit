@@ -43,39 +43,3 @@ export const TextFieldExampleSize = () => {
     </Example>
   );
 };
-
-export const TextFieldExampleSizeRows = () => {
-  const [value, setValue] = useState<string | null>(
-    'Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим',
-  );
-
-  return (
-    <Example col={1}>
-      <TextField
-        type="textarea"
-        rows={7}
-        cols={50}
-        onChange={setValue}
-        value={value}
-      />
-    </Example>
-  );
-};
-
-export const TextFieldExampleSizeMinRows = () => {
-  const [value, setValue] = useState<string | null>(
-    'Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим',
-  );
-
-  return (
-    <Example col={1}>
-      <TextField
-        type="textarea"
-        minRows={13}
-        cols={25}
-        onChange={setValue}
-        value={value}
-      />
-    </Example>
-  );
-};

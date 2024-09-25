@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 import { TextFieldExampleStatus } from './examples/TextFieldExampleStatus/TextFieldExampleStatus';
 import {
   TextFieldExampleTextPlaceholder,
@@ -25,6 +25,10 @@ import {
 } from './examples/TextFieldExampleLabel/TextFieldExampleLabel';
 import { TextFieldExampleCaption } from './examples/TextFieldExampleCaption/TextFieldExampleCaption';
 import {
+  TextFieldExampleResizeTrue,
+  TextFieldExampleResizeAuto,
+} from './examples/TextFieldExampleResize/TextFieldExampleResize';
+import {
   TextFieldExampleTypeText,
   TextFieldExampleTypeTextarea,
   TextFieldExampleTypeNumber,
@@ -32,7 +36,6 @@ import {
 } from './examples/TextFieldExampleType/TextFieldExampleType';
 import { TextFieldExampleRequired } from './examples/TextFieldExampleRequired/TextFieldExampleRequired';
 import { TextFieldExampleStepArray } from './examples/TextFieldExampleStepArray/TextFieldExampleStepArray';
-import { TextFieldExampleIncrementButtons } from './examples/TextFieldExampleIncrementButtons/TextFieldExampleIncrementButtons';
 import { TextFieldExampleWithClearButton } from './examples/TextFieldExampleWithClearButton/TextFieldExampleWithClearButton';
 import {
   TextFieldExampleMaskAmount,
@@ -41,6 +44,10 @@ import {
   TextFieldExampleMaskBankAccount,
   TextFieldExampleMaskSetValue,
 } from './examples/TextFieldExampleMask/TextFieldExampleMask';
+import {
+  TextFieldExampleAutoFocus,
+  TextFieldExampleProgramFocus,
+} from './examples/TextFieldExampleAutoFocus/TextFieldExampleAutoFocus';
 
 <MdxMenu>
 
@@ -114,98 +121,75 @@ import {
 
 ## Поле в одну строку: `type="text"`
 
-```tsx
-export const TextFieldExampleTypeText = () => {
-  const [value, setValue] = useState<string | null>(null);
+<MdxTabs>
 
-  return (
-    <TextField
-      onChange={setValue}
-      value={value}
-      type="text"
-      placeholder="Одна строчка"
-    />
-  );
-};
+```tsx
+<TextField type="text" placeholder="Одна строчка" />
 ```
 
 <TextFieldExampleTypeText />
 
+</MdxTabs>
+
 ## Поле в несколько строк: `type="textarea"`
 
-```tsx
-export const TextFieldExampleTypeTextarea = () => {
-  const [value, setValue] = useState<string | null>(null);
+Чтобы добавить большой по объему текст (например, отзыв или комментарий), используйте `type="textarea"`. У этого типа поля можно задать количество видимых строк (высоту) — в `rows`.
 
-  return (
-    <TextField
-      onChange={setValue}
-      value={value}
-      type="textarea"
-      cols={200}
-      rows={3}
-      placeholder="Несколько строчек"
-    />
-  );
-};
+<MdxTabs>
+
+```tsx
+<TextField type="textarea" rows={3} placeholder="Несколько строчек" />
 ```
 
 <TextFieldExampleTypeTextarea />
 
-### Строки и колонки
+</MdxTabs>
 
-Чтобы добавить большой по объему текст (например, отзыв или комментарий),
-используйте `type="textarea"`. У этого типа поля можно задать высоту и ширину.
+### Возможность изменять высоту
 
-Количество колонок (ширину) можно указать в свойстве `cols`,
-а количество строк (высоту) — в `rows`.
+У поля с `type="textarea"` возможно включить изменение высоты пользователем интерфейса, для этого используйте `resize = true`.
+
+<MdxTabs>
+
+```tsx
+<TextField type="textarea" rows={3} placeholder="Подергай за уголок" resize />
+```
+
+<TextFieldExampleResizeTrue />
+
+</MdxTabs>
+
+### Автомотическая смена высоты
+
+У поля с `type="textarea"` и `resize = "auto"` можно задать интервал для высоты (от `minRows` до `maxRows`).
+
+<MdxTabs>
 
 ```tsx
 <TextField
   type="textarea"
-  rows={7}
-  cols={50}
-  value="Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим"
+  minRows={3}
+  maxRows={6}
+  placeholder="Буду увеличиваться до 6ти строк"
+  resize="auto"
 />
 ```
 
-<TextFieldExampleSizeRows />
+<TextFieldExampleResizeAuto />
 
-### Минимальная и максимальная высота
-
-У поля с `type="textarea"` можно задать интервал для высоты (от `minRows` до `maxRows`) и ограничить ширину (`maxLength`).
-Если укажете `rows` и при этом не укажете `minRows` и `maxRows`, оба эти свойства будут равны `rows`.
-
-```tsx
-<TextField
-  type="textarea"
-  minRows={13}
-  cols={25}
-  value="Я иду и пою обо всем хорошем и улыбку свою я дарю прохожим"
-/>
-```
-
-<TextFieldExampleSizeMinRows />
+</MdxTabs>
 
 ## Поле для ввода чисел: `type="number"`
 
-```tsx
-export const TextFieldExampleTypeNumber = () => {
-  const [value, setValue] = useState<string | null>(null);
+<MdxTabs>
 
-  return (
-    <TextField
-      onChange={setValue}
-      value={value}
-      type="number"
-      step="2"
-      placeholder="Здесь цифры"
-    />
-  );
-};
+```tsx
+<TextField type="number" placeholder="Здесь цифры" />
 ```
 
 <TextFieldExampleTypeNumber />
+
+</MdxTabs>
 
 ### Шаг, набор значений и диапазон
 
@@ -213,63 +197,37 @@ export const TextFieldExampleTypeNumber = () => {
 
 Ограничить диапазон значений, которые меняются по стрелочкам, можно с помощью свойств `min` (минимальное значение) и `max` (максимальное значение).
 
-```tsx
-export const TextFieldExampleStepArray = () => {
-  const [value, setValue] = useState<string | null>(null);
+Показать стрелочки можно с помощью свойства `incrementButtons`.
 
-  return (
-    <TextField
-      onChange={setValue}
-      value={value}
-      type="number"
-      step={[10, 50, 80]}
-      min="0"
-      max="100"
-    />
-  );
-};
+<MdxTabs>
+
+```tsx
+<TextField
+  type="number"
+  step={[10, 50, 80]}
+  min="0"
+  max="100"
+  incrementButtons
+  defaultValue="10"
+  placeholder="Здесь цифры"
+/>
 ```
 
 <TextFieldExampleStepArray />
 
-Убрать стрелочки из поля (или показать их) можно с помощью свойства `incrementButtons`.
-
-```tsx
-export const TextFieldExampleIncrementButtons = () => {
-  const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
-
-  return (
-    <TextField
-      onChange={handleChange}
-      value={value}
-      type="number"
-      incrementButtons={false}
-    />
-  );
-};
-```
-
-<TextFieldExampleIncrementButtons />
+</MdxTabs>
 
 ## Поле для ввода проля: `type="password"`
 
-```tsx
-export const TextFieldExampleTypePassword = () => {
-  const [value, setValue] = useState<string | null>(null);
+<MdxTabs>
 
-  return (
-    <TextField
-      onChange={setValue}
-      value={value}
-      type="password"
-      placeholder="Пароль"
-    />
-  );
-};
+```tsx
+<TextField type="password" placeholder="Пароль" />
 ```
 
 <TextFieldExampleTypePassword />
+
+</MdxTabs>
 
 ## Содержимое поля
 
@@ -277,19 +235,25 @@ export const TextFieldExampleTypePassword = () => {
 
 В поле можно добавить подсказку — уточнить, что именно нужно написать в этом поле, подсказать формат данных или что-то ещё. Это можно сделать с помощью свойства `placeholder`.
 
+<MdxTabs>
+
 ```tsx
 <TextField placeholder="Здесь только цифры" />
 ```
 
 <TextFieldExampleTextPlaceholder />
 
+</MdxTabs>
+
 ### Значение
 
 Указать значение поля можно в `value`.
 
+<MdxTabs>
+
 ```tsx
 const App = () => {
-  const [value, setValue] = useState('стопиццот');
+  const [value, setValue] = useState('стопятьсот');
 
   return <TextField value={value} onChange={setValue} />;
 };
@@ -297,11 +261,15 @@ const App = () => {
 
 <TextFieldExampleTextValue />
 
+</MdxTabs>
+
 ### Дополнительная информация
 
-Вы можете добавить в поле дополнительную информацию — слева или справа.
+Вы можете добавить в поле дополнительную информацию — слева (`leftSide`) или справа (`rightSide`).
 
 Это может быть текст:
+
+<MdxTabs>
 
 ```tsx
 <TextField leftSide="куда" />
@@ -310,7 +278,11 @@ const App = () => {
 
 <TextFieldExampleTextLeft />
 
+</MdxTabs>
+
 Или иконка:
+
+<MdxTabs>
 
 ```tsx
 <TextField leftSide={IconDiamond} rightSide="карат" />
@@ -318,31 +290,61 @@ const App = () => {
 
 <TextFieldExampleTextRight />
 
+</MdxTabs>
+
 ### Кнопка для очистки поля
 
 Если вы хотите добавить в поле кнопку, по которой можно его очистить, используйте свойство `withClearButton`. Если в поле есть значение, справа появляется крестик. Нажмите на него — поле станет пустым.
 
+<MdxTabs>
+
 ```tsx
-export const TextFieldExampleWtihClearButton = () => {
-  const [value, setValue] = useState<string | null>(null);
-  const handleChange = ({ value }: { value: string | null }) => setValue(value);
-
-  return <TextField onChange={handleChange} value={value} withClearButton />;
-};
+<TextField defaultValue="Очисти меня" withClearButton />
 ```
-
-Напечатайте что-нибудь в поле — справа появится крестик.
 
 <TextFieldExampleWithClearButton />
 
-## Фокус TODO:провверить
+</MdxTabs>
 
-Чтобы поместить в поле фокус, добавьте `autoFocus`.
+## Фокус
+
+Чтобы поместить в поле фокус при первом рендере, добавьте `autoFocus`.
+
+<MdxTabs>
 
 ```tsx
-<TextField label="Поле раз" type="text" placeholder="В фокусе" autoFocus/>
-<TextField label="Поле два" type="text" placeholder="Не в фокусе" />
+<TextField autoFocus />
 ```
+
+<TextFieldExampleAutoFocus />
+
+</MdxTabs>
+
+При необходимости програмного фокуса используте `inputRef`
+
+<MdxTabs>
+
+```tsx
+export const TextFieldExampleProgramFocus = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <>
+      <TextField inputRef={inputRef} />
+      <Button
+        label="Тык"
+        onClick={() => {
+          inputRef.current?.focus();
+        }}
+      />
+    </>
+  );
+};
+```
+
+<TextFieldExampleProgramFocus />
+
+</MdxTabs>
 
 ## Статус поля
 
@@ -351,6 +353,8 @@ export const TextFieldExampleWtihClearButton = () => {
 
 За статус отвечает свойство `status`. Варианты: `success`, `alert` и `warning`.
 Если статус не указан, поле будет обычным.
+
+<MdxTabs>
 
 ```tsx
 <TextField status="success" placeholder="Статус success" />
@@ -361,9 +365,13 @@ export const TextFieldExampleWtihClearButton = () => {
 
 <TextFieldExampleStatus />
 
+</MdxTabs>
+
 ## Внешний вид
 
 Вы можете сделать поле незаметным: укажите `view = "clear"`. Данный вид используется, когда нужно создать кастомное поле ввода или обернуть его в контейнер. В этом случае поля с разными статусами и разной формы будут выглядеть одинаково.
+
+<MdxTabs>
 
 ```tsx
 <TextField view="default" placeholder="Самое обычное поле" />
@@ -372,7 +380,11 @@ export const TextFieldExampleWtihClearButton = () => {
 
 <TextFieldExampleView />
 
+</MdxTabs>
+
 Если хотите заблокировать поле, добавьте `disabled`.
+
+<MdxTabs>
 
 ```tsx
 <TextField placeholder="Неактивное поле" disabled />
@@ -380,12 +392,14 @@ export const TextFieldExampleWtihClearButton = () => {
 
 <TextFieldExampleViewDisabled />
 
-> Для создания hover эффекта для view="`clear`", управляйте внешним видом контейнера, в котором находится TextField
+</MdxTabs>
 
 ### Форма
 
-За форму поля отвечает свойство `form.` По умолчанию у полей скругленные края,
+За форму поля отвечает свойство `form`. По умолчанию у полей скругленные края,
 но ещё их можно сделать круглыми и квадратными.
+
+<MdxTabs>
 
 ```tsx
 <TextField placeholder="Default" />
@@ -395,15 +409,24 @@ export const TextFieldExampleWtihClearButton = () => {
 
 <TextFieldExampleFormBasic />
 
-Для комбинации поля с кнопкой используйте гибридные формы.
-У таких полей правая и левая грани могут отличаться.
+</MdxTabs>
+
+Для комбинации поля с кнопкой используйте гибридные формы. У таких полей правая и левая грани могут отличаться.
+
+Tакже можете использовать [`FieldGroup`](##LIBS.LIB.STAND/lib:uikit/stand:components-fieldgroup-stable) для автоматической расстановки формы для компонентов, при их групировки.
+
+<MdxTabs>
 
 ```tsx
-<TextField placeholder="Электронная почта" form="roundClear" style={{ width: '260px' }} />
-<Button form="brickRound" label="Подписаться" />
+<div className={cnMixFlex({ flex: 'flex' })}>
+  <TextField placeholder="Электронная почта" form="roundClear" />
+  <Button form="brickRound" label="Подписаться" />
+</div>
 ```
 
 <TextFieldExampleFormHybrid />
+
+</MdxTabs>
 
 ## Размеры
 
@@ -413,6 +436,8 @@ export const TextFieldExampleWtihClearButton = () => {
 Если вам нужно оставить шрифт и отступы неизменными и сделать поле уже или шире,
 поменяйте количество строк.
 
+<MdxTabs>
+
 ```tsx
 <TextField size="xs" placeholder="Размер XS" />
 <TextField size="s" placeholder="Размер S" />
@@ -421,6 +446,8 @@ export const TextFieldExampleWtihClearButton = () => {
 ```
 
 <TextFieldExampleSize />
+
+</MdxTabs>
 
 ## Маскирование
 
@@ -433,6 +460,8 @@ export const TextFieldExampleWtihClearButton = () => {
 Для того, чтобы указать значение в момент первого рендера, используйте defaultValue.
 Для того, чтобы изменить поле программно, используйтете setValue из хука.
 
+<MdxTabs>
+
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
 import React, { memo } from 'react';
@@ -442,8 +471,8 @@ import { TextField } from '@consta/uikit/TextFieldCanary';
 import { FieldGroup } from '@consta/uikit/FieldGroup';
 import { FieldLabel } from '@consta/uikit/FieldLabel';
 import { Button } from '@consta/uikit/Button';
+import { FieldWrapper } from '@consta/uikit/FieldComponents';
 
-const TextFieldMemo = memo(TextField);
 const defaultValue = '9876543210';
 
 export const TextFieldExampleMaskSetValue = () => {
@@ -452,10 +481,9 @@ export const TextFieldExampleMaskSetValue = () => {
   });
 
   return (
-    <>
-      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Телефон</FieldLabel>
+    <FieldWrapper label="Телефон">
       <FieldGroup>
-        <TextFieldMemo
+        <TextField
           placeholder="+7(999)999-99-99"
           inputRef={ref}
           defaultValue={defaultValue}
@@ -468,25 +496,27 @@ export const TextFieldExampleMaskSetValue = () => {
           title="Сбросить"
         />
       </FieldGroup>
-    </>
+    </FieldWrapper>
   );
 };
 ```
 
 <TextFieldExampleMaskSetValue />
 
+</MdxTabs>
+
 ## Примеры
 
-### Сумма
+### Формат числа
+
+<MdxTabs>
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
-import React, { memo } from 'react';
+import React from 'react';
 import { Text } from '@consta/uikit/Text';
 import { TextField } from '@consta/uikit/TextFieldCanary';
 import { cnMixSpace } from '@consta/uikit/MixSpace';
-
-const TextFieldMemo = memo(TextField);
 
 export const TextFieldExampleMaskAmount = () => {
   const { ref, value, unmaskedValue } = useIMask<
@@ -506,8 +536,8 @@ export const TextFieldExampleMaskAmount = () => {
   });
 
   return (
-    <Example>
-      <TextFieldMemo
+    <>
+      <TextField
         defaultValue="1000000"
         label="Сумма"
         placeholder="0"
@@ -523,23 +553,25 @@ export const TextFieldExampleMaskAmount = () => {
         </FieldLabel>
         <Text>{unmaskedValue}</Text>
       </>
-    </Example>
+    </>
   );
 };
 ```
 
 <TextFieldExampleMaskAmount />
 
+</MdxTabs>
+
 ### Телефон
+
+<MdxTabs>
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
-import React, { memo } from 'react';
+import React from 'react';
 import { Text } from '@consta/uikit/Text';
 import { TextField } from '@consta/uikit/TextFieldCanary';
 import { cnMixSpace } from '@consta/uikit/MixSpace';
-
-const TextFieldMemo = memo(TextField);
 
 export const TextFieldExampleMaskPhone = () => {
   const { ref, value, unmaskedValue } = useIMask<
@@ -550,8 +582,8 @@ export const TextFieldExampleMaskPhone = () => {
   });
 
   return (
-    <Example col={{ 1: 0, 3: 700 }}>
-      <TextFieldMemo
+    <>
+      <TextField
         label="Телефон"
         placeholder="+7(999)999-99-99"
         inputRef={ref}
@@ -567,23 +599,25 @@ export const TextFieldExampleMaskPhone = () => {
         </FieldLabel>
         <Text>{unmaskedValue}</Text>
       </>
-    </Example>
+    </>
   );
 };
 ```
 
 <TextFieldExampleMaskPhone />
 
+</MdxTabs>
+
 ### Паспорт
+
+<MdxTabs>
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
-import React, { memo } from 'react';
+import React from 'react';
 import { Text } from '@consta/uikit/Text';
 import { TextField } from '@consta/uikit/TextFieldCanary';
 import { cnMixSpace } from '@consta/uikit/MixSpace';
-
-const TextFieldMemo = memo(TextField);
 
 export const TextFieldExampleMaskPassport = () => {
   const { ref, value, unmaskedValue } = useIMask<
@@ -594,8 +628,8 @@ export const TextFieldExampleMaskPassport = () => {
   });
 
   return (
-    <Example col={{ 1: 0, 3: 700 }}>
-      <TextFieldMemo
+    <>
+      <TextField
         label="паспорт"
         placeholder="00 00 000000"
         defaultValue="1234567890"
@@ -611,14 +645,18 @@ export const TextFieldExampleMaskPassport = () => {
         </FieldLabel>
         <Text>{unmaskedValue}</Text>
       </>
-    </Example>
+    </>
   );
 };
 ```
 
 <TextFieldExampleMaskPassport />
 
+</MdxTabs>
+
 ### Банковский счет
+
+<MdxTabs>
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
@@ -627,7 +665,7 @@ import { Text } from '@consta/uikit/Text';
 import { TextField } from '@consta/uikit/TextFieldCanary';
 import { cnMixSpace } from '@consta/uikit/MixSpace';
 
-const TextFieldMemo = memo(TextField);
+const TextField = memo(TextField);
 
 export const TextFieldExampleMaskBankAccount = () => {
   const { ref, value, unmaskedValue } = useIMask<
@@ -639,7 +677,7 @@ export const TextFieldExampleMaskBankAccount = () => {
 
   return (
     <Example col={{ 1: 0, 3: 700 }}>
-      <TextFieldMemo
+      <TextField
         label="Номер карты"
         placeholder="1111 1111 1111 1111"
         defaultValue="1111222233334444"
@@ -661,6 +699,8 @@ export const TextFieldExampleMaskBankAccount = () => {
 ```
 
 <TextFieldExampleMaskBankAccount />
+
+</MdxTabs>
 
 ## Свойства
 

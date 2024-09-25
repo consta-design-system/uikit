@@ -112,6 +112,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       disabled,
       id,
       name,
+      autoFocus,
     };
 
     const textAreaNoAutoSizeProps = {
@@ -119,9 +120,8 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
     };
 
     const textAreaAutoSizeProps = {
-      minRows,
-      maxRows,
-      rows,
+      minRows: minRows || rows,
+      maxRows: maxRows || rows,
     };
 
     return (

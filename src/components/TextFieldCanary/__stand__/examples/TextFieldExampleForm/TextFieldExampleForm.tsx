@@ -1,6 +1,8 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
+import { cnMixFlex } from '##/mixs/MixFlex';
+
 import { Button } from '../../../../Button/Button';
 import { TextField } from '../../../TextField';
 
@@ -31,18 +33,10 @@ export const TextFieldExampleFormBasic = () => {
 };
 
 export function TextFieldExampleFormHybrid() {
-  const [value, setValue] = useState<string | null>(null);
-
   return (
     <Example col={1}>
-      <div>
-        <TextField
-          placeholder="Электронная почта"
-          form="roundClear"
-          value={value}
-          onChange={setValue}
-          style={{ width: '260px' }}
-        />
+      <div className={cnMixFlex({ flex: 'flex', direction: 'row' })}>
+        <TextField placeholder="Электронная почта" form="roundClear" />
         <Button form="brickRound" label="Подписаться" />
       </div>
     </Example>

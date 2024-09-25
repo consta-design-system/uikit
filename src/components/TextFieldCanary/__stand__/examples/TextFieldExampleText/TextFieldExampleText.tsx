@@ -19,7 +19,7 @@ export const TextFieldExampleTextPlaceholder = () => {
 };
 
 export const TextFieldExampleTextValue = () => {
-  const [value, setValue] = useState<string | null>('стопиццот');
+  const [value, setValue] = useState<string | null>('стопятьсот');
 
   return (
     <Example col={1}>
@@ -29,26 +29,17 @@ export const TextFieldExampleTextValue = () => {
 };
 
 export const TextFieldExampleTextLeft = () => {
-  const [value, setValue] = useState<string | null>(null);
-
   return (
     <Example col={1}>
-      <TextField leftSide="куда" value={value} onChange={setValue} />
-      <TextField leftSide="кому" value={value} onChange={setValue} />
+      <TextField leftSide="куда" />
+      <TextField leftSide="кому" />
     </Example>
   );
 };
 export const TextFieldExampleTextRight = () => {
-  const [value, setValue] = useState<string | null>(null);
-
   return (
     <Example col={1}>
-      <TextField
-        leftSide={IconDiamond}
-        rightSide="карат"
-        value={value}
-        onChange={setValue}
-      />
+      <TextField leftSide={IconDiamond} rightSide="карат" />
     </Example>
   );
 };

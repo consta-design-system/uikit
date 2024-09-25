@@ -30,6 +30,7 @@ export const FieldToggleVisiblePasswordButton = forwardRef<
         startIcon={IconEye}
         endIcon={IconEyeClose}
         active={active}
+        transition={125}
       />
     </FieldButton>
   );

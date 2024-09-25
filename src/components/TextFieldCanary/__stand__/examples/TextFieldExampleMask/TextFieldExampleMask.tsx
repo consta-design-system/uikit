@@ -1,16 +1,15 @@
 import { IconRevert } from '@consta/icons/IconRevert';
 import { Example } from '@consta/stand';
-import React, { memo } from 'react';
+import React from 'react';
 import { ReactMaskOpts, useIMask } from 'react-imask';
 
 import { Button } from '##/components/Button';
+import { FieldWrapper } from '##/components/FieldComponents';
 import { FieldGroup } from '##/components/FieldGroup';
 import { FieldLabel } from '##/components/FieldLabel';
 import { Text } from '##/components/Text';
 import { TextField } from '##/components/TextField';
 import { cnMixSpace } from '##/mixs/MixSpace';
-
-const TextFieldMemo = memo(TextField);
 
 export const TextFieldExampleMaskAmount = () => {
   const { ref, value, unmaskedValue } = useIMask<
@@ -31,7 +30,7 @@ export const TextFieldExampleMaskAmount = () => {
 
   return (
     <Example col={{ 1: 0, 3: 700 }}>
-      <TextFieldMemo
+      <TextField
         defaultValue="1000000"
         label="Сумма"
         placeholder="0"
@@ -61,7 +60,7 @@ export const TextFieldExampleMaskPhone = () => {
 
   return (
     <Example col={{ 1: 0, 3: 700 }}>
-      <TextFieldMemo
+      <TextField
         label="Телефон"
         placeholder="+7(999)999-99-99"
         inputRef={ref}
@@ -91,7 +90,7 @@ export const TextFieldExampleMaskPassport = () => {
 
   return (
     <Example col={{ 1: 0, 3: 700 }}>
-      <TextFieldMemo
+      <TextField
         label="паспорт"
         placeholder="00 00 000000"
         defaultValue="1234567890"
@@ -121,7 +120,7 @@ export const TextFieldExampleMaskBankAccount = () => {
 
   return (
     <Example col={{ 1: 0, 3: 700 }}>
-      <TextFieldMemo
+      <TextField
         label="Номер карты"
         placeholder="1111 1111 1111 1111"
         defaultValue="1111222233334444"
@@ -149,11 +148,10 @@ export const TextFieldExampleMaskSetValue = () => {
   });
 
   return (
-    <Example>
-      <>
-        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Телефон</FieldLabel>
+    <Example col={1}>
+      <FieldWrapper label="Телефон">
         <FieldGroup>
-          <TextFieldMemo
+          <TextField
             placeholder="+7(999)999-99-99"
             inputRef={ref}
             defaultValue={defaultValue}
@@ -166,7 +164,7 @@ export const TextFieldExampleMaskSetValue = () => {
             title="Сбросить"
           />
         </FieldGroup>
-      </>
+      </FieldWrapper>
     </Example>
   );
 };
