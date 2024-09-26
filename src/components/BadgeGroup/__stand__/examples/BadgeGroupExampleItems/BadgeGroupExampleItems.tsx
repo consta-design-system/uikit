@@ -18,6 +18,7 @@ const items: Item[] = [
   {
     text: 'ожидает',
     color: 'warning',
+    form: 'transparent',
   },
   {
     text: 'новый',

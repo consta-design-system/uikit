@@ -13,6 +13,7 @@ const items: BadgeGroupDefaultItem[] = [
     key: 2,
     label: 'ожидает',
     status: 'warning',
+    view: 'transparent',
   },
   {
     key: 3,
