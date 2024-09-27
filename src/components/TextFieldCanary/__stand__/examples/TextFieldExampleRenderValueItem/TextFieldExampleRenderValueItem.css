@@ -1,0 +1,11 @@
+.TagBase.TextFieldExampleRenderValueItem {
+  &-Item {
+    &_disabled {
+      background-color: var(--color-control-bg-disable);
+
+      & > * {
+        color: var(--color-control-typo-disable);
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { Example } from '@consta/stand';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { TextField } from '../../../TextField';
 
@@ -31,6 +31,30 @@ export const TextFieldExampleTypePassword = () => {
   return (
     <Example col={1}>
       <TextField type="password" placeholder="Пароль" />
+    </Example>
+  );
+};
+
+export const TextFieldExampleTypeTextArray = () => {
+  const [value, setValue] = useState<string[] | null>(null);
+  const [stringValue, setStringValue] = useState<string | null>(null);
+
+  const onChange = (value: string[] | null) => {
+    setStringValue(null);
+    setValue(value);
+  };
+
+  return (
+    <Example col={1}>
+      <TextField
+        placeholder="Введите текст и нажмите Enter"
+        value={value}
+        onChange={onChange}
+        type="textarray"
+        withClearButton
+        inputValue={stringValue}
+        onInputChange={setStringValue}
+      />
     </Example>
   );
 };

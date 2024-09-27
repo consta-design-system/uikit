@@ -32,11 +32,7 @@ export type TextFieldPropOnChange<TYPE> = (
   params: TextFieldOnChangeArguments,
 ) => void;
 
-export type TextFieldPropView = FieldPropView;
-export type TextFieldPropForm = FieldPropForm;
-export type TextFieldPropStatus = FieldPropStatus;
-
-type TextFieldPropsTypetextarea<TYPE> = TYPE extends 'textarea'
+type TextFieldPropsTypeTextArea<TYPE> = TYPE extends 'textarea'
   ? {
       resize?: boolean | 'auto';
     } & (
@@ -51,6 +47,22 @@ type TextFieldPropsTypetextarea<TYPE> = TYPE extends 'textarea'
           maxRows?: number;
         }
     )
+  : {};
+
+export type TextFieldPropRenderValueItem = (props: {
+  item: string;
+  index: number;
+  onRemove: (e: React.MouseEvent) => void;
+  size: FieldPropSize;
+  disabled: boolean | undefined;
+}) => React.ReactNode;
+
+type TextFieldPropsTypeTextArray<TYPE> = TYPE extends 'textarray'
+  ? {
+      renderValueItem?: TextFieldPropRenderValueItem;
+      inputValue?: string | null;
+      onInputChange?: TextFieldPropOnChange<string>;
+    }
   : {};
 
 type TextFieldPropsTypeNumber<TYPE> = TYPE extends 'number'
@@ -79,9 +91,9 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
     mixLength?: number;
     maxLength?: number;
     size?: TextFieldPropSize;
-    view?: TextFieldPropView;
-    form?: TextFieldPropForm;
-    status?: TextFieldPropStatus;
+    view?: FieldPropView;
+    form?: FieldPropForm;
+    status?: FieldPropStatus;
     onFocus?: React.FocusEventHandler<HTMLElement>;
     onBlur?: React.FocusEventHandler<HTMLElement>;
     autoFocus?: boolean;
@@ -105,7 +117,8 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
   },
   HTMLDivElement
 > &
-  TextFieldPropsTypetextarea<TYPE> &
+  TextFieldPropsTypeTextArea<TYPE> &
+  TextFieldPropsTypeTextArray<TYPE> &
   TextFieldPropsTypeNumber<TYPE>;
 
 export type TextFieldComponent = <TYPE extends string>(

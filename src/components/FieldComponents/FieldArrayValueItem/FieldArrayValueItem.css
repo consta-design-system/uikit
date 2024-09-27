@@ -8,7 +8,6 @@
 
   &_disabled {
     background-color: var(--color-control-bg-disable);
-    pointer-events: none;
 
     & > * {
       color: var(--color-control-typo-disable);

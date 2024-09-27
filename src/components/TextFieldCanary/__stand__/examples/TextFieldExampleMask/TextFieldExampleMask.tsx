@@ -1,6 +1,6 @@
 import { IconRevert } from '@consta/icons/IconRevert';
 import { Example } from '@consta/stand';
-import React from 'react';
+import React, { useState } from 'react';
 import { ReactMaskOpts, useIMask } from 'react-imask';
 
 import { Button } from '##/components/Button';
@@ -8,8 +8,9 @@ import { FieldWrapper } from '##/components/FieldComponents';
 import { FieldGroup } from '##/components/FieldGroup';
 import { FieldLabel } from '##/components/FieldLabel';
 import { Text } from '##/components/Text';
-import { TextField } from '##/components/TextField';
 import { cnMixSpace } from '##/mixs/MixSpace';
+
+import { TextField } from '../../../TextField';
 
 export const TextFieldExampleMaskAmount = () => {
   const { ref, value, unmaskedValue } = useIMask<
@@ -30,12 +31,7 @@ export const TextFieldExampleMaskAmount = () => {
 
   return (
     <Example col={{ 1: 0, 3: 700 }}>
-      <TextField
-        defaultValue="1000000"
-        label="Сумма"
-        placeholder="0"
-        inputRef={ref}
-      />
+      <TextField defaultValue="1000000" placeholder="0" inputRef={ref} />
       <>
         <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
         <Text>{value}</Text>
@@ -61,7 +57,6 @@ export const TextFieldExampleMaskPhone = () => {
   return (
     <Example col={{ 1: 0, 3: 700 }}>
       <TextField
-        label="Телефон"
         placeholder="+7(999)999-99-99"
         inputRef={ref}
         defaultValue="9876543210"
@@ -91,7 +86,6 @@ export const TextFieldExampleMaskPassport = () => {
   return (
     <Example col={{ 1: 0, 3: 700 }}>
       <TextField
-        label="паспорт"
         placeholder="00 00 000000"
         defaultValue="1234567890"
         inputRef={ref}
@@ -121,7 +115,6 @@ export const TextFieldExampleMaskBankAccount = () => {
   return (
     <Example col={{ 1: 0, 3: 700 }}>
       <TextField
-        label="Номер карты"
         placeholder="1111 1111 1111 1111"
         defaultValue="1111222233334444"
         inputRef={ref}
@@ -164,6 +157,28 @@ export const TextFieldExampleMaskSetValue = () => {
             title="Сбросить"
           />
         </FieldGroup>
+      </FieldWrapper>
+    </Example>
+  );
+};
+
+export const TextFieldExampleMaskArrayEmails = () => {
+  const [value, setValue] = useState<string[] | null>(null);
+  const { ref } = useIMask<HTMLInputElement, ReactMaskOpts>({
+    // mask: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,8}$/,
+
+    mask: /^\S*@?\S*$/,
+  });
+
+  return (
+    <Example col={1}>
+      <FieldWrapper label="Серийные номера">
+        <TextField
+          type="textarray"
+          inputRef={ref}
+          value={value}
+          onChange={setValue}
+        />
       </FieldWrapper>
     </Example>
   );

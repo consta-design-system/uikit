@@ -33,6 +33,7 @@ import {
   TextFieldExampleTypeTextarea,
   TextFieldExampleTypeNumber,
   TextFieldExampleTypePassword,
+  TextFieldExampleTypeTextArray,
 } from './examples/TextFieldExampleType/TextFieldExampleType';
 import { TextFieldExampleRequired } from './examples/TextFieldExampleRequired/TextFieldExampleRequired';
 import { TextFieldExampleStepArray } from './examples/TextFieldExampleStepArray/TextFieldExampleStepArray';
@@ -43,11 +44,14 @@ import {
   TextFieldExampleMaskPassport,
   TextFieldExampleMaskBankAccount,
   TextFieldExampleMaskSetValue,
+  TextFieldExampleMaskArrayEmails,
 } from './examples/TextFieldExampleMask/TextFieldExampleMask';
 import {
   TextFieldExampleAutoFocus,
   TextFieldExampleProgramFocus,
 } from './examples/TextFieldExampleAutoFocus/TextFieldExampleAutoFocus';
+
+import { TextFieldExampleRenderValueItem } from './examples/TextFieldExampleRenderValueItem/TextFieldExampleRenderValueItem';
 
 <MdxMenu>
 
@@ -91,7 +95,7 @@ import {
 Можно имортировать все типы сразу
 
 ```tsx
-import { TextField } from '@consta/uikit/TextField';
+import { TextField } from '@consta/uikit/TextFieldCanary';
 ```
 
 Или по каждому типу в отдельности
@@ -103,7 +107,7 @@ import {
   TextFieldTypeText,
   TextFieldTypeTextArea,
   TextFieldTypeTextArray,
-} from '@consta/uikit/TextField';
+} from '@consta/uikit/TextFieldCanary';
 ```
 
 ## Тип поля
@@ -226,6 +230,101 @@ import {
 ```
 
 <TextFieldExampleTypePassword />
+
+</MdxTabs>
+
+## Поле для ввода массива строк: `type="textarray"`
+
+Дает возможность вводить массивы строк.
+
+<MdxTabs>
+
+```tsx
+export const TextFieldExampleTypeTextArray = () => {
+  const [value, setValue] = useState<string[] | null>(null);
+
+  return (
+    <TextField
+      placeholder="Введите текст и нажмите Enter"
+      value={value}
+      onChange={setValue}
+      type="textarray"
+      withClearButton
+    />
+  );
+};
+```
+
+<TextFieldExampleTypeTextArray />
+
+</MdxTabs>
+
+### Ренддер значения
+
+Вы можете поменять рендер каждого элемента значения поля, используйте свойсво `renderValueItem`.
+
+<MdxTabs>
+
+```tsx
+import { Tag } from '@consta/uikit/Tag';
+import React, { useState } from 'react';
+import { IconRecord } from '@consta/icons/IconRecord';
+import {
+  TextField,
+  TextFieldPropRenderValueItem,
+} from '@consta/uikit/TextFieldCanary';
+
+const cnTextFieldExampleRenderValueItem = cn('TextFieldExampleRenderValueItem');
+
+const RenderValueItem: TextFieldPropRenderValueItem = ({
+  item,
+  index,
+  disabled,
+  onRemove,
+  size,
+}) => (
+  <Tag
+    icon={IconRecord}
+    key={index}
+    mode="cancel"
+    className={cnTextFieldExampleRenderValueItem({ disabled })}
+    label={item}
+    onCancel={onRemove}
+    size={size}
+    cancelButtonTabIndex={-1}
+  />
+);
+
+export const TextFieldExampleRenderValueItem = () => {
+  const [value, setValue] = useState<string[] | null>(null);
+
+  return (
+    <TextField
+      value={value}
+      onChange={setValue}
+      type="textarray"
+      withClearButton
+      renderValueItem={RenderValueItem}
+    />
+  );
+};
+```
+
+```css
+.TagBase.TextFieldExampleRenderValueItem {
+  &-Item {
+    &_disabled {
+      background-color: var(--color-control-bg-disable);
+
+      & > * {
+        color: var(--color-control-typo-disable);
+      }
+    }
+  }
+}
+```
+
+<TextFieldExampleRenderValueItem />
 
 </MdxTabs>
 
@@ -537,12 +636,7 @@ export const TextFieldExampleMaskAmount = () => {
 
   return (
     <>
-      <TextField
-        defaultValue="1000000"
-        label="Сумма"
-        placeholder="0"
-        inputRef={ref}
-      />
+      <TextField defaultValue="1000000" placeholder="0" inputRef={ref} />
       <>
         <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
         <Text>{value}</Text>
@@ -584,7 +678,6 @@ export const TextFieldExampleMaskPhone = () => {
   return (
     <>
       <TextField
-        label="Телефон"
         placeholder="+7(999)999-99-99"
         inputRef={ref}
         defaultValue="9876543210"
@@ -630,7 +723,6 @@ export const TextFieldExampleMaskPassport = () => {
   return (
     <>
       <TextField
-        label="паспорт"
         placeholder="00 00 000000"
         defaultValue="1234567890"
         inputRef={ref}
@@ -678,7 +770,6 @@ export const TextFieldExampleMaskBankAccount = () => {
   return (
     <Example col={{ 1: 0, 3: 700 }}>
       <TextField
-        label="Номер карты"
         placeholder="1111 1111 1111 1111"
         defaultValue="1111222233334444"
         inputRef={ref}
@@ -701,6 +792,10 @@ export const TextFieldExampleMaskBankAccount = () => {
 <TextFieldExampleMaskBankAccount />
 
 </MdxTabs>
+
+## ddd
+
+<TextFieldExampleMaskArrayEmails />
 
 ## Свойства
 

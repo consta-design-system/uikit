@@ -46,7 +46,7 @@ const FieldArrayValueInlineControlRender = (
     className,
     inputRef: inputRefProp,
     inputMaxLength,
-    value,
+    value = [],
     renderValue,
     onInputFocus,
     onInputBlur,
@@ -61,6 +61,7 @@ const FieldArrayValueInlineControlRender = (
     disabled,
     style,
     size = 'm',
+    placeholder,
     ...otherProps
   } = props;
 
@@ -113,6 +114,7 @@ const FieldArrayValueInlineControlRender = (
         onKeyUpCapture={onInputKeyUpCapture}
         disabled={disabled}
         type="text"
+        placeholder={value.length ? undefined : placeholder}
       />
       <div
         ref={fakeInputRef}

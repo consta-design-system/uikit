@@ -19,17 +19,9 @@ type FieldArrayValueItemProps = PropsWithHTMLAttributesAndRef<
 
 export const cnFieldArrayValueItem = cn('FieldArrayValueItem');
 
-const handleRemoveDefault = () => {};
-
 export const FieldArrayValueItem: React.FC<FieldArrayValueItemProps> =
   forwardRef((props, ref) => {
-    const {
-      onRemove = handleRemoveDefault,
-      size,
-      label,
-      disabled,
-      ...otherProps
-    } = props;
+    const { onRemove, size, label, disabled, ...otherProps } = props;
 
     return (
       <TagBase
@@ -38,7 +30,7 @@ export const FieldArrayValueItem: React.FC<FieldArrayValueItemProps> =
         className={cnFieldArrayValueItem({ disabled })}
         ref={ref}
         label={label}
-        onCancel={onRemove}
+        onCancel={disabled ? undefined : onRemove}
         size={size}
         cancelButtonTabIndex={-1}
         view="filled"

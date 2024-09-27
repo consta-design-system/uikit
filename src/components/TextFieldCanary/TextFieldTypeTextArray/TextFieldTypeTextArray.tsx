@@ -22,9 +22,25 @@ import { getElementWidth, useResizeObserved } from '##/hooks/useResizeObserved';
 import { getStyleProps } from '##/hooks/useStyleProps';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 
-import { TextFieldTypeComponent } from '../types';
+import { TextFieldPropRenderValueItem, TextFieldTypeComponent } from '../types';
 import { useTextField } from '../useTextField';
 import { cnTextFieldTypeTextArray } from './cnTextFieldTypeTextArray';
+
+const defaultRenderValueItem: TextFieldPropRenderValueItem = ({
+  item,
+  index,
+  size,
+  disabled,
+  onRemove,
+}) => (
+  <FieldArrayValueItem
+    key={index}
+    size={size}
+    label={item}
+    disabled={disabled}
+    onRemove={onRemove}
+  />
+);
 
 export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
   forwardRef((props, componentRef) => {
@@ -57,6 +73,9 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       iconSize,
       onClick,
       style,
+      inputValue,
+      renderValueItem = defaultRenderValueItem,
+      onInputChange,
       // onkey props
       onKeyDown,
       onKeyDownCapture,
@@ -72,19 +91,19 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       handleClear: inputHandleClear,
       handleFocus,
       focused,
-      withValue,
+      withValue: withInputValue,
       ref,
       inputRef,
       handleClick,
     } = useTextField({
       onClick,
-      onChange: undefined,
+      onChange: onInputChange,
       onBlur,
       onFocus,
       disabled,
-      id,
-      name,
     });
+
+    const withValue = withInputValue || !!value?.length;
 
     const controllRef = useRef<HTMLDivElement>(null);
     const scrollWrapperRef = useRef<HTMLDivElement>(null);
@@ -106,7 +125,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
     const handleClear = useCallback(
       (e: React.MouseEvent<HTMLButtonElement>) => {
         mutableRefs.current[1](e);
-        if (value?.length) {
+        if (mutableRefs.current[2]?.length) {
           mutableRefs.current[0]?.(null, { e });
         }
       },
@@ -125,7 +144,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
               },
             );
 
-            e.target.value = '';
+            // e.target.value = '';
 
             if (controllRef.current) {
               controllRef.current.scrollTo({
@@ -159,7 +178,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
 
     const rightSlotsRefs = useRefs<HTMLDivElement>(2, [
       !!rightSide,
-      withClearButton && !disabled && (withValue || value?.length),
+      withClearButton && !disabled && withValue,
     ]);
 
     const controlSize = useComponentSize(controllRef);
@@ -179,6 +198,12 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       }
     }, [controlSize.height]);
 
+    useEffect(() => {
+      if (inputRef.current && inputRef.current.value !== inputValue) {
+        inputRef.current.value = inputValue || '';
+      }
+    }, [inputValue, inputRef.current]);
+
     return (
       <FieldControlLayout
         {...otherProps}
@@ -188,7 +213,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
         size={size}
         leftSide={renderSide(leftSide, size, iconSize)}
         rightSide={[
-          withClearButton && !disabled && (withValue || value?.length) && (
+          withClearButton && !disabled && withValue && (
             <FieldClearButton size={size} onClick={handleClear} />
           ),
           renderSide(rightSide, size, iconSize),
@@ -219,22 +244,23 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
           <FieldArrayValueInlineControl
             size={size}
             inputRef={useForkRef([inputRef, inputRefProp])}
-            value={value ?? []}
+            value={value ?? undefined}
             onInputFocus={handleFocus}
             onInputBlur={handleBlur}
             onInputChange={handleChange}
             inputAutoFocus={autoFocus}
             onInputKeyDown={handleInputKeyDown}
             ref={controllRef}
-            renderValue={(item, index) => (
-              <FieldArrayValueItem
-                key={index}
-                size={size}
-                label={item}
-                disabled={disabled}
-                onRemove={getRemoveItem(index)}
-              />
-            )}
+            placeholder={placeholder}
+            renderValue={(item, index) =>
+              renderValueItem({
+                item,
+                index,
+                size,
+                disabled,
+                onRemove: getRemoveItem(index),
+              })
+            }
           />
         </div>
       </FieldControlLayout>

@@ -8,8 +8,8 @@ export type FieldArrayValueInlineControlProps<ITEM> =
   PropsWithHTMLAttributesAndRef<
     {
       children?: never;
-      value: ITEM[];
-      renderValue: (item: ITEM, index: number) => React.ReactElement | null;
+      value?: ITEM[];
+      renderValue: (item: ITEM, index: number) => React.ReactNode;
       inputMaxLength?: number;
       inputValue?: string;
       inputDafeultValue?: string;
@@ -25,6 +25,7 @@ export type FieldArrayValueInlineControlProps<ITEM> =
       onInputKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
       onInputKeyUpCapture?: React.KeyboardEventHandler<HTMLInputElement>;
       disabled?: boolean;
+      placeholder?: string;
       size?: FieldPropSize;
     },
     HTMLDivElement
