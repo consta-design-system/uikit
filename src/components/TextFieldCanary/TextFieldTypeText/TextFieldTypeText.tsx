@@ -46,6 +46,13 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
       onKeyDownCapture,
       onKeyUp,
       onKeyUpCapture,
+      onCopy,
+      onCopyCapture,
+      onCut,
+      onCutCapture,
+      onPaste,
+      onPasteCapture,
+      onClear,
       ...otherProps
     } = props;
 
@@ -65,6 +72,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
       onBlur,
       onFocus,
       disabled,
+      onClear,
     });
 
     return (
@@ -95,7 +103,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
           onChange={handleChange}
           onFocus={handleFocus}
           defaultValue={defaultValue || undefined}
-          value={value || undefined}
+          value={value === null ? '' : value}
           ref={useForkRef([inputRefProp, inputRef])}
           readOnly={readOnly}
           tabIndex={tabIndex}
@@ -109,6 +117,12 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
           type={type}
           id={id}
           name={name}
+          onCopy={onCopy}
+          onCopyCapture={onCopyCapture}
+          onCut={onCut}
+          onCutCapture={onCutCapture}
+          onPaste={onPaste}
+          onPasteCapture={onPasteCapture}
         />
       </FieldControlLayout>
     );

@@ -32,6 +32,10 @@ export type TextFieldPropOnChange<TYPE> = (
   params: TextFieldOnChangeArguments,
 ) => void;
 
+type InputType<TYPE extends string> = TYPE extends 'textarea'
+  ? HTMLTextAreaElement
+  : HTMLInputElement;
+
 type TextFieldPropsTypeTextArea<TYPE> = TYPE extends 'textarea'
   ? {
       resize?: boolean | 'auto';
@@ -114,6 +118,12 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
     onKeyDownCapture?: React.KeyboardEventHandler;
     onClear?: React.MouseEventHandler<HTMLButtonElement>;
     inputRef?: TextFieldPropInputRef<TYPE>;
+    onCopy?: React.ClipboardEventHandler<InputType<TYPE>>;
+    onCopyCapture?: React.ClipboardEventHandler<InputType<TYPE>>;
+    onCut?: React.ClipboardEventHandler<InputType<TYPE>>;
+    onCutCapture?: React.ClipboardEventHandler<InputType<TYPE>>;
+    onPaste?: React.ClipboardEventHandler<InputType<TYPE>>;
+    onPasteCapture?: React.ClipboardEventHandler<InputType<TYPE>>;
   },
   HTMLDivElement
 > &

@@ -48,6 +48,13 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       onKeyDownCapture,
       onKeyUp,
       onKeyUpCapture,
+      onCopy,
+      onCopyCapture,
+      onCut,
+      onCutCapture,
+      onPaste,
+      onPasteCapture,
+      onClear,
       ...otherProps
     } = props;
 
@@ -67,6 +74,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       onBlur,
       onFocus,
       disabled,
+      onClear,
     });
 
     const [visiblePassword, setVisiblePassword] = useFlag();
@@ -106,7 +114,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
           onChange={handleChange}
           onFocus={handleFocus}
           defaultValue={defaultValue || undefined}
-          value={value || undefined}
+          value={value === null ? '' : value}
           ref={useForkRef([inputRefProp, inputRef])}
           readOnly={readOnly}
           tabIndex={tabIndex}
@@ -119,6 +127,12 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
           disabled={disabled}
           id={id}
           name={name}
+          onCopy={onCopy}
+          onCopyCapture={onCopyCapture}
+          onCut={onCut}
+          onCutCapture={onCutCapture}
+          onPaste={onPaste}
+          onPasteCapture={onPasteCapture}
         />
       </FieldControlLayout>
     );

@@ -81,7 +81,13 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       onKeyDownCapture,
       onKeyUp,
       onKeyUpCapture,
-
+      onCopy,
+      onCopyCapture,
+      onCut,
+      onCutCapture,
+      onPaste,
+      onPasteCapture,
+      onClear,
       ...otherProps
     } = props;
 
@@ -101,6 +107,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       onBlur,
       onFocus,
       disabled,
+      onClear,
     });
 
     const withValue = withInputValue || !!value?.length;
@@ -261,6 +268,12 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
                 onRemove: getRemoveItem(index),
               })
             }
+            onCopy={onCopy}
+            onCopyCapture={onCopyCapture}
+            onCut={onCut}
+            onCutCapture={onCutCapture}
+            onPaste={onPaste}
+            onPasteCapture={onPasteCapture}
           />
         </div>
       </FieldControlLayout>

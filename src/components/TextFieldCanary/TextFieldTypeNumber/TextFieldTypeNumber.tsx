@@ -56,6 +56,13 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       onKeyDownCapture,
       onKeyUp,
       onKeyUpCapture,
+      onCopy,
+      onCopyCapture,
+      onCut,
+      onCutCapture,
+      onPaste,
+      onPasteCapture,
+      onClear,
       ...otherProps
     } = props;
 
@@ -77,6 +84,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       onBlur,
       onFocus,
       disabled,
+      onClear,
     });
 
     const sortSteps = useSortSteps({ step, min, max });
@@ -180,7 +188,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
           onChange={handleChange}
           onFocus={handleFocus}
           defaultValue={defaultValue || undefined}
-          value={value || undefined}
+          value={value === null ? '' : value}
           ref={useForkRef([inputRefProp, inputRef])}
           readOnly={readOnly}
           tabIndex={tabIndex}
@@ -196,6 +204,12 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
           min={min}
           id={id}
           name={name}
+          onCopy={onCopy}
+          onCopyCapture={onCopyCapture}
+          onCut={onCut}
+          onCutCapture={onCutCapture}
+          onPaste={onPaste}
+          onPasteCapture={onPasteCapture}
         />
       </FieldControlLayout>
     );

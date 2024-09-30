@@ -60,6 +60,13 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       onKeyDownCapture,
       onKeyUp,
       onKeyUpCapture,
+      onCopy,
+      onCopyCapture,
+      onCut,
+      onCutCapture,
+      onPaste,
+      onPasteCapture,
+      onClear,
       ...otherProps
     } = props;
 
@@ -79,6 +86,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       onBlur,
       onFocus,
       disabled,
+      onClear,
     });
 
     const rightSlotsRefs = useRefs<HTMLDivElement>(2, [
@@ -99,7 +107,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       'onChange': handleChange,
       'onFocus': handleFocus,
       'defaultValue': defaultValue || undefined,
-      'value': value || undefined,
+      'value': value === null ? '' : value,
       'ref': useForkRef([inputRefProp, inputRef]),
       readOnly,
       tabIndex,
@@ -113,6 +121,12 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       id,
       name,
       autoFocus,
+      onCopy,
+      onCopyCapture,
+      onCut,
+      onCutCapture,
+      onPaste,
+      onPasteCapture,
     };
 
     const textAreaNoAutoSizeProps = {

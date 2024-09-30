@@ -62,6 +62,12 @@ const FieldArrayValueInlineControlRender = (
     style,
     size = 'm',
     placeholder,
+    onCopy,
+    onCopyCapture,
+    onCut,
+    onCutCapture,
+    onPaste,
+    onPasteCapture,
     ...otherProps
   } = props;
 
@@ -115,6 +121,12 @@ const FieldArrayValueInlineControlRender = (
         disabled={disabled}
         type="text"
         placeholder={value.length ? undefined : placeholder}
+        onCopy={onCopy}
+        onCopyCapture={onCopyCapture}
+        onCut={onCut}
+        onCutCapture={onCutCapture}
+        onPaste={onPaste}
+        onPasteCapture={onPasteCapture}
       />
       <div
         ref={fakeInputRef}

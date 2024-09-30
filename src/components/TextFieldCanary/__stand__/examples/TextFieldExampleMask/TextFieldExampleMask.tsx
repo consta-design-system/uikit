@@ -1,6 +1,6 @@
 import { IconRevert } from '@consta/icons/IconRevert';
 import { Example } from '@consta/stand';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ReactMaskOpts, useIMask } from 'react-imask';
 
 import { Button } from '##/components/Button';
@@ -163,21 +163,41 @@ export const TextFieldExampleMaskSetValue = () => {
 };
 
 export const TextFieldExampleMaskArrayEmails = () => {
+  const mask = 'SN-000000';
   const [value, setValue] = useState<string[] | null>(null);
-  const { ref } = useIMask<HTMLInputElement, ReactMaskOpts>({
-    // mask: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,8}$/,
+  const [error, setError] = useState<string>('');
+  const { ref } = useIMask<HTMLInputElement, ReactMaskOpts>({ mask });
 
-    mask: /^\S*@?\S*$/,
-  });
+  const onChange = (value: string[] | null) => {
+    if (
+      (value?.length && value[value.length - 1].length === mask.length) ||
+      value?.length === 0
+    ) {
+      setValue(value);
+      setError('');
+      if (ref.current?.value) {
+        ref.current.value = '';
+      }
+    } else {
+      setError(`Пожалуйста введите серийный номер в формате "${mask}"`);
+    }
+  };
+
+  const onInputChange = () => setError('');
+
+  const status = error ? 'alert' : undefined;
 
   return (
     <Example col={1}>
-      <FieldWrapper label="Серийные номера">
+      <FieldWrapper label="Серийные номера" caption={error} status={status}>
         <TextField
           type="textarray"
           inputRef={ref}
           value={value}
-          onChange={setValue}
+          onChange={onChange}
+          onInputChange={onInputChange}
+          status={status}
+          placeholder={mask}
         />
       </FieldWrapper>
     </Example>

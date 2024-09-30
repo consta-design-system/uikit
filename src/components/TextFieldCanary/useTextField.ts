@@ -15,12 +15,14 @@ export const useTextField = <
   onBlur,
   onFocus,
   disabled,
+  onClear,
 }: {
   onClick: React.MouseEventHandler<HTMLDivElement> | undefined;
   onChange: TextFieldPropOnChange<string> | undefined;
   onBlur: React.FocusEventHandler<HTMLElement> | undefined;
   onFocus: React.FocusEventHandler<HTMLElement> | undefined;
   disabled: boolean | undefined;
+  onClear: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<INPUT_ELEMENT>(null);
@@ -33,6 +35,7 @@ export const useTextField = <
     onBlur,
     onFocus,
     disabled,
+    onClear,
   ] as const);
 
   const handleFocus: React.FocusEventHandler<HTMLElement> = useCallback((e) => {
@@ -50,11 +53,13 @@ export const useTextField = <
       return;
     }
 
-    mutableRefs.current[0]?.(null, { e });
-
-    if (inputRef.current) {
-      inputRef.current.value = '';
-      setWithValue.off();
+    if (mutableRefs.current[5]) {
+      mutableRefs.current[5]?.(e);
+    } else {
+      mutableRefs.current[0]?.(null, { e });
+      if (inputRef.current && inputRef.current.value !== '') {
+        inputRef.current.value = '';
+      }
     }
   }, []);
 
@@ -66,11 +71,7 @@ export const useTextField = <
 
       mutableRefs.current[0]?.(e.target.value || null, { e });
 
-      if (e.target.value) {
-        setWithValue.on();
-      } else {
-        setWithValue.off();
-      }
+      setWithValue[e.target.value ? 'on' : 'off']();
     },
     [],
   );
