@@ -23,10 +23,10 @@
   --font-weight-text-thin: 100;
   --font-weight-text-extralight: 200;
   --font-weight-text-light: 300;
-  --font-weight-text-regular: normal;
+  --font-weight-text-regular: 400;
   --font-weight-text-medium: 500;
   --font-weight-text-semibold: 600;
-  --font-weight-text-bold: bold;
+  --font-weight-text-bold: 700;
   --font-weight-text-extrabold: 800;
   --font-weight-text-black: 900;
 }
