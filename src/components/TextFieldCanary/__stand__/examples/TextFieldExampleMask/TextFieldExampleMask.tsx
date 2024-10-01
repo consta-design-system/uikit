@@ -1,6 +1,6 @@
 import { IconRevert } from '@consta/icons/IconRevert';
 import { Example } from '@consta/stand';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ReactMaskOpts, useIMask } from 'react-imask';
 
 import { Button } from '##/components/Button';
@@ -162,28 +162,34 @@ export const TextFieldExampleMaskSetValue = () => {
   );
 };
 
-export const TextFieldExampleMaskArrayEmails = () => {
+export const TextFieldExampleMaskArraySn = () => {
   const mask = 'SN-000000';
   const [value, setValue] = useState<string[] | null>(null);
   const [error, setError] = useState<string>('');
-  const { ref } = useIMask<HTMLInputElement, ReactMaskOpts>({ mask });
+  const { ref, setValue: setInputValue } = useIMask<
+    HTMLInputElement,
+    ReactMaskOpts
+  >({ mask });
 
-  const onChange = (value: string[] | null) => {
+  const onChange = useCallback((value: string[] | null) => {
     if (
       (value?.length && value[value.length - 1].length === mask.length) ||
       value?.length === 0
     ) {
       setValue(value);
       setError('');
-      if (ref.current?.value) {
-        ref.current.value = '';
-      }
+      setInputValue('');
     } else {
       setError(`Пожалуйста введите серийный номер в формате "${mask}"`);
     }
-  };
+  }, []);
 
-  const onInputChange = () => setError('');
+  const onInputChange = useCallback(() => setError(''), []);
+
+  const onClear = useCallback(() => {
+    setValue(null);
+    setInputValue('');
+  }, []);
 
   const status = error ? 'alert' : undefined;
 
@@ -198,6 +204,8 @@ export const TextFieldExampleMaskArrayEmails = () => {
           onInputChange={onInputChange}
           status={status}
           placeholder={mask}
+          withClearButton
+          onClear={onClear}
         />
       </FieldWrapper>
     </Example>

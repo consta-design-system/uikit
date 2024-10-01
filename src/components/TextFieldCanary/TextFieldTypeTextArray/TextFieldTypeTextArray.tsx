@@ -88,6 +88,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       onPaste,
       onPasteCapture,
       onClear,
+
       ...otherProps
     } = props;
 
@@ -107,7 +108,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       onBlur,
       onFocus,
       disabled,
-      onClear,
+      onClear: undefined,
     });
 
     const withValue = withInputValue || !!value?.length;
@@ -150,8 +151,6 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
                 e,
               },
             );
-
-            // e.target.value = '';
 
             if (controllRef.current) {
               controllRef.current.scrollTo({
@@ -221,7 +220,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
         leftSide={renderSide(leftSide, size, iconSize)}
         rightSide={[
           withClearButton && !disabled && withValue && (
-            <FieldClearButton size={size} onClick={handleClear} />
+            <FieldClearButton size={size} onClick={onClear || handleClear} />
           ),
           renderSide(rightSide, size, iconSize),
         ]}
@@ -274,6 +273,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onCutCapture={onCutCapture}
             onPaste={onPaste}
             onPasteCapture={onPasteCapture}
+            inputTabIndex={tabIndex}
           />
         </div>
       </FieldControlLayout>

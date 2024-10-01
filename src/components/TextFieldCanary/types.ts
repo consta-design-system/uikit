@@ -14,22 +14,17 @@ export type TextFieldPropValue<TYPE> = TYPE extends 'textarray'
   ? string[] | null
   : string | null;
 
-export type TextFieldPropDafaultValue<TYPE> = TYPE extends 'textarray'
+export type TextFieldPropDefaultValue<TYPE> = TYPE extends 'textarray'
   ? never
   : string | null;
 
-export type TextFieldPropName = string;
-export type TextFieldPropId = string;
-
 export type TextFieldPropSize = FieldPropSize;
-
-export type TextFieldOnChangeArguments = {
-  e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
-};
 
 export type TextFieldPropOnChange<TYPE> = (
   value: TextFieldPropValue<TYPE>,
-  params: TextFieldOnChangeArguments,
+  params: {
+    e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
+  },
 ) => void;
 
 type InputType<TYPE extends string> = TYPE extends 'textarea'
@@ -78,18 +73,14 @@ type TextFieldPropsTypeNumber<TYPE> = TYPE extends 'number'
     }
   : {};
 
-type TextFieldPropInputRef<TYPE> = TYPE extends 'textarea'
-  ? React.Ref<HTMLTextAreaElement>
-  : React.Ref<HTMLInputElement>;
-
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
   {
     className?: string;
     value?: TextFieldPropValue<TYPE>;
-    defaultValue?: TextFieldPropDafaultValue<TYPE>;
+    defaultValue?: TextFieldPropDefaultValue<TYPE>;
     onChange?: TextFieldPropOnChange<TYPE>;
-    id?: TextFieldPropId;
-    name?: TextFieldPropName;
+    id?: string;
+    name?: string;
     type?: TYPE;
     disabled?: boolean;
     mixLength?: number;
@@ -98,8 +89,8 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
     view?: FieldPropView;
     form?: FieldPropForm;
     status?: FieldPropStatus;
-    onFocus?: React.FocusEventHandler<HTMLElement>;
-    onBlur?: React.FocusEventHandler<HTMLElement>;
+    onFocus?: React.FocusEventHandler<InputType<TYPE>>;
+    onBlur?: React.FocusEventHandler<InputType<TYPE>>;
     autoFocus?: boolean;
     placeholder?: string;
     leftSide?: string | IconComponent;
@@ -112,12 +103,12 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
     ariaLabel?: string;
     iconSize?: IconPropSize;
     children?: never;
-    onKeyUp?: React.KeyboardEventHandler;
-    onKeyUpCapture?: React.KeyboardEventHandler;
-    onKeyDown?: React.KeyboardEventHandler;
-    onKeyDownCapture?: React.KeyboardEventHandler;
     onClear?: React.MouseEventHandler<HTMLButtonElement>;
-    inputRef?: TextFieldPropInputRef<TYPE>;
+    inputRef?: React.Ref<InputType<TYPE>>;
+    onKeyUp?: React.KeyboardEventHandler<InputType<TYPE>>;
+    onKeyUpCapture?: React.KeyboardEventHandler<InputType<TYPE>>;
+    onKeyDown?: React.KeyboardEventHandler<InputType<TYPE>>;
+    onKeyDownCapture?: React.KeyboardEventHandler<InputType<TYPE>>;
     onCopy?: React.ClipboardEventHandler<InputType<TYPE>>;
     onCopyCapture?: React.ClipboardEventHandler<InputType<TYPE>>;
     onCut?: React.ClipboardEventHandler<InputType<TYPE>>;

@@ -1,19 +1,25 @@
 import { Example } from '@consta/stand';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import { TextField } from '../../../TextField';
 
 export const TextFieldExampleTextArrayPreParsing = () => {
   const [value, setValue] = useState<string[] | null>(null);
-  const [inputValue, setInputValue] = useState<string | null>(null);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleChange = (value: string[] | null) => {
-    setValue(value);
-    setInputValue('');
-  };
+  const handleInputClear = useCallback(() => {
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
+  }, []);
 
-  const pasteHandle = (e: React.ClipboardEvent) => {
+  const handleChange = useCallback((value: string[] | null) => {
+    setValue(value);
+    handleInputClear();
+  }, []);
+
+  const pasteHandle = useCallback((e: React.ClipboardEvent) => {
     const data = e.clipboardData.getData('text/plain');
     if (!data) {
       return;
@@ -37,10 +43,10 @@ export const TextFieldExampleTextArrayPreParsing = () => {
 
     if (validData.length > 1) {
       e.preventDefault();
-      setInputValue('');
+      handleInputClear();
       setValue((state) => [...(state || []), ...validData]);
     }
-  };
+  }, []);
 
   return (
     <Example col={1}>
@@ -50,9 +56,7 @@ export const TextFieldExampleTextArrayPreParsing = () => {
         placeholder="Вставте вышеуказанный текст"
         onPaste={pasteHandle}
         type="textarray"
-        inputValue={inputValue}
         inputRef={inputRef}
-        onInputChange={setInputValue}
         withClearButton
       />
     </Example>

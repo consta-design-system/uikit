@@ -2,7 +2,7 @@ import { FieldGroupPropForm } from './types';
 
 const mapForm: Record<
   FieldGroupPropForm,
-  [FieldGroupPropForm, FieldGroupPropForm]
+  [Exclude<FieldGroupPropForm, 'clear'>, Exclude<FieldGroupPropForm, 'clear'>]
 > = {
   default: ['defaultClear', 'brickDefault'],
   defaultClear: ['defaultClear', 'brickClear'],
@@ -25,7 +25,7 @@ export const getForm = (
   form: FieldGroupPropForm = 'default',
   index: number,
   length: number,
-): FieldGroupPropForm => {
+): Exclude<FieldGroupPropForm, 'clear'> => {
   if (index === 0) {
     return mapForm[form][0];
   }
