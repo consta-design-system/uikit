@@ -53,6 +53,7 @@ import { MdxCollapse } from '@consta/stand/src/componets/MdxCollapse';
 
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
+  - [Расширенные типы свойств](#расширенные-типы-свойств)
 - [Тип поля](#тип-поля)
   - [type="text"](#поле-в-одну-строку)
   - [type="textarea"](#поле-в-несколько-строк)
@@ -140,7 +141,7 @@ import {
 | `inputRef?`                                           | `React.Ref<InputType<TYPE>>`                                                                                                                                                                                                                                                                                                                                                                                    | Ссылка на DOM-элемент поля ввода.                                                                                                             |
 | `ref?`                                                | `React.Ref<HTMLDivElement>`                                                                                                                                                                                                                                                                                                                                                                                     | Ссылка на корневой DOM-элемент компонента.                                                                                                    |
 
-<MdxCollapse label="Сложные типы свойств">
+### Расширенные типы свойств
 
 ```tsx
 type TextFieldPropValue<TYPE> = TYPE extends 'textarray'
@@ -170,8 +171,6 @@ type TextFieldPropRenderValueItem = (props: {
   disabled: boolean | undefined;
 }) => React.ReactNode;
 ```
-
-</MdxCollapse>
 
 ## Тип поля
 
