@@ -1,7 +1,7 @@
 .FieldCounter {
   &-Button {
-    height: calc(var(--field-control-layout-slot-height) / 2);
     width: var(--space-xl);
+    height: calc(var(--field-control-layout-slot-height) / 2);
 
     &_counter {
       &_increment {

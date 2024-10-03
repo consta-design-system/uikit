@@ -1,6 +1,6 @@
 .TagBase.FieldArrayValueItem {
-  margin: 0 var(--tag-space) var(--tag-space) 0;
   flex: none;
+  margin: 0 var(--tag-space) var(--tag-space) 0;
 
   .TagBase-Label {
     word-break: break-word;
