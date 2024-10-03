@@ -3,6 +3,7 @@ import React from 'react';
 
 import { Text } from '##/components/Text/Text';
 import { cnMixSpace, Space } from '##/mixs/MixSpace';
+import { AsTags } from '##/utils/types/AsTags';
 import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
 import { FieldPropSize } from '../types';
@@ -37,6 +38,7 @@ export const FieldLabel = forwardRefWithAs<FieldLabelProps>((props, ref) => {
     icon: Icon,
     size = 'm',
     iconRef,
+    as,
     ...otherProps
   } = props;
 
@@ -48,6 +50,7 @@ export const FieldLabel = forwardRefWithAs<FieldLabelProps>((props, ref) => {
       lineHeight="m"
       className={cnFieldLabel(null, [className])}
       ref={ref}
+      as={as as AsTags}
     >
       {children}
       {required && <span className={cnFieldLabel('Star')}>*</span>}

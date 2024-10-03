@@ -1,11 +1,11 @@
 import { IconComponent } from '@consta/icons/Icon';
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import { Text } from '##/components/Text';
 import { cnMixFlex, MixFlexPropDirection } from '##/mixs/MixFlex';
 import { Space } from '##/mixs/MixSpace';
 import { isString } from '##/utils/type-guards';
-import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
+import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
 import { FieldCaption } from '../FieldCaption';
 import { FieldLabel } from '../FieldLabel';
@@ -14,22 +14,20 @@ import { cnFieldWrapper } from './cnFieldWrapper';
 
 type Counter = string | number | [string | number, string | number];
 
-type FieldWrapperProps = PropsWithHTMLAttributesAndRef<
-  {
-    children: React.ReactNode;
-    size?: FieldPropSize;
-    label?: string;
-    labelIcon?: IconComponent;
-    labelIconRef?: React.Ref<HTMLSpanElement>;
-    labelPosition?: 'top' | 'left';
-    caption?: string;
-    required?: boolean;
-    status?: FieldPropStatus;
-    side?: React.ReactNode;
-    counter?: Counter;
-  },
-  HTMLDivElement
->;
+type FieldWrapperProps = {
+  children: React.ReactNode;
+  size?: FieldPropSize;
+  label?: string;
+  labelIcon?: IconComponent;
+  labelIconRef?: React.Ref<HTMLSpanElement>;
+  labelPosition?: 'top' | 'left';
+  labelHtmlFor?: string;
+  caption?: string;
+  required?: boolean;
+  status?: FieldPropStatus;
+  side?: React.ReactNode;
+  counter?: Counter;
+};
 
 const renderCounter = (counter: Counter) => {
   return (
@@ -61,9 +59,9 @@ const directionMap: Record<
   left: 'row',
 };
 
-export const FieldWrapper = forwardRef<HTMLDivElement, FieldWrapperProps>(
-  (
-    {
+export const FieldWrapper = forwardRefWithAs<FieldWrapperProps>(
+  (props, ref) => {
+    const {
       className,
       children,
       label,
@@ -76,14 +74,16 @@ export const FieldWrapper = forwardRef<HTMLDivElement, FieldWrapperProps>(
       counter,
       labelPosition = 'top',
       labelIconRef,
+      as = 'div',
+      labelHtmlFor,
       ...otherProps
-    },
-    ref,
-  ) => {
+    } = props;
+
+    const Tag = as as string;
     const gap = spaseMap[size];
 
     return (
-      <div
+      <Tag
         {...otherProps}
         ref={ref}
         className={cnFieldWrapper(null, [
@@ -100,6 +100,12 @@ export const FieldWrapper = forwardRef<HTMLDivElement, FieldWrapperProps>(
             required={required}
             icon={labelIcon}
             iconRef={labelIconRef}
+            {...(labelHtmlFor
+              ? {
+                  htmlFor: labelHtmlFor,
+                  as: 'label',
+                }
+              : {})}
           >
             {label}
           </FieldLabel>
@@ -144,7 +150,7 @@ export const FieldWrapper = forwardRef<HTMLDivElement, FieldWrapperProps>(
             </div>
           )}
         </div>
-      </div>
+      </Tag>
     );
   },
 );

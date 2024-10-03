@@ -1,6 +1,6 @@
 import { IconPhoto } from '@consta/icons/IconPhoto';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { FieldWrapper } from '##/components/FieldComponents';
 import {
@@ -38,17 +38,6 @@ const resizeMap = {
 } as const;
 
 const Variants = () => {
-  const [value, setValue] = useState<string[] | null>([
-    'Один',
-    'Два',
-    'Три',
-    'Четыре',
-    'Пять',
-    // 'Шесть',
-    // 'Семь',
-    // 'Восемь',
-  ]);
-
   const type = useSelect(
     'type',
     ['text', 'number', 'textarea', 'password', 'textarray'],
@@ -118,8 +107,10 @@ const Variants = () => {
       side="md"
       caption="Подпись подпись"
       counter={[10, 100]}
+      labelHtmlFor="inputId"
     >
       <TextField
+        id="inputId"
         form={form}
         status={status}
         size={size}
@@ -132,8 +123,6 @@ const Variants = () => {
         withClearButton={withClearButton}
         placeholder={placeholder}
         type={type}
-        value={type === 'textarray' ? value : undefined}
-        // onChange={type === 'textarray' ? setValue : undefined}
         incrementButtons={type === 'number' ? incrementButtons : undefined}
         min={type === 'number' ? min : undefined}
         max={type === 'number' ? max : undefined}

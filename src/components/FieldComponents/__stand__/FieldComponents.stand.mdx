@@ -389,16 +389,17 @@ type FieldPropSize = 'm' | 'xs' | 's' | 'l';
 type Counter = string | number | [string | number, string | number];
 ```
 
-| Свойство         | Тип                                  | По умолчанию | Описание                              |
-| ---------------- | ------------------------------------ | ------------ | ------------------------------------- |
-| `children?`      | `React.ReactNode`                    | -            | Контрол                               |
-| `size?`          | `FieldPropSize`                      | `'m'`        | Размер                                |
-| `label?`         | `string`                             | -            | Заголовок                             |
-| `labelIcon?`     | `IconComponent`                      | -            | Иконка у заголовка                    |
-| `labelIconRef?`  | `React.Ref<HTMLSpanElement>`         | -            | Ссылка на иконку                      |
-| `labelPosition?` | `'top'` <code>&#124;</code> `'left'` | `'top'`      | Позиция заголовка                     |
-| `caption?`       | `string`                             | -            | Подсказка                             |
-| `required?`      | `boolean`                            | -            | Признак обязательности                |
-| `status?`        | `FieldPropStatus`                    | -            | Статус                                |
-| `side?`          | `React.ReactNode`                    | -            | Дополнительный контент около контрола |
-| `counter?`       | `Counter`                            | -            | Счетчик количества символов           |
+| Свойство         | Тип                                  | По умолчанию | Описание                                        |
+| ---------------- | ------------------------------------ | ------------ | ----------------------------------------------- |
+| `children?`      | `React.ReactNode`                    | -            | Контрол                                         |
+| `size?`          | `FieldPropSize`                      | `'m'`        | Размер                                          |
+| `label?`         | `string`                             | -            | Заголовок                                       |
+| `labelIcon?`     | `IconComponent`                      | -            | Иконка у заголовка                              |
+| `labelIconRef?`  | `React.Ref<HTMLSpanElement>`         | -            | Ссылка на иконку                                |
+| `labelPosition?` | `'top'` <code>&#124;</code> `'left'` | `'top'`      | Позиция заголовка                               |
+| `labelHtmlFor?`  | `string`                             | -            | Id поля в которому необходимо привязать `label` |
+| `caption?`       | `string`                             | -            | Подсказка                                       |
+| `required?`      | `boolean`                            | -            | Признак обязательности                          |
+| `status?`        | `FieldPropStatus`                    | -            | Статус                                          |
+| `side?`          | `React.ReactNode`                    | -            | Дополнительный контент около контрола           |
+| `counter?`       | `Counter`                            | -            | Счетчик количества символов                     |
