@@ -1,0 +1,64 @@
+/*
+Переменные задаются из компонента:
+
+--field-control-layout-border-color
+--field-control-layout-height
+--field-control-layout-space
+--field-control-layout-text-size
+--field-control-layout-border-radius
+--field-control-layout-border-style
+--field-control-layout-padding
+--field-control-layout-bg-color
+--field-control-layout-border-width
+*/
+
+.FieldControlLayout {
+  --field-control-layout-slot-height:
+    calc(
+      var(--field-control-layout-height) -
+      var(--field-control-layout-border-width) * 2
+    );
+  --field-control-layout-slot-color: var(--color-control-typo-placeholder);
+  --field-control-layout-placeholder-color:
+    var(
+      --color-control-typo-placeholder
+    );
+  --field-control-layout-input-color: var(--color-control-typo-default);
+  box-sizing: border-box;
+  min-height: var(--field-control-layout-height);
+  padding: var(--field-control-layout-padding);
+  background-color: var(--field-control-layout-bg-color);
+  border-width: var(--field-control-layout-border-width);
+  border-style: var(--field-control-layout-border-style);
+  border-color: var(--field-control-layout-border-color);
+  border-radius: var(--field-control-layout-border-radius);
+  font-size: var(--field-control-layout-text-size);
+  line-height: var(--field-control-layout-text-line-height);
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &_disabled {
+    --field-control-layout-placeholder-color: var(--color-control-typo-disable);
+    --field-control-layout-input-color: var(--color-control-typo-disable);
+    --field-control-layout-slot-color: var(--color-control-typo-disable);
+  }
+
+  &-Container {
+    display: flex;
+    min-height: var(--field-control-layout-slot-height);
+    gap: var(--field-control-layout-space);
+  }
+
+  &-Slot {
+    display: flex;
+    flex: none;
+    justify-content: center;
+    align-items: center;
+    height: var(--field-control-layout-slot-height);
+    color: var(--field-control-layout-slot-color);
+    font-size: var(--field-control-layout-text-size);
+  }
+
+  &-Сhildren {
+    flex: auto;
+  }
+}

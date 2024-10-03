@@ -45,6 +45,7 @@ export type Props = {
   icon?: IconComponent;
   iconSize?: IconPropSize;
   withAction?: boolean;
+  cancelButtonTabIndex?: number;
 };
 
 export const cnTagBase = cn('TagBase');
@@ -68,6 +69,7 @@ export const TagBase = forwardRefWithAs<Props>((props, ref) => {
     icon: Icon,
     iconSize,
     withAction,
+    cancelButtonTabIndex,
     ...otherProps
   } = props;
 
@@ -106,6 +108,7 @@ export const TagBase = forwardRefWithAs<Props>((props, ref) => {
               className={cnTagBase('CancelButton')}
               type="button"
               onClick={onCancel}
+              tabIndex={cancelButtonTabIndex}
             >
               <IconClose
                 className={cnTagBase('CancelIcon')}

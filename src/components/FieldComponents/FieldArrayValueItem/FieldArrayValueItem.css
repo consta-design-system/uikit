@@ -1,0 +1,16 @@
+.TagBase.FieldArrayValueItem {
+  flex: none;
+  margin: 0 var(--tag-space) var(--tag-space) 0;
+
+  .TagBase-Label {
+    word-break: break-word;
+  }
+
+  &_disabled {
+    background-color: var(--color-control-bg-disable);
+
+    & > * {
+      color: var(--color-control-typo-disable);
+    }
+  }
+}

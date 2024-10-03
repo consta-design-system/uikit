@@ -14,7 +14,11 @@ export type FieldGroupPropForm =
   | 'clearRound'
   | 'clearDefault'
   | 'clearBrick'
-  | 'clearClear';
+  /**
+   * @deprecated use 'clear'
+   */
+  | 'clearClear'
+  | 'clear';
 
 export type FieldGroupPropSize = 'm' | 'xs' | 's' | 'l';
 

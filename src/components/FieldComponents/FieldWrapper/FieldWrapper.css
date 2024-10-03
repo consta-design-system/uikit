@@ -1,0 +1,24 @@
+.FieldWrapper,
+.FieldWrapper-ControlAndCaptionWrapper {
+  & > div {
+    width: 100%;
+  }
+}
+
+.FieldWrapper {
+  cursor: default;
+
+  &-Control {
+    flex: 1;
+  }
+
+  &-Side {
+    flex: 0;
+    min-height: var(--field-wrapper-side-height);
+  }
+
+  &-SideText {
+    color: var(--color-control-typo-placeholder);
+    font-size: var(--field-wrapper-side-text-size);
+  }
+}

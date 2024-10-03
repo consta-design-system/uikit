@@ -1,5 +1,5 @@
 import { IconComponent } from '@consta/icons/Icon';
-import { Accept, DropEvent, FileRejection } from 'react-dropzone';
+import { Accept, DropEvent, FileRejection, FileWithPath } from 'react-dropzone';
 
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
@@ -10,8 +10,8 @@ export type DragNDropFieldChildrenRenderFn = (props: {
   isDragAccept: boolean;
   isDragReject: boolean;
   isFileDialogActive: boolean;
-  acceptedFiles: File[];
-  fileRejections: FileRejection[];
+  acceptedFiles: readonly FileWithPath[];
+  fileRejections: readonly FileRejection[];
 }) => React.ReactNode;
 
 export type DragNDropFieldContentProps = {
@@ -22,8 +22,8 @@ export type DragNDropFieldContentProps = {
   isDragAccept: boolean;
   isDragReject: boolean;
   isFileDialogActive: boolean;
-  acceptedFiles: File[];
-  fileRejections: FileRejection[];
+  acceptedFiles: readonly FileWithPath[];
+  fileRejections: readonly FileRejection[];
 } & Pick<
   DragNDropFieldProps,
   'accept' | 'maxSize' | 'multiple' | 'disabled' | 'minSize'

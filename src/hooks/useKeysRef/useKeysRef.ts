@@ -18,12 +18,19 @@ type UseKeysProps = {
 };
 
 export const useKeysRef = (params: UseKeysProps) => {
-  const { ref, keys, isActive = false, eventType = 'keydown' } = params;
+  const {
+    ref,
+    keys,
+    isActive = false,
+    eventType = 'keydown',
+    eventHandler,
+  } = params;
 
   const fn = useMutableRef((e: KeyboardEvent) => {
     if (isActive) {
       (keys[e.code as KeyCode] || keys[e.key as KeyCode])?.(e);
     }
+    eventHandler?.(e);
   });
 
   useEffect(() => {

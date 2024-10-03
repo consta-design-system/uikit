@@ -1,0 +1,10 @@
+.FieldLabel {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  &-Star {
+    margin-left: var(--space-3xs);
+    color: var(--color-bg-alert);
+  }
+}

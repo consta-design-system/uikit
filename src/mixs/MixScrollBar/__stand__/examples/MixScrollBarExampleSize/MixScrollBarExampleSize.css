@@ -5,7 +5,7 @@
   border: 1px solid var(--color-bg-border);
 
   &-Block {
-    width: 100%;
+    width: 800px;
     height: 800px;
     background: var(--color-bg-brand);
   }
