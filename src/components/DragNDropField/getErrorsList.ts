@@ -32,7 +32,7 @@ const getErrorMessage = (
 };
 
 export const getErrorsList = (
-  fileRejections: FileRejection[],
+  fileRejections: readonly FileRejection[],
   sizes: FileSizes | undefined = defaultFileSizes,
   locale: Required<DragNDropFieldPropLocale>,
 ): string[] => {
