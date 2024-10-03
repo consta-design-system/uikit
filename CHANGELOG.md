@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.9.2 (20/09/2024)
+- [fix(Slider): fixed onChande on input (#3764)](https://github.com/consta-design-system/uikit/commit/f895d19ed56c1b2acf3c399fbbf2fb0f19f05fde) - [@gizeasy](https://github.com/gizeasy)
+- [fix(ChoiceGroup): remove `pointer-events: none;` on ChoiceGroup-Item (#3763)](https://github.com/consta-design-system/uikit/commit/cfb7fb1beb38b05c1538a1af7512410418383301) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Theme): changed --font-weight-text-extralight value (#3754)](https://github.com/consta-design-system/uikit/commit/dcba76ae453ec77137c7ed9df339cab8a0f874b4) - [@nevsky118](https://github.com/nevsky118)
+
+--------------------
+
 ## v5.9.1 (12/09/2024)
 - [fix(TextField): fixed arrowUp and arrowDown handlers (#3752)](https://github.com/consta-design-system/uikit/commit/733ae08423d064b0285bb882df405d1a4e3d62f8) - [@gizeasy](https://github.com/gizeasy)
 
@@ -386,21 +393,3 @@
 - [fix(TextField): fix clear button (#3199)](https://github.com/consta-design-system/uikit/commit/6a42c23eff6dd6e6600e1418406d37c419d614bd) - [@N1MBER](https://github.com/N1MBER)
 - [fix(Button): fix border for secondary view (#3206)](https://github.com/consta-design-system/uikit/commit/67a97a42a9c15f3473fe8df28c4434c10057171b) - [@N1MBER](https://github.com/N1MBER)
 - [feat(Selects): add canary Selects (#3188)](https://github.com/consta-design-system/uikit/commit/1ea3c340dc03b10fdf9f395d239fcf88b67b469a) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.24.0 (10/08/2023)
-Самое важное:
-- В `Spoiler` добавили возможность указывать количество строк, ниже которых текст сворачивается.
-- Добавили `useStyleProps` - хук для получения любого css свойства элемента, с подпиской на тему.
-
-Ломающие изменения:
-- В `Spoiler[Canary]` переименовали свойство `fullText` на `content`
-
----
-
-- [chore(deps): bump word-wrap from 1.2.3 to 1.2.4 (#3177)](https://github.com/consta-design-system/uikit/commit/6396d354b12b1d33e2a4acdbad0a7a64f2735b5e) - [@dependabot](https://github.com/dependabot[bot])
-- [feat(useStyleProps): add useStyleProps  (#3198)](https://github.com/consta-design-system/uikit/commit/df727b8b89e8516d13a384a5875ec79204794295) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Spoiler): add props clamp, buttonIndent, buttonAlign (#3197)](https://github.com/consta-design-system/uikit/commit/4fde84fea03b213e9f3f56bb2cacb9ca98e54122) - [@gizeasy](https://github.com/gizeasy)
-- [chore: edit deploy config and codeowners (#3194)](https://github.com/consta-design-system/uikit/commit/9dac7be9373b03bcd6558e79901b4846aa17b327) - [@gizeasy](https://github.com/gizeasy)
-- [fix(ContextMenu): fixed an unnecessary call onClickOutside (#3182)](https://github.com/consta-design-system/uikit/commit/b32e95d401c4a83033f8a38f3716fdd4304209e0) - [@gizeasy](https://github.com/gizeasy)

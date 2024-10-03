@@ -63,11 +63,13 @@ export const textPropViewDefault: TextPropView = textPropView[0];
 
 export const textPropWeight = [
   'thin',
+  'extralight',
   'light',
   'regular',
   'medium',
   'semibold',
   'bold',
+  'extrabold',
   'black',
 ] as const;
 export type TextPropWeight = typeof textPropWeight[number];

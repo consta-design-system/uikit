@@ -83,7 +83,7 @@ const ChoiceGroupRender = (
     >
       {items.map((item, index) => {
         const itemChecked = getChecked(item);
-        const itemDisabled = !!getItemDisabled && getItemDisabled(item);
+        const itemDisabled = getItemDisabled?.(item);
         const attributes = getItemAttributes(item) ?? {};
         const label = getItemLabel(item).toString();
 
@@ -98,7 +98,7 @@ const ChoiceGroupRender = (
               />
             )}
             <ChoiceGroupItem
-              onChange={getOnChange(item)}
+              onChange={!itemDisabled ? getOnChange(item) : undefined}
               checked={itemChecked}
               label={label}
               icon={getItemIcon && getItemIcon(item)}
