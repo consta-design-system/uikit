@@ -9,9 +9,8 @@
 
 .MixHitSlop {
   --mix-hit-slop-inset:
-    var(--mix-hit-slop-top, 0)
-    var(--mix-hit-slop-right, 0) var(--mix-hit-slop-bottom, 0)
-    var(--mix-hit-slop-left, 0);
+    var(--mix-hit-slop-top, 0) var(--mix-hit-slop-right, 0)
+    var(--mix-hit-slop-bottom, 0) var(--mix-hit-slop-left, 0);
   --mix-hit-slop-inset-negative:
     calc(var(--mix-hit-slop-top, 0) * -1)
     calc(var(--mix-hit-slop-right, 0) * -1)
