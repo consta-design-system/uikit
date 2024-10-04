@@ -1,5 +1,20 @@
 # Changelog
 
+## v5.10.0 (04/10/2024)
+Самое важное:
+- Включили набор компонентов `FieldComponents` для создания собственных полей ввода
+- Добавили возможность импортировать отдельные компоненты по свойству `type` из `TextField`
+- Добавили новый тип `textarray` для `TextField`
+- В `TextField` реализовали ручное управление размерами для типа `textarea`
+- В `Text` добавили значения `extralight` и `extrabold` для свойства `weight`
+
+---
+
+- [feat(TextField): add canary component (#3771)](https://github.com/consta-design-system/uikit/commit/c5f94d20625ee9bc41c30576907449fb1e49b652) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Text): add _weight_extralight and _weight_extrabold (#3766)](https://github.com/consta-design-system/uikit/commit/dacbdbd954324fd83d149b3bdd17f693ab7245ca) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.9.2 (20/09/2024)
 - [fix(Slider): fixed onChande on input (#3764)](https://github.com/consta-design-system/uikit/commit/f895d19ed56c1b2acf3c399fbbf2fb0f19f05fde) - [@gizeasy](https://github.com/gizeasy)
 - [fix(ChoiceGroup): remove `pointer-events: none;` on ChoiceGroup-Item (#3763)](https://github.com/consta-design-system/uikit/commit/cfb7fb1beb38b05c1538a1af7512410418383301) - [@gizeasy](https://github.com/gizeasy)
@@ -372,24 +387,3 @@
 - [fix(useAutoComplete): fix Tab two times when enter own custom  value (#3232)](https://github.com/consta-design-system/uikit/commit/299df63b8b00a7a569bf8c57ceaca1aa1c4e7a68) - [@vitaliidasaev](https://github.com/vitaliidasaev)
 - [fix(Collapse): fix collapse height (#3226)](https://github.com/consta-design-system/uikit/commit/979763a8bc7d9e34cbddae3eed5e9bbdffa287ed) - [@N1MBER](https://github.com/N1MBER)
 - [fix(TextField): fix value checking (#3228)](https://github.com/consta-design-system/uikit/commit/8a5317dc779c3fc34f4b7c076aca0525cc08a8be) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.25.0 (16/08/2023)
-Добавлены компоненты `Combobox[canary]`, `Select[canary]`, `UserSelect[canary]` и изменен `AutoComplete[canary]`. В них появились/изменились следующие функциональности:
-
-- Добавили возможность виртуального скролла
-- Изменили API свойств `onChandge`, `onCreate`, `renderItem`. [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3188)
-- Добавили свойства для управления выпадающим списком. [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3204)
-- Изменили взаимодействие с клавиатуры. [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3204)
-
-⚠️ Ломающие изменения:
-
-- В `AutoComplete[canary]` изменились свойства `onChandge` и `renderItem`. [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3188)
-
----
-
-- [feat(Selects): add props for control dropdown open/close state (#3204)](https://github.com/consta-design-system/uikit/commit/2f7f40fd7f322e990f38ce5d88efd80667d6ed7d) - [@gizeasy](https://github.com/gizeasy)
-- [fix(TextField): fix clear button (#3199)](https://github.com/consta-design-system/uikit/commit/6a42c23eff6dd6e6600e1418406d37c419d614bd) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Button): fix border for secondary view (#3206)](https://github.com/consta-design-system/uikit/commit/67a97a42a9c15f3473fe8df28c4434c10057171b) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Selects): add canary Selects (#3188)](https://github.com/consta-design-system/uikit/commit/1ea3c340dc03b10fdf9f395d239fcf88b67b469a) - [@gizeasy](https://github.com/gizeasy)
