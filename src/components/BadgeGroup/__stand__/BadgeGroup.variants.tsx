@@ -34,6 +34,7 @@ const badges: BadgeGroupDefaultItem[] = [
     iconLeft: IconQuestion,
     iconRight: IconAlert,
     label: 'ожидает',
+    view: 'transparent',
     status: 'warning',
   },
   {
