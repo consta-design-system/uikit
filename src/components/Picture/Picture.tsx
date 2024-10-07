@@ -39,8 +39,6 @@ export const Picture = forwardRef<HTMLImageElement, PictureProps>(
       ];
     }, [getSrcHash(srcProp)]);
 
-    console.log(convertedImages, sizes);
-
     const activeImageSize = Number(
       getLastPoint(
         useBreakpoints({
