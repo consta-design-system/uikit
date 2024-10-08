@@ -90,8 +90,8 @@ export type OptionProps<ITEM> = {
 };
 
 export type GetOptionPropsResult = {
-  onClick: (e: React.SyntheticEvent) => void;
-  onMouseEnter: (e: React.SyntheticEvent) => void;
+  onClick: (e: React.MouseEvent) => void;
+  onMouseEnter: (e: React.MouseEvent) => void;
   active: boolean;
   hovered: boolean;
   key: string | number;

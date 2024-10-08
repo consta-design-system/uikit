@@ -48,20 +48,20 @@ const FieldArrayValueInlineControlRender = (
     inputMaxLength,
     value = [],
     renderValue,
-    onInputFocus,
-    onInputBlur,
-    inputAutoFocus,
+    onFocus,
+    onBlur,
+    autoFocus,
     inputTabIndex,
     inputAriaLabel,
-    onInputKeyDown,
-    onInputKeyDownCapture,
-    onInputChange,
-    onInputKeyUp,
-    onInputKeyUpCapture,
     disabled,
     style,
     size = 'm',
     placeholder,
+    onKeyDown,
+    onKeyDownCapture,
+    onChange,
+    onKeyUp,
+    onKeyUpCapture,
     onCopy,
     onCopyCapture,
     onCut,
@@ -72,7 +72,7 @@ const FieldArrayValueInlineControlRender = (
   } = props;
 
   const [inputValue, setInputValue] = useState('');
-  const onInputChangeRef = useMutableRef(onInputChange);
+  const onInputChangeRef = useMutableRef(onChange);
   const fakeInputRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
@@ -108,16 +108,16 @@ const FieldArrayValueInlineControlRender = (
         onChange={handleChange}
         ref={useForkRef([inputRef, inputRefProp])}
         maxLength={inputMaxLength}
-        onFocus={onInputFocus}
-        onBlur={onInputBlur}
+        onFocus={onFocus}
+        onBlur={onBlur}
         // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus={inputAutoFocus}
+        autoFocus={autoFocus}
         tabIndex={inputTabIndex}
         aria-label={inputAriaLabel}
-        onKeyDown={onInputKeyDown}
-        onKeyDownCapture={onInputKeyDownCapture}
-        onKeyUp={onInputKeyUp}
-        onKeyUpCapture={onInputKeyUpCapture}
+        onKeyDown={onKeyDown}
+        onKeyDownCapture={onKeyDownCapture}
+        onKeyUp={onKeyUp}
+        onKeyUpCapture={onKeyUpCapture}
         disabled={disabled}
         type="text"
         placeholder={value.length ? undefined : placeholder}
