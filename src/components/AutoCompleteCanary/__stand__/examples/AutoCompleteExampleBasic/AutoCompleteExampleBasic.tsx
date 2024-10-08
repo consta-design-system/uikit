@@ -1,0 +1,21 @@
+import { Example } from '@consta/stand';
+import React, { useState } from 'react';
+
+import { AutoComplete } from '##/components/AutoComplete';
+import { basicItems } from '##/components/AutoComplete/__mocks__/data.mock';
+
+export const AutoCompleteExampleBasic = () => {
+  const [value, setValue] = useState<string | null>(null);
+  return (
+    <Example>
+      <AutoComplete
+        value={value}
+        items={basicItems}
+        getItemKey={(item) => item}
+        getItemLabel={(item) => item}
+        onChange={setValue}
+        type="text"
+      />
+    </Example>
+  );
+};
