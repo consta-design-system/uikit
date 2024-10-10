@@ -13,15 +13,12 @@ import { KeyHandler, useKeys } from '##/hooks/useKeysDepricated';
 import { useRefs } from '##/hooks/useRefs';
 import { getGroups } from '##/utils/getGroups';
 
+import { AutoCompletePropOnChange } from './types';
+
 type IndexForHighlight = number | ((oldIndex: number) => number);
 
 type GetItemGroupKey<ITEM> = (item: ITEM) => string | number | undefined;
 type GetGroupKey<GROUP> = (item: GROUP) => string | number | undefined;
-
-type OnChangeProp<ITEM> = (props: {
-  value: ITEM;
-  e: React.MouseEvent | React.KeyboardEvent;
-}) => void;
 
 type UseAutoCompleteProps<ITEM, GROUP> = {
   getItemGroupKey?: GetItemGroupKey<ITEM> | undefined;
@@ -36,7 +33,7 @@ type UseAutoCompleteProps<ITEM, GROUP> = {
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   searchValue?: string;
-  onChange: OnChangeProp<ITEM>;
+  onChange?: AutoCompletePropOnChange<'text'>;
   isLoading?: boolean;
   dropdownOpen?: boolean;
   onDropdownOpen?: (isOpen: boolean) => void;
@@ -50,8 +47,8 @@ type OptionProps<ITEM> = {
 };
 
 type GetOptionPropsResult = {
-  onClick: (e: React.SyntheticEvent) => void;
-  onMouseEnter: (e: React.SyntheticEvent) => void;
+  onClick: (e: React.MouseEvent) => void;
+  onMouseEnter: (e: React.MouseEvent) => void;
   active: boolean;
   hovered: boolean;
   key: string | number;
@@ -76,13 +73,20 @@ export function useAutoComplete<ITEM, GROUP>(
     dropdownOpen,
     onDropdownOpen,
     ignoreOutsideClicksRefs,
+    searchValue = '',
+    onChange,
   } = params;
-
-  const [searchValue, setSearchValue] = useState('');
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useFlag();
-  const [highlightedIndex, setHighlightedIndex] = useState<number>(0);
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
+
+  const handleChange: AutoCompletePropOnChange<'text'> = (value, props) => {
+    if (!disabled && onChange) {
+      onChange(value, props);
+    }
+    setHighlightedIndex(-1);
+  };
 
   const searchFunctionDefault = (item: ITEM, searchValue: string) => {
     if (!searchValue) {
@@ -138,15 +142,6 @@ export function useAutoComplete<ITEM, GROUP>(
     [filteredOptions, highlightedIndex],
   );
 
-  const onChange = (e: React.SyntheticEvent, item: ITEM) => {
-    if (!disabled) {
-      params.onChange({ value: item, e });
-      setSearchValue(getItemLabel(item));
-    }
-  };
-
-  // Prop Getters
-
   const ArrowUp: KeyHandler = (_, e): void => {
     if (!disabled) {
       e.preventDefault();
@@ -183,7 +178,7 @@ export function useAutoComplete<ITEM, GROUP>(
       const item = getItem(highlightedIndex);
 
       if (item) {
-        onChange(e, item);
+        handleChange(getItemLabel(item), { e });
       }
     } else {
       setIsOpen.on();
@@ -219,8 +214,8 @@ export function useAutoComplete<ITEM, GROUP>(
   }: OptionProps<ITEM>): GetOptionPropsResult => {
     const key = getItemKey(item);
     return {
-      onClick: (e: React.SyntheticEvent) => {
-        onChange(e, item);
+      onClick: (e: React.MouseEvent) => {
+        handleChange(getItemLabel(item), { e });
       },
       onMouseEnter: () => {
         highlightIndex(index);
@@ -288,19 +283,10 @@ export function useAutoComplete<ITEM, GROUP>(
   }, [dropdownOpen]);
 
   useEffect(() => {
-    const fn = (e: { target: { value: string } }) =>
-      setSearchValue(e.target.value || '');
-
-    inputRef.current?.addEventListener('input', fn as unknown as EventListener);
-
-    return () =>
-      inputRef.current?.removeEventListener(
-        'input',
-        fn as unknown as EventListener,
-      );
-  }, [inputRef.current]);
-
-  useEffect(() => setSearchValue(searchValue), [searchValue]);
+    if (inputRef.current) {
+      inputRef.current.value = searchValue;
+    }
+  }, [searchValue]);
 
   return {
     isOpen: Boolean(isOpen && (isLoading ? true : hasItems)),
@@ -312,5 +298,7 @@ export function useAutoComplete<ITEM, GROUP>(
     getKeyProps,
     hasItems,
     optionsRefs,
+    handleChange,
+    highlightedIndex,
   };
 }

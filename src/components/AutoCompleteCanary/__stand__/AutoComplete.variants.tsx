@@ -6,14 +6,14 @@ import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React, { useMemo, useState } from 'react';
 
 import {
-  textFieldPropForm,
-  textFieldPropFormDefault,
-  textFieldPropSize,
-  textFieldPropSizeDefault,
-  textFieldPropStatus,
-  textFieldPropView,
-  textFieldPropViewDefault,
-} from '##/components/TextField';
+  fieldPropForm,
+  fieldPropFormDefault,
+  fieldPropSize,
+  fieldPropSizeDefault,
+  fieldPropStatus,
+  fieldPropView,
+  fieldPropViewDefault,
+} from '##/components/FieldComponents/__mocks__/variants';
 import { cn } from '##/utils/bem';
 
 import {
@@ -26,16 +26,16 @@ import { AutoComplete } from '../AutoComplete';
 const cnAutoCompleteVariants = cn('AutoCompleteVariants');
 
 const Variants = () => {
-  const type = useSelect('type', ['text', 'email'], 'text');
-  const form = useSelect('form', textFieldPropForm, textFieldPropFormDefault);
+  const type = useSelect('type', ['text', 'email', 'textarray'], 'text');
+  const form = useSelect('form', fieldPropForm, fieldPropFormDefault);
   const dropdownForm = useSelect(
     'dropdownForm',
     ['default', 'brick', 'round'],
     undefined,
   );
-  const status = useSelect('status', textFieldPropStatus);
-  const size = useSelect('size', textFieldPropSize, textFieldPropSizeDefault);
-  const view = useSelect('view', textFieldPropView, textFieldPropViewDefault);
+  const status = useSelect('status', fieldPropStatus);
+  const size = useSelect('size', fieldPropSize, fieldPropSizeDefault);
+  const view = useSelect('view', fieldPropView, fieldPropViewDefault);
   const disabled = useBoolean('disabled', false);
   const required = useBoolean('required', false);
   const withClearButton = useBoolean('withClearButton', false);
@@ -52,7 +52,8 @@ const Variants = () => {
   const rightSideText = useText('rightSideText', 'm²');
   const withGroups = useBoolean('withGroups', false);
 
-  const [value, setValue] = useState<string[] | null | undefined>(undefined);
+  const [value, setValue] = useState<string[] | null>(null);
+  const [inputValue, setInputValue] = useState<string | null>(null);
 
   const leftSideSelect = {
     text: leftSideText,
@@ -68,36 +69,46 @@ const Variants = () => {
 
   const items = useMemo(() => {
     if (type === 'email') {
-      return getMailItems(value);
+      return getMailItems(inputValue);
     }
     return itemsArr;
-  }, [value, type]);
+  }, [inputValue, type]);
 
+  const props = {
+    form,
+    status,
+    size,
+    view,
+    className: cnAutoCompleteVariants(),
+    items,
+    dropdownForm,
+    groups: withGroups ? groups : [],
+    withClearButton,
+    maxLength,
+    placeholder,
+    leftSide,
+    rightSide,
+    disabled,
+  };
+
+  if (type === 'textarray') {
+    return (
+      <AutoComplete
+        {...props}
+        value={value}
+        type="textarray"
+        inputValue={inputValue}
+        onInputChange={setInputValue}
+        onChange={setValue}
+      />
+    );
+  }
   return (
     <AutoComplete
-      value={value}
-      // form={form}
-      status={status}
-      size={size}
-      view={view}
-      className={cnAutoCompleteVariants()}
-      items={items}
-      dropdownForm={dropdownForm}
-      groups={withGroups ? groups : []}
+      {...props}
+      value={inputValue}
+      onChange={setInputValue}
       type={type}
-      required={required}
-      withClearButton={withClearButton}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      onChange={setValue}
-      multiple
-      // labelIcon={withLabelIcon ? IconQuestion : undefined}
-      leftSide={leftSide}
-      rightSide={rightSide}
-      disabled={disabled}
-      // label={label}
-      // caption={caption}
-      // labelPosition={labelPosition}
     />
   );
 };

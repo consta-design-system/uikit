@@ -98,7 +98,6 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
     withClearButton?: boolean;
     autoComplete?: AutoCompete;
     readOnly?: boolean;
-    required?: boolean;
     tabIndex?: number;
     ariaLabel?: string;
     iconSize?: IconPropSize;

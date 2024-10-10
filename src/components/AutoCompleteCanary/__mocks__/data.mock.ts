@@ -11,9 +11,10 @@ export type Group = {
   id: string | number;
 };
 
+const postfixes = ['@gmail.com', '@yandex.ru', '@mail.ru'];
+
 export const getMailItems = (value: string | null | undefined): Item[] => {
-  const postfixes = ['@gmail.com', '@yandex.com', '@mail.ru'];
-  if (postfixes.find((el) => value?.includes(el))) {
+  if (postfixes.find((el) => value?.includes('@'))) {
     return [];
   }
   return postfixes.map((el, index) => ({

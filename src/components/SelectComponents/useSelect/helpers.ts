@@ -43,11 +43,11 @@ export const scrollToIndex: ScrollToIndexFunctionType = (
   optionsRefs,
   onFailure,
 ): void => {
-  if (!dropdownRef.current) {
+  if (!dropdownRef.current || index < 0) {
     return;
   }
 
-  const element = optionsRefs[index].current;
+  const element = optionsRefs[index]?.current;
 
   if (element) {
     scrollIntoView(element, dropdownRef.current);

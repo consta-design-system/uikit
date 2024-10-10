@@ -27,10 +27,10 @@ export const defaultGetGroupLabel: AutoCompletePropGetGroupLabel<
 > = (group) => group.label;
 
 export function withDefaultGetters<
-  MUTIPLE extends boolean = false,
+  TYPE extends string,
   ITEM = AutoCompleteItemDefault,
   GROUP = AutoCompleteGroupDefault,
->(props: AutoCompleteProps<MUTIPLE, ITEM, GROUP>) {
+>(props: AutoCompleteProps<TYPE, ITEM, GROUP>) {
   return {
     ...props,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
@@ -40,34 +40,3 @@ export function withDefaultGetters<
     getGroupKey: props.getGroupKey || defaultGetGroupKey,
   };
 }
-
-export const isMultipleProps = <
-  ITEM = AutoCompleteItemDefault,
-  GROUP = AutoCompleteGroupDefault,
->(
-  props: AutoCompleteProps<boolean, ITEM, GROUP>,
-): props is AutoCompleteProps<true, ITEM, GROUP> => props.multiple;
-
-export const isNotMultipleProps = <
-  ITEM = AutoCompleteItemDefault,
-  GROUP = AutoCompleteGroupDefault,
->(
-  props: AutoCompleteProps<boolean, ITEM, GROUP>,
-): props is AutoCompleteProps<false, ITEM, GROUP> => !props.multiple;
-
-export const getSearchValue = <
-  MUTIPLE extends boolean = false,
-  ITEM = AutoCompleteItemDefault,
-  GROUP = AutoCompleteGroupDefault,
->(
-  props: AutoCompleteProps<MUTIPLE, ITEM, GROUP>,
-) => {
-  let value: string | null = '';
-  if (isMultipleProps(props)) {
-    value = props.inputValue || ('' as string);
-  }
-  if (isNotMultipleProps(props)) {
-    value = props.value || '';
-  }
-  return value || '';
-};

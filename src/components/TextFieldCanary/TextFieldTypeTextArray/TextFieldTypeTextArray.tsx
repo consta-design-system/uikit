@@ -255,7 +255,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onBlur={handleBlur}
             onChange={handleChange}
             autoFocus={autoFocus}
-            onKeyDown={onKeyDown || handleInputKeyDown}
+            onKeyDown={handleInputKeyDown}
             ref={controllRef}
             placeholder={placeholder}
             renderValue={(item, index) =>
