@@ -1,5 +1,18 @@
 # Changelog
 
+## v5.11.0 (16/10/2024)
+Самое важное:
+- Компонент `Table` помечен как `deprecated`, чтобы уже сейчас вы готовились к переходу на  библиотеку `@consta/table`. Поддержка компонента в `@consta/uikit` v6 закончится, но еще останется в составе библиотеки.
+
+---
+
+- [fix(ProgressStepBar): add validate activeStepIndex (#3784)](https://github.com/consta-design-system/uikit/commit/a32b963845232bf219d176f86ebcecea5224eed4) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Table): mark us deprecated (#3782)](https://github.com/consta-design-system/uikit/commit/d0929e9af9782ec6eeab78e1a45d017cb813aea8) - [@gizeasy](https://github.com/gizeasy)
+- [chore: update deps (#3783)](https://github.com/consta-design-system/uikit/commit/686b01decf984754dc69d7831cda5915a2d3e363) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Picture): remove console.log (#3775)](https://github.com/consta-design-system/uikit/commit/b3f4f1dd8f494547d619e9717ef5f58955d1e2b4) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.10.0 (04/10/2024)
 Самое важное:
 - Включили набор компонентов `FieldComponents` для создания собственных полей ввода
@@ -375,15 +388,3 @@
 
 ## v4.26.1 (31/08/2023)
 - [fix(BookmarkTabs): reexport fix (#3237)](https://github.com/consta-design-system/uikit/commit/e87278371c3ba513d2efa5b674262be6d9a275c4) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.26.0 (30/08/2023)
-Добавлен новый компонент `BookmarkTabs` - табы в виде вкладок
-
----
-
-- [feat(BookmarkTabs): add new component (#3224)](https://github.com/consta-design-system/uikit/commit/734ddbb6dd1c3f6d615c93df9c1d0788a533b690) - [@N1MBER](https://github.com/N1MBER)
-- [fix(useAutoComplete): fix Tab two times when enter own custom  value (#3232)](https://github.com/consta-design-system/uikit/commit/299df63b8b00a7a569bf8c57ceaca1aa1c4e7a68) - [@vitaliidasaev](https://github.com/vitaliidasaev)
-- [fix(Collapse): fix collapse height (#3226)](https://github.com/consta-design-system/uikit/commit/979763a8bc7d9e34cbddae3eed5e9bbdffa287ed) - [@N1MBER](https://github.com/N1MBER)
-- [fix(TextField): fix value checking (#3228)](https://github.com/consta-design-system/uikit/commit/8a5317dc779c3fc34f4b7c076aca0525cc08a8be) - [@N1MBER](https://github.com/N1MBER)
