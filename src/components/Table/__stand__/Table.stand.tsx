@@ -6,7 +6,7 @@ export default createStand({
   group: 'components',
   description: 'Таблица. Выводит данные с фильтрами и сортировкой.',
   version: '1.6.0',
-  status: 'stable',
+  status: 'deprecated',
   sandbox: 'table-9kmysz',
   alias: [
     'таблица',

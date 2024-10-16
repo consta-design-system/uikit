@@ -34,6 +34,10 @@ import { TableExampleRowSpan } from './examples/TableExampleRowSpan/TableExample
 import { Table } from '@consta/uikit/Table';
 ```
 
+> **Прекращение поддержки**
+>
+> В следующем мажерном релизе компонент перестанет поддерживаться, рекомендуем уже сейчас переходит на новую библиотеку для создания таблиц [`@consta/table`](##LIBS.LIB/lib:table)
+
 <MdxMenu>
 
 - [Как формируется таблица](#как-формируется-таблица)
@@ -219,7 +223,7 @@ const App = () => {
 <Table columns={columns} rows={rows} stickyHeader />
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-с-зафиксированным-заголовком)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-зафиксированным-заголовком)
 
 ### Зафиксированная колонка
 
@@ -230,7 +234,7 @@ const App = () => {
 <Table columns={columns} rows={rows} stickyColumns=1 />
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-с-зафиксированной-колонкой)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-зафиксированной-колонкой)
 
 ### Скрытая колонка
 
@@ -252,7 +256,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 ];
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-со-скрытыми-колонками)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-со-скрытыми-колонками)
 
 ### Объединение ячеек
 
@@ -333,7 +337,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 const App = () => <Table columns={colums} rows={rows} />;
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-с-ячейками--объединёнными-кастомной-функцией)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-ячейками--объединёнными-кастомной-функцией)
 
 [Посмотреть расширенный пример на GitHub](https://github.com/consta-design-system/uikit/blob/master/src/components/Table/__stand__/variants/TableVariantWithMergedByCustomCallbackCells/TableVariantWithMergedByCustomCallbackCells.tsx) (в переменной `WithMergedByCustomCallbackCells`)
 
@@ -703,7 +707,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 ];
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-с-дополнительным-элементом-в-заголовке)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-дополнительным-элементом-в-заголовке)
 
 ### Изменяемая ширина колонок
 
@@ -723,7 +727,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 
 Если нужно удалять строки или добавлять их не только в конец таблицы, можно написать свой код на основе нашего примера.
 
-[Пример в работе](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-с-добавлением-удалением-строк)
+[Пример в работе](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-добавлением-удалением-строк)
 
 ### Заглушка для пустой таблицы
 
@@ -771,7 +775,7 @@ const App = () => {
 };
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-со-своим-текстом--если-нет-данных)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-со-своим-текстом--если-нет-данных)
 
 ### Постепенная загрузка
 
@@ -788,7 +792,7 @@ const App = () => {
 />
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-с-большим-количеством-строк)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-большим-количеством-строк)
 
 ### Обработка клика по ячейке
 
@@ -809,7 +813,7 @@ const App = () => {
 <Table columns={columns} rows={rows} onCellClick={({ e, type, columnIdx, ref, rowId }) => ...} />
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-с-обработкой-клика-по-ячейке)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-обработкой-клика-по-ячейке)
 
 ## Сортировка
 
@@ -1081,7 +1085,7 @@ const filters = [
 ];
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-с-кастомными-фильтрами)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-кастомными-фильтрами)
 
 #### Свойства кастомного компонента фильтра
 
@@ -1134,7 +1138,7 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 
 В ответ обработчик должен возвращать строку.
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-со-своей-функцией-переименования-тега-в-фильтре)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-со-своей-функцией-переименования-тега-в-фильтре)
 
 ## Внешний вид
 
@@ -1375,7 +1379,7 @@ const App = () => {
 
 Функция должна возвращать название CSS-класса типа `string`.
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-stable/tab:use/hash:пример-таблицы-с-дополнительным-классом)
+[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-дополнительным-классом)
 
 ## Адаптивность
 
