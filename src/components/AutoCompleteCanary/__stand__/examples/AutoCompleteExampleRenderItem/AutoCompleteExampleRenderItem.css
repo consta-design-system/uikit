@@ -1,0 +1,40 @@
+.AutoCompleteExampleRenderItem {
+  &-Item {
+    --text-color: var(--color-control-typo-default);
+    --point-size: var(--space-s);
+    --padding-size: var(--space-xs);
+    position: relative;
+    padding:
+      var(--padding-size) var(--padding-size) var(--padding-size)
+      calc(var(--padding-size) * 2 + var(--point-size));
+    color: var(--text-color);
+
+    &_hovered {
+      background-color: var(--color-control-bg-clear-hover);
+    }
+
+    &_active {
+      --text-color: var(--color-control-typo-secondary);
+    }
+
+    &_disabled {
+      --text-color: var(--color-control-typo-disable);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: calc(50% - var(--point-size) / 2);
+      left: var(--padding-size);
+      width: var(--point-size);
+      height: var(--point-size);
+      background-color: var(--color-control-typo-disable);
+      border-radius: 50%;
+      transition: background-color 0.2s ease-in;
+    }
+
+    &_active::before {
+      background-color: var(--text-color);
+    }
+  }
+}

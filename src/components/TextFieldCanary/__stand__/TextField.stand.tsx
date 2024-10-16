@@ -5,7 +5,7 @@ export default createStand({
   id: 'TextField',
   group: 'components',
   description: 'Поле для ввода текста и чисел.',
-  version: '5.10.0',
+  version: '5.11.0',
   status: 'canary',
   alias: ['поле', 'ввод', 'текст', 'число', 'инпут'],
   figma:

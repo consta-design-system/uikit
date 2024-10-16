@@ -251,11 +251,11 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             size={size}
             inputRef={useForkRef([inputRef, inputRefProp])}
             value={value ?? undefined}
-            onInputFocus={handleFocus}
-            onInputBlur={handleBlur}
-            onInputChange={handleChange}
-            inputAutoFocus={autoFocus}
-            onInputKeyDown={handleInputKeyDown}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            autoFocus={autoFocus}
+            onKeyDown={handleInputKeyDown}
             ref={controllRef}
             placeholder={placeholder}
             renderValue={(item, index) =>
@@ -274,6 +274,9 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onPaste={onPaste}
             onPasteCapture={onPasteCapture}
             inputTabIndex={tabIndex}
+            onKeyDownCapture={onKeyDownCapture}
+            onKeyUp={onKeyUp}
+            onKeyUpCapture={onKeyUpCapture}
           />
         </div>
       </FieldControlLayout>

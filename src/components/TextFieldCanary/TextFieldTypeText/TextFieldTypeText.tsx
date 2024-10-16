@@ -11,7 +11,7 @@ import { useForkRef } from '##/hooks/useForkRef';
 import { TextFieldTypeComponent } from '..';
 import { useTextField } from '../useTextField';
 
-export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
+export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
   (props, componentRef) => {
     const {
       className,
@@ -36,7 +36,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<'text'> = forwardRef(
       autoComplete,
       withClearButton,
       readOnly,
-      type,
+      type = 'text',
       tabIndex,
       ariaLabel,
       iconSize,
