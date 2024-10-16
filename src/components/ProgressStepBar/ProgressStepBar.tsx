@@ -31,6 +31,7 @@ import {
   progressStepBarPropDirectionDefault,
   ProgressStepBarProps,
   progressStepBarPropSizeDefault,
+  validateVisibleIndex,
   withDefaultGetters,
 } from './helpers';
 import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
@@ -49,7 +50,7 @@ function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
     direction = progressStepBarPropDirectionDefault,
     size = progressStepBarPropSizeDefault,
     className,
-    activeStepIndex,
+    activeStepIndex: activeStepIndexProp,
     onItemClick,
     getItemContent,
     getItemLabel,
@@ -62,6 +63,11 @@ function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
     style,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), containerRef);
+
+  const activeStepIndex = validateVisibleIndex(
+    steps.length,
+    activeStepIndexProp,
+  );
 
   const [visibleIndex, setVisibleIndex] = useState<number>(
     activeStepIndex || 0,

@@ -251,3 +251,18 @@ export const calculateLines = (
 
   return sizes;
 };
+
+export const validateVisibleIndex = (
+  lenght: number,
+  index: number | undefined,
+) => {
+  if (!index) {
+    return index;
+  }
+
+  if (index < 0) {
+    return undefined;
+  }
+
+  return Math.min(index, lenght - 1);
+};
