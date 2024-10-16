@@ -12,7 +12,7 @@ export const badgePropSize = ['xs', 's', 'm', 'l'] as const;
 export type BadgePropSize = typeof badgePropSize[number];
 export const badgePropSizeDefault: BadgePropSize = 'm';
 
-export const badgePropView = ['filled', 'stroked'] as const;
+export const badgePropView = ['filled', 'stroked', 'transparent'] as const;
 export type BadgePropView = typeof badgePropView[number];
 export const badgePropViewDefault: BadgePropView = badgePropView[0];
 

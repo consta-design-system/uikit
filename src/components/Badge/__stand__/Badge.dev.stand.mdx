@@ -93,9 +93,12 @@ import { Badge } from '@consta/uikit/Badge';
 
 `stroked` — второстепенный, такой бейдж не будет так сильно бросаться в глаза.
 
+`transparent` — промежуточный между двумя предыдущими. Позволяет подсветить статус, но не акцентировать на нем внимание.
+
 ```ts
 <Badge view="filled" label="Filled badge" />
 <Badge view="stroked" label="Stroked badge" />
+<Badge view="transparent" label="Transparent badge" />
 ```
 
 <BadgeExampleView />
@@ -134,7 +137,7 @@ import { Badge } from '@consta/uikit/Badge';
 | Свойство                           | Тип                                                     | По умолчанию | Описание                                                         |
 | ---------------------------------- | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
 | [`size?`](#размер)                 | `'s' , 'm' , 'l'`                                       | `'m'`        | Размер                                                           |
-| [`view?`](#типы-бейджиков)         | `'filled' , 'stroked'`                                  | `'filled'`   | Вид                                                              |
+| [`view?`](#типы-бейджиков)         | `'filled' , 'stroked', 'transparent'`                   | `'filled'`   | Вид                                                              |
 | [`status?`](#статус-и-содержимое)  | `'success' , 'error' , 'warning' , 'normal' , 'system'` | `'normal'`   | Статус                                                           |
 | [`form?`](#форма)                  | `'default' , 'round'`                                   | `'default'`  | Форма                                                            |
 | [`minified?`](#типы-бейджиков)     | `boolean`                                               | -            | Отвечает за отрисовку бейджика без надписи, в виде точки         |
