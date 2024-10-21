@@ -37,6 +37,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
       ignoreOutsideClicksRefs,
       disabled,
       inputRef: inputRefProp,
+      disableDates,
       ...otherProps
     } = props;
 
@@ -106,6 +107,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
           zIndex={getDropdownZIndex(props.style)}
+          disableDates={disableDates}
         />
       </>
     );

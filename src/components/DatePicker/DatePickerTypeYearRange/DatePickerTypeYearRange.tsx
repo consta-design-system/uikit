@@ -40,6 +40,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
       dropdownOpen,
       ignoreOutsideClicksRefs,
       disabled,
+      disableDates,
       ...fieldProps
     } = props;
 
@@ -215,6 +216,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
           onChange={hadleChange}
           renderAdditionalControls={renderAdditionalControls}
           zIndex={getDropdownZIndex(props.style)}
+          disableDates={disableDates}
         />
       </>
     );

@@ -9,6 +9,7 @@ import {
   DateTimePropType,
   MoveType,
 } from '##/components/DateTime';
+import { DateTimePropDisableDates } from '##/components/DateTime/helpers/types';
 import { Direction, Popover } from '##/components/Popover';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
@@ -49,6 +50,7 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
     multiplicityMinutes?: number;
     multiplicityHours?: number;
     timeFor?: 'start' | 'end';
+    disableDates?: DateTimePropDisableDates;
   },
   HTMLDivElement
 >;

@@ -47,6 +47,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> =
       dropdownOpen,
       ignoreOutsideClicksRefs,
       disabled,
+      disableDates,
       ...fieldProps
     } = props;
 
@@ -222,6 +223,7 @@ export const DatePickerTypeMonthRange: DatePickerTypeComponent<'month-range'> =
           onChange={hadleChange}
           renderAdditionalControls={renderAdditionalControls}
           zIndex={getDropdownZIndex(props.style)}
+          disableDates={disableDates}
         />
       </>
     );

@@ -3,7 +3,11 @@ import { Locale } from 'date-fns';
 
 import { DateRange } from '../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
-import { DateTimePropView, dateTimePropViewDefault } from '../DateTime/helpers';
+import {
+  DateTimePropDisableDates,
+  DateTimePropView,
+  dateTimePropViewDefault,
+} from '../DateTime/helpers';
 import {
   TextFieldPropForm,
   TextFieldPropSize,
@@ -110,6 +114,7 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
       id?: string;
       name?: DatePickerPropName<TYPE>;
       disabled?: boolean;
+      disableDates?: DateTimePropDisableDates;
       dropdownClassName?: string;
       dropdownRef?: React.Ref<HTMLDivElement>;
       size?: TextFieldPropSize;
