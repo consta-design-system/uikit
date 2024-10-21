@@ -27,6 +27,7 @@ import { DatePickerExampleDropdownOpen } from './examples/DatePickerExampleDropd
 import { DatePickerExampleTwoIcons } from './examples/DatePickerExampleTwoFields/DatePickerExampleTwoFields';
 import { DatePickerExampleDisableDates } from './examples/DatePickerExampleDisableDates/DatePickerExampleDisableDates';
 import { DatePickerExampleWithClearButton } from './examples/DatePickerExampleWithClearButton/DatePickerExampleWithClearButton';
+import { MdxTabs } from '@consta/stand';
 
 ```tsx
 import { DatePicker } from '@consta/uikit/DatePicker';
@@ -49,6 +50,7 @@ import { DatePicker } from '@consta/uikit/DatePicker';
   - [Два поля ввода](#два-поля-ввода-свойства-и-события)
   - [Кнопка для очистки поля](#кнопка-для-очистки-поля)
 - [Дополнительные контролы](#дополнительные-контролы)
+- [Отключение интервалов](#отключение-интервалов)
 - [Управление состоянием выпадающего списка](#управление-состоянием-выпадающего-списка)
 - [Обработка ошибок](#обработка-ошибок)
 - [Импорт](#импорт)
@@ -391,7 +393,9 @@ export const DatePickerExampleAdditionalControls = () => {
 
 ## Отключение интервалов
 
-Имеется возможность отключить интервалы или конкретные даты для выбора пользователем.
+Вы можете отключить интервалы или конкретные даты для выбора пользователем. Пример:
+
+<MdxTabs>
 
 ```tsx
 import React, { useState } from 'react';
@@ -408,9 +412,9 @@ const getDisableDates = (): Array<Date | [Date, Date]> => {
       new Date(year, month, day, 12, 34, 20),
       new Date(year, month, day, 16, 10, 41),
     ],
-    // слелдующий день
+    // следующий день
     new Date(year, month, day + 1),
-    // отключаем с 1го по 12ое включительно
+    // отключаем с 1-ого по 12-ое включительно
     [new Date(year, month, 1), new Date(year, month, 13)],
   ];
 };
@@ -432,6 +436,8 @@ export const DatePickerExampleDisableDates = () => {
 ```
 
 <DatePickerExampleDisableDates />
+
+</MdxTabs>
 
 ## Управление состоянием выпадающего списка
 
