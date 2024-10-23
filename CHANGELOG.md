@@ -1,8 +1,20 @@
 # Changelog
 
+## v5.12.0 (23/10/2024)
+Самое важное:
+- добавили новый компонент `AutoComplete(Canary)`. В отличие от старого компонента в нем появилась возможность множественного значения value.
+- в `DatePicker` добавили возможность исключать периоды дат и времени с помощью `disableDates`.
+
+---
+
+- [feat(AutoComplete): add canary component (#3780)](https://github.com/consta-design-system/uikit/commit/4e6de1ad3a58a368e3b3f719f7d91d184b078f5e) - [@gizeasy](https://github.com/gizeasy)
+- [feat(DatePicker): add disableDates (#3788)](https://github.com/consta-design-system/uikit/commit/5acafb7cfeea97d53ff5476f102db21bb3b57173) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.11.0 (16/10/2024)
 Самое важное:
-- Компонент `Table` помечен как `deprecated`, чтобы уже сейчас вы готовились к переходу на  библиотеку `@consta/table`. Поддержка компонента в `@consta/uikit` v6 закончится, но еще останется в составе библиотеки.
+- Компонент Table помечен как deprecated, чтобы уже сейчас вы готовились к переходу на  библиотеку @consta/table. Поддержка компонента в @consta/uikit v6 закончится, но еще останется в составе библиотеки.
 
 ---
 
@@ -383,8 +395,3 @@
 - [feat(Loader): rewrite styles and layout (#3239)](https://github.com/consta-design-system/uikit/commit/a745c55f6d2149859b3012d2c1f5021c766b2fd7) - [@N1MBER](https://github.com/N1MBER)
 - [fix(ProgressStepBar): fix refs problem (#3247)](https://github.com/consta-design-system/uikit/commit/5f3baf693070797671565836dbd7980f2842a690) - [@N1MBER](https://github.com/N1MBER)
 - [feat(Slider): add new props: tooltipDirection & tooltipPossibleDirections (#3246)](https://github.com/consta-design-system/uikit/commit/9cec9491781a2359ff777ab9ccc6718ab51cfcd8) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.26.1 (31/08/2023)
-- [fix(BookmarkTabs): reexport fix (#3237)](https://github.com/consta-design-system/uikit/commit/e87278371c3ba513d2efa5b674262be6d9a275c4) - [@gizeasy](https://github.com/gizeasy)
