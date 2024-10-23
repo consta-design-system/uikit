@@ -7,12 +7,7 @@ export const DatePickerExampleTypeDate = () => {
   const [value, setValue] = useState<Date | null>(null);
   return (
     <Example col={1}>
-      <DatePicker
-        type="date"
-        value={value}
-        onChange={setValue}
-        style={{ zIndex: 2 }}
-      />
+      <DatePicker type="date" value={value} onChange={setValue} />
     </Example>
   );
 };
@@ -21,12 +16,7 @@ export const DatePickerExampleTypeDateRange = () => {
   const [value, setValue] = useState<[Date?, Date?] | null>(null);
   return (
     <Example col={1}>
-      <DatePicker
-        type="date-range"
-        value={value}
-        onChange={setValue}
-        style={{ zIndex: 2 }}
-      />
+      <DatePicker type="date-range" value={value} onChange={setValue} />
     </Example>
   );
 };
@@ -35,12 +25,7 @@ export const DatePickerExampleTypeDateTime = () => {
   const [value, setValue] = useState<Date | null>(null);
   return (
     <Example col={1}>
-      <DatePicker
-        type="date-time"
-        value={value}
-        onChange={setValue}
-        style={{ zIndex: 2 }}
-      />
+      <DatePicker type="date-time" value={value} onChange={setValue} />
     </Example>
   );
 };
@@ -49,12 +34,7 @@ export const DatePickerExampleTypeDateTimeRange = () => {
   const [value, setValue] = useState<[Date?, Date?] | null>(null);
   return (
     <Example col={1}>
-      <DatePicker
-        type="date-time-range"
-        value={value}
-        onChange={setValue}
-        style={{ zIndex: 2 }}
-      />
+      <DatePicker type="date-time-range" value={value} onChange={setValue} />
     </Example>
   );
 };
@@ -91,12 +71,7 @@ export const DatePickerExampleTypeMonthRange = () => {
   const [value, setValue] = useState<[Date?, Date?] | null>(null);
   return (
     <Example col={1}>
-      <DatePicker
-        type="month-range"
-        value={value}
-        onChange={setValue}
-        style={{ zIndex: 2 }}
-      />
+      <DatePicker type="month-range" value={value} onChange={setValue} />
     </Example>
   );
 };
@@ -105,12 +80,7 @@ export const DatePickerExampleTypeYear = () => {
   const [value, setValue] = useState<Date | null>();
   return (
     <Example col={1}>
-      <DatePicker
-        type="year"
-        value={value}
-        onChange={setValue}
-        style={{ zIndex: 2 }}
-      />
+      <DatePicker type="year" value={value} onChange={setValue} />
     </Example>
   );
 };
@@ -119,12 +89,7 @@ export const DatePickerExampleTypeYearRange = () => {
   const [value, setValue] = useState<[Date?, Date?] | null>(null);
   return (
     <Example col={1}>
-      <DatePicker
-        type="year-range"
-        value={value}
-        onChange={setValue}
-        style={{ zIndex: 2 }}
-      />
+      <DatePicker type="year-range" value={value} onChange={setValue} />
     </Example>
   );
 };

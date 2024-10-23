@@ -33,6 +33,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
       ignoreOutsideClicksRefs,
       disabled,
       inputRef: inputRefProp,
+      disableDates,
       ...otherProps
     } = props;
 
@@ -122,6 +123,7 @@ export const DatePickerTypeMonth: DatePickerTypeComponent<'month'> = forwardRef(
           renderAdditionalControls={renderAdditionalControls}
           onChangeCurrentVisibleDate={setCurrentVisibleDate}
           zIndex={getDropdownZIndex(props.style)}
+          disableDates={disableDates}
         />
       </>
     );

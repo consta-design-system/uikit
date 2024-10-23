@@ -32,6 +32,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef(
       dropdownOpen,
       ignoreOutsideClicksRefs,
       disabled,
+      disableDates,
       inputRef: inputRefProp,
       ...otherProps
     } = props;

@@ -40,6 +40,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
       ignoreOutsideClicksRefs,
       disabled,
       inputRef: inputRefProp,
+      disableDates,
       ...otherProps
     } = props;
 
@@ -141,6 +142,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
           multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
           zIndex={getDropdownZIndex(props.style)}
+          disableDates={disableDates}
         />
       </>
     );

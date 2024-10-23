@@ -25,7 +25,9 @@ import {
 import { DatePickerExampleMulti } from './examples/DatePickerExampleMulti/DatePickerExampleMulti';
 import { DatePickerExampleDropdownOpen } from './examples/DatePickerExampleDropdownOpen/DatePickerExampleDropdownOpen';
 import { DatePickerExampleTwoIcons } from './examples/DatePickerExampleTwoFields/DatePickerExampleTwoFields';
+import { DatePickerExampleDisableDates } from './examples/DatePickerExampleDisableDates/DatePickerExampleDisableDates';
 import { DatePickerExampleWithClearButton } from './examples/DatePickerExampleWithClearButton/DatePickerExampleWithClearButton';
+import { MdxTabs } from '@consta/stand';
 
 ```tsx
 import { DatePicker } from '@consta/uikit/DatePicker';
@@ -48,6 +50,7 @@ import { DatePicker } from '@consta/uikit/DatePicker';
   - [Два поля ввода](#два-поля-ввода-свойства-и-события)
   - [Кнопка для очистки поля](#кнопка-для-очистки-поля)
 - [Дополнительные контролы](#дополнительные-контролы)
+- [Отключение интервалов](#отключение-интервалов)
 - [Управление состоянием выпадающего списка](#управление-состоянием-выпадающего-списка)
 - [Обработка ошибок](#обработка-ошибок)
 - [Импорт](#импорт)
@@ -387,6 +390,54 @@ export const DatePickerExampleAdditionalControls = () => {
 ```
 
 <DatePickerExampleAdditionalControls />
+
+## Отключение интервалов
+
+Вы можете отключить интервалы или конкретные даты для выбора пользователем. Пример:
+
+<MdxTabs>
+
+```tsx
+import React, { useState } from 'react';
+import { DatePicker } from '@consta/uikit/DatePicker';
+
+const getDisableDates = (): Array<Date | [Date, Date]> => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  return [
+    // интервал времени текущей даты с 12:34:20 - 16:10:41
+    [
+      new Date(year, month, day, 12, 34, 20),
+      new Date(year, month, day, 16, 10, 41),
+    ],
+    // следующий день
+    new Date(year, month, day + 1),
+    // отключаем с 1-ого по 12-ое включительно
+    [new Date(year, month, 1), new Date(year, month, 13)],
+  ];
+};
+
+const disableDates = getDisableDates();
+
+export const DatePickerExampleDisableDates = () => {
+  const [value, setValue] = useState<Date | null>();
+
+  return (
+    <DatePicker
+      type="date-time"
+      value={value}
+      disableDates={disableDates}
+      onChange={setValue}
+    />
+  );
+};
+```
+
+<DatePickerExampleDisableDates />
+
+</MdxTabs>
 
 ## Управление состоянием выпадающего списка
 
