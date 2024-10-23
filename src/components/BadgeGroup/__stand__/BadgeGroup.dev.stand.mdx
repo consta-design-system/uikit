@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 import { BadgeGroupExampleSize } from './examples/BadgeGroupExampleSize/BadgeGroupExampleSize';
 import { BadgeGroupExampleForm } from './examples/BadgeGroupExampleForm/BadgeGroupExampleForm';
 import { BadgeGroupExampleItems } from './examples/BadgeGroupExampleItems/BadgeGroupExampleItems';
@@ -36,6 +36,8 @@ import { Badge } from '@consta/uikit/Badge';
 - HTML-тег — в поле `as` или с помощью функции `getItemAs`,
 - дополнительные атрибуты — в поле `attributes` или с помощью функции `getItemAttributes`,
 
+<MdxTabs>
+
 ```tsx
 import React from 'react';
 
@@ -55,6 +57,7 @@ const items: Item[] = [
   },
   {
     text: 'ожидает',
+    form: 'transparent',
     color: 'warning',
   },
   {
@@ -91,6 +94,8 @@ export const BadgeGroupExampleItems = () => {
 ```
 
 <BadgeGroupExampleItems />
+
+</MdxTabs>
 
 ## Внешний вид
 
