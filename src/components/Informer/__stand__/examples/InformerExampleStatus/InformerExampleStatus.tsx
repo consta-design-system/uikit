@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Informer } from '../../../Informer';
 
-export const InformerExampleType = () => (
+export const InformerExampleStatus = () => (
   <Example col={{ 1: 0, 2: 720 }}>
     <Informer
       status="success"

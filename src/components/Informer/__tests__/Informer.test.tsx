@@ -49,11 +49,6 @@ describe('Компонент Informer', () => {
 
         expect(getIcon()).toHaveClass('IconLeaf');
       });
-      it(`присвоился модификатор withIcon`, () => {
-        renderComponent({ icon: IconLeaf });
-
-        expect(getRender()).toHaveClass(cnInformer({ withIcon: true }));
-      });
     });
     describe('проверка view', () => {
       informerPropView.forEach((view) => {

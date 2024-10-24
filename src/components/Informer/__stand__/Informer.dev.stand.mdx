@@ -1,11 +1,13 @@
 import { MdxMenu } from '@consta/stand';
 
 import { InformerExampleView } from './examples/InformerExampleView/InformerExampleView';
-import { InformerExampleType } from './examples/InformerExampleType/InformerExampleType';
+import { InformerExampleStatus } from './examples/InformerExampleStatus/InformerExampleStatus';
 import { InformerExampleIcon } from './examples/InformerExampleIcon/InformerExampleIcon';
 import { InformerExampleSuccess } from './examples/InformerExampleText/InformerExampleText';
 import { InformerExampleAlert } from './examples/InformerExampleText/InformerExampleText';
 import { InformerExampleSize } from './examples/InformerExampleSize/InformerExampleSize';
+
+import { MdxTabs } from '@consta/stand';
 
 ```tsx
 import { Informer } from '@consta/uikit/Informer';
@@ -13,21 +15,22 @@ import { Informer } from '@consta/uikit/Informer';
 
 <MdxMenu>
 
-- [Тип сообщения](#тип-сообщения)
+- [Статус сообщения](#статус-сообщения)
 - [Текст сообщения](#текст-сообщения)
 - [Внешний вид](#внешний-вид)
-  - [Тип информера](#тип-информера)
+  - [Вид информера](#вид-информера)
   - [Иконка](#иконка)
   - [Размер](#размер)
 - [Импорт](#импорт)
 - [Список свойств](#свойства)
-- [Пример использования](#пример)
 
 </MdxMenu>
 
-## Тип сообщения
+## Статус сообщения
 
-За тип сообщения отвечает свойство `type`.
+За тип сообщения отвечает свойство `status`.
+
+<MdxTabs>
 
 ```tsx
 <Informer
@@ -56,7 +59,9 @@ import { Informer } from '@consta/uikit/Informer';
 />
 ```
 
-<InformerExampleType />
+<InformerExampleStatus />
+
+</MdxTabs>
 
 ## Текст сообщения
 
@@ -67,26 +72,30 @@ import { Informer } from '@consta/uikit/Informer';
 
 ## Внешний вид
 
-### Тип информера
+### Вид информера
 
-За тип информера отвечает свойство `view`. В дизайн-системе есть информеры двух типов:
+За вид информера отвечает свойство `view`. В дизайн-системе есть информеры двух типов:
 с заливкой `filled` или без неё `bordered`.
+
+<MdxTabs>
 
 ```tsx
 <Informer label="Ваше сообщение отправлено" view="filled" status="success" />
-```
-
-```tsx
+<Informer label="Работа выполнена" view="outline" status="success" />
 <Informer label="Всё заполнено" view="bordered" status="success" />
 ```
 
 <InformerExampleView />
+
+</MdxTabs>
 
 ### Иконка
 
 С помощью свойства `icon` можно добавить иконку — любую из [библиотеки иконок](##LIBS.LIB/lib:icons).
 
 Не стоит добавлять иконку в информер без заливки.
+
+<MdxTabs>
 
 ```tsx
 <Informer
@@ -99,9 +108,13 @@ import { Informer } from '@consta/uikit/Informer';
 
 <InformerExampleIcon />
 
+</MdxTabs>
+
 ### Размер
 
 За размер сообщения отвечает свойство `size`. Варианты: `m`, `s`, по умолчанию — `m`.
+
+<MdxTabs>
 
 ```tsx
 <Informer
@@ -122,6 +135,8 @@ import { Informer } from '@consta/uikit/Informer';
 
 <InformerExampleSize />
 
+</MdxTabs>
+
 ## Импорт
 
 ```tsx
@@ -130,30 +145,14 @@ import { Informer } from '@consta/uikit/Informer';
 
 ## Свойства
 
-| Свойство                     | Тип или варианты значения                       | По умолчанию | Описание                           |
-| ---------------------------- | ----------------------------------------------- | ------------ | ---------------------------------- |
-| [`status?`](#тип-сообщения)  | `'system'`, `'alert'`, `'warning'`, '`success'` | `'success'`  | Тип сообщения                      |
-| [`title?`](#текст-сообщения) | `string`                                        | -            | Заголовок сообщения                |
-| [`label?`](#текст-сообщения) | `string`                                        | -            | Текст сообщения                    |
-| `children?`                  | `React.ReactNode`                               | -            | Текст сообщения                    |
-| [`view?`](#внешний-вид)      | `'filled'`, `'bordered'`                        | `'filled'`   | Тип информера (с заливкой или без) |
-| [`icon?`](#внешний-вид)      | `IconComponent`                                 | -            | Иконка                             |
-| [`size?`](#размер)           | `'m'`, `'s'`                                    | `'m'`        | Размер                             |
-| `ref?`                       | `React.Ref<HTMLDivElement>`                     | -            | Ссылка на DOM-элемент компонента   |
-| `className`                  | `string`                                        | -            | Дополнительный CSS-класс           |
-
-## Пример
-
-```ts
-import React from 'react';
-import { Informer } from '@consta/uikit/Informer';
-
-const App = () => {
-  return (
-    <Informer
-      title="Всё хорошо"
-      label="Уже сейчас всё хорошо, а будет ещё лучше"
-    />
-  );
-};
-```
+| Свойство                     | Тип или варианты значения                                                                                | По умолчанию | Описание                           |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------- | ------------ | ---------------------------------- |
+| [`status?`](#тип-сообщения)  | `'system'` <code>&#124;</code> `'alert'` <code>&#124;</code> `'warning'` <code>&#124;</code> '`success'` | `'success'`  | Тип сообщения                      |
+| [`title?`](#текст-сообщения) | `string`                                                                                                 | -            | Заголовок сообщения                |
+| [`label?`](#текст-сообщения) | `string`                                                                                                 | -            | Текст сообщения                    |
+| `children?`                  | `React.ReactNode`                                                                                        | -            | Текст сообщения                    |
+| [`view?`](#внешний-вид)      | `'filled'` <code>&#124;</code> `'bordered'` <code>&#124;</code> `'outline'`                              | `'filled'`   | Тип информера (с заливкой или без) |
+| [`icon?`](#внешний-вид)      | `IconComponent`                                                                                          | -            | Иконка                             |
+| [`size?`](#размер)           | `'m'` <code>&#124;</code> `'s'`                                                                          | `'m'`        | Размер                             |
+| `ref?`                       | `React.Ref<HTMLDivElement>`                                                                              | -            | Ссылка на DOM-элемент компонента   |
+| `className`                  | `string`                                                                                                 | -            | Дополнительный CSS-класс           |
