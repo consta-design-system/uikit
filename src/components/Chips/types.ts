@@ -1,6 +1,6 @@
 import { IconComponent } from '@consta/icons/Icon';
 
-import { badgePropStatus } from '##/components/Badge';
+import { BadgePropStatus } from '##/components/Badge';
 import { AsAttributes, AsTags } from '##/utils/types/AsTags';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
@@ -12,7 +12,7 @@ export const chipsPropActiveView = ['primary', 'secondary'] as const;
 export type ChipsPropActiveView = typeof chipsPropActiveView[number];
 export const chipsPropActiveViewDefault: ChipsPropActiveView = 'primary';
 
-export type ChipsPropStatus = typeof badgePropStatus[number];
+export type ChipsPropStatus = BadgePropStatus;
 
 export type ChipsItemProps = {
   size?: ChipsPropSize;
@@ -21,6 +21,9 @@ export type ChipsItemProps = {
   onRightIconClick?: React.MouseEventHandler<HTMLButtonElement>;
   iconLeft?: IconComponent;
   iconRight?: IconComponent;
+  /**
+   * "error" deprecated since version 5.13.0 use "alert"
+   */
   status?: ChipsPropStatus;
   label: string;
   active?: boolean;
@@ -76,6 +79,9 @@ export type ChipsProps<ITEM = ChipsDefaultItem> = PropsWithHTMLAttributesAndRef<
     items: ITEM[];
     interactive?: boolean;
     disabled?: boolean;
+    /**
+     * "error" deprecated since version 5.13.0 use "alert"
+     */
     getItemStatus?: ChipsPropGetItemStatus<ITEM>;
     getItemLabel?: ChipsPropGetItemLabel<ITEM>;
     getItemIconLeft?: ChipsPropGetItemIconLeft<ITEM>;

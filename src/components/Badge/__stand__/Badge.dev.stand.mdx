@@ -34,7 +34,7 @@ import { Badge } from '@consta/uikit/Badge';
 
 - `normal` — всё в порядке, так и должно быть (статус по умолчанию),
 - `success` — всё прошло успешно,
-- `error` — ничего не получилось, скорее всего, нужно начинать с начала,
+- `alert` — ничего не получилось, скорее всего, нужно начинать с начала,
 - `warning` — внимание, чтобы процесс прошел успешно, нужно что-то сделать,
 - `system` — системное сообщение.
 
@@ -49,7 +49,7 @@ import { Badge } from '@consta/uikit/Badge';
 <Badge status="system" label="Черновик" /> /* Документ ещё не готов */
 <Badge status="normal" label="Новый" /> /* Документ готов, отправьте на проверку */
 <Badge status="warning" label="На проверке" /> /* Подождите, документ проверяется */
-<Badge status="error" label="Есть ошибки" /> /* Исправьте ошибки в документе */
+<Badge status="alert" label="Есть ошибки" /> /* Исправьте ошибки в документе */
 <Badge status="success" label="Готов" /> /* Всё получилось, документ проверен  */
 ```
 
@@ -60,10 +60,10 @@ import { Badge } from '@consta/uikit/Badge';
 Если статусы очевидны и хорошо определяются по цвету (или просто нет места), можно
 сделать бейджик маленьким и круглым, без надписи — с помощью свойства `minified`.
 
-Например, если вы строите пешеходный переход, достаточно двух статусов — `success` и `error`.
+Например, если вы строите пешеходный переход, достаточно двух статусов — `success` и `alert`.
 
 ```ts
-<Badge minified status="error" label="Стойте" />
+<Badge minified status="alert" label="Стойте" />
 <Badge minified status="success" label="Идите" />
 ```
 
@@ -78,7 +78,7 @@ import { Badge } from '@consta/uikit/Badge';
 
 ```ts
 <Badge iconLeft={IconCheck} status="success" label="Съедобно" />
-<Badge iconRight={IconClose} status="error" label="Отрава" />
+<Badge iconRight={IconClose} status="alert" label="Отрава" />
 ```
 
 <BadgeExampleIcon />
@@ -135,7 +135,7 @@ import { Badge } from '@consta/uikit/Badge';
 | ---------------------------------- | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
 | [`size?`](#размер)                 | `'s' , 'm' , 'l'`                                       | `'m'`        | Размер                                                           |
 | [`view?`](#типы-бейджиков)         | `'filled' , 'stroked'`                                  | `'filled'`   | Вид                                                              |
-| [`status?`](#статус-и-содержимое)  | `'success' , 'error' , 'warning' , 'normal' , 'system'` | `'normal'`   | Статус                                                           |
+| [`status?`](#статус-и-содержимое)  | `'success' , 'alert' , 'warning' , 'normal' , 'system'` | `'normal'`   | Статус                                                           |
 | [`form?`](#форма)                  | `'default' , 'round'`                                   | `'default'`  | Форма                                                            |
 | [`minified?`](#типы-бейджиков)     | `boolean`                                               | -            | Отвечает за отрисовку бейджика без надписи, в виде точки         |
 | [`iconLeft?`](#бейджик-с-иконкой)  | `IconComponent`                                         | -            | Добавляет иконку слева                                           |

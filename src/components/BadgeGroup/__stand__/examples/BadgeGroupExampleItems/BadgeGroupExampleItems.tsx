@@ -1,8 +1,8 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { BadgePropStatus, BadgePropView } from '##/components/Badge/Badge';
-import { BadgeGroup } from '##/components/BadgeGroup/BadgeGroup';
+import { BadgePropStatus, BadgePropView } from '##/components/Badge';
+import { BadgeGroup } from '##/components/BadgeGroup';
 
 type Item = {
   text: string;
@@ -31,7 +31,7 @@ const items: Item[] = [
   {
     text: 'отказано',
     form: 'stroked',
-    color: 'error',
+    color: 'alert',
   },
 ];
 

@@ -29,7 +29,7 @@ const items: BadgeGroupDefaultItem[] = [
     key: 5,
     label: 'отказано',
     view: 'stroked',
-    status: 'error',
+    status: 'alert',
   },
 ];
 

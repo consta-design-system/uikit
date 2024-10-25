@@ -9,7 +9,7 @@ import {
   badgePropStatus,
   badgePropView,
   cnBadge,
-} from '../Badge';
+} from '..';
 
 type BadgeProps = React.ComponentProps<typeof Badge>;
 

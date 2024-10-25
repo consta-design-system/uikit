@@ -1,15 +1,14 @@
 import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
-import { AsAttributes, AsTags } from '##/utils/types/AsTags';
-import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
-
 import {
   BadgePropForm,
   BadgePropSize,
   BadgePropStatus,
   BadgePropView,
-} from '../Badge/Badge';
+} from '##/components/Badge';
+import { AsAttributes, AsTags } from '##/utils/types/AsTags';
+import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export type BadgeGroupDefaultItem = {
   key: string | number;
@@ -58,6 +57,9 @@ export type BadgeGroupProps<ITEM = BadgeGroupDefaultItem> =
       fitMode?: 'reduction' | 'wrap';
       getItemKey?: BadgeGroupPropGetItemKey<ITEM>;
       getItemLabel?: BadgeGroupPropGetItemLabel<ITEM>;
+      /**
+       * "error" deprecated since version 5.13.0 use "alert"
+       */
       getItemStatus?: BadgeGroupPropGetItemStatus<ITEM>;
       getItemView?: BadgeGroupPropGetItemView<ITEM>;
       getItemIconLeft?: BadgeGroupPropGetItemIconLeft<ITEM>;
