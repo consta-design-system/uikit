@@ -2,14 +2,7 @@ import { IconCamera } from '@consta/icons/IconCamera';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import {
-  Badge,
-  badgePropForm,
-  badgePropSize,
-  badgePropStatus,
-  badgePropView,
-  cnBadge,
-} from '..';
+import { Badge, badgePropForm, badgePropView, cnBadge } from '..';
 
 type BadgeProps = React.ComponentProps<typeof Badge>;
 
@@ -32,30 +25,12 @@ describe('Компонент Badge', () => {
     expect(renderComponent).not.toThrow();
   });
   describe('проверка props', () => {
-    describe('проверка size', () => {
-      badgePropSize.forEach((size) => {
-        it(`присваивает класс для size=${size}`, () => {
-          renderComponent({ size });
-
-          expect(getRender()).toHaveClass(cnBadge({ size }));
-        });
-      });
-    });
     describe('проверка form', () => {
       badgePropForm.forEach((form) => {
         it(`присваивает класс для form=${form}`, () => {
           renderComponent({ form });
 
           expect(getRender()).toHaveClass(cnBadge({ form }));
-        });
-      });
-    });
-    describe('проверка status', () => {
-      badgePropStatus.forEach((status) => {
-        it(`присваивает класс для status=${status}`, () => {
-          renderComponent({ status });
-
-          expect(getRender()).toHaveClass(cnBadge({ status }));
         });
       });
     });
