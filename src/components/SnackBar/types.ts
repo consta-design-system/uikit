@@ -12,6 +12,7 @@ export type SnackBarItemDefault = {
   actions?: SnackBarPropItemAction[];
   onClose?: (item: SnackBarItemDefault) => void;
   onAutoClose?: (item: SnackBarItemDefault) => void;
+  progress?: boolean | number;
 };
 
 /**
@@ -27,6 +28,7 @@ export type SnackBarPropItemAction = {
 export type SnackBarActionButtonProps = {
   actions: SnackBarPropItemAction[];
   className?: string;
+  form?: SnackBarPropForm;
 };
 
 export type SnackBarItemProps = PropsWithHTMLAttributesAndRef<
@@ -34,6 +36,8 @@ export type SnackBarItemProps = PropsWithHTMLAttributesAndRef<
     onClose?: () => void;
     form?: SnackBarPropForm;
     onAutoClose?: () => void;
+    progressView?: SnackBarPropProgressView;
+    progress?: number | boolean;
   },
   HTMLDivElement
 >;
@@ -78,6 +82,9 @@ export type SnackBarPropGetItemOnClose<ITEM> = (
 export type SnackBarPropGetItemOnAutoClose<ITEM> = (
   item: ITEM,
 ) => ((item: ITEM) => void) | undefined;
+export type SnackBarPropGetItemProgress<ITEM> = (
+  item: ITEM,
+) => number | boolean | undefined;
 
 export type Mappers<ITEM> = {
   getItemKey?: SnackBarPropGetItemKey<ITEM>;
@@ -89,11 +96,16 @@ export type Mappers<ITEM> = {
   getItemActions?: SnackBarPropGetItemActions<ITEM>;
   getItemOnClose?: SnackBarPropGetItemOnClose<ITEM>;
   getItemOnAutoClose?: SnackBarPropGetItemOnAutoClose<ITEM>;
+  getItemProgress?: SnackBarPropGetItemProgress<ITEM>;
 };
 
 export const snackBarPropForm = ['default', 'round', 'brick'] as const;
 export type SnackBarPropForm = typeof snackBarPropForm[number];
 export const snackBarPropFormDefault = snackBarPropForm[0];
+
+export const snackBarPropProgressView = ['spinText', 'spin', 'text'] as const;
+export type SnackBarPropProgressView = typeof snackBarPropProgressView[number];
+export const snackBarPropProgressViewDefault = snackBarPropProgressView[0];
 
 export type SnackBarProps<ITEM = SnackBarItemDefault> =
   PropsWithHTMLAttributesAndRef<
@@ -101,6 +113,7 @@ export type SnackBarProps<ITEM = SnackBarItemDefault> =
       items: ITEM[];
       children?: never;
       form?: SnackBarPropForm;
+      progressView?: SnackBarPropProgressView;
       onItemClose?: (item: ITEM) => void;
       onItemAutoClose?: (item: ITEM) => void;
     } & Mappers<ITEM>,
@@ -124,6 +137,12 @@ export type SnackBarTimerProps = {
   onTimeIsOver: () => void;
   startTime: number;
   hidden?: boolean;
+  className?: string;
+};
+
+export type SnackBarProgressProps = {
+  view: SnackBarPropProgressView;
+  progress?: number | boolean;
   className?: string;
 };
 

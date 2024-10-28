@@ -2,8 +2,9 @@ import './SnackBarActionButton.css';
 
 import React from 'react';
 
-import { cn } from '../../../utils/bem';
-import { Button } from '../../Button/Button';
+import { Button } from '##/components/Button';
+import { cn } from '##/utils/bem';
+
 import { SnackBarActionButtonProps } from '../types';
 
 const cnSnackBarActionButton = cn('SnackBarActionButton');
@@ -11,7 +12,7 @@ const cnSnackBarActionButton = cn('SnackBarActionButton');
 export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (
   props,
 ) => {
-  const { actions, className } = props;
+  const { actions, className, form } = props;
 
   if (actions.length < 1) {
     return null;
@@ -30,6 +31,7 @@ export const SnackBarActionButton: React.FC<SnackBarActionButtonProps> = (
           view="ghost"
           label={item.label}
           onClick={item.onClick}
+          form={form}
         />
       ))}
     </div>

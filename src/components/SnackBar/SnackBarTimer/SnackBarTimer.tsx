@@ -2,9 +2,10 @@ import './SnackBarTimer.css';
 
 import React, { useEffect, useState } from 'react';
 
-import { useTimer } from '../../../hooks/useTimer/useTimer';
-import { cn } from '../../../utils/bem';
-import { Timer } from '../../Timer/Timer';
+import { Timer } from '##/components/Timer';
+import { useTimer } from '##/hooks/useTimer';
+import { cn } from '##/utils/bem';
+
 import { SnackBarTimerProps } from '../types';
 
 const interval = 1000;
