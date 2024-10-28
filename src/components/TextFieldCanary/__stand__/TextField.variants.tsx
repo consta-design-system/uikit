@@ -2,7 +2,6 @@ import { IconPhoto } from '@consta/icons/IconPhoto';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React from 'react';
 
-import { FieldWrapper } from '##/components/FieldComponents';
 import {
   fieldPropForm,
   fieldPropFormDefault,
@@ -98,41 +97,29 @@ const Variants = () => {
   const rightSide = rightSideType && rightSideSelect[rightSideType];
 
   return (
-    <FieldWrapper
+    <TextField
+      id="inputId"
+      form={form}
+      status={status}
+      size={size}
+      view={view}
+      disabled={disabled}
       style={{ width: '100%' }}
-      label="Заголовок"
-      required
-      labelIcon={IconPhoto}
-      size="m"
-      side="md"
-      caption="Подпись подпись"
-      counter={[10, 100]}
-      labelHtmlFor="inputId"
-    >
-      <TextField
-        id="inputId"
-        form={form}
-        status={status}
-        size={size}
-        view={view}
-        disabled={disabled}
-        style={{ display: 'block' }}
-        leftSide={leftSide}
-        rightSide={rightSide}
-        maxLength={maxLength}
-        withClearButton={withClearButton}
-        placeholder={placeholder}
-        type={type}
-        incrementButtons={type === 'number' ? incrementButtons : undefined}
-        min={type === 'number' ? min : undefined}
-        max={type === 'number' ? max : undefined}
-        step={getStep(type, withStepArray, step)}
-        resize={type === 'textarea' ? resizeMap[resize] : undefined}
-        maxRows={type === 'textarea' && resize === 'auto' ? maxRows : undefined}
-        minRows={type === 'textarea' && resize === 'auto' ? minRows : undefined}
-        rows={type === 'textarea' && resize !== 'auto' ? rows : undefined}
-      />
-    </FieldWrapper>
+      leftSide={leftSide}
+      rightSide={rightSide}
+      maxLength={maxLength}
+      withClearButton={withClearButton}
+      placeholder={placeholder}
+      type={type}
+      incrementButtons={type === 'number' ? incrementButtons : undefined}
+      min={type === 'number' ? min : undefined}
+      max={type === 'number' ? max : undefined}
+      step={getStep(type, withStepArray, step)}
+      resize={type === 'textarea' ? resizeMap[resize] : undefined}
+      maxRows={type === 'textarea' && resize === 'auto' ? maxRows : undefined}
+      minRows={type === 'textarea' && resize === 'auto' ? minRows : undefined}
+      rows={type === 'textarea' && resize !== 'auto' ? rows : undefined}
+    />
   );
 };
 
