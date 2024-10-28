@@ -10,7 +10,7 @@ export function InformerExampleView() {
     <Example col={1}>
       <>
         <Informer
-          label="Ваше сообщение отправлено"
+          label="Сообщение отправлено"
           view="filled"
           status="success"
           className={cnMixSpace({ mB: 'm' })}
@@ -22,7 +22,7 @@ export function InformerExampleView() {
       </>
       <>
         <Informer
-          label="Всё заполнено"
+          label="Работа выполнена"
           view="outline"
           status="success"
           className={cnMixSpace({ mB: 'm' })}
@@ -34,7 +34,7 @@ export function InformerExampleView() {
       </>
       <>
         <Informer
-          label="Всё заполнено"
+          label="Все заполнено"
           view="bordered"
           status="success"
           className={cnMixSpace({ mB: 'm' })}
