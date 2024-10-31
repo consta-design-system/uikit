@@ -111,8 +111,11 @@ export const getDegreeMixing = (
   status: BadgePropStatus,
   view: BadgePropView,
 ) => {
-  if (view === 'tinted' && status === 'disabled') {
+  if (view === 'tinted' && status === 'system') {
     return '30%';
+  }
+  if (view === 'tinted' && status === 'disabled') {
+    return '100%';
   }
   if (view === 'tinted') {
     return '10%';

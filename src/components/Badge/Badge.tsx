@@ -52,7 +52,7 @@ export const Badge = forwardRefWithAs<BadgeProps>((props, ref) => {
   const { themeClassNames } = useTheme();
 
   const className =
-    status !== 'system' && view === 'filled'
+    status !== 'system' && status !== 'disabled' && view === 'filled'
       ? classnames(props.className, themeClassNames.color.accent)
       : props.className;
   const IconLeft = iconLeft ?? icon;
