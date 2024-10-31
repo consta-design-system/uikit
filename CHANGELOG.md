@@ -1,5 +1,16 @@
 # Changelog
 
+## v5.13.0 (31/10/2024)
+Самое важное:
+- В `Informer` добавили новый вид `outline`.
+
+---
+
+- [docs(TextField): remove wrapper from stand (#3793)](https://github.com/consta-design-system/uikit/commit/e9d1b61da756986bbe43dedb89378d149adc2b89) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Informer): add _view_outline (#3791)](https://github.com/consta-design-system/uikit/commit/35d82b078711f6b61238e73336c16ad1f9b4a5e3) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.12.0 (23/10/2024)
 Самое важное:
 - добавили новый компонент `AutoComplete(Canary)`. В отличие от старого компонента в нем появилась возможность множественного значения value.
@@ -377,21 +388,3 @@
 - [fix(TextField): move RefAttributes in TextFieldProps type (#3258)](https://github.com/consta-design-system/uikit/commit/8e87af0e63dd7be87181d6542079f41da7c76664) - [@gizeasy](https://github.com/gizeasy)
 - [fix(DatePicker): fix keyboard events (#3251)](https://github.com/consta-design-system/uikit/commit/9352e4659edc2fd0bf8069e53ba6bfeadc0b0e53) - [@N1MBER](https://github.com/N1MBER)
 - [feat(ComboboxCanary): added new prop allSelectedAllLabel (#3255)](https://github.com/consta-design-system/uikit/commit/b3a6d1cf15fcf46d572c29d7dcbd093e17413180) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.27.0 (06/09/2023)
-Самое важное:
-
-- `Badge` теперь можно использовать в качестве счетчика(`counter`)
-- В `DatePicker` изменили взаимодействие с клавиатуры и добавили свойства для управления выпадающим списком.  [Подробнее об изменениях](https://github.com/consta-design-system/uikit/pull/3204)
-- Добавили `Loader[Canary]` и переработали в нем позиционирование компонента.
-- В `Slider` добавили свойства для управления позиционированием тултипа.
-
----
-
-- [feat(Badge): add counter mod (#3240)](https://github.com/consta-design-system/uikit/commit/f4655dc62241c95688909351b76a18fc4d879da8) - [@gizeasy](https://github.com/gizeasy)
-- [feat(DatePicker): add new props: dropdownOpen, onDropdownOpen, ignoreOutsideClicksRefs (#3238)](https://github.com/consta-design-system/uikit/commit/30c100e25756bd21f1835061311890835a25bf53) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Loader): rewrite styles and layout (#3239)](https://github.com/consta-design-system/uikit/commit/a745c55f6d2149859b3012d2c1f5021c766b2fd7) - [@N1MBER](https://github.com/N1MBER)
-- [fix(ProgressStepBar): fix refs problem (#3247)](https://github.com/consta-design-system/uikit/commit/5f3baf693070797671565836dbd7980f2842a690) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Slider): add new props: tooltipDirection & tooltipPossibleDirections (#3246)](https://github.com/consta-design-system/uikit/commit/9cec9491781a2359ff777ab9ccc6718ab51cfcd8) - [@N1MBER](https://github.com/N1MBER)
