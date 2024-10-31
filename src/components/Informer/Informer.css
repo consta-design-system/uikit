@@ -1,28 +1,33 @@
 .Informer {
-  padding: var(--space-s) var(--space-m);
   color: var(--color-typo-primary);
-  border-radius: var(--control-radius);
-
-  &_withIcon {
-    display: flex;
-    flex-wrap: nowrap;
-  }
+  background-color: var(--informer-bg);
+  border-radius: var(--space-xs);
 
   &_view {
     &_bordered {
-      background-color: var(--color-bg-default);
-      border-left: var(--space-xs) solid var(--informer-status-color);
+      --informer-bg: var(--color-bg-default);
+      border-left: var(--space-xs) solid var(--informer-bg-color);
       box-shadow: var(--shadow-layer);
     }
 
     &_filled {
-      background-color: var(--informer-status-color);
+      --informer-bg: var(--informer-bg-color);
+    }
+
+    &_outline {
+      --informer-icon-color: var(--informer-typo-color);
+      --informer-bg:
+        color-mix(
+          in srgb,
+          var(--informer-bg-color) var(--informer-bg-opacity),
+          var(--color-bg-default)
+        );
+      border: var(--control-border-width) solid var(--informer-border-color);
     }
   }
 
   &-Icon {
-    margin-right: var(--space-s);
-    transform: translateY(var(--space-3xs));
-    flex-shrink: 0;
+    flex: 1;
+    color: var(--informer-icon-color, inherit);
   }
 }

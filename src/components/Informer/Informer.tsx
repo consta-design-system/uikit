@@ -4,6 +4,7 @@ import { classnames } from '@bem-react/classnames';
 import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
+import { cnMixFlex } from '##/mixs/MixFlex';
 import { cnMixSpace } from '##/mixs/MixSpace';
 
 import { cn } from '../../utils/bem';
@@ -11,7 +12,7 @@ import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttribut
 import { Text } from '../Text/Text';
 import { useTheme } from '../Theme/Theme';
 
-export const informerPropView = ['filled', 'bordered'] as const;
+export const informerPropView = ['filled', 'bordered', 'outline'] as const;
 export type InformerPropView = typeof informerPropView[number];
 export const informerPropViewDefault: InformerPropView = informerPropView[0];
 
@@ -20,6 +21,7 @@ export const informerPropStatus = [
   'system',
   'alert',
   'warning',
+  'normal',
 ] as const;
 export type InformerPropStatus = typeof informerPropStatus[number];
 export const informerPropStatusDefault: InformerPropStatus =
@@ -48,16 +50,15 @@ export const Informer = React.forwardRef<HTMLDivElement, InformerProps>(
       view = informerPropViewDefault,
       status = informerPropStatusDefault,
       size = informerPropSiseDefault,
-      icon,
+      icon: Icon,
       label,
       title,
       children,
       style,
       ...otherProps
     } = props;
-    const Icon = icon;
-    const withIcon = !!icon;
     const { themeClassNames } = useTheme();
+
     const className =
       status !== 'system' && view === 'filled'
         ? classnames(props.className, themeClassNames.color.accent)
@@ -69,19 +70,32 @@ export const Informer = React.forwardRef<HTMLDivElement, InformerProps>(
         className={cnInformer(
           {
             view,
-            withIcon,
           },
-          [className, cnMixSpace({ p: size })],
+          [
+            className,
+            cnMixSpace({ p: size }),
+            cnMixFlex({ flex: 'flex', gap: 's' }),
+          ],
         )}
         style={{
           ...style,
-          ['--informer-status-color' as string]: status
-            ? `var(--color-bg-${status})`
-            : undefined,
+          ['--informer-bg-color' as string]: `var(--color-bg-${status})`,
+          ['--informer-border-color' as string]:
+            status === 'system'
+              ? `var(--color-bg-border)`
+              : `var(--color-bg-${status})`,
+          ['--informer-typo-color' as string]: `var(--color-typo-${status})`,
+          ['--informer-bg-opacity' as string]:
+            status === 'system' ? '30%' : '10%',
         }}
         ref={ref}
       >
-        {Icon && <Icon className={cnInformer('Icon')} size="s" />}
+        {Icon && (
+          <Icon
+            className={cnInformer('Icon', [cnMixSpace({ mT: '3xs' })])}
+            size="s"
+          />
+        )}
         <div className={cnInformer('Content')}>
           {title && (
             <Text

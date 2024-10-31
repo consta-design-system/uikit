@@ -10,7 +10,7 @@ export const InformerExampleSize = () => (
         status="system"
         view="filled"
         title="Размер m"
-        label="Это обычное сообщение, и размер обычный"
+        label="Это обычное сообщение с обычным размером"
         size="m"
       />
       <Informer
