@@ -1,7 +1,7 @@
 .Informer {
   color: var(--color-typo-primary);
   background-color: var(--informer-bg);
-  border-radius: var(--control-radius);
+  border-radius: var(--space-xs);
 
   &_view {
     &_bordered {
