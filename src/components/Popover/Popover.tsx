@@ -106,6 +106,7 @@ export type PopoverProps = PropsWithJsxAttributes<
     onClickOutside?: ClickOutsideHandler;
     onSetDirection?: (direction: Direction) => void;
     viewportRef?: React.RefObject<HTMLElement>;
+    container?: Element;
   } & PositioningProps
 >;
 
@@ -194,6 +195,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       equalAnchorWidth,
       onSetDirection,
       viewportRef,
+      container = window.document.body,
       ...otherProps
     } = props;
 
@@ -308,7 +310,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         {...otherProps}
         preset={theme}
         className={cnPopover({ direction, notVisible }, [className])}
-        container={window.document.body}
+        container={container}
         ref={useForkRef([ref, componentRef])}
         style={{
           ...style,
