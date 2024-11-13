@@ -28,12 +28,26 @@ type Action =
   | { type: 'add'; item: SnackBarItemDefault }
   | { type: 'remove'; key: number | string };
 
+const progressVariantMap = {
+  true: true,
+  10: 10,
+  25: 25,
+  50: 50,
+  100: 100,
+};
+
 const Variants = () => {
   const withIcon = useBoolean('withIcon', false);
   const form = useSelect('form', snackBarPropForm, snackBarPropFormDefault);
   const withActionButtons = useBoolean('withActionButtons', false);
   const withCloseButton = useBoolean('withCloseButton', true);
   const withAutoClose = useBoolean('withAutoClose', false);
+  const withProgress = useSelect(
+    'withProgress',
+    ['true', '10', '25', '50', '100'],
+    undefined,
+  );
+
   const showProgress = useSelect(
     'showProgress',
     snackBarItemShowProgressProp,
@@ -93,6 +107,7 @@ const Variants = () => {
       key,
       message,
       status,
+      progress: withProgress ? progressVariantMap[withProgress] : undefined,
     };
     dispatchItems({ type: 'add', item });
   };

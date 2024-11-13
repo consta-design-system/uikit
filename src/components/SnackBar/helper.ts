@@ -8,6 +8,7 @@ import {
   SnackBarPropGetItemMessage,
   SnackBarPropGetItemOnAutoClose,
   SnackBarPropGetItemOnClose,
+  SnackBarPropGetItemProgress,
   SnackBarPropGetItemShowProgress,
   SnackBarPropGetItemStatus,
   SnackBarProps,
@@ -40,6 +41,10 @@ const defaultGetItemOnAutoClose: SnackBarPropGetItemOnAutoClose<
   SnackBarItemDefault
 > = (item) => item.onAutoClose;
 
+const defaultGetItemProgress: SnackBarPropGetItemProgress<
+  SnackBarItemDefault
+> = (item) => item.progress;
+
 export const withDefaultGetters = (props: SnackBarProps) => {
   return {
     ...props,
@@ -53,6 +58,7 @@ export const withDefaultGetters = (props: SnackBarProps) => {
     getItemActions: props.getItemActions || defaultGetItemActions,
     getItemOnClose: props.getItemOnClose || defaultGetItemOnClose,
     getItemOnAutoClose: props.getItemOnAutoClose || defaultGetItemOnAutoClose,
+    getItemProgress: props.getItemProgress || defaultGetItemProgress,
   };
 };
 
@@ -75,6 +81,7 @@ export const getItem = <ITEM>(
     getItemStatus,
     onItemClose,
     onItemAutoClose,
+    getItemProgress,
   } = props;
   return {
     key: getItemKey(item),
@@ -84,6 +91,7 @@ export const getItem = <ITEM>(
     showProgress: getItemShowProgress(item),
     icon: getItemIcon(item),
     actions: getItemActions(item),
+    progress: getItemProgress(item),
     onClose:
       typeof getItemOnClose(item) === 'function' ||
       typeof onItemClose === 'function'

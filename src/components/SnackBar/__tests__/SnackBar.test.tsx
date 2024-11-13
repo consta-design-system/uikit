@@ -5,11 +5,7 @@ import * as React from 'react';
 
 import { cnSnackBar, SnackBar } from '../SnackBar';
 import { cnSnackBarItem } from '../SnackBarItem/SnackBarItem';
-import {
-  SnackBarItemDefault,
-  snackBarItemStatus,
-  SnackBarProps,
-} from '../types';
+import { SnackBarItemDefault, SnackBarProps } from '../types';
 
 const testId = cnSnackBar();
 
@@ -69,26 +65,6 @@ describe('Компонент SnackBar', () => {
         ) as HTMLDivElement;
 
         expect(message.textContent).toEqual(messageText);
-      });
-    });
-    describe('проверка status', () => {
-      snackBarItemStatus.forEach((status) => {
-        it(`присваивает класс для status=${status} `, () => {
-          const items: SnackBarProps['items'] = [
-            {
-              key: '1',
-              status,
-            },
-          ];
-
-          renderComponent({ items });
-
-          const snackBar = screen.getByTestId(testId);
-          const item = snackBar.querySelector(
-            `.${cnSnackBarItem()}`,
-          ) as HTMLDivElement;
-          expect(item).toHaveClass(cnSnackBarItem({ status }));
-        });
       });
     });
     describe('проверка icon', () => {

@@ -1,23 +1,27 @@
-import '../../Theme/_color/Theme_color_gpnDark.css';
 import './SnackBarItem.css';
 
 import { IconClose } from '@consta/icons/IconClose';
 import React, { useEffect, useState } from 'react';
 
-import { useFlag } from '../../../hooks/useFlag/useFlag';
-import { cn } from '../../../utils/bem';
-import { isNumber, isString } from '../../../utils/type-guards';
-import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
-import { cnTheme } from '../../Theme/Theme';
-import { SnackBarActionButton } from '../SnackBarActionButton/SnackBarActionButton';
+import { Button } from '##/components/Button';
+import { Text } from '##/components/Text';
+import { useTheme } from '##/components/Theme';
+import { useFlag } from '##/hooks/useFlag';
+import { cnMixFlex } from '##/mixs/MixFlex';
+import { cnMixSpace } from '##/mixs/MixSpace';
+import { cn } from '##/utils/bem';
+import { isNumber, isString } from '##/utils/type-guards';
+
+import { SnackBarActionButton } from '../SnackBarActionButton';
 import { SnackBarLine } from '../SnackBarLine/SnackBarLine';
+import { SnackBarProgress } from '../SnackBarProgress';
 import { SnackBarTimer } from '../SnackBarTimer/SnackBarTimer';
 import {
   SnackBarItemComponent,
   SnackBarItemProps,
   snackBarItemStatusDefault,
   snackBarPropFormDefault,
+  snackBarPropProgressViewDefault,
   SnackBarTimerPropOnMount,
 } from '../types';
 
@@ -52,8 +56,13 @@ export const SnackBarItemRender = (
     status = snackBarItemStatusDefault,
     onAutoClose: onAutoCloseProp,
     className,
+    progressView = snackBarPropProgressViewDefault,
+    progress,
+    style,
     ...otherProps
   } = props;
+
+  const { themeClassNames } = useTheme();
 
   const [timerFunctions, setTimerFunctions] = useState<{
     start: () => void;
@@ -93,16 +102,23 @@ export const SnackBarItemRender = (
   };
 
   const handleClose = onClose ? () => onClose() : undefined;
+  const vsibleProgress = isNumber(progress) || progress === true;
 
   return (
     <div
       ref={ref}
-      className={cnSnackBarItem({ status, showProgress, form }, [
-        cnTheme({ color: 'gpnDark' }),
+      className={cnSnackBarItem({ showProgress, form }, [
+        cnMixFlex({ flex: 'flex', gap: 'm' }),
+        cnMixSpace({ p: 'm' }),
+        themeClassNames.color.accent,
         className,
       ])}
       onMouseEnter={autoCloseTime ? handleMouseEnter : undefined}
       onMouseLeave={autoCloseTime ? handleMouseLeave : undefined}
+      style={{
+        ...style,
+        ['--snack-bar-item-bg' as string]: `var(--color-bg-${status})`,
+      }}
       {...otherProps}
     >
       {autoCloseTime && showProgress !== 'line' && (
@@ -119,26 +135,51 @@ export const SnackBarItemRender = (
           showProgress !== 'timer') && (
           <Icon className={cnSnackBarItem('Icon')} size="m" />
         )}
-      <div className={cnSnackBarItem('Content')}>
-        {isString(message) || isNumber(message) ? (
-          <Text
-            view="primary"
-            size="m"
-            className={cnSnackBarItem('Message')}
-            lineHeight="s"
-          >
-            {message}
-          </Text>
-        ) : (
-          message
+      <div
+        className={cnSnackBarItem(
+          'Content',
+          cnMixFlex({ flex: 'flex', gap: 's', direction: 'column' }),
         )}
-        {actions && (
-          <SnackBarActionButton
-            actions={actions}
-            className={cnSnackBarItem('ActionButton')}
-          />
+      >
+        <div className={onClose ? cnMixSpace({ pR: 'm' }) : undefined}>
+          {isString(message) || isNumber(message) ? (
+            <Text
+              view="primary"
+              size="m"
+              className={cnSnackBarItem('Message')}
+              lineHeight="s"
+            >
+              {message}
+            </Text>
+          ) : (
+            message
+          )}
+        </div>
+        {(vsibleProgress || actions) && (
+          <div
+            className={cnSnackBarItem('Actions', [
+              cnMixFlex({
+                flex: 'flex',
+                align: 'flex-end',
+                gap: 's',
+                justify: 'flex-end',
+              }),
+            ])}
+          >
+            {actions && (
+              <SnackBarActionButton
+                className={cnSnackBarItem('ActionButtons')}
+                actions={actions}
+                form={form}
+              />
+            )}
+            {vsibleProgress && (
+              <SnackBarProgress progress={progress} view={progressView} />
+            )}
+          </div>
         )}
       </div>
+
       {onClose && (
         <Button
           className={cnSnackBarItem('CloseButton')}

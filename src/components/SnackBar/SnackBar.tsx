@@ -3,14 +3,16 @@ import './SnackBar.css';
 import React, { forwardRef } from 'react';
 import { Transition, TransitionGroup } from 'react-transition-group';
 
-import { useRefs } from '../../hooks/useRefs/useRefs';
-import { cn } from '../../utils/bem';
+import { useRefs } from '##/hooks/useRefs';
+import { cn } from '##/utils/bem';
+
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { getItem, withDefaultGetters } from './helper';
-import { SnackBarItem } from './SnackBarItem/SnackBarItem';
+import { SnackBarItem } from './SnackBarItem';
 import {
   SnackBarComponent,
   snackBarPropFormDefault,
+  snackBarPropProgressViewDefault,
   SnackBarProps,
 } from './types';
 
@@ -25,6 +27,7 @@ const SnackBarRender = (
     items,
     className,
     form = snackBarPropFormDefault,
+    progressView = snackBarPropProgressViewDefault,
     getItemKey,
     getItemActions,
     getItemAutoClose,
@@ -36,6 +39,7 @@ const SnackBarRender = (
     getItemStatus,
     onItemClose,
     onItemAutoClose,
+    getItemProgress,
     ...otherProps
   } = props;
 
@@ -55,6 +59,7 @@ const SnackBarRender = (
               <SnackBarItem
                 ref={refs[index]}
                 form={form}
+                progressView={progressView}
                 className={cnSnackBar('Item', { animate })}
                 {...getItem(item, props)}
               />
