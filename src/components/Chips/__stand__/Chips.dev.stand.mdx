@@ -95,7 +95,7 @@ export const items3: ChipsDefaultItem[] = [
     label: 'Согласован',
   },
   {
-    status: 'warning',
+    status: 'alert',
     label: 'Ожидает',
   },
   {
@@ -153,7 +153,7 @@ export const ChipsInteractiveExample = () => (
 ## Cвойства
 
 ```tsx
-type ChipsPropStatus = 'normal' | 'system' | 'success' | 'warning' | 'error';
+type ChipsPropStatus = 'normal' | 'system' | 'success' | 'alert' | 'error';
 
 export type ChipsDefaultItem = {
   iconLeft?: IconComponent;
@@ -332,20 +332,20 @@ export const ChipsWithContextMenuExample = () => {
 
 ## Свойства ChipsItem
 
-| Свойство                | Тип или варианты значения                                                           | По умолчанию | Описание                                                         |
-| ----------------------- | ----------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
-| `label`                 | `string`                                                                            | -            | Содержимое                                                       |
-| `interactive?`          | `boolean`                                                                           | -            | Включает фокус и ховер эффекты                                   |
-| `activeView?`           | `'primary'` &#124; `'secondary'`                                                    | `'primary'`  | Вид активного элемента                                           |
-| `onItemRightIconClick?` | `React.MouseEventHandler<HTMLButtonElement>`                                        | -            | Событие клика по иконки справа                                   |
-| `iconLeft?`             | `IconComponent`                                                                     | -            | Иконка слева                                                     |
-| `iconRight?`            | `IconComponent`                                                                     | -            | Иконка справа                                                    |
-| `status?`               | `'normal'` &#124; `'system'` &#124; `'success'` &#124; `'warning'` &#124; `'error'` | -            | Статус                                                           |
-| `active?`               | `boolean`                                                                           | -            | Активный                                                         |
-| `disabled?`             | `boolean`                                                                           | -            | Заблокирован                                                     |
-| `as?`                   | `keyof JSX.IntrinsicElements`                                                       | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
-| `className?`            | `string`                                                                            | -            | Дополнительный CSS-класс (mix)                                   |
-| `ref?`                  | `React.Ref<HTMLElement>`                                                            | -            | Ссылка на корневой DOM-элемент компонента                        |
+| Свойство                | Тип или варианты значения                                                         | По умолчанию | Описание                                                         |
+| ----------------------- | --------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
+| `label`                 | `string`                                                                          | -            | Содержимое                                                       |
+| `interactive?`          | `boolean`                                                                         | -            | Включает фокус и ховер эффекты                                   |
+| `activeView?`           | `'primary'` &#124; `'secondary'`                                                  | `'primary'`  | Вид активного элемента                                           |
+| `onItemRightIconClick?` | `React.MouseEventHandler<HTMLButtonElement>`                                      | -            | Событие клика по иконки справа                                   |
+| `iconLeft?`             | `IconComponent`                                                                   | -            | Иконка слева                                                     |
+| `iconRight?`            | `IconComponent`                                                                   | -            | Иконка справа                                                    |
+| `status?`               | `'normal'` &#124; `'system'` &#124; `'success'` &#124; `'alert'` &#124; `'error'` | -            | Статус                                                           |
+| `active?`               | `boolean`                                                                         | -            | Активный                                                         |
+| `disabled?`             | `boolean`                                                                         | -            | Заблокирован                                                     |
+| `as?`                   | `keyof JSX.IntrinsicElements`                                                     | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
+| `className?`            | `string`                                                                          | -            | Дополнительный CSS-класс (mix)                                   |
+| `ref?`                  | `React.Ref<HTMLElement>`                                                          | -            | Ссылка на корневой DOM-элемент компонента                        |
 
 ## ChipsChoice
 
@@ -358,7 +358,7 @@ export const items: ChipsDefaultItem[] = [
     label: 'Согласован',
   },
   {
-    status: 'warning',
+    status: 'alert',
     label: 'Ожидает',
   },
   {

@@ -8,7 +8,7 @@ export const BadgeExampleStatus = () => (
     <Badge status="system" label="Черновик" />
     <Badge status="normal" label="Новый" />
     <Badge status="warning" label="На проверке" />
-    <Badge status="error" label="Есть ошибки" />
+    <Badge status="alert" label="Есть ошибки" />
     <Badge status="success" label="Готов" />
   </Example>
 );

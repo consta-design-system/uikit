@@ -13,7 +13,7 @@ export const items: ChipsDefaultItem[] = [
     label: 'Ожидает',
   },
   {
-    status: 'error',
+    status: 'alert',
     label: 'Отказано',
   },
 ];

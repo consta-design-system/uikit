@@ -13,7 +13,7 @@ import {
   badgePropStatusDefault,
   badgePropView,
   badgePropViewDefault,
-} from '../Badge';
+} from '..';
 
 const Variants = () => {
   const minified = useBoolean('minified', false);

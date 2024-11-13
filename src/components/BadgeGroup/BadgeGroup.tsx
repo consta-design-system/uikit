@@ -2,15 +2,15 @@ import './BadgeGroup.css';
 
 import React, { forwardRef } from 'react';
 
-import { forkRef, useForkRef } from '##/hooks/useForkRef';
-import { useHideElementsInLine } from '##/hooks/useHideElementsInLine';
-import { cn } from '##/utils/bem';
-
 import {
   Badge,
   badgePropFormDefault,
   badgePropSizeDefault,
-} from '../Badge/Badge';
+} from '##/components/Badge';
+import { forkRef, useForkRef } from '##/hooks/useForkRef';
+import { useHideElementsInLine } from '##/hooks/useHideElementsInLine';
+import { cn } from '##/utils/bem';
+
 import { withDefaultGetters } from './helper';
 import { BadgeGroupComponent, BadgeGroupProps } from './types';
 

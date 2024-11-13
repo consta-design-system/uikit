@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { BadgePropSize } from '##/components/Badge/Badge';
+import { BadgePropSize } from '##/components/Badge';
 import { BadgeGroup, BadgeGroupDefaultItem } from '##/components/BadgeGroup';
 
 const items: BadgeGroupDefaultItem[] = [
@@ -30,7 +30,7 @@ const items: BadgeGroupDefaultItem[] = [
     key: 5,
     label: 'отказано',
     view: 'stroked',
-    status: 'error',
+    status: 'alert',
   },
 ];
 

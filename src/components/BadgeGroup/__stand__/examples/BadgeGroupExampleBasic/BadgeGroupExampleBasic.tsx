@@ -15,7 +15,7 @@ const badges: BadgeGroupDefaultItem[] = [
   {
     key: '2',
     label: 'ожидает',
-    status: 'warning',
+    status: 'alert',
   },
   {
     key: '3',
@@ -32,7 +32,7 @@ const badges: BadgeGroupDefaultItem[] = [
     key: '5',
     label: 'отказано',
     view: 'stroked',
-    status: 'error',
+    status: 'alert',
   },
 ];
 
