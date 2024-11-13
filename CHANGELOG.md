@@ -1,5 +1,20 @@
 # Changelog
 
+## v5.14.0 (13/11/2024)
+Самое важное:
+- В `SnackBar` добавили возможность указать прогресс.
+- В `Badge` добавили модификации `_view_pinted` и `_status_disabled`.
+- В `Popover` добавили возможность указать родительский контейнер.
+
+---
+
+- [fix(FieldComponents): fixed import (#3817)](https://github.com/consta-design-system/uikit/commit/3570773d39dd9209cd7c143dc6e2e9e2c986e3e5) - [@gizeasy](https://github.com/gizeasy)
+- [feat(SnackBar): add progress (#3796)](https://github.com/consta-design-system/uikit/commit/0cb9703b6a9956aaf2563717fd471a79d67b6d10) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Badge): add _view_pinted and _status_disabled (#3792)](https://github.com/consta-design-system/uikit/commit/04e198e5261fbf69df6de065a89fc5f791773319) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Popover): add container property (#3812)](https://github.com/consta-design-system/uikit/commit/00c224a26cfd9b14f2959f2f9d9891bd91f2642a) - [@ZettZet](https://github.com/ZettZet)
+
+--------------------
+
 ## v5.13.0 (31/10/2024)
 Самое важное:
 - В `Informer` добавили новый вид `outline`.
@@ -369,22 +384,3 @@
 
 ## v4.28.1 (14/09/2023)
 - [feat(List): added reexport renderHeader](https://github.com/consta-design-system/uikit/commit/76cd7cef99b04fb5b297261740aa60d79afb99ab) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.28.0 (13/09/2023)
-Самое важное:
-- Добавлены новые компоненты `Chips`, `ChipsItem`, `ChipsChoice`.
-- В `ChoiceGroup`, `CheckboxGroup` добавили свойства `getItemAttributes` и `getItemRef`.
-- В `Combobox` добавили свойство `allSelectedAllLabel`.
-
----
-
-- [feat(Chips): add components Chips, ChipsItem, ChipsChoice (#3266)](https://github.com/consta-design-system/uikit/commit/9783ae1ca2ba472b59834b7a1754b7ea47baed5d) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Button): fix icon styles (#3269)](https://github.com/consta-design-system/uikit/commit/a19ba2db92c06dc152808a20d675b438f12fd89f) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Switch): fix example (#3264)](https://github.com/consta-design-system/uikit/commit/7df3aa2782f7ffe2f3bc2dae569497759aa661fe) - [@N1MBER](https://github.com/N1MBER)
-- [feat(ChoiceGroup, CheckboxGroup): added props getItemAttributes and getItemRef (#3263)](https://github.com/consta-design-system/uikit/commit/9f8708f63a88d911525980e82f12f5d998d5b518) - [@N1MBER](https://github.com/N1MBER)
-- [docs(Table): fix typo (#3260)](https://github.com/consta-design-system/uikit/commit/4c2336c0686d0a49f1daff77bb4c4ba8692e954c) - [@nevsky118](https://github.com/nevsky118)
-- [fix(TextField): move RefAttributes in TextFieldProps type (#3258)](https://github.com/consta-design-system/uikit/commit/8e87af0e63dd7be87181d6542079f41da7c76664) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): fix keyboard events (#3251)](https://github.com/consta-design-system/uikit/commit/9352e4659edc2fd0bf8069e53ba6bfeadc0b0e53) - [@N1MBER](https://github.com/N1MBER)
-- [feat(ComboboxCanary): added new prop allSelectedAllLabel (#3255)](https://github.com/consta-design-system/uikit/commit/b3a6d1cf15fcf46d572c29d7dcbd093e17413180) - [@N1MBER](https://github.com/N1MBER)
