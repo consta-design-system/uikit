@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { TextField } from '../../../TextField';
+import { TextField } from '../../../TextFieldCanary';
 
 export const TextFieldExampleView = () => {
   const [value, setValue] = useState<string | null>(null);

@@ -2,7 +2,7 @@ import { IconDiamond } from '@consta/icons/IconDiamond';
 import { Example } from '@consta/stand';
 import React, { useState } from 'react';
 
-import { TextField } from '../../../TextField';
+import { TextField } from '../../../TextFieldCanary';
 
 export const TextFieldExampleTextPlaceholder = () => {
   const [value, setValue] = useState<string | null>(null);

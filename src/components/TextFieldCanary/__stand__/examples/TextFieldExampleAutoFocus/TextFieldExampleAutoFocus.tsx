@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 
 import { Button } from '##/components/Button';
 
-import { TextField } from '../../../TextField';
+import { TextField } from '../../../TextFieldCanary';
 
 export const TextFieldExampleAutoFocus = () => {
   return (
