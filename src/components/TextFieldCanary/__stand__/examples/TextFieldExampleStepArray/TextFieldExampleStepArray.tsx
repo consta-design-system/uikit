@@ -1,7 +1,7 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { TextField } from '../../../TextField';
+import { TextField } from '../../../TextFieldCanary';
 
 export const TextFieldExampleStepArray = () => {
   return (

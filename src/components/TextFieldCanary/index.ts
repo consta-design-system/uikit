@@ -1,4 +1,4 @@
-export * from './TextField';
+export * from './TextFieldCanary';
 
 export * from './TextFieldTypeText';
 export * from './TextFieldTypeTextArea';

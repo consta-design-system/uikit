@@ -10,7 +10,7 @@ import { FieldLabel } from '##/components/FieldLabel';
 import { Text } from '##/components/Text';
 import { cnMixSpace } from '##/mixs/MixSpace';
 
-import { TextField } from '../../../TextField';
+import { TextField } from '../../../TextFieldCanary';
 
 export const TextFieldExampleMaskAmount = () => {
   const { ref, value, unmaskedValue } = useIMask<
