@@ -1847,6 +1847,11 @@
     webpack-manifest-plugin "^5.0.0"
     workbox-webpack-plugin "^6.4.1"
 
+"@consta/uikit@^5.0.1":
+  version "5.14.0"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.14.0.tgz#1457c54a28623db720e9e6efb2fb5451aa533f73"
+  integrity sha512-IeBhi7HgyRw2aZWVb9va5rAxt/EIqZ2vJx+30OKMWNwBOfViV2QXLpTQ74z+sJXg+L5KinO0rtAbyIfjkrjPMQ==
+
 "@consta/uikit@^5.4.1":
   version "5.9.2"
   resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.9.2.tgz#5e3ee82b51445e8648305b82f096b23daf2f22c4"

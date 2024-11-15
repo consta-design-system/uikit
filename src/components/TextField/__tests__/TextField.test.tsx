@@ -176,4 +176,28 @@ describe('Компонент Button', () => {
       });
     });
   });
+  describe('проверка onWheel при input[type="number"]', () => {
+    it('проверяет поведение при step = 0', () => {
+      const handleChange = jest.fn();
+      renderComponent({
+        type: 'number',
+        step: 0,
+        onChange: handleChange,
+      });
+
+      const input = getInput() as Element;
+      fireEvent.wheel(input, { deltaMode: 0, deltaY: 10 });
+
+      expect(handleChange).toHaveBeenCalledTimes(0);
+    });
+    it('проверяет поведение при наличии step', () => {
+      const handleChange = jest.fn();
+
+      renderComponent({ type: 'number', step: 1, onChange: handleChange });
+      const input = getInput() as Element;
+      fireEvent.wheel(input, { deltaMode: 0, deltaY: 10 });
+
+      expect(handleChange).toHaveBeenCalledTimes(1);
+    });
+  });
 });
