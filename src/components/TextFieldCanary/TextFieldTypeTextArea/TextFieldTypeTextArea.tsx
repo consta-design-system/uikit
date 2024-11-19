@@ -67,6 +67,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       onPaste,
       onPasteCapture,
       onClear,
+      onWheel,
       ...otherProps
     } = props;
 
@@ -127,6 +128,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       onCutCapture,
       onPaste,
       onPasteCapture,
+      onWheel,
     };
 
     const textAreaNoAutoSizeProps = {

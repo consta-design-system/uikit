@@ -68,6 +68,7 @@ const FieldArrayValueInlineControlRender = (
     onCutCapture,
     onPaste,
     onPasteCapture,
+    onWheel,
     ...otherProps
   } = props;
 
@@ -127,6 +128,7 @@ const FieldArrayValueInlineControlRender = (
         onCutCapture={onCutCapture}
         onPaste={onPaste}
         onPasteCapture={onPasteCapture}
+        onWheel={onWheel}
       />
       <div
         ref={fakeInputRef}
