@@ -241,20 +241,10 @@ export const TextFieldRender = <TYPE extends string>(
   });
 
   const onWheel = (e: React.WheelEvent<HTMLInputElement>) => {
-    if (!step) {
-      inputRef.current?.blur();
-    } else if (type === 'number' && onChange) {
-      const { value } = e.target as HTMLInputElement;
-
-      onChange(value, {
-        e,
-        id,
-        name,
-      });
-    }
-
     if (onWheelProp) {
       onWheelProp(e);
+    } else if (type === 'number') {
+      inputRef.current?.blur();
     }
   };
 

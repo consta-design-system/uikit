@@ -63,6 +63,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       onPaste,
       onPasteCapture,
       onClear,
+      onWheel,
       ...otherProps
     } = props;
 
@@ -152,6 +153,14 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       ),
     );
 
+    const handleWheel = (e: React.WheelEvent<HTMLInputElement>) => {
+      if (onWheel) {
+        onWheel(e);
+      } else {
+        inputRef.current?.blur();
+      }
+    };
+
     return (
       <FieldControlLayout
         {...otherProps}
@@ -197,6 +206,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
           onKeyDownCapture={onKeyDownCapture}
           onKeyUp={onKeyUp}
           onKeyUpCapture={onKeyUpCapture}
+          onWheel={handleWheel}
           maxLength={maxLength}
           disabled={disabled}
           type={type}
