@@ -1,3 +1,4 @@
+/* cspell:disable */
 export type KeyCodeList = {
   /** The user agent wasn't able to map the event's virtual keycode to a specific key value. This can happen due to hardware or software constraints; or because of constraints around the platform on which the user agent is running. */
   Unidentified: 'Unidentified';
@@ -28,7 +29,6 @@ export type KeyCodeList = {
 
   /** The NumLock (Number Lock) key. Toggles the numeric keypad between number entry some other mode (often directional arrows). */
   NumLock: 'NumLock';
-
   /** The Scroll Lock key. Toggles beteen scrolling and cursor movement modes. */
   ScrollLock: 'ScrollLock';
 
@@ -142,13 +142,13 @@ export type KeyCodeList = {
 
   /**
    * The Pause key. Pauses the current application or state; if applicable.
-   * This shouldn't be confused with the "MediaPause" key value; which is used for media controllers; rather than to control applications and processes.
+   * This shouldn't be confused with the "MediaPause" key value; which is used for media controlers; rather than to control applications and processes.
    */
   Pause: 'Pause';
 
   /**
    * The Play key. Resumes a previously paused application; if applicable.
-   * This shouldn't be confused with the "MediaPlay" key value; which is used for media controllers; rather than to control applications and processes.
+   * This shouldn't be confused with the "MediaPlay" key value; which is used for media controlers; rather than to control applications and processes.
    */
   Play: 'Play';
 
@@ -722,7 +722,7 @@ export type KeyCodeList = {
   /** Opens the user interface for selecting on demand content or programs to watch. */
   OnDemand: 'OnDemand';
 
-  /** Starts the process of pairing the remote with a device to be controlled. */
+  /** Starts the process of pairing the remote with a device to be controled. */
   Pairing: 'Pairing';
 
   /** A button to move the picture-in-picture view downward. */

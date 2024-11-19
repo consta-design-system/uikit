@@ -6,7 +6,7 @@ import { Transition } from 'react-transition-group';
 import {
   cnListBox,
   ListItem,
-  mapVerticalSpase,
+  mapVerticalSpace,
 } from '##/components/ListCanary';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cnMixSpace } from '##/mixs/MixSpace';
@@ -33,9 +33,9 @@ import { SelectItemAll } from '../SelectItemAll/SelectSelectAll';
 import { SelectLoader } from '../SelectLoader/SelectLoader';
 import { PropSize, RenderItemProps } from '../types';
 
-export const selectDropdownform = ['default', 'brick', 'round'] as const;
-export type SelectDropdownPropForm = typeof selectDropdownform[number];
-export const defaultSelectDropdownPropForm = selectDropdownform[0];
+export const selectDropdownForm = ['default', 'brick', 'round'] as const;
+export type SelectDropdownPropForm = typeof selectDropdownForm[number];
+export const defaultSelectDropdownPropForm = selectDropdownForm[0];
 
 type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   size: PropSize;
@@ -143,7 +143,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
             <div
               className={cnSelectDropdown('List', [
                 cnMixSpace({
-                  pV: mapVerticalSpase[size],
+                  pV: mapVerticalSpace[size],
                 }),
                 cnMixScrollBar(),
               ])}

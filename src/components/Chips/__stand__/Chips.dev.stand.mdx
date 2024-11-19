@@ -22,7 +22,7 @@ import { Chips } from '@consta/uikit/Chips';
   - [Пример отображения статуса](#пример-отображения-статуса)
 - [Размер](#размер)
 - [Взаимодействие](#взаимодействие)
-- [Cвойства](#свойства)
+- [Свойства](#свойства)
 - [ChipsItem](#chipsitem)
   - [Свойства ChipsItem](#свойства-chipsitem)
 - [ChipsChoice](#chipschoice)
@@ -32,11 +32,11 @@ import { Chips } from '@consta/uikit/Chips';
 
 ## Содержимое
 
-Содерживое можно передать в поле `items` в объекте типа [`ChipsDefaultItem`](#свойства). Что можно указать:
+Содержимое можно передать в поле `items` в объекте типа [`ChipsDefaultItem`](#свойства). Что можно указать:
 
 - лейбл — в поле `label` или с помощью функции `getItemLabel`,
 - статус — в поле `status` или с помощью функции `getItemStatus`,
-- исконка справа — в поле `iconRight` или с помощью функции `getItemIconRight`,
+- иконка справа — в поле `iconRight` или с помощью функции `getItemIconRight`,
 - иконка слева — в поле `iconLeft` или с помощью функции `getItemIconLeft`,
 - HTML-тег — в поле `as` или с помощью функции `getItemAs`,
 - дополнительные атрибуты — в поле `attributes` или с помощью функции `getItemAttributes`,
@@ -150,7 +150,7 @@ export const ChipsInteractiveExample = () => (
 
 <ChipsInteractiveExample />
 
-## Cвойства
+## Свойства
 
 ```tsx
 type ChipsPropStatus = 'normal' | 'system' | 'success' | 'alert' | 'error';
@@ -203,29 +203,29 @@ export type ChipsPropItemOnRightIconClick<ITEM> = (
 ) => void;
 ```
 
-| Свойство                                   | Тип или варианты значения        | По умолчанию | Описание                                                |
-| ------------------------------------------ | -------------------------------- | ------------ | ------------------------------------------------------- |
-| [`items?`](#содержимое)                    | `ITEM[]`                         | -            | Содержимое                                              |
-| [`interactive?`](#взаимодействие)          | `boolean`                        | -            | Включает фокус и ховер эффекты                          |
-| [`disabled?`](#взаимодействие)             | `boolean`                        | false        | Включает блокировку компонента                          |
-| [`onItemClick?`](#взаимодействие)          | `ChipsPropOnItemClick`           | -            | Событие клика по элементу                               |
-| [`onItemRightIconClick?`](#взаимодействие) | `ChipsPropItemOnRightIconClick`  | -            | Событие клика по иконки справа                          |
-| `activeView?`                              | `'primary'` &#124; `'secondary'` | `'primary'`  | Вид активного элемента                                  |
-| [`getItemStatus?`](#содержимое)            | `ChipsPropGetItemStatus`         | -            | Функция указывает статус элемента                       |
-| [`getItemLabel?`](#содержимое)             | `ChipsPropGetItemLabel`          | -            | Функция указывает лейбл элемента                        |
-| [`getItemIconLeft?`](#содержимое)          | `ChipsPropGetItemIconLeft`       | -            | Функция указывает иконку слева элемента                 |
-| [`getItemIconRight?`](#содержимое)         | `ChipsPropGetItemIconRight`      | -            | Функция указывает иконку справа элемента                |
-| [`getItemRef?`](#содержимое)               | `ChipsPropGetItemRef`            | -            | Функция указывает ссылку на элемент                     |
-| [`getItemAs?`](#содержимое)                | `ChipsPropGetItemAs`             | -            | Функция указывает HTML-тег элемента                     |
-| [`getItemAttributes?`](#содержимое)        | `ChipsPropGetItemAttributes`     | -            | Функция указывает HTML атрибуты элемента                |
-| [`getItemActive?`](#содержимое)            | `ChipsPropGetItemActive`         | -            | Функция указывает на признак активности элемента        |
-| [`getItemDisabled?`](#содержимое)          | `ChipsPropGetItemDisabled`       | -            | Функция указывает на признак заблокированности элемента |
+| Свойство                                   | Тип или варианты значения        | По умолчанию | Описание                                               |
+| ------------------------------------------ | -------------------------------- | ------------ | ------------------------------------------------------ |
+| [`items?`](#содержимое)                    | `ITEM[]`                         | -            | Содержимое                                             |
+| [`interactive?`](#взаимодействие)          | `boolean`                        | -            | Включает фокус и ховер эффекты                         |
+| [`disabled?`](#взаимодействие)             | `boolean`                        | false        | Включает блокировку компонента                         |
+| [`onItemClick?`](#взаимодействие)          | `ChipsPropOnItemClick`           | -            | Событие клика по элементу                              |
+| [`onItemRightIconClick?`](#взаимодействие) | `ChipsPropItemOnRightIconClick`  | -            | Событие клика по иконки справа                         |
+| `activeView?`                              | `'primary'` &#124; `'secondary'` | `'primary'`  | Вид активного элемента                                 |
+| [`getItemStatus?`](#содержимое)            | `ChipsPropGetItemStatus`         | -            | Функция указывает статус элемента                      |
+| [`getItemLabel?`](#содержимое)             | `ChipsPropGetItemLabel`          | -            | Функция указывает лейбл элемента                       |
+| [`getItemIconLeft?`](#содержимое)          | `ChipsPropGetItemIconLeft`       | -            | Функция указывает иконку слева элемента                |
+| [`getItemIconRight?`](#содержимое)         | `ChipsPropGetItemIconRight`      | -            | Функция указывает иконку справа элемента               |
+| [`getItemRef?`](#содержимое)               | `ChipsPropGetItemRef`            | -            | Функция указывает ссылку на элемент                    |
+| [`getItemAs?`](#содержимое)                | `ChipsPropGetItemAs`             | -            | Функция указывает HTML-тег элемента                    |
+| [`getItemAttributes?`](#содержимое)        | `ChipsPropGetItemAttributes`     | -            | Функция указывает HTML атрибуты элемента               |
+| [`getItemActive?`](#содержимое)            | `ChipsPropGetItemActive`         | -            | Функция указывает на признак активности элемента       |
+| [`getItemDisabled?`](#содержимое)          | `ChipsPropGetItemDisabled`       | -            | Функция указывает на признак заблокированного элемента |
 
 ## ChipsItem
 
 Вы можете взять отдельно элемент чипсов.
 
-Пример чипа с выподающим списком
+Пример чипа с выпадающим списком
 
 ```tsx
 import './ChipsWithContextMenuExample.css';
@@ -349,7 +349,7 @@ export const ChipsWithContextMenuExample = () => {
 
 ## ChipsChoice
 
-Компонент построенный на `Chips` c свозможностью выбора элемента.
+Компонент построенный на `Chips` c возможностью выбора элемента.
 
 ```tsx
 export const items: ChipsDefaultItem[] = [
@@ -400,7 +400,7 @@ type ChipsChoicePropValue<ITEM, MULTIPLE extends boolean> =
 | ----------------------- | ------------------------- | ------------ | ------------------- |
 | `onChange?`             | `ChipsChoicePropOnChange` | -            | Событие выбора      |
 | `value?`                | `ChipsChoicePropValue`    | -            | Выбранное значение  |
-| `multiple?`             | `booleam`                 | -            | Множественный выбор |
+| `multiple?`             | `boolean`                 | -            | Множественный выбор |
 | `onItemClick`           | -                         | -            | Отсутствует         |
 | `onItemRightIconClick?` | -                         | -            | Отсутствует         |
 | `getItemActive?`        | -                         | -            | Отсутствует         |

@@ -33,6 +33,7 @@ import { AvatarGroup } from '@consta/uikit/AvatarGroup';
 Если указать 'auto', то количество аватарок будет подстраиваться под ширину компонента.
 
 ```tsx
+/* cspell:disable */
 export const avatarGroupItems: AvatarGroupDefaultItem[] = [
   {
     name: 'Вадим Матвеев',
@@ -83,6 +84,7 @@ export const avatarGroupItems: AvatarGroupDefaultItem[] = [
     url: '',
   },
 ];
+/* cspell:enable */
 
 <AvatarGroup items={avatarGroupItems} visibleCount={4} />
 <AvatarGroup items={avatarGroupItems} visibleCount={6} />
@@ -167,6 +169,7 @@ const App = () => {
       image: '',
     },
     {
+      /* cspell:disable-next-line */
       label: 'Лидия Индриксон',
       image: '',
     },

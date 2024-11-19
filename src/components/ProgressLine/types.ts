@@ -3,7 +3,7 @@ import React from 'react';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 export const progressLinePropSize = ['m', 's'] as const;
-export type PropgressLinePropSize = typeof progressLinePropSize[number];
+export type ProgressLinePropSize = typeof progressLinePropSize[number];
 export const defaultProgressLinePropSize = progressLinePropSize[0];
 
 export type ProgressLineItemDefault = {
@@ -17,7 +17,7 @@ export type ProgressLinePropGetItemLabel<ITEM> = (
 export type ProgressLineProps<ITEM = ProgressLineItemDefault> =
   PropsWithHTMLAttributesAndRef<
     {
-      size?: PropgressLinePropSize;
+      size?: ProgressLinePropSize;
       value?: number;
       steps?: ITEM[];
       getItemLabel?: ProgressLinePropGetItemLabel<ITEM>;

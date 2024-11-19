@@ -232,7 +232,7 @@ export const ButtonExampleNameAgreement = () => {
           size="m"
           lineHeight="m"
         >
-          Примите лиценизонное соглашение, ну пожалуйста.
+          Примите лицензионное соглашение, ну пожалуйста.
         </Text>
         <Button label="Принимаю" />
       </div>

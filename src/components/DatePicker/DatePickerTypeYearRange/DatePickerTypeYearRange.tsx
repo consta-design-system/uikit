@@ -57,7 +57,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
     const startFocused = fieldFocused === 'start';
     const endFocused = fieldFocused === 'end';
 
-    const hadleChange: DatePickerDropdownPropOnChange = (value, { e }) => {
+    const handleChange: DatePickerDropdownPropOnChange = (value, { e }) => {
       if (startFocused) {
         const newValue = normalizeRangeValue([value, props?.value?.[1]]);
         props.onChange?.(newValue, {
@@ -213,7 +213,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
           minDate={props.minDate}
           maxDate={props.maxDate}
           form={dropdownForm}
-          onChange={hadleChange}
+          onChange={handleChange}
           renderAdditionalControls={renderAdditionalControls}
           zIndex={getDropdownZIndex(props.style)}
           disableDates={disableDates}

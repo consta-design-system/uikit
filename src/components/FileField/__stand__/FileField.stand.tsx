@@ -7,6 +7,7 @@ export default createStand({
   description: 'Можно выбрать файлы, чтобы загрузить или отправить.',
   version: '1.6.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'filefield-8s0rny',
   alias: ['поле', 'ввод', 'файл', 'файлы'],
   figma:

@@ -1,5 +1,5 @@
 /*
-задается из компонета
+задается из компонента
 --label-length
 */
 
@@ -13,10 +13,10 @@
     --date-time-item-width: var(--control-height-s);
     --date-time-item-height: var(--control-height-s);
     --date-time-cell-vertical-gap: var(--space-3xs);
-    --date-time-cell-horisontal-gap: var(--space-3xs);
+    --date-time-cell-horizontal-gap: var(--space-3xs);
     --date-time-cell-width:
       calc(
-        var(--date-time-item-width) + (var(--date-time-cell-horisontal-gap) * 2)
+        var(--date-time-item-width) + (var(--date-time-cell-horizontal-gap) * 2)
       );
     --date-time-cell-height:
       calc(

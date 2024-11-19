@@ -7,6 +7,7 @@ export default createStand({
   description: 'Мгновенные уведомления.',
   version: '1.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'snackbar-frbjdw',
   alias: [
     'уведомление',

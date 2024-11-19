@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Text, textPropLineHeight } from '../../../Text';
 
-export const TextExampleLineheight = () => {
+export const TextExampleLineHeight = () => {
   return (
     <Example
       col={{ 1: 0, 2: 600, 3: 800 }}

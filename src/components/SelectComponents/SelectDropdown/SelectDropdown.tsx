@@ -7,7 +7,7 @@ import {
   cnListBox,
   ListItem,
   ListLoader,
-  mapVerticalSpase,
+  mapVerticalSpace,
 } from '##/components/ListCanary';
 import { Popover, PopoverPropOffset } from '##/components/Popover';
 import { useDebounce } from '##/hooks/useDebounce';
@@ -39,9 +39,9 @@ import {
   OptionProps,
 } from '../useSelect';
 
-export const selectDropdownform = ['default', 'brick', 'round'] as const;
-export type SelectDropdownPropForm = typeof selectDropdownform[number];
-export const defaultSelectDropdownPropForm = selectDropdownform[0];
+export const selectDropdownForm = ['default', 'brick', 'round'] as const;
+export type SelectDropdownPropForm = typeof selectDropdownForm[number];
+export const defaultSelectDropdownPropForm = selectDropdownForm[0];
 
 type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   size: PropSize;
@@ -72,7 +72,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   hasItems?: boolean;
   itemsRefs: React.RefObject<HTMLDivElement>[];
   virtualScroll?: boolean;
-  onScrollToBottom?: (lenght: number) => void;
+  onScrollToBottom?: (length: number) => void;
 }>;
 
 type SelectDropdown = <ITEM, GROUP>(
@@ -81,7 +81,7 @@ type SelectDropdown = <ITEM, GROUP>(
 
 const cnSelectDropdown = cn('SelectDropdown');
 
-const getLenghtElements = <ITEM, GROUP>(
+const getLengthElements = <ITEM, GROUP>(
   elements: (
     | OptionForCreate
     | {
@@ -94,21 +94,21 @@ const getLenghtElements = <ITEM, GROUP>(
       }
   )[],
 ) => {
-  let lenght = elements.length <= 1 ? 0 : elements.length;
+  let length = elements.length <= 1 ? 0 : elements.length;
 
   for (let index = 0; index < elements.length; index++) {
     const element = elements[index];
 
     if (isNotOptionForCreate(element) && element.items.length) {
-      lenght += element.items.length;
+      length += element.items.length;
     }
   }
 
-  return lenght;
+  return length;
 };
 
-const isVisible = (slise: [number, number], index: number) => {
-  return index >= slise[0] && index < slise[1];
+const isVisible = (slice: [number, number], index: number) => {
+  return index >= slice[0] && index < slice[1];
 };
 
 export const SelectDropdown: SelectDropdown = (props) => {
@@ -151,7 +151,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
   const offset = offsetProp === 'none' ? undefined : offsetProp;
 
   const lengthForVirtualScroll = useMemo(
-    () => getLenghtElements(visibleItems),
+    () => getLengthElements(visibleItems),
     [visibleItems],
   );
 
@@ -171,13 +171,13 @@ export const SelectDropdown: SelectDropdown = (props) => {
 
   const popoverRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useForkRef([scrollElementRef, dropdownRefProp]);
-  const [scrolled, setScroled] = useFlag();
-  const setScroledOffDebouns = useDebounce(setScroled.off, 100);
+  const [scrolled, setScrolled] = useFlag();
+  const setScrolledOffDebounce = useDebounce(setScrolled.off, 100);
 
   useEffect(() => {
     const fn = () => {
-      setScroled.on();
-      setScroledOffDebouns();
+      setScrolled.on();
+      setScrolledOffDebounce();
     };
 
     scrollElementRef.current?.addEventListener('scroll', fn);
@@ -222,7 +222,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
             <div
               className={cnSelectDropdown('ScrollContainer', [
                 cnMixSpace({
-                  pV: mapVerticalSpase[size],
+                  pV: mapVerticalSpace[size],
                 }),
                 cnMixScrollBar(),
               ])}

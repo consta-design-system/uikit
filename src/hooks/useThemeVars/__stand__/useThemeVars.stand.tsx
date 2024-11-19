@@ -19,6 +19,7 @@ export default createStand({
   ],
   version: '1.11.10',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'usethemevars-j54pt6',
   order: 10,
 });

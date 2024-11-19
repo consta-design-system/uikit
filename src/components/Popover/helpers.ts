@@ -9,7 +9,7 @@ const getPosition = (x: number, y: number): NonNullable<Position> => ({
   y: Math.round(y),
 });
 
-export const getPointPossition = (
+export const getPointPosition = (
   viewportElement: HTMLElement,
   positionInDocument: Position,
   withCustomViewPort: boolean,

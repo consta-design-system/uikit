@@ -7,6 +7,7 @@ export default createStand({
   description: 'Радиокнопка. Разные формы, цвета и размеры.',
   version: '5.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'radio-vpxngs',
   alias: ['поле', 'ввод', 'радиокнопка'],
   figma:

@@ -7,6 +7,7 @@ export default createStand({
   description: 'Группа скрытых блоков. Раскрывается по нажатию на заголовок.',
   version: '2.2.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'collapsegroup-syb9ly',
   alias: ['блок', 'скрытый', 'пояснение', 'описание', 'группа'],
   figma:

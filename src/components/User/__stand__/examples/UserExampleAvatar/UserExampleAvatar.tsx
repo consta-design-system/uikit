@@ -6,14 +6,14 @@ import { User } from '../../../User';
 
 export const UserExampleAvatar = () => (
   <Example>
-    <User avatarUrl={url} name="Роберт Пласт" info="Cейсмик" />
-    <User avatarUrl={url} name="Роберт Пласт" info="Cейсмик" onlyAvatar />
+    <User avatarUrl={url} name="Роберт Пласт" info="Сейсмик" />
+    <User avatarUrl={url} name="Роберт Пласт" info="Сейсмик" onlyAvatar />
   </Example>
 );
 
 export const UserExampleAvatarName = () => (
   <Example>
-    <User name="Роберт Пласт" info="Cейсмик" />
-    <User name="Роберт Альбертович Пласт" info="Cейсмик" onlyAvatar />
+    <User name="Роберт Пласт" info="Сейсмик" />
+    <User name="Роберт Альбертович Пласт" info="Сейсмик" onlyAvatar />
   </Example>
 );

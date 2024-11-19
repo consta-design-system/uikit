@@ -53,7 +53,7 @@ describe('Компонент Modal', () => {
     });
   });
 
-  describe('проверка оверлэя', () => {
+  describe('проверка оверлея', () => {
     const onClickOutside = jest.fn();
 
     it('должен рендериться по дефолту', () => {
@@ -62,7 +62,7 @@ describe('Компонент Modal', () => {
       expect(overlay).toBeInTheDocument();
     });
 
-    it('должен вызваться onClickOutside по клику на оверлэй', () => {
+    it('должен вызваться onClickOutside по клику на оверлей', () => {
       render(getComponent({ hasOverlay: true, onClickOutside }));
       const overlay = screen.getByLabelText(overlayAriaLabel);
       fireEvent.mouseDown(overlay);

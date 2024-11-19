@@ -59,7 +59,7 @@ export const useSliderStationing: UseSliderStationing = (
 
   const { width, height } = useComponentSize(sliderLineRef);
 
-  const calcualtedStep = useMemo(() => {
+  const calculatedStep = useMemo(() => {
     if (!Array.isArray(step)) {
       const val = Math.abs((max - min) / COUNT_STEPS);
       if (val > step) {
@@ -105,8 +105,8 @@ export const useSliderStationing: UseSliderStationing = (
             active: false,
           });
         }
-      } else if (typeof calcualtedStep !== 'undefined') {
-        getSteps(calcualtedStep, min, max).forEach((stepSize) => {
+      } else if (typeof calculatedStep !== 'undefined') {
+        getSteps(calculatedStep, min, max).forEach((stepSize) => {
           sizesArray.push({
             width: (Math.abs(stepSize.max - stepSize.min) * 100) / absoluteSize,
             active:
@@ -168,7 +168,7 @@ export const useSliderStationing: UseSliderStationing = (
   useEffect(() => {
     setLineSizes(calculateLines());
     setButtonPositions(calculateButtonPositions());
-  }, [value, min, max, range, calcualtedStep, view, width, height]);
+  }, [value, min, max, range, calculatedStep, view, width, height]);
 
   return {
     lineSizes,

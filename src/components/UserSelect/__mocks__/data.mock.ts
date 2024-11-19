@@ -47,7 +47,7 @@ export const items: Item[] = [
     groupId: 1,
   },
   {
-    label: 'Тимур Тумуров',
+    label: 'Тимур Шишкин',
     subLabel: 'timur@gmail.com',
     id: 6,
     groupId: 2,
@@ -122,7 +122,7 @@ export const myItems: MyItem[] = [
     position: 'Менеджер',
   },
   {
-    name: 'Тимур Тумуров',
+    name: 'Тимур Шишкин',
     email: 'timur@gmail.com',
     group: myGroup[1],
     position: 'Директор',

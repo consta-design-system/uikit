@@ -110,7 +110,7 @@ export type ComboboxProps<
     caption?: string;
     labelPosition?: 'top' | 'left';
     virtualScroll?: boolean;
-    onScrollToBottom?: (lenght: number) => void;
+    onScrollToBottom?: (length: number) => void;
     onSearchValueChange?: (value: string) => void;
     onDropdownOpen?: (isOpen: boolean) => void;
     dropdownOpen?: boolean;

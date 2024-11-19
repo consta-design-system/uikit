@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 
-import { getCalcaulatedSizes, getRefsSizes } from './helpers';
+import { getCalculatedSizes, getRefsSizes } from './helpers';
 import { UseResizableContent, UseResizableContentSize } from './types';
 
 export const useResizableContent: UseResizableContent = (props) => {
@@ -32,7 +32,7 @@ export const useResizableContent: UseResizableContent = (props) => {
       if (typeof index === 'number') {
         setSizes((copy) => {
           const copySizes = [...copy];
-          const [left, right] = getCalcaulatedSizes({
+          const [left, right] = getCalculatedSizes({
             event,
             index,
             direction,

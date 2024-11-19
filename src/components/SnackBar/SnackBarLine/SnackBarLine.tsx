@@ -15,8 +15,8 @@ export const SnackBarLine: React.FC<Omit<SnackBarTimerProps, 'hidden'>> = (
   props,
 ) => {
   const [running, setRunning] = useState<boolean>(false);
-  const { onMount, onTimeIsOver, startTime: startTimeprop, className } = props;
-  const startTime = startTimeprop * interval;
+  const { onMount, onTimeIsOver, startTime: startTimeProp, className } = props;
+  const startTime = startTimeProp * interval;
   const { time, start, pause, isRunning } = useTimer({
     endTime: 0,
     startTime,

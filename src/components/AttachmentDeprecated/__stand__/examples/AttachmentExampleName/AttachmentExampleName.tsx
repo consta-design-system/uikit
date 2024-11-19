@@ -14,6 +14,7 @@ export const AttachmentExampleName = () => {
       <Attachment
         fileName="Файл с каким попало описанием"
         fileExtension="bzz"
+        /* cspell:disable-next-line */
         fileDescription="Крекс, пекс, фекс"
       />
     </Example>

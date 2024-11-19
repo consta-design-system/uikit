@@ -7,9 +7,9 @@ import React, { forwardRef, useRef } from 'react';
 import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
 import { cnSelect } from '##/components/SelectComponents/cnSelect';
 import {
-  defaultlabelForCreate,
+  defaultLabelForCreate,
   defaultLabelForEmptyItems,
-  defaultlabelForNotFound,
+  defaultLabelForNotFound,
   getInputWidth,
 } from '##/components/SelectComponents/helpers';
 import { SelectContainer } from '##/components/SelectComponents/SelectContainer';
@@ -85,8 +85,8 @@ const ComboboxRender = <
     renderValue: renderValueProp,
     onCreate,
     inputRef: inputRefProp,
-    labelForNotFound = defaultlabelForNotFound,
-    labelForCreate = defaultlabelForCreate,
+    labelForNotFound = defaultLabelForNotFound,
+    labelForCreate = defaultLabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
     searchFunction,
     selectAll,
@@ -187,11 +187,11 @@ const ComboboxRender = <
   const renderValueDefaultNotMultiple: ComboboxPropRenderValue<ITEM> = (
     props,
   ) => {
-    const valueLable = getItemLabel(props.item);
+    const valueLabel = getItemLabel(props.item);
 
     return (
-      <span className={cnSelect('ControlValue')} title={valueLable}>
-        {valueLable}
+      <span className={cnSelect('ControlValue')} title={valueLabel}>
+        {valueLabel}
       </span>
     );
   };

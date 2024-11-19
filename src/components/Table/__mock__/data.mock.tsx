@@ -121,6 +121,7 @@ export const filters: Filters<typeof rows[number]> = [
     field: 'type',
   },
   {
+    /* cspell:disable-next-line */
     id: 'condensated',
     name: 'Конденсат',
     filterer: (value: string) => value === 'Конденсат',
@@ -133,30 +134,35 @@ export const filters: Filters<typeof rows[number]> = [
     field: 'type',
   },
   {
+    /* cspell:disable-next-line */
     id: 'priobskoye',
     name: 'Северное',
     filterer: (value: string) => value === 'Северное',
     field: 'field',
   },
   {
+    /* cspell:disable-next-line */
     id: 'urengoyskoye',
     name: 'Южное',
     filterer: (value: string) => value === 'Южное',
     field: 'field',
   },
   {
+    /* cspell:disable-next-line */
     id: 'krasnoleninskaya',
     name: 'Западное',
     filterer: (value: string) => value === 'Западное',
     field: 'field',
   },
   {
+    /* cspell:disable-next-line */
     id: 'velikoye',
     name: 'Восточное',
     filterer: (value: string) => value === 'Восточное',
     field: 'field',
   },
   {
+    /* cspell:disable-next-line */
     id: 'rusGasoil',
     name: 'Центральное',
     filterer: (value: string) => value === 'Центральное',
@@ -303,6 +309,7 @@ export const customFilters: Filters<typeof rows[number]> = [
     field: 'type',
   },
   {
+    /* cspell:disable-next-line */
     id: 'condensated',
     name: 'Конденсат',
     filterer: (value: string) => value === 'Конденсат',
@@ -692,7 +699,7 @@ const badgeParams: React.ComponentProps<typeof Badge> = {
 const tableWithTrafficLightDataRows = [
   {
     id: 'row1',
-    field: 'Cеверный разлом',
+    field: 'Северный разлом',
     sum: 20,
     status: <Badge {...badgeParams} status="normal" />,
     statusOrder: 1,
@@ -720,7 +727,7 @@ const tableWithTrafficLightDataRows = [
   },
 ];
 
-export const tableWithBagdeData: TableProps<
+export const tableWithBadgeData: TableProps<
   typeof tableWithTrafficLightDataRows[number]
 > = {
   columns: [
@@ -731,6 +738,7 @@ export const tableWithBagdeData: TableProps<
       sortable: true,
     },
     {
+      /* cspell:disable-next-line */
       title: 'Сумма скважин без МГРП',
       accessor: 'sum',
       align: 'right',
@@ -1046,6 +1054,7 @@ const rowsWithObjectFields = [
   },
   {
     id: 'row2',
+    /* cspell:disable-next-line */
     field: 'Уренгойское газонефтеконденсат­ное',
     year: {
       value: 2001,
@@ -1058,6 +1067,7 @@ const rowsWithObjectFields = [
   },
   {
     id: 'row3',
+    /* cspell:disable-next-line */
     field: 'Красноленинская группа',
     year: {
       value: 1985,

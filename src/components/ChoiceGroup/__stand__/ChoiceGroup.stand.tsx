@@ -7,6 +7,7 @@ export default createStand({
   description: 'Группа кнопок. Можно выбрать один или несколько вариантов.',
   version: '1.5.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'choicegroup-i10glc',
   alias: ['кнопка', 'кнопки', 'выбор', 'группа'],
   figma:

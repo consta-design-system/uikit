@@ -3,7 +3,7 @@ import { mapping, sortObj } from '../mapping';
 describe('useBreakpoints', () => {
   it('sortObj', () => {
     const result = sortObj({
-      desctop: 1000,
+      desktop: 1000,
       mobile: 0,
       tablet: 800,
     });
@@ -11,7 +11,7 @@ describe('useBreakpoints', () => {
     const expected: typeof result = {
       mobile: 0,
       tablet: 800,
-      desctop: 1000,
+      desktop: 1000,
     };
 
     expect(Object.keys(result).join('-')).toEqual(
@@ -21,7 +21,7 @@ describe('useBreakpoints', () => {
 
   it('mapping', () => {
     const result = mapping(802, {
-      desctop: 1000,
+      desktop: 1000,
       mobile: 0,
       tablet: 800,
     });
@@ -29,7 +29,7 @@ describe('useBreakpoints', () => {
     const expected: typeof result = {
       mobile: true,
       tablet: true,
-      desctop: false,
+      desktop: false,
     };
 
     expect(result).toEqual(expected);

@@ -16,7 +16,7 @@ const renderComponent = (props: DatePickerProps<'month'> = {}) => {
 };
 
 describe('Компонент DatePicker_type_month', () => {
-  describe('проверка onChage', () => {
+  describe('проверка onChange', () => {
     it(`при клике по календарю срабатывает`, () => {
       jest.useFakeTimers();
 

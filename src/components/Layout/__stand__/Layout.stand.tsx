@@ -7,6 +7,7 @@ export default createStand({
   description: 'Лейаут. Блоки, из которых можно построить каркас страницы.',
   version: '3.5.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'layout-nhip8h',
   alias: ['сетка', 'структура', 'разметка'],
   figma:

@@ -7,6 +7,7 @@ export default createStand({
   description: 'Хлебные крошки. Показывают путь к текущей странице.',
   version: '1.10.12',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'breadcrumbs-tebs5n',
   alias: ['крошки', 'навигация', 'меню'],
   figma:

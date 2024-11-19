@@ -17,13 +17,20 @@ type Item = {
 export const items: Item[] = [
   {
     name: 'один',
+    /* cspell:disable-next-line */
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores delectus eius fuga hic optio qui unde velit vitae voluptatibus! Ab autem dignissimos dolorum eaque, est et fugit ipsum molestias necessitatibus nesciunt ratione, vel veniam. Aspernatur aut consequatur ducimus est explicabo harum nemo, nisi officia placeat quisquam, tempore vitae, voluptates.',
   },
   {
     name: 'два',
+    /* cspell:disable-next-line */
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur esse explicabo harum illum molestias mollitia pariatur quasi quia tempora vel!',
   },
-  { name: 'три', text: 'Lorem ipsum dolor sit amet.' },
+
+  {
+    name: 'три',
+    /* cspell:disable-next-line */
+    text: 'Lorem ipsum dolor sit amet.',
+  },
 ];
 
 const defaultRightSide: React.ReactNode = [

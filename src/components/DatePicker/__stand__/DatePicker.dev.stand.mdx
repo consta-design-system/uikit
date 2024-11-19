@@ -34,7 +34,7 @@ import { DatePicker } from '@consta/uikit/DatePicker';
 ```
 
 > Здесь описаны свойства компонента в целом и не описаны свойства его составляющих.
-> Все подробности — в [полном списоке свойств](#свойства)
+> Все подробности — в [полном списке свойств](#свойства)
 
 <MdxMenu>
 
@@ -83,7 +83,7 @@ export const DatePickerExampleValue = () => {
 - `date-time-range` — период cо временем,
 - `time` — время,
 - `month` — один месяц,
-- `month-range` — инетрвал в несколько месяцев.
+- `month-range` — интервал в несколько месяцев.
 - `year` – один год,
 - `year-range` — интервал в несколько лет.
 
@@ -359,7 +359,7 @@ export const DatePickerExampleAdditionalControls = () => {
     undefined,
   ]);
 
-  const setCuarter = (date: Date) => {
+  const setQuarter = (date: Date) => {
     const year = date.getFullYear();
     const month = date.getMonth();
     if (month >= 0 && month < 3) {
@@ -381,7 +381,7 @@ export const DatePickerExampleAdditionalControls = () => {
       renderAdditionalControls={({ currentVisibleDate }) => (
         <Button
           label="Этот квартал"
-          onClick={() => currentVisibleDate && setCuarter(currentVisibleDate)}
+          onClick={() => currentVisibleDate && setQuarter(currentVisibleDate)}
         />
       )}
     />
@@ -444,7 +444,7 @@ export const DatePickerExampleDisableDates = () => {
 Для управления состоянием выпадающего списка используйте следующие свойства:
 
 - `dropdownOpen` - флаг открыт/закрыт
-- `onDropdownOpen` - колбек отрабатывающий каждый раз при открытии/закрытии
+- `onDropdownOpen` - Коллбэк отрабатывающий каждый раз при открытии/закрытии
 - `ignoreOutsideClicksRefs` - список ссылок на элементы по которым игнорируются клики
 
 ```tsx
@@ -496,7 +496,7 @@ const DatePickerExampleDropdownOpen = () => {
 ## Обработка ошибок
 
 Вы можете отследить ошибки, которые могут возникнуть у пользователя при вводе даты,
-и сообщить ему об этом. Для этого существует свойсво `onError`.
+и сообщить ему об этом. Для этого существует свойство `onError`.
 
 #### Типы ошибок
 
@@ -691,7 +691,7 @@ type DatePickerPropOnError = (
 | [`renderAdditionalControls?`](##LIBS.LIB.STAND/lib:uikit/stand:components-DateTime-stable) | `DateTimeAdditionalControlRenderProp`                                                                                                                                                                                                                       | -                                                   | Дополнительные конторолы для выбора даты                                                                                              |
 | `className?`                                                                               | `string`                                                                                                                                                                                                                                                    | -                                                   | Дополнительный CSS-класс                                                                                                              |
 | `dropdownClassName?`                                                                       | `string`                                                                                                                                                                                                                                                    | -                                                   | Дополнительный CSS-класс для выпадающего блока                                                                                        |
-| [`onDropdownOpen?`](#управление-состоянием-выподающего-списка)                             | `(open: boolean) => void;`                                                                                                                                                                                                                                  | -                                                   | Событие срабатывает при открытии списка                                                                                               |
-| [`dropdownOpen?` ](#управление-состоянием-выподающего-списка)                              | `boolean`                                                                                                                                                                                                                                                   | -                                                   | Состояние открыт/закрыт выпадающего списка                                                                                            |
-| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выподающего-списка)                    | `ReadonlyArray<React.RefObject<HTMLElement>>`                                                                                                                                                                                                               | -                                                   | Ссылки на элементы, которые нужно игнорировать при кликах вне компонента                                                              |
+| [`onDropdownOpen?`](#управление-состоянием-выпадающего-списка)                             | `(open: boolean) => void;`                                                                                                                                                                                                                                  | -                                                   | Событие срабатывает при открытии списка                                                                                               |
+| [`dropdownOpen?` ](#управление-состоянием-выпадающего-списка)                              | `boolean`                                                                                                                                                                                                                                                   | -                                                   | Состояние открыт/закрыт выпадающего списка                                                                                            |
+| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выпадающего-списка)                    | `ReadonlyArray<React.RefObject<HTMLElement>>`                                                                                                                                                                                                               | -                                                   | Ссылки на элементы, которые нужно игнорировать при кликах вне компонента                                                              |
 | `ref?`                                                                                     | `React.Ref<HTMLDivElement>`                                                                                                                                                                                                                                 | -                                                   | Ссылка на корневой DOM-элемент компонента                                                                                             |

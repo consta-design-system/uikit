@@ -114,7 +114,7 @@ function animateDelay() {
 }
 
 describe('Компонент Select', () => {
-  it('должен рендерится без ошибок', () => {
+  it('должен рендериться без ошибок', () => {
     expect(renderComponent).not.toThrow();
   });
 
@@ -125,7 +125,7 @@ describe('Компонент Select', () => {
     expect(getRender()).toHaveClass(className);
   });
 
-  it('рендерится с установленным значением', () => {
+  it('рендериться с установленным значением', () => {
     jest.useFakeTimers();
     const index = 0;
     const value = items[index];

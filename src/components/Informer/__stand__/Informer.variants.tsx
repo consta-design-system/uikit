@@ -4,8 +4,8 @@ import * as React from 'react';
 
 import {
   Informer,
-  informerPropSiseDefault,
   informerPropSize,
+  informerPropSizeDefault,
   informerPropStatus,
   informerPropStatusDefault,
   informerPropView,
@@ -21,7 +21,7 @@ const Variants = () => {
   const title = useText('title', 'Это заголовок');
   const label = useText('label', 'Это очень важное сообщение. Или не очень :)');
   const view = useSelect('view', informerPropView, informerPropViewDefault);
-  const size = useSelect('size', informerPropSize, informerPropSiseDefault);
+  const size = useSelect('size', informerPropSize, informerPropSizeDefault);
   const icon = useBoolean('icon', false);
 
   return (

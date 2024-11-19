@@ -7,6 +7,7 @@ export default createStand({
   description: 'Переключатель. Два положения — включено и выключено.',
   version: '0.1.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'switch-jwoqx3',
   alias: ['поле', 'ввод', 'переключатель'],
   figma:

@@ -2,7 +2,7 @@ import './ContextMenuLevelWrapper.css';
 
 import React, { forwardRef } from 'react';
 
-import { mapVerticalSpase } from '##/components/ListCanary';
+import { mapVerticalSpace } from '##/components/ListCanary';
 import { Popover } from '##/components/Popover';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
@@ -35,7 +35,7 @@ export const ContextMenuLevelWrapper = forwardRef(
           <div
             className={cnContextMenuLevelWrapper('Mobile', [
               cnMixSpace({
-                pV: mapVerticalSpase[size],
+                pV: mapVerticalSpace[size],
               }),
             ])}
             ref={ref}

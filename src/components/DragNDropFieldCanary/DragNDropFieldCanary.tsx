@@ -8,7 +8,7 @@ import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
 import { cnCanary } from '##/utils/bem';
 
 import { withDefaultLocale } from './locale';
-import { renderCildren } from './renderCildren';
+import { renderChildren } from './renderChildren';
 import { DragNDropFieldProps } from './types';
 
 const cnDragNDropField = cnCanary('DragNDropField');
@@ -74,7 +74,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
         })}
       >
         <input {...getInputProps()} />
-        {renderCildren(children, {
+        {renderChildren(children, {
           ...otherStateProps,
           accept,
           maxSize,

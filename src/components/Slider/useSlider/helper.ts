@@ -77,7 +77,7 @@ export const getActiveValue = (
 };
 
 export const detectActiveButton: (
-  posittion: TrackPosition,
+  position: TrackPosition,
   buttons: React.RefObject<HTMLButtonElement>[],
 ) => ActiveButton = (position, buttons) => {
   let activeButton: ActiveButton = null;
@@ -228,7 +228,7 @@ export const analyzeDivisionValue = (
   return newValue;
 };
 
-export const valueToSring = (value: number | number[] | undefined | null) => {
+export const valueToString = (value: number | number[] | undefined | null) => {
   if (!value) {
     return '';
   }

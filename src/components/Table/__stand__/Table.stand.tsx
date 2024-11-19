@@ -7,13 +7,14 @@ export default createStand({
   description: 'Таблица. Выводит данные с фильтрами и сортировкой.',
   version: '1.6.0',
   status: 'deprecated',
+  /* cspell:disable-next-line */
   sandbox: 'table-9kmysz',
   alias: [
     'таблица',
     'данные',
     'строка',
     'строки',
-    'колнока',
+    'колонка',
     'колонки',
     'столбец',
     'столбцы',

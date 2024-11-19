@@ -73,7 +73,7 @@ export const usePaginationItems = (props: UsePaginationItemsProps) => {
   const buttonPadding = width[18] - width[19];
   // минимальная ширина кнопки
   const buttonMinWidth = width[5];
-  // Максималяная ширина символа
+  // Максимальная ширина символа
   const maxSymbolSize = Math.max(
     width[8],
     width[9],

@@ -29,7 +29,7 @@ export type SliderPropOnChange<RANGE> = (
   },
 ) => void;
 
-type SliderPropToolipFormatter = (value: number | undefined) => string;
+type SliderPropTooltipFormatter = (value: number | undefined) => string;
 
 type Side = IconComponent | 'input';
 
@@ -51,7 +51,7 @@ type Props<RANGE extends boolean = false> = {
   onChange?: SliderPropOnChange<RANGE>;
   onAfterChange?: SliderPropOnChange<RANGE>;
   leftSide?: Side;
-  tooltipFormatter?: SliderPropToolipFormatter;
+  tooltipFormatter?: SliderPropTooltipFormatter;
   rightSide?: Side;
   tooltipDirection?: Direction;
   tooltipPossibleDirections?: Direction[];
@@ -82,7 +82,7 @@ export type SliderPointProps = PropsWithHTMLAttributes<
     buttonLabel?: ActiveButton;
     buttonRef?: React.RefObject<HTMLButtonElement>;
     popoverPosition?: TrackPosition;
-    tooltipFormatter?: SliderPropToolipFormatter;
+    tooltipFormatter?: SliderPropTooltipFormatter;
     onFocus?: (
       e: React.FocusEvent<HTMLButtonElement> | React.MouseEvent,
       button: ActiveButton,
@@ -119,7 +119,7 @@ export const isNotRangeParams = (
   return !params.range;
 };
 
-export const defaultTooltipFormatter: SliderPropToolipFormatter = (value) =>
+export const defaultTooltipFormatter: SliderPropTooltipFormatter = (value) =>
   value?.toString() || '';
 
 export type TrackPosition = {
@@ -137,13 +137,13 @@ export const getValueForInput = (
   return props.value as number;
 };
 
-type GetOnChandgeForInputReturned = (props: {
+type GetOnChangeForInputReturned = (props: {
   e?: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
   value: number;
 }) => void;
 
-export const getOnChandgeForInput =
-  (props: SliderProps<boolean>, field: 0 | 1): GetOnChandgeForInputReturned =>
+export const getOnChangeForInput =
+  (props: SliderProps<boolean>, field: 0 | 1): GetOnChangeForInputReturned =>
   ({ e, value }) => {
     if (!props.onChange) {
       return;

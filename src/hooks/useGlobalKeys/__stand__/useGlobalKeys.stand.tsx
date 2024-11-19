@@ -8,6 +8,7 @@ export default createStand({
   version: '3.3.0',
   status: 'stable',
   alias: ['хук', 'клавиша', 'нажатие'],
+  /* cspell:disable-next-line */
   sandbox: 'useglobalkeys-ljhoet',
   order: 10,
 });

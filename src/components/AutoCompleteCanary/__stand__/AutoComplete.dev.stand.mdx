@@ -60,7 +60,7 @@ import { AutoComplete } from '@consta/uikit/AutoCompleteCanary';
 
 ### Элементы списка
 
-Чтобы описать элементы выпадающего списка, укажите `items`. По умолчанию тип елемента [AutoCompleteItemDefault](#свойства), где:
+Чтобы описать элементы выпадающего списка, укажите `items`. По умолчанию тип элемента [AutoCompleteItemDefault](#свойства), где:
 
 - `label` — название элемента списка,
 - `id` — уникальный ключ элемента,
@@ -779,7 +779,7 @@ export const AutoCompleteExampleVirtualScroll = () => {
 
 Чтобы отобразить индикацию загрузки, укажите параметр `isLoading`.
 
-Пример ниже показывает, как можно загрузить данные после раскрытия списка. Этот функционаол стоит использовать, когда список сильно большой.
+Пример ниже показывает, как можно загрузить данные после раскрытия списка. Этот функционал стоит использовать, когда список сильно большой.
 
 <MdxTabs>
 
@@ -795,7 +795,7 @@ const useMockLoadData = (
 ): [Item[], boolean, () => void] => {
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
-  const [lenght, setLenght] = useState<number>(0);
+  const [length, setLength] = useState<number>(0);
   const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
 
   const items = useMemo(() => {
@@ -813,11 +813,11 @@ const useMockLoadData = (
               .indexOf(searchValue.toLocaleLowerCase()) !== -1,
         );
     }
-    return new Array(lenght).fill(null).map((_, i) => ({
+    return new Array(length).fill(null).map((_, i) => ({
       label: `Опция ${i + 1}`,
       id: i,
     }));
-  }, [lenght, searchValue]);
+  }, [length, searchValue]);
 
   useEffect(() => {
     if (isLoading) {
@@ -833,7 +833,7 @@ const useMockLoadData = (
 
     const timeoutNumber = setTimeout(() => {
       if (isStart) {
-        setLenght((state) => state + 100);
+        setLength((state) => state + 100);
         setIsLoading.off();
         setIsStart.off();
       }
@@ -886,7 +886,7 @@ export const AutoCompleteExampleIsLoading = () => {
 
 </MdxTabs>
 
-Пример ниже показывает, как можно дозагружать данные при скролле до конца списка.
+Пример ниже показывает, как можно дозагружать данные при прокрутке до конца списка.
 
 <MdxTabs>
 
@@ -897,7 +897,7 @@ const useMockLoadData = (
 ): [Item[], boolean, () => void] => {
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
-  const [lenght, setLenght] = useState<number>(0);
+  const [length, setLength] = useState<number>(0);
   const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
 
   const items = useMemo(() => {
@@ -915,11 +915,11 @@ const useMockLoadData = (
               .indexOf(searchValue.toLocaleLowerCase()) !== -1,
         );
     }
-    return new Array(lenght).fill(null).map((_, i) => ({
+    return new Array(length).fill(null).map((_, i) => ({
       label: `Опция ${i + 1}`,
       id: i,
     }));
-  }, [lenght, searchValue]);
+  }, [length, searchValue]);
 
   useEffect(() => {
     if (isLoading) {
@@ -935,7 +935,7 @@ const useMockLoadData = (
 
     const timeoutNumber = setTimeout(() => {
       if (isStart) {
-        setLenght((state) => state + 100);
+        setLength((state) => state + 100);
         setIsLoading.off();
         setIsStart.off();
       }
@@ -1036,7 +1036,7 @@ const AutoCompleteExampleDisabled = () => {
 Чтобы управлять состоянием выпадающего списка, используйте следующие свойства:
 
 - `dropdownOpen` - флаг открыт/закрыт,
-- `onDropdownOpen` - колбек, который отрабатывает каждый раз при открытии/закрытии,
+- `onDropdownOpen` - Коллбэк, который отрабатывает каждый раз при открытии/закрытии,
 - `ignoreClicksInsideRefs` - список ссылок на элементы по которым игнорируется клики.
 
 <MdxTabs>
@@ -1375,4 +1375,4 @@ type PropRenderItem<ITEM> = (
 | `dropdownForm?`                            | `'default'` <code>&#124;</code> `'brick'` <code>&#124;</code> `'round'`                                                                                                                                                                                                                                                                                                                                         | `'default'`                                              | Форма выпадающего блока с подсказками                                                                                                         |
 | `dropdownRef?`                             | `React.RefObject<HTMLDivElement>`                                                                                                                                                                                                                                                                                                                                                                               | -                                                        | Ссылка на DOM-элемент выпадающего списка                                                                                                      |
 | `virtualScroll?`                           | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                       | -                                                        | Включает виртуализацию скролла                                                                                                                |
-| `onScrollToBottom?`                        | `() => void;`                                                                                                                                                                                                                                                                                                                                                                                                   | -                                                        | Колбэк сработает при скролле до конца списка                                                                                                  |
+| `onScrollToBottom?`                        | `() => void;`                                                                                                                                                                                                                                                                                                                                                                                                   | -                                                        | Коллбэк сработает при прокрутке до конца списка                                                                                               |

@@ -5,14 +5,19 @@ import { User } from '../../../User';
 
 export const UserExampleSize = () => (
   <Example>
-    <User name="Серж Послоян" info="Размер S" view="ghost" size="s" />
-    <User name="Серж Послоян" info="Размер M" view="ghost" size="m" />
-    <User name="Серж Послоян" info="Размер L" view="ghost" size="l" />
+    <User name="Сергей Иванов" info="Размер S" view="ghost" size="s" />
+    <User name="Сергей Иванов" info="Размер M" view="ghost" size="m" />
+    <User name="Сергей Иванов" info="Размер L" view="ghost" size="l" />
   </Example>
 );
 
 export const UserExampleSizeWidth = () => (
   <Example>
-    <User name="Серж Послоян" info="В ширину блока" view="ghost" width="full" />
+    <User
+      name="Сергей Иванов"
+      info="В ширину блока"
+      view="ghost"
+      width="full"
+    />
   </Example>
 );

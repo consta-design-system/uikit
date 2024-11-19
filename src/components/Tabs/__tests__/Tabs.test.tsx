@@ -86,7 +86,7 @@ describe('Компонент Tabs', () => {
   });
   describe('проверка props', () => {
     describe('проверка items', () => {
-      it(`количество совпадает с передоваемым`, () => {
+      it(`количество совпадает с передаваемым`, () => {
         renderComponent({});
         const itemsRender = getItems();
         expect(itemsRender.length).toEqual(items.length);
@@ -151,7 +151,7 @@ describe('Компонент Tabs', () => {
       });
     });
     describe('проверка onChange', () => {
-      it(`клик по невыбраному элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
+      it(`клик по невыбранному элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
         const handleChange = jest.fn();
         const elementIndex = 1;
 
@@ -166,7 +166,7 @@ describe('Компонент Tabs', () => {
           e: expect.any(Object),
         });
       });
-      it('клик по выбраному элементу, не должен вызвать callback', () => {
+      it('клик по выбранному элементу, не должен вызвать callback', () => {
         const handleChange = jest.fn();
 
         renderComponent({ onChange: handleChange });

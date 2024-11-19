@@ -32,7 +32,7 @@ export const UserSelectExampleVirtualScroll = () => {
   return (
     <Example col={1}>
       <UserSelect
-        placeholder="Чтобы посмотреть весь список, скрольте вниз"
+        placeholder="Чтобы посмотреть весь список, прокручивайте вниз"
         items={items}
         value={value}
         onChange={setValue}

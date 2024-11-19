@@ -6,6 +6,7 @@ export default createStand({
   group: 'mixs',
   version: '3.10.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'mixspace-4rc067',
   alias: ['миксин', 'отступ', 'отступы', 'размер', 'размеры'],
   order: 10,

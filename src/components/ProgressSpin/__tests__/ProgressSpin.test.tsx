@@ -20,17 +20,17 @@ describe('Компонент ProgressSpin', () => {
     expect(() => renderComponent({})).not.toThrow();
   });
   describe('проверка props', () => {
-    it('дополнительный класс присваевается', () => {
+    it('дополнительный класс присваивается', () => {
       const className = 'className';
       renderComponent({ className });
       expect(getRender()).toHaveClass(className);
     });
-    it(`при loadingProgress=undefined ProgressSpin должен крутитьтся`, () => {
+    it(`при loadingProgress=undefined ProgressSpin должен крутится`, () => {
       renderComponent({});
 
       expect(getRender()).toHaveClass(cnProgressSpin({ spin: true }));
     });
-    it(`при указанном loadingProgress ProgressSpin не должен крутитьтся`, () => {
+    it(`при указанном loadingProgress ProgressSpin не должен крутится`, () => {
       renderComponent({ value: 1 });
 
       expect(getRender()).not.toHaveClass(cnProgressSpin({ spin: true }));

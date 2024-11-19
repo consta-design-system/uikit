@@ -9,7 +9,7 @@ import React, {
 
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useDebounce } from '##/hooks/useDebounce';
-import { KeyHandler, useKeys } from '##/hooks/useKeysDepricated';
+import { KeyHandler, useKeys } from '##/hooks/useKeysDeprecated';
 import { useMutableRef } from '##/hooks/useMutableRef';
 import { usePrevious } from '##/hooks/usePrevious';
 import { useRefs } from '##/hooks/useRefs';
@@ -143,7 +143,7 @@ export const isOptionForSelectAll = <ITEM>(
   params: SelectAllItem | ITEM,
 ): params is SelectAllItem => {
   return (
-    params && Object.prototype.hasOwnProperty.call(params, '__optionSelctAll')
+    params && Object.prototype.hasOwnProperty.call(params, '__optionSelectAll')
   );
 };
 
@@ -206,7 +206,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
   const [filteredOptions, optionForCreate] = useMemo(() => {
     if (resolvedSearchValue && resolvedSearchValue !== '') {
-      const fiteredOptions = items.filter((item) =>
+      const filteredOptions = items.filter((item) =>
         searchFunction
           ? searchFunction(item, resolvedSearchValue)
           : searchFunctionDefault(item, resolvedSearchValue),
@@ -218,8 +218,10 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       };
 
       return [
-        fiteredOptions,
-        params.onCreate && !fiteredOptions.length ? optionForCreate : undefined,
+        filteredOptions,
+        params.onCreate && !filteredOptions.length
+          ? optionForCreate
+          : undefined,
       ] as const;
     }
     return [items, undefined] as const;
@@ -254,7 +256,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   ]);
 
   const maxHighlightIndex =
-    // колличество опций
+    // количество опций
     filteredOptions.length +
     // кнопка для создания
     (optionForCreate ? 1 : 0) +
@@ -530,16 +532,16 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
         CountedGroup<ITEM, GROUP> | undefined,
         SelectAllItem | OptionForCreate | ITEM | undefined,
       ] => {
-        let couter = 0;
+        let counter = 0;
         for (const group of visibleItems) {
           if (isOptionForCreate(group)) {
-            couter++;
+            counter++;
             return [undefined, group];
           }
-          if (group.items.length + couter > index) {
-            return [group, group.items[index - couter]];
+          if (group.items.length + counter > index) {
+            return [group, group.items[index - counter]];
           }
-          couter += group.items.length;
+          counter += group.items.length;
         }
         return [undefined, undefined];
       };

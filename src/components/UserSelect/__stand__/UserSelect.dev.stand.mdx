@@ -50,7 +50,7 @@ import { UserSelect } from '@consta/uikit/UserSelect';
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Поиск](#поиск)
 - [Создание новых элементов](#создание-новых-элементов)
-- [Управление состоянием выподающего списка](#управление-состоянием-выподающего-списка)
+- [Управление состоянием выпадающего списка](#управление-состоянием-выпадающего-списка)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
   - [Кастомное выбранное значение](#кастомное-выбранное-значение)
@@ -637,7 +637,7 @@ export function UserSelectExampleForm() {
 За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
 
 Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
-поля с разными статусами и разной формы будут выглядет одинаково.
+поля с разными статусами и разной формы будут выглядит одинаково.
 
 > Для создания hover эффекта для view="`clear`" управляйте внешним видом контейнера, в котором находится UserSelect
 
@@ -686,7 +686,7 @@ export function UserSelectExampleView() {
 
 ## Виртуализация списка
 
-Если список элементов очень большой, то стоит использовать виртуализацию скрола.
+Если список элементов очень большой, то стоит использовать виртуализацию скролла.
 
 ```tsx
 type Item = {
@@ -717,7 +717,7 @@ export const UserSelectExampleVirtualScroll = () => {
   const [value, setValue] = useState<Item[] | null>();
   return (
     <UserSelect
-      placeholder="Чтобы посмотреть весь список, скрольте вниз"
+      placeholder="Чтобы посмотреть весь список, прокручивайте вниз"
       items={items}
       value={value}
       onChange={setValue}
@@ -749,7 +749,7 @@ const useMockLoadData = (
 ): [Item[], boolean, () => void] => {
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
-  const [lenght, setLenght] = useState<number>(0);
+  const [length, setLength] = useState<number>(0);
   const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
 
   const items = useMemo(() => {
@@ -767,11 +767,11 @@ const useMockLoadData = (
               .indexOf(searchValue.toLocaleLowerCase()) !== -1,
         );
     }
-    return new Array(lenght).fill(null).map((_, i) => ({
+    return new Array(length).fill(null).map((_, i) => ({
       label: `Опция ${i + 1}`,
       id: i,
     }));
-  }, [lenght, searchValue]);
+  }, [length, searchValue]);
 
   useEffect(() => {
     setIsLoading.on();
@@ -785,7 +785,7 @@ const useMockLoadData = (
 
     const timeoutNumber = setTimeout(() => {
       if (isStart) {
-        setLenght((state) => state + 100);
+        setLength((state) => state + 100);
         setIsLoading.off();
         setIsStart.off();
       }
@@ -989,12 +989,12 @@ export function UserSelectExampleMailInput() {
 
 <UserSelectExampleMailInput />
 
-## Управление состоянием выподающего списка
+## Управление состоянием выпадающего списка
 
-Для управлением состояния выподающего списка используйте следующие свойства:
+Для управлением состояния выпадающего списка используйте следующие свойства:
 
 - `dropdownOpen` - флаг открыт/закрыт
-- `onDropdownOpen` - колбек отрабатывающий каждый раз при открытии/закрытии
+- `onDropdownOpen` - Коллбэк отрабатывающий каждый раз при открытии/закрытии
 - `ignoreClicksInsideRefs` - список ссылок на элементы по которым игнорируется клики
 
 ```tsx
@@ -1509,7 +1509,7 @@ export type UserSelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`items`](#варианты)                                                    | `ITEM[]`                                               | -                                                             | Варианты                                                                  |
 | [`value?`](#выбранное-значение)                                         | `UserSelectPropValue<ITEM,MULTIPLE>`                   | -                                                             | Выбранное значение                                                        |
 | [`onChange?`](#выбранное-значение)                                      | `UserSelectPropOnChange<ITEM,MULTIPLE>`                | -                                                             | Обработчик события изменения значения компонента                          |
-| [`multiple?`](#несколько-вариантов)                                     | `boolean`                                              | `fasle`                                                       | Показывает, что можно выбрать несколько вариантов                         |
+| [`multiple?`](#несколько-вариантов)                                     | `boolean`                                              | `false`                                                       | Показывает, что можно выбрать несколько вариантов                         |
 | [`groups?`](#группы-вариантов)                                          | `GROUP[]`                                              | -                                                             | Группы                                                                    |
 | [`searchFunction?`](#поиск)                                             | `UserSelectPropSearchFunction<ITEM>`                   | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                            |
 | [`renderItem?`](#кастомный-элемент-списка)                              | `UserSelectPropRenderItem<ITEM>`                       | рендер по умолчанию                                           | Рендер-функция для элемента списка                                        |
@@ -1522,7 +1522,7 @@ export type UserSelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`getItemDisabled?`](#кастомные-типы-данных-для-групп-и-вариантов)      | `UserSelectPropGetItemDisabled<ITEM>`                  | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                              |
 | [`getGroupLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)        | `UserSelectPropGetGroupKey<GROUP>`                     | `(group) => group.id`                                         | Функция для определения названия группы                                   |
 | [`getGroupKey?`](#кастомные-типы-данных-для-групп-и-вариантов)          | `UserSelectPropGetGroupLabel<GROUP>`                   | `(group) => group.label`                                      | Функция для определения уникального ключа группы                          |
-| `isLoading?`                                                            | `boolean`                                              | -                                                             | При `true` будет отображаться лоудер загрузки                             |
+| `isLoading?`                                                            | `boolean`                                              | -                                                             | При `true` будет отображаться лоадер загрузки                             |
 | `required?`                                                             | `boolean`                                              | -                                                             | Нужно заполнить                                                           |
 | `searchValue?`                                                          | `string`                                               | -                                                             | Значение поля ввода                                                       |
 | `labelForEmptyItems?`                                                   | `string`                                               | `Список пуст`                                                 | Текст для случая, когда в списке нет значений                             |
@@ -1534,7 +1534,7 @@ export type UserSelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | `name?`                                                                 | `string`                                               | -                                                             | Имя поля ввода                                                            |
 | `className?`                                                            | `string`                                               | -                                                             | Дополнительный CSS-класс                                                  |
 | `dropdownClassName?`                                                    | `string`                                               | -                                                             | Дополнительный CSS-класс для выпадающего блока                            |
-| [`onDropdownOpen?`](#управление-состоянием-выподающего-списка)          | `(open: boolean) => void;`                             | -                                                             | Событие срабатывает при открытии списка                                   |
-| [`dropdownOpen?` ](#управление-состоянием-выподающего-списка)           | `boolean`                                              | -                                                             | Состояние открыт/закрыт выподающего списка                                |
-| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выподающего-списка) | `ReadonlyArray<React.RefObject<HTMLElement>>`          | -                                                             | Ссылки на элементы с которые нужно игнорировать при кликах вне компонента |
+| [`onDropdownOpen?`](#управление-состоянием-выпадающего-списка)          | `(open: boolean) => void;`                             | -                                                             | Событие срабатывает при открытии списка                                   |
+| [`dropdownOpen?` ](#управление-состоянием-выпадающего-списка)           | `boolean`                                              | -                                                             | Состояние открыт/закрыт выпадающего списка                                |
+| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выпадающего-списка) | `ReadonlyArray<React.RefObject<HTMLElement>>`          | -                                                             | Ссылки на элементы с которые нужно игнорировать при кликах вне компонента |
 | `ref?`                                                                  | `React.Ref<HTMLDivElement>`                            | -                                                             | Ссылка на корневой DOM-элемент компонента                                 |

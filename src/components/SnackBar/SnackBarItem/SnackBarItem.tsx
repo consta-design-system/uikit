@@ -102,7 +102,7 @@ export const SnackBarItemRender = (
   };
 
   const handleClose = onClose ? () => onClose() : undefined;
-  const vsibleProgress = isNumber(progress) || progress === true;
+  const visibleProgress = isNumber(progress) || progress === true;
 
   return (
     <div
@@ -155,7 +155,7 @@ export const SnackBarItemRender = (
             message
           )}
         </div>
-        {(vsibleProgress || actions) && (
+        {(visibleProgress || actions) && (
           <div
             className={cnSnackBarItem('Actions', [
               cnMixFlex({
@@ -173,7 +173,7 @@ export const SnackBarItemRender = (
                 form={form}
               />
             )}
-            {vsibleProgress && (
+            {visibleProgress && (
               <SnackBarProgress progress={progress} view={progressView} />
             )}
           </div>

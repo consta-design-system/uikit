@@ -1,7 +1,7 @@
 .TextFieldTypeTextArea {
   --text-field-textarea-padding:
     calc(
-      (var(--text-field-textarea-slot-sizes-lenght) + 1) *
+      (var(--text-field-textarea-slot-sizes-length) + 1) *
       var(--field-control-layout-space) +
       var(--text-field-textarea-slot-sizes-width)
     );
@@ -12,31 +12,31 @@
         var(--field-control-layout-text-line-height)
       ) / 2
     );
-  --text-field-textarea-control-heigth:
+  --text-field-textarea-control-height:
     var(
-      --text-field-heigth,
+      --text-field-height,
       var(--field-control-layout-height)
     );
-  --text-field-textarea-heigth-calc:
+  --text-field-textarea-height-calc:
     calc(
-      var(--text-field-textarea-control-heigth) -
+      var(--text-field-textarea-control-height) -
       var(--field-control-layout-border-width) * 2
     );
-  --text-field-textarea-min-heigth: var(--text-field-textarea-heigth-calc);
+  --text-field-textarea-min-height: var(--text-field-textarea-height-calc);
 
   &_resize {
     --text-field-textarea-resize: vertical;
 
     &_auto {
-      --text-field-textarea-heigth: var(--text-field-textarea-heigth-calc);
+      --text-field-textarea-height: var(--text-field-textarea-height-calc);
     }
   }
 
   &-TextArea {
     resize: var(--text-field-textarea-resize, none);
     width: calc(100% + var(--text-field-textarea-padding));
-    height: var(--text-field-textarea-heigth, auto);
-    min-height: var(--text-field-textarea-min-heigth);
+    height: var(--text-field-textarea-height, auto);
+    min-height: var(--text-field-textarea-min-height);
     padding-top: var(--text-field-textarea-vertical-padding);
     padding-right: var(--text-field-textarea-padding, 0);
     padding-bottom: var(--text-field-textarea-vertical-padding);

@@ -1,5 +1,5 @@
 .ProgressStepBar {
-  /* Необходимо для того чтобы stylelint не приобразовывал 0px в 0 */
+  /* Необходимо для того чтобы stylelint не преобразовывал 0px в 0 */
   --progress-step-bar-offset: calc(1px - 1px);
   display: inline-flex;
   width: 100%;

@@ -3,7 +3,7 @@ import './ContextMenuWrapper.css';
 import React, { Fragment, useCallback, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
-import { cnListBox, mapVerticalSpase } from '##/components/ListCanary';
+import { cnListBox, mapVerticalSpace } from '##/components/ListCanary';
 import { Direction, Popover } from '##/components/Popover';
 import { useFlag } from '##/hooks/useFlag';
 import { useMutableRef } from '##/hooks/useMutableRef';
@@ -40,14 +40,14 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
   } = props;
 
   const [innerAnimation, setInnerAnimation] = useFlag(isMobile);
-  // запоминаем позицию посднего удовлетворяющего разворота,
+  // запоминаем позицию последнего удовлетворяющего разворота,
   // для того чтоб следующий экран разворачивался в эту же строну.
-  const [direction, setSirection] = useState(directionProp);
+  const [direction, setDirection] = useState(directionProp);
 
   const onSetDirectionRef = useMutableRef(onSetDirectionProp);
 
   const onSetDirection = useCallback((direction: Direction) => {
-    setSirection(direction);
+    setDirection(direction);
     onSetDirectionRef.current?.(direction);
   }, []);
 
@@ -65,7 +65,7 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
             className={cnContextMenuWrapper({ animationBack, innerAnimation }, [
               cnListBox({ size, form, border: true, shadow: true }),
               cnMixSpace({
-                pV: mapVerticalSpase[size],
+                pV: mapVerticalSpace[size],
               }),
               cnMixPopoverAnimate({ animate }),
               className,

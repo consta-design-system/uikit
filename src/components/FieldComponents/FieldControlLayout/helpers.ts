@@ -103,6 +103,6 @@ export const getBgColor = (view: FieldPropView, disabled?: boolean) => {
   }
 };
 
-// ToDo: Удалить после того как удалим из всех компоентов "clearClear"
+// ToDo: Удалить после того как удалим из всех компонентов "clearClear"
 export const formGuard = (from: FieldPropForm | 'clearClear'): FieldPropForm =>
   from === 'clearClear' ? 'clear' : from;

@@ -16,7 +16,7 @@ const renderComponent = (props: DateTimeProps<'time'> = {}) => {
 
 describe('Компонент DateTime_type_time', () => {
   describe('проверка value', () => {
-    it(`выбранная дата отображаеся верно`, () => {
+    it(`выбранная дата отображается верно`, () => {
       renderComponent({ value: new Date(1970, 0, 1, 10, 15, 20) });
       const items = getDateTimeItemsSelected();
       expect(items[0]).toHaveTextContent('10');

@@ -88,6 +88,7 @@ export const ChoiceGroupExample = () => {
 ```tsx
 type Item = string;
 
+/* cspell:disable */
 const items: Item[] = [
   'Экриксинатозавр',
   'Пахицефалозавр',
@@ -95,6 +96,7 @@ const items: Item[] = [
   'Аргентинозавр',
   'Кархародонтозавр',
 ];
+/* cspell:enable */
 
 export const ChoiceGroupExampleTextOverflow = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
@@ -480,7 +482,7 @@ const getItemLabel = (item: string) => item;
 export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
   const { desktop } = useBreakpoints({ map: { desktop: 800 }, isActive: true });
   const [value, setValue] = useState(items2[0]);
-  const onChandge = useCallback(
+  const onChange = useCallback(
     ({ value }: { value: string }) => setValue(value),
     [],
   );
@@ -493,7 +495,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
         getItemLabel={getItemLabel}
         form="round"
         value={value}
-        onChange={onChandge}
+        onChange={onChange}
       />
     );
   }
@@ -504,7 +506,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
       items={items}
       getItemLabel={getItemLabel}
       value={value}
-      onChange={onChandge}
+      onChange={onChange}
     />
   );
 };
@@ -547,8 +549,8 @@ export type ChoiceGroupPropView = typeof choiceGroupViews[number];
 export const choiceGroupDefaultView: ChoiceGroupPropView = 'primary';
 
 export const choiceGroupWidth = ['default', 'full'] as const;
-export type СhoiceGroupPropWidth = typeof choiceGroupWidth[number];
-export const choiceGroupWidthDefault: СhoiceGroupPropWidth =
+export type ChoiceGroupPropWidth = typeof choiceGroupWidth[number];
+export const choiceGroupWidthDefault: ChoiceGroupPropWidth =
   choiceGroupWidth[0];
 
 export type ChoiceGroupPropGetItemLabel<ITEM> = (item: ITEM) => string | number;

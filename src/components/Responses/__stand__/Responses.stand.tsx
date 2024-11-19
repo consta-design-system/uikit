@@ -7,11 +7,12 @@ export default createStand({
   description: 'Заглушки с сообщениями об ошибках и важных статусах.',
   version: '1.10.11',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'responses-bvlqo1',
   alias: [
     'сообщения',
     'иллюстрация',
-    'илюстрации',
+    'иллюстрации',
     'заглушка',
     'статус',
     'статусы',

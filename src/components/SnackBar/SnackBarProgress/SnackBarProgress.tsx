@@ -28,7 +28,7 @@ export const SnackBarProgress: React.FC<SnackBarProgressProps> = (props) => {
     >
       {view !== 'text' && (progressIsNumber || progress === true) && (
         <ProgressSpin
-          className={cnSnackBarProgress('Spiner')}
+          className={cnSnackBarProgress('Spinner')}
           progress={progressIsNumber ? progress : undefined}
           size="m"
           animation

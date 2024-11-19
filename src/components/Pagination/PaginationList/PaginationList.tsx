@@ -62,7 +62,7 @@ const PaginationListRender = <ITEM extends PaginationBaseItemDefault>(
             clickable={getItemClickable?.(item)}
             key={getItemKey(item)}
             style={{
-              ['--pagination-item-label-lenght' as string]:
+              ['--pagination-item-label-length' as string]:
                 item.label === pageSeparatorLabel ? 1 : item.label?.length,
             }}
           />

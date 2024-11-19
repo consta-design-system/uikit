@@ -28,7 +28,7 @@ describe('Компонент DateTime', () => {
   describe('проверка className', () => {
     dateTimePropType.forEach((type) => {
       dateTimePropView.forEach((view) => {
-        it(`className присваевается при type="${type}" view="${view}"`, () => {
+        it(`className присваивается при type="${type}" view="${view}"`, () => {
           const className = 'className';
 
           renderComponent({ className, type, view });

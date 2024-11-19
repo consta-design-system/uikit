@@ -169,7 +169,7 @@ describe('getPositionsByDirection', () => {
 });
 
 describe('getComputedPositionAndDirection', () => {
-  describe('если поповер спозициронирован относительно координат', () => {
+  describe('если поповер спозиционирован относительно координат', () => {
     it('возвращаем неопределенную позицию, если данные для позиции отсутствуют', () => {
       expect(
         getComputedPositionAndDirection({
@@ -323,7 +323,7 @@ describe('getComputedPositionAndDirection', () => {
     });
   });
 
-  describe('если поповер спозициронирован относительно элемента', () => {
+  describe('если поповер спозиционирован относительно элемента', () => {
     const params = {
       ...defaultParams,
     } as const;

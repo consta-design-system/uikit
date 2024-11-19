@@ -67,7 +67,7 @@ export const getText = <PROPS>(
   return isString(textOrFn) ? textOrFn : textOrFn(props);
 };
 
-export const withdefaultLocale = (locale?: Locale): Required<Locale> =>
+export const withDefaultLocale = (locale?: Locale): Required<Locale> =>
   isDefined(locale)
     ? {
         ...defaultLocale,

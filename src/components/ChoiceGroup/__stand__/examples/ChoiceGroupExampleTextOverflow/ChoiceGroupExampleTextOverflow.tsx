@@ -6,6 +6,7 @@ import { cnChoiceGroupExampleFitMode } from '../ChoiceGroupExampleFitMode';
 
 type Item = string;
 
+/* cspell:disable */
 const items: Item[] = [
   'Экриксинатозавр',
   'Пахицефалозавр',
@@ -13,6 +14,7 @@ const items: Item[] = [
   'Аргентинозавр',
   'Кархародонтозавр',
 ];
+/* cspell:enable */
 
 export const ChoiceGroupExampleTextOverflow = () => {
   const [value, setValue] = useState<Item | null>(items[0]);

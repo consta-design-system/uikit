@@ -7,7 +7,7 @@ import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
-import { mapHorisontalSpase, mapHorisontalSpaseIncreased } from '../maps';
+import { mapHorizontalSpace, mapHorizontalSpaceIncreased } from '../maps';
 import {
   defaultListPropInnerOffset,
   defaultListPropSize,
@@ -38,8 +38,8 @@ export const ListLoader = forwardRef<HTMLDivElement, Props>(
           cnMixSpace({
             pH:
               innerOffset === 'increased'
-                ? mapHorisontalSpaseIncreased[size]
-                : mapHorisontalSpase[size],
+                ? mapHorizontalSpaceIncreased[size]
+                : mapHorizontalSpace[size],
           }),
           className,
         ])}

@@ -180,9 +180,9 @@ export function withDefaultGetters<ITEM>(props: ProgressStepBarProps<ITEM>) {
   };
 }
 
-export const getItemPosition = (index: number, lendth: number) => {
+export const getItemPosition = (index: number, length: number) => {
   let position: ProgressStepBarPropPosition = 'center';
-  if (index === lendth - 1) position = 'end';
+  if (index === length - 1) position = 'end';
   if (index === 0) position = 'start';
 
   return position;
@@ -253,7 +253,7 @@ export const calculateLines = (
 };
 
 export const validateVisibleIndex = (
-  lenght: number,
+  length: number,
   index: number | undefined,
 ) => {
   if (!index) {
@@ -264,5 +264,5 @@ export const validateVisibleIndex = (
     return undefined;
   }
 
-  return Math.min(index, lenght - 1);
+  return Math.min(index, length - 1);
 };

@@ -504,7 +504,7 @@ function ListExampleRenderItem() {
 ### Кастомные отступы
 
 Компонент позволяет поменять отступы элементов `ListItem`, `ListGroupLabel`, `ListDivider`,
-через `itemSpase`, `groupLabelSpase`, `dividerSpase` соответственно.
+через `itemSpace`, `groupLabelSpace`, `dividerSpace` соответственно.
 
 Свойства принимают объект как в [MixSpace](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable).
 Если необходимо убрать отступы, то передайте пустой объект `{}`.
@@ -515,9 +515,9 @@ function ListExampleRenderItem() {
   items={items}
   groups={groups}
   onItemClick={(item) => alert(item.label)}
-  itemSpase={{}}
-  groupLabelSpase={{}}
-  dividerSpase={{}}
+  itemSpace={{}}
+  groupLabelSpace={{}}
+  dividerSpace={{}}
 />
 
 // С кастомными отступами, без заголовков групп
@@ -525,8 +525,8 @@ function ListExampleRenderItem() {
   items={items}
   groups={groups}
   onItemClick={(item) => alert(item.label)}
-  itemSpase={{ p: 's' }}
-  dividerSpase={{ mH: 's' }}
+  itemSpace={{ p: 's' }}
+  dividerSpace={{ mH: 's' }}
   getGroupLabel={() => undefined}
 />
 
@@ -536,8 +536,8 @@ function ListExampleRenderItem() {
   items={items}
   groups={groups}
   onItemClick={(item) => alert(item.label)}
-  itemSpase={{ p: 's' }}
-  groupLabelSpase={{ mH: 's', pT: 's', pB: '2xs' }}
+  itemSpace={{ p: 's' }}
+  groupLabelSpace={{ mH: 's', pT: 's', pB: '2xs' }}
 />
 ```
 
@@ -953,7 +953,7 @@ export type ListPropGetItemRef<ITEM> = (
 | `getItemOnClick?`                                       | `ListPropGetItemOnClick<ITEM>`                         | `(item) => item.onClick`     | Функция для определения обработчика события при клике на элемент       |
 | `getItemActive?`                                        | `ListPropGetItemActive<ITEM>`                          | `(item) => item.active`      | Функция для определения активности элемента                            |
 | `getItemRightAs?`                                       | `ListPropGetItemAs<ITEM>`                              | `(item) => item.as`          | Функция определения HTML-тега для рендера элемента                     |
-| `getItemRightAttributes?`                               | `ListPropGetItemAtrributes<ITEM>`                      | `(item) => item.attributes`  | Функция для определения атрибутов элемента                             |
+| `getItemRightAttributes?`                               | `ListPropGetItemAttributes<ITEM>`                      | `(item) => item.attributes`  | Функция для определения атрибутов элемента                             |
 | [`getGroupLabel?`](#свои-тип-данных-items-и-groups)     | `ListPropGetGroupKey<GROUP>`                           | `(group) => group.id`        | Функция для определения названия группы                                |
 | [`getGroupKey?`](#свои-тип-данных-items-и-groups)       | `ListPropGetGroupLabel<GROUP>`                         | `(group) => group.label`     | Функция для определения уникального ключа группы                       |
 | [`getGroupRightSide?`](#свои-тип-данных-items-и-groups) | `ListPropGetGroupRightSide<GROUP>`                     | `(group) => group.rightSide` | Функция для определения контента с правой стороны                      |

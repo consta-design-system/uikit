@@ -88,7 +88,7 @@ export const TextFieldRender = <TYPE extends string>(
     iconSize: iconSizeProp,
     focused,
     onClick,
-    // onkey props
+    // onKey props
     onKeyDown: onKeyDownProp,
     onKeyDownCapture,
     onKeyPress,
@@ -103,7 +103,7 @@ export const TextFieldRender = <TYPE extends string>(
   const incrementButtons = type === 'number' ? incrementButtonsProp : false;
 
   const [focus, setFocus] = useFlag(autoFocus);
-  const [passwordVisible, setPasswordVisuble] = useFlag();
+  const [passwordVisible, setPasswordVisible] = useFlag();
   const [withValue, setWithValue] = useFlag();
 
   const onClickRef = useMutableRef(onClick);
@@ -112,7 +112,7 @@ export const TextFieldRender = <TYPE extends string>(
   const handleEyeClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.stopPropagation();
-      setPasswordVisuble.toggle();
+      setPasswordVisible.toggle();
       inputRef.current?.focus();
     },
     [],

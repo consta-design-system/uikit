@@ -15,7 +15,7 @@ const sortGroup = (a: number | string, b: number | string) => {
 };
 
 describe('helper getGroups', () => {
-  it('групировка без getGroupId', () => {
+  it('группировка без getGroupId', () => {
     const result = getGroups(items, undefined, undefined, undefined, undefined);
 
     const expected: typeof result = [
@@ -29,7 +29,7 @@ describe('helper getGroups', () => {
     expect(result).toEqual(expected);
   });
 
-  it('групировка без массива групп', () => {
+  it('группировка без массива групп', () => {
     const result = getGroups(
       items,
       getItemGroupKey,
@@ -62,7 +62,7 @@ describe('helper getGroups', () => {
     expect(result).toEqual(expected);
   });
 
-  it('групировка без массива групп и с сортировкой', () => {
+  it('группировка без массива групп и с сортировкой', () => {
     const result = getGroups(
       items,
       getItemGroupKey,
@@ -96,7 +96,7 @@ describe('helper getGroups', () => {
     expect(result).toEqual(expected);
   });
 
-  it('групировка c массивом групп', () => {
+  it('группировка c массивом групп', () => {
     const result = getGroups(
       items,
       getItemGroupKey,
@@ -151,7 +151,7 @@ describe('helper getGroups', () => {
     expect(result).toEqual(expected);
   });
 
-  it('групировка c массивом групп и с сортировкой', () => {
+  it('группировка c массивом групп и с сортировкой', () => {
     const result = getGroups(
       items,
       getItemGroupKey,

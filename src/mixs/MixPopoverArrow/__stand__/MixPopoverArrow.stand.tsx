@@ -6,6 +6,7 @@ export default createStand({
   group: 'mixs',
   version: '3.18.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'mixpopoverarrow-ciqb9x',
   alias: ['миксин', 'стрелочка', 'принадлежность'],
   order: 10,

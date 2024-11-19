@@ -7,6 +7,7 @@ export default createStand({
   description: 'Группа переключателей.',
   version: '5.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'switchgroup-b4cpro',
   alias: ['поле', 'ввод', 'переключатель', 'группа'],
   figma:

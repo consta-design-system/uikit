@@ -7,6 +7,7 @@ export default createStand({
   description: 'Карточка. Контейнер для любого контента.',
   version: '3.2.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'card-uttoei',
   alias: ['карточка', 'контейнер', 'обертка'],
   figma:

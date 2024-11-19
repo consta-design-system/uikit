@@ -60,7 +60,7 @@ const WithHandleCellClick = () => {
   return (
     <div>
       <Text view="primary" size="m" lineHeight="m">
-        Клик правой клавишей мыши, для вызова контексного меню
+        Клик правой клавишей мыши, для вызова контекстного меню
       </Text>
 
       <Table columns={columns} rows={rows} onCellClick={handleCellClick} />

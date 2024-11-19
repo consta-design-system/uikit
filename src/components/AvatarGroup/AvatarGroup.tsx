@@ -34,8 +34,8 @@ const AvatarGroupRender = (
     ...otherProps
   } = withDefaultGetters(props);
 
-  const itemLenght = items.length;
-  const elementsLength = itemLenght + 1;
+  const itemLength = items.length;
+  const elementsLength = itemLength + 1;
 
   const { elementsRefs, parentRef, visibleMap } = useHideElementsInLine(
     elementsLength,
@@ -56,7 +56,7 @@ const AvatarGroupRender = (
       ref={useForkRef([parentRef, ref])}
       {...otherProps}
     >
-      {(autoMode || itemLenght > visibleCount) && (
+      {(autoMode || itemLength > visibleCount) && (
         <div
           className={cnAvatar({ size, form }, [
             cnAvatarGroup('More', {
@@ -66,7 +66,7 @@ const AvatarGroupRender = (
           ref={elementsRefs[0]}
         >
           {`+${
-            autoMode ? getHiddenCount(visibleMap) : itemLenght - visibleCount
+            autoMode ? getHiddenCount(visibleMap) : itemLength - visibleCount
           }`}
         </div>
       )}

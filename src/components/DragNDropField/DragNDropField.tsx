@@ -14,7 +14,7 @@ import { DragNDropFieldContent } from './DragNDropFieldContent/DragNDropFieldCon
 import { DragNDropFieldTooltip } from './DragNDropFieldTooltip/DragNDropFieldTooltip';
 import { formatAccept } from './formatAccept';
 import { getErrorsList } from './getErrorsList';
-import { withdefaultLocale } from './locale';
+import { withDefaultLocale } from './locale';
 import { DragNDropFieldProps } from './types';
 
 const cnDragNDropField = cn('DragNDropField');
@@ -40,7 +40,7 @@ export const DragNDropField = forwardRef<HTMLDivElement, DragNDropFieldProps>(
 
     const onClickRef = useMutableRef(onClick);
 
-    const locale = withdefaultLocale(localeProp);
+    const locale = withDefaultLocale(localeProp);
 
     const handleDrop: DropzoneOptions['onDrop'] = React.useCallback(
       (acceptedFiles: File[]) =>

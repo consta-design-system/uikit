@@ -7,8 +7,8 @@ import {
   getColumnAllItem,
   getDateTimeColumnItem,
   getDateTimeLabel,
-  getDateTimeTooglerButtonNext,
-  getDateTimeTooglerButtonPrev,
+  getDateTimeTogglerButtonNext,
+  getDateTimeTogglerButtonPrev,
   getDayItem,
   getDayItemsSelected,
   getTimeItem,
@@ -23,7 +23,7 @@ const renderComponent = (props: DateTimeProps<'date-time'> = {}) => {
 
 describe('Компонент DateTime_type_dateTime', () => {
   describe('проверка value', () => {
-    it(`выбранная дата отображаеся верно`, () => {
+    it(`выбранная дата отображается верно`, () => {
       renderComponent({ value: new Date(1970, 0, 1, 10, 15, 20) });
       const timeItems = getTimeItemsSelected();
       const dayItems = getDayItemsSelected();
@@ -167,7 +167,7 @@ describe('Компонент DateTime_type_dateTime', () => {
       const label = getDateTimeLabel();
       expect(label).toHaveTextContent('май 2022');
 
-      fireEvent.click(getDateTimeTooglerButtonNext());
+      fireEvent.click(getDateTimeTogglerButtonNext());
 
       expect(label).not.toHaveTextContent('май 2022');
       expect(label).toHaveTextContent('июнь 2022');
@@ -182,7 +182,7 @@ describe('Компонент DateTime_type_dateTime', () => {
         onChange,
       });
 
-      fireEvent.click(getDateTimeTooglerButtonPrev());
+      fireEvent.click(getDateTimeTogglerButtonPrev());
 
       const timeItems = getTimeItemsSelected();
       expect(timeItems[2]).toHaveTextContent('25');

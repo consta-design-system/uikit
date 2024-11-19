@@ -3,9 +3,9 @@ import React, { forwardRef } from 'react';
 
 import { ListDivider, ListItem } from '..';
 import {
-  mapGroupVerticalSpaseBottom,
-  mapHorisontalSpase,
-  mapHorisontalSpaseIncreased,
+  mapGroupVerticalSpaceBottom,
+  mapHorizontalSpace,
+  mapHorizontalSpaceIncreased,
 } from '../maps';
 import { defaultListPropSize, ListAddItemProps } from '../types';
 
@@ -18,10 +18,10 @@ export const ListAddItem = forwardRef<HTMLDivElement, ListAddItemProps>(
       ...otherProps
     } = props;
 
-    const horisontalSpase =
+    const horizontalSpace =
       innerOffset === 'increased'
-        ? mapHorisontalSpaseIncreased[size]
-        : mapHorisontalSpase[size];
+        ? mapHorizontalSpaceIncreased[size]
+        : mapHorizontalSpace[size];
 
     return (
       <>
@@ -31,12 +31,12 @@ export const ListAddItem = forwardRef<HTMLDivElement, ListAddItemProps>(
           ref={ref}
           leftIcon={IconAdd}
           space={{
-            pH: horisontalSpase,
-            pV: mapGroupVerticalSpaseBottom[size],
+            pH: horizontalSpace,
+            pV: mapGroupVerticalSpaceBottom[size],
           }}
         />
         {underLine && (
-          <ListDivider size={size} space={{ mH: horisontalSpase }} />
+          <ListDivider size={size} space={{ mH: horizontalSpace }} />
         )}
       </>
     );

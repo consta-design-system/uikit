@@ -155,7 +155,7 @@ export const TextFieldExampleTypeNumber = () => {
 
 <TextFieldExampleTypeNumber />
 
-##### Поле для ввода проля: `type="password"`
+##### Поле для ввода пароля: `type="password"`
 
 ```tsx
 export const TextFieldExampleTypePassword = () => {
@@ -193,7 +193,7 @@ export const TextFieldExampleTypePassword = () => {
 
 ```tsx
 const App = () => {
-  const [value, setValue] = useState('стопиццот');
+  const [value, setValue] = useState('текст');
 
   return <TextField value={value} onChange={setValue} />;
 };
@@ -313,7 +313,7 @@ export const TextFieldExampleIncrementButtons = () => {
 Если вы хотите добавить в поле кнопку, по которой можно его очистить, используйте свойство `withClearButton`. Если в поле есть значение, справа появляется крестик. Нажмите на него — поле станет пустым.
 
 ```tsx
-export const TextFieldExampleWtihClearButton = () => {
+export const TextFieldExampleWithClearButton = () => {
   const [value, setValue] = useState<string | null>(null);
   const handleChange = ({ value }: { value: string | null }) => setValue(value);
 
@@ -468,7 +468,7 @@ export const TextFieldExampleWtihClearButton = () => {
 
 Значение `TextField` или любого другого `<input/>` меняется через хук со связкой с полем через `ref`.
 Для того, чтобы указать значение в момент первого рендера, используйте defaultValue.
-Для того, чтобы изменить поле программно, используйтете setValue из хука.
+Для того, чтобы изменить поле программно, используйте setValue из хука.
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';

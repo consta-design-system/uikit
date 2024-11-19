@@ -51,7 +51,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       max,
       min,
       step,
-      // onkey props
+      // onKey props
       onKeyDown,
       onKeyDownCapture,
       onKeyUp,

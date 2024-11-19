@@ -7,6 +7,7 @@ export default createStand({
   description: 'Визуальный плейсхолдер, заглушка.',
   version: '2.10.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'skeleton-5ebgtr',
   alias: ['заглушка', 'загрузка', 'mock'],
   figma:

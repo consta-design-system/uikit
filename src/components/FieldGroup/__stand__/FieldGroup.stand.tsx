@@ -8,6 +8,7 @@ export default createStand({
     'Группа полей. Объединяет одно или несколько полей ввода и кнопки.',
   version: '3.25.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'fieldgroup-hmsnz6',
   alias: [
     'группа',

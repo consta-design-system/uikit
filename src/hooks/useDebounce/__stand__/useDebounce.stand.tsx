@@ -8,6 +8,7 @@ export default createStand({
   alias: ['хук', 'таймаут', 'задержка'],
   version: '1.9.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'usedebounce-jodp65',
   order: 10,
 });

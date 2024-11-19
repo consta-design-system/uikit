@@ -14,14 +14,14 @@ const getAllParents = (element: HTMLElement): readonly Node[] => {
   return mutableParents;
 };
 
-/** Запрос репозиции поповера при ресайзе окна и скролле */
+/** Запрос репозиции поповера при ресайзе окна и прокрутке */
 export const usePopoverReposition = ({
   isActive,
   scrollAnchorRef,
   onRequestReposition,
 }: {
   isActive: boolean;
-  /** При скролле родителей этого элемента будет запрашиваться репозиция поповера */
+  /** При прокрутке родителей этого элемента будет запрашиваться репозиция поповера */
   scrollAnchorRef: React.RefObject<HTMLElement | null>;
   onRequestReposition: () => void;
 }) => {

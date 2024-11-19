@@ -8,6 +8,7 @@ export default createStand({
     'Сообщение для пользователя. Встраивается в содержимое страницы.',
   version: '1.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'informer-hlkt18',
   alias: ['сообщение', 'оповещение', 'информация'],
   figma:

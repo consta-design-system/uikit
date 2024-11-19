@@ -19,7 +19,7 @@ export const TextFieldExampleTextPlaceholder = () => {
 };
 
 export const TextFieldExampleTextValue = () => {
-  const [value, setValue] = useState<string | null>('стопиццот');
+  const [value, setValue] = useState<string | null>('текст');
 
   return (
     <Example col={1}>

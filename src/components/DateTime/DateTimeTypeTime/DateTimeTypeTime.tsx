@@ -59,7 +59,7 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef(
       multiplicityMinutes,
       multiplicitySeconds,
     );
-    const labelLenght = time.filter((item) => item.length).length;
+    const labelLength = time.filter((item) => item.length).length;
 
     return (
       <div
@@ -70,7 +70,7 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef(
         <DateTimeLabel
           align="center"
           className={cnDateTimeTypeTime('Label')}
-          style={{ ['--label-length' as string]: labelLenght }}
+          style={{ ['--label-length' as string]: labelLength }}
           label={label}
         />
         <div className={cnDateTimeTypeTime('Grid')}>

@@ -124,9 +124,9 @@ export type ListProps<ITEM = DefaultListItem, GROUP = DefaultListGroup> = {
   size?: ListPropSize;
   items: ITEM[];
   innerOffset?: ListPropInnerOffset;
-  itemSpase?: MixSpaceProps;
-  groupLabelSpase?: MixSpaceProps;
-  dividerSpase?: MixSpaceProps;
+  itemSpace?: MixSpaceProps;
+  groupLabelSpace?: MixSpaceProps;
+  dividerSpace?: MixSpaceProps;
   onItemClick?: ListPropOnItemClick<ITEM>;
   getItemLabel?: ListPropGetItemLabel<ITEM>;
   getItemDisabled?: ListPropGetItemDisabled<ITEM>;

@@ -7,6 +7,7 @@ export default createStand({
   description: 'Выпадающий список. Позволяет выбрать один вариант.',
   version: '5.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'select-ixtbcl',
   alias: ['поле', 'ввод', 'выбор', 'список', 'лист'],
   figma:

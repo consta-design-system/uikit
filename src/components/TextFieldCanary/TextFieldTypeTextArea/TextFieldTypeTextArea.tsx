@@ -55,7 +55,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       minRows,
       maxRows,
 
-      // onkey props
+      // onKey props
       onKeyDown,
       onKeyDownCapture,
       onKeyUp,
@@ -163,7 +163,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
           ['--text-field-textarea-slot-sizes-width' as string]: `${slotSizes.reduce(
             (a, b) => a + b,
           )}px`,
-          ['--text-field-textarea-slot-sizes-lenght' as string]:
+          ['--text-field-textarea-slot-sizes-length' as string]:
             slotSizes.filter((width) => !!width).length,
         }}
         rightSlotsRefs={rightSlotsRefs}

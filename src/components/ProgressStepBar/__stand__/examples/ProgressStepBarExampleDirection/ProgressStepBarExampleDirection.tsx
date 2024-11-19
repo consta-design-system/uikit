@@ -42,7 +42,7 @@ export const ProgressStepBarExampleDirectionHorizontal = () => {
   );
 };
 
-export const ProgressStepBarExampleDirectionVerical = () => {
+export const ProgressStepBarExampleDirectionVertical = () => {
   return (
     <Example col={1}>
       <ProgressStepBar

@@ -11,7 +11,7 @@ import {
   ListItem,
   ListPropOnItemClick,
   mapIconSize,
-  mapVerticalSpase,
+  mapVerticalSpace,
 } from '##/components/ListCanary';
 import { useFlag } from '##/hooks/useFlag/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
@@ -245,7 +245,7 @@ const ContextMenuLevelRender = (
           : cnContextMenuLevel('Desktop', { firstLevel }, [
               cnListBox({ size, form, border: true, shadow: true }),
               cnMixSpace({
-                pV: mapVerticalSpase[size],
+                pV: mapVerticalSpace[size],
               }),
               cnMixPopoverAnimate({ animate }),
               firstLevel ? className : undefined,
@@ -281,7 +281,7 @@ const ContextMenuLevelRender = (
               active: activeIndex === -1,
             })}
           />
-          <ListDivider size={size} space={{ mV: mapVerticalSpase[size] }} />
+          <ListDivider size={size} space={{ mV: mapVerticalSpace[size] }} />
         </>
       )}
       <List

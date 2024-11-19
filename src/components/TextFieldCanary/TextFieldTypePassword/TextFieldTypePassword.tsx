@@ -43,7 +43,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       ariaLabel,
       iconSize,
       onClick,
-      // onkey props
+      // onKey props
       onKeyDown,
       onKeyDownCapture,
       onKeyUp,

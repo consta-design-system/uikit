@@ -75,11 +75,11 @@ export const getValueByStepNumber = (
   );
 };
 
-export const getTypeForRender = (type: string, passwordVible: boolean) => {
+export const getTypeForRender = (type: string, passwordVisible: boolean) => {
   if (type !== 'password') {
     return type;
   }
-  if (passwordVible) {
+  if (passwordVisible) {
     return 'text';
   }
   return 'password';

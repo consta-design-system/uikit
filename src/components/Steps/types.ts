@@ -43,6 +43,6 @@ export type StepsProps<ITEM = StepsItemDefault> = PropsWithHTMLAttributesAndRef<
         getItemLabel: StepsPropGetLabel<ITEM>;
       });
 
-export type StepsCompnent = <ITEM>(
+export type StepsComponent = <ITEM>(
   props: StepsProps<ITEM>,
 ) => React.ReactElement | null;

@@ -53,7 +53,7 @@ import { Combobox } from '@consta/uikit/Combobox';
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
 - [Создание новых вариантов](#создание-новых-вариантов)
 - [Выбор всех элементов](#выбор-всех-элементов)
-- [Управление состоянием выподающего списка](#управление-состоянием-выподающего-списка)
+- [Управление состоянием выпадающего списка](#управление-состоянием-выпадающего-списка)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
   - [Кастомное выбранное значение](#кастомное-выбранное-значение)
@@ -574,7 +574,7 @@ function ComboboxExampleForm() {
 За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
 
 Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
-поля с разными статусами и разной формы будут выглядет одинаково.
+поля с разными статусами и разной формы будут выглядит одинаково.
 
 > Для создания hover эффекта для view="`clear`" управляйте внешним видом контейнера, в котором находится Combobox
 
@@ -675,7 +675,7 @@ function ComboboxExampleDisabled() {
 
 По умолчанию компонент ищет по `label` элемента. Вы можете поменять параметры поиска с помощью `searchFunction`. Например, если в комбобоксе есть [кастомные элементы](#кастомный-элемент-списка) и нужно искать варианты не только по `label`, но и по другим данным.
 
-Чтобы получить значение поисквого поля, нужно указать колбек для `onSearchValueChange`.
+Чтобы получить значение поискового поля, нужно указать Коллбэк для `onSearchValueChange`.
 
 Если ничего не нашлось, пользователь увидит текст **Не найдено**. Поменять его можно с помощью свойства `labelForNotFound`.
 
@@ -724,7 +724,7 @@ function ComboboxExampleOnSearchValueChange() {
 
 ## Виртуализация списка
 
-Если список элементов очень большой, то стоит использовать виртуализацию скрола.
+Если список элементов очень большой, то стоит использовать виртуализацию скролла.
 
 ```tsx
 type Item = {
@@ -755,7 +755,7 @@ const ComboboxExampleVirtualScroll = () => {
   const [value, setValue] = useState<Item[] | null>();
   return (
     <Combobox
-      placeholder="Чтобы посмотреть весь список, скрольте вниз"
+      placeholder="Чтобы посмотреть весь список, прокрутите вниз"
       items={items}
       value={value}
       onChange={setValue}
@@ -787,15 +787,15 @@ const useMockLoadData = (
 ): [Item[], boolean, () => void] => {
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
-  const [lenght, setLenght] = useState<number>(0);
+  const [length, setLength] = useState<number>(0);
 
   const items = useMemo(
     () =>
-      new Array(lenght).fill(null).map((_, i) => ({
+      new Array(length).fill(null).map((_, i) => ({
         label: `Опция ${i + 1}`,
         id: i,
       })),
-    [lenght],
+    [length],
   );
 
   useEffect(() => {
@@ -805,7 +805,7 @@ const useMockLoadData = (
 
     const timeoutNumber = setTimeout(() => {
       if (isStart) {
-        setLenght((state) => state + 100);
+        setLength((state) => state + 100);
         setIsLoading.off();
         setIsStart.off();
       }
@@ -847,7 +847,7 @@ const ComboboxExampleIsLoading = () => {
 
 <ComboboxExampleIsLoading />
 
-Пример ниже показывает как можно дозагружать данные при скролле до конца списка.
+Пример ниже показывает как можно дозагружать данные при прокрутке до конца списка.
 
 ```tsx
 type Item = {
@@ -861,7 +861,7 @@ const useMockLoadData = (
 ): [Item[], boolean, () => void] => {
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
-  const [lenght, setLenght] = useState<number>(0);
+  const [length, setLength] = useState<number>(0);
   const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
 
   const items = useMemo(() => {
@@ -879,11 +879,11 @@ const useMockLoadData = (
               .indexOf(searchValue.toLocaleLowerCase()) !== -1,
         );
     }
-    return new Array(lenght).fill(null).map((_, i) => ({
+    return new Array(length).fill(null).map((_, i) => ({
       label: `Опция ${i + 1}`,
       id: i,
     }));
-  }, [lenght, searchValue]);
+  }, [length, searchValue]);
 
   useEffect(() => {
     setIsLoading.on();
@@ -897,7 +897,7 @@ const useMockLoadData = (
 
     const timeoutNumber = setTimeout(() => {
       if (isStart) {
-        setLenght((state) => state + 100);
+        setLength((state) => state + 100);
         setIsLoading.off();
         setIsStart.off();
       }
@@ -1077,15 +1077,15 @@ const ComboboxExampleSelectAll = () => {
 
 <ComboboxExampleSelectAll />
 
-## Управление состоянием выподающего списка
+## Управление состоянием выпадающего списка
 
-Для управлением состояния выподающего списка используйте следующие свойства:
+Для управлением состояния выпадающего списка используйте следующие свойства:
 
 - `dropdownOpen` - флаг открыт/закрыт
-- `onDropdownOpen` - колбек отрабатывающий каждый раз при открытии/закрытии
+- `onDropdownOpen` - Коллбэк отрабатывающий каждый раз при открытии/закрытии
 - `ignoreOutsideClicksRefs` - список ссылок на элементы по которым игнорируется клики
 
-### Пример с расскрытием списка по кнопке
+### Пример с раскрытием списка по кнопке
 
 ```tsx
 type Item = {
@@ -1154,7 +1154,7 @@ const ComboboxExampleDropdownOpen = () => {
 
 <ComboboxExampleDropdownOpen />
 
-### Пример с расскрытием списка по фокусу
+### Пример с раскрытием списка по фокусу
 
 ```tsx
 type Item = {
@@ -1339,7 +1339,7 @@ function ComboboxExampleRenderItem() {
 
 ### Кастомное выбранное значение
 
-Чтобы создать кастомное выбранное значение, используте свойство `renderValue`.
+Чтобы создать кастомное выбранное значение, используйте свойство `renderValue`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
 ```tsx
@@ -1618,14 +1618,14 @@ type ComboboxPropOnCreate = (
 | `onBlur?`                                                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `blur`                                                             |
 | `onFocus?`                                                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                                                             | Обработчик события `focus`                                                            |
 | `onCreate?`                                                             | `ComboboxPropOnCreate`                                 | -                                                             | Событие по клику на кнопку 'Создать'                                                  |
-| `onScrollToBottom?`                                                     | `(lenght: number) => void`                             | -                                                             | Событие срабатывает когда доскролили список до конца                                  |
+| `onScrollToBottom?`                                                     | `(length: number) => void`                             | -                                                             | Событие срабатывает когда прокрутили список до конца                                  |
 | `onSearchValueChange?`                                                  | `(value: string) => void;`                             | -                                                             | Событие срабатывает при изменении значения поиска                                     |
 | `virtualScroll?`                                                        | `boolean`                                              | -                                                             | Включает виртуализацию скролла                                                        |
 | `ariaLabel?`                                                            | `string`                                               | -                                                             | `aria` атрибут для поля ввода                                                         |
 | `name?`                                                                 | `string`                                               | -                                                             | Имя поля ввода                                                                        |
 | `className?`                                                            | `string`                                               | -                                                             | Дополнительный CSS-класс                                                              |
 | `dropdownClassName?`                                                    | `string`                                               | -                                                             | Дополнительный CSS-класс для выпадающего блока                                        |
-| [`onDropdownOpen?`](#управление-состоянием-выподающего-списка)          | `(open: boolean) => void;`                             | -                                                             | Событие срабатывает при открытии списка                                               |
-| [`dropdownOpen?` ](#управление-состоянием-выподающего-списка)           | `boolean`                                              | -                                                             | Состояние открыт/закрыт выподающего списка                                            |
-| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выподающего-списка) | `ReadonlyArray<React.RefObject<HTMLElement>>`          | -                                                             | Ссылки на элементы с которые нужно игнорировать при кликах вне компонента             |
+| [`onDropdownOpen?`](#управление-состоянием-выпадающего-списка)          | `(open: boolean) => void;`                             | -                                                             | Событие срабатывает при открытии списка                                               |
+| [`dropdownOpen?` ](#управление-состоянием-выпадающего-списка)           | `boolean`                                              | -                                                             | Состояние открыт/закрыт выпадающего списка                                            |
+| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выпадающего-списка) | `ReadonlyArray<React.RefObject<HTMLElement>>`          | -                                                             | Ссылки на элементы с которые нужно игнорировать при кликах вне компонента             |
 | `ref?`                                                                  | `React.Ref<HTMLDivElement>`                            | -                                                             | Ссылка на корневой DOM-элемент компонента                                             |

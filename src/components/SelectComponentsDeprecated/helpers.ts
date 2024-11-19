@@ -1,5 +1,5 @@
-export const defaultlabelForNotFound = 'Не найдено';
-export const defaultlabelForCreate = '';
+export const defaultLabelForNotFound = 'Не найдено';
+export const defaultLabelForCreate = '';
 export const defaultLabelForEmptyItems = 'Список пуст';
 
 export const getInputWidth = (

@@ -13,9 +13,9 @@ import { clearSizeMap } from '../ComboboxDeprecated';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect } from '../SelectComponentsDeprecated/cnSelect';
 import {
-  defaultlabelForCreate,
+  defaultLabelForCreate,
   defaultLabelForEmptyItems,
-  defaultlabelForNotFound,
+  defaultLabelForNotFound,
   getInputWidth,
 } from '../SelectComponentsDeprecated/helpers';
 import { SelectContainer } from '../SelectComponentsDeprecated/SelectContainer/SelectContainer';
@@ -88,8 +88,8 @@ const UserSelectRender = <
     renderValue: renderValueProp,
     onCreate,
     inputRef: inputRefProp,
-    labelForNotFound = defaultlabelForNotFound,
-    labelForCreate = defaultlabelForCreate,
+    labelForNotFound = defaultLabelForNotFound,
+    labelForCreate = defaultLabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
     multiple = false,
     searchFunction,

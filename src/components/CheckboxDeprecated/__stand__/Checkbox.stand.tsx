@@ -7,6 +7,7 @@ export default createStand({
   description: 'Чекбокс. Можно сделать выбор и подтвердить.',
   version: '0.1.0',
   status: 'deprecated',
+  /* cspell:disable-next-line */
   sandbox: 'checkbox-e8wjsx',
   alias: ['поле', 'галочка', 'ввод', 'чекбокс'],
   figma:

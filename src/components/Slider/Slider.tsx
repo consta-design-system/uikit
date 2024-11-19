@@ -16,7 +16,7 @@ import {
   getIcon,
   getMaxForStartField,
   getMinForEndField,
-  getOnChandgeForInput,
+  getOnChangeForInput,
   getValidStep,
   getValueForInput,
   isRangeParams,
@@ -156,7 +156,7 @@ const SliderRender = <RANGE extends boolean = false>(
                 value={getValueForInput(props, 0)}
                 onFocus={() => setFocusIndex(0)}
                 onBlur={() => setFocusIndex(undefined)}
-                onChange={getOnChandgeForInput(props, 0)}
+                onChange={getOnChangeForInput(props, 0)}
                 size={size}
                 min={min}
                 inputMode="numeric"
@@ -223,7 +223,7 @@ const SliderRender = <RANGE extends boolean = false>(
             {rightSide === 'input' && (
               <SliderInput
                 value={getValueForInput(props, 1)}
-                onChange={getOnChandgeForInput(props, 1)}
+                onChange={getOnChangeForInput(props, 1)}
                 onBlur={() => setFocusIndex(undefined)}
                 size={size}
                 min={getMinForEndField(props)}

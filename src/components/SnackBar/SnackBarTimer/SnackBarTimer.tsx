@@ -17,11 +17,11 @@ export const SnackBarTimer: React.FC<SnackBarTimerProps> = (props) => {
   const {
     onMount,
     onTimeIsOver,
-    startTime: startTimeprop,
+    startTime: startTimeProp,
     hidden,
     className,
   } = props;
-  const startTime = startTimeprop * interval;
+  const startTime = startTimeProp * interval;
   const { time, start, pause, isRunning } = useTimer({
     endTime: 0,
     startTime,

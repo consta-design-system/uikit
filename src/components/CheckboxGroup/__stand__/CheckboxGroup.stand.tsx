@@ -7,6 +7,7 @@ export default createStand({
   description: 'Группа чекбоксов. Можно выбрать несколько вариантов.',
   version: '5.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'checkboxgroup-vqb15s',
   alias: ['поле', 'галочка', 'ввод', 'чекбокс', 'группа'],
   figma:

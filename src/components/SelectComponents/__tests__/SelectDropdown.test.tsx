@@ -5,7 +5,7 @@ import { cnLoader } from '../../LoaderDeprecated/LoaderDeprecated';
 import { cnSelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
 import {
   SelectDropdown,
-  selectDropdownform,
+  selectDropdownForm,
 } from '../SelectDropdown/SelectDropdown';
 
 type Props = React.ComponentProps<typeof SelectDropdown>;
@@ -36,7 +36,7 @@ const getIsLoader = (base: Element) => {
 
 describe('Компонент SelectDropdown', () => {
   describe('должен рендериться без ошибок', () => {
-    selectDropdownform.forEach((form) => {
+    selectDropdownForm.forEach((form) => {
       it(`для form = ${form}`, () => {
         expect(() => renderComponent({ form })).not.toThrow();
       });

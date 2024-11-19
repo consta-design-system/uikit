@@ -13,7 +13,7 @@ import {
   getBgColor,
   getBorderColor,
   getDegreeMixing,
-  getHorisontalPadding,
+  getHorizontalPadding,
   getMinifiedBorderSize,
   getSize,
   getTextColor,
@@ -80,7 +80,7 @@ export const Badge = forwardRefWithAs<BadgeProps>((props, ref) => {
         ...style,
         '--badge-bg-color': getBgColor(status),
         '--badge-border-color': getBorderColor(status, view),
-        '--badge-horisontal-padding': getHorisontalPadding(
+        '--badge-horizontal-padding': getHorizontalPadding(
           size,
           form,
           minified,

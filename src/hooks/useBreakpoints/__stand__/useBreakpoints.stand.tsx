@@ -4,7 +4,7 @@ export default createStand({
   title: 'useBreakpoints',
   id: 'useBreakpoints',
   group: 'hooks',
-  description: 'Отслеживанние размера экрана.',
+  description: 'Отслеживание размера экрана.',
   alias: ['хук', 'размер', 'экран'],
   version: '5.0.0',
   status: 'stable',

@@ -3,9 +3,9 @@ import * as React from 'react';
 
 import { DateTimeToggler } from '../DateTimeToggler/DateTimeToggler';
 import {
+  getDateTimeTogglerButtonNext,
+  getDateTimeTogglerButtonPrev,
   getDateTimeTogglerLabel,
-  getDateTimeTooglerButtonNext,
-  getDateTimeTooglerButtonPrev,
   getRender,
   testId,
 } from './helpers';
@@ -32,7 +32,7 @@ describe('Компонент DateTimeToggler', () => {
   });
 
   describe('проверка label', () => {
-    it(`label отображаеся`, () => {
+    it(`label отображается`, () => {
       const label = 'label';
 
       renderComponent({ label });
@@ -42,7 +42,7 @@ describe('Компонент DateTimeToggler', () => {
   });
 
   describe('проверка onLabelClick', () => {
-    it(`onLabelClickорабатывает`, () => {
+    it(`onLabelClick отрабатывает`, () => {
       const onLabelClick = jest.fn();
       const label = 'label';
 
@@ -57,26 +57,26 @@ describe('Компонент DateTimeToggler', () => {
   });
 
   describe('проверка prevOnClick', () => {
-    it(`prevOnClick орабатывает`, () => {
+    it(`prevOnClick отрабатывает`, () => {
       const prevOnClick = jest.fn();
       const label = 'label';
 
       renderComponent({ prevOnClick, label });
 
-      fireEvent.click(getDateTimeTooglerButtonPrev());
+      fireEvent.click(getDateTimeTogglerButtonPrev());
 
       expect(prevOnClick).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('проверка nextOnClick', () => {
-    it(`nextOnClick орабатывает`, () => {
+    it(`nextOnClick отрабатывает`, () => {
       const nextOnClick = jest.fn();
       const label = 'label';
 
       renderComponent({ nextOnClick, label });
 
-      fireEvent.click(getDateTimeTooglerButtonNext());
+      fireEvent.click(getDateTimeTogglerButtonNext());
 
       expect(nextOnClick).toHaveBeenCalledTimes(1);
     });

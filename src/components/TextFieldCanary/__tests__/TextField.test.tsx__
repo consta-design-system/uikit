@@ -32,7 +32,7 @@ function getTextArea() {
     .querySelector(`textarea.${cnTextField('Input')}`);
 }
 
-function getleftSide() {
+function getLeftSide() {
   return screen
     .getByTestId(testId)
     .querySelector(`.TextField-Side_position_left`);
@@ -86,11 +86,11 @@ describe('Компонент Button', () => {
       });
     });
     describe('проверка type', () => {
-      it(`по умолчанию рендерится как input`, () => {
+      it(`по умолчанию рендериться как input`, () => {
         renderComponent();
         expect(getInput()).not.toBeNull();
       });
-      it(`при type=textarea рендерится как textarea`, () => {
+      it(`при type=textarea рендериться как textarea`, () => {
         renderComponent({ type: 'textarea' });
         expect(getTextArea()).not.toBeNull();
       });
@@ -128,7 +128,7 @@ describe('Компонент Button', () => {
 
         renderComponent({ leftSide: leftSideText });
 
-        const leftSide = getleftSide();
+        const leftSide = getLeftSide();
 
         expect(leftSide).toHaveClass(cnTextField('Side', { type: 'string' }));
         expect(leftSide).toHaveTextContent(leftSideText);
@@ -136,7 +136,7 @@ describe('Компонент Button', () => {
       it(`отображается как иконка`, () => {
         renderComponent({ leftSide: IconAdd });
 
-        const leftSide = getleftSide() as Element;
+        const leftSide = getLeftSide() as Element;
 
         expect(leftSide).toHaveClass(cnTextField('Side', { type: 'icon' }));
 

@@ -62,7 +62,7 @@ export const TableVariantWithHandleCellClickExample = () => {
   const props = useVariants({ columns, rows });
   return (
     <div>
-      <Text>Клик правой клавишей мыши, для вызова контексного меню</Text>
+      <Text>Клик правой клавишей мыши, для вызова контекстного меню</Text>
 
       <Table {...props} onCellClick={handleCellClick} />
 

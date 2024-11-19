@@ -1,6 +1,6 @@
 import { DateRange } from '../../../utils/types/Date';
 
-const inProcent = (number: number, msInPeriod: number) =>
+const inPercent = (number: number, msInPeriod: number) =>
   (number / msInPeriod) * 100;
 
 export const getSliderValueRange = (
@@ -35,7 +35,7 @@ export const getSliderValueRange = (
   const msInPeriod = periodEndDateTime - periodStartDateTime;
 
   const offset = Math.floor(
-    inProcent(
+    inPercent(
       valueStartDateTime <= periodStartDateTime
         ? 0
         : valueStartDateTime - periodStartDateTime,
@@ -46,7 +46,7 @@ export const getSliderValueRange = (
   const width = Math.ceil(
     valueEndDateTime >= periodEndDateTime
       ? 100 - offset
-      : inProcent(
+      : inPercent(
           valueEndDateTime -
             (valueStartDateTime <= periodStartDateTime
               ? periodStartDateTime

@@ -7,6 +7,7 @@ export default createStand({
   description: 'Скрытый блок. Раскрывается по нажатию на заголовок.',
   version: '1.11.12',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'collapse-e2duqr',
   alias: ['блок', 'скрытый', 'пояснение', 'описание'],
   figma:

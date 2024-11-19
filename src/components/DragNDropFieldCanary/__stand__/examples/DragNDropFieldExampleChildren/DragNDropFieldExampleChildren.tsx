@@ -11,7 +11,7 @@ export const DragNDropFieldExampleRenderProps = () => (
       {({ openFileDialog }) => (
         <>
           <Text>
-            Перетащи сюда файлики или выбери их из списка нажав по кнопке
+            Перетащи сюда файлы или выбери их из списка нажав по кнопке
           </Text>
           <br />
           <Button onClick={openFileDialog} label="Выбрать файл" />
@@ -24,7 +24,7 @@ export const DragNDropFieldExampleRenderProps = () => (
 export const DragNDropFieldExampleChildren = () => (
   <Example col={1}>
     <DragNDropField>
-      <Text>Перетащи сюда файлики</Text>
+      <Text>Перетащи сюда файлы</Text>
     </DragNDropField>
   </Example>
 );

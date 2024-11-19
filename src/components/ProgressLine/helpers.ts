@@ -59,9 +59,11 @@ export const generateMask = (lines: ProgressLineSvgItem[]): string => {
   const { length } = lines;
   if (length > 0) {
     const width = lines[length - 1].x + lines[length - 1].width;
+    /* cspell:disable-next-line */
     let svg = `%3csvg width='${width}px' height='4px' xmlns='http://www.w3.org/2000/svg'%3e`;
     for (let index = 0; index < length; index++) {
       const { x, width, y } = lines[index];
+      /* cspell:disable-next-line */
       svg += `%3crect x='${x}px' y='${y}px' height='4px' width='${width}px' /%3e`;
     }
     svg += '%3c/svg%3e';

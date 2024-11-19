@@ -20,7 +20,7 @@
   }
 
   &-SelectButton {
-    width: vaer(--space-s);
+    width: var(--space-s);
     height: var(--space-s);
     margin: 0;
     margin-left: var(--space-xs);

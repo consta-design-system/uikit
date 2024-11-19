@@ -15,7 +15,7 @@ import {
   useScroll,
   UseVirtualScrollProps,
   UseVirtualScrollReturn,
-} from './hellpers';
+} from './helpers';
 
 export const useVirtualScroll = <
   ITEM_ELEMENT extends HTMLElement = HTMLDivElement,

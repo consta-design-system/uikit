@@ -65,9 +65,9 @@ export const ListExampleSpace = () => {
               items={items}
               groups={groups}
               onItemClick={(item) => alert(item.label)}
-              itemSpase={{}}
-              groupLabelSpase={{}}
-              dividerSpase={{}}
+              itemSpace={{}}
+              groupLabelSpace={{}}
+              dividerSpace={{}}
             />
           ),
         },
@@ -78,8 +78,8 @@ export const ListExampleSpace = () => {
               items={items}
               groups={groups}
               onItemClick={(item) => alert(item.label)}
-              itemSpase={{ p: 's' }}
-              dividerSpase={{ mH: 's' }}
+              itemSpace={{ p: 's' }}
+              dividerSpace={{ mH: 's' }}
               getGroupLabel={() => undefined}
             />
           ),
@@ -91,8 +91,8 @@ export const ListExampleSpace = () => {
               items={items}
               groups={groups}
               onItemClick={(item) => alert(item.label)}
-              itemSpase={{ p: 's' }}
-              groupLabelSpase={{ mH: 's', pT: 's', pB: '2xs' }}
+              itemSpace={{ p: 's' }}
+              groupLabelSpace={{ mH: 's', pT: 's', pB: '2xs' }}
             />
           ),
         },

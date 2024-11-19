@@ -8,6 +8,7 @@ export default createStand({
     'Модульная сетка. Отвечает за расположение содержимого на странице.',
   version: '1.1.18',
   status: 'deprecated',
+  /* cspell:disable-next-line */
   sandbox: 'grid-jysz8l',
   alias: ['сетка', 'структура', 'разметка', 'колонки', 'строки'],
   figma:

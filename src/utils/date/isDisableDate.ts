@@ -10,15 +10,15 @@ const clearTime = (
     hours?: boolean;
     minutes?: boolean;
     seconds?: boolean;
-    miliseconds?: boolean;
+    milliseconds?: boolean;
   },
 ) => {
-  const { hours, minutes, seconds, miliseconds } = params ?? {};
+  const { hours, minutes, seconds, milliseconds } = params ?? {};
   const copyDate = new Date(date);
   hours && copyDate.setHours(type === 'start' ? 0 : 23);
   minutes && copyDate.setMinutes(type === 'start' ? 0 : 59);
   seconds && copyDate.setSeconds(type === 'start' ? 0 : 59);
-  miliseconds && copyDate.setMilliseconds(type === 'start' ? 0 : 999);
+  milliseconds && copyDate.setMilliseconds(type === 'start' ? 0 : 999);
   return copyDate;
 };
 
@@ -30,13 +30,13 @@ const isInRangeWithoutTime = (date: Date, min: Date, max: Date) => {
       hours: true,
       minutes: true,
       seconds: true,
-      miliseconds: true,
+      milliseconds: true,
     }).getTime(),
     clearTime(date, 'end', {
       hours: true,
       minutes: true,
       seconds: true,
-      miliseconds: true,
+      milliseconds: true,
     }).getTime(),
   ];
   return (
@@ -56,8 +56,8 @@ export const isEqualDates = (
   if (mode === 'time') {
     if (timeType === 'seconds') {
       return (
-        clearTime(firstDate, 'start', { miliseconds: true }).getTime() ===
-        clearTime(secondDate, 'start', { miliseconds: true }).getTime()
+        clearTime(firstDate, 'start', { milliseconds: true }).getTime() ===
+        clearTime(secondDate, 'start', { milliseconds: true }).getTime()
       );
     }
     return false;
@@ -96,12 +96,12 @@ const isInRange = (
       clearTime(date, 'start', {
         minutes: timeType === 'hours',
         seconds: timeType === 'hours' || timeType === 'minutes',
-        miliseconds: false,
+        milliseconds: false,
       }).getTime(),
       clearTime(date, 'end', {
         minutes: timeType === 'hours',
         seconds: timeType === 'hours' || timeType === 'minutes',
-        miliseconds: false,
+        milliseconds: false,
       }).getTime(),
     ];
     return (

@@ -8,7 +8,7 @@ import {
 } from '../../utils/getGroups';
 import { useClickOutside } from '../useClickOutside/useClickOutside';
 import { useDebounce } from '../useDebounce/useDebounce';
-import { KeyHandler, useKeys } from '../useKeysDepricated/useKeysDepricated';
+import { KeyHandler, useKeys } from '../useKeysDeprecated/useKeysDeprecated';
 import { usePrevious } from '../usePrevious/usePrevious';
 import { scrollToIndex, useHoistedState } from './helpers';
 
@@ -116,7 +116,7 @@ export const isOptionForSelectAll = <ITEM, GROUP>(
   params: SelectAllItem | Group<ITEM, GROUP> | ITEM,
 ): params is SelectAllItem => {
   return (
-    params && Object.prototype.hasOwnProperty.call(params, '__optionSelctAll')
+    params && Object.prototype.hasOwnProperty.call(params, '__optionSelectAll')
   );
 };
 
@@ -170,7 +170,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
 
   const [filteredOptions, optionForCreate] = React.useMemo(() => {
     if (resolvedSearchValue && resolvedSearchValue !== '') {
-      const fiteredOptions = items.filter((item) =>
+      const filteredOptions = items.filter((item) =>
         searchFunction
           ? searchFunction(item, resolvedSearchValue)
           : searchFunctionDefault(item, resolvedSearchValue),
@@ -190,7 +190,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
       };
 
       return [
-        fiteredOptions,
+        filteredOptions,
         params.onCreate && !matchWithValueSearch ? optionForCreate : undefined,
       ] as const;
     }
@@ -466,16 +466,16 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
         CountedGroup<ITEM, GROUP> | undefined,
         SelectAllItem | OptionForCreate | ITEM | undefined,
       ] => {
-        let couter = 0;
+        let counter = 0;
         for (const group of visibleItems) {
           if (isOptionForCreate(group)) {
-            couter++;
+            counter++;
             return [undefined, group];
           }
-          if (group.items.length + couter > index) {
-            return [group, group.items[index - couter]];
+          if (group.items.length + counter > index) {
+            return [group, group.items[index - counter]];
           }
-          couter += group.items.length;
+          counter += group.items.length;
         }
         return [undefined, undefined];
       };

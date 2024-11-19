@@ -76,7 +76,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       inputValue,
       renderValueItem = defaultRenderValueItem,
       onInputChange,
-      // onkey props
+      // onKey props
       onKeyDown,
       onKeyDownCapture,
       onKeyUp,
@@ -113,7 +113,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
 
     const withValue = withInputValue || !!value?.length;
 
-    const controllRef = useRef<HTMLDivElement>(null);
+    const controlRef = useRef<HTMLDivElement>(null);
     const scrollWrapperRef = useRef<HTMLDivElement>(null);
 
     const mutableRefs = useMutableRef([
@@ -152,20 +152,20 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
               },
             );
 
-            if (controllRef.current) {
-              controllRef.current.scrollTo({
-                top: controllRef.current.scrollHeight,
+            if (controlRef.current) {
+              controlRef.current.scrollTo({
+                top: controlRef.current.scrollHeight,
               });
             }
           }
         },
         Backspace: (e) => {
           const stringValue = e.target.value;
-          const currnetValue = mutableRefs.current[2];
+          const currentValue = mutableRefs.current[2];
 
-          if (!stringValue && currnetValue?.length) {
+          if (!stringValue && currentValue?.length) {
             e.preventDefault();
-            const newValue = [...currnetValue];
+            const newValue = [...currentValue];
             newValue.pop();
             mutableRefs.current[0]?.(newValue, {
               e,
@@ -187,7 +187,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       withClearButton && !disabled && withValue,
     ]);
 
-    const controlSize = useComponentSize(controllRef);
+    const controlSize = useComponentSize(controlRef);
 
     const slotSizes = useResizeObserved(rightSlotsRefs, getElementWidth);
 
@@ -197,7 +197,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
         : undefined;
 
     useEffect(() => {
-      if (controllRef.current && scrollWrapperRef.current && focused) {
+      if (controlRef.current && scrollWrapperRef.current && focused) {
         scrollWrapperRef.current.scrollTo({
           top: controlSize.height,
         });
@@ -232,12 +232,12 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
         rightSlotsRefs={rightSlotsRefs}
         style={{
           ...style,
-          ['--text-tield-textarray-max-height' as string]:
+          ['--text-field-textarray-max-height' as string]:
             stylesRoot?.['max-height'] || stylesRoot?.height || 'auto',
           ['--text-field-textarray-slot-sizes-width' as string]: `${slotSizes.reduce(
             (a, b) => a + b,
           )}px`,
-          ['--text-field-textarray-slot-sizes-lenght' as string]:
+          ['--text-field-textarray-slot-sizes-length' as string]:
             slotSizes.filter((width) => !!width).length,
         }}
       >
@@ -256,7 +256,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onChange={handleChange}
             autoFocus={autoFocus}
             onKeyDown={handleInputKeyDown}
-            ref={controllRef}
+            ref={controlRef}
             placeholder={placeholder}
             renderValue={(item, index) =>
               renderValueItem({

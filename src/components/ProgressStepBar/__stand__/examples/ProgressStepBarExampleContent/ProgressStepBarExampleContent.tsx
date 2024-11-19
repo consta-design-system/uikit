@@ -9,7 +9,7 @@ import { cn } from '../../../../../utils/bem';
 import { Tag } from '../../../../Tag/Tag';
 import { ProgressStepBar } from '../../../ProgressStepBar';
 
-const cnProgressStepBarExampleContent = cn('ProgressStepBarExmapleContent');
+const cnProgressStepBarExampleContent = cn('ProgressStepBarExampleContent');
 
 const StepContent = () => {
   return (
