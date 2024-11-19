@@ -96,6 +96,7 @@ export const TextFieldRender = <TYPE extends string>(
     onKeyUp,
     onKeyUpCapture,
     onClear,
+    onWheel: onWheelProp,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, textFieldRef);
 
@@ -239,6 +240,14 @@ export const TextFieldRender = <TYPE extends string>(
     onEvent: onKeyDownProp,
   });
 
+  const onWheel = (e: React.WheelEvent<HTMLInputElement>) => {
+    if (onWheelProp) {
+      onWheelProp(e);
+    } else if (type === 'number') {
+      inputRef.current?.blur();
+    }
+  };
+
   const textareaProps = {
     rows,
     cols,
@@ -255,6 +264,7 @@ export const TextFieldRender = <TYPE extends string>(
     min,
     step: !Array.isArray(sortedSteps) ? sortedSteps : 0,
     onKeyDown,
+    onWheel,
     ref: useForkRef([
       inputRef,
       inputRefProp,

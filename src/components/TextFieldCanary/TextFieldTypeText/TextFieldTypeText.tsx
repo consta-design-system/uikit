@@ -53,6 +53,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
       onPaste,
       onPasteCapture,
       onClear,
+      onWheel,
       ...otherProps
     } = props;
 
@@ -123,6 +124,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
           onCutCapture={onCutCapture}
           onPaste={onPaste}
           onPasteCapture={onPasteCapture}
+          onWheel={onWheel}
         />
       </FieldControlLayout>
     );

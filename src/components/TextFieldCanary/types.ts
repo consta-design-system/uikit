@@ -114,6 +114,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
     onCutCapture?: React.ClipboardEventHandler<InputType<TYPE>>;
     onPaste?: React.ClipboardEventHandler<InputType<TYPE>>;
     onPasteCapture?: React.ClipboardEventHandler<InputType<TYPE>>;
+    onWheel?: React.WheelEventHandler<InputType<TYPE>>;
   },
   HTMLDivElement
 > &

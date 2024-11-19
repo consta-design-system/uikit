@@ -88,7 +88,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       onPaste,
       onPasteCapture,
       onClear,
-
+      onWheel,
       ...otherProps
     } = props;
 
@@ -277,6 +277,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onKeyDownCapture={onKeyDownCapture}
             onKeyUp={onKeyUp}
             onKeyUpCapture={onKeyUpCapture}
+            onWheel={onWheel}
           />
         </div>
       </FieldControlLayout>
