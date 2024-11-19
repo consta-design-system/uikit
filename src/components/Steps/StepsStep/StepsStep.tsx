@@ -60,9 +60,9 @@ export const StepsStep = React.forwardRef<HTMLButtonElement, Props>(
         {completed ? (
           <IconCheck className={cnStepsStep('Icon')} size={iconSize} />
         ) : (
-          <span className={cnStepsStep('StepIndex')}>{step}</span>
+          <span className={cnStepsStep('Number')}>{step}</span>
         )}
-        <span>{label}</span>
+        <span className={cnStepsStep('Label')}>{label}</span>
       </button>
     );
   },
