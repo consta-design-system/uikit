@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { cnSteps, Steps } from '../Steps';
+import { cnStepsStep } from '../StepsStep/StepsStep';
 
 type StepsProps = React.ComponentProps<typeof Steps>;
 type Item = {
@@ -67,9 +68,9 @@ describe('Компонент Steps', () => {
     describe('проверка getLabel', () => {
       it('лейбл совпадает', () => {
         renderComponent({});
-        expect(getItems()[0].querySelector('span')?.textContent).toEqual(
-          `${items[0].label}`,
-        );
+        expect(
+          getItems()[0].querySelector(`.${cnStepsStep('Label')}`)?.textContent,
+        ).toEqual(`${items[0].label}`);
       });
     });
 

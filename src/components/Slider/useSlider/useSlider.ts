@@ -157,7 +157,7 @@ export function useSlider<RANGE extends boolean>(
   }, []);
 
   const onSliderClick = (e: React.MouseEvent) => {
-    if (isNotRangeParams(props)) {
+    if (isNotRangeParams(props) && !disabled) {
       const positionValue = getValueByPosition(
         { x: e.pageX, y: e.pageY },
         sliderRef,

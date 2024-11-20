@@ -176,4 +176,26 @@ describe('Компонент Button', () => {
       });
     });
   });
+  describe('проверка onWheel', () => {
+    it('вызывается onWheel', () => {
+      const handleWheel = jest.fn();
+      renderComponent({
+        onWheel: handleWheel,
+      });
+
+      const input = getInput() as Element;
+      fireEvent.wheel(input, { deltaMode: 0, deltaY: 10 });
+
+      expect(handleWheel).toHaveBeenCalledTimes(1);
+    });
+    it('блюрится числовой инпут при отсутствии onWheel', () => {
+      const handleChange = jest.fn();
+
+      renderComponent({ type: 'number', step: 1, onChange: handleChange });
+      const input = getInput() as Element;
+      fireEvent.wheel(input, { deltaMode: 0, deltaY: 10 });
+
+      expect(input).not.toHaveFocus();
+    });
+  });
 });

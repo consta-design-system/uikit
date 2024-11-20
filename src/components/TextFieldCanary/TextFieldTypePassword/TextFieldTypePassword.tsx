@@ -55,6 +55,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       onPaste,
       onPasteCapture,
       onClear,
+      onWheel,
       ...otherProps
     } = props;
 
@@ -133,6 +134,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
           onCutCapture={onCutCapture}
           onPaste={onPaste}
           onPasteCapture={onPasteCapture}
+          onWheel={onWheel}
         />
       </FieldControlLayout>
     );
