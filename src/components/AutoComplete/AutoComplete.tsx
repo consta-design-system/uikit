@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { PropRenderItem } from '##/components/Select';
 import { SelectDropdown } from '##/components/SelectComponents/SelectDropdown';
@@ -166,6 +166,10 @@ const AutoCompleteRender = <
       />
     );
   };
+
+  useEffect(() => {
+    setSearchValue(value ?? '');
+  }, [value]);
 
   return (
     <>
