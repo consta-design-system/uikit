@@ -96,7 +96,7 @@ import { Switch } from '@consta/uikit/Switch';
 | `autoFocus?`              | `boolean`                                                                        | -            | Переносит фокус на этот переключатель                                        |
 | `tabIndex?`               | `number`                                                                         | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
 | `name?`                   | `string`                                                                         | -            | Имя элемента в DOM                                                           |
-| `onChange?`               | `(checked: boolean, params: {e: React.ChangeEvent<HTMLInputElement> }) => void;` | -            | Действие при смене состояния переключателя                                   |
+| `onChange?`               | `React.ChangeEventHandler<HTMLInputElement>`                                     | -            | Действие при смене состояния переключателя                                   |
 | `onFocus?`                | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Действие по фокусу                                                           |
 | `onBlur?`                 | `React.FocusEventHandler<HTMLInputElement>`                                      | -            | Действие при потере фокуса                                                   |
 | `inputRef?`               | `React.Ref<HTMLInputElement>`                                                    | -            | Ссылка на DOM-элемент `<input>`                                              |
