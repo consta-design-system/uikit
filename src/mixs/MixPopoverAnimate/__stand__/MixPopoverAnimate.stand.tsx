@@ -7,6 +7,7 @@ export default createStand({
   version: '3.16.0',
   status: 'stable',
   alias: ['миксин', 'анимация', 'список', 'лист', 'окно'],
+  /* cspell:disable-next-line */
   sandbox: 'mixpopoveranimate-kzfvfk',
   order: 10,
 });

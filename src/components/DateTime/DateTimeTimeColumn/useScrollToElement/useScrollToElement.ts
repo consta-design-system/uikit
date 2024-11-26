@@ -2,13 +2,13 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 
 import { useRefs } from '../../../../hooks/useRefs/useRefs';
 
-type ItemDimentions = { height: number; offset: number };
+type ItemDimensions = { height: number; offset: number };
 
 export const useScrollToElement = (
   items: { selected?: boolean }[],
   scrollWrapper: React.RefObject<HTMLDivElement>,
 ) => {
-  const [itemDimentions, setItemDimentions] = useState<ItemDimentions[]>([]);
+  const [itemDimensions, setItemDimensions] = useState<ItemDimensions[]>([]);
 
   const itemsRefs = useRefs<HTMLDivElement>(items.length);
 
@@ -16,13 +16,13 @@ export const useScrollToElement = (
     const selectedItemIndex = items.findIndex((item) => item.selected);
 
     scrollWrapper.current?.scrollTo?.({
-      top: itemDimentions?.[selectedItemIndex]?.offset || 0,
+      top: itemDimensions?.[selectedItemIndex]?.offset || 0,
       behavior: 'smooth',
     });
   });
 
   useLayoutEffect(() => {
-    const itemDimentions = itemsRefs.reduce<ItemDimentions[]>(
+    const itemDimensions = itemsRefs.reduce<ItemDimensions[]>(
       (accumulator, currentValue, index) => {
         const height = currentValue.current?.offsetHeight || 0;
         const offset =
@@ -39,7 +39,7 @@ export const useScrollToElement = (
       [],
     );
 
-    setItemDimentions(itemDimentions);
+    setItemDimensions(itemDimensions);
   }, [itemsRefs]);
 
   return [itemsRefs];

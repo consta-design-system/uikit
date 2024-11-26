@@ -29,7 +29,7 @@ export const informerPropStatusDefault: InformerPropStatus =
 
 export const informerPropSize = ['m', 's'] as const;
 export type InformerPropSize = typeof informerPropSize[number];
-export const informerPropSiseDefault: InformerPropSize = informerPropSize[0];
+export const informerPropSizeDefault: InformerPropSize = informerPropSize[0];
 
 type Props = {
   view?: InformerPropView;
@@ -49,7 +49,7 @@ export const Informer = React.forwardRef<HTMLDivElement, InformerProps>(
     const {
       view = informerPropViewDefault,
       status = informerPropStatusDefault,
-      size = informerPropSiseDefault,
+      size = informerPropSizeDefault,
       icon: Icon,
       label,
       title,

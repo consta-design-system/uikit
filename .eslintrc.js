@@ -1,3 +1,4 @@
+/* cspell:disable */
 module.exports = {
   env: {
     browser: true,

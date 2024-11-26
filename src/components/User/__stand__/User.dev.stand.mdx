@@ -38,8 +38,8 @@ import { User } from '@consta/uikit/User';
 с помощью свойства `onlyAvatar`.
 
 ```ts
-<User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Роберт Пласт" info="Cейсмик" />
-<User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Роберт Пласт" info="Cейсмик"  onlyAvatar/>
+<User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Роберт Пласт" info="Сейсмик" />
+<User avatarUrl="https://i.ibb.co/K2R8Lqb/Rectangle-1496.png" name="Роберт Пласт" info="Сейсмик"  onlyAvatar/>
 ```
 
 <UserExampleAvatar />
@@ -48,8 +48,8 @@ import { User } from '@consta/uikit/User';
 Цвет фона выбирается автоматически, поменять его не получится.
 
 ```ts
-<User  name="Роберт Пласт" info="Cейсмик" />
-<User  name="Роберт" info="Cейсмик"  onlyAvatar/>
+<User  name="Роберт Пласт" info="Сейсмик" />
+<User  name="Роберт" info="Сейсмик"  onlyAvatar/>
 ```
 
 <UserExampleAvatarName />
@@ -73,9 +73,9 @@ import { User } from '@consta/uikit/User';
 `status` показывает, как можно связаться с человеком.
 
 ```ts
-<User name="Камилла Флюдиндер" info="Онлайн" status="available" />
-<User name="Камилла Флюдиндер" info="Из дома" status="remote" />
-<User name="Камилла Флюдиндер" info="Недоступна" status="out" />
+<User name="Камилла Орлова" info="Онлайн" status="available" />
+<User name="Камилла Орлова" info="Из дома" status="remote" />
+<User name="Камилла Орлова" info="Недоступна" status="out" />
 ```
 
 <UserExampleStatus />
@@ -144,6 +144,7 @@ const App = () => {
   return (
     <User
       avatarUrl="https://pbs.twimg.com/profile_images/1150453787603156992/DoiKLDMY_400x400.png"
+      /* cspell:disable-next-line */
       name="Винни-Пух"
       info="И все-все-все"
     />

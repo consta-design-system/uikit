@@ -58,7 +58,7 @@
     font-size: var(--field-control-layout-text-size);
   }
 
-  &-Сhildren {
+  &-Children {
     flex: auto;
   }
 }

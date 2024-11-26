@@ -17,7 +17,7 @@ const useMockLoadData = (
 ): [Item[], boolean, () => void] => {
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
-  const [lenght, setLenght] = useState<number>(0);
+  const [length, setLength] = useState<number>(0);
   const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
 
   const items = useMemo(() => {
@@ -35,11 +35,11 @@ const useMockLoadData = (
               .indexOf(searchValue.toLocaleLowerCase()) !== -1,
         );
     }
-    return new Array(lenght).fill(null).map((_, i) => ({
+    return new Array(length).fill(null).map((_, i) => ({
       label: `Опция ${i + 1}`,
       id: i,
     }));
-  }, [lenght, searchValue]);
+  }, [length, searchValue]);
 
   useEffect(() => {
     setIsLoading.on();
@@ -53,7 +53,7 @@ const useMockLoadData = (
 
     const timeoutNumber = setTimeout(() => {
       if (isStart) {
-        setLenght((state) => state + 100);
+        setLength((state) => state + 100);
         setIsLoading.off();
         setIsStart.off();
       }

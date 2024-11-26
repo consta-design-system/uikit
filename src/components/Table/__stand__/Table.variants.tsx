@@ -9,17 +9,16 @@ import { TableVariantBasic } from './variants/TableVariantBasic/TableVariantBasi
 import { TableVariantCustomRows } from './variants/TableVariantCustomRows/TableVariantCustomRows';
 import { TableVariantSortByData } from './variants/TableVariantSortByData/TableVariantSortByData';
 import { TableVariantWithActiveRowContent } from './variants/TableVariantWithActiveRowContent/TableVariantWithActiveRowContent';
-import { TableVariantWithBagde } from './variants/TableVariantWithBagde/TableVariantWithBagde';
+import { TableVariantWithBadge } from './variants/TableVariantWithBadge/TableVariantWithBadge';
 import { TableVariantWithBigData } from './variants/TableVariantWithBigData/TableVariantWithBigData';
 import { TableVariantWithCheckboxHeader } from './variants/TableVariantWithCheckboxHeader/TableVariantWithCheckboxHeader';
-import { TableVariantWithCollapcingRows } from './variants/TableVariantWithCollapcingRows/TableVariantWithCollapcingRows';
+import { TableVariantWithCollapsingRows } from './variants/TableVariantWithCollapsingRows/TableVariantWithCollapsingRows';
 import { TableVariantWithColSpan } from './variants/TableVariantWithColSpan/TableVariantWithColSpan';
 import { TableVariantWithCustomFilters } from './variants/TableVariantWithCustomFilters/TableVariantWithCustomFilters';
 import { TableVariantWithCustomRowsPlaceholder } from './variants/TableVariantWithCustomRowsPlaceholder/TableVariantWithCustomRowsPlaceholder';
 import { TableVariantWithCustomTagLabelFunction } from './variants/TableVariantWithCustomTagLabelFunction/TableVariantWithCustomTagLabelFunction';
 import { TableVariantWithGetAdditionalClassName } from './variants/TableVariantWithGetAdditionalClassName/TableVariantWithGetAdditionalClassName';
 import { TableVariantWithHandleCellClickExample } from './variants/TableVariantWithHandleCellClickExample/TableVariantWithHandleCellClickExample';
-import { TableVariantWithHiddenColumn } from './variants/TableVariantWithHiddenColumn/TableVariantWithHiddenColumn';
 import { TableVariantWithIcon } from './variants/TableVariantWithIcon/TableVariantWithIcon';
 import { TableVariantWithMergedByCustomCallbackCells } from './variants/TableVariantWithMergedByCustomCallbackCells/TableVariantWithMergedByCustomCallbackCells';
 import { TableVariantWithMergedCells } from './variants/TableVariantWithMergedCells/TableVariantWithMergedCells';
@@ -39,7 +38,7 @@ export const variantTypes = [
   'с выбором строки',
   'с зафиксированным заголовком',
   'с зафиксированной колонкой',
-  'с Bagde',
+  'с Badge',
   'с дополнительным классом',
   'с чекбоксом в шапке',
   'со своим текстом, если данных нет',
@@ -54,7 +53,7 @@ export const variantTypes = [
   'с дополнительным элементом в заголовке',
   'с обработкой клика по ячейке',
   'со скрытыми колонками',
-  'с объединеными по горизонтали ячейками',
+  'с объединенными по горизонтали ячейками',
 ] as const;
 
 const Variants = () => {
@@ -69,7 +68,7 @@ const Variants = () => {
   }
 
   if (type === 'с разворачиванием строк') {
-    return <TableVariantWithCollapcingRows />;
+    return <TableVariantWithCollapsingRows />;
   }
 
   if (type === 'с многоуровневым заголовком') {
@@ -88,8 +87,8 @@ const Variants = () => {
     return <TableVariantWithStickyColumn />;
   }
 
-  if (type === 'с Bagde') {
-    return <TableVariantWithBagde />;
+  if (type === 'с Badge') {
+    return <TableVariantWithBadge />;
   }
 
   if (type === 'с дополнительным классом') {
@@ -144,11 +143,7 @@ const Variants = () => {
     return <TableVariantWithHandleCellClickExample />;
   }
 
-  if (type === 'с объединеными по горизонтали ячейками') {
-    return <TableVariantWithColSpan />;
-  }
-
-  return <TableVariantWithHiddenColumn />;
+  return <TableVariantWithColSpan />;
 };
 
 export default Variants;

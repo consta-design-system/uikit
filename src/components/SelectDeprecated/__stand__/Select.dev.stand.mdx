@@ -457,7 +457,7 @@ export function SelectExampleForm() {
 За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
 
 Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
-поля с разными статусами и разной формы будут выглядет одинаково.
+поля с разными статусами и разной формы будут выглядеть одинаково.
 
 > Для создания hover эффекта для view="`clear`" управляйте внешним видом контейнера, в котором находится Select
 
@@ -854,7 +854,7 @@ type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп) | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)              |
 | [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)   | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`     | Функция для определения названия группы                                |
 | [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)     | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`  | Функция для определения уникального ключа группы                       |
-| `isLoading?`                                                       | `boolean`                                              | -                         | При `true` будет отображаться лоудер загрузки                          |
+| `isLoading?`                                                       | `boolean`                                              | -                         | При `true` будет отображаться лоадер загрузки                          |
 | `required?`                                                        | `boolean`                                              | -                         | Нужно заполнить                                                        |
 | `labelForEmptyItems?`                                              | `string`                                               | `Список пуст`             | Текст для случая, когда в списке нет значений                          |
 | `onBlur?`                                                          | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `blur`                                              |

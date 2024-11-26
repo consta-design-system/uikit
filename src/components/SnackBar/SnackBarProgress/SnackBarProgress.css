@@ -1,5 +1,5 @@
 .SnackBarProgress {
-  &-Spiner.ProgressSpin {
+  &-Spinner.ProgressSpin {
     color: var(--color-typo-ghost);
   }
 }

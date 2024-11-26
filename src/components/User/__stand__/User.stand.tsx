@@ -8,6 +8,7 @@ export default createStand({
     'Показывает информацию о человеке: аватарку, имя, должность, статус.',
   version: '1.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'user-fqeoxq',
   alias: ['пользователь', 'юзер', 'аватарка', 'картинка', 'изображение'],
   figma:

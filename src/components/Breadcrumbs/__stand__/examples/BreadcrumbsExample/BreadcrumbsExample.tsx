@@ -99,7 +99,7 @@ const pagesLongLabels = [
     href: 'https://url.com/page-2',
   },
   {
-    label: 'Дополнителные свойства элемента раздела',
+    label: 'Дополнительные свойства элемента раздела',
     href: 'https://url.com/page-3',
   },
   {
@@ -184,7 +184,7 @@ export const BreadcrumbsExampleIconRoot = () => {
   );
 };
 
-export const BreadcrumbsExamplelastItemIsLink = () => {
+export const BreadcrumbsExampleLastItemIsLink = () => {
   return (
     <Example col={1}>
       <Breadcrumbs

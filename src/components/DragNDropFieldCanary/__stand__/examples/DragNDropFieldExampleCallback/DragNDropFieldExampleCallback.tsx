@@ -6,6 +6,7 @@ import { DragNDropField } from '##/components/DragNDropFieldCanary';
 export const DragNDropFieldExampleCallbackOnDrop = () => (
   <Example col={1}>
     <DragNDropField
+      /* cspell:disable-next-line */
       accept={{ 'application/msword': ['.doc', '.docx'] }}
       multiple
       onDrop={(filesAccepted, filesRejected) => {

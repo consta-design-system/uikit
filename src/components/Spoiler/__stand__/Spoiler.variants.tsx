@@ -7,29 +7,29 @@ import { Spoiler } from '..';
 import {
   defaultSpoilerPropButtonAlign,
   defaultSpoilerPropSize,
-  spolierPropButtonAlign,
-  spolierPropSize,
+  spoilerPropButtonAlign,
+  spoilerPropSize,
 } from '../types';
 
 const Variants = () => {
   const content = useText(
     'content',
-    'Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верхушке которого еле держалось готовое вот-вот окончательно сползти одеяло. Его многочисленные, убого тонкие по сравнению с остальным телом ножки беспомощно копошились у него перед глазами. «Что со мной случилось?» – подумал он.',
+    'Проснувшись однажды утром после беспокойного сна, Грегор Белый обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на твердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верхушке которого еле держалось готовое вот-вот окончательно сползти одеяло. Его многочисленные, убого тонкие по сравнению с остальным телом ножки беспомощно копошились у него перед глазами. «Что со мной случилось?» – подумал он.',
   );
-  const size = useSelect('size', spolierPropSize, defaultSpoilerPropSize);
+  const size = useSelect('size', spoilerPropSize, defaultSpoilerPropSize);
   const mode = useSelect('mode', ['toggle', 'blur', 'lineClamp'], 'lineClamp');
   const maxHeight = useNumber('maxHeight', 96, mode === 'blur') || 0;
   const lineClamp = useNumber('lineClamp', 4, mode === 'lineClamp') || 0;
   const preview = useText(
     'preview',
-    'Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое...',
+    'Проснувшись однажды утром после беспокойного сна, Грегор Белый обнаружил, что он у себя в постели превратился в страшное насекомое...',
     mode === 'toggle',
   );
   const lessLabel = useText('lessLabel', 'Показать меньше');
   const moreLabel = useText('moreLabel', 'Показать больше');
   const buttonAlign = useSelect(
     'buttonAlign',
-    spolierPropButtonAlign,
+    spoilerPropButtonAlign,
     defaultSpoilerPropButtonAlign,
   );
   const buttonWithIcons = useBoolean('buttonWithIcons');

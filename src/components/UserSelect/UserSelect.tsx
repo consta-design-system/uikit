@@ -7,9 +7,9 @@ import React, { forwardRef, useRef } from 'react';
 import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
 import { cnSelect } from '##/components/SelectComponents/cnSelect';
 import {
-  defaultlabelForCreate,
+  defaultLabelForCreate,
   defaultLabelForEmptyItems,
-  defaultlabelForNotFound,
+  defaultLabelForNotFound,
   getInputWidth,
 } from '##/components/SelectComponents/helpers';
 import { SelectContainer } from '##/components/SelectComponents/SelectContainer';
@@ -88,8 +88,8 @@ const UserSelectRender = <
     renderValue: renderValueProp,
     onCreate,
     inputRef: inputRefProp,
-    labelForNotFound = defaultlabelForNotFound,
-    labelForCreate = defaultlabelForCreate,
+    labelForNotFound = defaultLabelForNotFound,
+    labelForCreate = defaultLabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
     multiple = false,
     searchFunction,

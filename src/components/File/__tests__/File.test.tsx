@@ -49,8 +49,8 @@ describe('Компонент File', () => {
 
         expect(getRender()).toHaveClass('FileIconDoc');
       });
-      it(`рисует верную иконку для extension=blabla`, () => {
-        renderComponent({ extension: 'blabla' });
+      it(`рисует верную иконку для extension=undefined`, () => {
+        renderComponent({ extension: 'undefined' });
 
         expect(getRender()).toHaveClass('FileIconUndefined');
       });

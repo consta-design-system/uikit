@@ -2,6 +2,7 @@ import { AvatarGroupDefaultItem } from '../types';
 import image1 from './image.jpeg';
 import image2 from './image2.png';
 
+/* cspell:disable */
 export const avatarGroupItems: AvatarGroupDefaultItem[] = [
   {
     name: 'Лидия Индриксон',
@@ -52,3 +53,4 @@ export const avatarGroupItems: AvatarGroupDefaultItem[] = [
     url: '',
   },
 ];
+/* cspell:enable */

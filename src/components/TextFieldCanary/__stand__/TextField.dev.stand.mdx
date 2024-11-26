@@ -47,6 +47,7 @@ import {
 
 import { TextFieldExampleRenderValueItem } from './examples/TextFieldExampleRenderValueItem/TextFieldExampleRenderValueItem';
 import { TextFieldExampleTextArrayPreParsing } from './examples/TextFieldExampleText copy/TextFieldExampleTextArrayPreParsing';
+/* cspell:disable-next-line */
 import { MdxCollapse } from '@consta/stand/src/componets/MdxCollapse';
 
 <MdxMenu>
@@ -79,7 +80,7 @@ import { MdxCollapse } from '@consta/stand/src/componets/MdxCollapse';
 
 ## Импорт
 
-Вы можете импортировать один общий компонет:
+Вы можете импортировать один общий компонент:
 
 ```tsx
 import { TextField } from '@consta/uikit/TextFieldCanary';
@@ -245,7 +246,7 @@ export const TextFieldExampleTypeTextArray = () => {
 
 </MdxTabs>
 
-### Ренддер значения
+### Рендер значения
 
 Чтобы поменять рендер каждого элемента значения поля, используйте свойство `renderValueItem`:
 
@@ -316,7 +317,7 @@ export const TextFieldExampleRenderValueItem = () => {
 
 ### Парсинг значения при вставке
 
-Используйте, когда при вставке строки ее нужно сразу разбивать на подстроки и добавлять к `value`. Так, например, когда есть список электронных почт, который при вставке необходимо преобразавать в массив строк и задать `value`.
+Используйте, когда при вставке строки ее нужно сразу разбивать на подстроки и добавлять к `value`. Так, например, когда есть список электронных почт, который при вставке необходимо преобразовать в массив строк и задать `value`.
 
 ```json
 // Список через пробел
@@ -325,7 +326,7 @@ user@company.ru user2@company.ru user3@company.ru user4@company.ru
 // Список через запятую
 user@company.ru, user2@company.ru, user3@company.ru, user4@company.ru
 
-// Список зерез перенос строки
+// Список через перенос строки
 user@company.ru
 user2@company.ru
 user3@company.ru
@@ -385,7 +386,7 @@ export const TextFieldExampleTextArrayPreParsing = () => {
       <TextField
         value={value}
         onChange={handleChange}
-        placeholder="Вставте вышеуказанный текст"
+        placeholder="Вставьте вышеуказанный текст"
         onPaste={pasteHandle}
         type="textarray"
         inputRef={inputRef}
@@ -424,7 +425,7 @@ export const TextFieldExampleTextArrayPreParsing = () => {
 
 ```tsx
 const App = () => {
-  const [value, setValue] = useState('стопятьсот');
+  const [value, setValue] = useState('текст');
 
   return <TextField value={value} onChange={setValue} />;
 };
@@ -491,7 +492,7 @@ const App = () => {
 
 </MdxTabs>
 
-При необходимости програмного фокуса используте `inputRef`:
+При необходимости программного фокуса используйте `inputRef`:
 
 <MdxTabs>
 
@@ -581,7 +582,7 @@ export const TextFieldExampleProgramFocus = () => {
 
 Чтобы комбинировать поле с кнопкой, используйте гибридные формы. У таких полей правая и левая грани могут отличаться.
 
-Вы также можете использовать [`FieldGroup`](##LIBS.LIB.STAND/lib:uikit/stand:components-fieldgroup-stable) для автоматической расстановки формы компонентов при их групировке.
+Вы также можете использовать [`FieldGroup`](##LIBS.LIB.STAND/lib:uikit/stand:components-fieldgroup-stable) для автоматической расстановки формы компонентов при их группировке.
 
 <MdxTabs>
 
@@ -620,7 +621,7 @@ export const TextFieldExampleProgramFocus = () => {
 
 ## Как работает useIMask
 
-Значение `TextField` или любого другого `<input/>` меняется через хук со связкой с полем через `ref`. Чтобы указать значение в момент первого рендера, используйте `defaultValue`. Чтобы изменить поле программно, используйтете `setValue` из хука.
+Значение `TextField` или любого другого `<input/>` меняется через хук со связкой с полем через `ref`. Чтобы указать значение в момент первого рендера, используйте `defaultValue`. Чтобы изменить поле программно, используйте `setValue` из хука.
 
 <MdxTabs>
 

@@ -28,7 +28,7 @@ function renderComponent(props?: WithPartial<ChipsProps, 'items'>) {
 }
 
 describe('Chips', () => {
-  test('Рендерится без ошибок', () => {
+  test('Рендериться без ошибок', () => {
     renderComponent();
 
     expect(screen.getByTestId(testId)).toBeInTheDocument();

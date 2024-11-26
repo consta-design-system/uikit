@@ -12,7 +12,7 @@ export const renderHeader = (
   size: ListPropSize,
   rightSide: React.ReactNode,
   labelSpace: MixSpaceProps | undefined,
-  dividerSpase: MixSpaceProps | undefined,
+  dividerSpace: MixSpaceProps | undefined,
   className: string | undefined,
 ): React.ReactNode | null => {
   if (label) {
@@ -29,7 +29,7 @@ export const renderHeader = (
 
   if (!label && !first) {
     return (
-      <ListDivider size={size} space={dividerSpase} className={className} />
+      <ListDivider size={size} space={dividerSpace} className={className} />
     );
   }
 

@@ -12,7 +12,7 @@ export type FieldArrayValueInlineControlProps<ITEM> =
       renderValue: (item: ITEM, index: number) => React.ReactNode;
       inputMaxLength?: number;
       inputValue?: string;
-      inputDafeultValue?: string;
+      inputDefaultValue?: string;
       inputRef?: React.Ref<HTMLInputElement>;
       onInputFocus?: React.FocusEventHandler<HTMLInputElement>;
       onBlur?: React.FocusEventHandler<HTMLInputElement>;

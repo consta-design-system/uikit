@@ -9,8 +9,8 @@ import {
   getDateTimeSliderButtonNext,
   getDateTimeSliderButtonPrev,
   getDateTimeSliderLabel,
-  getDateTimeTooglerButtonNext,
-  getDateTimeTooglerButtonPrev,
+  getDateTimeTogglerButtonNext,
+  getDateTimeTogglerButtonPrev,
   getDateTimeViewBookLabels,
   getDateTimeViewSliderLabels,
   testId,
@@ -23,7 +23,7 @@ const renderComponent = (props: DateTimeProps<'year'> = {}) => {
 describe('Компонент DateTime_type_year', () => {
   describe('проверка value', () => {
     dateTimePropView.forEach((view) => {
-      it(`выбранная дата отображаеся верно для view=${view}`, () => {
+      it(`выбранная дата отображается верно для view=${view}`, () => {
         renderComponent({ value: new Date(1970, 0, 1), view });
         const item = getDateTimeItem(1);
         expect(item).toHaveClass('DateTimeItem_selected');
@@ -32,7 +32,7 @@ describe('Компонент DateTime_type_year', () => {
     });
 
     dateTimePropView.forEach((view) => {
-      it(`выбранный диапазон отображаеся верно для view=${view}`, () => {
+      it(`выбранный диапазон отображается верно для view=${view}`, () => {
         renderComponent({
           value: [new Date(1970, 0, 1), new Date(1972, 0, 1)],
           view,
@@ -60,7 +60,7 @@ describe('Компонент DateTime_type_year', () => {
   });
 
   describe('проверка currentVisibleDate', () => {
-    it(`Дата оображаеся верная при view='classic'`, () => {
+    it(`Дата отображается верная при view='classic'`, () => {
       renderComponent({
         currentVisibleDate: new Date(1970, 0),
         view: 'classic',
@@ -71,7 +71,7 @@ describe('Компонент DateTime_type_year', () => {
       expect(label).toHaveTextContent('1970 - 1979');
     });
 
-    it(`Дата оображаеся верная при view='book'`, () => {
+    it(`Дата отображается верная при view='book'`, () => {
       renderComponent({ currentVisibleDate: new Date(1970, 0), view: 'book' });
 
       const labels = getDateTimeViewBookLabels();
@@ -80,16 +80,16 @@ describe('Компонент DateTime_type_year', () => {
       expect(labels[1]).toHaveTextContent('1980 - 1989');
     });
 
-    it(`Дата оображаеся верная при view='slider'`, () => {
+    it(`Дата отображается верная при view='slider'`, () => {
       renderComponent({
         currentVisibleDate: new Date(1970, 0),
         view: 'slider',
       });
 
-      const sliderlabel = getDateTimeSliderLabel();
+      const sliderLabel = getDateTimeSliderLabel();
       const labels = getDateTimeViewSliderLabels();
 
-      expect(sliderlabel).toHaveTextContent('1900-2000');
+      expect(sliderLabel).toHaveTextContent('1900-2000');
       expect(labels[0]).toHaveTextContent('1970 - 1979');
       expect(labels[1]).toHaveTextContent('1980 - 1989');
     });
@@ -106,11 +106,11 @@ describe('Компонент DateTime_type_year', () => {
         type: 'year',
       });
 
-      fireEvent.click(getDateTimeTooglerButtonPrev());
+      fireEvent.click(getDateTimeTogglerButtonPrev());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1960, 0));
 
-      fireEvent.click(getDateTimeTooglerButtonNext());
+      fireEvent.click(getDateTimeTogglerButtonNext());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1970, 0));
 
@@ -126,11 +126,11 @@ describe('Компонент DateTime_type_year', () => {
         view: 'book',
       });
 
-      fireEvent.click(getDateTimeTooglerButtonPrev());
+      fireEvent.click(getDateTimeTogglerButtonPrev());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1960, 0));
 
-      fireEvent.click(getDateTimeTooglerButtonNext());
+      fireEvent.click(getDateTimeTogglerButtonNext());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1970, 0));
 
@@ -244,7 +244,7 @@ describe('Компонент DateTime_type_year', () => {
         } else {
           expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
 
-          const nextButton = getDateTimeTooglerButtonNext();
+          const nextButton = getDateTimeTogglerButtonNext();
           fireEvent.click(nextButton);
           expect(screen.getByText('1980 - 1989')).toBeInTheDocument();
 
@@ -282,7 +282,7 @@ describe('Компонент DateTime_type_year', () => {
         } else {
           expect(screen.getByText('1970 - 1979')).toBeInTheDocument();
 
-          const prevButton = getDateTimeTooglerButtonPrev();
+          const prevButton = getDateTimeTogglerButtonPrev();
           fireEvent.click(prevButton);
           expect(screen.getByText('1960 - 1969')).toBeInTheDocument();
 

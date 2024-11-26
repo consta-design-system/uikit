@@ -61,7 +61,7 @@ const BookmarkTabsRender = (
     ...otherProps
   } = withDefaultGetters(props);
 
-  const [higlightedIndex, setHighlitedIndex] = useState<number | null>(null);
+  const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
 
   type Item = typeof items[number];
 
@@ -102,8 +102,8 @@ const BookmarkTabsRender = (
   ) => (
     <div
       className={cnBookmarkTabs('Tab')}
-      onMouseEnter={() => setHighlitedIndex(index)}
-      onFocus={() => setHighlitedIndex(index)}
+      onMouseEnter={() => setHighlightedIndex(index)}
+      onFocus={() => setHighlightedIndex(index)}
       ref={controlRef}
     >
       {renderItemProp({
@@ -121,7 +121,7 @@ const BookmarkTabsRender = (
         onClose: onRemove ? (e) => onRemove(item, { e }) : undefined,
         size,
         view,
-        hovered: higlightedIndex === index,
+        hovered: highlightedIndex === index,
         form,
         tabWidth,
       })}
@@ -130,7 +130,7 @@ const BookmarkTabsRender = (
 
   const onMouseLeave: React.MouseEventHandler<HTMLDivElement> = (e) => {
     onMouseLeaveProp?.(e);
-    setHighlitedIndex(null);
+    setHighlightedIndex(null);
   };
 
   const borderedIndexes = useMemo(() => {

@@ -7,6 +7,7 @@ export default createStand({
   description: 'Группа аватарок. Показывает несколько пользователей.',
   version: '3.28.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'avatargroup-mqp00f',
   alias: ['аватар', 'изображение', 'картинка', 'пользователь', 'группа'],
   figma:

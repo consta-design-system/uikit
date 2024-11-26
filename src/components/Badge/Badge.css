@@ -3,7 +3,7 @@
   align-items: center;
   box-sizing: border-box;
   height: var(--badge-size);
-  padding: 0 var(--badge-horisontal-padding);
+  padding: 0 var(--badge-horizontal-padding);
   color: var(--badge-text-color);
   font-size: var(--badge-text-size);
   font-weight: var(--font-weight-text-semibold);

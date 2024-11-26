@@ -77,7 +77,7 @@ Theme.css					# Стили темы
 
 Значения модификатора используются при создании [пресета](#пресеты) — чтобы указать, какой CSS-файл в каких случаях подключать.
 
-Пресет — это `preset`, обязательное свойсто компонента `Theme`. В Consta три пресета:
+Пресет — это `preset`, обязательное свойство компонента `Theme`. В Consta три пресета:
 
 - `presetGpnDefault` — включает светлую цветовую схему,
 - `presetGpnDark` — тёмную,
@@ -121,7 +121,7 @@ const App = () => {
 
 ```
 _color / Theme_color_gpnDark.css     # Тёмная или инверсная тема — Dark
-_color / Theme_color_gpnDefault.css  # Cветлая, она же основая — Default
+_color / Theme_color_gpnDefault.css  # Светлая, она же основная — Default
 _color / Theme_color_gpnDisplay.css  # Презентационная или акцентная — Display
 ```
 
@@ -167,9 +167,9 @@ const App = () => {
 $color-base-base: #002033; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
 $color-base-essential: #fff; /* Базовый цвет поверхностей */
 $color-base-project: #0071b2; /* Проектный цвет, от которого выстраивают акцентные состояния */
-$color-base-phantom: #004269; /* Тонирующий цвет, от которого выстраиватся бордеры, оверлей под модальными окнами, ... */
+$color-base-phantom: #004269; /* Тонирующий цвет, от которого выстраиваются бордеры, оверлей под модальными окнами, ... */
 $color-base-path: #0078d2; /* Цвет ссылок и контролов, от которого выстраиваются все их состояния */
-$color-base-system: #ced8de; /* Цвет системнный */
+$color-base-system: #ced8de; /* Цвет системный */
 
 $color-base-success: #22c38e; /* Цвет успеха */
 $color-base-alert: #eb5757; /* Цвет ошибки */
@@ -187,7 +187,7 @@ $color-base-normal: #56b9f2; /* Цвет нейтральный */
 ); /* Цвет дефолта */
 --color-bg-brand: color(
   $color-base-project a(100%)
-); /* Цвет фона брендированый */
+); /* Цвет фона брендированный */
 --color-bg-link: color($color-base-path a(100%)); /* Цвет фона ссылки */
 --color-bg-border: color($color-base-phantom a(20%) l(+10)); /* Цвет границ */
 ```
@@ -230,9 +230,9 @@ font-family: var(--font-primary);
 > - Модификатор: `_size`
 > - CSS: [\_size / Theme_size_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_size/Theme_size_gpnDefault.css)
 
-Модификатор `_size` отвечает за размер текста и межстрочное расстрояние.
+Модификатор `_size` отвечает за размер текста и межстрочное расстояние.
 
-В дизайн-системе нет общих правил для типографики: на ней построены очень разные сервисы — с разной плотностью информации, разными устройствами и для разных ситуаций. Каждый проект или экосиcтема проектов задает свои правила иерархии текста.
+В дизайн-системе нет общих правил для типографики: на ней построены очень разные сервисы — с разной плотностью информации, разными устройствами и для разных ситуаций. Каждый проект или экосистема проектов задает свои правила иерархии текста.
 
 > Любой размер текста можно использовать с любым межстрочным расстоянием, а не только `xs` с `xs`
 
@@ -332,7 +332,7 @@ font-family: var(--font-primary);
 > - Модификатор: `_shadow`
 > - CSS: [\_shadow / Theme_shadow_gpnDefault.css](https://github.com/consta-design-system/uikit/tree/master/src/components/Theme/_shadow)
 
-Модификатор `_shadow` отвечает за тени. Посмотреть, как это выглдяит, можно в [Figma](https://www.figma.com/file/vNZFtFH6w0IjD2Twi5OXXE/Consta-Default-Colors), во вкладке **Default Shadows**.
+Модификатор `_shadow` отвечает за тени. Посмотреть, как это выглядит, можно в [Figma](https://www.figma.com/file/vNZFtFH6w0IjD2Twi5OXXE/Consta-Default-Colors), во вкладке **Default Shadows**.
 
 ```css
 --shadow-group: 0 2px 2px rgba(0, 32, 51, 0.02), 0 2px 8px rgba(0, 32, 51, 0.16);

@@ -19,7 +19,7 @@
     }
   }
 
-  &-FakeElemet {
+  &-FakeElement {
     height: calc(100% - var(--date-time-cell-height));
   }
 }

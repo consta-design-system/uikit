@@ -83,7 +83,7 @@ const PaginationRender = <TYPE extends PaginationPropType>(
     onChangeRef.current?.(Math.max(valueRef.current - 1, 1), { e });
   }, []);
 
-  const handlefirst = useCallback((e: React.MouseEvent | KeyboardEvent) => {
+  const handleFirst = useCallback((e: React.MouseEvent | KeyboardEvent) => {
     onChangeRef.current?.(1, { e });
   }, []);
 
@@ -177,7 +177,7 @@ const PaginationRender = <TYPE extends PaginationPropType>(
               'first',
               refs[0] as unknown as React.RefObject<HTMLButtonElement>,
               undefined,
-              handlefirst,
+              handleFirst,
             )}
           {arrows?.[0] &&
             renderArrow(

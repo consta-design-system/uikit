@@ -4,7 +4,7 @@
 }
 
 .MixPopoverAnimate.ContextMenuWrapper {
-  --mix-dropdown-animate-trasition:
+  --mix-dropdown-animate-transition:
     opacity var(--mix-dropdown-animate-timeout),
     transform var(--mix-dropdown-animate-timeout),
     height var(--mix-dropdown-animate-timeout);

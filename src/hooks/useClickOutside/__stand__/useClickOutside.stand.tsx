@@ -8,6 +8,7 @@ export default createStand({
   alias: ['хук', 'нажатие', 'экран'],
   version: '1.5.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'useclickoutside-b12t39',
   order: 10,
 });

@@ -4,13 +4,13 @@ import React from 'react';
 import { Space } from '##/mixs/MixSpace';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
-export const spolierPropSize = ['xs', 's', 'm', 'l'] as const;
-export type SpoilerPropSize = typeof spolierPropSize[number];
+export const spoilerPropSize = ['xs', 's', 'm', 'l'] as const;
+export type SpoilerPropSize = typeof spoilerPropSize[number];
 export const defaultSpoilerPropSize = 'm';
 
-export const spolierPropButtonAlign = ['left', 'center', 'right'] as const;
-export type SpoilerPropButtonAlign = typeof spolierPropButtonAlign[number];
-export const defaultSpoilerPropButtonAlign = spolierPropButtonAlign[0];
+export const spoilerPropButtonAlign = ['left', 'center', 'right'] as const;
+export type SpoilerPropButtonAlign = typeof spoilerPropButtonAlign[number];
+export const defaultSpoilerPropButtonAlign = spoilerPropButtonAlign[0];
 
 export type SpoilerModeProp = 'dots' | 'blur';
 

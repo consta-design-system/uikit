@@ -41,7 +41,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
       ariaLabel,
       iconSize,
       onClick,
-      // onkey props
+      // onKey props
       onKeyDown,
       onKeyDownCapture,
       onKeyUp,

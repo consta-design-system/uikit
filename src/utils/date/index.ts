@@ -11,7 +11,7 @@ export const getStartAndEndDate = (date1: Date, date2: Date): Date[] =>
 export const minDateDefault = setYear(new Date(1970, 0, 1, 0, 0, 0, 0), 1);
 export const maxDateDefault = new Date(9999, 11, 31, 23, 59, 59);
 
-export * from './isInMinMaxDade';
+export * from './isInMinMaxDate';
 export * from './isDateRange';
 export * from './isOnlyOneDateInRange';
 export * from './getCentury';

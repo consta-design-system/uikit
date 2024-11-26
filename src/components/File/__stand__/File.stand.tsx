@@ -7,6 +7,7 @@ export default createStand({
   description: 'Иконка для файла с расширением.',
   version: '1.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'file-syxv3f',
   alias: ['файл', 'иконка', 'формат', 'изображение', 'документ'],
   figma:

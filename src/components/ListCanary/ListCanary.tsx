@@ -21,9 +21,9 @@ export const List: ListComponent = (props) => {
     onItemClick,
     groups: groupsProp,
     disabled: disabledProp,
-    itemSpase,
-    groupLabelSpase,
-    dividerSpase,
+    itemSpace,
+    groupLabelSpace,
+    dividerSpace,
     getItemLabel,
     getItemLeftIcon,
     getItemLeftSide,
@@ -84,7 +84,7 @@ export const List: ListComponent = (props) => {
       onClick: handleClick,
       innerOffset,
       ref: (getItemRef?.(item) as React.RefObject<HTMLDivElement>) || undefined,
-      space: itemSpase,
+      space: itemSpace,
       className: getItemAdditionalClassName?.(item),
     };
 
@@ -101,8 +101,8 @@ export const List: ListComponent = (props) => {
               groupIndex === 0,
               size,
               group.group && getGroupRightSide(group.group),
-              groupLabelSpase,
-              dividerSpase,
+              groupLabelSpace,
+              dividerSpace,
               getGroupAdditionalClassName &&
                 group.group &&
                 getGroupAdditionalClassName(group.group),

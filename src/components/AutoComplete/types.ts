@@ -60,7 +60,7 @@ export type AutoCompleteProps<
   getGroupKey?: AutoCompletePropGetGroupId<GROUP>;
   onChange?: AutoCompletePropOnChange;
   virtualScroll?: boolean;
-  onScrollToBottom?: (lenght: number) => void;
+  onScrollToBottom?: (length: number) => void;
   onDropdownOpen?: (isOpen: boolean) => void;
   dropdownOpen?: boolean;
   ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;

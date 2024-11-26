@@ -7,6 +7,7 @@ export default createStand({
   description: 'Календарь. Можно выбрать дату или период.',
   version: '5.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'datetime-ioox6v',
   alias: ['календарь', 'дата', 'день', 'месяц', 'год', 'время'],
   figma:

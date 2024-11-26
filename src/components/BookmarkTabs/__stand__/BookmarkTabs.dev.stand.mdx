@@ -69,7 +69,7 @@ type TabsItemDefault = {
 ### Текст таба
 
 По умолчанию компонент берет текст для таба из [`ITEM['label']`](#тип-табов-по-умолчанию).
-Вы можете использовать свой тип `ITEM` и указать компоненту откуда брать текст с помошью `getItemLabel`
+Вы можете использовать свой тип `ITEM` и указать компоненту откуда брать текст с помощью `getItemLabel`
 
 ```tsx
 import React, { useState } from 'react';
@@ -99,7 +99,7 @@ export const BookmarkTabsExampleLabel = () => {
 ### Иконки
 
 По умолчанию компонент берет иконки из [`ITEM['leftIcon']`](#тип-табов-по-умолчанию) или [`ITEM['rightIcon']`](#тип-табов-по-умолчанию).
-Вы можете использовать свой тип `ITEM` и указать компоненту откуда брать иконки с помошью `getItemLeftIcon` или `getItemRightIcon`.
+Вы можете использовать свой тип `ITEM` и указать компоненту откуда брать иконки с помощью `getItemLeftIcon` или `getItemRightIcon`.
 
 ```tsx
 import React, { useState } from 'react';
@@ -159,7 +159,7 @@ export const BookmarkTabsExampleIcon = () => {
 
 ### Зафиксированные элементы
 
-Вы можете указать таб как зафиксированный, так он будет рендереиться только с иконкой и будет стоять в начале списка
+Вы можете указать таб как зафиксированный, так он будет рендериться только с иконкой и будет стоять в начале списка
 
 ```tsx
 import React, { useState } from 'react';
@@ -452,7 +452,7 @@ export const BookmarkTabsExampleOnCreate = () => {
 
 ## Удаление табов
 
-Чтобы у всех табов (не зафиксированных) появлился крестик для закрытия определите свойство `onRemove`.
+Чтобы у всех табов (не зафиксированных) появился крестик для закрытия определите свойство `onRemove`.
 
 ```tsx
 import React, { useState } from 'react';
@@ -547,7 +547,7 @@ export const BookmarkTabsExampleRenderItem = () => {
       value={value}
       getItemKey={(item) => item}
       onChange={setValue}
-      getItemFаixed={() => false}
+      getItemFixed={() => false}
       renderItem={({
         item,
         onClick,

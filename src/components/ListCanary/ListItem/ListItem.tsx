@@ -8,8 +8,8 @@ import { cn } from '##/utils/bem';
 
 import { cnListItemGrid, renderSlot } from '../ListItemGrid';
 import {
-  mapHorisontalSpase,
-  mapHorisontalSpaseIncreased,
+  mapHorizontalSpace,
+  mapHorizontalSpaceIncreased,
   mapItemVerticalPadding,
 } from '../maps';
 import {
@@ -62,8 +62,8 @@ const ListItemRender = (
             space || {
               pH:
                 innerOffset === 'increased'
-                  ? mapHorisontalSpaseIncreased[size]
-                  : mapHorisontalSpase[size],
+                  ? mapHorizontalSpaceIncreased[size]
+                  : mapHorizontalSpace[size],
               pV: mapItemVerticalPadding[size],
             },
           ),

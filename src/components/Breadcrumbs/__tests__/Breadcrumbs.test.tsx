@@ -76,7 +76,7 @@ describe('Компонент Breadcrumbs (Canary)', () => {
   });
 
   describe('проверка props', () => {
-    it('проверка лэйблов', () => {
+    it('проверка лейблов', () => {
       renderComponent({ items });
       const links = getLinks();
       items.forEach((page, i) => {
@@ -102,13 +102,13 @@ describe('Компонент Breadcrumbs (Canary)', () => {
     });
 
     describe('проверка onlyIconRoot', () => {
-      it(`Лэйбл первой ссылки не должен отображаться если выставлен флаг onlyIconRoot`, () => {
+      it(`Лейбл первой ссылки не должен отображаться если выставлен флаг onlyIconRoot`, () => {
         renderComponent({ items, onlyIconRoot: true });
         const link = getLink();
         expect(link).toHaveTextContent('');
       });
 
-      it(`Лэйбл первой ссылки должен отображаться если флаг onlyIconRoot не выставлен`, () => {
+      it(`Лейбл первой ссылки должен отображаться если флаг onlyIconRoot не выставлен`, () => {
         renderComponent({ items, onlyIconRoot: false });
         const link = getLink();
         expect(link).toHaveTextContent(items[0].label);

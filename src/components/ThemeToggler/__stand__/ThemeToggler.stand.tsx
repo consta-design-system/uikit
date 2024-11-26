@@ -7,6 +7,7 @@ export default createStand({
   description: 'Переключатель темы.',
   version: '5.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'themetoggler-4wgsyd',
   alias: ['тема', 'переключатель'],
   figma:

@@ -139,7 +139,7 @@ export const getPagesArrayByWidth: GetPagesArrayByWidth = (
   const currentPage = guardCurrentPage(currentPageArg, totalPages);
 
   let w = totalWidth;
-  // направлеине добавления кнопки, true - влево, false - вправо
+  // направление добавления кнопки, true - влево, false - вправо
   let direction = false;
   // индекс добавляемой кнопки относительно от выбранной
   let leftIndex = 0;
@@ -187,7 +187,7 @@ export const getPagesArrayByWidth: GetPagesArrayByWidth = (
     const lastButtonWidth = getButtonWidth(totalPages, true);
 
     let isAddFirstPage = false;
-    let isAddlastPage = false;
+    let isAddLastPage = false;
 
     if (showFirstPage && pages[0].key !== 1) {
       let array = [...pages];
@@ -235,7 +235,7 @@ export const getPagesArrayByWidth: GetPagesArrayByWidth = (
             (isAddFirstPage ? firstButtonWidth + moreButtonWidth : 0) <=
           totalWidth
         ) {
-          isAddlastPage = true;
+          isAddLastPage = true;
           pages = [...slicedArray];
           break;
         }
@@ -262,7 +262,7 @@ export const getPagesArrayByWidth: GetPagesArrayByWidth = (
           ]
         : []),
       ...pages,
-      ...(isAddlastPage
+      ...(isAddLastPage
         ? [
             {
               key: lastPageSeparator,

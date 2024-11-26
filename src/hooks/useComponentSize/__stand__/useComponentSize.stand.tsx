@@ -4,10 +4,11 @@ export default createStand({
   title: 'useComponentSize',
   id: 'useComponentSize',
   group: 'hooks',
-  description: 'Отслеживанние размера элемента.',
+  description: 'Отслеживание размера элемента.',
   alias: ['хук', 'выбор', 'список'],
   version: '3.0.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'usecomponentsize-stvz5g',
   order: 10,
 });

@@ -68,7 +68,7 @@
       border-color: var(--checkbox-checked-border);
 
       &::before {
-        --checkbox-intermidate-offset:
+        --checkbox-intermediate-offset:
           calc(
             var(--space-3xs) + var(--control-border-width)
           );
@@ -76,7 +76,7 @@
         left: var(--space-3xs);
         width:
           calc(
-            var(--checkbox-size) - var(--checkbox-intermidate-offset) * 2
+            var(--checkbox-size) - var(--checkbox-intermediate-offset) * 2
           );
         height: var(--space-3xs);
         background-color: var(--checkbox-checked-check);

@@ -39,7 +39,7 @@ const getTargetBlockPosition = (
     .map((el) => (direction === 'horizontal' ? el.width : el.height) ?? 0)
     .reduce((val, a) => (val ?? 0) + (a ?? 0), 0);
 
-const getNonCalcualtedSize = (
+const getNonCalculatedSize = (
   sizes: UseResizableContentSize[],
   direction: UseResizableContentPropDirection,
   index: number,
@@ -84,7 +84,7 @@ const getValidValues = (params: {
   } = params;
   const blocksSizes =
     (direction === 'horizontal' ? containerWidth : containerHeight) -
-    getNonCalcualtedSize(sizes, direction, index);
+    getNonCalculatedSize(sizes, direction, index);
   const current = getBlockMaxSizes(blocks, direction, index);
   const next = getBlockMaxSizes(blocks, direction, index + 1);
   let results = [value, blocksSizes - value];
@@ -108,7 +108,7 @@ const getValidValues = (params: {
   return results;
 };
 
-export const getCalcaulatedSizes = (params: {
+export const getCalculatedSizes = (params: {
   event: MouseEvent | TouchEvent | Event;
   index: number;
   direction: UseResizableContentPropDirection;

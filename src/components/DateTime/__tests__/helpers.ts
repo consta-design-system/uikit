@@ -22,11 +22,11 @@ export const getDateTimeSliderLabel = () =>
   getRender().querySelector(`.DateTimeSlider-ParentLabel_position_1`);
 export const getDateTimeViewSliderLabels = () =>
   getRender().querySelectorAll(`.DateTimeMixLayout-Label`);
-export const getDateTimeTooglerButtonNext = () =>
+export const getDateTimeTogglerButtonNext = () =>
   getRender().querySelector(
     `.DateTimeToggler-Button_direction_next`,
   ) as Element;
-export const getDateTimeTooglerButtonPrev = () =>
+export const getDateTimeTogglerButtonPrev = () =>
   getRender().querySelector(
     `.DateTimeToggler-Button_direction_prev`,
   ) as Element;

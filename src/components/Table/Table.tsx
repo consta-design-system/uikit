@@ -29,7 +29,7 @@ import {
 } from './filtering';
 import { TableHeader } from './Header/TableHeader';
 import {
-  calulateColSpans,
+  calculateColSpans,
   createSortingState,
   getColumnLeftOffset,
   getColumnsSize,
@@ -450,7 +450,7 @@ const InternalTable = <T extends TableRow>(
         columnsElementsWidths,
         resizedColumnWidths,
       );
-      // Выставляю в undefined для того, чтобы колонка, для кторой не определена ширина выставлялась в auto
+      // Выставляю в undefined для того, чтобы колонка, для которой не определена ширина выставлялась в auto
       // Если ее нет то заполняю недостающее пространство в последней колонке
       if ((overallColumnsWidth ?? tableWidth) < tableWidth) {
         let autoSetted = false;
@@ -585,7 +585,7 @@ const InternalTable = <T extends TableRow>(
 
     updateColumnWidth(idx, newColumnWidth);
 
-    // При расширении последней колонки скроллим таблицу вправо
+    // При расширении последней колонки прокручиваем таблицу вправо
     const containerEl = tableRef.current;
     if (idx === resizedColumnWidths.length - 1 && delta > 0 && containerEl) {
       containerEl.scrollBy(delta, 0);
@@ -800,7 +800,9 @@ const InternalTable = <T extends TableRow>(
     }
 
     return (
-      <div className={cnTable(rowsLength ? 'CreatRowCell' : 'RowWithoutCells')}>
+      <div
+        className={cnTable(rowsLength ? 'CreateRowCell' : 'RowWithoutCells')}
+      >
         <Button
           size={createButtonSizeMap[size]}
           form="brick"
@@ -988,7 +990,7 @@ const InternalTable = <T extends TableRow>(
         rowsData.map((row, rowIdx) => {
           const nth = (rowIdx + 1) % 2 === 0 ? 'even' : 'odd';
           const columns = columnsWithMetaData(lowHeaders);
-          const spans = calulateColSpans(columns, row);
+          const spans = calculateColSpans(columns, row);
           return (
             <div
               key={row.id}
@@ -1029,7 +1031,7 @@ const InternalTable = <T extends TableRow>(
                       }}
                       wrapperClassName={cnTable('ContentCell', {
                         isActive: activeRow ? activeRow.id === row.id : false,
-                        isDarkned: activeRow
+                        isDarked: activeRow
                           ? activeRow.id !== undefined &&
                             activeRow.id !== row.id
                           : false,

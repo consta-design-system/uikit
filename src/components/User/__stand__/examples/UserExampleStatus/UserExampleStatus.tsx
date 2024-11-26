@@ -5,8 +5,8 @@ import { User } from '../../../User';
 
 export const UserExampleStatus = () => (
   <Example>
-    <User name="Камилла Флюдиндер" info="Онлайн" status="available" />
-    <User name="Камилла Флюдиндер" info="Из дома" status="remote" />
-    <User name="Камилла Флюдиндер" info="Недоступна" status="out" />
+    <User name="Камилла Орлова" info="Онлайн" status="available" />
+    <User name="Камилла Орлова" info="Из дома" status="remote" />
+    <User name="Камилла Орлова" info="Недоступна" status="out" />
   </Example>
 );

@@ -10,8 +10,8 @@ import {
   getDateTimeSliderButtonNext,
   getDateTimeSliderButtonPrev,
   getDateTimeSliderLabel,
-  getDateTimeTooglerButtonNext,
-  getDateTimeTooglerButtonPrev,
+  getDateTimeTogglerButtonNext,
+  getDateTimeTogglerButtonPrev,
   getDateTimeViewBookLabels,
   getDateTimeViewSliderLabels,
   testId,
@@ -24,7 +24,7 @@ const renderComponent = (props: DateTimeProps<'month'> = {}) => {
 describe('Компонент DateTime_type_month', () => {
   describe('проверка value', () => {
     dateTimePropView.forEach((view) => {
-      it(`выбранная дата отображаеся верно для view=${view}`, () => {
+      it(`выбранная дата отображается верно для view=${view}`, () => {
         renderComponent({ value: new Date(1970, 0, 1), view });
         const item = getDateTimeItem();
         expect(item).toHaveClass('DateTimeItem_selected');
@@ -33,7 +33,7 @@ describe('Компонент DateTime_type_month', () => {
     });
 
     dateTimePropView.forEach((view) => {
-      it(`выбранный диапазон отображаеся верно для view=${view}`, () => {
+      it(`выбранный диапазон отображается верно для view=${view}`, () => {
         renderComponent({
           value: [new Date(1970, 0, 1), new Date(1970, 2, 1)],
           view,
@@ -61,7 +61,7 @@ describe('Компонент DateTime_type_month', () => {
   });
 
   describe('проверка currentVisibleDate', () => {
-    it(`Дата оображаеся верная при view='classic'`, () => {
+    it(`Дата отображается верная при view='classic'`, () => {
       renderComponent({
         currentVisibleDate: new Date(1970, 0),
         view: 'classic',
@@ -72,7 +72,7 @@ describe('Компонент DateTime_type_month', () => {
       expect(label).toHaveTextContent('1970');
     });
 
-    it(`Дата оображаеся верная при view='book'`, () => {
+    it(`Дата отображается верная при view='book'`, () => {
       renderComponent({ currentVisibleDate: new Date(1970, 0), view: 'book' });
 
       const labels = getDateTimeViewBookLabels();
@@ -81,16 +81,16 @@ describe('Компонент DateTime_type_month', () => {
       expect(labels[1]).toHaveTextContent('1971');
     });
 
-    it(`Дата оображаеся верная при view='slider'`, () => {
+    it(`Дата отображается верная при view='slider'`, () => {
       renderComponent({
         currentVisibleDate: new Date(1970, 0),
         view: 'slider',
       });
 
-      const sliderlabel = getDateTimeSliderLabel();
+      const sliderLabel = getDateTimeSliderLabel();
       const labels = getDateTimeViewSliderLabels();
 
-      expect(sliderlabel).toHaveTextContent('1970-1980');
+      expect(sliderLabel).toHaveTextContent('1970-1980');
       expect(labels[0]).toHaveTextContent('1970');
       expect(labels[1]).toHaveTextContent('1971');
     });
@@ -106,11 +106,11 @@ describe('Компонент DateTime_type_month', () => {
         view: 'classic',
       });
 
-      fireEvent.click(getDateTimeTooglerButtonPrev());
+      fireEvent.click(getDateTimeTogglerButtonPrev());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1969, 0));
 
-      fireEvent.click(getDateTimeTooglerButtonNext());
+      fireEvent.click(getDateTimeTogglerButtonNext());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1970, 0));
 
@@ -126,11 +126,11 @@ describe('Компонент DateTime_type_month', () => {
         view: 'book',
       });
 
-      fireEvent.click(getDateTimeTooglerButtonPrev());
+      fireEvent.click(getDateTimeTogglerButtonPrev());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1969, 0));
 
-      fireEvent.click(getDateTimeTooglerButtonNext());
+      fireEvent.click(getDateTimeTogglerButtonNext());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1970, 0));
 
@@ -269,7 +269,7 @@ describe('Компонент DateTime_type_month', () => {
       const label = getDateTimeLabel();
       expect(label).toHaveTextContent('2000');
 
-      fireEvent.click(getDateTimeTooglerButtonPrev());
+      fireEvent.click(getDateTimeTogglerButtonPrev());
 
       expect(label).not.toHaveTextContent('2000');
       expect(label).toHaveTextContent('1999');
@@ -285,7 +285,7 @@ describe('Компонент DateTime_type_month', () => {
       const label = getDateTimeLabel();
       expect(label).toHaveTextContent('2001');
 
-      fireEvent.click(getDateTimeTooglerButtonNext());
+      fireEvent.click(getDateTimeTogglerButtonNext());
 
       expect(label).not.toHaveTextContent('2001');
       expect(label).toHaveTextContent('2002');
@@ -302,7 +302,7 @@ describe('Компонент DateTime_type_month', () => {
       expect(labels[0]).toHaveTextContent('2000');
       expect(labels[1]).toHaveTextContent('2001');
 
-      fireEvent.click(getDateTimeTooglerButtonPrev());
+      fireEvent.click(getDateTimeTogglerButtonPrev());
 
       expect(labels[0]).not.toHaveTextContent('2001');
       expect(labels[0]).toHaveTextContent('1999');
@@ -320,7 +320,7 @@ describe('Компонент DateTime_type_month', () => {
       expect(labels[0]).toHaveTextContent('2000');
       expect(labels[1]).toHaveTextContent('2001');
 
-      fireEvent.click(getDateTimeTooglerButtonNext());
+      fireEvent.click(getDateTimeTogglerButtonNext());
 
       expect(labels[0]).not.toHaveTextContent('2000');
       expect(labels[0]).toHaveTextContent('2001');
@@ -334,20 +334,20 @@ describe('Компонент DateTime_type_month', () => {
         view: 'slider',
       });
 
-      const sliderlabel = getDateTimeSliderLabel();
+      const sliderLabel = getDateTimeSliderLabel();
       const labels = getDateTimeViewSliderLabels();
 
-      expect(sliderlabel).toHaveTextContent('2000-2010');
+      expect(sliderLabel).toHaveTextContent('2000-2010');
 
       expect(labels[0]).toHaveTextContent('2000');
       expect(labels[1]).toHaveTextContent('2001');
 
       fireEvent.click(getDateTimeSliderButtonPrev());
 
-      const updateSliderlabel = getDateTimeSliderLabel();
+      const updateSliderLabel = getDateTimeSliderLabel();
 
-      expect(updateSliderlabel).not.toHaveTextContent('2000-2010');
-      expect(updateSliderlabel).toHaveTextContent('1990-2000');
+      expect(updateSliderLabel).not.toHaveTextContent('2000-2010');
+      expect(updateSliderLabel).toHaveTextContent('1990-2000');
 
       expect(labels[0]).not.toHaveTextContent('2000');
       expect(labels[0]).toHaveTextContent('1990');
@@ -362,20 +362,20 @@ describe('Компонент DateTime_type_month', () => {
         view: 'slider',
       });
 
-      const sliderlabel = getDateTimeSliderLabel();
+      const sliderLabel = getDateTimeSliderLabel();
       const labels = getDateTimeViewSliderLabels();
 
-      expect(sliderlabel).toHaveTextContent('2000-2010');
+      expect(sliderLabel).toHaveTextContent('2000-2010');
 
       expect(labels[0]).toHaveTextContent('2000');
       expect(labels[1]).toHaveTextContent('2001');
 
       fireEvent.click(getDateTimeSliderButtonNext());
 
-      const updateSliderlabel = getDateTimeSliderLabel();
+      const updateSliderLabel = getDateTimeSliderLabel();
 
-      expect(updateSliderlabel).not.toHaveTextContent('2000-2010');
-      expect(updateSliderlabel).toHaveTextContent('2010-2020');
+      expect(updateSliderLabel).not.toHaveTextContent('2000-2010');
+      expect(updateSliderLabel).toHaveTextContent('2010-2020');
 
       expect(labels[0]).not.toHaveTextContent('2000');
       expect(labels[0]).toHaveTextContent('2010');
@@ -394,6 +394,7 @@ describe('Компонент DateTime_type_month', () => {
         });
 
         const month = getDateTimeItem(0);
+        /* cspell:disable-next-line */
         expect(month).toHaveTextContent('ژانـ');
       });
     });

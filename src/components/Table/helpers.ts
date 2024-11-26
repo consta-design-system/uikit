@@ -222,7 +222,7 @@ const getIsFirst = <T extends TableRow>(
 };
 
 /**
- * Возвращает данные, необходимые для построения хидера таблицы
+ * Возвращает данные, необходимые для построения хедера таблицы
  *
  * @param columns - массив колонок
  *
@@ -447,7 +447,7 @@ export function getMergedArray<TYPE>(mainArr: TYPE[], mergeArr: TYPE[]) {
   return resultArr;
 }
 
-export function calulateColSpans<T extends TableRow>(
+export function calculateColSpans<T extends TableRow>(
   columns: TableColumn<T>[],
   row: TableTreeRow<T>,
 ) {

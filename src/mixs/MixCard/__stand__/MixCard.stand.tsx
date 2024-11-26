@@ -6,6 +6,7 @@ export default createStand({
   group: 'mixs',
   version: '3.2.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'mixcard-s3bk4u',
   alias: [
     'миксин',

@@ -32,7 +32,7 @@ export const AutoCompleteExampleVirtualScroll = () => {
   return (
     <Example col={1}>
       <AutoComplete
-        placeholder="Чтобы посмотреть весь список, скрольте вниз"
+        placeholder="Чтобы посмотреть весь список, прокрутите вниз"
         items={items}
         value={value}
         onChange={setValue}

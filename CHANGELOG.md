@@ -175,7 +175,7 @@
 Самое важное:
 
 - Добавили новый компонент `DragNDropFieldCanary`.
-- В `TextField` добавили колбэк `onClear`.
+- В `TextField` добавили коллбэк `onClear`.
 - В `ChoiceGroup` при `truncate` на элементах  проставили `title` для вывода подсказок.
 - В `Chips` добавили свойства `disabled` и `getItemDisabled`.
 - В `Spoiler` добавили контроль состояния открыт/закрыт.
@@ -262,11 +262,11 @@
 - Компонент `UserSelect` был помечен на удаление и перенесен в `UserSelectDeprecated`
 - Компонент `UserSelectCanary` помечен как стабильный и перемещен в `UserSelect`
 - `useBreakpoints` помечен на удаление и перенесен в `useBreakpointsDeprecated`
-- `useComponentBreakpoints` помечен на удаление и перенесен в  `useComponentBreakpointsDepricated`
+- `useComponentBreakpoints` помечен на удаление и перенесен в  `useComponentBreakpointsDeprecated`
 - Добавлен новый компонент `useBreakpoints`, который объединяет возможности старых `useBreakpoints` и `useComponentBreakpoints`
 - В `useChoiceGroup` изменились аргументы свойства `callBack`, измените реализацию подключения в проекте
 - В `useChoiceGroupIndexed` изменились аргументы свойства `callBack`, измените реализацию подключения в проекте
-- `useHideElementsInLine` помечен на удаление и перенесен в  `useHideElementsInLineDepricated`
+- `useHideElementsInLine` помечен на удаление и перенесен в  `useHideElementsInLineDeprecated`
 - `useHideElementsInLineCanary` помечен как стабильный и перенесен в `useHideElementsInLine`
 - `useResizableContentCanary` помечен как стабильный и перенесен в  `useResizableContent`
 - `useThemeVars` удален, используйте `useStyleProps`

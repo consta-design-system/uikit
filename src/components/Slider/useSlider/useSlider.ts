@@ -23,7 +23,7 @@ import {
   trackPosition,
   UseSliderProps,
   UseSliderValues,
-  valueToSring,
+  valueToString,
 } from './helper';
 
 export const COUNT_STEPS = 250;
@@ -109,7 +109,7 @@ export function useSlider<RANGE extends boolean>(
   }, [currentValue]);
 
   useEffect(() => {
-    if (valueToSring(value) !== valueToSring(currentValue)) {
+    if (valueToString(value) !== valueToString(currentValue)) {
       setCurrentValue(value);
       setTooltipPosition(getActiveValue(value, activeButton.current), 0);
       setCurrentButton(null);
@@ -131,7 +131,7 @@ export function useSlider<RANGE extends boolean>(
           max,
           0,
         ) as SliderValue<RANGE>);
-    if (valueToSring(newValue) !== valueToSring(currentValue)) {
+    if (valueToString(newValue) !== valueToString(currentValue)) {
       onChangeRef.current?.(newValue, {});
     }
   }, [step]);
@@ -314,7 +314,7 @@ export function useSlider<RANGE extends boolean>(
       const oldValue: number = getActiveValue(currentValue, button);
       const newValue: number = getActiveValue(position, button);
       setCurrentValue(position);
-      if (valueToSring(oldValue) !== valueToSring(newValue)) {
+      if (valueToString(oldValue) !== valueToString(newValue)) {
         onAfterChangeRef.current?.(position, { e: event });
       }
     }

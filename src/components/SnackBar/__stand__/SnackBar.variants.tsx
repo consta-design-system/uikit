@@ -132,7 +132,7 @@ const Variants = () => {
           view="ghost"
           size="s"
           width="full"
-          label="Выполненно"
+          label="Выполнено"
           onClick={handleSuccessAdd}
         />
         <Button

@@ -8,10 +8,10 @@ import { cn } from '##/utils/bem';
 
 import { cnListItemGrid, renderSlot } from '../ListItemGrid';
 import {
-  mapGroupVerticalSpaseBottom,
-  mapGroupVerticalSpaseTop,
-  mapHorisontalSpase,
-  mapHorisontalSpaseIncreased,
+  mapGroupVerticalSpaceBottom,
+  mapGroupVerticalSpaceTop,
+  mapHorizontalSpace,
+  mapHorizontalSpaceIncreased,
 } from '../maps';
 import {
   defaultListPropSize,
@@ -50,10 +50,10 @@ export const ListGroupLabel = forwardRef<HTMLDivElement, ListGroupLabelProps>(
             space || {
               mH:
                 innerOffset === 'increased'
-                  ? mapHorisontalSpaseIncreased[size]
-                  : mapHorisontalSpase[size],
-              pT: mapGroupVerticalSpaseTop[size],
-              pB: mapGroupVerticalSpaseBottom[size],
+                  ? mapHorizontalSpaceIncreased[size]
+                  : mapHorizontalSpace[size],
+              pT: mapGroupVerticalSpaceTop[size],
+              pB: mapGroupVerticalSpaceBottom[size],
             },
           ),
           className,

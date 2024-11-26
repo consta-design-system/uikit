@@ -17,7 +17,7 @@ import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
 import {
   getComputedPositionAndDirection,
-  getPointPossition,
+  getPointPosition,
   getRenderPosition,
 } from './helpers';
 import { usePopoverReposition } from './usePopoverReposition';
@@ -110,7 +110,7 @@ export type PopoverProps = PropsWithJsxAttributes<
   } & PositioningProps
 >;
 
-export type Props = PopoverProps; // удалить при мажере
+export type Props = PopoverProps; // удалить при мажоре
 
 const getOffset = (
   ref: React.RefObject<HTMLDivElement>,
@@ -241,7 +241,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       direction: passedDirection,
       possibleDirections,
       bannedDirections,
-      position: getPointPossition(
+      position: getPointPosition(
         viewportElement,
         anchorClientRect
           ? { x: anchorClientRect.left, y: anchorClientRect.top }

@@ -12,9 +12,9 @@ import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { cnSelect } from '../SelectComponentsDeprecated/cnSelect';
 import {
-  defaultlabelForCreate,
+  defaultLabelForCreate,
   defaultLabelForEmptyItems,
-  defaultlabelForNotFound,
+  defaultLabelForNotFound,
   getInputWidth,
 } from '../SelectComponentsDeprecated/helpers';
 import { SelectContainer } from '../SelectComponentsDeprecated/SelectContainer/SelectContainer';
@@ -84,8 +84,8 @@ const ComboboxRender = <
     renderValue: renderValueProp,
     onCreate,
     inputRef: inputRefProp,
-    labelForNotFound = defaultlabelForNotFound,
-    labelForCreate = defaultlabelForCreate,
+    labelForNotFound = defaultLabelForNotFound,
+    labelForCreate = defaultLabelForCreate,
     labelForEmptyItems = defaultLabelForEmptyItems,
     onInputChange,
     searchFunction,
@@ -172,11 +172,11 @@ const ComboboxRender = <
   };
 
   const renderValueDefaultNotMultiple: PropRenderValue<ITEM> = (props) => {
-    const valueLable = getItemLabel(props.item);
+    const valueLabel = getItemLabel(props.item);
 
     return (
-      <span className={cnSelect('ControlValue')} title={valueLable}>
-        {valueLable}
+      <span className={cnSelect('ControlValue')} title={valueLabel}>
+        {valueLabel}
       </span>
     );
   };

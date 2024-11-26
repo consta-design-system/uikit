@@ -130,7 +130,7 @@ describe('Компонент ContextMenu', () => {
       });
     });
     describe('проверка getItemLeftSide', () => {
-      it('side cлева отобразился', () => {
+      it('side слева отобразился', () => {
         renderComponent({
           getItemLeftIcon: () => undefined,
           getItemLeftSide: () => 'test',
@@ -154,7 +154,7 @@ describe('Компонент ContextMenu', () => {
       });
     });
     describe('проверка getItemLeftIcon', () => {
-      it('icon cлева отобразился', () => {
+      it('icon слева отобразился', () => {
         renderComponent({
           getItemLeftSide: () => undefined,
           getItemLeftIcon: () => IconAllDone,

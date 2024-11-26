@@ -14,13 +14,13 @@ type Props = {
   container?: Element;
 } & ThemeProps;
 
-const getZIndex = (contextZindex?: number, propZindex?: number | string) => {
-  if (typeof propZindex === 'number') {
-    return propZindex;
+const getZIndex = (contextZIndex?: number, propZIndex?: number | string) => {
+  if (typeof propZIndex === 'number') {
+    return propZIndex;
   }
 
-  if (contextZindex) {
-    return contextZindex + 1;
+  if (contextZIndex) {
+    return contextZIndex + 1;
   }
 
   return undefined;

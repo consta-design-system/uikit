@@ -26,8 +26,8 @@ describe('Компонент SnackBar', () => {
     expect(renderComponent).not.toThrow();
   });
   describe('проверка items', () => {
-    describe('массив рендерится верно', () => {
-      it(`количество совпадает с передоваемым`, () => {
+    describe('массив рендериться верно', () => {
+      it(`количество совпадает с передаваемым`, () => {
         const items: SnackBarItemDefault[] = [
           {
             key: '1',

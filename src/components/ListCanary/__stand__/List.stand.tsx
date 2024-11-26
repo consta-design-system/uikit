@@ -7,6 +7,7 @@ export default createStand({
   description: 'Список. Компонент для отображения элементов списка.',
   version: '4.5.1',
   status: 'canary',
+  /* cspell:disable-next-line */
   sandbox: 'list-3foxo2',
   alias: ['список', 'лист'],
   figma:

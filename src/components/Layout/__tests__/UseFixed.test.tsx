@@ -16,7 +16,7 @@ const comparePositions: ComparePositions = (position1, position2) =>
   position1.position === position2.position;
 
 describe('Функция позиционирования в useFixed', () => {
-  describe("Позиционирование 'top' в контейнере без скрола", () => {
+  describe("Позиционирование 'top' в контейнере без скролла", () => {
     it('позиция элемента не должна измениться', () => {
       expect(() =>
         comparePositions(
@@ -35,7 +35,7 @@ describe('Функция позиционирования в useFixed', () => {
     });
   });
 
-  describe("Позиционирование 'bottom' в контейнере без скрола", () => {
+  describe("Позиционирование 'bottom' в контейнере без скролла", () => {
     it('позиция элемента должна измениться', () => {
       expect(() =>
         comparePositions(
@@ -54,7 +54,7 @@ describe('Функция позиционирования в useFixed', () => {
     });
   });
 
-  describe("Позиционирование 'top' в контейнере со скролом", () => {
+  describe("Позиционирование 'top' в контейнере со скроллом", () => {
     it('позиция элемента должна измениться', () => {
       expect(() =>
         comparePositions(
@@ -72,7 +72,7 @@ describe('Функция позиционирования в useFixed', () => {
       );
     });
 
-    describe("Позиционирование 'bottom' в контейнере со скролом", () => {
+    describe("Позиционирование 'bottom' в контейнере со скроллом", () => {
       it('позиция элемента должна измениться', () => {
         expect(() =>
           comparePositions(

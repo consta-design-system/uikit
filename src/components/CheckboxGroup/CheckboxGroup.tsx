@@ -54,10 +54,10 @@ const CheckboxGroupRender = (
       className={cnCheckboxGroup({ direction, size, view }, [className])}
     >
       {items.map((item) => {
-        const { className, ...atributes } = getItemAttributes(item) ?? {};
+        const { className, ...attributes } = getItemAttributes(item) ?? {};
         return (
           <Checkbox
-            {...atributes}
+            {...attributes}
             key={getItemKey(item) ?? getItemLabel(item)}
             align={align}
             label={getItemLabel(item)}

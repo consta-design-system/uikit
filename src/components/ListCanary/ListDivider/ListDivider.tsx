@@ -7,8 +7,8 @@ import { cn } from '##/utils/bem';
 
 import {
   mapDividerVerticalSpace,
-  mapHorisontalSpase,
-  mapHorisontalSpaseIncreased,
+  mapHorizontalSpace,
+  mapHorizontalSpaceIncreased,
 } from '../maps';
 import { defaultListPropSize, ListDividerProps } from '../types';
 
@@ -33,8 +33,8 @@ export const ListDivider = forwardRef<HTMLDivElement, ListDividerProps>(
             space || {
               mH:
                 innerOffset === 'increased'
-                  ? mapHorisontalSpaseIncreased[size]
-                  : mapHorisontalSpase[size],
+                  ? mapHorizontalSpaceIncreased[size]
+                  : mapHorizontalSpace[size],
               mV: mapDividerVerticalSpace[size],
             },
           ),

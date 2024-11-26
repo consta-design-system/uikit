@@ -7,6 +7,7 @@ export default createStand({
   description: 'Можно перетащить файлы, чтобы загрузить или отправить.',
   version: '2.1.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'dragndropfield-gst04t',
   alias: ['поле', 'ввод', 'файл', 'файлы', 'загрузка', 'выбор'],
   figma:

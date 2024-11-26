@@ -132,6 +132,7 @@ import { Attachment } from '@consta/uikit/Attachment';
   fileName="Файл с каким попало описанием"
   fileExtension="bzz"
   withPictogram
+  /* cspell:disable-next-line */
   fileDescription="Крекс, пекс, фекс"
 />
 ```
@@ -143,7 +144,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 ### Индикаторы загрузки
 
 Чтобы показать, что файл загружается, используйте свойство `loading`. Тогда вместо
-иконки файла пользователь увидит прелоадер.
+иконки файла пользователь увидит лоадер.
 
 Свойство `loadingText` отвечает за текст, который можно показать во время загрузки
 файла. Значение по умолчанию — **Loading**.
@@ -291,7 +292,7 @@ import { Attachment } from '@consta/uikit/Attachment';
 | [`fileDescription`](#описание)            | `string`                                | -            | Описание файла                                                   |
 | [`fileExtension`](#иконка)                | `string`                                | -            | Расширение иконки файла                                          |
 | [`withPictogram`](#показать-иконку)       | `boolean`                               | `true`       | Отображается ли пиктограмма файла                                |
-| [`loading`](#загрузка-файла)              | `boolean`                               | -            | Прелоадер загрузки                                               |
+| [`loading`](#загрузка-файла)              | `boolean`                               | -            | Лоадер загрузки                                                  |
 | [`loadingProgress`](#индикаторы-загрузки) | `number`                                | -            | Степень загрузки файла в процентах                               |
 | [`loadingText`](#индикаторы-загрузки)     | `string`                                | `'Loading'`  | Текст, который видно во время загрузки                           |
 | [`errorText`](#ошибка-при-загрузке)       | `string`                                | -            | Текст ошибки при загрузке файла                                  |

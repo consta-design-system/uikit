@@ -15,10 +15,10 @@ export function useClickOutside({
   ignoreClicksInsideRefs,
   handler,
 }: UseClickOutsideProps): void {
-  // Аргументы вынесены в рефки за тем, чтобы не пересоздавать подписку `mousedown` при кажом чихе.
-  // Бывают кейсы когда на странице несколко `useClickOutside` и один вызывает рендер,
+  // Аргументы вынесены в рефки за тем, чтобы не пересоздавать подписку `mousedown` при каждом чихе.
+  // Бывают кейсы когда на странице несколько `useClickOutside` и один вызывает рендер,
   // А второй не успевает отрабатывать а просто пересоздается
-  // С такой реализацией пересоздание только при удалении из дома, а аргументы всегда актуалны.
+  // С такой реализацией пересоздание только при удалении из дома, а аргументы всегда актуальны.
 
   const handlerRef = useMutableRef(handler);
   const ignoreClicksInsideRefsRef = useMutableRef(ignoreClicksInsideRefs);

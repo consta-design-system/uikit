@@ -30,19 +30,19 @@ const calculateBreakpoints = <T extends {}>(
   breakpoints: Record<string, T>,
   activeBreakpoints: Record<string, boolean>,
 ) => {
-  let retuned = {} as T;
+  let returned = {} as T;
   for (const key in activeBreakpoints) {
     if (
       Object.prototype.hasOwnProperty.call(activeBreakpoints, key) &&
       activeBreakpoints[key]
     ) {
-      retuned = { ...retuned, ...breakpoints[key] };
+      returned = { ...returned, ...breakpoints[key] };
     } else {
       break;
     }
   }
 
-  return retuned;
+  return returned;
 };
 
 export const useGridBreakpoints = <T extends {}>(

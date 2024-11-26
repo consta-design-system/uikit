@@ -143,7 +143,7 @@ describe('Компонент ChoiceGroup', () => {
   });
   describe('проверка props', () => {
     describe('проверка items', () => {
-      it(`количество совпадает с передоваемым`, () => {
+      it(`количество совпадает с передаваемым`, () => {
         renderComponent({});
         const itemsRender = getItems();
         expect(itemsRender.length).toEqual(elements.length);
@@ -216,7 +216,7 @@ describe('Компонент ChoiceGroup', () => {
       });
     });
     describe('проверка onChange при multiple=false', () => {
-      it(`клик по невыбраному элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
+      it(`клик по невыбранному элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
         const handleChange = jest.fn();
         const elementIndex = 1;
 
@@ -231,7 +231,7 @@ describe('Компонент ChoiceGroup', () => {
           e: expect.any(Object),
         });
       });
-      it('клик по выбраному элементу, не должен вызвать callback', () => {
+      it('клик по выбранному элементу, не должен вызвать callback', () => {
         const handleChange = jest.fn();
 
         renderComponent({ onChange: handleChange });
@@ -245,7 +245,7 @@ describe('Компонент ChoiceGroup', () => {
     });
 
     describe('проверка onChange при multiple=true', () => {
-      it(`клик по невыбраному элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
+      it(`клик по невыбранному элементу, должен вызвать callback c ожидаемыми параметрами`, () => {
         const handleChange = jest.fn();
         const elementIndex = 1;
 
@@ -264,7 +264,7 @@ describe('Компонент ChoiceGroup', () => {
           },
         );
       });
-      it(`клик по выбраному элементу (всего выбран 1 элемент), должен вызвать callback c ожидаемыми параметрами`, () => {
+      it(`клик по выбранному элементу (всего выбран 1 элемент), должен вызвать callback c ожидаемыми параметрами`, () => {
         const handleChange = jest.fn();
 
         renderComponentMultiple({ onChange: handleChange });
@@ -279,7 +279,7 @@ describe('Компонент ChoiceGroup', () => {
           e: expect.any(Object),
         });
       });
-      it(`клик по выбраному элементу (всего выбрано 2 элемента), должен вызвать callback c ожидаемыми параметрами`, () => {
+      it(`клик по выбранному элементу (всего выбрано 2 элемента), должен вызвать callback c ожидаемыми параметрами`, () => {
         const handleChange = jest.fn();
         const elementIndex = 1;
 
@@ -308,7 +308,7 @@ describe('Компонент ChoiceGroup', () => {
         expect(getRender()).toHaveClass(cnChoiceGroup({ disabled: true }));
       });
 
-      it(`всем лайблам присваивается класс ${cnChoiceGroup('Label', {
+      it(`всем лейблам присваивается класс ${cnChoiceGroup('Label', {
         disabled: true,
       })}`, () => {
         renderComponent({ disabled: true });
@@ -317,7 +317,7 @@ describe('Компонент ChoiceGroup', () => {
         });
       });
 
-      it('всем инпутам присваивается disabled', () => {
+      it('всем полям присваивается disabled', () => {
         renderComponent({ disabled: true });
         getInputs().forEach((input) => {
           expect(input).toHaveAttribute('disabled');

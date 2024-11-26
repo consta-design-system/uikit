@@ -36,11 +36,11 @@ const bgColors = [
   },
   {
     color: '--color-bg-tone',
-    description: 'Тёмный цвет подложки (оверлея) под высплывающими окнами',
+    description: 'Тёмный цвет подложки (оверлея) под всплывающими окнами',
   },
   {
     color: '--color-bg-soft',
-    description: 'Светлый цвет подложки (оверлея) под высплывающими окнами',
+    description: 'Светлый цвет подложки (оверлея) под всплывающими окнами',
   },
   {
     color: '--color-bg-normal',
@@ -176,11 +176,11 @@ const defaultControls = [
   },
   {
     color: '--color-control-bg-focus',
-    description: 'Цвет тени в состонии фокуса',
+    description: 'Цвет тени в состоянии фокуса',
   },
   {
     color: '--color-control-bg-active',
-    description: 'Цвет тени в состонии нажатия',
+    description: 'Цвет тени в состоянии нажатия',
   },
 ] as const;
 

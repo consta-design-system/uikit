@@ -10,7 +10,7 @@ export const DatePickerExampleAdditionalControls = () => {
     undefined,
   ]);
 
-  const setCuarter = (date: Date) => {
+  const setQuarter = (date: Date) => {
     const year = date.getFullYear();
     const month = date.getMonth();
     if (month >= 0 && month < 3) {
@@ -33,7 +33,7 @@ export const DatePickerExampleAdditionalControls = () => {
         renderAdditionalControls={({ currentVisibleDate }) => (
           <Button
             label="Этот квартал"
-            onClick={() => currentVisibleDate && setCuarter(currentVisibleDate)}
+            onClick={() => currentVisibleDate && setQuarter(currentVisibleDate)}
           />
         )}
       />

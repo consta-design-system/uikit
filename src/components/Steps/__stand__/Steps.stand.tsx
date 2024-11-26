@@ -7,6 +7,7 @@ export default createStand({
   description: 'Шаги.',
   version: '1.10.11',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'steps-6vynmz',
   alias: ['шаг', 'шаги', 'навигация', 'меню'],
   figma:

@@ -47,6 +47,7 @@ const FieldArrayValueInlineControlRender = (
     inputRef: inputRefProp,
     inputMaxLength,
     value = [],
+    inputDefaultValue,
     renderValue,
     onFocus,
     onBlur,
@@ -129,6 +130,7 @@ const FieldArrayValueInlineControlRender = (
         onPaste={onPaste}
         onPasteCapture={onPasteCapture}
         onWheel={onWheel}
+        defaultValue={inputDefaultValue}
       />
       <div
         ref={fakeInputRef}

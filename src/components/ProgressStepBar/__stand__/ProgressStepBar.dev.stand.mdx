@@ -1,7 +1,7 @@
 import { MdxMenu } from '@consta/stand';
 import {
   ProgressStepBarExampleDirectionHorizontal,
-  ProgressStepBarExampleDirectionVerical,
+  ProgressStepBarExampleDirectionVertical,
 } from './examples/ProgressStepBarExampleDirection/ProgressStepBarExampleDirection';
 import { ProgressStepBarExampleSize } from './examples/ProgressStepBarExampleSize/ProgressStepBarExampleSize';
 import { ProgressStepBarExampleTooltip } from './examples/ProgressStepBarExampleTooltip/ProgressStepBarExampleTooltip';
@@ -38,7 +38,7 @@ import { ProgressStepBar } from '@consta/uikit/ProgressStepBar';
 - `lineStatus` — цвет линии для выполненного шага,
 - `point` — номер шага или изображение в формате иконки, обозначающее этот шаг,
 - `progress` — показывает, что этот шаг в процессе выполнения (на его месте отображается индикатор загрузки),
-- `content` — любое содержимое для шага (лэйблы, описания, картинки),
+- `content` — любое содержимое для шага (лейблы, описания, картинки),
 - `onClick` — действие по клику на шаг.
 
 Шаги отображаются в том порядке, в котором описаны.
@@ -229,7 +229,7 @@ export const ProgressStepBarExampleContent = () => {
 <ProgressStepBar direction="vertical" />
 ```
 
-<ProgressStepBarExampleDirectionVerical />
+<ProgressStepBarExampleDirectionVertical />
 
 ## Активный шаг
 
@@ -323,7 +323,7 @@ type PropOnItemClick<ITEM> = (
 | Свойство                            | Тип или варианты значения                        | По умолчанию                    | Описание                                                    |
 | ----------------------------------- | ------------------------------------------------ | ------------------------------- | ----------------------------------------------------------- |
 | [`steps`](#элементы)                | `ITEM[]`                                         | -                               | Шаги                                                        |
-| [`direction?`](#ориентация)         | `'horizontal'` &#124; `'verical'`                | `'horizontal'`                  | Ориентация                                                  |
+| [`direction?`](#ориентация)         | `'horizontal'` &#124; `'vertical'`               | `'horizontal'`                  | Ориентация                                                  |
 | [`size?`](#размер)                  | `'xs'` &#124; `'s'` &#124; `'m'`                 | `'s'`                           | Размер                                                      |
 | [`activeStepIndex?`](#активный-шаг) | `string` &#124; `number`                         | -                               | Номер активного шага (по порядку), у первого шага номер `0` |
 | `onItemClick?`                      | `ProgressStepBarPropOnItemClick`                 | -                               | Функция для события нажатия на определенный шаг             |
@@ -334,6 +334,6 @@ type PropOnItemClick<ITEM> = (
 | `getItemProgress?`                  | `ProgressStepBarPropGetItemProgress<ITEM>`       | `(item) => item.progress`       | Функция определяет, находится ли шаг в прогрессе            |
 | `getItemContent?`                   | `ProgressStepBarPropGetItemContent<ITEM>;`       | `(item) => item.content`        | Функция для получения контента                              |
 | `getItemStatus?`                    | `ProgressStepBarPropGetItemStatus<ITEM>`         | `(item) => item.status`         | Функция для определения статуса шага                        |
-| `getItemClick?`                     | `ProgressStepBarPropGetItemOnClick<ITEM>`        | `(item) => item.onClick`        | Функция для определения клика нажития на шаг                |
+| `getItemClick?`                     | `ProgressStepBarPropGetItemOnClick<ITEM>`        | `(item) => item.onClick`        | Функция для определения клика нажатия на шаг                |
 | `ref?`                              | `React.Ref<HTMLDivElement>`                      | -                               | Ссылка на основной контейнер                                |
 | `className?`                        | `string`                                         | -                               | Дополнительный CSS-класс                                    |

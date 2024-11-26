@@ -63,7 +63,7 @@ export type CollapseIconProps = PropsWithHTMLAttributes<
     icon: React.FC<IconProps>;
     view: CollapsePropIconView;
     isOpen?: boolean;
-    cildren?: never;
+    children?: never;
     closeIcon?: React.FC<IconProps>;
     direction?: CollapseIconPropDirection;
     closeDirection?: CollapseIconPropDirection;

@@ -51,7 +51,7 @@ export const FieldControlLayout = forwardRef<
   const leftSlots = getSlots(leftSide);
   const rightSlots = getSlots(rightSide);
 
-  // ToDo: Удалить после того как удалим из всех компоентов "clearClear"
+  // ToDo: Удалить после того как удалим из всех компонентов "clearClear"
   const form = formGuard(formProp);
 
   const [hovered, setHovered] = useFlag();
@@ -97,7 +97,7 @@ export const FieldControlLayout = forwardRef<
           leftSlots.map((slot, index) =>
             renderContentSlot(slot, index, leftSlotsRefs),
           )}
-        <div className={cnFieldControlLayout('Сhildren')}>{children}</div>
+        <div className={cnFieldControlLayout('Children')}>{children}</div>
         {!!rightSlots.length &&
           rightSlots.map((slot, index) =>
             renderContentSlot(slot, index, rightSlotsRefs),

@@ -53,7 +53,7 @@ export const TextFieldExampleTextArrayPreParsing = () => {
       <TextField
         value={value}
         onChange={handleChange}
-        placeholder="Вставте вышеуказанный текст"
+        placeholder="Вставьте вышеуказанный текст"
         onPaste={pasteHandle}
         type="textarray"
         inputRef={inputRef}

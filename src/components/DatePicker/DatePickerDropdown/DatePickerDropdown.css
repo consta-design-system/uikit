@@ -1,5 +1,5 @@
 .DatePickerDropdown {
-  --transition-spase: var(--space-2xs);
+  --transition-space: var(--space-2xs);
   padding: var(--space-l);
   background: var(--color-bg-default);
   box-shadow: var(--shadow-layer);

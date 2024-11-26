@@ -1,3 +1,2 @@
+/* cspell:disable-next-line */
 export * from './useBreakpointsDepricated';
-export * from './getLastPoint';
-export * from './addPrefix';

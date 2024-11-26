@@ -10,9 +10,9 @@ import {
   getDateTimeSliderButtonNext,
   getDateTimeSliderButtonPrev,
   getDateTimeSliderLabel,
+  getDateTimeTogglerButtonNext,
+  getDateTimeTogglerButtonPrev,
   getDateTimeTogglerLabels,
-  getDateTimeTooglerButtonNext,
-  getDateTimeTooglerButtonPrev,
   getDateTimeViewBookLabels,
   getDateTimeViewSliderLabels,
   testId,
@@ -25,7 +25,7 @@ const renderComponent = (props: DateTimeProps<'date'> = {}) => {
 describe('Компонент DateTime_type_date', () => {
   describe('проверка value', () => {
     dateTimePropView.forEach((view) => {
-      it(`выбранная дата отображаеся верно для view=${view}`, () => {
+      it(`выбранная дата отображается верно для view=${view}`, () => {
         renderComponent({ value: new Date(1970, 5, 1), view });
         const item = getDateTimeItem();
         expect(item).toHaveClass('DateTimeItem_selected');
@@ -34,7 +34,7 @@ describe('Компонент DateTime_type_date', () => {
     });
 
     dateTimePropView.forEach((view) => {
-      it(`выбранный диапазон отображаеся верно для view=${view}`, () => {
+      it(`выбранный диапазон отображается верно для view=${view}`, () => {
         renderComponent({
           value: [new Date(1970, 5, 1), new Date(1970, 5, 3)],
           view,
@@ -62,7 +62,7 @@ describe('Компонент DateTime_type_date', () => {
   });
 
   describe('проверка currentVisibleDate', () => {
-    it(`Дата отображаеся верная при view='classic'`, () => {
+    it(`Дата отображается верная при view='classic'`, () => {
       renderComponent({
         currentVisibleDate: new Date(1970, 0),
         view: 'classic',
@@ -73,7 +73,7 @@ describe('Компонент DateTime_type_date', () => {
       expect(label).toHaveTextContent('январь 1970');
     });
 
-    it(`Дата отображаеся верная при view='book'`, () => {
+    it(`Дата отображается верная при view='book'`, () => {
       renderComponent({ currentVisibleDate: new Date(1970, 0), view: 'book' });
 
       const labels = getDateTimeViewBookLabels();
@@ -82,16 +82,16 @@ describe('Компонент DateTime_type_date', () => {
       expect(labels[1]).toHaveTextContent('февраль 1970');
     });
 
-    it(`Дата отображаеся верная при view='slider'`, () => {
+    it(`Дата отображается верная при view='slider'`, () => {
       renderComponent({
         currentVisibleDate: new Date(1970, 0),
         view: 'slider',
       });
 
-      const sliderlabel = getDateTimeSliderLabel();
+      const sliderLabel = getDateTimeSliderLabel();
       const labels = getDateTimeViewSliderLabels();
 
-      expect(sliderlabel).toHaveTextContent('1970');
+      expect(sliderLabel).toHaveTextContent('1970');
       expect(labels[0]).toHaveTextContent('январь 1970');
       expect(labels[1]).toHaveTextContent('февраль 1970');
     });
@@ -133,11 +133,11 @@ describe('Компонент DateTime_type_date', () => {
         view: 'classic',
       });
 
-      fireEvent.click(getDateTimeTooglerButtonPrev());
+      fireEvent.click(getDateTimeTogglerButtonPrev());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1970, 9, 1, 0, 0, 0));
 
-      fireEvent.click(getDateTimeTooglerButtonNext());
+      fireEvent.click(getDateTimeTogglerButtonNext());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1970, 10, 1, 0, 0, 0));
 
@@ -153,11 +153,11 @@ describe('Компонент DateTime_type_date', () => {
         view: 'book',
       });
 
-      fireEvent.click(getDateTimeTooglerButtonPrev());
+      fireEvent.click(getDateTimeTogglerButtonPrev());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1970, 9, 1, 0, 0, 0));
 
-      fireEvent.click(getDateTimeTooglerButtonNext());
+      fireEvent.click(getDateTimeTogglerButtonNext());
 
       expect(handleClick).toHaveBeenCalledWith(new Date(1970, 10, 1, 0, 0, 0));
 
@@ -288,11 +288,11 @@ describe('Компонент DateTime_type_date', () => {
           fireEvent.click(prevButton);
           expect(screen.getByText('февраль 1970')).toBeInTheDocument();
         } else {
-          const nextButton = getDateTimeTooglerButtonNext();
+          const nextButton = getDateTimeTogglerButtonNext();
           fireEvent.click(nextButton);
           expect(screen.getByText('февраль 1970')).toBeInTheDocument();
 
-          const prevButton = getDateTimeTooglerButtonPrev();
+          const prevButton = getDateTimeTogglerButtonPrev();
           fireEvent.click(prevButton);
         }
 

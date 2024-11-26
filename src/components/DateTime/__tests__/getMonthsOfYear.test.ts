@@ -82,6 +82,7 @@ describe('DateTime/getMonthsOfYear', () => {
         disabled: false,
       },
       {
+        /* cspell:disable-next-line */
         label: 'нояб',
         selected: false,
         range: false,
@@ -180,6 +181,7 @@ describe('DateTime/getMonthsOfYear', () => {
         disabled: true,
       },
       {
+        /* cspell:disable-next-line */
         label: 'нояб',
         selected: false,
         range: false,
@@ -292,6 +294,7 @@ describe('DateTime/getMonthsOfYear', () => {
         disabled: false,
       },
       {
+        /* cspell:disable-next-line */
         label: 'нояб',
         selected: false,
         range: false,
@@ -391,6 +394,7 @@ describe('DateTime/getMonthsOfYear', () => {
         disabled: false,
       },
       {
+        /* cspell:disable-next-line */
         label: 'нояб',
         selected: false,
         range: false,
@@ -488,6 +492,7 @@ describe('DateTime/getMonthsOfYear', () => {
         disabled: false,
       },
       {
+        /* cspell:disable-next-line */
         label: 'нояб',
         selected: false,
         range: false,
@@ -700,6 +705,7 @@ describe('DateTime/getMonthsOfYear', () => {
         disabled: true,
       },
       {
+        /* cspell:disable-next-line */
         label: 'нояб',
         selected: false,
         range: false,

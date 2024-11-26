@@ -14,7 +14,7 @@ const getDisableDates = (): Array<Date | [Date, Date]> => {
       new Date(year, month, day, 12, 34, 20),
       new Date(year, month, day, 16, 10, 41),
     ],
-    // слелдующий день
+    // следующий день
     new Date(year, month, day + 1),
     // отключаем с 1го по 12ое включительно
     [new Date(year, month, 1), new Date(year, month, 13)],

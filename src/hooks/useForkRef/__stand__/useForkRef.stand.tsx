@@ -8,6 +8,7 @@ export default createStand({
   alias: ['хук', 'реф', 'ссылка'],
   version: '1.5.0',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'useforkref-6lth98',
   order: 10,
 });

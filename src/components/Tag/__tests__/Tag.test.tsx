@@ -71,7 +71,7 @@ describe('Компонент Tag', () => {
     };
 
     tagPropMode.forEach((mode) => {
-      it(`возвращает верный обьект при mode=${mode}`, () => {
+      it(`возвращает верный объект при mode=${mode}`, () => {
         const params = getParams(mode, checked, onClick, onChange, onCancel);
 
         switch (mode) {

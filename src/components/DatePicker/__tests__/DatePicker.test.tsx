@@ -43,7 +43,7 @@ describe('Компонент DatePicker', () => {
   describe('проверка className', () => {
     datePickerPropType.forEach((type) => {
       dateTimePropView.forEach((dateTimeView) => {
-        it(`className присваевается при type="${type}" dateTimeView="${dateTimeView}"`, () => {
+        it(`className присваивается при type="${type}" dateTimeView="${dateTimeView}"`, () => {
           const className = 'className';
 
           renderComponent({ className });
@@ -56,7 +56,7 @@ describe('Компонент DatePicker', () => {
   describe('проверка dropDown', () => {
     datePickerPropType.forEach((type) => {
       dateTimePropView.forEach((dateTimeView) => {
-        it(`открываеся и закрывается при type="${type}" dateTimeView="${dateTimeView}"`, () => {
+        it(`открывается и закрывается при type="${type}" dateTimeView="${dateTimeView}"`, () => {
           jest.useFakeTimers();
           act(() => {
             renderComponent();

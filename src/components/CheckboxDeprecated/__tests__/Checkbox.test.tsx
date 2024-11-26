@@ -59,7 +59,7 @@ describe('Компонент Checkbox', () => {
         expect(labelElement.textContent).toEqual(label);
       });
     });
-    describe('проверка onChandge', () => {
+    describe('проверка onChange', () => {
       it(`клик должен вызвать callback c ожидаемыми параметрами`, () => {
         const handleChange = jest.fn();
 

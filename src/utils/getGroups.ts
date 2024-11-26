@@ -9,7 +9,7 @@ export type SelectAllItem = {
   checkedCount: number;
   totalCount: number;
   groupKey: string | number;
-  __optionSelctAll: true;
+  __optionSelectAll: true;
 };
 
 export type CountedGroup<ITEM, GROUP> = Omit<Group<ITEM, GROUP>, 'items'> & {
@@ -39,12 +39,12 @@ const getItemGroupKeyGuard = <ITEM>(
 };
 
 /**
- * @param items список который нужно групировать
+ * @param items список который нужно группировать
  * @param getItemGroupKey признак принадлежности к группе
  * @param groups список групп
  * @param getGroupKey результат функции должен вернуть уникальный ключ группы
  * @param sortGroups сортировка групп
- * @param noGroupKey ключ группы которая создаться если item небудет принадлежать ни к одной из групп
+ * @param noGroupKey ключ группы которая создаться если item не будет принадлежать ни к одной из групп
  */
 
 export function getGroups<ITEM, GROUP>(
@@ -124,7 +124,7 @@ export function getCountedGroups<ITEM, GROUP>(
       });
       copyGroups[index].items = [
         {
-          __optionSelctAll: true,
+          __optionSelectAll: true,
           totalCount,
           groupKey: group.key,
           checkedCount,

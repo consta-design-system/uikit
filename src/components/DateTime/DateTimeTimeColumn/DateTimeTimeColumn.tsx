@@ -55,7 +55,7 @@ export const DateTimeTimeColumn: React.FC<DateTimeTimeColumnProps> = memo(
             items={items}
             itemsRefs={itemsRefs}
           />
-          <div className={cnDateTimeTimeColumn('FakeElemet')} />
+          <div className={cnDateTimeTimeColumn('FakeElement')} />
         </div>
       </div>
     );

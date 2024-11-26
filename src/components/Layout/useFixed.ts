@@ -88,7 +88,7 @@ const getStationingElement = (
   return undefined;
 };
 
-const isElementScrollible = (
+const isElementScrollable = (
   element: ElementStationing,
   container: ElementStationing,
   anchor: ElementStationing | undefined,
@@ -149,7 +149,7 @@ export const positioningElement: PositioningElement = (
     stationingData.maxWidth = scrollContainerPosition.width;
     stationingData.maxHeight = scrollContainerPosition.height;
     if (
-      isElementScrollible(
+      isElementScrollable(
         layoutStationing,
         scrollContainerStationing,
         anchorStationing,

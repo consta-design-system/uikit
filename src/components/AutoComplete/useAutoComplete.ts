@@ -9,7 +9,7 @@ import React, {
 import { scrollToIndex } from '##/components/SelectComponents/useSelect/helpers';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useFlag } from '##/hooks/useFlag';
-import { KeyHandler, useKeys } from '##/hooks/useKeysDepricated';
+import { KeyHandler, useKeys } from '##/hooks/useKeysDeprecated';
 import { useRefs } from '##/hooks/useRefs';
 import { getGroups } from '##/utils/getGroups';
 
@@ -170,12 +170,12 @@ export function useAutoComplete<ITEM, GROUP>(
       }
 
       const getItem = (index: number) => {
-        let couter = 0;
+        let counter = 0;
         for (const group of visibleItems) {
-          if (group.items.length + couter > index) {
-            return group.items[index - couter];
+          if (group.items.length + counter > index) {
+            return group.items[index - counter];
           }
-          couter += group.items.length;
+          counter += group.items.length;
         }
         return undefined;
       };

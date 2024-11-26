@@ -34,6 +34,7 @@ const Variants = () => {
   const multiple = useBoolean('multiple', true);
 
   const accept: Accept = {
+    /* cspell:disable-next-line */
     'application/msword': ['.doc', '.docx'],
     'image/png': ['.png'],
     'image/jpeg': ['.jpeg', '.jpg'],

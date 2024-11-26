@@ -5,7 +5,7 @@ import { cnMixSpace } from '##/mixs/MixSpace';
 
 import { defaultListPropSize, ListBoxProps } from '../types';
 import { cnListBox } from './cnListBox';
-import { mapVerticalSpase } from './mapVerticalSpase';
+import { mapVerticalSpace } from './mapVerticalSpace';
 
 export const ListBox = forwardRef<HTMLDivElement, ListBoxProps>(
   (props, ref) => {
@@ -24,7 +24,7 @@ export const ListBox = forwardRef<HTMLDivElement, ListBoxProps>(
         ref={ref}
         className={cnListBox({ size, form, border, shadow }, [
           cnMixSpace({
-            pV: mapVerticalSpase[size],
+            pV: mapVerticalSpace[size],
           }),
           cnMixScrollBar(),
           className,

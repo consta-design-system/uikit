@@ -11,7 +11,7 @@ import { cn } from '../../utils/bem';
 import { Button } from '../Button/Button';
 import { withDefaultGetters } from './helper';
 import { StepsStep } from './StepsStep/StepsStep';
-import { StepsCompnent, stepsDefaultSize, StepsProps } from './types';
+import { StepsComponent, stepsDefaultSize, StepsProps } from './types';
 
 export const cnSteps = cn('Steps');
 
@@ -108,6 +108,6 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
   );
 };
 
-export const Steps = forwardRef(StepsRender) as StepsCompnent;
+export const Steps = forwardRef(StepsRender) as StepsComponent;
 
 export * from './types';

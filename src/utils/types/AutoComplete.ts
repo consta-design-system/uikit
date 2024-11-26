@@ -1,3 +1,4 @@
+/* cspell:disable */
 export type AutoCompete =
   | 'on'
   | 'off'

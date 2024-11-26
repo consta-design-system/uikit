@@ -45,7 +45,7 @@ import { AutoComplete } from '@consta/uikit/AutoComplete';
 - [Виртуализация списка](#виртуализация-списка)
 - [Индикация загрузки](#индикация-загрузки)
 - [Неактивный выпадающий список](#неактивный-выпадающий-список)
-- [Управление состоянием выподающего списка](#управление-состоянием-выподающего-списка)
+- [Управление состоянием выпадающего списка](#управление-состоянием-выпадающего-списка)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
 - [Импорт](#импорт)
@@ -637,7 +637,7 @@ const AutoCompleteExampleView = () => {
 
 ## Виртуализация списка
 
-Если список элементов очень большой, то стоит использовать виртуализацию скрола.
+Если список элементов очень большой, то стоит использовать виртуализацию скролла.
 
 ```tsx
 import { Example } from '@consta/stand';
@@ -673,7 +673,7 @@ export const AutoCompleteExampleVirtualScroll = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
     <AutoComplete
-      placeholder="Чтобы посмотреть весь список, скрольте вниз"
+      placeholder="Чтобы посмотреть весь список, прокрутите вниз"
       items={items}
       value={value}
       onChange={setValue}
@@ -701,7 +701,7 @@ export const AutoCompleteExampleVirtualScroll = () => {
 Для отображения индикации загрузки укажите параметр `isLoading`
 
 Пример ниже показывает, как можно загрузить данные после раскрытия списка.
-Этот функционаол стоит использовать когда список сильно большой
+Этот функционал стоит использовать когда список сильно большой
 
 ```tsx
 type Item = {
@@ -715,7 +715,7 @@ const useMockLoadData = (
 ): [Item[], boolean, () => void] => {
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
-  const [lenght, setLenght] = useState<number>(0);
+  const [length, setLength] = useState<number>(0);
   const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
 
   const items = useMemo(() => {
@@ -733,11 +733,11 @@ const useMockLoadData = (
               .indexOf(searchValue.toLocaleLowerCase()) !== -1,
         );
     }
-    return new Array(lenght).fill(null).map((_, i) => ({
+    return new Array(length).fill(null).map((_, i) => ({
       label: `Опция ${i + 1}`,
       id: i,
     }));
-  }, [lenght, searchValue]);
+  }, [length, searchValue]);
 
   useEffect(() => {
     if (isLoading) {
@@ -753,7 +753,7 @@ const useMockLoadData = (
 
     const timeoutNumber = setTimeout(() => {
       if (isStart) {
-        setLenght((state) => state + 100);
+        setLength((state) => state + 100);
         setIsLoading.off();
         setIsStart.off();
       }
@@ -804,7 +804,7 @@ export const AutoCompleteExampleIsLoading = () => {
 
 <AutoCompleteExampleIsLoading />
 
-Пример ниже показывает как можно дозагружать данные при скролле до конца списка.
+Пример ниже показывает как можно дозагружать данные при прокрутке до конца списка.
 
 ```tsx
 const useMockLoadData = (
@@ -813,7 +813,7 @@ const useMockLoadData = (
 ): [Item[], boolean, () => void] => {
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
-  const [lenght, setLenght] = useState<number>(0);
+  const [length, setLength] = useState<number>(0);
   const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
 
   const items = useMemo(() => {
@@ -831,11 +831,11 @@ const useMockLoadData = (
               .indexOf(searchValue.toLocaleLowerCase()) !== -1,
         );
     }
-    return new Array(lenght).fill(null).map((_, i) => ({
+    return new Array(length).fill(null).map((_, i) => ({
       label: `Опция ${i + 1}`,
       id: i,
     }));
-  }, [lenght, searchValue]);
+  }, [length, searchValue]);
 
   useEffect(() => {
     if (isLoading) {
@@ -851,7 +851,7 @@ const useMockLoadData = (
 
     const timeoutNumber = setTimeout(() => {
       if (isStart) {
-        setLenght((state) => state + 100);
+        setLength((state) => state + 100);
         setIsLoading.off();
         setIsStart.off();
       }
@@ -941,12 +941,12 @@ const AutoCompleteExampleDisabled = () => {
 
 <AutoCompleteExampleDisabled />
 
-## Управление состоянием выподающего списка
+## Управление состоянием выпадающего списка
 
-Для управлением состояния выподающего списка используйте следующие свойства:
+Для управлением состояния выпадающего списка используйте следующие свойства:
 
 - `dropdownOpen` - флаг открыт/закрыт
-- `onDropdownOpen` - колбек отрабатывающий каждый раз при открытии/закрытии
+- `onDropdownOpen` - Коллбэк отрабатывающий каждый раз при открытии/закрытии
 - `ignoreClicksInsideRefs` - список ссылок на элементы по которым игнорируется клики
 
 ```tsx
@@ -1220,8 +1220,8 @@ type AutoCompletePropOnChange = (
 | `dropdownClassName?`                                                                                            | `string`                                                                                                                                                            | -                                                                                    | Дополнительный CSS-класс для выпадающего блока с подсказками                                                                                 |
 | `dropdownForm?`                                                                                                 | `'default', 'brick', 'round'`                                                                                                                                       | `'default'`                                                                          | Форма выпадающего блока с подсказками                                                                                                        |
 | `dropdownRef?`                                                                                                  | `React.RefObject<HTMLDivElement>`                                                                                                                                   | -                                                                                    | Ссылка на DOM-элемент выпадающего списка                                                                                                     |
-| `virtualScroll?`                                                                                                | `boolean`                                                                                                                                                           | -                                                                                    | Включает виртуализацию скрола                                                                                                                |
-| `onScrollToBottom?`                                                                                             | `() => void;`                                                                                                                                                       | -                                                                                    | Колбэк сработает при скроле до конца списка                                                                                                  |
+| `virtualScroll?`                                                                                                | `boolean`                                                                                                                                                           | -                                                                                    | Включает виртуализацию скролла                                                                                                               |
+| `onScrollToBottom?`                                                                                             | `() => void;`                                                                                                                                                       | -                                                                                    | Коллбэк сработает при прокрутки до конца списка                                                                                              |
 
 ## Пример
 

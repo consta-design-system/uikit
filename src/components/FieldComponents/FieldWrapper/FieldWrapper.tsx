@@ -44,7 +44,7 @@ const renderSide = (side: React.ReactNode) => {
   return side;
 };
 
-const spaseMap: Record<FieldPropSize, Space> = {
+const spaceMap: Record<FieldPropSize, Space> = {
   l: 'xs',
   m: 'xs',
   s: '2xl',
@@ -80,7 +80,7 @@ export const FieldWrapper = forwardRefWithAs<FieldWrapperProps>(
     } = props;
 
     const Tag = as as string;
-    const gap = spaseMap[size];
+    const gap = spaceMap[size];
 
     return (
       <Tag

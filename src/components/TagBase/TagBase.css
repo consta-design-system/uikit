@@ -1,13 +1,13 @@
 .TagBase {
   --tag-base-typo-color: var(--color-control-typo-ghost);
-  --tag-base-half-space: calc(var(--tag-base-spaсe) / 2);
+  --tag-base-half-space: calc(var(--tag-base-space) / 2);
   position: relative;
   display: inline-flex;
   overflow: hidden;
   height: var(--tag-base-height);
   padding-top: 0;
-  padding-right: var(--tag-base-spaсe);
-  padding-left: var(--tag-base-spaсe);
+  padding-right: var(--tag-base-space);
+  padding-left: var(--tag-base-space);
   padding-bottom: 0;
   color: var(--tag-base-typo-color);
   background: var(--tag-base-bg-color);
@@ -59,25 +59,25 @@
   &_size {
     &_xs {
       --tag-base-height: var(--space-l);
-      --tag-base-spaсe: var(--space-2xs);
+      --tag-base-space: var(--space-2xs);
       --tag-base-font-size: var(--size-text-2xs);
     }
 
     &_s {
       --tag-base-height: var(--space-xl);
-      --tag-base-spaсe: var(--space-xs);
+      --tag-base-space: var(--space-xs);
       --tag-base-font-size: var(--size-text-xs);
     }
 
     &_m {
       --tag-base-height: calc(var(--space-2xl) - var(--space-2xs));
-      --tag-base-spaсe: var(--space-xs);
+      --tag-base-space: var(--space-xs);
       --tag-base-font-size: var(--size-text-s);
     }
 
     &_l {
       --tag-base-height: var(--space-2xl);
-      --tag-base-spaсe: var(--space-s);
+      --tag-base-space: var(--space-s);
       --tag-base-font-size: var(--size-text-m);
     }
   }

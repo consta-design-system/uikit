@@ -6,8 +6,8 @@ import { Transition } from 'react-transition-group';
 
 import { Avatar } from '##/components/Avatar';
 import {
-  mapHorisontalSpase,
-  mapHorisontalSpaseIncreased,
+  mapHorizontalSpace,
+  mapHorizontalSpaceIncreased,
   mapItemVerticalPadding,
 } from '##/components/ListCanary';
 import { cnMixSpace } from '##/mixs/MixSpace';
@@ -58,8 +58,8 @@ export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
             cnMixSpace({
               pH:
                 indent === 'increased'
-                  ? mapHorisontalSpaseIncreased[size]
-                  : mapHorisontalSpase[size],
+                  ? mapHorizontalSpaceIncreased[size]
+                  : mapHorizontalSpace[size],
               pV: mapItemVerticalPadding[size],
             }),
             className,

@@ -44,7 +44,7 @@ type CommonProps<ITEM> = {
 type UseChoiceGroupProps<ITEM, EVENT> = CommonProps<ITEM> &
   (PropsWithMultiple<ITEM, EVENT> | PropsWithoutMultiple<ITEM, EVENT>);
 
-type FormatedItems<ITEM> = { [value: string]: ITEM };
+type FormattedItems<ITEM> = { [value: string]: ITEM };
 
 function isMultiple<ITEM, EVENT>(
   params: UseChoiceGroupProps<ITEM, EVENT>,
@@ -63,7 +63,7 @@ function formatValue<ITEM>(
   getKey: GetKey<ITEM>,
   multiple?: boolean,
 ) {
-  const valueByKey: FormatedItems<ITEM> = {};
+  const valueByKey: FormattedItems<ITEM> = {};
   if (!isNotNil(valueProp) && !Array.isArray(valueProp)) {
     return valueByKey;
   }
@@ -79,10 +79,10 @@ function formatValue<ITEM>(
 export function useChoiceGroup<ITEM, EVENT>(
   props: UseChoiceGroupProps<ITEM, EVENT>,
 ): UseChoiceGroupValues<ITEM, EVENT> {
-  const formatedValue = formatValue(props.value, props.getKey, props.multiple);
+  const formattedValue = formatValue(props.value, props.getKey, props.multiple);
 
   const getChecked: GetChecked<ITEM> = (item) =>
-    Object.prototype.hasOwnProperty.call(formatedValue, props.getKey(item));
+    Object.prototype.hasOwnProperty.call(formattedValue, props.getKey(item));
 
   const getOnChange: GetOnChange<ITEM, EVENT> = (selectedItem) => (e) => {
     if (isMultiple(props)) {

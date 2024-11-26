@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as useResizeObserved from '##/hooks/useResizeObserved/useResizeObserved';
 
 import { cnSpoiler, cnSpoilerButton, Spoiler } from '..';
-import { spolierPropSize } from '../types';
+import { spoilerPropSize } from '../types';
 
 type SpoilerProps = React.ComponentProps<typeof Spoiler>;
 
@@ -33,9 +33,9 @@ const getButton = () =>
 const getButtonLabel = () =>
   getRender().querySelector(`.${cnSpoilerButton('Label')}`) as Element;
 
-const moksProps = {
+const mocksProps = {
   children:
-    'Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый,разделенный дугообразными чешуйками живот, на верхушке которого еле держалосьготовое вот-вот окончательно сползти одеяло. Его многочисленные, убого тонкиепо сравнению с остальным телом ножки беспомощно копошились у него передглазами. «Что со мной случилось?» – подумал он.',
+    'Проснувшись однажды утром после беспокойного сна, Грегор Белый обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на твердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый,разделенный дугообразными чешуйками живот, на верхушке которого еле держалось готовое вот-вот окончательно сползти одеяло. Его многочисленные, убого тонкие по сравнению с остальным телом ножки беспомощно копошились у него перед глазами. «Что со мной случилось?» – подумал он.',
   lineClamp: 1,
   moreLabel: 'Показать',
   lessLabel: 'Скрыть',
@@ -63,13 +63,13 @@ describe('Компонент Spoiler', () => {
         { width: 100, height: 200 },
         { width: 100, height: 200 },
       ]);
-      renderComponent(moksProps);
+      renderComponent(mocksProps);
 
       expect(getButton()).toEqual(null);
     });
     it('кнопка отображается, если высота превью меньше высоты полного текста', () => {
       setMockUseResizeObserved(defaultSizes);
-      renderComponent(moksProps);
+      renderComponent(mocksProps);
 
       expect(getButton()).toHaveClass(cnSpoilerButton());
     });
@@ -77,10 +77,10 @@ describe('Компонент Spoiler', () => {
 
   describe('проверка props', () => {
     describe('проверка size', () => {
-      spolierPropSize.forEach((size) => {
+      spoilerPropSize.forEach((size) => {
         it(`присваивает класс для size=${size}`, () => {
           setMockUseResizeObserved(defaultSizes);
-          renderComponent({ ...moksProps, size });
+          renderComponent({ ...mocksProps, size });
 
           expect(getRender()).toHaveClass(cnSpoiler({ size }));
         });
@@ -90,21 +90,21 @@ describe('Компонент Spoiler', () => {
     describe('проверка moreLabel', () => {
       it('проверка текста при open="false"', () => {
         setMockUseResizeObserved(defaultSizes);
-        renderComponent(moksProps);
+        renderComponent(mocksProps);
 
-        expect(getButtonLabel()).toHaveTextContent(moksProps.moreLabel);
+        expect(getButtonLabel()).toHaveTextContent(mocksProps.moreLabel);
       });
     });
     describe('проверка lessLabel', () => {
       it('проверка текста при open="true"', () => {
         setMockUseResizeObserved(defaultSizes);
-        renderComponent(moksProps);
+        renderComponent(mocksProps);
 
         const button = getButton();
 
         fireEvent.click(button);
 
-        expect(getButtonLabel()).toHaveTextContent(moksProps.lessLabel);
+        expect(getButtonLabel()).toHaveTextContent(mocksProps.lessLabel);
       });
     });
   });

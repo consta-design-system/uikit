@@ -103,7 +103,7 @@ function animateDelay() {
 }
 
 describe('Компонент Combobox', () => {
-  it('должен рендерится без ошибок', () => {
+  it('должен рендериться без ошибок', () => {
     expect(() => renderComponent(defaultProps)).not.toThrow();
   });
 
@@ -114,7 +114,7 @@ describe('Компонент Combobox', () => {
     expect(getRender()).toHaveClass(className);
   });
 
-  it('рендерится с установленным значением при multiple = false', () => {
+  it('рендериться с установленным значением при multiple = false', () => {
     jest.useFakeTimers();
     const index = 0;
     const value = items[index];
@@ -133,7 +133,7 @@ describe('Компонент Combobox', () => {
     expect(getItem(index)).toHaveClass(cnListItem({ checked: true }));
   });
 
-  it('рендерится с установленным значением при multiple = true', () => {
+  it('рендериться с установленным значением при multiple = true', () => {
     jest.useFakeTimers();
     const indexes = [0, 1, 5];
     const value = indexes.map((index) => items[index]);

@@ -8,6 +8,7 @@ export default createStand({
   alias: ['хок', 'тултип'],
   version: '1.10.13',
   status: 'stable',
+  /* cspell:disable-next-line */
   sandbox: 'withtooltip-3hvvbw',
   order: 10,
 });

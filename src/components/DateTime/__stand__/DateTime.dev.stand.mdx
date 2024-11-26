@@ -327,9 +327,9 @@ import ruLocale from 'date-fns/locale/ru';
 
 type DateTimePropValue = Date | [Date?, Date?];
 
-type СapableRangeType = 'date' | 'month' | 'year';
+type CapableRangeType = 'date' | 'month' | 'year';
 
-type DateTimePropValue<TYPE> = TYPE extends СapableRangeType
+type DateTimePropValue<TYPE> = TYPE extends CapableRangeType
   ? Date | DateRange
   : Date;
 
@@ -340,7 +340,7 @@ type DateTimePropOnChange = (
   },
 ) => void;
 
-type DateTimePropOnChangeRange<TYPE> = TYPE extends СapableRangeType
+type DateTimePropOnChangeRange<TYPE> = TYPE extends CapableRangeType
   ? (
       value: DateRange,
       props: {

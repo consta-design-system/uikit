@@ -4,6 +4,7 @@ import React from 'react';
 import { Table, TableColumn } from '../../../Table';
 
 const rows = [
+  /* cspell:disable-next-line */
   { id: '1', person: 'Винни Пух', food: 'Мёд' },
   { id: '2', person: 'Пятачок', food: 'Мёд' },
   { id: '3', person: 'Ослик Иа', food: 'Чертополох' },

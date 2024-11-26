@@ -7,21 +7,21 @@ import {
   BadgePropView,
 } from './types';
 
-const horisontalPaddingRoundMap: Record<BadgePropSize, Space> = {
+const horizontalPaddingRoundMap: Record<BadgePropSize, Space> = {
   xs: 'xs',
   s: 'xs',
   m: 's',
   l: 's',
 };
 
-const horisontalPaddingDefaultMap: Record<BadgePropSize, Space> = {
+const horizontalPaddingDefaultMap: Record<BadgePropSize, Space> = {
   xs: '2xs',
   s: '2xs',
   m: 'xs',
   l: 'xs',
 };
 
-export const getHorisontalPadding = (
+export const getHorizontalPadding = (
   size: BadgePropSize,
   form: BadgePropForm,
   minified: boolean,
@@ -30,9 +30,9 @@ export const getHorisontalPadding = (
     return undefined;
   }
   if (form === 'default') {
-    return `var(--space-${horisontalPaddingDefaultMap[size]})`;
+    return `var(--space-${horizontalPaddingDefaultMap[size]})`;
   }
-  return `var(--space-${horisontalPaddingRoundMap[size]})`;
+  return `var(--space-${horizontalPaddingRoundMap[size]})`;
 };
 
 const sizeMap: Record<BadgePropSize, Space> = {

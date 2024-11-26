@@ -640,7 +640,7 @@ export function UserSelectExampleForm() {
 За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
 
 Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
-поля с разными статусами и разной формы будут выглядет одинаково.
+поля с разными статусами и разной формы будут выглядит одинаково.
 
 > Для создания hover эффекта для view="`clear`" управляйте внешним видом контейнера, в котором находится UserSelect
 
@@ -1177,7 +1177,7 @@ export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`items`](#варианты)                                                | `ITEM[]`                                               | -                                                             | Варианты                                                               |
 | [`value?`](#выбранное-значение)                                     | `PropValue<ITEM,MULTIPLE>`                             | -                                                             | Выбранное значение                                                     |
 | [`onChange?`](#выбранное-значение)                                  | `PropOnChange<ITEM,MULTIPLE>`                          | -                                                             | Обработчик события изменения значения компонента                       |
-| [`multiple?`](#несколько-вариантов)                                 | `boolean`                                              | `fasle`                                                       | Показывает, что можно выбрать несколько вариантов                      |
+| [`multiple?`](#несколько-вариантов)                                 | `boolean`                                              | `false`                                                       | Показывает, что можно выбрать несколько вариантов                      |
 | [`groups?`](#группы-вариантов)                                      | `GROUP[]`                                              | -                                                             | Группы                                                                 |
 | [`searchFunction?`](#поиск)                                         | `PropSearchFunction<ITEM>`                             | поиск по `label` элементов, `label` получен из `getItemLabel` | Функция поиска                                                         |
 | [`renderItem?`](#кастомный-элемент-списка)                          | `PropRenderItem<ITEM>`                                 | рендер по умолчанию                                           | Рендер-функция для элемента списка                                     |
@@ -1190,7 +1190,7 @@ export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`getItemDisabled?`](#кастомные-типы-данных-для-групп-и-вариантов)  | `PropGetItemDisabled<ITEM>`                            | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                           |
 | [`getGroupLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)    | `PropGetGroupKey<GROUP>`                               | `(group) => group.id`                                         | Функция для определения названия группы                                |
 | [`getGroupKey?`](#кастомные-типы-данных-для-групп-и-вариантов)      | `PropGetGroupLabel<GROUP>`                             | `(group) => group.label`                                      | Функция для определения уникального ключа группы                       |
-| `isLoading?`                                                        | `boolean`                                              | -                                                             | При `true` будет отображаться лоудер загрузки                          |
+| `isLoading?`                                                        | `boolean`                                              | -                                                             | При `true` будет отображаться лоадер загрузки                          |
 | `required?`                                                         | `boolean`                                              | -                                                             | Нужно заполнить                                                        |
 | `searchValue?`                                                      | `string`                                               | -                                                             | Значение поля ввода                                                    |
 | `labelForEmptyItems?`                                               | `string`                                               | `Список пуст`                                                 | Текст для случая, когда в списке нет значений                          |
