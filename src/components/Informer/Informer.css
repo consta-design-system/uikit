@@ -27,7 +27,7 @@
   }
 
   &-Icon {
-    flex: 1;
+    flex: none;
     color: var(--informer-icon-color, inherit);
   }
 }
