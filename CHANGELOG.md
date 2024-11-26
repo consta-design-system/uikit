@@ -1,5 +1,23 @@
 # Changelog
 
+## v5.15.0 (26/11/2024)
+Самое главное:
+- В `TextField` добавили поддержку onWheel и отключили его действие по умолчанию для `type="number"`.
+- В `Steps` обернули номер шага в `<span/>` для возможности стилизации.
+- Исправили опечатки по всему проекту.
+
+---
+
+- [fix(Informer): fixed icon position (#3831)](https://github.com/consta-design-system/uikit/commit/f57e24a5ce1af47c5d0fb5ff3b9df97c32471853) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Switch): update onChange docs for Switch (#3829)](https://github.com/consta-design-system/uikit/commit/0b43f0f967f30f347e54ddfcad9c69cfbe84d55f) - [@vitaliidasaev](https://github.com/vitaliidasaev)
+- [fix: misprint (#3828)](https://github.com/consta-design-system/uikit/commit/1cc4e4076001461cea6d1d74615f960348416663) - [@gizeasy](https://github.com/gizeasy)
+- [feat(TextField): add wheel event handler for input[type="number"] (#3820)](https://github.com/consta-design-system/uikit/commit/7fb111e571d24a45f2204bbed0e66be1224ccf81) - [@belk1ng](https://github.com/belk1ng)
+- [feat(Steps): add wrapper to step index (#3821)](https://github.com/consta-design-system/uikit/commit/b46890555deac4530b4f82fb959482ccddd47780) - [@belk1ng](https://github.com/belk1ng)
+- [fix(Slider): fix value changing after click with disabled prop (#3822)](https://github.com/consta-design-system/uikit/commit/eb818a974a94a7294f2b12eccb646770b11b8d6e) - [@belk1ng](https://github.com/belk1ng)
+- [fix(TextFieldCanary): fixed import (#3819)](https://github.com/consta-design-system/uikit/commit/88c9a63cb5a99d700360a8a78fb45be6e4142f6c) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.14.0 (13/11/2024)
 Самое важное:
 - В `SnackBar` добавили возможность указать прогресс.
@@ -175,7 +193,7 @@
 Самое важное:
 
 - Добавили новый компонент `DragNDropFieldCanary`.
-- В `TextField` добавили коллбэк `onClear`.
+- В `TextField` добавили колбэк `onClear`.
 - В `ChoiceGroup` при `truncate` на элементах  проставили `title` для вывода подсказок.
 - В `Chips` добавили свойства `disabled` и `getItemDisabled`.
 - В `Spoiler` добавили контроль состояния открыт/закрыт.
@@ -262,11 +280,11 @@
 - Компонент `UserSelect` был помечен на удаление и перенесен в `UserSelectDeprecated`
 - Компонент `UserSelectCanary` помечен как стабильный и перемещен в `UserSelect`
 - `useBreakpoints` помечен на удаление и перенесен в `useBreakpointsDeprecated`
-- `useComponentBreakpoints` помечен на удаление и перенесен в  `useComponentBreakpointsDeprecated`
+- `useComponentBreakpoints` помечен на удаление и перенесен в  `useComponentBreakpointsDepricated`
 - Добавлен новый компонент `useBreakpoints`, который объединяет возможности старых `useBreakpoints` и `useComponentBreakpoints`
 - В `useChoiceGroup` изменились аргументы свойства `callBack`, измените реализацию подключения в проекте
 - В `useChoiceGroupIndexed` изменились аргументы свойства `callBack`, измените реализацию подключения в проекте
-- `useHideElementsInLine` помечен на удаление и перенесен в  `useHideElementsInLineDeprecated`
+- `useHideElementsInLine` помечен на удаление и перенесен в  `useHideElementsInLineDepricated`
 - `useHideElementsInLineCanary` помечен как стабильный и перенесен в `useHideElementsInLine`
 - `useResizableContentCanary` помечен как стабильный и перенесен в  `useResizableContent`
 - `useThemeVars` удален, используйте `useStyleProps`
@@ -379,8 +397,3 @@
 - [fix(BookmarkTabs): remove :has use (#3284)](https://github.com/consta-design-system/uikit/commit/1fabf695f335462ba0b15ec401bf314323df2713) - [@N1MBER](https://github.com/N1MBER)
 - [fix(Button): fix disabled mode (#3253)](https://github.com/consta-design-system/uikit/commit/b3c96e04e18c4be282be43237618477332e53da0) - [@N1MBER](https://github.com/N1MBER)
 - [feat(AsTags): added new type and rewrited component props (#3280)](https://github.com/consta-design-system/uikit/commit/4abb1db609473c58c8efa6047e55859da7178f71) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.28.1 (14/09/2023)
-- [feat(List): added reexport renderHeader](https://github.com/consta-design-system/uikit/commit/76cd7cef99b04fb5b297261740aa60d79afb99ab) - [@gizeasy](https://github.com/gizeasy)
