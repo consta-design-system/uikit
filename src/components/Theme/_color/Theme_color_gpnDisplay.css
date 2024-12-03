@@ -2,7 +2,7 @@
 $color-base-base: #f6fbfd; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
 $color-base-essential: #002033; /* Базовый цвет поверхностей */
 $color-base-project: #0071b2; /* Проектный цвет, от которого выстраивают акцентные состояния */
-$color-base-phantom: #f6fbfd; /* Тонирующий цвет, от которого выстраиваются бордеры, оверлей под модальными окнами, ... */
+$color-base-phantom: #f6fbfd; /* Тонирующий цвет, от которого выстраиваются границы, оверлей под модальными окнами, ... */
 $color-base-path: #0078d2; /* Цвет ссылок и контролов, от которого выстраиваются все их состояния */
 $color-base-system: #4b6272; /* Цвет системный */
 $color-base-shadow: #000306; /* Цвет тени */
@@ -174,17 +174,17 @@ $color-base-critical: #33000f;
   --color-control-bg-border-default:
     color(
       $color-base-phantom a(28%)
-    ); /* Цвет фона бордеров контрола */
+    ); /* Цвет фона границ контрола */
 
   --color-control-bg-border-default-hover:
     color(
       $color-base-phantom a(52%)
-    ); /* Цвет фона бордеров контрола по ховеру */
+    ); /* Цвет фона границ контрола по ховеру */
 
   --color-control-bg-border-focus:
     color(
       $color-base-path l(+10%)
-    ); /* Цвет аутлайна контролов при фокусе */ /* TODO заменить на правило целиком */
+    ); /* Цвет обводки контролов при фокусе */ /* TODO заменить на правило целиком */
   --color-control-bg-focus:
     color(
       $color-base-path a(40%)
@@ -220,17 +220,17 @@ $color-base-critical: #33000f;
   --color-control-bg-secondary:
     color(
       $color-base-essential a(0%)
-    ); /* Цвет фона бордеров контрола */
+    ); /* Цвет фона границ контрола */
 
   --color-control-bg-border-secondary:
     color(
       $color-base-path a(100%)
-    ); /* Цвет фона бордеров контрола */
+    ); /* Цвет фона границ контрола */
 
   --color-control-bg-border-secondary-hover:
     color(
       $color-base-path l(+9%)
-    ); /* Цвет фона бордеров контрола по ховеру */
+    ); /* Цвет фона границ контрола по ховеру */
 
   --color-control-typo-secondary:
     color(
@@ -293,7 +293,7 @@ $color-base-critical: #33000f;
   --color-control-bg-border-disable:
     color(
       $color-base-phantom a(0%)
-    ); /* Цвет фона бордеров неактивного контрола */
+    ); /* Цвет фона границ неактивного контрола */
 
   --color-control-typo-disable:
     color(
