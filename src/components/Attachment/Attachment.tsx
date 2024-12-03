@@ -6,10 +6,13 @@ import { Button } from '##/components/Button';
 import { File } from '##/components/File';
 import { Text, TextPropSize } from '##/components/Text';
 import { FileIconPropSize } from '##/fileIcons/FileIcon/FileIcon';
+import { cnMixFlex } from '##/mixs/MixFlex';
 import { cn } from '##/utils/bem';
+import { isDefined } from '##/utils/type-guards';
 import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
 import {
+  AttachmentActions,
   AttachmentProps,
   AttachmentPropSize,
   attachmentPropSizeDefault,
@@ -43,34 +46,52 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
     withPictogram,
     loading,
     fileName,
-    buttonIcon,
-    onButtonClick,
     errorText,
     loadingText = 'Loading',
     loadingProgress,
     fileDescription,
     size = attachmentPropSizeDefault,
     onClick,
-    withAction: withActionProp,
+    actions: actionsProp = [],
     buttonTitle,
+    buttonIcon,
+    onButtonClick,
     ...otherProps
   } = props;
   const Tag = as as string;
-  const withAction = withActionProp || Boolean(onClick);
-  const withOnButtonAction = Boolean(onButtonClick);
+
+  const actions: AttachmentActions[] = [
+    onButtonClick && buttonIcon
+      ? {
+          onClick: onButtonClick,
+          icon: buttonIcon,
+          title: buttonTitle,
+        }
+      : undefined,
+    ...actionsProp,
+  ].filter(isDefined);
+
+  const withActions = Boolean(actions?.length);
 
   return (
     <Tag
       {...otherProps}
       onClick={onClick}
-      className={cnAttachment({ withAction, withOnButtonAction, size }, [
-        className,
-      ])}
+      className={cnAttachment(
+        {
+          size,
+          hoverEffect: Boolean(actions?.length || onClick),
+          cursor: onClick ? 'pointer' : undefined,
+          withActions,
+          error: Boolean(errorText),
+        },
+        [cnMixFlex({ flex: 'flex', gap: 'xs' }), className],
+      )}
       ref={ref}
     >
       {withPictogram && (
         <File
-          className={cnAttachment('File', { error: Boolean(errorText) })}
+          className={cnAttachment('File')}
           extension={fileExtension}
           loading={loading}
           loadingWithProgressSpin
@@ -78,7 +99,11 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
           size={fileSizeMap[size]}
         />
       )}
-      <div className={cnAttachment('Content')}>
+      <div
+        className={cnAttachment('Content', [
+          cnMixFlex({ flex: 'flex', direction: 'column', gap: '2xs' }),
+        ])}
+      >
         {fileName && (
           <Text
             className={cnAttachment('FileName')}
@@ -122,17 +147,25 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
           </Text>
         )}
       </div>
-      {withOnButtonAction && (
-        <Button
-          className={cnAttachment('Button')}
-          as="span"
-          onlyIcon
-          iconLeft={buttonIcon}
-          onClick={onButtonClick}
-          title={buttonTitle}
-          size="xs"
-          view="clear"
-        />
+      {withActions && (
+        <div
+          className={cnAttachment('Actions', [
+            cnMixFlex({ flex: 'flex', gap: 'xs' }),
+          ])}
+        >
+          {actions.map((action) => (
+            <Button
+              tabIndex={-1}
+              onlyIcon
+              iconLeft={action.icon}
+              onClick={action.onClick}
+              title={action.title}
+              ref={action.ref}
+              size="xs"
+              view="clear"
+            />
+          ))}
+        </div>
       )}
     </Tag>
   );

@@ -1,7 +1,7 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 import { AttachmentExampleLoading } from './examples/AttachmentExampleLoading/AttachmentExampleLoading';
 import { AttachmentExampleError } from './examples/AttachmentExampleError/AttachmentExampleError';
-import { AttachmentExampleEvents } from './examples/AttachmentExampleEvents/AttachmentExampleEvents';
+import { AttachmentExampleActions } from './examples/AttachmentExampleActions/AttachmentExampleActions';
 import { AttachmentExampleDescription } from './examples/AttachmentExampleDescription/AttachmentExampleDescription';
 import { AttachmentExampleIcon } from './examples/AttachmentExampleIcon/AttachmentExampleIcon';
 import { AttachmentExampleName } from './examples/AttachmentExampleName/AttachmentExampleName';
@@ -24,13 +24,11 @@ import { Attachment } from '@consta/uikit/Attachment';
   - [Индикаторы загрузки](#индикаторы-загрузки)
   - [Ошибка при загрузке](#ошибка-при-загрузке)
 - [Обработка событий](#обработка-событий)
-  - [По клику на кнопку](#по-клику-на-кнопку)
   - [По клику на компонент](#по-клику-на-компонент)
+  - [Действия по кнопкам](#действия-по-кнопкам)
 - [Размер](#размер)
 - [Тег для компонента](#тег-для-компонента)
-- [Импорт](#импорт)
 - [Список свойств](#список-свойств)
-- [Пример использования](#пример)
 
 </MdxMenu>
 
@@ -40,6 +38,8 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 Иконка файла зависит от его расширения, за это отвечает свойство `fileExtension`. Если вы укажете расширение, которого нет в нашей галерее иконок, пользователь увидит иконку с вопросом.
 [Посмотреть иконки для файлов](##LIBS.LIB/lib:icons)
+
+<MdxTabs>
 
 ```tsx
 <Attachment
@@ -55,11 +55,15 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 <AttachmentExampleIcon />
 
+</MdxTabs>
+
 Рядом с иконкой можно разместить информацию о файле.
 
 #### Показать иконку
 
 Для того чтобы отобразить пиктограмму укажите значение свойства `withPictogram` в `true`.
+
+<MdxTabs>
 
 ```tsx
 <Attachment
@@ -78,11 +82,15 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 <AttachmentExampleWithPictogram />
 
+</MdxTabs>
+
 ### Название
 
 За название отвечает свойство `fileName`. Сюда можно подставить имя файла, но лучше придумать красивое название, которое будет понятно пользователям.
 
 Например, если вы просите загрузить фотографию, скан паспорта и сопроводительное письмо, загруженные файлы можно так и назвать.
+
+<MdxTabs>
 
 ```tsx
 <Attachment
@@ -112,11 +120,15 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 <AttachmentExampleDescription />
 
+</MdxTabs>
+
 ### Описание
 
 За описание файла отвечает свойство `fileDescription`. Мы предполагаем, что здесь удобно
 показывать размер файла и время загрузки, но вы можете использовать его для любой
 информации, которую считаете важной.
+
+<MdxTabs>
 
 ```tsx
 <Attachment
@@ -139,6 +151,8 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 <AttachmentExampleName />
 
+</MdxTabs>
+
 ## Загрузка файла
 
 ### Индикаторы загрузки
@@ -150,6 +164,8 @@ import { Attachment } from '@consta/uikit/Attachment';
 файла. Значение по умолчанию — **Loading**.
 
 `loadingProgress` позволяет показать прогресс загрузки файла в процентах.
+
+<MdxTabs>
 
 ```tsx
 <Attachment
@@ -165,6 +181,8 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 <AttachmentExampleLoading />
 
+</MdxTabs>
+
 ### Ошибка при загрузке
 
 Если во время загрузки файла произошла ошибка, вы можете показать, что случилось,
@@ -172,6 +190,8 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 Постарайтесь в тексте ошибки объяснить пользователю не только, что произошло, но ещё
 и почему так получилось и как это исправить.
+
+<MdxTabs>
 
 ```tsx
 <Attachment
@@ -190,26 +210,13 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 <AttachmentExampleError />
 
+</MdxTabs>
+
 ## Обработка событий
-
-### По клику на кнопку
-
-Кнопка нужна, чтобы совершать с файлом дополнительные действия (например, удалить его).
-
-`buttonIcon` отвечает за иконку на кнопке, она появится при наведении на компонент.
-Иконку можно выбрать из [библиотеки иконок](##LIBS.LIB/lib:icons).
-
-`buttonTitle` — всплывающая подсказка, появится при наведении на кнопку.
-
-`onButtonClick` задаёт событие, которое обрабатывается при клике на кнопку.
-
-`withAction` добавляет подсветку компонента по наведению.
 
 ### По клику на компонент
 
 За обработку событий по клику на весь компонент отвечает свойство `onClick`.
-
-> Не забудьте про всплытие событий
 
 ```tsx
 <Attachment
@@ -217,23 +224,54 @@ import { Attachment } from '@consta/uikit/Attachment';
   fileExtension="docx"
   withPictogram
   fileDescription="1,5 Mб 21.02.2051, 14:12"
-  loadingText="Загрузка"
-  buttonIcon={IconTrash}
-  buttonTitle="Удалить"
-  onClick={() => console.log('onClick')}
-  onButtonClick={(e) => {
-    e.stopPropagation();
-    console.log('onButtonClick');
-  }}
+  onClick={(e) => console.log(e)}
 />
 ```
 
-<AttachmentExampleEvents />
+### Действия по кнопкам
+
+Кнопки нужны, чтобы совершать с файлом дополнительные действия (например, удалить его). Указать события можно в свойстве `actions`
+
+> Не забудьте про всплытие событий
+
+<MdxTabs>
+
+```tsx
+<Attachment
+  fileName="my_tale_about_mars_final_last_12"
+  fileExtension="docx"
+  withPictogram
+  fileDescription="1,5 Mб 21.02.2020, 14:12"
+  actions={[
+    {
+      onClick: (e) => e.stopPropagation(),
+      title: 'Изменить',
+      icon: IconEdit,
+    },
+    {
+      onClick: (e) => e.stopPropagation(),
+      title: 'Скрыть',
+      icon: IconEyeClose,
+    },
+    {
+      onClick: (e) => e.stopPropagation(),
+      title: 'Удалить',
+      icon: IconTrash,
+    },
+  ]}
+/>
+```
+
+<AttachmentExampleActions />
+
+</MdxTabs>
 
 ## Размер
 
 За размер компонента отвечает свойство `size`.
 Возможные значения: `xs`, `s` и `m`. Значение по умолчанию `s`.
+
+<MdxTabs>
 
 ```tsx
 <Attachment
@@ -258,11 +296,15 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 <AttachmentExampleSize />
 
+</MdxTabs>
+
 ## Тег для компонента
 
 Свойство `as` отвечает за тег, в который `Attachment` оборачивается в HTML-документе.
 По умолчанию это `div`. Вы можете поменять этот тег, чтобы добавить компоненту
 свойства другого элемента — например, сделайте его ссылкой.
+
+<MdxTabs>
 
 ```tsx
 <Attachment
@@ -277,41 +319,33 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 <AttachmentExampleAs />
 
-## Импорт
-
-```tsx
-import { Attachment } from '@consta/uikit/Attachment';
-```
+</MdxTabs>
 
 ## Список свойств
 
-| Свойство                                  | Тип                                     | По умолчанию | Описание                                                         |
-| ----------------------------------------- | --------------------------------------- | ------------ | ---------------------------------------------------------------- |
-| [`size?`](#размер)                        | `'xs', 's', 'm'`                        | `'s'`        | Размер компонента                                                |
-| [`fileName`](#название)                   | `string`                                | -            | Название файла                                                   |
-| [`fileDescription`](#описание)            | `string`                                | -            | Описание файла                                                   |
-| [`fileExtension`](#иконка)                | `string`                                | -            | Расширение иконки файла                                          |
-| [`withPictogram`](#показать-иконку)       | `boolean`                               | `true`       | Отображается ли пиктограмма файла                                |
-| [`loading`](#загрузка-файла)              | `boolean`                               | -            | Лоадер загрузки                                                  |
-| [`loadingProgress`](#индикаторы-загрузки) | `number`                                | -            | Степень загрузки файла в процентах                               |
-| [`loadingText`](#индикаторы-загрузки)     | `string`                                | `'Loading'`  | Текст, который видно во время загрузки                           |
-| [`errorText`](#ошибка-при-загрузке)       | `string`                                | -            | Текст ошибки при загрузке файла                                  |
-| [`onClick`](#по-клику-на-компонент)       | `React.EventHandler<React.MouseEvent>;` | -            | Событие для клика по всему компоненту                            |
-| [`onButtonClick`](#по-клику-на-кнопку)    | `React.EventHandler<React.MouseEvent>;` | -            | Событие для клика по кнопке                                      |
-| [`buttonIcon`](#по-клику-на-кнопку)       | `IconComponent`                         | -            | Иконка для кнопки                                                |
-| [`buttonTitle`](#по-клику-на-кнопку)      | `string`                                | -            | Всплывающая подсказка для кнопки                                 |
-| [`withAction`](#обработка-событий)        | `boolean`                               | -            | Добавляет подсветку компонента по наведению                      |
-| [`as`](#тег-для-компонента)               | `keyof JSX.IntrinsicElements`           | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
-| `className`                               | `string`                                | -            | Дополнительный CSS-класс                                         |
-| `ref`                                     | `React.Ref<HTMLDivElement>`             | -            | Ссылка на корневой DOM-элемент этого компонента                  |
-
-## Пример
-
-```tsx
-import React from 'react';
-import { Attachment } from '@consta/uikit/Attachment';
-
-const App = () => {
-  return <Attachment fileName="Документация" extension="doc" withPictogram />;
+```ts
+export type AttachmentActions = {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  icon: IconComponent;
+  title?: string;
+  ref?: React.Ref<HTMLButtonElement>;
 };
 ```
+
+| Свойство                                  | Тип                                    | По умолчанию | Описание                                                         |
+| ----------------------------------------- | -------------------------------------- | ------------ | ---------------------------------------------------------------- |
+| [`size?`](#размер)                        | `'xs', 's', 'm'`                       | `'s'`        | Размер компонента                                                |
+| [`fileName`](#название)                   | `string`                               | -            | Название файла                                                   |
+| [`fileDescription`](#описание)            | `string`                               | -            | Описание файла                                                   |
+| [`fileExtension`](#иконка)                | `string`                               | -            | Расширение иконки файла                                          |
+| [`withPictogram`](#показать-иконку)       | `boolean`                              | `true`       | Отображается ли пиктограмма файла                                |
+| [`loading`](#загрузка-файла)              | `boolean`                              | -            | Лоадер загрузки                                                  |
+| [`loadingProgress`](#индикаторы-загрузки) | `number`                               | -            | Степень загрузки файла в процентах                               |
+| [`loadingText`](#индикаторы-загрузки)     | `string`                               | `'Loading'`  | Текст, который видно во время загрузки                           |
+| [`errorText`](#ошибка-при-загрузке)       | `string`                               | -            | Текст ошибки при загрузке файла                                  |
+| [`onClick`](#по-клику-на-компонент)       | `React.EventHandler<React.MouseEvent>` | -            | Событие для клика по всему компоненту                            |
+| [`actions`](#по-клику-на-компонент)       | `AttachmentActions[]`                  | []           | Дополнительные действия                                          |
+| [`withAction`](#обработка-событий)        | `boolean`                              | -            | Добавляет подсветку компонента по наведению                      |
+| [`as`](#тег-для-компонента)               | `keyof JSX.IntrinsicElements`          | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
+| `className`                               | `string`                               | -            | Дополнительный CSS-класс                                         |
+| `ref`                                     | `React.Ref<HTMLDivElement>`            | -            | Ссылка на корневой DOM-элемент этого компонента                  |
