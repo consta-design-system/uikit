@@ -14,7 +14,7 @@ type Props = {
   onDoubleClick: () => void;
 };
 
-/* Сделано классом, чтобы хэндлеры событий на document могли иметь доступ к актуальному состоянию/пропсам без пересоздания подписок */
+/* Сделано классом, чтобы функции событий на document имели доступ к актуальному состоянию/пропсам без пересоздания подписок */
 export class TableResizer extends React.Component<
   Props,
   { isDragging: boolean }

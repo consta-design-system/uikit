@@ -740,7 +740,7 @@ function SelectExampleDisabled() {
 Для управлением состояния выпадающего списка используйте следующие свойства:
 
 - `dropdownOpen` - флаг открыт/закрыт
-- `onDropdownOpen` - Коллбэк отрабатывающий каждый раз при открытии/закрытии
+- `onDropdownOpen` - Колбэк отрабатывающий каждый раз при открытии/закрытии
 - `ignoreClicksInsideRefs` - список ссылок на элементы по которым игнорируется клики
 
 ```tsx
@@ -1075,9 +1075,9 @@ type SelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `SelectPropGetItemDisabled<ITEM>`                      | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)                 |
 | [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)        | `SelectPropGetGroupKey<GROUP>`                         | `(group) => group.id`     | Функция для определения названия группы                                   |
 | [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)          | `SelectPropGetGroupLabel<GROUP>`                       | `(group) => group.label`  | Функция для определения уникального ключа группы                          |
-| `isLoading?`                                                            | `boolean`                                              | -                         | При `true` будет отображаться лоадер загрузки                             |
+| `isLoading?`                                                            | `boolean`                                              | -                         | При `true` будет отображаться индикатор загрузки                          |
 | `virtualScroll?`                                                        | `boolean`                                              | -                         | Включает виртуализацию скролла                                            |
-| `onScrollToBottom?`                                                     | `(length: number) => void`                             | -                         | Коллбэк сработает при прокрутки до конца списка                           |
+| `onScrollToBottom?`                                                     | `(length: number) => void`                             | -                         | Колбэк сработает при прокрутки до конца списка                            |
 | `required?`                                                             | `boolean`                                              | -                         | Нужно заполнить                                                           |
 | `labelForEmptyItems?`                                                   | `string`                                               | `Список пуст`             | Текст для случая, когда в списке нет значений                             |
 | `onBlur?`                                                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `blur`                                                 |

@@ -153,7 +153,7 @@ const getOffset = (
 
 /**
  * Подписчик на PortalWithThemeProvider
- * получает рефы всех вложенных порталов в модалку
+ * получает рефы всех вложенных порталов во всплывающем окне
  * для дальнейшего исключения их из useClickOutside
  */
 const ContextConsumer: React.FC<{

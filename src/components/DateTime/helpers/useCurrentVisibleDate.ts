@@ -56,7 +56,7 @@ const calculateCurrentVisibleDate = ({
   }
 
   // По хорошему было бы неплохо абстрагировать получение текущей даты
-  // чтобы не использовать моки через jest
+  // чтобы не использовать mocks через jest
   const currentDate = new Date();
 
   return clampDate(currentDate, minDate, maxDate);

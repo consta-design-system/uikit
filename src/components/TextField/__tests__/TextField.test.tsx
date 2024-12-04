@@ -188,7 +188,7 @@ describe('Компонент Button', () => {
 
       expect(handleWheel).toHaveBeenCalledTimes(1);
     });
-    it('блюрится числовой инпут при отсутствии onWheel', () => {
+    it('снимается фокус числовой инпут при отсутствии onWheel', () => {
       const handleChange = jest.fn();
 
       renderComponent({ type: 'number', step: 1, onChange: handleChange });

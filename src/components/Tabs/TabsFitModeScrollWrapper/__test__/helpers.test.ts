@@ -28,7 +28,7 @@ describe('getVisibleTabsRange', () => {
     ).toEqual([0, 2]);
   });
 
-  it('возвращает все табы, если прокрутили только паддинг', () => {
+  it('возвращает все табы, если прокрутили только внутренний отступ', () => {
     expect(
       getVisibleTabsRange({
         tabsDimensions,

@@ -324,7 +324,7 @@ describe('Компонент ChoiceGroup', () => {
         });
       });
 
-      it('при клике по лейблу коллбэк не вызывается', () => {
+      it('при клике по лейблу колбэк не вызывается', () => {
         const handleChange = jest.fn();
         renderComponent({ disabled: true, onChange: handleChange });
 
