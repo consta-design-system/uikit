@@ -1,55 +1,126 @@
+/* --loader-size-prop - задайте для указания размера */
 .Loader {
-  --backgroundColor:
-    var(
-      --loaderBackgroundColor,
-      var(--color-control-bg-primary)
+  --loader-color-var: var(--loader-color-prop, var(--loader-color));
+  --loader-type-circle-size-var:
+    max(
+      var(--loader-size-prop, var(--loader-type-circle-size)),
+      var(--space-s)
+    );
+  --loader-type-dot-size-var:
+    max(
+      var(--loader-size-prop, var(--loader-type-dot-size)),
+      calc(var(--space-l) - var(--space-3xs))
     );
   display: inline-flex;
-  padding: calc(var(--loader-size) * 0.25);
-  gap: var(--loader-gap);
+  box-sizing: border-box;
 
-  &-Dot {
-    width: var(--loader-size);
-    height: var(--loader-size);
-    background: var(--backgroundColor);
-    border-radius: 50%;
-    animation: var(--loader-dot-animation);
+  &_view {
+    &_primary {
+      --loader-color: var(--color-control-bg-primary);
+    }
 
-    &_side {
-      &_left {
-        --loader-dot-animation: loader 1s ease infinite;
-      }
-
-      &_center {
-        --loader-dot-animation: loader 1s -0.18s ease infinite;
-      }
-
-      &_right {
-        --loader-dot-animation: loader 1s -0.36s ease infinite;
-      }
+    &_clear {
+      --loader-color: var(--color-control-typo-clear);
     }
   }
 
   &_size {
     &_xs {
-      --loader-size: var(--space-2xs);
-      --loader-gap: var(--space-3xs);
+      --loader-type-circle-size: var(--space-s);
+      --loader-type-dot-size: calc(var(--space-l) - var(--space-3xs));
     }
 
     &_s {
-      --loader-size: var(--space-2xs);
-      --loader-gap: var(--space-2xs);
+      --loader-type-circle-size: var(--space-m);
+      --loader-type-dot-size: calc(var(--space-xl) - var(--space-3xs));
     }
 
     &_m {
-      --loader-size: var(--space-xs);
-      --loader-gap: calc(var(--space-xs) - var(--space-3xs));
+      --loader-type-circle-size: var(--space-xl);
+      --loader-type-dot-size: var(--space-3xl);
+    }
+  }
+
+  &_type {
+    &_dots {
+      --loader-dot-padding:
+        round(
+          down,
+          calc(var(--loader-type-dot-size-var) / 12),
+          1px
+        );
+      --loader-dot-size:
+        round(
+          down,
+          calc(
+            var(--loader-type-dot-size-var) / 3 - var(--loader-dot-padding) * 1.4
+          ),
+          2px
+        );
+      --loader-dot-scale:
+        calc(
+          var(--loader-dot-padding) + var(--loader-dot-size)
+        );
+      justify-content: space-between;
+      width: var(--loader-type-dot-size-var);
+      margin: calc(var(--loader-dot-scale) * 1px);
+      padding: max(calc(var(--loader-dot-padding) / 2), 1px);
+
+      &::before,
+      &::after,
+      .Loader-Dot {
+        flex: none;
+        width: var(--loader-dot-size);
+        height: var(--loader-dot-size);
+        background: var(--loader-color-var);
+        border-radius: 50%;
+        animation:
+          Loader-Animate_type_dots 1s
+          var(--loader-type-dot-animation-delay) ease infinite;
+      }
+
+      &::before,
+      &::after {
+        content: '';
+      }
+
+      &::before {
+        --loader-type-dot-animation-delay: 0s;
+      }
+
+      &::after {
+        --loader-type-dot-animation-delay: 0.36s;
+      }
+
+      .Loader-Dot {
+        --loader-type-dot-animation-delay: 0.18s;
+      }
+    }
+
+    &_circle {
+      --loader-type-circle-mask:
+        conic-gradient(#0000 2%, #000),
+        linear-gradient(#000 0 0) content-box;
+      width: var(--loader-type-circle-size-var);
+      height: var(--loader-type-circle-size-var);
+      padding: round(up, calc(var(--loader-type-circle-size-var) / 10), 1px);
+      background: var(--loader-color-var);
+      border-radius: 50%;
+      animation: Loader-Animate_type_circle 1.2s infinite linear;
+      mask: var(--loader-type-circle-mask);
+      mask-composite: subtract;
     }
   }
 }
 
-@keyframes loader {
+@keyframes Loader-Animate_type_dots {
   50% {
-    transform: scale(1.5);
+    transform: scale(1.4);
+  }
+}
+
+@keyframes Loader-Animate_type_circle {
+  to {
+    transform: rotate(1turn);
   }
 }

@@ -1,12 +1,14 @@
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
-export const loaderPropSize = ['m', 's', 'xs'] as const;
-export type LoaderPropSize = typeof loaderPropSize[number];
-export const loaderPropSizeDefault: LoaderPropSize = loaderPropSize[0];
+export type LoaderPropSize = 'xs' | 's' | 'm';
+export type LoaderPropType = 'dots' | 'circle';
+export type LoaderPropView = 'primary' | 'clear';
 
 type Props = {
-  size?: LoaderPropSize;
+  size?: 'xs' | 's' | 'm';
   children?: never;
+  type?: LoaderPropType;
+  view?: LoaderPropView;
 };
 
 export type LoaderProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
