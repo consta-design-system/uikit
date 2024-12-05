@@ -96,6 +96,7 @@ const AutoCompleteRender = <
 
   const onResolveValue: TextFieldPropOnChange = useCallback(
     (value, { id, name, e }) => {
+      console.log('here resolve');
       onChangeRef.current?.(value, { id: id?.toString(), name, e });
     },
     [],
@@ -109,9 +110,11 @@ const AutoCompleteRender = <
   const handleInputChange: TextFieldPropOnChange = useCallback(
     (value, { id, name, e }) => {
       if (searchDebounceDelay) {
+        console.log('debounce change');
         setSearchValue(value ?? '');
         onDebouncedChange(value, { id, name, e });
       } else {
+        console.log('default change');
         onResolveValue(value, { id, name, e });
       }
     },
