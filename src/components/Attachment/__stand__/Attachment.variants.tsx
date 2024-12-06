@@ -1,5 +1,7 @@
 import './Attachment.variants.css';
 
+import { IconEdit } from '@consta/icons/IconEdit';
+import { IconEyeClose } from '@consta/icons/IconEyeClose';
 import { IconTrash } from '@consta/icons/IconTrash';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
 import React from 'react';
@@ -23,7 +25,7 @@ const Variants = () => {
   const loading = useBoolean('loading', false);
   const loadingProgress = useNumber('loadingProgress', 70, Boolean(loading));
   const loadingText = useText('loadingText', 'Загрузка', Boolean(loading));
-  const withButtonAction = useBoolean('withButtonAction', false);
+  const withActions = useBoolean('withActions', false);
   const withPictogram = useBoolean('withPictogram', true);
 
   return (
@@ -37,13 +39,25 @@ const Variants = () => {
       loadingProgress={loadingProgress}
       errorText={errorText}
       fileDescription={fileDescription}
-      buttonIcon={IconTrash}
-      buttonTitle="Удалить"
       fileExtension={fileExtension}
-      {...(withButtonAction && {
-        onButtonClick: (e) => {
-          e.stopPropagation();
-        },
+      {...(withActions && {
+        actions: [
+          {
+            onClick: (e) => e.stopPropagation(),
+            title: 'Изменить',
+            icon: IconEdit,
+          },
+          {
+            onClick: (e) => e.stopPropagation(),
+            title: 'Скрыть',
+            icon: IconEyeClose,
+          },
+          {
+            onClick: (e) => e.stopPropagation(),
+            title: 'Удалить',
+            icon: IconTrash,
+          },
+        ],
       })}
     />
   );
