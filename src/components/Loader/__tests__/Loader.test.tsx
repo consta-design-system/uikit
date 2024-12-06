@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import * as React from 'react';
 
 import { cnLoader, Loader } from '../Loader';
-import { loaderPropSize } from '../types';
 
 type FileProps = React.ComponentProps<typeof Loader>;
 
@@ -23,7 +22,7 @@ describe('Компонент File', () => {
 
   describe('проверка props', () => {
     describe('проверка size', () => {
-      loaderPropSize.forEach((size) => {
+      (['xs', 's', 'm'] as const).forEach((size) => {
         it(`присваивает класс для size=${size}`, () => {
           renderComponent({ size });
 

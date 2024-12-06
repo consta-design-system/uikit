@@ -1,0 +1,3 @@
+.LoaderExampleCustomColor {
+  --loader-color-prop: var(--color-typo-primary);
+}

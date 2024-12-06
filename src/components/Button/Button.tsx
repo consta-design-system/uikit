@@ -3,13 +3,14 @@ import './Button.css';
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import React, { HTMLProps, useRef } from 'react';
 
+import { Loader } from '##/components/Loader';
+
 import { useForkRef } from '../../hooks/useForkRef/useForkRef';
 import { cnMixFocus } from '../../mixs/MixFocus/MixFocus';
 import { cn } from '../../utils/bem';
 import { getByMap } from '../../utils/getByMap';
 import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
-import { Loader } from '../LoaderDeprecated/LoaderDeprecated';
 
 export const buttonPropSize = ['m', 'xs', 's', 'l'] as const;
 export type ButtonPropSize = typeof buttonPropSize[number];
@@ -197,7 +198,11 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
         ) : (
           label
         ))}
-      {loading && <Loader className={cnButton('Loader')} size="s" />}
+      {loading && (
+        <div className={cnButton('Loader')}>
+          <Loader size="s" />
+        </div>
+      )}
     </Tag>
   );
 });

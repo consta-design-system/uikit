@@ -213,8 +213,15 @@
     }
 
     & .Button-Loader {
-      --loaderBackgroundColor: var(--button-loader-color);
+      --loader-color-prop: var(--button-loader-color);
       position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
