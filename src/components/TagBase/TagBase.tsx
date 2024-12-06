@@ -46,6 +46,8 @@ export type Props = {
   iconSize?: IconPropSize;
   withAction?: boolean;
   cancelButtonTabIndex?: number;
+  disabled?: boolean;
+  href?: string;
 };
 
 export const cnTagBase = cn('TagBase');
@@ -70,6 +72,8 @@ export const TagBase = forwardRefWithAs<Props>((props, ref) => {
     iconSize,
     withAction,
     cancelButtonTabIndex,
+    disabled,
+    href,
     ...otherProps
   } = props;
 
@@ -78,6 +82,7 @@ export const TagBase = forwardRefWithAs<Props>((props, ref) => {
   const withIcon = !!Icon;
   const IconCloseSize = getByMap(sizeMap, size);
   const IconSize = getByMap(sizeMap, size, iconSize);
+  const tagLinkHref = href && disabled ? undefined : href;
 
   return (
     <Tag
@@ -88,12 +93,15 @@ export const TagBase = forwardRefWithAs<Props>((props, ref) => {
           view,
           withCancel,
           withIcon,
-          group,
-          withAction,
+          disabled,
+          withAction: !disabled && withAction,
+          group: disabled && group ? 'disabled' : group,
         },
         [className],
       )}
       ref={ref}
+      disabled={disabled}
+      href={tagLinkHref}
     >
       {withCancel || Icon ? (
         <>
@@ -105,10 +113,11 @@ export const TagBase = forwardRefWithAs<Props>((props, ref) => {
           <span className={cnTagBase('Label')}>{label}</span>
           {withCancel && (
             <button
-              className={cnTagBase('CancelButton')}
+              className={cnTagBase('CancelButton', { disabled })}
               type="button"
               onClick={onCancel}
               tabIndex={cancelButtonTabIndex}
+              disabled={disabled}
             >
               <IconClose
                 className={cnTagBase('CancelIcon')}

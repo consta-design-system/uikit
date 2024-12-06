@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
 import { getParams, Tag, tagPropMode } from '../Tag';
@@ -28,6 +28,72 @@ describe('Компонент Tag', () => {
         const tagBase = screen.getByTestId(testId);
 
         expect(tagBase).toHaveClass(className);
+      });
+    });
+
+    describe('проверка disabled', () => {
+      it('при disabled=true отключает onClick в mode=button', () => {
+        const handleClick = jest.fn();
+        renderComponent({
+          label,
+          disabled: true,
+          mode: 'button',
+          onClick: handleClick,
+        });
+
+        const tagBase = screen.getByTestId(testId);
+        expect(tagBase).toBeDisabled();
+
+        fireEvent.click(tagBase);
+
+        expect(handleClick).not.toBeCalled();
+      });
+
+      it('при disabled=true отключает onChange в mode=check', () => {
+        const handleChange = jest.fn();
+        renderComponent({
+          label,
+          disabled: true,
+          checked: false,
+          mode: 'check',
+          onChange: handleChange,
+        });
+
+        const tagBase = screen.getByTestId(testId);
+        expect(tagBase).toBeDisabled();
+
+        fireEvent.click(tagBase);
+
+        expect(handleChange).not.toBeCalled();
+      });
+
+      it('при disabled=true отключает onCancel в mode=cancel', () => {
+        const handleCancel = jest.fn();
+        renderComponent({
+          label,
+          disabled: true,
+          mode: 'cancel',
+          onCancel: handleCancel,
+        });
+
+        const tagBase = screen.getByTestId(testId);
+
+        fireEvent.click(tagBase);
+
+        expect(handleCancel).not.toBeCalled();
+      });
+
+      it('при disabled=true отключает ссылку в mode=link', () => {
+        renderComponent({
+          label,
+          disabled: true,
+          mode: 'link',
+          href: '#',
+        });
+
+        const tagBase = screen.getByTestId(testId);
+
+        expect(tagBase).not.toHaveAttribute('href');
       });
     });
   });
