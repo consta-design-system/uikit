@@ -50,12 +50,10 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
     const endFieldInputRef = useRef<HTMLInputElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
 
-    const [fieldFocused, setFieldFocused] = useState<'start' | 'end' | false>(
-      false,
-    );
+    const [fieldFocused, setFieldFocused] = useState<0 | 1 | undefined>();
 
-    const startFocused = fieldFocused === 'start';
-    const endFocused = fieldFocused === 'end';
+    const startFocused = fieldFocused === 0;
+    const endFocused = fieldFocused === 1;
 
     const handleChange: DatePickerDropdownPropOnChange = (value, { e }) => {
       if (startFocused) {
@@ -88,6 +86,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
       startOfUnit: startOfDecade,
       onChangeCurrentVisibleDate,
       calendarVisible,
+      rangeIndex: fieldFocused,
     });
 
     const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) =>
@@ -97,12 +96,12 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
       Array.isArray(onBlur) ? onBlur[1]?.(e) : onBlur?.(e);
 
     const startFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
-      setFieldFocused('start');
+      setFieldFocused(0);
       Array.isArray(onFocus) ? onFocus[0]?.(e) : onFocus?.(e);
     };
 
     const endFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
-      setFieldFocused('end');
+      setFieldFocused(1);
       Array.isArray(onFocus) ? onFocus[1]?.(e) : onFocus?.(e);
     };
 
@@ -156,7 +155,7 @@ export const DatePickerTypeYearRange: DatePickerTypeComponent<'date-range'> =
         ...(ignoreOutsideClicksRefs ?? []),
       ],
       handler: () => {
-        setFieldFocused(false);
+        setFieldFocused(undefined);
         setCalendarVisible.off();
       },
     });

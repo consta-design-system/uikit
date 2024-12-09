@@ -114,33 +114,34 @@ const Variants = () => {
   }, [type]);
 
   return (
-    <DatePicker
-      className={cnDatePickerVariants()}
-      type={type}
-      form={form}
-      label={label}
-      labelPosition={labelPosition}
-      caption={caption}
-      required={required}
-      labelIcon={withLabelIcon ? IconQuestion : undefined}
-      value={value}
-      status={status}
-      view={view}
-      disabled={disabled}
-      size={size}
-      onChange={setValue}
-      leftSide={icon}
-      events={events}
-      locale={getByMap(localeMap, locale)}
-      dateTimeView={dateTimeView}
-      dropdownForm={dropdownForm}
-      minDate={minDate}
-      maxDate={maxDate}
-      renderAdditionalControls={
-        withAdditionalControls ? additionalControls : undefined
-      }
-      withClearButton={withClearButton}
-    />
+    <div className={cnDatePickerVariants()}>
+      <DatePicker
+        type={type}
+        form={form}
+        label={label}
+        labelPosition={labelPosition}
+        caption={caption}
+        required={required}
+        labelIcon={withLabelIcon ? IconQuestion : undefined}
+        value={value}
+        status={status}
+        view={view}
+        disabled={disabled}
+        size={size}
+        onChange={setValue}
+        leftSide={icon}
+        events={events}
+        locale={getByMap(localeMap, locale)}
+        dateTimeView={dateTimeView}
+        dropdownForm={dropdownForm}
+        minDate={minDate}
+        maxDate={maxDate}
+        renderAdditionalControls={
+          withAdditionalControls ? additionalControls : undefined
+        }
+        withClearButton={withClearButton}
+      />
+    </div>
   );
 };
 
