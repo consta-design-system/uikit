@@ -20,10 +20,8 @@ import {
   getFieldName,
   normalizeRangeValue,
 } from '../helpers';
-import {
-  datePickerPropDateTimeViewDefault,
-  DatePickerTypeComponent,
-} from '../types';
+import { getTimeFof } from '../timeForMap';
+import { DatePickerTypeComponent } from '../types';
 import { useCalendarVisible } from '../useCalendarVisible';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
@@ -31,7 +29,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
   forwardRef((props, ref) => {
     const {
       events,
-      dateTimeView = datePickerPropDateTimeViewDefault,
+      dateTimeView,
       locale,
       dropdownForm,
       onFocus,
@@ -63,12 +61,10 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
     const endFieldInputRef = useRef<HTMLInputElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
 
-    const [fieldFocused, setFieldFocused] = useState<'start' | 'end' | false>(
-      false,
-    );
+    const [fieldFocused, setFieldFocused] = useState<0 | 1 | undefined>();
 
-    const startFocused = fieldFocused === 'start';
-    const endFocused = fieldFocused === 'end';
+    const startFocused = fieldFocused === 0;
+    const endFocused = fieldFocused === 1;
 
     const handleChange: DatePickerDropdownPropOnChange = (value, { e }) => {
       if (startFocused) {
@@ -101,6 +97,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       startOfUnit: startOfMonth,
       onChangeCurrentVisibleDate,
       calendarVisible,
+      rangeIndex: fieldFocused,
     });
 
     const startFieldOnBlurHandler = (e: React.FocusEvent<HTMLElement>) =>
@@ -110,12 +107,12 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       Array.isArray(onBlur) ? onBlur[1]?.(e) : onBlur?.(e);
 
     const startFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
-      setFieldFocused('start');
+      setFieldFocused(0);
       Array.isArray(onFocus) ? onFocus[0]?.(e) : onFocus?.(e);
     };
 
     const endFieldOnFocusHandler = (e: React.FocusEvent<HTMLElement>) => {
-      setFieldFocused('end');
+      setFieldFocused(1);
       Array.isArray(onFocus) ? onFocus[1]?.(e) : onFocus?.(e);
     };
 
@@ -147,7 +144,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
         ...(ignoreOutsideClicksRefs ?? []),
       ],
       handler: useCallback(() => {
-        setFieldFocused(false);
+        setFieldFocused(undefined);
         setCalendarVisible.off();
       }, []),
     });
@@ -198,8 +195,8 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           onChangeCurrentVisibleDate={setCurrentVisibleDate}
           currentVisibleDate={currentVisibleDate}
           value={props.value || undefined}
-          timeFor={fieldFocused || undefined}
-          view={dateTimeView}
+          timeFor={getTimeFof(fieldFocused)}
+          view="classic"
           events={events}
           locale={locale}
           minDate={props.minDate}
