@@ -1,4 +1,4 @@
-import { MdxMenu, MdxTabs } from '@consta/stand';
+import { MdxMenu, MdxTabs, MdxInformer } from '@consta/stand';
 import { AttachmentExampleLoading } from './examples/AttachmentExampleLoading/AttachmentExampleLoading';
 import { AttachmentExampleError } from './examples/AttachmentExampleError/AttachmentExampleError';
 import { AttachmentExampleActions } from './examples/AttachmentExampleActions/AttachmentExampleActions';
@@ -230,9 +230,12 @@ import { Attachment } from '@consta/uikit/Attachment';
 
 ### Действия по кнопкам
 
-Кнопки нужны, чтобы совершать с файлом дополнительные действия (например, удалить его). Указать события можно в свойстве `actions`
+Используйте кнопки для выполнения дополнительных действий с файлом. Событие можно задать в свойстве `actions`.
 
-> Не забудьте про всплытие событий
+<MdxInformer status="normal">
+  Не забудьте про [всплытие
+  событий](https://learn.javascript.ru/event-bubbling).
+</MdxInformer>
 
 <MdxTabs>
 
