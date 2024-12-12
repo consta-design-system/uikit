@@ -1,3 +1,4 @@
+import { IconSave } from '@consta/icons/IconSave';
 import { fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
@@ -31,8 +32,12 @@ function getLoadingText() {
   return getRender().querySelector(`.${cnAttachment('LoadingText')}`);
 }
 
-function getButton() {
-  return getRender().querySelector(`.${cnAttachment('Button')}`);
+function getButtons() {
+  return getRender().querySelectorAll(`.${cnAttachment('Button')}`);
+}
+
+function getButton(index = 0) {
+  return getButtons()[index];
 }
 
 describe('Компонент Attachment', () => {
@@ -131,7 +136,7 @@ describe('Компонент Attachment', () => {
       it(`событие на кнопке срабатывает`, () => {
         const handleClick = jest.fn();
 
-        renderComponent({ onButtonClick: handleClick });
+        renderComponent({ onButtonClick: handleClick, buttonIcon: IconSave });
 
         const buttonElement = getButton() as HTMLButtonElement;
 

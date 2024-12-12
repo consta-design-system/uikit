@@ -155,6 +155,7 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
         >
           {actions.map((action) => (
             <Button
+              className={cnAttachment('Button')}
               tabIndex={-1}
               onlyIcon
               iconLeft={action.icon}
