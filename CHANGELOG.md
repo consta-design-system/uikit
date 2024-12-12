@@ -1,5 +1,23 @@
 # Changelog
 
+## v5.16.0 (12/12/2024)
+Самое важное:
+- В `Attachment` добавили возможность указывать несколько кнопок с действиями.
+- В `Loader` добавили новый тип компонента и возможность указывать произвольный размер и цвет.
+- В `Tag` добавили свойство `disabled`.
+
+---
+
+- [test(Attachment): fix test](https://github.com/consta-design-system/uikit/commit/3294b2115a8815e6b3f55b203ab05a57105f0398) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Attachment): add actions (#3846)](https://github.com/consta-design-system/uikit/commit/3728cab89756bd790eea304636186bf88201ebea) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Loader): add _view_circle (#3849)](https://github.com/consta-design-system/uikit/commit/8a2180b73709a30b69cb060e1b70d4f32b7cd6a5) - [@gizeasy](https://github.com/gizeasy)
+- [chore(cspell): add  --no-progress flag (#3851)](https://github.com/consta-design-system/uikit/commit/7e7004f8a830b497e433a68e17fae6d31dfefb29) - [@gizeasy](https://github.com/gizeasy)
+- [docs(edit cspell) (#3845)](https://github.com/consta-design-system/uikit/commit/c74c489c6c6429d6cda5cd96b1a0a4a39d6bc551) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [fix(DatePicker): fixed visited date (#3850)](https://github.com/consta-design-system/uikit/commit/71e1a1f72e0cde38a06c19b09474459aaf4722da) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Tag): add disabled prop (#3841)](https://github.com/consta-design-system/uikit/commit/a1c40e61b23d836d58250d39884082fcbb01d648) - [@baevm](https://github.com/baevm)
+
+--------------------
+
 ## v5.15.0 (26/11/2024)
 Самое главное:
 - В `TextField` добавили поддержку onWheel и отключили его действие по умолчанию для `type="number"`.
@@ -384,16 +402,3 @@
 ## v4.30.0 (20/09/2023)
 - [fix(List): fixed render undefined in renderSlot (#3289)](https://github.com/consta-design-system/uikit/commit/78515e8ae5107cc73e4d4f9c84eb6bdf978af8b7) - [@gizeasy](https://github.com/gizeasy)
 - [feat(BookmarkTabs): add tab navigation to close button (#3256)](https://github.com/consta-design-system/uikit/commit/3913dc4397e1d773999ac2e0ace5a825681b7aa0) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.29.0 (18/09/2023)
-- В `Tabs` переработали адаптивность, теперь выбранный пункт не скрывается.
-- В компоненты со свойством `as` добавили ограничение на возможные тэги, убрали svg элементы.
-
----
-
-- [feat(Tabs): rewrite adaptivity logic (#3282)](https://github.com/consta-design-system/uikit/commit/6a9078b18713f24ad4d1680b22b3023df265a010) - [@N1MBER](https://github.com/N1MBER)
-- [fix(BookmarkTabs): remove :has use (#3284)](https://github.com/consta-design-system/uikit/commit/1fabf695f335462ba0b15ec401bf314323df2713) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Button): fix disabled mode (#3253)](https://github.com/consta-design-system/uikit/commit/b3c96e04e18c4be282be43237618477332e53da0) - [@N1MBER](https://github.com/N1MBER)
-- [feat(AsTags): added new type and rewrited component props (#3280)](https://github.com/consta-design-system/uikit/commit/4abb1db609473c58c8efa6047e55859da7178f71) - [@N1MBER](https://github.com/N1MBER)
