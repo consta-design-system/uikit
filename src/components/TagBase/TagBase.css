@@ -41,6 +41,12 @@
     cursor: pointer;
   }
 
+  &_disabled {
+    --tag-base-bg-color: var(--color-control-bg-disable);
+    --tag-base-border-color: var(--color-control-bg-border-disable);
+    --tag-base-typo-color: var(--color-control-typo-disable);
+  }
+
   &_withAction&_view {
     &_stroked {
       &:hover {
@@ -103,6 +109,10 @@
   }
 
   &_group {
+    &_disabled {
+      --tag-base-group-color: var(--color-control-typo-disable);
+    }
+
     &_1 {
       --tag-base-group-color: #e92064;
     }
@@ -153,10 +163,15 @@
     cursor: pointer;
     transition: opacity 0.15s ease;
 
-    &:hover {
+    &:not(&_disabled):hover {
       background: transparent;
       outline: none;
       opacity: 1;
+    }
+
+    &_disabled {
+      color: var(--color-control-typo-disable);
+      cursor: not-allowed;
     }
   }
 
@@ -170,5 +185,12 @@
     align-items: center;
     height: var(--tag-base-height);
     padding: 0 var(--tag-base-half-space) 0 var(--tag-base-half-space);
+  }
+}
+
+button.TagBase,
+a.TagBase {
+  &_disabled {
+    cursor: not-allowed;
   }
 }

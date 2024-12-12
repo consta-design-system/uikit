@@ -116,7 +116,7 @@ describe('Компонент Button', () => {
       });
     });
     describe('проверка className', () => {
-      it(`присвоился дополнительный класс`, () => {
+      it(`есть дополнительный класс`, () => {
         const className = 'className';
         renderComponent({ className });
         expect(getRender()).toHaveClass(className);

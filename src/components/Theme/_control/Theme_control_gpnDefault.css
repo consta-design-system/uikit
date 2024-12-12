@@ -1,6 +1,6 @@
 .Theme_control_gpnDefault {
-  --control-radius: 4px; /* Основной радиус скругления контроллов */
-  --control-border-width: 1px; /* Основная толщина контроллов */
+  --control-radius: 4px; /* Основной радиус скругления контролов */
+  --control-border-width: 1px; /* Основная толщина контролов */
   --control-height-l: var(--space-4xl);
   --control-height-m: var(--space-3xl);
   --control-height-s: var(--space-2xl);

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { DateRange } from '../../../utils/types/Date';
+import { isNumber } from '##/utils/type-guards';
+import { DateRange } from '##/utils/types/Date';
 
 type GetCurrentVisibleDateProps = {
   currentVisibleDate: Date | undefined;
@@ -9,6 +10,7 @@ type GetCurrentVisibleDateProps = {
   value: Date | DateRange | undefined | null;
   startOfUnit: (date: Date) => Date;
   onChangeCurrentVisibleDate?: (date: Date) => void;
+  rangeIndex?: number;
 };
 
 export type UseCurrentVisibleDateProps = GetCurrentVisibleDateProps & {
@@ -38,9 +40,17 @@ const calculateCurrentVisibleDate = ({
   minDate,
   maxDate,
   value,
+  rangeIndex,
 }: GetCurrentVisibleDateProps): Date => {
   if (currentVisibleDate) {
     return currentVisibleDate;
+  }
+
+  if (Array.isArray(value) && isNumber(rangeIndex)) {
+    const date = value[rangeIndex];
+    if (date) {
+      return date;
+    }
   }
 
   if (Array.isArray(value) && value[0]) {
@@ -56,7 +66,7 @@ const calculateCurrentVisibleDate = ({
   }
 
   // По хорошему было бы неплохо абстрагировать получение текущей даты
-  // чтобы не использовать моки через jest
+  // чтобы не использовать mocks через jest
   const currentDate = new Date();
 
   return clampDate(currentDate, minDate, maxDate);

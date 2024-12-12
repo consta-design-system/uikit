@@ -26,6 +26,7 @@ type CommonProps = {
   icon?: IconComponent;
   iconSize?: IconProps['size'];
   children?: never;
+  disabled?: boolean;
 };
 
 type PropsWithModeButton = CommonProps & {

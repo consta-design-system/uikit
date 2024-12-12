@@ -15,9 +15,9 @@ const Variants = () => {
   const mode = useSelect('mode', tagPropMode, tagPropModeDefault);
   const group = useSelect('group', tagBasePropGroupNumberValue);
   const icon = useBoolean('icon', false);
+  const disabled = useBoolean('disabled', false);
 
   const [checked, setChecked] = useState<boolean>(false);
-  // const group2 = typeof group === 'number' ? group : undefined;
   const Icon = icon ? IconAttach : undefined;
 
   function getTag() {
@@ -32,6 +32,7 @@ const Variants = () => {
             onChange={setChecked}
             group={group}
             icon={Icon}
+            disabled={disabled}
           />
         );
       case 'cancel':
@@ -43,6 +44,7 @@ const Variants = () => {
             onCancel={() => console.log('onCancel')}
             group={group}
             icon={Icon}
+            disabled={disabled}
           />
         );
       case 'button':
@@ -54,6 +56,7 @@ const Variants = () => {
             onClick={() => console.log('onClick')}
             group={group}
             icon={Icon}
+            disabled={disabled}
           />
         );
       case 'link':
@@ -65,6 +68,7 @@ const Variants = () => {
             size={size}
             group={group}
             icon={Icon}
+            disabled={disabled}
           />
         );
       case 'info':
@@ -75,6 +79,7 @@ const Variants = () => {
             size={size}
             group={group}
             icon={Icon}
+            disabled={disabled}
           />
         );
     }

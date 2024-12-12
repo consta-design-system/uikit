@@ -994,7 +994,7 @@ export function UserSelectExampleMailInput() {
 Для управлением состояния выпадающего списка используйте следующие свойства:
 
 - `dropdownOpen` - флаг открыт/закрыт
-- `onDropdownOpen` - Коллбэк отрабатывающий каждый раз при открытии/закрытии
+- `onDropdownOpen` - Колбэк отрабатывающий каждый раз при открытии/закрытии
 - `ignoreClicksInsideRefs` - список ссылок на элементы по которым игнорируется клики
 
 ```tsx
@@ -1522,7 +1522,7 @@ export type UserSelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 | [`getItemDisabled?`](#кастомные-типы-данных-для-групп-и-вариантов)      | `UserSelectPropGetItemDisabled<ITEM>`                  | `(item) => item.disabled`                                     | Функция для определения состояния `disabled`                              |
 | [`getGroupLabel?`](#кастомные-типы-данных-для-групп-и-вариантов)        | `UserSelectPropGetGroupKey<GROUP>`                     | `(group) => group.id`                                         | Функция для определения названия группы                                   |
 | [`getGroupKey?`](#кастомные-типы-данных-для-групп-и-вариантов)          | `UserSelectPropGetGroupLabel<GROUP>`                   | `(group) => group.label`                                      | Функция для определения уникального ключа группы                          |
-| `isLoading?`                                                            | `boolean`                                              | -                                                             | При `true` будет отображаться лоадер загрузки                             |
+| `isLoading?`                                                            | `boolean`                                              | -                                                             | При `true` будет отображаться индикатор загрузки                          |
 | `required?`                                                             | `boolean`                                              | -                                                             | Нужно заполнить                                                           |
 | `searchValue?`                                                          | `string`                                               | -                                                             | Значение поля ввода                                                       |
 | `labelForEmptyItems?`                                                   | `string`                                               | `Список пуст`                                                 | Текст для случая, когда в списке нет значений                             |

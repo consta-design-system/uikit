@@ -40,4 +40,4 @@ jobs:
       - name: Unit тесты
         run: yarn tsc --noEmit
       - name: Проверка орфографии
-        run: yarn cspell
+        run: yarn cspell --no-progress
