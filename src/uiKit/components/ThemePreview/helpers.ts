@@ -27,7 +27,7 @@ const bgColors = [
   },
   {
     color: '--color-bg-border',
-    description: 'Цвет большинства бордеров и тонких разделителей',
+    description: 'Цвет большинства границ и тонких разделителей',
   },
   {
     color: '--color-bg-system',
@@ -164,15 +164,15 @@ const defaultControls = [
   },
   {
     color: '--color-control-bg-border-default',
-    description: 'Цвет бордеров',
+    description: 'Цвет границ',
   },
   {
     color: '--color-control-bg-border-default-hover',
-    description: 'Цвет бордеров по наведению',
+    description: 'Цвет границ по наведению',
   },
   {
     color: '--color-control-bg-border-focus',
-    description: 'Цвет бордеров в состоянии фокуса',
+    description: 'Цвет границ в состоянии фокуса',
   },
   {
     color: '--color-control-bg-focus',
@@ -218,11 +218,11 @@ const secondaryControls = [
   },
   {
     color: '--color-control-bg-border-secondary',
-    description: 'Цвет бордеров',
+    description: 'Цвет границ',
   },
   {
     color: '--color-control-bg-border-secondary-hover',
-    description: 'Цвет бордеров по наведению',
+    description: 'Цвет границ по наведению',
   },
 ] as const;
 
@@ -275,7 +275,7 @@ const disableControls = [
   },
   {
     color: '--color-control-bg-border-disable',
-    description: 'Цвет бордеров',
+    description: 'Цвет границ',
   },
 ] as const;
 

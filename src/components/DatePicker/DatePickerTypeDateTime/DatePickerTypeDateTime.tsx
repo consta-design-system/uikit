@@ -13,10 +13,7 @@ import {
   getDropdownZIndex,
   getMultiplicityTime,
 } from '../helpers';
-import {
-  datePickerPropDateTimeViewDefault,
-  DatePickerTypeComponent,
-} from '../types';
+import { DatePickerTypeComponent } from '../types';
 import { useCalendarVisible } from '../useCalendarVisible';
 import { useCurrentVisibleDate } from '../useCurrentVisibleDate';
 
@@ -24,7 +21,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
   forwardRef((props, ref) => {
     const {
       events,
-      dateTimeView = datePickerPropDateTimeViewDefault,
+      dateTimeView,
       locale,
       dropdownForm,
       dropdownClassName,
@@ -127,7 +124,7 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
           isOpen={calendarVisible}
           value={props.value || undefined}
           type="date-time"
-          view={dateTimeView}
+          view="classic"
           events={events}
           className={dropdownClassName}
           locale={locale}
