@@ -1,0 +1,44 @@
+/* 
+--steps-item-max-width-prop - свойство для того чтобы переопределить максимальную ширину Steps-Item 
+*/
+
+.canary--Steps {
+  --steps-item-max-width: var(--steps-item-max-width-prop, auto);
+  --steps-item-min-width: var(--steps-item-max-width-prop, auto);
+  --steps-item-line-height: var(--space-3xs);
+  display: flex;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  gap: var(--space-xs);
+
+  &_size {
+    &_s {
+      --steps-list-gap: var(--space-xs);
+    }
+    &_m {
+      --steps-list-gap: var(--space-s);
+    }
+    &_l {
+      --steps-list-gap: var(--space-m);
+    }
+  }
+
+  &-List {
+    flex: 1;
+    display: grid;
+    overflow-x: scroll;
+    overflow-y: visible;
+    gap: calc(var(--space-2xs) - var(--steps-item-line-height))
+      var(--steps-list-gap);
+    grid-template: auto var(--steps-item-line-height) / repeat(
+        var(--steps-items-length),
+        auto
+      );
+    grid-auto-flow: column;
+  }
+
+  &-ScrollButton {
+    flex: none;
+  }
+}

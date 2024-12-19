@@ -1,0 +1,51 @@
+.canary--StepsItem {
+  --steps-item-text-color: var(--color-typo-secondary);
+  --steps-item-elements-bg-color: var(--color-bg-border);
+  --steps-item-line-color: var(--color-bg-border);
+  --steps-item-cursor: pointer;
+  display: contents;
+
+  &_active {
+    --steps-item-text-color: var(--color-typo-primary);
+    --steps-item-cursor: auto;
+    --steps-item-line-color: var(--steps-item-elements-bg-color);
+  }
+
+  &_status {
+    &_error {
+      --steps-item-elements-bg-color: var(--color-bg-alert);
+    }
+    &_resolved {
+      --steps-item-elements-bg-color: var(--color-control-bg-primary);
+    }
+  }
+
+  &_disabled {
+    --steps-item-text-color: var(--color-control-typo-disable);
+    --steps-item-cursor: no-drop;
+  }
+
+  &-Button {
+    border: none;
+    background-color: transparent;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    color: var(--steps-item-text-color);
+    cursor: var(--steps-item-cursor);
+    max-width: var(--steps-item-max-width);
+    min-width: var(--steps-item-min-width);
+    text-decoration: none;
+    text-indent: 0;
+  }
+
+  &-Badge {
+    flex: none;
+  }
+
+  &-Line {
+    background-color: var(--steps-item-line-color);
+    height: var(--steps-item-line-height);
+    border-radius: calc(var(--steps-item-line-height) / 2);
+  }
+}
