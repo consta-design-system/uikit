@@ -1,0 +1,333 @@
+import { MdxMenu, MdxTabs } from '@consta/stand';
+import { ExampleStepsValue } from './examples/ExampleStepsValue/ExampleStepsValue';
+import { ExampleStepsDisabled } from './examples/ExampleStepsDisabled/ExampleStepsDisabled';
+import { ExampleStepsContent } from './examples/ExampleStepsContent/ExampleStepsContent';
+import { ExampleStepsSize } from './examples/ExampleStepsSize/ExampleStepsSize';
+import { ExampleStepsAdaptive } from './examples/ExampleStepsAdaptive/ExampleStepsAdaptive';
+import { ExampleStepsIcon } from './examples/ExampleStepsIcon/ExampleStepsIcon';
+import { ExampleStepsWithNumber } from './examples/ExampleStepsWithNumber/ExampleStepsWithNumber';
+import { ExampleStepsStatus } from './examples/ExampleStepsStatus/ExampleStepsStatus';
+
+```tsx
+import { Steps } from '@consta/uikit/StepsCanary';
+```
+
+<MdxMenu>
+
+- [Шаги](#шаги)
+  - [Тип шага по умолчанию](#тип-шага-по-умолчанию)
+  - [Активный шаг](#активный-шаг)
+  - [Недоступные шаги](#пройденные-шаги)
+  - [Пройденные шаги](#пройденные-шаги)
+  - [Пропущенные шаги](#пропущенные-шаги)
+- [Содержимое](#содержимое)
+- [Размер](#размер)
+- [Адаптивность](#адаптивность)
+- [Импорт](#импорт)
+- [Список свойств](#свойства)
+
+</MdxMenu>
+
+## Шаги
+
+Данные для отображения шагов можно задать в массиве `items`. Названия шагов можно получить с помощью функции `getLabel`.
+
+> 5 шагов — это максимум, больше делать не стоит.
+
+### Тип шага по умолчанию
+
+По умолчанию используется тип `StepsItemDefault`. Однако компонент может принимать и произвольный тип.
+
+```tsx
+type StepsItemDefault = {
+  label: string;
+  description?: string;
+  disabled?: boolean;
+  status?: 'resolved' | 'error';
+  icon?: IconComponent;
+};
+```
+
+Свойства `label`, `description`, `disabled`, `status`, `icon` компонент будет оптимистично брать опираясь на тип по умолчанию. Можно указать компоненту другое место хранения свойств шага.
+
+### Активный шаг
+
+Это шаг, в котором находится пользователь, за него отвечает свойство `value`
+
+<MdxTabs>
+
+```tsx
+import { Steps } from '@consta/uikit/StepsCanary';
+
+const items: string[] = ['Главное', 'Важное', 'Необязательное'];
+
+const getItemLabel = <T,>(item: T) => item;
+
+const ExampleStepsValue = () => {
+  const [value, setValue] = useState(items[0]);
+
+  return (
+    <Steps
+      items={items}
+      value={value}
+      getItemLabel={getItemLabel}
+      onChange={setValue}
+    />
+  );
+};
+```
+
+<ExampleStepsValue />
+
+</MdxTabs>
+
+### Номер шаг
+
+Укажите компоненту свойство `withNumber` чтобы отразить его порядковый номер.
+
+<MdxTabs>
+
+```tsx
+import { Steps } from '@consta/uikit/StepsCanary';
+
+const items: string[] = ['Главное', 'Важное', 'Необязательное'];
+
+const getItemLabel = <T,>(item: T) => item;
+
+const ExampleStepsValue = () => {
+  const [value, setValue] = useState(items[0]);
+
+  return (
+    <Steps
+      items={items}
+      value={value}
+      getItemLabel={getItemLabel}
+      onChange={setValue}
+      withNumber
+    />
+  );
+};
+```
+
+<ExampleStepsWithNumber />
+
+</MdxTabs>
+
+### Недоступные шаги
+
+Это шаги, которые пока нельзя пройти. Например, они откроются, когда пользователь пройдет предыдущий шаг.
+
+Их можно указать в свойстве `disabled` шага или с помощью функции `getItemDisabled`.
+
+<MdxTabs>
+
+```tsx
+type Item = {
+  label: string;
+  disabled?: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Главное',
+  },
+  {
+    label: 'Важное',
+    disabled: true,
+  },
+  {
+    label: 'Необязательное',
+  },
+];
+
+export const ExampleStepsDisabled = () => {
+  const [value, setValue] = useState(items[0]);
+
+  return <Steps items={items} value={value} onChange={setValue} />;
+};
+```
+
+<ExampleStepsDisabled />
+
+</MdxTabs>
+
+### Иконка шага
+
+Компонент может отобразить иконку в место номера шага, укажите иконку в свойстве `icon` шага или с помощью функции `getItemIcon`.
+
+<MdxTabs>
+
+```tsx
+export const items: StepsItemDefault[] = [
+  {
+    label: 'Планирование',
+    icon: IconCalendar,
+  },
+  {
+    label: 'Расчет средств',
+    icon: IconCalculator,
+  },
+  {
+    label: 'Разработка',
+    icon: IconWrench,
+  },
+  {
+    label: 'Итог',
+    icon: IconFlagFilled,
+  },
+];
+
+export const ExampleStepsIcon = () => {
+  const [value, setValue] = useState(items[0]);
+
+  return <Steps items={items} value={value} onChange={setValue} withNumber />;
+};
+```
+
+<ExampleStepsIcon />
+
+</MdxTabs>
+
+### Статус шагов
+
+Статус шага можно указать в свойстве `status` шага или с помощью функции `getItemStatus`. Желательно шаги со статусом помечать соответствующими иконками.
+
+<MdxTabs>
+
+```tsx
+export const items: StepsItemDefault[] = [
+  {
+    label: 'Главное',
+    status: 'resolved',
+    icon: IconCheck,
+  },
+  {
+    label: 'Важное',
+    status: 'error',
+    icon: IconClose,
+  },
+  {
+    label: 'Необязательное',
+  },
+];
+
+export const ExampleStepsStatus = () => {
+  const [value, setValue] = useState(items[1]);
+
+  return <Steps items={items} value={value} onChange={setValue} withNumber />;
+};
+```
+
+<ExampleStepsStatus />
+
+</MdxTabs>
+
+## Размер
+
+За размер отвечает свойство `size`.
+
+<MdxTabs>
+
+```tsx
+export const Items: string[] = ['Главное', 'Важное', 'Необязательное'];
+
+<Steps size="s" items={items} getItemLabel={(item) => item} value={items[1]} />;
+<Steps size="m" items={items} getItemLabel={(item) => item} value={items[1]} />;
+<Steps size="l" items={items} getItemLabel={(item) => item} value={items[1]} />;
+```
+
+<ExampleStepsSize />
+
+</MdxTabs>
+
+## Адаптивность
+
+На мобильных и компактных экранах компонент заполняет всю доступную ширину. Свойство `fitMode` определяет как компонент будет отображаться в случае если не помещается в ширину контейнера, варианты `'scroll'` и `'scrollWithButtons'`
+
+<MdxTabs>
+
+```tsx
+const getItemLabel = <T,>(item: T) => item;
+
+export const ExampleStepsAdaptive = () => {
+  const [value, setValue] = useState(steps[0]);
+
+  return (
+    <div style={{ maxWidth: 300 }}>
+      <Steps
+        items={steps}
+        value={value}
+        onChange={setValue}
+        getItemLabel={getItemLabel}
+        withNumber
+        fitMode="scroll"
+      />
+      <Steps
+        items={steps}
+        onChange={setValue}
+        value={value}
+        getItemLabel={getItemLabel}
+        withNumber
+        fitMode="scrollWithButtons"
+      />
+    </div>
+  );
+};
+```
+
+<ExampleStepsAdaptive />
+
+</MdxTabs>
+
+## Импорт
+
+```tsx
+import { Steps } from '@consta/uikit/Steps';
+```
+
+## Свойства
+
+```tsx
+export type StepItemStatus = 'resolved' | 'error';
+
+export type StepsPropGetItemLabel<ITEM> = (item: ITEM) => string;
+
+export type StepsPropGetItemDescription<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+
+export type StepsPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+
+export type StepsPropGetItemStatus<ITEM> = (
+  item: ITEM,
+) => StepItemStatus | undefined;
+
+export type StepsPropGetItemIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+
+export type StepsItemDefault = {
+  label: string;
+  description?: string;
+  disabled?: boolean;
+  status?: StepItemStatus;
+  icon?: IconComponent;
+};
+```
+
+| Свойство                                | Тип                                                       | По умолчанию                 | Описание                                                                           |
+| --------------------------------------- | --------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------- |
+| [`value`](#активный-шаг)                | `Item`                                                    | -                            | Выбранный шаг                                                                      |
+| [`items`](#шаги)                        | `Item[]`                                                  | -                            | Массив с шагами                                                                    |
+| [`getItemLabel`](#шаги)                 | `StepsPropGetLabel`                                       | `(item) => item.label`       | Определяет название шага. Также используется в качестве уникального ключа элемента |
+| [`getItemDescription`](#шаги)           | `StepsPropGetLabel`                                       | `(item) => item.description` | Определяет описание шага.                                                          |
+| [`getItemDisabled?`](#недоступные-шаги) | `StepsPropGetDisabled`                                    | `(item) => item.disabled`    | Определяет флаг недоступен ли шаг                                                  |
+| [`getItemStatus?`](#статус-шагов)       | `StepsPropGetItemStatus`                                  | `(item) => item.status`      | Определяет статус шага                                                             |
+| [`getItemIcon?`](#иконка-шага)          | `StepsPropGetItemIcon`                                    | `(item) => item.icon`        | Определяет иконку шага, иконка отобразится если включено свойство `withNumber`     |
+| [`fitMode?`](#адаптивность)             | `'scroll'` <code>&#124;</code> `'scrollWithButtons'`      | `'scroll'`                   | Способ адаптации при нехватки места                                                |
+| `onChange`                              | `StepsPropOnChange`                                       | -                            | Событие выбора шага                                                                |
+| [`size?`](#размер)                      | `'m'` <code>&#124;</code> `'s'` <code>&#124;</code> `'l'` | `'m'`                        | Размер                                                                             |
+| [`withNumber?`](#размер)                | `boolean`                                                 | -                            | Показать номер шага                                                                |
+| `className?`                            | `string`                                                  | -                            | Дополнительные CSS-классы для компонента                                           |

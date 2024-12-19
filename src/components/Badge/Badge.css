@@ -1,10 +1,23 @@
+/*
+--badge-bg-color-prop: для переопределения цвета фона
+--badge-text-color-prop: для переопределения цвета текста
+--badge-border-color-prop: для переопределения цвета обводки
+*/
+
 .Badge {
+  --badge-bg-color-var: var(--badge-bg-color-prop, var(--badge-bg-color));
+  --badge-text-color-var: var(--badge-text-color-prop, var(--badge-text-color));
+  --badge-border-color-var:
+    var(
+      --badge-border-color-prop,
+      var(--badge-border-color)
+    );
   display: inline-flex;
   align-items: center;
   box-sizing: border-box;
   height: var(--badge-size);
   padding: 0 var(--badge-horizontal-padding);
-  color: var(--badge-text-color);
+  color: var(--badge-text-color-var);
   font-size: var(--badge-text-size);
   font-weight: var(--font-weight-text-semibold);
   line-height: var(--badge-size);
@@ -27,18 +40,18 @@
 
   &_view {
     &_filled {
-      background: var(--badge-bg-color);
+      background: var(--badge-bg-color-var);
     }
 
     &_stroked {
-      box-shadow: inset 0 0 0 1px var(--badge-border-color);
+      box-shadow: inset 0 0 0 1px var(--badge-border-color-var);
     }
 
     &_tinted {
       background:
         color-mix(
           in srgb,
-          var(--badge-bg-color) var(--badge-degree-mixing),
+          var(--badge-bg-color-var) var(--badge-degree-mixing),
           var(--color-bg-default)
         );
     }
@@ -56,7 +69,7 @@
     background: transparent;
     border: var(--badge-minified-border-size) solid transparent;
     border-radius: 99em;
-    box-shadow: inset 0 0 0 var(--badge-size) var(--badge-bg-color);
+    box-shadow: inset 0 0 0 var(--badge-size) var(--badge-bg-color-var);
   }
 
   &-Icon {

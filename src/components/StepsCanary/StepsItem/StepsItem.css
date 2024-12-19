@@ -1,0 +1,87 @@
+.canary--StepsItem {
+  --steps-item-text-color: var(--color-typo-secondary);
+  --steps-item-badge-bg-color: var(--color-bg-secondary);
+  --steps-item-badge-text-color: var(--color-typo-secondary);
+  --steps-item-line-color: var(--color-bg-border);
+  --steps-item-cursor: pointer;
+  display: contents;
+
+  &::after {
+    content: '';
+    height: var(--space-3xs);
+    background-color: var(--steps-item-line-color);
+    border-radius: 99em;
+  }
+
+  &_active {
+    --steps-item-text-color: var(--color-typo-primary);
+    --steps-item-cursor: auto;
+    --steps-item-line-color: var(--color-control-bg-primary);
+  }
+
+  &_active&_status {
+    &_error {
+      --steps-item-line-color: var(--color-bg-alert);
+    }
+
+    &_resolved {
+      --steps-item-line-color: var(--color-control-bg-primary);
+    }
+  }
+
+  &_disabled {
+    --steps-item-text-color: var(--color-control-typo-disable);
+    --steps-item-badge-bg-color: var(--color-control-bg-disable);
+    --steps-item-badge-text-color: var(--color-control-typo-disable);
+    --steps-item-line-color: var(--color-control-bg-disable);
+    --steps-item-cursor: no-drop;
+  }
+
+  &:not(&_active, &_disabled) &-Button:hover &-Label,
+  &:not(&_active, &_disabled) &-Button:focus &-Label {
+    color: var(--color-control-typo-secondary-hover);
+  }
+
+  &-Button {
+    min-width: var(--steps-item-min-width);
+    max-width: var(--steps-item-max-width);
+    margin: 0;
+    padding: 0;
+    color: var(--steps-item-text-color);
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    cursor: var(--steps-item-cursor);
+  }
+
+  &-Badge {
+    /* бейджик находится в акцентной теме */
+    --badge-bg-color-prop: var(--steps-item-badge-bg-color);
+    --badge-text-color-prop: var(--steps-item-badge-text-color);
+    flex: none;
+    margin-top: var(--steps-item-badge-margin-top);
+
+    &_active:not(.canary--StepsItem-Badge_disabled) {
+      --steps-item-badge-bg-color: var(--color-control-bg-primary);
+      --steps-item-badge-text-color: var(--color-typo-primary);
+    }
+
+    &_status {
+      &_error:not(.canary--StepsItem-Badge_disabled) {
+        --steps-item-badge-bg-color: var(--color-bg-alert);
+        --steps-item-badge-text-color: var(--color-typo-primary);
+      }
+
+      &_resolved:not(.canary--StepsItem-Badge_disabled) {
+        --steps-item-badge-bg-color: var(--color-control-bg-primary);
+        --steps-item-badge-text-color: var(--color-typo-primary);
+      }
+    }
+  }
+
+  &-Label:not(&-Label_wordWrap) {
+    white-space: nowrap;
+  }
+}
