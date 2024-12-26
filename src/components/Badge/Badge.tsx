@@ -75,7 +75,7 @@ export const Badge = forwardRefWithAs<BadgeProps>((props, ref) => {
         [className],
       )}
       ref={ref}
-      title={title || (minified && label)}
+      title={title || (minified && label) || undefined}
       style={{
         ...style,
         '--badge-bg-color': getBgColor(status),

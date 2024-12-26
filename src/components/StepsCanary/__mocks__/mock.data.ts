@@ -1,23 +1,16 @@
+import { StepsItemDefault } from '../types';
+
 export type SimpleItem = string;
 
 export const simpleItems: SimpleItem[] = [
   'Главное',
   'Важное',
-  'Необязательное Необязательное Необязательное Необязательное',
+  'Необязательное',
 ];
 
-export type Item = {
-  label: string;
-  disabled?: boolean;
-  finish?: boolean;
-  skip?: boolean;
-};
-
-export const items: Item[] = [
+export const items: StepsItemDefault[] = [
   {
     label: 'Главное',
-    finish: true,
-    skip: true,
   },
   {
     label: 'Важное',

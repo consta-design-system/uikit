@@ -3,7 +3,7 @@ import './StepsItem.css';
 import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
-import { Badge, BadgePropSize, BadgePropStatus } from '##/components/Badge';
+import { Badge, BadgePropSize } from '##/components/Badge';
 import { Text, TextPropSize } from '##/components/Text';
 import { cnMixFlex } from '##/mixs/MixFlex';
 import { cnCanary } from '##/utils/bem';
@@ -24,18 +24,13 @@ type Props = {
   icon?: IconComponent;
   description?: string;
   withNumber?: boolean;
+  labelWordWrap?: boolean;
 };
 
 const badgeSizeMap: Record<StepsPropSize, BadgePropSize> = {
   s: 'xs',
   m: 's',
   l: 's',
-};
-
-const badgeStatusMap: Record<StepItemStatus | 'default', BadgePropStatus> = {
-  default: 'system',
-  resolved: 'normal',
-  error: 'alert',
 };
 
 const descriptionSizeMap: Record<StepsPropSize, TextPropSize> = {
@@ -58,6 +53,7 @@ export const StepsStep = React.forwardRef<HTMLButtonElement, Props>(
       description,
       withNumber,
       className,
+      labelWordWrap,
     } = props;
 
     const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -74,11 +70,7 @@ export const StepsStep = React.forwardRef<HTMLButtonElement, Props>(
         <button
           ref={ref}
           className={cnStepsStep('Button', [
-            cnMixFlex({
-              flex: 'flex',
-              direction: 'column',
-              gap: '2xs',
-            }),
+            cnMixFlex({ flex: 'flex', gap: 'xs' }),
             className,
           ])}
           type="button"
@@ -86,37 +78,43 @@ export const StepsStep = React.forwardRef<HTMLButtonElement, Props>(
           onClick={clickHandler}
           disabled={disabled}
         >
-          <Text
-            as="div"
-            className={cnStepsStep('Label', [
-              cnMixFlex({ flex: 'flex', align: 'center', gap: 'xs' }),
-            ])}
-            size={size}
-            lineHeight="m"
+          {withNumber && (
+            <Badge
+              className={cnStepsStep('Badge', { status, active, disabled })}
+              as="span"
+              iconLeft={icon}
+              label={icon ? undefined : number?.toString()}
+              size={badgeSizeMap[size]}
+              form="round"
+            />
+          )}
+          <div
+            className={cnMixFlex({
+              flex: 'flex',
+              gap: '2xs',
+              direction: 'column',
+            })}
           >
-            {withNumber && (
-              <Badge
-                className={cnStepsStep('Badge')}
-                as="span"
-                iconLeft={icon}
-                label={icon ? undefined : number?.toString()}
-                size={badgeSizeMap[size]}
-                status={
-                  disabled ? 'disabled' : badgeStatusMap[status || 'default']
-                }
-                form="round"
-              />
+            <Text
+              as="div"
+              className={cnStepsStep('Label', { wordWrap: labelWordWrap }, [
+                cnMixFlex({ flex: 'flex', gap: 'xs' }),
+              ])}
+              size={size}
+              lineHeight="m"
+            >
+              {label}
+            </Text>
+            {description && (
+              <Text
+                className={cnStepsStep('Description')}
+                size={descriptionSizeMap[size]}
+                lineHeight="m"
+              >
+                {description}
+              </Text>
             )}
-            {label}
-          </Text>
-
-          <Text
-            className={cnStepsStep('Description')}
-            size={descriptionSizeMap[size]}
-            lineHeight="m"
-          >
-            {description}
-          </Text>
+          </div>
         </button>
         <div
           className={cnStepsStep('Line', {

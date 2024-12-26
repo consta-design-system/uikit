@@ -4,8 +4,9 @@
 
 .canary--Steps {
   --steps-item-max-width: var(--steps-item-max-width-prop, auto);
-  --steps-item-min-width: var(--steps-item-max-width-prop, auto);
-  --steps-item-line-height: var(--space-3xs);
+  --steps-item-min-width: var(--steps-item-mix-width-prop, auto);
+  --steps-item-width: var(--steps-item-width-prop, auto);
+
   display: flex;
   align-items: center;
   width: max-content;
@@ -15,12 +16,17 @@
   &_size {
     &_s {
       --steps-list-gap: var(--space-xs);
+      --steps-item-badge-margin-top: calc(var(--space-3xs) / 2);
     }
+
     &_m {
       --steps-list-gap: var(--space-s);
+      --steps-item-badge-margin-top: var(--space-3xs);
     }
+
     &_l {
       --steps-list-gap: var(--space-m);
+      --steps-item-badge-margin-top: var(--space-3xs);
     }
   }
 
@@ -29,9 +35,8 @@
     display: grid;
     overflow-x: scroll;
     overflow-y: visible;
-    gap: calc(var(--space-2xs) - var(--steps-item-line-height))
-      var(--steps-list-gap);
-    grid-template: auto var(--steps-item-line-height) / repeat(
+    gap: var(--space-xs) var(--steps-list-gap);
+    grid-template: var(--steps-item-width) auto / repeat(
         var(--steps-items-length),
         auto
       );
@@ -40,5 +45,10 @@
 
   &-ScrollButton {
     flex: none;
+    &_position {
+      &_right .Button-Icon {
+        transform: rotate(180deg);
+      }
+    }
   }
 }

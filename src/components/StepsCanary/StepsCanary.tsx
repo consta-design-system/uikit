@@ -1,11 +1,18 @@
 import './Steps.css';
 
 import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
-import { IconArrowRight } from '@consta/icons/IconArrowRight';
-import React, { forwardRef, useMemo, useRef, useState } from 'react';
+
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { Button } from '##/components/Button';
 import { useChoiceGroup } from '##/hooks/useChoiceGroup/useChoiceGroup';
+import { useMutableRef } from '##/hooks/useMutableRef';
 import { useOverflow } from '##/hooks/useOverflow/useOverflow';
 import { useScrollElements } from '##/hooks/useScrollElements/useScrollElements';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
@@ -31,8 +38,13 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
     className,
     style,
     withNumber,
+    labelWordWrap,
+    fitMode = 'scroll',
     ...otherProps
   } = withDefaultGetters(props);
+
+  const listRef = useRef<HTMLDivElement>(null);
+  const { refs, scrollTo } = useScrollElements(items, listRef);
 
   const [activeStep, setActiveStep] = useState<number>(-1);
 
@@ -43,30 +55,42 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
     multiple: false,
   });
 
-  useMemo(() => {
-    items.forEach((item, index) => {
-      if (getChecked(item)) {
-        setActiveStep(index);
-      }
-    });
+  const mutableRefs = useMutableRef([
+    activeStep,
+    getOnChange,
+    getItemDisabled,
+  ] as const);
+
+  const isOverflow =
+    useOverflow({ currentRef: listRef }) && fitMode === 'scrollWithButtons';
+
+  const toPrevStep = useCallback((e: React.MouseEvent) => {
+    const [currentStep, getOnChange, getDisabled] = mutableRefs.current;
+    const nextStep = currentStep - 1;
+
+    if (nextStep >= 0) {
+      setActiveStep(nextStep);
+      !getDisabled(items[nextStep]) && getOnChange?.(items[nextStep])(e);
+    }
+  }, []);
+
+  const toNextStep = useCallback((e: React.MouseEvent) => {
+    const [currentStep, getOnChange, getDisabled] = mutableRefs.current;
+    const prevStep = currentStep + 1;
+
+    if (prevStep <= items.length - 1) {
+      setActiveStep(prevStep);
+      !getDisabled(items[prevStep]) && getOnChange?.(items[prevStep])(e);
+    }
+  }, []);
+
+  useEffect(() => {
+    setActiveStep(items.findIndex(getChecked));
   }, [items, value]);
 
-  const { refs, scrollTo } = useScrollElements(items);
-
-  const stepsRef = useRef<HTMLDivElement>(null);
-
-  const isOverflow = useOverflow({ currentRef: stepsRef });
-
-  const changeStep = (e: React.MouseEvent, prev: boolean) => {
-    if (prev && activeStep !== 0) {
-      getOnChange(items[activeStep - 1])(e);
-      scrollTo(activeStep - 1);
-    }
-    if (!prev && activeStep !== items.length - 1) {
-      getOnChange(items[activeStep + 1])(e);
-      scrollTo(activeStep + 1);
-    }
-  };
+  useEffect(() => {
+    scrollTo(activeStep);
+  }, [activeStep]);
 
   return (
     <div
@@ -80,17 +104,17 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
     >
       {isOverflow && (
         <Button
-          className={cnSteps('ScrollButton')}
+          className={cnSteps('ScrollButton', { position: 'left' })}
           iconLeft={IconArrowLeft}
           view="clear"
           onlyIcon
           size="xs"
           type="button"
-          onClick={(e) => changeStep(e, true)}
+          onClick={toPrevStep}
         />
       )}
       <div
-        ref={stepsRef}
+        ref={listRef}
         className={cnSteps('List', [cnMixScrollBar({ invisible: true })])}
       >
         {items.map((item, index) => (
@@ -107,18 +131,20 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
             disabled={getItemDisabled(item)}
             status={getItemStatus(item)}
             description={getItemDescription(item)}
+            labelWordWrap={labelWordWrap}
+            icon={getItemIcon(item)}
           />
         ))}
       </div>
       {isOverflow && (
         <Button
-          className={cnSteps('ScrollButton')}
-          iconLeft={IconArrowRight}
+          className={cnSteps('ScrollButton', { position: 'right' })}
+          iconLeft={IconArrowLeft}
           view="clear"
           onlyIcon
           size="xs"
           type="button"
-          onClick={(e) => changeStep(e, false)}
+          onClick={toNextStep}
         />
       )}
     </div>

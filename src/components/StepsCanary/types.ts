@@ -43,7 +43,7 @@ export type StepsProps<ITEM = StepsItemDefault> = PropsWithHTMLAttributesAndRef<
   {
     items: ITEM[];
     value: ITEM;
-    onChange: StepsPropOnChange<ITEM>;
+    onChange?: StepsPropOnChange<ITEM>;
     getItemLabel?: StepsPropGetItemLabel<ITEM>;
     getItemDisabled?: StepsPropGetItemDisabled<ITEM>;
     getItemStatus?: StepsPropGetItemStatus<ITEM>;
@@ -52,6 +52,8 @@ export type StepsProps<ITEM = StepsItemDefault> = PropsWithHTMLAttributesAndRef<
     size?: StepsPropSize;
     className?: string;
     withNumber?: boolean;
+    fitMode?: 'scroll' | 'scrollWithButtons';
+    labelWordWrap?: boolean;
   },
   HTMLDivElement
 > &

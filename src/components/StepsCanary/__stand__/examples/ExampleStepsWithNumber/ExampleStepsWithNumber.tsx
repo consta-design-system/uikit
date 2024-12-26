@@ -6,7 +6,7 @@ import { Steps } from '../../../StepsCanary';
 
 const getItemLabel = <T,>(item: T) => item;
 
-export const ExampleStepsValue = () => {
+export const ExampleStepsWithNumber = () => {
   const [value, setValue] = useState(items[0]);
 
   return (
@@ -16,6 +16,7 @@ export const ExampleStepsValue = () => {
         value={value}
         getItemLabel={getItemLabel}
         onChange={setValue}
+        withNumber
       />
     </Example>
   );

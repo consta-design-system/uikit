@@ -1,19 +1,21 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 import { ExampleStepsValue } from './examples/ExampleStepsValue/ExampleStepsValue';
 import { ExampleStepsDisabled } from './examples/ExampleStepsDisabled/ExampleStepsDisabled';
-import { ExampleStepsCompleted } from './examples/ExampleStepsCompleted/ExampleStepsCompleted';
-import { ExampleStepsSkipped } from './examples/ExampleStepsSkipped/ExampleStepsSkipped';
 import { ExampleStepsContent } from './examples/ExampleStepsContent/ExampleStepsContent';
 import { ExampleStepsSize } from './examples/ExampleStepsSize/ExampleStepsSize';
 import { ExampleStepsAdaptive } from './examples/ExampleStepsAdaptive/ExampleStepsAdaptive';
+import { ExampleStepsIcon } from './examples/ExampleStepsIcon/ExampleStepsIcon';
+import { ExampleStepsWithNumber } from './examples/ExampleStepsWithNumber/ExampleStepsWithNumber';
+import { ExampleStepsStatus } from './examples/ExampleStepsStatus/ExampleStepsStatus';
 
 ```tsx
-import { Steps } from '@consta/uikit/Steps';
+import { Steps } from '@consta/uikit/StepsCanary';
 ```
 
 <MdxMenu>
 
 - [Шаги](#шаги)
+  - [Тип шага по умолчанию](#тип-шага-по-умолчанию)
   - [Активный шаг](#активный-шаг)
   - [Недоступные шаги](#пройденные-шаги)
   - [Пройденные шаги](#пройденные-шаги)
@@ -32,25 +34,92 @@ import { Steps } from '@consta/uikit/Steps';
 
 > 5 шагов — это максимум, больше делать не стоит.
 
+### Тип шага по умолчанию
+
+По умолчанию используется тип `StepsItemDefault`. Однако компонент может принимать и произвольный тип.
+
+```tsx
+type StepsItemDefault = {
+  label: string;
+  description?: string;
+  disabled?: boolean;
+  status?: 'resolved' | 'error';
+  icon?: IconComponent;
+};
+```
+
+Свойства `label`, `description`, `disabled`, `status`, `icon` компонент будет оптимистично брать опираясь на тип по умолчанию. Можно указать компоненту другое место хранения свойств шага.
+
 ### Активный шаг
 
 Это шаг, в котором находится пользователь, за него отвечает свойство `value`
 
+<MdxTabs>
+
 ```tsx
-type Item = string;
+import { Steps } from '@consta/uikit/StepsCanary';
 
-const items: Item[] = ['Главное', 'Важное', 'Необязательное'];
+const items: string[] = ['Главное', 'Важное', 'Необязательное'];
 
-<Steps items={items} value={items[1]} getItemLabel={(item) => item} />;
+const getItemLabel = <T,>(item: T) => item;
+
+const ExampleStepsValue = () => {
+  const [value, setValue] = useState(items[0]);
+
+  return (
+    <Steps
+      items={items}
+      value={value}
+      getItemLabel={getItemLabel}
+      onChange={setValue}
+    />
+  );
+};
 ```
 
 <ExampleStepsValue />
+
+</MdxTabs>
+
+### Номер шаг
+
+Укажите компоненту свойство `withNumber` чтобы отразить его порядковый номер.
+
+<MdxTabs>
+
+```tsx
+import { Steps } from '@consta/uikit/StepsCanary';
+
+const items: string[] = ['Главное', 'Важное', 'Необязательное'];
+
+const getItemLabel = <T,>(item: T) => item;
+
+const ExampleStepsValue = () => {
+  const [value, setValue] = useState(items[0]);
+
+  return (
+    <Steps
+      items={items}
+      value={value}
+      getItemLabel={getItemLabel}
+      onChange={setValue}
+      withNumber
+    />
+  );
+};
+```
+
+<ExampleStepsWithNumber />
+
+</MdxTabs>
 
 ### Недоступные шаги
 
 Это шаги, которые пока нельзя пройти. Например, они откроются, когда пользователь пройдет предыдущий шаг.
 
-Такие шаги выделены цветом. Их можно получить с помощью функции `getItemDisabled`.
+Их можно указать в свойстве `disabled` шага или с помощью функции `getItemDisabled`.
+
+<MdxTabs>
 
 ```tsx
 type Item = {
@@ -71,139 +140,93 @@ const items: Item[] = [
   },
 ];
 
-<Steps
-  items={items}
-  getItemDisabled={(item) => item.disabled}
-  value={items[2]}
-  onChange={emptyFunction}
-/>;
+export const ExampleStepsDisabled = () => {
+  const [value, setValue] = useState(items[0]);
+
+  return <Steps items={items} value={value} onChange={setValue} />;
+};
 ```
 
 <ExampleStepsDisabled />
 
-### Пройденные шаги
+</MdxTabs>
 
-Пройденные шаги — те, к которым пользователю не нужно возвращаться. Например,
-те, в которых он ответил на все вопросы или заполнил все обязательные поля в форме.
+### Иконка шага
 
-Такие шаги выделены цветом и иконкой `IconCheck`. Их можно получить с помощью функции `getItemCompleted`.
+Компонент может отобразить иконку в место номера шага, укажите иконку в свойстве `icon` шага или с помощью функции `getItemIcon`.
+
+<MdxTabs>
 
 ```tsx
-type Item = {
-  label: string;
-  finish?: boolean;
-};
+export const items: StepsItemDefault[] = [
+  {
+    label: 'Планирование',
+    icon: IconCalendar,
+  },
+  {
+    label: 'Расчет средств',
+    icon: IconCalculator,
+  },
+  {
+    label: 'Разработка',
+    icon: IconWrench,
+  },
+  {
+    label: 'Итог',
+    icon: IconFlagFilled,
+  },
+];
 
-const items: Item[] = [
+export const ExampleStepsIcon = () => {
+  const [value, setValue] = useState(items[0]);
+
+  return <Steps items={items} value={value} onChange={setValue} withNumber />;
+};
+```
+
+<ExampleStepsIcon />
+
+</MdxTabs>
+
+### Статус шагов
+
+Статус шага можно указать в свойстве `status` шага или с помощью функции `getItemStatus`. Желательно шаги со статусом помечать соответствующими иконками.
+
+<MdxTabs>
+
+```tsx
+export const items: StepsItemDefault[] = [
   {
     label: 'Главное',
-    finish: true,
+    status: 'resolved',
+    icon: IconCheck,
   },
   {
     label: 'Важное',
+    status: 'error',
+    icon: IconClose,
   },
   {
     label: 'Необязательное',
   },
 ];
 
-<Steps
-  items={items}
-  getItemCompleted={(item) => item.finish}
-  value={items[1]}
-  onChange={emptyFunction}
-/>;
-```
+export const ExampleStepsStatus = () => {
+  const [value, setValue] = useState(items[1]);
 
-<ExampleStepsCompleted />
-
-### Пропущенные шаги
-
-Пропущенные шаги — те, на которых пользователь побывал, но что-то не доделал: например,
-не ответил на вопросы или не заполнил поля.
-
-Такие шаги выделены цветом. Их можно получить с помощью функции `getItemSkipped`.
-
-```tsx
-type Item = {
-  label: string;
-  skip?: boolean;
-};
-
-const items: Item[] = [
-  {
-    label: 'Главное',
-    skip: true,
-  },
-  {
-    label: 'Важное',
-  },
-  {
-    label: 'Необязательное',
-  },
-];
-
-<Steps
-  items={items}
-  getItemSkipped={(item) => item.skip}
-  value={items[1]}
-  onChange={emptyFunction}
-/>;
-```
-
-<ExampleStepsSkipped />
-
-## Содержимое
-
-Вы можете поместить компонент шагами в любое место на странице и при их переключении
-отображать что угодно: формы, кнопки, текст, что-то ещё.
-
-Можно добавить дополнительные кнопки для переключения между шагами — например, **Вперёд** и **Назад**.
-По умолчанию таких кнопок нет.
-
-```tsx
-export const Items: string[] = ['Главное', 'Важное', 'Необязательное'];
-
-const getContent = (index: number) => `Контент на шаге №${index + 1}`;
-const getLabel = (item: string) => item;
-
-export const ExampleStepsContent = () => {
-  const [activeStep, setActiveStep] = useState<string>(items[0]);
-
-  const activeStepIndex = items.findIndex((item) => item === activeStep);
-
-  const handleNext = () => setActiveStep(items[activeStepIndex + 1]);
-  const handlePrev = () => setActiveStep(items[activeStepIndex - 1]);
-
-  return (
-    <>
-      <Steps
-        items={items}
-        getItemLabel={getLabel}
-        value={activeStep}
-        onChange={setActiveStep}
-      />
-      <div>{getContent(activeStepIndex)}</div>
-      <Button
-        label="Предыдущий"
-        onClick={handlePrev}
-        disabled={activeStepIndex === 0}
-      />
-      <Button
-        label="Следующий"
-        onClick={handleNext}
-        disabled={activeStepIndex === items.length - 1}
-      />
-    </>
-  );
+  return <Steps items={items} value={value} onChange={setValue} withNumber />;
 };
 ```
 
-<ExampleStepsContent />
+<ExampleStepsStatus />
+
+</MdxTabs>
 
 ## Размер
 
 За размер отвечает свойство `size`.
+
+<MdxTabs>
 
 ```tsx
 export const Items: string[] = ['Главное', 'Важное', 'Необязательное'];
@@ -215,12 +238,40 @@ export const Items: string[] = ['Главное', 'Важное', 'Необяз�
 
 <ExampleStepsSize />
 
+</MdxTabs>
+
 ## Адаптивность
 
-На мобильных и компактных экранах компонент заполняет всю доступную ширину.
-Если что-то не помещается, появляется прокрутка. Обозначение шагов и их названия сохраняются. Прокручивать список можно кнопками или свайпами вправо и влево (для мобильных устройств). Например, так:
+На мобильных и компактных экранах компонент заполняет всю доступную ширину. Свойство `fitMode` определяет как компонент будет отображаться в случае если не помещается в ширину контейнера, варианты `'scroll'` и `'scrollWithButtons'`
+
+<MdxTabs>
+
+```tsx
+const getItemLabel = <T,>(item: T) => item;
+
+export const ExampleStepsAdaptive = () => (
+  <div style={{ maxWidth: 300 }}>
+    <Steps
+      items={steps}
+      value={steps[0]}
+      getItemLabel={getItemLabel}
+      withNumber
+      fitMode="scroll"
+    />
+    <Steps
+      items={steps}
+      value={steps[0]}
+      getItemLabel={getItemLabel}
+      withNumber
+      fitMode="scrollWithButtons"
+    />
+  </div>
+);
+```
 
 <ExampleStepsAdaptive />
+
+</MdxTabs>
 
 ## Импорт
 
@@ -231,23 +282,12 @@ import { Steps } from '@consta/uikit/Steps';
 ## Свойства
 
 ```tsx
-type StepsPropOnChange<ITEM> = (
-  value: ITEM,
-  props: {
-    e: React.MouseEvent;
-  },
-) => void;
-
-type StepsPropGetLabel<ITEM> = (item: ITEM) => string;
-type StepsPropGetDisabled<ITEM> = (item: ITEM) => boolean | undefined;
-type StepsPropGetSkipped<ITEM> = (item: ITEM) => boolean | undefined;
-type StepsPropGetCompleted<ITEM> = (item: ITEM) => boolean | undefined;
-
 type StepsItemDefault = {
   label: string;
+  description?: string;
   disabled?: boolean;
-  skipped?: boolean;
-  completed?: boolean;
+  status?: 'resolved' | 'error';
+  icon?: IconComponent;
 };
 ```
 

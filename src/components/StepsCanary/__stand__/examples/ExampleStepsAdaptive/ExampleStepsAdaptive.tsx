@@ -1,19 +1,37 @@
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { simpleItems as items } from '../../../__mocks__/mock.data';
 import { Steps } from '../../../StepsCanary';
 
-const emptyFunction = () => {};
+const steps = [
+  'Первый шаг',
+  'Второй шаг',
+  'Третий шаг',
+  'Четвертый шаг',
+  'Пятый шаг',
+];
+
+const getItemLabel = <T,>(item: T) => item;
 
 export const ExampleStepsAdaptive = () => (
   <Example col={1}>
-    <Steps
-      style={{ maxWidth: 300 }}
-      items={items}
-      value={items[1]}
-      getItemLabel={(item) => item}
-      onChange={emptyFunction}
-    />
+    <div style={{ maxWidth: 300 }}>
+      <Steps
+        items={steps}
+        value={steps[0]}
+        getItemLabel={getItemLabel}
+        withNumber
+        fitMode="scroll"
+      />
+    </div>
+    <div style={{ maxWidth: 300 }}>
+      <Steps
+        items={steps}
+        value={steps[0]}
+        getItemLabel={getItemLabel}
+        withNumber
+        fitMode="scrollWithButtons"
+      />
+    </div>
   </Example>
 );
