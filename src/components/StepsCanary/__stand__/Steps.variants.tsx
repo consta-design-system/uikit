@@ -146,14 +146,10 @@ const Variants = () => {
         />
       </div>
       <div className={cnStepsVariants('Actions')}>
-        <Button
-          onClick={handlePrev}
-          label="Отклонить"
-          iconLeft={IconArrowNext}
-        />
+        <Button onClick={handlePrev} label="Назад" iconLeft={IconArrowNext} />
         <Button
           onClick={handleNext}
-          label="Принять"
+          label="Далее"
           iconRight={IconArrowPrevious}
         />
       </div>

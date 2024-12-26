@@ -1,14 +1,7 @@
 import './Steps.css';
 
 import { IconArrowLeft } from '@consta/icons/IconArrowLeft';
-
-import React, {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef } from 'react';
 
 import { Button } from '##/components/Button';
 import { useChoiceGroup } from '##/hooks/useChoiceGroup/useChoiceGroup';
@@ -46,14 +39,14 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
   const listRef = useRef<HTMLDivElement>(null);
   const { refs, scrollTo } = useScrollElements(items, listRef);
 
-  const [activeStep, setActiveStep] = useState<number>(-1);
-
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
     getKey: getItemLabel,
     callBack: onChange,
     multiple: false,
   });
+
+  const activeStep = items.findIndex(getChecked);
 
   const mutableRefs = useMutableRef([
     activeStep,
@@ -69,7 +62,6 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
     const nextStep = currentStep - 1;
 
     if (nextStep >= 0) {
-      setActiveStep(nextStep);
       !getDisabled(items[nextStep]) && getOnChange?.(items[nextStep])(e);
     }
   }, []);
@@ -79,14 +71,9 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
     const prevStep = currentStep + 1;
 
     if (prevStep <= items.length - 1) {
-      setActiveStep(prevStep);
       !getDisabled(items[prevStep]) && getOnChange?.(items[prevStep])(e);
     }
   }, []);
-
-  useEffect(() => {
-    setActiveStep(items.findIndex(getChecked));
-  }, [items, value]);
 
   useEffect(() => {
     scrollTo(activeStep);

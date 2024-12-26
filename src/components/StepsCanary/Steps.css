@@ -3,8 +3,6 @@
 */
 
 .canary--Steps {
-  --steps-item-max-width: var(--steps-item-max-width-prop, auto);
-  --steps-item-min-width: var(--steps-item-mix-width-prop, auto);
   --steps-item-width: var(--steps-item-width-prop, auto);
 
   display: flex;
@@ -36,11 +34,15 @@
     overflow-x: scroll;
     overflow-y: visible;
     gap: var(--space-xs) var(--steps-list-gap);
-    grid-template: var(--steps-item-width) auto / repeat(
+    grid-template: auto auto / repeat(
         var(--steps-items-length),
-        auto
+        var(--steps-item-width)
       );
     grid-auto-flow: column;
+  }
+
+  &-Item {
+    max-width: var(--steps-item-max-width-prop);
   }
 
   &-ScrollButton {

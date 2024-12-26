@@ -1,7 +1,6 @@
 .StepsVariants {
   display: flex;
   flex-direction: column;
-  max-width: 550px;
   height: 330px;
   width: 100%;
 

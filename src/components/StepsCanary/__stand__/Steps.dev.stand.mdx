@@ -249,24 +249,30 @@ export const Items: string[] = ['Главное', 'Важное', 'Необяз�
 ```tsx
 const getItemLabel = <T,>(item: T) => item;
 
-export const ExampleStepsAdaptive = () => (
-  <div style={{ maxWidth: 300 }}>
-    <Steps
-      items={steps}
-      value={steps[0]}
-      getItemLabel={getItemLabel}
-      withNumber
-      fitMode="scroll"
-    />
-    <Steps
-      items={steps}
-      value={steps[0]}
-      getItemLabel={getItemLabel}
-      withNumber
-      fitMode="scrollWithButtons"
-    />
-  </div>
-);
+export const ExampleStepsAdaptive = () => {
+  const [value, setValue] = useState(steps[0]);
+
+  return (
+    <div style={{ maxWidth: 300 }}>
+      <Steps
+        items={steps}
+        value={value}
+        onChange={setValue}
+        getItemLabel={getItemLabel}
+        withNumber
+        fitMode="scroll"
+      />
+      <Steps
+        items={steps}
+        onChange={setValue}
+        value={value}
+        getItemLabel={getItemLabel}
+        withNumber
+        fitMode="scrollWithButtons"
+      />
+    </div>
+  );
+};
 ```
 
 <ExampleStepsAdaptive />
@@ -282,23 +288,46 @@ import { Steps } from '@consta/uikit/Steps';
 ## Свойства
 
 ```tsx
-type StepsItemDefault = {
+export type StepItemStatus = 'resolved' | 'error';
+
+export type StepsPropGetItemLabel<ITEM> = (item: ITEM) => string;
+
+export type StepsPropGetItemDescription<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+
+export type StepsPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+
+export type StepsPropGetItemStatus<ITEM> = (
+  item: ITEM,
+) => StepItemStatus | undefined;
+
+export type StepsPropGetItemIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+
+export type StepsItemDefault = {
   label: string;
   description?: string;
   disabled?: boolean;
-  status?: 'resolved' | 'error';
+  status?: StepItemStatus;
   icon?: IconComponent;
 };
 ```
 
-| Свойство                                | Тип                     | По умолчанию | Описание                                                                             |
-| --------------------------------------- | ----------------------- | ------------ | ------------------------------------------------------------------------------------ |
-| [`value`](#активный-шаг)                | `Item`                  | -            | Номер шага                                                                           |
-| [`items`](#шаги)                        | `Item[]`                | -            | Массив с шагами                                                                      |
-| [`getItemLabel`](#шаги)                 | `StepsPropGetLabel`     | -            | Получает название для шага. Также используется в качестве уникального ключа элемента |
-| [`getItemDisabled?`](#недоступные-шаги) | `StepsPropGetDisabled`  | -            | Определяет флаг недоступен ли шаг                                                    |
-| [`getItemCompleted?`](#пройденные-шаги) | `StepsPropGetSkipped`   | -            | Определяет флаг завершен ли шаг                                                      |
-| [`getItemSkipped?`](#пропущенные-шаги)  | `StepsPropGetCompleted` | -            | Определяет флаг пропущен ли шаг                                                      |
-| `onChange`                              | `StepsPropOnChange`     | -            | Меняет шаги                                                                          |
-| [`size?`](#размер)                      | `'m', 's', 'l'`         | `'m'`        | Размер элементов компонента                                                          |
-| `className?`                            | `string`                | -            | Дополнительные CSS-классы для компонента                                             |
+| Свойство                                | Тип                                                       | По умолчанию                 | Описание                                                                           |
+| --------------------------------------- | --------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------- |
+| [`value`](#активный-шаг)                | `Item`                                                    | -                            | Выбранный шаг                                                                      |
+| [`items`](#шаги)                        | `Item[]`                                                  | -                            | Массив с шагами                                                                    |
+| [`getItemLabel`](#шаги)                 | `StepsPropGetLabel`                                       | `(item) => item.label`       | Определяет название шага. Также используется в качестве уникального ключа элемента |
+| [`getItemDescription`](#шаги)           | `StepsPropGetLabel`                                       | `(item) => item.description` | Определяет описание шага.                                                          |
+| [`getItemDisabled?`](#недоступные-шаги) | `StepsPropGetDisabled`                                    | `(item) => item.disabled`    | Определяет флаг недоступен ли шаг                                                  |
+| [`getItemStatus?`](#статус-шагов)       | `StepsPropGetItemStatus`                                  | `(item) => item.status`      | Определяет статус шага                                                             |
+| [`getItemIcon?`](#иконка-шага)          | `StepsPropGetItemIcon`                                    | `(item) => item.icon`        | Определяет иконку шага, иконка отобразится если включено свойство `withNumber`     |
+| [`fitMode?`](#адаптивность)             | `'scroll'` <code>&#124;</code> `'scrollWithButtons'`      | `'scroll'`                   | Способ адаптации при нехватки места                                                |
+| `onChange`                              | `StepsPropOnChange`                                       | -                            | Событие выбора шага                                                                |
+| [`size?`](#размер)                      | `'m'` <code>&#124;</code> `'s'` <code>&#124;</code> `'l'` | `'m'`                        | Размер                                                                             |
+| [`withNumber?`](#размер)                | `boolean`                                                 | -                            | Показать номер шага                                                                |
+| `className?`                            | `string`                                                  | -                            | Дополнительные CSS-классы для компонента                                           |
