@@ -117,12 +117,6 @@ export const StepsStep = React.forwardRef<HTMLButtonElement, Props>(
             )}
           </div>
         </button>
-        <div
-          className={cnStepsStep('Line', {
-            status: active ? status : undefined,
-            disabled,
-          })}
-        />
       </div>
     );
   },

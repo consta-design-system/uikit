@@ -80,7 +80,8 @@
     white-space: nowrap;
   }
 
-  &-Line {
+  &:after {
+    content: '';
     background-color: var(--steps-item-line-color);
     height: var(--space-3xs);
     border-radius: 99em;
