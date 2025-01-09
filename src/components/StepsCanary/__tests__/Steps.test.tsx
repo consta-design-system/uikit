@@ -50,6 +50,9 @@ const renderComponent = (props: {
 const getRender = () => screen.getByTestId(testId);
 
 const getItems = () => getRender().querySelectorAll(`.${cnSteps('Item')}`);
+const getButtons = () =>
+  getRender().querySelectorAll(`.${cnStepsStep('Button')}`);
+const getButton = (index = 0) => getButtons()[index] as HTMLElement;
 
 describe('Компонент Steps', () => {
   it('должен рендериться без ошибок', () => {
@@ -87,7 +90,7 @@ describe('Компонент Steps', () => {
 
         renderComponent({ onChange: handleChange });
 
-        const item = getItems()[1];
+        const item = getButton(1);
         fireEvent.click(item);
 
         expect(handleChange).toHaveBeenCalledTimes(1);
@@ -103,7 +106,7 @@ describe('Компонент Steps', () => {
 
         renderComponent({ onChange: handleChange });
 
-        const item = getItems()[2];
+        const item = getButton(2);
         fireEvent.click(item);
 
         expect(handleChange).toHaveBeenCalledTimes(0);

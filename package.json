@@ -75,6 +75,9 @@
         "fix": {
           "description": "Bug fix"
         },
+        "test": {
+          "description": "Editing of adding tests"
+        },
         "refactor": {
           "description": "Editing code without fixing bugs or adding new features"
         },

@@ -71,7 +71,6 @@ export const StepsStep = React.forwardRef<HTMLButtonElement, Props>(
           ref={ref}
           className={cnStepsStep('Button', [
             cnMixFlex({ flex: 'flex', gap: 'xs' }),
-            className,
           ])}
           type="button"
           title={label}
