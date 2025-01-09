@@ -77,6 +77,7 @@ export const StepsStep = React.forwardRef<HTMLButtonElement, Props>(
           title={label}
           onClick={clickHandler}
           disabled={disabled}
+          tabIndex={disabled || active ? -1 : undefined}
         >
           {withNumber && (
             <Badge

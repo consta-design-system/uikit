@@ -30,6 +30,13 @@
     --steps-item-cursor: no-drop;
   }
 
+  &:not(&_disabled, &_active) &-Button {
+    &:hover,
+    &:focus {
+      --steps-item-text-color: var(--color-control-typo-secondary-hover);
+    }
+  }
+
   &-Button {
     border: none;
     background-color: transparent;
