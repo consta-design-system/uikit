@@ -9,6 +9,7 @@ type UseScrollElementsResult = {
 
 export function useScrollElements<ITEM>(
   items: ITEM[],
+  containerRef?: React.RefObject<HTMLElement>,
 ): UseScrollElementsResult {
   const refs = useMemo(() => {
     const refArray: React.RefObject<HTMLElement>[] = [];
@@ -22,7 +23,9 @@ export function useScrollElements<ITEM>(
 
   const scrollTo = useDebounce((index: number) => {
     const currentRef = refs[Math.max(index, 0)];
-    const container = currentRef?.current?.parentElement;
+    const container =
+      containerRef?.current || currentRef?.current?.parentElement;
+
     if (currentRef?.current && container) {
       const defaultPadding =
         getComputedStyle(container).position !== 'relative'

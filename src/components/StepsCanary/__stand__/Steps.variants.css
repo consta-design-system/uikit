@@ -1,0 +1,15 @@
+.StepsVariants {
+  display: flex;
+  flex-direction: column;
+  height: 330px;
+  width: 100%;
+
+  &-Content {
+    flex: 1;
+  }
+
+  &-Actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}
