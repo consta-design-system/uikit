@@ -1,5 +1,16 @@
 # Changelog
 
+## v5.17.0 (09/01/2025)
+Самое важное:
+- Добавили новый `canary` компонент `Steps`. Полностью переработали дизайн компонента и добавили новые возможности.
+
+---
+
+- [test(StepsCanary): edit tests](https://github.com/consta-design-system/uikit/commit/7a57287ad45afb9d066ea55b186812629cf34ed7) - [@gizeasy](https://github.com/gizeasy)
+- [feat(StepsCanary): new canary component (#3861)](https://github.com/consta-design-system/uikit/commit/a62788e19d34bc78681148bc70fb812197fa2706) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.16.0 (12/12/2024)
 Самое важное:
 - В `Attachment` добавили возможность указывать несколько кнопок с действиями.
@@ -396,9 +407,3 @@
 - [fix(Selects): fix render numbers value (#3297)](https://github.com/consta-design-system/uikit/commit/f129a3482476c59038252295f9a5853c203b12b2) - [@N1MBER](https://github.com/N1MBER)
 - [fix(Button): property type set to all places (#3295)](https://github.com/consta-design-system/uikit/commit/ebec6dba46e0fcc789f0f5714348ab906bfb180d) - [@N1MBER](https://github.com/N1MBER)
 - [docs(List): remove non exist field from documentation (#3296)](https://github.com/consta-design-system/uikit/commit/f70ea5167e2888489215f8336e7dd8cf9c2dc9d2) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.30.0 (20/09/2023)
-- [fix(List): fixed render undefined in renderSlot (#3289)](https://github.com/consta-design-system/uikit/commit/78515e8ae5107cc73e4d4f9c84eb6bdf978af8b7) - [@gizeasy](https://github.com/gizeasy)
-- [feat(BookmarkTabs): add tab navigation to close button (#3256)](https://github.com/consta-design-system/uikit/commit/3913dc4397e1d773999ac2e0ace5a825681b7aa0) - [@N1MBER](https://github.com/N1MBER)
