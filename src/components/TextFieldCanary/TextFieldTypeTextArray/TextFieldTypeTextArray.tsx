@@ -258,14 +258,16 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onKeyDown={handleInputKeyDown}
             ref={controlRef}
             placeholder={placeholder}
-            renderValue={(item, index) =>
-              renderValueItem({
-                item,
-                index,
-                size,
-                disabled,
-                onRemove: getRemoveItem(index),
-              })
+            renderValue={(items) =>
+              items.map((item, index) =>
+                renderValueItem({
+                  item,
+                  index,
+                  size,
+                  disabled,
+                  onRemove: getRemoveItem(index),
+                }),
+              )
             }
             onCopy={onCopy}
             onCopyCapture={onCopyCapture}
@@ -278,6 +280,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onKeyUp={onKeyUp}
             onKeyUpCapture={onKeyUpCapture}
             onWheel={onWheel}
+            disabled={disabled}
           />
         </div>
       </FieldControlLayout>
