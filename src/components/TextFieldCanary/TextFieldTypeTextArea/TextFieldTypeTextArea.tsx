@@ -43,7 +43,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       leftSide,
       rightSide,
       autoComplete,
-      withClearButton,
+      clearButton,
       readOnly,
       type,
       tabIndex,
@@ -68,6 +68,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       onPasteCapture,
       onClear,
       onWheel,
+      iconClear,
       ...otherProps
     } = props;
 
@@ -92,7 +93,7 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
 
     const rightSlotsRefs = useRefs<HTMLDivElement>(2, [
       !!rightSide,
-      withClearButton && !disabled && withValue,
+      clearButton && !disabled && withValue,
     ]);
 
     const slotSizes = useResizeObserved(rightSlotsRefs, getElementWidth);
@@ -149,8 +150,12 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
         size={size}
         leftSide={renderSide(leftSide, size, iconSize)}
         rightSide={[
-          withClearButton && !disabled && withValue && (
-            <FieldClearButton size={size} onClick={handleClear} />
+          clearButton && !disabled && withValue && (
+            <FieldClearButton
+              size={size}
+              onClick={handleClear}
+              icon={iconClear}
+            />
           ),
           renderSide(rightSide, size, iconSize),
         ]}

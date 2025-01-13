@@ -5,3 +5,7 @@
   --mix-hit-slop-right: var(--field-clear-button-fit-slop);
   --mix-hit-slop-bottom: var(--field-clear-button-fit-slop);
 }
+
+.FieldControlLayout:not(.FieldControlLayout_disabled) .FieldButton {
+  cursor: pointer;
+}

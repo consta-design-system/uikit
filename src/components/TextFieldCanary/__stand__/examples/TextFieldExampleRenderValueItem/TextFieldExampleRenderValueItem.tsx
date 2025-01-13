@@ -39,7 +39,7 @@ export const TextFieldExampleRenderValueItem = () => {
         value={value}
         onChange={setValue}
         type="textarray"
-        withClearButton
+        clearButton
         renderValueItem={RenderValueItem}
       />
     </Example>

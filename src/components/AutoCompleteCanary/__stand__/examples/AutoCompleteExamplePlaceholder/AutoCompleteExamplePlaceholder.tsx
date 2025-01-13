@@ -26,7 +26,7 @@ const items: Item[] = [
 export const AutoCompleteExamplePlaceholder = () => {
   const [value, setValue] = useState<string | null>(null);
   return (
-    <Example>
+    <Example col={1}>
       <AutoComplete
         type="text"
         placeholder="Введите значение"

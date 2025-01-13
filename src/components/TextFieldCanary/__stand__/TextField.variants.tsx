@@ -1,6 +1,6 @@
 import { IconPhoto } from '@consta/icons/IconPhoto';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   fieldPropForm,
@@ -74,7 +74,7 @@ const Variants = () => {
   const size = useSelect('size', fieldPropSize, fieldPropSizeDefault);
   const view = useSelect('view', fieldPropView, fieldPropViewDefault);
   const disabled = useBoolean('disabled', false);
-  const withClearButton = useBoolean('withClearButton', true);
+  const clearButton = useBoolean('clearButton', true);
 
   const maxLength = useNumber('maxLength', 200, type !== 'number');
   const placeholder = useText('placeholder', 'Подсказка в поле');
@@ -96,8 +96,24 @@ const Variants = () => {
   const leftSide = leftSideType && leftSideSelect[leftSideType];
   const rightSide = rightSideType && rightSideSelect[rightSideType];
 
+  const [value, setValue] = useState<string[] | null>(null);
+  const [stringValue, setStringValue] = useState<string | null>(null);
+
+  const onChange = (value: string[] | null) => {
+    setStringValue(null);
+    setValue(value);
+  };
+
   return (
     <TextField
+      {...(type === 'textarray'
+        ? {
+            value,
+            inputValue: stringValue,
+            onInputChange: setStringValue,
+            onChange,
+          }
+        : {})}
       id="inputId"
       form={form}
       status={status}
@@ -108,7 +124,7 @@ const Variants = () => {
       leftSide={leftSide}
       rightSide={rightSide}
       maxLength={maxLength}
-      withClearButton={withClearButton}
+      clearButton={clearButton}
       placeholder={placeholder}
       type={type}
       incrementButtons={type === 'number' ? incrementButtons : undefined}

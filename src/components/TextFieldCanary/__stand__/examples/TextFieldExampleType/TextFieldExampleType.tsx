@@ -51,7 +51,7 @@ export const TextFieldExampleTypeTextArray = () => {
         value={value}
         onChange={onChange}
         type="textarray"
-        withClearButton
+        clearButton
         inputValue={stringValue}
         onInputChange={setStringValue}
       />

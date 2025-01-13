@@ -34,7 +34,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
       leftSide,
       rightSide,
       autoComplete,
-      withClearButton,
+      clearButton,
       readOnly,
       type = 'text',
       tabIndex,
@@ -54,6 +54,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
       onPasteCapture,
       onClear,
       onWheel,
+      iconClear,
       ...otherProps
     } = props;
 
@@ -85,8 +86,12 @@ export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
         size={size}
         leftSide={renderSide(leftSide, size, iconSize)}
         rightSide={[
-          withClearButton && !disabled && withValue && (
-            <FieldClearButton size={size} onClick={handleClear} />
+          clearButton && !disabled && withValue && (
+            <FieldClearButton
+              size={size}
+              onClick={handleClear}
+              icon={iconClear}
+            />
           ),
           renderSide(rightSide, size, iconSize),
         ]}
