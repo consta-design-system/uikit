@@ -156,12 +156,12 @@ import { withTooltip } from '@consta/uikit/withTooltip';
 
 | Свойство                 | Тип или варианты значения | По умолчанию      | Описание                                                                                                              |
 | ------------------------ | ------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [`size`](#ширина)        | `'s', 'm', 'l'`           | '`m`'             | Максимальная ширина тултипа                                                                                           |
-| [`content`](#содержимое) | `React.ReactNode`         | —                 | Контент тултипа                                                                                                       |
-| [`mode`](#режим-работы)  | `'mouseover', 'click`     | `'mouseover'`     | Режим работы                                                                                                          |
-| `closeOnClickOutside`    | `boolean`                 | `true`            | Скрывает тултип по клику за пределами компонента и тултипа. Работает только при `mode = click`                        |
-| `appearTimeout`          | `number`                  | `400`             | Сколько миллисекунд нужно держать курсор на компоненте, чтобы появился тултип. Работает только при `mode = mouseover` |
-| `exitTimeout`            | `number`                  | `200`             | Сколько миллисекунд нужно держать курсор на компоненте, чтобы тултип исчез. Работает только при `mode = mouseover`    |
+| [`size?`](#ширина)       | `'s', 'm', 'l'`           | '`m`'             | Максимальная ширина тултипа                                                                                           |
+| [`content?`](#содержимое)| `React.ReactNode`         | —                 | Контент тултипа                                                                                                       |
+| [`mode?`](#режим-работы) | `'mouseover', 'click`     | `'mouseover'`     | Режим работы                                                                                                          |
+| `closeOnClickOutside?`   | `boolean`                 | `true`            | Скрывает тултип по клику за пределами компонента и тултипа. Работает только при `mode = click`                        |
+| `appearTimeout?`         | `number`                  | `400`             | Сколько миллисекунд нужно держать курсор на компоненте, чтобы появился тултип. Работает только при `mode = mouseover` |
+| `exitTimeout?`           | `number`                  | `200`             | Сколько миллисекунд нужно держать курсор на компоненте, чтобы тултип исчез. Работает только при `mode = mouseover`    |
 | `direction?`             | `Direction`               | `'upCenter'`      | см. [Popover](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable)                                             |
 | `possibleDirections?`    | `Direction[]`             | `Direction`       | см. [Popover](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable)                                             |
 | `spareDirection?`        | `Direction`               | `'downStartLeft'` | см. [Popover](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable)                                             |
