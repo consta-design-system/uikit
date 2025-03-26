@@ -5,7 +5,7 @@ import {
   fieldPropHovered,
   fieldPropStatus,
   fieldPropView,
-} from '../__mocks__/variants';
+} from '../../__mocks__/variants';
 import {
   getBgColor,
   getBorderColor,
@@ -13,7 +13,7 @@ import {
   getBorderStyle,
   getPadding,
   getSlots,
-} from '../FieldControlLayout/helpers';
+} from '../helpers';
 
 const getBorderStyleResultMap = {
   'default-clear': 'none',

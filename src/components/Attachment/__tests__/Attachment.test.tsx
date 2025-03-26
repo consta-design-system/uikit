@@ -1,6 +1,9 @@
 import { IconSave } from '@consta/icons/IconSave';
 import { fireEvent, render, screen } from '@testing-library/react';
-import * as React from 'react';
+import React from 'react';
+
+import { IconMock } from '##/../__mocks__/IconMock';
+import { setRef } from '##/utils/setRef';
 
 import { Attachment, cnAttachment } from '../Attachment';
 
@@ -32,6 +35,12 @@ function getLoadingText() {
   return getRender().querySelector(`.${cnAttachment('LoadingText')}`);
 }
 
+function getActionsButtons() {
+  return getRender().querySelectorAll(
+    `.${cnAttachment('Actions')} .${cnAttachment('Button')}`,
+  );
+}
+
 function getButtons() {
   return getRender().querySelectorAll(`.${cnAttachment('Button')}`);
 }
@@ -43,6 +52,19 @@ function getButton(index = 0) {
 describe('Компонент Attachment', () => {
   it('должен рендериться без ошибок', () => {
     expect(() => renderComponent({})).not.toThrow();
+  });
+  describe('проверка ref', () => {
+    // const ref = useRef(null);
+
+    it(`ref присвоен`, () => {
+      const ref = { current: null };
+
+      renderComponent({
+        ref: (el: HTMLElement) => setRef(ref, el),
+      });
+
+      expect(ref.current).toBeTruthy();
+    });
   });
   describe('проверка props', () => {
     describe('проверка className', () => {
@@ -150,10 +172,49 @@ describe('Компонент Attachment', () => {
 
         renderComponent({ onClick: handleClick });
 
-        const buttonElement = getRender() as HTMLButtonElement;
+        const render = getRender() as HTMLButtonElement;
 
-        fireEvent.click(buttonElement);
+        fireEvent.click(render);
         expect(handleClick).toHaveBeenCalledTimes(1);
+      });
+    });
+    describe('проверка actions', () => {
+      const actions = [
+        {
+          onClick: jest.fn(),
+          title: 'action 1',
+          icon: IconMock,
+        },
+        {
+          onClick: jest.fn(),
+          title: 'action 2',
+          icon: IconMock,
+        },
+        {
+          onClick: jest.fn(),
+          title: 'action 3',
+          icon: IconMock,
+        },
+      ];
+
+      renderComponent({
+        actions,
+      });
+
+      const buttons = getActionsButtons();
+
+      fireEvent.click(buttons[0]);
+
+      it(`Количество кнопок совпадает с ${actions.length}`, () => {
+        expect(buttons.length).toEqual(actions.length);
+      });
+
+      it(`Отображается иконка`, () => {
+        expect(buttons[0]).toHaveTextContent('IconMock');
+      });
+
+      it(`Обработка клика`, () => {
+        expect(actions[0].onClick).toHaveBeenCalledTimes(1);
       });
     });
   });

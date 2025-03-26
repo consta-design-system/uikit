@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Установка yarn
         id: yarn-setup
@@ -27,7 +27,7 @@ jobs:
           yarn policies set-version 1.22.18
           echo "::set-output name=cache_dir::$(yarn cache dir)"
       - name: Настройка кэширования yarn
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.yarn-setup.outputs.cache_dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}

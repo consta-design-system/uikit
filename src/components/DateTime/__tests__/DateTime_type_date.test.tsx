@@ -97,7 +97,7 @@ describe('Компонент DateTime_type_date', () => {
     });
 
     it('Если текущая дата меньше минимальной, отображается минимальная', () => {
-      jest.useFakeTimers('modern');
+      jest.useFakeTimers();
       jest.setSystemTime(new Date(2000, 0));
       renderComponent({
         minDate: new Date(2001, 0),
@@ -110,7 +110,7 @@ describe('Компонент DateTime_type_date', () => {
     });
 
     it('Если текущая дата больше максимальной, отображается максимальная', () => {
-      jest.useFakeTimers('modern');
+      jest.useFakeTimers();
       jest.setSystemTime(new Date(2000, 0));
       renderComponent({
         maxDate: new Date(1999, 0),

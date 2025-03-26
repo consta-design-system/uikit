@@ -48,8 +48,8 @@ export const DragNDropFieldTooltip: React.FC<DragNDropFieldTooltipProps> = ({
               cnMixSpace({ pL: 'xl' }),
             ])}
           >
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
+            {errors.map((error, index) => (
+              <li key={index}>{error}</li>
             ))}
           </ul>
         )}

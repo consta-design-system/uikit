@@ -13,7 +13,7 @@ import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttri
 type FieldToggleVisiblePasswordButtonProps = PropsWithHTMLAttributesAndRef<
   {
     size?: FieldPropSize;
-    active: boolean;
+    active?: boolean;
     children?: never;
   },
   HTMLButtonElement
@@ -22,7 +22,7 @@ type FieldToggleVisiblePasswordButtonProps = PropsWithHTMLAttributesAndRef<
 export const FieldToggleVisiblePasswordButton = forwardRef<
   HTMLButtonElement,
   FieldToggleVisiblePasswordButtonProps
->(({ size = 'm', active, ...props }, ref) => {
+>(({ size = 'm', active = false, ...props }, ref) => {
   return (
     <FieldButton {...props} ref={ref}>
       <AnimateIconSwitcher
