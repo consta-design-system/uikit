@@ -48,6 +48,7 @@ export const FieldCounter = forwardRef<HTMLDivElement, FieldCounterProps>(
           ])}
           type="button"
           onClick={onDecrementClick}
+          onFocus={onDecrementFocus}
           tabIndex={-1}
         >
           <IconSelect size="xs" />
