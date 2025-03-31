@@ -52,7 +52,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
     getItemAttributes,
     getItemRef,
     getItemLabel,
-    getItemKey,
+    getItemKey: getItemKeyProp,
     onChange,
     iconSize,
     renderItem: renderItemProp = renderItemDefault,
@@ -64,6 +64,8 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
     disabled,
     ...otherProps
   } = withDefaultGetters(props);
+
+  const getItemKey = getItemKeyProp || getItemLabel;
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value: value || null,
