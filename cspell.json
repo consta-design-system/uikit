@@ -1,16 +1,10 @@
 /* cspell:disable */
 /* cspell:enable */
-/* cspell:disable-next-line */{
-  "import": [
-    "@cspell/dict-ru_ru/cspell-ext.json"
-  ],
-  "files": [
-    "src/**"
-  ],
+/* cspell:disable-next-line */ {
+  "import": ["@cspell/dict-ru_ru/cspell-ext.json"],
+  "files": ["src/**"],
   "language": "en, ru",
-  "ignorePaths": [
-    "*.svg"
-  ],
+  "ignorePaths": ["*.svg"],
   "words": [
     "автокомплит",
     "аудиофайлы",
