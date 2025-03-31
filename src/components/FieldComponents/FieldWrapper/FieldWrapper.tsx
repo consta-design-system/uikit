@@ -1,37 +1,26 @@
-import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
 import { Text } from '##/components/Text';
-import { cnMixFlex, MixFlexPropDirection } from '##/mixs/MixFlex';
-import { Space } from '##/mixs/MixSpace';
+import { cnMixFlex } from '##/mixs/MixFlex';
 import { isString } from '##/utils/type-guards';
 import { forwardRefWithAs } from '##/utils/types/PropsWithAsAttributes';
 
 import { FieldCaption } from '../FieldCaption';
 import { FieldLabel } from '../FieldLabel';
-import { FieldPropSize, FieldPropStatus } from '../types';
 import { cnFieldWrapper } from './cnFieldWrapper';
+import { directionMap, spaceMap } from './helpers';
+import { FieldWrapperProps } from './types';
 
 type Counter = string | number | [string | number, string | number];
 
-type FieldWrapperProps = {
-  children: React.ReactNode;
-  size?: FieldPropSize;
-  label?: string;
-  labelIcon?: IconComponent;
-  labelIconRef?: React.Ref<HTMLSpanElement>;
-  labelPosition?: 'top' | 'left';
-  labelHtmlFor?: string;
-  caption?: string;
-  required?: boolean;
-  status?: FieldPropStatus;
-  side?: React.ReactNode;
-  counter?: Counter;
-};
-
 const renderCounter = (counter: Counter) => {
   return (
-    <Text view="ghost" size="xs" lineHeight="m">
+    <Text
+      className={cnFieldWrapper('Counter')}
+      view="ghost"
+      size="xs"
+      lineHeight="m"
+    >
       {Array.isArray(counter) ? counter.join('/') : counter}
     </Text>
   );
@@ -42,21 +31,6 @@ const renderSide = (side: React.ReactNode) => {
     return <span className={cnFieldWrapper('SideText')}>{side}</span>;
   }
   return side;
-};
-
-const spaceMap: Record<FieldPropSize, Space> = {
-  l: 'xs',
-  m: 'xs',
-  s: '2xl',
-  xs: '2xs',
-};
-
-const directionMap: Record<
-  Exclude<FieldWrapperProps['labelPosition'], undefined>,
-  MixFlexPropDirection
-> = {
-  top: 'column',
-  left: 'row',
 };
 
 export const FieldWrapper = forwardRefWithAs<FieldWrapperProps>(
@@ -144,7 +118,12 @@ export const FieldWrapper = forwardRefWithAs<FieldWrapperProps>(
               })}
             >
               {caption && (
-                <FieldCaption status={status}>{caption}</FieldCaption>
+                <FieldCaption
+                  className={cnFieldWrapper('Caption')}
+                  status={status}
+                >
+                  {caption}
+                </FieldCaption>
               )}
               {counter && renderCounter(counter)}
             </div>

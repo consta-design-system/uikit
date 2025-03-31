@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
 import {
   cnFieldControlLayout,
   FieldControlLayout,
   FieldControlLayoutProps,
-} from '../FieldControlLayout';
+} from '..';
 
 const testId = cnFieldControlLayout();
 
@@ -70,5 +70,61 @@ describe('Компонент FieldControlLayout', () => {
     renderComponent({ rightSide: ['1', 0, false, null] });
 
     expect(getSlots().length).toEqual(2);
+  });
+  it('Компонент корректно обрабатывает состояние hovered', () => {
+    renderComponent();
+
+    const element = getRender();
+    expect(element).not.toHaveStyle(
+      '--field-control-layout-border-color: var(--color-control-bg-border-default-hover)',
+    );
+
+    fireEvent.mouseEnter(element);
+
+    expect(element).toHaveStyle(
+      '--field-control-layout-border-color: var(--color-control-bg-border-default-hover)',
+    );
+
+    fireEvent.mouseLeave(element);
+
+    expect(element).not.toHaveStyle(
+      '--field-control-layout-border-color: var(--color-control-bg-border-default-hover)',
+    );
+  });
+
+  it('Компонент корректно обрабатывает состояние disabled', () => {
+    renderComponent({ disabled: true });
+
+    expect(getRender()).toHaveClass(cnFieldControlLayout({ disabled: true }));
+    expect(getRender()).toHaveStyle(
+      '--field-control-layout-bg-color: var(--color-control-bg-disable)',
+    );
+  });
+
+  it('Компонент корректно обрабатывает состояние focused', () => {
+    renderComponent({ focused: true });
+
+    expect(getRender()).toHaveStyle(
+      '--field-control-layout-border-color: var(--color-control-bg-border-focus)',
+    );
+  });
+
+  it('Компонент корректно обрабатывает разные размеры', () => {
+    renderComponent({ size: 's' });
+    expect(getRender()).toHaveStyle(
+      '--field-control-layout-height: var(--control-height-s)',
+    );
+  });
+
+  it('Компонент корректно обрабатывает разные формы', () => {
+    renderComponent({ form: 'round' });
+    expect(getRender()).toHaveStyle(
+      '--field-control-layout-border-radius: calc(var(--field-control-layout-height) / 2) calc(var(--field-control-layout-height) / 2) calc(var(--field-control-layout-height) / 2) calc(var(--field-control-layout-height) / 2)',
+    );
+  });
+
+  it('Компонент корректно обрабатывает разные виды отображения (view)', () => {
+    renderComponent({ view: 'clear' });
+    expect(getRender()).toHaveStyle('--field-control-layout-border-width: 0px');
   });
 });
