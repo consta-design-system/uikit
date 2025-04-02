@@ -4,7 +4,7 @@ export default createStand({
   title: 'useChoiceGroup',
   id: 'useChoiceGroup',
   group: 'hooks',
-  description: 'Отслеживание размера экрана.',
+  description: 'Хук для выбора нескольких значений из списка.',
   alias: ['хук', 'выбор', 'список'],
   version: '1.7.0',
   status: 'stable',
