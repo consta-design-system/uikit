@@ -50,6 +50,7 @@ export const AutoCompleteTypeTextArray: AutoCompleteTypeComponent<'textarray'> =
       ignoreOutsideClicksRefs,
       onInputChange,
       inputValue,
+      onBlur,
       ...otherProps
     } = withDefaultGettersProps;
 
@@ -65,6 +66,7 @@ export const AutoCompleteTypeTextArray: AutoCompleteTypeComponent<'textarray'> =
       inputRef: inputControlRef,
       optionsRefs,
       handleChange,
+      handleInputBlur,
       highlightedIndex,
     } = useAutoComplete({
       items,
@@ -79,6 +81,7 @@ export const AutoCompleteTypeTextArray: AutoCompleteTypeComponent<'textarray'> =
       getGroupKey,
       onFocus,
       searchFunction,
+      onBlur,
       isLoading,
       onDropdownOpen,
       dropdownOpen,
@@ -105,11 +108,13 @@ export const AutoCompleteTypeTextArray: AutoCompleteTypeComponent<'textarray'> =
           ref={useForkRef([controlRef, componentRef])}
           inputRef={useForkRef([inputRef, inputControlRef])}
           onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           onChange={highlightedIndex < 0 ? onChange : undefined}
           onInputChange={handleChange}
           value={value}
           style={style}
           size={size}
+          inputValue={inputValue}
           {...otherProps}
         />
         <SelectDropdown

@@ -152,7 +152,10 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
               },
             );
 
-            if (controlRef.current) {
+            if (
+              controlRef.current &&
+              typeof controlRef.current.scrollTo === 'function'
+            ) {
               controlRef.current.scrollTo({
                 top: controlRef.current.scrollHeight,
               });
