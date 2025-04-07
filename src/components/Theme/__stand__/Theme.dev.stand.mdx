@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxInformer } from '@consta/stand';
 import { ThemeExampleColors } from './examples/ThemeExampleColors/ThemeExampleColors';
 import { ThemeExampleRoot } from './examples/ThemeExampleRoot/ThemeExampleRoot';
 
@@ -105,11 +105,11 @@ const App = () => {
 
 ### Цвета
 
-> - Модификатор: `_color`
-> - CSS:
->   - [\_color / Theme_color_gpnDark.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_color/Theme_color_gpnDark.css)
->   - [\_color / Theme_color_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_color/Theme_color_gpnDefault.css)
->   - [\_color / Theme_color_gpnDisplay.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_color/Theme_color_gpnDisplay.css)
+- Модификатор: `_color`
+- CSS:
+  - [\_color / Theme_color_gpnDark.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_color/Theme_color_gpnDark.css)
+  - [\_color / Theme_color_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_color/Theme_color_gpnDefault.css)
+  - [\_color / Theme_color_gpnDisplay.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_color/Theme_color_gpnDisplay.css)
 
 #### Цветовые схемы в Consta
 
@@ -157,11 +157,9 @@ const App = () => {
 
 #### Цвета в CSS
 
-Все цвета в теме высчитываются из базовых цветов (меняется HSLA-значение). Базовые цвета не используются в интерфейсах, они нужны только для вычисления остальных цветов.
+Все цвета в теме высчитываются из базовых цветов (меняется HSLA-значение). Если вы хотите поменять цветовую схему, достаточно поменять базовые цвета — остальные пересчитаются
 
-> Если вы хотите поменять цветовую схему, достаточно поменять базовые цвета — остальные пересчитаются
-
-Базовые цвета описываются PostCSS-переменными. Вот так выглядят базовые цвета из темы Default:
+Базовые цвета не используются в интерфейсах, они нужны только для вычисления остальных цветов и описываются PostCSS-переменными. Вот так выглядят базовые цвета из темы Default:
 
 ```css
 $color-base-base: #002033; /* Базовый цвет содержимого, от которого выстраиваются цвета текста, иконок, ... */
@@ -204,8 +202,8 @@ $color-base-normal: #56b9f2; /* Цвет нейтральный */
 
 ### Шрифты
 
-> - Модификатор: `_font`
-> - CSS: [\_font / Theme_font_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_font/Theme_font_gpnDefault.css)
+- Модификатор: `_font`
+- CSS: [\_font / Theme_font_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_font/Theme_font_gpnDefault.css)
 
 Мы ориентируемся на самый популярный шрифт у наших пользователей — Inter.
 
@@ -220,21 +218,24 @@ font-family: var(--font-primary);
 
 В этом файле подключаются все начертания/насыщенности/жирности шрифта.
 
-> Проверьте, что в шрифте есть насыщенность, которую вы используете.
-> Браузер имитирует насыщенность, которой нет в наборе, но неизвестно, как это будет выглядеть.
->
-> [Посмотреть варианты насыщенности в компоненте `Text`](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components---text--stable/tab:dev/hash:насыщенность).
+<MdxInformer status="success">
+
+Убедитесь, что в шрифте есть насыщенность, которую вы используете. Браузер имитирует насыщенность, которой нет в наборе, но неизвестно, как это будет выглядеть.
+
+</MdxInformer>
+
+Вы можете посмотреть варианты насыщенности в компоненте [Text](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-text-stable/tab:dev/hash:насыщенность).
 
 ### Размеры текста
 
-> - Модификатор: `_size`
-> - CSS: [\_size / Theme_size_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_size/Theme_size_gpnDefault.css)
+- Модификатор: `_size`
+- CSS: [\_size / Theme_size_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_size/Theme_size_gpnDefault.css)
 
 Модификатор `_size` отвечает за размер текста и межстрочное расстояние.
 
 В дизайн-системе нет общих правил для типографики: на ней построены очень разные сервисы — с разной плотностью информации, разными устройствами и для разных ситуаций. Каждый проект или экосистема проектов задает свои правила иерархии текста.
 
-> Любой размер текста можно использовать с любым межстрочным расстоянием, а не только `xs` с `xs`
+Любой размер текста можно использовать с любым межстрочным расстоянием, а не только `xs` с `xs`
 
 ```css
 /* Размер текста */
@@ -271,8 +272,8 @@ font-family: var(--font-primary);
 
 ### Отступы
 
-> - Модификатор: `_space`
-> - CSS: [\_size / Theme_space_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_space/Theme_space_gpnDefault.css)
+- Модификатор: `_space`
+- CSS: [\_size / Theme_space_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_space/Theme_space_gpnDefault.css)
 
 Все отступы нужно описывать с помощью переменных, в коде не должно быть случайных пикселей.
 
@@ -299,8 +300,8 @@ font-family: var(--font-primary);
 
 ### Внешний вид контролов
 
-> - Модификатор: `_control`
-> - CSS: [\_control / Theme_control_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_control/Theme_control_gpnDefault.css)
+- Модификатор: `_control`
+- CSS: [\_control / Theme_control_gpnDefault.css](https://github.com/consta-design-system/uikit/blob/master/src/components/Theme/_control/Theme_control_gpnDefault.css)
 
 Отвечает за размеры контролов, внутренние отступы и размеры текста внутри контролов.
 
@@ -329,8 +330,8 @@ font-family: var(--font-primary);
 
 ### Тени
 
-> - Модификатор: `_shadow`
-> - CSS: [\_shadow / Theme_shadow_gpnDefault.css](https://github.com/consta-design-system/uikit/tree/master/src/components/Theme/_shadow)
+- Модификатор: `_shadow`
+- CSS: [\_shadow / Theme_shadow_gpnDefault.css](https://github.com/consta-design-system/uikit/tree/master/src/components/Theme/_shadow)
 
 Модификатор `_shadow` отвечает за тени. Посмотреть, как это выглядит, можно в [Figma](https://www.figma.com/file/vNZFtFH6w0IjD2Twi5OXXE/Consta-Default-Colors), во вкладке **Default Shadows**.
 
@@ -444,7 +445,11 @@ const App = () => {
 
 Вы можете вкладывать компоненты `Theme` друг в друга, если нужно, чтобы некоторые блоки выглядели не так, как основной контент.
 
-> Если вы переключите основную тему, вложенная тема не поменяется
+<MdxInformer status="normal">
+
+Если вы переключите основную тему, вложенная тема не поменяется.
+
+</MdxInformer>
 
 ```tsx
 import React from 'react';
@@ -464,7 +469,11 @@ const App = () => {
 
 Вы можете добавить переключатель тем, чтобы пользователь мог сам решить, какой темой хочет пользоваться — тёмной или светлой. За это отвечает компонент [ThemeToggler](##LIBS.LIB.STAND/lib:uikit/stand:components-themetoggler-stable/).
 
-> Чтобы смена тем работала, все значения в CSS нужно задавать переменными, а переменные использовать по смыслу. [Почитать про смысл цветов](##LIBS.LIB.STAND/lib:uikit/stand:components-theme-stable/hash:цвета-темы-default)
+<MdxInformer status="normal">
+
+Чтобы смена тем работала, все значения в CSS нужно задавать переменными, а переменные использовать по смыслу. Почитать про [смысл цветов](##LIBS.LIB.STAND/lib:uikit/stand:components-theme-stable/hash:цвета-темы-default)
+
+</MdxInformer>
 
 ```tsx
 import './RootTheme.css';

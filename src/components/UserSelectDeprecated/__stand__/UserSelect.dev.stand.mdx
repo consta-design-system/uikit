@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxInformer } from '@consta/stand';
 import { UserSelectExampleItems } from './examples/UserSelectExampleItems/UserSelectExampleItems';
 import { UserSelectExamplePlaceholder } from './examples/UserSelectExamplePlaceholder/UserSelectExamplePlaceholder';
 import { UserSelectExampleSize } from './examples/UserSelectExampleSize/UserSelectExampleSize';
@@ -330,9 +330,7 @@ export function UserSelectExampleDisabledItem() {
 
 ### Несколько вариантов
 
-По умолчанию из списка можно выбрать только одного пользователя. Чтобы выбрать нескольких, добавьте `multiple`.
-
-> В этом случае `value` становится массивом, а в `onChange` передаётся массив выбранных элементов
+По умолчанию из списка можно выбрать только одного пользователя. Чтобы выбрать нескольких, добавьте `multiple`. В этом случае `value` становится массивом, а в `onChange` передаётся массив выбранных элементов
 
 ```tsx
 type Item = {
@@ -642,7 +640,11 @@ export function UserSelectExampleForm() {
 Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
 поля с разными статусами и разной формы будут выглядит одинаково.
 
-> Для создания hover эффекта для view="`clear`" управляйте внешним видом контейнера, в котором находится UserSelect
+<MdxInformer status="normal">
+
+Чтобы создать hover-эффект для `view="clear"`, управляйте внешним видом контейнера, в котором находится **UserSelect**.
+
+</MdxInformer>
 
 ```tsx
 type Item = {
@@ -820,7 +822,11 @@ export function UserSelectExampleCreate() {
 Сделать кастомное представление для элементов списка можно с помощью свойства `renderItem`.
 Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
 
-> У корневого DOM-элемента должно быть свойство `role="option"`.
+<MdxInformer status="warning">
+
+У корневого DOM-элемента в свойстве `role` должно быть установлено значение `option`.
+
+</MdxInformer>
 
 #### Пример с кастомными элементами и своей функцией для поиска
 
@@ -1024,7 +1030,11 @@ export function UserSelectExampleRenderValue() {
 `getItemSubLabel`, `getItemAvatarUrl`, `getGroupLabel`, `getGroupKey`,
 чтобы компонент понимал, откуда брать данные.
 
-> Если геттеры не указаны, используются геттеры по умолчанию, которые могут не подойти к вашим типам данных.
+<MdxInformer status="warning">
+
+Если геттеры не указаны, используются геттеры по умолчанию, которые могут не подойти к вашим типам данных.
+
+</MdxInformer>
 
 ### Геттеры по умолчанию
 

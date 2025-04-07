@@ -26,7 +26,7 @@ import {
 import { DragNDropFieldExampleWithInformer } from './examples/DragNDropFieldExampleWithInformer/DragNDropFieldExampleWithInformer';
 import { DragNDropFieldExampleErrorMessages } from './examples/DragNDropFieldExampleErrorMessages/DragNDropFieldExampleErrorMessages';
 import { DragNDropFieldExampleInformer } from './examples/DragNDropFieldExampleInformer/DragNDropFieldExampleInformer';
-import { MdxMenu, MdxTabs, Example } from '@consta/stand';
+import { MdxMenu, MdxTabs, MdxInformer, Example } from '@consta/stand';
 
 <MdxMenu>
 
@@ -49,7 +49,11 @@ import { MdxMenu, MdxTabs, Example } from '@consta/stand';
 
 </MdxMenu>
 
-> Чтобы использовать компонент, обновите библиотеку [react-dropzone](https://react-dropzone.js.org/?ref=blog.horizon-ui.com) до версии `^14.2.3`.
+<MdxInformer status="warning">
+
+Чтобы использовать компонент, обновите библиотеку [react-dropzone](https://react-dropzone.js.org/?ref=blog.horizon-ui.com) до версии `^14.2.3`.
+
+</MdxInformer>
 
 `DragNDropField` — это компонент для загрузки файлов путем перетаскивания их в определенную область или выбора файлов через диалоговое окно.
 
@@ -132,7 +136,11 @@ type DragNDropFieldChildrenRenderFn = (props: {
 
 Чтобы ограничить тип файлов, используйте свойство `accept`. Это объект с ключами [типа MIME](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types) и массивом расширений файлов в качестве значений. Смотрите также [спецификацию](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file).
 
-> Типы MIME не определены однозначно на всех платформах. Например, файлы CSV на macOS относятся к text/plain, а в Windows — к application/vnd.ms-excel. В некоторых случаях тип MIME может не быть определен вовсе.
+<MdxInformer status="normal">
+
+Типы MIME не определены однозначно на всех платформах. Например, файлы CSV на macOS относятся к text/plain, а в Windows — к application/vnd.ms-excel. В некоторых случаях тип MIME может не быть определен вовсе.
+
+</MdxInformer>
 
 Пример:
 
@@ -269,7 +277,11 @@ type DragNDropFieldPropLocale = {
 
 `onDrop` — обработчик события дропа. Файлы принимаются или отвергаются, основываясь на свойствах `accept`, `multiple`, `minSize` и `maxSize`.
 
-> Колбэк будет вызван независимо от того, были файлы приняты или отвергнуты.
+<MdxInformer status="normal">
+
+Колбэк будет вызван независимо от того, были файлы приняты или отвергнуты.
+
+</MdxInformer>
 
 ```ts
 type onDrop = <T extends File>(
