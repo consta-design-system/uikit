@@ -47,6 +47,7 @@ export const AutoCompleteTypeText: AutoCompleteTypeComponent<string> =
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
+      onBlur,
       ...otherProps
     } = withDefaultGetters(props);
 
@@ -59,6 +60,7 @@ export const AutoCompleteTypeText: AutoCompleteTypeComponent<string> =
       getKeyProps,
       visibleItems,
       handleInputFocus,
+      handleInputBlur,
       inputRef: inputControlRef,
       optionsRefs,
       handleChange,
@@ -74,6 +76,7 @@ export const AutoCompleteTypeText: AutoCompleteTypeComponent<string> =
       getItemGroupKey,
       getGroupKey,
       onFocus,
+      onBlur,
       searchFunction,
       isLoading,
       onDropdownOpen,
@@ -102,6 +105,7 @@ export const AutoCompleteTypeText: AutoCompleteTypeComponent<string> =
           inputRef={useForkRef([inputRef, inputControlRef])}
           onChange={handleChange}
           onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           value={value}
           style={style}
           size={size}

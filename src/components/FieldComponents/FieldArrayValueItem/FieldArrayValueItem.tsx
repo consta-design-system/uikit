@@ -21,13 +21,13 @@ export const cnFieldArrayValueItem = cn('FieldArrayValueItem');
 
 export const FieldArrayValueItem: React.FC<FieldArrayValueItemProps> =
   forwardRef((props, ref) => {
-    const { onRemove, size, label, disabled, ...otherProps } = props;
+    const { onRemove, size, label, disabled, className, ...otherProps } = props;
 
     return (
       <TagBase
         {...otherProps}
         as="span"
-        className={cnFieldArrayValueItem({ disabled })}
+        className={cnFieldArrayValueItem({ disabled }, [className])}
         ref={ref}
         label={label}
         onCancel={disabled ? undefined : onRemove}

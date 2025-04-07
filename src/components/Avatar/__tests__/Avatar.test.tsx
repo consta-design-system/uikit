@@ -1,14 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import * as React from 'react';
 
+import { Avatar, avatarPropForm, avatarPropSize, cnAvatar } from '../Avatar';
 import {
-  Avatar,
-  avatarPropForm,
-  avatarPropSize,
-  cnAvatar,
   getColorIndexForName,
   getInitialsForName,
-} from '../Avatar';
+  getRandomInt,
+} from '../helpers';
 
 type AvatarProps = React.ComponentProps<typeof Avatar>;
 
@@ -164,6 +162,97 @@ describe('Компонент Avatar', () => {
           expect(colorIndex).toBeLessThanOrEqual(maxColorIndex);
           expect(colorIndexes[name]).toEqual(colorIndex);
         });
+      });
+    });
+    describe('проверка monochrome', () => {
+      it('должен использовать monochrome цвет, если monochrome=true', () => {
+        renderComponent({ monochrome: true });
+
+        const avatar = screen.getByTestId(testId);
+
+        expect(avatar).toHaveStyle('--avatar-color: var(--avatar-color-18)');
+      });
+
+      it('не должен использовать monochrome цвет, если monochrome=false', () => {
+        renderComponent({ monochrome: false, name: 'Test User' });
+
+        const avatar = screen.getByTestId(testId);
+
+        expect(avatar).not.toHaveStyle(
+          '--avatar-color: var(--avatar-color-18)',
+        );
+      });
+    });
+
+    describe('проверка стилей', () => {
+      it('должен добавлять кастомные стили', () => {
+        const customStyle = { backgroundColor: 'red' };
+
+        renderComponent({ style: customStyle });
+
+        const avatar = screen.getByTestId(testId);
+
+        expect(avatar).toHaveStyle('background-color: red');
+      });
+    });
+
+    describe('проверка getRandomInt', () => {
+      it('должен возвращать значение в пределах max', () => {
+        const max = 10;
+        const randomValue = getRandomInt(max);
+
+        expect(randomValue).toBeGreaterThanOrEqual(0);
+        expect(randomValue).toBeLessThan(max);
+      });
+    });
+
+    describe('проверка отображения инициалов', () => {
+      it('должен отображать инициалы, если имя указано', () => {
+        const name = 'John Doe';
+        const initials = getInitialsForName(name);
+
+        renderComponent({ name });
+
+        const avatar = screen.getByTestId(testId);
+
+        expect(avatar.textContent).toEqual(initials);
+      });
+
+      it('не должен отображать инициалы, если имя не указано', () => {
+        renderComponent();
+
+        const avatar = screen.getByTestId(testId);
+
+        expect(avatar.textContent).toEqual('');
+      });
+    });
+
+    describe('проверка комбинации props', () => {
+      it('должен корректно рендериться с url и monochrome', () => {
+        const url = 'https://example.com/avatar.png';
+        const name = 'John Doe';
+
+        renderComponent({ url, name, monochrome: true });
+
+        const avatar = screen.getByTestId(testId);
+        const img = avatar.querySelector('img') as HTMLImageElement;
+
+        console.log('avatar.textContent', avatar.textContent);
+
+        expect(img).toBeTruthy();
+        expect(img.src).toEqual(url);
+        expect(avatar.textContent).toEqual('');
+      });
+
+      it('должен корректно рендериться без url и с monochrome', () => {
+        const name = 'John Doe';
+
+        renderComponent({ name, monochrome: true });
+
+        const avatar = screen.getByTestId(testId);
+
+        expect(avatar).toHaveTextContent('JD');
+        expect(avatar).toHaveStyle('--avatar-color: var(--avatar-color-18)');
       });
     });
   });

@@ -36,7 +36,7 @@ const Variants = () => {
   const size = useSelect('size', fieldPropSize, fieldPropSizeDefault);
   const view = useSelect('view', fieldPropView, fieldPropViewDefault);
   const disabled = useBoolean('disabled', false);
-  const clearButton = useBoolean('clearButton', false);
+  const withClearButton = useBoolean('withClearButton', false);
   const maxLength = useNumber('maxLength', 200);
   const placeholder = useText('placeholder', 'Подсказка в поле');
   const leftSideType = useSelect('leftSideType', ['icon', 'text']);
@@ -72,10 +72,11 @@ const Variants = () => {
     status,
     size,
     view,
+    className: cnAutoCompleteVariants(),
     items,
     dropdownForm,
     groups: withGroups ? groups : [],
-    clearButton,
+    withClearButton,
     maxLength,
     placeholder,
     leftSide,
@@ -85,27 +86,25 @@ const Variants = () => {
 
   if (type === 'textarray') {
     return (
-      <div className={cnAutoCompleteVariants()}>
-        <AutoComplete
-          {...props}
-          value={value}
-          type="textarray"
-          inputValue={inputValue}
-          onInputChange={setInputValue}
-          onChange={setValue}
-        />
-      </div>
+      <AutoComplete
+        {...props}
+        value={value}
+        type="textarray"
+        inputValue={inputValue}
+        onInputChange={setInputValue}
+        onChange={setValue}
+        isLoading
+      />
     );
   }
   return (
-    <div className={cnAutoCompleteVariants()}>
-      <AutoComplete
-        {...props}
-        value={inputValue}
-        onChange={setInputValue}
-        type={type}
-      />
-    </div>
+    <AutoComplete
+      {...props}
+      value={inputValue}
+      onChange={setInputValue}
+      type={type}
+      isLoading
+    />
   );
 };
 

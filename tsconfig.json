@@ -23,7 +23,8 @@
     },
     "plugins": [
       { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ]
+    ],
+    "types": ["@testing-library/jest-dom", "node"]
   },
   "include": ["src/**/*", "scripts/**/*"],
   "exclude": [

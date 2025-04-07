@@ -31,6 +31,7 @@ type UseAutoCompleteProps<ITEM, GROUP> = {
   getItemKey: (item: ITEM) => string | number;
   searchFunction?: (item: ITEM, searchValue: string) => boolean;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
   searchValue?: string;
   onChange?: AutoCompletePropOnChange<'text'>;
   isLoading?: boolean;
@@ -67,6 +68,7 @@ export function useAutoComplete<ITEM, GROUP>(
     groups,
     getGroupKey,
     onFocus,
+    onBlur,
     isLoading,
     dropdownOpen,
     onDropdownOpen,
@@ -189,10 +191,14 @@ export function useAutoComplete<ITEM, GROUP>(
     setIsOpen.off();
   };
 
+  const returnIsOpen = Boolean(isOpen && (isLoading ? true : hasItems));
+
   const Tab: KeyHandler = (_, e): void => {
     setIsOpen.off();
-    if (isOpen && hasItems) {
+    if (returnIsOpen) {
       e.preventDefault();
+    } else {
+      inputRef.current?.blur();
     }
   };
 
@@ -232,11 +238,12 @@ export function useAutoComplete<ITEM, GROUP>(
   const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>): void => {
     if (!disabled) {
       setIsOpen.on();
-
-      if (typeof onFocus === 'function') {
-        onFocus(e);
-      }
+      onFocus?.(e);
     }
+  };
+
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
+    onBlur?.(e);
   };
 
   useClickOutside({
@@ -262,11 +269,12 @@ export function useAutoComplete<ITEM, GROUP>(
   }, [highlightedIndex]);
 
   useEffect(() => {
-    onDropdownOpen?.(isOpen);
-    if (isOpen) {
+    onDropdownOpen?.(returnIsOpen);
+
+    if (returnIsOpen) {
       setHighlightedIndex(0);
     }
-  }, [isOpen]);
+  }, [returnIsOpen]);
 
   useEffect(() => {
     setIsOpen.set(dropdownOpen || false);
@@ -279,7 +287,7 @@ export function useAutoComplete<ITEM, GROUP>(
   }, [searchValue]);
 
   return {
-    isOpen: Boolean(isOpen && (isLoading ? true : hasItems)),
+    isOpen: returnIsOpen,
     visibleItems,
     getOptionProps,
     handleInputFocus,
@@ -289,5 +297,6 @@ export function useAutoComplete<ITEM, GROUP>(
     optionsRefs,
     handleChange,
     highlightedIndex,
+    handleInputBlur,
   };
 }
