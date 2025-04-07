@@ -38,6 +38,19 @@ export type AutoCompletePropOnChange<TYPE extends string> = (
   },
 ) => void;
 
+export type AutoCompleteRenderItemProps<ITEM> = {
+  item: ITEM;
+  active: boolean;
+  hovered: boolean;
+  onClick: (e: React.MouseEvent) => void;
+  onMouseEnter: (e: React.MouseEvent) => void;
+  ref: React.Ref<HTMLDivElement>;
+};
+
+export type AutoCompletePropRenderItem<ITEM> = (
+  props: AutoCompleteRenderItemProps<ITEM>,
+) => React.ReactElement | null;
+
 export type AutoCompleteProps<
   TYPE extends string,
   ITEM = AutoCompleteItemDefault,

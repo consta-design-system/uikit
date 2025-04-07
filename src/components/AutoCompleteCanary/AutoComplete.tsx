@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { cnCanary } from '##/utils/bem';
+
 import { AutoCompleteTypeText } from './AutoCompleteTypeText';
 import { AutoCompleteTypeTextArray } from './AutoCompleteTypeTextArray';
 import {
@@ -18,6 +20,8 @@ const typeMap: Record<
   textarray: AutoCompleteTypeTextArray,
 };
 
+export const cnAutoComplete = cnCanary('AutoComplete');
+
 const AutoCompleteRender = <
   TYPE extends string,
   ITEM = AutoCompleteItemDefault,
@@ -26,12 +30,14 @@ const AutoCompleteRender = <
   props: AutoCompleteProps<TYPE, ITEM, GROUP>,
   ref: React.Ref<HTMLDivElement>,
 ) => {
-  const Component = typeMap[props.type || 'text'] || typeMap.text;
+  const type = props.type || 'text';
+  const Component = typeMap[type] || typeMap.text;
 
   return (
     <Component
-      ref={ref}
       {...(props as unknown as AutoCompleteTypeComponent<TYPE, ITEM, GROUP>)}
+      ref={ref}
+      className={cnAutoComplete({ type }, [props.className])}
     />
   );
 };
