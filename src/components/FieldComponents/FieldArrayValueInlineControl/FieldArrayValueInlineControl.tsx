@@ -39,7 +39,10 @@ const inputHeightMap: Record<FieldPropSize, string> = {
 const InputFakeElement = forwardRef<
   HTMLDivElement,
   PropsWithHTMLAttributes<
-    { valueAtom: AtomMut<string>; inputMinWidthAtom: AtomMut<number> },
+    {
+      valueAtom: AtomMut<string>;
+      inputMinWidthAtom: AtomMut<number>;
+    },
     HTMLDivElement
   >
 >(({ valueAtom, inputMinWidthAtom, ...otherProps }, componentRef) => {
@@ -115,7 +118,7 @@ const FieldArrayValueInlineControlRender = (
     inputMaxLength,
     value = [],
     inputValue,
-    inputDefaultValue,
+    inputDefaultValue = '',
     renderValue,
     onFocus,
     onBlur,
@@ -144,10 +147,9 @@ const FieldArrayValueInlineControlRender = (
   const propsAtom = useSendToAtom(props);
   const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
   const valueAtom = usePropAtom(propsAtom, 'value');
-  const inputValueAtom = useCreateAtom('');
+  const inputValueAtom = useCreateAtom(inputValue || inputDefaultValue || '');
+  const inputDefaultValueAtom = useCreateAtom(inputDefaultValue);
   const inputMinWidthAtom = useCreateAtom(0);
-
-  // const [inputValue, setInputValue] = useState('');
 
   const fakeInputRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -162,19 +164,24 @@ const FieldArrayValueInlineControlRender = (
     [],
   );
 
-  useAtom((ctx) => {
-    const inputValueProp = ctx.spy(inputValuePropAtom);
-    if (inputRef.current) {
-      inputRef.current.value = inputValueProp || '';
-    }
-
-    inputValueAtom(ctx, inputValueProp || '');
-  });
-
   const [valueNode] = useAtom((ctx) => {
     const value = ctx.spy(valueAtom);
     const { renderValue } = ctx.get(propsAtom);
     return renderValue(value || []);
+  });
+
+  useAtom((ctx) => {
+    const inputValueProp = ctx.spy(inputValuePropAtom);
+    const inputDefaultValue = ctx.get(inputDefaultValueAtom);
+    if (inputDefaultValue) {
+      inputDefaultValueAtom(ctx, '');
+    } else {
+      if (inputRef.current) {
+        inputRef.current.value = inputValueProp || '';
+      }
+
+      inputValueAtom(ctx, inputValueProp || '');
+    }
   });
 
   return (

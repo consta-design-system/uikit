@@ -72,7 +72,7 @@ const Variants = () => {
           items={items}
           value={valueMultiple}
           onChange={setValueMultiple}
-          groups={withGroups ? groups : []}
+          // groups={withGroups ? groups : []}
           multiple
           isLoading={isLoading}
           getItemDisabled={conditionalGetter(itemsDisabled)}

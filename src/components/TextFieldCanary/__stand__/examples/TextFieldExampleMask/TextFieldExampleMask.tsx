@@ -145,6 +145,7 @@ export const TextFieldExampleMaskSetValue = () => {
       <FieldWrapper label="Телефон">
         <FieldGroup>
           <TextField
+            style={{ flex: 1 }}
             placeholder="+7(999)999-99-99"
             inputRef={ref}
             defaultValue={defaultValue}

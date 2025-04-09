@@ -13,14 +13,14 @@ import { FieldArrayValueInlineControlProps } from '../types';
 const testId = 'FieldArrayValueInlineControl';
 const cnRenderValueItem = () => 'RenderValueItem';
 
-const defaultRenderValue: (item: string, index: number) => React.ReactNode = (
-  item,
-  index,
-) => (
-  <div className={cnRenderValueItem()} data-index={index}>
-    {item}
-  </div>
-);
+const defaultRenderValue: (value: string[]) => React.ReactNode = (value) =>
+  value.map((item, index) => {
+    return (
+      <div className={cnRenderValueItem()} data-index={index}>
+        {item}
+      </div>
+    );
+  });
 
 const defaultValue = ['один', 'два', 'три'];
 

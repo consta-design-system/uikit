@@ -113,13 +113,13 @@ export function getCountedGroups<ITEM, GROUP>(
   if (selectAll) {
     groups.forEach((group, index) => {
       let totalCount = 0;
-      let checkedCount = 0;
+
+      // TODO: checkedCount вынести в отдельный атом
+      const checkedCount = 0;
+
       group.items.forEach((item) => {
         if (!(getItemDisabled && getItemDisabled?.(item))) {
           totalCount += 1;
-        }
-        if (values?.find((el) => getItemKey(item) === getItemKey(el))) {
-          checkedCount += 1;
         }
       });
       copyGroups[index].items = [

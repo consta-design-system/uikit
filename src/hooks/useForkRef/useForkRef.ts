@@ -16,4 +16,4 @@ export const forkRef = <T>(
 };
 
 export const useForkRef = <T>(refs: (React.Ref<T> | undefined)[]) =>
-  useMemo(() => forkRef(refs), [refs]);
+  useMemo(() => forkRef(refs), refs);

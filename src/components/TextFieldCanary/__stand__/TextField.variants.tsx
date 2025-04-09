@@ -104,38 +104,58 @@ const Variants = () => {
     setValue(value);
   };
 
+  if (type === 'textarray') {
+    return (
+      <div style={{ width: '100%' }}>
+        <TextField
+          value={value}
+          inputValue={stringValue}
+          onInputChange={setStringValue}
+          onChange={onChange}
+          id="inputId"
+          form={form}
+          status={status}
+          size={size}
+          view={view}
+          disabled={disabled}
+          style={{ width: '100%' }}
+          leftSide={leftSide}
+          rightSide={rightSide}
+          maxLength={maxLength}
+          clearButton={clearButton}
+          placeholder={placeholder}
+          type={type}
+        />
+      </div>
+    );
+  }
+
   return (
-    <TextField
-      {...(type === 'textarray'
-        ? {
-            value,
-            inputValue: stringValue,
-            onInputChange: setStringValue,
-            onChange,
-          }
-        : {})}
-      id="inputId"
-      form={form}
-      status={status}
-      size={size}
-      view={view}
-      disabled={disabled}
-      style={{ width: '100%' }}
-      leftSide={leftSide}
-      rightSide={rightSide}
-      maxLength={maxLength}
-      clearButton={clearButton}
-      placeholder={placeholder}
-      type={type}
-      incrementButtons={type === 'number' ? incrementButtons : undefined}
-      min={type === 'number' ? min : undefined}
-      max={type === 'number' ? max : undefined}
-      step={getStep(type, withStepArray, step)}
-      resize={type === 'textarea' ? resizeMap[resize] : undefined}
-      maxRows={type === 'textarea' && resize === 'auto' ? maxRows : undefined}
-      minRows={type === 'textarea' && resize === 'auto' ? minRows : undefined}
-      rows={type === 'textarea' && resize !== 'auto' ? rows : undefined}
-    />
+    <div style={{ width: '100%' }}>
+      <TextField
+        id="inputId"
+        form={form}
+        status={status}
+        size={size}
+        view={view}
+        disabled={disabled}
+        style={{ width: '100%' }}
+        leftSide={leftSide}
+        rightSide={rightSide}
+        maxLength={maxLength}
+        clearButton={clearButton}
+        placeholder={placeholder}
+        type={type}
+        incrementButtons={type === 'number' ? incrementButtons : undefined}
+        min={type === 'number' ? min : undefined}
+        max={type === 'number' ? max : undefined}
+        step={getStep(type, withStepArray, step)}
+        resize={type === 'textarea' ? resizeMap[resize] : undefined}
+        maxRows={type === 'textarea' && resize === 'auto' ? maxRows : undefined}
+        minRows={type === 'textarea' && resize === 'auto' ? minRows : undefined}
+        rows={type === 'textarea' && resize !== 'auto' ? rows : undefined}
+      />
+    </div>
   );
 };
 

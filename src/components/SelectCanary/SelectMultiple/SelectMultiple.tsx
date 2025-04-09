@@ -1,6 +1,6 @@
 import './SelectMultiple.css';
 
-import { useAction } from '@reatom/npm-react';
+import { useAction, useAtom } from '@reatom/npm-react';
 import React, { forwardRef, useRef } from 'react';
 
 import {
@@ -116,6 +116,7 @@ const SelectMultipleRender = <
     onChange,
     inputValueAtom,
     getHandleRemoveValue,
+    hasItemsAtom,
   } = useSelect<ITEM, GROUP, true>({
     propsAtom,
   });
@@ -241,6 +242,7 @@ const SelectMultipleRender = <
         size={size}
         controlRef={controlRef}
         getOptionActions={getOptionActions}
+        // TODO: были ошибки в useForkRef, проверить все вызовы
         dropdownRef={useForkRef([dropdownRef, dropdownRefProp])}
         form={dropdownForm}
         className={dropdownClassName}
@@ -259,11 +261,13 @@ const SelectMultipleRender = <
         onCreate={onCreate}
         onChange={onChange}
         inputValueAtom={inputValueAtom}
-        style={
-          typeof style?.zIndex === 'number'
-            ? { zIndex: style.zIndex + 1 }
-            : undefined
-        }
+        hasItemsAtom={hasItemsAtom}
+        // style={
+        //   // TODO: мемоизировать
+        //   typeof style?.zIndex === 'number'
+        //     ? { zIndex: style.zIndex + 1 }
+        //     : undefined
+        // }
       />
     </>
   );

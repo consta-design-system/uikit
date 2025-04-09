@@ -11,6 +11,7 @@ import { SelectExampleSize } from './examples/SelectExampleSize/SelectExampleSiz
 import { SelectExampleView } from './examples/SelectExampleView/SelectExampleView';
 import { SelectExampleDisabled } from './examples/SelectExampleDisabled/SelectExampleDisabled';
 import { SelectExampleCreate } from './examples/SelectExampleCreate/SelectExampleCreate';
+import { SelectExampleSelectAll } from './examples/SelectExampleSelectAll/SelectExampleSelectAll';
 import {
   SelectExampleSearch,
   SelectExampleUseSearch,
@@ -845,6 +846,8 @@ const SelectExampleIsLoadingOnScrollBottom = () => {
 
 > Чтобы переопределить текст выводимый при выборе все элементов укажите свойство `allSelectedAllLabel`.
 
+<MdxTabs>
+
 ```tsx
 import React, { useState } from 'react';
 import { Select } from '@consta/uikit/Select';
@@ -920,7 +923,9 @@ const SelectExampleSelectAll = () => {
 };
 ```
 
-{/* <SelectExampleSelectAll /> */}
+<SelectExampleSelectAll />
+
+</MdxTabs>
 
 ## Управление состоянием выпадающего списка
 

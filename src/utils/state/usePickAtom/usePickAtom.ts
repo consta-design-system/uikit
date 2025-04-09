@@ -3,36 +3,13 @@ import { useAtom, useCtx } from '@reatom/npm-react';
 import { useEffect } from 'react';
 
 import { pick } from '##/utils/object';
+import { useCreateAtom } from '##/utils/state/useCreateAtom/useCreateAtom';
 
 export type ObjectAtomValue<T> = {
   [Property in keyof T]: T[Property];
 };
 
 export type AtomProp<T> = AtomMut<ObjectAtomValue<T>>;
-
-export const usePropAtom = <
-  T extends {},
-  K extends keyof T,
-  S extends boolean = false,
->(
-  target: AtomMut<T>,
-  key: K,
-  subscribe?: S,
-) => {
-  // eslint-disable-next-line no-unused-vars
-  const [state, _, atom] = useAtom(
-    (ctx) => ctx.spy(target)[key],
-    [key],
-    subscribe,
-  );
-  return (subscribe ? ([state, atom] as const) : atom) as S extends true
-    ? [T[K], AtomMut<T[K]>]
-    : AtomMut<T[K]>;
-};
-
-export type UseObjectPropsAtomReturn<T, K extends keyof T> = {
-  [Property in K]: T[Property];
-};
 
 const needUpdate = (
   state: Record<string, unknown>,
@@ -64,7 +41,7 @@ export const usePickAtom = <
   const [state, _, atom] = useAtom(
     pick(ctx.get(target), keys),
     undefined,
-    subscribe,
+    subscribe || false,
   );
 
   useEffect(() => {
@@ -80,4 +57,13 @@ export const usePickAtom = <
   return (subscribe ? [state, atom] : atom) as S extends true
     ? [UseObjectPropsAtomReturn<T, K>, AtomMut<UseObjectPropsAtomReturn<T, K>>]
     : AtomMut<UseObjectPropsAtomReturn<T, K>>;
+};
+
+export const usePropAtom = <T extends {}, K extends keyof T>(
+  target: AtomMut<T>,
+  key: K,
+) => useCreateAtom((ctx) => ctx.spy(target)[key]);
+
+export type UseObjectPropsAtomReturn<T, K extends keyof T> = {
+  [Property in K]: T[Property];
 };

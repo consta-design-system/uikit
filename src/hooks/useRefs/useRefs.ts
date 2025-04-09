@@ -18,8 +18,14 @@ export const useRefs = <
 >(
   elements: E,
   deps: unknown[] = [],
+  log?: boolean,
 ): Return<T, E> =>
   useMemo(() => {
+    if (log) {
+      console.log('useRefs');
+      console.log(elements);
+    }
+
     if (isNotNumber(elements)) {
       const obj: Record<string, React.RefObject<T>> = {};
       for (let index = 0; index < elements.length; index++) {

@@ -14,7 +14,7 @@ import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttri
 type FieldToggleVisiblePasswordButtonProps = PropsWithHTMLAttributesAndRef<
   {
     size?: FieldPropSize;
-    active: boolean;
+    active?: boolean;
     children?: never;
     startIcon?: IconComponent;
     endIcon?: IconComponent;

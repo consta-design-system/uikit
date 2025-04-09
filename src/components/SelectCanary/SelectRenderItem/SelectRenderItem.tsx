@@ -1,6 +1,6 @@
 import { AtomMut } from '@reatom/framework';
-import { reatomComponent } from '@reatom/npm-react';
-import React from 'react';
+import { reatomComponent, useAtom, useCtx } from '@reatom/npm-react';
+import React, { useEffect } from 'react';
 
 import { useCreateAtom } from '##/utils/state/useCreateAtom';
 
@@ -29,46 +29,44 @@ type SelectRenderItemComponent = <ITEM>(
   props: SelectRenderItemProps<ITEM>,
 ) => JSX.Element;
 
-export const SelectRenderItem: SelectRenderItemComponent = reatomComponent(
-  (props) => {
-    const {
-      ctx,
-      renderItem,
-      item,
-      rootRef,
-      onClick,
-      onMouseEnter,
-      highlightedIndexAtom,
-      index,
-      valueAtom,
-      getItemKeyAtom,
-    } = props;
+export const SelectRenderItem: SelectRenderItemComponent = (props) => {
+  const {
+    renderItem,
+    item,
+    rootRef,
+    onClick,
+    onMouseEnter,
+    highlightedIndexAtom,
+    index,
+    valueAtom,
+    getItemKeyAtom,
+  } = props;
 
-    const hoveredAtom = useCreateAtom((ctx) => {
-      const highlightedIndex = ctx.spy(highlightedIndexAtom);
-      return index === highlightedIndex;
-    });
+  const [active] = useAtom((ctx) => {
+    const value = ctx.spy(valueAtom);
 
-    const activeAtom = useCreateAtom((ctx) => {
-      const value = ctx.spy(valueAtom);
-      const getItemKey = ctx.get(getItemKeyAtom);
+    const getItemKey = ctx.get(getItemKeyAtom);
 
-      return !!value.find(
-        (valueItem) => getItemKey(valueItem) === getItemKey(item),
-      );
-    });
-
-    return (
-      <>
-        {renderItem({
-          ref: rootRef,
-          onClick,
-          onMouseEnter,
-          item,
-          active: ctx.spy(activeAtom),
-          hovered: ctx.spy(hoveredAtom),
-        })}
-      </>
+    return !!value.find(
+      (valueItem) => getItemKey(valueItem) === getItemKey(item),
     );
-  },
-);
+  });
+
+  const [hovered] = useAtom((ctx) => {
+    const highlightedIndex = ctx.spy(highlightedIndexAtom);
+    return index === highlightedIndex;
+  });
+
+  return (
+    <>
+      {renderItem({
+        ref: rootRef,
+        onClick,
+        onMouseEnter,
+        item,
+        active,
+        hovered,
+      })}
+    </>
+  );
+};

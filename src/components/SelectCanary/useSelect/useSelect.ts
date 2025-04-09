@@ -101,13 +101,13 @@ export const useSelect = <
   const disabledAtom = usePropAtom(propsAtom, 'disabled');
   const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
   const dropdownOpenPropAtom = usePropAtom(propsAtom, 'dropdownOpen');
-  const [ignoreOutsideClicksRefs] = usePropAtom(
+  const ignoreOutsideClicksRefsAtom = usePropAtom(
     propsAtom,
     'ignoreOutsideClicksRefs',
-    true,
   );
   const onCreateAtom = usePropAtom(propsAtom, 'onCreate');
   const getItemKeyAtom = usePropAtom(propsAtom, 'getItemKey');
+  const [ignoreOutsideClicksRefs] = useAtom(ignoreOutsideClicksRefsAtom);
 
   const valueAtom = useCreateAtom((ctx) => {
     const value = ctx.spy(valuePropAtom);
@@ -162,42 +162,67 @@ export const useSelect = <
     ],
   );
 
-  const visibleItemsAtom = useAtom(
-    (ctx) => {
-      const {
-        selectAll,
-        groups,
-        getItemGroupKey,
-        getGroupKey,
-        getItemDisabled,
-        getItemKey,
+  const visibleItemsAtom = useCreateAtom((ctx) => {
+    const {
+      selectAll,
+      groups,
+      getItemGroupKey,
+      getGroupKey,
+      getItemDisabled,
+      getItemKey,
+      items,
+    } = ctx.spy(propsForVisibleItemsAtom);
+
+    const optionForCreate = ctx.spy(optionForCreateAtom);
+
+    // ToDo: преобразовать в расчет только структуры
+    const resultGroups = getCountedGroups(
+      getGroups(
         items,
-      } = ctx.spy(propsForVisibleItemsAtom);
+        groups?.length ? getItemGroupKey : undefined,
+        groups,
+        getGroupKey,
+        undefined,
+      ),
+      [],
+      !!selectAll,
+      getItemKey as SelectPropGetItemKey<ITEM>,
+      getItemDisabled,
+    );
 
-      const optionForCreate = ctx.spy(optionForCreateAtom);
+    return optionForCreate ? [optionForCreate, ...resultGroups] : resultGroups;
+  });
 
-      const value = ctx.spy(valueAtom);
-      const resultGroups = getCountedGroups(
-        getGroups(
-          items,
-          groups?.length ? getItemGroupKey : undefined,
-          groups,
-          getGroupKey,
-          undefined,
-        ),
-        value,
-        !!selectAll,
-        getItemKey as SelectPropGetItemKey<ITEM>,
-        getItemDisabled,
-      );
+  const groupsCounterAtom = useCreateAtom((ctx) => {
+    const items = ctx.spy(visibleItemsAtom);
+    const selectAll = ctx.spy(selectAllAtom);
+    const value = ctx.spy(valueAtom);
 
-      return optionForCreate
-        ? [optionForCreate, ...resultGroups]
-        : resultGroups;
-    },
-    undefined,
-    false,
-  )[2];
+    const getCounter = () => {
+      const total = [];
+      for (const group of items) {
+        if (isOptionForCreate(group)) {
+          continue;
+        }
+        for (const groupItems of group.items) {
+          if (!!isOptionForSelectAll(groupItems)) {
+            total.push(groupItems);
+          }
+        }
+      }
+    }
+
+    const counter = items.map((item) => {
+
+    }
+    // if(selectAll){
+    //   return items.map((item) => {
+    //     if()
+    //   })
+    // }
+
+    console.log(items);
+  });
 
   // eslint-disable-next-line no-unused-vars
   const [maxHighlightIndex, _, maxHighlightIndexAtom] = useAtom((ctx) => {
@@ -215,7 +240,22 @@ export const useSelect = <
     );
   });
 
-  const optionsRefs = useRefs<HTMLDivElement>(maxHighlightIndex);
+  const hasItemsAtom = useCreateAtom((ctx) => {
+    const items = ctx.spy(itemsAtom);
+    const optionForCreate = ctx.spy(optionForCreateAtom);
+
+    if (optionForCreate) {
+      return false;
+    }
+
+    return !!items.length;
+  });
+
+  const optionsRefs = useRefs<HTMLDivElement>(
+    maxHighlightIndex,
+    undefined,
+    true,
+  );
 
   const scrollToHighlightedIndex = useAction((ctx) => {
     const items = ctx.get(itemsAtom);
@@ -636,5 +676,6 @@ export const useSelect = <
     highlightIndex,
     onCreate,
     onChange,
+    hasItemsAtom,
   };
 };

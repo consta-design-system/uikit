@@ -4,16 +4,23 @@ import { SelectGroupDefault, SelectItemDefault, SelectPropsInit } from '.';
 
 export const defaultLabelForEmptyItems = 'Список пуст';
 
+const getItemKey = (item: SelectItemDefault) => item.id;
+const getGroupKey = (group: SelectGroupDefault) => group.id;
+const getGroupLabel = (group: SelectGroupDefault) => group.label;
+const getItemDisabled = (item: SelectItemDefault) => item.disabled;
+const getItemGroupKey = (item: SelectItemDefault) => item.groupId;
+const getItemLabel = (item: SelectItemDefault) => item.label;
+
 const defaultProps = {
   form: 'default',
   size: 'm',
   view: 'default',
-  getItemKey: (item: SelectItemDefault) => item.id,
-  getGroupKey: (group: SelectGroupDefault) => group.id,
-  getGroupLabel: (group: SelectGroupDefault) => group.label,
-  getItemDisabled: (item: SelectItemDefault) => item.disabled,
-  getItemGroupKey: (item: SelectItemDefault) => item.groupId,
-  getItemLabel: (item: SelectItemDefault) => item.label,
+  getItemKey,
+  getGroupKey,
+  getGroupLabel,
+  getItemDisabled,
+  getItemGroupKey,
+  getItemLabel,
   dropdownForm: 'default',
   labelForEmptyItems: defaultLabelForEmptyItems,
 } as const;

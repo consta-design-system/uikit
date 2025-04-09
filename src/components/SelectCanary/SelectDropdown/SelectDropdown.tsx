@@ -2,7 +2,7 @@ import './SelectDropdown.css';
 
 import { AtomMut } from '@reatom/framework';
 import { useAtom } from '@reatom/npm-react';
-import React, { Fragment, useMemo } from 'react';
+import React, { Fragment, memo, useMemo } from 'react';
 
 import { FieldPropSize } from '##/components/FieldComponents';
 import {
@@ -79,7 +79,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   labelForNotFound?: string;
   labelForEmptyItems?: string;
   notFound?: boolean;
-  hasItems?: boolean;
+  hasItemsAtom: AtomMut<boolean>;
   itemsRefs: React.RefObject<HTMLDivElement>[];
   virtualScroll?: boolean;
   onScrollToBottom?: (length: number) => void;
@@ -128,7 +128,7 @@ const isVisible = (slice: [number, number], index: number) => {
   return index >= slice[0] && index < slice[1];
 };
 
-export const SelectDropdown: SelectDropdownComponent = (props) => {
+export const SelectDropdown: SelectDropdownComponent = memo((props) => {
   const {
     controlRef,
     size,
@@ -138,7 +138,7 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
     className,
     labelForNotFound,
     labelForEmptyItems,
-    hasItems = true,
+    hasItemsAtom,
     form,
     openAtom,
     offset: offsetProp = 'none',
@@ -161,8 +161,8 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
     ...otherProps
   } = props;
 
-  const isOpen = useAtom(openAtom)[0];
-  const visibleItems = useAtom(visibleItemsAtom)[0];
+  const [visibleItems] = useAtom(visibleItemsAtom);
+  const [hasItems] = useAtom(hasItemsAtom);
 
   const indent = form === 'round' ? 'increased' : 'normal';
 
@@ -190,7 +190,7 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
     scrollElementRef,
   } = useVirtualScroll({
     length: lengthForVirtualScroll,
-    isActive: virtualScroll && isOpen,
+    isActive: virtualScroll,
     onScrollToBottom,
   });
 
@@ -330,4 +330,4 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
       </div>
     </SelectPopover>
   );
-};
+});
