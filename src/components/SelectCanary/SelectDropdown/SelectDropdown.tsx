@@ -90,6 +90,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   onCreate: (e: React.SyntheticEvent) => void;
   onChange: (e: React.SyntheticEvent, item: ITEM) => void;
   inputValueAtom: AtomMut<string>;
+  groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
 }>;
 
 type SelectDropdownComponent = <ITEM, GROUP>(
@@ -158,6 +159,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
     onChange,
     onChangeAll,
     inputValueAtom,
+    groupsCounterAtom,
     ...otherProps
   } = props;
 
@@ -224,6 +226,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
         {isLoading && !isListShowed && <SelectLoader />}
         <div
           className={cnSelectDropdown('List')}
+          key={cnSelectDropdown('List')}
           style={{ marginTop: spaceTop }}
         >
           {visibleItems.map((group, groupIndex) => {
@@ -232,6 +235,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
               return (
                 <SelectCreateButton
                   size={size}
+                  key={cnSelectDropdown('List', { key: 'CreateButton' })}
                   labelForCreate={labelForCreate}
                   indent={indent}
                   ref={itemsRefs[index]}
@@ -253,6 +257,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
                   getGroupLabel &&
                   isVisible(slice, virtualIndex) && (
                     <SelectGroupLabel
+                      groupsCounterAtom={groupsCounterAtom}
                       label={getGroupLabel(group.group)}
                       size={size}
                       indent={indent}
@@ -268,6 +273,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
                     if (isVisible(slice, virtualIndex)) {
                       return (
                         <SelectItemAll
+                          key={`group-${group.key}-SelectItemAll`}
                           ref={forkRef([
                             listRefs[virtualIndex],
                             itemsRefs[index],

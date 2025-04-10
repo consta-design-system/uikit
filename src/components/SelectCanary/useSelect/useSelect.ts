@@ -111,6 +111,7 @@ export const useSelect = <
 
   const valueAtom = useCreateAtom((ctx) => {
     const value = ctx.spy(valuePropAtom);
+    console.log('valueAtom', value);
     return (value && (Array.isArray(value) ? value : [value])) || [];
   }) as unknown as AtomMut<ITEM[]>;
   const focusAtom = useCreateAtom(false);
@@ -197,31 +198,43 @@ export const useSelect = <
     const items = ctx.spy(visibleItemsAtom);
     const selectAll = ctx.spy(selectAllAtom);
     const value = ctx.spy(valueAtom);
+    const { getItemDisabled, getGroupKey } = ctx.get(propsForVisibleItemsAtom);
 
-    const getCounter = () => {
-      const total = [];
+    console.log('groupsCounterAtom value', value);
+    const groupCounter: Record<string, [number, number]> = {};
+
+    const getSelectedCounter = () => {
       for (const group of items) {
         if (isOptionForCreate(group)) {
           continue;
         }
+        groupCounter[group.key] = [0, items.length];
         for (const groupItems of group.items) {
-          if (!!isOptionForSelectAll(groupItems)) {
-            total.push(groupItems);
+          if (
+            !isOptionForSelectAll(groupItems) &&
+            !getItemDisabled(groupItems) &&
+            value.some((item) => groupItems === item)
+          ) {
+            groupCounter[group.key][0] = (groupCounter[group.key][0] || 0) + 1;
           }
         }
       }
+    };
+
+    if (selectAll) {
+      getSelectedCounter();
     }
 
-    const counter = items.map((item) => {
+    console.log('groupCounter', groupCounter);
 
-    }
+    return groupCounter;
+    // const
+
     // if(selectAll){
     //   return items.map((item) => {
     //     if()
     //   })
     // }
-
-    console.log(items);
   });
 
   // eslint-disable-next-line no-unused-vars
@@ -251,11 +264,7 @@ export const useSelect = <
     return !!items.length;
   });
 
-  const optionsRefs = useRefs<HTMLDivElement>(
-    maxHighlightIndex,
-    undefined,
-    true,
-  );
+  const optionsRefs = useRefs<HTMLDivElement>(maxHighlightIndex, undefined);
 
   const scrollToHighlightedIndex = useAction((ctx) => {
     const items = ctx.get(itemsAtom);
@@ -677,5 +686,6 @@ export const useSelect = <
     onCreate,
     onChange,
     hasItemsAtom,
+    groupsCounterAtom,
   };
 };

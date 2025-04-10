@@ -88,6 +88,7 @@ const SelectMultipleRender = <
     ignoreOutsideClicksRefs,
     clearButton,
     selectAll,
+
     ...otherProps
   } = propsWithDefault;
 
@@ -117,6 +118,7 @@ const SelectMultipleRender = <
     inputValueAtom,
     getHandleRemoveValue,
     hasItemsAtom,
+    groupsCounterAtom,
   } = useSelect<ITEM, GROUP, true>({
     propsAtom,
   });
@@ -262,6 +264,7 @@ const SelectMultipleRender = <
         onChange={onChange}
         inputValueAtom={inputValueAtom}
         hasItemsAtom={hasItemsAtom}
+        groupsCounterAtom={groupsCounterAtom}
         // style={
         //   // TODO: мемоизировать
         //   typeof style?.zIndex === 'number'
