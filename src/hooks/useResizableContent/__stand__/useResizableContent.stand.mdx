@@ -1,3 +1,5 @@
+import { MdxInformer } from '@consta/stand';
+
 import { UseResizableContentBasic } from './examples/UseResizableContentBasic/UseResizableContentBasic';
 
 ```tsx
@@ -6,7 +8,11 @@ import { useResizableContent } from '@consta/uikit/useResizableContent';
 
 С помощью хука `useResizableContent` размеры блоков в контейнере можно сделать изменяемыми.
 
-> Для избежания пересоздания внутренних функций хука, мемоизируйте входные параметры.
+<MdxInformer status="success">
+
+Чтобы избежать пересоздания внутренних функций хука, мемоизируйте входные параметры.
+
+</MdxInformer>
 
 ```tsx
 export const UseResizableContentBasic = () => {
