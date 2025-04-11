@@ -1,6 +1,6 @@
 import './ContextMenuWrapper.css';
 
-import React, { Fragment, useCallback, useState } from 'react';
+import React, { Fragment, useCallback, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 
 import { cnListBox, mapVerticalSpace } from '##/components/ListCanary';
@@ -46,6 +46,8 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
 
   const onSetDirectionRef = useMutableRef(onSetDirectionProp);
 
+  const rootRef = useRef<HTMLDivElement>(null);
+
   const onSetDirection = useCallback((direction: Direction) => {
     setDirection(direction);
     onSetDirectionRef.current?.(direction);
@@ -59,6 +61,7 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
         unmountOnExit
         onEntered={setInnerAnimation.on}
         onExit={setInnerAnimation.off}
+        nodeRef={rootRef}
       >
         {(animate) => (
           <Popover
@@ -70,6 +73,7 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
               cnMixPopoverAnimate({ animate }),
               className,
             ])}
+            ref={rootRef}
             anchorRef={anchorRef}
             possibleDirections={possibleDirections}
             position={position}
