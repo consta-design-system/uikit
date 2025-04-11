@@ -1,5 +1,21 @@
 # Changelog
 
+## v5.18.0 (11/04/2025)
+Самое главное:
+- В `Tabs` добавлен `getItemKey` для возможности указывать произвольный ключ.
+- Добавлены тесты для `Avatar`, `AutoComplete`, `Attachment` и `FieldComponents`.
+
+---
+
+- [fix(Transition): fixed findDOMNode is not a function in react 19 (#3922)](https://github.com/consta-design-system/uikit/commit/9a071fbbf0fd24f38bdf10da4a30f531a70886ec) - [@gizeasy](https://github.com/gizeasy)
+- [test(Avatar): add tests](https://github.com/consta-design-system/uikit/commit/761ec46d442f14d75a2a90ada56cf127dff9c533) - [@gizeasy](https://github.com/gizeasy)
+- [test(AutoComplete): add tests (#3913)](https://github.com/consta-design-system/uikit/commit/f728b6a448ae2207e5cc8b75de503244b2ffda71) - [@gizeasy](https://github.com/gizeasy)
+- [docs: fix docs typos (#3902)](https://github.com/consta-design-system/uikit/commit/671d545de0ebb667d4f6a3ea87c3191b2cbf46e1) - [@baevm](https://github.com/baevm)
+- [feat(Tabs, BookmarkTabs): add getItemKey for Tabs, fix empty tabs render problem for BookmarkTabs](https://github.com/consta-design-system/uikit/commit/84649da176a7e42a8c0ac5a59c2cc0516e9eaace) - [@ZettZet](https://github.com/ZettZet)
+- [test(Attachment, FieldComponents): add tests (#3910)](https://github.com/consta-design-system/uikit/commit/38e9c667edee8b7f11b926ea555de280b135f1ef) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.17.0 (09/01/2025)
 Самое важное:
 - Добавили новый `canary` компонент `Steps`. Полностью переработали дизайн компонента и добавили новые возможности.
@@ -399,11 +415,3 @@
 - [feat(withTooltip): add animate and refactor HOC (#3310)](https://github.com/consta-design-system/uikit/commit/c7dd62e56feb41c18e4a2bf0d11de76afb419dc2) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Responses): added images reexports (#3308)](https://github.com/consta-design-system/uikit/commit/04c832e480d19a08e6c81ad72e3a71eff7bf9a33) - [@gizeasy](https://github.com/gizeasy)
 - [feat(MixFlex): add new mixin (#3294)](https://github.com/consta-design-system/uikit/commit/fda9e848c80ad2ab22ed7da89868bb0499eb2ae5) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.30.1 (27/09/2023)
-- [fix(List): fixed background on ListItem (#3300)](https://github.com/consta-design-system/uikit/commit/6b87a1e491836354e17626440e8adcd14f2b414f) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Selects): fix render numbers value (#3297)](https://github.com/consta-design-system/uikit/commit/f129a3482476c59038252295f9a5853c203b12b2) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Button): property type set to all places (#3295)](https://github.com/consta-design-system/uikit/commit/ebec6dba46e0fcc789f0f5714348ab906bfb180d) - [@N1MBER](https://github.com/N1MBER)
-- [docs(List): remove non exist field from documentation (#3296)](https://github.com/consta-design-system/uikit/commit/f70ea5167e2888489215f8336e7dd8cf9c2dc9d2) - [@N1MBER](https://github.com/N1MBER)
