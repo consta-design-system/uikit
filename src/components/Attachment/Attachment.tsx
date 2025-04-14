@@ -153,8 +153,9 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
             cnMixFlex({ flex: 'flex', gap: 'xs' }),
           ])}
         >
-          {actions.map((action) => (
+          {actions.map((action, index) => (
             <Button
+              key={action.title || index}
               className={cnAttachment('Button')}
               tabIndex={-1}
               onlyIcon
