@@ -51,6 +51,7 @@
   font-size: var(--field-control-layout-text-size);
   line-height: var(--field-control-layout-text-line-height);
   transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
 
   &_disabled {
     --field-control-layout-placeholder-color: var(--color-control-typo-disable);

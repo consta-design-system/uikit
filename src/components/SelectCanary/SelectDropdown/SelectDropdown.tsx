@@ -34,6 +34,7 @@ import { SelectItemAll } from '../SelectItemAll/SelectItemAll';
 import { SelectLoader } from '../SelectLoader/SelectLoader';
 import { SelectPopover } from '../SelectPopover';
 import { SelectRenderItem } from '../SelectRenderItem';
+import { CountedGroup } from '../types';
 
 export const selectDropdownForm = ['default', 'brick', 'round'] as const;
 export type SelectDropdownPropForm = typeof selectDropdownForm[number];
@@ -59,19 +60,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   isLoading?: boolean;
   renderItem: (props: RenderItemProps<ITEM>) => React.ReactNode | null;
   highlightedIndexAtom: AtomMut<number>;
-  visibleItemsAtom: AtomMut<
-    (
-      | OptionForCreate
-      | {
-          items: Array<SelectAllItem | ITEM>;
-          key: string | number;
-          group?: GROUP;
-          groupIndex: number;
-          checkedCount?: number;
-          totalCount?: number;
-        }
-    )[]
-  >;
+  visibleItemsAtom: AtomMut<(OptionForCreate | CountedGroup<ITEM, GROUP>)[]>;
   getGroupLabel?: (group: GROUP) => string;
   labelForCreate?:
     | ((label: string | undefined) => React.ReactNode)
@@ -106,9 +95,6 @@ const getLengthElements = <ITEM, GROUP>(
         items: Array<SelectAllItem | ITEM>;
         key: string | number;
         group?: GROUP;
-        groupIndex: number;
-        checkedCount?: number;
-        totalCount?: number;
       }
   )[],
 ) => {
@@ -165,6 +151,10 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
 
   const [visibleItems] = useAtom(visibleItemsAtom);
   const [hasItems] = useAtom(hasItemsAtom);
+  const [isListMount, setIsListMount] = useAtom(false);
+  const [getItemKey] = useAtom(getItemKeyAtom);
+
+  console.log('render SelectDropdown', { hasItems, visibleItems });
 
   const indent = form === 'round' ? 'increased' : 'normal';
 
@@ -192,9 +182,11 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
     scrollElementRef,
   } = useVirtualScroll({
     length: lengthForVirtualScroll,
-    isActive: virtualScroll,
+    isActive: virtualScroll && isListMount,
     onScrollToBottom,
   });
+
+  const scrollContainerRef = useForkRef([scrollElementRef, dropdownRefProp]);
 
   const slice: [number, number] =
     sliceHookProp[0] === 0 && virtualScroll ? [0, 50] : sliceHookProp;
@@ -213,127 +205,134 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
       controlRef={controlRef}
       openAtom={openAtom}
       form={form}
+      onMount={setIsListMount}
     >
-      <div
-        className={cnSelectDropdown('ScrollContainer', [
-          cnMixSpace({
-            pV: mapVerticalSpace[size],
-          }),
-          cnMixScrollBar({ size: 'xs' }),
-        ])}
-        ref={useForkRef([scrollElementRef, dropdownRefProp])}
-      >
-        {isLoading && !isListShowed && <SelectLoader />}
+      {isListMount && (
         <div
-          className={cnSelectDropdown('List')}
-          key={cnSelectDropdown('List')}
-          style={{ marginTop: spaceTop }}
+          className={cnSelectDropdown('ScrollContainer', [
+            cnMixSpace({
+              pV: mapVerticalSpace[size],
+            }),
+            cnMixScrollBar({ size: 'xs' }),
+          ])}
+          ref={scrollContainerRef}
         >
-          {visibleItems.map((group, groupIndex) => {
-            if (isOptionForCreate(group)) {
-              const index = getIndex();
+          {isLoading && !isListShowed && <SelectLoader />}
+          <div
+            className={cnSelectDropdown('List')}
+            key={cnSelectDropdown('List')}
+            style={{ marginTop: spaceTop }}
+          >
+            {visibleItems.map((group) => {
+              if (isOptionForCreate(group)) {
+                const index = getIndex();
+                return (
+                  <SelectCreateButton
+                    size={size}
+                    key={cnSelectDropdown('List', { key: 'CreateButton' })}
+                    labelForCreate={labelForCreate}
+                    indent={indent}
+                    ref={itemsRefs[index]}
+                    onClick={onCreate}
+                    highlightedIndexAtom={highlightedIndexAtom}
+                    inputValueAtom={inputValueAtom}
+                    highlightIndex={highlightIndex}
+                    index={index}
+                  />
+                );
+              }
+
+              const virtualIndex =
+                visibleItems.length > 1 ? getVirtualIndex() : 0;
+
               return (
-                <SelectCreateButton
-                  size={size}
-                  key={cnSelectDropdown('List', { key: 'CreateButton' })}
-                  labelForCreate={labelForCreate}
-                  indent={indent}
-                  ref={itemsRefs[index]}
-                  onClick={onCreate}
-                  highlightedIndexAtom={highlightedIndexAtom}
-                  inputValueAtom={inputValueAtom}
-                  highlightIndex={highlightIndex}
-                  index={index}
-                />
+                <Fragment key={group.key}>
+                  {group.group &&
+                    getGroupLabel &&
+                    isVisible(slice, virtualIndex) && (
+                      <SelectGroupLabel
+                        label={getGroupLabel(group.group)}
+                        size={size}
+                        indent={indent}
+                        ref={listRefs[virtualIndex]}
+                        key={`group-${group.key}-Label`}
+                      />
+                    )}
+                  {group.items.map((item) => {
+                    if (isOptionForSelectAll(item)) {
+                      const virtualIndex = getVirtualIndex();
+                      const index = getIndex();
+
+                      if (isVisible(slice, virtualIndex)) {
+                        return (
+                          <SelectItemAll
+                            groupId={group.key}
+                            highlightedIndexAtom={highlightedIndexAtom}
+                            groupsCounterAtom={groupsCounterAtom}
+                            key={cnSelectDropdown('SelectItemAll', {
+                              group: group.key,
+                            })}
+                            ref={forkRef([
+                              listRefs[virtualIndex],
+                              itemsRefs[index],
+                            ])}
+                            indent={indent}
+                            size={size}
+                            {...getOptionActions({
+                              index,
+                              item,
+                            })}
+                            index={index}
+                          />
+                        );
+                      }
+                    } else {
+                      const virtualIndex = getVirtualIndex();
+                      const index = getIndex();
+                      if (isVisible(slice, virtualIndex)) {
+                        return (
+                          <SelectRenderItem
+                            key={cnSelectDropdown('SelectRenderItem', {
+                              group: group.key,
+                              item: getItemKey(item),
+                            })}
+                            getItemKeyAtom={getItemKeyAtom}
+                            highlightedIndexAtom={highlightedIndexAtom}
+                            rootRef={forkRef([
+                              listRefs[virtualIndex],
+                              itemsRefs[index],
+                            ])}
+                            renderItem={renderItem}
+                            item={item}
+                            {...getOptionActions({
+                              index,
+                              item,
+                            })}
+                            index={index}
+                            valueAtom={valueAtom}
+                          />
+                        );
+                      }
+                    }
+                  })}
+                </Fragment>
               );
-            }
-
-            const virtualIndex =
-              visibleItems.length > 1 ? getVirtualIndex() : 0;
-
-            return (
-              <Fragment key={group.key}>
-                {group.group &&
-                  getGroupLabel &&
-                  isVisible(slice, virtualIndex) && (
-                    <SelectGroupLabel
-                      groupsCounterAtom={groupsCounterAtom}
-                      label={getGroupLabel(group.group)}
-                      size={size}
-                      indent={indent}
-                      ref={listRefs[virtualIndex]}
-                      key={`group-${group.key}`}
-                    />
-                  )}
-                {group.items.map((item, i) => {
-                  if (isOptionForSelectAll(item)) {
-                    const virtualIndex = getVirtualIndex();
-                    const index = getIndex();
-
-                    if (isVisible(slice, virtualIndex)) {
-                      return (
-                        <SelectItemAll
-                          key={`group-${group.key}-SelectItemAll`}
-                          ref={forkRef([
-                            listRefs[virtualIndex],
-                            itemsRefs[index],
-                          ])}
-                          indent={indent}
-                          size={size}
-                          {...getOptionActions({
-                            index,
-                            item,
-                          })}
-                          intermediate={
-                            item.checkedCount && item.totalCount
-                              ? item.checkedCount !== item.totalCount
-                              : false
-                          }
-                          checked={item.checkedCount === item.totalCount}
-                          countItems={item.checkedCount}
-                          total={item.totalCount}
-                        />
-                      );
-                    }
-                  } else {
-                    const virtualIndex = getVirtualIndex();
-                    const index = getIndex();
-                    if (isVisible(slice, virtualIndex)) {
-                      return (
-                        <SelectRenderItem
-                          key={`${group.key}-${i}`}
-                          getItemKeyAtom={getItemKeyAtom}
-                          highlightedIndexAtom={highlightedIndexAtom}
-                          rootRef={forkRef([
-                            listRefs[virtualIndex],
-                            itemsRefs[index],
-                          ])}
-                          renderItem={renderItem}
-                          item={item}
-                          {...getOptionActions({
-                            index,
-                            item,
-                          })}
-                          index={index}
-                          valueAtom={valueAtom}
-                        />
-                      );
-                    }
-                  }
-                })}
-              </Fragment>
-            );
-          })}
-          {isLoading && isListShowed && (
-            <ListLoader size={size} innerOffset={indent} />
+            })}
+            {isLoading && isListShowed && (
+              <ListLoader size={size} innerOffset={indent} />
+            )}
+          </div>
+          {!isLoading && !hasItems && labelForEmptyItems && (
+            <ListItem
+              size={size}
+              label={labelForEmptyItems}
+              innerOffset={indent}
+            >
+              {labelForEmptyItems}
+            </ListItem>
           )}
         </div>
-        {!isLoading && !hasItems && labelForEmptyItems && (
-          <ListItem size={size} label={labelForEmptyItems} innerOffset={indent}>
-            {labelForEmptyItems}
-          </ListItem>
-        )}
-      </div>
+      )}
     </SelectPopover>
   );
 });

@@ -1,7 +1,7 @@
 import { classnames } from '@bem-react/classnames';
 import { AtomMut } from '@reatom/framework';
 import { reatomComponent } from '@reatom/npm-react';
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Transition } from 'react-transition-group';
 
 import { FieldPropSize } from '##/components/FieldComponents';
@@ -25,6 +25,7 @@ type Props = PropsWithJsxAttributes<{
   offset?: PopoverPropOffset | 'none';
   anchorRef: React.RefObject<HTMLElement> | undefined;
   children: React.ReactNode;
+  onMount: (isMount: boolean) => void;
 }>;
 
 export const SelectPopover = reatomComponent<Props>((props) => {
@@ -38,6 +39,7 @@ export const SelectPopover = reatomComponent<Props>((props) => {
     form,
     anchorRef,
     children,
+    onMount,
     ...otherProps
   } = props;
 
@@ -51,6 +53,8 @@ export const SelectPopover = reatomComponent<Props>((props) => {
       nodeRef={popoverRef}
       timeout={animateTimeout}
       unmountOnExit
+      onEntering={useCallback(() => onMount(true), [])}
+      onExited={useCallback(() => onMount(false), [])}
     >
       {(animate) => {
         return (

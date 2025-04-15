@@ -1,18 +1,15 @@
-import { atom, CtxSpy, Fn } from '@reatom/core';
+import { atom, AtomMut, CtxSpy } from '@reatom/core';
 import { useCtx } from '@reatom/npm-react';
 import { useEffect, useMemo } from 'react';
 
-// export const useCreateAtom = <T>(init: T | Fn<[CtxSpy], T>) =>
-//   useAtom(init, undefined, false)[2];
+const emptyFn = () => {};
+const emptyArray: [] = [];
 
-export const useCreateAtom = <T>(init: T | Fn<[CtxSpy], T>) => {
+export const useCreateAtom = <T>(init: T | ((ctx: CtxSpy) => T)) => {
   const ctx = useCtx();
-  const a = useMemo(() => atom(init), []);
+  const targetAtom = useMemo(() => atom(init), emptyArray) as AtomMut<T>;
 
-  useEffect(() => {
-    const unsubscribe = ctx.subscribe(a, () => {});
-    return unsubscribe;
-  }, []);
+  useEffect(() => ctx.subscribe(targetAtom, emptyFn), emptyArray);
 
-  return a;
+  return targetAtom;
 };

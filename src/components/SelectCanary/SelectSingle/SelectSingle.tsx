@@ -146,6 +146,7 @@ const SelectSingleRender = <
     onChange,
     inputValueAtom,
     hasItemsAtom,
+    groupsCounterAtom,
   } = useSelect<ITEM, GROUP, false>({
     propsAtom,
   });
@@ -211,6 +212,7 @@ const SelectSingleRender = <
         onChange={onChange}
         inputValueAtom={inputValueAtom}
         hasItemsAtom={hasItemsAtom}
+        groupsCounterAtom={groupsCounterAtom}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

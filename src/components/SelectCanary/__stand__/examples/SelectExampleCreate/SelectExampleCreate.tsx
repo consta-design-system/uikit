@@ -8,30 +8,27 @@ const getItemLabel = (item: string) => item;
 export function SelectExampleCreate() {
   const [value, setValue] = useState<string | null>();
   const [list, setList] = useState<string[]>(['Первый', 'Второй', 'Третий']);
-  // const { items, labelForEmptyItems, onInput } = useSearch({
-  //   items: list,
-  //   search: getSearchFunctionDefault(getItemLabel),
-  // });
-  // const onCreate = useCallback(
-  //   (label: string) => setList((state) => [label, ...state]),
-  //   [],
-  // );
-
-  console.log('SelectExampleCreate');
+  const { items, labelForEmptyItems, onInput } = useSearch({
+    items: list,
+    search: getSearchFunctionDefault(getItemLabel),
+  });
+  const onCreate = useCallback(
+    (label: string) => setList((state) => [label, ...state]),
+    [],
+  );
 
   return (
     <Example col={1}>
       <Select
         placeholder="Выберите вариант"
-        items={list}
+        items={items}
         value={value}
         onChange={setValue}
         getItemLabel={getItemLabel}
         getItemKey={getItemLabel}
-        // onCreate={!items.length ? onCreate : undefined}
-        onCreate={() => {}}
-        // labelForEmptyItems={labelForEmptyItems}
-        // onInput={onInput}
+        onCreate={!items.length ? onCreate : undefined}
+        labelForEmptyItems={labelForEmptyItems}
+        onInput={onInput}
         input
       />
     </Example>

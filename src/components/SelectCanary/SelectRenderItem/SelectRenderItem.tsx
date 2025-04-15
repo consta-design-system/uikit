@@ -1,8 +1,6 @@
 import { AtomMut } from '@reatom/framework';
-import { reatomComponent, useAtom, useCtx } from '@reatom/npm-react';
-import React, { useEffect } from 'react';
-
-import { useCreateAtom } from '##/utils/state/useCreateAtom';
+import { useAtom } from '@reatom/npm-react';
+import React from 'react';
 
 type RenderItemProps<ITEM> = {
   item: ITEM;

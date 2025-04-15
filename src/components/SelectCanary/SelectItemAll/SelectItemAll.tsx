@@ -1,3 +1,5 @@
+import { AtomMut } from '@reatom/framework';
+import { useAtom } from '@reatom/npm-react';
 import React, { forwardRef } from 'react';
 
 import { Checkbox } from '##/components/Checkbox';
@@ -11,13 +13,13 @@ import { sizeCheckboxMap } from '../SelectItem';
 
 export type SelectItemAllProps = PropsWithHTMLAttributesAndRef<
   {
-    checked: boolean;
-    intermediate?: boolean;
     size: FieldPropSize;
     hovered?: boolean;
     indent?: 'normal' | 'increased';
-    countItems?: number;
-    total?: number;
+    groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
+    groupId: string | number;
+    highlightedIndexAtom: AtomMut<number>;
+    index: number;
   },
   HTMLDivElement
 >;
@@ -31,43 +33,95 @@ const textSizeMap: Record<FieldPropSize, TextPropSize> = {
   l: 'l',
 };
 
+const SelectItemAllCounter: React.FC<{
+  groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
+  groupId: string | number;
+  size: FieldPropSize;
+}> = ({ groupsCounterAtom, groupId, size }) => {
+  const [total] = useAtom((ctx) => {
+    const counter = ctx.spy(groupsCounterAtom);
+    return counter[groupId]?.[1] || 0;
+  });
+  const [selected] = useAtom((ctx) => {
+    const counter = ctx.spy(groupsCounterAtom);
+    return counter[groupId]?.[0] || 0;
+  });
+
+  return (
+    <Text
+      size={textSizeMap[size]}
+      lineHeight="xs"
+      view="ghost"
+    >{`${selected} из ${total}`}</Text>
+  );
+};
+
+const SelectItemAllCounterCheckbox: React.FC<{
+  groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
+  groupId: string | number;
+  size: FieldPropSize;
+}> = ({ groupsCounterAtom, groupId, size }) => {
+  const [checked] = useAtom((ctx) => {
+    const counter = ctx.spy(groupsCounterAtom);
+    if (counter[groupId] === undefined) {
+      return false;
+    }
+    return counter[groupId][0] === counter[groupId][1];
+  });
+  const [intermediate] = useAtom((ctx) => {
+    const counter = ctx.spy(groupsCounterAtom);
+    if (counter[groupId] === undefined) {
+      return false;
+    }
+    return counter[groupId][0] > 0 && counter[groupId][0] < counter[groupId][1];
+  });
+
+  return (
+    <Checkbox
+      checked={checked}
+      intermediate={intermediate}
+      size={sizeCheckboxMap[size]}
+    />
+  );
+};
+
 export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
   (props, ref) => {
     const {
-      checked,
-      intermediate,
       size,
       indent,
-      hovered,
-      countItems = 0,
       className,
-      total = 0,
+      groupsCounterAtom,
+      groupId,
+      highlightedIndexAtom,
+      index,
       ...otherProps
     } = props;
+
+    const [hovered] = useAtom((ctx) => ctx.spy(highlightedIndexAtom) === index);
 
     return (
       <ListItem
         {...otherProps}
         ref={ref}
         className={cnSelectItemAll(null, [className])}
-        aria-selected={checked}
         role="option"
         label="Выбрать все"
         innerOffset={indent}
         size={size}
         active={hovered}
         rightSide={
-          <Text
-            size={textSizeMap[size]}
-            lineHeight="xs"
-            view="ghost"
-          >{`${countItems} из ${total}`}</Text>
+          <SelectItemAllCounter
+            size={size}
+            groupsCounterAtom={groupsCounterAtom}
+            groupId={groupId}
+          />
         }
         leftSide={
-          <Checkbox
-            checked={checked}
-            intermediate={intermediate}
-            size={sizeCheckboxMap[size]}
+          <SelectItemAllCounterCheckbox
+            size={size}
+            groupsCounterAtom={groupsCounterAtom}
+            groupId={groupId}
           />
         }
       >

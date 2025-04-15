@@ -70,6 +70,21 @@ export type SelectPropOnCreate = (
   props: { e: React.SyntheticEvent },
 ) => void;
 
+export type SelectAllItem = {
+  groupKey: string | number;
+  __optionSelectAll: true;
+};
+
+export type Group<ITEM, GROUP> = {
+  items: ITEM[];
+  key: string | number;
+  group?: GROUP;
+};
+
+export type CountedGroup<ITEM, GROUP> = Omit<Group<ITEM, GROUP>, 'items'> & {
+  items: Array<SelectAllItem | ITEM>;
+};
+
 export type SelectPropsInit<
   ITEM = SelectItemDefault,
   GROUP = SelectGroupDefault,

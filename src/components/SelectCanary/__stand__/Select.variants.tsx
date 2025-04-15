@@ -21,6 +21,7 @@ const getUndefined = () => undefined;
 
 const conditionalGetter = (conditional: boolean) =>
   conditional ? undefined : getUndefined;
+const emptyGroup: [] = [];
 
 const cnSelectCanaryVariants = cn('SelectCanaryVariants');
 
@@ -28,6 +29,7 @@ const Variants = () => {
   const placeholder = useText('placeholder', 'Placeholder');
   const withGroups = useBoolean('withGroups', false);
   const isLoading = useBoolean('isLoading', false);
+  const emptyList = useBoolean('emptyList', false);
   const multiple = useBoolean('multiple', false);
   const withCreateButton = useBoolean('onCreate', false);
   const clearButton = useBoolean('clearButton', false);
@@ -69,10 +71,10 @@ const Variants = () => {
           // allSelectedAllLabel={allSelectedAllLabel}
           dropdownForm={dropdownForm}
           placeholder={placeholder}
-          items={items}
+          items={emptyList ? [] : items}
           value={valueMultiple}
           onChange={setValueMultiple}
-          // groups={withGroups ? groups : []}
+          groups={withGroups ? groups : emptyGroup}
           multiple
           isLoading={isLoading}
           getItemDisabled={conditionalGetter(itemsDisabled)}
@@ -95,10 +97,10 @@ const Variants = () => {
         dropdownForm={dropdownForm}
         status={status || undefined}
         placeholder={placeholder}
-        items={items}
+        items={emptyList ? [] : items}
         value={value}
         onChange={setValue}
-        groups={withGroups ? groups : []}
+        groups={withGroups ? groups : emptyGroup}
         getItemDisabled={conditionalGetter(itemsDisabled)}
         clearButton={clearButton}
         input={input}

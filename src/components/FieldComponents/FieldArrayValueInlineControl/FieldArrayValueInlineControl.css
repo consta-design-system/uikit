@@ -1,4 +1,5 @@
 .FieldArrayValueInlineControl {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: var(--field-array-value-inline-control-items-gap);
@@ -33,6 +34,7 @@
     &_disabled {
       position: absolute;
       pointer-events: none;
+      width: 100%;
     }
 
     &:-webkit-autofill,

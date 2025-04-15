@@ -20,5 +20,6 @@ export const withCtx = <C, P extends {}>(component: C): C =>
     if (useContext(reatomContext)) {
       return element;
     }
+
     return <ProviderWithCtx>{element}</ProviderWithCtx>;
   }) as unknown as C;

@@ -24,7 +24,7 @@ type SortGroups<ITEM, GROUP> = (
   a: Group<ITEM, GROUP>,
   b: Group<ITEM, GROUP>,
 ) => number;
-type GetGroupsResult<ITEM, GROUP> = Group<ITEM, GROUP>[];
+export type GetGroupsResult<ITEM, GROUP> = Group<ITEM, GROUP>[];
 
 export const defaultGroupKey = 'no-group';
 
@@ -102,6 +102,9 @@ export function getGroups<ITEM, GROUP>(
   return resultGroups;
 }
 
+/**
+ * @deprecated
+ */
 export function getCountedGroups<ITEM, GROUP>(
   groups: GetGroupsResult<ITEM, GROUP>,
   values: ITEM[] | undefined | null,
@@ -113,13 +116,13 @@ export function getCountedGroups<ITEM, GROUP>(
   if (selectAll) {
     groups.forEach((group, index) => {
       let totalCount = 0;
-
-      // TODO: checkedCount вынести в отдельный атом
-      const checkedCount = 0;
-
+      let checkedCount = 0;
       group.items.forEach((item) => {
         if (!(getItemDisabled && getItemDisabled?.(item))) {
           totalCount += 1;
+        }
+        if (values?.find((el) => getItemKey(item) === getItemKey(el))) {
+          checkedCount += 1;
         }
       });
       copyGroups[index].items = [

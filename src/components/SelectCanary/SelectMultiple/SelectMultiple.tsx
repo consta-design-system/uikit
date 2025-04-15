@@ -1,6 +1,6 @@
 import './SelectMultiple.css';
 
-import { useAction, useAtom } from '@reatom/npm-react';
+import { useAction } from '@reatom/npm-react';
 import React, { forwardRef, useRef } from 'react';
 
 import {

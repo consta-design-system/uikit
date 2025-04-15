@@ -5,31 +5,16 @@ import React, { useRef } from 'react';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { KeyHandlers, useKeysRef } from '##/hooks/useKeysRef';
 import { useRefs } from '##/hooks/useRefs';
-import {
-  CountedGroup,
-  getCountedGroups,
-  getGroups,
-  SelectAllItem,
-} from '##/utils/getGroups';
+import { getGroups, GetGroupsResult } from '##/utils/getGroups';
 import { useCreateAtom } from '##/utils/state/useCreateAtom';
 import { usePickAtom, usePropAtom } from '##/utils/state/usePickAtom';
 
 import { PropsWithDefault } from '../../SelectCanary/defaultProps';
-import {
-  SelectGroupDefault,
-  SelectItemDefault,
-  SelectPropGetItemKey,
-  SelectPropOnChange,
-} from '..';
+import { SelectGroupDefault, SelectItemDefault, SelectPropOnChange } from '..';
+import { CountedGroup, Group, SelectAllItem } from '../types';
 import { scrollToIndex } from './helpers';
 
 type IndexForHighlight = number | ((oldIndex: number) => number);
-
-type Group<ITEM, GROUP> = {
-  items: ITEM[];
-  key: string | number;
-  group?: GROUP;
-};
 
 export type OptionForCreate = {
   label: string;
@@ -84,6 +69,26 @@ export const isOptionForSelectAll = <ITEM>(
   );
 };
 
+export function getCountedGroups<ITEM, GROUP>(
+  groups: GetGroupsResult<ITEM, GROUP>,
+  selectAll: boolean,
+): CountedGroup<ITEM, GROUP>[] {
+  const copyGroups: CountedGroup<ITEM, GROUP>[] = [...groups];
+
+  if (selectAll) {
+    groups.forEach((group, index) => {
+      copyGroups[index].items = [
+        {
+          __optionSelectAll: true,
+          groupKey: group.key,
+        },
+        ...copyGroups[index].items,
+      ];
+    });
+  }
+  return copyGroups;
+}
+
 export const useSelect = <
   ITEM = SelectItemDefault,
   GROUP = SelectItemDefault,
@@ -111,7 +116,6 @@ export const useSelect = <
 
   const valueAtom = useCreateAtom((ctx) => {
     const value = ctx.spy(valuePropAtom);
-    console.log('valueAtom', value);
     return (value && (Array.isArray(value) ? value : [value])) || [];
   }) as unknown as AtomMut<ITEM[]>;
   const focusAtom = useCreateAtom(false);
@@ -164,16 +168,11 @@ export const useSelect = <
   );
 
   const visibleItemsAtom = useCreateAtom((ctx) => {
-    const {
-      selectAll,
-      groups,
-      getItemGroupKey,
-      getGroupKey,
-      getItemDisabled,
-      getItemKey,
-      items,
-    } = ctx.spy(propsForVisibleItemsAtom);
+    const { selectAll, groups, getItemGroupKey, getGroupKey, items } = ctx.spy(
+      propsForVisibleItemsAtom,
+    );
 
+    // ToDo: optionForCreate расчитывать отдельно
     const optionForCreate = ctx.spy(optionForCreateAtom);
 
     // ToDo: преобразовать в расчет только структуры
@@ -185,35 +184,31 @@ export const useSelect = <
         getGroupKey,
         undefined,
       ),
-      [],
       !!selectAll,
-      getItemKey as SelectPropGetItemKey<ITEM>,
-      getItemDisabled,
     );
 
     return optionForCreate ? [optionForCreate, ...resultGroups] : resultGroups;
   });
 
   const groupsCounterAtom = useCreateAtom((ctx) => {
-    const items = ctx.spy(visibleItemsAtom);
+    const visibleItems = ctx.spy(visibleItemsAtom);
     const selectAll = ctx.spy(selectAllAtom);
     const value = ctx.spy(valueAtom);
-    const { getItemDisabled, getGroupKey } = ctx.get(propsForVisibleItemsAtom);
+    const { getItemDisabled } = ctx.get(propsForVisibleItemsAtom);
 
-    console.log('groupsCounterAtom value', value);
     const groupCounter: Record<string, [number, number]> = {};
 
     const getSelectedCounter = () => {
-      for (const group of items) {
+      for (const group of visibleItems) {
         if (isOptionForCreate(group)) {
           continue;
         }
-        groupCounter[group.key] = [0, items.length];
+        groupCounter[group.key] = [0, group.items.length - 1];
         for (const groupItems of group.items) {
           if (
             !isOptionForSelectAll(groupItems) &&
             !getItemDisabled(groupItems) &&
-            value.some((item) => groupItems === item)
+            value.some((item) => item === groupItems)
           ) {
             groupCounter[group.key][0] = (groupCounter[group.key][0] || 0) + 1;
           }
@@ -225,16 +220,7 @@ export const useSelect = <
       getSelectedCounter();
     }
 
-    console.log('groupCounter', groupCounter);
-
     return groupCounter;
-    // const
-
-    // if(selectAll){
-    //   return items.map((item) => {
-    //     if()
-    //   })
-    // }
   });
 
   // eslint-disable-next-line no-unused-vars
@@ -258,7 +244,7 @@ export const useSelect = <
     const optionForCreate = ctx.spy(optionForCreateAtom);
 
     if (optionForCreate) {
-      return false;
+      return true;
     }
 
     return !!items.length;
@@ -388,7 +374,7 @@ export const useSelect = <
 
   const handleInputChange = useAction(
     (ctx, e: React.ChangeEvent<HTMLInputElement>): void => {
-      if (!ctx.get(disabledAtom)) {
+      if (!ctx.get(disabledAtom) && ctx.get(propsAtom).input) {
         onInput?.(e.target.value);
         openAtom(ctx, true);
       }
@@ -513,7 +499,7 @@ export const useSelect = <
 
   const Backspace = useAction((ctx, e: React.SyntheticEvent) => {
     const inputValue = ctx.get(inputValueAtom);
-    const { multiple } = ctx.get(propsAtom);
+    const { multiple, clearButton } = ctx.get(propsAtom);
     const value = ctx.get(valueAtom);
 
     if (inputValue) {
@@ -523,7 +509,7 @@ export const useSelect = <
     if (multiple) {
       removeValue(e, value[value.length - 1]);
     } else {
-      clearValue?.(e);
+      clearButton && clearValue?.(e);
     }
   });
 

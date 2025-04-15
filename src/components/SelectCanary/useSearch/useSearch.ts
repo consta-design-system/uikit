@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import { defaultGetItemLabel } from '##/components/SelectCanary';
+import { defaultGetItemLabel } from '##/components/SelectCanary/helpers';
 import { useDebounce } from '##/hooks/useDebounce';
 
 type SelectItemDefault = {
