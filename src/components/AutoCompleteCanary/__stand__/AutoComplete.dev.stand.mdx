@@ -22,7 +22,7 @@ import {
   AutoCompleteExampleIsLoading,
   AutoCompleteExampleOnScrollBottom,
 } from './examples/AutoCompleteExampleIsLoading/AutoCompleteExampleIsLoading';
-import { MdxMenu, MdxTabs } from '@consta/stand';
+import { MdxMenu, MdxTabs, MdxInformer } from '@consta/stand';
 
 ```tsx
 import { AutoComplete } from '@consta/uikit/AutoCompleteCanary';
@@ -648,7 +648,11 @@ const AutoCompleteExampleForm = () => {
 
 В случае `clear` у поля ввода не будет обводки. Используйте `clear`, чтобы создать кастомное поле ввода или обернуть его в контейнер.
 
-> Чтобы создать hover-эффект для вида `clear`, управляйте внешним видом контейнера, в котором находится `AutoComplete`.
+<MdxInformer status="normal">
+
+Для создания hover-эффекта для `view="clear"`, управляйте внешним видом контейнера, в котором находится **AutoComplete**.
+
+</MdxInformer>
 
 <MdxTabs>
 

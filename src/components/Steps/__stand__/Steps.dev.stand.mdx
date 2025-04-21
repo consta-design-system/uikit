@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxInformer } from '@consta/stand';
 import { ExampleStepsValue } from './examples/ExampleStepsValue/ExampleStepsValue';
 import { ExampleStepsDisabled } from './examples/ExampleStepsDisabled/ExampleStepsDisabled';
 import { ExampleStepsCompleted } from './examples/ExampleStepsCompleted/ExampleStepsCompleted';
@@ -30,7 +30,11 @@ import { Steps } from '@consta/uikit/Steps';
 
 Данные для отображения шагов можно задать в массиве `items`. Названия шагов можно получить с помощью функции `getLabel`.
 
-> 5 шагов — это максимум, больше делать не стоит.
+<MdxInformer status="warning">
+
+Не рекомендуем делать больше 5 шагов.
+
+</MdxInformer>
 
 ### Активный шаг
 

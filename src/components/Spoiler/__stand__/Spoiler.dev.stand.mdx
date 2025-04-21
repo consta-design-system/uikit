@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxInformer } from '@consta/stand';
 import { SpoilerExampleLabel } from './examples/SpoilerExampleLabel/SpoilerExampleLabel';
 import { SpoilerExampleIcon } from './examples/SpoilerExampleIcon/SpoilerExampleIcon';
 import { SpoilerExampleMode } from './examples/SpoilerExampleMode/SpoilerExampleMode';
@@ -63,8 +63,11 @@ import { Spoiler } from '@consta/uikit/Spoiler';
 
 ## Кнопка
 
-> Кнопка будет отображаться, если высота обрезанного текста меньше, чем высота полного текста.
-> Это правило работает во всех модификациях.
+<MdxInformer status="normal">
+
+Кнопка будет отображаться, если высота обрезанного текста меньше, чем высота полного текста. Это правило работает во всех модификациях.
+
+</MdxInformer>
 
 ```tsx
 export const SpoilerExampleHiddenButton = () => {

@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxInformer } from '@consta/stand';
 import { TextFieldExampleStatus } from './examples/TextFieldExampleStatus/TextFieldExampleStatus';
 import {
   TextFieldExampleTextPlaceholder,
@@ -382,7 +382,11 @@ export const TextFieldExampleWithClearButton = () => {
 
 <TextFieldExampleViewDisabled />
 
-> Для создания hover эффекта для view="`clear`", управляйте внешним видом контейнера, в котором находится TextField
+<MdxInformer status="normal">
+
+Чтобы создать hover-эффект для `view="clear"`, управляйте внешним видом контейнера, в котором находится TextField.
+
+</MdxInformer>
 
 ### Форма
 

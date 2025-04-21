@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxInformer } from '@consta/stand';
 
 import { ChipsWithContextMenuExample } from './examples/ChipsWithContextMenuExample/ChipsWithContextMenuExample';
 import {
@@ -43,7 +43,11 @@ import { Chips } from '@consta/uikit/Chips';
 - статус активности — в поле `active` или с помощью функции `getItemActive`,
 - статус доступности — в поле `disabled` или с помощью функции `getItemDisabled`,
 
-> Одновременно можно использовать либо `iconLeft` или `status`
+<MdxInformer status="warning">
+
+Одновременное использование `iconLeft` и`status` недоступно.
+
+</MdxInformer>
 
 ### Пример использования свой тип данных
 

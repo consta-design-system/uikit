@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxInformer } from '@consta/stand';
 import { TextExampleAlign } from './examples/TextExampleAlign/TextExampleAlign';
 import { TextExampleCombinedWeightAndStyle } from './examples/TextExampleCombinedWeightAndStyle/TextExampleCombinedWeightAndStyle';
 import { TextExampleDecoration } from './examples/TextExampleDecoration/TextExampleDecoration';
@@ -118,8 +118,11 @@ import { Text } from '@consta/uikit/TextDeprecated';
 
 `weight` отвечает за насыщенность (жирный, полужирный, обычный, светлый и другие варианты).
 
-> Убедитесь, что в шрифте есть насыщенность, которую вы используете. Браузер имитирует
-> насыщенность, которой нет в наборе, но неизвестно, как это будет выглядеть.
+<MdxInformer status="success">
+
+Убедитесь, что в шрифте есть насыщенность, которую вы используете. Браузер имитирует насыщенность, которой нет в наборе, но неизвестно, как это будет выглядеть.
+
+</MdxInformer>
 
 ```ts
 <Text weight="black">Просто текст</Text>
