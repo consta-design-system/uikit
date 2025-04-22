@@ -42,7 +42,7 @@ const SelectSingleRender = <
     value,
     renderValue,
     isLoading,
-    dropdownRef: dropdownRefProp,
+    'dropdownRef': dropdownRefProp,
     dropdownForm,
     renderItem,
     getGroupLabel,
@@ -58,9 +58,8 @@ const SelectSingleRender = <
     input,
     inputValue,
     inputDefaultValue,
-    inputRef: inputRefProp,
-    name,
-    ariaLabel,
+    'inputRef': inputRefProp,
+    'aria-label': ariaLabel,
 
     // исключаем из otherProps
     getGroupKey,
@@ -69,11 +68,11 @@ const SelectSingleRender = <
     getItemKey,
     getItemLabel,
     items,
-    onChange: onChangeProp,
+    'onChange': onChangeProp,
     dropdownClassName,
     onFocus,
     onBlur,
-    onCreate: onCreateProp,
+    'onCreate': onCreateProp,
     onInput,
     multiple,
     groups,
@@ -182,6 +181,7 @@ const SelectSingleRender = <
           readOnly={input ? undefined : true}
           disabled={disabled}
           placeholder={placeholder}
+          aria-label={ariaLabel}
         >
           {value && (renderValue || renderValueDefault)({ value })}
         </SelectInput>

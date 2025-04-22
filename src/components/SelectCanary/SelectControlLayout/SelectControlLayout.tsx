@@ -58,6 +58,7 @@ export const SelectControlLayout = forwardRef<HTMLDivElement, FieldButtonProps>(
         rightSide={[
           clearButton ? (
             <FieldClearButton
+              className={cnSelectControlLayout('ClearButton')}
               tabIndex={-1}
               size={size}
               onClick={onClear}

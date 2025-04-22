@@ -26,23 +26,12 @@ const items: Item[] = [
   },
 ];
 
-export function SelectExampleOpenByFocus() {
+export const SelectExampleOpenByFocus = () => {
   const [value, setValue] = useState<Item | null>();
   const [isOpened, setIsOpened] = useFlag();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleFocus = () => {
-    inputRef.current?.focus();
-  };
-
-  // Запрещаем всплытие клика c input, чтобы предотвратить рассинхронизацию isOpened
-  // с внутренним состоянием раскрытия списка. Так как клик по компоненту переключает состояние скрыт/раскрыт,
-  // нам при фокусе требуется не переключение (toggle), а включение (setTrue)
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.onclick = (e) => e.stopPropagation();
-    }
-  }, [inputRef.current]);
+  const handleFocus = () => inputRef.current?.focus();
 
   return (
     <Example col={1}>
@@ -59,4 +48,4 @@ export function SelectExampleOpenByFocus() {
       />
     </Example>
   );
-}
+};

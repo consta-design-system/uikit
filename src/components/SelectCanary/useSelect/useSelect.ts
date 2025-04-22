@@ -307,6 +307,8 @@ export const useSelect = <
     const { getItemDisabled, getItemKey, onChange, multiple, disabled } =
       ctx.get(propsAtom);
 
+    console.log('disabled', disabled);
+
     if (disabled || (getItemDisabled && getItemDisabled(item))) {
       return;
     }
@@ -382,14 +384,19 @@ export const useSelect = <
   );
 
   const handleInputClick = useAction((ctx) => {
-    const { disabled } = ctx.get(propsAtom);
-    !disabled && openAtom(ctx, (value) => !value);
+    !ctx.get(disabledAtom) && openAtom(ctx, (value) => !value);
 
     inputRef.current?.focus();
   });
 
   const clearValue = useAction((ctx, e: React.SyntheticEvent) => {
-    const { getItemDisabled, multiple, onChange } = ctx.get(propsAtom);
+    const { getItemDisabled, multiple, onChange, disabled } =
+      ctx.get(propsAtom);
+
+    if (disabled) {
+      return;
+    }
+
     const value = ctx.get(valueAtom);
     if (multiple) {
       const results = value?.filter((item) => getItemDisabled?.(item));
@@ -629,19 +636,27 @@ export const useSelect = <
 
   useUpdate((ctx, disable) => disable && openAtom(ctx, false), [disabledAtom]);
 
-  useAtom((ctx) => {
-    const open = ctx.spy(openAtom);
-    ctx.get(propsAtom).onDropdownOpen?.(open);
-    highlightIndex(0);
-  });
+  useUpdate(
+    (ctx, open = false) => {
+      ctx.get(propsAtom).onDropdownOpen?.(open);
+      highlightIndex(0);
+    },
+    [openAtom],
+  );
 
   useUpdate(
-    (_, inputValueProp) => onInput(inputValueProp),
+    (ctx, inputValueProp = '') => {
+      const inputValue = ctx.get(inputValueAtom);
+
+      if (inputValueProp !== inputValue) {
+        onInput(inputValueProp);
+      }
+    },
     [inputValuePropAtom],
   );
 
   useUpdate(
-    (ctx, dropdownOpenProp) => openAtom(ctx, !!dropdownOpenProp),
+    (ctx, dropdownOpenProp = false) => openAtom(ctx, dropdownOpenProp),
     [dropdownOpenPropAtom],
   );
 

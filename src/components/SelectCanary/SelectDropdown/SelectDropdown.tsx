@@ -153,9 +153,6 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
   const [hasItems] = useAtom(hasItemsAtom);
   const [isListMount, setIsListMount] = useAtom(false);
   const [getItemKey] = useAtom(getItemKeyAtom);
-
-  console.log('render SelectDropdown', { hasItems, visibleItems });
-
   const indent = form === 'round' ? 'increased' : 'normal';
 
   const isListShowed = useMemo(() => {

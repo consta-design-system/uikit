@@ -91,51 +91,50 @@ export type SelectPropsInit<
   MULTIPLE extends boolean = false,
 > = PropsWithHTMLAttributesAndRef<
   {
-    items: ITEM[];
-    onChange: SelectPropOnChange<ITEM, MULTIPLE>;
-    disabled?: boolean;
-    form?: FieldPropForm;
-    dropdownForm?: 'default' | 'brick' | 'round';
-    size?: FieldPropSize;
-    view?: FieldPropView;
-    placeholder?: string;
-    ariaLabel?: string;
-    status?: FieldPropStatus;
-    isLoading?: boolean;
-    dropdownClassName?: string;
-    dropdownRef?: React.Ref<HTMLDivElement>;
-    name?: string;
-    renderItem?: SelectPropRenderItem<ITEM>;
-    renderValue?: SelectPropRenderValue<ITEM, MULTIPLE>;
-    onFocus?: React.FocusEventHandler<HTMLInputElement>;
-    onBlur?: React.FocusEventHandler<HTMLInputElement>;
-    onCreate?: SelectPropOnCreate;
-    inputRef?: React.Ref<HTMLInputElement>;
-    input?: boolean;
-    inputValue?: string;
-    inputDefaultValue?: string;
-    onInput?: (value: string) => void;
-    labelForCreate?:
+    'items': ITEM[];
+    'onChange': SelectPropOnChange<ITEM, MULTIPLE>;
+    'disabled'?: boolean;
+    'form'?: FieldPropForm;
+    'dropdownForm'?: 'default' | 'brick' | 'round';
+    'size'?: FieldPropSize;
+    'view'?: FieldPropView;
+    'placeholder'?: string;
+    'aria-Label'?: string;
+    'status'?: FieldPropStatus;
+    'isLoading'?: boolean;
+    'dropdownClassName'?: string;
+    'dropdownRef'?: React.Ref<HTMLDivElement>;
+    'renderItem'?: SelectPropRenderItem<ITEM>;
+    'renderValue'?: SelectPropRenderValue<ITEM, MULTIPLE>;
+    'onFocus'?: React.FocusEventHandler<HTMLInputElement>;
+    'onBlur'?: React.FocusEventHandler<HTMLInputElement>;
+    'onCreate'?: SelectPropOnCreate;
+    'inputRef'?: React.Ref<HTMLInputElement>;
+    'input'?: boolean;
+    'inputValue'?: string;
+    'inputDefaultValue'?: string;
+    'onInput'?: (value: string) => void;
+    'labelForCreate'?:
       | ((label: string | undefined) => React.ReactNode)
       | React.ReactNode;
-    labelForEmptyItems?: string;
-    multiple?: MULTIPLE;
-    value?: SelectPropValue<ITEM, MULTIPLE>;
-    groups?: GROUP[];
-    getItemLabel?: SelectPropGetItemLabel<ITEM>;
-    getItemKey?: SelectPropGetItemKey<ITEM>;
-    getItemGroupKey?: SelectPropGetItemGroupKey<ITEM>;
-    getItemDisabled?: SelectPropGetItemDisabled<ITEM>;
-    getGroupLabel?: SelectPropGetGroupLabel<GROUP>;
-    getGroupKey?: SelectPropGetGroupKey<GROUP>;
-    virtualScroll?: boolean;
-    onScrollToBottom?: (length: number) => void;
-    onDropdownOpen?: (isOpen: boolean) => void;
-    dropdownOpen?: boolean;
-    ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
-    clearButton?: boolean;
-    iconClear?: IconComponent;
-    selectAll?: MULTIPLE extends true ? boolean : never;
+    'labelForEmptyItems'?: string;
+    'multiple'?: MULTIPLE;
+    'value'?: SelectPropValue<ITEM, MULTIPLE>;
+    'groups'?: GROUP[];
+    'getItemLabel'?: SelectPropGetItemLabel<ITEM>;
+    'getItemKey'?: SelectPropGetItemKey<ITEM>;
+    'getItemGroupKey'?: SelectPropGetItemGroupKey<ITEM>;
+    'getItemDisabled'?: SelectPropGetItemDisabled<ITEM>;
+    'getGroupLabel'?: SelectPropGetGroupLabel<GROUP>;
+    'getGroupKey'?: SelectPropGetGroupKey<GROUP>;
+    'virtualScroll'?: boolean;
+    'onScrollToBottom'?: (length: number) => void;
+    'onDropdownOpen'?: (isOpen: boolean) => void;
+    'dropdownOpen'?: boolean;
+    'ignoreOutsideClicksRefs'?: ReadonlyArray<React.RefObject<HTMLElement>>;
+    'clearButton'?: boolean;
+    'iconClear'?: IconComponent;
+    'selectAll'?: MULTIPLE extends true ? boolean : never;
   },
   HTMLDivElement
 >;
