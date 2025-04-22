@@ -3,7 +3,7 @@ import './Table.css';
 import { IconSortDown } from '@consta/icons/IconSortDown';
 import { IconSortUp } from '@consta/icons/IconSortUp';
 import { IconUnsort } from '@consta/icons/IconUnsort';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 
@@ -371,11 +371,15 @@ const InternalTable = <T extends TableRow>(
   >([]);
   const [sorting, setSorting] = React.useState<SortingState<T>>(null);
   const [visibleFilter, setVisibleFilter] = React.useState<string | null>(null);
-  const [tableScroll, setTableScroll] = React.useState({ top: 0, left: 0 });
+  const [showVerticalCellShadow, setShowVerticalCellShadow] =
+    React.useState<boolean>(false);
+  const [showHorizontalCellShadow, setShowHorizontalCellShadow] =
+    React.useState<boolean>(false);
 
   const tableRef = React.useRef<HTMLDivElement>(null);
   const columnsRefs = React.useRef<Record<number, HTMLDivElement | null>>({});
   const cellsRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
+  const tableScrollLeft = useRef<number>(0);
   const {
     selectedFilters,
     updateSelectedFilters,
@@ -412,8 +416,6 @@ const InternalTable = <T extends TableRow>(
   const tableHeight = tableRef.current?.clientHeight || 0;
   const tableWidth = tableRef.current?.clientWidth || 0;
 
-  const showVerticalCellShadow = tableScroll.left > 0;
-  const showHorizontalCellShadow = tableScroll.top > 0;
   const isRowsClickable = activeRow && activeRow.onChange;
 
   const updateColumnWidth = (idx: number, newWidth: number): void => {
@@ -550,10 +552,11 @@ const InternalTable = <T extends TableRow>(
       return;
     }
 
-    setTableScroll({
-      top: e.target.scrollTop,
-      left: e.target.scrollLeft,
-    });
+    const { scrollTop, scrollLeft } = e.target;
+
+    setShowHorizontalCellShadow(scrollTop > 0);
+    setShowVerticalCellShadow(scrollLeft > 0);
+    tableScrollLeft.current = scrollLeft;
   };
 
   const handleSelectRow = ({
@@ -613,7 +616,8 @@ const InternalTable = <T extends TableRow>(
       const isSticky = stickyColumns > column.position!.topHeaderGridIndex;
       const showResizer =
         stickyColumns > columnIndex ||
-        stickyColumnsWidth + tableScroll.left < columnLeftOffset + columnWidth;
+        stickyColumnsWidth + tableScrollLeft.current <
+          columnLeftOffset + columnWidth;
       const isFilterActive =
         (selectedFilters[column.accessor!]?.selected || []).length > 0;
 
