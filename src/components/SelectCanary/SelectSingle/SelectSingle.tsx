@@ -32,6 +32,8 @@ const SelectSingleRender = <
 ) => {
   const propsWithDefault = withDefault(props);
 
+  console.log(propsWithDefault);
+
   const propsAtom = useSendToAtom(propsWithDefault);
 
   const {
@@ -102,6 +104,8 @@ const SelectSingleRender = <
     ) => {
       const { getItemLabel, size, dropdownForm, getItemDisabled } =
         ctx.get(propsAtom);
+
+      console.log(getItemDisabled, size, getItemLabel);
 
       return (
         <SelectItem

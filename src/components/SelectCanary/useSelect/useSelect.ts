@@ -393,6 +393,8 @@ export const useSelect = <
     const { getItemDisabled, multiple, onChange, disabled } =
       ctx.get(propsAtom);
 
+    console.log('');
+
     if (disabled) {
       return;
     }

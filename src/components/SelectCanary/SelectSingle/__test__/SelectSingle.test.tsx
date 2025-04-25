@@ -1,7 +1,12 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { cnListGroupLabel, cnListItem } from '##/components/ListCanary';
+import { cnFieldControlLayout } from '##/components/FieldComponents/FieldControlLayout';
+import {
+  cnListBox,
+  cnListGroupLabel,
+  cnListItem,
+} from '##/components/ListCanary';
 
 import {
   SelectComponent,
@@ -55,6 +60,12 @@ const items: SelectItemDefault[] = [
   { id: 1, label: 'Item 1', groupId: 1 },
   { id: 2, label: 'Item 2', groupId: 1 },
   { id: 3, label: 'Item 3', groupId: 2 },
+];
+
+const itemsWithDisabled: SelectItemDefault[] = [
+  { id: 1, label: 'Item 1', groupId: 1, disabled: true },
+  { id: 2, label: 'Item 2', groupId: 1 },
+  { id: 3, label: 'Item 3', groupId: 2, disabled: true },
 ];
 
 const groups: SelectGroupDefault[] = [
@@ -541,8 +552,114 @@ describe('SelectSingle', () => {
     groups.map((group) =>
       expect(screen.getByText(group.label)).toBeInTheDocument(),
     );
+  });
 
-    // expect(handleChange).not.toHaveBeenCalled();
+  describe('проверка dropdownForm', () => {
+    (['default', 'brick', 'round'] as const).map((dropdownForm) => {
+      it(`dropdownForm = ${dropdownForm}`, () => {
+        jest.useFakeTimers();
+
+        act(() => {
+          renderComponent({ items, dropdownForm, onChange: jest.fn() });
+        });
+        inputClick();
+        animateDelay();
+        expect(getDropdown()).toHaveClass(
+          cnListBox({ form: dropdownForm }).split(' ')[1],
+        );
+      });
+    });
+  });
+
+  describe('проверка form', () => {
+    (
+      [
+        'default',
+        'defaultClear',
+        'defaultBrick',
+        'brick',
+        'brickDefault',
+        'brickClear',
+        'brickRound',
+        'round',
+        'roundClear',
+        'roundBrick',
+        'clearRound',
+        'clearDefault',
+        'clearBrick',
+        'clear',
+      ] as const
+    ).map((form) => {
+      it(`form = ${form}`, () => {
+        renderComponent({ items, form, onChange: jest.fn() });
+
+        expect(getRender()).toHaveClass(
+          cnFieldControlLayout({ form }).split(' ')[1],
+        );
+      });
+    });
+  });
+
+  describe('проверка view', () => {
+    (['default', 'clear'] as const).map((view) => {
+      it(`view = ${view}`, () => {
+        renderComponent({ items, view, onChange: jest.fn() });
+
+        expect(getRender()).toHaveClass(
+          cnFieldControlLayout({ view }).split(' ')[1],
+        );
+      });
+    });
+  });
+
+  it('элементы disabled отображаются с соответствущем классом', () => {
+    jest.useFakeTimers();
+    act(() => {
+      renderComponent({ items: itemsWithDisabled, onChange: jest.fn() });
+    });
+
+    inputClick();
+
+    animateDelay();
+
+    // getItem cnListItem
+
+    itemsWithDisabled.map((item, index) => {
+      if (item.disabled) {
+        expect(getItem(index)).toHaveClass(
+          cnListItem({ disabled: true }).split(' ')[1],
+        );
+      } else {
+        expect(getItem(index)).not.toHaveClass(
+          cnListItem({ disabled: true }).split(' ')[1],
+        );
+      }
+    });
+  });
+
+  it('по элементам disabled не отрабатывает onChange', () => {
+    jest.useFakeTimers();
+    act(() => {
+      renderComponent({ items: itemsWithDisabled, onChange: jest.fn() });
+    });
+
+    inputClick();
+
+    animateDelay();
+
+    // getItem cnListItem
+
+    itemsWithDisabled.map((item, index) => {
+      if (item.disabled) {
+        expect(getItem(index)).toHaveClass(
+          cnListItem({ disabled: true }).split(' ')[1],
+        );
+      } else {
+        expect(getItem(index)).not.toHaveClass(
+          cnListItem({ disabled: true }).split(' ')[1],
+        );
+      }
+    });
   });
 
   // проверка задизебленных элементов
