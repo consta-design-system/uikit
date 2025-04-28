@@ -135,7 +135,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       [],
     );
 
-    const handleInputKeyDown = useKeys(
+    const handleInputKeyDown = useKeys<Element>(
       useMemo(
         () => ({
           isActive: true,

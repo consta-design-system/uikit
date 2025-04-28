@@ -56,7 +56,7 @@ export const DragNDropFieldExampleOnDropAcceptedWithInformer = () => {
         setLoading((loading as number) + 1);
       }, 20);
 
-      if (loading > 100) {
+      if (typeof loading === 'number' && loading > 100) {
         setIsLoaded(true);
         setLoading(false);
         clearInterval(interval);

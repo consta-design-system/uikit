@@ -66,8 +66,6 @@ const SelectMultipleRender = <
     inputValue,
     inputDefaultValue,
     inputRef: inputRefProp,
-    name,
-    ariaLabel,
 
     // исключаем из otherProps
     getGroupKey,
@@ -119,6 +117,7 @@ const SelectMultipleRender = <
     getHandleRemoveValue,
     hasItemsAtom,
     groupsCounterAtom,
+    dropdownZIndexAtom,
   } = useSelect<ITEM, GROUP, true>({
     propsAtom,
   });
@@ -263,12 +262,7 @@ const SelectMultipleRender = <
         inputValueAtom={inputValueAtom}
         hasItemsAtom={hasItemsAtom}
         groupsCounterAtom={groupsCounterAtom}
-        // style={
-        //   // TODO: мемоизировать
-        //   typeof style?.zIndex === 'number'
-        //     ? { zIndex: style.zIndex + 1 }
-        //     : undefined
-        // }
+        dropdownZIndexAtom={dropdownZIndexAtom}
       />
     </>
   );
