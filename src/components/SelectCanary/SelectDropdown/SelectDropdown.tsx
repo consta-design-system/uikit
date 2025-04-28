@@ -80,6 +80,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   onChange: (e: React.SyntheticEvent, item: ITEM) => void;
   inputValueAtom: AtomMut<string>;
   groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
+  dropdownZIndexAtom: AtomMut<number | undefined>;
 }>;
 
 type SelectDropdownComponent = <ITEM, GROUP>(
@@ -146,6 +147,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
     onChangeAll,
     inputValueAtom,
     groupsCounterAtom,
+    dropdownZIndexAtom,
     ...otherProps
   } = props;
 
@@ -190,6 +192,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
 
   const getIndex = fabricIndex();
   const getVirtualIndex = fabricIndex();
+  const zIndex = useAtom(dropdownZIndexAtom);
 
   return (
     <SelectPopover

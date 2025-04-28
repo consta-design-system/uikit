@@ -232,7 +232,6 @@ const SelectMultipleRender = <
           disableInput={input ? undefined : true}
           inputRef={useForkRef([inputRef, inputRefProp])}
           ref={valueContainerRef}
-          // inputValue={input ? inputValue : undefined}
           inputDefaultValue={input ? inputDefaultValue : undefined}
           onChange={handleInputChange}
         />
@@ -244,7 +243,6 @@ const SelectMultipleRender = <
         size={size}
         controlRef={controlRef}
         getOptionActions={getOptionActions}
-        // TODO: были ошибки в useForkRef, проверить все вызовы
         dropdownRef={useForkRef([dropdownRef, dropdownRefProp])}
         form={dropdownForm}
         className={dropdownClassName}

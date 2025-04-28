@@ -3076,28 +3076,15 @@
     "@reatom/primitives" "^3.5.0"
     "@reatom/utils" "^3.11.0"
 
-"@reatom/core@^3.1.1", "@reatom/core@^3.2.0", "@reatom/core@^3.3.0", "@reatom/core@^3.4.0", "@reatom/core@^3.5.0":
-  version "3.6.5"
-  resolved "https://registry.yarnpkg.com/@reatom/core/-/core-3.6.5.tgz#5d13030d5c2aa56a1d319c01dc9008f7eaa2d941"
-  integrity sha512-X0zUAXZPlLY9V99l4VgvYllQ63lswlAsqQYm0poNoW3KkthVrwQLkXSaZGCpV5TaOmhLaNEaJ89PlQHjjlE9rw==
-
-"@reatom/core@^3.10.1", "@reatom/core@^3.8.1":
+"@reatom/core@^3.1.1", "@reatom/core@^3.10.1", "@reatom/core@^3.2.0", "@reatom/core@^3.3.0", "@reatom/core@^3.4.0", "@reatom/core@^3.5.0", "@reatom/core@^3.8.1":
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/@reatom/core/-/core-3.10.1.tgz#b91f562cce25610539618c7fc75b5fb9c44d338a"
   integrity sha512-A5vx+akCGkc+YCYhqPaAnR46uvqe70pQ2JB82JCLgOrj+YmnStIGkiaiWG43wn30qUjatXjejJmGkqQbjtri+A==
 
-"@reatom/effects@^3.10.0", "@reatom/effects@^3.11.3", "@reatom/effects@^3.7.3":
+"@reatom/effects@^3.10.0", "@reatom/effects@^3.11.3", "@reatom/effects@^3.2.0", "@reatom/effects@^3.7.0", "@reatom/effects@^3.7.3":
   version "3.11.3"
   resolved "https://registry.yarnpkg.com/@reatom/effects/-/effects-3.11.3.tgz#e6ff0901d7cf7c0fad01a52019a35d8768cf0566"
   integrity sha512-0qxr7m6e+GrOvt0pESONl4aRZxGjsU1HWXIsDR2Ghw0mNGjuStnEDUZnO+MVbKOArMIAvZ8ZoMrQWqXEBfOrVg==
-  dependencies:
-    "@reatom/core" "^3.2.0"
-    "@reatom/utils" "^3.5.0"
-
-"@reatom/effects@^3.2.0", "@reatom/effects@^3.7.0":
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/@reatom/effects/-/effects-3.7.2.tgz#5dc6cdc054360c73dedc6d7b1e28e270aedb99d0"
-  integrity sha512-6j3rhFdUSCjNC0HK7lKNFHYM8y6JV0OXpPUXKtA0psNwa5WUq2X4Q0WfMnixy7Jm8tAAQR9F6iKqy9T0U1Ej8Q==
   dependencies:
     "@reatom/core" "^3.2.0"
     "@reatom/utils" "^3.5.0"
@@ -3116,16 +3103,7 @@
     "@reatom/primitives" "^3.10.0"
     "@reatom/utils" "^3.11.3"
 
-"@reatom/hooks@^3.2.0", "@reatom/hooks@^3.3.1", "@reatom/hooks@^3.4.0":
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/@reatom/hooks/-/hooks-3.5.2.tgz#475e3f3e4f056efb779dabcf1f49d5b78491f9fa"
-  integrity sha512-mZJP+fsv+cg35vPEbdEJ4AroSDqnXaK9DpLq8M0AXg97UPJY2c2IoztD0mvEVkFSBxoGAsTXO89m8ZgZxVud2Q==
-  dependencies:
-    "@reatom/core" "^3.2.0"
-    "@reatom/effects" "^3.7.0"
-    "@reatom/utils" "^3.3.0"
-
-"@reatom/hooks@^3.6.1":
+"@reatom/hooks@^3.2.0", "@reatom/hooks@^3.3.1", "@reatom/hooks@^3.4.0", "@reatom/hooks@^3.6.1":
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/@reatom/hooks/-/hooks-3.6.1.tgz#bac1d50ba7cebdbb50af1947c65e919387feb8cc"
   integrity sha512-1q8qXAOkQlDKc/Y94alPHWqMnXvJhCG4Rr9hQxPMPG1Qf3WpeKm7Zdxs4v3DC2Kcw6oG6djVk3i5duIjPygGWA==
@@ -3134,17 +3112,7 @@
     "@reatom/effects" "^3.7.0"
     "@reatom/utils" "^3.3.0"
 
-"@reatom/lens@^3.1.0", "@reatom/lens@^3.4.0":
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/@reatom/lens/-/lens-3.9.1.tgz#a86e5a1a06d96493b0a3eb10dc2c00fdd9fdb428"
-  integrity sha512-od3Ni2iMfxdjWp7CKtzZX7wA6/PQdJDnSut2uOqFgxaF+PGBao+tlV+RdVO5MoSoenZTSL7IUQw8YERXhAoViA==
-  dependencies:
-    "@reatom/core" "^3.4.0"
-    "@reatom/effects" "^3.2.0"
-    "@reatom/hooks" "^3.3.1"
-    "@reatom/utils" "^3.1.0"
-
-"@reatom/lens@^3.11.8":
+"@reatom/lens@^3.1.0", "@reatom/lens@^3.11.8", "@reatom/lens@^3.4.0":
   version "3.11.8"
   resolved "https://registry.yarnpkg.com/@reatom/lens/-/lens-3.11.8.tgz#14847bbb1795ff62854d0859a1e376f5139e96bc"
   integrity sha512-MiHrOI7to7065+UDbG+Qbs4n1PCub/O9OcOpOIYR9SB9+pZrl05lvNQXT4QLqfEXO5coYUZ0JbK2SkR1kvO5Yg==
@@ -3184,9 +3152,9 @@
     idb-keyval "^6.2.1"
 
 "@reatom/persist@^3.1.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@reatom/persist/-/persist-3.3.0.tgz#1adafc5e04fb75cf586d89963bfc24e5fa3263a9"
-  integrity sha512-RM9PFxjwLje1FsMfBsborA9SyedsJIJVHqfuyoszLRv3J9SmTi4S2SJBd2EfZBbGF1hy0vwPncx1FYIHbgmU9g==
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@reatom/persist/-/persist-3.4.1.tgz#2cef471b7a3bf907bf7a9bb29741c6f702f9934e"
+  integrity sha512-LM3JriTJNSH1EluVcvW9ik7DK5oa0NeIgkz8rIGvVk/c9ZIqp0Olthc/WEB5qNNDdzZMrebGRFiHRM2iO5/T6A==
   dependencies:
     "@reatom/core" "^3.3.0"
     "@reatom/hooks" "^3.4.0"
@@ -3201,12 +3169,7 @@
     "@reatom/core" "^3.1.1"
     "@reatom/utils" "^3.1.1"
 
-"@reatom/utils@^3.1.0", "@reatom/utils@^3.1.1", "@reatom/utils@^3.3.0", "@reatom/utils@^3.4.0", "@reatom/utils@^3.5.0":
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/@reatom/utils/-/utils-3.8.0.tgz#3d4289032ae2b77b5e2bdab17dff8f07b671d0ad"
-  integrity sha512-U4cINdsQuj4jH5Q0EKXmzeXLIN4dTT6Jqk+c7IAWmdIf/FKjk6jqXRiIWZWVaj5/Yw/kCDPBIxE3IR0pLtOFHA==
-
-"@reatom/utils@^3.11.0", "@reatom/utils@^3.11.3", "@reatom/utils@^3.9.0":
+"@reatom/utils@^3.1.0", "@reatom/utils@^3.1.1", "@reatom/utils@^3.11.0", "@reatom/utils@^3.11.3", "@reatom/utils@^3.3.0", "@reatom/utils@^3.4.0", "@reatom/utils@^3.5.0", "@reatom/utils@^3.9.0":
   version "3.11.3"
   resolved "https://registry.yarnpkg.com/@reatom/utils/-/utils-3.11.3.tgz#89fe7ddcb049c6c5f506410d44f66cf2377df8ec"
   integrity sha512-H2FQf9xra7Twf0PxS6L0DtuRRC79NfHRB3V/YhnhPHyUE/UFscXrin/I2eGj3FEKcgOfC2BWnzCOrkXjKWgECQ==

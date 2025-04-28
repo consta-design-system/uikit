@@ -1,5 +1,5 @@
 import './SelectInput.css';
 
-import { cn } from '##/utils/bem';
+import { cnCanary } from '##/utils/bem';
 
-export const cnSelectInput = cn('SelectInput');
+export const cnSelectInput = cnCanary('SelectInput');

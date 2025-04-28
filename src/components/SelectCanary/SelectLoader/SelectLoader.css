@@ -1,11 +1,10 @@
-.SelectLoader {
+.canary--SelectLoader {
   --loader-height: 0;
   position: relative;
-  height:
-    calc(
-      var(--select-dropdown-height) - var(--space-padding-bottom) -
+  height: calc(
+    var(--select-dropdown-height) - var(--space-padding-bottom) -
       var(--space-padding-top)
-    );
+  );
   cursor: wait;
 
   &-Loader.deprecated--Loader {

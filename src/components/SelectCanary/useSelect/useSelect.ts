@@ -106,6 +106,10 @@ export const useSelect = <
   const disabledAtom = usePropAtom(propsAtom, 'disabled');
   const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
   const dropdownOpenPropAtom = usePropAtom(propsAtom, 'dropdownOpen');
+  const dropdownZIndexAtom = useCreateAtom((ctx) => {
+    const zIndex = ctx.spy(propsAtom).style?.zIndex;
+    return typeof zIndex === 'number' ? zIndex + 1 : undefined;
+  });
   const ignoreOutsideClicksRefsAtom = usePropAtom(
     propsAtom,
     'ignoreOutsideClicksRefs',
@@ -690,5 +694,6 @@ export const useSelect = <
     onChange,
     hasItemsAtom,
     groupsCounterAtom,
+    dropdownZIndexAtom,
   };
 };

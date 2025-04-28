@@ -3,7 +3,7 @@ import './SelectLoader.css';
 import React from 'react';
 
 import { Loader } from '##/components/LoaderDeprecated';
-import { cn } from '##/utils/bem';
+import { cnCanary as cn } from '##/utils/bem';
 
 export const cnSelectLoader = cn('SelectLoader');
 

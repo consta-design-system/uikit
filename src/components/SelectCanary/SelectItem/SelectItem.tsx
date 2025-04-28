@@ -5,7 +5,7 @@ import React, { forwardRef } from 'react';
 import { Checkbox, CheckboxPropSize } from '##/components/Checkbox';
 import { FieldPropSize } from '##/components/FieldComponents';
 import { ListItem } from '##/components/ListCanary';
-import { cn } from '##/utils/bem';
+import { cnCanary as cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export type SelectItemProps = PropsWithHTMLAttributesAndRef<

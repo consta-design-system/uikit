@@ -72,9 +72,10 @@ export const FieldControlLayout = forwardRef<
     <div
       {...otherProps}
       ref={ref}
-      className={cnFieldControlLayout({ form, disabled, view, alignSlots }, [
-        className,
-      ])}
+      className={cnFieldControlLayout(
+        { form, disabled, view, alignSlots, status },
+        [className],
+      )}
       style={{
         ...style,
         ['--field-control-layout-border-color' as string]: getBorderColor(

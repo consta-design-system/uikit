@@ -6,7 +6,7 @@ import { Checkbox } from '##/components/Checkbox';
 import { FieldPropSize } from '##/components/FieldComponents';
 import { ListItem } from '##/components/ListCanary';
 import { Text, TextPropSize } from '##/components/Text';
-import { cn } from '##/utils/bem';
+import { cnCanary as cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { sizeCheckboxMap } from '../SelectItem';

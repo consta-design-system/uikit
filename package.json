@@ -17,7 +17,7 @@
     "@bem-react/classname": "^1.6.0",
     "@bem-react/classnames": "^1.3.10",
     "@consta/icons": "^1.0.0",
-    "@reatom/framework": "^3.4.6",
+    "@reatom/core": "^3.10.1",
     "@reatom/npm-react": "^3.10.6",
     "compute-scroll-into-view": "^1.0.17",
     "date-fns": "^2.30.0",

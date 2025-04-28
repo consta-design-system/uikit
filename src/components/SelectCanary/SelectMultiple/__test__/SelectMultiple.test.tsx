@@ -2,6 +2,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { createIconMock } from '##/../__mocks__/IconMock';
+import { cnFieldArrayValueInlineControl } from '##/components/FieldComponents';
 import { cnFieldControlLayout } from '##/components/FieldComponents/FieldControlLayout';
 import { cnListBox, cnListItem, cnListLoader } from '##/components/ListCanary';
 
@@ -11,22 +12,22 @@ import {
   SelectPropRenderItem,
   SelectPropRenderValue,
   SelectProps,
-  SelectSingle,
 } from '../..';
 import { cnSelectControlLayout } from '../../SelectControlLayout';
 import { cnSelectCreateButton } from '../../SelectCreateButton';
 import { cnSelectInput } from '../../SelectInput';
+import { SelectMultiple } from '../SelectMultiple';
 
 const testId = 'SelectSingleCanary';
 const animationDuration = 200;
 
 const renderComponent = (
-  props: SelectProps<SelectItemDefault, SelectGroupDefault, false>,
+  props: SelectProps<SelectItemDefault, SelectGroupDefault, true>,
 ) => {
   return render(
     <>
       <div data-testid="outside" />
-      <SelectSingle data-testid={testId} {...props} />
+      <SelectMultiple data-testid={testId} multiple {...props} />
     </>,
   );
 };
@@ -42,8 +43,10 @@ const animateDelay = () => {
 };
 const getDropdown = () => screen.queryByRole('listbox') as HTMLDivElement;
 const outsideClick = () => fireEvent.mouseDown(getOutside());
-const getValueText = () =>
-  getRender().querySelector(`.${cnSelectInput('ValueText')}`) as HTMLDivElement;
+const getValueControl = () =>
+  getRender().querySelector(
+    `.${cnFieldArrayValueInlineControl()}`,
+  ) as HTMLDivElement;
 const getItems = () =>
   getDropdown().querySelectorAll(
     `.${cnListItem()}`,
@@ -100,7 +103,7 @@ describe('SelectSingle', () => {
   it('отображает выбранное значение', () => {
     renderComponent({
       items,
-      value: items[1],
+      value: [items[1]],
       onChange: jest.fn(),
       placeholder: 'Выберите элемент',
     });
@@ -210,14 +213,14 @@ describe('SelectSingle', () => {
   });
 
   it('value верно рендерится', () => {
-    const value = items[2];
+    const value = [items[2]];
 
     renderComponent({
       items,
       value,
       onChange: jest.fn(),
     });
-    expect(getValueText().textContent).toEqual(value.label);
+    expect(getValueControl().textContent).toEqual(value[0].label);
   });
 
   it('проверка onChange', () => {
@@ -231,7 +234,7 @@ describe('SelectSingle', () => {
     fireEvent.click(getItem(0));
     expect(onChangeMock).toHaveBeenCalled();
     expect(onChangeMock).toHaveBeenCalledTimes(1);
-    expect(onChangeMock).toHaveBeenCalledWith(items[0], {
+    expect(onChangeMock).toHaveBeenCalledWith([items[0]], {
       e: expect.any(Object),
     });
   });
@@ -299,7 +302,7 @@ describe('SelectSingle', () => {
     fireEvent.keyDown(input, { key: 'Enter' });
 
     // переход по клавишам работает
-    expect(onChangeMock).toHaveBeenCalledWith(items[1], {
+    expect(onChangeMock).toHaveBeenCalledWith([items[1]], {
       e: expect.any(Object),
     });
 
@@ -356,7 +359,7 @@ describe('SelectSingle', () => {
 
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: jest.fn(),
       onInput: onInputChangeMock,
       input: true,
@@ -374,7 +377,7 @@ describe('SelectSingle', () => {
 
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: jest.fn(),
       onInput: onInputChangeMock,
       input: true,
@@ -393,7 +396,7 @@ describe('SelectSingle', () => {
 
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: jest.fn(),
       onInput: onInputChangeMock,
       input: true,
@@ -410,7 +413,7 @@ describe('SelectSingle', () => {
 
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: jest.fn(),
       onInput: onInputChangeMock,
       disabled: true,
@@ -428,7 +431,7 @@ describe('SelectSingle', () => {
 
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: jest.fn(),
       onInput: onInputChangeMock,
       inputValue,
@@ -443,7 +446,7 @@ describe('SelectSingle', () => {
 
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: jest.fn(),
       inputDefaultValue,
       input: true,
@@ -458,7 +461,7 @@ describe('SelectSingle', () => {
 
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: jest.fn(),
       onInput: onInputChangeMock,
       inputValue,
@@ -476,7 +479,7 @@ describe('SelectSingle', () => {
   it('clearButton отображается при выбранном значении', () => {
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: jest.fn(),
       clearButton: true,
     });
@@ -490,7 +493,7 @@ describe('SelectSingle', () => {
     const handleChange = jest.fn();
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: handleChange,
       clearButton: true,
     });
@@ -507,7 +510,7 @@ describe('SelectSingle', () => {
     const handleChange = jest.fn();
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: handleChange,
       clearButton: true,
     });
@@ -523,7 +526,7 @@ describe('SelectSingle', () => {
     const handleChange = jest.fn();
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: handleChange,
       clearButton: true,
       disabled: true,
@@ -539,7 +542,7 @@ describe('SelectSingle', () => {
     const handleChange = jest.fn();
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: handleChange,
       clearButton: true,
       disabled: true,
@@ -554,7 +557,7 @@ describe('SelectSingle', () => {
     const handleChange = jest.fn();
     renderComponent({
       items,
-      value: items[0],
+      value: [items[0]],
       onChange: handleChange,
       clearButton: true,
       disabled: true,
@@ -569,7 +572,7 @@ describe('SelectSingle', () => {
     renderComponent({
       items,
       groups,
-      value: items[0],
+      value: [items[0]],
       onChange: jest.fn(),
     });
 
@@ -812,14 +815,21 @@ describe('SelectSingle', () => {
 
   it('проверка renderValue', () => {
     jest.useFakeTimers();
-    const renderValue: SelectPropRenderValue<SelectItemDefault, false> = ({
+    const renderValue: SelectPropRenderValue<SelectItemDefault, true> = ({
       value,
-    }) => <div className="test">{value.label}</div>;
+    }) => (
+      <>
+        {value.map((item) => (
+          <div className="test">{item.label}</div>
+        ))}
+      </>
+    );
+
     act(() => {
       renderComponent({
         items,
         renderValue,
-        value: items[0],
+        value: [items[0]],
         onChange: jest.fn(),
       });
     });
@@ -828,6 +838,6 @@ describe('SelectSingle', () => {
 
     animateDelay();
 
-    expect(getSelectInputValue().querySelector('.test')).toBeInTheDocument();
+    expect(getValueControl().querySelector('.test')).toBeInTheDocument();
   });
 });

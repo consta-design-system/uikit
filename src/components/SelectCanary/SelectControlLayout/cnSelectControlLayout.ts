@@ -1,5 +1,5 @@
 import './SelectControlLayout.css';
 
-import { cn } from '##/utils/bem';
+import { cnCanary } from '##/utils/bem';
 
-export const cnSelectControlLayout = cn('SelectControlLayout');
+export const cnSelectControlLayout = cnCanary('SelectControlLayout');

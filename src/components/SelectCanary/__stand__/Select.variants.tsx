@@ -35,7 +35,7 @@ const Variants = () => {
   const clearButton = useBoolean('clearButton', false);
   const input = useBoolean('input', false);
   const selectAll = useBoolean('selectAll', false, multiple);
-  const allSelectedAllLabel = useText('allSelectedAllLabel', 'Все', selectAll);
+
   const size = useSelect('size', fieldPropSize, fieldPropSizeDefault);
   const view = useSelect('view', fieldPropView, fieldPropViewDefault);
   const form = useSelect('form', fieldPropForm, fieldPropFormDefault);
@@ -68,7 +68,6 @@ const Variants = () => {
           onCreate={onCreate}
           form={form}
           status={status}
-          // allSelectedAllLabel={allSelectedAllLabel}
           dropdownForm={dropdownForm}
           placeholder={placeholder}
           items={emptyList ? [] : items}

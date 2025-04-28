@@ -1,4 +1,4 @@
-.SelectInput {
+.canary--SelectInput {
   --select-input-text-height: calc(
     var(--field-control-layout-height) -
       var(--field-control-layout-border-width)

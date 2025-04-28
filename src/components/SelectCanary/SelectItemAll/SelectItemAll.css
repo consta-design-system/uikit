@@ -1,4 +1,4 @@
-.ListItem.SelectItemAll {
+.ListItem.canary--SelectItemAll {
   &:hover:not(.ListItem_active) {
     background: transparent;
   }
