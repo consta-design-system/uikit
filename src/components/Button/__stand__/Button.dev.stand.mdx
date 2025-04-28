@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxInformer } from '@consta/stand';
 
 import {
   ButtonExampleFormBasic,
@@ -153,7 +153,11 @@ import { Button } from '@consta/uikit/Button';
 
 <ButtonExampleIconBasic />
 
-> В панели с большим количеством кнопок иконки будут создавать лишний визуальный шум. В этом случае оставьте иконки только у самых важных действий
+<MdxInformer status="success">
+  
+В панели с большим количеством кнопок иконки будут создавать лишний визуальный шум. В этом случае оставьте иконки только у самых важных действий.
+
+</MdxInformer>
 
 #### Только иконка
 
@@ -165,9 +169,13 @@ import { Button } from '@consta/uikit/Button';
 <Button label="Вперёд" view="ghost" iconRight={IconFilter} onlyIcon />
 ```
 
-<ButtonExampleIconOnly />
+<ButtonExampleIconOnly />\
 
-> Убедитесь, что изображение на иконке знакомо пользователям и легко считывается, так, что все сразу понимают, что делает эта кнопка
+<MdxInformer status="success">
+
+Убедитесь, что изображение на иконке знакомо пользователям и легко считывается. Так, что все сразу понимают, что делает эта кнопка.
+
+</MdxInformer>
 
 #### Размер иконки
 

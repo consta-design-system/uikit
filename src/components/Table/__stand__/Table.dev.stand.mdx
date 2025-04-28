@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxInformer } from '@consta/stand';
 
 import {
   TableExampleAdaptiveScroll,
@@ -34,9 +34,11 @@ import { TableExampleRowSpan } from './examples/TableExampleRowSpan/TableExample
 import { Table } from '@consta/uikit/Table';
 ```
 
-> **Прекращение поддержки**
->
-> В следующем мажорном релизе компонент перестанет поддерживаться, рекомендуем уже сейчас переходит на новую библиотеку для создания таблиц [`@consta/table`](##LIBS.LIB/lib:table)
+<MdxInformer status="alert">
+  
+  Компонент больше не поддерживается. Переходите на новую библиотеку для создания таблиц [`@consta/table`](##LIBS.LIB/lib:table).
+
+</MdxInformer>
 
 <MdxMenu>
 
@@ -109,7 +111,7 @@ export type TableRow = {
 };
 ```
 
-> То есть `id` является обязательным полем
+`id` является обязательным полем
 
 Если пропустить в строке ячейку, она останется пустой.
 

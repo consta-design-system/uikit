@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxInformer } from '@consta/stand';
 import { SliderExampleBasic } from './examples/SliderExampleBasic/SliderExampleBasic';
 import {
   SliderExampleViewDefault,
@@ -88,7 +88,11 @@ export const SliderExampleViewRange = () => {
 
 <SliderExampleRange />
 
-> Для того чтобы получить текущее значение в момент выбора (перемещения ползунка), используйте свойство `onAfterChange`.
+<MdxInformer status="normal">
+
+Чтобы получить текущее значение в момент выбора (перемещения ползунка), используйте свойство `onAfterChange`.
+
+</MdxInformer>
 
 ### Минимальное и максимальное значения
 
