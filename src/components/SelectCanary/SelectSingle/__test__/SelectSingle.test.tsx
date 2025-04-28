@@ -637,28 +637,25 @@ describe('SelectSingle', () => {
     });
   });
 
-  it('по элементам disabled не отрабатывает onChange', () => {
-    jest.useFakeTimers();
-    act(() => {
-      renderComponent({ items: itemsWithDisabled, onChange: jest.fn() });
-    });
-
-    inputClick();
-
-    animateDelay();
-
-    // getItem cnListItem
-
+  describe('по элементам disabled не отрабатывает onChange', () => {
     itemsWithDisabled.map((item, index) => {
-      if (item.disabled) {
-        expect(getItem(index)).toHaveClass(
-          cnListItem({ disabled: true }).split(' ')[1],
-        );
-      } else {
-        expect(getItem(index)).not.toHaveClass(
-          cnListItem({ disabled: true }).split(' ')[1],
-        );
-      }
+      it(`item ${index} disabled = ${item.disabled}`, () => {
+        jest.useFakeTimers();
+        const handleChange = jest.fn();
+        act(() => {
+          renderComponent({ items: itemsWithDisabled, onChange: handleChange });
+        });
+
+        inputClick();
+
+        animateDelay();
+        fireEvent.click(getItem(index));
+        if (item.disabled) {
+          expect(handleChange).not.toHaveBeenCalled();
+        } else {
+          expect(handleChange).toHaveBeenCalled();
+        }
+      });
     });
   });
 
