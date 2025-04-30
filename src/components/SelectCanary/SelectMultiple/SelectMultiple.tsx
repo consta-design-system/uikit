@@ -86,7 +86,7 @@ const SelectMultipleRender = <
     ignoreOutsideClicksRefs,
     clearButton,
     selectAll,
-
+    selectAllLabel,
     ...otherProps
   } = propsWithDefault;
 
@@ -263,6 +263,7 @@ const SelectMultipleRender = <
         hasItemsAtom={hasItemsAtom}
         groupsCounterAtom={groupsCounterAtom}
         dropdownZIndexAtom={dropdownZIndexAtom}
+        selectAllLabel={selectAllLabel}
       />
     </>
   );

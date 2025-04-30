@@ -10,13 +10,13 @@ export const objectWithDefault = <Object extends {}, Key extends keyof Object>(
   },
   props: Object,
 ): WithDefaultReturn<Object, Key> => {
-  const propsWithOutUndefined = {} as Object;
+  const propsWithoutUndefined = {} as Object;
 
   for (const key of Object.keys(props) as Key[]) {
     if (isDefined(props[key])) {
-      propsWithOutUndefined[key] = props[key];
+      propsWithoutUndefined[key] = props[key];
     }
   }
 
-  return { ...defaultProps, ...propsWithOutUndefined };
+  return { ...defaultProps, ...propsWithoutUndefined };
 };

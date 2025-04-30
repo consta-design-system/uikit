@@ -135,6 +135,7 @@ export type SelectPropsInit<
     'clearButton'?: boolean;
     'iconClear'?: IconComponent;
     'selectAll'?: MULTIPLE extends true ? boolean : never;
+    'selectAllLabel'?: string;
   },
   HTMLDivElement
 >;

@@ -93,7 +93,6 @@ const Variants = () => {
         inputValue={inputValue}
         onInputChange={setInputValue}
         onChange={setValue}
-        isLoading
       />
     );
   }
@@ -103,7 +102,6 @@ const Variants = () => {
       value={inputValue}
       onChange={setInputValue}
       type={type}
-      isLoading
     />
   );
 };

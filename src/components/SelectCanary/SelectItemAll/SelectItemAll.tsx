@@ -20,6 +20,7 @@ export type SelectItemAllProps = PropsWithHTMLAttributesAndRef<
     groupId: string | number;
     highlightedIndexAtom: AtomMut<number>;
     index: number;
+    label: string;
   },
   HTMLDivElement
 >;
@@ -95,6 +96,7 @@ export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
       groupId,
       highlightedIndexAtom,
       index,
+      label,
       ...otherProps
     } = props;
 
@@ -106,7 +108,7 @@ export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
         ref={ref}
         className={cnSelectItemAll(null, [className])}
         role="option"
-        label="Выбрать все"
+        label={label}
         innerOffset={indent}
         size={size}
         active={hovered}
@@ -124,9 +126,7 @@ export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
             groupId={groupId}
           />
         }
-      >
-        Выбрать все
-      </ListItem>
+      />
     );
   },
 );

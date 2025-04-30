@@ -32,8 +32,6 @@ const SelectSingleRender = <
 ) => {
   const propsWithDefault = withDefault(props);
 
-  console.log(propsWithDefault);
-
   const propsAtom = useSendToAtom(propsWithDefault);
 
   const {
@@ -82,6 +80,7 @@ const SelectSingleRender = <
     ignoreOutsideClicksRefs,
     clearButton,
     selectAll,
+    selectAllLabel,
     ...otherProps
   } = propsWithDefault;
 
@@ -219,6 +218,7 @@ const SelectSingleRender = <
         hasItemsAtom={hasItemsAtom}
         groupsCounterAtom={groupsCounterAtom}
         dropdownZIndexAtom={dropdownZIndexAtom}
+        selectAllLabel={selectAllLabel}
       />
     </>
   );

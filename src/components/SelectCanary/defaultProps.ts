@@ -3,6 +3,7 @@ import { objectWithDefault, WithDefaultReturn } from '##/utils/object';
 import { SelectGroupDefault, SelectItemDefault, SelectPropsInit } from '.';
 
 export const defaultLabelForEmptyItems = 'Список пуст';
+export const defaultSelectAllLabel = 'Выбрать все';
 
 const getItemKey = (item: SelectItemDefault) => item.id;
 const getGroupKey = (group: SelectGroupDefault) => group.id;
@@ -23,6 +24,7 @@ const defaultProps = {
   getItemLabel,
   dropdownForm: 'default',
   labelForEmptyItems: defaultLabelForEmptyItems,
+  selectAllLabel: defaultSelectAllLabel,
 } as const;
 
 export const withDefault = <

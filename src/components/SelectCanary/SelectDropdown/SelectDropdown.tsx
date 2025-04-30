@@ -81,6 +81,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   inputValueAtom: AtomMut<string>;
   groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
   dropdownZIndexAtom: AtomMut<number | undefined>;
+  selectAllLabel: string;
 }>;
 
 type SelectDropdownComponent = <ITEM, GROUP>(
@@ -148,6 +149,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
     inputValueAtom,
     groupsCounterAtom,
     dropdownZIndexAtom,
+    selectAllLabel,
     ...otherProps
   } = props;
 
@@ -192,7 +194,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
 
   const getIndex = fabricIndex();
   const getVirtualIndex = fabricIndex();
-  const zIndex = useAtom(dropdownZIndexAtom);
+  const [zIndex] = useAtom(dropdownZIndexAtom);
 
   return (
     <SelectPopover
@@ -206,6 +208,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
       openAtom={openAtom}
       form={form}
       onMount={setIsListMount}
+      style={{ zIndex }}
     >
       {isListMount && (
         <div
@@ -266,6 +269,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
                       if (isVisible(slice, virtualIndex)) {
                         return (
                           <SelectItemAll
+                            label={selectAllLabel}
                             groupId={group.key}
                             highlightedIndexAtom={highlightedIndexAtom}
                             groupsCounterAtom={groupsCounterAtom}

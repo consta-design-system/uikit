@@ -15,7 +15,7 @@ import {
 } from '../..';
 import { cnSelectControlLayout } from '../../SelectControlLayout';
 import { cnSelectCreateButton } from '../../SelectCreateButton';
-import { cnSelectInput } from '../../SelectInput';
+import { cnSelectItemAll } from '../../SelectItemAll';
 import { SelectMultiple } from '../SelectMultiple';
 
 const testId = 'SelectSingleCanary';
@@ -51,6 +51,12 @@ const getItems = () =>
   getDropdown().querySelectorAll(
     `.${cnListItem()}`,
   ) as unknown as HTMLDivElement[];
+const getSelectAllOptions = () =>
+  getDropdown().querySelectorAll(
+    `.${cnSelectItemAll()}`,
+  ) as unknown as HTMLDivElement[];
+const getSelectAllOption = (index: number = 0) =>
+  getSelectAllOptions()[index] as HTMLDivElement;
 
 const getItem = (index: number = 0) => getItems()[index] as HTMLDivElement;
 const getClearButton = () =>
@@ -62,8 +68,6 @@ const getLoader = () =>
 const getCreateButton = () =>
   getDropdown().querySelector(`.${cnSelectCreateButton()}`) as HTMLDivElement;
 const onCreateClick = () => fireEvent.click(getCreateButton());
-const getSelectInputValue = () =>
-  getRender().querySelector(`.${cnSelectInput('Value')}`) as HTMLDivElement;
 
 const items: SelectItemDefault[] = [
   { id: 1, label: 'Item 1', groupId: 1 },
@@ -839,5 +843,288 @@ describe('SelectSingle', () => {
     animateDelay();
 
     expect(getValueControl().querySelector('.test')).toBeInTheDocument();
+  });
+
+  it('проверка selectAll', () => {
+    jest.useFakeTimers();
+    const onChangeMock = jest.fn();
+
+    act(() => {
+      renderComponent({
+        items,
+        selectAll: true,
+        onChange: onChangeMock,
+      });
+    });
+
+    inputClick();
+
+    animateDelay();
+
+    const item = getItem(0);
+
+    expect(item).toHaveTextContent('Выбрать все');
+    expect(item).toHaveClass(cnSelectItemAll());
+
+    // получить элемент selectAl
+  });
+
+  it('проверка selectAll в группе', () => {
+    jest.useFakeTimers();
+    const onChangeMock = jest.fn();
+
+    act(() => {
+      renderComponent({
+        items,
+        value: items,
+        groups,
+        selectAll: true,
+        onChange: onChangeMock,
+      });
+    });
+
+    inputClick();
+
+    animateDelay();
+
+    expect(getSelectAllOptions().length).toEqual(2);
+  });
+
+  it('проверка selectAllLabel', () => {
+    jest.useFakeTimers();
+    const onChangeMock = jest.fn();
+    const selectAllLabel = 'Все';
+
+    act(() => {
+      renderComponent({
+        items,
+        selectAll: true,
+        onChange: onChangeMock,
+        selectAllLabel,
+      });
+    });
+
+    inputClick();
+
+    animateDelay();
+
+    const item = getItem(0);
+    expect(item).toHaveTextContent(selectAllLabel);
+    expect(item).toHaveClass(cnSelectItemAll());
+  });
+
+  describe('проверка клика selectAll', () => {
+    it('если не выбрано то выбирает все', () => {
+      jest.useFakeTimers();
+      const onChangeMock = jest.fn();
+
+      act(() => {
+        renderComponent({
+          items,
+          selectAll: true,
+          onChange: onChangeMock,
+        });
+      });
+
+      inputClick();
+
+      animateDelay();
+
+      const item = getItem(0);
+
+      expect(item).toHaveTextContent('Выбрать все');
+      expect(item).toHaveClass(cnSelectItemAll());
+
+      fireEvent.click(item);
+      expect(onChangeMock).toHaveBeenCalledWith(items, {
+        e: expect.any(Object),
+      });
+    });
+    it('если выбран хотя бы 1  выбрано то выбирает все', () => {
+      jest.useFakeTimers();
+      const onChangeMock = jest.fn();
+
+      act(() => {
+        renderComponent({
+          items,
+          value: [items[0]],
+          selectAll: true,
+          onChange: onChangeMock,
+        });
+      });
+
+      inputClick();
+
+      animateDelay();
+
+      const item = getItem(0);
+
+      expect(item).toHaveTextContent('Выбрать все');
+      expect(item).toHaveClass(cnSelectItemAll());
+
+      fireEvent.click(item);
+      expect(onChangeMock).toHaveBeenCalledWith(items, {
+        e: expect.any(Object),
+      });
+    });
+    it('если выбраны все то отменяет все выборы', () => {
+      jest.useFakeTimers();
+      const onChangeMock = jest.fn();
+
+      act(() => {
+        renderComponent({
+          items,
+          value: items,
+          selectAll: true,
+          onChange: onChangeMock,
+        });
+      });
+
+      inputClick();
+
+      animateDelay();
+
+      const item = getItem(0);
+
+      expect(item).toHaveTextContent('Выбрать все');
+      expect(item).toHaveClass(cnSelectItemAll());
+
+      fireEvent.click(item);
+      expect(onChangeMock).toHaveBeenCalledWith([], {
+        e: expect.any(Object),
+      });
+    });
+    it('c группами, если не выбрано то выбирает все в группе', () => {
+      jest.useFakeTimers();
+      const onChangeMock = jest.fn();
+      const testingGroupIndex = 0;
+
+      act(() => {
+        renderComponent({
+          items,
+          groups,
+          selectAll: true,
+          onChange: onChangeMock,
+        });
+      });
+
+      inputClick();
+
+      animateDelay();
+
+      const item = getSelectAllOption(testingGroupIndex);
+
+      expect(item).toHaveTextContent('Выбрать все');
+      expect(item).toHaveClass(cnSelectItemAll());
+
+      fireEvent.click(item);
+      expect(onChangeMock).toHaveBeenCalledWith(
+        items.filter((item) => item.groupId === groups[testingGroupIndex].id),
+        {
+          e: expect.any(Object),
+        },
+      );
+    });
+
+    it('c группами, если не выбрано то выбирает все в группе', () => {
+      jest.useFakeTimers();
+      const onChangeMock = jest.fn();
+      const testingGroupIndex = 0;
+
+      act(() => {
+        renderComponent({
+          items,
+          groups,
+          selectAll: true,
+          onChange: onChangeMock,
+        });
+      });
+
+      inputClick();
+
+      animateDelay();
+
+      const item = getSelectAllOption(testingGroupIndex);
+
+      expect(item).toHaveTextContent('Выбрать все');
+      expect(item).toHaveClass(cnSelectItemAll());
+
+      fireEvent.click(item);
+      expect(onChangeMock).toHaveBeenCalledWith(
+        items.filter((item) => item.groupId === groups[testingGroupIndex].id),
+        {
+          e: expect.any(Object),
+        },
+      );
+    });
+
+    it('c группами, если выбран хотя бы 1 то выбирает все в группе', () => {
+      jest.useFakeTimers();
+      const onChangeMock = jest.fn();
+      const testingGroupIndex = 0;
+
+      act(() => {
+        renderComponent({
+          items,
+          groups,
+          value: [
+            items.filter(
+              (item) => item.groupId === groups[testingGroupIndex].id,
+            )[0],
+          ],
+          selectAll: true,
+          onChange: onChangeMock,
+        });
+      });
+
+      inputClick();
+
+      animateDelay();
+
+      const item = getSelectAllOption(testingGroupIndex);
+
+      expect(item).toHaveTextContent('Выбрать все');
+      expect(item).toHaveClass(cnSelectItemAll());
+
+      fireEvent.click(item);
+      expect(onChangeMock).toHaveBeenCalledWith(
+        items.filter((item) => item.groupId === groups[testingGroupIndex].id),
+        {
+          e: expect.any(Object),
+        },
+      );
+    });
+
+    it('c группами, если выбраны все то отменяет все выборы в группе', () => {
+      jest.useFakeTimers();
+      const onChangeMock = jest.fn();
+      const testingGroupIndex = 0;
+
+      act(() => {
+        renderComponent({
+          items,
+          groups,
+          value: items.filter(
+            (item) => item.groupId === groups[testingGroupIndex].id,
+          ),
+          selectAll: true,
+          onChange: onChangeMock,
+        });
+      });
+
+      inputClick();
+
+      animateDelay();
+
+      const item = getSelectAllOption(testingGroupIndex);
+
+      expect(item).toHaveTextContent('Выбрать все');
+      expect(item).toHaveClass(cnSelectItemAll());
+
+      fireEvent.click(item);
+      expect(onChangeMock).toHaveBeenCalledWith([], {
+        e: expect.any(Object),
+      });
+    });
   });
 });
