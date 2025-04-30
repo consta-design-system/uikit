@@ -176,10 +176,8 @@ export const useSelect = <
       propsForVisibleItemsAtom,
     );
 
-    // ToDo: optionForCreate расчитывать отдельно
     const optionForCreate = ctx.spy(optionForCreateAtom);
 
-    // ToDo: преобразовать в расчет только структуры
     const resultGroups = getCountedGroups(
       getGroups(
         items,
