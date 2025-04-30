@@ -14,7 +14,7 @@ export type SelectItemProps = PropsWithHTMLAttributesAndRef<
     label: string;
     active: boolean;
     hovered: boolean;
-    multiple: boolean;
+    multiple?: boolean;
     size: PropSize;
     indent: 'normal' | 'increased';
     disabled: boolean | undefined;
@@ -23,9 +23,9 @@ export type SelectItemProps = PropsWithHTMLAttributesAndRef<
 >;
 
 export const sizeCheckboxMap: Record<PropSize, CheckboxPropSize> = {
-  xs: 'm',
-  s: 'm',
-  m: 'l',
+  xs: 's',
+  s: 's',
+  m: 'm',
   l: 'l',
 };
 

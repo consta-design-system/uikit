@@ -36,7 +36,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       leftSide,
       rightSide,
       autoComplete,
-      withClearButton,
+      clearButton,
       readOnly,
       type,
       tabIndex,
@@ -56,6 +56,9 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       onPasteCapture,
       onClear,
       onWheel,
+      iconClear,
+      iconShowPassword,
+      iconHidePassword,
       ...otherProps
     } = props;
 
@@ -89,14 +92,20 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
         size={size}
         leftSide={renderSide(leftSide, size, iconSize)}
         rightSide={[
-          withClearButton && !disabled && withValue && (
-            <FieldClearButton size={size} onClick={handleClear} />
+          clearButton && !disabled && withValue && (
+            <FieldClearButton
+              size={size}
+              onClick={handleClear}
+              icon={iconClear}
+            />
           ),
           withValue && (
             <FieldToggleVisiblePasswordButton
               size={size}
               onClick={setVisiblePassword.toggle}
               active={visiblePassword}
+              startIcon={iconShowPassword}
+              endIcon={iconHidePassword}
             />
           ),
         ]}

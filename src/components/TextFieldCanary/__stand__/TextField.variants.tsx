@@ -1,6 +1,6 @@
 import { IconPhoto } from '@consta/icons/IconPhoto';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   fieldPropForm,
@@ -74,7 +74,7 @@ const Variants = () => {
   const size = useSelect('size', fieldPropSize, fieldPropSizeDefault);
   const view = useSelect('view', fieldPropView, fieldPropViewDefault);
   const disabled = useBoolean('disabled', false);
-  const withClearButton = useBoolean('withClearButton', true);
+  const clearButton = useBoolean('clearButton', true);
 
   const maxLength = useNumber('maxLength', 200, type !== 'number');
   const placeholder = useText('placeholder', 'Подсказка в поле');
@@ -96,30 +96,66 @@ const Variants = () => {
   const leftSide = leftSideType && leftSideSelect[leftSideType];
   const rightSide = rightSideType && rightSideSelect[rightSideType];
 
+  const [value, setValue] = useState<string[] | null>(null);
+  const [stringValue, setStringValue] = useState<string | null>(null);
+
+  const onChange = (value: string[] | null) => {
+    setStringValue(null);
+    setValue(value);
+  };
+
+  if (type === 'textarray') {
+    return (
+      <div style={{ width: '100%' }}>
+        <TextField
+          value={value}
+          inputValue={stringValue}
+          onInputChange={setStringValue}
+          onChange={onChange}
+          id="inputId"
+          form={form}
+          status={status}
+          size={size}
+          view={view}
+          disabled={disabled}
+          style={{ width: '100%' }}
+          leftSide={leftSide}
+          rightSide={rightSide}
+          maxLength={maxLength}
+          clearButton={clearButton}
+          placeholder={placeholder}
+          type={type}
+        />
+      </div>
+    );
+  }
+
   return (
-    <TextField
-      id="inputId"
-      form={form}
-      status={status}
-      size={size}
-      view={view}
-      disabled={disabled}
-      style={{ width: '100%' }}
-      leftSide={leftSide}
-      rightSide={rightSide}
-      maxLength={maxLength}
-      withClearButton={withClearButton}
-      placeholder={placeholder}
-      type={type}
-      incrementButtons={type === 'number' ? incrementButtons : undefined}
-      min={type === 'number' ? min : undefined}
-      max={type === 'number' ? max : undefined}
-      step={getStep(type, withStepArray, step)}
-      resize={type === 'textarea' ? resizeMap[resize] : undefined}
-      maxRows={type === 'textarea' && resize === 'auto' ? maxRows : undefined}
-      minRows={type === 'textarea' && resize === 'auto' ? minRows : undefined}
-      rows={type === 'textarea' && resize !== 'auto' ? rows : undefined}
-    />
+    <div style={{ width: '100%' }}>
+      <TextField
+        id="inputId"
+        form={form}
+        status={status}
+        size={size}
+        view={view}
+        disabled={disabled}
+        style={{ width: '100%' }}
+        leftSide={leftSide}
+        rightSide={rightSide}
+        maxLength={maxLength}
+        clearButton={clearButton}
+        placeholder={placeholder}
+        type={type}
+        incrementButtons={type === 'number' ? incrementButtons : undefined}
+        min={type === 'number' ? min : undefined}
+        max={type === 'number' ? max : undefined}
+        step={getStep(type, withStepArray, step)}
+        resize={type === 'textarea' ? resizeMap[resize] : undefined}
+        maxRows={type === 'textarea' && resize === 'auto' ? maxRows : undefined}
+        minRows={type === 'textarea' && resize === 'auto' ? minRows : undefined}
+        rows={type === 'textarea' && resize !== 'auto' ? rows : undefined}
+      />
+    </div>
   );
 };
 

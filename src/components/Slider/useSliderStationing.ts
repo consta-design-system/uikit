@@ -114,7 +114,7 @@ export const useSliderStationing: UseSliderStationing = (
               (range && Array.isArray(value)
                 ? stepSize.max > Math.min(...value) &&
                   stepSize.min < Math.max(...value)
-                : stepSize.max <= value),
+                : stepSize.max <= (value as number)),
           });
         });
       }

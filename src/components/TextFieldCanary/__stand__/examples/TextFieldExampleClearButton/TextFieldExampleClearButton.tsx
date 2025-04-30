@@ -3,10 +3,10 @@ import React from 'react';
 
 import { TextField } from '../../../TextFieldCanary';
 
-export const TextFieldExampleWithClearButton = () => {
+export const TextFieldExampleClearButton = () => {
   return (
     <Example col={1}>
-      <TextField defaultValue="Очисти меня" withClearButton />
+      <TextField defaultValue="Очисти меня" clearButton />
     </Example>
   );
 };

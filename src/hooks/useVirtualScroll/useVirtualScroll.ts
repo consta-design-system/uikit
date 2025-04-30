@@ -17,6 +17,8 @@ import {
   UseVirtualScrollReturn,
 } from './helpers';
 
+const emptyArray: [] = [];
+
 export const useVirtualScroll = <
   ITEM_ELEMENT extends HTMLElement = HTMLDivElement,
   SCROLL_ELEMENT extends HTMLElement = HTMLDivElement,
@@ -37,7 +39,11 @@ export const useVirtualScroll = <
   ]);
   const listRefs = useRefs<ITEM_ELEMENT>(length, visiblePosition);
   const scrollElementRef = useRef<SCROLL_ELEMENT>(null);
-  const sizes = useResizeObserved(listRefs, getElementHeight);
+  const sizes = useResizeObserved(
+    isActive ? listRefs : emptyArray,
+    getElementHeight,
+  );
+
   const savedSizesRef = useRef(calculateSavedSizes([], sizes));
   const onScrollToBottomRef = useMutableRef(onScrollToBottom);
   const [scrollElementRefHeight] = useResizeObserved(
@@ -67,10 +73,20 @@ export const useVirtualScroll = <
         calculateBounds(savedSizesRef.current, sizes, visiblePosition, length),
       );
     } else {
-      setBounds([
-        [0, 0],
-        [0, length],
-      ]);
+      setBounds((state) => {
+        if (
+          state[0][0] !== 0 ||
+          state[0][1] !== 0 ||
+          state[1][0] !== 0 ||
+          state[1][1] !== length
+        ) {
+          return [
+            [0, 0],
+            [0, length],
+          ];
+        }
+        return state;
+      });
     }
   }, [...visiblePosition, sizes, length, isActive]);
 

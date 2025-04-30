@@ -57,7 +57,7 @@ export const TextFieldExampleTextArrayPreParsing = () => {
         onPaste={pasteHandle}
         type="textarray"
         inputRef={inputRef}
-        withClearButton
+        clearButton
       />
     </Example>
   );

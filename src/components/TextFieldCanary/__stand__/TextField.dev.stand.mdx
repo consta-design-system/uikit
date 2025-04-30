@@ -31,7 +31,7 @@ import {
   TextFieldExampleTypeTextArray,
 } from './examples/TextFieldExampleType/TextFieldExampleType';
 import { TextFieldExampleStepArray } from './examples/TextFieldExampleStepArray/TextFieldExampleStepArray';
-import { TextFieldExampleWithClearButton } from './examples/TextFieldExampleWithClearButton/TextFieldExampleWithClearButton';
+import { TextFieldExampleClearButton } from './examples/TextFieldExampleClearButton/TextFieldExampleClearButton';
 import {
   TextFieldExampleMaskAmount,
   TextFieldExampleMaskPhone,
@@ -236,7 +236,7 @@ export const TextFieldExampleTypeTextArray = () => {
       value={value}
       onChange={setValue}
       type="textarray"
-      withClearButton
+      clearButton
     />
   );
 };
@@ -290,7 +290,7 @@ export const TextFieldExampleRenderValueItem = () => {
       value={value}
       onChange={setValue}
       type="textarray"
-      withClearButton
+      clearButton
       renderValueItem={RenderValueItem}
     />
   );
@@ -390,7 +390,7 @@ export const TextFieldExampleTextArrayPreParsing = () => {
         onPaste={pasteHandle}
         type="textarray"
         inputRef={inputRef}
-        withClearButton
+        clearButton
       />
     </Example>
   );
@@ -466,15 +466,15 @@ const App = () => {
 
 ### Кнопка для очистки поля
 
-Чтобы добавить в поле кнопку, по которой можно очистить его содержимое, используйте свойство `withClearButton`. Если в поле есть значение, справа появляется крестик. При нажатии на него поле станет пустым.
+Чтобы добавить в поле кнопку, по которой можно очистить его содержимое, используйте свойство `clearButton`. Если в поле есть значение, справа появляется крестик. При нажатии на него поле станет пустым.
 
 <MdxTabs>
 
 ```tsx
-<TextField defaultValue="Очисти меня" withClearButton />
+<TextField defaultValue="Очисти меня" clearButton />
 ```
 
-<TextFieldExampleWithClearButton />
+<TextFieldExampleClearButton />
 
 </MdxTabs>
 
@@ -650,7 +650,7 @@ export const TextFieldExampleMaskSetValue = () => {
           placeholder="+7(999)999-99-99"
           inputRef={ref}
           defaultValue={defaultValue}
-          withClearButton
+          clearButton
           onClear={() => setValue('')}
         />
         <Button
@@ -903,7 +903,7 @@ export const TextFieldExampleMaskArraySn = () => {
         onInputChange={onInputChange}
         status={status}
         placeholder={mask}
-        withClearButton
+        clearButton
         onClear={onClear}
       />
     </FieldWrapper>
@@ -960,7 +960,7 @@ type TextFieldPropRenderValueItem = (props: {
 | [`maxRows?`](#строки-и-колонки)                       | `number`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Максимум видимых строк, работает только с `type='textarea'`.                                                                                  |
 | [`maxLength?`](#строки-и-колонки)                     | `number`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Максимальное количество символов.                                                                                                             |
 | [`incrementButtons?`](#шаг-набор-значений-и-диапазон) | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                       | -            | Отображать ли кнопки-стрелочки для `type='number'`.                                                                                           |
-| [`withClearButton?`](#кнопка-для-очистки-поля)        | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                       | -            | Отображение кнопки-крестик для очистки поля ввода.                                                                                            |
+| [`clearButton?`](#кнопка-для-очистки-поля)            | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                       | -            | Отображение кнопки-крестик для очистки поля ввода.                                                                                            |
 | [`view?`](#внешний-вид)                               | `'default'` <code>&#124;</code> `'clear'`                                                                                                                                                                                                                                                                                                                                                                       | `default`    | Внешний вид поля.                                                                                                                             |
 | [`form?`](#форма)                                     | `'default'` <code>&#124;</code> ` 'brick'` <code>&#124;</code> ` 'round'` <code>&#124;</code> ` 'clearRound'` <code>&#124;</code> ` 'roundClear'` <code>&#124;</code> ` 'clearDefault'` <code>&#124;</code> ` 'defaultClear'` <code>&#124;</code> ` 'defaultBrick'` <code>&#124;</code> ` 'brickDefault'` <code>&#124;</code> `'brickClear'` <code>&#124;</code> ` 'clearBrick'` <code>&#124;</code> ` 'clear'` | `default`    | Форма поля.                                                                                                                                   |
 | [`leftSide?`](#дополнительная-информация)             | `IconComponent` <code>&#124;</code> `string`                                                                                                                                                                                                                                                                                                                                                                    | -            | Иконка или текст слева, внутри поля                                                                                                           |
@@ -982,6 +982,9 @@ type TextFieldPropRenderValueItem = (props: {
 | `renderValueItem?`                                    | `TextFieldPropRenderValueItem`                                                                                                                                                                                                                                                                                                                                                                                  | -            | Функция которая определяет как будет выглядеть значение поля, работает только с `type='textarray'`.                                           |
 | `onInputChange?`                                      | `TextFieldPropOnChange<string>`                                                                                                                                                                                                                                                                                                                                                                                 | -            | Действие при изменении текстового поля, работает только с `type='textarray'`.                                                                 |
 | `inputValue?`                                         | `string` <code>&#124;</code> `null`                                                                                                                                                                                                                                                                                                                                                                             | -            | Значение `<input>`, работает только с `type='textarray'`.                                                                                     |
+| `iconClear?`                                          | `IconComponent`                                                                                                                                                                                                                                                                                                                                                                                                 | -            | Иконка удаления выбранного значения                                                                                                           |
+| `iconShowPassword?`                                   | `IconComponent`                                                                                                                                                                                                                                                                                                                                                                                                 | -            | Иконка глазика                                                                                                                                |
+| `iconHidePassword?`                                   | `IconComponent`                                                                                                                                                                                                                                                                                                                                                                                                 | -            | Иконка закрытого глазика                                                                                                                      |
 | `className?`                                          | `string`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Дополнительный CSS-класс.                                                                                                                     |
 | `inputRef?`                                           | `React.Ref<InputType<TYPE>>`                                                                                                                                                                                                                                                                                                                                                                                    | -            | Ссылка на DOM-элемент поля ввода.                                                                                                             |
 | `ref?`                                                | `React.Ref<HTMLDivElement>`                                                                                                                                                                                                                                                                                                                                                                                     | -            | Ссылка на корневой DOM-элемент компонента.                                                                                                    |
