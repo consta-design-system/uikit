@@ -72,6 +72,9 @@ const AutoCompleteRender = <
     onDropdownOpen,
     dropdownOpen,
     ignoreOutsideClicksRefs,
+    rows,
+    minRows,
+    maxRows,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -157,7 +160,10 @@ const AutoCompleteRender = <
         name={name}
         disabled={disabled}
         ref={useForkRef([controlRef, ref])}
-        inputRef={useForkRef([inputRef, inputControlRef])}
+        inputRef={useForkRef([
+          inputRef as React.RefObject<HTMLInputElement>,
+          inputControlRef,
+        ])}
         onBlur={handleInputBlur}
         inputContainerRef={useForkRef([containerRef, inputContainerRef])}
         onClick={handleInputFocus}
@@ -165,6 +171,9 @@ const AutoCompleteRender = <
         value={value}
         style={style}
         size={size}
+        rows={rows as undefined}
+        minRows={minRows as undefined}
+        maxRows={maxRows as undefined}
         {...otherProps}
       />
       <SelectDropdown

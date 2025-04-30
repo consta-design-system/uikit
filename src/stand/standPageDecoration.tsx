@@ -6,9 +6,10 @@ import { Theme } from '##/components/Theme';
 export const StandPageDecoration: Lib<Group>['standPageDecoration'] = (
   props,
 ) => {
-  return (
-    <StrictMode>
-      <Theme preset={props.theme}>{props.children}</Theme>
-    </StrictMode>
-  );
+  const content = <Theme preset={props.theme}>{props.children}</Theme>;
+  if (process.env.NODE_ENV === 'development') {
+    return <StrictMode>{content}</StrictMode>;
+  }
+
+  return content;
 };

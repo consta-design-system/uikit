@@ -5,7 +5,7 @@ import { useMutableRef } from '../useMutableRef/useMutableRef';
 export type ClickOutsideHandler = (event: MouseEvent) => void;
 
 type UseClickOutsideProps = {
-  isActive?: boolean;
+  isActive?: boolean | (() => boolean | undefined);
   ignoreClicksInsideRefs?: ReadonlyArray<RefObject<HTMLElement>>;
   handler?: ClickOutsideHandler;
 };
@@ -26,17 +26,19 @@ export function useClickOutside({
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
-      if (!isActiveRef.current) {
-        return;
+      if (
+        typeof isActiveRef.current === 'function'
+          ? isActiveRef.current()
+          : isActiveRef.current
+      ) {
+        const target = event.target as Node;
+
+        const shouldCallHandler = ignoreClicksInsideRefsRef.current?.every(
+          (ref) => !ref.current?.contains(target),
+        );
+
+        shouldCallHandler && handlerRef.current?.(event);
       }
-
-      const target = event.target as Node;
-
-      const shouldCallHandler = ignoreClicksInsideRefsRef.current?.every(
-        (ref) => !ref.current?.contains(target),
-      );
-
-      shouldCallHandler && handlerRef.current?.(event);
     };
 
     document.addEventListener('mousedown', handleClick);

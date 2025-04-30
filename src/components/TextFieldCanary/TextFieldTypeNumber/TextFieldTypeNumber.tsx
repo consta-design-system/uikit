@@ -40,7 +40,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       leftSide,
       rightSide,
       autoComplete,
-      withClearButton,
+      clearButton,
       readOnly,
       type,
       tabIndex,
@@ -64,6 +64,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       onPasteCapture,
       onClear,
       onWheel,
+      iconClear,
       ...otherProps
     } = props;
 
@@ -134,7 +135,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       [],
     );
 
-    const handleInputKeyDown = useKeys(
+    const handleInputKeyDown = useKeys<Element>(
       useMemo(
         () => ({
           isActive: true,
@@ -171,8 +172,12 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
         size={size}
         leftSide={renderSide(leftSide, size, iconSize)}
         rightSide={[
-          withClearButton && !disabled && withValue && !incrementButtons && (
-            <FieldClearButton size={size} onClick={handleClear} />
+          clearButton && !disabled && withValue && !incrementButtons && (
+            <FieldClearButton
+              size={size}
+              onClick={handleClear}
+              icon={iconClear}
+            />
           ),
           incrementButtons && refs.current[4] && (
             <FieldCounter

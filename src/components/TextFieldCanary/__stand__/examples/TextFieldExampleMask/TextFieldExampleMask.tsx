@@ -145,10 +145,11 @@ export const TextFieldExampleMaskSetValue = () => {
       <FieldWrapper label="Телефон">
         <FieldGroup>
           <TextField
+            style={{ flex: 1 }}
             placeholder="+7(999)999-99-99"
             inputRef={ref}
             defaultValue={defaultValue}
-            withClearButton
+            clearButton
             onClear={() => setValue('')}
           />
           <Button
@@ -204,7 +205,7 @@ export const TextFieldExampleMaskArraySn = () => {
           onInputChange={onInputChange}
           status={status}
           placeholder={mask}
-          withClearButton
+          clearButton
           onClear={onClear}
         />
       </FieldWrapper>

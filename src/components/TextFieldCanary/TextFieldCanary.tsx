@@ -30,7 +30,8 @@ const TextFieldRender = <TYPE extends string>(
   props: TextFieldProps<TYPE>,
   ref: React.Ref<HTMLDivElement>,
 ) => {
-  const Component = typeMap[props.type || 'text'] || typeMap.text;
+  const Component = (typeMap[props.type || 'text'] ||
+    typeMap.text) as TextFieldTypeComponent<TYPE>;
 
   return <Component ref={ref} {...props} />;
 };

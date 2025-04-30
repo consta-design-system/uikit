@@ -24,7 +24,7 @@ type SortGroups<ITEM, GROUP> = (
   a: Group<ITEM, GROUP>,
   b: Group<ITEM, GROUP>,
 ) => number;
-type GetGroupsResult<ITEM, GROUP> = Group<ITEM, GROUP>[];
+export type GetGroupsResult<ITEM, GROUP> = Group<ITEM, GROUP>[];
 
 export const defaultGroupKey = 'no-group';
 
@@ -102,6 +102,9 @@ export function getGroups<ITEM, GROUP>(
   return resultGroups;
 }
 
+/**
+ * @deprecated
+ */
 export function getCountedGroups<ITEM, GROUP>(
   groups: GetGroupsResult<ITEM, GROUP>,
   values: ITEM[] | undefined | null,

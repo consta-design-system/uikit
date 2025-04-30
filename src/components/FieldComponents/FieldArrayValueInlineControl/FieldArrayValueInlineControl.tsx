@@ -1,14 +1,12 @@
-import React, {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { AtomMut } from '@reatom/framework';
+import { useAction, useAtom, useUpdate } from '@reatom/npm-react';
+import React, { forwardRef, useRef } from 'react';
 
 import { useComponentSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
-import { useMutableRef } from '##/hooks/useMutableRef';
+import { usePropAtom, useSendToAtom, withCtx } from '##/utils/state';
+import { useCreateAtom } from '##/utils/state/useCreateAtom';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { FieldPropSize } from '../types';
 import { cnFieldArrayValueInlineControl } from './cnFieldArrayValueInlineControl';
@@ -38,6 +36,78 @@ const inputHeightMap: Record<FieldPropSize, string> = {
   xs: 'var(--space-l)',
 };
 
+const InputFakeElement = forwardRef<
+  HTMLDivElement,
+  PropsWithHTMLAttributes<
+    {
+      valueAtom: AtomMut<string>;
+      inputMinWidthAtom: AtomMut<number>;
+    },
+    HTMLDivElement
+  >
+>(({ valueAtom, inputMinWidthAtom, ...otherProps }, componentRef) => {
+  const [value] = useAtom(valueAtom);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { width } = useComponentSize(ref);
+
+  useUpdate(
+    (ctx, width) => {
+      inputMinWidthAtom(ctx, width);
+    },
+    [width],
+  );
+
+  return (
+    <div {...otherProps} ref={useForkRef([componentRef, ref])}>
+      {value}
+    </div>
+  );
+});
+
+const Root = forwardRef<
+  HTMLDivElement,
+  PropsWithHTMLAttributes<
+    {
+      inputMinWidthAtom: AtomMut<number>;
+      size: FieldArrayValueInlineControlProps<unknown>['size'];
+    },
+    HTMLDivElement
+  >
+>(
+  (
+    {
+      children,
+      className,
+      inputMinWidthAtom,
+      size = 'm',
+      style,
+      ...otherProps
+    },
+    ref,
+  ) => {
+    const [inputMinWidth] = useAtom(inputMinWidthAtom);
+
+    return (
+      <div
+        {...otherProps}
+        className={cnFieldArrayValueInlineControl(null, [className])}
+        ref={ref}
+        style={{
+          ...style,
+          ['--field-array-value-inline-control-items-gap' as string]:
+            gapMap[size],
+          ['--field-array-value-inline-control-input-min-width' as string]: `${inputMinWidth}px`,
+          ['--field-array-value-inline-control-vertical-padding' as string]: `${verticalPaddingMap[size]}`,
+          ['--field-array-value-inline-control-input-height' as string]: `${inputHeightMap[size]}`,
+        }}
+      >
+        {children}
+      </div>
+    );
+  },
+);
+
 const FieldArrayValueInlineControlRender = (
   props: FieldArrayValueInlineControlProps<unknown>,
   ref: React.Ref<HTMLDivElement>,
@@ -47,7 +117,8 @@ const FieldArrayValueInlineControlRender = (
     inputRef: inputRefProp,
     inputMaxLength,
     value = [],
-    inputDefaultValue,
+    inputValue,
+    inputDefaultValue = '',
     renderValue,
     onFocus,
     onBlur,
@@ -55,7 +126,6 @@ const FieldArrayValueInlineControlRender = (
     inputTabIndex,
     inputAriaLabel,
     disabled,
-    style,
     size = 'm',
     placeholder,
     onKeyDown,
@@ -70,43 +140,63 @@ const FieldArrayValueInlineControlRender = (
     onPaste,
     onPasteCapture,
     onWheel,
+    disableInput,
     ...otherProps
   } = props;
 
-  const [inputValue, setInputValue] = useState('');
-  const onInputChangeRef = useMutableRef(onChange);
+  const propsAtom = useSendToAtom(props);
+  const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
+  const valueAtom = usePropAtom(propsAtom, 'value');
+  const inputValueAtom = useCreateAtom(inputValue || inputDefaultValue || '');
+  const inputDefaultValueAtom = useCreateAtom(inputDefaultValue);
+  const inputMinWidthAtom = useCreateAtom(0);
+
   const fakeInputRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => {
-      setInputValue(e.target.value);
-      onInputChangeRef.current?.(e);
+  const handleChange = useAction(
+    (ctx, e: React.ChangeEvent<HTMLInputElement>) => {
+      inputValueAtom(ctx, e.target.value);
+      const { onChange } = ctx.get(propsAtom);
+      if (onChange) {
+        onChange(e);
+      }
     },
     [],
   );
-  const { width: inputMinWidth } = useComponentSize(fakeInputRef);
 
-  useEffect(() => {
-    setInputValue(inputRef.current?.value || '');
-  }, [inputRef.current?.value]);
+  const [valueNode] = useAtom((ctx) => {
+    const value = ctx.spy(valueAtom);
+    const { renderValue } = ctx.get(propsAtom);
+    return renderValue(value || []);
+  });
+
+  useAtom((ctx) => {
+    const inputValueProp = ctx.spy(inputValuePropAtom);
+    const inputDefaultValue = ctx.get(inputDefaultValueAtom);
+    if (inputDefaultValue) {
+      inputDefaultValueAtom(ctx, '');
+    } else {
+      if (inputRef.current) {
+        inputRef.current.value = inputValueProp || '';
+      }
+
+      inputValueAtom(ctx, inputValueProp || '');
+    }
+  });
 
   return (
-    <div
+    <Root
       {...otherProps}
       className={cnFieldArrayValueInlineControl(null, [className])}
       ref={ref}
-      style={{
-        ...style,
-        ['--field-array-value-inline-control-items-gap' as string]:
-          gapMap[size],
-        ['--field-array-value-inline-control-input-min-width' as string]: `${inputMinWidth}px`,
-        ['--field-array-value-inline-control-vertical-padding' as string]: `${verticalPaddingMap[size]}`,
-        ['--field-array-value-inline-control-input-height' as string]: `${inputHeightMap[size]}`,
-      }}
+      size={size}
+      inputMinWidthAtom={inputMinWidthAtom}
     >
-      {value.map(renderValue)}
+      {valueNode}
       <input
-        className={cnFieldArrayValueInlineControl('Input')}
+        className={cnFieldArrayValueInlineControl('Input', {
+          disabled: disableInput,
+        })}
         onChange={handleChange}
         ref={useForkRef([inputRef, inputRefProp])}
         maxLength={inputMaxLength}
@@ -131,17 +221,18 @@ const FieldArrayValueInlineControlRender = (
         onPasteCapture={onPasteCapture}
         onWheel={onWheel}
         defaultValue={inputDefaultValue}
+        readOnly={disableInput}
       />
-      <div
+      <InputFakeElement
         ref={fakeInputRef}
         className={cnFieldArrayValueInlineControl('HelperInputFakeElement')}
-      >
-        {inputValue}
-      </div>
-    </div>
+        valueAtom={inputValueAtom}
+        inputMinWidthAtom={inputMinWidthAtom}
+      />
+    </Root>
   );
 };
 
-export const FieldArrayValueInlineControl = forwardRef(
-  FieldArrayValueInlineControlRender,
+export const FieldArrayValueInlineControl = withCtx(
+  forwardRef(FieldArrayValueInlineControlRender),
 ) as FieldArrayValueInlineControlComponent;

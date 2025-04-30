@@ -73,6 +73,13 @@ type TextFieldPropsTypeNumber<TYPE> = TYPE extends 'number'
     }
   : {};
 
+type TextFieldPropsTypePassword<TYPE> = TYPE extends 'password'
+  ? {
+      iconShowPassword?: IconComponent;
+      iconHidePassword?: IconComponent;
+    }
+  : {};
+
 export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
   {
     className?: string;
@@ -95,7 +102,8 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
     placeholder?: string;
     leftSide?: string | IconComponent;
     rightSide?: string | IconComponent;
-    withClearButton?: boolean;
+    clearButton?: boolean;
+    iconClear?: IconComponent;
     autoComplete?: AutoCompete;
     readOnly?: boolean;
     tabIndex?: number;
@@ -120,7 +128,8 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
 > &
   TextFieldPropsTypeTextArea<TYPE> &
   TextFieldPropsTypeTextArray<TYPE> &
-  TextFieldPropsTypeNumber<TYPE>;
+  TextFieldPropsTypeNumber<TYPE> &
+  TextFieldPropsTypePassword<TYPE>;
 
 export type TextFieldComponent = <TYPE extends string>(
   props: TextFieldProps<TYPE>,

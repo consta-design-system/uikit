@@ -1,0 +1,23 @@
+.canary--SelectMultiple {
+  --select-value-offset: var(--field-control-layout-space);
+  --select-max-height-var:
+    var(
+      --select-max-height-prop,
+      calc(var(--field-control-layout-height) * 3.7)
+    );
+
+  &.SelectControlLayout_clearButton {
+    --select-value-offset:
+      calc(
+        var(--field-control-layout-right-slot-content-width-0) +
+        var(--field-control-layout-space) * 2
+      );
+  }
+
+  &-Value.FieldArrayValueInlineControl {
+    overflow: auto;
+    width: calc(100% + var(--select-value-offset));
+    max-height: var(--select-max-height-var);
+    padding-right: var(--select-value-offset);
+  }
+}

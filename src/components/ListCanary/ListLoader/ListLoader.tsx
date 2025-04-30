@@ -15,7 +15,7 @@ import {
   ListPropSize,
 } from '../types';
 
-const cnListLoader = cn('ListLoader');
+export const cnListLoader = cn('ListLoader');
 
 type Props = PropsWithHTMLAttributesAndRef<
   { size?: ListPropSize; innerOffset?: ListPropInnerOffset },
