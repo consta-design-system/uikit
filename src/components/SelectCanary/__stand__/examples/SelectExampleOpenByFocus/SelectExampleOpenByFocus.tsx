@@ -1,5 +1,5 @@
 import { Example } from '@consta/stand';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { Button } from '##/components/Button';
 import { useFlag } from '##/hooks/useFlag';

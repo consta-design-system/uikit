@@ -1,27 +1,27 @@
 .FieldArrayValueInlineControl {
   position: relative;
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--field-array-value-inline-control-items-gap);
-  padding: calc(
+  min-height: var(--field-control-layout-slot-height);
+  padding:
+    calc(
       var(--field-array-value-inline-control-vertical-padding) -
-        var(--field-control-layout-border-width)
+      var(--field-control-layout-border-width)
     )
     0;
-
-  min-height: var(--field-control-layout-slot-height);
+  flex-wrap: wrap;
+  gap: var(--field-array-value-inline-control-items-gap);
 
   &-Input {
     display: block;
     flex: 1;
-    min-width: min(
-      max(
-        var(--field-array-value-inline-control-input-min-width),
-        var(--field-control-layout-space)
-      ),
-      var(--field-control-layout-children-width)
-    );
-
+    min-width:
+      min(
+        max(
+          var(--field-array-value-inline-control-input-min-width),
+          var(--field-control-layout-space)
+        ),
+        var(--field-control-layout-children-width)
+      );
     height: var(--field-array-value-inline-control-input-height);
     color: var(--field-control-layout-input-color);
     background: transparent;
@@ -33,8 +33,8 @@
 
     &_disabled {
       position: absolute;
-      pointer-events: none;
       width: 100%;
+      pointer-events: none;
     }
 
     &:-webkit-autofill,

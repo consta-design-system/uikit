@@ -2,6 +2,7 @@
   &:hover:not(.ListItem_active) {
     background: transparent;
   }
+
   .ListItemGrid-Slot_position_center {
     overflow: hidden;
   }
@@ -10,7 +11,7 @@
 .canary--SelectCreateButton {
   &-CreateLabel {
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
