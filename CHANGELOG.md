@@ -1,5 +1,17 @@
 # Changelog
 
+## v5.19.0 (05/05/2025)
+Самое важное:
+- Добавлен новый компонент `Select(canary)` который обеспечивает функционал `Combobox` и `Select`.
+
+---
+
+- [feat(Select): add canary component (#3907)](https://github.com/consta-design-system/uikit/commit/3ad5947067ff13daee9a0732167503f67ae2c751) - [@gizeasy](https://github.com/gizeasy)
+- [docs: replace informers (#3920)](https://github.com/consta-design-system/uikit/commit/8bf61a1d1127ba3339d2832932633b2eb054aa39) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [fix(Attachment): fixes attachment actions key (#3923)](https://github.com/consta-design-system/uikit/commit/d4a2b99b36c8b123eacd7ab84a60c0488f0a0a1b) - [@baevm](https://github.com/baevm)
+
+--------------------
+
 ## v5.18.0 (11/04/2025)
 Самое главное:
 - В `Tabs` добавлен `getItemKey` для возможности указывать произвольный ключ.
@@ -396,22 +408,3 @@
 
 ## v4.31.1 (05/10/2023)
 - [fix(withTooltip): fixed types (#3335)](https://github.com/consta-design-system/uikit/commit/40bb234829e346ca2e57801696a78675237b221c) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.31.0 (04/10/2023)
-Самое важное:
-- в `ContextMenu` добавили управление с клавиатуры
--  переписали HOC `withTooltip` и добавили в него анимацию появления тултипа
-- теперь можно отдельно импортировать изображения `Responses`
--  добавили миксин `MixFlex`
-- добавили в документацию компонента `Slider` описание свойства `onAfterChange`
-
----
-
-- [feat(ContextMenu): add keyboard navigation (#3259)](https://github.com/consta-design-system/uikit/commit/477c710d274375bae9263d75ad117006ce2b4b53) - [@N1MBER](https://github.com/N1MBER)
-- [fix(List): fixed default color of list items in dark theme (#3324)](https://github.com/consta-design-system/uikit/commit/81308b2b9f55f8ba865ca5b12134ee3493c0486f) - [@levi2ki](https://github.com/levi2ki)
-- [docs(Slider): added description of the onAfterChange property (#3327)](https://github.com/consta-design-system/uikit/commit/c9d3da82acf675f98912d72411ccb1410e37e1cc) - [@N1MBER](https://github.com/N1MBER)
-- [feat(withTooltip): add animate and refactor HOC (#3310)](https://github.com/consta-design-system/uikit/commit/c7dd62e56feb41c18e4a2bf0d11de76afb419dc2) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Responses): added images reexports (#3308)](https://github.com/consta-design-system/uikit/commit/04c832e480d19a08e6c81ad72e3a71eff7bf9a33) - [@gizeasy](https://github.com/gizeasy)
-- [feat(MixFlex): add new mixin (#3294)](https://github.com/consta-design-system/uikit/commit/fda9e848c80ad2ab22ed7da89868bb0499eb2ae5) - [@N1MBER](https://github.com/N1MBER)
