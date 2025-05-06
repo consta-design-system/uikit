@@ -1,6 +1,6 @@
 {
   "name": "@consta/uikit",
-  "version": "5.19.0",
+  "version": "5.19.2",
   "keywords": [
     "ui-kit",
     "design-system",
@@ -54,7 +54,7 @@
     "unit:clear": "jest --clearCache",
     "build:css": "cross-env NODE_ENV=buildProduction postcss 'src/**/*.css' --base src --dir dist/__internal__/src/",
     "build:js": "cross-env NODE_ENV=buildProduction BUILDING_JS=true babel --extensions '.ts,.tsx' --config-file ./babel.config.js --source-maps --out-dir dist/__internal__/src/ ./src",
-    "build:types": "cross-env NODE_ENV=buildProduction tsc --declaration --outDir dist/__internal__/src/ --emitDeclarationOnly -p tsconfig.build.json",
+    "build:types": "cross-env NODE_ENV=buildProduction tsc --declaration --outDir dist/__internal__/ --emitDeclarationOnly -p tsconfig.build.json & node ./scripts/copy.js --src=./tsconfig.json --dest=./dist/__internal__/tsconfig.json & tsconfig-replace-paths -p ./dist/__internal__/tsconfig.json -s ./dist/__internal__ -o ./dist/__internal__ & node ./scripts/rm.js --path=./dist/__internal__/tsconfig.json",
     "build:package.json": "node scripts/prepare-package-json.js",
     "build:reexports": "node scripts/generateReExports.js --config=scripts/generateReExportsConfig.js",
     "build:copy-assets": "node scripts/copyAssets.js",
@@ -205,6 +205,7 @@
     "terser-webpack-plugin": "^5.2.5",
     "ts-jest": "^28.0.7",
     "ts-loader": "^9.2.8",
+    "tsconfig-replace-paths": "^0.0.14",
     "typescript": "^5.8.3",
     "typescript-eslint-parser": "^22.0.0",
     "typescript-transform-paths": "^3.3.1",
