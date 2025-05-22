@@ -1,8 +1,9 @@
-import { useAtom, useUpdate } from '@reatom/npm-react';
+import { useUpdate } from '@reatom/npm-react';
+
+import { useCreateAtom } from '../useCreateAtom';
 
 export const useSendToAtom = <T>(value: T) => {
-  const atom = useAtom(value, undefined, false)[2];
-
+  const atom = useCreateAtom(value);
   useUpdate(atom, [value]);
 
   return atom;

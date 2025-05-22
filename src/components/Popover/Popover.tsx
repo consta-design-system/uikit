@@ -199,8 +199,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       ...otherProps
     } = props;
 
-    // console.log(viewportRef);
-
     const viewportElement = viewportRef?.current || document.documentElement;
 
     const ref = React.useRef<HTMLDivElement>(null);

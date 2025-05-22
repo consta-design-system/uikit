@@ -668,13 +668,14 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   };
 
   useClickOutside({
-    isActive: isOpen,
+    isActive: true,
     ignoreClicksInsideRefs: [
       dropdownRef,
       controlRef,
       ...(ignoreOutsideClicksRefs || []),
     ],
     handler: () => {
+      setIsFocused(false);
       setOpen(false);
     },
   });
