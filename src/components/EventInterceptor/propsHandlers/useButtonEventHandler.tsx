@@ -28,6 +28,6 @@ export const useButtonEventHandler = <T extends ButtonProps>(
 
     return props.onClick?.(...onClickArgs);
   };
-
+  // ываываы
   return newProps;
 };
