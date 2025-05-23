@@ -1,5 +1,17 @@
 # Changelog
 
+## v5.20.0 (23/05/2025)
+Самое важное:
+- Добавили в `Tooltip` свойство `container` для возможности указания родительского контейнера для рендера.
+
+---
+
+- [fix(Select, Combobox): fixed unfocus in firefox (#3939)](https://github.com/consta-design-system/uikit/commit/4470abaa8ea8a2d6cda8e7e9c7fca715d762bbf9) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Tooltip): adds container prop (#3930)](https://github.com/consta-design-system/uikit/commit/daf1cbe28273b3d18017f681352932a70208b547) - [@baevm](https://github.com/baevm)
+- [chore: fixed build](https://github.com/consta-design-system/uikit/commit/42801758a1893b7e695d56b8e0f888592becfc27) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.19.0 (05/05/2025)
 Самое важное:
 - Добавлен новый компонент `Select(canary)` который обеспечивает функционал `Combobox` и `Select`.
@@ -403,8 +415,3 @@
 - [fix(Theme): fix mistakes in dark theme colors (#3362)](https://github.com/consta-design-system/uikit/commit/8104a23d9ecfa68e9eb8790ed19b23f217f2440d) - [@N1MBER](https://github.com/N1MBER)
 - [chore(deploy): edit config](https://github.com/consta-design-system/uikit/commit/6d99bdd93fa22c6c8ce8fe0d6f0f129361c1ac31) - [@gizeasy](https://github.com/gizeasy)
 - [chore(withTooltip): update tests (#3337)](https://github.com/consta-design-system/uikit/commit/c9f23dbebd2f3959322405be2a6e86d632933c4f) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.31.1 (05/10/2023)
-- [fix(withTooltip): fixed types (#3335)](https://github.com/consta-design-system/uikit/commit/40bb234829e346ca2e57801696a78675237b221c) - [@gizeasy](https://github.com/gizeasy)
