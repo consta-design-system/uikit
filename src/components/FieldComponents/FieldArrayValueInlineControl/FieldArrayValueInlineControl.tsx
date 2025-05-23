@@ -146,7 +146,7 @@ const FieldArrayValueInlineControlRender = (
 
   const propsAtom = useSendToAtom(props);
   const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
-  const valueAtom = usePropAtom(propsAtom, 'value');
+  // const valueAtom = usePropAtom(propsAtom, 'value');
   const inputValueAtom = useCreateAtom(inputValue || inputDefaultValue || '');
   const inputDefaultValueAtom = useCreateAtom(inputDefaultValue);
   const inputMinWidthAtom = useCreateAtom(0);
@@ -164,11 +164,11 @@ const FieldArrayValueInlineControlRender = (
     [],
   );
 
-  const [valueNode] = useAtom((ctx) => {
-    const value = ctx.spy(valueAtom);
-    const { renderValue } = ctx.get(propsAtom);
-    return renderValue(value || []);
-  });
+  // const [valueNode] = useAtom((ctx) => {
+  //   const value = ctx.spy(valueAtom);
+  //   const { renderValue } = ctx.get(propsAtom);
+  //   return renderValue(value || []);
+  // });
 
   useAtom((ctx) => {
     const inputValueProp = ctx.spy(inputValuePropAtom);
@@ -192,7 +192,7 @@ const FieldArrayValueInlineControlRender = (
       size={size}
       inputMinWidthAtom={inputMinWidthAtom}
     >
-      {valueNode}
+      {renderValue(value || [])}
       <input
         className={cnFieldArrayValueInlineControl('Input', {
           disabled: disableInput,

@@ -3,14 +3,10 @@ import './SelectMultiple.css';
 import { useAction } from '@reatom/npm-react';
 import React, { forwardRef, useRef } from 'react';
 
-import {
-  FieldArrayValueInlineControl,
-  FieldArrayValueItem,
-} from '##/components/FieldComponents';
+import { FieldArrayValueItem } from '##/components/FieldComponents';
 import { SelectDropdown } from '##/components/SelectCanary/SelectDropdown';
 import { SelectItem } from '##/components/SelectCanary/SelectItem';
 import { useForkRef } from '##/hooks/useForkRef';
-import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cnCanary as cn } from '##/utils/bem';
 import { useSendToAtom } from '##/utils/state';
 import { withCtx } from '##/utils/state/withCtx';
@@ -21,11 +17,11 @@ import {
   SelectGroupDefault,
   SelectItemDefault,
   SelectPropRenderItem,
-  SelectPropRenderValue,
   SelectProps,
 } from '..';
 import { withDefault } from '../defaultProps';
 import { SelectControlLayout } from '../SelectControlLayout';
+import { SelectMultipleValue } from '../SelectMultipleValue';
 import { useSelect } from '../useSelect';
 
 const cnSelectMultiple = cn('SelectMultiple');
@@ -124,37 +120,6 @@ const SelectMultipleRender = <
 
   const valueContainerRef = useRef<HTMLDivElement>(null);
 
-  const renderValueDefault: SelectPropRenderValue<ITEM, true> = useAction(
-    (
-      ctx,
-      {
-        value,
-        getRemove,
-      }: {
-        value: ITEM[];
-        getRemove: (
-          item: ITEM,
-        ) => (e: React.SyntheticEvent<Element, Event>) => void;
-      },
-    ) => {
-      const { disabled, getItemDisabled, getItemKey, size, getItemLabel } =
-        ctx.get(propsAtom);
-
-      return value.map((item) => {
-        const itemDisabled = disabled || getItemDisabled(item);
-        return (
-          <FieldArrayValueItem
-            key={getItemKey(item)}
-            size={size}
-            label={getItemLabel(item)}
-            disabled={itemDisabled}
-            onRemove={itemDisabled ? undefined : getRemove(item)}
-          />
-        );
-      });
-    },
-  );
-
   const renderItemDefault: SelectPropRenderItem<ITEM> = useAction(
     (
       ctx,
@@ -167,9 +132,6 @@ const SelectMultipleRender = <
         ref,
       }: RenderItemProps<ITEM>,
     ) => {
-      const { getItemDisabled, size, getItemLabel, dropdownForm } =
-        ctx.get(propsAtom);
-
       return (
         <SelectItem
           label={getItemLabel(item)}
@@ -185,16 +147,41 @@ const SelectMultipleRender = <
         />
       );
     },
+    [getItemDisabled, size, getItemLabel, dropdownForm],
   );
 
-  const inlineControlRender = useAction((ctx, value: ITEM[]) => {
-    const { renderValue } = ctx.get(propsAtom);
+  const inlineControlRender = useAction(
+    (ctx, value: ITEM[]) => {
+      const renderValueDefault = ({
+        value,
+        getRemove,
+      }: {
+        value: ITEM[];
+        getRemove: (
+          item: ITEM,
+        ) => (e: React.SyntheticEvent<Element, Event>) => void;
+      }) => {
+        return value.map((item) => {
+          const itemDisabled = disabled || getItemDisabled(item);
+          return (
+            <FieldArrayValueItem
+              key={getItemKey(item)}
+              size={size}
+              label={getItemLabel(item)}
+              disabled={itemDisabled}
+              onRemove={itemDisabled ? undefined : getRemove(item)}
+            />
+          );
+        });
+      };
 
-    return (renderValue || renderValueDefault)({
-      value,
-      getRemove: getHandleRemoveValue,
-    });
-  });
+      return (renderValue || renderValueDefault)({
+        value,
+        getRemove: getHandleRemoveValue,
+      });
+    },
+    [disabled, getItemDisabled, getItemKey, size, getItemLabel, renderValue],
+  );
 
   return (
     <>
@@ -216,23 +203,15 @@ const SelectMultipleRender = <
         clearButtonAtom={clearButtonAtom}
         ref={useForkRef([ref, controlRef])}
       >
-        <FieldArrayValueInlineControl
-          className={cnSelectMultiple('Value', [
-            cnMixScrollBar({ size: 'xs', trackSize: 'auto' }),
-          ])}
+        <SelectMultipleValue
+          propsAtom={propsAtom}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           onClick={handleInputClick}
-          value={value || undefined}
-          disabled={disabled}
-          placeholder={placeholder}
+          onChange={handleInputChange}
           renderValue={inlineControlRender}
-          size={size}
-          disableInput={input ? undefined : true}
           inputRef={useForkRef([inputRef, inputRefProp])}
           ref={valueContainerRef}
-          inputDefaultValue={input ? inputDefaultValue : undefined}
-          onChange={handleInputChange}
         />
       </SelectControlLayout>
       <SelectDropdown

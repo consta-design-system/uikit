@@ -104,8 +104,6 @@ const SelectSingleRender = <
       const { getItemLabel, size, dropdownForm, getItemDisabled } =
         ctx.get(propsAtom);
 
-      console.log(getItemDisabled, size, getItemLabel);
-
       return (
         <SelectItem
           label={getItemLabel(item)}

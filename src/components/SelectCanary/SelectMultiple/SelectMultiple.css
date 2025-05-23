@@ -13,11 +13,4 @@
         var(--field-control-layout-space) * 2
       );
   }
-
-  &-Value.FieldArrayValueInlineControl {
-    overflow: auto;
-    width: calc(100% + var(--select-value-offset));
-    max-height: var(--select-max-height-var);
-    padding-right: var(--select-value-offset);
-  }
 }

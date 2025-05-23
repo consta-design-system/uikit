@@ -237,8 +237,6 @@ describe('Компонент Avatar', () => {
         const avatar = screen.getByTestId(testId);
         const img = avatar.querySelector('img') as HTMLImageElement;
 
-        console.log('avatar.textContent', avatar.textContent);
-
         expect(img).toBeTruthy();
         expect(img.src).toEqual(url);
         expect(avatar.textContent).toEqual('');

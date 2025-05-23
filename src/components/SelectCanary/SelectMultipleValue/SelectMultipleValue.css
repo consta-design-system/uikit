@@ -1,0 +1,6 @@
+.canary--SelectMultipleValue.FieldArrayValueInlineControl {
+  overflow: auto;
+  width: calc(100% + var(--select-value-offset));
+  max-height: var(--select-max-height-var);
+  padding-right: var(--select-value-offset);
+}

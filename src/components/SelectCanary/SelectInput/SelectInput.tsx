@@ -15,7 +15,7 @@ type FieldInputProps = PropsWithJsxAttributes<
 >;
 
 export const SelectInput = forwardRef<HTMLInputElement, FieldInputProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ className, children, readOnly, ...props }, ref) => {
     return (
       <div className={cnSelectInput({ withValue: !!children }, [className])}>
         {children && (
@@ -29,7 +29,12 @@ export const SelectInput = forwardRef<HTMLInputElement, FieldInputProps>(
             )}
           </div>
         )}
-        <FieldInput className={cnSelectInput('Input')} {...props} ref={ref} />
+        <FieldInput
+          className={cnSelectInput('Input', { readOnly })}
+          readOnly={readOnly}
+          {...props}
+          ref={ref}
+        />
       </div>
     );
   },

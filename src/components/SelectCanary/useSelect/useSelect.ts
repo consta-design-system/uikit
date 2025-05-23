@@ -3,6 +3,7 @@ import { useAction, useAtom, useUpdate } from '@reatom/npm-react';
 import React, { useRef } from 'react';
 
 import { useClickOutside } from '##/hooks/useClickOutside';
+import { useDebounce } from '##/hooks/useDebounce';
 import { KeyHandlers, useKeysRef } from '##/hooks/useKeysRef';
 import { useRefs } from '##/hooks/useRefs';
 import { getGroups, GetGroupsResult } from '##/utils/getGroups';
@@ -142,6 +143,13 @@ export const useSelect = <
       inputRef.current.value = value;
     }
   });
+
+  const inputElementFocus = useDebounce(
+    useAction(() => {
+      inputRef.current?.focus();
+    }),
+    10,
+  );
 
   const optionForCreateAtom = useCreateAtom<OptionForCreate | undefined>(
     (ctx) => {
@@ -309,8 +317,6 @@ export const useSelect = <
     const { getItemDisabled, getItemKey, onChange, multiple, disabled } =
       ctx.get(propsAtom);
 
-    console.log('disabled', disabled);
-
     if (disabled || (getItemDisabled && getItemDisabled(item))) {
       return;
     }
@@ -388,14 +394,12 @@ export const useSelect = <
   const handleInputClick = useAction((ctx) => {
     !ctx.get(disabledAtom) && openAtom(ctx, (value) => !value);
 
-    inputRef.current?.focus();
+    inputElementFocus();
   });
 
   const clearValue = useAction((ctx, e: React.SyntheticEvent) => {
     const { getItemDisabled, multiple, onChange, disabled } =
       ctx.get(propsAtom);
-
-    console.log('');
 
     if (disabled) {
       return;
@@ -422,6 +426,7 @@ export const useSelect = <
 
   const ArrowUp = useAction((ctx, e: KeyboardEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     if (!ctx.get(disabledAtom)) {
       openAtom(ctx, true);
       highlightIndex((old) => old - 1);
@@ -431,7 +436,7 @@ export const useSelect = <
 
   const ArrowDown = useAction((ctx, e: KeyboardEvent) => {
     e.preventDefault();
-
+    e.stopPropagation();
     if (!ctx.get(disabledAtom)) {
       openAtom(ctx, true);
       highlightIndex((old) => old + 1);
@@ -449,6 +454,7 @@ export const useSelect = <
     if (open) {
       if (inputValue || items[highlightedIndex]) {
         e.preventDefault();
+        e.stopPropagation();
       }
 
       const getData = (
@@ -499,11 +505,16 @@ export const useSelect = <
     }
   });
 
-  const Escape = useAction((ctx) => openAtom(ctx, false));
+  const Escape = useAction((ctx, e: KeyboardEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openAtom(ctx, false);
+  });
 
   const Tab = useAction((ctx, e: KeyboardEvent) => {
     if (ctx.get(openAtom)) {
       e.preventDefault();
+      e.stopPropagation();
       openAtom(ctx, false);
     }
   });
@@ -596,7 +607,7 @@ export const useSelect = <
     (ctx, e: React.FocusEvent<HTMLInputElement>): void => {
       const { onBlur } = ctx.get(propsAtom);
       if (ctx.get(openAtom)) {
-        inputRef.current?.focus();
+        inputElementFocus();
         return;
       }
 
@@ -629,13 +640,16 @@ export const useSelect = <
   });
 
   useClickOutside({
-    isActive: useAction((ctx) => ctx.get(openAtom)),
+    isActive: true,
     ignoreClicksInsideRefs: [
       dropdownRef,
       controlRef,
       ...(ignoreOutsideClicksRefs || []),
     ],
-    handler: useAction((ctx) => openAtom(ctx, false)),
+    handler: useAction((ctx) => {
+      openAtom(ctx, false);
+      focusAtom(ctx, false);
+    }),
   });
 
   useUpdate((ctx, disable) => disable && openAtom(ctx, false), [disabledAtom]);

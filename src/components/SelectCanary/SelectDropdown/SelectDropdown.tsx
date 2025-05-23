@@ -154,6 +154,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
   } = props;
 
   const [visibleItems] = useAtom(visibleItemsAtom);
+
   const [hasItems] = useAtom(hasItemsAtom);
   const [isListMount, setIsListMount] = useAtom(false);
   const [getItemKey] = useAtom(getItemKeyAtom);
