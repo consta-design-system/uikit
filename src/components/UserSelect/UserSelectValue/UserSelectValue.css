@@ -4,6 +4,12 @@
     margin-bottom: calc(var(--space-s) / 4);
   }
 
+  &:not(&.UserSelectValue_multiple) {
+    .User-Name {
+      max-width: 100%;
+    }
+  }
+
   &_disabled {
     opacity: 0.6;
   }
