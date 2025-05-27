@@ -257,7 +257,7 @@ const UserSelectRender = <
         view={view}
         type="userselect"
         form={form}
-        multiple={multiple}
+        multiple
         ref={ref}
         style={style}
         {...restProps}
