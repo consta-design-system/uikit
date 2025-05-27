@@ -14,5 +14,9 @@
         background-color: var(--color-control-bg-clear);
       }
     }
+
+    .User-Name {
+      max-width: 100%;
+    }
   }
 }
