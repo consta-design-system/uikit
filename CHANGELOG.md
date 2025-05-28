@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.20.2 (28/05/2025)
+- [fix(UserSelect): correction of name circumcision (#3942)](https://github.com/consta-design-system/uikit/commit/26f34c915063688798aee90f9018414821274072) - [@klekovvlad](https://github.com/klekovvlad)
+- [chore: fixed build](https://github.com/consta-design-system/uikit/commit/307bffd73ab798f41910c811ccea75f26927b324) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.20.0 (23/05/2025)
 Самое важное:
 - Добавили в `Tooltip` свойство `container` для возможности указания родительского контейнера для рендера.
@@ -390,28 +396,3 @@
 - [feat(AttachmentCanary): add new canary component (#3374)](https://github.com/consta-design-system/uikit/commit/0820be95b779e002a9661fd10cf87c6ce404b6a2) - [@N1MBER](https://github.com/N1MBER)
 - [feat(CheckboxGroup): add new prop (#3378)](https://github.com/consta-design-system/uikit/commit/035baa46798c2b3c3bf4eab67f6e4c1fbf556157) - [@N1MBER](https://github.com/N1MBER)
 - [chore(eslint): add ascii plugin and rules (#3384)](https://github.com/consta-design-system/uikit/commit/c08744546f6d026e0f6087f537a6238ca25fc3b7) - [@N1MBER](https://github.com/N1MBER)
-
---------------------
-
-## v4.32.0 (08/11/2023)
-Самое важное:
-
-- В полях ввода все иконки закрытия теперь выглядят одинаково
-- В `Loader` добавили новый размер
-- Добавили компонент `TooltipCanary`, теперь у тултипа есть анимация открытия/закрытия
-
----
-
-- [feat(Selects): change clear icon and sizes (#3379)](https://github.com/consta-design-system/uikit/commit/ec210eced1f9fcba13fe9cb9272e36b80c55aaf9) - [@N1MBER](https://github.com/N1MBER)
-- [feat(Loader): add new size to stable and canary version (#3377)](https://github.com/consta-design-system/uikit/commit/b6ca7465ae74e4068a7e62aac0770d16015f6d42) - [@N1MBER](https://github.com/N1MBER)
-- [refactor(BadgeGroup): update useHideElementsInLine (#3376)](https://github.com/consta-design-system/uikit/commit/3c31439b03957dc0983c8018fd53d864fd75611f) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Responses): fix discrepancies (#3363)](https://github.com/consta-design-system/uikit/commit/aad160dd75b900f39cce3cc212d655cc9478bb22) - [@N1MBER](https://github.com/N1MBER)
-- [feat(TooltipCanary): replace a old tooltip with new canary version (#3365)](https://github.com/consta-design-system/uikit/commit/52ad5017524f888a1e1385d4de79bc15c4aeeb3e) - [@N1MBER](https://github.com/N1MBER)
-- [chore(deps-dev): bump postcss from 8.4.16 to 8.4.31 (#3326)](https://github.com/consta-design-system/uikit/commit/e4a94585db38588eacfa3047535ccea6b4da2137) - [@dependabot](https://github.com/dependabot[bot])
-- [chore(deps): bump @babel/traverse from 7.18.9 to 7.23.2 (#3360)](https://github.com/consta-design-system/uikit/commit/4134007895441f3fe73c9a94db64dca1c5e9c3bb) - [@dependabot](https://github.com/dependabot[bot])
-- [docs(Combobox): fix examples with search value (#3345)](https://github.com/consta-design-system/uikit/commit/9c319edb90a26ebce5e51f9b1f5eded4852a10a7) - [@N1MBER](https://github.com/N1MBER)
-- [feat(BookmarkTabs): rewrite hover and focus to highlitedIndex (#3333)](https://github.com/consta-design-system/uikit/commit/a7df418bae23d1a57982014590db27c4b30c3a53) - [@N1MBER](https://github.com/N1MBER)
-- [feat(TooltipCanary): added canary tooltip with animations (#3334)](https://github.com/consta-design-system/uikit/commit/197b3f18b8027e1377c4b246b0aa5f2cc4360753) - [@N1MBER](https://github.com/N1MBER)
-- [fix(Theme): fix mistakes in dark theme colors (#3362)](https://github.com/consta-design-system/uikit/commit/8104a23d9ecfa68e9eb8790ed19b23f217f2440d) - [@N1MBER](https://github.com/N1MBER)
-- [chore(deploy): edit config](https://github.com/consta-design-system/uikit/commit/6d99bdd93fa22c6c8ce8fe0d6f0f129361c1ac31) - [@gizeasy](https://github.com/gizeasy)
-- [chore(withTooltip): update tests (#3337)](https://github.com/consta-design-system/uikit/commit/c9f23dbebd2f3959322405be2a6e86d632933c4f) - [@gizeasy](https://github.com/gizeasy)
