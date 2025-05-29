@@ -1,5 +1,7 @@
+import { AnimateIconBaseProvider } from '@consta/icons/AnimateIconBaseProvider';
 import { IconCheck } from '@consta/icons/IconCheck';
-import React, { forwardRef, useRef } from 'react';
+import { withAnimateBaseHOC } from '@consta/icons/withAnimateBaseHOC';
+import React, { forwardRef, useMemo, useRef } from 'react';
 
 import { Button } from '##/components/Button';
 import { ContextMenu } from '##/components/ContextMenu';
@@ -39,7 +41,7 @@ const ThemeTogglerRender = (
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), buttonRef);
 
-  const [isOpen, setIsOpen] = useFlag(false);
+  const [isOpen, setIsOpen] = useFlag();
 
   const { getOnChange, getChecked } = useChoiceGroup({
     value,
@@ -53,8 +55,11 @@ const ThemeTogglerRender = (
   const iconSize = iconSizeMap[size];
   const contextMenuSize = contextMenuSizeMap[size];
 
-  const getButtonIcon = () =>
-    getItemIcon(items.find((theme) => getChecked(theme)) ?? items[0]);
+  const Icon = useMemo(
+    () =>
+      withAnimateBaseHOC({ icons: items.map(getItemIcon), transition: 260 }),
+    [items],
+  );
 
   const onButtonClick = (e: React.MouseEvent<Element, MouseEvent>) => {
     if (items.length > 2) {
@@ -84,17 +89,21 @@ const ThemeTogglerRender = (
 
   return (
     <>
-      <Button
-        {...otherProps}
-        ref={buttonRef}
-        iconLeft={getButtonIcon()}
-        onClick={onButtonClick}
-        onlyIcon
-        type="button"
-        size={size}
-        view={view}
-        style={style}
-      />
+      <AnimateIconBaseProvider
+        activeIndex={items.findIndex((theme) => getChecked(theme)) ?? items[0]}
+      >
+        <Button
+          {...otherProps}
+          ref={buttonRef}
+          iconLeft={Icon}
+          onClick={onButtonClick}
+          onlyIcon
+          type="button"
+          size={size}
+          view={view}
+          style={style}
+        />
+      </AnimateIconBaseProvider>
       {items.length > 2 && (
         <ContextMenu
           isOpen={isOpen}
