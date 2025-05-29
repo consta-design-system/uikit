@@ -61,15 +61,56 @@ describe('Компонент Avatar', () => {
       });
     });
     describe('проверка visibleCount', () => {
-      it('количество элементов должно быть равно длине массива', () => {
-        renderComponent({ visibleCount: avatarGroupItems.length });
+      it('количество элементов должно быть равно visibleCount + more', () => {
+        const visibleCount = 3;
+        renderComponent({ visibleCount });
+        const items = getItems();
+        expect(items.length).toEqual(visibleCount + 1);
+      });
+      it('если visibleCount больше чем длинна массива то должны выводится все элементы без more', () => {
+        renderComponent({ visibleCount: avatarGroupItems.length + 3 });
         const items = getItems();
         expect(items.length).toEqual(avatarGroupItems.length);
       });
-      it('количество скрытых элементов', () => {
+      it(`элемент ${cnAvatarGroup('More')} отображается верно`, () => {
         renderComponent({ visibleCount: 3 });
         const more = getMore();
         expect(more.textContent).toEqual(`+${avatarGroupItems.length - 3}`);
+      });
+    });
+
+    describe('проверка className', () => {
+      it('присваивает класс для className', () => {
+        renderComponent({ className: 'test-class' });
+        expect(getRender()).toHaveClass('test-class');
+      });
+    });
+    describe('проверка style', () => {
+      it('присваивает стиль для style', () => {
+        renderComponent({ style: { backgroundColor: 'red' } });
+        expect(getRender()).toHaveStyle('background-color: red');
+      });
+    });
+    describe('проверка ref', () => {
+      it('присваивает ref', () => {
+        const ref = React.createRef<HTMLDivElement>();
+        renderComponent({ ref });
+        expect(ref.current).toBe(getRender());
+      });
+    });
+    describe('проверка onClick', () => {
+      it('вызывает onClick при клике на компонент', () => {
+        const onClick = jest.fn();
+        renderComponent({ onClick });
+        getRender().click();
+        expect(onClick).toHaveBeenCalled();
+      });
+    });
+    describe('проверка monochrome', () => {
+      it('присваивает класс для monochrome', () => {
+        renderComponent({ monochrome: true });
+        const avatar = getItem(1);
+        expect(avatar).toHaveStyle('--avatar-color: var(--avatar-color-18)');
       });
     });
   });

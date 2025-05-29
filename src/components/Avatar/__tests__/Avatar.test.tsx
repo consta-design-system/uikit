@@ -21,6 +21,12 @@ describe('Компонент Avatar', () => {
   it('должен рендериться без ошибок', () => {
     expect(renderComponent).not.toThrow();
   });
+  it('должен передавать ref на корневой элемент', () => {
+    const ref = React.createRef<HTMLDivElement>();
+    renderComponent({ ref });
+
+    expect(ref.current).toBeInstanceOf(HTMLDivElement);
+  });
 
   describe('проверка props', () => {
     describe('проверка form', () => {
@@ -193,6 +199,17 @@ describe('Компонент Avatar', () => {
         const avatar = screen.getByTestId(testId);
 
         expect(avatar).toHaveStyle('background-color: red');
+      });
+    });
+
+    describe('проверка className', () => {
+      it('должен добавлять пользовательский className', () => {
+        const customClass = 'custom-class';
+        renderComponent({ className: customClass });
+
+        const avatar = screen.getByTestId(testId);
+
+        expect(avatar).toHaveClass(customClass);
       });
     });
 
