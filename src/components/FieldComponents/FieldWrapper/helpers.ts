@@ -7,7 +7,7 @@ import { FieldWrapperProps } from './types';
 export const spaceMap: Record<FieldPropSize, Space> = {
   l: 'xs',
   m: 'xs',
-  s: '2xl',
+  s: '2xs',
   xs: '2xs',
 };
 
