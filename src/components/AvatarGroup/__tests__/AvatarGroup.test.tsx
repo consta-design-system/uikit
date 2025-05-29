@@ -15,12 +15,6 @@ const testId = 'AvatarGroup';
 const cnAvatar = cn('Avatar');
 const cnAvatarGroup = cn('AvatarGroup');
 
-// const animateDelay = () => {
-//   act(() => {
-//     jest.advanceTimersByTime(300);
-//   });
-// };
-
 const renderComponent = (props: AvatarGroupProps = {}) => {
   return render(
     <AvatarGroup data-testid={testId} items={avatarGroupItems} {...props} />,
@@ -34,11 +28,6 @@ function getRender() {
 function getItems() {
   return getRender().querySelectorAll(`.${cnAvatar()}`);
 }
-// function getHiddenItems() {
-//   return getRender().querySelectorAll(
-//     `.${cnAvatarGroup('Avatar', { hidden: true }).split(' ')[1]}`,
-//   );
-// }
 
 function getItem(index = 0) {
   return getItems()[index];
@@ -88,20 +77,8 @@ describe('Компонент Avatar', () => {
         const more = getMore();
         expect(more.textContent).toEqual(`+${avatarGroupItems.length - 3}`);
       });
-      // it('авто подстройка visibleCount', () => {
-      //   jest.useFakeTimers();
-      //   act(() => {
-      //     renderComponent({ visibleCount: 'auto', style: { width: 100 } });
-      //   });
-      //   animateDelay();
-      //   const items = getItems();
-      //   const hiddenItems = getHiddenItems();
-      //   expect(items.length).toEqual(3);
-
-      //   expect(hiddenItems.length).toEqual(3);
-      //   // expect(more.textContent).toEqual(`+${avatarGroupItems.length - 3}`);
-      // });
     });
+
     describe('проверка className', () => {
       it('присваивает класс для className', () => {
         renderComponent({ className: 'test-class' });
@@ -115,7 +92,7 @@ describe('Компонент Avatar', () => {
       });
     });
     describe('проверка ref', () => {
-      it('присваивает ref для ref', () => {
+      it('присваивает ref', () => {
         const ref = React.createRef<HTMLDivElement>();
         renderComponent({ ref });
         expect(ref.current).toBe(getRender());
