@@ -60,7 +60,6 @@ const BadgeGroupRender = (
       {...otherProps}
     >
       {items.map((item, index) => {
-        const as = getItemAs(item);
         return (
           <Badge
             key={getItemKey(item)}
@@ -70,7 +69,7 @@ const BadgeGroupRender = (
             label={getItemLabel(item)}
             iconLeft={getItemIconLeft(item)}
             iconRight={getItemIconRight(item)}
-            as={as}
+            as={getItemAs(item)}
             ref={forkRef([elementsRefs[index], getItemRef(item)])}
             view={getItemView(item)}
             status={getItemStatus(item)}
