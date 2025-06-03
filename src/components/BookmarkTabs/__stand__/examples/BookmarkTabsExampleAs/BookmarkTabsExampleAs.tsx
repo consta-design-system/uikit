@@ -22,7 +22,7 @@ export const BookmarkTabsExampleAs = () => {
         getItemKey={(item) => item}
         getItemAs={() => 'a'}
         getItemFixed={() => false}
-        getItemAttributes={(item) => ({ href: item })}
+        getItemAttributes={(item) => ({ href: `#${item}` })}
         getItemLabel={getItemLabel}
       />
     </Example>
