@@ -1,25 +1,28 @@
 import {
+  BreadcrumbsDefaultItem,
   BreadcrumbsPropGetItemHref,
   BreadcrumbsPropGetItemIcon,
   BreadcrumbsPropGetItemLabel,
   BreadcrumbsPropGetItemOnClick,
   BreadcrumbsPropGetItemSubMenu,
   BreadcrumbsProps,
-  DefaultItem,
 } from './types';
 
-const defaultGetItemLabel: BreadcrumbsPropGetItemLabel<DefaultItem> = (item) =>
-  item.label;
-const defaultGetItemIcon: BreadcrumbsPropGetItemIcon<DefaultItem> = (item) =>
-  item.icon;
-const defaultGetItemHref: BreadcrumbsPropGetItemHref<DefaultItem> = (item) =>
-  item.href;
-const defaultGetItemOnClick: BreadcrumbsPropGetItemOnClick<DefaultItem> = (
+const defaultGetItemLabel: BreadcrumbsPropGetItemLabel<
+  BreadcrumbsDefaultItem
+> = (item) => item.label;
+const defaultGetItemIcon: BreadcrumbsPropGetItemIcon<BreadcrumbsDefaultItem> = (
   item,
-) => item.onClick;
-const defaultGetItemSubMenu: BreadcrumbsPropGetItemSubMenu<DefaultItem> = (
+) => item.icon;
+const defaultGetItemHref: BreadcrumbsPropGetItemHref<BreadcrumbsDefaultItem> = (
   item,
-) => item.subMenu;
+) => item.href;
+const defaultGetItemOnClick: BreadcrumbsPropGetItemOnClick<
+  BreadcrumbsDefaultItem
+> = (item) => item.onClick;
+const defaultGetItemSubMenu: BreadcrumbsPropGetItemSubMenu<
+  BreadcrumbsDefaultItem
+> = (item) => item.subMenu;
 
 export function withDefaultGetters(props: BreadcrumbsProps) {
   return {
