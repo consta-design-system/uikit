@@ -1,5 +1,21 @@
 # Changelog
 
+## v5.21.0 (06/06/2025)
+Самое важное:
+- В `ThemeToggler` добавили анимацию смены иконок
+- Актуализировали тесты для `Breadcrumbs`, `BadgeGroup` и `AvatarGroup`
+
+---
+
+- [test(Breadcrumbs): add tests (#3962)](https://github.com/consta-design-system/uikit/commit/ecda95a991c9e26da7422cadc976ba02f1b820bf) - [@gizeasy](https://github.com/gizeasy)
+- [test(BadgeGroup): add tests (#3949)](https://github.com/consta-design-system/uikit/commit/e3401506883ecdd447a175ffa61ddd8567b4772a) - [@gizeasy](https://github.com/gizeasy)
+- [test(Badge): add tests (#3948)](https://github.com/consta-design-system/uikit/commit/13830f4ec7fcd02823e0d5db918b8dcf417d84eb) - [@gizeasy](https://github.com/gizeasy)
+- [fix(FieldWrapper): change gap for size=s (#3947)](https://github.com/consta-design-system/uikit/commit/f9082c578bd8176527b7bd4e8244c26112500a68) - [@baevm](https://github.com/baevm)
+- [test(AvatarGroup): add tests (#3946)](https://github.com/consta-design-system/uikit/commit/06f0b1abd7e95e4f89af378d1a91113bae431868) - [@gizeasy](https://github.com/gizeasy)
+- [feat(ThemeToggler): added animation for switching icons (#3945)](https://github.com/consta-design-system/uikit/commit/0a9162948f754b109477e512be0fe2ef2e5fbfcc) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.20.2 (28/05/2025)
 - [fix(UserSelect): correction of name circumcision (#3942)](https://github.com/consta-design-system/uikit/commit/26f34c915063688798aee90f9018414821274072) - [@klekovvlad](https://github.com/klekovvlad)
 - [chore: fixed build](https://github.com/consta-design-system/uikit/commit/307bffd73ab798f41910c811ccea75f26927b324) - [@gizeasy](https://github.com/gizeasy)
@@ -376,23 +392,3 @@
 
 ## v4.33.1 (17/11/2023)
 - [fix(Tabs): fixed error at empty items (#3398)](https://github.com/consta-design-system/uikit/commit/525576b95affa97a336a9a2e683eedc8d73f6975) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v4.33.0 (15/11/2023)
-Самое важное:
-
-- Добавили новый компонент `PaginationCanary`, для разбивки на страницы и навигации по результатам поиска.
-- Добавили новый компонент `AttachmentCanary`, для индикатора загрузки файлов.
-- Добавили возможность выравнивания текста для `CheckboxGroup`
-
----
-
-- [fix(Tabs): fix vertical view (#3394)](https://github.com/consta-design-system/uikit/commit/500040761bc2a9496b4e39760da0fa90b85d4c36) - [@N1MBER](https://github.com/N1MBER)
-- [feat(PaginationCanary): added new canary component (#3355)](https://github.com/consta-design-system/uikit/commit/1cedd46b5394aa58fca9f4e5a319aea83a538a80) - [@N1MBER](https://github.com/N1MBER)
-- [fix(useHideElementsInLine): remove console.log (#3392)](https://github.com/consta-design-system/uikit/commit/ee6f93d01c7be0c8d5d83bcb2eec85df16b6422a) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Tabs): fix keyboard navigation (#3383)](https://github.com/consta-design-system/uikit/commit/f54c094b55313a3134255a9f4d4b370ec9501f2c) - [@N1MBER](https://github.com/N1MBER)
-- [fix(DragNDropField): fixed DragNDropFieldTooltip (#3391)](https://github.com/consta-design-system/uikit/commit/96218216a1610b1ce1491aa6fce2803c907eb9a8) - [@gizeasy](https://github.com/gizeasy)
-- [feat(AttachmentCanary): add new canary component (#3374)](https://github.com/consta-design-system/uikit/commit/0820be95b779e002a9661fd10cf87c6ce404b6a2) - [@N1MBER](https://github.com/N1MBER)
-- [feat(CheckboxGroup): add new prop (#3378)](https://github.com/consta-design-system/uikit/commit/035baa46798c2b3c3bf4eab67f6e4c1fbf556157) - [@N1MBER](https://github.com/N1MBER)
-- [chore(eslint): add ascii plugin and rules (#3384)](https://github.com/consta-design-system/uikit/commit/c08744546f6d026e0f6087f537a6238ca25fc3b7) - [@N1MBER](https://github.com/N1MBER)
