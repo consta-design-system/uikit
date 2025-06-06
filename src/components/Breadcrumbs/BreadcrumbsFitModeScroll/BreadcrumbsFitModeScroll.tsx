@@ -15,7 +15,7 @@ export const BreadcrumbsFitModeScroll: BreadcrumbsFitModeScrollComponent =
     const rootRef = useRef<HTMLUListElement>(null);
 
     useEffect(() => {
-      rootRef.current?.scrollTo({
+      rootRef.current?.scrollTo?.({
         left: rootRef.current?.scrollWidth,
       });
     }, []);

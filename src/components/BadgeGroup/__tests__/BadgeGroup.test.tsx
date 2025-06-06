@@ -189,7 +189,7 @@ const itemsDefaultWithAttributes: BadgeGroupDefaultItem[] = [
 const customItems = ['item1', 'item2', 'item3', 'item4', 'item5'];
 const getItemForComponent = (item: string) => item;
 
-export type Render = <ITEM = BadgeGroupDefaultItem>(
+type Render = <ITEM = BadgeGroupDefaultItem>(
   props: BadgeGroupProps<ITEM>,
 ) => RenderResult;
 

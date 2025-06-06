@@ -30,13 +30,15 @@ export type BreadcrumbsPropOnItemClick<ITEM> = (
   },
 ) => void;
 
-export type DefaultItem = {
+export type BreadcrumbsDefaultItem = {
   label: string;
   icon?: IconComponent;
   href?: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
-  subMenu?: DefaultItem[];
+  subMenu?: BreadcrumbsDefaultItem[];
 };
+
+export type DefaultItem = BreadcrumbsDefaultItem;
 
 export type RenderItem<ITEM> = (
   item: ITEM | undefined,
@@ -47,7 +49,7 @@ export type RenderItem<ITEM> = (
   hidden?: boolean,
 ) => React.ReactElement | undefined;
 
-export type BreadcrumbsProps<ITEM = DefaultItem> =
+export type BreadcrumbsProps<ITEM = BreadcrumbsDefaultItem> =
   PropsWithHTMLAttributesAndRef<
     {
       items: ITEM[];
@@ -64,7 +66,7 @@ export type BreadcrumbsProps<ITEM = DefaultItem> =
     },
     HTMLUListElement
   > &
-    (ITEM extends { label: DefaultItem['label'] }
+    (ITEM extends { label: BreadcrumbsDefaultItem['label'] }
       ? {}
       : { getItemLabel: BreadcrumbsPropGetItemLabel<ITEM> });
 

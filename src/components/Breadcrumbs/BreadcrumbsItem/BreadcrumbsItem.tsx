@@ -150,6 +150,7 @@ function BreadcrumbsItemRender<ITEM>(
           offset="xs"
           onClickOutside={setOpen.off}
           size={contextMenuSizeMap[size]}
+          role="listbox"
         />
       )}
     </li>
