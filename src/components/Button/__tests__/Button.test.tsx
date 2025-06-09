@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
-import { IconMock } from '##/../__mocks__/IconMock';
+import { createIconMock, IconMock } from '##/../__mocks__/IconMock';
 import { cnMixFocus } from '##/mixs/MixFocus/MixFocus';
 
 import {
@@ -13,9 +13,16 @@ import {
   cnButton,
 } from '../Button';
 
+const iconLeftText = 'IconLeftMock';
+const iconRightText = 'IconRightMock';
+const IconLeftMock = createIconMock(iconLeftText);
+const IconRightMock = createIconMock(iconRightText);
+
 type ButtonProps = React.ComponentProps<typeof Button>;
 
 const testId = 'button';
+
+const getRender = () => screen.getByTestId(testId);
 
 const renderComponent = (props: ButtonProps = {}) => {
   const { label = 'Текст кнопки', ...rest } = props;
@@ -31,9 +38,7 @@ describe('Компонент Button', () => {
     buttonPropSize.forEach((size) => {
       it(`присваивает класс для size=${size}`, () => {
         renderComponent({ size });
-
-        const button = screen.getByTestId(testId);
-        expect(button).toHaveClass(cnButton({ size }));
+        expect(getRender()).toHaveClass(cnButton({ size }));
       });
     });
   });
@@ -43,9 +48,7 @@ describe('Компонент Button', () => {
       it(`присваивает класс для view=${view}`, () => {
         renderComponent({ view });
 
-        const button = screen.getByTestId(testId);
-
-        expect(button).toHaveClass(cnButton({ view }));
+        expect(getRender()).toHaveClass(cnButton({ view }));
       });
     });
   });
@@ -54,10 +57,7 @@ describe('Компонент Button', () => {
     buttonPropWidth.forEach((width) => {
       it(`присваивает класс для width=${width}`, () => {
         renderComponent({ width });
-
-        const button = screen.getByTestId(testId);
-
-        expect(button).toHaveClass(cnButton({ width }));
+        expect(getRender()).toHaveClass(cnButton({ width }));
       });
     });
   });
@@ -66,10 +66,7 @@ describe('Компонент Button', () => {
     buttonPropForm.forEach((form) => {
       it(`присваивает класс для form=${form}`, () => {
         renderComponent({ form });
-
-        const button = screen.getByTestId(testId);
-
-        expect(button).toHaveClass(cnButton({ form }));
+        expect(getRender()).toHaveClass(cnButton({ form }));
       });
     });
   });
@@ -79,10 +76,7 @@ describe('Компонент Button', () => {
     tags.forEach((el) => {
       it(`должен рендериться как <${el}>`, () => {
         renderComponent({ as: el });
-
-        const button = screen.getByTestId(testId);
-
-        expect(button.tagName).toEqual(el.toUpperCase());
+        expect(getRender().tagName).toEqual(el.toUpperCase());
       });
     });
   });
@@ -93,7 +87,7 @@ describe('Компонент Button', () => {
 
       renderComponent({ disabled: true, onClick: handleClick });
 
-      const button = screen.getByTestId(testId);
+      const button = getRender();
 
       fireEvent.click(button);
 
@@ -107,7 +101,7 @@ describe('Компонент Button', () => {
 
       renderComponent({ disabled: true, as: 'a', onClick: handleClick });
 
-      const button = screen.getByTestId(testId);
+      const button = getRender();
 
       fireEvent.click(button);
 
@@ -121,7 +115,7 @@ describe('Компонент Button', () => {
 
       renderComponent({ loading: true, onClick: handleClick });
 
-      const button = screen.getByTestId(testId);
+      const button = getRender();
 
       fireEvent.click(button);
 
@@ -135,7 +129,7 @@ describe('Компонент Button', () => {
 
       renderComponent({ loading: true, as: 'a', onClick: handleClick });
 
-      const button = screen.getByTestId(testId);
+      const button = getRender();
 
       fireEvent.click(button);
 
@@ -147,12 +141,9 @@ describe('Компонент Button', () => {
 
 it('должен отображать текст в кнопке', () => {
   const label = 'Это кнопка';
-
   renderComponent({ label });
 
-  const button = screen.getByTestId(testId);
-
-  expect(button.textContent).toEqual(label);
+  expect(getRender().textContent).toEqual(label);
 });
 
 it('должен работать onClick, если кнопка не отключена', () => {
@@ -160,7 +151,7 @@ it('должен работать onClick, если кнопка не отклю
 
   renderComponent({ onClick: handleClick });
 
-  const button = screen.getByTestId(testId);
+  const button = getRender();
 
   fireEvent.click(button);
 
@@ -170,81 +161,50 @@ it('должен работать onClick, если кнопка не отклю
 describe('проверка иконки', () => {
   it('должен отображать иконку слева', () => {
     const label = 'Текст кнопки';
-    const iconLeftText = 'Иконка слева';
-    const IconLeft = () => <span>{iconLeftText}</span>;
-
-    renderComponent({ label, iconLeft: IconLeft });
-
-    const button = screen.getByTestId(testId);
-
-    expect(button).toHaveTextContent(iconLeftText + label);
+    renderComponent({ label, iconLeft: IconLeftMock });
+    expect(getRender()).toHaveTextContent(iconLeftText + label);
   });
 
   it('должен отображать иконку справа', () => {
     const label = 'Текст кнопки';
-    const iconRightText = 'Иконка справа';
-    const IconRight = () => <span>{iconRightText}</span>;
-
-    renderComponent({ label, iconRight: IconRight });
-
-    const button = screen.getByTestId(testId);
-
-    expect(button).toHaveTextContent(label + iconRightText);
+    renderComponent({ label, iconRight: IconRightMock });
+    expect(getRender()).toHaveTextContent(label + iconRightText);
   });
 
   it('должен отображать иконки слева и справа', () => {
     const label = 'Текст кнопки';
-    const iconRightText = 'Иконка справа';
-    const iconLeftText = 'Иконка слева';
 
-    const IconLeft = () => <span>{iconLeftText}</span>;
-    const IconRight = () => <span>{iconRightText}</span>;
-
-    renderComponent({ label, iconRight: IconRight, iconLeft: IconLeft });
-
-    const button = screen.getByTestId(testId);
-
-    expect(button).toHaveTextContent(iconLeftText + label + iconRightText);
+    renderComponent({
+      label,
+      iconRight: IconRightMock,
+      iconLeft: IconLeftMock,
+    });
+    expect(getRender()).toHaveTextContent(iconLeftText + label + iconRightText);
   });
 
   it('должен отображать только иконку', () => {
     const label = 'Текст кнопки';
-    const iconLeftText = 'Иконка слева';
 
-    const IconLeft = () => <span>{iconLeftText}</span>;
-
-    renderComponent({ label, iconLeft: IconLeft, onlyIcon: true });
-
-    const button = screen.getByTestId(testId);
-
-    expect(button).toHaveTextContent(iconLeftText);
+    renderComponent({ label, iconLeft: IconLeftMock, onlyIcon: true });
+    expect(getRender()).toHaveTextContent(iconLeftText);
   });
 
   describe('проверка атрибута title', () => {
     it('должен устанавливать title, если он передан', () => {
       const title = 'Тестовый title';
       renderComponent({ title });
-
-      const button = screen.getByTestId(testId);
-
-      expect(button).toHaveAttribute('title', title);
+      expect(getRender()).toHaveAttribute('title', title);
     });
 
     it('не должен устанавливать title, если он не передан', () => {
       renderComponent();
-
-      const button = screen.getByTestId(testId);
-
-      expect(button).not.toHaveAttribute('title');
+      expect(getRender()).not.toHaveAttribute('title');
     });
 
     it('должен устанавливать title, если onlyIcon=true и передан label', () => {
       const label = 'Текст кнопки';
       renderComponent({ onlyIcon: true, label, iconLeft: IconMock });
-
-      const button = screen.getByTestId(testId);
-
-      expect(button).toHaveAttribute('title', label);
+      expect(getRender()).toHaveAttribute('title', label);
     });
   });
 
@@ -252,18 +212,12 @@ describe('проверка иконки', () => {
     it('должен устанавливать tabIndex, если он передан', () => {
       const tabIndex = 3;
       renderComponent({ tabIndex });
-
-      const button = screen.getByTestId(testId);
-
-      expect(button).toHaveAttribute('tabindex', tabIndex.toString());
+      expect(getRender()).toHaveAttribute('tabindex', tabIndex.toString());
     });
 
     it('не должен устанавливать tabIndex, если он не передан', () => {
       renderComponent();
-
-      const button = screen.getByTestId(testId);
-
-      expect(button).not.toHaveAttribute('tabindex');
+      expect(getRender()).not.toHaveAttribute('tabindex');
     });
   });
 
@@ -271,18 +225,12 @@ describe('проверка иконки', () => {
     it('должен устанавливать form, если передан formId', () => {
       const formId = 'test-form';
       renderComponent({ formId });
-
-      const button = screen.getByTestId(testId);
-
-      expect(button).toHaveAttribute('form', formId);
+      expect(getRender()).toHaveAttribute('form', formId);
     });
 
     it('не должен устанавливать form, если formId не передан', () => {
       renderComponent();
-
-      const button = screen.getByTestId(testId);
-
-      expect(button).not.toHaveAttribute('form');
+      expect(getRender()).not.toHaveAttribute('form');
     });
   });
 
@@ -290,10 +238,7 @@ describe('проверка иконки', () => {
     it('должен добавлять переданный className', () => {
       const customClass = 'custom-class';
       renderComponent({ className: customClass });
-
-      const button = screen.getByTestId(testId);
-
-      expect(button).toHaveClass(customClass);
+      expect(getRender()).toHaveClass(customClass);
     });
   });
 
@@ -301,7 +246,7 @@ describe('проверка иконки', () => {
     it('должен добавлять класс фокуса, если кнопка активна', () => {
       renderComponent();
 
-      const button = screen.getByTestId(testId);
+      const button = getRender();
 
       fireEvent.focus(button);
 
@@ -311,7 +256,7 @@ describe('проверка иконки', () => {
     it('не должен добавлять класс фокуса, если кнопка отключена', () => {
       renderComponent({ disabled: true });
 
-      const button = screen.getByTestId(testId);
+      const button = getRender();
 
       fireEvent.focus(button);
 
@@ -321,7 +266,7 @@ describe('проверка иконки', () => {
     it('не должен добавлять класс фокуса, если кнопка в состоянии загрузки', () => {
       renderComponent({ loading: true });
 
-      const button = screen.getByTestId(testId);
+      const button = getRender();
 
       fireEvent.focus(button);
 
