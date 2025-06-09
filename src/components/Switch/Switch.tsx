@@ -38,6 +38,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
       step,
       tabIndex,
       inputRef,
+      inputId,
       ...otherProps
     } = usePropsHandler(COMPONENT_NAME, props, switchRef);
 
@@ -61,6 +62,7 @@ export const Switch = React.forwardRef<HTMLLabelElement, SwitchProps>(
           step={step}
           tabIndex={tabIndex}
           ref={inputRef}
+          id={inputId}
         />
         {label && <span className={cnSwitch('Label')}>{label}</span>}
       </label>
