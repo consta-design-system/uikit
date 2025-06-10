@@ -1,5 +1,21 @@
 # Changelog
 
+## v5.22.0 (10/06/2025)
+Самое важное:
+- Актуализировали тесты для `BookmarkTabs`, `Switch`, `Radio`, `Checkbox`, `Card` и `Button`
+
+---
+
+- [feat: update react types (#3969)](https://github.com/consta-design-system/uikit/commit/945799c00045d8c3355260bb93288912ea99396a) - [@gizeasy](https://github.com/gizeasy)
+- [fix(BookmarkTabs): fixed style (#3952)](https://github.com/consta-design-system/uikit/commit/478be7023786079f611e5f4fe4c7b11cd0d5a225) - [@gizeasy](https://github.com/gizeasy)
+- [test(Switch): update tests (#3967)](https://github.com/consta-design-system/uikit/commit/e8e2774dcaf304f80d6fade8ec04080c9e7da48f) - [@gizeasy](https://github.com/gizeasy)
+- [test(Radio): update tests (#3966)](https://github.com/consta-design-system/uikit/commit/6a96217428cdb15dbbce9d851ee9e17c6e9346bd) - [@gizeasy](https://github.com/gizeasy)
+- [test(Checkbox): update tests (#3965)](https://github.com/consta-design-system/uikit/commit/f2b84c4cec2f73c4d65766e4556c26245bb01808) - [@gizeasy](https://github.com/gizeasy)
+- [test(Card): add tests](https://github.com/consta-design-system/uikit/commit/03ad4cc9b92c3e22ec56cc0e4f10e221d73df11e) - [@gizeasy](https://github.com/gizeasy)
+- [test(Button): updating tests](https://github.com/consta-design-system/uikit/commit/8bc10215386c911816ce73eb0d20561dd01adf81) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.21.0 (06/06/2025)
 Самое важное:
 - В `ThemeToggler` добавили анимацию смены иконок
@@ -387,8 +403,3 @@
 - [chore(.eslintrc): edit config](https://github.com/consta-design-system/uikit/commit/0de44c0890788e60193bec80291073dc531020b8) - [@gizeasy](https://github.com/gizeasy)
 - [fix: typo (#3404)](https://github.com/consta-design-system/uikit/commit/034d608211aa16216db2f3b56b54f411037281d2) - [@nevsky118](https://github.com/nevsky118)
 - [Docs: fix typos (#3399)](https://github.com/consta-design-system/uikit/commit/ba7f1d6368c411f95a8d5c138861209e66a1bdba) - [@vindi-r](https://github.com/vindi-r)
-
---------------------
-
-## v4.33.1 (17/11/2023)
-- [fix(Tabs): fixed error at empty items (#3398)](https://github.com/consta-design-system/uikit/commit/525576b95affa97a336a9a2e683eedc8d73f6975) - [@gizeasy](https://github.com/gizeasy)
