@@ -94,11 +94,11 @@ type Props<ROLE extends TagPropMode = 'button'> = ROLE extends 'button'
 type TagRender = <ROLE extends TagPropMode>(
   props: Props<ROLE>,
   ref: React.Ref<HTMLElement>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 type TagComponent = <ROLE extends TagPropMode>(
   props: Props<ROLE> & React.RefAttributes<HTMLElement>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export function getParams(
   mode: TagPropMode,

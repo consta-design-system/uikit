@@ -20,7 +20,7 @@ export const TabsFitModeDropdownWrapper = <ITEM,>({
   onChange,
   renderItemsList,
   size,
-}: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => {
+}: TabsFitModeWrapperProps<ITEM>): React.ReactNode | null => {
   const ref = React.useRef<HTMLDivElement>(null);
   const moreItemsRef = React.useRef<HTMLDivElement>(null);
 

@@ -125,7 +125,7 @@ export type SnackBarProps<ITEM = SnackBarItemDefault> =
 
 export type SnackBarComponent = <ITEM = SnackBarItemDefault>(
   props: SnackBarProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type SnackBarTimerPropOnMount = (object: {
   pause: () => void;
@@ -148,4 +148,4 @@ export type SnackBarProgressProps = {
 
 export type SnackBarItemComponent = (
   props: SnackBarItemProps,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

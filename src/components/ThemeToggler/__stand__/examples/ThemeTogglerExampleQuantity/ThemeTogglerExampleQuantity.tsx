@@ -15,7 +15,9 @@ import { ThemeToggler } from '../../../ThemeToggler';
 
 const cnThemeTogglerExample = cn('ThemeTogglerExample');
 
-const GetThemeTogglerExampleQuantity = (items: ThemeType[]): JSX.Element => {
+const GetThemeTogglerExampleQuantity = (
+  items: ThemeType[],
+): React.ReactNode => {
   const [value, setValue] = useState<ThemeType>(exampleThemesTwo[0]);
 
   return (

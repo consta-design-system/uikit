@@ -16,8 +16,8 @@ export type FieldControlLayoutProps = PropsWithHTMLAttributesAndRef<
     disabled?: boolean;
     view?: FieldPropView;
     status?: FieldPropStatus;
-    leftSide?: React.ReactNode | JSX.Element[];
-    rightSide?: React.ReactNode | JSX.Element[];
+    leftSide?: React.ReactNode | React.ReactNode[];
+    rightSide?: React.ReactNode | React.ReactNode[];
     children?: React.ReactNode;
     focused?: boolean;
     leftSlotsRefs?: React.Ref<HTMLDivElement>[];

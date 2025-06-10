@@ -32,7 +32,7 @@ export type TooltipProps = Omit<TooltipComponentProps, 'children' | 'ref'> & {
   exitTimeout?: number;
 };
 
-export type WithTooltipProps<Props> = Omit<Props, 'tooltipProps'> & {
+export type WithTooltipProps<Props> = Props & {
   tooltipProps?: TooltipProps;
 };
 
@@ -146,7 +146,7 @@ export function withTooltip(hocProps?: TooltipProps) {
         return (
           <>
             <Anchor
-              {...(componentProps as COMPONENT_PROPS)}
+              {...(componentProps as unknown as COMPONENT_PROPS)}
               onClick={anchorOnClick}
               onMouseEnter={anchorOnMouseEnter}
               onMouseLeave={anchorOnMouseLeave}

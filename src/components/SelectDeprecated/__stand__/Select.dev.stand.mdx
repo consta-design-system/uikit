@@ -829,11 +829,9 @@ type PropRenderItem<ITEM = DefaultItem> = (props: {
   hovered: boolean;
   onClick: React.ReactEventHandler;
   onMouseEnter: React.ReactEventHandler;
-}) => React.ReactElement | null;
+}) => React.ReactNode | null;
 
-type PropRenderValue<ITEM> = (props: {
-  item: ITEM;
-}) => React.ReactElement | null;
+type PropRenderValue<ITEM> = (props: { item: ITEM }) => React.ReactNode | null;
 
 type PropGetItemLabel<ITEM> = (item: ITEM) => string;
 type PropGetItemKey<ITEM> = (item: ITEM) => string | number;

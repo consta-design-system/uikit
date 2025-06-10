@@ -55,4 +55,4 @@ export type ThemeTogglerProps<ITEM = ThemeTogglerItemDefault> =
 
 export type ThemeTogglerComponent = <ITEM>(
   props: ThemeTogglerProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

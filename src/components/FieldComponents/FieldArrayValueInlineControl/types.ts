@@ -35,4 +35,4 @@ export type FieldArrayValueInlineControlProps<ITEM> =
 
 export type FieldArrayValueInlineControlComponent = <ITEM>(
   props: FieldArrayValueInlineControlProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

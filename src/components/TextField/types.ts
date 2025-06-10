@@ -127,4 +127,4 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
 
 export type TextFieldComponent = <TYPE extends string>(
   props: TextFieldProps<TYPE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

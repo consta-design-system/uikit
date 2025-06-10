@@ -1185,16 +1185,14 @@ type PropRenderItem<ITEM = DefaultItem> = (props: {
   hovered: boolean;
   onClick: React.ReactEventHandler;
   onMouseEnter: React.ReactEventHandler;
-}) => React.ReactElement | null;
+}) => React.ReactNode | null;
 
 type PropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)
   | null
   | undefined;
 
-type PropRenderValue<ITEM> = (props: {
-  item: ITEM;
-}) => React.ReactElement | null;
+type PropRenderValue<ITEM> = (props: { item: ITEM }) => React.ReactNode | null;
 
 type PropSearchFunction<ITEM> = (item: ITEM, searchValue: string) => boolean;
 

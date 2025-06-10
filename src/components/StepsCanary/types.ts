@@ -65,4 +65,4 @@ export type StepsProps<ITEM = StepsItemDefault> = PropsWithHTMLAttributesAndRef<
 
 export type StepsComponent = <ITEM>(
   props: StepsProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

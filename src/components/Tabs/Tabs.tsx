@@ -31,7 +31,7 @@ export const cnTabs = cn('Tabs');
 
 function renderItemDefault<ITEM>(
   props: RenderItemProps<ITEM>,
-): React.ReactElement {
+): React.ReactNode {
   const { item, attributes = {}, as, ...otherProps } = props;
   return <TabsTab {...attributes} {...otherProps} as={as} />;
 }

@@ -67,4 +67,4 @@ export type ChipsChoiceComponent = <
   MULTIPLE extends boolean = false,
 >(
   props: ChipsChoiceProps<ITEM, MULTIPLE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

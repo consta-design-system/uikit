@@ -1461,7 +1461,7 @@ type UserSelectPropRenderItem<ITEM = UserSelectItemDefault> = (props: {
   hovered: boolean;
   onClick: React.ReactEventHandler;
   onMouseEnter: React.ReactEventHandler;
-}) => React.ReactElement | null;
+}) => React.ReactNode | null;
 
 type UserSelectPropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)
@@ -1470,7 +1470,7 @@ type UserSelectPropValue<ITEM, MULTIPLE extends boolean> =
 
 type UserSelectPropRenderValue<ITEM> = (props: {
   item: ITEM;
-}) => React.ReactElement | null;
+}) => React.ReactNode | null;
 
 type UserSelectPropSearchFunction<ITEM> = (
   item: ITEM,

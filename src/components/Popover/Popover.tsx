@@ -172,7 +172,7 @@ const ContextConsumer: React.FC<{
     handler: onClickOutside,
   });
 
-  return children as React.ReactElement;
+  return children as React.ReactNode;
 };
 
 const cnPopover = cn('Popover');

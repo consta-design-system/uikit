@@ -85,7 +85,7 @@ export type RenderItemProps<ITEM> = {
 
 export type RenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type TabsFitModeWrapperProps<ITEM> = {
   items: ITEM[];
@@ -156,7 +156,7 @@ export type TabsProps<ITEM = TabsItemDefault> = PropsWithHTMLAttributesAndRef<
 
 export type TabsComponent = <ITEM>(
   props: TabsProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type TabsTabProps<AS extends AsTags = 'button'> = PropsWithAsAttributes<
   {
@@ -175,7 +175,7 @@ export type TabsTabProps<AS extends AsTags = 'button'> = PropsWithAsAttributes<
 
 export type TabsTabComponent = <AS extends AsTags = 'button'>(
   props: TabsTabProps<AS>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type TabsMoreItemsProps<ITEM = TabsItemDefault> =
   PropsWithHTMLAttributesAndRef<
@@ -196,7 +196,7 @@ export type TabsMoreItemsProps<ITEM = TabsItemDefault> =
 
 export type TabsMoreItemsComponent = <ITEM>(
   props: TabsMoreItemsProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type RenderItemsListProp = (props: {
   visibleIndexes?: number[];
