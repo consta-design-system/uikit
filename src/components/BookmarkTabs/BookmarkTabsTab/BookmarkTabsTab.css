@@ -91,6 +91,10 @@
     &_brick {
       --bookmark-divider-height: 100%;
       --bookmark-divider-top: 0;
+
+      &.BookmarkTabsTab_active {
+        padding-top: calc(var(--bookmark-tabs-tab-padding-top) - 1px);
+      }
     }
   }
 
