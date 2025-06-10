@@ -156,14 +156,14 @@ export const defaultGetItemOnClick: ProgressStepBarPropGetItemOnClick<
 
 export type ProgressStepBarComponent = <ITEM = ProgressStepBarItemDefault>(
   props: ProgressStepBarProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type ProgressStepBarItemComponent = (
   props: PropsWithHTMLAttributesAndRef<
     ProgressStepBarItemProps,
     HTMLDivElement
   >,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export function withDefaultGetters<ITEM>(props: ProgressStepBarProps<ITEM>) {
   return {

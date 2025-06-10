@@ -21,7 +21,7 @@ export const TabsFitModeScrollWrapper = <ITEM,>({
   renderItemsList,
   getItemChecked,
   withScrollButtons,
-}: TabsFitModeWrapperProps<ITEM>): React.ReactElement | null => {
+}: TabsFitModeWrapperProps<ITEM>): React.ReactNode | null => {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
   const [
     { isScrollable, width: containerWidth, paddingLeft: containerPaddingLeft },

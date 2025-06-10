@@ -105,4 +105,4 @@ export type ChoiceGroupItemProps = {
 
 export type ChoiceGroupComponent = <ITEM, MULTIPLE extends boolean = false>(
   props: ChoiceGroupProps<ITEM, MULTIPLE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

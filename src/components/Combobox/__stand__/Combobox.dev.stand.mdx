@@ -1554,7 +1554,7 @@ type ComboboxPropRenderItem<ITEM = DefaultItem> = (props: {
   hovered: boolean;
   onClick: React.ReactEventHandler;
   onMouseEnter: React.ReactEventHandler;
-}) => React.ReactElement | null;
+}) => React.ReactNode | null;
 
 type ComboboxPropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)
@@ -1563,7 +1563,7 @@ type ComboboxPropValue<ITEM, MULTIPLE extends boolean> =
 
 type ComboboxPropRenderValue<ITEM> = (props: {
   item: ITEM;
-}) => React.ReactElement | null;
+}) => React.ReactNode | null;
 
 type ComboboxPropSearchFunction<ITEM> = (
   item: ITEM,

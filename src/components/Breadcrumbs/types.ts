@@ -47,7 +47,7 @@ export type RenderItem<ITEM> = (
   isLast?: boolean,
   ref?: React.Ref<HTMLLIElement>,
   hidden?: boolean,
-) => React.ReactElement | undefined;
+) => React.ReactNode | undefined;
 
 export type BreadcrumbsProps<ITEM = BreadcrumbsDefaultItem> =
   PropsWithHTMLAttributesAndRef<
@@ -72,7 +72,7 @@ export type BreadcrumbsProps<ITEM = BreadcrumbsDefaultItem> =
 
 export type BreadcrumbsComponent = <ITEM>(
   props: BreadcrumbsProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type BreadcrumbsMoreProps<ITEM> = PropsWithHTMLAttributesAndRef<
   {
@@ -90,7 +90,7 @@ export type BreadcrumbsMoreProps<ITEM> = PropsWithHTMLAttributesAndRef<
 
 export type BreadcrumbsMoreComponent = <ITEM>(
   props: BreadcrumbsMoreProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type BreadcrumbsItemProps<ITEM> = PropsWithHTMLAttributesAndRef<
   {
@@ -110,7 +110,7 @@ export type BreadcrumbsItemProps<ITEM> = PropsWithHTMLAttributesAndRef<
 
 export type BreadcrumbsItemComponent = <ITEM>(
   props: BreadcrumbsItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type BreadcrumbsFitModeDropdownProps<ITEM> =
   PropsWithHTMLAttributesAndRef<
@@ -130,7 +130,7 @@ export type BreadcrumbsFitModeDropdownProps<ITEM> =
 
 export type BreadcrumbsFitModeDropdownComponent = <ITEM>(
   props: BreadcrumbsFitModeDropdownProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type BreadcrumbsFitModeScrollProps<ITEM> = PropsWithHTMLAttributesAndRef<
   {
@@ -142,8 +142,8 @@ export type BreadcrumbsFitModeScrollProps<ITEM> = PropsWithHTMLAttributesAndRef<
 
 export type BreadcrumbsFitModeScrollComponent = <ITEM>(
   props: BreadcrumbsFitModeScrollProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type BreadcrumbsShortListComponent = <ITEM>(
   props: BreadcrumbsFitModeScrollProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

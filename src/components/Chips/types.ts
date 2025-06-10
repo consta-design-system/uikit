@@ -104,4 +104,4 @@ export type ChipsProps<ITEM = ChipsDefaultItem> = PropsWithHTMLAttributesAndRef<
 
 export type ChipsComponent = <ITEM = ChipsDefaultItem>(
   props: ChipsProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

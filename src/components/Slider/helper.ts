@@ -105,7 +105,7 @@ export type SliderProps<RANGE extends boolean> = PropsWithHTMLAttributes<
 
 export type SliderComponent = <RANGE extends boolean = false>(
   props: SliderProps<RANGE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export const isRangeParams = (
   params: Props<boolean>,

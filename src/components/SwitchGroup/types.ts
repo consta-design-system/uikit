@@ -48,4 +48,4 @@ export type SwitchGroupProps<ITEM = SwitchGroupDefaultItem> =
 
 export type SwitchGroupComponent = <ITEM>(
   props: SwitchGroupProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

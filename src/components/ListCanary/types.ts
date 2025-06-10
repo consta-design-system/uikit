@@ -50,9 +50,7 @@ export type ListPropOnItemClick<ITEM> = (
   },
 ) => void;
 
-export type ListPropRenderItem<ITEM> = (
-  item: ITEM,
-) => React.ReactElement | null;
+export type ListPropRenderItem<ITEM> = (item: ITEM) => React.ReactNode | null;
 
 // ITEMS
 
@@ -160,7 +158,7 @@ export type ListProps<ITEM = DefaultListItem, GROUP = DefaultListGroup> = {
 
 export type ListComponent = <ITEM = DefaultListItem, GROUP = DefaultListGroup>(
   props: ListProps<ITEM, GROUP>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type ListItemProps<AS extends AsTags = 'div'> = PropsWithAsAttributes<
   Omit<DefaultListItem, 'id' | 'groupId' | 'attributes' | 'onClick'> & {
@@ -174,7 +172,7 @@ export type ListItemProps<AS extends AsTags = 'div'> = PropsWithAsAttributes<
 
 export type ListItemComponent = <AS extends AsTags = 'div'>(
   props: ListItemProps<AS>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type ListGroupLabelProps = PropsWithHTMLAttributesAndRef<
   {

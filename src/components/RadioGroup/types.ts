@@ -66,4 +66,4 @@ export type RadioGroupProps<ITEM = RadioGroupDefaultItem> =
 
 export type RadioGroupComponent = <ITEM = RadioGroupDefaultItem>(
   props: RadioGroupProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

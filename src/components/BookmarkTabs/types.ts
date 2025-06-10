@@ -77,7 +77,7 @@ export type BookmarkTabsRenderItemProps<ITEM> = {
 
 export type BookmarkTabsPropRenderItem<ITEM> = (
   props: BookmarkTabsRenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type BookmarkTabsPropOnRemove<ITEM> = (
   item: ITEM,
@@ -117,7 +117,7 @@ export type BookmarkTabsProps<ITEM = BookmarkTabsItemDefault> =
 
 export type BookmarkTabsComponent = <ITEM>(
   props: BookmarkTabsProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type BookmarkTabsTabProps<AS extends AsTags = 'div'> =
   PropsWithAsAttributes<
@@ -139,4 +139,4 @@ export type BookmarkTabsTabProps<AS extends AsTags = 'div'> =
 
 export type BookmarkTabsTabComponent = <AS extends AsTags = 'div'>(
   props: BookmarkTabsTabProps<AS>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

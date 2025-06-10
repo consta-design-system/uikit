@@ -224,14 +224,14 @@ export type ContextMenuLevelsComponent = <
   GROUP = ContextMenuGroupDefault,
 >(
   props: ContextMenuLevelsProps<ITEM, GROUP>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type ContextMenuComponent = <
   ITEM = ContextMenuItemDefault,
   GROUP = ContextMenuGroupDefault,
 >(
   props: ContextMenuProps<ITEM, GROUP>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type ContextMenuLevelProps<
   ITEM = ContextMenuItemDefault,
@@ -264,7 +264,7 @@ export type ContextMenuLevelProps<
 export type ContextMenuLevelComponent = <ITEM, GROUP>(
   props: ContextMenuLevelProps<ITEM, GROUP>,
   ref: React.Ref<HTMLElement>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type ContextMenuItemProps<AS extends AsTags = 'div'> =
   PropsWithAsAttributes<
@@ -280,7 +280,7 @@ export type ContextMenuItemProps<AS extends AsTags = 'div'> =
 export type ContextMenuItemComponent = <AS extends AsTags = 'div'>(
   props: ContextMenuItemProps<AS>,
   ref: React.Ref<HTMLElement>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type GetLevelsParams<ITEM> = {
   levels: Level<ITEM>[];

@@ -38,10 +38,10 @@ export type PropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 export type PropGetGroupLabel<GROUP> = (group: GROUP) => string;
 export type PropRenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 export type PropRenderValue<ITEM> = (
   props: RenderValueProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type SelectProps<
   ITEM = DefaultItem,
@@ -101,7 +101,7 @@ export type SelectProps<
 
 export type SelectComponent = <ITEM = DefaultItem, GROUP = DefaultGroup>(
   props: SelectProps<ITEM, GROUP>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
 export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) =>

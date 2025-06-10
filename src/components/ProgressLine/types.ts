@@ -27,4 +27,4 @@ export type ProgressLineProps<ITEM = ProgressLineItemDefault> =
 
 export type ProgressLineComponent = <ITEM>(
   props: ProgressLineProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

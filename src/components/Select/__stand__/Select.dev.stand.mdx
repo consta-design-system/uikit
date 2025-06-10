@@ -1052,7 +1052,7 @@ type SelectRenderItemProps<ITEM> = {
 
 type SelectPropRenderValue<ITEM> = (props: {
   item: ITEM;
-}) => React.ReactElement | null;
+}) => React.ReactNode | null;
 
 type SelectPropGetItemLabel<ITEM> = (item: ITEM) => string;
 type SelectPropGetItemKey<ITEM> = (item: ITEM) => string | number;

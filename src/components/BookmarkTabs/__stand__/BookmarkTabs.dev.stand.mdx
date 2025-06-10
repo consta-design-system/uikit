@@ -673,7 +673,7 @@ export type BookmarkTabsRenderItemProps<ITEM> = {
 
 export type BookmarkTabsPropRenderItem<ITEM> = (
   props: BookmarkTabsRenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type BookmarkTabsPropOnRemove<ITEM> = (
   item: ITEM,

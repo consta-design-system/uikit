@@ -142,7 +142,8 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
     const keys: UseKeysPropKeys<HTMLInputElement> = useMemo(
       () => ({
         Enter: (e) => {
-          const stringValue = e.target.value;
+          const stringValue = inputRef.current?.value;
+
           if (stringValue) {
             mutableRefs.current[0]?.(
               [...(mutableRefs.current[2] || []), stringValue],
@@ -162,7 +163,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
           }
         },
         Backspace: (e) => {
-          const stringValue = e.target.value;
+          const stringValue = inputRef.current?.value;
           const currentValue = mutableRefs.current[2];
 
           if (!stringValue && currentValue?.length) {

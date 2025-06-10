@@ -83,4 +83,4 @@ export type BadgeGroupProps<ITEM = BadgeGroupDefaultItem> =
 
 export type BadgeGroupComponent = <ITEM = BadgeGroupDefaultItem>(
   props: BadgeGroupProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

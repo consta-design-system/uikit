@@ -65,7 +65,7 @@ type Props = {
 
 type Pagination = (
   props: PropsWithHTMLAttributesAndRef<Props, HTMLDivElement>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export const Pagination: Pagination = React.forwardRef((props, ref) => {
   const {

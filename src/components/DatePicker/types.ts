@@ -156,11 +156,11 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
 
 export type DatePickerComponent = <TYPE extends DatePickerPropType = 'date'>(
   props: DatePickerProps<TYPE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type DatePickerTypeComponent<TYPE extends DatePickerPropType> = (
   props: Omit<DatePickerProps<TYPE>, 'type'>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type DatePickerPropOnError = (
   props:

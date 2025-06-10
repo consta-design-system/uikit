@@ -42,7 +42,7 @@ const labelForCreateDefault: LabelForCreate = (label) => (
 
 type SelectCreateButtonComponent = (
   props: SelectCreateButtonProps,
-) => JSX.Element | null;
+) => React.ReactNode | null;
 
 export const SelectCreateButton: SelectCreateButtonComponent = forwardRef(
   (props, ref) => {

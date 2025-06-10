@@ -52,7 +52,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   isOpen: boolean;
   offset?: PopoverPropOffset | 'none';
   isLoading?: boolean;
-  renderItem: (props: RenderItemProps<ITEM>) => JSX.Element | null;
+  renderItem: (props: RenderItemProps<ITEM>) => React.ReactNode | null;
   visibleItems: (
     | OptionForCreate
     | {
@@ -77,7 +77,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
 
 type SelectDropdownComponent = <ITEM, GROUP>(
   props: Props<ITEM, GROUP>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 const cnSelectDropdown = cn('SelectDropdown');
 

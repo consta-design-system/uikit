@@ -54,10 +54,10 @@ type ComboboxPropValue<ITEM, MULTIPLE extends boolean> =
 
 export type ComboboxPropRenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 export type ComboboxPropRenderValue<ITEM> = (
   props: RenderValueProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 type ComboboxPropOnCreate = (
   label: string,
@@ -146,7 +146,7 @@ export type ComboboxComponent = <
   MULTIPLE extends boolean = false,
 >(
   props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export const defaultGetItemKey: ComboboxPropGetItemKey<ComboboxItemDefault> = (
   item,

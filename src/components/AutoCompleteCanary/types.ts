@@ -49,7 +49,7 @@ export type AutoCompleteRenderItemProps<ITEM> = {
 
 export type AutoCompletePropRenderItem<ITEM> = (
   props: AutoCompleteRenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type AutoCompleteProps<
   TYPE extends string,
@@ -96,10 +96,10 @@ export type AutoCompleteComponent = <
   GROUP = AutoCompleteGroupDefault,
 >(
   props: AutoCompleteProps<TYPE, ITEM, GROUP>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type AutoCompleteTypeComponent<
   TYPE extends string = string,
   ITEM = AutoCompleteItemDefault,
   GROUP = AutoCompleteGroupDefault,
-> = (props: AutoCompleteProps<TYPE, ITEM, GROUP>) => React.ReactElement | null;
+> = (props: AutoCompleteProps<TYPE, ITEM, GROUP>) => React.ReactNode | null;

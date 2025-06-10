@@ -494,7 +494,7 @@ type RenderItem<ITEM, ELEMENT> = (props: {
   icon?: IconComponent;
   iconSize: IconPropSize;
   onlyIcon?: boolean;
-}) => React.ReactElement | null;
+}) => React.ReactNode | null;
 
 export type TabsItemDefault = {
   label: string | number;
@@ -564,7 +564,7 @@ export type RenderItemProps<ITEM> = {
 
 export type RenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 ```
 
 | Свойство                                       | Тип                                | По умолчанию | Описание                                                                                                                                                                             |

@@ -86,7 +86,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
 
 type SelectDropdownComponent = <ITEM, GROUP>(
   props: Props<ITEM, GROUP>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 const cnSelectDropdown = cn('SelectDropdown');
 

@@ -89,4 +89,4 @@ export type AutoCompleteComponent = <
   GROUP = AutoCompleteGroupDefault,
 >(
   props: AutoCompleteProps<TYPE, ITEM, GROUP>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

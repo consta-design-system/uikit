@@ -77,7 +77,7 @@ export const TableHeader = <T extends TableRow>({
   selectedFilters,
   showHorizontalCellShadow,
   borderBetweenColumns,
-}: Props<T>): React.ReactElement => {
+}: Props<T>): React.ReactNode => {
   const tableHeaderHeight = headerRowsHeights.reduce(
     (a: number, b: number) => a + b,
     0,

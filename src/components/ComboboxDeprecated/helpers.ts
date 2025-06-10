@@ -48,10 +48,10 @@ type PropValue<ITEM, MULTIPLE extends boolean> =
 
 export type PropRenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 export type PropRenderValue<ITEM> = (
   props: RenderValueProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type ComboboxProps<
   ITEM = DefaultItem,
@@ -128,7 +128,7 @@ export type ComboboxComponent = <
   MULTIPLE extends boolean = false,
 >(
   props: ComboboxProps<ITEM, GROUP, MULTIPLE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
 export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) =>
