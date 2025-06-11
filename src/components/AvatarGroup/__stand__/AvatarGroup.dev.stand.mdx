@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 
 import { AvatarGroupExampleCount } from './examples/AvatarGroupExampleCount/AvatarGroupExampleCount';
 import { AvatarGroupExampleSize } from './examples/AvatarGroupExampleSize/AvatarGroupExampleSize';
@@ -10,111 +10,28 @@ import { AvatarGroup } from '@consta/uikit/AvatarGroup';
 
 <MdxMenu>
 
-- [Аватары](#аватары)
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Элементы](#элементы)
+- [Количество видимых элементов](#количество-видимых-элементов)
 - [Размер](#размер)
 - [Форма](#форма)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
-- [Пример использования](#пример)
+- [Ссылка на изображение](#ссылка-на-изображение)
+- [Имя пользователя](#имя-пользователя)
+- [Монохромный режим](#монохромный-режим)
 
 </MdxMenu>
 
-## Аватары
+## Обзор
 
-Список аватарок можно передать в поле `items` в объекте типа [AvatarGroupDefaultItem](#свойства). Что можно указать:
+Компонент `AvatarGroup` предназначен для отображения группы аватаров пользователей. Он позволяет компактно представить список участников, например, в интерфейсах чатов, командных проектов или социальных платформ. Компонент поддерживает настройку количества видимых аватаров, их размера, формы, а также возможность задавать изображения и имена пользователей. Если аватаров больше, чем указано в настройках, избыточные элементы скрываются, а их количество отображается в виде счетчика.
 
-- имя пользователя — в поле `name` или с помощью функции `getItemName`,
-- ссылку на изображение — в поле `url` или с помощью функции `getItemUrl`.
+Типичные сценарии использования:
 
-Если указаны и имя, и ссылка на изображение, сгенерируется аватарка с изображением.
-
-Количество отображаемых аватаров можно указать в свойстве `visibleCount`, по умолчанию оно равно `4`. Если указать 'auto', то количество аватарок будет подстраиваться под ширину компонента.
-
-```tsx
-/* cspell:disable */
-export const avatarGroupItems: AvatarGroupDefaultItem[] = [
-  {
-    name: 'Вадим Матвеев',
-    url: '',
-  },
-  {
-    name: 'Лидия Индриксон',
-    url: '',
-  },
-  {
-    name: 'Геннадий Морозов',
-    url: '',
-  },
-  {
-    name: 'Аркадий Лушко',
-    url: '',
-  },
-  {
-    name: 'Георгий Калинин',
-    url: '',
-  },
-  {
-    name: 'Виталий Алтуфьев',
-    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
-  },
-  {
-    name: 'Вадим Матвеев',
-    url: '',
-  },
-  {
-    name: 'Лидия Индриксон',
-    url: '',
-  },
-  {
-    name: 'Геннадий Морозов',
-    url: '',
-  },
-  {
-    name: 'Аркадий Лушко',
-    url: '',
-  },
-  {
-    name: 'Георгий Калинин',
-    url: '',
-  },
-  {
-    name: 'Виталий Алтуфьев',
-    url: '',
-  },
-];
-/* cspell:enable */
-
-<AvatarGroup items={avatarGroupItems} visibleCount={4} />
-<AvatarGroup items={avatarGroupItems} visibleCount={6} />
-<AvatarGroup items={avatarGroupItems} visibleCount="auto" />
-```
-
-<AvatarGroupExampleCount />
-
-## Размер
-
-За размер отвечает свойство `size`.
-
-```tsx
-<AvatarGroup size="xs" items={avatarGroupItems} />
-<AvatarGroup size="s" items={avatarGroupItems} />
-<AvatarGroup size="m" items={avatarGroupItems} />
-<AvatarGroup size="l" items={avatarGroupItems} />
-```
-
-<AvatarGroupExampleSize />
-
-## Форма
-
-За форму отвечает свойство `form`. Значение по умолчанию – `round`.
-
-```tsx
-<AvatarGroup form="round" items={avatarGroupItems} />
-<AvatarGroup form="default" items={avatarGroupItems} />
-<AvatarGroup form="brick" items={avatarGroupItems} />
-```
-
-<AvatarGroupExampleForm />
+- Отображение участников группового чата.
+- Показ команды проекта в карточке.
+- Визуализация списка пользователей в интерфейсе.
 
 ## Импорт
 
@@ -141,49 +58,98 @@ export type AvatarGroupDefaultItem = {
 };
 ```
 
-| Свойство                    | Тип                                                    | По умолчанию | Описание                                                                                                                                |
-| --------------------------- | ------------------------------------------------------ | ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| [`items?`](#аватары)        | `ITEM[]`                                               | -            | Список элементов                                                                                                                        |
-| [`visibleCount?`](#аватары) | `number` &#124; `'auto'`                               | `4`          | Количество отображаемых элементов                                                                                                       |
-| [`size?`](#размер)          | `'xs', 's' , 'm', 'l'`                                 | `'m'`        | Размер аватара                                                                                                                          |
-| [`form?`](#форма)           | `'default' , 'round', 'brick'`                         | `'round'`    | Форма аватара                                                                                                                           |
-| `getItemUrl?`               | `(item: ITEM) => string`<code>&#124;</code>`undefined` | -            | Результат функции используется в качестве изображения                                                                                   |
-| `getItemName?`              | `(item: ITEM) => string`<code>&#124;</code>`undefined` | -            | Результат функции используется в качестве имени                                                                                         |
-| `monochrome?`               | `boolean`                                              | -            | Включает монохромный режим ([см. Avatar](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-avatar-stable/tab:dev/hash:монохромный-режим)) |
-| `className`                 | `string`                                               | -            | Дополнительный CSS-класс                                                                                                                |
-| `as`                        | `React.ElementType`                                    | -            | HTML-тег, в виде которого этот компонент будет представлен в DOM                                                                        |
-| `ref`                       | `React.Ref<HTMLDivElement>`                            | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                         |
+| Свойство                                        | Тип                                   | По умолчанию | Описание                                                    |
+| ----------------------------------------------- | ------------------------------------- | ------------ | ----------------------------------------------------------- |
+| [`items`](#элементы)                            | `ITEM[]`                              | -            | Список элементов для отображения аватаров                   |
+| [`visibleCount`](#количество-видимых-элементов) | `number` \| `'auto'`                  | `4`          | Количество отображаемых аватаров                            |
+| [`size`](#размер)                               | `'xs' \| 's' \| 'm' \| 'l'`           | `'m'`        | Размер аватаров                                             |
+| [`form`](#форма)                                | `'default' \| 'round' \| 'brick'`     | `'round'`    | Форма аватаров                                              |
+| [`getItemUrl`](#ссылка-на-изображение)          | `(item: ITEM) => string \| undefined` | -            | Функция для получения ссылки на изображение аватара         |
+| [`getItemName`](#имя-пользователя)              | `(item: ITEM) => string \| undefined` | -            | Функция для получения имени пользователя                    |
+| [`monochrome`](#монохромный-режим)              | `boolean`                             | -            | Включение монохромного режима для аватаров                  |
+| `className`                                     | `string`                              | -            | Дополнительный CSS-класс для компонента                     |
+| `as`                                            | `React.ElementType`                   | -            | HTML-тег, в виде которого компонент будет представлен в DOM |
+| `ref`                                           | `React.Ref<HTMLDivElement>`           | -            | Ссылка на корневой DOM-элемент компонента                   |
 
-## Пример
+## Элементы
+
+Список элементов, содержащих данные для отображения аватаров. Каждый элемент должен соответствовать типу `AvatarGroupDefaultItem`, который включает поля `url` (ссылка на изображение) и `name` (имя пользователя). Если указаны оба поля, приоритет отдается изображению. Если изображение отсутствует, отображается аватар с инициалами имени.
 
 ```tsx
-import React from 'react';
-import { AvatarGroup } from '@consta/uikit/AvatarGroup';
-
-const App = () => {
-  const avatarGroupItems: AvatarGroupDefaultItem[] = [
-    {
-      label: 'Вадим Матвеев',
-      image: '',
-    },
-    {
-      /* cspell:disable-next-line */
-      label: 'Лидия Индриксон',
-      image: '',
-    },
-    {
-      label: 'Геннадий Морозов',
-      image: '',
-    },
-  ];
-
-  return (
-    <AvatarGroup
-      items={avatarGroupItems}
-      size="m"
-      getItemName={(item) => item.label}
-      getItemUrl={(item) => item.image}
-    />
-  );
-};
+/* cspell:disable */
+export const avatarGroupItems: AvatarGroupDefaultItem[] = [
+  {
+    name: 'Вадим Матвеев',
+    url: '',
+  },
+  {
+    name: 'Лидия Индриксон',
+    url: '',
+  },
+  {
+    name: 'Виталий Алтуфьев',
+    url: 'https://i.ibb.co/K2R8Lqb/Rectangle-1496.png',
+  },
+];
 ```
+
+## Количество видимых элементов
+
+Определяет количество отображаемых аватаров. Может быть числом или значением `'auto'`. При использовании `'auto'` компонент автоматически подстраивает количество аватаров под ширину контейнера. Если количество элементов превышает `visibleCount`, избыточные аватары заменяются счетчиком.
+
+<MdxTabs>
+
+<AvatarGroupExampleCount />
+
+```tsx
+<AvatarGroup items={avatarGroupItems} visibleCount={4} />
+<AvatarGroup items={avatarGroupItems} visibleCount={6} />
+<AvatarGroup items={avatarGroupItems} visibleCount="auto" />
+```
+
+</MdxTabs>
+
+## Размер
+
+Задает размер аватаров. Доступные значения: `'xs'`, `'s'`, `'m'`, `'l'`. Размер влияет на диаметр аватаров и их визуальное восприятие в интерфейсе.
+
+<MdxTabs>
+
+<AvatarGroupExampleSize />
+
+```tsx
+<AvatarGroup size="xs" items={avatarGroupItems} />
+<AvatarGroup size="s" items={avatarGroupItems} />
+<AvatarGroup size="m" items={avatarGroupItems} />
+<AvatarGroup size="l" items={avatarGroupItems} />
+```
+
+</MdxTabs>
+
+## Форма
+
+Определяет форму аватаров. Доступные значения: `'round'` (круглые), `'default'` (квадратные со скругленными углами), `'brick'` (прямоугольные). Форма влияет на визуальный стиль компонента.
+
+<MdxTabs>
+
+<AvatarGroupExampleForm />
+
+```tsx
+<AvatarGroup form="round" items={avatarGroupItems} />
+<AvatarGroup form="default" items={avatarGroupItems} />
+<AvatarGroup form="brick" items={avatarGroupItems} />
+```
+
+</MdxTabs>
+
+## Ссылка на изображение
+
+Функция, которая возвращает ссылку на изображение для каждого элемента. Используется для динамического определения `url` на основе данных элемента. Если функция не указана, используется поле `url` из объекта `AvatarGroupDefaultItem`.
+
+## Имя пользователя
+
+Функция, которая возвращает имя пользователя для каждого элемента. Используется для динамического определения `name` на основе данных элемента. Если функция не указана, используется поле `name` из объекта `AvatarGroupDefaultItem`.
+
+## Монохромный режим
+
+Включает монохромный режим для аватаров, при котором изображения отображаются в оттенках серого. Полезно для создания единообразного стиля или для людей с нарушениями восприятия цвета.
