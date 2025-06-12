@@ -79,7 +79,7 @@ import { BookmarkTabs } from '@consta/uikit/BookmarkTabs';
 
 ### Элементы и их структура
 
-Свойство `items` задаёт массив объектов, представляющих табы. Каждый таб должен иметь уникальный ключ, который определяется через `getItemKey`. По умолчанию используется структура `BookmarkTabsItemDefault`:
+Свойство `items` задаёт массив объектов, представляющих табы. Каждый таб должен иметь уникальный ключ, который определяется через `getItemKey`. По умолчанию используется тип `BookmarkTabsItemDefault`:
 
 ```tsx
 type BookmarkTabsItemDefault = {
@@ -93,11 +93,6 @@ type BookmarkTabsItemDefault = {
   attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
 };
 ```
-
-<MdxTabs>
-  <BookmarkTabsExample />
-  ```tsx import {BookmarkTabs} from '@consta/uikit/BookmarkTabs'; ```
-</MdxTabs>
 
 ### Текст таба
 
@@ -134,7 +129,9 @@ export const BookmarkTabsExampleLabel = () => {
 Свойства `getItemLeftIcon` и `getItemRightIcon` задают иконки слева и справа от текста таба. По умолчанию иконки берутся из полей `leftIcon` и `rightIcon`. Для кастомных данных указывайте собственные функции.
 
 <MdxTabs>
+
 <BookmarkTabsExampleIcon />
+
 ```tsx
 import React, { useState } from 'react';
 import { BookmarkTabs } from '@consta/uikit/BookmarkTabs';
@@ -144,23 +141,23 @@ import { IconRing } from '@consta/icons/IconRing';
 import { IconCamera } from '@consta/icons/IconCamera';
 
 type Item = {
-label: string;
-image: IconComponent;
+  label: string;
+  image: IconComponent;
 };
 
 const items: Item[] = [
-{
-label: 'Первый',
-image: IconPhoto,
-},
-{
-label: 'Второй',
-image: IconRing,
-},
-{
-label: 'Третий вариант',
-image: IconCamera,
-},
+  {
+    label: 'Первый',
+    image: IconPhoto,
+  },
+  {
+    label: 'Второй',
+    image: IconRing,
+  },
+  {
+    label: 'Третий вариант',
+    image: IconCamera,
+  },
 ];
 
 const getItemIcon = (item: Item) => item.image;
@@ -188,6 +185,7 @@ export const BookmarkTabsExampleIcon = () => {
   );
 };
 ```
+
 </MdxTabs>
 
 ### Зафиксированные табы
@@ -195,7 +193,9 @@ export const BookmarkTabsExampleIcon = () => {
 Свойство `getItemFixed` определяет, является ли таб зафиксированным. Зафиксированные табы отображаются в начале списка только с иконкой (без текста). По умолчанию флаг берётся из поля `fixed`.
 
 <MdxTabs>
+
 <BookmarkTabsExampleFixed />
+
 ```tsx
 import React, { useState } from 'react';
 import {
@@ -204,32 +204,32 @@ import {
 } from '@consta/uikit/BookmarkTabs';
 
 const items: BookmarkTabsItemDefault[] = [
-{
-key: 1,
-label: 'Название 1',
-leftIcon: IconGitHub,
-fixed: true,
-},
-{
-key: 2,
-label: 'Название 2',
-leftIcon: IconCamera,
-fixed: true,
-},
-{
-key: 3,
-label: 'Название 3',
-leftIcon: IconPhoto,
-},
-{
-key: 4,
-label: 'Название 4',
-leftIcon: IconRing,
-},
-{
-key: 5,
-label: 'Название 5',
-},
+  {
+    key: 1,
+    label: 'Название 1',
+    leftIcon: IconGitHub,
+    fixed: true,
+  },
+  {
+    key: 2,
+    label: 'Название 2',
+    leftIcon: IconCamera,
+    fixed: true,
+  },
+  {
+    key: 3,
+    label: 'Название 3',
+    leftIcon: IconPhoto,
+  },
+  {
+    key: 4,
+    label: 'Название 4',
+    leftIcon: IconRing,
+  },
+  {
+    key: 5,
+    label: 'Название 5',
+  },
 ];
 
 export const BookmarkTabsExampleFixed = () => {
@@ -237,16 +237,19 @@ export const BookmarkTabsExampleFixed = () => {
   return <BookmarkTabs items={items} value={value} onChange={setValue} />;
 };
 ```
+
 </MdxTabs>
 
 ## Внешний вид
 
 ### Размер
 
-Свойство `size` задаёт размер табов, включая шрифт и отступы. Возможные значения: `'xs'`, `'s'`, `'m'` (по умолчанию `'m'`).
+Свойство `size` задаёт размер табов, включая шрифт и отступы. Возможные значения: `'xs'`, `'s'`, `'m'` (по умолчанию).
 
 <MdxTabs>
+
 <BookmarkTabsExampleSize />
+
 ```tsx
 import React, { useState } from 'react';
 import {
@@ -255,18 +258,18 @@ import {
 } from '@consta/uikit/BookmarkTabs';
 
 const items: BookmarkTabsItemDefault[] = [
-{
-key: 1,
-label: 'Первая вкладка',
-},
-{
-key: 2,
-label: 'Вторая вкладка',
-},
-{
-key: 3,
-label: 'Третья вкладка',
-},
+  {
+    key: 1,
+    label: 'Первая вкладка',
+  },
+  {
+    key: 2,
+    label: 'Вторая вкладка',
+  },
+  {
+    key: 3,
+    label: 'Третья вкладка',
+  },
 ];
 
 export const BookmarkTabsExampleSize = () => {
@@ -279,6 +282,7 @@ export const BookmarkTabsExampleSize = () => {
   );
 };
 ```
+
 </MdxTabs>
 
 ### Форма
@@ -289,7 +293,9 @@ export const BookmarkTabsExampleSize = () => {
 - `'round'` — со скруглением.
 
 <MdxTabs>
+
 <BookmarkTabsExampleForm />
+
 ```tsx
 import React, { useState } from 'react';
 import {
@@ -298,18 +304,18 @@ import {
 } from '@consta/uikit/BookmarkTabs';
 
 const items: BookmarkTabsItemDefault[] = [
-{
-key: 1,
-label: 'Первая вкладка',
-},
-{
-key: 2,
-label: 'Вторая вкладка',
-},
-{
-key: 3,
-label: 'Третья вкладка',
-},
+  {
+    key: 1,
+    label: 'Первая вкладка',
+  },
+  {
+    key: 2,
+    label: 'Вторая вкладка',
+  },
+  {
+    key: 3,
+    label: 'Третья вкладка',
+  },
 ];
 
 export const BookmarkTabsExampleForm = () => {
@@ -332,6 +338,7 @@ export const BookmarkTabsExampleForm = () => {
   );
 };
 ```
+
 </MdxTabs>
 
 ### Стиль
@@ -342,7 +349,9 @@ export const BookmarkTabsExampleForm = () => {
 - `'clear'` — без заливки.
 
 <MdxTabs>
+
 <BookmarkTabsExampleView />
+
 ```tsx
 import React, { useState } from 'react';
 import {
@@ -351,18 +360,18 @@ import {
 } from '@consta/uikit/BookmarkTabs';
 
 const items: BookmarkTabsItemDefault[] = [
-{
-key: 1,
-label: 'Первая вкладка',
-},
-{
-key: 2,
-label: 'Вторая вкладка',
-},
-{
-key: 3,
-label: 'Третья вкладка',
-},
+  {
+    key: 1,
+    label: 'Первая вкладка',
+  },
+  {
+    key: 2,
+    label: 'Вторая вкладка',
+  },
+  {
+    key: 3,
+    label: 'Третья вкладка',
+  },
 ];
 
 export const BookmarkTabsExampleView = () => {
@@ -385,6 +394,7 @@ export const BookmarkTabsExampleView = () => {
   );
 };
 ```
+
 </MdxTabs>
 
 ## Поведение
@@ -397,20 +407,18 @@ export const BookmarkTabsExampleView = () => {
 
 Табы адаптируются к ширине контейнера. Если табы не помещаются, появляется скролл (по умолчанию) или навигационные кнопки при `withNavigationButtons={true}`.
 
-<MdxTabs>
-  <BookmarkTabsExampleFitModeScroll />
-</MdxTabs>
+<BookmarkTabsExampleFitModeScroll />
 
-<MdxTabs>
-  <BookmarkTabsExampleFitModeButtons />
-</MdxTabs>
+<BookmarkTabsExampleFitModeButtons />
 
 ### Добавление табов
 
 Свойство `onCreate` добавляет кнопку для создания новых табов. При клике вызывается указанная функция.
 
 <MdxTabs>
+
 <BookmarkTabsExampleOnCreate />
+
 ```tsx
 import React, { useState } from 'react';
 import {
@@ -419,45 +427,45 @@ import {
 } from '@consta/uikit/BookmarkTabs';
 
 const array: BookmarkTabsItemDefault[] = [
-{
-key: 1,
-label: 'Вкладка 1',
-},
-{
-key: 2,
-label: 'Вкладка 2',
-},
-{
-key: 3,
-label: 'Вкладка 3',
-},
+  {
+    key: 1,
+    label: 'Вкладка 1',
+  },
+  {
+    key: 2,
+    label: 'Вкладка 2',
+  },
+  {
+    key: 3,
+    label: 'Вкладка 3',
+  },
 ];
 
 export const BookmarkTabsExampleOnCreate = () => {
   const [items, setItems] = useState<BookmarkTabsItemDefault[]>(array);
   const [value, setValue] = useState<Item | null>(items[0]);
 
-const onCreate = () => {
-setItems([
-...items,
-{
-key: items.length + 1,
-label: `Вкладка ${items.length + 1}`,
-},
-]);
+  const onCreate = () => {
+    setItems([
+      ...items,
+      {
+        key: items.length + 1,
+        label: `Вкладка ${items.length + 1}`,
+      },
+    ]);
+  };
+
+  return (
+    <BookmarkTabs
+      items={items}
+      value={value}
+      onCreate={onCreate}
+      onChange={setValue}
+    />
+  );
 };
+```
 
-return (
-
-<BookmarkTabs
-  items={items}
-  value={value}
-  onCreate={onCreate}
-  onChange={setValue}
-/>
-); };
-
-````
 </MdxTabs>
 
 ### Удаление табов
@@ -465,7 +473,9 @@ return (
 Свойство `onRemove` добавляет крестик для удаления незакреплённых табов. При клике вызывается указанная функция.
 
 <MdxTabs>
+
 <BookmarkTabsExampleOnRemove />
+
 ```tsx
 import React, { useState } from 'react';
 import {
@@ -516,7 +526,7 @@ export const BookmarkTabsExampleOnRemove = () => {
     />
   );
 };
-````
+```
 
 </MdxTabs>
 
@@ -525,7 +535,9 @@ export const BookmarkTabsExampleOnRemove = () => {
 Свойство `renderItem` позволяет полностью кастомизировать рендеринг таба. Функция принимает параметры, такие как `item`, `onClick`, `active`, `size`, `form`, `view`, и другие.
 
 <MdxTabs>
+
 <BookmarkTabsExampleRenderItem />
+
 ```tsx
 import React, { useState } from 'react';
 import { BookmarkTabs, cnBookmarkTabsTab } from '@consta/uikit/BookmarkTabs';
@@ -537,55 +549,55 @@ const items: Item[] = ['Один', 'Два', 'Три'];
 export const BookmarkTabsExampleRenderItem = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
 
-return (
-
-<BookmarkTabs
-items={items}
-value={value}
-getItemKey={(item) => item}
-onChange={setValue}
-getItemFixed={() => false}
-renderItem={({
-item,
-onClick,
-active,
-tabWidth,
-size,
-bordered,
-form,
-view,
-hovered,
-}) => (
-<button
-type="button"
-onClick={onClick}
-className={cnBookmarkTabsTab({
-active,
-size,
-form,
-view,
-hovered,
-bordered,
-})}
-style={{
+  return (
+    <BookmarkTabs
+      items={items}
+      value={value}
+      getItemKey={(item) => item}
+      onChange={setValue}
+      getItemFixed={() => false}
+      renderItem={({
+        item,
+        onClick,
+        active,
+        tabWidth,
+        size,
+        bordered,
+        form,
+        view,
+        hovered,
+      }) => (
+        <button
+          type="button"
+          onClick={onClick}
+          className={cnBookmarkTabsTab({
+            active,
+            size,
+            form,
+            view,
+            hovered,
+            bordered,
+          })}
+          style={{
             ['--bookmarks-tab-width' as string]: tabWidth,
-          }} >
-<Text
+          }}
+        >
+          <Text
             view="primary"
             size="m"
             weight="semibold"
             size="xl"
             lineHeight="m"
           >
-{item}
-</Text>
-</button>
-)}
-/>
-);
+            {item}
+          </Text>
+        </button>
+      )}
+    />
+  );
 };
+```
 
-````
 </MdxTabs>
 
 ### Рендеринг
@@ -593,7 +605,9 @@ style={{
 Свойства `getItemAs` и `getItemAttributes` позволяют задавать HTML-тег и атрибуты для рендеринга таба. Например, можно отображать таб как ссылку (`<a>`).
 
 <MdxTabs>
+
 <BookmarkTabsExampleAs />
+
 ```tsx
 import React, { useState } from 'react';
 import { BookmarkTabs } from '@consta/uikit/BookmarkTabs';
@@ -603,7 +617,7 @@ const items: string[] = ['Один', 'Два', 'Три'];
 const getItemLabel = (label: string) => label;
 
 export const BookmarkTabsExampleAs = () => {
-  const [value, setValue] = useState<string | null>(items[0]);
+  const [value, setValue] = (useState < string) | (null > items[0]);
   return (
     <BookmarkTabs
       value={value}
@@ -617,7 +631,7 @@ export const BookmarkTabsExampleAs = () => {
     />
   );
 };
-````
+```
 
 </MdxTabs>
 
