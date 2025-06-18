@@ -1,4 +1,4 @@
-import { MdxMenu, MdxInformer } from '@consta/stand';
+import { MdxMenu, MdxInformer, MdxTabs } from '@consta/stand';
 
 import { BadgeExampleIcon } from './examples/BadgeExampleIcon/BadgeExampleIcon';
 import { BadgeExampleMinified } from './examples/BadgeExampleMinified/BadgeExampleMinified';
@@ -7,121 +7,30 @@ import { BadgeExampleStatus } from './examples/BadgeExampleStatus/BadgeExampleSt
 import { BadgeExampleView } from './examples/BadgeExampleView/BadgeExampleView';
 import { BadgeExampleForm } from './examples/BadgeExampleForm/BadgeExampleForm';
 
-```tsx
-import { Badge } from '@consta/uikit/Badge';
-```
-
 <MdxMenu>
-- [Статус и содержимое](#статус-и-содержимое)
-  - [Бейджик с текстом](#бейджик-с-текстом)
-  - [Бейджик без текста](#бейджик-без-текста)
-  - [Бейджик с иконкой](#бейджик-с-иконкой)
-- [Внешний вид](#внешний-вид)
-  - [Типы бейджиков](#типы-бейджиков)
-  - [Размер](#размер)
-  - [Форма](#форма)
+
+- [Обзор](#обзор)
 - [Импорт](#импорт)
-- [Список свойств](#свойства)
+- [Свойства](#свойства)
+- [Размер](#размер)
+- [Типы бейджиков](#типы-бейджиков)
+- [Статус](#статус)
+- [Форма](#форма)
+- [Бейджик без текста](#бейджик-без-текста)
+- [Бейджик с иконкой](#бейджик-с-иконкой)
+- [Бейджик с текстом](#бейджик-с-текстом)
 - [Пример использования](#пример)
 
 </MdxMenu>
 
-## Статус и содержимое
+## Обзор
 
-Статус — основное свойство бейджика, его можно менять с помощью свойства `status`.
+Компонент `Badge` используется для отображения статуса или дополнительной информации об объекте в виде компактного бейджика. Подходит для обозначения состояний, таких как "черновик", "на проверке" или "готов", а также для привлечения внимания к элементам интерфейса.
 
-Какие бывают статусы:
+Типичные сценарии использования:
 
-- `normal` — всё в порядке, так и должно быть (статус по умолчанию),
-- `success` — всё прошло успешно,
-- `alert` — ничего не получилось, скорее всего, нужно начинать с начала,
-- `warning` — внимание, чтобы процесс прошел успешно, нужно что-то сделать,
-- `system` — системное сообщение.
-
-### Бейджик с текстом
-
-Текст на бейджике называет статус объекта или показывает дополнительную информацию. За текст отвечает свойство `label`.
-
-Например, если в каком-то сервисе есть операция по проверке документа, у него могут быть такие статусы:
-
-```ts
-<Badge status="system" label="Черновик" /> /* Документ ещё не готов */
-<Badge status="normal" label="Новый" /> /* Документ готов, отправьте на проверку */
-<Badge status="warning" label="На проверке" /> /* Подождите, документ проверяется */
-<Badge status="alert" label="Есть ошибки" /> /* Исправьте ошибки в документе */
-<Badge status="success" label="Готов" /> /* Всё получилось, документ проверен  */
-```
-
-<BadgeExampleStatus />
-
-### Бейджик без текста
-
-Если статусы очевидны и хорошо определяются по цвету (или просто нет места), можно сделать бейджик маленьким и круглым, без надписи — с помощью свойства `minified`.
-
-Например, если вы строите пешеходный переход, достаточно двух статусов — `success` и `alert`.
-
-```ts
-<Badge minified status="alert" label="Стойте" />
-<Badge minified status="success" label="Идите" />
-```
-
-<BadgeExampleMinified />
-
-### Бейджик с иконкой
-
-На бейджике, слева и справа от надписи, можно поставить любую иконку из нашей[библиотеки иконок](##LIBS.LIB/lib:icons). За иконки отвечают свойства `iconLeft`, `iconRight` за левую и правую часть соответственно.
-
-<MdxInformer status="warning">
-
-С версии 4.17.2 свойство `icon` помечено как `deprecated`.
-
-</MdxInformer>
-
-```ts
-<Badge iconLeft={IconCheck} status="success" label="Съедобно" />
-<Badge iconRight={IconClose} status="alert" label="Отрава" />
-```
-
-<BadgeExampleIcon />
-
-## Внешний вид
-
-### Типы бейджиков
-
-В дизайн-системе два типа бейджиков, за них отвечает свойство `view`. Возможные значения:
-
-- `filled` — основной тип. Используйте его, если статус нужно сделать очень заметным.
-- `stroked` — второстепенный, такой бейдж не будет так сильно бросаться в глаза.
-
-```ts
-<Badge view="filled" label="Filled badge" />
-<Badge view="stroked" label="Stroked badge" />
-```
-
-<BadgeExampleView />
-
-### Размер
-
-За размер бейджиков отвечает свойство `size`.
-
-```ts
-<Badge size="s" label="Badge S" />
-<Badge size="m" label="Badge M" />
-<Badge size="l" label="Badge L" />
-```
-
-<BadgeExampleSize />
-
-### Форма
-
-За форму бейджиков отвечает свойство `form`.
-
-```ts
-<Badge form="default" label="Default badge" />
-<Badge form="round" label="Round badge" />
-```
-
-<BadgeExampleForm />
+- Отображение статуса документа (например, "новый", "ошибка").
+- Индикация состояния процесса (например, "в процессе", "завершено").
 
 ## Импорт
 
@@ -131,24 +40,223 @@ import { Badge } from '@consta/uikit/Badge';
 
 ## Свойства
 
-| Свойство                           | Тип                                                     | По умолчанию | Описание                                                         |
-| ---------------------------------- | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------- |
-| [`size?`](#размер)                 | `'s' , 'm' , 'l'`                                       | `'m'`        | Размер                                                           |
-| [`view?`](#типы-бейджиков)         | `'filled' , 'stroked'`                                  | `'filled'`   | Вид                                                              |
-| [`status?`](#статус-и-содержимое)  | `'success' , 'alert' , 'warning' , 'normal' , 'system'` | `'normal'`   | Статус                                                           |
-| [`form?`](#форма)                  | `'default' , 'round'`                                   | `'default'`  | Форма                                                            |
-| [`minified?`](#типы-бейджиков)     | `boolean`                                               | -            | Отвечает за отрисовку бейджика без надписи, в виде точки         |
-| [`iconLeft?`](#бейджик-с-иконкой)  | `IconComponent`                                         | -            | Добавляет иконку слева                                           |
-| [`iconRight?`](#бейджик-с-иконкой) | `IconComponent`                                         | -            | Добавляет иконку справа                                          |
-| [`label?`](#бейджик-с-текстом)     | `string`                                                | -            | Текст на бейджике                                                |
-| `as?`                              | `keyof JSX.IntrinsicElements`                           | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
-| `className?`                       | `string`                                                | -            | Дополнительный CSS-класс (mix)                                   |
-| `ref?`                             | `React.Ref<HTMLElement>`                                | -            | Ссылка на корневой DOM-элемент компонента                        |
+```tsx
+type BadgePropStatus = 'success' | 'alert' | 'warning' | 'normal' | 'system';
+type BadgePropView = 'filled' | 'stroked';
+type BadgePropSize = 's' | 'm' | 'l';
+type BadgePropForm = 'default' | 'round';
+```
 
-## Пример
+| Свойство                           | Тип                                                         | По умолчанию | Описание                                   |
+| ---------------------------------- | ----------------------------------------------------------- | ------------ | ------------------------------------------ |
+| [`size?`](#размер)                 | `'s' \| 'm' \| 'l'`                                         | `'m'`        | Размер бейджика                            |
+| [`view?`](#типы-бейджиков)         | `'filled' \| 'stroked'`                                     | `'filled'`   | Тип бейджика (заполненный или с обводкой)  |
+| [`status?`](#статус)               | `'success' \| 'alert' \| 'warning' \| 'normal' \| 'system'` | `'normal'`   | Статус бейджика                            |
+| [`form?`](#форма)                  | `'default' \| 'round'`                                      | `'default'`  | Форма бейджика                             |
+| [`minified?`](#бейджик-без-текста) | `boolean`                                                   | -            | Отображает бейджик без текста в виде точки |
+| [`iconLeft?`](#бейджик-с-иконкой)  | `IconComponent`                                             | -            | Иконка слева от текста                     |
+| [`iconRight?`](#бейджик-с-иконкой) | `IconComponent`                                             | -            | Иконка справа от текста                    |
+| [`label?`](#бейджик-с-текстом)     | `string`                                                    | -            | Текст на бейджике                          |
+| `as?`                              | `keyof JSX.IntrinsicElements`                               | `'div'`      | HTML-тег для рендера компонента            |
+| `className?`                       | `string`                                                    | -            | Дополнительный CSS-класс                   |
+| `ref?`                             | `React.Ref<HTMLElement>`                                    | -            | Ссылка на корневой DOM-элемент             |
 
-```ts
-// src/App.ts
+## Размер
+
+Свойство `size` задаёт размер бейджика. Возможные значения: `s`, `m` (по умолчанию), `l`.
+
+<MdxTabs>
+
+<BadgeExampleSize />
+
+```tsx
+import React from 'react';
+import { Badge } from '@consta/uikit/Badge';
+
+const BadgeExampleSize = () => {
+  return (
+    <>
+      <Badge size="s" label="Badge S" />
+      <Badge size="m" label="Badge M" />
+      <Badge size="l" label="Badge L" />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Типы бейджиков
+
+Свойство `view` определяет стиль бейджика:
+
+- `filled` — заполненный фон, для акцента на статусе.
+- `stroked` — с обводкой, менее заметный.
+
+<MdxTabs>
+
+<BadgeExampleView />
+
+```tsx
+import React from 'react';
+import { Badge } from '@consta/uikit/Badge';
+
+const BadgeExampleView = () => {
+  return (
+    <>
+      <Badge view="filled" label="Filled badge" />
+      <Badge view="stroked" label="Stroked badge" />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Статус
+
+Свойство `status` определяет состояние бейджика и его цветовую индикацию. Возможные значения:
+
+- `normal` — нейтральный статус (по умолчанию).
+- `success` — успешное завершение.
+- `alert` — ошибка или проблема.
+- `warning` — предупреждение, требующее внимания.
+- `system` — системное сообщение.
+
+<MdxTabs>
+
+<BadgeExampleStatus />
+
+```tsx
+import React from 'react';
+import { Badge } from '@consta/uikit/Badge';
+
+const BadgeExampleStatus = () => {
+  return (
+    <>
+      <Badge status="system" label="Черновик" />
+      <Badge status="normal" label="Новый" />
+      <Badge status="warning" label="На проверке" />
+      <Badge status="alert" label="Есть ошибки" />
+      <Badge status="success" label="Готов" />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Форма
+
+Свойство `form` определяет форму бейджика: `default` (прямоугольная, по умолчанию) или `round` (скруглённая).
+
+<MdxTabs>
+
+<BadgeExampleForm />
+
+```tsx
+import React from 'react';
+import { Badge } from '@consta/uikit/Badge';
+
+const BadgeExampleForm = () => {
+  return (
+    <>
+      <Badge form="default" label="Default badge" />
+      <Badge form="round" label="Round badge" />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Бейджик без текста
+
+Свойство `minified` позволяет отображать бейджик в виде компактной точки без текста, полагаясь на цвет для индикации статуса.
+
+<MdxTabs>
+
+<BadgeExampleMinified />
+
+```tsx
+import React from 'react';
+import { Badge } from '@consta/uikit/Badge';
+
+const BadgeExample = () => {
+  return (
+    <>
+      <Badge minified="true" status="alert" label="Стойте" />
+      <Badge minified="true" status="success" label="Идите" />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Бейджик с иконкой
+
+Свойства `iconLeft` и `iconRight` добавляют иконки слева или справа от текста. Используются для усиления визуального контекста. Иконки берутся из [библиотеки иконок Consta](##LIBS.LIB/lib:icons).
+
+<MdxInformer status="warning">
+
+С версии 4.17.2 свойство `icon` помечено как `deprecated`. Используйте `iconLeft` или `iconRight`.
+
+</MdxInformer>
+
+<MdxTabs>
+
+<BadgeExampleIcon />
+
+```tsx
+import React from 'react';
+import { Badge } from '@consta/uikit/Badge';
+import { IconCheck } from '@consta/uikit/IconCheck';
+import { IconClose } from '@consta/uikit/IconClose';
+
+const BadgeExampleIcon = () => {
+  return (
+    <>
+      <Badge iconLeft={IconCheck} status="success" label="Съедобно" />
+      <Badge iconRight={IconClose} status="alert" label="Отрава" />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Бейджик с текстом
+
+Свойство `label` задаёт текст, который отображается на бейджике. Используется для описания статуса или дополнительной информации.
+
+<MdxTabs>
+
+<BadgeExampleStatus />
+
+```tsx
+import React from 'react';
+import { Badge } from '@consta/uikit/Badge';
+
+const BadgeExampleStatus = () => {
+  return (
+    <>
+      <Badge status="system" label="Черновик" />
+      <Badge status="normal" label="Новый" />
+      <Badge status="warning" label="На проверке" />
+      <Badge status="alert" label="Есть ошибки" />
+      <Badge status="success" label="Готовка" />
+    </>
+};
+```
+
+</MdxTabs>
+
+## Пример использования
+
+Пример демонстрирует базовое использование компонента `Badge` для отображения статуса.
+
+```tsx
 import React from 'react';
 import { Badge } from '@consta/uikit/Badge';
 
