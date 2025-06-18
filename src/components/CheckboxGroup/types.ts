@@ -86,4 +86,4 @@ export type CheckboxGroupProps<ITEM = CheckboxGroupDefaultItem> =
 
 export type CheckboxGroupComponent = <ITEM = CheckboxGroupDefaultItem>(
   props: CheckboxGroupProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

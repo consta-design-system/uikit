@@ -101,7 +101,7 @@ export type CollapseGroupComponent = <
   IS_ACCORDION extends boolean = false,
 >(
   props: CollapseGroupProps<ITEM, IS_ACCORDION>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type CollapseGroupRenderFunction = <
   ITEM,
@@ -109,7 +109,7 @@ export type CollapseGroupRenderFunction = <
 >(
   props: CollapseGroupProps<ITEM, IS_ACCORDION>,
   ref: React.Ref<HTMLDivElement>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export function withDefaultGetters<ITEM, IS_ACCORDION extends boolean>(
   props: CollapseGroupProps<ITEM, IS_ACCORDION>,

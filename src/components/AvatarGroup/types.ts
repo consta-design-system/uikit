@@ -41,4 +41,4 @@ export type AvatarGroupProps<ITEM = AvatarGroupDefaultItem> =
 
 export type AvatarGroupComponent = <ITEM = AvatarGroupDefaultItem>(
   props: AvatarGroupProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

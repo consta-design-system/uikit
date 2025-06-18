@@ -52,10 +52,10 @@ type PropValue<ITEM, MULTIPLE extends boolean> =
 
 export type PropRenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 export type PropRenderValue<ITEM> = (
   props: RenderValueProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type UserSelectProps<
   ITEM = DefaultItem,
@@ -126,7 +126,7 @@ export type UserSelectComponent = <
   MULTIPLE extends boolean = false,
 >(
   props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export const defaultGetItemKey: PropGetItemKey<DefaultItem> = (item) => item.id;
 export const defaultGetItemLabel: PropGetItemLabel<DefaultItem> = (item) =>

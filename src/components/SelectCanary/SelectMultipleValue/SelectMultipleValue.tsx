@@ -27,7 +27,7 @@ export type SelectMultipleValueComponent = <
   GROUP = SelectGroupDefault,
 >(
   props: SelectMultipleValueProps<ITEM, GROUP>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export const SelectMultipleValueRender = <
   ITEM = SelectItemDefault,

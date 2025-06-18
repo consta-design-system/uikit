@@ -41,6 +41,7 @@ export type SwitchProps = PropsWithHTMLAttributes<
     tabIndex?: number;
     inputRef?: React.Ref<HTMLInputElement>;
     children?: never;
+    inputId?: string;
   },
   HTMLLabelElement
 >;

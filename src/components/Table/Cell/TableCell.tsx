@@ -47,7 +47,7 @@ type Props<T extends TableRow> = {
 
 type TableCell = <T extends TableRow>(
   props: Props<T>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 const getCellClasses = <T extends TableRow>(props: Props<T>): string => {
   const { column, showVerticalShadow, className } = props;

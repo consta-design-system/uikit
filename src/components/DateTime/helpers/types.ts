@@ -83,11 +83,11 @@ export type DateTimeProps<TYPE extends DateTimePropType = 'date'> =
 
 export type DateTimeComponent = <TYPE extends DateTimePropType = 'date'>(
   props: DateTimeProps<TYPE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type DateTimeTypeComponent<TYPE extends DateTimePropType> = (
   props: Omit<DateTimeProps<TYPE>, 'type'>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type HandleSelectDate = (
   value: Date,

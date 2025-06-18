@@ -51,7 +51,7 @@ export class TableResizer extends React.Component<
     document.removeEventListener('mouseup', this.onMouseUp);
   };
 
-  render(): JSX.Element {
+  render(): React.ReactNode {
     return (
       <div
         className={cnTableResizer({

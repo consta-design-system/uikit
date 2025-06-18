@@ -57,7 +57,7 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
 
 type DatePickerDropdownComponent = (
   props: DatePickerDropdownProps,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 const moveMap: Record<DateTimePropType, MoveType> = {
   'year': 'year',

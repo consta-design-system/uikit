@@ -860,9 +860,7 @@ export type ListPropOnItemClick<ITEM> = (
   },
 ) => void;
 
-export type ListPropRenderItem<ITEM> = (
-  item: ITEM,
-) => React.ReactElement | null;
+export type ListPropRenderItem<ITEM> = (item: ITEM) => React.ReactNode | null;
 
 // ITEMS
 

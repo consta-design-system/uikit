@@ -1,0 +1,61 @@
+import { render, RenderResult, screen } from '@testing-library/react';
+import React from 'react';
+
+import { createIconMock } from '##/../__mocks__/IconMock';
+
+import {
+  BookmarkTabs,
+  BookmarkTabsItemDefault,
+  BookmarkTabsProps,
+  cnBookmarkTabs,
+} from '..';
+
+type Render = <ITEM = BookmarkTabsItemDefault>(
+  props: BookmarkTabsProps<ITEM>,
+) => RenderResult;
+
+const testId = cnBookmarkTabs();
+
+const iconLeftText = 'IconLeftMock';
+const iconRightText = 'IconRightMock';
+const leftIcon = createIconMock(iconLeftText);
+const rightIcon = createIconMock(iconRightText);
+
+const itemsDefault: BookmarkTabsItemDefault[] = [
+  {
+    key: 1,
+    label: 'Tab 1',
+  },
+  {
+    key: 2,
+    label: 'Tab 2',
+    leftIcon,
+    rightIcon,
+  },
+  {
+    key: 3,
+    label: 'Tab 3',
+    rightIcon,
+  },
+  {
+    key: 4,
+    label: 'Tab 4',
+    leftIcon,
+  },
+  {
+    key: 4,
+    label: 'Tab 4',
+    leftIcon,
+  },
+];
+
+const renderComponent: Render = (props) =>
+  render(<BookmarkTabs {...props} data-testid={testId} />);
+
+describe('Компонент BookmarkTabs', () => {
+  it('должен рендериться без ошибок', () => {
+    expect(renderComponent).not.toThrow();
+  });
+
+  describe('Проверка items', () => {});
+});

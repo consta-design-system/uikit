@@ -25,7 +25,7 @@ type SelectRenderItemProps<ITEM> = {
 
 type SelectRenderItemComponent = <ITEM>(
   props: SelectRenderItemProps<ITEM>,
-) => JSX.Element;
+) => React.ReactNode;
 
 export const SelectRenderItem: SelectRenderItemComponent = (props) => {
   const {

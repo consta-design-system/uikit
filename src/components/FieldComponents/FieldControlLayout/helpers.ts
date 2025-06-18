@@ -13,7 +13,7 @@ import {
 } from './maps';
 
 export const getSlots = (
-  side: React.ReactNode | JSX.Element[],
+  side: React.ReactNode | React.ReactNode[],
 ): React.ReactNode[] => {
   return ((Array.isArray(side) ? side : [side]) as []).filter(
     (item) => isNotNil(item) && item !== false,

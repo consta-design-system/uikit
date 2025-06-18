@@ -103,7 +103,7 @@ export type PaginationProps<TYPE extends PaginationPropType> =
 
 export type PaginationComponent = <TYPE extends PaginationPropType>(
   props: PaginationProps<TYPE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type PaginationBaseItemDefault = {
   key: string | number;
@@ -174,7 +174,7 @@ export type PaginationItemProps<AS extends AsTags = 'button'> =
 
 export type PaginationItemComponent = <AS extends AsTags = 'button'>(
   props: PaginationItemProps<AS>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type PaginationNumberInputProps = PropsWithHTMLAttributes<
   {
@@ -202,4 +202,4 @@ export type PaginationListProps<ITEM> = PropsWithHTMLAttributesAndRef<
 
 export type PaginationListComponent = <ITEM extends PaginationBaseItemDefault>(
   props: PaginationListProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

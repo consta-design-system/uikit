@@ -52,6 +52,61 @@ import { BookmarkTabs } from '@consta/uikit/BookmarkTabs';
 
 ## Свойства
 
+```tsx
+export type BookmarkTabsPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+export type BookmarkTabsPropGetItemLabel<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+export type BookmarkTabsPropGetItemLeftIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+export type BookmarkTabsPropGetItemRightIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+export type BookmarkTabsPropGetItemFixed<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+export type BookmarkTabsPropGetItemAs<ITEM> = (
+  item: ITEM,
+) => keyof JSX.IntrinsicElements | undefined;
+export type BookmarkTabsPropGetItemRef<ITEM> = (
+  item: ITEM,
+) => React.RefObject<HTMLElement> | undefined;
+export type BookmarkTabsPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements] | undefined;
+
+export type BookmarkTabsPropOnChange<ITEM> = (
+  value: ITEM,
+  params: {
+    e: React.MouseEvent;
+  },
+) => void;
+
+export type BookmarkTabsRenderItemProps<ITEM> = {
+  item: ITEM;
+  onClick: React.MouseEventHandler;
+  active?: boolean;
+  onClose?: React.MouseEventHandler;
+  size: BookmarkTabsPropSize;
+  form: BookmarkTabsPropForm;
+  view: BookmarkTabsPropView;
+  tabWidth?: string;
+  hovered?: boolean;
+  bordered?: boolean;
+  tabRef?: React.RefObject<HTMLElement>;
+} & Omit<BookmarkTabsItemDefault, 'key' | 'ref'>;
+
+export type BookmarkTabsPropRenderItem<ITEM> = (
+  props: BookmarkTabsRenderItemProps<ITEM>,
+) => React.ReactNode | null;
+
+export type BookmarkTabsPropOnRemove<ITEM> = (
+  item: ITEM,
+  params: { e: React.MouseEvent },
+) => void;
+```
+
 | Свойство                                 | Тип                                                                               | По умолчанию | Описание                                        |
 | ---------------------------------------- | --------------------------------------------------------------------------------- | ------------ | ----------------------------------------------- |
 | [`items`](#элементы-и-их-структура)      | `ITEM[]`                                                                          | -            | Массив элементов с данными для табов            |
@@ -608,7 +663,7 @@ export const BookmarkTabsExampleRenderItem = () => {
 
 <BookmarkTabsExampleAs />
 
-```tsx
+````tsx
 import React, { useState } from 'react';
 import { BookmarkTabs } from '@consta/uikit/BookmarkTabs';
 
@@ -631,7 +686,6 @@ export const BookmarkTabsExampleAs = () => {
     />
   );
 };
-```
 
 </MdxTabs>
 
@@ -657,4 +711,4 @@ export function App() {
     />
   );
 }
-```
+````

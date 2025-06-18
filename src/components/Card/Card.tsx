@@ -26,7 +26,7 @@ export type CardPropSpace = typeof cardPropSpace[number];
 export const cardPropStatus = ['alert', 'success', 'warning'] as const;
 export type CardPropStatus = typeof cardPropStatus[number] | string;
 
-export type Props = {
+export type CardProps = {
   verticalSpace?: CardPropSpace;
   horizontalSpace?: CardPropSpace;
   status?: CardPropStatus;
@@ -36,11 +36,13 @@ export type Props = {
   children?: React.ReactNode;
 };
 
+export type Props = CardProps;
+
 export const COMPONENT_NAME = 'Card' as const;
 
 export const cnCard = cn('Card');
 
-export const Card = forwardRefWithAs<Props>((props, ref) => {
+export const Card = forwardRefWithAs<CardProps>((props, ref) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const {

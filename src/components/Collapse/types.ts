@@ -112,4 +112,4 @@ export type CollapseProps = PropsWithHTMLAttributesAndRef<
 
 export type CollapseComponent = (
   props: CollapseProps,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

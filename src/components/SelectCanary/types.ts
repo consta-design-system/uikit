@@ -164,4 +164,4 @@ export type SelectComponent = <
   MULTIPLE extends boolean = false,
 >(
   props: SelectProps<ITEM, GROUP, MULTIPLE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;

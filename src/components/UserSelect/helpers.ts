@@ -65,10 +65,10 @@ type UserSelectPropValue<ITEM, MULTIPLE extends boolean> =
 
 export type UserSelectPropRenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 export type UserSelectPropRenderValue<ITEM> = (
   props: UserSelectRenderValueProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type UserSelectProps<
   ITEM = UserSelectItemDefault,
@@ -145,7 +145,7 @@ export type UserSelectComponent = <
   MULTIPLE extends boolean = false,
 >(
   props: UserSelectProps<ITEM, GROUP, MULTIPLE>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export const defaultGetItemKey: UserSelectPropGetItemKey<
   UserSelectItemDefault

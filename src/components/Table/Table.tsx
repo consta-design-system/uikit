@@ -233,7 +233,7 @@ export type TableProps<T extends TableRow> = {
 
 type Table = <T extends TableRow>(
   props: TableProps<T> & { ref?: React.Ref<HTMLDivElement> },
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type ColumnMetaData = {
   filterable: boolean;

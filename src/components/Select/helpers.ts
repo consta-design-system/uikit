@@ -40,10 +40,10 @@ export type SelectPropGetGroupKey<GROUP> = (group: GROUP) => string | number;
 export type SelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
 export type PropRenderItem<ITEM> = (
   props: RenderItemProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 export type PropRenderValue<ITEM> = (
   props: SelectRenderValueProps<ITEM>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export type SelectPropOnChange<ITEM> = (
   value: ITEM | null,
@@ -115,7 +115,7 @@ export type SelectComponent = <
   GROUP = SelectGroupDefault,
 >(
   props: SelectProps<ITEM, GROUP>,
-) => React.ReactElement | null;
+) => React.ReactNode | null;
 
 export const defaultGetItemKey: SelectPropGetItemKey<SelectItemDefault> = (
   item,
