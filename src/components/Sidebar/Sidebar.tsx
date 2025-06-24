@@ -5,10 +5,9 @@ import { Transition } from 'react-transition-group';
 
 import {
   PortalWithTheme,
-  usePortalContext,
+  PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
 import { useTheme } from '##/components/Theme/Theme';
-import { useClickOutside } from '##/hooks/useClickOutside';
 import { useGlobalKeys } from '##/hooks/useGlobalKeys';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
@@ -86,25 +85,6 @@ const SidebarActions: React.FC<SidebarActionsProps> = ({
     {children}
   </div>
 );
-
-const ContextConsumer: React.FC<{
-  onClickOutside?: (event: MouseEvent) => void;
-  ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
-  children: React.ReactNode;
-}> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
-  const { refs } = usePortalContext();
-
-  useClickOutside({
-    isActive: !!onClickOutside,
-    ignoreClicksInsideRefs: [
-      ...(ignoreClicksInsideRefs || []),
-      ...(refs || []),
-    ],
-    handler: onClickOutside,
-  });
-
-  return children as React.ReactNode;
-};
 
 interface SidebarComponent
   extends React.FC<SidebarProps>,
@@ -187,12 +167,12 @@ export const Sidebar: SidebarComponent = (props) => {
             ])}
             ref={ref}
           >
-            <ContextConsumer
+            <PortalWithThemeConsumer
               onClickOutside={onClickOutside}
               ignoreClicksInsideRefs={[ref]}
             >
               {children}
-            </ContextConsumer>
+            </PortalWithThemeConsumer>
           </div>
         </PortalWithTheme>
       )}

@@ -5,10 +5,9 @@ import { Transition } from 'react-transition-group';
 
 import {
   PortalWithTheme,
-  usePortalContext,
+  PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
 import { useTheme } from '##/components/Theme/Theme';
-import { useClickOutside } from '##/hooks/useClickOutside';
 import { useGlobalKeys } from '##/hooks/useGlobalKeys';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
@@ -45,30 +44,6 @@ type ModalProps = PropsWithHTMLAttributes<
 >;
 
 const cnModal = cn('Modal');
-
-/**
- * Подписчик на PortalWithThemeProvider
- * получает рефы всех вложенных порталов во всплывающем окне
- * для дальнейшего исключения их из useClickOutside
- */
-const ContextConsumer: React.FC<{
-  onClickOutside?: (event: MouseEvent) => void;
-  ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
-  children: React.ReactNode;
-}> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
-  const { refs } = usePortalContext();
-
-  useClickOutside({
-    isActive: !!onClickOutside,
-    ignoreClicksInsideRefs: [
-      ...(ignoreClicksInsideRefs || []),
-      ...(refs || []),
-    ],
-    handler: onClickOutside,
-  });
-
-  return children as React.ReactNode;
-};
 
 export const Modal: React.FC<ModalProps> = (props) => {
   const {
@@ -146,7 +121,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
             ])}
             ref={ref}
           >
-            <ContextConsumer
+            <PortalWithThemeConsumer
               onClickOutside={onClickOutside || onOverlayClick}
               ignoreClicksInsideRefs={[
                 ...(refsForExcludeClickOutside || []),
@@ -154,7 +129,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
               ]}
             >
               {children}
-            </ContextConsumer>
+            </PortalWithThemeConsumer>
           </div>
         </PortalWithTheme>
       )}
