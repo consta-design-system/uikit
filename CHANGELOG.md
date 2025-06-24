@@ -1,11 +1,12 @@
 # Changelog
 
+## v5.23.0 (24/06/2025)
+- [feat(PortalWithTheme): added type React.RefObject<HTMLElement> for container (#3973)](https://github.com/consta-design-system/uikit/commit/e5ec16b06484ccf7476ab40182154044a2fb55a7) - [@gizeasy](https://github.com/gizeasy)
+- [docs: implementation of editorial policy (#3970)](https://github.com/consta-design-system/uikit/commit/a19f26a685d30171100812a6c0dfd07f04f8a902) - [@alyonurchick1](https://github.com/alyonurchick1)
+
+--------------------
+
 ## v5.22.0 (10/06/2025)
-Самое важное:
-- Актуализировали тесты для `BookmarkTabs`, `Switch`, `Radio`, `Checkbox`, `Card` и `Button`
-
----
-
 - [feat: update react types (#3969)](https://github.com/consta-design-system/uikit/commit/945799c00045d8c3355260bb93288912ea99396a) - [@gizeasy](https://github.com/gizeasy)
 - [fix(BookmarkTabs): fixed style (#3952)](https://github.com/consta-design-system/uikit/commit/478be7023786079f611e5f4fe4c7b11cd0d5a225) - [@gizeasy](https://github.com/gizeasy)
 - [test(Switch): update tests (#3967)](https://github.com/consta-design-system/uikit/commit/e8e2774dcaf304f80d6fade8ec04080c9e7da48f) - [@gizeasy](https://github.com/gizeasy)
@@ -366,40 +367,3 @@
 
 ## v5.0.1 (09/01/2024)
 - [fix(Selects): fixed classNames (#3425)](https://github.com/consta-design-system/uikit/commit/b562ca25a6fce40a25b9fcc7bf9b7a819ced6b80) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.0.0 (19/12/2023)
-Новая мажорная версия.
-
-- Сторонние зависимости перенесены в `peerDependencies`. Установить их вы сможете самостоятельно, полный список доступен [здесь](https://github.com/consta-design-system/uikit/blob/master/package.json) 
-- В `Switch` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте или используйте `SwitchDeprecated`
-- В `SwitchGroup` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
-- Компонент `SwitchGroupDeprecated` удален, используйте `SwitchGroup`
-- `TabsDeprecated `удален, используйте `Tabs`
-- В `Tabs` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
-- В `Text` сброшены свойства по умолчанию. Включите необходимые свойства в проекте или используйте компонент `TextDeprecated`
-- `TextField` изменено взаимодействие с маской. Примеры использования можно найти в документации
-- В `TextField` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
-- В `ThemeToggler` изменены аргументы свойства `onChange`, измените реализацию подключения в проекте
-- Компонент `Tooltip` был помечен на удаление и перенесен в `TooltipDeprecated`
-- Компонент `TooltipCanary` помечен как стабильный и перемещен в `Tooltip`
-- Компонент `UserSelect` был помечен на удаление и перенесен в `UserSelectDeprecated`
-- Компонент `UserSelectCanary` помечен как стабильный и перемещен в `UserSelect`
-- `useBreakpoints` помечен на удаление и перенесен в `useBreakpointsDeprecated`
-- `useComponentBreakpoints` помечен на удаление и перенесен в  `useComponentBreakpointsDepricated`
-- Добавлен новый компонент `useBreakpoints`, который объединяет возможности старых `useBreakpoints` и `useComponentBreakpoints`
-- В `useChoiceGroup` изменились аргументы свойства `callBack`, измените реализацию подключения в проекте
-- В `useChoiceGroupIndexed` изменились аргументы свойства `callBack`, измените реализацию подключения в проекте
-- `useHideElementsInLine` помечен на удаление и перенесен в  `useHideElementsInLineDepricated`
-- `useHideElementsInLineCanary` помечен как стабильный и перенесен в `useHideElementsInLine`
-- `useResizableContentCanary` помечен как стабильный и перенесен в  `useResizableContent`
-- `useThemeVars` удален, используйте `useStyleProps`
--  `useVirtualScrollCanary` помечен как стабильный и перенесен в  `useVirtualScroll`
-
----
-
-- [feat(v5): update code](https://github.com/consta-design-system/uikit/commit/e196dd77e5c51f82f416a5ba0c70aa669b81607c) - [@gizeasy](https://github.com/gizeasy)
-- [chore(.eslintrc): edit config](https://github.com/consta-design-system/uikit/commit/0de44c0890788e60193bec80291073dc531020b8) - [@gizeasy](https://github.com/gizeasy)
-- [fix: typo (#3404)](https://github.com/consta-design-system/uikit/commit/034d608211aa16216db2f3b56b54f411037281d2) - [@nevsky118](https://github.com/nevsky118)
-- [Docs: fix typos (#3399)](https://github.com/consta-design-system/uikit/commit/ba7f1d6368c411f95a8d5c138861209e66a1bdba) - [@vindi-r](https://github.com/vindi-r)
