@@ -4,10 +4,10 @@ import React, { forwardRef, useEffect, useLayoutEffect, useMemo } from 'react';
 
 import {
   PortalWithTheme,
-  usePortalContext,
+  PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
 import { useTheme } from '##/components/Theme/Theme';
-import { ClickOutsideHandler, useClickOutside } from '##/hooks/useClickOutside';
+import { ClickOutsideHandler } from '##/hooks/useClickOutside';
 import { useComponentSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
 import { cn } from '##/utils/bem';
@@ -149,30 +149,6 @@ const getOffset = (
   }
 
   return 0;
-};
-
-/**
- * Подписчик на PortalWithThemeProvider
- * получает рефы всех вложенных порталов во всплывающем окне
- * для дальнейшего исключения их из useClickOutside
- */
-const ContextConsumer: React.FC<{
-  onClickOutside?: (event: MouseEvent) => void;
-  ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
-  children: React.ReactNode;
-}> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
-  const { refs } = usePortalContext();
-
-  useClickOutside({
-    isActive: !!onClickOutside,
-    ignoreClicksInsideRefs: [
-      ...(ignoreClicksInsideRefs || []),
-      ...(refs || []),
-    ],
-    handler: onClickOutside,
-  });
-
-  return children as React.ReactNode;
 };
 
 const cnPopover = cn('Popover');
@@ -329,12 +305,12 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               }),
         }}
       >
-        <ContextConsumer
+        <PortalWithThemeConsumer
           onClickOutside={onClickOutside}
           ignoreClicksInsideRefs={[ref, anchorRef || { current: null }]}
         >
           {isRenderProp(children) ? children(direction) : children}
-        </ContextConsumer>
+        </PortalWithThemeConsumer>
       </PortalWithTheme>
     );
   },
