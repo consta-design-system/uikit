@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 import { BadgeGroupExampleSize } from './examples/BadgeGroupExampleSize/BadgeGroupExampleSize';
 import { BadgeGroupExampleForm } from './examples/BadgeGroupExampleForm/BadgeGroupExampleForm';
 import { BadgeGroupExampleItems } from './examples/BadgeGroupExampleItems/BadgeGroupExampleItems';
@@ -7,133 +7,24 @@ import {
   BadgeGroupExampleFitModeReduction,
 } from './examples/BadgeGroupExampleFitMode/BadgeGroupExampleFitMode';
 
-```tsx
-import { Badge } from '@consta/uikit/Badge';
-```
-
 <MdxMenu>
 
-- [Бейджики](#бейджики)
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Бейджики](#бейджики)
 - [Внешний вид](#внешний-вид)
   - [Размер](#размер)
   - [Форма](#форма)
 - [Адаптивность](#адаптивность)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
+- [Пример использования](#пример-использования)
 
 </MdxMenu>
 
-## Бейджики
+## Обзор
 
-Список бейджиков можно передать в поле `items` в объекте типа [BadgeGroupDefaultItem](#свойства). Что можно указать:
-
-- ключ — в поле `key` или с помощью функции `getItemKey`,
-- лейбл — в поле `label` или с помощью функции `getItemLabel`,
-- статус — в поле `status` или с помощью функции `getItemStatus`,
-- внешний вид — в поле `view` или с помощью функции `getItemView`,
-- иконка справа — в поле `iconRight` или с помощью функции `getItemIconRight`,
-- иконка слева — в поле `iconLeft` или с помощью функции `getItemIconLeft`,
-- HTML-тег — в поле `as` или с помощью функции `getItemAs`,
-- дополнительные атрибуты — в поле `attributes` или с помощью функции `getItemAttributes`,
-
-```tsx
-import React from 'react';
-
-import { BadgePropStatus, BadgePropView } from '@consta/uikit/Badge';
-import { BadgeGroup } from '@consta/uikit/BadgeGroup';
-
-type Item = {
-  text: string;
-  color: BadgePropStatus;
-  form?: BadgePropView;
-};
-
-const items: Item[] = [
-  {
-    text: 'Согласован',
-    color: 'success',
-  },
-  {
-    text: 'ожидает',
-    color: 'alert',
-  },
-  {
-    text: 'новый',
-    form: 'stroked',
-    color: 'normal',
-  },
-  {
-    text: 'черновик',
-    color: 'system',
-  },
-  {
-    text: 'отказано',
-    form: 'stroked',
-    color: 'error',
-  },
-];
-
-const getItemLabel = (item: Item) => item.text;
-const getItemView = (item: Item) => item.form;
-const getItemStatus = (item: Item) => item.color;
-
-export const BadgeGroupExampleItems = () => {
-  return (
-    <BadgeGroup
-      items={[...items]}
-      getItemKey={getItemLabel}
-      getItemLabel={getItemLabel}
-      getItemView={getItemView}
-      getItemStatus={getItemStatus}
-    />
-  );
-};
-```
-
-<BadgeGroupExampleItems />
-
-## Внешний вид
-
-### Размер
-
-За размер бейджиков отвечает свойство `size`.
-
-```ts
-<BadgeGroup size="s" items={items} />
-<BadgeGroup size="s" items={items}/>
-<BadgeGroup size="m" items={items} />
-<BadgeGroup size="l" items={items} />
-```
-
-<BadgeGroupExampleSize />
-
-### Форма
-
-За форму бейджиков отвечает свойство `form`.
-
-```ts
-<BadgeGroup form="default" items={items} />
-<BadgeGroup form="round" items={items} />
-```
-
-<BadgeGroupExampleForm />
-
-## Адаптивность
-
-Если все бейджи не могут разместиться в контейнер, та часть что не помещается будет скрываться и будет появляться новый бейджик, отображающий количество скрытых элементов.
-Это поведение можно настроить с помощью `fitMode`.
-
-## Сокращение
-
-Чтобы использовать сокращение элементов в контейнере используйте `fitMode="reduction"` (работает по умолчанию).
-
-<BadgeGroupExampleFitModeReduction />
-
-## Перенос
-
-Чтобы использовать перенос в контейнере используйте `fitMode="wrap"`.
-
-<BadgeGroupExampleFitModeWrap />
+Компонент `BadgeGroup` предназначен для отображения группы бейджиков, каждый из которых может содержать текст, иконки, статус и другие параметры. Поддерживает настройку размера, формы и адаптивного поведения при нехватке места в контейнере. Используется для отображения списков статусов, тегов или других элементов с визуальной дифференциацией.
 
 ## Импорт
 
@@ -143,37 +34,167 @@ import { BadgeGroup } from '@consta/uikit/BadgeGroup';
 
 ## Свойства
 
+| Свойство                    | Тип                                                                               | По умолчанию | Описание                                                               |
+| --------------------------- | --------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------- |
+| [`items?`](#бейджики)       | `ITEM[]`                                                                          | -            | Список бейджиков                                                       |
+| [`size?`](#размер)          | `'s' \| 'm' \| 'l'`                                                               | `'m'`        | Размер бейджиков                                                       |
+| [`form?`](#форма)           | `'default' \| 'round'`                                                            | `'default'`  | Форма бейджиков                                                        |
+| [`fitMode?`](#адаптивность) | `'reduction' \| 'wrap'`                                                           | `'wrap'`     | Способ сворачивания бейджей при нехватке места: сокращение или перенос |
+| `minified?`                 | `boolean`                                                                         | -            | Отрисовка бейджика без надписи, в виде точки                           |
+| `getItemKey?`               | `(item: ITEM) => string \| number`                                                | -            | Функция для получения ключа бейджика                                   |
+| `getItemLabel?`             | `(item: ITEM) => string \| undefined`                                             | -            | Функция для получения лейбла бейджика                                  |
+| `getItemIconLeft?`          | `(item: ITEM) => IconComponent \| undefined`                                      | -            | Функция для получения иконки слева                                     |
+| `getItemIconRight?`         | `(item: ITEM) => IconComponent \| undefined`                                      | -            | Функция для получения иконки справа                                    |
+| `getItemStatus?`            | `(item: ITEM) => BadgePropStatus \| undefined`                                    | -            | Функция для получения статуса бейджика                                 |
+| `getItemView?`              | `(item: ITEM) => BadgePropView \| undefined`                                      | -            | Функция для получения внешнего вида бейджика                           |
+| `getItemAs?`                | `(item: ITEM) => keyof JSX.IntrinsicElements \| undefined`                        | -            | Функция для получения HTML-тега бейджика                               |
+| `getItemAttributes?`        | `(item: ITEM) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements] \| undefined` | -            | Функция для получения HTML-атрибутов бейджика                          |
+| `getItemRef?`               | `(item: ITEM) => React.RefObject<HTMLElement> \| undefined`                       | -            | Функция для получения ссылки на DOM-элемент бейджика                   |
+| `moreRef?`                  | `React.RefObject<HTMLDivElement>`                                                 | -            | Ссылка на бейдж со скрытыми элементами                                 |
+| `moreAttributes?`           | `React.HTMLAttributes<HTMLDivElement>`                                            | -            | Атрибуты для бейджика со скрытыми элементами                           |
+| `className?`                | `string`                                                                          | -            | Дополнительный CSS-класс (mix)                                         |
+| `ref?`                      | `React.PrincipalRef<HTMLElement>`                                                 | -            | Ссылка на корневой DOM-элемент компонента                              |
+
+## Содержимое
+
+### Бейджики
+
+Список бейджиков задаётся через свойство `items`, которое принимает массив объектов типа `BadgeGroupDefaultItem`. Каждому объекту можно указать:
+
+- `key` — уникальный ключ или функция `getItemKey` для его получения.
+- `label` — текст бейджика или функция `getItemLabel`.
+- `status` — статус бейджика (например, `success`, `alert`) или функция `getItemStatus`.
+- `view` — внешний вид (например, `stroked`) или функция `getItemView`.
+- `iconLeft` — иконка слева или функция `getItemIconLeft`.
+- `iconRight` — иконка справа или функция `getItemIconRight`.
+- `as` — HTML-тег или функция `getItemAs`.
+- `attributes` — дополнительные HTML-атрибуты или функция `getItemAttributes`.
+
+Пример:
+
+<MdxTabs>
+
+<BadgeGroupExampleItems />
+
 ```tsx
-export type BadgeGroupDefaultItem = {
-  key: string | number;
-  status?: BadgePropStatus;
-  view?: BadgePropView;
-  label?: string;
-  iconLeft?: IconComponent;
-  iconRight?: IconComponent;
-  as?: keyof JSX.IntrinsicElements;
-  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
-  ref?: React.RefObject<HTMLElement>;
+<>
+  <BadgeGroup
+    items={[
+      { text: 'Согласован', color: 'success' },
+      { text: 'Ожидает', color: 'alert' },
+      { text: 'Новый', form: 'stroked', color: 'normal' },
+      { text: 'Черновик', color: 'system' },
+      { text: 'Отказано', form: 'stroked', color: 'error' },
+    ]}
+    getItemKey={(item) => item.text}
+    getItemLabel={(item) => item.text}
+    getItemView={(item) => item.form}
+    getItemStatus={(item) => item.color}
+  />
+</>
+```
+
+</MdxTabs>
+
+## Внешний вид
+
+### Размер
+
+Свойство `size` определяет размер бейджиков в группе. Доступные значения: `'s'`, `'m'`, `'l'`.
+
+<MdxTabs>
+
+<BadgeGroupExampleSize />
+
+```tsx
+<>
+  <BadgeGroup size="s" items={items} />
+  <BadgeGroup size="m" items={items} />
+  <BadgeGroup size="l" items={items} />
+</>
+```
+
+</MdxTabs>
+
+### Форма
+
+Свойство `form` задаёт форму бейджиков. Доступные значения: `'default'` (прямоугольная с углами), `'round'` (скруглённая).
+
+<MdxTabs>
+
+<BadgeGroupExampleForm />
+
+```tsx
+<>
+  <BadgeGroup form="default" items={items} />
+  <BadgeGroup form="round" items={items} />
+</>
+```
+
+</MdxTabs>
+
+## Адаптивность
+
+Свойство `fitMode` определяет поведение бейджиков при нехватке места в контейнере:
+
+- `'reduction'` — скрывает часть бейджиков и показывает бейдж с количеством скрытых элементов.
+- `'wrap'` — переносит бейджики на новую строку.
+
+Пример для `fitMode="reduction"`:
+
+<MdxTabs>
+
+<BadgeGroupExampleFitModeReduction />
+
+```tsx
+<>
+  <BadgeGroup fitMode="reduction" items={items} />
+</>
+```
+
+</MdxTabs>
+
+Пример для `fitMode="wrap"`:
+
+<MdxTabs>
+
+<BadgeGroupExampleFitModeWrap />
+
+```tsx
+<>
+  <BadgeGroup fitMode="wrap" items={items} />
+</>
+```
+
+</MdxTabs>
+
+## Пример использования
+
+Базовый пример использования компонента `BadgeGroup`:
+
+```tsx
+import { BadgeGroup } from '@consta/uikit/BadgeGroup';
+
+const items = [
+  { text: 'Согласован', color: 'success' },
+  { text: 'Ожидает', color: 'alert' },
+  { text: 'Новый', form: 'stroked', color: 'normal' },
+];
+
+const App = () => {
+  return (
+    <BadgeGroup
+      items={items}
+      size="m"
+      form="default"
+      fitMode="wrap"
+      getItemKey={(item) => item.text}
+      getItemLabel={(item) => item.text}
+      getItemView={(item) => item.form}
+      getItemStatus={(item) => item.color}
+    />
+  );
 };
 ```
 
-| Свойство                    | Тип                                                                                                | По умолчанию | Описание                                                                |
-| --------------------------- | -------------------------------------------------------------------------------------------------- | ------------ | ----------------------------------------------------------------------- |
-| [`items?`](#бейджики)       | `ITEM[]`                                                                                           | -            | Список бейджиков                                                        |
-| [`size?`](#размер)          | `'s' , 'm' , 'l'`                                                                                  | `'m'`        | Размер                                                                  |
-| [`form?`](#форма)           | `'default' , 'round'`                                                                              | `'default'`  | Форма                                                                   |
-| [`fitMode?`](#адаптивность) | `'reduction', 'wrap'`                                                                              | `'wrap'`     | Способ сворачивания бейджей при нехватке места: сокращение или перенос. |
-| `minified?`                 | `boolean`                                                                                          | -            | Отвечает за отрисовку бейджика без надписи, в виде точки                |
-| `getItemKey?`               | `(item: ITEM) => string`<code>&#124;</code>`number`                                                | -            | Результат функции используется в качестве ключа                         |
-| `getItemLabel?`             | `(item: ITEM) => string`<code>&#124;</code>`undefined`                                             | -            | Результат функции используется в качестве лейбла                        |
-| `getItemIconLeft?`          | `(item: ITEM) => IconComponent`<code>&#124;</code>`undefined`                                      | -            | Результат функции используется в качестве иконки слева                  |
-| `getItemIconLeft?`          | `(item: ITEM) => IconComponent`<code>&#124;</code>`undefined`                                      | -            | Результат функции используется в качестве иконки справа                 |
-| `getItemStatus?`            | `(item: ITEM) => BadgePropStatus`<code>&#124;</code>`undefined`                                    | -            | Результат функции используется для статуса бейджика                     |
-| `getItemView?`              | `(item: ITEM) => BadgePropView`<code>&#124;</code>`undefined`                                      | -            | Результат функции используется внешнего вида бейджика                   |
-| `getItemAs?`                | `(item: ITEM) => keyof JSX.IntrinsicElements`<code>&#124;</code>`undefined`                        | -            | Результат функции используется в качестве HTML-тега бейджика            |
-| `getItemAttributes?`        | `(item: ITEM) => JSX.IntrinsicElements[keyof JSX.IntrinsicElements]`<code>&#124;</code>`undefined` | -            | Результат функции используется в HTML-атрибутов бейджика                |
-| `getItemRef?`               | `(item: ITEM) => React.RefObject<HTMLElement>`<code>&#124;</code>`undefined`                       | -            | Результат функции используется в HTML-атрибутов бейджика                |
-| `moreRef?`                  | `React.RefObject<HTMLDivElement>`                                                                  | -            | Ссылка на бейдж со скрытыми элементами                                  |
-| `moreAttributes?`           | `React.HTMLAttributes<HTMLDivElement>`                                                             | -            | Атрибуты для бейджика со скрытыми элементами                            |
-| `className?`                | `string`                                                                                           | -            | Дополнительный CSS-класс (mix)                                          |
-| `ref?`                      | `React.Ref<HTMLElement>`                                                                           | -            | Ссылка на корневой DOM-элемент компонента                               |
+Этот пример демонстрирует настройку группы бейджиков с текстом, статусами, размером и адаптивным поведением.
