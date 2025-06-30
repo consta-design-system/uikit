@@ -1,4 +1,4 @@
-import { MdxMenu, MdxInformer } from '@consta/stand';
+import { MdxMenu, MdxInformer, MdxTabs } from '@consta/stand';
 
 import {
   ButtonExampleFormBasic,
@@ -23,190 +23,269 @@ import {
   ButtonExampleViewDisabled,
 } from './examples/ButtonExampleView/ButtonExampleView';
 
-```tsx
-import { Button } from '@consta/uikit/Button';
-```
-
-<ButtonExample />
-
 <MdxMenu>
 
-- [Текст на кнопке](#текст-на-кнопке)
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Текст на кнопке](#текст-на-кнопке)
 - [Внешний вид](#внешний-вид)
   - [Типы кнопок](#типы-кнопок)
   - [Размер](#размер)
   - [Кнопка с иконкой](#кнопка-с-иконкой)
   - [Форма](#форма)
   - [Индикатор загрузки](#индикатор-загрузки)
+- [Поведение](#поведение)
 - [Адаптивность](#адаптивность)
-- [Импорт](#импорт)
-- [Список свойств](#список-свойств)
 - [Пример использования](#пример-использования)
 
 </MdxMenu>
 
-## Текст на кнопке
+## Обзор
 
-За текст на кнопке отвечает свойство `label`. [Посмотреть примеры текстов](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-button-stable/tab:use)
+Компонент `Button` — это универсальная кнопка для интерфейсов. Она поддерживает различные типы, размеры, формы и иконки, а также адаптивное поведение для удобного использования в разных сценариях.
+
+## Импорт
+
+```tsx
+import { Button } from '@consta/uikit/Button';
+```
+
+## Свойства
+
+| Свойство                         | Тип или варианты значения                                                                 | По умолчанию              | Описание                                      |
+| -------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------- | --------------------------------------------- |
+| [`label`](#текст-на-кнопке)      | `string`                                                                                  | -                         | Текст на кнопке                               |
+| [`view`](#типы-кнопок)           | `'clear', 'primary', 'secondary', 'ghost'`                                                | `primary`                 | Внешний вид кнопки                            |
+| [`size`](#размер)                | `'xs', 's', 'm', 'l'`                                                                     | `m`                       | Размер кнопки                                 |
+| [`width`](#размер)               | `'full', 'default'`                                                                       | `default`                 | Ширина кнопки                                 |
+| [`form`](#форма)                 | `'default', 'round', 'brick', 'brickRound', 'roundBrick', 'brickDefault', 'defaultBrick'` | `default`                 | Форма кнопки                                  |
+| [`iconLeft`](#кнопка-с-иконкой)  | `React.FC<IIcon>`                                                                         | -                         | Иконка слева от текста                        |
+| [`iconRight`](#кнопка-с-иконкой) | `React.FC<IIcon>`                                                                         | -                         | Иконка справа от текста                       |
+| [`onlyIcon`](#кнопка-с-иконкой)  | `boolean`                                                                                 | `false`                   | Отображение только иконки без текста          |
+| [`iconSize`](#кнопка-с-иконкой)  | `'xs', 's', 'm'`                                                                          | Зависит от размера кнопки | Размер иконки                                 |
+| [`loading`](#индикатор-загрузки) | `boolean`                                                                                 | `false`                   | Отображение индикатора загрузки               |
+| [`disabled`](#поведение)         | `boolean`                                                                                 | `false`                   | Блокировка кнопки                             |
+| [`onClick`](#поведение)          | `React.EventHandler<React.MouseEvent>`                                                    | -                         | Обработчик клика                              |
+| `title`                          | `string`                                                                                  | -                         | Всплывающая подсказка при наведении           |
+| `tabIndex`                       | `number`                                                                                  | -                         | Порядковый номер для навигации по клавише Tab |
+| `className`                      | `string`                                                                                  | -                         | Дополнительные CSS-классы                     |
+| `as`                             | `React.ElementType`                                                                       | `button`                  | HTML-тег для кнопки                           |
+| `innerRef`                       | `React.Ref<HTMLElement>`                                                                  | -                         | Ссылка на корневой DOM-элемент                |
+
+## Содержимое
+
+### Текст на кнопке
+
+Свойство `label` определяет текст, отображаемый на кнопке. Оно задаёт основное содержимое кнопки и помогает пользователю понять её назначение.
+
+<MdxTabs>
+
+<ButtonExample />
+
+```tsx
+<Button label="Сохранить" />
+```
+
+</MdxTabs>
 
 ## Внешний вид
 
 ### Типы кнопок
 
-Всего в дизайн-системе четыре типа кнопок: `primary`, `secondary`, `ghost` и `clear`. Этого обычно хватает, чтобы расставить
-акценты пользовательских действий на странице.
-
-За тип кнопки отвечает свойство `view`.
+Свойство `view` определяет внешний вид кнопки. В дизайн-системе Consta UI Kit доступны четыре типа кнопок: `primary`, `secondary`, `ghost` и `clear`. Каждый тип предназначен для определённых сценариев использования.
 
 #### `primary`
 
-Это основной тип кнопки (используется по умолчанию). Если на странице одна кнопка, используйте такую. Если несколько, оставьте кнопку `primary` для самого важного, «целевого» действия, на котором нужно сделать акцент. Постарайтесь использовать одну кнопку `primary` на странице или в блоке.
+Основной тип кнопки, используемый для ключевых действий. Рекомендуется для акцентирования самого важного действия на странице.
 
-```tsx
-<Button label="Войти" />
-<Button label="Продолжить" iconRight={IconForward} />
-<Button label="Добавить" iconRight={IconAdd} onlyIcon />
-```
+<MdxTabs>
 
 <ButtonExampleViewPrimary />
 
+```tsx
+<>
+  <Button label="Войти" />
+  <Button label="Продолжить" iconRight={IconForward} />
+  <Button label="Добавить" iconRight={IconAdd} onlyIcon />
+</>
+```
+
+</MdxTabs>
+
 #### `secondary`
 
-Эта кнопка похожа на `primary`, но не так сильно выделяется. Используйте её, когда хотите сохранить важность действия, но не слишком привлекать к нему внимание.
+Кнопка второго уровня важности, менее акцентированная, чем `primary`. Подходит для действий, которые не требуют сильного выделения.
 
-```tsx
-<Button label="Читать далее" view="secondary" />
-<Button label="Комментировать" view="secondary" iconLeft={IconChat} />
-<Button label="Редактировать" view="secondary" iconRight={IconEdit} onlyIcon />
-```
+<MdxTabs>
 
 <ButtonExampleViewSecondary />
 
+```tsx
+<>
+  <Button label="Читать далее" view="secondary" />
+  <Button label="Комментировать" view="secondary" iconLeft={IconChat} />
+  <Button
+    label="Редактировать"
+    view="secondary"
+    iconRight={IconEdit}
+    onlyIcon
+  />
+</>
+```
+
+</MdxTabs>
+
 #### `ghost`
 
-Это второстепенная или дополнительная кнопка. Часто используется в паре с основной кнопкой и обозначает альтернативное, не главное действие. Например, если есть основная кнопка **Подтвердить**, в паре с ней можно поставить кнопку `ghost` с текстом **Отменить**. Также может использоваться для не очень важных действий, к которым не хочется привлекать внимание.
+Второстепенная кнопка для альтернативных или менее важных действий, таких как «Отмена» или «Настройки».
 
-```ts
-<Button label="Отмена" view="ghost" />
-<Button label="Настройки" view="ghost" iconLeft={IconSettings} />
-<Button label="Фильтр" view="ghost" iconLeft={IconFunnel} onlyIcon />
-```
+<MdxTabs>
 
 <ButtonExampleViewGhost />
 
+```tsx
+<>
+  <Button label="Отмена" view="ghost" />
+  <Button label="Настройки" view="ghost" iconLeft={IconSettings} />
+  <Button label="Фильтр" view="ghost" iconLeft={IconFunnel} onlyIcon />
+</>
+```
+
+</MdxTabs>
+
 #### `clear`
 
-Это полноценная кнопка с прозрачным фоном. Используйте её, когда внимание пользователя должно быть сосредоточено на более важных компонентах. Также эти кнопки удобно использовать в списке кнопок-иконок без текста или для обозначения самых незначительных действий.
+Кнопка с прозрачным фоном, подходящая для незначительных действий или списков кнопок-иконок.
 
-```ts
-<Button label="Развернуть" view="clear" />
-<Button label="Скопировать" view="clear" iconLeft={IconCopy} />
-<Button label="Добавить в Избранное" view="clear" iconLeft={IconBookmarkStroked} onlyIcon />
-```
+<MdxTabs>
 
 <ButtonExampleViewClear />
 
-#### `disabled`
-
-Это свойство блокирует кнопку — её невозможно нажать. Его можно применить к кнопке любого типа. Используйте `disabled` в тех случаях, когда пользователь не может нажать на кнопку из-за каких-то условий. Например, пока не напишет логин и пароль для входа в аккаунт или не заполнит все обязательные поля в форме.
-
-```ts
-<Button label="Войти" disabled />
-<Button label="Продолжить" disabled iconRight={IconForward} />
-<Button label="Добавить" disabled iconRight={IconAdd} onlyIcon />
+```tsx
+<>
+  <Button label="Развернуть" view="clear" />
+  <Button label="Скопировать" view="clear" iconLeft={IconCopy} />
+  <Button
+    label="Добавить в Избранное"
+    view="clear"
+    iconLeft={IconBookmarkStroked}
+    onlyIcon
+  />
+</>
 ```
 
-<ButtonExampleViewDisabled />
+</MdxTabs>
 
 ### Размер
 
-В дизайн-системе четыре размера кнопок: `xs`, `s`, `m` и `l`. За размер кнопок отвечает свойство `size`, оно определяет высоту кнопки. Ширина кнопки задается размером контента внутри нее и стандартными отступами.
+Свойство `size` задаёт высоту кнопки. Доступны четыре размера: `xs`, `s`, `m` (по умолчанию), `l`. Ширина кнопки зависит от содержимого и отступов.
 
-```ts
-<Button label="Размер XS" size="xs" />
-<Button label="Размер S" size="s" />
-<Button label="Размер M" size="m" />
-<Button label="Размер L" size="l" />
-```
+<MdxTabs>
 
 <ButtonExampleSizeBasic />
 
-#### Кнопка в ширину блока
-
-Вы можете сделать ширину кнопки равной 100% от ширины родительского
-контейнера. Для этого используйте свойство `width` со значением `full`.
-
-```ts
-<Button label="Отправить" width="full" />
+```tsx
+<>
+  <Button label="Размер XS" size="xs" />
+  <Button label="Размер S" size="s" />
+  <Button label="Размер M" size="m" />
+  <Button label="Размер L" size="l" />
+</>
 ```
+
+</MdxTabs>
+
+#### Ширина кнопки
+
+Свойство `width` позволяет сделать кнопку на всю ширину контейнера (`full`) или оставить стандартную ширину (`default`).
+
+<MdxTabs>
 
 <ButtonExampleSizeFull />
 
+```tsx
+<Button label="Отправить" width="full" />
+```
+
+</MdxTabs>
+
 ### Кнопка с иконкой
 
-Название кнопки можно дополнять иконкой. Она поможет быстрее найти нужную кнопку в ряду других и быстрее понять, что эта кнопка делает. За иконку отвечают свойства `iconLeft` (ставит иконку слева от текста на кнопке) или `iconRight` (ставит иконку справа). Оба эти свойства ожидают компонент иконки из нашей [библиотеки иконок](##LIBS.LIB/lib:icons).
+Свойства `iconLeft` и `iconRight` добавляют иконки слева или справа от текста. Они принимают компоненты иконок из [библиотеки иконок Consta](##LIBS.LIB/lib:icons). Свойство `onlyIcon` позволяет отображать только иконку без текста.
 
-```ts
-<Button label="Назад" iconLeft={IconBackward} />
-<Button label="Вперёд" iconRight={IconForward} />
-```
+<MdxTabs>
 
 <ButtonExampleIconBasic />
 
-<MdxInformer status="success">
-  
-В панели с большим количеством кнопок иконки будут создавать лишний визуальный шум. В этом случае оставьте иконки только у самых важных действий.
-
-</MdxInformer>
-
-#### Только иконка
-
-Кнопка может состоять только из иконки. Такие кнопки экономят место и позволяют разместить рядом много похожих кнопок. Например, кнопки для выбора даты или фильтров. Для создания такой кнопки используйте свойство `onlyIcon` в паре с `iconLeft` или `iconRight`.
-
-```ts
-<Button label="Назад" view="ghost" iconLeft={IconHamburger} onlyIcon />
-<Button label="Назад" view="ghost" iconLeft={IconCalendar} onlyIcon />
-<Button label="Вперёд" view="ghost" iconRight={IconFilter} onlyIcon />
+```tsx
+<>
+  <Button label="Назад" iconLeft={IconBackward} />
+  <Button label="Вперёд" iconRight={IconForward} />
+</>
 ```
 
-<ButtonExampleIconOnly />\
+</MdxTabs>
+
+<MdxTabs>
+
+<ButtonExampleIconOnly />
+
+```tsx
+<>
+  <Button label="Назад" view="ghost" iconLeft={IconHamburger} onlyIcon />
+  <Button label="Назад" view="ghost" iconLeft={IconCalendar} onlyIcon />
+  <Button label="Вперёд" view="ghost" iconRight={IconFilter} onlyIcon />
+</>
+```
+
+</MdxTabs>
 
 <MdxInformer status="success">
 
-Убедитесь, что изображение на иконке знакомо пользователям и легко считывается. Так, что все сразу понимают, что делает эта кнопка.
+В панели с большим количеством кнопок иконки могут создавать визуальный шум. Используйте их только для ключевых действий.
 
 </MdxInformer>
 
 #### Размер иконки
 
-По умолчанию размер иконки зависит от размера кнопки.
+Свойство `iconSize` позволяет задать размер иконки (`xs`, `s`, `m`). По умолчанию размер иконки зависит от размера кнопки:
 
-|               |     |     |     |     |
-| ------------- | --- | --- | --- | --- |
-| Размер кнопки | L   | M   | S   | XS  |
-| Размер иконки | M   | S   | XS  | XS  |
-
-Чтобы его поменять, используйте свойство `iconSize`, в котором можно указать любой размер иконки из списка допустимых: `m`, `s`, `xs`.
+| Размер кнопки | Размер иконки |
+| ------------- | ------------- |
+| `xs`          | `xs`          |
+| `s`           | `xs`          |
+| `m`           | `s`           |
+| `l`           | `m`           |
 
 ### Форма
 
-За форму кнопки отвечает свойство `form`. По умолчанию у кнопок скруглённые края (значение `default`), а ещё кнопки могут быть квадратными `brick` и круглыми `round`.
+Свойство `form` определяет форму кнопки: `default` (скруглённые края), `brick` (квадратная), `round` (круглая), а также гибридные варианты для комбинации с полями ввода.
 
-```ts
-<Button label="Default" />
-<Button label="Brick" form="brick" />
-<Button label="Round" form="round" />
-```
+<MdxTabs>
 
 <ButtonExampleFormBasic />
 
+```tsx
+<>
+  <Button label="Default" />
+  <Button label="Brick" form="brick" />
+  <Button label="Round" form="round" />
+</>
+```
+
+</MdxTabs>
+
 #### Гибридные формы
 
-Для комбинации кнопки с [полем ввода](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable) предусмотрены гибридные формы. У таких вариантов правая и левая грани могут отличаться.
+Гибридные формы (`brickRound`, `roundBrick`, `brickDefault`, `defaultBrick`) используются для интеграции кнопки с полями ввода.
 
-В этом примере свойство `form` у кнопки равно `brickRound`.
+<MdxTabs>
 
-```ts
+<ButtonExampleFormHybrid />
+
+```tsx
 <div style={{ display: 'flex' }}>
   <TextField
     placeholder="Электронная почта"
@@ -217,60 +296,59 @@ import { Button } from '@consta/uikit/Button';
 </div>
 ```
 
-<ButtonExampleFormHybrid />
+</MdxTabs>
 
 ### Индикатор загрузки
 
-Если после нажатия на кнопку пользователь ждет какого-то результата, в кнопке можно отобразить индикатор загрузки. Для этого используйте свойство `loading`.
+Свойство `loading` отображает индикатор загрузки вместо содержимого кнопки, сигнализируя о выполнении процесса.
 
-```ts
-<Button label="Загрузка" loading />
-```
+<MdxTabs>
 
 <ButtonExampleLoading />
 
+```tsx
+<Button label="Загрузка" loading />
+```
+
+</MdxTabs>
+
+## Поведение
+
+Свойство `disabled` блокирует кнопку, делая её неактивной. Используйте его, если действие недоступно, например, пока пользователь не заполнил обязательные поля формы.
+
+<MdxTabs>
+
+<ButtonExampleViewDisabled />
+
+```tsx
+<>
+  <Button label="Войти" disabled />
+  <Button label="Продолжить" disabled iconRight={IconForward} />
+  <Button label="Добавить" disabled iconRight={IconAdd} onlyIcon />
+</>
+```
+
+</MdxTabs>
+
+Свойство `onClick` задаёт обработчик события клика по кнопке.
+
 ## Адаптивность
 
-Если кнопка не помещается в родительский контейнер по ширине, она сжимается,
-текст обрезается, в конце добавляется многоточие.
+Если кнопка не помещается в контейнер, текст обрезается, и в конце добавляется многоточие.
 
-```ts
-<Button label="Этот текст не помещается" />
-```
+<MdxTabs>
 
 <ButtonExampleAdaptive />
 
-## Импорт
-
 ```tsx
-import { Button } from '@consta/uikit/Button';
+<Button label="Этот текст не помещается" />
 ```
 
-## Список свойств
-
-| Свойство                         | Тип или варианты значения                                                                 | По умолчанию              | Описание                                                                         |
-| -------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------- |
-| [`label`](#текст-на-кнопке)      | `string`                                                                                  | -                         | Текст на кнопке                                                                  |
-| [`view`](#внешний-вид)           | `'clear', 'primary', 'secondary', 'ghost'`                                                | `primary`                 | Внешний вид                                                                      |
-| [`disabled`](#disabled)          | `boolean`                                                                                 | `false`                   | Блокировка кнопки                                                                |
-| [`size`](#размер)                | `'xs', 's', 'm', 'l'`                                                                     | `m`                       | Размер                                                                           |
-| [`width`](#размер)               | `'full', 'default'`                                                                       | `default`                 | Ширина                                                                           |
-| [`form`](#форма)                 | `'default', 'round', 'brick', 'brickRound', 'roundBrick', 'brickDefault', 'defaultBrick'` | `default`                 | Форма                                                                            |
-| [`iconLeft`](#кнопка-с-иконкой)  | `React.FC<IIcon>`                                                                         | -                         | Иконка слева                                                                     |
-| [`iconRight`](#кнопка-с-иконкой) | `React.FC<IIcon>`                                                                         | -                         | Иконка справа                                                                    |
-| [`onlyIcon`](#только-иконка)     | `boolean`                                                                                 | `false`                   | Только иконка без текста                                                         |
-| [`iconSize`](#размер-иконки)     | `'xs', 's', 'm'`                                                                          | Зависит от размера кнопки | Размер иконки                                                                    |
-| `title`                          | `string`                                                                                  | -                         | HTML-атрибут `title` — всплывающая подсказка, появляется при наведении на кнопку |
-| `tabIndex`                       | `number`                                                                                  | -                         | Порядковый номер при переходе между элементами интерфейса по клавише **tab**     |
-| `as`                             | `React.ElementType`                                                                       | `button`                  | HTML-тег для кнопки                                                              |
-| [`loading`](#индикатор-загрузки) | `boolean`                                                                                 | `false`                   | Отображает индикатор загрузки вместо кнопки во время загрузки информации         |
-| `onClick`                        | `React.EventHandler<React.MouseEvent>`                                                    | -                         | Действие по клику                                                                |
-| `innerRef`                       | `React.Ref<HTMLElement>`                                                                  | -                         | Ссылка на корневой DOM-элемент                                                   |
-| `className`                      | `string`                                                                                  | -                         | Дополнительные CSS-классы                                                        |
+</MdxTabs>
 
 ## Пример использования
 
-```ts
+```tsx
 import React from 'react';
 import { Button } from '@consta/uikit/Button';
 
