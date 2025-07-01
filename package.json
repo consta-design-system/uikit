@@ -19,7 +19,7 @@
     "@consta/icons": "^1.0.0",
     "@reatom/core": "^3.10.1",
     "@reatom/npm-react": "^3.10.6",
-    "compute-scroll-into-view": "^1.0.17",
+    "compute-scroll-into-view": "^3.1.1",
     "date-fns": "^2.30.0",
     "react": ">= 16.8.0",
     "react-dom": ">= 16.8.0",
@@ -64,7 +64,8 @@
     "stand:start": "cross-env NODE_ENV=development webpack serve --open --progress --mode development --hot --progress --config node_modules/@consta/stand/webpack.config.js",
     "start": "yarn stand:generate && yarn stand:start",
     "rm:dist": "node ./scripts/rm.js --path=./dist",
-    "rm:build": "node ./scripts/rm.js --path=./build"
+    "rm:build": "node ./scripts/rm.js --path=./build",
+    "rm:node_modules": "node ./scripts/rm.js --path=./node_modules"
   },
   "config": {
     "commitizen": {
@@ -109,7 +110,7 @@
     "@babel/preset-typescript": "^7.18.6",
     "@bem/sdk.naming.cell.match": "^0.1.3",
     "@bem/sdk.naming.presets": "^0.2.3",
-    "@consta/stand": "^0.0.155",
+    "@consta/stand": "^0.0.156",
     "@consta/uikit": "^5.22.0",
     "@cspell/dict-ru_ru": "^2.2.4",
     "@mdx-js/loader": "^2.1.5",
