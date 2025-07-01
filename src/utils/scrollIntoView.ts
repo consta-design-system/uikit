@@ -1,10 +1,10 @@
-import computeScrollIntoView from 'compute-scroll-into-view';
+import { compute } from 'compute-scroll-into-view';
 
 export function scrollIntoView(
   node: HTMLDivElement,
   menuNode: HTMLDivElement,
 ): void {
-  const actions = computeScrollIntoView(node, {
+  const actions = compute(node, {
     boundary: menuNode,
     block: 'nearest',
     scrollMode: 'if-needed',
