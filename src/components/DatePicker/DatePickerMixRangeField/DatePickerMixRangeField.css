@@ -6,21 +6,25 @@
     &_xs {
       --input-height: var(--control-height-xs);
       --input-space: calc(var(--control-space-xs) * 0.5);
+      --caption-offset: var(--space-2xs);
     }
 
     &_s {
       --input-height: var(--control-height-s);
       --input-space: calc(var(--control-space-s) * 0.5);
+      --caption-offset: var(--space-2xs);
     }
 
     &_m {
       --input-height: var(--control-height-m);
       --input-space: calc(var(--control-space-m) * 0.5);
+      --caption-offset: var(--space-xs);
     }
 
     &_l {
       --input-height: var(--control-height-l);
       --input-space: calc(var(--control-space-l) * 0.5);
+      --caption-offset: var(--space-xs);
     }
   }
 
@@ -73,7 +77,7 @@
   }
 
   &-Caption {
-    margin-top: var(--space-2xs);
+    margin-top: var(--caption-offset);
     margin-left: var(--caption-margin-left);
   }
 }
