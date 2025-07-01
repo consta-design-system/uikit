@@ -1792,14 +1792,14 @@
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-1.1.1.tgz#a6b9535612d4b78228ebc441123c11f42b2ee000"
   integrity sha512-3meYl46x0figWwTwakB19q+2BYuXWeBAyxQgBdxYdclocKkuMztF/ffknIQjPdfjHeA6rBwIbbxh7M3BfTXH5A==
 
-"@consta/stand@^0.0.156":
-  version "0.0.156"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.156.tgz#0ed03332d949d9f6fe50a70bac473d6441f24404"
-  integrity sha512-nrJ9QMq3pDRG/LdUcDeFeQHM6WY5bRXJdF999E3KVCSteptLMo6LKhWHG2exlFELwVrDq5ebPpTxVsjdYbgNOA==
+"@consta/stand@^0.0.158":
+  version "0.0.158"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.158.tgz#b013f9e2474d3ec8a79271accf1ab4aeb7b8872d"
+  integrity sha512-3JFbigk3z16u8gxQsAkq68jl1wCO0xULnGKU9FFpE4TV8yg5LL8WCBiyjBYVVm9pYCYhgWav7qlJQ2FPcSmpQw==
   dependencies:
     "@consta/header" "^3.0.1"
     "@consta/icons" "^1.1.1"
-    "@consta/uikit" "^5.22.0"
+    "@consta/uikit" "^5.24.0"
     "@mdx-js/loader" "^2.3.0"
     "@mdx-js/react" "^2.3.0"
     "@oclif/command" "^1.8.22"
@@ -1869,6 +1869,11 @@
   version "5.22.0"
   resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.22.0.tgz#371c310788e92e5c2fcaf3571ca14c4292d77810"
   integrity sha512-Fu1K7ZOLFW8ZSR+JWM31nBKcebkGlksvqyx1wlqlP0M/C34QOKDvzfMmNNe1TGH2tCSbnJZhZatOSo60oXhNVA==
+
+"@consta/uikit@^5.24.0":
+  version "5.24.0"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.24.0.tgz#6749b89d807b4c5b6dcc46cae25dfb9c020a4ded"
+  integrity sha512-y0momNleJam2FkLmOGCcHdgSr5g4dGQPcgOnpPidp1telin5jJeXRZNqYG3W0wH+OOEw4oPxPyhTOqo41aooSQ==
 
 "@cspell/cspell-bundled-dicts@8.16.1":
   version "8.16.1"
