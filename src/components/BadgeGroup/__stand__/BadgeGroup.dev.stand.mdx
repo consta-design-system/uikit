@@ -77,21 +77,19 @@ import { BadgeGroup } from '@consta/uikit/BadgeGroup';
 <BadgeGroupExampleItems />
 
 ```tsx
-<>
-  <BadgeGroup
-    items={[
-      { text: 'Согласован', color: 'success' },
-      { text: 'Ожидает', color: 'alert' },
-      { text: 'Новый', form: 'stroked', color: 'normal' },
-      { text: 'Черновик', color: 'system' },
-      { text: 'Отказано', form: 'stroked', color: 'error' },
-    ]}
-    getItemKey={(item) => item.text}
-    getItemLabel={(item) => item.text}
-    getItemView={(item) => item.form}
-    getItemStatus={(item) => item.color}
-  />
-</>
+<BadgeGroup
+  items={[
+    { text: 'Согласован', color: 'success' },
+    { text: 'Ожидает', color: 'alert' },
+    { text: 'Новый', form: 'stroked', color: 'normal' },
+    { text: 'Черновик', color: 'system' },
+    { text: 'Отказано', form: 'stroked', color: 'error' },
+  ]}
+  getItemKey={(item) => item.text}
+  getItemLabel={(item) => item.text}
+  getItemView={(item) => item.form}
+  getItemStatus={(item) => item.color}
+/>
 ```
 
 </MdxTabs>
@@ -107,11 +105,9 @@ import { BadgeGroup } from '@consta/uikit/BadgeGroup';
 <BadgeGroupExampleSize />
 
 ```tsx
-<>
-  <BadgeGroup size="s" items={items} />
-  <BadgeGroup size="m" items={items} />
-  <BadgeGroup size="l" items={items} />
-</>
+<BadgeGroup size="s" items={items} />
+<BadgeGroup size="m" items={items} />
+<BadgeGroup size="l" items={items} />
 ```
 
 </MdxTabs>
@@ -125,10 +121,8 @@ import { BadgeGroup } from '@consta/uikit/BadgeGroup';
 <BadgeGroupExampleForm />
 
 ```tsx
-<>
-  <BadgeGroup form="default" items={items} />
-  <BadgeGroup form="round" items={items} />
-</>
+<BadgeGroup form="default" items={items} />
+<BadgeGroup form="round" items={items} />
 ```
 
 </MdxTabs>
@@ -147,9 +141,7 @@ import { BadgeGroup } from '@consta/uikit/BadgeGroup';
 <BadgeGroupExampleFitModeReduction />
 
 ```tsx
-<>
-  <BadgeGroup fitMode="reduction" items={items} />
-</>
+<BadgeGroup fitMode="reduction" items={items} />
 ```
 
 </MdxTabs>
@@ -161,9 +153,7 @@ import { BadgeGroup } from '@consta/uikit/BadgeGroup';
 <BadgeGroupExampleFitModeWrap />
 
 ```tsx
-<>
-  <BadgeGroup fitMode="wrap" items={items} />
-</>
+<BadgeGroup fitMode="wrap" items={items} />
 ```
 
 </MdxTabs>
