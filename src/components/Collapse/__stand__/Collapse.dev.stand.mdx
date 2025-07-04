@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 
 import { CollapseExampleView } from './examples/CollapseExampleView/CollapseExampleView';
 import { CollapseExampleSpace } from './examples/CollapseExampleSpace/CollapseExampleSpace';
@@ -18,396 +18,32 @@ import {
   CollapseExampleIconCustomIcon,
 } from './examples/CollapseExampleIconCustomIcon/CollapseExampleIconCustomIcon';
 
-```tsx
-import { Collapse } from '@consta/uikit/Collapse';
-```
-
 <MdxMenu>
 
-- [Заголовок](#заголовок)
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Заголовок](#заголовок)
+  - [Дополнительный элемент](#дополнительный-элемент)
+- [Внешний вид](#внешний-вид)
+  - [Форма](#форма)
+  - [Размер](#размер)
   - [Подсветка](#подсветка)
   - [Разделитель](#разделитель)
-  - [Дополнительный элемент](#дополнительный-элемент)
 - [Иконка](#иконка)
-  - [Внешний вид](#внешний-вид-иконки)
+  - [Внешний вид иконки](#внешний-вид-иконки)
   - [Замена иконки](#замена-иконки)
   - [Расположение иконки](#расположение-иконки)
   - [Направление иконки](#направление-иконки)
-- [Внешний вид](#внешний-вид)
-- [Форма](#форма)
-- [Размер](#размер)
 - [Отступы](#отступы)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
-- [Пример использования](#примеры)
+- [Пример использования](#пример-использования)
 
 </MdxMenu>
 
-## Заголовок
+## Обзор
 
-Заголовок виден, когда коллапс закрыт.
-
-За текст и контент заголовка отвечает свойство `label`. Заголовок может быть длинным или коротким, его лучше писать с прописной буквы, точка не нужна.
-
-```tsx
-const CollapseExampleLabel = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  return (
-    <Collapse
-      label={
-        <>
-          Заголовок
-          <Badge label="Статус" size="s" />
-        </>
-      }
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
-    >
-      {content}
-    </Collapse>
-  );
-};
-```
-
-<CollapseExampleLabel />
-
-### Подсветка
-
-Чтобы подсвечивать заголовок при наведении, добавьте `hoverEffect`.
-
-```tsx
-export const CollapseExampleHover = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  return (
-    <Collapse
-      label="Здесь есть подсветка"
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
-      hoverEffect
-    >
-      {content}
-    </Collapse>
-  );
-};
-```
-
-<CollapseExampleHover />
-
-### Разделитель
-
-Чтобы добавить разделитель между заголовком и содержимым, используйте `divider`.
-
-```tsx
-export const CollapseExampleIconDivider = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  return (
-    <Collapse
-      label="Здесь есть разделитель"
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
-      divider
-    >
-      {content}
-    </Collapse>
-  );
-};
-```
-
-<CollapseExampleIconDivider />
-
-### Дополнительный элемент
-
-Справа от заголовка можно добавить иконку, бейджик, кнопку, текст или что-то ещё. Это поможет выделить коллапсы или разбить на группы.
-
-За дополнительный элемент отвечает свойство `rightSide`.
-
-```tsx
-export const CollapseExampleIconRightSideBadge = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  return (
-    <Collapse
-      label="Здесь справа что-то есть"
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
-      rightSide={[
-        <Badge label="Badge" status="success" />,
-        <IconAlert size="s" view="warning" />,
-      ]}
-    >
-      {content}
-    </Collapse>
-  );
-};
-```
-
-<CollapseExampleIconRightSideBadge />
-
-```tsx
-export const CollapseExampleIconRightSideButton = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  return (
-    <Collapse
-      label="А здесь вообще справа настройки"
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
-      rightSide={
-        <Button
-          iconLeft={IconSettings}
-          size="xs"
-          view="ghost"
-          onClick={(e) => {
-            e.stopPropagation();
-            alert('Button Click');
-          }}
-        />
-      }
-    >
-      {content}
-    </Collapse>
-  );
-};
-```
-
-<CollapseExampleIconRightSideButton />
-
-## Иконка
-
-По умолчанию у коллапса иконка-стрелочка: `IconArrowDown` — в закрытом виде, `IconArrowUp` — в открытом.
-
-### Внешний вид иконки
-
-Вы можете изменить внешний вид иконки.
-
-<CollapseExampleIconView />
-
-### Замена иконки
-
-Вы можете поменять иконку на любую из [библиотеки иконок](##LIBS.LIB/lib:icons).
-
-В свойстве `icon` указывается иконка в открытом состоянии, в `closeIcon` — в закрытом.
-
-```tsx
-export const CollapseExampleIconCustomIcon = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  return (
-    <Collapse
-      label="Здесь меняется иконка"
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
-      icon={IconAdd}
-      closeIcon={IconRemove}
-    >
-      {content}
-    </Collapse>
-  );
-};
-```
-
-<CollapseExampleIconCustomIcon />
-
-### Расположение иконки
-
-Иконку можно расположить слева или справа от заголовка с помощью свойства `iconPosition`. Варианты: `left` и `right`, по умолчанию иконка слева.
-
-```tsx
-export const CollapseExampleIconPosition = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-  const [isOpenTwo, setOpenTwo] = useState<boolean>(false);
-
-  return (
-    <div style={{ maxWidth: 300 }}>
-      <Collapse
-        label="Иконка слева"
-        isOpen={isOpen}
-        onClick={() => setOpen(!isOpen)}
-        iconPosition="left"
-      >
-        {content}
-      </Collapse>
-      <Collapse
-        label="Иконка справа"
-        isOpen={isOpenTwo}
-        onClick={() => setOpenTwo(!isOpenTwo)}
-        iconPosition="right"
-      >
-        {content}
-      </Collapse>
-    </div>
-  );
-};
-```
-
-<CollapseExampleIconPosition />
-
-### Направление иконки
-
-Вы можете выбрать, куда повернуть иконку. Свойство `directionIcon` отвечает за направление иконки в открытом коллапсе, `closeDirectionIcon` — в закрытом.
-
-Варианты: `'up'`,`'right'`,`'down'`,`'left'`,`'upRight'`,`'downRight'`,`'upLeft'`,`'downLeft'`, по умолчанию `up`.
-
-```tsx
-export const CollapseExampleIconCustomIconDirection = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  return (
-    <Collapse
-      label="Здесь у иконки меняется направление"
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
-      icon={IconAdd}
-      directionIcon="up"
-      closeDirectionIcon="downRight"
-    >
-      {content}
-    </Collapse>
-  );
-};
-```
-
-<CollapseExampleIconCustomIconDirection />
-
-## Внешний вид
-
-У коллапса два варианта отображения:
-
-- `clear` — используется по умолчанию,
-- `ghost` — подходит, чтобы сделать коллапс более заметным.
-
-```tsx
-export const CollapseExampleView = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-  const [isOpenTwo, setOpenTwo] = useState<boolean>(false);
-
-  return (
-    <div>
-      <Collapse
-        label="Clear"
-        view="clear"
-        isOpen={isOpen}
-        onClick={() => setOpen(!isOpen)}
-      >
-        {content}
-      </Collapse>
-      <Collapse
-        label="Ghost"
-        view="ghost"
-        isOpen={isOpenTwo}
-        onClick={() => setOpenTwo(!isOpenTwo)}
-      >
-        {content}
-      </Collapse>
-    </div>
-  );
-};
-```
-
-<CollapseExampleView />
-
-## Форма
-
-У коллапса три варианта форм:
-
-- `brick` — используется по умолчанию,
-- `default` — добавляет скругление граням,
-- `round` — делает грани круглыми.
-
-```tsx
-export const CollapseExampleForm = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-  const [isOpenTwo, setOpenTwo] = useState<boolean>(false);
-  const [isOpenThree, setIsOpenThree] = useState<boolean>(false);
-
-  return (
-    <div>
-      <Collapse
-        label="Brick"
-        form="brick"
-        hoverEffect
-        horizontalSpace="m"
-        isOpen={isOpen}
-        onClick={() => setOpen(!isOpen)}
-      >
-        {content}
-      </Collapse>
-      <Collapse
-        label="Default"
-        form="default"
-        hoverEffect
-        horizontalSpace="m"
-        isOpen={isOpenTwo}
-        onClick={() => setOpenTwo(!isOpenTwo)}
-      >
-        {content}
-      </Collapse>
-      <Collapse
-        label="Round"
-        form="round"
-        horizontalSpace="m"
-        hoverEffect
-        isOpen={isOpenThree}
-        onClick={() => setIsOpenThree(!isOpenTwo)}
-      >
-        {content}
-      </Collapse>
-    </div>
-  );
-};
-```
-
-<CollapseExampleForm />
-
-## Размер
-
-За размер отвечает свойство `size`. Оно влияет на размер заголовка, иконок и отступов и не влияет на размер содержимого. Варианты: `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`.
-
-```tsx
-export const CollapseExampleSize = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  return (
-    <Collapse
-      label="Самый большой коллапс"
-      size="l"
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
-    >
-      {content}
-    </Collapse>
-  );
-};
-```
-
-<CollapseExampleSize />
-
-## Отступы
-
-Внутренние боковые отступы между текстом и границами компонента можно регулировать с помощью `horizontalSpace`. Варианты: `'6xl'`, `'5xl'`, `'4xl'`, `'3xl'`, `'2xl'`, `'xl'`, `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`, `'3xs'`. По умолчанию 0.
-
-```tsx
-export const CollapseExampleSpace = () => {
-  const [isOpen, setOpen] = useState<boolean>(false);
-
-  return (
-    <Collapse
-      label="Отступы 6xl"
-      horizontalSpace="6xl"
-      isOpen={isOpen}
-      onClick={() => setOpen(!isOpen)}
-      hoverEffect
-    >
-      {content}
-    </Collapse>
-  );
-};
-```
-
-<CollapseExampleSpace />
+`Collapse` — это компонент для компактного отображения информации с возможностью сворачивания и разворачивания. Он состоит из заголовка и содержимого, которое показывается или скрывается при клике на заголовок. Подходит для экономии пространства в интерфейсе, например, в списках, FAQ или настройках.
 
 ## Импорт
 
@@ -420,33 +56,368 @@ import { Collapse } from '@consta/uikit/Collapse';
 | Свойство                                     | Тип                                                                                                | По умолчанию    | Описание                                                                    |
 | -------------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------- | --------------------------------------------------------------------------- |
 | [`label`](#заголовок)                        | `React.ReactNode`                                                                                  | -               | Заголовок коллапса                                                          |
-| [`size?`](#размер)                           | `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`                                                               | `'m'`           | Размер                                                                      |
+| `children`                                   | `React.ReactNode`                                                                                  | -               | Содержимое коллапса                                                         |
+| [`rightSide?`](#дополнительный-элемент)      | `React.ReactNode`                                                                                  | -               | Дополнительный контент, который можно поместить рядом с заголовком коллапса |
 | [`form?`](#форма)                            | `'default'`, `'brick'`, `'round'`                                                                  | `'brick'`       | Форма компонента                                                            |
-| [`view?`](#внешний-вид)                      | `'clear'`, `'ghost'`, `'primary'`, `'secondary'`                                                   | `'clear'`       | Внешний вид                                                                 |
-| [`iconView?`](#внешний-вид-иконки)           | `'clear'`, `'ghost'`                                                                               | `'clear'`       | Внешний вид иконки разворота                                                |
+| [`size?`](#размер)                           | `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`                                                               | `'m'`           | Размер                                                                      |
+| [`view?`](#внешний-вид)                      | `'clear'`, `'ghost'`                                                                               | `'clear'`       | Внешний вид                                                                 |
 | [`hoverEffect?`](#подсветка)                 | `boolean`                                                                                          | -               | Подсвечивает заголовок при наведении                                        |
 | [`divider?`](#разделитель)                   | `boolean`                                                                                          | -               | Добавляет разделитель между заголовком и содержимым                         |
-| [`horizontalSpace?`](#отступы)               | `'6xl'`, `'5xl'`, `'4xl'`, `'3xl'`, `'2xl'`, `'xl'`, `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`, `'3xs'` | -               | Устанавливает боковые отступы                                               |
-| `children`                                   | `React.ReactNode`                                                                                  | -               | Содержимое коллапса                                                         |
-| `maxContentHeight?`                          | `'string', 'number'`                                                                               | -               | Максимальная высота контента коллапса                                       |
-| [`icon?` ](#замена-иконки)                   | `IconComponent`                                                                                    | `IconComponent` | Иконка в закрытом состоянии                                                 |
-| [`closeIcon?`](#замена-иконки)               | `IconComponent`                                                                                    | -               | Иконка в открытом состоянии                                                 |
+| [`icon?`](#замена-иконки)                    | `IconComponent`                                                                                    | `IconArrowDown` | Иконка в закрытом состоянии                                                 |
+| [`closeIcon?`](#замена-иконки)               | `IconComponent`                                                                                    | `IconArrowUp`   | Иконка в открытом состоянии                                                 |
+| [`iconView?`](#внешний-вид-иконки)           | `'clear'`, `'ghost'`                                                                               | `'clear'`       | Внешний вид иконки разворота                                                |
 | [`iconPosition?`](#расположение-иконки)      | `'left'`, `'right'`                                                                                | `'left'`        | Расположение иконки                                                         |
 | [`directionIcon?`](#направление-иконки)      | `'up'`, `'right'`, `'down'`, `'left'`, `'upRight'`, `'downRight'`, `'upLeft'`, `'downLeft'`        | `'up'`          | Направление иконки в закрытом состоянии                                     |
 | [`closeDirectionIcon?`](#направление-иконки) | `'up'`, `'right'`, `'down'`, `'left'`, `'upRight'`, `'downRight'`, `'upLeft'`, `'downLeft'`        | `'down'`        | Направление иконки в открытом состоянии                                     |
-| [`rightSide?`](#дополнительный-элемент)      | `React.ReactNode`                                                                                  | -               | Дополнительный контент, который можно поместить рядом с заголовком коллапса |
-| `isOpen?`                                    | `boolean`                                                                                          | -               | Состояние коллапса (открыт/закрыт)                                          |
-| `onClick?`                                   | `React.EventHandler<React.MouseEvent>`                                                             | -               | Действие при клике на коллапс                                               |
-| `className?`                                 | `string`                                                                                           | -               | Дополнительный CSS-класс                                                    |
+| [`horizontalSpace?`](#отступы)               | `'6xl'`, `'5xl'`, `'4xl'`, `'3xl'`, `'2xl'`, `'xl'`, `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`, `'3xs'` | -               | Устанавливает боковые отступы                                               |
+| [`maxContentHeight?`](#содержимое)           | `string` \| `number`                                                                               | -               | Максимальная высота контента коллапса                                       |
+| [`isOpen?`](#поведение)                      | `boolean`                                                                                          | -               | Состояние коллапса (открыт/закрыт)                                          |
+| [`onClick?`](#поведение)                     | `React.EventHandler<React.MouseEvent>`                                                             | -               | Действие при клике на коллапс                                               |
+| [`className?`](#свойства)                    | `string`                                                                                           | -               | Дополнительный CSS-класс                                                    |
 
-## Пример
+## Содержимое
 
-```ts
-// src/App.ts
+### Заголовок
+
+Свойство `label` задаёт текст или содержимое заголовка коллапса, видимого в закрытом состоянии. Заголовок может быть текстом, компонентом или их комбинацией. Рекомендуется писать заголовок с прописной буквы без точки в конце.
+
+<MdxTabs>
+
+<CollapseExampleLabel />
+
+```tsx
+<>
+  <Collapse
+    label={
+      <>
+        Заголовок
+        <Badge label="Статус" size="s" />
+      </>
+    }
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+### Дополнительный элемент
+
+Свойство `rightSide` позволяет добавить справа от заголовка дополнительный контент, например, иконку, бейджик или кнопку, для выделения коллапса или группировки.
+
+<MdxTabs>
+
+<CollapseExampleIconRightSideBadge />
+
+```tsx
+<>
+  <Collapse
+    label="Здесь справа что-то есть"
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+    rightSide={[
+      <Badge label="Badge" status="success" />,
+      <IconAlert size="s" view="warning" />,
+    ]}
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+<MdxTabs>
+
+<CollapseExampleIconRightSideButton />
+
+```tsx
+<>
+  <Collapse
+    label="А здесь вообще справа настройки"
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+    rightSide={
+      <Button
+        iconLeft={IconSettings}
+        size="xs"
+        view="ghost"
+        onClick={(e) => {
+          e.stopPropagation();
+          alert('Button Click');
+        }}
+      />
+    }
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+## Внешний вид
+
+### Форма
+
+Свойство `form` определяет форму компонента. Варианты:
+
+- `brick` — без скругления (по умолчанию),
+- `default` — со скруглёнными углами,
+- `round` — с полностью круглыми углами.
+
+<MdxTabs>
+
+<CollapseExampleForm />
+
+```tsx
+<>
+  <Collapse
+    label="Brick"
+    form="brick"
+    hoverEffect
+    horizontalSpace="m"
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+  >
+    {content}
+  </Collapse>
+  <Collapse
+    label="Default"
+    form="default"
+    hoverEffect
+    horizontalSpace="m"
+    isOpen={isOpenTwo}
+    onClick={() => setOpenTwo(!isOpenTwo)}
+  >
+    {content}
+  </Collapse>
+  <Collapse
+    label="Round"
+    form="round"
+    horizontalSpace="m"
+    hoverEffect
+    isOpen={isOpenThree}
+    onClick={() => setIsOpenThree(!isOpenThree)}
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+### Размер
+
+Свойство `size` задаёт размер заголовка, иконок и отступов. На содержимое коллапса не влияет. Варианты: `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`. По умолчанию — `'m'`.
+
+<MdxTabs>
+
+<CollapseExampleSize />
+
+```tsx
+<>
+  <Collapse
+    label="Самый большой коллапс"
+    size="l"
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+### Подсветка
+
+Свойство `hoverEffect` добавляет подсветку заголовка при наведении курсора.
+
+<MdxTabs>
+
+<CollapseExampleHover />
+
+```tsx
+<>
+  <Collapse
+    label="Здесь есть подсветка"
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+    hoverEffect
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+### Разделитель
+
+Свойство `divider` добавляет горизонтальную линию между заголовком и содержимым коллапса.
+
+<MdxTabs>
+
+<CollapseExampleIconDivider />
+
+```tsx
+<>
+  <Collapse
+    label="Здесь есть разделитель"
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+    divider
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+## Иконка
+
+По умолчанию коллапс использует иконки `IconArrowDown` (закрыт) и `IconArrowUp` (открыт).
+
+### Внешний вид иконки
+
+Свойство `iconView` изменяет внешний вид иконки. Варианты: `'clear'` (по умолчанию), `'ghost'`.
+
+<MdxTabs>
+
+<CollapseExampleIconView />
+
+</MdxTabs>
+
+### Замена иконки
+
+Свойства `icon` и `closeIcon` позволяют заменить стандартные иконки на любые из [библиотеки иконок Consta](##LIBS.LIB/lib:icons). `icon` задаёт иконку в закрытом состоянии, `closeIcon` — в открытом.
+
+<MdxTabs>
+
+<CollapseExampleIconCustomIcon />
+
+```tsx
+<>
+  <Collapse
+    label="Здесь меняется иконка"
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+    icon={IconAdd}
+    closeIcon={IconRemove}
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+### Расположение иконки
+
+Свойство `iconPosition` определяет расположение иконки относительно заголовка. Варианты: `'left'` (по умолчанию), `'right'`.
+
+<MdxTabs>
+
+<CollapseExampleIconPosition />
+
+```tsx
+<>
+  <Collapse
+    label="Иконка слева"
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+    iconPosition="left"
+  >
+    {content}
+  </Collapse>
+  <Collapse
+    label="Иконка справа"
+    isOpen={isOpenTwo}
+    onClick={() => setOpenTwo(!isOpenTwo)}
+    iconPosition="right"
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+### Направление иконки
+
+Свойства `directionIcon` и `closeDirectionIcon` задают направление иконки в закрытом и открытом состоянии соответственно. Варианты: `'up'`, `'right'`, `'down'`, `'left'`, `'upRight'`, `'downRight'`, `'upLeft'`, `'downLeft'`. По умолчанию: `'up'` для `directionIcon`, `'down'` для `closeDirectionIcon`.
+
+<MdxTabs>
+
+<CollapseExampleIconCustomIconDirection />
+
+```tsx
+<>
+  <Collapse
+    label="Здесь у иконки меняется направление"
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+    icon={IconAdd}
+    directionIcon="up"
+    closeDirectionIcon="downRight"
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+## Отступы
+
+Свойство `horizontalSpace` регулирует внутренние боковые отступы между текстом и границами компонента. Варианты: `'6xl'`, `'5xl'`, `'4xl'`, `'3xl'`, `'2xl'`, `'xl'`, `'l'`, `'m'`, `'s'`, `'xs'`, `'2xs'`, `'3xs'`. По умолчанию — 0.
+
+<MdxTabs>
+
+<CollapseExampleSpace />
+
+```tsx
+<>
+  <Collapse
+    label="Отступы 6xl"
+    horizontalSpace="6xl"
+    isOpen={isOpen}
+    onClick={() => setOpen(!isOpen)}
+    hoverEffect
+  >
+    {content}
+  </Collapse>
+</>
+```
+
+</MdxTabs>
+
+## Пример использования
+
+```tsx
 import React from 'react';
 import { Collapse } from '@consta/uikit/Collapse';
 
 const App = () => {
-  return <Collapse label={'Заголовок коллапса'}>Тело коллапса</Collapse>;
+  const [isOpen, setOpen] = React.useState<boolean>(false);
+
+  return (
+    <Collapse
+      label="Заголовок коллапса"
+      isOpen={isOpen}
+      onClick={() => setOpen(!isOpen)}
+    >
+      Тело коллапса
+    </Collapse>
+  );
 };
+```
+
+```
+
 ```
