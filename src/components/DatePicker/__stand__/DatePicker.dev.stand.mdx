@@ -1,4 +1,4 @@
-import { MdxMenu, MdxInformer } from '@consta/stand';
+import { MdxMenu, MdxInformer, MdxTabs } from '@consta/stand';
 
 import { DatePickerExampleValue } from './examples/DatePickerExampleValue/DatePickerExampleValue';
 import { DatePickerExampleOnError } from './examples/DatePickerExampleOnError/DatePickerExampleOnError';
@@ -27,556 +27,37 @@ import { DatePickerExampleDropdownOpen } from './examples/DatePickerExampleDropd
 import { DatePickerExampleTwoIcons } from './examples/DatePickerExampleTwoFields/DatePickerExampleTwoFields';
 import { DatePickerExampleDisableDates } from './examples/DatePickerExampleDisableDates/DatePickerExampleDisableDates';
 import { DatePickerExampleWithClearButton } from './examples/DatePickerExampleWithClearButton/DatePickerExampleWithClearButton';
-import { MdxTabs } from '@consta/stand';
-
-```tsx
-import { DatePicker } from '@consta/uikit/DatePicker';
-```
-
-Здесь описаны свойства компонента в целом и не описаны свойства его составляющих. Все подробности — в [полном списке свойств](#свойства).
 
 <MdxMenu>
 
-- [Выбор даты](#выбор-даты)
-- [Тип: дата или период](#тип-дата-или-период)
-- [Формат даты](#формат-даты)
-- [Интервал при выборе времени](#интервал-при-выборе-времени)
-- [Свойства поля ввода](#свойства-поля-ввода)
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Выбор даты](#выбор-даты)
+  - [Тип календаря](#тип-календаря)
+  - [Формат даты](#формат-даты)
+  - [Интервал времени](#интервал-времени)
+- [Внешний вид](#внешний-вид)
   - [Лейбл](#лейбл)
   - [Подпись](#подпись)
+  - [Статус](#статус)
+  - [Размер и форма](#размер-и-форма)
+  - [Иконки и текст в полях](#иконки-и-текст-в-полях)
+  - [Кнопка очистки](#кнопка-очистки)
+- [Поведение](#поведение)
   - [Обязательность](#обязательность)
-  - [Статус](#статус-поля)
-  - [Два поля ввода](#два-поля-ввода-свойства-и-события)
-  - [Кнопка для очистки поля](#кнопка-для-очистки-поля)
-- [Дополнительные контролы](#дополнительные-контролы)
-- [Отключение интервалов](#отключение-интервалов)
-- [Управление состоянием выпадающего списка](#управление-состоянием-выпадающего-списка)
-- [Обработка ошибок](#обработка-ошибок)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
+  - [Дополнительные контролы](#дополнительные-контролы)
+  - [Отключение интервалов](#отключение-интервалов)
+  - [Управление выпадающим списком](#управление-выпадающим-списком)
+  - [Обработка ошибок](#обработка-ошибок)
+- [Пример использования](#пример-использования)
 
 </MdxMenu>
 
-## Выбор даты
+## Обзор
 
-Выбранная дата (при `type = "date"`) или диапазон дат (при `type = "date-range"`) передаётся в свойстве `value`.
-
-За событие выбора даты отвечает свойство `onChange`.
-
-```tsx
-export const DatePickerExampleValue = () => {
-  const [value, setValue] = useState<Date | null>(null);
-  return <DatePicker value={value} onChange={setValue} />;
-};
-```
-
-<DatePickerExampleValue />
-
-## Тип: дата или период
-
-За способ выбора даты отвечает свойство `type`. Варианты:
-
-- `date` — позволяет выбрать одну дату (показывает одно поле ввода),
-- `date-range` — период: дату начала и дату конца (показывает два поля ввода).
-- `date-time` — одну дату cо временем,
-- `date-time-range` — период cо временем,
-- `time` — время,
-- `month` — один месяц,
-- `month-range` — интервал в несколько месяцев.
-- `year` – один год,
-- `year-range` — интервал в несколько лет.
-
-Все варианты с `-range` выводят два поля ввода и соответствуют типу [Range](#свойства).
-
-```tsx
-const DatePickerExampleTypeDate = () => {
-  const [value, setValue] = useState<Date | null>(null);
-  return <DatePicker type="date" value={value} onChange={setValue} />;
-};
-```
-
-<DatePickerExampleTypeDate />
-
-```tsx
-const DatePickerExampleTypeDateRange = () => {
-  const [value, setValue] = useState<[Date?, Date?] | null>(null);
-  return <DatePicker type="date-range" value={value} onChange={setValue} />;
-};
-```
-
-<DatePickerExampleTypeDateRange />
-
-```tsx
-const DatePickerExampleTypeDateTime = () => {
-  const [value, setValue] = useState<Date | null>(null);
-  return <DatePicker type="date-time" value={value} onChange={setValue} />;
-};
-```
-
-<DatePickerExampleTypeDateTime />
-
-```tsx
-export const DatePickerExampleTypeDateTimeRange = () => {
-  const [value, setValue] = useState<[Date?, Date?] | null>(null);
-  return (
-    <DatePicker type="date-time-range" value={value} onChange={setValue} />
-  );
-};
-```
-
-<DatePickerExampleTypeDateTimeRange />
-
-```tsx
-export const DatePickerExampleTypeTime = () => {
-  const [value, setValue] = useState<Date | null>(null);
-  return <DatePicker type="time" value={value} onChange={setValue} />;
-};
-```
-
-<DatePickerExampleTypeTime />
-
-```tsx
-export const DatePickerExampleTypeMonth = () => {
-  const [value, setValue] = useState<Date | null>();
-  return <DatePicker type="month" value={value} onChange={setValue} />;
-};
-```
-
-<DatePickerExampleTypeMonth />
-
-```tsx
-export const DatePickerExampleTypeMonthRange = () => {
-  const [value, setValue] = useState<Date | null>();
-  return <DatePicker type="month-range" value={value} onChange={setValue} />;
-};
-```
-
-<DatePickerExampleTypeMonthRange />
-
-```tsx
-export const DatePickerExampleTypeYear = () => {
-  const [value, setValue] = useState<Date | null>();
-  return <DatePicker type="year" value={value} onChange={setValue} />;
-};
-```
-
-<DatePickerExampleTypeYear />
-
-```tsx
-export const DatePickerExampleTypeYearRange = () => {
-  const [value, setValue] = useState<Date | null>();
-  return <DatePicker type="year-range" value={value} onChange={setValue} />;
-};
-```
-
-<DatePickerExampleTypeYearRange />
-
-### Кнопка для очистки поля
-
-Если вы хотите добавить в поле кнопку, по которой можно его очистить, используйте свойство `withClearButton`. Если в поле есть значение, в справа появляется крестик. Нажмите на него — поле станет пустым.
-
-```tsx
-export const DatePickerExampleWithClearButton = () => {
-  const [value, setValue] = useState<Date | null>(null);
-
-  return <DatePicker value={value} onChange={setValue} withClearButton />;
-};
-```
-
-Выберите дату — в поле появится крестик.
-
-<DatePickerExampleWithClearButton />
-
-## Формат даты
-
-За формат даты отвечают два свойства вместе:
-
-- `format` — маска для отображения даты,
-- `separator` — разделитель, который нужно использовать в этой маске.
-
-`format` по умолчанию зависит от `type`:
-
-- `type=date` или `type=date-range` — `format='dd.MM.yyyy'`
-- `type=date-time` — `format='dd.MM.yyyy HH:mm:ss'`
-
-`separator` — точка `'.'`
-
-Разделитель между датой и временем нельзя поменять, это всегда пробел `' '`.
-
-Разделитель между промежутками времени — всегда двоеточие `':'`.
-
-Чтобы задать формат, который используется в США, укажите `format='MM/dd/yyyy HH:mm:ss'`, `separator='/'`.
-
-<MdxInformer status="warning">
-
-Если тип требует ввода даты с точностью до дня, указывайте формат с точностью до дня. Если тип даты предполагает только месяц и год, в формате нужно указать только месяц и год.
-
-</MdxInformer>
-
-<MdxInformer status="normal">
-
-Если маска содержит дату и время, время всегда указывается после даты.
-
-</MdxInformer>
-
-```tsx
-export const DatePickerExampleFormat = () => {
-  const [value, setValue] = useState<Date | null>(null);
-  return (
-    <DatePicker
-      type="date-time"
-      format="MM/dd/yyyy HH:mm"
-      separator="/"
-      placeholder="ММ/ДД/ГГГГ ЧЧ:ММ"
-      value={value}
-      onChange={setValue}
-    />
-  );
-};
-```
-
-<DatePickerExampleFormat />
-
-## Интервал при выборе времени
-
-В режиме с выбором времени (`type='date-time'`) можно показать часы, минуты и секунды. За их настройки отвечают эти свойства:
-
-- часы — `multiplicityHours`,
-- минуты — `multiplicityMinutes`,
-- секунды — `multiplicitySeconds`.
-
-По умолчанию значения всех свойств равны 1 (выводятся 24 часа, 60 минут, 60 секунд).
-
-Если нужно убрать секунды или другие единицы, передайте 0 в соответствующем свойстве.
-
-Если хотите показывать не все часы, минуты и секунды, передайте интервал между значениями. Например, если в `multiplicityHours` передать 2, пользователь сможет выбрать только чётные часы — 0, 2, 4 и так далее. А если в `multiplicityMinutes` передать 15, пользователь увидит только четверти часа.
-
-<DatePickerExampleMulti />
-
-## Свойства поля вода
-
-### Лейбл
-
-К полю можно добавить лейбл. За текст отвечает свойство `label`,
-за его расположение — `labelPosition`. Варианты расположения:
-`left` — лейбл слева от поля, `top` — лейбл над полем.
-
-```tsx
-<DatePicker label="Лейбл" labelPosition="top" />
-<DatePicker label="Лейбл" labelPosition="left" />
-```
-
-<DatePickerExampleLabel />
-
-Также к лейблу можно добавить иконку используя свойство `labelIcon`.
-
-```tsx
-<DatePicker label="Лейбл" labelIcon={IconQuestion} />
-```
-
-<DatePickerExampleLabelIcon />
-
-### Подпись
-
-Под полем можно добавить подпись — например, чтобы показать информацию о его состоянии.
-За подпись отвечает свойство `caption`, оно наследует
-[статус поля](#статус) и стилизуется в соответствии с ним.
-
-```tsx
-<DatePicker status="success" />
-<DatePicker status="alert" />
-<DatePicker status="warning" />
-<DatePicker/>
-```
-
-<DatePickerExampleCaption />
-
-### Обязательность
-
-Чтобы сделать поле обязательным, добавьте `required`.
-Если у поля есть лейбл, рядом с ним появится маркер обязательности.
-
-```tsx
-<DatePicker label="Обязательное" required />
-<DatePicker label="Необязательное" />
-```
-
-<DatePickerExampleRequired />
-
-### Статус поля
-
-С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
-отметить правильно заполненные поля.
-
-За статус отвечает свойство `status`. Варианты: `success`, `alert` и `warning`.
-Если статус не указан, поле будет обычным.
-
-```tsx
-<DatePicker status="success" />
-<DatePicker status="alert" />
-<DatePicker status="warning" />
-<DatePicker/>
-```
-
-<DatePickerExampleStatus />
-
-### Два поля ввода: свойства и события
-
-Если у вас два поля ввода ([тип Range](#свойства): `date-range`, `date-time-range`, `year-range` или `month-range`), вы можете указать свойства и события для каждого. В этом случае синтаксис такой:
-
-`свойство = [значение для левого поля, значение для правого поля]`
-
-Это работает для свойств `name`, `leftSide` и `rightSide`, `value`, `inputRef`, `placeholder` и для событий `onChange`, `onFocus`, `onBlur`.
-
-##### Пример с разными иконками и подсказками для левого и правого поля
-
-```tsx
-import { IconForward } from '@consta/icons/IconForward';
-import { IconBackward } from '@consta/icons/IconBackward';
-
-export const DatePickerExampleTwoIcons = () => {
-  const [value, setValue] = useState<[Date?, Date?] | null>(null);
-
-  return (
-    <DatePicker
-      type="date-range"
-      value={value}
-      onChange={setValue}
-      leftSide={[IconForward, IconBackward]}
-      rightSide={['туда', 'обратно']}
-      placeholder={['Начало', 'Конец']}
-    />
-  );
-};
-```
-
-<DatePickerExampleTwoIcons />
-
-## Дополнительные контролы
-
-Чтобы добавить контролы в календарь, передайте в свойстве `renderAdditionalControls`
-рендер-функцию для отрисовки нужных элементов (например, кнопок).
-
-```tsx
-export const DatePickerExampleAdditionalControls = () => {
-  const [value, setValue] = useState<DatePickerPropValue<'date-range'>>([
-    undefined,
-    undefined,
-  ]);
-
-  const setQuarter = (date: Date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    if (month >= 0 && month < 3) {
-      setValue([new Date(year, 0, 1), new Date(year, 3, 0)]);
-    } else if (month >= 3 && month < 6) {
-      setValue([new Date(year, 3, 1), new Date(year, 6, 0)]);
-    } else if (month >= 6 && month < 9) {
-      setValue([new Date(year, 6, 1), new Date(year, 9, 0)]);
-    } else {
-      setValue([new Date(year, 9, 1), new Date(year + 1, 0, 0)]);
-    }
-  };
-
-  return (
-    <DatePicker
-      value={value}
-      type="date-range"
-      onChange={setValue}
-      renderAdditionalControls={({ currentVisibleDate }) => (
-        <Button
-          label="Этот квартал"
-          onClick={() => currentVisibleDate && setQuarter(currentVisibleDate)}
-        />
-      )}
-    />
-  );
-};
-```
-
-<DatePickerExampleAdditionalControls />
-
-## Отключение интервалов
-
-Вы можете отключить интервалы или конкретные даты для выбора пользователем. Пример:
-
-<MdxTabs>
-
-```tsx
-import React, { useState } from 'react';
-import { DatePicker } from '@consta/uikit/DatePicker';
-
-const getDisableDates = (): Array<Date | [Date, Date]> => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth();
-  const day = date.getDate();
-  return [
-    // интервал времени текущей даты с 12:34:20 - 16:10:41
-    [
-      new Date(year, month, day, 12, 34, 20),
-      new Date(year, month, day, 16, 10, 41),
-    ],
-    // следующий день
-    new Date(year, month, day + 1),
-    // отключаем с 1-ого по 12-ое включительно
-    [new Date(year, month, 1), new Date(year, month, 13)],
-  ];
-};
-
-const disableDates = getDisableDates();
-
-export const DatePickerExampleDisableDates = () => {
-  const [value, setValue] = useState<Date | null>();
-
-  return (
-    <DatePicker
-      type="date-time"
-      value={value}
-      disableDates={disableDates}
-      onChange={setValue}
-    />
-  );
-};
-```
-
-<DatePickerExampleDisableDates />
-
-</MdxTabs>
-
-## Управление состоянием выпадающего списка
-
-Для управления состоянием выпадающего списка используйте следующие свойства:
-
-- `dropdownOpen` - флаг открыт/закрыт
-- `onDropdownOpen` - Колбэк отрабатывающий каждый раз при открытии/закрытии
-- `ignoreOutsideClicksRefs` - список ссылок на элементы по которым игнорируются клики
-
-```tsx
-const Icon = withAnimateSwitcherHOC({
-  startIcon: IconArrowDown,
-  startDirection: 0,
-  endDirection: 180,
-});
-
-const DatePickerExampleDropdownOpen = () => {
-  const [value, setValue] = useState<Item | null>();
-  const [open, setOpen] = useFlag();
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const onDropdownOpen = useCallback((open: boolean) => {
-    setOpen.set(open);
-    if (open) {
-      inputRef.current?.focus();
-    }
-  }, []);
-
-  return (
-    <AnimateIconSwitcherProvider active={open}>
-      <FieldGroup>
-        <Button
-          ref={buttonRef}
-          label={open ? 'Закрыть' : 'Открыть'}
-          onClick={setOpen.toggle}
-          iconLeft={Icon}
-          onlyIcon
-        />
-        <DatePicker
-          inputRef={inputRef}
-          placeholder="Выберите вариант"
-          value={value}
-          onChange={setValue}
-          dropdownOpen={open}
-          onDropdownOpen={onDropdownOpen}
-          ignoreOutsideClicksRefs={[buttonRef]}
-        />
-      </FieldGroup>
-    </AnimateIconSwitcherProvider>
-  );
-};
-```
-
-<DatePickerExampleDropdownOpen />
-
-## Обработка ошибок
-
-Вы можете отследить ошибки, которые могут возникнуть у пользователя при вводе даты,
-и сообщить ему об этом. Для этого существует свойство `onError`.
-
-#### Типы ошибок
-
-- `outOfRange` — дата, которую вводит пользователь, не попадает в диапазон между `minDate` и `maxDate`.
-- `invalidInputAttempt` — пользователь вводит несуществующую дату.
-- `startDateIsGreaterThanEndDate` — дата начала больше, чем дата конца периода.
-
-#### Пример с обработкой ошибок
-
-```tsx
-import React, { useState, useRef } from 'react';
-import { DatePicker } from '@consta/uikit/DatePicker';
-import { Tooltip } from '@consta/uikit/TooltipCanary';
-
-const minDate = new Date(2000, 1, 1);
-const maxDate = new Date(2001, 1, 1);
-const formatDate = (date: Date) => format(date, 'dd.MM.yyyy');
-
-export const DatePickerExampleOnError = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [value, setValue] = useState<[Date?, Date?] | null>(null);
-  const [error, setError] = useState<string | undefined>();
-
-  const onChange: DatePickerPropOnChange<'date-range'> = (value) => {
-    setValue(value);
-    setError(undefined);
-  };
-
-  const onError: DatePickerPropOnError = (props) => {
-    if (props.type === 'outOfRange') {
-      setError(
-        `Дата ${formatDate(props.date)} не входит в диапазон c ${formatDate(
-          minDate,
-        )} по ${formatDate(maxDate)}`,
-      );
-    }
-    if (props.type === 'invalidInputAttempt') {
-      setError(`Даты ${props.stringValue} не существует`);
-    }
-    if (props.type === 'startDateIsGreaterThanEndDate') {
-      setError(
-        `Дата начала (${formatDate(
-          props.date[0],
-        )}) больше, чем дата конца (${formatDate(props.date[1])})`,
-      );
-    }
-  };
-
-  return (
-    <>
-      <DatePicker
-        minDate={minDate}
-        maxDate={maxDate}
-        ref={ref}
-        status={error ? 'alert' : undefined}
-        value={value}
-        onChange={onChange}
-        type="date-range"
-        onError={onError}
-      />
-      <Tooltip isOpen={!!error} status="alert" anchorRef={ref}>
-        {error}
-      </Tooltip>
-    </>
-  );
-};
-```
-
-Чтобы увидеть ошибку, введите в поле:
-
-- дату меньше 01.02.2000 или больше 01.02.2001,
-- 29.02.2001 (этот год — не високосный, в нём нет 29 февраля),
-- дату начала, которая больше даты конца.
-
-<DatePickerExampleOnError />
+`DatePicker` позволяет пользователю выбирать дату, время или период с помощью поля ввода и выпадающего календаря. Компонент поддерживает настройку формата, ограничения выбора, добавление дополнительных элементов управления и обработку ошибок.
 
 ## Импорт
 
@@ -586,117 +67,491 @@ import { DatePicker } from '@consta/uikit/DatePicker';
 
 ## Свойства
 
-```ts
-import { Locale } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
+| Свойство                                                     | Тип                                                                                                                                                                                       | По умолчанию          | Описание                                                   |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------------------------------------------------------- |
+| [`value?`](#выбор-даты)                                      | `DatePickerPropValue<TYPE>`                                                                                                                                                               | -                     | Выбранная дата или период                                  |
+| [`onChange?`](#выбор-даты)                                   | `DatePickerPropOnChange<TYPE>`                                                                                                                                                            | -                     | Событие выбора даты или периода                            |
+| [`type?`](#тип-календаря)                                    | `'date' \| 'date-range' \| 'date-time' \| 'date-time-range' \| 'time' \| 'month' \| 'month-range' \| 'year' \| 'year-range'`                                                              | `date`                | Тип календаря: выбор даты, времени или периода             |
+| [`format?`](#формат-даты)                                    | `string`                                                                                                                                                                                  | `'dd.MM.yyyy'`        | Формат отображения даты                                    |
+| [`separator?`](#формат-даты)                                 | `string`                                                                                                                                                                                  | `'.'`                 | Разделитель в формате даты                                 |
+| [`label?`](#лейбл)                                           | `string`                                                                                                                                                                                  | -                     | Лейбл к полю ввода                                         |
+| [`labelIcon?`](#лейбл)                                       | `IconComponent`                                                                                                                                                                           | -                     | Иконка слева от лейбла                                     |
+| [`labelPosition?`](#лейбл)                                   | `'top' \| 'left'`                                                                                                                                                                         | `'top'`               | Положение лейбла относительно поля                         |
+| [`caption?`](#подпись)                                       | `string`                                                                                                                                                                                  | -                     | Подпись под полем ввода                                    |
+| [`status?`](#статус)                                         | `'alert' \| 'success' \| 'warning'`                                                                                                                                                       | -                     | Статус поля                                                |
+| [`size?`](#размер-и-форма)                                   | `'m' \| 'xs' \| 's' \| 'l'`                                                                                                                                                               | `'m'`                 | Размер поля                                                |
+| [`form?`](#размер-и-форма)                                   | `'default' \| 'brick' \| 'round' \| 'clearRound' \| 'roundClear' \| 'clearDefault' \| 'defaultClear' \| 'defaultBrick' \| 'brickDefault' \| 'brickClear' \| 'clearBrick' \| 'clearClear'` | `'default'`           | Форма поля                                                 |
+| [`view?`](#размер-и-форма)                                   | `'default' \| 'clear'`                                                                                                                                                                    | `'default'`           | Внешний вид поля                                           |
+| [`leftSide?`](#иконки-и-текст-в-полях)                       | `DatePickerPropSide<TYPE>`                                                                                                                                                                | -                     | Иконка или текст слева внутри поля                         |
+| [`rightSide?`](#иконки-и-текст-в-полях)                      | `DatePickerPropSide<TYPE>`                                                                                                                                                                | -                     | Иконка или текст справа внутри поля                        |
+| [`withClearButton?`](#кнопка-очистки)                        | `boolean`                                                                                                                                                                                 | -                     | Добавляет кнопку для очистки поля                          |
+| [`required?`](#обязательность)                               | `boolean`                                                                                                                                                                                 | -                     | Обязательность поля                                        |
+| [`renderAdditionalControls?`](#дополнительные-контролы)      | `DateTimeAdditionalControlRenderProp`                                                                                                                                                     | -                     | Дополнительные контролы для календаря                      |
+| [`disableDates?`](#отключение-интервалов)                    | `Array<Date \| [Date, Date]>`                                                                                                                                                             | -                     | Отключенные даты или интервалы                             |
+| [`dropdownOpen?`](#управление-выпадающим-списком)            | `boolean`                                                                                                                                                                                 | -                     | Состояние выпадающего списка (открыт/закрыт)               |
+| [`onDropdownOpen?`](#управление-выпадающим-списком)          | `(open: boolean) => void`                                                                                                                                                                 | -                     | Событие при открытии/закрытии выпадающего списка           |
+| [`ignoreOutsideClicksRefs?`](#управление-выпадающим-списком) | `ReadonlyArray<React.RefObject<HTMLElement>>`                                                                                                                                             | -                     | Ссылки на элементы, игнорируемые при кликах вне компонента |
+| [`onError?`](#обработка-ошибок)                              | `DatePickerPropOnError`                                                                                                                                                                   | -                     | Обработка ошибок ввода                                     |
+| [`multiplicityHours?`](#интервал-времени)                    | `number`                                                                                                                                                                                  | `1`                   | Интервал для вывода часов                                  |
+| [`multiplicityMinutes?`](#интервал-времени)                  | `number`                                                                                                                                                                                  | `1`                   | Интервал для вывода минут                                  |
+| [`multiplicitySeconds?`](#интервал-времени)                  | `number`                                                                                                                                                                                  | `1`                   | Интервал для вывода секунд                                 |
+| `name?`                                                      | `DatePickerPropName<TYPE>`                                                                                                                                                                | -                     | Имя поля ввода                                             |
+| `minDate?`                                                   | `Date`                                                                                                                                                                                    | `01.01.0001 00:00:00` | Минимальная дата для выбора                                |
+| `maxDate?`                                                   | `Date`                                                                                                                                                                                    | `31.12.9999 23:59:59` | Максимальная дата для выбора                               |
+| `events?`                                                    | `Date[]`                                                                                                                                                                                  | -                     | События на календаре                                       |
+| `dateTimeView?`                                              | `'classic' \| 'book' \| 'slider'`                                                                                                                                                         | `'classic'`           | Вид календаря                                              |
+| `locale?`                                                    | `Locale`                                                                                                                                                                                  | `ruLocale`            | Локализация календаря                                      |
+| `currentVisibleDate?`                                        | `Date`                                                                                                                                                                                    | `new Date()`          | Текущая отображаемая дата                                  |
+| `onChangeCurrentVisibleDate?`                                | `(date: Date) => void`                                                                                                                                                                    | -                     | Событие при изменении отображаемой даты                    |
+| `disabled?`                                                  | `boolean`                                                                                                                                                                                 | -                     | Отключение ввода                                           |
+| `onFocus?`                                                   | `DatePickerPropOnFocus<TYPE>`                                                                                                                                                             | -                     | Событие при фокусе                                         |
+| `onBlur?`                                                    | `DatePickerPropOnFocus<TYPE>`                                                                                                                                                             | -                     | Событие при потере фокуса                                  |
+| `autoFocus?`                                                 | `boolean`                                                                                                                                                                                 | -                     | Автофокус на поле                                          |
+| `placeholder?`                                               | `DatePickerPropPlaceholder<TYPE>`                                                                                                                                                         | `'ДД.ММ.ГГГГ'`        | Подсказка в поле                                           |
+| `inputRef?`                                                  | `DatePickerPropInputRef<TYPE>`                                                                                                                                                            | -                     | Ссылка на DOM-элемент поля ввода                           |
+| `dropdownForm?`                                              | `'default' \| 'brick' \| 'round'`                                                                                                                                                         | `'default'`           | Форма выпадающего календаря                                |
+| `dropdownClassName?`                                         | `string`                                                                                                                                                                                  | -                     | CSS-класс для выпадающего блока                            |
+| `className?`                                                 | `string`                                                                                                                                                                                  | -                     | CSS-класс для компонента                                   |
+| `ref?`                                                       | `React.Ref<HTMLDivElement>`                                                                                                                                                               | -                     | Ссылка на корневой DOM-элемент                             |
 
-type Range = 'date-range' | 'date-time-range' | 'year-range' | 'month-range';
+## Содержимое
 
-type DatePickerPropValue<TYPE> =
-  | (TYPE extends 'date' ? Date : [Date?, Date?])
-  | null;
+### Выбор даты
 
-type DatePickerPropInputRef<TYPE> = TYPE extends Range
-  ? [React.Ref<HTMLInputElement>?, React.Ref<HTMLInputElement>?]
-  : React.Ref<HTMLInputElement>;
+Свойства `value` и `onChange` управляют выбранной датой или периодом. `value` принимает дату (`Date`) для одиночного выбора или массив дат (`[Date?, Date?]`) для периода. `onChange` вызывается при изменении значения.
 
-type DatePickerPropSide<TYPE> = TYPE extends Range
-  ?
-      | [(string | IconComponent)?, (string | IconComponent)?]
-      | string
-      | IconComponent
-  : string | IconComponent;
+<MdxTabs>
 
-type DatePickerPropOnFocus<TYPE> = TYPE extends Range
-  ?
-      | [
-          React.FocusEventHandler<HTMLElement>?,
-          React.FocusEventHandler<HTMLElement>?,
-        ]
-      | React.FocusEventHandler<HTMLElement>
-  : React.FocusEventHandler<HTMLElement>;
+<DatePickerExampleValue />
 
-type DatePickerPropName<TYPE> = TYPE extends Range
-  ? [string?, string?] | string
-  : string;
-
-export type DatePickerPropPlaceholder<TYPE> = TYPE extends Range
-  ? [string?, string?] | string
-  : string;
-
-type DatePickerPropOnChange<TYPE> = (
-  value: DatePickerPropValue<TYPE>,
-  props: {
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
-  },
-) => void;
-
-type DatePickerPropOnError = (
-  props:
-    | {
-        type: 'outOfRange';
-        stringValue: string;
-        dd?: string;
-        MM?: string;
-        yyyy?: string;
-        date: Date;
-      }
-    | {
-        type: 'invalidInputAttempt';
-        stringValue: string;
-        dd?: string;
-        MM?: string;
-        yyyy?: string;
-      }
-    | {
-        type: 'startDateIsGreaterThanEndDate';
-        date: DateRange;
-      },
-) => void;
+```tsx
+const [value, setValue] = useState<Date | null>(null);
+return <DatePicker value={value} onChange={setValue} />;
 ```
 
-| Свойство                                                                                   | Тип                                                                                                                                                                                                                                                         | По умолчанию                                        | Описание                                                                                                                              |
-| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| [`onChange?`](#выбор-даты)                                                                 | `DatePickerPropOnChange<TYPE>`                                                                                                                                                                                                                              | -                                                   | Событие выбора даты или периода                                                                                                       |
-| [`value?`](#выбор-даты)                                                                    | `DatePickerPropValue<TYPE>`                                                                                                                                                                                                                                 | -                                                   | Выбранная дата или период                                                                                                             |
-| [`type?`](#тип-дата-или-период)                                                            | `'date'` &#124; `'date-range'` &#124; `'date-time'` &#124; `'date-time-range'` &#124; `'time'` &#124; `'month'` &#124; `'month-range'` &#124; `'year'` &#124; `'year-range'`                                                                                | `date`                                              | Тип календаря: выбор даты, времени или выбор периода                                                                                  |
-| [`label?`](#лейбл)                                                                         | `string`                                                                                                                                                                                                                                                    | -                                                   | Лейбл к полю ввода                                                                                                                    |
-| [`labelIcon?`](#лейбл)                                                                     | `IconComponent`                                                                                                                                                                                                                                             | -                                                   | Иконка слева от лейбла                                                                                                                |
-| [`labelPosition?`](#лейбл)                                                                 | `'top'` &#124; `'left'`                                                                                                                                                                                                                                     | `'top'`                                             | Положение лейбла относительно поля                                                                                                    |
-| [`caption?`](#подпись)                                                                     | `string`                                                                                                                                                                                                                                                    | -                                                   | Подпись под полем ввода                                                                                                               |
-| `name?`                                                                                    | `DatePickerPropName<TYPE>`                                                                                                                                                                                                                                  | -                                                   | Имя поля ввода                                                                                                                        |
-| [`withClearButton?`](#кнопка-для-очистки-поля)                                             | `boolean`                                                                                                                                                                                                                                                   | -                                                   | Добавляет крестик, по которому можно очистить поле, если оно заполнено                                                                |
-| [`required?`](#обязательность)                                                             | `boolean`                                                                                                                                                                                                                                                   | -                                                   | Нужно заполнить                                                                                                                       |
-| `minDate?`                                                                                 | `Date`                                                                                                                                                                                                                                                      | `01.01.0001 00:00:00`                               | Ограничение выбора по меньшей дате, см. [DateTime](##LIBS.LIB.STAND/lib:uikit/stand:components-datetime-stable)                       |
-| `maxDate?`                                                                                 | `Date`                                                                                                                                                                                                                                                      | `31.12.9999 23:59:59`                               | Ограничение выбора по большей дате, см. [DateTime](##LIBS.LIB.STAND/lib:uikit/stand:components-datetime-stable)                       |
-| `events?`                                                                                  | `Date[]`                                                                                                                                                                                                                                                    | -                                                   | События на календаре, см. [DateTime](##LIBS.LIB.STAND/lib:uikit/stand:components-datetime-stable)                                     |
-| `dateTimeView?`                                                                            | `'classic'` &#124; `'book'` &#124; `'slider'`                                                                                                                                                                                                               | `'classic'`                                         | Вид календаря: одна страничка, две странички или слайдер, см. [DateTime](##LIBS.LIB.STAND/lib:uikit/stand:components-datetime-stable) |
-| `locale?`                                                                                  | `Locale`                                                                                                                                                                                                                                                    | `ruLocale`                                          | Локализация, см. [DateTime](##LIBS.LIB.STAND/lib:uikit/stand:components-datetime-stable)                                              |
-| [`onError?`](#обработка-ошибок)                                                            | `DatePickerPropOnError`                                                                                                                                                                                                                                     | -                                                   | Сработает, если пользователь ввёл дату с ошибкой                                                                                      |
-| `currentVisibleDate?`                                                                      | `Date`                                                                                                                                                                                                                                                      | `new Date()`                                        | Дата, которая входит в страницу календаря, которую можно показать                                                                     |
-| `onChangeCurrentVisibleDate?`                                                              | `(date: Date) => void`                                                                                                                                                                                                                                      | -                                                   | Сработает при изменении отображаемого месяца или года                                                                                 |
-| `disabled?`                                                                                | `boolean`                                                                                                                                                                                                                                                   | -                                                   | Отключает возможность ввода, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                            |
-| `size?`                                                                                    | `'m'` &#124; `'xs'` &#124; `'s'` &#124; `'l'`                                                                                                                                                                                                               | `'m'`                                               | Размер, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                                                 |
-| `form?`                                                                                    | `'default'` &#124; `'brick'` &#124; `'round'` &#124; `'clearRound'` &#124; `'roundClear'` &#124; `'clearDefault'` &#124; `'defaultClear'` &#124; `'defaultBrick'` &#124; `'brickDefault'` &#124; `'brickClear'` &#124; `'clearBrick'` &#124; `'clearClear'` | `'default'`                                         | Форма поля, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                                             |
-| `view?`                                                                                    | `'default'` &#124; `'clear'`                                                                                                                                                                                                                                | `'default'`                                         | Внешний вид поля, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                                       |
-| `status?`                                                                                  | `'alert'` &#124; `'success'` &#124; `'warning'`                                                                                                                                                                                                             | -                                                   | Статус поля, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                                            |
-| `onFocus?`                                                                                 | `DatePickerPropOnFocus<TYPE>`                                                                                                                                                                                                                               | -                                                   | Событие по фокусу в поле, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                               |
-| `onBlur?`                                                                                  | `DatePickerPropOnFocus<TYPE>`                                                                                                                                                                                                                               | -                                                   | Событие при потере фокуса в поле, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                       |
-| `autoFocus?`                                                                               | `boolean`                                                                                                                                                                                                                                                   | -                                                   | Перемещает фокус в поле, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                                |
-| `placeholder?`                                                                             | `DatePickerPropPlaceholder<TYPE>`                                                                                                                                                                                                                           | `'ДД.ММ.ГГГГ' или другой в соответствии с форматом` | Подсказка в поле, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                                       |
-| `inputRef?`                                                                                | `DatePickerPropInputRef<TYPE>`                                                                                                                                                                                                                              | -                                                   | Ссылка на DOM-элемент поля ввода, недоступна при выборе диапазона дат                                                                 |
-| [`format?`](#формат-даты)                                                                  | `string`                                                                                                                                                                                                                                                    | `'dd.MM.yyyy'`                                      | Формат даты                                                                                                                           |
-| [`separator?`](#формат-даты)                                                               | `string`                                                                                                                                                                                                                                                    | `'.'`                                               | Разделитель для даты, используется вместе с форматом                                                                                  |
-| `dropdownForm?`                                                                            | `'default'` &#124; `'brick'` &#124; `'round'`                                                                                                                                                                                                               | `'default'`                                         | Форма календаря                                                                                                                       |
-| `leftSide?`                                                                                | `DatePickerPropSide<TYPE>`                                                                                                                                                                                                                                  | -                                                   | Иконка или текст слева, внутри поля, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                    |
-| `rightSide?`                                                                               | `DatePickerPropSide<TYPE>`                                                                                                                                                                                                                                  | -                                                   | Иконка или текст справа, внутри поля, см. [TextField](##LIBS.LIB.STAND/lib:uikit/stand:components-textfield-stable)                   |
-| [`multiplicitySeconds?`](#интервал-при-выборе-времени)                                     | `number`                                                                                                                                                                                                                                                    | 1                                                   | Интервал для вывода секунд (1 — показать все секунды, 0 — убрать секунды)                                                             |
-| [`multiplicityMinutes?`](#интервал-при-выборе-времени)                                     | `number`                                                                                                                                                                                                                                                    | 1                                                   | Интервал для вывода минут (1 — показать все минуты, 0 — убрать минуты)                                                                |
-| [`multiplicityHours?`](#интервал-при-выборе-времени)                                       | `number`                                                                                                                                                                                                                                                    | 1                                                   | Интервал для вывода часов (1 — показать все часы, 0 — убрать часы)                                                                    |
-| [`renderAdditionalControls?`](##LIBS.LIB.STAND/lib:uikit/stand:components-DateTime-stable) | `DateTimeAdditionalControlRenderProp`                                                                                                                                                                                                                       | -                                                   | Дополнительные контролы для выбора даты                                                                                               |
-| `className?`                                                                               | `string`                                                                                                                                                                                                                                                    | -                                                   | Дополнительный CSS-класс                                                                                                              |
-| `dropdownClassName?`                                                                       | `string`                                                                                                                                                                                                                                                    | -                                                   | Дополнительный CSS-класс для выпадающего блока                                                                                        |
-| [`onDropdownOpen?`](#управление-состоянием-выпадающего-списка)                             | `(open: boolean) => void;`                                                                                                                                                                                                                                  | -                                                   | Событие срабатывает при открытии списка                                                                                               |
-| [`dropdownOpen?` ](#управление-состоянием-выпадающего-списка)                              | `boolean`                                                                                                                                                                                                                                                   | -                                                   | Состояние открыт/закрыт выпадающего списка                                                                                            |
-| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выпадающего-списка)                    | `ReadonlyArray<React.RefObject<HTMLElement>>`                                                                                                                                                                                                               | -                                                   | Ссылки на элементы, которые нужно игнорировать при кликах вне компонента                                                              |
-| `ref?`                                                                                     | `React.Ref<HTMLDivElement>`                                                                                                                                                                                                                                 | -                                                   | Ссылка на корневой DOM-элемент компонента                                                                                             |
+</MdxTabs>
+
+### Тип календаря
+
+Свойство `type` определяет режим выбора:
+
+- `date` — одна дата.
+- `date-range` — период дат.
+- `date-time` — дата и время.
+- `date-time-range` — период с временем.
+- `time` — только время.
+- `month` — месяц.
+- `month-range` — период месяцев.
+- `year` — год.
+- `year-range` — период годов.
+
+<MdxTabs>
+
+<DatePickerExampleTypeDate />
+
+```tsx
+const [value, setValue] = useState<Date | null>(null);
+return <DatePicker type="date" value={value} onChange={setValue} />;
+```
+
+</MdxTabs>
+
+<MdxTabs>
+
+<DatePickerExampleTypeDateRange />
+
+```tsx
+const [value, setValue] = useState<[Date?, Date?] | null>(null);
+return <DatePicker type="date-range" value={value} onChange={setValue} />;
+```
+
+</MdxTabs>
+
+### Формат даты
+
+Свойства `format` и `separator` задают формат отображения даты. По умолчанию `format="dd.MM.yyyy"`, `separator="."`. Для американского формата используйте `format="MM/dd/yyyy"`, `separator="/"`.
+
+<MdxInformer status="warning">
+  Если тип требует ввода даты с точностью до дня, указывайте формат с точностью
+  до дня. Для месяца и года — только месяц и год.
+</MdxInformer>
+
+<MdxInformer status="normal">
+  Время всегда указывается после даты в формате.
+</MdxInformer>
+
+<MdxTabs>
+
+<DatePickerExampleFormat />
+
+```tsx
+const [value, setValue] = useState<Date | null>(null);
+return (
+  <DatePicker
+    type="date-time"
+    format="MM/dd/yyyy HH:mm"
+    separator="/"
+    placeholder="ММ/ДД/ГГГГ ЧЧ:ММ"
+    value={value}
+    onChange={setValue}
+  />
+);
+```
+
+</MdxTabs>
+
+### Интервал времени
+
+Для режимов с временем (`date-time`, `date-time-range`) свойства `multiplicityHours`, `multiplicityMinutes` и `multiplicitySeconds` задают интервалы выбора. По умолчанию — 1 (все значения). Укажите 0, чтобы скрыть единицу, или, например, 15 для минут, чтобы показывать только четверти часа.
+
+<MdxTabs>
+
+<DatePickerExampleMulti />
+
+</MdxTabs>
+
+## Внешний вид
+
+### Лейбл
+
+Свойства `label`, `labelPosition` и `labelIcon` добавляют текстовую метку и иконку. `labelPosition` может быть `top` или `left`.
+
+<MdxTabs>
+
+<DatePickerExampleLabel />
+
+```tsx
+<>
+  <DatePicker label="Лейбл" labelPosition="top" />
+  <DatePicker label="Лейбл" labelPosition="left" />
+</>
+```
+
+</MdxTabs>
+
+<MdxTabs>
+
+<DatePickerExampleLabelIcon />
+
+```tsx
+<DatePicker label="Лейбл" labelIcon={IconQuestion} />
+```
+
+</MdxTabs>
+
+### Подпись
+
+Свойство `caption` добавляет подпись под полем, которая наследует стиль от `status`.
+
+<MdxTabs>
+
+<DatePickerExampleCaption />
+
+```tsx
+<>
+  <DatePicker status="success" caption="Успешно" />
+  <DatePicker status="alert" caption="Ошибка" />
+  <DatePicker status="warning" caption="Предупреждение" />
+  <DatePicker caption="Обычная подпись" />
+</>
+```
+
+</MdxTabs>
+
+### Статус
+
+Свойство `status` (`success`, `alert`, `warning`) выделяет поле цветом, указывая на его состояние.
+
+<MdxTabs>
+
+<DatePickerExampleStatus />
+
+```tsx
+<>
+  <DatePicker status="success" />
+  <DatePicker status="alert" />
+  <DatePicker status="warning" />
+  <DatePicker />
+</>
+```
+
+</MdxTabs>
+
+### Размер и форма
+
+Свойства `size`, `form` и `view` настраивают внешний вид поля:
+
+- `size`: `xs`, `s`, `m`, `l`.
+- `form`: `default`, `brick`, `round`, `clearRound`, и другие комбинации.
+- `view`: `default`, `clear`.
+
+### Иконки и текст в полях
+
+Свойства `leftSide` и `rightSide` добавляют иконки или текст внутри полей. Для типов с двумя полями (`date-range` и др.) можно указать массив значений: `[значение_для_левого_поля, значение_для_правого_поля]`.
+
+<MdxTabs>
+
+<DatePickerExampleTwoIcons />
+
+```tsx
+const [value, setValue] = useState<[Date?, Date?] | null>(null);
+return (
+  <DatePicker
+    type="date-range"
+    value={value}
+    onChange={setValue}
+    leftSide={[IconForward, IconBackward]}
+    rightSide={['туда', 'обратно']}
+    placeholder={['Начало', 'Конец']}
+  />
+);
+```
+
+</MdxTabs>
+
+### Кнопка очистки
+
+Свойство `withClearButton` добавляет крестик для очистки поля, который появляется при наличии значения.
+
+<MdxTabs>
+
+<DatePickerExampleWithClearButton />
+
+```tsx
+const [value, setValue] = useState<Date | null>(null);
+return <DatePicker value={value} onChange={setValue} withClearButton />;
+```
+
+</MdxTabs>
+
+## Поведение
+
+### Обязательность
+
+Свойство `required` делает поле обязательным, добавляя маркер к лейблу.
+
+<MdxTabs>
+
+<DatePickerExampleRequired />
+
+```tsx
+<>
+  <DatePicker label="Обязательное" required />
+  <DatePicker label="Необязательное" />
+</>
+```
+
+</MdxTabs>
+
+### Дополнительные контролы
+
+Свойство `renderAdditionalControls` позволяет добавить кастомные элементы управления в календарь, например, кнопку для выбора текущего квартала.
+
+<MdxTabs>
+
+<DatePickerExampleAdditionalControls />
+
+```tsx
+const [value, setValue] = useState<DatePickerPropValue<'date-range'>>([
+  undefined,
+  undefined,
+]);
+const setQuarter = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  if (month >= 0 && month < 3) {
+    setValue([new Date(year, 0, 1), new Date(year, 3, 0)]);
+  } else if (month >= 3 && month < 6) {
+    setValue([new Date(year, 3, 1), new Date(year, 6, 0)]);
+  } else if (month >= 6 && month < 9) {
+    setValue([new Date(year, 6, 1), new Date(year, 9, 0)]);
+  } else {
+    setValue([new Date(year, 9, 1), new Date(year + 1, 0, 0)]);
+  }
+};
+return (
+  <DatePicker
+    value={value}
+    type="date-range"
+    onChange={setValue}
+    renderAdditionalControls={({ currentVisibleDate }) => (
+      <Button
+        label="Этот квартал"
+        onClick={() => currentVisibleDate && setQuarter(currentVisibleDate)}
+      />
+    )}
+  />
+);
+```
+
+</MdxTabs>
+
+### Отключение интервалов
+
+Свойство `disableDates` позволяет запретить выбор определённых дат или интервалов, передавая массив дат или пар дат.
+
+<MdxTabs>
+
+<DatePickerExampleDisableDates />
+
+```tsx
+const getDisableDates = (): Array<Date | [Date, Date]> => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  return [
+    [
+      new Date(year, month, day, 12, 34, 20),
+      new Date(year, month, day, 16, 10, 41),
+    ],
+    new Date(year, month, day + 1),
+    [new Date(year, month, 1), new Date(year, month, 13)],
+  ];
+};
+const disableDates = getDisableDates();
+const [value, setValue] = useState<Date | null>();
+return (
+  <DatePicker
+    type="date-time"
+    value={value}
+    disableDates={disableDates}
+    onChange={setValue}
+  />
+);
+```
+
+</MdxTabs>
+
+### Управление выпадающим списком
+
+Свойства `dropdownOpen`, `onDropdownOpen` и `ignoreOutsideClicksRefs` управляют состоянием выпадающего календаря:
+
+- `dropdownOpen` - флаг открыт/закрыт,
+- `onDropdownOpen` - колбэк отрабатывающий каждый раз при открытии/закрытии,
+- `ignoreOutsideClicksRefs` - список ссылок на элементы по которым игнорируются клики.
+
+<MdxTabs>
+
+<DatePickerExampleDropdownOpen />
+
+```tsx
+const Icon = withAnimateSwitcherHOC({
+  startIcon: IconArrowDown,
+  startDirection: 0,
+  endDirection: 180,
+});
+const [value, setValue] = useState<Item | null>();
+const [open, setOpen] = useFlag();
+const buttonRef = useRef<HTMLButtonElement>(null);
+const inputRef = useRef<HTMLInputElement>(null);
+const onDropdownOpen = useCallback((open: boolean) => {
+  setOpen.set(open);
+  if (open) {
+    inputRef.current?.focus();
+  }
+}, []);
+return (
+  <AnimateIconSwitcherProvider active={open}>
+    <FieldGroup>
+      <Button
+        ref={buttonRef}
+        label={open ? 'Закрыть' : 'Открыть'}
+        onClick={setOpen.toggle}
+        iconLeft={Icon}
+        onlyIcon
+      />
+      <DatePicker
+        inputRef={inputRef}
+        placeholder="Выберите вариант"
+        value={value}
+        onChange={setValue}
+        dropdownOpen={open}
+        onDropdownOpen={onDropdownOpen}
+        ignoreOutsideClicksRefs={[buttonRef]}
+      />
+    </FieldGroup>
+  </AnimateIconSwitcherProvider>
+);
+```
+
+</MdxTabs>
+
+### Обработка ошибок
+
+Свойство `onError` позволяет отслеживать ошибки ввода:
+
+- `outOfRange` — дата, которую вводит пользователь, не попадает в диапазон между `minDate` и `maxDate`.
+- `invalidInputAttempt` — пользователь вводит несуществующую дату.
+- `startDateIsGreaterThanEndDate` — дата начала больше, чем дата конца периода.
+
+<MdxTabs>
+
+<DatePickerExampleOnError />
+
+```tsx
+const minDate = new Date(2000, 1, 1);
+const maxDate = new Date(2001, 1, 1);
+const formatDate = (date: Date) => format(date, 'dd.MM.yyyy');
+const ref = useRef<HTMLDivElement>(null);
+const [value, setValue] = useState<[Date?, Date?] | null>(null);
+const [error, setError] = useState<string | undefined>();
+const onChange: DatePickerPropOnChange<'date-range'> = (value) => {
+  setValue(value);
+  setError(undefined);
+};
+const onError: DatePickerPropOnError = (props) => {
+  if (props.type === 'outOfRange') {
+    setError(
+      `Дата ${formatDate(props.date)} не входит в диапазон c ${formatDate(
+        minDate,
+      )} по ${formatDate(maxDate)}`,
+    );
+  }
+  if (props.type === 'invalidInputAttempt') {
+    setError(`Даты ${props.stringValue} не существует`);
+  }
+  if (props.type === 'startDateIsGreaterThanEndDate') {
+    setError(
+      `Дата начала (${formatDate(
+        props.date[0],
+      )}) больше, чем дата конца (${formatDate(props.date[1])})`,
+    );
+  }
+};
+return (
+  <>
+    <DatePicker
+      minDate={minDate}
+      maxDate={maxDate}
+      ref={ref}
+      status={error ? 'alert' : undefined}
+      value={value}
+      onChange={onChange}
+      type="date-range"
+      onError={onError}
+    />
+    <Tooltip isOpen={!!error} status="alert" anchorRef={ref}>
+      {error}
+    </Tooltip>
+  </>
+);
+```
+
+</MdxTabs>
+
+## Пример использования
+
+```tsx
+const [value, setValue] = useState<Date | null>(null);
+return (
+  <DatePicker
+    type="date"
+    value={value}
+    onChange={setValue}
+    label="Выберите дату"
+    labelPosition="top"
+    withClearButton
+  />
+);
+```
