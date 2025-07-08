@@ -43,7 +43,7 @@ export const { createStand } = createConfig({
   standTabs: [
     // табы по умолчанию
     { id: '', label: 'Обзор' },
-    { id: 'dev', label: 'Разработчикам' },
+    { id: 'dev', label: 'Код и свойства' },
     { id: 'design', label: 'Дизайнерам', figma: true },
     { id: 'sandbox', label: 'Песочница', sandbox: true },
     // свои табы
