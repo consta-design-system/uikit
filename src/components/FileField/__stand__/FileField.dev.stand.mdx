@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 
 import { FileFieldExampleRenderProp } from './examples/FileFieldExampleRenderProp/FileFieldExampleRenderProp';
 import {
@@ -6,23 +6,35 @@ import {
   FileFieldExampleWithoutRenderPropIcon,
 } from './examples/FileFieldExampleWithoutRenderProp/FileFieldExampleWithoutRenderProp';
 
-```tsx
-import { FileField } from '@consta/uikit/FileField';
-```
-
 <MdxMenu>
 
+- [Импорт](#импорт)
+- [Свойства](#свойства)
 - [Пример с Render Prop](#пример-с-rende-rprop)
 - [Пример без Render Prop](#пример-без-render-prop)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
 - [Пример использования](#пример)
 
 </MdxMenu>
 
+## Импорт
+
+```tsx
+import { FileField } from '@consta/uikit/FileField';
+```
+
+## Свойства
+
+| Свойство    | Тип                                         | По умолчанию | Описание                                           |
+| ----------- | ------------------------------------------- | ------------ | -------------------------------------------------- |
+| `id`        | `string`                                    | -            | Идентификатор компонента                           |
+| `onChange?` | `(e: DragEvent, React.ChangeEvent) => void` | -            | Действие при выборе файла                          |
+| `inputRef?` | `React.Ref<HTMLInputElement>`               | -            | Ссылка на DOM-элемент `<input>` и все его атрибуты |
+
 ## Пример с Render Prop
 
 Нажмите на кнопку, чтобы открыть выбор файлов.
+
+<MdxTabs>
 
 <FileFieldExampleRenderProp />
 
@@ -39,6 +51,8 @@ const App = () => {
   );
 };
 ```
+
+</MdxTabs>
 
 ## Пример без Render Prop
 
@@ -65,21 +79,7 @@ const App = () => {
 };
 ```
 
-## Импорт
-
-```tsx
-import { FileField } from '@consta/uikit/FileField';
-```
-
-## Свойства
-
-| Свойство    | Тип                                         | По умолчанию | Описание                                           |
-| ----------- | ------------------------------------------- | ------------ | -------------------------------------------------- |
-| `id`        | `string`                                    | -            | Идентификатор компонента                           |
-| `onChange?` | `(e: DragEvent, React.ChangeEvent) => void` | -            | Действие при выборе файла                          |
-| `inputRef?` | `React.Ref<HTMLInputElement>`               | -            | Ссылка на DOM-элемент `<input>` и все его атрибуты |
-
-## Пример
+## Пример использования
 
 ```ts
 import React from 'react';
