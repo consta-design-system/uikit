@@ -3,10 +3,10 @@ import { Transition, TransitionGroup } from 'react-transition-group';
 
 import { Direction } from '##/components/Popover';
 import { useClickOutside } from '##/hooks/useClickOutside';
-import { useForkRef } from '##/hooks/useForkRef';
 import { useMutableRef } from '##/hooks/useMutableRef';
 import { useRefs } from '##/hooks/useRefs';
 import { animateTimeout } from '##/mixs/MixPopoverAnimate';
+import { setRef } from '##/utils/setRef';
 
 import { clearTimers, ContextMenuLevel } from '../ContextMenuLevel';
 import { getLevels, withDefaultGetters } from '../helpers';
@@ -138,8 +138,6 @@ const ContextMenuLevelsRender = (
     return () => clearTimers();
   }, [items]);
 
-  const firstLevelRef = useForkRef([levelsRefs[0], ref]);
-
   useEffect(() => {
     setLevels(defaultLevels);
   }, [position]);
@@ -195,7 +193,7 @@ const ContextMenuLevelsRender = (
                 setHoveredParenLevel={setHoveredParenLevel}
                 getItemSubMenu={getItemSubMenu}
                 getItemKey={getItemKey}
-                ref={index === 0 ? firstLevelRef : levelsRefs[index]}
+                ref={(el) => setRef(levelsRefs[index], el)}
                 spareDirection={index === 0 ? spareDirection : 'rightStartUp'}
                 parent={isMobile ? level.parent : undefined}
                 animate={animate}
