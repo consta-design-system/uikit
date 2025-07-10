@@ -127,31 +127,41 @@ export const ChoiceGroupExample = () => {
 ```tsx
 <>
   <ChoiceGroup
-    value={value}
-    onChange={setValue}
     items={[
-      { name: 'Первый', icon: IconPhoto },
-      { name: 'Второй', icon: IconRing },
-      { name: 'Третий вариант', icon: IconCamera },
+      {
+        label: 'Первый',
+        icon: IconPhoto,
+      },
+      {
+        label: 'Второй',
+        icon: IconRing,
+      },
+      {
+        label: 'Третий вариант',
+        icon: IconCamera,
+      },
     ]}
-    getItemLabel={(item) => item.name}
-    getItemIcon={(item) => item.icon}
     name="ChoiceGroupExampleIcon"
-    multiple={false}
   />
   <ChoiceGroup
-    value={value}
-    onChange={setValue}
     items={[
-      { name: 'Первый', icon: IconPhoto },
-      { name: 'Второй', icon: IconRing },
-      { name: 'Третий вариант', icon: IconCamera },
+      {
+        name: 'Первый',
+        pictogram: IconPhoto,
+      },
+      {
+        name: 'Второй',
+        pictogram: IconRing,
+      },
+      {
+        name: 'Третий вариант',
+        pictogram: IconCamera,
+      },
     ]}
     getItemLabel={(item) => item.name}
-    getItemIcon={(item) => item.icon}
+    getItemIcon={(item) => item.pictogram}
     onlyIcon
     name="ChoiceGroupExampleIcon"
-    multiple={false}
   />
 </>
 ```
@@ -164,45 +174,13 @@ export const ChoiceGroupExample = () => {
 
 Свойство `form` определяет форму кнопок. Доступные варианты: `'default'`, `'brick'`, `'round'`.
 
-<MdxTabs>
-
 <ChoiceGroupExampleForm />
-
-```tsx
-<ChoiceGroup
-  value={value}
-  onChange={setValue}
-  items={['один', 'два', 'три']}
-  getItemLabel={(item) => item}
-  form="default"
-  name="ChoiceGroupExampleForm"
-  multiple={false}
-/>
-```
-
-</MdxTabs>
 
 ### Размер
 
 Свойство `size` задаёт размер кнопок. Доступные варианты: `'xs'`, `'s'`, `'m'`, `'l'`.
 
-<MdxTabs>
-
 <ChoiceGroupExampleSize />
-
-```tsx
-<ChoiceGroup
-  value={value}
-  onChange={setValue}
-  items={['один', 'два', 'три']}
-  getItemLabel={(item) => item}
-  size="xs"
-  name="ChoiceGroupExampleSize"
-  multiple={false}
-/>
-```
-
-</MdxTabs>
 
 ### Ширина
 

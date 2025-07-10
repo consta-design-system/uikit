@@ -28,7 +28,7 @@ const getItemLabel = (item: string) => item;
 
 export const ChoiceGroupExampleAdaptiveScroll = () => {
   return (
-    <Example>
+    <Example col={1}>
       <div className={cnChoiceGroupExampleAdaptiveScroll()}>
         <ChoiceGroup
           name="ChoiceGroupExampleAdaptiveScroll"
@@ -49,7 +49,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
 
   if (desktop) {
     return (
-      <Example>
+      <Example col={1}>
         <ChoiceGroup
           name="ChoiceGroupExampleAdaptiveUseBreakpoints"
           items={items2}
@@ -64,7 +64,7 @@ export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
   }
 
   return (
-    <Example>
+    <Example col={1}>
       <ChoiceGroup
         name="ChoiceGroupExampleAdaptiveUseBreakpoints"
         items={items2}
