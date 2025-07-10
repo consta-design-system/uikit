@@ -1,9 +1,6 @@
 import { MdxMenu, MdxTabs } from '@consta/stand';
 
-import {
-  CheckboxGroupExampleColumn,
-  CheckboxGroupExampleRow,
-} from './examples/CheckboxGroupExampleDirection/CheckboxGroupExampleDirection';
+import { CheckboxGroupExampleDirection } from './examples/CheckboxGroupExampleDirection/CheckboxGroupExampleDirection';
 import { CheckboxGroupExampleSize } from './examples/CheckboxGroupExampleSize/CheckboxGroupExampleSize';
 import { CheckboxGroupExampleDisabled } from './examples/CheckboxGroupExampleDisabled/CheckboxGroupExampleDisabled';
 import { CheckboxGroupExampleView } from './examples/CheckboxGroupExampleView/CheckboxGroupExampleView';
@@ -103,91 +100,13 @@ const [value, setValue] = React.useState(null);
 
 Свойство `size` задаёт размер чекбоксов. Возможные значения: `'xs'`, `'s'`, `'m'`, `'l'`. По умолчанию: `'m'`.
 
-<MdxTabs>
-
 <CheckboxGroupExampleSize />
-
-```tsx
-const items = [
-  { name: 'Один' },
-  { name: 'Два' },
-  { name: 'Три' },
-  { name: 'Четыре', disabled: true },
-  { name: 'Пять' },
-];
-
-const [value, setValue] = React.useState(null);
-
-<>
-  <CheckboxGroup
-    value={value}
-    items={items}
-    getItemLabel={(item) => item.name}
-    getItemDisabled={(item) => item.disabled}
-    onChange={setValue}
-    name="CheckboxGroup"
-    direction="row"
-    size="m"
-  />
-  <CheckboxGroup
-    value={value}
-    items={items}
-    getItemLabel={(item) => item.name}
-    getItemDisabled={(item) => item.disabled}
-    onChange={setValue}
-    name="CheckboxGroup"
-    direction="row"
-    size="l"
-  />
-</>;
-```
-
-</MdxTabs>
 
 ### Стиль
 
 Свойство `view` определяет внешний вид группы чекбоксов. Возможные значения: `'primary'`, `'ghost'`. По умолчанию: `'primary'`.
 
-<MdxTabs>
-
 <CheckboxGroupExampleView />
-
-```tsx
-const items = [
-  { name: 'Один' },
-  { name: 'Два' },
-  { name: 'Три' },
-  { name: 'Четыре', disabled: true },
-  { name: 'Пять' },
-];
-
-const [value, setValue] = React.useState(null);
-
-<>
-  <CheckboxGroup
-    value={value}
-    items={items}
-    getItemLabel={(item) => item.name}
-    getItemDisabled={(item) => item.disabled}
-    onChange={setValue}
-    name="CheckboxGroup"
-    direction="row"
-    view="primary"
-  />
-  <CheckboxGroup
-    value={value}
-    items={items}
-    getItemLabel={(item) => item.name}
-    getItemDisabled={(item) => item.disabled}
-    onChange={setValue}
-    name="CheckboxGroup"
-    direction="row"
-    view="ghost"
-  />
-</>;
-```
-
-</MdxTabs>
 
 ### Расположение чекбоксов
 
@@ -196,59 +115,7 @@ const [value, setValue] = React.useState(null);
 - `'column'` — чекбоксы располагаются в столбик (по умолчанию).
 - `'row'` — чекбоксы располагаются в строку.
 
-<MdxTabs>
-
-<CheckboxGroupExampleColumn />
-
-```tsx
-const items = [
-  { name: 'Один' },
-  { name: 'Два' },
-  { name: 'Три' },
-  { name: 'Четыре', disabled: true },
-  { name: 'Пять' },
-];
-
-const [value, setValue] = React.useState(null);
-
-<CheckboxGroup
-  value={value}
-  items={items}
-  getItemLabel={(item) => item.name}
-  getItemDisabled={(item) => item.disabled}
-  onChange={setValue}
-  direction="column"
-/>;
-```
-
-</MdxTabs>
-
-<MdxTabs>
-
-<CheckboxGroupExampleRow />
-
-```tsx
-const items = [
-  { name: 'Один' },
-  { name: 'Два' },
-  { name: 'Три' },
-  { name: 'Четыре', disabled: true },
-  { name: 'Пять' },
-];
-
-const [value, setValue] = React.useState(null);
-
-<CheckboxGroup
-  value={value}
-  items={items}
-  getItemLabel={(item) => item.name}
-  getItemDisabled={(item) => item.disabled}
-  onChange={setValue}
-  direction="row"
-/>;
-```
-
-</MdxTabs>
+<CheckboxGroupExampleDirection />
 
 ### Выравнивание
 
@@ -257,42 +124,7 @@ const [value, setValue] = React.useState(null);
 - `'center'` — текст выровнен по центру (по умолчанию).
 - `'top'` — текст выровнен по верхнему краю.
 
-<MdxTabs>
-
 <CheckboxGroupExampleAlign />
-
-```tsx
-const items = [
-  { name: 'Один' },
-  { name: 'Два' },
-  { name: 'Три' },
-  { name: 'Четыре', disabled: true },
-  { name: 'Пять' },
-];
-
-const [value, setValue] = React.useState(null);
-
-<>
-  <CheckboxGroup
-    value={value}
-    align="top"
-    items={items}
-    getItemLabel={(item) => item.name}
-    getItemDisabled={(item) => item.disabled}
-    onChange={setValue}
-  />
-  <CheckboxGroup
-    value={value}
-    align="center"
-    items={items}
-    getItemLabel={(item) => item.name}
-    getItemDisabled={(item) => item.disabled}
-    onChange={setValue}
-  />
-</>;
-```
-
-</MdxTabs>
 
 ## Поведение
 

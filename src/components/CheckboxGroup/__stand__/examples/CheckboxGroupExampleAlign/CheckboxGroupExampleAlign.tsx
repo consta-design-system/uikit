@@ -16,6 +16,7 @@ export const CheckboxGroupExampleAlign = () => {
 
   return (
     <Example
+      col={{ 1: 0, 2: 600 }}
       items={aligns}
       getItemDescription={(align) => `align="${align}"`}
       getItemNode={(align) => (
