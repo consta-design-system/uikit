@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 
 import { CardExample } from './examples/CardExample/CardExample';
 import { CardExampleForm } from './examples/CardExampleForm/CardExampleForm';
@@ -8,120 +8,27 @@ import { CardExampleBorder } from './examples/CardExampleBorder/CardExampleBorde
 import { CardExampleSpace } from './examples/CardExampleSpace/CardExampleSpace';
 import { CardExampleAdaptive } from './examples/CardExampleAdaptive/CardExampleAdaptive';
 
-```tsx
-import { Card } from '@consta/uikit/Card';
-```
-
 <MdxMenu>
 
-- [Отступы](#отступы)
-- [Статус](#статус)
-- [Форма](#форма)
-- [Тень](#тень)
-- [Граница](#граница)
-- [Адаптивность](#адаптивность)
+- [Обзор](#обзор)
 - [Импорт](#импорт)
-- [Список свойств](#список-свойств)
-- [Пример использования](#пример)
+- [Свойства](#свойства)
+- [Внешний вид](#внешний-вид)
+  - [Отступы](#отступы)
+  - [Статус](#статус)
+  - [Форма](#форма)
+  - [Тень](#тень)
+  - [Граница](#граница)
+- [Поведение](#поведение)
+  - [Адаптивность](#адаптивность)
+  - [Навигация по клавиатуре](#навигация-по-клавиатуре)
+- [Пример использования](#пример-использования)
 
 </MdxMenu>
 
-## Отступы
+## Обзор
 
-Отступы внутри карточки можно менять с помощью двух свойств:
-
-- за отступы сверху и снизу отвечает `verticalSpace`,
-- за отступы по бокам — `horizontalSpace`.
-
-Варианты:
-`'xs'`, `'s'`, `'m'`, `'l'`, `'xl'`, `'2xl'`, `'3xl'`, `'4xl'`, `'5xl'`.
-
-По умолчанию — `'xs'`.
-
-```tsx
-<Card verticalSpace="xs" horizontalSpace="xs">
-  <Text>Отступы 'xs'</Text>
-</Card>
-```
-
-<CardExampleSpace />
-
-## Статус
-
-Свойство `status` окрашивает рамку карточки в цвета соответствующего статуса. Варианты:
-`'alert'`, `'success'`, `'warning'`.
-
-```tsx
-<Card verticalSpace="2xl" horizontalSpace="2xl" status="alert">
-  <Text>Опасная карточка</Text>
-</Card>
-<Card verticalSpace="2xl" horizontalSpace="2xl" status="warning">
-  <Text>Тревожная карточка</Text>
-</Card>
-<Card verticalSpace="2xl" horizontalSpace="2xl" status="success">
-  <Text>Успешная карточка</Text>
-</Card>
-```
-
-<CardExampleState />
-
-## Форма
-
-За форму карточки отвечает свойство `form`. Варианты:
-`'round'`, `'square'`, по умолчанию `'round'`.
-
-```tsx
-<Card verticalSpace="2xl" horizontalSpace="2xl" form="round">
-  <Text>Круглая карточка</Text>
-</Card>
-<Card verticalSpace="2xl" horizontalSpace="2xl" form="square">
-  <Text>Квадратная карточка</Text>
-</Card>
-```
-
-<CardExampleForm />
-
-## Тень
-
-По умолчанию у карточки есть тень, её можно убирать и показывать с помощью свойства `shadow`.
-
-```tsx
-<Card verticalSpace="2xl" horizontalSpace="2xl" status="success" shadow={false} border>
-  <Text>Карточка с границей</Text>
-</Card>
-<Card verticalSpace="2xl" horizontalSpace="2xl" status="success" shadow={false}>
-  <Text>Карточка без границы</Text>
-</Card>
-```
-
-<CardExampleBorder />
-
-## Граница
-
-По умолчанию у карточки отключены границы, за их отображение отвечает свойство `border`.
-
-```tsx
-<Card verticalSpace="2xl" horizontalSpace="2xl" status="success">
-  <Text>Карточка с тенью</Text>
-</Card>
-<Card verticalSpace="2xl" horizontalSpace="2xl" status="success" shadow={false}>
-  <Text>Карточка без тени</Text>
-</Card>
-```
-
-<CardExampleShadow />
-
-## Адаптивность
-
-Поведение карточек при изменении ширины экрана зависит от правил адаптивности, которые вы установили для своего проекта, от брейкпоинтов, сетки и так далее.
-
-По умолчанию карточки растягиваются и сжимаются в зависимости от ширины экрана, а высота карточек зависит от высоты их содержимого. Но на самом деле карточка — просто контейнер, и может вести себя так, как вы захотите.
-
-Например, сетка из карточек может перестраиваться так:
-
-<CardExampleAdaptive name="1440" />
-<CardExampleAdaptive name="1280" />
-<CardExampleAdaptive name="923" />
+Компонент `Card` — это контейнер для отображения контента с настраиваемыми отступами, формой, тенью, границей и статусом. Подходит для создания карточек с различным содержимым, например, текстом, изображениями или другими компонентами.
 
 ## Импорт
 
@@ -129,26 +36,172 @@ import { Card } from '@consta/uikit/Card';
 import { Card } from '@consta/uikit/Card';
 ```
 
-## Список свойств
+## Свойства
 
-| Свойство                       | Тип или варианты значения                               | По умолчанию | Описание                                                                     |
-| ------------------------------ | ------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------- |
-| [`verticalSpace?`](#отступы)   | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `'xs'`       | Вертикальные отступы                                                         |
-| [`horizontalSpace?`](#отступы) | `'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl', '5xl'` | `'xs'`       | Горизонтальные отступы                                                       |
-| [`status?`](#статус)           | `'alert', 'success', 'warning'`                         | -            | Статус, меняет цвет границ карточки                                          |
-| [`form?`](#форма)              | `'round'`, `'square'`                                   | `'round'`    | Форма                                                                        |
-| [`shadow?`](#тень)             | `boolean`                                               | `'true'`     | Тень                                                                         |
-| [`border?`](#граница)          | `boolean`                                               | `'false'`    | Граница                                                                      |
-| `tabIndex`                     | `number`                                                | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab** |
-| `as`                           | `React.ElementType`                                     | `div`        | HTML-тег для кнопки                                                          |
-| `className`                    | `string`                                                | -            | Дополнительные CSS-классы                                                    |
+| Свойство                                | Тип или варианты значения                                               | По умолчанию | Описание                                                          |
+| --------------------------------------- | ----------------------------------------------------------------------- | ------------ | ----------------------------------------------------------------- |
+| [`verticalSpace?`](#отступы)            | `'xs' \| 's' \| 'm' \| 'l' \| 'xl' \| '2xl' \| '3xl' \| '4xl' \| '5xl'` | `'xs'`       | Вертикальные отступы                                              |
+| [`horizontalSpace?`](#отступы)          | `'xs' \| 's' \| 'm' \| 'l' \| 'xl' \| '2xl' \| '3xl' \| '4xl' \| '5xl'` | `'xs'`       | Горизонтальные отступы                                            |
+| [`status?`](#статус)                    | `'alert' \| 'success' \| 'warning'`                                     | -            | Статус, меняет цвет границ карточки                               |
+| [`form?`](#форма)                       | `'round' \| 'square'`                                                   | `'round'`    | Форма карточки                                                    |
+| [`shadow?`](#тень)                      | `boolean`                                                               | `true`       | Тень                                                              |
+| [`border?`](#граница)                   | `boolean`                                                               | `false`      | Граница                                                           |
+| [`tabIndex?`](#навигация-по-клавиатуре) | `number`                                                                | -            | Порядковый номер при переходе между элементами по клавише **Tab** |
+| `className?`                            | `string`                                                                | -            | Дополнительные CSS-классы                                         |
+| `as?`                                   | `React.ElementType`                                                     | `div`        | HTML-тег для компонента                                           |
 
-## Пример
+## Внешний вид
+
+### Отступы
+
+Свойства `verticalSpace` и `horizontalSpace` задают внутренние отступы карточки. Возможные значения: `'xs'`, `'s'`, `'m'`, `'l'`, `'xl'`, `'2xl'`, `'3xl'`, `'4xl'`, `'5xl'`. По умолчанию — `'xs'`.
+
+- `verticalSpace` отвечает за отступы сверху и снизу.
+- `horizontalSpace` — за отступы по бокам.
+
+<MdxTabs>
+
+<CardExampleSpace />
 
 ```tsx
-<Card verticalSpace={'2xl'} horizontalSpace={'2xl'} status={'alert'}>
+<Card verticalSpace="xs" horizontalSpace="xs">
+  <Text>Отступы 'xs'</Text>
+</Card>
+```
+
+</MdxTabs>
+
+### Статус
+
+Свойство `status` окрашивает рамку карточки в цвета, соответствующие статусу. Возможные значения: `'alert'`, `'success'`, `'warning'`. Без указания свойства статус не отображается.
+
+<MdxTabs>
+
+<CardExampleState />
+
+```tsx
+<>
+  <Card verticalSpace="2xl" horizontalSpace="2xl" status="alert">
+    <Text>Опасная карточка</Text>
+  </Card>
+  <Card verticalSpace="2xl" horizontalSpace="2xl" status="warning">
+    <Text>Тревожная карточка</Text>
+  </Card>
+  <Card verticalSpace="2xl" horizontalSpace="2xl" status="success">
+    <Text>Успешная карточка</Text>
+  </Card>
+</>
+```
+
+</MdxTabs>
+
+### Форма
+
+Свойство `form` определяет форму углов карточки. Возможные значения: `'round'` (скругленные углы, по умолчанию) и `'square'` (прямые углы).
+
+<MdxTabs>
+
+<CardExampleForm />
+
+```tsx
+<>
+  <Card verticalSpace="2xl" horizontalSpace="2xl" form="round">
+    <Text>Круглая карточка</Text>
+  </Card>
+  <Card verticalSpace="2xl" horizontalSpace="2xl" form="square">
+    <Text>Квадратная карточка</Text>
+  </Card>
+</>
+```
+
+</MdxTabs>
+
+### Тень
+
+Свойство `shadow` управляет отображением тени. По умолчанию тень включена (`true`). Установите `shadow={false}`, чтобы отключить тень.
+
+<MdxTabs>
+
+<CardExampleShadow />
+
+```tsx
+<>
+  <Card verticalSpace="2xl" horizontalSpace="2xl" status="success">
+    <Text>Карточка с тенью</Text>
+  </Card>
+  <Card
+    verticalSpace="2xl"
+    horizontalSpace="2xl"
+    status="success"
+    shadow={false}
+  >
+    <Text>Карточка без тени</Text>
+  </Card>
+</>
+```
+
+</MdxTabs>
+
+### Граница
+
+Свойство `border` включает или отключает отображение границы. По умолчанию граница отключена (`false`). Установите `border={true}`, чтобы включить границу.
+
+<MdxTabs>
+
+<CardExampleBorder />
+
+```tsx
+<>
+  <Card
+    verticalSpace="2xl"
+    horizontalSpace="2xl"
+    status="success"
+    shadow={false}
+    border
+  >
+    <Text>Карточка с границей</Text>
+  </Card>
+  <Card
+    verticalSpace="2xl"
+    horizontalSpace="2xl"
+    status="success"
+    shadow={false}
+  >
+    <Text>Карточка без границы</Text>
+  </Card>
+</>
+```
+
+</MdxTabs>
+
+## Поведение
+
+### Адаптивность
+
+Компонент `Card` адаптируется к ширине экрана в зависимости от заданных в проекте правил (брейкпоинтов, сетки и т.д.). По умолчанию карточка растягивается или сжимается по ширине, а высота зависит от содержимого. Вы можете настроить поведение карточки под свои нужды, так как это универсальный контейнер.
+
+Пример адаптивной сетки из карточек:
+
+<CardExampleAdaptive name="1440" />
+<CardExampleAdaptive name="1280" />
+<CardExampleAdaptive name="923" />
+
+### Навигация по клавиатуре
+
+Свойство `tabIndex` задаёт порядковый номер для перехода между элементами интерфейса с помощью клавиши **Tab**. Используйте, если карточка должна быть интерактивной.
+
+## Пример использования
+
+Базовый пример использования компонента `Card`:
+
+<MdxTabs>
+
+<CardExample />
+
+```tsx
+<Card verticalSpace="2xl" horizontalSpace="2xl" status="alert">
   <Text>Здесь может быть ваш текст</Text>
 </Card>
 ```
 
-<CardExample />
+</MdxTabs>

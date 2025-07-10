@@ -1,5 +1,21 @@
 # Changelog
 
+## v5.24.0 (01/07/2025)
+BREAKING CHANGE: need to update 'compute-scroll-into-view' package
+
+---
+
+- [chore: update compute-scroll-into-view (#3989)](https://github.com/consta-design-system/uikit/commit/a0e25c9b5ce9bb0e22933d0fd936f8d073ae4fde) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Card): implementation of editorial policy (#3986)](https://github.com/consta-design-system/uikit/commit/3b34dde96864923c1c141100d20793bfb4b67cf5) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Button): implementation of editorial policy (#3984)](https://github.com/consta-design-system/uikit/commit/d52e0a63983b6f9c263891f5976ca3ba26ae4e54) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(BadgeGroup): implementation of editorial policy (#3980)](https://github.com/consta-design-system/uikit/commit/c9d6809b98b84ab73fae38bcab5e53ebc8e7ea55) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(AutoComplete Canary): implementation of editorial policy (#3979)](https://github.com/consta-design-system/uikit/commit/c4deea006beb65b37fed1ef4ec42cbcb2aa3c094) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(AutoComplete): update docs(#3978)](https://github.com/consta-design-system/uikit/commit/cf1cdd4a3206430d1cca5ccecc9c5c826c0a07eb) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(AvatarGroup): update docs(#3977)](https://github.com/consta-design-system/uikit/commit/4741a26e92bd303c540ba29a71c024e04f9bf485) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Badge): update Badge.dev.stand.mdx (#3976)](https://github.com/consta-design-system/uikit/commit/7ac0e986f48ae9b5c64b50bbe8bd9e1470ea4fbb) - [@alyonurchick1](https://github.com/alyonurchick1)
+
+--------------------
+
 ## v5.23.0 (24/06/2025)
 - [feat(PortalWithTheme): added type React.RefObject<HTMLElement> for container (#3973)](https://github.com/consta-design-system/uikit/commit/e5ec16b06484ccf7476ab40182154044a2fb55a7) - [@gizeasy](https://github.com/gizeasy)
 - [docs: implementation of editorial policy (#3970)](https://github.com/consta-design-system/uikit/commit/a19f26a685d30171100812a6c0dfd07f04f8a902) - [@alyonurchick1](https://github.com/alyonurchick1)
@@ -362,8 +378,3 @@
 - [fix(Switch): add onChangeDefault](https://github.com/consta-design-system/uikit/commit/d30f834cfadd5b68bb6c9ce78ddf7c0016c64ddb) - [@gizeasy](https://github.com/gizeasy)
 - [fix(Radio): add onChangeDefault](https://github.com/consta-design-system/uikit/commit/f25c771f3b7c3c916a4aa60f3552e5130a05a6f9) - [@gizeasy](https://github.com/gizeasy)
 - [fix(Checkbox): add onChangeDefault (#3428)](https://github.com/consta-design-system/uikit/commit/68e9a6fa7f1c0863919bc1721302f52c5613d67f) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.0.1 (09/01/2024)
-- [fix(Selects): fixed classNames (#3425)](https://github.com/consta-design-system/uikit/commit/b562ca25a6fce40a25b9fcc7bf9b7a819ced6b80) - [@gizeasy](https://github.com/gizeasy)
