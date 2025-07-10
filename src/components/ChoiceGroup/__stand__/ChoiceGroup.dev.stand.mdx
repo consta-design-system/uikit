@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 
 import { ChoiceGroupExampleIcon } from './examples/ChoiceGroupExampleIcon/ChoiceGroupExampleIcon';
 import { ChoiceGroupExampleView } from './examples/ChoiceGroupExampleView/ChoiceGroupExampleView';
@@ -27,35 +27,72 @@ import {
   ChoiceGroupExampleAdaptiveUseBreakpoints,
 } from './examples/ChoiceGroupExampleAdaptive/ChoiceGroupExampleAdaptive';
 
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Текст на кнопках](#текст-на-кнопках)
+  - [Иконки](#иконки)
+- [Внешний вид](#внешний-вид)
+  - [Форма кнопок](#форма-кнопок)
+  - [Размер](#размер)
+  - [Ширина](#ширина)
+  - [Стиль](#стиль)
+- [Поведение](#поведение)
+  - [Один или несколько вариантов](#один-или-несколько-вариантов)
+  - [Неактивные кнопки](#неактивные-кнопки)
+- [Адаптивность](#адаптивность)
+  - [Прокрутка](#прокрутка)
+  - [Преобразование в RadioGroup](#преобразование-в-radiogroup)
+- [Пример использования](#пример-использования)
+
+</MdxMenu>
+
+## Обзор
+
+Компонент `ChoiceGroup` — это группа кнопок, которая позволяет пользователю выбрать один или несколько вариантов из предложенных. Используется для представления набора опций, таких как фильтры, переключатели или выбор настроек. Поддерживает настройку текста, иконок, внешнего вида, размеров и поведения.
+
+## Импорт
+
 ```tsx
 import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
 ```
 
-<MdxMenu>
+## Свойства
 
-- [Текст на кнопках](#текст-на-кнопках)
-  - [Слишком длинный текст](#слишком-длинный-текст)
-- [Иконки](#иконки)
-- [Один или несколько](#один-или-несколько)
-  - [Один вариант](#один-вариант)
-  - [Несколько вариантов](#несколько-вариантов)
-  - [В качестве переключателя](#в-качестве-переключателя)
-- [Внешний вид](#внешний-вид)
-- [Форма кнопок](#форма-кнопок)
-- [Размер](#размер)
-- [Неактивные кнопки](#неактивные-кнопки)
-  - [Неактивная кнопка](#неактивная-кнопка)
-  - [Неактивная группа кнопок](#неактивная-группа-кнопок)
-- [Адаптивность](#адаптивность)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
-- [Пример использования](#пример)
+| Свойство                                    | Тип                                   | По умолчанию | Описание                                                                                                                                  |
+| ------------------------------------------- | ------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| [`items`](#текст-на-кнопках)                | `ITEM[]`                              | -            | Элементы для отображения в группе кнопок                                                                                                  |
+| [`multiple`](#один-или-несколько-вариантов) | `boolean`                             | `false`      | Разрешает выбор нескольких вариантов                                                                                                      |
+| [`value`](#один-или-несколько-вариантов)    | `ChoiceGroupPropValue`                | -            | Текущее значение (выбранный элемент или массив элементов)                                                                                 |
+| [`onChange`](#один-или-несколько-вариантов) | `ChoiceGroupPropOnChange`             | -            | Обработчик события при выборе элемента                                                                                                    |
+| [`name`](#один-или-несколько-вариантов)     | `string`                              | -            | Имя `<input>` для доступности                                                                                                             |
+| [`getItemLabel?`](#текст-на-кнопках)        | `ChoiceGroupPropGetItemLabel`         | -            | Функция для формирования текста кнопки или всплывающей подсказки (при `onlyIcon = true`). Также используется как уникальный ключ элемента |
+| [`getItemIcon?`](#иконки)                   | `ChoiceGroupPropGetItemIcon`          | -            | Функция для указания иконки на кнопке                                                                                                     |
+| [`onlyIcon?`](#иконки)                      | `boolean`                             | `false`      | Показывает только иконку, текст отображается во всплывающей подсказке                                                                     |
+| [`size?`](#размер)                          | `'xs' \| 's' \| 'm' \| 'l'`           | `'m'`        | Размер кнопок                                                                                                                             |
+| [`form?`](#форма-кнопок)                    | `'default' \| 'brick' \| 'round'`     | `'default'`  | Форма кнопок                                                                                                                              |
+| [`view?`](#внешний-вид)                     | `'primary' \| 'ghost' \| 'secondary'` | `'primary'`  | Внешний вид кнопок                                                                                                                        |
+| [`width?`](#ширина)                         | `'default' \| 'full'`                 | `'default'`  | Ширина компонента                                                                                                                         |
+| [`disabled?`](#неактивные-кнопки)           | `boolean`                             | `false`      | Делает всю группу кнопок неактивной                                                                                                       |
+| [`getItemDisabled?`](#неактивные-кнопки)    | `ChoiceGroupPropGetItemDisabled`      | -            | Функция для указания неактивного состояния отдельных кнопок                                                                               |
+| [`truncate?`](#текст-на-кнопках)            | `boolean`                             | `false`      | Обрезает длинный текст на кнопках, добавляя многоточие                                                                                    |
+| `getItemAttributes?`                        | `ChoiceGroupPropGetItemAttributes`    | -            | Функция для получения дополнительных атрибутов элемента                                                                                   |
+| `getItemRef?`                               | `ChoiceGroupPropGetItemRef`           | -            | Функция для получения ссылки на DOM-элемент кнопки                                                                                        |
+| `className?`                                | `string`                              | -            | Дополнительный CSS-класс для компонента                                                                                                   |
+| `ref?`                                      | `React.Ref<HTMLDivElement>`           | -            | Ссылка на корневой DOM-элемент компонента                                                                                                 |
 
-</MdxMenu>
+## Содержимое
 
-## Текст на кнопках
+### Текст на кнопках
 
-Текст для всех кнопок указывается в `items` и формируется с помощью функции `getItemLabel` или в поле `label` элемента списка. Например, так:
+Текст для кнопок задаётся через свойство `items` и формируется с помощью функции `getItemLabel` или поля `label` в объекте элемента. Если текст слишком длинный, используйте свойство `truncate`, чтобы обрезать текст и добавить многоточие.
+
+<MdxTabs>
+
+<ChoiceGroupExample />
 
 ```tsx
 type Item = string;
@@ -77,534 +114,284 @@ export const ChoiceGroupExample = () => {
 };
 ```
 
-<ChoiceGroupExample />
+</MdxTabs>
 
-### Слишком длинный текст
+### Иконки
 
-Если группа кнопок слишком большая или текст на кнопке слишком длинный и не помещается в выделенную область, можно включить модификатор `truncate`.
+Для добавления иконок используйте функцию `getItemIcon` или поле `icon` в объекте элемента. Свойство `onlyIcon` позволяет отображать только иконку, скрывая текст (текст показывается во всплывающей подсказке при наведении).
 
-Тогда текст на кнопке сокращается, в конце появляется многоточие.
-
-```tsx
-type Item = string;
-
-/* cspell:disable */
-const items: Item[] = [
-  'Экриксинатозавр',
-  'Пахицефалозавр',
-  'Жираффатитан',
-  'Аргентинозавр',
-  'Кархародонтозавр',
-];
-/* cspell:enable */
-
-export const ChoiceGroupExampleTextOverflow = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
-  return (
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item}
-      multiple={false}
-      name="ChoiceGroupExampleTextOverflow"
-      truncate
-    />
-  );
-};
-```
-
-<ChoiceGroupExampleTextOverflow />
-
-## Иконки
-
-Чтобы показать иконку на кнопке, используйте `getItemIcon` или поле `icon` элемента списка.
-
-Добавьте `onlyIcon`, чтобы убрать текст и оставить только иконку (текст будет показываться по наведению).
-
-```tsx
-type Item = {
-  name: string;
-  icon?: IconComponent;
-};
-
-const items = [
-  {
-    name: 'Первый',
-    icon: IconPhoto,
-  },
-  {
-    name: 'Второй',
-    icon: IconRing,
-  },
-  {
-    name: 'Третий вариант',
-    icon: IconCamera,
-  },
-];
-
-export const ChoiceGroupExampleIcon = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
-  return (
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item.name}
-      getItemIcon={(item) => item.icon}
-      name="ChoiceGroupExampleIcon"
-      multiple={false}
-    />
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item.name}
-      getItemIcon={(item) => item.icon}
-      onlyIcon
-      name="ChoiceGroupExampleIcon"
-      multiple={false}
-    />
-  );
-};
-```
+<MdxTabs>
 
 <ChoiceGroupExampleIcon />
 
-## Один или несколько
-
-### Один вариант
-
-По умолчанию пользователь может выбрать только один вариант,
-как в [RadioGroup](##LIBS.LIB.STAND/lib:uikit/stand:components-radiogroup-stable).
-
 ```tsx
-type Item = string;
-
-const items: Item[] = ['один', 'два', 'три', 'четыре', 'пять', 'шесть'];
-
-export const ChoiceGroupExampleOne = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
-  return (
-    <p>Выберите один вариант</p>
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item}
-      multiple={false}
-      name="ChoiceGroupExampleOne"
-    />
-  );
-};
+<>
+  <ChoiceGroup
+    items={[
+      {
+        label: 'Первый',
+        icon: IconPhoto,
+      },
+      {
+        label: 'Второй',
+        icon: IconRing,
+      },
+      {
+        label: 'Третий вариант',
+        icon: IconCamera,
+      },
+    ]}
+    name="ChoiceGroupExampleIcon"
+  />
+  <ChoiceGroup
+    items={[
+      {
+        name: 'Первый',
+        pictogram: IconPhoto,
+      },
+      {
+        name: 'Второй',
+        pictogram: IconRing,
+      },
+      {
+        name: 'Третий вариант',
+        pictogram: IconCamera,
+      },
+    ]}
+    getItemLabel={(item) => item.name}
+    getItemIcon={(item) => item.pictogram}
+    onlyIcon
+    name="ChoiceGroupExampleIcon"
+  />
+</>
 ```
 
-**Выберите один вариант**
-
-<ChoiceGroupExampleOne />
-
-### Несколько вариантов
-
-Можно добавить `multiple` — чтобы выбирать из нескольких вариантов,
-как в [CheckboxGroup](##LIBS.LIB.STAND/lib:uikit/stand:components-checkboxgroup-stable).
-
-```tsx
-export const ChoiceGroupExampleMultiple = () => {
-  const [value, setValue] = useState<Item[] | null>([]);
-  return (
-    <p>Выберите несколько вариантов</p>
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item}
-      multiple
-      name="ChoiceGroupExampleMultiple"
-    />
-  );
-};
-```
-
-**Выберите несколько вариантов**
-
-<ChoiceGroupExampleMultiple />
-
-### В качестве переключателя
-
-Группу из двух кнопок иногда стоит использовать вместо переключателя
-[Switch](##LIBS.LIB.STAND/lib:uikit/stand:components-switch-stable) — если в интерфейсе есть место.
-
-**Поляризационный фильтр**
-
-<ChoiceGroupExampleSwitchPolar />
-
-**Получать письма**
-
-<ChoiceGroupExampleSwitchLetters />
-
-<ChoiceGroupExampleSwitchMode />
+</MdxTabs>
 
 ## Внешний вид
 
-За внешний вид компонента отвечает `view`. Варианты: `'primary', 'ghost', 'secondary'`.
+### Форма кнопок
 
-```tsx
-type Item = string;
-
-const items: Item[] = ['один', 'два', 'три'];
-
-export const ChoiceGroupExampleView = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
-  return (
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item}
-      view="primary"
-      multiple={false}
-      name="ChoiceGroupExampleView"
-    />
-  );
-};
-```
-
-<ChoiceGroupExampleView />
-
-## Форма кнопок
-
-За форму кнопок в группе отвечает `form`. Варианты: `'default', 'brick', 'round'`.
-
-```tsx
-type Item = string;
-
-const items: Item[] = ['один', 'два', 'три'];
-
-export const ChoiceGroupExampleForm = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
-  return (
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item}
-      form="default"
-      name="ChoiceGroupExampleForm"
-      multiple={false}
-    />
-  );
-};
-```
+Свойство `form` определяет форму кнопок. Доступные варианты: `'default'`, `'brick'`, `'round'`.
 
 <ChoiceGroupExampleForm />
 
-## Размер
+### Размер
 
-За размер компонента отвечает свойство `size`. Варианты: `'xs', 's', 'm', 'l'`.
-
-```tsx
-type Item = string;
-
-const items: Item[] = ['один', 'два', 'три'];
-
-export const ChoiceGroupExampleSize = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
-  return (
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item}
-      size="xs"
-      multiple={false}
-      name="ChoiceGroupExampleSize"
-    />
-  );
-};
-```
+Свойство `size` задаёт размер кнопок. Доступные варианты: `'xs'`, `'s'`, `'m'`, `'l'`.
 
 <ChoiceGroupExampleSize />
 
-### Группа кнопок в ширину блока
+### Ширина
 
-За ширину компонента отвечает свойство `width`. Варианты: `'full', 'default'`.
+Свойство `width` управляет шириной компонента. Варианты: `'default'` (по содержимому) или `'full'` (на всю ширину контейнера).
 
-```tsx
-type Item = string;
-
-const items: Item[] = ['один', 'два', 'три'];
-
-export const ChoiceGroupExampleWidth = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
-  return (
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item}
-      multiple={false}
-      width="full"
-      name="ChoiceGroupExampleWidth"
-    />
-  );
-};
-```
+<MdxTabs>
 
 <ChoiceGroupExampleWidth />
 
-## Неактивные кнопки
+```tsx
+<ChoiceGroup
+  value={value}
+  onChange={setValue}
+  items={['один', 'два', 'три']}
+  getItemLabel={(item) => item}
+  multiple={false}
+  width="full"
+  name="ChoiceGroupExampleWidth"
+/>
+```
 
-### Неактивная кнопка
+</MdxTabs>
 
-Одну или несколько кнопок можно сделать неактивными — если вы не хотите, чтобы их выбирали.
-За неактивность отвечает функция `getItemDisabled` или поле `disabled` элемента списка.
+### Стиль
+
+Свойство `view` определяет стиль кнопок. Варианты: `'primary'`, `'ghost'`, `'secondary'`.
+
+<MdxTabs>
+
+<ChoiceGroupExampleView />
 
 ```tsx
-type Item = { name: string; disabled?: boolean };
-
-const items: Item[] = [
-  { name: 'один' },
-  { name: 'два' },
-  { name: 'три', disabled: true },
-  { name: 'четыре', disabled: true },
-];
-
-export const ChoiceGroupExampleWidth = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
-  return (
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item.name}
-      multiple={false}
-      name="ChoiceGroupExampleSomeDisabled"
-      getItemDisabled={(item: Item) => item.disabled}
-    />
-  );
-};
+<ChoiceGroup
+  value={value}
+  onChange={setValue}
+  items={['один', 'два', 'три']}
+  getItemLabel={(item) => item}
+  view="primary"
+  multiple={false}
+  name="ChoiceGroupExampleView"
+/>
 ```
+
+</MdxTabs>
+
+## Поведение
+
+### Один или несколько вариантов
+
+По умолчанию (`multiple={false}`) пользователь может выбрать только один вариант, аналогично компоненту [RadioGroup](##LIBS.LIB.STAND/lib:uikit/stand:components-radiogroup-stable). Если установить `multiple={true}`, можно выбирать несколько вариантов, как в [CheckboxGroup](##LIBS.LIB.STAND/lib:uikit/stand:components-checkboxgroup-stable).
+
+<MdxTabs>
+
+<ChoiceGroupExampleOne />
+
+```tsx
+<ChoiceGroup
+  value={value}
+  onChange={setValue}
+  items={['один', 'два', 'три', 'четыре', 'пять', 'шесть']}
+  getItemLabel={(item) => item}
+  multiple={false}
+  name="ChoiceGroupExampleOne"
+/>
+```
+
+</MdxTabs>
+
+<MdxTabs>
+
+<ChoiceGroupExampleMultiple />
+
+```tsx
+<ChoiceGroup
+  value={value}
+  onChange={setValue}
+  items={['один', 'два', 'три', 'четыре', 'пять', 'шесть']}
+  getItemLabel={(item) => item}
+  multiple
+  name="ChoiceGroupExampleMultiple"
+/>
+```
+
+</MdxTabs>
+
+Для двух вариантов `ChoiceGroup` может использоваться вместо переключателя [Switch](##LIBS.LIB.STAND/lib:uikit/stand:components-switch-stable), если позволяет пространство интерфейса.
+
+Примеры использования в качестве переключателя:
+
+<ChoiceGroupExampleSwitchPolar />
+<ChoiceGroupExampleSwitchLetters />
+<ChoiceGroupExampleSwitchMode />
+
+### Неактивные кнопки
+
+Чтобы сделать отдельные кнопки неактивными, используйте функцию `getItemDisabled` или поле `disabled` в объекте элемента.
+
+<MdxTabs>
 
 <ChoiceGroupExampleSomeDisabled />
 
-### Неактивная группа кнопок
-
-Чтобы сделать группу кнопок неактивной, добавьте свойство `disabled` к компоненту `<ChoiceGroup {...props} disabled/>`.
-
 ```tsx
-type Item = string;
-
-const items: Item[] = ['один', 'два', 'три'];
-
-export const ChoiceGroupExampleWidth = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
-  return (
-    <ChoiceGroup
-      value={value}
-      onChange={setValue}
-      items={items}
-      getItemLabel={(item) => item}
-      multiple={false}
-      name="ChoiceGroupExampleDisabled"
-      disabled
-    />
-  );
-};
+<ChoiceGroup
+  value={value}
+  onChange={setValue}
+  items={[
+    { name: 'один' },
+    { name: 'два' },
+    { name: 'три', disabled: true },
+    { name: 'четыре', disabled: true },
+  ]}
+  getItemLabel={(item) => item.name}
+  multiple={false}
+  name="ChoiceGroupExampleSomeDisabled"
+  getItemDisabled={(item) => item.disabled}
+/>
 ```
+
+</MdxTabs>
+
+Для отключения всей группы кнопок задайте свойство `disabled`.
+
+<MdxTabs>
 
 <ChoiceGroupExampleDisabled />
 
+```tsx
+<ChoiceGroup
+  value={value}
+  onChange={setValue}
+  items={['один', 'два', 'три']}
+  getItemLabel={(item) => item}
+  multiple={false}
+  name="ChoiceGroupExampleDisabled"
+  disabled
+/>
+```
+
+</MdxTabs>
+
 ## Адаптивность
 
-Если компонент не помещается на мобильный экран или в родительский контейнер
-по ширине, можно обрезать текст с помощью свойства `truncate`. В этом случае компонент сжимается, текст обрезается, в конце добавляется многоточие. [Посмотреть пример](#слишком-длинный-текст)
+Для адаптивности на мобильных устройствах или в узких контейнерах используйте свойство `truncate` для обрезки длинного текста (см. [Текст на кнопках](#текст-на-кнопках)). Также можно добавить горизонтальную прокрутку или преобразовать `ChoiceGroup` в [RadioGroup](##LIBS.LIB.STAND/lib:uikit/stand:components-radiogroup-stable) на определённых разрешениях экрана.
 
-Если кнопки не помещаются на мобильный экран, можно добавить горизонтальную прокрутку или преобразовать в [RadioGroup](##LIBS.LIB.STAND/lib:uikit/stand:components-radiogroup-stable).
+### Прокрутка
 
-##### Пример компонента с прокруткой
-
-```css
-.ChoiceGroupExampleAdaptiveScroll {
-  overflow: auto;
-  width: 100%;
-
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-}
-```
-
-```tsx
-const items: string[] = [
-  'один',
-  'два',
-  'три',
-  'четыре',
-  'пять',
-  'шесть',
-  'семь',
-  'восемь',
-  'девять',
-];
-
-const cnChoiceGroupExampleAdaptiveScroll = cn(
-  'ChoiceGroupExampleAdaptiveScroll',
-);
-
-const getItemLabel = (item: string) => item;
-
-export const ChoiceGroupExampleAdaptiveScroll = () => {
-  return (
-    <div className={cnChoiceGroupExampleAdaptiveScroll()}>
-      <ChoiceGroup
-        name="ChoiceGroupExampleAdaptiveScroll"
-        items={items}
-        getItemLabel={getItemLabel}
-        form="round"
-      />
-    </div>
-  );
-};
-```
+<MdxTabs>
 
 <ChoiceGroupExampleAdaptiveScroll />
 
-##### Пример с преобразованием в RadioGroup
+```tsx
+<div className="ChoiceGroupExampleAdaptiveScroll">
+  <ChoiceGroup
+    name="ChoiceGroupExampleAdaptiveScroll"
+    items={[
+      'один',
+      'два',
+      'три',
+      'четыре',
+      'пять',
+      'шесть',
+      'семь',
+      'восемь',
+      'девять',
+    ]}
+    getItemLabel={(item) => item}
+    form="round"
+  />
+</div>
+```
 
-Если экран меньше 800 px по ширине, отображаем `ChoiceGroup`, если больше — `RadioGroup`. Чтобы посмотреть, как это работает, уменьшите ширину окна в браузере.
+</MdxTabs>
+
+### Преобразование в RadioGroup
+
+Если ширина экрана меньше 800 px, компонент отображается как `ChoiceGroup`, иначе — как `RadioGroup`.
+
+<MdxTabs>
+
+<ChoiceGroupExampleAdaptiveUseBreakpoints />
 
 ```tsx
-const items: string[] = ['один', 'два', 'три', 'четыре', 'пять'];
-
-const getItemLabel = (item: string) => item;
-
-export const ChoiceGroupExampleAdaptiveUseBreakpoints = () => {
-  const { desktop } = useBreakpoints({ map: { desktop: 800 }, isActive: true });
-  const [value, setValue] = useState(items2[0]);
-  const onChange = useCallback(
-    ({ value }: { value: string }) => setValue(value),
-    [],
-  );
-
-  if (desktop) {
-    return (
-      <ChoiceGroup
-        name="ChoiceGroupExampleAdaptiveUseBreakpoints"
-        items={items}
-        getItemLabel={getItemLabel}
-        form="round"
-        value={value}
-        onChange={onChange}
-      />
-    );
-  }
-
+const { desktop } = useBreakpoints({ map: { desktop: 800 }, isActive: true });
+if (desktop) {
   return (
-    <RadioGroup
+    <ChoiceGroup
       name="ChoiceGroupExampleAdaptiveUseBreakpoints"
-      items={items}
-      getItemLabel={getItemLabel}
+      items={['один', 'два', 'три', 'четыре', 'пять']}
+      getItemLabel={(item) => item}
+      form="round"
       value={value}
       onChange={onChange}
     />
   );
-};
+}
+return (
+  <RadioGroup
+    name="ChoiceGroupExampleAdaptiveUseBreakpoints"
+    items={['один', 'два', 'три', 'четыре', 'пять']}
+    getItemLabel={(item) => item}
+    value={value}
+    onChange={onChange}
+  />
+);
 ```
 
-<ChoiceGroupExampleAdaptiveUseBreakpoints />
+</MdxTabs>
 
-## Импорт
+## Пример использования
 
 ```tsx
-import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
-```
-
-## Свойства
-
-```tsx
-export type ChoiceGroupDefaultItem = {
-  label: string;
-  icon?: IconComponent;
-  disabled?: boolean;
-  attributes?: Omit<
-    JSX.IntrinsicElements['label'],
-    'ref' | 'onChange' | 'children'
-  >;
-  ref?: React.RefObject<HTMLLabelElement>;
-};
-
-export const choiceGroupForms = ['default', 'brick', 'round'] as const;
-export type ChoiceGroupPropForm = typeof choiceGroupForms[number];
-export const choiceGroupDefaultForm: ChoiceGroupPropForm = 'default';
-
-export const choiceGroupSizes = ['xs', 's', 'm', 'l'] as const;
-export type ChoiceGroupPropSize = typeof choiceGroupSizes[number];
-export const choiceGroupDefaultSize: ChoiceGroupPropSize = 'm';
-
-export const choiceGroupViews = ['primary', 'ghost', 'secondary'] as const;
-export type ChoiceGroupPropView = typeof choiceGroupViews[number];
-export const choiceGroupDefaultView: ChoiceGroupPropView = 'primary';
-
-export const choiceGroupWidth = ['default', 'full'] as const;
-export type ChoiceGroupPropWidth = typeof choiceGroupWidth[number];
-export const choiceGroupWidthDefault: ChoiceGroupPropWidth =
-  choiceGroupWidth[0];
-
-export type ChoiceGroupPropGetItemLabel<ITEM> = (item: ITEM) => string | number;
-export type ChoiceGroupPropGetItemIcon<ITEM> = (
-  item: ITEM,
-) => IconComponent | undefined;
-export type ChoiceGroupPropGetItemDisabled<ITEM> = (
-  item: ITEM,
-) => boolean | undefined;
-export type ChoiceGroupPropGetItemAttributes<ITEM> = (
-  item: ITEM,
-) =>
-  | Omit<JSX.IntrinsicElements['label'], 'ref' | 'onChange' | 'children'>
-  | undefined;
-export type ChoiceGroupPropGetItemRef<ITEM> = (
-  item: ITEM,
-) => React.RefObject<HTMLLabelElement> | undefined;
-
-export type ChoiceGroupPropValue<ITEM, MULTIPLE extends boolean> =
-  | (MULTIPLE extends true ? ITEM[] : ITEM)
-  | null;
-
-export type ChoiceGroupPropOnChange<ITEM, MULTIPLE extends boolean> = (
-  value: MULTIPLE extends true ? ITEM[] | null : ITEM,
-  props: {
-    e: React.ChangeEvent<HTMLInputElement>;
-  },
-) => void;
-```
-
-| Свойство                                  | Тип                                | По умолчанию | Описание                                                                                                                                               |
-| ----------------------------------------- | ---------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `items`                                   | `ITEM[]`                           | -            | Элементы                                                                                                                                               |
-| [`multiple`](#один-или-несколько)         | `boolean`                          | -            | Выбрать несколько вариантов                                                                                                                            |
-| `value`                                   | `ChoiceGroupPropValue`             | -            | Значение                                                                                                                                               |
-| `onChange`                                | `ChoiceGroupPropOnChange`          | -            | Действие при выборе элемента                                                                                                                           |
-| `name`                                    | `string`                           | -            | Имя `<input>`, указывается для доступности                                                                                                             |
-| [`getItemLabel?`](#текст-на-кнопках)      | `ChoiceGroupPropGetItemLabel`      | -            | Функция для формирования текста для кнопки или всплывающей подсказки (при `onlyIcon = true`). Также используется в качестве уникального ключа элемента |
-| [`getItemIcon?`](#иконки)                 | `ChoiceGroupPropGetItemIcon`       | -            | Функция для формирования иконки                                                                                                                        |
-| [`onlyIcon?`](#иконки)                    | `boolean`                          | -            | Показывать только иконку                                                                                                                               |
-| [`size?`](#размер)                        | `'xs', 's', 'm', 'l'`              | `'m'`        | Размер                                                                                                                                                 |
-| [`form?`](#форма-кнопок)                  | `'default', 'brick', 'round'`      | `'default'`  | Форма                                                                                                                                                  |
-| [`view?`](#внешний-вид)                   | `'primary', 'ghost', 'secondary'`  | `'primary'`  | Внешний вид                                                                                                                                            |
-| [`width?`](#группа-кнопок-в-ширину-блока) | `'default', 'full'`                | `'default'`  | Ширина компонента                                                                                                                                      |
-| [`disabled?`](#неактивная-группа-кнопок)  | `boolean`                          | `false`      | Делает группу кнопок неактивной                                                                                                                        |
-| [`getItemDisabled?`](#неактивная-кнопка)  | `ChoiceGroupPropGetItemDisabled`   | -            | Функция для определения неактивного состояния кнопки                                                                                                   |
-| `getItemAttributes?`                      | `ChoiceGroupPropGetItemAttributes` | -            | Функция для получения дополнительных атрибутов элемента                                                                                                |
-| `getItemRef?`                             | `ChoiceGroupPropGetItemRef`        | -            | Функция для получения ссылки на кнопку                                                                                                                 |
-| [`truncate`](#слишком-длинный-текст)      | `boolean`                          | `false`      | Обрезает длинный текст на кнопках и добавляет многоточие                                                                                               |
-| `className?`                              | `string`                           | -            | Дополнительный CSS-класс                                                                                                                               |
-| `ref?`                                    | `React.Ref<HTMLDivElement>`        | -            | Ссылка на корневой DOM-элемент этого компонента                                                                                                        |
-
-## Пример
-
-```ts
-// src/App.ts
 import React, { useState } from 'react';
 import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
 

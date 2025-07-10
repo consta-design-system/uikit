@@ -11,7 +11,7 @@ const items: Item[] = ['один', 'два', 'три'];
 export const ChoiceGroupExampleWidth = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
-    <Example>
+    <Example col={1}>
       <ChoiceGroup
         value={value}
         onChange={setValue}

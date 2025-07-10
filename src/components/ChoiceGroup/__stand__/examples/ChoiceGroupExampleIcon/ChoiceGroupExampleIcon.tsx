@@ -1,50 +1,48 @@
-import { IconComponent } from '@consta/icons/Icon';
 import { IconCamera } from '@consta/icons/IconCamera';
 import { IconPhoto } from '@consta/icons/IconPhoto';
 import { IconRing } from '@consta/icons/IconRing';
 import { Example } from '@consta/stand';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ChoiceGroup } from '../../../ChoiceGroup';
 
-type Item = {
-  name: string;
-  icon?: IconComponent;
-};
-
-const items: Item[] = [
-  {
-    name: 'Первый',
-    icon: IconPhoto,
-  },
-  {
-    name: 'Второй',
-    icon: IconRing,
-  },
-  {
-    name: 'Третий вариант',
-    icon: IconCamera,
-  },
-];
-
 export const ChoiceGroupExampleIcon = () => {
-  const [value, setValue] = useState<Item | null>(items[0]);
   return (
     <Example col={1}>
       <ChoiceGroup
-        value={value}
-        onChange={setValue}
-        items={items}
-        getItemLabel={(item) => item.name}
-        getItemIcon={(item) => item.icon}
+        items={[
+          {
+            label: 'Первый',
+            icon: IconPhoto,
+          },
+          {
+            label: 'Второй',
+            icon: IconRing,
+          },
+          {
+            label: 'Третий вариант',
+            icon: IconCamera,
+          },
+        ]}
         name="ChoiceGroupExampleIcon"
       />
       <ChoiceGroup
-        value={value}
-        onChange={setValue}
-        items={items}
+        items={[
+          {
+            name: 'Первый',
+            pictogram: IconPhoto,
+          },
+          {
+            name: 'Второй',
+            pictogram: IconRing,
+          },
+          {
+            name: 'Третий вариант',
+            pictogram: IconCamera,
+          },
+        ]}
         getItemLabel={(item) => item.name}
-        getItemIcon={(item) => item.icon}
+        getItemIcon={(item) => item.pictogram}
         onlyIcon
         name="ChoiceGroupExampleIcon"
       />
