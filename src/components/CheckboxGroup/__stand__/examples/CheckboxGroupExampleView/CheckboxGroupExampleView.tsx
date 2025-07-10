@@ -10,21 +10,20 @@ export const CheckboxGroupExampleView = () => {
   return (
     <Example
       col={1}
-      items={checkboxGroupPropViews.map((view) => ({
-        node: (
-          <CheckboxGroup
-            value={value}
-            items={items}
-            getItemLabel={(item) => item.name}
-            getItemDisabled={(item) => item.disabled}
-            onChange={setValue}
-            name="CheckboxGroup"
-            direction="row"
-            view={view}
-          />
-        ),
-        label: view,
-      }))}
+      items={[...checkboxGroupPropViews]}
+      getItemDescription={(view) => `view="${view}"`}
+      getItemNode={(view) => (
+        <CheckboxGroup
+          value={value}
+          items={items}
+          getItemLabel={(item) => item.name}
+          getItemDisabled={(item) => item.disabled}
+          onChange={setValue}
+          name="CheckboxGroup"
+          direction="row"
+          view={view}
+        />
+      )}
     />
   );
 };

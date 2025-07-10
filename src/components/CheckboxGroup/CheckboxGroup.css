@@ -15,6 +15,10 @@
 
       .CheckboxGroup-Item:not(:last-child) {
         margin-right: var(--offset);
+
+        .Checkbox-Label {
+          margin-right: var(--checkbox-offset);
+        }
       }
     }
   }
