@@ -1,12 +1,9 @@
-import * as React from 'react';
+import { MutableRefObject, Ref } from 'react';
 
-type Ref<T> = React.RefCallback<T> | React.MutableRefObject<T> | undefined;
-
-export function setRef<T>(ref: Ref<T>, value: T): void {
+export function setRef<T>(ref: Ref<T> | undefined, value: T): void {
   if (typeof ref === 'function') {
     ref(value);
-  } else if (ref) {
-    // eslint-disable-next-line no-param-reassign
-    ref.current = value;
+  } else if (ref && 'current' in ref) {
+    (ref as MutableRefObject<T>).current = value;
   }
 }
