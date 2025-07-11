@@ -1,5 +1,26 @@
 # Changelog
 
+## v5.24.1 (11/07/2025)
+- [docs (FileField): implementation of editorial policy (#4005)](https://github.com/consta-design-system/uikit/commit/766fc6c537525739fb50fe56d3e3f08a7a794b17) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (File): implementation of editorial policy (#4004)](https://github.com/consta-design-system/uikit/commit/dfc80c73256efea1246d5745911650283df5dbb1) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (FieldGroup): implementation of editorial policy (#4003)](https://github.com/consta-design-system/uikit/commit/4de6dfa304c4cfcde241303935012a3b812d3bdd) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (DragNDropFieldCanary): implementation of editorial policy (#4002)](https://github.com/consta-design-system/uikit/commit/b7ff247099569ec7493c08677a25a578437634d7) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (DragNDropField): implementation of editorial policy (#4001)](https://github.com/consta-design-system/uikit/commit/d405f69cdd7e6c6ce9eb44f026a82731b901cc5a) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (DateTime): implementation of editorial policy (#4000)](https://github.com/consta-design-system/uikit/commit/4f1cee37595cac019733b961678e466859a77d37) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (ContextMenu): implementation of editorial policy (#3998)](https://github.com/consta-design-system/uikit/commit/e16904681ec6738214505f3176d5caa143592160) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (DatePicker): implementation of editorial policy (#3999)](https://github.com/consta-design-system/uikit/commit/3bf4deb877fa248a0afd2cbfc15522d301ea200c) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Combobox): implementation of editorial policy (#3997)](https://github.com/consta-design-system/uikit/commit/d113fbb11063c21790cbaf429d8bf6901b86278e) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (CollapseGroup): implementation of editorial policy (#3996)](https://github.com/consta-design-system/uikit/commit/cd03c393f848446664e03765861181da62277ce1) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Collapse): implementation of editorial policy (#3993)](https://github.com/consta-design-system/uikit/commit/bb600938a84de3eaa54b84aa66bff63ad250e534) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (ChoiceGroup): implementation of editorial policy (#3992)](https://github.com/consta-design-system/uikit/commit/cea8f332ff0b74a8009a89f4e25ee07e004daced) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (CheckboxGroup): implementation of editorial policy (#3991)](https://github.com/consta-design-system/uikit/commit/8cac0b046472fccba68785558d00d192f6ad620d) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Checkbox): implementation of editorial policy (#3990)](https://github.com/consta-design-system/uikit/commit/fe47f652dab5e9e99aac872efdd1f03fd15f1fbd) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [fix(DatePicker): fixed caption space (#3988)](https://github.com/consta-design-system/uikit/commit/b370d3acc3772174848d43a15578a7cb9f14d3a9) - [@gizeasy](https://github.com/gizeasy)
+- [fix(ContextMenu): fixed outside clicks (#4006)](https://github.com/consta-design-system/uikit/commit/30af6bf2bac78378f5889868fa404fc1e1af738e) - [@gizeasy](https://github.com/gizeasy)
+- [chore: update deps](https://github.com/consta-design-system/uikit/commit/80d8582520210c181bd999492fd260e3fb0b870e) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.24.0 (01/07/2025)
 BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 
@@ -371,10 +392,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [chore: not significant changes (#3454)](https://github.com/consta-design-system/uikit/commit/ca31b3c97b96abd2b8e96af5bb28983588eb5e8f) - [@gizeasy](https://github.com/gizeasy)
 - [fix(EventInterceptor): fix Checkbox events handler (#3451)](https://github.com/consta-design-system/uikit/commit/b89f247a8b5271b1773dd164e3467cbfecb13607) - [@gizeasy](https://github.com/gizeasy)
 - [chore: the trash is cleaned up (#3446)](https://github.com/consta-design-system/uikit/commit/7257b4b5319e386c2758eb8463f341b6506ad0e8) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.0.2 (10/01/2024)
-- [fix(Switch): add onChangeDefault](https://github.com/consta-design-system/uikit/commit/d30f834cfadd5b68bb6c9ce78ddf7c0016c64ddb) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Radio): add onChangeDefault](https://github.com/consta-design-system/uikit/commit/f25c771f3b7c3c916a4aa60f3552e5130a05a6f9) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Checkbox): add onChangeDefault (#3428)](https://github.com/consta-design-system/uikit/commit/68e9a6fa7f1c0863919bc1721302f52c5613d67f) - [@gizeasy](https://github.com/gizeasy)
