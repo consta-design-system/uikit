@@ -1,96 +1,26 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 
 import { FileExampleExtension } from './examples/FileExampleExtension/FileExampleExtension';
 import { FileExampleLoading } from './examples/FileExampleLoading/FileExampleLoading';
 import { FileExampleSize } from './examples/FileExampleSize/FileExampleSize';
 
-```tsx
-import { File } from '@consta/uikit/File';
-```
-
 <MdxMenu>
 
-- [Иконка](#иконка)
-- [Размер иконки](#размер-иконки)
-- [Индикаторы загрузки](#индикаторы-загрузки)
+- [Обзор](#обзор)
 - [Импорт](#импорт)
 - [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Расширение файла](#расширение-файла)
+- [Внешний вид](#внешний-вид)
+  - [Размер иконки](#размер-иконки)
+  - [Индикатор загрузки](#индикатор-загрузки)
 - [Пример использования](#пример-использования)
 
 </MdxMenu>
 
-## Иконка
+## Обзор
 
-Укажите расширение файла с помощью свойства `extension`, и пользователь увидит
-нужную иконку. Если в дизайн-системе нет изображения для какого-то расширения, на иконке будет знак вопроса.
-
-### Доступные расширения
-
-- `bmp`
-- `csv`
-- `avi`
-- `doc`
-- `docx`
-- `gif`
-- `exe`
-- `jpg`
-- `jpeg`
-- `mp3`
-- `mp4`
-- `mov`
-- `pdf`
-- `ppt`
-- `pptx`
-- `png`
-- `rar`
-- `rtf`
-- `tiff`
-- `txt`
-- `wav`
-- `zip`
-- `gz`
-- `xls`
-- `xlsx`
-- `json`
-
-```ts
-<File extension="doc" />
-<File extension="docx" />
-<File extension="jpg" />
-<File extension="mov" />
-<File extension="BlaBla" />
-```
-
-<FileExampleExtension />
-
-## Размер иконки
-
-За размер иконки отвечает свойство `size`.
-
-```ts
-<File size="m" />
-<File size="s" />
-```
-
-<FileExampleSize />
-
-## Индикаторы загрузки
-
-Свойство `loading` показывает, что файл загружается.
-
-Если нужен индикатор загрузки, добавьте `loadingWithProgressSpin`.
-
-Процент загрузки можно указать с помощью `loadingProgress`.
-
-```ts
-<File loading />
-<File loading loadingWithProgressSpin />
-<File loading loadingWithProgressSpin loadingProgress={30} />
-<File loading loadingWithProgressSpin loadingProgress={60} />
-<File loading loadingWithProgressSpin loadingProgress={90} />
-```
-
-<FileExampleLoading />
+Компонент `File` используется для отображения иконки файла с указанием его расширения, размера и состояния загрузки. Поддерживает настройку внешнего вида и отображение прогресса загрузки.
 
 ## Импорт
 
@@ -100,21 +30,89 @@ import { File } from '@consta/uikit/File';
 
 ## Свойства
 
-| Свойство                                          | Тип                           | По умолчанию | Описание                                                         |
-| ------------------------------------------------- | ----------------------------- | ------------ | ---------------------------------------------------------------- |
-| [`extension?`](#иконка)                            | `string`                      | -            | Иконка файла                                                     |
-| [`size?`](#размер-иконки)                          | `'m', 's'`                    | `'m'`        | Размер иконки                                                    |
-| [`loading?`](#индикаторы-загрузки)                 | `boolean`                     | -            | Показывает, что файл загружается                                 |
-| [`loadingWithProgressSpin?`](#индикаторы-загрузки) | `boolean`                     | -            | Показывает индикатор прогресса загрузки                          |
-| [`loadingProgress?`](#индикаторы-загрузки)         | `number`                      | -            | Прогресс загрузки в процентах                                    |
-| `as?`                                              | `keyof JSX.IntrinsicElements` | -            | HTML-тег, в виде которого этот компонент будет представлен в DOM |
-| `className?`                                       | `string`                      | -            | Дополнительный CSS-класс                                         |
-| `ref?`                                             | `React.Ref<HTMLDivElement>`   | -            | Ссылка на корневой DOM-элемент компонента                        |
+| Свойство                                           | Тип                           | По умолчанию | Описание                                                    |
+| -------------------------------------------------- | ----------------------------- | ------------ | ----------------------------------------------------------- |
+| [`extension?`](#расширение-файла)                  | `string`                      | -            | Расширение файла, определяющее иконку                       |
+| [`size?`](#размер-иконки)                          | `'m' \| 's'`                  | `'m'`        | Размер иконки                                               |
+| [`loading?`](#индикаторы-загрузки)                 | `boolean`                     | -            | Показывает, что файл загружается                            |
+| [`loadingWithProgressSpin?`](#индикаторы-загрузки) | `boolean`                     | -            | Показывает индикатор прогресса загрузки                     |
+| [`loadingProgress?`](#индикаторы-загрузки)         | `number`                      | -            | Прогресс загрузки в процентах (0–100)                       |
+| `className?`                                       | `string`                      | -            | Дополнительный CSS-класс                                    |
+| `as?`                                              | `keyof JSX.IntrinsicElements` | -            | HTML-тег, в виде которого компонент будет представлен в DOM |
+| `ref?`                                             | `React.Ref<HTMLDivElement>`   | -            | Ссылка на корневой DOM-элемент компонента                   |
+
+## Содержимое
+
+### Расширение файла
+
+Свойство `extension` определяет иконку файла в зависимости от его расширения. Если указанное расширение не поддерживается, отображается иконка со знаком вопроса.
+
+**Поддерживаемые расширения**:
+
+- `bmp`, `csv`, `avi`, `doc`, `docx`, `gif`, `exe`, `jpg`, `jpeg`, `mp3`, `mp4`, `mov`, `pdf`, `ppt`, `pptx`, `png`, `rar`, `rtf`, `tiff`, `txt`, `wav`, `zip`, `gz`, `xls`, `xlsx`, `json`
+
+<MdxTabs>
+
+<FileExampleExtension />
+
+```tsx
+<>
+  <File extension="doc" />
+  <File extension="docx" />
+  <File extension="jpg" />
+  <File extension="mov" />
+  <File extension="BlaBla" />
+</>
+```
+
+</MdxTabs>
+
+## Внешний вид
+
+### Размер иконки
+
+Свойство `size` задаёт размер иконки файла. Доступные значения: `'m'` (средний, по умолчанию) и `'s'` (маленький).
+
+<MdxTabs>
+
+<FileExampleSize />
+
+```tsx
+<>
+  <File size="m" />
+  <File size="s" />
+</>
+```
+
+</MdxTabs>
+
+### Индикатор загрузки
+
+Свойства `loading`, `loadingWithProgressSpin` и `loadingProgress` управляют отображением состояния загрузки файла:
+
+- `loading`: включает индикатор загрузки.
+- `loadingWithProgressSpin`: добавляет спиннер, показывающий прогресс.
+- `loadingProgress`: задаёт процент загрузки (от 0 до 100).
+
+<MdxTabs>
+
+<FileExampleLoading />
+
+```tsx
+<>
+  <File loading />
+  <File loading loadingWithProgressSpin />
+  <File loading loadingWithProgressSpin loadingProgress={30} />
+  <File loading loadingWithProgressSpin loadingProgress={60} />
+  <File loading loadingWithProgressSpin loadingProgress={90} />
+</>
+```
+
+</MdxTabs>
 
 ## Пример использования
 
-```ts
-// src/App.ts
+```tsx
 import React from 'react';
 import { File } from '@consta/uikit/File';
 
