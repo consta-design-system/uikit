@@ -75,6 +75,7 @@ const Variants = () => {
   const minDate = useDate('minDate', minDateDefault);
   const maxDate = useDate('maxDate', maxDateDefault);
   const withEvents = useBoolean('withEvents', false);
+  const withDisableDates = useBoolean('withDisableDates', false);
   const locale =
     useSelect('locale', localeProp, localeDefault) || localeDefault;
   const dateTimeView = useSelect(
@@ -109,6 +110,26 @@ const Variants = () => {
 
   const icon = withIcon ? IconCalendar : undefined;
 
+  const getDisableDates = (): Array<Date | [Date, Date]> => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    return [
+      // интервал времени текущей даты с 12:34:20 - 16:10:41
+      [
+        new Date(year, month, day, 12, 34, 20),
+        new Date(year, month, day, 16, 10, 41),
+      ],
+      // следующий день
+      new Date(year, month, day + 1),
+      // отключаем с 2го по 12ое включительно
+      [new Date(year, month, 2), new Date(year, month, 13)],
+    ];
+  };
+
+  const disableDates = withDisableDates ? getDisableDates() : undefined;
+
   useEffect(() => {
     setValue(null);
   }, [type]);
@@ -127,6 +148,7 @@ const Variants = () => {
         status={status}
         view={view}
         disabled={disabled}
+        disableDates={disableDates}
         size={size}
         onChange={setValue}
         leftSide={icon}
