@@ -7,27 +7,30 @@ import {
 import { LoaderExampleCustomColor } from './examples/LoaderExampleCustomColor/LoaderExampleCustomColor';
 import { LoaderExampleCustomSize } from './examples/LoaderExampleCustomSize/LoaderExampleCustomSize';
 
-```tsx
-import { Loader } from '@consta/uikit/Loader';
-```
-
 <MdxMenu>
 
+- [Импорт](#импорт)
 - [Свойства](#свойства)
 - [Внешний вид](#внешний-вид)
-  - [Тип](#тип)
   - [Размер](#размер)
+  - [Тип](#тип)
   - [Стиль](#стиль)
   - [Кастомный цвет](#кастомный-цвет)
 
 </MdxMenu>
 
+## Импорт
+
+```tsx
+import { Loader } from '@consta/uikit/Loader';
+```
+
 ## Свойства
 
 | Свойство           | Тип                                                        | По умолчанию | Описание                                        |
 | ------------------ | ---------------------------------------------------------- | ------------ | ----------------------------------------------- |
-| [`type?`](#тип)    | `'dots'` <code>&#124;</code> `'circle'`                    | `dots'`      | Тип                                             |
 | [`size?`](#размер) | `'xs'` <code>&#124;</code> `'s'` <code>&#124;</code> `'m'` | `'m'`        | Размер                                          |
+| [`type?`](#тип)    | `'dots'` <code>&#124;</code> `'circle'`                    | `dots'`      | Тип                                             |
 | [`view?`](#тип)    | `'primary'` <code>&#124;</code> `'clear'`                  | `primary'`   | Вид                                             |
 | `className?`       | `string`                                                   | -            | Дополнительный CSS-класс                        |
 | `ref?`             | `React.Ref<HTMLDivElement>`                                | -            | Ссылка на корневой DOM-элемент этого компонента |
@@ -40,15 +43,6 @@ import { Loader } from '@consta/uikit/Loader';
 | [`--loader-size-prop`](#размер)           | Установка размера |
 
 ## Внешний вид
-
-### Тип
-
-Тип компонента задается в свойстве `type`. Возможные значения:
-
-- `'dots'` - в виде точек,
-- `'circle'` - в виде круга.
-
-<LoaderExampleType />
 
 ### Размер
 
@@ -83,6 +77,15 @@ export const LoaderExampleCustomSize = () => (
 <LoaderExampleCustomSize />
 
 </MdxTabs>
+
+### Тип
+
+Тип компонента задается в свойстве `type`. Возможные значения:
+
+- `'dots'` - в виде точек,
+- `'circle'` - в виде круга.
+
+<LoaderExampleType />
 
 ### Стиль
 
