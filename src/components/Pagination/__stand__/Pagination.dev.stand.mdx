@@ -23,7 +23,7 @@ import { MdxMenu, MdxTabs } from '@consta/stand';
 - [Внешний вид](#внешний-вид)
   - [Форма](#форма)
   - [Размер](#размер)
-- [Поведение](#поведение)
+- [Навигация](#навигация)
   - [Тип](#тип)
   - [Стрелки](#стрелки)
   - [Конец или начало](#конец-или-начало)
@@ -140,39 +140,13 @@ return (
 
 <PaginationExampleSize />
 
-## Поведение
+## Навигация
 
 ### Тип
 
 Свойство `type` определяет, как отображается компонент: как набор кнопок с номерами страниц (`'default'`) или как поле ввода номера страницы (`'input'`). По умолчанию — `'default'`.
 
-<MdxTabs>
-
 <PaginationExampleType />
-
-```tsx
-const [page, setPage] = useState(1);
-return (
-  <>
-    <Pagination
-      type="default"
-      items={15}
-      visibleCount={7}
-      value={page}
-      onChange={setPage}
-    />
-    <Pagination
-      type="input"
-      items={15}
-      visibleCount={7}
-      value={page}
-      onChange={setPage}
-    />
-  </>
-);
-```
-
-</MdxTabs>
 
 ### Стрелки
 
