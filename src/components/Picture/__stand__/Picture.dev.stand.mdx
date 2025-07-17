@@ -1,25 +1,54 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 import { PictureExample } from './examples/PictureExample/PictureExample';
 import { PictureExampleGetImageSettings } from './examples/PictureExampleGetImageSettings/PictureExampleGetImageSettings';
 import { PictureExampleResizeMode } from './examples/PictureExampleResizeMode/PictureExampleResizeMode';
+
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Изображения](#изображения)
+- [Функция определения свойств](#функция-определения-свойств)
+- [Адаптивность](#адаптивность)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Обзор
+
+Компонент `Picture` предназначен для отображения изображений с учетом темы, разрешения экрана или размеров компонента. Поддерживает задание нескольких источников изображений через объект `src` и настройку их отображения с помощью функции `getImageSettings`. Компонент также позволяет задавать альтернативный текст (`alt`) и всплывающую подсказку (`title`).
+
+## Импорт
 
 ```tsx
 import { Picture } from '@consta/uikit/Picture';
 ```
 
-<MdxMenu>
+## Свойства
 
-- [Изображения](#изображения)
-- [Функция определения свойств](#функция-определения-свойств)
-- [Адаптивность](#адаптивность)
-- [Список свойств](#свойства)
+| Свойство                                            | Тип                            | По умолчанию              | Описание                                                   |
+| --------------------------------------------------- | ------------------------------ | ------------------------- | ---------------------------------------------------------- |
+| [`src?`](#изображения)                              | `PicturePropSrc`               | -                         | Изображение или объект с изображениями                     |
+| [`getImageSettings?`](#функция-определения-свойств) | `PicturePropGetImageSettings`  | `defaultGetImageSettings` | Функция получения параметров отображения картинки          |
+| [`subscribeToRef?`](#адаптивность)                  | `React.RefObject<HTMLElement>` | -                         | Контейнер, относительно которого просчитываем адаптивность |
+| [`alt?`](#изображения)                              | `string`                       | -                         | Альтернативное текстовое описание изображения              |
+| [`title?`](#изображения)                            | `string`                       | -                         | Отображаемая подсказка                                     |
+| `className?`                                        | `string`                       | -                         | Дополнительный CSS-класс                                   |
+| `ref?`                                              | `React.Ref<HTMLDivElement>`    | -                         | Ссылка на корневой DOM-элемент этого компонента            |
 
-</MdxMenu>
+## Содержимое
 
-## Изображения
+### Изображения
 
-Для того чтобы указать исходные изображения или изображение необходимо определить свойство `src`. Оно может принимать как строку, так и объект ключ - значение,
-где ключ содержит в себе параметры изображения.
+Свойство `src` определяет источник изображения. Оно может быть строкой (для одного изображения) или объектом, где ключи задают параметры изображения (тема, размер, дескриптор), а значения — пути к изображениям.
+
+Пример использования объекта `src` с поддержкой нескольких тем и разрешений:
+
+<MdxTabs>
+
+<PictureExample />
 
 ```tsx
 <Picture
@@ -58,17 +87,29 @@ import { Picture } from '@consta/uikit/Picture';
 />
 ```
 
-<PictureExample />
+</MdxTabs>
 
-По умолчанию первым параметром указывается название темы, вторым разрешение, начиная с которого изображение будет отображаться, а на третьем дескриптор (физическая ширина картинки или плотность пикселей устройства DPR)
+Ключи в объекте `src` состоят из трех частей:
+
+- **Тема** (например, `gpnDefault`, `gpnDisplay`, `gpnDark`).
+- **Размер** (например, `0`, `500`, `1000` — минимальная ширина в пикселях, начиная с которой применяется изображение).
+- **Дескриптор** (например, `1x`, `2x`, `4x` — плотность пикселей устройства).
+
+Свойства `alt` и `title` задают альтернативный текст и всплывающую подсказку для изображения, соответственно.
 
 ## Функция определения свойств
 
-Если вы используете свой метод именования ключей, тогда определите свойство `getImageSettings`. Эта функция принимает ключ и возвращает объект:
+Свойство `getImageSettings` позволяет кастомизировать логику обработки ключей объекта `src`. Функция принимает ключ и возвращает объект с параметрами:
 
-- `theme` - тема для которой показывается картинка,
-- `size` - размер, начиная с которого изображение отображается,
-- `descriptor` - дескриптор
+- `theme` — тема изображения.
+- `size` — минимальная ширина для отображения.
+- `descriptor` — дескриптор (например, плотность пикселей).
+
+Пример использования `getImageSettings`:
+
+<MdxTabs>
+
+<PictureExampleGetImageSettings />
 
 ```tsx
 const themeMap: Record<string, string> = {
@@ -77,117 +118,96 @@ const themeMap: Record<string, string> = {
   dark: 'gpnDark',
 };
 
-export const PictureExampleGetImageSettings = () => {
-  const getImageSettings = (key: string) => {
-    const parts = key.split('_');
-    return {
-      theme: themeMap[parts[0]],
-      size: Number(parts[1].replace(/[^0-9.]+/g, '')),
-      descriptor: parts[2],
-    };
+const getImageSettings = (key: string) => {
+  const parts = key.split('_');
+  return {
+    theme: themeMap[parts[0]],
+    size: Number(parts[1].replace(/[^0-9.]+/g, '')),
+    descriptor: parts[2],
   };
-
-  return (
-    <Picture
-      src={{
-        default_0px_1x: imageSmall1xDefault,
-        default_0px_2x: imageSmall2xDefault,
-        default_0px_4x: imageSmall3xDefault,
-        default_500px_1x: imageMedium1xDefault,
-        default_500px_2x: imageMedium2xDefault,
-        default_500px_4x: imageMedium3xDefault,
-        default_1000px_1x: imageBig1xDefault,
-        default_1000px_2x: imageBig2xDefault,
-        default_1000px_4x: imageBig3xDefault,
-        display_0px_1x: imageSmall1xDisplay,
-        display_0px_2x: imageSmall2xDisplay,
-        display_0px_4x: imageSmall3xDisplay,
-        display_500px_1x: imageMedium1xDisplay,
-        display_500px_2x: imageMedium2xDisplay,
-        display_500px_4x: imageMedium3xDisplay,
-        display_1000px_1x: imageBig1xDisplay,
-        display_1000px_2x: imageBig2xDisplay,
-        display_1000px_4x: imageBig3xDisplay,
-        dark_0px_1x: imageSmall1xDark,
-        dark_0px_2x: imageSmall2xDark,
-        dark_0px_4x: imageSmall3xDark,
-        dark_500px_1x: imageMedium1xDark,
-        dark_500px_2x: imageMedium2xDark,
-        dark_500px_4x: imageMedium3xDark,
-        dark_1000px_1x: imageBig1xDark,
-        dark_1000px_2x: imageBig2xDark,
-        dark_1000px_4x: imageBig3xDark,
-      }}
-      getImageSettings={getImageSettings}
-    />
-  );
 };
+
+<Picture
+  src={{
+    default_0px_1x: imageSmall1xDefault,
+    default_0px_2x: imageSmall2xDefault,
+    default_0px_4x: imageSmall3xDefault,
+    default_500px_1x: imageMedium1xDefault,
+    default_500px_2x: imageMedium2xDefault,
+    default_500px_4x: imageMedium3xDefault,
+    default_1000px_1x: imageBig1xDefault,
+    default_1000px_2x: imageBig2xDefault,
+    default_1000px_4x: imageBig3xDefault,
+    display_0px_1x: imageSmall1xDisplay,
+    display_0px_2x: imageSmall2xDisplay,
+    display_0px_4x: imageSmall3xDisplay,
+    display_500px_1x: imageMedium1xDisplay,
+    display_500px_2x: imageMedium2xDisplay,
+    display_500px_4x: imageMedium3xDisplay,
+    display_1000px_1x: imageBig1xDisplay,
+    display_1000px_2x: imageBig2xDisplay,
+    display_1000px_4x: imageBig3xDisplay,
+    dark_0px_1x: imageSmall1xDark,
+    dark_0px_2x: imageSmall2xDark,
+    dark_0px_4x: imageSmall3xDark,
+    dark_500px_1x: imageMedium1xDark,
+    dark_500px_2x: imageMedium2xDark,
+    dark_500px_4x: imageMedium3xDark,
+    dark_1000px_1x: imageBig1xDark,
+    dark_1000px_2x: imageBig2xDark,
+    dark_1000px_4x: imageBig3xDark,
+  }}
+  getImageSettings={getImageSettings}
+/>;
 ```
 
-<PictureExampleGetImageSettings />
+</MdxTabs>
 
 ## Адаптивность
 
-Отображать значение по разрешению можно в двух режимах: в зависимости от ширины экрана `window` и в зависимости от ширины компонента `component`.
+Компонент поддерживает два режима адаптивности, задаваемых через свойство `resizeMode`:
 
-```tsx
-export const PictureExampleResizeMode = () => {
-  const getImageSettings = (key: string) => {
-    if (key === 'dark') {
-      return {
-        size: 0,
-      };
-    }
-    return {
-      size: 700,
-    };
-  };
+- `window` — изображение выбирается в зависимости от ширины окна браузера.
+- `component` — изображение выбирается в зависимости от ширины компонента. Для этого режима необходимо передать `subscribeToRef` с ссылкой на контейнер.
 
-  const componentRef = useRef<HTMLImageElement>(null);
+Пример использования адаптивности:
 
-  return (
-    <>
-      <Picture
-        src={{
-          dark: imageDark,
-          light: imageLight,
-        }}
-        getImageSettings={getImageSettings}
-      />
-      <Picture
-        src={{
-          dark: imageDark,
-          light: imageLight,
-        }}
-        ref={componentRef}
-        subscribeToRef={componentRef}
-        getImageSettings={getImageSettings}
-      />
-    </>
-  );
-};
-```
+<MdxTabs>
 
 <PictureExampleResizeMode />
 
-## Свойства
-
 ```tsx
-export type PicturePropGetImageSettings = (image: string) => {
-  theme?: string;
-  size?: number;
-  descriptor?: string;
+const getImageSettings = (key: string) => {
+  if (key === 'dark') {
+    return {
+      size: 0,
+    };
+  }
+  return {
+    size: 700,
+  };
 };
 
-export type PicturePropSrc = string | Record<string, string>;
+const componentRef = useRef<HTMLImageElement>(null);
+
+<>
+  <Picture
+    src={{
+      dark: imageDark,
+      light: imageLight,
+    }}
+    getImageSettings={getImageSettings}
+  />
+  <Picture
+    src={{
+      dark: imageDark,
+      light: imageLight,
+    }}
+    ref={componentRef}
+    subscribeToRef={componentRef}
+    getImageSettings={getImageSettings}
+  />
+</>;
 ```
 
-| Свойство                                            | Тип                             | По умолчанию              | Описание                                                   |
-| --------------------------------------------------- | ------------------------------- | ------------------------- | ---------------------------------------------------------- |
-| [`src?`](#изображения)                              | `PicturePropSrc`                | -                         | Изображение или объект с изображениями                     |
-| [`getImageSettings?`](#функция-определения-свойств) | `PicturePropGetImageSettings`   | `defaultGetImageSettings` | Функция получения параметров отображения картинки          |
-| [`subscribeToRef?`](#адаптивность)                  | `React.RefObject<HTMLElement >` | -                         | Контейнер, относительно которого просчитываем адаптивность |
-| `alt?`                                              | `string`                        | -                         | Альтернативное текстовое описание изображения              |
-| `title?`                                            | `string`                        | -                         | Отображаемая подсказка                                     |
-| `className?`                                        | `string`                        | -                         | Дополнительный CSS-класс                                   |
-| `ref`                                               | `React.Ref<HTMLDivElement>`     | -                         | Ссылка на корневой DOM-элемент этого компонента            |
+</MdxTabs>
