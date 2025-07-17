@@ -9,307 +9,33 @@ import { PaginationExampleVisibleCount } from './examples/PaginationExampleVisib
 import { PaginationExampleFirstLastItem } from './examples/PaginationExampleFirstLastItem/PaginationExampleFirstLastItem';
 import { PaginationExampleAdaptivity } from './examples/PaginationExampleAdaptivity/PaginationExampleAdaptivity';
 
-import { MdxMenu } from '@consta/stand';
-
-```tsx
-import { Pagination } from '@consta/uikit/Pagination';
-```
+import { MdxMenu, MdxTabs } from '@consta/stand';
 
 <MdxMenu>
 
-- [Страницы](#страницы)
-- [Количество элементов](#количество-элементов)
-- [Первая и последняя страница](#первая-и-последняя-страница)
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Страницы](#страницы)
+  - [Количество элементов](#количество-элементов)
+  - [Первая и последняя страница](#первая-и-последняя-страница)
 - [Внешний вид](#внешний-вид)
   - [Форма](#форма)
   - [Размер](#размер)
-- [Навигация](#навигация)
+- [Поведение](#поведение)
   - [Тип](#тип)
-  - [Конец или начало](#конец-или-начало)
   - [Стрелки](#стрелки)
+  - [Конец или начало](#конец-или-начало)
   - [Горячие клавиши](#горячие-клавиши)
 - [Адаптивность](#адаптивность)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
 - [Пример использования](#пример)
-- [PaginationBase](#paginationbase)
-- [Свойства PaginationBase](#свойства-paginationbase)
 
 </MdxMenu>
 
-## Страницы
+## Обзор
 
-За количество страниц отвечает свойство `items`. Текущую страницу можно задать
-с помощью `value`.
-
-Событие изменения страницы определяется свойством `onChange`.
-
-```tsx
-export const PaginationExample = () => {
-  const [page, setPage] = useState(1);
-
-  return <Pagination value={page} onChange={setPage} items={3} />;
-};
-```
-
-<PaginationExample />
-
-## Количество элементов
-
-Чтобы не отображать все страницы сразу, можно рендерить только необходимое их количество, задаваемое через `visibleCount`.
-
-```tsx
-export const PaginationExampleVisibleCount = () => {
-  const [page, setPage] = useState(1);
-
-  return (
-    <>
-      <Pagination items={15} value={page} onChange={setPage} visibleCount={5} />
-      <Pagination items={15} value={page} onChange={setPage} visibleCount={9} />
-    </>
-  );
-};
-```
-
-<PaginationExampleVisibleCount />
-
-## Первая и последняя страница
-
-Чтобы пользователь видел количество страниц и мог переходить на первую и последнюю из них, укажите свойства `showFirstPage` и `showLastPage` соответственно.
-
-```tsx
-export const PaginationExampleFirstLastItem = () => {
-  const [page, setPage] = useState(7);
-
-  return (
-    <Pagination
-      items={15}
-      value={page}
-      onChange={setPage}
-      showFirstPage
-      showLastPage
-      visibleCount={7}
-    />
-  );
-};
-```
-
-<PaginationExampleFirstLastItem />
-
-## Внешний вид
-
-### Форма
-
-За форму элементов отвечает свойство `form`.
-
-Варианты: `'default'`, `'round'`, `'brick'`,
-по умолчанию — `'default'`.
-
-```tsx
-<Pagination form="default" />
-<Pagination form="round" />
-<Pagination form="brick" />
-```
-
-<PaginationExampleForm />
-
-### Размер
-
-За размер отвечает свойство `size`.
-
-```tsx
-<Pagination size="xs" />
-<Pagination size="s" />
-<Pagination size="m" />
-<Pagination size="l" />
-```
-
-<PaginationExampleSize />
-
-## Навигация
-
-### Тип
-
-Компонент может выглядеть как набор кнопок с номерами страниц (`'default'`) или как поле, в которое пользователь может ввести номер нужной страницы (`'input'`).
-
-За это отвечает свойство `type`.
-
-```tsx
-export const PaginationExampleType = () => {
-  const [page, setPage] = useState(1);
-
-  return (
-    <>
-      <Pagination
-        type="default"
-        items={15}
-        visibleCount={7}
-        value={page}
-        onChange={setPage}
-      />
-      <Pagination
-        type="input"
-        items={15}
-        visibleCount={7}
-        value={page}
-        onChange={setPage}
-      />
-    </>
-  );
-};
-```
-
-<PaginationExampleType />
-
-### Конец или начало
-
-Чтобы отобразить кнопки перехода в конец или начало, определите свойство `outerMostArrows`. Оно принимает массив двух значений, где может быть:
-
-- `true` - отображается кнопка с иконкой по умолчанию;
-- `IconComponent` - отображается кнопка с кастомной иконкой;
-- `false` - кнопка скрывается.
-
-```tsx
-export const PaginationExampleOuterMostArrows = () => {
-  const [page, setPage] = useState(1);
-
-  return (
-    <Pagination
-      items={5}
-      value={page}
-      onChange={setPage}
-      outerMostArrows={[true, true]}
-    />
-  );
-};
-```
-
-<PaginationExampleOuterMostArrows />
-
-### Стрелки
-
-Чтобы отобразить кнопки для перехода по страницам вперед или назад, определите свойство `arrows`. Оно принимает массив двух значений, где может быть:
-
-- `true` - отображается кнопка с иконкой по умолчанию;
-- `IconComponent` - отображается кнопка с кастомной иконкой;
-- `{ icon?: IconComponent, disabled?: boolean, label?: string }` - кнопка рендериться с собственной иконкой и лейблом;
-- `false` - кнопка скрывается.
-
-Кнопка может быть двух видов:
-
-- с лейблом и описанием горячей клавиши (если имеется);
-- обычная кнопка с иконкой.
-
-```tsx
-export const PaginationExampleArrows = () => {
-  const [page, setPage] = useState(1);
-
-  return (
-    <>
-      <Pagination
-        items={5}
-        value={page}
-        onChange={setPage}
-        arrows={[true, true]}
-      />
-      <Pagination
-        items={5}
-        value={page}
-        onChange={setPage}
-        arrows={[{ label: 'Сюда' }, { label: 'Туда' }]}
-      />
-    </>
-  );
-};
-```
-
-<PaginationExampleArrows />
-
-### Горячие клавиши
-
-Вы можете установить клавиши быстрого переключения страниц. Обычно для этого используют **Control** со стрелками.
-
-За горячие клавиши отвечает свойство `hotKeys`, которое принимает массив двух объектов, где:
-
-- `label` — подсказка, которую увидят пользователи;
-- `keys` — сочетание клавиш, их обозначение можно посмотреть в [списке горячих клавиш](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values).
-
-```tsx
-export const PaginationExampleHotKeys = () => {
-  const [page, setPage] = useState(1);
-
-  return (
-    <Pagination
-      items={5}
-      value={page}
-      onChange={setPage}
-      arrows={[{ label: 'Назад' }, { label: 'Вперёд' }]}
-      hotKeys={[
-        {
-          label: '← Shift',
-          keys: ['Shift', 'ArrowLeft'],
-        },
-        {
-          label: 'Shift →',
-          keys: ['Shift', 'ArrowRight'],
-        },
-      ]}
-    />
-  );
-};
-```
-
-<PaginationExampleHotKeys />
-
-## Адаптивность
-
-При небольшой ширине экрана можно:
-
-- показывать меньше кнопок,
-- показывать [только поле ввода](#тип) (`type="input"`),
-- вместо компонента `Pagination` вывести кнопку **Показать ещё** и подгружать по ней новые страницы.
-
-##### Пример с кнопкой вместо Pagination
-
-```tsx
-export const PaginationExampleAdaptivity = () => {
-  const [page, setPage] = useState(1);
-  return (
-    <>
-      <Pagination
-        items={15}
-        value={page}
-        showFirstPage
-        showLastPage
-        onChange={setPage}
-        arrows={[true, true]}
-        style={{ width: 1000 }}
-      />
-      <Pagination
-        items={15}
-        value={page}
-        showFirstPage
-        showLastPage
-        onChange={setPage}
-        arrows={[true, true]}
-        style={{ width: 600 }}
-      />
-      <Pagination
-        items={15}
-        value={page}
-        showFirstPage
-        showLastPage
-        onChange={setPage}
-        arrows={[true, true]}
-        style={{ width: 300 }}
-      />
-      <Button label="Показать еще" view="ghost" width="full" />
-    </>
-  );
-};
-```
-
-<PaginationExampleAdaptivity />
+Компонент `Pagination` предназначен для навигации по страницам в интерфейсе. Он позволяет пользователю переключаться между страницами, отображать определённое количество страниц, задавать их внешний вид и поведение, а также поддерживает адаптивность для разных устройств.
 
 ## Импорт
 
@@ -319,61 +45,259 @@ import { Pagination } from '@consta/uikit/Pagination';
 
 ## Свойства
 
-```tsx
-export const paginationPropForm = ['default', 'brick', 'round'] as const;
-export type PaginationPropForm = typeof paginationPropForm[number];
-export const paginationPropFormDefault: PaginationPropForm =
-  paginationPropForm[0];
-
-export const paginationPropSize = ['m', 'xs', 's', 'l'] as const;
-export type PaginationPropSize = typeof paginationPropSize[number];
-export const paginationPropSizeDefault: PaginationPropSize =
-  paginationPropSize[0];
-
-export const paginationPropType = ['default', 'input'] as const;
-export type PaginationPropType = typeof paginationPropType[number];
-export const paginationPropTypeDefault: PaginationPropType =
-  paginationPropType[0];
-
-export type PaginationPropHotKey = { label: string; keys: string[] };
-
-export type PaginationPropOnChange = (
-  value: number,
-  params: { e: React.MouseEvent | Event; value: number },
-) => void;
-
-export type PaginationPropArrow =
-  | boolean
-  | IconComponent
-  | {
-      label?: string;
-      disabled?: boolean;
-      icon?: IconComponent;
-    };
-
-export type PaginationItem = {
-  key: string | number;
-  label: string;
-  clickable: boolean;
-};
-```
-
 | Свойство                                         | Тип                                              | По умолчанию       | Описание                                                    |
 | ------------------------------------------------ | ------------------------------------------------ | ------------------ | ----------------------------------------------------------- |
-| [`value?`](#страницы)                            | `number`                                         | —                  | Номер текущей страницы                                      |
 | [`items?`](#страницы)                            | `number`                                         | —                  | Количество страниц                                          |
+| [`value?`](#страницы)                            | `number`                                         | —                  | Номер текущей страницы                                      |
 | [`visibleCount?`](#количество-элементов)         | `number`                                         | —                  | Количество отображаемых элементов                           |
-| [`onChange?`](#страницы)                         | `PaginationPropOnChange`                         | —                  | Функция для смены страницы                                  |
-| `getTotalLabel?`                                 | `(totalPages: number) => string`                 | `из ${totalPages}` | Функция для получения номера страницы из количества страниц |
-| [`showFirstPage?`](#первая-и-последняя-страница) | `boolean`                                        | -                  | Флаг, отображать ли первый элемент                          |
-| [`showLastPage?`](#первая-и-последняя-страница)  | `boolean`                                        | -                  | Флаг, отображать ли последний элемент                       |
+| [`showFirstPage?`](#первая-и-последняя-страница) | `boolean`                                        | —                  | Флаг, отображать ли первый элемент                          |
+| [`showLastPage?`](#первая-и-последняя-страница)  | `boolean`                                        | —                  | Флаг, отображать ли последний элемент                       |
 | [`form?`](#форма)                                | `'default', 'round', 'brick'`                    | `'default'`        | Форма элементов компонента                                  |
 | [`size?`](#размер)                               | `'xs', 's', 'm', 'l'`                            | `'m'`              | Размер элементов компонента                                 |
 | [`type?`](#тип)                                  | `'default', 'input'`                             | `'default'`        | Тип компонента (кнопки или поле ввода)                      |
-| [`arrows?`](#стрелки)                            | `[PaginationPropArrow?, PaginationPropArrow?]`   | -                  | Стрелки перемещения по страницам                            |
-| [`outerMostArrows?`](#конец-или-начало)          | `[PaginationPropArrow?,PaginationPropArrow?]`    | -                  | Стрелки перемещения на первую и последнюю страницу          |
-| [`hotKeys?`](#горячие-клавиши)                   | `[PaginationPropHotKey?, PaginationPropHotKey?]` | -                  | Горячие клавиши для переключения страниц                    |
-| `containerEventListener?`                        | `HTMLElement, Window`                            | `window`           | Элемент, к которому прикрепляется обработчик нажатия клавиш |
-| `getItemAs?`                                     | `(item: PaginationItem) => AsTags`               | `button`           | Указание html тэга элемента                                 |
-| `getItemAttributes?`                             | `(item: PaginationItem) => AsAttributes`         | -                  | Указание html атрибутов элемента                            |
+| [`arrows?`](#стрелки)                            | `[PaginationPropArrow?, PaginationPropArrow?]`   | —                  | Стрелки перемещения по страницам                            |
+| [`outerMostArrows?`](#конец-или-начало)          | `[PaginationPropArrow?, PaginationPropArrow?]`   | —                  | Стрелки перемещения на первую и последнюю страницу          |
+| [`hotKeys?`](#горячие-клавиши)                   | `[PaginationPropHotKey?, PaginationPropHotKey?]` | —                  | Горячие клавиши для переключения страниц                    |
+| [`onChange?`](#страницы)                         | `PaginationPropOnChange`                         | —                  | Функция для смены страницы                                  |
+| `getTotalLabel?`                                 | `(totalPages: number) => string`                 | `из ${totalPages}` | Функция для получения номера страницы из количества страниц |
+| `containerEventListener?`                        | `HTMLElement , Window`                           | `window`           | Элемент, к которому прикрепляется обработчик нажатия клавиш |
+| `getItemAs?`                                     | `(item: PaginationItem) => AsTags`               | `button`           | Указание HTML-тега элемента                                 |
+| `getItemAttributes?`                             | `(item: PaginationItem) => AsAttributes`         | —                  | Указание HTML-атрибутов элемента                            |
 | `className?`                                     | `string`                                         | —                  | Дополнительные CSS-классы                                   |
+
+## Содержимое
+
+### Страницы
+
+Свойства `items` и `value` определяют количество страниц и текущую страницу соответственно. Событие изменения страницы задаётся через `onChange`.
+
+<MdxTabs>
+
+<PaginationExample />
+
+```tsx
+const [page, setPage] = useState(1);
+return <Pagination value={page} onChange={setPage} items={3} />;
+```
+
+</MdxTabs>
+
+### Количество элементов
+
+Свойство `visibleCount` позволяет ограничить количество отображаемых страниц, чтобы не загромождать интерфейс.
+
+<MdxTabs>
+
+<PaginationExampleVisibleCount />
+
+```tsx
+const [page, setPage] = useState(1);
+return (
+  <>
+    <Pagination items={15} value={page} onChange={setPage} visibileCount={5} />
+    <Pagination items={15} value={page} onChange={setPage} visibileCount={9} />
+  </>
+);
+```
+
+</MdxTabs>
+
+### Первая и последняя страница
+
+Свойства `showFirstPage` и `showLastPage` включают отображение кнопок для перехода к первой и последней страницам.
+
+<MdxTabs>
+
+<PaginationExampleFirstLastItem />
+
+```tsx
+const [page, setPage] = useState(7);
+return (
+  <Pagination
+    items={15}
+    value={page}
+    onChange={setPage}
+    showFirstPage
+    showLastPage
+    visibleCount={7}
+  />
+);
+```
+
+</MdxTabs>
+
+## Внешний вид
+
+### Форма
+
+Свойство `form` задаёт форму элементов компонента. Возможные значения: `'default'`, `'round'`, `'brick'`. По умолчанию — `'default'`.
+
+<PaginationExampleForm />
+
+### Размер
+
+Свойство `size` определяет размер элементов. Возможные значения: `'xs'`, `'s'`, `'m'`, `'l'`. По умолчанию — `'m'`.
+
+<PaginationExampleSize />
+
+## Поведение
+
+### Тип
+
+Свойство `type` определяет, как отображается компонент: как набор кнопок с номерами страниц (`'default'`) или как поле ввода номера страницы (`'input'`). По умолчанию — `'default'`.
+
+<MdxTabs>
+
+<PaginationExampleType />
+
+```tsx
+const [page, setPage] = useState(1);
+return (
+  <>
+    <Pagination
+      type="default"
+      items={15}
+      visibleCount={7}
+      value={page}
+      onChange={setPage}
+    />
+    <Pagination
+      type="input"
+      items={15}
+      visibleCount={7}
+      value={page}
+      onChange={setPage}
+    />
+  </>
+);
+```
+
+</MdxTabs>
+
+### Стрелки
+
+Свойство `arrows` задаёт кнопки для перехода по страницам (назад/вперёд). Принимает массив двух значений: `true` (иконка по умолчанию), `false` (скрыть), объект `{ label?: string, disabled?: boolean, icon?: IconComponent }` или компонент иконки.
+
+<MdxTabs>
+
+<PaginationExampleArrows />
+
+```tsx
+const [page, setPage] = useState(1);
+return (
+  <>
+    <Pagination
+      items={5}
+      value={page}
+      onChange={setPage}
+      arrows={[true, true]}
+    />
+    <Pagination
+      items={5}
+      value={page}
+      onChange={setPage}
+      arrows={[{ label: 'Сюда' }, { label: 'Туда' }]}
+    />
+  </>
+);
+```
+
+</MdxTabs>
+
+### Конец или начало
+
+Свойство `outerMostArrows` управляет отображением кнопок для перехода к первой и последней страницам. Принимает массив двух значений: `true` (иконка по умолчанию), `false` (скрыть) или компонент иконки.
+
+<MdxTabs>
+
+<PaginationExampleOuterMostArrows />
+
+```tsx
+const [page, setPage] = useState(1);
+return (
+  <Pagination
+    items={5}
+    value={page}
+    onChange={setPage}
+    outerMostArrows={[true, true]}
+  />
+);
+```
+
+</MdxTabs>
+
+### Горячие клавиши
+
+Свойство `hotKeys` задаёт комбинации клавиш для переключения страниц. Принимает массив двух объектов с полями `label` (подсказка) и `keys` (клавиши, см. [список](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values)).
+
+<MdxTabs>
+
+<PaginationExampleHotKeys />
+
+```tsx
+const [page, setPage] = useState(1);
+return (
+  <Pagination
+    items={5}
+    value={page}
+    onChange={setPage}
+    arrows={[{ label: 'Назад' }, { label: 'Вперёд' }]}
+    hotKeys={[
+      { label: '← Shift', keys: ['Shift', 'ArrowLeft'] },
+      { label: 'Shift →', keys: ['Shift', 'ArrowRight'] },
+    ]}
+  />
+);
+```
+
+</MdxTabs>
+
+## Адаптивность
+
+Для адаптации к разным размерам экрана можно:
+
+- Уменьшать количество отображаемых кнопок через `visibleCount`.
+- Использовать `type="input"` для компактного ввода номера страницы.
+- Заменить компонент `Pagination` кнопкой «Показать ещё» для подгрузки страниц.
+
+<MdxTabs>
+
+<PaginationExampleAdaptivity />
+
+```tsx
+const [page, setPage] = useState(1);
+return (
+  <>
+    <Pagination
+      items={15}
+      value={page}
+      showFirstPage
+      showLastPage
+      onChange={setPage}
+      arrows={[true, true]}
+      style={{ width: 1000 }}
+    />
+    <Pagination
+      items={15}
+      value={page}
+      showFirstPage
+      showLastPage
+      onChange={setPage}
+      arrows={[true, true]}
+      style={{ width: 600 }}
+    />
+    <Pagination
+      items={15}
+      value={page}
+      showFirstPage
+      showLastPage
+      onChange={setPage}
+      arrows={[true, true]}
+      style={{ width: 300 }}
+    />
+    <Button label="Показать еще" view="ghost" width="full" />
+  </>
+);
+```
+
+</MdxTabs>
