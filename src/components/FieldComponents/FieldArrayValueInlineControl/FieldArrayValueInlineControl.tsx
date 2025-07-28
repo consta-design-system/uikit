@@ -40,13 +40,14 @@ const InputFakeElement = forwardRef<
   HTMLDivElement,
   PropsWithHTMLAttributes<
     {
-      valueAtom: AtomMut<string>;
+      valueAtom: AtomMut<string | undefined>;
       inputMinWidthAtom: AtomMut<number>;
     },
     HTMLDivElement
   >
 >(({ valueAtom, inputMinWidthAtom, ...otherProps }, componentRef) => {
   const [value] = useAtom(valueAtom);
+
   const ref = useRef<HTMLDivElement>(null);
 
   const { width } = useComponentSize(ref);
@@ -147,7 +148,9 @@ const FieldArrayValueInlineControlRender = (
   const propsAtom = useSendToAtom(props);
   const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
   // const valueAtom = usePropAtom(propsAtom, 'value');
-  const inputValueAtom = useCreateAtom(inputValue || inputDefaultValue || '');
+  const inputValueAtom = useCreateAtom<string | undefined>(
+    inputValue || inputDefaultValue,
+  );
   const inputDefaultValueAtom = useCreateAtom(inputDefaultValue);
   const inputMinWidthAtom = useCreateAtom(0);
 
@@ -164,12 +167,6 @@ const FieldArrayValueInlineControlRender = (
     [],
   );
 
-  // const [valueNode] = useAtom((ctx) => {
-  //   const value = ctx.spy(valueAtom);
-  //   const { renderValue } = ctx.get(propsAtom);
-  //   return renderValue(value || []);
-  // });
-
   useAtom((ctx) => {
     const inputValueProp = ctx.spy(inputValuePropAtom);
     const inputDefaultValue = ctx.get(inputDefaultValueAtom);
@@ -180,7 +177,7 @@ const FieldArrayValueInlineControlRender = (
         inputRef.current.value = inputValueProp || '';
       }
 
-      inputValueAtom(ctx, inputValueProp || '');
+      inputValueAtom(ctx, inputValueProp);
     }
   });
 

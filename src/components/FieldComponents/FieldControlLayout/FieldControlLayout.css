@@ -38,7 +38,7 @@
     );
   --field-control-layout-children-width:
     calc(
-      var(--field-control-layout-container-width) -
+      100% -
       (
         var(--field-control-layout-right-slots-width) +
         var(--field-control-layout-left-slots-width)
@@ -88,6 +88,5 @@
 
   &-Children {
     flex: auto;
-    width: var(--field-control-layout-children-width);
   }
 }
