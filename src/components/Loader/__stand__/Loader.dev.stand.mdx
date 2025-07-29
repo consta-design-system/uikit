@@ -7,59 +7,48 @@ import {
 import { LoaderExampleCustomColor } from './examples/LoaderExampleCustomColor/LoaderExampleCustomColor';
 import { LoaderExampleCustomSize } from './examples/LoaderExampleCustomSize/LoaderExampleCustomSize';
 
+<MdxMenu>
+
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Внешний вид](#внешний-вид)
+  - [Размер](#размер)
+  - [Тип](#тип)
+  - [Стиль](#стиль)
+  - [Кастомный цвет](#кастомный-цвет)
+
+</MdxMenu>
+
+## Импорт
+
 ```tsx
 import { Loader } from '@consta/uikit/Loader';
 ```
 
-<MdxMenu>
+## Свойства
 
-- [Тип](#тип)
-- [Размер](#размер)
-  - [Кастомный размер](#кастомный-размер)
-- [Вид](#вид)
-  - [Кастомный цвет](#кастомный-цвет)
-- [Список свойств](#свойства-компонента)
-- [Сss-переменные](#сss-переменные)
+| Свойство           | Тип                                                        | По умолчанию | Описание                                        |
+| ------------------ | ---------------------------------------------------------- | ------------ | ----------------------------------------------- |
+| [`size?`](#размер) | `'xs'` <code>&#124;</code> `'s'` <code>&#124;</code> `'m'` | `'m'`        | Размер                                          |
+| [`type?`](#тип)    | `'dots'` <code>&#124;</code> `'circle'`                    | `dots'`      | Тип                                             |
+| [`view?`](#тип)    | `'primary'` <code>&#124;</code> `'clear'`                  | `primary'`   | Вид                                             |
+| `className?`       | `string`                                                   | -            | Дополнительный CSS-класс                        |
+| `ref?`             | `React.Ref<HTMLDivElement>`                                | -            | Ссылка на корневой DOM-элемент этого компонента |
 
-</MdxMenu>
+### CSS-переменные
 
-## Тип
+| Свойство                                  | Описание          |
+| ----------------------------------------- | ----------------- |
+| [ `--loader-color-prop`](#кастомный-цвет) | Установка цвета   |
+| [`--loader-size-prop`](#размер)           | Установка размера |
 
-За размер компонента отвечает свойство `type`.
+## Внешний вид
 
-Может принимать значения:
-
-- `'dots'` - в виде точек
-- `'circle'` - в виде круга
-
-<MdxTabs>
-
-```tsx
-<Loader type="dots" />
-<Loader type="circle" />
-```
-
-<LoaderExampleType />
-
-</MdxTabs>
-
-## Размер
+### Размер
 
 За размер компонента отвечает свойство `size`.
 
-<MdxTabs>
-
-```tsx
-<Loader size="m" />
-<Loader size="s" />
-<Loader size="xs" />
-```
-
 <LoaderExampleSize />
-
-</MdxTabs>
-
-### Кастомный размер
 
 Чтобы установить любой размер, используйте css-переменную `--loader-size-prop`
 
@@ -89,20 +78,20 @@ export const LoaderExampleCustomSize = () => (
 
 </MdxTabs>
 
-## Вид
+### Тип
 
-Вид компонента можно установить в свойстве `view`.
+Тип компонента задается в свойстве `type`. Возможные значения:
 
-<MdxTabs>
+- `'dots'` - в виде точек,
+- `'circle'` - в виде круга.
 
-```tsx
-<Loader view="primary" />
-<Loader view="clear" />
-```
+<LoaderExampleType />
+
+### Стиль
+
+Стиль компонента можно установить в свойстве `view`. Доступные значения: `primary` и `clear`.
 
 <LoaderExampleView />
-
-</MdxTabs>
 
 ### Кастомный цвет
 
@@ -133,20 +122,3 @@ export const LoaderExampleCustomColor = () => (
 <LoaderExampleCustomColor />
 
 </MdxTabs>
-
-## Свойства компонента
-
-| Свойство           | Тип                                                        | По умолчанию | Описание                                        |
-| ------------------ | ---------------------------------------------------------- | ------------ | ----------------------------------------------- |
-| [`size?`](#размер) | `'xs'` <code>&#124;</code> `'s'` <code>&#124;</code> `'m'` | `'m'`        | Размер                                          |
-| [`type?`](#тип)    | `'dots'` <code>&#124;</code> `'circle'`                    | `dots'`      | Тип                                             |
-| [`view?`](#тип)    | `'primary'` <code>&#124;</code> `'clear'`                  | `primary'`   | Вид                                             |
-| `className?`       | `string`                                                   | -            | Дополнительный CSS-класс                        |
-| `ref?`             | `React.Ref<HTMLDivElement>`                                | -            | Ссылка на корневой DOM-элемент этого компонента |
-
-## Сss-переменные
-
-| Свойство              | Описание          |
-| --------------------- | ----------------- |
-| `--loader-color-prop` | Установка цвета   |
-| `--loader-size-prop`  | Установка размера |
