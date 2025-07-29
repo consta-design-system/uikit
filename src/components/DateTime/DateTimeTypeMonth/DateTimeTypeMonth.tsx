@@ -134,6 +134,7 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef(
       onChange: handleSelectDate,
       value,
       events,
+      disableDates,
       minDate,
       maxDate,
       locale,

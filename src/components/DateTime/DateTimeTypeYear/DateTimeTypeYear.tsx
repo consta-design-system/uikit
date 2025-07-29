@@ -105,6 +105,7 @@ export const DateTimeTypeYear: DateTimeTypeComponent<'year'> = forwardRef(
       onChange: handleSelectDate,
       value,
       events,
+      disableDates,
       minDate,
       maxDate,
       locale,

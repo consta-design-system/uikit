@@ -295,4 +295,29 @@ describe('Компонент DateTime_type_year', () => {
       });
     });
   });
+
+  describe('проверка disableDates', () => {
+    dateTimePropView.forEach((view) => {
+      it(`корректно отключает даты при view=${view}`, () => {
+        renderComponent({
+          currentVisibleDate: new Date(1970, 0),
+          disableDates: [
+            new Date(1970, 0),
+            new Date(1971, 0),
+            new Date(1980, 0),
+            new Date(1981, 0),
+          ],
+          view,
+        });
+
+        expect(getDateTimeItem(1)).toBeDisabled();
+        expect(getDateTimeItem(2)).toBeDisabled();
+
+        if (view === 'slider' || view === 'book') {
+          expect(getDateTimeItem(12)).toBeDisabled();
+          expect(getDateTimeItem(13)).toBeDisabled();
+        }
+      });
+    });
+  });
 });

@@ -6,7 +6,6 @@ import {
   animateDelay,
   getDateTimeDaySelected,
   getDateTimeItem,
-  getDateTimeItemByText,
   getDateTimeTimeItem,
   getDateTimeTimeSelected,
   getInput,
@@ -84,9 +83,9 @@ describe('Компонент DatePicker_type_dateTime', () => {
       inputFocus();
       animateDelay();
 
-      expect(getDateTimeItemByText('20')).toBeDisabled();
-      expect(getDateTimeItemByText('21')).toBeDisabled();
-      expect(getDateTimeItemByText('22')).toBeDisabled();
+      expect(getDateTimeItem(22)).toBeDisabled();
+      expect(getDateTimeItem(23)).toBeDisabled();
+      expect(getDateTimeItem(24)).toBeDisabled();
     });
 
     it('корректно отключает часы', () => {
