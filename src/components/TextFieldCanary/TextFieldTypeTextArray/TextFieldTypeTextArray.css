@@ -17,4 +17,8 @@
     max-height: var(--text-field-textarray-scroll-wrapper-height);
     padding-right: var(--text-field-textarray-padding, 0);
   }
+
+  .FieldControlLayout-Children {
+    overflow: hidden;
+  }
 }
