@@ -9,7 +9,9 @@ export const testId = 'DateTime';
 
 export const getRender = () => screen.getByTestId(testId);
 export const getDateTimeItems = () =>
-  getRender().querySelectorAll(`.${cnDateTimeItem()}`);
+  getRender().querySelectorAll(
+    `.${cnDateTimeItem()}`,
+  ) as NodeListOf<HTMLElement>;
 export const getDateTimeCells = () =>
   getRender().querySelectorAll(`.${cnDateTimeCell()}`);
 export const getDateTimeColumn = () =>
@@ -57,3 +59,5 @@ export const getColumnAllItem = (column: number) =>
 export const getDateTimeColumnItem = (column: number, item: number) =>
   getColumnAllItem(column)[item];
 export const multiplicity = [0, 1, 2, 3, 4];
+export const getDateTimeItemByText = (dateText: string) =>
+  Array.from(getDateTimeItems()).find((node) => node.textContent === dateText);

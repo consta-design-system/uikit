@@ -6,6 +6,7 @@ import { DateTime, DateTimeProps } from '../DateTime';
 import {
   getColumnAllItem,
   getDateTimeColumnItem,
+  getDateTimeItem,
   getDateTimeLabel,
   getDateTimeTogglerButtonNext,
   getDateTimeTogglerButtonPrev,
@@ -304,6 +305,25 @@ describe('Компонент DateTime_type_dateTime', () => {
 
       const label = getDateTimeLabel();
       expect(label).toHaveTextContent('جون 2022');
+    });
+  });
+
+  describe('проверка disableDates', () => {
+    it(`корректно отключает даты при view=classic`, () => {
+      renderComponent({
+        currentVisibleDate: new Date(1970, 0),
+        disableDates: [
+          [new Date(1970, 0, 20), new Date(1970, 0, 23)],
+          [new Date(1970, 1, 10), new Date(1970, 1, 13)],
+        ],
+        view: 'classic',
+      });
+
+      expect(getDateTimeItem(21)).not.toBeDisabled();
+      expect(getDateTimeItem(22)).toBeDisabled();
+      expect(getDateTimeItem(23)).toBeDisabled();
+      expect(getDateTimeItem(24)).toBeDisabled();
+      expect(getDateTimeItem(25)).not.toBeDisabled();
     });
   });
 });

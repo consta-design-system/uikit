@@ -373,4 +373,33 @@ describe('Компонент DateTime_type_date', () => {
       });
     });
   });
+
+  describe('проверка disableDates', () => {
+    dateTimePropView.forEach((view) => {
+      it(`корректно отключает даты при view=${view}`, () => {
+        renderComponent({
+          currentVisibleDate: new Date(1970, 0),
+          disableDates: [
+            [new Date(1970, 0, 20), new Date(1970, 0, 23)],
+            [new Date(1970, 1, 10), new Date(1970, 1, 13)],
+          ],
+          view,
+        });
+
+        expect(getDateTimeItem(21)).not.toBeDisabled();
+        expect(getDateTimeItem(22)).toBeDisabled();
+        expect(getDateTimeItem(23)).toBeDisabled();
+        expect(getDateTimeItem(24)).toBeDisabled();
+        expect(getDateTimeItem(25)).not.toBeDisabled();
+
+        if (view === 'slider' || view === 'book') {
+          expect(getDateTimeItem(56)).not.toBeDisabled();
+          expect(getDateTimeItem(57)).toBeDisabled();
+          expect(getDateTimeItem(58)).toBeDisabled();
+          expect(getDateTimeItem(59)).toBeDisabled();
+          expect(getDateTimeItem(60)).not.toBeDisabled();
+        }
+      });
+    });
+  });
 });

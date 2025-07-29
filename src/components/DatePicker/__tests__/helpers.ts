@@ -1,4 +1,4 @@
-import { act, fireEvent, screen } from '@testing-library/react';
+import { act, fireEvent, screen, within } from '@testing-library/react';
 
 import { animateTimeout } from '../../../mixs/MixPopoverAnimate/MixPopoverAnimate';
 
@@ -22,7 +22,12 @@ export const animateDelay = () =>
   });
 export const getDateTimeItems = () =>
   getDropdown().querySelectorAll(`.DateTimeItem`);
+export const getDateTimeTimeItems = () =>
+  getDropdown().querySelectorAll(`.DateTimeTypeDateTime-Time .DateTimeItem`);
 export const getDateTimeItem = (item = 0) => getDateTimeItems()[item];
+export const getDateTimeTimeItem = (item = 0) => getDateTimeTimeItems()[item];
+export const getDateTimeItemByText = (dateText: string) =>
+  within(getDropdown()).getByText(dateText);
 export const getDateTimeItemsSelected = () =>
   getDropdown().querySelectorAll(`.DateTimeItem_selected`);
 export const getDateTimeItemSelected = (item = 0) =>

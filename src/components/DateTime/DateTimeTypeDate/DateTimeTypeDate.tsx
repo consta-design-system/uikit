@@ -134,6 +134,7 @@ export const DateTimeTypeDate: DateTimeTypeComponent<'date'> = forwardRef(
 
     const pageTwoDaysOfMonth = getDaysOfMonth({
       date: pageTwoCurrentVisibleDate,
+      disableDates,
       handleDayClick: handleSelectDate,
       value,
       events,

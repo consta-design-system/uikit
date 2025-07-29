@@ -122,6 +122,7 @@ export const DatePickerTypeDate: DatePickerTypeComponent<'date'> = forwardRef(
             setCalendarVisible.off();
           }}
           renderAdditionalControls={renderAdditionalControls}
+          disableDates={disableDates}
           zIndex={getDropdownZIndex(props.style)}
           onChangeCurrentVisibleDate={setCurrentVisibleDate}
         />
