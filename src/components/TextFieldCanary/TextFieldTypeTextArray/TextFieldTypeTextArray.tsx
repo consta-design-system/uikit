@@ -275,7 +275,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onKeyUpCapture={onKeyUpCapture}
             onWheel={onWheel}
             disabled={disabled}
-            inputDefaultValue={inputValue || ''}
+            inputValue={inputValue || ''}
           />
         </div>
       </FieldControlLayout>

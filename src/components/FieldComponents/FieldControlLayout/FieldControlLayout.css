@@ -88,6 +88,5 @@
 
   &-Children {
     flex: auto;
-    width: var(--field-control-layout-children-width);
   }
 }
