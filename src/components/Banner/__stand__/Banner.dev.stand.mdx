@@ -1,0 +1,144 @@
+import { MdxMenu, MdxTabs } from '@consta/stand';
+
+import { BannerExampleContent } from './examples/BannerExampleContent/BannerExampleContent';
+import { BannerExampleIcon } from './examples/BannerExampleIcon/BannerExampleIcon';
+import { BannerExampleSize } from './examples/BannerExampleSize/BannerExampleSize';
+import { BannerExampleForm } from './examples/BannerExampleForm/BannerExampleForm';
+import {
+  BannerExampleView,
+  BannerExampleViewCustomBg,
+} from './examples/BannerExampleView/BannerExampleView';
+
+```tsx
+import { Banner } from '@consta/uikit/Banner';
+```
+
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Наполнение](#наполнение)
+- [Иконка](#иконка)
+- [Фон](#фон)
+- [Размер баннера](#размер-баннера)
+- [Форма](#форма)
+- [Свойства](#свойства)
+
+</MdxMenu>
+
+# Обзор
+
+# Наполнение
+
+Для наполнения используйте свойство `leftSide` или `rightSide`. При использования массива элементов в качестве значения свойств `leftSide` или `rightSide`, отступы между элементами расставятся автоматически. Так же если прокидывать в качестве элемента строки то она будет обернута в компонент Text. Если первый элемент массива `leftSide` является строкой, то он будет жирным.
+
+<MdxTabs>
+
+<BannerExampleContent />
+
+```tsx
+<Banner
+  leftSide={['Заголовок', 'описание']}
+  rightSide={[<Button label="Кнопка" />]}
+/>
+```
+
+</MdxTabs>
+
+# Иконка
+
+Для добавления иконки используйте свойство `icon`
+
+<MdxTabs>
+
+<BannerExampleIcon />
+
+```tsx
+<Banner leftSide="Заголовок" icon={IconAlert} />
+```
+
+</MdxTabs>
+
+# Фон
+
+Для изменения фона используйте свойство `view` и `status`.
+
+<MdxTabs>
+
+<BannerExampleView />
+
+```tsx
+<Banner leftSide="Заголовок" view="filled" status="normal" />
+```
+
+</MdxTabs>
+
+`view=transparent` обычно используется для создания баннера с пользовательским фоном.
+
+<MdxTabs>
+
+<BannerExampleViewCustomBg />
+
+```tsx
+export const BannerExampleViewCustomBg = () => {
+  const { themeClassNames } = useTheme();
+
+  return (
+
+      <Banner
+        leftSide="Заголовок"
+        view="transparent"
+        style={{
+          background: `url(${BannerCustomBg}) right top no-repeat, rgb(1, 45, 155)`,
+        }}
+        className={themeClassNames.color.accent}
+      />
+  );
+};
+
+/>
+```
+
+</MdxTabs>
+
+# Размер баннера
+
+Для изменения размера используйте свойство `size`.
+
+<MdxTabs>
+
+<BannerExampleSize />
+
+```tsx
+<Banner leftSide="Заголовок" size="s" />
+```
+
+</MdxTabs>
+
+# Форма
+
+Для изменения формы используйте свойство `form`.
+
+<MdxTabs>
+
+<BannerExampleForm />
+
+```tsx
+<Banner leftSide="Заголовок" form="brick" />
+```
+
+</MdxTabs>
+
+# Свойства
+
+| Свойство    | Тип или варианты значения                                   | По умолчанию | Описание                                                                                     |
+| ----------- | ----------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------- |
+| `leftSide`  | `React.ReactNode`                                           | —            | Содержимое на левой стороне                                                                  |
+| `rightSide` | `React.ReactNode`                                           | —            | Содержимое на правой стороне                                                                 |
+| `icon`      | `IconComponent`                                             | —            | Иконка                                                                                       |
+| `size`      | `'xs' \| 's' \| 'm' \| 'l'`                                 | `'m'`        | Размер компонента                                                                            |
+| `view`      | `'filled' \| 'ghost' \| 'transparent'`                      | `'filled'`   | Визуальный стиль                                                                             |
+| `space`     | `MixSpaceProps`                                             | —            | Параметры отступов, [подробнее](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable)       |
+| `itemsGap`  | `Space \| [Space, Space]`                                   | `'s'`        | Отступы между элементами, [подробнее](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable) |
+| `status`    | `'normal' \| 'warning' \| 'alert' \| 'success' \| 'system'` | `'normal'`   | Статус (цветовая схема)                                                                      |
+| `form`      | `'default' \| 'round' \| 'brick'`                           | `'default'`  | Форма компонента                                                                             |
+| `className` | `string`                                                    | —            | Дополнительный класс                                                                         |
