@@ -56,6 +56,7 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
     buttonTitle,
     buttonIcon,
     onButtonClick,
+    withAction,
     ...otherProps
   } = props;
   const Tag = as as string;
