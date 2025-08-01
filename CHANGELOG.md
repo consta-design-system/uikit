@@ -1,5 +1,21 @@
 # Changelog
 
+## v5.24.2 (01/08/2025)
+- [fix(Attachment): fixed withAction (#4026)](https://github.com/consta-design-system/uikit/commit/433ec061b8d9ddf2fca3a9cacbaff74b4c623998) - [@klekovvlad](https://github.com/klekovvlad)
+- [fix(TextFieldCanary): fixed calculate width (#4024)](https://github.com/consta-design-system/uikit/commit/e3f256c4f383a72352795e9ae4ddcb2645a2264b) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Tabs): fixed page (#4025)](https://github.com/consta-design-system/uikit/commit/990920577dfa4fc34d6fb73d11213f7cf57a3d52) - [@gizeasy](https://github.com/gizeasy)
+- [docs (Popover): implementation of editorial policy (#4020)](https://github.com/consta-design-system/uikit/commit/1dd2e0457cb3ddf50468c920fb81332c3391f386) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Picture): implementation of editorial policy (#4019)](https://github.com/consta-design-system/uikit/commit/b571d1d4f6a43df3845e79a9879512e1eacc4bd6) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Pagination): implementation of editorial policy (#4018)](https://github.com/consta-design-system/uikit/commit/dd04bce1e93ceb05df362cc85d52b43e50919ff4) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Modal): implementation of editorial policy (#4017)](https://github.com/consta-design-system/uikit/commit/aa7170fa85afbe34c6d621e976670732b7f0096a) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Loader): implementation of editorial policy (#4014)](https://github.com/consta-design-system/uikit/commit/90dd239dbf344d64620c190305dc3caca0b45d6e) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (List): implementation of editorial policy](https://github.com/consta-design-system/uikit/commit/4a09a9aafad3fd81361c9a08819ba85e37933454) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Layout): implementation of editorial policy (#4012)](https://github.com/consta-design-system/uikit/commit/7e5305677cc9e3c1e1738ebcaf76016e4825971b) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Informer): implementation of editorial policy (#4011)](https://github.com/consta-design-system/uikit/commit/4ad0fc552aa8981a4ff3b8ce528bc5f099b097f1) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [fix(DatePicker): fixed disableDates (#4010)](https://github.com/consta-design-system/uikit/commit/9841c1e4cf29514c58f85849ebd8ff259b006afc) - [@baevm](https://github.com/baevm)
+
+--------------------
+
 ## v5.24.1 (11/07/2025)
 - [docs (FileField): implementation of editorial policy (#4005)](https://github.com/consta-design-system/uikit/commit/766fc6c537525739fb50fe56d3e3f08a7a794b17) - [@alyonurchick1](https://github.com/alyonurchick1)
 - [docs (File): implementation of editorial policy (#4004)](https://github.com/consta-design-system/uikit/commit/dfc80c73256efea1246d5745911650283df5dbb1) - [@alyonurchick1](https://github.com/alyonurchick1)
@@ -383,12 +399,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [chore(deps): fixed install-peers-cli for os windows (#3475)](https://github.com/consta-design-system/uikit/commit/1f8cfada4d69a35d5a50cf5ebcff15494c44ac7f) - [@gizeasy](https://github.com/gizeasy)
 - [chore(husky): fixed prepare-commit-msg for os windows](https://github.com/consta-design-system/uikit/commit/71cd1bf516653baea08c7d4e3acef1fd2a74fbc3) - [@gizeasy](https://github.com/gizeasy)
 - [chore(deps): update](https://github.com/consta-design-system/uikit/commit/c61004cf6d71f40385ecb94a6434fd4c11684a19) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.0.3 (17/01/2024)
-- [fix(Combobox): fixed align ClearButton (#3442)](https://github.com/consta-design-system/uikit/commit/bde70e1e70ecd2a9c4ddf3c143d9d88e7fa50747) - [@gizeasy](https://github.com/gizeasy)
-- [fix(TextField): fixed rightSide and clearButton (#3440)](https://github.com/consta-design-system/uikit/commit/fea7954dcdd5e847f31bbb158c78348cf8580aac) - [@gizeasy](https://github.com/gizeasy)
-- [chore: not significant changes (#3454)](https://github.com/consta-design-system/uikit/commit/ca31b3c97b96abd2b8e96af5bb28983588eb5e8f) - [@gizeasy](https://github.com/gizeasy)
-- [fix(EventInterceptor): fix Checkbox events handler (#3451)](https://github.com/consta-design-system/uikit/commit/b89f247a8b5271b1773dd164e3467cbfecb13607) - [@gizeasy](https://github.com/gizeasy)
-- [chore: the trash is cleaned up (#3446)](https://github.com/consta-design-system/uikit/commit/7257b4b5319e386c2758eb8463f341b6506ad0e8) - [@gizeasy](https://github.com/gizeasy)
