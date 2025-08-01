@@ -1865,15 +1865,15 @@
     webpack-manifest-plugin "^5.0.0"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/uikit@^5.22.0":
-  version "5.22.0"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.22.0.tgz#371c310788e92e5c2fcaf3571ca14c4292d77810"
-  integrity sha512-Fu1K7ZOLFW8ZSR+JWM31nBKcebkGlksvqyx1wlqlP0M/C34QOKDvzfMmNNe1TGH2tCSbnJZhZatOSo60oXhNVA==
-
 "@consta/uikit@^5.24.0":
   version "5.24.0"
   resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.24.0.tgz#6749b89d807b4c5b6dcc46cae25dfb9c020a4ded"
   integrity sha512-y0momNleJam2FkLmOGCcHdgSr5g4dGQPcgOnpPidp1telin5jJeXRZNqYG3W0wH+OOEw4oPxPyhTOqo41aooSQ==
+
+"@consta/uikit@^5.24.1":
+  version "5.24.1"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.24.1.tgz#0273a45c368b1d8fc4b8f7a9c6286d88d54a7841"
+  integrity sha512-WbeFd4rZmSUp44ZzknU8A3JnOcf16UZyO35ZbHp3SilHVhGnzOqO7er5BlIxCrV26rY/guCo6g01upy1hs0qoA==
 
 "@cspell/cspell-bundled-dicts@8.16.1":
   version "8.16.1"

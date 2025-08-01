@@ -1,0 +1,35 @@
+.Banner {
+  --banner-bg-opacity: 30%;
+  --banner-height: calc(
+    var(--banner-inner-height) + var(--space-padding-top) +
+      var(--space-padding-bottom)
+  );
+  color: var(--color-typo-primary);
+  min-height: var(--banner-height);
+
+  &_form {
+    &_default {
+      border-radius: var(--space-xs);
+    }
+    &_round {
+      border-radius: calc(var(--banner-height) / 2);
+    }
+  }
+
+  &_view {
+    &_filled {
+      background-color: var(--banner-bg-color);
+    }
+    &_ghost {
+      background-color: color-mix(
+        in srgb,
+        var(--banner-bg-color) var(--banner-bg-opacity),
+        var(--color-bg-default)
+      );
+    }
+  }
+
+  &-Icon {
+    display: block;
+  }
+}
