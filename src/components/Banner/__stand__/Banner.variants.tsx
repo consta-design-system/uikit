@@ -11,11 +11,7 @@ import BannerCustomBg from './BannerCustomBg.png';
 
 const Variants = () => {
   const size = useSelect('size', ['xs', 's', 'm', 'l'], 'm') || 'm';
-  const view = useSelect(
-    'view',
-    ['filled', 'ghost', 'transparent'],
-    'transparent',
-  );
+  const view = useSelect('view', ['filled', 'ghost', 'transparent'], 'filled');
   const status = useSelect(
     'status',
     ['normal', 'warning', 'alert', 'success', 'system'],
@@ -23,7 +19,11 @@ const Variants = () => {
     view !== 'transparent',
   );
   const form = useSelect('form', ['default', 'round', 'brick'], 'default');
-  const withCustomBg = useBoolean('withCustomBg', true, view === 'transparent');
+  const withCustomBg = useBoolean(
+    'withCustomBg',
+    false,
+    view === 'transparent',
+  );
   const iconLeft = useBoolean('iconLeft', false);
   const withRightSide = useBoolean('withRightSide', false);
 
