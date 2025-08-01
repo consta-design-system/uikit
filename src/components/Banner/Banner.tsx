@@ -75,11 +75,11 @@ const textSizeMap = {
   l: 'l',
 } as const;
 
-const paddingHorizontalMap = {
+const controlSizeMap = {
   xs: 'xs',
   s: 's',
-  m: 'm',
-  l: 'l',
+  m: 's',
+  l: 'm',
 } as const;
 
 /**
@@ -136,7 +136,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
           align: 'center',
           gap: 'm',
         }),
-        cnMixSpace(space || { pH: paddingHorizontalMap[size], pV: 'xs' }),
+        cnMixSpace(space || { pH: size, pV: 'xs' }),
         cnText({ size: textSizeMap[size] }),
         status !== 'system' && view === 'filled'
           ? themeClassNames.color.accent
@@ -146,7 +146,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
       style={{
         ...style,
         ['--banner-bg-color' as string]: `var(--color-bg-${status})`,
-        ['--banner-inner-height' as string]: `var(--control-height-${size})`,
+        ['--banner-inner-height' as string]: `var(--control-height-${controlSizeMap[size]})`,
       }}
       ref={ref}
     >
