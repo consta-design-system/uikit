@@ -15,17 +15,29 @@ import { Banner } from '@consta/uikit/Banner';
 
 <MdxMenu>
 
-- [Обзор](#обзор)
+- [Свойства](#свойства)
 - [Наполнение](#наполнение)
 - [Иконка](#иконка)
 - [Фон](#фон)
 - [Размер баннера](#размер-баннера)
 - [Форма](#форма)
-- [Свойства](#свойства)
 
 </MdxMenu>
 
-# Обзор
+# Свойства
+
+| Свойство    | Тип или варианты значения                                   | По умолчанию | Описание                                                                                     |
+| ----------- | ----------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------- |
+| `leftSide`  | `React.ReactNode`                                           | —            | Содержимое на левой стороне                                                                  |
+| `rightSide` | `React.ReactNode`                                           | —            | Содержимое на правой стороне                                                                 |
+| `icon`      | `IconComponent`                                             | —            | Иконка                                                                                       |
+| `size`      | `'xs' \| 's' \| 'm' \| 'l'`                                 | `'m'`        | Размер компонента                                                                            |
+| `view`      | `'filled' \| 'ghost' \| 'transparent'`                      | `'filled'`   | Визуальный стиль                                                                             |
+| `space`     | `MixSpaceProps`                                             | —            | Параметры отступов, [подробнее](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable)       |
+| `itemsGap`  | `Space \| [Space, Space]`                                   | `'s'`        | Отступы между элементами, [подробнее](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable) |
+| `status`    | `'normal' \| 'warning' \| 'alert' \| 'success' \| 'system'` | `'normal'`   | Статус (цветовая схема)                                                                      |
+| `form`      | `'default' \| 'round' \| 'brick'`                           | `'default'`  | Форма компонента                                                                             |
+| `className` | `string`                                                    | —            | Дополнительный класс                                                                         |
 
 # Наполнение
 
@@ -127,18 +139,3 @@ export const BannerExampleViewCustomBg = () => {
 ```
 
 </MdxTabs>
-
-# Свойства
-
-| Свойство    | Тип или варианты значения                                   | По умолчанию | Описание                                                                                     |
-| ----------- | ----------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------- |
-| `leftSide`  | `React.ReactNode`                                           | —            | Содержимое на левой стороне                                                                  |
-| `rightSide` | `React.ReactNode`                                           | —            | Содержимое на правой стороне                                                                 |
-| `icon`      | `IconComponent`                                             | —            | Иконка                                                                                       |
-| `size`      | `'xs' \| 's' \| 'm' \| 'l'`                                 | `'m'`        | Размер компонента                                                                            |
-| `view`      | `'filled' \| 'ghost' \| 'transparent'`                      | `'filled'`   | Визуальный стиль                                                                             |
-| `space`     | `MixSpaceProps`                                             | —            | Параметры отступов, [подробнее](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable)       |
-| `itemsGap`  | `Space \| [Space, Space]`                                   | `'s'`        | Отступы между элементами, [подробнее](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable) |
-| `status`    | `'normal' \| 'warning' \| 'alert' \| 'success' \| 'system'` | `'normal'`   | Статус (цветовая схема)                                                                      |
-| `form`      | `'default' \| 'round' \| 'brick'`                           | `'default'`  | Форма компонента                                                                             |
-| `className` | `string`                                                    | —            | Дополнительный класс                                                                         |
