@@ -7,7 +7,7 @@ export const PaginationExampleHotKeys = () => {
   const [page, setPage] = useState(1);
 
   return (
-    <Example>
+    <Example col={1}>
       <Pagination
         items={5}
         value={page}

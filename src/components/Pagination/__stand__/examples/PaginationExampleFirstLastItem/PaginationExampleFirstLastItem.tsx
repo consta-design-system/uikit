@@ -7,7 +7,7 @@ export const PaginationExampleFirstLastItem = () => {
   const [page, setPage] = useState(7);
 
   return (
-    <Example>
+    <Example col={1}>
       <Pagination
         items={15}
         value={page}

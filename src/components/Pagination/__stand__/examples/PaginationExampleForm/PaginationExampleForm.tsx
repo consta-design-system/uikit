@@ -11,6 +11,7 @@ export const PaginationExampleForm = () => {
 
   return (
     <Example
+      col={1}
       items={forms}
       getItemDescription={(form) => `form="${form}"`}
       getItemNode={(form) => (
