@@ -1,0 +1,157 @@
+import { MdxMenu, MdxTabs } from '@consta/stand';
+
+import { BannerExampleContent } from './examples/BannerExampleContent/BannerExampleContent';
+import { BannerExampleIcon } from './examples/BannerExampleIcon/BannerExampleIcon';
+import { BannerExampleSize } from './examples/BannerExampleSize/BannerExampleSize';
+import { BannerExampleForm } from './examples/BannerExampleForm/BannerExampleForm';
+import {
+  BannerExampleView,
+  BannerExampleViewCustomBg,
+} from './examples/BannerExampleView/BannerExampleView';
+
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Иконка](#иконка)
+- [Внешний вид](#внешний-вид)
+  - [Фон](#фон)
+  - [Размер](#размер)
+  - [Форма](#форма)
+
+</MdxMenu>
+
+## Обзор
+
+Компонент `Banner` предназначен для отображения срочных и важных оповещений, которые требуют внимания пользователя. Он размещается в верхней или нижней части страницы и может включать текст, иконки и интерактивные элементы, такие как кнопки.
+
+В отличие от `Informer` (для кратких статичных сообщений) и `Snackbar` (для временных уведомлений), `Banner` более заметный, кастомизируемый и подходит для длительного отображения критически важной информации, например, предупреждений о сбоях или системных статусов.
+
+## Импорт
+
+```tsx
+import { Banner } from '@consta/uikit/Banner';
+```
+
+## Свойства
+
+| Свойство                   | Тип или варианты значения                                   | По умолчанию | Описание                                                                                     |
+| -------------------------- | ----------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------- |
+| [`leftSide`](#содержимое)  | `React.ReactNode`                                           | —            | Содержимое на левой стороне                                                                  |
+| [`rightSide`](#содержимое) | `React.ReactNode`                                           | —            | Содержимое на правой стороне                                                                 |
+| [`icon`](#иконка)          | `IconComponent`                                             | —            | Иконка                                                                                       |
+| [`size`](#размер)          | `'xs' \| 's' \| 'm' \| 'l'`                                 | `'m'`        | Размер компонента                                                                            |
+| [`view`](#фон)             | `'filled' \| 'ghost' \| 'transparent'`                      | `'filled'`   | Визуальный стиль                                                                             |
+| [`status`](#фон)           | `'normal' \| 'warning' \| 'alert' \| 'success' \| 'system'` | `'normal'`   | Статус (цветовая схема)                                                                      |
+| [`form`](#форма)           | `'default' \| 'round' \| 'brick'`                           | `'default'`  | Форма компонента                                                                             |
+| `space`                    | `MixSpaceProps`                                             | —            | Параметры отступов, [подробнее](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable)       |
+| `itemsGap`                 | `Space \| [Space, Space]`                                   | `'s'`        | Отступы между элементами, [подробнее](##LIBS.LIB.STAND/lib:uikit/stand:mixs-mixspace-stable) |
+| `className`                | `string`                                                    | —            | Дополнительный класс                                                                         |
+
+## Содержимое
+
+Для наполнения баннера используйте свойства `leftSide` и `rightSide`. Эти свойства позволяют добавлять текст, иконки, кнопки или другие элементы. Если в `leftSide` или `rightSide` передан массив элементов, отступы между ними задаются автоматически с помощью свойства `itemsGap`. Если первый элемент массива `leftSide` — строка, она отображается жирным шрифтом, а остальные строки оборачиваются в компонент `Text`.
+
+<MdxTabs>
+
+<BannerExampleContent />
+
+```tsx
+<Banner
+  leftSide={['Заголовок', 'описание']}
+  rightSide={[<Button label="Кнопка" />]}
+/>
+```
+
+</MdxTabs>
+
+### Иконка
+
+Для добавления иконки используйте свойство `icon`, передав компонент иконки из библиотеки Consta.
+
+<MdxTabs>
+
+<BannerExampleIcon />
+
+```tsx
+<Banner leftSide="Заголовок" icon={IconAlert} />
+```
+
+</MdxTabs>
+
+## Внешний вид
+
+### Фон
+
+Свойства `view` и `status` определяют стиль и цветовую схему баннера. Параметр `view` задает тип фона:
+
+- `filled` — заполненный фон с цветом, зависящим от `status`.
+- `ghost` — полупрозрачный фон.
+- `transparent` — прозрачный фон, подходит для кастомизации с помощью `style`.
+
+Свойство `status` определяет цветовую схему: `normal`, `warning`, `alert`, `success`, `system`.
+
+<MdxTabs>
+
+<BannerExampleView />
+
+```tsx
+<Banner leftSide="Заголовок" view="filled" status="normal" />
+```
+
+</MdxTabs>
+
+Для создания баннера с пользовательским фоном используйте `view="transparent"` и задайте фон через свойство `style`.
+
+<MdxTabs>
+
+<BannerExampleViewCustomBg />
+
+```tsx
+const { themeClassNames } = useTheme();
+
+<Banner
+  leftSide="Заголовок"
+  view="transparent"
+  style={{
+    background: `url(${BannerCustomBg}) right top no-repeat, rgb(1, 45, 155)`,
+  }}
+  className={themeClassNames.color.accent}
+/>;
+```
+
+</MdxTabs>
+
+### Размер
+
+Свойство `size` задает размер баннера: `xs`, `s`, `m`, `l`. Размер влияет на высоту и отступы компонента.
+
+<MdxTabs>
+
+<BannerExampleSize />
+
+```tsx
+<Banner leftSide="Заголовок" size="s" />
+```
+
+</MdxTabs>
+
+### Форма
+
+Свойство `form` определяет форму углов баннера:
+
+- `default` — стандартные углы.
+- `round` — скругленные углы.
+- `brick` — прямые углы.
+
+<MdxTabs>
+
+<BannerExampleForm />
+
+```tsx
+<Banner leftSide="Заголовок" form="brick" />
+```
+
+</MdxTabs>
