@@ -11,6 +11,7 @@ export const PaginationExampleSize = () => {
 
   return (
     <Example
+      col={1}
       items={sizes}
       getItemDescription={(size) => `size="${size}"`}
       getItemNode={(size) => (

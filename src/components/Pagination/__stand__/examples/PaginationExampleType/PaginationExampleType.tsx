@@ -11,6 +11,7 @@ export const PaginationExampleType = () => {
 
   return (
     <Example
+      col={1}
       items={types}
       getItemDescription={(type) => `type="${type}"`}
       getItemNode={(type) => (

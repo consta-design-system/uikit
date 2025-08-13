@@ -7,7 +7,7 @@ export const PaginationExampleArrows = () => {
   const [page, setPage] = useState(1);
 
   return (
-    <Example col={2}>
+    <Example col={{ 1: 0, 2: 700 }}>
       <Pagination
         items={5}
         value={page}

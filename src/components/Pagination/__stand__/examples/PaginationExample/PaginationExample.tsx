@@ -7,7 +7,7 @@ export const PaginationExample = () => {
   const [page, setPage] = useState(1);
 
   return (
-    <Example>
+    <Example col={1}>
       <Pagination value={page} onChange={setPage} items={3} />
     </Example>
   );
