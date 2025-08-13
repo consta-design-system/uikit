@@ -20,7 +20,7 @@ import {
   groups,
   items as itemsArr,
 } from '../__mocks__/data.mock';
-import { AutoComplete } from '../AutoComplete';
+import { AutoComplete } from '../AutoCompleteCanary';
 
 const cnAutoCompleteVariants = cn('AutoCompleteVariants');
 
