@@ -1,54 +1,23 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 import { ProgressSpinExampleProgress } from './examples/ProgressSpinExampleProgress/ProgressSpinExampleProgress';
 import { ProgressSpinExampleSize } from './examples/ProgressSpinExampleSize/ProgressSpinExampleSize';
 
-```tsx
-import { ProgressSpin } from '@consta/uikit/ProgressSpin';
-```
-
 <MdxMenu>
 
-- [Процент готовности](#процент-готовности)
-- [Размер](#размер)
+- [Обзор](#обзор)
 - [Импорт](#импорт)
 - [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Процент готовности](#процент-готовности)
+- [Внешний вид](#внешний-вид)
+  - [Размер](#размер)
 - [Пример использования](#пример-использования)
 
 </MdxMenu>
 
-## Процент готовности
+## Обзор
 
-Если хотите показать, сколько ещё ждать, укажите в процентах, насколько процесс
-близок к завершению — с помощью свойства `value`.
-
-Чтобы анимировать индикатор, добавьте `animation` (тогда он плавно прокрутится до величины,
-которую вы указали в `value`).
-
-Если опустить это свойство, то индикатор будет бесконечно крутиться.
-
-```ts
-<ProgressSpin size="m" />
-<ProgressSpin value={20} size="m" />
-<ProgressSpin value={40} size="m" />
-<ProgressSpin value={60} size="m" />
-<ProgressSpin animation value={80} size="m" />
-```
-
-<ProgressSpinExampleProgress />
-
-## Размер
-
-За размер индикатора отвечает свойство `size`.
-
-```ts
-<ProgressSpin value={70} size="2xl" />
-<ProgressSpin value={70} size="xl" />
-<ProgressSpin value={70} size="l" />
-<ProgressSpin value={70} size="m" />
-<ProgressSpin value={70} size="s" />
-```
-
-<ProgressSpinExampleSize />
+Компонент `ProgressSpin` — это индикатор загрузки, который отображает прогресс выполнения процесса или бесконечную анимацию ожидания. Используется для визуализации статуса выполнения задачи в интерфейсе.
 
 ## Импорт
 
@@ -58,18 +27,67 @@ import { ProgressSpin } from '@consta/uikit/ProgressSpin';
 
 ## Свойства
 
-| Свойство                            | Тип                        | По умолчанию | Описание                                                                           |
-| ----------------------------------- | -------------------------- | ------------ | ---------------------------------------------------------------------------------- |
-| [`value?`](#процент-готовности)     | `number`                   | -            | Выполненная часть процесса в процентах (определяет заполненную область индикатора) |
-| [`animation?`](#процент-готовности) | `boolean`                  | -            | Включает плавное изменение индикатора до величины, указанной в `progress`          |
-| [`size?`](#размер)                  | `'m','s','l','xl','2xl'`   | `'m'`        | Размер                                                                             |
-| `className?`                        | `string`                   | -            | Дополнительный класс                                                               |
-| `ref?`                              | `React.Ref<SVGSVGElement>` | -            | Ссылка на корневой DOM-элемент компонента                                          |
+| Свойство                            | Тип                                  | По умолчанию | Описание                                                                           |
+| ----------------------------------- | ------------------------------------ | ------------ | ---------------------------------------------------------------------------------- |
+| [`value?`](#процент-готовности)     | `number`                             | -            | Выполненная часть процесса в процентах (определяет заполненную область индикатора) |
+| [`animation?`](#процент-готовности) | `boolean`                            | -            | Включает плавное изменение индикатора до величины, указанной в `value`             |
+| [`size?`](#размер)                  | `'s' \| 'm' \| 'l' \| 'xl' \| '2xl'` | `'m'`        | Размер индикатора                                                                  |
+| `className?`                        | `string`                             | -            | Дополнительный класс                                                               |
+| `ref?`                              | `React.Ref<SVGSVGElement>`           | -            | Ссылка на корневой DOM-элемент компонента                                          |
+
+## Содержимое
+
+### Процент готовности
+
+Свойство `value` позволяет указать, насколько процесс близок к завершению (в процентах). Если задать `value`, индикатор отобразит заполненную область, соответствующую указанному значению.
+
+Для добавления плавной анимации изменения прогресса используйте свойство `animation`. При включении анимации индикатор будет плавно заполняться до значения, указанного в `value`.
+
+Если свойство `value` не задано, индикатор будет бесконечно вращаться, показывая состояние ожидания.
+
+<MdxTabs>
+
+<ProgressSpinExampleProgress />
+
+```tsx
+<>
+  <ProgressSpin size="m" />
+  <ProgressSpin value={20} size="m" />
+  <ProgressSpin value={40} size="m" />
+  <ProgressSpin value={60} size="m" />
+  <ProgressSpin animation value={80} size="m" />
+</>
+```
+
+</MdxTabs>
+
+## Внешний вид
+
+### Размер
+
+Свойство `size` определяет размер индикатора. Доступные значения: `s`, `m`, `l`, `xl`, `2xl`. По умолчанию используется размер `m`.
+
+<MdxTabs>
+
+<ProgressSpinExampleSize />
+
+```tsx
+<>
+  <ProgressSpin value={70} size="2xl" />
+  <ProgressSpin value={70} size="xl" />
+  <ProgressSpin value={70} size="l" />
+  <ProgressSpin value={70} size="m" />
+  <ProgressSpin value={70} size="s" />
+</>
+```
+
+</MdxTabs>
 
 ## Пример использования
 
-```ts
-// src/App.ts
+Ниже приведён пример использования компонента `ProgressSpin` с указанием прогресса:
+
+```tsx
 import React from 'react';
 import { ProgressSpin } from '@consta/uikit/ProgressSpin';
 
