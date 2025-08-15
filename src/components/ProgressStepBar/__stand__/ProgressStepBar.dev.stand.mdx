@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 import {
   ProgressStepBarExampleDirectionHorizontal,
   ProgressStepBarExampleDirectionVertical,
@@ -10,58 +10,95 @@ import { ProgressStepBarExampleContent } from './examples/ProgressStepBarExample
 import { ProgressStepBarExampleActive } from './examples/ProgressStepBarExampleActive/ProgressStepBarExampleActive';
 import { ProgressStepBarExampleAdaptive } from './examples/ProgressStepBarExampleAdaptive/ProgressStepBarExampleAdaptive';
 
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Шаги](#шаги)
+  - [Подсказка в тултипе](#подсказка-в-тултипе)
+  - [Индикатор шага в процессе](#индикатор-шага)
+  - [Дополнительный контент и клик](#дополнительный-контент-и-клик)
+- [Внешний вид](#внешний-вид)
+  - [Расположение](#расположение)
+  - [Размер](#размер)
+- [Поведение](#поведение)
+  - [Активный шаг](#активный-шаг)
+  - [Адаптивность](#адаптивность)
+- [Пример использования](#пример-использования)
+
+</MdxMenu>
+
+## Обзор
+
+Компонент `ProgressStepBar` отображает последовательность шагов с возможностью указания их статуса, прогресса и дополнительного контента. Подходит для отображения процессов, таких как прогресс выполнения задачи, навигация по этапам или визуализация рабочих процессов.
+
+## Импорт
+
 ```tsx
 import { ProgressStepBar } from '@consta/uikit/ProgressStepBar';
 ```
 
-<MdxMenu>
+## Свойства
 
-- [Шаги](#шаги)
-  - [Подсказка в тултипе](#пример-с-подсказкой-в-тултипе)
-  - [Индикатор шага в процессе](#пример-с-индикатором-шага-который-выполняется)
-  - [Дополнительный контент для шага и действие по клику](#пример-с-дополнительным-контентом-для-шагов-и-действием-по-клику-на-шаги)
-- [Расположение](#расположение)
-- [Активный шаг](#активный-шаг)
-- [Размер](#размер)
-- [Адаптивность](#адаптивность)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
+| Свойство                            | Тип или варианты значения                        | По умолчанию                    | Описание                                            |
+| ----------------------------------- | ------------------------------------------------ | ------------------------------- | --------------------------------------------------- |
+| [`steps`](#шаги)                    | `ITEM[]`                                         | -                               | Список шагов                                        |
+| [`direction?`](#расположение)       | `'horizontal'` &#124; `'vertical'`               | `'horizontal'`                  | Ориентация шагов                                    |
+| [`size?`](#размер)                  | `'xs'` &#124; `'s'` &#124; `'m'`                 | `'s'`                           | Размер компонента                                   |
+| [`activeStepIndex?`](#активный-шаг) | `string` &#124; `number`                         | -                               | Номер активного шага (нумерация начинается с `0`)   |
+| `onItemClick?`                      | `ProgressStepBarPropOnItemClick`                 | -                               | Обработчик клика по шагу                            |
+| `getItemLabel?`                     | `ProgressStepBarPropGetItemLabel<ITEM>`          | `(item) => item.label`          | Функция для получения названия шага                 |
+| `getItemLineStatus?`                | `ProgressStepBarPropGetItemLineStatus<ITEM>`     | `(item) => item.lineStatus`     | Функция для получения статуса линии                 |
+| `getItemTooltipContent?`            | `ProgressStepBarPropGetItemTooltipContent<ITEM>` | `(item) => item.tooltipContent` | Функция для получения содержимого тултипа           |
+| `getItemPoint?`                     | `ProgressStepBarPropGetItemPoint<ITEM>`          | `(item) => item.point`          | Функция для получения внутреннего контента шага     |
+| `getItemProgress?`                  | `ProgressStepBarPropGetItemProgress<ITEM>`       | `(item) => item.progress`       | Функция для определения прогресса шага              |
+| `getItemContent?`                   | `ProgressStepBarPropGetItemContent<ITEM>`        | `(item) => item.content`        | Функция для получения дополнительного контента шага |
+| `getItemStatus?`                    | `ProgressStepBarPropGetItemStatus<ITEM>`         | `(item) => item.status`         | Функция для получения статуса шага                  |
+| `getItemClick?`                     | `ProgressStepBarPropGetItemOnClick<ITEM>`        | `(item) => item.onClick`        | Функция для обработки клика по шагу                 |
+| `className?`                        | `string`                                         | -                               | Дополнительный CSS-класс                            |
+| `ref?`                              | `React.Ref<HTMLDivElement>`                      | -                               | Ссылка на корневой элемент                          |
 
-</MdxMenu>
+## Содержимое
 
-## Шаги
+### Шаги
 
-Список шагов передаётся в свойстве `steps`. Тип элементов массива `steps` по умолчанию равен [DefaultItem](#свойства). Что внутри:
+Список шагов задаётся через свойство `steps` в виде массива объектов. Каждый объект в массиве описывает шаг и может содержать следующие поля:
 
-- `label` — название шага,
-- `tooltipContent` — текст для подсказки в [тултипе](##LIBS.LIB.STAND/lib:uikit/stand:components-tooltip-stable) (краткое описание шага),
-- `lineStatus` — цвет линии для выполненного шага,
-- `point` — номер шага или изображение в формате иконки, обозначающее этот шаг,
-- `progress` — показывает, что этот шаг в процессе выполнения (на его месте отображается индикатор загрузки),
-- `content` — любое содержимое для шага (лейблы, описания, картинки),
-- `onClick` — действие по клику на шаг.
+### Шаги
 
-Шаги отображаются в том порядке, в котором описаны.
+Список шагов задаётся через свойство `steps` в виде массива объектов. Каждый объект в массиве описывает шаг и может содержать следующие поля:
 
-#### Пример с подсказкой в тултипе
+| Свойство          | Тип или варианты значения                                         | Описание                                                                                                |
+| ----------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `label`           | `string`                                                          | Название шага, отображается рядом с его обозначением                                                    |
+| `tooltipContent?` | `string`                                                          | Текст для всплывающей подсказки ([Tooltip](##LIBS.LIB.STAND/lib:uikit/stand:components-tooltip-stable)) |
+| `lineStatus?`     | `'normal' \| 'success' \| 'alert' \| 'warning'`                   | Цвет линии, соединяющей шаги                                                                            |
+| `point?`          | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 7 \| 8 \| 9 \| IconComponent` | Номер шага или иконка, отображаемая в качестве обозначения шага                                         |
+| `progress?`       | `boolean`                                                         | Показывает, что шаг в процессе выполнения (отображается индикатор загрузки)                             |
+| `content?`        | `React.ReactNode`                                                 | Дополнительное содержимое шага (например, текст, иконки, компоненты)                                    |
+| `status?`         | `'normal' \| 'success' \| 'alert' \| 'warning'`                   | Статус шага, влияет на его визуальное отображение                                                       |
+| `onClick?`        | `React.EventHandler<React.MouseEvent>`                            | Обработчик клика по шагу                                                                                |
+
+Шаги отображаются в порядке, указанном в массиве.
+
+### Подсказка в тултипе
+
+Для отображения всплывающей подсказки используйте свойство `tooltipContent` в объекте шага. Подсказка появляется при наведении на шаг и содержит краткое описание.
+
+<MdxTabs>
+
+<ProgressStepBarExampleTooltip />
 
 ```tsx
-type Item = {
-  label: string;
-  tooltipContent?: string;
-  point?: number;
-  progress?: boolean;
-  status?: 'normal' | 'success' | 'alert' | 'warning';
-  lineStatus?: 'normal' | 'success' | 'alert' | 'warning';
-};
-
-const steps: Item[] = [
+const steps = [
   {
     label: 'Первый шаг',
     point: 1,
     status: 'normal',
     lineStatus: 'normal',
-    tooltipContent: `Небольшое описание выполнения или состояния на шаге 1`,
+    tooltipContent: 'Небольшое описание выполнения или состояния на шаге 1',
   },
   {
     label: 'Второй шаг',
@@ -69,7 +106,7 @@ const steps: Item[] = [
     status: 'warning',
     progress: true,
     lineStatus: 'warning',
-    tooltipContent: `Небольшое описание выполнения или состояния на шаге 2`,
+    tooltipContent: 'Небольшое описание выполнения или состояния на шаге 2',
   },
   {
     label: 'Третий шаг',
@@ -77,34 +114,31 @@ const steps: Item[] = [
     status: 'alert',
     progress: true,
     lineStatus: 'alert',
-    tooltipContent: `Небольшое описание выполнения или состояния на шаге 3`,
+    tooltipContent: 'Небольшое описание выполнения или состояния на шаге 3',
   },
   {
-    label: 'Четвертый шаг',
+    label: 'Четвёртый шаг',
     point: 4,
     status: 'success',
-    tooltipContent: `Небольшое описание выполнения или состояния на шаге 4`,
+    tooltipContent: 'Небольшое описание выполнения или состояния на шаге 4',
   },
 ];
-export const ProgressStepBarExampleTooltip = () => {
-  return <ProgressStepBar steps={steps} />;
-};
+
+return <ProgressStepBar steps={steps} />;
 ```
 
-<ProgressStepBarExampleTooltip />
+</MdxTabs>
 
-#### Пример с индикатором шага, который выполняется
+### Индикатор шага
+
+Свойство `progress` в объекте шага показывает, что шаг находится в процессе выполнения. В таком случае вместо номера или иконки отображается индикатор загрузки.
+
+<MdxTabs>
+
+<ProgressStepBarExampleProgress />
 
 ```tsx
-type Item = {
-  label: string;
-  point?: number;
-  progress?: boolean;
-  status?: 'normal' | 'success' | 'alert' | 'warning';
-  lineStatus?: 'normal' | 'success' | 'alert' | 'warning';
-};
-
-const steps: Item[] = [
+const steps = [
   {
     label: 'Первый шаг',
     point: 1,
@@ -131,23 +165,20 @@ const steps: Item[] = [
   },
 ];
 
-export const ProgressStepBarExampleProgress = () => {
-  return <ProgressStepBar steps={steps} activeStepIndex={3} />;
-};
+return <ProgressStepBar steps={steps} activeStepIndex={3} />;
 ```
 
-<ProgressStepBarExampleProgress />
+</MdxTabs>
 
-#### Пример с дополнительным контентом для шагов и действием по клику на шаги
+### Дополнительный контент и клик
+
+Свойство `content` позволяет добавить к шагу дополнительное содержимое, например, иконки, теги или другие компоненты. Свойство `onClick` задаёт действие при клике на шаг.
+
+<MdxTabs>
+
+<ProgressStepBarExampleContent />
 
 ```tsx
-import React, { useState } from 'react';
-
-import { IconDinosaur } from '@consta/uikit/icons/IconDinosaur';
-import { IconSettings } from '@consta/uikit/icons/IconSettings';
-import { Tag } from '@consta/uikit/Tag';
-import { ProgressStepBar } from '@consta/uikit/ProgressStepBar';
-
 const StepContent = () => {
   return (
     <div>
@@ -163,177 +194,131 @@ const StepContent = () => {
   );
 };
 
-export const ProgressStepBarExampleContent = () => {
-  const [status, setStatus] = useState<string>('normal');
+const [status, setStatus] = useState('normal');
 
-  const clickAction = () => {
-    setStatus(status === 'normal' ? 'success' : 'normal');
-  };
-
-  const steps = [
-    {
-      label: 'Первый шаг',
-      point: 1,
-      status,
-      lineStatus: 'normal',
-      content: <StepContent />,
-      onClick: () => clickAction(),
-    },
-    {
-      label: 'Второй шаг',
-      point: 2,
-      status,
-      lineStatus: 'normal',
-      onClick: () => clickAction(),
-    },
-    {
-      label: 'Третий шаг',
-      point: 3,
-      status,
-      lineStatus: 'normal',
-      onClick: () => clickAction(),
-    },
-    {
-      label: 'Четвёртый шаг',
-      point: 4,
-      status,
-      content: <StepContent />,
-      onClick: () => clickAction(),
-    },
-  ];
-
-  return <ProgressStepBar steps={steps} activeStepIndex={2} size="m" />;
+const clickAction = () => {
+  setStatus(status === 'normal' ? 'success' : 'normal');
 };
+
+const steps = [
+  {
+    label: 'Первый шаг',
+    point: 1,
+    status,
+    lineStatus: 'normal',
+    content: <StepContent />,
+    onClick: () => clickAction(),
+  },
+  {
+    label: 'Второй шаг',
+    point: 2,
+    status,
+    lineStatus: 'normal',
+    onClick: () => clickAction(),
+  },
+  {
+    label: 'Третий шаг',
+    point: 3,
+    status,
+    lineStatus: 'normal',
+    onClick: () => clickAction(),
+  },
+  {
+    label: 'Четвёртый шаг',
+    point: 4,
+    status,
+    content: <StepContent />,
+    onClick: () => clickAction(),
+  },
+];
+
+return <ProgressStepBar steps={steps} activeStepIndex={2} size="m" />;
 ```
 
-<ProgressStepBarExampleContent />
+</MdxTabs>
 
-## Расположение
+## Внешний вид
 
-За расположение шагов отвечает свойство `direction`:
+### Расположение
 
-- `horizontal` — шаги располагаются по горизонтали,
-- `vertical` — по вертикали, друг под другом.
+Свойство `direction` определяет ориентацию шагов:
 
-#### Пример горизонтальных шагов
+- `'horizontal'` — шаги располагаются горизонтально (по умолчанию).
+- `'vertical'` — шаги располагаются вертикально, друг под другом.
 
-```tsx
-<ProgressStepBar direction="horizontal" />
-```
+<MdxTabs>
 
 <ProgressStepBarExampleDirectionHorizontal />
 
-#### Пример вертикальных шагов
-
 ```tsx
-<ProgressStepBar direction="vertical" />
+return <ProgressStepBar direction="horizontal" steps={steps} />;
 ```
+
+</MdxTabs>
+
+<MdxTabs>
 
 <ProgressStepBarExampleDirectionVertical />
 
-## Активный шаг
-
-Чтобы указать активный шаг, передайте номер этого шага по порядку в свойство `activeStepIndex`. У первого шага номер равен `0`.
-
 ```tsx
-<ProgressStepBar steps={steps} activeStepIndex={0} />
-<ProgressStepBar steps={steps} activeStepIndex={1} />
-<ProgressStepBar steps={steps} activeStepIndex={2} />
-<ProgressStepBar steps={steps} activeStepIndex={3} />
+return <ProgressStepBar direction="vertical" steps={steps} />;
 ```
 
-<ProgressStepBarExampleActive />
+</MdxTabs>
 
-## Размер
+### Размер
 
-Размер компонента определяется в свойстве `size`. Варианты: `xs`, `s`, `m`, по умолчанию `s`.
+Свойство `size` задаёт размер компонента. Доступные значения: `'xs'`, `'s'`, `'m'`. По умолчанию — `'s'`.
 
-```tsx
-<ProgressStepBar size="xs" steps={steps} activeStepIndex={2} />
-<ProgressStepBar size="s" steps={steps} activeStepIndex={2} />
-<ProgressStepBar size="m" steps={steps} activeStepIndex={2} />
-```
+<MdxTabs>
 
 <ProgressStepBarExampleSize />
 
-## Адаптивность
+```tsx
+return (
+  <>
+    <ProgressStepBar size="xs" steps={steps} activeStepIndex={2} />
+    <ProgressStepBar size="s" steps={steps} activeStepIndex={2} />
+    <ProgressStepBar size="m" steps={steps} activeStepIndex={2} />
+  </>
+);
+```
 
-На мобильных и компактных экранах компонент заполняет всю доступную ширину.
-Если что-то не помещается, появляется прокрутка. Обозначение шагов и их названия сохраняются. Прокручивать список можно кнопками или свайпами вправо и влево (для мобильных устройств).
+</MdxTabs>
+
+## Поведение
+
+### Активный шаг
+
+Свойство `activeStepIndex` указывает номер активного шага (нумерация начинается с `0`). Активный шаг выделяется визуально.
+
+<MdxTabs>
+
+<ProgressStepBarExampleActive />
+
+```tsx
+return (
+  <>
+    <ProgressStepBar steps={steps} activeStepIndex={0} />
+    <ProgressStepBar steps={steps} activeStepIndex={1} />
+    <ProgressStepBar steps={steps} activeStepIndex={2} />
+    <ProgressStepBar steps={steps} activeStepIndex={3} />
+  </>
+);
+```
+
+</MdxTabs>
+
+### Адаптивность
+
+На компактных экранах компонент занимает всю доступную ширину. Если шаги не помещаются, появляется горизонтальная прокрутка, которую можно выполнять кнопками или свайпами (на мобильных устройствах). Названия и обозначения шагов сохраняются. Для лучшего отображения на узких экранах рекомендуется использовать `direction="vertical"`.
+
+<MdxTabs>
 
 <ProgressStepBarExampleAdaptive />
 
-Если вам не нравится, как выглядит компонент с прокруткой, можно использовать [вертикальный вариант](#расположение) (`direction="vertical"`).
-
-## Импорт
-
 ```tsx
-import { ProgressStepBar } from '@consta/uikit/ProgressStepBar';
+return <ProgressStepBar steps={steps} />;
 ```
 
-## Свойства
-
-```tsx
-export type ProgressStepBarItemDefault = {
-  label: string;
-  tooltipContent?: string;
-  lineStatus?: ProgressStepBarPropStatus;
-  point?: ProgressStepBarPointNumbersMap | IconComponent;
-  status?: ProgressStepBarPropStatus;
-  progress?: boolean;
-  content?: React.ReactNode;
-  onClick?: React.EventHandler<React.MouseEvent>;
-};
-
-type ProgressStepBarPropStatus = 'normal' | 'success' | 'warning' | 'alert';
-type ProgressStepBarPointNumbersMap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-type ProgressStepBarPropGetItemLabel<ITEM> = (item: ITEM) => string;
-type ProgressStepBarPropGetItemKey<ITEM> = (item: ITEM) => string | number;
-type ProgressStepBarPropGetItemTooltipContent<ITEM> = (
-  item: ITEM,
-) => string | undefined;
-type ProgressStepBarPropGetItemLineStatus<ITEM> = (
-  item: ITEM,
-) => PropStatus | undefined;
-type ProgressStepBarPropGetItemPoint<ITEM> = (
-  item: ITEM,
-) => PointNumbersMap | IconComponent | undefined;
-type ProgressStepBarPropGetItemProgress<ITEM> = (
-  item: ITEM,
-) => boolean | undefined;
-type ProgressStepBarPropGetItemContent<ITEM> = (
-  item: ITEM,
-) => React.ReactNode | undefined;
-type ProgressStepBarPropGetItemStatus<ITEM> = (
-  item: ITEM,
-) => PropStatus | undefined;
-type ProgressStepBarPropGetItemOnClick<ITEM> = (
-  item: ITEM,
-) => React.EventHandler<React.MouseEvent> | undefined;
-
-type PropOnItemClick<ITEM> = (
-  item: ITEM,
-  props: {
-    e: React.MouseEvent;
-    index: number;
-  },
-) => void;
-```
-
-| Свойство                            | Тип или варианты значения                        | По умолчанию                    | Описание                                                    |
-| ----------------------------------- | ------------------------------------------------ | ------------------------------- | ----------------------------------------------------------- |
-| [`steps`](#элементы)                | `ITEM[]`                                         | -                               | Шаги                                                        |
-| [`direction?`](#ориентация)         | `'horizontal'` &#124; `'vertical'`               | `'horizontal'`                  | Ориентация                                                  |
-| [`size?`](#размер)                  | `'xs'` &#124; `'s'` &#124; `'m'`                 | `'s'`                           | Размер                                                      |
-| [`activeStepIndex?`](#активный-шаг) | `string` &#124; `number`                         | -                               | Номер активного шага (по порядку), у первого шага номер `0` |
-| `onItemClick?`                      | `ProgressStepBarPropOnItemClick`                 | -                               | Функция для события нажатия на определенный шаг             |
-| `getItemLabel?`                     | `ProgressStepBarPropGetItemLabel<ITEM>`          | `(item) => item.label`          | Функция для определения названия шага                       |
-| `getItemLineStatus?`                | `ProgressStepBarPropGetItemLineStatus<ITEM>`     | `(item) => item.lineStatus`     | Функция для определения статуса линии                       |
-| `getItemTooltipContent?`            | `ProgressStepBarPropGetItemTooltipContent<ITEM>` | `(item) => item.tooltipContent` | Функция для определения содержимого тултипа                 |
-| `getItemPoint?`                     | `ProgressStepBarPropGetItemPoint<ITEM>`          | `(item) => item.point`          | Функция для определения внутреннего контента шага           |
-| `getItemProgress?`                  | `ProgressStepBarPropGetItemProgress<ITEM>`       | `(item) => item.progress`       | Функция определяет, находится ли шаг в прогрессе            |
-| `getItemContent?`                   | `ProgressStepBarPropGetItemContent<ITEM>;`       | `(item) => item.content`        | Функция для получения контента                              |
-| `getItemStatus?`                    | `ProgressStepBarPropGetItemStatus<ITEM>`         | `(item) => item.status`         | Функция для определения статуса шага                        |
-| `getItemClick?`                     | `ProgressStepBarPropGetItemOnClick<ITEM>`        | `(item) => item.onClick`        | Функция для определения клика нажатия на шаг                |
-| `ref?`                              | `React.Ref<HTMLDivElement>`                      | -                               | Ссылка на основной контейнер                                |
-| `className?`                        | `string`                                         | -                               | Дополнительный CSS-класс                                    |
+</MdxTabs>
