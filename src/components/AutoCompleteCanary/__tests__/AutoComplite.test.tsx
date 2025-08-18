@@ -13,7 +13,7 @@ import { cnLoader } from '##/components/LoaderDeprecated';
 import { DefaultItem } from '##/components/SelectDeprecated';
 import { TextFieldPropRenderValueItem } from '##/components/TextFieldCanary/types';
 
-import { AutoComplete, cnAutoComplete } from '../AutoComplete';
+import { AutoComplete, cnAutoComplete } from '../AutoCompleteCanary';
 import {
   AutoCompleteGroupDefault,
   AutoCompleteItemDefault,
