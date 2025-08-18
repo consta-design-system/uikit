@@ -99,19 +99,19 @@ export type Props = {
 export const COMPONENT_NAME = 'Button' as const;
 export const cnButton = cn(COMPONENT_NAME);
 
-const sizeMap: Record<ButtonPropSize, IconPropSize> = {
+const sizeMap = {
   xs: 'xs',
   s: 'xs',
   m: 's',
   l: 'm',
-};
+} as const;
 
-const sizeMapOnlyIcon: Record<ButtonPropSize, IconPropSize> = {
+const sizeMapOnlyIcon = {
   xs: 'xs',
   s: 's',
   m: 'm',
   l: 'm',
-};
+} as const;
 
 export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -200,7 +200,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
         ))}
       {loading && (
         <div className={cnButton('Loader')}>
-          <Loader size="s" />
+          <Loader size={sizeMapOnlyIcon[size]} type="circle" />
         </div>
       )}
     </Tag>
