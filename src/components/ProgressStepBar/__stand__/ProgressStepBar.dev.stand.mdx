@@ -165,7 +165,9 @@ const steps = [
   },
 ];
 
-return <ProgressStepBar steps={steps} activeStepIndex={3} />;
+export const ProgressStepBarExampleProgress = () => {
+  return <ProgressStepBar steps={steps} activeStepIndex={3} />;
+};
 ```
 
 </MdxTabs>
@@ -194,7 +196,8 @@ const StepContent = () => {
   );
 };
 
-const [status, setStatus] = useState('normal');
+export const ProgressStepBarExampleContent = () => {
+  const [status, setStatus] = useState<string>('normal');
 
 const clickAction = () => {
   setStatus(status === 'normal' ? 'success' : 'normal');
