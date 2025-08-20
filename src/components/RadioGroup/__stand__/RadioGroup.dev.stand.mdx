@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 import { RadioGroupExampleSize } from './examples/RadioGroupExampleSize/RadioGroupExampleSize';
 import {
   RadioGroupExampleDisabled,
@@ -11,294 +11,27 @@ import {
 } from './examples/RadioGroupExampleAlign/RadioGroupExampleAlign';
 import { RadioGroupExampleView } from './examples/RadioGroupExampleView/RadioGroupExampleView';
 
-```tsx
-import { RadioGroup } from '@consta/uikit/RadioGroup';
-```
-
 <MdxMenu>
 
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
 - [Содержимое](#содержимое)
   - [Название радиокнопки](#название-радиокнопки)
   - [Неактивная радиокнопка](#неактивная-радиокнопка)
-- [Расположение радиокнопок](#расположение)
-- [Выравнивание](#выравнивание)
-- [Неактивная группа радиокнопок](#неактивная-группа-кнопок)
-- [Размер](#размер)
+  - [Неактивная группа радиокнопок](#неактивная-группа-радиокнопок)
 - [Внешний вид](#внешний-вид)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
+  - [Размер](#размер)
+  - [Стиль](#стиль)
+  - [Выравнивание](#выравнивание)
+  - [Расположение](#расположение)
+- [Пример использования](#пример-использования)
 
 </MdxMenu>
 
-## Содержимое
+## Обзор
 
-Информация об элементах группы — отдельных радиокнопках — описывается в массиве `items`. В нём можно описать название радиокнопки и её неактивность. Например, вот так:
-
-```tsx
-const items = [
-  {
-    name: 'Один',
-  },
-  {
-    name: 'Два',
-  },
-  {
-    name: 'Три',
-  },
-  {
-    name: 'Четыре',
-  },
-  {
-    name: 'Пять — неактивная',
-    disabled: true,
-  },
-];
-```
-
-### Название радиокнопки
-
-Надпись рядом с радиокнопкой можно получить с помощью функции `getItemLabel` или указав свойство `label` в элементе списка. Лучше писать название с заглавной буквы, точка не нужна.
-
-### Неактивная радиокнопка
-
-Одну или несколько радиокнопок можно сделать неактивными — если вы не хотите, чтобы их выбирали. За неактивность отвечает функция `getItemDisabled` или свойство `disabled` в элементе списка.
-
-```tsx
-type Item = {
-  name: string;
-  disabled?: boolean;
-};
-
-const items: Item[] = [
-  {
-    name: 'один',
-  },
-  {
-    name: 'два',
-  },
-  {
-    name: 'три',
-  },
-  {
-    name: 'четыре',
-  },
-  {
-    name: 'пять',
-    disabled: true,
-  },
-];
-
-function RadioGroupExampleDisabledItem() {
-  const [value, setValue] = React.useState<Item | null>(items[0]);
-
-  return (
-    <RadioGroup
-      value={value}
-      items={items}
-      getItemLabel={(item) => item.name}
-      getItemDisabled={(item) => item.disabled}
-      onChange={({ value }) => setValue(value)}
-    />
-  );
-}
-```
-
-<RadioGroupExampleDisabledItem />
-
-## Расположение
-
-Группа радиокнопок может располагаться как по вертикали, так и по горизонтали. За направление отвечает свойство `direction`. Варианты:
-
-- `column` — по вертикали (работает по умолчанию),
-- `row` — по горизонтали.
-
-```tsx
-const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
-
-function RadioGroupExampleColumn() {
-  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
-
-  return (
-    <RadioGroup
-      value={value}
-      items={simpleItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      direction="column"
-    />
-  );
-}
-```
-
-<RadioGroupExampleColumn />
-
-```tsx
-const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
-
-function RadioGroupExampleRow() {
-  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
-
-  return (
-    <RadioGroup
-      value={value}
-      items={simpleItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      direction="row"
-    />
-  );
-}
-```
-
-<RadioGroupExampleRow />
-
-## Выравнивание
-
-За выравнивание названий по вертикали по отношению к радиокнопкам отвечает свойство `align`. Варианты:
-
-- `center` — радиокнопки выровнены по центру контейнеров с текстом,
-- `top` — радиокнопки выровнены по верхнему краю контейнеров с текстом.
-
-```tsx
-export const alignItems = [
-  'Это текст',
-  'Это длинный текст',
-  'Это очень длинный текст',
-  'Это очень-очень длинный текст, которому хочется быть ещё длиннее',
-  'Этот текст гораздо длиннее всех предыдущих текстов, что само по себе уже даже странно, хотя на свете бывает много гораздо более странных вещей',
-];
-
-export function RadioGroupExampleAlign() {
-  const [value, setValue] = React.useState<string | null>(alignItems[0]);
-
-  return (
-    <>
-      <RadioGroup
-        value={value}
-        items={alignItems}
-        getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
-        align="top"
-      />
-      <RadioGroup
-        value={value}
-        items={alignItems}
-        getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
-        align="center"
-      />
-    </>
-  );
-}
-```
-
-<RadioGroupExampleAlign />
-
-## Неактивная группа кнопок
-
-Чтобы сделать группу радиокнопок неактивной, добавьте `disabled`.
-
-```tsx
-const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
-
-function RadioGroupExampleDisabled() {
-  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
-
-  return (
-    <RadioGroup
-      value={value}
-      items={simpleItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      disabled
-    />
-  );
-}
-```
-
-<RadioGroupExampleDisabled />
-
-## Размер
-
-За размер отвечает свойство `size`. Варианты: `'l'`, `'m'`, `'s'`, `'xs'`, по умолчанию: `'m'`.
-
-```tsx
-const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
-
-function RadioGroupExampleSize() {
-  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
-
-  return (
-    <Example>
-      <RadioGroup
-        value={value}
-        items={simpleItems}
-        getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
-        size="l"
-      />
-      <RadioGroup
-        value={value}
-        items={simpleItems}
-        getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
-        size="m"
-      />
-      <RadioGroup
-        value={value}
-        items={simpleItems}
-        getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
-        size="s"
-      />
-      <RadioGroup
-        value={value}
-        items={simpleItems}
-        getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
-        size="xs"
-      />
-    </Example>
-  );
-}
-```
-
-<RadioGroupExampleSize />
-
-## Внешний вид
-
-Всего в дизайн-системе два вида групп радиокнопок: `primary` и `ghost`. За это отвечает свойство `view`.
-
-```tsx
-const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
-
-function RadioGroupExampleView() {
-  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
-
-  return (
-    <Example>
-      <RadioGroup
-        value={value}
-        items={simpleItems}
-        getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
-        direction="row"
-        view="primary"
-      />
-      <RadioGroup
-        value={value}
-        items={simpleItems}
-        getItemLabel={(item) => item}
-        onChange={({ value }) => setValue(value)}
-        direction="row"
-        view="ghost"
-      />
-    </Example>
-  );
-}
-```
-
-<RadioGroupExampleView />
+Компонент `RadioGroup` предназначен для создания группы радиокнопок, позволяющих пользователю выбрать один вариант из нескольких. Подходит для форм, где требуется однозначный выбор, например, выбор размера, типа или категории. Компонент поддерживает настройку содержимого, внешнего вида и поведения.
 
 ## Импорт
 
@@ -308,59 +41,258 @@ import { RadioGroup } from '@consta/uikit/RadioGroup';
 
 ## Свойства
 
+| Свойство                                      | Тип                             | По умолчанию | Описание                                                  |
+| --------------------------------------------- | ------------------------------- | ------------ | --------------------------------------------------------- |
+| [`items`](#содержимое)                        | `ITEM[]`                        | -            | Массив элементов (радиокнопок)                            |
+| [`value`](#поведение)                         | `ITEM`                          | -            | Текущее выбранное значение                                |
+| [`onChange`](#поведение)                      | `RadioGroupPropOnChange`        | -            | Действие при выборе элемента                              |
+| [`getItemLabel?`](#название-радиокнопки)      | `RadioGroupPropGetItemLabel`    | -            | Функция для получения текста радиокнопки                  |
+| [`getItemDisabled?`](#неактивная-радиокнопка) | `RadioGroupPropGetItemDisabled` | -            | Функция для определения неактивного состояния радиокнопки |
+| `getItemKey?`                                 | `RadioGroupPropGetItemKey`      | -            | Функция для формирования ключа радиокнопки                |
+| [`size?`](#размер)                            | `'xs' \| 's' \| 'm' \| 'l'`     | `'m'`        | Размер группы радиокнопок                                 |
+| [`view?`](#стиль)                             | `'primary' \| 'ghost'`          | `'primary'`  | Внешний вид группы радиокнопок                            |
+| [`align?`](#выравнивание)                     | `'center' \| 'top'`             | `'center'`   | Выравнивание текста относительно радиокнопок              |
+| [`direction?`](#расположение)                 | `'column' \| 'row'`             | `'column'`   | Направление расположения радиокнопок                      |
+| [`disabled?`](#неактивная-группа-радиокнопок) | `boolean`                       | `false`      | Делает группу радиокнопок неактивной                      |
+| `name?`                                       | `string`                        | -            | Имя `<input>` для доступности                             |
+| `className?`                                  | `string`                        | -            | Дополнительные CSS-классы                                 |
+
+## Содержимое
+
+### Название радиокнопки
+
+Название радиокнопки задаётся через свойство `label` в объекте элемента массива `items` или с помощью функции `getItemLabel`. Название должно начинаться с заглавной буквы и не содержать точку в конце.
+
+Пример:
+
 ```tsx
-export type RadioGroupDefaultItem = {
-  key?: string | number;
-  label: string;
-  disabled?: boolean;
-};
-
-export const radioGroupDirections = ['column', 'row'] as const;
-export type RadioGroupDirection = typeof radioGroupDirections[number];
-export const radioGroupDefaultDirection: RadioGroupDirection =
-  radioGroupDirections[0];
-
-export const radioGroupSizes = ['m', 'l', 'xs', 's'] as const;
-export type RadioGroupPropSize = typeof radioGroupSizes[number];
-export const radioGroupDefaultSize: RadioGroupPropSize = radioGroupSizes[0];
-
-export const radioGroupViews = ['primary', 'ghost'] as const;
-export type RadioGroupPropView = typeof radioGroupViews[number];
-export const radioGroupDefaultView: RadioGroupPropView = radioGroupViews[0];
-
-export const radioGroupPropAlign = ['center', 'top'] as const;
-export type RadioGroupPropAlign = typeof radioGroupPropAlign[number];
-export const radioGroupPropAlignDefault: RadioGroupPropAlign =
-  radioGroupPropAlign[0];
-
-export type RadioGroupPropGetItemKey<ITEM> = (
-  item: ITEM,
-) => string | number | undefined;
-export type RadioGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
-export type RadioGroupPropGetItemDisabled<ITEM> = (
-  item: ITEM,
-) => boolean | undefined;
-
-export type RadioGroupPropOnChange<ITEM> = (
-  value: ITEM,
-  props: {
-    e: React.ChangeEvent<HTMLInputElement>;
-  },
-) => void;
+const items = [{ name: 'Один' }, { name: 'Два' }, { name: 'Три' }];
 ```
 
-| Свойство                                      | Тип                             | По умолчанию | Описание                                                                                    |
-| --------------------------------------------- | ------------------------------- | ------------ | ------------------------------------------------------------------------------------------- |
-| [`align`](#выравнивание)                      | `'center', 'top'`               | `'center'`   | Выравнивание                                                                                |
-| `value`                                       | `ITEM`                          | -            | Значение                                                                                    |
-| [`items`](#содержимое)                        | `ITEM[]`                        | -            | Радиокнопки                                                                                 |
-| `getItemKey?`                                 | `RadioGroupPropGetItemKey`      | -            | Функция формирования ключа радиокнопки.                                                     |
-| [`getItemLabel?`](#название-радиокнопки)      | `RadioGroupPropGetItemLabel`    | -            | Функция формирования текста радиокнопки. Используется в качестве уникального ключа элемента |
-| [`getItemDisabled?`](#неактивная-радиокнопка) | `RadioGroupPropGetItemDisabled` | -            | Функция для определения неактивного состояния радиокнопки                                   |
-| `onChange`                                    | `RadioGroupPropOnChange`        | -            | Действие при выборе элемента                                                                |
-| `name`                                        | `string`                        | -            | Имя `<input>`, указывается для доступности                                                  |
-| [`direction?`](#расположение)                 | `'column', 'row'`               | `'column'`   | Направление радиокнопок                                                                     |
-| [`disabled?`](#неактивная-группа-кнопок)      | `boolean`                       | `false`      | Делает группу радиокнопок неактивной                                                        |
-| [`size?`](#размер)                            | `'l'`, `'m'`, `'s'`, `'xs'`     | `'m'`        | Размер группы радиокнопок                                                                   |
-| [`view?`](#внешний-вид)                       | `'primary', 'ghost'`            | `'primary'`  | Внешний вид                                                                                 |
-| `className?`                                  | `string`                        | -            | Дополнительные CSS-классы                                                                   |
+### Неактивная радиокнопка
+
+Чтобы сделать радиокнопку неактивной, используйте свойство `disabled` в объекте элемента массива `items` или функцию `getItemDisabled`. Неактивные радиокнопки нельзя выбрать.
+
+<MdxTabs>
+
+<RadioGroupExampleDisabledItem />
+
+```tsx
+const items = [
+  { name: 'Один' },
+  { name: 'Два' },
+  { name: 'Три' },
+  { name: 'Четыре' },
+  { name: 'Пять', disabled: true },
+];
+const [value, setValue] = React.useState(items[0]);
+
+return (
+  <RadioGroup
+    value={value}
+    items={items}
+    getItemLabel={(item) => item.name}
+    getItemDisabled={(item) => item.disabled}
+    onChange={({ value }) => setValue(value)}
+  />
+);
+```
+
+</MdxTabs>
+
+### Неактивная группа радиокнопок
+
+Свойство `disabled` делает всю группу радиокнопок неактивной, отключая взаимодействие с ней. Значение по умолчанию: `false`.
+
+<MdxTabs>
+
+<RadioGroupExampleDisabled />
+
+```tsx
+const simpleItems = ['Один', 'Два', 'Три', 'Четыре', 'Пять'];
+const [value, setValue] = React.useState(simpleItems[0]);
+
+return (
+  <RadioGroup
+    value={value}
+    items={simpleItems}
+    getItemLabel={(item) => item}
+    onChange={({ value }) => setValue(value)}
+    disabled
+  />
+);
+```
+
+</MdxTabs>
+
+## Внешний вид
+
+### Размер
+
+Свойство `size` определяет размер радиокнопок. Доступные значения: `'xs'`, `'s'`, `'m'`, `'l'`. Значение по умолчанию: `'m'`.
+
+<MdxTabs>
+
+<RadioGroupExampleSize />
+
+```tsx
+const simpleItems = ['Один', 'Два', 'Три', 'Четыре', 'Пять'];
+const [value, setValue] = React.useState(simpleItems[0]);
+
+return (
+  <>
+    <RadioGroup
+      value={value}
+      items={simpleItems}
+      getItemLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      size="l"
+    />
+    <RadioGroup
+      value={value}
+      items={simpleItems}
+      getItemLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      size="m"
+    />
+    <RadioGroup
+      value={value}
+      items={simpleItems}
+      getItemLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      size="s"
+    />
+    <RadioGroup
+      value={value}
+      items={simpleItems}
+      getItemLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      size="xs"
+    />
+  </>
+);
+```
+
+</MdxTabs>
+
+### Стиль
+
+Свойство `view` задаёт внешний вид группы радиокнопок. Доступные значения: `'primary'` (по умолчанию) и `'ghost'`.
+
+<MdxTabs>
+
+<RadioGroupExampleView />
+
+```tsx
+const simpleItems = ['Один', 'Два', 'Три', 'Четыре', 'Пять'];
+const [value, setValue] = React.useState(simpleItems[0]);
+
+return (
+  <>
+    <RadioGroup
+      value={value}
+      items={simpleItems}
+      getItemLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      direction="row"
+      view="primary"
+    />
+    <RadioGroup
+      value={value}
+      items={simpleItems}
+      getItemLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      direction="row"
+      view="ghost"
+    />
+  </>
+);
+```
+
+</MdxTabs>
+
+### Выравнивание
+
+Свойство `align` определяет выравнивание текста относительно радиокнопок. Доступные значения: `'center'` (по умолчанию) и `'top'`.
+
+<MdxTabs>
+
+<RadioGroupExampleAlign />
+
+```tsx
+const alignItems = [
+  'Это текст',
+  'Это длинный текст',
+  'Это очень длинный текст',
+  'Это очень-очень длинный текст, которому хочется быть ещё длиннее',
+  'Этот текст гораздо длиннее всех предыдущих текстов, что само по себе уже даже странно, хотя на свете бывает много гораздо более странных вещей',
+];
+const [value, setValue] = React.useState(alignItems[0]);
+
+return (
+  <>
+    <RadioGroup
+      value={value}
+      items={alignItems}
+      getItemLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      align="top"
+    />
+    <RadioGroup
+      value={value}
+      items={alignItems}
+      getItemLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      align="center"
+    />
+  </>
+);
+```
+
+</MdxTabs>
+
+### Расположение
+
+Свойство `direction` задаёт направление расположения радиокнопок. Доступные значения: `'column'` (по умолчанию, вертикально) и `'row'` (горизонтально).
+
+<MdxTabs>
+
+<RadioGroupExampleRow />
+
+```tsx
+const simpleItems = ['Один', 'Два', 'Три', 'Четыре', 'Пять'];
+const [value, setValue] = React.useState(simpleItems[0]);
+
+return (
+  <RadioGroup
+    value={value}
+    items={simpleItems}
+    getItemLabel={(item) => item}
+    onChange={({ value }) => setValue(value)}
+    direction="row"
+  />
+);
+```
+
+</MdxTabs>
+
+<MdxTabs>
+
+<RadioGroupExampleColumn />
+
+```tsx
+const simpleItems = ['Один', 'Два', 'Три', 'Четыре', 'Пять'];
+const [value, setValue] = React.useState(simpleItems[0]);
+
+return (
+  <RadioGroup
+    value={value}
+    items={simpleItems}
+    getItemLabel={(item) => item}
+    onChange={({ value }) => setValue(value)}
+    direction="column"
+  />
+);
+```
+
+</MdxTabs>
