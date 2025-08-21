@@ -1,4 +1,4 @@
-import { MdxMenu, MdxInformer } from '@consta/stand';
+import { MdxMenu, MdxInformer, MdxTabs } from '@consta/stand';
 import { SelectExampleItems } from './examples/SelectExampleItems/SelectExampleItems';
 import { SelectExamplePlaceholder } from './examples/SelectExamplePlaceholder/SelectExamplePlaceholder';
 import { SelectExampleSize } from './examples/SelectExampleSize/SelectExampleSize';
@@ -22,416 +22,319 @@ import {
 } from './examples/SelectExampleLabel/SelectExampleLabel';
 import { SelectExampleStatus } from './examples/SelectExampleStatus/SelectExampleStatus';
 
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Варианты](#варианты)
+  - [Выбранное значение](#выбранное-значение)
+  - [Лейбл и подпись](#лейбл-и-подпись)
+  - [Подсказка](#подсказка)
+  - [Неактивный элемент](#неактивный-элемент)
+  - [Группы вариантов](#группы-вариантов)
+- [Внешний вид](#внешний-вид)
+  - [Размер](#размер)
+  - [Форма](#форма)
+  - [Стиль](#стиль)
+  - [Статус поля](#статус-поля)
+- [Поведение](#поведение)
+  - [Неактивный выпадающий список](#неактивный-выпадающий-список)
+  - [Управление состоянием выпадающего списка](#управление-состоянием-выпадающего-списка)
+  - [Индикация загрузки](#индикация-загрузки)
+  - [Виртуализация списка](#виртуализация-списка)
+- [Кастомизация](#кастомизация)
+  - [Кастомный элемент списка](#кастомный-элемент-списка)
+  - [Кастомное выбранное значение](#кастомное-выбранное-значение)
+  - [Кастомные типы данных](#кастомные-типы-данных)
+- [Пример использования](#пример)
+
+</MdxMenu>
+
+## Обзор
+
+Компонент **Select** — это выпадающий список, который позволяет пользователю выбрать один вариант из предложенных. Поддерживает настройку внешнего вида, содержимого, поведения и кастомизацию элементов.
+
+## Импорт
+
 ```tsx
 import { Select } from '@consta/uikit/Select';
 ```
 
-<MdxMenu>
+## Свойства
 
-- [Содержимое](#содержимое-списка)
-  - [Варианты](#варианты)
-  - [Выбранное значение](#выбранное-значение)
-  - [Подсказка](#подсказка)
-  - [Неактивный вариант](#неактивный-элемент-списка)
-  - [Группы вариантов](#группы-вариантов)
-- [Статус](#статус-поля)
-- [Размер](#размер)
-- [Форма](#форма)
-- [Внешний вид](#внешний-вид)
-- [Виртуализация списка](#виртуализация-списка)
-- [Индикация загрузки](#индикация-загрузки)
-- [Лейбл и подпись](#лейбл-и-подпись)
-- [Неактивный выпадающий список](#неактивный-выпадающий-список)
-- [Управление состоянием выпадающего списка](#управление-состоянием-выпадающего-списка)
-- [Кастомизация](#кастомизация)
-  - [Кастомный элемент списка](#кастомный-элемент-списка)
-  - [Кастомное выбранное значение](#кастомное-выбранное-значение)
-  - [Кастомные типы данных для групп и вариантов](#кастомные-типы-данных-для-вариантов-и-групп)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
+| Свойство                                                                | Тип или варианты значения                                                                                                                                         | По умолчанию              | Описание                                          |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------- |
+| [`items`](#варианты)                                                    | `ITEM[]`                                                                                                                                                          | -                         | Варианты для выбора                               |
+| [`value?`](#выбранное-значение)                                         | `ITEM`, `null`                                                                                                                                                    | -                         | Выбранное значение                                |
+| [`onChange?`](#выбранное-значение)                                      | `SelectPropOnChange<ITEM>`                                                                                                                                        | -                         | Обработчик изменения значения                     |
+| [`placeholder?`](#подсказка)                                            | `string`                                                                                                                                                          | -                         | Подсказка, отображается, когда вариант не выбран  |
+| [`groups?`](#группы-вариантов)                                          | `GROUP[]`                                                                                                                                                         | -                         | Группы вариантов                                  |
+| [`size?`](#размер)                                                      | `'xs'`, `'s'`, `'m'`, `'l'`                                                                                                                                       | `'m'`                     | Размер компонента                                 |
+| [`form?`](#форма)                                                       | `default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear` | `default`                 | Форма компонента                                  |
+| [`view?`](#стиль)                                                       | `default`, `clear`                                                                                                                                                | `default`                 | Стиль компонента                                  |
+| [`status?`](#статус-поля)                                               | `'', 'alert', 'success', 'warning'`                                                                                                                               | `' '`                     | Статус поля                                       |
+| [`disabled?`](#неактивный-выпадающий-список)                            | `boolean`                                                                                                                                                         | -                         | Делает компонент неактивным                       |
+| [`isLoading?`](#индикация-загрузки)                                     | `boolean`                                                                                                                                                         | -                         | Отображает индикатор загрузки                     |
+| [`virtualScroll?`](#виртуализация-списка)                               | `boolean`                                                                                                                                                         | -                         | Включает виртуализацию скролла                    |
+| [`label?`](#лейбл-и-подпись)                                            | `string`                                                                                                                                                          | -                         | Лейбл компонента                                  |
+| [`labelPosition?`](#лейбл-и-подпись)                                    | `'top'`, `'left'`                                                                                                                                                 | `'top'`                   | Положение лейбла                                  |
+| [`caption?`](#лейбл-и-подпись)                                          | `string`                                                                                                                                                          | -                         | Подпись под компонентом                           |
+| [`labelIcon?`](#лейбл-и-подпись)                                        | `React.ReactNode`                                                                                                                                                 | -                         | Иконка для лейбла                                 |
+| [`renderItem?`](#кастомный-элемент-списка)                              | `SelectPropRenderItem<ITEM>`                                                                                                                                      | рендер по умолчанию       | Рендер-функция для элемента списка                |
+| [`renderValue?`](#кастомное-выбранное-значение)                         | `SelectPropRenderValue<ITEM>`                                                                                                                                     | рендер по умолчанию       | Рендер-функция для выбранного значения            |
+| [`getItemLabel?`](#кастомные-типы-данных)                               | `SelectPropGetItemLabel<ITEM>`                                                                                                                                    | `(item) => item.label`    | Функция для получения названия элемента           |
+| [`getItemKey?`](#кастомные-типы-данных)                                 | `SelectPropGetItemKey<ITEM>`                                                                                                                                      | `(item) => item.id`       | Функция для получения ключа элемента              |
+| [`getItemGroupKey?`](#кастомные-типы-данных)                            | `SelectPropGetItemGroupKey<ITEM>`                                                                                                                                 | `(item) => item.groupId`  | Функция для получения ключа группы                |
+| [`getItemDisabled?`](#кастомные-типы-данных)                            | `SelectPropGetItemDisabled<ITEM>`                                                                                                                                 | `(item) => item.disabled` | Функция для определения неактивного элемента      |
+| [`getGroupLabel?`](#кастомные-типы-данных)                              | `SelectPropGetGroupLabel<GROUP>`                                                                                                                                  | `(group) => group.label`  | Функция для получения названия группы             |
+| [`getGroupKey?`](#кастомные-типы-данных)                                | `SelectPropGetGroupKey<GROUP>`                                                                                                                                    | `(group) => group.id`     | Функция для получения ключа группы                |
+| [`dropdownOpen?`](#управление-состоянием-выпадающего-списка)            | `boolean`                                                                                                                                                         | -                         | Состояние выпадающего списка (открыт/закрыт)      |
+| [`onDropdownOpen?`](#управление-состоянием-выпадающего-списка)          | `(open: boolean) => void`                                                                                                                                         | -                         | Обработчик открытия/закрытия списка               |
+| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выпадающего-списка) | `ReadonlyArray<React.RefObject<HTMLElement>>`                                                                                                                     | -                         | Ссылки на элементы, клики по которым игнорируются |
+| [`onScrollToBottom?`](#виртуализация-списка)                            | `(length: number) => void`                                                                                                                                        | -                         | Обработчик прокрутки до конца списка              |
+| [`required?`](#поведение)                                               | `boolean`                                                                                                                                                         | -                         | Обязательность заполнения                         |
+| [`labelForEmptyItems?`](#содержимое)                                    | `string`                                                                                                                                                          | `Список пуст`             | Текст, если список пуст                           |
+| [`onBlur?`](#поведение)                                                 | `(event?: React.FocusEvent<HTMLInputElement>) => void`                                                                                                            | -                         | Обработчик события `blur`                         |
+| [`onFocus?`](#поведение)                                                | `(event?: React.FocusEvent<HTMLInputElement>) => void`                                                                                                            | -                         | Обработчик события `focus`                        |
+| [`ariaLabel?`](#поведение)                                              | `string`                                                                                                                                                          | -                         | `aria` атрибут для поля ввода                     |
+| [`name?`](#поведение)                                                   | `string`                                                                                                                                                          | -                         | Имя поля ввода                                    |
+| `className`                                                             | `string`                                                                                                                                                          | -                         | Дополнительный CSS-класс                          |
+| `dropdownClassName`                                                     | `string`                                                                                                                                                          | -                         | Дополнительный CSS-класс для выпадающего блока    |
+| `ref`                                                                   | `React.Ref<HTMLDivElement>`                                                                                                                                       | -                         | Ссылка на корневой DOM-элемент компонента         |
 
-</MdxMenu>
-
-## Содержимое списка
+## Содержимое
 
 ### Варианты
 
-Элементы выпадающего списка можно описать в массиве `items`. Тип свойства `items` по умолчанию равен [DefaultItem](#свойства). Что внутри:
+Свойство `items` определяет массив элементов выпадающего списка. По умолчанию тип `items` соответствует интерфейсу `SelectItemDefault`:
 
-- `label` — название элемента списка, лучше писать с заглавной буквы, точка не нужна,
-- `id` — уникальный ключ элемента,
-- `groupId` — идентификатор [группы](#группы-вариантов), в которую входит этот элемент (если список разбит на группы),
-- `disabled` — отмечает [неактивные элементы](#неактивные-варианты).
+- `label` — название элемента (пишите с заглавной буквы, без точки в конце).
+- `id` — уникальный ключ элемента.
+- `groupId` — идентификатор группы, если элементы разбиты на группы.
+- `disabled` — флаг неактивного элемента.
 
-Вы можете сделать [кастомный тип данных для элементов списка](#кастомные-типы-данных-для-вариантов-и-групп) и использовать его.
-
-```tsx
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-```
-
-### Выбранное значение
-
-Выбранное значение задаётся в свойстве `value`. Тип свойства `value` по умолчанию равен [DefaultItem](#свойства).
-
-Чтобы получить значение, которое пользователь выбрал из списка, используйте `onChange`. Этот обработчик срабатывает при выборе варианта или при очистке поля ввода
-и возвращает значение из массива `items` и событие выбора.
-
-Выбор варианта срабатывает по клику мыши или по нажатию `Enter` на клавиатуре.
-
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-function SelectExampleItems() {
-  const [value, setValue] = useState<Item | null>();
-  return <Select items={items} value={value} onChange={setValue} />;
-}
-```
+<MdxTabs>
 
 <SelectExampleItems />
 
-### Подсказка
-
-Подсказка, которая видна, когда ни один вариант не выбран, задаётся в свойстве `placeholder`.
-Сформулируйте подсказку так, чтобы стало понятно, что по клику на поле раскроется список вариантов, один из которых нужно выбрать.
-
-Если не знаете, что написать в подсказке, используйте универсальное **Выберите**.
-
 ```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
 ];
 
-function SelectExamplePlaceholder() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={setValue}
-    />
-  );
-}
+const [value, setValue] = useState(null);
+return <Select items={items} value={value} onChange={setValue} />;
 ```
+
+</MdxTabs>
+
+### Выбранное значение
+
+Свойство `value` задаёт выбранное значение из массива `items`. Для обработки выбора используется `onChange`, который возвращает выбранный элемент и событие. Выбор срабатывает по клику или нажатию `Enter`.
+
+<MdxTabs>
+
+<SelectExampleItems />
+
+```tsx
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
+];
+
+const [value, setValue] = useState(null);
+return <Select items={items} value={value} onChange={setValue} />;
+```
+
+</MdxTabs>
+
+### Лейбл и подпись
+
+Свойство `label` добавляет лейбл, `labelPosition` задаёт его положение (`'top'` или `'left'`), `caption` — подпись под компонентом, `labelIcon` — иконка для лейбла.
+
+<MdxTabs>
+
+<SelectExampleLabel />
+
+```tsx
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
+];
+
+const [value, setValue] = useState(null);
+return (
+  <Select
+    label="Значение"
+    caption={value?.label}
+    placeholder="Выберите значение"
+    items={items}
+    value={value}
+    onChange={setValue}
+  />
+);
+```
+
+</MdxTabs>
+
+<MdxTabs>
+
+<SelectExampleLabelIcon />
+
+```tsx
+<Select label="Значение" labelIcon={IconQuestion} />
+```
+
+</MdxTabs>
+
+### Подсказка
+
+Свойство `placeholder` задаёт текст, отображаемый, когда ничего не выбрано. Рекомендуется использовать понятный текст, например, **"Выберите"**.
+
+<MdxTabs>
 
 <SelectExamplePlaceholder />
 
-### Неактивный элемент списка
-
-Чтобы сделать вариант в списке неактивным, добавьте к элементу массива `items` свойство `disabled: true`. Если используете [кастомный тип `items`](#кастомные-типы-данных-для-групп-и-вариантов), можете добавить своё свойство.
-
 ```tsx
-type Item = {
-  label: string;
-  id: number;
-  disabled: boolean;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-    disabled: true,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-    disabled: false,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-    disabled: true,
-  },
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
 ];
 
-function SelectExampleDisabledItem() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={setValue}
-    />
-  );
-}
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Выберите значение"
+    items={items}
+    value={value}
+    onChange={setValue}
+  />
+);
 ```
+
+</MdxTabs>
+
+### Неактивный элемент
+
+Чтобы сделать элемент списка неактивным, добавьте `disabled: true` в объект элемента в массиве `items`.
+
+<MdxTabs>
 
 <SelectExampleDisabledItem />
 
+```tsx
+const items = [
+  { label: 'Первый', id: 1, disabled: true },
+  { label: 'Второй', id: 2, disabled: false },
+  { label: 'Третий', id: 3, disabled: true },
+];
+
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Выберите значение"
+    items={items}
+    value={value}
+    onChange={setValue}
+  />
+);
+```
+
+</MdxTabs>
+
 ### Группы вариантов
 
-Чтобы разбить элементы списка на группы, передайте массив групп в свойство `groups`. Тип свойства `groups` по умолчанию равен [DefaultGroup](#свойства). Что внутри:
+Для группировки элементов используйте свойство `groups`, задающее массив групп. Тип группы по умолчанию — `SelectGroupDefault` с полями `label` и `id`. Элементы связываются с группами через `groupId`.
 
-- `label` — название группы,
-- `id` — уникальный ключ.
-
-```tsx
-type Item = {
-  label: string;
-  id: number;
-  groupId: number;
-};
-
-type Group = {
-  label: string;
-  id: number;
-};
-
-const groups: Group[] = [
-  {
-    id: 1,
-    label: 'Первая группа',
-  },
-  {
-    id: 2,
-    label: 'Вторая группа',
-  },
-  {
-    id: 3,
-    label: 'Третья группа',
-  },
-];
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-    groupId: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-    groupId: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-    groupId: 1,
-  },
-  {
-    label: 'Четвертый',
-    id: 4,
-    groupId: 3,
-  },
-  {
-    label: 'Пятый',
-    id: 5,
-    groupId: 2,
-  },
-];
-
-function SelectExampleGroups() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={setValue}
-      groups={groups}
-    />
-  );
-}
-```
+<MdxTabs>
 
 <SelectExampleGroups />
 
-## Статус поля
-
-С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот,
-отметить правильно заполненные поля.
-
-За статус отвечает свойство `status`. Если оно не указано, поле будет обычным.
-
 ```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
+const groups = [
+  { id: 1, label: 'Первая группа' },
+  { id: 2, label: 'Вторая группа' },
+  { id: 3, label: 'Третья группа' },
 ];
 
-function SelectExampleStatus() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <>
-      <Select
-        placeholder="default"
-        caption="default"
-        size="s"
-        items={items}
-        value={value}
-        onChange={setValue}
-      />
-      <Select
-        placeholder="alert"
-        caption="alert"
-        status="alert"
-        size="s"
-        items={items}
-        value={value}
-        onChange={setValue}
-      />
-      <Select
-        placeholder="warning"
-        caption="warning"
-        status="warning"
-        size="s"
-        items={items}
-        value={value}
-        onChange={setValue}
-      />
-      <Select
-        placeholder="success"
-        caption="success"
-        size="s"
-        status="success"
-        items={items}
-        value={value}
-        onChange={setValue}
-      />
-    </>
-  );
-}
-```
-
-<SelectExampleStatus />
-
-## Размер
-
-За размер компонента отвечает свойство `size`. Варианты: `xs`, `s` , `m` , `l` , по умолчанию `m`.
-
-Компонент занимает всю ширину родительского блока.
-
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
+const items = [
+  { label: 'Первый', id: 1, groupId: 1 },
+  { label: 'Второй', id: 2, groupId: 2 },
+  { label: 'Третий', id: 3, groupId: 1 },
+  { label: 'Четвертый', id: 4, groupId: 3 },
+  { label: 'Пятый', id: 5, groupId: 2 },
 ];
 
-function SelectExampleSize() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      placeholder="Размер xs"
-      size="xs"
-      items={items}
-      value={value}
-      onChange={setValue}
-    />
-  );
-}
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Выберите значение"
+    items={items}
+    value={value}
+    onChange={setValue}
+    groups={groups}
+  />
+);
 ```
+
+</MdxTabs>
+
+## Внешний вид
+
+### Размер
+
+Свойство `size` задаёт размер компонента. Варианты: `'xs'`, `'s'`, `'m'`, `'l'`. По умолчанию — `'m'`. Компонент занимает всю ширину родительского контейнера.
+
+<MdxTabs>
 
 <SelectExampleSize />
 
-## Форма
-
-За форму селекта отвечает свойство `form`. Варианты:
-`default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`,
-по умолчанию `default`.
-
 ```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
 ];
 
-function SelectExampleForm() {
-  const [value, setValue] = useState<Item | null>();
-  return (
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Размер xs"
+    size="xs"
+    items={items}
+    value={value}
+    onChange={setValue}
+  />
+);
+```
+
+</MdxTabs>
+
+### Форма
+
+Свойство `form` определяет форму компонента. Варианты: `default`, `brick`, `round`, `clearRound`, `roundClear`, `clearDefault`, `defaultClear`, `defaultBrick`, `brickDefault`, `brickClear`, `clearBrick`, `clearClear`. По умолчанию — `default`.
+
+<MdxTabs>
+
+<SelectExampleForm />
+
+```tsx
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
+];
+
+const [value, setValue] = useState(null);
+return (
+  <>
     <Select
       placeholder="Форма round"
       form="round"
@@ -446,127 +349,213 @@ function SelectExampleForm() {
       value={value}
       onChange={setValue}
     />
-  );
-}
+  </>
+);
 ```
 
-<SelectExampleForm />
+</MdxTabs>
 
-## Внешний вид
+### Стиль
 
-За вид компонента отвечает свойство `view`. Варианты: `default`, `clear`, по умолчанию `default`.
-
-Вид `view="clear"` используется в случаях когда нужно создать кастомное поле ввода или обернуть его в контейнер, в этом случае
-поля с разными статусами и разной формы будут выглядит одинаково.
+Свойство `view` задаёт стиль компонента. Варианты: `default`, `clear`. По умолчанию — `default`. Стиль `clear` используется для кастомных полей или обёртывания в контейнер.
 
 <MdxInformer status="normal">
 
-Чтобы создать hover-эффект для `view="clear"`, управляйте внешним видом контейнера, в котором находится **Select**.
+Для создания hover-эффекта при `view="clear"` управляйте стилем контейнера, в котором находится **Select**.
 
 </MdxInformer>
 
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-function SelectExampleView() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      placeholder="Выберите значение"
-      view="clear"
-      items={items}
-      value={value}
-      onChange={setValue}
-    />
-  );
-}
-```
+<MdxTabs>
 
 <SelectExampleView />
 
-## Виртуализация списка
+```tsx
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
+];
 
-Если список элементов очень большой, то стоит использовать виртуализацию скролла.
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Выберите значение"
+    view="clear"
+    items={items}
+    value={value}
+    onChange={setValue}
+  />
+);
+```
+
+</MdxTabs>
+
+### Статус поля
+
+Свойство `status` выделяет поле визуально. Варианты: `''`, `'alert'`, `'success'`, `'warning'`. По умолчанию — `''` (обычное поле).
+
+<MdxTabs>
+
+<SelectExampleStatus />
 
 ```tsx
-type Item = {
-  label: string;
-  id: number;
-  groupId: number;
-};
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
+];
 
-type Group = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = new Array(100000).fill(null).map((_, i) => ({
-  label: `Опция ${i + 1}`,
-  groupId: Math.floor(i / 100) + 1,
-  id: i,
-}));
-
-const groups: Group[] = new Array(items.length / 100)
-  .fill(null)
-  .map((_, i) => ({
-    id: i + 1,
-    label: `Группа ${i + 1}`,
-  }));
-
-const SelectExampleVirtualScroll = () => {
-  const [value, setValue] = useState<Item | null>();
-  return (
+const [value, setValue] = useState(null);
+return (
+  <>
     <Select
-      placeholder="Чтобы посмотреть весь список, прокрутите вниз"
+      placeholder="default"
+      caption="default"
+      size="s"
       items={items}
       value={value}
       onChange={setValue}
-      groups={groups}
-      virtualScroll
     />
-  );
-};
+    <Select
+      placeholder="alert"
+      caption="alert"
+      status="alert"
+      size="s"
+      items={items}
+      value={value}
+      onChange={setValue}
+    />
+    <Select
+      placeholder="warning"
+      caption="warning"
+      status="warning"
+      size="s"
+      items={items}
+      value={value}
+      onChange={setValue}
+    />
+    <Select
+      placeholder="success"
+      caption="success"
+      size="s"
+      status="success"
+      items={items}
+      value={value}
+      onChange={setValue}
+    />
+  </>
+);
 ```
 
-<SelectExampleVirtualScroll />
+</MdxTabs>
 
-# Индикация загрузки
+## Поведение
 
-Для отображения индикации загрузки укажите параметр `isLoading`.
+### Неактивный выпадающий список
 
-Пример ниже показывает, как можно загрузить данные после раскрытия списка.
+Свойство `disabled` делает весь компонент неактивным.
+
+<MdxTabs>
+
+<SelectExampleDisabled />
 
 ```tsx
-type Item = {
-  label: string;
-  id: number;
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
+];
+
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Выберите значение"
+    items={items}
+    value={value}
+    onChange={setValue}
+    disabled
+  />
+);
+```
+
+</MdxTabs>
+
+### Управление состоянием выпадающего списка
+
+Для управления состоянием списка используйте:
+
+- `dropdownOpen` — флаг открытия/закрытия.
+- `onDropdownOpen` — обработчик открытия/закрытия.
+- `ignoreOutsideClicksRefs` — список элементов, клики по которым игнорируются.
+
+<MdxTabs>
+
+<SelectExampleDropdownOpen />
+
+```tsx
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
+];
+
+const Icon = withAnimateSwitcherHOC({
+  startIcon: IconArrowDown,
+  startDirection: 0,
+  endDirection: 180,
+});
+
+const [value, setValue] = useState(null);
+const [open, setOpen] = useFlag();
+const buttonRef = useRef(null);
+const inputRef = useRef(null);
+const onDropdownOpen = (open) => {
+  setOpen.set(open);
+  if (open) {
+    inputRef.current?.focus();
+  }
 };
 
-const useMockLoadData = (
-  searchValue = '',
-  timeout = 2000,
-): [Item[], boolean, () => void] => {
+return (
+  <AnimateIconSwitcherProvider active={open}>
+    <FieldGroup>
+      <Button
+        ref={buttonRef}
+        label={open ? 'Закрыть' : 'Открыть'}
+        onClick={setOpen.toggle}
+        iconLeft={Icon}
+        onlyIcon
+      />
+      <Select
+        inputRef={inputRef}
+        placeholder="Выберите вариант"
+        items={items}
+        value={value}
+        onChange={setValue}
+        dropdownOpen={open}
+        onDropdownOpen={onDropdownOpen}
+        ignoreOutsideClicksRefs={[buttonRef]}
+      />
+    </FieldGroup>
+  </AnimateIconSwitcherProvider>
+);
+```
+
+</MdxTabs>
+
+### Индикация загрузки
+
+Свойство `isLoading` включает индикатор загрузки. Используется для асинхронной загрузки данных.
+
+<MdxTabs>
+
+<SelectExampleIsLoading />
+
+```tsx
+const useMockLoadData = (searchValue = '', timeout = 2000) => {
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
-  const [length, setLength] = useState<number>(0);
+  const [length, setLength] = useState(0);
   const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
 
   const items = useMemo(() => {
@@ -599,7 +588,6 @@ const useMockLoadData = (
     if (isStart) {
       setIsLoading.on();
     }
-
     const timeoutNumber = setTimeout(() => {
       if (isStart) {
         setLength((state) => state + 100);
@@ -607,10 +595,7 @@ const useMockLoadData = (
         setIsStart.off();
       }
     }, timeout);
-
-    return () => {
-      clearTimeout(timeoutNumber);
-    };
+    return () => clearTimeout(timeoutNumber);
   }, [isStart]);
 
   useEffect(() => {
@@ -623,361 +608,180 @@ const useMockLoadData = (
   return [searchValue && isLoading ? [] : items, isLoading, setIsStart.on];
 };
 
-const SelectExampleIsLoading = () => {
-  const [value, setValue] = useState<Item | null>();
-  const [data, isLoading, load] = useMockLoadData();
-  const onDropdownOpen = useCallback((open: boolean) => {
-    open && load();
-  }, []);
+const [value, setValue] = useState(null);
+const [data, isLoading, load] = useMockLoadData();
+const onDropdownOpen = (open) => open && load();
 
-  return (
-    <Select
-      placeholder="Кликните по полю ввода, чтобы данные загрузились"
-      items={data}
-      value={value}
-      onChange={setValue}
-      onDropdownOpen={onDropdownOpen}
-      isLoading={isLoading}
-      virtualScroll
-      onScrollToBottom={load}
-    />
-  );
-};
+return (
+  <Select
+    placeholder="Кликните по полю ввода, чтобы данные загрузились"
+    items={data}
+    value={value}
+    onChange={setValue}
+    onDropdownOpen={onDropdownOpen}
+    isLoading={isLoading}
+    virtualScroll
+    onScrollToBottom={load}
+  />
+);
 ```
 
-<SelectExampleIsLoading />
+</MdxTabs>
 
-## Лейбл и подпись
+### Виртуализация списка
 
-Лейбл к компоненту можно добавить через свойство `label`, а за его позиционирование отвечает
-свойство `labelPosition`. Подпись можно добавить через свойство `caption`.
+Свойство `virtualScroll` включает виртуализацию для оптимизации отображения больших списков.
+
+<MdxTabs>
+
+<SelectExampleVirtualScroll />
 
 ```tsx
-type Item = {
-  label: string;
-  id: number;
-};
+const items = new Array(100000).fill(null).map((_, i) => ({
+  label: `Опция ${i + 1}`,
+  groupId: Math.floor(i / 100) + 1,
+  id: i,
+}));
 
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
+const groups = new Array(items.length / 100).fill(null).map((_, i) => ({
+  id: i + 1,
+  label: `Группа ${i + 1}`,
+}));
 
-function SelectExampleLabel() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      label="Значение"
-      caption={value?.label}
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={setValue}
-    />
-  );
-}
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Чтобы посмотреть весь список, прокрутите вниз"
+    items={items}
+    value={value}
+    onChange={setValue}
+    groups={groups}
+    virtualScroll
+  />
+);
 ```
 
-<SelectExampleLabel />
-
-Также к лейблу можно добавить иконку используя свойство `labelIcon`.
-
-```tsx
-<Select label="Значение" labelIcon={IconQuestion} />
-```
-
-<SelectExampleLabelIcon />
-
-## Неактивный выпадающий список
-
-Чтобы сделать список неактивным, добавьте `disabled`.
-
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-function SelectExampleDisabled() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={setValue}
-      disabled
-    />
-  );
-}
-```
-
-<SelectExampleDisabled />
-
-## Управление состоянием выпадающего списка
-
-Для управлением состояния выпадающего списка используйте следующие свойства:
-
-- `dropdownOpen` - флаг открыт/закрыт
-- `onDropdownOpen` - Колбэк отрабатывающий каждый раз при открытии/закрытии
-- `ignoreClicksInsideRefs` - список ссылок на элементы по которым игнорируется клики
-
-```tsx
-type Item = {
-  label: string;
-  id: number | string;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-const Icon = withAnimateSwitcherHOC({
-  startIcon: IconArrowDown,
-  startDirection: 0,
-  endDirection: 180,
-});
-
-const SelectExampleDropdownOpen = () => {
-  const [value, setValue] = useState<Item | null>();
-  const [open, setOpen] = useFlag();
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const onDropdownOpen = useCallback((open: boolean) => {
-    setOpen.set(open);
-    if (open) {
-      inputRef.current?.focus();
-    }
-  }, []);
-
-  return (
-    <AnimateIconSwitcherProvider active={open}>
-      <FieldGroup>
-        <Button
-          ref={buttonRef}
-          label={open ? 'Закрыть' : 'Открыть'}
-          onClick={setOpen.toggle}
-          iconLeft={Icon}
-          onlyIcon
-        />
-        <Select
-          inputRef={inputRef}
-          placeholder="Выберите вариант"
-          items={items}
-          value={value}
-          onChange={setValue}
-          dropdownOpen={open}
-          onDropdownOpen={onDropdownOpen}
-          ignoreClicksInsideRefs={[buttonRef]}
-        />
-      </FieldGroup>
-    </AnimateIconSwitcherProvider>
-  );
-};
-```
-
-<SelectExampleDropdownOpen />
+</MdxTabs>
 
 ## Кастомизация
 
 ### Кастомный элемент списка
 
-Сделать кастомное представление для элементов списка можно с помощью свойства `renderItem`.
-Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
+Свойство `renderItem` позволяет настроить отображение элементов списка через функцию рендера.
 
 <MdxInformer status="warning">
 
-У корневого DOM-элемента в свойстве `role` должно быть установлено значение `option`.
+У корневого DOM-элемента в `renderItem` должно быть `role="option"`.
 
 </MdxInformer>
 
-```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
-];
-
-const cnSelectExampleRenderItem = cn('SelectExampleRenderItem');
-
-function SelectExampleRenderItem() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={setValue}
-      renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
-        <div
-          className={cnSelectExampleRenderItem('Item', { active, hovered })}
-          aria-selected={active}
-          onMouseEnter={onMouseEnter}
-          onClick={onClick}
-          ref={ref}
-        >
-          {item.label}
-        </div>
-      )}
-    />
-  );
-}
-```
+<MdxTabs>
 
 <SelectExampleRenderItem />
 
-### Кастомное выбранное значение
-
-Сделать кастомное представление для выбранного значения можно с помощью свойства `renderValue`.
-Свойство принимает [функцию рендера](https://reactjs.org/docs/render-props.html).
-
 ```tsx
-type Item = {
-  label: string;
-  id: number;
-};
-
-const items: Item[] = [
-  {
-    label: 'Первый',
-    id: 1,
-  },
-  {
-    label: 'Второй',
-    id: 2,
-  },
-  {
-    label: 'Третий',
-    id: 3,
-  },
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
 ];
 
-function SelectExampleRenderValue() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      placeholder="Выберите значение"
-      items={items}
-      value={value}
-      onChange={setValue}
-      renderValue={({ item }) => (
-        <div>
-          <span role="img" aria-label="Panda">
-            🐼
-          </span>{' '}
-          — {item.name}
-        </div>
-      )}
-    />
-  );
-}
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Выберите значение"
+    items={items}
+    value={value}
+    onChange={setValue}
+    renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
+      <div
+        className={cnSelectExampleRenderItem('Item', { active, hovered })}
+        aria-selected={active}
+        onMouseEnter={onMouseEnter}
+        onClick={onClick}
+        ref={ref}
+      >
+        {item.label}
+      </div>
+    )}
+  />
+);
 ```
+
+</MdxTabs>
+
+### Кастомное выбранное значение
+
+Свойство `renderValue` позволяет настроить отображение выбранного значения через функцию рендера.
+
+<MdxTabs>
 
 <SelectExampleRenderValue />
 
-### Кастомные типы данных для вариантов и групп
+```tsx
+const items = [
+  { label: 'Первый', id: 1 },
+  { label: 'Второй', id: 2 },
+  { label: 'Третий', id: 3 },
+];
 
-Вы можете использовать кастомные типы данных для элементов списка (`items`) и групп (`groups`) — они могут отличаться от [DefaultItem](#свойства) и [DefaultGroup](#свойства).
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Выберите значение"
+    items={items}
+    value={value}
+    onChange={setValue}
+    renderValue={({ item }) => (
+      <div>
+        <span role="img" aria-label="Panda">
+          🐼
+        </span>{' '}
+        — {item.name}
+      </div>
+    )}
+  />
+);
+```
 
-В этом случае нужно использовать геттеры
-`getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getGroupLabel`, `getGroupKey`, чтобы компонент понимал, откуда брать данные.
+</MdxTabs>
+
+### Кастомные типы данных
+
+Для кастомных типов данных в `items` и `groups` используйте геттеры: `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getGroupLabel`, `getGroupKey`.
 
 <MdxInformer status="warning">
 
-Если геттеры не указаны, используются геттеры по умолчанию, которые могут не подойти к вашим типам данных.
+Без геттеров используются значения по умолчанию, которые могут не соответствовать вашим типам данных.
 
 </MdxInformer>
 
-#### Геттеры по умолчанию
-
-```ts
-const defaultGetItemKey = (item) => item.id;
-const defaultGetItemLabel = (item) => item.label;
-const defaultGetItemGroupKey = (item) => item.groupId;
-const defaultGetItemDisabled = (item) => item.disabled;
-const defaultGetGroupKey = (group) => group.id;
-const defaultGetGroupLabel = (group) => group.label;
-```
-
-#### Пример с кастомным Item
-
-```tsx
-function SelectExampleCustomTypes() {
-  const [value, setValue] = useState<string | null>();
-  return (
-    <Select
-      placeholder="Выберите значение"
-      items={['Первый', 'Второй', 'Третий']}
-      value={value}
-      onChange={setValue}
-      getItemKey={(item) => item}
-      getItemLabel={(item) => item}
-    />
-  );
-}
-```
+<MdxTabs>
 
 <SelectExampleCustomTypes />
 
-#### Пример с кастомными Item и Group
+```tsx
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Выберите значение"
+    items={['Первый', 'Второй', 'Третий']}
+    value={value}
+    onChange={setValue}
+    getItemKey={(item) => item}
+    getItemLabel={(item) => item}
+  />
+);
+```
+
+</MdxTabs>
+
+<MdxTabs>
+
+<SelectExampleCustomTypesWithGroups />
 
 ```tsx
-type Item = {
-  name: string;
-  group: string;
-};
-
-const items: Item[] = [
+const items = [
   { name: 'Первый', group: 'Первая группа' },
   { name: 'Второй', group: 'Третья группа' },
   { name: 'Третий', group: 'Вторая группа' },
@@ -990,115 +794,23 @@ const items: Item[] = [
   { name: 'Десятый', group: 'Вторая группа' },
 ];
 
-const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
+const groups = ['Первая группа', 'Вторая группа', 'Третья группа'];
 
-function SelectExampleCustomTypesWithGroups() {
-  const [value, setValue] = useState<Item | null>();
-  return (
-    <Select
-      placeholder="Выберите значение"
-      items={items}
-      groups={groups}
-      value={value}
-      onChange={setValue}
-      getItemKey={(item) => item.name}
-      getItemLabel={(item) => item.name}
-      getItemGroupKey={(item) => item.group}
-      getGroupKey={(group) => group}
-      getGroupLabel={(group) => group}
-    />
-  );
-}
+const [value, setValue] = useState(null);
+return (
+  <Select
+    placeholder="Выберите значение"
+    items={items}
+    groups={groups}
+    value={value}
+    onChange={setValue}
+    getItemKey={(item) => item.name}
+    getItemLabel={(item) => item.name}
+    getItemGroupKey={(item) => item.group}
+    getGroupKey={(group) => group}
+    getGroupLabel={(group) => group}
+  />
+);
 ```
 
-<SelectExampleCustomTypesWithGroups />
-
-## Импорт
-
-```tsx
-import { Select } from '@consta/uikit/Select';
-```
-
-## Свойства
-
-```tsx
-type SelectItemDefault = {
-  label: string;
-  id: string | number;
-  groupId?: string | number;
-  disabled?: boolean;
-};
-
-type SelectGroupDefault = {
-  label: string;
-  id: string | number;
-};
-
-type SelectPropOnChange<ITEM = SelectItemDefault> = (
-  value: ITEM | null,
-  props: {
-    e: React.SyntheticEvent;
-  },
-) => void;
-
-type SelectRenderItemProps<ITEM> = {
-  item: ITEM;
-  active: boolean;
-  hovered: boolean;
-  onClick: (e: React.SyntheticEvent) => void;
-  onMouseEnter: (e: React.SyntheticEvent) => void;
-  ref: React.Ref<HTMLDivElement>;
-};
-
-type SelectPropRenderValue<ITEM> = (props: {
-  item: ITEM;
-}) => React.ReactNode | null;
-
-type SelectPropGetItemLabel<ITEM> = (item: ITEM) => string;
-type SelectPropGetItemKey<ITEM> = (item: ITEM) => string | number;
-type SelectPropGetItemGroupKey<ITEM> = (
-  item: ITEM,
-) => string | number | undefined;
-type SelectPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
-type SelectPropGetGroupKey<GROUP> = (group: GROUP) => string | number;
-type SelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
-```
-
-| Свойство                                                                | Тип или варианты значения                              | По умолчанию              | Описание                                                                  |
-| ----------------------------------------------------------------------- | ------------------------------------------------------ | ------------------------- | ------------------------------------------------------------------------- |
-| [`view?`](#внешний-вид)                                                 | `default` , `clear`                                    | `default`                 | Внешний вид компонента                                                    |
-| [`disabled?`](#неактивный-выпадающий-список)                            | `boolean`                                              | -                         | Делает компонент неактивным                                               |
-| [`status?`](#статус-поля)                                               | `'', 'alert', 'success', 'warning'`                    | `' '`                     | Тип поля                                                                  |
-| [`size?`](#размер)                                                      | `'xs'`, `'s'` , `'m'` , `'l'`                          | `'m'`                     | Размер компонента                                                         |
-| [`form?`](#форма)                                                       | `default`, `brick`, `round`                            | `default`                 | Форма компонента                                                          |
-| [`placeholder?`](#подсказка)                                            | `string`                                               | -                         | Подсказка. Отображается, когда вариант не выбран                          |
-| [`label?`](#лейбл-и-подпись)                                            | `string`                                               | -                         | Лейбл                                                                     |
-| [`labelPosition?`](#лейбл-и-подпись)                                    | `'top', 'left'`                                        | `'top'`                   | Положение лейбла                                                          |
-| [`caption?`](#лейбл-и-подпись)                                          | `string`                                               | -                         | Подпись                                                                   |
-| [`items`](#варианты)                                                    | `ITEM[]`                                               | -                         | Варианты                                                                  |
-| [`value?`](#выбранное-значение)                                         | `ITEM`, `null`                                         | -                         | Выбранное значение                                                        |
-| [`onChange?`](#выбранное-значение)                                      | `SelectPropOnChange<ITEM>`                             | -                         | Обработчик события изменения значения компонента                          |
-| [`groups?`](#группы-вариантов)                                          | `GROUP[]`                                              | -                         | Группы вариантов                                                          |
-| [`renderItem?`](#кастомный-элемент-списка)                              | `SelectPropRenderItem<ITEM>`                           | рендер по умолчанию       | Рендер-функция для элемента списка                                        |
-| [`renderValue?`](#кастомное-выбранное-значение)                         | `SelectPropRenderValue<ITEM>`                          | рендер по умолчанию       | Рендер-функция для выбранного значения                                    |
-| [`getItemLabel?`](#)                                                    | `SelectPropGetItemLabel<ITEM>`                         | `(item) => item.label`    | Функция для определения названия элемента                                 |
-| [`getItemKey?`](#кастомные-типы-данных-для-вариантов-и-групп)           | `SelectPropGetItemKey<ITEM>`                           | `(item) => item.id`       | Функция для определения уникального ключа элемента                        |
-| [`getItemGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `SelectPropGetItemGroupKey<ITEM>`                      | `(item) => item.groupId`  | Функция для определения ключа группы, к которой будет привязан элемент    |
-| [`getItemDisabled?`](#кастомные-типы-данных-для-вариантов-и-групп)      | `SelectPropGetItemDisabled<ITEM>`                      | `(item) => item.disabled` | Функция для определения неактивного варианта (`disabled`)                 |
-| [`getGroupLabel?`](#кастомные-типы-данных-для-вариантов-и-групп)        | `SelectPropGetGroupKey<GROUP>`                         | `(group) => group.id`     | Функция для определения названия группы                                   |
-| [`getGroupKey?`](#кастомные-типы-данных-для-вариантов-и-групп)          | `SelectPropGetGroupLabel<GROUP>`                       | `(group) => group.label`  | Функция для определения уникального ключа группы                          |
-| `isLoading?`                                                            | `boolean`                                              | -                         | При `true` будет отображаться индикатор загрузки                          |
-| `virtualScroll?`                                                        | `boolean`                                              | -                         | Включает виртуализацию скролла                                            |
-| `onScrollToBottom?`                                                     | `(length: number) => void`                             | -                         | Колбэк сработает при прокрутки до конца списка                            |
-| `required?`                                                             | `boolean`                                              | -                         | Нужно заполнить                                                           |
-| `labelForEmptyItems?`                                                   | `string`                                               | `Список пуст`             | Текст для случая, когда в списке нет значений                             |
-| `onBlur?`                                                               | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `blur`                                                 |
-| `onFocus?`                                                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                         | Обработчик события `focus`                                                |
-| `ariaLabel?`                                                            | `string`                                               | -                         | `aria` атрибут для поля ввода                                             |
-| `name?`                                                                 | `string`                                               | -                         | Имя поля ввода                                                            |
-| `className?`                                                            | `string`                                               | -                         | Дополнительный CSS-класс                                                  |
-| `dropdownClassName?`                                                    | `string`                                               | -                         | Дополнительный CSS-класс для выпадающего блока                            |
-| [`onDropdownOpen?`](#управление-состоянием-выпадающего-списка)          | `(open: boolean) => void;`                             | -                         | Событие срабатывает при открытии списка                                   |
-| [`dropdownOpen?` ](#управление-состоянием-выпадающего-списка)           | `boolean`                                              | -                         | Состояние открыт/закрыт выпадающего списка                                |
-| [`ignoreOutsideClicksRefs?`](#управление-состоянием-выпадающего-списка) | `ReadonlyArray<React.RefObject<HTMLElement>>`          | -                         | Ссылки на элементы с которые нужно игнорировать при кликах вне компонента |
-| `ref?`                                                                  | `React.Ref<HTMLDivElement>`                            | -                         | Ссылка на корневой DOM-элемент компонента                                 |
+</MdxTabs>
