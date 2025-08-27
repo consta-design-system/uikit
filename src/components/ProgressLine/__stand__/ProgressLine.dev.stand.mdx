@@ -1,4 +1,4 @@
-import { MdxMenu } from '@consta/stand';
+import { MdxMenu, MdxTabs } from '@consta/stand';
 import {
   ProgressLineExampleMode,
   ProgressLineExampleModeValue,
@@ -6,65 +6,23 @@ import {
 } from './examples/ProgressLineExampleMode/ProgressLineExampleMode';
 import { ProgressLineExampleSize } from './examples/ProgressLineExampleSize/ProgressLineExampleSize';
 
-```tsx
-import { ProgressLine } from '@consta/uikit/ProgressLine';
-```
-
 <MdxMenu>
 
-- [Тип](#тип)
-- [Размер](#размер)
+- [Обзор](#обзор)
 - [Импорт](#импорт)
 - [Свойства](#свойства)
-- [Пример](#пример)
+- [Содержимое](#содержимое)
+  - [Тип отображения](#тип-отображения)
+- [Внешний вид](#внешний-вид)
+  - [Размер](#размер)
 
 </MdxMenu>
 
-## Тип
+## Обзор
 
-По умолчанию компонент отображается с бесконечной анимацией — 
-чтобы показать, что процесс идёт.
+Компонент `ProgressLine` используется для отображения прогресса выполнения задачи или процесса. Он может работать в трёх режимах:
 
-Если нужно показать процент загрузки или выполнения задачи,
-передайте соответствующее значение в свойстве `value`.
-В этом случае анимация выключится.
-
-Если нужно отображать прогресс пошагово, передайте массив шагов
-в свойстве `steps`, а также для указания описания шага определите функцию
-`getItemLabel`.
-
-```tsx
-<ProgressLine />
-```
-
-<ProgressLineExampleMode />
-
-```tsx
-<ProgressLine value={30} />
-```
-
-<ProgressLineExampleModeValue />
-
-```tsx
-<ProgressLine
-  value={3}
-  steps={['Первый', 'Второй', 'Третий']}
-  getItemLabel={(item) => item}
-/>
-```
-
-<ProgressLineExampleModeSteps />
-
-## Размер
-
-Свойство `size` отвечает за размер индикатора. Доступные размеры: `s` и `m`.
-
-```tsx
-<ProgressLine size="s" />
-<ProgressLine size="m" />
-```
-
-<ProgressLineExampleSize />
+Компонент поддерживает настройку размера и отображение шагов с помощью функции для получения подписей.
 
 ## Импорт
 
@@ -74,26 +32,79 @@ import { ProgressLine } from '@consta/uikit/ProgressLine';
 
 ## Свойства
 
+| Свойство                            | Тип                         | По умолчанию | Описание                                  |
+| ----------------------------------- | --------------------------- | ------------ | ----------------------------------------- |
+| [`value?`](#тип-отображения)        | `number`                    | -            | Процент загрузки или номер текущего шага  |
+| [`steps?`](#тип-отображения)        | `ITEM[]`                    | -            | Массив шагов                              |
+| [`getItemLabel?`](#тип-отображения) | `(item: ITEM) => string`    | -            | Функция для получения подписи шага        |
+| [`size?`](#размер)                  | `'s' \| 'm'`                | `'m'`        | Размер индикатора                         |
+| `className?`                        | `string`                    | -            | Дополнительный CSS-класс                  |
+| `ref?`                              | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент компонента |
+
+## Содержимое
+
+### Тип отображения
+
+Свойства `value`, `steps` и `getItemLabel` определяют, как будет отображаться прогресс.
+
+- **Бесконечная анимация**: Если не указаны `value` и `steps`, компонент отображается с бесконечной анимацией, сигнализирующей о выполнении процесса.
+
+<MdxTabs>
+
+<ProgressLineExampleMode />
+
 ```tsx
-type ProgressLinePropMode = 'determinate' | 'indeterminate';
+<ProgressLine />
 ```
 
-| Свойство                | Тип                         | По умолчанию | Описание                                  |
-| ----------------------- | --------------------------- | ------------ | ----------------------------------------- |
-| [`value?`](#тип)        | `number`                    | -            | Процент загрузки или выполнения           |
-| [`steps?`](#тип)        | `ITEM[]`                    | -            | Массив шагов                              |
-| [`size?`](#размер)      | `'s', 'm'`                  | `'m'`        | Размер индикатора                         |
-| [`getItemLabel?`](#тип) | `(item: ITEM) => string`    | -            | Функция получения лейбла                  |
-| `className?`            | `string`                    | -            | Дополнительный CSS-класс                  |
-| `ref?`                  | `React.Ref<HTMLDivElement>` | -            | Ссылка на корневой DOM-элемент компонента |
+</MdxTabs>
 
-## Пример
+- **Процент выполнения**: Если передать свойство `value` (число от 0 до 100), компонент отобразит прогресс в процентах, а анимация отключится.
+
+<MdxTabs>
+
+<ProgressLineExampleModeValue />
 
 ```tsx
-import React, { useState } from 'react';
-import { ProgressLine } from '@consta/uikit/ProgressLine';
-
-const App = () => {
-  return <ProgressLine size="s" value={20} />;
-};
+<ProgressLine value={30} />
 ```
+
+</MdxTabs>
+
+- **Пошаговый прогресс**: Если передать массив `steps` и функцию `getItemLabel`, компонент отобразит прогресс в виде шагов. Свойство `value` указывает номер текущего шага (начинается с 0). Функция `getItemLabel` возвращает подпись для каждого шага.
+
+<MdxTabs>
+
+<ProgressLineExampleModeSteps />
+
+```tsx
+<ProgressLine
+  value={3}
+  steps={['Первый', 'Второй', 'Третий']}
+  getItemLabel={(item) => item}
+/>
+```
+
+</MdxTabs>
+
+## Внешний вид
+
+### Размер
+
+Свойство `size` определяет размер индикатора. Доступны два значения:
+
+- `s` — маленький размер.
+- `m` — средний размер (по умолчанию).
+
+<MdxTabs>
+
+<ProgressLineExampleSize />
+
+```tsx
+<>
+  <ProgressLine size="s" />
+  <ProgressLine size="m" />
+</>
+```
+
+</MdxTabs>
