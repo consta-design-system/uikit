@@ -9,81 +9,91 @@ import { SnackBarExampleForm } from './examples/SnackBarExampleForm/SnackBarExam
 import { SnackBarExampleProgress } from './examples/SnackBarExampleProgress/SnackBarExampleProgress';
 import { SnackBarExampleGetItemProgress } from './examples/SnackBarExampleGetItemProgress/SnackBarExampleGetItemProgress';
 
-```tsx
-import { SnackBar } from '@consta/uikit/SnackBar';
-```
-
 <MdxMenu>
 
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
 - [Содержимое](#содержимое)
-- [Текст сообщения](#текст-сообщения)
-- [Статус](#статус)
-- [Иконка](#иконка)
-- [Кнопки](#кнопки)
-- [Форма](#форма)
-- [Возможность закрыть снек-бар](#возможность-закрыть-снек-бар)
-- [Автоматическое закрытие](#автоматическое-закрытие)
+  - [Текст сообщения](#текст-сообщения)
+  - [Статус](#статус)
+  - [Иконка](#иконка)
+  - [Кнопки](#кнопки)
+- [Внешний вид](#внешний-вид)
+  - [Форма](#форма)
+- [Поведение](#поведение)
+  - [Возможность закрыть](#возможность-закрыть)
+  - [Автоматическое закрытие](#автоматическое-закрытие)
   - [Таймер](#таймер)
-- [Прогресс](#прогресс)
+  - [Прогресс](#прогресс)
 - [Адаптивность](#адаптивность)
-- [Список свойств](#свойства)
 - [Пример использования](#пример)
 
 </MdxMenu>
 
-## Содержимое
+## Обзор
 
-Данные для формирования снек-бара можно передать в свойстве `items` типа [Item](#свойства). Что внутри:
+Компонент `SnackBar` используется для отображения уведомлений или кратких сообщений пользователю. Он поддерживает настройку текста, статуса, иконок, кнопок, таймеров и прогресса. Компонент адаптивен и может быть настроен для автоматического закрытия.
 
-- `key` — идентификатор сообщения (обязательный).
-- `message` — [текст сообщения](#текст-сообщения).
-- `status` — [статус сообщения](#статус), определяет цвет фона или обводки. Варианты: `'success'`, `'warning'`, `'alert'`, `'normal'`.
-- `autoClose` — [позволяет закрыть сообщение](#возможность-закрыть-снек-бар): добавляет кнопку-крестик, показывает, что сделать с сообщением: не закрывать или закрыть, и через какое время.
-- `showProgress` — [добавляет таймер](#таймер): показывает, сколько секунд осталось до закрытия сообщения. Работает вместе с `autoClose`.
-- `icon` — добавляет [иконку](#иконка).
-- `actions` — добавляет [кнопки](#кнопки).
-- `onClose` — функция, которая вызывается по закрытию сообщения.
-- `onAutoClose` — функция, которая вызывается по автоматическому закрытию сообщения. Если не передавать `onAutoClose`, то по окончанию таймера сработает `onClose`.
-- `progress` отображает [прогресс](#прогресс).
-
-## Текст сообщения
-
-Добавить сообщение можно в атрибуте `message` в свойстве `items` типа [Item](#свойства). Если используете кастомный тип, получить сообщение можно с помощью функции `getItemMessage`.
-
-В качестве значения можно передавать текст или JSX-разметку `React.ReactNode`, например, ссылку `<a href="#">Ссылка</a>`.
-
-<MdxTabs>
+## Импорт
 
 ```tsx
 import { SnackBar } from '@consta/uikit/SnackBar';
+```
 
-const items: Item[] = [
+## Свойства
+
+| Свойство                                        | Тип                               | По умолчанию | Описание                                                        |
+| ----------------------------------------------- | --------------------------------- | ------------ | --------------------------------------------------------------- |
+| [`items`](#содержимое)                          | `Item[]`                          | -            | Массив элементов                                                |
+| `getItemKey?`                                   | `SnackBarPropGetItemKey`          | -            | Функция для получения ключа элемента                            |
+| [`form?`](#форма)                               | `'default', 'round', 'brick'`     | `'default'`  | Внешний вид компонента                                          |
+| [`getItemMessage?`](#текст-сообщения)           | `SnackBarPropGetItemMessage`      | -            | Функция для получения текста элемента                           |
+| [`getItemStatus?`](#статус)                     | `SnackBarPropGetItemStatus`       | -            | Функция для получения статуса элемента                          |
+| [`getItemIcon?`](#иконка)                       | `SnackBarPropGetItemIcon`         | -            | Функция для получения иконки для элемента                       |
+| [`getItemActions?`](#кнопки)                    | `SnackBarPropGetItemActions`      | -            | Функция для получения дополнительных контролов элемента         |
+| [`getItemAutoClose?`](#автоматическое-закрытие) | `SnackBarPropGetItemAutoClose`    | -            | Функция для получения значения таймера элемента                 |
+| [`getItemShowProgress?`](#таймер)               | `SnackBarPropGetItemShowProgress` | -            | Функция для получения типа таймера элемента                     |
+| [`getItemProgress?`](#прогресс)                 | `SnackBarPropGetItemProgress`     | -            | Функция для получения статуса прогресса                         |
+| [`progressView?`](#прогресс)                    | `'spinText', 'spin', 'text'`      | `'spinText'` | Вид отображения прогресса                                       |
+| [`getItemOnClose?`](#возможность-закрыть)       | `SnackBarPropGetItemOnClose`      | -            | Функция для получения события закрытия элемента                 |
+| `getItemOnAutoClose?`                           | `SnackBarPropGetItemOnAutoClose`  | -            | Функция для получения события автоматического закрытия элемента |
+| `onItemClose?`                                  | `(item: Item) => void`            | -            | Функция срабатывает при закрытии элемента                       |
+| `onItemAutoClose?`                              | `(item: Item) => void`            | -            | Функция срабатывает при автоматическом закрытии элемента        |
+| `className?`                                    | `string`                          | -            | Дополнительный CSS-класс                                        |
+
+## Содержимое
+
+### Текст сообщения
+
+Свойство `message` в объекте `items` задаёт текст сообщения. Можно передавать строку, число или JSX-разметку (`React.ReactNode`), например, ссылку `<a href="#">Ссылка</a>`. Для кастомных типов используйте функцию `getItemMessage`.
+
+<MdxTabs>
+
+<SnackBarExampleText />
+
+```tsx
+const items = [
   {
     key: 1,
     text: 'Это просто сообщение',
   },
 ];
 
-export const SnackBarExampleText: React.FC = () => {
-  return <SnackBar items={items} getItemMessage={(item) => item.text} />;
-};
+return <SnackBar items={items} getItemMessage={(item) => item.text} />;
 ```
-
-<SnackBarExampleText />
 
 </MdxTabs>
 
-## Статус
+### Статус
 
-От статуса зависит цвет фона под текстом.
-
-Добавить статус можно в атрибуте `status` в свойстве `items` типа [Item](#свойства). Если используете кастомный тип, получить статус можно с помощью функции `getItemStatus`.
+Свойство `status` определяет цвет фона или обводки сообщения. Возможные значения: `'success'`, `'warning'`, `'alert'`, `'normal'`. Для кастомных типов используйте функцию `getItemStatus`.
 
 <MdxTabs>
 
-```tsx
-import { SnackBar } from '@consta/uikit/SnackBar';
+<SnackBarExampleStatus />
 
+```tsx
 type Item = {
   key: string;
   message?: string;
@@ -118,23 +128,20 @@ const getStatus = (item: Item) => {
   return 'normal';
 };
 
-export const SnackBarExampleStatus: React.FC = () => {
-  return <SnackBar items={items} getItemStatus={getStatus} />;
-};
+return <SnackBar items={items} getItemStatus={getStatus} />;
 ```
-
-<SnackBarExampleStatus />
 
 </MdxTabs>
 
-## Иконка
+### Иконка
 
-Добавьте любую из [библиотеки иконок](##LIBS.LIB/lib:icons) в атрибуте `icon` в свойстве `items` типа [Item](#свойства). Если используете кастомный тип, получить иконку можно с помощью функции `getItemIcon`.
+Свойство `icon` позволяет добавить иконку из [библиотеки иконок Consta](##LIBS.LIB/lib:icons). Для кастомных типов используйте функцию `getItemIcon`.
 
 <MdxTabs>
 
+<SnackBarExampleIcon />
+
 ```tsx
-import { SnackBar } from '@consta/uikit/SnackBar';
 import { IconMoon } from '@consta/uikit/icons/IconMoon';
 import { IconDisconnection } from '@consta/uikit/icons/IconDisconnection';
 
@@ -164,31 +171,20 @@ const getIcon = (item: Item) => {
   return IconDisconnection;
 };
 
-export const SnackBarExampleIcon = () => {
-  return <SnackBar items={items} getItemIcon={getIcon} />;
-};
+return <SnackBar items={items} getItemIcon={getIcon} />;
 ```
-
-<SnackBarExampleIcon />
 
 </MdxTabs>
 
-## Кнопки
+### Кнопки
 
-Добавьте кнопки, чтобы пользователь мог отреагировать на событие.
-
-За кнопки отвечает объект `actions` — элемент объекта типа [Item](#свойства). Что внутри:
-
-- `label` — текст на кнопке,
-- `onClick` — функция, которая обрабатывает клик по этой кнопке.
-
-Если используете кастомный тип, получить кнопки можно с помощью функции `getItemActions`.
+Свойство `actions` добавляет кнопки для взаимодействия. Объект `actions` содержит `label` (текст кнопки) и `onClick` (обработчик клика). Для кастомных типов используйте функцию `getItemActions`.
 
 <MdxTabs>
 
-```tsx
-import { SnackBar } from '@consta/uikit/SnackBar';
+<SnackBarExampleButtons />
 
+```tsx
 type Item = {
   key: number;
   message: string;
@@ -214,26 +210,22 @@ const getActions = (buttons?: string[]) => {
   }
 };
 
-export const SnackBarExampleButtons: React.FC = () => {
-  return (
-    <SnackBar
-      items={items}
-      getItemActions={(item) => getActions(item.buttons)}
-    />
-  );
-};
+return (
+  <SnackBar items={items} getItemActions={(item) => getActions(item.buttons)} />
+);
 ```
-
-<SnackBarExampleButtons />
 
 </MdxTabs>
 
-## Форма
+## Внешний вид
 
-За форму компонента отвечает свойство `form.` По умолчанию у полей скругленные края,
-но ещё их можно сделать круглыми и квадратными.
+### Форма
+
+Свойство `form` задаёт форму компонента. Возможные значения: `'default'` (скругленные края), `'round'` (круглые края), `'brick'` (прямые края).
 
 <MdxTabs>
+
+<SnackBarExampleForm />
 
 ```tsx
 type Item = {
@@ -259,33 +251,25 @@ return (
 );
 ```
 
-<SnackBarExampleForm />
-
 </MdxTabs>
 
-## Возможность закрыть снек-бар
+## Поведение
 
-Чтобы добавить кнопку-крестик, по которой можно закрыть снек-бар, и функцию, которая сработает по этой кнопке, добавьте в объект с описанием снек-бара `onClose` или используйте `getItemOnClose`.
+### Возможность закрыть
 
-## Автоматическое закрытие
+Свойство `onClose` или функция `getItemOnClose` добавляет кнопку-крестик для закрытия снек-бара и задаёт обработчик закрытия.
 
-Закрывайте сообщения автоматически, если сообщений слишком много и они не очень важные.
-Такое сообщение будет держаться на экране некоторое время, а потом исчезнет.
+### Автоматическое закрытие
 
-Таймер нужен, чтобы дать пользователю возможность поменять решение. Например,
-если пользователь что-то удалил, можно вывести сообщение с таймером и кнопкой
-**Не удалять**. Если пользователь передумал, нажмет на кнопку. Если нет, сообщение само закроется по таймеру.
-
-Чтобы автоматически закрыть сообщение, добавьте в объект с описанием снек-бара `autoClose` или используйте `getItemAutoClose`. Можно указать количество секунд, по истечении которых сообщение закроется, по умолчанию — 3 секунды.
+Свойство `autoClose` или функция `getItemAutoClose` включает автоматическое закрытие сообщения. Можно указать время в секундах (по умолчанию 3 секунды).
 
 ### Таймер
 
-Вы можете добавить таймер, чтобы в явном виде показать пользователю, сколько времени осталось для закрытия сообщения. Для этого добавьте в объект с описанием сообщения `showProgress` или используйте `getItemShowProgress`. Вид таймера:
-
-- `'timer'` — показывает радиальный таймер с меняющимся количеством секунд,
-- `'line'` — показывает линейный таймер.
+Свойство `showProgress` или функция `getItemShowProgress` добавляет таймер, показывающий время до закрытия. Возможные значения: `'timer'` (радиальный таймер), `'line'` (линейный таймер).
 
 <MdxTabs>
+
+<SnackBarExampleTimer />
 
 ```tsx
 type Item = {
@@ -318,93 +302,77 @@ function reducer(
 const getItemIcon = (item: Item) => mapIconByStatus[item.status];
 const getItemShowProgress = (item: Item) => item.progressMode;
 
-export const SnackBarExampleTimer: React.FC = () => {
-  const [items, dispatchItems] = useReducer<
-    React.Reducer<
-      Item[],
-      { type: 'add' | 'remove'; item: Item; key?: number | string }
-    >
-  >(reducer, []);
+const [items, dispatchItems] = useReducer(reducer, []);
 
-  const generateHandleAdd =
-    (status: SnackBarItemStatus, progressMode?: SnackBarItemShowProgressProp) =>
-    () => {
-      const key = items.length + 1;
-      const item: Item = {
-        key,
-        message: `Сейчас эта штука закроется ${key}`,
-        status,
-        progressMode,
-      };
-      dispatchItems({ type: 'add', item });
+const generateHandleAdd =
+  (status: SnackBarItemStatus, progressMode?: SnackBarItemShowProgressProp) =>
+  () => {
+    const key = items.length + 1;
+    const item: Item = {
+      key,
+      message: `Сейчас эта штука закроется ${key}`,
+      status,
+      progressMode,
     };
+    dispatchItems({ type: 'add', item });
+  };
 
-  const handleAlertAdd = generateHandleAdd('alert', 'timer');
-  const handleNormalAdd = generateHandleAdd('normal', 'timer');
-  const handleLineNormalAdd = generateHandleAdd('normal', 'line');
-  const handleHiddenTimerAdd = generateHandleAdd('normal');
+const handleAlertAdd = generateHandleAdd('alert', 'timer');
+const handleNormalAdd = generateHandleAdd('normal', 'timer');
+const handleLineNormalAdd = generateHandleAdd('normal', 'line');
+const handleHiddenTimerAdd = generateHandleAdd('normal');
 
-  React.useEffect(() => handleNormalAdd(), []);
+React.useEffect(() => handleNormalAdd(), []);
 
-  return (
+return (
+  <div>
     <div>
-      <div>
-        <Button
-          className={cnSnackBarExampleTimer('ButtonAdd')}
-          iconLeft={IconAdd}
-          label="Без таймера + иконка"
-          onClick={handleHiddenTimerAdd}
-        />
-        <Button
-          className={cnSnackBarExampleTimer('ButtonAdd')}
-          iconLeft={IconAdd}
-          label="Обычный таймер"
-          onClick={handleNormalAdd}
-        />
-        <Button
-          className={cnSnackBarExampleTimer('ButtonAdd')}
-          iconLeft={IconAdd}
-          label="Обычный таймер c линией"
-          onClick={handleLineNormalAdd}
-        />
-        <Button
-          className={cnSnackBarExampleTimer('ButtonAdd')}
-          iconLeft={IconAdd}
-          label="Тревожный таймер"
-          onClick={handleAlertAdd}
-        />
-      </div>
-      <SnackBar
-        className={cnSnackBarExampleTimer('SnackBar')}
-        items={items}
-        onItemClose={(item) => dispatchItems({ type: 'remove', item })}
-        getItemShowProgress={getItemShowProgress}
-        getItemIcon={getItemIcon}
-        getItemAutoClose={() => 5}
+      <Button
+        className={cnSnackBarExampleTimer('ButtonAdd')}
+        iconLeft={IconAdd}
+        label="Без таймера + иконка"
+        onClick={handleHiddenTimerAdd}
+      />
+      <Button
+        className={cnSnackBarExampleTimer('ButtonAdd')}
+        iconLeft={IconAdd}
+        label="Обычный таймер"
+        onClick={handleNormalAdd}
+      />
+      <Button
+        className={cnSnackBarExampleTimer('ButtonAdd')}
+        iconLeft={IconAdd}
+        label="Обычный таймер c линией"
+        onClick={handleLineNormalAdd}
+      />
+      <Button
+        className={cnSnackBarExampleTimer('ButtonAdd')}
+        iconLeft={IconAdd}
+        label="Тревожный таймер"
+        onClick={handleAlertAdd}
       />
     </div>
-  );
-};
+    <SnackBar
+      className={cnSnackBarExampleTimer('SnackBar')}
+      items={items}
+      onItemClose={(item) => dispatchItems({ type: 'remove', item })}
+      getItemShowProgress={getItemShowProgress}
+      getItemIcon={getItemIcon}
+      getItemAutoClose={() => 5}
+    />
+  </div>
+);
 ```
-
-<SnackBarExampleTimer />
 
 </MdxTabs>
 
-## Прогресс
+### Прогресс
 
-Прогресс можно отобразить двумя способами:
-
-- добавить свойство `progress` в свойства элемента,
-- использовать в компоненте свойство `getItemProgress`.
-
-Чтобы настроить вид анимации прогресса, в свойстве `progressView` задайте значение:
-
-- `spin` — круговая анимация загрузки,
-- `text` — числовое значение,
-- `spinText` — круговая анимация и цифры.
+Свойство `progress` или функция `getItemProgress` отображает прогресс. Свойство `progressView` задаёт вид анимации: `'spin'` (круговая), `'text'` (числовая), `'spinText'` (круговая с числом).
 
 <MdxTabs>
+
+<SnackBarExampleProgress />
 
 ```tsx
 const items = [
@@ -422,20 +390,14 @@ const items = [
   },
 ];
 
-export const SnackBarExampleProgress = () => {
-  return (
-    <Example col={1}>
-      <SnackBar items={items} progressView="spinText" />
-    </Example>
-  );
-};
+return <SnackBar items={items} progressView="spinText" />;
 ```
-
-<SnackBarExampleProgress />
 
 </MdxTabs>
 
 <MdxTabs>
+
+<SnackBarExampleGetItemProgress />
 
 ```tsx
 const items = [
@@ -453,28 +415,24 @@ const items = [
   },
 ];
 
-export const SnackBarExampleGetItemProgress = () => {
-  return (
-    <Example col={1}>
-      <SnackBar
-        items={items}
-        getItemProgress={(item) => item.loading}
-        progressView="spin"
-      />
-    </Example>
-  );
-};
+return (
+  <SnackBar
+    items={items}
+    getItemProgress={(item) => item.loading}
+    progressView="spin"
+  />
+);
 ```
-
-<SnackBarExampleGetItemProgress />
 
 </MdxTabs>
 
 ## Адаптивность
 
-Компонент подстраивается под ширину контейнера, автоматически проставляются горизонтальные отступы `xs`.
+Компонент автоматически подстраивается под ширину контейнера, с горизонтальными отступами `xs`.
 
 <MdxTabs>
+
+<SnackBarExampleAdaptive />
 
 ```tsx
 const items = [
@@ -485,86 +443,11 @@ const items = [
   },
 ];
 
-export const SnackBarExampleAdaptive = () => {
-  return (
-    <Card verticalSpace="xs" style={{ maxWidth: 200 }}>
-      <SnackBar items={items} />
-    </Card>
-  );
-};
+return (
+  <Card verticalSpace="xs" style={{ maxWidth: 200 }}>
+    <SnackBar items={items} />
+  </Card>
+);
 ```
-
-<SnackBarExampleAdaptive />
 
 </MdxTabs>
-
-## Свойства
-
-```tsx
-type SnackBarItemDefault = {
-  key: string | number;
-  message?: string | number | React.ReactNode;
-  status?: 'success' | 'warning' | 'alert' | 'normal';
-  autoClose?: boolean | number;
-  showProgress?: 'timer' | 'line';
-  icon?: IconComponent;
-  actions?: {
-    label: string | number;
-    onClick: React.EventHandler<React.MouseEvent>;
-  }[];
-  onClose?: (item: Item) => void;
-  onAutoClose?: (item: Item) => void; // Если не передавать `onAutoClose`, то по истечению таймера будет срабатывать `onClose`
-  progress?: boolean | number;
-};
-
-export type SnackBarPropGetItemKey<ITEM> = (item: ITEM) => string | number;
-export type SnackBarPropGetItemMessage<ITEM> = (
-  item: ITEM,
-) => string | number | React.ReactNode | undefined;
-export type SnackBarPropGetItemStatus<ITEM> = (
-  item: ITEM,
-) => SnackBarItemStatus | undefined;
-export type SnackBarPropGetItemAutoClose<ITEM> = (
-  item: ITEM,
-) => boolean | number | undefined;
-export type SnackBarPropGetItemShowProgress<ITEM> = (
-  item: ITEM,
-) => SnackBarItemShowProgressProp | undefined;
-export type SnackBarPropGetItemIcon<ITEM> = (
-  item: ITEM,
-) => IconComponent | undefined;
-export type SnackBarPropGetItemActions<ITEM> = (
-  item: ITEM,
-) => SnackBarPropItemAction[] | undefined;
-export type SnackBarPropGetItemOnClose<ITEM> = (
-  item: ITEM,
-) => ((item: ITEM) => void) | undefined;
-export type SnackBarPropGetItemOnAutoClose<ITEM> = (
-  item: ITEM,
-) => ((item: ITEM) => void) | undefined;
-export type SnackBarPropGetItemProgress<ITEM> = (
-  item: ITEM,
-) => number | boolean | undefined;
-
-export const snackBarPropForm = ['default', 'round', 'brick'] as const;
-export type SnackBarPropForm = typeof snackBarPropForm[number];
-```
-
-| Свойство                                           | Тип                                                                    | По умолчанию | Описание                                                        |
-| -------------------------------------------------- | ---------------------------------------------------------------------- | ------------ | --------------------------------------------------------------- |
-| `items`                                            | `Item[]`                                                               | -            | Массив элементов                                                |
-| `getItemKey?`                                      | `SnackBarPropGetItemKey`                                               | -            | Функция для получения ключа элемента                            |
-| [`form?`](#форма)                                  | `SnackBarPropForm`                                                     | `default`    | Внешний вид компонента                                          |
-| [`getItemMessage?`](#текст-сообщения)              | `SnackBarPropGetItemMessage`                                           | -            | Функция для получения текста элемента                           |
-| [`getItemStatus?`](#статус)                        | `SnackBarPropGetItemStatus`                                            | -            | Функция для получения статуса элемента                          |
-| [`getItemAutoClose?`](#автоматическое-закрытие)    | `SnackBarPropGetItemAutoClose`                                         | -            | Функция для получения значения таймера элемента                 |
-| [`getItemShowProgress?`](#таймер)                  | `SnackBarPropGetItemShowProgress`                                      | -            | Функция для получения типа таймера элемента                     |
-| [`getItemIcon?`](#иконка)                          | `SnackBarPropGetItemIcon`                                              | -            | Функция для получения иконки для элемента                       |
-| [`getItemActions?`](#кнопки)                       | `SnackBarPropGetItemActions`                                           | -            | Функция для получения дополнительных контролов элемента         |
-| [`getItemOnClose?`](#возможность-закрыть-снек-бар) | `SnackBarPropGetItemOnClose`                                           | -            | Функция для получения события закрытия элемента                 |
-| `getItemOnAutoClose?`                              | `SnackBarPropGetItemOnAutoClose`                                       | -            | Функция для получения события автоматического закрытия элемента |
-| [`getItemProgress?`](#прогресс)                    | `SnackBarPropGetItemProgress`                                          | -            | Функция для получения статуса прогресса                         |
-| [`progressView?`](#прогресс)                       | `'spinText'` <code>&#124;</code> `'spin'` <code>&#124;</code> `'text'` | `'spinText'` | Вид отображения прогресса                                       |
-| `onItemClose?`                                     | `(item: Item) => void`                                                 | -            | Функция сработает при закрытии элемента                         |
-| `onItemAutoClose?`                                 | `(item: Item) => void`                                                 | -            | Функция сработает при автоматическом закрытии элемента          |
-| `className?`                                       | `string`                                                               | -            | Дополнительный CSS-класс                                        |
