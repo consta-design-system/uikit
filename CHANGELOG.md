@@ -1,5 +1,21 @@
 # Changelog
 
+## v5.25.0 (28/08/2025)
+Самое важное:
+- В `Button` изменили вид состояния `loading`. Теперь `Loader` выводится с `type="circle"`
+- Добавили новый компонент `Banner`, который предназначен для отображения срочных и важных оповещений
+
+---
+
+- [docs (ProgressLine): implementation of editorial policy (#4037)](https://github.com/consta-design-system/uikit/commit/4f919af5c2c32ec9a92bac8b91c25ec662392b31) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [feat(Button): added type="circle" for Loader (#4041)](https://github.com/consta-design-system/uikit/commit/bb38547137c6f9c471e1b99e5a53a3fdaf54a53e) - [@gizeasy](https://github.com/gizeasy)
+- [docs (ProgressSpin): implementation of editorial policy (#4038)](https://github.com/consta-design-system/uikit/commit/6b14aa912cf4ccb8ddeec5e4afb5fb03bd3558be) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [fix(AutoCompleteCanary): export fixed (#4034)](https://github.com/consta-design-system/uikit/commit/4ac9cafeb43459e320f0e4c77251731008ed91f4) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Pagination): fixed examples (#4033)](https://github.com/consta-design-system/uikit/commit/507d60e860bfc66f42030ed8115cce0da5f5f1e9) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Banner): add component (#4028)](https://github.com/consta-design-system/uikit/commit/fc1d544142a5ca65d914deb014715b635105b637) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.24.2 (01/08/2025)
 - [fix(Attachment): fixed withAction (#4026)](https://github.com/consta-design-system/uikit/commit/433ec061b8d9ddf2fca3a9cacbaff74b4c623998) - [@klekovvlad](https://github.com/klekovvlad)
 - [fix(TextFieldCanary): fixed calculate width (#4024)](https://github.com/consta-design-system/uikit/commit/e3f256c4f383a72352795e9ae4ddcb2645a2264b) - [@gizeasy](https://github.com/gizeasy)
@@ -345,57 +361,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 ## v5.3.2 (27/05/2024)
 - [fix(button): add missing html form attribute (#3664)](https://github.com/consta-design-system/uikit/commit/4d8f2ee561b4d519f6dea35718528e6ec5531699) - [@js2me](https://github.com/js2me)
 - [chore(builder): fix build](https://github.com/consta-design-system/uikit/commit/77ca591d8b68a294b1c93a478450c90d91bd1171) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.3.0 (26/04/2024)
-⚠️Перед обновлением библиотеки обновите `react-dropzone` до версии  `^14.2.3`
-
-Самое важное:
-
-- Добавили новый компонент `DragNDropFieldCanary`.
-- В `TextField` добавили колбэк `onClear`.
-- В `ChoiceGroup` при `truncate` на элементах  проставили `title` для вывода подсказок.
-- В `Chips` добавили свойства `disabled` и `getItemDisabled`.
-- В `Spoiler` добавили контроль состояния открыт/закрыт.
-- Повысили стабильность и производительность компонентов.
-- Внесли небольшие правки в документацию.
-
----
-
-- [feat(DragNDropFieldCanary): create new component (#3600)](https://github.com/consta-design-system/uikit/commit/cd312feabff255ad25fd662eb435f36cd07e5dee) - [@Elena-BLZ](https://github.com/Elena-BLZ)
-- [chore(builder): fix build for Windows OS (#3632)](https://github.com/consta-design-system/uikit/commit/4c054d3b27be70d8b041c9d67b02b611806057c4) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): fix calling onDropdownOpen on mount event (#3559) (#3629)](https://github.com/consta-design-system/uikit/commit/2190c899b051527fe9be508cbff0fb4f4ee49b72) - [@KlochkovIUS](https://github.com/KlochkovIUS)
-- [fix(Table): fix docs (#3607)](https://github.com/consta-design-system/uikit/commit/eaf4c004e341d3f1d38d165594e53a10ed7b14ea) - [@nevsky118](https://github.com/nevsky118)
-- [fix(TextField): fixed ClearButton for type number (#3599)](https://github.com/consta-design-system/uikit/commit/5c9e7fd26905789f904cef9a700388a4832fbd9c) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Badge): fixed spaces (#3598)](https://github.com/consta-design-system/uikit/commit/1b6cdc9e01a7b547697816da01292f34d669894e) - [@gizeasy](https://github.com/gizeasy)
-- [feat(UserSelect): edit disable style (#3597)](https://github.com/consta-design-system/uikit/commit/ad7f76e5a26bd1c2b3542fe1cad0ff3ffb250d05) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): fixed clearButton logic (#3594)](https://github.com/consta-design-system/uikit/commit/a7ea473f089b53d2b3055ec897c026db4eeeac2f) - [@gizeasy](https://github.com/gizeasy)
-- [feat(TextField): add onClear (#3593)](https://github.com/consta-design-system/uikit/commit/986cdac3d7f1617961de6e1813c8b92374fa2c7f) - [@gizeasy](https://github.com/gizeasy)
-- [feat(ChoiceGroup): add title for truncate (#3596)](https://github.com/consta-design-system/uikit/commit/e3ac3aa6fef0b8e4eb663ec25d52f5b43f0b60cd) - [@gizeasy](https://github.com/gizeasy)
-- [docs(TextField, Combobox): fix misprint (#3595)](https://github.com/consta-design-system/uikit/commit/e58f741770cbd15b2ae87de6a2216d11e9407943) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [fix(Swith): fixed align circle (#3590)](https://github.com/consta-design-system/uikit/commit/efa1141ca89234e5ac2ff6989f4514ea5be0e147) - [@gizeasy](https://github.com/gizeasy)
-- [docs(chips): update (#3566)](https://github.com/consta-design-system/uikit/commit/b79cb33c2781b0c94c869a868df34243c29f605a) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [feat(Chips): add disabled and getItemDisabled props and styles (#3565)](https://github.com/consta-design-system/uikit/commit/bc5b9da767f4848e83b041236a0b58af3e612fd9) - [@Elena-BLZ](https://github.com/Elena-BLZ)
-- [feat(Spoiler): add default state (opened or closed) (#3546)](https://github.com/consta-design-system/uikit/commit/7f55721bbad372c61d1271091ecf12eab4a404a5) - [@Elena-BLZ](https://github.com/Elena-BLZ)
-- [chore(deps): update stands](https://github.com/consta-design-system/uikit/commit/76fdc6620746c23f3ceb080878c5ff56fc40db25) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Slider): fixed onChange event when mounting a component (#3557)](https://github.com/consta-design-system/uikit/commit/eb82469f654fec1b5866b987ef5ad39261f76c16) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): fixed a bug in field clearing (#3551)](https://github.com/consta-design-system/uikit/commit/36e63321e53923defc3dc016a9f00deb1841338a) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): fixed inputRef (#3549)](https://github.com/consta-design-system/uikit/commit/f14aa6f7f4b814575f0ba5d3c1e6fe88126724d4) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): fix disable failure and fix button colour (#3527)](https://github.com/consta-design-system/uikit/commit/5356a900dc51c88c178b132078c37a2d3f9f832e) - [@Elena-BLZ](https://github.com/Elena-BLZ)
-- [docs(Theme): fixed example (#3541)](https://github.com/consta-design-system/uikit/commit/7b5654576b59fdbe284013bca6e846afc08a7861) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Tooltip): fix docs (#3522)](https://github.com/consta-design-system/uikit/commit/bc41f6fc3151a9ae46e46707c7340fbdbfcc29e0) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [fix(ProgressStepBar): fix adaptation failure (#3517)](https://github.com/consta-design-system/uikit/commit/e39107a7ca2685f562282d2d51ffcfdf22f01522) - [@Elena-BLZ](https://github.com/Elena-BLZ)
-- [fix(BookmarkTabs): hide scrollbar (#3516)](https://github.com/consta-design-system/uikit/commit/6235632db41717dfb7baede9fafaa70a39e75211) - [@Elena-BLZ](https://github.com/Elena-BLZ)
-- [feat(Tabs): make scroll buttons optional (#3494)](https://github.com/consta-design-system/uikit/commit/fdd7b091d110e8de043ce122720e49517a77ea78) - [@Elena-BLZ](https://github.com/Elena-BLZ)
-- [fix(Pagination): fix generate array (#3500)](https://github.com/consta-design-system/uikit/commit/e6c6cda9182786823e507b1184c896b289234a47) - [@gizeasy](https://github.com/gizeasy)
-- [fix(TextField): global styles for tags removed (#3501)](https://github.com/consta-design-system/uikit/commit/c54520d5433556bacfab9ecff282c09c7931b581) - [@gizeasy](https://github.com/gizeasy)
-- [chore: fixed end of line sequence (#3503)](https://github.com/consta-design-system/uikit/commit/f2c7734d334f3db9f0590b32e2014d31c17a17eb) - [@gizeasy](https://github.com/gizeasy)
-- [chore(CODEOWNERS): update (#3504)](https://github.com/consta-design-system/uikit/commit/72124114363d358b17ec53f2f96794db86441d05) - [@gizeasy](https://github.com/gizeasy)
-- [fix(DatePicker): fix clearButton (#3502)](https://github.com/consta-design-system/uikit/commit/1304bdd7b6ea9664a7058a5d44162c47c9711b95) - [@gizeasy](https://github.com/gizeasy)
-- [fix(FieldLabel): fix icon position (#3492)](https://github.com/consta-design-system/uikit/commit/401ea46005102443a09584e565b601d43c0beb6c) - [@Elena-BLZ](https://github.com/Elena-BLZ)
-- [fix(Combobox): multiple options (#3490)](https://github.com/consta-design-system/uikit/commit/2a46281c4e96618bb3912e25dbe2309b7e2dd3b2) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [docs(Chips): edit description (#3412)](https://github.com/consta-design-system/uikit/commit/4a462e33856761d45a7d1eb757459f6ebfb898ea) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [chore(deps): fixed install-peers-cli for os windows (#3475)](https://github.com/consta-design-system/uikit/commit/1f8cfada4d69a35d5a50cf5ebcff15494c44ac7f) - [@gizeasy](https://github.com/gizeasy)
-- [chore(husky): fixed prepare-commit-msg for os windows](https://github.com/consta-design-system/uikit/commit/71cd1bf516653baea08c7d4e3acef1fd2a74fbc3) - [@gizeasy](https://github.com/gizeasy)
-- [chore(deps): update](https://github.com/consta-design-system/uikit/commit/c61004cf6d71f40385ecb94a6434fd4c11684a19) - [@gizeasy](https://github.com/gizeasy)
