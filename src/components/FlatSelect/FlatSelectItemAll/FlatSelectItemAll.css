@@ -1,0 +1,5 @@
+.ListItem.FlatSelectItemAll {
+  &:hover:not(.ListItem_active) {
+    background: transparent;
+  }
+}

@@ -26,7 +26,7 @@ export const ListBox = forwardRef<HTMLDivElement, ListBoxProps>(
           cnMixSpace({
             pV: mapVerticalSpace[size],
           }),
-          cnMixScrollBar(),
+          cnMixScrollBar({ size: 'xs' }),
           className,
         ])}
       />
