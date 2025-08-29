@@ -13,7 +13,7 @@ import { KeyHandlers, useKeysRef } from '@consta/uikit/useKeysRef';
 import { useRefs } from '@consta/uikit/useRefs';
 import { AtomMut } from '@reatom/core';
 import { useAction, useAtom, useUpdate } from '@reatom/npm-react';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import {
   FlatSelectGroupDefault,
@@ -112,6 +112,7 @@ export const useFlatSelect = <
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const controlRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
   const itemsAtom = usePropAtom(propsAtom, 'items');
   const selectAllAtom = usePropAtom(propsAtom, 'selectAll');
@@ -158,7 +159,7 @@ export const useFlatSelect = <
 
   const inputElementFocus = useDebounce(
     useAction(() => {
-      inputRef.current?.focus();
+      // rootRef.current?.focus();
     }),
     10,
   );
@@ -437,6 +438,8 @@ export const useFlatSelect = <
   // Prop Getters
 
   const ArrowUp = useAction((ctx, e: KeyboardEvent) => {
+    console.log('ArrowUp');
+
     e.preventDefault();
     e.stopPropagation();
     if (!ctx.get(disabledAtom)) {
@@ -647,22 +650,27 @@ export const useFlatSelect = <
 
   useKeysRef({
     keys: keys as unknown as KeyHandlers,
-    ref: inputRef,
+    ref: rootRef,
     isActive: useAction((ctx) => !ctx.get(disabledAtom)),
   });
 
-  useClickOutside({
-    isActive: true,
-    ignoreClicksInsideRefs: [
-      dropdownRef,
-      controlRef,
-      ...(ignoreOutsideClicksRefs || []),
-    ],
-    handler: useAction((ctx) => {
-      openAtom(ctx, false);
-      focusAtom(ctx, false);
-    }),
+  useEffect(() => {
+    console.log('rootRef.current', rootRef.current?.focus);
+    rootRef.current?.focus();
   });
+
+  // useClickOutside({
+  //   isActive: true,
+  //   ignoreClicksInsideRefs: [
+  //     dropdownRef,
+  //     controlRef,
+  //     ...(ignoreOutsideClicksRefs || []),
+  //   ],
+  //   handler: useAction((ctx) => {
+  //     openAtom(ctx, false);
+  //     focusAtom(ctx, false);
+  //   }),
+  // });
 
   useUpdate((ctx, disable) => disable && openAtom(ctx, false), [disabledAtom]);
 
@@ -719,5 +727,6 @@ export const useFlatSelect = <
     hasItemsAtom,
     groupsCounterAtom,
     dropdownZIndexAtom,
+    rootRef,
   };
 };

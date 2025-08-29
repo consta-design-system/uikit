@@ -1,19 +1,76 @@
 .FlatSelect {
-  &_bordered {
+  /* &_bordered {
     border: 1px solid var(--color-bg-border);
-  }
+  } */
+  --flat-select-radius-round: calc(var(--flat-select-control-height) / 2);
 
   &_withAnchor {
     background: var(--color-bg-default);
+  }
+
+  &_form {
+    &_default {
+      border-radius: var(--control-radius);
+    }
+    &_round {
+      border-radius: calc(var(--flat-select-control-height) / 2);
+    }
   }
 
   &_view_clear &-Input {
     border-bottom: 1px solid var(--color-bg-border);
   }
 
+  &-Input {
+    &_border {
+      border: 1px solid var(--color-bg-border);
+    }
+    &_form {
+      &_default {
+        border-radius: var(--control-radius) var(--control-radius) 0 0;
+      }
+      &_round {
+        border-radius: var(--flat-select-radius-round)
+          var(--flat-select-radius-round) 0 0;
+      }
+    }
+  }
+
+  &-List {
+    &_borderHorizontal {
+      border-left: 1px solid var(--color-bg-border);
+      border-right: 1px solid var(--color-bg-border);
+    }
+    &_borderBottom {
+      border-bottom: 1px solid var(--color-bg-border);
+    }
+    &_form {
+      &_default {
+        border-radius: 0 0 var(--control-radius) var(--control-radius);
+      }
+      &_round {
+        border-radius: 0 0 var(--flat-select-radius-round)
+          var(--flat-select-radius-round);
+      }
+    }
+  }
+
   &-Footer {
     border-top: 1px solid var(--color-bg-border);
-    background: var(--color-bg-secondary);
-    /* border-radius: 0 0 var(--control-radius) var(--control-radius); */
+
+    &_border {
+      border-left: 1px solid var(--color-bg-border);
+      border-right: 1px solid var(--color-bg-border);
+      border-bottom: 1px solid var(--color-bg-border);
+    }
+    &_form {
+      &_default {
+        border-radius: 0 0 var(--control-radius) var(--control-radius);
+      }
+      &_round {
+        border-radius: 0 0 var(--flat-select-radius-round)
+          var(--flat-select-radius-round);
+      }
+    }
   }
 }

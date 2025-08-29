@@ -146,6 +146,7 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
     dropdownZIndexAtom,
     selectAllLabel,
     view,
+
     ...otherProps
   } = props;
 
@@ -198,9 +199,9 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
       {...otherProps}
       size={size}
       ref={scrollContainerRef}
-      className={cnFlatSelectList({ view })}
+      className={cnFlatSelectList({ view }, [className])}
       // border={view === 'default'}
-      form={form}
+      // form={form}
 
       //   anchorRef={controlRef}
       //   offset={offset}

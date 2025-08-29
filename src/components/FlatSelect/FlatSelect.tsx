@@ -2,7 +2,7 @@ import './FlatSelect.css';
 
 import { TextFieldTypeText } from '@consta/uikit/TextFieldCanary';
 import { useAction } from '@reatom/npm-react';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 
 import { Checkbox } from '##/components/Checkbox';
 import { FieldInput } from '##/components/FieldComponents';
@@ -128,6 +128,7 @@ const FlatSelectRender = (
     hasItemsAtom,
     groupsCounterAtom,
     dropdownZIndexAtom,
+    rootRef,
   } = useFlatSelect<FlatSelectItemDefault, FlatSelectGroupDefault, false>({
     propsAtom,
   });
@@ -177,20 +178,43 @@ const FlatSelectRender = (
 
   // Flat Select
 
+  // useEffect(() => {
+  //   console.log('rootRef.current', rootRef.current);
+  //   rootRef.current?.focus();
+  // }, [rootRef]);
+
   return (
     <div
       {...otherProps}
-      ref={ref}
-      className={cnFlatSelect({ bordered, view, form }, [className])}
+      ref={useForkRef([ref, rootRef])}
+      className={cnFlatSelect(
+        {
+          view,
+          bordered: view === 'clear' ? bordered : undefined,
+          form: bordered ? form : undefined,
+        },
+
+        [className],
+      )}
+      style={{
+        ...style,
+        ['--flat-select-control-height' as string]: `var(--control-height-${size})`,
+      }}
+      tabIndex={0}
+      role="listbox"
     >
       <div
-        className={cnFlatSelect('Input', [
-          view === 'clear' ? cnMixSpace({ pV: '2xs', pH: 's' }) : undefined,
-        ])}
+        className={cnFlatSelect(
+          'Input',
+          {
+            border: view === 'clear' ? bordered : undefined,
+            form: bordered ? form : undefined,
+          },
+          [view === 'clear' ? cnMixSpace({ pV: '2xs', pH: 's' }) : undefined],
+        )}
       >
         <FlatSelectControlLayout
-          {...otherProps}
-          style={style}
+          // {...otherProps}
           form={form}
           disabled={disabled}
           separator
@@ -225,6 +249,11 @@ const FlatSelectRender = (
         </FlatSelectControlLayout>
       </div>
       <FlatSelectList
+        className={cnFlatSelect('List', {
+          borderHorizontal: view === 'clear' ? bordered : undefined,
+          borderBottom: view === 'clear' && !footer ? bordered : undefined,
+          form: bordered && !footer ? form : undefined,
+        })}
         view={view}
         size={size}
         form={form}
@@ -259,12 +288,19 @@ const FlatSelectRender = (
       />
       {footer && (
         <div
-          className={cnFlatSelect('Footer', [
-            Array.isArray(footer)
-              ? cnMixFlex({ flex: 'flex', justify: 'flex-end', gap: 'xs' })
-              : undefined,
-            cnMixSpace({ pV: 'xs', pH: 's' }),
-          ])}
+          className={cnFlatSelect(
+            'Footer',
+            {
+              border: view === 'clear' ? bordered : undefined,
+              form: bordered ? form : undefined,
+            },
+            [
+              Array.isArray(footer)
+                ? cnMixFlex({ flex: 'flex', justify: 'flex-end', gap: 'xs' })
+                : undefined,
+              cnMixSpace({ pV: 'xs', pH: 's' }),
+            ],
+          )}
         >
           {renderSlot(footer)}
         </div>

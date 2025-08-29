@@ -1,13 +1,14 @@
 import { IconComponent } from '@consta/icons/Icon';
 import { IconSearchStroked } from '@consta/icons/IconSearchStroked';
+import { AtomMut } from '@reatom/framework';
+import { useAtom } from '@reatom/npm-react';
+import React, { forwardRef } from 'react';
+
 import {
   FieldClearButton,
   FieldControlLayout,
   FieldControlLayoutProps,
-} from '@consta/uikit/FieldComponents';
-import { AtomMut } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
-import React, { forwardRef } from 'react';
+} from '##/components/FieldComponents';
 
 type FieldButtonProps = Omit<
   FieldControlLayoutProps,

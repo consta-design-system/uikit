@@ -56,10 +56,10 @@ const Variants = () => {
         view={view}
         bordered={bordered}
         form={form}
-        // footer={[
-        //   <Button label="Сбросить" size="xs" view="ghost" />,
-        //   <Button label="Применить" size="xs" />,
-        // ]}
+        footer={[
+          <Button label="Сбросить" size="xs" view="ghost" />,
+          <Button label="Применить" size="xs" />,
+        ]}
         multiple
       />
     </div>
