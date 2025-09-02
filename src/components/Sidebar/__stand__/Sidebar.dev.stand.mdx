@@ -61,22 +61,20 @@ import { Sidebar } from '@consta/uikit/Sidebar';
 <SidebarExample />
 
 ```tsx
-<>
-  <Sidebar isOpen={true}>
-    <Sidebar.Content>
-      <Text as="p" size="l" view="primary" weight="semibold">
-        Заголовок сайдбара
-      </Text>
-      <Text as="p" size="m" view="secondary">
-        // содержимое сайдбара
-      </Text>
-    </Sidebar.Content>
-    <Sidebar.Actions>
-      <Button size="m" view="clear" label="Понятно" width="default" />
-      <Button size="m" view="ghost" label="Закрыть" width="default" />
-    </Sidebar.Actions>
-  </Sidebar>
-</>
+<Sidebar isOpen={true}>
+  <Sidebar.Content>
+    <Text as="p" size="l" view="primary" weight="semibold">
+      Заголовок сайдбара
+    </Text>
+    <Text as="p" size="m" view="secondary">
+      // содержимое сайдбара
+    </Text>
+  </Sidebar.Content>
+  <Sidebar.Actions>
+    <Button size="m" view="clear" label="Понятно" width="default" />
+    <Button size="m" view="ghost" label="Закрыть" width="default" />
+  </Sidebar.Actions>
+</Sidebar>
 ```
 
 </MdxTabs>
@@ -105,18 +103,16 @@ import { Sidebar } from '@consta/uikit/Sidebar';
 <MdxTabs>
 
 ```tsx
-<>
-  <Sidebar isOpen={true} size="2/3">
-    <Sidebar.Content>
-      <Text as="p" size="l" view="primary" weight="semibold">
-        Заголовок сайдбара
-      </Text>
-      <Text as="p" size="m" view="secondary">
-        // содержимое сайдбара
-      </Text>
-    </Sidebar.Content>
-  </Sidebar>
-</>
+<Sidebar isOpen={true} size="2/3">
+  <Sidebar.Content>
+    <Text as="p" size="l" view="primary" weight="semibold">
+      Заголовок сайдбара
+    </Text>
+    <Text as="p" size="m" view="secondary">
+      // содержимое сайдбара
+    </Text>
+  </Sidebar.Content>
+</Sidebar>
 ```
 
 </MdxTabs>
@@ -130,18 +126,16 @@ import { Sidebar } from '@consta/uikit/Sidebar';
 <SidebarExampleNoOverlay />
 
 ```tsx
-<>
-  <Sidebar isOpen={true} hasOverlay={false}>
-    <Sidebar.Content>
-      <Text as="p" size="l" view="primary" weight="semibold">
-        Заголовок сайдбара
-      </Text>
-      <Text as="p" size="m" view="secondary">
-        // содержимое сайдбара
-      </Text>
-    </Sidebar.Content>
-  </Sidebar>
-</>
+<Sidebar isOpen={true} hasOverlay={false}>
+  <Sidebar.Content>
+    <Text as="p" size="l" view="primary" weight="semibold">
+      Заголовок сайдбара
+    </Text>
+    <Text as="p" size="m" view="secondary">
+      // содержимое сайдбара
+    </Text>
+  </Sidebar.Content>
+</Sidebar>
 ```
 
 </MdxTabs>
@@ -151,47 +145,60 @@ import { Sidebar } from '@consta/uikit/Sidebar';
 Пример демонстрирует типичное использование компонента `Sidebar` с управлением состоянием открытия/закрытия и обработкой событий.
 
 ```tsx
-const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-return (
-  <>
-    <Button
-      size="m"
-      view="primary"
-      label="Открыть Sidebar"
-      width="default"
-      onClick={() => setIsSidebarOpen(true)}
-    />
-    <Sidebar
-      isOpen={isSidebarOpen}
-      onClickOutside={() => setIsSidebarOpen(false)}
-      onEsc={() => setIsSidebarOpen(false)}
-    >
-      <Sidebar.Content>
-        <Text as="p" size="l" view="primary" weight="semibold">
-          Заголовок сайдбара
-        </Text>
-        <Text as="p" size="m" view="secondary">
-          // содержимое сайдбара
-        </Text>
-      </Sidebar.Content>
-      <Sidebar.Actions>
-        <Button
-          size="m"
-          view="clear"
-          label="Понятно"
-          width="default"
-          onClick={() => setIsSidebarOpen(false)}
-        />
-        <Button
-          size="m"
-          view="ghost"
-          label="Закрыть"
-          width="default"
-          onClick={() => setIsSidebarOpen(false)}
-        />
-      </Sidebar.Actions>
-    </Sidebar>
-  </>
-);
+export const SidebarExample = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  return (
+    <div className={cnDocsDecorator('Section')}>
+      <Button
+        size="m"
+        view="primary"
+        label="Открыть Sidebar"
+        width="default"
+        onClick={() => setIsSidebarOpen(true)}
+      />
+      <Sidebar
+        className={cnSidebarExample('Sidebar')}
+        isOpen={isSidebarOpen}
+        onClickOutside={() => setIsSidebarOpen(false)}
+        onEsc={() => setIsSidebarOpen(false)}
+      >
+        <Sidebar.Content className={cnSidebarExample('Content')}>
+          <Text
+            as="p"
+            size="l"
+            view="primary"
+            weight="semibold"
+            className={cnSidebarExample('Title')}
+          >
+            Заголовок сайдбара
+          </Text>
+          <Text
+            as="p"
+            size="m"
+            view="secondary"
+            className={cnSidebarExample('Body')}
+          >
+            // содержимое сайдбара
+          </Text>
+        </Sidebar.Content>
+        <Sidebar.Actions className={cnSidebarExample('Actions')}>
+          <Button
+            size="m"
+            view="clear"
+            label="Понятно"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+          <Button
+            size="m"
+            view="ghost"
+            label="Закрыть"
+            width="default"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        </Sidebar.Actions>
+      </Sidebar>
+    </div>
+  );
+};
 ```
