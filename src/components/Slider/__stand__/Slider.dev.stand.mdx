@@ -93,8 +93,13 @@ import { Slider } from '@consta/uikit/Slider';
 <SliderExampleBasic />
 
 ```tsx
-const [value, setValue] = useState<number>(20);
-return <Slider label={`Значение ${value}`} onChange={setValue} value={value} />;
+export const SliderExampleBasic = () => {
+  const [value, setValue] = useState<number>(20);
+
+  return (
+    <Slider label={`Значение ${value}`} onChange={setValue} value={value} />
+  );
+};
 ```
 
 </MdxTabs>
@@ -106,16 +111,18 @@ return <Slider label={`Значение ${value}`} onChange={setValue} value={va
 <SliderExampleRange />
 
 ```tsx
-const [value, setValue] = useState<number[]>([20, 50]);
-return (
-  <Slider
-    step={5}
-    label={`Значение ${value[0]}-${value[1]}`}
-    onChange={setValue}
-    value={value}
-    range
-  />
-);
+export const SliderExampleViewRange = () => {
+  const [value, setValue] = useState<number[]>([20, 50]);
+
+  return (
+    <Slider
+      step={5}
+      label={`Значение ${value[0]}-${value[1]}`}
+      onChange={setValue}
+      value={value}
+    />
+  );
+};
 ```
 
 </MdxTabs>
@@ -137,16 +144,20 @@ return (
 <SliderExampleMinMax />
 
 ```tsx
-const [value, setValue] = useState<number>(50);
-return (
-  <Slider
-    label={`Значение ${value}`}
-    onChange={setValue}
-    value={value}
-    min={20}
-    max={70}
-  />
-);
+export const SliderExampleMinMax = () => {
+  const [value, setValue] = useState<number>(50);
+
+  return (
+    <Slider
+      label={`Значение ${value}`}
+      onChange={setValue}
+      value={value}
+      range={false}
+      min={20}
+      max={70}
+    />
+  );
+};
 ```
 
 </MdxTabs>
@@ -164,16 +175,19 @@ return (
 <SliderExampleStepSingle />
 
 ```tsx
-const [value, setValue] = useState<number>(20);
-return (
-  <Slider
-    view="division"
-    step={10}
-    label={`Значение ${value}`}
-    onChange={setValue}
-    value={value}
-  />
-);
+export const SliderExampleStepSingle = () => {
+  const [value, setValue] = useState<number>(20);
+
+  return (
+    <Slider
+      view="division"
+      step={10}
+      label={`Значение ${value}`}
+      onChange={setValue}
+      value={value}
+    />
+  );
+};
 ```
 
 </MdxTabs>
@@ -187,16 +201,19 @@ return (
 <SliderExampleStepArray />
 
 ```tsx
-const [value, setValue] = useState<number>(20);
-return (
-  <Slider
-    view="division"
-    step={[15, 40, 70]}
-    label={`Значение ${value}`}
-    onChange={setValue}
-    value={value}
-  />
-);
+export const SliderExampleStepArray = () => {
+  const [value, setValue] = useState<number>(20);
+
+  return (
+    <Slider
+      view="division"
+      step={[15, 40, 70]}
+      label={`Значение ${value}`}
+      onChange={setValue}
+      value={value}
+    />
+  );
+};
 ```
 
 </MdxTabs>
@@ -215,15 +232,12 @@ return (
 <SliderExampleViewDefault />
 
 ```tsx
-const [value, setValue] = useState<number>(20);
-return (
-  <Slider
-    view="default"
-    label={`Значение ${value}`}
-    onChange={setValue}
-    value={value}
-  />
-);
+<Slider
+  view="default"
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+/>
 ```
 
 </MdxTabs>
@@ -233,16 +247,13 @@ return (
 <SliderExampleViewDivision />
 
 ```tsx
-const [value, setValue] = useState<number>(20);
-return (
-  <Slider
-    view="division"
-    step={10}
-    label={`Значение ${value}`}
-    onChange={setValue}
-    value={value}
-  />
-);
+<Slider
+  view="division"
+  step={10}
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+/>
 ```
 
 </MdxTabs>
@@ -256,35 +267,30 @@ return (
 <SliderExampleSize />
 
 ```tsx
-const [value, setValue] = useState<number>(20);
-return (
-  <>
-    <Slider
-      label={`Значение ${value}`}
-      onChange={setValue}
-      value={value}
-      size="xs"
-    />
-    <Slider
-      label={`Значение ${value}`}
-      onChange={setValue}
-      value={value}
-      size="s"
-    />
-    <Slider
-      label={`Значение ${value}`}
-      onChange={setValue}
-      value={value}
-      size="m"
-    />
-    <Slider
-      label={`Значение ${value}`}
-      onChange={setValue}
-      value={value}
-      size="l"
-    />
-  </>
-);
+<Slider
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+  size="xs"
+/>
+<Slider
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+  size="s"
+/>
+<Slider
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+  size="m"
+/>
+<Slider
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+  size="l"
+/>
 ```
 
 </MdxTabs>
@@ -298,38 +304,33 @@ return (
 <SliderExampleStatus />
 
 ```tsx
-const [value, setValue] = useState<number>(20);
-return (
-  <>
-    <Slider
-      label={`Значение ${value}`}
-      caption="Статус alert"
-      onChange={setValue}
-      value={value}
-      status="alert"
-    />
-    <Slider
-      label={`Значение ${value}`}
-      caption="Статус warning"
-      onChange={setValue}
-      value={value}
-      status="warning"
-    />
-    <Slider
-      label={`Значение ${value}`}
-      caption="Статус success"
-      onChange={setValue}
-      value={value}
-      status="success"
-    />
-    <Slider
-      label={`Значение ${value}`}
-      caption="Обычный ползунок"
-      onChange={setValue}
-      value={value}
-    />
-  </>
-);
+<Slider
+  label={`Значение ${value}`}
+  caption="Статус alert"
+  onChange={setValue}
+  value={value}
+  status="alert"
+/>
+<Slider
+  label={`Значение ${value}`}
+  caption="Статус warning"
+  onChange={setValue}
+  value={value}
+  status="warning"
+/>
+<Slider
+  label={`Значение ${value}`}
+  caption="Статус success"
+  onChange={setValue}
+  value={value}
+  status="success"
+/>
+<Slider
+  label={`Значение ${value}`}
+  caption="Обычный ползунок"
+  onChange={setValue}
+  value={value}
+/>
 ```
 
 </MdxTabs>
@@ -345,19 +346,16 @@ return (
 <SliderExampleLabel />
 
 ```tsx
-const [value, setValue] = useState<number[]>([20, 50]);
-return (
-  <Slider
-    step={5}
-    range
-    label="Пример"
-    caption="Выберите значения"
-    status="success"
-    withTooltip
-    onChange={setValue}
-    value={value}
-  />
-);
+<Slider
+  step={5}
+  range
+  label="Пример"
+  caption="Выберите значения"
+  status="success"
+  withTooltip
+  onChange={setValue}
+  value={value}
+/>
 ```
 
 </MdxTabs>
@@ -367,17 +365,14 @@ return (
 <SliderExampleLabelIcon />
 
 ```tsx
-const [value, setValue] = useState<number[]>([20, 50]);
-return (
-  <Slider
-    step={5}
-    range
-    label="Пример"
-    labelIcon={IconQuestion}
-    onChange={setValue}
-    value={value}
-  />
-);
+<Slider
+  step={5}
+  range
+  label="Пример"
+  labelIcon={IconQuestion}
+  onChange={setValue}
+  value={value}
+/>
 ```
 
 </MdxTabs>
@@ -391,17 +386,14 @@ return (
 <SliderExampleTooltip />
 
 ```tsx
-const [value, setValue] = useState<number[]>([20, 50]);
-return (
-  <Slider
-    step={5}
-    range
-    label={`Значение ${value[0]}-${value[1]}`}
-    onChange={setValue}
-    value={value}
-    withTooltip
-  />
-);
+<Slider
+  step={5}
+  range
+  label={`Значение ${value[0]}-${value[1]}`}
+  onChange={setValue}
+  value={value}
+  withTooltip
+/>
 ```
 
 </MdxTabs>
@@ -411,18 +403,15 @@ return (
 <SliderExampleTooltipFormatter />
 
 ```tsx
-const [value, setValue] = useState<[number, number]>([20, 50]);
-return (
-  <Slider
-    step={5}
-    range
-    label={`Значение ${value[0]}-${value[1]}`}
-    tooltipFormatter={(value) => `${value}%`}
-    onChange={setValue}
-    value={value}
-    withTooltip
-  />
-);
+<Slider
+  step={5}
+  range
+  label={`Значение ${value[0]}-${value[1]}`}
+  tooltipFormatter={(value) => `${value}%`}
+  onChange={setValue}
+  value={value}
+  withTooltip
+/>
 ```
 
 </MdxTabs>
@@ -440,15 +429,12 @@ return (
 <SliderExampleDisabled />
 
 ```tsx
-const [value, setValue] = useState<number>(20);
-return (
-  <Slider
-    disabled
-    label={`Значение ${value}`}
-    onChange={setValue}
-    value={value}
-  />
-);
+<Slider
+  disabled
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+/>
 ```
 
 </MdxTabs>
@@ -462,19 +448,16 @@ return (
 <SliderExampleContent />
 
 ```tsx
-const [value, setValue] = useState<number>(20);
-return (
-  <Slider
-    value={value}
-    label={`Значение ${value}`}
-    withTooltip
-    step={5}
-    view="division"
-    leftSide="input"
-    rightSide={IconSettings}
-    onChange={setValue}
-  />
-);
+<Slider
+  value={value}
+  label={`Значение ${value}`}
+  withTooltip
+  step={5}
+  view="division"
+  leftSide="input"
+  rightSide={IconSettings}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -486,19 +469,16 @@ return (
 <SliderExampleContentInputLeftAndRight />
 
 ```tsx
-const [value, setValue] = useState<[number, number]>([20, 50]);
-return (
-  <Slider
-    step={5}
-    range
-    label={`Значение ${value[0]}-${value[1]}`}
-    view="division"
-    onChange={setValue}
-    value={value}
-    leftSide="input"
-    rightSide="input"
-  />
-);
+<Slider
+  step={5}
+  range
+  label={`Значение ${value[0]}-${value[1]}`}
+  view="division"
+  onChange={setValue}
+  value={value}
+  leftSide="input"
+  rightSide="input"
+/>
 ```
 
 </MdxTabs>
