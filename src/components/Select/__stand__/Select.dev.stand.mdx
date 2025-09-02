@@ -125,9 +125,6 @@ const items = [
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
-
-const [value, setValue] = useState(null);
-return <Select items={items} value={value} onChange={setValue} />;
 ```
 
 </MdxTabs>
@@ -141,14 +138,21 @@ return <Select items={items} value={value} onChange={setValue} />;
 <SelectExampleItems />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
 
-const [value, setValue] = useState(null);
-return <Select items={items} value={value} onChange={setValue} />;
+function SelectExampleItems() {
+  const [value, setValue] = useState<Item | null>();
+  return <Select items={items} value={value} onChange={setValue} />;
+}
 ```
 
 </MdxTabs>
@@ -162,23 +166,30 @@ return <Select items={items} value={value} onChange={setValue} />;
 <SelectExampleLabel />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    label="Значение"
-    caption={value?.label}
-    placeholder="Выберите значение"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-);
+function SelectExampleLabel() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      label="Значение"
+      caption={value?.label}
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={setValue}
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -202,21 +213,28 @@ return (
 <SelectExamplePlaceholder />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Выберите значение"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-);
+function SelectExamplePlaceholder() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={setValue}
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -230,21 +248,29 @@ return (
 <SelectExampleDisabledItem />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+  disabled: boolean;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1, disabled: true },
   { label: 'Второй', id: 2, disabled: false },
   { label: 'Третий', id: 3, disabled: true },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Выберите значение"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-);
+function SelectExampleDisabledItem() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={setValue}
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -258,13 +284,24 @@ return (
 <SelectExampleGroups />
 
 ```tsx
-const groups = [
+type Item = {
+  label: string;
+  id: number;
+  groupId: number;
+};
+
+type Group = {
+  label: string;
+  id: number;
+};
+
+const groups: Group[] = [
   { id: 1, label: 'Первая группа' },
   { id: 2, label: 'Вторая группа' },
   { id: 3, label: 'Третья группа' },
 ];
 
-const items = [
+const items: Item[] = [
   { label: 'Первый', id: 1, groupId: 1 },
   { label: 'Второй', id: 2, groupId: 2 },
   { label: 'Третий', id: 3, groupId: 1 },
@@ -272,16 +309,18 @@ const items = [
   { label: 'Пятый', id: 5, groupId: 2 },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Выберите значение"
-    items={items}
-    value={value}
-    onChange={setValue}
-    groups={groups}
-  />
-);
+function SelectExampleGroups() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={setValue}
+      groups={groups}
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -297,22 +336,29 @@ return (
 <SelectExampleSize />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Размер xs"
-    size="xs"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-);
+function SelectExampleSize() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Размер xs"
+      size="xs"
+      items={items}
+      value={value}
+      onChange={setValue}
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -326,15 +372,20 @@ return (
 <SelectExampleForm />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <>
+function SelectExampleForm() {
+  const [value, setValue] = useState<Item | null>();
+  return (
     <Select
       placeholder="Форма round"
       form="round"
@@ -349,8 +400,8 @@ return (
       value={value}
       onChange={setValue}
     />
-  </>
-);
+  );
+}
 ```
 
 </MdxTabs>
@@ -370,22 +421,29 @@ return (
 <SelectExampleView />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Выберите значение"
-    view="clear"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-);
+function SelectExampleView() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      view="clear"
+      items={items}
+      value={value}
+      onChange={setValue}
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -399,52 +457,59 @@ return (
 <SelectExampleStatus />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <>
-    <Select
-      placeholder="default"
-      caption="default"
-      size="s"
-      items={items}
-      value={value}
-      onChange={setValue}
-    />
-    <Select
-      placeholder="alert"
-      caption="alert"
-      status="alert"
-      size="s"
-      items={items}
-      value={value}
-      onChange={setValue}
-    />
-    <Select
-      placeholder="warning"
-      caption="warning"
-      status="warning"
-      size="s"
-      items={items}
-      value={value}
-      onChange={setValue}
-    />
-    <Select
-      placeholder="success"
-      caption="success"
-      size="s"
-      status="success"
-      items={items}
-      value={value}
-      onChange={setValue}
-    />
-  </>
-);
+function SelectExampleStatus() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <>
+      <Select
+        placeholder="default"
+        caption="default"
+        size="s"
+        items={items}
+        value={value}
+        onChange={setValue}
+      />
+      <Select
+        placeholder="alert"
+        caption="alert"
+        status="alert"
+        size="s"
+        items={items}
+        value={value}
+        onChange={setValue}
+      />
+      <Select
+        placeholder="warning"
+        caption="warning"
+        status="warning"
+        size="s"
+        items={items}
+        value={value}
+        onChange={setValue}
+      />
+      <Select
+        placeholder="success"
+        caption="success"
+        size="s"
+        status="success"
+        items={items}
+        value={value}
+        onChange={setValue}
+      />
+    </>
+  );
+}
 ```
 
 </MdxTabs>
@@ -460,22 +525,29 @@ return (
 <SelectExampleDisabled />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Выберите значение"
-    items={items}
-    value={value}
-    onChange={setValue}
-    disabled
-  />
-);
+function SelectExampleDisabled() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={setValue}
+      disabled
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -493,7 +565,12 @@ return (
 <SelectExampleDropdownOpen />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number | string;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
@@ -505,40 +582,42 @@ const Icon = withAnimateSwitcherHOC({
   endDirection: 180,
 });
 
-const [value, setValue] = useState(null);
-const [open, setOpen] = useFlag();
-const buttonRef = useRef(null);
-const inputRef = useRef(null);
-const onDropdownOpen = (open) => {
-  setOpen.set(open);
-  if (open) {
-    inputRef.current?.focus();
-  }
-};
+const SelectExampleDropdownOpen = () => {
+  const [value, setValue] = useState<Item | null>();
+  const [open, setOpen] = useFlag();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onDropdownOpen = useCallback((open: boolean) => {
+    setOpen.set(open);
+    if (open) {
+      inputRef.current?.focus();
+    }
+  }, []);
 
-return (
-  <AnimateIconSwitcherProvider active={open}>
-    <FieldGroup>
-      <Button
-        ref={buttonRef}
-        label={open ? 'Закрыть' : 'Открыть'}
-        onClick={setOpen.toggle}
-        iconLeft={Icon}
-        onlyIcon
-      />
-      <Select
-        inputRef={inputRef}
-        placeholder="Выберите вариант"
-        items={items}
-        value={value}
-        onChange={setValue}
-        dropdownOpen={open}
-        onDropdownOpen={onDropdownOpen}
-        ignoreOutsideClicksRefs={[buttonRef]}
-      />
-    </FieldGroup>
-  </AnimateIconSwitcherProvider>
-);
+  return (
+    <AnimateIconSwitcherProvider active={open}>
+      <FieldGroup>
+        <Button
+          ref={buttonRef}
+          label={open ? 'Закрыть' : 'Открыть'}
+          onClick={setOpen.toggle}
+          iconLeft={Icon}
+          onlyIcon
+        />
+        <Select
+          inputRef={inputRef}
+          placeholder="Выберите вариант"
+          items={items}
+          value={value}
+          onChange={setValue}
+          dropdownOpen={open}
+          onDropdownOpen={onDropdownOpen}
+          ignoreClicksInsideRefs={[buttonRef]}
+        />
+      </FieldGroup>
+    </AnimateIconSwitcherProvider>
+  );
+};
 ```
 
 </MdxTabs>
@@ -552,10 +631,18 @@ return (
 <SelectExampleIsLoading />
 
 ```tsx
-const useMockLoadData = (searchValue = '', timeout = 2000) => {
+type Item = {
+  label: string;
+  id: number;
+};
+
+const useMockLoadData = (
+  searchValue = '',
+  timeout = 2000,
+): [Item[], boolean, () => void] => {
   const [isLoading, setIsLoading] = useFlag();
   const [isStart, setIsStart] = useFlag();
-  const [length, setLength] = useState(0);
+  const [length, setLength] = useState<number>(0);
   const isLoadingOffDebounce = useDebounce(setIsLoading.off, 2000);
 
   const items = useMemo(() => {
@@ -588,6 +675,7 @@ const useMockLoadData = (searchValue = '', timeout = 2000) => {
     if (isStart) {
       setIsLoading.on();
     }
+
     const timeoutNumber = setTimeout(() => {
       if (isStart) {
         setLength((state) => state + 100);
@@ -595,7 +683,10 @@ const useMockLoadData = (searchValue = '', timeout = 2000) => {
         setIsStart.off();
       }
     }, timeout);
-    return () => clearTimeout(timeoutNumber);
+
+    return () => {
+      clearTimeout(timeoutNumber);
+    };
   }, [isStart]);
 
   useEffect(() => {
@@ -608,22 +699,26 @@ const useMockLoadData = (searchValue = '', timeout = 2000) => {
   return [searchValue && isLoading ? [] : items, isLoading, setIsStart.on];
 };
 
-const [value, setValue] = useState(null);
-const [data, isLoading, load] = useMockLoadData();
-const onDropdownOpen = (open) => open && load();
+const SelectExampleIsLoading = () => {
+  const [value, setValue] = useState<Item | null>();
+  const [data, isLoading, load] = useMockLoadData();
+  const onDropdownOpen = useCallback((open: boolean) => {
+    open && load();
+  }, []);
 
-return (
-  <Select
-    placeholder="Кликните по полю ввода, чтобы данные загрузились"
-    items={data}
-    value={value}
-    onChange={setValue}
-    onDropdownOpen={onDropdownOpen}
-    isLoading={isLoading}
-    virtualScroll
-    onScrollToBottom={load}
-  />
-);
+  return (
+    <Select
+      placeholder="Кликните по полю ввода, чтобы данные загрузились"
+      items={data}
+      value={value}
+      onChange={setValue}
+      onDropdownOpen={onDropdownOpen}
+      isLoading={isLoading}
+      virtualScroll
+      onScrollToBottom={load}
+    />
+  );
+};
 ```
 
 </MdxTabs>
@@ -637,28 +732,43 @@ return (
 <SelectExampleVirtualScroll />
 
 ```tsx
-const items = new Array(100000).fill(null).map((_, i) => ({
+type Item = {
+  label: string;
+  id: number;
+  groupId: number;
+};
+
+type Group = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = new Array(100000).fill(null).map((_, i) => ({
   label: `Опция ${i + 1}`,
   groupId: Math.floor(i / 100) + 1,
   id: i,
 }));
 
-const groups = new Array(items.length / 100).fill(null).map((_, i) => ({
-  id: i + 1,
-  label: `Группа ${i + 1}`,
-}));
+const groups: Group[] = new Array(items.length / 100)
+  .fill(null)
+  .map((_, i) => ({
+    id: i + 1,
+    label: `Группа ${i + 1}`,
+  }));
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Чтобы посмотреть весь список, прокрутите вниз"
-    items={items}
-    value={value}
-    onChange={setValue}
-    groups={groups}
-    virtualScroll
-  />
-);
+const SelectExampleVirtualScroll = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Чтобы посмотреть весь список, прокрутите вниз"
+      items={items}
+      value={value}
+      onChange={setValue}
+      groups={groups}
+      virtualScroll
+    />
+  );
+};
 ```
 
 </MdxTabs>
@@ -680,32 +790,41 @@ return (
 <SelectExampleRenderItem />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Выберите значение"
-    items={items}
-    value={value}
-    onChange={setValue}
-    renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
-      <div
-        className={cnSelectExampleRenderItem('Item', { active, hovered })}
-        aria-selected={active}
-        onMouseEnter={onMouseEnter}
-        onClick={onClick}
-        ref={ref}
-      >
-        {item.label}
-      </div>
-    )}
-  />
-);
+const cnSelectExampleRenderItem = cn('SelectExampleRenderItem');
+
+function SelectExampleRenderItem() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={setValue}
+      renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
+        <div
+          className={cnSelectExampleRenderItem('Item', { active, hovered })}
+          aria-selected={active}
+          onMouseEnter={onMouseEnter}
+          onClick={onClick}
+          ref={ref}
+        >
+          {item.label}
+        </div>
+      )}
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -719,29 +838,36 @@ return (
 <SelectExampleRenderValue />
 
 ```tsx
-const items = [
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
   { label: 'Первый', id: 1 },
   { label: 'Второй', id: 2 },
   { label: 'Третий', id: 3 },
 ];
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Выберите значение"
-    items={items}
-    value={value}
-    onChange={setValue}
-    renderValue={({ item }) => (
-      <div>
-        <span role="img" aria-label="Panda">
-          🐼
-        </span>{' '}
-        — {item.name}
-      </div>
-    )}
-  />
-);
+function SelectExampleRenderValue() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      value={value}
+      onChange={setValue}
+      renderValue={({ item }) => (
+        <div>
+          <span role="img" aria-label="Panda">
+            🐼
+          </span>{' '}
+          — {item.name}
+        </div>
+      )}
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -761,17 +887,19 @@ return (
 <SelectExampleCustomTypes />
 
 ```tsx
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Выберите значение"
-    items={['Первый', 'Второй', 'Третий']}
-    value={value}
-    onChange={setValue}
-    getItemKey={(item) => item}
-    getItemLabel={(item) => item}
-  />
-);
+function SelectExampleCustomTypes() {
+  const [value, setValue] = useState<string | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={['Первый', 'Второй', 'Третий']}
+      value={value}
+      onChange={setValue}
+      getItemKey={(item) => item}
+      getItemLabel={(item) => item}
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -781,7 +909,12 @@ return (
 <SelectExampleCustomTypesWithGroups />
 
 ```tsx
-const items = [
+type Item = {
+  name: string;
+  group: string;
+};
+
+const items: Item[] = [
   { name: 'Первый', group: 'Первая группа' },
   { name: 'Второй', group: 'Третья группа' },
   { name: 'Третий', group: 'Вторая группа' },
@@ -794,23 +927,25 @@ const items = [
   { name: 'Десятый', group: 'Вторая группа' },
 ];
 
-const groups = ['Первая группа', 'Вторая группа', 'Третья группа'];
+const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
 
-const [value, setValue] = useState(null);
-return (
-  <Select
-    placeholder="Выберите значение"
-    items={items}
-    groups={groups}
-    value={value}
-    onChange={setValue}
-    getItemKey={(item) => item.name}
-    getItemLabel={(item) => item.name}
-    getItemGroupKey={(item) => item.group}
-    getGroupKey={(group) => group}
-    getGroupLabel={(group) => group}
-  />
-);
+function SelectExampleCustomTypesWithGroups() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Select
+      placeholder="Выберите значение"
+      items={items}
+      groups={groups}
+      value={value}
+      onChange={setValue}
+      getItemKey={(item) => item.name}
+      getItemLabel={(item) => item.name}
+      getItemGroupKey={(item) => item.group}
+      getGroupKey={(group) => group}
+      getGroupLabel={(group) => group}
+    />
+  );
+}
 ```
 
 </MdxTabs>
