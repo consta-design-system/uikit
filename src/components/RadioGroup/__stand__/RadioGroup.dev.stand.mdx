@@ -77,6 +77,11 @@ const items = [{ name: 'Один' }, { name: 'Два' }, { name: 'Три' }];
 <RadioGroupExampleDisabledItem />
 
 ```tsx
+type Item = {
+  name: string;
+  disabled?: boolean;
+};
+
 const items = [
   { name: 'Один' },
   { name: 'Два' },
@@ -84,17 +89,20 @@ const items = [
   { name: 'Четыре' },
   { name: 'Пять', disabled: true },
 ];
-const [value, setValue] = React.useState(items[0]);
 
-return (
-  <RadioGroup
-    value={value}
-    items={items}
-    getItemLabel={(item) => item.name}
-    getItemDisabled={(item) => item.disabled}
-    onChange={({ value }) => setValue(value)}
-  />
-);
+function RadioGroupExampleDisabledItem() {
+  const [value, setValue] = React.useState<Item | null>(items[0]);
+
+  return (
+    <RadioGroup
+      value={value}
+      items={items}
+      getItemLabel={(item) => item.name}
+      getItemDisabled={(item) => item.disabled}
+      onChange={({ value }) => setValue(value)}
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -108,18 +116,21 @@ return (
 <RadioGroupExampleDisabled />
 
 ```tsx
-const simpleItems = ['Один', 'Два', 'Три', 'Четыре', 'Пять'];
-const [value, setValue] = React.useState(simpleItems[0]);
+const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
 
-return (
-  <RadioGroup
-    value={value}
-    items={simpleItems}
-    getItemLabel={(item) => item}
-    onChange={({ value }) => setValue(value)}
-    disabled
-  />
-);
+function RadioGroupExampleDisabled() {
+  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
+
+  return (
+    <RadioGroup
+      value={value}
+      items={simpleItems}
+      getItemLabel={(item) => item}
+      onChange={({ value }) => setValue(value)}
+      disabled
+    />
+  );
+}
 ```
 
 </MdxTabs>
@@ -135,41 +146,44 @@ return (
 <RadioGroupExampleSize />
 
 ```tsx
-const simpleItems = ['Один', 'Два', 'Три', 'Четыре', 'Пять'];
-const [value, setValue] = React.useState(simpleItems[0]);
+const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
 
-return (
-  <>
-    <RadioGroup
-      value={value}
-      items={simpleItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      size="l"
-    />
-    <RadioGroup
-      value={value}
-      items={simpleItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      size="m"
-    />
-    <RadioGroup
-      value={value}
-      items={simpleItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      size="s"
-    />
-    <RadioGroup
-      value={value}
-      items={simpleItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      size="xs"
-    />
-  </>
-);
+function RadioGroupExampleSize() {
+  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
+
+  return (
+    <Example>
+      <RadioGroup
+        value={value}
+        items={simpleItems}
+        getItemLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        size="l"
+      />
+      <RadioGroup
+        value={value}
+        items={simpleItems}
+        getItemLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        size="m"
+      />
+      <RadioGroup
+        value={value}
+        items={simpleItems}
+        getItemLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        size="s"
+      />
+      <RadioGroup
+        value={value}
+        items={simpleItems}
+        getItemLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        size="xs"
+      />
+    </Example>
+  );
+}
 ```
 
 </MdxTabs>
@@ -183,29 +197,32 @@ return (
 <RadioGroupExampleView />
 
 ```tsx
-const simpleItems = ['Один', 'Два', 'Три', 'Четыре', 'Пять'];
-const [value, setValue] = React.useState(simpleItems[0]);
+const simpleItems = ['один', 'два', 'три', 'четыре', 'пять'];
 
-return (
-  <>
-    <RadioGroup
-      value={value}
-      items={simpleItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      direction="row"
-      view="primary"
-    />
-    <RadioGroup
-      value={value}
-      items={simpleItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      direction="row"
-      view="ghost"
-    />
-  </>
-);
+function RadioGroupExampleView() {
+  const [value, setValue] = React.useState<string | null>(simpleItems[0]);
+
+  return (
+    <Example>
+      <RadioGroup
+        value={value}
+        items={simpleItems}
+        getItemLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        direction="row"
+        view="primary"
+      />
+      <RadioGroup
+        value={value}
+        items={simpleItems}
+        getItemLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        direction="row"
+        view="ghost"
+      />
+    </Example>
+  );
+}
 ```
 
 </MdxTabs>
@@ -219,33 +236,36 @@ return (
 <RadioGroupExampleAlign />
 
 ```tsx
-const alignItems = [
+export const alignItems = [
   'Это текст',
   'Это длинный текст',
   'Это очень длинный текст',
   'Это очень-очень длинный текст, которому хочется быть ещё длиннее',
   'Этот текст гораздо длиннее всех предыдущих текстов, что само по себе уже даже странно, хотя на свете бывает много гораздо более странных вещей',
 ];
-const [value, setValue] = React.useState(alignItems[0]);
 
-return (
-  <>
-    <RadioGroup
-      value={value}
-      items={alignItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      align="top"
-    />
-    <RadioGroup
-      value={value}
-      items={alignItems}
-      getItemLabel={(item) => item}
-      onChange={({ value }) => setValue(value)}
-      align="center"
-    />
-  </>
-);
+export function RadioGroupExampleAlign() {
+  const [value, setValue] = React.useState<string | null>(alignItems[0]);
+
+  return (
+    <>
+      <RadioGroup
+        value={value}
+        items={alignItems}
+        getItemLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        align="top"
+      />
+      <RadioGroup
+        value={value}
+        items={alignItems}
+        getItemLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        align="center"
+      />
+    </>
+  );
+}
 ```
 
 </MdxTabs>
@@ -280,18 +300,36 @@ return (
 <RadioGroupExampleColumn />
 
 ```tsx
-const simpleItems = ['Один', 'Два', 'Три', 'Четыре', 'Пять'];
-const [value, setValue] = React.useState(simpleItems[0]);
+export const alignItems = [
+  'Это текст',
+  'Это длинный текст',
+  'Это очень длинный текст',
+  'Это очень-очень длинный текст, которому хочется быть ещё длиннее',
+  'Этот текст гораздо длиннее всех предыдущих текстов, что само по себе уже даже странно, хотя на свете бывает много гораздо более странных вещей',
+];
 
-return (
-  <RadioGroup
-    value={value}
-    items={simpleItems}
-    getItemLabel={(item) => item}
-    onChange={({ value }) => setValue(value)}
-    direction="column"
-  />
-);
+export function RadioGroupExampleAlign() {
+  const [value, setValue] = React.useState<string | null>(alignItems[0]);
+
+  return (
+    <>
+      <RadioGroup
+        value={value}
+        items={alignItems}
+        getItemLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        align="top"
+      />
+      <RadioGroup
+        value={value}
+        items={alignItems}
+        getItemLabel={(item) => item}
+        onChange={({ value }) => setValue(value)}
+        align="center"
+      />
+    </>
+  );
+}
 ```
 
 </MdxTabs>
