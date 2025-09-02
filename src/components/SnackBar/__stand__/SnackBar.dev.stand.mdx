@@ -73,14 +73,16 @@ import { SnackBar } from '@consta/uikit/SnackBar';
 <SnackBarExampleText />
 
 ```tsx
-const items = [
+const items: Item[] = [
   {
     key: 1,
-    text: 'Это просто сообщение',
+    message: 'Это просто сообщение',
   },
 ];
 
-return <SnackBar items={items} getItemMessage={(item) => item.text} />;
+export const SnackBarExampleText: React.FC = () => {
+  return <SnackBar items={items} getItemMessage={(item) => item.text} />;
+};
 ```
 
 </MdxTabs>
@@ -94,6 +96,8 @@ return <SnackBar items={items} getItemMessage={(item) => item.text} />;
 <SnackBarExampleStatus />
 
 ```tsx
+import { SnackBar } from '@consta/uikit/SnackBar';
+
 type Item = {
   key: string;
   message?: string;
@@ -128,7 +132,9 @@ const getStatus = (item: Item) => {
   return 'normal';
 };
 
-return <SnackBar items={items} getItemStatus={getStatus} />;
+export const SnackBarExampleStatus: React.FC = () => {
+  return <SnackBar items={items} getItemStatus={getStatus} />;
+};
 ```
 
 </MdxTabs>
@@ -142,6 +148,7 @@ return <SnackBar items={items} getItemStatus={getStatus} />;
 <SnackBarExampleIcon />
 
 ```tsx
+import { SnackBar } from '@consta/uikit/SnackBar';
 import { IconMoon } from '@consta/uikit/icons/IconMoon';
 import { IconDisconnection } from '@consta/uikit/icons/IconDisconnection';
 
@@ -171,7 +178,9 @@ const getIcon = (item: Item) => {
   return IconDisconnection;
 };
 
-return <SnackBar items={items} getItemIcon={getIcon} />;
+export const SnackBarExampleIcon = () => {
+  return <SnackBar items={items} getItemIcon={getIcon} />;
+};
 ```
 
 </MdxTabs>
@@ -210,9 +219,14 @@ const getActions = (buttons?: string[]) => {
   }
 };
 
-return (
-  <SnackBar items={items} getItemActions={(item) => getActions(item.buttons)} />
-);
+export const SnackBarExampleButtons: React.FC = () => {
+  return (
+    <SnackBar
+      items={items}
+      getItemActions={(item) => getActions(item.buttons)}
+    />
+  );
+};
 ```
 
 </MdxTabs>
@@ -228,27 +242,9 @@ return (
 <SnackBarExampleForm />
 
 ```tsx
-type Item = {
-  key: string;
-  message: string;
-  buttons?: string[];
-};
-
-const items: Item[] = [
-  {
-    key: '1',
-    message: 'С этим сообщением нельзя не согласиться',
-    buttons: ['Согласен', 'Не согласен'],
-  },
-];
-
-return (
-  <>
-    <SnackBar items={items} form="default" />
-    <SnackBar items={items} form="round" />
-    <SnackBar items={items} form="brick" />
-  </>
-);
+<SnackBar items={items} form="default" />
+<SnackBar items={items} form="round" />
+<SnackBar items={items} form="brick" />
 ```
 
 </MdxTabs>
@@ -302,66 +298,73 @@ function reducer(
 const getItemIcon = (item: Item) => mapIconByStatus[item.status];
 const getItemShowProgress = (item: Item) => item.progressMode;
 
-const [items, dispatchItems] = useReducer(reducer, []);
+export const SnackBarExampleTimer: React.FC = () => {
+  const [items, dispatchItems] = useReducer<
+    React.Reducer<
+      Item[],
+      { type: 'add' | 'remove'; item: Item; key?: number | string }
+    >
+  >(reducer, []);
 
-const generateHandleAdd =
-  (status: SnackBarItemStatus, progressMode?: SnackBarItemShowProgressProp) =>
-  () => {
-    const key = items.length + 1;
-    const item: Item = {
-      key,
-      message: `Сейчас эта штука закроется ${key}`,
-      status,
-      progressMode,
+  const generateHandleAdd =
+    (status: SnackBarItemStatus, progressMode?: SnackBarItemShowProgressProp) =>
+    () => {
+      const key = items.length + 1;
+      const item: Item = {
+        key,
+        message: `Сейчас эта штука закроется ${key}`,
+        status,
+        progressMode,
+      };
+      dispatchItems({ type: 'add', item });
     };
-    dispatchItems({ type: 'add', item });
-  };
 
-const handleAlertAdd = generateHandleAdd('alert', 'timer');
-const handleNormalAdd = generateHandleAdd('normal', 'timer');
-const handleLineNormalAdd = generateHandleAdd('normal', 'line');
-const handleHiddenTimerAdd = generateHandleAdd('normal');
+  const handleAlertAdd = generateHandleAdd('alert', 'timer');
+  const handleNormalAdd = generateHandleAdd('normal', 'timer');
+  const handleLineNormalAdd = generateHandleAdd('normal', 'line');
+  const handleHiddenTimerAdd = generateHandleAdd('normal');
 
-React.useEffect(() => handleNormalAdd(), []);
+  React.useEffect(() => handleNormalAdd(), []);
 
-return (
-  <div>
+  return (
     <div>
-      <Button
-        className={cnSnackBarExampleTimer('ButtonAdd')}
-        iconLeft={IconAdd}
-        label="Без таймера + иконка"
-        onClick={handleHiddenTimerAdd}
-      />
-      <Button
-        className={cnSnackBarExampleTimer('ButtonAdd')}
-        iconLeft={IconAdd}
-        label="Обычный таймер"
-        onClick={handleNormalAdd}
-      />
-      <Button
-        className={cnSnackBarExampleTimer('ButtonAdd')}
-        iconLeft={IconAdd}
-        label="Обычный таймер c линией"
-        onClick={handleLineNormalAdd}
-      />
-      <Button
-        className={cnSnackBarExampleTimer('ButtonAdd')}
-        iconLeft={IconAdd}
-        label="Тревожный таймер"
-        onClick={handleAlertAdd}
+      <div>
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Без таймера + иконка"
+          onClick={handleHiddenTimerAdd}
+        />
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Обычный таймер"
+          onClick={handleNormalAdd}
+        />
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Обычный таймер c линией"
+          onClick={handleLineNormalAdd}
+        />
+        <Button
+          className={cnSnackBarExampleTimer('ButtonAdd')}
+          iconLeft={IconAdd}
+          label="Тревожный таймер"
+          onClick={handleAlertAdd}
+        />
+      </div>
+      <SnackBar
+        className={cnSnackBarExampleTimer('SnackBar')}
+        items={items}
+        onItemClose={(item) => dispatchItems({ type: 'remove', item })}
+        getItemShowProgress={getItemShowProgress}
+        getItemIcon={getItemIcon}
+        getItemAutoClose={() => 5}
       />
     </div>
-    <SnackBar
-      className={cnSnackBarExampleTimer('SnackBar')}
-      items={items}
-      onItemClose={(item) => dispatchItems({ type: 'remove', item })}
-      getItemShowProgress={getItemShowProgress}
-      getItemIcon={getItemIcon}
-      getItemAutoClose={() => 5}
-    />
-  </div>
-);
+  );
+};
 ```
 
 </MdxTabs>
@@ -390,7 +393,13 @@ const items = [
   },
 ];
 
-return <SnackBar items={items} progressView="spinText" />;
+export const SnackBarExampleProgress = () => {
+  return (
+    <Example col={1}>
+      <SnackBar items={items} progressView="spinText" />
+    </Example>
+  );
+};
 ```
 
 </MdxTabs>
@@ -415,13 +424,17 @@ const items = [
   },
 ];
 
-return (
-  <SnackBar
-    items={items}
-    getItemProgress={(item) => item.loading}
-    progressView="spin"
-  />
-);
+export const SnackBarExampleGetItemProgress = () => {
+  return (
+    <Example col={1}>
+      <SnackBar
+        items={items}
+        getItemProgress={(item) => item.loading}
+        progressView="spin"
+      />
+    </Example>
+  );
+};
 ```
 
 </MdxTabs>
