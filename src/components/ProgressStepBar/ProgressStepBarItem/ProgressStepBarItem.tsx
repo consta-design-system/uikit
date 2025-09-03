@@ -20,7 +20,7 @@ import {
   progressStepBarPropStatusDefault,
 } from '../helpers';
 
-const cnProgressStepBarItem = cn('ProgressStepBarItem');
+export const cnProgressStepBarItem = cn('ProgressStepBarItem');
 
 const possibleVerticalDirections: Direction[] = [
   'leftCenter',
