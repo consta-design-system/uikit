@@ -98,8 +98,21 @@ function animateDelay() {
     jest.advanceTimersByTime(animationDuration);
   });
 }
+function getClearButton() {
+  return getRender().querySelector(
+    `.${cnSelect('ClearIndicator')}`,
+  ) as HTMLElement;
+}
 
 describe('Компонент Combobox', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
   it('должен рендериться без ошибок', () => {
     expect(() => renderComponent(defaultProps)).not.toThrow();
   });
@@ -112,7 +125,6 @@ describe('Компонент Combobox', () => {
   });
 
   it('рендериться с установленным значением при multiple = false', () => {
-    jest.useFakeTimers();
     const index = 0;
     const value = items[index];
     act(() => {
@@ -131,7 +143,6 @@ describe('Компонент Combobox', () => {
   });
 
   it('рендериться с установленным значением при multiple = true', () => {
-    jest.useFakeTimers();
     const indexes = [0, 1, 5];
     const value = indexes.map((index) => items[index]);
 
@@ -163,7 +174,6 @@ describe('Компонент Combobox', () => {
   });
 
   it('открывается и закрывается по клику', () => {
-    jest.useFakeTimers();
     act(() => {
       renderComponent(defaultProps);
     });
@@ -182,7 +192,6 @@ describe('Компонент Combobox', () => {
   });
 
   it('открывается и закрывается по клику за пределами селекта', () => {
-    jest.useFakeTimers();
     act(() => {
       renderComponent(defaultProps);
     });
@@ -199,7 +208,6 @@ describe('Компонент Combobox', () => {
   });
 
   it('открывается и закрывается по клику на индикатор', () => {
-    jest.useFakeTimers();
     act(() => {
       renderComponent(defaultProps);
     });
@@ -216,7 +224,6 @@ describe('Компонент Combobox', () => {
   });
 
   it('отрисовываются опции', () => {
-    jest.useFakeTimers();
     act(() => {
       renderComponent(defaultProps);
     });
@@ -227,7 +234,6 @@ describe('Компонент Combobox', () => {
   });
 
   it('отрисовываются группы', () => {
-    jest.useFakeTimers();
     act(() => {
       renderComponent({ ...defaultProps, groups });
     });
@@ -238,7 +244,6 @@ describe('Компонент Combobox', () => {
   });
 
   it('проверка onChange при multiple = false', () => {
-    jest.useFakeTimers();
     const handleChange = jest.fn();
     const elementIndex = 1;
     act(() => {
@@ -258,7 +263,6 @@ describe('Компонент Combobox', () => {
   });
 
   it('проверка onChange при multiple = true', () => {
-    jest.useFakeTimers();
     const handleChange = jest.fn();
     const elementIndex = 1;
     act(() => {
@@ -285,11 +289,11 @@ describe('Компонент Combobox', () => {
     const handlerFocus = jest.fn();
     renderComponent({ ...defaultProps, onFocus: handlerFocus });
 
-    expect(handlerFocus).toBeCalledTimes(0);
+    expect(handlerFocus).toHaveBeenCalledTimes(0);
 
     getInput().focus();
 
-    expect(handlerFocus).toBeCalledTimes(1);
+    expect(handlerFocus).toHaveBeenCalledTimes(1);
   });
 
   it('вызывается onBlur', () => {
@@ -298,11 +302,11 @@ describe('Компонент Combobox', () => {
 
     getInput().focus();
 
-    expect(handlerBlur).toBeCalledTimes(0);
+    expect(handlerBlur).toHaveBeenCalledTimes(0);
 
     getInput().blur();
 
-    expect(handlerBlur).toBeCalledTimes(1);
+    expect(handlerBlur).toHaveBeenCalledTimes(1);
   });
 
   it('renderValue отрабатывает верно', () => {
@@ -319,7 +323,6 @@ describe('Компонент Combobox', () => {
   });
 
   it('renderItem отрабатывает верно', () => {
-    jest.useFakeTimers();
     act(() => {
       renderComponent({
         ...defaultProps,
@@ -341,5 +344,96 @@ describe('Компонент Combobox', () => {
     animateDelay();
 
     expect(getRenderItems().length).toEqual(items.length);
+  });
+
+  it('отображает "Все" в инпут, когда все элементы выбраны', () => {
+    const allSelectedAllLabel = 'Выбраны все элементы';
+    renderComponent({
+      ...defaultProps,
+      multiple: true,
+      selectAll: true,
+      value: items,
+      allSelectedAllLabel,
+    });
+
+    const selectAllText = getRender().querySelector(
+      `.${cnSelect('SelectAll')}`,
+    );
+    expect(selectAllText).toBeInTheDocument();
+    expect(selectAllText).toHaveTextContent(allSelectedAllLabel);
+  });
+
+  describe('проверка кнопки очистки', () => {
+    it('при клике вызывает onChange с null', () => {
+      const handleChange = jest.fn();
+
+      renderComponent({
+        ...defaultProps,
+        value: items[0],
+        onChange: handleChange,
+      });
+
+      const clearButton = getClearButton();
+      fireEvent.click(clearButton);
+
+      expect(handleChange).toHaveBeenCalledWith(null, {
+        e: expect.any(Object),
+      });
+    });
+
+    it('не отображается, если значение не выбрано', () => {
+      renderComponent(defaultProps);
+      expect(getClearButton()).not.toBeInTheDocument();
+    });
+
+    it('отображается, если значение выбрано', () => {
+      renderComponent({ ...defaultProps, value: items[0] });
+      expect(getClearButton()).toBeInTheDocument();
+    });
+
+    it('не отображается, если значение не выбрано в multiple', () => {
+      renderComponent({ ...defaultProps, multiple: true, value: [] });
+      expect(getClearButton()).not.toBeInTheDocument();
+    });
+
+    it('отображается, если значение выбрано в multiple', () => {
+      renderComponent({ ...defaultProps, multiple: true, value: [items[0]] });
+      expect(getClearButton()).toBeInTheDocument();
+    });
+
+    it('отображение кнопки по клику на selectAll', () => {
+      const Component = () => {
+        const [value, setValue] = React.useState<ComboboxItemDefault[] | null>(
+          [],
+        );
+        return (
+          <Combobox
+            {...defaultProps}
+            selectAll
+            multiple
+            items={items}
+            value={value}
+            onChange={setValue}
+            data-testid={testId}
+          />
+        );
+      };
+      render(<Component />);
+
+      inputClick();
+      animateDelay();
+
+      // Выбираем "Выбрать все"
+      fireEvent.click(getItem(0));
+      animateDelay();
+
+      expect(getClearButton()).toBeInTheDocument();
+
+      // Убираем "Выбрать все"
+      fireEvent.click(getItem(0));
+      animateDelay();
+
+      expect(getClearButton()).not.toBeInTheDocument();
+    });
   });
 });
