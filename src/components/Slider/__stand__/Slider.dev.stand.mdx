@@ -1,4 +1,4 @@
-import { MdxMenu, MdxInformer } from '@consta/stand';
+import { MdxMenu, MdxInformer, MdxTabs } from '@consta/stand';
 import { SliderExampleBasic } from './examples/SliderExampleBasic/SliderExampleBasic';
 import {
   SliderExampleViewDefault,
@@ -24,35 +24,73 @@ import { SliderExampleSize } from './examples/SliderExampleSize/SliderExampleSiz
 import { SliderExampleStatus } from './examples/SliderExampleStatus/SliderExampleStatus';
 import { SliderExampleMinMax } from './examples/SliderExampleMinMax/SliderExampleMinMax';
 
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Одно значение или диапазон](#одно-значение-или-диапазон)
+  - [Минимальное и максимальное значения](#минимальное-и-максимальное-значения)
+  - [Ограничение значений](#ограничение-значений)
+- [Внешний вид](#внешний-вид)
+  - [Тип линии](#тип-линии)
+  - [Размер](#размер)
+  - [Статус](#статус)
+- [Тексты](#тексты)
+  - [Лейбл и подпись](#лейбл-и-подпись)
+  - [Тултип](#тултип)
+- [Поведение](#поведение)
+  - [Неактивный ползунок](#неактивный-ползунок)
+  - [Иконка и поле ввода](#иконка-и-поле-ввода)
+
+</MdxMenu>
+
+## Обзор
+
+Компонент `Slider` позволяет пользователю выбирать значение или диапазон значений, перемещая ползунок по шкале. Используется для настройки числовых параметров, таких как громкость, яркость или фильтры данных. Поддерживает настройку шага, минимального и максимального значений, а также отображение тултипов, лейблов и дополнительных элементов.
+
+## Импорт
+
 ```tsx
 import { Slider } from '@consta/uikit/Slider';
 ```
 
-<MdxMenu>
+## Свойства
 
-- [Значения на ползунке](#значения-на-ползунке)
-  - [Одно значение или диапазон](#одно-значение-или-диапазон)
-  - [Минимальное и максимальное значения](#минимальное-и-максимальное-значения)
-  - [Ограничение выбора](#ограничение-значений-которые-можно-выбрать)
-- [Тексты](#тексты)
-  - [Тултип с подсказкой](#тултип-с-подсказкой)
-  - [Кастомная подсказка](#кастомная-подсказка)
-  - [Лейбл и подпись](#лейбл-и-подпись)
-- [Иконка и поле ввода](#иконка-и-поле-ввода)
-- [Неактивный ползунок](#неактивный-ползунок)
-- [Статус](#статус)
-- [Внешний вид линии](#внешний-вид-линии)
-- [Размер](#размер)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
+| Свойство                                        | Тип или варианты значения                                                 | По умолчанию | Описание                                        |
+| ----------------------------------------------- | ------------------------------------------------------------------------- | ------------ | ----------------------------------------------- |
+| [`value?`](#одно-значение-или-диапазон)         | `SliderValue<RANGE>`                                                      | -            | Значение или массив значений                    |
+| [`range?`](#одно-значение-или-диапазон)         | `boolean`                                                                 | -            | Выбор диапазона                                 |
+| [`min?`](#минимальное-и-максимальное-значения)  | `number`                                                                  | `0`          | Минимальное значение                            |
+| [`max?`](#минимальное-и-максимальное-значения)  | `number`                                                                  | `100`        | Максимальное значение                           |
+| [`step?`](#ограничение-значений)                | `number` \| `number[]`                                                    | `1`          | Шаг для перемещения ползунка или набор значений |
+| [`view?`](#тип-линии)                           | `'default'` \| `'division'`                                               | `'default'`  | Внешний вид линии                               |
+| [`size?`](#размер)                              | `'xs'` \| `'s'` \| `'m'` \| `'l'`                                         | `'m'`        | Размер компонента                               |
+| [`status?`](#статус)                            | `''` \| `'alert'` \| `'success'` \| `'warning'`                           | -            | Статус поля                                     |
+| [`label?`](#лейбл-и-подпись)                    | `string`                                                                  | -            | Лейбл                                           |
+| [`labelIcon?`](#лейбл-и-подпись)                | `IconComponent`                                                           | -            | Иконка слева от лейбла                          |
+| [`caption?`](#лейбл-и-подпись)                  | `string`                                                                  | -            | Подпись                                         |
+| [`withTooltip?`](#тултип)                       | `boolean`                                                                 | -            | Показывать тултип                               |
+| [`tooltipFormatter?`](#тултип)                  | `SliderPropTooltipFormatter`                                              | -            | Форматирование текста в тултипе                 |
+| [`leftSide?`](#иконка-и-поле-ввода)             | `'input'` \| `IconComponent`                                              | -            | Элемент слева от компонента                     |
+| [`rightSide?`](#иконка-и-поле-ввода)            | `'input'` \| `IconComponent`                                              | -            | Элемент справа от компонента                    |
+| [`disabled?`](#неактивный-ползунок)             | `boolean`                                                                 | `false`      | Делает компонент неактивным                     |
+| [`onChange?`](#одно-значение-или-диапазон)      | `SliderPropOnChange<RANGE>`                                               | -            | Обработчик изменения значения                   |
+| [`onAfterChange?`](#одно-значение-или-диапазон) | `SliderPropOnChange<RANGE>`                                               | -            | Обработчик процесса изменения значения          |
+| [`tooltipDirection?`](#тултип)                  | [`Direction`](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable) | -            | Позиция тултипа                                 |
+| [`tooltipPossibleDirections?`](#тултип)         | [`Direction`](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable) | -            | Возможные позиции тултипа                       |
+| `className?`                                    | `string`                                                                  | -            | Дополнительный CSS-класс                        |
 
-</MdxMenu>
-
-## Значения на ползунке
+## Содержимое
 
 ### Одно значение или диапазон
 
-Если пользователю нужно выбрать на ползунке **одно значение**, передайте значение в свойстве `value`. Например, так:
+Свойство `value` задаёт текущее значение ползунка. Для выбора одного значения передайте число:
+
+<MdxTabs>
+
+<SliderExampleBasic />
 
 ```tsx
 export const SliderExampleBasic = () => {
@@ -64,12 +102,13 @@ export const SliderExampleBasic = () => {
 };
 ```
 
-<SliderExampleBasic />
+</MdxTabs>
 
-Если хотите, чтобы пользователь мог выбрать **диапазон**:
+Для выбора диапазона укажите `range={true}` и передайте массив из двух чисел в `value`:
 
-- передайте в `value` массив из двух значений — границы диапазона,
-- добавьте `range="true"`.
+<MdxTabs>
+
+<SliderExampleRange />
 
 ```tsx
 export const SliderExampleViewRange = () => {
@@ -86,19 +125,23 @@ export const SliderExampleViewRange = () => {
 };
 ```
 
-<SliderExampleRange />
+</MdxTabs>
 
 <MdxInformer status="normal">
 
-Чтобы получить текущее значение в момент выбора (перемещения ползунка), используйте свойство `onAfterChange`.
+Для обработки значения в момент перемещения ползунка используйте `onAfterChange`.
 
 </MdxInformer>
 
+Свойство `onChange` позволяет отслеживать изменение значения, а `onAfterChange` — фиксировать значение после завершения перемещения.
+
 ### Минимальное и максимальное значения
 
-Можно установить минимальное и максимальное значение для ползунка в свойствах `min` и `max`. По умолчанию `min=0`, а `max=100`.
+Свойства `min` и `max` задают границы значений ползунка. По умолчанию: `min=0`, `max=100`. Если `min` больше `max`, используются значения по умолчанию.
 
-Если минимальное значение больше, чем максимальное, применяются значения по умолчанию.
+<MdxTabs>
+
+<SliderExampleMinMax />
 
 ```tsx
 export const SliderExampleMinMax = () => {
@@ -117,17 +160,19 @@ export const SliderExampleMinMax = () => {
 };
 ```
 
-<SliderExampleMinMax />
+</MdxTabs>
 
-### Ограничение значений, которые можно выбрать
+### Ограничение значений
 
-Вы можете ограничить значения, которые может выбрать пользователь: указать [шаг для движения ползунка](#шаг-для-ползунка) или передать [набор значений](#набор-значений). За это отвечает свойство `step`.
+Свойство `step` ограничивает значения, которые может выбрать пользователь.
 
 #### Шаг для ползунка
 
-Чтобы установить шаг для перемещения ползунка, передайте в `step` целое число. Пользователь сможет перемещать ползунок между значениями, кратными этому числу.
+Передайте в `step` целое число, чтобы задать шаг перемещения. Пользователь сможет выбирать значения, кратные шагу (например, при `step={10}`: 0, 10, 20 и т.д.).
 
-Например, если задан шаг 10, а ползунок установлен на 0, пользователь сможет выбрать только значения 0, 10, 20, 30 и так далее.
+<MdxTabs>
+
+<SliderExampleStepSingle />
 
 ```tsx
 export const SliderExampleStepSingle = () => {
@@ -145,11 +190,15 @@ export const SliderExampleStepSingle = () => {
 };
 ```
 
-<SliderExampleStepSingle />
+</MdxTabs>
 
 #### Набор значений
 
-Чтобы задать набор значений, среди которых пользователь может сделать выбор, передайте массив этих значений в свойстве `step.`
+Передайте в `step` массив чисел, чтобы ограничить выбор конкретными значениями.
+
+<MdxTabs>
+
+<SliderExampleStepArray />
 
 ```tsx
 export const SliderExampleStepArray = () => {
@@ -167,350 +216,271 @@ export const SliderExampleStepArray = () => {
 };
 ```
 
-<SliderExampleStepArray />
+</MdxTabs>
 
-## Тексты
+## Внешний вид
 
-### Тултип с подсказкой
+### Тип линии
 
-Чтобы показать тултип с подсказкой, добавьте `withTooltip=true`. По наведению на указатель будет всплывать тултип со значением этого указателя.
+Свойство `view` определяет внешний вид линии ползунка:
 
-```tsx
-export const SliderExampleTooltip = () => {
-  const [value, setValue] = useState<number[]>([20, 50]);
+- `'default'` — сплошная линия.
+- `'division'` — прерывистая линия, отображающая доступные значения.
 
-  return (
-    <Slider
-      step={5}
-      range
-      label={`Значение ${value[0]}-${value[1]}`}
-      onChange={setValue}
-      value={value}
-      withTooltip
-    />
-  );
-};
-```
-
-<SliderExampleTooltip />
-
-### Кастомная подсказка
-
-Чтобы поменять текст в подсказке, используйте `tooltipFormatter`.
-
-```tsx
-export const SliderExampleTooltipFormatter = () => {
-  const [value, setValue] = useState<[number, number]>([20, 50]);
-  return (
-    <div className={cnDocsDecorator('Section')}>
-      <Slider
-        step={5}
-        range
-        label={`Значение ${value[0]}-${value[1]}`}
-        tooltipFormatter={(value) => `${value}%`}
-        onChange={setValue}
-        value={value}
-        withTooltip
-      />
-    </div>
-  );
-};
-```
-
-<SliderExampleTooltipFormatter />
-
-### Лейбл и подпись
-
-Добавить к ползунку лейбл можно с помощью свойство `label`.
-
-За подпись под ползунком отвечает свойство `caption`. Внешний вид подписи [зависит от статуса](#статус) ползунка.
-
-```tsx
-export const SliderExampleLabel = () => {
-  const [value, setValue] = useState<number[]>([20, 50]);
-
-  return (
-    <Slider
-      step={5}
-      range
-      label="Пример"
-      caption="Выберите значения"
-      status="success"
-      withTooltip
-      onChange={setValue}
-      value={value}
-    />
-  );
-};
-```
-
-<SliderExampleLabel />
-
-Также к лейблу можно добавить иконку используя свойство `labelIcon`.
-
-```tsx
-<Slider step={5} range label="Пример" labelIcon={IconQuestion} />
-```
-
-<SliderExampleLabelIcon />
-
-### Иконка и поле ввода
-
-Слева и справа от ползунка можно добавить дополнительные элементы — иконку и поле ввода,
-за это отвечают свойства `leftSide` и `rightSide`.
-
-Если его указать `input`, слева и/или справа от слайда появится поле ввода со значением, выбранным на слайдере. Если значение в поле поменять,
-ползунок на слайдере подвинется (в тот момент, когда поле потеряет фокус).
-
-Также можно добавить любую [иконку](##LIBS.LIB/lib:icons).
-
-```tsx
-export const SliderExampleContent = () => {
-  const [value, setValue] = useState<number>(20);
-
-  return (
-    <Slider
-      value={value}
-      label={`Значение ${value}`}
-      withTooltip
-      step={5}
-      view="division"
-      leftSide="input"
-      rightSide={IconSettings}
-      onChange={setValue}
-    />
-  );
-};
-```
-
-<SliderExampleContent />
-
-Используйте поля ввода с обоих сторон только в применением модификации `range`
-
-```tsx
-export const SliderExampleContentInputLeftAndRight = () => {
-  const [value, setValue] = useState<[number, number]>([20, 50]);
-
-  return (
-    <Slider
-      step={5}
-      range
-      label={`Значение ${value[0]}-${value[1]}`}
-      view="division"
-      onChange={setValue}
-      value={value}
-      leftSide="input"
-      rightSide="input"
-    />
-  );
-};
-```
-
-<SliderExampleContentInputLeftAndRight />
-
-### Неактивный ползунок
-
-За активность ползунка отвечает свойство `disabled`. Если добавить это свойство, ползунок блокируется, его нельзя использовать.
-
-```tsx
-export const SliderExampleDisabled = () => {
-  const [value, setValue] = useState<number>(20);
-
-  return (
-    <Slider
-      disabled
-      label={`Значение ${value}`}
-      onChange={setValue}
-      value={value}
-    />
-  );
-};
-```
-
-<SliderExampleDisabled />
-
-## Статус
-
-За статус ползунка отвечает свойство `status`. Варианты: `alert`, `warning`, `success`.
-
-Статус влияет только на [подпись к ползунку](#лейбл-и-подпись). Если у ползунка нет подписи, пользователь никак не узнает о его статусе.
-
-```tsx
-export const SliderExampleStatus = () => {
-  const [value, setValue] = useState<number>(20);
-
-  return (
-    <div className={cnSliderExampleStatus()}>
-      <Slider
-        range={false}
-        label={`Значение ${value}`}
-        caption="Статус alert"
-        onChange={setValue}
-        value={value}
-        status="alert"
-      />
-      <Slider
-        range={false}
-        label={`Значение ${value}`}
-        caption="Статус warning"
-        onChange={setValue}
-        value={value}
-        status="warning"
-      />
-      <Slider
-        range={false}
-        label={`Значение ${value}`}
-        caption="Статус success"
-        onChange={setValue}
-        value={value}
-        status="success"
-      />
-      <Slider
-        range={false}
-        label={`Значение ${value}`}
-        caption="Обычный ползунок"
-        onChange={setValue}
-        value={value}
-      />
-    </div>
-  );
-};
-```
-
-<SliderExampleStatus />
-
-## Внешний вид линии
-
-За отображение линии отвечает свойство `view`. Варианты:
-
-- `default`— сплошная линия (по умолчанию),
-- `division` — прерывистая: отрезки соединяют значения, которые можно выбрать.
-
-##### Сплошная линия: view="default"
-
-```tsx
-export const SliderExampleViewDefault = () => {
-  const [value, setValue] = useState<number>(20);
-
-  return (
-    <Slider
-      view="default"
-      label={`Значение ${value}`}
-      onChange={setValue}
-      value={value}
-    />
-  );
-};
-```
+<MdxTabs>
 
 <SliderExampleViewDefault />
 
-##### Прерывистая линия: view="division"
-
 ```tsx
-export const SliderExampleViewDivision = () => {
-  const [value, setValue] = useState<number>(20);
-
-  return (
-    <Slider
-      view="division"
-      step={10}
-      label={`Значение ${value}`}
-      onChange={setValue}
-      value={value}
-    />
-  );
-};
+<Slider
+  view="default"
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+/>
 ```
+
+</MdxTabs>
+
+<MdxTabs>
 
 <SliderExampleViewDivision />
 
-## Размер
-
-За размер компонента отвечает свойство `size`. Варианты: `'xs'`, `'s'` , `'m'` , `'l'`, по умолчанию `'m'`.
-
 ```tsx
-export const SliderExampleSize = () => {
-  const [value, setValue] = useState<number>(20);
-
-  return (
-    <div>
-      <Slider
-        range={false}
-        label={`Значение ${value}`}
-        onChange={setValue}
-        value={value}
-        size="xs"
-      />
-      <Slider
-        range={false}
-        label={`Значение ${value}`}
-        onChange={setValue}
-        value={value}
-        size="s"
-      />
-      <Slider
-        range={false}
-        label={`Значение ${value}`}
-        onChange={setValue}
-        value={value}
-        size="m"
-      />
-      <Slider
-        range={false}
-        label={`Значение ${value}`}
-        onChange={setValue}
-        value={value}
-        size="l"
-      />
-    </div>
-  );
-};
+<Slider
+  view="division"
+  step={10}
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+/>
 ```
+
+</MdxTabs>
+
+### Размер
+
+Свойство `size` задаёт размер компонента: `'xs'`, `'s'`, `'m'`, `'l'`. По умолчанию — `'m'`.
+
+<MdxTabs>
 
 <SliderExampleSize />
 
-## Импорт
-
 ```tsx
-import { Slider } from '@consta/uikit/Slider';
+<Slider
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+  size="xs"
+/>
+<Slider
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+  size="s"
+/>
+<Slider
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+  size="m"
+/>
+<Slider
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+  size="l"
+/>
 ```
 
-## Свойства
+</MdxTabs>
+
+### Статус
+
+Свойство `status` задаёт статус подписи: `'alert'`, `'warning'`, `'success'`. Влияет только на подпись (`caption`), если она указана.
+
+<MdxTabs>
+
+<SliderExampleStatus />
 
 ```tsx
-export type SliderValue<RANGE> = RANGE extends true ? [number, number] : number;
-
-export type SliderPropOnChange<RANGE> = (
-  value: SliderValue<RANGE>,
-  prop: {
-    e?: Event | React.TouchEvent | React.MouseEvent | React.KeyboardEvent;
-  },
-) => void;
-
-type SliderPropTooltipFormatter = (value: number | undefined) => string;
+<Slider
+  label={`Значение ${value}`}
+  caption="Статус alert"
+  onChange={setValue}
+  value={value}
+  status="alert"
+/>
+<Slider
+  label={`Значение ${value}`}
+  caption="Статус warning"
+  onChange={setValue}
+  value={value}
+  status="warning"
+/>
+<Slider
+  label={`Значение ${value}`}
+  caption="Статус success"
+  onChange={setValue}
+  value={value}
+  status="success"
+/>
+<Slider
+  label={`Значение ${value}`}
+  caption="Обычный ползунок"
+  onChange={setValue}
+  value={value}
+/>
 ```
 
-| Свойство                                               | Тип или варианты значения                                                 | По умолчанию | Описание                                         |
-| ------------------------------------------------------ | ------------------------------------------------------------------------- | ------------ | ------------------------------------------------ |
-| [`view?`](#внешний-вид-линии)                          | `default` , `division`                                                    | `default`    | Внешний вид линии                                |
-| [`disabled?`](#неактивный-ползунок)                    | `boolean`                                                                 | `false`      | Делает компонент неактивным                      |
-| [`status?`](#статус)                                   | `'', 'alert', 'success', 'warning'`                                       | -            | Статус поля                                      |
-| [`size?`](#размер)                                     | `'xs'`, `'s'` , `'m'` , `'l'`                                             | `'m'`        | Размер компонента                                |
-| [`step?`](#ограничение-значений-которые-можно-выбрать) | `number` <code>&#124;</code> `[number, number]`                           | `1`          | Шаг для перемещения ползунка или набор значений  |
-| [`range?`](#одно-значение-или-диапазон)                | `boolean`                                                                 | -            | Выбор диапазона                                  |
-| [`labelIcon?`](#лейбл-и-подпись)                       | `IconComponent`                                                           | -            | Иконка слева от лейбла                           |
-| [`label?`](#лейбл-и-подпись)                           | `string`                                                                  | -            | Лейбл                                            |
-| [`caption?`](#лейбл-и-подпись)                         | `string`                                                                  | -            | Подпись                                          |
-| [`value?`](#одно-значение-или-диапазон)                | `SliderValue<RANGE>`                                                      | -            | Значение или массив значений                     |
-| [`onChange?`](#одно-значение-или-диапазон)             | `SliderPropOnChange<RANGE>`                                               | -            | Обработчик события изменения значения компонента |
-| [`onAfterChange?`](#одно-значение-или-диапазон)        | `SliderPropOnChange<RANGE>`                                               | -            | Обработчик процесса изменения значения           |
-| [`withTooltip?`](#тултип-с-подсказкой)                 | `boolean`                                                                 | -            | Нужно ли показывать тултип                       |
-| [`tooltipFormatter?`](#кастомная-подсказка)            | `SliderPropTooltipFormatter`                                              | -            | Метод для форматирования текста в тултипе        |
-| `tooltipDirection?`                                    | [`Direction`](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable) | -            | Позиция тултипа по умолчанию                     |
-| `tooltipPossibleDirections?`                           | [`Direction`](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable) | -            | Возможные позиции тултипа                        |
-| [`min?`](#минимальное-и-максимальное-значения)         | `number`                                                                  | `0`          | Минимальное значение                             |
-| [`max?`](#минимальное-и-максимальное-значения)         | `number`                                                                  | `100`        | Максимальное значение                            |
-| [`leftSide?`](#иконка-и-поле-ввода)                    | `'input'` <code>&#124;</code> `IconComponent`                             | -            | Элемент слева от компонента (иконка)             |
-| [`rightSide?`](#иконка-и-поле-ввода)                   | `'input'` <code>&#124;</code> `IconComponent`                             | -            | Элемент справа от компонента (поле ввода)        |
-| `className?`                                           | `string`                                                                  | -            | Дополнительный CSS-класс                         |
+</MdxTabs>
+
+## Тексты
+
+### Лейбл и подпись
+
+Свойство `label` добавляет заголовок над ползунком, а `caption` — подпись под ним. Свойство `labelIcon` позволяет добавить иконку слева от лейбла.
+
+<MdxTabs>
+
+<SliderExampleLabel />
+
+```tsx
+<Slider
+  step={5}
+  range
+  label="Пример"
+  caption="Выберите значения"
+  status="success"
+  withTooltip
+  onChange={setValue}
+  value={value}
+/>
+```
+
+</MdxTabs>
+
+<MdxTabs>
+
+<SliderExampleLabelIcon />
+
+```tsx
+<Slider
+  step={5}
+  range
+  label="Пример"
+  labelIcon={IconQuestion}
+  onChange={setValue}
+  value={value}
+/>
+```
+
+</MdxTabs>
+
+### Тултип
+
+Свойство `withTooltip` включает отображение тултипа с текущим значением при наведении на ползунок. Свойство `tooltipFormatter` позволяет настроить форматирование текста в тултипе.
+
+<MdxTabs>
+
+<SliderExampleTooltip />
+
+```tsx
+<Slider
+  step={5}
+  range
+  label={`Значение ${value[0]}-${value[1]}`}
+  onChange={setValue}
+  value={value}
+  withTooltip
+/>
+```
+
+</MdxTabs>
+
+<MdxTabs>
+
+<SliderExampleTooltipFormatter />
+
+```tsx
+<Slider
+  step={5}
+  range
+  label={`Значение ${value[0]}-${value[1]}`}
+  tooltipFormatter={(value) => `${value}%`}
+  onChange={setValue}
+  value={value}
+  withTooltip
+/>
+```
+
+</MdxTabs>
+
+Свойства `tooltipDirection` и `tooltipPossibleDirections` задают позицию и возможные направления тултипа (см. [Direction](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable)).
+
+## Поведение
+
+### Неактивный ползунок
+
+Свойство `disabled` делает ползунок неактивным, блокируя взаимодействие.
+
+<MdxTabs>
+
+<SliderExampleDisabled />
+
+```tsx
+<Slider
+  disabled
+  label={`Значение ${value}`}
+  onChange={setValue}
+  value={value}
+/>
+```
+
+</MdxTabs>
+
+### Иконка и поле ввода
+
+Свойства `leftSide` и `rightSide` позволяют добавить иконку или поле ввода (`'input'`) слева или справа от ползунка. Поле ввода синхронизируется с ползунком при потере фокуса.
+
+<MdxTabs>
+
+<SliderExampleContent />
+
+```tsx
+<Slider
+  value={value}
+  label={`Значение ${value}`}
+  withTooltip
+  step={5}
+  view="division"
+  leftSide="input"
+  rightSide={IconSettings}
+  onChange={setValue}
+/>
+```
+
+</MdxTabs>
+
+Для диапазона (`range={true}`) можно использовать поля ввода с обеих сторон:
+
+<MdxTabs>
+
+<SliderExampleContentInputLeftAndRight />
+
+```tsx
+<Slider
+  step={5}
+  range
+  label={`Значение ${value[0]}-${value[1]}`}
+  view="division"
+  onChange={setValue}
+  value={value}
+  leftSide="input"
+  rightSide="input"
+/>
+```
+
+</MdxTabs>
+
+Иконки можно выбрать из [библиотеки иконок](##LIBS.LIB/lib:icons).

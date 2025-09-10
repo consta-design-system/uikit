@@ -4,7 +4,7 @@ export default createStand({
   title: 'Steps',
   id: 'Steps',
   group: 'components',
-  description: 'Шаги.',
+  description: 'Последовательность шагов',
   version: '1.10.11',
   status: 'stable',
   /* cspell:disable-next-line */

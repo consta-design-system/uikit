@@ -1,5 +1,25 @@
 # Changelog
 
+## v5.25.1 (10/09/2025)
+- [docs(Tabs): implementation of editorial policy (#4059)](https://github.com/consta-design-system/uikit/commit/94eba6c6aba682db596c69d501fde41ce963c9ac) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (SwitchGroup): implementation of editorial policy (#4058)](https://github.com/consta-design-system/uikit/commit/71cf3ead3e0f85425591f91379dea81635a87982) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [fix(ProgressStepBar): fix line width for 2 steps (#4054)](https://github.com/consta-design-system/uikit/commit/96f754b8f9fba5e2f77505b6981fa222676fb734) - [@baevm](https://github.com/baevm)
+- [docs(Switch): implementation of editorial policy (#4057)](https://github.com/consta-design-system/uikit/commit/01cb990765c36785a409515eaf2d2e3b42c0df9d) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Steps): implementation of editorial policy (#4055)](https://github.com/consta-design-system/uikit/commit/5182b6c037f9d04d12a28af22f6725993d851f55) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(StepsCanary): implementation of editorial policy (#4056)](https://github.com/consta-design-system/uikit/commit/80539d84ed782b665b30d6c06cc8c87c5422bec4) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Spoiler): implementation of editorial policy (#4053)](https://github.com/consta-design-system/uikit/commit/e651a8d58b8077b3600b09cff4249cb9459c12d9) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(SnackBar): implementation of editorial policy (#4051)](https://github.com/consta-design-system/uikit/commit/9b18d40d2af167e878a6d67f858c3a9707b00294) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Slider): implementation of editorial policy (#4050)](https://github.com/consta-design-system/uikit/commit/5d70ba45419bb69d9e9f84e9c6bb3b71efa8e2b2) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Sidebar): implementation of editorial policy (#4049)](https://github.com/consta-design-system/uikit/commit/3ec30874389a42a671eef51571d10cc5270de8ed) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(SelectCanary): implementation of editorial policy (#4047)](https://github.com/consta-design-system/uikit/commit/fd59ddfe6a4d1c0dc0d3f50733fcbde0ce495ae4) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(ProgressStepBar): implementation of editorial policy (#4039)](https://github.com/consta-design-system/uikit/commit/9318f74d82f2d776ab3b81707e2cbe97f0b39b53) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Responses): implementation of editorial policy (#4045)](https://github.com/consta-design-system/uikit/commit/7f068bc7d408932366f70cc8f92124408281932f) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Select): implementation of editorial policy (#4046)](https://github.com/consta-design-system/uikit/commit/e54741cf8c795ba2ae561d336bad478f91609b0c) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Radio): implementation of editorial policy (#4043)](https://github.com/consta-design-system/uikit/commit/74adf0852c46a928e4895145a758e73ee4a2e6d4) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (RadioGroup): implementation of editorial policy (#4042)](https://github.com/consta-design-system/uikit/commit/3af395a2f150f1270e22a147c27d3760df020ca4) - [@alyonurchick1](https://github.com/alyonurchick1)
+
+--------------------
+
 ## v5.25.0 (28/08/2025)
 Самое важное:
 - В `Button` изменили вид состояния `loading`. Теперь `Loader` выводится с `type="circle"`
@@ -355,9 +375,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [fix(tootip): added ref forwarding to Transition (#3672)](https://github.com/consta-design-system/uikit/commit/2c5255c463ee88def0ef19bf364f545158393239) - [@ZettZet](https://github.com/ZettZet)
 - [fix(Table): added test to check sanitize (#3670)](https://github.com/consta-design-system/uikit/commit/c8fd8304446916e9b922e7bd630e7346b4ea4892) - [@ZettZet](https://github.com/ZettZet)
 - [feat(DatePicker): add individual start-end  placeholders for DatePicker in range formats (#3662)](https://github.com/consta-design-system/uikit/commit/9bca9907598f48c9909d83d76df381ae74322570) - [@Elena-BLZ](https://github.com/Elena-BLZ)
-
---------------------
-
-## v5.3.2 (27/05/2024)
-- [fix(button): add missing html form attribute (#3664)](https://github.com/consta-design-system/uikit/commit/4d8f2ee561b4d519f6dea35718528e6ec5531699) - [@js2me](https://github.com/js2me)
-- [chore(builder): fix build](https://github.com/consta-design-system/uikit/commit/77ca591d8b68a294b1c93a478450c90d91bd1171) - [@gizeasy](https://github.com/gizeasy)
