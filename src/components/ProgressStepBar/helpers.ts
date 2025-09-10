@@ -188,30 +188,6 @@ export const getItemPosition = (index: number, length: number) => {
   return position;
 };
 
-export const getLineSize: (
-  container: React.RefObject<HTMLElement>,
-  activeElement: React.RefObject<HTMLElement>,
-  direction: ProgressStepBarPropDirection,
-) => number = (container, activeElement, direction) => {
-  let size = 0;
-  if (
-    container &&
-    container.current &&
-    activeElement &&
-    activeElement.current
-  ) {
-    const containerPosition = container.current.getBoundingClientRect();
-    const activeElementPosition = activeElement.current.getBoundingClientRect();
-    if (direction === 'vertical')
-      size =
-        activeElementPosition.y -
-        containerPosition.y +
-        activeElementPosition.height;
-    else size = activeElementPosition.x - containerPosition.x;
-  }
-  return size;
-};
-
 const getRefSize = (ref: React.RefObject<HTMLElement>) => {
   if (ref.current) {
     const { width, height } = ref.current.getBoundingClientRect();
@@ -225,26 +201,26 @@ export const calculateLines = (
   direction: ProgressStepBarPropDirection,
 ) => {
   const sizes: number[] = [];
-  for (let i = 0; i < refs.length - 1; i++) {
-    const ref = refs[i];
-    const firstSize = getRefSize(ref);
-    const secondSize = getRefSize(refs[i + 1]);
+  const { length } = refs;
+
+  if (length < 2) {
+    return sizes;
+  }
+
+  for (let i = 0; i < length - 1; i++) {
+    const [width1, height1] = getRefSize(refs[i]);
+    const [width2] = getRefSize(refs[i + 1]);
+
     let size = 0;
-    if (i === 0) {
-      size =
-        direction === 'horizontal'
-          ? firstSize[0] + secondSize[0] / 2
-          : firstSize[1];
-    } else if (i === refs.length - 2) {
-      size =
-        direction === 'horizontal'
-          ? firstSize[0] / 2 + secondSize[0]
-          : firstSize[1] + 2;
+    if (direction === 'horizontal') {
+      const first = i === 0 ? width1 : width1 / 2;
+      const second = i === length - 2 ? width2 : width2 / 2;
+      size = first + second;
     } else {
-      size =
-        direction === 'horizontal'
-          ? firstSize[0] / 2 + secondSize[0] / 2
-          : firstSize[1];
+      size = height1;
+      if (i === length - 2) {
+        size += 2;
+      }
     }
     sizes.push(size);
   }
