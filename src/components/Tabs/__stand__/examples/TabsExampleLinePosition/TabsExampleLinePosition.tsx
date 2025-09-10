@@ -13,7 +13,6 @@ export const TabsExampleLinePosition = () => {
   const [value, setValue] = useState<Item | null>(items[0]);
   return (
     <Example
-      separately
       col={{ 1: 0, 2: 600 }}
       items={positions}
       getItemNode={(linePosition) => (
