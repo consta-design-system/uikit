@@ -18,7 +18,6 @@ export const SwitchGroupExampleSize = () => {
   return (
     <Example
       col={{ 1: 0, 2: 800 }}
-      separately
       items={(['m', 'l'] as const).map((size) => ({
         label: `size="${size}"`,
         node: (

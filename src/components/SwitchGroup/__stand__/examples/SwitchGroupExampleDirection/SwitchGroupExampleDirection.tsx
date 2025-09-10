@@ -19,8 +19,7 @@ export const SwitchGroupExampleDirection = () => {
 
   return (
     <Example
-      col={{ 1: 0, 2: 800 }}
-      separately
+      col={{ 1: 0 }}
       items={(['column', 'row'] as const).map((direction) => ({
         label: `direction="${direction}"`,
         node: (

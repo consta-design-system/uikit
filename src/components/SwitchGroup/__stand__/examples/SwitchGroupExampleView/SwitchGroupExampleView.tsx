@@ -20,7 +20,6 @@ export const SwitchGroupExampleView = () => {
   return (
     <Example
       col={{ 1: 0, 2: 800 }}
-      separately
       items={(['primary', 'ghost'] as const).map((view) => ({
         label: `view="${view}"`,
         node: (
