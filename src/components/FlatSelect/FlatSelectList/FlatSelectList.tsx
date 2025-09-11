@@ -173,8 +173,6 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
     [visibleItems],
   );
 
-  console.log('virtualScroll', virtualScroll);
-
   const {
     spaceTop,
     slice: sliceHookProp,

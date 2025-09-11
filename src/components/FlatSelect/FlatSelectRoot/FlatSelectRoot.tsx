@@ -7,7 +7,6 @@ import { Transition } from 'react-transition-group';
 
 import { Direction, Popover } from '##/components/Popover';
 import { useForkRef } from '##/hooks/useForkRef';
-import { KeyHandlers, useKeysRef } from '##/hooks/useKeysRef';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
@@ -16,11 +15,6 @@ export type FlatSelectRootProps = PropsWithHTMLAttributesAndRef<
   {
     anchorRef?: React.RefObject<HTMLElement>;
     openAtom: AtomMut<boolean>;
-    useKeysRefPropsAtom: AtomMut<{
-      keys: KeyHandlers;
-      ref: React.MutableRefObject<HTMLDivElement | null>;
-      isActive: () => boolean;
-    }>;
     direction?: Direction;
     spareDirection?: Direction;
     possibleDirections?: Direction[];
@@ -36,7 +30,6 @@ export const FlatSelectRoot: React.FC<FlatSelectRootProps> = forwardRef(
       className,
       anchorRef,
       openAtom,
-      useKeysRefPropsAtom,
       direction = 'downStartLeft',
       spareDirection = 'downStartLeft',
       possibleDirections = [
@@ -51,11 +44,8 @@ export const FlatSelectRoot: React.FC<FlatSelectRootProps> = forwardRef(
     } = props;
     const contentRef = useRef(null);
     const contentForkedRef = useForkRef([contentRef, ref]);
-    const withAnchor = !!anchorRef?.current;
+    const withAnchor = !!anchorRef;
     const [open] = useAtom(openAtom);
-    const [useKeysRefProps] = useAtom(useKeysRefPropsAtom);
-
-    useKeysRef(useKeysRefProps);
 
     if (withAnchor) {
       return (

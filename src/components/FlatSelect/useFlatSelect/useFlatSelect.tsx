@@ -1,15 +1,16 @@
-import { useClickOutside } from '@consta/uikit/useClickOutside';
 import { action, AtomMut, sleep, withConcurrency } from '@reatom/framework';
 import { useAction, useAtom, useUpdate } from '@reatom/npm-react';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
-import { KeyHandlers } from '##/hooks/useKeysRef';
 import { useRefs } from '##/hooks/useRefs';
 import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 import { getGroups, GetGroupsResult } from '##/utils/getGroups';
-import { setRef } from '##/utils/setRef';
+import { useClickOutsideAtom } from '##/utils/state/useClickOutsideAtom';
 import { useCreateAtom } from '##/utils/state/useCreateAtom';
+import { useElementAtomEventListener } from '##/utils/state/useElementAtomEventListener';
+import { KeyHandlers, useKeysAtom } from '##/utils/state/useKeysAtom';
 import { usePickAtom, usePropAtom } from '##/utils/state/usePickAtom';
+import { useRefAtom } from '##/utils/state/useRefAtom';
 
 import { PropsWithDefault } from '../defaultProps';
 import {
@@ -100,19 +101,6 @@ export function getCountedGroups<ITEM, GROUP>(
   return copyGroups;
 }
 
-const useEventListener = <TYPE extends keyof DocumentEventMap>(
-  type: TYPE,
-  ref: React.RefObject<HTMLElement>,
-  callback: (event: Event) => void,
-) => {
-  useEffect(() => {
-    ref.current?.addEventListener(type, callback);
-    return () => {
-      ref.current?.removeEventListener(type, callback);
-    };
-  }, [ref, callback, type]);
-};
-
 export const useFlatSelect = <
   ITEM = FlatSelectItemDefault,
   GROUP = FlatSelectItemDefault,
@@ -122,9 +110,14 @@ export const useFlatSelect = <
 }: UseFlatSelectProps<ITEM, GROUP, MULTIPLE>) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const rootRef = useRef<HTMLDivElement | null>(null);
-  const anchorRef = useRef<HTMLDivElement | null>(null);
+
   const anchorRefAtom = usePropAtom(propsAtom, 'anchorRef');
+  const anchorElementAtom = useCreateAtom((ctx) => {
+    const ref = ctx.spy(anchorRefAtom);
+    return ref?.current ? ref.current : null;
+  });
+
+  const [rootElementAtom, rootRef] = useRefAtom<HTMLDivElement>();
 
   const rootFocusAtom = useCreateAtom(false);
 
@@ -147,7 +140,6 @@ export const useFlatSelect = <
   );
   const onCreateAtom = usePropAtom(propsAtom, 'onCreate');
   const getItemKeyAtom = usePropAtom(propsAtom, 'getItemKey');
-  const [ignoreOutsideClicksRefs] = useAtom(ignoreOutsideClicksRefsAtom);
 
   const valueAtom = useCreateAtom((ctx) => {
     const value = ctx.spy(valuePropAtom);
@@ -171,31 +163,14 @@ export const useFlatSelect = <
       rootFocusAtom(ctx, value);
     }).pipe(withConcurrency()),
   );
-  const handleRootMouseDown = useAction(
-    (ctx, e: React.MouseEvent<HTMLDivElement>) => {
-      ctx.get(propsAtom).onMouseDown?.(e);
-      rootMouseDownAtom(ctx, true);
-    },
+  const handleRootMouseDown = useAction((ctx, e: Event) =>
+    rootMouseDownAtom(ctx, true),
   );
-  const handleRootMouseUp = useAction(
-    (ctx, e: React.MouseEvent<HTMLDivElement>) => {
-      ctx.get(propsAtom).onMouseUp?.(e);
-      rootMouseDownAtom(ctx, false);
-    },
+  const handleRootMouseUp = useAction((ctx, e: Event) =>
+    rootMouseDownAtom(ctx, false),
   );
-  const handleRootFocus = useAction(
-    (ctx, e: React.FocusEvent<HTMLDivElement>) => {
-      console.log('handleRootFocus', e);
-      ctx.get(propsAtom).onFocus?.(e);
-      setRootFocus(true);
-    },
-  );
-  const handleRootBlur = useAction(
-    (ctx, e: React.FocusEvent<HTMLDivElement>) => {
-      ctx.get(propsAtom).onBlur?.(e);
-      setRootFocus(false);
-    },
-  );
+  const handleRootFocus = useAction((_, e: Event) => setRootFocus(true));
+  const handleRootBlur = useAction((_, e: Event) => setRootFocus(false));
   const onInput = useAction((ctx, value: string | undefined = '') => {
     ctx.get(propsAtom).onInput?.(value);
     inputValueAtom(ctx, value);
@@ -476,7 +451,6 @@ export const useFlatSelect = <
     const highlightedIndex = ctx.get(highlightedIndexAtom);
     const inputValue = ctx.get(inputValueAtom);
     const visibleItems = ctx.get(visibleItemsAtom);
-    // const open = ctx.get(openAtom);
 
     if (inputValue || items[highlightedIndex]) {
       e.preventDefault();
@@ -526,14 +500,14 @@ export const useFlatSelect = <
     if (item) {
       onChange(e, item);
     }
-  });
+  }) as unknown as (e: KeyboardEvent) => void;
 
   const Escape = useAction((ctx, e: KeyboardEvent) => {
     e.preventDefault();
     e.stopPropagation();
     openAtom(ctx, false);
 
-    anchorRef.current?.focus();
+    ctx.get(anchorRefAtom)?.current?.focus();
   });
 
   const Tab = useAction((ctx, e: KeyboardEvent) => {
@@ -546,10 +520,10 @@ export const useFlatSelect = <
       openAtom(ctx, false);
     }
 
-    anchorRef.current?.focus();
+    ctx.get(anchorRefAtom)?.current?.focus();
   });
 
-  const keysAtom = useCreateAtom({
+  const keysAtom = useCreateAtom<KeyHandlers>({
     ArrowUp,
     ArrowDown,
     PageUp: ArrowUp,
@@ -632,28 +606,21 @@ export const useFlatSelect = <
     },
   );
 
-  const useKeysRefPropsAtom = useCreateAtom((ctx) => {
-    const keys = ctx.spy(keysAtom);
+  useClickOutsideAtom({
+    isActiveAtom: openAtom,
+    ignoreClicksElementsAtom: useCreateAtom((ctx) => {
+      const rootElement = ctx.spy(rootElementAtom);
+      const anchorElement = ctx.spy(anchorElementAtom);
+      const ignoreOutsideClicksElements = ctx
+        .spy(ignoreOutsideClicksRefsAtom)
+        ?.map((ref) => ref.current);
 
-    return {
-      keys: keys as unknown as KeyHandlers,
-      ref: rootRef,
-      isActive: () => {
-        if (ctx.get(propsAtom).anchorRef?.current && ctx.get(openAtom)) {
-          return true;
-        }
-        return !ctx.get(disabledAtom);
-      },
-    };
-  });
-
-  useClickOutside({
-    isActive: useAction((ctx) => ctx.get(openAtom)),
-    ignoreClicksInsideRefs: [
-      rootRef,
-      anchorRef,
-      ...(ignoreOutsideClicksRefs || []),
-    ],
+      return [
+        rootElement,
+        anchorElement,
+        ...(ignoreOutsideClicksElements || []),
+      ];
+    }),
     handler: useAction((ctx) => {
       openAtom(ctx, false);
     }),
@@ -695,25 +662,43 @@ export const useFlatSelect = <
     [disabledAtom],
   );
 
-  useUpdate((ctx, ref) => setRef(anchorRef, ref?.current), [anchorRefAtom]);
-
   const handleAnchorClick = useAction((ctx) =>
     openAtom(ctx, !ctx.get(openAtom)),
   );
 
-  useEventListener('click', anchorRef, handleAnchorClick);
+  useElementAtomEventListener(anchorElementAtom, 'click', handleAnchorClick);
+  useElementAtomEventListener(rootElementAtom, 'focus', handleRootFocus);
+  useElementAtomEventListener(rootElementAtom, 'blur', handleRootBlur);
+  useElementAtomEventListener(
+    rootElementAtom,
+    'mousedown',
+    handleRootMouseDown,
+  );
+  useElementAtomEventListener(rootElementAtom, 'mouseup', handleRootMouseUp);
+
+  useKeysAtom({
+    keysAtom,
+    elAtom: rootElementAtom,
+    isActiveAtom: useCreateAtom((ctx) => {
+      if (ctx.spy(anchorRefAtom)?.current && ctx.spy(openAtom)) {
+        return true;
+      }
+      return !ctx.spy(disabledAtom);
+    }),
+  });
 
   useUpdate(
-    async (ctx, value) => {
+    async (ctx, open) => {
+      ctx.get(propsAtom).onOpen?.(open);
       await sleep(animateTimeout);
-      if (!value) {
+      if (!open) {
         onInput('');
         inputFocusAtom(ctx, false);
         rootFocusAtom(ctx, false);
         return;
       }
-      if (value) {
-        rootRef.current?.focus();
+      if (open) {
+        ctx.get(rootElementAtom)?.focus();
       }
     },
     [openAtom],
@@ -746,10 +731,5 @@ export const useFlatSelect = <
     dropdownZIndexAtom,
     rootRef,
     createButtonOnMouseEnter,
-    handleRootFocus,
-    handleRootBlur,
-    handleRootMouseDown,
-    handleRootMouseUp,
-    useKeysRefPropsAtom,
   };
 };

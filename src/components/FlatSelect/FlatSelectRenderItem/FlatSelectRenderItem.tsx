@@ -55,8 +55,6 @@ export const FlatSelectRenderItem: SelectRenderItemComponent = (props) => {
     return index === highlightedIndex;
   });
 
-  // console.log(hovered, item);
-
   return (
     <>
       {renderItem({

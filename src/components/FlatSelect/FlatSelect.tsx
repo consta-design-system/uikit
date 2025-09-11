@@ -109,11 +109,6 @@ const FlatSelectRender = (
     dropdownZIndexAtom,
     rootRef,
     createButtonOnMouseEnter,
-    handleRootFocus,
-    handleRootBlur,
-    handleRootMouseDown,
-    handleRootMouseUp,
-    useKeysRefPropsAtom,
   } = useFlatSelect<FlatSelectItemDefault, FlatSelectGroupDefault, false>({
     propsAtom,
   });
@@ -151,11 +146,6 @@ const FlatSelectRender = (
       }}
       anchorRef={anchorRef}
       openAtom={openAtom}
-      useKeysRefPropsAtom={useKeysRefPropsAtom}
-      onFocus={handleRootFocus}
-      onBlur={handleRootBlur}
-      onMouseDown={handleRootMouseDown}
-      onMouseUp={handleRootMouseUp}
       tabIndex={0}
       direction={direction}
       spareDirection={spareDirection}

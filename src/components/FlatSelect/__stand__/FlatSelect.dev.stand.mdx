@@ -1,1 +1,131 @@
-# dev
+import { MdxMenu, MdxTabs } from '@consta/stand';
+
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Варианты](#варианты)
+  - [Выбранное значение](#выбранное-значение)
+  - [Подсказка](#подсказка)
+  - [Неактивный элемент списка](#неактивный-элемент-списка)
+  - [Множественный выбор](#множественный-выбор)
+  - [Группы вариантов](#группы-вариантов)
+  - [Кнопка очистки поля](#кнопка-очистки-поля)
+- [Внешний вид](#внешний-вид)
+  - [Размер](#размер)
+  - [Стиль](#стиль)
+  - [Форма](#форма)
+  - [Статус](#статус)
+- [Поведение](#поведение)
+  - [Неактивный компонент](#неактивный-компонент)
+  - [Поиск](#поиск)
+  - [Создание новых вариантов](#создание-новых-вариантов)
+  - [Виртуализация списка](#виртуализация-списка)
+  - [Индикация загрузки](#индикация-загрузки)
+  - [Выбор всех элементов](#выбор-всех-элементов)
+  - [Управление состоянием выпадающего списка](#управление-состоянием-выпадающего-списка)
+- [Кастомизация](#кастомизация)
+  - [Кастомный элемент списка](#кастомный-элемент-списка)
+  - [Кастомное выбранное значение](#кастомное-выбранное-значение)
+  - [Кастомные типы данных](#кастомные-типы-данных)
+
+</MdxMenu>
+
+# Обзор
+
+Компонент `FlatSelect` предоставляет список для выбора одного или нескольких вариантов. Поддерживает кастомизацию, группировку, поиск, виртуализацию и другие функции.
+
+# Импорт
+
+```js
+import { FlatSelect } from '@consta/uikit/FlatSelect';
+```
+
+# Свойства
+
+```ts
+type FlatSelectPropOnChange<ITEM, MULTIPLE extends boolean> = (
+  value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
+  props: {
+    e: React.SyntheticEvent;
+  },
+) => void;
+
+type RenderItemProps<ITEM> = {
+  item: ITEM;
+  active: boolean;
+  hovered: boolean;
+  onClick: (e: React.MouseEvent) => void;
+  onMouseEnter: (e: React.MouseEvent) => void;
+  ref: React.Ref<HTMLDivElement>;
+};
+
+type FlatSelectPropRenderItem<ITEM> = (
+  props: RenderItemProps<ITEM>,
+) => React.ReactNode | null;
+
+type FlatSelectPropOnCreate = (
+  label: string,
+  props: { e: React.SyntheticEvent },
+) => void;
+
+type FlatSelectPropValue<ITEM, MULTIPLE extends boolean> =
+  | (MULTIPLE extends true ? ITEM[] : ITEM)
+  | null
+  | undefined;
+```
+
+| Свойство                | Тип или варианты значения                                              | По умолчанию              | Описание                                                                                                                                                                     |
+| ----------------------- | ---------------------------------------------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| items                   | `ITEM[]`                                                               | -                         | Массив элементов, отображаемых в списке выбора.                                                                                                                              |
+| onChange                | `FlatSelectPropOnChange<ITEM, MULTIPLE>`                               | -                         | Функция обратного вызова, срабатывающая при изменении выбора.                                                                                                                |
+| disabled                | `boolean`                                                              | -                         | Указывает, отключен ли компонент.                                                                                                                                            |
+| form                    | `'default'` \| `'brick'` \| `'round'`                                  | `'default'`               | Вариант стиля компонента.                                                                                                                                                    |
+| placeholder             | `string`                                                               | -                         | Текст-заполнитель для поля ввода.                                                                                                                                            |
+| size                    | `'m'` \| `'xs'` \| `'s'` \| `'l'`                                      | -                         | Размер компонента.                                                                                                                                                           |
+| isLoading               | `boolean`                                                              | -                         | Указывает, находится ли компонент в состоянии загрузки.                                                                                                                      |
+| listRef                 | `React.Ref<HTMLDivElement>`                                            | -                         | Ref для контейнера выпадающего списка.                                                                                                                                       |
+| renderItem              | `FlatSelectPropRenderItem<ITEM>`                                       | -                         | Пользовательская функция отрисовки элементов.                                                                                                                                |
+| onInputFocus            | `React.FocusEventHandler<HTMLInputElement>`                            | -                         | Функция обратного вызова, срабатывающая при фокусе на поле ввода.                                                                                                            |
+| onInputBlur             | `React.FocusEventHandler<HTMLInputElement>`                            | -                         | Функция обратного вызова, срабатывающая при потере фокуса поля ввода.                                                                                                        |
+| onCreate                | `FlatSelectPropOnCreate`                                               | -                         | Функция обратного вызова, срабатывающая при создании нового элемента.                                                                                                        |
+| inputRef                | `React.Ref<HTMLInputElement>`                                          | -                         | Ref для поля ввода.                                                                                                                                                          |
+| input                   | `boolean`                                                              | -                         | Указывает, включено ли поле ввода.                                                                                                                                           |
+| inputValue              | `string`                                                               | -                         | Контролируемое значение поля ввода.                                                                                                                                          |
+| inputDefaultValue       | `string`                                                               | -                         | Значение поля ввода по умолчанию.                                                                                                                                            |
+| onInput                 | `(value: string) => void`                                              | -                         | Функция обратного вызова, срабатывающая при изменении значения ввода.                                                                                                        |
+| labelForCreate          | `((label: string \| undefined) => React.ReactNode) \| React.ReactNode` | `'+'`                     | Метка или функция отрисовки для опции создания.                                                                                                                              |
+| labelForEmptyItems      | `string`                                                               | `'Список пуст'`           | Метка, отображаемая, когда нет элементов.                                                                                                                                    |
+| multiple                | `boolean`                                                              | `false`                   | Указывает, включен ли множественный выбор.                                                                                                                                   |
+| value                   | `FlatSelectPropValue<ITEM, MULTIPLE>`                                  | -                         | Текущее выбранное значение(я).                                                                                                                                               |
+| groups                  | `GROUP[]`                                                              | -                         | Массив групп для элементов.                                                                                                                                                  |
+| getItemLabel            | `(item: ITEM) => string`                                               | `(item) => item.label`    | Функция для получения метки элемента.                                                                                                                                        |
+| getItemKey              | `(item: ITEM) => string \| number`                                     | `(item) => item.id`       | Функция для получения уникального ключа элемента.                                                                                                                            |
+| getItemGroupKey         | `(item: ITEM) => string \| number \| undefined`                        | `(item) => item.groupId`  | Функция для получения ключа группы элемента.                                                                                                                                 |
+| getItemDisabled         | `(item: ITEM) => boolean \| undefined`                                 | `(item) => item.disabled` | Функция для проверки, отключен ли элемент.                                                                                                                                   |
+| getGroupLabel           | `(group: GROUP) => string`                                             | `(group) => group.label`  | Функция для получения метки группы.                                                                                                                                          |
+| getGroupKey             | `(group: GROUP) => string \| number`                                   | `(group) => group.id`     | Функция для получения уникального ключа группы.                                                                                                                              |
+| virtualScroll           | `boolean`                                                              | -                         | Указывает, включена ли виртуальная прокрутка.                                                                                                                                |
+| onScrollToBottom        | `(length: number) => void`                                             | -                         | Функция обратного вызова, срабатывающая при прокрутке до конца списка.                                                                                                       |
+| onOpen                  | `(isOpen: boolean) => void`                                            | -                         | Функция обратного вызова, срабатывающая при открытии или закрытии списка.                                                                                                    |
+| open                    | `boolean`                                                              | -                         | Контролирует состояние открытия выпадающего списка.                                                                                                                          |
+| listClassName           | `string`                                                               | -                         | Дополнительный CSS-класс для выпадающего списка.                                                                                                                             |
+| ignoreOutsideClicksRefs | `ReadonlyArray<React.RefObject<HTMLElement>>`                          | -                         | Массив рефов, игнорируемых при определении кликов вне области.                                                                                                               |
+| clearButton             | `boolean`                                                              | -                         | Указывает, включена ли кнопка очистки.                                                                                                                                       |
+| iconClear               | `IconComponent`                                                        | -                         | Компонент иконки для кнопки очистки.                                                                                                                                         |
+| iconLeft                | `IconComponent`                                                        | -                         | Компонент иконки, отображаемой слева от поля ввода.                                                                                                                          |
+| selectAll               | `boolean`                                                              | -                         | Указывает, включена ли опция "выбрать все" (только при множественном выборе).                                                                                                |
+| selectAllLabel          | `string`                                                               | 'Выбрать все'             | Метка для опции "выбрать все".                                                                                                                                               |
+| footer                  | `React.ReactNode`                                                      | -                         | Содержимое футера выпадающего списка.                                                                                                                                        |
+| view                    | `'default'` \| `'clear'`                                               | `'default'`               | Стиль отображения компонента.                                                                                                                                                |
+| bordered                | `boolean`                                                              | -                         | Указывает, есть ли у компонента граница.                                                                                                                                     |
+| anchorRef               | `React.RefObject<HTMLElement>`                                         | -                         | Ref для элемента-якоря, используемого для позиционирования списка.                                                                                                           |
+| direction               | `Direction`                                                            | -                         | Предпочтительное направление для выпадающего списка. (см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания)) |
+| spareDirection          | `Direction`                                                            | -                         | Резервное направление для выпадающего списка. (см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания))        |
+| possibleDirections      | `Direction[]`                                                          | -                         | Массив возможных направлений для выпадающего списка. (см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания)) |
+| className               | `string`                                                               | -                         | Дополнительный CSS-класс                                                                                                                                                     |
+| ref                     | `React.Ref<HTMLDivElement>`                                            | -                         | Ссылка на корневой DOM-элемент компонента                                                                                                                                    |
+
+# Содержимое
