@@ -179,7 +179,7 @@ export type FlatSelectPropsInit<
     iconLeft?: IconComponent;
     selectAll?: MULTIPLE extends true ? boolean : never;
     selectAllLabel?: string;
-    footer: React.ReactNode;
+    footer?: React.ReactNode;
     view?: FieldPropView;
     bordered?: boolean;
     anchorRef?: React.RefObject<HTMLElement>;

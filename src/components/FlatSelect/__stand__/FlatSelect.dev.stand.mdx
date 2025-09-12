@@ -1,4 +1,13 @@
 import { MdxMenu, MdxTabs } from '@consta/stand';
+import { FlatSelectExampleItems } from './examples/FlatSelectExampleItems/FlatSelectExampleItems';
+import { FlatSelectExampleDisabledItem } from './examples/FlatSelectExampleDisabledItem/FlatSelectExampleDisabledItem';
+import { FlatSelectExampleMultiple } from './examples/FlatSelectExampleMultiple/FlatSelectExampleMultiple';
+import { FlatSelectExampleGroups } from './examples/FlatSelectExampleGroups/FlatSelectExampleGroups';
+import { FlatSelectExampleClearButton } from './examples/FlatSelectExampleClearButton/FlatSelectExampleClearButton';
+import {
+  FlatSelectExampleInput,
+  FlatSelectExampleUseSearch,
+} from './examples/FlatSelectExampleInput/FlatSelectExampleInput';
 
 <MdxMenu>
 
@@ -6,12 +15,12 @@ import { MdxMenu, MdxTabs } from '@consta/stand';
 - [Импорт](#импорт)
 - [Свойства](#свойства)
 - [Содержимое](#содержимое)
-  - [Варианты](#варианты)
+  - [Элементы списка](#элементы-списка)
   - [Выбранное значение](#выбранное-значение)
-  - [Подсказка](#подсказка)
+  - [Поле ввода](#поле-ввода)
   - [Неактивный элемент списка](#неактивный-элемент-списка)
   - [Множественный выбор](#множественный-выбор)
-  - [Группы вариантов](#группы-вариантов)
+  - [Группы](#группы)
   - [Кнопка очистки поля](#кнопка-очистки-поля)
 - [Внешний вид](#внешний-вид)
   - [Размер](#размер)
@@ -129,3 +138,367 @@ type FlatSelectPropValue<ITEM, MULTIPLE extends boolean> =
 | ref                     | `React.Ref<HTMLDivElement>`                                            | -                         | Ссылка на корневой DOM-элемент компонента                                                                                                                                    |
 
 # Содержимое
+
+## Элементы списка
+
+Свойство items задаёт массив элементов выпадающего списка. Тип по умолчанию — `FlatSelectItemDefault`:
+
+```tsx
+type FlatSelectItemDefault = {
+  label: string; // название элемента (пишите с заглавной буквы, без точки).
+  id: string | number; // уникальный ключ элемента.
+  groupId?: string | number; // идентификатор группы (если используются группы).
+  disabled?: boolean; // флаг неактивного элемента.
+};
+```
+
+## Выбранное значение
+
+Свойство `value` задаёт текущее выбранное значение (один элемент или массив при `multiple`). Для обработки выбора используйте `onChange`, который возвращает выбранное значение и событие. Выбор срабатывает по клику или нажатию `Enter`.
+
+<MdxTabs>
+
+<FlatSelectExampleItems />
+
+```tsx
+const items: FlatSelectItemDefault[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleItems = () => {
+  const [value, setValue] = useState<FlatSelectItemDefault | null>();
+  return <FlatSelect items={items} value={value} onChange={setValue} />;
+};
+```
+
+</MdxTabs>
+
+## Поле ввода
+
+Свойство `input` включает поле ввода для поиска по элементам. Логика поиска не реализована внутри компонента но вы можете использовать свойство `onInput` для реализации поиска.
+
+<MdxTabs>
+
+<FlatSelectExampleInput />
+
+```tsx
+import { useSearch } from '@consta/uikit/SelectCanary';
+import { useDebounce } from '@consta/uikit/useDebounce';
+import { FlatSelect } from '@consta/uikit/FlatSelect';
+
+const items: FlatSelectItemDefault[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const search = (item: FlatSelectItemDefault, input: string) => {
+  return item.label.toLowerCase().includes(input.toLowerCase());
+};
+
+const FlatSelectExampleInput = () => {
+  const [value, setValue] = useState<FlatSelectItemDefault | null>();
+  const [inputState, setInputState] = useState('');
+
+  const filteredItems = useMemo(() => {
+    if (!inputState) return items;
+    return items.filter((item) => search(item, inputState));
+  }, [inputState]);
+
+  return (
+    <FlatSelect
+      items={filteredItems}
+      input
+      placeholder="Поиск"
+      onInput={useDebounce(setInputState, 300)}
+      value={value}
+      onChange={setValue}
+    />
+  );
+};
+```
+
+</MdxTabs>
+
+Также можете взять хук `useSearch` из `@consta/uikit/SelectCanary` для реализации поиска.
+
+<MdxTabs>
+
+<FlatSelectExampleUseSearch />
+
+```tsx
+import { useSearch } from '@consta/uikit/SelectCanary';
+import { FlatSelect } from '@consta/uikit/FlatSelect';
+
+const items: FlatSelectItemDefault[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleUseSearch = () => {
+  const [value, setValue] = useState<FlatSelectItemDefault | null>();
+  return (
+    <FlatSelect
+      {...useSearch({ items })}
+      placeholder="Поиск"
+      value={value}
+      onChange={setValue}
+    />
+  );
+};
+```
+
+</MdxTabs>
+
+## Неактивный элемент списка
+
+Чтобы сделать элемент списка неактивным, добавьте в объект массива `items` свойство `disabled: true`. Или используйте функцию `getItemDisabled`.
+
+<MdxTabs>
+
+<FlatSelectExampleDisabledItem />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+  disabled: boolean;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый — этот вариант не выбрать',
+    id: 1,
+    disabled: true,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+    disabled: false,
+  },
+  {
+    label: 'Третий — и этот тоже не выбрать',
+    id: 3,
+    disabled: true,
+  },
+];
+
+const FlatSelectExampleDisabledItem = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Example col={1}>
+      <FlatSelect
+        placeholder="Выберите вариант"
+        items={items}
+        value={value}
+        onChange={setValue}
+      />
+    </Example>
+  );
+};
+```
+
+</MdxTabs>
+
+## Множественный выбор
+
+Для выбора нескольких элементов установите `multiple`. В этом случае value и onChange работают с массивом элементов.
+
+<MdxTabs>
+
+<FlatSelectExampleMultiple />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleMultiple = () => {
+  const [value, setValue] = useState<Item[] | null>();
+  return (
+    <FlatSelect items={items} value={value} onChange={setValue} multiple />
+  );
+};
+```
+
+</MdxTabs>
+
+## Группы
+
+Для группировки элементов используйте свойство `groups`, тип по умолчанию — `FlatSelectGroupDefault`:
+
+```ts
+type FlatSelectGroupDefault = {
+  label: string;
+  id: string | number;
+};
+```
+
+Элементы списка привязываются к группе по свойству `groupId` или через функцию `getItemGroupId`.
+
+<MdxTabs>
+
+<FlatSelectExampleGroups />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+  groupId: number;
+};
+
+type Group = {
+  label: string;
+  id: number;
+};
+
+const groups: Group[] = [
+  {
+    id: 1,
+    label: 'Первая группа',
+  },
+  {
+    id: 2,
+    label: 'Вторая группа',
+  },
+  {
+    id: 3,
+    label: 'Третья группа',
+  },
+];
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+    groupId: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+    groupId: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+    groupId: 1,
+  },
+  {
+    label: 'Четвертый',
+    id: 4,
+    groupId: 3,
+  },
+  {
+    label: 'Пятый',
+    id: 5,
+    groupId: 2,
+  },
+];
+
+const FlatSelectExampleGroups = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <FlatSelect
+      items={items}
+      value={value}
+      onChange={setValue}
+      groups={groups}
+    />
+  );
+};
+```
+
+</MdxTabs>
+
+## Кнопка очистки поля
+
+Чтобы добавить кнопку очистки поля, установите свойство `clearButton`.
+
+<MdxTabs>
+
+<FlatSelectExampleClearButton />
+
+```tsx
+import { useSearch } from '@consta/uikit/SelectCanary';
+
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleClearButton = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <FlatSelect
+      {...useSearch({ items })}
+      placeholder="Поиск"
+      value={value}
+      onChange={setValue}
+      clearButton
+    />
+  );
+};
+```
+
+</MdxTabs>
