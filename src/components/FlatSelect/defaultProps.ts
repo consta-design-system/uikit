@@ -33,7 +33,7 @@ const defaultProps = {
   getItemLabel,
   labelForEmptyItems: defaultLabelForEmptyItems,
   selectAllLabel: defaultSelectAllLabel,
-  view: 'clear',
+  view: 'default',
   size: 'm',
 } as const;
 

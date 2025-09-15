@@ -1,9 +1,19 @@
-import { MdxMenu, MdxTabs } from '@consta/stand';
+import { MdxMenu, MdxTabs, MdxInformer } from '@consta/stand';
 import { FlatSelectExampleItems } from './examples/FlatSelectExampleItems/FlatSelectExampleItems';
 import { FlatSelectExampleDisabledItem } from './examples/FlatSelectExampleDisabledItem/FlatSelectExampleDisabledItem';
 import { FlatSelectExampleMultiple } from './examples/FlatSelectExampleMultiple/FlatSelectExampleMultiple';
 import { FlatSelectExampleGroups } from './examples/FlatSelectExampleGroups/FlatSelectExampleGroups';
+import { FlatSelectExampleSize } from './examples/FlatSelectExampleSize/FlatSelectExampleSize';
 import { FlatSelectExampleClearButton } from './examples/FlatSelectExampleClearButton/FlatSelectExampleClearButton';
+import { FlatSelectExampleView } from './examples/FlatSelectExampleView/FlatSelectExampleView';
+import { FlatSelectExampleBorder } from './examples/FlatSelectExampleBorder/FlatSelectExampleBorder';
+import { FlatSelectExampleForm } from './examples/FlatSelectExampleForm/FlatSelectExampleForm';
+import { FlatSelectExampleIcon } from './examples/FlatSelectExampleIcon/FlatSelectExampleIcon';
+import { FlatSelectExampleFooter } from './examples/FlatSelectExampleFooter/FlatSelectExampleFooter';
+import { FlatSelectExampleAnchor } from './examples/FlatSelectExampleAnchor/FlatSelectExampleAnchor';
+import { FlatSelectExampleDisabled } from './examples/FlatSelectExampleDisabled/FlatSelectExampleDisabled';
+import { FlatSelectExampleCreate } from './examples/FlatSelectExampleCreate/FlatSelectExampleCreate';
+import { FlatSelectExampleVirtualScroll } from './examples/FlatSelectExampleVirtualScroll/FlatSelectExampleVirtualScroll';
 import {
   FlatSelectExampleInput,
   FlatSelectExampleUseSearch,
@@ -22,14 +32,16 @@ import {
   - [Множественный выбор](#множественный-выбор)
   - [Группы](#группы)
   - [Кнопка очистки поля](#кнопка-очистки-поля)
+  - [Иконка](#иконка)
+  - [Подвал](#подвал)
 - [Внешний вид](#внешний-вид)
   - [Размер](#размер)
-  - [Стиль](#стиль)
+  - [Вид](#вид)
+  - [Обводка](#обводка)
   - [Форма](#форма)
-  - [Статус](#статус)
+  - [Всплывающий вид](#всплывающий-вид)
 - [Поведение](#поведение)
   - [Неактивный компонент](#неактивный-компонент)
-  - [Поиск](#поиск)
   - [Создание новых вариантов](#создание-новых-вариантов)
   - [Виртуализация списка](#виртуализация-списка)
   - [Индикация загрузки](#индикация-загрузки)
@@ -42,17 +54,17 @@ import {
 
 </MdxMenu>
 
-# Обзор
+## Обзор
 
 Компонент `FlatSelect` предоставляет список для выбора одного или нескольких вариантов. Поддерживает кастомизацию, группировку, поиск, виртуализацию и другие функции.
 
-# Импорт
+## Импорт
 
 ```js
 import { FlatSelect } from '@consta/uikit/FlatSelect';
 ```
 
-# Свойства
+## Свойства
 
 ```ts
 type FlatSelectPropOnChange<ITEM, MULTIPLE extends boolean> = (
@@ -137,9 +149,9 @@ type FlatSelectPropValue<ITEM, MULTIPLE extends boolean> =
 | className               | `string`                                                               | -                         | Дополнительный CSS-класс                                                                                                                                                     |
 | ref                     | `React.Ref<HTMLDivElement>`                                            | -                         | Ссылка на корневой DOM-элемент компонента                                                                                                                                    |
 
-# Содержимое
+## Содержимое
 
-## Элементы списка
+### Элементы списка
 
 Свойство items задаёт массив элементов выпадающего списка. Тип по умолчанию — `FlatSelectItemDefault`:
 
@@ -152,7 +164,7 @@ type FlatSelectItemDefault = {
 };
 ```
 
-## Выбранное значение
+### Выбранное значение
 
 Свойство `value` задаёт текущее выбранное значение (один элемент или массив при `multiple`). Для обработки выбора используйте `onChange`, который возвращает выбранное значение и событие. Выбор срабатывает по клику или нажатию `Enter`.
 
@@ -184,7 +196,7 @@ const FlatSelectExampleItems = () => {
 
 </MdxTabs>
 
-## Поле ввода
+### Поле ввода
 
 Свойство `input` включает поле ввода для поиска по элементам. Логика поиска не реализована внутри компонента но вы можете использовать свойство `onInput` для реализации поиска.
 
@@ -280,7 +292,7 @@ const FlatSelectExampleUseSearch = () => {
 
 </MdxTabs>
 
-## Неактивный элемент списка
+### Неактивный элемент списка
 
 Чтобы сделать элемент списка неактивным, добавьте в объект массива `items` свойство `disabled: true`. Или используйте функцию `getItemDisabled`.
 
@@ -330,7 +342,7 @@ const FlatSelectExampleDisabledItem = () => {
 
 </MdxTabs>
 
-## Множественный выбор
+### Множественный выбор
 
 Для выбора нескольких элементов установите `multiple`. В этом случае value и onChange работают с массивом элементов.
 
@@ -369,7 +381,7 @@ const FlatSelectExampleMultiple = () => {
 
 </MdxTabs>
 
-## Группы
+### Группы
 
 Для группировки элементов используйте свойство `groups`, тип по умолчанию — `FlatSelectGroupDefault`:
 
@@ -456,7 +468,7 @@ const FlatSelectExampleGroups = () => {
 
 </MdxTabs>
 
-## Кнопка очистки поля
+### Кнопка очистки поля
 
 Чтобы добавить кнопку очистки поля, установите свойство `clearButton`.
 
@@ -500,5 +512,540 @@ const FlatSelectExampleClearButton = () => {
   );
 };
 ```
+
+</MdxTabs>
+
+### Иконка
+
+Чтобы добавить иконку, установите свойство `iconLeft`.
+
+<MdxTabs>
+
+<FlatSelectExampleIcon />
+
+```tsx
+import { useSearch } from '@consta/uikit/SelectCanary';
+import { IconSearchStroked } from '@consta/icons/IconSearchStroked';
+
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleIcon = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <FlatSelect
+      {...useSearch({ items })}
+      placeholder="Поиск"
+      iconLeft={IconSearchStroked}
+      value={value}
+      onChange={setValue}
+    />
+  );
+};
+```
+
+</MdxTabs>
+
+### Подвал
+
+Чтобы добавить подвал, установите свойство `footer`. Если передавать массив нод, то отступы между нодами будут расставляться автоматически.
+
+<MdxTabs>
+
+<FlatSelectExampleFooter />
+
+```tsx
+import { useSearch } from '@consta/uikit/SelectCanary';
+
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const cnFlatSelectExampleFooter = cn('FlatSelectExampleFooter');
+
+const FlatSelectExampleFooter = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <FlatSelect
+      {...useSearch({ items })}
+      className={cnFlatSelectExampleFooter()}
+      placeholder="Поиск"
+      value={value}
+      onChange={setValue}
+      bordered
+      footer={[
+        <Button label="Сбросить" view="ghost" />,
+        <Button label="Применить" />,
+      ]}
+    />
+  );
+};
+```
+
+```css
+.FlatSelectExampleFooter {
+  background: var(--color-bg-default);
+
+  .FlatSelectFooter {
+    background: var(--color-bg-secondary);
+  }
+}
+```
+
+</MdxTabs>
+
+## Внешний вид
+
+### Размеры
+
+Для изменения размера выбора используйте свойство `size`. Доступные значения: `xs`, `s`, `m`, `l`.
+
+<MdxTabs>
+
+<FlatSelectExampleSize />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleSize = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <FlatSelect items={items} value={value} onChange={setValue} size="s" />
+  );
+};
+```
+
+</MdxTabs>
+
+### Вид
+
+За вид отвечает свойство `view`. Доступные значения: `default`, `clear`.
+
+<MdxTabs>
+
+<FlatSelectExampleView />
+
+```tsx
+import { useSearch } from '@consta/uikit/SelectCanary';
+
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleView = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <FlatSelect
+      {...useSearch({ items })}
+      value={value}
+      onChange={setValue}
+      view="clear"
+    />
+  );
+};
+```
+
+</MdxTabs>
+
+### Обводка
+
+Для того, чтобы добавить обводку, установите свойство `bordered`.
+
+<MdxInformer>
+
+Если включить свойство `bordered`, то свойство `view` автоматически станет `clear`.
+
+</MdxInformer>
+
+<MdxTabs>
+
+<FlatSelectExampleBorder />
+
+```tsx
+import { useSearch } from '@consta/uikit/SelectCanary';
+
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleBorder = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <FlatSelect
+      {...useSearch({ items })}
+      value={value}
+      onChange={setValue}
+      bordered
+    />
+  );
+};
+```
+
+</MdxTabs>
+
+### Форма
+
+Для того, чтобы добавить форму, установите свойство `form`. Доступные значения: `default`, `round`, `brick`.
+
+<MdxInformer>
+
+В случае, если установлено свойство `bordered`, то свойство будет менять форму контейнера. Если нет то форму поля ввода.
+
+</MdxInformer>
+
+<MdxTabs>
+
+<FlatSelectExampleForm />
+
+```tsx
+import { useSearch } from '@consta/uikit/SelectCanary';
+
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleForm = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <FlatSelect
+      {...useSearch({ items })}
+      value={value}
+      onChange={setValue}
+      form="round"
+    />
+  );
+};
+```
+
+</MdxTabs>
+
+### Всплывающий вид
+
+Для того, чтобы добавить всплывающий вид, передайте в свойство `anchorRef` ссылку на элемент по клику на которой необходимо отображать компонент `FlatSelect`.
+
+<MdxInformer>
+
+Компонент с `anchorRef` всегда будет отображаться как `view="clear"` и `bordered={true}`.
+
+</MdxInformer>
+
+<MdxTabs>
+
+<FlatSelectExampleAnchor />
+
+```tsx
+import { useSearch } from '@consta/uikit/SelectCanary';
+
+const items: FlatSelectItemDefault[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleAnchor = () => {
+  const [value, setValue] = useState<FlatSelectItemDefault | null>();
+  const anchorRef = useRef<HTMLButtonElement | null>(null);
+  return (
+    <>
+      <Button iconLeft={IconFunnel} ref={anchorRef} />
+      <FlatSelect
+        {...useSearch({ items })}
+        anchorRef={anchorRef}
+        placeholder="Поиск"
+        value={value}
+        onChange={setValue}
+      />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Поведение
+
+### Неактивный компонент
+
+Для того, чтобы добавить неактивный компонент, установите свойство `disabled`.
+
+<MdxTabs>
+
+<FlatSelectExampleDisabled />
+
+```tsx
+const items: FlatSelectItemDefault[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const FlatSelectExampleDisabled = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <Example col={1}>
+      <FlatSelect items={items} value={value} onChange={setValue} disabled />
+    </Example>
+  );
+};
+```
+
+</MdxTabs>
+
+### Создание новых вариантов
+
+Свойство `onCreate` позволяет добавлять новые элементы в список. Передаётся label введённого значения.
+
+<MdxTabs>
+
+<FlatSelectExampleCreate />
+
+```tsx
+import React, { useCallback, useState } from 'react';
+
+import {
+  getSearchFunctionDefault,
+  useSearch,
+} from '@consta/uikit/SelectCanary';
+
+import { FlatSelect } from '@consta/uikit/FlatSelect';
+
+const getItemLabel = (item: string) => item;
+
+export const FlatSelectExampleCreate = () => {
+  const [value, setValue] = useState<string | null>();
+  const [list, setList] = useState<string[]>(['Первый', 'Второй', 'Третий']);
+  const { items, labelForEmptyItems, onInput } = useSearch({
+    items: list,
+    search: getSearchFunctionDefault(getItemLabel),
+  });
+  const onCreate = useCallback(
+    (label: string) => setList((state) => [label, ...state]),
+    [],
+  );
+
+  return (
+    <FlatSelect
+      placeholder="Выберите вариант"
+      items={items}
+      value={value}
+      onChange={setValue}
+      getItemLabel={getItemLabel}
+      getItemKey={getItemLabel}
+      onCreate={!items.length ? onCreate : undefined}
+      labelForEmptyItems={labelForEmptyItems}
+      onInput={onInput}
+      input
+    />
+  );
+};
+```
+
+</MdxTabs>
+
+### Виртуализация списка
+
+Свойство `virtualScroll` оптимизирует отображение больших списков.
+
+<MdxInformer>
+
+Для того чтобы виртуальный скролл работал необходимо ограничить высоты списка, это можно сделать через свойство `listClassName`.
+
+</MdxInformer>
+
+<MdxTabs>
+
+<FlatSelectExampleVirtualScroll />
+
+```tsx
+import './FlatSelectExampleVirtualScroll.css';
+
+import { Example } from '@consta/stand';
+import React, { useState } from 'react';
+
+import { useSearch } from '@consta/uikit/SelectCanary';
+
+import { FlatSelect } from '@consta/uikit/FlatSelect';
+
+type Item = {
+  label: string;
+  id: number;
+  groupId: number;
+};
+
+type Group = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = new Array(1000).fill(null).map((_, i) => ({
+  label: `Опция ${i + 1}`,
+  groupId: Math.floor(i / 100) + 1,
+  id: i,
+}));
+
+const groups: Group[] = new Array(items.length / 100)
+  .fill(null)
+  .map((_, i) => ({
+    id: i + 1,
+    label: `Группа ${i + 1}`,
+  }));
+
+const cnFlatSelectExampleVirtualScroll = cn('FlatSelectExampleVirtualScroll');
+
+export const FlatSelectExampleVirtualScroll = () => {
+  const [value, setValue] = useState<Item[] | null>();
+
+  return (
+    <Example col={1}>
+      <FlatSelect
+        {...useSearch({ items })}
+        listClassName={cnFlatSelectExampleVirtualScroll('List')}
+        placeholder="Поиск"
+        value={value}
+        onChange={setValue}
+        groups={groups}
+        multiple
+        selectAll
+        virtualScroll
+      />
+    </Example>
+  );
+};
+```
+
+```css
+.FlatSelectExampleVirtualScroll {
+  &-List {
+    height: 200px;
+  }
+}
+```
+
+</MdxTabs>
+
+### Индикация загрузки
+
+Свойство `loading` позволяет показать индикацию загрузки.
+
+<MdxTabs>
+
+{/* <FlatSelectExampleLoading /> */}
 
 </MdxTabs>

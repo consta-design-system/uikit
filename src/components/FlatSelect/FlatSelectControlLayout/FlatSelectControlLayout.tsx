@@ -1,5 +1,4 @@
 import { IconComponent } from '@consta/icons/Icon';
-import { IconSearchStroked } from '@consta/icons/IconSearchStroked';
 import { AtomMut } from '@reatom/framework';
 import { useAtom } from '@reatom/npm-react';
 import React, { forwardRef } from 'react';
@@ -21,6 +20,7 @@ type FieldButtonProps = Omit<
   onDropdownButton?: (e: React.SyntheticEvent<Element, Event>) => void;
   iconClear?: IconComponent;
   leftSide?: React.ReactNode | React.ReactNode[];
+  valueAtom: AtomMut<string>;
 };
 
 export const FlatSelectControlLayout = forwardRef<
@@ -38,11 +38,14 @@ export const FlatSelectControlLayout = forwardRef<
       clearButtonAtom,
       iconClear,
       view,
+      valueAtom,
       ...props
     },
     ref,
   ) => {
-    const [clearButton] = useAtom(clearButtonAtom);
+    const [clearButton] = useAtom(
+      (ctx) => ctx.spy(clearButtonAtom) && !!ctx.spy(valueAtom),
+    );
 
     return (
       <FieldControlLayout

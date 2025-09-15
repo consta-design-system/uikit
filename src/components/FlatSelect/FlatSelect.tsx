@@ -122,7 +122,7 @@ const FlatSelectRender = (
     renderItem: renderItemProp,
   });
 
-  const view = !input || anchorRef ? 'clear' : viewProp;
+  const view = !input || anchorRef || borderedProp ? 'clear' : viewProp;
   const bordered = anchorRef ? true : borderedProp;
   const fieldInputRef = useForkRef([inputRef, inputRefProp]);
 
@@ -173,6 +173,7 @@ const FlatSelectRender = (
             clearButtonAtom={clearButtonAtom}
             size={size}
             view={view}
+            valueAtom={inputValueAtom}
           >
             <FieldInput
               onFocus={handleInputFocus}
