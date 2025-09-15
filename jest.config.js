@@ -16,7 +16,11 @@ module.exports = {
     // Транспайлим библиотеки на es-модулях в commonjs-модули
     `<rootDir>/node_modules/(?!(@consta)/).+\\.(js|jsx|ts|tsx)`,
   ],
-  collectCoverageFrom: ['**/*.{ts,tsx}', '!**/*.stories.tsx'],
+  collectCoverageFrom: [
+    '**/*.{ts,tsx}',
+    '!**/*.stories.tsx',
+    '!**/__stand__/**',
+  ],
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['./jest.setup.ts'],
 };

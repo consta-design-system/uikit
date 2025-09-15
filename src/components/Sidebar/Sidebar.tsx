@@ -33,7 +33,7 @@ export const sidebarPropSize = [
 export type SidebarPropSize = typeof sidebarPropSize[number];
 const sidebarPropSizeDefault: SidebarPropSize = sidebarPropSize[1];
 
-type SidebarProps = PropsWithHTMLAttributes<
+export type SidebarProps = PropsWithHTMLAttributes<
   {
     isOpen?: boolean;
     onClose?: () => void;
