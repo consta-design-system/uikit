@@ -32,7 +32,7 @@ export const TextFieldExampleTextLeft = () => {
   return (
     <Example col={1}>
       <TextField leftSide="куда" />
-      <TextField leftSide="кому" />
+      <TextField leftSide={IconDiamond} rightSide="карат" />
     </Example>
   );
 };
