@@ -37,7 +37,7 @@ export type ThemeTogglerProps<ITEM = ThemeTogglerItemDefault> =
       getItemLabel?: ThemeTogglerPropGetItemLabel<ITEM>;
       getItemIcon?: ThemeTogglerPropGetItemIcon<ITEM>;
       direction?: Direction;
-      possibleDirections?: readonly Direction[];
+      possibleDirections?: Direction[];
       children?: never;
       view?: ButtonPropView;
     },

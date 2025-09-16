@@ -124,7 +124,7 @@ export type FlatSelectPropsInit<
     virtualScroll?: boolean;
     onScrollToBottom?: (length: number) => void;
     onOpen?: (isOpen: boolean) => void;
-    open?: boolean;
+    isOpen?: boolean;
     listClassName?: string;
     ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
     clearButton?: boolean;

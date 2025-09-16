@@ -82,6 +82,7 @@ const SelectItemAllCounterCheckbox: React.FC<{
       checked={checked}
       intermediate={intermediate}
       size={sizeCheckboxMap[size]}
+      tabIndex={-1}
     />
   );
 };

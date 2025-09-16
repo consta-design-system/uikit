@@ -128,7 +128,7 @@ export const useFlatSelect = <
   const valuePropAtom = usePropAtom(propsAtom, 'value');
   const disabledAtom = usePropAtom(propsAtom, 'disabled');
   const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
-  const openPropAtom = usePropAtom(propsAtom, 'open');
+  const openPropAtom = usePropAtom(propsAtom, 'isOpen');
 
   const dropdownZIndexAtom = useCreateAtom((ctx) => {
     const zIndex = ctx.spy(propsAtom).style?.zIndex;

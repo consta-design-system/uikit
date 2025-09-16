@@ -14,6 +14,10 @@ import { FlatSelectExampleAnchor } from './examples/FlatSelectExampleAnchor/Flat
 import { FlatSelectExampleDisabled } from './examples/FlatSelectExampleDisabled/FlatSelectExampleDisabled';
 import { FlatSelectExampleCreate } from './examples/FlatSelectExampleCreate/FlatSelectExampleCreate';
 import { FlatSelectExampleVirtualScroll } from './examples/FlatSelectExampleVirtualScroll/FlatSelectExampleVirtualScroll';
+import { FlatSelectExampleLoading } from './examples/FlatSelectExampleLoading/FlatSelectExampleLoading';
+import { FlatSelectExampleSelectAll } from './examples/FlatSelectExampleSelectAll/FlatSelectExampleSelectAll';
+import { FlatSelectExampleIsOpen } from './examples/FlatSelectExampleIsOpen/FlatSelectExampleIsOpen';
+import { FlatSelectExampleRenderItem } from './examples/FlatSelectExampleRenderItem/FlatSelectExampleRenderItem';
 import {
   FlatSelectExampleInput,
   FlatSelectExampleUseSearch,
@@ -49,7 +53,6 @@ import {
   - [Управление состоянием выпадающего списка](#управление-состоянием-выпадающего-списка)
 - [Кастомизация](#кастомизация)
   - [Кастомный элемент списка](#кастомный-элемент-списка)
-  - [Кастомное выбранное значение](#кастомное-выбранное-значение)
   - [Кастомные типы данных](#кастомные-типы-данных)
 
 </MdxMenu>
@@ -1042,10 +1045,406 @@ export const FlatSelectExampleVirtualScroll = () => {
 
 ### Индикация загрузки
 
-Свойство `loading` позволяет показать индикацию загрузки.
+Свойство `isLoading` позволяет показать индикацию загрузки. Если список пуст, то индикация отображается по середине списка, если список не пуст, то индикация отображается внизу списка.
 
 <MdxTabs>
 
-{/* <FlatSelectExampleLoading /> */}
+<FlatSelectExampleLoading />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+};
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+const itemsEmpty: Item[] = [];
+
+const FlatSelectExampleLoading = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <>
+      <FlatSelect
+        items={items}
+        value={value}
+        onChange={setValue}
+        isLoading
+        bordered
+      />
+      <FlatSelect
+        items={itemsEmpty}
+        value={value}
+        onChange={setValue}
+        isLoading
+        bordered
+      />
+    </>
+  );
+};
+```
 
 </MdxTabs>
+
+### Выбор всех элементов
+
+Свойство `selectAll` позволяет выбирать все варианты. Если будет включена группировка (свойство `groups`), то выбор всех вариантов будет работать только внутри группы.
+
+<MdxTabs>
+
+<FlatSelectExampleSelectAll />
+
+```tsx
+type Item = {
+  label: string;
+  id: number;
+  groupId: number;
+};
+
+type Group = {
+  label: string;
+  id: number;
+};
+
+const groups: Group[] = [
+  {
+    id: 1,
+    label: 'Первая группа',
+  },
+  {
+    id: 2,
+    label: 'Вторая группа',
+  },
+  {
+    id: 3,
+    label: 'Третья группа',
+  },
+];
+
+const items: Item[] = [
+  {
+    label: 'Первый',
+    id: 1,
+    groupId: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+    groupId: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+    groupId: 1,
+  },
+  {
+    label: 'Четвертый',
+    id: 4,
+    groupId: 3,
+  },
+  {
+    label: 'Пятый',
+    id: 5,
+    groupId: 2,
+  },
+];
+
+const FlatSelectExampleSelectAll = () => {
+  const [value, setValue] = useState<Item[] | null>();
+  return (
+    <>
+      <FlatSelect
+        items={items}
+        value={value}
+        onChange={setValue}
+        multiple
+        selectAll
+        bordered
+      />
+      <FlatSelect
+        items={items}
+        value={value}
+        onChange={setValue}
+        groups={groups}
+        multiple
+        selectAll
+        bordered
+      />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+### Управление выпадающим списком
+
+Для управления состоянием списка используйте:
+
+- `isOpen` — флаг открытия/закрытия.
+- `onOpen` — обработчик открытия/закрытия.
+- `ignoreOutsideClicksRefs` — элементы, игнорируемые при клике вне компонента.
+
+<MdxTabs>
+
+<FlatSelectExampleIsOpen />
+
+```tsx
+import { IconFunnel } from '@consta/icons/IconFunnel';
+import React, { useRef, useState } from 'react';
+
+import { Button } from '@consta/uikit/Button';
+import { useSearch } from '@consta/uikit/SelectCanary';
+
+import { FlatSelect, FlatSelectItemDefault } from '@consta/uikit/FlatSelect';
+
+const items: FlatSelectItemDefault[] = [
+  {
+    label: 'Первый',
+    id: 1,
+  },
+  {
+    label: 'Второй',
+    id: 2,
+  },
+  {
+    label: 'Третий',
+    id: 3,
+  },
+];
+
+export const FlatSelectExampleIsOpen = () => {
+  const [value, setValue] = useState<FlatSelectItemDefault | null>();
+  const anchorRef = useRef<HTMLButtonElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <Button iconLeft={IconFunnel} ref={anchorRef} />
+      <Button
+        label="Программный вызов"
+        onClick={() => setIsOpen((state) => !state)}
+        ref={buttonRef}
+      />
+      <FlatSelect
+        {...useSearch({ items })}
+        placeholder="Поиск"
+        value={value}
+        onChange={setValue}
+        anchorRef={anchorRef}
+        isOpen={isOpen}
+        onOpen={setIsOpen}
+        ignoreOutsideClicksRefs={[buttonRef]}
+      />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Кастомизация
+
+### Кастомный элемент списка
+
+Свойство `renderItem` позволяет настроить отображение элементов списка через функцию рендера.
+
+<MdxTabs>
+
+<FlatSelectExampleRenderItem />
+
+```tsx
+import React, { useState } from 'react';
+
+import { Badge } from '@consta/uikit/Badge';
+import { ListItem } from '@consta/uikit//ListCanary';
+import { Radio } from '@consta/uikit//Radio';
+import { useSearch } from '@consta/uikit//SelectCanary';
+import { cnMixSpace } from '@consta/uikit//MixSpace';
+import { FlatSelect } from '@consta/uikit/FlatSelect';
+
+type Item = {
+  label: string;
+  id: number;
+  status?: 'repairs' | 'serviceable';
+};
+
+const items: Item[] = [
+  {
+    label: 'Принтер',
+    id: 1,
+    status: 'repairs',
+  },
+  {
+    label: 'Монитор',
+    id: 2,
+    status: 'serviceable',
+  },
+  {
+    label: 'Ноутбук',
+    id: 3,
+    status: 'serviceable',
+  },
+  {
+    label: 'Стол',
+    id: 4,
+  },
+];
+
+const mapLabel = {
+  repairs: 'На ремонте',
+  serviceable: 'Исправен',
+} as const;
+
+const mapStatus = {
+  repairs: 'error',
+  serviceable: 'success',
+} as const;
+
+export const searchCompare = (
+  searchValue: string,
+  compare?: string,
+): boolean => {
+  if (!compare) {
+    return false;
+  }
+
+  return (
+    compare.toLocaleLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1
+  );
+};
+
+const searchFunction = (item: Item, searchValue: string): boolean => {
+  const searchOfLabel = searchCompare(searchValue, item.label);
+
+  if (searchOfLabel) {
+    return searchOfLabel;
+  }
+
+  return searchCompare(searchValue, item.status && mapLabel[item.status]);
+};
+
+export const FlatSelectExampleRenderItem = () => {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <FlatSelect
+      {...useSearch({ items, search: searchFunction })}
+      placeholder="Поиск"
+      clearButton
+      value={value}
+      onChange={setValue}
+      renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => {
+        return (
+          <ListItem
+            aria-selected={active}
+            active={hovered}
+            role="option"
+            aria-hidden="true"
+            onMouseEnter={onMouseEnter}
+            onClick={onClick}
+            ref={ref}
+            leftSide={<Radio checked={active} tabIndex={-1} />}
+            label={
+              <>
+                {item.label}
+                {item.status && (
+                  <Badge
+                    className={cnMixSpace({ mL: 'm' })}
+                    as="span"
+                    size="s"
+                    label={mapLabel[item.status]}
+                    status={mapStatus[item.status]}
+                  />
+                )}
+              </>
+            }
+          />
+        );
+      }}
+    />
+  );
+};
+```
+
+</MdxTabs>
+
+### Кастомные типы данных
+
+Для использования кастомных типов данных задайте геттеры: `getItemLabel`, `getItemKey`, `getItemGroupKey`, `getItemDisabled`, `getGroupLabel`, `getGroupKey`.
+
+#### Пример с кастомным Item
+
+```tsx
+import React, { useState } from 'react';
+import { FlatSelect } from '@consta/uikit/FlatSelect';
+
+function SelectExampleCustomTypes() {
+  const [value, setValue] = useState<string | null>();
+  return (
+    <FlatSelect
+      items={['Первый', 'Второй', 'Третий']}
+      value={value}
+      onChange={setValue}
+      getItemKey={(item) => item}
+      getItemLabel={(item) => item}
+    />
+  );
+}
+```
+
+#### Пример с кастомным Item и Group
+
+```tsx
+import React, { useState } from 'react';
+import { FlatSelect } from '@consta/uikit/Select';
+
+type Item = {
+  name: string;
+  group: string;
+};
+
+const items: Item[] = [
+  { name: 'Первый', group: 'Первая группа' },
+  { name: 'Второй', group: 'Третья группа' },
+  { name: 'Третий', group: 'Вторая группа' },
+  { name: 'Четвертый', group: 'Первая группа' },
+  { name: 'Пятый', group: 'Первая группа' },
+  { name: 'Шестой', group: 'Третья группа' },
+  { name: 'Седьмой', group: 'Первая группа' },
+  { name: 'Восьмой', group: 'Вторая группа' },
+  { name: 'Девятый', group: 'Третья группа' },
+  { name: 'Десятый', group: 'Вторая группа' },
+];
+
+const groups: string[] = ['Первая группа', 'Вторая группа', 'Третья группа'];
+
+function SelectExampleCustomTypesWithGroups() {
+  const [value, setValue] = useState<Item | null>();
+  return (
+    <FlatSelect
+      items={items}
+      groups={groups}
+      value={value}
+      onChange={setValue}
+      getItemKey={(item) => item.name}
+      getItemLabel={(item) => item.name}
+      getItemGroupKey={(item) => item.group}
+      getGroupKey={(group: string) => group}
+      getGroupLabel={(group: string) => group}
+    />
+  );
+}
+```
