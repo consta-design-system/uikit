@@ -77,6 +77,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   view: 'default' | 'clear';
   form: 'default' | 'brick' | 'round';
   createButtonOnMouseEnter: () => void;
+  disabledAtom: AtomMut<boolean>;
 }>;
 
 type FlatSelectListComponent = <ITEM, GROUP>(
@@ -145,7 +146,7 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
     selectAllLabel,
     view,
     createButtonOnMouseEnter,
-
+    disabledAtom,
     ...otherProps
   } = props;
 
@@ -267,6 +268,7 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
                           item,
                         })}
                         index={index}
+                        disabledAtom={disabledAtom}
                       />
                     );
                   }

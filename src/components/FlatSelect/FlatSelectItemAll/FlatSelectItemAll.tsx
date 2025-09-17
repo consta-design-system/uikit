@@ -11,7 +11,7 @@ import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttri
 
 import { sizeCheckboxMap } from '../FlatSelectItem';
 
-export type SelectItemAllProps = PropsWithHTMLAttributesAndRef<
+export type FlatSelectItemAllProps = PropsWithHTMLAttributesAndRef<
   {
     size: FieldPropSize;
     hovered?: boolean;
@@ -21,6 +21,7 @@ export type SelectItemAllProps = PropsWithHTMLAttributesAndRef<
     highlightedIndexAtom: AtomMut<number>;
     index: number;
     label: string;
+    disabledAtom: AtomMut<boolean>;
   },
   HTMLDivElement
 >;
@@ -59,9 +60,10 @@ const SelectItemAllCounter: React.FC<{
 
 const SelectItemAllCounterCheckbox: React.FC<{
   groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
+  disabledAtom: AtomMut<boolean>;
   groupId: string | number;
   size: FieldPropSize;
-}> = ({ groupsCounterAtom, groupId, size }) => {
+}> = ({ groupsCounterAtom, groupId, size, disabledAtom }) => {
   const [checked] = useAtom((ctx) => {
     const counter = ctx.spy(groupsCounterAtom);
     if (counter[groupId] === undefined) {
@@ -76,6 +78,7 @@ const SelectItemAllCounterCheckbox: React.FC<{
     }
     return counter[groupId][0] > 0 && counter[groupId][0] < counter[groupId][1];
   });
+  const [disabled] = useAtom(disabledAtom);
 
   return (
     <Checkbox
@@ -83,11 +86,12 @@ const SelectItemAllCounterCheckbox: React.FC<{
       intermediate={intermediate}
       size={sizeCheckboxMap[size]}
       tabIndex={-1}
+      disabled={disabled}
     />
   );
 };
 
-export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
+export const SelectItemAll: React.FC<FlatSelectItemAllProps> = forwardRef(
   (props, ref) => {
     const {
       size,
@@ -96,12 +100,14 @@ export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
       groupsCounterAtom,
       groupId,
       highlightedIndexAtom,
+      disabledAtom,
       index,
       label,
       ...otherProps
     } = props;
 
     const [hovered] = useAtom((ctx) => ctx.spy(highlightedIndexAtom) === index);
+    const [disabled] = useAtom(disabledAtom);
 
     return (
       <ListItem
@@ -113,6 +119,7 @@ export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
         innerOffset={indent}
         size={size}
         active={hovered}
+        disabled={disabled}
         rightSide={
           <SelectItemAllCounter
             size={size}
@@ -125,6 +132,7 @@ export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
             size={size}
             groupsCounterAtom={groupsCounterAtom}
             groupId={groupId}
+            disabledAtom={disabledAtom}
           />
         }
       />

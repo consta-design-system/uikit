@@ -1,0 +1,42 @@
+import { render, RenderResult, screen } from '@testing-library/react';
+import * as React from 'react';
+
+import { cn } from '##/utils/bem';
+
+import {
+  FlatSelect,
+  FlatSelectComponent,
+  FlatSelectGroupDefault,
+  FlatSelectItemDefault,
+  FlatSelectProps,
+} from '..';
+import { Group, groups, Item, items } from '../__mocks__/data.mock';
+
+const testId = 'AvatarGroup';
+
+const cnFlatSelect = cn('FlatSelect');
+type TestComponent<
+  ITEM = FlatSelectItemDefault,
+  GROUP = FlatSelectGroupDefault,
+  MULTIPLE extends boolean = false,
+> = (props: FlatSelectProps<ITEM, GROUP, MULTIPLE>) => RenderResult;
+
+const renderComponent: TestComponent = (props) => {
+  return render(
+    <>
+      <div data-testid="outside" />
+      <FlatSelect data-testid={testId} {...props} />
+    </>,
+  );
+};
+
+const getRender = () => screen.getByTestId(testId);
+const getOutside = () => screen.getByTestId('outside') as HTMLDivElement;
+
+describe(`Компонент ${testId}`, () => {
+  it('должен рендериться без ошибок', () => {
+    renderComponent({ items, onChange: () => {} });
+
+    expect(getRender()).toBeInTheDocument();
+  });
+});

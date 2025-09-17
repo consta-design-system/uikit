@@ -58,7 +58,7 @@ const items: Item[] = [
 ];
 
 export const FlatSelectExampleGroups = () => {
-  const [value, setValue] = useState<Item | null>();
+  const [value, setValue] = useState<Item[] | null>();
   return (
     <Example col={1}>
       <FlatSelect
@@ -66,6 +66,7 @@ export const FlatSelectExampleGroups = () => {
         value={value}
         onChange={setValue}
         groups={groups}
+        multiple
       />
     </Example>
   );

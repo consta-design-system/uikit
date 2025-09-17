@@ -126,7 +126,8 @@ export const useFlatSelect = <
   const itemsAtom = usePropAtom(propsAtom, 'items');
   const selectAllAtom = usePropAtom(propsAtom, 'selectAll');
   const valuePropAtom = usePropAtom(propsAtom, 'value');
-  const disabledAtom = usePropAtom(propsAtom, 'disabled');
+  const disabledPropAtom = usePropAtom(propsAtom, 'disabled');
+  const disabledAtom = useCreateAtom((ctx) => !!ctx.spy(disabledPropAtom));
   const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
   const openPropAtom = usePropAtom(propsAtom, 'isOpen');
 
@@ -163,14 +164,10 @@ export const useFlatSelect = <
       rootFocusAtom(ctx, value);
     }).pipe(withConcurrency()),
   );
-  const handleRootMouseDown = useAction((ctx, e: Event) =>
-    rootMouseDownAtom(ctx, true),
-  );
-  const handleRootMouseUp = useAction((ctx, e: Event) =>
-    rootMouseDownAtom(ctx, false),
-  );
-  const handleRootFocus = useAction((_, e: Event) => setRootFocus(true));
-  const handleRootBlur = useAction((_, e: Event) => setRootFocus(false));
+  const handleRootMouseDown = useAction((ctx) => rootMouseDownAtom(ctx, true));
+  const handleRootMouseUp = useAction((ctx) => rootMouseDownAtom(ctx, false));
+  const handleRootFocus = useAction(() => setRootFocus(true));
+  const handleRootBlur = useAction(() => setRootFocus(false));
   const onInput = useAction((ctx, value: string | undefined = '') => {
     ctx.get(propsAtom).onInput?.(value);
     inputValueAtom(ctx, value);
@@ -222,7 +219,7 @@ export const useFlatSelect = <
         getGroupKey,
         undefined,
       ),
-      !!selectAll,
+      !!selectAll && items.length ? selectAll : false,
     );
 
     return optionForCreate ? [optionForCreate, ...resultGroups] : resultGroups;
@@ -626,6 +623,16 @@ export const useFlatSelect = <
     }),
   });
 
+  useClickOutsideAtom({
+    isActiveAtom: rootFocusAtom,
+    ignoreClicksElementsAtom: useCreateAtom((ctx) => {
+      const rootElement = ctx.spy(rootElementAtom);
+
+      return [rootElement] as (HTMLElement | null)[];
+    }),
+    handler: handleRootBlur,
+  });
+
   useUpdate(
     (ctx, focus) => {
       if (
@@ -668,6 +675,7 @@ export const useFlatSelect = <
 
   useElementAtomEventListener(anchorElementAtom, 'click', handleAnchorClick);
   useElementAtomEventListener(rootElementAtom, 'focus', handleRootFocus);
+  useElementAtomEventListener(rootElementAtom, 'click', handleRootFocus);
   useElementAtomEventListener(rootElementAtom, 'blur', handleRootBlur);
   useElementAtomEventListener(
     rootElementAtom,
@@ -704,6 +712,13 @@ export const useFlatSelect = <
     [openAtom],
   );
 
+  useUpdate(
+    (ctx, v) => {
+      console.log(v);
+    },
+    [rootFocusAtom],
+  );
+
   return {
     openAtom,
     inputFocusAtom,
@@ -731,5 +746,6 @@ export const useFlatSelect = <
     dropdownZIndexAtom,
     rootRef,
     createButtonOnMouseEnter,
+    disabledAtom,
   };
 };

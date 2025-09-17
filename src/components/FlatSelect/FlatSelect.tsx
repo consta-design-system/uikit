@@ -94,7 +94,7 @@ const FlatSelectRender = (
     handleInputChange,
     clearValue,
     optionsRefs,
-
+    disabledAtom,
     listRef,
     clearButtonAtom,
     highlightedIndexAtom,
@@ -227,6 +227,7 @@ const FlatSelectRender = (
         dropdownZIndexAtom={dropdownZIndexAtom}
         selectAllLabel={selectAllLabel}
         createButtonOnMouseEnter={createButtonOnMouseEnter}
+        disabledAtom={disabledAtom}
       />
       {footer && (
         <FlatSelectFooter
