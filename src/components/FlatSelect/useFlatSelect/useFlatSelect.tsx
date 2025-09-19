@@ -355,7 +355,7 @@ export const useFlatSelect = <
       )
         ? value.filter((value) => getItemKey(value) !== getItemKey(item))
         : [...value, item];
-      const val = newValue?.length ? newValue : null;
+      const val = newValue.length ? newValue : null;
       (onChange as FlatSelectPropOnChange<ITEM, true>)(val, { e });
     } else {
       (onChange as FlatSelectPropOnChange<ITEM, false>)(item, { e });
@@ -571,6 +571,7 @@ export const useFlatSelect = <
 
       return {
         onClick: (e: React.SyntheticEvent) => {
+          console.log('onClick', item);
           highlightIndex(index);
           onChange(e, item);
         },
@@ -710,13 +711,6 @@ export const useFlatSelect = <
       }
     },
     [openAtom],
-  );
-
-  useUpdate(
-    (ctx, v) => {
-      console.log(v);
-    },
-    [rootFocusAtom],
   );
 
   return {

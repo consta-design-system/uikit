@@ -1,11 +1,8 @@
 import { reatomContext, useCreateCtx } from '@reatom/npm-react';
 import React, { createElement, forwardRef, useContext } from 'react';
 
-const ProviderWithCtx = ({ children }: { children: React.ReactNode }) => (
-  <reatomContext.Provider value={useCreateCtx()}>
-    {children}
-  </reatomContext.Provider>
-);
+const ProviderWithCtx = ({ children }: { children: React.ReactNode }) =>
+  createElement(reatomContext.Provider, { value: useCreateCtx() }, children);
 
 export const withCtx = <C, P extends {}>(component: C): C =>
   forwardRef<HTMLElement, P>((props, ref) => {

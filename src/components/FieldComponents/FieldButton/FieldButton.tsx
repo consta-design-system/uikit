@@ -8,7 +8,7 @@ import { cnFieldButton } from './cnFieldButton';
 
 type FieldButtonProps = PropsWithHTMLAttributesAndRef<
   {
-    children: React.ReactNode;
+    children?: React.ReactNode;
   },
   HTMLButtonElement
 >;

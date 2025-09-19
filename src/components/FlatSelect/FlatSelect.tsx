@@ -61,8 +61,6 @@ const FlatSelectRender = (
     getItemLabel,
     items,
     onChange: onChangeProp,
-    onFocus,
-    onBlur,
     onCreate: onCreateProp,
     onInput,
     multiple,
