@@ -130,6 +130,9 @@ export const useFlatSelect = <
   const disabledAtom = useCreateAtom((ctx) => !!ctx.spy(disabledPropAtom));
   const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
   const openPropAtom = usePropAtom(propsAtom, 'isOpen');
+  const withOnCreateAtom = useCreateAtom(
+    (ctx) => !!ctx.spy(propsAtom).onCreate,
+  );
 
   const dropdownZIndexAtom = useCreateAtom((ctx) => {
     const zIndex = ctx.spy(propsAtom).style?.zIndex;
@@ -139,7 +142,7 @@ export const useFlatSelect = <
     propsAtom,
     'ignoreOutsideClicksRefs',
   );
-  const onCreateAtom = usePropAtom(propsAtom, 'onCreate');
+
   const getItemKeyAtom = usePropAtom(propsAtom, 'getItemKey');
 
   const valueAtom = useCreateAtom((ctx) => {
@@ -179,8 +182,8 @@ export const useFlatSelect = <
 
   const optionForCreateAtom = useCreateAtom<OptionForCreate | undefined>(
     (ctx) => {
-      const onCreate = ctx.spy(onCreateAtom);
-      if (!onCreate) {
+      const withOnCreate = ctx.spy(withOnCreateAtom);
+      if (!withOnCreate) {
         return undefined;
       }
       const inputValue = ctx.spy(inputValueAtom);
@@ -261,7 +264,7 @@ export const useFlatSelect = <
   // eslint-disable-next-line no-unused-vars
   const [maxHighlightIndex, _, maxHighlightIndexAtom] = useAtom((ctx) => {
     const items = ctx.spy(itemsAtom);
-    const optionForCreate = ctx.spy(optionForCreateAtom);
+    const optionForCreate = ctx.spy(withOnCreateAtom);
     const selectAll = ctx.spy(selectAllAtom);
     const visibleItems = ctx.spy(visibleItemsAtom);
 
@@ -364,9 +367,9 @@ export const useFlatSelect = <
 
   const onChangeAll = useAction(
     (ctx, e: React.SyntheticEvent, items: ITEM[]) => {
-      const props = ctx.get(propsAtom);
       const value = ctx.get(valueAtom);
-      const { getItemDisabled, getItemKey, multiple, onChange } = props;
+      const { getItemDisabled, getItemKey, multiple, onChange } =
+        ctx.get(propsAtom);
 
       if (multiple) {
         const nonDisabledItems = getItemDisabled
@@ -385,14 +388,16 @@ export const useFlatSelect = <
           }
         });
         if (currentGroupValues.length === nonDisabledItems.length) {
-          (onChange as FlatSelectPropOnChange<ITEM, true>)(withoutGroupValues, {
-            e,
-          });
+          (onChange as FlatSelectPropOnChange<ITEM, true>)(
+            withoutGroupValues.length ? withoutGroupValues : null,
+            { e },
+          );
         } else {
           const val = [...withoutGroupValues, ...nonDisabledItems];
-          (onChange as FlatSelectPropOnChange<ITEM, true>)(val, {
-            e,
-          });
+          (onChange as FlatSelectPropOnChange<ITEM, true>)(
+            val.length ? val : null,
+            { e },
+          );
         }
       }
     },
@@ -404,9 +409,6 @@ export const useFlatSelect = <
     onInput('');
   });
 
-  const createButtonOnMouseEnter = useAction((ctx) =>
-    highlightedIndexAtom(ctx, 0),
-  );
   // Handlers
 
   const handleInputChange = useAction(
@@ -639,7 +641,8 @@ export const useFlatSelect = <
       if (
         focus &&
         !ctx.get(rootMouseDownAtom) &&
-        ctx.get(highlightedIndexAtom) === -1
+        ctx.get(highlightedIndexAtom) === -1 &&
+        !ctx.get(disabledAtom)
       ) {
         highlightedIndexAtom(ctx, 0);
       }
@@ -739,7 +742,6 @@ export const useFlatSelect = <
     groupsCounterAtom,
     dropdownZIndexAtom,
     rootRef,
-    createButtonOnMouseEnter,
     disabledAtom,
   };
 };

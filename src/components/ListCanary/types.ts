@@ -211,6 +211,7 @@ export type ListAddItemProps = PropsWithHTMLAttributesAndRef<
     innerOffset?: ListPropInnerOffset;
     active?: boolean;
     underLine?: boolean;
+    disabled?: boolean;
   },
   HTMLDivElement
 >;

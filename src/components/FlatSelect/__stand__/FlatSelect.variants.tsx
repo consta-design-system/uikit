@@ -93,12 +93,7 @@ const Variants = () => {
           multiple
         />
       ) : (
-        <FlatSelect
-          {...props}
-          value={value}
-          onChange={setValue}
-          onKeyDown={() => {}}
-        />
+        <FlatSelect {...props} value={value} onChange={setValue} />
       )}
     </div>
   );

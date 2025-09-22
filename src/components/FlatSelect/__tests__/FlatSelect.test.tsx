@@ -1,10 +1,13 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
+import { IconMock, iconMockText } from '##/../__mocks__/IconMock';
+import { cnFieldControlLayout } from '##/components/FieldComponents';
 import { cnListGroupLabel, cnListItem } from '##/components/ListCanary';
 
 // import { cn } from '##/utils/bem';
 import {
+  cnFlatSelect,
   FlatSelect,
   FlatSelectComponent,
   FlatSelectGroupDefault,
@@ -12,6 +15,8 @@ import {
   FlatSelectProps,
 } from '..';
 import { groups, items } from '../__mocks__/data.mock';
+import { cnFlatSelectCreateButton } from '../FlatSelectCreateButton';
+import { cnFlatSelectItemAll } from '../FlatSelectItemAll';
 
 const testId = 'FlatSelect';
 const animationDuration = 200;
@@ -19,7 +24,13 @@ const animationDuration = 200;
 const defaultProps = {
   items,
   onChange: () => {},
+  getItemDisabled: () => undefined,
+  getItemGroup: () => undefined,
 };
+
+const views: FlatSelectProps['view'][] = ['default', 'clear'];
+const sizes: FlatSelectProps['size'][] = ['s', 'm', 'l'];
+const forms: FlatSelectProps['form'][] = ['default', 'brick', 'round'];
 
 // const cnFlatSelect = cn('FlatSelect');
 
@@ -71,10 +82,24 @@ const getItems = () =>
   getRender().querySelectorAll(
     `.${cnListItem()}`,
   ) as unknown as HTMLDivElement[];
-// const getItem = (index: number = 0) => getItems()[index] as HTMLDivElement;
+const getItem = (index: number = 0) => getItems()[index] as HTMLDivElement;
 const getInput = () => getRender().querySelector('input') as HTMLInputElement;
 
 const getGroups = () => getRender().querySelectorAll(`.${cnListGroupLabel()}`);
+const getIcon = () =>
+  getRender().querySelector(`.${iconMockText}`) as HTMLSpanElement;
+
+const getCreateButton = () =>
+  getRender().querySelector(
+    `.${cnFlatSelectCreateButton()}`,
+  ) as HTMLButtonElement;
+
+const getFieldControlLayout = () =>
+  getRender().querySelector(`.${cnFieldControlLayout()}`) as HTMLDivElement;
+
+const getSelectAll = () =>
+  getRender().querySelector(`.${cnFlatSelectItemAll()}`) as HTMLDivElement;
+
 const animateDelay = () => {
   act(() => {
     jest.advanceTimersByTime(animationDuration);
@@ -182,6 +207,46 @@ describe(`Компонент ${testId}`, () => {
       });
 
       fireEvent.click(screen.getByText(items[1].label));
+      expect(onChangeMock).toHaveBeenCalled();
+      expect(onChangeMock).toHaveBeenCalledTimes(1);
+      expect(onChangeMock).toHaveBeenCalledWith(null, {
+        e: expect.any(Object),
+      });
+    });
+
+    it('проверка onChange при клике на FlatSelectItemAll', () => {
+      const onChangeMock = jest.fn();
+      renderComponent({
+        ...defaultProps,
+        onChange: onChangeMock,
+        multiple: true,
+        selectAll: true,
+        value: null,
+      });
+
+      const allButton = getSelectAll();
+
+      fireEvent.click(allButton);
+      expect(onChangeMock).toHaveBeenCalled();
+      expect(onChangeMock).toHaveBeenCalledTimes(1);
+      expect(onChangeMock).toHaveBeenCalledWith(items, {
+        e: expect.any(Object),
+      });
+    });
+
+    it('проверка onChange при клике на FlatSelectItemAll и выбранными всеми элементами', () => {
+      const onChangeMock = jest.fn();
+      renderComponent({
+        ...defaultProps,
+        onChange: onChangeMock,
+        multiple: true,
+        selectAll: true,
+        value: items,
+      });
+
+      const allButton = getSelectAll();
+
+      fireEvent.click(allButton);
       expect(onChangeMock).toHaveBeenCalled();
       expect(onChangeMock).toHaveBeenCalledTimes(1);
       expect(onChangeMock).toHaveBeenCalledWith(null, {
@@ -352,6 +417,203 @@ describe(`Компонент ${testId}`, () => {
       fireEvent.change(input, { target: { value: 'value' } });
 
       expect(getClearButton()).toBeInTheDocument();
+    });
+  });
+
+  describe('проверка iconLeft', () => {
+    it('иконка отображается', () => {
+      renderComponent({
+        ...defaultProps,
+        input: true,
+        iconLeft: IconMock,
+      });
+
+      expect(getIcon()).toBeInTheDocument();
+    });
+  });
+
+  describe('проверка view,', () => {
+    views.map((view) => {
+      it(`проверка view=${view}, input=true`, () => {
+        renderComponent({
+          ...defaultProps,
+          view,
+          input: true,
+        });
+
+        expect(getRender()).toHaveClass(cnFlatSelect({ view }));
+      });
+    });
+    views.map((view) => {
+      it(`проверка view=${view}, input=false`, () => {
+        renderComponent({
+          ...defaultProps,
+          view,
+          input: false,
+        });
+
+        expect(getRender()).toHaveClass(cnFlatSelect({ view: 'clear' }));
+      });
+    });
+  });
+
+  describe('проверка size', () => {
+    sizes.map((size) => {
+      it(`проверка size=${size}`, () => {
+        renderComponent({
+          ...defaultProps,
+          size,
+        });
+
+        expect(getRender()).toHaveClass(cnFlatSelect({ size }));
+      });
+    });
+  });
+
+  describe('проверка bordered', () => {
+    it('класс присваивается', () => {
+      renderComponent({
+        ...defaultProps,
+        bordered: true,
+      });
+
+      expect(getRender()).toHaveClass(cnFlatSelect({ bordered: true }));
+    });
+
+    it('при bordered=true view должен быть clear', () => {
+      renderComponent({
+        ...defaultProps,
+        bordered: true,
+      });
+
+      expect(getRender()).toHaveClass(cnFlatSelect({ view: 'clear' }));
+    });
+  });
+
+  describe('проверка forms', () => {
+    forms.map((form) => {
+      it(`form=${form}, bordered=true, класс присваивается`, () => {
+        renderComponent({
+          ...defaultProps,
+          form,
+          bordered: true,
+        });
+
+        expect(getRender()).toHaveClass(cnFlatSelect({ form }));
+      });
+    });
+
+    forms.map((form) => {
+      it(`form=${form}, bordered=false класс не присваивается`, () => {
+        renderComponent({
+          ...defaultProps,
+          form,
+          bordered: false,
+        });
+
+        expect(getRender()).not.toHaveClass(cnFlatSelect({ form }));
+      });
+    });
+  });
+
+  describe('проверка onCreate', () => {
+    it('onCreate отображается и вызывается', () => {
+      const onCreate = jest.fn();
+      renderComponent({
+        ...defaultProps,
+        onCreate,
+      });
+
+      const button = getCreateButton();
+
+      expect(button).toBeInTheDocument();
+
+      fireEvent.click(button);
+
+      expect(onCreate).toHaveBeenCalled();
+    });
+  });
+
+  describe('проверка disabled', () => {
+    it('FieldControlLayout получил свойство disabled', () => {
+      renderComponent({
+        ...defaultProps,
+        input: true,
+        disabled: true,
+      });
+
+      expect(getFieldControlLayout()).toHaveClass(
+        cnFieldControlLayout({ disabled: true }),
+      );
+    });
+    it('input получил свойство disabled', () => {
+      renderComponent({
+        ...defaultProps,
+        input: true,
+        disabled: true,
+      });
+
+      expect(getInput()).toHaveAttribute('disabled', '');
+    });
+    it('onCreate не вызывается', () => {
+      const onCreate = jest.fn();
+      renderComponent({
+        ...defaultProps,
+        input: true,
+        disabled: true,
+        onCreate,
+      });
+
+      const button = getCreateButton();
+
+      expect(button).toBeInTheDocument();
+
+      fireEvent.click(button);
+
+      expect(onCreate).not.toHaveBeenCalled();
+    });
+    it('onChange не вызывается при клике на Item', () => {
+      const onChange = jest.fn();
+      renderComponent({
+        ...defaultProps,
+        input: true,
+        disabled: true,
+        onChange,
+      });
+
+      fireEvent.click(getItem());
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('onChange не вызывается при клике на Item', () => {
+      const onChange = jest.fn();
+      renderComponent({
+        ...defaultProps,
+        input: true,
+        disabled: true,
+        onChange,
+      });
+
+      fireEvent.click(getItem());
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+
+    it('onChange не вызывается при клике на selectAll', () => {
+      const onChange = jest.fn();
+      renderComponent({
+        ...defaultProps,
+        input: true,
+        disabled: true,
+        multiple: true,
+        selectAll: true,
+        onChange,
+      });
+
+      fireEvent.click(getSelectAll());
+
+      expect(onChange).not.toHaveBeenCalled();
     });
   });
 });

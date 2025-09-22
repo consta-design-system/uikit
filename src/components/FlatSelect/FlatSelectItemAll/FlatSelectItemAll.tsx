@@ -6,12 +6,12 @@ import { Checkbox } from '##/components/Checkbox';
 import { FieldPropSize } from '##/components/FieldComponents';
 import { ListItem } from '##/components/ListCanary';
 import { Text, TextPropSize } from '##/components/Text';
-import { cnCanary as cn } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { sizeCheckboxMap } from '../FlatSelectItem';
 
-export type FlatSelectItemAllProps = PropsWithHTMLAttributesAndRef<
+export type FlatFlatSelectItemAllProps = PropsWithHTMLAttributesAndRef<
   {
     size: FieldPropSize;
     hovered?: boolean;
@@ -26,7 +26,7 @@ export type FlatSelectItemAllProps = PropsWithHTMLAttributesAndRef<
   HTMLDivElement
 >;
 
-export const cnSelectItemAll = cn('SelectItemAll');
+export const cnFlatSelectItemAll = cn('FlatSelectItemAll');
 
 const textSizeMap: Record<FieldPropSize, TextPropSize> = {
   xs: 's',
@@ -35,7 +35,7 @@ const textSizeMap: Record<FieldPropSize, TextPropSize> = {
   l: 'l',
 };
 
-const SelectItemAllCounter: React.FC<{
+const FlatSelectItemAllCounter: React.FC<{
   groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
   groupId: string | number;
   size: FieldPropSize;
@@ -58,7 +58,7 @@ const SelectItemAllCounter: React.FC<{
   );
 };
 
-const SelectItemAllCounterCheckbox: React.FC<{
+const FlatSelectItemAllCounterCheckbox: React.FC<{
   groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
   disabledAtom: AtomMut<boolean>;
   groupId: string | number;
@@ -91,11 +91,10 @@ const SelectItemAllCounterCheckbox: React.FC<{
   );
 };
 
-export const SelectItemAll: React.FC<FlatSelectItemAllProps> = forwardRef(
-  (props, ref) => {
+export const FlatSelectItemAll: React.FC<FlatFlatSelectItemAllProps> =
+  forwardRef((props, ref) => {
     const {
       size,
-      indent,
       className,
       groupsCounterAtom,
       groupId,
@@ -113,22 +112,21 @@ export const SelectItemAll: React.FC<FlatSelectItemAllProps> = forwardRef(
       <ListItem
         {...otherProps}
         ref={ref}
-        className={cnSelectItemAll(null, [className])}
+        className={cnFlatSelectItemAll(null, [className])}
         role="option"
         label={label}
-        innerOffset={indent}
         size={size}
         active={hovered}
         disabled={disabled}
         rightSide={
-          <SelectItemAllCounter
+          <FlatSelectItemAllCounter
             size={size}
             groupsCounterAtom={groupsCounterAtom}
             groupId={groupId}
           />
         }
         leftSide={
-          <SelectItemAllCounterCheckbox
+          <FlatSelectItemAllCounterCheckbox
             size={size}
             groupsCounterAtom={groupsCounterAtom}
             groupId={groupId}
@@ -137,5 +135,4 @@ export const SelectItemAll: React.FC<FlatSelectItemAllProps> = forwardRef(
         }
       />
     );
-  },
-);
+  });

@@ -6,7 +6,7 @@ import React, { forwardRef } from 'react';
 
 import { FieldPropSize } from '##/components/FieldComponents';
 import { ListAddItem } from '##/components/ListCanary';
-import { cnCanary as cn } from '##/utils/bem';
+import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 type LabelForCreate =
@@ -21,6 +21,7 @@ type FlatSelectCreateButtonProps = PropsWithHTMLAttributesAndRef<
     indent: 'normal' | 'increased';
     index: number;
     highlightedIndexAtom: AtomMut<number>;
+    disabledAtom: AtomMut<boolean>;
   },
   HTMLDivElement
 >;
@@ -51,17 +52,23 @@ export const FlatSelectCreateButton: FlatSelectCreateButtonComponent =
       inputValueAtom,
       index,
       size,
-      indent,
+
       highlightedIndexAtom,
+      disabledAtom,
       ...otherProps
     } = props;
 
-    const [hovered] = useAtom((ctx) => {
+    const [active] = useAtom((ctx) => {
       const highlightedIndex = ctx.spy(highlightedIndexAtom);
+      const disabled = ctx.spy(disabledAtom);
+      if (disabled) {
+        return false;
+      }
       return index === highlightedIndex;
     });
 
     const [inputValue] = useAtom(inputValueAtom);
+    const [disabled] = useAtom(disabledAtom);
 
     return (
       <ListAddItem
@@ -69,9 +76,9 @@ export const FlatSelectCreateButton: FlatSelectCreateButtonComponent =
         ref={ref}
         className={cnFlatSelectCreateButton(null, [className])}
         role="option"
-        active={hovered}
+        active={active}
         size={size}
-        innerOffset={indent}
+        disabled={disabled}
         label={
           typeof labelForCreate === 'function'
             ? labelForCreate(inputValue)

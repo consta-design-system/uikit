@@ -22,7 +22,7 @@ import {
 import { useFlatSelect } from './useFlatSelect';
 import { useRenderItem } from './useRenderItem';
 
-const cnFlatSelect = cn('FlatSelect');
+export const cnFlatSelect = cn('FlatSelect');
 
 const FlatSelectRender = (
   p: FlatSelectProps,
@@ -99,14 +99,12 @@ const FlatSelectRender = (
     getItemKeyAtom,
     valueAtom,
     onChangeAll,
-    onCreate,
     onChange,
     inputValueAtom,
     hasItemsAtom,
     groupsCounterAtom,
     dropdownZIndexAtom,
     rootRef,
-    createButtonOnMouseEnter,
   } = useFlatSelect<FlatSelectItemDefault, FlatSelectGroupDefault, false>({
     propsAtom,
   });
@@ -134,6 +132,7 @@ const FlatSelectRender = (
           view,
           bordered: view === 'clear' ? bordered : undefined,
           form: bordered ? form : undefined,
+          size,
         },
 
         [className],
@@ -217,14 +216,12 @@ const FlatSelectRender = (
         onScrollToBottom={onScrollToBottom}
         highlightedIndexAtom={highlightedIndexAtom}
         onChangeAll={onChangeAll}
-        onCreate={onCreate}
         onChange={onChange}
         inputValueAtom={inputValueAtom}
         hasItemsAtom={hasItemsAtom}
         groupsCounterAtom={groupsCounterAtom}
         dropdownZIndexAtom={dropdownZIndexAtom}
         selectAllLabel={selectAllLabel}
-        createButtonOnMouseEnter={createButtonOnMouseEnter}
         disabledAtom={disabledAtom}
       />
       {footer && (

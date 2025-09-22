@@ -1,8 +1,4 @@
 .ListItem.FlatSelectCreateButton {
-  &:hover:not(.ListItem_active) {
-    background: transparent;
-  }
-
   .ListItemGrid-Slot_position_center {
     overflow: hidden;
   }

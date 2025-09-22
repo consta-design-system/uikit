@@ -16,7 +16,7 @@ import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
 import { FlatSelectCreateButton } from '../FlatSelectCreateButton';
 import { FlatSelectGroupLabel } from '../FlatSelectGroupLabel/FlatSelectGroupLabel';
-import { SelectItemAll } from '../FlatSelectItemAll/FlatSelectItemAll';
+import { FlatSelectItemAll } from '../FlatSelectItemAll/FlatSelectItemAll';
 import { FlatSelectLoader } from '../FlatSelectLoader/FlatSelectLoader';
 // import { SelectPopover } from '../SelectPopover';
 import { FlatSelectRenderItem } from '../FlatSelectRenderItem';
@@ -68,7 +68,6 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   valueAtom: AtomMut<ITEM[]>;
   getItemKeyAtom: AtomMut<(item: ITEM) => string | number>;
   onChangeAll: (e: React.SyntheticEvent, items: ITEM[]) => void;
-  onCreate: (e: React.SyntheticEvent) => void;
   onChange: (e: React.SyntheticEvent, item: ITEM) => void;
   inputValueAtom: AtomMut<string>;
   groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
@@ -76,7 +75,6 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   selectAllLabel: string;
   view: 'default' | 'clear';
   form: 'default' | 'brick' | 'round';
-  createButtonOnMouseEnter: () => void;
   disabledAtom: AtomMut<boolean>;
 }>;
 
@@ -125,7 +123,6 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
     hasItemsAtom,
     form,
     openAtom,
-    // offset: offsetProp = 'none',
     renderItem,
     visibleItemsAtom,
     isLoading,
@@ -137,7 +134,6 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
     highlightedIndexAtom,
     valueAtom,
     getItemKeyAtom,
-    onCreate,
     onChange,
     onChangeAll,
     inputValueAtom,
@@ -145,7 +141,6 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
     dropdownZIndexAtom,
     selectAllLabel,
     view,
-    createButtonOnMouseEnter,
     disabledAtom,
     ...otherProps
   } = props;
@@ -218,11 +213,14 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
                 labelForCreate={labelForCreate}
                 indent={indent}
                 ref={itemsRefs[index]}
-                onClick={onCreate}
                 highlightedIndexAtom={highlightedIndexAtom}
                 inputValueAtom={inputValueAtom}
-                onMouseEnter={createButtonOnMouseEnter}
+                disabledAtom={disabledAtom}
                 index={index}
+                {...getOptionActions({
+                  index,
+                  item: group,
+                })}
               />
             );
           }
@@ -249,7 +247,7 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
 
                   if (isVisible(slice, virtualIndex)) {
                     return (
-                      <SelectItemAll
+                      <FlatSelectItemAll
                         label={selectAllLabel}
                         groupId={group.key}
                         highlightedIndexAtom={highlightedIndexAtom}
