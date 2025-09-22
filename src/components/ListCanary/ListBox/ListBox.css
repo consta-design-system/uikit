@@ -36,7 +36,8 @@
   }
 
   &_border {
-    border: var(--control-border-width) solid
+    border:
+      var(--control-border-width) solid
       var(--color-control-bg-border-default);
   }
 

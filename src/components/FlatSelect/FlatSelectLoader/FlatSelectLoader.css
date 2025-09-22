@@ -2,8 +2,8 @@
   --loader-height: 0;
   position: relative;
   height: 100%;
-  cursor: wait;
   min-height: calc(var(--flat-select-control-height) * 2);
+  cursor: wait;
 
   &-Loader.Loader {
     --loader-color: var(--color-control-typo-disable);

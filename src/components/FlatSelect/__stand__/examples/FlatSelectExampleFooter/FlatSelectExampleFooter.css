@@ -1,5 +1,6 @@
 .FlatSelectExampleFooter {
   background: var(--color-bg-default);
+
   .FlatSelectFooter {
     background: var(--color-bg-secondary);
   }
