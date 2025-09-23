@@ -266,6 +266,10 @@ const ComboboxRender = <
     return renderControlValue();
   };
 
+  const isClearButtonVisible = isMultipleParams(props)
+    ? isNotNil(props.value) && props.value.length > 0
+    : isNotNil(props.value);
+
   return (
     <>
       <SelectContainer
@@ -301,7 +305,7 @@ const ComboboxRender = <
             </div>
           </div>
           <span className={cnSelect('Indicators')}>
-            {isNotNil(value) && (
+            {isClearButtonVisible && (
               <button
                 type="button"
                 onClick={clearValue}
