@@ -4,7 +4,7 @@ export default createStand({
   title: 'FlatSelect',
   id: 'FlatSelect',
   group: 'components',
-  description: 'Компонент для выбора одного или несколько вариантов.',
+  description: 'Выпадающий список с поддержкой поиска и множественного выбора.',
   version: '5.26.0',
   status: 'stable',
   alias: [
