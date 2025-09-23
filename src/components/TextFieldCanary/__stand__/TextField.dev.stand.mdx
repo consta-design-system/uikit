@@ -102,6 +102,35 @@ import {
 
 ## Свойства
 
+```tsx
+type TextFieldPropValue<TYPE> = TYPE extends 'textarray'
+  ? string[] | null
+  : string | null;
+
+type TextFieldPropDefaultValue<TYPE> = TYPE extends 'textarray'
+  ? never
+  : string | null;
+
+type TextFieldPropOnChange<TYPE> = (
+  value: TextFieldPropValue<TYPE>,
+  params: {
+    e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
+  },
+) => void;
+
+type InputType<TYPE extends string> = TYPE extends 'textarea'
+  ? HTMLTextAreaElement
+  : HTMLInputElement;
+
+type TextFieldPropRenderValueItem = (props: {
+  item: string;
+  index: number;
+  onRemove: (e: React.MouseEvent) => void;
+  size: FieldPropSize;
+  disabled: boolean | undefined;
+}) => React.ReactNode;
+```
+
 | Свойство                                       | Тип                                                                                                                                                                                                        | По умолчанию | Описание                                                            |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------- |
 | [`type?`](#тип-поля)                           | `string`                                                                                                                                                                                                   | `text`       | Тип поля ввода.                                                     |
