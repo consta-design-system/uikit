@@ -35,6 +35,29 @@ import { ThemeToggler } from '@consta/uikit/ThemeToggler';
 
 ## Свойства
 
+```tsx
+export const themeTogglerPropSize = ['m', 'l', 's', 'xs'] as const;
+export type ThemeTogglerPropSize = typeof themeTogglerPropSize[number];
+export const themeTogglerPropSizeDefault: ThemeTogglerPropSize =
+  themeTogglerPropSize[0];
+
+export type ThemeTogglerPropOnChange<ITEM> = (
+  value: ITEM,
+  props: {
+    e: React.MouseEvent;
+  },
+) => void;
+export type ThemeTogglerPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+export type ThemeTogglerPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type ThemeTogglerPropGetItemIcon<ITEM> = (item: ITEM) => IconComponent;
+
+export type ThemeTogglerItemDefault = {
+  key: string;
+  label: string;
+  icon: IconComponent;
+};
+```
+
 | Свойство                                   | Тип и значения                                   | По умолчанию   | Описание                                                                                                                        |
 | ------------------------------------------ | ------------------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | [`items`](#содержимое)                     | `ITEM[]`                                         | -              | Массив тем для выбора                                                                                                           |
