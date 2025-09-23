@@ -6,43 +6,102 @@ import {
 
 import { TooltipViewportExample } from './examples/TooltipViewportExample/TooltipViewportExample';
 
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Контент тултипа](#контент-тултипа)
+- [Внешний вид](#внешний-вид)
+  - [Тема](#тема)
+  - [Размер](#размер)
+  - [Статус](#статус)
+- [Позиционирование](#позиционирование)
+  - [Элемент-якорь](#элемент-якорь)
+  - [Координаты](#координаты)
+  - [Viewport](#viewport)
+- [Пример использования](#пример-использования)
+
+</MdxMenu>
+
+## Обзор
+
+Компонент `Tooltip` предназначен для отображения всплывающих подсказок с информацией. Он используется для предоставления дополнительного контекста или пояснений к элементам интерфейса. Подсказка может позиционироваться относительно элемента-якоря или координат, а также поддерживает настройку внешнего вида и поведения.
+
+Компонент основан на [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev) и наследует его возможности позиционирования.
+
+## Импорт
+
 ```tsx
 import { Tooltip } from '@consta/uikit/Tooltip';
 ```
 
-<MdxMenu>
+## Свойства
 
-- [Тема](#тема-тултипа)
-- [Размер](#размер)
-- [Статус](#статус)
-- [Позиционирование](#позиционирование-тултипа)
-  - [По якорю](#по-элементу-якорю)
-  - [По координатам](#по-координатам)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
-- [Пример использования](#примеры)
+| Свойство                                   | Тип или варианты значения                     | По умолчанию               | Описание                                                                                                                                                    |
+| ------------------------------------------ | --------------------------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`children`](#контент-тултипа)             | `React.ReactNode`                             | -                          | Контент тултипа                                                                                                                                             |
+| [`size`](#размер)                          | `'s', 'm', 'l'`                               | `'m'`                      | Размер, влияющий на максимальную ширину тултипа                                                                                                             |
+| [`status?`](#статус)                       | `'normal', 'success', 'warning', 'alert'`     | -                          | Статус для выделения типа сообщения                                                                                                                         |
+| [`direction?`](#позиционирование)          | `Direction`                                   | `'upCenter'`               | Направление разворачивания тултипа. См. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания)   |
+| [`possibleDirections?`](#позиционирование) | `Direction[]`                                 | все возможные `Direction`  | Возможные направления разворачивания. См. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания) |
+| [`spareDirection?`](#позиционирование)     | `Direction`                                   | `'downStartLeft'`          | Запасное направление разворачивания. См. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания)  |
+| [`anchorRef?`](#элемент-якорь)             | `React.RefObject<HTMLElement>`                | -                          | Ссылка на элемент-якорь. См. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                                              |
+| `isOpen?`                                  | `boolean`                                     | -                          | Состояние тултипа (открыт/закрыт)                                                                                                                           |
+| [`position?`](#координаты)                 | `{ x: number; y: number }` &#124; `undefined` | -                          | Координаты для позиционирования. См. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                                      |
+| [`viewportRef?`](#viewport)                | `React.RefObject<HTMLElement>`                | `document.documentElement` | Элемент, определяющий область видимости тултипа                                                                                                             |
+| [`isInteractive?`](#позиционирование)      | `boolean`                                     | `true`                     | Включает/отключает интерактивность тултипа. См. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                           |
+| [`offset?`](#позиционирование)             | `number`                                      | `0`                        | Отступ от якоря или позиции                                                                                                                                 |
+| [`equalAnchorWidth?`](#позиционирование)   | `boolean`                                     | `false`                    | Уравнивает ширину тултипа с шириной якоря. См. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                            |
+| `className`                                | `string`                                      | -                          | Дополнительные CSS-классы                                                                                                                                   |
+| `as`                                       | `React.ElementType`                           | -                          | HTML-тег для рендеринга компонента                                                                                                                          |
+| `ref`                                      | `React.Ref<HTMLElement>`                      | -                          | Ссылка на DOM-элемент                                                                                                                                       |
 
-</MdxMenu>
+## Содержимое
 
-## Тема тултипа
+### Контент тултипа
 
-Содержимое тултипа использует инвертированную тему: в светлой теме тултип будет тёмным, в тёмной — светлым.
+Свойство `children` определяет содержимое тултипа. Это может быть текст, компоненты или любой другой React-элемент. Например, текст внутри тултипа можно оформить с помощью компонента `Text` из Consta UI Kit для настройки размера, стиля или других параметров.
 
-## Размер
+```tsx
+<Tooltip isOpen size="s">
+  <Text view="primary" size="xs" lineHeight="m">
+    Текст тултипа
+  </Text>
+</Tooltip>
+```
 
-За размер тултипа отвечает свойство `size`. Варианты: `s`, `m`, `l`. В зависимости от выбранного размера изменяется максимальная ширина тултипа.
+## Внешний вид
 
-## Статус
+### Тема
 
-Иногда можно дополнительно выделить статус сообщения в тултипе, например для уведомления об ошибке. Сделать это можно с помощью свойства `status` со значениями: `normal`, `success`, `warning` и `alert`.
+Содержимое тултипа использует инвертированную тему: в светлой теме тултип отображается тёмным, в тёмной — светлым.
 
-## Позиционирование тултипа
+### Размер
 
-Чтобы открыть тултип определите свойство `isOpen`. Для позиционирования тултипа используется компонент [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:способы-позиционирования) и его способы позиционирования — по якорю или по координатам.
+Свойство `size` задаёт максимальную ширину тултипа. Доступные значения: `'s'`, `'m'`, `'l'`. Размер влияет только на ширину, а высота определяется содержимым.
 
-### По элементу-якорю
+### Статус
+
+Свойство `status` позволяет выделить тип сообщения в тултипе с помощью цветового акцента. Доступные значения:
+
+- `normal` — нейтральный стиль (по умолчанию).
+- `success` — для успешных уведомлений.
+- `warning` — для предупреждений.
+- `alert` — для ошибок.
+
+## Позиционирование
+
+Компонент `Tooltip` поддерживает позиционирование с помощью свойств, унаследованных от [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev). Тултип можно разместить относительно элемента-якоря или по координатам. Свойства `direction`, `possibleDirections`, `spareDirection`, `isInteractive`, `offset` и `equalAnchorWidth` определяют поведение позиционирования.
+
+### Элемент-якорь
+
+Свойство `anchorRef` позволяет привязать тултип к элементу-якорю. Для управления видимостью используется свойство `isOpen`. Пример:
 
 <MdxTabs>
+
+<TooltipPositionedAnchor />
 
 ```tsx
 export const TooltipPositionedAnchor = () => {
@@ -70,20 +129,21 @@ export const TooltipPositionedAnchor = () => {
         <Text view="primary" lineHeight="m" size="xs">
           Текст тултипа
         </Text>
-        ,
       </Tooltip>
     </>
   );
 };
 ```
 
-<TooltipPositionedAnchor />
-
 </MdxTabs>
 
-### По координатам
+### Координаты
+
+Свойство `position` задаёт координаты `{ x: number, y: number }` для позиционирования тултипа. Это полезно для динамического отображения, например, при движении мыши.
 
 <MdxTabs>
+
+<TooltipPositionedCoords />
 
 ```tsx
 export const TooltipPositionedCoords = () => {
@@ -121,15 +181,15 @@ export const TooltipPositionedCoords = () => {
 };
 ```
 
-<TooltipPositionedCoords />
-
 </MdxTabs>
 
-# Viewport
+### Viewport
 
-По умолчанию вьюпортом является `document.documentElement`. Чтобы заменить его на любой другой элемент, используйте свойство `viewportRef`. Обычно это требуется, когда вьюпорт имеет скролл и необходимо не показывать `Tooltip` за пределами вьюпорта.
+Свойство `viewportRef` позволяет задать элемент, который будет использоваться как область видимости (вьюпорт) для тултипа. По умолчанию используется `document.documentElement`. Это полезно, когда тултип не должен выходить за границы контейнера со скроллом.
 
 <MdxTabs>
+
+<TooltipViewportExample />
 
 ```tsx
 import './TooltipViewportExample.css';
@@ -207,37 +267,13 @@ export const TooltipViewportExample = () => {
 };
 ```
 
-<TooltipViewportExample />
-
 </MdxTabs>
 
-## Импорт
+## Пример использования
+
+Базовый пример использования компонента `Tooltip`:
 
 ```tsx
-import { Tooltip } from '@consta/uikit/Tooltip';
-```
-
-## Свойства
-
-| Свойство              | Тип или варианты значения                     | По умолчанию            | Описание                                                                                                              |
-| --------------------- | --------------------------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `isOpen?`             | `boolean`                                     | -                       | Состояние тултипа (открыт/закрыт)                                                                                     |
-| `anchorRef?`          | `React.RefObject<HTMLElement>`                | -                       | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                                 |
-| `position?`           | `{ x: number; y: number }` &#124; `undefined` | -                       | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                                 |
-| `size`                | `'s', 'm', 'l'`                               | '`m`'                   | Размер, влияющий на максимальную ширину тултипа                                                                       |
-| `children`            | `React.ReactNode`                             | -                       | Контент тултипа                                                                                                       |
-| `direction?`          | `Direction`                                   | `'upCenter'`            | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания) |
-| `possibleDirections?` | `Direction[]`                                 | все возможные Direction | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания) |
-| `spareDirection?`     | `Direction`                                   | `'downStartLeft'`       | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания) |
-| `isInteractive?`      | `boolean`                                     | `true`                  | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                                 |
-| `onClickOutside?`     | `(event: MouseEvent) => void`                 | -                       | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                                 |
-| `offset?`             | `number`                                      | `0`                     | Отступ от якоря или позиции                                                                                           |
-| `equalAnchorWidth?`   | `boolean`                                     | `false`                 | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                                 |
-| `container?`          | `Element`                                     | `window.document.body`  | см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev)                                 |
-
-### Пример
-
-```ts
 <Tooltip isOpen size="s" position={{ x: 100, y: 200 }}>
   Контент тултипа
 </Tooltip>
