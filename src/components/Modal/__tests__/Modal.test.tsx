@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
 import { Modal } from '../Modal';
@@ -70,21 +70,36 @@ describe('Компонент Modal', () => {
     });
   });
 
-  // Исправить
-  // describe('проверка onOpen и onClose', () => {
-  //   const onOpen = jest.fn();
-  //   const onClose = jest.fn();
-  //   const { rerender } = render(getComponent({ onClose, onOpen }));
+  describe("проверка callback'ов", () => {
+    it('onOpen должен вызваться после рендера', () => {
+      const onOpen = jest.fn();
+      const onClose = jest.fn();
+      render(getComponent({ onClose, onOpen }));
+      expect(onOpen).toHaveBeenCalledTimes(1);
+      expect(onClose).toHaveBeenCalledTimes(0);
+    });
 
-  //   it('onOpen должен вызваться после рендера', () => {
-  //     expect(onOpen).toHaveBeenCalledTimes(1);
-  //     expect(onClose).toHaveBeenCalledTimes(0);
-  //   });
+    it('onClose должен вызваться в момент закрытия', () => {
+      const onOpen = jest.fn();
+      const onClose = jest.fn();
+      const { rerender } = render(getComponent({ onClose, onOpen }));
+      expect(onOpen).toHaveBeenCalledTimes(1);
+      rerender(getComponent({ onClose, onOpen, isOpen: false }));
+      expect(onClose).toHaveBeenCalledTimes(1);
+    });
 
-  //   it('onClose должен вызваться после закрытия', () => {
-  //     rerender(getComponent({ onClose, onOpen, isOpen: false }));
-  //     expect(onOpen).toHaveBeenCalledTimes(1);
-  //     expect(onClose).toHaveBeenCalledTimes(1);
-  //   });
-  // });
+    it('afterClose должен вызваться после закрытия', () => {
+      jest.useFakeTimers();
+      const afterClose = jest.fn();
+      const { rerender } = render(getComponent({ isOpen: true, afterClose }));
+
+      rerender(getComponent({ isOpen: false, afterClose }));
+
+      act(() => {
+        jest.runAllTimers();
+      });
+
+      expect(afterClose).toHaveBeenCalledTimes(1);
+    });
+  });
 });
