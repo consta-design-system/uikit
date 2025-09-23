@@ -12,6 +12,7 @@ export const TextFieldExampleLabel = () => {
       <TextField
         onChange={setValue}
         value={value}
+        labelIcon={IconQuestion}
         placeholder="Здесь лейбл сверху"
         label="Лейбл"
         labelPosition="top"

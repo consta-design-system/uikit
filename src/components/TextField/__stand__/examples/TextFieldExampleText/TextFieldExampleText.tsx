@@ -34,7 +34,7 @@ export const TextFieldExampleTextLeft = () => {
   return (
     <Example col={1}>
       <TextField leftSide="куда" value={value} onChange={setValue} />
-      <TextField leftSide="кому" value={value} onChange={setValue} />
+      <TextField leftSide={IconDiamond} rightSide="карат" />
     </Example>
   );
 };
