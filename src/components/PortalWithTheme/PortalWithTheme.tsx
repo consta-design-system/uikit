@@ -28,8 +28,7 @@ const getZIndex = (contextZIndex?: number, propZIndex?: number | string) => {
 
 const isRef = (
   ref: React.RefObject<HTMLElement> | Element | undefined,
-): ref is React.RefObject<HTMLElement> =>
-  !!ref && 'current' in ref && ref.current instanceof HTMLElement;
+): ref is React.RefObject<HTMLElement> => !!ref && 'current' in ref;
 
 const getElement = (ref: React.RefObject<HTMLElement> | Element) =>
   isRef(ref) ? ref.current : ref;

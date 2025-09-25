@@ -1,0 +1,14 @@
+.ModalExampleImage {
+  &-Modal {
+    width: 630px;
+  }
+
+  &-HeaderContent {
+    width: 100%;
+  }
+
+  &-Image {
+    width: 100%;
+    max-width: 450px;
+  }
+}

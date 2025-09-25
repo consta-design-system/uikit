@@ -37,7 +37,7 @@ export const mixFlexPropDirection = [
 ] as const;
 export type MixFlexPropDirection = typeof mixFlexPropDirection[number];
 
-type Props = {
+export type CnMixFlexProps = {
   align?: MixFlexPropAlign;
   justify?: MixFlexPropJustify;
   flex?: MixFlexPropFlex;
@@ -48,7 +48,7 @@ type Props = {
 };
 
 type CnMixFlex = (
-  props: Props,
+  props: CnMixFlexProps,
   classNames?: Array<string | undefined>,
 ) => string;
 

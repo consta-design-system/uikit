@@ -1,0 +1,6 @@
+.ModalExampleStaticModal.Modal {
+  --modal-window-offset-prop: 5%;
+  position: static;
+  width: 100%;
+  height: 100%;
+}

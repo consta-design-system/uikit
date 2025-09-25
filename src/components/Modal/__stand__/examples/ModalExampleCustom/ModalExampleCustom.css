@@ -1,0 +1,40 @@
+.ModalExampleCustom {
+  &-Modal {
+    width: 630px;
+  }
+
+  &-HeaderContent {
+    width: 100%;
+  }
+
+  &-EmailBox {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &-AccessBox {
+    width: 100%;
+  }
+
+  &-Access {
+    overflow: hidden;
+    flex: 1;
+    width: 100%;
+  }
+
+  &-Users {
+    overflow: hidden;
+    flex: 1;
+    width: 100%;
+  }
+
+  &-Body {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &-Input {
+    overflow: hidden;
+    flex: 1;
+  }
+}

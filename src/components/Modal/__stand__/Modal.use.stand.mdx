@@ -1,0 +1,500 @@
+import { MdxMenu, MdxTabs } from '@consta/stand';
+
+import { ModalStatusExample } from './examples/ModalStatusExample/ModalStatusExample';
+import { ModalHeaderDirectionHorizontal } from './examples/ModalHeaderDirectionHorizontal/ModalHeaderDirectionHorizontal';
+import { ModalHeaderDirectionVertical } from './examples/ModalHeaderDirectionVertical/ModalHeaderDirectionVertical';
+import { ModalExampleDestructive } from './examples/ModalExampleDestructive/ModalExampleDestructive';
+import { ModalExampleImage } from './examples/ModalExampleImage/ModalExampleImage';
+import { ModalExampleTable } from './examples/ModalExampleTable/ModalExampleTable';
+import { ModalExampleCustom } from './examples/ModalExampleCustom/ModalExampleCustom';
+
+## Лучшие практики
+
+### Использование иконок
+
+Статусные иконки полезны в ситуациях, когда вам необходимо подсветить тип совершаемого действия, например, ошибочное, нейтральное, положительное, системное и опасное.
+
+<MdxTabs>
+
+<ModalStatusExample />
+
+```tsx
+<Modal
+  className={cnModalStatusExample('Modal')}
+  isOpen
+  hasOverlay={false}
+  border
+>
+  <ModalLayout space={[{ p: 's' }, { p: 's' }]} border={[false, true]}>
+    <ModalHeader
+      onClose={setOpen.off}
+      icon={IconAllDone}
+      status="success"
+      direction="vertical"
+    >
+      Обращение зарегистрировано
+    </ModalHeader>
+    <Text align="center">
+      Вы можете ознакомиться со статусом на вкладке <b>Мои обращения</b>
+    </Text>
+    <div
+      className={cnModalStatusExample('Footer', [
+        cnMixSpace({ p: 's' }),
+        cnMixFlex({ gap: 's', direction: 'column' }),
+      ])}
+    >
+      <Button
+        size="m"
+        view="primary"
+        label="Перейти к обращению"
+        width="full"
+      />
+      <Button size="m" view="ghost" label="Закрыть" width="full" />
+    </div>
+  </ModalLayout>
+</Modal>
+```
+
+```css
+.ModalStatusExample {
+  &-Modal {
+    width: 400px;
+  }
+  &-Footer {
+    background: var(--color-bg-secondary);
+  }
+}
+```
+
+</MdxTabs>
+
+### Заголовок
+
+Заголовок должен быть коротким, понятным и отвечать на вопрос «Зачем открылось окно?». Если модальное окно предназначено для решения одной задачи, то отразите это в заголовке. Например: «Создание обращения», «Изменения у сотрудника», «Удалить строку?».
+
+### Закрытие окна
+
+Окно может закрываться несколькими способами:
+
+- Кнопкой закрытия в виде крестика в верхнем правом углу.
+- Текстовой кнопкой закрытия находящейся в футере.
+- При клике за пределы окна.
+
+Во всех вариантах выше, введенная информация может быть удалена, продумайте логику закрытия от целей своего проекта. Если было какое-то изменение, советуем уточнять способы закрытия, например, «Закрыть без сохранения», «Сохранить данные».
+
+### Расположение кнопок
+
+Используя `ModalHeader` c `direction="horizontal"` мы отображаем кнопки в футере справа. Где кнопка справа имеет самое приоритетное действие выделенное `view="primary"`
+
+<MdxTabs>
+
+<ModalHeaderDirectionHorizontal />
+
+```tsx
+<Modal isOpen hasOverlay={false} style={{ width: 600 }} border>
+  <ModalLayout space={{ p: 'm' }} border>
+    <ModalHeader onClose={() => {}}>Создание карточки сотрудника</ModalHeader>
+    <>
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>ФИО</FieldLabel>
+      <TextField
+        className={cnMixSpace({ mB: 'l' })}
+        placeholder="Иванов Иван Иванович"
+        defaultValue="Золотов Иван Сергеевич"
+        clearButton
+      />
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Почта</FieldLabel>
+      <TextField
+        placeholder="example@example.com"
+        defaultValue="ivan@mail.ru"
+        clearButton
+      />
+    </>
+    <div
+      className={cnMixFlex({
+        gap: 'xs',
+        justify: 'flex-end',
+      })}
+    >
+      <Button view="ghost" label="Отмена" />
+      <Button label="Создать карточку" />
+    </div>
+  </ModalLayout>
+</Modal>
+```
+
+</MdxTabs>
+
+Для `direction="horizontal"` мы отображаем кнопки снизу. Самое приоритетное действие выделенное в кнопку вида `view="primary"` находится первым в списке кнопок.
+
+<MdxTabs>
+
+<ModalHeaderDirectionVertical />
+
+```tsx
+<Modal
+  className={cnModalHeaderDirectionVertical()}
+  isOpen
+  hasOverlay={false}
+  border
+>
+  <ModalLayout space={[{ p: 'm' }, { p: 'm' }]} border>
+    <ModalHeader
+      onClose={() => {}}
+      direction="vertical"
+      status="warning"
+      icon={IconWifiOff}
+    >
+      Ошибка подключения
+    </ModalHeader>
+    <Text align="center">
+      Не удается подключиться к WI-FI. Проверьте соединение и повторите попытку
+    </Text>
+    <div
+      className={cnModalHeaderDirectionVertical('Footer', [
+        cnMixFlex({
+          gap: 'xs',
+          direction: 'column',
+        }),
+        cnMixSpace({ p: 'm' }),
+      ])}
+    >
+      <Button label="Повторить попытку" width="full" />
+      <Button view="ghost" label="Отмена" width="full" />
+    </div>
+  </ModalLayout>
+</Modal>
+```
+
+</MdxTabs>
+
+### Деструктивные действия
+
+Бывают ситуации, когда необходимо показать деструктивное действие в модальном окне. Мы рекомендуем размещать такие действия в менее приоритетной позиции или использовать дополнительную валидацию.
+
+Так же, чтобы привлечь внимание пользователя на опасность действия, используйте статустные иконки красного цвета с понятными метафорами действия, например, удаление = мусорка или красный крест.
+
+<ModalExampleDestructive />
+
+Если ваше деструктивное действие находится рядом с недеструктивными, например _Подтвердить сборку_ и _Остановить сборку_, то расположите их в разных краях модального окна или уберите деструктивное действие в менее видимую часть интерфейса.
+
+## Примеры
+
+### Окно с изображением
+
+<MdxTabs>
+
+<ModalExampleImage />
+
+```tsx
+<Modal
+  className={cnModalExampleImage('Modal')}
+  isOpen
+  hasOverlay={false}
+  border
+>
+  <ModalLayout space={[{ p: 'm' }, { pB: 'm', pH: 'm' }, { p: 'm' }]}>
+    <ModalHeader onClose={() => {}} direction="vertical">
+      <div
+        className={cnModalExampleImage('HeaderContent', [
+          cnMixFlex({
+            gap: 'xs',
+            align: 'center',
+            direction: 'column',
+          }),
+        ])}
+      >
+        <SvgImage className={cnModalExampleImage('Image')} />
+        <Text align="center" view="primary" size="m" weight="semibold">
+          Заголовок модального окна
+        </Text>
+      </div>
+    </ModalHeader>
+    <Text size="m" view="primary" lineHeight="m" align="center">
+      На почту будет отправлено письмо от системы учета данных. При
+      возникновении проблем обращайтесь на тех. портал в раздел «Помощь с
+      заявками»
+    </Text>
+    <div
+      className={cnMixFlex({
+        gap: 'xs',
+        justify: 'center',
+      })}
+    >
+      <Button size="m" view="primary" label="Отменить" width="default" />
+    </div>
+  </ModalLayout>
+</Modal>
+```
+
+```css
+.ModalExampleImage {
+  &-Modal {
+    width: 630px;
+  }
+  &-HeaderContent {
+    width: 100%;
+  }
+  &-Image {
+    width: 100%;
+    max-width: 450px;
+  }
+}
+```
+
+</MdxTabs>
+
+### Окно с таблицей
+
+<MdxTabs>
+
+<ModalExampleTable />
+
+```tsx
+<Modal
+  container={ref}
+  rootClassName={cnModalExampleStaticModal()}
+  className={cnModalExampleTable('Modal')}
+  isOpen
+  hasOverlay={false}
+  border
+>
+  <ModalLayout space={{ p: 'm' }} border={[true, false]}>
+    <ModalHeader onClose={() => {}}>Изменения у сотрудника</ModalHeader>
+    <div className={cnModalExampleTable('TableWrapper')}>
+      <Table columns={columns} rows={rows} zebraStriped />
+    </div>
+  </ModalLayout>
+</Modal>
+```
+
+```css
+.ModalExampleTable {
+  &-Modal {
+    width: 630px;
+  }
+  &-TableWrapper {
+    border: 1px solid var(--color-bg-border);
+    border-radius: var(--control-radius);
+    overflow: hidden;
+  }
+}
+```
+
+</MdxTabs>
+
+### Кастомное окно
+
+<MdxTabs>
+
+<ModalExampleCustom />
+
+```tsx
+import './ModalExampleCustom.css';
+
+import { IconAdd } from '@consta/icons/IconAdd';
+import { IconConnection } from '@consta/icons/IconConnection';
+import { Example } from '@consta/stand';
+import React, { useRef } from 'react';
+
+import { AvatarGroup } from '@consta/uikit/AvatarGroup';
+import { Button } from '@consta/uikit//Button';
+import { ChipsItem } from '@consta/uikit/Chips';
+import { FieldLabel } from '@consta/uikit/FieldComponents';
+import { Select } from '@consta/uikit/SelectCanary';
+import { Text } from '@consta/uikit/Text';
+import { TextField } from '@consta/uikit/TextFieldCanary';
+import { getLastPoint, useBreakpoints } from '@consta/uikit/useBreakpoints';
+import { cnMixFlex } from '@consta/uikit/MixFlex';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+import { cn } from '##/utils/bem';
+
+import { Modal, ModalHeader, ModalLayout } from '@consta/uikit/Modal';
+
+const cnModalExampleCustom = cn('ModalExampleCustom');
+
+export const ModalExampleCustom = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const isDesktop =
+    getLastPoint(
+      useBreakpoints({
+        ref,
+        map: { isDesktop: 600 },
+        isActive: true,
+      }),
+    ) === 'isDesktop';
+
+  return (
+    <>
+      <div ref={ref} style={{ height: 460 }} />
+      <Modal
+        container={ref}
+        className={cnModalExampleCustom('Modal')}
+        isOpen
+        hasOverlay={false}
+        border
+      >
+        <ModalLayout space={{ p: 'm' }} border={[true, false]}>
+          <ModalHeader onClose={() => {}}>
+            <div
+              className={cnModalExampleCustom('HeaderContent', [
+                cnMixFlex({
+                  gap: 's',
+                  justify: 'space-between',
+                  direction: 'row',
+                  align: 'center',
+                }),
+              ])}
+            >
+              <Text view="primary" size="m" weight="semibold">
+                {isDesktop ? 'Поделиться файлом' : 'Поделиться'}
+              </Text>
+              <Button
+                size="s"
+                view="clear"
+                label={isDesktop ? 'Копировать ссылку' : 'Копировать'}
+                iconLeft={IconConnection}
+              />
+            </div>
+          </ModalHeader>
+          <div
+            className={cnModalExampleCustom('Body', [
+              cnMixFlex({ gap: 's', direction: 'column' }),
+            ])}
+          >
+            <div
+              className={cnModalExampleCustom('EmailBox', [
+                cnMixFlex({ gap: 's' }),
+              ])}
+            >
+              <TextField
+                className={cnModalExampleCustom('Input')}
+                placeholder="Введите почту"
+              />
+              <Button
+                className={cnModalExampleCustom('SendButton')}
+                label="Отправить"
+              />
+            </div>
+            <div
+              className={cnModalExampleCustom('ChipsBox', [
+                cnMixFlex({ gap: 's', wrap: 'wrap' }),
+                cnMixSpace({ mB: 'xl' }),
+              ])}
+            >
+              <ChipsItem
+                size="s"
+                iconLeft={IconAdd}
+                label="Филатов Олег Владимирович"
+              />
+              <ChipsItem
+                size="s"
+                iconLeft={IconAdd}
+                label="Петрова Ксения Михайловна"
+              />
+            </div>
+            <div
+              className={cnModalExampleCustom('AccessBox', [
+                cnMixFlex({
+                  gap: 's',
+                  direction: isDesktop ? 'row' : 'column',
+                }),
+              ])}
+            >
+              <div
+                className={cnModalExampleCustom('Access', [
+                  cnMixFlex({ gap: 's', direction: 'column' }),
+                ])}
+              >
+                <FieldLabel>Настройки доступа</FieldLabel>
+                <Select
+                  items={[
+                    {
+                      id: 1,
+                      label: 'Только к просмотру',
+                    },
+                    { id: 2, label: 'Просмотр и изменение' },
+                  ]}
+                  value={{
+                    id: 1,
+                    label: 'Только к просмотру',
+                  }}
+                  onChange={() => {}}
+                  size="m"
+                  view="default"
+                />
+              </div>
+              <div
+                className={cnModalExampleCustom('Users', [
+                  cnMixFlex({ gap: 'm', direction: 'column' }),
+                ])}
+              >
+                <FieldLabel>Пользователи</FieldLabel>
+                <AvatarGroup
+                  visibleCount="auto"
+                  items={[
+                    { name: 'Филатов Олег Владимирович' },
+                    { name: 'Петрова Ксения Михайловна' },
+                    { name: 'Иванов Иван Иванович' },
+                    { name: 'Сидоров Петр Петрович' },
+                    { name: 'Сидорова Елена Ивановна' },
+                    { name: 'Иванова Елена Петровна' },
+                    { name: 'Иванов Петр Иванович' },
+                    { name: 'Сидоров Иван Петрович' },
+                    { name: 'Сидорова Елена Ивановна' },
+                    { name: 'Иванова Елена Петровна' },
+                    { name: 'Иванов Петр Иванович' },
+                    { name: 'Сидоров Иван Петрович' },
+                    { name: 'Сидорова Елена Ивановна' },
+                    { name: 'Иванова Елена Петровна' },
+                    { name: 'Иванов Петр Иванович' },
+                    { name: 'Сидоров Иван Петрович' },
+                  ]}
+                />
+              </div>
+            </div>
+          </div>
+        </ModalLayout>
+      </Modal>
+    </>
+  );
+};
+```
+
+```css
+.ModalExampleCustom {
+  &-Modal {
+    width: 630px;
+  }
+  &-HeaderContent {
+    width: 100%;
+  }
+  &-EmailBox {
+    width: 100%;
+    overflow: hidden;
+  }
+  &-AccessBox {
+    width: 100%;
+  }
+  &-Access {
+    flex: 1;
+    overflow: hidden;
+    width: 100%;
+  }
+  &-Users {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+  }
+  &-Body {
+    width: 100%;
+    overflow: hidden;
+  }
+  &-Input {
+    flex: 1;
+    overflow: hidden;
+  }
+}
+```
+
+</MdxTabs>

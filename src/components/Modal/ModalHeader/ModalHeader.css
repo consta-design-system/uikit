@@ -1,0 +1,53 @@
+.ModalHeader {
+  position: relative;
+
+  &_gap {
+    padding-right: calc(var(--space-2xl) + var(--space-xs));
+    padding-left: calc(var(--space-2xl) + var(--space-xs));
+  }
+
+  &-Icon {
+    flex: none;
+  }
+
+  &-ButtonClose {
+    flex: none;
+
+    &_fixed {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &-Title {
+    flex: 1;
+
+    &_minHeight {
+      min-height: var(--space-2xl);
+    }
+  }
+
+  &-StatusIcon {
+    flex: none;
+    width: var(--modal-header-status-icon-size);
+    height: var(--modal-header-status-icon-size);
+    background:
+      color-mix(
+        in srgb,
+        var(--modal-status-icon-bg) var(--modal-status-icon-degree-mixing),
+        var(--color-bg-default)
+      );
+    border-radius: 50%;
+
+    &_size {
+      &_m {
+        --modal-header-status-icon-size: var(--space-2xl);
+      }
+
+      &_l {
+        --modal-header-status-icon-size: calc(var(--space-2xl) * 2);
+      }
+    }
+  }
+}
