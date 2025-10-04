@@ -13,7 +13,6 @@ import { getLevels, withDefaultGetters } from '../helpers';
 import {
   AddLevel,
   ContextMenuItemDefault,
-  ContextMenuLevelsComponent,
   ContextMenuLevelsProps,
   contextMenuPropDefaultSubMenuDirection,
   contextMenuPropSubMenuDirections,
@@ -21,10 +20,7 @@ import {
 } from '../types';
 import { useSize } from './useSize';
 
-const ContextMenuLevelsRender = (
-  propsComponent: ContextMenuLevelsProps,
-  ref: React.Ref<HTMLDivElement>,
-) => {
+export const ContextMenuLevels = (propsComponent: ContextMenuLevelsProps) => {
   const props = withDefaultGetters(propsComponent);
   const {
     items,
@@ -205,7 +201,3 @@ const ContextMenuLevelsRender = (
     </TransitionGroup>
   );
 };
-
-export const ContextMenuLevels = React.forwardRef(
-  ContextMenuLevelsRender,
-) as ContextMenuLevelsComponent;
