@@ -56,6 +56,47 @@ import { RadioGroup } from '@consta/uikit/RadioGroup';
 | `name?`                                       | `string`                        | -            | Имя `<input>` для доступности                             |
 | `className?`                                  | `string`                        | -            | Дополнительные CSS-классы                                 |
 
+```tsx
+export type RadioGroupDefaultItem = {
+  key?: string | number;
+  label: string;
+  disabled?: boolean;
+};
+
+export const radioGroupDirections = ['column', 'row'] as const;
+export type RadioGroupDirection = typeof radioGroupDirections[number];
+export const radioGroupDefaultDirection: RadioGroupDirection =
+  radioGroupDirections[0];
+
+export const radioGroupSizes = ['m', 'l', 'xs', 's'] as const;
+export type RadioGroupPropSize = typeof radioGroupSizes[number];
+export const radioGroupDefaultSize: RadioGroupPropSize = radioGroupSizes[0];
+
+export const radioGroupViews = ['primary', 'ghost'] as const;
+export type RadioGroupPropView = typeof radioGroupViews[number];
+export const radioGroupDefaultView: RadioGroupPropView = radioGroupViews[0];
+
+export const radioGroupPropAlign = ['center', 'top'] as const;
+export type RadioGroupPropAlign = typeof radioGroupPropAlign[number];
+export const radioGroupPropAlignDefault: RadioGroupPropAlign =
+  radioGroupPropAlign[0];
+
+export type RadioGroupPropGetItemKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+export type RadioGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type RadioGroupPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+
+export type RadioGroupPropOnChange<ITEM> = (
+  value: ITEM,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
+```
+
 ## Содержимое
 
 ### Название радиокнопки

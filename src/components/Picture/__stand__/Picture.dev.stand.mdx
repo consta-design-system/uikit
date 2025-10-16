@@ -38,6 +38,16 @@ import { Picture } from '@consta/uikit/Picture';
 | `className?`                                        | `string`                       | -                         | Дополнительный CSS-класс                                   |
 | `ref?`                                              | `React.Ref<HTMLDivElement>`    | -                         | Ссылка на корневой DOM-элемент этого компонента            |
 
+```tsx
+export type PicturePropGetImageSettings = (image: string) => {
+  theme?: string;
+  size?: number;
+  descriptor?: string;
+};
+
+export type PicturePropSrc = string | Record<string, string>;
+```
+
 ## Содержимое
 
 ### Изображения

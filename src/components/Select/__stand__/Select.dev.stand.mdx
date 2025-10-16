@@ -104,6 +104,49 @@ import { Select } from '@consta/uikit/Select';
 | `dropdownClassName`                                                     | `string`                                                                                                                                                          | -                         | Дополнительный CSS-класс для выпадающего блока    |
 | `ref`                                                                   | `React.Ref<HTMLDivElement>`                                                                                                                                       | -                         | Ссылка на корневой DOM-элемент компонента         |
 
+```tsx
+type SelectItemDefault = {
+  label: string;
+  id: string | number;
+  groupId?: string | number;
+  disabled?: boolean;
+};
+
+type SelectGroupDefault = {
+  label: string;
+  id: string | number;
+};
+
+type SelectPropOnChange<ITEM = SelectItemDefault> = (
+  value: ITEM | null,
+  props: {
+    e: React.SyntheticEvent;
+  },
+) => void;
+
+type SelectRenderItemProps<ITEM> = {
+  item: ITEM;
+  active: boolean;
+  hovered: boolean;
+  onClick: (e: React.SyntheticEvent) => void;
+  onMouseEnter: (e: React.SyntheticEvent) => void;
+  ref: React.Ref<HTMLDivElement>;
+};
+
+type SelectPropRenderValue<ITEM> = (props: {
+  item: ITEM;
+}) => React.ReactNode | null;
+
+type SelectPropGetItemLabel<ITEM> = (item: ITEM) => string;
+type SelectPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type SelectPropGetItemGroupKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+type SelectPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+type SelectPropGetGroupKey<GROUP> = (group: GROUP) => string | number;
+type SelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
+```
+
 ## Содержимое
 
 ### Варианты

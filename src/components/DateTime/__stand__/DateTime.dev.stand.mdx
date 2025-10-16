@@ -78,6 +78,46 @@ import { DateTime } from '@consta/uikit/DateTime';
 | `className?`                                     | `string`                                               | -            | Дополнительные CSS-классы                                                 |
 | `ref?`                                           | `React.Ref<HTMLDivElement>`                            | -            | Ссылка на корневой DOM-элемент компонента                                 |
 
+```tsx
+import { Locale } from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
+
+type DateTimePropValue = Date | [Date?, Date?];
+
+type CapableRangeType = 'date' | 'month' | 'year';
+
+type DateTimePropValue<TYPE> = TYPE extends CapableRangeType
+  ? Date | DateRange
+  : Date;
+
+type DateTimePropOnChange = (
+  value: Date,
+  props: {
+    e: React.MouseEvent<HTMLButtonElement>;
+  },
+) => void;
+
+type DateTimePropOnChangeRange<TYPE> = TYPE extends CapableRangeType
+  ? (
+      value: DateRange,
+      props: {
+        e: React.MouseEvent<HTMLButtonElement>;
+      },
+    ) => void
+  : never;
+
+type LocaleWords = {
+  words?: {
+    hours?: string;
+    minutes?: string;
+    seconds?: string;
+  };
+};
+
+export type DateTimePropLocale = Locale & LocaleWords;
+export type DateTimePropDisableDates = Array<Date | [Date, Date]>;
+```
+
 ## Содержимое
 
 ### Тип календаря

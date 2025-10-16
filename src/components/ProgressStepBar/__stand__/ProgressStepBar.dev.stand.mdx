@@ -60,6 +60,53 @@ import { ProgressStepBar } from '@consta/uikit/ProgressStepBar';
 | `className?`                        | `string`                                         | -                               | Дополнительный CSS-класс                            |
 | `ref?`                              | `React.Ref<HTMLDivElement>`                      | -                               | Ссылка на корневой элемент                          |
 
+```tsx
+export type ProgressStepBarItemDefault = {
+  label: string;
+  tooltipContent?: string;
+  lineStatus?: ProgressStepBarPropStatus;
+  point?: ProgressStepBarPointNumbersMap | IconComponent;
+  status?: ProgressStepBarPropStatus;
+  progress?: boolean;
+  content?: React.ReactNode;
+  onClick?: React.EventHandler<React.MouseEvent>;
+};
+
+type ProgressStepBarPropStatus = 'normal' | 'success' | 'warning' | 'alert';
+type ProgressStepBarPointNumbersMap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+type ProgressStepBarPropGetItemLabel<ITEM> = (item: ITEM) => string;
+type ProgressStepBarPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type ProgressStepBarPropGetItemTooltipContent<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+type ProgressStepBarPropGetItemLineStatus<ITEM> = (
+  item: ITEM,
+) => PropStatus | undefined;
+type ProgressStepBarPropGetItemPoint<ITEM> = (
+  item: ITEM,
+) => PointNumbersMap | IconComponent | undefined;
+type ProgressStepBarPropGetItemProgress<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+type ProgressStepBarPropGetItemContent<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | undefined;
+type ProgressStepBarPropGetItemStatus<ITEM> = (
+  item: ITEM,
+) => PropStatus | undefined;
+type ProgressStepBarPropGetItemOnClick<ITEM> = (
+  item: ITEM,
+) => React.EventHandler<React.MouseEvent> | undefined;
+
+type PropOnItemClick<ITEM> = (
+  item: ITEM,
+  props: {
+    e: React.MouseEvent;
+    index: number;
+  },
+) => void;
+```
+
 ## Содержимое
 
 ### Шаги

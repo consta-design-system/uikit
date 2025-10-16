@@ -62,6 +62,42 @@ import { CollapseGroup } from '@consta/uikit/CollapseGroup';
 | [`opened?`](#кастомное-поведение)              | `Opened<IS_ACCORDION>`                                                                             | -                         | Индексы открытых коллапсов                                         |
 | `className?`                                   | `string`                                                                                           | -                         | Дополнительный CSS-класс                                           |
 
+```tsx
+type DefaultItem = {
+  label: string;
+  content: React.ReactNode;
+  rightSide?: React.ReactNode | React.ReactNode[];
+};
+
+type GetItemLabel<ITEM> = (item: ITEM) => string;
+
+type GetItemContent<ITEM> = (item: ITEM) => React.ReactNode;
+
+type GetItemRightSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | React.ReactNode[] | undefined;
+
+type OnOpen<IS_ACCORDION> = (params: {
+  e: React.MouseEvent<HTMLDivElement, MouseEvent>;
+  value: (IS_ACCORDION extends true ? number : number[]) | null;
+}) => void;
+
+type Opened<IS_ACCORDION> =
+  | (IS_ACCORDION extends true ? number : number[])
+  | null
+  | undefined;
+
+const defaultGetItemLabel: CollapseGroupPropGetItemLabel<DefaultItem> = (
+  item,
+) => item.label;
+const defaultGetItemContent: CollapseGroupPropGetItemContent<DefaultItem> = (
+  item,
+) => item.content;
+const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (
+  item,
+) => item.rightSide;
+```
+
 ## Содержимое
 
 ### Блоки с информацией

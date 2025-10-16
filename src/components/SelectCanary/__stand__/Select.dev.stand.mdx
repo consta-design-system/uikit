@@ -118,6 +118,83 @@ import { Select } from '@consta/uikit/SelectCanary';
 | `className`                                                            | `string`                                               | -                         | Дополнительный CSS-класс                         |
 | `ref`                                                                  | `React.Ref<HTMLDivElement>`                            | -                         | Ссылка на корневой DOM-элемент компонента        |
 
+```tsx
+type RenderItemProps<ITEM> = {
+  item: ITEM;
+  active: boolean;
+  hovered: boolean;
+  onClick: (e: React.MouseEvent) => void;
+  onMouseEnter: (e: React.MouseEvent) => void;
+  ref: React.Ref<HTMLDivElement>;
+};
+
+type SelectItemDefault = {
+  label: string;
+  id: string | number;
+  groupId?: string | number;
+  disabled?: boolean;
+};
+
+type SelectGroupDefault = {
+  label: string;
+  id: string | number;
+};
+
+type SelectPropGetItemLabel<ITEM> = (item: ITEM) => string;
+type SelectPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type SelectPropGetItemGroupKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+type SelectPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+type SelectPropGetGroupKey<GROUP> = (group: GROUP) => string | number;
+type SelectPropGetGroupLabel<GROUP> = (group: GROUP) => string;
+
+type SelectPropOnChange<ITEM, MULTIPLE extends boolean> = (
+  value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
+  props: {
+    e: React.SyntheticEvent;
+  },
+) => void;
+type SelectPropValue<ITEM, MULTIPLE extends boolean> =
+  | (MULTIPLE extends true ? ITEM[] : ITEM)
+  | null
+  | undefined;
+
+type SelectPropRenderItem<ITEM> = (
+  props: RenderItemProps<ITEM>,
+) => React.ReactNode | null;
+
+type SelectPropRenderValue<ITEM, MULTIPLE> = MULTIPLE extends true
+  ? (props: {
+      value: ITEM[];
+      getRemove: (
+        item: ITEM,
+      ) => (e: React.SyntheticEvent<Element, Event>) => void;
+    }) => React.ReactNode | null
+  : (props: { value: ITEM }) => React.ReactNode | null;
+
+type SelectPropOnCreate = (
+  label: string,
+  props: { e: React.SyntheticEvent },
+) => void;
+
+type FieldPropForm =
+  | 'default'
+  | 'defaultClear'
+  | 'defaultBrick'
+  | 'brick'
+  | 'brickDefault'
+  | 'brickClear'
+  | 'brickRound'
+  | 'round'
+  | 'roundClear'
+  | 'roundBrick'
+  | 'clearRound'
+  | 'clearDefault'
+  | 'clearBrick'
+  | 'clear';
+```
+
 ## Содержимое
 
 ### Варианты

@@ -55,6 +55,57 @@ import { CheckboxGroup } from '@consta/uikit/CheckboxGroup';
 | `name`                                      | `string`                             | —            | Имя `<input>`, указывается для доступности                                                              |
 | `className?`                                | `string`                             | —            | Дополнительные CSS-классы                                                                               |
 
+```tsx
+type CheckboxGroupPropAttributes = Omit<
+  JSX.IntrinsicElements['label'],
+  'ref' | 'onChange' | 'onFocus' | 'children' | 'onBlur'
+>;
+
+export type CheckboxGroupDefaultItem = {
+  key?: string | number;
+  label: string;
+  disabled?: boolean;
+  attributes?: CheckboxGroupPropAttributes;
+  ref?: React.RefObject<HTMLLabelElement>;
+};
+
+export const checkboxGroupDirections = ['column', 'row'] as const;
+export type CheckboxGroupDirection = typeof checkboxGroupDirections[number];
+export const checkboxGroupDefaultDirection: CheckboxGroupDirection =
+  checkboxGroupDirections[0];
+
+export const checkboxGroupSizes = ['m', 'xs', 's', 'l'] as const;
+export type CheckboxGroupPropSize = typeof checkboxGroupSizes[number];
+export const checkboxGroupDefaultSize: CheckboxGroupPropSize =
+  checkboxGroupSizes[0];
+
+export const checkboxGroupViews = ['primary', 'ghost'] as const;
+export type CheckboxGroupPropView = typeof checkboxGroupViews[number];
+export const checkboxGroupDefaultView: CheckboxGroupPropView =
+  checkboxGroupViews[0];
+
+export type CheckboxGroupPropGetItemKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+export type CheckboxGroupPropGetItemLabel<ITEM> = (item: ITEM) => string;
+export type CheckboxGroupPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+export type CheckboxGroupPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => CheckboxGroupPropAttributes | undefined;
+export type CheckboxGroupPropGetItemRef<ITEM> = (
+  item: ITEM,
+) => React.RefObject<HTMLLabelElement> | undefined;
+
+export type CheckboxGroupPropOnChange<ITEM> = (
+  value: ITEM[] | null,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
+```
+
 ## Содержимое
 
 Свойство `items` задаёт массив объектов, описывающих каждый чекбокс. Объект может содержать поля:

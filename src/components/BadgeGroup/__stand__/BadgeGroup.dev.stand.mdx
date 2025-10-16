@@ -55,6 +55,20 @@ import { BadgeGroup } from '@consta/uikit/BadgeGroup';
 | `className?`                | `string`                                                                          | -            | Дополнительный CSS-класс (mix)                                         |
 | `ref?`                      | `React.PrincipalRef<HTMLElement>`                                                 | -            | Ссылка на корневой DOM-элемент компонента                              |
 
+```tsx
+export type BadgeGroupDefaultItem = {
+  key: string | number;
+  status?: BadgePropStatus;
+  view?: BadgePropView;
+  label?: string;
+  iconLeft?: IconComponent;
+  iconRight?: IconComponent;
+  as?: keyof JSX.IntrinsicElements;
+  attributes?: JSX.IntrinsicElements[keyof JSX.IntrinsicElements];
+  ref?: React.RefObject<HTMLElement>;
+};
+```
+
 ## Содержимое
 
 ### Бейджики

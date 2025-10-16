@@ -114,6 +114,75 @@ import { DatePicker } from '@consta/uikit/DatePicker';
 | `className?`                                                 | `string`                                                                                                                                                                                  | -                     | CSS-класс для компонента                                   |
 | `ref?`                                                       | `React.Ref<HTMLDivElement>`                                                                                                                                                               | -                     | Ссылка на корневой DOM-элемент                             |
 
+```tsx
+import { Locale } from 'date-fns';
+import ruLocale from 'date-fns/locale/ru';
+
+type Range = 'date-range' | 'date-time-range' | 'year-range' | 'month-range';
+
+type DatePickerPropValue<TYPE> =
+  | (TYPE extends 'date' ? Date : [Date?, Date?])
+  | null;
+
+type DatePickerPropInputRef<TYPE> = TYPE extends Range
+  ? [React.Ref<HTMLInputElement>?, React.Ref<HTMLInputElement>?]
+  : React.Ref<HTMLInputElement>;
+
+type DatePickerPropSide<TYPE> = TYPE extends Range
+  ?
+      | [(string | IconComponent)?, (string | IconComponent)?]
+      | string
+      | IconComponent
+  : string | IconComponent;
+
+type DatePickerPropOnFocus<TYPE> = TYPE extends Range
+  ?
+      | [
+          React.FocusEventHandler<HTMLElement>?,
+          React.FocusEventHandler<HTMLElement>?,
+        ]
+      | React.FocusEventHandler<HTMLElement>
+  : React.FocusEventHandler<HTMLElement>;
+
+type DatePickerPropName<TYPE> = TYPE extends Range
+  ? [string?, string?] | string
+  : string;
+
+export type DatePickerPropPlaceholder<TYPE> = TYPE extends Range
+  ? [string?, string?] | string
+  : string;
+
+type DatePickerPropOnChange<TYPE> = (
+  value: DatePickerPropValue<TYPE>,
+  props: {
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event;
+  },
+) => void;
+
+type DatePickerPropOnError = (
+  props:
+    | {
+        type: 'outOfRange';
+        stringValue: string;
+        dd?: string;
+        MM?: string;
+        yyyy?: string;
+        date: Date;
+      }
+    | {
+        type: 'invalidInputAttempt';
+        stringValue: string;
+        dd?: string;
+        MM?: string;
+        yyyy?: string;
+      }
+    | {
+        type: 'startDateIsGreaterThanEndDate';
+        date: DateRange;
+      },
+) => void;
+```
+
 ## Содержимое
 
 ### Выбор даты

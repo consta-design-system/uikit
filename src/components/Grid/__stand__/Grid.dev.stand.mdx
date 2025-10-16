@@ -64,6 +64,37 @@ import { Grid, GridItem } from '@consta/uikit/Grid';
 | `as?`                                                | `React.ElementType`             | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM |
 | `ref?`                                               | `React.Ref<HTMLDivElement>`     | -            | Ссылка на DOM-элемент компонента                                 |
 
+```tsx
+type Gap =
+  | 0
+  | '2xs'
+  | 'xs'
+  | 's'
+  | 'm'
+  | 'l'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl';
+
+type XAlign = 'left' | 'center' | 'right';
+
+type YAlign = 'top' | 'center' | 'bottom';
+
+type Breakpoint = {
+  cols?: Cols;
+  gap?: Gap;
+  colGap?: Gap;
+  rowGap?: Gap;
+  xAlign?: XAlign;
+  yAlign?: YAlign;
+};
+
+type Breakpoints = Record<number, Breakpoint>;
+```
+
 ### Колонки
 
 Свойство `cols` определяет количество колонок в сетке. Например, `cols={2}` создаёт сетку с двумя колонками.
@@ -249,6 +280,18 @@ return (
 | `className?`                                            | `string`                       | -            | Дополнительный CSS-класс                                                                  |
 | `as?`                                                   | `React.ElementType`            | `'div'`      | HTML-тег, в виде которого этот компонент будет представлен в DOM                          |
 | `ref?`                                                  | `React.Ref<HTMLDivElement>`    | -            | Ссылка на DOM-элемент компонента                                                          |
+
+```tsx
+type Breakpoint = {
+  col?: number;
+  colStart?: number;
+  row?: number;
+  rowStart?: number;
+  order?: 0 | 1 | -1;
+};
+
+type Breakpoints = Record<number, Breakpoint>;
+```
 
 ### Количество колонок
 

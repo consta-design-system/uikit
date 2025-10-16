@@ -118,6 +118,51 @@ import { AutoComplete } from '@consta/uikit/AutoCompleteCanary';
 | `dropdownRef?`                                              | `React.RefObject<HTMLDivElement>`                                                                                                                                                                          | -                        | Ссылка на DOM-элемент выпадающего списка.                                    |
 | `ref?`                                                      | `React.Ref<HTMLDivElement>`                                                                                                                                                                                | -                        | Ссылка на корневой DOM-элемент компонента.                                   |
 
+```tsx
+type AutoCompleteItemDefault = {
+  id: string | number;
+  label: string;
+  groupId?: number;
+};
+
+type AutoCompleteGroupDefault = {
+  label: string;
+  id: number | string;
+};
+
+type AutoCompletePropDropdownForm = 'default' | 'brick' | 'round';
+type AutoCompletePropGetItemLabel<ITEM> = (item: ITEM) => string;
+type AutoCompletePropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type AutoCompletePropGetItemGroupId<ITEM> = (item: ITEM) => number | undefined;
+type AutoCompletePropGetGroupLabel<GROUP> = (group: GROUP) => string;
+type AutoCompletePropGetGroupId<GROUP> = (group: GROUP) => number | string;
+
+type AutoCompletePropOnChange<TYPE extends string> = (
+  value: TYPE extends 'textarray' ? string[] | null : string | null,
+  props: {
+    e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
+  },
+) => void;
+
+type AutoCompletePropSearchFunction<ITEM> = (
+  item: ITEM,
+  searchValue: string,
+) => boolean;
+
+type RenderItemProps<ITEM> = {
+  item: ITEM;
+  active: boolean;
+  hovered: boolean;
+  onClick: (e: React.MouseEvent) => void;
+  onMouseEnter: (e: React.MouseEvent) => void;
+  ref: React.Ref<HTMLDivElement>;
+};
+
+type PropRenderItem<ITEM> = (
+  props: RenderItemProps<ITEM>,
+) => React.ReactNode | null;
+```
+
 ## Содержимое
 
 ### Элементы списка

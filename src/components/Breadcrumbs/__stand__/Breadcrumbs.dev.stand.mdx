@@ -55,6 +55,38 @@ import { Breadcrumbs } from '@consta/uikit/Breadcrumbs';
 | [`lastItemIsLink?`](#последний-элемент-как-ссылка) | `boolean`                       | `false`      | Последний элемент отображается как ссылка                                           |
 | `className?`                                       | `string`                        | -            | Дополнительный CSS-класс компонента                                                 |
 
+```tsx
+export type DefaultItem = {
+  label: string;
+  icon?: IconComponent;
+  href?: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  subMenu?: DefaultItem[];
+};
+
+export type BreadcrumbsPropGetItemLabel<ITEM> = (
+  item: ITEM,
+) => string | React.ReactNode;
+export type BreadcrumbsPropGetItemHref<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+export type BreadcrumbsPropGetItemIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+export type BreadcrumbsPropGetItemOnClick<ITEM> = (
+  item: ITEM,
+) => React.MouseEventHandler | undefined;
+export type BreadcrumbsPropOnItemClick<ITEM> = (
+  item: ITEM,
+  props: {
+    e: React.MouseEvent;
+  },
+) => void;
+export type BreadcrumbsPropGetItemSubMenu<ITEM> = (
+  item: ITEM,
+) => ITEM[] | undefined;
+```
+
 ## Содержимое
 
 Хлебные крошки формируются из массива `items`, где каждый элемент описывает страницу. Элемент может содержать:
