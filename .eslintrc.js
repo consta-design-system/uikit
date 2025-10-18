@@ -35,7 +35,6 @@ module.exports = {
     '@typescript-eslint',
     'simple-import-sort',
     'prettier',
-    'id-match',
   ],
   overrides: [
     {
