@@ -13,7 +13,7 @@ import {
   paginationPropSizeDefault,
 } from '../types';
 
-const cnPaginationArrow = cn('PaginationArrow');
+export const cnPaginationArrow = cn('PaginationArrow');
 
 export const PaginationArrow = forwardRef<
   HTMLButtonElement,
