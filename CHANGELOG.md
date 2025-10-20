@@ -1,5 +1,32 @@
 # Changelog
 
+## v5.26.0 (20/10/2025)
+Самое важное:
+- Добавили новый компонент `FlatSelect`
+- Обновили документацию девяти компонентов
+- Добавили тесты для `Pagination`, `BookmarkTabs`
+
+---
+
+- [chore(eslint): remove unused eslint-plugin-id-match (#4092)](https://github.com/consta-design-system/uikit/commit/63fd2f31bc78f81610eb883d1e501ad6d00e5f3b) - [@baevm](https://github.com/baevm)
+- [fix(ContextMenu): remove unused ref (#4083)](https://github.com/consta-design-system/uikit/commit/504ec2d5fc87bce0e614890792cca98376ee48af) - [@baevm](https://github.com/baevm)
+- [tests (Pagination, BookmarkTabs): добавить тесты (#4079)](https://github.com/consta-design-system/uikit/commit/d80e1a4a45fcba21c93d53095992bfd5dba7b4e9) - [@baevm](https://github.com/baevm)
+- [docs(ThemeToggler): implementation of editorial policy (#4072)](https://github.com/consta-design-system/uikit/commit/02bd4edf132193bae93047d41c9e11f442ce6cdb) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(TextFieldCanary): implementation of editorial policy (#4068)](https://github.com/consta-design-system/uikit/commit/ec7d075e43d46324322c2c94f42f1bdfc8f4e854) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [feat(FlatSelect): add component (#4069)](https://github.com/consta-design-system/uikit/commit/e11ab65cd615e6929d2e7f785ff5a9a7fb0d0c33) - [@gizeasy](https://github.com/gizeasy)
+- [docs(User): implementation of editorial policy (#4076)](https://github.com/consta-design-system/uikit/commit/7ee29a9951ce4349083681d5ab42cf9a8ec80e08) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Tooltip): implementation of editorial policy (#4075)](https://github.com/consta-design-system/uikit/commit/9d3ef41b4db938f904929b8797b122827ca7520f) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Timer): implementation of editorial policy (#4073)](https://github.com/consta-design-system/uikit/commit/a3452ec8495b7920a927451b024af543739659b9) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Theme): implementation of editorial policy (#4070)](https://github.com/consta-design-system/uikit/commit/7d757129e918f4cad341c9b9fba92d0f4b3e50f1) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(TextField): implementation of editorial policy (#4067)](https://github.com/consta-design-system/uikit/commit/363830e4b5590bffba2e654db91f8e8e7ec5e796) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs (Text): implementation of editorial policy (#4066)](https://github.com/consta-design-system/uikit/commit/666056fad468c8e01aed42e8208c3e62ed04c44f) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Tag): implementation of editorial policy (#4065)](https://github.com/consta-design-system/uikit/commit/9e56616ebf0cf5752f97d39ad05a69319057098a) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [fix(github actions): fix duplicate typecheck in github actions, add lint job (#4071)](https://github.com/consta-design-system/uikit/commit/c025e90463d06c1d2fa8daefdbf8f93c3a08c6fb) - [@baevm](https://github.com/baevm)
+- [test(Slider/Sidebar/Modal): adds tests for Slider and Sidebar, fixes commented test in Modal (#4064)](https://github.com/consta-design-system/uikit/commit/fcb0ea7d11b9ae8210bf4ace44517d01e275f22b) - [@baevm](https://github.com/baevm)
+- [fix(Combobox): fix combobox clear button visibility with selectAll and multiple (#4062)](https://github.com/consta-design-system/uikit/commit/63ef467b3f9c7234a9010ffefa50d02668fc26cb) - [@baevm](https://github.com/baevm)
+
+--------------------
+
 ## v5.25.1 (10/09/2025)
 - [docs(Tabs): implementation of editorial policy (#4059)](https://github.com/consta-design-system/uikit/commit/94eba6c6aba682db596c69d501fde41ce963c9ac) - [@alyonurchick1](https://github.com/alyonurchick1)
 - [docs (SwitchGroup): implementation of editorial policy (#4058)](https://github.com/consta-design-system/uikit/commit/71cf3ead3e0f85425591f91379dea81635a87982) - [@alyonurchick1](https://github.com/alyonurchick1)
@@ -360,18 +387,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [fix(useVirtualScroll): fixed calculate position and visible items (#3676)](https://github.com/consta-design-system/uikit/commit/5d1096b5b45250de7585997befc2325ea6dd4899) - [@gizeasy](https://github.com/gizeasy)
 - [fix(caption): removed left indentation in components (#3671)](https://github.com/consta-design-system/uikit/commit/80c38e6440dcfe34cf85b583e1cd26f920f90748) - [@ZettZet](https://github.com/ZettZet)
 - [fix(Picture): edit examples (#3675)](https://github.com/consta-design-system/uikit/commit/19d6dee9d6d836c8f3d24aac410b6610e9298919) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.4.0 (06/06/2024)
-Самое важное:
-- В `Switch`, `Checkbox` и `Radio` поправили отступы в соответствии с дизайном.
-- В `DatePicker` реализовали возможность добавлять разный текст плейсхолдеров при использовании типа `range`.
-
----
-
-- [feat(Switch/Checkbox/Radio): update checkmarks proportions (#3667)](https://github.com/consta-design-system/uikit/commit/1cada84cd85a96d49ca643b298bf69b0b6b45dae) - [@Elena-BLZ](https://github.com/Elena-BLZ)
-- [fix(DatePicker): added rounding within min-max (#3673)](https://github.com/consta-design-system/uikit/commit/62991c0b58ff0e8b2f1079b5e84a452200d452da) - [@ZettZet](https://github.com/ZettZet)
-- [fix(tootip): added ref forwarding to Transition (#3672)](https://github.com/consta-design-system/uikit/commit/2c5255c463ee88def0ef19bf364f545158393239) - [@ZettZet](https://github.com/ZettZet)
-- [fix(Table): added test to check sanitize (#3670)](https://github.com/consta-design-system/uikit/commit/c8fd8304446916e9b922e7bd630e7346b4ea4892) - [@ZettZet](https://github.com/ZettZet)
-- [feat(DatePicker): add individual start-end  placeholders for DatePicker in range formats (#3662)](https://github.com/consta-design-system/uikit/commit/9bca9907598f48c9909d83d76df381ae74322570) - [@Elena-BLZ](https://github.com/Elena-BLZ)
