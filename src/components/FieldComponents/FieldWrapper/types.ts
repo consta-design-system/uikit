@@ -18,4 +18,5 @@ export type FieldWrapperProps = {
   status?: FieldPropStatus;
   side?: React.ReactNode;
   counter?: Counter;
+  counterStatus?: 'alert';
 };

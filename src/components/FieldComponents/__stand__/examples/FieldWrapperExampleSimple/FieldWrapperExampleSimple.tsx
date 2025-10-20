@@ -14,6 +14,7 @@ export const FieldWrapperExampleSimple = () => {
         required
         caption="Должно содержать площадь всех объектов"
         side="m²"
+        counter={[20, 100]}
       >
         <FieldControlLayout />
       </FieldWrapper>

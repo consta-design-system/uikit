@@ -13,11 +13,14 @@ import { FieldWrapperProps } from './types';
 
 type Counter = string | number | [string | number, string | number];
 
-const renderCounter = (counter: Counter) => {
+const Counter: React.FC<{ counter: Counter; status?: 'alert' }> = ({
+  counter,
+  status,
+}) => {
   return (
     <Text
       className={cnFieldWrapper('Counter')}
-      view="ghost"
+      view={status || 'ghost'}
       size="xs"
       lineHeight="m"
     >
@@ -46,6 +49,7 @@ export const FieldWrapper = forwardRefWithAs<FieldWrapperProps>(
       status,
       side,
       counter,
+      counterStatus,
       labelPosition = 'top',
       labelIconRef,
       as = 'div',
@@ -114,7 +118,7 @@ export const FieldWrapper = forwardRefWithAs<FieldWrapperProps>(
               className={cnMixFlex({
                 direction: 'row',
                 gap,
-                justify: 'space-between',
+                justify: !caption ? 'flex-end' : 'space-between',
               })}
             >
               {caption && (
@@ -125,7 +129,7 @@ export const FieldWrapper = forwardRefWithAs<FieldWrapperProps>(
                   {caption}
                 </FieldCaption>
               )}
-              {counter && renderCounter(counter)}
+              {counter && <Counter counter={counter} status={counterStatus} />}
             </div>
           )}
         </div>

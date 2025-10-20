@@ -371,6 +371,7 @@ export const FieldWrapperExampleSimple = () => {
       required
       caption="Должно содержать площадь всех объектов"
       side="m²"
+      counter={[20, 100]}
     >
       <FieldControlLayout />
     </FieldWrapper>
@@ -403,3 +404,4 @@ type Counter = string | number | [string | number, string | number];
 | `status?`        | `FieldPropStatus`                    | -            | Статус                                          |
 | `side?`          | `React.ReactNode`                    | -            | Дополнительный контент около контрола           |
 | `counter?`       | `Counter`                            | -            | Счетчик количества символов                     |
+| `counterStatus?` | `"alert"`                            | -            | Статус счетчика количества символов             |
