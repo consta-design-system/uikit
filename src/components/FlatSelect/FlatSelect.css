@@ -1,0 +1,103 @@
+.FlatSelect {
+  /* &_bordered {
+    border: 1px solid var(--color-bg-border);
+  } */
+  --flat-select-radius-round: calc(var(--flat-select-control-height) / 2);
+
+  &_withAnchor {
+    background: var(--color-bg-default);
+  }
+
+  &_form {
+    &_default {
+      border-radius: var(--control-radius);
+    }
+
+    &_round {
+      border-radius: calc(var(--flat-select-control-height) / 2);
+    }
+  }
+
+  &_view_clear &-Input {
+    border-bottom: 1px solid var(--color-bg-border);
+  }
+
+  &-Input {
+    &_border {
+      border: 1px solid var(--color-bg-border);
+    }
+
+    &_form {
+      &_default {
+        border-radius: var(--control-radius) var(--control-radius) 0 0;
+      }
+
+      &_round {
+        border-radius:
+          var(--flat-select-radius-round)
+          var(--flat-select-radius-round) 0 0;
+      }
+    }
+  }
+
+  &-List {
+    --flat-select-list-border-top-left-radius: 0;
+    --flat-select-list-border-top-right-radius: 0;
+    --flat-select-list-border-bottom-right-radius: 0;
+    --flat-select-list-border-bottom-left-radius: 0;
+    border-radius:
+      var(--flat-select-list-border-top-left-radius)
+      var(--flat-select-list-border-top-right-radius)
+      var(--flat-select-list-border-bottom-right-radius)
+      var(--flat-select-list-border-bottom-left-radius);
+
+    &_borderHorizontal {
+      border-left: 1px solid var(--color-bg-border);
+      border-right: 1px solid var(--color-bg-border);
+    }
+
+    &_borderBottom {
+      border-bottom: 1px solid var(--color-bg-border);
+    }
+
+    &_borderTop {
+      border-top: 1px solid var(--color-bg-border);
+    }
+
+    &_formTop {
+      &_default {
+        --flat-select-list-border-top-right-radius: var(--control-radius);
+        --flat-select-list-border-top-left-radius: var(--control-radius);
+      }
+
+      &_round {
+        --flat-select-list-border-top-right-radius:
+          var(
+            --flat-select-radius-round
+          );
+        --flat-select-list-border-top-left-radius:
+          var(
+            --flat-select-radius-round
+          );
+      }
+    }
+
+    &_formBottom {
+      &_default {
+        --flat-select-list-border-bottom-right-radius: var(--control-radius);
+        --flat-select-list-border-bottom-left-radius: var(--control-radius);
+      }
+
+      &_round {
+        --flat-select-list-border-bottom-right-radius:
+          var(
+            --flat-select-radius-round
+          );
+        --flat-select-list-border-bottom-left-radius:
+          var(
+            --flat-select-radius-round
+          );
+      }
+    }
+  }
+}

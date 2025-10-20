@@ -1,0 +1,5 @@
+.FlatSelectVariants {
+  &-List {
+    max-height: 268px;
+  }
+}

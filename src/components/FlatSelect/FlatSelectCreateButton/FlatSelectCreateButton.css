@@ -1,0 +1,13 @@
+.ListItem.FlatSelectCreateButton {
+  .ListItemGrid-Slot_position_center {
+    overflow: hidden;
+  }
+}
+
+.FlatSelectCreateButton {
+  &-CreateLabel {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}

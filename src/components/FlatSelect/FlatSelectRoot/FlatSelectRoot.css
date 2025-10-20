@@ -1,0 +1,7 @@
+.FlatSelectRoot {
+  &_withAnchor {
+    min-width: 280px;
+    background: var(--color-bg-default);
+    box-shadow: var(--shadow-layer);
+  }
+}

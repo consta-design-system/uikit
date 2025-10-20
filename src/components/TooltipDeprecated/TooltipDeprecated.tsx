@@ -38,7 +38,7 @@ export type TooltipProps = PropsWithJsxAttributes<
     status?: TooltipPropStatus;
     direction?: Direction;
     spareDirection?: Direction;
-    possibleDirections?: readonly Direction[];
+    possibleDirections?: Direction[];
     isInteractive?: boolean;
     children: React.ReactNode;
     onClickOutside?: ClickOutsideHandler;

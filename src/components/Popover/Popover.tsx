@@ -98,11 +98,11 @@ export type PopoverProps = PropsWithJsxAttributes<
   {
     direction?: Direction;
     spareDirection?: Direction;
+    possibleDirections?: Direction[];
     offset?: PopoverPropOffset;
     arrowOffset?: number;
-    possibleDirections?: readonly Direction[];
     isInteractive?: boolean;
-    children: React.ReactNode | ChildrenRenderProp;
+    children?: React.ReactNode | ChildrenRenderProp;
     onClickOutside?: ClickOutsideHandler;
     onSetDirection?: (direction: Direction) => void;
     viewportRef?: React.RefObject<HTMLElement>;

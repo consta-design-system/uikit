@@ -7,6 +7,7 @@ import {
   FieldPropSize,
   getFieldIconSize,
 } from '##/components/FieldComponents';
+import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 type FieldClearButtonProps = PropsWithHTMLAttributesAndRef<
@@ -18,12 +19,18 @@ type FieldClearButtonProps = PropsWithHTMLAttributesAndRef<
   HTMLButtonElement
 >;
 
+export const cnFieldClearButton = cn('FieldClearButton');
+
 export const FieldClearButton = forwardRef<
   HTMLButtonElement,
   FieldClearButtonProps
->(({ size = 'm', icon: Icon = IconClear, ...props }, ref) => {
+>(({ size = 'm', icon: Icon = IconClear, className, ...props }, ref) => {
   return (
-    <FieldButton {...props} ref={ref}>
+    <FieldButton
+      {...props}
+      className={cnFieldClearButton(null, [className])}
+      ref={ref}
+    >
       <Icon size={getFieldIconSize(size)} />
     </FieldButton>
   );

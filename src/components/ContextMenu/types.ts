@@ -29,12 +29,12 @@ export const contextMenuForm = listPropForm;
 export type ContextMenuForm = ListPropForm;
 export const defaultContextMenuForm = defaultListPropForm;
 
-export const contextMenuPropSubMenuDirections = [
+export const contextMenuPropSubMenuDirections: Direction[] = [
   'rightStartUp',
   'rightStartDown',
   'leftStartUp',
   'leftStartDown',
-] as const;
+];
 export type ContextMenuPropSubMenuDirection =
   typeof contextMenuPropSubMenuDirections[number];
 export const contextMenuPropDefaultSubMenuDirection: ContextMenuPropSubMenuDirection =
@@ -161,7 +161,7 @@ export type Level<ITEM> = {
   items: ITEM[];
   activeItem?: string;
   direction?: Direction;
-  possibleDirections?: readonly Direction[];
+  possibleDirections?: Direction[];
   offset?: PopoverPropOffset;
   parent?: ITEM;
   anchorRef?: React.RefObject<HTMLElement>;
@@ -189,7 +189,7 @@ export type ContextMenuProps<
     groups?: GROUP[];
     sortGroup?: ContextMenuPropSortGroup;
     onItemClick?: ContextMenuPropOnItemClick<ITEM>;
-    possibleDirections?: readonly Direction[];
+    possibleDirections?: Direction[];
     subMenuDirection?: ContextMenuPropSubMenuDirection;
     spareDirection?: Direction;
     onSetDirection?: (direction: Direction) => void;
@@ -297,7 +297,7 @@ export type ContextMenuWrapperProps = PropsWithHTMLAttributes<
     form?: ContextMenuForm;
     onClickOutside?: ClickOutsideHandler;
     spareDirection?: Direction;
-    possibleDirections?: readonly Direction[];
+    possibleDirections?: Direction[];
     size?: ContextMenuPropSize;
     direction?: Direction;
     offset?: PopoverPropOffset;
@@ -316,7 +316,7 @@ export type ContextMenuLevelWrapperProps = PropsWithHTMLAttributesAndRef<
     isMobile?: boolean;
     onClickOutside?: ClickOutsideHandler;
     spareDirection?: Direction;
-    possibleDirections?: readonly Direction[];
+    possibleDirections?: Direction[];
     size?: ContextMenuPropSize;
     direction?: Direction;
     offset?: PopoverPropOffset;
