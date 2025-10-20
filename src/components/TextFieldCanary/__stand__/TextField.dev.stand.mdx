@@ -1,4 +1,4 @@
-import { MdxMenu, MdxTabs } from '@consta/stand';
+import { MdxMenu, MdxTabs, MdxInformer } from '@consta/stand';
 import { TextFieldExampleStatus } from './examples/TextFieldExampleStatus/TextFieldExampleStatus';
 import {
   TextFieldExampleTextPlaceholder,
@@ -40,11 +40,7 @@ import {
   TextFieldExampleMaskSetValue,
   TextFieldExampleMaskArraySn,
 } from './examples/TextFieldExampleMask/TextFieldExampleMask';
-import {
-  TextFieldExampleAutoFocus,
-  TextFieldExampleProgramFocus,
-} from './examples/TextFieldExampleAutoFocus/TextFieldExampleAutoFocus';
-
+import { TextFieldExampleProgramFocus } from './examples/TextFieldExampleAutoFocus/TextFieldExampleAutoFocus';
 import { TextFieldExampleRenderValueItem } from './examples/TextFieldExampleRenderValueItem/TextFieldExampleRenderValueItem';
 import { TextFieldExampleTextArrayPreParsing } from './examples/TextFieldExampleText copy/TextFieldExampleTextArrayPreParsing';
 /* cspell:disable-next-line */
@@ -52,41 +48,47 @@ import { MdxCollapse } from '@consta/stand/src/componets/MdxCollapse';
 
 <MdxMenu>
 
+- [Обзор](#обзор)
 - [Импорт](#импорт)
+- [Свойства](#свойства)
 - [Тип поля](#тип-поля)
-  - [type="text"](#поле-в-одну-строку)
-  - [type="textarea"](#поле-в-несколько-строк)
-  - [type="number"](#поле-для-ввода-чисел)
-  - [type="password"](#поле-для-ввода-пароля)
-  - [type="textarray"](#поле-для-ввода-массива-строк)
-- [Содержимое](#содержимое-поля)
+  - [Одна строка](#поле-в-одну-строку)
+  - [Несколько строк](#поле-в-несколько-строк)
+  - [Числовое поле](#поле-для-ввода-чисел)
+  - [Поле для пароля](#поле-для-ввода-пароля)
+  - [Массив строк](#поле-для-ввода-массива-строк)
+- [Содержимое](#содержимое)
   - [Подсказка](#подсказка)
   - [Значение](#значение)
   - [Дополнительная информация](#дополнительная-информация)
-  - [Кнопка для очистки поля](#кнопка-для-очистки-поля)
-- [Фокус](#фокус)
-- [Статус](#статус-поля)
+  - [Кнопка очистки](#кнопка-для-очистки-поля)
 - [Внешний вид](#внешний-вид)
-- [Форма](#форма)
-- [Размер](#размер)
+  - [Вид](#вид)
+  - [Статус](#статус)
+  - [Форма](#форма)
+  - [Размер](#размер)
+- [Поведение](#поведение)
+  - [Фокус](#фокус)
 - [Маскирование](#маскирование)
-  - [Как работает useIMask](#как-работает-useimask)
-  - [Примеры](#примеры-маски)
-- [Список свойств](#свойства)
+  - [Работа с useIMask](#работа-с-useimask)
+  - [Примеры масок](#примеры-масок)
+- [Пример использования](#пример-использования)
 
 </MdxMenu>
 
-`TextField` – поле для ввода текста и чисел из одной или нескольких строк. Используется в формах.
+## Обзор
+
+`TextField` позволяет вводить текст, числа или массивы строк в формах. Компонент поддерживает настройку типа поля, маскирование, размеры, формы, статусы и дополнительные элементы, такие как иконки или кнопки очистки.
 
 ## Импорт
 
-Вы можете импортировать один общий компонент:
+Импортируйте общий компонент:
 
 ```tsx
 import { TextField } from '@consta/uikit/TextFieldCanary';
 ```
 
-Или каждый тип по отдельности:
+Или отдельные типы:
 
 ```tsx
 import {
@@ -98,21 +100,94 @@ import {
 } from '@consta/uikit/TextFieldCanary';
 ```
 
+## Свойства
+
+```tsx
+type TextFieldPropValue<TYPE> = TYPE extends 'textarray'
+  ? string[] | null
+  : string | null;
+
+type TextFieldPropDefaultValue<TYPE> = TYPE extends 'textarray'
+  ? never
+  : string | null;
+
+type TextFieldPropOnChange<TYPE> = (
+  value: TextFieldPropValue<TYPE>,
+  params: {
+    e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
+  },
+) => void;
+
+type InputType<TYPE extends string> = TYPE extends 'textarea'
+  ? HTMLTextAreaElement
+  : HTMLInputElement;
+
+type TextFieldPropRenderValueItem = (props: {
+  item: string;
+  index: number;
+  onRemove: (e: React.MouseEvent) => void;
+  size: FieldPropSize;
+  disabled: boolean | undefined;
+}) => React.ReactNode;
+```
+
+| Свойство                                       | Тип                                                                                                                                                                                                        | По умолчанию | Описание                                                            |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------- |
+| [`type?`](#тип-поля)                           | `string`                                                                                                                                                                                                   | `text`       | Тип поля ввода.                                                     |
+| [`value?`](#значение)                          | `TextFieldPropValue<TYPE>`                                                                                                                                                                                 | -            | Значение поля.                                                      |
+| [`defaultValue?`](#значение)                   | `TextFieldPropDefaultValue<TYPE>`                                                                                                                                                                          | -            | Предустановленное значение поля.                                    |
+| [`placeholder?`](#подсказка)                   | `string`                                                                                                                                                                                                   | -            | Подсказка внутри поля.                                              |
+| [`leftSide?`](#дополнительная-информация)      | `IconComponent` \| `string`                                                                                                                                                                                | -            | Иконка или текст слева внутри поля.                                 |
+| [`rightSide?`](#дополнительная-информация)     | `IconComponent` \| `string`                                                                                                                                                                                | -            | Иконка или текст справа внутри поля. Не работает с `type="number"`. |
+| [`status?`](#статус)                           | `'alert'` \| `'success'` \| `'warning'`                                                                                                                                                                    | -            | Статус поля (например, для выделения ошибок или успеха).            |
+| [`size?`](#размер)                             | `'xs'` \| `'s'` \| `'m'` \| `'l'`                                                                                                                                                                          | `m`          | Размер поля (шрифт, отступы, высота).                               |
+| [`form?`](#форма)                              | `'default'` \| `'brick'` \| `'round'` \| `'clearRound'` \| `'roundClear'` \| `'clearDefault'` \| `'defaultClear'` \| `'defaultBrick'` \| `'brickDefault'` \| `'brickClear'` \| `'clearBrick'` \| `'clear'` | `default`    | Форма поля.                                                         |
+| [`view?`](#внешний-вид)                        | `'default'` \| `'clear'`                                                                                                                                                                                   | `default`    | Внешний вид поля.                                                   |
+| [`rows?`](#поле-в-несколько-строк)             | `number`                                                                                                                                                                                                   | -            | Количество строк для `type="textarea"`.                             |
+| [`minRows?`](#поле-в-несколько-строк)          | `number`                                                                                                                                                                                                   | -            | Минимальное количество строк для `type="textarea"`.                 |
+| [`maxRows?`](#поле-в-несколько-строк)          | `number`                                                                                                                                                                                                   | -            | Максимальное количество строк для `type="textarea"`.                |
+| [`maxLength?`](#поле-в-несколько-строк)        | `number`                                                                                                                                                                                                   | -            | Максимальное количество символов.                                   |
+| [`resize?`](#поле-в-несколько-строк)           | `boolean` \| `'auto'`                                                                                                                                                                                      | -            | Возможность изменения размера поля для `type="textarea"`.           |
+| [`step?`](#поле-для-ввода-чисел)               | `string` \| `number` \| `number[]`                                                                                                                                                                         | -            | Шаг изменения значения для `type="number"`.                         |
+| [`min?`](#поле-для-ввода-чисел)                | `number` \| `string`                                                                                                                                                                                       | -            | Минимальное значение для `type="number"`.                           |
+| [`max?`](#поле-для-ввода-чисел)                | `number` \| `string`                                                                                                                                                                                       | -            | Максимальное значение для `type="number"`.                          |
+| [`incrementButtons?`](#поле-для-ввода-чисел)   | `boolean`                                                                                                                                                                                                  | -            | Отображение кнопок-стрелок для `type="number"`.                     |
+| [`clearButton?`](#кнопка-для-очистки-поля)     | `boolean`                                                                                                                                                                                                  | -            | Отображение кнопки очистки поля.                                    |
+| [`autoFocus?`](#фокус)                         | `boolean`                                                                                                                                                                                                  | -            | Автофокус при первом рендере.                                       |
+| `renderValueItem?`                             | `TextFieldPropRenderValueItem`                                                                                                                                                                             | -            | Функция рендера элементов для `type="textarray"`.                   |
+| `onChange?`                                    | `TextFieldPropOnChange<TYPE>`                                                                                                                                                                              | -            | Обработчик изменения значения поля.                                 |
+| `onInputChange?`                               | `TextFieldPropOnChange<string>`                                                                                                                                                                            | -            | Обработчик изменения ввода для `type="textarray"`.                  |
+| `onClear?`                                     | `React.MouseEventHandler`                                                                                                                                                                                  | -            | Обработчик очистки поля.                                            |
+| `onFocus?`                                     | `React.FocusEventHandler`                                                                                                                                                                                  | -            | Обработчик фокуса.                                                  |
+| `onBlur?`                                      | `React.FocusEventHandler`                                                                                                                                                                                  | -            | Обработчик потери фокуса.                                           |
+| [`inputValue?`](#поле-для-ввода-массива-строк) | `string` \| `null`                                                                                                                                                                                         | -            | Значение `<input>` для `type="textarray"`.                          |
+| [`iconSize?`](#дополнительная-информация)      | `'s'` \| `'m'` \| `'xs'` \| `'l'`                                                                                                                                                                          | -            | Размер иконок (зависит от `size`).                                  |
+| [`iconClear?`](#кнопка-для-очистки-поля)       | `IconComponent`                                                                                                                                                                                            | -            | Иконка для кнопки очистки.                                          |
+| [`iconShowPassword?`](#поле-для-ввода-пароля)  | `IconComponent`                                                                                                                                                                                            | -            | Иконка для отображения пароля.                                      |
+| [`iconHidePassword?`](#поле-для-ввода-пароля)  | `IconComponent`                                                                                                                                                                                            | -            | Иконка для скрытия пароля.                                          |
+| `id?`                                          | `string`                                                                                                                                                                                                   | -            | ID поля в DOM.                                                      |
+| `name?`                                        | `string`                                                                                                                                                                                                   | -            | Имя поля в DOM.                                                     |
+| `tabIndex?`                                    | `number`                                                                                                                                                                                                   | -            | Порядковый номер при переходе по **Tab**.                           |
+| `autoComplete?`                                | `AutoCompete`                                                                                                                                                                                              | -            | Автозаполнение поля (аналог HTML-атрибута `autocomplete`).          |
+| `className?`                                   | `string`                                                                                                                                                                                                   | -            | Дополнительный CSS-класс.                                           |
+| `inputRef?`                                    | `React.Ref<InputType<TYPE>>`                                                                                                                                                                               | -            | Ссылка на DOM-элемент поля ввода.                                   |
+| `ref?`                                         | `React.Ref<HTMLDivElement>`                                                                                                                                                                                | -            | Ссылка на корневой DOM-элемент компонента.                          |
+
 ## Тип поля
 
-Свойство `type` определяет тип поля и тег, который будет для него использоваться:
+Свойство `type` определяет тип поля и его поведение:
 
-- [`text`](#поле-в-одну-строку). Поле для ввода текста в одну строку.
-- [`textarea`](#поле-в-несколько-строк). Текстовое поле из нескольких строк, можно регулировать [количество строк и колонок](#строки-и-колонки).
-- [`number`](#поле-для-ввода-чисел). Поле для ввода чисел, значение можно менять с помощью кнопок-стрелочек.
-- [`password`](#поле-для-ввода-пароля). Маскированное поле для ввода пароля.
-- [`textarray`](#поле-для-ввода-массива-строк). Поле ввода массива строк.
+- [`text`](#поле-в-одну-строку): Поле для ввода текста в одну строку.
+- [`textarea`](#поле-в-несколько-строк): Поле для ввода текста в несколько строк.
+- [`number`](#поле-для-ввода-чисел): Поле для ввода чисел с возможностью использования кнопок-стрелок.
+- [`password`](#поле-для-ввода-пароля): Поле для ввода пароля с маскировкой символов.
+- [`textarray`](#поле-для-ввода-массива-строк): Поле для ввода массива строк.
 
-Здесь описаны основные типы, но вы можете использовать любые `<input type="*" />`, например, `<input type="email">`.
+Поддерживаются любые HTML-атрибуты `<input type="*" />`, например, `email`.
 
-## Поле в одну строку
+### Поле в одну строку
 
-<MdxTabs>
+Поле с `type="text"` предназначено для ввода текста в одну строку.
 
 ```tsx
 <TextField type="text" placeholder="Одна строчка" />
@@ -120,13 +195,9 @@ import {
 
 <TextFieldExampleTypeText />
 
-</MdxTabs>
+### Поле в несколько строк
 
-## Поле в несколько строк
-
-Чтобы добавить большой по объему текст (например, отзыв или комментарий), используйте `type="textarea"`. У этого типа поля вы можете задать высоту в свойстве `rows`.
-
-<MdxTabs>
+Поле с `type="textarea"` подходит для ввода большого текста, например, отзывов или комментариев. Количество строк задается свойством `rows`.
 
 ```tsx
 <TextField type="textarea" rows={3} placeholder="Несколько строчек" />
@@ -134,13 +205,9 @@ import {
 
 <TextFieldExampleTypeTextarea />
 
-</MdxTabs>
+#### Изменение высоты
 
-### Изменить высоту
-
-У поля с `type="textarea"` возможно включить изменение высоты пользователем интерфейса, для этого используйте `resize = true`.
-
-<MdxTabs>
+Для включения изменения высоты пользователем установите `resize={true}`.
 
 ```tsx
 <TextField type="textarea" rows={3} placeholder="Подергай за уголок" resize />
@@ -148,13 +215,9 @@ import {
 
 <TextFieldExampleResizeTrue />
 
-</MdxTabs>
+#### Автоматическая высота
 
-### Автоматическая смена высоты
-
-У поля с `type="textarea"` и `resize = "auto"` можно задать интервал для высоты (от `minRows` до `maxRows`):
-
-<MdxTabs>
+Для автоматической регулировки высоты используйте `resize="auto"` с указанием `minRows` и `maxRows`.
 
 ```tsx
 <TextField
@@ -168,11 +231,9 @@ import {
 
 <TextFieldExampleResizeAuto />
 
-</MdxTabs>
+### Поле для ввода чисел
 
-## Поле для ввода чисел
-
-<MdxTabs>
+Поле с `type="number"` предназначено для ввода чисел. Поддерживает кнопки-стрелки для изменения значения.
 
 ```tsx
 <TextField type="number" placeholder="Здесь цифры" />
@@ -180,17 +241,9 @@ import {
 
 <TextFieldExampleTypeNumber />
 
-</MdxTabs>
+#### Шаг, значения и диапазон
 
-### Шаг, набор значений и диапазон
-
-Для поля ввода с `type=number` вы можете указать шаг, целое число, на которое можно менять значение в поле с помощью кнопок-стрелочек, или набор значений в виде конечных точек. За это отвечает свойство `step`.
-
-Ограничить диапазон значений, которые меняются по стрелочкам, можно с помощью свойств `min` (минимальное значение) и `max` (максимальное значение).
-
-Отобразить стрелочки можно с помощью свойства `incrementButtons`.
-
-<MdxTabs>
+Свойство `step` задает шаг изменения значения или набор фиксированных значений. Свойства `min` и `max` ограничивают диапазон. Отображение кнопок-стрелок включается с помощью `incrementButtons`.
 
 ```tsx
 <TextField
@@ -206,11 +259,9 @@ import {
 
 <TextFieldExampleStepArray />
 
-</MdxTabs>
+### Поле для ввода пароля
 
-## Поле для ввода пароля
-
-<MdxTabs>
+Поле с `type="password"` маскирует вводимые символы.
 
 ```tsx
 <TextField type="password" placeholder="Пароль" />
@@ -218,15 +269,17 @@ import {
 
 <TextFieldExampleTypePassword />
 
-</MdxTabs>
+### Поле для ввода массива строк
 
-## Поле для ввода массива строк
-
-Дает возможность вводить массивы строк:
+Поле с `type="textarray"` позволяет вводить массивы строк, которые добавляются по нажатию **Enter**.
 
 <MdxTabs>
 
+<TextFieldExampleTypeTextArray />
+
 ```tsx
+import { useState } from 'react';
+
 export const TextFieldExampleTypeTextArray = () => {
   const [value, setValue] = useState<string[] | null>(null);
 
@@ -242,15 +295,15 @@ export const TextFieldExampleTypeTextArray = () => {
 };
 ```
 
-<TextFieldExampleTypeTextArray />
-
 </MdxTabs>
 
-### Рендер значения
+#### Рендер значения
 
-Чтобы поменять рендер каждого элемента значения поля, используйте свойство `renderValueItem`:
+Для кастомизации отображения элементов в `type="textarray"` используйте свойство `renderValueItem`.
 
 <MdxTabs>
+
+<TextFieldExampleRenderValueItem />
 
 ```tsx
 import { Tag } from '@consta/uikit/Tag';
@@ -311,34 +364,23 @@ export const TextFieldExampleRenderValueItem = () => {
 }
 ```
 
-<TextFieldExampleRenderValueItem />
-
 </MdxTabs>
 
-### Парсинг значения при вставке
+#### Парсинг при вставке
 
-Используйте, когда при вставке строки ее нужно сразу разбивать на подстроки и добавлять к `value`. Так, например, когда есть список электронных почт, который при вставке необходимо преобразовать в массив строк и задать `value`.
-
-```json
-// Список через пробел
-user@company.ru user2@company.ru user3@company.ru user4@company.ru
-
-// Список через запятую
-user@company.ru, user2@company.ru, user3@company.ru, user4@company.ru
-
-// Список через перенос строки
-user@company.ru
-user2@company.ru
-user3@company.ru
-user4@company.ru
-```
+Для разбивки вставленного текста на массив строк используйте обработчик `onPaste`.
 
 <MdxTabs>
 
+<TextFieldExampleTextArrayPreParsing />
+
 ```tsx
+import { useCallback, useRef, useState } from 'react';
+import { Example } from '@consta/stand';
+import { TextField } from '@consta/uikit/TextFieldCanary';
+
 export const TextFieldExampleTextArrayPreParsing = () => {
   const [value, setValue] = useState<string[] | null>(null);
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputClear = useCallback(() => {
@@ -359,7 +401,6 @@ export const TextFieldExampleTextArrayPreParsing = () => {
     }
 
     const array = [data.split(','), data.split(' '), data.split('\n')];
-
     let maxLength = 0;
     let validIndex = 0;
 
@@ -397,17 +438,13 @@ export const TextFieldExampleTextArrayPreParsing = () => {
 };
 ```
 
-<TextFieldExampleTextArrayPreParsing />
-
 </MdxTabs>
 
-## Содержимое поля
+## Содержимое
 
 ### Подсказка
 
-Вы можете добавить подсказку, чтобы уточнить, что именно нужно написать в поле, подсказать формат данных или что-то ещё. Это можно сделать с помощью свойства `placeholder`.
-
-<MdxTabs>
+Свойство `placeholder` задает текст-подсказку, уточняющую формат или тип вводимых данных.
 
 ```tsx
 <TextField placeholder="Здесь только цифры" />
@@ -415,15 +452,18 @@ export const TextFieldExampleTextArrayPreParsing = () => {
 
 <TextFieldExampleTextPlaceholder />
 
-</MdxTabs>
-
 ### Значение
 
-Указать значение поля можно в `value`:
+Свойство `value` задает текущее значение поля, а `defaultValue` – начальное значение.
 
 <MdxTabs>
 
+<TextFieldExampleTextValue />
+
 ```tsx
+import { useState } from 'react';
+import { TextField } from '@consta/uikit/TextFieldCanary';
+
 const App = () => {
   const [value, setValue] = useState('текст');
 
@@ -431,44 +471,22 @@ const App = () => {
 };
 ```
 
-<TextFieldExampleTextValue />
-
 </MdxTabs>
 
 ### Дополнительная информация
 
-Вы можете добавить в поле дополнительную информацию — слева (`leftSide`) или справа (`rightSide`).
-
-Это может быть текст:
-
-<MdxTabs>
+Свойства `leftSide` и `rightSide` позволяют добавить текст или иконку слева или справа внутри поля.
 
 ```tsx
 <TextField leftSide="куда" />
-<TextField leftSide="кому" />
+<TextField leftSide={IconDiamond} rightSide="карат" />
 ```
 
 <TextFieldExampleTextLeft />
 
-</MdxTabs>
-
-Или иконка:
-
-<MdxTabs>
-
-```tsx
-<TextField leftSide={IconDiamond} rightSide="карат" />
-```
-
-<TextFieldExampleTextRight />
-
-</MdxTabs>
-
 ### Кнопка для очистки поля
 
-Чтобы добавить в поле кнопку, по которой можно очистить его содержимое, используйте свойство `clearButton`. Если в поле есть значение, справа появляется крестик. При нажатии на него поле станет пустым.
-
-<MdxTabs>
+Свойство `clearButton` добавляет кнопку для очистки содержимого поля.
 
 ```tsx
 <TextField defaultValue="Очисти меня" clearButton />
@@ -476,27 +494,27 @@ const App = () => {
 
 <TextFieldExampleClearButton />
 
-</MdxTabs>
+## Поведение
 
-## Фокус
+### Фокус
 
-Чтобы поместить в поле фокус при первом рендере, добавьте `autoFocus`.
-
-<MdxTabs>
+Свойство `autoFocus` активирует фокус при первом рендере.
 
 ```tsx
 <TextField autoFocus />
 ```
 
-<TextFieldExampleAutoFocus />
-
-</MdxTabs>
-
-При необходимости программного фокуса используйте `inputRef`:
+Для программного управления фокусом используйте `inputRef`.
 
 <MdxTabs>
 
+<TextFieldExampleProgramFocus />
+
 ```tsx
+import { useRef } from 'react';
+import { TextField } from '@consta/uikit/TextFieldCanary';
+import { Button } from '@consta/uikit/Button';
+
 export const TextFieldExampleProgramFocus = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -514,17 +532,32 @@ export const TextFieldExampleProgramFocus = () => {
 };
 ```
 
-<TextFieldExampleProgramFocus />
-
 </MdxTabs>
 
-## Статус поля
+## Внешний вид
 
-С помощью статуса можно выделить поле: показать, где ошибка, или, наоборот, отметить правильно заполненные поля.
+### Вид
 
-За статус отвечает свойство `status`. Варианты: `success`, `alert` и `warning`. Если статус не указан, поле будет обычным.
+Свойство `view="clear"` делает поле визуально минималистичным, убирая границы.
 
-<MdxTabs>
+```tsx
+<TextField view="default" placeholder="Самое обычное поле" />
+<TextField view="clear" placeholder="Незаметное поле" />
+```
+
+<TextFieldExampleView />
+
+Свойство `disabled` делает поле неактивным.
+
+```tsx
+<TextField placeholder="Неактивное поле" disabled />
+```
+
+<TextFieldExampleViewDisabled />
+
+### Статус
+
+Свойство `status` выделяет поле цветом: `success`, `alert`, `warning`. Без указания статуса поле имеет стандартный вид.
 
 ```tsx
 <TextField status="success" placeholder="Статус success" />
@@ -535,40 +568,11 @@ export const TextFieldExampleProgramFocus = () => {
 
 <TextFieldExampleStatus />
 
-</MdxTabs>
+### Форма
 
-## Внешний вид
+#### Базовые формы
 
-Чтобы сделать поле незаметным, укажите `view = "clear"`. Такая настройка подойдет, когда нужно создать кастомное поле ввода или обернуть его в контейнер. В этом случае поля с разными статусами и разной формы будут выглядеть одинаково.
-
-<MdxTabs>
-
-```tsx
-<TextField view="default" placeholder="Самое обычное поле" />
-<TextField view="clear" placeholder="Незаметное поле" />
-```
-
-<TextFieldExampleView />
-
-</MdxTabs>
-
-Если вы хотите заблокировать поле, добавьте `disabled`.
-
-<MdxTabs>
-
-```tsx
-<TextField placeholder="Неактивное поле" disabled />
-```
-
-<TextFieldExampleViewDisabled />
-
-</MdxTabs>
-
-## Форма
-
-За форму поля отвечает свойство `form`. По умолчанию у полей скругленные края, но ещё их можно сделать круглыми и квадратными.
-
-<MdxTabs>
+Свойство `form` задает форму поля: `default` (скругленные края), `brick` (прямые края), `round` (круглые края).
 
 ```tsx
 <TextField placeholder="Default" />
@@ -578,30 +582,35 @@ export const TextFieldExampleProgramFocus = () => {
 
 <TextFieldExampleFormBasic />
 
-</MdxTabs>
+#### Гибридные формы
 
-Чтобы комбинировать поле с кнопкой, используйте гибридные формы. У таких полей правая и левая грани могут отличаться.
-
-Вы также можете использовать [`FieldGroup`](##LIBS.LIB.STAND/lib:uikit/stand:components-fieldgroup-stable) для автоматической расстановки формы компонентов при их группировке.
+Гибридные формы (`roundClear`, `clearRound`, и т.д.) позволяют комбинировать разные границы для интеграции с другими компонентами, например, с кнопками.
 
 <MdxTabs>
-
-```tsx
-<div className={cnMixFlex({ flex: 'flex' })}>
-  <TextField placeholder="Электронная почта" form="roundClear" />
-  <Button form="brickRound" label="Подписаться" />
-</div>
-```
 
 <TextFieldExampleFormHybrid />
 
+```tsx
+import { Button } from '@consta/uikit/Button';
+import { cnMixFlex } from '@consta/uikit/MixFlex';
+
+<div className={cnMixFlex({ flex: 'flex' })}>
+  <TextField placeholder="Электронная почта" form="roundClear" />
+  <Button form="brickRound" label="Подписаться" />
+</div>;
+```
+
 </MdxTabs>
 
-## Размер
+<MdxInformer status="success">
 
-Свойство `size` отвечает за размер поля. Вместе с ним меняется размер шрифта, отступы и высота поля. Если вам нужно оставить шрифт и отступы неизменными и сделать поле уже или шире, измените количество строк.
+Для автоматической расстановки форм при группировке компонентов используйте [`FieldGroup`](##LIBS.LIB.STAND/lib:uikit/stand:components-fieldgroup-stable).
 
-<MdxTabs>
+</MdxInformer>
+
+### Размер
+
+Свойство `size` изменяет размер шрифта, отступы и высоту поля: `xs`, `s`, `m`, `l`.
 
 ```tsx
 <TextField size="xs" placeholder="Размер XS" />
@@ -612,29 +621,26 @@ export const TextFieldExampleProgramFocus = () => {
 
 <TextFieldExampleSize />
 
-</MdxTabs>
-
 ## Маскирование
 
-Чтобы использовать маски вместе с компонентом `TextField`, импортируйте хук [useIMask](https://github.com/uNmAnNeR/imaskjs/tree/master/packages/react-imask#using-hook).
-Как составить собственные маски, читайте в документации [imask](https://imask.js.org/guide.html).
+Для маскирования данных используйте хук [useIMask](https://github.com/uNmAnNeR/imaskjs/tree/master/packages/react-imask). Подробности о создании масок см. в [документации imask](https://imask.js.org/guide.html).
 
-## Как работает useIMask
+### Работа с useIMask
 
-Значение `TextField` или любого другого `<input/>` меняется через хук со связкой с полем через `ref`. Чтобы указать значение в момент первого рендера, используйте `defaultValue`. Чтобы изменить поле программно, используйте `setValue` из хука.
+Хук `useIMask` управляет значением поля через `ref`. Начальное значение задается через `defaultValue`, а программное изменение – через `setValue`.
 
 <MdxTabs>
 
+<TextFieldExampleMaskSetValue />
+
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
-import React, { memo } from 'react';
+import React from 'react';
 import { IconRevert } from '@consta/icons/IconRevert';
-import { Text } from '@consta/uikit/Text';
 import { TextField } from '@consta/uikit/TextFieldCanary';
 import { FieldGroup } from '@consta/uikit/FieldGroup';
-import { FieldLabel } from '@consta/uikit/FieldLabel';
-import { Button } from '@consta/uikit/Button';
 import { FieldWrapper } from '@consta/uikit/FieldComponents';
+import { Button } from '@consta/uikit/Button';
 
 const defaultValue = '9876543210';
 
@@ -664,15 +670,17 @@ export const TextFieldExampleMaskSetValue = () => {
 };
 ```
 
-<TextFieldExampleMaskSetValue />
-
 </MdxTabs>
 
-## Примеры маски
+### Примеры масок
 
-### Формат числа
+#### Формат числа
+
+Маска для ввода чисел с разделителем тысяч и двумя знаками после запятой.
 
 <MdxTabs>
+
+<TextFieldExampleMaskAmount />
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
@@ -701,28 +709,26 @@ export const TextFieldExampleMaskAmount = () => {
   return (
     <>
       <TextField defaultValue="1000000" placeholder="0" inputRef={ref} />
-      <>
-        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
-        <Text>{value}</Text>
-      </>
-      <>
-        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
-          UnmaskedValue
-        </FieldLabel>
-        <Text>{unmaskedValue}</Text>
-      </>
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
+      <Text>{value}</Text>
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
+        UnmaskedValue
+      </FieldLabel>
+      <Text>{unmaskedValue}</Text>
     </>
   );
 };
 ```
 
-<TextFieldExampleMaskAmount />
-
 </MdxTabs>
 
-### Телефон
+#### Телефон
+
+Маска для ввода номера телефона в формате `+7(XXX)XXX-XX-XX`.
 
 <MdxTabs>
+
+<TextFieldExampleMaskPhone />
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
@@ -746,28 +752,26 @@ export const TextFieldExampleMaskPhone = () => {
         inputRef={ref}
         defaultValue="9876543210"
       />
-      <>
-        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
-        <Text>{value}</Text>
-      </>
-      <>
-        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
-          UnmaskedValue
-        </FieldLabel>
-        <Text>{unmaskedValue}</Text>
-      </>
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
+      <Text>{value}</Text>
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
+        UnmaskedValue
+      </FieldLabel>
+      <Text>{unmaskedValue}</Text>
     </>
   );
 };
 ```
 
-<TextFieldExampleMaskPhone />
-
 </MdxTabs>
 
-### Паспорт
+#### Паспорт
+
+Маска для ввода номера паспорта в формате `XX XX XXXXXX`.
 
 <MdxTabs>
+
+<TextFieldExampleMaskPassport />
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
@@ -791,28 +795,26 @@ export const TextFieldExampleMaskPassport = () => {
         defaultValue="1234567890"
         inputRef={ref}
       />
-      <>
-        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
-        <Text>{value}</Text>
-      </>
-      <>
-        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
-          UnmaskedValue
-        </FieldLabel>
-        <Text>{unmaskedValue}</Text>
-      </>
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
+      <Text>{value}</Text>
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
+        UnmaskedValue
+      </FieldLabel>
+      <Text>{unmaskedValue}</Text>
     </>
   );
 };
 ```
 
-<TextFieldExampleMaskPassport />
-
 </MdxTabs>
 
-### Банковский счет
+#### Банковский счет
+
+Маска для ввода номера банковского счета в формате `XXXX XXXX XXXX XXXX`.
 
 <MdxTabs>
+
+<TextFieldExampleMaskBankAccount />
 
 ```tsx
 import { ReactMaskOpts, useIMask } from 'react-imask';
@@ -820,6 +822,7 @@ import React, { memo } from 'react';
 import { Text } from '@consta/uikit/Text';
 import { TextField } from '@consta/uikit/TextFieldCanary';
 import { cnMixSpace } from '@consta/uikit/MixSpace';
+import { Example } from '@consta/stand';
 
 const TextField = memo(TextField);
 
@@ -838,30 +841,33 @@ export const TextFieldExampleMaskBankAccount = () => {
         defaultValue="1111222233334444"
         inputRef={ref}
       />
-      <>
-        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
-        <Text>{value}</Text>
-      </>
-      <>
-        <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
-          UnmaskedValue
-        </FieldLabel>
-        <Text>{unmaskedValue}</Text>
-      </>
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>Value</FieldLabel>
+      <Text>{value}</Text>
+      <FieldLabel className={cnMixSpace({ mB: 'xs' })}>
+        UnmaskedValue
+      </FieldLabel>
+      <Text>{unmaskedValue}</Text>
     </Example>
   );
 };
 ```
 
-<TextFieldExampleMaskBankAccount />
-
 </MdxTabs>
 
-### Серийные номера
+#### Серийные номера
+
+Маска для ввода серийных номеров с валидацией формата.
 
 <MdxTabs>
 
+<TextFieldExampleMaskArraySn />
+
 ```tsx
+import { ReactMaskOpts, useIMask } from 'react-imask';
+import React, { useCallback, useState } from 'react';
+import { TextField } from '@consta/uikit/TextFieldCanary';
+import { FieldWrapper } from '@consta/uikit/FieldComponents';
+
 export const TextFieldExampleMaskArraySn = () => {
   const mask = 'SN-000000';
   const [value, setValue] = useState<string[] | null>(null);
@@ -911,80 +917,25 @@ export const TextFieldExampleMaskArraySn = () => {
 };
 ```
 
-<TextFieldExampleMaskArraySn />
-
 </MdxTabs>
 
-## Свойства
+## Пример использования
+
+Базовый пример использования `TextField` с управляемым значением:
+
+<MdxTabs>
+
+<TextFieldExampleTextValue />
 
 ```tsx
-type TextFieldPropValue<TYPE> = TYPE extends 'textarray'
-  ? string[] | null
-  : string | null;
+import { useState } from 'react';
+import { TextField } from '@consta/uikit/TextFieldCanary';
 
-type TextFieldPropDefaultValue<TYPE> = TYPE extends 'textarray'
-  ? never
-  : string | null;
+const App = () => {
+  const [value, setValue] = useState('текст');
 
-type TextFieldPropOnChange<TYPE> = (
-  value: TextFieldPropValue<TYPE>,
-  params: {
-    e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
-  },
-) => void;
-
-type InputType<TYPE extends string> = TYPE extends 'textarea'
-  ? HTMLTextAreaElement
-  : HTMLInputElement;
-
-type TextFieldPropRenderValueItem = (props: {
-  item: string;
-  index: number;
-  onRemove: (e: React.MouseEvent) => void;
-  size: FieldPropSize;
-  disabled: boolean | undefined;
-}) => React.ReactNode;
+  return <TextField value={value} onChange={setValue} />;
+};
 ```
 
-| Свойство                                              | Тип                                                                                                                                                                                                                                                                                                                                                                                                             | По умолчанию | Описание                                                                                                                                      |
-| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`type?`](#тип-поля)                                  | `string`                                                                                                                                                                                                                                                                                                                                                                                                        | `text`       | Тип поля.                                                                                                                                     |
-| [`step?`](#шаг-набор-значений-и-диапазон)             | `string` <code>&#124;</code> `number` <code>&#124;</code> `number[]`                                                                                                                                                                                                                                                                                                                                            | -            | Шаг, на который меняется число в поле по кнопкам-стрелочкам при `type=number`. Целое число.                                                   |
-| [`min?`](#шаг-набор-значений-и-диапазон)              | `number` <code>&#124;</code> `string`                                                                                                                                                                                                                                                                                                                                                                           | -            | Нижняя граница диапазона значений, которые меняются по кнопкам-стрелочкам, в поле с `type=number`.                                            |
-| [`max?`](#шаг-набор-значений-и-диапазон)              | `number` <code>&#124;</code> `string`                                                                                                                                                                                                                                                                                                                                                                           |              | Верхняя граница диапазона значений, которые меняются по кнопкам-стрелочкам, в поле с `type=number`.                                           |
-| [`status?`](#статус-поля)                             | `'alert'` <code>&#124;</code> `'success'` <code>&#124;</code> `'warning'`                                                                                                                                                                                                                                                                                                                                       |              | Тип поля.                                                                                                                                     |
-| `disabled?`                                           | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                       |              | Делает поле неактивным.                                                                                                                       |
-| [`size?`](#размеры)                                   | `'xs'` <code>&#124;</code> `'s'` <code>&#124;</code> `'m'` <code>&#124;</code> `'l'`                                                                                                                                                                                                                                                                                                                            | `m`          | Размер шрифта, отступы и высота поля.                                                                                                         |
-| [`rows?`](#строки-и-колонки)                          | `number`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Количество строк, работает только с `type='textarea'`.                                                                                        |
-| [`minRows?`](#строки-и-колонки)                       | `number`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Минимум видимых строк, работает только с `type='textarea'`.                                                                                   |
-| [`maxRows?`](#строки-и-колонки)                       | `number`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Максимум видимых строк, работает только с `type='textarea'`.                                                                                  |
-| [`maxLength?`](#строки-и-колонки)                     | `number`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Максимальное количество символов.                                                                                                             |
-| [`incrementButtons?`](#шаг-набор-значений-и-диапазон) | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                       | -            | Отображать ли кнопки-стрелочки для `type='number'`.                                                                                           |
-| [`clearButton?`](#кнопка-для-очистки-поля)            | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                       | -            | Отображение кнопки-крестик для очистки поля ввода.                                                                                            |
-| [`view?`](#внешний-вид)                               | `'default'` <code>&#124;</code> `'clear'`                                                                                                                                                                                                                                                                                                                                                                       | `default`    | Внешний вид поля.                                                                                                                             |
-| [`form?`](#форма)                                     | `'default'` <code>&#124;</code> ` 'brick'` <code>&#124;</code> ` 'round'` <code>&#124;</code> ` 'clearRound'` <code>&#124;</code> ` 'roundClear'` <code>&#124;</code> ` 'clearDefault'` <code>&#124;</code> ` 'defaultClear'` <code>&#124;</code> ` 'defaultBrick'` <code>&#124;</code> ` 'brickDefault'` <code>&#124;</code> `'brickClear'` <code>&#124;</code> ` 'clearBrick'` <code>&#124;</code> ` 'clear'` | `default`    | Форма поля.                                                                                                                                   |
-| [`leftSide?`](#дополнительная-информация)             | `IconComponent` <code>&#124;</code> `string`                                                                                                                                                                                                                                                                                                                                                                    | -            | Иконка или текст слева, внутри поля                                                                                                           |
-| [`rightSide?`](#дополнительная-информация)            | `IconComponent` <code>&#124;</code> `string`                                                                                                                                                                                                                                                                                                                                                                    | -            | Иконка или текст справа, внутри поля. Не работает с `type='number'`.                                                                          |
-| `iconSize?`                                           | `'s'` <code>&#124;</code> `'m'` <code>&#124;</code> `'xs'` <code>&#124;</code> `'l'`                                                                                                                                                                                                                                                                                                                            | -            | Размер иконок. Высчитывается в зависимости от `size`.                                                                                         |
-| `resize?`                                             | `boolean` <code>&#124;</code> `'auto'`                                                                                                                                                                                                                                                                                                                                                                          | -            | Возможность изменения размера поля, работает только с `type='textarea'`.                                                                      |
-| [`value?`](#значение)                                 | `TextFieldPropValue<TYPE>`                                                                                                                                                                                                                                                                                                                                                                                      | -            | Значение в поле.                                                                                                                              |
-| `defaultValue?`                                       | `TextFieldPropDefaultValue<TYPE>`                                                                                                                                                                                                                                                                                                                                                                               | -            | Предустановленное значение в поле.                                                                                                            |
-| [`placeholder?`](#подсказка)                          | `string`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Подсказка внутри поля.                                                                                                                        |
-| `id?`                                                 | `string`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | ID поля в DOM.                                                                                                                                |
-| `name?`                                               | `string`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Имя поля в DOM.                                                                                                                               |
-| `tabIndex?`                                           | `number`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Порядковый номер при переходе между элементами интерфейса по клавише **tab**.                                                                 |
-| [`autoFocus?`](#фокус)                                | `boolean`                                                                                                                                                                                                                                                                                                                                                                                                       | -            | Перемещает фокус в поле.                                                                                                                      |
-| `onFocus?`                                            | `React.FocusEventHandler`                                                                                                                                                                                                                                                                                                                                                                                       | -            | Действие по фокусу.                                                                                                                           |
-| `onBlur?`                                             | `React.FocusEventHandler`                                                                                                                                                                                                                                                                                                                                                                                       | -            | Действие при потере фокуса.                                                                                                                   |
-| `autoComplete?`                                       | [`AutoCompete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)                                                                                                                                                                                                                                                                                                                      | -            | Автозаполнение поля ввода — аналог HTML-атрибута [`autocomplete`](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete). |
-| `onClear?`                                            | `React.MouseEventHandler`                                                                                                                                                                                                                                                                                                                                                                                       | -            | Функция, которая определяет, как будет удалено значение из поля.                                                                              |
-| `onChange?`                                           | `TextFieldPropOnChange<TYPE>`                                                                                                                                                                                                                                                                                                                                                                                   | -            | Действие при изменении текстового поля.                                                                                                       |
-| `renderValueItem?`                                    | `TextFieldPropRenderValueItem`                                                                                                                                                                                                                                                                                                                                                                                  | -            | Функция которая определяет как будет выглядеть значение поля, работает только с `type='textarray'`.                                           |
-| `onInputChange?`                                      | `TextFieldPropOnChange<string>`                                                                                                                                                                                                                                                                                                                                                                                 | -            | Действие при изменении текстового поля, работает только с `type='textarray'`.                                                                 |
-| `inputValue?`                                         | `string` <code>&#124;</code> `null`                                                                                                                                                                                                                                                                                                                                                                             | -            | Значение `<input>`, работает только с `type='textarray'`.                                                                                     |
-| `iconClear?`                                          | `IconComponent`                                                                                                                                                                                                                                                                                                                                                                                                 | -            | Иконка удаления выбранного значения                                                                                                           |
-| `iconShowPassword?`                                   | `IconComponent`                                                                                                                                                                                                                                                                                                                                                                                                 | -            | Иконка глазика                                                                                                                                |
-| `iconHidePassword?`                                   | `IconComponent`                                                                                                                                                                                                                                                                                                                                                                                                 | -            | Иконка закрытого глазика                                                                                                                      |
-| `className?`                                          | `string`                                                                                                                                                                                                                                                                                                                                                                                                        | -            | Дополнительный CSS-класс.                                                                                                                     |
-| `inputRef?`                                           | `React.Ref<InputType<TYPE>>`                                                                                                                                                                                                                                                                                                                                                                                    | -            | Ссылка на DOM-элемент поля ввода.                                                                                                             |
-| `ref?`                                                | `React.Ref<HTMLDivElement>`                                                                                                                                                                                                                                                                                                                                                                                     | -            | Ссылка на корневой DOM-элемент компонента.                                                                                                    |
+</MdxTabs>
