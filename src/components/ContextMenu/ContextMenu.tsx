@@ -38,7 +38,6 @@ const ContextMenuRender = (
       <ContextMenuLevels
         {...rest}
         setComponentSize={setComponentSize}
-        ref={ref}
         enableAnimationBack={setAnimationBack.on}
         disableAnimationBack={disableAnimationBack}
       />
