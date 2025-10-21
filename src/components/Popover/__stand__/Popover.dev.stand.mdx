@@ -55,6 +55,45 @@ import { Popover } from '@consta/uikit/Popover';
 | `as?`                                                | `string`                                                             | -                       | HTML-тег для рендеринга компонента                                                                           |
 | `ref?`                                               | `React.RefObject<HTMLElement>`                                       | -                       | Ссылка на DOM-элемент компонента                                                                             |
 
+```tsx
+type PopoverPropOffset =
+  | '3xs'
+  | '2xs'
+  | 'xs'
+  | 's'
+  | 'm'
+  | 'l'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl'
+  | number;
+
+type Direction =
+  | 'downCenter'
+  | 'upCenter'
+  | 'downRight'
+  | 'downLeft'
+  | 'upRight'
+  | 'upLeft'
+  | 'leftUp'
+  | 'leftCenter'
+  | 'leftDown'
+  | 'rightUp'
+  | 'rightCenter'
+  | 'rightDown'
+  | 'downStartLeft'
+  | 'upStartLeft'
+  | 'downStartRight'
+  | 'upStartRight'
+  | 'leftStartUp'
+  | 'leftStartDown'
+  | 'rightStartUp'
+  | 'rightStartDown';
+```
+
 ## Содержимое
 
 Свойство `children` определяет содержимое поповера. В него можно передать:

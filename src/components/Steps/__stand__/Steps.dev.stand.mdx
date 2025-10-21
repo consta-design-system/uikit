@@ -54,6 +54,27 @@ import { Steps } from '@consta/uikit/Steps';
 | [`size?`](#размер)                      | `'s' \| 'm' \| 'l'`     | `'m'`        | Размер элементов компонента                                                          |
 | `className?`                            | `string`                | -            | Дополнительные CSS-классы для компонента                                             |
 
+```tsx
+type StepsPropOnChange<ITEM> = (
+  value: ITEM,
+  props: {
+    e: React.MouseEvent;
+  },
+) => void;
+
+type StepsPropGetLabel<ITEM> = (item: ITEM) => string;
+type StepsPropGetDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+type StepsPropGetSkipped<ITEM> = (item: ITEM) => boolean | undefined;
+type StepsPropGetCompleted<ITEM> = (item: ITEM) => boolean | undefined;
+
+type StepsItemDefault = {
+  label: string;
+  disabled?: boolean;
+  skipped?: boolean;
+  completed?: boolean;
+};
+```
+
 ## Содержимое
 
 ### Шаги

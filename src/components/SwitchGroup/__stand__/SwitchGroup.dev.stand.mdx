@@ -51,6 +51,15 @@ import { SwitchGroup } from '@consta/uikit/SwitchGroup';
 | `name`                                          | `string`                  | -            | Имя `<input>` для доступности                                                       |
 | `className?`                                    | `string`                  | -            | Дополнительные CSS-классы                                                           |
 
+```tsx
+export type SwitchGroupPropOnChange<ITEM> = (
+  value: ITEM[] | null,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
+```
+
 ## Содержимое
 
 ### Элементы и их подписи

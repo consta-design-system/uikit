@@ -84,6 +84,63 @@ import { ChoiceGroup } from '@consta/uikit/ChoiceGroup';
 | `className?`                                | `string`                              | -            | Дополнительный CSS-класс для компонента                                                                                                   |
 | `ref?`                                      | `React.Ref<HTMLDivElement>`           | -            | Ссылка на корневой DOM-элемент компонента                                                                                                 |
 
+```tsx
+export type ChoiceGroupDefaultItem = {
+  label: string;
+  icon?: IconComponent;
+  disabled?: boolean;
+  attributes?: Omit<
+    JSX.IntrinsicElements['label'],
+    'ref' | 'onChange' | 'children'
+  >;
+  ref?: React.RefObject<HTMLLabelElement>;
+};
+
+export const choiceGroupForms = ['default', 'brick', 'round'] as const;
+export type ChoiceGroupPropForm = typeof choiceGroupForms[number];
+export const choiceGroupDefaultForm: ChoiceGroupPropForm = 'default';
+
+export const choiceGroupSizes = ['xs', 's', 'm', 'l'] as const;
+export type ChoiceGroupPropSize = typeof choiceGroupSizes[number];
+export const choiceGroupDefaultSize: ChoiceGroupPropSize = 'm';
+
+export const choiceGroupViews = ['primary', 'ghost', 'secondary'] as const;
+export type ChoiceGroupPropView = typeof choiceGroupViews[number];
+export const choiceGroupDefaultView: ChoiceGroupPropView = 'primary';
+
+export const choiceGroupWidth = ['default', 'full'] as const;
+export type ChoiceGroupPropWidth = typeof choiceGroupWidth[number];
+export const choiceGroupWidthDefault: ChoiceGroupPropWidth =
+  choiceGroupWidth[0];
+
+export type ChoiceGroupPropGetItemLabel<ITEM> = (item: ITEM) => string | number;
+export type ChoiceGroupPropGetItemIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+export type ChoiceGroupPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+export type ChoiceGroupPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) =>
+  | Omit<JSX.IntrinsicElements['label'], 'ref' | 'onChange' | 'children'>
+  | undefined;
+export type ChoiceGroupPropGetItemRef<ITEM> = (
+  item: ITEM,
+) => React.RefObject<HTMLLabelElement> | undefined;
+
+export type ChoiceGroupPropValue<ITEM, MULTIPLE extends boolean> =
+  | (MULTIPLE extends true ? ITEM[] : ITEM)
+  | null;
+
+export type ChoiceGroupPropOnChange<ITEM, MULTIPLE extends boolean> = (
+  value: MULTIPLE extends true ? ITEM[] | null : ITEM,
+  props: {
+    e: React.ChangeEvent<HTMLInputElement>;
+  },
+) => void;
+```
+
 ## Содержимое
 
 ### Текст на кнопках

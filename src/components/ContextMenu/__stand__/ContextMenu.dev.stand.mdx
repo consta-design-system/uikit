@@ -82,6 +82,139 @@ import { ContextMenu } from '@consta/uikit/ContextMenu';
 | `getItemAttributes?`                                | `(item: ITEM) => AsAttributes \| undefined`                              | -                | Функция для получения HTML-атрибутов пункта меню                                                                                                                       |
 | `className?`                                        | `string`                                                                 | -                | Дополнительный CSS-класс для каждого уровня меню                                                                                                                       |
 
+```tsx
+export const contextMenuSizes = ['m', 'xs', 's', 'l'] as const;
+export type ContextMenuPropSize = typeof contextMenuSizes[number];
+export const contextMenuDefaultSize: ContextMenuPropSize = contextMenuSizes[0];
+
+export const contextMenuStatus = ['alert', 'success', 'warning'] as const;
+export type ContextMenuStatus = typeof contextMenuStatus[number];
+export const contextMenuDefaultStatus: ContextMenuStatus = contextMenuStatus[0];
+
+export const contextMenuForm = listPropForm;
+export type ContextMenuForm = ListPropForm;
+export const defaultContextMenuForm = defaultListPropForm;
+
+export const contextMenuPropSubMenuDirections = [
+  'rightStartUp',
+  'rightStartDown',
+  'leftStartUp',
+  'leftStartDown',
+] as const;
+export type ContextMenuPropSubMenuDirection =
+  typeof contextMenuPropSubMenuDirections[number];
+export const contextMenuPropDefaultSubMenuDirection: ContextMenuPropSubMenuDirection =
+  contextMenuPropSubMenuDirections[0];
+
+export type ContextMenuPropOnClick<ITEM> = (
+  item: ITEM,
+  params: {
+    e: React.MouseEvent;
+  },
+) => void;
+
+export type ContextMenuGroupDefault = {
+  label?: string;
+  id: number;
+};
+
+export type ContextMenuItemDefault = {
+  label: string | number;
+  key?: string | number;
+  rightSide?: React.ReactNode;
+  rightIcon?: IconComponent;
+  leftSide?: React.ReactNode;
+  leftIcon?: IconComponent;
+  subMenu?: ContextMenuItemDefault[];
+  status?: ContextMenuStatus;
+  disabled?: boolean;
+  groupId?: number;
+  onClick?: React.MouseEventHandler;
+  as?: AsTags;
+  attributes?: AsAttributes;
+};
+
+export type ContextMenuPropSortGroup = (
+  a: string | number,
+  b: string | number,
+) => number;
+
+export type ContextMenuPropGetItemLabel<ITEM> = (item: ITEM) => string | number;
+
+export type ContextMenuPropGetItemRightSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | undefined;
+
+export type ContextMenuPropGetItemLeftSide<ITEM> = (
+  item: ITEM,
+) => React.ReactNode | undefined;
+
+export type ContextMenuPropGetItemSubMenu<ITEM> = (
+  item: ITEM,
+) => ITEM[] | undefined;
+
+export type ContextMenuPropGetItemStatus<ITEM> = (
+  item: ITEM,
+) => ContextMenuStatus | undefined;
+
+export type ContextMenuPropGetItemKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+
+export type ContextMenuPropGetItemOnClick<ITEM> = (
+  item: ITEM,
+) => React.MouseEventHandler | undefined;
+
+export type ContextMenuPropGetItemDisabled<ITEM> = (
+  item: ITEM,
+) => boolean | undefined;
+
+export type ContextMenuPropGetItemAs<ITEM> = (item: ITEM) => AsTags | undefined;
+
+export type ContextMenuPropGetItemAttributes<ITEM> = (
+  item: ITEM,
+) => AsAttributes | undefined;
+
+export type ContextMenuPropGetItemGroupId<ITEM> = (
+  item: ITEM,
+) => number | undefined;
+
+export type ContextMenuPropGetItemRightIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+
+export type ContextMenuPropGetItemLeftIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+
+export type ContextMenuPropGetGroupLabel<GROUP> = (
+  group: GROUP,
+) => string | undefined;
+export type ContextMenuPropGetGroupId<GROUP> = (group: GROUP) => number;
+
+type Direction =
+  | 'downCenter'
+  | 'upCenter'
+  | 'downRight'
+  | 'downLeft'
+  | 'upRight'
+  | 'upLeft'
+  | 'leftUp'
+  | 'leftCenter'
+  | 'leftDown'
+  | 'rightUp'
+  | 'rightCenter'
+  | 'rightDown'
+  | 'downStartLeft'
+  | 'upStartLeft'
+  | 'downStartRight'
+  | 'upStartRight'
+  | 'leftStartUp'’
+  | 'leftStartDown'
+  | 'rightStartUp'
+  | 'rightStartDown';
+```
+
 ## Содержимое
 
 ### Текст пункта

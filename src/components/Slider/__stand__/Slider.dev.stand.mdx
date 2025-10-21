@@ -82,6 +82,19 @@ import { Slider } from '@consta/uikit/Slider';
 | [`tooltipPossibleDirections?`](#тултип)         | [`Direction`](##LIBS.LIB.STAND/lib:uikit/stand:components-popover-stable) | -            | Возможные позиции тултипа                       |
 | `className?`                                    | `string`                                                                  | -            | Дополнительный CSS-класс                        |
 
+```tsx
+export type SliderValue<RANGE> = RANGE extends true ? [number, number] : number;
+
+export type SliderPropOnChange<RANGE> = (
+  value: SliderValue<RANGE>,
+  prop: {
+    e?: Event | React.TouchEvent | React.MouseEvent | React.KeyboardEvent;
+  },
+) => void;
+
+type SliderPropTooltipFormatter = (value: number | undefined) => string;
+```
+
 ## Содержимое
 
 ### Одно значение или диапазон

@@ -132,6 +132,35 @@ import { TextField, useIMask } from '@consta/uikit/TextField';
 | `inputContainerRef?`                                  | `React.Ref<HTMLDivElement>`                                                                                                                                                                                     | -            | Ссылка на DOM-элемент контейнера поля ввода                                                                                                  |
 | `ref?`                                                | `React.Ref<HTMLDivElement>`                                                                                                                                                                                     | -            | Ссылка на корневой DOM-элемент компонента                                                                                                    |
 
+```tsx
+type TextFieldPropValue<TYPE> = TYPE extends 'textarray'
+  ? string[] | null
+  : string | null;
+
+type TextFieldPropDefaultValue<TYPE> = TYPE extends 'textarray'
+  ? never
+  : string | null;
+
+type TextFieldPropOnChange<TYPE> = (
+  value: TextFieldPropValue<TYPE>,
+  params: {
+    e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
+  },
+) => void;
+
+type InputType<TYPE extends string> = TYPE extends 'textarea'
+  ? HTMLTextAreaElement
+  : HTMLInputElement;
+
+type TextFieldPropRenderValueItem = (props: {
+  item: string;
+  index: number;
+  onRemove: (e: React.MouseEvent) => void;
+  size: FieldPropSize;
+  disabled: boolean | undefined;
+}) => React.ReactNode;
+```
+
 ## Содержимое
 
 ### Тип поля

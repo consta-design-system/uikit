@@ -125,6 +125,63 @@ import { Combobox } from '@consta/uikit/Combobox';
 | `dropdownClassName?`                                         | `string`                                               | -                         | CSS-класс для выпадающего блока                            |
 | `ref?`                                                       | `React.Ref<HTMLDivElement>`                            | -                         | Ссылка на корневой DOM-элемент                             |
 
+```tsx
+type ComboboxItemDefault = {
+  label: string;
+  id: string | number;
+  groupId?: string | number;
+  disabled?: boolean;
+};
+
+type ComboboxGroupDefault = {
+  label: string;
+  id: string | number;
+};
+
+type ComboboxPropOnChange<ITEM, MULTIPLE extends boolean> = (
+  value: (MULTIPLE extends true ? ITEM[] : ITEM) | null,
+  props: {
+    e: React.SyntheticEvent;
+  },
+) => void;
+
+type ComboboxPropRenderItem<ITEM = DefaultItem> = (props: {
+  item: ITEM;
+  active: boolean;
+  hovered: boolean;
+  onClick: React.ReactEventHandler;
+  onMouseEnter: React.ReactEventHandler;
+}) => React.ReactNode | null;
+
+type ComboboxPropValue<ITEM, MULTIPLE extends boolean> =
+  | (MULTIPLE extends true ? ITEM[] : ITEM)
+  | null
+  | undefined;
+
+type ComboboxPropRenderValue<ITEM> = (props: {
+  item: ITEM;
+}) => React.ReactNode | null;
+
+type ComboboxPropSearchFunction<ITEM> = (
+  item: ITEM,
+  searchValue: string,
+) => boolean;
+
+type ComboboxPropGetItemLabel<ITEM> = (item: ITEM) => string;
+type ComboboxPropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type ComboboxPropGetItemGroupKey<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+type ComboboxPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
+type ComboboxPropGetGroupKey<GROUP> = (group: GROUP) => string | number;
+type ComboboxPropGetGroupLabel<GROUP> = (group: GROUP) => string;
+
+type ComboboxPropOnCreate = (
+  label: string,
+  props: { e: React.SyntheticEvent },
+) => void;
+```
+
 ## Содержимое
 
 ### Варианты
