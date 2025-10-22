@@ -132,6 +132,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
     status = bannerPropStatusDefault,
     style,
     form = bannerPropFormDefault,
+    ...otherProps
   } = props;
 
   const { themeClassNames } = useTheme();
@@ -149,6 +150,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
 
   return (
     <div
+      {...otherProps}
       className={cnBanner({ view, form }, [
         cnMixFlex({
           justify:
