@@ -139,7 +139,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
 
   const leftSlots = [
     Icon ? (
-      <SlotWrapper>
+      <SlotWrapper key={cnBanner('Slot', { index: 'icon', position: 0 })}>
         <Icon className={cnBanner('Icon')} />
       </SlotWrapper>
     ) : null,
