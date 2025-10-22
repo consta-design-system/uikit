@@ -11,16 +11,38 @@ import { cn } from '##/utils/bem';
 import { isNotNil, isString } from '##/utils/type-guards';
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
+export const bannerPropSize = ['xs', 's', 'm', 'l'] as const;
+export type BannerPropSize = typeof bannerPropSize[number];
+export const bannerPropSizeDefault: BannerPropSize = bannerPropSize[2]; // 'm'
+
+export const bannerPropView = ['filled', 'ghost', 'transparent'] as const;
+export type BannerPropView = typeof bannerPropView[number];
+export const bannerPropViewDefault: BannerPropView = bannerPropView[0]; // 'filled'
+
+export const bannerPropStatus = [
+  'normal',
+  'warning',
+  'alert',
+  'success',
+  'system',
+] as const;
+export type BannerPropStatus = typeof bannerPropStatus[number];
+export const bannerPropStatusDefault: BannerPropStatus = bannerPropStatus[0]; // 'normal'
+
+export const bannerPropForm = ['default', 'round', 'brick'] as const;
+export type BannerPropForm = typeof bannerPropForm[number];
+export const bannerPropFormDefault: BannerPropForm = bannerPropForm[0]; // 'default'
+
 export type BannerProps = PropsWithJsxAttributes<{
   leftSide?: React.ReactNode;
   rightSide?: React.ReactNode;
   icon?: IconComponent;
-  size?: 'xs' | 's' | 'm' | 'l';
-  view?: 'filled' | 'ghost' | 'transparent';
+  size?: BannerPropSize;
+  view?: BannerPropView;
   space?: MixSpaceProps;
   itemsGap?: Space | [Space, Space];
-  status?: 'normal' | 'warning' | 'alert' | 'success' | 'system';
-  form?: 'default' | 'round' | 'brick';
+  status?: BannerPropStatus;
+  form?: BannerPropForm;
 }>;
 
 export const cnBanner = cn('Banner');
@@ -68,14 +90,14 @@ const getGap = (gap: Space | [Space, Space], index: number) => {
   return gap;
 };
 
-const textSizeMap = {
+const textSizeMap: Record<BannerPropSize, 'xs' | 's' | 'm' | 'l'> = {
   xs: 's',
   s: 's',
   m: 'm',
   l: 'l',
 } as const;
 
-const controlSizeMap = {
+const controlSizeMap: Record<BannerPropSize, 'xs' | 's' | 'm'> = {
   xs: 'xs',
   s: 's',
   m: 's',
@@ -89,12 +111,12 @@ const controlSizeMap = {
  * @property {React.ReactNode} [leftSide] - Содержимое на левой стороне.
  * @property {React.ReactNode} [rightSide] - Содержимое на правой стороне.
  * @property {IconComponent} [icon] - Иконка.
- * @property {'xs' | 's' | 'm' | 'l'} [size] - Размер компонента.
- * @property {'filled' | 'ghost' | 'transparent'} [view] - Визуальный стиль.
+ * @property {BannerPropSize} [size] - Размер компонента.
+ * @property {BannerPropView} [view] - Визуальный стиль.
  * @property {MixSpaceProps} [space] - Параметры отступов.
  * @property {Space | [Space, Space]} [itemsGap] - Отступы между элементами.
- * @property {'normal' | 'warning' | 'alert' | 'success' | 'system'} [status] - Статус (цветовая схема).
- * @property {'default' | 'round' | 'brick'} [form] - Форма компонента.
+ * @property {BannerPropStatus} [status] - Статус (цветовая схема).
+ * @property {BannerPropForm} [form] - Форма компонента.
  */
 
 export const Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
@@ -102,14 +124,14 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
     leftSide,
     rightSide,
     icon: Icon,
-    size = 'm',
-    view = 'filled',
+    size = bannerPropSizeDefault,
+    view = bannerPropViewDefault,
     className,
     space,
     itemsGap = 's',
-    status = 'normal',
+    status = bannerPropStatusDefault,
     style,
-    form = 'default',
+    form = bannerPropFormDefault,
   } = props;
 
   const { themeClassNames } = useTheme();
