@@ -151,7 +151,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
   return (
     <div
       {...otherProps}
-      className={cnBanner({ view, form }, [
+      className={cnBanner({ view, form, size }, [
         cnMixFlex({
           justify:
             rightSlots.length && !leftSlots.length
