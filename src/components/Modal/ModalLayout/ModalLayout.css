@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  flex: 1;
 
   &-Slot {
     background-color: var(--color-bg-default);
@@ -11,8 +11,7 @@
     &_border {
       &_top {
         padding-top: 1px;
-        box-shadow:
-          0 1px 0 0 var(--color-bg-border) inset,
+        box-shadow: 0 1px 0 0 var(--color-bg-border) inset,
           0 -2px 3px var(--modal-layout-slot-color-shadow, transparent);
 
         &[class*='MixSpace_pT'] {
@@ -22,8 +21,7 @@
 
       &_bottom {
         padding-bottom: 1px;
-        box-shadow:
-          0 -1px 0 0 var(--color-bg-border) inset,
+        box-shadow: 0 -1px 0 0 var(--color-bg-border) inset,
           0 2px 3px var(--modal-layout-slot-color-shadow, transparent);
 
         &[class*='MixSpace_pB'] {
@@ -34,22 +32,24 @@
 
     &_fixed {
       &_top {
-        --modal-layout-slot-color-shadow:
-          var(
-            --modal-layout-header-color-shadow
-          );
+        --modal-layout-slot-color-shadow: var(
+          --modal-layout-header-color-shadow
+        );
         position: sticky;
         top: 0;
       }
 
       &_bottom {
-        --modal-layout-slot-color-shadow:
-          var(
-            --modal-layout-footer-color-shadow
-          );
+        --modal-layout-slot-color-shadow: var(
+          --modal-layout-footer-color-shadow
+        );
         position: sticky;
         bottom: 0;
       }
+    }
+
+    &_between {
+      flex: 1;
     }
   }
 }

@@ -1,65 +1,22 @@
 import './Sidebar.css';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Transition } from 'react-transition-group';
 
+import { useModal } from '##/components/Modal/useModal';
 import {
   PortalWithTheme,
   PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
-import { useTheme } from '##/components/Theme/Theme';
-import { useGlobalKeys } from '##/hooks/useGlobalKeys';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
-import { AsTagAttribute } from '##/utils/types/AsTags';
-import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
-const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
-type SidebarPropPosition = typeof sidebarPropPosition[number];
-const sidebarPropPositionDefault: SidebarPropPosition = sidebarPropPosition[0];
-
-export const sidebarPropSize = [
-  's',
-  'm',
-  'l',
-  'full',
-  '1/2',
-  '1/3',
-  '1/4',
-  '2/3',
-  '3/4',
-] as const;
-
-export type SidebarPropSize = typeof sidebarPropSize[number];
-const sidebarPropSizeDefault: SidebarPropSize = sidebarPropSize[1];
-
-export type SidebarProps = PropsWithHTMLAttributes<
-  {
-    isOpen?: boolean;
-    onClose?: () => void;
-    onOpen?: () => void;
-    hasOverlay?: boolean;
-    onClickOutside?: (event: MouseEvent) => void;
-    onEsc?: (event: KeyboardEvent) => void;
-    position?: SidebarPropPosition;
-    size?: SidebarPropSize;
-    rootClassName?: string;
-    children?: React.ReactNode;
-    container?: HTMLDivElement | undefined;
-    afterClose?: () => void;
-  },
-  HTMLDivElement
->;
-
-type SidebarContentProps = {
-  className?: string;
-  children: React.ReactNode;
-};
-
-type SidebarActionsProps = {
-  className?: string;
-  children: React.ReactNode;
-};
+import {
+  SidebarActionsProps,
+  SidebarComponent,
+  SidebarContentProps,
+} from './types';
+import { useAnimateTimeout } from './useAnimateTimeout';
 
 export const cnSidebar = cn('Sidebar');
 
@@ -86,13 +43,6 @@ const SidebarActions: React.FC<SidebarActionsProps> = ({
   </div>
 );
 
-interface SidebarComponent
-  extends React.FC<SidebarProps>,
-    AsTagAttribute<'div'> {
-  Content: typeof SidebarContent;
-  Actions: typeof SidebarActions;
-}
-
 export const Sidebar: SidebarComponent = (props) => {
   const {
     isOpen,
@@ -101,40 +51,47 @@ export const Sidebar: SidebarComponent = (props) => {
     hasOverlay = true,
     onClickOutside,
     onEsc,
-    position = sidebarPropPositionDefault,
-    size = sidebarPropSizeDefault,
+    position = 'right',
+    size = 'm',
     className,
     children,
     container = window.document.body,
     style,
     rootClassName,
     afterClose,
+    refsForExcludeClickOutside,
     ...otherProps
   } = props;
 
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const portalRef = useRef<HTMLDivElement>(null);
-
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    if (isOpen) {
-      onOpen?.();
-    } else {
-      onClose?.();
-    }
-  }, [isOpen]);
-
-  useGlobalKeys({
-    Escape: (e) => isOpen && onEsc && onEsc(e),
+  const {
+    shadowHeader,
+    shadowFooter,
+    scrollable,
+    theme,
+    portalRef,
+    windowRef,
+    contentRef,
+    scrollRef,
+    ignoreClicksInsideRefs,
+    windowElAtom,
+  } = useModal({
+    ref,
+    isOpen,
+    onEsc,
+    onOpen,
+    onClose,
+    refsForExcludeClickOutside,
   });
+
+  const animateTimeout = useAnimateTimeout(windowElAtom, position);
 
   return (
     <Transition
       in={isOpen}
       unmountOnExit
-      timeout={240}
+      timeout={animateTimeout}
       nodeRef={portalRef}
       onExiting={afterClose}
     >
@@ -144,11 +101,20 @@ export const Sidebar: SidebarComponent = (props) => {
           ref={portalRef}
           container={container}
           className={cnSidebar({ position, hasOverlay }, [rootClassName])}
-          style={
-            typeof style?.zIndex === 'number'
-              ? { zIndex: style.zIndex }
-              : undefined
-          }
+          style={{
+            ...(style?.zIndex === 'number' && {
+              zIndex: style.zIndex,
+            }),
+            ['--sidebar-animate-timeout' as string]: `${animateTimeout}ms`,
+            ...(shadowHeader && {
+              ['--modal-layout-header-color-shadow' as string]:
+                'var(--color-shadow-group-2)',
+            }),
+            ...(shadowFooter && {
+              ['--modal-layout-footer-color-shadow' as string]:
+                'var(--color-shadow-group-2)',
+            }),
+          }}
         >
           {hasOverlay && (
             <div
@@ -162,23 +128,37 @@ export const Sidebar: SidebarComponent = (props) => {
               ...style,
               zIndex: undefined,
             }}
-            className={cnSidebar('Window', { size, position, animate }, [
-              className,
-            ])}
-            ref={ref}
+            className={cnSidebar(
+              'Window',
+              { size, position, animate, scrollable },
+              [className],
+            )}
+            ref={windowRef}
           >
-            <PortalWithThemeConsumer
-              onClickOutside={onClickOutside}
-              ignoreClicksInsideRefs={[ref]}
+            <div
+              className={cnSidebar('Scroll', cnMixScrollBar({ size: 's' }))}
+              ref={scrollRef}
             >
-              {children}
-            </PortalWithThemeConsumer>
+              <div className={cnSidebar('Content')} ref={contentRef}>
+                <PortalWithThemeConsumer
+                  onClickOutside={onClickOutside}
+                  ignoreClicksInsideRefs={ignoreClicksInsideRefs}
+                >
+                  {children}
+                </PortalWithThemeConsumer>
+              </div>
+            </div>
           </div>
         </PortalWithTheme>
       )}
     </Transition>
   );
 };
-
+/**
+ * @deprecated use actions
+ */
 Sidebar.Content = SidebarContent;
+/**
+ * @deprecated use actions
+ */
 Sidebar.Actions = SidebarActions;

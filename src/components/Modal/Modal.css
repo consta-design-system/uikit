@@ -46,9 +46,18 @@
     }
   }
 
+  &-Content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
   &-Scroll {
+    display: flex;
+    flex-direction: column;
     overflow: auto;
     height: 100%;
+    flex: 1;
   }
 
   &-Overlay {

@@ -69,6 +69,9 @@ export const ModalLayout = forwardRef<HTMLDivElement, ModalLayoutProps>(
                   'bottom ',
                   'top',
                 ]),
+                between:
+                  (index === slots.length - 2 && getSlotProp(fixed, 1)) ||
+                  (index === slots.length - 1 && !getSlotProp(fixed, 1)),
               },
               [cnMixSpace(getSlotProp(space, index))],
             )}
