@@ -137,14 +137,13 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>((props, ref) => {
 
   const { themeClassNames } = useTheme();
 
-  const leftSlots = [
-    Icon ? (
-      <SlotWrapper key={cnBanner('Slot', { index: 'icon', position: 0 })}>
-        <Icon className={cnBanner('Icon')} />
-      </SlotWrapper>
-    ) : null,
-    ...renderSlots(leftSide, 0),
-  ].filter(isNotNil);
+  const leftSlots = renderSlots(
+    [
+      Icon ? <Icon className={cnBanner('Icon')} /> : null,
+      ...(Array.isArray(leftSide) ? leftSide : [leftSide]),
+    ],
+    0,
+  );
 
   const rightSlots = renderSlots(rightSide, 1);
 
