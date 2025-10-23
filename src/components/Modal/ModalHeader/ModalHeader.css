@@ -10,7 +10,7 @@
     flex: none;
   }
 
-  &-ButtonClose {
+  .Button&-ButtonClose {
     flex: none;
 
     &_fixed {
@@ -32,12 +32,11 @@
     flex: none;
     width: var(--modal-header-status-icon-size);
     height: var(--modal-header-status-icon-size);
-    background:
-      color-mix(
-        in srgb,
-        var(--modal-status-icon-bg) var(--modal-status-icon-degree-mixing),
-        var(--color-bg-default)
-      );
+    background: color-mix(
+      in srgb,
+      var(--modal-status-icon-bg) var(--modal-status-icon-degree-mixing),
+      var(--color-bg-default)
+    );
     border-radius: 50%;
 
     &_size {

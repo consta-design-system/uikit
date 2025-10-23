@@ -1,65 +1,23 @@
 import './Sidebar.css';
 
-import React, { useEffect, useRef } from 'react';
+import React, { forwardRef } from 'react';
 import { Transition } from 'react-transition-group';
 
+import { useModal } from '##/components/Modal/useModal';
 import {
   PortalWithTheme,
   PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
-import { useTheme } from '##/components/Theme/Theme';
-import { useGlobalKeys } from '##/hooks/useGlobalKeys';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
-import { AsTagAttribute } from '##/utils/types/AsTags';
-import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
-const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
-type SidebarPropPosition = typeof sidebarPropPosition[number];
-const sidebarPropPositionDefault: SidebarPropPosition = sidebarPropPosition[0];
-
-export const sidebarPropSize = [
-  's',
-  'm',
-  'l',
-  'full',
-  '1/2',
-  '1/3',
-  '1/4',
-  '2/3',
-  '3/4',
-] as const;
-
-export type SidebarPropSize = typeof sidebarPropSize[number];
-const sidebarPropSizeDefault: SidebarPropSize = sidebarPropSize[1];
-
-export type SidebarProps = PropsWithHTMLAttributes<
-  {
-    isOpen?: boolean;
-    onClose?: () => void;
-    onOpen?: () => void;
-    hasOverlay?: boolean;
-    onClickOutside?: (event: MouseEvent) => void;
-    onEsc?: (event: KeyboardEvent) => void;
-    position?: SidebarPropPosition;
-    size?: SidebarPropSize;
-    rootClassName?: string;
-    children?: React.ReactNode;
-    container?: HTMLDivElement | undefined;
-    afterClose?: () => void;
-  },
-  HTMLDivElement
->;
-
-type SidebarContentProps = {
-  className?: string;
-  children: React.ReactNode;
-};
-
-type SidebarActionsProps = {
-  className?: string;
-  children: React.ReactNode;
-};
+import {
+  SidebarActionsProps,
+  SidebarComponent,
+  SidebarContentProps,
+  SidebarProps,
+} from './types';
+import { useAnimateTimeout } from './useAnimateTimeout';
 
 export const cnSidebar = cn('Sidebar');
 
@@ -86,99 +44,124 @@ const SidebarActions: React.FC<SidebarActionsProps> = ({
   </div>
 );
 
-interface SidebarComponent
-  extends React.FC<SidebarProps>,
-    AsTagAttribute<'div'> {
-  Content: typeof SidebarContent;
-  Actions: typeof SidebarActions;
-}
+export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
+  (props, ref) => {
+    const {
+      isOpen,
+      onClose,
+      onOpen,
+      hasOverlay = true,
+      onClickOutside,
+      onEsc,
+      position = 'right',
+      size = 'm',
+      className,
+      children,
+      container = window.document.body,
+      style,
+      rootClassName,
+      afterClose,
+      ignoreOutsideClicksRefs: ignoreOutsideClicksRefsProp,
+      border,
+      ...otherProps
+    } = props;
 
-export const Sidebar: SidebarComponent = (props) => {
-  const {
-    isOpen,
-    onClose,
-    onOpen,
-    hasOverlay = true,
-    onClickOutside,
-    onEsc,
-    position = sidebarPropPositionDefault,
-    size = sidebarPropSizeDefault,
-    className,
-    children,
-    container = window.document.body,
-    style,
-    rootClassName,
-    afterClose,
-    ...otherProps
-  } = props;
+    const {
+      shadowHeader,
+      shadowFooter,
+      scrollable,
+      theme,
+      portalRef,
+      windowRef,
+      contentRef,
+      scrollRef,
+      ignoreOutsideClicksRefs,
+      windowElAtom,
+    } = useModal({
+      ref,
+      isOpen,
+      onEsc,
+      onOpen,
+      onClose,
+      ignoreOutsideClicksRefs: ignoreOutsideClicksRefsProp,
+    });
 
-  const ref = useRef<HTMLDivElement | null>(null);
+    const animateTimeout = useAnimateTimeout(windowElAtom, position);
 
-  const portalRef = useRef<HTMLDivElement>(null);
-
-  const { theme } = useTheme();
-
-  useEffect(() => {
-    if (isOpen) {
-      onOpen?.();
-    } else {
-      onClose?.();
-    }
-  }, [isOpen]);
-
-  useGlobalKeys({
-    Escape: (e) => isOpen && onEsc && onEsc(e),
-  });
-
-  return (
-    <Transition
-      in={isOpen}
-      unmountOnExit
-      timeout={240}
-      nodeRef={portalRef}
-      onExiting={afterClose}
-    >
-      {(animate) => (
-        <PortalWithTheme
-          preset={theme}
-          ref={portalRef}
-          container={container}
-          className={cnSidebar({ position, hasOverlay }, [rootClassName])}
-          style={
-            typeof style?.zIndex === 'number'
-              ? { zIndex: style.zIndex }
-              : undefined
-          }
-        >
-          {hasOverlay && (
-            <div
-              className={cnSidebar('Overlay', { animate })}
-              aria-label="Overlay"
-            />
-          )}
-          <div
-            {...otherProps}
+    return (
+      <Transition
+        in={isOpen}
+        unmountOnExit
+        timeout={animateTimeout}
+        nodeRef={portalRef}
+        onExiting={afterClose}
+      >
+        {(animate) => (
+          <PortalWithTheme
+            preset={theme}
+            ref={portalRef}
+            container={container}
+            className={cnSidebar({ position, hasOverlay }, [rootClassName])}
             style={{
-              ...style,
-              zIndex: undefined,
+              ...(style?.zIndex === 'number' && {
+                zIndex: style.zIndex,
+              }),
+              ['--sidebar-animate-timeout' as string]: `${animateTimeout}ms`,
+              ...(shadowHeader && {
+                ['--modal-layout-header-color-shadow' as string]:
+                  'var(--color-shadow-group-2)',
+              }),
+              ...(shadowFooter && {
+                ['--modal-layout-footer-color-shadow' as string]:
+                  'var(--color-shadow-group-2)',
+              }),
             }}
-            className={cnSidebar('Window', { size, position, animate }, [
-              className,
-            ])}
-            ref={ref}
           >
-            <PortalWithThemeConsumer
-              onClickOutside={onClickOutside}
-              ignoreClicksInsideRefs={[ref]}
+            {hasOverlay && (
+              <div
+                className={cnSidebar('Overlay', { animate })}
+                aria-label="Overlay"
+              />
+            )}
+            <div
+              {...otherProps}
+              style={{
+                ...style,
+                zIndex: undefined,
+              }}
+              className={cnSidebar(
+                'Window',
+                { size, position, animate, scrollable, border },
+                [className],
+              )}
+              ref={windowRef}
             >
-              {children}
-            </PortalWithThemeConsumer>
-          </div>
-        </PortalWithTheme>
-      )}
-    </Transition>
-  );
-};
-
-Sidebar.Content = SidebarContent;
+              <div
+                className={cnSidebar('Scroll', cnMixScrollBar({ size: 's' }))}
+                ref={scrollRef}
+              >
+                <div className={cnSidebar('Content')} ref={contentRef}>
+                  <PortalWithThemeConsumer
+                    onClickOutside={onClickOutside}
+                    ignoreClicksInsideRefs={ignoreOutsideClicksRefs}
+                  >
+                    {children}
+                  </PortalWithThemeConsumer>
+                </div>
+              </div>
+            </div>
+          </PortalWithTheme>
+        )}
+      </Transition>
+    );
+  },
+) as SidebarComponent;
+/**
+ * @deprecated use actions
+ */
 Sidebar.Actions = SidebarActions;
+
+/**
+ * @deprecated use actions
+ */
+Sidebar.Content = SidebarContent;
