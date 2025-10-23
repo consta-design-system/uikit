@@ -95,14 +95,14 @@ const textSizeMap: Record<BannerPropSize, 'xs' | 's' | 'm' | 'l'> = {
   s: 's',
   m: 'm',
   l: 'l',
-} as const;
+};
 
 const controlSizeMap: Record<BannerPropSize, 'xs' | 's' | 'm'> = {
   xs: 'xs',
   s: 's',
   m: 's',
   l: 'm',
-} as const;
+};
 
 /**
  * Компонент Banner, отображающий содержимое слева и справа.
