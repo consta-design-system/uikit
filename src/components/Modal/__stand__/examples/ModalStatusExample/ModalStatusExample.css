@@ -1,0 +1,9 @@
+.ModalStatusExample {
+  &-Modal {
+    width: 400px;
+  }
+
+  &-Footer {
+    background: var(--color-bg-secondary);
+  }
+}

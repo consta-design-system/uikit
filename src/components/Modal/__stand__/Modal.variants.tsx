@@ -1,14 +1,16 @@
 import './Modal.variants.css';
 
+import { IconAllDone } from '@consta/icons/IconAllDone';
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
+import { Button } from '##/components/Button';
+import { Text } from '##/components/Text';
 import { useFlag } from '##/hooks/useFlag';
+import { cnMixFlex } from '##/mixs/MixFlex';
+import { cn } from '##/utils/bem';
 
-import { cn } from '../../../utils/bem';
-import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
-import { Modal } from '../Modal';
+import { Modal, ModalHeader, ModalLayout } from '..';
 
 type SelectOption = {
   label: string;
@@ -21,10 +23,21 @@ export type Option = SelectOption | Group;
 const cnModalVariants = cn('ModalVariants');
 
 const Variants = () => {
-  const [open, setOpen] = useFlag();
+  const [open, setOpen] = useFlag(true);
   const hasOverlay = useBoolean('hasOverlay', true);
-  const width = useSelect('width', ['auto'], 'auto');
+  const form = useSelect('form', ['default', 'brick'], 'default');
   const position = useSelect('position', ['center', 'top'], 'center');
+  const border = useBoolean('border', false);
+  const withHeader = useBoolean('withHeader', false);
+  const fixedHeader = useBoolean('fixedHeader', false, withHeader);
+  const directionHeader = useSelect(
+    'directionHeader',
+    ['vertical', 'horizontal'],
+    'vertical',
+    withHeader,
+  );
+  const withFooter = useBoolean('withFooter', false);
+  const fixedFooter = useBoolean('fixedFooter', false, withFooter);
 
   return (
     <div className={cnModalVariants()}>
@@ -41,41 +54,57 @@ const Variants = () => {
         hasOverlay={hasOverlay}
         onClickOutside={setOpen.off}
         onEsc={setOpen.off}
-        width={width}
+        form={form}
         position={position}
-        refsForExcludeClickOutside={[...[]]}
+        border={border}
       >
-        <>
-          <Text
-            as="p"
-            size="s"
-            view="secondary"
-            lineHeight="m"
-            className={cnModalVariants('Title')}
-          >
-            Это заголовок модального окна
-          </Text>
-          <Text
-            as="p"
-            size="m"
-            view="primary"
-            lineHeight="m"
-            className={cnModalVariants('Body')}
-          >
+        <ModalLayout
+          fixed={[fixedHeader, fixedFooter]}
+          border={[withHeader && border, withFooter && border]}
+          space={{ p: 's' }}
+        >
+          {withHeader ? (
+            <ModalHeader
+              icon={IconAllDone}
+              status="success"
+              onClose={setOpen.off}
+              direction={directionHeader}
+            >
+              Заголовок модального окна
+            </ModalHeader>
+          ) : undefined}
+          <Text as="p" size="m" view="primary" lineHeight="m">
             Это содержимое модального окна. Здесь может быть что угодно: текст,
             изображение, форма или таблица. Всё, что хочется вынести из
-            контекста и показать поверх основной страницы.
+            контекста и показать поверх основной страницы. Это содержимое
+            модального окна. Здесь может быть что угодно: текст, изображение,
+            форма или таблица. Всё, что хочется вынести из контекста и показать
+            поверх основной страницы.Это содержимое модального окна. Здесь может
+            быть что угодно: текст, изображение, форма или таблица. Всё, что
+            хочется вынести из контекста и показать поверх основной страницы.Это
+            содержимое модального окна. Здесь может быть что угодно: текст,
+            изображение, форма или таблица. Всё, что хочется вынести из
+            контекста и показать поверх основной страницы.Это содержимое
+            модального окна. Здесь может быть что угодно: текст, изображение,
+            форма или таблица. Всё, что хочется вынести из контекста и показать
+            поверх основной страницы.
           </Text>
-        </>
-        <div className={cnModalVariants('Action')}>
-          <Button
-            size="m"
-            view="primary"
-            label="Закрыть"
-            width="default"
-            onClick={setOpen.off}
-          />
-        </div>
+          {withFooter ? (
+            <div
+              className={cnMixFlex({
+                justify: 'flex-end',
+              })}
+            >
+              <Button
+                size="m"
+                view="primary"
+                label="Закрыть"
+                width="default"
+                onClick={setOpen.off}
+              />
+            </div>
+          ) : undefined}
+        </ModalLayout>
       </Modal>
     </div>
   );

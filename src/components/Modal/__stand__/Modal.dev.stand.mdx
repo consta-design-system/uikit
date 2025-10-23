@@ -5,8 +5,10 @@ import {
   ModalExampleCenter,
   ModalExampleNoOverlay,
 } from './examples/ModalExample/ModalExample';
-
+import { ModalLayoutExample } from './examples/ModalLayoutExample/ModalLayoutExample';
 import { ModalExampleZIndex } from './examples/ModalExampleZIndex/ModalExampleZIndex';
+import { ModalHeaderExample } from './examples/ModalHeaderExample/ModalHeaderExample';
+import { ModalExampleFullScreen } from './examples/ModalExampleFullScreen/ModalExampleFullScreen';
 
 <MdxMenu>
 
@@ -17,9 +19,18 @@ import { ModalExampleZIndex } from './examples/ModalExampleZIndex/ModalExampleZI
 - [Внешний вид](#внешний-вид)
   - [Расположение](#расположение)
   - [Подложка](#подложка)
+  - [Отступы и размеры](#отступы-и-размеры)
 - [Поведение](#поведение)
   - [Взаимодействие](#взаимодействие)
 - [zIndex и вложенные всплывающие окна](#zindex-и-вложенные-всплывающие-окна)
+- [ModalLayout](#modallayout)
+  - [Импорт](#импорт-modallayout)
+  - [Свойства](#свойства-modallayout)
+  - [Пример использования](#пример-использования-modallayout)
+- [ModalHeader](#modalheader)
+  - [Импорт](#импорт-modalheader)
+  - [Свойства](#свойства-modalheader)
+  - [Пример использования](#пример-использования-modalheader)
 
 </MdxMenu>
 
@@ -35,20 +46,21 @@ import { Modal } from '@consta/uikit/Modal';
 
 ## Свойства
 
-| Свойство                             | Тип или варианты значения       | По умолчанию           | Описание                                                    |
-| ------------------------------------ | ------------------------------- | ---------------------- | ----------------------------------------------------------- |
-| [`children?`](#содержимое)           | `React.ReactNode`               | -                      | Дочерние элементы, отображаемые внутри модального окна      |
-| [`position?`](#расположение)         | `'center' \| 'top'`             | `'center'`             | Расположение модального окна на странице                    |
-| [`hasOverlay?`](#подложка)           | `boolean`                       | `true`                 | Добавляет полупрозрачную подложку вокруг модального окна    |
-| [`onClickOutside?`](#взаимодействие) | `(e: React.MouseEvent) => void` | -                      | Действие при клике за пределами модального окна             |
-| [`onEsc?`](#взаимодействие)          | `(e: KeyboardEvent) => void`    | -                      | Действие при нажатии клавиши **Escape**                     |
-| [`onOpen?`](#взаимодействие)         | `() => void`                    | -                      | Действие при открытии модального окна                       |
-| [`onClose?`](#взаимодействие)        | `() => void`                    | -                      | Действие в момент начала анимации закрытия модального окна  |
-| [`afterClose?`](#взаимодействие)     | `() => void`                    | -                      | Действие после завершения анимации закрытия модального окна |
-| `isOpen?`                            | `boolean`                       | -                      | Открывает или закрывает модальное окно                      |
-| `container?`                         | `HTMLDivElement \| undefined`   | `window.document.body` | Родительский контейнер для модального окна                  |
-| `className?`                         | `string`                        | -                      | Дополнительный CSS-класс для модального окна                |
-| `rootClassName?`                     | `string`                        | -                      | Дополнительный CSS-класс для корневого DOM-элемента         |
+| Свойство                             | Тип или варианты значения                     | По умолчанию           | Описание                                                    |
+| ------------------------------------ | --------------------------------------------- | ---------------------- | ----------------------------------------------------------- |
+| [`children?`](#содержимое)           | `React.ReactNode`                             | -                      | Дочерние элементы, отображаемые внутри модального окна      |
+| [`position?`](#расположение)         | `'center' \| 'top'`                           | `'center'`             | Расположение модального окна на странице                    |
+| [`hasOverlay?`](#подложка)           | `boolean`                                     | `true`                 | Добавляет полупрозрачную подложку вокруг модального окна    |
+| [`onClickOutside?`](#взаимодействие) | `(e: React.MouseEvent) => void`               | -                      | Действие при клике за пределами модального окна             |
+| [`onEsc?`](#взаимодействие)          | `(e: KeyboardEvent) => void`                  | -                      | Действие при нажатии клавиши **Escape**                     |
+| [`onOpen?`](#взаимодействие)         | `() => void`                                  | -                      | Действие при открытии модального окна                       |
+| [`onClose?`](#взаимодействие)        | `() => void`                                  | -                      | Действие в момент начала анимации закрытия модального окна  |
+| [`afterClose?`](#взаимодействие)     | `() => void`                                  | -                      | Действие после завершения анимации закрытия модального окна |
+| `isOpen?`                            | `boolean`                                     | -                      | Открывает или закрывает модальное окно                      |
+| `border?`                            | `boolean`                                     | -                      | Добавляет обводку                                           |
+| `container?`                         | `HTMLElement \| React.RefObject<HTMLElement>` | `window.document.body` | Родительский контейнер для модального окна                  |
+| `className?`                         | `string`                                      | -                      | Дополнительный CSS-класс для модального окна                |
+| `rootClassName?`                     | `string`                                      | -                      | Дополнительный CSS-класс для корневого DOM-элемента         |
 
 ## Содержимое
 
@@ -256,6 +268,60 @@ return (
 
 </MdxTabs>
 
+### Отступы и размеры
+
+Модальное окно не имеет фиксированных размеров но и не может быть больше контейнера в котором он рендерится. По умолчанию модальное окно имеет отступы от родительного контейнера `5vh` по вертикали и `5vw` по горизонтали. Отступы можно изменить с помощью css переменной `--modal-window-offset-prop`.
+
+Пример с раскрытием модального окна во весь экран:
+
+<MdxTabs>
+
+<ModalExampleFullScreen />
+
+```tsx
+const ModalExampleFullScreen = () => {
+  const [open, setOpen] = useFlag();
+
+  return (
+    <>
+      <Example>
+        <Button label="Открыть модальное окно" onClick={setOpen.on} />
+      </Example>
+      <Modal
+        rootClassName={cnModalExampleFullScreen('Wrapper')}
+        className={cnModalExampleFullScreen('Modal')}
+        isOpen={open}
+        hasOverlay={false}
+        onClickOutside={setOpen.off}
+        onEsc={setOpen.off}
+      >
+        <ModalLayout space={{ p: 'm' }} border={[true, false]}>
+          <ModalHeader onClose={setOpen.off}>
+            Заголовок модального окна
+          </ModalHeader>
+          <Text>Содержимое модального окна</Text>
+        </ModalLayout>
+      </Modal>
+    </>
+  );
+};
+```
+
+```css
+.ModalExampleFullScreen {
+  &-Wrapper {
+    --modal-window-offset-prop: 0px;
+    z-index: 5000;
+  }
+  &-Modal {
+    width: 100%;
+    height: 100%;
+  }
+}
+```
+
+</MdxTabs>
+
 ## Поведение
 
 ### Взаимодействие
@@ -345,6 +411,102 @@ return (
     </>
   </>
 );
+```
+
+</MdxTabs>
+
+# ModalLayout
+
+Компонент для разметки содержимого модального окна.
+
+## Импорт ModalLayout
+
+```tsx
+import { ModalLayout } from '@consta/uikit/ModalLayout';
+```
+
+## Свойства ModalLayout
+
+| Свойство     | Тип или варианты значения                         | По умолчанию | Описание                                                                                |
+| ------------ | ------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------- |
+| `children?`  | `React.ReactNode`                                 | -            | Содержимое, отображаемое модального окна, крайние ноды воспринимаются как шапка и футер |
+| `fixed`      | `boolean \| [boolean, boolean]`                   | -            | Фиксирует шапку и(или) футер в верхней или нижней части модального окна соответственно  |
+| `border?`    | `boolean \| [boolean, boolean]`                   | -            | Отображает границы между секций модального окна                                         |
+| `space?`     | `MixSpaceProps \| (MixSpaceProps \| undefined)[]` | -            | Отступы для всех секций модального окна                                                 |
+| `className?` | `string`                                          | -            | Дополнительный CSS-класс для модального окна                                            |
+
+## Пример использования ModalLayout
+
+<MdxTabs>
+
+<ModalLayoutExample />
+
+```tsx
+<Modal isOpen hasOverlay={false} style={{ height: 250, width: 400 }} border>
+  <ModalLayout space={{ p: 'm' }} border fixed>
+    {/* Шапка */}
+    Это заголовок модального окна
+    {/* Тело */}
+    <Text as="p" size="m" view="primary" lineHeight="m">
+      Это содержимое модального окна. Здесь может быть что угодно: текст,
+      изображение, форма или таблица. Всё, что хочется вынести из контекста и
+      показать поверх основной страницы.
+    </Text>
+    {/* Футер */}
+    <div
+      className={cnMixFlex({
+        gap: 'xs',
+        justify: 'flex-end',
+      })}
+    >
+      <Button size="m" view="primary" label="Кнопка" width="default" />
+    </div>
+  </ModalLayout>
+</Modal>
+```
+
+</MdxTabs>
+
+# ModalHeader
+
+Компонент для разметки шапки модального окна.
+
+## Импорт ModalHeader
+
+```tsx
+import { ModalHeader } from '@consta/uikit/ModalHeader';
+```
+
+## Свойства ModalHeader
+
+| Свойство     | Тип или варианты значения                                   | По умолчанию   | Описание                                           |
+| ------------ | ----------------------------------------------------------- | -------------- | -------------------------------------------------- |
+| `children`?  | `ReactNode`                                                 | -              | Текст заголовка модального окна                    |
+| `className?` | `string`                                                    | -              | Дополнительный CSS-класс для шапки модального окна |
+| `icon?`      | `IconComponent`                                             | -              | Иконка, отображаемая в заголовке                   |
+| `onClose?`   | `() => void`                                                | -              | Обработчик события закрытия модального окна        |
+| `direction?` | `'vertical' \| 'horizontal'`                                | `'horizontal'` | Направление расположения элементов                 |
+| `size?`      | `'s' \| 'm' \| 'l' \| 'xs'`                                 | -              | Размер текста заголовка                            |
+| `status?`    | `'success' \| 'system' \| 'normal' \| 'warning' \| 'alert'` | -              | Статус иконки                                      |
+| `ref?`       | `Ref<HTMLDivElement>`                                       | -              | Ref для доступа к DOM элементу                     |
+
+## Пример использования ModalHeader
+
+<MdxTabs>
+
+<ModalHeaderExample />
+
+```tsx
+<Modal style={{ width: 400 }} hasOverlay={false} isOpen border>
+  <ModalLayout space={{ p: 'm' }} border={[true, false]}>
+    <ModalHeader onClose={() => {}} icon={IconAllDone} status="success">
+      Это заголовок модального окна
+    </ModalHeader>
+    Это содержимое модального окна. Здесь может быть что угодно: текст, изображение,
+    форма или таблица. Всё, что хочется вынести из контекста и показать поверх основной
+    страницы.
+  </ModalLayout>
+</Modal>
 ```
 
 </MdxTabs>

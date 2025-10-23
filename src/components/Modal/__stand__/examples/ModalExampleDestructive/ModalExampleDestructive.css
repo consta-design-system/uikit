@@ -1,0 +1,18 @@
+.ModalExampleDestructive {
+  &-Modal {
+    width: 400px;
+  }
+
+  &-Footer {
+    background: var(--color-bg-secondary);
+  }
+
+  &-List {
+    & li {
+      list-style: inside;
+      list-style-type: disc;
+
+      /* padding: 0; */
+    }
+  }
+}
