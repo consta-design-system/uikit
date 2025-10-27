@@ -32,8 +32,6 @@ const Variants = () => {
   const fixedFooter = useBoolean('fixedFooter', false, withFooter);
   const border = useBoolean('border');
 
-  console.log('Sidebar variants');
-
   return (
     <div className={cnSidebarVariants()}>
       <Button

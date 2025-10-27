@@ -6,6 +6,7 @@
   bottom: 0;
   display: flex;
   overflow: hidden;
+  box-sizing: border-box;
 
   &:not(.Sidebar_hasOverlay) {
     pointer-events: none;
@@ -61,6 +62,8 @@
     position: absolute;
     display: flex;
     flex-direction: column;
+    max-width: 100%;
+    max-height: 100%;
     background-color: var(--color-bg-default);
     box-shadow: var(--sidebar-modal-shadow);
     pointer-events: auto;
@@ -98,10 +101,6 @@
         border-bottom: var(--sidebar-border);
       }
     }
-
-    /* &_scrollable {
-      height: 100%;
-    } */
 
     &_size {
       &_s {
@@ -144,21 +143,22 @@
     &_animate {
       &_exited,
       &_exiting {
+        --sidebar-modal-shadow: 0 0 0 transparent, 0 0 0 transparent;
         transform: var(--sidebar-transform);
-        --sidebar-modal-shadow: 0 0px 0px transparent, 0 0px 0px transparent;
       }
 
       &_entered,
       &_entering {
-        transform: translate3d(0, 0, 0);
         --sidebar-modal-shadow: var(--shadow-modal);
+        transform: translate3d(0, 0, 0);
       }
 
       &_exited,
       &_entered,
       &_entering,
       &_exiting {
-        transition: transform var(--sidebar-animate-timeout),
+        transition:
+          transform var(--sidebar-animate-timeout),
           box-shadow var(--sidebar-animate-timeout) ease-in;
       }
     }
@@ -172,19 +172,14 @@
 
   &-Scroll {
     display: flex;
-    flex-direction: column;
     overflow: auto;
-    height: 100%;
+    flex-direction: column;
     flex: 1;
+    height: 100%;
   }
 
   &-Actions {
     flex-shrink: 0;
     border-top: 1px solid var(--color-bg-border);
-  }
-
-  &-Scroll {
-    overflow: auto;
-    height: 100%;
   }
 }

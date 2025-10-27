@@ -10,6 +10,7 @@ import {
 } from '##/components/PortalWithTheme';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
+import { withCtx } from '##/utils/state';
 
 import {
   SidebarActionsProps,
@@ -44,8 +45,8 @@ const SidebarActions: React.FC<SidebarActionsProps> = ({
   </div>
 );
 
-export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
-  (props, ref) => {
+export const Sidebar = withCtx(
+  forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
     const {
       isOpen,
       onClose,
@@ -103,7 +104,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
             container={container}
             className={cnSidebar({ position, hasOverlay }, [rootClassName])}
             style={{
-              ...(style?.zIndex === 'number' && {
+              ...(style?.zIndex && {
                 zIndex: style.zIndex,
               }),
               ['--sidebar-animate-timeout' as string]: `${animateTimeout}ms`,
@@ -114,6 +115,10 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
               ...(shadowFooter && {
                 ['--modal-layout-footer-color-shadow' as string]:
                   'var(--color-shadow-group-2)',
+              }),
+              ...(style?.zIndex && {
+                ['--modal-layout-z-index-for-fixed-slot' as string]:
+                  style.zIndex,
               }),
             }}
           >
@@ -131,7 +136,13 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
               }}
               className={cnSidebar(
                 'Window',
-                { size, position, animate, scrollable, border },
+                {
+                  size,
+                  position,
+                  animate,
+                  scrollable,
+                  border,
+                },
                 [className],
               )}
               ref={windowRef}
@@ -154,7 +165,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
         )}
       </Transition>
     );
-  },
+  }),
 ) as SidebarComponent;
 /**
  * @deprecated use actions

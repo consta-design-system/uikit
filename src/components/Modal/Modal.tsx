@@ -88,6 +88,10 @@ export const Modal = withCtx(
                 ['--modal-layout-footer-color-shadow' as string]:
                   'var(--color-shadow-group-2)',
               }),
+              ...(style?.zIndex && {
+                ['--modal-layout-z-index-for-fixed-slot' as string]:
+                  style.zIndex,
+              }),
             }}
           >
             {hasOverlay && (

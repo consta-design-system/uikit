@@ -2,7 +2,7 @@ import { AsTagAttribute } from '##/utils/types/AsTags';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
-type SidebarPropPosition = typeof sidebarPropPosition[number];
+export type SidebarPropPosition = typeof sidebarPropPosition[number];
 
 export const sidebarPropSize = [
   's',
@@ -22,7 +22,6 @@ export type SidebarPropSize = typeof sidebarPropSize[number];
 export type SidebarProps = PropsWithHTMLAttributes<
   {
     isOpen?: boolean;
-    border?: boolean;
     onClose?: () => void;
     onOpen?: () => void;
     hasOverlay?: boolean;
@@ -35,6 +34,7 @@ export type SidebarProps = PropsWithHTMLAttributes<
     container?: HTMLDivElement | React.RefObject<HTMLDivElement>;
     afterClose?: () => void;
     ignoreOutsideClicksRefs?: React.RefObject<HTMLElement>[];
+    border?: boolean;
   },
   HTMLDivElement
 >;

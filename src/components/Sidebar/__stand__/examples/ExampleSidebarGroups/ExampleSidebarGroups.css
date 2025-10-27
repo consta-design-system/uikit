@@ -1,0 +1,31 @@
+.ExampleSidebarGroups {
+  height: 460px;
+
+  &-Prop {
+    display: flex;
+  }
+
+  &-PropLabel {
+    display: flex;
+    flex: 1;
+  }
+
+  &-PropValue {
+    flex: 1;
+  }
+
+  &-PropSeparator {
+    flex: 1;
+
+    &::before {
+      content: ' ';
+      display: inline-block;
+      width: 100%;
+      border-bottom: 1px dotted var(--color-typo-secondary);
+    }
+  }
+}
+
+.stand--Example-Node:has(.ExampleSidebarGroups) {
+  padding: 0;
+}
