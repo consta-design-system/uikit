@@ -99,6 +99,10 @@
       }
     }
 
+    /* &_scrollable {
+      height: 100%;
+    } */
+
     &_size {
       &_s {
         --sidebar-size: 260px;
