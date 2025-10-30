@@ -202,27 +202,25 @@ type AutoCompleteGroupDefault = {
 <AutoCompleteExampleGroups />
 
 ```tsx
-<>
-  <AutoComplete
-    type="text"
-    placeholder="Начните вводить цвет"
-    value={value}
-    items={[
-      { label: 'Чёрный', groupId: 1, id: 1 },
-      { label: 'Белый', groupId: 1, id: 2 },
-      { label: 'Синий', groupId: 1, id: 3 },
-      { label: 'Красный', groupId: 1, id: 4 },
-      { label: 'Сине-зелёный', groupId: 2, id: 5 },
-      { label: 'Красно-коричневый', groupId: 2, id: 6 },
-    ]}
-    groups={[
-      { id: 1, label: 'Первая группа' },
-      { id: 2, label: 'Вторая группа' },
-      { id: 3, label: 'Третья группа' },
-    ]}
-    onChange={setValue}
-  />
-</>
+<AutoComplete
+  type="text"
+  placeholder="Начните вводить цвет"
+  value={value}
+  items={[
+    { label: 'Чёрный', groupId: 1, id: 1 },
+    { label: 'Белый', groupId: 1, id: 2 },
+    { label: 'Синий', groupId: 1, id: 3 },
+    { label: 'Красный', groupId: 1, id: 4 },
+    { label: 'Сине-зелёный', groupId: 2, id: 5 },
+    { label: 'Красно-коричневый', groupId: 2, id: 6 },
+  ]}
+  groups={[
+    { id: 1, label: 'Первая группа' },
+    { id: 2, label: 'Вторая группа' },
+    { id: 3, label: 'Третья группа' },
+  ]}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -251,19 +249,17 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExamplePlaceholder />
 
 ```tsx
-<>
-  <AutoComplete
-    type="text"
-    placeholder="Введите значение"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-  />
-</>
+<AutoComplete
+  type="text"
+  placeholder="Введите значение"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -285,20 +281,18 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleType />
 
 ```tsx
-<>
-  <AutoComplete
-    type="textarray"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    inputValue={inputValue}
-    onInputChange={setInputValue}
-    onChange={handleChange}
-  />
-</>
+<AutoComplete
+  type="textarray"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  inputValue={inputValue}
+  onInputChange={setInputValue}
+  onChange={handleChange}
+/>
 ```
 
 </MdxTabs>
@@ -308,14 +302,12 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleTypeEmail />
 
 ```tsx
-<>
-  <AutoComplete
-    type="email"
-    value={value}
-    items={getMailItems(value)}
-    onChange={setValue}
-  />
-</>
+<AutoComplete
+  type="email"
+  value={value}
+  items={getMailItems(value)}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -336,56 +328,54 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleSize />
 
 ```tsx
-<>
-  <AutoComplete
-    type="text"
-    size="xs"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-    placeholder="Начните вводить текст"
-  />
-  <AutoComplete
-    type="text"
-    size="s"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-    placeholder="Начните вводить текст"
-  />
-  <AutoComplete
-    type="text"
-    size="m"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-    placeholder="Начните вводить текст"
-  />
-  <AutoComplete
-    type="text"
-    size="l"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-    placeholder="Начните вводить текст"
-  />
-</>
+<AutoComplete
+  type="text"
+  size="xs"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+  placeholder="Начните вводить текст"
+/>
+<AutoComplete
+  type="text"
+  size="s"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+  placeholder="Начните вводить текст"
+/>
+<AutoComplete
+  type="text"
+  size="m"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+  placeholder="Начните вводить текст"
+/>
+<AutoComplete
+  type="text"
+  size="l"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+  placeholder="Начните вводить текст"
+/>
 ```
 
 </MdxTabs>
@@ -414,32 +404,30 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleForm />
 
 ```tsx
-<>
-  <AutoComplete
-    type="text"
-    placeholder="Форма round"
-    form="round"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-  />
-  <AutoComplete
-    type="text"
-    placeholder="Форма defaultBrick"
-    form="defaultBrick"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-  />
-</>
+<AutoComplete
+  type="text"
+  placeholder="Форма round"
+  form="round"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+/>
+<AutoComplete
+  type="text"
+  placeholder="Форма defaultBrick"
+  form="defaultBrick"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -457,32 +445,30 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleDropdownForm />
 
 ```tsx
-<>
-  <AutoComplete
-    type="text"
-    placeholder="Форма списка round"
-    dropdownForm="round"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-  />
-  <AutoComplete
-    type="text"
-    placeholder="Форма списка brick"
-    dropdownForm="brick"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-  />
-</>
+<AutoComplete
+  type="text"
+  placeholder="Форма списка round"
+  dropdownForm="round"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+/>
+<AutoComplete
+  type="text"
+  placeholder="Форма списка brick"
+  dropdownForm="brick"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -500,41 +486,39 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleStatus />
 
 ```tsx
-<>
-  <AutoComplete
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    status="alert"
-    onChange={setValue}
-    placeholder="Начните вводить текст"
-  />
-  <AutoComplete
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    status="warning"
-    onChange={setValue}
-    placeholder="Начните вводить текст"
-  />
-  <AutoComplete
-    value={value}
-    items=[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    status="success"
-    onChange={setValue}
-    placeholder="Начните вводить текст"
-  />
-</>
+<AutoComplete
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  status="alert"
+  onChange={setValue}
+  placeholder="Начните вводить текст"
+/>
+<AutoComplete
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  status="warning"
+  onChange={setValue}
+  placeholder="Начните вводить текст"
+/>
+<AutoComplete
+  value={value}
+  items=[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  status="success"
+  onChange={setValue}
+  placeholder="Начните вводить текст"
+/>
 ```
 
 </MdxTabs>
@@ -556,35 +540,31 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleView />
 
 ```tsx
-<>
-  <AutoComplete
-    type="text"
-    value={value}
-    view="default"
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-  />
-  <AutoComplete
-    type="text"
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    view="clear"
-    onChange={setValue}
-  />
-</>
+<AutoComplete
+  type="text"
+  value={value}
+  view="default"
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+/>
+<AutoComplete
+  type="text"
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  view="clear"
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
-
----
 
 ## Поведение
 
@@ -597,21 +577,19 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleDisabled />
 
 ```tsx
-<>
-  <AutoComplete
-    type="text"
-    placeholder="Пример disabled"
-    form="round"
-    disabled
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    onChange={setValue}
-  />
-</>
+<AutoComplete
+  type="text"
+  placeholder="Пример disabled"
+  form="round"
+  disabled
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -625,27 +603,25 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleVirtualScroll />
 
 ```tsx
-<>
-  <AutoComplete
-    placeholder="Чтобы посмотреть весь список, прокрутите вниз"
-    items={new Array(100000).fill(null).map((_, i) => ({
-      label: `Опция ${i + 1}`,
-      groupId: Math.floor(i / 100) + 1,
-      id: i,
-    }))}
-    value={value}
-    onChange={setValue}
-    groups={new Array(1000).fill(null).map((_, i) => ({
-      id: i + 1,
-      label: `Группа ${i + 1}`,
-    }))}
-    virtualScroll
-    searchFunction={(item, searchValue) => {
-      if (!searchValue) return true;
-      return item.label.toLowerCase().includes(searchValue.toLowerCase());
-    }}
-  />
-</>
+<AutoComplete
+  placeholder="Чтобы посмотреть весь список, прокрутите вниз"
+  items={new Array(100000).fill(null).map((_, i) => ({
+    label: `Опция ${i + 1}`,
+    groupId: Math.floor(i / 100) + 1,
+    id: i,
+  }))}
+  value={value}
+  onChange={setValue}
+  groups={new Array(1000).fill(null).map((_, i) => ({
+    id: i + 1,
+    label: `Группа ${i + 1}`,
+  }))}
+  virtualScroll
+  searchFunction={(item, searchValue) => {
+    if (!searchValue) return true;
+    return item.label.toLowerCase().includes(searchValue.toLowerCase());
+  }}
+/>
 ```
 
 </MdxTabs>
@@ -659,21 +635,19 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleIsLoading />
 
 ```tsx
-<>
-  <AutoComplete
-    placeholder="Кликните по полю ввода, чтобы данные загрузились"
-    items={data}
-    value={value}
-    onChange={setValue}
-    onFocus={onFocus}
-    isLoading={isLoading}
-    virtualScroll
-    searchFunction={(item, searchValue) => {
-      if (!searchValue) return true;
-      return item.label.toLowerCase().includes(searchValue.toLowerCase());
-    }}
-  />
-</>
+<AutoComplete
+  placeholder="Кликните по полю ввода, чтобы данные загрузились"
+  items={data}
+  value={value}
+  onChange={setValue}
+  onFocus={onFocus}
+  isLoading={isLoading}
+  virtualScroll
+  searchFunction={(item, searchValue) => {
+    if (!searchValue) return true;
+    return item.label.toLowerCase().includes(searchValue.toLowerCase());
+  }}
+/>
 ```
 
 </MdxTabs>
@@ -685,19 +659,17 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleOnScrollBottom />
 
 ```tsx
-<>
-  <AutoComplete
-    placeholder="Кликните по полю ввода, чтобы данные загрузились"
-    items={data}
-    value={value}
-    onChange={setValue}
-    onFocus={onFocus}
-    isLoading={isLoading}
-    virtualScroll
-    onScrollToBottom={value ? undefined : onFocus}
-    searchFunction={() => true}
-  />
-</>
+<AutoComplete
+  placeholder="Кликните по полю ввода, чтобы данные загрузились"
+  items={data}
+  value={value}
+  onChange={setValue}
+  onFocus={onFocus}
+  isLoading={isLoading}
+  virtualScroll
+  onScrollToBottom={value ? undefined : onFocus}
+  searchFunction={() => true}
+/>
 ```
 
 </MdxTabs>
@@ -715,26 +687,24 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleDropdownOpen />
 
 ```tsx
-<>
-  <AutoComplete
-    inputRef={inputRef}
-    placeholder="Выберите вариант"
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    value={value}
-    onChange={setValue}
-    dropdownOpen={open}
-    onDropdownOpen={onDropdownOpen}
-    ignoreOutsideClicksRefs={[buttonRef]}
-    searchFunction={(item, searchValue) => {
-      if (!searchValue) return true;
-      return item.label.toLowerCase().includes(searchValue.toLowerCase());
-    }}
-  />
-</>
+<AutoComplete
+  inputRef={inputRef}
+  placeholder="Выберите вариант"
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  value={value}
+  onChange={setValue}
+  dropdownOpen={open}
+  onDropdownOpen={onDropdownOpen}
+  ignoreOutsideClicksRefs={[buttonRef]}
+  searchFunction={(item, searchValue) => {
+    if (!searchValue) return true;
+    return item.label.toLowerCase().includes(searchValue.toLowerCase());
+  }}
+/>
 ```
 
 </MdxTabs>
@@ -757,30 +727,28 @@ searchFunction={(item, searchValue) =>
 <AutoCompleteExampleRenderItem />
 
 ```tsx
-<>
-  <AutoComplete
-    value={value}
-    items={[
-      { label: 'Первый', id: 1 },
-      { label: 'Второй', id: 2 },
-      { label: 'Третий', id: 3 },
-    ]}
-    renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
-      <div
-        className={cnAutoCompleteExampleRenderItem('Item', { active, hovered })}
-        role="option"
-        aria-selected={active}
-        aria-hidden="true"
-        onMouseEnter={onMouseEnter}
-        onClick={onClick}
-        ref={ref}
-      >
-        {item.label}
-      </div>
-    )}
-    onChange={setValue}
-  />
-</>
+<AutoComplete
+  value={value}
+  items={[
+    { label: 'Первый', id: 1 },
+    { label: 'Второй', id: 2 },
+    { label: 'Третий', id: 3 },
+  ]}
+  renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
+    <div
+      className={cnAutoCompleteExampleRenderItem('Item', { active, hovered })}
+      role="option"
+      aria-selected={active}
+      aria-hidden="true"
+      onMouseEnter={onMouseEnter}
+      onClick={onClick}
+      ref={ref}
+    >
+      {item.label}
+    </div>
+  )}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>

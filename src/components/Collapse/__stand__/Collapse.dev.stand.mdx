@@ -86,20 +86,18 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleLabel />
 
 ```tsx
-<>
-  <Collapse
-    label={
-      <>
-        Заголовок
-        <Badge label="Статус" size="s" />
-      </>
-    }
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label={
+    <>
+      Заголовок
+      <Badge label="Статус" size="s" />
+    </>
+  }
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>
@@ -113,19 +111,17 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleIconRightSideBadge />
 
 ```tsx
-<>
-  <Collapse
-    label="Здесь справа что-то есть"
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-    rightSide={[
-      <Badge label="Badge" status="success" />,
-      <IconAlert size="s" view="warning" />,
-    ]}
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label="Здесь справа что-то есть"
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+  rightSide={[
+    <Badge label="Badge" status="success" />,
+    <IconAlert size="s" view="warning" />,
+  ]}
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>
@@ -135,26 +131,24 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleIconRightSideButton />
 
 ```tsx
-<>
-  <Collapse
-    label="А здесь вообще справа настройки"
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-    rightSide={
-      <Button
-        iconLeft={IconSettings}
-        size="xs"
-        view="ghost"
-        onClick={(e) => {
-          e.stopPropagation();
-          alert('Button Click');
-        }}
-      />
-    }
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label="А здесь вообще справа настройки"
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+  rightSide={
+    <Button
+      iconLeft={IconSettings}
+      size="xs"
+      view="ghost"
+      onClick={(e) => {
+        e.stopPropagation();
+        alert('Button Click');
+      }}
+    />
+  }
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>
@@ -174,38 +168,36 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleForm />
 
 ```tsx
-<>
-  <Collapse
-    label="Brick"
-    form="brick"
-    hoverEffect
-    horizontalSpace="m"
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-  >
-    {content}
-  </Collapse>
-  <Collapse
-    label="Default"
-    form="default"
-    hoverEffect
-    horizontalSpace="m"
-    isOpen={isOpenTwo}
-    onClick={() => setOpenTwo(!isOpenTwo)}
-  >
-    {content}
-  </Collapse>
-  <Collapse
-    label="Round"
-    form="round"
-    horizontalSpace="m"
-    hoverEffect
-    isOpen={isOpenThree}
-    onClick={() => setIsOpenThree(!isOpenThree)}
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label="Brick"
+  form="brick"
+  hoverEffect
+  horizontalSpace="m"
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+>
+  {content}
+</Collapse>
+<Collapse
+  label="Default"
+  form="default"
+  hoverEffect
+  horizontalSpace="m"
+  isOpen={isOpenTwo}
+  onClick={() => setOpenTwo(!isOpenTwo)}
+>
+  {content}
+</Collapse>
+<Collapse
+  label="Round"
+  form="round"
+  horizontalSpace="m"
+  hoverEffect
+  isOpen={isOpenThree}
+  onClick={() => setIsOpenThree(!isOpenThree)}
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>
@@ -219,16 +211,14 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleSize />
 
 ```tsx
-<>
-  <Collapse
-    label="Самый большой коллапс"
-    size="l"
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label="Самый большой коллапс"
+  size="l"
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>
@@ -242,16 +232,14 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleHover />
 
 ```tsx
-<>
-  <Collapse
-    label="Здесь есть подсветка"
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-    hoverEffect
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label="Здесь есть подсветка"
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+  hoverEffect
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>
@@ -265,16 +253,14 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleIconDivider />
 
 ```tsx
-<>
-  <Collapse
-    label="Здесь есть разделитель"
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-    divider
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label="Здесь есть разделитель"
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+  divider
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>
@@ -302,17 +288,15 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleIconCustomIcon />
 
 ```tsx
-<>
-  <Collapse
-    label="Здесь меняется иконка"
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-    icon={IconAdd}
-    closeIcon={IconRemove}
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label="Здесь меняется иконка"
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+  icon={IconAdd}
+  closeIcon={IconRemove}
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>
@@ -326,24 +310,22 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleIconPosition />
 
 ```tsx
-<>
-  <Collapse
-    label="Иконка слева"
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-    iconPosition="left"
-  >
-    {content}
-  </Collapse>
-  <Collapse
-    label="Иконка справа"
-    isOpen={isOpenTwo}
-    onClick={() => setOpenTwo(!isOpenTwo)}
-    iconPosition="right"
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label="Иконка слева"
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+  iconPosition="left"
+>
+  {content}
+</Collapse>
+<Collapse
+  label="Иконка справа"
+  isOpen={isOpenTwo}
+  onClick={() => setOpenTwo(!isOpenTwo)}
+  iconPosition="right"
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>
@@ -357,18 +339,16 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleIconCustomIconDirection />
 
 ```tsx
-<>
-  <Collapse
-    label="Здесь у иконки меняется направление"
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-    icon={IconAdd}
-    directionIcon="up"
-    closeDirectionIcon="downRight"
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label="Здесь у иконки меняется направление"
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+  icon={IconAdd}
+  directionIcon="up"
+  closeDirectionIcon="downRight"
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>
@@ -382,17 +362,15 @@ import { Collapse } from '@consta/uikit/Collapse';
 <CollapseExampleSpace />
 
 ```tsx
-<>
-  <Collapse
-    label="Отступы 6xl"
-    horizontalSpace="6xl"
-    isOpen={isOpen}
-    onClick={() => setOpen(!isOpen)}
-    hoverEffect
-  >
-    {content}
-  </Collapse>
-</>
+<Collapse
+  label="Отступы 6xl"
+  horizontalSpace="6xl"
+  isOpen={isOpen}
+  onClick={() => setOpen(!isOpen)}
+  hoverEffect
+>
+  {content}
+</Collapse>
 ```
 
 </MdxTabs>

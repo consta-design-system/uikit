@@ -113,25 +113,23 @@ const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (
 <CollapseGroupExampleSimple2 />
 
 ```tsx
-<>
-  <CollapseGroup items={[
-    {
-      label: 'Пункт раз',
-      content: 'Содержимое блока раз',
-      rightSide: 'Я справа',
-    },
-    {
-      label: 'Пункт два',
-      content: 'Содержимое блока два',
-      rightSide: 'Я тоже справа',
-    },
-    {
-      label: 'Пункт три',
-      content: 'Содержимое блока три',
- .     rightSide: 'И я :)',
-    },
-  ]} />
-</>
+<CollapseGroup items={[
+  {
+    label: 'Пункт раз',
+    content: 'Содержимое блока раз',
+    rightSide: 'Я справа',
+  },
+  {
+    label: 'Пункт два',
+    content: 'Содержимое блока два',
+    rightSide: 'Я тоже справа',
+  },
+  {
+    label: 'Пункт три',
+    content: 'Содержимое блока три',
+.     rightSide: 'И я :)',
+  },
+]} />
 ```
 
 </MdxTabs>
@@ -145,33 +143,31 @@ const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (
 <CollapseGroupExampleOwnType />
 
 ```tsx
-<>
-  <CollapseGroup
-    items={[
-      {
-        title: 'Во-первых',
-        text: 'Здесь ошибка. Кажется, с этим пунктом что-то не так: например, пользователь неправильно заполнил форму или не ответил на какой-то вопрос.',
-        status: 'error',
-      },
-      {
-        title: 'Во-вторых',
-        text: 'Здесь всё в порядке. Скорее всего, здесь всё сделано и можно больше не открывать.',
-        status: 'success',
-      },
- }^0-2
-      {
-        title: 'В-третьих',
-        text: 'Это не пройдено. Нужно открыть и посмотреть, что здесь нужно прочитать, посмотреть или заполнить.',
-        status: 'system',
-      },
-    ]}
-    getItemLabel={(item) => item.title}
-    getItemContent={(item) => item.text}
-    getItemRightSide={(item) => (
-      <Badge size="s" status={item.status} label={item.status} />
-    )}
-  />
-</>
+<CollapseGroup
+  items={[
+    {
+      title: 'Во-первых',
+      text: 'Здесь ошибка. Кажется, с этим пунктом что-то не так: например, пользователь неправильно заполнил форму или не ответил на какой-то вопрос.',
+      status: 'error',
+    },
+    {
+      title: 'Во-вторых',
+      text: 'Здесь всё в порядке. Скорее всего, здесь всё сделано и можно больше не открывать.',
+      status: 'success',
+    },
+}^0-2
+    {
+      title: 'В-третьих',
+      text: 'Это не пройдено. Нужно открыть и посмотреть, что здесь нужно прочитать, посмотреть или заполнить.',
+      status: 'system',
+    },
+  ]}
+  getItemLabel={(item) => item.title}
+  getItemContent={(item) => item.text}
+  getItemRightSide={(item) => (
+    <Badge size="s" status={item.status} label={item.status} />
+  )}
+/>
 ```
 
 </MdxTabs>
@@ -211,27 +207,25 @@ const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (
 <CollapseGroupExampleSimple />
 
 ```tsx
-<>
-  <CollapseGroup
-    items={[
-      {
-        label: 'Пункт раз',
-        content: 'Содержимое блока раз',
-        rightSide: 'Я справа',
-      },
-      {
-        label: 'Пункт два',
-        content: 'Содержимое блока два',
-        rightSide: 'Я тоже справа',
-      },
-      {
-        label: 'Пункт три',
-        content: 'Содержимое блока три',
-        rightSide: 'И я :)',
-      },
-    ]}
-  />
-</>
+<CollapseGroup
+  items={[
+    {
+      label: 'Пункт раз',
+      content: 'Содержимое блока раз',
+      rightSide: 'Я справа',
+    },
+    {
+      label: 'Пункт два',
+      content: 'Содержимое блока два',
+      rightSide: 'Я тоже справа',
+    },
+    {
+      label: 'Пункт три',
+      content: 'Содержимое блока три',
+      rightSide: 'И я :)',
+    },
+  ]}
+/>
 ```
 
 </MdxTabs>
@@ -245,25 +239,23 @@ const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (
 <CollapseGroupExampleIsAccordion />
 
 ```tsx
-<>
-  <CollapseGroup
-    isAccordion
-    items={[
-      {
-        label: 'Пункт раз',
-        content: 'Содержимое блока раз',
-      },
-      {
-        label: 'Пункт два',
-        content: 'Содержимое блока два',
-      },
-      {
-        label: 'Пункт три',
-        content: 'Содержимое блока три',
-      },
-    ]}
-  />
-</>
+<CollapseGroup
+  isAccordion
+  items={[
+    {
+      label: 'Пункт раз',
+      content: 'Содержимое блока раз',
+    },
+    {
+      label: 'Пункт два',
+      content: 'Содержимое блока два',
+    },
+    {
+      label: 'Пункт три',
+      content: 'Содержимое блока три',
+    },
+  ]}
+/>
 ```
 
 </MdxTabs>
@@ -277,26 +269,24 @@ const defaultGetItemRightSide: CollapseGroupPropGetItemContent<DefaultItem> = (
 <CollapseGroupExampleControl />
 
 ```tsx
-<>
-  <CollapseGroup
-    items={[
-      {
-        label: 'Пункт раз',
-        content: 'Содержимое блока раз',
-      },
-      {
-        label: 'Пункт два',
-        content: 'Содержимое блока два',
-      },
-      {
-        label: 'Пункт три',
-        content: 'Содержимое блока три',
-      },
-    ]}
-    opened={[0, 1, 2]}
-    onOpen={(params) => setOpened(params.value)}
-  />
-</>
+<CollapseGroup
+  items={[
+    {
+      label: 'Пункт раз',
+      content: 'Содержимое блока раз',
+    },
+    {
+      label: 'Пункт два',
+      content: 'Содержимое блока два',
+    },
+    {
+      label: 'Пункт три',
+      content: 'Содержимое блока три',
+    },
+  ]}
+  opened={[0, 1, 2]}
+  onOpen={(params) => setOpened(params.value)}
+/>
 ```
 
 </MdxTabs>

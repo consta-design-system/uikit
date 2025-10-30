@@ -69,36 +69,6 @@ import { AutoComplete } from '@consta/uikit/AutoComplete';
 
 ## Свойства
 
-```tsx
-type AutoCompleteItemDefault = {
-  id: string | number;
-  label: string;
-  groupId?: number;
-};
-
-type AutoCompleteGroupDefault = {
-  label: string;
-  id: number | string;
-};
-
-type AutoCompletePropDropdownForm = 'default' | 'brick' | 'round';
-
-type AutoCompletePropGetItemLabel<ITEM> = (item: ITEM) => string;
-type AutoCompletePropGetItemKey<ITEM> = (item: ITEM) => string | number;
-type AutoCompletePropGetItemGroupId<ITEM> = (item: ITEM) => number | undefined;
-type AutoCompletePropGetGroupLabel<GROUP> = (group: GROUP) => string;
-type AutoCompletePropGetGroupId<GROUP> = (group: GROUP) => number | string;
-
-type AutoCompletePropOnChange = (
-  value: string | null,
-  props: {
-    e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
-    id?: string;
-    name?: string;
-  },
-) => void;
-```
-
 | Свойство                                                                                                                        | Тип                                                                                                                                                                                       | По умолчанию             | Описание                                             |
 | ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | ---------------------------------------------------- |
 | [`items`](#подсказки)                                                                                                           | `ITEM[]`                                                                                                                                                                                  | -                        | Объект с подсказками, появляющимися при вводе текста |
@@ -149,6 +119,36 @@ type AutoCompletePropOnChange = (
 | `dropdownRef?`                                                                                                                  | `React.RefObject<HTMLDivElement>`                                                                                                                                                         | -                        | Ссылка на DOM-элемент списка                         |
 | [`virtualScroll?`](#виртуализация-списка)                                                                                       | `boolean`                                                                                                                                                                                 | -                        | Включение виртуализации скролла                      |
 | `onScrollToBottom?`                                                                                                             | `() => void`                                                                                                                                                                              | -                        | Обработчик прокрутки до конца списка                 |
+
+```tsx
+type AutoCompleteItemDefault = {
+  id: string | number;
+  label: string;
+  groupId?: number;
+};
+
+type AutoCompleteGroupDefault = {
+  label: string;
+  id: number | string;
+};
+
+type AutoCompletePropDropdownForm = 'default' | 'brick' | 'round';
+
+type AutoCompletePropGetItemLabel<ITEM> = (item: ITEM) => string;
+type AutoCompletePropGetItemKey<ITEM> = (item: ITEM) => string | number;
+type AutoCompletePropGetItemGroupId<ITEM> = (item: ITEM) => number | undefined;
+type AutoCompletePropGetGroupLabel<GROUP> = (group: GROUP) => string;
+type AutoCompletePropGetGroupId<GROUP> = (group: GROUP) => number | string;
+
+type AutoCompletePropOnChange = (
+  value: string | null,
+  props: {
+    e: React.ChangeEvent | React.MouseEvent | React.KeyboardEvent;
+    id?: string;
+    name?: string;
+  },
+) => void;
+```
 
 ## Подсказки
 

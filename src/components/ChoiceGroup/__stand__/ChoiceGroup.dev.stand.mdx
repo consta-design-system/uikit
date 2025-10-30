@@ -182,45 +182,43 @@ export const ChoiceGroupExample = () => {
 <ChoiceGroupExampleIcon />
 
 ```tsx
-<>
-  <ChoiceGroup
-    items={[
-      {
-        label: 'Первый',
-        icon: IconPhoto,
-      },
-      {
-        label: 'Второй',
-        icon: IconRing,
-      },
-      {
-        label: 'Третий вариант',
-        icon: IconCamera,
-      },
-    ]}
-    name="ChoiceGroupExampleIcon"
-  />
-  <ChoiceGroup
-    items={[
-      {
-        name: 'Первый',
-        pictogram: IconPhoto,
-      },
-      {
-        name: 'Второй',
-        pictogram: IconRing,
-      },
-      {
-        name: 'Третий вариант',
-        pictogram: IconCamera,
-      },
-    ]}
-    getItemLabel={(item) => item.name}
-    getItemIcon={(item) => item.pictogram}
-    onlyIcon
-    name="ChoiceGroupExampleIcon"
-  />
-</>
+<ChoiceGroup
+  items={[
+    {
+      label: 'Первый',
+      icon: IconPhoto,
+    },
+    {
+      label: 'Второй',
+      icon: IconRing,
+    },
+    {
+      label: 'Третий вариант',
+      icon: IconCamera,
+    },
+  ]}
+  name="ChoiceGroupExampleIcon"
+/>
+<ChoiceGroup
+  items={[
+    {
+      name: 'Первый',
+      pictogram: IconPhoto,
+    },
+    {
+      name: 'Второй',
+      pictogram: IconRing,
+    },
+    {
+      name: 'Третий вариант',
+      pictogram: IconCamera,
+    },
+  ]}
+  getItemLabel={(item) => item.name}
+  getItemIcon={(item) => item.pictogram}
+  onlyIcon
+  name="ChoiceGroupExampleIcon"
+/>
 ```
 
 </MdxTabs>
