@@ -35,6 +35,7 @@ const RadioGroupRender = (
     align = radioGroupPropAlignDefault,
     disabled = false,
     className,
+    id,
     ...otherProps
   } = withDefaultGetters(props);
 

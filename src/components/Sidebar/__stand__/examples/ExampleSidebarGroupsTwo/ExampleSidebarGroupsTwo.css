@@ -1,0 +1,17 @@
+.ExampleSidebarGroupsTwo {
+  height: 460px;
+
+  &-Group {
+    &:not(&:last-child)&::after {
+      content: '';
+      display: block;
+      clear: both;
+      height: 1px;
+      background-color: var(--color-bg-border);
+    }
+  }
+}
+
+.stand--Example-Node:has(.ExampleSidebarGroupsTwo) {
+  padding: 0;
+}
