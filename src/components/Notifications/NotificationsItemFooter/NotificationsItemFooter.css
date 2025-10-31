@@ -1,0 +1,18 @@
+.NotificationsItemFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-3xl);
+  width: 100%;
+
+  &-Badges {
+    position: relative;
+    flex: 1;
+    width: calc(100% - var(--time-width));
+  }
+
+  &-Time {
+    flex: none;
+    white-space: nowrap;
+  }
+}

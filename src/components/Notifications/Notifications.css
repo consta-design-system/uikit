@@ -1,0 +1,15 @@
+.Notifications {
+  &-Popover {
+    --popover-bg-color: var(--color-bg-default);
+    --popover-arrow-bg-color: var(--popover-bg-color);
+    width: 90vw;
+    max-width: 450px;
+    background: var(--popover-bg-color);
+    border-radius: var(--control-radius);
+    box-shadow: var(--shadow-layer);
+  }
+
+  &-List {
+    height: 100%;
+  }
+}

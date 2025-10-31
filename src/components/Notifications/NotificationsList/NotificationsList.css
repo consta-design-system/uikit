@@ -1,0 +1,33 @@
+.NotificationsList {
+  display: flex;
+  flex-direction: column;
+
+  &-GroupLabel {
+    background: var(--color-bg-secondary);
+  }
+
+  &-Header {
+    display: flex;
+    flex: none;
+    align-items: center;
+    border-bottom: 1px solid var(--color-bg-border);
+  }
+
+  &-HeaderItem {
+    flex: none;
+    margin-right: var(--space-xs);
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:first-child {
+      flex: 1;
+    }
+  }
+
+  &-List {
+    overflow: auto;
+    height: 100%;
+  }
+}

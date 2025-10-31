@@ -1,0 +1,10 @@
+.NotificationsStories {
+  position: absolute;
+  top: var(--space-l);
+
+  &-List {
+    &_isDesktop {
+      height: 400px;
+    }
+  }
+}
