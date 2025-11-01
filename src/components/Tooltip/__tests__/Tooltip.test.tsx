@@ -13,9 +13,7 @@ const outsideTestId = 'outside';
 const getRender = () => screen.queryByTestId(testId);
 const getTooltipContent = () => screen.queryByTestId(tooltipContentTestId);
 
-type TestProps = TooltipProps;
-
-const renderComponent = ({ ...tooltipProps }: TestProps) => {
+const renderComponent = ({ ...tooltipProps }: TooltipProps) => {
   const ref = React.createRef<HTMLDivElement>();
   return render(
     <>
