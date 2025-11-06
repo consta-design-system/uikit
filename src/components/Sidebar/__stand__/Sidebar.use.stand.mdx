@@ -1,0 +1,573 @@
+import { MdxTabs, MdxImage } from '@consta/stand';
+import ParanjaImage from './examples/images/Paranja.jpg';
+
+import { ExampleSidebarOpenClose } from './examples/ExampleSidebarOpenClose/ExampleSidebarOpenClose';
+import { ExampleSidebarGroups } from './examples/ExampleSidebarGroups/ExampleSidebarGroups';
+import { ExampleSidebarGroupsTwo } from './examples/ExampleSidebarGroupsTwo/ExampleSidebarGroupsTwo';
+
+## Лучшие практики
+
+### Закрытие и сворачивание окна
+
+СайдБар может закрываться/ сворачиваться несколькими способами:
+
+- Кнопкой закрытия/ сворачивания в виде крестика в верхнем правом углу.
+- Кликом вне зоны сайд бара, по затеняющей подложке.
+
+Если вы используете сворачивание окна, то не забудьте показать в своем интерфейсе кнопку свернутого сайд бара, например, кнопка с иконкой. Такая кнопка должна быть легкодоступной и понятной, для большей наглядности используйте тултипы.
+
+<MdxTabs>
+
+<ExampleSidebarOpenClose />
+
+```tsx
+import { IconPanelLeft } from '@consta/icons/IconPanelLeft';
+import { IconPicture } from '@consta/icons/IconPicture';
+import { IconTree } from '@consta/icons/IconTree';
+import { IconType } from '@consta/icons/IconType';
+import React, { useRef } from 'react';
+
+import { Button } from '@consta/uikit/Button';
+import { ListItem } from '@consta/uikit/ListCanary';
+import { ModalLayout } from '@consta/uikit/Modal';
+import { Text } from '@consta/uikit/Text';
+import { useFlag } from '@consta/uikit/useFlag';
+import { cnMixFlex } from '@consta/uikit/MixFlex';
+import { cn } from '##/utils/bem';
+
+import { Sidebar } from '@consta/uikit/Sidebar';
+import { cnSidebarExampleStaticModal } from '../cnSidebarExampleStaticModal';
+
+const cnExampleSidebarOpenClose = cn('ExampleSidebarOpenClose');
+
+export const ExampleSidebarOpenClose = () => {
+  const [open, setOpen] = useFlag();
+  const ref = useRef<HTMLDivElement>(null);
+
+  return (
+    <>
+      <div ref={ref} className={cnExampleSidebarOpenClose()}>
+        <div
+          className={cnExampleSidebarOpenClose('LayersBar', {
+            visible: !open,
+          })}
+        >
+          <div
+            className={cnExampleSidebarOpenClose('LayersBarWrapper', [
+              cnMixFlex({
+                gap: 'xs',
+                justify: 'space-between',
+                align: 'center',
+              }),
+            ])}
+          >
+            <Text size="m" view="primary" weight="semibold">
+              Слои
+            </Text>
+            <Button
+              size="s"
+              view="ghost"
+              label="Показать боковые вкладки"
+              width="default"
+              onClick={setOpen.on}
+              onlyIcon
+              iconLeft={IconPanelLeft}
+            />
+          </div>
+        </div>
+      </div>
+      <Sidebar
+        className={cnExampleSidebarOpenClose('Window')}
+        rootClassName={cnExampleSidebarOpenClose('Root', [
+          cnSidebarExampleStaticModal(),
+        ])}
+        container={ref}
+        isOpen={open}
+        onClickOutside={setOpen.off}
+        onEsc={setOpen.off}
+        style={{ zIndex: 2000 }}
+        border
+        size="none"
+        position="left"
+        hasOverlay={false}
+      >
+        <ModalLayout border={[true, false]}>
+          <div
+            className={cnExampleSidebarOpenClose('Header', [
+              cnMixFlex({
+                gap: 'xs',
+                justify: 'space-between',
+                align: 'center',
+              }),
+            ])}
+          >
+            <Text size="m" view="primary" weight="semibold">
+              Слои
+            </Text>
+            <Button
+              size="s"
+              view="ghost"
+              label="Закрыть боковые вкладки"
+              width="default"
+              onClick={setOpen.off}
+              onlyIcon
+              iconLeft={IconPanelLeft}
+            />
+          </div>
+          <div className={cnExampleSidebarOpenClose('Body')}>
+            <ListItem
+              leftIcon={IconType}
+              label="Content"
+              space={{ pV: 'xs' }}
+            />
+            <ListItem
+              leftIcon={IconPicture}
+              label="Photo"
+              space={{ pV: 'xs' }}
+            />
+            <ListItem leftIcon={IconTree} label="Block" space={{ pV: 'xs' }} />
+          </div>
+        </ModalLayout>
+      </Sidebar>
+    </>
+  );
+};
+```
+
+```css
+.SidebarExampleStaticModal.Sidebar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.ExampleSidebarOpenClose {
+  --sidebar-size: 260px;
+  height: 460px;
+
+  &-Root {
+    --sidebar-size: 260px;
+  }
+  &-LayersBar {
+    transition: opacity 0.15s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    padding: var(--space-s);
+    width: var(--sidebar-size);
+    &_visible {
+      opacity: 1;
+    }
+  }
+  &-LayersBarWrapper {
+    background-color: var(--color-bg-default);
+    padding: var(--space-xs);
+    border-radius: 8px;
+    border: 1px solid var(--color-bg-border);
+  }
+  &-Header {
+    padding: calc(var(--space-xs) + var(--space-s));
+  }
+  &-Body {
+    padding: calc(var(--space-xs) + var(--space-s));
+  }
+}
+```
+
+</MdxTabs>
+
+### Использование затеняющей подложки
+
+При открытии сайдбара в модальном режиме должна использоваться затемняющая подложка _Paranja_, которая имеет фиксированную прозрачность.
+
+<MdxImage src={ParanjaImage} />
+
+Затеняющая подложка не изменяется от случая к случаю, на всем вашем продукте должен быть единый стиль.
+
+Цель подложки — фокус на панели и затемнение отвлекающего фона, но не полная блокировка.
+
+### Расположение кнопок
+
+Самую приоритетную кнопку вида `"primary"` располагаем в крайнем правом углу, от нее в лево уже вторичные кнопки.
+
+### Перегруженность сайдбара
+
+Чтобы `Sidebar` не был перегружен информацией, важно соблюдать баланс между полезностью и простотой. Старайтесь группировать смыслы, например, «основные фильтры» и «дополнительные фильтры».
+
+<MdxTabs>
+
+<ExampleSidebarGroups />
+
+```tsx
+import React, { useRef } from 'react';
+
+import { ModalHeader, ModalLayout } from '@consta/uikit/Modal';
+import { Text } from '@consta/uikit/Text';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+import { cn } from '##/utils/bem';
+
+import { Sidebar } from '@consta/uikit/Sidebar';
+import { cnSidebarExampleStaticModal } from '../cnSidebarExampleStaticModal';
+
+const cnExampleSidebarGroups = cn('ExampleSidebarGroups');
+
+const props: { label: string; props: { label: string; value: string }[] }[] = [
+  {
+    label: 'Основная информация',
+    props: [
+      {
+        label: 'Состав',
+        value:
+          'Чай ассам; малина; мята; чабрец; лемонграсс; роза; брусника; липа; василек; лимонник',
+      },
+    ],
+  },
+  {
+    label: 'Дополнительная информация',
+    props: [
+      {
+        label: 'Вкус',
+        value: 'чай Ассам; чабрец мелисса; липа',
+      },
+      {
+        label: 'Вид чая',
+        value: 'травяной; ассорти с травами; черный индийский листовой Ассам',
+      },
+      {
+        label: 'Форма выпуска напитка',
+        value: 'рассыпной; связанный',
+      },
+      {
+        label: 'Срок годности',
+        value: '24 месяца',
+      },
+    ],
+  },
+  {
+    label: 'Габариты',
+    props: [
+      {
+        label: 'Вес товара без упаковки (г)',
+        value: '140 г',
+      },
+      {
+        label: 'Вес товара с упаковкой (г)',
+        value: '180 г',
+      },
+      {
+        label: 'Длина упаковки',
+        value: '10 см',
+      },
+      {
+        label: 'Высота упаковки',
+        value: '18 см',
+      },
+      {
+        label: 'Ширина упаковки',
+        value: '16 см',
+      },
+    ],
+  },
+];
+
+const Title: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className,
+}) => (
+  <Text
+    size="s"
+    view="primary"
+    weight="semibold"
+    lineHeight="m"
+    className={className}
+  >
+    {children}
+  </Text>
+);
+
+const Prop: React.FC<{ label: string; value: string; className?: string }> = ({
+  label,
+  value,
+  className,
+}) => (
+  <Text
+    size="s"
+    lineHeight="m"
+    className={cnExampleSidebarGroups('Prop', [className])}
+  >
+    <Text className={cnExampleSidebarGroups('PropLabel')} view="secondary">
+      {label} <div className={cnExampleSidebarGroups('PropSeparator')} />
+    </Text>
+    <Text className={cnExampleSidebarGroups('PropValue')} view="primary">
+      {value}
+    </Text>
+  </Text>
+);
+
+export const ExampleSidebarGroups = () => {
+  // const [open, setOpen] = useFlag();
+  const ref = useRef<HTMLDivElement>(null);
+
+  return (
+    <>
+      <div ref={ref} className={cnExampleSidebarGroups()} />
+      <Sidebar
+        className={cnExampleSidebarGroups('Window')}
+        rootClassName={cnExampleSidebarGroups('Root', [
+          cnSidebarExampleStaticModal(),
+        ])}
+        container={ref}
+        style={{ zIndex: 2000 }}
+        border
+        size="l"
+        hasOverlay={false}
+        isOpen
+      >
+        <ModalLayout
+          border={[true, false]}
+          space={{ p: 's' }}
+          fixed={[true, false]}
+        >
+          <ModalHeader onClose={() => {}}>
+            Характеристика и описание
+          </ModalHeader>
+          <div>
+            {props.map(({ label, props }) => (
+              <div className={cnMixSpace({ mB: 'l' })} key={label}>
+                <Title className={cnMixSpace({ mB: 's' })}>{label}</Title>
+                {props.map(({ label, value }, index) => (
+                  <Prop
+                    className={
+                      index === props.length - 1
+                        ? undefined
+                        : cnMixSpace({ mB: 's' })
+                    }
+                    key={label}
+                    label={label}
+                    value={value}
+                  />
+                ))}
+              </div>
+            ))}
+            <Title className={cnMixSpace({ mB: 's' })}>Описание</Title>
+            <Text size="s" lineHeight="m">
+              Чай листовой черный травяной По-Татарски. Это не просто напиток,
+              это культурный ритуал, пронизанный уютом, гостеприимством и
+              многовековыми традициями. Он занимает особое место в татарской
+              кухне и повседневной жизни, сопровождая как будни, так и
+              праздничные застолья. Классический татарский чай — это крепко
+              заваренный чёрный чай, который подают с молоком, иногда с
+              добавлением сливочного масла или сливок. В некоторых семьях его
+              также готовят с пряностями: гвоздикой, кардамоном, чёрным перцем,
+              придавая напитку насыщенный и согревающий вкус. Часто к чаю подают
+              чак-чак и другие традиционные угощения. Чай в татарской культуре —
+              это символ уважения и заботы. Его всегда предлагают гостю, а сам
+              процесс чаепития может затянуться на долгие часы задушевных
+              разговоров. За чашкой чая укрепляются родственные связи,
+              обсуждаются важные дела и просто делятся теплом. Татарский чай —
+              это приглашение остановиться и почувствовать вкус жизни.
+            </Text>
+          </div>
+        </ModalLayout>
+      </Sidebar>
+    </>
+  );
+};
+```
+
+```css
+.SidebarExampleStaticModal.Sidebar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.ExampleSidebarGroups {
+  height: 460px;
+
+  &-Prop {
+    display: flex;
+  }
+
+  &-PropLabel {
+    flex: 1;
+    display: flex;
+  }
+
+  &-PropValue {
+    flex: 1;
+  }
+
+  &-PropSeparator {
+    flex: 1;
+
+    &::before {
+      content: ' ';
+      border-bottom: 1px dotted var(--color-typo-secondary);
+      display: inline-block;
+      width: 100%;
+    }
+  }
+}
+```
+
+</MdxTabs>
+
+Отделяйте смысловые блоки отступами или разделителями.
+
+<MdxTabs>
+
+<ExampleSidebarGroupsTwo />
+
+```tsx
+import './ExampleSidebarGroupsTwo.css';
+
+import React, { useRef } from 'react';
+
+import { ModalHeader, ModalLayout } from '@consta/uikit/Modal';
+import { RadioGroup } from '@consta/uikit/RadioGroup';
+import { Text } from '@consta/uikit/Text';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+import { cn } from '##/utils/bem';
+
+import { Sidebar } from '@consta/uikit/Sidebar';
+import { cnSidebarExampleStaticModal } from '../cnSidebarExampleStaticModal';
+
+const cnExampleSidebarGroupsTwo = cn('ExampleSidebarGroupsTwo');
+
+const Title: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className,
+}) => (
+  <Text
+    size="s"
+    view="primary"
+    weight="semibold"
+    lineHeight="m"
+    className={className}
+  >
+    {children}
+  </Text>
+);
+
+const props: { label: string; value: string; list: string[] }[] = [
+  {
+    label: 'Размер интерфейса',
+    value: 'По умолчанию',
+    list: ['По умолчанию', 'Обычный', 'Компактный'],
+  },
+  {
+    label: 'Тема',
+    value: 'Системная',
+    list: ['Системная', 'Светлая', 'Темная'],
+  },
+  {
+    label: 'Сортировка входящих писем',
+    value: 'По умолчанию',
+    list: [
+      'По умолчанию',
+      'Сначала важные',
+      'Сначала важные',
+      'Сначала помеченные',
+      'Приоритетные',
+      'Дополнительные папки',
+    ],
+  },
+  {
+    label: 'Область просмотра',
+    value: 'Не разделять',
+    list: ['Не разделять', 'Сплава', 'Снизу'],
+  },
+];
+
+export const ExampleSidebarGroupsTwo = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  return (
+    <>
+      <div ref={ref} className={cnExampleSidebarGroupsTwo()} />
+      <Sidebar
+        className={cnExampleSidebarGroupsTwo('Window')}
+        rootClassName={cnExampleSidebarGroupsTwo('Root', [
+          cnSidebarExampleStaticModal(),
+        ])}
+        container={ref}
+        style={{ zIndex: 2000 }}
+        border
+        size="l"
+        hasOverlay={false}
+        isOpen
+      >
+        <ModalLayout
+          border={[true, false]}
+          space={{ p: 's' }}
+          fixed={[true, false]}
+        >
+          <ModalHeader onClose={() => {}}>
+            Характеристика и описание
+          </ModalHeader>
+          <div>
+            {props.map(({ label, value, list }, index) => (
+              <div
+                className={cnExampleSidebarGroupsTwo('Group', [
+                  index === props.length - 1
+                    ? undefined
+                    : cnMixSpace({ mB: 'l' }),
+                ])}
+                key={label}
+              >
+                <Title className={cnMixSpace({ mB: 's' })}>{label}</Title>
+                <RadioGroup
+                  className={
+                    index === props.length - 1
+                      ? undefined
+                      : cnMixSpace({ mB: 'l' })
+                  }
+                  value={value}
+                  items={list}
+                  id={label}
+                  getItemLabel={(item) => item}
+                  getItemKey={(item) => item}
+                />
+              </div>
+            ))}
+          </div>
+        </ModalLayout>
+      </Sidebar>
+    </>
+  );
+};
+```
+
+```css
+.SidebarExampleStaticModal.Sidebar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.ExampleSidebarGroupsTwo {
+  height: 460px;
+
+  &-Group {
+    &:not(&:last-child)&:after {
+      content: '';
+      display: block;
+      clear: both;
+      height: 1px;
+      background-color: var(--color-bg-border);
+    }
+  }
+}
+```
+
+</MdxTabs>
+
+Показывайте только необходимую информацию, второстепенную информацию можно убрать в раскрывающийся или выпадающий список.
+
+Избегайте длинных форм и текстовых блоков на всю ширину экран. Все необязательные ссылки и подсказки уберите или скройте в иконки.
+
+Если проект позволяет, то используйте возможность сворачивания сайдбара в компактный вид. Это поможет сэкономить пространство и снизит перегруз, особенно если сайдбар используется для основной навигации.
+
+Контролируйте количество действий в сайд баре. Старайтесь не делать больше 2 кнопок в подвале.

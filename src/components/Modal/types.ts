@@ -19,7 +19,9 @@ export type ModalProps = PropsWithHTMLAttributes<
     children?: React.ReactNode;
     container?: HTMLElement | React.RefObject<HTMLElement>;
     afterClose?: () => void;
+    /** @deprecated use ignoreOutsideClicksRefs */
     refsForExcludeClickOutside?: React.RefObject<HTMLElement>[];
+    ignoreOutsideClicksRefs?: React.RefObject<HTMLElement>[];
   },
   HTMLDivElement
 >;

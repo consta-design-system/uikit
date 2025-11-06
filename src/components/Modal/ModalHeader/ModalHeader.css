@@ -10,7 +10,7 @@
     flex: none;
   }
 
-  &-ButtonClose {
+  .Button&-ButtonClose {
     flex: none;
 
     &_fixed {
