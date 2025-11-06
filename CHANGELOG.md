@@ -1,5 +1,26 @@
 # Changelog
 
+## v5.27.0 (06/11/2025)
+Самое важное:
+ - Переработали `Modal` и добавили `ModalLayout` и `ModalHeader` для более гибкой кастомизации.
+ - Переработали `Sidebar` для более гибкой кастомизации. 
+ - Добавили раздел **Как использовать** в `Modal` и `Sidebar` с примерами.
+
+---
+
+- [docs: removed unnecessary properties (#4108)](https://github.com/consta-design-system/uikit/commit/fb6e4e03559e6699d6b621f16df4bd88119f0e0f) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Sidebar): refactor component (#4104)](https://github.com/consta-design-system/uikit/commit/7da573de1acbbc714ca3bc58292c329904c5e962) - [@gizeasy](https://github.com/gizeasy)
+- [tests: add tests for ListCanary, Tooltip, Popover (#4105)](https://github.com/consta-design-system/uikit/commit/1cd184c8ef34fc9e5f1c5e0131830f2baabaa62f) - [@baevm](https://github.com/baevm)
+- [docs: check tabs (#4103)](https://github.com/consta-design-system/uikit/commit/86d88a68eab13c565a8034c082509894d37aa0a3) - [@alyonurchick1](https://github.com/alyonurchick1)
+- [docs(Combobox, Select): onСhange required (#4099)](https://github.com/consta-design-system/uikit/commit/74f7d8b3e6b4302341cae35d96f00e54e6a4b336) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+- [test(hooks): add tests (#4100)](https://github.com/consta-design-system/uikit/commit/11d8397e4117645ab61782b6d06af6ecb69586c7) - [@baevm](https://github.com/baevm)
+- [test(Banner): add tests (#4095)](https://github.com/consta-design-system/uikit/commit/168f15a6d602f521b3ad3237e7d43ae8b134f6fb) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+- [feat(FieldWrapper): add counterStatus prop (#4093)](https://github.com/consta-design-system/uikit/commit/df46541a688f3bad00c0f22402796025b45e97a8) - [@gizeasy](https://github.com/gizeasy)
+- [feat(Modal): add components (#4082)](https://github.com/consta-design-system/uikit/commit/ee8ea7ec4c8bbaa5415ba6b1aba81a816780cd1a) - [@gizeasy](https://github.com/gizeasy)
+- [docs: return complex props (#4091)](https://github.com/consta-design-system/uikit/commit/efffc10f4acf3984cbc2154b44b6905e3489ac70) - [@alyonurchick1](https://github.com/alyonurchick1)
+
+--------------------
+
 ## v5.26.0 (20/10/2025)
 Самое важное:
 - Добавили новый компонент `FlatSelect`
@@ -380,10 +401,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 
 ## v5.5.0 (14/06/2024)
 - [feat(File): update icons, add .vsd and .svg (#3685)](https://github.com/consta-design-system/uikit/commit/cc5ebe1bd62138f50b59510365611f7261ac8e6e) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.4.1 (10/06/2024)
-- [fix(useVirtualScroll): fixed calculate position and visible items (#3676)](https://github.com/consta-design-system/uikit/commit/5d1096b5b45250de7585997befc2325ea6dd4899) - [@gizeasy](https://github.com/gizeasy)
-- [fix(caption): removed left indentation in components (#3671)](https://github.com/consta-design-system/uikit/commit/80c38e6440dcfe34cf85b583e1cd26f920f90748) - [@ZettZet](https://github.com/ZettZet)
-- [fix(Picture): edit examples (#3675)](https://github.com/consta-design-system/uikit/commit/19d6dee9d6d836c8f3d24aac410b6610e9298919) - [@gizeasy](https://github.com/gizeasy)
