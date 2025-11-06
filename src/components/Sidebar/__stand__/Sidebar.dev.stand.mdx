@@ -54,7 +54,7 @@ import { Sidebar } from '@consta/uikit/Sidebar';
 
 ### Дочерние элементы
 
-Свойство `children` определяет содержимое, которое отображается внутри сайдбара. Это могут быть любые React-компоненты или элементы. Для удобства, можно использовать компоненты [`ModalLayout`](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-modal-stable/tab:dev/hash:modallayout), [`ModalHeader`](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-modal-stable/tab:dev/hash:modalheader).
+Свойство `children` задаёт содержимое, которое отображается внутри сайдбара. В нём можно разместить любые React-компоненты или элементы. Для удобства рекомендуем использовать компоненты [`ModalLayout`](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-modal-stable/tab:dev/hash:modallayout) и [`ModalHeader`](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-modal-stable/tab:dev/hash:modalheader).
 
 <MdxTabs>
 
@@ -204,7 +204,7 @@ export const ExampleSidebarSize = () => {
 
 </MdxTabs>
 
-Для указания произвольного размера укажите `size="none"`, что отключит стили размера у компонента, и воспользуйтесь css переменной `--sidebar-size`.
+Чтобы задать произвольный размер, укажите свойство `size="none"`. Это отключит встроенные стили размера компонента, после чего вы сможете использовать CSS-переменную `--sidebar-size` для кастомизации.
 
 <MdxTabs>
 
