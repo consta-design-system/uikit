@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import { cnSidebar, Sidebar, SidebarProps, sidebarPropSize } from '../Sidebar';
+import { cnSidebar, Sidebar, SidebarProps, sidebarPropSize } from '..';
 
 const testId = 'Sidebar';
 

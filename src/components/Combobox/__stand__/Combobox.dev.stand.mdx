@@ -198,14 +198,12 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleItems />
 
 ```tsx
-<>
-  <Combobox
-    items={items}
-    value={value}
-    onChange={setValue}
-    placeholder="Выберите нужный элемент из списка"
-  />
-</>
+<Combobox
+  items={items}
+  value={value}
+  onChange={setValue}
+  placeholder="Выберите нужный элемент из списка"
+/>
 ```
 
 </MdxTabs>
@@ -219,14 +217,12 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleItems />
 
 ```tsx
-<>
-  <Combobox
-    items={items}
-    value={value}
-    onChange={setValue}
-    placeholder="Выберите нужный элемент из списка"
-  />
-</>
+<Combobox
+  items={items}
+  value={value}
+  onChange={setValue}
+  placeholder="Выберите нужный элемент из списка"
+/>
 ```
 
 </MdxTabs>
@@ -240,14 +236,12 @@ type ComboboxPropOnCreate = (
 <ComboboxExamplePlaceholder />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Выберите вариант"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-</>
+<Combobox
+  placeholder="Выберите вариант"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -263,16 +257,14 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleLabel />
 
 ```tsx
-<>
-  <Combobox
-    label="Выберите что-нибудь"
-    caption={value?.label}
-    items={items}
-    value={value}
-    onChange={setValue}
-    placeholder="Выберите нужный элемент из списка"
-  />
-</>
+<Combobox
+  label="Выберите что-нибудь"
+  caption={value?.label}
+  items={items}
+  value={value}
+  onChange={setValue}
+  placeholder="Выберите нужный элемент из списка"
+/>
 ```
 
 </MdxTabs>
@@ -286,14 +278,12 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleDisabledItem />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Выберите вариант"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-</>
+<Combobox
+  placeholder="Выберите вариант"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -307,15 +297,13 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleMultiple />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Выберите вариант"
-    items={items}
-    value={value}
-    onChange={setValue}
-    multiple
-  />
-</>
+<Combobox
+  placeholder="Выберите вариант"
+  items={items}
+  value={value}
+  onChange={setValue}
+  multiple
+/>
 ```
 
 </MdxTabs>
@@ -329,15 +317,13 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleGroups />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Выберите вариант"
-    items={items}
-    value={value}
-    onChange={setValue}
-    groups={groups}
-  />
-</>
+<Combobox
+  placeholder="Выберите вариант"
+  items={items}
+  value={value}
+  onChange={setValue}
+  groups={groups}
+/>
 ```
 
 </MdxTabs>
@@ -353,15 +339,13 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleSize />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Размер s"
-    size="s"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-</>
+<Combobox
+  placeholder="Размер s"
+  size="s"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -375,22 +359,20 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleForm />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Форма round"
-    form="round"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-  <Combobox
-    placeholder="Форма defaultBrick"
-    form="defaultBrick"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-</>
+<Combobox
+  placeholder="Форма round"
+  form="round"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
+<Combobox
+  placeholder="Форма defaultBrick"
+  form="defaultBrick"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -410,22 +392,20 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleView />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Вид default"
-    view="default"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-  <Combobox
-    placeholder="Вид clear"
-    view="clear"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-</>
+<Combobox
+  placeholder="Вид default"
+  view="default"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
+<Combobox
+  placeholder="Вид clear"
+  view="clear"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -439,43 +419,41 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleStatus />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="default"
-    caption="default"
-    size="s"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-  <Combobox
-    placeholder="alert"
-    caption="alert"
-    status="alert"
-    size="s"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-  <Combobox
-    placeholder="warning"
-    caption="warning"
-    status="warning"
-    size="s"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-  <Combobox
-    placeholder="success"
-    caption="success"
-    size="s"
-    status="success"
-    items={items}
-    value={value}
-    onChange={setValue}
-  />
-</>
+<Combobox
+  placeholder="default"
+  caption="default"
+  size="s"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
+<Combobox
+  placeholder="alert"
+  caption="alert"
+  status="alert"
+  size="s"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
+<Combobox
+  placeholder="warning"
+  caption="warning"
+  status="warning"
+  size="s"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
+<Combobox
+  placeholder="success"
+  caption="success"
+  size="s"
+  status="success"
+  items={items}
+  value={value}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -491,18 +469,16 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleOnSearchValueChange />
 
 ```tsx
-<>
-  <Text view="primary" size="l" lineHeight="m">
-    Значение поиска: {search ?? 'Пусто'}
-  </Text>
-  <Combobox
-    placeholder="Выберите вариант"
-    items={items}
-    value={value}
-    onSearchValueChange={setSearch}
-    onChange={setValue}
-  />
-</>
+<Text view="primary" size="l" lineHeight="m">
+  Значение поиска: {search ?? 'Пусто'}
+</Text>
+<Combobox
+  placeholder="Выберите вариант"
+  items={items}
+  value={value}
+  onSearchValueChange={setSearch}
+  onChange={setValue}
+/>
 ```
 
 </MdxTabs>
@@ -516,17 +492,15 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleCreate />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Выберите вариант"
-    items={list}
-    value={value}
-    onChange={setValue}
-    onCreate={(label) =>
-      setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
-    }
-  />
-</>
+<Combobox
+  placeholder="Выберите вариант"
+  items={list}
+  value={value}
+  onChange={setValue}
+  onCreate={(label) =>
+    setList([{ label, id: `${label}_${list.length + 1}` }, ...list])
+  }
+/>
 ```
 
 </MdxTabs>
@@ -546,18 +520,16 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleSelectAll />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Выберите варианты"
-    items={items}
-    value={value}
-    multiple
-    selectAll
-    allSelectedAllLabel="Выбрать все"
-    onChange={setValue}
-    groups={groups}
-  />
-</>
+<Combobox
+  placeholder="Выберите варианты"
+  items={items}
+  value={value}
+  multiple
+  selectAll
+  allSelectedAllLabel="Выбрать все"
+  onChange={setValue}
+  groups={groups}
+/>
 ```
 
 </MdxTabs>
@@ -571,18 +543,16 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleVirtualScroll />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Чтобы посмотреть весь список, прокрутите вниз"
-    items={items}
-    value={value}
-    onChange={setValue}
-    groups={groups}
-    multiple
-    selectAll
-    virtualScroll
-  />
-</>
+<Combobox
+  placeholder="Чтобы посмотреть весь список, прокрутите вниз"
+  items={items}
+  value={value}
+  onChange={setValue}
+  groups={groups}
+  multiple
+  selectAll
+  virtualScroll
+/>
 ```
 
 </MdxTabs>
@@ -596,18 +566,16 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleIsLoading />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Кликните по полю ввода, чтобы данные загрузились"
-    items={data}
-    value={value}
-    onChange={setValue}
-    multiple
-    onDropdownOpen={onDropdownOpen}
-    isLoading={isLoading}
-    virtualScroll
-  />
-</>
+<Combobox
+  placeholder="Кликните по полю ввода, чтобы данные загрузились"
+  items={data}
+  value={value}
+  onChange={setValue}
+  multiple
+  onDropdownOpen={onDropdownOpen}
+  isLoading={isLoading}
+  virtualScroll
+/>
 ```
 
 </MdxTabs>
@@ -617,20 +585,18 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleIsLoadingOnScrollBottom />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Кликните по полю ввода, чтобы данные загрузились"
-    items={data}
-    value={value}
-    onChange={setValue}
-    multiple
-    isLoading={isLoading}
-    virtualScroll
-    onScrollToBottom={searchValue ? undefined : load}
-    searchFunction={() => true}
-    onSearchValueChange={setSearchValue}
-  />
-</>
+<Combobox
+  placeholder="Кликните по полю ввода, чтобы данные загрузились"
+  items={data}
+  value={value}
+  onChange={setValue}
+  multiple
+  isLoading={isLoading}
+  virtualScroll
+  onScrollToBottom={searchValue ? undefined : load}
+  searchFunction={() => true}
+  onSearchValueChange={setSearchValue}
+/>
 ```
 
 </MdxTabs>
@@ -644,15 +610,13 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleDisabled />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Здесь не получится ничего выбрать"
-    items={items}
-    value={value}
-    onChange={setValue}
-    disabled
-  />
-</>
+<Combobox
+  placeholder="Здесь не получится ничего выбрать"
+  items={items}
+  value={value}
+  onChange={setValue}
+  disabled
+/>
 ```
 
 </MdxTabs>
@@ -668,27 +632,25 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleDropdownOpen />
 
 ```tsx
-<>
-  <FieldGroup>
-    <Button
-      ref={buttonRef}
-      label={open ? 'Закрыть' : 'Открыть'}
-      onClick={setOpen.toggle}
-      iconLeft={Icon}
-      onlyIcon
-    />
-    <Combobox
-      inputRef={inputRef}
-      placeholder="Выберите вариант"
-      items={items}
-      value={value}
-      onChange={setValue}
-      dropdownOpen={open}
-      onDropdownOpen={onDropdownOpen}
-      ignoreOutsideClicksRefs={[buttonRef]}
-    />
-  </FieldGroup>
-</>
+<FieldGroup>
+  <Button
+    ref={buttonRef}
+    label={open ? 'Закрыть' : 'Открыть'}
+    onClick={setOpen.toggle}
+    iconLeft={Icon}
+    onlyIcon
+  />
+  <Combobox
+    inputRef={inputRef}
+    placeholder="Выберите вариант"
+    items={items}
+    value={value}
+    onChange={setValue}
+    dropdownOpen={open}
+    onDropdownOpen={onDropdownOpen}
+    ignoreOutsideClicksRefs={[buttonRef]}
+  />
+</FieldGroup>
 ```
 
 </MdxTabs>
@@ -698,19 +660,17 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleOpenByFocus />
 
 ```tsx
-<>
-  <Button onClick={handleFocus} label="Эмулировать фокус на элемент" />
-  <Combobox
-    inputRef={inputRef}
-    items={items}
-    value={value}
-    onChange={setValue}
-    placeholder="Выберите элемент"
-    dropdownOpen={isOpened}
-    onDropdownOpen={setIsOpened.set}
-    onFocus={setIsOpened.on}
-  />
-</>
+<Button onClick={handleFocus} label="Эмулировать фокус на элемент" />
+<Combobox
+  inputRef={inputRef}
+  items={items}
+  value={value}
+  onChange={setValue}
+  placeholder="Выберите элемент"
+  dropdownOpen={isOpened}
+  onDropdownOpen={setIsOpened.set}
+  onFocus={setIsOpened.on}
+/>
 ```
 
 </MdxTabs>
@@ -726,36 +686,34 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleRenderItem />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Выберите вариант"
-    items={items}
-    value={value}
-    onChange={setValue}
-    searchFunction={searchFunction}
-    renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
-      <div
-        className={cnComboboxExampleRenderItem('Item', { active, hovered })}
-        aria-selected={active}
-        aria-hidden="true"
-        onMouseEnter={onMouseEnter}
-        onClick={onClick}
-        ref={ref}
-      >
-        {item.label}
-        {item.status && (
-          <Badge
-            className={cnComboboxExampleRenderItem('Badge')}
-            as="span"
-            size="s"
-            label={mapLabel[item.status]}
-            status={mapStatus[item.status]}
-          />
-        )}
-      </div>
-    )}
-  />
-</>
+<Combobox
+  placeholder="Выберите вариант"
+  items={items}
+  value={value}
+  onChange={setValue}
+  searchFunction={searchFunction}
+  renderItem={({ item, active, hovered, onClick, onMouseEnter, ref }) => (
+    <div
+      className={cnComboboxExampleRenderItem('Item', { active, hovered })}
+      aria-selected={active}
+      aria-hidden="true"
+      onMouseEnter={onMouseEnter}
+      onClick={onClick}
+      ref={ref}
+    >
+      {item.label}
+      {item.status && (
+        <Badge
+          className={cnComboboxExampleRenderItem('Badge')}
+          as="span"
+          size="s"
+          label={mapLabel[item.status]}
+          status={mapStatus[item.status]}
+        />
+      )}
+    </div>
+  )}
+/>
 ```
 
 </MdxTabs>
@@ -769,22 +727,20 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleRenderValue />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Выберите вариант"
-    items={items}
-    value={value}
-    onChange={setValue}
-    renderValue={({ item }) => (
-      <div>
-        <span role="img" aria-label="Panda">
-          🐼
-        </span>{' '}
-        — {item.label}
-      </div>
-    )}
-  />
-</>
+<Combobox
+  placeholder="Выберите вариант"
+  items={items}
+  value={value}
+  onChange={setValue}
+  renderValue={({ item }) => (
+    <div>
+      <span role="img" aria-label="Panda">
+        🐼
+      </span>{' '}
+      — {item.label}
+    </div>
+  )}
+/>
 ```
 
 </MdxTabs>
@@ -798,16 +754,14 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleCustomTypes />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Выберите вариант"
-    items={['Первый', 'Второй', 'Третий']}
-    value={value}
-    onChange={setValue}
-    getItemKey={(item) => item}
-    getItemLabel={(item) => item}
-  />
-</>
+<Combobox
+  placeholder="Выберите вариант"
+  items={['Первый', 'Второй', 'Третий']}
+  value={value}
+  onChange={setValue}
+  getItemKey={(item) => item}
+  getItemLabel={(item) => item}
+/>
 ```
 
 </MdxTabs>
@@ -817,20 +771,18 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleCustomTypesWithGroups />
 
 ```tsx
-<>
-  <Combobox
-    placeholder="Выберите вариант"
-    items={items}
-    groups={groups}
-    value={value}
-    onChange={setValue}
-    getItemKey={(item) => item.name}
-    getItemLabel={(item) => item.name}
-    getItemGroupKey={(item) => item.group}
-    getGroupKey={(group: string) => group}
-    getGroupLabel={(group: string) => group}
-  />
-</>
+<Combobox
+  placeholder="Выберите вариант"
+  items={items}
+  groups={groups}
+  value={value}
+  onChange={setValue}
+  getItemKey={(item) => item.name}
+  getItemLabel={(item) => item.name}
+  getItemGroupKey={(item) => item.group}
+  getGroupKey={(group: string) => group}
+  getGroupLabel={(group: string) => group}
+/>
 ```
 
 </MdxTabs>
@@ -844,29 +796,27 @@ type ComboboxPropOnCreate = (
 <ComboboxExampleSearchValue />
 
 ```tsx
-<>
-  <Combobox
-    className={cnMixSpace({ mB: 'm' })}
-    placeholder="Выберите вариант"
-    items={items}
-    value={value}
-    onChange={setValue}
-    searchValue={searchValue}
-    onSearchValueChange={setSearchValue}
-    multiple
-  />
-  <Button
-    className={cnMixSpace({ mR: 'm' })}
-    label="Второй"
-    onClick={() => setSearchValue('Второй')}
-  />
-  <Button
-    className={cnMixSpace({ mR: 'm' })}
-    label="Первый"
-    onClick={() => setSearchValue('Первый')}
-  />
-  <Button label="Очистить" onClick={() => setSearchValue(undefined)} />
-</>
+<Combobox
+  className={cnMixSpace({ mB: 'm' })}
+  placeholder="Выберите вариант"
+  items={items}
+  value={value}
+  onChange={setValue}
+  searchValue={searchValue}
+  onSearchValueChange={setSearchValue}
+  multiple
+/>
+<Button
+  className={cnMixSpace({ mR: 'm' })}
+  label="Второй"
+  onClick={() => setSearchValue('Второй')}
+/>
+<Button
+  className={cnMixSpace({ mR: 'm' })}
+  label="Первый"
+  onClick={() => setSearchValue('Первый')}
+/>
+<Button label="Очистить" onClick={() => setSearchValue(undefined)} />
 ```
 
 </MdxTabs>

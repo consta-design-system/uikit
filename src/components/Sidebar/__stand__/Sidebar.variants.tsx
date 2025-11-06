@@ -1,27 +1,36 @@
 import './Sidebar.variants.css';
 
+import { IconSettings } from '@consta/icons/IconSettings';
 import { useBoolean, useSelect } from '@consta/stand';
 import React from 'react';
 
+import { ModalHeader, ModalLayout } from '##/components/Modal';
 import { useFlag } from '##/hooks/useFlag';
+import { cnMixFlex } from '##/mixs/MixFlex';
 
 import { cn } from '../../../utils/bem';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Sidebar, sidebarPropSize } from '../Sidebar';
+import { Sidebar, sidebarPropSize } from '..';
 
 const cnSidebarVariants = cn('SidebarVariants');
 
 const Variants = () => {
-  const hasOverlay = useBoolean('hasOverlay', true);
   const size = useSelect('size', sidebarPropSize, sidebarPropSize[1]);
   const position = useSelect(
     'position',
     ['right', 'bottom', 'left', 'top'],
     'right',
   );
+  const [open, setOpen] = useFlag(true);
+  const hasOverlay = useBoolean('hasOverlay', true);
 
-  const [open, setOpen] = useFlag();
+  const withHeader = useBoolean('withHeader', false);
+  const fixedHeader = useBoolean('fixedHeader', false, withHeader);
+
+  const withFooter = useBoolean('withFooter', false);
+  const fixedFooter = useBoolean('fixedFooter', false, withFooter);
+  const border = useBoolean('border');
 
   return (
     <div className={cnSidebarVariants()}>
@@ -40,117 +49,49 @@ const Variants = () => {
         onEsc={setOpen.off}
         size={size}
         position={position}
+        border={border}
       >
-        <Sidebar.Content className={cnSidebarVariants('Content')}>
-          <Text
-            as="p"
-            size="l"
-            view="primary"
-            weight="semibold"
-            lineHeight="m"
-            className={cnSidebarVariants('Title')}
-          >
-            Заголовок сайдбара
+        <ModalLayout
+          fixed={[fixedHeader, fixedFooter]}
+          border={[border && withHeader, border && withFooter]}
+          space={{ p: 's' }}
+        >
+          {withHeader ? (
+            <ModalHeader
+              className={cnSidebarVariants('Header')}
+              icon={IconSettings}
+              onClose={setOpen.off}
+            >
+              Заголовок
+            </ModalHeader>
+          ) : undefined}
+          <Text as="p" size="m" view="primary" lineHeight="m">
+            Это содержимое модального окна. Здесь может быть что угодно: текст,
+            изображение, форма или таблица. Всё, что хочется вынести из
+            контекста и показать поверх основной страницы. Это содержимое
+            модального окна. Здесь может быть что угодно: текст, изображение,
+            форма или таблица. Всё, что хочется вынести из контекста и показать
+            поверх основной страницы.Это содержимое модального окна. Здесь может
+            быть что угодно: текст, изображение, форма или таблица. Всё, что
+            хочется вынести из контекста и показать поверх основной страницы.Это
+            содержимое модального окна.
           </Text>
-          <Text
-            as="p"
-            size="m"
-            view="secondary"
-            lineHeight="m"
-            className={cnSidebarVariants('Body')}
-          >
-            Содержимое сайдбара. Сайдбар — это всплывающее окно, «прилипающее» к
-            краю экрана. Показывается поверх контента, содержимое страницы можно
-            закрыть полупрозрачной подложкой. Внутри может быть что угодно:
-            текст, кнопки, изображения или другие элементы.
-          </Text>
-          <Text
-            as="p"
-            size="m"
-            view="secondary"
-            lineHeight="m"
-            className={cnSidebarVariants('Body')}
-          >
-            Сайдбар входит в дизайн-систему Consta. В ней несколько библиотек с
-            интерфейсными компонентами и правилами их взаимодействия. Компоненты
-            — кнопки, иконки, списки, таблицы и другие элементы, из которых
-            собирается интерфейс, реализованы в двух форматах: для дизайнеров,
-            чтобы собирать макеты в Figma, и для разработчиков — в виде кода на
-            React.
-          </Text>
-          <Text
-            as="p"
-            size="m"
-            view="primary"
-            weight="semibold"
-            lineHeight="m"
-            className={cnSidebarVariants('Title')}
-          >
-            Особенности дизайн-системы
-          </Text>
-          <Text
-            as="p"
-            size="m"
-            view="secondary"
-            lineHeight="m"
-            className={cnSidebarVariants('Body')}
-          >
-            Гибкая тематизация. Тема определяет внешний вид всего интерфейса —
-            цвета, шрифты, отступы. В тему вкладываются все компоненты, а ещё
-            темы вкладываются друг в друга. В дизайн-системе может быть сколько
-            угодно вариантов темы.
-          </Text>
-          <Text
-            as="p"
-            size="m"
-            view="secondary"
-            lineHeight="m"
-            className={cnSidebarVariants('Body')}
-          >
-            Семантические переменные. Все параметры темы описаны с помощью
-            переменных (CSS Custom Properties) — значения цветов, отступов и
-            размеров типографики берутся из темы, а значит, легко меняются
-            вместе с ней.
-          </Text>
-          <Text
-            as="p"
-            size="m"
-            view="secondary"
-            lineHeight="m"
-            className={cnSidebarVariants('Body')}
-          >
-            Кастомные блоки и компоненты. В дизайн-системе есть готовые блоки,
-            но из её компонентов можно собирать кастомные блоки и элементы
-            интерфейса. Если чего-то не хватает, можно создавать своё по
-            принципам дизайн-системы.
-          </Text>
-          <Text
-            as="p"
-            size="m"
-            view="secondary"
-            lineHeight="m"
-            className={cnSidebarVariants('Body')}
-          >
-            Одинаковые сущности в макетах и в коде. Все сущности есть в двух
-            видах: в виде макетов в Figma и в коде.
-          </Text>
-        </Sidebar.Content>
-        <Sidebar.Actions className={cnSidebarVariants('Actions')}>
-          <Button
-            size="m"
-            view="clear"
-            label="Ок"
-            width="default"
-            onClick={setOpen.off}
-          />
-          <Button
-            size="m"
-            view="ghost"
-            label="Закрыть"
-            width="default"
-            onClick={setOpen.off}
-          />
-        </Sidebar.Actions>
+          {withFooter ? (
+            <div
+              className={cnMixFlex({
+                justify: 'flex-end',
+              })}
+            >
+              <Button
+                size="m"
+                view="primary"
+                label="Закрыть"
+                width="default"
+                onClick={setOpen.off}
+              />
+            </div>
+          ) : undefined}
+        </ModalLayout>
       </Sidebar>
     </div>
   );

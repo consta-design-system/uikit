@@ -60,39 +60,34 @@ import { List } from '@consta/uikit/ListCanary';
 
 ## Свойства
 
-| Свойство                                               | Тип или варианты значения                              | По умолчанию                 | Описание                                     |
-| ------------------------------------------------------ | ------------------------------------------------------ | ---------------------------- | -------------------------------------------- |
-| [`items`](#элементы-списка)                            | `ITEM[]`                                               | -                            | Массив элементов списка                      |
-| [`groups?`](#группировка)                              | `GROUP[]`                                              | -                            | Массив групп для элементов                   |
-| [`size?`](#размер)                                     | `'xs'`, `'s'`, `'m'`, `'l'`                            | `'m'`                        | Размер компонента                            |
-| [`innerOffset?`](#отступы)                             | `'increased'`, `'normal'`                              | `'normal'`                   | Внутренние отступы элементов                 |
-| [`disabled?`](#неактивный-список)                      | `boolean`                                              | -                            | Делает весь список неактивным                |
-| [`onItemClick?`](#выбранный-элемент-списка)            | `ListPropOnItemClick<ITEM>`                            | -                            | Обработчик клика по элементу                 |
-| [`renderItem?`](#кастомный-элемент-списка)             | `ListPropRenderItem<ITEM>`                             | рендер по умолчанию          | Функция рендера элемента списка              |
-| [`getItemLabel?`](#кастомные-типы-данных)              | `ListPropGetItemLabel<ITEM>`                           | `(item) => item.label`       | Определяет название элемента                 |
-| [`getItemKey?`](#кастомные-типы-данных)                | `ListPropGetItemKey<ITEM>`                             | `(item) => item.id`          | Определяет уникальный ключ элемента          |
-| [`getItemGroupKey?`](#кастомные-типы-данных)           | `ListPropGetItemGroupKey<ITEM>`                        | `(item) => item.groupId`     | Определяет ключ группы для элемента          |
-| [`getItemDisabled?`](#кастомные-типы-данных)           | `ListPropGetItemDisabled<ITEM>`                        | `(item) => item.disabled`    | Определяет состояние `disabled` для элемента |
-| [`getItemLeftIcon?`](#кастомные-типы-данных)           | `ListPropGetItemLeftIcon<ITEM>`                        | `(item) => item.leftIcon`    | Определяет иконку слева от элемента          |
-| [`getItemLeftSide?`](#кастомные-типы-данных)           | `ListPropGetItemLeftSide<ITEM>`                        | `(item) => item.leftSide`    | Определяет контент слева от элемента         |
-| [`getItemRightIcon?`](#кастомные-типы-данных)          | `ListPropGetItemRightIcon<ITEM>`                       | `(item) => item.rightIcon`   | Определяет иконку справа от элемента         |
-| [`getItemRightSide?`](#кастомные-типы-данных)          | `ListPropGetItemRightSide<ITEM>`                       | `(item) => item.rightSide`   | Определяет контент справа от элемента        |
-| [`getItemOnClick?`](#кастомные-типы-данных)            | `ListPropGetItemOnClick<ITEM>`                         | `(item) => item.onClick`     | Определяет обработчик клика для элемента     |
-| [`getItemActive?`](#кастомные-типы-данных)             | `ListPropGetItemActive<ITEM>`                          | `(item) => item.active`      | Определяет активное состояние элемента       |
-| [`getItemAs?`](#кастомные-типы-данных)                 | `ListPropGetItemAs<ITEM>`                              | `(item) => item.as`          | Определяет HTML-тег для рендера элемента     |
-| [`getItemAttributes?`](#кастомные-типы-данных)         | `ListPropGetItemAttributes<ITEM>`                      | `(item) => item.attributes`  | Определяет атрибуты элемента                 |
-| [`getGroupLabel?`](#кастомные-типы-данных)             | `ListPropGetGroupLabel<GROUP>`                         | `(group) => group.label`     | Определяет название группы                   |
-| [`getGroupKey?`](#кастомные-типы-данных)               | `ListPropGetGroupKey<GROUP>`                           | `(group) => group.id`        | Определяет уникальный ключ группы            |
-| [`getGroupRightSide?`](#кастомные-типы-данных)         | `ListPropGetGroupRightSide<GROUP>`                     | `(group) => group.rightSide` | Определяет контент справа от группы          |
-| [`itemSpace?`](#кастомные-отступы)                     | `MixSpaceProps`                                        | -                            | Кастомные отступы для элементов списка       |
-| [`groupLabelSpace?`](#кастомные-отступы)               | `MixSpaceProps`                                        | -                            | Кастомные отступы для заголовков групп       |
-| [`dividerSpace?`](#кастомные-отступы)                  | `MixSpaceProps`                                        | -                            | Кастомные отступы для разделителей           |
-| [`getItemAdditionalClassName?`](#дополнительный-класс) | `ListPropGetItemAdditionalClassName<ITEM>`             | -                            | Дополнительный CSS-класс для элемента        |
-| `onBlur?`                                              | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                            | Обработчик события `blur`                    |
-| `onFocus?`                                             | `(event?: React.FocusEvent<HTMLInputElement>) => void` | -                            | Обработчик события `focus`                   |
-| `name?`                                                | `string`                                               | -                            | Имя поля ввода                               |
-| `className?`                                           | `string`                                               | -                            | Дополнительный CSS-класс                     |
-| `ref?`                                                 | `React.Ref<HTMLDivElement>`                            | -                            | Ссылка на корневой DOM-элемент компонента    |
+| Свойство                                               | Тип или варианты значения                  | По умолчанию                 | Описание                                     |
+| ------------------------------------------------------ | ------------------------------------------ | ---------------------------- | -------------------------------------------- |
+| [`items`](#элементы-списка)                            | `ITEM[]`                                   | -                            | Массив элементов списка                      |
+| [`groups?`](#группировка)                              | `GROUP[]`                                  | -                            | Массив групп для элементов                   |
+| [`size?`](#размер)                                     | `'xs'`, `'s'`, `'m'`, `'l'`                | `'m'`                        | Размер компонента                            |
+| [`innerOffset?`](#отступы)                             | `'increased'`, `'normal'`                  | `'normal'`                   | Внутренние отступы элементов                 |
+| [`disabled?`](#неактивный-список)                      | `boolean`                                  | -                            | Делает весь список неактивным                |
+| [`onItemClick?`](#выбранный-элемент-списка)            | `ListPropOnItemClick<ITEM>`                | -                            | Обработчик клика по элементу                 |
+| [`renderItem?`](#кастомный-элемент-списка)             | `ListPropRenderItem<ITEM>`                 | рендер по умолчанию          | Функция рендера элемента списка              |
+| [`getItemLabel?`](#кастомные-типы-данных)              | `ListPropGetItemLabel<ITEM>`               | `(item) => item.label`       | Определяет название элемента                 |
+| [`getItemKey?`](#кастомные-типы-данных)                | `ListPropGetItemKey<ITEM>`                 | `(item) => item.id`          | Определяет уникальный ключ элемента          |
+| [`getItemGroupKey?`](#кастомные-типы-данных)           | `ListPropGetItemGroupKey<ITEM>`            | `(item) => item.groupId`     | Определяет ключ группы для элемента          |
+| [`getItemDisabled?`](#кастомные-типы-данных)           | `ListPropGetItemDisabled<ITEM>`            | `(item) => item.disabled`    | Определяет состояние `disabled` для элемента |
+| [`getItemLeftIcon?`](#кастомные-типы-данных)           | `ListPropGetItemLeftIcon<ITEM>`            | `(item) => item.leftIcon`    | Определяет иконку слева от элемента          |
+| [`getItemLeftSide?`](#кастомные-типы-данных)           | `ListPropGetItemLeftSide<ITEM>`            | `(item) => item.leftSide`    | Определяет контент слева от элемента         |
+| [`getItemRightIcon?`](#кастомные-типы-данных)          | `ListPropGetItemRightIcon<ITEM>`           | `(item) => item.rightIcon`   | Определяет иконку справа от элемента         |
+| [`getItemRightSide?`](#кастомные-типы-данных)          | `ListPropGetItemRightSide<ITEM>`           | `(item) => item.rightSide`   | Определяет контент справа от элемента        |
+| [`getItemOnClick?`](#кастомные-типы-данных)            | `ListPropGetItemOnClick<ITEM>`             | `(item) => item.onClick`     | Определяет обработчик клика для элемента     |
+| [`getItemActive?`](#кастомные-типы-данных)             | `ListPropGetItemActive<ITEM>`              | `(item) => item.active`      | Определяет активное состояние элемента       |
+| [`getItemAs?`](#кастомные-типы-данных)                 | `ListPropGetItemAs<ITEM>`                  | `(item) => item.as`          | Определяет HTML-тег для рендера элемента     |
+| [`getItemAttributes?`](#кастомные-типы-данных)         | `ListPropGetItemAttributes<ITEM>`          | `(item) => item.attributes`  | Определяет атрибуты элемента                 |
+| [`getGroupLabel?`](#кастомные-типы-данных)             | `ListPropGetGroupLabel<GROUP>`             | `(group) => group.label`     | Определяет название группы                   |
+| [`getGroupKey?`](#кастомные-типы-данных)               | `ListPropGetGroupKey<GROUP>`               | `(group) => group.id`        | Определяет уникальный ключ группы            |
+| [`getGroupRightSide?`](#кастомные-типы-данных)         | `ListPropGetGroupRightSide<GROUP>`         | `(group) => group.rightSide` | Определяет контент справа от группы          |
+| [`itemSpace?`](#кастомные-отступы)                     | `MixSpaceProps`                            | -                            | Кастомные отступы для элементов списка       |
+| [`groupLabelSpace?`](#кастомные-отступы)               | `MixSpaceProps`                            | -                            | Кастомные отступы для заголовков групп       |
+| [`dividerSpace?`](#кастомные-отступы)                  | `MixSpaceProps`                            | -                            | Кастомные отступы для разделителей           |
+| [`getItemAdditionalClassName?`](#дополнительный-класс) | `ListPropGetItemAdditionalClassName<ITEM>` | -                            | Дополнительный CSS-класс для элемента        |
 
 ```tsx
 export type DefaultListGroup = {

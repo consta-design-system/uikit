@@ -226,9 +226,10 @@ type Direction =
 <ContextMenuExampleLabel />
 
 ```tsx
-<>
-  const items = ['Пункт 1', 'Пункт 2', 'Пункт 3']; const [isOpen, setIsOpen] =
-  useState(false); const ref = useRef(null); return (
+const items = ['Пункт 1', 'Пункт 2', 'Пункт 3'];
+const [isOpen, setIsOpen] = useState(false);
+const ref = useRef(null);
+return (
   <>
     <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
     <ContextMenu
@@ -238,8 +239,7 @@ type Direction =
       anchorRef={ref}
     />
   </>
-  );
-</>
+);
 ```
 
 </MdxTabs>
@@ -253,27 +253,25 @@ type Direction =
 <ContextMenuExampleStatus />
 
 ```tsx
-<>
-  const items = [
-    { label: 'Пункт 1', accent: 'alert' },
-    { label: 'Пункт 2', accent: 'warning' },
-    { label: 'Пункт 3', accent: 'success' },
-  ];
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
-  return (
-    <>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
-      <ContextMenu
-        isOpen={isOpen}
-        items={items}
-        getItemStatus={(item) => item.accent}
-        anchorRef={ref}
-        direction="downStartLeft"
-      />
-    </>
-  );
-</>
+const items = [
+  { label: 'Пункт 1', accent: 'alert' },
+  { label: 'Пункт 2', accent: 'warning' },
+  { label: 'Пункт 3', accent: 'success' },
+];
+const [isOpen, setIsOpen] = useState(false);
+const ref = useRef(null);
+return (
+  <>
+    <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <ContextMenu
+      isOpen={isOpen}
+      items={items}
+      getItemStatus={(item) => item.accent}
+      anchorRef={ref}
+      direction="downStartLeft"
+    />
+  </>
+);
 ```
 
 </MdxTabs>
@@ -287,27 +285,25 @@ type Direction =
 <ContextMenuExampleDisabled />
 
 ```tsx
-<>
-  const items = [
-    { label: 'Пункт 1', active: true },
-    { label: 'Пункт 2', active: true },
-    { label: 'Пункт 3', active: false },
-  ];
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
-  return (
-    <>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
-      <ContextMenu
-        isOpen={isOpen}
-        items={items}
-        getItemDisabled={(item) => item.active}
-        anchorRef={ref}
-        direction="downStartLeft"
-      />
-    </>
-  );
-</>
+const items = [
+  { label: 'Пункт 1', active: true },
+  { label: 'Пункт 2', active: true },
+  { label: 'Пункт 3', active: false },
+];
+const [isOpen, setIsOpen] = useState(false);
+const ref = useRef(null);
+return (
+  <>
+    <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <ContextMenu
+      isOpen={isOpen}
+      items={items}
+      getItemDisabled={(item) => item.active}
+      anchorRef={ref}
+      direction="downStartLeft"
+    />
+  </>
+);
 ```
 
 </MdxTabs>
@@ -321,28 +317,26 @@ type Direction =
 <ContextMenuExampleIcon />
 
 ```tsx
-<>
-  const items = [
-    { label: 'Скрепка', imageLeft: IconAttach },
-    { label: 'Две галочки', imageRight: IconAllDone },
-    { label: 'Чемодан', imageLeft: IconBag },
-  ];
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
-  return (
-    <>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
-      <ContextMenu
-        isOpen={isOpen}
-        items={items}
-        getItemLeftIcon={(item) => item.imageLeft}
-        getItemRightIcon={(item) => item.imageRight}
-        anchorRef={ref}
-        direction="downStartLeft"
-      />
-    </>
-  );
-</>
+const items = [
+  { label: 'Скрепка', imageLeft: IconAttach },
+  { label: 'Две галочки', imageRight: IconAllDone },
+  { label: 'Чемодан', imageLeft: IconBag },
+];
+const [isOpen, setIsOpen] = useState(false);
+const ref = useRef(null);
+return (
+  <>
+    <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <ContextMenu
+      isOpen={isOpen}
+      items={items}
+      getItemLeftIcon={(item) => item.imageLeft}
+      getItemRightIcon={(item) => item.imageRight}
+      anchorRef={ref}
+      direction="downStartLeft"
+    />
+  </>
+);
 ```
 
 </MdxTabs>
@@ -356,34 +350,32 @@ type Direction =
 <ContextMenuExampleOnClick />
 
 ```tsx
-<>
-  const items = [
-    { label: 'Пункт 1' },
-    { label: 'Пункт 2', event: () => alert('Нажатие на второй пункт') },
-    { label: 'Пункт 3' },
-  ];
-  const getItemOnClick = (item) => {
-    if (item.event) {
-      return item.event;
-    }
-    return () => alert(item.label);
-  };
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
-  return (
-    <>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
-      <ContextMenu
-        isOpen={isOpen}
-        items={items}
-        anchorRef={ref}
-        getItemOnClick={getItemOnClick}
-        onClickOutside={() => setIsOpen(false)}
-        direction="downStartLeft"
-      />
-    </>
-  );
-</>
+const items = [
+  { label: 'Пункт 1' },
+  { label: 'Пункт 2', event: () => alert('Нажатие на второй пункт') },
+  { label: 'Пункт 3' },
+];
+const getItemOnClick = (item) => {
+  if (item.event) {
+    return item.event;
+  }
+  return () => alert(item.label);
+};
+const [isOpen, setIsOpen] = useState(false);
+const ref = useRef(null);
+return (
+  <>
+    <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <ContextMenu
+      isOpen={isOpen}
+      items={items}
+      anchorRef={ref}
+      getItemOnClick={getItemOnClick}
+      onClickOutside={() => setIsOpen(false)}
+      direction="downStartLeft"
+    />
+  </>
+);
 ```
 
 </MdxTabs>
@@ -397,55 +389,53 @@ type Direction =
 <ContextMenuExampleSide />
 
 ```tsx
-<>
-  const menuItems = [
-    { label: 'Пункт 1', icon: IconInfo, status: 'success' },
-    { label: 'Пункт 2', icon: IconInfo, status: 'warning', switch: false },
-    { label: 'Пункт 3', icon: IconInfo, status: 'success', switch: true },
-  ];
-  function renderLeftSide(item) {
-    const Icon = item.icon;
-    return <Icon size="s" />;
-  }
-  function renderRightSide(item, onChange) {
-    const nodeArray = [];
-    item.switch !== undefined &&
-      nodeArray.push(
-        <Switch
-          size="m"
-          checked={item.switch}
-          onChange={() => onChange(item)}
-          key="Switch"
-        />,
-      );
-    nodeArray.push(<Badge status={item.status} minified key="Badge" size="s" />);
-    return nodeArray;
-  }
-  const [items, setItems] = useState(menuItems);
-  const onChange = (switchItem) => {
-    const newItems = items.map((item, index) => {
-      if (switchItem.label === item.label) {
-        return { ...items[index], switch: !items[index].switch };
-      }
-      return item;
-    });
-    setItems(newItems);
-  };
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
-  return (
-    <>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
-      <ContextMenu
-        isOpen={isOpen}
-        items={items}
-        anchorRef={ref}
-        getItemLeftSide={renderLeftSide}
-        getItemRightSide={(item) => renderRightSide(item, onChange)}
-      />
-    </>
-  );
-</>
+const menuItems = [
+  { label: 'Пункт 1', icon: IconInfo, status: 'success' },
+  { label: 'Пункт 2', icon: IconInfo, status: 'warning', switch: false },
+  { label: 'Пункт 3', icon: IconInfo, status: 'success', switch: true },
+];
+function renderLeftSide(item) {
+  const Icon = item.icon;
+  return <Icon size="s" />;
+}
+function renderRightSide(item, onChange) {
+  const nodeArray = [];
+  item.switch !== undefined &&
+    nodeArray.push(
+      <Switch
+        size="m"
+        checked={item.switch}
+        onChange={() => onChange(item)}
+        key="Switch"
+      />,
+    );
+  nodeArray.push(<Badge status={item.status} minified key="Badge" size="s" />);
+  return nodeArray;
+}
+const [items, setItems] = useState(menuItems);
+const onChange = (switchItem) => {
+  const newItems = items.map((item, index) => {
+    if (switchItem.label === item.label) {
+      return { ...items[index], switch: !items[index].switch };
+    }
+    return item;
+  });
+  setItems(newItems);
+};
+const [isOpen, setIsOpen] = useState(false);
+const ref = useRef(null);
+return (
+  <>
+    <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <ContextMenu
+      isOpen={isOpen}
+      items={items}
+      anchorRef={ref}
+      getItemLeftSide={renderLeftSide}
+      getItemRightSide={(item) => renderRightSide(item, onChange)}
+    />
+  </>
+);
 ```
 
 </MdxTabs>
@@ -459,40 +449,38 @@ type Direction =
 <ContextMenuExampleSubMenu />
 
 ```tsx
-<>
-  const items = [
-    {
-      label: 'Пункт 1',
-      menu: [
-        { label: 'Пункт 1-1' },
-        { label: 'Пункт 1-2' },
-        {
-          label: 'Пункт 1-3',
-          menu: [
-            { label: 'Пункт 1-3-1' },
-            { label: 'Пункт 1-3-2' },
-            { label: 'Пункт 1-3-3' },
-          ],
-        },
-      ],
-    },
-    { label: 'Пункт 2' },
-    { label: 'Пункт 3' },
-  ];
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
-  return (
-    <>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
-      <ContextMenu
-        isOpen={isOpen}
-        items={items}
-        anchorRef={ref}
-        getItemSubMenu={(item) => item.menu}
-      />
-    </>
-  );
-</>
+const items = [
+  {
+    label: 'Пункт 1',
+    menu: [
+      { label: 'Пункт 1-1' },
+      { label: 'Пункт 1-2' },
+      {
+        label: 'Пункт 1-3',
+        menu: [
+          { label: 'Пункт 1-3-1' },
+          { label: 'Пункт 1-3-2' },
+          { label: 'Пункт 1-3-3' },
+        ],
+      },
+    ],
+  },
+  { label: 'Пункт 2' },
+  { label: 'Пункт 3' },
+];
+const [isOpen, setIsOpen] = useState(false);
+const ref = useRef(null);
+return (
+  <>
+    <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <ContextMenu
+      isOpen={isOpen}
+      items={items}
+      anchorRef={ref}
+      getItemSubMenu={(item) => item.menu}
+    />
+  </>
+);
 ```
 
 </MdxTabs>
@@ -506,39 +494,37 @@ type Direction =
 <ContextMenuExampleGroups />
 
 ```tsx
-<>
-  const groups = [
-    { name: 'Первая группа', key: 1 },
-    { name: 'Вторая группа', key: 2 },
-  ];
-  const items = [
-    { label: 'Пункт 1', group: 1 },
-    { label: 'Пункт 2', group: 2 },
-    { label: 'Пункт 3', group: 2 },
-  ];
-  const sortGroup = (a, b) => {
-    if (a > b) return 1;
-    if (a < b) return -1;
-    return 0;
-  };
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
-  return (
-    <>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
-      <ContextMenu
-        items={items}
-        isOpen={isOpen}
-        groups={groups}
-        getItemGroupId={(item) => item.group}
-        getGroupLabel={(group) => group.name}
-        getGroupId={(group) => group.key}
-        anchorRef={ref}
-        sortGroup={sortGroup}
-      />
-    </>
-  );
-</>
+const groups = [
+  { name: 'Первая группа', key: 1 },
+  { name: 'Вторая группа', key: 2 },
+];
+const items = [
+  { label: 'Пункт 1', group: 1 },
+  { label: 'Пункт 2', group: 2 },
+  { label: 'Пункт 3', group: 2 },
+];
+const sortGroup = (a, b) => {
+  if (a > b) return 1;
+  if (a < b) return -1;
+  return 0;
+};
+const [isOpen, setIsOpen] = useState(false);
+const ref = useRef(null);
+return (
+  <>
+    <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <ContextMenu
+      items={items}
+      isOpen={isOpen}
+      groups={groups}
+      getItemGroupId={(item) => item.group}
+      getGroupLabel={(group) => group.name}
+      getGroupId={(group) => group.key}
+      anchorRef={ref}
+      sortGroup={sortGroup}
+    />
+  </>
+);
 ```
 
 </MdxTabs>
@@ -562,27 +548,25 @@ type Direction =
 <ContextMenuExampleOutsideClick />
 
 ```tsx
-<>
-  const items = [
-    { label: 'Пункт 1' },
-    { label: 'Пункт 2' },
-    { label: 'Пункт 3' },
-  ];
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
-  return (
-    <>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
-      <ContextMenu
-        isOpen={isOpen}
-        items={items}
-        anchorRef={ref}
-        onClickOutside={() => setIsOpen(false)}
-        direction="downStartLeft"
-      />
-    </>
-  );
-</>
+const items = [
+  { label: 'Пункт 1' },
+  { label: 'Пункт 2' },
+  { label: 'Пункт 3' },
+];
+const [isOpen, setIsOpen] = useState(false);
+const ref = useRef(null);
+return (
+  <>
+    <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <ContextMenu
+      isOpen={isOpen}
+      items={items}
+      anchorRef={ref}
+      onClickOutside={() => setIsOpen(false)}
+      direction="downStartLeft"
+    />
+  </>
+);
 ```
 
 </MdxTabs>
@@ -596,23 +580,21 @@ type Direction =
 <ContextMenuExampleMobile />
 
 ```tsx
+const [isOpen, setIsOpen] = useFlag();
+const buttonRef = useRef(null);
+return;
 <>
-  const [isOpen, setIsOpen] = useFlag(); const buttonRef = useRef(null); return
-  (
-  <>
-    <Button ref={buttonRef} label="Открыть" onClick={setIsOpen.toggle} />
-    <ContextMenu
-      isOpen={isOpen}
-      items={exampleItems}
-      groups={groups}
-      anchorRef={buttonRef}
-      onClickOutside={setIsOpen.off}
-      direction="upStartLeft"
-      isMobile
-    />
-  </>
-  );
-</>
+  <Button ref={buttonRef} label="Открыть" onClick={setIsOpen.toggle} />
+  <ContextMenu
+    isOpen={isOpen}
+    items={exampleItems}
+    groups={groups}
+    anchorRef={buttonRef}
+    onClickOutside={setIsOpen.off}
+    direction="upStartLeft"
+    isMobile
+  />
+</>;
 ```
 
 </MdxTabs>
@@ -624,84 +606,76 @@ type Direction =
 <ContextMenuExampleDefault />
 
 ```tsx
-<>
-  const groups = [
-    { label: 'Первая группа', id: 1 },
-    { label: 'Вторая группа', id: 2 },
-  ];
-  const exampleItems = [
-    {
-      label: 'Скрепка',
-      leftIcon: IconAttach,
-      status: 'success',
-      groupId: 1,
-      subMenu: [
-        { label: 'Пункт - 1', status: 'success' },
-        {
-          label: 'Пункт - 2',
-          status: 'success',
-          subMenu: [
-            {
-              label: 'Пункт - 3',
-              leftIcon: IconSun,
-              subMenu: [
-                { label: 'Пункт - 5' },
-                { label: 'Пункт - 6' },
-              ],
-            },
-            {
-              label: 'Пункт - 4',
-              leftIcon: IconSun,
-              subMenu: [
-                { label: 'Пункт - 7' },
-                { label: 'Пункт - 8' },
-              ],
-            },
-            { label: 'Пункт - 9', leftIcon: IconSun },
-          ],
-        },
-      ],
-    },
-    { label: 'Глаз', leftIcon: IconEye, groupId: 1 },
-    {
-      label: 'Две галочки',
-      groupId: 2,
-      leftIcon: IconAllDone,
-      rightSide: '!',
-      status: 'alert',
-    },
-    {
-      label: 'Чемодан',
-      groupId: 2,
-      leftIcon: IconBag,
-      rightSide: '!',
-      status: 'alert',
-    },
-    {
-      label: 'Солнце',
-      groupId: 2,
-      leftIcon: IconSun,
-      status: 'alert',
-      rightSide: '!',
-      disabled: true,
-    },
-  ];
-  const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef(null);
-  return (
-    <>
-      <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
-      <ContextMenu
-        isOpen={isOpen}
-        items={exampleItems}
-        groups={groups}
-        anchorRef={ref}
-        onClickOutside={() => setIsOpen(false)}
-        direction="downStartLeft"
-      />
-    </>
-  );
-</>
+const groups = [
+  { label: 'Первая группа', id: 1 },
+  { label: 'Вторая группа', id: 2 },
+];
+const exampleItems = [
+  {
+    label: 'Скрепка',
+    leftIcon: IconAttach,
+    status: 'success',
+    groupId: 1,
+    subMenu: [
+      { label: 'Пункт - 1', status: 'success' },
+      {
+        label: 'Пункт - 2',
+        status: 'success',
+        subMenu: [
+          {
+            label: 'Пункт - 3',
+            leftIcon: IconSun,
+            subMenu: [{ label: 'Пункт - 5' }, { label: 'Пункт - 6' }],
+          },
+          {
+            label: 'Пункт - 4',
+            leftIcon: IconSun,
+            subMenu: [{ label: 'Пункт - 7' }, { label: 'Пункт - 8' }],
+          },
+          { label: 'Пункт - 9', leftIcon: IconSun },
+        ],
+      },
+    ],
+  },
+  { label: 'Глаз', leftIcon: IconEye, groupId: 1 },
+  {
+    label: 'Две галочки',
+    groupId: 2,
+    leftIcon: IconAllDone,
+    rightSide: '!',
+    status: 'alert',
+  },
+  {
+    label: 'Чемодан',
+    groupId: 2,
+    leftIcon: IconBag,
+    rightSide: '!',
+    status: 'alert',
+  },
+  {
+    label: 'Солнце',
+    groupId: 2,
+    leftIcon: IconSun,
+    status: 'alert',
+    rightSide: '!',
+    disabled: true,
+  },
+];
+const [isOpen, setIsOpen] = useState(false);
+const ref = useRef(null);
+return (
+  <>
+    <Button ref={ref} label="Открыть" onClick={() => setIsOpen(!isOpen)} />
+    <ContextMenu
+      isOpen={isOpen}
+      items={exampleItems}
+      groups={groups}
+      anchorRef={ref}
+      onClickOutside={() => setIsOpen(false)}
+      direction="downStartLeft"
+    />
+  </>
+);
 ```
 
 </MdxTabs>

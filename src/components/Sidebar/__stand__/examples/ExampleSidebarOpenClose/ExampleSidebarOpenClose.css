@@ -1,0 +1,41 @@
+.ExampleSidebarOpenClose {
+  --sidebar-size: 260px;
+  height: 460px;
+
+  &-Root {
+    --sidebar-size: 260px;
+  }
+
+  &-LayersBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-size);
+    padding: var(--space-s);
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+
+    &_visible {
+      opacity: 1;
+    }
+  }
+
+  &-LayersBarWrapper {
+    padding: var(--space-xs);
+    background-color: var(--color-bg-default);
+    border: 1px solid var(--color-bg-border);
+    border-radius: 8px;
+  }
+
+  &-Header {
+    padding: calc(var(--space-xs) + var(--space-s));
+  }
+
+  &-Body {
+    padding: calc(var(--space-xs) + var(--space-s));
+  }
+}
+
+.stand--Example-Node:has(.ExampleSidebarOpenClose) {
+  padding: 0;
+}

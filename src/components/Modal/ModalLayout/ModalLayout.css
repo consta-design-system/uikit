@@ -1,8 +1,8 @@
 .ModalLayout {
   display: flex;
   flex-direction: column;
+  flex: 1;
   justify-content: space-between;
-  height: 100%;
 
   &-Slot {
     background-color: var(--color-bg-default);
@@ -39,6 +39,7 @@
             --modal-layout-header-color-shadow
           );
         position: sticky;
+        z-index: calc(var(--modal-layout-z-index-for-fixed-slot) + 1);
         top: 0;
       }
 
@@ -48,8 +49,13 @@
             --modal-layout-footer-color-shadow
           );
         position: sticky;
+        z-index: calc(var(--modal-layout-z-index-for-fixed-slot) + 1);
         bottom: 0;
       }
+    }
+
+    &_stretch {
+      flex: 1;
     }
   }
 }
