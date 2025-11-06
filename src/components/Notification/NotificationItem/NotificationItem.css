@@ -1,0 +1,45 @@
+.NotificationItem {
+  display: flex;
+
+  &-Image {
+    flex: none;
+  }
+
+  &-Content {
+    position: relative;
+    flex: 1;
+    max-width: calc(100% - var(--space-3xl) - var(--space-m));
+  }
+
+  &-Text {
+    margin-bottom: var(--space-m);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &-Title {
+    margin-bottom: var(--space-2xs);
+
+    &_cardWithActions {
+      margin-right: calc(var(--control-height-xs) + var(--space-2xs));
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &-Button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &-Actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
