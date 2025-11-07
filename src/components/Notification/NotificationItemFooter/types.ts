@@ -8,8 +8,7 @@ export type NotificationItemBadge = {
 
 export type NotificationItemFooterProps = PropsWithHTMLAttributesAndRef<
   {
-    date?: Date;
-    dateFormat?: (date: Date) => string;
+    date?: string;
     badges?: NotificationItemBadge[];
     children?: never;
   },

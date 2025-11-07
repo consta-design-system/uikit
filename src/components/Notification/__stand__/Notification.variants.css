@@ -1,10 +1,6 @@
-.NotificationStories {
+.NotificationVariants {
   position: absolute;
-  top: var(--space-l);
-
-  &-List {
-    &_isDesktop {
-      height: 400px;
-    }
-  }
+  width: 100%;
+  padding: var(--space-m);
+  min-height: 100%;
 }

@@ -18,17 +18,16 @@ export type NotificationItemBadge = {
 export type NotificationItemProps = PropsWithHTMLAttributesAndRef<
   {
     title: string;
-    description?: string;
-    imageUrl?: string;
-    read?: boolean;
-    date?: Date;
-    dateFormat?: (date: Date) => string;
+    userName?: string;
+    userImageUrl?: string;
+    content?: React.ReactNode;
+    date?: string;
     badges?: NotificationItemBadge[];
     actions?: NotificationItemAction[];
     onClick?: React.EventHandler<React.MouseEvent>;
     children?: never;
-    view?: 'user' | 'default';
     actionsMenuOpened?: boolean;
+    status?: BadgePropStatus;
   },
   HTMLDivElement
 >;

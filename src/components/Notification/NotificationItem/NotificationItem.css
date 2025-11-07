@@ -1,17 +1,15 @@
 .NotificationItem {
-  display: flex;
-
-  &-Image {
+  &-Avatar {
     flex: none;
   }
 
   &-Content {
     position: relative;
     flex: 1;
-    max-width: calc(100% - var(--space-3xl) - var(--space-m));
+    overflow: auto;
   }
 
-  &-Text {
+  &-Children {
     margin-bottom: var(--space-m);
 
     &:last-child {

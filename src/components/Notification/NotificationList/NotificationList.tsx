@@ -139,14 +139,12 @@ function NotificationListRender(
                     ])}
                     key={cnNotificationList('Item', { groupIndex, itemIndex })}
                     title={getItemLabel(item)}
-                    description={getItemDescription(item)}
+                    content={getItemDescription(item)}
                     imageUrl={getItemImage(item)}
-                    read={getItemRead(item)}
                     date={getItemDate(item)}
                     dateFormat={itemDateFormat}
                     badges={getItemBadges(item)}
                     actions={getItemActions(item)}
-                    view={getItemView(item)}
                     style={{ zIndex: elementZIndex }}
                   />
                 );
