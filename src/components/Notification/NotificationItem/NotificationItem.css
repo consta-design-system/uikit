@@ -1,4 +1,8 @@
 .NotificationItem {
+  &_withAvatar {
+    --notification-item-gap: var(--space-m, 0px);
+  }
+
   &-Avatar {
     flex: none;
   }
@@ -6,23 +10,36 @@
   &-Content {
     position: relative;
     flex: 1;
-    overflow: auto;
+    width: calc(
+      var(--notification-item-wrapper-width) -
+        var(--notification-item-user-width) - var(--notification-item-gap)
+    );
   }
 
-  &-Children {
-    margin-bottom: var(--space-m);
+  &-TitleWrapper {
+    min-height: var(--control-height-xs);
+  }
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+  &-Date {
+    white-space: nowrap;
+  }
+
+  &-Badge {
+    flex: none;
+  }
+
+  &-AdditionalInfo {
+    overflow: hidden;
+    min-height: var(--space-m);
+  }
+
+  &-Badges {
+    overflow: hidden;
+    width: 100%;
   }
 
   &-Title {
     margin-bottom: var(--space-2xs);
-
-    &_cardWithActions {
-      margin-right: calc(var(--control-height-xs) + var(--space-2xs));
-    }
 
     &:last-child {
       margin-bottom: 0;
@@ -39,5 +56,9 @@
     position: absolute;
     top: 0;
     right: 0;
+  }
+
+  &-MixMR {
+    margin-right: calc(var(--control-height-xs) + var(--space-2xs));
   }
 }

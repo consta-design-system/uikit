@@ -17,7 +17,7 @@ export type NotificationItemBadge = {
 
 export type NotificationItemProps = PropsWithHTMLAttributesAndRef<
   {
-    title: string;
+    title?: string;
     userName?: string;
     userImageUrl?: string;
     content?: React.ReactNode;
@@ -26,7 +26,6 @@ export type NotificationItemProps = PropsWithHTMLAttributesAndRef<
     actions?: NotificationItemAction[];
     onClick?: React.EventHandler<React.MouseEvent>;
     children?: never;
-    actionsMenuOpened?: boolean;
     status?: BadgePropStatus;
   },
   HTMLDivElement

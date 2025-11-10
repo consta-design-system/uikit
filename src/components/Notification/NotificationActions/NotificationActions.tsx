@@ -1,4 +1,4 @@
-import { IconMeatball } from '@consta/icons/IconMeatball';
+import { IconKebab } from '@consta/icons/IconKebab';
 import React, { forwardRef, useEffect, useRef } from 'react';
 
 import { Button } from '##/components/Button';
@@ -93,12 +93,14 @@ const NotificationActionsRender = (
         className={className}
         size="xs"
         view="clear"
-        iconLeft={IconMeatball}
+        iconLeft={IconKebab}
         ref={menuRef}
         onClick={setVisibleMenu.toggle}
       />
       <ContextMenu
+        offset="2xs"
         isOpen={visibleMenu}
+        size="s"
         items={items}
         getItemLabel={getItemLabel}
         onItemClick={(item, { e }) =>
