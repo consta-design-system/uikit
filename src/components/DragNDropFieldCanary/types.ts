@@ -94,13 +94,16 @@ export const dragNDropFieldInformerPropStatus = [
 export type DragNDropFieldInformerPropStatus =
   typeof dragNDropFieldInformerPropStatus[number];
 
-export type DragNDropFieldInformerProps = {
-  status?: DragNDropFieldInformerPropStatus;
-  icon?: IconComponent;
-  loading?: boolean | number;
-  text?: string;
-  withButton?: boolean;
-  buttonIcon?: IconComponent;
-  buttonLabel?: string;
-  onButtonClick?: () => void;
-};
+export type DragNDropFieldInformerProps = PropsWithHTMLAttributes<
+  {
+    status?: DragNDropFieldInformerPropStatus;
+    icon?: IconComponent;
+    loading?: boolean | number;
+    text?: string;
+    withButton?: boolean;
+    buttonIcon?: IconComponent;
+    buttonLabel?: string;
+    onButtonClick?: () => void;
+  },
+  HTMLDivElement
+>;
