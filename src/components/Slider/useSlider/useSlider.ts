@@ -190,8 +190,6 @@ export function useSlider<RANGE extends boolean>(
         typeof typeButton === 'number' &&
         typeof currentValue !== 'undefined'
       ) {
-        event.preventDefault();
-        event.stopPropagation();
         let stepIncrement = !Array.isArray(step) ? step || 1 : 1;
         let validKeyCode = false;
         const changedValue = getActiveValue(currentValue, typeButton);
@@ -211,6 +209,8 @@ export function useSlider<RANGE extends boolean>(
             break;
         }
         if (validKeyCode) {
+          event.preventDefault();
+          event.stopPropagation();
           if (Array.isArray(step)) {
             step.forEach((stepPoint, index) => {
               if (
