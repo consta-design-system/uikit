@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.27.1 (11/11/2025)
+- [fix(Modal): fixed zIndex prop (#4110)](https://github.com/consta-design-system/uikit/commit/d8544b0b9df8f58e2ed3a881cd1bbf7c6645b8c3) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Slider): tab navigation (#4109)](https://github.com/consta-design-system/uikit/commit/680364e4a88431e569e065a764354563e8979bff) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+
+--------------------
+
 ## v5.27.0 (06/11/2025)
 Самое важное:
  - Переработали `Modal` и добавили `ModalLayout` и `ModalHeader` для более гибкой кастомизации.
@@ -396,8 +402,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 ## v5.6.1 (17/06/2024)
 - [fix(withTooltip): fixed types(#3684)](https://github.com/consta-design-system/uikit/commit/94a4c201a5a4dce4256610d0ab2fe06a9fc21c74) - [@ZettZet](https://github.com/ZettZet)
 - [feat(File): add .msg icon (#3686)](https://github.com/consta-design-system/uikit/commit/1525600ec6c0683a616e7f165979085997a6f778) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.5.0 (14/06/2024)
-- [feat(File): update icons, add .vsd and .svg (#3685)](https://github.com/consta-design-system/uikit/commit/cc5ebe1bd62138f50b59510365611f7261ac8e6e) - [@gizeasy](https://github.com/gizeasy)
