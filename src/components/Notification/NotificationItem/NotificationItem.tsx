@@ -164,7 +164,7 @@ export const NotificationItem = withCtx(
               <NotificationActions
                 className={cnNotificationItem('Actions')}
                 items={actions}
-                mainButtonOnlyIcon
+                onlyIcon
                 style={{ zIndex: props.style?.zIndex }}
               />
             )}

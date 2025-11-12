@@ -1,12 +1,26 @@
 import './Notification.variants.css';
 
+import { IconComponent } from '@consta/icons/Icon';
+import { IconEdit } from '@consta/icons/IconEdit';
+import { IconTrash } from '@consta/icons/IconTrash';
+import { IconUser } from '@consta/icons/IconUser';
 import { useBoolean, useSelect, useText } from '@consta/stand';
-import React from 'react';
+import { lastBreakpointAtom } from '@consta/stand/src/modules/breakpoints';
+import { useAtom } from '@reatom/npm-react';
+import React, { useState } from 'react';
 
 import { BadgePropStatus } from '##/components/Badge';
-import { Notification, NotificationItem } from '##/components/Notification';
+import { ChipsChoice } from '##/components/Chips';
+import { ChoiceGroup } from '##/components/ChoiceGroup';
+import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
 
+import {
+  Notification,
+  NotificationActions,
+  NotificationGroup,
+  NotificationItem,
+} from '..';
 import { actions, items } from '../__mocks__/data.mock';
 
 const cnNotificationVariants = cn('NotificationVariants');
@@ -20,8 +34,8 @@ const useNotificationItemProps = (enable: boolean) => {
     'Получена заявка на изменение договора. Согласовать до 31.01.2025 года',
     enable,
   );
-  const badges = useBoolean('badges', enable);
-  const actions = useBoolean('actions', enable);
+  const badges = useBoolean('badges', false, enable);
+  const actions = useBoolean('actions', false, enable);
   const status = useSelect<BadgePropStatus>(
     'status',
     ['success', 'warning', 'normal', 'alert', 'system', 'disabled', 'error'],
@@ -35,10 +49,14 @@ const useNotificationItemProps = (enable: boolean) => {
     { label: 'Отпуск', status: 'normal' },
   ];
 
-  const actionsArray: Array<{ label: string; onClick: () => void }> = [
-    { label: 'Открыть', onClick: () => {} },
-    { label: 'Редактировать', onClick: () => {} },
-    { label: 'Удалить', onClick: () => {} },
+  const actionsArray: Array<{
+    label: string;
+    onClick: () => void;
+    icon: IconComponent;
+  }> = [
+    { label: 'Удалить', onClick: () => {}, icon: IconTrash },
+    { label: 'Редактировать', onClick: () => {}, icon: IconEdit },
+    { label: 'Пользователь', onClick: () => {}, icon: IconUser },
   ];
 
   return {
@@ -52,29 +70,145 @@ const useNotificationItemProps = (enable: boolean) => {
   };
 };
 
+const useNotificationActionsProps = (enable: boolean) => {
+  const onlyIcon = useBoolean('onlyIcon', false, enable);
+  const multiActions = useBoolean('multiActions', false, enable);
+  const actionsWithIcon = useBoolean('actionsWithIcon', false, enable);
+
+  const items: Array<{
+    label: string;
+    onClick: () => void;
+    icon?: IconComponent;
+  }> = [
+    {
+      label: 'Удалить',
+      onClick: () => {},
+      icon: actionsWithIcon ? IconTrash : undefined,
+    },
+    ...(multiActions
+      ? [
+          {
+            label: 'Редактировать',
+            onClick: () => {},
+            icon: actionsWithIcon ? IconEdit : undefined,
+          },
+          {
+            label: 'Пользователь',
+            onClick: () => {},
+            icon: actionsWithIcon ? IconUser : undefined,
+          },
+        ]
+      : []),
+  ];
+
+  return {
+    items,
+    onlyIcon,
+  };
+};
+
+const useNotificationGroupProps = (enable: boolean) => {
+  const label = useText('label', 'Группа', enable);
+
+  const multiActions = useBoolean('multiActions', false, enable);
+  const actionsWithIcon = useBoolean('actionsWithIcon', false, enable);
+
+  const actions: Array<{
+    label: string;
+    onClick: () => void;
+    icon?: IconComponent;
+  }> = [
+    {
+      label: 'Удалить',
+      onClick: () => {},
+      icon: actionsWithIcon ? IconTrash : undefined,
+    },
+    ...(multiActions
+      ? [
+          {
+            label: 'Редактировать',
+            onClick: () => {},
+            icon: actionsWithIcon ? IconEdit : undefined,
+          },
+          {
+            label: 'Пользователь',
+            onClick: () => {},
+            icon: actionsWithIcon ? IconUser : undefined,
+          },
+        ]
+      : []),
+  ];
+
+  return {
+    label,
+    actions,
+  };
+};
+
+const NotificationActionsVariants = () => {
+  const notificationItemProps = useNotificationActionsProps(true);
+  return <NotificationActions {...notificationItemProps} />;
+};
+
+const NotificationItemVariants = () => {
+  const notificationItemProps = useNotificationItemProps(true);
+  return <NotificationItem {...notificationItemProps} />;
+};
+
+const NotificationGroupVariants = () => {
+  const notificationGroupProps = useNotificationGroupProps(true);
+  return <NotificationGroup {...notificationGroupProps} />;
+};
+
+const mapComponent = {
+  NotificationActions: NotificationActionsVariants,
+  NotificationItem: NotificationItemVariants,
+  NotificationGroup: NotificationGroupVariants,
+  NotificationGroups: NotificationGroupVariants,
+};
+
+const keysComponent = Object.keys(
+  mapComponent,
+) as (keyof typeof mapComponent)[];
+
+// console.log(keysComponent);
+const defaultComponent = keysComponent[0];
+
+const getItem = (item: keyof typeof mapComponent) => item;
+
 export const Variants = () => {
-  const component = useSelect(
-    'component',
-    ['Notification', 'NotificationItem'],
-    'NotificationItem',
-  );
+  const [component, setComponent] = useState(defaultComponent);
 
-  const notificationItemProps = useNotificationItemProps(
-    component === 'NotificationItem',
-  );
+  const [f] = useAtom(lastBreakpointAtom);
 
-  if (component === 'Notification')
-    return <Notification items={items} actions={actions} />;
+  console.log(f);
 
-  if (component === 'NotificationItem')
-    return (
-      <div className={cnNotificationVariants()}>
-        <NotificationItem
-          {...notificationItemProps}
-          status={notificationItemProps.status}
-        />
+  const Component = mapComponent[component || defaultComponent];
+
+  return (
+    <div className={cnNotificationVariants()}>
+      <div
+        className={cnNotificationVariants('Header', [
+          cnMixScrollBar({ invisible: true }),
+        ])}
+      >
+        <div className={cnNotificationVariants('ChoiceWrapper')}>
+          <ChipsChoice
+            className={cnNotificationVariants('Choice')}
+            size="xs"
+            getItemLabel={getItem}
+            getItemKey={getItem}
+            items={keysComponent}
+            value={component}
+            onChange={setComponent}
+          />
+        </div>
       </div>
-    );
+      <div className={cnNotificationVariants('Body')}>
+        <Component />
+      </div>
+    </div>
+  );
 };
 
 export default Variants;

@@ -25,7 +25,7 @@ const NotificationActionsRender = (
     items = [],
     className,
     children,
-    mainButtonOnlyIcon,
+    onlyIcon,
     opened = false,
     onOpen: onOpenProp,
     getItemIcon,
@@ -54,7 +54,7 @@ const NotificationActionsRender = (
     onOpen.current?.(visibleMenu);
   }, [visibleMenu, onOpen]);
 
-  if (items.length === 1 && !mainButtonOnlyIcon) {
+  if (items.length === 1 && !onlyIcon) {
     return (
       <Button
         {...otherProps}
@@ -69,7 +69,7 @@ const NotificationActionsRender = (
     );
   }
 
-  if (items.length === 1 && getItemIcon(items[0]) && mainButtonOnlyIcon) {
+  if (items.length === 1 && getItemIcon(items[0]) && onlyIcon) {
     return (
       <ButtonWithTooltip
         {...otherProps}

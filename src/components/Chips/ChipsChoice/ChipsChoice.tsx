@@ -51,6 +51,7 @@ const ChipsChoiceRender = (
       ref={ref}
       onItemRightIconClick={getUndefined}
       onItemClick={(item, { e }) => !disabled && getOnChange(item)(e)}
+      getItemLabel={getItemLabel}
       getItemIconRight={getUndefined}
       getItemAttributes={getUndefined}
       getItemActive={getChecked}

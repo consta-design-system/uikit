@@ -27,7 +27,7 @@ export type NotificationActionsProps<ITEM = ButtonMenuDefaultItem> =
   PropsWithHTMLAttributes<
     {
       items?: ITEM[];
-      mainButtonOnlyIcon?: boolean;
+      onlyIcon?: boolean;
       opened?: boolean;
       onOpen?: (value: boolean) => void;
       onItemClick?: NotificationActionsOnItemClick<ITEM>;

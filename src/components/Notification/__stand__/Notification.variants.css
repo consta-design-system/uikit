@@ -1,6 +1,26 @@
 .NotificationVariants {
+  box-sizing: border-box;
   position: absolute;
   width: 100%;
-  padding: var(--space-m);
   min-height: 100%;
+
+  &-Header {
+    padding: var(--space-s);
+    overflow-y: auto;
+    background-color: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-bg-border);
+  }
+
+  &-Choice.Chips {
+    flex-wrap: nowrap;
+  }
+
+  &-ChoiceWrapper {
+    padding-right: calc(var(--control-height-s) + (var(--space-xs) * 2));
+    width: max-content;
+  }
+
+  &-Body {
+    padding: var(--space-s);
+  }
 }
