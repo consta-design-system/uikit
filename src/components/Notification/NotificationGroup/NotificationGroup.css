@@ -1,0 +1,8 @@
+.NotificationGroup {
+  background: var(--color-bg-secondary);
+
+  &-Label {
+    flex: 1;
+    min-height: var(--control-height-xs);
+  }
+}

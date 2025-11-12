@@ -1,0 +1,6 @@
+.NotificationHeader {
+  &-Title {
+    flex: 1;
+    min-height: var(--control-height-xs);
+  }
+}

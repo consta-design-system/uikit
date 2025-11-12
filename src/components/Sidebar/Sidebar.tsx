@@ -8,6 +8,7 @@ import {
   PortalWithTheme,
   PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
+import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
 import { withCtx } from '##/utils/state';
@@ -64,6 +65,7 @@ export const Sidebar = withCtx(
       afterClose,
       ignoreOutsideClicksRefs: ignoreOutsideClicksRefsProp,
       border,
+      scrollContainerRef: scrollContainerRefProp,
       ...otherProps
     } = props;
 
@@ -88,6 +90,7 @@ export const Sidebar = withCtx(
     });
 
     const animateTimeout = useAnimateTimeout(windowElAtom, position);
+    const scrollContainerRef = useForkRef([scrollContainerRefProp, scrollRef]);
 
     return (
       <Transition
@@ -149,7 +152,7 @@ export const Sidebar = withCtx(
             >
               <div
                 className={cnSidebar('Scroll', cnMixScrollBar({ size: 's' }))}
-                ref={scrollRef}
+                ref={scrollContainerRef}
               >
                 <div className={cnSidebar('Content')} ref={contentRef}>
                   <PortalWithThemeConsumer

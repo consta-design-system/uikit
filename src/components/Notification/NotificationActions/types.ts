@@ -1,8 +1,8 @@
 import { IconComponent } from '@consta/icons/Icon';
 
-import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
+import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
-export type ButtonMenuDefaultItem = {
+export type NotificationActionsDefaultItem = {
   label: string;
   onClick?: React.EventHandler<React.MouseEvent>;
   icon?: IconComponent;
@@ -23,24 +23,27 @@ export type NotificationActionsOnItemClick<ITEM> = (
   },
 ) => void;
 
-export type NotificationActionsProps<ITEM = ButtonMenuDefaultItem> =
-  PropsWithHTMLAttributes<
+export type NotificationActionsProps<ITEM = NotificationActionsDefaultItem> =
+  PropsWithHTMLAttributesAndRef<
     {
       items?: ITEM[];
-      mainButtonOnlyIcon?: boolean;
+      onlyIcon?: boolean;
       opened?: boolean;
       onOpen?: (value: boolean) => void;
       onItemClick?: NotificationActionsOnItemClick<ITEM>;
+      scrollContainerRef?: React.RefObject<HTMLDivElement>;
     },
     HTMLButtonElement
   > & {
     getItemLabel?: NotificationActionsPropGetItemLabel<ITEM>;
     getItemOnClick?: NotificationActionsPropGetItemOnClick<ITEM>;
     getItemIcon?: NotificationActionsPropGetItemIcon<ITEM>;
-  } & (ITEM extends { label: ButtonMenuDefaultItem['label'] }
+  } & (ITEM extends { label: NotificationActionsDefaultItem['label'] }
       ? {}
       : { getItemLabel: NotificationActionsPropGetItemLabel<ITEM> });
 
-export type NotificationActionsComponent = <ITEM = ButtonMenuDefaultItem>(
+export type NotificationActionsComponent = <
+  ITEM = NotificationActionsDefaultItem,
+>(
   props: NotificationActionsProps<ITEM>,
 ) => React.ReactNode;

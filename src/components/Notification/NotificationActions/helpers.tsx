@@ -1,5 +1,5 @@
 import {
-  ButtonMenuDefaultItem,
+  NotificationActionsDefaultItem,
   NotificationActionsPropGetItemIcon,
   NotificationActionsPropGetItemLabel,
   NotificationActionsPropGetItemOnClick,
@@ -7,13 +7,13 @@ import {
 } from './types';
 
 const defaultGetItemIcon: NotificationActionsPropGetItemIcon<
-  ButtonMenuDefaultItem
+  NotificationActionsDefaultItem
 > = (item) => item.icon;
 const defaultGetItemLabel: NotificationActionsPropGetItemLabel<
-  ButtonMenuDefaultItem
+  NotificationActionsDefaultItem
 > = (item) => item.label;
 const defaultGetItemOnClick: NotificationActionsPropGetItemOnClick<
-  ButtonMenuDefaultItem
+  NotificationActionsDefaultItem
 > = (item) => item.onClick;
 
 export function withDefaultGetters<ITEM>(

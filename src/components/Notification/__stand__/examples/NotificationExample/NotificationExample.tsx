@@ -1,21 +1,70 @@
+import { IconEye } from '@consta/icons/IconEye';
+import { IconTrash } from '@consta/icons/IconTrash';
 import { Example } from '@consta/stand';
 import React from 'react';
 
-import { Notification } from '##/components/Notification';
-import { cn } from '##/utils/bem';
+import { Notification, NotificationDefaultItem } from '../../..';
 
-import { actions, items } from '../../../__mocks__/data.mock';
+const emptyFunction = (e: React.MouseEvent) => {};
 
-const cnNotificationStories = cn('NotificationStories');
+export const items: NotificationDefaultItem[] = [
+  {
+    label: 'Иванов Иван Иванович',
+    content: 'Добавил файлы в проект, план/факт по расчету предварительные',
+    caption: 'Меньше минуты назад',
+    read: true,
+    actions: [
+      {
+        label: 'Удалить',
+        onClick: emptyFunction,
+        icon: IconTrash,
+      },
+      {
+        label: 'Отметить как прочитанное',
+        onClick: emptyFunction,
+        icon: IconEye,
+      },
+    ],
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    content: 'Добавил файлы в проект, план/факт по расчету предварительные',
+    caption: 'Меньше минуты назад',
+    read: true,
+    actions: [
+      {
+        label: 'Удалить',
+        onClick: emptyFunction,
+        icon: IconTrash,
+      },
+      {
+        label: 'Отметить как прочитанное',
+        onClick: emptyFunction,
+        icon: IconEye,
+      },
+    ],
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    content: 'Добавил файлы в проект, план/факт по расчету предварительные',
+    read: false,
+    actions: [
+      {
+        label: 'Удалить',
+        onClick: emptyFunction,
+        icon: IconTrash,
+      },
+      {
+        label: 'Отметить как прочитанное',
+        onClick: emptyFunction,
+        icon: IconEye,
+      },
+    ],
+  },
+];
 
 export const NotificationExample = () => (
-  <Example>
-    <Notification
-      listClassName={cnNotificationStories('List')}
-      items={items}
-      title="Уведомления"
-      actions={actions}
-      groupByDay
-    />
+  <Example col={1}>
+    <Notification items={items} getItemUserName={(item) => item.label} />
   </Example>
 );

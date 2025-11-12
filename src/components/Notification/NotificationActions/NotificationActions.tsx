@@ -1,8 +1,9 @@
 import { IconKebab } from '@consta/icons/IconKebab';
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef } from 'react';
 
 import { Button } from '##/components/Button';
 import { ContextMenu } from '##/components/ContextMenu';
+import { Text } from '##/components/Text';
 import { withTooltip } from '##/hocs/withTooltip';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
@@ -15,7 +16,7 @@ import {
   NotificationActionsProps,
 } from './types';
 
-const ButtonWithTooltip = withTooltip()(Button);
+const ButtonWithTooltip = withTooltip({ size: 's' })(Button);
 
 const NotificationActionsRender = (
   props: NotificationActionsProps,
@@ -25,18 +26,29 @@ const NotificationActionsRender = (
     items = [],
     className,
     children,
-    mainButtonOnlyIcon,
+    onlyIcon,
     opened = false,
     onOpen: onOpenProp,
     getItemIcon,
     getItemLabel,
     getItemOnClick,
     onItemClick,
+    scrollContainerRef,
+    title,
     ...otherProps
   } = withDefaultGetters(props);
+
   const buttonRef = useRef(null);
 
   const [visibleMenu, setVisibleMenu] = useFlag(opened);
+
+  const toggleMenu = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setVisibleMenu.toggle();
+    },
+    [setVisibleMenu],
+  );
 
   const onOpen = useMutableRef(onOpenProp);
   const menuRef = useForkRef([buttonRef, ref]);
@@ -54,7 +66,21 @@ const NotificationActionsRender = (
     onOpen.current?.(visibleMenu);
   }, [visibleMenu, onOpen]);
 
-  if (items.length === 1 && !mainButtonOnlyIcon) {
+  useEffect(() => {
+    if (scrollContainerRef?.current) {
+      scrollContainerRef.current.addEventListener('scroll', setVisibleMenu.off);
+    }
+    return () => {
+      if (scrollContainerRef?.current) {
+        scrollContainerRef.current.removeEventListener(
+          'scroll',
+          setVisibleMenu.off,
+        );
+      }
+    };
+  }, [scrollContainerRef]);
+
+  if (items.length === 1 && !onlyIcon) {
     return (
       <Button
         {...otherProps}
@@ -69,7 +95,7 @@ const NotificationActionsRender = (
     );
   }
 
-  if (items.length === 1 && getItemIcon(items[0]) && mainButtonOnlyIcon) {
+  if (items.length === 1 && getItemIcon(items[0]) && onlyIcon) {
     return (
       <ButtonWithTooltip
         {...otherProps}
@@ -79,7 +105,11 @@ const NotificationActionsRender = (
         iconLeft={getItemIcon(items[0])}
         onClick={getItemClick(items[0], getItemOnClick, onItemClick)}
         tooltipProps={{
-          content: getItemLabel(items[0]),
+          tooltipContent: (
+            <Text view="primary" size="xs">
+              {getItemLabel(items[0])}
+            </Text>
+          ),
         }}
         ref={ref}
       />
@@ -95,24 +125,24 @@ const NotificationActionsRender = (
         view="clear"
         iconLeft={IconKebab}
         ref={menuRef}
-        onClick={setVisibleMenu.toggle}
+        onClick={toggleMenu}
       />
       <ContextMenu
+        role="listbox"
         offset="2xs"
         isOpen={visibleMenu}
         size="s"
         items={items}
         getItemLabel={getItemLabel}
-        onItemClick={(item, { e }) =>
-          getItemClick(item, getItemOnClick, onItemClick)(e)
-        }
+        onItemClick={onItemClick}
+        getItemOnClick={getItemOnClick}
         getItemKey={getItemLabel}
         getItemLeftIcon={getItemIcon}
         anchorRef={buttonRef}
         onClickOutside={setVisibleMenu.off}
         possibleDirections={['downStartRight', 'upStartRight']}
         direction="downStartRight"
-        style={{ width: 280, zIndex: elementZIndex }}
+        style={{ zIndex: elementZIndex }}
       />
     </>
   );

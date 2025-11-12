@@ -1,6 +1,10 @@
 .NotificationItem {
   &_withAvatar {
-    --notification-item-gap: var(--space-m, 0px);
+    --notification-item-gap: var(--space-m, 0);
+  }
+
+  &_clickable {
+    cursor: pointer;
   }
 
   &-Avatar {
@@ -10,26 +14,19 @@
   &-Content {
     position: relative;
     flex: 1;
-    width: calc(
-      var(--notification-item-wrapper-width) -
-        var(--notification-item-user-width) - var(--notification-item-gap)
-    );
   }
 
   &-TitleWrapper {
     min-height: var(--control-height-xs);
   }
 
-  &-Date {
-    white-space: nowrap;
-  }
-
   &-Badge {
     flex: none;
   }
 
-  &-AdditionalInfo {
+  &-Caption {
     overflow: hidden;
+    width: 100%;
     min-height: var(--space-m);
   }
 

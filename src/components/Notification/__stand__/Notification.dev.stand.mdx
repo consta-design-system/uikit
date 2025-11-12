@@ -1,89 +1,153 @@
-import { MdxMenu, MdxInformer } from '@consta/stand';
 import { NotificationExample } from './examples/NotificationExample/NotificationExample';
+import { NotificationExamplePopover } from './examples/NotificationExamplePopover/NotificationExamplePopover';
+import { NotificationExampleSidebar } from './examples/NotificationExampleSidebar/NotificationExampleSidebar';
+import { NotificationExampleRender } from './examples/NotificationExampleRender/NotificationExampleRender';
+import { NotificationItemExample } from './examples/NotificationItemExample/NotificationItemExample';
+import { NotificationGroupExample } from './examples/NotificationGroupExample/NotificationGroupExample';
+import { NotificationHeaderExample } from './examples/NotificationHeaderExample/NotificationHeaderExample';
+import { NotificationActionsExample } from './examples/NotificationActionsExample/NotificationActionsExample';
 import {
-  NotificationListExample,
-  NotificationListExampleBasic,
-} from './examples/NotificationListExample/NotificationListExample';
+  NotificationExampleGroupsByDay,
+  NotificationExampleGroupByRead,
+  NotificationExampleGroups,
+} from './examples/NotificationExampleGroups/NotificationExampleGroups';
+import { MdxMenu, MdxTabs, MdxInformer } from '@consta/stand';
 
-import { NotificationListExampleActions } from './examples/NotificationListExampleActions/NotificationListExampleActions';
-import {
-  NotificationListExampleDate,
-  NotificationListExampleGroups,
-} from './examples/NotificationListExampleGroups/NotificationListExampleGroups';
-import { NotificationItemExampleBasic } from './examples/NotificationItemExampleBasic/NotificationItemExampleBasic';
-import { NotificationItemExampleBadges } from './examples/NotificationItemExampleBadges/NotificationItemExampleBadges';
-import { NotificationItemExampleView } from './examples/NotificationItemExampleView/NotificationItemExampleView';
-import { NotificationItemExampleAction } from './examples/NotificationItemExampleAction/NotificationItemExampleAction';
-import { NotificationItemExampleRead } from './examples/NotificationItemExampleRead/NotificationItemExampleRead';
-
-```tsx
-import { Notification } from '@consta/header/Notification';
+```ts
+import { Notification } from '@consta/uikit/Notification';
 ```
 
-<MdxMenu>
+## Свойства компонента Notification
 
-- [Нотификации](#нотификации)
-- [Список уведомлений](#список-уведомлений)
-  - [Действия](#действия)
-  - [Группировка](#группировка)
-    - [По дням](#группировка-по-дням)
-    - [По группам](#группировка-по-группам)
-  - [Свойства NotificationList](#свойства-notificationlist)
-- [Уведомление](#уведомление)
-  - [Контент](#контент)
-  - [Бейджики](#бейджики)
-  - [Изображение или аватар](#изображение-или-аватар)
-  - [Действия с уведомлением](#действия-с-уведомлением)
-  - [Прочитанные](#прочитанные)
-  - [Свойства NotificationItem](#свойства-notificationitem)
-- [Мобильная версия](#мобильная-версия)
-- [Импорт](#импорт)
-- [Список свойств](#свойства)
+| Свойство             | Тип                                | По умолчанию                     | Описание                                            |
+| -------------------- | ---------------------------------- | -------------------------------- | --------------------------------------------------- |
+| `items`              | `ITEM[]`                           | -                                | Массив элементов уведомлений                        |
+| `getItemLabel`       | `NotificationPropGetItemLabel`     | `(item) => item.label`           | Функция получения заголовка элемента                |
+| `getItemClassName`   | `NotificationPropGetItemClassName` | -                                | Функция получения CSS класса для элемента           |
+| `getItemContent`     | `NotificationPropGetItemContent`   | `(item) => item.content`         | Функция получения содержимого элемента              |
+| `getItemRead`        | `NotificationPropGetItemRead`      | `(item) => item.read`            | Функция получения статуса прочтения элемента        |
+| `getItemCaption`     | `NotificationPropGetItemCaption`   | `(item) => item.caption`         | Функция получения подписи элемента                  |
+| `getItemRender`      | `NotificationPropGetItemRender`    | -                                | Функция рендеринга элемента                         |
+| `getItemActions`     | `NotificationPropGetItemActions`   | `(item) => item.actions`         | Функция получения действий элемента                 |
+| `getItemGroup`       | `NotificationPropGetItemGroup`     | `(item) => item.group`           | Функция получения группы элемента                   |
+| `getItemUserName`    | `NotificationPropGetItemUserName`  | `(item) => item.userName`        | Функция получения имени пользователя элемента       |
+| `getItemUserImage`   | `NotificationPropGetItemUserImage` | `(item) => item.userImage`       | Функция получения изображения пользователя элемента |
+| `getGroupId`         | `NotificationPropGetGroupId`       | `(group) => group.id`            | Функция получения ID группы                         |
+| `getGroupActions`    | `NotificationPropGetGroupActions`  | `(group) => group.actions`       | Функция получения действий группы                   |
+| `getGroupLabel`      | `NotificationPropGetGroupLabel`    | `(group) => group.label`         | Функция получения заголовка группы                  |
+| `getGroupRender`     | `NotificationPropGetGroupRender`   | -                                | Функция рендеринга группы                           |
+| `groups`             | `GROUP[]`                          | -                                | Массив групп уведомлений                            |
+| `sortGroups`         | `NotificationPropSortGroups`       | -                                | Функция сортировки групп                            |
+| `itemSpace`          | `MixSpaceProps`                    | `{ pH: 's', mB: 's' }`           | Отступы для элементов                               |
+| `groupSpace`         | `MixSpaceProps`                    | `{ pV: 'xs', pH: 's', mB: 's' }` | Отступы для групп                                   |
+| `scrollContainerRef` | `React.RefObject<HTMLDivElement>`  | -                                | Ссылка на контейнер прокрутки                       |
+| `className`          | `string`                           | -                                | CSS класс для контейнера                            |
+| `ref`                | `React.RefObject<HTMLDivElement>`  | -                                | Ссылка на контейнер                                 |
 
-</MdxMenu>
+```ts
+type NotificationDefaultGroup = {
+  label: string;
+  id: string;
+  actions?: NotificationItemAction[];
+};
 
-## Нотификации
+type NotificationDefaultItem = {
+  label: string;
+  userName?: string;
+  userImage?: string;
+  content?: React.ReactNode;
+  read?: boolean;
+  caption?: string;
+  actions?: NotificationItemAction[];
+  onClick?: React.EventHandler<React.MouseEvent>;
+  group?: string;
+};
 
-Список уведомлений работает так же, как в компоненте [NotificationList](#список-уведомлений).
+type NotificationPropGetItemLabel<ITEM> = (item: ITEM) => string;
+type NotificationPropGetItemContent<ITEM> = (item: ITEM) => React.ReactNode;
+
+type NotificationPropGetItemRead<ITEM> = (item: ITEM) => boolean | undefined;
+
+type NotificationPropGetItemCaption<ITEM> = (item: ITEM) => React.ReactNode;
+
+type NotificationPropGetItemUserName<ITEM> = (item: ITEM) => string | undefined;
+
+type NotificationPropGetItemUserImage<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+
+type NotificationPropGetItemActions<ITEM> = (
+  item: ITEM,
+) => NotificationItemAction[] | undefined;
+
+type NotificationPropGetItemGroup<ITEM> = (
+  item: ITEM,
+) => string | number | undefined;
+
+type NotificationPropGetGroupId<GROUP> = (group: GROUP) => string | undefined;
+
+type NotificationPropGetGroupLabel<ITEM, GROUP> = (
+  group: Group<ITEM, GROUP>,
+) => string | undefined;
+type NotificationPropGetGroupActions<ITEM, GROUP> = (
+  group: Group<ITEM, GROUP>,
+) => NotificationItemAction[] | undefined;
+
+type NotificationPropSortGroups<ITEM, GROUP> = (
+  a: Group<ITEM, GROUP>,
+  b: Group<ITEM, GROUP>,
+) => number;
+
+type NotificationPropGetItemRender<ITEM> = (item: ITEM) => React.ReactNode;
+
+type NotificationPropGetGroupRender<ITEM, GROUP> = (
+  group: Group<ITEM, GROUP>,
+) => React.ReactNode;
+
+type NotificationPropGetItemClassName<ITEM> = (item: ITEM) => string;
+
+type NotificationPropOnItemClick<ITEM> = (
+  item: ITEM,
+  e: React.MouseEvent<HTMLElement>,
+) => void;
+```
+
+## Содержимое элементов
+
+Список нотификаций задаётся через свойство items, которое принимает массив объектов типа NotificationDefaultItem. Каждому объекту можно указать:
+
+- label — текст бейджика или функция getItemLabel.
+- content — текст содержимого или функция getItemContent.
+- read — флаг прочтения или функция getItemRead.
+- caption — текст подписи или функция getItemCaption.
+- actions — массив действий или функция getItemActions.
+- group — группа или функция getItemGroup.
+- userName — имя пользователя или функция getItemUserName.
+- userImage — изображение пользователя или функция getItemUserImage.
+
+### Пример
+
+<MdxTabs>
+
+<NotificationExample />
 
 ```tsx
 import { IconEye } from '@consta/icons/IconEye';
 import { IconTrash } from '@consta/icons/IconTrash';
 
-export const items: NotificationDefaultItem[] = [
+import {
+  Notification,
+  NotificationDefaultItem,
+} from '@consta/uikit/Notification';
+
+const emptyFunction = (e: React.MouseEvent) => {};
+
+const items: NotificationDefaultItem[] = [
   {
     label: 'Иванов Иван Иванович',
-    description: 'Добавил файлы в проект, план/факт по расчету предварительные',
-    image: 'https://avatars.githubusercontent.com/u/13190808?v=4',
-    date: new Date(2021, 10, 12, 13, 57, 0),
-    read: false,
-    badges: [
-      {
-        label: 'отчеты 1',
-        status: 'normal',
-      },
-      {
-        label: 'файлы 2',
-        status: 'warning',
-      },
-      {
-        label: 'система 3',
-        status: 'success',
-      },
-      {
-        label: 'отчеты 4',
-        status: 'normal',
-      },
-      {
-        label: 'файлы 5',
-        status: 'warning',
-      },
-      {
-        label: 'система 6',
-        status: 'success',
-      },
-    ],
-    onClick: emptyFunction,
+    content: 'Добавил файлы в проект, план/факт по расчету предварительные',
+    caption: 'Меньше минуты назад',
+    read: true,
     actions: [
       {
         label: 'Удалить',
@@ -96,525 +160,886 @@ export const items: NotificationDefaultItem[] = [
         icon: IconEye,
       },
     ],
-    view: 'user',
-    group: 'd',
-  },
-
-  // и так для каждого уведомления
-];
-
-export const NotificationExample = () => (
-  <Notification
-    listClassName={cnNotificationStories('List')}
-    items={items}
-    title="Уведомления"
-    actions={actions}
-    groupByDay
-  />
-);
-```
-
-<NotificationExample />
-
-## Список уведомлений
-
-Данные для уведомлений можно указать в свойстве `items` (тип [NotificationListDefaultItem](#свойства-notificationlist)). В него входит:
-
-- `label` — заголовок уведомления (обязательный),
-- `description` — описание,
-- `image` — ссылка на изображение,
-- `read` — отмечает сообщение [прочитанным](#прочитанные),
-- `date` — дата,
-- `badges` — [список бейджиков](#бейджики),
-- `actions` — объект с описанием [действий](#действия-с-уведомлением), которые можно совершить с этим уведомлением,
-- `group` — [группа](#группировка), к которой относится это уведомление,
-- `view` — [внешний вид](#вид) списка c уведомлениями,
-- `onClick` — возвращает клик на этот пункт.
-
-Вот пример простого списка: в нём есть заголовок, описание и картинка, больше ничего:
-
-```tsx
-import {
-  NotificationList,
-  NotificationListDefaultItem,
-} from '@consta/header/Notification';
-
-const itemsBasic: NotificationListDefaultItem[] = [
-  {
-    label: 'Один человек',
-    description: 'Принёс краску',
-    image: 'https://avatars.githubusercontent.com/u/13190808?v=4',
   },
   {
-    label: 'Другой человек',
-    description: 'Покрасил забор',
-    image: 'https://avatars.githubusercontent.com/u/12581569?s=40&v=4',
+    label: 'Иванов Иван Иванович',
+    content: 'Добавил файлы в проект, план/факт по расчету предварительные',
+    caption: 'Меньше минуты назад',
+    read: true,
+    actions: [
+      {
+        label: 'Удалить',
+        onClick: emptyFunction,
+        icon: IconTrash,
+      },
+      {
+        label: 'Отметить как прочитанное',
+        onClick: emptyFunction,
+        icon: IconEye,
+      },
+    ],
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    content: 'Добавил файлы в проект, план/факт по расчету предварительные',
+    read: false,
+    actions: [
+      {
+        label: 'Удалить',
+        onClick: emptyFunction,
+        icon: IconTrash,
+      },
+      {
+        label: 'Отметить как прочитанное',
+        onClick: emptyFunction,
+        icon: IconEye,
+      },
+    ],
   },
 ];
 
-export const NotificationListExample = () => (
-  <NotificationList
-    items={itemsBasic}
-    title="Уведомления о действиях с забором"
-  />
-);
+const NotificationExample = () => <Notification items={items} />;
 ```
 
-<NotificationListExampleBasic />
+</MdxTabs>
 
-### Действия
+## Группировка
 
-Дополнительные действия, которые пользователь может совершать с уведомлениями,
-показываются в выпадающем меню — при нажатии на многоточие.
+Группировка нотификаций позволяет сгруппировать нотификации по одному или нескольким полям. Группировка позволяет упростить просмотр нотификаций. Для группировки используется свойство `groups` и(или) `getItemGroup`.
 
-Можно совершать действия [со всем списком уведомлений сразу](#действия-со-списком) или только [с одним уведомлением](#действия-с-уведомлением).
+### Группировка по признаку в элементе
 
-Чтобы создать уведомления, используйте объект типа [NotificationItemAction](#свойства-notificationlist). Что внутри:
+Вы можете не указывать массив групп, а указать функцию `getItemGroup`, которая возвращает признак группировки.
 
-- `label` — название действия (например, «Удалить»),
-- `icon` — иконка из [библиотеки иконок](##LIBS.LIB.STAND/lib:uikit/stand:components-icon-stable),
-- `onClick` — функция для получения клика по этому элементу.
+Пример с группировкой по дню:
 
-Вы можете создать уведомления с кастомным типом данных, отличающимся от [NotificationListDefaultItem](#свойства-notificationlist). В этом случае используйте геттеры
-`getActionLabel`, `getActionIcon`, `getActionOnClick`, чтобы указать компоненту,
-откуда брать описание действий.
+<MdxTabs>
 
-Действия со списком можно посмотреть по нажатию на многоточие рядом с заголовком списка. Чтобы их добавить, создайте объект с описанием действий и передайте в свойстве `actions`.
+<NotificationExampleGroupsByDay />
 
 ```tsx
-import {
-  NotificationList,
-  NotificationListDefaultItem,
-} from '@consta/header/Notification';
-
+import { IconAllDone } from '@consta/icons/IconAllDone';
 import { IconTrash } from '@consta/icons/IconTrash';
-import { IconEye } from '@consta/icons/IconEye';
 
-const itemsBasic: NotificationListDefaultItem[] = [
-  {
-    label: 'Один человек',
-    description: 'Принёс краску',
-    image: 'https://avatars.githubusercontent.com/u/13190808?v=4',
-  },
-  {
-    label: 'Другой человек',
-    description: 'Покрасил забор',
-    image: 'https://avatars.githubusercontent.com/u/12581569?s=40&v=4',
-  },
-];
-
-const actions: NotificationItemAction[] = [
-  {
-    label: 'Отметить все как прочитанное',
-    icon: IconEye,
-  },
-  {
-    label: 'Удалить все',
-    icon: IconTrash,
-  },
-];
-
-export const NotificationListExampleActions = () => (
-  <NotificationList items={itemsBasic} actions={actions} title="Уведомления" />
-);
-```
-
-<NotificationListExampleActions />
-
-<MdxInformer status="warning">
-
-Формулируйте описание действий так, чтобы было понятно, что действие применится ко всем элементам списка: «Удалить всё», «Отметить всё», «Наплевать на всё».
-
-</MdxInformer>
-
-### Группировка
-
-За группировку событий отвечает свойство `groups`. Есть два варианта группировки: по дням или по группам.
-
-#### Группировка по дням
-
-Чтобы с группировать уведомления по дням:
-
-1. добавьте дату в объект с описанием каждого уведомления — в атрибуте `date`,
-2. укажите свойство `groupByDay`.
-
-```tsx
 import {
-  NotificationList,
-  NotificationListDefaultItem,
-} from '@consta/header/NotificationList';
+  defaultDateFormat,
+  groupLabelByDay,
+  groupsByDay,
+  Notification,
+  sortGroupByDay,
+} from '@consta/uikit/Notification';
 
-const itemsDate: NotificationListDefaultItem[] = [
-  {
-    label: 'Первое уведомление',
-    description: 'Привет, мир',
-    image: 'https://avatars.githubusercontent.com/u/13190808?v=4',
-    date: new Date(2021, 10, 12, 13, 57, 0),
-  },
-  {
-    label: 'Второе уведомление',
-    description: 'Пока-пока',
-    image: 'https://avatars.githubusercontent.com/u/12581569?s=40&v=4',
-    date: new Date(2021, 10, 12, 13, 57, 0),
-  },
-  {
-    label: 'Третее уведомление',
-    description: 'Пока-пока',
-    image: 'https://avatars.githubusercontent.com/u/12581569?s=40&v=4',
-    date: new Date(),
-  },
-  {
-    label: 'Четвёртое уведомление',
-    description: 'Пока-пока',
-    image: 'https://avatars.githubusercontent.com/u/12581569?s=40&v=4',
-    date: new Date(),
-  },
-];
+const emptyFunction = (e: React.MouseEvent) => {};
 
-export const NotificationListExampleDate = () => (
-  <NotificationList items={itemsDate} groupByDay title="Уведомления" />
-);
-```
-
-<NotificationListExampleDate />
-
-Чтобы поменять формат даты, используйте свойство `itemDateFormat`.
-
-#### Группировка по группам
-
-Чтобы разбить уведомления на группы:
-
-1. передайте в свойстве `groups` объект с описанием групп типа [NotificationListDefaultGroup](#свойства-notificationlist) с двумя обязательными полями:
-
-- `label` — название группы,
-- `id` — идентификатор группы.
-
-2. добавьте идентификатор группы в объект с описанием уведомления — в свойстве `group`.
-
-```tsx
-import {
-  NotificationList,
-  NotificationListDefaultItem,
-  NotificationListDefaultGroup,
-} from '@consta/header/Notification';
-
-const groups: NotificationListDefaultGroup[] = [
-  {
-    label: 'важное',
-    id: 'important',
-  },
-  {
-    label: 'неважное',
-    id: 'not',
-  },
-];
-
-const itemsGroups: NotificationListDefaultItem[] = [
-  {
-    label: 'Первое уведомление',
-    description: 'Привет, мир',
-    image: 'https://avatars.githubusercontent.com/u/13190808?v=4',
-    group: 'important',
-  },
-  {
-    label: 'Второе уведомление',
-    description: 'Пока-пока',
-    image: 'https://avatars.githubusercontent.com/u/12581569?s=40&v=4',
-    group: 'not',
-  },
-  {
-    label: 'Третее уведомление',
-    description: 'Пока-пока',
-    image: 'https://avatars.githubusercontent.com/u/12581569?s=40&v=4',
-    group: 'not',
-  },
-  {
-    label: 'Четвёртое уведомление',
-    description: 'Пока-пока',
-    image: 'https://avatars.githubusercontent.com/u/12581569?s=40&v=4',
-    group: 'important',
-  },
-];
-
-export const NotificationListExampleGroups = () => (
-  <NotificationList items={itemsGroups} groups={groups} title="Уведомления" />
-);
-```
-
-<NotificationListExampleGroups />
-
-### Свойства NotificationList
-
-```tsx
-type NotificationListDefaultGroup = {
+type Item = {
   label: string;
-  id: string;
-};
-
-type NotificationListDefaultItem = {
-  label: string;
-  description?: string;
-  image?: string;
+  date: Date;
   read?: boolean;
-  date?: Date;
-  badges?: NotificationItemBadge[];
-  actions?: NotificationItemAction[];
-  onClick?: React.EventHandler<React.MouseEvent>;
-  group?: string;
-  view?: 'default' | 'user';
+  content: string;
 };
 
-type NotificationListPropGetItemLabel<ITEM> = (item: ITEM) => string;
-type NotificationListPropGetItemDescription<ITEM> = (
-  item: ITEM,
-) => string | undefined;
-type NotificationListPropGetItemImage<ITEM> = (
-  item: ITEM,
-) => string | undefined;
-type NotificationListPropGetItemRead<ITEM> = (
-  item: ITEM,
-) => boolean | undefined;
-type NotificationListPropGetItemDate<ITEM> = (item: ITEM) => Date | undefined;
-type NotificationListPropGetItemBadges<ITEM> = (
-  item: ITEM,
-) => NotificationItemBadge[] | undefined;
-type NotificationListPropGetItemActions<ITEM> = (
-  item: ITEM,
-) => NotificationItemAction[] | undefined;
-type NotificationListPropGetItemGroup<ITEM> = (
-  item: ITEM,
-) => string | undefined;
-type NotificationListPropGetItemView<ITEM> = (
-  item: ITEM,
-) => 'default' | 'user' | undefined;
-type NotificationListPropItemDateFormat = (date: Date) => string;
-type NotificationListPropGetActionLabel<ACTION> = (action: ACTION) => string;
-type NotificationListPropGetActionIcon<ACTION> = (
-  action: ACTION,
-) => React.FC<IconProps> | undefined;
-type NotificationListPropGetActionOnClick<ACTION> = (
-  action: ACTION,
-) => React.EventHandler<React.MouseEvent> | undefined;
+const items: Item[] = [
+  {
+    label: 'Иванов Иван Иванович',
+    date: new Date(),
+    read: true,
+    content: 'Добавил файлы в проект',
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    date: new Date(),
+    read: true,
+    content: 'Исправил документы',
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    date: new Date(2025, 10, 12, 13, 57, 0),
+    read: false,
+    content: 'Отправил расчеты',
+  },
+];
 
-type NotificationListPropGetGroupLabel<GROUP> = (group: GROUP) => string;
-type NotificationListPropGetGroupId<GROUP> = (group: GROUP) => string | number;
-type NotificationListPropGroupLabelFormat<GROUP_BY_DAY> =
-  GROUP_BY_DAY extends true ? (timestamp: number) => string : never;
-
-const defaultGetActionIcon: NotificationListPropGetActionIcon<
-  NotificationItemAction
-> = (action) => action.icon;
-const defaultGetActionLabel: NotificationListPropGetActionLabel<
-  NotificationItemAction
-> = (action) => action.label;
-const defaultGetActionOnClick: NotificationListPropGetActionOnClick<
-  NotificationItemAction
-> = (action) => action.onClick;
-const defaultGetGroupId: NotificationListPropGetGroupId<
-  NotificationListDefaultGroup
-> = (group) => group.id;
-const defaultGetGroupLabel: NotificationListPropGetGroupLabel<
-  NotificationListDefaultGroup
-> = (group) => group.label;
-const defaultGetItemActions: NotificationListPropGetItemActions<
-  NotificationListDefaultItem
-> = (item) => item.actions;
-const defaultGetItemBadges: NotificationListPropGetItemBadges<
-  NotificationListDefaultItem
-> = (item) => item.badges;
-const defaultGetItemDate: NotificationListPropGetItemDate<
-  NotificationListDefaultItem
-> = (item) => item.date;
-const defaultGetItemDescription: NotificationListPropGetItemDescription<
-  NotificationListDefaultItem
-> = (item) => item.description;
-const defaultGetItemGroup: NotificationListPropGetItemGroup<
-  NotificationListDefaultItem
-> = (item) => item.group;
-const defaultGetItemImage: NotificationListPropGetItemImage<
-  NotificationListDefaultItem
-> = (item) => item.image;
-const defaultGetItemLabel: NotificationListPropGetItemLabel<
-  NotificationListDefaultItem
-> = (item) => item.label;
-const defaultGetItemRead: NotificationListPropGetItemRead<
-  NotificationListDefaultItem
-> = (item) => item.read;
-const defaultGetItemView: NotificationListPropGetItemView<
-  NotificationListDefaultItem
-> = (item) => item.view;
-
-const NotificationListDefaultGroupLabelFormat: NotificationListPropGroupLabelFormat<
-  true
-> = (timestamp) => {
-  if (isToday(timestamp)) {
-    return 'Сегодня';
-  }
-  if (isYesterday(timestamp)) {
-    return 'Вчера';
-  }
-  return format(timestamp, 'dd.MM.yyyy');
-};
-
-const defaultDateFormat = (date: Date): string => {
-  const currentDate = new Date();
-
-  if (currentDate.getTime() - date.getTime() < 3600000) {
-    return formatDistanceToNow(date, { locale: ruLocale, addSuffix: true });
-  }
-
-  if (format(currentDate, 'dd.MM.yyyy') === format(date, 'dd.MM.yyyy')) {
-    return format(date, 'HH:mm');
-  }
-
-  return format(date, 'dd.MM.yyyy HH:mm');
-};
-```
-
-| Свойство                            | Тип                                           | По умолчанию                              | Описание                                             |
-| ----------------------------------- | --------------------------------------------- | ----------------------------------------- | ---------------------------------------------------- |
-| [`items`](#список-уведомлений)      | `ITEM[]`                                      | -                                         | Элементы                                             |
-| [`actions?`](#действия)             | `ACTIONS[]`                                   | -                                         | Действия списка                                      |
-| [`groupByDay?`](#группировка)       | `boolean`                                     | -                                         | Групировка элементов по дням                         |
-| [`groupLabelFormat?`](#группировка) | `NotificationListPropGroupLabelFormat`        | `NotificationListDefaultGroupLabelFormat` | Групировка элементов по дням                         |
-| [`groups?`](#группировка)           | `GROUP_BY_DAY extends true ? never : GROUP[]` | -                                         | Группы                                               |
-| `title?`                            | `string`                                      | -                                         | Заголовок                                            |
-| `onClose?`                          | `React.EventHandler<React.MouseEvent>`        | -                                         | Функция события клика на кнопку около заголовка      |
-| `itemDateFormat`                    | `NotificationListPropItemDateFormat`          | `defaultDateFormat`                       | Функция форматирования даты элемента                 |
-| `getItemLabel?`                     | `NotificationListPropGetItemLabel`            | `defaultGetItemLabel`                     | Функция для определения заголовка элемента           |
-| `getItemDescription?`               | `NotificationListPropGetItemDescription`      | `defaultGetItemDescription`               | Функция для определения описания элемента            |
-| `getItemImage?`                     | `NotificationListPropGetItemImage`            | `defaultGetItemImage`                     | Функция для определения изображения элемента         |
-| `getItemRead?`                      | `NotificationListPropGetItemRead`             | `defaultGetItemRead`                      | Функция для определения статуса "прочитано" элемента |
-| `getItemDate?`                      | `NotificationListPropGetItemDate`             | `defaultGetItemDate`                      | Функция для определения даты элемента                |
-| `getItemBadges?`                    | `NotificationListPropGetItemBadges`           | `defaultGetItemBadges`                    | Функция для определения бейджов элемента             |
-| `getItemActions?`                   | `NotificationListPropGetItemActions`          | `defaultGetItemActions`                   | Функция для определения действий элемента            |
-| `getItemGroup?`                     | `NotificationListPropGetItemGroup`            | `defaultGetItemGroup`                     | Функция для определения группы элемента              |
-| `getItemView?`                      | `NotificationListPropGetItemView`             | `defaultGetItemView`                      | Функция для определения вида элемента                |
-| [`getActionLabel?`](#действия)      | `NotificationListPropGetActionLabel`          | `defaultGetActionLabel`                   | Функция для определения заголовка действия           |
-| [`getActionIcon?`](#действия)       | `NotificationListPropGetActionIcon`           | `defaultGetActionIcon`                    | Функция для определения иконки действия              |
-| [`getActionOnClick?`](#действия)    | `NotificationListPropGetActionOnClick`        | `defaultGetActionOnClick`                 | Функция для определения функчии действия             |
-| [`getGroupLabel?`](#группировка)    | `NotificationListPropGetGroupLabel`           | `defaultGetGroupLabel`                    | Функция для определения заголовка группы             |
-| [`getGroupId?`](#группировка)       | `NotificationListPropGetGroupId`              | `defaultGetGroupId`                       | Функция для определения уникального ключа группы     |
-| `className?`                        | `string`                                      | -                                         | Дополнительный CSS-класс                             |
-| `ref?`                              | `React.Ref<HTMLDivElement>`                   | -                                         | Ссылка на корневой DOM-элемент                       |
-
-## Уведомление
-
-### Контент
-
-Основные элементы уведомления задаются через данные свойства:
-
-- `title` — заголовок уведомления (обязательный),
-- `description` — описание,
-- `imageUrl` — ссылка на изображение,
-- `date` — дата.
-
-```tsx
-const date = new Date(2021, 10, 12, 13, 57, 0);
-
-export const NotificationItemExampleBasic = () => {
-  return (
-    <NotificationItem
-      title="Заголовок"
-      date={date}
-      description="Описание"
-      imageUrl="https://avatars.githubusercontent.com/u/12581569?s=40&v=4"
-    />
-  );
-};
-```
-
-<NotificationItemExampleBasic />
-
-### Бейджики
-
-Если вам нужно добавить к уведомлению бейджики — с тегами или статусами,
-передайте в свойстве `badges` массив с данными типа [`NotificationItemBadge`](#свойства-notificationitem). Что внутри:
-
-- `label` — надпись на бейджике (обязательно),
-- `status` — статус бейджика, варианты: `'success'`, `'error'`, `'warning'`, `'normal'`, `'system'` (см. [Badge](##LIBS.LIB.STAND/lib:uikit/stand:components-badge-stable)). По умолчанию `'normal'`.
-
-```tsx
-import { NotificationItem } from '@consta/header/Notification';
-
-export const NotificationItemExampleBadges = () => (
-  <NotificationItem
-    title="Один человек"
-    description="Принёс краску"
-    imageUrl="https://avatars.githubusercontent.com/u/13190808?v=4"
-    badges={[
+const NotificationExampleGroupsByDay = () => (
+  <Notification
+    items={items}
+    getItemGroup={({ date }) => groupsByDay(date)}
+    getGroupLabel={({ key }) => groupLabelByDay(key)}
+    getItemCaption={(item) => defaultDateFormat(item.date)}
+    getItemUserName={(item) => item.label}
+    getItemActions={() => [
       {
-        label: 'готов к работе',
-        status: 'warning',
+        label: 'Прочитать',
+        onClick: emptyFunction,
+        icon: IconAllDone,
       },
+      { label: 'Удалить', onClick: emptyFunction, icon: IconTrash },
+    ]}
+    sortGroups={sortGroupByDay}
+    getGroupActions={() => [
       {
-        label: 'горит',
-        status: 'error',
+        label: 'Прочитать всё',
+        onClick: () => {},
+        icon: IconAllDone,
       },
+      { label: 'Удалить всё', onClick: emptyFunction, icon: IconTrash },
     ]}
   />
 );
 ```
 
-<NotificationItemExampleBadges />
+</MdxTabs>
 
-### Изображение или аватар
+Пример с группировкой по признаку прочитанности
 
-По умолчанию уведомление ведёт себя как обычный текст с заголовком и изображением.
-Если укажете `view='user'`, уведомление будет вести себя как компонент [User](##LIBS.LIB.STAND/lib:uikit/stand:components-user-stable): `title` превратится в имя пользователя, а `imageUrl` — в его аватарку.
+<MdxTabs>
 
-Это не сильно влияет на весь компонент, но если не укажете картинку, аватарка сформируется из имени пользователя (цвет подбирается автоматически).
-
-При `view='default'` изображение ничем не заменяется.
+<NotificationExampleGroupByRead />
 
 ```tsx
-import { NotificationItem } from '@consta/header/Notification';
+import { IconAllDone } from '@consta/icons/IconAllDone';
+import { IconTrash } from '@consta/icons/IconTrash';
 
-export const NotificationItemExampleView = () => (
-  <>
-    <NotificationItem
-      title="Иванов Иван Иванович"
-      description="Принёс краску"
-      view="default"
-    />
-    <NotificationItem
-      title="Петров Петр Петрович"
-      description="Покрасил забор"
-      view="user"
-    />
-  </>
+import { defaultDateFormat, Notification } from '@consta/uikit/Notification';
+
+const emptyFunction = (e: React.MouseEvent) => {};
+
+type Item = {
+  label: string;
+  date: Date;
+  read?: boolean;
+  content: string;
+};
+
+const items: Item[] = [
+  {
+    label: 'Иванов Иван Иванович',
+    date: new Date(),
+    read: true,
+    content: 'Добавил файлы в проект',
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    date: new Date(),
+    read: true,
+    content: 'Исправил документы',
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    date: new Date(2025, 10, 12, 13, 57, 0),
+    read: false,
+    content: 'Отправил расчеты',
+  },
+];
+
+const NotificationExampleGroupByRead = () => (
+  <Notification
+    items={items}
+    getItemGroup={({ read }) => (read ? 'read' : 'not-read')}
+    getGroupLabel={({ key }) =>
+      key === 'read' ? 'Прочитанные' : 'Непрочитанные'
+    }
+    getItemCaption={(item) => defaultDateFormat(item.date)}
+    getItemUserName={(item) => item.label}
+    getItemRead={() => undefined}
+    getItemActions={() => [
+      {
+        label: 'Прочитать',
+        onClick: emptyFunction,
+        icon: IconAllDone,
+      },
+      { label: 'Удалить', onClick: emptyFunction, icon: IconTrash },
+    ]}
+    sortGroups={sortGroupByDay}
+    getGroupActions={() => [
+      {
+        label: 'Прочитать всё',
+        onClick: () => {},
+        icon: IconAllDone,
+      },
+      { label: 'Удалить всё', onClick: emptyFunction, icon: IconTrash },
+    ]}
+  />
 );
 ```
 
-<NotificationItemExampleView />
+</MdxTabs>
 
-### Действия с уведомлением
+### Группировка по массиву групп
 
-Дополнительные действия, которые пользователь может совершать с уведомлением,
-показываются в выпадающем меню — при нажатии на многоточие.
+Для группировки по массиву групп используйте свойство `groups`.
 
-Описать эти действия можно в свойстве `actions` типа [NotificationItemAction](#свойства-notificationitem).
+<MdxTabs>
+
+<NotificationExampleGroups />
 
 ```tsx
-import { NotificationItem } from '@consta/header/Notification';
-
+import { IconAllDone } from '@consta/icons/IconAllDone';
 import { IconTrash } from '@consta/icons/IconTrash';
-import { IconEye } from '@consta/icons/IconEye';
 
-export const NotificationItemExampleAction = () => {
+import {
+  defaultDateFormat,
+  Notification,
+  NotificationDefaultGroup,
+} from '@consta/uikit/Notification';
+
+const emptyFunction = (e: React.MouseEvent) => {};
+
+type Item = {
+  label: string;
+  date: Date;
+  read?: boolean;
+  content: string;
+};
+
+const itemsWithGroups = [
+  {
+    label: 'Иванов Иван Иванович',
+    date: new Date(),
+    read: true,
+    content: 'Добавил файлы в проект',
+    group: '1',
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    date: new Date(),
+    read: false,
+    content: 'Отправил расчеты',
+    group: '1',
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    date: new Date(),
+    read: true,
+    content: 'Отправил расчеты',
+    group: '2',
+  },
+];
+
+const groups: NotificationDefaultGroup[] = [
+  {
+    id: '1',
+    label: 'Важные',
+    actions: [
+      {
+        label: 'Прочитать всю группу',
+        onClick: emptyFunction,
+        icon: IconAllDone,
+      },
+      { label: 'Удалить всю группу', onClick: emptyFunction, icon: IconTrash },
+    ],
+  },
+  {
+    id: '2',
+    label: 'Неважные',
+    actions: [
+      {
+        label: 'Прочитать всю группу',
+        onClick: emptyFunction,
+        icon: IconAllDone,
+      },
+      { label: 'Удалить всю группу', onClick: emptyFunction, icon: IconTrash },
+    ],
+  },
+];
+
+const NotificationExampleGroups = () => (
+  <Notification
+    items={itemsWithGroups}
+    groups={groups}
+    getItemCaption={(item) => defaultDateFormat(item.date)}
+    getItemUserName={(item) => item.label}
+    getItemActions={() => [
+      {
+        label: 'Прочитать',
+        onClick: emptyFunction,
+        icon: IconAllDone,
+      },
+      { label: 'Удалить', onClick: emptyFunction, icon: IconTrash },
+    ]}
+    getGroupActions={() => [
+      {
+        label: 'Прочитать всё',
+        onClick: () => {},
+        icon: IconAllDone,
+      },
+      { label: 'Удалить всё', onClick: emptyFunction, icon: IconTrash },
+    ]}
+  />
+);
+```
+
+</MdxTabs>
+
+## Кастомизация
+
+### Использование с всплывающие окнами
+
+Для использования с всплывающими окнами используйте компонент `Popover` или `SideBar`
+
+<MdxInformer>
+
+Если в ваших контеинерах используется скролл, то необходимо установить свойство `scrollContainerRef`, чтобы контекстное меню скрывалось при скролле.
+
+</MdxInformer>
+
+Пример использования с `Popover`:
+
+<MdxTabs>
+
+<NotificationExamplePopover />
+
+```tsx
+import './NotificationExamplePopover.css';
+
+import { IconEye } from '@consta/icons/IconEye';
+import { IconRing } from '@consta/icons/IconRing';
+import { IconTrash } from '@consta/icons/IconTrash';
+import { Example } from '@consta/stand';
+import React, { useRef } from 'react';
+import { Transition } from 'react-transition-group';
+
+import { Button } from '@consta/uikit/Button';
+import { ModalLayout } from '@consta/uikit/Modal';
+import { Popover } from '@consta/uikit/Popover';
+import { useFlag } from '@consta/uikit/useFlag';
+import { cnMixCard } from '@consta/uikit/MixCard';
+import {
+  animateTimeout,
+  cnMixPopoverAnimate,
+} from '@consta/uikit/MixPopoverAnimate';
+import { cnMixScrollBar } from '@consta/uikit/MixScrollBar';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+import { cn } from '##/utils/bem';
+
+import {
+  Notification,
+  NotificationDefaultItem,
+  NotificationHeader,
+} from '@consta/uikit/Notification';
+
+const emptyFunction = (e: React.MouseEvent) => {};
+
+const items: NotificationDefaultItem[] = [
+  {
+    label: 'Иванов Иван Иванович',
+    content: 'Добавил файлы в проект, план/факт по расчету предварительные',
+    caption: 'Меньше минуты назад',
+    read: true,
+    actions: [
+      {
+        label: 'Удалить',
+        onClick: emptyFunction,
+        icon: IconTrash,
+      },
+      {
+        label: 'Отметить как прочитанное',
+        onClick: emptyFunction,
+        icon: IconEye,
+      },
+    ],
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    content: 'Добавил файлы в проект, план/факт по расчету предварительные',
+    caption: 'Меньше минуты назад',
+    read: true,
+    actions: [
+      {
+        label: 'Удалить',
+        onClick: emptyFunction,
+        icon: IconTrash,
+      },
+      {
+        label: 'Отметить как прочитанное',
+        onClick: emptyFunction,
+        icon: IconEye,
+      },
+    ],
+  },
+  {
+    label: 'Иванов Иван Иванович',
+    content: 'Добавил файлы в проект, план/факт по расчету предварительные',
+    read: false,
+    actions: [
+      {
+        label: 'Удалить',
+        onClick: emptyFunction,
+        icon: IconTrash,
+      },
+      {
+        label: 'Отметить как прочитанное',
+        onClick: emptyFunction,
+        icon: IconEye,
+      },
+    ],
+  },
+];
+
+const cnNotificationExamplePopover = cn('NotificationExamplePopover');
+
+const NotificationExamplePopover = () => {
+  const [isOpen, setIsOpen] = useFlag();
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <>
+      <Button
+        ref={buttonRef}
+        iconLeft={IconRing}
+        label="Открыть уведомления"
+        onClick={setIsOpen.toggle}
+      />
+      <Transition
+        in={isOpen}
+        unmountOnExit
+        timeout={animateTimeout}
+        nodeRef={popoverRef}
+      >
+        {(animate) => {
+          return (
+            <Popover
+              className={cnNotificationExamplePopover('Popover', [
+                cnMixPopoverAnimate({ animate }),
+                cnMixCard({ shadow: true, form: 'round' }),
+              ])}
+              offset="xs"
+              anchorRef={buttonRef}
+              ref={popoverRef}
+              direction="downStartLeft"
+              style={{ zIndex: 1000 }}
+              onClickOutside={setIsOpen.off}
+            >
+              <ModalLayout
+                className={cnNotificationExamplePopover('ScrollContainer', [
+                  cnMixScrollBar({ size: 's' }),
+                ])}
+                border={[true, false]}
+                fixed={[true, false]}
+                space={[{ mB: 's' }]}
+                ref={scrollContainerRef}
+              >
+                <NotificationHeader
+                  className={cnNotificationExamplePopover(
+                    'Header',
+                    cnMixSpace({ p: 's' }),
+                  )}
+                  title="Уведомления"
+                  actions={[
+                    {
+                      label: 'Удалить всe',
+                      onClick: emptyFunction,
+                      icon: IconTrash,
+                    },
+                    {
+                      label: 'Отметить все как прочитанное',
+                      onClick: emptyFunction,
+                      icon: IconEye,
+                    },
+                  ]}
+                />
+                <Notification
+                  items={items}
+                  getItemUserName={(item) => item.label}
+                  scrollContainerRef={scrollContainerRef}
+                />
+              </ModalLayout>
+            </Popover>
+          );
+        }}
+      </Transition>
+    </>
+  );
+};
+```
+
+```css
+.NotificationExamplePopover {
+  &-Popover {
+    --modal-layout-z-index-for-fixed-slot: 10;
+    border-radius: 60px;
+    overflow: hidden;
+  }
+  &-Header {
+    background: var(--color-bg-default);
+  }
+  &-ScrollContainer {
+    max-height: 300px;
+    width: 300px;
+    overflow: auto;
+    background: var(--color-bg-default);
+    position: relative;
+  }
+}
+```
+
+</MdxTabs>
+
+Пример использования с `SideBar`:
+
+<MdxTabs>
+
+<NotificationExampleSidebar />
+
+```tsx
+import { IconEye } from '@consta/icons/IconEye';
+import { IconRing } from '@consta/icons/IconRing';
+import { IconTrash } from '@consta/icons/IconTrash';
+import { Example } from '@consta/stand';
+import React, { useRef } from 'react';
+
+import { Button } from '@consta/uikit/Button';
+import { ModalLayout } from '@consta/uikit/Modal';
+import { Sidebar } from '@consta/uikit/Sidebar';
+import { useFlag } from '@consta/uikit/useFlag';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+
+import {
+  Notification,
+  NotificationDefaultItem,
+  NotificationHeader,
+} from '@consta/uikit/Notification';
+
+const emptyFunction = (e: React.MouseEvent) => {};
+
+const item: NotificationDefaultItem = {
+  label: 'Иванов Иван Иванович',
+  content: 'Добавил файлы в проект, план/факт по расчету предварительные',
+  caption: 'Меньше минуты назад',
+  read: true,
+  actions: [
+    {
+      label: 'Удалить',
+      onClick: emptyFunction,
+      icon: IconTrash,
+    },
+    {
+      label: 'Отметить как прочитанное',
+      onClick: emptyFunction,
+      icon: IconEye,
+    },
+  ],
+};
+
+const items: NotificationDefaultItem[] = Array(30).fill(item);
+
+const NotificationExampleSidebar = () => {
+  const [isOpen, setIsOpen] = useFlag();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <>
+      <Button
+        ref={buttonRef}
+        iconLeft={IconRing}
+        label="Открыть уведомления"
+        onClick={setIsOpen.toggle}
+      />
+      <Sidebar
+        scrollContainerRef={scrollContainerRef}
+        isOpen={isOpen}
+        onClickOutside={setIsOpen.off}
+        style={{ zIndex: 100 }}
+        border
+      >
+        <ModalLayout
+          fixed={[true, false]}
+          border={[true, false]}
+          space={[{ mB: 's' }]}
+        >
+          <NotificationHeader
+            className={cnMixSpace({ p: 's' })}
+            onClose={setIsOpen.off}
+            title="Уведомления"
+            actions={[
+              {
+                label: 'Удалить всe',
+                onClick: emptyFunction,
+                icon: IconTrash,
+              },
+              {
+                label: 'Отметить все как прочитанное',
+                onClick: emptyFunction,
+                icon: IconEye,
+              },
+            ]}
+          />
+          <Notification
+            items={items}
+            getItemUserName={(item) => item.label}
+            scrollContainerRef={scrollContainerRef}
+          />
+        </ModalLayout>
+      </Sidebar>
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+### Кастомный рендеринг
+
+Для кастомного рендеринга используйте `renderItem`.
+
+<MdxTabs>
+
+<NotificationExampleRender />
+
+```tsx
+import { IconComponent } from '@consta/icons/Icon';
+import { IconCheck } from '@consta/icons/IconCheck';
+import { IconClose } from '@consta/icons/IconClose';
+import { Example } from '@consta/stand';
+import React from 'react';
+
+import { Button } from '@consta/uikit/Button';
+import { File } from '@consta/uikit/File';
+import { Tag } from '@consta/uikit/Tag';
+import { Text } from '@consta/uikit/Text';
+import { cnMixFlex } from '@consta/uikit/MixFlex';
+import { cnMixSpace } from '@consta/uikit/MixSpace';
+import { cn } from '##/utils/bem';
+
+import {
+  defaultDateFormat,
+  Notification,
+  NotificationCaption,
+  NotificationItem,
+} from '@consta/uikit/Notification';
+import photo from './photo.jpg';
+
+const cnNotificationExampleRender = cn('NotificationExampleRender');
+
+type Item = {
+  label?: string;
+  userName?: string;
+  content: string;
+  date: Date;
+  read: boolean;
+  buttons?: {
+    label: string;
+    onClick: () => void;
+    icon: IconComponent;
+    view: 'primary' | 'ghost';
+  }[];
+  docs?: { label: string; onClick: () => void; ext: string }[];
+  tags?: string[];
+  photo?: string;
+};
+
+const items: Item[] = [
+  {
+    label: 'Приглашение в группу ',
+    content: 'Вас пригласили в группу “Чаепительный чат”',
+    date: new Date(),
+    read: false,
+    buttons: [
+      {
+        label: 'Принять приглашение',
+        onClick: () => {},
+        icon: IconCheck,
+        view: 'primary',
+      },
+      {
+        label: 'Отклонить',
+        onClick: () => {},
+        icon: IconClose,
+        view: 'ghost',
+      },
+    ],
+  },
+  {
+    userName: 'Степанова Ольга Дмитриевна',
+    content:
+      'Приветушки! Скидываю доки по проекту, глянь пожалуйста сегодня до 16:00',
+    date: new Date(),
+    read: false,
+    docs: [
+      {
+        label: 'Документ 1',
+        onClick: () => {},
+        ext: 'pdf',
+      },
+      {
+        label: 'Документ 2',
+        onClick: () => {},
+        ext: 'docx',
+      },
+      {
+        label: 'Документ 3',
+        onClick: () => {},
+        ext: 'xlsx',
+      },
+      {
+        label: 'Документ 4',
+        onClick: () => {},
+        ext: 'pptx',
+      },
+    ],
+  },
+  {
+    userName: 'Мамулик',
+    content:
+      'Глянь на него, опять утащил банан! Будешь ехать домой, купи Халку канатик',
+    photo,
+    tags: ['tag1', 'tag2', 'tag3'],
+    date: new Date(),
+    read: true,
+  },
+];
+
+const RenderItem = ({
+  label,
+  userName,
+  content,
+  date,
+  read,
+  buttons,
+  docs,
+  tags,
+  photo,
+}: Item) => (
+  <NotificationItem
+    key={userName || label}
+    className={cnMixSpace({ mB: 'm' })}
+    title={label || userName}
+    userName={userName}
+    caption={[
+      <NotificationCaption key="date">
+        {defaultDateFormat(date)}
+      </NotificationCaption>,
+      docs?.length ? (
+        <NotificationCaption key="docs">
+          {docs.length} документов
+        </NotificationCaption>
+      ) : undefined,
+      tags?.length
+        ? tags.map((tag) => (
+            <Tag key={`tag-${tag}`} size="xs" mode="info" label={tag} />
+          ))
+        : undefined,
+    ]}
+    read={read}
+    content={
+      <div className={cnMixFlex({ direction: 'column', gap: 'xs' })}>
+        <div className={cnMixFlex({ direction: 'row', gap: 's' })}>
+          <Text size="s">{content}</Text>
+          {photo && (
+            <img
+              className={cnNotificationExampleRender('Photo')}
+              src={photo}
+              alt={content}
+            />
+          )}
+        </div>
+        {docs && (
+          <div className={cnMixFlex({ direction: 'row', gap: 's' })}>
+            {docs.map(({ label, onClick, ext }) => (
+              <File
+                size="m"
+                key={label}
+                onClick={onClick}
+                extension={ext}
+                title={`${label}.${ext}`}
+              />
+            ))}
+          </div>
+        )}
+        {buttons && (
+          <div className={cnMixFlex({ direction: 'row', gap: 's' })}>
+            {buttons.map(({ label, onClick, icon, view }) => (
+              <Button
+                size="xs"
+                key={label}
+                onClick={onClick}
+                iconLeft={icon}
+                label={label}
+                view={view}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    }
+  />
+);
+
+const NotificationExampleRender = () => (
+  <Notification
+    className={cnNotificationExampleRender()}
+    items={items}
+    itemRender={RenderItem}
+  />
+);
+```
+
+```css
+.NotificationExampleRender {
+  max-width: 400px;
+
+  &-Photo {
+    width: 85px;
+    border-radius: 2px;
+  }
+}
+```
+
+</MdxTabs>
+
+# NotificationItem
+
+## Свойства компонента NotificationItem
+
+Таблица свойств для типа NotificationItemProps:
+
+| Свойство              | Тип                               | По умолчанию | Описание                              |
+| --------------------- | --------------------------------- | ------------ | ------------------------------------- |
+| `title?`              | `string`                          | `-`          | Заголовок уведомления                 |
+| `userName?`           | `string`                          | `-`          | Имя пользователя                      |
+| `userImageUrl?`       | `string`                          | `-`          | URL аватара пользователя              |
+| `content?`            | `React.ReactNode`                 | `-`          | Основное содержимое уведомления       |
+| `caption?`            | `React.ReactNode`                 | `-`          | Подпись или дополнительная информация |
+| `actions?`            | `NotificationItemAction[]`        | `-`          | Список действий для уведомления       |
+| `read?`               | `boolean`                         | `-`          | Флаг прочтения уведомления            |
+| `scrollContainerRef?` | `React.RefObject<HTMLDivElement>` | `-`          | Ссылка на контейнер прокрутки         |
+
+```ts
+type NotificationItemAction = {
+  label: string;
+  onClick?: React.EventHandler<React.MouseEvent>;
+  icon?: React.FC<IconProps>;
+};
+```
+
+Пример использования:
+
+<MdxTabs>
+
+<NotificationItemExample />
+
+```tsx
+import { NotificationItem } from '@consta/uikit/Notification';
+import { IconCrown } from '@consta/icons/IconCrown';
+
+const NotificationItemExample = () => {
   return (
     <NotificationItem
-      title="Иванов Иван Иванович"
-      description="Принёс краску"
-      imageUrl="https://avatars.githubusercontent.com/u/12581569?s=40&v=4"
+      title="Заголовок сообщения"
+      read={false}
+      content="Содержимое сообщения"
+      caption="Подпись сообщения"
+      userName="Имя Пользователя"
       actions={[
         {
-          label: 'Удалить',
-          icon: IconTrash,
+          label: 'Действие  1',
+          icon: IconCrown,
         },
         {
-          label: 'Отметить как прочитанное',
-          icon: IconEye,
+          label: 'Действие  2',
+          icon: IconCrown,
         },
       ]}
     />
@@ -622,104 +1047,184 @@ export const NotificationItemExampleAction = () => {
 };
 ```
 
-<NotificationItemExampleAction />
+</MdxTabs>
 
-### Прочитанные
+# NotificationHeader
 
-Чтобы пометить сообщение прочитанным, определите флаг `read`.
+## Свойства компонента NotificationHeader
+
+| Свойство             | Тип                                    | По умолчанию | Описание                        |
+| -------------------- | -------------------------------------- | ------------ | ------------------------------- |
+| `title`              | `string`                               | `-`          | Заголовок уведомления           |
+| `actions`            | `NotificationHeaderAction[]`           | `-`          | Список действий для заголовка   |
+| `onClose`            | `React.EventHandler<React.MouseEvent>` | `-`          | Обработчик закрытия уведомления |
+| `scrollContainerRef` | `React.RefObject<HTMLDivElement>`      | `-`          | Ссылка на контейнер прокрутки   |
+
+Пример использования:
+
+<MdxTabs>
+
+<NotificationHeaderExample />
 
 ```tsx
-import { NotificationItem } from '@consta/header/Notification';
+import { NotificationHeader } from '@consta/uikit/Notification';
+import { IconCrown } from '@consta/icons/IconCrown';
 
-export const NotificationItemExampleRead = () => (
-  <>
-    <NotificationItem
-      title="Иванов Иван Иванович"
-      description="Принёс краску"
-      read={true}
+const NotificationHeaderExample = () => {
+  return (
+    <NotificationHeader
+      title="Заголовок уведомления"
+      onClose={() => console.log('onClose')}
+      actions={[
+        {
+          label: 'Действие 1',
+          icon: IconCrown,
+        },
+        {
+          label: 'Действие 2',
+          icon: IconCrown,
+        },
+      ]}
     />
-    <NotificationItem
-      title="Петров Петр Петрович"
-      description="Покрасил забор"
-      read={false}
-    />
-  </>
-);
+  );
+};
 ```
 
-<NotificationItemExampleRead />
+</MdxTabs>
 
-### Свойства NotificationItem
+# NotificationGroup
 
-```tsx
-export type NotificationItemAction = {
+Таблица свойств для типа NotificationGroupProps:
+
+| `Свойство` | `Тип`                       | `По умолчанию` | `Описание`                   |
+| ---------- | --------------------------- | -------------- | ---------------------------- |
+| `title`    | `string`                    | `undefined`    | Заголовок группы уведомлений |
+| `actions`  | `NotificationGroupAction[]` | `undefined`    | Список действий для группы   |
+
+```ts
+type NotificationGroupAction = {
   label: string;
   onClick?: React.EventHandler<React.MouseEvent>;
-  icon?: React.FC<IconProps>;
-};
-
-export type NotificationItemBadge = {
-  label: string;
-  status?: BadgePropStatus;
+  icon?: IconComponent;
 };
 ```
 
-| Свойство                               | Тип                                    | По умолчанию | Описание                                     |
-| -------------------------------------- | -------------------------------------- | ------------ | -------------------------------------------- |
-| [`title`](#контент)                    | `string`                               | -            | Заголовок уведомления                        |
-| [`description?`](#контент)             | `string`                               | -            | Описание уведомления                         |
-| [`imageUrl?`](#изображение-или-аватар) | `string`                               | -            | Изображение уведомления                      |
-| [`read?`](#прочитанные)                | `boolean`                              | `false`      | Флаг прочитано уведомление или нет           |
-| [`date?`](#контент)                    | `Date`                                 | -            | Дата уведомления                             |
-| [`badges?`](#бейджики)                 | `NotificationItemBadge`                | -            | Бейджики уведомления                         |
-| [`actions?`](#действия-с-уведомлением) | `NotificationItemAction`               | -            | Действия уведомления                         |
-| `dateFormat?`                          | `(date: Date) => string`               | -            | Функция форматирования даты                  |
-| [`view?`](#изображение-или-аватар)     | `'user'`<code>&#124;</code>`'default'` | `default`    | Внешний вид                                  |
-| `onClick?`                             | `React.EventHandler<React.MouseEvent>` | -            | Оброботчик события клика на уведомление      |
-| `actionsMenuOpened?`                   | `boolean`                              | `false`      | Флаг раскрыт ли список действий по умолчанию |
-| `className?`                           | `string`                               | -            | Дополнительный CSS-класс                     |
-| `ref?`                                 | `React.Ref<HTMLDivElement>`            | -            | Ссылка на корневой DOM-элемент               |
+<MdxTabs>
 
-## Мобильная версия
-
-Чтобы уведомления правильно отображалось на мобильном устройстве, добавьте `isMobile={true}`. Тогда список уведомлений откроется на весь экран.
-
-## Импорт
+<NotificationGroupExample />
 
 ```tsx
-import {
-  Notification,
-  NotificationList,
-  NotificationItem,
-} from '@consta/header/Notification';
+import { NotificationGroup } from '@consta/uikit/Notification';
+import { IconCrown } from '@consta/icons/IconCrown';
+
+const NotificationGroupExample = () => {
+  return (
+    <NotificationGroup
+      title="Заголовок группы уведомлений"
+      className={cnMixSpace({ pV: 'xs', pH: 's' })}
+      actions={[
+        {
+          label: 'Действие 1',
+          icon: IconCrown,
+        },
+        {
+          label: 'Действие 2',
+          icon: IconCrown,
+        },
+      ]}
+    />
+  );
+};
 ```
 
-## Свойства
+</MdxTabs>
 
-| Свойство                            | Тип                                           | По умолчанию                              | Описание                                                                                                  |
-| ----------------------------------- | --------------------------------------------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| [`items`](#список-уведомлений)      | `ITEM[]`                                      | -                                         | Элементы (см. [NotificationList](#свойства-notificationlist))                                             |
-| [`actions?`](#действия)             | `ACTIONS[]`                                   | -                                         | Действия списка (см. [NotificationList](#свойства-notificationlist))                                      |
-| [`groupByDay?`](#группировка)       | `boolean`                                     | -                                         | Групировка элементов по дням (см. [NotificationList](#свойства-notificationlist))                         |
-| [`groupLabelFormat?`](#группировка) | `NotificationListPropGroupLabelFormat`        | `NotificationListDefaultGroupLabelFormat` | Групировка элементов по дням (см. [NotificationList](#свойства-notificationlist))                         |
-| [`groups?`](#группировка)           | `GROUP_BY_DAY extends true ? never : GROUP[]` | -                                         | Группы (см. [NotificationList](#свойства-notificationlist))                                               |
-| `title?`                            | `string`                                      | -                                         | Заголовок (см. [NotificationList](#свойства-notificationlist))                                            |
-| `itemDateFormat`                    | `NotificationListPropItemDateFormat`          | `defaultDateFormat`                       | Функция форматирования даты элемента (см. [NotificationList](#свойства-notificationlist))                 |
-| `getItemLabel?`                     | `NotificationListPropGetItemLabel`            | `defaultGetItemLabel`                     | Функция для определения заголовка элемента (см. [NotificationList](#свойства-notificationlist))           |
-| `getItemDescription?`               | `NotificationListPropGetItemDescription`      | `defaultGetItemDescription`               | Функция для определения описания элемента (см. [NotificationList](#свойства-notificationlist))            |
-| `getItemImage?`                     | `NotificationListPropGetItemImage`            | `defaultGetItemImage`                     | Функция для определения изображения элемента (см. [NotificationList](#свойства-notificationlist))         |
-| `getItemRead?`                      | `NotificationListPropGetItemRead`             | `defaultGetItemRead`                      | Функция для определения статуса "прочитано" элемента (см. [NotificationList](#свойства-notificationlist)) |
-| `getItemDate?`                      | `NotificationListPropGetItemDate`             | `defaultGetItemDate`                      | Функция для определения даты элемента (см. [NotificationList](#свойства-notificationlist))                |
-| `getItemBadges?`                    | `NotificationListPropGetItemBadges`           | `defaultGetItemBadges`                    | Функция для определения бейджов элемента (см. [NotificationList](#свойства-notificationlist))             |
-| `getItemActions?`                   | `NotificationListPropGetItemActions`          | `defaultGetItemActions`                   | Функция для определения действий элемента (см. [NotificationList](#свойства-notificationlist))            |
-| `getItemGroup?`                     | `NotificationListPropGetItemGroup`            | `defaultGetItemGroup`                     | Функция для определения группы элемента (см. [NotificationList](#свойства-notificationlist))              |
-| `getItemView?`                      | `NotificationListPropGetItemView`             | `defaultGetItemView`                      | Функция для определения вида элемента (см. [NotificationList](#свойства-notificationlist))                |
-| [`getActionLabel?`](#действия)      | `NotificationListPropGetActionLabel`          | `defaultGetActionLabel`                   | Функция для определения заголовка действия (см. [NotificationList](#свойства-notificationlist))           |
-| [`getActionIcon?`](#действия)       | `NotificationListPropGetActionIcon`           | `defaultGetActionIcon`                    | Функция для определения иконки действия (см. [NotificationList](#свойства-notificationlist))              |
-| `getActionOnClick?`](#действия)     | `NotificationListPropGetActionOnClick`        | `defaultGetActionOnClick`                 | Функция для определения функчии действия (см. [NotificationList](#свойства-notificationlist))             |
-| [`getGroupLabel?`](#группировка)    | `NotificationListPropGetGroupLabel`           | `defaultGetGroupLabel`                    | Функция для определения заголовка группы (см. [NotificationList](#свойства-notificationlist))             |
-| [`getGroupId?`](#группировка)       | `NotificationListPropGetGroupId`              | `defaultGetGroupId`                       | Функция для определения уникального ключа группы (см. [NotificationList](#свойства-notificationlist))     |
-| [`isMobile?`](#мобильная-версия)    | `boolean`                                     | -                                         | Мобильный вид                                                                                             |
-| `className?`                        | `string`                                      | -                                         | Дополнительный CSS-класс для кнопки, по которой открываются уведомления                                   |
-| `listClassName?`                    | `string`                                      | -                                         | Дополнительный CSS-класс списка уведомлений (см. [NotificationList](#свойства-notificationlist))          |
-| `ref?`                              | `React.Ref<HTMLButtonElement>`                | -                                         | Ссылка на корневой DOM-элемент (см. [NotificationList](#свойства-notificationlist))                       |
+# NotificationActions
+
+## Свойства компонента NotificationActions
+
+| Свойство             | Тип                                           | По умолчанию | Описание                            |
+| -------------------- | --------------------------------------------- | ------------ | ----------------------------------- |
+| `items`              | `ITEM[]`                                      | `-`          | Список элементов действий           |
+| `onlyIcon`           | `boolean`                                     | `-`          | Флаг отображения только иконок      |
+| `opened`             | `boolean`                                     | `-`          | Флаг открытого состояния меню       |
+| `onOpen`             | `(value: boolean) => void`                    | `-`          | Обработчик открытия/закрытия меню   |
+| `onItemClick`        | `NotificationActionsOnItemClick<ITEM>`        | `-`          | Обработчик клика по элементу        |
+| `scrollContainerRef` | `React.RefObject<HTMLDivElement>`             | `-`          | Ссылка на контейнер прокрутки       |
+| `getItemLabel`       | `NotificationActionsPropGetItemLabel<ITEM>`   | `-`          | Функция получения метки элемента    |
+| `getItemOnClick`     | `NotificationActionsPropGetItemOnClick<ITEM>` | `-`          | Функция получения обработчика клика |
+| `getItemIcon`        | `NotificationActionsPropGetItemIcon<ITEM>`    | `-`          | Функция получения иконки элемента   |
+
+```ts
+type NotificationActionsDefaultItem = {
+  label: string;
+  onClick?: React.EventHandler<React.MouseEvent>;
+  icon?: IconComponent;
+};
+
+type NotificationActionsPropGetItemLabel<ITEM> = (item: ITEM) => string;
+
+type NotificationActionsPropGetItemIcon<ITEM> = (
+  item: ITEM,
+) => IconComponent | undefined;
+
+type NotificationActionsPropGetItemOnClick<ITEM> = (
+  item: ITEM,
+) => React.EventHandler<React.MouseEvent> | undefined;
+
+type NotificationActionsOnItemClick<ITEM> = (
+  item: ITEM,
+  props: {
+    e: React.MouseEvent;
+  },
+) => void;
+```
+
+Пример использования:
+
+<MdxTabs>
+
+<NotificationActionsExample />
+
+```tsx
+import { NotificationActions } from '@consta/uikit/Notification';
+import { IconCrown } from '@consta/icons/IconCrown';
+
+const NotificationActionsExample = () => {
+  return (
+    <>
+      <NotificationActions
+        items={[
+          {
+            label: 'Action 1',
+            icon: IconCrown,
+          },
+        ]}
+      />
+      <NotificationActions
+        items={[
+          {
+            label: 'Action 1',
+            icon: IconCrown,
+          },
+        ]}
+        onlyIcon
+      />
+      <NotificationActions
+        items={[
+          {
+            label: 'Action 1',
+            icon: IconCrown,
+          },
+          {
+            label: 'Action 2',
+            icon: IconCrown,
+          },
+        ]}
+      />
+    </>
+  );
+};
+```
+
+</MdxTabs>

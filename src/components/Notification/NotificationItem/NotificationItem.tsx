@@ -1,27 +1,18 @@
 import './NotificationItem.css';
 
-import { useAtom } from '@reatom/npm-react';
 import React, { forwardRef } from 'react';
 
 import { Avatar } from '##/components/Avatar';
-import { Badge, BadgePropView } from '##/components/Badge';
-import { BadgeGroup } from '##/components/BadgeGroup';
+import { Badge } from '##/components/Badge';
 import { Text } from '##/components/Text';
-import { getElementWidth } from '##/hooks/useResizeObserved';
 import { cnMixFlex } from '##/mixs/MixFlex';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
-import { withCtx } from '##/utils/state';
-import { useCreateAtom } from '##/utils/state/useCreateAtom';
-import { useRefAtom } from '##/utils/state/useRefAtom';
-import { useResizeObservedAtom } from '##/utils/state/useResizeObservedAtom';
-import { isString } from '##/utils/type-guards';
+import { isNotNil, isString } from '##/utils/type-guards';
 
 import { NotificationActions } from '../NotificationActions';
-import { NotificationItemBadge, NotificationItemProps } from './types';
-
-const badgeGroupGetItemView = (): BadgePropView => 'tinted';
-const badgeGroupGetItemLabel = (item: NotificationItemBadge) => item.label;
+import { NotificationCaption } from '../NotificationCaption';
+import { NotificationItemProps } from './types';
 
 export const cnNotificationItem = cn('NotificationItem');
 
@@ -39,51 +30,57 @@ const renderContent = (content: React.ReactNode, mr: boolean) =>
     content
   );
 
-export const NotificationItem = withCtx(
-  forwardRef((props: NotificationItemProps, ref: React.Ref<HTMLDivElement>) => {
+const renderCaption = (node: React.ReactNode, mr: boolean) => {
+  if (!node || (Array.isArray(node) && node.filter(isNotNil).length === 0))
+    return null;
+
+  return (
+    <div
+      className={cnNotificationItem('Caption', [
+        cnMixFlex({ gap: 'xs', align: 'center' }),
+        cnMixSpace({ mB: '2xs' }),
+        mr ? cnNotificationItem('MixMR') : undefined,
+      ])}
+    >
+      {isString(node) ? (
+        <NotificationCaption>{node}</NotificationCaption>
+      ) : (
+        node
+      )}
+    </div>
+  );
+};
+
+export const NotificationItem = forwardRef(
+  (props: NotificationItemProps, ref: React.Ref<HTMLDivElement>) => {
     const {
       title,
       className,
       content,
       userName,
       userImageUrl,
-      date,
-      badges,
+      caption,
       actions,
-      status,
+      read,
+      scrollContainerRef,
       ...otherProps
     } = props;
-
-    const [userElAtom, userRef] = useRefAtom<HTMLDivElement>();
-    const [wrapperElAtom, wrapperRef] = useRefAtom<HTMLDivElement>();
-
-    const [widths] = useAtom(
-      useResizeObservedAtom(
-        useCreateAtom((ctx) => [ctx.spy(userElAtom), ctx.spy(wrapperElAtom)]),
-        getElementWidth,
-      ),
-    );
 
     return (
       <div
         {...otherProps}
         ref={ref}
         className={cnNotificationItem(
-          { withAvatar: !!(userName || userImageUrl) },
+          {
+            withAvatar: !!(userName || userImageUrl),
+            clickable: !!otherProps.onClick,
+          },
           [className],
         )}
       >
-        <div
-          ref={wrapperRef}
-          className={cnMixFlex({ gap: 'm' })}
-          style={{
-            ['--notification-item-user-width' as string]: `${widths[0]}px`,
-            ['--notification-item-wrapper-width' as string]: `${widths[1]}px`,
-          }}
-        >
+        <div className={cnMixFlex({ gap: 'm' })}>
           {(userName || userImageUrl) && (
             <Avatar
-              ref={userRef}
               size="l"
               name={userName}
               title={userName}
@@ -104,11 +101,11 @@ export const NotificationItem = withCtx(
                   actions?.length ? cnNotificationItem('MixMR') : undefined,
                 ])}
               >
-                {status && (
+                {read === false && (
                   <Badge
                     className={cnNotificationItem('Badge')}
                     size="s"
-                    status={status}
+                    status="normal"
                     minified
                   />
                 )}
@@ -124,39 +121,7 @@ export const NotificationItem = withCtx(
                 </Text>
               </div>
             )}
-            {(date || badges?.length) && (
-              <div
-                className={cnNotificationItem('AdditionalInfo', [
-                  cnMixFlex({ gap: 'xs', align: 'center' }),
-                  cnMixSpace({ mB: '2xs' }),
-                  actions?.length && !title
-                    ? cnNotificationItem('MixMR')
-                    : undefined,
-                ])}
-              >
-                {date && (
-                  <Text
-                    className={cnNotificationItem('Date')}
-                    size="2xs"
-                    lineHeight="m"
-                    view="ghost"
-                  >
-                    {date}
-                  </Text>
-                )}
-                {badges?.length && (
-                  <BadgeGroup
-                    className={cnNotificationItem('Badges')}
-                    items={badges}
-                    size="xs"
-                    fitMode="reduction"
-                    getItemKey={badgeGroupGetItemLabel}
-                    getItemView={badgeGroupGetItemView}
-                    getItemLabel={badgeGroupGetItemLabel}
-                  />
-                )}
-              </div>
-            )}
+            {renderCaption(caption, !!actions?.length && !title)}
             <div className={cnNotificationItem('Children')}>
               {content && renderContent(content, !!(actions?.length && !title))}
             </div>
@@ -164,15 +129,16 @@ export const NotificationItem = withCtx(
               <NotificationActions
                 className={cnNotificationItem('Actions')}
                 items={actions}
-                mainButtonOnlyIcon
+                onlyIcon
                 style={{ zIndex: props.style?.zIndex }}
+                scrollContainerRef={scrollContainerRef}
               />
             )}
           </div>
         </div>
       </div>
     );
-  }),
+  },
 );
 
 export * from './types';
