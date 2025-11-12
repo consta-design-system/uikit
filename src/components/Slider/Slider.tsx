@@ -125,7 +125,7 @@ const SliderRender = <RANGE extends boolean = false>(
 
   const containerProps = {
     role: 'button',
-    tabIndex: 0,
+    tabIndex: -1,
     className: cnSlider('Control'),
     ref: sliderRef,
     onClick: onSliderClick,
