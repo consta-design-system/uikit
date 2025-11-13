@@ -690,11 +690,17 @@ describe('Компонент DateTime_type_dateTime', () => {
   });
 
   describe('совместимость timeOptions и multiplicity', () => {
+    const onChange = jest.fn(({ value }) => new Date(value));
+    const baseVisibleDate = new Date(2022, 5);
+    const baseDate = {
+      hours: new Date(2022, 5, 27, 11),
+      minutes: new Date(2022, 5, 27, 11, 34),
+      seconds: new Date(2022, 5, 27, 11, 34, 56),
+    };
     it('timeOptions.step имеет приоритет над multiplicity', () => {
-      const onChange = jest.fn(({ value }) => new Date(value));
       renderComponent({
-        value: new Date(2022, 5, 27, 11),
-        currentVisibleDate: new Date(2022, 5),
+        value: baseDate.hours,
+        currentVisibleDate: baseVisibleDate,
         multiplicityHours: 5,
         timeOptions: { hours: { step: 2 } },
         onChange,
@@ -707,6 +713,21 @@ describe('Компонент DateTime_type_dateTime', () => {
       fireEvent.click(firstHour);
       const date = new Date(2022, 5, 27, 0);
       expect(onChange).toHaveBeenCalledWith(date, { e: expect.any(Object) });
+    });
+
+    it('timeOptions.unit как массив имеет приоритет над multiplicity', () => {
+      renderComponent({
+        value: baseDate.hours,
+        currentVisibleDate: baseVisibleDate,
+        onChange,
+        timeOptions: { hours: [0, 6, 12, 18] },
+        multiplicityHours: 3,
+      });
+
+      const hoursColumn = getColumnAllItem(0);
+      expect(hoursColumn).toHaveLength(4);
+      expect(hoursColumn[0]).toHaveTextContent('00');
+      expect(hoursColumn[3]).toHaveTextContent('18');
     });
 
     it('частичное указание timeOptions использует multiplicity для остальных', () => {
