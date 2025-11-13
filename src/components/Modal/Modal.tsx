@@ -77,7 +77,7 @@ export const Modal = withCtx(
             className={cnModal({ hasOverlay }, [rootClassName])}
             ref={portalRef}
             style={{
-              ...(style?.zIndex === 'number' && {
+              ...(style?.zIndex && {
                 zIndex: style.zIndex,
               }),
               ...(shadowHeader && {
