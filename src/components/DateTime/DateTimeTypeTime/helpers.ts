@@ -14,13 +14,15 @@ import {
 import { useMemo } from 'react';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
-import { range } from '../../../utils/array';
 import { isDisableDate, isInMinMaxDate } from '../../../utils/date';
 import {
   DateTimePropDisableDates,
   getLabelHours,
   getLabelMinutes,
   getLabelSeconds,
+  getTimeNumbers,
+  TimeOptions,
+  TimeUnitOptions,
 } from '../helpers';
 
 export const dateTimeTimePropLocaleDefault = {
@@ -45,11 +47,11 @@ type ResultItem = {
 
 const getItemData = (
   timeType: 'hours' | 'minutes' | 'seconds',
-  multiplicity = 1,
+  options: TimeUnitOptions,
   startOfUnits: (date: Date) => Date,
   startOfUnit: (date: Date) => Date,
   endOfUnit: (date: Date) => Date,
-  addUnits: typeof addHours,
+  addUnits: typeof addHours | typeof addMinutes | typeof addSeconds,
   getItemLabel: (date: Date) => string,
   value?: Date,
   minDate?: Date,
@@ -57,8 +59,7 @@ const getItemData = (
   disableDates?: DateTimePropDisableDates,
   onChangeRef?: React.MutableRefObject<DateTimeTimePropOnChange | undefined>,
 ): ResultItem[] => {
-  const length = timeType === 'hours' ? 24 : 60;
-  const numbers = range(multiplicity ? Math.ceil(length / multiplicity) : 0);
+  const numbers = getTimeNumbers(timeType, options);
 
   if (numbers.length === 0) {
     return [];
@@ -67,7 +68,7 @@ const getItemData = (
   const startDate = startOfUnits(value || startOfToday());
 
   return numbers.map((number) => {
-    const date = addUnits(startDate, number * multiplicity);
+    const date = addUnits(startDate, number);
     const label = getItemLabel(date);
     const selected = value ? getItemLabel(date) === getItemLabel(value) : false;
     const disabled =
@@ -87,6 +88,7 @@ const getItemData = (
 
 export const useTimeItems = (
   value?: Date,
+  timeOptions?: TimeOptions,
   multiplicityHours?: number,
   multiplicityMinutes?: number,
   multiplicitySeconds?: number,
@@ -97,11 +99,21 @@ export const useTimeItems = (
 ): ResultItem[][] => {
   const onChangeRef = useMutableRef(onChange);
 
+  const hoursOptions: TimeUnitOptions =
+    timeOptions?.hours ??
+    (multiplicityHours !== undefined ? { step: multiplicityHours } : {});
+  const minutesOptions: TimeUnitOptions =
+    timeOptions?.minutes ??
+    (multiplicityMinutes !== undefined ? { step: multiplicityMinutes } : {});
+  const secondsOptions: TimeUnitOptions =
+    timeOptions?.seconds ??
+    (multiplicitySeconds !== undefined ? { step: multiplicitySeconds } : {});
+
   return useMemo(
     () => [
       getItemData(
         'hours',
-        multiplicityHours,
+        hoursOptions,
         startOfDay,
         startOfHour,
         endOfHour,
@@ -115,7 +127,7 @@ export const useTimeItems = (
       ),
       getItemData(
         'minutes',
-        multiplicityMinutes,
+        minutesOptions,
         startOfHour,
         startOfMinute,
         endOfMinute,
@@ -129,7 +141,7 @@ export const useTimeItems = (
       ),
       getItemData(
         'seconds',
-        multiplicitySeconds,
+        secondsOptions,
         startOfMinute,
         startOfSecond,
         endOfSecond,
@@ -146,6 +158,7 @@ export const useTimeItems = (
       value?.getTime(),
       minDate?.getTime(),
       maxDate?.getTime(),
+      timeOptions,
       multiplicityHours,
       multiplicityMinutes,
       multiplicitySeconds,
