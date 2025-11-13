@@ -7,7 +7,6 @@ import { Button } from '##/components/Button';
 import { ProgressSpin } from '##/components/ProgressSpin';
 import { Text, TextPropView } from '##/components/Text';
 import { cnCanary } from '##/utils/bem';
-import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 import {
   DragNDropFieldInformerProps,
@@ -27,11 +26,6 @@ const iconStatusMap: Record<DragNDropFieldInformerPropStatus, IconPropView> = {
   warning: 'warning',
 };
 
-type InformerProps = PropsWithHTMLAttributes<
-  DragNDropFieldInformerProps,
-  HTMLDivElement
->;
-
 const cnDragNDropFieldInformer = cnCanary('DragNDropFieldInformer');
 
 const propStatusDefault: DragNDropFieldInformerPropStatus =
@@ -39,7 +33,7 @@ const propStatusDefault: DragNDropFieldInformerPropStatus =
 
 export const DragNDropFieldInformer = React.forwardRef<
   HTMLDivElement,
-  InformerProps
+  DragNDropFieldInformerProps
 >((props, ref) => {
   const {
     status = propStatusDefault,
