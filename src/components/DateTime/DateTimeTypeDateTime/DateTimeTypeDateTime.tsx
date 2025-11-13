@@ -30,6 +30,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> =
       disableDates,
       locale,
       onChangeCurrentVisibleDate,
+      timeOptions,
       multiplicitySeconds,
       multiplicityMinutes,
       multiplicityHours,
@@ -97,6 +98,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> =
             maxDate={maxDate}
             disableDates={disableDates}
             locale={locale}
+            timeOptions={timeOptions}
             multiplicitySeconds={multiplicitySeconds}
             multiplicityMinutes={multiplicityMinutes}
             multiplicityHours={multiplicityHours}
