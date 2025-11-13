@@ -56,6 +56,20 @@ type DateTimePropTimeFor<TYPE> = TYPE extends 'date-time'
   ? 'start' | 'end'
   : never;
 
+export type TimeUnitOptions =
+  | {
+      step?: number;
+      start?: number;
+      stop?: number;
+    }
+  | number[];
+
+export type TimeOptions = {
+  hours?: TimeUnitOptions;
+  minutes?: TimeUnitOptions;
+  seconds?: TimeUnitOptions;
+};
+
 export type DateTimeProps<TYPE extends DateTimePropType = 'date'> =
   PropsWithHTMLAttributesAndRef<
     {
@@ -72,8 +86,12 @@ export type DateTimeProps<TYPE extends DateTimePropType = 'date'> =
       children?: never;
       disableDates?: DateTimePropDisableDates;
       onChangeCurrentVisibleDate?: (date: Date) => void;
+      timeOptions?: TimeOptions;
+      /** @deprecated - Use timeOptions instead */
       multiplicitySeconds?: number;
+      /** @deprecated - Use timeOptions instead */
       multiplicityMinutes?: number;
+      /** @deprecated - Use timeOptions instead */
       multiplicityHours?: number;
       onMove?: (type: MoveType) => void;
       timeFor?: DateTimePropTimeFor<TYPE>;
