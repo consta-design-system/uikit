@@ -4,13 +4,20 @@ import { TimeUnitOptions } from './types';
 
 export const getTimeNumbers = (
   timeType: 'hours' | 'minutes' | 'seconds',
-  options: TimeUnitOptions,
+  options?: TimeUnitOptions,
 ): number[] => {
   const minValue = 0;
   const maxValue = timeType === 'hours' ? 23 : 59;
 
+  if (
+    !options ||
+    (typeof options === 'object' && Object.keys(options).length === 0)
+  ) {
+    return range(maxValue + 1);
+  }
+
   if (Array.isArray(options)) {
-    const filtered = (options || []).filter(
+    const filtered = options.filter(
       (n): n is number =>
         typeof n === 'number' &&
         Number.isInteger(n) &&
@@ -18,14 +25,6 @@ export const getTimeNumbers = (
         n <= maxValue,
     );
     return Array.from(new Set(filtered)).sort((a, b) => a - b);
-  }
-
-  if (
-    options &&
-    typeof options === 'object' &&
-    Object.keys(options).length === 0
-  ) {
-    return range(maxValue + 1);
   }
 
   const getClampedValue = (
