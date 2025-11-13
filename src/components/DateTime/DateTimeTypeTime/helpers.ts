@@ -47,12 +47,12 @@ type ResultItem = {
 
 const getItemData = (
   timeType: 'hours' | 'minutes' | 'seconds',
-  options: TimeUnitOptions,
   startOfUnits: (date: Date) => Date,
   startOfUnit: (date: Date) => Date,
   endOfUnit: (date: Date) => Date,
   addUnits: typeof addHours | typeof addMinutes | typeof addSeconds,
   getItemLabel: (date: Date) => string,
+  options?: TimeUnitOptions,
   value?: Date,
   minDate?: Date,
   maxDate?: Date,
@@ -89,8 +89,23 @@ const getItemData = (
 export const useTimeItems = (
   value?: Date,
   timeOptions?: TimeOptions,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
   multiplicityHours?: number,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
   multiplicityMinutes?: number,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
   multiplicitySeconds?: number,
   onChange?: DateTimeTimePropOnChange,
   minDate?: Date,
@@ -99,12 +114,27 @@ export const useTimeItems = (
 ): ResultItem[][] => {
   const onChangeRef = useMutableRef(onChange);
 
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
   const hoursOptions: TimeUnitOptions =
     timeOptions?.hours ??
     (multiplicityHours !== undefined ? { step: multiplicityHours } : {});
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
   const minutesOptions: TimeUnitOptions =
     timeOptions?.minutes ??
     (multiplicityMinutes !== undefined ? { step: multiplicityMinutes } : {});
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
   const secondsOptions: TimeUnitOptions =
     timeOptions?.seconds ??
     (multiplicitySeconds !== undefined ? { step: multiplicitySeconds } : {});
@@ -113,12 +143,12 @@ export const useTimeItems = (
     () => [
       getItemData(
         'hours',
-        hoursOptions,
         startOfDay,
         startOfHour,
         endOfHour,
         addHours,
         getLabelHours,
+        hoursOptions,
         value,
         minDate,
         maxDate,
@@ -127,12 +157,12 @@ export const useTimeItems = (
       ),
       getItemData(
         'minutes',
-        minutesOptions,
         startOfHour,
         startOfMinute,
         endOfMinute,
         addMinutes,
         getLabelMinutes,
+        minutesOptions,
         value,
         minDate,
         maxDate,
@@ -141,12 +171,12 @@ export const useTimeItems = (
       ),
       getItemData(
         'seconds',
-        secondsOptions,
         startOfMinute,
         startOfSecond,
         endOfSecond,
         addSeconds,
         getLabelSeconds,
+        secondsOptions,
         value,
         minDate,
         maxDate,
