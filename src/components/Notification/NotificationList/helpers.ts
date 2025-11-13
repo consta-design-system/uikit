@@ -19,7 +19,6 @@ import {
   NotificationListPropGetItemImage,
   NotificationListPropGetItemLabel,
   NotificationListPropGetItemRead,
-  NotificationListPropGetItemView,
   NotificationListPropGroupLabelFormat,
   NotificationListProps,
 } from './types';
@@ -63,9 +62,6 @@ const defaultGetItemLabel: NotificationListPropGetItemLabel<
 const defaultGetItemRead: NotificationListPropGetItemRead<
   NotificationListDefaultItem
 > = (item) => item.read;
-const defaultGetItemView: NotificationListPropGetItemView<
-  NotificationListDefaultItem
-> = (item) => item.view;
 
 export function withDefaultGetters<ITEM, GROUP, ACTION>(
   props: NotificationListProps<ITEM, GROUP, ACTION>,
@@ -85,7 +81,6 @@ export function withDefaultGetters<ITEM, GROUP, ACTION>(
     getItemImage: props.getItemImage || defaultGetItemImage,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
     getItemRead: props.getItemRead || defaultGetItemRead,
-    getItemView: props.getItemView || defaultGetItemView,
   };
 }
 
@@ -132,14 +127,12 @@ export const getGroups = <ITEM, GROUP>(
   getGroupId: NotificationListPropGetGroupId<GROUP>,
 ): Array<ReturnedGroup<ITEM, GROUP>> => {
   if (groupByDay) {
-    const getItemGroupByDate = (item: ITEM) => {
-      const date = getItemDate(item);
-      return date ? startOfDay(date).getTime() : undefined;
-    };
-
     return constaGetGroups<ITEM, GROUP>(
       items,
-      getItemGroupByDate,
+      (item) => {
+        const date = getItemDate(item);
+        return date ? startOfDay(date).getTime() : undefined;
+      },
       undefined,
       undefined,
       sortGroup,

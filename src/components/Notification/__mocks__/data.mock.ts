@@ -1,5 +1,6 @@
 import { IconEye } from '@consta/icons/IconEye';
 import { IconTrash } from '@consta/icons/IconTrash';
+import { format, isToday, isYesterday, startOfDay } from 'date-fns';
 
 // import Image1 from '##/images/Arhayka.image.jpeg';
 // import Image from '##/images/Gizeasy.image.jpeg';
@@ -8,6 +9,16 @@ import {
   NotificationListDefaultGroup,
   NotificationListDefaultItem,
 } from '../NotificationList';
+
+const defaultGroupLabelFormat = (date: Date) => {
+  if (isToday(date)) {
+    return 'Сегодня';
+  }
+  if (isYesterday(date)) {
+    return 'Вчера';
+  }
+  return format(date, 'dd.MM.yyyy');
+};
 
 const emptyFunction = () => {};
 

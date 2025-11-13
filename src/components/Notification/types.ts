@@ -14,7 +14,6 @@ export type NotificationProps<
   GROUP_BY_DAY extends boolean = false,
 > = PropsWithHTMLAttributesAndRef<
   Omit<Props<ITEM, GROUP, ACTION, GROUP_BY_DAY>, 'onClose'> & {
-    listClassName?: string;
     isMobile?: boolean;
   },
   HTMLButtonElement

@@ -4,12 +4,17 @@ import './Notification.css';
 import React, { forwardRef } from 'react';
 
 import { cn } from '##/utils/bem';
+import { withCtx } from '##/utils/state';
+import { useCreateAtom } from '##/utils/state/useCreateAtom';
 
 // import { PopoverButton } from '../PopoverButton';
 import { NotificationList } from './NotificationList';
+import { NotificationRoot } from './NotificationRoot';
 import { NotificationComponent, NotificationProps } from './types';
 
 export const cnNotification = cn('Notification');
+
+// TODO: В место которое для даты вставляем текст из caption (getItemCaption), также добавляем getItemDate для того чтобы группировать по дате. при groupByDay в getGroupLabel должен приходить timestamp дня.
 
 const NotificationRender = (
   props: NotificationProps,
@@ -37,14 +42,14 @@ const NotificationRender = (
     getItemImage,
     getItemLabel,
     getItemRead,
-    getItemView,
-    listClassName,
+    // getItemView,
+    // listClassName,
     // isMobile,
     // ...otherProps
   } = props;
 
   const listProps = {
-    className: cnNotification('List', [listClassName]),
+    className: cnNotification('List'),
     items,
     groupByDay,
     groups,
@@ -71,16 +76,15 @@ const NotificationRender = (
     typeof props.style?.zIndex === 'number'
       ? props.style.zIndex + 1
       : undefined;
+  const openAtom = useCreateAtom(false);
 
   return (
-    <NotificationList
-      {...listProps}
-      // onClose={isMobile ? onClose : undefined}
-      style={{ zIndex: elementZIndex }}
-    />
+    <NotificationRoot openAtom={openAtom}>
+      <NotificationList {...listProps} />
+    </NotificationRoot>
   );
 };
 
-export const Notification = forwardRef(
-  NotificationRender,
+export const Notification = withCtx(
+  forwardRef(NotificationRender),
 ) as NotificationComponent;

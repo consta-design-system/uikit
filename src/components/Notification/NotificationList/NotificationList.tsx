@@ -7,14 +7,12 @@ import { Button } from '##/components/Button';
 import { Text } from '##/components/Text';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
+import { getGroups } from '##/utils/getGroups';
 
 import { NotificationActions } from '../NotificationActions';
+import { NotificationGroup } from '../NotificationGroup';
 import { NotificationItem } from '../NotificationItem';
-import {
-  defaultGroupLabelFormat,
-  getGroups,
-  withDefaultGetters,
-} from './helpers';
+import { defaultGroupLabelFormat, withDefaultGetters } from './helpers';
 import { NotificationListComponent, NotificationListProps } from './types';
 
 export const cnNotificationList = cn('NotificationList');
@@ -45,18 +43,17 @@ function NotificationListRender(
     getItemGroup,
     getItemImage,
     getItemRead,
-    getItemView,
+    sortGroups,
     onClose,
     ...otherProps
   } = withDefaultGetters(props);
 
   const resultGroups = getGroups(
     items,
-    groups,
-    groupByDay,
     getItemGroup,
-    getItemDate,
+    groups,
     getGroupId,
+    sortGroups,
   );
 
   const elementZIndex =
@@ -114,22 +111,10 @@ function NotificationListRender(
           return (
             <Fragment key={cnNotificationList('Group', { groupIndex })}>
               {groupLabel && (
-                <Text
-                  className={cnNotificationList('GroupLabel', [
-                    cnMixSpace({
-                      pV: '2xs',
-                      pH: 'xl',
-                    }),
-                  ])}
-                  key={cnNotificationList('GroupLabel', { groupIndex })}
-                  view="secondary"
-                  transform="uppercase"
-                  weight="bold"
-                  size="2xs"
-                  lineHeight="m"
-                >
-                  {groupLabel}
-                </Text>
+                <NotificationGroup
+                  key={cnNotificationList('Group', { groupIndex })}
+                  label={groupLabel}
+                />
               )}
               {group.items.map((item, itemIndex) => {
                 return (
@@ -140,9 +125,9 @@ function NotificationListRender(
                     key={cnNotificationList('Item', { groupIndex, itemIndex })}
                     title={getItemLabel(item)}
                     content={getItemDescription(item)}
-                    imageUrl={getItemImage(item)}
-                    date={getItemDate(item)}
-                    dateFormat={itemDateFormat}
+                    // imageUrl={getItemImage(item)}
+                    // date={getItemDate(item)}
+                    // dateFormat={itemDateFormat}
                     badges={getItemBadges(item)}
                     actions={getItemActions(item)}
                     style={{ zIndex: elementZIndex }}
