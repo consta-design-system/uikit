@@ -14,13 +14,15 @@ import {
 import { useMemo } from 'react';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
-import { range } from '../../../utils/array';
 import { isDisableDate, isInMinMaxDate } from '../../../utils/date';
 import {
   DateTimePropDisableDates,
   getLabelHours,
   getLabelMinutes,
   getLabelSeconds,
+  getTimeNumbers,
+  TimeOptions,
+  TimeUnitOptions,
 } from '../helpers';
 
 export const dateTimeTimePropLocaleDefault = {
@@ -45,20 +47,19 @@ type ResultItem = {
 
 const getItemData = (
   timeType: 'hours' | 'minutes' | 'seconds',
-  multiplicity = 1,
   startOfUnits: (date: Date) => Date,
   startOfUnit: (date: Date) => Date,
   endOfUnit: (date: Date) => Date,
-  addUnits: typeof addHours,
+  addUnits: typeof addHours | typeof addMinutes | typeof addSeconds,
   getItemLabel: (date: Date) => string,
+  options?: TimeUnitOptions,
   value?: Date,
   minDate?: Date,
   maxDate?: Date,
   disableDates?: DateTimePropDisableDates,
   onChangeRef?: React.MutableRefObject<DateTimeTimePropOnChange | undefined>,
 ): ResultItem[] => {
-  const length = timeType === 'hours' ? 24 : 60;
-  const numbers = range(multiplicity ? Math.ceil(length / multiplicity) : 0);
+  const numbers = getTimeNumbers(timeType, options);
 
   if (numbers.length === 0) {
     return [];
@@ -67,7 +68,7 @@ const getItemData = (
   const startDate = startOfUnits(value || startOfToday());
 
   return numbers.map((number) => {
-    const date = addUnits(startDate, number * multiplicity);
+    const date = addUnits(startDate, number);
     const label = getItemLabel(date);
     const selected = value ? getItemLabel(date) === getItemLabel(value) : false;
     const disabled =
@@ -87,8 +88,24 @@ const getItemData = (
 
 export const useTimeItems = (
   value?: Date,
+  timeOptions?: TimeOptions,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
   multiplicityHours?: number,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
   multiplicityMinutes?: number,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
   multiplicitySeconds?: number,
   onChange?: DateTimeTimePropOnChange,
   minDate?: Date,
@@ -97,16 +114,41 @@ export const useTimeItems = (
 ): ResultItem[][] => {
   const onChangeRef = useMutableRef(onChange);
 
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
+  const hoursOptions: TimeUnitOptions =
+    timeOptions?.hours ??
+    (multiplicityHours !== undefined ? { step: multiplicityHours } : {});
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
+  const minutesOptions: TimeUnitOptions =
+    timeOptions?.minutes ??
+    (multiplicityMinutes !== undefined ? { step: multiplicityMinutes } : {});
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить обработку multiplicity* в useTimeItems,
+   * формирование options { step: multiplicity } и оставить только timeOptions.
+   */
+  const secondsOptions: TimeUnitOptions =
+    timeOptions?.seconds ??
+    (multiplicitySeconds !== undefined ? { step: multiplicitySeconds } : {});
+
   return useMemo(
     () => [
       getItemData(
         'hours',
-        multiplicityHours,
         startOfDay,
         startOfHour,
         endOfHour,
         addHours,
         getLabelHours,
+        hoursOptions,
         value,
         minDate,
         maxDate,
@@ -115,12 +157,12 @@ export const useTimeItems = (
       ),
       getItemData(
         'minutes',
-        multiplicityMinutes,
         startOfHour,
         startOfMinute,
         endOfMinute,
         addMinutes,
         getLabelMinutes,
+        minutesOptions,
         value,
         minDate,
         maxDate,
@@ -129,12 +171,12 @@ export const useTimeItems = (
       ),
       getItemData(
         'seconds',
-        multiplicitySeconds,
         startOfMinute,
         startOfSecond,
         endOfSecond,
         addSeconds,
         getLabelSeconds,
+        secondsOptions,
         value,
         minDate,
         maxDate,
@@ -146,6 +188,7 @@ export const useTimeItems = (
       value?.getTime(),
       minDate?.getTime(),
       maxDate?.getTime(),
+      timeOptions,
       multiplicityHours,
       multiplicityMinutes,
       multiplicitySeconds,

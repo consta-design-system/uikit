@@ -133,3 +133,4 @@ export * from './isEqualDay';
 export * from './isEqualYear';
 export * from './isEqualMount';
 export * from './getMonthsOfYear';
+export * from './getTimeNumbers';
