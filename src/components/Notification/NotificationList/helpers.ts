@@ -1,4 +1,5 @@
 import { format, isToday, isYesterday, startOfDay } from 'date-fns';
+import { get } from 'http';
 
 import { getGroups as constaGetGroups } from '##/utils/getGroups';
 
@@ -9,17 +10,18 @@ import {
   NotificationListPropGetActionIcon,
   NotificationListPropGetActionLabel,
   NotificationListPropGetActionOnClick,
+  NotificationListPropGetGroupActions,
   NotificationListPropGetGroupId,
   NotificationListPropGetGroupLabel,
   NotificationListPropGetItemActions,
   NotificationListPropGetItemBadges,
-  NotificationListPropGetItemDate,
+  NotificationListPropGetItemCaption,
   NotificationListPropGetItemDescription,
   NotificationListPropGetItemGroup,
-  NotificationListPropGetItemImage,
   NotificationListPropGetItemLabel,
   NotificationListPropGetItemRead,
-  NotificationListPropGroupLabelFormat,
+  NotificationListPropGetItemUserImage,
+  NotificationListPropGetItemUserName,
   NotificationListProps,
 } from './types';
 
@@ -33,29 +35,42 @@ const defaultGetActionOnClick: NotificationListPropGetActionOnClick<
   NotificationItemAction
 > = (action) => action.onClick;
 const defaultGetGroupId: NotificationListPropGetGroupId<
+  NotificationListDefaultItem,
   NotificationListDefaultGroup
-> = (group) => group.id;
+> = (group) => group.group?.id;
 const defaultGetGroupLabel: NotificationListPropGetGroupLabel<
+  NotificationListDefaultItem,
   NotificationListDefaultGroup
-> = (group) => group.label;
+> = (group) => group.group?.label;
+const defaultGetGroupActions: NotificationListPropGetGroupActions<
+  NotificationListDefaultItem,
+  NotificationListDefaultGroup
+> = (group) => group.group?.actions;
 const defaultGetItemActions: NotificationListPropGetItemActions<
   NotificationListDefaultItem
 > = (item) => item.actions;
 const defaultGetItemBadges: NotificationListPropGetItemBadges<
   NotificationListDefaultItem
 > = (item) => item.badges;
-const defaultGetItemDate: NotificationListPropGetItemDate<
+const defaultGetItemCaption: NotificationListPropGetItemCaption<
   NotificationListDefaultItem
-> = (item) => item.date;
+> = (item) => item.caption;
+
+const defaultGetItemUserName: NotificationListPropGetItemUserImage<
+  NotificationListDefaultItem
+> = (item) => item.userName;
+
+const defaultGetItemUserImage: NotificationListPropGetItemUserImage<
+  NotificationListDefaultItem
+> = (item) => item.userImage;
+
 const defaultGetItemDescription: NotificationListPropGetItemDescription<
   NotificationListDefaultItem
 > = (item) => item.description;
 const defaultGetItemGroup: NotificationListPropGetItemGroup<
   NotificationListDefaultItem
 > = (item) => item.group;
-const defaultGetItemImage: NotificationListPropGetItemImage<
-  NotificationListDefaultItem
-> = (item) => item.image;
+
 const defaultGetItemLabel: NotificationListPropGetItemLabel<
   NotificationListDefaultItem
 > = (item) => item.label;
@@ -73,25 +88,18 @@ export function withDefaultGetters<ITEM, GROUP, ACTION>(
     getActionOnClick: props.getActionOnClick || defaultGetActionOnClick,
     getGroupId: props.getGroupId || defaultGetGroupId,
     getGroupLabel: props.getGroupLabel || defaultGetGroupLabel,
+    getGroupActions: props.getGroupActions || defaultGetGroupActions,
     getItemActions: props.getItemActions || defaultGetItemActions,
     getItemBadges: props.getItemBadges || defaultGetItemBadges,
-    getItemDate: props.getItemDate || defaultGetItemDate,
+    getItemCaption: props.getItemCaption || defaultGetItemCaption,
     getItemDescription: props.getItemDescription || defaultGetItemDescription,
     getItemGroup: props.getItemGroup || defaultGetItemGroup,
-    getItemImage: props.getItemImage || defaultGetItemImage,
+    getItemUserImage: props.getItemUserImage || defaultGetItemUserImage,
+    getItemUserName: props.getItemUserName || defaultGetItemUserName,
     getItemLabel: props.getItemLabel || defaultGetItemLabel,
     getItemRead: props.getItemRead || defaultGetItemRead,
   };
 }
-
-type ReturnedGroup<ITEM, GROUP> = {
-  items: ITEM[];
-  key: string | number;
-  group?: GROUP;
-  groupIndex: number;
-};
-
-export const noGroupKey = 'no-group';
 
 export const defaultGroupLabelFormat: NotificationListPropGroupLabelFormat<
   true
@@ -116,35 +124,4 @@ const sortGroup = (
     return -1;
   }
   return 0;
-};
-
-export const getGroups = <ITEM, GROUP>(
-  items: ITEM[],
-  groups: GROUP[] | undefined,
-  groupByDay: boolean,
-  getItemGroup: NotificationListPropGetItemGroup<ITEM>,
-  getItemDate: NotificationListPropGetItemDate<ITEM>,
-  getGroupId: NotificationListPropGetGroupId<GROUP>,
-): Array<ReturnedGroup<ITEM, GROUP>> => {
-  if (groupByDay) {
-    return constaGetGroups<ITEM, GROUP>(
-      items,
-      (item) => {
-        const date = getItemDate(item);
-        return date ? startOfDay(date).getTime() : undefined;
-      },
-      undefined,
-      undefined,
-      sortGroup,
-      noGroupKey,
-    );
-  }
-  return constaGetGroups(
-    items,
-    getItemGroup,
-    groups,
-    getGroupId,
-    undefined,
-    noGroupKey,
-  );
 };

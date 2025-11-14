@@ -10,7 +10,7 @@ import {
   NotificationListDefaultItem,
 } from '../NotificationList';
 
-const defaultGroupLabelFormat = (date: Date) => {
+const groupLabelFormat = (date: Date) => {
   if (isToday(date)) {
     return 'Сегодня';
   }

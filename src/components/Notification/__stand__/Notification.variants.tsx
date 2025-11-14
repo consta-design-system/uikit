@@ -175,7 +175,7 @@ export const Variants = () => {
           />
         </div>
       </div>
-      <div className={cnNotificationVariants('Body')}>
+      <div className={cnNotificationVariants('Body', [cnMixScrollBar()])}>
         <Component />
       </div>
     </div>

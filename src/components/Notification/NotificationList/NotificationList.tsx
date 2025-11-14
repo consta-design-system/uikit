@@ -12,7 +12,7 @@ import { getGroups } from '##/utils/getGroups';
 import { NotificationActions } from '../NotificationActions';
 import { NotificationGroup } from '../NotificationGroup';
 import { NotificationItem } from '../NotificationItem';
-import { defaultGroupLabelFormat, withDefaultGetters } from './helpers';
+import { withDefaultGetters } from './helpers';
 import { NotificationListComponent, NotificationListProps } from './types';
 
 export const cnNotificationList = cn('NotificationList');
@@ -24,9 +24,7 @@ function NotificationListRender(
   const {
     className,
     items,
-    groupByDay = false,
     groups,
-    groupLabelFormat = defaultGroupLabelFormat,
     itemDateFormat,
     title,
     actions,
@@ -38,12 +36,14 @@ function NotificationListRender(
     getGroupLabel,
     getItemActions,
     getItemBadges,
-    getItemDate,
     getItemDescription,
     getItemGroup,
-    getItemImage,
     getItemRead,
+    getItemUserName,
+    getItemUserImage,
+    getItemCaption,
     sortGroups,
+    getGroupActions,
     onClose,
     ...otherProps
   } = withDefaultGetters(props);
@@ -105,15 +105,15 @@ function NotificationListRender(
       )}
       <div className={cnNotificationList('List')}>
         {resultGroups.map((group, groupIndex) => {
-          const groupLabel = groupByDay
-            ? groupLabelFormat(Number(group.key))
-            : group.group && getGroupLabel(group.group);
+          const groupLabel = getGroupLabel(group);
+
           return (
             <Fragment key={cnNotificationList('Group', { groupIndex })}>
               {groupLabel && (
                 <NotificationGroup
                   key={cnNotificationList('Group', { groupIndex })}
                   label={groupLabel}
+                  actions={getGroupActions?.(group)}
                 />
               )}
               {group.items.map((item, itemIndex) => {
@@ -125,9 +125,8 @@ function NotificationListRender(
                     key={cnNotificationList('Item', { groupIndex, itemIndex })}
                     title={getItemLabel(item)}
                     content={getItemDescription(item)}
-                    // imageUrl={getItemImage(item)}
-                    // date={getItemDate(item)}
-                    // dateFormat={itemDateFormat}
+                    userName={getItemUserName(item)}
+                    userImageUrl={getItemUserImage(item)}
                     badges={getItemBadges(item)}
                     actions={getItemActions(item)}
                     style={{ zIndex: elementZIndex }}

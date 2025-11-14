@@ -21,11 +21,11 @@ const NotificationRender = (
   ref: React.Ref<HTMLButtonElement>,
 ) => {
   const {
-    // className,
+    className,
     items,
     groupByDay,
     groups,
-    groupLabelFormat,
+    // groupLabelFormat,
     // itemDateFormat,
     title,
     actions,
@@ -53,7 +53,6 @@ const NotificationRender = (
     items,
     groupByDay,
     groups,
-    groupLabelFormat,
     title,
     actions,
     getActionIcon,
@@ -69,7 +68,6 @@ const NotificationRender = (
     getItemImage,
     getItemLabel,
     getItemRead,
-    getItemView,
   };
 
   const elementZIndex =
@@ -79,7 +77,7 @@ const NotificationRender = (
   const openAtom = useCreateAtom(false);
 
   return (
-    <NotificationRoot openAtom={openAtom}>
+    <NotificationRoot className={className} openAtom={openAtom}>
       <NotificationList {...listProps} />
     </NotificationRoot>
   );

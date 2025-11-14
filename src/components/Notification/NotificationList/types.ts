@@ -10,14 +10,18 @@ import {
 export type NotificationListDefaultGroup = {
   label: string;
   id: string;
+  actions?: NotificationItemAction[];
 };
+
+import { Group } from '##/utils/getGroups';
 
 export type NotificationListDefaultItem = {
   label: string;
+  userName?: string;
+  userImage?: string;
   description?: string;
-  image?: string;
   read?: boolean;
-  date?: string;
+  caption?: string;
   badges?: NotificationItemBadge[];
   actions?: NotificationItemAction[];
   onClick?: React.EventHandler<React.MouseEvent>;
@@ -28,21 +32,30 @@ export type NotificationListPropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type NotificationListPropGetItemDescription<ITEM> = (
   item: ITEM,
 ) => string | undefined;
-export type NotificationListPropGetItemImage<ITEM> = (
-  item: ITEM,
-) => string | undefined;
+
 export type NotificationListPropGetItemRead<ITEM> = (
   item: ITEM,
 ) => boolean | undefined;
-export type NotificationListPropGetItemDate<ITEM> = (
+
+export type NotificationListPropGetItemCaption<ITEM> = (
   item: ITEM,
-) => Date | undefined;
+) => string | undefined;
+
+export type NotificationListPropGetItemUserName<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+
+export type NotificationListPropGetItemUserImage<ITEM> = (
+  item: ITEM,
+) => string | undefined;
+
 export type NotificationListPropGetItemBadges<ITEM> = (
   item: ITEM,
 ) => NotificationItemBadge[] | undefined;
 export type NotificationListPropGetItemActions<ITEM> = (
   item: ITEM,
 ) => NotificationItemAction[] | undefined;
+
 export type NotificationListPropGetItemGroup<ITEM> = (
   item: ITEM,
 ) => string | undefined;
@@ -59,30 +72,23 @@ export type NotificationListPropGetActionOnClick<ACTION> = (
   action: ACTION,
 ) => React.EventHandler<React.MouseEvent> | undefined;
 
-export type NotificationListPropGetGroupLabel<GROUP> = (group: GROUP) => string;
-export type NotificationListPropGetGroupId<GROUP> = (
+export type NotificationListPropGetGroupId<ITEM, GROUP> = (
   group: GROUP,
-) => string | number;
+) => string | undefined;
 
-export type NotificationListPropGroupLabelFormat<GROUP_BY_DAY> =
-  GROUP_BY_DAY extends true ? (timestamp: number) => string : never;
+export type NotificationListPropGetGroupLabel<ITEM, GROUP> = (
+  group: Group<ITEM, GROUP>,
+) => string | undefined;
+export type NotificationListPropGetGroupActions<ITEM, GROUP> = (
+  group: Group<ITEM, GROUP>,
+) => NotificationItemAction[] | undefined;
 
 export type NotificationListPropSortGroups<ITEM, GROUP> = (
-  a: {
-    items: ITEM[];
-    key: string | number;
-    group?: GROUP;
-    groupIndex: number;
-  },
-  b: {
-    items: ITEM[];
-    key: string | number;
-    group?: GROUP;
-    groupIndex: number;
-  },
+  a: Group<ITEM, GROUP>,
+  b: Group<ITEM, GROUP>,
 ) => number;
 
-export type Props<ITEM, GROUP, ACTION, GROUP_BY_DAY extends boolean> = {
+export type Props<ITEM, GROUP, ACTION> = {
   children?: never;
   items: ITEM[];
   itemDateFormat?: NotificationListPropItemDateFormat;
@@ -90,20 +96,20 @@ export type Props<ITEM, GROUP, ACTION, GROUP_BY_DAY extends boolean> = {
   actions?: ACTION[];
   getItemLabel?: NotificationListPropGetItemLabel<ITEM>;
   getItemDescription?: NotificationListPropGetItemDescription<ITEM>;
-  getItemImage?: NotificationListPropGetItemImage<ITEM>;
   getItemRead?: NotificationListPropGetItemRead<ITEM>;
-  getItemDate?: NotificationListPropGetItemDate<ITEM>;
+  getItemCaption?: NotificationListPropGetItemCaption<ITEM>;
   getItemBadges?: NotificationListPropGetItemBadges<ITEM>;
   getItemActions?: NotificationListPropGetItemActions<ITEM>;
   getItemGroup?: NotificationListPropGetItemGroup<ITEM>;
+  getItemUserName?: NotificationListPropGetItemUserName<ITEM>;
+  getItemUserImage?: NotificationListPropGetItemUserImage<ITEM>;
   getActionLabel?: NotificationListPropGetActionLabel<ACTION>;
   getActionIcon?: NotificationListPropGetActionIcon<ACTION>;
   getActionOnClick?: NotificationListPropGetActionOnClick<ACTION>;
-  getGroupLabel?: NotificationListPropGetGroupLabel<GROUP>;
-  getGroupId?: NotificationListPropGetGroupId<GROUP>;
-  groupByDay?: GROUP_BY_DAY;
-  groupLabelFormat?: NotificationListPropGroupLabelFormat<GROUP_BY_DAY>;
-  groups?: GROUP_BY_DAY extends true ? never : GROUP[];
+  getGroupId?: NotificationListPropGetGroupId<ITEM, GROUP>;
+  getGroupActions?: NotificationListPropGetGroupActions<ITEM, GROUP>;
+  getGroupLabel?: NotificationListPropGetGroupLabel<ITEM, GROUP>;
+  groups?: GROUP[];
   onClose?: React.EventHandler<React.MouseEvent>;
   sortGroups?: NotificationListPropSortGroups<ITEM, GROUP> | undefined;
 } & (ACTION extends { label: NotificationItemAction['label'] }
@@ -111,10 +117,12 @@ export type Props<ITEM, GROUP, ACTION, GROUP_BY_DAY extends boolean> = {
   : { getActionLabel: NotificationListPropGetItemActions<ACTION> }) &
   (GROUP extends { label: NotificationListDefaultGroup['label'] }
     ? {}
-    : { getGroupLabel: NotificationListPropGetGroupLabel<GROUP> }) &
+    : {
+        getGroupLabel: NotificationListPropGetGroupLabel<ITEM, GROUP>;
+      }) &
   (GROUP extends { id: NotificationListDefaultGroup['id'] }
     ? {}
-    : { getGroupId: NotificationListPropGetGroupId<GROUP> }) &
+    : { getGroupId: NotificationListPropGetGroupId<ITEM, GROUP> }) &
   (ITEM extends { label: NotificationListDefaultItem['label'] }
     ? {}
     : { getItemLabel: NotificationListPropGetItemLabel<ITEM> });
@@ -123,17 +131,12 @@ export type NotificationListProps<
   ITEM = NotificationListDefaultItem,
   GROUP = NotificationListDefaultGroup,
   ACTION = NotificationItemAction,
-  GROUP_BY_DAY extends boolean = false,
-> = PropsWithHTMLAttributesAndRef<
-  Props<ITEM, GROUP, ACTION, GROUP_BY_DAY>,
-  HTMLDivElement
->;
+> = PropsWithHTMLAttributesAndRef<Props<ITEM, GROUP, ACTION>, HTMLDivElement>;
 
 export type NotificationListComponent = <
   ITEM = NotificationListDefaultItem,
   GROUP = NotificationListDefaultGroup,
   ACTION = NotificationItemAction,
-  GROUP_BY_DAY extends boolean = false,
 >(
-  props: NotificationListProps<ITEM, GROUP, ACTION, GROUP_BY_DAY>,
+  props: NotificationListProps<ITEM, GROUP, ACTION>,
 ) => React.ReactNode;
