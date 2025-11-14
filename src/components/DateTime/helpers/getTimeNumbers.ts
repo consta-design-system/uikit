@@ -10,8 +10,10 @@ export const getTimeNumbers = (
   const maxValue = timeType === 'hours' ? 23 : 59;
 
   if (
-    !options ||
-    (typeof options === 'object' && Object.keys(options).length === 0)
+    options === undefined ||
+    (!Array.isArray(options) &&
+      typeof options === 'object' &&
+      Object.keys(options).length === 0)
   ) {
     return range(maxValue + 1);
   }
