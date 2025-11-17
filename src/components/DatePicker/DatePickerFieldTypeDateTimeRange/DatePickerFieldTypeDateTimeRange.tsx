@@ -59,6 +59,10 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
     startFieldName,
     endFieldName,
     withClearButton,
+    timeOptions,
+    multiplicityHours,
+    multiplicityMinutes,
+    multiplicitySeconds,
     ...otherProps
   } = props;
 
@@ -79,6 +83,10 @@ export const DatePickerFieldTypeDateTimeRange = forwardRef<
     minDate,
     maxDate,
     withClearButton,
+    timeOptions,
+    multiplicityHours,
+    multiplicityMinutes,
+    multiplicitySeconds,
   };
 
   const [handleStartDateChange, handleEndDateChange] = getChangeFnRange(
