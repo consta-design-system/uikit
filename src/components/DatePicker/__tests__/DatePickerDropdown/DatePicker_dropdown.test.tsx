@@ -123,4 +123,33 @@ describe('Компонент DatePickerDropdown', () => {
       expect(props.multiplicitySeconds).toBe(10);
     });
   });
+
+  describe('timeOptions prop', () => {
+    it('по умолчанию не передаёт timeOptions', () => {
+      const { DateTimeMock } = renderComponent();
+      const props = DateTimeMock.mock.calls[0][0];
+
+      expect(props.timeOptions).toBeUndefined();
+    });
+
+    it('пробрасывает timeOptions, если передан', () => {
+      const timeOptions = {
+        hours: { step: 2 },
+        minutes: [0, 30],
+        seconds: { start: 0, stop: 10, step: 5 },
+      };
+
+      const { DateTimeMock } = renderComponent({ timeOptions });
+      const props = DateTimeMock.mock.calls[0][0];
+
+      expect(props.timeOptions).toEqual(timeOptions);
+    });
+
+    it('оставляет timeOptions undefined, если передано undefined', () => {
+      const { DateTimeMock } = renderComponent({ timeOptions: undefined });
+      const props = DateTimeMock.mock.calls[0][0];
+
+      expect(props.timeOptions).toBeUndefined();
+    });
+  });
 });
