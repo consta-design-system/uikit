@@ -1,7 +1,7 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
 
-import { DatePicker, DatePickerProps } from '../DatePicker';
+import { DatePicker, DatePickerProps } from '../../DatePicker';
 import {
   animateDelay,
   getDateTimeItem,
@@ -9,15 +9,13 @@ import {
   getInput,
   inputFocus,
   testId,
-} from './helpers';
+} from '../helpers';
 
-const renderComponent = (props: DatePickerProps<'year-range'> = {}) => {
-  return render(
-    <DatePicker {...props} type="year-range" data-testid={testId} />,
-  );
+const renderComponent = (props: DatePickerProps<'year'> = {}) => {
+  return render(<DatePicker {...props} type="year" data-testid={testId} />);
 };
 
-describe('Компонент DatePicker_type_yearRange', () => {
+describe('Компонент DatePicker_type_year', () => {
   describe('проверка onChange', () => {
     it(`при клике по календарю срабатывает`, () => {
       jest.useFakeTimers();
@@ -41,9 +39,7 @@ describe('Компонент DatePicker_type_yearRange', () => {
 
   describe('проверка value', () => {
     it(`верно отображается в поле ввода`, () => {
-      renderComponent({
-        value: [new Date(1970, 0, 15), new Date(1970, 0, 17)],
-      });
+      renderComponent({ value: new Date(1970, 0, 15) });
 
       expect(getInput()).toHaveValue('1970');
     });
@@ -53,7 +49,7 @@ describe('Компонент DatePicker_type_yearRange', () => {
 
       act(() => {
         renderComponent({
-          value: [new Date(1970, 0, 15), new Date(1973, 0, 17)],
+          value: new Date(1970, 0, 15),
           currentVisibleDate: new Date(1970, 0),
         });
       });
@@ -61,8 +57,7 @@ describe('Компонент DatePicker_type_yearRange', () => {
       inputFocus();
       animateDelay();
 
-      expect(getDateTimeItemSelected(0)).toHaveTextContent('1970');
-      expect(getDateTimeItemSelected(1)).toHaveTextContent('1973');
+      expect(getDateTimeItemSelected()).toHaveTextContent('1970');
     });
   });
 });

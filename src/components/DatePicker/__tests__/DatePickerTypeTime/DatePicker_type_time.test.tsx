@@ -1,20 +1,18 @@
 import { render } from '@testing-library/react';
-import { ru } from 'date-fns/locale';
-import React, { createRef } from 'react';
+import React from 'react';
 
-import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
-import { DatePickerFieldTypeDateTime } from '../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime';
-import { DatePickerTypeDateTime } from '../DatePickerTypeDateTime/DatePickerTypeDateTime';
+import { DatePickerDropdown } from '../../DatePickerDropdown/DatePickerDropdown';
+import { DatePickerFieldTypeTime } from '../../DatePickerFieldTypeTime/DatePickerFieldTypeTime';
+import { DatePickerTypeTime } from '../../DatePickerTypeTime/DatePickerTypeTime';
 
-jest.mock('../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime');
+jest.mock('../DatePickerFieldTypeTime/DatePickerFieldTypeTime');
 jest.mock('../DatePickerDropdown/DatePickerDropdown');
 
-const getFieldMock = () =>
-  (DatePickerFieldTypeDateTime as any).render as jest.Mock;
+const getFieldMock = () => (DatePickerFieldTypeTime as any).render as jest.Mock;
 
 const getDropdownMock = () => (DatePickerDropdown as any).render as jest.Mock;
 
-describe('Компонент DatePicker_type_dateTime_props', () => {
+describe('Компонент DatePickerTypeTime', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -76,7 +74,7 @@ describe('Компонент DatePicker_type_dateTime_props', () => {
       ({ label, format, expectedHours, expectedMinutes, expectedSeconds }) => {
         it(`корректно рассчитывает multiplicity, когда ${label}`, () => {
           render(
-            <DatePickerTypeDateTime
+            <DatePickerTypeTime
               value={new Date(1970, 0, 1, 10, 0, 0)}
               format={format}
               {...baseMultiplicities}
@@ -102,9 +100,10 @@ describe('Компонент DatePicker_type_dateTime_props', () => {
         });
       },
     );
+
     it('если multiplicity не передан, остаётся undefined даже при полном формате', () => {
       render(
-        <DatePickerTypeDateTime
+        <DatePickerTypeTime
           value={new Date(1970, 0, 1, 10, 0, 0)}
           format="dd.MM.yyyy HH:mm:ss"
         />,
@@ -124,74 +123,5 @@ describe('Компонент DatePicker_type_dateTime_props', () => {
       expect(dropdownProps.multiplicityMinutes).toBeUndefined();
       expect(dropdownProps.multiplicitySeconds).toBeUndefined();
     });
-  });
-
-  it('пробрасывает value в Field и Dropdown', () => {
-    const value = new Date(2023, 10, 5, 12, 30, 45);
-
-    render(<DatePickerTypeDateTime value={value} />);
-
-    const fieldProps = getFieldMock().mock.calls[0][0];
-    const dropdownProps = getDropdownMock().mock.calls[0][0];
-
-    expect(fieldProps.value).toBe(value);
-    expect(dropdownProps.value).toBe(value);
-  });
-
-  it('пробрасывает disabled в Field', () => {
-    render(<DatePickerTypeDateTime disabled />);
-
-    const fieldProps = getFieldMock().mock.calls[0][0];
-
-    expect(fieldProps.disabled).toBe(true);
-  });
-
-  it('пробрасывает onChange в Dropdown', () => {
-    const onChange = jest.fn();
-
-    render(<DatePickerTypeDateTime onChange={onChange} />);
-
-    const dropdownProps = getDropdownMock().mock.calls[0][0];
-
-    expect(dropdownProps.onChange).toBe(onChange);
-  });
-
-  it('пробрасывает locale и events в Dropdown', () => {
-    const locale = ru;
-    const events = [new Date(2023, 0, 1), new Date(2023, 1, 1)];
-
-    render(<DatePickerTypeDateTime locale={locale} events={events} />);
-
-    const dropdownProps = getDropdownMock().mock.calls[0][0];
-
-    expect(dropdownProps.locale).toBe(locale);
-    expect(dropdownProps.events).toBe(events);
-  });
-
-  it('пробрасывает ref и inputRef', () => {
-    const ref = createRef<HTMLDivElement>();
-    const inputRef = createRef<HTMLInputElement>();
-
-    render(<DatePickerTypeDateTime ref={ref} inputRef={inputRef} />);
-
-    const fieldProps = getFieldMock().mock.calls[0][0];
-
-    expect(fieldProps.inputRef).toBeDefined();
-  });
-
-  it('пробрасывает renderAdditionalControls в Dropdown', () => {
-    const renderAdditionalControls = jest.fn();
-
-    render(
-      <DatePickerTypeDateTime
-        renderAdditionalControls={renderAdditionalControls}
-      />,
-    );
-
-    const dropdownProps = getDropdownMock().mock.calls[0][0];
-
-    expect(dropdownProps.renderAdditionalControls).toBe(
-      renderAdditionalControls,
-    );
   });
 });

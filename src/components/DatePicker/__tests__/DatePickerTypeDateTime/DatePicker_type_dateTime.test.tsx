@@ -1,7 +1,7 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
 
-import { DatePicker, DatePickerProps } from '../DatePicker';
+import { DatePicker, DatePickerProps } from '../../DatePicker';
 import {
   animateDelay,
   getDateTimeDaySelected,
@@ -11,7 +11,7 @@ import {
   getInput,
   inputFocus,
   testId,
-} from './helpers';
+} from '../helpers';
 
 const renderComponent = (props: DatePickerProps<'date-time'> = {}) => {
   return render(

@@ -1,24 +1,21 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
 
-import { DatePicker, DatePickerProps } from '../DatePicker';
+import { DatePicker, DatePickerProps } from '../../DatePicker';
 import {
   animateDelay,
-  getDateTimeDaySelected,
   getDateTimeItem,
-  getDateTimeTimeSelected,
+  getDateTimeItemSelected,
   getInput,
   inputFocus,
   testId,
-} from './helpers';
+} from '../helpers';
 
-const renderComponent = (props: DatePickerProps<'date-time-range'> = {}) => {
-  return render(
-    <DatePicker {...props} type="date-time-range" data-testid={testId} />,
-  );
+const renderComponent = (props: DatePickerProps<'month'> = {}) => {
+  return render(<DatePicker {...props} type="month" data-testid={testId} />);
 };
 
-describe('Компонент DatePicker_type_dateTimeRange', () => {
+describe('Компонент DatePicker_type_month', () => {
   describe('проверка onChange', () => {
     it(`при клике по календарю срабатывает`, () => {
       jest.useFakeTimers();
@@ -42,11 +39,9 @@ describe('Компонент DatePicker_type_dateTimeRange', () => {
 
   describe('проверка value', () => {
     it(`верно отображается в поле ввода`, () => {
-      renderComponent({
-        value: [new Date(1970, 0, 15, 10, 11, 12), new Date(1970, 0, 17)],
-      });
+      renderComponent({ value: new Date(1970, 0, 15) });
 
-      expect(getInput()).toHaveValue('15.01.1970 10:11:12');
+      expect(getInput()).toHaveValue('01.1970');
     });
 
     it(`верно отображается в календаре`, () => {
@@ -54,17 +49,15 @@ describe('Компонент DatePicker_type_dateTimeRange', () => {
 
       act(() => {
         renderComponent({
-          value: [new Date(1970, 0, 15, 10, 11, 12), new Date(1970, 0, 17)],
+          value: new Date(1970, 0, 15),
+          currentVisibleDate: new Date(1970, 0),
         });
       });
 
       inputFocus();
       animateDelay();
 
-      expect(getDateTimeDaySelected()).toHaveTextContent('15');
-      expect(getDateTimeTimeSelected(0)).toHaveTextContent('10');
-      expect(getDateTimeTimeSelected(1)).toHaveTextContent('11');
-      expect(getDateTimeTimeSelected(2)).toHaveTextContent('12');
+      expect(getDateTimeItemSelected()).toHaveTextContent('янв');
     });
   });
 });

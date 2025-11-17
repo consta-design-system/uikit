@@ -1,27 +1,26 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { DatePickerFieldTypeDateTime } from '../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime';
+import { DatePickerFieldTypeTime } from '../../DatePickerFieldTypeTime/DatePickerFieldTypeTime';
 
 const defaultProps = {
-  value: new Date(2023, 0, 1, 12, 0, 0),
+  value: new Date(2023, 0, 1, 12, 30, 45),
   onChange: jest.fn(),
   onError: jest.fn(),
-  placeholder: 'Выберите дату',
+  placeholder: 'Выберите время',
 };
 
 const renderComponent = (props = {}) => {
-  return render(<DatePickerFieldTypeDateTime {...defaultProps} {...props} />);
+  return render(<DatePickerFieldTypeTime {...defaultProps} {...props} />);
 };
 
-describe('Компонент DatePickerFieldTypeDateTime', () => {
+describe('Компонент DatePickerFieldTypeTime', () => {
   it('рендерит TextField с placeholder и value', () => {
     const { getByPlaceholderText } = renderComponent();
+    const input = getByPlaceholderText('Выберите время') as HTMLInputElement;
 
-    const input = getByPlaceholderText('Выберите дату') as HTMLInputElement;
     expect(input).toBeInTheDocument();
-
-    expect(input.value).toBe('01.01.2023 12:00:00');
+    expect(input.value).toBe('12:30:45');
   });
 
   it('поддерживает disabled и required', () => {
@@ -29,8 +28,8 @@ describe('Компонент DatePickerFieldTypeDateTime', () => {
       disabled: true,
       required: true,
     });
+    const input = getByPlaceholderText('Выберите время') as HTMLInputElement;
 
-    const input = getByPlaceholderText('Выберите дату') as HTMLInputElement;
     expect(input).toBeDisabled();
   });
 

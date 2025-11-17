@@ -3,7 +3,7 @@ import React from 'react';
 
 import { DateTime, DateTimePropType } from '##/components/DateTime';
 
-import { DatePickerDropdown } from '../DatePickerDropdown/DatePickerDropdown';
+import { DatePickerDropdown } from '../../DatePickerDropdown/DatePickerDropdown';
 
 jest.mock('##/components/DateTime');
 

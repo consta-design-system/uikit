@@ -2,8 +2,8 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { IMask, useIMask } from 'react-imask';
 
-import { usePicker } from '../DatePickerFieldTypeTime/helpers';
-import { datePickerErrorTypes } from '../types';
+import { usePicker } from '../../DatePickerFieldTypeTime/helpers';
+import { datePickerErrorTypes } from '../../types';
 
 jest.mock('react-imask', () => {
   const MaskedEnum = jest.fn();
