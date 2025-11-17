@@ -6,8 +6,8 @@ import { DatePickerDropdown } from '../../DatePickerDropdown/DatePickerDropdown'
 import { DatePickerFieldTypeDateTime } from '../../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime';
 import { DatePickerTypeDateTime } from '../../DatePickerTypeDateTime/DatePickerTypeDateTime';
 
-jest.mock('../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime');
-jest.mock('../DatePickerDropdown/DatePickerDropdown');
+jest.mock('../../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime');
+jest.mock('../../DatePickerDropdown/DatePickerDropdown');
 
 const getFieldMock = () =>
   (DatePickerFieldTypeDateTime as any).render as jest.Mock;
