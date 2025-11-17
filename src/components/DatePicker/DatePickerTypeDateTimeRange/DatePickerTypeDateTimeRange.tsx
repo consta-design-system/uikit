@@ -16,8 +16,11 @@ import {
 } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateTimeRange } from '../DatePickerFieldTypeDateTimeRange/DatePickerFieldTypeDateTimeRange';
 import {
+  datePickerPropFormatTypeDateTime,
   getDropdownZIndex,
   getFieldName,
+  getMultiplicityTime,
+  getTimeOptionsByFormat,
   normalizeRangeValue,
 } from '../helpers';
 import { getTimeFof } from '../timeForMap';
@@ -42,11 +45,12 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       inputRef,
       name,
       placeholder,
-      multiplicityMinutes,
       dropdownClassName,
       dropdownRef,
-      multiplicitySeconds,
-      multiplicityHours,
+      timeOptions: timeOptionsProp,
+      multiplicityHours: multiplicitySecondsProp,
+      multiplicityMinutes: multiplicityHoursProp,
+      multiplicitySeconds: multiplicityMinutesProp,
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
@@ -65,6 +69,24 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
 
     const startFocused = fieldFocused === 0;
     const endFocused = fieldFocused === 1;
+
+    /**
+     * @deprecated
+     * TODO: major - удалить вызов getMultiplicityTime и связанные свойства multiplicity*
+     * при переходе на новую схему работы с timeOptions, использовать только timeOptions и getTimeOptionsByFormat.
+     */
+    const [multiplicityHours, multiplicityMinutes, multiplicitySeconds] =
+      getMultiplicityTime(
+        fieldProps.format || datePickerPropFormatTypeDateTime,
+        multiplicityHoursProp,
+        multiplicityMinutesProp,
+        multiplicitySecondsProp,
+      );
+
+    const timeOptions = getTimeOptionsByFormat(
+      fieldProps.format || datePickerPropFormatTypeDateTime,
+      timeOptionsProp,
+    );
 
     const handleChange: DatePickerDropdownPropOnChange = (value, { e }) => {
       if (startFocused) {
@@ -185,6 +207,10 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           endFieldPlaceholder={
             Array.isArray(placeholder) ? placeholder?.[1] : placeholder
           }
+          timeOptions={timeOptions}
+          multiplicityHours={multiplicityHours}
+          multiplicityMinutes={multiplicityMinutes}
+          multiplicitySeconds={multiplicitySeconds}
         />
         <DatePickerDropdown
           type="date-time"
@@ -204,6 +230,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           form={dropdownForm}
           onChange={handleChange}
           renderAdditionalControls={renderAdditionalControls}
+          timeOptions={timeOptions}
           multiplicityMinutes={multiplicityMinutes}
           multiplicitySeconds={multiplicitySeconds}
           multiplicityHours={multiplicityHours}
