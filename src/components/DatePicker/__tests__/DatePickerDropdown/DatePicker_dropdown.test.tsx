@@ -96,7 +96,7 @@ describe('Компонент DatePickerDropdown', () => {
     ];
 
     cases.forEach(({ label, key, value }) => {
-      it(`пробрасывает ${label}, если проп передан`, () => {
+      it(`пробрасывает ${label}, если props передан`, () => {
         const { DateTimeMock } = renderComponent({ [key]: value });
         const props = DateTimeMock.mock.calls[0][0];
         expect(props[key]).toBe(value);
