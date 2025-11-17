@@ -10,6 +10,7 @@ import {
   datePickerPropFormatTypeDateTime,
   getDropdownZIndex,
   getMultiplicityTime,
+  getTimeOptionsByFormat,
 } from '../helpers';
 import {
   datePickerPropDateTimeViewDefault,
@@ -26,6 +27,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
       dropdownForm,
       dropdownClassName,
       dropdownRef,
+      timeOptions: timeOptionsProp,
       multiplicityHours: multiplicityHoursProp,
       multiplicityMinutes: multiplicityMinutesProp,
       multiplicitySeconds: multiplicitySecondsProp,
@@ -41,6 +43,11 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
       ...otherProps
     } = props;
 
+    /**
+     * @deprecated
+     * TODO: major - удалить вызов getMultiplicityTime и связанные свойства multiplicity*
+     * при переходе на новую схему работы с timeOptions, использовать только timeOptions и getTimeOptionsByFormat.
+     */
     const [multiplicityHours, multiplicityMinutes, multiplicitySeconds] =
       getMultiplicityTime(
         otherProps.format || datePickerPropFormatTypeDateTime,
@@ -48,6 +55,11 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
         multiplicityMinutesProp,
         multiplicitySecondsProp,
       );
+
+    const timeOptions = getTimeOptionsByFormat(
+      otherProps.format || datePickerPropFormatTypeDateTime,
+      timeOptionsProp,
+    );
 
     const fieldRef = useRef<HTMLDivElement>(null);
     const calendarRef = useRef<HTMLDivElement>(null);
@@ -83,9 +95,10 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
           ref={fieldRef}
           inputRef={useForkRef([inputRef, inputRefProp])}
           onClick={setCalendarVisible.on}
+          timeOptions={timeOptions}
           multiplicityHours={multiplicityHours}
-          multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
+          multiplicitySeconds={multiplicitySeconds}
           disabled={disabled}
         />
         <DatePickerDropdown
@@ -103,9 +116,10 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
           className={dropdownClassName}
           onChange={props.onChange}
           renderAdditionalControls={renderAdditionalControls}
+          timeOptions={timeOptions}
           multiplicityHours={multiplicityHours}
-          multiplicitySeconds={multiplicitySeconds}
           multiplicityMinutes={multiplicityMinutes}
+          multiplicitySeconds={multiplicitySeconds}
           zIndex={getDropdownZIndex(props.style)}
           disableDates={disableDates}
         />
