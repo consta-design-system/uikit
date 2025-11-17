@@ -1,5 +1,7 @@
 import { IconComponent } from '@consta/icons/Icon';
 
+import { TimeOptions } from '##/components/DateTime';
+
 import { DateRange } from '../../../utils/types/Date';
 import { DatePickerFieldTypeDateTimeProps } from '../DatePickerFieldTypeDateTime/helpers';
 
@@ -48,4 +50,20 @@ export type DatePickerFieldTypeDateTimeRangeProps = Omit<
   endFieldName?: string;
   startFieldPlaceholder?: string;
   endFieldPlaceholder?: string;
+  timeOptions?: TimeOptions;
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
+   */
+  multiplicityHours?: number;
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
+   */
+  multiplicityMinutes?: number;
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
+   */
+  multiplicitySeconds?: number;
 };
