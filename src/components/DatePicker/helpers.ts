@@ -8,6 +8,7 @@ import { useMutableRef } from '##/hooks/useMutableRef';
 import { range } from '##/utils/array';
 import { DateRange } from '##/utils/types/Date';
 
+import { TimeOptions, TimeUnitOptions } from '../DateTime';
 import { DatePickerPropType } from './types';
 
 export const datePickerPropSeparatorDefault = '.';
@@ -37,6 +38,39 @@ export const normalizeRangeValue = (dateRange: DateRange): DateRange => {
   return dateRange;
 };
 
+export const getTimeOptionsByFormat = (
+  format: string,
+  timeOptions?: TimeOptions,
+) => {
+  const markers = ['HH', 'mm', 'ss'] as const;
+  const formatArray = format.split(' ')[1]?.split(':');
+  const mapTimeOptions = {
+    HH: timeOptions?.hours,
+    mm: timeOptions?.minutes,
+    ss: timeOptions?.seconds,
+  } as const;
+
+  const [hoursOptions, minutesOptions, secondsOptions] = markers.map((marker) =>
+    formatArray?.includes(marker) ? mapTimeOptions[marker] : [],
+  ) as [
+    TimeUnitOptions | undefined,
+    TimeUnitOptions | undefined,
+    TimeUnitOptions | undefined,
+  ];
+
+  const effectiveTimeOptions = {
+    hours: hoursOptions,
+    minutes: minutesOptions,
+    seconds: secondsOptions,
+  };
+
+  return effectiveTimeOptions;
+};
+
+/**
+ * @deprecated Use getTimeOptionsByFormat(format, timeOptions) instead
+ * TODO: major - удалить getMultiplicityTime и все multiplicity* пропсы/логику,
+ */
 export const getMultiplicityTime = (
   format: string,
   multiplicityHours: number | undefined,
