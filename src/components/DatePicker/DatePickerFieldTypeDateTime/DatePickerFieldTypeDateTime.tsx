@@ -25,9 +25,10 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     maxDate = maxDateDefault,
     value,
     inputRef: inputRefProp,
+    timeOptions,
     multiplicityHours,
-    multiplicitySeconds,
     multiplicityMinutes,
+    multiplicitySeconds,
     defaultValue,
     ...otherProps
   } = props;
@@ -38,6 +39,7 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     onError,
     maxDate,
     minDate,
+    timeOptions,
     multiplicityHours,
     multiplicityMinutes,
     multiplicitySeconds,
