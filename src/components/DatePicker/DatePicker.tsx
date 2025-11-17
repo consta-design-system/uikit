@@ -46,9 +46,10 @@ export const DatePicker: DatePickerComponent = forwardRef((props, ref) => {
     minDate = minDateDefault,
     maxDate = maxDateDefault,
     labelPosition = 'top',
+    timeOptions,
+    multiplicityHours,
     multiplicityMinutes,
     multiplicitySeconds,
-    multiplicityHours,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, datePickerRef);
 
@@ -56,12 +57,19 @@ export const DatePicker: DatePickerComponent = forwardRef((props, ref) => {
     () =>
       isTypeWithTime(type)
         ? {
+            timeOptions,
             multiplicityMinutes,
             multiplicitySeconds,
             multiplicityHours,
           }
         : undefined,
-    [type, multiplicityMinutes, multiplicitySeconds, multiplicityHours],
+    [
+      type,
+      timeOptions,
+      multiplicityMinutes,
+      multiplicitySeconds,
+      multiplicityHours,
+    ],
   );
 
   const Component = getByMap(typeMap, type);
