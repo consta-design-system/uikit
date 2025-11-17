@@ -52,7 +52,7 @@ export const getMultiplicityTime = (
   } as const;
 
   return markers.map((marker) =>
-    formatArray?.indexOf(marker) < 0 ? 0 : map[marker],
+    formatArray?.includes(marker) ? map[marker] : 0,
   );
 };
 
