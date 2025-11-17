@@ -124,4 +124,104 @@ describe('Компонент DatePickerTypeTime', () => {
       expect(dropdownProps.multiplicitySeconds).toBeUndefined();
     });
   });
+
+  describe('timeOptions + format -> корректный проброс пропсов', () => {
+    const baseTimeOptions = {
+      hours: [0, 6, 12],
+      minutes: [0, 30],
+      seconds: [0, 10, 20, 30],
+    };
+
+    const formatCases = [
+      {
+        label: 'полный формат HH:mm:ss',
+        format: 'dd.MM.yyyy HH:mm:ss',
+        expectedTimeOptions: {
+          hours: [0, 6, 12],
+          minutes: [0, 30],
+          seconds: [0, 10, 20, 30],
+        },
+      },
+      {
+        label: 'нет секунд (HH:mm)',
+        format: 'dd.MM.yyyy HH:mm',
+        expectedTimeOptions: {
+          hours: [0, 6, 12],
+          minutes: [0, 30],
+          seconds: [],
+        },
+      },
+      {
+        label: 'нет минут (HH:ss)',
+        format: 'dd.MM.yyyy HH:ss',
+        expectedTimeOptions: {
+          hours: [0, 6, 12],
+          minutes: [],
+          seconds: [0, 10, 20, 30],
+        },
+      },
+      {
+        label: 'нет часов (mm:ss)',
+        format: 'dd.MM.yyyy mm:ss',
+        expectedTimeOptions: {
+          hours: [],
+          minutes: [0, 30],
+          seconds: [0, 10, 20, 30],
+        },
+      },
+      {
+        label: 'формат без времени',
+        format: 'dd.MM.yyyy',
+        expectedTimeOptions: {
+          hours: [],
+          minutes: [],
+          seconds: [],
+        },
+      },
+    ];
+
+    formatCases.forEach(({ label, format, expectedTimeOptions }) => {
+      it(`корректно обрабатывает timeOptions, когда ${label}`, () => {
+        render(
+          <DatePickerTypeTime
+            value={new Date(1970, 0, 1, 10, 0, 0)}
+            format={format}
+            timeOptions={baseTimeOptions}
+          />,
+        );
+
+        const FieldMock = getFieldMock();
+        const DropdownMock = getDropdownMock();
+
+        const fieldProps = FieldMock.mock.calls[0][0];
+        const dropdownProps = DropdownMock.mock.calls[0][0];
+
+        expect(fieldProps.timeOptions).toEqual(expectedTimeOptions);
+        expect(dropdownProps.timeOptions).toEqual(expectedTimeOptions);
+      });
+    });
+
+    it('если timeOptions не передан, становится обьектом с полями undefined при полном формате', () => {
+      render(
+        <DatePickerTypeTime
+          value={new Date(1970, 0, 1, 10, 0, 0)}
+          format="dd.MM.yyyy HH:mm:ss"
+        />,
+      );
+      const expectedTimeOptions = {
+        hours: undefined,
+        minutes: undefined,
+        seconds: undefined,
+      };
+
+      const FieldMock = getFieldMock();
+      const DropdownMock = getDropdownMock();
+
+      const fieldProps = FieldMock.mock.calls[0][0];
+      const dropdownProps = DropdownMock.mock.calls[0][0];
+
+      expect(fieldProps.timeOptions).toEqual(expectedTimeOptions);
+      expect(dropdownProps.timeOptions).toEqual(expectedTimeOptions);
+    });
+  });
 });
