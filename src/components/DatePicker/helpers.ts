@@ -1,6 +1,14 @@
-import { format, isValid, parse, startOfToday } from 'date-fns';
+import {
+  addHours,
+  addMinutes,
+  addSeconds,
+  format,
+  isValid,
+  parse,
+  startOfToday,
+} from 'date-fns';
 import { useCallback, useEffect } from 'react';
-import { useIMask } from 'react-imask';
+import { IMask, useIMask } from 'react-imask';
 
 import { getForm } from '##/components/FieldGroup';
 import { TextFieldPropForm } from '##/components/TextField';
@@ -9,6 +17,12 @@ import { range } from '##/utils/array';
 import { DateRange } from '##/utils/types/Date';
 
 import { TimeOptions, TimeUnitOptions } from '../DateTime';
+import {
+  getLabelHours,
+  getLabelMinutes,
+  getLabelSeconds,
+  getTimeNumbers,
+} from '../DateTime/helpers';
 import { DatePickerPropType } from './types';
 
 export const datePickerPropSeparatorDefault = '.';
@@ -88,6 +102,80 @@ export const getMultiplicityTime = (
   return markers.map((marker) =>
     formatArray?.includes(marker) ? map[marker] : 0,
   );
+};
+
+export const getTimeMaskBlocks = (
+  timeOptions?: TimeOptions,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
+   */
+  multiplicityHours?: number,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
+   */
+  multiplicityMinutes?: number,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
+   */
+  multiplicitySeconds?: number,
+) => {
+  const getBlockConfig = (
+    timeType: 'hours' | 'minutes' | 'seconds',
+    addUnits: typeof addHours | typeof addMinutes | typeof addSeconds,
+    getItemLabel: (date: Date) => string,
+    option?: TimeUnitOptions,
+    /**
+     * @deprecated Use option instead.
+     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с TimeUnitOptions.
+     */
+    multiplicity?: number,
+  ) => {
+    const maxValue = timeType === 'hours' ? 23 : 59;
+    const defaultConfig = { mask: IMask.MaskedRange, from: 0, to: maxValue };
+
+    const effectiveOption =
+      option ?? (multiplicity !== undefined ? { step: multiplicity } : {});
+    const numbers = getTimeNumbers(timeType, effectiveOption);
+    const isFullRange = numbers.length === maxValue + 1;
+
+    if (isFullRange || numbers.length === 0) {
+      return defaultConfig;
+    }
+
+    const startDate = startOfToday();
+    const enumValues = numbers.map((n) => getItemLabel(addUnits(startDate, n)));
+    return {
+      mask: IMask.MaskedEnum,
+      enum: enumValues,
+    };
+  };
+
+  return {
+    HH: getBlockConfig(
+      'hours',
+      addHours,
+      getLabelHours,
+      timeOptions?.hours,
+      multiplicityHours,
+    ),
+    mm: getBlockConfig(
+      'minutes',
+      addMinutes,
+      getLabelMinutes,
+      timeOptions?.minutes,
+      multiplicityMinutes,
+    ),
+    ss: getBlockConfig(
+      'seconds',
+      addSeconds,
+      getLabelSeconds,
+      timeOptions?.seconds,
+      multiplicitySeconds,
+    ),
+  };
 };
 
 export const getTimeEnum = (
