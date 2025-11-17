@@ -14,6 +14,13 @@ const getFieldMock = () =>
 
 const getDropdownMock = () => (DatePickerDropdown as any).render as jest.Mock;
 
+const renderComponent = (
+  props: Partial<React.ComponentProps<typeof DatePickerTypeDateTime>> = {},
+) => {
+  const defaultValue = new Date(1970, 0, 1, 10, 0, 0);
+  return render(<DatePickerTypeDateTime value={defaultValue} {...props} />);
+};
+
 describe('Компонент DatePicker_type_dateTime_props', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -75,13 +82,7 @@ describe('Компонент DatePicker_type_dateTime_props', () => {
     formatCases.forEach(
       ({ label, format, expectedHours, expectedMinutes, expectedSeconds }) => {
         it(`корректно рассчитывает multiplicity, когда ${label}`, () => {
-          render(
-            <DatePickerTypeDateTime
-              value={new Date(1970, 0, 1, 10, 0, 0)}
-              format={format}
-              {...baseMultiplicities}
-            />,
-          );
+          renderComponent({ format, ...baseMultiplicities });
 
           const FieldMock = getFieldMock();
           const DropdownMock = getDropdownMock();
@@ -95,20 +96,15 @@ describe('Компонент DatePicker_type_dateTime_props', () => {
           expect(fieldProps.multiplicityHours).toBe(expectedHours);
           expect(fieldProps.multiplicityMinutes).toBe(expectedMinutes);
           expect(fieldProps.multiplicitySeconds).toBe(expectedSeconds);
-
           expect(dropdownProps.multiplicityHours).toBe(expectedHours);
           expect(dropdownProps.multiplicityMinutes).toBe(expectedMinutes);
           expect(dropdownProps.multiplicitySeconds).toBe(expectedSeconds);
         });
       },
     );
+
     it('если multiplicity не передан, остаётся undefined даже при полном формате', () => {
-      render(
-        <DatePickerTypeDateTime
-          value={new Date(1970, 0, 1, 10, 0, 0)}
-          format="dd.MM.yyyy HH:mm:ss"
-        />,
-      );
+      renderComponent({ format: 'dd.MM.yyyy HH:mm:ss' });
 
       const FieldMock = getFieldMock();
       const DropdownMock = getDropdownMock();
@@ -119,17 +115,92 @@ describe('Компонент DatePicker_type_dateTime_props', () => {
       expect(fieldProps.multiplicityHours).toBeUndefined();
       expect(fieldProps.multiplicityMinutes).toBeUndefined();
       expect(fieldProps.multiplicitySeconds).toBeUndefined();
-
       expect(dropdownProps.multiplicityHours).toBeUndefined();
       expect(dropdownProps.multiplicityMinutes).toBeUndefined();
       expect(dropdownProps.multiplicitySeconds).toBeUndefined();
     });
   });
 
+  describe('timeOptions + format -> корректный проброс пропсов', () => {
+    const baseTimeOptions = {
+      hours: [0, 6, 12],
+      minutes: [0, 30],
+      seconds: [0, 10, 20, 30],
+    };
+
+    const formatCases = [
+      {
+        label: 'полный формат HH:mm:ss',
+        format: 'dd.MM.yyyy HH:mm:ss',
+        expectedTimeOptions: baseTimeOptions,
+      },
+      {
+        label: 'нет секунд (HH:mm)',
+        format: 'dd.MM.yyyy HH:mm',
+        expectedTimeOptions: { ...baseTimeOptions, seconds: [] },
+      },
+      {
+        label: 'нет минут (HH:ss)',
+        format: 'dd.MM.yyyy HH:ss',
+        expectedTimeOptions: {
+          hours: [0, 6, 12],
+          minutes: [],
+          seconds: [0, 10, 20, 30],
+        },
+      },
+      {
+        label: 'нет часов (mm:ss)',
+        format: 'dd.MM.yyyy mm:ss',
+        expectedTimeOptions: {
+          hours: [],
+          minutes: [0, 30],
+          seconds: [0, 10, 20, 30],
+        },
+      },
+      {
+        label: 'формат без времени',
+        format: 'dd.MM.yyyy',
+        expectedTimeOptions: { hours: [], minutes: [], seconds: [] },
+      },
+    ];
+
+    formatCases.forEach(({ label, format, expectedTimeOptions }) => {
+      it(`корректно обрабатывает timeOptions, когда ${label}`, () => {
+        renderComponent({ format, timeOptions: baseTimeOptions });
+
+        const FieldMock = getFieldMock();
+        const DropdownMock = getDropdownMock();
+
+        const fieldProps = FieldMock.mock.calls[0][0];
+        const dropdownProps = DropdownMock.mock.calls[0][0];
+
+        expect(fieldProps.timeOptions).toEqual(expectedTimeOptions);
+        expect(dropdownProps.timeOptions).toEqual(expectedTimeOptions);
+      });
+    });
+
+    it('если timeOptions не передан, становится объектом с полями undefined при полном формате', () => {
+      renderComponent({ format: 'dd.MM.yyyy HH:mm:ss' });
+
+      const expectedTimeOptions = {
+        hours: undefined,
+        minutes: undefined,
+        seconds: undefined,
+      };
+      const FieldMock = getFieldMock();
+      const DropdownMock = getDropdownMock();
+
+      const fieldProps = FieldMock.mock.calls[0][0];
+      const dropdownProps = DropdownMock.mock.calls[0][0];
+
+      expect(fieldProps.timeOptions).toEqual(expectedTimeOptions);
+      expect(dropdownProps.timeOptions).toEqual(expectedTimeOptions);
+    });
+  });
+
   it('пробрасывает value в Field и Dropdown', () => {
     const value = new Date(2023, 10, 5, 12, 30, 45);
-
-    render(<DatePickerTypeDateTime value={value} />);
+    renderComponent({ value });
 
     const fieldProps = getFieldMock().mock.calls[0][0];
     const dropdownProps = getDropdownMock().mock.calls[0][0];
@@ -139,31 +210,23 @@ describe('Компонент DatePicker_type_dateTime_props', () => {
   });
 
   it('пробрасывает disabled в Field', () => {
-    render(<DatePickerTypeDateTime disabled />);
-
+    renderComponent({ disabled: true });
     const fieldProps = getFieldMock().mock.calls[0][0];
-
     expect(fieldProps.disabled).toBe(true);
   });
 
   it('пробрасывает onChange в Dropdown', () => {
     const onChange = jest.fn();
-
-    render(<DatePickerTypeDateTime onChange={onChange} />);
-
+    renderComponent({ onChange });
     const dropdownProps = getDropdownMock().mock.calls[0][0];
-
     expect(dropdownProps.onChange).toBe(onChange);
   });
 
   it('пробрасывает locale и events в Dropdown', () => {
     const locale = ru;
     const events = [new Date(2023, 0, 1), new Date(2023, 1, 1)];
-
-    render(<DatePickerTypeDateTime locale={locale} events={events} />);
-
+    renderComponent({ locale, events });
     const dropdownProps = getDropdownMock().mock.calls[0][0];
-
     expect(dropdownProps.locale).toBe(locale);
     expect(dropdownProps.events).toBe(events);
   });
@@ -171,25 +234,15 @@ describe('Компонент DatePicker_type_dateTime_props', () => {
   it('пробрасывает ref и inputRef', () => {
     const ref = createRef<HTMLDivElement>();
     const inputRef = createRef<HTMLInputElement>();
-
-    render(<DatePickerTypeDateTime ref={ref} inputRef={inputRef} />);
-
+    renderComponent({ ref, inputRef });
     const fieldProps = getFieldMock().mock.calls[0][0];
-
     expect(fieldProps.inputRef).toBeDefined();
   });
 
   it('пробрасывает renderAdditionalControls в Dropdown', () => {
     const renderAdditionalControls = jest.fn();
-
-    render(
-      <DatePickerTypeDateTime
-        renderAdditionalControls={renderAdditionalControls}
-      />,
-    );
-
+    renderComponent({ renderAdditionalControls });
     const dropdownProps = getDropdownMock().mock.calls[0][0];
-
     expect(dropdownProps.renderAdditionalControls).toBe(
       renderAdditionalControls,
     );
