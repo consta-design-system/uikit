@@ -334,6 +334,7 @@ const events = [
 
 ```tsx
 // Пример 1
+const [value1, setValue1] = useState<Date | undefined>();
 <DateTime
   type="time"
   timeOptions={
@@ -341,9 +342,12 @@ const events = [
     minutes: [0, 15, 45],                      // конкретные значения минут
     // seconds не указаны — будут все значения по умолчанию (0–59)
   }
+  value={value1}
+  onChange={setValue1}
 />
 
 // Пример 2
+const [value2, setValue2] = useState<Date | undefined>();
 <DateTime
   type="time"
   timeOptions={
@@ -351,9 +355,12 @@ const events = [
     minutes: [],               // пустой массив — минуты не показываются
     seconds: { step: 0 },      // секунды не показываются
   }
+  value={value2}
+  onChange={setValue2}
 />
 
 // Пример 3
+const [value3, setValue3] = useState<Date | undefined>();
 <DateTime
   type="time"
   timeOptions={
@@ -361,9 +368,12 @@ const events = [
     minutes: { step: 15 },    // каждые 15 минут
     seconds: { step: 15 },    // каждые 15 секунд
   }
+  value={value3}
+  onChange={setValue3}
 />
 
 // Пример 4
+const [value4, setValue4] = useState<Date | undefined>();
 <DateTime
   type="time"
   timeOptions={
@@ -371,6 +381,8 @@ const events = [
     minutes: [10, 40],
     seconds: [],              // пустой массив — секунды не показываются
   }
+  value={value4}
+  onChange={setValue4}
 />
 ```
 
@@ -381,12 +393,15 @@ const events = [
 <DateTimeExampleMultiplicity />
 
 ```tsx
+const [value, setValue] = useState<Date | undefined>();
 <DateTime
   type="time"
+  value={value}
+  onChange={setValue}
   multiplicityHours={2}
   multiplicityMinutes={5}
   multiplicitySeconds={0}
-/>
+/>;
 ```
 
 </MdxTabs>
