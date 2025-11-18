@@ -334,6 +334,32 @@ return (
 
 <DatePickerExampleMulti />
 
+```tsx
+// Пример 1
+<DatePicker
+  type="date-time"
+  multiplicityHours={2}       // 0, 2, 4, … 22
+  multiplicityMinutes={15}    // 0, 15, 30, 45
+  multiplicitySeconds={undefined} // секунды — любые (0–59)
+/>
+
+// Пример 2
+<DatePicker
+  type="date-time"
+  // multiplicityHours: undefined - все часы
+  multiplicityMinutes={0}     // минут нет
+  multiplicitySeconds={1}     // все секунды
+/>
+
+// Пример 3
+<DatePicker
+  type="date-time"
+  multiplicityHours={2}       // 0, 2, 4, … 22
+  multiplicityMinutes={0}     // нет
+  multiplicitySeconds={0}     // нет
+/>
+```
+
 </MdxTabs>
 
 ## Внешний вид
