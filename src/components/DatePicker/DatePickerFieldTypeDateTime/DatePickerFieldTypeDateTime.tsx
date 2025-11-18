@@ -8,6 +8,7 @@ import {
   datePickerPropFormatTypeDateTime,
   datePickerPropPlaceholderTypeDateTime,
   datePickerPropSeparatorDefault,
+  getAdaptedFormatByTimeOptions,
 } from '../helpers';
 import { DatePickerFieldTypeDateTimeProps, usePicker } from './helpers';
 
@@ -33,6 +34,22 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     ...otherProps
   } = props;
 
+  const adaptedFormat = getAdaptedFormatByTimeOptions(
+    format,
+    timeOptions,
+    multiplicityHours,
+    multiplicityMinutes,
+    multiplicitySeconds,
+  );
+
+  const adaptedPlaceholder = getAdaptedFormatByTimeOptions(
+    placeholder,
+    timeOptions,
+    multiplicityHours,
+    multiplicityMinutes,
+    multiplicitySeconds,
+  );
+
   const [inputRef, onClear] = usePicker({
     onChange,
     value,
@@ -44,7 +61,7 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     multiplicityMinutes,
     multiplicitySeconds,
     separator,
-    format,
+    format: adaptedFormat,
   });
 
   return (
@@ -53,7 +70,7 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
       type="text"
       inputContainerRef={ref}
       inputRef={useForkRef([inputRef, inputRefProp])}
-      placeholder={placeholder}
+      placeholder={adaptedPlaceholder}
       onClear={onClear}
     />
   );
