@@ -36,8 +36,8 @@ const timeOptionsExamples = [
     index: 3,
     options: {
       hours: [8, 12, 16],
-      minutes: [10, 40],
-      seconds: [], // пустой массив — секунды не показываются
+      minutes: [10, 15, 25, 40],
+      seconds: { step: 5 }, // кажды 5 секунд
     },
   },
 ];
