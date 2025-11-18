@@ -22,6 +22,7 @@ import {
   DatePickerExampleTypeMonth,
   DatePickerExampleTypeMonthRange,
 } from './examples/DatePickerExampleType/DatePickerExampleType';
+import { DatePickerExampleTimeOptions } from './examples/DatePickerExampleTimeOptions/DatePickerExampleTimeOptions';
 import { DatePickerExampleMulti } from './examples/DatePickerExampleMulti/DatePickerExampleMulti';
 import { DatePickerExampleDropdownOpen } from './examples/DatePickerExampleDropdownOpen/DatePickerExampleDropdownOpen';
 import { DatePickerExampleTwoIcons } from './examples/DatePickerExampleTwoFields/DatePickerExampleTwoFields';
@@ -37,7 +38,7 @@ import { DatePickerExampleWithClearButton } from './examples/DatePickerExampleWi
   - [Выбор даты](#выбор-даты)
   - [Тип календаря](#тип-календаря)
   - [Формат даты](#формат-даты)
-  - [Интервал времени](#интервал-времени)
+  - [Выбор времени](#выбор-времени)
 - [Внешний вид](#внешний-вид)
   - [Лейбл](#лейбл)
   - [Подпись](#подпись)
@@ -67,52 +68,53 @@ import { DatePicker } from '@consta/uikit/DatePicker';
 
 ## Свойства
 
-| Свойство                                                     | Тип                                                                                                                                                                                       | По умолчанию          | Описание                                                   |
-| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------------------------------------------------------- |
-| [`value?`](#выбор-даты)                                      | `DatePickerPropValue<TYPE>`                                                                                                                                                               | -                     | Выбранная дата или период                                  |
-| [`onChange?`](#выбор-даты)                                   | `DatePickerPropOnChange<TYPE>`                                                                                                                                                            | -                     | Событие выбора даты или периода                            |
-| [`type?`](#тип-календаря)                                    | `'date' \| 'date-range' \| 'date-time' \| 'date-time-range' \| 'time' \| 'month' \| 'month-range' \| 'year' \| 'year-range'`                                                              | `date`                | Тип календаря: выбор даты, времени или периода             |
-| [`format?`](#формат-даты)                                    | `string`                                                                                                                                                                                  | `'dd.MM.yyyy'`        | Формат отображения даты                                    |
-| [`separator?`](#формат-даты)                                 | `string`                                                                                                                                                                                  | `'.'`                 | Разделитель в формате даты                                 |
-| [`label?`](#лейбл)                                           | `string`                                                                                                                                                                                  | -                     | Лейбл к полю ввода                                         |
-| [`labelIcon?`](#лейбл)                                       | `IconComponent`                                                                                                                                                                           | -                     | Иконка слева от лейбла                                     |
-| [`labelPosition?`](#лейбл)                                   | `'top' \| 'left'`                                                                                                                                                                         | `'top'`               | Положение лейбла относительно поля                         |
-| [`caption?`](#подпись)                                       | `string`                                                                                                                                                                                  | -                     | Подпись под полем ввода                                    |
-| [`status?`](#статус)                                         | `'alert' \| 'success' \| 'warning'`                                                                                                                                                       | -                     | Статус поля                                                |
-| [`size?`](#размер-и-форма)                                   | `'m' \| 'xs' \| 's' \| 'l'`                                                                                                                                                               | `'m'`                 | Размер поля                                                |
-| [`form?`](#размер-и-форма)                                   | `'default' \| 'brick' \| 'round' \| 'clearRound' \| 'roundClear' \| 'clearDefault' \| 'defaultClear' \| 'defaultBrick' \| 'brickDefault' \| 'brickClear' \| 'clearBrick' \| 'clearClear'` | `'default'`           | Форма поля                                                 |
-| [`view?`](#размер-и-форма)                                   | `'default' \| 'clear'`                                                                                                                                                                    | `'default'`           | Внешний вид поля                                           |
-| [`leftSide?`](#иконки-и-текст-в-полях)                       | `DatePickerPropSide<TYPE>`                                                                                                                                                                | -                     | Иконка или текст слева внутри поля                         |
-| [`rightSide?`](#иконки-и-текст-в-полях)                      | `DatePickerPropSide<TYPE>`                                                                                                                                                                | -                     | Иконка или текст справа внутри поля                        |
-| [`withClearButton?`](#кнопка-очистки)                        | `boolean`                                                                                                                                                                                 | -                     | Добавляет кнопку для очистки поля                          |
-| [`required?`](#обязательность)                               | `boolean`                                                                                                                                                                                 | -                     | Обязательность поля                                        |
-| [`renderAdditionalControls?`](#дополнительные-контролы)      | `DateTimeAdditionalControlRenderProp`                                                                                                                                                     | -                     | Дополнительные контролы для календаря                      |
-| [`disableDates?`](#отключение-интервалов)                    | `Array<Date \| [Date, Date]>`                                                                                                                                                             | -                     | Отключенные даты или интервалы                             |
-| [`dropdownOpen?`](#управление-выпадающим-списком)            | `boolean`                                                                                                                                                                                 | -                     | Состояние выпадающего списка (открыт/закрыт)               |
-| [`onDropdownOpen?`](#управление-выпадающим-списком)          | `(open: boolean) => void`                                                                                                                                                                 | -                     | Событие при открытии/закрытии выпадающего списка           |
-| [`ignoreOutsideClicksRefs?`](#управление-выпадающим-списком) | `ReadonlyArray<React.RefObject<HTMLElement>>`                                                                                                                                             | -                     | Ссылки на элементы, игнорируемые при кликах вне компонента |
-| [`onError?`](#обработка-ошибок)                              | `DatePickerPropOnError`                                                                                                                                                                   | -                     | Обработка ошибок ввода                                     |
-| [`multiplicityHours?`](#интервал-времени)                    | `number`                                                                                                                                                                                  | `1`                   | Интервал для вывода часов                                  |
-| [`multiplicityMinutes?`](#интервал-времени)                  | `number`                                                                                                                                                                                  | `1`                   | Интервал для вывода минут                                  |
-| [`multiplicitySeconds?`](#интервал-времени)                  | `number`                                                                                                                                                                                  | `1`                   | Интервал для вывода секунд                                 |
-| `name?`                                                      | `DatePickerPropName<TYPE>`                                                                                                                                                                | -                     | Имя поля ввода                                             |
-| `minDate?`                                                   | `Date`                                                                                                                                                                                    | `01.01.0001 00:00:00` | Минимальная дата для выбора                                |
-| `maxDate?`                                                   | `Date`                                                                                                                                                                                    | `31.12.9999 23:59:59` | Максимальная дата для выбора                               |
-| `events?`                                                    | `Date[]`                                                                                                                                                                                  | -                     | События на календаре                                       |
-| `dateTimeView?`                                              | `'classic' \| 'book' \| 'slider'`                                                                                                                                                         | `'classic'`           | Вид календаря                                              |
-| `locale?`                                                    | `Locale`                                                                                                                                                                                  | `ruLocale`            | Локализация календаря                                      |
-| `currentVisibleDate?`                                        | `Date`                                                                                                                                                                                    | `new Date()`          | Текущая отображаемая дата                                  |
-| `onChangeCurrentVisibleDate?`                                | `(date: Date) => void`                                                                                                                                                                    | -                     | Событие при изменении отображаемой даты                    |
-| `disabled?`                                                  | `boolean`                                                                                                                                                                                 | -                     | Отключение ввода                                           |
-| `onFocus?`                                                   | `DatePickerPropOnFocus<TYPE>`                                                                                                                                                             | -                     | Событие при фокусе                                         |
-| `onBlur?`                                                    | `DatePickerPropOnFocus<TYPE>`                                                                                                                                                             | -                     | Событие при потере фокуса                                  |
-| `autoFocus?`                                                 | `boolean`                                                                                                                                                                                 | -                     | Автофокус на поле                                          |
-| `placeholder?`                                               | `DatePickerPropPlaceholder<TYPE>`                                                                                                                                                         | `'ДД.ММ.ГГГГ'`        | Подсказка в поле                                           |
-| `inputRef?`                                                  | `DatePickerPropInputRef<TYPE>`                                                                                                                                                            | -                     | Ссылка на DOM-элемент поля ввода                           |
-| `dropdownForm?`                                              | `'default' \| 'brick' \| 'round'`                                                                                                                                                         | `'default'`           | Форма выпадающего календаря                                |
-| `dropdownClassName?`                                         | `string`                                                                                                                                                                                  | -                     | CSS-класс для выпадающего блока                            |
-| `className?`                                                 | `string`                                                                                                                                                                                  | -                     | CSS-класс для компонента                                   |
-| `ref?`                                                       | `React.Ref<HTMLDivElement>`                                                                                                                                                               | -                     | Ссылка на корневой DOM-элемент                             |
+| Свойство                                                     | Тип                                                                                                                                                                                       | По умолчанию          | Описание                                                                   |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | -------------------------------------------------------------------------- |
+| [`value?`](#выбор-даты)                                      | `DatePickerPropValue<TYPE>`                                                                                                                                                               | -                     | Выбранная дата или период                                                  |
+| [`onChange?`](#выбор-даты)                                   | `DatePickerPropOnChange<TYPE>`                                                                                                                                                            | -                     | Событие выбора даты или периода                                            |
+| [`type?`](#тип-календаря)                                    | `'date' \| 'date-range' \| 'date-time' \| 'date-time-range' \| 'time' \| 'month' \| 'month-range' \| 'year' \| 'year-range'`                                                              | `date`                | Тип календаря: выбор даты, времени или периода                             |
+| [`format?`](#формат-даты)                                    | `string`                                                                                                                                                                                  | `'dd.MM.yyyy'`        | Формат отображения даты                                                    |
+| [`separator?`](#формат-даты)                                 | `string`                                                                                                                                                                                  | `'.'`                 | Разделитель в формате даты                                                 |
+| [`label?`](#лейбл)                                           | `string`                                                                                                                                                                                  | -                     | Лейбл к полю ввода                                                         |
+| [`labelIcon?`](#лейбл)                                       | `IconComponent`                                                                                                                                                                           | -                     | Иконка слева от лейбла                                                     |
+| [`labelPosition?`](#лейбл)                                   | `'top' \| 'left'`                                                                                                                                                                         | `'top'`               | Положение лейбла относительно поля                                         |
+| [`caption?`](#подпись)                                       | `string`                                                                                                                                                                                  | -                     | Подпись под полем ввода                                                    |
+| [`status?`](#статус)                                         | `'alert' \| 'success' \| 'warning'`                                                                                                                                                       | -                     | Статус поля                                                                |
+| [`size?`](#размер-и-форма)                                   | `'m' \| 'xs' \| 's' \| 'l'`                                                                                                                                                               | `'m'`                 | Размер поля                                                                |
+| [`form?`](#размер-и-форма)                                   | `'default' \| 'brick' \| 'round' \| 'clearRound' \| 'roundClear' \| 'clearDefault' \| 'defaultClear' \| 'defaultBrick' \| 'brickDefault' \| 'brickClear' \| 'clearBrick' \| 'clearClear'` | `'default'`           | Форма поля                                                                 |
+| [`view?`](#размер-и-форма)                                   | `'default' \| 'clear'`                                                                                                                                                                    | `'default'`           | Внешний вид поля                                                           |
+| [`leftSide?`](#иконки-и-текст-в-полях)                       | `DatePickerPropSide<TYPE>`                                                                                                                                                                | -                     | Иконка или текст слева внутри поля                                         |
+| [`rightSide?`](#иконки-и-текст-в-полях)                      | `DatePickerPropSide<TYPE>`                                                                                                                                                                | -                     | Иконка или текст справа внутри поля                                        |
+| [`withClearButton?`](#кнопка-очистки)                        | `boolean`                                                                                                                                                                                 | -                     | Добавляет кнопку для очистки поля                                          |
+| [`required?`](#обязательность)                               | `boolean`                                                                                                                                                                                 | -                     | Обязательность поля                                                        |
+| [`renderAdditionalControls?`](#дополнительные-контролы)      | `DateTimeAdditionalControlRenderProp`                                                                                                                                                     | -                     | Дополнительные контролы для календаря                                      |
+| [`disableDates?`](#отключение-интервалов)                    | `Array<Date \| [Date, Date]>`                                                                                                                                                             | -                     | Отключенные даты или интервалы                                             |
+| [`dropdownOpen?`](#управление-выпадающим-списком)            | `boolean`                                                                                                                                                                                 | -                     | Состояние выпадающего списка (открыт/закрыт)                               |
+| [`onDropdownOpen?`](#управление-выпадающим-списком)          | `(open: boolean) => void`                                                                                                                                                                 | -                     | Событие при открытии/закрытии выпадающего списка                           |
+| [`ignoreOutsideClicksRefs?`](#управление-выпадающим-списком) | `ReadonlyArray<React.RefObject<HTMLElement>>`                                                                                                                                             | -                     | Ссылки на элементы, игнорируемые при кликах вне компонента                 |
+| [`onError?`](#обработка-ошибок)                              | `DatePickerPropOnError`                                                                                                                                                                   | -                     | Обработка ошибок ввода                                                     |
+| [`timeOptions?`](#выбор-времени)                             | `TimeOptions`                                                                                                                                                                             | -                     | Настройка шагов, диапазонов или массива значений для часов, минут и секунд |
+| [`multiplicityHours?`](#выбор-времени)                       | `number`                                                                                                                                                                                  | `1`                   | Интервал для вывода часов                                                  |
+| [`multiplicityMinutes?`](#выбор-времени)                     | `number`                                                                                                                                                                                  | `1`                   | Интервал для вывода минут                                                  |
+| [`multiplicitySeconds?`](#выбор-времени)                     | `number`                                                                                                                                                                                  | `1`                   | Интервал для вывода секунд                                                 |
+| `name?`                                                      | `DatePickerPropName<TYPE>`                                                                                                                                                                | -                     | Имя поля ввода                                                             |
+| `minDate?`                                                   | `Date`                                                                                                                                                                                    | `01.01.0001 00:00:00` | Минимальная дата для выбора                                                |
+| `maxDate?`                                                   | `Date`                                                                                                                                                                                    | `31.12.9999 23:59:59` | Максимальная дата для выбора                                               |
+| `events?`                                                    | `Date[]`                                                                                                                                                                                  | -                     | События на календаре                                                       |
+| `dateTimeView?`                                              | `'classic' \| 'book' \| 'slider'`                                                                                                                                                         | `'classic'`           | Вид календаря                                                              |
+| `locale?`                                                    | `Locale`                                                                                                                                                                                  | `ruLocale`            | Локализация календаря                                                      |
+| `currentVisibleDate?`                                        | `Date`                                                                                                                                                                                    | `new Date()`          | Текущая отображаемая дата                                                  |
+| `onChangeCurrentVisibleDate?`                                | `(date: Date) => void`                                                                                                                                                                    | -                     | Событие при изменении отображаемой даты                                    |
+| `disabled?`                                                  | `boolean`                                                                                                                                                                                 | -                     | Отключение ввода                                                           |
+| `onFocus?`                                                   | `DatePickerPropOnFocus<TYPE>`                                                                                                                                                             | -                     | Событие при фокусе                                                         |
+| `onBlur?`                                                    | `DatePickerPropOnFocus<TYPE>`                                                                                                                                                             | -                     | Событие при потере фокуса                                                  |
+| `autoFocus?`                                                 | `boolean`                                                                                                                                                                                 | -                     | Автофокус на поле                                                          |
+| `placeholder?`                                               | `DatePickerPropPlaceholder<TYPE>`                                                                                                                                                         | `'ДД.ММ.ГГГГ'`        | Подсказка в поле                                                           |
+| `inputRef?`                                                  | `DatePickerPropInputRef<TYPE>`                                                                                                                                                            | -                     | Ссылка на DOM-элемент поля ввода                                           |
+| `dropdownForm?`                                              | `'default' \| 'brick' \| 'round'`                                                                                                                                                         | `'default'`           | Форма выпадающего календаря                                                |
+| `dropdownClassName?`                                         | `string`                                                                                                                                                                                  | -                     | CSS-класс для выпадающего блока                                            |
+| `className?`                                                 | `string`                                                                                                                                                                                  | -                     | CSS-класс для компонента                                                   |
+| `ref?`                                                       | `React.Ref<HTMLDivElement>`                                                                                                                                                               | -                     | Ссылка на корневой DOM-элемент                                             |
 
 ```tsx
 import { Locale } from 'date-fns';
@@ -269,9 +271,64 @@ return (
 
 </MdxTabs>
 
-### Интервал времени
+### Выбор времени
 
-Для режимов с временем (`date-time`, `date-time-range`) свойства `multiplicityHours`, `multiplicityMinutes` и `multiplicitySeconds` задают интервалы выбора. По умолчанию — 1 (все значения). Укажите 0, чтобы скрыть единицу, или, например, 15 для минут, чтобы показывать только четверти часа.
+<MdxInformer status="alert">
+  Пропсы `multiplicityHours`, `multiplicityMinutes` и `multiplicitySeconds`
+  устарели и в будущем будут удалены. Используйте `timeOptions`.
+</MdxInformer>
+
+Для режимов с временем (`time`, `date-time`, `date-time-range`) свойства `multiplicityHours`, `multiplicityMinutes` и `multiplicitySeconds` задают интервалы выбора. По умолчанию — 1 (все значения). Укажите 0, чтобы скрыть единицу, или, например, 15 для минут, чтобы показывать только четверти часа.
+
+Свойство `timeOptions` позволяет гибко задавать шаги, диапазоны или конкретные значения для часов, минут и секунд. Если `step = 0` или передан пустой массив (`[]`), соответствующие значения не будут отображаться. Если поле `hours`, `minutes` или `seconds` не указано, используется весь диапазон по умолчанию (0–23 для часов, 0–59 для минут и секунд).
+
+<MdxTabs>
+
+<DatePickerExampleTimeOptions />
+
+```tsx
+// Пример 1
+<DatePicker
+  type="time"
+  timeOptions={{
+    hours: { start: 9, step: 2, stop: 18 }, // 9, 11, 13, 15, 17
+    minutes: [0, 15, 45],                   // конкретные значения минут
+    // seconds не указаны — будут все значения по умолчанию (0–59)
+  }}
+/>
+
+// Пример 2
+<DatePicker
+  type="time"
+  timeOptions={{
+    hours: { step: 1 },  // все часы
+    minutes: [],          // пустой массив — минуты не показываются
+    seconds: { step: 0 }, // секунды не показываются
+  }}
+/>
+
+// Пример 3
+<DatePicker
+  type="time"
+  timeOptions={{
+    hours: { step: 1 },   // все часы
+    minutes: { step: 15 },// каждые 15 минут
+    seconds: { step: 15 },// каждые 15 секунд
+  }}
+/>
+
+// Пример 4
+<DatePicker
+  type="time"
+  timeOptions={{
+    hours: [8, 12, 16],
+    minutes: [10, 40],
+    seconds: [],           // пустой массив — секунды не показываются
+  }}
+/>
+```
+
+</MdxTabs>
 
 <MdxTabs>
 
