@@ -139,36 +139,8 @@ export const useTimeItems = (
     timeOptions?.seconds ??
     (multiplicitySeconds !== undefined ? { step: multiplicitySeconds } : {});
 
-  return useMemo(
-    () => [
-      getItemData(
-        'hours',
-        startOfDay,
-        startOfHour,
-        endOfHour,
-        addHours,
-        getLabelHours,
-        hoursOptions,
-        value,
-        minDate,
-        maxDate,
-        disableDates,
-        onChangeRef,
-      ),
-      getItemData(
-        'minutes',
-        startOfHour,
-        startOfMinute,
-        endOfMinute,
-        addMinutes,
-        getLabelMinutes,
-        minutesOptions,
-        value,
-        minDate,
-        maxDate,
-        disableDates,
-        onChangeRef,
-      ),
+  const secondsItems = useMemo(
+    () =>
       getItemData(
         'seconds',
         startOfMinute,
@@ -183,16 +155,104 @@ export const useTimeItems = (
         disableDates,
         onChangeRef,
       ),
-    ],
     [
       value?.getTime(),
       minDate?.getTime(),
       maxDate?.getTime(),
       timeOptions,
-      multiplicityHours,
-      multiplicityMinutes,
       multiplicitySeconds,
       disableDates,
     ],
   );
+
+  const minutesItems = useMemo(() => {
+    const minutesOnChangeRef: React.MutableRefObject<
+      DateTimeTimePropOnChange | undefined
+    > = {
+      current: (
+        date: Date,
+        props: { e: React.MouseEvent<HTMLButtonElement> },
+      ) => {
+        const firstAvailableSecond = secondsItems.find(
+          (item) => !item.disabled,
+        );
+        if (firstAvailableSecond) {
+          date.setSeconds(parseInt(firstAvailableSecond.label, 10));
+        }
+        onChangeRef.current?.(date, props);
+      },
+    };
+
+    return getItemData(
+      'minutes',
+      startOfHour,
+      startOfMinute,
+      endOfMinute,
+      addMinutes,
+      getLabelMinutes,
+      minutesOptions,
+      value,
+      minDate,
+      maxDate,
+      disableDates,
+      minutesOnChangeRef,
+    );
+  }, [
+    value?.getTime(),
+    minDate?.getTime(),
+    maxDate?.getTime(),
+    timeOptions,
+    multiplicityMinutes,
+    disableDates,
+  ]);
+
+  const hoursItems = useMemo(() => {
+    const hoursOnChangeRef: React.MutableRefObject<
+      DateTimeTimePropOnChange | undefined
+    > = {
+      current: (
+        date: Date,
+        props: { e: React.MouseEvent<HTMLButtonElement> },
+      ) => {
+        const firstAvailableMinute = minutesItems.find(
+          (item) => !item.disabled,
+        );
+        const firstAvailableSecond = secondsItems.find(
+          (item) => !item.disabled,
+        );
+
+        if (firstAvailableMinute) {
+          date.setMinutes(parseInt(firstAvailableMinute.label, 10));
+        }
+        if (firstAvailableSecond) {
+          date.setSeconds(parseInt(firstAvailableSecond.label, 10));
+        }
+        onChangeRef.current?.(date, props);
+      },
+    };
+
+    return getItemData(
+      'hours',
+      startOfDay,
+      startOfHour,
+      endOfHour,
+      addHours,
+      getLabelHours,
+      hoursOptions,
+      value,
+      minDate,
+      maxDate,
+      disableDates,
+      hoursOnChangeRef,
+    );
+  }, [
+    value?.getTime(),
+    minDate?.getTime(),
+    maxDate?.getTime(),
+    timeOptions,
+    multiplicityHours,
+    disableDates,
+  ]);
+
+  return [hoursItems, minutesItems, secondsItems];
 };
