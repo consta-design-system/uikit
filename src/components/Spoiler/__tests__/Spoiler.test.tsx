@@ -107,5 +107,11 @@ describe('Компонент Spoiler', () => {
         expect(getButtonLabel()).toHaveTextContent(mocksProps.lessLabel);
       });
     });
+
+    it('ref должен быть присвоен', () => {
+      const ref = React.createRef<HTMLDivElement>();
+      renderComponent({ ...mocksProps, ref });
+      expect(ref.current).toBe(getRender());
+    });
   });
 });
