@@ -201,7 +201,7 @@ describe('Компонент DatePickerTypeTime', () => {
       });
     });
 
-    it('если timeOptions не передан, становится обьектом с полями undefined при полном формате', () => {
+    it('если timeOptions не передан, становится объектом с полями undefined при полном формате', () => {
       render(
         <DatePickerTypeTime
           value={new Date(1970, 0, 1, 10, 0, 0)}

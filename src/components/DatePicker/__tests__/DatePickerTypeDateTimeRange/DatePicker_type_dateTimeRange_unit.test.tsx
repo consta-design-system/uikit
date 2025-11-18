@@ -195,7 +195,7 @@ describe('Компонент DatePickerTypeDateTimeRange (unit tests)', () => {
       });
     });
 
-    it('если timeOptions не передан, становится обьектом с полями undefined при полном формате', () => {
+    it('если timeOptions не передан, становится объектом с полями undefined при полном формате', () => {
       renderComponent({
         format: 'dd.MM.yyyy HH:mm:ss',
       });
@@ -213,7 +213,7 @@ describe('Компонент DatePickerTypeDateTimeRange (unit tests)', () => {
     });
   });
 
-  describe('проброс остальных пропов', () => {
+  describe('проброс остальных props', () => {
     it('пробрасывает value в Field и Dropdown', () => {
       const value: [Date, Date] = [
         new Date(2023, 10, 5, 12, 30, 45),
