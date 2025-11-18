@@ -16,6 +16,7 @@ import {
 
 import {
   datePickerPropFormatTypeDateTime,
+  getAdaptedFormatByTimeOptions,
   getMultiplicityTime,
   getTimeEnum,
   getTimeMaskBlocks,
@@ -300,6 +301,231 @@ describe('DateTime helpers (time)', () => {
         '20',
         '22',
       ]);
+    });
+  });
+
+  describe('getAdaptedFormatByTimeOptions', () => {
+    const numericFormat = 'dd.MM.yyyy HH:mm:ss';
+    const placeholderFormat = 'ДД.ММ.ГГГГ ЧЧ:ММ:СС';
+
+    describe('with numeric format (dd.MM.yyyy HH:mm:ss)', () => {
+      it('удаляет часть времени, если multiplicity = 0 (timeOptions undefined)', () => {
+        const resultHours = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          undefined,
+          0,
+        );
+        expect(resultHours).toBe('dd.MM.yyyy mm:ss');
+
+        const resultMinutes = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          undefined,
+          undefined,
+          0,
+        );
+        expect(resultMinutes).toBe('dd.MM.yyyy HH:ss');
+
+        const resultSeconds = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          undefined,
+          undefined,
+          undefined,
+          0,
+        );
+        expect(resultSeconds).toBe('dd.MM.yyyy HH:mm');
+
+        const resultAll = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          undefined,
+          0,
+          0,
+          0,
+        );
+        expect(resultAll).toBe('dd.MM.yyyy');
+      });
+
+      it('удаляет часть времени, если timeOptions пустой или step=0 (multiplicity undefined)', () => {
+        const timeOptionsHoursEmpty = { hours: [] };
+        const resultHoursEmpty = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          timeOptionsHoursEmpty,
+        );
+        expect(resultHoursEmpty).toBe('dd.MM.yyyy mm:ss');
+
+        const timeOptionsHoursStep0 = { minutes: { step: 0 } };
+        const resultHoursStep0 = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          timeOptionsHoursStep0,
+        );
+        expect(resultHoursStep0).toBe('dd.MM.yyyy HH:ss');
+
+        const timeOptionsAllEmpty = { hours: [], minutes: [], seconds: [] };
+        const resultAllEmpty = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          timeOptionsAllEmpty,
+        );
+        expect(resultAllEmpty).toBe('dd.MM.yyyy');
+      });
+
+      it('приоритет timeOptions над multiplicity (удаление по timeOptions, игнор multiplicity)', () => {
+        const timeOptionsHoursEmpty = { hours: [] };
+        const result = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          timeOptionsHoursEmpty,
+          2,
+        );
+        expect(result).toBe('dd.MM.yyyy mm:ss');
+
+        const timeOptionsSecondsStep0 = { seconds: { step: 0 } };
+        const resultSeconds = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          timeOptionsSecondsStep0,
+          undefined,
+          undefined,
+          10,
+        );
+        expect(resultSeconds).toBe('dd.MM.yyyy HH:mm');
+      });
+
+      it('не меняет формат, если опции полные (multiplicity или timeOptions)', () => {
+        const resultMultiplicity = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          undefined,
+          2,
+          5,
+          10,
+        );
+        expect(resultMultiplicity).toBe(numericFormat);
+
+        const timeOptionsFull = {
+          hours: [0, 12],
+          minutes: [0, 30],
+          seconds: [0, 45],
+        };
+        const resultTimeOptions = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          timeOptionsFull,
+        );
+        expect(resultTimeOptions).toBe(numericFormat);
+
+        const timeOptionsPart = { minutes: [0, 30], seconds: [0, 45] };
+        const resultTimeOptionsPart = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          timeOptionsPart,
+          2,
+        );
+        expect(resultTimeOptionsPart).toBe(numericFormat);
+      });
+    });
+
+    describe('with placeholder format (ДД.ММ.ГГГГ ЧЧ:ММ:СС)', () => {
+      it('удаляет часть времени, если multiplicity = 0 (timeOptions undefined)', () => {
+        const resultHours = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          undefined,
+          0,
+        );
+        expect(resultHours).toBe('ДД.ММ.ГГГГ ММ:СС');
+
+        const resultMinutes = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          undefined,
+          undefined,
+          0,
+        );
+        expect(resultMinutes).toBe('ДД.ММ.ГГГГ ЧЧ:СС');
+
+        const resultSeconds = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          undefined,
+          undefined,
+          undefined,
+          0,
+        );
+        expect(resultSeconds).toBe('ДД.ММ.ГГГГ ЧЧ:ММ');
+
+        const resultAll = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          undefined,
+          0,
+          0,
+          0,
+        );
+        expect(resultAll).toBe('ДД.ММ.ГГГГ');
+      });
+
+      it('удаляет часть времени, если timeOptions пустой или step=0 (multiplicity undefined)', () => {
+        const timeOptionsHoursEmpty = { hours: [] };
+        const resultHoursEmpty = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          timeOptionsHoursEmpty,
+        );
+        expect(resultHoursEmpty).toBe('ДД.ММ.ГГГГ ММ:СС');
+
+        const timeOptionsHoursStep0 = { hours: { step: 0 } };
+        const resultHoursStep0 = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          timeOptionsHoursStep0,
+        );
+        expect(resultHoursStep0).toBe('ДД.ММ.ГГГГ ММ:СС');
+
+        const timeOptionsAllEmpty = { hours: [], minutes: [], seconds: [] };
+        const resultAllEmpty = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          timeOptionsAllEmpty,
+        );
+        expect(resultAllEmpty).toBe('ДД.ММ.ГГГГ');
+      });
+
+      it('приоритет timeOptions над multiplicity (удаление по timeOptions, игнор multiplicity)', () => {
+        const timeOptionsHoursEmpty = { hours: [] };
+        const result = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          timeOptionsHoursEmpty,
+          2,
+        );
+        expect(result).toBe('ДД.ММ.ГГГГ ММ:СС');
+
+        const timeOptionsSecondsStep0 = { seconds: { step: 0 } };
+        const resultSeconds = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          timeOptionsSecondsStep0,
+          undefined,
+          undefined,
+          10,
+        );
+        expect(resultSeconds).toBe('ДД.ММ.ГГГГ ЧЧ:ММ');
+      });
+
+      it('не меняет формат, если опции полные (multiplicity или timeOptions)', () => {
+        const resultMultiplicity = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          undefined,
+          2,
+          5,
+          10,
+        );
+        expect(resultMultiplicity).toBe(placeholderFormat);
+
+        const timeOptionsFull = {
+          hours: [0, 12],
+          minutes: [0, 30],
+          seconds: [0, 45],
+        };
+        const resultTimeOptions = getAdaptedFormatByTimeOptions(
+          placeholderFormat,
+          timeOptionsFull,
+        );
+        expect(resultTimeOptions).toBe(placeholderFormat);
+
+        const timeOptionsPart = { minutes: [0, 30], seconds: [0, 45] };
+        const resultTimeOptionsPart = getAdaptedFormatByTimeOptions(
+          numericFormat,
+          timeOptionsPart,
+          2,
+        );
+        expect(resultTimeOptionsPart).toBe(numericFormat);
+      });
     });
   });
 });
