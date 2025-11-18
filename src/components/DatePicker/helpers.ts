@@ -81,6 +81,86 @@ export const getTimeOptionsByFormat = (
   return effectiveTimeOptions;
 };
 
+export const getAdaptedFormatByTimeOptions = (
+  format: string,
+  timeOptions?: TimeOptions,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить при мажорном релизе все аргументы multiplicity*, оставив только работу с timeOptions.
+   */
+  multiplicityHours?: number,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить при мажорном релизе все аргументы multiplicity*, оставив только работу с timeOptions.
+   */
+  multiplicityMinutes?: number,
+  /**
+   * @deprecated Use timeOptions instead.
+   * TODO: major - удалить при мажорном релизе все аргументы multiplicity*, оставив только работу с timeOptions.
+   */
+  multiplicitySeconds?: number,
+): string => {
+  const formatArray = format.split(' ');
+  let adaptedFormat = formatArray[1] ?? format;
+
+  const shouldRemoveTimePart = (
+    multiplicity: number | undefined,
+    timeOption: TimeUnitOptions | undefined,
+  ): boolean => {
+    if (timeOption && Array.isArray(timeOption) && timeOption.length === 0)
+      return true;
+    if (timeOption && !Array.isArray(timeOption) && timeOption.step === 0)
+      return true;
+
+    // TODO: major - удалить при мажорном релизе
+    if (timeOption === undefined && multiplicity === 0) return true;
+
+    return false;
+  };
+
+  const timeMarkers = [
+    {
+      markers: ['HH', 'ЧЧ'],
+      multiplicity: multiplicityHours,
+      timeOption: timeOptions?.hours,
+    },
+    {
+      markers: ['mm', 'ММ'],
+      multiplicity: multiplicityMinutes,
+      timeOption: timeOptions?.minutes,
+    },
+    {
+      markers: ['ss', 'СС'],
+      multiplicity: multiplicitySeconds,
+      timeOption: timeOptions?.seconds,
+    },
+  ];
+
+  timeMarkers.forEach(({ markers, multiplicity, timeOption }) => {
+    if (shouldRemoveTimePart(multiplicity, timeOption)) {
+      markers.forEach((marker) => {
+        adaptedFormat = adaptedFormat.replace(
+          new RegExp(`:?${marker}`, 'g'),
+          '',
+        );
+      });
+    }
+  });
+
+  adaptedFormat = adaptedFormat
+    .replace(/:+$/, '')
+    .replace(/^:+/, '')
+    .replace(/:+/g, ':')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (formatArray.length > 1) {
+    formatArray[1] = adaptedFormat;
+    return formatArray.filter((part) => part.length > 0).join(' ');
+  }
+  return adaptedFormat;
+};
+
 /**
  * @deprecated Use getTimeOptionsByFormat(format, timeOptions) instead
  * TODO: major - удалить getMultiplicityTime и все multiplicity* пропсы/логику,
