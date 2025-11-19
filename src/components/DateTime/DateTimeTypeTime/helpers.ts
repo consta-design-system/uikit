@@ -40,6 +40,7 @@ type DateTimeTimePropOnChange = (
 
 type ResultItem = {
   label: string;
+  date: Date;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   selected?: boolean;
@@ -57,7 +58,6 @@ const getItemData = (
   minDate?: Date,
   maxDate?: Date,
   disableDates?: DateTimePropDisableDates,
-  onChangeRef?: React.MutableRefObject<DateTimeTimePropOnChange | undefined>,
 ): ResultItem[] => {
   const numbers = getTimeNumbers(timeType, options);
 
@@ -74,183 +74,231 @@ const getItemData = (
     const disabled =
       !isInMinMaxDate(date, minDate, maxDate, startOfUnit, endOfUnit) ||
       isDisableDate({ date, disableDates, mode: 'time', timeType });
-    const onClick = (e: React.MouseEvent<HTMLButtonElement>) =>
-      !disabled && onChangeRef?.current?.(date, { e });
 
     return {
       label,
+      date,
       selected,
       disabled,
-      onClick,
     };
   });
 };
 
-export const useTimeItems = (
-  value?: Date,
-  timeOptions?: TimeOptions,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить обработку multiplicity* в useTimeItems,
-   * формирование options { step: multiplicity } и оставить только timeOptions.
-   */
-  multiplicityHours?: number,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить обработку multiplicity* в useTimeItems,
-   * формирование options { step: multiplicity } и оставить только timeOptions.
-   */
-  multiplicityMinutes?: number,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить обработку multiplicity* в useTimeItems,
-   * формирование options { step: multiplicity } и оставить только timeOptions.
-   */
-  multiplicitySeconds?: number,
-  onChange?: DateTimeTimePropOnChange,
-  minDate?: Date,
-  maxDate?: Date,
-  disableDates?: DateTimePropDisableDates,
-): ResultItem[][] => {
-  const onChangeRef = useMutableRef(onChange);
-
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить обработку multiplicity* в useTimeItems,
-   * формирование options { step: multiplicity } и оставить только timeOptions.
-   */
-  const hoursOptions: TimeUnitOptions =
-    timeOptions?.hours ??
-    (multiplicityHours !== undefined ? { step: multiplicityHours } : {});
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить обработку multiplicity* в useTimeItems,
-   * формирование options { step: multiplicity } и оставить только timeOptions.
-   */
-  const minutesOptions: TimeUnitOptions =
-    timeOptions?.minutes ??
-    (multiplicityMinutes !== undefined ? { step: multiplicityMinutes } : {});
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить обработку multiplicity* в useTimeItems,
-   * формирование options { step: multiplicity } и оставить только timeOptions.
-   */
-  const secondsOptions: TimeUnitOptions =
-    timeOptions?.seconds ??
-    (multiplicitySeconds !== undefined ? { step: multiplicitySeconds } : {});
-
-  const secondsItems = useMemo(
-    () =>
-      getItemData(
+const buildUnitItems = (
+  unit: 'hours' | 'minutes' | 'seconds',
+  value: Date | undefined,
+  options: TimeUnitOptions,
+  minDate: Date | undefined,
+  maxDate: Date | undefined,
+  disableDates: DateTimePropDisableDates | undefined,
+) => {
+  switch (unit) {
+    case 'hours':
+      return getItemData(
+        'hours',
+        startOfDay,
+        startOfHour,
+        endOfHour,
+        addHours,
+        getLabelHours,
+        options,
+        value,
+        minDate,
+        maxDate,
+        disableDates,
+      );
+    case 'minutes':
+      return getItemData(
+        'minutes',
+        startOfHour,
+        startOfMinute,
+        endOfMinute,
+        addMinutes,
+        getLabelMinutes,
+        options,
+        value,
+        minDate,
+        maxDate,
+        disableDates,
+      );
+    case 'seconds':
+      return getItemData(
         'seconds',
         startOfMinute,
         startOfSecond,
         endOfSecond,
         addSeconds,
         getLabelSeconds,
-        secondsOptions,
+        options,
         value,
         minDate,
         maxDate,
         disableDates,
-        onChangeRef,
-      ),
-    [
-      value?.getTime(),
-      minDate?.getTime(),
-      maxDate?.getTime(),
-      timeOptions,
-      multiplicitySeconds,
-      disableDates,
-    ],
+      );
+  }
+};
+
+const validateUnit = (
+  newDate: Date,
+  unit: 'hours' | 'minutes' | 'seconds',
+  minDate?: Date,
+  maxDate?: Date,
+  disableDates?: DateTimePropDisableDates,
+  options?: TimeUnitOptions,
+) => {
+  const items = buildUnitItems(
+    unit,
+    newDate,
+    options || {},
+    minDate,
+    maxDate,
+    disableDates,
   );
 
-  const minutesItems = useMemo(() => {
-    const minutesOnChangeRef: React.MutableRefObject<
-      DateTimeTimePropOnChange | undefined
-    > = {
-      current: (
-        date: Date,
-        props: { e: React.MouseEvent<HTMLButtonElement> },
-      ) => {
-        const firstAvailableSecond = secondsItems.find(
-          (item) => !item.disabled,
-        );
-        if (firstAvailableSecond) {
-          date.setSeconds(parseInt(firstAvailableSecond.label, 10));
-        }
-        onChangeRef.current?.(date, props);
-      },
-    };
+  let target: number;
+  switch (unit) {
+    case 'hours':
+      target = newDate.getHours();
+      break;
+    case 'minutes':
+      target = newDate.getMinutes();
+      break;
+    case 'seconds':
+      target = newDate.getSeconds();
+      break;
+  }
 
-    return getItemData(
-      'minutes',
-      startOfHour,
-      startOfMinute,
-      endOfMinute,
-      addMinutes,
-      getLabelMinutes,
-      minutesOptions,
-      value,
-      minDate,
-      maxDate,
-      disableDates,
-      minutesOnChangeRef,
-    );
-  }, [
-    value?.getTime(),
-    minDate?.getTime(),
-    maxDate?.getTime(),
-    timeOptions,
-    multiplicityMinutes,
+  const exact = items.find(
+    (item) => parseInt(item.label, 10) === target && !item.disabled,
+  );
+  if (exact) return exact;
+
+  const first = items.find((i) => !i.disabled);
+  return first || null;
+};
+
+export const getValidDate = (
+  date: Date,
+  hoursOptions: TimeUnitOptions,
+  minutesOptions: TimeUnitOptions,
+  secondsOptions: TimeUnitOptions,
+  minDate?: Date,
+  maxDate?: Date,
+  disableDates?: DateTimePropDisableDates,
+) => {
+  const newDate = new Date(date);
+
+  const h = validateUnit(
+    newDate,
+    'hours',
+    minDate,
+    maxDate,
     disableDates,
-  ]);
+    hoursOptions,
+  );
+  if (h) newDate.setHours(parseInt(h.label, 10));
 
-  const hoursItems = useMemo(() => {
-    const hoursOnChangeRef: React.MutableRefObject<
-      DateTimeTimePropOnChange | undefined
-    > = {
-      current: (
-        date: Date,
-        props: { e: React.MouseEvent<HTMLButtonElement> },
-      ) => {
-        const firstAvailableMinute = minutesItems.find(
-          (item) => !item.disabled,
-        );
-        const firstAvailableSecond = secondsItems.find(
-          (item) => !item.disabled,
-        );
+  const m = validateUnit(
+    newDate,
+    'minutes',
+    minDate,
+    maxDate,
+    disableDates,
+    minutesOptions,
+  );
+  if (m) newDate.setMinutes(parseInt(m.label, 10));
 
-        if (firstAvailableMinute) {
-          date.setMinutes(parseInt(firstAvailableMinute.label, 10));
-        }
-        if (firstAvailableSecond) {
-          date.setSeconds(parseInt(firstAvailableSecond.label, 10));
-        }
-        onChangeRef.current?.(date, props);
-      },
-    };
+  const s = validateUnit(
+    newDate,
+    'seconds',
+    minDate,
+    maxDate,
+    disableDates,
+    secondsOptions,
+  );
+  if (s) newDate.setSeconds(parseInt(s.label, 10));
 
-    return getItemData(
+  return newDate;
+};
+
+export const useTimeItems = (
+  value?: Date,
+  timeOptions?: TimeOptions,
+  multiplicityHours?: number,
+  multiplicityMinutes?: number,
+  multiplicitySeconds?: number,
+  onChange?: DateTimeTimePropOnChange,
+  minDate?: Date,
+  maxDate?: Date,
+  disableDates?: DateTimePropDisableDates,
+): Omit<ResultItem, 'date'>[][] => {
+  const onChangeRef = useMutableRef(onChange);
+
+  const hoursOptions: TimeUnitOptions =
+    timeOptions?.hours ??
+    (multiplicityHours !== undefined ? { step: multiplicityHours } : {});
+  const minutesOptions: TimeUnitOptions =
+    timeOptions?.minutes ??
+    (multiplicityMinutes !== undefined ? { step: multiplicityMinutes } : {});
+  const secondsOptions: TimeUnitOptions =
+    timeOptions?.seconds ??
+    (multiplicitySeconds !== undefined ? { step: multiplicitySeconds } : {});
+
+  const [hoursItems, minutesItems, secondsItems] = useMemo(() => {
+    const hours = buildUnitItems(
       'hours',
-      startOfDay,
-      startOfHour,
-      endOfHour,
-      addHours,
-      getLabelHours,
-      hoursOptions,
       value,
+      hoursOptions,
       minDate,
       maxDate,
       disableDates,
-      hoursOnChangeRef,
     );
+    const minutes = buildUnitItems(
+      'minutes',
+      value,
+      minutesOptions,
+      minDate,
+      maxDate,
+      disableDates,
+    );
+    const seconds = buildUnitItems(
+      'seconds',
+      value,
+      secondsOptions,
+      minDate,
+      maxDate,
+      disableDates,
+    );
+
+    const wrap = (item: ResultItem) => {
+      if (item.disabled) return;
+
+      item.onClick = (e) => {
+        const valid = getValidDate(
+          item.date,
+          hoursOptions,
+          minutesOptions,
+          secondsOptions,
+          minDate,
+          maxDate,
+          disableDates,
+        );
+        onChangeRef.current?.(valid, { e });
+      };
+    };
+
+    hours.forEach(wrap);
+    minutes.forEach(wrap);
+    seconds.forEach(wrap);
+
+    return [hours, minutes, seconds];
   }, [
     value?.getTime(),
     minDate?.getTime(),
     maxDate?.getTime(),
-    timeOptions,
-    multiplicityHours,
+    hoursOptions,
+    minutesOptions,
+    secondsOptions,
     disableDates,
   ]);
 
