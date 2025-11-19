@@ -42,7 +42,7 @@ const TestComponent = ({
   );
 };
 
-describe('хук useMouseLeave', () => {
+describe('Хук useMouseLeave', () => {
   beforeEach(() => {
     jest.useFakeTimers();
   });
