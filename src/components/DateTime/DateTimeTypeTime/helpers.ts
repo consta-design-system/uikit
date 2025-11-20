@@ -5,6 +5,7 @@ import {
   endOfHour,
   endOfMinute,
   endOfSecond,
+  set,
   startOfDay,
   startOfHour,
   startOfMinute,
@@ -185,7 +186,7 @@ export const getValidDate = (
   minDate?: Date,
   maxDate?: Date,
   disableDates?: DateTimePropDisableDates,
-) => {
+): Date => {
   const newDate = new Date(date);
 
   const h = validateUnit(
@@ -219,6 +220,66 @@ export const getValidDate = (
   if (s) newDate.setSeconds(parseInt(s.label, 10));
 
   return newDate;
+};
+
+export const getFirstValidDateTime = (
+  date: Date,
+  hoursOptions: TimeUnitOptions,
+  minutesOptions: TimeUnitOptions,
+  secondsOptions: TimeUnitOptions,
+  minDate?: Date,
+  maxDate?: Date,
+  disableDates?: DateTimePropDisableDates,
+): Date => {
+  const start = startOfDay(date);
+
+  const validHours = buildUnitItems(
+    'hours',
+    start,
+    hoursOptions,
+    minDate,
+    maxDate,
+    disableDates,
+  )
+    .filter((h) => !h.disabled)
+    .map((h) => parseInt(h.label, 10));
+
+  if (validHours.length === 0) return start;
+
+  for (const hour of validHours) {
+    const hourDate = set(start, { hours: hour });
+    const validMinutes = buildUnitItems(
+      'minutes',
+      hourDate,
+      minutesOptions,
+      minDate,
+      maxDate,
+      disableDates,
+    )
+      .filter((m) => !m.disabled)
+      .map((m) => parseInt(m.label, 10));
+
+    if (validMinutes.length === 0) continue;
+
+    for (const minute of validMinutes) {
+      const minuteDate = set(hourDate, { minutes: minute });
+      const validSeconds = buildUnitItems(
+        'seconds',
+        minuteDate,
+        secondsOptions,
+        minDate,
+        maxDate,
+        disableDates,
+      )
+        .filter((s) => !s.disabled)
+        .map((s) => parseInt(s.label, 10));
+
+      if (validSeconds.length === 0) continue;
+
+      return set(minuteDate, { seconds: validSeconds[0] });
+    }
+  }
+  return start;
 };
 
 export const useTimeItems = (
