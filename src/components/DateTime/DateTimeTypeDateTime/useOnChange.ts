@@ -108,11 +108,12 @@ export const useOnChange = (
       const currentRange = value as DateRange;
       const timeForEnd =
         timeFor === 'start' ? currentRange[0] : currentRange[1];
-      const prevStart = previousRangeRef.current || undefined;
-      const changedEnd =
-        currentRange[0]?.getTime() !== prevStart?.getTime() ? 'start' : 'end';
-      const validTimeValue =
-        changedEnd === timeFor ? getValidTimeValue(timeForEnd) : timeForEnd;
+      const prevTimeForEnd = previousRangeRef.current || undefined;
+      const isTimeForEndChanged =
+        timeForEnd?.getTime() !== prevTimeForEnd?.getTime();
+      const validTimeValue = isTimeForEndChanged
+        ? getValidTimeValue(timeForEnd)
+        : timeForEnd;
       const newRange = applyTimeToRange(currentRange, validTimeValue);
       onChangeRangeRef.current?.(newRange, { e });
     },
@@ -121,13 +122,11 @@ export const useOnChange = (
 
   const onTimeChange: DateTimePropOnChange = useCallback(
     (selectedValue, { e }) => {
-      console.log('Selected ', selectedValue);
       if (!isRange) {
         onChangeRef.current?.(selectedValue, { e });
       } else {
         const currentRange = value as DateRange;
         const newRange = applyTimeToRange(currentRange, selectedValue);
-        console.log('Selected new range', newRange);
         onChangeRangeRef.current?.(newRange, { e });
       }
     },
