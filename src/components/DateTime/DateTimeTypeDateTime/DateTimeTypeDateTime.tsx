@@ -45,7 +45,19 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> =
     });
 
     const [onDateChange, onDateChangeRange, onTimeChange, valueTime] =
-      useOnChange(onChange, onChangeRange, value, timeFor);
+      useOnChange(
+        onChange,
+        onChangeRange,
+        value,
+        timeFor,
+        timeOptions,
+        multiplicityHours,
+        multiplicityMinutes,
+        multiplicitySeconds,
+        minDate,
+        maxDate,
+        disableDates,
+      );
 
     const rootRef = useRef<HTMLDivElement>(null);
 
