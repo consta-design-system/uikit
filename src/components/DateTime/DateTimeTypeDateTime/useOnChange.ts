@@ -122,15 +122,9 @@ export const useOnChange = (
 
   const onTimeChange: DateTimePropOnChange = useCallback(
     (selectedValue, { e }) => {
-      if (!isRange) {
-        onChangeRef.current?.(selectedValue, { e });
-      } else {
-        const currentRange = value as DateRange;
-        const newRange = applyTimeToRange(currentRange, selectedValue);
-        onChangeRangeRef.current?.(newRange, { e });
-      }
+      onChangeRef.current?.(selectedValue, { e });
     },
-    [isRange, value],
+    [],
   );
 
   useEffect(() => {
