@@ -21,9 +21,6 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef(
       minDate,
       disableDates,
       timeOptions,
-      multiplicityHours = 1,
-      multiplicityMinutes = 1,
-      multiplicitySeconds = 1,
       onMove,
       ...otherProps
     } = props;
@@ -44,9 +41,6 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef(
     const time = useTimeItems(
       value,
       timeOptions,
-      multiplicityHours,
-      multiplicityMinutes,
-      multiplicitySeconds,
       onChange,
       minDate,
       maxDate,
