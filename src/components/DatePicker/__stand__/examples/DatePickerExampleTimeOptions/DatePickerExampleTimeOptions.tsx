@@ -12,32 +12,28 @@ const timeOptionsExamples = [
       minutes: [0, 15, 45], // конкретные значения минут
       // seconds не указаны — будут все значения по умолчанию (0–59)
     },
+    multiplicityHours: 1, // Игнорируется, так как задан timeOptions.hours
+    multiplicityMinutes: undefined,
+    multiplicitySeconds: undefined,
   },
   {
     label: 'Пример 2',
     index: 1,
     options: {
       hours: { step: 1 }, // все часы
-      minutes: [], // пустой массив — минуты не показываются
       seconds: { step: 0 }, // секунды не показываются
     },
+    multiplicityHours: undefined,
+    multiplicityMinutes: 2, // Используется, так как timeOptions.minutes не задан
+    multiplicitySeconds: 3, // Игнорируется, так как задан timeOptions.seconds
   },
   {
     label: 'Пример 3',
     index: 2,
     options: {
-      hours: { step: 1 }, // все часы
-      minutes: { step: 15 }, // каждые 15 минут
-      seconds: { step: 15 }, // каждые 15 секунд
-    },
-  },
-  {
-    label: 'Пример 4',
-    index: 3,
-    options: {
       hours: [8, 12, 16],
-      minutes: [10, 15, 25, 40],
-      seconds: { step: 5 }, // каждые 5 секунд
+      minutes: { step: 15 }, // каждые 15 минут
+      seconds: [], // пустой массив — секунды не показываются
     },
   },
 ];
@@ -49,7 +45,7 @@ export const DatePickerExampleTimeOptions = () => {
 
   return (
     <Example
-      col={4}
+      col={3}
       separately
       items={timeOptionsExamples}
       getItemNode={(item) => (
@@ -64,6 +60,9 @@ export const DatePickerExampleTimeOptions = () => {
             })
           }
           timeOptions={item.options}
+          multiplicityHours={item.multiplicityHours}
+          multiplicityMinutes={item.multiplicityMinutes}
+          multiplicitySeconds={item.multiplicitySeconds}
         />
       )}
       getItemLabel={(item) => item.label}
