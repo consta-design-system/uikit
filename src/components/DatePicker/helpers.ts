@@ -13,7 +13,6 @@ import { IMask, useIMask } from 'react-imask';
 import { getForm } from '##/components/FieldGroup';
 import { TextFieldPropForm } from '##/components/TextField';
 import { useMutableRef } from '##/hooks/useMutableRef';
-import { range } from '##/utils/array';
 import { DateRange } from '##/utils/types/Date';
 
 import { TimeOptions, TimeUnitOptions } from '../DateTime';
@@ -84,27 +83,11 @@ export const getTimeOptionsByFormat = (
 export const getAdaptedFormatByTimeOptions = (
   format: string,
   timeOptions?: TimeOptions,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все аргументы multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicityHours?: number,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все аргументы multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicityMinutes?: number,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все аргументы multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicitySeconds?: number,
 ): string => {
   const formatArray = format.split(' ');
   let adaptedFormat = formatArray[1] ?? format;
 
   const shouldRemoveTimePart = (
-    multiplicity: number | undefined,
     timeOption: TimeUnitOptions | undefined,
   ): boolean => {
     if (timeOption && Array.isArray(timeOption) && timeOption.length === 0)
@@ -112,32 +95,26 @@ export const getAdaptedFormatByTimeOptions = (
     if (timeOption && !Array.isArray(timeOption) && timeOption.step === 0)
       return true;
 
-    // TODO: major - удалить при мажорном релизе
-    if (timeOption === undefined && multiplicity === 0) return true;
-
     return false;
   };
 
   const timeMarkers = [
     {
       markers: ['HH', 'ЧЧ'],
-      multiplicity: multiplicityHours,
       timeOption: timeOptions?.hours,
     },
     {
       markers: ['mm', 'ММ'],
-      multiplicity: multiplicityMinutes,
       timeOption: timeOptions?.minutes,
     },
     {
       markers: ['ss', 'СС'],
-      multiplicity: multiplicitySeconds,
       timeOption: timeOptions?.seconds,
     },
   ];
 
-  timeMarkers.forEach(({ markers, multiplicity, timeOption }) => {
-    if (shouldRemoveTimePart(multiplicity, timeOption)) {
+  timeMarkers.forEach(({ markers, timeOption }) => {
+    if (shouldRemoveTimePart(timeOption)) {
       markers.forEach((marker) => {
         adaptedFormat = adaptedFormat.replace(
           new RegExp(`:?${marker}`, 'g'),
@@ -161,64 +138,17 @@ export const getAdaptedFormatByTimeOptions = (
   return adaptedFormat;
 };
 
-/**
- * @deprecated Use getTimeOptionsByFormat(format, timeOptions) instead
- * TODO: major - удалить getMultiplicityTime и все multiplicity* пропсы/логику,
- */
-export const getMultiplicityTime = (
-  format: string,
-  multiplicityHours: number | undefined,
-  multiplicityMinutes: number | undefined,
-  multiplicitySeconds: number | undefined,
-) => {
-  const markers = ['HH', 'mm', 'ss'] as const;
-  const formatArray = format.split(' ')[1]?.split(':');
-  const map = {
-    HH: multiplicityHours,
-    mm: multiplicityMinutes,
-    ss: multiplicitySeconds,
-  } as const;
-
-  return markers.map((marker) =>
-    formatArray?.includes(marker) ? map[marker] : 0,
-  );
-};
-
-export const getTimeMaskBlocks = (
-  timeOptions?: TimeOptions,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicityHours?: number,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicityMinutes?: number,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicitySeconds?: number,
-) => {
+export const getTimeMaskBlocks = (timeOptions?: TimeOptions) => {
   const getBlockConfig = (
     timeType: 'hours' | 'minutes' | 'seconds',
     addUnits: typeof addHours | typeof addMinutes | typeof addSeconds,
     getItemLabel: (date: Date) => string,
     option?: TimeUnitOptions,
-    /**
-     * @deprecated Use option instead.
-     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с TimeUnitOptions.
-     */
-    multiplicity?: number,
   ) => {
     const maxValue = timeType === 'hours' ? 23 : 59;
     const defaultConfig = { mask: IMask.MaskedRange, from: 0, to: maxValue };
 
-    const effectiveOption =
-      option ?? (multiplicity !== undefined ? { step: multiplicity } : {});
-    const numbers = getTimeNumbers(timeType, effectiveOption);
+    const numbers = getTimeNumbers(timeType, option);
     const isFullRange = numbers.length === maxValue + 1;
 
     if (isFullRange || numbers.length === 0) {
@@ -234,48 +164,20 @@ export const getTimeMaskBlocks = (
   };
 
   return {
-    HH: getBlockConfig(
-      'hours',
-      addHours,
-      getLabelHours,
-      timeOptions?.hours,
-      multiplicityHours,
-    ),
+    HH: getBlockConfig('hours', addHours, getLabelHours, timeOptions?.hours),
     mm: getBlockConfig(
       'minutes',
       addMinutes,
       getLabelMinutes,
       timeOptions?.minutes,
-      multiplicityMinutes,
     ),
     ss: getBlockConfig(
       'seconds',
       addSeconds,
       getLabelSeconds,
       timeOptions?.seconds,
-      multiplicitySeconds,
     ),
   };
-};
-
-export const getTimeEnum = (
-  length: number,
-  multiplicity = 1,
-  startOfUnits: (date: Date) => Date,
-  addUnits: (date: Date, amount: number) => Date,
-  getItemLabel: (date: Date) => string,
-) => {
-  const numbers = range(multiplicity ? Math.floor(length / multiplicity) : 0);
-
-  if (numbers.length === 0) {
-    return [];
-  }
-
-  const startDate = startOfUnits(startOfToday());
-
-  return numbers.map((number) => {
-    return getItemLabel(addUnits(startDate, number * multiplicity));
-  });
 };
 
 export const getFormForStart = (form: TextFieldPropForm) => getForm(form, 0, 2);
