@@ -14,35 +14,11 @@ describe('DatePickerFieldTypeDateTimeRange', () => {
     jest.clearAllMocks();
   });
 
-  const baseMultiplicities = {
-    multiplicityHours: 2,
-    multiplicityMinutes: 5,
-    multiplicitySeconds: 10,
-  };
-
   const baseTimeOptions = {
     hours: [0, 6, 12],
     minutes: [0, 30],
     seconds: [0, 10, 20, 30],
   };
-
-  it('пробрасывает multiplicity в start и end DatePickerFieldTypeDateTime', () => {
-    const value: [Date, Date] = [new Date(2023, 0, 1), new Date(2023, 0, 2)];
-    render(
-      <DatePickerFieldTypeDateTimeRange
-        value={value}
-        {...baseMultiplicities}
-      />,
-    );
-
-    const fieldProps = getFieldMock().mock.calls.map((call) => call[0]);
-
-    fieldProps.forEach((props) => {
-      expect(props.multiplicityHours).toBe(2);
-      expect(props.multiplicityMinutes).toBe(5);
-      expect(props.multiplicitySeconds).toBe(10);
-    });
-  });
 
   it('пробрасывает timeOptions в start и end DatePickerFieldTypeDateTime', () => {
     const value: [Date, Date] = [new Date(2023, 0, 1), new Date(2023, 0, 2)];
@@ -60,16 +36,13 @@ describe('DatePickerFieldTypeDateTimeRange', () => {
     });
   });
 
-  it('если multiplicity и timeOptions не переданы, остаются undefined', () => {
+  it('если timeOptions не переданы, остаются undefined', () => {
     const value: [Date, Date] = [new Date(2023, 0, 1), new Date(2023, 0, 2)];
     render(<DatePickerFieldTypeDateTimeRange value={value} />);
 
     const fieldProps = getFieldMock().mock.calls.map((call) => call[0]);
 
     fieldProps.forEach((props) => {
-      expect(props.multiplicityHours).toBeUndefined();
-      expect(props.multiplicityMinutes).toBeUndefined();
-      expect(props.multiplicitySeconds).toBeUndefined();
       expect(props.timeOptions).toBeUndefined();
     });
   });
