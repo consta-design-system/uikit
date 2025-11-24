@@ -13,6 +13,7 @@ import eachDayOfInterval from 'date-fns/eachDayOfInterval';
 import { isDateRange, isOnlyOneDateInRange } from '../../../utils/date';
 import { isDefined } from '../../../utils/type-guards';
 import { DateRange } from '../../../utils/types/Date';
+import { DateTimePropType } from './types';
 
 export const dateComparer = (a?: Date, b?: Date): number =>
   (a?.getTime() ?? 0) - (b?.getTime() ?? 0);
@@ -123,6 +124,9 @@ export const getTimeTitle = (
     })
     .join('')
     .slice(0, -1);
+
+export const isTypeWithTime = (type: DateTimePropType) =>
+  type.indexOf('time') !== -1;
 
 export * from './useCurrentVisibleDate';
 export * from './types';
