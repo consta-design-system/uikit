@@ -62,21 +62,6 @@ export type DatePickerFieldTypeTimeProps = PropsWithHTMLAttributes<
     maxDate?: Date;
     focused?: boolean;
     timeOptions?: TimeOptions;
-    /**
-     * @deprecated Use timeOptions instead.
-     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-     */
-    multiplicityHours?: number;
-    /**
-     * @deprecated Use timeOptions instead.
-     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-     */
-    multiplicityMinutes?: number;
-    /**
-     * @deprecated Use timeOptions instead.
-     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-     */
-    multiplicitySeconds?: number;
     label?: string;
     labelIcon?: IconComponent;
     caption?: string;
@@ -91,21 +76,6 @@ type UsePickerProps = {
   onChange?: DatePickerFieldTypeTimePropOnChange;
   onError?: DatePickerPropOnError;
   timeOptions?: TimeOptions;
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicityHours: number | undefined;
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicityMinutes: number | undefined;
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicitySeconds: number | undefined;
   format: string;
   separator: string;
   minDate: Date;
@@ -118,9 +88,6 @@ export const usePicker = (props: UsePickerProps) => {
     onChange,
     onError,
     timeOptions,
-    multiplicityHours,
-    multiplicityMinutes,
-    multiplicitySeconds,
     format: formatProp,
     separator,
     maxDate,
@@ -201,12 +168,7 @@ export const usePicker = (props: UsePickerProps) => {
     [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
   );
 
-  const timeMaskBlocks = getTimeMaskBlocks(
-    timeOptions,
-    multiplicityHours,
-    multiplicityMinutes,
-    multiplicitySeconds,
-  );
+  const timeMaskBlocks = getTimeMaskBlocks(timeOptions);
 
   const imaskProps = useIMask<HTMLInputElement, ReactMaskOpts>(
     {
