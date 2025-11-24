@@ -323,7 +323,12 @@ const events = [
 - `multiplicityMinutes` — интервал для минут (например, `15` для четвертей часа, `0` — убрать минуты).
 - `multiplicitySeconds` — интервал для секунд (например, `0` — убрать секунды).
 
-Комментарии по поведению timeOptions:
+**Приоритет конфигурации:**
+
+Если заданы оба варианта, `timeOptions` имеет приоритет над `multiplicity*`.
+Если `timeOptions` не указан для конкретного юнита (часы/минуты/секунды), будут использоваться значения из `multiplicity*` (при их наличии).
+
+**Комментарии по поведению timeOptions:**
 
 - Если `step = 0` или кастомные значения - пустой массив ([]), то соответствующие значения не будут отображаться.
 - Если поле `hours`, `minutes` или `seconds` не указано, используется весь диапазон по умолчанию (0–23 для часов, 0–59 для минут и секунд).
@@ -342,6 +347,7 @@ const [value1, setValue1] = useState<Date | undefined>();
     minutes: [0, 15, 45],                      // конкретные значения минут
     // seconds не указаны — будут все значения по умолчанию (0–59)
   }
+  multiplicityHours={1}  // Игнорируется, так как задан timeOptions.hours
   value={value1}
   onChange={setValue1}
 />
@@ -351,10 +357,12 @@ const [value2, setValue2] = useState<Date | undefined>();
 <DateTime
   type="time"
   timeOptions={
-    hours: { step: 1 },        // все часы
-    minutes: [],               // пустой массив — минуты не показываются
-    seconds: { step: 0 },      // секунды не показываются
+    hours: { step: 1 },   // все часы
+    minutes: [],          // пустой массив — минуты не показываются
+    seconds: { step: 0 }, // секунды не показываются
   }
+  multiplicityMinutes={2} // Используется, так как timeOptions.minutes не задан
+  multiplicitySeconds={3} // Игнорируется, так как задан timeOptions.seconds
   value={value2}
   onChange={setValue2}
 />
@@ -364,25 +372,12 @@ const [value3, setValue3] = useState<Date | undefined>();
 <DateTime
   type="time"
   timeOptions={
-    hours: { step: 1 },       // все часы
-    minutes: { step: 15 },    // каждые 15 минут
-    seconds: { step: 15 },    // каждые 15 секунд
+    hours: [8, 12, 16],
+    minutes: { step: 15 }, // каждые 15 минут
+    seconds: [],           // пустой массив — секунды не показываются
   }
   value={value3}
   onChange={setValue3}
-/>
-
-// Пример 4
-const [value4, setValue4] = useState<Date | undefined>();
-<DateTime
-  type="time"
-  timeOptions={
-    hours: [8, 12, 16],
-    minutes: [10, 40],
-    seconds: [],              // пустой массив — секунды не показываются
-  }
-  value={value4}
-  onChange={setValue4}
 />
 ```
 
