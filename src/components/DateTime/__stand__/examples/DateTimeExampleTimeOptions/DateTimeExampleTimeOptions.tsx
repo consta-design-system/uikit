@@ -21,7 +21,6 @@ const timeOptionsExamples = [
     index: 2,
     options: {
       hours: { step: 1 }, // все часы
-      minutes: [], // пустой массив — минуты не показываются
       seconds: { step: 0 }, // секунды не показываются
     },
     multiplicityHours: undefined,

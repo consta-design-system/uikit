@@ -358,7 +358,6 @@ const [value2, setValue2] = useState<Date | undefined>();
   type="time"
   timeOptions={
     hours: { step: 1 },   // все часы
-    minutes: [],          // пустой массив — минуты не показываются
     seconds: { step: 0 }, // секунды не показываются
   }
   multiplicityMinutes={2} // Используется, так как timeOptions.minutes не задан
