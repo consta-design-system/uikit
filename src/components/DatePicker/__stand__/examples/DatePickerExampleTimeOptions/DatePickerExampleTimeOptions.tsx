@@ -45,7 +45,7 @@ export const DatePickerExampleTimeOptions = () => {
 
   return (
     <Example
-      col={3}
+      col={{ 1: 0, 2: 500, 3: 800 }}
       separately
       items={timeOptionsExamples}
       getItemNode={(item) => (
