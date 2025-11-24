@@ -4,6 +4,7 @@ import { useForkRef } from '##/hooks/useForkRef/useForkRef';
 import { maxDateDefault, minDateDefault } from '##/utils/date';
 import { getByMap } from '##/utils/getByMap';
 
+import { TimeOptions } from '../DateTime';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { DatePickerTypeDate } from './DatePickerTypeDate/DatePickerTypeDate';
 import { DatePickerTypeDateRange } from './DatePickerTypeDateRange/DatePickerTypeDateRange';
@@ -53,23 +54,40 @@ export const DatePicker: DatePickerComponent = forwardRef((props, ref) => {
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, props, datePickerRef);
 
+  // TODO: major - удалить multiplicity* props конвертацию, используйте timeOptions напрямую
+  const effectiveTimeOptions = useMemo((): TimeOptions => {
+    return {
+      hours:
+        timeOptions?.hours ??
+        (multiplicityHours !== undefined
+          ? { step: multiplicityHours }
+          : undefined),
+      minutes:
+        timeOptions?.minutes ??
+        (multiplicityMinutes !== undefined
+          ? { step: multiplicityMinutes }
+          : undefined),
+      seconds:
+        timeOptions?.seconds ??
+        (multiplicitySeconds !== undefined
+          ? { step: multiplicitySeconds }
+          : undefined),
+    };
+  }, [
+    timeOptions,
+    multiplicityHours,
+    multiplicityMinutes,
+    multiplicitySeconds,
+  ]);
+
   const timeProps = useMemo(
     () =>
       isTypeWithTime(type)
         ? {
-            timeOptions,
-            multiplicityMinutes,
-            multiplicitySeconds,
-            multiplicityHours,
+            timeOptions: effectiveTimeOptions,
           }
         : undefined,
-    [
-      type,
-      timeOptions,
-      multiplicityMinutes,
-      multiplicitySeconds,
-      multiplicityHours,
-    ],
+    [type, effectiveTimeOptions],
   );
 
   const Component = getByMap(typeMap, type);
