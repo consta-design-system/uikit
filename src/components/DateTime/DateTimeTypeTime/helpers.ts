@@ -229,6 +229,16 @@ export const getFirstValidDateTime = (
 ): Date => {
   const start = startOfDay(date);
 
+  const isUnitSkiped = (timeUnitOptions: TimeUnitOptions | undefined) => {
+    if (timeUnitOptions === undefined) {
+      return false;
+    }
+    if (Array.isArray(timeUnitOptions)) {
+      return timeUnitOptions.length === 0;
+    }
+    return timeUnitOptions?.step === 0;
+  };
+
   const validHours = buildUnitItems(
     'hours',
     start,
@@ -239,11 +249,11 @@ export const getFirstValidDateTime = (
   )
     .filter((h) => !h.disabled)
     .map((h) => parseInt(h.label, 10));
-
-  if (validHours.length === 0) return start;
+  const isHoursSkiped = isUnitSkiped(timeOptions?.hours);
+  if (!isHoursSkiped && validHours.length === 0) return start;
 
   for (const hour of validHours) {
-    const hourDate = set(start, { hours: hour });
+    const hourDate = isHoursSkiped ? start : set(start, { hours: hour });
     const validMinutes = buildUnitItems(
       'minutes',
       hourDate,
@@ -254,11 +264,13 @@ export const getFirstValidDateTime = (
     )
       .filter((m) => !m.disabled)
       .map((m) => parseInt(m.label, 10));
-
-    if (validMinutes.length === 0) continue;
+    const isMinutesSkiped = isUnitSkiped(timeOptions?.minutes);
+    if (!isMinutesSkiped && validMinutes.length === 0) continue;
 
     for (const minute of validMinutes) {
-      const minuteDate = set(hourDate, { minutes: minute });
+      const minuteDate = isMinutesSkiped
+        ? hourDate
+        : set(hourDate, { minutes: minute });
       const validSeconds = buildUnitItems(
         'seconds',
         minuteDate,
@@ -269,10 +281,12 @@ export const getFirstValidDateTime = (
       )
         .filter((s) => !s.disabled)
         .map((s) => parseInt(s.label, 10));
+      const isSecondsSkiped = isUnitSkiped(timeOptions?.seconds);
+      if (!isSecondsSkiped && validSeconds.length === 0) continue;
 
-      if (validSeconds.length === 0) continue;
-
-      return set(minuteDate, { seconds: validSeconds[0] });
+      return isSecondsSkiped
+        ? minuteDate
+        : set(minuteDate, { seconds: validSeconds[0] });
     }
   }
   return start;
