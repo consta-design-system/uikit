@@ -51,19 +51,4 @@ export type DatePickerFieldTypeDateTimeRangeProps = Omit<
   startFieldPlaceholder?: string;
   endFieldPlaceholder?: string;
   timeOptions?: TimeOptions;
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicityHours?: number;
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicityMinutes?: number;
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicitySeconds?: number;
 };
