@@ -13,6 +13,7 @@ import {
   dateTimePropTypeDefault,
   dateTimePropView,
   dateTimePropViewDefault,
+  TimeOptions,
 } from '../helpers';
 
 const localeProp = ['ru', 'en-US', 'zh-CN', 'es'] as const;
@@ -56,9 +57,35 @@ const Variants = () => {
       ]
     : undefined;
 
-  const multiplicityHours = useNumber('multiplicityHours', 1);
-  const multiplicityMinutes = useNumber('multiplicityMinutes', 1);
-  const multiplicitySeconds = useNumber('multiplicitySeconds', 1);
+  const hoursStep = useNumber('hoursStep', 1);
+  const hoursStart = useNumber('hoursStart', 0);
+  const hoursStop = useNumber('hoursStop', 23);
+
+  const minutesStep = useNumber('minutesStep', 1);
+  const minutesStart = useNumber('minutesStart', 0);
+  const minutesStop = useNumber('minutesStop', 59);
+
+  const secondsStep = useNumber('secondsStep', 1);
+  const secondsStart = useNumber('secondsStart', 0);
+  const secondsStop = useNumber('secondsStop', 59);
+
+  const timeOptions: TimeOptions | undefined = {
+    hours: {
+      start: hoursStart,
+      stop: hoursStop,
+      step: hoursStep,
+    },
+    minutes: {
+      start: minutesStart,
+      stop: minutesStop,
+      step: minutesStep,
+    },
+    seconds: {
+      start: secondsStart,
+      stop: secondsStop,
+      step: secondsStep,
+    },
+  };
 
   return (
     <DateTime
@@ -70,9 +97,7 @@ const Variants = () => {
       maxDate={maxDate}
       events={events}
       locale={getByMap(localeMap, locale)}
-      multiplicityHours={multiplicityHours}
-      multiplicityMinutes={multiplicityMinutes}
-      multiplicitySeconds={multiplicitySeconds}
+      timeOptions={timeOptions}
     />
   );
 };
