@@ -239,54 +239,58 @@ export const getFirstValidDateTime = (
     return timeUnitOptions?.step === 0;
   };
 
-  const validHours = buildUnitItems(
-    'hours',
-    start,
-    timeOptions?.hours,
-    minDate,
-    maxDate,
-    disableDates,
-  )
-    .filter((h) => !h.disabled)
-    .map((h) => parseInt(h.label, 10));
   const isHoursSkiped = isUnitSkiped(timeOptions?.hours);
-  if (!isHoursSkiped && validHours.length === 0) return start;
-
-  for (const hour of validHours) {
-    const hourDate = isHoursSkiped ? start : set(start, { hours: hour });
-    const validMinutes = buildUnitItems(
-      'minutes',
-      hourDate,
-      timeOptions?.minutes,
-      minDate,
-      maxDate,
-      disableDates,
-    )
-      .filter((m) => !m.disabled)
-      .map((m) => parseInt(m.label, 10));
-    const isMinutesSkiped = isUnitSkiped(timeOptions?.minutes);
-    if (!isMinutesSkiped && validMinutes.length === 0) continue;
-
-    for (const minute of validMinutes) {
-      const minuteDate = isMinutesSkiped
-        ? hourDate
-        : set(hourDate, { minutes: minute });
-      const validSeconds = buildUnitItems(
-        'seconds',
-        minuteDate,
-        timeOptions?.seconds,
+  const validHours = isHoursSkiped
+    ? [0]
+    : buildUnitItems(
+        'hours',
+        start,
+        timeOptions?.hours,
         minDate,
         maxDate,
         disableDates,
       )
-        .filter((s) => !s.disabled)
-        .map((s) => parseInt(s.label, 10));
+        .filter((h) => !h.disabled)
+        .map((h) => parseInt(h.label, 10));
+
+  if (!isHoursSkiped && validHours.length === 0) return start;
+
+  for (const hour of validHours) {
+    const hourDate = set(start, { hours: hour });
+    const isMinutesSkiped = isUnitSkiped(timeOptions?.minutes);
+    const validMinutes = isMinutesSkiped
+      ? [0]
+      : buildUnitItems(
+          'minutes',
+          hourDate,
+          timeOptions?.minutes,
+          minDate,
+          maxDate,
+          disableDates,
+        )
+          .filter((m) => !m.disabled)
+          .map((m) => parseInt(m.label, 10));
+    if (!isMinutesSkiped && validMinutes.length === 0) continue;
+
+    for (const minute of validMinutes) {
+      const minuteDate = set(hourDate, { minutes: minute });
       const isSecondsSkiped = isUnitSkiped(timeOptions?.seconds);
+      const validSeconds = isSecondsSkiped
+        ? [0]
+        : buildUnitItems(
+            'seconds',
+            minuteDate,
+            timeOptions?.seconds,
+            minDate,
+            maxDate,
+            disableDates,
+          )
+            .filter((s) => !s.disabled)
+            .map((s) => parseInt(s.label, 10));
+
       if (!isSecondsSkiped && validSeconds.length === 0) continue;
 
-      return isSecondsSkiped
-        ? minuteDate
-        : set(minuteDate, { seconds: validSeconds[0] });
+      return set(minuteDate, { seconds: validSeconds[0] });
     }
   }
   return start;
