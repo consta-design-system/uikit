@@ -9,7 +9,6 @@ import { DatePickerFieldTypeTime } from '../DatePickerFieldTypeTime/DatePickerFi
 import {
   datePickerPropFormatTypeDateTime,
   getDropdownZIndex,
-  getMultiplicityTime,
   getTimeOptionsByFormat,
 } from '../helpers';
 import {
@@ -28,9 +27,6 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
       dropdownClassName,
       dropdownRef,
       timeOptions: timeOptionsProp,
-      multiplicityHours: multiplicityHoursProp,
-      multiplicityMinutes: multiplicityMinutesProp,
-      multiplicitySeconds: multiplicitySecondsProp,
       renderAdditionalControls,
       currentVisibleDate,
       onChangeCurrentVisibleDate,
@@ -42,19 +38,6 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
       disableDates,
       ...otherProps
     } = props;
-
-    /**
-     * @deprecated
-     * TODO: major - удалить вызов getMultiplicityTime и связанные свойства multiplicity*
-     * при переходе на новую схему работы с timeOptions, использовать только timeOptions и getTimeOptionsByFormat.
-     */
-    const [multiplicityHours, multiplicityMinutes, multiplicitySeconds] =
-      getMultiplicityTime(
-        otherProps.format || datePickerPropFormatTypeDateTime,
-        multiplicityHoursProp,
-        multiplicityMinutesProp,
-        multiplicitySecondsProp,
-      );
 
     const timeOptions = getTimeOptionsByFormat(
       otherProps.format || datePickerPropFormatTypeDateTime,
@@ -96,9 +79,6 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
           inputRef={useForkRef([inputRef, inputRefProp])}
           onClick={setCalendarVisible.on}
           timeOptions={timeOptions}
-          multiplicityHours={multiplicityHours}
-          multiplicityMinutes={multiplicityMinutes}
-          multiplicitySeconds={multiplicitySeconds}
           disabled={disabled}
         />
         <DatePickerDropdown
@@ -117,9 +97,6 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
           onChange={props.onChange}
           renderAdditionalControls={renderAdditionalControls}
           timeOptions={timeOptions}
-          multiplicityHours={multiplicityHours}
-          multiplicityMinutes={multiplicityMinutes}
-          multiplicitySeconds={multiplicitySeconds}
           zIndex={getDropdownZIndex(props.style)}
           disableDates={disableDates}
         />
