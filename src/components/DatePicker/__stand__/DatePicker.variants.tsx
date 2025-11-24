@@ -2,7 +2,13 @@ import './DatePicker.variants.css';
 
 import { IconCalendar } from '@consta/icons/IconCalendar';
 import { IconQuestion } from '@consta/icons/IconQuestion';
-import { useBoolean, useDate, useSelect, useText } from '@consta/stand';
+import {
+  useBoolean,
+  useDate,
+  useNumber,
+  useSelect,
+  useText,
+} from '@consta/stand';
 import { addDays, Locale, startOfWeek } from 'date-fns';
 import enUSLocale from 'date-fns/locale/en-US';
 import esLocale from 'date-fns/locale/es';
@@ -14,6 +20,7 @@ import { Button } from '##/components/Button/Button';
 import {
   dateTimePropView,
   dateTimePropViewDefault,
+  TimeOptions,
 } from '##/components/DateTime/helpers';
 import {
   textFieldPropForm,
@@ -89,6 +96,36 @@ const Variants = () => {
     datePickerPropDropdownFormDefault,
   );
 
+  const hoursStep = useNumber('hoursStep', 1);
+  const hoursStart = useNumber('hoursStart', 0);
+  const hoursStop = useNumber('hoursStop', 23);
+
+  const minutesStep = useNumber('minutesStep', 1);
+  const minutesStart = useNumber('minutesStart', 0);
+  const minutesStop = useNumber('minutesStop', 59);
+
+  const secondsStep = useNumber('secondsStep', 1);
+  const secondsStart = useNumber('secondsStart', 0);
+  const secondsStop = useNumber('secondsStop', 59);
+
+  const timeOptions: TimeOptions | undefined = {
+    hours: {
+      start: hoursStart,
+      stop: hoursStop,
+      step: hoursStep,
+    },
+    minutes: {
+      start: minutesStart,
+      stop: minutesStop,
+      step: minutesStep,
+    },
+    seconds: {
+      start: secondsStart,
+      stop: secondsStop,
+      step: secondsStep,
+    },
+  };
+
   const additionalControls = () => {
     return [
       <Button label="Кнопка" key="1" />,
@@ -162,6 +199,7 @@ const Variants = () => {
           withAdditionalControls ? additionalControls : undefined
         }
         withClearButton={withClearButton}
+        timeOptions={timeOptions}
       />
     </div>
   );
