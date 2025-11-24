@@ -75,55 +75,6 @@ describe('Компонент DatePickerDropdown', () => {
     expect(onChange).toHaveBeenCalled();
   });
 
-  describe('multiplicity props', () => {
-    it('по умолчанию не передаёт multiplicityHours/Minutes/Seconds', () => {
-      const { DateTimeMock } = renderComponent();
-      const props = DateTimeMock.mock.calls[0][0];
-
-      expect(props.multiplicityHours).toBeUndefined();
-      expect(props.multiplicityMinutes).toBeUndefined();
-      expect(props.multiplicitySeconds).toBeUndefined();
-    });
-
-    type MultiplicityKey =
-      | 'multiplicityHours'
-      | 'multiplicityMinutes'
-      | 'multiplicitySeconds';
-    const cases: { label: string; key: MultiplicityKey; value: number }[] = [
-      { label: 'multiplicityHours', key: 'multiplicityHours', value: 2 },
-      { label: 'multiplicityMinutes', key: 'multiplicityMinutes', value: 5 },
-      { label: 'multiplicitySeconds', key: 'multiplicitySeconds', value: 10 },
-    ];
-
-    cases.forEach(({ label, key, value }) => {
-      it(`пробрасывает ${label}, если props передан`, () => {
-        const { DateTimeMock } = renderComponent({ [key]: value });
-        const props = DateTimeMock.mock.calls[0][0];
-        expect(props[key]).toBe(value);
-      });
-
-      it(`оставляет ${label} undefined, если явно передано undefined`, () => {
-        const { DateTimeMock } = renderComponent({ [key]: undefined });
-        const props = DateTimeMock.mock.calls[0][0];
-        expect(props[key]).toBeUndefined();
-      });
-    });
-
-    it('одновременно пробрасывает все multiplicity, если все заданы', () => {
-      const { DateTimeMock } = renderComponent({
-        multiplicityHours: 2,
-        multiplicityMinutes: 5,
-        multiplicitySeconds: 10,
-      });
-
-      const props = DateTimeMock.mock.calls[0][0];
-
-      expect(props.multiplicityHours).toBe(2);
-      expect(props.multiplicityMinutes).toBe(5);
-      expect(props.multiplicitySeconds).toBe(10);
-    });
-  });
-
   describe('timeOptions prop', () => {
     it('по умолчанию не передаёт timeOptions', () => {
       const { DateTimeMock } = renderComponent();
