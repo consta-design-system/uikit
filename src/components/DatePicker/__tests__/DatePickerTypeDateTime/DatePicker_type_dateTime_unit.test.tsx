@@ -2,9 +2,9 @@ import { render } from '@testing-library/react';
 import { ru } from 'date-fns/locale';
 import React, { createRef } from 'react';
 
+import { DatePicker } from '../../DatePicker';
 import { DatePickerDropdown } from '../../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateTime } from '../../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime';
-import { DatePickerTypeDateTime } from '../../DatePickerTypeDateTime/DatePickerTypeDateTime';
 
 jest.mock('../../DatePickerFieldTypeDateTime/DatePickerFieldTypeDateTime');
 jest.mock('../../DatePickerDropdown/DatePickerDropdown');
@@ -15,110 +15,20 @@ const getFieldMock = () =>
 const getDropdownMock = () => (DatePickerDropdown as any).render as jest.Mock;
 
 const renderComponent = (
-  props: Partial<React.ComponentProps<typeof DatePickerTypeDateTime>> = {},
+  props: Partial<React.ComponentProps<typeof DatePicker>> = {},
 ) => {
   const defaultValue = new Date(1970, 0, 1, 10, 0, 0);
-  return render(<DatePickerTypeDateTime value={defaultValue} {...props} />);
+  const defaultProps = {
+    type: 'date-time' as const,
+    value: defaultValue,
+    ...props,
+  };
+  return render(<DatePicker {...defaultProps} />);
 };
 
 describe('Компонент DatePicker_type_dateTime_props', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-  });
-
-  describe('multiplicity + format -> проброс в Field и Dropdown', () => {
-    const baseMultiplicities = {
-      multiplicityHours: 2,
-      multiplicityMinutes: 5,
-      multiplicitySeconds: 10,
-    };
-
-    type FormatCase = {
-      label: string;
-      format: string;
-      expectedHours: number | undefined;
-      expectedMinutes: number | undefined;
-      expectedSeconds: number | undefined;
-    };
-
-    const formatCases: FormatCase[] = [
-      {
-        label: 'полный формат HH:mm:ss',
-        format: 'dd.MM.yyyy HH:mm:ss',
-        expectedHours: 2,
-        expectedMinutes: 5,
-        expectedSeconds: 10,
-      },
-      {
-        label: 'нет секунд (HH:mm)',
-        format: 'dd.MM.yyyy HH:mm',
-        expectedHours: 2,
-        expectedMinutes: 5,
-        expectedSeconds: 0,
-      },
-      {
-        label: 'нет минут (HH:ss)',
-        format: 'dd.MM.yyyy HH:ss',
-        expectedHours: 2,
-        expectedMinutes: 0,
-        expectedSeconds: 10,
-      },
-      {
-        label: 'нет часов (mm:ss)',
-        format: 'dd.MM.yyyy mm:ss',
-        expectedHours: 0,
-        expectedMinutes: 5,
-        expectedSeconds: 10,
-      },
-      {
-        label: 'формат без времени вообще',
-        format: 'dd.MM.yyyy',
-        expectedHours: 0,
-        expectedMinutes: 0,
-        expectedSeconds: 0,
-      },
-    ];
-
-    formatCases.forEach(
-      ({ label, format, expectedHours, expectedMinutes, expectedSeconds }) => {
-        it(`корректно рассчитывает multiplicity, когда ${label}`, () => {
-          renderComponent({ format, ...baseMultiplicities });
-
-          const FieldMock = getFieldMock();
-          const DropdownMock = getDropdownMock();
-
-          expect(FieldMock).toHaveBeenCalled();
-          expect(DropdownMock).toHaveBeenCalled();
-
-          const fieldProps = FieldMock.mock.calls[0][0];
-          const dropdownProps = DropdownMock.mock.calls[0][0];
-
-          expect(fieldProps.multiplicityHours).toBe(expectedHours);
-          expect(fieldProps.multiplicityMinutes).toBe(expectedMinutes);
-          expect(fieldProps.multiplicitySeconds).toBe(expectedSeconds);
-          expect(dropdownProps.multiplicityHours).toBe(expectedHours);
-          expect(dropdownProps.multiplicityMinutes).toBe(expectedMinutes);
-          expect(dropdownProps.multiplicitySeconds).toBe(expectedSeconds);
-        });
-      },
-    );
-
-    it('если multiplicity не передан, остаётся undefined даже при полном формате', () => {
-      renderComponent({ format: 'dd.MM.yyyy HH:mm:ss' });
-
-      const FieldMock = getFieldMock();
-      const DropdownMock = getDropdownMock();
-
-      const fieldProps = FieldMock.mock.calls[0][0];
-      const dropdownProps = DropdownMock.mock.calls[0][0];
-
-      expect(fieldProps.multiplicityHours).toBeUndefined();
-      expect(fieldProps.multiplicityMinutes).toBeUndefined();
-      expect(fieldProps.multiplicitySeconds).toBeUndefined();
-      expect(dropdownProps.multiplicityHours).toBeUndefined();
-      expect(dropdownProps.multiplicityMinutes).toBeUndefined();
-      expect(dropdownProps.multiplicitySeconds).toBeUndefined();
-    });
   });
 
   describe('timeOptions + format -> корректный проброс пропсов', () => {
@@ -195,6 +105,62 @@ describe('Компонент DatePicker_type_dateTime_props', () => {
 
       expect(fieldProps.timeOptions).toEqual(expectedTimeOptions);
       expect(dropdownProps.timeOptions).toEqual(expectedTimeOptions);
+    });
+  });
+
+  describe('совместимость timeOptions и multiplicity', () => {
+    it('корректно преобразует multiplicity в timeOptions', () => {
+      renderComponent({
+        multiplicityHours: 2,
+        multiplicityMinutes: 5,
+        multiplicitySeconds: 10,
+      });
+
+      const FieldMock = getFieldMock();
+      const DropdownMock = getDropdownMock();
+
+      const fieldProps = FieldMock.mock.calls[0][0];
+      const dropdownProps = DropdownMock.mock.calls[0][0];
+
+      expect(fieldProps.timeOptions).toEqual({
+        hours: { step: 2 },
+        minutes: { step: 5 },
+        seconds: { step: 10 },
+      });
+      expect(dropdownProps.timeOptions).toEqual({
+        hours: { step: 2 },
+        minutes: { step: 5 },
+        seconds: { step: 10 },
+      });
+    });
+
+    it('timeOptions имеет приоритет над multiplicity', () => {
+      renderComponent({
+        multiplicityHours: 2,
+        multiplicityMinutes: 5,
+        multiplicitySeconds: 10,
+        timeOptions: {
+          hours: [0, 6, 12],
+          minutes: { step: 15 },
+        },
+      });
+
+      const FieldMock = getFieldMock();
+      const DropdownMock = getDropdownMock();
+
+      const fieldProps = FieldMock.mock.calls[0][0];
+      const dropdownProps = DropdownMock.mock.calls[0][0];
+
+      expect(fieldProps.timeOptions).toEqual({
+        hours: [0, 6, 12],
+        minutes: { step: 15 },
+        seconds: { step: 10 },
+      });
+      expect(dropdownProps.timeOptions).toEqual({
+        hours: [0, 6, 12],
+        minutes: { step: 15 },
+        seconds: { step: 10 },
+      });
     });
   });
 
