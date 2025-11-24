@@ -63,21 +63,6 @@ export type DatePickerFieldTypeDateTimeProps = PropsWithHTMLAttributes<
     maxDate?: Date;
     focused?: boolean;
     timeOptions?: TimeOptions;
-    /**
-     * @deprecated Use timeOptions instead.
-     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-     */
-    multiplicityHours?: number;
-    /**
-     * @deprecated Use timeOptions instead.
-     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-     */
-    multiplicityMinutes?: number;
-    /**
-     * @deprecated Use timeOptions instead.
-     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-     */
-    multiplicitySeconds?: number;
     label?: string;
     labelIcon?: IconComponent;
     caption?: string;
@@ -96,21 +81,6 @@ type UsePickerProps = {
   minDate: Date;
   maxDate: Date;
   timeOptions?: TimeOptions;
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicityHours: number | undefined;
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicityMinutes: number | undefined;
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-   */
-  multiplicitySeconds: number | undefined;
 };
 
 export const usePicker = (props: UsePickerProps) => {
@@ -123,9 +93,6 @@ export const usePicker = (props: UsePickerProps) => {
     maxDate,
     minDate,
     timeOptions,
-    multiplicityHours,
-    multiplicityMinutes,
-    multiplicitySeconds,
   } = props;
   const onChangeRef = useMutableRef(onChange);
   const valueRef = useMutableRef(value);
@@ -205,12 +172,7 @@ export const usePicker = (props: UsePickerProps) => {
     [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
   );
 
-  const timeMaskBlocks = getTimeMaskBlocks(
-    timeOptions,
-    multiplicityHours,
-    multiplicityMinutes,
-    multiplicitySeconds,
-  );
+  const timeMaskBlocks = getTimeMaskBlocks(timeOptions);
 
   const imaskProps = useIMask<HTMLInputElement, ReactMaskOpts>(
     {
