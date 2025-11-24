@@ -27,27 +27,15 @@ export const DatePickerFieldTypeTime = React.forwardRef<
     value,
     inputRef: inputRefProp,
     timeOptions,
-    multiplicityHours,
-    multiplicitySeconds,
-    multiplicityMinutes,
     defaultValue,
     ...otherProps
   } = props;
 
-  const adaptedFormat = getAdaptedFormatByTimeOptions(
-    format,
-    timeOptions,
-    multiplicityHours,
-    multiplicityMinutes,
-    multiplicitySeconds,
-  );
+  const adaptedFormat = getAdaptedFormatByTimeOptions(format, timeOptions);
 
   const adaptedPlaceholder = getAdaptedFormatByTimeOptions(
     placeholder,
     timeOptions,
-    multiplicityHours,
-    multiplicityMinutes,
-    multiplicitySeconds,
   );
 
   const [inputRef, onClear] = usePicker({
@@ -59,9 +47,6 @@ export const DatePickerFieldTypeTime = React.forwardRef<
     minDate,
     maxDate,
     timeOptions,
-    multiplicityHours,
-    multiplicityMinutes,
-    multiplicitySeconds,
   });
 
   return (
