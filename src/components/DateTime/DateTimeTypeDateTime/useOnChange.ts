@@ -50,18 +50,21 @@ export const useOnChange = (
   const onChangeRef = useMutableRef(onChange);
   const onChangeRangeRef = useMutableRef(onChangeRange);
 
-  const getValidTimeValue = (value: Date | undefined): Date => {
-    const startOfDayDate = startOfDay(value || startOfToday());
+  const getValidTimeValue = useCallback(
+    (value: Date | undefined): Date => {
+      const startOfDayDate = startOfDay(value || startOfToday());
 
-    const validValue = getFirstValidDateTime(
-      startOfDayDate,
-      timeOptions,
-      minDate,
-      maxDate,
-      disableDates,
-    );
-    return validValue;
-  };
+      const validValue = getFirstValidDateTime(
+        startOfDayDate,
+        timeOptions,
+        minDate,
+        maxDate,
+        disableDates,
+      );
+      return validValue;
+    },
+    [timeOptions, minDate, maxDate, disableDates],
+  );
 
   const applyTimeToRange = (
     range: DateRange,
@@ -77,12 +80,15 @@ export const useOnChange = (
     return [newStart, newEnd];
   };
 
-  const onDateChange: DateTimePropOnChange = useCallback((value, { e }) => {
-    const validValue = getValidTimeValue(value);
-    onChangeRef.current?.(validValue, {
-      e,
-    });
-  }, []);
+  const onDateChange: DateTimePropOnChange = useCallback(
+    (value, { e }) => {
+      const validValue = getValidTimeValue(value);
+      onChangeRef.current?.(validValue, {
+        e,
+      });
+    },
+    [getValidTimeValue],
+  );
 
   const onDateChangeRange: DateTimePropOnChangeRange<'date-time'> = useCallback(
     (value, { e }) => {
@@ -98,7 +104,7 @@ export const useOnChange = (
       const newRange = applyTimeToRange(currentRange, validTimeValue);
       onChangeRangeRef.current?.(newRange, { e });
     },
-    [timeFor],
+    [timeFor, getValidTimeValue],
   );
 
   const onTimeChange: DateTimePropOnChange = useCallback(
