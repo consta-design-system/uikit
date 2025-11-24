@@ -31,9 +31,6 @@ export const useOnChange = (
   value: DateRange | Date | undefined,
   timeFor: 'start' | 'end',
   timeOptions?: TimeOptions,
-  multiplicityHours?: number,
-  multiplicityMinutes?: number,
-  multiplicitySeconds?: number,
   minDate?: Date,
   maxDate?: Date,
   disableDates?: DateTimePropDisableDates,
@@ -56,25 +53,9 @@ export const useOnChange = (
   const getValidTimeValue = (value: Date | undefined): Date => {
     const startOfDayDate = startOfDay(value || startOfToday());
 
-    const effectiveTimeOptions: TimeOptions = {
-      hours:
-        timeOptions?.hours ??
-        (multiplicityHours !== undefined ? { step: multiplicityHours } : {}),
-      minutes:
-        timeOptions?.minutes ??
-        (multiplicityMinutes !== undefined
-          ? { step: multiplicityMinutes }
-          : {}),
-      seconds:
-        timeOptions?.seconds ??
-        (multiplicitySeconds !== undefined
-          ? { step: multiplicitySeconds }
-          : {}),
-    };
-
     const validValue = getFirstValidDateTime(
       startOfDayDate,
-      effectiveTimeOptions,
+      timeOptions,
       minDate,
       maxDate,
       disableDates,
