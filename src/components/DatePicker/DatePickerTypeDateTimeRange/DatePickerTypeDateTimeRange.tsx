@@ -19,7 +19,6 @@ import {
   datePickerPropFormatTypeDateTime,
   getDropdownZIndex,
   getFieldName,
-  getMultiplicityTime,
   getTimeOptionsByFormat,
   normalizeRangeValue,
 } from '../helpers';
@@ -48,9 +47,6 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       dropdownClassName,
       dropdownRef,
       timeOptions: timeOptionsProp,
-      multiplicityHours: multiplicityHoursProp,
-      multiplicityMinutes: multiplicityMinutesProp,
-      multiplicitySeconds: multiplicitySecondsProp,
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
@@ -69,19 +65,6 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
 
     const startFocused = fieldFocused === 0;
     const endFocused = fieldFocused === 1;
-
-    /**
-     * @deprecated
-     * TODO: major - удалить вызов getMultiplicityTime и связанные свойства multiplicity*
-     * при переходе на новую схему работы с timeOptions, использовать только timeOptions и getTimeOptionsByFormat.
-     */
-    const [multiplicityHours, multiplicityMinutes, multiplicitySeconds] =
-      getMultiplicityTime(
-        fieldProps.format || datePickerPropFormatTypeDateTime,
-        multiplicityHoursProp,
-        multiplicityMinutesProp,
-        multiplicitySecondsProp,
-      );
 
     const timeOptions = getTimeOptionsByFormat(
       fieldProps.format || datePickerPropFormatTypeDateTime,
@@ -208,9 +191,6 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
             Array.isArray(placeholder) ? placeholder?.[1] : placeholder
           }
           timeOptions={timeOptions}
-          multiplicityHours={multiplicityHours}
-          multiplicityMinutes={multiplicityMinutes}
-          multiplicitySeconds={multiplicitySeconds}
         />
         <DatePickerDropdown
           type="date-time"
@@ -231,9 +211,6 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           onChange={handleChange}
           renderAdditionalControls={renderAdditionalControls}
           timeOptions={timeOptions}
-          multiplicityMinutes={multiplicityMinutes}
-          multiplicitySeconds={multiplicitySeconds}
-          multiplicityHours={multiplicityHours}
           zIndex={getDropdownZIndex(props.style)}
           disableDates={disableDates}
         />
