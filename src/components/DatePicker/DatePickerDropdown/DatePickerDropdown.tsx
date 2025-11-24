@@ -50,21 +50,6 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
     zIndex?: number;
     renderAdditionalControls?: DatePickerAdditionalControlRenderProp;
     timeOptions?: TimeOptions;
-    /**
-     * @deprecated Use timeOptions instead.
-     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-     */
-    multiplicitySeconds?: number;
-    /**
-     * @deprecated Use timeOptions instead.
-     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-     */
-    multiplicityMinutes?: number;
-    /**
-     * @deprecated Use timeOptions instead.
-     * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
-     */
-    multiplicityHours?: number;
     timeFor?: 'start' | 'end';
     disableDates?: DateTimePropDisableDates;
   },
