@@ -11,7 +11,6 @@ import { DatePickerFieldTypeDateTime } from '../DatePickerFieldTypeDateTime/Date
 import {
   datePickerPropFormatTypeDateTime,
   getDropdownZIndex,
-  getMultiplicityTime,
   getTimeOptionsByFormat,
 } from '../helpers';
 import { DatePickerTypeComponent } from '../types';
@@ -30,9 +29,6 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
       currentVisibleDate: currentVisibleDateProp,
       onChangeCurrentVisibleDate,
       timeOptions: timeOptionsProp,
-      multiplicityHours: multiplicityHoursProp,
-      multiplicityMinutes: multiplicityMinutesProp,
-      multiplicitySeconds: multiplicitySecondsProp,
       renderAdditionalControls,
       onDropdownOpen,
       dropdownOpen,
@@ -42,19 +38,6 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
       disableDates,
       ...otherProps
     } = props;
-
-    /**
-     * @deprecated
-     * TODO: major - удалить вызов getMultiplicityTime и связанные свойства multiplicity*
-     * при переходе на новую схему работы с timeOptions, использовать только timeOptions и getTimeOptionsByFormat.
-     */
-    const [multiplicityHours, multiplicityMinutes, multiplicitySeconds] =
-      getMultiplicityTime(
-        otherProps.format || datePickerPropFormatTypeDateTime,
-        multiplicityHoursProp,
-        multiplicityMinutesProp,
-        multiplicitySecondsProp,
-      );
 
     const timeOptions = getTimeOptionsByFormat(
       otherProps.format || datePickerPropFormatTypeDateTime,
@@ -126,9 +109,6 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
           inputRef={useForkRef([inputRef, inputRefProp])}
           onClick={setCalendarVisible.on}
           timeOptions={timeOptions}
-          multiplicityHours={multiplicityHours}
-          multiplicitySeconds={multiplicitySeconds}
-          multiplicityMinutes={multiplicityMinutes}
           disabled={disabled}
         />
         <DatePickerDropdown
@@ -149,9 +129,6 @@ export const DatePickerTypeDateTime: DatePickerTypeComponent<'date-time'> =
           renderAdditionalControls={renderAdditionalControls}
           onChangeCurrentVisibleDate={setCurrentVisibleDate}
           timeOptions={timeOptions}
-          multiplicityHours={multiplicityHours}
-          multiplicitySeconds={multiplicitySeconds}
-          multiplicityMinutes={multiplicityMinutes}
           zIndex={getDropdownZIndex(props.style)}
           disableDates={disableDates}
         />
