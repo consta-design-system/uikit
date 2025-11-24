@@ -180,7 +180,7 @@ const validateUnit = (
 
 export const getValidDate = (
   date: Date,
-  timeOptions: TimeOptions,
+  timeOptions?: TimeOptions,
   minDate?: Date,
   maxDate?: Date,
   disableDates?: DateTimePropDisableDates,
@@ -193,7 +193,7 @@ export const getValidDate = (
     minDate,
     maxDate,
     disableDates,
-    timeOptions.hours,
+    timeOptions?.hours,
   );
   if (h) newDate.setHours(parseInt(h.label, 10));
 
@@ -203,7 +203,7 @@ export const getValidDate = (
     minDate,
     maxDate,
     disableDates,
-    timeOptions.minutes,
+    timeOptions?.minutes,
   );
   if (m) newDate.setMinutes(parseInt(m.label, 10));
 
@@ -213,7 +213,7 @@ export const getValidDate = (
     minDate,
     maxDate,
     disableDates,
-    timeOptions.seconds,
+    timeOptions?.seconds,
   );
   if (s) newDate.setSeconds(parseInt(s.label, 10));
 
@@ -295,21 +295,6 @@ export const getFirstValidDateTime = (
 export const useTimeItems = (
   value?: Date,
   timeOptions?: TimeOptions,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity* оставив только работу с timeOptions.
-   */
-  multiplicityHours?: number,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity* оставив только работу с timeOptions.
-   */
-  multiplicityMinutes?: number,
-  /**
-   * @deprecated Use timeOptions instead.
-   * TODO: major - удалить при мажорном релизе все свойства multiplicity* оставив только работу с timeOptions.
-   */
-  multiplicitySeconds?: number,
   onChange?: DateTimeTimePropOnChange,
   minDate?: Date,
   maxDate?: Date,
@@ -317,23 +302,11 @@ export const useTimeItems = (
 ): Omit<ResultItem, 'date'>[][] => {
   const onChangeRef = useMutableRef(onChange);
 
-  const effectiveTimeOptions: TimeOptions = {
-    hours:
-      timeOptions?.hours ??
-      (multiplicityHours !== undefined ? { step: multiplicityHours } : {}),
-    minutes:
-      timeOptions?.minutes ??
-      (multiplicityMinutes !== undefined ? { step: multiplicityMinutes } : {}),
-    seconds:
-      timeOptions?.seconds ??
-      (multiplicitySeconds !== undefined ? { step: multiplicitySeconds } : {}),
-  };
-
   const [hoursItems, minutesItems, secondsItems] = useMemo(() => {
     const hours = buildUnitItems(
       'hours',
       value,
-      effectiveTimeOptions.hours,
+      timeOptions?.hours,
       minDate,
       maxDate,
       disableDates,
@@ -341,7 +314,7 @@ export const useTimeItems = (
     const minutes = buildUnitItems(
       'minutes',
       value,
-      effectiveTimeOptions.minutes,
+      timeOptions?.minutes,
       minDate,
       maxDate,
       disableDates,
@@ -349,7 +322,7 @@ export const useTimeItems = (
     const seconds = buildUnitItems(
       'seconds',
       value,
-      effectiveTimeOptions.seconds,
+      timeOptions?.seconds,
       minDate,
       maxDate,
       disableDates,
@@ -361,7 +334,7 @@ export const useTimeItems = (
       item.onClick = (e) => {
         const valid = getValidDate(
           item.date,
-          effectiveTimeOptions,
+          timeOptions,
           minDate,
           maxDate,
           disableDates,
@@ -379,7 +352,7 @@ export const useTimeItems = (
     value?.getTime(),
     minDate?.getTime(),
     maxDate?.getTime(),
-    effectiveTimeOptions,
+    timeOptions,
     disableDates,
   ]);
 
