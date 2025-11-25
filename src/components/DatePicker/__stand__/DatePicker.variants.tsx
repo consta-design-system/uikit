@@ -14,7 +14,7 @@ import enUSLocale from 'date-fns/locale/en-US';
 import esLocale from 'date-fns/locale/es';
 import ruLocale from 'date-fns/locale/ru';
 import zhCNLocale from 'date-fns/locale/zh-CN';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { Button } from '##/components/Button/Button';
 import {
@@ -134,6 +134,12 @@ const Variants = () => {
   };
 
   const [value, setValue] = useState<DatePickerPropValue<typeof type>>(null);
+  const safeValue = useMemo(() => {
+    if (type.includes('range')) {
+      return Array.isArray(value) ? value : null;
+    }
+    return value instanceof Date ? value : null;
+  }, [type, value]);
 
   const currentDay = new Date();
 
@@ -181,7 +187,7 @@ const Variants = () => {
         caption={caption}
         required={required}
         labelIcon={withLabelIcon ? IconQuestion : undefined}
-        value={value}
+        value={safeValue}
         status={status}
         view={view}
         disabled={disabled}
