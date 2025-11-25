@@ -229,7 +229,7 @@ export const getFirstValidDateTime = (
 ): Date => {
   const start = startOfDay(date);
 
-  const isUnitSkiped = (timeUnitOptions: TimeUnitOptions | undefined) => {
+  const isUnitSkipped = (timeUnitOptions: TimeUnitOptions | undefined) => {
     if (timeUnitOptions === undefined) {
       return false;
     }
@@ -239,8 +239,8 @@ export const getFirstValidDateTime = (
     return timeUnitOptions?.step === 0;
   };
 
-  const isHoursSkiped = isUnitSkiped(timeOptions?.hours);
-  const validHours = isHoursSkiped
+  const isHoursSkipped = isUnitSkipped(timeOptions?.hours);
+  const validHours = isHoursSkipped
     ? [0]
     : buildUnitItems(
         'hours',
@@ -253,12 +253,12 @@ export const getFirstValidDateTime = (
         .filter((h) => !h.disabled)
         .map((h) => parseInt(h.label, 10));
 
-  if (!isHoursSkiped && validHours.length === 0) return start;
+  if (!isHoursSkipped && validHours.length === 0) return start;
 
   for (const hour of validHours) {
     const hourDate = set(start, { hours: hour });
-    const isMinutesSkiped = isUnitSkiped(timeOptions?.minutes);
-    const validMinutes = isMinutesSkiped
+    const isMinutesSkipped = isUnitSkipped(timeOptions?.minutes);
+    const validMinutes = isMinutesSkipped
       ? [0]
       : buildUnitItems(
           'minutes',
@@ -270,12 +270,12 @@ export const getFirstValidDateTime = (
         )
           .filter((m) => !m.disabled)
           .map((m) => parseInt(m.label, 10));
-    if (!isMinutesSkiped && validMinutes.length === 0) continue;
+    if (!isMinutesSkipped && validMinutes.length === 0) continue;
 
     for (const minute of validMinutes) {
       const minuteDate = set(hourDate, { minutes: minute });
-      const isSecondsSkiped = isUnitSkiped(timeOptions?.seconds);
-      const validSeconds = isSecondsSkiped
+      const isSecondsSkipped = isUnitSkipped(timeOptions?.seconds);
+      const validSeconds = isSecondsSkipped
         ? [0]
         : buildUnitItems(
             'seconds',
@@ -288,7 +288,7 @@ export const getFirstValidDateTime = (
             .filter((s) => !s.disabled)
             .map((s) => parseInt(s.label, 10));
 
-      if (!isSecondsSkiped && validSeconds.length === 0) continue;
+      if (!isSecondsSkipped && validSeconds.length === 0) continue;
 
       return set(minuteDate, { seconds: validSeconds[0] });
     }
