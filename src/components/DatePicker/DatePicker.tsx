@@ -5,6 +5,7 @@ import { maxDateDefault, minDateDefault } from '##/utils/date';
 import { getByMap } from '##/utils/getByMap';
 
 import { TimeOptions } from '../DateTime';
+import { getTimeOptionsKey } from '../DateTime/helpers/getTimeOptionsKey';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 import { DatePickerTypeDate } from './DatePickerTypeDate/DatePickerTypeDate';
 import { DatePickerTypeDateRange } from './DatePickerTypeDateRange/DatePickerTypeDateRange';
@@ -74,7 +75,7 @@ export const DatePicker: DatePickerComponent = forwardRef((props, ref) => {
           : undefined),
     };
   }, [
-    timeOptions,
+    getTimeOptionsKey(timeOptions),
     multiplicityHours,
     multiplicityMinutes,
     multiplicitySeconds,
