@@ -20,6 +20,7 @@ import {
   getParts,
   getPartsDate,
   getTimeMaskBlocks,
+  isValidTimeByTymeOptions,
   useStringValue,
 } from '../helpers';
 import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
@@ -152,6 +153,29 @@ export const usePicker = (props: UsePickerProps) => {
               dd,
               MM,
               yyyy,
+              date,
+              HH,
+              mm,
+              ss,
+            });
+
+            if (value) {
+              onChange(null, { e });
+            }
+            return;
+          }
+          if (!isValidTimeByTymeOptions(date, timeOptions)) {
+            const [HH, mm, ss] = getPartsDate(
+              stringValue,
+              formatProp,
+              ':',
+              false,
+              ['HH', 'mm', 'ss'],
+            );
+
+            onErrorRef.current?.({
+              type: datePickerErrorTypes[3],
+              stringValue,
               date,
               HH,
               mm,
