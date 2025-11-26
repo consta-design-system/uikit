@@ -31,11 +31,13 @@ const additionalClass = 'additionalClass';
 const renderComponent = (props: {
   size?: StepsProps['size'];
   onChange?: OnChange;
+  ref?: React.RefObject<HTMLDivElement>;
 }) => {
   const handleChange = jest.fn();
 
   return render(
     <Steps
+      ref={props.ref}
       items={items}
       value={items[0]}
       getItemLabel={(item) => item.label}
@@ -57,6 +59,12 @@ describe('Компонент Steps', () => {
   });
 
   describe('проверка props', () => {
+    it('ref должен быть присвоен', () => {
+      const ref = React.createRef<HTMLDivElement>();
+      renderComponent({ ref });
+      expect(ref.current).toBe(getRender());
+    });
+
     describe('проверка items', () => {
       it('количество совпадает с передаваемым', () => {
         renderComponent({});

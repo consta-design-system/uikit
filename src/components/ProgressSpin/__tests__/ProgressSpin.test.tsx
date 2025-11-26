@@ -35,5 +35,10 @@ describe('Компонент ProgressSpin', () => {
 
       expect(getRender()).not.toHaveClass(cnProgressSpin({ spin: true }));
     });
+    it('ref должен быть присвоен', () => {
+      const ref = React.createRef<SVGSVGElement>();
+      renderComponent({ ref });
+      expect(ref.current).toBe(getRender());
+    });
   });
 });
