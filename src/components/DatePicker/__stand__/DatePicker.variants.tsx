@@ -20,7 +20,6 @@ import { Button } from '##/components/Button/Button';
 import {
   dateTimePropView,
   dateTimePropViewDefault,
-  TimeOptions,
 } from '##/components/DateTime/helpers';
 import {
   textFieldPropForm,
@@ -42,6 +41,7 @@ import {
   datePickerPropType,
   datePickerPropTypeDefault,
   DatePickerPropValue,
+  isTypeWithTime,
 } from '../DatePicker';
 
 const localeProp = ['ru', 'en-US', 'zh-CN', 'es'] as const;
@@ -96,35 +96,23 @@ const Variants = () => {
     datePickerPropDropdownFormDefault,
   );
 
-  const hoursStep = useNumber('hoursStep', 1);
-  const hoursStart = useNumber('hoursStart', 0);
-  const hoursStop = useNumber('hoursStop', 23);
+  const timeOptions = useBoolean(
+    'timeOptions',
+    false,
+    type ? isTypeWithTime(type) : false,
+  );
 
-  const minutesStep = useNumber('minutesStep', 1);
-  const minutesStart = useNumber('minutesStart', 0);
-  const minutesStop = useNumber('minutesStop', 59);
+  const hoursStep = useNumber('hoursStep', 1, timeOptions);
+  const hoursStart = useNumber('hoursStart', 0, timeOptions);
+  const hoursStop = useNumber('hoursStop', 23, timeOptions);
 
-  const secondsStep = useNumber('secondsStep', 1);
-  const secondsStart = useNumber('secondsStart', 0);
-  const secondsStop = useNumber('secondsStop', 59);
+  const minutesStep = useNumber('minutesStep', 1, timeOptions);
+  const minutesStart = useNumber('minutesStart', 0, timeOptions);
+  const minutesStop = useNumber('minutesStop', 59, timeOptions);
 
-  const timeOptions: TimeOptions | undefined = {
-    hours: {
-      start: hoursStart,
-      stop: hoursStop,
-      step: hoursStep,
-    },
-    minutes: {
-      start: minutesStart,
-      stop: minutesStop,
-      step: minutesStep,
-    },
-    seconds: {
-      start: secondsStart,
-      stop: secondsStop,
-      step: secondsStep,
-    },
-  };
+  const secondsStep = useNumber('secondsStep', 1, timeOptions);
+  const secondsStart = useNumber('secondsStart', 0, timeOptions);
+  const secondsStop = useNumber('secondsStop', 59, timeOptions);
 
   const additionalControls = () => {
     return [
@@ -205,7 +193,27 @@ const Variants = () => {
           withAdditionalControls ? additionalControls : undefined
         }
         withClearButton={withClearButton}
-        timeOptions={timeOptions}
+        timeOptions={
+          timeOptions
+            ? {
+                hours: {
+                  start: hoursStart,
+                  stop: hoursStop,
+                  step: hoursStep,
+                },
+                minutes: {
+                  start: minutesStart,
+                  stop: minutesStop,
+                  step: minutesStep,
+                },
+                seconds: {
+                  start: secondsStart,
+                  stop: secondsStop,
+                  step: secondsStep,
+                },
+              }
+            : undefined
+        }
       />
     </div>
   );
