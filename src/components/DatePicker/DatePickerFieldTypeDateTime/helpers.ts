@@ -5,6 +5,7 @@ import React, { useCallback } from 'react';
 import { IMask, ReactMaskOpts, useIMask } from 'react-imask';
 
 import { TimeOptions } from '##/components/DateTime/helpers';
+import { getTimeOptionsKey } from '##/components/DateTime/helpers/getTimeOptionsKey';
 import {
   TextFieldPropForm,
   TextFieldPropSize,
@@ -20,7 +21,7 @@ import {
   getParts,
   getPartsDate,
   getTimeMaskBlocks,
-  isValidTimeByTymeOptions,
+  isValidTimeByTimeOptions,
   useStringValue,
 } from '../helpers';
 import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
@@ -164,7 +165,8 @@ export const usePicker = (props: UsePickerProps) => {
             }
             return;
           }
-          if (!isValidTimeByTymeOptions(date, timeOptions)) {
+
+          if (!isValidTimeByTimeOptions(date, timeOptions)) {
             const [HH, mm, ss] = getPartsDate(
               stringValue,
               formatProp,
@@ -193,7 +195,13 @@ export const usePicker = (props: UsePickerProps) => {
         }
       }
     },
-    [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
+    [
+      minDate?.getTime(),
+      maxDate?.getTime(),
+      formatProp,
+      separator,
+      getTimeOptionsKey(timeOptions),
+    ],
   );
 
   const timeMaskBlocks = getTimeMaskBlocks(timeOptions);
