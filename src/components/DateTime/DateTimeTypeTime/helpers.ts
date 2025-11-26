@@ -25,6 +25,7 @@ import {
   TimeOptions,
   TimeUnitOptions,
 } from '../helpers';
+import { getTimeOptionsKey } from '../helpers/getTimeOptionsKey';
 
 export const dateTimeTimePropLocaleDefault = {
   hours: 'Час',
@@ -356,7 +357,7 @@ export const useTimeItems = (
     value?.getTime(),
     minDate?.getTime(),
     maxDate?.getTime(),
-    timeOptions,
+    getTimeOptionsKey(timeOptions),
     disableDates,
   ]);
 
