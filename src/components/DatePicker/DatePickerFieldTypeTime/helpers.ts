@@ -207,11 +207,9 @@ export const usePicker = (props: UsePickerProps) => {
       },
       lazy: true,
       autofix: true,
-      // overwrite: true,
       format: (date: Date) => format(date, formatProp),
       parse: (string: string) => parse(string, formatProp, new Date()),
       validate: (string: string) => {
-        console.log(string);
         const formatArray = getParts(formatProp, separator, false);
         const valueArray = getParts(string, separator, false);
         const validArray = formatArray
