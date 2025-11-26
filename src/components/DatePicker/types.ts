@@ -41,6 +41,7 @@ export const datePickerErrorTypes = [
   'outOfRange',
   'invalidInputAttempt',
   'startDateIsGreaterThanEndDate',
+  'invalidTimeByTimeOptions',
 ] as const;
 
 export type DatePickerPropValue<TYPE extends DatePickerPropType> =
@@ -203,5 +204,13 @@ export type DatePickerPropOnError = (
     | {
         type: typeof datePickerErrorTypes[2];
         date: [Date, Date];
+      }
+    | {
+        type: typeof datePickerErrorTypes[3];
+        stringValue: string;
+        date: Date;
+        HH?: string;
+        mm?: string;
+        ss?: string;
       },
 ) => void;
