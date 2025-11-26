@@ -13,6 +13,7 @@ import {
   dateTimePropTypeDefault,
   dateTimePropView,
   dateTimePropViewDefault,
+  isTypeWithTime,
 } from '../helpers';
 
 const localeProp = ['ru', 'en-US', 'zh-CN', 'es'] as const;
@@ -47,7 +48,7 @@ const Variants = () => {
   const timeOptions = useBoolean(
     'timeOptions',
     false,
-    type === 'time' || type === 'date-time',
+    type ? isTypeWithTime(type) : false,
   );
 
   const hoursStep = useNumber('hoursStep', 1, timeOptions);
