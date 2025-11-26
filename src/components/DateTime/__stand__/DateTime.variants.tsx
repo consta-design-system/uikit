@@ -13,7 +13,6 @@ import {
   dateTimePropTypeDefault,
   dateTimePropView,
   dateTimePropViewDefault,
-  TimeOptions,
 } from '../helpers';
 
 const localeProp = ['ru', 'en-US', 'zh-CN', 'es'] as const;
@@ -45,6 +44,24 @@ const Variants = () => {
   const locale =
     useSelect('locale', localeProp, localeDefault) || localeDefault;
 
+  const timeOptions = useBoolean(
+    'timeOptions',
+    false,
+    type === 'time' || type === 'date-time',
+  );
+
+  const hoursStep = useNumber('hoursStep', 1, timeOptions);
+  const hoursStart = useNumber('hoursStart', 0, timeOptions);
+  const hoursStop = useNumber('hoursStop', 23, timeOptions);
+
+  const minutesStep = useNumber('minutesStep', 1, timeOptions);
+  const minutesStart = useNumber('minutesStart', 0, timeOptions);
+  const minutesStop = useNumber('minutesStop', 59, timeOptions);
+
+  const secondsStep = useNumber('secondsStep', 1, timeOptions);
+  const secondsStart = useNumber('secondsStart', 0, timeOptions);
+  const secondsStop = useNumber('secondsStop', 59, timeOptions);
+
   const currentDay = new Date();
 
   const [value, setValue] = useState<Date | undefined>(undefined);
@@ -57,36 +74,6 @@ const Variants = () => {
       ]
     : undefined;
 
-  const hoursStep = useNumber('hoursStep', 1);
-  const hoursStart = useNumber('hoursStart', 0);
-  const hoursStop = useNumber('hoursStop', 23);
-
-  const minutesStep = useNumber('minutesStep', 1);
-  const minutesStart = useNumber('minutesStart', 0);
-  const minutesStop = useNumber('minutesStop', 59);
-
-  const secondsStep = useNumber('secondsStep', 1);
-  const secondsStart = useNumber('secondsStart', 0);
-  const secondsStop = useNumber('secondsStop', 59);
-
-  const timeOptions: TimeOptions | undefined = {
-    hours: {
-      start: hoursStart,
-      stop: hoursStop,
-      step: hoursStep,
-    },
-    minutes: {
-      start: minutesStart,
-      stop: minutesStop,
-      step: minutesStep,
-    },
-    seconds: {
-      start: secondsStart,
-      stop: secondsStop,
-      step: secondsStep,
-    },
-  };
-
   return (
     <DateTime
       type={type}
@@ -97,7 +84,27 @@ const Variants = () => {
       maxDate={maxDate}
       events={events}
       locale={getByMap(localeMap, locale)}
-      timeOptions={timeOptions}
+      timeOptions={
+        timeOptions
+          ? {
+              hours: {
+                start: hoursStart,
+                stop: hoursStop,
+                step: hoursStep,
+              },
+              minutes: {
+                start: minutesStart,
+                stop: minutesStop,
+                step: minutesStep,
+              },
+              seconds: {
+                start: secondsStart,
+                stop: secondsStop,
+                step: secondsStep,
+              },
+            }
+          : undefined
+      }
     />
   );
 };
