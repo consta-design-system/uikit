@@ -325,7 +325,7 @@ export const useStringValue = (
   return handleClear;
 };
 
-export const isValidTimeByTymeOptions = (
+export const isValidTimeByTimeOptions = (
   date: Date,
   timeOptions?: TimeOptions,
 ): boolean => {
