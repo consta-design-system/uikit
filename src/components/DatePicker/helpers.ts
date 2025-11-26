@@ -324,3 +324,36 @@ export const useStringValue = (
 
   return handleClear;
 };
+
+export const isValidTimeByTymeOptions = (
+  date: Date,
+  timeOptions?: TimeOptions,
+): boolean => {
+  const isUnitValid = (
+    unit: 'hours' | 'minutes' | 'seconds',
+    value: number,
+    options?: TimeUnitOptions,
+  ): boolean => {
+    if (!options) return true;
+
+    const allowed = getTimeNumbers(unit, options);
+    if (allowed.length === 0) return true;
+
+    return allowed.includes(value);
+  };
+
+  if (!timeOptions) return true;
+  const isHoursValid = isUnitValid('hours', date.getHours(), timeOptions.hours);
+  const isMinutesValid = isUnitValid(
+    'minutes',
+    date.getMinutes(),
+    timeOptions.minutes,
+  );
+  const isSecondsValid = isUnitValid(
+    'seconds',
+    date.getSeconds(),
+    timeOptions.seconds,
+  );
+
+  return isHoursValid && isMinutesValid && isSecondsValid;
+};
