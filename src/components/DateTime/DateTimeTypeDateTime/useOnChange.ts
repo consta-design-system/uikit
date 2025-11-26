@@ -17,6 +17,8 @@ import {
   DateTimePropOnChangeRange,
   TimeOptions,
 } from '../helpers';
+import { getDisableDatesKey } from '../helpers/getDisableDatesKey';
+import { getTimeOptionsKey } from '../helpers/getTimeOptionsKey';
 
 const getTime = (date?: Date) => {
   if (!date) {
@@ -63,7 +65,12 @@ export const useOnChange = (
       );
       return validValue;
     },
-    [timeOptions, minDate, maxDate, disableDates],
+    [
+      getTimeOptionsKey(timeOptions),
+      minDate?.getTime(),
+      maxDate?.getTime(),
+      getDisableDatesKey(disableDates),
+    ],
   );
 
   const applyTimeToRange = (
@@ -116,7 +123,7 @@ export const useOnChange = (
 
   useEffect(() => {
     previousRangeRef.current = isRange ? normalizeValue : undefined;
-  }, [isRange, normalizeValue]);
+  }, [isRange, normalizeValue?.getTime()]);
 
   return [onDateChange, onDateChangeRange, onTimeChange, normalizeValue];
 };
