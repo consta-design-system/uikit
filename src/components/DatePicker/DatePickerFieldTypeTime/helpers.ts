@@ -19,6 +19,7 @@ import {
   getParts,
   getPartsDate,
   getTimeMaskBlocks,
+  isValidTimeByTymeOptions,
   useStringValue,
 } from '../helpers';
 import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
@@ -159,6 +160,31 @@ export const usePicker = (props: UsePickerProps) => {
             }
             return;
           }
+
+          if (!isValidTimeByTymeOptions(date, timeOptions)) {
+            const [HH, mm, ss] = getPartsDate(
+              stringValue,
+              formatProp,
+              ':',
+              false,
+              ['HH', 'mm', 'ss'],
+            );
+
+            onErrorRef.current?.({
+              type: datePickerErrorTypes[3],
+              stringValue,
+              date,
+              HH,
+              mm,
+              ss,
+            });
+
+            if (value) {
+              onChange(null, { e });
+            }
+            return;
+          }
+
           onChange(date, { e });
         } else if (value) {
           onChange(null, { e });
@@ -181,9 +207,11 @@ export const usePicker = (props: UsePickerProps) => {
       },
       lazy: true,
       autofix: true,
+      // overwrite: true,
       format: (date: Date) => format(date, formatProp),
       parse: (string: string) => parse(string, formatProp, new Date()),
       validate: (string: string) => {
+        console.log(string);
         const formatArray = getParts(formatProp, separator, false);
         const valueArray = getParts(string, separator, false);
         const validArray = formatArray
