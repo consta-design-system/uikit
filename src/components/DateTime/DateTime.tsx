@@ -10,6 +10,7 @@ import { DateTimeTypeMonth } from './DateTimeTypeMonth/DateTimeTypeMonth';
 import { DateTimeTypeTime } from './DateTimeTypeTime/DateTimeTypeTime';
 import { DateTimeTypeYear } from './DateTimeTypeYear/DateTimeTypeYear';
 import { isTypeWithTime } from './helpers';
+import { getTimeOptionsKey } from './helpers/getTimeOptionsKey';
 import {
   DateTimeComponent,
   DateTimePropType,
@@ -62,7 +63,7 @@ export const DateTime: DateTimeComponent = forwardRef((props, ref) => {
           : undefined),
     };
   }, [
-    timeOptions,
+    getTimeOptionsKey(timeOptions),
     multiplicityHours,
     multiplicityMinutes,
     multiplicitySeconds,
