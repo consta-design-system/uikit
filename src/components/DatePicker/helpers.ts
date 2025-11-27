@@ -138,6 +138,27 @@ export const getAdaptedFormatByTimeOptions = (
   return adaptedFormat;
 };
 
+export const duplicateSingleDecadeValues = (values: number[]) => {
+  const groups = new Map<number, number[]>();
+  values.forEach((value) => {
+    const key = Math.floor(value / 10);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key)!.push(value);
+  });
+
+  const result: number[] = [];
+
+  for (const groupValues of groups.values()) {
+    if (groupValues.length === 1) {
+      result.push(groupValues[0], groupValues[0]);
+    } else {
+      result.push(...groupValues);
+    }
+  }
+
+  return result;
+};
+
 export const getTimeMaskBlocks = (timeOptions?: TimeOptions) => {
   const getBlockConfig = (
     timeType: 'hours' | 'minutes' | 'seconds',
@@ -156,7 +177,11 @@ export const getTimeMaskBlocks = (timeOptions?: TimeOptions) => {
     }
 
     const startDate = startOfToday();
-    const enumValues = numbers.map((n) => getItemLabel(addUnits(startDate, n)));
+    // Prevents IMask.MaskedEnum autocomplete when there's only one value in a decade
+    // by duplicating single values to avoid autofill behavior
+    const enumValues = duplicateSingleDecadeValues(numbers).map((n) =>
+      getItemLabel(addUnits(startDate, n)),
+    );
     return {
       mask: IMask.MaskedEnum,
       enum: enumValues,
