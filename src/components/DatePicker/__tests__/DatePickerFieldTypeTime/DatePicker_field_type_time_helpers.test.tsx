@@ -106,9 +106,9 @@ describe('Helpers для DatePicker_field_type_time', () => {
       {
         label: 'hours, minutes, seconds массивы с данными',
         timeOptions: {
-          hours: [0, 6, 12],
-          minutes: [0, 30],
-          seconds: [0, 15, 30, 45],
+          hours: [0, 6, 12, 15],
+          minutes: [0, 5, 30, 35],
+          seconds: [15, 19, 30, 35, 45, 49],
         },
         expectedMasks: {
           HH: 'MaskedEnum',
@@ -116,21 +116,21 @@ describe('Helpers для DatePicker_field_type_time', () => {
           ss: 'MaskedEnum',
         },
         expectedLengths: {
-          HH: 3,
-          mm: 2,
-          ss: 4,
+          HH: 4,
+          mm: 4,
+          ss: 6,
         },
         expectedFirstLast: {
-          HH: ['00', '12'],
-          mm: ['00', '30'],
-          ss: ['00', '45'],
+          HH: ['00', '15'],
+          mm: ['00', '35'],
+          ss: ['15', '49'],
         },
       },
       {
-        label: 'hours и minutes объекты {start, stop, step}, seconds массив',
+        label: 'hours и minutes объекты {start, stop, step}',
         timeOptions: {
           hours: { start: 0, stop: 12, step: 2 },
-          minutes: { stop: 30, step: 5 },
+          minutes: { stop: 25, step: 5 },
           seconds: { start: 30, step: 1 },
         },
         expectedMasks: {
@@ -140,12 +140,12 @@ describe('Helpers для DatePicker_field_type_time', () => {
         },
         expectedLengths: {
           HH: 7, // 0,2,4,6,8,10,12
-          mm: 7, // 0,5,10,15,20,25,30
+          mm: 6, // 0,5,10,15,20,25
           ss: 30, // 30 to 59 step 1
         },
         expectedFirstLast: {
           HH: ['00', '12'],
-          mm: ['00', '30'],
+          mm: ['00', '25'],
           ss: ['30', '59'],
         },
       },
@@ -167,7 +167,7 @@ describe('Helpers для DatePicker_field_type_time', () => {
       {
         label: 'minutes и seconds не переданы',
         timeOptions: {
-          hours: [0, 6, 12],
+          hours: [0, 6, 12, 15],
         },
         expectedMasks: {
           HH: 'MaskedEnum',
@@ -175,10 +175,10 @@ describe('Helpers для DatePicker_field_type_time', () => {
           ss: 'MaskedRange',
         },
         expectedLengths: {
-          HH: 3,
+          HH: 4,
         },
         expectedFirstLast: {
-          HH: ['00', '12'],
+          HH: ['00', '15'],
         },
       },
       {
@@ -191,6 +191,30 @@ describe('Helpers для DatePicker_field_type_time', () => {
         },
         expectedLengths: undefined,
         expectedFirstLast: undefined,
+      },
+      {
+        label:
+          'hours, minutes, seconds массивы (проверка дублирования одиночных значений в десятке)',
+        timeOptions: {
+          hours: [0, 6, 12],
+          minutes: [0, 5, 30],
+          seconds: [15, 30, 45],
+        },
+        expectedMasks: {
+          HH: 'MaskedEnum',
+          mm: 'MaskedEnum',
+          ss: 'MaskedEnum',
+        },
+        expectedLengths: {
+          HH: 4,
+          mm: 4,
+          ss: 6,
+        },
+        expectedFirstLast: {
+          HH: ['00', '12'],
+          mm: ['00', '30'],
+          ss: ['15', '45'],
+        },
       },
     ];
 
