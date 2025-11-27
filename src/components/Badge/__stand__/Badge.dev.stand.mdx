@@ -44,24 +44,24 @@ import { Badge } from '@consta/uikit/Badge';
 
 ```tsx
 type BadgePropStatus = 'success' | 'alert' | 'warning' | 'normal' | 'system';
-type BadgePropView = 'filled' | 'stroked';
-type BadgePropSize = 's' | 'm' | 'l';
+type BadgePropView = 'filled' | 'stroked' | 'tinted';
+type BadgePropSize = 'xs' | 's' | 'm' | 'l';
 type BadgePropForm = 'default' | 'round';
 ```
 
-| Свойство                           | Тип                                                         | По умолчанию | Описание                                   |
-| ---------------------------------- | ----------------------------------------------------------- | ------------ | ------------------------------------------ |
-| [`label?`](#бейджик-с-текстом)     | `string`                                                    | -            | Текст на бейджике                          |
-| [`minified?`](#бейджик-без-текста) | `boolean`                                                   | -            | Отображает бейджик без текста в виде точки |
-| [`iconLeft?`](#бейджик-с-иконкой)  | `IconComponent`                                             | -            | Иконка слева от текста                     |
-| [`iconRight?`](#бейджик-с-иконкой) | `IconComponent`                                             | -            | Иконка справа от текста                    |
-| [`size?`](#размер)                 | `'s' \| 'm' \| 'l'`                                         | `'m'`        | Размер бейджика                            |
-| [`view?`](#типы-бейджиков)         | `'filled' \| 'stroked'`                                     | `'filled'`   | Тип бейджика (заполненный или с обводкой)  |
-| [`status?`](#статус)               | `'success' \| 'alert' \| 'warning' \| 'normal' \| 'system'` | `'normal'`   | Статус бейджика                            |
-| [`form?`](#форма)                  | `'default' \| 'round'`                                      | `'default'`  | Форма бейджика                             |
-| `as?`                              | `keyof JSX.IntrinsicElements`                               | `'div'`      | HTML-тег для рендера компонента            |
-| `className?`                       | `string`                                                    | -            | Дополнительный CSS-класс                   |
-| `ref?`                             | `React.Ref<HTMLElement>`                                    | -            | Ссылка на корневой DOM-элемент             |
+| Свойство                           | Тип                                                         | По умолчанию | Описание                                                  |
+| ---------------------------------- | ----------------------------------------------------------- | ------------ | --------------------------------------------------------- |
+| [`label?`](#бейджик-с-текстом)     | `string`                                                    | -            | Текст на бейджике                                         |
+| [`minified?`](#бейджик-без-текста) | `boolean`                                                   | -            | Отображает бейджик без текста в виде точки                |
+| [`iconLeft?`](#бейджик-с-иконкой)  | `IconComponent`                                             | -            | Иконка слева от текста                                    |
+| [`iconRight?`](#бейджик-с-иконкой) | `IconComponent`                                             | -            | Иконка справа от текста                                   |
+| [`size?`](#размер)                 | `'xs' \| 's' \| 'm' \| 'l'`                                 | `'m'`        | Размер бейджика                                           |
+| [`view?`](#типы-бейджиков)         | `'filled' \| 'stroked' \| 'tinted'`                         | `'filled'`   | Тип бейджика (заполненный, с обводкой или полупрозрачный) |
+| [`status?`](#статус)               | `'success' \| 'alert' \| 'warning' \| 'normal' \| 'system'` | `'normal'`   | Статус бейджика                                           |
+| [`form?`](#форма)                  | `'default' \| 'round'`                                      | `'default'`  | Форма бейджика                                            |
+| `as?`                              | `keyof JSX.IntrinsicElements`                               | `'div'`      | HTML-тег для рендера компонента                           |
+| `className?`                       | `string`                                                    | -            | Дополнительный CSS-класс                                  |
+| `ref?`                             | `React.Ref<HTMLElement>`                                    | -            | Ссылка на корневой DOM-элемент                            |
 
 ## Содержимое
 
@@ -151,7 +151,7 @@ const BadgeExampleIcon = () => {
 
 ### Размер
 
-Свойство `size` задаёт размер бейджика. Возможные значения: `s`, `m` (по умолчанию), `l`.
+Свойство `size` задаёт размер бейджика. Возможные значения: `xs`, `s`, `m` (по умолчанию), `l`.
 
 <MdxTabs>
 
@@ -180,6 +180,7 @@ const BadgeExampleSize = () => {
 
 - `filled` — заполненный фон, для акцента на статусе.
 - `stroked` — с обводкой, менее заметный.
+- `tinted` — полупрозрачный фон.
 
 <MdxTabs>
 
@@ -194,6 +195,7 @@ const BadgeExampleView = () => {
     <>
       <Badge view="filled" label="Filled badge" />
       <Badge view="stroked" label="Stroked badge" />
+      <Badge view="tinted" label="Tinted badge" />
     </>
   );
 };
