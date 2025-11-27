@@ -1,7 +1,7 @@
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
 import { format, isValid, isWithinInterval, parse } from 'date-fns';
 import { MaskedDate } from 'imask';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { ReactMaskOpts, useIMask } from 'react-imask';
 
 import { TimeOptions } from '##/components/DateTime/helpers';
@@ -201,7 +201,10 @@ export const usePicker = (props: UsePickerProps) => {
     ],
   );
 
-  const timeMaskBlocks = getTimeMaskBlocks(timeOptions);
+  const timeMaskBlocks = useMemo(
+    () => getTimeMaskBlocks(timeOptions),
+    [getTimeOptionsKey(timeOptions)],
+  );
 
   const imaskProps = useIMask<HTMLInputElement, ReactMaskOpts>(
     {
