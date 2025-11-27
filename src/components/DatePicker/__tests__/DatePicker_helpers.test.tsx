@@ -10,6 +10,7 @@ import {
 
 import {
   datePickerPropFormatTypeDateTime,
+  duplicateSingleDecadeValues,
   getAdaptedFormatByTimeOptions,
   getTimeMaskBlocks,
   getTimeOptionsByFormat,
@@ -106,6 +107,42 @@ describe('DateTime helpers (time)', () => {
     });
   });
 
+  describe('duplicateSingleDecadeValues — дублирование одиночных значений в десятках', () => {
+    it('возвращает пустой массив, если на вход подан пустой массив', () => {
+      expect(duplicateSingleDecadeValues([])).toEqual([]);
+    });
+
+    it('дублирует значение, если оно единственное в своём десятке', () => {
+      expect(duplicateSingleDecadeValues([7])).toEqual([7, 7]);
+    });
+
+    it('не дублирует значения, если в десятке больше одного значения', () => {
+      expect(duplicateSingleDecadeValues([10, 11, 12])).toEqual([10, 11, 12]);
+    });
+
+    it('дублирует только те десятки, в которых ровно одно значение', () => {
+      expect(duplicateSingleDecadeValues([3, 15, 20, 29])).toEqual([
+        3, 3, 15, 15, 20, 29,
+      ]);
+    });
+
+    it('сохраняет порядок значений внутри десятка', () => {
+      expect(duplicateSingleDecadeValues([21, 23, 15, 10])).toEqual([
+        21, 23, 15, 10,
+      ]);
+    });
+
+    it('корректно работает на границах десятков (9 → 10)', () => {
+      expect(duplicateSingleDecadeValues([9, 10])).toEqual([9, 9, 10, 10]);
+    });
+
+    it('не меняет порядок самих десятков — только дублирует значения', () => {
+      expect(duplicateSingleDecadeValues([20, 3, 40])).toEqual([
+        20, 20, 3, 3, 40, 40,
+      ]);
+    });
+  });
+
   describe('getTimeMaskBlocks', () => {
     function expectMaskedRange(block: any, from: number, to: number) {
       expect(block.mask).toBe(IMask.MaskedRange);
@@ -144,7 +181,7 @@ describe('DateTime helpers (time)', () => {
     it('корректно работает с массивом кастомных значений', () => {
       const timeOptions = { minutes: [0, 15, 30, 45] };
       const result = getTimeMaskBlocks(timeOptions);
-      const expectedEnum = [0, 15, 30, 45].map((m) =>
+      const expectedEnum = [0, 0, 15, 15, 30, 30, 45, 45].map((m) =>
         getLabelMinutes(addMinutes(startOfToday(), m)),
       );
       expectMaskedEnum(result.mm, expectedEnum);
@@ -153,7 +190,7 @@ describe('DateTime helpers (time)', () => {
     it('корректно обрабатывает stop = 0', () => {
       const timeOptions = { seconds: { start: 0, stop: 0, step: 1 } };
       const result = getTimeMaskBlocks(timeOptions);
-      const expectedEnum = [0].map((s) =>
+      const expectedEnum = [0, 0].map((s) =>
         getLabelSeconds(addSeconds(startOfToday(), s)),
       );
       expectMaskedEnum(result.ss, expectedEnum);
