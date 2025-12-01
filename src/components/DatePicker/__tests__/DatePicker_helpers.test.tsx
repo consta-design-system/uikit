@@ -1,18 +1,11 @@
-import { addHours, addMinutes, addSeconds, startOfToday } from 'date-fns';
 import { IMask } from 'react-imask';
 
 import { TimeOptions } from '##/components/DateTime';
-import {
-  getLabelHours,
-  getLabelMinutes,
-  getLabelSeconds,
-} from '##/components/DateTime/helpers';
 
 import {
   datePickerPropFormatTypeDateTime,
-  duplicateSingleDecadeValues,
   getAdaptedFormatByTimeOptions,
-  getTimeMaskBlocks,
+  getMaskBlocks,
   getTimeOptionsByFormat,
 } from '../helpers';
 
@@ -107,93 +100,133 @@ describe('DateTime helpers (time)', () => {
     });
   });
 
-  describe('duplicateSingleDecadeValues — дублирование одиночных значений в десятках', () => {
-    it('возвращает пустой массив, если на вход подан пустой массив', () => {
-      expect(duplicateSingleDecadeValues([])).toEqual([]);
-    });
-
-    it('дублирует значение, если оно единственное в своём десятке', () => {
-      expect(duplicateSingleDecadeValues([7])).toEqual([7, 7]);
-    });
-
-    it('не дублирует значения, если в десятке больше одного значения', () => {
-      expect(duplicateSingleDecadeValues([10, 11, 12])).toEqual([10, 11, 12]);
-    });
-
-    it('дублирует только те десятки, в которых ровно одно значение', () => {
-      expect(duplicateSingleDecadeValues([3, 15, 20, 29])).toEqual([
-        3, 3, 15, 15, 20, 29,
-      ]);
-    });
-
-    it('сохраняет порядок значений внутри десятка', () => {
-      expect(duplicateSingleDecadeValues([21, 23, 15, 10])).toEqual([
-        21, 23, 15, 10,
-      ]);
-    });
-
-    it('корректно работает на границах десятков (9 → 10)', () => {
-      expect(duplicateSingleDecadeValues([9, 10])).toEqual([9, 9, 10, 10]);
-    });
-
-    it('не меняет порядок самих десятков — только дублирует значения', () => {
-      expect(duplicateSingleDecadeValues([20, 3, 40])).toEqual([
-        20, 20, 3, 3, 40, 40,
-      ]);
-    });
-  });
-
-  describe('getTimeMaskBlocks', () => {
-    function expectMaskedRange(block: any, from: number, to: number) {
+  describe('getMaskBlocks', () => {
+    const expectMaskedRange = (block: any, from: number, to: number) => {
       expect(block.mask).toBe(IMask.MaskedRange);
       expect(block.from).toBe(from);
       expect(block.to).toBe(to);
-    }
+    };
 
-    function expectMaskedEnum(block: any, expectedEnum: string[]) {
-      expect(block.mask).toBe(IMask.MaskedEnum);
-      expect(block.enum).toEqual(expectedEnum);
-    }
+    describe('возвращает блоки для даты и времени по умолчанию', () => {
+      it('включает и дату, и время при вызове без параметров', () => {
+        const result = getMaskBlocks();
 
-    it('возвращает полный диапазон, если timeOptions не переданы', () => {
-      const result = getTimeMaskBlocks();
-      expectMaskedRange(result.HH, 0, 23);
-      expectMaskedRange(result.mm, 0, 59);
-      expectMaskedRange(result.ss, 0, 59);
+        expect(result.dd).toBeDefined();
+        expectMaskedRange(result.dd, 1, 31);
+
+        expect(result.MM).toBeDefined();
+        expectMaskedRange(result.MM, 1, 12);
+
+        expect(result.yyyy).toBeDefined();
+        expectMaskedRange(result.yyyy, 1, 9999);
+
+        expect(result.HH).toBeDefined();
+        expectMaskedRange(result.HH, 0, 23);
+
+        expect(result.mm).toBeDefined();
+        expectMaskedRange(result.mm, 0, 59);
+
+        expect(result.ss).toBeDefined();
+        expectMaskedRange(result.ss, 0, 59);
+      });
+
+      it('включает и дату, и время при явном указании', () => {
+        const result = getMaskBlocks({ includeDate: true, includeTime: true });
+
+        expect(result.dd).toBeDefined();
+        expect(result.MM).toBeDefined();
+        expect(result.yyyy).toBeDefined();
+        expect(result.HH).toBeDefined();
+        expect(result.mm).toBeDefined();
+        expect(result.ss).toBeDefined();
+      });
     });
 
-    it('корректно обрабатывает пустой массив', () => {
-      const result = getTimeMaskBlocks({ hours: [], minutes: [], seconds: [] });
-      expectMaskedRange(result.HH, 0, 23);
-      expectMaskedRange(result.mm, 0, 59);
-      expectMaskedRange(result.ss, 0, 59);
+    describe('возвращает только блоки для даты', () => {
+      it('при includeDate: true и includeTime: false', () => {
+        const result = getMaskBlocks({ includeDate: true, includeTime: false });
+
+        expect(result.dd).toBeDefined();
+        expectMaskedRange(result.dd, 1, 31);
+
+        expect(result.MM).toBeDefined();
+        expectMaskedRange(result.MM, 1, 12);
+
+        expect(result.yyyy).toBeDefined();
+        expectMaskedRange(result.yyyy, 1, 9999);
+
+        expect(result.HH).toBeUndefined();
+        expect(result.mm).toBeUndefined();
+        expect(result.ss).toBeUndefined();
+      });
     });
 
-    it('корректно обрабатывает объект { start, stop, step }', () => {
-      const timeOptions = { hours: { start: 0, stop: 6, step: 2 } };
-      const result = getTimeMaskBlocks(timeOptions);
-      const expectedEnum = [0, 2, 4, 6].map((h) =>
-        getLabelHours(addHours(startOfToday(), h)),
-      );
-      expectMaskedEnum(result.HH, expectedEnum);
+    describe('возвращает только блоки для времени', () => {
+      it('при includeDate: false и includeTime: true', () => {
+        const result = getMaskBlocks({ includeDate: false, includeTime: true });
+
+        expect(result.dd).toBeUndefined();
+        expect(result.MM).toBeUndefined();
+        expect(result.yyyy).toBeUndefined();
+
+        expect(result.HH).toBeDefined();
+        expectMaskedRange(result.HH, 0, 23);
+
+        expect(result.mm).toBeDefined();
+        expectMaskedRange(result.mm, 0, 59);
+
+        expect(result.ss).toBeDefined();
+        expectMaskedRange(result.ss, 0, 59);
+      });
     });
 
-    it('корректно работает с массивом кастомных значений', () => {
-      const timeOptions = { minutes: [0, 15, 30, 45] };
-      const result = getTimeMaskBlocks(timeOptions);
-      const expectedEnum = [0, 0, 15, 15, 30, 30, 45, 45].map((m) =>
-        getLabelMinutes(addMinutes(startOfToday(), m)),
-      );
-      expectMaskedEnum(result.mm, expectedEnum);
+    describe('возвращает пустой объект', () => {
+      it('при includeDate: false и includeTime: false', () => {
+        const result = getMaskBlocks({
+          includeDate: false,
+          includeTime: false,
+        });
+
+        expect(result).toEqual({});
+        expect(result.dd).toBeUndefined();
+        expect(result.MM).toBeUndefined();
+        expect(result.yyyy).toBeUndefined();
+        expect(result.HH).toBeUndefined();
+        expect(result.mm).toBeUndefined();
+        expect(result.ss).toBeUndefined();
+      });
     });
 
-    it('корректно обрабатывает stop = 0', () => {
-      const timeOptions = { seconds: { start: 0, stop: 0, step: 1 } };
-      const result = getTimeMaskBlocks(timeOptions);
-      const expectedEnum = [0, 0].map((s) =>
-        getLabelSeconds(addSeconds(startOfToday(), s)),
-      );
-      expectMaskedEnum(result.ss, expectedEnum);
+    describe('корректные диапазоны значений', () => {
+      it('дни от 1 до 31', () => {
+        const result = getMaskBlocks();
+        expectMaskedRange(result.dd, 1, 31);
+      });
+
+      it('месяцы от 1 до 12', () => {
+        const result = getMaskBlocks();
+        expectMaskedRange(result.MM, 1, 12);
+      });
+
+      it('годы от 1 до 9999', () => {
+        const result = getMaskBlocks();
+        expectMaskedRange(result.yyyy, 1, 9999);
+      });
+
+      it('часы от 0 до 23', () => {
+        const result = getMaskBlocks();
+        expectMaskedRange(result.HH, 0, 23);
+      });
+
+      it('минуты от 0 до 59', () => {
+        const result = getMaskBlocks();
+        expectMaskedRange(result.mm, 0, 59);
+      });
+
+      it('секунды от 0 до 59', () => {
+        const result = getMaskBlocks();
+        expectMaskedRange(result.ss, 0, 59);
+      });
     });
   });
 
