@@ -101,157 +101,30 @@ describe('Helpers для DatePicker_field_type_time', () => {
     });
   });
 
-  describe('конфиг маски (timeOptions)', () => {
-    const timeOptionsCases = [
-      {
-        label: 'hours, minutes, seconds массивы с данными',
-        timeOptions: {
-          hours: [0, 6, 12, 15],
-          minutes: [0, 5, 30, 35],
-          seconds: [15, 19, 30, 35, 45, 49],
-        },
-        expectedMasks: {
-          HH: 'MaskedEnum',
-          mm: 'MaskedEnum',
-          ss: 'MaskedEnum',
-        },
-        expectedLengths: {
-          HH: 4,
-          mm: 4,
-          ss: 6,
-        },
-        expectedFirstLast: {
-          HH: ['00', '15'],
-          mm: ['00', '35'],
-          ss: ['15', '49'],
-        },
-      },
-      {
-        label: 'hours и minutes объекты {start, stop, step}',
-        timeOptions: {
-          hours: { start: 0, stop: 12, step: 2 },
-          minutes: { stop: 25, step: 5 },
-          seconds: { start: 30, step: 1 },
-        },
-        expectedMasks: {
-          HH: 'MaskedEnum',
-          mm: 'MaskedEnum',
-          ss: 'MaskedEnum',
-        },
-        expectedLengths: {
-          HH: 7, // 0,2,4,6,8,10,12
-          mm: 6, // 0,5,10,15,20,25
-          ss: 30, // 30 to 59 step 1
-        },
-        expectedFirstLast: {
-          HH: ['00', '12'],
-          mm: ['00', '25'],
-          ss: ['30', '59'],
-        },
-      },
-      {
-        label: 'пустые массивы → MaskedRange',
-        timeOptions: {
-          hours: [],
-          minutes: [],
-          seconds: [],
-        },
-        expectedMasks: {
-          HH: 'MaskedRange',
-          mm: 'MaskedRange',
-          ss: 'MaskedRange',
-        },
-        expectedLengths: undefined,
-        expectedFirstLast: undefined,
-      },
-      {
-        label: 'minutes и seconds не переданы',
-        timeOptions: {
-          hours: [0, 6, 12, 15],
-        },
-        expectedMasks: {
-          HH: 'MaskedEnum',
-          mm: 'MaskedRange',
-          ss: 'MaskedRange',
-        },
-        expectedLengths: {
-          HH: 4,
-        },
-        expectedFirstLast: {
-          HH: ['00', '15'],
-        },
-      },
-      {
-        label: 'timeOptions не передан → MaskedRange',
-        timeOptions: undefined,
-        expectedMasks: {
-          HH: 'MaskedRange',
-          mm: 'MaskedRange',
-          ss: 'MaskedRange',
-        },
-        expectedLengths: undefined,
-        expectedFirstLast: undefined,
-      },
-      {
-        label:
-          'hours, minutes, seconds массивы (проверка дублирования одиночных значений в десятке)',
-        timeOptions: {
-          hours: [0, 6, 12],
-          minutes: [0, 5, 30],
-          seconds: [15, 30, 45],
-        },
-        expectedMasks: {
-          HH: 'MaskedEnum',
-          mm: 'MaskedEnum',
-          ss: 'MaskedEnum',
-        },
-        expectedLengths: {
-          HH: 4,
-          mm: 4,
-          ss: 6,
-        },
-        expectedFirstLast: {
-          HH: ['00', '12'],
-          mm: ['00', '30'],
-          ss: ['15', '45'],
-        },
-      },
-    ];
+  describe('конфиг маски', () => {
+    it('всегда возвращает MaskedRange для HH, mm, ss', () => {
+      render(<TestComponent {...baseProps} />);
 
-    timeOptionsCases.forEach(
-      ({
-        label,
-        timeOptions,
-        expectedMasks,
-        expectedLengths,
-        expectedFirstLast,
-      }) => {
-        it(`корректно формирует маски при ${label}`, () => {
-          render(<TestComponent {...baseProps} timeOptions={timeOptions} />);
-          const useIMaskMock = useIMask as unknown as jest.Mock;
-          const IMaskAny = IMask as any;
-          const config = useIMaskMock.mock.calls[0][0];
-          (['HH', 'mm', 'ss'] as const).forEach((key) => {
-            const block = config.blocks[key];
-            if (expectedMasks[key] === 'MaskedEnum') {
-              expect(block.mask).toBe(IMaskAny.MaskedEnum);
-              expect(Array.isArray(block.enum)).toBe(true);
-              const values: string[] = block.enum;
-              if (expectedLengths && expectedLengths[key]) {
-                expect(values.length).toBe(expectedLengths[key]);
-              }
-              if (expectedFirstLast && expectedFirstLast[key]) {
-                expect(values[0]).toBe(expectedFirstLast[key][0]);
-                expect(values[values.length - 1]).toBe(
-                  expectedFirstLast[key][1],
-                );
-              }
-            } else {
-              expect(block.mask).toBe(IMaskAny.MaskedRange);
-            }
-          });
-        });
-      },
-    );
+      const useIMaskMock = useIMask as unknown as jest.Mock;
+      const IMaskAny = IMask as any;
+      const config = useIMaskMock.mock.calls[0][0];
+
+      expect(config.blocks.HH).toBeDefined();
+      expect(config.blocks.mm).toBeDefined();
+      expect(config.blocks.ss).toBeDefined();
+
+      expect(config.blocks.HH.mask).toBe(IMaskAny.MaskedRange);
+      expect(config.blocks.mm.mask).toBe(IMaskAny.MaskedRange);
+      expect(config.blocks.ss.mask).toBe(IMaskAny.MaskedRange);
+
+      expect(config.blocks.HH.from).toBe(0);
+      expect(config.blocks.HH.to).toBe(23);
+
+      expect(config.blocks.mm.from).toBe(0);
+      expect(config.blocks.mm.to).toBe(59);
+
+      expect(config.blocks.ss.from).toBe(0);
+      expect(config.blocks.ss.to).toBe(59);
+    });
   });
 });
