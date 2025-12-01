@@ -1,12 +1,4 @@
-import {
-  addHours,
-  addMinutes,
-  addSeconds,
-  format,
-  isValid,
-  parse,
-  startOfToday,
-} from 'date-fns';
+import { format, isValid, parse } from 'date-fns';
 import { useCallback, useEffect } from 'react';
 import { IMask, useIMask } from 'react-imask';
 
@@ -16,12 +8,7 @@ import { useMutableRef } from '##/hooks/useMutableRef';
 import { DateRange } from '##/utils/types/Date';
 
 import { TimeOptions, TimeUnitOptions } from '../DateTime';
-import {
-  getLabelHours,
-  getLabelMinutes,
-  getLabelSeconds,
-  getTimeNumbers,
-} from '../DateTime/helpers';
+import { getTimeNumbers } from '../DateTime/helpers';
 import { DatePickerPropType } from './types';
 
 export const datePickerPropSeparatorDefault = '.';
@@ -138,71 +125,40 @@ export const getAdaptedFormatByTimeOptions = (
   return adaptedFormat;
 };
 
-export const duplicateSingleDecadeValues = (values: number[]) => {
-  const groups = new Map<number, number[]>();
-  values.forEach((value) => {
-    const key = Math.floor(value / 10);
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key)!.push(value);
-  });
-
-  const result: number[] = [];
-
-  for (const groupValues of groups.values()) {
-    if (groupValues.length === 1) {
-      result.push(groupValues[0], groupValues[0]);
-    } else {
-      result.push(...groupValues);
-    }
-  }
-
-  return result;
+type MaskBlock = {
+  mask: typeof IMask.MaskedRange;
+  from: number;
+  to: number;
 };
 
-export const getTimeMaskBlocks = (timeOptions?: TimeOptions) => {
-  const getBlockConfig = (
-    timeType: 'hours' | 'minutes' | 'seconds',
-    addUnits: typeof addHours | typeof addMinutes | typeof addSeconds,
-    getItemLabel: (date: Date) => string,
-    option?: TimeUnitOptions,
-  ) => {
-    const maxValue = timeType === 'hours' ? 23 : 59;
-    const defaultConfig = { mask: IMask.MaskedRange, from: 0, to: maxValue };
+type MaskBlocks = Partial<{
+  dd: MaskBlock;
+  MM: MaskBlock;
+  yyyy: MaskBlock;
+  HH: MaskBlock;
+  mm: MaskBlock;
+  ss: MaskBlock;
+}>;
 
-    const numbers = getTimeNumbers(timeType, option);
-    const isFullRange = numbers.length === maxValue + 1;
+export const getMaskBlocks = ({
+  includeDate = true,
+  includeTime = true,
+} = {}): MaskBlocks => {
+  const blocks: MaskBlocks = {};
 
-    if (isFullRange || numbers.length === 0) {
-      return defaultConfig;
-    }
+  if (includeDate) {
+    blocks.dd = { mask: IMask.MaskedRange, from: 1, to: 31 };
+    blocks.MM = { mask: IMask.MaskedRange, from: 1, to: 12 };
+    blocks.yyyy = { mask: IMask.MaskedRange, from: 1, to: 9999 };
+  }
 
-    const startDate = startOfToday();
-    // Prevents IMask.MaskedEnum autocomplete when there's only one value in a decade
-    // by duplicating single values to avoid autofill behavior
-    const enumValues = duplicateSingleDecadeValues(numbers).map((n) =>
-      getItemLabel(addUnits(startDate, n)),
-    );
-    return {
-      mask: IMask.MaskedEnum,
-      enum: enumValues,
-    };
-  };
+  if (includeTime) {
+    blocks.HH = { mask: IMask.MaskedRange, from: 0, to: 23 };
+    blocks.mm = { mask: IMask.MaskedRange, from: 0, to: 59 };
+    blocks.ss = { mask: IMask.MaskedRange, from: 0, to: 59 };
+  }
 
-  return {
-    HH: getBlockConfig('hours', addHours, getLabelHours, timeOptions?.hours),
-    mm: getBlockConfig(
-      'minutes',
-      addMinutes,
-      getLabelMinutes,
-      timeOptions?.minutes,
-    ),
-    ss: getBlockConfig(
-      'seconds',
-      addSeconds,
-      getLabelSeconds,
-      timeOptions?.seconds,
-    ),
-  };
+  return blocks;
 };
 
 export const getFormForStart = (form: TextFieldPropForm) => getForm(form, 0, 2);
