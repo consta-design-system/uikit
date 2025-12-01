@@ -25,6 +25,11 @@ describe('Компонент SnackBar', () => {
   it('должен рендериться без ошибок', () => {
     expect(renderComponent).not.toThrow();
   });
+  it('ref должен быть присвоен', () => {
+    const ref = React.createRef<HTMLDivElement>();
+    renderComponent({ items, ref });
+    expect(ref.current).toBe(screen.getByTestId(testId));
+  });
   describe('проверка items', () => {
     describe('массив рендериться верно', () => {
       it(`количество совпадает с передаваемым`, () => {
