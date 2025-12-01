@@ -16,10 +16,10 @@ import { useMutableRef } from '##/hooks/useMutableRef';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 import {
+  getMaskBlocks,
   getPartDate,
   getParts,
   getPartsDate,
-  getTimeMaskBlocks,
   isValidTimeByTimeOptions,
   useStringValue,
 } from '../helpers';
@@ -201,19 +201,16 @@ export const usePicker = (props: UsePickerProps) => {
     ],
   );
 
-  const timeMaskBlocks = useMemo(
-    () => getTimeMaskBlocks(timeOptions),
-    [getTimeOptionsKey(timeOptions)],
-  );
+  const maskBlocks = useMemo(() => getMaskBlocks({ includeDate: false }), []);
 
   const imaskProps = useIMask<HTMLInputElement, ReactMaskOpts>(
     {
       mask: Date as unknown as MaskedDate,
       pattern: formatProp,
       blocks: {
-        HH: timeMaskBlocks.HH,
-        mm: timeMaskBlocks.mm,
-        ss: timeMaskBlocks.ss,
+        HH: maskBlocks.HH,
+        mm: maskBlocks.mm,
+        ss: maskBlocks.ss,
       },
       lazy: true,
       autofix: true,
