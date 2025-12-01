@@ -295,12 +295,19 @@ return (
 - Если `step = 0` или кастомные значения - пустой массив ([]), то соответствующие значения не будут отображаться.
 - Если поле `hours`, `minutes` или `seconds` не указано, используется весь диапазон по умолчанию (0–23 для часов, 0–59 для минут и секунд).
 
+**Важно:**
+`timeOptions` применяется только для ограничения значений в выпадающем списке.
+В поле ввода действуют только базовые ограничения на время (часы 0-23, минуты/секунды 0-59).
+Однако при вводе времени, которое не соответствует timeOptions, возвращается ошибка типа `'invalidTimeByTimeOptions'`.
+Подробнее об обработке ошибок см. в разделе [Обработка ошибок](#обработка-ошибок).
+
 <MdxTabs>
 
 <DatePickerExampleTimeOptions />
 
 ```tsx
 // Пример 1
+const [value1, setValue1] = useState<Date | null>(null);
 <DatePicker
   type="time"
   timeOptions={
@@ -309,9 +316,12 @@ return (
     // seconds не указаны — будут все значения по умолчанию (0–59)
   }
   multiplicityHours={1}  // Игнорируется, так как задан timeOptions.hours
+  value={value1}
+  onChange={setValue1}
 />
 
 // Пример 2
+const [value2, setValue2] = useState<Date | null>(null);
 <DatePicker
   type="time"
   timeOptions={
@@ -320,9 +330,12 @@ return (
   }
   multiplicityMinutes={2} // Используется, так как timeOptions.minutes не задан
   multiplicitySeconds={3} // Игнорируется, так как задан timeOptions.seconds
+  value={value2}
+  onChange={setValue2}
 />
 
 // Пример 3
+const [value3, setValue3] = useState<Date | null>(null);
 <DatePicker
   type="time"
   timeOptions={
@@ -330,6 +343,8 @@ return (
     minutes: { step: 15 }, // каждые 15 минут
     seconds: [],           // пустой массив — секунды не показываются
   }
+  value={value3}
+  onChange={setValue3}
 />
 ```
 
@@ -633,6 +648,7 @@ return (
 - `outOfRange` — дата, которую вводит пользователь, не попадает в диапазон между `minDate` и `maxDate`.
 - `invalidInputAttempt` — пользователь вводит несуществующую дату.
 - `startDateIsGreaterThanEndDate` — дата начала больше, чем дата конца периода.
+- `invalidTimeByTimeOptions` — введённое время не соответствует ограничениям `timeOptions`.
 
 <MdxTabs>
 
@@ -667,6 +683,11 @@ const onError: DatePickerPropOnError = (props) => {
       )}) больше, чем дата конца (${formatDate(props.date[1])})`,
     );
   }
+  if (props.type === 'invalidTimeByTimeOptions') {
+    setError(
+      `Время "${props.stringValue}" не соответствует ограничениям timeOptions`,
+    );
+  }
 };
 return (
   <>
@@ -677,8 +698,13 @@ return (
       status={error ? 'alert' : undefined}
       value={value}
       onChange={onChange}
-      type="date-range"
+      type="date-time-range"
       onError={onError}
+      timeOptions={{
+        hours: [8, 12, 16],
+        minutes: { step: 15 },
+        seconds: [],
+      }}
     />
     <Tooltip isOpen={!!error} status="alert" anchorRef={ref}>
       {error}
