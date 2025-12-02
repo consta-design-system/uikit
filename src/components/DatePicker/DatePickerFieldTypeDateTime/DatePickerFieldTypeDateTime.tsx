@@ -5,10 +5,10 @@ import { useForkRef } from '##/hooks/useForkRef';
 import { maxDateDefault, minDateDefault } from '##/utils/date';
 
 import {
+  adaptFormat,
   datePickerPropFormatTypeDateTime,
-  datePickerPropPlaceholderTypeDateTime,
   datePickerPropSeparatorDefault,
-  getAdaptedFormatByTimeOptions,
+  placeholderByFormat,
 } from '../helpers';
 import { DatePickerFieldTypeDateTimeProps, usePicker } from './helpers';
 
@@ -19,7 +19,7 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
   const {
     format = datePickerPropFormatTypeDateTime,
     separator = datePickerPropSeparatorDefault,
-    placeholder = datePickerPropPlaceholderTypeDateTime,
+    placeholder,
     onChange,
     onError,
     minDate = minDateDefault,
@@ -31,12 +31,9 @@ export const DatePickerFieldTypeDateTime = React.forwardRef<
     ...otherProps
   } = props;
 
-  const adaptedFormat = getAdaptedFormatByTimeOptions(format, timeOptions);
+  const adaptedFormat = adaptFormat(format, timeOptions);
 
-  const adaptedPlaceholder = getAdaptedFormatByTimeOptions(
-    placeholder,
-    timeOptions,
-  );
+  const adaptedPlaceholder = placeholder ?? placeholderByFormat(adaptedFormat);
 
   const [inputRef, onClear] = usePicker({
     onChange,
