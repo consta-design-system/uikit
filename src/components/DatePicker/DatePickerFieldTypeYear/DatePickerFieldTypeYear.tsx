@@ -6,8 +6,8 @@ import { maxDateDefault, minDateDefault } from '##/utils/date';
 
 import {
   datePickerPropFormatTypeYear,
-  datePickerPropPlaceholderTypeYear,
   datePickerPropSeparatorDefault,
+  placeholderByFormat,
 } from '../helpers';
 import { DatePickerFieldTypeYearProps, usePicker } from './helpers';
 
@@ -18,7 +18,7 @@ export const DatePickerFieldTypeYear = React.forwardRef<
   const {
     format = datePickerPropFormatTypeYear,
     separator = datePickerPropSeparatorDefault,
-    placeholder = datePickerPropPlaceholderTypeYear,
+    placeholder,
     onChange,
     onError,
     minDate = minDateDefault,
@@ -28,6 +28,8 @@ export const DatePickerFieldTypeYear = React.forwardRef<
     defaultValue,
     ...otherProps
   } = props;
+
+  const adaptedPlaceholder = placeholder ?? placeholderByFormat(format);
 
   const [inputRef, onClear] = usePicker({
     value,
@@ -45,7 +47,7 @@ export const DatePickerFieldTypeYear = React.forwardRef<
       type="text"
       inputContainerRef={ref}
       inputRef={useForkRef([inputRef, inputRefProp])}
-      placeholder={placeholder}
+      placeholder={adaptedPlaceholder}
       onClear={onClear}
     />
   );
