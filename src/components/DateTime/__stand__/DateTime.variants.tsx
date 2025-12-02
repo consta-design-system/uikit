@@ -13,6 +13,7 @@ import {
   dateTimePropTypeDefault,
   dateTimePropView,
   dateTimePropViewDefault,
+  isTypeWithTime,
 } from '../helpers';
 
 const localeProp = ['ru', 'en-US', 'zh-CN', 'es'] as const;
@@ -44,6 +45,24 @@ const Variants = () => {
   const locale =
     useSelect('locale', localeProp, localeDefault) || localeDefault;
 
+  const timeOptions = useBoolean(
+    'timeOptions',
+    false,
+    type ? isTypeWithTime(type) : false,
+  );
+
+  const hoursStep = useNumber('hoursStep', 1, timeOptions);
+  const hoursStart = useNumber('hoursStart', 0, timeOptions);
+  const hoursStop = useNumber('hoursStop', 23, timeOptions);
+
+  const minutesStep = useNumber('minutesStep', 1, timeOptions);
+  const minutesStart = useNumber('minutesStart', 0, timeOptions);
+  const minutesStop = useNumber('minutesStop', 59, timeOptions);
+
+  const secondsStep = useNumber('secondsStep', 1, timeOptions);
+  const secondsStart = useNumber('secondsStart', 0, timeOptions);
+  const secondsStop = useNumber('secondsStop', 59, timeOptions);
+
   const currentDay = new Date();
 
   const [value, setValue] = useState<Date | undefined>(undefined);
@@ -56,10 +75,6 @@ const Variants = () => {
       ]
     : undefined;
 
-  const multiplicityHours = useNumber('multiplicityHours', 1);
-  const multiplicityMinutes = useNumber('multiplicityMinutes', 1);
-  const multiplicitySeconds = useNumber('multiplicitySeconds', 1);
-
   return (
     <DateTime
       type={type}
@@ -70,9 +85,27 @@ const Variants = () => {
       maxDate={maxDate}
       events={events}
       locale={getByMap(localeMap, locale)}
-      multiplicityHours={multiplicityHours}
-      multiplicityMinutes={multiplicityMinutes}
-      multiplicitySeconds={multiplicitySeconds}
+      timeOptions={
+        timeOptions
+          ? {
+              hours: {
+                start: hoursStart,
+                stop: hoursStop,
+                step: hoursStep,
+              },
+              minutes: {
+                start: minutesStart,
+                stop: minutesStop,
+                step: minutesStep,
+              },
+              seconds: {
+                start: secondsStart,
+                stop: secondsStop,
+                step: secondsStep,
+              },
+            }
+          : undefined
+      }
     />
   );
 };

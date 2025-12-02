@@ -1,9 +1,24 @@
-import { getHours, getMinutes, getSeconds, set } from 'date-fns';
-import { useCallback, useEffect, useState } from 'react';
+import {
+  getHours,
+  getMinutes,
+  getSeconds,
+  set,
+  startOfDay,
+  startOfToday,
+} from 'date-fns';
+import { useCallback, useEffect } from 'react';
 
 import { useMutableRef } from '../../../hooks/useMutableRef/useMutableRef';
 import { DateRange } from '../../../utils/types/Date';
-import { DateTimePropOnChange, DateTimePropOnChangeRange } from '../helpers';
+import { getFirstValidDateTime } from '../DateTimeTypeTime/helpers';
+import {
+  DateTimePropDisableDates,
+  DateTimePropOnChange,
+  DateTimePropOnChangeRange,
+  TimeOptions,
+} from '../helpers';
+import { getDisableDatesKey } from '../helpers/getDisableDatesKey';
+import { getTimeOptionsKey } from '../helpers/getTimeOptionsKey';
 
 const getTime = (date?: Date) => {
   if (!date) {
@@ -17,49 +32,98 @@ export const useOnChange = (
   onChangeRange: DateTimePropOnChangeRange<'date-time'> | undefined,
   value: DateRange | Date | undefined,
   timeFor: 'start' | 'end',
+  timeOptions?: TimeOptions,
+  minDate?: Date,
+  maxDate?: Date,
+  disableDates?: DateTimePropDisableDates,
 ): [
   DateTimePropOnChange,
   DateTimePropOnChangeRange<'date-time'>,
   DateTimePropOnChange,
   Date | undefined,
 ] => {
-  const normalizeValue = Array.isArray(value)
-    ? value[timeFor === 'start' ? 0 : 1]
-    : value;
+  const isRange = value !== undefined && Array.isArray(value);
+  const normalizeValue = isRange ? value[timeFor === 'start' ? 0 : 1] : value;
 
-  const [time, setTime] = useState<Date | undefined>(normalizeValue);
+  const previousRangeRef = useMutableRef<Date | undefined>(
+    isRange ? normalizeValue : undefined,
+  );
 
   const onChangeRef = useMutableRef(onChange);
   const onChangeRangeRef = useMutableRef(onChangeRange);
-  const timeRef = useMutableRef(time);
 
-  const onDateChange: DateTimePropOnChange = useCallback((value, { e }) => {
-    const [hours, minutes, seconds] = getTime(timeRef.current);
-    const newValue = set(value, { hours, minutes, seconds });
-    onChangeRef.current?.(newValue, {
-      e,
-    });
-  }, []);
+  const getValidTimeValue = useCallback(
+    (value: Date | undefined): Date => {
+      const startOfDayDate = startOfDay(value || startOfToday());
+
+      const validValue = getFirstValidDateTime(
+        startOfDayDate,
+        timeOptions,
+        minDate,
+        maxDate,
+        disableDates,
+      );
+      return validValue;
+    },
+    [
+      getTimeOptionsKey(timeOptions),
+      minDate?.getTime(),
+      maxDate?.getTime(),
+      getDisableDatesKey(disableDates),
+    ],
+  );
+
+  const applyTimeToRange = (
+    range: DateRange,
+    timeSource: Date | undefined,
+  ): DateRange => {
+    if (!timeSource) return range;
+    const [hours, minutes, seconds] = getTime(timeSource);
+    const [start, end] = range;
+
+    const newStart = start ? set(start, { hours, minutes, seconds }) : start;
+    const newEnd = end ? set(end, { hours, minutes, seconds }) : end;
+
+    return [newStart, newEnd];
+  };
+
+  const onDateChange: DateTimePropOnChange = useCallback(
+    (value, { e }) => {
+      const validValue = getValidTimeValue(value);
+      onChangeRef.current?.(validValue, {
+        e,
+      });
+    },
+    [getValidTimeValue],
+  );
 
   const onDateChangeRange: DateTimePropOnChangeRange<'date-time'> = useCallback(
     (value, { e }) => {
-      const [hours, minutes, seconds] = getTime(timeRef.current);
-      const newValue: DateRange = [
-        value[0] ? set(value[0], { hours, minutes, seconds }) : undefined,
-        value[1] ? set(value[1], { hours, minutes, seconds }) : undefined,
-      ];
-      onChangeRangeRef.current?.(newValue, {
-        e,
-      });
+      const currentRange = value as DateRange;
+      const timeForEnd =
+        timeFor === 'start' ? currentRange[0] : currentRange[1];
+      const prevTimeForEnd = previousRangeRef.current || undefined;
+      const isTimeForEndChanged =
+        timeForEnd?.getTime() !== prevTimeForEnd?.getTime();
+      const validTimeValue = isTimeForEndChanged
+        ? getValidTimeValue(timeForEnd)
+        : timeForEnd;
+      const newRange = applyTimeToRange(currentRange, validTimeValue);
+      onChangeRangeRef.current?.(newRange, { e });
+    },
+    [timeFor, getValidTimeValue],
+  );
+
+  const onTimeChange: DateTimePropOnChange = useCallback(
+    (selectedValue, { e }) => {
+      onChangeRef.current?.(selectedValue, { e });
     },
     [],
   );
 
-  const onTimeChange: DateTimePropOnChange = useCallback((value, { e }) => {
-    onChangeRef.current?.(value, { e });
-  }, []);
-
-  useEffect(() => setTime(normalizeValue), [normalizeValue?.getTime()]);
+  useEffect(() => {
+    previousRangeRef.current = isRange ? normalizeValue : undefined;
+  }, [isRange, normalizeValue?.getTime()]);
 
   return [onDateChange, onDateChangeRange, onTimeChange, normalizeValue];
 };

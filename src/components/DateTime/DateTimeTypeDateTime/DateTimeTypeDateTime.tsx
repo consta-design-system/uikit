@@ -30,9 +30,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> =
       disableDates,
       locale,
       onChangeCurrentVisibleDate,
-      multiplicitySeconds,
-      multiplicityMinutes,
-      multiplicityHours,
+      timeOptions,
       style,
       timeFor = 'start',
       ...otherProps
@@ -44,7 +42,16 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> =
     });
 
     const [onDateChange, onDateChangeRange, onTimeChange, valueTime] =
-      useOnChange(onChange, onChangeRange, value, timeFor);
+      useOnChange(
+        onChange,
+        onChangeRange,
+        value,
+        timeFor,
+        timeOptions,
+        minDate,
+        maxDate,
+        disableDates,
+      );
 
     const rootRef = useRef<HTMLDivElement>(null);
 
@@ -97,9 +104,7 @@ export const DateTimeTypeDateTime: DateTimeTypeComponent<'date-time'> =
             maxDate={maxDate}
             disableDates={disableDates}
             locale={locale}
-            multiplicitySeconds={multiplicitySeconds}
-            multiplicityMinutes={multiplicityMinutes}
-            multiplicityHours={multiplicityHours}
+            timeOptions={timeOptions}
           />
         )}
       </div>

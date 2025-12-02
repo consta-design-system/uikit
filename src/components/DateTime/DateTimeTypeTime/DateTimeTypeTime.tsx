@@ -20,9 +20,7 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef(
       maxDate,
       minDate,
       disableDates,
-      multiplicityHours = 1,
-      multiplicityMinutes = 1,
-      multiplicitySeconds = 1,
+      timeOptions,
       onMove,
       ...otherProps
     } = props;
@@ -42,9 +40,7 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef(
 
     const time = useTimeItems(
       value,
-      multiplicityHours,
-      multiplicityMinutes,
-      multiplicitySeconds,
+      timeOptions,
       onChange,
       minDate,
       maxDate,
@@ -52,13 +48,17 @@ export const DateTimeTypeTime: DateTimeTypeComponent<'time'> = forwardRef(
     );
 
     const [hours, minutes, seconds] = time;
+    const effectiveHours = hours.length > 0 ? 1 : 0;
+    const effectiveMinutes = minutes.length > 0 ? 1 : 0;
+    const effectiveSeconds = seconds.length > 0 ? 1 : 0;
 
     const label = getTimeTitle(
       value,
-      multiplicityHours,
-      multiplicityMinutes,
-      multiplicitySeconds,
+      effectiveHours,
+      effectiveMinutes,
+      effectiveSeconds,
     );
+
     const labelLength = time.filter((item) => item.length).length;
 
     return (

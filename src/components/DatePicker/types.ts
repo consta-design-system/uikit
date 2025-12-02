@@ -7,6 +7,7 @@ import {
   DateTimePropDisableDates,
   DateTimePropView,
   dateTimePropViewDefault,
+  TimeOptions,
 } from '../DateTime/helpers';
 import {
   TextFieldPropForm,
@@ -34,11 +35,13 @@ export type DatePickerPropDateTimeView = DateTimePropView;
 export const datePickerPropDateTimeViewDefault = dateTimePropViewDefault;
 
 type Range = 'date-range' | 'date-time-range' | 'year-range' | 'month-range';
+type Time = 'time' | 'date-time' | 'date-time-range';
 
 export const datePickerErrorTypes = [
   'outOfRange',
   'invalidInputAttempt',
   'startDateIsGreaterThanEndDate',
+  'invalidTimeByTimeOptions',
 ] as const;
 
 export type DatePickerPropValue<TYPE extends DatePickerPropType> =
@@ -142,9 +145,22 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
       labelPosition?: 'top' | 'left';
       onChangeCurrentVisibleDate?: (date: Date) => void;
       currentVisibleDate?: Date;
-      multiplicitySeconds?: number;
-      multiplicityMinutes?: number;
-      multiplicityHours?: number;
+      timeOptions?: TYPE extends Time ? TimeOptions : never;
+      /**
+       * @deprecated Use timeOptions instead.
+       * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
+       */
+      multiplicitySeconds?: TYPE extends Time ? number : never;
+      /**
+       * @deprecated Use timeOptions instead.
+       * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
+       */
+      multiplicityMinutes?: TYPE extends Time ? number : never;
+      /**
+       * @deprecated Use timeOptions instead.
+       * TODO: major - удалить при мажорном релизе все свойства multiplicity*, оставив только работу с timeOptions.
+       */
+      multiplicityHours?: TYPE extends Time ? number : never;
       isMobile?: number;
       withClearButton?: boolean;
       onDropdownOpen?: (isOpen: boolean) => void;
@@ -188,5 +204,13 @@ export type DatePickerPropOnError = (
     | {
         type: typeof datePickerErrorTypes[2];
         date: [Date, Date];
+      }
+    | {
+        type: typeof datePickerErrorTypes[3];
+        stringValue: string;
+        date: Date;
+        HH?: string;
+        mm?: string;
+        ss?: string;
       },
 ) => void;

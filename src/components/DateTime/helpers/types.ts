@@ -19,6 +19,8 @@ export type DateTimePropDisableDates = Array<Date | [Date, Date]>;
 
 export type CapableRangeType = 'date' | 'month' | 'year' | 'date-time';
 
+export type TypeWithTime = 'time' | 'date-time';
+
 export type DateTimePropValue<TYPE> = TYPE extends CapableRangeType
   ? Date | DateRange
   : Date;
@@ -56,6 +58,20 @@ type DateTimePropTimeFor<TYPE> = TYPE extends 'date-time'
   ? 'start' | 'end'
   : never;
 
+export type TimeUnitOptions =
+  | {
+      step?: number;
+      start?: number;
+      stop?: number;
+    }
+  | number[];
+
+export type TimeOptions = {
+  hours?: TimeUnitOptions;
+  minutes?: TimeUnitOptions;
+  seconds?: TimeUnitOptions;
+};
+
 export type DateTimeProps<TYPE extends DateTimePropType = 'date'> =
   PropsWithHTMLAttributesAndRef<
     {
@@ -72,9 +88,25 @@ export type DateTimeProps<TYPE extends DateTimePropType = 'date'> =
       children?: never;
       disableDates?: DateTimePropDisableDates;
       onChangeCurrentVisibleDate?: (date: Date) => void;
-      multiplicitySeconds?: number;
-      multiplicityMinutes?: number;
-      multiplicityHours?: number;
+      timeOptions?: TYPE extends TypeWithTime ? TimeOptions : never;
+      /**
+       * @deprecated Use timeOptions instead.
+       * TODO: major - удалить при мажорном релизе все свойства multiplicity* и логику формирования
+       * объектов с шагом ({ step: multiplicity }) во всех местах, оставив только работу с timeOptions.
+       */
+      multiplicitySeconds?: TYPE extends TypeWithTime ? number : never;
+      /**
+       * @deprecated Use timeOptions instead.
+       * TODO: major - удалить при мажорном релизе все свойства multiplicity* и логику формирования
+       * объектов с шагом ({ step: multiplicity }) во всех местах, оставив только работу с timeOptions.
+       */
+      multiplicityMinutes?: TYPE extends TypeWithTime ? number : never;
+      /**
+       * @deprecated Use timeOptions instead.
+       * TODO: major - удалить при мажорном релизе все свойства multiplicity* и логику формирования
+       * объектов с шагом ({ step: multiplicity }) во всех местах, оставив только работу с timeOptions.
+       */
+      multiplicityHours?: TYPE extends TypeWithTime ? number : never;
       onMove?: (type: MoveType) => void;
       timeFor?: DateTimePropTimeFor<TYPE>;
     },

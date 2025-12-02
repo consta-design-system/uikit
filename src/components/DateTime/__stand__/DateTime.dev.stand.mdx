@@ -28,6 +28,8 @@ import { DateTimeExampleEvents } from './examples/DateTimeExampleEvents/DateTime
 
 import { DateTimeExampleDisableDates } from './examples/DateTimeExampleDisableDates/DateTimeExampleDisableDates';
 
+import { DateTimeExampleTimeOptions } from './examples/DateTimeExampleTimeOptions/DateTimeExampleTimeOptions';
+
 <MdxMenu>
 
 - [Обзор](#обзор)
@@ -59,24 +61,25 @@ import { DateTime } from '@consta/uikit/DateTime';
 
 ## Свойства
 
-| Свойство                                         | Тип или варианты значения                              | По умолчанию | Описание                                                                  |
-| ------------------------------------------------ | ------------------------------------------------------ | ------------ | ------------------------------------------------------------------------- |
-| [`type?`](#тип-календаря)                        | `'date'`, `'month'`, `'year'`, `'time'`, `'date-time'` | `'date'`     | Тип календаря                                                             |
-| [`value?`](#выбор-даты)                          | `DateTimePropValue`                                    | -            | Выбранная дата или диапазон дат                                           |
-| [`disableDates?`](#ограничение-выбора)           | `DateTimePropDisableDates`                             | -            | Интервал или время, недоступное для выбора                                |
-| [`minDate?`](#ограничение-выбора)                | `Date`                                                 | -            | Ограничение выбора дат по минимальной дате                                |
-| [`maxDate?`](#ограничение-выбора)                | `Date`                                                 | -            | Ограничение выбора дат по максимальной дате                               |
-| [`currentVisibleDate?`](#какой-месяц-показывать) | `Date`                                                 | `new Date()` | Дата, которая входит в страницу календаря, которую нужно показать         |
-| [`events?`](#события-на-календаре)               | `Date[]`                                               | -            | События, отображаемые на календаре                                        |
-| [`view?`](#внешний-вид)                          | `'classic'`, `'book'`, `'slider'`                      | `'classic'`  | Вид календаря                                                             |
-| [`multiplicityHours?`](#выбор-времени)           | `number`                                               | 1            | Интервал для вывода часов (1 — показать все часы, 0 — убрать часы)        |
-| [`multiplicityMinutes?`](#выбор-времени)         | `number`                                               | 1            | Интервал для вывода минут (1 — показать все минуты, 0 — убрать минуты)    |
-| [`multiplicitySeconds?`](#выбор-времени)         | `number`                                               | 1            | Интервал для вывода секунд (1 — показать все секунды, 0 — убрать секунды) |
-| [`locale?`](#локализация)                        | `DateTimePropLocale`                                   | `ruLocale`   | Локализация календаря                                                     |
-| [`onChange?`](#выбор-даты)                       | `DateTimePropOnChange`                                 | -            | Обработчик событий выбора даты                                            |
-| [`onChangeRange?`](#выбор-даты)                  | `DateTimePropOnChangeRange`                            | -            | Обработчик событий выбора диапазона дат                                   |
-| `className?`                                     | `string`                                               | -            | Дополнительные CSS-классы                                                 |
-| `ref?`                                           | `React.Ref<HTMLDivElement>`                            | -            | Ссылка на корневой DOM-элемент компонента                                 |
+| Свойство                                         | Тип или варианты значения                              | По умолчанию | Описание                                                                   |
+| ------------------------------------------------ | ------------------------------------------------------ | ------------ | -------------------------------------------------------------------------- |
+| [`type?`](#тип-календаря)                        | `'date'`, `'month'`, `'year'`, `'time'`, `'date-time'` | `'date'`     | Тип календаря                                                              |
+| [`value?`](#выбор-даты)                          | `DateTimePropValue`                                    | -            | Выбранная дата или диапазон дат                                            |
+| [`disableDates?`](#ограничение-выбора)           | `DateTimePropDisableDates`                             | -            | Интервал или время, недоступное для выбора                                 |
+| [`minDate?`](#ограничение-выбора)                | `Date`                                                 | -            | Ограничение выбора дат по минимальной дате                                 |
+| [`maxDate?`](#ограничение-выбора)                | `Date`                                                 | -            | Ограничение выбора дат по максимальной дате                                |
+| [`currentVisibleDate?`](#какой-месяц-показывать) | `Date`                                                 | `new Date()` | Дата, которая входит в страницу календаря, которую нужно показать          |
+| [`events?`](#события-на-календаре)               | `Date[]`                                               | -            | События, отображаемые на календаре                                         |
+| [`view?`](#внешний-вид)                          | `'classic'`, `'book'`, `'slider'`                      | `'classic'`  | Вид календаря                                                              |
+| [`timeOptions?`](#выбор-времени)                 | `TimeOptions`                                          | -            | Настройка шагов, диапазонов или массива значений для часов, минут и секунд |
+| [`multiplicityHours?`](#выбор-времени)           | `number`                                               | 1            | Интервал для вывода часов (1 — показать все часы, 0 — убрать часы)         |
+| [`multiplicityMinutes?`](#выбор-времени)         | `number`                                               | 1            | Интервал для вывода минут (1 — показать все минуты, 0 — убрать минуты)     |
+| [`multiplicitySeconds?`](#выбор-времени)         | `number`                                               | 1            | Интервал для вывода секунд (1 — показать все секунды, 0 — убрать секунды)  |
+| [`locale?`](#локализация)                        | `DateTimePropLocale`                                   | `ruLocale`   | Локализация календаря                                                      |
+| [`onChange?`](#выбор-даты)                       | `DateTimePropOnChange`                                 | -            | Обработчик событий выбора даты                                             |
+| [`onChangeRange?`](#выбор-даты)                  | `DateTimePropOnChangeRange`                            | -            | Обработчик событий выбора диапазона дат                                    |
+| `className?`                                     | `string`                                               | -            | Дополнительные CSS-классы                                                  |
+| `ref?`                                           | `React.Ref<HTMLDivElement>`                            | -            | Ссылка на корневой DOM-элемент компонента                                  |
 
 ```tsx
 import { Locale } from 'date-fns';
@@ -116,6 +119,20 @@ type LocaleWords = {
 
 export type DateTimePropLocale = Locale & LocaleWords;
 export type DateTimePropDisableDates = Array<Date | [Date, Date]>;
+
+type TimeUnitOptions =
+  | {
+      step?: number;
+      start?: number;
+      stop?: number;
+    }
+  | number[];
+
+type TimeOptions = {
+  hours?: TimeUnitOptions;
+  minutes?: TimeUnitOptions;
+  seconds?: TimeUnitOptions;
+};
 ```
 
 ## Содержимое
@@ -294,23 +311,91 @@ const events = [
 
 ### Выбор времени
 
+<MdxInformer status="alert">
+  Пропсы `multiplicityHours`, `multiplicityMinutes` и `multiplicitySeconds`
+  устарели и в будущем будут удалены. Используйте `timeOptions`.
+</MdxInformer>
+
 Для режимов `type="time"` или `type="date-time"` можно настроить отображение часов, минут и секунд с помощью свойств:
 
+- `timeOptions` - позволяет гибко задавать шаги, диапазоны или конкретные значения для часов, минут и секунд.
 - `multiplicityHours` — интервал для часов (например, `2` для чётных часов, `0` — убрать часы).
 - `multiplicityMinutes` — интервал для минут (например, `15` для четвертей часа, `0` — убрать минуты).
 - `multiplicitySeconds` — интервал для секунд (например, `0` — убрать секунды).
+
+**Приоритет конфигурации:**
+
+Если заданы оба варианта, `timeOptions` имеет приоритет над `multiplicity*`.
+Если `timeOptions` не указан для конкретного параметра (часы/минуты/секунды), будут использоваться значения из `multiplicity*` (при их наличии).
+
+**Комментарии по поведению timeOptions:**
+
+- Если `step = 0` или кастомные значения - пустой массив ([]), то соответствующие значения не будут отображаться.
+- Если поле `hours`, `minutes` или `seconds` не указано, используется весь диапазон по умолчанию (0–23 для часов, 0–59 для минут и секунд).
+
+<MdxTabs>
+
+<DateTimeExampleTimeOptions />
+
+```tsx
+// Пример 1
+const [value1, setValue1] = useState<Date | undefined>();
+<DateTime
+  type="time"
+  timeOptions={
+    hours: { start: 9, step: 2, stop: 18 },    // 9, 11, 13, 15, 17
+    minutes: [0, 15, 45],                      // конкретные значения минут
+    // seconds не указаны — будут все значения по умолчанию (0–59)
+  }
+  multiplicityHours={1}  // Игнорируется, так как задан timeOptions.hours
+  value={value1}
+  onChange={setValue1}
+/>
+
+// Пример 2
+const [value2, setValue2] = useState<Date | undefined>();
+<DateTime
+  type="time"
+  timeOptions={
+    hours: { step: 1 },   // все часы
+    seconds: { step: 0 }, // секунды не показываются
+  }
+  multiplicityMinutes={2} // Используется, так как timeOptions.minutes не задан
+  multiplicitySeconds={3} // Игнорируется, так как задан timeOptions.seconds
+  value={value2}
+  onChange={setValue2}
+/>
+
+// Пример 3
+const [value3, setValue3] = useState<Date | undefined>();
+<DateTime
+  type="time"
+  timeOptions={
+    hours: [8, 12, 16],
+    minutes: { step: 15 }, // каждые 15 минут
+    seconds: [],           // пустой массив — секунды не показываются
+  }
+  value={value3}
+  onChange={setValue3}
+/>
+```
+
+</MdxTabs>
 
 <MdxTabs>
 
 <DateTimeExampleMultiplicity />
 
 ```tsx
+const [value, setValue] = useState<Date | undefined>();
 <DateTime
   type="time"
+  value={value}
+  onChange={setValue}
   multiplicityHours={2}
   multiplicityMinutes={5}
   multiplicitySeconds={0}
-/>
+/>;
 ```
 
 </MdxTabs>

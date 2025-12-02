@@ -42,6 +42,11 @@ export const DatePickerExampleOnError = () => {
         )}) больше чем дата конца (${formatDate(props.date[1])})`,
       );
     }
+    if (props.type === 'invalidTimeByTimeOptions') {
+      setError(
+        `Время "${props.stringValue}" не соответствует ограничениям timeOptions`,
+      );
+    }
   };
 
   return (
@@ -54,8 +59,13 @@ export const DatePickerExampleOnError = () => {
           status={error ? 'alert' : undefined}
           value={value}
           onChange={onChange}
-          type="date-range"
+          type="date-time-range"
           onError={onError}
+          timeOptions={{
+            hours: [8, 12, 16],
+            minutes: { step: 15 },
+            seconds: [],
+          }}
         />
       </Example>
       <Tooltip isOpen={!!error} status="alert" anchorRef={ref}>

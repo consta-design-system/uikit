@@ -1,7 +1,7 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
 
-import { DatePicker, DatePickerProps } from '../DatePicker';
+import { DatePicker, DatePickerProps } from '../../DatePicker';
 import {
   animateDelay,
   getDateTimeItem,
@@ -9,13 +9,15 @@ import {
   getInput,
   inputFocus,
   testId,
-} from './helpers';
+} from '../helpers';
 
-const renderComponent = (props: DatePickerProps<'year'> = {}) => {
-  return render(<DatePicker {...props} type="year" data-testid={testId} />);
+const renderComponent = (props: DatePickerProps<'month-range'> = {}) => {
+  return render(
+    <DatePicker {...props} type="month-range" data-testid={testId} />,
+  );
 };
 
-describe('Компонент DatePicker_type_year', () => {
+describe('Компонент DatePicker_type_monthRange', () => {
   describe('проверка onChange', () => {
     it(`при клике по календарю срабатывает`, () => {
       jest.useFakeTimers();
@@ -39,9 +41,11 @@ describe('Компонент DatePicker_type_year', () => {
 
   describe('проверка value', () => {
     it(`верно отображается в поле ввода`, () => {
-      renderComponent({ value: new Date(1970, 0, 15) });
+      renderComponent({
+        value: [new Date(1970, 0, 15), new Date(1970, 1, 17)],
+      });
 
-      expect(getInput()).toHaveValue('1970');
+      expect(getInput()).toHaveValue('01.1970');
     });
 
     it(`верно отображается в календаре`, () => {
@@ -49,7 +53,7 @@ describe('Компонент DatePicker_type_year', () => {
 
       act(() => {
         renderComponent({
-          value: new Date(1970, 0, 15),
+          value: [new Date(1970, 0, 15), new Date(1970, 2, 17)],
           currentVisibleDate: new Date(1970, 0),
         });
       });
@@ -57,7 +61,8 @@ describe('Компонент DatePicker_type_year', () => {
       inputFocus();
       animateDelay();
 
-      expect(getDateTimeItemSelected()).toHaveTextContent('1970');
+      expect(getDateTimeItemSelected(0)).toHaveTextContent('янв');
+      expect(getDateTimeItemSelected(1)).toHaveTextContent('мар');
     });
   });
 });

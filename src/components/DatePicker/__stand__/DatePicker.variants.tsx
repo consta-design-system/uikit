@@ -2,13 +2,19 @@ import './DatePicker.variants.css';
 
 import { IconCalendar } from '@consta/icons/IconCalendar';
 import { IconQuestion } from '@consta/icons/IconQuestion';
-import { useBoolean, useDate, useSelect, useText } from '@consta/stand';
+import {
+  useBoolean,
+  useDate,
+  useNumber,
+  useSelect,
+  useText,
+} from '@consta/stand';
 import { addDays, Locale, startOfWeek } from 'date-fns';
 import enUSLocale from 'date-fns/locale/en-US';
 import esLocale from 'date-fns/locale/es';
 import ruLocale from 'date-fns/locale/ru';
 import zhCNLocale from 'date-fns/locale/zh-CN';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { Button } from '##/components/Button/Button';
 import {
@@ -35,6 +41,7 @@ import {
   datePickerPropType,
   datePickerPropTypeDefault,
   DatePickerPropValue,
+  isTypeWithTime,
 } from '../DatePicker';
 
 const localeProp = ['ru', 'en-US', 'zh-CN', 'es'] as const;
@@ -89,6 +96,24 @@ const Variants = () => {
     datePickerPropDropdownFormDefault,
   );
 
+  const timeOptions = useBoolean(
+    'timeOptions',
+    false,
+    type ? isTypeWithTime(type) : false,
+  );
+
+  const hoursStep = useNumber('hoursStep', 1, timeOptions);
+  const hoursStart = useNumber('hoursStart', 0, timeOptions);
+  const hoursStop = useNumber('hoursStop', 23, timeOptions);
+
+  const minutesStep = useNumber('minutesStep', 1, timeOptions);
+  const minutesStart = useNumber('minutesStart', 0, timeOptions);
+  const minutesStop = useNumber('minutesStop', 59, timeOptions);
+
+  const secondsStep = useNumber('secondsStep', 1, timeOptions);
+  const secondsStart = useNumber('secondsStart', 0, timeOptions);
+  const secondsStop = useNumber('secondsStop', 59, timeOptions);
+
   const additionalControls = () => {
     return [
       <Button label="Кнопка" key="1" />,
@@ -97,6 +122,12 @@ const Variants = () => {
   };
 
   const [value, setValue] = useState<DatePickerPropValue<typeof type>>(null);
+  const safeValue = useMemo(() => {
+    if (type.includes('range')) {
+      return Array.isArray(value) ? value : null;
+    }
+    return value instanceof Date ? value : null;
+  }, [type, value]);
 
   const currentDay = new Date();
 
@@ -144,7 +175,7 @@ const Variants = () => {
         caption={caption}
         required={required}
         labelIcon={withLabelIcon ? IconQuestion : undefined}
-        value={value}
+        value={safeValue}
         status={status}
         view={view}
         disabled={disabled}
@@ -162,6 +193,27 @@ const Variants = () => {
           withAdditionalControls ? additionalControls : undefined
         }
         withClearButton={withClearButton}
+        timeOptions={
+          timeOptions
+            ? {
+                hours: {
+                  start: hoursStart,
+                  stop: hoursStop,
+                  step: hoursStep,
+                },
+                minutes: {
+                  start: minutesStart,
+                  stop: minutesStop,
+                  step: minutesStep,
+                },
+                seconds: {
+                  start: secondsStart,
+                  stop: secondsStop,
+                  step: secondsStep,
+                },
+              }
+            : undefined
+        }
       />
     </div>
   );

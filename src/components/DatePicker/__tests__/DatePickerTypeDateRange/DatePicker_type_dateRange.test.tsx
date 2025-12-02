@@ -5,7 +5,7 @@ import {
   DatePicker,
   DatePickerPropDateTimeView,
   DatePickerProps,
-} from '../DatePicker';
+} from '../../DatePicker';
 import {
   animateDelay,
   getDateTimeItem,
@@ -14,7 +14,7 @@ import {
   getInput,
   inputFocus,
   testId,
-} from './helpers';
+} from '../helpers';
 
 const renderComponent = (props: DatePickerProps<'date-range'> = {}) => {
   return render(

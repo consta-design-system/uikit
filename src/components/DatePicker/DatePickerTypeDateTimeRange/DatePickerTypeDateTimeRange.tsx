@@ -16,8 +16,10 @@ import {
 } from '../DatePickerDropdown/DatePickerDropdown';
 import { DatePickerFieldTypeDateTimeRange } from '../DatePickerFieldTypeDateTimeRange/DatePickerFieldTypeDateTimeRange';
 import {
+  datePickerPropFormatTypeDateTime,
   getDropdownZIndex,
   getFieldName,
+  getTimeOptionsByFormat,
   normalizeRangeValue,
 } from '../helpers';
 import { getTimeFof } from '../timeForMap';
@@ -42,11 +44,9 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       inputRef,
       name,
       placeholder,
-      multiplicityMinutes,
       dropdownClassName,
       dropdownRef,
-      multiplicitySeconds,
-      multiplicityHours,
+      timeOptions: timeOptionsProp,
       onDropdownOpen,
       dropdownOpen,
       ignoreOutsideClicksRefs,
@@ -65,6 +65,11 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
 
     const startFocused = fieldFocused === 0;
     const endFocused = fieldFocused === 1;
+
+    const timeOptions = getTimeOptionsByFormat(
+      fieldProps.format || datePickerPropFormatTypeDateTime,
+      timeOptionsProp,
+    );
 
     const handleChange: DatePickerDropdownPropOnChange = (value, { e }) => {
       if (startFocused) {
@@ -185,6 +190,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           endFieldPlaceholder={
             Array.isArray(placeholder) ? placeholder?.[1] : placeholder
           }
+          timeOptions={timeOptions}
         />
         <DatePickerDropdown
           type="date-time"
@@ -204,9 +210,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           form={dropdownForm}
           onChange={handleChange}
           renderAdditionalControls={renderAdditionalControls}
-          multiplicityMinutes={multiplicityMinutes}
-          multiplicitySeconds={multiplicitySeconds}
-          multiplicityHours={multiplicityHours}
+          timeOptions={timeOptions}
           zIndex={getDropdownZIndex(props.style)}
           disableDates={disableDates}
         />

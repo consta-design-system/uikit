@@ -1,30 +1,26 @@
-import { format, isValid, parse, startOfToday } from 'date-fns';
+import { format, isValid, parse } from 'date-fns';
 import { useCallback, useEffect } from 'react';
-import { useIMask } from 'react-imask';
+import { IMask, useIMask } from 'react-imask';
 
 import { getForm } from '##/components/FieldGroup';
 import { TextFieldPropForm } from '##/components/TextField';
 import { useMutableRef } from '##/hooks/useMutableRef';
-import { range } from '##/utils/array';
 import { DateRange } from '##/utils/types/Date';
 
+import { TimeOptions, TimeUnitOptions } from '../DateTime';
+import { getTimeNumbers } from '../DateTime/helpers';
 import { DatePickerPropType } from './types';
 
 export const datePickerPropSeparatorDefault = '.';
 export const datePickerPropFormatTypeDate = `dd${datePickerPropSeparatorDefault}MM${datePickerPropSeparatorDefault}yyyy`;
-export const datePickerPropPlaceholderTypeDate = `ДД${datePickerPropSeparatorDefault}ММ${datePickerPropSeparatorDefault}ГГГГ`;
 
 export const datePickerPropFormatTypeTime = `HH:mm:ss`;
-export const datePickerPropPlaceholderTypeTime = `ЧЧ:ММ:СС`;
 
 export const datePickerPropFormatTypeDateTime = `${datePickerPropFormatTypeDate} ${datePickerPropFormatTypeTime}`;
-export const datePickerPropPlaceholderTypeDateTime = `${datePickerPropPlaceholderTypeDate} ${datePickerPropPlaceholderTypeTime}`;
 
 export const datePickerPropFormatTypeYear = `yyyy`;
-export const datePickerPropPlaceholderTypeYear = `ГГГГ`;
 
 export const datePickerPropFormatTypeMonth = `MM${datePickerPropSeparatorDefault}yyyy`;
-export const datePickerPropPlaceholderTypeMonth = `MM${datePickerPropSeparatorDefault}ГГГГ`;
 
 export const normalizeRangeValue = (dateRange: DateRange): DateRange => {
   if (
@@ -37,43 +33,123 @@ export const normalizeRangeValue = (dateRange: DateRange): DateRange => {
   return dateRange;
 };
 
-export const getMultiplicityTime = (
+export const getTimeOptionsByFormat = (
   format: string,
-  multiplicityHours: number | undefined,
-  multiplicityMinutes: number | undefined,
-  multiplicitySeconds: number | undefined,
+  timeOptions?: TimeOptions,
 ) => {
   const markers = ['HH', 'mm', 'ss'] as const;
   const formatArray = format.split(' ')[1]?.split(':');
-  const map = {
-    HH: multiplicityHours,
-    mm: multiplicityMinutes,
-    ss: multiplicitySeconds,
+  const mapTimeOptions = {
+    HH: timeOptions?.hours,
+    mm: timeOptions?.minutes,
+    ss: timeOptions?.seconds,
   } as const;
 
-  return markers.map((marker) =>
-    formatArray?.indexOf(marker) < 0 ? 0 : map[marker],
-  );
+  const [hoursOptions, minutesOptions, secondsOptions] = markers.map((marker) =>
+    formatArray?.includes(marker) ? mapTimeOptions[marker] : [],
+  ) as [
+    TimeUnitOptions | undefined,
+    TimeUnitOptions | undefined,
+    TimeUnitOptions | undefined,
+  ];
+
+  const effectiveTimeOptions = {
+    hours: hoursOptions,
+    minutes: minutesOptions,
+    seconds: secondsOptions,
+  };
+
+  return effectiveTimeOptions;
 };
 
-export const getTimeEnum = (
-  length: number,
-  multiplicity = 1,
-  startOfUnits: (date: Date) => Date,
-  addUnits: (date: Date, amount: number) => Date,
-  getItemLabel: (date: Date) => string,
-) => {
-  const numbers = range(multiplicity ? Math.floor(length / multiplicity) : 0);
+export const adaptFormat = (
+  format: string,
+  timeOptions?: TimeOptions,
+): string => {
+  const formatArray = format.split(' ');
+  let adaptedFormat = formatArray[1] ?? format;
 
-  if (numbers.length === 0) {
-    return [];
+  const shouldRemoveTimePart = (
+    timeOption: TimeUnitOptions | undefined,
+  ): boolean => {
+    if (timeOption && Array.isArray(timeOption) && timeOption.length === 0)
+      return true;
+    if (timeOption && !Array.isArray(timeOption) && timeOption.step === 0)
+      return true;
+
+    return false;
+  };
+
+  const timeMarkers = [
+    { marker: 'HH', timeOption: timeOptions?.hours },
+    { marker: 'mm', timeOption: timeOptions?.minutes },
+    { marker: 'ss', timeOption: timeOptions?.seconds },
+  ];
+
+  for (const { marker, timeOption } of timeMarkers) {
+    if (shouldRemoveTimePart(timeOption)) {
+      adaptedFormat = adaptedFormat.replace(new RegExp(`:?${marker}`, 'g'), '');
+    }
   }
 
-  const startDate = startOfUnits(startOfToday());
+  adaptedFormat = adaptedFormat
+    .replace(/:+$/, '')
+    .replace(/^:+/, '')
+    .replace(/:+/g, ':')
+    .replace(/\s+/g, ' ')
+    .trim();
 
-  return numbers.map((number) => {
-    return getItemLabel(addUnits(startDate, number * multiplicity));
-  });
+  if (formatArray.length > 1) {
+    formatArray[1] = adaptedFormat;
+    return formatArray.filter((part) => part.length > 0).join(' ');
+  }
+  return adaptedFormat;
+};
+
+export const placeholderByFormat = (format: string): string => {
+  return format
+    .replace(/yyyy/g, 'ГГГГ')
+    .replace(/MM/g, 'ММ')
+    .replace(/dd/g, 'ДД')
+    .replace(/HH/g, 'ЧЧ')
+    .replace(/mm/g, 'ММ')
+    .replace(/ss/g, 'СС');
+};
+
+type MaskBlock = {
+  mask: typeof IMask.MaskedRange;
+  from: number;
+  to: number;
+};
+
+type MaskBlocks = Partial<{
+  dd: MaskBlock;
+  MM: MaskBlock;
+  yyyy: MaskBlock;
+  HH: MaskBlock;
+  mm: MaskBlock;
+  ss: MaskBlock;
+}>;
+
+export const getMaskBlocks = ({
+  includeDate = true,
+  includeTime = true,
+} = {}): MaskBlocks => {
+  const blocks: MaskBlocks = {};
+
+  if (includeDate) {
+    blocks.dd = { mask: IMask.MaskedRange, from: 1, to: 31 };
+    blocks.MM = { mask: IMask.MaskedRange, from: 1, to: 12 };
+    blocks.yyyy = { mask: IMask.MaskedRange, from: 1, to: 9999 };
+  }
+
+  if (includeTime) {
+    blocks.HH = { mask: IMask.MaskedRange, from: 0, to: 23 };
+    blocks.mm = { mask: IMask.MaskedRange, from: 0, to: 59 };
+    blocks.ss = { mask: IMask.MaskedRange, from: 0, to: 59 };
+  }
+
+  return blocks;
 };
 
 export const getFormForStart = (form: TextFieldPropForm) => getForm(form, 0, 2);
@@ -219,4 +295,37 @@ export const useStringValue = (
   }, [value?.getTime()]);
 
   return handleClear;
+};
+
+export const isValidTimeByTimeOptions = (
+  date: Date,
+  timeOptions?: TimeOptions,
+): boolean => {
+  const isUnitValid = (
+    unit: 'hours' | 'minutes' | 'seconds',
+    value: number,
+    options?: TimeUnitOptions,
+  ): boolean => {
+    if (!options) return true;
+
+    const allowed = getTimeNumbers(unit, options);
+    if (allowed.length === 0) return true;
+
+    return allowed.includes(value);
+  };
+
+  if (!timeOptions) return true;
+  const isHoursValid = isUnitValid('hours', date.getHours(), timeOptions.hours);
+  const isMinutesValid = isUnitValid(
+    'minutes',
+    date.getMinutes(),
+    timeOptions.minutes,
+  );
+  const isSecondsValid = isUnitValid(
+    'seconds',
+    date.getSeconds(),
+    timeOptions.seconds,
+  );
+
+  return isHoursValid && isMinutesValid && isSecondsValid;
 };

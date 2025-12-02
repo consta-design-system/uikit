@@ -6,8 +6,8 @@ import { maxDateDefault, minDateDefault } from '##/utils/date';
 
 import {
   datePickerPropFormatTypeMonth,
-  datePickerPropPlaceholderTypeMonth,
   datePickerPropSeparatorDefault,
+  placeholderByFormat,
 } from '../helpers';
 import { DatePickerFieldTypeMonthProps, usePicker } from './helpers';
 
@@ -18,7 +18,7 @@ export const DatePickerFieldTypeMonth = React.forwardRef<
   const {
     format = datePickerPropFormatTypeMonth,
     separator = datePickerPropSeparatorDefault,
-    placeholder = datePickerPropPlaceholderTypeMonth,
+    placeholder,
     onChange,
     onError,
     minDate = minDateDefault,
@@ -28,6 +28,8 @@ export const DatePickerFieldTypeMonth = React.forwardRef<
     defaultValue,
     ...otherProps
   } = props;
+
+  const adaptedPlaceholder = placeholder ?? placeholderByFormat(format);
 
   const [inputRef, onClear] = usePicker({
     value,
@@ -45,7 +47,7 @@ export const DatePickerFieldTypeMonth = React.forwardRef<
       type="text"
       inputContainerRef={ref}
       inputRef={useForkRef([inputRef, inputRefProp])}
-      placeholder={placeholder}
+      placeholder={adaptedPlaceholder}
       onClear={onClear}
     />
   );

@@ -9,7 +9,10 @@ import {
   DateTimePropType,
   MoveType,
 } from '##/components/DateTime';
-import { DateTimePropDisableDates } from '##/components/DateTime/helpers/types';
+import {
+  DateTimePropDisableDates,
+  TimeOptions,
+} from '##/components/DateTime/helpers/types';
 import { Direction, Popover } from '##/components/Popover';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
@@ -46,9 +49,7 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
     onChangeCurrentVisibleDate?: (date: Date) => void;
     zIndex?: number;
     renderAdditionalControls?: DatePickerAdditionalControlRenderProp;
-    multiplicitySeconds?: number;
-    multiplicityMinutes?: number;
-    multiplicityHours?: number;
+    timeOptions?: TimeOptions;
     timeFor?: 'start' | 'end';
     disableDates?: DateTimePropDisableDates;
   },

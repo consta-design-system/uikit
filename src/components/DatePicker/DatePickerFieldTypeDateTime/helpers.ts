@@ -1,25 +1,11 @@
 import { IconComponent, IconPropSize } from '@consta/icons/Icon';
-import {
-  addHours,
-  addMinutes,
-  addSeconds,
-  format,
-  isValid,
-  isWithinInterval,
-  parse,
-  startOfDay,
-  startOfHour,
-  startOfMinute,
-} from 'date-fns';
+import { format, isValid, isWithinInterval, parse } from 'date-fns';
 import { MaskedDate } from 'imask';
-import React, { useCallback } from 'react';
-import { IMask, ReactMaskOpts, useIMask } from 'react-imask';
+import React, { useCallback, useMemo } from 'react';
+import { ReactMaskOpts, useIMask } from 'react-imask';
 
-import {
-  getLabelHours,
-  getLabelMinutes,
-  getLabelSeconds,
-} from '##/components/DateTime/helpers';
+import { TimeOptions } from '##/components/DateTime/helpers';
+import { getTimeOptionsKey } from '##/components/DateTime/helpers/getTimeOptionsKey';
 import {
   TextFieldPropForm,
   TextFieldPropSize,
@@ -31,10 +17,11 @@ import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes'
 
 import {
   datePickerPropSeparatorDefault,
+  getMaskBlocks,
   getPartDate,
   getParts,
   getPartsDate,
-  getTimeEnum,
+  isValidTimeByTimeOptions,
   useStringValue,
 } from '../helpers';
 import { datePickerErrorTypes, DatePickerPropOnError } from '../types';
@@ -77,9 +64,7 @@ export type DatePickerFieldTypeDateTimeProps = PropsWithHTMLAttributes<
     minDate?: Date;
     maxDate?: Date;
     focused?: boolean;
-    multiplicitySeconds?: number;
-    multiplicityMinutes?: number;
-    multiplicityHours?: number;
+    timeOptions?: TimeOptions;
     label?: string;
     labelIcon?: IconComponent;
     caption?: string;
@@ -97,9 +82,7 @@ type UsePickerProps = {
   separator: string;
   minDate: Date;
   maxDate: Date;
-  multiplicityHours: number | undefined;
-  multiplicitySeconds: number | undefined;
-  multiplicityMinutes: number | undefined;
+  timeOptions?: TimeOptions;
 };
 
 export const usePicker = (props: UsePickerProps) => {
@@ -111,9 +94,7 @@ export const usePicker = (props: UsePickerProps) => {
     separator,
     maxDate,
     minDate,
-    multiplicityHours,
-    multiplicityMinutes,
-    multiplicitySeconds,
+    timeOptions,
   } = props;
   const onChangeRef = useMutableRef(onChange);
   const valueRef = useMutableRef(value);
@@ -184,88 +165,58 @@ export const usePicker = (props: UsePickerProps) => {
             }
             return;
           }
+
+          if (!isValidTimeByTimeOptions(date, timeOptions)) {
+            const [HH, mm, ss] = getPartsDate(
+              stringValue,
+              formatProp,
+              ':',
+              false,
+              ['HH', 'mm', 'ss'],
+            );
+
+            onErrorRef.current?.({
+              type: datePickerErrorTypes[3],
+              stringValue,
+              date,
+              HH,
+              mm,
+              ss,
+            });
+
+            if (value) {
+              onChange(null, { e });
+            }
+            return;
+          }
           onChange(date, { e });
         } else if (value) {
           onChange(null, { e });
         }
       }
     },
-    [minDate?.getTime(), maxDate?.getTime(), formatProp, separator],
+    [
+      minDate?.getTime(),
+      maxDate?.getTime(),
+      formatProp,
+      separator,
+      getTimeOptionsKey(timeOptions),
+    ],
   );
+
+  const maskBlocks = useMemo(() => getMaskBlocks(), []);
 
   const imaskProps = useIMask<HTMLInputElement, ReactMaskOpts>(
     {
       mask: Date as unknown as MaskedDate,
       pattern: formatProp,
       blocks: {
-        yyyy: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 9999,
-        },
-
-        MM: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 12,
-        },
-
-        dd: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 31,
-        },
-        HH:
-          multiplicityHours && multiplicityHours > 1
-            ? {
-                mask: IMask.MaskedEnum,
-                enum: getTimeEnum(
-                  24,
-                  multiplicityHours,
-                  startOfDay,
-                  addHours,
-                  getLabelHours,
-                ),
-              }
-            : {
-                mask: IMask.MaskedRange,
-                from: 0,
-                to: 23,
-              },
-        mm:
-          multiplicityMinutes && multiplicityMinutes > 1
-            ? {
-                mask: IMask.MaskedEnum,
-                enum: getTimeEnum(
-                  60,
-                  multiplicityMinutes,
-                  startOfHour,
-                  addMinutes,
-                  getLabelMinutes,
-                ),
-              }
-            : {
-                mask: IMask.MaskedRange,
-                from: 0,
-                to: 59,
-              },
-        ss:
-          multiplicitySeconds && multiplicitySeconds > 1
-            ? {
-                mask: IMask.MaskedEnum,
-                enum: getTimeEnum(
-                  60,
-                  multiplicitySeconds,
-                  startOfMinute,
-                  addSeconds,
-                  getLabelSeconds,
-                ),
-              }
-            : {
-                mask: IMask.MaskedRange,
-                from: 0,
-                to: 59,
-              },
+        yyyy: maskBlocks.yyyy,
+        MM: maskBlocks.MM,
+        dd: maskBlocks.dd,
+        HH: maskBlocks.HH,
+        mm: maskBlocks.mm,
+        ss: maskBlocks.ss,
       },
       lazy: true,
       autofix: true,
