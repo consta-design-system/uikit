@@ -67,7 +67,7 @@ export const getTimeOptionsByFormat = (
   return effectiveTimeOptions;
 };
 
-export const getAdaptedFormatByTimeOptions = (
+export const adaptFormat = (
   format: string,
   timeOptions?: TimeOptions,
 ): string => {
@@ -86,30 +86,16 @@ export const getAdaptedFormatByTimeOptions = (
   };
 
   const timeMarkers = [
-    {
-      markers: ['HH', 'ЧЧ'],
-      timeOption: timeOptions?.hours,
-    },
-    {
-      markers: ['mm', 'ММ'],
-      timeOption: timeOptions?.minutes,
-    },
-    {
-      markers: ['ss', 'СС'],
-      timeOption: timeOptions?.seconds,
-    },
+    { marker: 'HH', timeOption: timeOptions?.hours },
+    { marker: 'mm', timeOption: timeOptions?.minutes },
+    { marker: 'ss', timeOption: timeOptions?.seconds },
   ];
 
-  timeMarkers.forEach(({ markers, timeOption }) => {
+  for (const { marker, timeOption } of timeMarkers) {
     if (shouldRemoveTimePart(timeOption)) {
-      markers.forEach((marker) => {
-        adaptedFormat = adaptedFormat.replace(
-          new RegExp(`:?${marker}`, 'g'),
-          '',
-        );
-      });
+      adaptedFormat = adaptedFormat.replace(new RegExp(`:?${marker}`, 'g'), '');
     }
-  });
+  }
 
   adaptedFormat = adaptedFormat
     .replace(/:+$/, '')
@@ -123,6 +109,16 @@ export const getAdaptedFormatByTimeOptions = (
     return formatArray.filter((part) => part.length > 0).join(' ');
   }
   return adaptedFormat;
+};
+
+export const placeholderByFormat = (format: string): string => {
+  return format
+    .replace(/yyyy/g, 'ГГГГ')
+    .replace(/MM/g, 'ММ')
+    .replace(/dd/g, 'ДД')
+    .replace(/HH/g, 'ЧЧ')
+    .replace(/mm/g, 'ММ')
+    .replace(/ss/g, 'СС');
 };
 
 type MaskBlock = {
