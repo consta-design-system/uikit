@@ -13,19 +13,14 @@ import { DatePickerPropType } from './types';
 
 export const datePickerPropSeparatorDefault = '.';
 export const datePickerPropFormatTypeDate = `dd${datePickerPropSeparatorDefault}MM${datePickerPropSeparatorDefault}yyyy`;
-export const datePickerPropPlaceholderTypeDate = `ДД${datePickerPropSeparatorDefault}ММ${datePickerPropSeparatorDefault}ГГГГ`;
 
 export const datePickerPropFormatTypeTime = `HH:mm:ss`;
-export const datePickerPropPlaceholderTypeTime = `ЧЧ:ММ:СС`;
 
 export const datePickerPropFormatTypeDateTime = `${datePickerPropFormatTypeDate} ${datePickerPropFormatTypeTime}`;
-export const datePickerPropPlaceholderTypeDateTime = `${datePickerPropPlaceholderTypeDate} ${datePickerPropPlaceholderTypeTime}`;
 
 export const datePickerPropFormatTypeYear = `yyyy`;
-export const datePickerPropPlaceholderTypeYear = `ГГГГ`;
 
 export const datePickerPropFormatTypeMonth = `MM${datePickerPropSeparatorDefault}yyyy`;
-export const datePickerPropPlaceholderTypeMonth = `MM${datePickerPropSeparatorDefault}ГГГГ`;
 
 export const normalizeRangeValue = (dateRange: DateRange): DateRange => {
   if (
