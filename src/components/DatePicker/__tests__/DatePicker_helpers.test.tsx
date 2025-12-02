@@ -3,10 +3,11 @@ import { IMask } from 'react-imask';
 import { TimeOptions } from '##/components/DateTime';
 
 import {
+  adaptFormat,
   datePickerPropFormatTypeDateTime,
-  getAdaptedFormatByTimeOptions,
   getMaskBlocks,
   getTimeOptionsByFormat,
+  placeholderByFormat,
 } from '../helpers';
 
 describe('DateTime helpers (time)', () => {
@@ -230,31 +231,27 @@ describe('DateTime helpers (time)', () => {
     });
   });
 
-  describe('getAdaptedFormatByTimeOptions', () => {
+  describe('adaptFormat', () => {
     const numericFormat = 'dd.MM.yyyy HH:mm:ss';
-    const placeholderFormat = 'ДД.ММ.ГГГГ ЧЧ:ММ:СС';
 
     describe('with numeric format (dd.MM.yyyy HH:mm:ss)', () => {
       it('удаляет часть времени, если timeOptions пустой или step=0', () => {
         const timeOptionsHoursEmpty = { hours: [] };
-        const resultHoursEmpty = getAdaptedFormatByTimeOptions(
+        const resultHoursEmpty = adaptFormat(
           numericFormat,
           timeOptionsHoursEmpty,
         );
         expect(resultHoursEmpty).toBe('dd.MM.yyyy mm:ss');
 
         const timeOptionsHoursStep0 = { minutes: { step: 0 } };
-        const resultHoursStep0 = getAdaptedFormatByTimeOptions(
+        const resultHoursStep0 = adaptFormat(
           numericFormat,
           timeOptionsHoursStep0,
         );
         expect(resultHoursStep0).toBe('dd.MM.yyyy HH:ss');
 
         const timeOptionsAllEmpty = { hours: [], minutes: [], seconds: [] };
-        const resultAllEmpty = getAdaptedFormatByTimeOptions(
-          numericFormat,
-          timeOptionsAllEmpty,
-        );
+        const resultAllEmpty = adaptFormat(numericFormat, timeOptionsAllEmpty);
         expect(resultAllEmpty).toBe('dd.MM.yyyy');
       });
 
@@ -264,49 +261,39 @@ describe('DateTime helpers (time)', () => {
           minutes: [0, 30],
           seconds: [0, 45],
         };
-        const resultTimeOptions = getAdaptedFormatByTimeOptions(
-          numericFormat,
-          timeOptionsFull,
-        );
+        const resultTimeOptions = adaptFormat(numericFormat, timeOptionsFull);
         expect(resultTimeOptions).toBe(numericFormat);
       });
     });
+  });
 
-    describe('with placeholder format (ДД.ММ.ГГГГ ЧЧ:ММ:СС)', () => {
-      it('удаляет часть времени, если timeOptions пустой или step=0', () => {
-        const timeOptionsHoursEmpty = { hours: [] };
-        const resultHoursEmpty = getAdaptedFormatByTimeOptions(
-          placeholderFormat,
-          timeOptionsHoursEmpty,
-        );
-        expect(resultHoursEmpty).toBe('ДД.ММ.ГГГГ ММ:СС');
+  describe('placeholderByFormat', () => {
+    const testCases = [
+      { input: 'yyyy', expected: 'ГГГГ' },
+      { input: 'MM', expected: 'ММ' },
+      { input: 'dd', expected: 'ДД' },
+      { input: 'MM.yyyy', expected: 'ММ.ГГГГ' },
+      { input: 'dd.MM.yyyy', expected: 'ДД.ММ.ГГГГ' },
+      { input: 'dd/MM/yyyy', expected: 'ДД/ММ/ГГГГ' },
+      { input: 'yyyy-MM-dd', expected: 'ГГГГ-ММ-ДД' },
 
-        const timeOptionsHoursStep0 = { hours: { step: 0 } };
-        const resultHoursStep0 = getAdaptedFormatByTimeOptions(
-          placeholderFormat,
-          timeOptionsHoursStep0,
-        );
-        expect(resultHoursStep0).toBe('ДД.ММ.ГГГГ ММ:СС');
+      { input: 'HH:mm:ss', expected: 'ЧЧ:ММ:СС' },
+      { input: 'HH:mm', expected: 'ЧЧ:ММ' },
+      { input: 'HH', expected: 'ЧЧ' },
+      { input: 'mm', expected: 'ММ' },
+      { input: 'ss', expected: 'СС' },
+      { input: 'dd.MM.yyyy HH:mm:ss', expected: 'ДД.ММ.ГГГГ ЧЧ:ММ:СС' },
+      { input: 'dd.MM.yyyy HH:mm', expected: 'ДД.ММ.ГГГГ ЧЧ:ММ' },
+      { input: 'yyyy-MM-dd HH:mm:ss', expected: 'ГГГГ-ММ-ДД ЧЧ:ММ:СС' },
 
-        const timeOptionsAllEmpty = { hours: [], minutes: [], seconds: [] };
-        const resultAllEmpty = getAdaptedFormatByTimeOptions(
-          placeholderFormat,
-          timeOptionsAllEmpty,
-        );
-        expect(resultAllEmpty).toBe('ДД.ММ.ГГГГ');
-      });
+      { input: '', expected: '' },
+      { input: 'Произвольная строка', expected: 'Произвольная строка' },
+      { input: 'dd.MM.yyyy T HH:mm:ss', expected: 'ДД.ММ.ГГГГ T ЧЧ:ММ:СС' },
+    ];
 
-      it('не меняет формат, если опции полные timeOptions', () => {
-        const timeOptionsFull = {
-          hours: [0, 12],
-          minutes: [0, 30],
-          seconds: [0, 45],
-        };
-        const resultTimeOptions = getAdaptedFormatByTimeOptions(
-          placeholderFormat,
-          timeOptionsFull,
-        );
-        expect(resultTimeOptions).toBe(placeholderFormat);
+    testCases.forEach(({ input, expected }) => {
+      it(`должен преобразовать "${input}" в "${expected}"`, () => {
+        expect(placeholderByFormat(input)).toBe(expected);
       });
     });
   });
