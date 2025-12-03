@@ -1,0 +1,19 @@
+.ModalExample {
+  &-Title {
+    margin: var(--space-m);
+  }
+
+  &-Body {
+    margin: var(--space-m);
+  }
+
+  &-Action {
+    display: flex;
+    justify-content: flex-end;
+    margin: var(--space-m);
+  }
+
+  &-Modal {
+    width: 400px;
+  }
+}
