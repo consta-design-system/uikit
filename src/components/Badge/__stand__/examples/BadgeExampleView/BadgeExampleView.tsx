@@ -7,5 +7,6 @@ export const BadgeExampleView = () => (
   <Example>
     <Badge view="filled" label="Filled badge" />
     <Badge view="stroked" label="Stroked badge" />
+    <Badge view="tinted" label="Tinted badge" />
   </Example>
 );
