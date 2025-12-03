@@ -161,22 +161,6 @@ export const NotificationExampleGroups = () => (
       groups={groups}
       getItemCaption={(item) => defaultDateFormat(item.date)}
       getItemUserName={(item) => item.label}
-      getItemActions={() => [
-        {
-          label: 'Прочитать',
-          onClick: emptyFunction,
-          icon: IconAllDone,
-        },
-        { label: 'Удалить', onClick: emptyFunction, icon: IconTrash },
-      ]}
-      getGroupActions={() => [
-        {
-          label: 'Прочитать всё',
-          onClick: () => {},
-          icon: IconAllDone,
-        },
-        { label: 'Удалить всё', onClick: emptyFunction, icon: IconTrash },
-      ]}
     />
   </Example>
 );

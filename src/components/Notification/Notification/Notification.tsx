@@ -68,12 +68,12 @@ function NotificationRender(
             groupRender(group)
           ) : (
             <NotificationGroup
+              className={cnNotification('Group', [
+                cnMixSpace(groupSpace || { pV: 'xs', pH: 's', mB: 's' }),
+              ])}
               key={cnNotification('Group', { groupIndex })}
               title={getGroupLabel(group)}
               actions={getGroupActions?.(group)}
-              className={cnMixSpace(
-                groupSpace || { pV: 'xs', pH: 's', mB: 's' },
-              )}
             />
           )}
           {group.items.map((item, itemIndex) => {

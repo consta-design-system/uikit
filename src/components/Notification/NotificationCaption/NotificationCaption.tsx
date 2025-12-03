@@ -6,7 +6,7 @@ import React, { forwardRef } from 'react';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
-const cnNotificationCaption = cn('NotificationCaption');
+export const cnNotificationCaption = cn('NotificationCaption');
 
 type NotificationCaptionProps = PropsWithHTMLAttributesAndRef<
   {},

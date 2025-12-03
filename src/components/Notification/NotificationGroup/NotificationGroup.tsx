@@ -33,8 +33,7 @@ export const NotificationGroup: React.FC<NotificationGroupProps> = forwardRef<
           cnMixFlex({ align: 'center' }),
         ])}
         view="secondary"
-        transform="uppercase"
-        weight="semibold"
+        weight="medium"
         size="xs"
         lineHeight="m"
         fontStyle="italic"
