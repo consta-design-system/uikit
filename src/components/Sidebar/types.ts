@@ -35,6 +35,7 @@ export type SidebarProps = PropsWithHTMLAttributes<
     afterClose?: () => void;
     ignoreOutsideClicksRefs?: React.RefObject<HTMLElement>[];
     border?: boolean;
+    scrollContainerRef?: React.RefObject<HTMLDivElement>;
   },
   HTMLDivElement
 >;

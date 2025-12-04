@@ -9,10 +9,6 @@ import {
   FlatSelectPropsInit,
 } from '.';
 
-// import { objectWithDefault, WithDefaultReturn } from '##/utils/object';
-
-// import { FlatSelectGroupDefault, FlatSelectItemDefault, FlatSelectPropsInit } from '.';
-
 export const defaultLabelForEmptyItems = 'Список пуст';
 export const defaultSelectAllLabel = 'Выбрать все';
 

@@ -1,0 +1,8 @@
+.NotificationExampleRender {
+  max-width: 400px;
+
+  &-Photo {
+    width: 85px;
+    border-radius: 2px;
+  }
+}

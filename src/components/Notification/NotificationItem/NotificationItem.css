@@ -1,0 +1,61 @@
+.NotificationItem {
+  &_withAvatar {
+    --notification-item-gap: var(--space-m, 0);
+  }
+
+  &_clickable {
+    cursor: pointer;
+  }
+
+  &-Avatar {
+    flex: none;
+  }
+
+  &-Content {
+    position: relative;
+    flex: 1;
+  }
+
+  &-TitleWrapper {
+    min-height: var(--control-height-xs);
+  }
+
+  &-Badge {
+    flex: none;
+  }
+
+  &-Caption {
+    overflow: hidden;
+    width: 100%;
+    min-height: var(--space-m);
+  }
+
+  &-Badges {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &-Title {
+    margin-bottom: var(--space-2xs);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &-Button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &-Actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &-MixMR {
+    margin-right: calc(var(--control-height-xs) + var(--space-2xs));
+  }
+}

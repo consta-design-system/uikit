@@ -134,7 +134,6 @@ const FlatSelectRender = (
           form: bordered ? form : undefined,
           size,
         },
-
         [className],
       )}
       style={{

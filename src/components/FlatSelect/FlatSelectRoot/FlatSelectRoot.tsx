@@ -42,6 +42,7 @@ export const FlatSelectRoot: React.FC<FlatSelectRootProps> = forwardRef(
       ],
       ...otherProps
     } = props;
+
     const contentRef = useRef(null);
     const contentForkedRef = useForkRef([contentRef, ref]);
     const withAnchor = !!anchorRef;
