@@ -1,5 +1,22 @@
 # Changelog
 
+## v5.28.0 (04/12/2025)
+Самое важное:
+- Добавили новый компонент `Notification` и его элементы, для вывода нотификаций
+- В `DateTime` и `DatePicker` добавили свойство  `timeOptions`, для гибкой настройки контролов выбора времени.
+
+---
+
+
+- [feat(Notification): add components (#4124)](https://github.com/consta-design-system/uikit/commit/c7b9e1eeee4c3ed11e9e3e075aacaa2dc794e0b6) - [@gizeasy](https://github.com/gizeasy)
+- [fix: add SidebarDeprecated and ModalDeprecated (#4126)](https://github.com/consta-design-system/uikit/commit/64eeeffa0f6ab704d1455c72ec0e70cd7b7b56d1) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Badge): add missing view=tinted docs (#4120)](https://github.com/consta-design-system/uikit/commit/a4472ab1fc5216f31f12c6e06917c4a5c10b5471) - [@baevm](https://github.com/baevm)
+- [feat(Datetime): time options (#4112)](https://github.com/consta-design-system/uikit/commit/e123250e92613a2c4e60697279211830503767a0) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+- [test: add tests for ProgressLine, useForkRef, useMouseLeave (#4116)](https://github.com/consta-design-system/uikit/commit/251aa97e72f237629163097120e8d8e61ee69d6a) - [@baevm](https://github.com/baevm)
+- [test(Picture/Grid/DragNDropFieldCanary): add tests (#4111)](https://github.com/consta-design-system/uikit/commit/57088313b59a517c55cfd0a611138d62a3be1755) - [@baevm](https://github.com/baevm)
+
+--------------------
+
 ## v5.27.1 (11/11/2025)
 - [fix(Modal): fixed zIndex prop (#4110)](https://github.com/consta-design-system/uikit/commit/d8544b0b9df8f58e2ed3a881cd1bbf7c6645b8c3) - [@gizeasy](https://github.com/gizeasy)
 - [fix(Slider): tab navigation (#4109)](https://github.com/consta-design-system/uikit/commit/680364e4a88431e569e065a764354563e8979bff) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
@@ -396,9 +413,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [docs(Informer): fixed status examples (#3714)](https://github.com/consta-design-system/uikit/commit/18fcb020caf3a781b78087aec6c40e8ab9ccfbe9) - [@gizeasy](https://github.com/gizeasy)
 - [fix(TableTextFilter): Apply filter based on visible and checked elements (#3712)](https://github.com/consta-design-system/uikit/commit/75eec472115a8e781405808d13f05843dcdaf97f) - [@ZettZet](https://github.com/ZettZet)
 - [fix(Chips): callback fix (#3709)](https://github.com/consta-design-system/uikit/commit/9e223d472b61a3e6291bba5731c3d995776bb114) - [@ZettZet](https://github.com/ZettZet)
-
---------------------
-
-## v5.6.1 (17/06/2024)
-- [fix(withTooltip): fixed types(#3684)](https://github.com/consta-design-system/uikit/commit/94a4c201a5a4dce4256610d0ab2fe06a9fc21c74) - [@ZettZet](https://github.com/ZettZet)
-- [feat(File): add .msg icon (#3686)](https://github.com/consta-design-system/uikit/commit/1525600ec6c0683a616e7f165979085997a6f778) - [@gizeasy](https://github.com/gizeasy)
