@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.28.1 (18/12/2025)
+- [fix(ContextMenu): fixed className (#4134)](https://github.com/consta-design-system/uikit/commit/5b8cae4667c84126159b65a7a7735752159c0a1b) - [@gizeasy](https://github.com/gizeasy)
+- [fix(Sidebar): fix type for ref (#4132)](https://github.com/consta-design-system/uikit/commit/827fbfd3b031723b15924bbbe5f008d06df7e73a) - [@baevm](https://github.com/baevm)
+- [docs(FieldGroup): fix typos in doc (#4128)](https://github.com/consta-design-system/uikit/commit/76f2b35c8aa53b0ee670c120939a090089c5f7a6) - [@baevm](https://github.com/baevm)
+
+--------------------
+
 ## v5.28.0 (04/12/2025)
 Самое важное:
 - Добавили новый компонент `Notification` и его элементы, для вывода нотификаций
@@ -399,17 +406,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 
 - [fix(AutoComplite): removed dependence on value (#3735)](https://github.com/consta-design-system/uikit/commit/c99fa0451257c137534a0937cf3416b66acdd99e) - [@gizeasy](https://github.com/gizeasy)
 - [feat(DatePicker): add dropdownRef props (#3732)](https://github.com/consta-design-system/uikit/commit/a8added4c415f8f30295ebe8da6f1971f5dc5fb4) - [@KlochkovIUS](https://github.com/KlochkovIUS)
-
---------------------
-
-## v5.7.0 (07/08/2024)
-Самое важное:
-
-- В `Popover` и `Tooltip` добавили возможность указывать вьюпорт.
-
----
-
-- [feat(Popover, Tooltip): add viewport (#3719)](https://github.com/consta-design-system/uikit/commit/ccda0ffaa6b021346c847e3c59e512976f59ab8c) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Informer): fixed status examples (#3714)](https://github.com/consta-design-system/uikit/commit/18fcb020caf3a781b78087aec6c40e8ab9ccfbe9) - [@gizeasy](https://github.com/gizeasy)
-- [fix(TableTextFilter): Apply filter based on visible and checked elements (#3712)](https://github.com/consta-design-system/uikit/commit/75eec472115a8e781405808d13f05843dcdaf97f) - [@ZettZet](https://github.com/ZettZet)
-- [fix(Chips): callback fix (#3709)](https://github.com/consta-design-system/uikit/commit/9e223d472b61a3e6291bba5731c3d995776bb114) - [@ZettZet](https://github.com/ZettZet)
