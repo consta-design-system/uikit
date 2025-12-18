@@ -241,15 +241,23 @@ const ContextMenuLevelRender = (
       anchorRef={anchorRef}
       className={
         isMobile
-          ? cnContextMenuLevel('Mobile', { animate }, [className])
-          : cnContextMenuLevel('Desktop', { firstLevel }, [
-              cnListBox({ size, form, border: true, shadow: true }),
-              cnMixSpace({
-                pV: mapVerticalSpace[size],
-              }),
-              cnMixPopoverAnimate({ animate }),
-              firstLevel ? className : undefined,
-            ])
+          ? cnContextMenuLevel(
+              'Mobile',
+              { animate, firstLevel, level: levelDepth.toString() },
+              [className],
+            )
+          : cnContextMenuLevel(
+              'Desktop',
+              { firstLevel, level: levelDepth.toString() },
+              [
+                cnListBox({ size, form, border: true, shadow: true }),
+                cnMixSpace({
+                  pV: mapVerticalSpace[size],
+                }),
+                cnMixPopoverAnimate({ animate }),
+                className,
+              ],
+            )
       }
       possibleDirections={possibleDirections}
       spareDirection={spareDirection}
