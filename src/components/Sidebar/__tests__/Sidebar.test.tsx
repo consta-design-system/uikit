@@ -140,6 +140,12 @@ describe('Компонент Sidebar', () => {
       document.body.removeChild(portal);
     });
 
+    it('присваивает ref', () => {
+      const ref = React.createRef<HTMLDivElement>();
+      renderComponent({ isOpen: true, ref, children: '' });
+      expect(ref.current).toBe(getRender());
+    });
+
     test.each(sidebarPropSize)('применяется класс для размера %p', (size) => {
       renderComponent({ isOpen: true, size });
       const sidebarWindow = getRender();

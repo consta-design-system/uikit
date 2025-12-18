@@ -1,5 +1,5 @@
 import { AsTagAttribute } from '##/utils/types/AsTags';
-import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
+import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
 export type SidebarPropPosition = typeof sidebarPropPosition[number];
@@ -19,7 +19,7 @@ export const sidebarPropSize = [
 
 export type SidebarPropSize = typeof sidebarPropSize[number];
 
-export type SidebarProps = PropsWithHTMLAttributes<
+export type SidebarProps = PropsWithHTMLAttributesAndRef<
   {
     isOpen?: boolean;
     onClose?: () => void;
