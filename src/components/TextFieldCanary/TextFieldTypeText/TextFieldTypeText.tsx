@@ -22,6 +22,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
       name,
       inputRef: inputRefProp,
       maxLength,
+      minLength,
       disabled,
       size = 'm',
       view = 'default',
@@ -119,6 +120,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
           onKeyUp={onKeyUp}
           onKeyUpCapture={onKeyUpCapture}
           maxLength={maxLength}
+          minLength={minLength}
           disabled={disabled}
           type={type}
           id={id}

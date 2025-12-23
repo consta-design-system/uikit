@@ -11,6 +11,7 @@ export type FieldArrayValueInlineControlProps<ITEM> =
       value?: ITEM[];
       renderValue: (items: ITEM[]) => React.ReactNode;
       inputMaxLength?: number;
+      inputMinLength?: number;
       inputValue?: string;
       inputDefaultValue?: string;
       inputRef?: React.Ref<HTMLInputElement>;

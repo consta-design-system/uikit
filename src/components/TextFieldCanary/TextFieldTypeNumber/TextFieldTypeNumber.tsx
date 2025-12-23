@@ -28,6 +28,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       name,
       inputRef: inputRefProp,
       maxLength,
+      minLength,
       disabled,
       size = 'm',
       view = 'default',
@@ -214,6 +215,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
           onKeyUpCapture={onKeyUpCapture}
           onWheel={handleWheel}
           maxLength={maxLength}
+          minLength={minLength}
           disabled={disabled}
           type={type}
           max={max}
