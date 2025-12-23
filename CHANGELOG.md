@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.28.2 (23/12/2025)
+- [fix(TextFieldCanary): fixed minLength (#4135)](https://github.com/consta-design-system/uikit/commit/71740a356dd560c31a4d722f483924f774fec9f4) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.28.1 (18/12/2025)
 - [fix(ContextMenu): fixed className (#4134)](https://github.com/consta-design-system/uikit/commit/5b8cae4667c84126159b65a7a7735752159c0a1b) - [@gizeasy](https://github.com/gizeasy)
 - [fix(Sidebar): fix type for ref (#4132)](https://github.com/consta-design-system/uikit/commit/827fbfd3b031723b15924bbbe5f008d06df7e73a) - [@baevm](https://github.com/baevm)
@@ -395,14 +400,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 
 ## v5.8.1 (19/08/2024)
 - [fix(DatePicker): fixed nulling of value (#3736)](https://github.com/consta-design-system/uikit/commit/2e8e85143dc8c67a0313a86b7aa215ed03bf6b64) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.8.0 (19/08/2024)
-Самое важное:
-- в `DatePicker` добавили свойство `dropdownRef` для получения ссылки на элемент выпадающего списка.
-
----
-
-- [fix(AutoComplite): removed dependence on value (#3735)](https://github.com/consta-design-system/uikit/commit/c99fa0451257c137534a0937cf3416b66acdd99e) - [@gizeasy](https://github.com/gizeasy)
-- [feat(DatePicker): add dropdownRef props (#3732)](https://github.com/consta-design-system/uikit/commit/a8added4c415f8f30295ebe8da6f1971f5dc5fb4) - [@KlochkovIUS](https://github.com/KlochkovIUS)
