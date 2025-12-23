@@ -117,6 +117,7 @@ const FieldArrayValueInlineControlRender = (
     className,
     inputRef: inputRefProp,
     inputMaxLength,
+    inputMinLength,
     value = [],
     inputValue,
     inputDefaultValue = '',

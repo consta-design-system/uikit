@@ -27,11 +27,11 @@ export type TextFieldPropOnChange<TYPE> = (
   },
 ) => void;
 
-type InputType<TYPE extends string> = TYPE extends 'textarea'
+export type InputType<TYPE extends string> = TYPE extends 'textarea'
   ? HTMLTextAreaElement
   : HTMLInputElement;
 
-type TextFieldPropsTypeTextArea<TYPE> = TYPE extends 'textarea'
+export type TextFieldPropsTypeTextArea<TYPE> = TYPE extends 'textarea'
   ? {
       resize?: boolean | 'auto';
     } & (
@@ -56,7 +56,7 @@ export type TextFieldPropRenderValueItem = (props: {
   disabled: boolean | undefined;
 }) => React.ReactNode;
 
-type TextFieldPropsTypeTextArray<TYPE> = TYPE extends 'textarray'
+export type TextFieldPropsTypeTextArray<TYPE> = TYPE extends 'textarray'
   ? {
       renderValueItem?: TextFieldPropRenderValueItem;
       inputValue?: string | null;
@@ -64,7 +64,7 @@ type TextFieldPropsTypeTextArray<TYPE> = TYPE extends 'textarray'
     }
   : {};
 
-type TextFieldPropsTypeNumber<TYPE> = TYPE extends 'number'
+export type TextFieldPropsTypeNumber<TYPE> = TYPE extends 'number'
   ? {
       max?: number | string;
       min?: number | string;
@@ -73,7 +73,7 @@ type TextFieldPropsTypeNumber<TYPE> = TYPE extends 'number'
     }
   : {};
 
-type TextFieldPropsTypePassword<TYPE> = TYPE extends 'password'
+export type TextFieldPropsTypePassword<TYPE> = TYPE extends 'password'
   ? {
       iconShowPassword?: IconComponent;
       iconHidePassword?: IconComponent;
@@ -90,7 +90,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
     name?: string;
     type?: TYPE;
     disabled?: boolean;
-    mixLength?: number;
+    minLength?: number;
     maxLength?: number;
     size?: TextFieldPropSize;
     view?: FieldPropView;

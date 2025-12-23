@@ -24,6 +24,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       name,
       inputRef: inputRefProp,
       maxLength,
+      minLength,
       disabled,
       size = 'm',
       view = 'default',
@@ -134,6 +135,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
           onKeyUp={onKeyUp}
           onKeyUpCapture={onKeyUpCapture}
           maxLength={maxLength}
+          minLength={minLength}
           disabled={disabled}
           id={id}
           name={name}

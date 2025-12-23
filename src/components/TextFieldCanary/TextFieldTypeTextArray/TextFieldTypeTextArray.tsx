@@ -51,6 +51,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       name,
       inputRef: inputRefProp,
       maxLength,
+      minLength,
       disabled,
       size = 'm',
       view = 'default',
@@ -276,6 +277,8 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onWheel={onWheel}
             disabled={disabled}
             inputValue={inputValue || ''}
+            inputMaxLength={maxLength}
+            inputMinLength={minLength}
           />
         </div>
       </FieldControlLayout>
