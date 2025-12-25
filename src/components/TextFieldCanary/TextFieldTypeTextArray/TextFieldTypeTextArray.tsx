@@ -193,6 +193,8 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
         ? getStyleProps(ref.current, ['max-height', 'height'])
         : undefined;
 
+    console.log(stylesRoot);
+
     useEffect(() => {
       if (controlRef.current && scrollWrapperRef.current && focused) {
         scrollWrapperRef.current.scrollTo({
@@ -233,7 +235,9 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
         style={{
           ...style,
           ['--text-field-textarray-max-height' as string]:
-            stylesRoot?.['max-height'] || stylesRoot?.height || 'auto',
+            stylesRoot?.['max-height'] !== 'none'
+              ? stylesRoot?.['max-height']
+              : stylesRoot?.height || 'auto',
         }}
       >
         <div

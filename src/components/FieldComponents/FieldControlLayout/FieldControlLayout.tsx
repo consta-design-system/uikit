@@ -12,7 +12,9 @@ import {
   getBorderColor,
   getBorderRadius,
   getBorderStyle,
-  getPadding,
+  getPaddingLeft,
+  getPaddingRight,
+  getPaddingVertical,
   getSlots,
   getSlotsWidthStyles,
 } from './helpers';
@@ -96,7 +98,19 @@ export const FieldControlLayout = forwardRef<
           form,
           view,
         ),
-        ['--field-control-layout-padding' as string]: getPadding(form, view),
+        ['--field-control-layout-padding-top' as string]:
+          getPaddingVertical(view),
+        ['--field-control-layout-padding-bottom' as string]:
+          getPaddingVertical(view),
+        ['--field-control-layout-padding-left' as string]: getPaddingLeft(
+          view,
+          form,
+        ),
+        ['--field-control-layout-padding-right' as string]: getPaddingRight(
+          view,
+          form,
+        ),
+        // ['--field-control-layout-padding' as string]: getPadding(form, view),
         ['--field-control-layout-bg-color' as string]: getBgColor(
           view,
           disabled,

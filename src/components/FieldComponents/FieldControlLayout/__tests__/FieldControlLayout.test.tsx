@@ -37,23 +37,10 @@ describe('Компонент FieldControlLayout', () => {
     --field-control-layout-border-style: solid solid solid solid;
     --field-control-layout-border-width: var(--control-border-width);
     --field-control-layout-height: var(--control-height-m);
-    --field-control-layout-padding: 0px var(--field-control-layout-space) 0px var(--field-control-layout-space);
-    --field-control-layout-space: calc(var(--control-space-m) * 0.5);
-    --field-control-layout-text-line-height: var(--line-height-text-m);
-    --field-control-layout-text-size: var(--control-text-size-m);
-    `);
-  });
-  it('Указываются все css переменные', () => {
-    renderComponent();
-
-    expect(getRender()).toHaveStyle(`
-    --field-control-layout-bg-color: var(--color-bg-default);
-    --field-control-layout-border-color: var(--color-control-bg-border-default);
-    --field-control-layout-border-radius: var(--control-radius) var(--control-radius) var(--control-radius) var(--control-radius);
-    --field-control-layout-border-style: solid solid solid solid;
-    --field-control-layout-border-width: var(--control-border-width);
-    --field-control-layout-height: var(--control-height-m);
-    --field-control-layout-padding: 0px var(--field-control-layout-space) 0px var(--field-control-layout-space);
+    --field-control-layout-padding-top: 0px;
+    --field-control-layout-padding-bottom: 0px;
+    --field-control-layout-padding-left: var(--field-control-layout-space);
+    --field-control-layout-padding-right: var(--field-control-layout-space);
     --field-control-layout-space: calc(var(--control-space-m) * 0.5);
     --field-control-layout-text-line-height: var(--line-height-text-m);
     --field-control-layout-text-size: var(--control-text-size-m);

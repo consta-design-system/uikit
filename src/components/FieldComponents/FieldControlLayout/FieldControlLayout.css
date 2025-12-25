@@ -7,9 +7,12 @@
 --field-control-layout-text-size
 --field-control-layout-border-radius
 --field-control-layout-border-style
---field-control-layout-padding
 --field-control-layout-bg-color
 --field-control-layout-border-width
+--field-control-layout-padding-top
+--field-control-layout-padding-bottom
+--field-control-layout-padding-left
+--field-control-layout-padding-right
 */
 
 .FieldControlLayout {
@@ -44,6 +47,11 @@
         var(--field-control-layout-left-slots-width)
       )
     );
+  --field-control-layout-padding:
+    var(--field-control-layout-padding-top)
+    var(--field-control-layout-padding-right)
+    var(--field-control-layout-padding-bottom)
+    var(--field-control-layout-padding-left);
   box-sizing: border-box;
   width: 100%;
   min-height: var(--field-control-layout-height);
