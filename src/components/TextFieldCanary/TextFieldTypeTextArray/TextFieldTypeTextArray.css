@@ -11,7 +11,8 @@
   & .FieldControlLayout-Container,
   & .FieldControlLayout-Children,
   & &-ScrollWrapper {
-    height: 100%;
+    height: inherit;
+    max-height: inherit;
   }
 
   &-ScrollWrapper {

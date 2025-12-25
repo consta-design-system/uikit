@@ -1,9 +1,9 @@
 .TextFieldTypeTextArea {
   --text-field-textarea-padding-right:
     calc(
-      (var(--text-field-textarea-slot-sizes-length)) *
+      (var(--field-control-layout-right-slots-length)) *
       var(--field-control-layout-space) +
-      var(--text-field-textarea-slot-sizes-width) +
+      var(--field-control-layout-right-slot-contents-width) +
       var(--field-control-layout-padding-right)
     );
   --text-field-textarea-vertical-padding:

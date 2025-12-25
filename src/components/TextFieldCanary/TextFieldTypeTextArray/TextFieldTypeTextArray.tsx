@@ -17,7 +17,6 @@ import { useComponentSize } from '##/hooks/useComponentSize';
 import { useForkRef } from '##/hooks/useForkRef';
 import { useKeys, UseKeysPropKeys } from '##/hooks/useKeys';
 import { useMutableRef } from '##/hooks/useMutableRef';
-import { getStyleProps } from '##/hooks/useStyleProps';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 
 import { TextFieldPropRenderValueItem, TextFieldTypeComponent } from '../types';
@@ -188,13 +187,6 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
 
     const controlSize = useComponentSize(controlRef);
 
-    const stylesRoot: Record<'max-height' | 'height', string> | undefined =
-      ref.current
-        ? getStyleProps(ref.current, ['max-height', 'height'])
-        : undefined;
-
-    console.log(stylesRoot);
-
     useEffect(() => {
       if (controlRef.current && scrollWrapperRef.current && focused) {
         scrollWrapperRef.current.scrollTo({
@@ -232,13 +224,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
         ref={useForkRef([componentRef, ref])}
         disabled={disabled}
         onClick={handleClick}
-        style={{
-          ...style,
-          ['--text-field-textarray-max-height' as string]:
-            stylesRoot?.['max-height'] !== 'none'
-              ? stylesRoot?.['max-height']
-              : stylesRoot?.height || 'auto',
-        }}
+        style={style}
       >
         <div
           ref={scrollWrapperRef}
