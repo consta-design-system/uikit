@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.28.4 (26/12/2025)
+- [fix(TextField): fixed children container width (#4137)](https://github.com/consta-design-system/uikit/commit/a60db4b10c0d9a3414c258a826131a756fa54936) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.28.3 (26/12/2025)
 - [fix(TextField): fixed calculate padding (#4136)](https://github.com/consta-design-system/uikit/commit/ef80a5bbc469e45248f7d463b6f376b7765ca4eb) - [@gizeasy](https://github.com/gizeasy)
 
@@ -378,25 +383,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 
 ## v5.9.1 (12/09/2024)
 - [fix(TextField): fixed arrowUp and arrowDown handlers (#3752)](https://github.com/consta-design-system/uikit/commit/733ae08423d064b0285bb882df405d1a4e3d62f8) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.9.0 (29/08/2024)
-Самое главное:
-- Добавили в документацию раздел "Как использовать" для компонентов `Select`, `UserSelect`, `AutoComplete`, `Combobox`, `BookmarkTabs`, `SnackBar`, `Chips`, `List`, `Tag` и `ContextMenu`.
-- Для `Combobox` добавили пример, объясняющий, как открывать выпадающий список событию фокуса.
----
-
-- [docs(Select): how-to-use (#3710)](https://github.com/consta-design-system/uikit/commit/7a472d01c60ed5e639726bdb8bb59d035621cc06) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [docs(Combobox): add example: opening by focus (#3727)](https://github.com/consta-design-system/uikit/commit/65b73ab17ba33be1777f55966fcdf2d7d76c6736) - [@gizeasy](https://github.com/gizeasy)
-- [fix(withTooltip): typo (#3747)](https://github.com/consta-design-system/uikit/commit/9fe1709f45bce75a475157c895f711f44869f9ee) - [@nevsky118](https://github.com/nevsky118)
-- [fix(Tabs): fix add tab from last selected (#3737)](https://github.com/consta-design-system/uikit/commit/03b0b58cf2c2f09a7745494781362b46c3f2f9cc) - [@ZettZet](https://github.com/ZettZet)
-- [docs(UserSelect): adit example for create (#3726)](https://github.com/consta-design-system/uikit/commit/e996ea8afa900485225062ad342d8a470358c51c) - [@gizeasy](https://github.com/gizeasy)
-- [docs(AutoComplete): how-to-use (#3721)](https://github.com/consta-design-system/uikit/commit/301192ddd8f15d32b86eb497b2b04ab396280703) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [docs(Combobox): how-to-use  (#3725)](https://github.com/consta-design-system/uikit/commit/728ddf7e0df33b3b1e8d40596982a0c307974b1e) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [docs(BookmarkTabs): how-to-use (#3720)](https://github.com/consta-design-system/uikit/commit/5922171da0ac32c58371a79141a55e5e35a8ad73) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [docs(SnackBar): how-to-use (#3705)](https://github.com/consta-design-system/uikit/commit/9fdc3c1302cbf5fe63ae7cd68ee79ef300dc154f) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [docs(Chips): how-to-use (#3701)](https://github.com/consta-design-system/uikit/commit/0f2912440b2c474c16860348c32cd787d15c3486) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [docs(List): how-to-use (#3695)](https://github.com/consta-design-system/uikit/commit/12c3b89544162b61ce1878a48d3df4a58e176b3a) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [docs(Tag): how-to-use (#3674)](https://github.com/consta-design-system/uikit/commit/01801ec024bcfe0dae27a9a125739f8307dad17d) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [docs(ContextMenu): how-to-use (#3665)](https://github.com/consta-design-system/uikit/commit/e1d350313d11669c6989ad8cfa2f84b0359afcc0) - [@alyonurchick1](https://github.com/alyonurchick1)
