@@ -95,7 +95,7 @@
   }
 
   &-Children {
-    flex: 1;
-    width: 0;
+    flex: auto;
+    width: var(--field-control-layout-children-width);
   }
 }

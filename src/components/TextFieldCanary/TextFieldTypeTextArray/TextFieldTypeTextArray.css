@@ -1,9 +1,7 @@
 .TextFieldTypeTextArray {
   --text-field-textarray-padding-right:
     calc(
-      var(--field-control-layout-right-slots-length) *
-      var(--field-control-layout-space) +
-      var(--field-control-layout-right-slot-contents-width) +
+      var(--field-control-layout-right-slots-width) +
       var(--field-control-layout-padding-right)
     );
   overflow: hidden;
