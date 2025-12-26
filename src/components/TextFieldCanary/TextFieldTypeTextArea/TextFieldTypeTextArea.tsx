@@ -10,8 +10,6 @@ import {
   renderSide,
 } from '##/components/FieldComponents';
 import { useForkRef } from '##/hooks/useForkRef';
-import { useRefs } from '##/hooks/useRefs';
-import { getElementWidth, useResizeObserved } from '##/hooks/useResizeObserved';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
 
@@ -92,13 +90,6 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
       onClear,
     });
 
-    const rightSlotsRefs = useRefs<HTMLDivElement>(2, [
-      !!rightSide,
-      clearButton && !disabled && withValue,
-    ]);
-
-    const slotSizes = useResizeObserved(rightSlotsRefs, getElementWidth);
-
     const textareaProps = {
       'className': cnTextFieldTypeTextArea('TextArea', [
         cnFieldInput(),
@@ -166,14 +157,6 @@ export const TextFieldTypeTextArea: TextFieldTypeComponent<'textarea'> =
         ref={useForkRef([componentRef, ref])}
         disabled={disabled}
         onClick={handleClick}
-        style={{
-          ['--text-field-textarea-slot-sizes-width' as string]: `${slotSizes.reduce(
-            (a, b) => a + b,
-          )}px`,
-          ['--text-field-textarea-slot-sizes-length' as string]:
-            slotSizes.filter((width) => !!width).length,
-        }}
-        rightSlotsRefs={rightSlotsRefs}
       >
         {resize === 'auto' ? (
           <TextAreaAutoSize {...textareaProps} {...textAreaAutoSizeProps} />

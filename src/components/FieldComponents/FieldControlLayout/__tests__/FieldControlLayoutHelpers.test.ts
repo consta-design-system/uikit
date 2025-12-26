@@ -11,7 +11,9 @@ import {
   getBorderColor,
   getBorderRadius,
   getBorderStyle,
-  getPadding,
+  getPaddingLeft,
+  getPaddingRight,
+  getPaddingVertical,
   getSlots,
 } from '../helpers';
 
@@ -44,51 +46,6 @@ const getBorderStyleResultMap = {
   'clearBrick-default': 'solid solid solid none',
   'clear-clear': 'none',
   'clear-default': 'solid none solid none',
-};
-
-const getPaddingResultMap = {
-  'default-clear': '1px 0px 1px 0px',
-  'default-default':
-    '0px var(--field-control-layout-space) 0px var(--field-control-layout-space)',
-  'defaultClear-clear': '1px 0px 1px 0px',
-  'defaultClear-default':
-    '0px var(--field-control-layout-space) 0px var(--field-control-layout-space)',
-  'defaultBrick-clear': '1px 0px 1px 0px',
-  'defaultBrick-default':
-    '0px var(--field-control-layout-space) 0px var(--field-control-layout-space)',
-  'brick-clear': '1px 0px 1px 0px',
-  'brick-default':
-    '0px var(--field-control-layout-space) 0px var(--field-control-layout-space)',
-  'brickDefault-clear': '1px 0px 1px 0px',
-  'brickDefault-default':
-    '0px var(--field-control-layout-space) 0px var(--field-control-layout-space)',
-  'brickClear-clear': '1px 0px 1px 0px',
-  'brickClear-default':
-    '0px var(--field-control-layout-space) 0px var(--field-control-layout-space)',
-  'brickRound-clear': '1px 0px 1px 0px',
-  'brickRound-default':
-    '0px calc(var(--field-control-layout-space) * 1.6) 0px var(--field-control-layout-space)',
-  'round-clear': '1px 0px 1px 0px',
-  'round-default':
-    '0px calc(var(--field-control-layout-space) * 1.6) 0px calc(var(--field-control-layout-space) * 1.6)',
-  'roundClear-clear': '1px 0px 1px 0px',
-  'roundClear-default':
-    '0px var(--field-control-layout-space) 0px calc(var(--field-control-layout-space) * 1.6)',
-  'roundBrick-clear': '1px 0px 1px 0px',
-  'roundBrick-default':
-    '0px var(--field-control-layout-space) 0px calc(var(--field-control-layout-space) * 1.6)',
-  'clearRound-clear': '1px 0px 1px 0px',
-  'clearRound-default':
-    '0px calc(var(--field-control-layout-space) * 1.6) 0px var(--field-control-layout-space)',
-  'clearDefault-clear': '1px 0px 1px 0px',
-  'clearDefault-default':
-    '0px var(--field-control-layout-space) 0px var(--field-control-layout-space)',
-  'clearBrick-clear': '1px 0px 1px 0px',
-  'clearBrick-default':
-    '0px var(--field-control-layout-space) 0px var(--field-control-layout-space)',
-  'clear-clear': '1px 0px 1px 0px',
-  'clear-default':
-    '0px var(--field-control-layout-space) 0px var(--field-control-layout-space)',
 };
 
 const getBorderRadiusResultMap = {
@@ -155,6 +112,73 @@ const getBorderColorResultMap = {
   'false-false-warning-false': 'var(--color-bg-warning)',
 };
 
+const getPaddingLeftResultMap = {
+  'brick-clear': '0px',
+  'brick-default': 'var(--field-control-layout-space)',
+  'brickClear-clear': '0px',
+  'brickClear-default': 'var(--field-control-layout-space)',
+  'brickDefault-clear': '0px',
+  'brickDefault-default': 'var(--field-control-layout-space)',
+  'brickRound-clear': '0px',
+  'brickRound-default': 'var(--field-control-layout-space)',
+  'clear-clear': '0px',
+  'clear-default': 'var(--field-control-layout-space)',
+  'clearBrick-clear': '0px',
+  'clearBrick-default': 'var(--field-control-layout-space)',
+  'clearDefault-clear': '0px',
+  'clearDefault-default': 'var(--field-control-layout-space)',
+  'clearRound-clear': '0px',
+  'clearRound-default': 'var(--field-control-layout-space)',
+  'default-clear': '0px',
+  'default-default': 'var(--field-control-layout-space)',
+  'defaultBrick-clear': '0px',
+  'defaultBrick-default': 'var(--field-control-layout-space)',
+  'defaultClear-clear': '0px',
+  'defaultClear-default': 'var(--field-control-layout-space)',
+  'round-clear': '0px',
+  'round-default': 'calc(var(--field-control-layout-space) * 1.6)',
+  'roundBrick-clear': '0px',
+  'roundBrick-default': 'calc(var(--field-control-layout-space) * 1.6)',
+  'roundClear-clear': '0px',
+  'roundClear-default': 'calc(var(--field-control-layout-space) * 1.6)',
+};
+
+const getPaddingRightResultMap = {
+  'brick-clear': '0px',
+  'brick-default': 'var(--field-control-layout-space)',
+  'brickClear-clear': '0px',
+  'brickClear-default': 'var(--field-control-layout-space)',
+  'brickDefault-clear': '0px',
+  'brickDefault-default': 'var(--field-control-layout-space)',
+  'brickRound-clear': '0px',
+  'brickRound-default': 'calc(var(--field-control-layout-space) * 1.6)',
+  'clear-clear': '0px',
+  'clear-default': 'var(--field-control-layout-space)',
+  'clearBrick-clear': '0px',
+  'clearBrick-default': 'var(--field-control-layout-space)',
+  'clearDefault-clear': '0px',
+  'clearDefault-default': 'var(--field-control-layout-space)',
+  'clearRound-clear': '0px',
+  'clearRound-default': 'calc(var(--field-control-layout-space) * 1.6)',
+  'default-clear': '0px',
+  'default-default': 'var(--field-control-layout-space)',
+  'defaultBrick-clear': '0px',
+  'defaultBrick-default': 'var(--field-control-layout-space)',
+  'defaultClear-clear': '0px',
+  'defaultClear-default': 'var(--field-control-layout-space)',
+  'round-clear': '0px',
+  'round-default': 'calc(var(--field-control-layout-space) * 1.6)',
+  'roundBrick-clear': '0px',
+  'roundBrick-default': 'var(--field-control-layout-space)',
+  'roundClear-clear': '0px',
+  'roundClear-default': 'var(--field-control-layout-space)',
+};
+
+const getPaddingVerticalResultMap = {
+  clear: 'var(--control-border-width)',
+  default: '0px',
+};
+
 const getBgColorResultMap = {
   'clear-true': undefined,
   'clear-false': undefined,
@@ -175,12 +199,34 @@ describe('FieldControlLayout helpers getBorderStyle', () => {
   });
 });
 
-describe('FieldControlLayout helpers getPadding', () => {
+describe('FieldControlLayout helpers getPaddingLeft', () => {
   fieldPropForm.forEach((from) => {
     fieldPropView.forEach((view) => {
       it(`form = ${from}; view = ${view};`, () => {
-        const result = getPadding(from, view);
-        expect(result).toEqual(getPaddingResultMap[`${from}-${view}`]);
+        const result = getPaddingLeft(view, from);
+        expect(result).toEqual(getPaddingLeftResultMap[`${from}-${view}`]);
+      });
+    });
+  });
+});
+
+describe('FieldControlLayout helpers getPaddingRight', () => {
+  fieldPropForm.forEach((from) => {
+    fieldPropView.forEach((view) => {
+      it(`form = ${from}; view = ${view};`, () => {
+        const result = getPaddingRight(view, from);
+        expect(result).toEqual(getPaddingRightResultMap[`${from}-${view}`]);
+      });
+    });
+  });
+});
+
+describe('FieldControlLayout helpers getPaddingVertical', () => {
+  fieldPropForm.forEach((from) => {
+    fieldPropView.forEach((view) => {
+      it(`form = ${from}; view = ${view};`, () => {
+        const result = getPaddingVertical(view);
+        expect(result).toEqual(getPaddingVerticalResultMap[`${view}`]);
       });
     });
   });

@@ -41,15 +41,22 @@ const paddingToCss = (value: FieldControlLayoutPaddingNode): string => {
     : 'var(--field-control-layout-space)';
 };
 
-export const getPadding = (
-  form: FieldPropForm,
+export const getPaddingVertical = (view: FieldPropView): string => {
+  return view === 'default' ? '0px' : 'var(--control-border-width)';
+};
+
+export const getPaddingLeft = (
   view: FieldPropView,
+  form: FieldPropForm,
 ): string => {
-  return view === 'default'
-    ? `0px ${paddingToCss(paddingMap[form][1])} 0px ${paddingToCss(
-        paddingMap[form][0],
-      )}`
-    : `1px 0px 1px 0px`;
+  return view === 'default' ? paddingToCss(paddingMap[form][0]) : `0px`;
+};
+
+export const getPaddingRight = (
+  view: FieldPropView,
+  form: FieldPropForm,
+): string => {
+  return view === 'default' ? paddingToCss(paddingMap[form][1]) : `0px`;
 };
 
 const borderRadiusToCss = (

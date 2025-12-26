@@ -1,24 +1,23 @@
 .TextFieldTypeTextArray {
-  --text-field-textarray-padding:
+  --text-field-textarray-padding-right:
     calc(
-      (var(--field-control-layout-right-slots-length) + 1) *
+      (var(--field-control-layout-right-slots-length)) *
       var(--field-control-layout-space) +
-      var(--field-control-layout-right-slot-contents-width)
+      var(--field-control-layout-right-slot-contents-width) +
+      var(--field-control-layout-padding-right)
     );
-  --text-field-textarray-scroll-wrapper-height:
-    calc(
-      var(--text-field-textarray-max-height) -
-      (var(--field-control-layout-border-width) * 2)
-    );
+  overflow: hidden;
+
+  & .FieldControlLayout-Container,
+  & .FieldControlLayout-Children,
+  & &-ScrollWrapper {
+    height: inherit;
+    max-height: inherit;
+  }
 
   &-ScrollWrapper {
     overflow: auto;
-    width: calc(100% + var(--text-field-textarray-padding));
-    max-height: var(--text-field-textarray-scroll-wrapper-height);
-    padding-right: var(--text-field-textarray-padding, 0);
-  }
-
-  .FieldControlLayout-Children {
-    overflow: hidden;
+    width: calc(100% + var(--text-field-textarray-padding-right));
+    padding-right: var(--text-field-textarray-padding-right, 0);
   }
 }
