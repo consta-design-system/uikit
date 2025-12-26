@@ -95,6 +95,7 @@
   }
 
   &-Children {
-    flex: auto;
+    flex: 1;
+    width: 0;
   }
 }

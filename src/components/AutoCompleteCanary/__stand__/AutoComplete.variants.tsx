@@ -76,7 +76,7 @@ const Variants = () => {
     items,
     dropdownForm,
     groups: withGroups ? groups : [],
-    withClearButton,
+    clearButton: withClearButton,
     maxLength,
     placeholder,
     leftSide,
