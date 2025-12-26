@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.28.3 (26/12/2025)
+- [fix(TextField): fixed calculate padding (#4136)](https://github.com/consta-design-system/uikit/commit/ef80a5bbc469e45248f7d463b6f376b7765ca4eb) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.28.2 (23/12/2025)
 - [fix(TextFieldCanary): fixed minLength (#4135)](https://github.com/consta-design-system/uikit/commit/71740a356dd560c31a4d722f483924f774fec9f4) - [@gizeasy](https://github.com/gizeasy)
 
@@ -395,8 +400,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [docs(List): how-to-use (#3695)](https://github.com/consta-design-system/uikit/commit/12c3b89544162b61ce1878a48d3df4a58e176b3a) - [@alyonurchick1](https://github.com/alyonurchick1)
 - [docs(Tag): how-to-use (#3674)](https://github.com/consta-design-system/uikit/commit/01801ec024bcfe0dae27a9a125739f8307dad17d) - [@alyonurchick1](https://github.com/alyonurchick1)
 - [docs(ContextMenu): how-to-use (#3665)](https://github.com/consta-design-system/uikit/commit/e1d350313d11669c6989ad8cfa2f84b0359afcc0) - [@alyonurchick1](https://github.com/alyonurchick1)
-
---------------------
-
-## v5.8.1 (19/08/2024)
-- [fix(DatePicker): fixed nulling of value (#3736)](https://github.com/consta-design-system/uikit/commit/2e8e85143dc8c67a0313a86b7aa215ed03bf6b64) - [@gizeasy](https://github.com/gizeasy)
