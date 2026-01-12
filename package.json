@@ -208,7 +208,6 @@
     "ts-loader": "^9.2.8",
     "tsconfig-replace-paths": "^0.0.14",
     "typescript": "^5.8.3",
-    "typescript-eslint-parser": "^22.0.0",
     "typescript-transform-paths": "^3.3.1",
     "use-subscription": "^1.5.1",
     "web-vitals": "^2.1.0",
