@@ -89,7 +89,7 @@ export const FieldControlLayout = forwardRef<
         ['--field-control-layout-height' as string]: `var(--control-height-${size})`,
         ['--field-control-layout-space' as string]: `calc(var(--control-space-${size}) * 0.5)`,
         ['--field-control-layout-text-size' as string]: `var(--control-text-size-${size})`,
-        ['--field-control-layout-text-line-height' as string]: `var(--line-height-text-${size})`,
+        ['--field-control-layout-text-line-height' as string]: `var(--line-height-text-m)`,
         ['--field-control-layout-border-radius' as string]: getBorderRadius(
           form,
           view,

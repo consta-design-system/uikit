@@ -35,10 +35,13 @@ export const getBorderStyle = (
     : `none`;
 };
 
-const paddingToCss = (value: FieldControlLayoutPaddingNode): string => {
+const paddingToCss = (
+  value: FieldControlLayoutPaddingNode,
+  additional: string = '0px',
+): string => {
   return value === 'increased'
-    ? 'calc(var(--field-control-layout-space) * 1.6)'
-    : 'var(--field-control-layout-space)';
+    ? `calc(var(--field-control-layout-space) * 1.6 + ${additional})`
+    : `calc(var(--field-control-layout-space) + ${additional})`;
 };
 
 export const getPaddingVertical = (view: FieldPropView): string => {
@@ -49,14 +52,24 @@ export const getPaddingLeft = (
   view: FieldPropView,
   form: FieldPropForm,
 ): string => {
-  return view === 'default' ? paddingToCss(paddingMap[form][0]) : `0px`;
+  return view === 'default'
+    ? paddingToCss(
+        paddingMap[form][0],
+        'var(--field-control-layout-additional-padding-left, 0px)',
+      )
+    : `var(--field-control-layout-additional-padding-left, 0px)`;
 };
 
 export const getPaddingRight = (
   view: FieldPropView,
   form: FieldPropForm,
 ): string => {
-  return view === 'default' ? paddingToCss(paddingMap[form][1]) : `0px`;
+  return view === 'default'
+    ? paddingToCss(
+        paddingMap[form][1],
+        'var(--field-control-layout-additional-padding-right, 0px)',
+      )
+    : `var(--field-control-layout-additional-padding-right, 0px)`;
 };
 
 const borderRadiusToCss = (
