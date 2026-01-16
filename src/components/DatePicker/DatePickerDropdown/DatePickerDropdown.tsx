@@ -52,6 +52,7 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
     timeOptions?: TimeOptions;
     timeFor?: 'start' | 'end';
     disableDates?: DateTimePropDisableDates;
+    viewportRef?: React.RefObject<HTMLElement>;
   },
   HTMLDivElement
 >;

@@ -18,6 +18,7 @@ export type FlatSelectRootProps = PropsWithHTMLAttributesAndRef<
     direction?: Direction;
     spareDirection?: Direction;
     possibleDirections?: Direction[];
+    viewportRef?: React.RefObject<HTMLElement>;
   },
   HTMLDivElement
 >;
@@ -40,6 +41,7 @@ export const FlatSelectRoot: React.FC<FlatSelectRootProps> = forwardRef(
         'leftStartDown',
         'leftStartUp',
       ],
+      viewportRef,
       ...otherProps
     } = props;
 
@@ -70,6 +72,7 @@ export const FlatSelectRoot: React.FC<FlatSelectRootProps> = forwardRef(
               direction={direction}
               spareDirection={spareDirection}
               possibleDirections={possibleDirections}
+              viewportRef={viewportRef}
             />
           )}
         </Transition>

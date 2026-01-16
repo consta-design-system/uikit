@@ -51,6 +51,7 @@ export const AutoCompleteTypeTextArray: AutoCompleteTypeComponent<'textarray'> =
       onInputChange,
       inputValue,
       onBlur,
+      dropdownViewportRef,
       ...otherProps
     } = withDefaultGettersProps;
 
@@ -118,6 +119,7 @@ export const AutoCompleteTypeTextArray: AutoCompleteTypeComponent<'textarray'> =
           {...otherProps}
         />
         <SelectDropdown
+          viewportRef={dropdownViewportRef}
           isOpen={isOpen}
           size={size}
           controlRef={controlRef}

@@ -63,6 +63,7 @@ export type AutoCompleteProps<
   onScrollToBottom?: (length: number) => void;
   onDropdownOpen?: (isOpen: boolean) => void;
   dropdownOpen?: boolean;
+  dropdownViewportRef?: React.RefObject<HTMLElement>;
   ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
 } & Omit<
   TextFieldProps<TYPE>,

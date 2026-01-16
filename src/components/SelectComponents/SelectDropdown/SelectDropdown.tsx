@@ -73,6 +73,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   itemsRefs: React.RefObject<HTMLDivElement>[];
   virtualScroll?: boolean;
   onScrollToBottom?: (length: number) => void;
+  viewportRef?: React.RefObject<HTMLElement>;
 }>;
 
 type SelectDropdownComponent = <ITEM, GROUP>(
@@ -133,6 +134,7 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
     itemsRefs,
     virtualScroll,
     onScrollToBottom,
+    viewportRef,
     ...otherProps
   } = props;
 
@@ -218,6 +220,7 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
               className,
             ])}
             equalAnchorWidth
+            viewportRef={viewportRef}
           >
             <div
               className={cnSelectDropdown('ScrollContainer', [

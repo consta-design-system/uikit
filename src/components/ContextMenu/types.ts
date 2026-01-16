@@ -198,6 +198,7 @@ export type ContextMenuProps<
     form?: ContextMenuForm;
     isMobile?: boolean;
     onEsc?: React.KeyboardEventHandler;
+    viewportRef?: React.RefObject<HTMLElement>;
   } & MappersItem<ITEM> &
     MappersGroup<GROUP> &
     PositioningProps,
@@ -323,6 +324,7 @@ export type ContextMenuLevelWrapperProps = PropsWithHTMLAttributesAndRef<
     anchorRef?: React.RefObject<HTMLElement>;
     position?: Position;
     onSetDirection?: (direction: Direction) => void;
+    viewportRef?: React.RefObject<HTMLElement>;
   },
   HTMLDivElement
 >;

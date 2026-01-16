@@ -100,6 +100,7 @@ const ComboboxRender = <
     onSearchValueChange,
     dropdownOpen,
     ignoreOutsideClicksRefs,
+    dropdownViewportRef,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -340,6 +341,7 @@ const ComboboxRender = <
         </div>
       </SelectContainer>
       <SelectDropdown
+        viewportRef={dropdownViewportRef}
         isOpen={isOpen}
         size={size}
         controlRef={controlRef}

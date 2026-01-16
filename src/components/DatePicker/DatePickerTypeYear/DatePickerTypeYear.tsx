@@ -33,6 +33,7 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef(
       ignoreOutsideClicksRefs,
       inputRef: inputRefProp,
       disableDates,
+      dropdownViewportRef,
       ...otherProps
     } = props;
 
@@ -104,6 +105,7 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef(
         />
         <DatePickerDropdown
           ref={useForkRef([dropdownRef, calendarRef])}
+          viewportRef={dropdownViewportRef}
           anchorRef={fieldRef}
           className={dropdownClassName}
           isOpen={calendarVisible}
