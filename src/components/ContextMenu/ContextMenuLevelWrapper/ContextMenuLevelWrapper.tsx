@@ -26,6 +26,7 @@ export const ContextMenuLevelWrapper = forwardRef(
       anchorRef,
       position,
       onSetDirection,
+      viewportRef,
       ...otherProps
     } = props;
 
@@ -50,6 +51,7 @@ export const ContextMenuLevelWrapper = forwardRef(
     return (
       <Popover
         {...otherProps}
+        viewportRef={viewportRef}
         ref={ref}
         className={className}
         onClickOutside={onClickOutside}

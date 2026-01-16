@@ -52,6 +52,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       ignoreOutsideClicksRefs,
       disabled,
       disableDates,
+      dropdownViewportRef,
       ...fieldProps
     } = props;
 
@@ -195,6 +196,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
         <DatePickerDropdown
           type="date-time"
           ref={useForkRef([dropdownRef, calendarRef])}
+          viewportRef={dropdownViewportRef}
           anchorRef={startFieldRef}
           isOpen={calendarVisible}
           className={dropdownClassName}
