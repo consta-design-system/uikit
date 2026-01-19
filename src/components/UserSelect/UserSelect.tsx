@@ -344,7 +344,7 @@ const UserSelectRender = <
         itemsRefs={optionsRefs}
         onScrollToBottom={onScrollToBottom}
         virtualScroll={virtualScroll}
-        viewportRef={defaultDropdownRef}
+        viewportRef={dropdownViewportRef}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

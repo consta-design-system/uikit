@@ -80,6 +80,7 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef(
       className,
       zIndex,
       renderAdditionalControls,
+      viewportRef,
       ...otherProps
     } = props;
 
@@ -127,6 +128,7 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef(
               style={{ zIndex }}
               role="listbox"
               onSetDirection={setDirection}
+              viewportRef={viewportRef}
             >
               <DateTime {...otherProps} onMove={onMove} />
               {visibleAdditionalControls && (
