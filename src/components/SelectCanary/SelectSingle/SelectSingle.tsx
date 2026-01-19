@@ -81,6 +81,7 @@ const SelectSingleRender = <
     clearButton,
     selectAll,
     selectAllLabel,
+    dropdownViewportRef,
     ...otherProps
   } = propsWithDefault;
 
@@ -217,6 +218,7 @@ const SelectSingleRender = <
         groupsCounterAtom={groupsCounterAtom}
         dropdownZIndexAtom={dropdownZIndexAtom}
         selectAllLabel={selectAllLabel}
+        viewportRef={dropdownViewportRef}
       />
     </>
   );

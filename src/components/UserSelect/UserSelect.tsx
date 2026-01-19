@@ -101,6 +101,7 @@ const UserSelectRender = <
     virtualScroll,
     dropdownOpen,
     ignoreOutsideClicksRefs,
+    dropdownViewportRef,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -343,6 +344,7 @@ const UserSelectRender = <
         itemsRefs={optionsRefs}
         onScrollToBottom={onScrollToBottom}
         virtualScroll={virtualScroll}
+        viewportRef={dropdownViewportRef}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

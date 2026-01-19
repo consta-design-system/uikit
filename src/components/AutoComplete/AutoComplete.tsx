@@ -75,6 +75,7 @@ const AutoCompleteRender = <
     rows,
     minRows,
     maxRows,
+    dropdownViewportRef,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -177,6 +178,7 @@ const AutoCompleteRender = <
         {...otherProps}
       />
       <SelectDropdown
+        viewportRef={dropdownViewportRef}
         isOpen={isOpen}
         size={size}
         controlRef={containerRef}

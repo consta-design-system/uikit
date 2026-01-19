@@ -83,6 +83,7 @@ const SelectMultipleRender = <
     clearButton,
     selectAll,
     selectAllLabel,
+    dropdownViewportRef,
     ...otherProps
   } = propsWithDefault;
 
@@ -243,6 +244,7 @@ const SelectMultipleRender = <
         groupsCounterAtom={groupsCounterAtom}
         dropdownZIndexAtom={dropdownZIndexAtom}
         selectAllLabel={selectAllLabel}
+        viewportRef={dropdownViewportRef}
       />
     </>
   );

@@ -94,6 +94,7 @@ export type SelectProps<
     onDropdownOpen?: (isOpen: boolean) => void;
     dropdownOpen?: boolean;
     ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+    dropdownViewportRef?: React.RefObject<HTMLElement>;
   },
   HTMLDivElement
 > &
