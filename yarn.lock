@@ -1782,24 +1782,24 @@
   dependencies:
     chalk "^4.1.0"
 
-"@consta/header@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@consta/header/-/header-3.0.1.tgz#6c14e61aa3d162ead7abb2e54a91cf1ddc346f12"
-  integrity sha512-TfMkt/2OqmbZGNpJrEcvwh6ZSious5R6p1qi1N7Dk9iOSnfxLAfjGHbI8dzphReJ3/CsKah0ZFo6AxEvOyR9yQ==
+"@consta/header@^3.0.2":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@consta/header/-/header-3.1.0.tgz#a2937c58af238b7453a253c81c706dc2805c6688"
+  integrity sha512-wo5ayLZPa9Xthv1lWBlAYVERA7AShQ0gLUxrdpbQjnYSyqQ9lPFjKF5TRMaceIcI8xVDru40EngarHTZtPL+Qg==
 
-"@consta/icons@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-1.1.1.tgz#a6b9535612d4b78228ebc441123c11f42b2ee000"
-  integrity sha512-3meYl46x0figWwTwakB19q+2BYuXWeBAyxQgBdxYdclocKkuMztF/ffknIQjPdfjHeA6rBwIbbxh7M3BfTXH5A==
+"@consta/icons@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-1.5.0.tgz#92164390ba95e4a557f90583dc02743b70e6f044"
+  integrity sha512-LfoTGjuPMgC/M8NN00tbbf1xJfhiiAZeZjgg/nAiM7ab4WzkAPkQy9yCkRrml40bcjBXgJxDjZOHaSfitLddaA==
 
-"@consta/stand@^0.0.158":
-  version "0.0.158"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.158.tgz#b013f9e2474d3ec8a79271accf1ab4aeb7b8872d"
-  integrity sha512-3JFbigk3z16u8gxQsAkq68jl1wCO0xULnGKU9FFpE4TV8yg5LL8WCBiyjBYVVm9pYCYhgWav7qlJQ2FPcSmpQw==
+"@consta/stand@^0.0.161":
+  version "0.0.161"
+  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.161.tgz#f563fe9a8c968d366b6240036056d602ee114f1c"
+  integrity sha512-+zNDCG7CMQ2wWCzpBb5JdUCmdzuXTH5yZqxllpUiZfnvPY/Trdh9Z7Pyo3lDMpWhSi2wKuHEja654lw/Ys83bw==
   dependencies:
-    "@consta/header" "^3.0.1"
-    "@consta/icons" "^1.1.1"
-    "@consta/uikit" "^5.24.0"
+    "@consta/header" "^3.0.2"
+    "@consta/icons" "^1.5.0"
+    "@consta/uikit" "^5.27.1"
     "@mdx-js/loader" "^2.3.0"
     "@mdx-js/react" "^2.3.0"
     "@oclif/command" "^1.8.22"
@@ -1865,15 +1865,15 @@
     webpack-manifest-plugin "^5.0.0"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/uikit@^5.24.0":
-  version "5.24.0"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.24.0.tgz#6749b89d807b4c5b6dcc46cae25dfb9c020a4ded"
-  integrity sha512-y0momNleJam2FkLmOGCcHdgSr5g4dGQPcgOnpPidp1telin5jJeXRZNqYG3W0wH+OOEw4oPxPyhTOqo41aooSQ==
-
 "@consta/uikit@^5.24.1":
   version "5.24.1"
   resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.24.1.tgz#0273a45c368b1d8fc4b8f7a9c6286d88d54a7841"
   integrity sha512-WbeFd4rZmSUp44ZzknU8A3JnOcf16UZyO35ZbHp3SilHVhGnzOqO7er5BlIxCrV26rY/guCo6g01upy1hs0qoA==
+
+"@consta/uikit@^5.27.1":
+  version "5.28.5"
+  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.28.5.tgz#b14eaa7dfe8e5e8c4ec2b7c2609c7aeb51766d76"
+  integrity sha512-bYR+1i9hpK0BJe3BjI6Ai+1zeKbJ/HOBgNQmHEJB+iYs8gzRrdV4KeMLNjaK0valVIwjKtV+/DGIgIdtOYAvAg==
 
 "@cspell/cspell-bundled-dicts@8.16.1":
   version "8.16.1"

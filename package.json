@@ -26,8 +26,8 @@
     "react-dom": ">= 16.8.0",
     "react-dropzone": "^14.2.3",
     "react-imask": "^7.2.1",
-    "react-transition-group": "^4.4.5",
-    "react-textarea-autosize": "^8.5.3"
+    "react-textarea-autosize": "^8.5.3",
+    "react-transition-group": "^4.4.5"
   },
   "files": [
     "*",
@@ -111,7 +111,7 @@
     "@babel/preset-typescript": "^7.18.6",
     "@bem/sdk.naming.cell.match": "^0.1.3",
     "@bem/sdk.naming.presets": "^0.2.3",
-    "@consta/stand": "^0.0.158",
+    "@consta/stand": "^0.0.161",
     "@consta/uikit": "^5.24.1",
     "@cspell/dict-ru_ru": "^2.2.4",
     "@mdx-js/loader": "^2.1.5",
