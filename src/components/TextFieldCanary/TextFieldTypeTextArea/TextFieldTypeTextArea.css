@@ -24,24 +24,24 @@
       var(--field-control-layout-border-width) * 2
     );
   --text-field-textarea-min-height: var(--text-field-textarea-height-calc);
+  overflow: hidden;
 
   &_resize {
     --text-field-textarea-resize: vertical;
-    overflow: hidden;
-
-    &_auto {
-      --text-field-textarea-height: var(--text-field-textarea-height-calc);
-    }
   }
 
   &-TextArea {
     resize: var(--text-field-textarea-resize, none);
     width: calc(100% + var(--text-field-textarea-padding-right));
-    height: var(--text-field-textarea-height, auto);
+    height: auto;
     min-height: var(--text-field-textarea-min-height);
     padding-top: var(--text-field-textarea-vertical-padding);
     padding-right: var(--text-field-textarea-padding-right, 0);
     padding-bottom: var(--text-field-textarea-vertical-padding);
     line-height: var(--field-control-layout-text-line-height);
+
+    &.TextAreaAutoSize {
+      line-height: var(--field-control-layout-text-line-height);
+    }
   }
 }

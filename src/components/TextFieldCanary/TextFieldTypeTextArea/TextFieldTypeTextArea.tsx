@@ -1,7 +1,6 @@
 import './TextFieldTypeTextArea.css';
 
 import React, { forwardRef } from 'react';
-import TextAreaAutoSize from 'react-textarea-autosize';
 
 import {
   cnFieldInput,
@@ -9,6 +8,7 @@ import {
   FieldControlLayout,
   renderSide,
 } from '##/components/FieldComponents';
+import { TextAreaAutoSize } from '##/components/TextAreaAutoSize';
 import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';

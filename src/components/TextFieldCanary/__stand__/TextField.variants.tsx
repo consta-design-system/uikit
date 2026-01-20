@@ -139,7 +139,9 @@ const Variants = () => {
         size={size}
         view={view}
         disabled={disabled}
-        style={{ width: '100%' }}
+        style={{
+          width: '100%',
+        }}
         leftSide={leftSide}
         rightSide={rightSide}
         maxLength={maxLength}

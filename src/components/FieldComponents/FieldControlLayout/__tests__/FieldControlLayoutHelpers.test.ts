@@ -113,65 +113,113 @@ const getBorderColorResultMap = {
 };
 
 const getPaddingLeftResultMap = {
-  'brick-clear': '0px',
-  'brick-default': 'var(--field-control-layout-space)',
-  'brickClear-clear': '0px',
-  'brickClear-default': 'var(--field-control-layout-space)',
-  'brickDefault-clear': '0px',
-  'brickDefault-default': 'var(--field-control-layout-space)',
-  'brickRound-clear': '0px',
-  'brickRound-default': 'var(--field-control-layout-space)',
-  'clear-clear': '0px',
-  'clear-default': 'var(--field-control-layout-space)',
-  'clearBrick-clear': '0px',
-  'clearBrick-default': 'var(--field-control-layout-space)',
-  'clearDefault-clear': '0px',
-  'clearDefault-default': 'var(--field-control-layout-space)',
-  'clearRound-clear': '0px',
-  'clearRound-default': 'var(--field-control-layout-space)',
-  'default-clear': '0px',
-  'default-default': 'var(--field-control-layout-space)',
-  'defaultBrick-clear': '0px',
-  'defaultBrick-default': 'var(--field-control-layout-space)',
-  'defaultClear-clear': '0px',
-  'defaultClear-default': 'var(--field-control-layout-space)',
-  'round-clear': '0px',
-  'round-default': 'calc(var(--field-control-layout-space) * 1.6)',
-  'roundBrick-clear': '0px',
-  'roundBrick-default': 'calc(var(--field-control-layout-space) * 1.6)',
-  'roundClear-clear': '0px',
-  'roundClear-default': 'calc(var(--field-control-layout-space) * 1.6)',
+  'brick-clear': 'var(--field-control-layout-additional-padding-left, 0px)',
+  'brick-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'brickClear-clear':
+    'var(--field-control-layout-additional-padding-left, 0px)',
+  'brickClear-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'brickDefault-clear':
+    'var(--field-control-layout-additional-padding-left, 0px)',
+  'brickDefault-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'brickRound-clear':
+    'var(--field-control-layout-additional-padding-left, 0px)',
+  'brickRound-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'clear-clear': 'var(--field-control-layout-additional-padding-left, 0px)',
+  'clear-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'clearBrick-clear':
+    'var(--field-control-layout-additional-padding-left, 0px)',
+  'clearBrick-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'clearDefault-clear':
+    'var(--field-control-layout-additional-padding-left, 0px)',
+  'clearDefault-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'clearRound-clear':
+    'var(--field-control-layout-additional-padding-left, 0px)',
+  'clearRound-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'default-clear': 'var(--field-control-layout-additional-padding-left, 0px)',
+  'default-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'defaultBrick-clear':
+    'var(--field-control-layout-additional-padding-left, 0px)',
+  'defaultBrick-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'defaultClear-clear':
+    'var(--field-control-layout-additional-padding-left, 0px)',
+  'defaultClear-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+  'round-clear': 'var(--field-control-layout-additional-padding-left, 0px)',
+  'round-default':
+    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-left, 0px))',
+  'roundBrick-clear':
+    'var(--field-control-layout-additional-padding-left, 0px)',
+  'roundBrick-default':
+    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-left, 0px))',
+  'roundClear-clear':
+    'var(--field-control-layout-additional-padding-left, 0px)',
+  'roundClear-default':
+    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-left, 0px))',
 };
 
 const getPaddingRightResultMap = {
-  'brick-clear': '0px',
-  'brick-default': 'var(--field-control-layout-space)',
-  'brickClear-clear': '0px',
-  'brickClear-default': 'var(--field-control-layout-space)',
-  'brickDefault-clear': '0px',
-  'brickDefault-default': 'var(--field-control-layout-space)',
-  'brickRound-clear': '0px',
-  'brickRound-default': 'calc(var(--field-control-layout-space) * 1.6)',
-  'clear-clear': '0px',
-  'clear-default': 'var(--field-control-layout-space)',
-  'clearBrick-clear': '0px',
-  'clearBrick-default': 'var(--field-control-layout-space)',
-  'clearDefault-clear': '0px',
-  'clearDefault-default': 'var(--field-control-layout-space)',
-  'clearRound-clear': '0px',
-  'clearRound-default': 'calc(var(--field-control-layout-space) * 1.6)',
-  'default-clear': '0px',
-  'default-default': 'var(--field-control-layout-space)',
-  'defaultBrick-clear': '0px',
-  'defaultBrick-default': 'var(--field-control-layout-space)',
-  'defaultClear-clear': '0px',
-  'defaultClear-default': 'var(--field-control-layout-space)',
-  'round-clear': '0px',
-  'round-default': 'calc(var(--field-control-layout-space) * 1.6)',
-  'roundBrick-clear': '0px',
-  'roundBrick-default': 'var(--field-control-layout-space)',
-  'roundClear-clear': '0px',
-  'roundClear-default': 'var(--field-control-layout-space)',
+  'brick-clear': 'var(--field-control-layout-additional-padding-right, 0px)',
+  'brick-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+  'brickClear-clear':
+    'var(--field-control-layout-additional-padding-right, 0px)',
+  'brickClear-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+  'brickDefault-clear':
+    'var(--field-control-layout-additional-padding-right, 0px)',
+  'brickDefault-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+  'brickRound-clear':
+    'var(--field-control-layout-additional-padding-right, 0px)',
+  'brickRound-default':
+    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-right, 0px))',
+  'clear-clear': 'var(--field-control-layout-additional-padding-right, 0px)',
+  'clear-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+  'clearBrick-clear':
+    'var(--field-control-layout-additional-padding-right, 0px)',
+  'clearBrick-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+  'clearDefault-clear':
+    'var(--field-control-layout-additional-padding-right, 0px)',
+  'clearDefault-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+  'clearRound-clear':
+    'var(--field-control-layout-additional-padding-right, 0px)',
+  'clearRound-default':
+    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-right, 0px))',
+  'default-clear': 'var(--field-control-layout-additional-padding-right, 0px)',
+  'default-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+  'defaultBrick-clear':
+    'var(--field-control-layout-additional-padding-right, 0px)',
+  'defaultBrick-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+  'defaultClear-clear':
+    'var(--field-control-layout-additional-padding-right, 0px)',
+  'defaultClear-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+  'round-clear': 'var(--field-control-layout-additional-padding-right, 0px)',
+  'round-default':
+    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-right, 0px))',
+  'roundBrick-clear':
+    'var(--field-control-layout-additional-padding-right, 0px)',
+  'roundBrick-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+  'roundClear-clear':
+    'var(--field-control-layout-additional-padding-right, 0px)',
+  'roundClear-default':
+    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
 };
 
 const getPaddingVerticalResultMap = {
@@ -202,9 +250,10 @@ describe('FieldControlLayout helpers getBorderStyle', () => {
 describe('FieldControlLayout helpers getPaddingLeft', () => {
   fieldPropForm.forEach((from) => {
     fieldPropView.forEach((view) => {
-      it(`form = ${from}; view = ${view};`, () => {
-        const result = getPaddingLeft(view, from);
-        expect(result).toEqual(getPaddingLeftResultMap[`${from}-${view}`]);
+      it(`form = ${from}; view = ${view}`, () => {
+        expect(getPaddingLeft(view, from)).toEqual(
+          getPaddingLeftResultMap[`${from}-${view}`],
+        );
       });
     });
   });

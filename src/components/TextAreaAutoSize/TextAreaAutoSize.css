@@ -1,0 +1,14 @@
+.TextAreaAutoSize {
+  resize: none;
+  line-height: 1.5;
+
+  &-Fake {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    visibility: hidden;
+    height: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}

@@ -82,6 +82,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
   dropdownZIndexAtom: AtomMut<number | undefined>;
   selectAllLabel: string;
+  viewportRef?: React.RefObject<HTMLElement>;
 }>;
 
 type SelectDropdownComponent = <ITEM, GROUP>(

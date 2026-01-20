@@ -37,10 +37,10 @@ describe('Компонент FieldControlLayout', () => {
     --field-control-layout-border-style: solid solid solid solid;
     --field-control-layout-border-width: var(--control-border-width);
     --field-control-layout-height: var(--control-height-m);
-    --field-control-layout-padding-top: 0px;
     --field-control-layout-padding-bottom: 0px;
-    --field-control-layout-padding-left: var(--field-control-layout-space);
-    --field-control-layout-padding-right: var(--field-control-layout-space);
+    --field-control-layout-padding-left: calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px));
+    --field-control-layout-padding-right: calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px));
+    --field-control-layout-padding-top: 0px;
     --field-control-layout-space: calc(var(--control-space-m) * 0.5);
     --field-control-layout-text-line-height: var(--line-height-text-m);
     --field-control-layout-text-size: var(--control-text-size-m);

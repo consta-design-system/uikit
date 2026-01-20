@@ -5,11 +5,11 @@ import { IconEye } from '@consta/icons/IconEye';
 import { IconEyeClose } from '@consta/icons/IconEyeClose';
 import { IconSelect } from '@consta/icons/IconSelect';
 import React, { forwardRef, useCallback, useEffect } from 'react';
-import TextAreaAutoSize from 'react-textarea-autosize';
 
 import { usePropsHandler } from '##/components/EventInterceptor/usePropsHandler';
 import { FieldCaption } from '##/components/FieldCaption/FieldCaption';
 import { FieldLabel } from '##/components/FieldLabel/FieldLabel';
+import { TextAreaAutoSize } from '##/components/TextAreaAutoSize';
 import { useFlag } from '##/hooks/useFlag/useFlag';
 import { useForkRef } from '##/hooks/useForkRef/useForkRef';
 import { useKeys } from '##/hooks/useKeys';

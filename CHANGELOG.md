@@ -1,5 +1,27 @@
 # Changelog
 
+## v5.29.0 (20/01/2026)
+Самое важное:
+- Добавили возможность указывать `viewport` для компонетов:
+  - `AutoComplete`
+  - `AutoCompleteCanary`
+  - `Combobox`
+  - `ContextMenu`
+  - `DatePicker`
+  - `FlatSelect`
+  - `Select`
+  - `SelectCanary`
+  - `UserSelect`
+
+---
+
+- [chore(deps): update consta@stand](https://github.com/consta-design-system/uikit/commit/0ed7de065f7557c6d16c11a7567e06b2e9305397) - [@gizeasy](https://github.com/gizeasy)
+- [chore(eslint): remove unused deprecated typescript-eslint-parser (#4139)](https://github.com/consta-design-system/uikit/commit/3ac10e0326ca3c9d4af1ba3a0989b44cc16901d6) - [@baevm](https://github.com/baevm)
+- [feat: Added support for the viewport  (#4146)](https://github.com/consta-design-system/uikit/commit/90a778b63d3f6732abd5a7f4f151cce0ca6fe942) - [@gizeasy](https://github.com/gizeasy)
+- [feat(TextField): rewrite TextAreaAutoSize and fixed some bugs (#4141)](https://github.com/consta-design-system/uikit/commit/adf81ed0707df1596303ce2d6cc8532184ad9b12) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.28.4 (26/12/2025)
 - [fix(TextField): fixed children container width (#4137)](https://github.com/consta-design-system/uikit/commit/a60db4b10c0d9a3414c258a826131a756fa54936) - [@gizeasy](https://github.com/gizeasy)
 
@@ -378,8 +400,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [fix(Slider): fixed onChande on input (#3764)](https://github.com/consta-design-system/uikit/commit/f895d19ed56c1b2acf3c399fbbf2fb0f19f05fde) - [@gizeasy](https://github.com/gizeasy)
 - [fix(ChoiceGroup): remove `pointer-events: none;` on ChoiceGroup-Item (#3763)](https://github.com/consta-design-system/uikit/commit/cfb7fb1beb38b05c1538a1af7512410418383301) - [@gizeasy](https://github.com/gizeasy)
 - [fix(Theme): changed --font-weight-text-extralight value (#3754)](https://github.com/consta-design-system/uikit/commit/dcba76ae453ec77137c7ed9df339cab8a0f874b4) - [@nevsky118](https://github.com/nevsky118)
-
---------------------
-
-## v5.9.1 (12/09/2024)
-- [fix(TextField): fixed arrowUp and arrowDown handlers (#3752)](https://github.com/consta-design-system/uikit/commit/733ae08423d064b0285bb882df405d1a4e3d62f8) - [@gizeasy](https://github.com/gizeasy)

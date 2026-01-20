@@ -48,6 +48,7 @@ export const AutoCompleteTypeText: AutoCompleteTypeComponent<string> =
       dropdownOpen,
       ignoreOutsideClicksRefs,
       onBlur,
+      dropdownViewportRef,
       ...otherProps
     } = withDefaultGetters(props);
 
@@ -112,6 +113,7 @@ export const AutoCompleteTypeText: AutoCompleteTypeComponent<string> =
           {...otherProps}
         />
         <SelectDropdown
+          viewportRef={dropdownViewportRef}
           isOpen={isOpen}
           size={size}
           controlRef={controlRef}

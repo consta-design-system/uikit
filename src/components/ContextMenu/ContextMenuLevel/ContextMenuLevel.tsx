@@ -66,7 +66,7 @@ const ContextMenuLevelRender = (
     isOpen,
     parent,
     isMobile,
-
+    viewportRef,
     // Свойства для поповера
     direction,
     possibleDirections,
@@ -273,6 +273,7 @@ const ContextMenuLevelRender = (
       onMouseLeave={onMouseLeave}
       ref={useForkRef([ref, containerRef])}
       isMobile={isMobile}
+      viewportRef={viewportRef}
       {...otherProps}
     >
       {parent && (

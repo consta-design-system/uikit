@@ -26,6 +26,7 @@ type Props = PropsWithJsxAttributes<{
   anchorRef: React.RefObject<HTMLElement> | undefined;
   children: React.ReactNode;
   onMount: (isMount: boolean) => void;
+  viewportRef?: React.RefObject<HTMLElement>;
 }>;
 
 export const SelectPopover = reatomComponent<Props>((props) => {
