@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.29.1 (23/01/2026)
+- [fix(DatePicker): handle time-only format without date (#4148)](https://github.com/consta-design-system/uikit/commit/777840cd4b08b0d495e8c35ed8b034268efe086a) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+
+--------------------
+
 ## v5.29.0 (20/01/2026)
 Самое важное:
 - Добавили возможность указывать `viewport` для компонетов:
@@ -393,10 +398,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 
 - [feat(TextField): add canary component (#3771)](https://github.com/consta-design-system/uikit/commit/c5f94d20625ee9bc41c30576907449fb1e49b652) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Text): add _weight_extralight and _weight_extrabold (#3766)](https://github.com/consta-design-system/uikit/commit/dacbdbd954324fd83d149b3bdd17f693ab7245ca) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.9.2 (20/09/2024)
-- [fix(Slider): fixed onChande on input (#3764)](https://github.com/consta-design-system/uikit/commit/f895d19ed56c1b2acf3c399fbbf2fb0f19f05fde) - [@gizeasy](https://github.com/gizeasy)
-- [fix(ChoiceGroup): remove `pointer-events: none;` on ChoiceGroup-Item (#3763)](https://github.com/consta-design-system/uikit/commit/cfb7fb1beb38b05c1538a1af7512410418383301) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Theme): changed --font-weight-text-extralight value (#3754)](https://github.com/consta-design-system/uikit/commit/dcba76ae453ec77137c7ed9df339cab8a0f874b4) - [@nevsky118](https://github.com/nevsky118)
