@@ -118,7 +118,6 @@ export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
                 cnMixSpace({ mB: labelOffsetMap[size] }),
               ])}
               view="brand"
-              lineHeight="2xs"
             >
               {label}
             </Text>
@@ -127,7 +126,6 @@ export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
             <Text
               className={cnUserSelectItem('SubLabel', { disable })}
               view="brand"
-              lineHeight="2xs"
             >
               {subLabel}
             </Text>

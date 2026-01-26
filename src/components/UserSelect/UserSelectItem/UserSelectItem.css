@@ -98,12 +98,18 @@
   &-SubLabel {
     display: -webkit-box;
     overflow: hidden;
+    line-height: normal;
     word-wrap: break-word;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
   }
 
+  &-Label {
+    max-width: 20ch;
+  }
+
   &-SubLabel {
+    max-width: 28ch;
     opacity: 0.7;
     font-size: var(--sub-label-font-size);
 
