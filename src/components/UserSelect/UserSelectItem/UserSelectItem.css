@@ -90,7 +90,17 @@
   }
 
   &-Info {
+    flex: 1;
     padding-left: var(--sub-info-space);
+  }
+
+  &-Label,
+  &-SubLabel {
+    display: -webkit-box;
+    overflow: hidden;
+    word-wrap: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 
   &-SubLabel {
