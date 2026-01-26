@@ -1,5 +1,6 @@
 import './UserSelectItem.css';
 
+import { IconPropSize } from '@consta/icons/Icon';
 import { IconCheck } from '@consta/icons/IconCheck';
 import React, { forwardRef, useRef } from 'react';
 import { Transition } from 'react-transition-group';
@@ -10,16 +11,19 @@ import {
   mapHorizontalSpaceIncreased,
   mapItemVerticalPadding,
 } from '##/components/ListCanary';
-import { cnMixSpace } from '##/mixs/MixSpace';
+import { cnMixSpace, Space } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
+
+import { Text } from '../../Text/Text';
+import { UserSelectPropSize } from '../helpers';
 
 type UserSelectItemProps = PropsWithHTMLAttributes<
   {
     label: string;
     active: boolean;
     hovered: boolean;
-    size: 's' | 'm' | 'l';
+    size: UserSelectPropSize;
     indent: 'normal' | 'increased';
     subLabel?: string;
     avatarUrl?: string;
@@ -30,6 +34,18 @@ type UserSelectItemProps = PropsWithHTMLAttributes<
 >;
 
 export const cnUserSelectItem = cn('UserSelectItem');
+
+const avatarSizeMap: Record<UserSelectPropSize, IconPropSize> = {
+  s: 's',
+  m: 'm',
+  l: 'm',
+};
+
+const labelOffsetMap: Record<UserSelectPropSize, Space> = {
+  s: '3xs',
+  m: '2xs',
+  l: '2xs',
+};
 
 export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
   (props, ref) => {
@@ -71,6 +87,7 @@ export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
         <div className={cnUserSelectItem('AvatarContainer')}>
           <Avatar
             className={cnUserSelectItem('Avatar')}
+            size={avatarSizeMap[size]}
             url={avatarUrl}
             name={label}
             monochrome={disable}
@@ -94,16 +111,28 @@ export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
             <IconCheck className={cnUserSelectItem('CheckIcon')} />
           )}
         </div>
-        {!subLabel ? (
-          <div className={cnUserSelectItem('Info')}>{label}</div>
-        ) : (
-          <div className={cnUserSelectItem('Info')}>
-            <div>{label}</div>
-            <div className={cnUserSelectItem('SubLabel', { disable })}>
+        <div className={cnUserSelectItem('Info')}>
+          {label && (
+            <Text
+              className={cnUserSelectItem('Label', [
+                cnMixSpace({ mB: labelOffsetMap[size] }),
+              ])}
+              view="brand"
+              lineHeight="2xs"
+            >
+              {label}
+            </Text>
+          )}
+          {subLabel && (
+            <Text
+              className={cnUserSelectItem('SubLabel', { disable })}
+              view="brand"
+              lineHeight="2xs"
+            >
               {subLabel}
-            </div>
-          </div>
-        )}
+            </Text>
+          )}
+        </div>
       </div>
     );
   },
