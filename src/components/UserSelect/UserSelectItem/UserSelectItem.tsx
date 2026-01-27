@@ -11,7 +11,7 @@ import {
   mapHorizontalSpaceIncreased,
   mapItemVerticalPadding,
 } from '##/components/ListCanary';
-import { cnMixSpace, Space } from '##/mixs/MixSpace';
+import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
@@ -39,12 +39,6 @@ const avatarSizeMap: Record<UserSelectPropSize, IconPropSize> = {
   s: 's',
   m: 'm',
   l: 'm',
-};
-
-const labelOffsetMap: Record<UserSelectPropSize, Space> = {
-  s: '3xs',
-  m: '2xs',
-  l: '2xs',
 };
 
 export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
@@ -112,15 +106,7 @@ export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
           )}
         </div>
         <div className={cnUserSelectItem('Info')}>
-          {label && (
-            <Text
-              className={cnUserSelectItem('Label', [
-                cnMixSpace({ mB: labelOffsetMap[size] }),
-              ])}
-            >
-              {label}
-            </Text>
-          )}
+          {label && <Text className={cnUserSelectItem('Label')}>{label}</Text>}
           {subLabel && (
             <Text className={cnUserSelectItem('SubLabel', { disable })}>
               {subLabel}

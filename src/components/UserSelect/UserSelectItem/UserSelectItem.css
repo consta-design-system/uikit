@@ -100,7 +100,7 @@
   &-SubLabel {
     display: -webkit-box;
     overflow: hidden;
-    line-height: normal;
+    line-height: var(--line-height-text-m);
     word-wrap: break-word;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
