@@ -36,7 +36,9 @@
     cursor: auto;
   }
 
-  &_active {
+  &_active,
+  &_active .UserSelectItem-Label,
+  &_active .UserSelectItem-SubLabel {
     color: var(--color-control-typo-secondary);
   }
 

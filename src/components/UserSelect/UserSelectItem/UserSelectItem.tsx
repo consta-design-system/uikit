@@ -117,16 +117,12 @@ export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
               className={cnUserSelectItem('Label', [
                 cnMixSpace({ mB: labelOffsetMap[size] }),
               ])}
-              view="brand"
             >
               {label}
             </Text>
           )}
           {subLabel && (
-            <Text
-              className={cnUserSelectItem('SubLabel', { disable })}
-              view="brand"
-            >
+            <Text className={cnUserSelectItem('SubLabel', { disable })}>
               {subLabel}
             </Text>
           )}
