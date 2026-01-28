@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.29.2 (28/01/2026)
+- [fix(TextField): fixed errors in the console](https://github.com/consta-design-system/uikit/commit/744999c3f117e45aa4c75d9bf0a458ef51a61f71) - [@gizeasy](https://github.com/gizeasy)
+- [fix(UserSelect): incorrect avatar size and label gap (#4149)](https://github.com/consta-design-system/uikit/commit/74fae2c9a1e86a56b4dea67804cdebb2736b83f7) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+
+--------------------
+
 ## v5.29.1 (23/01/2026)
 - [fix(DatePicker): handle time-only format without date (#4148)](https://github.com/consta-design-system/uikit/commit/777840cd4b08b0d495e8c35ed8b034268efe086a) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
 
@@ -383,18 +389,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [feat(Table): mark us deprecated (#3782)](https://github.com/consta-design-system/uikit/commit/d0929e9af9782ec6eeab78e1a45d017cb813aea8) - [@gizeasy](https://github.com/gizeasy)
 - [chore: update deps (#3783)](https://github.com/consta-design-system/uikit/commit/686b01decf984754dc69d7831cda5915a2d3e363) - [@gizeasy](https://github.com/gizeasy)
 - [fix(Picture): remove console.log (#3775)](https://github.com/consta-design-system/uikit/commit/b3f4f1dd8f494547d619e9717ef5f58955d1e2b4) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.10.0 (04/10/2024)
-Самое важное:
-- Включили набор компонентов `FieldComponents` для создания собственных полей ввода
-- Добавили возможность импортировать отдельные компоненты по свойству `type` из `TextField`
-- Добавили новый тип `textarray` для `TextField`
-- В `TextField` реализовали ручное управление размерами для типа `textarea`
-- В `Text` добавили значения `extralight` и `extrabold` для свойства `weight`
-
----
-
-- [feat(TextField): add canary component (#3771)](https://github.com/consta-design-system/uikit/commit/c5f94d20625ee9bc41c30576907449fb1e49b652) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Text): add _weight_extralight and _weight_extrabold (#3766)](https://github.com/consta-design-system/uikit/commit/dacbdbd954324fd83d149b3bdd17f693ab7245ca) - [@gizeasy](https://github.com/gizeasy)
