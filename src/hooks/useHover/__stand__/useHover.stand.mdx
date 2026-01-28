@@ -1,0 +1,68 @@
+import { UseHoverExample } from './examples/UseHoverExample';
+
+import { MdxTabs } from '@consta/stand';
+
+```tsx
+import { useHover } from '@consta/uikit/useHover';
+```
+
+```tsx
+type useHover = (props: {
+  isActive?: boolean | (() => boolean | undefined);
+  refs: Array<React.RefObject<HTMLElement>>;
+  onHover?: (event: MouseEvent) => void;
+  onBlur?: (event: MouseEvent) => void;
+  blurDelay?: number;
+  hoverDelay?: number;
+}) => void;
+```
+
+Хук `useHover` отслеживает события наведения курсора на указанные ссылки, учитывая задержку, вызывает колбэки `onHover` и `onBlur`.
+
+## Свойства
+
+| Параметры    | Тип                                       | По умолчанию | Описание                                                      |
+| ------------ | ----------------------------------------- | ------------ | ------------------------------------------------------------- |
+| `isActive`   | `boolean \| (() => boolean \| undefined)` | -            | Активность                                                    |
+| `refs`       | `Array<React.RefObject<HTMLElement>>`     | -            | Массив ссылок на элементы с которых нужно отслеживать события |
+| `onHover`    | `(event: MouseEvent) => void`             | -            | Событие наведения курсора на элементы                         |
+| `onBlur`     | `(event: MouseEvent) => void`             | -            | Событие снятие курсора с элементов                            |
+| `blurDelay`  | `number`                                  | `200`        | Задержка в миллисекундах до срабатывания `onBlur`             |
+| `hoverDelay` | `number`                                  | `0`          | Задержка в миллисекундах до срабатывания `hoverDelay`         |
+
+## Пример
+
+<MdxTabs>
+
+<UseHoverExample />
+
+```tsx
+import React, { useRef, useState } from 'react';
+
+import { Button } from '@consta/uikit/Button';
+import { Tooltip } from '@consta/uikit/Tooltip';
+import { useHover } from '@consta/uikit/useHover';
+
+export const UseHoverExample = () => {
+  const buttonRef = useRef(null);
+  const tooltipRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useHover({
+    refs: [buttonRef, tooltipRef],
+    onHover: () => setIsHovered(true),
+    onBlur: () => setIsHovered(false),
+  });
+
+  return (
+    <>
+      <Button ref={buttonRef} label="Наведи на меня" />
+      <Tooltip isOpen={isHovered} ref={tooltipRef} anchorRef={buttonRef}>
+        Я появился
+      </Tooltip>
+    </>
+  );
+};
+```
+
+</MdxTabs>
