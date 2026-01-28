@@ -48,7 +48,13 @@ const bodyRemoveStyles = () => {
   removeCssVariable(SCROLLBAR_WIDTH_VAR);
 };
 
-export const useBodyScrollFreeze = (isActive: boolean): void => {
+export type UseBodyScrollFreezeProps = {
+  isActive?: boolean;
+};
+
+export const useBodyScrollFreeze = ({
+  isActive,
+}: UseBodyScrollFreezeProps): void => {
   useEffect(() => {
     if (!isActive) return;
     if (typeof window === 'undefined') return;

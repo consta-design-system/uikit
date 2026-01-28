@@ -13,7 +13,7 @@ describe('Хук useBodyScrollFreeze', () => {
   });
 
   it('добавляет класс и CSS переменную при монтировании с isActive=true', () => {
-    renderHook(() => useBodyScrollFreeze(true));
+    renderHook(() => useBodyScrollFreeze({ isActive: true }));
 
     expect(
       document.documentElement.classList.contains(cnBodyScrollFreeze()),
@@ -24,7 +24,7 @@ describe('Хук useBodyScrollFreeze', () => {
   });
 
   it('не добавляет класс и CSS переменную при монтировании с isActive=false', () => {
-    renderHook(() => useBodyScrollFreeze(false));
+    renderHook(() => useBodyScrollFreeze({ isActive: false }));
 
     expect(
       document.documentElement.classList.contains(cnBodyScrollFreeze()),
@@ -36,7 +36,7 @@ describe('Хук useBodyScrollFreeze', () => {
 
   it('добавляет класс и CSS переменную при смене isActive с false на true', () => {
     const { rerender } = renderHook(
-      ({ isActive }) => useBodyScrollFreeze(isActive),
+      ({ isActive }) => useBodyScrollFreeze({ isActive }),
       {
         initialProps: { isActive: false },
       },
@@ -58,7 +58,7 @@ describe('Хук useBodyScrollFreeze', () => {
 
   it('удаляет класс и CSS переменную при смене isActive с true на false', () => {
     const { rerender } = renderHook(
-      ({ isActive }) => useBodyScrollFreeze(isActive),
+      ({ isActive }) => useBodyScrollFreeze({ isActive }),
       {
         initialProps: { isActive: true },
       },
