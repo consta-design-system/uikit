@@ -1,0 +1,49 @@
+import { MdxInformer } from '@consta/stand';
+
+```tsx
+import { useBodyScrollFreeze } from '@consta/uikit/useBodyScrollFreeze';
+```
+
+Этот хук нужен, чтобы блокировать прокрутку страницы на время активности определенного компонента. Например, на время активности модального окна, коллапса, поддерживающего прокрутку, и других оверлейных компонентов.
+
+## Свойства
+
+| Свойство   | Тип       | По умолчанию | Описание                                                   |
+| ---------- | --------- | ------------ | ---------------------------------------------------------- |
+| `isActive` | `boolean` | -            | Флаг, указывающий, нужно ли блокировать прокрутку страницы |
+
+## Поведение
+
+- При active = true:
+
+  - на document.documentElement добавляется класс BodyScrollFreeze
+  - устанавливается CSS-переменная --body-scroll-freeze-scrollbar-width
+
+- При active = false:
+
+  - класс и CSS-переменная удаляются
+
+- При размонтировании компонента:
+  - все стили удаляются автоматически
+
+<MdxInformer status="warning">
+  Хук не управляет счетчиком блокировок — при использовании нескольких
+  компонентов пользователь должен самостоятельно контролировать логику активации
+  и деактивации блокировки скролинга.
+</MdxInformer>
+
+## Пример
+
+```tsx
+import { useBodyScrollFreeze } from '@consta/uikit/useBodyScrollFreeze';
+
+const Modal = ({ isOpen }: { isOpen: boolean }) => {
+  useBodyScrollFreeze({ isActive: isOpen });
+
+  if (!isOpen) {
+    return null;
+  }
+
+  return <div>Модальное окно</div>;
+};
+```
