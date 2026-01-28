@@ -12,7 +12,7 @@ describe('Хук useBodyScrollFreeze', () => {
     document.documentElement.style.removeProperty(SCROLLBAR_WIDTH_VAR);
   });
 
-  it('добавляет класс и CSS переменную при монтировании с active=true', () => {
+  it('добавляет класс и CSS переменную при монтировании с isActive=true', () => {
     renderHook(() => useBodyScrollFreeze(true));
 
     expect(
@@ -23,7 +23,7 @@ describe('Хук useBodyScrollFreeze', () => {
     ).not.toBe('');
   });
 
-  it('не добавляет класс и CSS переменную при монтировании с active=false', () => {
+  it('не добавляет класс и CSS переменную при монтировании с isActive=false', () => {
     renderHook(() => useBodyScrollFreeze(false));
 
     expect(
@@ -34,11 +34,11 @@ describe('Хук useBodyScrollFreeze', () => {
     ).toBe('');
   });
 
-  it('добавляет класс и CSS переменную при смене active с false на true', () => {
+  it('добавляет класс и CSS переменную при смене isActive с false на true', () => {
     const { rerender } = renderHook(
-      ({ active }) => useBodyScrollFreeze(active),
+      ({ isActive }) => useBodyScrollFreeze(isActive),
       {
-        initialProps: { active: false },
+        initialProps: { isActive: false },
       },
     );
 
@@ -46,7 +46,7 @@ describe('Хук useBodyScrollFreeze', () => {
       document.documentElement.classList.contains(cnBodyScrollFreeze()),
     ).toBe(false);
 
-    rerender({ active: true });
+    rerender({ isActive: true });
 
     expect(
       document.documentElement.classList.contains(cnBodyScrollFreeze()),
@@ -56,11 +56,11 @@ describe('Хук useBodyScrollFreeze', () => {
     ).not.toBe('');
   });
 
-  it('удаляет класс и CSS переменную при смене active с true на false', () => {
+  it('удаляет класс и CSS переменную при смене isActive с true на false', () => {
     const { rerender } = renderHook(
-      ({ active }) => useBodyScrollFreeze(active),
+      ({ isActive }) => useBodyScrollFreeze(isActive),
       {
-        initialProps: { active: true },
+        initialProps: { isActive: true },
       },
     );
 
@@ -68,7 +68,7 @@ describe('Хук useBodyScrollFreeze', () => {
       document.documentElement.classList.contains(cnBodyScrollFreeze()),
     ).toBe(true);
 
-    rerender({ active: false });
+    rerender({ isActive: false });
 
     expect(
       document.documentElement.classList.contains(cnBodyScrollFreeze()),
