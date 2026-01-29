@@ -9,7 +9,7 @@ import { useHover } from '@consta/uikit/useHover';
 ```tsx
 type useHover = (props: {
   isActive?: boolean | (() => boolean | undefined);
-  refs: Array<React.RefObject<HTMLElement>>;
+  refs: React.RefObject<HTMLElement>[];
   onHover?: (event: MouseEvent) => void;
   onBlur?: (event: MouseEvent) => void;
   blurDelay?: number;
@@ -21,14 +21,14 @@ type useHover = (props: {
 
 ## Свойства
 
-| Параметры    | Тип                                       | По умолчанию | Описание                                                      |
-| ------------ | ----------------------------------------- | ------------ | ------------------------------------------------------------- |
-| `isActive`   | `boolean \| (() => boolean \| undefined)` | -            | Активность                                                    |
-| `refs`       | `Array<React.RefObject<HTMLElement>>`     | -            | Массив ссылок на элементы с которых нужно отслеживать события |
-| `onHover`    | `(event: MouseEvent) => void`             | -            | Событие наведения курсора на элементы                         |
-| `onBlur`     | `(event: MouseEvent) => void`             | -            | Событие снятие курсора с элементов                            |
-| `blurDelay`  | `number`                                  | `200`        | Задержка в миллисекундах до срабатывания `onBlur`             |
-| `hoverDelay` | `number`                                  | `0`          | Задержка в миллисекундах до срабатывания `hoverDelay`         |
+| Параметры     | Тип                                       | По умолчанию | Описание                                                      |
+| ------------- | ----------------------------------------- | ------------ | ------------------------------------------------------------- |
+| `isActive?`   | `boolean \| (() => boolean \| undefined)` | -            | Активность                                                    |
+| `refs`        | `React.RefObject<HTMLElement>[]`          | -            | Массив ссылок на элементы с которых нужно отслеживать события |
+| `onHover?`    | `(event: MouseEvent) => void`             | -            | Событие наведения курсора на элементы                         |
+| `onBlur?`     | `(event: MouseEvent) => void`             | -            | Событие снятие курсора с элементов                            |
+| `blurDelay?`  | `number`                                  | `200`        | Задержка в миллисекундах до срабатывания `onBlur`             |
+| `hoverDelay?` | `number`                                  | `0`          | Задержка в миллисекундах до срабатывания `onHover`            |
 
 ## Пример
 
@@ -49,6 +49,7 @@ export const UseHoverExample = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   useHover({
+    isActive: true,
     refs: [buttonRef, tooltipRef],
     onHover: () => setIsHovered(true),
     onBlur: () => setIsHovered(false),

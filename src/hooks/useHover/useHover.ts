@@ -1,24 +1,24 @@
-import { useMutableRef } from '@consta/uikit/useMutableRef';
 import { useEffect, useRef } from 'react';
+
+import { useMutableRef } from '##/hooks/useMutableRef';
 
 export type UseHoverProps = {
   isActive?: boolean | (() => boolean | undefined);
-  refs: Array<React.RefObject<HTMLElement>>;
+  refs: React.RefObject<HTMLElement>[];
   onHover?: (event: MouseEvent) => void;
   onBlur?: (event: MouseEvent) => void;
   blurDelay?: number;
   hoverDelay?: number;
 };
 
-export const useHover = (props: UseHoverProps): void => {
-  const {
-    refs,
-    onHover,
-    onBlur,
-    blurDelay = 200,
-    hoverDelay = 0,
-    isActive,
-  } = props;
+export const useHover = ({
+  refs,
+  onHover,
+  onBlur,
+  blurDelay = 200,
+  hoverDelay = 0,
+  isActive,
+}: UseHoverProps): void => {
   const blurTimeoutId = useRef<NodeJS.Timeout | null>(null);
   const hoverTimeoutId = useRef<NodeJS.Timeout | null>(null);
   const isHovered = useRef(false);
@@ -77,18 +77,17 @@ export const useHover = (props: UseHoverProps): void => {
       }, mutableRef.current[3]);
     };
 
-    for (let i = 0; i < refs.length; i++) {
-      const element = refs[i].current;
-      element?.addEventListener('mouseenter', handleMouseEnter);
-      element?.addEventListener('mouseleave', handleMouseLeave);
+    for (const element of refs) {
+      element.current?.addEventListener('mouseenter', handleMouseEnter);
+      element.current?.addEventListener('mouseleave', handleMouseLeave);
     }
 
     return () => {
-      for (let i = 0; i < refs.length; i++) {
-        const element = refs[i].current;
-        element?.removeEventListener('mouseenter', handleMouseEnter);
-        element?.removeEventListener('mouseleave', handleMouseLeave);
+      for (const element of refs) {
+        element.current?.removeEventListener('mouseenter', handleMouseEnter);
+        element.current?.removeEventListener('mouseleave', handleMouseLeave);
       }
+      clearTimeouts();
     };
   }, [refs]);
 };
