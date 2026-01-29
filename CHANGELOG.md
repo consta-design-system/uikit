@@ -1,5 +1,17 @@
 # Changelog
 
+## v5.30.0 (29/01/2026)
+Самое важное:
+- Добавили хук `useHover` для подписки на несколько элементов одновременно с возможностью установить задержку перед срабатыванием колбэка.
+- Добавили хук `useBodyScrollFreeze` для возможности убрать полосу скролла на body.
+
+---
+
+- [feat(useHover): add hook (#4151)](https://github.com/consta-design-system/uikit/commit/433d5791655d37afcb81c22d11bcd49dedf21575) - [@gizeasy](https://github.com/gizeasy)
+- [feature(useBodyScrollFreeze): add body scroll freez hook (#4150)](https://github.com/consta-design-system/uikit/commit/0d3b607f7a5d91724e58ccc8f3cb261bdbeb7b07) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+
+--------------------
+
 ## v5.29.2 (28/01/2026)
 - [fix(TextField): fixed errors in the console](https://github.com/consta-design-system/uikit/commit/744999c3f117e45aa4c75d9bf0a458ef51a61f71) - [@gizeasy](https://github.com/gizeasy)
 - [fix(UserSelect): incorrect avatar size and label gap (#4149)](https://github.com/consta-design-system/uikit/commit/74fae2c9a1e86a56b4dea67804cdebb2736b83f7) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
@@ -376,16 +388,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 
 - [feat(AutoComplete): add canary component (#3780)](https://github.com/consta-design-system/uikit/commit/4e6de1ad3a58a368e3b3f719f7d91d184b078f5e) - [@gizeasy](https://github.com/gizeasy)
 - [feat(DatePicker): add disableDates (#3788)](https://github.com/consta-design-system/uikit/commit/5acafb7cfeea97d53ff5476f102db21bb3b57173) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.11.0 (16/10/2024)
-Самое важное:
-- Компонент Table помечен как deprecated, чтобы уже сейчас вы готовились к переходу на  библиотеку @consta/table. Поддержка компонента в @consta/uikit v6 закончится, но еще останется в составе библиотеки.
-
----
-
-- [fix(ProgressStepBar): add validate activeStepIndex (#3784)](https://github.com/consta-design-system/uikit/commit/a32b963845232bf219d176f86ebcecea5224eed4) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Table): mark us deprecated (#3782)](https://github.com/consta-design-system/uikit/commit/d0929e9af9782ec6eeab78e1a45d017cb813aea8) - [@gizeasy](https://github.com/gizeasy)
-- [chore: update deps (#3783)](https://github.com/consta-design-system/uikit/commit/686b01decf984754dc69d7831cda5915a2d3e363) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Picture): remove console.log (#3775)](https://github.com/consta-design-system/uikit/commit/b3f4f1dd8f494547d619e9717ef5f58955d1e2b4) - [@gizeasy](https://github.com/gizeasy)
