@@ -1,0 +1,4 @@
+.BodyScrollFreeze {
+  overflow: hidden !important;
+  margin-right: var(--body-scroll-freeze-scrollbar-width) !important;
+}

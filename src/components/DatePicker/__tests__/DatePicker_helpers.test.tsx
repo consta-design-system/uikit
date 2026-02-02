@@ -99,6 +99,48 @@ describe('DateTime helpers (time)', () => {
       expect(result.minutes).toEqual({ step: 5 });
       expect(result.seconds).toEqual([]);
     });
+
+    it('полный timeOptions и неполный format без даты и неполным временем (HH:mm)', () => {
+      const timeOptions: TimeOptions = {
+        hours: [1, 2, 3],
+        minutes: [10, 20],
+        seconds: [30],
+      };
+
+      const result = getTimeOptionsByFormat('HH:mm', timeOptions);
+
+      expect(result.hours).toEqual([1, 2, 3]);
+      expect(result.minutes).toEqual([10, 20]);
+      expect(result.seconds).toEqual([]);
+    });
+
+    it('полный timeOptions и полный format времени (HH:mm:ss)', () => {
+      const timeOptions: TimeOptions = {
+        hours: { step: 1 },
+        minutes: { step: 5 },
+        seconds: { step: 10 },
+      };
+
+      const result = getTimeOptionsByFormat('HH:mm:ss', timeOptions);
+
+      expect(result.hours).toEqual({ step: 1 });
+      expect(result.minutes).toEqual({ step: 5 });
+      expect(result.seconds).toEqual({ step: 10 });
+    });
+
+    it('полный timeOptions и пустой format', () => {
+      const timeOptions: TimeOptions = {
+        hours: { step: 1 },
+        minutes: { step: 5 },
+        seconds: { step: 10 },
+      };
+
+      const result = getTimeOptionsByFormat('', timeOptions);
+
+      expect(result.hours).toEqual([]);
+      expect(result.minutes).toEqual([]);
+      expect(result.seconds).toEqual([]);
+    });
   });
 
   describe('getMaskBlocks', () => {

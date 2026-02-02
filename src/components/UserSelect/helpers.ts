@@ -70,6 +70,8 @@ export type UserSelectPropRenderValue<ITEM> = (
   props: UserSelectRenderValueProps<ITEM>,
 ) => React.ReactNode | null;
 
+export type UserSelectPropSize = Exclude<PropSize, 'xs'>;
+
 export type UserSelectProps<
   ITEM = UserSelectItemDefault,
   GROUP = UserSelectGroupDefault,
@@ -78,7 +80,7 @@ export type UserSelectProps<
   {
     disabled?: boolean;
     form?: PropForm;
-    size?: Exclude<PropSize, 'xs'>;
+    size?: UserSelectPropSize;
     view?: PropView;
     dropdownForm?: 'default' | 'brick' | 'round';
     placeholder?: string;
@@ -217,15 +219,13 @@ export const searchCompare = (
   );
 };
 
-export const clearSizeMap: Record<PropSize, IconPropSize> = {
-  xs: 'xs',
+export const clearSizeMap: Record<UserSelectPropSize, IconPropSize> = {
   s: 's',
   m: 's',
   l: 'm',
 };
 
-export const iconSizeMap: Record<PropSize, IconPropSize> = {
-  xs: 'xs',
+export const iconSizeMap: Record<UserSelectPropSize, IconPropSize> = {
   s: 's',
   m: 'm',
   l: 'm',

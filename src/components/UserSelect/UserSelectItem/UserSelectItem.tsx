@@ -1,5 +1,6 @@
 import './UserSelectItem.css';
 
+import { IconPropSize } from '@consta/icons/Icon';
 import { IconCheck } from '@consta/icons/IconCheck';
 import React, { forwardRef, useRef } from 'react';
 import { Transition } from 'react-transition-group';
@@ -14,12 +15,15 @@ import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
+import { Text } from '../../Text/Text';
+import { UserSelectPropSize } from '../helpers';
+
 type UserSelectItemProps = PropsWithHTMLAttributes<
   {
     label: string;
     active: boolean;
     hovered: boolean;
-    size: 's' | 'm' | 'l';
+    size: UserSelectPropSize;
     indent: 'normal' | 'increased';
     subLabel?: string;
     avatarUrl?: string;
@@ -30,6 +34,12 @@ type UserSelectItemProps = PropsWithHTMLAttributes<
 >;
 
 export const cnUserSelectItem = cn('UserSelectItem');
+
+const avatarSizeMap: Record<UserSelectPropSize, IconPropSize> = {
+  s: 's',
+  m: 'm',
+  l: 'm',
+};
 
 export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
   (props, ref) => {
@@ -71,6 +81,7 @@ export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
         <div className={cnUserSelectItem('AvatarContainer')}>
           <Avatar
             className={cnUserSelectItem('Avatar')}
+            size={avatarSizeMap[size]}
             url={avatarUrl}
             name={label}
             monochrome={disable}
@@ -94,16 +105,14 @@ export const UserSelectItem = forwardRef<HTMLDivElement, UserSelectItemProps>(
             <IconCheck className={cnUserSelectItem('CheckIcon')} />
           )}
         </div>
-        {!subLabel ? (
-          <div className={cnUserSelectItem('Info')}>{label}</div>
-        ) : (
-          <div className={cnUserSelectItem('Info')}>
-            <div>{label}</div>
-            <div className={cnUserSelectItem('SubLabel', { disable })}>
+        <div className={cnUserSelectItem('Info')}>
+          {label && <Text className={cnUserSelectItem('Label')}>{label}</Text>}
+          {subLabel && (
+            <Text className={cnUserSelectItem('SubLabel', { disable })}>
               {subLabel}
-            </div>
-          </div>
-        )}
+            </Text>
+          )}
+        </div>
       </div>
     );
   },

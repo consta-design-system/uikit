@@ -5,10 +5,11 @@ import React from 'react';
 
 import { cn } from '../../../utils/bem';
 import { User } from '../../User/User';
+import { UserSelectPropSize } from '../helpers';
 
 type UserValueProps = {
   label: string;
-  size: 's' | 'm' | 'l';
+  size: UserSelectPropSize;
   subLabel?: string;
   avatarUrl?: string;
   handleRemove?: (e: React.SyntheticEvent) => void;

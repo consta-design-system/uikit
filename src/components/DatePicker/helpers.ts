@@ -38,7 +38,8 @@ export const getTimeOptionsByFormat = (
   timeOptions?: TimeOptions,
 ) => {
   const markers = ['HH', 'mm', 'ss'] as const;
-  const formatArray = format.split(' ')[1]?.split(':');
+  const timePart = format.includes(' ') ? format.split(' ')[1] : format;
+  const formatArray = timePart?.split(':');
   const mapTimeOptions = {
     HH: timeOptions?.hours,
     mm: timeOptions?.minutes,

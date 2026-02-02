@@ -55,7 +55,6 @@ export const TextAreaAutoSize = withCtx(
         minHeight: textAreaStyles.minHeight,
         maxHeight: textAreaStyles.maxHeight,
         width: textAreaStyles.width,
-        padding: textAreaStyles.padding,
         paddingBottom: textAreaStyles.paddingBottom,
         paddingTop: textAreaStyles.paddingTop,
         paddingLeft: textAreaStyles.paddingLeft,

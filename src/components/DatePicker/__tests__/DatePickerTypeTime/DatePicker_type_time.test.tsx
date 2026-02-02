@@ -79,6 +79,33 @@ describe('Компонент DatePickerTypeTime', () => {
           seconds: [],
         },
       },
+      {
+        label: 'формат без даты',
+        format: 'HH:mm:ss',
+        expectedTimeOptions: {
+          hours: [0, 6, 12],
+          minutes: [0, 30],
+          seconds: [0, 10, 20, 30],
+        },
+      },
+      {
+        label: 'формат без даты + нет минут (HH:ss)',
+        format: 'HH:ss',
+        expectedTimeOptions: {
+          hours: [0, 6, 12],
+          minutes: [],
+          seconds: [0, 10, 20, 30],
+        },
+      },
+      {
+        label: 'пустой формат (формат по умолчанию)',
+        format: '',
+        expectedTimeOptions: {
+          hours: [0, 6, 12],
+          minutes: [0, 30],
+          seconds: [0, 10, 20, 30],
+        },
+      },
     ];
 
     formatCases.forEach(({ label, format, expectedTimeOptions }) => {

@@ -1,5 +1,7 @@
 import React, { forwardRef } from 'react';
 
+import { clearUndefined } from '##/utils/object';
+
 import { TextFieldTypeNumber } from './TextFieldTypeNumber';
 import { TextFieldTypePassword } from './TextFieldTypePassword';
 import { TextFieldTypeText } from './TextFieldTypeText';
@@ -33,7 +35,7 @@ const TextFieldRender = <TYPE extends string>(
   const Component = (typeMap[props.type || 'text'] ||
     typeMap.text) as TextFieldTypeComponent<TYPE>;
 
-  return <Component ref={ref} {...props} />;
+  return <Component ref={ref} {...clearUndefined(props)} />;
 };
 
 export const TextField = forwardRef(TextFieldRender) as TextFieldComponent;

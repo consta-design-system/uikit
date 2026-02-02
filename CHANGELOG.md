@@ -1,5 +1,28 @@
 # Changelog
 
+## v5.30.0 (29/01/2026)
+Самое важное:
+- Добавили хук `useHover` для подписки на несколько элементов одновременно с возможностью установить задержку перед срабатыванием колбэка.
+- Добавили хук `useBodyScrollFreeze` для возможности убрать полосу скролла на body.
+
+---
+
+- [feat(useHover): add hook (#4151)](https://github.com/consta-design-system/uikit/commit/433d5791655d37afcb81c22d11bcd49dedf21575) - [@gizeasy](https://github.com/gizeasy)
+- [feature(useBodyScrollFreeze): add body scroll freez hook (#4150)](https://github.com/consta-design-system/uikit/commit/0d3b607f7a5d91724e58ccc8f3cb261bdbeb7b07) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+
+--------------------
+
+## v5.29.2 (28/01/2026)
+- [fix(TextField): fixed errors in the console](https://github.com/consta-design-system/uikit/commit/744999c3f117e45aa4c75d9bf0a458ef51a61f71) - [@gizeasy](https://github.com/gizeasy)
+- [fix(UserSelect): incorrect avatar size and label gap (#4149)](https://github.com/consta-design-system/uikit/commit/74fae2c9a1e86a56b4dea67804cdebb2736b83f7) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+
+--------------------
+
+## v5.29.1 (23/01/2026)
+- [fix(DatePicker): handle time-only format without date (#4148)](https://github.com/consta-design-system/uikit/commit/777840cd4b08b0d495e8c35ed8b034268efe086a) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+
+--------------------
+
 ## v5.29.0 (20/01/2026)
 Самое важное:
 - Добавили возможность указывать `viewport` для компонетов:
@@ -365,38 +388,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 
 - [feat(AutoComplete): add canary component (#3780)](https://github.com/consta-design-system/uikit/commit/4e6de1ad3a58a368e3b3f719f7d91d184b078f5e) - [@gizeasy](https://github.com/gizeasy)
 - [feat(DatePicker): add disableDates (#3788)](https://github.com/consta-design-system/uikit/commit/5acafb7cfeea97d53ff5476f102db21bb3b57173) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.11.0 (16/10/2024)
-Самое важное:
-- Компонент Table помечен как deprecated, чтобы уже сейчас вы готовились к переходу на  библиотеку @consta/table. Поддержка компонента в @consta/uikit v6 закончится, но еще останется в составе библиотеки.
-
----
-
-- [fix(ProgressStepBar): add validate activeStepIndex (#3784)](https://github.com/consta-design-system/uikit/commit/a32b963845232bf219d176f86ebcecea5224eed4) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Table): mark us deprecated (#3782)](https://github.com/consta-design-system/uikit/commit/d0929e9af9782ec6eeab78e1a45d017cb813aea8) - [@gizeasy](https://github.com/gizeasy)
-- [chore: update deps (#3783)](https://github.com/consta-design-system/uikit/commit/686b01decf984754dc69d7831cda5915a2d3e363) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Picture): remove console.log (#3775)](https://github.com/consta-design-system/uikit/commit/b3f4f1dd8f494547d619e9717ef5f58955d1e2b4) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.10.0 (04/10/2024)
-Самое важное:
-- Включили набор компонентов `FieldComponents` для создания собственных полей ввода
-- Добавили возможность импортировать отдельные компоненты по свойству `type` из `TextField`
-- Добавили новый тип `textarray` для `TextField`
-- В `TextField` реализовали ручное управление размерами для типа `textarea`
-- В `Text` добавили значения `extralight` и `extrabold` для свойства `weight`
-
----
-
-- [feat(TextField): add canary component (#3771)](https://github.com/consta-design-system/uikit/commit/c5f94d20625ee9bc41c30576907449fb1e49b652) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Text): add _weight_extralight and _weight_extrabold (#3766)](https://github.com/consta-design-system/uikit/commit/dacbdbd954324fd83d149b3bdd17f693ab7245ca) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.9.2 (20/09/2024)
-- [fix(Slider): fixed onChande on input (#3764)](https://github.com/consta-design-system/uikit/commit/f895d19ed56c1b2acf3c399fbbf2fb0f19f05fde) - [@gizeasy](https://github.com/gizeasy)
-- [fix(ChoiceGroup): remove `pointer-events: none;` on ChoiceGroup-Item (#3763)](https://github.com/consta-design-system/uikit/commit/cfb7fb1beb38b05c1538a1af7512410418383301) - [@gizeasy](https://github.com/gizeasy)
-- [fix(Theme): changed --font-weight-text-extralight value (#3754)](https://github.com/consta-design-system/uikit/commit/dcba76ae453ec77137c7ed9df339cab8a0f874b4) - [@nevsky118](https://github.com/nevsky118)
