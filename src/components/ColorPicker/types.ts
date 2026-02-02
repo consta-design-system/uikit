@@ -1,36 +1,32 @@
-import './styles.css';
-
-import React from 'react';
-
-export interface RgbColor {
+export type RgbColor = {
   r: number;
   g: number;
   b: number;
-}
+};
 
-export interface RgbaColor extends RgbColor {
+export type RgbaColor = RgbColor & {
   a: number;
-}
+};
 
-export interface HslColor {
+export type HslColor = {
   h: number;
   s: number;
   l: number;
-}
+};
 
-export interface HslaColor extends HslColor {
+export type HslaColor = HslColor & {
   a: number;
-}
+};
 
-export interface HsvColor {
+export type HsvColor = {
   h: number;
   s: number;
   v: number;
-}
+};
 
-export interface HsvaColor extends HsvColor {
+export type HsvaColor = HsvColor & {
   a: number;
-}
+};
 
 export type ObjectColor =
   | RgbColor
@@ -42,30 +38,11 @@ export type ObjectColor =
 
 export type AnyColor = string | ObjectColor;
 
-export interface ColorModel<T extends AnyColor> {
+export type ColorInputFormat = 'rgb' | 'hsl' | 'hsv' | 'hex';
+
+export type ColorModel<T> = {
   defaultColor: T;
-  toHsva: (defaultColor: T) => HsvaColor;
+  toHsva: (color: T) => HsvaColor;
   fromHsva: (hsva: HsvaColor) => T;
   equal: (first: T, second: T) => boolean;
-}
-
-type ColorPickerHTMLAttributes = Omit<
-  React.HTMLAttributes<HTMLDivElement>,
-  'color' | 'onChange' | 'onChangeCapture'
->;
-
-export interface ColorPickerBaseProps<T extends AnyColor>
-  extends ColorPickerHTMLAttributes {
-  color: T;
-  onChange: (newColor: T) => void;
-}
-
-type ColorInputHTMLAttributes = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  'onChange' | 'value'
->;
-
-export interface ColorInputBaseProps extends ColorInputHTMLAttributes {
-  color?: string;
-  onChange?: (newColor: string) => void;
-}
+};

@@ -34,6 +34,7 @@ const descriptionSizeMap: Record<AttachmentPropSize, TextPropSize> = {
   s: 'xs',
   m: 's',
 };
+
 const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
   const {
     className,

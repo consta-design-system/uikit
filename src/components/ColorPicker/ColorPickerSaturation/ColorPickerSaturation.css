@@ -1,0 +1,12 @@
+.ColorPickerSaturation {
+  --color-picker-saturation-size: 220px;
+  position: relative;
+  border-color: transparent;
+  background-image: linear-gradient(to top, #000, rgba(0, 0, 0, 0)),
+    linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  height: var(--color-picker-saturation-size);
+  box-shadow: inset 0 0 0 1px var(--color-bg-border);
+  border-radius: 4px;
+}

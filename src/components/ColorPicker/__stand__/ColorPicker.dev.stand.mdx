@@ -1,1 +1,444 @@
-# dev
+import { MdxMenu, MdxTabs } from '@consta/stand';
+
+import { ColorPickerExample } from './examples/ColorPickerExample/ColorPickerExample';
+import { ColorPickerExampleAnchor } from './examples/ColorPickerExampleAnchor/ColorPickerExampleAnchor';
+import { ColorPickerBaseExample } from './examples/ColorPickerBaseExample/ColorPickerBaseExample';
+import { ColorMarkerExample } from './examples/ColorMarkerExample/ColorMarkerExample';
+import { ColorPaletteExample } from './examples/ColorPaletteExample/ColorPaletteExample';
+import { ColorPickerInputExample } from './examples/ColorPickerInputExample/ColorPickerInputExample';
+import { ColorControlExample } from './examples/ColorControlExample/ColorControlExample';
+
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Свойства](#свойства)
+- [Модель цвета](#модель-цвета)
+- [Пример использования ColorPicker](#пример-использования-colorpicker)
+- [Якорь](#якорь)
+- [Компонент ColorPickerBase](#компонент-colorpickerbase)
+  - [Импорт](#импорт-компонента-colorpickerbase)
+  - [Свойства](#свойства-компонента-colorpickerbase)
+  - [Использование](#использование-компонента-colorpickerbase)
+- [Компонент ColorMarker](#компонент-colormarker)
+  - [Импорт](#импорт-компонента-colormarker)
+  - [Свойства](#свойства-компонента-colormarker)
+  - [Использование](#использование-компонента-colormarker)
+- [Компонент ColorPaletteExample](#компонент-colorpaletteexample)
+  - [Импорт](#импорт-компонента-colorpaletteexample)
+  - [Свойства](#свойства-компонента-colorpaletteexample)
+  - [Использование](#использование-компонента-colorpaletteexample)
+- [Компонент ColorPickerInput](#компонент-colorpickerinput)
+  - [Импорт](#импорт-компонента-colorpickerinput)
+  - [Свойства](#свойства-компонента-colorpickerinput)
+  - [Использование](#использование-компонента-colorpickerinput)
+- [Компонент ColorControl](#компонент-colorcontrol)
+  - [Импорт](#импорт-компонента-colorcontrol)
+  - [Свойства](#свойства-компонента-colorcontrol)
+  - [Использование](#использование-компонента-colorcontrol)
+
+</MdxMenu>
+
+## Обзор
+
+Компонент ColorPicker предназначен для выбора цвета.
+
+## Импорт
+
+```jsx
+import { ColorPicker } from '@consta/uikit/ColorPicker';
+```
+
+## Свойства
+
+| Свойство                 | Тип                                               | По умолчанию                   | Описание                                                                                                                                                                 |
+| ------------------------ | ------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`model`](#модель-цвета) | `ColorModel<T>`                                   | —                              | Модель цвета, определяющая преобразование между типом T и HSVA.                                                                                                          |
+| `value?`                 | `T`                                               | `model.defaultColor`           | Текущее значение цвета.                                                                                                                                                  |
+| `onOpen?`                | `(open: boolean) => void`                         | —                              | Обработчик открытия/закрытия попапа.                                                                                                                                     |
+| `open?`                  | `boolean`                                         | —                              | Управляет видимостью попапа (контролируемый режим).                                                                                                                      |
+| `anchorRef?`             | `React.RefObject<HTMLElement>`                    | `controlRef` (если задан)      | Ref элемента, относительно которого позиционируется попап.                                                                                                               |
+| `controlRef?`            | `React.RefObject<HTMLElement>`                    | `anchorRef` (если задан)       | Ref элемента управления (кнопки) для открытия попапа.                                                                                                                    |
+| `direction?`             | `Direction`                                       | —                              | Направление открытия попапа (см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания)).                     |
+| `spareDirection?`        | `Direction`                                       | —                              | Запасное направление, если основное не подходит (см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания)). |
+| `possibleDirections?`    | `Direction[]`                                     | —                              | Список возможных направлений открытия (см. [Popover](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-popover-stable/tab:dev/hash:направление-разворачивания)).           |
+| `viewportRef?`           | `React.RefObject<HTMLElement>`                    | —                              | Ref viewport'а для ограничения области видимости попапа.                                                                                                                 |
+| `header?`                | `React.ReactNode`                                 | —                              | Заголовок попапа.                                                                                                                                                        |
+| `onChange`               | `(value: T) => void`                              | —                              | Обработчик изменения цвета.                                                                                                                                              |
+| `alpha?`                 | `boolean`                                         | `false`                        | Включение альфа-канала (прозрачности).                                                                                                                                   |
+| `pallette?`              | `T[]`                                             | —                              | Палитра цветов для быстрого выбора.                                                                                                                                      |
+| `paletteTitle?`          | `React.ReactNode`                                 | —                              | Заголовок палитры цветов.                                                                                                                                                |
+| `mainControl?`           | `boolean`                                         | `true`                         | Показывать основной контрол выбора цвета.                                                                                                                                |
+| `format?`                | `ColorInputFormat[] \| ColorInputFormat \| false` | `['hex', 'hsl', 'hsv', 'rgb']` | Форматы ввода цвета (или false, чтобы скрыть контрол).                                                                                                                   |
+| `className?`             | `string`                                          | —                              | Дополнительный CSS-класс.                                                                                                                                                |
+
+## Модель цвета
+
+Модель цвета необходима для унификации работы с цветами, обеспечивая возможность конвертации между различными цветовыми формами и упрощая выполнение операций над цветами.
+
+```ts
+type HsvaColor = {
+  h: number;
+  s: number;
+  v: number;
+  a: number;
+};
+
+type ColorModel<T> = {
+  defaultColor: T;
+  toHsva: (color: T) => HsvaColor;
+  fromHsva: (hsva: HsvaColor) => T;
+  equal: (first: T, second: T) => boolean;
+};
+```
+
+Библиотека предоставляет несколько моделей цвета:
+
+```ts
+import {
+  hexModel, // '#rrggbb'
+  hexAlphaModel, // '#rrggbbaa'
+  rgbModel, // { r, g, b }
+  rgbStringModel, // 'rgb(r, g, b)'
+  rgbaModel, // { r, g, b, a }
+  rgbaStringModel, // 'rgba(r, g, b, a)'
+  hslModel, // { h, s, l }
+  hslStringModel, // 'hsl(h, s, l)'
+  hslaModel, // { h, s, l, a }
+  hslaStringModel, // 'hsla(h, s, l, a)'
+  hsvModel, // { h, s, v }
+  hsvStringModel, // 'hsv(h, s, v)'
+  hsvaModel, // { h, s, v, a }
+  hsvaStringModel, // 'hsva(h, s, v, a)'
+} from '@consta/uikit/ColorPicker';
+```
+
+## Пример использования ColorPicker
+
+<MdxTabs>
+
+<ColorPickerExample />
+
+```tsx
+import { ColorPicker, rgbaStringModel } from '@consta/uikit/ColorPicker';
+
+const ColorPickerExample = () => {
+  const [color, setColor] = React.useState(rgbaStringModel.defaultColor);
+  return (
+    <>
+      <div>{color}</div>
+      <ColorPicker
+        header="Выбор цвета"
+        value={color}
+        model={rgbaStringModel}
+        alpha
+        onChange={setColor}
+        paletteTitle="Ранее использованные цвета"
+        pallette={[
+          'rgba(146,64,108,0.5)',
+          'rgba(80,60,60)',
+          'rgba(255,255,255,0.1)',
+          'rgba(0,0,0)',
+        ]}
+      />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Якорь
+
+Вы можете указать якорь для попапа цвета с помощью свойства `anchorRef`. На якорь будут назначены события клика. Если не обходимо позиционировать попап от одного элемента а события назначить на другой, то укажите `controlRef`.
+
+<MdxTabs>
+
+<ColorPickerExampleAnchor />
+
+```tsx
+import { Button } from '@consta/uikit/Button';
+import { ColorPicker, hexModel } from '@consta/uikit/ColorPicker';
+
+export const ColorPickerExampleAnchor = () => {
+  const [color, setColor] = React.useState(hexModel.defaultColor);
+  const anchorRef = React.useRef(null);
+  return (
+    <>
+      <Button label={color} ref={anchorRef} />
+      <ColorPicker
+        value={color}
+        model={hexModel}
+        onChange={setColor}
+        anchorRef={anchorRef}
+      />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Компонент ColorPickerBase
+
+Компонент ColorPickerBase используется для создания собственного компонента для выбора цвета.
+
+### Импорт компонента ColorPickerBase
+
+```jsx
+import { ColorPickerBase } from '@consta/uikit/ColorPicker';
+```
+
+### Свойства компонента ColorPickerBase
+
+| Свойство                 | Тип                  | По умолчанию         | Описание                                                        |
+| ------------------------ | -------------------- | -------------------- | --------------------------------------------------------------- |
+| [`model`](#модель-цвета) | `ColorModel<T>`      | —                    | Модель цвета, определяющая преобразование между типом T и HSVA. |
+| `value`                  | `T`                  | `model.defaultColor` | Текущее значение цвета.                                         |
+| `onChange`               | `(value: T) => void` | —                    | Обработчик изменения цвета.                                     |
+| `alpha?`                 | `boolean`            | `false`              | Включение альфа-канала (прозрачности).                          |
+| `className?`             | `string`             | —                    | Дополнительный CSS-класс.                                       |
+
+### Использование компонента ColorPickerBase
+
+<MdxTabs>
+
+<ColorPickerBaseExample />
+
+```tsx
+import { ColorPickerBase, rgbaStringModel } from '@consta/uikit/ColorPicker';
+
+export const ColorPickerBaseExample = () => {
+  const [color, setColor] = React.useState(rgbaStringModel.defaultColor);
+  return (
+    <>
+      <div>{color}</div>
+      <ColorPickerBase
+        value={color}
+        model={rgbaStringModel}
+        alpha
+        onChange={setColor}
+      />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Компонент ColorMarker
+
+Компонент `ColorMarker` используется для отображения маркера цвета.
+
+### Импорт компонента ColorMarker
+
+```jsx
+import { ColorMarker } from '@consta/uikit/ColorMarker';
+```
+
+### Свойства компонента ColorMarker
+
+| Свойство     | Тип                               | По умолчанию | Описание                                                                        |
+| ------------ | --------------------------------- | ------------ | ------------------------------------------------------------------------------- |
+| `model`      | `ColorModel<T>`                   | —            | Модель цвета, определяющая преобразование между типом T и HSVA.                 |
+| `value`      | `T \| undefined \| null`          | —            | Значение цвета типа T. Если undefined или null, маркер отображается как пустой. |
+| `active?`    | `boolean`                         | `false`      | Активен ли маркер (визуальное выделение).                                       |
+| `size?`      | `'xs' \| 's' \| 'm' \| 'l'`       | `'m'`        | Размер маркера.                                                                 |
+| `as?`        | `AsTags` (строковый литерал)      | `'div'`      | HTML-тег или компонент для рендеринга корневого элемента.                       |
+| `form?`      | `'default' \| 'brick' \| 'round'` | `'default'`  | Форма маркера.                                                                  |
+| `className?` | `string`                          | —            | Дополнительный CSS-класс.                                                       |
+
+### Использование компонента ColorMarker
+
+<MdxTabs>
+
+<ColorMarkerExample />
+
+```tsx
+import { ColorMarker, hslaModel } from '@consta/uikit/ColorMarker';
+
+export const ColorMarkerExample = () => {
+  return (
+    <ColorMarker model={hslaModel} value={{ h: 296, s: 65, l: 4, a: 0.5 }} />
+  );
+};
+```
+
+</MdxTabs>
+
+## Компонент ColorPaletteExample
+
+Компонент `ColorPaletteExample` используется для отображения палитры цветов.
+
+### Импорт компонента ColorPaletteExample
+
+```jsx
+import { ColorPaletteExample } from '@consta/uikit/ColorPalette';
+```
+
+### Свойства компонента ColorPaletteExample
+
+| Свойство     | Тип                                                              | По умолчанию | Описание                                                          |
+| ------------ | ---------------------------------------------------------------- | ------------ | ----------------------------------------------------------------- |
+| `model`      | `ColorModel<T>`                                                  | —            | Модель цвета, определяющая преобразование между типом `T` и HSVA. |
+| `items`      | `T[]`                                                            | —            | Массив цветов типа `T` для отображения в палитре.                 |
+| `value?`     | `T`                                                              | —            | Выбранный цвет (опционально).                                     |
+| `onChange?`  | `(value: T, event: React.MouseEvent<HTMLButtonElement>) => void` | —            | Обработчик выбора цвета.                                          |
+| `size?`      | `'xs' \| 's' \| 'm' \| 'l'`                                      | `'m'`        | Размер маркеров цвета.                                            |
+| `form?`      | `'default' \| 'brick' \| 'round'`                                | `'default'`  | Форма маркеров цвета.                                             |
+| `className?` | `string`                                                         | —            | Дополнительный CSS-класс.                                         |
+
+### Использование компонента ColorPaletteExample
+
+<MdxTabs>
+
+<ColorPaletteExample />
+
+```tsx
+import { ColorPaletteExample } from '@consta/uikit/ColorPalette';
+
+export const ColorPaletteExample = () => {
+  const palette = useMemo(() => generateHslaPalette(60), []);
+
+  const [color, setColor] = useState(palette[0]);
+
+  return (
+    <ColorPalette
+      model={hslaModel}
+      value={color}
+      items={palette}
+      onChange={setColor}
+    />
+  );
+};
+```
+
+</MdxTabs>
+
+## Компонент ColorPickerInput
+
+Компонент `ColorPickerInput` используется для ввода цвета в ручную цвета. Обычно используется вместе с компонентом ColorPickerBase.
+
+## Импорт компонента ColorPickerInput
+
+```jsx
+import { ColorPickerInput } from '@consta/uikit/ColorPicker';
+```
+
+### Свойства компонента ColorPickerInput
+
+| Свойство     | Тип                                                                                                                                                                                                                  | По умолчанию           | Описание                                                              |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | --------------------------------------------------------------------- |
+| `model`      | `ColorModel<T>`                                                                                                                                                                                                      | —                      | Модель цвета, определяющая преобразование между значением `T` и HSVA. |
+| `value?`     | `T`                                                                                                                                                                                                                  | `model.defaultColor`   | Текущее значение цвета.                                               |
+| `onChange?`  | `(value: T, props: { e: React.ChangeEvent \| React.MouseEvent \| React.KeyboardEvent }) => void`                                                                                                                     | —                      | Обработчик изменения значения.                                        |
+| `size?`      | `'xs' \| 's' \| 'm' \| 'l'`                                                                                                                                                                                          | `'m'`                  | Размер поля ввода.                                                    |
+| `disabled?`  | `boolean`                                                                                                                                                                                                            | `false`                | Отключение поля ввода.                                                |
+| `format?`    | `'rgb' \| 'hsl' \| 'hsv' \| 'hex'`                                                                                                                                                                                   | `'hex'`                | Формат отображения цвета.                                             |
+| `alpha?`     | `boolean`                                                                                                                                                                                                            | `false`                | Включение альфа-канала (прозрачности).                                |
+| `id?`        | `string`                                                                                                                                                                                                             | `'color-picker-input'` | Идентификатор корневого элемента.                                     |
+| `view?`      | `'default' \| 'clear'`                                                                                                                                                                                               | `'default'`            | Стиль отображения поля.                                               |
+| `name?`      | `string`                                                                                                                                                                                                             | `'color-picker-input'` | Имя поля формы.                                                       |
+| `form?`      | `'default' \| 'defaultClear' \| 'defaultBrick' \| 'brick' \| 'brickDefault' \| 'brickClear' \| 'brickRound' \| 'round' \| 'roundClear' \| 'roundBrick' \| 'clearRound' \| 'clearDefault' \| 'clearBrick' \| 'clear'` | `'default'`            | Форма поля (скругление, границы).                                     |
+| `onFocus?`   | `React.FocusEventHandler<HTMLInputElement>`                                                                                                                                                                          | —                      | Обработчик фокуса на поле ввода.                                      |
+| `onBlur?`    | `React.FocusEventHandler<HTMLInputElement>`                                                                                                                                                                          | —                      | Обработчик потери фокуса.                                             |
+| `className?` | `string`                                                                                                                                                                                                             | —                      | Дополнительный CSS-класс.                                             |
+
+### Использование компонента ColorPickerInput
+
+<MdxTabs>
+
+<ColorPickerInputExample />
+
+```tsx
+import { ColorPickerInput, rgbStringModel } from '@consta/uikit/ColorPicker';
+
+export const ColorPickerInputExample = () => {
+  const [color, setColor] = React.useState(rgbStringModel.defaultColor);
+  return (
+    <>
+      <div>{color}</div>
+      <ColorPickerInput
+        model={rgbStringModel}
+        value={color}
+        onChange={setColor}
+      />
+    </>
+  );
+};
+```
+
+</MdxTabs>
+
+## Компонент ColorControl
+
+Компонент `ColorControl` используется для выбора цвета. Обычно используется вместе с компонентом ColorPicker в качестве якоря.
+
+## Импорт компонента ColorControl
+
+```jsx
+import { ColorControl } from '@consta/uikit/ColorControl';
+```
+
+### Свойства компонента ColorControl
+
+| Свойство                 | Тип                                                                                                                                                                                                                  | По умолчанию           | Описание                                                          |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------- |
+| [`model`](#модель-цвета) | `ColorModel<T>`                                                                                                                                                                                                      | —                      | Модель цвета, определяющая преобразование между типом `T` и HSVA. |
+| `value?`                 | `T`                                                                                                                                                                                                                  | `model.defaultColor`   | Текущее значение цвета.                                           |
+| `onChange?`              | `(value: T, props: { e: React.ChangeEvent \| React.MouseEvent \| React.KeyboardEvent }) => void`                                                                                                                     | —                      | Обработчик изменения значения.                                    |
+| `size?`                  | `'xs' \| 's' \| 'm' \| 'l'`                                                                                                                                                                                          | `'m'`                  | Размер контрола.                                                  |
+| `disabled?`              | `boolean`                                                                                                                                                                                                            | `false`                | Отключение контрола.                                              |
+| `format?`                | `'rgb' \| 'hsl' \| 'hsv' \| 'hex'`                                                                                                                                                                                   | `'hex'`                | Формат отображения цвета.                                         |
+| `alpha?`                 | `boolean`                                                                                                                                                                                                            | `false`                | Включение альфа-канала (прозрачности).                            |
+| `id?`                    | `string`                                                                                                                                                                                                             | `'color-picker-input'` | Идентификатор корневого элемента.                                 |
+| `view?`                  | `'default' \| 'clear'`                                                                                                                                                                                               | `'default'`            | Стиль отображения поля.                                           |
+| `name?`                  | `string`                                                                                                                                                                                                             | `'color-picker-input'` | Имя поля формы.                                                   |
+| `form?`                  | `'default' \| 'defaultClear' \| 'defaultBrick' \| 'brick' \| 'brickDefault' \| 'brickClear' \| 'brickRound' \| 'round' \| 'roundClear' \| 'roundBrick' \| 'clearRound' \| 'clearDefault' \| 'clearBrick' \| 'clear'` | `'default'`            | Форма поля (скругление, границы).                                 |
+| `onFocus?`               | `React.FocusEventHandler<HTMLInputElement>`                                                                                                                                                                          | —                      | Обработчик фокуса на поле ввода.                                  |
+| `onBlur?`                | `React.FocusEventHandler<HTMLInputElement>`                                                                                                                                                                          | —                      | Обработчик потери фокуса.                                         |
+| `markerRef?`             | `React.RefObject<HTMLButtonElement>`                                                                                                                                                                                 | —                      | Ref для маркера цвета.                                            |
+| `onlyMarker?`            | `boolean`                                                                                                                                                                                                            | `false`                | Если `true`, скрывает поле ввода, оставляя только маркер.         |
+| `className?`             | `string`                                                                                                                                                                                                             | —                      | Дополнительный CSS-класс.                                         |
+
+### Использование компонента ColorControl
+
+<MdxTabs>
+
+<ColorControlExample />
+
+```tsx
+import {
+  ColorControl,
+  ColorPicker,
+  hexAlphaModel,
+} from '@consta/uikit/ColorControl';
+
+export const ColorControlExample = () => {
+  const [color, setColor] = useState(hexAlphaModel.defaultColor);
+  const rootRef = useRef(null);
+  const markerRef = useRef(null);
+  return (
+    <>
+      <ColorControl
+        model={hexAlphaModel}
+        value={color}
+        onChange={setColor}
+        ref={rootRef}
+        markerRef={markerRef}
+        alpha
+      />
+      <ColorPicker
+        value={color}
+        model={hexAlphaModel}
+        onChange={setColor}
+        anchorRef={rootRef}
+        controlRef={markerRef}
+        alpha
+      />
+    </>
+  );
+};
+```
+
+</MdxTabs>

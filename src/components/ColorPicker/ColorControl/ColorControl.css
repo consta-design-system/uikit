@@ -1,0 +1,68 @@
+.ColorControl {
+  --color-control-marker-offset: calc(
+    (var(--field-control-layout-height) - var(--color-control-marker-size)) / 2 -
+      (var(--control-border-width))
+  );
+
+  &_size {
+    &_xs {
+      --color-control-marker-size: var(--space-m);
+    }
+    &_s {
+      --color-control-marker-size: var(--space-m);
+    }
+    &_m {
+      --color-control-marker-size: var(--space-xl);
+    }
+
+    &_l {
+      --color-control-marker-size: var(--space-2xl);
+    }
+  }
+
+  &_view {
+    &_default {
+      --field-control-layout-padding-left-override: var(
+        --color-control-marker-offset
+      );
+
+      .ColorControl-Input {
+        --field-control-layout-padding-left-override: var(
+          --field-control-layout-space
+        );
+      }
+
+      &.ColorControl_onlyMarker {
+        --field-control-layout-padding-right-override: var(
+          --color-control-marker-offset
+        );
+      }
+    }
+  }
+  &_onlyMarker.FieldControlLayout {
+    width: var(--field-control-layout-height);
+  }
+  &_onlyMarker &-Marker.MixFocus {
+    --mix-focus-color-one: transparent;
+    --mix-focus-color-two: transparent;
+  }
+
+  &-Input {
+    --field-control-layout-height-override: calc(
+      var(--field-control-layout-height) - (var(--control-border-width) * 2)
+    );
+    --field-control-layout-additional-padding-top: calc(
+      var(--control-border-width) * -1
+    );
+    --field-control-layout-additional-padding-bottom: calc(
+      var(--control-border-width) * -1
+    );
+  }
+
+  &-Marker {
+    --mix-hit-slop-top: var(--color-control-marker-offset);
+    --mix-hit-slop-left: var(--color-control-marker-offset);
+    --mix-hit-slop-right: var(--color-control-marker-offset);
+    --mix-hit-slop-bottom: var(--color-control-marker-offset);
+  }
+}

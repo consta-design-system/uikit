@@ -1,0 +1,25 @@
+.ColorPickerAlpha {
+  --color-picker-interactive-gap-left: calc(var(--space-m) / 2);
+  --color-picker-interactive-gap-right: calc(var(--space-m) / 2);
+
+  position: relative;
+  height: var(--space-m);
+  border-radius: 99em;
+  background-color: #fff;
+  padding: 0 var(--space-m);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    display: block;
+    box-shadow: inset 0 0 0 1px var(--color-bg-border);
+    background: var(--color-picker-alpha-gradient),
+      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill-opacity="0.05"><rect x="4" width="4" height="4"/><rect y="4" width="4" height="4"/></svg>');
+  }
+}
