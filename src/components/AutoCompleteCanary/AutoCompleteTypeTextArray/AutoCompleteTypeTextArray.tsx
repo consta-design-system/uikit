@@ -52,6 +52,7 @@ export const AutoCompleteTypeTextArray: AutoCompleteTypeComponent<'textarray'> =
       inputValue,
       onBlur,
       dropdownViewportRef,
+      dropdownContainer,
       ...otherProps
     } = withDefaultGettersProps;
 
@@ -133,6 +134,7 @@ export const AutoCompleteTypeTextArray: AutoCompleteTypeComponent<'textarray'> =
           isLoading={isLoading}
           hasItems={items.length !== 0}
           itemsRefs={optionsRefs}
+          container={dropdownContainer}
           virtualScroll
           style={
             typeof style?.zIndex === 'number'

@@ -4,6 +4,7 @@ import {
   render,
   RenderResult,
   screen,
+  within,
 } from '@testing-library/react';
 import React from 'react';
 
@@ -936,6 +937,83 @@ describe(`Компонент ${testId}`, () => {
       animateDelay();
 
       expect(getGroup(0).textContent).toEqual(groups[0].id.toString());
+    });
+  });
+
+  describe(`проверка dropdownContainer`, () => {
+    const types = ['text', 'textarray'] as const;
+
+    types.forEach((type) => {
+      it(`рендерит dropdown по умолчанию в document.body для type="${type}"`, () => {
+        jest.useFakeTimers();
+
+        const container = document.createElement('div');
+        container.setAttribute('data-testid', 'container');
+        document.body.appendChild(container);
+
+        act(() => {
+          if (type === 'text') {
+            renderComponent({
+              items,
+              onChange: jest.fn(),
+              dropdownContainer: undefined,
+              type,
+              value: 'item',
+            });
+          } else {
+            renderComponentTextArray({
+              items,
+              onInputChange: jest.fn(),
+              dropdownContainer: undefined,
+              type,
+              inputValue: 'item',
+            });
+          }
+        });
+
+        inputClick();
+        animateDelay();
+
+        expect(screen.queryByRole('listbox')).not.toBeNull();
+        expect(
+          within(container).queryByRole('listbox'),
+        ).not.toBeInTheDocument();
+      });
+    });
+
+    types.forEach((type) => {
+      it(`рендерит dropdown внутри переданного контейнера для type="${type}"`, () => {
+        jest.useFakeTimers();
+
+        const container = document.createElement('div');
+        container.setAttribute('data-testid', 'container');
+        document.body.appendChild(container);
+
+        act(() => {
+          if (type === 'text') {
+            renderComponent({
+              items,
+              onChange: jest.fn(),
+              dropdownContainer: container,
+              type,
+              value: 'item',
+            });
+          } else {
+            renderComponentTextArray({
+              items,
+              onInputChange: jest.fn(),
+              dropdownContainer: container,
+              type,
+              inputValue: 'item',
+            });
+          }
+        });
+
+        inputClick();
+        animateDelay();
+
+        expect(within(container).getByRole('listbox')).toBeInTheDocument();
+      });
     });
   });
 });
