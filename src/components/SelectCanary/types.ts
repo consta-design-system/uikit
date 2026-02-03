@@ -104,6 +104,7 @@ export type SelectPropsInit<
     'isLoading'?: boolean;
     'dropdownClassName'?: string;
     'dropdownRef'?: React.Ref<HTMLDivElement>;
+    'dropdownContainer'?: HTMLElement;
     'renderItem'?: SelectPropRenderItem<ITEM>;
     'renderValue'?: SelectPropRenderValue<ITEM, MULTIPLE>;
     'onFocus'?: React.FocusEventHandler<HTMLInputElement>;

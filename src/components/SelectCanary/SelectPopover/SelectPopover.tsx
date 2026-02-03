@@ -27,6 +27,7 @@ type Props = PropsWithJsxAttributes<{
   children: React.ReactNode;
   onMount: (isMount: boolean) => void;
   viewportRef?: React.RefObject<HTMLElement>;
+  container?: Element;
 }>;
 
 export const SelectPopover = reatomComponent<Props>((props) => {
@@ -41,6 +42,7 @@ export const SelectPopover = reatomComponent<Props>((props) => {
     anchorRef,
     children,
     onMount,
+    container,
     ...otherProps
   } = props;
 
@@ -62,6 +64,7 @@ export const SelectPopover = reatomComponent<Props>((props) => {
           <Popover
             {...otherProps}
             anchorRef={anchorRef}
+            container={container}
             direction="downStartLeft"
             possibleDirections={[
               'downStartLeft',

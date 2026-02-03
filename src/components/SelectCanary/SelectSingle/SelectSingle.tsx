@@ -82,6 +82,7 @@ const SelectSingleRender = <
     selectAll,
     selectAllLabel,
     dropdownViewportRef,
+    dropdownContainer,
     ...otherProps
   } = propsWithDefault;
 
@@ -219,6 +220,7 @@ const SelectSingleRender = <
         dropdownZIndexAtom={dropdownZIndexAtom}
         selectAllLabel={selectAllLabel}
         viewportRef={dropdownViewportRef}
+        container={dropdownContainer}
       />
     </>
   );
