@@ -76,6 +76,7 @@ const AutoCompleteRender = <
     minRows,
     maxRows,
     dropdownViewportRef,
+    dropdownContainer,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -192,6 +193,7 @@ const AutoCompleteRender = <
         isLoading={isLoading}
         hasItems={items.length !== 0}
         itemsRefs={optionsRefs}
+        container={dropdownContainer}
         virtualScroll
         style={
           typeof style?.zIndex === 'number'
