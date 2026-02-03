@@ -4,6 +4,7 @@ import {
   render,
   RenderResult,
   screen,
+  within,
 } from '@testing-library/react';
 import * as React from 'react';
 
@@ -383,9 +384,7 @@ describe('Компонент Select', () => {
 
       const listbox = screen.queryByRole('listbox');
       expect(listbox).not.toBeNull();
-      expect(
-        container.querySelector('[role="listbox"]'),
-      ).not.toBeInTheDocument();
+      expect(within(container).queryByRole('listbox')).not.toBeInTheDocument();
     });
 
     it('рендерит dropdown внутри переданного контейнера', () => {
@@ -406,7 +405,7 @@ describe('Компонент Select', () => {
       inputClick();
       animateDelay();
 
-      expect(container.querySelector('[role="listbox"]')).toBeInTheDocument();
+      expect(within(container).getByRole('listbox')).toBeInTheDocument();
     });
   });
 });
