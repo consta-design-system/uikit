@@ -617,7 +617,7 @@ describe(`Компонент ${testId}`, () => {
     });
   });
 
-  describe('проверка dropdownContainer', () => {
+  describe('проверка container', () => {
     it('по умолчанию рендерит dropdown в document.body', () => {
       jest.useFakeTimers();
 
@@ -631,7 +631,7 @@ describe(`Компонент ${testId}`, () => {
         renderComponent({
           ...defaultProps,
           anchorRef,
-          dropdownContainer: undefined,
+          container: undefined,
         });
       });
 
@@ -656,7 +656,7 @@ describe(`Компонент ${testId}`, () => {
         renderComponent({
           ...defaultProps,
           anchorRef,
-          dropdownContainer: container,
+          container,
         });
       });
 

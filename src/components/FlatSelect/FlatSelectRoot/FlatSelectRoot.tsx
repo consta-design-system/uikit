@@ -19,7 +19,7 @@ export type FlatSelectRootProps = PropsWithHTMLAttributesAndRef<
     spareDirection?: Direction;
     possibleDirections?: Direction[];
     viewportRef?: React.RefObject<HTMLElement>;
-    dropdownContainer?: Element;
+    container?: Element;
   },
   HTMLDivElement
 >;
@@ -43,7 +43,7 @@ export const FlatSelectRoot: React.FC<FlatSelectRootProps> = forwardRef(
         'leftStartUp',
       ],
       viewportRef,
-      dropdownContainer,
+      container,
       ...otherProps
     } = props;
 
@@ -75,7 +75,7 @@ export const FlatSelectRoot: React.FC<FlatSelectRootProps> = forwardRef(
               spareDirection={spareDirection}
               possibleDirections={possibleDirections}
               viewportRef={viewportRef}
-              container={dropdownContainer}
+              container={container}
               role="listbox"
             />
           )}
