@@ -37,6 +37,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
       inputRef: inputRefProp,
       disableDates,
       dropdownViewportRef,
+      dropdownContainer,
       ...otherProps
     } = props;
 
@@ -101,6 +102,7 @@ export const DatePickerTypeTime: DatePickerTypeComponent<'time'> = forwardRef(
           timeOptions={timeOptions}
           zIndex={getDropdownZIndex(props.style)}
           disableDates={disableDates}
+          container={dropdownContainer}
         />
       </>
     );
