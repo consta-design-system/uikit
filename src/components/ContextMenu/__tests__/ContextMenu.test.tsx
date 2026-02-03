@@ -204,9 +204,9 @@ describe('Компонент ContextMenu', () => {
           });
         });
 
-        expect(screen.getByRole('menu')).toBeInTheDocument();
+        expect(screen.getByTestId(testId)).toBeInTheDocument();
 
-        expect(within(container).queryByRole('menu')).not.toBeInTheDocument();
+        expect(within(container).queryByTestId(testId)).not.toBeInTheDocument();
       });
 
       it('рендерит dropdown внутри переданного контейнера', () => {
@@ -222,7 +222,7 @@ describe('Компонент ContextMenu', () => {
           });
         });
 
-        expect(within(container).getByRole('menu')).toBeInTheDocument();
+        expect(within(container).getByTestId(testId)).toBeInTheDocument();
       });
     });
   });

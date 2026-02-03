@@ -83,7 +83,6 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
             onClickOutside={onClickOutside}
             offset={offset}
             onSetDirection={onSetDirection}
-            role="menu"
             container={dropdownContainer}
             style={style}
           >
