@@ -1,5 +1,5 @@
 import { IconAllDone } from '@consta/icons/IconAllDone';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import React from 'react';
 
 import { cnListGroupLabel, cnListItem, cnListItemGrid } from '../../ListCanary';
@@ -187,6 +187,42 @@ describe('Компонент ContextMenu', () => {
         renderComponent({});
 
         expect(getRender()).toHaveClass(additionalClass);
+      });
+    });
+
+    describe('проверка dropdownContainer', () => {
+      it('рендерит dropdown по умолчанию в document.body', () => {
+        jest.useFakeTimers();
+
+        const container = document.createElement('div');
+        container.setAttribute('data-testid', 'container');
+        document.body.appendChild(container);
+
+        act(() => {
+          renderComponent({
+            dropdownContainer: undefined,
+          });
+        });
+
+        expect(screen.getByRole('menu')).toBeInTheDocument();
+
+        expect(within(container).queryByRole('menu')).not.toBeInTheDocument();
+      });
+
+      it('рендерит dropdown внутри переданного контейнера', () => {
+        jest.useFakeTimers();
+
+        const container = document.createElement('div');
+        container.setAttribute('data-testid', 'container');
+        document.body.appendChild(container);
+
+        act(() => {
+          renderComponent({
+            dropdownContainer: container,
+          });
+        });
+
+        expect(within(container).getByRole('menu')).toBeInTheDocument();
       });
     });
   });
