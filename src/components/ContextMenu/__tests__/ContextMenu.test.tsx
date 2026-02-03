@@ -190,7 +190,7 @@ describe('Компонент ContextMenu', () => {
       });
     });
 
-    describe('проверка dropdownContainer', () => {
+    describe('проверка container', () => {
       it('рендерит dropdown по умолчанию в document.body', () => {
         jest.useFakeTimers();
 
@@ -200,7 +200,7 @@ describe('Компонент ContextMenu', () => {
 
         act(() => {
           renderComponent({
-            dropdownContainer: undefined,
+            container: undefined,
           });
         });
 
@@ -218,7 +218,7 @@ describe('Компонент ContextMenu', () => {
 
         act(() => {
           renderComponent({
-            dropdownContainer: container,
+            container,
           });
         });
 

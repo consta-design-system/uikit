@@ -36,7 +36,7 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
     onSetDirection: onSetDirectionProp,
     className,
     animationBack,
-    dropdownContainer,
+    container,
     style,
   } = props;
 
@@ -83,7 +83,7 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
             onClickOutside={onClickOutside}
             offset={offset}
             onSetDirection={onSetDirection}
-            container={dropdownContainer}
+            container={container}
             style={style}
           >
             {children}

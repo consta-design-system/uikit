@@ -27,7 +27,7 @@ export const ContextMenuLevelWrapper = forwardRef(
       position,
       onSetDirection,
       viewportRef,
-      dropdownContainer,
+      container,
       ...otherProps
     } = props;
 
@@ -63,7 +63,7 @@ export const ContextMenuLevelWrapper = forwardRef(
         anchorRef={anchorRef}
         position={position}
         onSetDirection={onSetDirection}
-        container={dropdownContainer}
+        container={container}
       >
         {children}
       </Popover>
