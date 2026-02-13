@@ -34,6 +34,7 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef(
       inputRef: inputRefProp,
       disableDates,
       dropdownViewportRef,
+      dropdownContainer,
       ...otherProps
     } = props;
 
@@ -126,6 +127,7 @@ export const DatePickerTypeYear: DatePickerTypeComponent<'year'> = forwardRef(
           zIndex={getDropdownZIndex(props.style)}
           onChangeCurrentVisibleDate={setCurrentVisibleDate}
           disableDates={disableDates}
+          container={dropdownContainer}
         />
       </>
     );

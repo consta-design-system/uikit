@@ -78,6 +78,7 @@ const FlatSelectRender = (
     direction,
     spareDirection,
     possibleDirections,
+    container,
     ...otherProps
   } = props;
 
@@ -146,6 +147,7 @@ const FlatSelectRender = (
       direction={direction}
       spareDirection={spareDirection}
       possibleDirections={possibleDirections}
+      container={container}
     >
       {input && (
         <div

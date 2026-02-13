@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import React from 'react';
 
 import { createIconMock } from '##/../__mocks__/IconMock';
@@ -18,7 +18,7 @@ import { cnSelectCreateButton } from '../../SelectCreateButton';
 import { cnSelectItemAll } from '../../SelectItemAll';
 import { SelectMultiple } from '../SelectMultiple';
 
-const testId = 'SelectSingleCanary';
+const testId = 'SelectMultipleCanary';
 const animationDuration = 200;
 
 const renderComponent = (
@@ -86,7 +86,7 @@ const groups: SelectGroupDefault[] = [
   { id: 2, label: 'Group 2' },
 ];
 
-describe('SelectSingle', () => {
+describe('SelectMultiple', () => {
   //   const getItemLabel = (item: { id: number; label: string }) => item.label;
   //   const getItemKey = (item: { id: number; label: string }) => item.id;
 
@@ -1125,6 +1125,52 @@ describe('SelectSingle', () => {
       expect(onChangeMock).toHaveBeenCalledWith([], {
         e: expect.any(Object),
       });
+    });
+  });
+
+  describe('проверка dropdownContainer', () => {
+    it('рендерит dropdown по умолчанию в document.body', () => {
+      jest.useFakeTimers();
+
+      const container = document.createElement('div');
+      container.setAttribute('data-testid', 'container');
+      document.body.appendChild(container);
+
+      act(() => {
+        renderComponent({
+          items,
+          onChange: jest.fn(),
+          dropdownContainer: undefined,
+        });
+      });
+
+      inputClick();
+      animateDelay();
+
+      expect(screen.queryByRole('listbox')).not.toBeNull();
+
+      expect(within(container).queryByRole('listbox')).not.toBeInTheDocument();
+    });
+
+    it('рендерит dropdown внутри переданного контейнера', () => {
+      jest.useFakeTimers();
+
+      const container = document.createElement('div');
+      container.setAttribute('data-testid', 'container');
+      document.body.appendChild(container);
+
+      act(() => {
+        renderComponent({
+          items,
+          onChange: jest.fn(),
+          dropdownContainer: container,
+        });
+      });
+
+      inputClick();
+      animateDelay();
+
+      expect(within(container).getByRole('listbox')).toBeInTheDocument();
     });
   });
 });

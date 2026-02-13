@@ -199,6 +199,7 @@ export type ContextMenuProps<
     isMobile?: boolean;
     onEsc?: React.KeyboardEventHandler;
     viewportRef?: React.RefObject<HTMLElement>;
+    container?: Element;
   } & MappersItem<ITEM> &
     MappersGroup<GROUP> &
     PositioningProps,
@@ -307,6 +308,7 @@ export type ContextMenuWrapperProps = PropsWithHTMLAttributes<
     onSetDirection?: (direction: Direction) => void;
     className?: string;
     animationBack?: boolean;
+    container?: Element;
   },
   HTMLDivElement
 >;
@@ -325,6 +327,7 @@ export type ContextMenuLevelWrapperProps = PropsWithHTMLAttributesAndRef<
     position?: Position;
     onSetDirection?: (direction: Direction) => void;
     viewportRef?: React.RefObject<HTMLElement>;
+    container?: Element;
   },
   HTMLDivElement
 >;
