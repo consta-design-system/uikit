@@ -1,0 +1,16 @@
+/* @layer components.file, overrides; */
+.FileExampleColorOverride {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+  &-File {
+    --file-color-document: #f80;
+  }
+}
+
+/* @layer overrides {
+  .FileExampleColorOverride-Overridden .canary--FileBase {
+    --file-color-document: #ff8800;
+  }
+} */
