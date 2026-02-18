@@ -1,0 +1,66 @@
+.canary--FileBase {
+  --file-color-unknown: #70788b;
+  --file-color-code: #70788b;
+  --file-color-font: #70788b;
+  --file-color-disk: #70788b;
+  --file-color-executive: #70788b;
+  --file-color-config: #70788b;
+  --file-color-database: #70788b;
+  --file-color-presentation: #f56b00;
+  --file-color-table: #6fb80a;
+  --file-color-document: #016bdc;
+  --file-color-pdf: #c62828;
+  --file-color-audio: #e92064;
+  --file-color-image: #7448dd;
+  --file-color-video: #2044d5;
+  --file-color-mail: #2196f3;
+  --file-color-scheme: #0088a3;
+  --file-color-archive: #9010d1;
+  --file-extension-font-size: 8px;
+  --file-extension-bg-color: rgba(0, 0, 0, 0.5);
+  --file-border-radius: 4px;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  width: var(--file-width);
+  height: var(--file-height);
+  color: var(--color-typo-primary);
+  border-radius: var(--file-border-radius);
+
+  &_size {
+    &_s {
+      --file-icon-container-padding: 4px 4px 3px 4px;
+      --file-width: 24px;
+      --file-height: 32px;
+    }
+
+    &_m {
+      --file-icon-container-padding: 3px 3px 2px 3px;
+      --file-width: 30px;
+      --file-height: 40px;
+    }
+  }
+
+  &-IconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    padding: var(--file-icon-container-padding);
+  }
+
+  &-Extension {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 0;
+    background-color: var(--file-extension-bg-color);
+    font-family: 'Silkscreen', sans-serif;
+    font-size: var(--file-extension-font-size);
+    text-transform: uppercase;
+  }
+}
