@@ -1,0 +1,229 @@
+import { MdxMenu, MdxTabs } from '@consta/stand';
+
+import { FileExampleExtension } from './examples/FileExampleExtension/FileExampleExtension';
+import { FileExampleSize } from './examples/FileExampleSize/FileExampleSize';
+import { FileExampleAllExtensions } from './examples/FileExampleAllExtensions/FileExampleAllExtensions';
+import { FileExampleConfigOverride } from './examples/FileExampleConfigOverride/FileExampleConfigOverride.tsx';
+import { FileExampleColorOverride } from './examples/FileExampleColorOverride/FileExampleColorOverride';
+
+<MdxMenu>
+
+- [Обзор](#обзор)
+- [Импорт](#импорт)
+- [Пример использования](#пример-использования)
+- [Свойства](#свойства)
+- [Содержимое](#содержимое)
+  - [Расширение файла](#расширение-файла)
+- [Внешний вид](#внешний-вид)
+  - [Размер иконки](#размер-иконки)
+  - [Цвет иконки](#цвет-иконки)
+- [Кастомизация](#кастомизация)
+  - [Структура конфига](#структура-конфига)
+  - [Генератор компонента](#генератор-компонента)
+  - [Переопределение стандартного конфига](#переопределение-стандартного-конфига)
+  - [Переопределение цвета группы](#переопределение-цвета-группы)
+
+</MdxMenu>
+
+## Обзор
+
+Компонент `File` используется для отображения иконки файла с указанием его расширения и размера. Расширения разделены на логические группы, определяющие цвет компонента в группе и его иконку. Для некоторых спецефичных расширений иконка внутри группы может отличаться.
+
+## Импорт
+
+```tsx
+import { File } from '@consta/uikit/FileCanary';
+```
+
+## Пример использования
+
+```tsx
+import React from 'react';
+import { File } from '@consta/uikit/FileCanary';
+
+const App = () => {
+  return <File extension="doc" />;
+};
+```
+
+## Свойства
+
+| Свойство                         | Тип          | По умолчанию | Описание                              |
+| -------------------------------- | ------------ | ------------ | ------------------------------------- | --- |
+| [`extension`](#расширение-файла) | `string`     | -            | Расширение файла, определяющее иконку |
+| [`size?`](#размер-иконки)        | `'m' \| 's'` | `'m'`        | Размер иконки                         |     |
+| `className?`                     | `string`     | -            | Дополнительный CSS-класс              |
+
+## Содержимое
+
+### Расширение файла
+
+Свойство `extension` определяет иконку файла в зависимости от его расширения. Если указанное расширение не поддерживается, отображается иконка со знаком вопроса и введенное значение расширения.
+
+<MdxTabs>
+
+<FileExampleExtension />
+
+```tsx
+<File extension="doc" />
+<File extension="docx" />
+<File extension="jpg" />
+<File extension="mov" />
+<File extension="BlaBla" />
+```
+
+</MdxTabs>
+
+**Поддерживаемые расширения**:
+
+<FileExampleAllExtensions />
+
+## Внешний вид
+
+### Размер иконки
+
+Свойство `size` задаёт размер иконки файла. Доступные значения: `'m'` (средний, по умолчанию) и `'s'` (маленький).
+
+<MdxTabs>
+
+<FileExampleSize />
+
+```tsx
+<File size="m" extension="doc"/>
+<File size="s" extension="doc"/>
+```
+
+</MdxTabs>
+
+### Цвет иконки
+
+Для каждой группы файлов используются CSS-переменные, задающие цвет компонента, принадлежащего заданной группе.
+
+| CSS переменная цвета группы      | Группа      |
+| -------------------------------- | ----------- |
+| `var(--file-color-code)`         | Код         |
+| `var(--file-color-font)`         | Шрифт       |
+| `var(--file-color-disk)`         | Образ       |
+| `var(--file-color-executive)`    | Исполняемый |
+| `var(--file-color-config)`       | Конфиг      |
+| `var(--file-color-database)`     | БД          |
+| `var(--file-color-presentation)` | Презентация |
+| `var(--file-color-table)`        | Таблица     |
+| `var(--file-color-document)`     | Документ    |
+| `var(--file-color-pdf)`          | PDF         |
+| `var(--file-color-audio)`        | Аудио       |
+| `var(--file-color-image)`        | Изображение |
+| `var(--file-color-video)`        | Видео       |
+| `var(--file-color-mail)`         | Почта       |
+| `var(--file-color-scheme)`       | Схема       |
+| `var(--file-color-archive)`      | Архив       |
+
+## Кастомизация
+
+Компонент `File` построен на основе конфига, который сопоставляет расширение файла с цветом фона и иконкой. По умолчанию используется `defaultConfig`, содержащий предопределённые цвета для множества расширений, сгруппированных по типам (документы, изображения, видео и т.д.).
+
+### Структура конфига
+
+Конфиг представляет собой объект, где ключ - расширение файла (строка), а значение - объект с двумя полями:
+
+```ts
+import { FileConfig } from '@consta/uikit/FileCanary';
+import { IconFilePDF } from '@consta/icons/IconFilePDF';
+import { IconFileDocument } from '@consta/icons/IconFileDocument';
+
+const config = {
+  pdf: {
+    color: '#C62828',
+    icon: IconFilePDF,
+  },
+  doc: {
+    color: '#016BDC',
+    icon: IconFileDocument,
+  },
+};
+```
+
+### Генератор компонента
+
+Это функция, которая принимает конфиг и возвращает готовый компонент `File`, использующий этот конфиг.
+
+**Пример использования:**
+
+```ts
+import { fileGenerator } from '@consta/uikit/FileCanary';
+import { defaultConfig } from '@consta/uikit/FileCanary';
+import { IconFileConfig } from '@consta/icons';
+
+const myConfig = {...defaultConfig, ...{ 'xyz':  color: 'red', icon: IconFileConfig }};
+
+const MyFile = fileGenerator(myConfig);
+```
+
+### Переопределение стандартного конфига
+
+Самый частый сценарий — взять стандартный конфиг и изменить/добавить несколько расширений под свои нужды. Вы также можете задать полностью новый конфиг со своими расширениями, иконками и цветами.
+
+<MdxTabs>
+
+<FileExampleConfigOverride />
+
+```ts
+import { fileGenerator } from '../../../fileCanaryGenerator';
+import { defaultConfig } from '../../../config';
+import { IconFileDocument } from '@consta/icons/IconFileDocument';
+import { IconFileImage } from '@consta/icons/IconFileImage';
+import { IconFileConfig } from '@consta/icons/IconFileConfig';
+
+const overridenConfig = {
+  ...defaultConfig,
+  js: { color: '#0071b2', icon: IconFileDocument },
+  png: { color: 'rgb(116, 72, 221)', icon: IconFileImage },
+  rst: { color: 'var(--custom-color-example)', icon: IconFileConfig },
+};
+
+const OverridenFile = fileGenerator(overridenConfig);
+
+export const OverridenFileExample = () => {
+  return (
+    <div className="OverridenFileExample">
+      <OverridenFile extension="js" />
+      <OverridenFile extension="png" />
+      <OverridenFile extension="rst" />
+      <OverridenFile extension="docx" />
+    </div>
+  );
+};
+```
+
+```css
+.OverridenFileExample {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  --custom-color-example: #ff8800;
+}
+```
+
+</MdxTabs>
+
+### Переопределение цвета группы
+
+<MdxTabs>
+
+<FileExampleColorOverride />
+
+```ts
+<File extension="doc" />
+<File extension="docx" />
+<File extension="txt" />
+```
+
+```css
+:root {
+  --file-color-document: #ff8800;
+}
+```
+
+</MdxTabs>
