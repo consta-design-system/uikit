@@ -11,7 +11,7 @@ import { IconFileImage } from '@consta/icons/IconFileImage';
 import { IconFileMail } from '@consta/icons/IconFileMail';
 import { IconFilePDF } from '@consta/icons/IconFilePDF';
 import { IconFilePresentation } from '@consta/icons/IconFilePresentation';
-import { IconFileProgramm } from '@consta/icons/IconFileProgramm';
+import { IconFileProgram } from '@consta/icons/IconFileProgram';
 import { IconFileScheme } from '@consta/icons/IconFileScheme';
 import { IconFileTable } from '@consta/icons/IconFileTable';
 import { IconFileTransparent } from '@consta/icons/IconFileTransparent';
@@ -52,12 +52,12 @@ export const defaultConfig: FileConfig = {
   'vcd': { color: 'var(--file-color-disk)', icon: IconFileDisk },
 
   // executive
-  'bat': { color: 'var(--file-color-executive)', icon: IconFileProgramm },
-  'com': { color: 'var(--file-color-executive)', icon: IconFileProgramm },
-  'exe': { color: 'var(--file-color-executive)', icon: IconFileProgramm },
-  'msi': { color: 'var(--file-color-executive)', icon: IconFileProgramm },
-  'sh': { color: 'var(--file-color-executive)', icon: IconFileProgramm },
-  'wsf': { color: 'var(--file-color-executive)', icon: IconFileProgramm },
+  'bat': { color: 'var(--file-color-executive)', icon: IconFileProgram },
+  'com': { color: 'var(--file-color-executive)', icon: IconFileProgram },
+  'exe': { color: 'var(--file-color-executive)', icon: IconFileProgram },
+  'msi': { color: 'var(--file-color-executive)', icon: IconFileProgram },
+  'sh': { color: 'var(--file-color-executive)', icon: IconFileProgram },
+  'wsf': { color: 'var(--file-color-executive)', icon: IconFileProgram },
 
   // config
   'conf': { color: 'var(--file-color-config)', icon: IconFileConfig },
