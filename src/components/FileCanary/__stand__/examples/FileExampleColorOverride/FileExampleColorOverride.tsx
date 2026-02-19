@@ -12,7 +12,7 @@ export const cnFileExampleColorOverride = cn('FileExampleColorOverride');
 export const FileExampleColorOverride = () => (
   <Example>
     <div className={cnFileExampleColorOverride()}>
-      <File extension="doc" className={cnFileExampleColorOverride('File')} />
+      <File extension="doc" />
       <File extension="docx" />
       <File extension="txt" />
     </div>
