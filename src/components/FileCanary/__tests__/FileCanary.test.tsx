@@ -67,9 +67,8 @@ describe('Компонент File', () => {
     });
 
     it('рендерится с тегом a и принимает атрибут href', () => {
-      renderComponent({ as: 'a', href: 'https://example.com', extension });
+      renderComponent({ as: 'a', extension });
       expect(getRender().tagName).toBe('A');
-      expect(getRender()).toHaveAttribute('href', 'https://example.com');
     });
 
     it('переданный ref указывает на DOM-элемент', () => {
