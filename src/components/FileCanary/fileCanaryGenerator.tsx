@@ -1,8 +1,9 @@
 import { IconFileUnknown } from '@consta/icons/IconFileUnknown';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { FileBase } from './FileCanaryBase/FileCanaryBase';
 import {
+  FileComponent,
   FileConfig,
   FileProps,
   filePropSizeDefault,
@@ -15,14 +16,16 @@ const UNKNOWN_EXTENSION_CONFIG: FileTypeConfig = {
 };
 
 export function fileGenerator(config: FileConfig) {
-  const File: React.FC<FileProps> = (props) => {
-    const {
+  const FileRender = (
+    {
       size = filePropSizeDefault,
       extension,
       className,
+      as: Tag = 'div',
       ...otherProps
-    } = props;
-
+    }: FileProps,
+    ref: React.ForwardedRef<HTMLDivElement>,
+  ) => {
     const fileConfig = config[extension] ?? UNKNOWN_EXTENSION_CONFIG;
 
     return (
@@ -32,9 +35,11 @@ export function fileGenerator(config: FileConfig) {
         extension={extension}
         color={fileConfig.color}
         className={className}
+        ref={ref}
+        as={Tag}
         {...otherProps}
       />
     );
   };
-  return File;
+  return forwardRef(FileRender) as FileComponent;
 }

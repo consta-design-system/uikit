@@ -25,8 +25,11 @@
   align-items: center;
   width: var(--file-width);
   height: var(--file-height);
+  padding: 0;
   color: var(--color-typo-primary);
+  border: none;
   border-radius: var(--file-border-radius);
+  outline: none;
 
   &_size {
     &_s {

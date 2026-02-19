@@ -1,38 +1,43 @@
 import './FileCanaryBase.css';
 
 import { classnames } from '@bem-react/classnames';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { useTheme } from '##/components/Theme';
 import { cnCanary } from '##/utils/bem';
 
-import { FileBaseProps } from '../types';
+import { FileBaseComponent, FileBaseProps } from '../types';
 
 export const cnFileCanaryBase = cnCanary('FileBase');
 
-export const FileBase: React.FC<FileBaseProps> = (props) => {
-  const {
+const FileBaseRender = (
+  {
     size,
     icon: Icon,
     extension,
     color,
     className,
+    as: Tag = 'div',
     ...otherProps
-  } = props;
-
+  }: FileBaseProps,
+  ref: React.ForwardedRef<HTMLDivElement>,
+) => {
   const { themeClassNames } = useTheme();
   const themedClassName = classnames(className, themeClassNames.color.accent);
 
   return (
-    <div
+    <Tag
       className={cnFileCanaryBase({ size }, [themedClassName])}
       style={{ backgroundColor: color }}
+      ref={ref}
       {...otherProps}
     >
       <div className={cnFileCanaryBase('IconContainer')}>
         <Icon size={size} className={cnFileCanaryBase('Icon')} />
       </div>
       <div className={cnFileCanaryBase('Extension')}>{extension}</div>
-    </div>
+    </Tag>
   );
 };
+
+export const FileBase = forwardRef(FileBaseRender) as FileBaseComponent;
