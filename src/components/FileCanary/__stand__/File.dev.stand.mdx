@@ -19,14 +19,14 @@ import { FileExampleColorOverride } from './examples/FileExampleColorOverride/Fi
 - [Кастомизация](#кастомизация)
   - [Переопределение цвета группы](#переопределение-цвета-группы)
   - [Создание собственного компонента](#создание-собственного-компонента)
-    - [Структура конфига](#структура-конфига)
+    - [Структура конфиг](#структура-конфига)
     - [Генератор компонента](#генератор-компонента)
 
 </MdxMenu>
 
 ## Обзор
 
-Компонент `File` используется для отображения иконки файла с указанием его расширения и размера. Расширения разделены на логические группы, определяющие цвет компонента в группе и его иконку. Для некоторых спецефичных расширений иконка внутри группы может отличаться.
+Компонент `File` используется для отображения иконки файла с указанием его расширения и размера. Расширения разделены на логические группы, определяющие цвет компонента в группе и его иконку. Для некоторых специфичных расширений иконка внутри группы может отличаться.
 
 ## Импорт
 
@@ -105,7 +105,7 @@ const App = () => {
 
 Для каждой группы файлов существуют специальные CSS-переменные с суффиксом `-override`. Задавая их, вы можете переопределить цвет для всех экземпляров компонента внутри области действия переменной.
 
-**Полный список переменных‑оверрайдов:**
+**Полный список переменных для переопределения:**
 
 | Переменная для переопределения       | Группа      |
 | ------------------------------------ | ----------- |
@@ -188,7 +188,7 @@ const myConfig = {...defaultConfig, ...{ 'xyz':  color: 'red', icon: IconFileCon
 const MyFile = fileGenerator(myConfig);
 ```
 
-**Пример: создание собственного компонента по конфигу**
+**Пример: создание собственного компонента по конфигурации**
 
 <MdxTabs>
 
@@ -201,29 +201,29 @@ import { IconFileDocument } from '@consta/icons/IconFileDocument';
 import { IconFileImage } from '@consta/icons/IconFileImage';
 import { IconFileConfig } from '@consta/icons/IconFileConfig';
 
-const overridenConfig = {
+const overriddenConfig = {
   ...defaultConfig,
   js: { color: '#0071b2', icon: IconFileDocument },
   png: { color: 'rgb(116, 72, 221)', icon: IconFileImage },
   rst: { color: 'var(--custom-color-example)', icon: IconFileConfig },
 };
 
-const OverridenFile = fileGenerator(overridenConfig);
+const OverriddenFile = fileGenerator(overriddenConfig);
 
-export const OverridenFileExample = () => {
+export const OverriddenFileExample = () => {
   return (
-    <div className="OverridenFileExample">
-      <OverridenFile extension="js" />
-      <OverridenFile extension="png" />
-      <OverridenFile extension="rst" />
-      <OverridenFile extension="docx" />
+    <div className="OverriddenFileExample">
+      <OverriddenFile extension="js" />
+      <OverriddenFile extension="png" />
+      <OverriddenFile extension="rst" />
+      <OverriddenFile extension="docx" />
     </div>
   );
 };
 ```
 
 ```css
-.OverridenFileExample {
+.OverriddenFileExample {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;

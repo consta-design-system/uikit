@@ -13,7 +13,7 @@ import { fileGenerator } from '../../../fileCanaryGenerator';
 
 export const cnFileExampleConfigOverride = cn('FileExampleConfigOverride');
 
-const overridenConfig = {
+const overriddenConfig = {
   ...defaultConfig,
   js: {
     color: '#0071b2',
@@ -29,7 +29,7 @@ const overridenConfig = {
   },
 };
 
-const OverridenFile = fileGenerator(overridenConfig);
+const OverriddenFile = fileGenerator(overriddenConfig);
 
 export const FileExampleConfigOverride = () => {
   const extensions = ['js', 'png', 'rst', 'docx'];
@@ -37,7 +37,7 @@ export const FileExampleConfigOverride = () => {
     <Example>
       <div className={cnFileExampleConfigOverride()}>
         {extensions.map((ext) => (
-          <OverridenFile size="m" extension={ext} key={ext} />
+          <OverriddenFile size="m" extension={ext} key={ext} />
         ))}
       </div>
     </Example>
