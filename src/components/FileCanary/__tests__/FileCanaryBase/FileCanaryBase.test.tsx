@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import * as React from 'react';
+import React, { createRef } from 'react';
 
 import { cn } from '##/utils/bem';
 
@@ -85,6 +85,30 @@ describe('Компонент FileBase', () => {
       const customClass = 'custom-class';
       renderComponent({ className: customClass });
       expect(getRender()).toHaveClass(customClass);
+    });
+  });
+
+  describe('проверка полиморфизма as и ref', () => {
+    it('рендерится с тегом по умолчанию (div)', () => {
+      renderComponent();
+      expect(getRender().tagName).toBe('DIV');
+    });
+
+    it('рендерится с переданным тегом (span)', () => {
+      renderComponent({ as: 'span' });
+      expect(getRender().tagName).toBe('SPAN');
+    });
+
+    it('рендерится с тегом a и принимает атрибут href', () => {
+      renderComponent({ as: 'a', href: 'https://example.com' });
+      expect(getRender().tagName).toBe('A');
+      expect(getRender()).toHaveAttribute('href', 'https://example.com');
+    });
+
+    it('переданный ref указывает на DOM-элемент', () => {
+      const ref = createRef<HTMLElement>();
+      renderComponent({ ref });
+      expect(ref.current).toBe(getRender());
     });
   });
 });

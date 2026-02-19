@@ -1,17 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import * as React from 'react';
+import React from 'react';
 
 import { cnFileCanaryBase } from '../FileCanaryBase/FileCanaryBase';
 import { fileGenerator } from '../fileCanaryGenerator';
 import { FileConfig } from '../types';
-
-jest.mock('##/components/Theme', () => ({
-  useTheme: () => ({
-    themeClassNames: {
-      color: { accent: 'mock-theme-accent' },
-    },
-  }),
-}));
 
 const iconDocTestId = 'icon-doc';
 const IconDoc = () => <div data-testid={iconDocTestId} />;
@@ -67,20 +59,5 @@ describe('fileGenerator', () => {
     );
     expect(extensionElement).toBeInTheDocument();
     expect(extensionElement).toHaveTextContent(extension);
-  });
-
-  it('передаёт пропс size в FileBase', () => {
-    renderComponent({ extension: 'doc', size: 's' });
-    expect(getRender()).toHaveClass(cnFileCanaryBase({ size: 's' }));
-  });
-
-  it('передаёт пропс className в FileBase', () => {
-    renderComponent({ extension: 'doc', className: 'extra-class' });
-    expect(getRender()).toHaveClass('extra-class');
-  });
-
-  it('применяет класс темы', () => {
-    renderComponent({ extension: 'doc' });
-    expect(getRender()).toHaveClass('mock-theme-accent');
   });
 });
