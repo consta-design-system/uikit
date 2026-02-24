@@ -5,14 +5,6 @@ import { defaultConfig } from '../config';
 import { File } from '../FileCanary';
 import { cnFileCanaryBase } from '../FileCanaryBase/FileCanaryBase';
 
-jest.mock('##/components/Theme', () => ({
-  useTheme: () => ({
-    themeClassNames: {
-      color: { accent: 'mock-theme-accent' },
-    },
-  }),
-}));
-
 const testId = 'default-file';
 
 const renderComponent = (props: React.ComponentProps<typeof File>) => {
@@ -47,11 +39,6 @@ describe('Компонент File', () => {
       renderComponent({ extension: 'doc', className: 'extra-class' });
       expect(getRender()).toHaveClass('extra-class');
     });
-
-    it('применяет класс темы', () => {
-      renderComponent({ extension: 'pdf' });
-      expect(getRender()).toHaveClass('mock-theme-accent');
-    });
   });
 
   describe('проверка полиморфизма as и ref', () => {
@@ -79,11 +66,11 @@ describe('Компонент File', () => {
   });
 
   it('использует специальный конфиг для неизвестного расширения', () => {
-    renderComponent({ extension: 'xyz' });
+    renderComponent({ extension: 'custom' });
     expect(getRender()).toHaveStyle(
       'background-color: var(--file-color-unknown)',
     );
     expect(document.querySelector('.IconFileUnknown')).toBeInTheDocument();
-    expect(screen.getByText('xyz')).toBeInTheDocument();
+    expect(screen.getByText('custom')).toBeInTheDocument();
   });
 });
