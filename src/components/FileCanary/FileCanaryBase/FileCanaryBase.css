@@ -18,7 +18,9 @@
   --file-color-archive: var(--file-color-archive-override, #9010d1);
   --file-extension-font-size: 8px;
   --file-extension-bg-color: rgba(0, 0, 0, 0.5);
+  --file-extension-letter-spacing: -0.125em;
   --file-border-radius: var(--control-radius);
+  --file-typo-color: #fff;
   display: flex;
   overflow: hidden;
   flex-direction: column;
@@ -26,7 +28,7 @@
   width: var(--file-width);
   height: var(--file-height);
   padding: 0;
-  color: #fff;
+  color: var(--file-typo-color);
   border: none;
   border-radius: var(--file-border-radius);
   outline: none;
@@ -64,6 +66,7 @@
     background-color: var(--file-extension-bg-color);
     font-family: 'Silkscreen', sans-serif;
     font-size: var(--file-extension-font-size);
+    letter-spacing: var(--file-extension-letter-spacing);
     text-transform: uppercase;
   }
 }
