@@ -30,6 +30,7 @@ export function fileGenerator(config: FileConfig) {
 
     return (
       <FileBase
+        {...otherProps}
         size={size}
         icon={fileConfig.icon}
         extension={extension}
@@ -37,7 +38,6 @@ export function fileGenerator(config: FileConfig) {
         className={className}
         ref={ref}
         as={Tag}
-        {...otherProps}
       />
     );
   };
