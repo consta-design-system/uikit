@@ -18,7 +18,7 @@
   --file-color-archive: var(--file-color-archive-override, #9010d1);
   --file-extension-font-size: 8px;
   --file-extension-bg-color: rgba(0, 0, 0, 0.5);
-  --file-border-radius: 4px;
+  --file-border-radius: var(--control-radius);
   display: flex;
   overflow: hidden;
   flex-direction: column;
