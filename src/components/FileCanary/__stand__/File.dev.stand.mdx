@@ -128,21 +128,28 @@ const App = () => {
 | `--file-color-scheme-override`       | Схема       |
 | `--file-color-archive-override`      | Архив       |
 
-**Пример: переопределение цвета группы глобальным стилем**
+**Пример: переопределение цвета группы**
+
+В данном примере для компонентов внутри контейнера переопределен цвет группы "Документы"
 
 <MdxTabs>
 
 <FileExampleColorOverride />
 
 ```ts
-<File extension="doc" />
-<File extension="docx" />
-<File extension="txt" />
+<div class="FileExampleColorOverride">
+  <File extension="doc" />
+  <File extension="docx" />
+  <File extension="txt" />
+</div>
 ```
 
 ```css
-:root {
+.FileExampleColorOverride {
   --file-color-document-override: #ff8800;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 ```
 
