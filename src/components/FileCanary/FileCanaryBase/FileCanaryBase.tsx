@@ -1,9 +1,7 @@
 import './FileCanaryBase.css';
 
-import { classnames } from '@bem-react/classnames';
 import React, { forwardRef } from 'react';
 
-import { useTheme } from '##/components/Theme';
 import { cnCanary } from '##/utils/bem';
 
 import { FileBaseComponent, FileBaseProps } from '../types';
@@ -22,12 +20,9 @@ const FileBaseRender = (
   }: FileBaseProps,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) => {
-  const { themeClassNames } = useTheme();
-  const themedClassName = classnames(className, themeClassNames.color.accent);
-
   return (
     <Tag
-      className={cnFileCanaryBase({ size }, [themedClassName])}
+      className={cnFileCanaryBase({ size }, [className])}
       style={{ backgroundColor: color }}
       ref={ref}
       {...otherProps}
