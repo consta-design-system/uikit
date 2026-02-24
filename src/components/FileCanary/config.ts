@@ -168,7 +168,6 @@ export const defaultConfig: FileConfig = {
 
   // scheme
   'vsd': { color: 'var(--file-color-scheme)', icon: IconFileScheme },
-  'drawio': { color: 'var(--file-color-scheme)', icon: IconFileScheme },
 
   // archive
   '7z': { color: 'var(--file-color-archive)', icon: IconFileArchive },
