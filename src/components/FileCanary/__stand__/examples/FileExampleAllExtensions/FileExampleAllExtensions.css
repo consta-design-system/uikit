@@ -1,0 +1,23 @@
+.FileExampleAllExtensions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+
+  &-Group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &-Title {
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+
+  &-List {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}

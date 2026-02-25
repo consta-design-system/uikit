@@ -16,7 +16,7 @@
   "peerDependencies": {
     "@bem-react/classname": "^1.6.0",
     "@bem-react/classnames": "^1.3.10",
-    "@consta/icons": "^1.3.0",
+    "@consta/icons": "^1.7.1",
     "@consta/table": "^0.7.0",
     "@reatom/core": "^3.10.1",
     "@reatom/npm-react": "^3.10.6",
