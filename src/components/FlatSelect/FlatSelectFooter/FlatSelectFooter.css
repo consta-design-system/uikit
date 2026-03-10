@@ -13,8 +13,7 @@
     }
 
     &_round {
-      border-radius:
-        0 0 var(--flat-select-radius-round)
+      border-radius: 0 0 var(--flat-select-radius-round)
         var(--flat-select-radius-round);
     }
   }

@@ -33,8 +33,7 @@
     overflow-y: visible;
     flex: 1;
     gap: var(--space-xs) var(--steps-list-gap);
-    grid-template:
-      auto auto / repeat(
+    grid-template: auto auto / repeat(
         var(--steps-items-length),
         var(--steps-item-width)
       );

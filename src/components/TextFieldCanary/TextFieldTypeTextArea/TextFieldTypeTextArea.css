@@ -1,28 +1,24 @@
 .TextFieldTypeTextArea {
-  --text-field-textarea-padding-right:
-    calc(
-      (var(--field-control-layout-right-slots-length)) *
+  --text-field-textarea-padding-right: calc(
+    (var(--field-control-layout-right-slots-length)) *
       var(--field-control-layout-space) +
       var(--field-control-layout-right-slot-contents-width) +
       var(--field-control-layout-padding-right)
-    );
-  --text-field-textarea-vertical-padding:
-    calc(
-      (
+  );
+  --text-field-textarea-vertical-padding: calc(
+    (
         var(--field-control-layout-slot-height) -
-        var(--field-control-layout-text-line-height)
+          var(--field-control-layout-text-line-height)
       ) / 2
-    );
-  --text-field-textarea-control-height:
-    var(
-      --text-field-height,
-      var(--field-control-layout-height)
-    );
-  --text-field-textarea-height-calc:
-    calc(
-      var(--text-field-textarea-control-height) -
+  );
+  --text-field-textarea-control-height: var(
+    --text-field-height,
+    var(--field-control-layout-height)
+  );
+  --text-field-textarea-height-calc: calc(
+    var(--text-field-textarea-control-height) -
       var(--field-control-layout-border-width) * 2
-    );
+  );
   --text-field-textarea-min-height: var(--text-field-textarea-height-calc);
   overflow: hidden;
 

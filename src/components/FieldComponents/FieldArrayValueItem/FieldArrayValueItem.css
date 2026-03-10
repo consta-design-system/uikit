@@ -1,10 +1,9 @@
 .TagBase.FieldArrayValueItem {
   overflow: hidden;
   flex: none;
-  max-width:
-    calc(
-      var(--field-control-layout-children-width) - var(--space-2xs)
-    );
+  max-width: calc(
+    var(--field-control-layout-children-width) - var(--space-2xs)
+  );
 
   & .TagBase-Label {
     display: inline-block;

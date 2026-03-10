@@ -20,12 +20,8 @@
   text-decoration: none;
   text-overflow: ellipsis;
   cursor: var(--button-cursor);
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease,
-    color 0.15s ease,
-    fill 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
   flex-shrink: 0;
   -webkit-appearance: none;
 

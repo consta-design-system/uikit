@@ -87,34 +87,30 @@
 
     &_normal {
       --progress-step-bar-item-point-background: var(--color-bg-normal);
-      --progress-step-bar-item-point-content-color:
-        var(
-          --color-control-typo-primary
-        );
+      --progress-step-bar-item-point-content-color: var(
+        --color-control-typo-primary
+      );
     }
 
     &_success {
       --progress-step-bar-item-point-background: var(--color-bg-success);
-      --progress-step-bar-item-point-content-color:
-        var(
-          --color-control-typo-primary
-        );
+      --progress-step-bar-item-point-content-color: var(
+        --color-control-typo-primary
+      );
     }
 
     &_warning {
       --progress-step-bar-item-point-background: var(--color-bg-warning);
-      --progress-step-bar-item-point-content-color:
-        var(
-          --color-control-typo-primary
-        );
+      --progress-step-bar-item-point-content-color: var(
+        --color-control-typo-primary
+      );
     }
 
     &_alert {
       --progress-step-bar-item-point-background: var(--color-bg-alert);
-      --progress-step-bar-item-point-content-color:
-        var(
-          --color-control-typo-primary
-        );
+      --progress-step-bar-item-point-content-color: var(
+        --color-control-typo-primary
+      );
     }
   }
 
