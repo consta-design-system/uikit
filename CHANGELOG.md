@@ -1,5 +1,20 @@
 # Changelog
 
+## v5.31.0 (12/03/2026)
+Самое важное:
+- Добавлено свойство `container` для компонетов с `Popover`
+- Добавлен новый компонент `File`(canary)
+
+---
+
+- [test(hooks): add tests for `useFlag` `useKeys` `usePrevious` `useTimer` (#4159)](https://github.com/consta-design-system/uikit/commit/2a8a8c862c2890f95be54de0e3c73fb7dd5f69af) - [@baevm](https://github.com/baevm)
+- [feat(FileCanary): create file canary component (#4158)](https://github.com/consta-design-system/uikit/commit/d6d916485bba8bae7f11ae74dd4b91b8f8bfabbd) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+- [chore(tests): remove `ts-jest`, keep `babel-jest` for tests (#4153)](https://github.com/consta-design-system/uikit/commit/2c5c1b85ff80c390bb153a1b43bf7a9f19b3cd6b) - [@baevm](https://github.com/baevm)
+- [feature: add dropdown container props (#4152)](https://github.com/consta-design-system/uikit/commit/8df4c0dd029951e4a65084bec03b59fb52465a21) - [@ShavrinAleksei](https://github.com/ShavrinAleksei)
+- [chore(deps): remove unused deprecated react-test-renderer (#4147)](https://github.com/consta-design-system/uikit/commit/ed0ded859693a9d323643f6f14f09ca062238f82) - [@baevm](https://github.com/baevm)
+
+--------------------
+
 ## v5.30.0 (29/01/2026)
 Самое важное:
 - Добавили хук `useHover` для подписки на несколько элементов одновременно с возможностью установить задержку перед срабатыванием колбэка.
@@ -376,15 +391,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 
 - [docs(TextField): remove wrapper from stand (#3793)](https://github.com/consta-design-system/uikit/commit/e9d1b61da756986bbe43dedb89378d149adc2b89) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Informer): add _view_outline (#3791)](https://github.com/consta-design-system/uikit/commit/35d82b078711f6b61238e73336c16ad1f9b4a5e3) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.12.0 (23/10/2024)
-Самое важное:
-- добавили новый компонент `AutoComplete(Canary)`. В отличие от старого компонента в нем появилась возможность множественного значения value.
-- в `DatePicker` добавили возможность исключать периоды дат и времени с помощью `disableDates`.
-
----
-
-- [feat(AutoComplete): add canary component (#3780)](https://github.com/consta-design-system/uikit/commit/4e6de1ad3a58a368e3b3f719f7d91d184b078f5e) - [@gizeasy](https://github.com/gizeasy)
-- [feat(DatePicker): add disableDates (#3788)](https://github.com/consta-design-system/uikit/commit/5acafb7cfeea97d53ff5476f102db21bb3b57173) - [@gizeasy](https://github.com/gizeasy)
