@@ -3,7 +3,7 @@ import React from 'react';
 import { Direction } from '##/components/Popover';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
-import { AnyColor, ColorInputFormat, ColorModel } from '../types';
+import { ColorInputFormat, ColorModel } from '../types';
 
 export type ColorPickerPropForm = 'default' | 'brick' | 'round';
 
@@ -22,7 +22,7 @@ export type ColorPickerProps<T> = PropsWithHTMLAttributesAndRef<
     header?: React.ReactNode;
     onChange: (value: T) => void;
     alpha?: boolean;
-    pallette?: T[];
+    palette?: T[];
     paletteTitle?: React.ReactNode;
     mainControl?: boolean;
     format?: ColorInputFormat[] | ColorInputFormat | false;
@@ -30,6 +30,6 @@ export type ColorPickerProps<T> = PropsWithHTMLAttributesAndRef<
   HTMLDivElement
 >;
 
-export type ColorPickerComponent = <T extends AnyColor>(
+export type ColorPickerComponent = <T>(
   props: ColorPickerProps<T>,
 ) => React.ReactNode | null;

@@ -41,7 +41,7 @@ const ColorPickerRender = <T,>(
     header,
     onChange,
     alpha,
-    pallette,
+    palette,
     paletteTitle,
     mainControl = true,
     format = ['hex', 'hsl', 'hsv', 'rgb'],
@@ -62,7 +62,7 @@ const ColorPickerRender = <T,>(
       anchorRef={anchorRef}
       controlRef={controlRef}
     >
-      <ModalLayout border={[!!header && mainControl, !!pallette?.length]}>
+      <ModalLayout border={[!!header && mainControl, !!palette?.length]}>
         {renderNode(
           header,
           cnColorPicker('Header', cnMixSpace({ pH, pV: 's' })),
@@ -94,7 +94,7 @@ const ColorPickerRender = <T,>(
             format={format}
           />
         ) : null}
-        {pallette && (
+        {palette && (
           <>
             {renderNode(paletteTitle, cnMixSpace({ pH, pV: 's' }))}
             <ColorPalette
@@ -106,7 +106,7 @@ const ColorPickerRender = <T,>(
               model={model}
               value={value}
               onChange={onChange}
-              items={pallette}
+              items={palette}
               size="xs"
             />
           </>

@@ -5,8 +5,6 @@ import React, { forwardRef } from 'react';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
-// import { formatClassName } from '../utils/format';
-
 export type ColorPickerPointProps = PropsWithHTMLAttributesAndRef<
   {
     color: string;

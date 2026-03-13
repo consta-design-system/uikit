@@ -11,7 +11,7 @@ import { HsvaColor } from '../types';
 import { clamp } from '../utils/clamp';
 import { hsvaToHslaString } from '../utils/convert';
 
-const cnColorPickerAlpha = cn('ColorPickerAlpha');
+export const cnColorPickerAlpha = cn('ColorPickerAlpha');
 export type ColorPickerAlphaProps = PropsWithHTMLAttributesAndRef<
   {
     hsva: HsvaColor;

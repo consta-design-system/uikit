@@ -13,7 +13,7 @@ import {
   ColorInputTypeChangerProps,
 } from './types';
 
-const cnColorInputTypeChanger = cn('ColorInputTypeChanger');
+export const cnColorInputTypeChanger = cn('ColorInputTypeChanger');
 
 const getFormat = (format: string) => format;
 

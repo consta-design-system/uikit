@@ -62,17 +62,13 @@ export const ColorPickerVariants = () => {
   const markerRef = useRef<HTMLButtonElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState<HslaColor>({ h: 0, s: 100, l: 50, a: 1 });
-  const palletteArray = useMemo(() => generateHslaPalette(33), []);
+  const paletteArray = useMemo(() => generateHslaPalette(33), []);
 
   const withAnchor = useBoolean('withAnchor', true);
   const header = useText('header', 'Выбор цвета');
   const mainControl = useBoolean('mainControl', true);
-  const pallette = useBoolean('pallette', true);
-  const paletteTitle = useText(
-    'paletteTitle',
-    'Ранее использованные',
-    pallette,
-  );
+  const palette = useBoolean('palette', true);
+  const paletteTitle = useText('paletteTitle', 'Ранее использованные', palette);
   const alpha = useBoolean('alpha', true);
   const withFormat = useSelect(
     'withFormat',
@@ -106,7 +102,7 @@ export const ColorPickerVariants = () => {
         onChange={setValue}
         header={header}
         alpha={alpha}
-        pallette={pallette ? palletteArray : undefined}
+        palette={palette ? paletteArray : undefined}
         paletteTitle={paletteTitle}
         mainControl={mainControl}
         format={formatMap[withFormat || 'multiple']}

@@ -4,7 +4,6 @@ export * from './ColorMarker';
 export * from './ColorPalette';
 export * from './ColorPickerInput';
 export * from './ColorPickerBase';
-export * from './ColorPicker';
 export * from './types';
 export * from './models';
 export * from './utils/convert';

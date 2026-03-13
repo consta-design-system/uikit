@@ -36,11 +36,12 @@ describe('Компонент FieldControlLayout', () => {
     --field-control-layout-border-radius: var(--control-radius) var(--control-radius) var(--control-radius) var(--control-radius);
     --field-control-layout-border-style: solid solid solid solid;
     --field-control-layout-border-width: var(--control-border-width);
-    --field-control-layout-height: var(--control-height-m);
-    --field-control-layout-padding-bottom: 0px;
-    --field-control-layout-padding-left: calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px));
-    --field-control-layout-padding-right: calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px));
-    --field-control-layout-padding-top: 0px;
+    --field-control-layout-height: var(--field-control-layout-height-override, var(--control-height-m));
+    --field-control-layout-padding-bottom: var(--field-control-layout-padding-bottom-override,
+  var(--field-control-layout-additional-padding-bottom, 0px));
+    --field-control-layout-padding-left: var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)));
+    --field-control-layout-padding-right: var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)));
+    --field-control-layout-padding-top: var(--field-control-layout-padding-top-override,var(--field-control-layout-additional-padding-top, 0px));
     --field-control-layout-space: calc(var(--control-space-m) * 0.5);
     --field-control-layout-text-line-height: var(--line-height-text-m);
     --field-control-layout-text-size: var(--control-text-size-m);
@@ -99,7 +100,7 @@ describe('Компонент FieldControlLayout', () => {
   it('Компонент корректно обрабатывает разные размеры', () => {
     renderComponent({ size: 's' });
     expect(getRender()).toHaveStyle(
-      '--field-control-layout-height: var(--control-height-s)',
+      '--field-control-layout-height: var(--field-control-layout-height-override, var(--control-height-s))',
     );
   });
 

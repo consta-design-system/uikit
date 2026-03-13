@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 
-// Saves incoming handler to the ref in order to avoid "useCallback hell"
 export function useEventCallback<T>(
   handler?: (value: T) => void,
 ): (value: T) => void {

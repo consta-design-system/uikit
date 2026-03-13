@@ -94,8 +94,8 @@ const fixH = (part: string | null) => {
     return 0;
   }
   let value = parseInt(part, 10);
-  if (value > 360) {
-    value = 360;
+  if (value > 359) {
+    value = 359;
   }
   if (value < 0) {
     value = 0;

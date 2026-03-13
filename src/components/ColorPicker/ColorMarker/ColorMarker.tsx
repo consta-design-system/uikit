@@ -10,7 +10,7 @@ import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
 import { ColorModel } from '../types';
 import { hsvaToHslaString, hsvaToHslString } from '../utils/convert';
 
-const cnColorMarker = cn('ColorMarker');
+export const cnColorMarker = cn('ColorMarker');
 
 export type ColorMarkerProps<
   T,

@@ -15,7 +15,7 @@ export const ColorPickerExample = () => {
         alpha
         onChange={setColor}
         paletteTitle="Ранее использованные цвета"
-        pallette={[
+        palette={[
           'rgba(146,64,108,0.5)',
           'rgba(80,60,60)',
           'rgba(255,255,255,0.1)',

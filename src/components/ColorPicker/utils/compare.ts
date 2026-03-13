@@ -25,6 +25,5 @@ export const equalColorString = (first: string, second: string): boolean => {
 export const equalHex = (first: string, second: string): boolean => {
   if (first.toLowerCase() === second.toLowerCase()) return true;
 
-  // To compare colors like `#FFF` and `ffffff` we convert them into RGB objects
   return equalColorObjects(hexToRgba(first), hexToRgba(second));
 };

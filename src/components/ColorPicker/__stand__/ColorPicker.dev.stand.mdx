@@ -66,7 +66,7 @@ import { ColorPicker } from '@consta/uikit/ColorPicker';
 | `header?`                | `React.ReactNode`                                 | —                              | Заголовок попапа.                                                                                                                                                        |
 | `onChange`               | `(value: T) => void`                              | —                              | Обработчик изменения цвета.                                                                                                                                              |
 | `alpha?`                 | `boolean`                                         | `false`                        | Включение альфа-канала (прозрачности).                                                                                                                                   |
-| `pallette?`              | `T[]`                                             | —                              | Палитра цветов для быстрого выбора.                                                                                                                                      |
+| `palette?`               | `T[]`                                             | —                              | Палитра цветов для быстрого выбора.                                                                                                                                      |
 | `paletteTitle?`          | `React.ReactNode`                                 | —                              | Заголовок палитры цветов.                                                                                                                                                |
 | `mainControl?`           | `boolean`                                         | `true`                         | Показывать основной контрол выбора цвета.                                                                                                                                |
 | `format?`                | `ColorInputFormat[] \| ColorInputFormat \| false` | `['hex', 'hsl', 'hsv', 'rgb']` | Форматы ввода цвета (или false, чтобы скрыть контрол).                                                                                                                   |
@@ -134,7 +134,7 @@ const ColorPickerExample = () => {
         alpha
         onChange={setColor}
         paletteTitle="Ранее использованные цвета"
-        pallette={[
+        palette={[
           'rgba(146,64,108,0.5)',
           'rgba(80,60,60)',
           'rgba(255,255,255,0.1)',
