@@ -75,7 +75,7 @@ import { DateTime } from '@consta/uikit/DateTime';
 | [`multiplicityHours?`](#выбор-времени)           | `number`                                               | 1            | Интервал для вывода часов (1 — показать все часы, 0 — убрать часы)         |
 | [`multiplicityMinutes?`](#выбор-времени)         | `number`                                               | 1            | Интервал для вывода минут (1 — показать все минуты, 0 — убрать минуты)     |
 | [`multiplicitySeconds?`](#выбор-времени)         | `number`                                               | 1            | Интервал для вывода секунд (1 — показать все секунды, 0 — убрать секунды)  |
-| [`locale?`](#локализация)                        | `DateTimePropLocale`                                   | `ruLocale`   | Локализация календаря                                                      |
+| [`locale?`](#локализация)                        | `DateTimePropLocale`                                   | `ru`         | Локализация календаря                                                      |
 | [`onChange?`](#выбор-даты)                       | `DateTimePropOnChange`                                 | -            | Обработчик событий выбора даты                                             |
 | [`onChangeRange?`](#выбор-даты)                  | `DateTimePropOnChangeRange`                            | -            | Обработчик событий выбора диапазона дат                                    |
 | `className?`                                     | `string`                                               | -            | Дополнительные CSS-классы                                                  |
@@ -83,7 +83,7 @@ import { DateTime } from '@consta/uikit/DateTime';
 
 ```tsx
 import { Locale } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
+import { ru } from 'date-fns/locale';
 
 type DateTimePropValue = Date | [Date?, Date?];
 
@@ -202,9 +202,9 @@ return (
 
 ```tsx
 import { startOfWeek } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
+import { ru } from 'date-fns/locale';
 
-const minDate = startOfWeek(new Date(), { locale: ruLocale });
+const minDate = startOfWeek(new Date(), { locale: ru });
 const maxDate = new Date();
 const [value, setValue] = useState<Date | undefined>();
 
@@ -281,7 +281,7 @@ return (
 import { addDays, startOfWeek } from 'date-fns';
 
 const events = [
-  startOfWeek(new Date(), { locale: ruLocale }),
+  startOfWeek(new Date(), { locale: ru }),
   new Date(),
   addDays(new Date(), 2),
 ];
@@ -402,17 +402,17 @@ const [value, setValue] = useState<Date | undefined>();
 
 ### Локализация
 
-Свойство `locale` позволяет настроить язык календаря с использованием библиотеки [date-fns](https://date-fns.org/). По умолчанию используется русская локализация (`ruLocale`).
+Свойство `locale` позволяет настроить язык календаря с использованием библиотеки [date-fns](https://date-fns.org/). По умолчанию используется русская локализация (`ru`).
 
 <MdxTabs>
 
 <DateTimeExampleLocale />
 
 ```tsx
-import frLocale from 'date-fns/locale/fr';
+import { fr } from 'date-fns/locale';
 
 const dateTimeLocale = {
-  ...frLocale,
+  ...fr,
   words: {
     hours: 'H',
     minutes: 'Min',

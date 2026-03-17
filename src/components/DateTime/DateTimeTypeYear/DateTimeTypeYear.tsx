@@ -1,5 +1,5 @@
 import { addYears, startOfDecade } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
+import { ru } from 'date-fns/locale';
 import React, { forwardRef, useEffect } from 'react';
 
 import { DateTime10Years } from '../DateTime10Years/DateTime10Years';
@@ -29,7 +29,7 @@ export const DateTimeTypeYear: DateTimeTypeComponent<'year'> = forwardRef(
       disableDates,
       currentVisibleDate: currentVisibleDateProp,
       events,
-      locale = ruLocale,
+      locale = ru,
       className,
       view = dateTimePropViewDefault,
       onMove,

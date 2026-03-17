@@ -1,5 +1,6 @@
 import {
   addYears,
+  eachDayOfInterval,
   endOfWeek,
   format,
   isBefore,
@@ -8,7 +9,6 @@ import {
   Locale,
   startOfWeek,
 } from 'date-fns';
-import eachDayOfInterval from 'date-fns/eachDayOfInterval';
 
 import { isDateRange, isOnlyOneDateInRange } from '../../../utils/date';
 import { isDefined } from '../../../utils/type-guards';

@@ -1,12 +1,12 @@
 import { Example } from '@consta/stand';
 import { addDays, startOfWeek } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
+import { ru } from 'date-fns/locale';
 import React from 'react';
 
 import { DateTime } from '../../../DateTime';
 
 const events = [
-  startOfWeek(new Date(), { locale: ruLocale }),
+  startOfWeek(new Date(), { locale: ru }),
   new Date(),
   addDays(new Date(), 2),
 ];

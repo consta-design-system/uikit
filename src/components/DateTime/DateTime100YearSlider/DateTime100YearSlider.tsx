@@ -1,7 +1,7 @@
 import './DateTime100YearSlider.css';
 
 import { addYears, format, getDecade, Locale } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
+import { ru } from 'date-fns/locale';
 import React from 'react';
 
 import { range } from '../../../utils/array';
@@ -80,7 +80,7 @@ export const DateTime100YearSlider: React.FC<DateTime100YearSliderProps> = (
     className,
     onChange,
     value,
-    locale = ruLocale,
+    locale = ru,
     ...otherProps
   } = props;
 

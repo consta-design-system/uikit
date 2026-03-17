@@ -1,11 +1,11 @@
 import { Example } from '@consta/stand';
 import { startOfWeek } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
+import { ru } from 'date-fns/locale';
 import React, { useState } from 'react';
 
 import { DateTime } from '../../../DateTime';
 
-const minDate = startOfWeek(new Date(), { locale: ruLocale });
+const minDate = startOfWeek(new Date(), { locale: ru });
 const maxDate = new Date();
 
 export const DateTimeExampleDateMin = () => {

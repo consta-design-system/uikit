@@ -1,5 +1,4 @@
-import enUSLocale from 'date-fns/locale/en-US';
-import ruLocale from 'date-fns/locale/ru';
+import { enUS, ru } from 'date-fns/locale';
 
 import { getMonthsOfYear } from '../helpers';
 
@@ -7,7 +6,7 @@ describe('DateTime/getMonthsOfYear', () => {
   it('верный результат c date', () => {
     const result = getMonthsOfYear({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
     });
 
     const expected: typeof result = [
@@ -104,7 +103,7 @@ describe('DateTime/getMonthsOfYear', () => {
   it('верный результат с minDate и maxDate', () => {
     const result = getMonthsOfYear({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       minDate: new Date(1970, 3, 1),
       maxDate: new Date(1970, 7, 30),
     });
@@ -203,7 +202,7 @@ describe('DateTime/getMonthsOfYear', () => {
   it('верный результат с events', () => {
     const result = getMonthsOfYear({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       events: [
         new Date(1970, 0, 1),
         new Date(1970, 0, 2),
@@ -318,7 +317,7 @@ describe('DateTime/getMonthsOfYear', () => {
   it('верный результат с value:Date', () => {
     const result = getMonthsOfYear({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       value: new Date(1970, 0, 3),
     });
 
@@ -416,7 +415,7 @@ describe('DateTime/getMonthsOfYear', () => {
   it('верный результат с value:DateRange', () => {
     const result = getMonthsOfYear({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       value: [new Date(1970, 0, 3), new Date(1970, 5, 7)],
     });
 
@@ -514,7 +513,7 @@ describe('DateTime/getMonthsOfYear', () => {
   it('верный результат с locale = en-US', () => {
     const result = getMonthsOfYear({
       date: new Date(1970, 0),
-      locale: enUSLocale,
+      locale: enUS,
     });
 
     const expected: typeof result = [
@@ -610,7 +609,7 @@ describe('DateTime/getMonthsOfYear', () => {
   it('верный результат с множеством данных', () => {
     const result = getMonthsOfYear({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       value: [new Date(1970, 3, 3), new Date(1970, 5, 20)],
       minDate: new Date(1970, 2, 2),
       maxDate: new Date(1970, 8, 10),

@@ -9,7 +9,7 @@ import {
   Locale,
   startOfDecade,
 } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
+import { ru } from 'date-fns/locale';
 import React from 'react';
 
 import { range } from '../../../utils/array';
@@ -87,7 +87,7 @@ export const DateTime10YearSlider: React.FC<DateTime10YearSliderProps> = (
     className,
     onChange,
     value,
-    locale = ruLocale,
+    locale = ru,
     ...otherProps
   } = props;
 

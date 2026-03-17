@@ -1,4 +1,4 @@
-import setYear from 'date-fns/setYear';
+import { setYear } from 'date-fns';
 
 export const leapYear = 2020;
 

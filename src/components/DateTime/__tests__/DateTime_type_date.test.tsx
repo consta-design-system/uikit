@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import faIRLocale from 'date-fns/locale/fa-IR';
+import { faIR } from 'date-fns/locale';
 import * as React from 'react';
 
 import { DateTime, DateTimeProps, dateTimePropView } from '../DateTime';
@@ -364,7 +364,7 @@ describe('Компонент DateTime_type_date', () => {
       it(`проверка применения locale="fa-IR" при view="${view}"`, () => {
         renderComponent({
           view,
-          locale: faIRLocale,
+          locale: faIR,
           currentVisibleDate: new Date(2022, 5),
         });
 

@@ -1,3 +1,5 @@
+import { Locale } from 'date-fns';
+
 import { DateRange } from '../../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 

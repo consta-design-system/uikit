@@ -1,4 +1,4 @@
-import startOfMonth from 'date-fns/startOfMonth';
+import { startOfMonth } from 'date-fns';
 import React, {
   forwardRef,
   useCallback,

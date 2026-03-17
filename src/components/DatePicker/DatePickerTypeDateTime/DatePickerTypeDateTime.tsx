@@ -1,5 +1,4 @@
-import addMonths from 'date-fns/addMonths';
-import startOfMonth from 'date-fns/startOfMonth';
+import { addMonths, startOfMonth } from 'date-fns';
 import React, { forwardRef, useEffect, useRef } from 'react';
 
 import { useClickOutside } from '##/hooks/useClickOutside/useClickOutside';

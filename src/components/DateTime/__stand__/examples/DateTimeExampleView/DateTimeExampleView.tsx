@@ -1,6 +1,6 @@
 import { Example } from '@consta/stand';
 import { startOfWeek } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
+import { ru } from 'date-fns/locale';
 import React from 'react';
 
 import { DateTime } from '../../../DateTime';
@@ -32,9 +32,7 @@ export const DateTimeExampleViewSlider = () => {
 export const DateTimeExampleCurrent = () => {
   return (
     <Example>
-      <DateTime
-        currentVisibleDate={startOfWeek(new Date(), { locale: ruLocale })}
-      />
+      <DateTime currentVisibleDate={startOfWeek(new Date(), { locale: ru })} />
     </Example>
   );
 };
