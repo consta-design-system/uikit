@@ -21,7 +21,7 @@
     "@reatom/core": "^3.10.1",
     "@reatom/npm-react": "^3.10.6",
     "compute-scroll-into-view": "^3.1.1",
-    "date-fns": "^2.30.0",
+    "date-fns": "^4.1.0",
     "react": ">= 16.8.0",
     "react-dom": ">= 16.8.0",
     "react-dropzone": "^14.2.3",
