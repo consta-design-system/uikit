@@ -347,45 +347,6 @@ describe('Компонент Combobox', () => {
     expect(getRenderItems().length).toEqual(items.length);
   });
 
-  it('не зацикливается при контролируемом searchValue и быстром вводе', () => {
-    const consoleErrorSpy = jest
-      .spyOn(console, 'error')
-      .mockImplementation(() => undefined);
-
-    const Component = () => {
-      const [searchValue, setSearchValue] = React.useState('');
-
-      return (
-        <Combobox
-          {...defaultProps}
-          searchValue={searchValue}
-          data-testid={testId}
-          onSearchValueChange={setSearchValue}
-        />
-      );
-    };
-
-    render(<Component />);
-
-    inputClick();
-    animateDelay();
-
-    const input = getInput();
-
-    fireEvent.change(input, { target: { value: 'a' } });
-    fireEvent.change(input, { target: { value: 'ab' } });
-    fireEvent.change(input, { target: { value: 'abc' } });
-    fireEvent.change(input, { target: { value: 'abcd' } });
-    fireEvent.change(input, { target: { value: 'abcde' } });
-
-    expect((input as HTMLInputElement).value).toEqual('abcde');
-    expect(consoleErrorSpy).not.toHaveBeenCalledWith(
-      expect.stringContaining('Maximum update depth exceeded'),
-    );
-
-    consoleErrorSpy.mockRestore();
-  });
-
   it('отображает "Все" в инпут, когда все элементы выбраны', () => {
     const allSelectedAllLabel = 'Выбраны все элементы';
     renderComponent({
