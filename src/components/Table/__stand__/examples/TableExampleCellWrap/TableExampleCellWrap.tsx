@@ -19,7 +19,7 @@ const rows = [
   },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: 'Что',
     accessor: 'id',

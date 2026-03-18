@@ -13,7 +13,7 @@ import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 export const buttonPropSize = ['m', 'xs', 's', 'l'] as const;
-export type ButtonPropSize = typeof buttonPropSize[number];
+export type ButtonPropSize = (typeof buttonPropSize)[number];
 export const buttonPropSizeDefault: ButtonPropSize = buttonPropSize[0];
 
 export const buttonPropView = [
@@ -22,11 +22,11 @@ export const buttonPropView = [
   'ghost',
   'secondary',
 ] as const;
-export type ButtonPropView = typeof buttonPropView[number];
+export type ButtonPropView = (typeof buttonPropView)[number];
 export const buttonPropViewDefault: ButtonPropView = buttonPropView[0];
 
 export const buttonPropWidth = ['default', 'full'] as const;
-export type ButtonPropWidth = typeof buttonPropWidth[number];
+export type ButtonPropWidth = (typeof buttonPropWidth)[number];
 export const buttonPropWidthDefault: ButtonPropWidth = buttonPropWidth[0];
 
 export const buttonPropForm = [
@@ -39,7 +39,7 @@ export const buttonPropForm = [
   'defaultBrick',
 ] as const;
 
-export type ButtonPropForm = typeof buttonPropForm[number];
+export type ButtonPropForm = (typeof buttonPropForm)[number];
 
 type GlobalForm =
   | 'default'

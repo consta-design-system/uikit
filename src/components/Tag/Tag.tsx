@@ -17,7 +17,7 @@ export const tagPropMode = [
   'info',
 ] as const;
 export const tagPropModeDefault = tagPropMode[0];
-type TagPropMode = typeof tagPropMode[number];
+type TagPropMode = (typeof tagPropMode)[number];
 
 type CommonProps = {
   size?: TagBaseProps['size'];
@@ -80,16 +80,17 @@ type Props<ROLE extends TagPropMode = 'button'> = ROLE extends 'button'
   ? PropsWithModeButton &
       Omit<AsTagAttribute<'button'>, keyof PropsWithModeButton>
   : {} & ROLE extends 'check'
-  ? PropsWithModeCheck &
-      Omit<AsTagAttribute<'button'>, keyof PropsWithModeCheck>
-  : {} & ROLE extends 'cancel'
-  ? PropsWithModeCancel &
-      Omit<AsTagAttribute<'span'>, keyof PropsWithModeCancel>
-  : {} & ROLE extends 'link'
-  ? PropsWithModeLink & Omit<AsTagAttribute<'a'>, keyof PropsWithModeLink>
-  : {} & ROLE extends 'info'
-  ? PropsWithModeInfo & Omit<AsTagAttribute<'span'>, keyof PropsWithModeInfo>
-  : {};
+    ? PropsWithModeCheck &
+        Omit<AsTagAttribute<'button'>, keyof PropsWithModeCheck>
+    : {} & ROLE extends 'cancel'
+      ? PropsWithModeCancel &
+          Omit<AsTagAttribute<'span'>, keyof PropsWithModeCancel>
+      : {} & ROLE extends 'link'
+        ? PropsWithModeLink & Omit<AsTagAttribute<'a'>, keyof PropsWithModeLink>
+        : {} & ROLE extends 'info'
+          ? PropsWithModeInfo &
+              Omit<AsTagAttribute<'span'>, keyof PropsWithModeInfo>
+          : {};
 
 type TagRender = <ROLE extends TagPropMode>(
   props: Props<ROLE>,

@@ -23,14 +23,14 @@ export const TableVariantWithOnRowHover = () => {
     ),
   }));
 
-  const columns: TableColumn<typeof rows[number]>[] = [
+  const columns: TableColumn<(typeof rows)[number]>[] = [
     {
       title: 'Появится кнопка при наведении',
       accessor: 'button',
       align: 'center',
       width: 120,
     },
-    ...(tableData.columns as TableColumn<typeof rows[number]>[]),
+    ...(tableData.columns as TableColumn<(typeof rows)[number]>[]),
   ];
   const props = useVariants({ rows, columns });
 

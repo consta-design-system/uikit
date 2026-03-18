@@ -11,7 +11,7 @@ import { useVariants } from '../useVariants/useVariants';
 
 export const TableVariantWithHiddenColumn = () => {
   const [mock, setMock] = useState<
-    TableProps<typeof rowsForCustomTagLabelFunction[number]>
+    TableProps<(typeof rowsForCustomTagLabelFunction)[number]>
   >(withHiddenColumnTableMock);
   const [isHidden, setIsHidden] = useState<boolean>(true);
 

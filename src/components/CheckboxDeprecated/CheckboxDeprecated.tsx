@@ -9,15 +9,15 @@ import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttribut
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 export const checkboxPropSize = ['m', 'xs', 's', 'l'] as const;
-export type CheckboxPropSize = typeof checkboxPropSize[number];
+export type CheckboxPropSize = (typeof checkboxPropSize)[number];
 export const checkboxPropSizeDefault: CheckboxPropSize = checkboxPropSize[0];
 
 export const checkboxPropView = ['primary', 'ghost'] as const;
-export type CheckboxPropView = typeof checkboxPropView[number];
+export type CheckboxPropView = (typeof checkboxPropView)[number];
 export const checkboxPropViewDefault: CheckboxPropView = checkboxPropView[0];
 
 export const checkboxPropAlign = ['center', 'top'] as const;
-export type CheckboxPropAlign = typeof checkboxPropAlign[number];
+export type CheckboxPropAlign = (typeof checkboxPropAlign)[number];
 export const checkboxPropAlignDefault: CheckboxPropAlign = checkboxPropAlign[0];
 
 export type CheckboxPropOnChange = (

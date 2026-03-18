@@ -14,7 +14,7 @@ import {
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
 export const SelectPopoverForm = ['default', 'brick', 'round'] as const;
-export type SelectPopoverPropForm = typeof SelectPopoverForm[number];
+export type SelectPopoverPropForm = (typeof SelectPopoverForm)[number];
 export const defaultSelectPopoverPropForm = SelectPopoverForm[0];
 
 type Props = PropsWithJsxAttributes<{

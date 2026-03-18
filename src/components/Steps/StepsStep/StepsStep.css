@@ -9,12 +9,13 @@
   border: none;
   font-family: var(--font);
   font-size: var(--step-text-size);
-  line-height: var(--line-height-text-s);
   line-height: var(--step-text-line-height);
   text-align: left;
   white-space: nowrap;
   cursor: pointer;
-  transition: color 0.2s, font-weight 0.2s;
+  transition:
+    color 0.2s,
+    font-weight 0.2s;
   gap: var(--space-2xs);
 
   &::after {
@@ -25,7 +26,9 @@
     height: 2px;
     background-color: var(--color-control-bg-ghost);
     border-radius: var(--control-radius);
-    transition: background-color 0.2s, opacity 0.2s;
+    transition:
+      background-color 0.2s,
+      opacity 0.2s;
   }
 
   &:hover {

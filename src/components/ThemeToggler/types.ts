@@ -5,7 +5,7 @@ import { Direction } from '##/components/Popover';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const themeTogglerPropSize = ['m', 'l', 's', 'xs'] as const;
-export type ThemeTogglerPropSize = typeof themeTogglerPropSize[number];
+export type ThemeTogglerPropSize = (typeof themeTogglerPropSize)[number];
 export const themeTogglerPropSizeDefault: ThemeTogglerPropSize =
   themeTogglerPropSize[0];
 

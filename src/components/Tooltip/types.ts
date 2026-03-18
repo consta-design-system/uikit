@@ -4,7 +4,7 @@ import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 import { Direction, PositioningProps } from '../Popover/Popover';
 
 export const tooltipPropSizes = ['m', 's', 'l'] as const;
-export type TooltipPropSize = typeof tooltipPropSizes[number];
+export type TooltipPropSize = (typeof tooltipPropSizes)[number];
 export const tooltipPropSizesDefault: TooltipPropSize = tooltipPropSizes[0];
 
 export const tooltipPropStatus = [
@@ -13,7 +13,7 @@ export const tooltipPropStatus = [
   'success',
   'warning',
 ] as const;
-export type TooltipPropStatus = typeof tooltipPropStatus[number];
+export type TooltipPropStatus = (typeof tooltipPropStatus)[number];
 
 export type TooltipProps = PropsWithJsxAttributes<
   {

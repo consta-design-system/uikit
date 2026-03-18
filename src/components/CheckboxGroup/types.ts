@@ -17,22 +17,22 @@ export type CheckboxGroupDefaultItem = {
 
 export const checkboxGroupPropDirections = ['column', 'row'] as const;
 export type CheckboxGroupPropDirection =
-  typeof checkboxGroupPropDirections[number];
+  (typeof checkboxGroupPropDirections)[number];
 export const checkboxGroupDefaultDirection: CheckboxGroupPropDirection =
   checkboxGroupPropDirections[0];
 
 export const checkboxGroupPropSizes = ['m', 'xs', 's', 'l'] as const;
-export type CheckboxGroupPropSize = typeof checkboxGroupPropSizes[number];
+export type CheckboxGroupPropSize = (typeof checkboxGroupPropSizes)[number];
 export const checkboxGroupDefaultSize: CheckboxGroupPropSize =
   checkboxGroupPropSizes[0];
 
 export const checkboxGroupPropViews = ['primary', 'ghost'] as const;
-export type CheckboxGroupPropView = typeof checkboxGroupPropViews[number];
+export type CheckboxGroupPropView = (typeof checkboxGroupPropViews)[number];
 export const checkboxGroupDefaultView: CheckboxGroupPropView =
   checkboxGroupPropViews[0];
 
 export const checkboxGroupPropAlign = ['center', 'top'] as const;
-export type CheckboxGroupPropAlign = typeof checkboxGroupPropAlign[number];
+export type CheckboxGroupPropAlign = (typeof checkboxGroupPropAlign)[number];
 export const checkboxGroupDefaultAlign: CheckboxGroupPropAlign =
   checkboxGroupPropAlign[0];
 

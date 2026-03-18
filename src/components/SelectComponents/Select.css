@@ -270,8 +270,8 @@
       .Select-Control,
     &_view_default.Select-SelectContainer_form_clearClear.Select-SelectContainer_focused
       .Select-Control {
-      box-shadow: var(--control-border-width) 0
-          var(--color-control-bg-border-focus),
+      box-shadow:
+        var(--control-border-width) 0 var(--color-control-bg-border-focus),
         calc(-1 * var(--control-border-width)) 0
           var(--color-control-bg-border-focus);
     }
@@ -387,7 +387,10 @@
     font-weight: var(--font-weight-text-regular);
     line-height: calc(var(--input-height) - var(--control-border-width));
     cursor: pointer;
-    transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+    transition:
+      border-color 0.15s,
+      box-shadow 0.15s,
+      background-color 0.15s;
 
     &:focus {
       outline: none;

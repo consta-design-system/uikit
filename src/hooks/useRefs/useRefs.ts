@@ -9,8 +9,8 @@ type Return<
 > = E extends string[]
   ? Record<E[number], React.RefObject<T>>
   : E extends readonly string[]
-  ? Record<E[number], React.RefObject<T>>
-  : Array<React.RefObject<T>>;
+    ? Record<E[number], React.RefObject<T>>
+    : Array<React.RefObject<T>>;
 
 export const useRefs = <
   T,

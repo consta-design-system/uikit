@@ -57,7 +57,9 @@
   border-radius: var(--field-control-layout-border-radius);
   font-size: var(--field-control-layout-text-size);
   line-height: var(--field-control-layout-text-line-height);
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 
   &_disabled {
     --field-control-layout-placeholder-color: var(--color-control-typo-disable);

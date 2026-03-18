@@ -6,13 +6,13 @@ import { Direction } from '../Popover';
 import { ActiveButton } from './useSlider/helper';
 
 export const sliderPropStatus = ['alert', 'warning', 'success'] as const;
-export type SliderPropStatus = typeof sliderPropStatus[number];
+export type SliderPropStatus = (typeof sliderPropStatus)[number];
 export const sliderPropStatusDefault = sliderPropStatus[0];
 
 export type SliderPropView = 'default' | 'division';
 
 export const sliderPropSize = ['s', 'xs', 'm', 'l'] as const;
-export type SliderPropSize = typeof sliderPropSize[number];
+export type SliderPropSize = (typeof sliderPropSize)[number];
 export const sliderPropSizeDefault: SliderPropSize = sliderPropSize[0];
 
 export type SliderValue<RANGE> = RANGE extends true ? [number, number] : number;

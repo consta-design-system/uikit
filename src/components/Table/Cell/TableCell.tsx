@@ -8,9 +8,9 @@ import { TableColumn, TableRow } from '../Table';
 const cnTableCell = cn('TableCell');
 
 export const verticalAligns = ['top', 'center', 'bottom'] as const;
-export type VerticalAlign = typeof verticalAligns[number];
+export type VerticalAlign = (typeof verticalAligns)[number];
 export const horizontalAligns = ['left', 'center', 'right'] as const;
-export type HorizontalAlign = typeof horizontalAligns[number];
+export type HorizontalAlign = (typeof horizontalAligns)[number];
 
 type Props<T extends TableRow> = {
   column: TableColumn<T> & {

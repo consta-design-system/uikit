@@ -6,7 +6,7 @@ import { cnDeprecated } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export const loaderPropSize = ['m', 's', 'xs'] as const;
-export type LoaderPropSize = typeof loaderPropSize[number];
+export type LoaderPropSize = (typeof loaderPropSize)[number];
 export const loaderPropSizeDefault: LoaderPropSize = loaderPropSize[0];
 
 type Props = {

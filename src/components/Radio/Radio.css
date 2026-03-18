@@ -14,7 +14,9 @@
     border: var(--control-border-width) solid;
     border-radius: 50%;
     cursor: pointer;
-    transition: border-color 0.15s, background-color 0.15s;
+    transition:
+      border-color 0.15s,
+      background-color 0.15s;
     -webkit-appearance: none;
     flex-shrink: 0;
 
@@ -28,7 +30,10 @@
       height: var(--radio-size);
       border-radius: 50%;
       opacity: 0;
-      transition: background-color 0.15s, opacity 0.15s, transform 0.15s;
+      transition:
+        background-color 0.15s,
+        opacity 0.15s,
+        transform 0.15s;
       transform: scale(0, 0);
     }
   }
@@ -163,7 +168,7 @@
     }
 
     &_top {
-      align-items: top;
+      align-items: start;
 
       .Radio-Input {
         margin-top: var(--align-top-margin);

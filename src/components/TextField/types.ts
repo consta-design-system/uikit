@@ -9,7 +9,7 @@ export type TextFieldPropName = string;
 export type TextFieldPropId = string | number;
 
 export const textFieldPropSize = ['m', 'xs', 's', 'l'] as const;
-export type TextFieldPropSize = typeof textFieldPropSize[number];
+export type TextFieldPropSize = (typeof textFieldPropSize)[number];
 export const textFieldPropSizeDefault: TextFieldPropSize = textFieldPropSize[0];
 
 export type TextFieldPropOnChange = (
@@ -23,7 +23,7 @@ export type TextFieldOnChangeArguments = {
 };
 
 export const textFieldPropView = ['default', 'clear'] as const;
-export type TextFieldPropView = typeof textFieldPropView[number];
+export type TextFieldPropView = (typeof textFieldPropView)[number];
 export const textFieldPropViewDefault: TextFieldPropView = textFieldPropView[0];
 
 export const textFieldPropForm = [
@@ -42,11 +42,11 @@ export const textFieldPropForm = [
   'clearBrick',
   'clearClear',
 ] as const;
-export type TextFieldPropForm = typeof textFieldPropForm[number];
+export type TextFieldPropForm = (typeof textFieldPropForm)[number];
 export const textFieldPropFormDefault: TextFieldPropForm = textFieldPropForm[0];
 
 export const textFieldPropStatus = ['alert', 'success', 'warning'] as const;
-export type TextFieldPropStatus = typeof textFieldPropStatus[number];
+export type TextFieldPropStatus = (typeof textFieldPropStatus)[number];
 
 export type TextFieldPropsTextareaType<TYPE> = TYPE extends 'textarea'
   ?

@@ -4,7 +4,7 @@
   align-items: center;
   box-sizing: border-box;
   gap: var(--space-xs);
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 
   &-Slot {
     display: flex;

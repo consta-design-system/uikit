@@ -115,7 +115,10 @@
     min-height: var(--input-height);
     font-family: var(--font-primary);
     font-weight: var(--font-weight-text-regular);
-    transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+    transition:
+      border-color 0.15s,
+      box-shadow 0.15s,
+      background-color 0.15s;
 
     &_disabled {
       --counter-button-background: var(--color-control-bg-disable);
@@ -209,8 +212,8 @@
         outline: none;
 
         &.TextField-InputContainer_form_clearClear {
-          box-shadow: var(--control-border-width) 0
-              var(--color-control-bg-border-focus),
+          box-shadow:
+            var(--control-border-width) 0 var(--color-control-bg-border-focus),
             calc(-1 * var(--control-border-width)) 0
               var(--color-control-bg-border-focus);
         }
@@ -352,13 +355,15 @@
           (
               var(--input-height) - (var(--control-border-width) * 2) -
                 var(--line-height-text-m)
-            ) / 2
+            ) /
+            2
         );
         padding-bottom: calc(
           (
               var(--input-height) - (var(--control-border-width) * 2) -
                 var(--line-height-text-m)
-            ) / 2
+            ) /
+            2
         );
         line-height: var(--line-height-text-m);
       }

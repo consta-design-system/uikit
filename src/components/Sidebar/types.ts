@@ -2,7 +2,7 @@ import { AsTagAttribute } from '##/utils/types/AsTags';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 const sidebarPropPosition = ['right', 'bottom', 'left', 'top'] as const;
-export type SidebarPropPosition = typeof sidebarPropPosition[number];
+export type SidebarPropPosition = (typeof sidebarPropPosition)[number];
 
 export const sidebarPropSize = [
   's',
@@ -17,7 +17,7 @@ export const sidebarPropSize = [
   '3/4',
 ] as const;
 
-export type SidebarPropSize = typeof sidebarPropSize[number];
+export type SidebarPropSize = (typeof sidebarPropSize)[number];
 
 export type SidebarProps = PropsWithHTMLAttributesAndRef<
   {
@@ -57,8 +57,7 @@ export type SidebarActionsProps = {
 };
 
 export interface SidebarComponent
-  extends React.ForwardRefExoticComponent<SidebarProps>,
-    AsTagAttribute<'div'> {
+  extends React.ForwardRefExoticComponent<SidebarProps>, AsTagAttribute<'div'> {
   /**
    * @deprecated
    */

@@ -3,12 +3,12 @@ import React from 'react';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 export const avatarGroupPropSize = ['m', 's', 'xs', 'l'] as const;
-export type AvatarGroupPropSize = typeof avatarGroupPropSize[number];
+export type AvatarGroupPropSize = (typeof avatarGroupPropSize)[number];
 export const avatarGroupPropSizeDefault: AvatarGroupPropSize =
   avatarGroupPropSize[0];
 
 export const avatarGroupPropForm = ['round', 'brick', 'default'] as const;
-export type AvatarGroupPropForm = typeof avatarGroupPropForm[number];
+export type AvatarGroupPropForm = (typeof avatarGroupPropForm)[number];
 export const avatarGroupPropFormDefault: AvatarGroupPropForm =
   avatarGroupPropForm[0];
 

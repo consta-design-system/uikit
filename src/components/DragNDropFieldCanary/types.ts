@@ -92,7 +92,7 @@ export const dragNDropFieldInformerPropStatus = [
 ] as const;
 
 export type DragNDropFieldInformerPropStatus =
-  typeof dragNDropFieldInformerPropStatus[number];
+  (typeof dragNDropFieldInformerPropStatus)[number];
 
 export type DragNDropFieldInformerProps = PropsWithHTMLAttributes<
   {

@@ -89,7 +89,7 @@ export const rows = [
   },
 ];
 
-export const filters: Filters<typeof rows[number]> = [
+export const filters: Filters<(typeof rows)[number]> = [
   {
     id: 'olderThan2018',
     name: 'Старше 2018 года',
@@ -266,7 +266,7 @@ export const filters: Filters<typeof rows[number]> = [
   },
 ];
 
-export const customFilters: Filters<typeof rows[number]> = [
+export const customFilters: Filters<(typeof rows)[number]> = [
   {
     id: 'field',
     name: 'Месторождение: ',
@@ -341,7 +341,7 @@ export const customFilters: Filters<typeof rows[number]> = [
   },
 ];
 
-export const tableData: TableProps<typeof rows[number]> = {
+export const tableData: TableProps<(typeof rows)[number]> = {
   columns: [
     {
       title: 'Месторождение',
@@ -627,7 +627,7 @@ export const tableWithExpandableRowsData = {
 };
 
 export const tableWithMultiLevelHeadersData: TableProps<
-  typeof rowsForMultiLevelHeadersData[number]
+  (typeof rowsForMultiLevelHeadersData)[number]
 > = {
   columns: [
     {
@@ -728,7 +728,7 @@ const tableWithTrafficLightDataRows = [
 ];
 
 export const tableWithBadgeData: TableProps<
-  typeof tableWithTrafficLightDataRows[number]
+  (typeof tableWithTrafficLightDataRows)[number]
 > = {
   columns: [
     {
@@ -1105,7 +1105,7 @@ const rowsWithObjectFields = [
 ];
 
 export const tableDataWithRenderFn: TableProps<
-  typeof rowsWithObjectFields[number]
+  (typeof rowsWithObjectFields)[number]
 > = {
   columns: [
     {
@@ -1210,7 +1210,7 @@ export const tableDataWithRenderFn: TableProps<
 const cnCustomCell = cn('CustomCell');
 
 export const tableDataWithAdditionalClassName: TableProps<
-  typeof rowsWithObjectFields[number]
+  (typeof rowsWithObjectFields)[number]
 > = {
   columns: [
     {
@@ -1339,7 +1339,7 @@ export const partOfTableDataForCustomTagLabelFunction = {
 };
 
 export const withControlTableMock: TableProps<
-  typeof rowsForCustomTagLabelFunction[number]
+  (typeof rowsForCustomTagLabelFunction)[number]
 > = {
   columns: [
     {
@@ -1402,7 +1402,7 @@ export const withControlTableMock: TableProps<
 };
 
 export const withHiddenColumnTableMock: TableProps<
-  typeof rowsForCustomTagLabelFunction[number]
+  (typeof rowsForCustomTagLabelFunction)[number]
 > = {
   columns: [
     {
@@ -1452,7 +1452,7 @@ const rowsWithColSpan = [
   },
 ];
 
-export const withColSpan: TableProps<typeof rowsWithColSpan[number]> = {
+export const withColSpan: TableProps<(typeof rowsWithColSpan)[number]> = {
   columns: [
     {
       title: 'Имя',

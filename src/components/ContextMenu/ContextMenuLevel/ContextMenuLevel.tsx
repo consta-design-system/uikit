@@ -181,7 +181,7 @@ const ContextMenuLevelRender = (
       ...getItemAttributesProp(item),
       tabIndex: 0,
       onMouseEnter: onMouseEnter?.(item),
-    } as AsAttributes);
+    }) as AsAttributes;
 
   const getItemActive = (item: ContextMenuItemDefault) => {
     const key = getKey(item);

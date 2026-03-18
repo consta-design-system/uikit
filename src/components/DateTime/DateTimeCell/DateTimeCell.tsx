@@ -6,7 +6,7 @@ import { cn } from '../../../utils/bem';
 import { PropsWithJsxAttributes } from '../../../utils/types/PropsWithJsxAttributes';
 
 export const DateTimeCellPropRange = ['first', 'last', true, false] as const;
-export type DateTimeCellPropRange = typeof DateTimeCellPropRange[number];
+export type DateTimeCellPropRange = (typeof DateTimeCellPropRange)[number];
 
 export type DateTimeCellProps = PropsWithJsxAttributes<
   {

@@ -8,18 +8,18 @@ import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const listPropSize = ['m', 'xs', 's', 'l'] as const;
-export type ListPropSize = typeof listPropSize[number];
+export type ListPropSize = (typeof listPropSize)[number];
 export const defaultListPropSize = listPropSize[0];
 
 export const listPropInnerOffset = ['normal', 'increased'] as const;
-export type ListPropInnerOffset = typeof listPropInnerOffset[number];
+export type ListPropInnerOffset = (typeof listPropInnerOffset)[number];
 export const defaultListPropInnerOffset = listPropInnerOffset[0];
 
 export const listPropStatus = ['alert', 'success', 'warning'] as const;
-export type ListPropStatus = typeof listPropStatus[number];
+export type ListPropStatus = (typeof listPropStatus)[number];
 
 export const listPropForm = ['default', 'brick', 'round'] as const;
-export type ListPropForm = typeof listPropForm[number];
+export type ListPropForm = (typeof listPropForm)[number];
 export const defaultListPropForm = listPropForm[0];
 
 export type DefaultListGroup = {

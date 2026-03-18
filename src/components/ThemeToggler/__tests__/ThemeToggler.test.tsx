@@ -6,7 +6,7 @@ import { exampleThemesThree, exampleThemesTwo } from '../__mocks__/data.mock';
 import { ThemeToggler } from '../ThemeToggler';
 import { ThemeTogglerProps } from '../types';
 
-type Item = typeof exampleThemesTwo[number];
+type Item = (typeof exampleThemesTwo)[number];
 
 const defaultSetValue = jest.fn();
 const testId = 'ThemeToggler';

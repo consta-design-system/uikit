@@ -19,12 +19,12 @@
 
     &_alert {
       --informer-status-border-color: var(--color-bg-alert);
-      --informer-status-bg-color: rgba(235, 87, 87, 0.05);
+      --informer-status-bg-color: rgb(235 87 87 / 0.05);
     }
 
     &_warning {
       --informer-status-border-color: var(--color-bg-alert);
-      --informer-status-bg-color: rgba(243, 139, 0, 0.05);
+      --informer-status-bg-color: rgb(243 139 0 / 0.05);
     }
   }
 

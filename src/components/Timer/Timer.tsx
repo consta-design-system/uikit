@@ -7,7 +7,7 @@ import { PropsWithJsxAttributes } from '../../utils/types/PropsWithJsxAttributes
 import { ProgressSpin } from '../ProgressSpin/ProgressSpin';
 
 export const timerPropsSize = ['m', 's', 'l', 'xl', '2xl'] as const;
-export type TimerPropsSize = typeof timerPropsSize[number];
+export type TimerPropsSize = (typeof timerPropsSize)[number];
 export const timerPropsSizeDefault: TimerPropsSize = timerPropsSize[0];
 
 export type TimerProps = PropsWithJsxAttributes<{

@@ -17,7 +17,7 @@
   --file-color-scheme: var(--file-color-scheme-override, #0088a3);
   --file-color-archive: var(--file-color-archive-override, #9010d1);
   --file-extension-font-size: 8px;
-  --file-extension-bg-color: rgba(0, 0, 0, 0.5);
+  --file-extension-bg-color: rgb(0 0 0 / 0.5);
   --file-extension-letter-spacing: -0.125em;
   --file-border-radius: var(--control-radius);
   --file-typo-color: #fff;
@@ -64,7 +64,7 @@
     width: 100%;
     min-height: 0;
     background-color: var(--file-extension-bg-color);
-    font-family: 'Silkscreen', sans-serif;
+    font-family: Silkscreen, sans-serif;
     font-size: var(--file-extension-font-size);
     letter-spacing: var(--file-extension-letter-spacing);
     text-transform: uppercase;

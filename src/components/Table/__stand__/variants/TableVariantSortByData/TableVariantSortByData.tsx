@@ -47,7 +47,7 @@ export const TableVariantSortByData = () => {
       date: item.date.toString(),
     }));
 
-  const columns: TableColumn<typeof rows[number]>[] = [
+  const columns: TableColumn<(typeof rows)[number]>[] = [
     {
       title: `Id`,
       accessor: `id`,

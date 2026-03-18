@@ -56,7 +56,7 @@ const ChoiceGroupRender = (
     ...otherProps
   } = withDefaultGetters(props);
 
-  type Item = typeof items[number];
+  type Item = (typeof items)[number];
 
   const { getOnChange, getChecked } = useChoiceGroup<
     Item,

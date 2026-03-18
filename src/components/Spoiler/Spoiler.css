@@ -19,7 +19,7 @@
           height: min(100%, var(--space-6xl));
           background: linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0) 0%,
+            rgb(0 0 0 / 0) 0%,
             var(--color-bg-default) 100%
           );
           pointer-events: none;

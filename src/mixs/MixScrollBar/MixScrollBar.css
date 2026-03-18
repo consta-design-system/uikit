@@ -1,9 +1,10 @@
 .MixScrollBar {
-  --scrollbar-resizer-transparent-color: rgba(0, 0, 0, 0);
+  --scrollbar-resizer-transparent-color: rgb(0 0 0 / 0);
   --scrollbar-resizer-color: var(--color-control-typo-placeholder);
   --scrollbar-resizer-gap: 7;
   --scrollbar-thumb-color: var(--color-scroll-thumb);
-  --scrollbar-thumb-background: var(--scrollbar-thumb-color) 0%,
+  --scrollbar-thumb-background:
+    var(--scrollbar-thumb-color) 0%,
     var(--scrollbar-thumb-color) var(--webkit-scrollbar-size),
     var(--scrollbar-resizer-transparent-color) var(--webkit-scrollbar-size),
     var(--scrollbar-resizer-transparent-color) 100%;

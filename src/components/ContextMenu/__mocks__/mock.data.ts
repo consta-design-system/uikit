@@ -110,7 +110,7 @@ export const exampleItems: Item[] = [
 
 export type TestItem = {
   name: string;
-  group?: typeof groups[number]['id'];
+  group?: (typeof groups)[number]['id'];
 };
 
 export const testItems: TestItem[] = [

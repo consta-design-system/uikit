@@ -34,7 +34,7 @@ import { SelectLoader } from '../SelectLoader/SelectLoader';
 import { PropSize, RenderItemProps } from '../types';
 
 export const selectDropdownForm = ['default', 'brick', 'round'] as const;
-export type SelectDropdownPropForm = typeof selectDropdownForm[number];
+export type SelectDropdownPropForm = (typeof selectDropdownForm)[number];
 export const defaultSelectDropdownPropForm = selectDropdownForm[0];
 
 type Props<ITEM, GROUP> = PropsWithJsxAttributes<{

@@ -49,11 +49,14 @@ export const groupBy = <T, K extends keyof any>(
   array: T[],
   iteratee: (elem: T) => K,
 ) =>
-  array.reduce((result, value) => {
-    const key = iteratee(value);
+  array.reduce(
+    (result, value) => {
+      const key = iteratee(value);
 
-    return {
-      ...result,
-      [key]: result[key] ? [...result[key], value] : [value],
-    };
-  }, {} as Record<K, T[]>);
+      return {
+        ...result,
+        [key]: result[key] ? [...result[key], value] : [value],
+      };
+    },
+    {} as Record<K, T[]>,
+  );

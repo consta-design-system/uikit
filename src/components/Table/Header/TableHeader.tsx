@@ -28,7 +28,7 @@ type TableCSSCustomProperty = {
 };
 
 export const levelTypes = ['high', 'low', 'default'] as const;
-export type LevelType = typeof levelTypes[number];
+export type LevelType = (typeof levelTypes)[number];
 
 type Props<T extends TableRow> = {
   isStickyHeader: boolean;
