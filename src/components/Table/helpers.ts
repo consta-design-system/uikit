@@ -16,7 +16,7 @@ export const Order = {
   desc: 'desc',
 } as const;
 
-export type OrderType = typeof Order[keyof typeof Order];
+export type OrderType = (typeof Order)[keyof typeof Order];
 
 export type Position = {
   colSpan?: number;
@@ -160,7 +160,7 @@ export const transformColumns = <T extends TableRow>(
       const gridIndex = prevItem
         ? prevItem.position.gridIndex + (prevItem.position.colSpan || 1)
         : 0;
-      const mainId = level === 0 ? col++ : item.colId ?? 0;
+      const mainId = level === 0 ? col++ : (item.colId ?? 0);
 
       const handledItem: TableColumn<T> & {
         position: Position;

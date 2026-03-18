@@ -5,11 +5,11 @@ import { AsAttributes, AsTags } from '##/utils/types/AsTags';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const chipsPropSize = ['xs', 's', 'm', 'l'] as const;
-export type ChipsPropSize = typeof chipsPropSize[number];
+export type ChipsPropSize = (typeof chipsPropSize)[number];
 export const chipsPropSizeDefault: ChipsPropSize = 'm';
 
 export const chipsPropActiveView = ['primary', 'secondary'] as const;
-export type ChipsPropActiveView = typeof chipsPropActiveView[number];
+export type ChipsPropActiveView = (typeof chipsPropActiveView)[number];
 export const chipsPropActiveViewDefault: ChipsPropActiveView = 'primary';
 
 export type ChipsPropStatus = BadgePropStatus;

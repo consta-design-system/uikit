@@ -101,6 +101,7 @@ const ComboboxRender = <
     dropdownOpen,
     ignoreOutsideClicksRefs,
     dropdownViewportRef,
+    dropdownContainer,
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -361,6 +362,7 @@ const ComboboxRender = <
         itemsRefs={optionsRefs}
         virtualScroll={virtualScroll}
         onScrollToBottom={onScrollToBottom}
+        container={dropdownContainer}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

@@ -73,8 +73,10 @@ const minifiedBorderSizeMap: Record<BadgePropSize, number> = {
   l: 5,
 };
 
-export const getMinifiedBorderSize = (size: BadgePropSize, minified: boolean) =>
-  minified ? `${minifiedBorderSizeMap[size]}px` : undefined;
+export const getMinifiedBorderSize = (
+  size: BadgePropSize,
+  minified: boolean,
+) => (minified ? `${minifiedBorderSizeMap[size]}px` : undefined);
 
 export const getBgColor = (status: BadgePropStatus) =>
   status === 'disabled'

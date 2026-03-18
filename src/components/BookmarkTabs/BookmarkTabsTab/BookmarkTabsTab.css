@@ -7,13 +7,12 @@
   align-items: center;
   box-sizing: border-box;
   width: var(--bookmarks-tab-width);
-  min-width:
-    calc(
-      var(--bookmark-tabs-tab-close-size) +
+  min-width: calc(
+    var(--bookmark-tabs-tab-close-size) +
       var(--bookmark-tabs-tab-right-icon-size) +
       var(--bookmark-tabs-tab-left-icon-size) + var(--space-3xl) +
       var(--space-m)
-    );
+  );
   max-width: 200px;
   height: var(--bookmark-tabs-tab-size);
   max-height: 100%;
@@ -21,7 +20,9 @@
   background: none;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
 
   &:not(.BookmarkTabsTab_active) {
     border-bottom: 1px solid var(--color-bg-border);

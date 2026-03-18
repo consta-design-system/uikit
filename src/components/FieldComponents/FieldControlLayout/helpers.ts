@@ -175,13 +175,11 @@ export const getSlotsWidthStyles = (
     ] = `${sizes[index]}px`;
   }
 
-  style[
-    `--field-control-layout-${postfix}-slot-contents-width` as 'width'
-  ] = `${sizes.length ? sizes.reduce((a, b) => a + b) : 0}px`;
+  style[`--field-control-layout-${postfix}-slot-contents-width` as 'width'] =
+    `${sizes.length ? sizes.reduce((a, b) => a + b) : 0}px`;
 
-  style[
-    `--field-control-layout-${postfix}-slots-length` as 'width'
-  ] = `${sizes.length}`;
+  style[`--field-control-layout-${postfix}-slots-length` as 'width'] =
+    `${sizes.length}`;
 
   return style;
 };

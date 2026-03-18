@@ -5,9 +5,8 @@
 }
 
 .PaginationList-Item.Button.PaginationItem {
-  width:
-    calc(
-      var(--pagination-item-label-length) * var(--pagination-symbol-size) +
+  width: calc(
+    var(--pagination-item-label-length) * var(--pagination-symbol-size) +
       var(--pagination-item-ph) * 2
-    );
+  );
 }

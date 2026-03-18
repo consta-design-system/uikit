@@ -15,19 +15,19 @@ export type ChoiceGroupDefaultItem = {
 };
 
 export const choiceGroupForms = ['default', 'brick', 'round'] as const;
-export type ChoiceGroupPropForm = typeof choiceGroupForms[number];
+export type ChoiceGroupPropForm = (typeof choiceGroupForms)[number];
 export const choiceGroupDefaultForm: ChoiceGroupPropForm = 'default';
 
 export const choiceGroupSizes = ['xs', 's', 'm', 'l'] as const;
-export type ChoiceGroupPropSize = typeof choiceGroupSizes[number];
+export type ChoiceGroupPropSize = (typeof choiceGroupSizes)[number];
 export const choiceGroupDefaultSize: ChoiceGroupPropSize = 'm';
 
 export const choiceGroupViews = ['primary', 'ghost', 'secondary'] as const;
-export type ChoiceGroupPropView = typeof choiceGroupViews[number];
+export type ChoiceGroupPropView = (typeof choiceGroupViews)[number];
 export const choiceGroupDefaultView: ChoiceGroupPropView = 'primary';
 
 export const choiceGroupWidth = ['default', 'full'] as const;
-export type ChoiceGroupPropWidth = typeof choiceGroupWidth[number];
+export type ChoiceGroupPropWidth = (typeof choiceGroupWidth)[number];
 export const choiceGroupWidthDefault: ChoiceGroupPropWidth =
   choiceGroupWidth[0];
 

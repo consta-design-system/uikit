@@ -6,7 +6,7 @@ import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export const fileIconPropSize = ['m', 's'] as const;
-export type FileIconPropSize = typeof fileIconPropSize[number];
+export type FileIconPropSize = (typeof fileIconPropSize)[number];
 export const fileIconPropSizeDefault = fileIconPropSize[0];
 
 type Props = {

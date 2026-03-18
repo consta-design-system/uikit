@@ -84,6 +84,7 @@ const SelectMultipleRender = <
     selectAll,
     selectAllLabel,
     dropdownViewportRef,
+    dropdownContainer,
     ...otherProps
   } = propsWithDefault;
 
@@ -245,6 +246,7 @@ const SelectMultipleRender = <
         dropdownZIndexAtom={dropdownZIndexAtom}
         selectAllLabel={selectAllLabel}
         viewportRef={dropdownViewportRef}
+        container={dropdownContainer}
       />
     </>
   );

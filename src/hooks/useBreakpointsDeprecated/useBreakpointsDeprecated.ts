@@ -21,7 +21,7 @@ const defaultPoints = [
   '5xl',
 ] as const;
 
-type DefaultPoints = typeof defaultPoints[number];
+type DefaultPoints = (typeof defaultPoints)[number];
 
 const defaultMap: Map<DefaultPoints> = {
   '5xs': 320,

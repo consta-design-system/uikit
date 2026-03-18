@@ -70,7 +70,7 @@ const defaultFilters = [
   },
 ] as Filters<Row>;
 
-type Row = typeof rows[number];
+type Row = (typeof rows)[number];
 
 const defaultProps: Props<Row> = {
   columns: [
@@ -216,7 +216,7 @@ describe('Компонент Table', () => {
           count: 200,
         },
       ];
-      const columns: TableColumn<typeof rows[number]>[] = [
+      const columns: TableColumn<(typeof rows)[number]>[] = [
         {
           accessor: 'name',
           title: 'Название',
@@ -383,7 +383,7 @@ describe('Компонент Table', () => {
 
     describe('Проверка типа сортировки по умолчанию: column.order', () => {
       it('Сортировка по умолчанию: без передачи параметра order, не сортируется', () => {
-        const columns: TableColumn<typeof rows[number]>[] = [
+        const columns: TableColumn<(typeof rows)[number]>[] = [
           {
             title: '#',
             accessor: 'id',
@@ -401,7 +401,7 @@ describe('Компонент Table', () => {
       });
 
       it('Сортировка по умолчанию: по возрастанию', () => {
-        const columns: TableColumn<typeof rows[number]>[] = [
+        const columns: TableColumn<(typeof rows)[number]>[] = [
           {
             title: '#',
             accessor: 'id',
@@ -420,7 +420,7 @@ describe('Компонент Table', () => {
       });
 
       it('Сортировка по умолчанию: по убыванию', () => {
-        const columns: TableColumn<typeof rows[number]>[] = [
+        const columns: TableColumn<(typeof rows)[number]>[] = [
           {
             title: '#',
             accessor: 'id',
@@ -440,7 +440,7 @@ describe('Компонент Table', () => {
     });
 
     it('Проверка кнопки сортировки в хедере колонки', () => {
-      const columns: TableColumn<typeof rows[number]>[] = [
+      const columns: TableColumn<(typeof rows)[number]>[] = [
         {
           title: '#',
           accessor: 'id',
@@ -471,7 +471,7 @@ describe('Компонент Table', () => {
 
     it('Проверка вызова метода column.sortFn', () => {
       const sortFn = jest.fn((a, b) => (a < b ? -1 : 1));
-      const columns: TableColumn<typeof rows[number]>[] = [
+      const columns: TableColumn<(typeof rows)[number]>[] = [
         {
           title: '#',
           accessor: 'id',
@@ -643,7 +643,7 @@ describe('Компонент Table', () => {
         },
       ];
 
-      const props: Props<typeof rows[number]> = {
+      const props: Props<(typeof rows)[number]> = {
         columns: [
           {
             accessor: 'name',

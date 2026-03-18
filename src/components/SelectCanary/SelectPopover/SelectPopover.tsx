@@ -14,7 +14,7 @@ import {
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
 export const SelectPopoverForm = ['default', 'brick', 'round'] as const;
-export type SelectPopoverPropForm = typeof SelectPopoverForm[number];
+export type SelectPopoverPropForm = (typeof SelectPopoverForm)[number];
 export const defaultSelectPopoverPropForm = SelectPopoverForm[0];
 
 type Props = PropsWithJsxAttributes<{
@@ -27,6 +27,7 @@ type Props = PropsWithJsxAttributes<{
   children: React.ReactNode;
   onMount: (isMount: boolean) => void;
   viewportRef?: React.RefObject<HTMLElement>;
+  container?: Element;
 }>;
 
 export const SelectPopover = reatomComponent<Props>((props) => {
@@ -41,6 +42,7 @@ export const SelectPopover = reatomComponent<Props>((props) => {
     anchorRef,
     children,
     onMount,
+    container,
     ...otherProps
   } = props;
 
@@ -62,6 +64,7 @@ export const SelectPopover = reatomComponent<Props>((props) => {
           <Popover
             {...otherProps}
             anchorRef={anchorRef}
+            container={container}
             direction="downStartLeft"
             possibleDirections={[
               'downStartLeft',

@@ -11,7 +11,11 @@
 }
 
 .TextFieldTypeNumber_incrementButtons.FieldControlLayout_view_default {
-  &:not(.FieldControlLayout_form_brickRound, .FieldControlLayout_form_clearRound, .FieldControlLayout_form_round) {
+  &:not(
+    .FieldControlLayout_form_brickRound,
+    .FieldControlLayout_form_clearRound,
+    .FieldControlLayout_form_round
+  ) {
     padding-right: 0;
   }
 }

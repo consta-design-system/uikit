@@ -45,7 +45,7 @@ import {
 } from '../DatePicker';
 
 const localeProp = ['ru', 'en-US', 'zh-CN', 'es'] as const;
-type LocaleProp = typeof localeProp[number];
+type LocaleProp = (typeof localeProp)[number];
 const localeDefault: LocaleProp = localeProp[0];
 
 const localeMap: Record<LocaleProp, Locale> = {

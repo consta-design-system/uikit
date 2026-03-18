@@ -9,17 +9,17 @@ import {
 } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const paginationPropForm = ['default', 'brick', 'round'] as const;
-export type PaginationPropForm = typeof paginationPropForm[number];
+export type PaginationPropForm = (typeof paginationPropForm)[number];
 export const paginationPropFormDefault: PaginationPropForm =
   paginationPropForm[0];
 
 export const paginationPropSize = ['m', 'xs', 's', 'l'] as const;
-export type PaginationPropSize = typeof paginationPropSize[number];
+export type PaginationPropSize = (typeof paginationPropSize)[number];
 export const paginationPropSizeDefault: PaginationPropSize =
   paginationPropSize[0];
 
 export const paginationPropType = ['default', 'input'] as const;
-export type PaginationPropType = typeof paginationPropType[number];
+export type PaginationPropType = (typeof paginationPropType)[number];
 export const paginationPropTypeDefault: PaginationPropType =
   paginationPropType[0];
 

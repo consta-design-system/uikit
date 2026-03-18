@@ -28,7 +28,7 @@
   &-Content {
     overflow: hidden;
     flex: 1;
-    word-wrap: break-word;
+    overflow-wrap: break-word;
 
     & > .Text:not(:first-child) {
       margin-top: var(--space-2xs);

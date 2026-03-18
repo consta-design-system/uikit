@@ -9,7 +9,10 @@
   max-width: var(--layout-max-width);
   min-height: var(--layout-min-height);
   max-height: var(--layout-max-height);
-  transition: flex 0.3s, width 0.3s, height 0.3s;
+  transition:
+    flex 0.3s,
+    width 0.3s,
+    height 0.3s;
 
   &_direction {
     &_row {
@@ -26,6 +29,9 @@
     min-width: var(--layout-min-width);
     min-height: var(--layout-min-height);
     background-color: var(--layout-bg-color);
-    transition: flex 0.3s, width 0.3s, height 0.3s;
+    transition:
+      flex 0.3s,
+      width 0.3s,
+      height 0.3s;
   }
 }

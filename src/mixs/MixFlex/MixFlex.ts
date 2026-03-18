@@ -11,7 +11,7 @@ export const mixFlexPropAlign = [
   'baseline',
   'stretch',
 ] as const;
-export type MixFlexPropAlign = typeof mixFlexPropAlign[number];
+export type MixFlexPropAlign = (typeof mixFlexPropAlign)[number];
 
 export const mixFlexPropJustify = [
   'flex-start',
@@ -21,13 +21,13 @@ export const mixFlexPropJustify = [
   'space-around',
   'space-evenly',
 ] as const;
-export type MixFlexPropJustify = typeof mixFlexPropJustify[number];
+export type MixFlexPropJustify = (typeof mixFlexPropJustify)[number];
 
 export const mixFlexPropFlex = ['flex', 'inline-flex'] as const;
-export type MixFlexPropFlex = typeof mixFlexPropFlex[number];
+export type MixFlexPropFlex = (typeof mixFlexPropFlex)[number];
 
 export const mixFlexPropWrap = ['nowrap', 'wrap', 'wrap-reverse'] as const;
-export type MixFlexPropWrap = typeof mixFlexPropWrap[number];
+export type MixFlexPropWrap = (typeof mixFlexPropWrap)[number];
 
 export const mixFlexPropDirection = [
   'row',
@@ -35,7 +35,7 @@ export const mixFlexPropDirection = [
   'column',
   'column-reverse',
 ] as const;
-export type MixFlexPropDirection = typeof mixFlexPropDirection[number];
+export type MixFlexPropDirection = (typeof mixFlexPropDirection)[number];
 
 export type CnMixFlexProps = {
   align?: MixFlexPropAlign;

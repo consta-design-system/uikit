@@ -75,7 +75,7 @@ const Variants = () => {
 
   const [items, setItems] = useState<Item[]>(exampleItems);
 
-  const onSwitch = (item: typeof exampleItems[number]) => {
+  const onSwitch = (item: (typeof exampleItems)[number]) => {
     const itemIndex = items.findIndex((v) => v.label === item.label);
     const newItems = Array.from(items);
     newItems.splice(itemIndex, 1, {
@@ -112,56 +112,56 @@ const Variants = () => {
     return 0;
   };
 
-  const getItemGroupId = (item: typeof exampleItems[number]) => {
+  const getItemGroupId = (item: (typeof exampleItems)[number]) => {
     if (withGroup) {
       return item.groupId;
     }
     return undefined;
   };
 
-  const getGroupLabel = (group: typeof groups[number]) => {
+  const getGroupLabel = (group: (typeof groups)[number]) => {
     if (withGroupLabel) {
       return group.label;
     }
     return undefined;
   };
 
-  const getItemSubMenu = (item: typeof exampleItems[number]) => {
+  const getItemSubMenu = (item: (typeof exampleItems)[number]) => {
     if (withSubMenu) {
       return item.subMenu;
     }
     return undefined;
   };
 
-  const getItemDisabled = (item: typeof exampleItems[number]) => {
+  const getItemDisabled = (item: (typeof exampleItems)[number]) => {
     if (disabled) {
       return item.disabled;
     }
     return undefined;
   };
 
-  const getItemLeftIcon = (item: typeof exampleItems[number]) => {
+  const getItemLeftIcon = (item: (typeof exampleItems)[number]) => {
     if (withLeftIcon) {
       return item.leftIcon;
     }
     return undefined;
   };
 
-  const getItemRightIcon = (item: typeof exampleItems[number]) => {
+  const getItemRightIcon = (item: (typeof exampleItems)[number]) => {
     if (withRightIcon) {
       return item.leftIcon;
     }
     return undefined;
   };
 
-  const getItemRightSide = (item: typeof exampleItems[number]) => {
+  const getItemRightSide = (item: (typeof exampleItems)[number]) => {
     if (withRightSide) {
       return renderRightSide(item, size, onSwitch, getItemDisabled);
     }
     return undefined;
   };
 
-  const getItemLeftSide = (item: typeof exampleItems[number]) => {
+  const getItemLeftSide = (item: (typeof exampleItems)[number]) => {
     if (withLeftSide) {
       return renderRightSide(item, size, onSwitch, getItemDisabled);
     }

@@ -3,8 +3,16 @@ module.exports = {
   plugins: ['stylelint-order', 'stylelint-prettier'],
   rules: {
     'prettier/prettier': true,
-    'color-named': 'never',
     'no-descending-specificity': null,
+    'selector-class-pattern': null,
+    'keyframes-name-pattern': null,
+    'custom-property-pattern': null,
+    'alpha-value-notation': 'number',
+    'value-keyword-case': null,
+    'declaration-block-no-redundant-longhand-properties': null,
+    'property-no-vendor-prefix': null,
+    'selector-not-notation': null,
+    'block-no-redundant-nested-style-rules': null,
     'selector-pseudo-class-no-unknown': [
       true,
       { ignorePseudoClasses: ['focus-visible', 'global'] },
@@ -17,7 +25,6 @@ module.exports = {
       'never',
       { ignore: ['after-declaration'] },
     ],
-    'string-quotes': 'single',
     'order/order': ['custom-properties', 'declarations', 'rules'],
     'at-rule-no-unknown': [
       true,

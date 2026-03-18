@@ -44,10 +44,9 @@
       --checkbox-checked-background: var(--color-control-bg-primary);
       --checkbox-checked-check: var(--color-control-typo-primary);
       --checkbox-checked-border-hover: var(--color-control-bg-primary-hover);
-      --checkbox-checked-background-hover:
-        var(
-          --color-control-bg-primary-hover
-        );
+      --checkbox-checked-background-hover: var(
+        --color-control-bg-primary-hover
+      );
     }
 
     &_ghost {
@@ -72,7 +71,10 @@
         background-color: var(--checkbox-checked-check);
         border: none;
         opacity: 1;
-        transition: opacity 0.15s, transform 0.15s, background-color 0.08s 0.04s;
+        transition:
+          opacity 0.15s,
+          transform 0.15s,
+          background-color 0.08s 0.04s;
         transform: rotate(0) translate(0, -50%);
       }
     }
@@ -107,7 +109,7 @@
     }
 
     &_top {
-      align-items: top;
+      align-items: start;
 
       .Checkbox-Input {
         margin-top: var(--space-3xs);
@@ -130,12 +132,13 @@
     margin: 0;
     padding: 0;
     background-color: transparent;
-    border:
-      var(--control-border-width) solid
+    border: var(--control-border-width) solid
       var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
     cursor: pointer;
-    transition: border-color 0.15s, background-color 0.15s;
+    transition:
+      border-color 0.15s,
+      background-color 0.15s;
     flex-shrink: 0;
     -webkit-appearance: none;
 
@@ -148,14 +151,15 @@
       width: calc(var(--checkbox-size) * 0.6);
       height: calc(var(--checkbox-size) * 0.35);
       background-color: var(--color-control-bg-affect);
-      border-left:
-        var(--checkbox-arrow-width) solid
+      border-left: var(--checkbox-arrow-width) solid
         var(--checkbox-checked-check);
-      border-bottom:
-        var(--checkbox-arrow-width) solid
+      border-bottom: var(--checkbox-arrow-width) solid
         var(--checkbox-checked-check);
       opacity: 0;
-      transition: opacity 0.15s, transform 0.15s, background-color 0.08s;
+      transition:
+        opacity 0.15s,
+        transform 0.15s,
+        background-color 0.08s;
       transform: rotate(-50deg) scale(0, 1);
       transform-origin: 0 0;
     }

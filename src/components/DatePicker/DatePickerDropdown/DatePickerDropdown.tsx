@@ -53,6 +53,7 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
     timeFor?: 'start' | 'end';
     disableDates?: DateTimePropDisableDates;
     viewportRef?: React.RefObject<HTMLElement>;
+    container?: Element;
   },
   HTMLDivElement
 >;
@@ -81,6 +82,7 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef(
       zIndex,
       renderAdditionalControls,
       viewportRef,
+      container,
       ...otherProps
     } = props;
 
@@ -129,6 +131,7 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef(
               role="listbox"
               onSetDirection={setDirection}
               viewportRef={viewportRef}
+              container={container}
             >
               <DateTime {...otherProps} onMove={onMove} />
               {visibleAdditionalControls && (

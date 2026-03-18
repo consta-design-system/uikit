@@ -487,7 +487,7 @@ describe(`Компонент ${testId}`, () => {
         getItemAttributes: () =>
           ({
             'data-testid': 'test',
-          } as React.HTMLAttributes<HTMLDivElement>),
+          }) as React.HTMLAttributes<HTMLDivElement>,
       });
       expect(getItem()).toHaveAttribute('data-testid', 'test');
     });

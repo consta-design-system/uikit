@@ -50,7 +50,7 @@ const ThemeTogglerRender = (
     multiple: false,
   });
 
-  type Item = typeof items[number];
+  type Item = (typeof items)[number];
 
   const iconSize = iconSizeMap[size];
   const contextMenuSize = contextMenuSizeMap[size];

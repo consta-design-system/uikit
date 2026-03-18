@@ -7,11 +7,11 @@ import {
 } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const collapsePropSize = ['m', 'l', 's', 'xs', '2xs'] as const;
-export type CollapsePropSize = typeof collapsePropSize[number];
+export type CollapsePropSize = (typeof collapsePropSize)[number];
 export const collapsePropSizeDefault = collapsePropSize[0];
 
 export const collapsePropForm = ['brick', 'default', 'round'] as const;
-export type CollapsePropForm = typeof collapsePropForm[number];
+export type CollapsePropForm = (typeof collapsePropForm)[number];
 export const collapsePropFormDefault = collapsePropForm[0];
 
 export const collapsePropView = [
@@ -20,7 +20,7 @@ export const collapsePropView = [
   'primary',
   'secondary',
 ] as const;
-export type CollapsePropView = typeof collapsePropView[number];
+export type CollapsePropView = (typeof collapsePropView)[number];
 export const collapsePropViewDefault = collapsePropView[0];
 
 export const collapsePropHorizontalSpace = [
@@ -38,10 +38,11 @@ export const collapsePropHorizontalSpace = [
   '2xs',
 ] as const;
 export type CollapsePropHorizontalSpace =
-  typeof collapsePropHorizontalSpace[number];
+  (typeof collapsePropHorizontalSpace)[number];
 
 export const collapsePropIconPosition = ['left', 'right'] as const;
-export type CollapsePropIconPosition = typeof collapsePropIconPosition[number];
+export type CollapsePropIconPosition =
+  (typeof collapsePropIconPosition)[number];
 export const collapsePropIconPositionDefault = collapsePropIconPosition[0];
 
 export const collapseIconPropDirection = [
@@ -55,7 +56,7 @@ export const collapseIconPropDirection = [
   'downLeft',
 ] as const;
 export type CollapseIconPropDirection =
-  typeof collapseIconPropDirection[number];
+  (typeof collapseIconPropDirection)[number];
 
 export type CollapseIconProps = PropsWithHTMLAttributes<
   {
@@ -78,7 +79,7 @@ export const collapsePropCloseDirectionIconDefault =
 
 export const collapsePropIconView = ['clear', 'ghost'] as const;
 export const collapsePropIconViewDefault = collapsePropIconView[0];
-export type CollapsePropIconView = typeof collapsePropIconView[number];
+export type CollapsePropIconView = (typeof collapsePropIconView)[number];
 
 export type CollapseProps = PropsWithHTMLAttributesAndRef<
   {

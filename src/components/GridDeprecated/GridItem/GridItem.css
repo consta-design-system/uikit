@@ -1,3 +1,4 @@
+/* stylelint-disable */
 @define-mixin breakpoint {
   &col {
     &_1 {

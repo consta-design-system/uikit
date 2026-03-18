@@ -46,8 +46,8 @@ export const getTimeOptionsByFormat = (
     ss: timeOptions?.seconds,
   } as const;
 
-  const [hoursOptions, minutesOptions, secondsOptions] = markers.map((marker) =>
-    formatArray?.includes(marker) ? mapTimeOptions[marker] : [],
+  const [hoursOptions, minutesOptions, secondsOptions] = markers.map(
+    (marker) => (formatArray?.includes(marker) ? mapTimeOptions[marker] : []),
   ) as [
     TimeUnitOptions | undefined,
     TimeUnitOptions | undefined,

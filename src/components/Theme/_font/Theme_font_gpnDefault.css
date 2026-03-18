@@ -1,7 +1,7 @@
 /* Thin 100 */
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-Thin.woff2') format('woff2'),
     url('Inter-Thin.woff') format('woff');
@@ -12,7 +12,7 @@
 /* ExtraLight 200 */
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-ExtraLight.woff2') format('woff2'),
     url('Inter-ExtraLight.woff') format('woff');
@@ -23,7 +23,7 @@
 /* Light 300 */
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-Light.woff2') format('woff2'),
     url('Inter-Light.woff') format('woff');
@@ -34,7 +34,7 @@
 /* Regular 400 */
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-Regular.woff2') format('woff2'),
     url('Inter-Regular.woff') format('woff');
@@ -43,7 +43,7 @@
 }
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-Regular.woff2') format('woff2'),
     url('Inter-Regular.woff') format('woff');
@@ -54,7 +54,7 @@
 /* Medium 500 */
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-Medium.woff2') format('woff2'),
     url('Inter-Medium.woff') format('woff');
@@ -65,7 +65,7 @@
 /* SemiBold 600 */
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-SemiBold.woff2') format('woff2'),
     url('Inter-SemiBold.woff') format('woff');
@@ -76,7 +76,7 @@
 /* Bold 700 */
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-Bold.woff2') format('woff2'),
     url('Inter-Bold.woff') format('woff');
@@ -85,7 +85,7 @@
 }
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-Bold.woff2') format('woff2'),
     url('Inter-Bold.woff') format('woff');
@@ -96,7 +96,7 @@
 /* ExtraBold 800 */
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-ExtraBold.woff2') format('woff2'),
     url('Inter-ExtraBold.woff') format('woff');
@@ -107,7 +107,7 @@
 /* Black 900 */
 
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src:
     url('Inter-Black.woff2') format('woff2'),
     url('Inter-Black.woff') format('woff');
@@ -115,25 +115,22 @@
   font-style: normal;
 }
 
+/* Silkscreen Regular 400 */
+
+@font-face {
+  font-family: Silkscreen;
+  src:
+    url('Silkscreen-Regular.woff2') format('woff2'),
+    url('Silkscreen-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
 .Theme_font_gpnDefault {
   --font-primary:
-    'Inter',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Roboto',
-    'Oxygen',
-    'Ubuntu',
-    'Cantarell',
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+    'Inter', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   --font-mono:
-    source-code-pro,
-    Menlo,
-    Monaco,
-    Consolas,
-    'Courier New',
-    monospace;
+    source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
   font-family: var(--font-primary);
 }

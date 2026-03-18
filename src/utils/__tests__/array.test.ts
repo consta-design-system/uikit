@@ -43,7 +43,7 @@ describe('sortBy', () => {
       },
     ];
 
-    type DateType = typeof arr[number]['date'];
+    type DateType = (typeof arr)[number]['date'];
     const sortFn = (a: DateType, b: DateType): number => a.day - b.day;
 
     expect(sortBy(arr, 'date', 'asc', sortFn)).toEqual([

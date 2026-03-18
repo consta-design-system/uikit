@@ -2,7 +2,7 @@ import { DateRange } from '../../../utils/types/Date';
 import { PropsWithHTMLAttributesAndRef } from '../../../utils/types/PropsWithHTMLAttributes';
 
 export const dateTimePropView = ['classic', 'book', 'slider'] as const;
-export type DateTimePropView = typeof dateTimePropView[number];
+export type DateTimePropView = (typeof dateTimePropView)[number];
 export const dateTimePropViewDefault = dateTimePropView[0];
 
 export const dateTimePropType = [
@@ -12,7 +12,7 @@ export const dateTimePropType = [
   'time',
   'date-time',
 ] as const;
-export type DateTimePropType = typeof dateTimePropType[number];
+export type DateTimePropType = (typeof dateTimePropType)[number];
 export const dateTimePropTypeDefault = dateTimePropType[0];
 
 export type DateTimePropDisableDates = Array<Date | [Date, Date]>;
@@ -52,7 +52,7 @@ type LocaleWords = {
 export type DateTimePropLocale = Locale & LocaleWords;
 
 export const moveTypes = ['year', 'month', 'day', 'time'] as const;
-export type MoveType = typeof moveTypes[number];
+export type MoveType = (typeof moveTypes)[number];
 
 type DateTimePropTimeFor<TYPE> = TYPE extends 'date-time'
   ? 'start' | 'end'

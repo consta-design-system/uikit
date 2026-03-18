@@ -10,7 +10,7 @@ export function TableExampleSort() {
     { id: '3', letter: 'В' },
   ];
 
-  const columns: TableColumn<typeof rows[number]>[] = [
+  const columns: TableColumn<(typeof rows)[number]>[] = [
     {
       title: '№',
       accessor: 'id',

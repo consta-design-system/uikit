@@ -12,11 +12,11 @@ import { isNotNil, isString } from '##/utils/type-guards';
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
 export const bannerPropSize = ['xs', 's', 'm', 'l'] as const;
-export type BannerPropSize = typeof bannerPropSize[number];
+export type BannerPropSize = (typeof bannerPropSize)[number];
 export const bannerPropSizeDefault: BannerPropSize = bannerPropSize[2]; // 'm'
 
 export const bannerPropView = ['filled', 'ghost', 'transparent'] as const;
-export type BannerPropView = typeof bannerPropView[number];
+export type BannerPropView = (typeof bannerPropView)[number];
 export const bannerPropViewDefault: BannerPropView = bannerPropView[0]; // 'filled'
 
 export const bannerPropStatus = [
@@ -26,11 +26,11 @@ export const bannerPropStatus = [
   'success',
   'system',
 ] as const;
-export type BannerPropStatus = typeof bannerPropStatus[number];
+export type BannerPropStatus = (typeof bannerPropStatus)[number];
 export const bannerPropStatusDefault: BannerPropStatus = bannerPropStatus[0]; // 'normal'
 
 export const bannerPropForm = ['default', 'round', 'brick'] as const;
-export type BannerPropForm = typeof bannerPropForm[number];
+export type BannerPropForm = (typeof bannerPropForm)[number];
 export const bannerPropFormDefault: BannerPropForm = bannerPropForm[0]; // 'default'
 
 export type BannerProps = PropsWithJsxAttributes<{

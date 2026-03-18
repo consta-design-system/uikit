@@ -9,10 +9,9 @@
 
 .DateTimeCell {
   --bg-color: var(--color-control-bg-ghost);
-  --visible-height:
-    calc(
-      var(--date-time-cell-height) - (var(--date-time-cell-horizontal-gap) * 2)
-    );
+  --visible-height: calc(
+    var(--date-time-cell-height) - (var(--date-time-cell-horizontal-gap) * 2)
+  );
   position: relative;
   display: flex;
   justify-content: center;

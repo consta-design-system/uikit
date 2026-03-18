@@ -63,7 +63,7 @@ const BookmarkTabsRender = (
 
   const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
 
-  type Item = typeof items[number];
+  type Item = (typeof items)[number];
 
   const getItemActive = (item: Item) => {
     return value ? getItemKey(item) === getItemKey(value) : false;

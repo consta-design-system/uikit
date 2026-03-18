@@ -7,7 +7,7 @@ export type SwitchGroupDefaultItem = {
 };
 
 export const switchGroupDirections = ['column', 'row'] as const;
-export type SwitchGroupDirection = typeof switchGroupDirections[number];
+export type SwitchGroupDirection = (typeof switchGroupDirections)[number];
 export const switchGroupDefaultDirection: SwitchGroupDirection =
   switchGroupDirections[0];
 

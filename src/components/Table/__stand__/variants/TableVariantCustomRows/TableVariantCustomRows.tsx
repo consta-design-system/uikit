@@ -11,7 +11,7 @@ export const TableVariantCustomRows = () => {
   const copyColumns = [...columns].map((column) => {
     const copy = { ...column };
     if (copy.accessor === 'year') {
-      copy.renderCell = (row: typeof props.rows[number]): React.ReactNode => {
+      copy.renderCell = (row: (typeof props.rows)[number]): React.ReactNode => {
         return <h2>{row.year.value}</h2>;
       };
     }

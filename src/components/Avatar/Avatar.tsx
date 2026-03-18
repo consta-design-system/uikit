@@ -11,11 +11,11 @@ import {
 } from './helpers';
 
 export const avatarPropSize = ['m', 's', 'xs', 'l'] as const;
-export type AvatarPropSize = typeof avatarPropSize[number];
+export type AvatarPropSize = (typeof avatarPropSize)[number];
 export const avatarPropSizeDefault: AvatarPropSize = avatarPropSize[0];
 
 export const avatarPropForm = ['round', 'brick', 'default'] as const;
-export type AvatarPropForm = typeof avatarPropForm[number];
+export type AvatarPropForm = (typeof avatarPropForm)[number];
 export const avatarPropFormDefault: AvatarPropForm = avatarPropForm[0];
 
 type Props = {

@@ -31,7 +31,7 @@ import {
 } from '../useFlatSelect';
 
 export const FlatSelectListForm = ['default', 'brick', 'round'] as const;
-export type FlatSelectListPropForm = typeof FlatSelectListForm[number];
+export type FlatSelectListPropForm = (typeof FlatSelectListForm)[number];
 export const defaultFlatSelectListPropForm = FlatSelectListForm[0];
 
 type RenderItemProps<ITEM> = {

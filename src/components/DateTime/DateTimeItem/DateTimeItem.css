@@ -31,7 +31,10 @@
   font-size: var(--size-text-s);
   line-height: var(--date-time-item-height);
   text-transform: capitalize;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
     --bg-color: var(--item-bg-color-hover);

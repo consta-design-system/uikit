@@ -2,23 +2,22 @@
   --loader-width: 100px;
   box-sizing: border-box;
   background-color: var(--color-bg-system);
-  background-image:
-    linear-gradient(
-      to right,
-      transparent 0%,
-      var(--color-bg-stripe) calc(0.2 * var(--loader-width)),
-      var(--color-bg-ghost) calc(0.6 * var(--loader-width)),
-      transparent var(--loader-width)
-    );
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--color-bg-stripe) calc(0.2 * var(--loader-width)),
+    var(--color-bg-ghost) calc(0.6 * var(--loader-width)),
+    transparent var(--loader-width)
+  );
   background-repeat: no-repeat;
   background-attachment: fixed;
   animation: Skeleton-Animation 1.5s linear infinite;
 
-  @media (min-width: 720px) {
+  @media (width >= 720px) {
     animation-duration: 2s;
   }
 
-  @media (min-width: 1280px) {
+  @media (width >= 1280px) {
     animation-duration: 2.5s;
   }
 }

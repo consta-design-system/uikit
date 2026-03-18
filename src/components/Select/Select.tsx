@@ -76,6 +76,7 @@ const SelectRender = <ITEM = SelectItemDefault, GROUP = SelectGroupDefault>(
     dropdownOpen,
     ignoreOutsideClicksRefs,
     dropdownViewportRef,
+    dropdownContainer,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -225,6 +226,7 @@ const SelectRender = <ITEM = SelectItemDefault, GROUP = SelectGroupDefault>(
         virtualScroll={virtualScroll}
         onScrollToBottom={onScrollToBottom}
         viewportRef={dropdownViewportRef}
+        container={dropdownContainer}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

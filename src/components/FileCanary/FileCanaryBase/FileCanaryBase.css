@@ -1,0 +1,72 @@
+.canary--FileBase {
+  --file-color-unknown: var(--file-color-unknown-override, #70788b);
+  --file-color-code: var(--file-color-code-override, #70788b);
+  --file-color-font: var(--file-color-font-override, #70788b);
+  --file-color-disk: var(--file-color-disk-override, #70788b);
+  --file-color-executive: var(--file-color-executive-override, #70788b);
+  --file-color-config: var(--file-color-config-override, #70788b);
+  --file-color-database: var(--file-color-database-override, #70788b);
+  --file-color-presentation: var(--file-color-presentation-override, #f56b00);
+  --file-color-table: var(--file-color-table-override, #6fb80a);
+  --file-color-document: var(--file-color-document-override, #016bdc);
+  --file-color-pdf: var(--file-color-pdf-override, #c62828);
+  --file-color-audio: var(--file-color-audio-override, #e92064);
+  --file-color-image: var(--file-color-image-override, #7448dd);
+  --file-color-video: var(--file-color-video-override, #2044d5);
+  --file-color-mail: var(--file-color-mail-override, #2196f3);
+  --file-color-scheme: var(--file-color-scheme-override, #0088a3);
+  --file-color-archive: var(--file-color-archive-override, #9010d1);
+  --file-extension-font-size: 8px;
+  --file-extension-bg-color: rgb(0 0 0 / 0.5);
+  --file-extension-letter-spacing: -0.125em;
+  --file-border-radius: var(--control-radius);
+  --file-typo-color: #fff;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  width: var(--file-width);
+  height: var(--file-height);
+  padding: 0;
+  color: var(--file-typo-color);
+  border: none;
+  border-radius: var(--file-border-radius);
+  outline: none;
+
+  &_size {
+    &_s {
+      --file-icon-container-padding: 4px 4px 3px 4px;
+      --file-width: 24px;
+      --file-height: 32px;
+    }
+
+    &_m {
+      --file-icon-container-padding: 3px 3px 2px 3px;
+      --file-width: 30px;
+      --file-height: 40px;
+    }
+  }
+
+  &-IconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    padding: var(--file-icon-container-padding);
+  }
+
+  &-Extension {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 0;
+    background-color: var(--file-extension-bg-color);
+    font-family: Silkscreen, sans-serif;
+    font-size: var(--file-extension-font-size);
+    letter-spacing: var(--file-extension-letter-spacing);
+    text-transform: uppercase;
+  }
+}

@@ -18,11 +18,11 @@ import {
 import { Direction, PopoverPropOffset, Position } from '../Popover/Popover';
 
 export const contextMenuSizes = ['m', 'xs', 's', 'l'] as const;
-export type ContextMenuPropSize = typeof contextMenuSizes[number];
+export type ContextMenuPropSize = (typeof contextMenuSizes)[number];
 export const contextMenuDefaultSize: ContextMenuPropSize = contextMenuSizes[0];
 
 export const contextMenuStatus = ['alert', 'success', 'warning'] as const;
-export type ContextMenuStatus = typeof contextMenuStatus[number];
+export type ContextMenuStatus = (typeof contextMenuStatus)[number];
 export const contextMenuDefaultStatus: ContextMenuStatus = contextMenuStatus[0];
 
 export const contextMenuForm = listPropForm;
@@ -36,7 +36,7 @@ export const contextMenuPropSubMenuDirections: Direction[] = [
   'leftStartDown',
 ];
 export type ContextMenuPropSubMenuDirection =
-  typeof contextMenuPropSubMenuDirections[number];
+  (typeof contextMenuPropSubMenuDirections)[number];
 export const contextMenuPropDefaultSubMenuDirection: ContextMenuPropSubMenuDirection =
   contextMenuPropSubMenuDirections[0];
 
@@ -199,6 +199,7 @@ export type ContextMenuProps<
     isMobile?: boolean;
     onEsc?: React.KeyboardEventHandler;
     viewportRef?: React.RefObject<HTMLElement>;
+    container?: Element;
   } & MappersItem<ITEM> &
     MappersGroup<GROUP> &
     PositioningProps,
@@ -307,6 +308,7 @@ export type ContextMenuWrapperProps = PropsWithHTMLAttributes<
     onSetDirection?: (direction: Direction) => void;
     className?: string;
     animationBack?: boolean;
+    container?: Element;
   },
   HTMLDivElement
 >;
@@ -325,6 +327,7 @@ export type ContextMenuLevelWrapperProps = PropsWithHTMLAttributesAndRef<
     position?: Position;
     onSetDirection?: (direction: Direction) => void;
     viewportRef?: React.RefObject<HTMLElement>;
+    container?: Element;
   },
   HTMLDivElement
 >;

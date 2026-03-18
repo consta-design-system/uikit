@@ -1,5 +1,5 @@
 .MixScrollBar {
-  --scrollbar-resizer-transparent-color: rgba(0, 0, 0, 0);
+  --scrollbar-resizer-transparent-color: rgb(0 0 0 / 0);
   --scrollbar-resizer-color: var(--color-control-typo-placeholder);
   --scrollbar-resizer-gap: 7;
   --scrollbar-thumb-color: var(--color-scroll-thumb);
@@ -75,30 +75,29 @@
     }
 
     &::-webkit-resizer {
-      background-image:
-        linear-gradient(
-          -45deg,
-          var(--scrollbar-resizer-transparent-color) 0%,
-          var(--scrollbar-resizer-transparent-color)
+      background-image: linear-gradient(
+        -45deg,
+        var(--scrollbar-resizer-transparent-color) 0%,
+        var(--scrollbar-resizer-transparent-color)
           calc(1% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-color) calc(1% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-color) calc(2% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-transparent-color)
+        var(--scrollbar-resizer-color) calc(1% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-color) calc(2% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-transparent-color)
           calc(2% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-transparent-color)
+        var(--scrollbar-resizer-transparent-color)
           calc(3% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-color) calc(3% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-color) calc(4% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-transparent-color)
+        var(--scrollbar-resizer-color) calc(3% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-color) calc(4% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-transparent-color)
           calc(4% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-transparent-color)
+        var(--scrollbar-resizer-transparent-color)
           calc(5% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-color) calc(5% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-color) calc(6% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-transparent-color)
+        var(--scrollbar-resizer-color) calc(5% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-color) calc(6% * var(--scrollbar-resizer-gap)),
+        var(--scrollbar-resizer-transparent-color)
           calc(6% * var(--scrollbar-resizer-gap)),
-          var(--scrollbar-resizer-transparent-color) 100%
-        );
+        var(--scrollbar-resizer-transparent-color) 100%
+      );
       background-repeat: no-repeat;
       background-size: calc(100% - 2px) calc(100% - 2px);
     }

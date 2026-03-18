@@ -28,8 +28,7 @@
   gap: calc(var(--chip-space) / 2);
 
   &_status {
-    padding:
-      0 var(--chip-space) 0
+    padding: 0 var(--chip-space) 0
       calc((var(--chip-height) / 2) - (var(--chip-badge-size) / 2));
   }
 
@@ -92,10 +91,9 @@
       --chip-active-color: var(--color-control-typo-secondary);
       --chip-active-color-hover: var(--color-control-typo-secondary-hover);
       --chip-active-border: var(--color-control-bg-border-secondary);
-      --chip-active-border-hover:
-        var(
-          --color-control-bg-border-secondary-hover
-        );
+      --chip-active-border-hover: var(
+        --color-control-bg-border-secondary-hover
+      );
       --chip-active-disabled-bg-color: var(--color-control-bg-secondary);
       --chip-active-disabled-color: var(--color-control-typo-disable);
       --chip-active-disabled-border: var(--color-control-typo-disable);

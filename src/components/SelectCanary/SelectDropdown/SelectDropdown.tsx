@@ -37,7 +37,7 @@ import { SelectRenderItem } from '../SelectRenderItem';
 import { CountedGroup } from '../types';
 
 export const selectDropdownForm = ['default', 'brick', 'round'] as const;
-export type SelectDropdownPropForm = typeof selectDropdownForm[number];
+export type SelectDropdownPropForm = (typeof selectDropdownForm)[number];
 export const defaultSelectDropdownPropForm = selectDropdownForm[0];
 
 type RenderItemProps<ITEM> = {
@@ -83,6 +83,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   dropdownZIndexAtom: AtomMut<number | undefined>;
   selectAllLabel: string;
   viewportRef?: React.RefObject<HTMLElement>;
+  container?: Element;
 }>;
 
 type SelectDropdownComponent = <ITEM, GROUP>(
@@ -151,6 +152,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
     groupsCounterAtom,
     dropdownZIndexAtom,
     selectAllLabel,
+    container,
     ...otherProps
   } = props;
 
@@ -211,6 +213,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
       form={form}
       onMount={setIsListMount}
       style={{ zIndex }}
+      container={container}
     >
       {isListMount && (
         <div

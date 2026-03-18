@@ -8,18 +8,18 @@ import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import { useFixed } from './useFixed';
 
 export const layoutPropDirection = ['row', 'column'] as const;
-export type LayoutPropDirection = typeof layoutPropDirection[number];
+export type LayoutPropDirection = (typeof layoutPropDirection)[number];
 export const layoutPropDirectionDefault: LayoutPropDirection =
   layoutPropDirection[0];
 
 export const layoutPropVerticalAlign = ['top', 'bottom'] as const;
-export type LayoutPropVerticalAlign = typeof layoutPropVerticalAlign[number];
+export type LayoutPropVerticalAlign = (typeof layoutPropVerticalAlign)[number];
 export const layoutPropVerticalAlignDefault: LayoutPropVerticalAlign =
   layoutPropVerticalAlign[0];
 
 export const layoutPropHorizontalAlign = ['left', 'right'] as const;
 export type LayoutPropHorizontalAlign =
-  typeof layoutPropHorizontalAlign[number];
+  (typeof layoutPropHorizontalAlign)[number];
 export const layoutPropHorizontalAlignDefault: LayoutPropHorizontalAlign =
   layoutPropHorizontalAlign[0];
 

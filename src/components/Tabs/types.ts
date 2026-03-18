@@ -29,19 +29,19 @@ export type TabsItemDefault = {
 };
 
 export const tabsSizes = ['m', 's', 'xs'] as const;
-export type TabsPropSize = typeof tabsSizes[number];
+export type TabsPropSize = (typeof tabsSizes)[number];
 export const tabsDefaultSize: TabsPropSize = tabsSizes[0];
 
 export const tabsViews = ['bordered', 'clear'] as const;
-export type TabsPropView = typeof tabsViews[number];
+export type TabsPropView = (typeof tabsViews)[number];
 export const tabsDefaultView: TabsPropView = tabsViews[0];
 
 export const tabsLinePositions = ['bottom', 'top', 'left', 'right'] as const;
-export type TabsPropLinePosition = typeof tabsLinePositions[number];
+export type TabsPropLinePosition = (typeof tabsLinePositions)[number];
 export const tabsDefaultLinePosition: TabsPropLinePosition = 'bottom';
 
 export const tabsFitModes = ['scroll', 'dropdown'] as const;
-export type TabsPropFitMode = typeof tabsFitModes[number];
+export type TabsPropFitMode = (typeof tabsFitModes)[number];
 export const tabsDefaultFitMode: TabsPropFitMode = 'dropdown';
 
 export type TabsPropGetItemKey<ITEM> = (item: ITEM) => string | number;

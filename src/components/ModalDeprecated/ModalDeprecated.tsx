@@ -15,11 +15,11 @@ import { cnDeprecated as cn } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 const modalPropWidth = ['auto'] as const;
-type ModalPropWidth = typeof modalPropWidth[number];
+type ModalPropWidth = (typeof modalPropWidth)[number];
 const modalPropWidthDefault: ModalPropWidth = modalPropWidth[0];
 
 const modalPropPosition = ['center', 'top'] as const;
-type ModalPropPosition = typeof modalPropPosition[number];
+type ModalPropPosition = (typeof modalPropPosition)[number];
 const modalPropPositionDefault: ModalPropPosition = modalPropPosition[0];
 
 type ModalProps = PropsWithHTMLAttributes<

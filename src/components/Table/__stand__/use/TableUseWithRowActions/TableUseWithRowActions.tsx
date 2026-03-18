@@ -253,7 +253,7 @@ export const TableUseWithRowActions = () => {
 
   const handleContextMenuClick =
     (onClick: () => void, rowId: string, level?: number) =>
-    ({ type }: typeof actionItems[number]) =>
+    ({ type }: (typeof actionItems)[number]) =>
     () => {
       actionFunctions[type](rowId, level);
       onClick();
@@ -276,7 +276,7 @@ export const TableUseWithRowActions = () => {
       {
         title: 'Действия',
         accessor: 'actions',
-        renderCell: (row: typeof rows[number]) => {
+        renderCell: (row: (typeof rows)[number]) => {
           const setMenuState = (isOpen: boolean) => () =>
             setContextMenuState((prevState) => {
               if (prevState[row.id]) {

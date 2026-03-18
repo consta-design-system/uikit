@@ -7,20 +7,20 @@ export type RadioGroupDefaultItem = {
 };
 
 export const radioGroupDirections = ['column', 'row'] as const;
-export type RadioGroupDirection = typeof radioGroupDirections[number];
+export type RadioGroupDirection = (typeof radioGroupDirections)[number];
 export const radioGroupDefaultDirection: RadioGroupDirection =
   radioGroupDirections[0];
 
 export const radioGroupSizes = ['m', 'l', 'xs', 's'] as const;
-export type RadioGroupPropSize = typeof radioGroupSizes[number];
+export type RadioGroupPropSize = (typeof radioGroupSizes)[number];
 export const radioGroupDefaultSize: RadioGroupPropSize = radioGroupSizes[0];
 
 export const radioGroupViews = ['primary', 'ghost'] as const;
-export type RadioGroupPropView = typeof radioGroupViews[number];
+export type RadioGroupPropView = (typeof radioGroupViews)[number];
 export const radioGroupDefaultView: RadioGroupPropView = radioGroupViews[0];
 
 export const radioGroupPropAlign = ['center', 'top'] as const;
-export type RadioGroupPropAlign = typeof radioGroupPropAlign[number];
+export type RadioGroupPropAlign = (typeof radioGroupPropAlign)[number];
 export const radioGroupPropAlignDefault: RadioGroupPropAlign =
   radioGroupPropAlign[0];
 

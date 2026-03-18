@@ -49,13 +49,13 @@ export const snackBarItemStatus = [
   'warning',
   'alert',
 ] as const;
-export type SnackBarItemStatus = typeof snackBarItemStatus[number];
+export type SnackBarItemStatus = (typeof snackBarItemStatus)[number];
 export const snackBarItemStatusDefault: SnackBarItemStatus =
   snackBarItemStatus[0];
 
 export const snackBarItemShowProgressProp = ['timer', 'line'] as const;
 export type SnackBarItemShowProgressProp =
-  typeof snackBarItemShowProgressProp[number];
+  (typeof snackBarItemShowProgressProp)[number];
 
 export type SnackBarPropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type SnackBarPropGetItemMessage<ITEM> = (
@@ -100,11 +100,12 @@ export type Mappers<ITEM> = {
 };
 
 export const snackBarPropForm = ['default', 'round', 'brick'] as const;
-export type SnackBarPropForm = typeof snackBarPropForm[number];
+export type SnackBarPropForm = (typeof snackBarPropForm)[number];
 export const snackBarPropFormDefault = snackBarPropForm[0];
 
 export const snackBarPropProgressView = ['spinText', 'spin', 'text'] as const;
-export type SnackBarPropProgressView = typeof snackBarPropProgressView[number];
+export type SnackBarPropProgressView =
+  (typeof snackBarPropProgressView)[number];
 export const snackBarPropProgressViewDefault = snackBarPropProgressView[0];
 
 export type SnackBarProps<ITEM = SnackBarItemDefault> =

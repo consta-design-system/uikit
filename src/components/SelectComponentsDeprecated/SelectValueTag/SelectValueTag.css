@@ -9,7 +9,7 @@
   }
 
   .TagBase-Label {
-    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   &_disabled {

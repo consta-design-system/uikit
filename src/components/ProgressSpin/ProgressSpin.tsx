@@ -8,7 +8,7 @@ import { isNumber } from '../../utils/type-guards';
 import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
 
 export const progressSpinPropSize = ['m', 's', 'l', 'xl', '2xl'] as const;
-export type ProgressSpinPropSize = typeof progressSpinPropSize[number];
+export type ProgressSpinPropSize = (typeof progressSpinPropSize)[number];
 export const progressSpinPropSizeDefault: ProgressSpinPropSize =
   progressSpinPropSize[0];
 

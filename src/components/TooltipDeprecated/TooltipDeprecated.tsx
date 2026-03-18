@@ -22,7 +22,7 @@ const cnTooltip = cnDeprecated('Tooltip');
 
 export const tooltipPropSizes = ['m', 's', 'l'] as const;
 export const tooltipPropSizesDefault = tooltipPropSizes[0];
-export type TooltipPropSize = typeof tooltipPropSizes[number];
+export type TooltipPropSize = (typeof tooltipPropSizes)[number];
 
 export const tooltipPropStatus = [
   'normal',
@@ -30,7 +30,7 @@ export const tooltipPropStatus = [
   'success',
   'warning',
 ] as const;
-export type TooltipPropStatus = typeof tooltipPropStatus[number];
+export type TooltipPropStatus = (typeof tooltipPropStatus)[number];
 
 export type TooltipProps = PropsWithJsxAttributes<
   {

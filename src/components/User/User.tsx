@@ -14,19 +14,19 @@ import { Button, ButtonPropSize } from '../Button/Button';
 import { Text, TextPropSize } from '../Text/Text';
 
 export const userPropSize = ['m', 's', 'l'] as const;
-export type UserPropSize = typeof userPropSize[number];
+export type UserPropSize = (typeof userPropSize)[number];
 export const userPropSizeDefault: UserPropSize = userPropSize[0];
 
 export const userPropView = ['clear', 'ghost'] as const;
-export type UserPropView = typeof userPropView[number];
+export type UserPropView = (typeof userPropView)[number];
 export const userPropViewDefault: UserPropView = userPropView[0];
 
 export const userPropWidth = ['default', 'full'] as const;
-export type UserPropWidth = typeof userPropWidth[number];
+export type UserPropWidth = (typeof userPropWidth)[number];
 export const userPropWidthDefault: UserPropWidth = userPropWidth[0];
 
 export const userPropStatus = ['available', 'remote', 'out'] as const;
-export type UserPropStatus = typeof userPropStatus[number];
+export type UserPropStatus = (typeof userPropStatus)[number];
 
 type Props = {
   avatarUrl?: string;

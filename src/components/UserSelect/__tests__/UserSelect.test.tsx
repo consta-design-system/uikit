@@ -4,6 +4,7 @@ import {
   render,
   RenderResult,
   screen,
+  within,
 } from '@testing-library/react';
 import * as React from 'react';
 
@@ -346,5 +347,48 @@ describe('Компонент UserSelect', () => {
     animateDelay();
 
     expect(getRenderItems().length).toEqual(items.length);
+  });
+
+  describe('проверка dropdownContainer', () => {
+    it('по умолчанию рендерит dropdown в document.body', () => {
+      jest.useFakeTimers();
+
+      const container = document.createElement('div');
+      container.setAttribute('data-testid', 'container');
+      document.body.appendChild(container);
+
+      act(() => {
+        renderComponent({
+          ...defaultProps,
+          dropdownContainer: undefined,
+        });
+      });
+
+      inputClick();
+      animateDelay();
+
+      expect(screen.getByRole('listbox')).toBeInTheDocument();
+      expect(within(container).queryByRole('listbox')).not.toBeInTheDocument();
+    });
+
+    it('рендерит dropdown внутри переданного контейнера', () => {
+      jest.useFakeTimers();
+
+      const container = document.createElement('div');
+      container.setAttribute('data-testid', 'container');
+      document.body.appendChild(container);
+
+      act(() => {
+        renderComponent({
+          ...defaultProps,
+          dropdownContainer: container,
+        });
+      });
+
+      inputClick();
+      animateDelay();
+
+      expect(within(container).queryByRole('listbox')).toBeInTheDocument();
+    });
   });
 });

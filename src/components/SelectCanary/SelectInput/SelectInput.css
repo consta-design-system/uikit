@@ -1,9 +1,8 @@
 .canary--SelectInput {
-  --select-input-text-height:
-    calc(
-      var(--field-control-layout-height) -
+  --select-input-text-height: calc(
+    var(--field-control-layout-height) -
       var(--field-control-layout-border-width)
-    );
+  );
   position: relative;
 
   &_withValue &-Input {

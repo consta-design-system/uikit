@@ -28,7 +28,7 @@
   }
 
   &_isResized {
-    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   &_isClickable {
@@ -89,11 +89,10 @@
     box-sizing: border-box;
     height: 100%;
     padding: var(--cell-padding-vertical) var(--cell-padding-horizontal);
-    padding-right:
-      calc(
-        var(--cell-padding-horizontal) + var(--resizer-width) +
+    padding-right: calc(
+      var(--cell-padding-horizontal) + var(--resizer-width) +
         var(--buttons-wrapper-size)
-      );
+    );
 
     &_wrap {
       &_truncate {
@@ -107,7 +106,7 @@
       &_break {
         max-width: 100%;
         white-space: pre-wrap;
-        word-break: break-word;
+        overflow-wrap: break-word;
       }
     }
 

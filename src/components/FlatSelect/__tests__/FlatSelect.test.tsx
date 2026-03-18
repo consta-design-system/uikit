@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import * as React from 'react';
 
 import { IconMock, iconMockText } from '##/../__mocks__/IconMock';
@@ -614,6 +614,56 @@ describe(`Компонент ${testId}`, () => {
       fireEvent.click(getSelectAll());
 
       expect(onChange).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('проверка container', () => {
+    it('по умолчанию рендерит dropdown в document.body', () => {
+      jest.useFakeTimers();
+
+      const container = document.createElement('div');
+      container.setAttribute('data-testid', 'container');
+      document.body.appendChild(container);
+
+      const anchorRef = { current: null };
+
+      act(() => {
+        renderComponent({
+          ...defaultProps,
+          anchorRef,
+          container: undefined,
+        });
+      });
+
+      anchorClick();
+      animateDelay();
+
+      expect(screen.queryByRole('listbox')).not.toBeNull();
+
+      expect(within(container).queryByRole('listbox')).not.toBeInTheDocument();
+    });
+
+    it('рендерит dropdown внутри переданного контейнера', () => {
+      jest.useFakeTimers();
+
+      const container = document.createElement('div');
+      container.setAttribute('data-testid', 'container');
+      document.body.appendChild(container);
+
+      const anchorRef = { current: null };
+
+      act(() => {
+        renderComponent({
+          ...defaultProps,
+          anchorRef,
+          container,
+        });
+      });
+
+      anchorClick();
+      animateDelay();
+
+      expect(within(container).getByRole('listbox')).toBeInTheDocument();
     });
   });
 });

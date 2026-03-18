@@ -62,7 +62,9 @@
   border-radius: var(--field-control-layout-border-radius);
   font-size: var(--field-control-layout-text-size);
   line-height: var(--field-control-layout-text-line-height);
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 
   &_focused {
     --field-control-layout-focus-helper-color: var(
@@ -72,19 +74,18 @@
 
   &_focusHelper {
     &_left {
-      box-shadow: 1px 0px 0px 0px var(--field-control-layout-focus-helper-color)
-        inset;
+      box-shadow: 1px 0 0 0 var(--field-control-layout-focus-helper-color) inset;
     }
 
     &_right {
-      box-shadow: -1px 0px 0px 0px
-        var(--field-control-layout-focus-helper-color) inset;
+      box-shadow: -1px 0 0 0 var(--field-control-layout-focus-helper-color)
+        inset;
     }
 
     &_both {
-      box-shadow: 1px 0px 0px 0px var(--field-control-layout-focus-helper-color)
-          inset,
-        -1px 0px 0px 0px var(--field-control-layout-focus-helper-color) inset;
+      box-shadow:
+        1px 0 0 0 var(--field-control-layout-focus-helper-color) inset,
+        -1px 0 0 0 var(--field-control-layout-focus-helper-color) inset;
     }
   }
 

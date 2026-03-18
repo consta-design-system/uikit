@@ -27,7 +27,7 @@ const DATA = [
   },
 ];
 
-type Row = typeof DATA[number];
+type Row = (typeof DATA)[number];
 
 const COUNT_FILTERS: Filters<Row> = [
   {

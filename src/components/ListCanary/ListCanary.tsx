@@ -54,7 +54,7 @@ export const List: ListComponent = (props) => {
     [groupsProp, items],
   );
 
-  type ITEM = typeof items[number];
+  type ITEM = (typeof items)[number];
 
   const renderItemDefault: ListPropRenderItem<ITEM> = (item) => {
     const onClick = getItemOnClick(item);
