@@ -140,6 +140,7 @@ export type FlatSelectPropsInit<
     spareDirection?: Direction;
     possibleDirections?: Direction[];
     viewportRef?: React.RefObject<HTMLElement>;
+    container?: Element;
   },
   HTMLDivElement
 >;

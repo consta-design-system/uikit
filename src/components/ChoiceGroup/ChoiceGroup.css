@@ -5,8 +5,7 @@
   display: inline-flex;
   background-color: var(--choice-group-bg-color);
   border-radius: var(--choice-radius);
-  box-shadow:
-    inset 0 0 0 var(--control-border-width)
+  box-shadow: inset 0 0 0 var(--control-border-width)
     var(--choice-group-border-color);
 
   &_truncate {
@@ -118,11 +117,8 @@
     font-weight: var(--font-weight-text-regular);
     line-height: calc(var(--choice-height) - var(--control-border-width) * 2);
     text-decoration: none;
-    transition:
-      background-color 0.15s ease,
-      box-shadow 0.15s ease,
-      color 0.15s ease,
-      fill 0.15s ease;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease,
+      color 0.15s ease, fill 0.15s ease;
     flex-grow: 1;
 
     &::after {

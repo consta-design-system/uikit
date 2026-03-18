@@ -7,13 +7,12 @@
   align-items: center;
   box-sizing: border-box;
   width: var(--bookmarks-tab-width);
-  min-width:
-    calc(
-      var(--bookmark-tabs-tab-close-size) +
+  min-width: calc(
+    var(--bookmark-tabs-tab-close-size) +
       var(--bookmark-tabs-tab-right-icon-size) +
       var(--bookmark-tabs-tab-left-icon-size) + var(--space-3xl) +
       var(--space-m)
-    );
+  );
   max-width: 200px;
   height: var(--bookmark-tabs-tab-size);
   max-height: 100%;

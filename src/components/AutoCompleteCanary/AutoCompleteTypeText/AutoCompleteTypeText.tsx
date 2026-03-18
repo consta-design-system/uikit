@@ -49,6 +49,7 @@ export const AutoCompleteTypeText: AutoCompleteTypeComponent<string> =
       ignoreOutsideClicksRefs,
       onBlur,
       dropdownViewportRef,
+      dropdownContainer,
       ...otherProps
     } = withDefaultGetters(props);
 
@@ -127,6 +128,7 @@ export const AutoCompleteTypeText: AutoCompleteTypeComponent<string> =
           isLoading={isLoading}
           hasItems={items.length !== 0}
           itemsRefs={optionsRefs}
+          container={dropdownContainer}
           virtualScroll
           style={
             typeof style?.zIndex === 'number'

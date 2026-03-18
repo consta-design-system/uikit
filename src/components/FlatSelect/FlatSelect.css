@@ -33,8 +33,7 @@
       }
 
       &_round {
-        border-radius:
-          var(--flat-select-radius-round)
+        border-radius: var(--flat-select-radius-round)
           var(--flat-select-radius-round) 0 0;
       }
     }
@@ -45,8 +44,7 @@
     --flat-select-list-border-top-right-radius: 0;
     --flat-select-list-border-bottom-right-radius: 0;
     --flat-select-list-border-bottom-left-radius: 0;
-    border-radius:
-      var(--flat-select-list-border-top-left-radius)
+    border-radius: var(--flat-select-list-border-top-left-radius)
       var(--flat-select-list-border-top-right-radius)
       var(--flat-select-list-border-bottom-right-radius)
       var(--flat-select-list-border-bottom-left-radius);
@@ -71,14 +69,12 @@
       }
 
       &_round {
-        --flat-select-list-border-top-right-radius:
-          var(
-            --flat-select-radius-round
-          );
-        --flat-select-list-border-top-left-radius:
-          var(
-            --flat-select-radius-round
-          );
+        --flat-select-list-border-top-right-radius: var(
+          --flat-select-radius-round
+        );
+        --flat-select-list-border-top-left-radius: var(
+          --flat-select-radius-round
+        );
       }
     }
 
@@ -89,14 +85,12 @@
       }
 
       &_round {
-        --flat-select-list-border-bottom-right-radius:
-          var(
-            --flat-select-radius-round
-          );
-        --flat-select-list-border-bottom-left-radius:
-          var(
-            --flat-select-radius-round
-          );
+        --flat-select-list-border-bottom-right-radius: var(
+          --flat-select-radius-round
+        );
+        --flat-select-list-border-bottom-left-radius: var(
+          --flat-select-radius-round
+        );
       }
     }
   }

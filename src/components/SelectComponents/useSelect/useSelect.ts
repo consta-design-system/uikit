@@ -346,17 +346,21 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   }, 300);
 
   const setSearch = useCallback(
-    (value: string | undefined) => {
+    (value: string | undefined, shouldNotify = true) => {
+      const normalizedValue = value || '';
       setState((old) => {
-        if (old.searchValue === value) {
+        if (old.searchValue === normalizedValue) {
           return old;
         }
         return {
           ...old,
-          searchValue: value || '',
+          searchValue: normalizedValue,
         };
       }, actions.setSearch);
-      setResolvedSearch(value || '');
+      setResolvedSearch(normalizedValue);
+      if (shouldNotify) {
+        onSearchValueChangeRef.current?.(normalizedValue);
+      }
     },
     [setState, setResolvedSearch],
   );
@@ -737,7 +741,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   };
 
   useEffect(() => {
-    setSearch(searchValueProp);
+    setSearch(searchValueProp, false);
   }, [searchValueProp]);
 
   useEffect(() => {
@@ -747,10 +751,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   useEffect(() => {
     onDropdownOpen?.(isOpen);
   }, [isOpen]);
-
-  useEffect(() => {
-    onSearchValueChangeRef.current?.(searchValue);
-  }, [searchValue]);
 
   useEffect(() => {
     setOpen(dropdownOpen || false);

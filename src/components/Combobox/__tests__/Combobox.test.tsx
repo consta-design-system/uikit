@@ -4,6 +4,7 @@ import {
   render,
   RenderResult,
   screen,
+  within,
 } from '@testing-library/react';
 import * as React from 'react';
 
@@ -434,6 +435,52 @@ describe('Компонент Combobox', () => {
       animateDelay();
 
       expect(getClearButton()).not.toBeInTheDocument();
+    });
+  });
+
+  describe('проверка dropdownContainer', () => {
+    it('рендерит dropdown по умолчанию в document.body', () => {
+      jest.useFakeTimers();
+
+      const container = document.createElement('div');
+      container.setAttribute('data-testid', 'container');
+      document.body.appendChild(container);
+
+      act(() => {
+        renderComponent({
+          items,
+          onChange: jest.fn(),
+          dropdownContainer: undefined,
+        });
+      });
+
+      inputClick();
+      animateDelay();
+
+      const listbox = screen.queryByRole('listbox');
+      expect(listbox).not.toBeNull();
+      expect(within(container).queryByRole('listbox')).not.toBeInTheDocument();
+    });
+
+    it('рендерит dropdown внутри переданного контейнера', () => {
+      jest.useFakeTimers();
+
+      const container = document.createElement('div');
+      container.setAttribute('data-testid', 'container');
+      document.body.appendChild(container);
+
+      act(() => {
+        renderComponent({
+          items,
+          onChange: jest.fn(),
+          dropdownContainer: container,
+        });
+      });
+
+      inputClick();
+      animateDelay();
+
+      expect(within(container).getByRole('listbox')).toBeInTheDocument();
     });
   });
 });

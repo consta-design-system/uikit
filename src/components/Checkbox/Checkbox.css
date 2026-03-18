@@ -45,10 +45,9 @@
       --checkbox-checked-background: var(--color-control-bg-primary);
       --checkbox-checked-check: var(--color-control-typo-primary);
       --checkbox-checked-border-hover: var(--color-control-bg-primary-hover);
-      --checkbox-checked-background-hover:
-        var(
-          --color-control-bg-primary-hover
-        );
+      --checkbox-checked-background-hover: var(
+        --color-control-bg-primary-hover
+      );
     }
 
     &_ghost {
@@ -68,16 +67,14 @@
       border-color: var(--checkbox-checked-border);
 
       &::before {
-        --checkbox-intermediate-offset:
-          calc(
-            var(--space-3xs) + var(--control-border-width)
-          );
+        --checkbox-intermediate-offset: calc(
+          var(--space-3xs) + var(--control-border-width)
+        );
         top: calc(calc(var(--checkbox-size) - var(--space-3xs)) / 2);
         left: var(--space-3xs);
-        width:
-          calc(
-            var(--checkbox-size) - var(--checkbox-intermediate-offset) * 2
-          );
+        width: calc(
+          var(--checkbox-size) - var(--checkbox-intermediate-offset) * 2
+        );
         height: var(--space-3xs);
         background-color: var(--checkbox-checked-check);
         border: none;
@@ -140,8 +137,7 @@
     margin: 0;
     padding: 0;
     background-color: transparent;
-    border:
-      var(--control-border-width) solid
+    border: var(--control-border-width) solid
       var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
     cursor: pointer;
@@ -158,11 +154,9 @@
       width: calc(var(--checkbox-size) * 0.6);
       height: calc(var(--checkbox-size) * 0.35);
       background-color: var(--color-control-bg-affect);
-      border-left:
-        var(--checkbox-arrow-width) solid
+      border-left: var(--checkbox-arrow-width) solid
         var(--checkbox-checked-check);
-      border-bottom:
-        var(--checkbox-arrow-width) solid
+      border-bottom: var(--checkbox-arrow-width) solid
         var(--checkbox-checked-check);
       opacity: 0;
       transition: opacity 0.15s, transform 0.15s, background-color 0.08s;

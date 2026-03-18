@@ -157,8 +157,7 @@
       &_entered,
       &_entering,
       &_exiting {
-        transition:
-          transform var(--sidebar-animate-timeout),
+        transition: transform var(--sidebar-animate-timeout),
           box-shadow var(--sidebar-animate-timeout) ease-in;
       }
     }

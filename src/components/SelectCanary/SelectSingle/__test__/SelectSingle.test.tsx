@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import React from 'react';
 
 import { createIconMock } from '##/../__mocks__/IconMock';
@@ -829,5 +829,51 @@ describe('SelectSingle', () => {
     animateDelay();
 
     expect(getSelectInputValue().querySelector('.test')).toBeInTheDocument();
+  });
+
+  describe('проверка dropdownContainer', () => {
+    it('рендерит dropdown по умолчанию в document.body', () => {
+      jest.useFakeTimers();
+
+      const container = document.createElement('div');
+      container.setAttribute('data-testid', 'container');
+      document.body.appendChild(container);
+
+      act(() => {
+        renderComponent({
+          items,
+          onChange: jest.fn(),
+          dropdownContainer: undefined,
+        });
+      });
+
+      inputClick();
+      animateDelay();
+
+      expect(screen.queryByRole('listbox')).not.toBeNull();
+
+      expect(within(container).queryByRole('listbox')).not.toBeInTheDocument();
+    });
+
+    it('рендерит dropdown внутри переданного контейнера', () => {
+      jest.useFakeTimers();
+
+      const container = document.createElement('div');
+      container.setAttribute('data-testid', 'container');
+      document.body.appendChild(container);
+
+      act(() => {
+        renderComponent({
+          items,
+          onChange: jest.fn(),
+          dropdownContainer: container,
+        });
+      });
+
+      inputClick();
+      animateDelay();
+
+      expect(within(container).getByRole('listbox')).toBeInTheDocument();
+    });
   });
 });

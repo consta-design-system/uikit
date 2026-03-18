@@ -17,12 +17,11 @@
           left: 0;
           bottom: 0;
           height: min(100%, var(--space-6xl));
-          background:
-            linear-gradient(
-              to bottom,
-              rgba(0, 0, 0, 0) 0%,
-              var(--color-bg-default) 100%
-            );
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            var(--color-bg-default) 100%
+          );
           pointer-events: none;
         }
       }

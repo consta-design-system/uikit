@@ -78,19 +78,17 @@
   }
 
   &-Steps {
-    --progress-line-width-no-gap:
-      calc(
-        100% - calc(calc(var(--progress-line-steps) - 1) * var(--space-3xs))
-      );
+    --progress-line-width-no-gap: calc(
+      100% - calc(calc(var(--progress-line-steps) - 1) * var(--space-3xs))
+    );
     display: grid;
     height: auto;
     margin-top: var(--progress-line-height);
     background: transparent;
-    grid-template-columns:
-      repeat(
-        var(--progress-line-steps),
-        calc(var(--progress-line-width-no-gap) / var(--progress-line-steps))
-      );
+    grid-template-columns: repeat(
+      var(--progress-line-steps),
+      calc(var(--progress-line-width-no-gap) / var(--progress-line-steps))
+    );
     grid-gap: var(--space-3xs);
   }
 

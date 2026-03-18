@@ -1,4 +1,4 @@
-import { act, render } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import * as React from 'react';
 
 import { dateTimePropView } from '../../DateTime/DateTime';
@@ -106,6 +106,49 @@ describe('Компонент DatePicker', () => {
             expect(getAdditionalControls()).toHaveTextContent(content);
           });
         });
+      });
+    });
+  });
+
+  describe('проверка dropdownContainer', () => {
+    datePickerPropType.forEach((type) => {
+      it(`рендерит dropdown при type="${type}" по умолчанию в document.body`, () => {
+        jest.useFakeTimers();
+
+        const container = document.createElement('div');
+        container.setAttribute('data-testid', 'container');
+        document.body.appendChild(container);
+        act(() => {
+          renderComponent({ type, dropdownContainer: undefined });
+        });
+
+        inputFocus();
+        animateDelay();
+
+        expect(screen.queryByRole('listbox')).not.toBeNull();
+
+        expect(
+          within(container).queryByRole('listbox'),
+        ).not.toBeInTheDocument();
+      });
+    });
+
+    datePickerPropType.forEach((type) => {
+      it(`рендерит dropdown при type="${type}" внутри переданного контейнера`, () => {
+        jest.useFakeTimers();
+
+        const container = document.createElement('div');
+        container.setAttribute('data-testid', 'container');
+        document.body.appendChild(container);
+
+        act(() => {
+          renderComponent({ type, dropdownContainer: container });
+        });
+
+        inputFocus();
+        animateDelay();
+
+        expect(within(container).getByRole('listbox')).toBeInTheDocument();
       });
     });
   });

@@ -53,6 +53,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
       disabled,
       disableDates,
       dropdownViewportRef,
+      dropdownContainer,
       ...fieldProps
     } = props;
 
@@ -215,6 +216,7 @@ export const DatePickerTypeDateTimeRange: DatePickerTypeComponent<'date-time-ran
           timeOptions={timeOptions}
           zIndex={getDropdownZIndex(props.style)}
           disableDates={disableDates}
+          container={dropdownContainer}
         />
       </>
     );
