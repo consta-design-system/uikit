@@ -1,13 +1,11 @@
 .MixPopoverAnimate {
   --mix-dropdown-animate-space: var(--space-s);
-  --mix-dropdown-animate-transform:
-    translate(
-      0,
-      var(--mix-dropdown-animate-space)
-    );
+  --mix-dropdown-animate-transform: translate(
+    0,
+    var(--mix-dropdown-animate-space)
+  );
   --mix-dropdown-animate-timeout: 0.2s;
-  --mix-dropdown-animate-transition:
-    opacity var(--mix-dropdown-animate-timeout),
+  --mix-dropdown-animate-transition: opacity var(--mix-dropdown-animate-timeout),
     transform var(--mix-dropdown-animate-timeout);
 
   &_animate {

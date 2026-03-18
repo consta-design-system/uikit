@@ -16,12 +16,11 @@
 
     &_outline {
       --informer-icon-color: var(--informer-typo-color);
-      --informer-bg:
-        color-mix(
-          in srgb,
-          var(--informer-bg-color) var(--informer-bg-opacity),
-          var(--color-bg-default)
-        );
+      --informer-bg: color-mix(
+        in srgb,
+        var(--informer-bg-color) var(--informer-bg-opacity),
+        var(--color-bg-default)
+      );
       border: var(--control-border-width) solid var(--informer-border-color);
     }
   }

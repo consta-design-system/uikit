@@ -1,6 +1,5 @@
 .ListGroupLabel {
   box-sizing: border-box;
-  border-bottom:
-    var(--control-border-width) solid
+  border-bottom: var(--control-border-width) solid
     var(--color-control-bg-border-default);
 }

@@ -2,10 +2,9 @@
   position: relative;
   display: flex;
   min-height: var(--field-control-layout-slot-height);
-  padding:
-    calc(
+  padding: calc(
       var(--field-array-value-inline-control-vertical-padding) -
-      var(--field-control-layout-border-width)
+        var(--field-control-layout-border-width)
     )
     0;
   flex-wrap: wrap;
@@ -14,14 +13,13 @@
   &-Input {
     display: block;
     flex: 1;
-    min-width:
-      min(
-        max(
-          var(--field-array-value-inline-control-input-min-width),
-          var(--field-control-layout-space)
-        ),
-        var(--field-control-layout-children-width)
-      );
+    min-width: min(
+      max(
+        var(--field-array-value-inline-control-input-min-width),
+        var(--field-control-layout-space)
+      ),
+      var(--field-control-layout-children-width)
+    );
     height: var(--field-array-value-inline-control-input-height);
     color: var(--field-control-layout-input-color);
     background: transparent;

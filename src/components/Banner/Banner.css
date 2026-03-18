@@ -1,10 +1,9 @@
 .Banner {
   --banner-bg-opacity: 30%;
-  --banner-height:
-    calc(
-      var(--banner-inner-height) + var(--space-padding-top) +
+  --banner-height: calc(
+    var(--banner-inner-height) + var(--space-padding-top) +
       var(--space-padding-bottom)
-    );
+  );
   min-height: var(--banner-height);
   color: var(--color-typo-primary);
 
@@ -24,12 +23,11 @@
     }
 
     &_ghost {
-      background-color:
-        color-mix(
-          in srgb,
-          var(--banner-bg-color) var(--banner-bg-opacity),
-          var(--color-bg-default)
-        );
+      background-color: color-mix(
+        in srgb,
+        var(--banner-bg-color) var(--banner-bg-opacity),
+        var(--color-bg-default)
+      );
     }
   }
 

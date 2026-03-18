@@ -4,8 +4,7 @@
     --point-size: var(--space-s);
     --padding-size: var(--space-xs);
     position: relative;
-    padding:
-      var(--padding-size) var(--padding-size) var(--padding-size)
+    padding: var(--padding-size) var(--padding-size) var(--padding-size)
       calc(var(--padding-size) * 2 + var(--point-size));
     color: var(--text-color);
 

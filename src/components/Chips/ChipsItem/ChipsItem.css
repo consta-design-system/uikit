@@ -19,17 +19,12 @@
   font-size: var(--chip-text-size);
   white-space: nowrap;
   text-decoration: none;
-  transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease,
-    color 0.15s ease,
-    fill 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
   gap: calc(var(--chip-space) / 2);
 
   &_status {
-    padding:
-      0 var(--chip-space) 0
+    padding: 0 var(--chip-space) 0
       calc((var(--chip-height) / 2) - (var(--chip-badge-size) / 2));
   }
 
@@ -92,10 +87,9 @@
       --chip-active-color: var(--color-control-typo-secondary);
       --chip-active-color-hover: var(--color-control-typo-secondary-hover);
       --chip-active-border: var(--color-control-bg-border-secondary);
-      --chip-active-border-hover:
-        var(
-          --color-control-bg-border-secondary-hover
-        );
+      --chip-active-border-hover: var(
+        --color-control-bg-border-secondary-hover
+      );
       --chip-active-disabled-bg-color: var(--color-control-bg-secondary);
       --chip-active-disabled-color: var(--color-control-typo-disable);
       --chip-active-disabled-border: var(--color-control-typo-disable);

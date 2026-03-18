@@ -117,10 +117,9 @@
       background-color: var(--content-color);
       border-radius: 999rem;
       transition: transform 0.15s, background-color 0.15s;
-      transform:
-        translateX(
-          calc((var(--box-height) - var(--switch-border-gap)) * -1)
-        );
+      transform: translateX(
+        calc((var(--box-height) - var(--switch-border-gap)) * -1)
+      );
     }
 
     &:checked {

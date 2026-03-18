@@ -89,11 +89,10 @@
     box-sizing: border-box;
     height: 100%;
     padding: var(--cell-padding-vertical) var(--cell-padding-horizontal);
-    padding-right:
-      calc(
-        var(--cell-padding-horizontal) + var(--resizer-width) +
+    padding-right: calc(
+      var(--cell-padding-horizontal) + var(--resizer-width) +
         var(--buttons-wrapper-size)
-      );
+    );
 
     &_wrap {
       &_truncate {

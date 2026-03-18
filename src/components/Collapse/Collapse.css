@@ -109,8 +109,7 @@
   }
 
   &-Content {
-    padding:
-      var(--body-offset-up) var(--horizontal-space)
+    padding: var(--body-offset-up) var(--horizontal-space)
       var(--body-offset-bottom) var(--horizontal-space);
   }
 

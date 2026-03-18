@@ -30,8 +30,7 @@
 
 @keyframes Animation--MixFocus {
   from {
-    box-shadow:
-      0 0 0 0 var(--mix-focus-color-one),
+    box-shadow: 0 0 0 0 var(--mix-focus-color-one),
       0 0 0 0 var(--mix-focus-color-two);
   }
 

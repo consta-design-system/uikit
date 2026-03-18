@@ -12,10 +12,9 @@
 
     &_size {
       &_xs {
-        --pagination-arrow-caption-offset:
-          calc(
-            var(--space-xs) + var(--space-3xs)
-          );
+        --pagination-arrow-caption-offset: calc(
+          var(--space-xs) + var(--space-3xs)
+        );
       }
 
       &_s {
