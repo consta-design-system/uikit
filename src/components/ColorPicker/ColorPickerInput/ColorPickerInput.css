@@ -6,25 +6,28 @@
         width: round(calc(var(--field-control-layout-height) * 2.25), 4px);
       }
     }
+
     &_view {
       &_clear {
         &:first-child {
           --field-control-layout-padding-left-override: 0px;
         }
+
         &:not(:first-child) {
           --field-control-layout-additional-padding-left: var(
             --field-control-layout-space
           );
           position: relative;
+
           &::after {
             content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
             display: block;
             width: 1px;
             height: var(--space-m);
             background-color: var(--color-bg-border);
-            position: absolute;
-            top: 50%;
-            left: 0;
             transform: translateY(-50%);
           }
         }

@@ -6,27 +6,29 @@
     var(--color-picker-marker-color) 50%,
     var(--color-picker-marker-color) 100%
   );
-  outline: none;
-  border: none;
-  padding: 0px;
+  position: relative;
   display: flex;
   width: var(--color-picker-marker-size);
   height: var(--color-picker-marker-size);
-  background-image: var(--marker-color),
+  padding: 0;
+  background-image:
+    var(--marker-color),
     url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill-opacity="0.05"><rect x="4" width="4" height="4"/><rect y="4" width="4" height="4"/></svg>'),
     linear-gradient(to left, #fff 0%, #fff 100%);
-
-  background-size: 100% 100%, 8px 8px;
   background-repeat: no-repeat, repeat;
+  background-size:
+    100% 100%,
+    8px 8px;
+  border: none;
   border-radius: var(--color-picker-marker-radius, none);
-
-  position: relative;
+  outline: none;
 
   &_as {
     &_button,
     &_a {
       cursor: pointer;
     }
+
     &_button:disabled {
       cursor: not-allowed;
     }
@@ -36,9 +38,11 @@
     &_xs {
       --color-picker-marker-size: var(--space-m);
     }
+
     &_s {
       --color-picker-marker-size: var(--space-xl);
     }
+
     &_m {
       --color-picker-marker-size: var(--space-2xl);
     }
@@ -52,6 +56,7 @@
     &_default {
       --color-picker-marker-radius: var(--control-radius);
     }
+
     &_round {
       --color-picker-marker-radius: calc(var(--color-picker-marker-size) / 2);
     }
@@ -63,13 +68,13 @@
 
   &::after {
     content: '';
-    box-shadow: inset 0 0 0 1px var(--color-bg-border);
+    position: absolute;
     top: 0;
-    left: 0;
     right: 0;
+    left: 0;
     bottom: 0;
     border-radius: var(--color-picker-marker-radius);
-    position: absolute;
+    box-shadow: inset 0 0 0 1px var(--color-bg-border);
   }
 
   &_withoutColor {

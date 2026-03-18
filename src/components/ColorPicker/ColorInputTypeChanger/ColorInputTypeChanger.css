@@ -1,8 +1,9 @@
 .ColorInputTypeChanger {
   &-Select.FieldControlLayout {
-    width: 64px;
     flex: none;
+    width: 64px;
   }
+
   &-Input {
     flex: 1;
   }

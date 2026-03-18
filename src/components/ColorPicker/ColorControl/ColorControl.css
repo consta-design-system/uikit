@@ -1,16 +1,18 @@
 .ColorControl {
   --color-control-marker-offset: calc(
-    (var(--field-control-layout-height) - var(--color-control-marker-size)) / 2 -
-      (var(--control-border-width))
+    (var(--field-control-layout-height) - var(--color-control-marker-size)) /
+      2 - (var(--control-border-width))
   );
 
   &_size {
     &_xs {
       --color-control-marker-size: var(--space-m);
     }
+
     &_s {
       --color-control-marker-size: var(--space-m);
     }
+
     &_m {
       --color-control-marker-size: var(--space-xl);
     }
@@ -39,9 +41,11 @@
       }
     }
   }
+
   &_onlyMarker.FieldControlLayout {
     width: var(--field-control-layout-height);
   }
+
   &_onlyMarker &-Marker.MixFocus {
     --mix-focus-color-one: transparent;
     --mix-focus-color-two: transparent;

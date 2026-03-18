@@ -2,9 +2,7 @@
   --color-picker-interactive-gap-left: calc(var(--space-m) / 2);
   --color-picker-interactive-gap-right: calc(var(--space-m) / 2);
   position: relative;
-  border-radius: 99em;
   height: var(--space-m);
-  box-shadow: inset 0 0 0 1px var(--color-bg-border);
   background: linear-gradient(
     to right,
     #f00 0%,
@@ -15,4 +13,6 @@
     #f0f 83%,
     #f00 100%
   );
+  border-radius: 99em;
+  box-shadow: inset 0 0 0 1px var(--color-bg-border);
 }

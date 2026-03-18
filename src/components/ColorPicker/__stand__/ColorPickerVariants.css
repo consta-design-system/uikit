@@ -25,7 +25,7 @@
 
   &-Body {
     flex: 1;
-    padding: var(--space-s);
     width: 100%;
+    padding: var(--space-s);
   }
 }
