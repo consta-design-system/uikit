@@ -108,8 +108,7 @@
 
 @font-face {
   font-family: 'Silkscreen';
-  src:
-    url('Silkscreen-Regular.woff2') format('woff2'),
+  src: url('Silkscreen-Regular.woff2') format('woff2'),
     url('Silkscreen-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
