@@ -1,5 +1,4 @@
-import enUSLocale from 'date-fns/locale/en-US';
-import ruLocale from 'date-fns/locale/ru';
+import { enUS, ru } from 'date-fns/locale';
 
 import { getDaysOfMonth } from '../helpers';
 
@@ -7,7 +6,7 @@ describe('DateTime/getDaysOfMonth', () => {
   it('верный результат c date', () => {
     const result = getDaysOfMonth({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
     });
 
     const expected: typeof result = [
@@ -247,7 +246,7 @@ describe('DateTime/getDaysOfMonth', () => {
   it('верный результат с minDate и maxDate', () => {
     const result = getDaysOfMonth({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       minDate: new Date(1970, 0, 3),
       maxDate: new Date(1970, 0, 4),
     });
@@ -489,7 +488,7 @@ describe('DateTime/getDaysOfMonth', () => {
   it('верный результат с events', () => {
     const result = getDaysOfMonth({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       events: [
         new Date(1970, 0, 1),
         new Date(1970, 0, 2),
@@ -765,7 +764,7 @@ describe('DateTime/getDaysOfMonth', () => {
   it('верный результат с value:Date', () => {
     const result = getDaysOfMonth({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       value: new Date(1970, 0, 3),
     });
 
@@ -1006,7 +1005,7 @@ describe('DateTime/getDaysOfMonth', () => {
   it('верный результат с value:DateRange', () => {
     const result = getDaysOfMonth({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       value: [new Date(1970, 0, 3), new Date(1970, 0, 7)],
     });
 
@@ -1247,7 +1246,7 @@ describe('DateTime/getDaysOfMonth', () => {
   it('верный результат с locale = en-US', () => {
     const result = getDaysOfMonth({
       date: new Date(1970, 0),
-      locale: enUSLocale,
+      locale: enUS,
     });
 
     const expected: typeof result = [
@@ -1487,7 +1486,7 @@ describe('DateTime/getDaysOfMonth', () => {
   it('верный результат с множеством данных', () => {
     const result = getDaysOfMonth({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       value: [new Date(1970, 0, 3), new Date(1970, 0, 20)],
       minDate: new Date(1970, 0, 2),
       maxDate: new Date(1970, 0, 10),

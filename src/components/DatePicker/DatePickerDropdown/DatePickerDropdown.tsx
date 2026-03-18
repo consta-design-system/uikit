@@ -1,5 +1,6 @@
 import './DatePickerDropdown.css';
 
+import { Locale } from 'date-fns';
 import React, { forwardRef, useCallback, useRef, useState } from 'react';
 import { Transition } from 'react-transition-group';
 

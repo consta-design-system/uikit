@@ -10,10 +10,7 @@ import {
   useText,
 } from '@consta/stand';
 import { addDays, Locale, startOfWeek } from 'date-fns';
-import enUSLocale from 'date-fns/locale/en-US';
-import esLocale from 'date-fns/locale/es';
-import ruLocale from 'date-fns/locale/ru';
-import zhCNLocale from 'date-fns/locale/zh-CN';
+import { enUS, es, ru, zhCN } from 'date-fns/locale';
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { Button } from '##/components/Button/Button';
@@ -49,10 +46,10 @@ type LocaleProp = (typeof localeProp)[number];
 const localeDefault: LocaleProp = localeProp[0];
 
 const localeMap: Record<LocaleProp, Locale> = {
-  'ru': ruLocale,
-  'en-US': enUSLocale,
-  'zh-CN': zhCNLocale,
-  'es': esLocale,
+  'ru': ru,
+  'en-US': enUS,
+  'zh-CN': zhCN,
+  'es': es,
 };
 
 const cnDatePickerVariants = cn('DatePickerVariants');
@@ -133,7 +130,7 @@ const Variants = () => {
 
   const events = withEvents
     ? [
-        startOfWeek(currentDay, { locale: ruLocale }),
+        startOfWeek(currentDay, { locale: ru }),
         currentDay,
         addDays(currentDay, 2),
       ]

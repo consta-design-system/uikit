@@ -1,9 +1,6 @@
 import { useBoolean, useDate, useNumber, useSelect } from '@consta/stand';
 import { addDays, endOfDecade, startOfDecade, startOfWeek } from 'date-fns';
-import enUSLocale from 'date-fns/locale/en-US';
-import esLocale from 'date-fns/locale/es';
-import ruLocale from 'date-fns/locale/ru';
-import zhCNLocale from 'date-fns/locale/zh-CN';
+import { enUS, es, ru, zhCN } from 'date-fns/locale';
 import React, { useState } from 'react';
 
 import { getByMap } from '../../../utils/getByMap';
@@ -21,17 +18,17 @@ type LocaleProp = (typeof localeProp)[number];
 const localeDefault: LocaleProp = localeProp[0];
 
 const localeMap: Record<LocaleProp, DateTimePropLocale> = {
-  'ru': ruLocale,
+  'ru': ru,
   'en-US': {
-    ...enUSLocale,
+    ...enUS,
     words: { hours: 'hrs', minutes: 'min', seconds: 'sec' },
   },
   'zh-CN': {
-    ...zhCNLocale,
+    ...zhCN,
     words: { hours: '小时', minutes: '分钟', seconds: '秒' },
   },
   'es': {
-    ...esLocale,
+    ...es,
     words: { hours: 'hrs', minutes: 'min', seconds: 'seg' },
   },
 };
@@ -69,7 +66,7 @@ const Variants = () => {
 
   const events = withEvents
     ? [
-        startOfWeek(currentDay, { locale: ruLocale }),
+        startOfWeek(currentDay, { locale: ru }),
         currentDay,
         addDays(currentDay, 2),
       ]

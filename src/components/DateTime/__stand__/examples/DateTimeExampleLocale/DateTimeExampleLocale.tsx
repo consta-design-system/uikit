@@ -1,11 +1,11 @@
 import { Example } from '@consta/stand';
-import frLocale from 'date-fns/locale/fr';
+import { fr } from 'date-fns/locale';
 import React from 'react';
 
 import { DateTime } from '../../../DateTime';
 
 const dateTimeLocale = {
-  ...frLocale,
+  ...fr,
   words: {
     hours: 'H',
     minutes: 'Min',

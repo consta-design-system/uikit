@@ -1,5 +1,4 @@
-import isBefore from 'date-fns/isBefore';
-import isEqual from 'date-fns/isEqual';
+import { isBefore, isEqual } from 'date-fns';
 
 import { DateRange } from '../../utils/types/Date';
 import { datePickerErrorTypes, DatePickerPropOnError } from './types';

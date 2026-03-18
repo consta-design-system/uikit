@@ -1,5 +1,4 @@
-import addYears from 'date-fns/addYears';
-import startOfYear from 'date-fns/startOfYear';
+import { addYears, startOfYear } from 'date-fns';
 import React, {
   forwardRef,
   useCallback,

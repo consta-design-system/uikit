@@ -1,5 +1,5 @@
 import { addYears, startOfYear } from 'date-fns';
-import ruLocale from 'date-fns/locale/ru';
+import { ru } from 'date-fns/locale';
 import React, { forwardRef, useEffect } from 'react';
 
 import { useFlag } from '../../../hooks/useFlag/useFlag';
@@ -32,7 +32,7 @@ export const DateTimeTypeMonth: DateTimeTypeComponent<'month'> = forwardRef(
       disableDates,
       currentVisibleDate: currentVisibleDateProp,
       events,
-      locale = ruLocale,
+      locale = ru,
       className,
       view = dateTimePropViewDefault,
       onMove,

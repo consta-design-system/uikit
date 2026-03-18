@@ -1,4 +1,4 @@
-import ruLocale from 'date-fns/locale/ru';
+import { ru } from 'date-fns/locale';
 
 import { getYearsOfDecade } from '../helpers';
 
@@ -6,7 +6,7 @@ describe('DateTime/getYearsOfDecade', () => {
   it('верный результат c date', () => {
     const result = getYearsOfDecade({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
     });
 
     const expected: typeof result = [
@@ -90,7 +90,7 @@ describe('DateTime/getYearsOfDecade', () => {
   it('верный результат с minDate и maxDate', () => {
     const result = getYearsOfDecade({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       minDate: new Date(1974, 0),
       maxDate: new Date(1978, 0),
     });
@@ -176,7 +176,7 @@ describe('DateTime/getYearsOfDecade', () => {
   it('верный результат с events', () => {
     const result = getYearsOfDecade({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       events: [
         new Date(1970, 0, 1),
         new Date(1970, 0, 2),
@@ -276,7 +276,7 @@ describe('DateTime/getYearsOfDecade', () => {
   it('верный результат с value:Date', () => {
     const result = getYearsOfDecade({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       value: new Date(1975, 0, 3),
     });
 
@@ -361,7 +361,7 @@ describe('DateTime/getYearsOfDecade', () => {
   it('верный результат с value:DateRange', () => {
     const result = getYearsOfDecade({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       value: [new Date(1973, 0, 3), new Date(1976, 5, 7)],
     });
 
@@ -446,7 +446,7 @@ describe('DateTime/getYearsOfDecade', () => {
   it('верный результат с множеством данных', () => {
     const result = getYearsOfDecade({
       date: new Date(1970, 0),
-      locale: ruLocale,
+      locale: ru,
       value: [new Date(1974, 3, 3), new Date(1978, 5, 20)],
       minDate: new Date(1971, 2, 2),
       maxDate: new Date(1979, 8, 10),
