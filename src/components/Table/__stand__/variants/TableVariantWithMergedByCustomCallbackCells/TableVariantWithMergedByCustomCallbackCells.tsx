@@ -38,7 +38,7 @@ export const TableVariantWithMergedByCustomCallbackCells = () => {
     };
   });
 
-  const columns: TableColumn<typeof rows[number]>[] = [
+  const columns: TableColumn<(typeof rows)[number]>[] = [
     {
       title: 'ID',
       accessor: 'id',

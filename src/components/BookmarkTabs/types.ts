@@ -6,17 +6,17 @@ import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const bookmarkTabsPropSize = ['m', 's'] as const;
-export type BookmarkTabsPropSize = typeof bookmarkTabsPropSize[number];
+export type BookmarkTabsPropSize = (typeof bookmarkTabsPropSize)[number];
 export const bookmarkTabsPropSizeDefault: BookmarkTabsPropSize =
   bookmarkTabsPropSize[0];
 
 export const bookmarkTabsPropForm = ['brick', 'round'] as const;
-export type BookmarkTabsPropForm = typeof bookmarkTabsPropForm[number];
+export type BookmarkTabsPropForm = (typeof bookmarkTabsPropForm)[number];
 export const bookmarkTabsPropFormDefault: BookmarkTabsPropForm =
   bookmarkTabsPropForm[0];
 
 export const bookmarkTabsPropView = ['ghost', 'clear'] as const;
-export type BookmarkTabsPropView = typeof bookmarkTabsPropView[number];
+export type BookmarkTabsPropView = (typeof bookmarkTabsPropView)[number];
 export const bookmarkTabsPropViewDefault: BookmarkTabsPropView =
   bookmarkTabsPropView[0];
 

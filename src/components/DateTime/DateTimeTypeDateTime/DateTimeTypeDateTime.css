@@ -13,8 +13,8 @@
       position: absolute;
       top: 0;
       left: calc(
-        (var(--control-height-s) + (var(--space-3xs) * 2)) * 7 + var(--space-l) +
-          var(--root-padding-left)
+        (var(--control-height-s) + (var(--space-3xs) * 2)) * 7 +
+          var(--space-l) + var(--root-padding-left)
       );
       display: block;
       width: 1px;

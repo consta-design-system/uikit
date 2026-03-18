@@ -20,7 +20,9 @@
   background: none;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
 
   &:not(.BookmarkTabsTab_active) {
     border-bottom: 1px solid var(--color-bg-border);

@@ -89,7 +89,7 @@
       var(--progress-line-steps),
       calc(var(--progress-line-width-no-gap) / var(--progress-line-steps))
     );
-    grid-gap: var(--space-3xs);
+    gap: var(--space-3xs);
   }
 
   &-Label {

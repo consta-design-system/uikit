@@ -1,3 +1,4 @@
+/* stylelint-disable */
 @define-mixin breakpoint {
   &cols {
     &_1 {
@@ -79,151 +80,151 @@
 
   &gap {
     &_0 {
-      grid-gap: 0;
+      gap: 0;
     }
 
     &_2xs {
-      grid-gap: var(--space-2xs);
+      gap: var(--space-2xs);
     }
 
     &_xs {
-      grid-gap: var(--space-xs);
+      gap: var(--space-xs);
     }
 
     &_s {
-      grid-gap: var(--space-s);
+      gap: var(--space-s);
     }
 
     &_m {
-      grid-gap: var(--space-m);
+      gap: var(--space-m);
     }
 
     &_l {
-      grid-gap: var(--space-l);
+      gap: var(--space-l);
     }
 
     &_xl {
-      grid-gap: var(--space-xl);
+      gap: var(--space-xl);
     }
 
     &_2xl {
-      grid-gap: var(--space-2xl);
+      gap: var(--space-2xl);
     }
 
     &_3xl {
-      grid-gap: var(--space-3xl);
+      gap: var(--space-3xl);
     }
 
     &_4xl {
-      grid-gap: var(--space-4xl);
+      gap: var(--space-4xl);
     }
 
     &_5xl {
-      grid-gap: var(--space-5xl);
+      gap: var(--space-5xl);
     }
 
     &_6xl {
-      grid-gap: var(--space-6xl);
+      gap: var(--space-6xl);
     }
   }
 
   &colGap {
     &_0 {
-      grid-column-gap: 0;
+      column-gap: 0;
     }
 
     &_2xs {
-      grid-column-gap: var(--space-2xs);
+      column-gap: var(--space-2xs);
     }
 
     &_xs {
-      grid-column-gap: var(--space-xs);
+      column-gap: var(--space-xs);
     }
 
     &_s {
-      grid-column-gap: var(--space-s);
+      column-gap: var(--space-s);
     }
 
     &_m {
-      grid-column-gap: var(--space-m);
+      column-gap: var(--space-m);
     }
 
     &_l {
-      grid-column-gap: var(--space-l);
+      column-gap: var(--space-l);
     }
 
     &_xl {
-      grid-column-gap: var(--space-xl);
+      column-gap: var(--space-xl);
     }
 
     &_2xl {
-      grid-column-gap: var(--space-2xl);
+      column-gap: var(--space-2xl);
     }
 
     &_3xl {
-      grid-column-gap: var(--space-3xl);
+      column-gap: var(--space-3xl);
     }
 
     &_4xl {
-      grid-column-gap: var(--space-4xl);
+      column-gap: var(--space-4xl);
     }
 
     &_5xl {
-      grid-column-gap: var(--space-5xl);
+      column-gap: var(--space-5xl);
     }
 
     &_6xl {
-      grid-column-gap: var(--space-6xl);
+      column-gap: var(--space-6xl);
     }
   }
 
   &rowGap {
     &_0 {
-      grid-row-gap: 0;
+      row-gap: 0;
     }
 
     &_2xs {
-      grid-row-gap: var(--space-2xs);
+      row-gap: var(--space-2xs);
     }
 
     &_xs {
-      grid-row-gap: var(--space-xs);
+      row-gap: var(--space-xs);
     }
 
     &_s {
-      grid-row-gap: var(--space-s);
+      row-gap: var(--space-s);
     }
 
     &_m {
-      grid-row-gap: var(--space-m);
+      row-gap: var(--space-m);
     }
 
     &_l {
-      grid-row-gap: var(--space-l);
+      row-gap: var(--space-l);
     }
 
     &_xl {
-      grid-row-gap: var(--space-xl);
+      row-gap: var(--space-xl);
     }
 
     &_2xl {
-      grid-row-gap: var(--space-2xl);
+      row-gap: var(--space-2xl);
     }
 
     &_3xl {
-      grid-row-gap: var(--space-3xl);
+      row-gap: var(--space-3xl);
     }
 
     &_4xl {
-      grid-row-gap: var(--space-4xl);
+      row-gap: var(--space-4xl);
     }
 
     &_5xl {
-      grid-row-gap: var(--space-5xl);
+      row-gap: var(--space-5xl);
     }
 
     &_6xl {
-      grid-row-gap: var(--space-6xl);
+      row-gap: var(--space-6xl);
     }
   }
 }

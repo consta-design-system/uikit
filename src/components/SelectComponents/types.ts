@@ -1,7 +1,7 @@
 import { RefObject } from 'react';
 
 export const propSize = ['m', 'xs', 's', 'l'] as const;
-export type PropSize = typeof propSize[number];
+export type PropSize = (typeof propSize)[number];
 export const defaultPropSize = propSize[0];
 
 export const propForm = [
@@ -20,15 +20,15 @@ export const propForm = [
   'clearBrick',
   'clearClear',
 ] as const;
-export type PropForm = typeof propForm[number];
+export type PropForm = (typeof propForm)[number];
 export const defaultPropForm = propForm[0];
 
 export const propView = ['default', 'clear'] as const;
-export type PropView = typeof propView[number];
+export type PropView = (typeof propView)[number];
 export const defaultPropView = propView[0];
 
 export const propStatus = ['alert', 'warning', 'success'] as const;
-export type PropStatus = typeof propStatus[number];
+export type PropStatus = (typeof propStatus)[number];
 
 export type CommonSelectProps<ITEM> = {
   options: ITEM[];

@@ -23,7 +23,7 @@ const rowsProf = [
   },
 ];
 
-const columns: TableColumn<typeof rowsProf[number]>[] = [
+const columns: TableColumn<(typeof rowsProf)[number]>[] = [
   {
     title: '№',
     accessor: 'id',

@@ -9,7 +9,10 @@
   &_type_running {
     --line-thickness: 2px;
     background-color: var(--color-control-bg-primary);
-    transition: transform 0.25s, width 0.25s, height 0.25s;
+    transition:
+      transform 0.25s,
+      width 0.25s,
+      height 0.25s;
   }
 
   &_position_bottom,

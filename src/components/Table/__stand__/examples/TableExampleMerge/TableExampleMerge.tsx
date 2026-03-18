@@ -12,7 +12,7 @@ const rows = [
   { id: '5', person: 'Кристофер Робин', food: 'Мёд' },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: 'Кто',
     accessor: 'person',

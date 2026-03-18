@@ -10,7 +10,7 @@
     padding-right: var(--space-xs);
     padding-left: var(--space-xs);
 
-    @media (min-width: 800px) {
+    @media (width >= 800px) {
       position: static;
       z-index: auto;
       right: auto;

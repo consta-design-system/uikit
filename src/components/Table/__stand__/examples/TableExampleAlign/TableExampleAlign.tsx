@@ -17,7 +17,7 @@ const rowsProf = [
   },
 ];
 
-const columns: TableColumn<typeof rowsProf[number]>[] = [
+const columns: TableColumn<(typeof rowsProf)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -38,7 +38,7 @@ const columns: TableColumn<typeof rowsProf[number]>[] = [
   },
 ];
 
-const columnsAlignLeft: TableColumn<typeof rows[number]>[] = [
+const columnsAlignLeft: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -51,7 +51,7 @@ const columnsAlignLeft: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-const columnsAlignCenter: TableColumn<typeof rows[number]>[] = [
+const columnsAlignCenter: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -64,7 +64,7 @@ const columnsAlignCenter: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-const columnsAlignRight: TableColumn<typeof rows[number]>[] = [
+const columnsAlignRight: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',

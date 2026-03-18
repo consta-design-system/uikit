@@ -13,7 +13,7 @@ import { Text } from '../Text/Text';
 import { useTheme } from '../Theme/Theme';
 
 export const informerPropView = ['filled', 'bordered', 'outline'] as const;
-export type InformerPropView = typeof informerPropView[number];
+export type InformerPropView = (typeof informerPropView)[number];
 export const informerPropViewDefault: InformerPropView = informerPropView[0];
 
 export const informerPropStatus = [
@@ -23,12 +23,12 @@ export const informerPropStatus = [
   'warning',
   'normal',
 ] as const;
-export type InformerPropStatus = typeof informerPropStatus[number];
+export type InformerPropStatus = (typeof informerPropStatus)[number];
 export const informerPropStatusDefault: InformerPropStatus =
   informerPropStatus[0];
 
 export const informerPropSize = ['m', 's'] as const;
-export type InformerPropSize = typeof informerPropSize[number];
+export type InformerPropSize = (typeof informerPropSize)[number];
 export const informerPropSizeDefault: InformerPropSize = informerPropSize[0];
 
 type Props = {

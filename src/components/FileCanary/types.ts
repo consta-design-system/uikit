@@ -4,7 +4,7 @@ import { AsTags } from '##/utils/types/AsTags';
 import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
 
 export const filePropSize = ['s', 'm'] as const;
-export type FilePropSize = typeof filePropSize[number];
+export type FilePropSize = (typeof filePropSize)[number];
 export const filePropSizeDefault: FilePropSize = filePropSize[1];
 
 export type FileTypeConfig = {

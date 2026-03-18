@@ -9,15 +9,15 @@ import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttribut
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
 
 export const radioPropSize = ['m', 'l', 's', 'xs'] as const;
-export type RadioPropSize = typeof radioPropSize[number];
+export type RadioPropSize = (typeof radioPropSize)[number];
 export const radioPropSizeDefault: RadioPropSize = radioPropSize[0];
 
 export const radioPropView = ['primary', 'ghost'] as const;
-export type RadioPropView = typeof radioPropView[number];
+export type RadioPropView = (typeof radioPropView)[number];
 export const radioPropViewDefault: RadioPropView = radioPropView[0];
 
 export const radioPropAlign = ['center', 'top'] as const;
-export type RadioPropAlign = typeof radioPropAlign[number];
+export type RadioPropAlign = (typeof radioPropAlign)[number];
 export const radioPropAlignDefault: RadioPropAlign = radioPropAlign[0];
 
 const radioPropOnChangeDefault = () => {};

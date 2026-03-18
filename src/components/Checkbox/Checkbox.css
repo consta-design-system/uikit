@@ -79,7 +79,10 @@
         background-color: var(--checkbox-checked-check);
         border: none;
         opacity: 1;
-        transition: opacity 0.15s, transform 0.15s, background-color 0.08s 0.04s;
+        transition:
+          opacity 0.15s,
+          transform 0.15s,
+          background-color 0.08s 0.04s;
         transform: rotate(0) translate(0, -50%);
       }
     }
@@ -114,7 +117,7 @@
     }
 
     &_top {
-      align-items: top;
+      align-items: start;
 
       .Checkbox-Input {
         margin-top: var(--align-top-margin);
@@ -141,7 +144,9 @@
       var(--color-control-bg-border-default);
     border-radius: var(--control-radius);
     cursor: pointer;
-    transition: border-color 0.15s, background-color 0.15s;
+    transition:
+      border-color 0.15s,
+      background-color 0.15s;
     flex-shrink: 0;
     -webkit-appearance: none;
 
@@ -159,7 +164,10 @@
       border-bottom: var(--checkbox-arrow-width) solid
         var(--checkbox-checked-check);
       opacity: 0;
-      transition: opacity 0.15s, transform 0.15s, background-color 0.08s;
+      transition:
+        opacity 0.15s,
+        transform 0.15s,
+        background-color 0.08s;
       transform: rotate(-50deg) scale(0, 1);
       transform-origin: 0 0;
     }

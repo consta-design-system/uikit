@@ -28,7 +28,7 @@
   }
 
   &_isResized {
-    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   &_isClickable {
@@ -106,7 +106,7 @@
       &_break {
         max-width: 100%;
         white-space: pre-wrap;
-        word-break: break-word;
+        overflow-wrap: break-word;
       }
     }
 

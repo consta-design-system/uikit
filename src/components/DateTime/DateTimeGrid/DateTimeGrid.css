@@ -12,6 +12,6 @@
     var(--date-time-grid-columns),
     var(--date-time-cell-width)
   );
-  grid-row-gap: var(--date-time-grid-row-gap);
+  row-gap: var(--date-time-grid-row-gap);
   justify-content: start;
 }

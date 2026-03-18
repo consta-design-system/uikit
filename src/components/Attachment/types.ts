@@ -2,7 +2,7 @@ import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
 export const attachmentPropSize = ['s', 'xs', 'm'] as const;
-export type AttachmentPropSize = typeof attachmentPropSize[number];
+export type AttachmentPropSize = (typeof attachmentPropSize)[number];
 export const attachmentPropSizeDefault: AttachmentPropSize =
   attachmentPropSize[0];
 

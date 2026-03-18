@@ -11,7 +11,7 @@ import { useMutableRef } from '##/hooks/useMutableRef';
 
 export const withTooltipPropMode = ['mouseover', 'click'] as const;
 export const withTooltipPropModeDefault = withTooltipPropMode[0];
-type WithTooltipPropMode = typeof withTooltipPropMode[number];
+type WithTooltipPropMode = (typeof withTooltipPropMode)[number];
 
 export const appearTimeoutDefault = 400;
 export const exitTimeoutDefault = 200;

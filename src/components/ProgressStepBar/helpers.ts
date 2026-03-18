@@ -5,12 +5,12 @@ import { cn } from '../../utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 export const progressStepBarPropSize = ['s', 'xs', 'm'] as const;
-export type ProgressStepBarPropSize = typeof progressStepBarPropSize[number];
+export type ProgressStepBarPropSize = (typeof progressStepBarPropSize)[number];
 export const progressStepBarPropSizeDefault = progressStepBarPropSize[0];
 
 export const progressStepBarPropDirection = ['horizontal', 'vertical'] as const;
 export type ProgressStepBarPropDirection =
-  typeof progressStepBarPropDirection[number];
+  (typeof progressStepBarPropDirection)[number];
 export const progressStepBarPropDirectionDefault =
   progressStepBarPropDirection[0];
 
@@ -21,18 +21,18 @@ export const progressStepBarPropStatus = [
   'alert',
 ] as const;
 export type ProgressStepBarPropStatus =
-  typeof progressStepBarPropStatus[number];
+  (typeof progressStepBarPropStatus)[number];
 export const progressStepBarPropStatusDefault = progressStepBarPropStatus[0];
 
 export const progressStepBarPointNumbersMap = [
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
 ] as const;
 export type ProgressStepBarPointNumbersMap =
-  typeof progressStepBarPointNumbersMap[number];
+  (typeof progressStepBarPointNumbersMap)[number];
 
 export const progressStepBarPropPosition = ['center', 'start', 'end'] as const;
 export type ProgressStepBarPropPosition =
-  typeof progressStepBarPropPosition[number];
+  (typeof progressStepBarPropPosition)[number];
 export const progressStepBarPropPositionDefault: ProgressStepBarPropPosition =
   progressStepBarPropPosition[0];
 

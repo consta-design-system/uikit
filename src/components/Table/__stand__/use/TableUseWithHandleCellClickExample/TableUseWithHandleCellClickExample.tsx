@@ -14,7 +14,7 @@ const rows = [
   { id: '2', name: 'Василий' },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',

@@ -11,10 +11,10 @@ import { useBreakpoints } from './useBreakpoints';
 export * from './GridItem/GridItem';
 
 export const gridPropXAlign = ['left', 'center', 'right'] as const;
-export type GridPropXAlign = typeof gridPropXAlign[number];
+export type GridPropXAlign = (typeof gridPropXAlign)[number];
 
 export const gridPropYAlign = ['top', 'center', 'bottom'] as const;
-export type GridPropYAlign = typeof gridPropYAlign[number];
+export type GridPropYAlign = (typeof gridPropYAlign)[number];
 
 export const gridPropGap = [
   0,
@@ -30,13 +30,13 @@ export const gridPropGap = [
   '5xl',
   '6xl',
 ] as const;
-export type GridPropGap = typeof gridPropGap[number] | '0';
+export type GridPropGap = (typeof gridPropGap)[number] | '0';
 
 export type GridPropColGap = GridPropGap;
 export type GridPropRowGap = GridPropGap;
 
 export const breakpointSizes = ['xs', 's', 'm', 'l', 'xl', '2xl'] as const;
-export type BreakpointSizes = typeof breakpointSizes[number];
+export type BreakpointSizes = (typeof breakpointSizes)[number];
 
 type Breakpoint = {
   cols?: number | string;

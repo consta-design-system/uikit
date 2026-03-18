@@ -8,7 +8,7 @@ const rows = [
   { id: '2', name: 'Василий' },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -19,7 +19,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-const filters: TableFilters<typeof rows[number]> = [
+const filters: TableFilters<(typeof rows)[number]> = [
   {
     id: 'executor',
     name: 'Антон',

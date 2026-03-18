@@ -12,19 +12,19 @@ import { TextField, TextFieldPropOnChange } from '../TextField/TextField';
 import { getPaginationInfo } from './helpers';
 
 export const paginationForms = ['default', 'round', 'brick'] as const;
-export type PaginationPropForm = typeof paginationForms[number];
+export type PaginationPropForm = (typeof paginationForms)[number];
 export const paginationDefaultForm: PaginationPropForm = 'default';
 
 export const paginationSizes = ['xs', 's', 'm', 'l'] as const;
-export type PaginationPropSize = typeof paginationSizes[number];
+export type PaginationPropSize = (typeof paginationSizes)[number];
 export const paginationDefaultSize: PaginationPropSize = 'm';
 
 export const paginationTypes = ['default', 'input'] as const;
-export type PaginationPropType = typeof paginationTypes[number];
+export type PaginationPropType = (typeof paginationTypes)[number];
 export const paginationDefaultType: PaginationPropType = 'default';
 
 export const paginationPositions = ['left', 'center', 'right'] as const;
-export type PaginationPropPosition = typeof paginationPositions[number];
+export type PaginationPropPosition = (typeof paginationPositions)[number];
 export const paginationDefaultPosition: PaginationPropPosition = 'center';
 
 const getDefaultLabel = (totalPages: number): string => `из ${totalPages}`;

@@ -11,7 +11,7 @@ import {
   zebraStriped,
 } from '../../../Table';
 
-const defaultProps: TableProps<typeof tableData.rows[number]> = {
+const defaultProps: TableProps<(typeof tableData.rows)[number]> = {
   columns: tableData.columns,
   rows: tableData.rows,
   filters: tableData.filters,

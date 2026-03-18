@@ -18,7 +18,10 @@
   font-size: var(--tag-base-font-size);
   line-height: var(--tag-base-height);
   text-decoration: none;
-  transition: box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+  transition:
+    box-shadow 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
 
   &:focus,
   &:focus:hover {

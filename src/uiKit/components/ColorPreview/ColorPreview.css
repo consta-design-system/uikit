@@ -31,23 +31,26 @@
       left: 50%;
       width: 50%;
       height: 100%;
-      background-image: linear-gradient(
+      background-image:
+        linear-gradient(
           45deg,
-          rgba(0, 0, 0, 0.5) 25%,
+          rgb(0 0 0 / 0.5) 25%,
           transparent 25%,
           transparent 75%,
-          rgba(0, 0, 0, 0.5) 75%,
-          rgba(0, 0, 0, 0.5)
+          rgb(0 0 0 / 0.5) 75%,
+          rgb(0 0 0 / 0.5)
         ),
         linear-gradient(
           45deg,
-          rgba(0, 0, 0, 0.5) 25%,
+          rgb(0 0 0 / 0.5) 25%,
           transparent 25%,
           transparent 75%,
-          rgba(0, 0, 0, 0.5) 75%,
-          rgba(0, 0, 0, 0.5)
+          rgb(0 0 0 / 0.5) 75%,
+          rgb(0 0 0 / 0.5)
         );
-      background-position: 0 0, 5px 5px;
+      background-position:
+        0 0,
+        5px 5px;
       background-size: 10px 10px;
       border-radius: 0 99em 99em 0;
       transform: rotate(45deg);

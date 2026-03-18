@@ -1,11 +1,11 @@
 import { IconComponent } from '@consta/icons/Icon';
 
 export const badgePropSize = ['xs', 's', 'm', 'l'] as const;
-export type BadgePropSize = typeof badgePropSize[number];
+export type BadgePropSize = (typeof badgePropSize)[number];
 export const badgePropSizeDefault: BadgePropSize = 'm';
 
 export const badgePropView = ['filled', 'stroked', 'tinted'] as const;
-export type BadgePropView = typeof badgePropView[number];
+export type BadgePropView = (typeof badgePropView)[number];
 export const badgePropViewDefault: BadgePropView = badgePropView[0];
 
 export const badgePropStatus = [
@@ -16,11 +16,11 @@ export const badgePropStatus = [
   'system',
   'disabled',
 ] as const;
-export type BadgePropStatus = typeof badgePropStatus[number] | 'error';
+export type BadgePropStatus = (typeof badgePropStatus)[number] | 'error';
 export const badgePropStatusDefault: BadgePropStatus = badgePropStatus[0];
 
 export const badgePropForm = ['default', 'round'] as const;
-export type BadgePropForm = typeof badgePropForm[number];
+export type BadgePropForm = (typeof badgePropForm)[number];
 export const badgePropFormDefault: BadgePropForm = badgePropForm[0];
 
 export type BadgeProps = {

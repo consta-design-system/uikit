@@ -8,7 +8,7 @@ import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 export const responsesPropSize = ['l', 'm'] as const;
-export type ResponsesPropSize = typeof responsesPropSize[number];
+export type ResponsesPropSize = (typeof responsesPropSize)[number];
 export const responsesPropSizeDefault: ResponsesPropSize = responsesPropSize[0];
 
 export type ResponsesProps = PropsWithHTMLAttributes<

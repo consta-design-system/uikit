@@ -6,10 +6,10 @@ import { cnMixSpace } from '../MixSpace/MixSpace';
 type Size = 'xs' | 's' | 'm' | 'l' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
 
 const formMap = ['round', 'square'] as const;
-type FormMap = typeof formMap[number];
+type FormMap = (typeof formMap)[number];
 
 const cardStatus = ['alert', 'success', 'warning'] as const;
-type CardStatus = typeof cardStatus[number] | string;
+type CardStatus = (typeof cardStatus)[number] | string;
 
 type Props = {
   shadow?: boolean;

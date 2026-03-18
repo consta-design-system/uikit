@@ -38,7 +38,7 @@ const BreadcrumbsRender = (
     ...otherProps
   } = withDefaultGetters(props);
 
-  type Item = typeof items[number];
+  type Item = (typeof items)[number];
 
   const shortList = items.length <= 2;
 

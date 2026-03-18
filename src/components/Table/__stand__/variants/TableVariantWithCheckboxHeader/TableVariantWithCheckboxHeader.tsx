@@ -30,7 +30,7 @@ export const TableVariantWithCheckboxHeader = () => {
 
   const areAllSelected = values.every((v) => v);
 
-  const columns: TableColumn<typeof rows[number]>[] = [
+  const columns: TableColumn<(typeof rows)[number]>[] = [
     {
       title: (
         <Checkbox

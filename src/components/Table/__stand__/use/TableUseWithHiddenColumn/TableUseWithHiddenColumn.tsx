@@ -15,7 +15,7 @@ const cnTableUse = cn('TableUse');
 
 export const TableUseWithHiddenColumn = () => {
   const [mock, setMock] = useState<
-    TableProps<typeof rowsForCustomTagLabelFunction[number]>
+    TableProps<(typeof rowsForCustomTagLabelFunction)[number]>
   >(withHiddenColumnTableMock);
   const [isHidden, setIsHidden] = useState<boolean>(true);
 

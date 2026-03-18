@@ -3,11 +3,11 @@ import { IconComponent } from '@consta/icons/Icon';
 import { PropsWithHTMLAttributesAndRef } from '../../utils/types/PropsWithHTMLAttributes';
 
 export const breadcrumbPropSize = ['m', 'xs', 's', 'l'] as const;
-export type BreadcrumbPropSize = typeof breadcrumbPropSize[number];
+export type BreadcrumbPropSize = (typeof breadcrumbPropSize)[number];
 export const breadcrumbPropSizeDefault = breadcrumbPropSize[0];
 
 export const breadcrumbPropFitMode = ['dropdown', 'scroll'] as const;
-export type BreadcrumbPropFitMode = typeof breadcrumbPropFitMode[number];
+export type BreadcrumbPropFitMode = (typeof breadcrumbPropFitMode)[number];
 export const breadcrumbPropFitModeDefault = breadcrumbPropFitMode[0];
 
 export type BreadcrumbsPropGetItemLabel<ITEM> = (item: ITEM) => string;

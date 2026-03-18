@@ -26,7 +26,7 @@ const items = [
 const TestComponent: React.FC<
   Omit<Parameters<typeof EventInterceptorProvider>[0], 'children'>
 > = (eventInterceptorArgs) => {
-  const [value, setValue] = React.useState<typeof items[number] | null>(null);
+  const [value, setValue] = React.useState<(typeof items)[number] | null>(null);
   return (
     <EventInterceptorProvider {...eventInterceptorArgs}>
       <Select

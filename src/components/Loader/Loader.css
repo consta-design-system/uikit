@@ -92,8 +92,8 @@
     }
 
     &_circle {
-      --loader-type-circle-mask: conic-gradient(#0000 2%, #000),
-        linear-gradient(#000 0 0) content-box;
+      --loader-type-circle-mask:
+        conic-gradient(#0000 2%, #000), linear-gradient(#000 0 0) content-box;
       width: var(--loader-type-circle-size-var);
       height: var(--loader-type-circle-size-var);
       padding: round(up, calc(var(--loader-type-circle-size-var) / 10), 1px);

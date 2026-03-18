@@ -72,11 +72,11 @@ export const popoverPropOffset = [
   '5xl',
   '6xl',
 ] as const;
-export type PopoverPropOffset = typeof popoverPropOffset[number] | number;
+export type PopoverPropOffset = (typeof popoverPropOffset)[number] | number;
 
 export const directions = [...directionsStartCenter, ...directionsStartEdge];
 
-export type Direction = typeof directions[number];
+export type Direction = (typeof directions)[number];
 
 export type Position = { x: number; y: number } | undefined;
 

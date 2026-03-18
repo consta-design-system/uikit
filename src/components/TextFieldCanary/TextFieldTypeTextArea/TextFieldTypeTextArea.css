@@ -9,7 +9,8 @@
     (
         var(--field-control-layout-slot-height) -
           var(--field-control-layout-text-line-height)
-      ) / 2
+      ) /
+      2
   );
   --text-field-textarea-control-height: var(
     --text-field-height,

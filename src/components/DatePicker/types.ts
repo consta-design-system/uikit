@@ -28,7 +28,7 @@ export const datePickerPropType = [
   'month-range',
 ] as const;
 
-export type DatePickerPropType = typeof datePickerPropType[number];
+export type DatePickerPropType = (typeof datePickerPropType)[number];
 export const datePickerPropTypeDefault = datePickerPropType[0];
 
 export type DatePickerPropDateTimeView = DateTimePropView;
@@ -65,7 +65,7 @@ export const datePickerPropDropdownForm = [
   'round',
 ] as const;
 export type DatePickerPropDropdownForm =
-  typeof datePickerPropDropdownForm[number];
+  (typeof datePickerPropDropdownForm)[number];
 export const datePickerPropDropdownFormDefault = datePickerPropDropdownForm[0];
 
 type DatePickerPropInputRef<TYPE> = TYPE extends Range
@@ -183,7 +183,7 @@ export type DatePickerTypeComponent<TYPE extends DatePickerPropType> = (
 export type DatePickerPropOnError = (
   props:
     | {
-        type: typeof datePickerErrorTypes[0];
+        type: (typeof datePickerErrorTypes)[0];
         stringValue: string;
         dd?: string;
         MM?: string;
@@ -194,7 +194,7 @@ export type DatePickerPropOnError = (
         date: Date;
       }
     | {
-        type: typeof datePickerErrorTypes[1];
+        type: (typeof datePickerErrorTypes)[1];
         stringValue: string;
         dd?: string;
         MM?: string;
@@ -204,11 +204,11 @@ export type DatePickerPropOnError = (
         HH?: string;
       }
     | {
-        type: typeof datePickerErrorTypes[2];
+        type: (typeof datePickerErrorTypes)[2];
         date: [Date, Date];
       }
     | {
-        type: typeof datePickerErrorTypes[3];
+        type: (typeof datePickerErrorTypes)[3];
         stringValue: string;
         date: Date;
         HH?: string;

@@ -6,9 +6,8 @@ import { useMutableRef } from '##/hooks/useMutableRef/useMutableRef';
 import { TextFieldPropOnChange } from './types';
 
 export const useTextField = <
-  INPUT_ELEMENT extends
-    | HTMLInputElement
-    | HTMLTextAreaElement = HTMLInputElement,
+  INPUT_ELEMENT extends HTMLInputElement | HTMLTextAreaElement =
+    HTMLInputElement,
 >({
   onClick,
   onChange,

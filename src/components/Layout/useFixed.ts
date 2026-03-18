@@ -11,11 +11,11 @@ export type UseFixedData = {
 };
 
 const verticalAlign = ['top', 'bottom'] as const;
-type VerticalAlign = typeof verticalAlign[number];
+type VerticalAlign = (typeof verticalAlign)[number];
 const verticalAlignDefault: VerticalAlign = verticalAlign[0];
 
 const horizontalAlign = ['left', 'right'] as const;
-type HorizontalAlign = typeof horizontalAlign[number];
+type HorizontalAlign = (typeof horizontalAlign)[number];
 const horizontalAlignDefault: HorizontalAlign = horizontalAlign[0];
 
 type UseFixed = (

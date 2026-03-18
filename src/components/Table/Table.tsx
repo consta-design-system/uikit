@@ -61,13 +61,13 @@ export { TableChoiceGroupFilter } from './ChoiceGroupFilter/TableChoiceGroupFilt
 const cnTable = cn('Table');
 
 export const sizes = ['s', 'm', 'l'] as const;
-type Size = typeof sizes[number];
+type Size = (typeof sizes)[number];
 
 export const zebraStriped = ['odd', 'even'] as const;
-type ZebraStriped = typeof zebraStriped[number];
+type ZebraStriped = (typeof zebraStriped)[number];
 
 export const headerVerticalAligns = ['center', 'bottom'] as const;
-export type HeaderVerticalAlign = typeof headerVerticalAligns[number];
+export type HeaderVerticalAlign = (typeof headerVerticalAligns)[number];
 
 const createButtonSizeMap: Record<Size, ButtonPropSize> = {
   s: 'xs',
@@ -352,9 +352,8 @@ const InternalTable = <T extends TableRow>(
 
   const getColumnsWidth = () =>
     lowHeaders.map((column: TableColumn<T>) => column.width);
-  const [resizedColumnWidths, setResizedColumnWidths] = React.useState<
-    ColumnWidth[]
-  >(getColumnsWidth());
+  const [resizedColumnWidths, setResizedColumnWidths] =
+    React.useState<ColumnWidth[]>(getColumnsWidth());
 
   const filters = React.useMemo(() => {
     return (

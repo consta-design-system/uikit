@@ -43,7 +43,9 @@
       &_entered,
       &_exiting {
         pointer-events: none;
-        transition: transform 0.2s, opacity 0.2s;
+        transition:
+          transform 0.2s,
+          opacity 0.2s;
       }
 
       &_entered {

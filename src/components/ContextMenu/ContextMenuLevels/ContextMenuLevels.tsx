@@ -47,7 +47,7 @@ export const ContextMenuLevels = (propsComponent: ContextMenuLevelsProps) => {
 
   const isOpenRef = useMutableRef(isOpen);
 
-  type Item = typeof items[number];
+  type Item = (typeof items)[number];
 
   const defaultLevels: Level<ContextMenuItemDefault>[] = [
     {

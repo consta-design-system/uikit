@@ -98,7 +98,7 @@ const TabsRender = (props: TabsProps, ref: React.Ref<HTMLDivElement>) => {
   const activeTabIdx = items.findIndex(getChecked);
 
   const renderItem = (
-    item: typeof items[number],
+    item: (typeof items)[number],
     onClick?: () => void,
     renderInDropdown?: boolean,
   ) =>

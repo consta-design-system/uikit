@@ -19,8 +19,12 @@
   font-size: var(--chip-text-size);
   white-space: nowrap;
   text-decoration: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease,
-    box-shadow 0.15s ease, color 0.15s ease, fill 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    color 0.15s ease,
+    fill 0.15s ease;
   gap: calc(var(--chip-space) / 2);
 
   &_status {
