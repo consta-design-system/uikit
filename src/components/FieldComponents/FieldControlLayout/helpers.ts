@@ -35,6 +35,24 @@ export const getBorderStyle = (
     : `none`;
 };
 
+export const getBorderFocusHelper = (
+  form: FieldPropForm,
+  view: FieldPropView,
+) => {
+  if (view !== 'default') {
+    return;
+  }
+  if (borderWidthMap[form][0] === false && borderWidthMap[form][1] === false) {
+    return 'both';
+  }
+  if (borderWidthMap[form][0] === false) {
+    return 'left';
+  }
+  if (borderWidthMap[form][1] === false) {
+    return 'right';
+  }
+};
+
 const paddingToCss = (
   value: FieldControlLayoutPaddingNode,
   additional: string = '0px',
@@ -44,32 +62,54 @@ const paddingToCss = (
     : `calc(var(--field-control-layout-space) + ${additional})`;
 };
 
-export const getPaddingVertical = (view: FieldPropView): string => {
-  return view === 'default' ? '0px' : 'var(--control-border-width)';
+export const getPaddingVertical = (
+  view: FieldPropView,
+  additional: string = '0px',
+): string => {
+  return view === 'default'
+    ? additional
+    : `calc(var(--control-border-width) + ${additional})`;
 };
+
+export const getPaddingTop = (view: FieldPropView): string =>
+  `var(--field-control-layout-padding-top-override,${getPaddingVertical(
+    view,
+    'var(--field-control-layout-additional-padding-top, 0px)',
+  )})`;
+
+export const getPaddingBottom = (view: FieldPropView): string =>
+  `var(--field-control-layout-padding-bottom-override,
+  ${getPaddingVertical(
+    view,
+    'var(--field-control-layout-additional-padding-bottom, 0px)',
+  )})`;
 
 export const getPaddingLeft = (
   view: FieldPropView,
   form: FieldPropForm,
 ): string => {
-  return view === 'default'
-    ? paddingToCss(
-        paddingMap[form][0],
-        'var(--field-control-layout-additional-padding-left, 0px)',
-      )
-    : `var(--field-control-layout-additional-padding-left, 0px)`;
+  return `var(--field-control-layout-padding-left-override,${
+    view === 'default'
+      ? paddingToCss(
+          paddingMap[form][0],
+          'var(--field-control-layout-additional-padding-left, 0px)',
+        )
+      : `var(--field-control-layout-additional-padding-left, 0px)`
+  })`;
 };
 
 export const getPaddingRight = (
   view: FieldPropView,
   form: FieldPropForm,
 ): string => {
-  return view === 'default'
-    ? paddingToCss(
-        paddingMap[form][1],
-        'var(--field-control-layout-additional-padding-right, 0px)',
-      )
-    : `var(--field-control-layout-additional-padding-right, 0px)`;
+  return `var(--field-control-layout-padding-right-override, ${
+    view === 'default'
+      ? paddingToCss(
+          paddingMap[form][1],
+          'var(--field-control-layout-additional-padding-right, 0px)',
+        )
+      : `var(--field-control-layout-additional-padding-right, 0px)`
+  })`;
 };
 
 const borderRadiusToCss = (
@@ -121,6 +161,7 @@ export const getBgColor = (view: FieldPropView, disabled?: boolean) => {
   if (view === 'default') {
     return 'var(--color-bg-default)';
   }
+  return 'transparent';
 };
 
 export const getSlotsWidthStyles = (

@@ -1,0 +1,22 @@
+.ColorPickerPoint {
+  position: absolute;
+  box-sizing: border-box;
+  width: var(--space-m);
+  height: var(--space-m);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: var(--shadow-layer);
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+
+  &-Fill {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+}

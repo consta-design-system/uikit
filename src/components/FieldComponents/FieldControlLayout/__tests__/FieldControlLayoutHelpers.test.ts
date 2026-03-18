@@ -113,123 +113,131 @@ const getBorderColorResultMap = {
 };
 
 const getPaddingLeftResultMap = {
-  'brick-clear': 'var(--field-control-layout-additional-padding-left, 0px)',
+  'brick-clear':
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'brick-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
   'brickClear-clear':
-    'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'brickClear-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
   'brickDefault-clear':
-    'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'brickDefault-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
   'brickRound-clear':
-    'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'brickRound-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
-  'clear-clear': 'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
+  'clear-clear':
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'clear-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
   'clearBrick-clear':
-    'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'clearBrick-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
   'clearDefault-clear':
-    'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'clearDefault-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
   'clearRound-clear':
-    'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'clearRound-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
-  'default-clear': 'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
+  'default-clear':
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'default-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
   'defaultBrick-clear':
-    'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'defaultBrick-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
   'defaultClear-clear':
-    'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'defaultClear-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px))',
-  'round-clear': 'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-left, 0px)))',
+  'round-clear':
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'round-default':
-    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-left, 0px)))',
   'roundBrick-clear':
-    'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'roundBrick-default':
-    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-left, 0px)))',
   'roundClear-clear':
-    'var(--field-control-layout-additional-padding-left, 0px)',
+    'var(--field-control-layout-padding-left-override,var(--field-control-layout-additional-padding-left, 0px))',
   'roundClear-default':
-    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-left, 0px))',
+    'var(--field-control-layout-padding-left-override,calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-left, 0px)))',
 };
 
 const getPaddingRightResultMap = {
-  'brick-clear': 'var(--field-control-layout-additional-padding-right, 0px)',
+  'brick-clear':
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'brick-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
   'brickClear-clear':
-    'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'brickClear-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
   'brickDefault-clear':
-    'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'brickDefault-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
   'brickRound-clear':
-    'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'brickRound-default':
-    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-right, 0px))',
-  'clear-clear': 'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-right, 0px)))',
+  'clear-clear':
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'clear-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
   'clearBrick-clear':
-    'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'clearBrick-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
   'clearDefault-clear':
-    'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'clearDefault-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
   'clearRound-clear':
-    'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'clearRound-default':
-    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-right, 0px))',
-  'default-clear': 'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-right, 0px)))',
+  'default-clear':
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'default-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
   'defaultBrick-clear':
-    'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'defaultBrick-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
   'defaultClear-clear':
-    'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'defaultClear-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
-  'round-clear': 'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
+  'round-clear':
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'round-default':
-    'calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) * 1.6 + var(--field-control-layout-additional-padding-right, 0px)))',
   'roundBrick-clear':
-    'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'roundBrick-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
   'roundClear-clear':
-    'var(--field-control-layout-additional-padding-right, 0px)',
+    'var(--field-control-layout-padding-right-override, var(--field-control-layout-additional-padding-right, 0px))',
   'roundClear-default':
-    'calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px))',
+    'var(--field-control-layout-padding-right-override, calc(var(--field-control-layout-space) + var(--field-control-layout-additional-padding-right, 0px)))',
 };
 
 const getPaddingVerticalResultMap = {
-  clear: 'var(--control-border-width)',
+  clear: 'calc(var(--control-border-width) + 0px)',
   default: '0px',
 };
 
 const getBgColorResultMap = {
-  'clear-true': undefined,
-  'clear-false': undefined,
+  'clear-true': 'transparent',
+  'clear-false': 'transparent',
   'default-true': 'var(--color-control-bg-disable)',
   'default-false': 'var(--color-bg-default)',
 };

@@ -26,6 +26,9 @@ export const getForm = (
   index: number,
   length: number,
 ): Exclude<FieldGroupPropForm, 'clear'> => {
+  if (length === 1) {
+    return form as Exclude<FieldGroupPropForm, 'clear'>;
+  }
   if (index === 0) {
     return mapForm[form][0];
   }

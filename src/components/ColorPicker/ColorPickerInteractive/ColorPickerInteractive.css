@@ -1,0 +1,31 @@
+.ColorPickerInteractive {
+  position: absolute;
+  top: var(--color-picker-interactive-gap-top, 0);
+  right: var(--color-picker-interactive-gap-right, 0);
+  left: var(--color-picker-interactive-gap-left, 0);
+  bottom: var(--color-picker-interactive-gap-bottom, 0);
+  border-radius: inherit;
+  outline: none;
+  touch-action: none;
+
+  &:focus .ColorPickerPoint {
+    z-index: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  &-LeftButton,
+  &-RightButton {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--color-picker-interactive-gap-left, 0);
+  }
+
+  &-LeftButton {
+    left: 0;
+  }
+
+  &-RightButton {
+    right: 0;
+  }
+}

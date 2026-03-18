@@ -1,0 +1,16 @@
+.ColorPickerRoot {
+  &_withAnchor {
+    overflow: hidden;
+    width: 282px;
+    background: var(--color-bg-default);
+    border: var(--control-border-width) solid var(--color-bg-border);
+    border-radius: var(--control-radius);
+    box-shadow: var(--shadow-layer);
+  }
+
+  &:not(&_withAnchor) {
+    .ModalLayout-Slot {
+      background-color: transparent;
+    }
+  }
+}

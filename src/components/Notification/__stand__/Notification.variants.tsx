@@ -226,7 +226,7 @@ const defaultComponent = keysComponent[0];
 
 const getItem = (item: keyof typeof mapComponent) => item;
 
-export const Variants = () => {
+const Variants = () => {
   const [component, setComponent] = useState(defaultComponent);
 
   const Component = mapComponent[component];

@@ -37,6 +37,7 @@ export type FieldControlLayoutPaddingMap = Record<
 >;
 
 const borderRadiusVariants: FieldControlLayoutBorderRadius[] = [
+  // [top,right,bottom,left]
   [0, 0, 0, 0],
   [0, 'default', 'default', 0],
   [0, 'round', 'round', 0],
@@ -71,7 +72,23 @@ const borderWidthVariants: FieldControlLayoutBorderWidth[] = [
 ];
 
 export const borderWidthMap: FieldControlLayoutBorderWidthMap = {
-  // [top,right,bottom,left]
+  brick: borderWidthVariants[0],
+  brickClear: borderWidthVariants[1],
+  brickDefault: borderWidthVariants[0],
+  brickRound: borderWidthVariants[0],
+  clear: borderWidthVariants[3],
+  clearBrick: borderWidthVariants[2],
+  clearDefault: borderWidthVariants[2],
+  clearRound: borderWidthVariants[2],
+  default: borderWidthVariants[0],
+  defaultBrick: borderWidthVariants[0],
+  defaultClear: borderWidthVariants[1],
+  round: borderWidthVariants[0],
+  roundBrick: borderWidthVariants[0],
+  roundClear: borderWidthVariants[1],
+};
+
+export const borderFocusHelper: FieldControlLayoutBorderWidthMap = {
   brick: borderWidthVariants[0],
   brickClear: borderWidthVariants[1],
   brickDefault: borderWidthVariants[0],

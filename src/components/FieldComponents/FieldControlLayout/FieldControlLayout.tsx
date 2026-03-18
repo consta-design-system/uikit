@@ -10,11 +10,13 @@ import {
   formGuard,
   getBgColor,
   getBorderColor,
+  getBorderFocusHelper,
   getBorderRadius,
   getBorderStyle,
+  getPaddingBottom,
   getPaddingLeft,
   getPaddingRight,
-  getPaddingVertical,
+  getPaddingTop,
   getSlots,
   getSlotsWidthStyles,
 } from './helpers';
@@ -63,7 +65,6 @@ export const FieldControlLayout = forwardRef<
   const rightSlotsRefs = useRefs<HTMLDivElement>(rightSlots.length);
   const leftSlotsWidth = useResizeObserved(leftSlotsRefs, getElementWidth);
   const rightSlotsWidth = useResizeObserved(rightSlotsRefs, getElementWidth);
-  const containerWidth = useResizeObserved(containerRefs, getElementWidth)[0];
 
   // ToDo: Удалить после того как удалим из всех компонентов "clearClear"
   const form = formGuard(formProp);
@@ -75,7 +76,15 @@ export const FieldControlLayout = forwardRef<
       {...otherProps}
       ref={ref}
       className={cnFieldControlLayout(
-        { form, disabled, view, alignSlots, status },
+        {
+          form,
+          disabled,
+          view,
+          alignSlots,
+          status,
+          focused,
+          focusHelper: getBorderFocusHelper(form, view),
+        },
         [className],
       )}
       style={{
@@ -86,7 +95,7 @@ export const FieldControlLayout = forwardRef<
           status,
           disabled,
         ),
-        ['--field-control-layout-height' as string]: `var(--control-height-${size})`,
+        ['--field-control-layout-height' as string]: `var(--field-control-layout-height-override, var(--control-height-${size}))`,
         ['--field-control-layout-space' as string]: `calc(var(--control-space-${size}) * 0.5)`,
         ['--field-control-layout-text-size' as string]: `var(--control-text-size-${size})`,
         ['--field-control-layout-text-line-height' as string]: `var(--line-height-text-m)`,
@@ -98,10 +107,9 @@ export const FieldControlLayout = forwardRef<
           form,
           view,
         ),
-        ['--field-control-layout-padding-top' as string]:
-          getPaddingVertical(view),
+        ['--field-control-layout-padding-top' as string]: getPaddingTop(view),
         ['--field-control-layout-padding-bottom' as string]:
-          getPaddingVertical(view),
+          getPaddingBottom(view),
         ['--field-control-layout-padding-left' as string]: getPaddingLeft(
           view,
           form,
@@ -110,14 +118,12 @@ export const FieldControlLayout = forwardRef<
           view,
           form,
         ),
-        // ['--field-control-layout-padding' as string]: getPadding(form, view),
         ['--field-control-layout-bg-color' as string]: getBgColor(
           view,
           disabled,
         ),
         ['--field-control-layout-border-width' as string]:
           view === 'default' ? 'var(--control-border-width)' : '0px',
-        ['--field-control-layout-container-width' as string]: `${containerWidth}px`,
         ...getSlotsWidthStyles(leftSlotsWidth, 'left'),
         ...getSlotsWidthStyles(rightSlotsWidth, 'right'),
       }}
@@ -129,7 +135,9 @@ export const FieldControlLayout = forwardRef<
           leftSlots.map((slot, index) =>
             renderContentSlot(slot, index, leftSlotsRefs, leftSlotsRefsProp),
           )}
-        <div className={cnFieldControlLayout('Children')}>{children}</div>
+        {children && (
+          <div className={cnFieldControlLayout('Children')}>{children}</div>
+        )}
         {!!rightSlots.length &&
           rightSlots.map((slot, index) =>
             renderContentSlot(slot, index, rightSlotsRefs, rightSlotsRefsProp),

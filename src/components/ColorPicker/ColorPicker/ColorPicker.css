@@ -1,0 +1,11 @@
+.ColorPicker {
+  &:not(&_withAnchor) {
+    .ModalLayout-Slot:first-child > *:first-child {
+      padding-top: 0;
+    }
+
+    .ModalLayout-Slot:last-child > *:last-child {
+      padding-bottom: 0;
+    }
+  }
+}

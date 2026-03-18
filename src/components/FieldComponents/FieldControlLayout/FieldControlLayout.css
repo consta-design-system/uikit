@@ -35,6 +35,10 @@
       var(--field-control-layout-space) +
       var(--field-control-layout-right-slot-contents-width)
   );
+  --field-control-layout-container-width: calc(
+    100% - var(--field-control-layout-padding-left) -
+      var(--field-control-layout-padding-right)
+  );
   --field-control-layout-children-width: calc(
     var(--field-control-layout-container-width) -
       (
@@ -46,6 +50,7 @@
     var(--field-control-layout-padding-right)
     var(--field-control-layout-padding-bottom)
     var(--field-control-layout-padding-left);
+  --field-control-layout-focus-helper-color: transparent;
   box-sizing: border-box;
   width: 100%;
   min-height: var(--field-control-layout-height);
@@ -60,6 +65,29 @@
   transition:
     border-color 0.15s,
     box-shadow 0.15s;
+
+  &_focused {
+    --field-control-layout-focus-helper-color: var(
+      --field-control-layout-border-color
+    );
+  }
+
+  &_focusHelper {
+    &_left {
+      box-shadow: 1px 0 0 0 var(--field-control-layout-focus-helper-color) inset;
+    }
+
+    &_right {
+      box-shadow: -1px 0 0 0 var(--field-control-layout-focus-helper-color)
+        inset;
+    }
+
+    &_both {
+      box-shadow:
+        1px 0 0 0 var(--field-control-layout-focus-helper-color) inset,
+        -1px 0 0 0 var(--field-control-layout-focus-helper-color) inset;
+    }
+  }
 
   &_disabled {
     --field-control-layout-placeholder-color: var(--color-control-typo-disable);

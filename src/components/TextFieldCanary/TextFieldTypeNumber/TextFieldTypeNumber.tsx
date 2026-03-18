@@ -180,6 +180,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
               icon={iconClear}
             />
           ),
+          renderSide(rightSide, size, iconSize),
           incrementButtons && refs.current[4] && (
             <FieldCounter
               onIncrementClick={handleIncrementButton}
