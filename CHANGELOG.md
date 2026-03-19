@@ -1,5 +1,22 @@
 # Changelog
 
+## v5.32.0 (19/03/2026)
+Самое важное:
+- Мы добавили компонент `ColorPicker`. Он позволяет удобно выбирать цвета и поддерживает все основные цветовые модели, а также работает с пользовательскими.
+
+⚠️ Ваш проект может потребовать доработок из-за обновления `date-fns`. Подробнее об этом можно узнать [здесь](https://github.com/consta-design-system/uikit/pull/4165).
+
+---
+- [chore(deps): update date-fns (#4165)](https://github.com/consta-design-system/uikit/commit/ef4c73b0eca8513e71ce2b6e5e6919da67cd8034) - [@gizeasy](https://github.com/gizeasy)
+- [feat(ColorPicker): add component (#4162)](https://github.com/consta-design-system/uikit/commit/dc7fa1abc0772386b68944f81ca3b7fbbe6c9829) - [@gizeasy](https://github.com/gizeasy)
+- [docs(Tooltip): add doc for `container` prop (#4166)](https://github.com/consta-design-system/uikit/commit/1fcbfeeaf44523a49185894a83ccbb619ff55143) - [@baevm](https://github.com/baevm)
+- [chore(stylelint): update to v17 (#4167)](https://github.com/consta-design-system/uikit/commit/2c546f306d4a3016adabaf99accae804e3c862fc) - [@gizeasy](https://github.com/gizeasy)
+- [chore(CI): run linters in github actions without autofix (#4155)](https://github.com/consta-design-system/uikit/commit/b6327cd32675752d7f5dd742abcaedebd778f02c) - [@baevm](https://github.com/baevm)
+- [chore(stylelint): update stylelint to v15 (#4161)](https://github.com/consta-design-system/uikit/commit/3472c91d47f778411beff1f0c7ff779b1a342ddf) - [@baevm](https://github.com/baevm)
+- [fix(Combobox/UserSelect): fix `Maximum update depth exceeded` (#4164)](https://github.com/consta-design-system/uikit/commit/c06160da5dc46d5a9275d732e6ec4a3b7a360da9) - [@baevm](https://github.com/baevm)
+
+--------------------
+
 ## v5.31.0 (12/03/2026)
 Самое важное:
 - Добавлено свойство `container` для компонетов с `Popover`
@@ -380,14 +397,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [feat(SnackBar): add progress (#3796)](https://github.com/consta-design-system/uikit/commit/0cb9703b6a9956aaf2563717fd471a79d67b6d10) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Badge): add _view_pinted and _status_disabled (#3792)](https://github.com/consta-design-system/uikit/commit/04e198e5261fbf69df6de065a89fc5f791773319) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Popover): add container property (#3812)](https://github.com/consta-design-system/uikit/commit/00c224a26cfd9b14f2959f2f9d9891bd91f2642a) - [@ZettZet](https://github.com/ZettZet)
-
---------------------
-
-## v5.13.0 (31/10/2024)
-Самое важное:
-- В `Informer` добавили новый вид `outline`.
-
----
-
-- [docs(TextField): remove wrapper from stand (#3793)](https://github.com/consta-design-system/uikit/commit/e9d1b61da756986bbe43dedb89378d149adc2b89) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Informer): add _view_outline (#3791)](https://github.com/consta-design-system/uikit/commit/35d82b078711f6b61238e73336c16ad1f9b4a5e3) - [@gizeasy](https://github.com/gizeasy)
