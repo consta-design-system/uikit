@@ -13,13 +13,13 @@ import { Text } from '##/components/Text';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
+import { ProgressStepBar } from '../ProgressStepBar';
 import {
   progressStepBarPropDirection,
   progressStepBarPropDirectionDefault,
   progressStepBarPropSize,
   progressStepBarPropSizeDefault,
-} from '../helpers';
-import { ProgressStepBar } from '../ProgressStepBar';
+} from '../types';
 
 const cnProgressStepBarVariants = cn('ProgressStepBarVariants');
 

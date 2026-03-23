@@ -4,15 +4,15 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
 import {
+  cnProgressStepBarItem,
+  ProgressStepBarItem,
+} from '../ProgressStepBarItem/ProgressStepBarItem';
+import {
   progressStepBarPropDirection,
   progressStepBarPropPosition,
   progressStepBarPropSize,
   progressStepBarPropStatus,
-} from '../helpers';
-import {
-  cnProgressStepBarItem,
-  ProgressStepBarItem,
-} from '../ProgressStepBarItem/ProgressStepBarItem';
+} from '../types';
 
 type ProgressStepBarItemProps = React.ComponentProps<
   typeof ProgressStepBarItem
