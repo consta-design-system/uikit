@@ -7,7 +7,7 @@ import {
   Line,
   ProgressStepBarPropDirection,
   ProgressStepBarPropSize,
-} from '../helpers';
+} from '../types';
 
 type ProgressStepBarLineProps = {
   lines: Line[];

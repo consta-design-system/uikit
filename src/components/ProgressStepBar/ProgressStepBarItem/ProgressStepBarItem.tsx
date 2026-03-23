@@ -18,7 +18,7 @@ import {
   ProgressStepBarPointNumbersMap,
   progressStepBarPropPositionDefault,
   progressStepBarPropStatusDefault,
-} from '../helpers';
+} from '../types';
 
 export const cnProgressStepBarItem = cn('ProgressStepBarItem');
 
