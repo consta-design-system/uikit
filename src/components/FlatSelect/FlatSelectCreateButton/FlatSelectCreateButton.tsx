@@ -1,7 +1,7 @@
 import './FlatSelectCreateButton.css';
 
-import { AtomMut } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
+import { AtomLike } from '@reatom/core';
+import { useAtom } from '@reatom/react';
 import React, { forwardRef } from 'react';
 
 import { FieldPropSize } from '##/components/FieldComponents';
@@ -16,12 +16,12 @@ type LabelForCreate =
 type FlatSelectCreateButtonProps = PropsWithHTMLAttributesAndRef<
   {
     labelForCreate?: LabelForCreate;
-    inputValueAtom: AtomMut<string>;
+    inputValueAtom: AtomLike<string>;
     size: FieldPropSize;
     indent: 'normal' | 'increased';
     index: number;
-    highlightedIndexAtom: AtomMut<number>;
-    disabledAtom: AtomMut<boolean>;
+    highlightedIndexAtom: AtomLike<number>;
+    disabledAtom: AtomLike<boolean>;
   },
   HTMLDivElement
 >;
@@ -58,14 +58,14 @@ export const FlatSelectCreateButton: FlatSelectCreateButtonComponent =
       ...otherProps
     } = props;
 
-    const [active] = useAtom((ctx) => {
-      const highlightedIndex = ctx.spy(highlightedIndexAtom);
-      const disabled = ctx.spy(disabledAtom);
+    const [active] = useAtom(() => {
+      const highlightedIndex = highlightedIndexAtom();
+      const disabled = disabledAtom();
       if (disabled) {
         return false;
       }
       return index === highlightedIndex;
-    });
+    }, [index]);
 
     const [inputValue] = useAtom(inputValueAtom);
     const [disabled] = useAtom(disabledAtom);

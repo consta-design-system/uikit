@@ -1,5 +1,5 @@
-import { AtomMut } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
+import { AtomLike } from '@reatom/core';
+import { useAtom } from '@reatom/react';
 import React, { forwardRef } from 'react';
 
 import { Checkbox } from '##/components/Checkbox';
@@ -16,9 +16,9 @@ export type SelectItemAllProps = PropsWithHTMLAttributesAndRef<
     size: FieldPropSize;
     hovered?: boolean;
     indent?: 'normal' | 'increased';
-    groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
+    groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
     groupId: string | number;
-    highlightedIndexAtom: AtomMut<number>;
+    highlightedIndexAtom: AtomLike<number>;
     index: number;
     label: string;
   },
@@ -35,16 +35,16 @@ const textSizeMap: Record<FieldPropSize, TextPropSize> = {
 };
 
 const SelectItemAllCounter: React.FC<{
-  groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
+  groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
   groupId: string | number;
   size: FieldPropSize;
 }> = ({ groupsCounterAtom, groupId, size }) => {
-  const [total] = useAtom((ctx) => {
-    const counter = ctx.spy(groupsCounterAtom);
+  const [total] = useAtom(() => {
+    const counter = groupsCounterAtom();
     return counter[groupId]?.[1] || 0;
   });
-  const [selected] = useAtom((ctx) => {
-    const counter = ctx.spy(groupsCounterAtom);
+  const [selected] = useAtom(() => {
+    const counter = groupsCounterAtom();
     return counter[groupId]?.[0] || 0;
   });
 
@@ -58,19 +58,19 @@ const SelectItemAllCounter: React.FC<{
 };
 
 const SelectItemAllCounterCheckbox: React.FC<{
-  groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
+  groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
   groupId: string | number;
   size: FieldPropSize;
 }> = ({ groupsCounterAtom, groupId, size }) => {
-  const [checked] = useAtom((ctx) => {
-    const counter = ctx.spy(groupsCounterAtom);
+  const [checked] = useAtom(() => {
+    const counter = groupsCounterAtom();
     if (counter[groupId] === undefined) {
       return false;
     }
     return counter[groupId][0] === counter[groupId][1];
   });
-  const [intermediate] = useAtom((ctx) => {
-    const counter = ctx.spy(groupsCounterAtom);
+  const [intermediate] = useAtom(() => {
+    const counter = groupsCounterAtom();
     if (counter[groupId] === undefined) {
       return false;
     }
@@ -100,7 +100,7 @@ export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
       ...otherProps
     } = props;
 
-    const [hovered] = useAtom((ctx) => ctx.spy(highlightedIndexAtom) === index);
+    const [hovered] = useAtom(() => highlightedIndexAtom() === index, [index]);
 
     return (
       <ListItem

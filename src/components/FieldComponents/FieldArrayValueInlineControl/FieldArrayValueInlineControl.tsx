@@ -1,11 +1,18 @@
-import { AtomMut } from '@reatom/framework';
-import { useAction, useAtom, useUpdate } from '@reatom/npm-react';
-import React, { forwardRef, useRef } from 'react';
+import {
+  action,
+  Atom,
+  atom,
+  Computed,
+  computed,
+  effect,
+  wrap,
+} from '@reatom/core';
+import React, { memo } from 'react';
 
-import { useComponentSize } from '##/hooks/useComponentSize';
-import { useForkRef } from '##/hooks/useForkRef';
-import { usePropAtom, useSendToAtom, withCtx } from '##/utils/state';
-import { useCreateAtom } from '##/utils/state/useCreateAtom';
+import { forkRef } from '##/hooks/useForkRef';
+import { factoryComponent } from '##/utils/state/component';
+import { computedSet } from '##/utils/state/computedSet';
+import { resizeObservedAtom } from '##/utils/state/resizeObservedAtom';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { FieldPropSize } from '../types';
@@ -36,60 +43,42 @@ const inputHeightMap: Record<FieldPropSize, string> = {
   xs: 'var(--space-l)',
 };
 
-const InputFakeElement = forwardRef<
-  HTMLDivElement,
-  PropsWithHTMLAttributes<
-    {
-      valueAtom: AtomMut<string | undefined>;
-      inputMinWidthAtom: AtomMut<number>;
-    },
-    HTMLDivElement
-  >
->(({ valueAtom, inputMinWidthAtom, ...otherProps }, componentRef) => {
-  const [value] = useAtom(valueAtom);
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { width } = useComponentSize(ref);
-
-  useUpdate(
-    (ctx, width) => {
-      inputMinWidthAtom(ctx, width);
-    },
-    [width],
-  );
-
-  return (
-    <div {...otherProps} ref={useForkRef([componentRef, ref])}>
-      {value}
+const InputFakeElement = memo(
+  factoryComponent<
+    HTMLDivElement,
+    PropsWithHTMLAttributes<
+      {
+        valueAtom: Atom<string | undefined>;
+      },
+      HTMLDivElement
+    >
+  >(() => ({ ref, valueAtom, ...otherProps }) => (
+    <div {...otherProps} ref={ref}>
+      {valueAtom()}
     </div>
-  );
-});
+  )),
+);
 
-const Root = forwardRef<
+const Root = factoryComponent<
   HTMLDivElement,
   PropsWithHTMLAttributes<
     {
-      inputMinWidthAtom: AtomMut<number>;
+      inputMinWidthAtom: Computed<number>;
       size: FieldArrayValueInlineControlProps<unknown>['size'];
     },
     HTMLDivElement
   >
 >(
-  (
-    {
+  () =>
+    ({
       children,
       className,
       inputMinWidthAtom,
       size = 'm',
       style,
+      ref,
       ...otherProps
-    },
-    ref,
-  ) => {
-    const [inputMinWidth] = useAtom(inputMinWidthAtom);
-
-    return (
+    }) => (
       <div
         {...otherProps}
         className={cnFieldArrayValueInlineControl(null, [className])}
@@ -98,43 +87,71 @@ const Root = forwardRef<
           ...style,
           ['--field-array-value-inline-control-items-gap' as string]:
             gapMap[size],
-          ['--field-array-value-inline-control-input-min-width' as string]: `${inputMinWidth}px`,
+          ['--field-array-value-inline-control-input-min-width' as string]: `${inputMinWidthAtom()}px`,
           ['--field-array-value-inline-control-vertical-padding' as string]: `${verticalPaddingMap[size]}`,
           ['--field-array-value-inline-control-input-height' as string]: `${inputHeightMap[size]}`,
         }}
       >
         {children}
       </div>
-    );
-  },
+    ),
 );
 
-const FieldArrayValueInlineControlRender = (
-  props: FieldArrayValueInlineControlProps<unknown>,
-  ref: React.Ref<HTMLDivElement>,
-) => {
-  const {
+export const FieldArrayValueInlineControl = factoryComponent<
+  HTMLDivElement,
+  FieldArrayValueInlineControlProps<unknown>
+>(({ inputDefaultValue }, propsAtom) => {
+  const fakeInputEl = atom<HTMLDivElement | null>(null);
+  const inputElAtom = atom<HTMLInputElement | null>(null, 'inputElAtom');
+
+  const inputValuePropAtom = computed(
+    () => propsAtom().inputValue || inputElAtom()?.value || inputDefaultValue,
+  );
+  const inputValueAtom = computedSet(() => inputValuePropAtom());
+
+  const inputMinWidthAtom = resizeObservedAtom(fakeInputEl, (el) =>
+    Math.ceil(el?.getBoundingClientRect().width || 0),
+  );
+
+  const handleChange = action((e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputEl = inputElAtom();
+    if (inputEl) {
+      inputEl.value = e.target.value;
+    }
+    inputValueAtom.set(e.target.value);
+    propsAtom().onChange?.(e);
+  });
+
+  effect(() => {
+    const inputValueProp = inputValuePropAtom();
+    const inputEl = inputElAtom();
+
+    if (inputEl && inputValueProp) {
+      inputEl.value = inputValueProp || '';
+      inputValueAtom.set(inputValueProp);
+    }
+  });
+
+  return ({
+    ref,
+    size,
     className,
-    inputRef: inputRefProp,
-    inputMaxLength,
-    inputMinLength,
-    value = [],
-    inputValue,
-    inputDefaultValue = '',
     renderValue,
+    value = [],
+    disableInput = false,
+    inputRef,
+    inputMaxLength,
     onFocus,
     onBlur,
     autoFocus,
     inputTabIndex,
     inputAriaLabel,
-    disabled,
-    size = 'm',
-    placeholder,
     onKeyDown,
     onKeyDownCapture,
-    onChange,
     onKeyUp,
     onKeyUpCapture,
+    disabled,
+    placeholder,
     onCopy,
     onCopyCapture,
     onCut,
@@ -142,95 +159,58 @@ const FieldArrayValueInlineControlRender = (
     onPaste,
     onPasteCapture,
     onWheel,
-    disableInput,
+    inputDefaultValue,
+    inputMinLength,
+    inputValue,
+    onChange,
     ...otherProps
-  } = props;
-
-  const propsAtom = useSendToAtom(props);
-  const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
-  // const valueAtom = usePropAtom(propsAtom, 'value');
-  const inputValueAtom = useCreateAtom<string | undefined>(
-    inputValue || inputDefaultValue,
-  );
-  const inputDefaultValueAtom = useCreateAtom(inputDefaultValue);
-  const inputMinWidthAtom = useCreateAtom(0);
-
-  const fakeInputRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const handleChange = useAction(
-    (ctx, e: React.ChangeEvent<HTMLInputElement>) => {
-      inputValueAtom(ctx, e.target.value);
-      const { onChange } = ctx.get(propsAtom);
-      if (onChange) {
-        onChange(e);
-      }
-    },
-    [],
-  );
-
-  useAtom((ctx) => {
-    const inputValueProp = ctx.spy(inputValuePropAtom);
-    const inputDefaultValue = ctx.get(inputDefaultValueAtom);
-    if (inputDefaultValue) {
-      inputDefaultValueAtom(ctx, '');
-    } else {
-      if (inputRef.current) {
-        inputRef.current.value = inputValueProp || '';
-      }
-
-      inputValueAtom(ctx, inputValueProp);
-    }
-  });
-
-  return (
-    <Root
-      {...otherProps}
-      className={cnFieldArrayValueInlineControl(null, [className])}
-      ref={ref}
-      size={size}
-      inputMinWidthAtom={inputMinWidthAtom}
-    >
-      {renderValue(value || [])}
-      <input
-        className={cnFieldArrayValueInlineControl('Input', {
-          disabled: disableInput,
-        })}
-        onChange={handleChange}
-        ref={useForkRef([inputRef, inputRefProp])}
-        maxLength={inputMaxLength}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus={autoFocus}
-        tabIndex={inputTabIndex}
-        aria-label={inputAriaLabel}
-        onKeyDown={onKeyDown}
-        onKeyDownCapture={onKeyDownCapture}
-        onKeyUp={onKeyUp}
-        onKeyUpCapture={onKeyUpCapture}
-        disabled={disabled}
-        type="text"
-        placeholder={value.length ? undefined : placeholder}
-        onCopy={onCopy}
-        onCopyCapture={onCopyCapture}
-        onCut={onCut}
-        onCutCapture={onCutCapture}
-        onPaste={onPaste}
-        onPasteCapture={onPasteCapture}
-        onWheel={onWheel}
-        defaultValue={inputDefaultValue}
-        readOnly={disableInput}
-      />
-      <InputFakeElement
-        ref={fakeInputRef}
-        className={cnFieldArrayValueInlineControl('HelperInputFakeElement')}
-        valueAtom={inputValueAtom}
+  }: FieldArrayValueInlineControlProps<unknown>) => {
+    return (
+      <Root
+        {...otherProps}
+        className={cnFieldArrayValueInlineControl(null, [className])}
+        ref={ref}
+        size={size}
         inputMinWidthAtom={inputMinWidthAtom}
-      />
-    </Root>
-  );
-};
+      >
+        {renderValue(value || [])}
 
-export const FieldArrayValueInlineControl = withCtx(
-  forwardRef(FieldArrayValueInlineControlRender),
-) as FieldArrayValueInlineControlComponent;
+        <input
+          className={cnFieldArrayValueInlineControl('Input', {
+            disabled: disableInput,
+          })}
+          onChange={handleChange}
+          ref={forkRef([inputRef, wrap(inputElAtom.set)])}
+          maxLength={inputMaxLength}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus={autoFocus}
+          tabIndex={inputTabIndex}
+          aria-label={inputAriaLabel}
+          onKeyDown={onKeyDown}
+          onKeyDownCapture={onKeyDownCapture}
+          onKeyUp={onKeyUp}
+          onKeyUpCapture={onKeyUpCapture}
+          disabled={disabled}
+          type="text"
+          placeholder={value.length ? undefined : placeholder}
+          onCopy={onCopy}
+          onCopyCapture={onCopyCapture}
+          onCut={onCut}
+          onCutCapture={onCutCapture}
+          onPaste={onPaste}
+          onPasteCapture={onPasteCapture}
+          onWheel={onWheel}
+          defaultValue={inputDefaultValue}
+          readOnly={disableInput}
+        />
+        <InputFakeElement
+          ref={fakeInputEl.set}
+          className={cnFieldArrayValueInlineControl('HelperInputFakeElement')}
+          valueAtom={inputValueAtom}
+        />
+      </Root>
+    );
+  };
+}) as FieldArrayValueInlineControlComponent;

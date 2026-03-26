@@ -42,6 +42,7 @@ export const ContextMenuLevels = (propsComponent: ContextMenuLevelsProps) => {
     setComponentSize,
     enableAnimationBack,
     disableAnimationBack,
+    clickOutsideSubscriber,
     ...otherProps
   } = props;
 
@@ -119,6 +120,7 @@ export const ContextMenuLevels = (propsComponent: ContextMenuLevelsProps) => {
     isActive: onClickOutside && isOpen,
     ignoreClicksInsideRefs: [...levelsRefs, anchorRef || { current: null }],
     handler: onClickOutside,
+    subscriber: clickOutsideSubscriber,
   });
 
   useEffect(() => {

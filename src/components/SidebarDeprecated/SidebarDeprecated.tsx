@@ -45,7 +45,7 @@ export type SidebarProps = PropsWithHTMLAttributes<
     size?: SidebarPropSize;
     rootClassName?: string;
     children?: React.ReactNode;
-    container?: HTMLDivElement | undefined;
+    container?: HTMLElement | undefined;
     afterClose?: () => void;
   },
   HTMLDivElement

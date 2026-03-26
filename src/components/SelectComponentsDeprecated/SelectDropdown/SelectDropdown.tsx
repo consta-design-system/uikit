@@ -64,6 +64,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   labelForEmptyItems?: string;
   notFound?: boolean;
   hasItems?: boolean;
+  container?: HTMLElement;
 }>;
 
 type SelectDropdown = <ITEM, GROUP>(
@@ -91,6 +92,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
     isLoading,
     getGroupLabel,
     notFound,
+    container,
     ...otherProps
   } = props;
 
@@ -122,6 +124,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
         return (
           <Popover
             {...otherProps}
+            container={container}
             anchorRef={controlRef}
             direction="downStartLeft"
             possibleDirections={[

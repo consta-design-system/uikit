@@ -11,7 +11,6 @@ import {
 import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
-import { withCtx } from '##/utils/state';
 
 import {
   SidebarActionsProps,
@@ -46,8 +45,8 @@ const SidebarActions: React.FC<SidebarActionsProps> = ({
   </div>
 );
 
-export const Sidebar = withCtx(
-  forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
+export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
+  (props, ref) => {
     const {
       isOpen,
       onClose,
@@ -168,7 +167,7 @@ export const Sidebar = withCtx(
         )}
       </Transition>
     );
-  }),
+  },
 ) as SidebarComponent;
 /**
  * @deprecated use actions

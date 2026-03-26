@@ -1,6 +1,7 @@
-import { AtomMut } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
+import { AtomLike, computed, peek } from '@reatom/core';
 import React from 'react';
+
+import { factoryComponent } from '##/utils/state';
 
 type RenderItemProps<ITEM> = {
   item: ITEM;
@@ -13,58 +14,41 @@ type RenderItemProps<ITEM> = {
 
 type SelectRenderItemProps<ITEM> = {
   item: ITEM;
-  rootRef: React.Ref<HTMLDivElement>;
   onClick: (e: React.MouseEvent) => void;
   onMouseEnter: (e: React.MouseEvent) => void;
   renderItem: (props: RenderItemProps<ITEM>) => React.ReactNode | null;
-  highlightedIndexAtom: AtomMut<number>;
+  highlightedIndexAtom: AtomLike<number>;
   index: number;
-  valueAtom: AtomMut<ITEM[]>;
-  getItemKeyAtom: AtomMut<(item: ITEM) => string | number>;
+  valueAtom: AtomLike<ITEM[]>;
+  getItemKeyAtom: AtomLike<(item: ITEM) => string | number>;
+  ref: React.Ref<HTMLDivElement>;
 };
 
 type SelectRenderItemComponent = <ITEM>(
   props: SelectRenderItemProps<ITEM>,
 ) => React.ReactNode;
 
-export const SelectRenderItem: SelectRenderItemComponent = (props) => {
-  const {
-    renderItem,
-    item,
-    rootRef,
-    onClick,
-    onMouseEnter,
-    highlightedIndexAtom,
-    index,
-    valueAtom,
-    getItemKeyAtom,
-  } = props;
+export const SelectRenderItem = factoryComponent<
+  HTMLDivElement,
+  SelectRenderItemProps<unknown>
+>(({ highlightedIndexAtom, valueAtom, getItemKeyAtom }, propsAtom) => {
+  const active = computed(() => {
+    const getItemKey = peek(() => getItemKeyAtom());
 
-  const [active] = useAtom((ctx) => {
-    const value = ctx.spy(valueAtom);
-
-    const getItemKey = ctx.get(getItemKeyAtom);
-
-    return !!value.find(
-      (valueItem) => getItemKey(valueItem) === getItemKey(item),
+    return !!valueAtom().find(
+      (valueItem) => getItemKey(valueItem) === getItemKey(propsAtom().item),
     );
   });
 
-  const [hovered] = useAtom((ctx) => {
-    const highlightedIndex = ctx.spy(highlightedIndexAtom);
-    return index === highlightedIndex;
-  });
+  const hovered = computed(() => highlightedIndexAtom() === propsAtom().index);
 
-  return (
-    <>
-      {renderItem({
-        ref: rootRef,
-        onClick,
-        onMouseEnter,
-        item,
-        active,
-        hovered,
-      })}
-    </>
-  );
-};
+  return ({ renderItem, item, ref, onClick, onMouseEnter }) =>
+    renderItem({
+      ref,
+      onClick,
+      onMouseEnter,
+      item,
+      active: active(),
+      hovered: hovered(),
+    });
+}) as SelectRenderItemComponent;

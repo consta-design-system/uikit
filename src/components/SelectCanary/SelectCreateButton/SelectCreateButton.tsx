@@ -1,7 +1,7 @@
 import './SelectCreateButton.css';
 
-import { AtomMut } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
+import { AtomLike } from '@reatom/core';
+import { useAtom } from '@reatom/react';
 import React, { forwardRef } from 'react';
 
 import { FieldPropSize } from '##/components/FieldComponents';
@@ -16,12 +16,11 @@ type LabelForCreate =
 type SelectCreateButtonProps = PropsWithHTMLAttributesAndRef<
   {
     labelForCreate?: LabelForCreate;
-    inputValueAtom: AtomMut<string>;
+    inputValueAtom: AtomLike<string>;
     size: FieldPropSize;
     indent: 'normal' | 'increased';
     index: number;
-    highlightIndex: (index: number) => void;
-    highlightedIndexAtom: AtomMut<number>;
+    highlightedIndexAtom: AtomLike<number>;
   },
   HTMLDivElement
 >;
@@ -48,22 +47,23 @@ export const SelectCreateButton: SelectCreateButtonComponent = forwardRef(
   (props, ref) => {
     const {
       className,
-      labelForCreate = labelForCreateDefault,
+      labelForCreate: labelForCreateProp = labelForCreateDefault,
       inputValueAtom,
       index,
       size,
       indent,
       highlightedIndexAtom,
-      highlightIndex,
       ...otherProps
     } = props;
 
-    const [hovered] = useAtom((ctx) => {
-      const highlightedIndex = ctx.spy(highlightedIndexAtom);
-      return index === highlightedIndex;
-    });
+    const [hovered] = useAtom(() => highlightedIndexAtom() === index);
 
-    const [inputValue] = useAtom(inputValueAtom);
+    const [labelForCreate] = useAtom(() => {
+      const inputValue = inputValueAtom();
+      return typeof labelForCreateProp === 'function'
+        ? labelForCreateProp(inputValue)
+        : labelForCreateProp;
+    }, [labelForCreateProp]);
 
     return (
       <ListAddItem
@@ -74,14 +74,7 @@ export const SelectCreateButton: SelectCreateButtonComponent = forwardRef(
         active={hovered}
         size={size}
         innerOffset={indent}
-        label={
-          typeof labelForCreate === 'function'
-            ? labelForCreate(inputValue)
-            : labelForCreate
-        }
-        onMouseEnter={() => {
-          highlightIndex(index);
-        }}
+        label={labelForCreate}
         underLine
       />
     );

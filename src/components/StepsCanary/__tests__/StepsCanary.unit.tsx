@@ -1,0 +1,162 @@
+import { clearStack, context, top } from '@reatom/core';
+import { reatomContext } from '@reatom/react';
+import { act, fireEvent } from '@testing-library/react';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { describe, expect, test, vi } from 'vitest';
+
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
+
+import { cnSteps, Steps } from '../StepsCanary';
+import { cnStepsStep } from '../StepsItem/StepsItem';
+
+createRoot();
+clearStack();
+
+type StepsProps = React.ComponentProps<typeof Steps>;
+type Item = {
+  label: string;
+  disabled?: boolean;
+};
+type OnChange = (value: Item | null, props: { e: React.MouseEvent }) => void;
+
+const testId = 'StepsCanary';
+
+const items: Item[] = [
+  {
+    label: 'один',
+  },
+  {
+    label: 'два',
+  },
+  {
+    label: 'три',
+    disabled: true,
+  },
+];
+
+const additionalClass = 'additionalClass';
+
+const TestComponent = ({
+  size,
+  onChange,
+}: {
+  size?: StepsProps['size'];
+  onChange?: OnChange;
+}) => {
+  const handleChange = vi.fn();
+
+  return (
+    <Steps
+      items={items}
+      value={items[0]}
+      getItemLabel={(item) => item.label}
+      getItemDisabled={(item) => item.disabled || false}
+      onChange={onChange || handleChange}
+      className={additionalClass}
+      data-testid={testId}
+    />
+  );
+};
+
+const renderComponent = ({
+  ctx,
+  size,
+  onChange,
+}: {
+  ctx: TestContext;
+  size?: StepsProps['size'];
+  onChange?: OnChange;
+}) => {
+  const root = ReactDOM.createRoot(document.getElementById(testRootId(ctx))!);
+
+  act(() => {
+    root.render(
+      <reatomContext.Provider value={top()}>
+        <TestComponent size={size} onChange={onChange} />
+      </reatomContext.Provider>,
+    );
+  });
+};
+
+const getRender = (ctx: TestContext) =>
+  document.querySelector(`#${testRootId(ctx)} *[data-testid="${testId}"]`);
+
+const getItems = (ctx: TestContext) =>
+  getRender(ctx)?.querySelectorAll(`.${cnSteps('Item')}`);
+const getButtons = (ctx: TestContext) =>
+  getRender(ctx)?.querySelectorAll(`.${cnStepsStep('Button')}`);
+const getButton = (ctx: TestContext, index = 0) =>
+  getButtons(ctx)?.[index] as HTMLElement;
+
+describe.concurrent('Компонент Steps', () => {
+  test('должен рендериться без ошибок', (ctx) =>
+    context.start(async () => {
+      expect(() =>
+        renderComponent({
+          ctx,
+        }),
+      ).not.toThrow();
+    }));
+
+  describe.concurrent('проверка props', () => {
+    describe.concurrent('проверка items', () => {
+      test('количество совпадает с передаваемым', (ctx) =>
+        context.start(async () => {
+          renderComponent({ ctx });
+          const itemsRender = getItems(ctx);
+          expect(itemsRender?.length).toEqual(items.length);
+        }));
+    });
+
+    describe.concurrent('проверка getLabel', () => {
+      test('лейбл совпадает', (ctx) =>
+        context.start(async () => {
+          renderComponent({ ctx });
+          expect(
+            getItems(ctx)?.[0].querySelector(`.${cnStepsStep('Label')}`)
+              ?.textContent,
+          ).toEqual(`${items[0].label}`);
+        }));
+    });
+
+    describe.concurrent('проверка className', () => {
+      test(`присвоился дополнительный класс`, (ctx) =>
+        context.start(async () => {
+          renderComponent({ ctx });
+          expect(getRender(ctx)).toHaveClass(additionalClass);
+        }));
+    });
+
+    describe.concurrent('проверка onChange', () => {
+      test(`клик по элементу должен вызвать callback`, (ctx) =>
+        context.start(async () => {
+          const handleChange = vi.fn();
+
+          renderComponent({ ctx, onChange: handleChange });
+
+          const item = getButton(ctx, 1);
+          fireEvent.click(item);
+
+          expect(handleChange).toHaveBeenCalledTimes(1);
+          expect(handleChange).toHaveBeenCalledWith(items[1], {
+            e: expect.any(Object),
+          });
+        }));
+    });
+
+    describe.concurrent('проверка getDisabled', () => {
+      test(`клик по disabled элементу не должен вызывать handleChange`, (ctx) =>
+        context.start(async () => {
+          const handleChange = vi.fn();
+
+          renderComponent({ ctx, onChange: handleChange });
+
+          const item = getButton(ctx, 2);
+          fireEvent.click(item);
+
+          expect(handleChange).toHaveBeenCalledTimes(0);
+        }));
+    });
+  });
+});

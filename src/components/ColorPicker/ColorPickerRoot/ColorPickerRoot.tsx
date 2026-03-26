@@ -23,6 +23,7 @@ export type ColorPickerRootProps = PropsWithHTMLAttributesAndRef<
     viewportRef?: React.RefObject<HTMLElement>;
     onOpen?: (open: boolean) => void;
     open?: boolean;
+    container?: HTMLElement;
   },
   HTMLDivElement
 >;
@@ -49,6 +50,7 @@ export const ColorPickerRoot: React.FC<ColorPickerRootProps> = forwardRef(
       viewportRef,
       onOpen,
       open: openProp,
+      container,
       ...otherProps
     } = props;
 
@@ -135,6 +137,7 @@ export const ColorPickerRoot: React.FC<ColorPickerRootProps> = forwardRef(
               tabIndex={0}
               role="dialog"
               onKeyUp={handelKeys}
+              container={container}
             />
           )}
         </Transition>

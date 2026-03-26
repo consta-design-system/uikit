@@ -38,6 +38,7 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
     animationBack,
     container,
     style,
+    clickOutsideSubscriber,
   } = props;
 
   const [innerAnimation, setInnerAnimation] = useFlag(isMobile);
@@ -85,6 +86,7 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
             onSetDirection={onSetDirection}
             container={container}
             style={style}
+            clickOutsideSubscriber={clickOutsideSubscriber}
           >
             {children}
           </Popover>

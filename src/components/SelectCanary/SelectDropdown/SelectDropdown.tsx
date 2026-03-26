@@ -1,7 +1,7 @@
 import './SelectDropdown.css';
 
-import { AtomMut } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
+import { AtomLike } from '@reatom/core';
+import { useAction, useAtom } from '@reatom/react';
 import React, { Fragment, memo, useMemo } from 'react';
 
 import { FieldPropSize } from '##/components/FieldComponents';
@@ -51,16 +51,16 @@ type RenderItemProps<ITEM> = {
 
 type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   size: FieldPropSize;
-  controlRef: React.MutableRefObject<HTMLDivElement | null>;
-  dropdownRef: React.Ref<HTMLDivElement>;
+  controlElAtom: AtomLike<HTMLDivElement | null>;
+  dropdownRef: React.Ref<HTMLDivElement | null>;
   getOptionActions(props: OptionProps<ITEM>): GetOptionPropsResult;
   form: SelectDropdownPropForm;
-  openAtom: AtomMut<boolean>;
+  openAtom: AtomLike<boolean>;
   offset?: PopoverPropOffset | 'none';
   isLoading?: boolean;
   renderItem: (props: RenderItemProps<ITEM>) => React.ReactNode | null;
-  highlightedIndexAtom: AtomMut<number>;
-  visibleItemsAtom: AtomMut<(OptionForCreate | CountedGroup<ITEM, GROUP>)[]>;
+  highlightedIndexAtom: AtomLike<number>;
+  visibleItemsAtom: AtomLike<(OptionForCreate | CountedGroup<ITEM, GROUP>)[]>;
   getGroupLabel?: (group: GROUP) => string;
   labelForCreate?:
     | ((label: string | undefined) => React.ReactNode)
@@ -68,21 +68,20 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   labelForNotFound?: string;
   labelForEmptyItems?: string;
   notFound?: boolean;
-  hasItemsAtom: AtomMut<boolean>;
-  itemsRefs: React.RefObject<HTMLDivElement>[];
+  hasItemsAtom: AtomLike<boolean>;
+  getItemRef: (index: number) => React.Ref<HTMLDivElement>;
   virtualScroll?: boolean;
   onScrollToBottom?: (length: number) => void;
-  valueAtom: AtomMut<ITEM[]>;
-  getItemKeyAtom: AtomMut<(item: ITEM) => string | number>;
+  valueAtom: AtomLike<ITEM[]>;
+  getItemKeyAtom: AtomLike<(item: ITEM) => string | number>;
   onChangeAll: (e: React.SyntheticEvent, items: ITEM[]) => void;
-  highlightIndex: (index: number) => void;
   onCreate: (e: React.SyntheticEvent) => void;
   onChange: (e: React.SyntheticEvent, item: ITEM) => void;
-  inputValueAtom: AtomMut<string>;
-  groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
-  dropdownZIndexAtom: AtomMut<number | undefined>;
+  inputValueAtom: AtomLike<string>;
+  groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
+  dropdownZIndexAtom: AtomLike<number | undefined>;
   selectAllLabel: string;
-  viewportRef?: React.RefObject<HTMLElement>;
+  viewportRef?: React.RefObject<HTMLElement | null>;
   container?: Element;
 }>;
 
@@ -90,7 +89,7 @@ type SelectDropdownComponent = <ITEM, GROUP>(
   props: Props<ITEM, GROUP>,
 ) => React.ReactNode | null;
 
-const cnSelectDropdown = cn('SelectDropdown');
+export const cnSelectDropdown = cn('SelectDropdown');
 
 const getLengthElements = <ITEM, GROUP>(
   elements: (
@@ -121,9 +120,9 @@ const isVisible = (slice: [number, number], index: number) => {
 
 export const SelectDropdown: SelectDropdownComponent = memo((props) => {
   const {
-    controlRef,
+    controlElAtom,
     size,
-    getOptionActions,
+    getOptionActions: getOptionActionsAction,
     dropdownRef: dropdownRefProp,
     labelForCreate,
     className,
@@ -138,13 +137,12 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
     isLoading,
     getGroupLabel,
     notFound,
-    itemsRefs,
+    getItemRef: getItemRefAction,
     virtualScroll,
     onScrollToBottom,
     highlightedIndexAtom,
     valueAtom,
     getItemKeyAtom,
-    highlightIndex,
     onCreate,
     onChange,
     onChangeAll,
@@ -153,13 +151,16 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
     dropdownZIndexAtom,
     selectAllLabel,
     container,
+    viewportRef,
     ...otherProps
   } = props;
 
   const [visibleItems] = useAtom(visibleItemsAtom);
 
   const [hasItems] = useAtom(hasItemsAtom);
-  const [isListMount, setIsListMount] = useAtom(false);
+  const [open] = useAtom(openAtom);
+  const [isListMount, setIsListMount] = useAtom(open);
+
   const [getItemKey] = useAtom(getItemKeyAtom);
   const indent = form === 'round' ? 'increased' : 'normal';
 
@@ -187,7 +188,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
     scrollElementRef,
   } = useVirtualScroll({
     length: lengthForVirtualScroll,
-    isActive: virtualScroll && isListMount,
+    isActive: virtualScroll && open,
     onScrollToBottom,
   });
 
@@ -199,21 +200,24 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
   const getIndex = fabricIndex();
   const getVirtualIndex = fabricIndex();
   const [zIndex] = useAtom(dropdownZIndexAtom);
+  const getItemRef = useAction(getItemRefAction);
+
+  const getOptionActions = useAction(getOptionActionsAction);
 
   return (
     <SelectPopover
       {...otherProps}
-      anchorRef={controlRef}
+      controlElAtom={controlElAtom}
       offset={offset}
       role="listbox"
       className={cnSelectDropdown()}
       size={size}
-      controlRef={controlRef}
       openAtom={openAtom}
       form={form}
       onMount={setIsListMount}
       style={{ zIndex }}
       container={container}
+      viewportRef={viewportRef}
     >
       {isListMount && (
         <div
@@ -240,11 +244,10 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
                     key={cnSelectDropdown('List', { key: 'CreateButton' })}
                     labelForCreate={labelForCreate}
                     indent={indent}
-                    ref={itemsRefs[index]}
+                    ref={getItemRef(index)}
                     onClick={onCreate}
                     highlightedIndexAtom={highlightedIndexAtom}
                     inputValueAtom={inputValueAtom}
-                    highlightIndex={highlightIndex}
                     index={index}
                   />
                 );
@@ -283,7 +286,7 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
                             })}
                             ref={forkRef([
                               listRefs[virtualIndex],
-                              itemsRefs[index],
+                              getItemRef(index),
                             ])}
                             indent={indent}
                             size={size}
@@ -307,9 +310,9 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
                             })}
                             getItemKeyAtom={getItemKeyAtom}
                             highlightedIndexAtom={highlightedIndexAtom}
-                            rootRef={forkRef([
+                            ref={forkRef([
                               listRefs[virtualIndex],
-                              itemsRefs[index],
+                              getItemRef(index),
                             ])}
                             renderItem={renderItem}
                             item={item}

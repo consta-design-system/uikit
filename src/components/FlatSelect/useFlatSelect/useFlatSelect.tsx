@@ -1,16 +1,19 @@
-import { action, AtomMut, sleep, withConcurrency } from '@reatom/framework';
-import { useAction, useAtom, useUpdate } from '@reatom/npm-react';
-import React, { useRef } from 'react';
+import { action, Computed, peek, sleep, withAbort, wrap } from '@reatom/core';
+import { useAction, useAtom } from '@reatom/react';
+import React, { useEffect, useRef } from 'react';
 
 import { useRefs } from '##/hooks/useRefs';
 import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 import { getGroups, GetGroupsResult } from '##/utils/getGroups';
-import { useClickOutsideAtom } from '##/utils/state/useClickOutsideAtom';
-import { useCreateAtom } from '##/utils/state/useCreateAtom';
-import { useElementAtomEventListener } from '##/utils/state/useElementAtomEventListener';
-import { KeyHandlers, useKeysAtom } from '##/utils/state/useKeysAtom';
-import { usePickAtom, usePropAtom } from '##/utils/state/usePickAtom';
-import { useRefAtom } from '##/utils/state/useRefAtom';
+import {
+  useClickOutsideAtom,
+  useCreateAtom,
+  useElementAtomEventListener,
+  useKeysAtom,
+  usePropAtom,
+  useRefAtom,
+  useSendRefToAtom,
+} from '##/utils/state';
 
 import { PropsWithDefault } from '../defaultProps';
 import {
@@ -35,7 +38,7 @@ export type UseFlatSelectProps<
   GROUP = FlatSelectGroupDefault,
   MULTIPLE extends boolean = false,
 > = {
-  propsAtom: AtomMut<PropsWithDefault<ITEM, GROUP, MULTIPLE>>;
+  propsAtom: Computed<PropsWithDefault<ITEM, GROUP, MULTIPLE>>;
 };
 
 export type OptionProps<ITEM> = {
@@ -112,30 +115,31 @@ export const useFlatSelect = <
   const listRef = useRef<HTMLDivElement>(null);
 
   const anchorRefAtom = usePropAtom(propsAtom, 'anchorRef');
-  const anchorElementAtom = useCreateAtom((ctx) => {
-    const ref = ctx.spy(anchorRefAtom);
-    return ref?.current ? ref.current : null;
-  });
+  const anchorRef = useAtom(anchorRefAtom)[0];
+
+  const anchorElementAtom = useSendRefToAtom(anchorRef);
 
   const [rootElementAtom, rootRef] = useRefAtom<HTMLDivElement>();
 
   const rootFocusAtom = useCreateAtom(false);
-
   const rootMouseDownAtom = useCreateAtom(false);
 
   const itemsAtom = usePropAtom(propsAtom, 'items');
   const selectAllAtom = usePropAtom(propsAtom, 'selectAll');
   const valuePropAtom = usePropAtom(propsAtom, 'value');
   const disabledPropAtom = usePropAtom(propsAtom, 'disabled');
-  const disabledAtom = useCreateAtom((ctx) => !!ctx.spy(disabledPropAtom));
+  const disabledAtom = useCreateAtom(() => !!disabledPropAtom());
   const inputValuePropAtom = usePropAtom(propsAtom, 'inputValue');
-  const openPropAtom = usePropAtom(propsAtom, 'isOpen');
-  const withOnCreateAtom = useCreateAtom(
-    (ctx) => !!ctx.spy(propsAtom).onCreate,
-  );
 
-  const dropdownZIndexAtom = useCreateAtom((ctx) => {
-    const zIndex = ctx.spy(propsAtom).style?.zIndex;
+  const openPropAtom = usePropAtom(propsAtom, 'isOpen');
+  const withOnCreateAtom = useCreateAtom(() => !!propsAtom().onCreate);
+  const groupsAtom = usePropAtom(propsAtom, 'groups');
+  const getItemGroupKeyAtom = usePropAtom(propsAtom, 'getItemGroupKey');
+  const getGroupKeyAtom = usePropAtom(propsAtom, 'getGroupKey');
+  const getItemKeyAtom = usePropAtom(propsAtom, 'getItemKey');
+
+  const dropdownZIndexAtom = useCreateAtom(() => {
+    const zIndex = propsAtom().style?.zIndex;
     return typeof zIndex === 'number' ? zIndex + 1 : undefined;
   });
   const ignoreOutsideClicksRefsAtom = usePropAtom(
@@ -143,76 +147,70 @@ export const useFlatSelect = <
     'ignoreOutsideClicksRefs',
   );
 
-  const getItemKeyAtom = usePropAtom(propsAtom, 'getItemKey');
-
-  const valueAtom = useCreateAtom((ctx) => {
-    const value = ctx.spy(valuePropAtom);
+  const valueAtom = useCreateAtom(() => {
+    const value = valuePropAtom();
     return (value && (Array.isArray(value) ? value : [value])) || [];
-  }) as unknown as AtomMut<ITEM[]>;
+  }) as Computed<ITEM[]>;
   const inputFocusAtom = useCreateAtom(false);
   const openAtom = useCreateAtom(false);
   const highlightedIndexAtom = useCreateAtom(-1);
   const inputValueAtom = useCreateAtom('');
 
-  const clearButtonAtom = useCreateAtom((ctx) => {
-    const { clearButton } = ctx.spy(propsAtom);
-    const inputValue = ctx.spy(inputValueAtom);
-    const value = ctx.spy(valueAtom);
-    return !!(clearButton && (value?.length || inputValue));
-  });
+  const clearButtonAtom = useAtom(
+    () => {
+      const { clearButton } = propsAtom();
+      const inputValue = inputValueAtom();
+      const value = valueAtom();
+
+      return !!(clearButton && (value?.length || inputValue));
+    },
+    [],
+    { subscribe: false },
+  )[2];
 
   const setRootFocus = useAction(
-    action(async (ctx, value: boolean) => {
-      await ctx.schedule(() => sleep(5));
-      rootFocusAtom(ctx, value);
-    }).pipe(withConcurrency()),
+    action(async (value: boolean) => {
+      await wrap(sleep(5));
+      rootFocusAtom.set(value);
+    }).extend(withAbort()),
   );
-  const handleRootMouseDown = useAction((ctx) => rootMouseDownAtom(ctx, true));
-  const handleRootMouseUp = useAction((ctx) => rootMouseDownAtom(ctx, false));
+  const handleRootMouseDown = useAction(() => rootMouseDownAtom.set(true));
+  const handleRootMouseUp = useAction(() => rootMouseDownAtom.set(false));
   const handleRootFocus = useAction(() => setRootFocus(true));
   const handleRootBlur = useAction(() => setRootFocus(false));
-  const onInput = useAction((ctx, value: string | undefined = '') => {
-    ctx.get(propsAtom).onInput?.(value);
-    inputValueAtom(ctx, value);
+  const setInputValue = useAction((value: string | undefined = '') => {
+    inputValueAtom.set(value);
 
     if (inputRef.current) {
       inputRef.current.value = value;
     }
   });
 
-  const optionForCreateAtom = useCreateAtom<OptionForCreate | undefined>(
-    (ctx) => {
-      const withOnCreate = ctx.spy(withOnCreateAtom);
-      if (!withOnCreate) {
-        return undefined;
-      }
-      const inputValue = ctx.spy(inputValueAtom);
-      const optionForCreate: OptionForCreate = {
-        label: inputValue,
-        __optionForCreate: true,
-      };
-      return optionForCreate;
-    },
-  );
+  const onInput = useAction((value: string | undefined = '') => {
+    propsAtom().onInput?.(value);
+    setInputValue(value);
+  });
 
-  const propsForVisibleItemsAtom = usePickAtom(
-    propsAtom as AtomMut<PropsWithDefault<ITEM, GROUP, boolean>>,
-    [
-      'selectAll',
-      'groups',
-      'getItemGroupKey',
-      'getGroupKey',
-      'getItemKey',
-      'items',
-    ],
-  );
+  const optionForCreateAtom = useCreateAtom<OptionForCreate | undefined>(() => {
+    const withOnCreate = withOnCreateAtom();
+    if (!withOnCreate) {
+      return undefined;
+    }
+    const inputValue = inputValueAtom();
+    const optionForCreate: OptionForCreate = {
+      label: inputValue,
+      __optionForCreate: true,
+    };
+    return optionForCreate;
+  });
 
-  const visibleItemsAtom = useCreateAtom((ctx) => {
-    const { selectAll, groups, getItemGroupKey, getGroupKey, items } = ctx.spy(
-      propsForVisibleItemsAtom,
-    );
-
-    const optionForCreate = ctx.spy(optionForCreateAtom);
+  const visibleItemsAtom = useCreateAtom(() => {
+    const selectAll = selectAllAtom();
+    const groups = groupsAtom();
+    const getItemGroupKey = getItemGroupKeyAtom();
+    const getGroupKey = getGroupKeyAtom();
+    const items = itemsAtom();
+    const optionForCreate = optionForCreateAtom();
 
     const resultGroups = getCountedGroups(
       getGroups(
@@ -228,11 +226,11 @@ export const useFlatSelect = <
     return optionForCreate ? [optionForCreate, ...resultGroups] : resultGroups;
   });
 
-  const groupsCounterAtom = useCreateAtom((ctx) => {
-    const visibleItems = ctx.spy(visibleItemsAtom);
-    const selectAll = ctx.spy(selectAllAtom);
-    const value = ctx.spy(valueAtom);
-    const { getItemDisabled } = ctx.get(propsAtom);
+  const groupsCounterAtom = useCreateAtom(() => {
+    const visibleItems = visibleItemsAtom();
+    const selectAll = selectAllAtom();
+    const value = valueAtom();
+    const { getItemDisabled } = peek(propsAtom);
 
     const groupCounter: Record<string, [number, number]> = {};
 
@@ -262,11 +260,11 @@ export const useFlatSelect = <
   });
 
   // eslint-disable-next-line no-unused-vars
-  const [maxHighlightIndex, _, maxHighlightIndexAtom] = useAtom((ctx) => {
-    const items = ctx.spy(itemsAtom);
-    const optionForCreate = ctx.spy(withOnCreateAtom);
-    const selectAll = ctx.spy(selectAllAtom);
-    const visibleItems = ctx.spy(visibleItemsAtom);
+  const [maxHighlightIndex, _, maxHighlightIndexAtom] = useAtom(() => {
+    const items = itemsAtom();
+    const optionForCreate = withOnCreateAtom();
+    const selectAll = selectAllAtom();
+    const visibleItems = visibleItemsAtom();
 
     return (
       items.length +
@@ -277,9 +275,9 @@ export const useFlatSelect = <
     );
   });
 
-  const hasItemsAtom = useCreateAtom((ctx) => {
-    const items = ctx.spy(itemsAtom);
-    const optionForCreate = ctx.spy(optionForCreateAtom);
+  const hasItemsAtom = useCreateAtom(() => {
+    const items = itemsAtom();
+    const optionForCreate = optionForCreateAtom();
 
     if (optionForCreate) {
       return true;
@@ -290,9 +288,9 @@ export const useFlatSelect = <
 
   const optionsRefs = useRefs<HTMLDivElement>(maxHighlightIndex, undefined);
 
-  const scrollToHighlightedIndex = useAction((ctx) => {
-    const items = ctx.get(itemsAtom);
-    const highlightedIndex = ctx.get(highlightedIndexAtom);
+  const scrollToHighlightedIndex = useAction(() => {
+    const items = itemsAtom();
+    const highlightedIndex = peek(highlightedIndexAtom);
     const listElement = listRef.current;
 
     if (items.length > 0 && listElement) {
@@ -300,59 +298,55 @@ export const useFlatSelect = <
     }
   });
 
-  const highlightIndex = useAction(
-    (ctx, indexForHighlight: IndexForHighlight) => {
-      if (ctx.get(disabledAtom)) {
-        return;
-      }
+  const highlightIndex = useAction((indexForHighlight: IndexForHighlight) => {
+    if (disabledAtom()) {
+      return;
+    }
 
-      highlightedIndexAtom(ctx, (state) => {
-        const newIndex = Math.min(
-          Math.max(
-            0,
-            typeof indexForHighlight === 'function'
-              ? indexForHighlight(state)
-              : indexForHighlight,
-          ),
-          ctx.get(maxHighlightIndexAtom) - 1,
-        );
+    highlightedIndexAtom.set((state) => {
+      const newIndex = Math.min(
+        Math.max(
+          0,
+          typeof indexForHighlight === 'function'
+            ? indexForHighlight(state)
+            : indexForHighlight,
+        ),
+        maxHighlightIndexAtom() - 1,
+      );
 
-        return newIndex;
+      return newIndex;
+    });
+  });
+
+  const removeValue = useAction((e: React.SyntheticEvent, valueItem: ITEM) => {
+    e.stopPropagation();
+    const props = propsAtom();
+
+    if (isMultipleParams(props)) {
+      const { getItemDisabled, getItemKey, onChange } = props;
+
+      const newValue = valueAtom().filter((item) => {
+        return getItemDisabled?.(item)
+          ? true
+          : getItemKey(item) !== getItemKey(valueItem);
       });
-    },
-  );
 
-  const removeValue = useAction(
-    (ctx, e: React.SyntheticEvent, valueItem: ITEM) => {
-      e.stopPropagation();
-      const props = ctx.get(propsAtom);
+      onChange(newValue?.length ? newValue : null, {
+        e,
+      });
+    }
+  });
 
-      if (isMultipleParams(props)) {
-        const { getItemDisabled, getItemKey, onChange } = props;
-
-        const newValue = ctx.get(valueAtom).filter((item) => {
-          return getItemDisabled?.(item)
-            ? true
-            : getItemKey(item) !== getItemKey(valueItem);
-        });
-
-        onChange(newValue?.length ? newValue : null, {
-          e,
-        });
-      }
-    },
-  );
-
-  const onChange = useAction((ctx, e: React.SyntheticEvent, item: ITEM) => {
+  const onChange = useAction((e: React.SyntheticEvent, item: ITEM) => {
     const { getItemDisabled, getItemKey, onChange, multiple, disabled } =
-      ctx.get(propsAtom);
+      propsAtom();
 
     if (disabled || (getItemDisabled && getItemDisabled(item))) {
       return;
     }
 
     if (multiple) {
-      const value = ctx.get(valueAtom);
+      const value = valueAtom();
       const newValue = value.some(
         (value) => getItemKey(value) === getItemKey(item),
       )
@@ -365,55 +359,50 @@ export const useFlatSelect = <
     }
   });
 
-  const onChangeAll = useAction(
-    (ctx, e: React.SyntheticEvent, items: ITEM[]) => {
-      const value = ctx.get(valueAtom);
-      const { getItemDisabled, getItemKey, multiple, onChange } =
-        ctx.get(propsAtom);
+  const onChangeAll = useAction((e: React.SyntheticEvent, items: ITEM[]) => {
+    const value = valueAtom();
+    const { getItemDisabled, getItemKey, multiple, onChange } = propsAtom();
 
-      if (multiple) {
-        const nonDisabledItems = getItemDisabled
-          ? items.filter((item) => !getItemDisabled(item))
-          : items;
+    if (multiple) {
+      const nonDisabledItems = getItemDisabled
+        ? items.filter((item) => !getItemDisabled(item))
+        : items;
 
-        const currentGroupValues: ITEM[] = [];
-        const withoutGroupValues: ITEM[] = [];
-        value.forEach((el) => {
-          if (
-            nonDisabledItems.find((item) => getItemKey(el) === getItemKey(item))
-          ) {
-            currentGroupValues.push(el);
-          } else {
-            withoutGroupValues.push(el);
-          }
-        });
-        if (currentGroupValues.length === nonDisabledItems.length) {
-          (onChange as FlatSelectPropOnChange<ITEM, true>)(
-            withoutGroupValues.length ? withoutGroupValues : null,
-            { e },
-          );
+      const currentGroupValues: ITEM[] = [];
+      const withoutGroupValues: ITEM[] = [];
+      value.forEach((el) => {
+        if (
+          nonDisabledItems.find((item) => getItemKey(el) === getItemKey(item))
+        ) {
+          currentGroupValues.push(el);
         } else {
-          const val = [...withoutGroupValues, ...nonDisabledItems];
-          (onChange as FlatSelectPropOnChange<ITEM, true>)(
-            val.length ? val : null,
-            { e },
-          );
+          withoutGroupValues.push(el);
         }
+      });
+      if (currentGroupValues.length === nonDisabledItems.length) {
+        (onChange as FlatSelectPropOnChange<ITEM, true>)(
+          withoutGroupValues.length ? withoutGroupValues : null,
+          { e },
+        );
+      } else {
+        const val = [...withoutGroupValues, ...nonDisabledItems];
+        (onChange as FlatSelectPropOnChange<ITEM, true>)(
+          val.length ? val : null,
+          { e },
+        );
       }
-    },
-  );
+    }
+  });
 
-  const onCreate = useAction((ctx, e: React.SyntheticEvent) => {
-    const { onCreate } = ctx.get(propsAtom);
-    onCreate?.(ctx.get(inputValueAtom), { e });
-    onInput('');
+  const onCreate = useAction((e: React.SyntheticEvent) => {
+    propsAtom().onCreate?.(inputValueAtom(), { e });
   });
 
   // Handlers
 
   const handleInputChange = useAction(
-    (ctx, e: React.ChangeEvent<HTMLInputElement>): void => {
-      if (!ctx.get(disabledAtom) && ctx.get(propsAtom).input) {
+    (e: React.ChangeEvent<HTMLInputElement>): void => {
+      if (!disabledAtom() && propsAtom().input) {
         onInput?.(e.target.value);
       }
     },
@@ -427,29 +416,29 @@ export const useFlatSelect = <
 
   // Prop Getters
 
-  const ArrowUp = useAction((ctx, e: KeyboardEvent) => {
+  const ArrowUp = useAction((e: KeyboardEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!ctx.get(disabledAtom)) {
+    if (!disabledAtom()) {
       highlightIndex((old) => old - 1);
       scrollToHighlightedIndex();
     }
   });
 
-  const ArrowDown = useAction((ctx, e: KeyboardEvent) => {
+  const ArrowDown = useAction((e: KeyboardEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!ctx.get(disabledAtom)) {
+    if (!disabledAtom()) {
       highlightIndex((old) => old + 1);
       scrollToHighlightedIndex();
     }
   });
 
-  const Enter = useAction((ctx, e: React.SyntheticEvent) => {
-    const { items } = ctx.get(propsAtom);
-    const highlightedIndex = ctx.get(highlightedIndexAtom);
-    const inputValue = ctx.get(inputValueAtom);
-    const visibleItems = ctx.get(visibleItemsAtom);
+  const Enter = useAction((e: React.SyntheticEvent) => {
+    const { items } = propsAtom();
+    const highlightedIndex = highlightedIndexAtom();
+    const inputValue = inputValueAtom();
+    const visibleItems = visibleItemsAtom();
 
     if (inputValue || items[highlightedIndex]) {
       e.preventDefault();
@@ -501,28 +490,28 @@ export const useFlatSelect = <
     }
   }) as unknown as (e: KeyboardEvent) => void;
 
-  const Escape = useAction((ctx, e: KeyboardEvent) => {
+  const Escape = useAction((e: KeyboardEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    openAtom(ctx, false);
+    openAtom.set(false);
 
-    ctx.get(anchorRefAtom)?.current?.focus();
+    anchorRefAtom()?.current?.focus();
   });
 
-  const Tab = useAction((ctx, e: KeyboardEvent) => {
-    if (ctx.get(propsAtom).input && !ctx.get(inputFocusAtom)) {
+  const Tab = useAction((e: KeyboardEvent) => {
+    if (propsAtom().input && !inputFocusAtom()) {
       return;
     }
-    if (ctx.get(openAtom)) {
+    if (openAtom()) {
       e.preventDefault();
       e.stopPropagation();
-      openAtom(ctx, false);
+      openAtom.set(false);
     }
 
-    ctx.get(anchorRefAtom)?.current?.focus();
+    anchorRefAtom()?.current?.focus();
   });
 
-  const keysAtom = useCreateAtom<KeyHandlers>({
+  const keysAtom = useCreateAtom({
     ArrowUp,
     ArrowDown,
     PageUp: ArrowUp,
@@ -535,19 +524,19 @@ export const useFlatSelect = <
   });
 
   const getOptionActions = useAction(
-    (ctx, { index, item }: OptionProps<ITEM>): GetOptionPropsResult => {
+    ({ index, item }: OptionProps<ITEM>): GetOptionPropsResult => {
       if (isOptionForCreate(item)) {
         return {
           onClick: (e) => {
             onCreate(e);
             highlightIndex(index);
           },
-          onMouseEnter: () => ctx.get(rootFocusAtom) && highlightIndex(index),
+          onMouseEnter: () => rootFocusAtom() && highlightIndex(index),
         };
       }
       if (isOptionForSelectAll(item)) {
         const getItems = (): ITEM[] => {
-          const visibleItems = ctx.get(visibleItemsAtom);
+          const visibleItems = visibleItemsAtom();
           for (const group of visibleItems) {
             if (isOptionForCreate(group)) {
               continue;
@@ -567,29 +556,28 @@ export const useFlatSelect = <
             onChangeAll(e, getItems());
             highlightIndex(index);
           },
-          onMouseEnter: () => ctx.get(rootFocusAtom) && highlightIndex(index),
+          onMouseEnter: () => rootFocusAtom() && highlightIndex(index),
         };
       }
 
       return {
         onClick: (e: React.SyntheticEvent) => {
-          console.log('onClick', item);
           highlightIndex(index);
           onChange(e, item);
         },
-        onMouseEnter: () => ctx.get(rootFocusAtom) && highlightIndex(index),
+        onMouseEnter: () => rootFocusAtom() && highlightIndex(index),
       };
     },
   );
 
   const handleInputFocus = useAction(
-    (ctx, e: React.FocusEvent<HTMLInputElement>): void => {
-      const { disabled, onInputFocus } = ctx.get(propsAtom);
-      const focused = ctx.get(inputFocusAtom);
+    (e: React.FocusEvent<HTMLInputElement>): void => {
+      const { disabled, onInputFocus } = propsAtom();
+      const focused = inputFocusAtom();
 
       if (!disabled) {
         if (!focused) {
-          inputFocusAtom(ctx, true);
+          inputFocusAtom.set(true);
         }
         onInputFocus?.(e);
       }
@@ -597,23 +585,23 @@ export const useFlatSelect = <
   );
 
   const handleInputBlur = useAction(
-    (ctx, e: React.FocusEvent<HTMLInputElement>): void => {
-      if (ctx.get(inputFocusAtom)) {
-        inputFocusAtom(ctx, false);
+    (e: React.FocusEvent<HTMLInputElement>): void => {
+      if (inputFocusAtom()) {
+        inputFocusAtom.set(false);
       }
 
-      ctx.get(propsAtom).onInputBlur?.(e);
+      propsAtom().onInputBlur?.(e);
     },
   );
 
   useClickOutsideAtom({
     isActiveAtom: openAtom,
-    ignoreClicksElementsAtom: useCreateAtom((ctx) => {
-      const rootElement = ctx.spy(rootElementAtom);
-      const anchorElement = ctx.spy(anchorElementAtom);
-      const ignoreOutsideClicksElements = ctx
-        .spy(ignoreOutsideClicksRefsAtom)
-        ?.map((ref) => ref.current);
+    ignoreClicksElementsAtom: useCreateAtom(() => {
+      const rootElement = rootElementAtom();
+      const anchorElement = anchorElementAtom();
+      const ignoreOutsideClicksElements = ignoreOutsideClicksRefsAtom()?.map(
+        (ref) => ref.current,
+      );
 
       return [
         rootElement,
@@ -621,61 +609,38 @@ export const useFlatSelect = <
         ...(ignoreOutsideClicksElements || []),
       ];
     }),
-    handler: useAction((ctx) => {
-      openAtom(ctx, false);
+    handler: useAction(() => {
+      openAtom.set(false);
     }),
   });
 
   useClickOutsideAtom({
     isActiveAtom: rootFocusAtom,
-    ignoreClicksElementsAtom: useCreateAtom((ctx) => {
-      const rootElement = ctx.spy(rootElementAtom);
-
-      return [rootElement] as (HTMLElement | null)[];
-    }),
+    ignoreClicksElementsAtom: useCreateAtom(() => [rootElementAtom()]),
     handler: handleRootBlur,
   });
 
-  useUpdate(
-    (ctx, focus) => {
+  useEffect(() => {
+    const unsubscribe = rootFocusAtom.subscribe((focus) => {
       if (
         focus &&
-        !ctx.get(rootMouseDownAtom) &&
-        ctx.get(highlightedIndexAtom) === -1 &&
-        !ctx.get(disabledAtom)
+        !peek(rootMouseDownAtom) &&
+        peek(highlightedIndexAtom) === -1 &&
+        !peek(disabledAtom)
       ) {
-        highlightedIndexAtom(ctx, 0);
+        highlightedIndexAtom.set(0);
       }
       if (!focus) {
-        highlightedIndexAtom(ctx, -1);
+        highlightedIndexAtom.set(-1);
       }
-    },
-    [rootFocusAtom],
-  );
+    });
 
-  useUpdate(
-    (ctx, inputValueProp = '') => {
-      const inputValue = ctx.get(inputValueAtom);
+    return unsubscribe;
+  }, []);
 
-      if (inputValueProp !== inputValue) {
-        onInput(inputValueProp);
-      }
-    },
-    [inputValuePropAtom],
-  );
-
-  useUpdate((ctx, openProp = false) => openAtom(ctx, openProp), [openPropAtom]);
-
-  useUpdate((ctx) => highlightedIndexAtom(ctx, -1), [visibleItemsAtom]);
-
-  useUpdate(
-    (ctx, disabledAtom) => disabledAtom && highlightedIndexAtom(ctx, -1),
-    [disabledAtom],
-  );
-
-  const handleAnchorClick = useAction((ctx) =>
-    openAtom(ctx, !ctx.get(openAtom)),
-  );
+  const handleAnchorClick = useAction(() => {
+    openAtom.set(!openAtom());
+  });
 
   useElementAtomEventListener(anchorElementAtom, 'click', handleAnchorClick);
   useElementAtomEventListener(rootElementAtom, 'focus', handleRootFocus);
@@ -691,30 +656,82 @@ export const useFlatSelect = <
   useKeysAtom({
     keysAtom,
     elAtom: rootElementAtom,
-    isActiveAtom: useCreateAtom((ctx) => {
-      if (ctx.spy(anchorRefAtom)?.current && ctx.spy(openAtom)) {
+    isActiveAtom: useCreateAtom(() => {
+      const disabled = disabledAtom();
+      if (anchorRefAtom()?.current && openAtom()) {
         return true;
       }
-      return !ctx.spy(disabledAtom);
+      return !disabled;
     }),
   });
 
-  useUpdate(
-    async (ctx, open) => {
-      ctx.get(propsAtom).onOpen?.(open);
-      await sleep(animateTimeout);
-      if (!open) {
-        onInput('');
-        inputFocusAtom(ctx, false);
-        rootFocusAtom(ctx, false);
-        return;
+  useEffect(() => {
+    const unsubscribe = inputValuePropAtom.subscribe((inputValueProp = '') => {
+      const inputValue = peek(inputValueAtom);
+
+      if (inputValueProp !== inputValue) {
+        setInputValue(inputValueProp);
       }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const { inputDefaultValue, inputValue } = propsAtom();
+
+    setInputValue(inputValue || inputDefaultValue);
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = inputValueAtom.subscribe(console.log);
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = openPropAtom.subscribe((openProp = false) =>
+      openAtom.set(openProp),
+    );
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = visibleItemsAtom.subscribe(() =>
+      highlightedIndexAtom.set(-1),
+    );
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = disabledAtom.subscribe((disabled) => {
+      disabled && highlightedIndexAtom.set(-1);
+    });
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = openAtom.subscribe(async (open) => {
+      peek(propsAtom).onOpen?.(open);
+      const anchorElement = peek(anchorElementAtom);
+      if (anchorElement && open) {
+        setInputValue(peek(() => propsAtom().inputDefaultValue));
+      }
+      await wrap(sleep(animateTimeout));
+
       if (open) {
-        ctx.get(rootElementAtom)?.focus();
+        peek(rootElementAtom)?.focus();
+      } else {
+        inputFocusAtom.set(false);
+        rootFocusAtom.set(false);
       }
-    },
-    [openAtom],
-  );
+    });
+
+    return unsubscribe;
+  }, []);
 
   return {
     openAtom,

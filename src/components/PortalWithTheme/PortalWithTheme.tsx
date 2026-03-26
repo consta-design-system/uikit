@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { useForkRef } from '../../hooks/useForkRef/useForkRef';
+import { forkRef } from '../../hooks/useForkRef/useForkRef';
 import { Theme, ThemeProps } from '../Theme/Theme';
 import {
   PortalWithThemeProvider,
@@ -47,7 +47,7 @@ export const PortalWithTheme = React.forwardRef<HTMLDivElement, Props>(
 
     const zIndex = getZIndex(zIndexContext, styleProp?.zIndex);
 
-    const themeRefForked = useForkRef([themeRef, ref]);
+    const themeRefForked = forkRef([themeRef, ref]);
 
     useEffect(() => {
       addRefs && addRefs([themeRef]);

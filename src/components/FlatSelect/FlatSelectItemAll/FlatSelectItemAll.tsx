@@ -1,5 +1,5 @@
-import { AtomMut } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
+import { AtomLike } from '@reatom/core';
+import { useAtom } from '@reatom/react';
 import React, { forwardRef } from 'react';
 
 import { Checkbox } from '##/components/Checkbox';
@@ -16,12 +16,12 @@ export type FlatFlatSelectItemAllProps = PropsWithHTMLAttributesAndRef<
     size: FieldPropSize;
     hovered?: boolean;
     indent?: 'normal' | 'increased';
-    groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
+    groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
     groupId: string | number;
-    highlightedIndexAtom: AtomMut<number>;
+    highlightedIndexAtom: AtomLike<number>;
     index: number;
     label: string;
-    disabledAtom: AtomMut<boolean>;
+    disabledAtom: AtomLike<boolean>;
   },
   HTMLDivElement
 >;
@@ -36,18 +36,18 @@ const textSizeMap: Record<FieldPropSize, TextPropSize> = {
 };
 
 const FlatSelectItemAllCounter: React.FC<{
-  groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
+  groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
   groupId: string | number;
   size: FieldPropSize;
 }> = ({ groupsCounterAtom, groupId, size }) => {
-  const [total] = useAtom((ctx) => {
-    const counter = ctx.spy(groupsCounterAtom);
-    return counter[groupId]?.[1] || 0;
-  });
-  const [selected] = useAtom((ctx) => {
-    const counter = ctx.spy(groupsCounterAtom);
-    return counter[groupId]?.[0] || 0;
-  });
+  const [total] = useAtom(
+    () => groupsCounterAtom()[groupId]?.[1] || 0,
+    [groupId],
+  );
+  const [selected] = useAtom(
+    () => groupsCounterAtom()[groupId]?.[0] || 0,
+    [groupId],
+  );
 
   return (
     <Text
@@ -59,20 +59,20 @@ const FlatSelectItemAllCounter: React.FC<{
 };
 
 const FlatSelectItemAllCounterCheckbox: React.FC<{
-  groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
-  disabledAtom: AtomMut<boolean>;
+  groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
+  disabledAtom: AtomLike<boolean>;
   groupId: string | number;
   size: FieldPropSize;
 }> = ({ groupsCounterAtom, groupId, size, disabledAtom }) => {
-  const [checked] = useAtom((ctx) => {
-    const counter = ctx.spy(groupsCounterAtom);
+  const [checked] = useAtom(() => {
+    const counter = groupsCounterAtom();
     if (counter[groupId] === undefined) {
       return false;
     }
     return counter[groupId][0] === counter[groupId][1];
   });
-  const [intermediate] = useAtom((ctx) => {
-    const counter = ctx.spy(groupsCounterAtom);
+  const [intermediate] = useAtom(() => {
+    const counter = groupsCounterAtom();
     if (counter[groupId] === undefined) {
       return false;
     }
@@ -105,7 +105,7 @@ export const FlatSelectItemAll: React.FC<FlatFlatSelectItemAllProps> =
       ...otherProps
     } = props;
 
-    const [hovered] = useAtom((ctx) => ctx.spy(highlightedIndexAtom) === index);
+    const [hovered] = useAtom(() => highlightedIndexAtom() === index, [index]);
     const [disabled] = useAtom(disabledAtom);
 
     return (

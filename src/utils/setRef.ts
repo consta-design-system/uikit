@@ -1,9 +1,10 @@
-import { MutableRefObject, Ref } from 'react';
+import { LegacyRef, MutableRefObject } from 'react';
 
-export function setRef<T>(ref: Ref<T> | undefined, value: T): void {
+export function setRef<T>(ref: LegacyRef<T> | undefined, value: T): void {
   if (typeof ref === 'function') {
     ref(value);
-  } else if (ref && 'current' in ref) {
+  } else if (ref && typeof ref === 'object' && 'current' in ref) {
     (ref as MutableRefObject<T>).current = value;
   }
+  // Игнорируем строковые ref (устаревшие)
 }

@@ -243,17 +243,20 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onKeyDown={handleInputKeyDown}
             ref={controlRef}
             placeholder={placeholder}
-            renderValue={(items) =>
-              items.map((item, index) =>
-                renderValueItem({
-                  item,
-                  index,
-                  size,
-                  disabled,
-                  onRemove: getRemoveItem(index),
-                }),
-              )
-            }
+            renderValue={(items) => {
+              return (
+                Array.isArray(items) &&
+                items.map((item, index) =>
+                  renderValueItem({
+                    item,
+                    index,
+                    size,
+                    disabled,
+                    onRemove: getRemoveItem(index),
+                  }),
+                )
+              );
+            }}
             onCopy={onCopy}
             onCopyCapture={onCopyCapture}
             onCut={onCut}

@@ -1,10 +1,15 @@
-import { useUpdate } from '@reatom/npm-react';
+import { useAtom } from '@reatom/react';
+import { RefObject, useEffect } from 'react';
 
-import { useCreateAtom } from '../useCreateAtom';
+export const useSendToAtom = <T>(value: T) =>
+  useAtom<T>(() => value, [value], { subscribe: false })[2];
 
-export const useSendToAtom = <T>(value: T) => {
-  const atom = useCreateAtom(value);
-  useUpdate(atom, [value]);
-
+export const useSendRefToAtom = <E>(ref: RefObject<E> | undefined) => {
+  const atom = useAtom<E | null>(ref?.current || null, [], {
+    subscribe: false,
+  })[2];
+  useEffect(() => {
+    atom.set(ref?.current || null);
+  }, [ref?.current]);
   return atom;
 };

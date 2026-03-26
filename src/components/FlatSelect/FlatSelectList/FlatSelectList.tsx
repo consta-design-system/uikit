@@ -1,7 +1,7 @@
 import './FlatSelectList.css';
 
-import { AtomMut } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
+import { AtomLike } from '@reatom/core';
+import { useAction, useAtom } from '@reatom/react';
 import React, { Fragment, memo, useMemo } from 'react';
 
 import { FieldPropSize } from '##/components/FieldComponents';
@@ -18,7 +18,6 @@ import { FlatSelectCreateButton } from '../FlatSelectCreateButton';
 import { FlatSelectGroupLabel } from '../FlatSelectGroupLabel/FlatSelectGroupLabel';
 import { FlatSelectItemAll } from '../FlatSelectItemAll/FlatSelectItemAll';
 import { FlatSelectLoader } from '../FlatSelectLoader/FlatSelectLoader';
-// import { SelectPopover } from '../SelectPopover';
 import { FlatSelectRenderItem } from '../FlatSelectRenderItem';
 import { CountedGroup } from '../types';
 import {
@@ -47,13 +46,14 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   size: FieldPropSize;
   listRef: React.Ref<HTMLDivElement>;
   getOptionActions(props: OptionProps<ITEM>): GetOptionPropsResult;
-  //   form: FlatSelectListPropForm;
-  openAtom: AtomMut<boolean>;
+  openAtom: AtomLike<boolean>;
   offset?: PopoverPropOffset | 'none';
   isLoading?: boolean;
-  renderItem: (props: RenderItemProps<ITEM>) => React.ReactNode | null;
-  highlightedIndexAtom: AtomMut<number>;
-  visibleItemsAtom: AtomMut<(OptionForCreate | CountedGroup<ITEM, GROUP>)[]>;
+  renderItem: AtomLike<
+    (props: RenderItemProps<ITEM>) => React.ReactNode | null
+  >;
+  highlightedIndexAtom: AtomLike<number>;
+  visibleItemsAtom: AtomLike<(OptionForCreate | CountedGroup<ITEM, GROUP>)[]>;
   getGroupLabel?: (group: GROUP) => string;
   labelForCreate?:
     | ((label: string | undefined) => React.ReactNode)
@@ -61,21 +61,20 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   labelForNotFound?: string;
   labelForEmptyItems?: string;
   notFound?: boolean;
-  hasItemsAtom: AtomMut<boolean>;
-  itemsRefs: React.RefObject<HTMLDivElement>[];
+  hasItemsAtom: AtomLike<boolean>;
+  getItemRef: (index: number) => React.RefCallback<HTMLDivElement>;
   virtualScroll?: boolean;
   onScrollToBottom?: (length: number) => void;
-  valueAtom: AtomMut<ITEM[]>;
-  getItemKeyAtom: AtomMut<(item: ITEM) => string | number>;
+  valueAtom: AtomLike<ITEM[]>;
+  getItemKeyAtom: AtomLike<(item: ITEM) => string | number>;
   onChangeAll: (e: React.SyntheticEvent, items: ITEM[]) => void;
   onChange: (e: React.SyntheticEvent, item: ITEM) => void;
-  inputValueAtom: AtomMut<string>;
-  groupsCounterAtom: AtomMut<Record<string, [number, number]>>;
-  dropdownZIndexAtom: AtomMut<number | undefined>;
+  inputValueAtom: AtomLike<string>;
+  groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
   selectAllLabel: string;
   view: 'default' | 'clear';
   form: 'default' | 'brick' | 'round';
-  disabledAtom: AtomMut<boolean>;
+  disabledAtom: AtomLike<boolean>;
 }>;
 
 type FlatSelectListComponent = <ITEM, GROUP>(
@@ -111,7 +110,7 @@ const isVisible = (slice: [number, number], index: number) => {
   return index >= slice[0] && index < slice[1];
 };
 
-export const FlatSelectList: FlatSelectListComponent = memo((props) => {
+export const FlatSelectList = memo(<ITEM, GROUP>(props: Props<ITEM, GROUP>) => {
   const {
     size,
     getOptionActions,
@@ -128,7 +127,7 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
     isLoading,
     getGroupLabel,
     notFound,
-    itemsRefs,
+    getItemRef,
     virtualScroll,
     onScrollToBottom,
     highlightedIndexAtom,
@@ -138,7 +137,6 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
     onChangeAll,
     inputValueAtom,
     groupsCounterAtom,
-    dropdownZIndexAtom,
     selectAllLabel,
     view,
     disabledAtom,
@@ -148,8 +146,8 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
   const [visibleItems] = useAtom(visibleItemsAtom);
 
   const [hasItems] = useAtom(hasItemsAtom);
-  //   const [isListMount, setIsListMount] = useAtom(false);
-  const [getItemKey] = useAtom(getItemKeyAtom);
+
+  const getItemKey = useAction((item: ITEM) => getItemKeyAtom()(item));
   const indent = form === 'round' ? 'increased' : 'normal';
 
   const isListShowed = useMemo(() => {
@@ -161,8 +159,6 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
       ).length > 0
     );
   }, [visibleItems]);
-
-  //   const offset = offsetProp === 'none' ? undefined : offsetProp;
 
   const lengthForVirtualScroll = useMemo(
     () => getLengthElements(visibleItems),
@@ -187,7 +183,6 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
 
   const getIndex = fabricIndex();
   const getVirtualIndex = fabricIndex();
-  //   const [zIndex] = useAtom(dropdownZIndexAtom);
 
   return (
     <ListBox
@@ -212,7 +207,7 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
                 key={cnFlatSelectList('List', { key: 'CreateButton' })}
                 labelForCreate={labelForCreate}
                 indent={indent}
-                ref={itemsRefs[index]}
+                ref={getItemRef(index)}
                 highlightedIndexAtom={highlightedIndexAtom}
                 inputValueAtom={inputValueAtom}
                 disabledAtom={disabledAtom}
@@ -257,7 +252,7 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
                         })}
                         ref={forkRef([
                           listRefs[virtualIndex],
-                          itemsRefs[index],
+                          getItemRef(index),
                         ])}
                         indent={indent}
                         size={size}
@@ -284,7 +279,7 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
                         highlightedIndexAtom={highlightedIndexAtom}
                         rootRef={forkRef([
                           listRefs[virtualIndex],
-                          itemsRefs[index],
+                          getItemRef(index),
                         ])}
                         renderItem={renderItem}
                         item={item}
@@ -313,4 +308,4 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
       )}
     </ListBox>
   );
-});
+}) as FlatSelectListComponent;

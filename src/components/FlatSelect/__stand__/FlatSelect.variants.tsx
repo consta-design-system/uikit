@@ -2,9 +2,9 @@ import './FlatSelect.variants.css';
 
 import { IconSearchStroked } from '@consta/icons/IconSearchStroked';
 import { useBoolean, useSelect, useText } from '@consta/stand';
-import { Button } from '@consta/uikit/Button';
 import React, { useRef, useState } from 'react';
 
+import { Button } from '##/components/Button';
 import {
   fieldPropSize,
   fieldPropSizeDefault,
@@ -48,7 +48,6 @@ const Variants = () => {
   const props = {
     ...(input ? searchProps : { items }),
     disabled,
-    input,
     size,
     view,
     form,
