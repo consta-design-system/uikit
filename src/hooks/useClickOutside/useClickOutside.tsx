@@ -31,10 +31,22 @@ export function useClickOutside({
           ? isActiveRef.current()
           : isActiveRef.current
       ) {
-        const target = event.target as Node;
+        const target = event.target as Node | null;
+        const composedPath =
+          typeof event.composedPath === 'function'
+            ? event.composedPath()
+            : undefined;
 
         const shouldCallHandler = ignoreClicksInsideRefsRef.current?.every(
-          (ref) => !ref.current?.contains(target),
+          (ref) => {
+            if (!ref.current) {
+              return true;
+            }
+
+            return composedPath
+              ? !composedPath.includes(ref.current)
+              : !ref.current.contains(target);
+          },
         );
 
         shouldCallHandler && handlerRef.current?.(event);

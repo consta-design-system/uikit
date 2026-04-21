@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { createEvent, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
 import { useClickOutside } from '../useClickOutside';
@@ -154,5 +154,56 @@ describe('Хук useClickOutside', () => {
 
     fireEvent.mouseDown(screen.getByTestId('outside'));
     expect(handler).toHaveBeenCalledTimes(1);
+  });
+
+  it('не вызывает экшен при клике внутри shadow DOM при ретаргетинге target на host', () => {
+    const handler = jest.fn();
+    const TestComponent = () => {
+      const hostRef = React.useRef<HTMLDivElement>(null);
+      const insideRef = React.useRef<HTMLDivElement | null>(null);
+
+      useClickOutside({
+        handler,
+        isActive: true,
+        ignoreClicksInsideRefs: [insideRef],
+      });
+
+      React.useEffect(() => {
+        const host = hostRef.current;
+        if (!host) {
+          return;
+        }
+
+        const shadowRoot = host.attachShadow({ mode: 'open' });
+        const inside = document.createElement('div');
+        shadowRoot.appendChild(inside);
+        insideRef.current = inside;
+      }, []);
+
+      return <div data-testid="shadow-host" ref={hostRef} />;
+    };
+
+    render(<TestComponent />);
+
+    const host = screen.getByTestId('shadow-host');
+    const shadowRoot = host.shadowRoot as ShadowRoot;
+    const inside = shadowRoot.firstElementChild as HTMLDivElement;
+    const event = createEvent.mouseDown(host);
+
+    Object.defineProperty(event, 'composedPath', {
+      value: () => [
+        inside,
+        shadowRoot,
+        host,
+        document.body,
+        document.documentElement,
+        document,
+        window,
+      ],
+    });
+
+    fireEvent(host, event);
+
+    expect(handler).not.toHaveBeenCalled();
   });
 });
