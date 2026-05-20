@@ -11,15 +11,15 @@ import { presetGpnDefault, Theme } from '##/components/Theme';
 import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import {
+  cnProgressStepBarItem,
+  ProgressStepBarItem,
+} from '../ProgressStepBarItem/ProgressStepBarItem';
+import {
   progressStepBarPropDirection,
   progressStepBarPropPosition,
   progressStepBarPropSize,
   progressStepBarPropStatus,
-} from '../helpers';
-import {
-  cnProgressStepBarItem,
-  ProgressStepBarItem,
-} from '../ProgressStepBarItem/ProgressStepBarItem';
+} from '../types';
 
 createRoot();
 clearStack();
