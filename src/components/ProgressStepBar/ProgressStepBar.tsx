@@ -24,6 +24,12 @@ import {
   calculateLines,
   cnProgressStepBar,
   getItemPosition,
+  validateVisibleIndex,
+  withDefaultGetters,
+} from './helpers';
+import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
+import { ProgressStepBarLine } from './ProgressStepBarLine/ProgressStepBarLine';
+import {
   Line,
   ProgressStepBarComponent,
   ProgressStepBarItemDefault,
@@ -31,11 +37,7 @@ import {
   progressStepBarPropDirectionDefault,
   ProgressStepBarProps,
   progressStepBarPropSizeDefault,
-  validateVisibleIndex,
-  withDefaultGetters,
-} from './helpers';
-import { ProgressStepBarItem } from './ProgressStepBarItem/ProgressStepBarItem';
-import { ProgressStepBarLine } from './ProgressStepBarLine/ProgressStepBarLine';
+} from './types';
 
 export const COMPONENT_NAME = 'ProgressStepBar' as const;
 
