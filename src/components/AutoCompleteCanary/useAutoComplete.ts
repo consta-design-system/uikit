@@ -12,6 +12,7 @@ import { useFlag } from '##/hooks/useFlag';
 import { KeyHandler, useKeys } from '##/hooks/useKeysDeprecated';
 import { useRefs } from '##/hooks/useRefs';
 import { getGroups } from '##/utils/getGroups';
+import { scrollIntoView } from '##/utils/scrollIntoView';
 
 import { AutoCompletePropOnChange } from './types';
 
@@ -261,9 +262,7 @@ export function useAutoComplete<ITEM, GROUP>(
 
   useEffect(() => {
     if (filteredOptions.length > 0) {
-      scrollToIndex(highlightedIndex, dropdownRef, optionsRefs, () =>
-        highlightIndex(0),
-      );
+      scrollIntoView(optionsRefs[highlightedIndex || 0].current!);
     }
     setIsOpen.on();
   }, [highlightedIndex]);

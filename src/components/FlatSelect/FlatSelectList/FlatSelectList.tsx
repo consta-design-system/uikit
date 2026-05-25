@@ -19,7 +19,6 @@ import { FlatSelectGroupLabel } from '../FlatSelectGroupLabel/FlatSelectGroupLab
 import { FlatSelectItemAll } from '../FlatSelectItemAll/FlatSelectItemAll';
 import { FlatSelectLoader } from '../FlatSelectLoader/FlatSelectLoader';
 import { FlatSelectRenderItem } from '../FlatSelectRenderItem';
-import { CountedGroup } from '../types';
 import {
   GetOptionPropsResult,
   isNotOptionForCreate,
@@ -27,7 +26,8 @@ import {
   isOptionForSelectAll,
   OptionForCreate,
   OptionProps,
-} from '../useFlatSelect';
+} from '../model';
+import { CountedGroup } from '../types';
 
 export const FlatSelectListForm = ['default', 'brick', 'round'] as const;
 export type FlatSelectListPropForm = (typeof FlatSelectListForm)[number];

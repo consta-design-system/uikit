@@ -7,13 +7,13 @@ import { useDebounce } from '##/hooks/useDebounce';
 import { KeyHandlers, useKeysRef } from '##/hooks/useKeysRef';
 import { useRefs } from '##/hooks/useRefs';
 import { getGroups, GetGroupsResult } from '##/utils/getGroups';
+import { scrollIntoView } from '##/utils/scrollIntoView';
 import { useCreateAtom } from '##/utils/state/useCreateAtom';
 import { usePropAtom } from '##/utils/state/usePickAtom';
 
 import { PropsWithDefault } from '../../SelectCanary/defaultProps';
 import { SelectGroupDefault, SelectItemDefault, SelectPropOnChange } from '..';
 import { CountedGroup, Group, SelectAllItem } from '../types';
-import { scrollToIndex } from './helpers';
 
 type IndexForHighlight = number | ((oldIndex: number) => number);
 
@@ -264,13 +264,7 @@ export const useSelect = <
   const optionsRefs = useRefs<HTMLDivElement>(maxHighlightIndex, undefined);
 
   const scrollToHighlightedIndex = useAction(() => {
-    const items = itemsAtom();
-    const highlightedIndex = highlightedIndexAtom();
-    const dropdownElement = dropdownRef.current;
-
-    if (items.length > 0 && dropdownElement) {
-      scrollToIndex(highlightedIndex, dropdownElement, optionsRefs);
-    }
+    scrollIntoView(optionsRefs[highlightedIndexAtom()].current!);
   });
 
   const highlightIndex = useAction((indexForHighlight: IndexForHighlight) => {

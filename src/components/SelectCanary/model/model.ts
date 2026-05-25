@@ -284,12 +284,7 @@ export const model = <
   );
 
   const scrollToHighlightedIndex = action(() => {
-    const listElement = dropdownElAtom();
-    const el = optionsElsAtom()[highlightedIndexAtom()]();
-
-    if (listElement && el) {
-      scrollIntoView(listElement, el);
-    }
+    scrollIntoView(optionsElsAtom()[highlightedIndexAtom()]()!);
   });
 
   const highlightIndex = action((indexForHighlight: IndexForHighlight) => {
