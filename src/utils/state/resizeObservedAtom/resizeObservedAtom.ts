@@ -10,7 +10,7 @@ import {
 } from '@reatom/core';
 
 export const resizeObservedAtom = <
-  ELEMENT extends HTMLElement | SVGElement | null,
+  ELEMENT extends HTMLElement | null,
   RETURN_TYPE,
   SUBSCRIBERS extends ELEMENT[] | ELEMENT,
 >(
