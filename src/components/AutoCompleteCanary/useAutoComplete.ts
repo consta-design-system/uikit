@@ -6,7 +6,6 @@ import React, {
   useState,
 } from 'react';
 
-import { scrollToIndex } from '##/components/SelectComponents/useSelect/helpers';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useFlag } from '##/hooks/useFlag';
 import { KeyHandler, useKeys } from '##/hooks/useKeysDeprecated';
@@ -262,7 +261,7 @@ export function useAutoComplete<ITEM, GROUP>(
 
   useEffect(() => {
     if (filteredOptions.length > 0) {
-      scrollIntoView(optionsRefs[highlightedIndex || 0].current!);
+      scrollIntoView(optionsRefs[highlightedIndex || 0]?.current!);
     }
     setIsOpen.on();
   }, [highlightedIndex]);
