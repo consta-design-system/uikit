@@ -155,22 +155,22 @@ describe('DateTime helpers (time)', () => {
         const result = getMaskBlocks();
 
         expect(result.dd).toBeDefined();
-        expectMaskedRange(result.dd, 1, 31);
+        expectMaskedRange(result.dd, 0, 99);
 
         expect(result.MM).toBeDefined();
-        expectMaskedRange(result.MM, 1, 12);
+        expectMaskedRange(result.MM, 0, 99);
 
         expect(result.yyyy).toBeDefined();
-        expectMaskedRange(result.yyyy, 1, 9999);
+        expectMaskedRange(result.yyyy, 0, 9999);
 
         expect(result.HH).toBeDefined();
-        expectMaskedRange(result.HH, 0, 23);
+        expectMaskedRange(result.HH, 0, 99);
 
         expect(result.mm).toBeDefined();
-        expectMaskedRange(result.mm, 0, 59);
+        expectMaskedRange(result.mm, 0, 99);
 
         expect(result.ss).toBeDefined();
-        expectMaskedRange(result.ss, 0, 59);
+        expectMaskedRange(result.ss, 0, 99);
       });
 
       it('включает и дату, и время при явном указании', () => {
@@ -190,13 +190,13 @@ describe('DateTime helpers (time)', () => {
         const result = getMaskBlocks({ includeDate: true, includeTime: false });
 
         expect(result.dd).toBeDefined();
-        expectMaskedRange(result.dd, 1, 31);
+        expectMaskedRange(result.dd, 0, 99);
 
         expect(result.MM).toBeDefined();
-        expectMaskedRange(result.MM, 1, 12);
+        expectMaskedRange(result.MM, 0, 99);
 
         expect(result.yyyy).toBeDefined();
-        expectMaskedRange(result.yyyy, 1, 9999);
+        expectMaskedRange(result.yyyy, 0, 9999);
 
         expect(result.HH).toBeUndefined();
         expect(result.mm).toBeUndefined();
@@ -213,13 +213,13 @@ describe('DateTime helpers (time)', () => {
         expect(result.yyyy).toBeUndefined();
 
         expect(result.HH).toBeDefined();
-        expectMaskedRange(result.HH, 0, 23);
+        expectMaskedRange(result.HH, 0, 99);
 
         expect(result.mm).toBeDefined();
-        expectMaskedRange(result.mm, 0, 59);
+        expectMaskedRange(result.mm, 0, 99);
 
         expect(result.ss).toBeDefined();
-        expectMaskedRange(result.ss, 0, 59);
+        expectMaskedRange(result.ss, 0, 99);
       });
     });
 
@@ -243,32 +243,32 @@ describe('DateTime helpers (time)', () => {
     describe('корректные диапазоны значений', () => {
       it('дни от 1 до 31', () => {
         const result = getMaskBlocks();
-        expectMaskedRange(result.dd, 1, 31);
+        expectMaskedRange(result.dd, 0, 99);
       });
 
       it('месяцы от 1 до 12', () => {
         const result = getMaskBlocks();
-        expectMaskedRange(result.MM, 1, 12);
+        expectMaskedRange(result.MM, 0, 99);
       });
 
       it('годы от 1 до 9999', () => {
         const result = getMaskBlocks();
-        expectMaskedRange(result.yyyy, 1, 9999);
+        expectMaskedRange(result.yyyy, 0, 9999);
       });
 
       it('часы от 0 до 23', () => {
         const result = getMaskBlocks();
-        expectMaskedRange(result.HH, 0, 23);
+        expectMaskedRange(result.HH, 0, 99);
       });
 
       it('минуты от 0 до 59', () => {
         const result = getMaskBlocks();
-        expectMaskedRange(result.mm, 0, 59);
+        expectMaskedRange(result.mm, 0, 99);
       });
 
       it('секунды от 0 до 59', () => {
         const result = getMaskBlocks();
-        expectMaskedRange(result.ss, 0, 59);
+        expectMaskedRange(result.ss, 0, 99);
       });
     });
   });

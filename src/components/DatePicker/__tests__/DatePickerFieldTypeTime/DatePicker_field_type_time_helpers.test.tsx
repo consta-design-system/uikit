@@ -118,13 +118,13 @@ describe('Helpers для DatePicker_field_type_time', () => {
       expect(config.blocks.ss.mask).toBe(IMaskAny.MaskedRange);
 
       expect(config.blocks.HH.from).toBe(0);
-      expect(config.blocks.HH.to).toBe(23);
+      expect(config.blocks.HH.to).toBe(99);
 
       expect(config.blocks.mm.from).toBe(0);
-      expect(config.blocks.mm.to).toBe(59);
+      expect(config.blocks.mm.to).toBe(99);
 
       expect(config.blocks.ss.from).toBe(0);
-      expect(config.blocks.ss.to).toBe(59);
+      expect(config.blocks.ss.to).toBe(99);
     });
   });
 });

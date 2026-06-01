@@ -139,15 +139,15 @@ export const getMaskBlocks = ({
   const blocks: MaskBlocks = {};
 
   if (includeDate) {
-    blocks.dd = { mask: IMask.MaskedRange, from: 1, to: 31 };
-    blocks.MM = { mask: IMask.MaskedRange, from: 1, to: 12 };
-    blocks.yyyy = { mask: IMask.MaskedRange, from: 1, to: 9999 };
+    blocks.dd = { mask: IMask.MaskedRange, from: 0, to: 99 };
+    blocks.MM = { mask: IMask.MaskedRange, from: 0, to: 99 };
+    blocks.yyyy = { mask: IMask.MaskedRange, from: 0, to: 9999 };
   }
 
   if (includeTime) {
-    blocks.HH = { mask: IMask.MaskedRange, from: 0, to: 23 };
-    blocks.mm = { mask: IMask.MaskedRange, from: 0, to: 59 };
-    blocks.ss = { mask: IMask.MaskedRange, from: 0, to: 59 };
+    blocks.HH = { mask: IMask.MaskedRange, from: 0, to: 99 };
+    blocks.mm = { mask: IMask.MaskedRange, from: 0, to: 99 };
+    blocks.ss = { mask: IMask.MaskedRange, from: 0, to: 99 };
   }
 
   return blocks;
