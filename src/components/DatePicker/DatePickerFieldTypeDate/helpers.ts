@@ -172,20 +172,20 @@ export const usePicker = (props: UsePickerProps) => {
         // @ts-ignore
         yyyy: {
           mask: IMask.MaskedRange,
-          from: 1,
+          from: 0,
           to: 9999,
         },
         // @ts-ignore
         MM: {
           mask: IMask.MaskedRange,
-          from: 1,
-          to: 12,
+          from: 0,
+          to: 99,
         },
         // @ts-ignore
         dd: {
           mask: IMask.MaskedRange,
-          from: 1,
-          to: 31,
+          from: 0,
+          to: 99,
         },
       },
       lazy: true,

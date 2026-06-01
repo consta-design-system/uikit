@@ -132,14 +132,14 @@ describe('Helpers для DatePicker_field_type_dateTime', () => {
       expect(config.blocks.MM.mask).toBe(IMaskAny.MaskedRange);
       expect(config.blocks.dd.mask).toBe(IMaskAny.MaskedRange);
 
-      expect(config.blocks.yyyy.from).toBe(1);
+      expect(config.blocks.yyyy.from).toBe(0);
       expect(config.blocks.yyyy.to).toBe(9999);
 
-      expect(config.blocks.MM.from).toBe(1);
-      expect(config.blocks.MM.to).toBe(12);
+      expect(config.blocks.MM.from).toBe(0);
+      expect(config.blocks.MM.to).toBe(99);
 
-      expect(config.blocks.dd.from).toBe(1);
-      expect(config.blocks.dd.to).toBe(31);
+      expect(config.blocks.dd.from).toBe(0);
+      expect(config.blocks.dd.to).toBe(99);
     });
 
     it('всегда использует MaskedRange с базовыми диапазонами для HH, mm, ss', () => {
@@ -151,15 +151,15 @@ describe('Helpers для DatePicker_field_type_dateTime', () => {
 
       expect(config.blocks.HH.mask).toBe(IMaskAny.MaskedRange);
       expect(config.blocks.HH.from).toBe(0);
-      expect(config.blocks.HH.to).toBe(23);
+      expect(config.blocks.HH.to).toBe(99);
 
       expect(config.blocks.mm.mask).toBe(IMaskAny.MaskedRange);
       expect(config.blocks.mm.from).toBe(0);
-      expect(config.blocks.mm.to).toBe(59);
+      expect(config.blocks.mm.to).toBe(99);
 
       expect(config.blocks.ss.mask).toBe(IMaskAny.MaskedRange);
       expect(config.blocks.ss.from).toBe(0);
-      expect(config.blocks.ss.to).toBe(59);
+      expect(config.blocks.ss.to).toBe(99);
     });
   });
 });
