@@ -1,9 +1,5 @@
-import { action, atom, computed } from '@reatom/core';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { action, atom, computed, effect, peek } from '@reatom/core';
 
-import { useMutableRef } from '##/hooks/useMutableRef';
-import { useRefs } from '##/hooks/useRefs';
-import { useResizeObserved } from '##/hooks/useResizeObserved';
 import { onEventEffect } from '##/utils/state/onEventEffect';
 import { resizeObservedAtom } from '##/utils/state/resizeObservedAtom';
 
@@ -15,36 +11,32 @@ import {
   defaultItemsCalculationCount,
   getElementHeight,
   getVisiblePosition,
-  useCalculateVisiblePosition,
-  useScroll,
   UseVirtualScrollProps,
-  UseVirtualScrollReturn,
 } from './helpers';
-
-const emptyArray: [] = [];
 
 export const virtualScrollEffect = <
   ITEM_ELEMENT extends HTMLElement = HTMLDivElement,
   SCROLL_ELEMENT extends HTMLElement = HTMLDivElement,
 >({
-  length,
+  length: lengthAtom,
   onScrollToBottom,
-  isActive,
+  isActive: isActiveAtom,
 }: UseVirtualScrollProps): UseVirtualScrollReturn<
   ITEM_ELEMENT,
   SCROLL_ELEMENT
 > => {
   const visiblePositionAtom = atom<[number, number]>([0, 0]);
 
-  //   const fff = visiblePosition.set;
-
-  const bounds = atom<Bounds>([
+  const boundsAtom = atom<Bounds>([
     [0, 0],
-    [0, isActive?.() ? defaultItemsCalculationCount : length()],
+    [0, isActiveAtom?.() ? defaultItemsCalculationCount : lengthAtom()],
   ]);
-  //   const listRefs = useRefs<ITEM_ELEMENT>(length, visiblePosition);
+
+  const spaceTopAtom = computed(() => boundsAtom()[1][1]);
+  const sliceAtom = computed(() => boundsAtom()[1]);
+
   const listRefs = computed(() => {
-    return new Array(length() as number)
+    return new Array(lengthAtom() as number)
       .fill(null)
       .map(() => atom<ITEM_ELEMENT | null>(null));
   });
@@ -55,17 +47,17 @@ export const virtualScrollEffect = <
 
   //   resizeObservedAtom;
 
-  const sizes = resizeObservedAtom<
+  const sizesAtom = resizeObservedAtom<
     ITEM_ELEMENT | null,
     number,
     (ITEM_ELEMENT | null)[]
   >(subscribersElements, getElementHeight);
 
-  //   const savedSizesRef = useRef(calculateSavedSizes([], sizes));
+  const savedSizesAtom = atom<number[]>([]);
 
   //   const onScrollToBottomRef = useMutableRef(onScrollToBottom);
 
-  const scrollElementRefHeight = resizeObservedAtom(
+  const scrollElementHeightAtom = resizeObservedAtom(
     scrollElementAtom,
     getElementHeight,
   );
@@ -79,7 +71,7 @@ export const virtualScrollEffect = <
     const visiblePosition = getVisiblePosition(
       scrollElement.scrollTop,
       getElementHeight(scrollElement),
-      Math.max.apply(null, sizes()),
+      Math.max.apply(null, sizesAtom()),
     );
 
     visiblePositionAtom.set((state: [number, number]) => {
@@ -94,20 +86,28 @@ export const virtualScrollEffect = <
   onEventEffect(scrollElementAtom, 'scroll', calculateVisiblePosition);
 
   // TODO: доделать
-  useEffect(() => {
-    if (isActive) {
+  effect(() => {
+    scrollElementHeightAtom();
+
+    if (isActiveAtom?.()) {
       calculateVisiblePosition();
     }
-  }, [scrollElementRefHeight, isActive]);
+  });
 
-  useEffect(() => {
-    if (isActive) {
-      savedSizesRef.current = calculateSavedSizes(savedSizesRef.current, sizes);
-      setBounds(
-        calculateBounds(savedSizesRef.current, sizes, visiblePosition, length),
+  effect(() => {
+    visiblePositionAtom();
+    const sizes = sizesAtom();
+    const visiblePosition = visiblePositionAtom();
+    const length = lengthAtom();
+
+    if (isActiveAtom?.()) {
+      savedSizesAtom.set(calculateSavedSizes(peek(savedSizesAtom), sizes));
+
+      boundsAtom.set(
+        calculateBounds(savedSizesAtom(), sizes, visiblePosition, length),
       );
     } else {
-      setBounds((state) => {
+      boundsAtom.set((state) => {
         if (
           state[0][0] !== 0 ||
           state[0][1] !== 0 ||
@@ -122,37 +122,43 @@ export const virtualScrollEffect = <
         return state;
       });
     }
-  }, [...visiblePosition, sizes, length, isActive]);
+  });
 
-  useEffect(() => {
-    if (isActive && onScrollToBottomRef.current && bounds[1][1] + 1 >= length) {
-      onScrollToBottomRef.current(length);
+  effect(() => {
+    const isActive = isActiveAtom?.();
+    const boundBottom = spaceTopAtom();
+    const length = peek(lengthAtom);
+
+    if (isActive && onScrollToBottom && boundBottom + 1 >= length) {
+      onScrollToBottom(length);
     }
-  }, [bounds[1][1], isActive]);
+  });
 
-  useEffect(() => {
+  effect(() => {
+    const isActive = isActiveAtom?.();
+    const length = peek(lengthAtom);
     const resetVisiblePosition: [number, number] = [0, 0];
     const resetBounds: Bounds = [
       [0, 0],
       [0, isActive ? defaultItemsCalculationCount : length],
     ];
 
-    setBounds((state) =>
+    boundsAtom.set((state) =>
       arraysIsEq(state[0], resetBounds[0]) &&
       arraysIsEq(state[1], resetBounds[1])
         ? state
         : resetBounds,
     );
 
-    setVisiblePosition((state) =>
+    visiblePositionAtom.set((state) =>
       arraysIsEq(state, resetVisiblePosition) ? state : resetVisiblePosition,
     );
-  }, [isActive]);
+  });
 
   return {
     listRefs,
-    scrollElementRef,
-    slice: bounds[1],
-    spaceTop: bounds[0][0],
+    scrollElementAtom,
+    sliceAtom,
+    spaceTopAtom,
   };
 };

@@ -1,7 +1,5 @@
-import { Action, action, AtomLike, computed } from '@reatom/core';
-import { RefObject, useCallback, useEffect } from 'react';
+import { action, Atom, AtomLike, Computed, computed } from '@reatom/core';
 
-import { useMutableRef } from '##/hooks/useMutableRef';
 import { getElementSize } from '##/hooks/useResizeObserved';
 
 export type UseVirtualScrollProps = {
@@ -11,10 +9,15 @@ export type UseVirtualScrollProps = {
 };
 
 export type UseVirtualScrollReturn<ITEM_ELEMENT, SCROLL_ELEMENT> = {
-  listRefs: React.RefObject<ITEM_ELEMENT>[];
-  scrollElementRef: React.RefObject<SCROLL_ELEMENT>;
-  slice: [number, number];
-  spaceTop: number;
+  listRefs: Computed<
+    Atom<ITEM_ELEMENT | null, [newState: ITEM_ELEMENT | null]>[]
+  >;
+  scrollElementAtom: Atom<
+    SCROLL_ELEMENT | null,
+    [newState: SCROLL_ELEMENT | null]
+  >;
+  sliceAtom: Computed<[number, number]>;
+  spaceTopAtom: Computed<number>;
 };
 
 export type Bounds = [[number, number], [number, number]];
@@ -24,21 +27,21 @@ export const defaultItemsCalculationCount = 5;
 export const arraysIsEq = (arr1: number[], arr2: number[]) =>
   arr1.join('-') === arr2.join('-');
 
-export const useScroll = (
-  ref: RefObject<HTMLElement>,
-  fn: () => void,
-  isActive: boolean,
-) => {
-  useEffect(() => {
-    if (isActive) {
-      ref.current?.addEventListener('scroll', fn);
-    }
+// export const useScroll = (
+//   ref: RefObject<HTMLElement>,
+//   fn: () => void,
+//   isActive: boolean,
+// ) => {
+//   useEffect(() => {
+//     if (isActive) {
+//       ref.current?.addEventListener('scroll', fn);
+//     }
 
-    return () => {
-      ref.current?.removeEventListener('scroll', fn);
-    };
-  }, [ref.current, fn, isActive]);
-};
+//     return () => {
+//       ref.current?.removeEventListener('scroll', fn);
+//     };
+//   }, [ref.current, fn, isActive]);
+// };
 
 export const getElementHeight = (el: HTMLElement | SVGGraphicsElement | null) =>
   getElementSize(el).height;
@@ -79,33 +82,33 @@ export const calculateSavedSizes = (savedSizes: number[], sizes: number[]) => {
   return newSavedSizes;
 };
 
-export const useCalculateVisiblePosition = (
-  scrollElement: HTMLElement | null,
-  set: (value: React.SetStateAction<[number, number]>) => void,
-  elementsSizes: number[],
-) => {
-  const elementMaxSizeRef = useMutableRef(Math.max.apply(null, elementsSizes));
+// export const useCalculateVisiblePosition = (
+//   scrollElement: HTMLElement | null,
+//   set: (value: React.SetStateAction<[number, number]>) => void,
+//   elementsSizes: number[],
+// ) => {
+//   const elementMaxSizeRef = useMutableRef(Math.max.apply(null, elementsSizes));
 
-  return useCallback(() => {
-    if (!scrollElement) {
-      return;
-    }
+//   return useCallback(() => {
+//     if (!scrollElement) {
+//       return;
+//     }
 
-    const visiblePosition = getVisiblePosition(
-      scrollElement.scrollTop,
-      getElementHeight(scrollElement),
-      elementMaxSizeRef.current,
-    );
+//     const visiblePosition = getVisiblePosition(
+//       scrollElement.scrollTop,
+//       getElementHeight(scrollElement),
+//       elementMaxSizeRef.current,
+//     );
 
-    set((state) => {
-      if (visiblePosition[0] !== state[0] || visiblePosition[1] !== state[1]) {
-        return visiblePosition;
-      }
+//     set((state) => {
+//       if (visiblePosition[0] !== state[0] || visiblePosition[1] !== state[1]) {
+//         return visiblePosition;
+//       }
 
-      return state;
-    });
-  }, [scrollElement, set]);
-};
+//       return state;
+//     });
+//   }, [scrollElement, set]);
+// };
 
 export const calculateVisiblePosition = (
   scrollElementAtom: AtomLike<HTMLElement | null>,
