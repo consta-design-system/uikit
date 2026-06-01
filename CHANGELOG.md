@@ -1,5 +1,18 @@
 # Changelog
 
+## v5.33.0 (01/06/2026)
+- [fix(DatePicker): mask settings have been fixed for a more convenient experience (#4173)](https://github.com/consta-design-system/uikit/commit/1c87a2afb6e85379830ff4eef5b323089ec7937c) - [@gizeasy](https://github.com/gizeasy)
+- [refactor(ProgressStepBar): extract and export shared types via dedicated module](https://github.com/consta-design-system/uikit/commit/1e85f96c6c81228a633d20a0e89af50ec39ed65e) - [@baevm](https://github.com/baevm)
+- [feat(ProgressLine): re-export public types from component index](https://github.com/consta-design-system/uikit/commit/dc1c6a15cf0c0ca834c9d69cca74d6405400d720) - [@baevm](https://github.com/baevm)
+- [feat(Picture): re-export public types from component index](https://github.com/consta-design-system/uikit/commit/5e40dca3326101dc1a428178237b1fcf483d9284) - [@baevm](https://github.com/baevm)
+- [feat(Pagination): re-export public types from component index](https://github.com/consta-design-system/uikit/commit/e2ac046ada3fa2213a166b03fb5fc1b7e7168f7a) - [@baevm](https://github.com/baevm)
+- [feat(Loader): re-export public types from component index](https://github.com/consta-design-system/uikit/commit/1d36bfa76955d4ac6c41ed6f31aab38629a00230) - [@baevm](https://github.com/baevm)
+- [feat(EventInterceptor): re-export public types from component index](https://github.com/consta-design-system/uikit/commit/c8589120fd265fe3c5d1e72dc4c21f9dbf968d39) - [@baevm](https://github.com/baevm)
+- [feat(Attachment): re-export public types from component index](https://github.com/consta-design-system/uikit/commit/9d07cf8a59f47c658a6e971449d9dcda21231958) - [@baevm](https://github.com/baevm)
+- [chore(deps): remove unused tailwindcss dependency (#4172)](https://github.com/consta-design-system/uikit/commit/d4fcc922601a3893e8f6bcc6dea042fc6ca091d2) - [@baevm](https://github.com/baevm)
+
+--------------------
+
 ## v5.32.0 (19/03/2026)
 Самое важное:
 - Мы добавили компонент `ColorPicker`. Он позволяет удобно выбирать цвета и поддерживает все основные цветовые модели, а также работает с пользовательскими.
@@ -382,18 +395,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [feat(Steps): add wrapper to step index (#3821)](https://github.com/consta-design-system/uikit/commit/b46890555deac4530b4f82fb959482ccddd47780) - [@belk1ng](https://github.com/belk1ng)
 - [fix(Slider): fix value changing after click with disabled prop (#3822)](https://github.com/consta-design-system/uikit/commit/eb818a974a94a7294f2b12eccb646770b11b8d6e) - [@belk1ng](https://github.com/belk1ng)
 - [fix(TextFieldCanary): fixed import (#3819)](https://github.com/consta-design-system/uikit/commit/88c9a63cb5a99d700360a8a78fb45be6e4142f6c) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.14.0 (13/11/2024)
-Самое важное:
-- В `SnackBar` добавили возможность указать прогресс.
-- В `Badge` добавили модификации `_view_pinted` и `_status_disabled`.
-- В `Popover` добавили возможность указать родительский контейнер.
-
----
-
-- [fix(FieldComponents): fixed import (#3817)](https://github.com/consta-design-system/uikit/commit/3570773d39dd9209cd7c143dc6e2e9e2c986e3e5) - [@gizeasy](https://github.com/gizeasy)
-- [feat(SnackBar): add progress (#3796)](https://github.com/consta-design-system/uikit/commit/0cb9703b6a9956aaf2563717fd471a79d67b6d10) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Badge): add _view_pinted and _status_disabled (#3792)](https://github.com/consta-design-system/uikit/commit/04e198e5261fbf69df6de065a89fc5f791773319) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Popover): add container property (#3812)](https://github.com/consta-design-system/uikit/commit/00c224a26cfd9b14f2959f2f9d9891bd91f2642a) - [@ZettZet](https://github.com/ZettZet)
