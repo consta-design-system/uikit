@@ -168,7 +168,7 @@ export const usePicker = (props: UsePickerProps) => {
       blocks: {
         yyyy: {
           mask: IMask.MaskedRange,
-          from: 1,
+          from: 0,
           to: 9999,
         },
       },
