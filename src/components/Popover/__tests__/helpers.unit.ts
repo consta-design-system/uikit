@@ -37,7 +37,7 @@ const defaultParams: Parameters<typeof getComputedPositionAndDirection>[0] = {
   spareDirection: 'downStartLeft',
 };
 
-describe.concurrent('getPositionsByDirection', () => {
+describe('getPositionsByDirection', () => {
   test('возвращает позиции по направлениям без сдвигов и якоря', () => {
     const result = getPositionsByDirection({
       contentSize: { width: 100, height: 50 },
@@ -176,398 +176,389 @@ describe.concurrent('getPositionsByDirection', () => {
   });
 });
 
-describe.concurrent('getComputedPositionAndDirection', () => {
-  describe.concurrent(
-    'если поповер спозиционирован относительно координат',
-    () => {
-      test('возвращаем неопределенную позицию, если данные для позиции отсутствуют', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            direction: 'rightCenter',
-            position: undefined,
-          }),
-        ).toEqual({
+describe('getComputedPositionAndDirection', () => {
+  describe('если поповер спозиционирован относительно координат', () => {
+    test('возвращаем неопределенную позицию, если данные для позиции отсутствуют', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
           direction: 'rightCenter',
           position: undefined,
-        });
+        }),
+      ).toEqual({
+        direction: 'rightCenter',
+        position: undefined,
       });
+    });
 
-      test('отображаем поповер вниз по центру', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            position: { x: 250, y: 0 },
-          }),
-        ).toEqual({
-          direction: 'downCenter',
-          position: { x: 200, y: 0 },
-        });
+    test('отображаем поповер вниз по центру', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
+          position: { x: 250, y: 0 },
+        }),
+      ).toEqual({
+        direction: 'downCenter',
+        position: { x: 200, y: 0 },
       });
+    });
 
-      test('отображаем поповер вверх по центру', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            position: { x: 150, y: 490 },
-          }),
-        ).toEqual({
-          direction: 'upCenter',
-          position: { x: 100, y: 440 },
-        });
+    test('отображаем поповер вверх по центру', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
+          position: { x: 150, y: 490 },
+        }),
+      ).toEqual({
+        direction: 'upCenter',
+        position: { x: 100, y: 440 },
       });
+    });
 
-      test('отображаем поповер снизу по левому краю', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            position: { x: 10, y: 10 },
-          }),
-        ).toEqual({
-          direction: 'downRight',
+    test('отображаем поповер снизу по левому краю', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
           position: { x: 10, y: 10 },
-        });
+        }),
+      ).toEqual({
+        direction: 'downRight',
+        position: { x: 10, y: 10 },
       });
+    });
 
-      test('отображаем поповер снизу по правому краю', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            position: { x: 490, y: 10 },
-          }),
-        ).toEqual({
-          direction: 'downLeft',
-          position: { x: 390, y: 10 },
-        });
+    test('отображаем поповер снизу по правому краю', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
+          position: { x: 490, y: 10 },
+        }),
+      ).toEqual({
+        direction: 'downLeft',
+        position: { x: 390, y: 10 },
       });
+    });
 
-      test('отображаем поповер сверху по левому краю', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            position: { x: 10, y: 490 },
-          }),
-        ).toEqual({
-          direction: 'upRight',
-          position: { x: 10, y: 440 },
-        });
+    test('отображаем поповер сверху по левому краю', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
+          position: { x: 10, y: 490 },
+        }),
+      ).toEqual({
+        direction: 'upRight',
+        position: { x: 10, y: 440 },
       });
+    });
 
-      test('отображаем поповер сверху по правому краю', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            position: { x: 490, y: 490 },
-          }),
-        ).toEqual({
-          direction: 'upLeft',
-          position: { x: 390, y: 440 },
-        });
+    test('отображаем поповер сверху по правому краю', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
+          position: { x: 490, y: 490 },
+        }),
+      ).toEqual({
+        direction: 'upLeft',
+        position: { x: 390, y: 440 },
       });
+    });
 
-      test('отображаем поповер справа', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            viewportSize: {
-              height: 50,
-              width: 500,
-            },
-            position: { x: 50, y: 25 },
-          }),
-        ).toEqual({
-          direction: 'rightCenter',
-          position: { x: 50, y: 0 },
-        });
-      });
-
-      test('отображаем поповер слева', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            viewportSize: {
-              height: 50,
-              width: 500,
-            },
-            position: { x: 450, y: 25 },
-          }),
-        ).toEqual({
-          direction: 'leftCenter',
-          position: { x: 350, y: 0 },
-        });
-      });
-
-      test('если поповер никуда не помещается, то используем направление spareDirection', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            direction: 'downCenter',
-            viewportSize: {
-              height: 50,
-              width: 100,
-            },
-            position: { x: 50, y: 25 },
-            contentSize: { width: 200, height: 300 },
-          }),
-        ).toEqual({
-          direction: 'downStartLeft',
+    test('отображаем поповер справа', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
+          viewportSize: {
+            height: 50,
+            width: 500,
+          },
           position: { x: 50, y: 25 },
-        });
+        }),
+      ).toEqual({
+        direction: 'rightCenter',
+        position: { x: 50, y: 0 },
       });
+    });
 
-      test('если поповер может поместиться в любую сторону, то используем сторону из настроек', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...defaultParams,
-            direction: 'rightCenter',
-            viewportSize: {
-              height: 1000,
-              width: 1000,
-            },
-            position: { x: 500, y: 500 },
-          }),
-        ).toEqual({
-          direction: 'rightCenter',
-          position: { x: 500, y: 475 },
-        });
+    test('отображаем поповер слева', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
+          viewportSize: {
+            height: 50,
+            width: 500,
+          },
+          position: { x: 450, y: 25 },
+        }),
+      ).toEqual({
+        direction: 'leftCenter',
+        position: { x: 350, y: 0 },
       });
-    },
-  );
+    });
 
-  describe.concurrent(
-    'если поповер спозиционирован относительно элемента',
-    () => {
-      const params = {
-        ...defaultParams,
-      } as const;
-
-      test('отображаем поповер вниз по центру', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...params,
-            contentSize: {
-              width: 250,
-              height: 50,
-            },
-            position: {
-              x: 200,
-              y: 100,
-            },
-            anchorSize: ANCHOR_SIZE,
-          }),
-        ).toEqual({
+    test('если поповер никуда не помещается, то используем направление spareDirection', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
           direction: 'downCenter',
-          position: { x: 125, y: 150 },
-        });
+          viewportSize: {
+            height: 50,
+            width: 100,
+          },
+          position: { x: 50, y: 25 },
+          contentSize: { width: 200, height: 300 },
+        }),
+      ).toEqual({
+        direction: 'downStartLeft',
+        position: { x: 50, y: 25 },
       });
+    });
 
-      test('отображаем поповер вверх по центру', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...params,
-            contentSize: {
-              height: 100,
-              width: 100,
-            },
-            position: {
-              x: 400,
-              y: 450,
-            },
-            anchorSize: ANCHOR_SIZE,
-          }),
-        ).toEqual({
+    test('если поповер может поместиться в любую сторону, то используем сторону из настроек', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...defaultParams,
+          direction: 'rightCenter',
+          viewportSize: {
+            height: 1000,
+            width: 1000,
+          },
+          position: { x: 500, y: 500 },
+        }),
+      ).toEqual({
+        direction: 'rightCenter',
+        position: { x: 500, y: 475 },
+      });
+    });
+  });
+
+  describe('если поповер спозиционирован относительно элемента', () => {
+    const params = {
+      ...defaultParams,
+    } as const;
+
+    test('отображаем поповер вниз по центру', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...params,
+          contentSize: {
+            width: 250,
+            height: 50,
+          },
+          position: {
+            x: 200,
+            y: 100,
+          },
+          anchorSize: ANCHOR_SIZE,
+        }),
+      ).toEqual({
+        direction: 'downCenter',
+        position: { x: 125, y: 150 },
+      });
+    });
+
+    test('отображаем поповер вверх по центру', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...params,
+          contentSize: {
+            height: 100,
+            width: 100,
+          },
+          position: {
+            x: 400,
+            y: 450,
+          },
+          anchorSize: ANCHOR_SIZE,
+        }),
+      ).toEqual({
+        direction: 'upCenter',
+        position: { x: 400, y: 350 },
+      });
+    });
+
+    test('отображаем поповер вниз вправо', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...params,
+          contentSize: {
+            width: 200,
+            height: 50,
+          },
+          position: {
+            x: 0,
+            y: 0,
+          },
+          anchorSize: ANCHOR_SIZE,
+        }),
+      ).toEqual({
+        direction: 'downRight',
+        position: { x: 50, y: 50 },
+      });
+    });
+
+    test('отображаем поповер вниз влево', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...params,
+          contentSize: {
+            width: 500,
+            height: 50,
+          },
+          position: {
+            x: 450,
+            y: 0,
+          },
+          anchorSize: ANCHOR_SIZE,
+        }),
+      ).toEqual({
+        direction: 'downLeft',
+        position: { x: 0, y: 50 },
+      });
+    });
+
+    test('отображаем поповер вверх вправо', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...params,
+          contentSize: {
+            width: 200,
+            height: 50,
+          },
+          position: {
+            x: 0,
+            y: 450,
+          },
+          anchorSize: ANCHOR_SIZE,
+        }),
+      ).toEqual({
+        direction: 'upRight',
+        position: { x: 50, y: 400 },
+      });
+    });
+
+    test('отображаем поповер вверх влево', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...params,
+          contentSize: {
+            width: 200,
+            height: 100,
+          },
+          position: {
+            x: 400,
+            y: 450,
+          },
+          anchorSize: ANCHOR_SIZE,
+        }),
+      ).toEqual({
+        direction: 'upLeft',
+        position: { x: 250, y: 350 },
+      });
+    });
+
+    test('отображаем поповер справа', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...params,
+          viewportSize: {
+            height: 50,
+            width: 500,
+          },
+          position: {
+            x: 0,
+            y: 0,
+          },
+          anchorSize: ANCHOR_SIZE,
+        }),
+      ).toEqual({
+        direction: 'rightCenter',
+        position: { x: 100, y: 0 },
+      });
+    });
+
+    test('отображаем поповер слева', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...params,
+          viewportSize: {
+            height: 50,
+            width: 500,
+          },
+          position: {
+            x: 400,
+            y: 0,
+          },
+          anchorSize: ANCHOR_SIZE,
+        }),
+      ).toEqual({
+        direction: 'leftCenter',
+        position: { x: 300, y: 0 },
+      });
+    });
+
+    test('если поповер никуда не помещается, то используем направление spareDirection', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...params,
           direction: 'upCenter',
-          position: { x: 400, y: 350 },
-        });
+          viewportSize: {
+            height: 50,
+            width: 100,
+          },
+          position: {
+            x: 0,
+            y: 0,
+          },
+          anchorSize: ANCHOR_SIZE,
+        }),
+      ).toEqual({
+        direction: 'downStartLeft',
+        position: { x: 0, y: 50 },
       });
+    });
 
-      test('отображаем поповер вниз вправо', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...params,
-            contentSize: {
-              width: 200,
-              height: 50,
-            },
-            position: {
-              x: 0,
-              y: 0,
-            },
-            anchorSize: ANCHOR_SIZE,
-          }),
-        ).toEqual({
+    test('если поповер может поместиться в любую сторону, то используем сторону из настроек', () => {
+      expect(
+        getComputedPositionAndDirection({
+          ...params,
           direction: 'downRight',
-          position: { x: 50, y: 50 },
-        });
+          viewportSize: {
+            height: 1000,
+            width: 1000,
+          },
+          position: {
+            x: 400,
+            y: 500,
+          },
+          anchorSize: ANCHOR_SIZE,
+        }),
+      ).toEqual({
+        direction: 'downRight',
+        position: { x: 450, y: 550 },
       });
+    });
+  });
 
-      test('отображаем поповер вниз влево', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...params,
-            contentSize: {
-              width: 500,
-              height: 50,
-            },
-            position: {
-              x: 450,
-              y: 0,
-            },
-            anchorSize: ANCHOR_SIZE,
-          }),
-        ).toEqual({
-          direction: 'downLeft',
-          position: { x: 0, y: 50 },
-        });
-      });
-
-      test('отображаем поповер вверх вправо', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...params,
-            contentSize: {
-              width: 200,
-              height: 50,
-            },
-            position: {
-              x: 0,
-              y: 450,
-            },
-            anchorSize: ANCHOR_SIZE,
-          }),
-        ).toEqual({
-          direction: 'upRight',
-          position: { x: 50, y: 400 },
-        });
-      });
-
-      test('отображаем поповер вверх влево', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...params,
-            contentSize: {
-              width: 200,
-              height: 100,
-            },
-            position: {
-              x: 400,
-              y: 450,
-            },
-            anchorSize: ANCHOR_SIZE,
-          }),
-        ).toEqual({
-          direction: 'upLeft',
-          position: { x: 250, y: 350 },
-        });
-      });
-
-      test('отображаем поповер справа', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...params,
-            viewportSize: {
-              height: 50,
-              width: 500,
-            },
-            position: {
-              x: 0,
-              y: 0,
-            },
-            anchorSize: ANCHOR_SIZE,
-          }),
-        ).toEqual({
-          direction: 'rightCenter',
-          position: { x: 100, y: 0 },
-        });
-      });
-
-      test('отображаем поповер слева', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...params,
-            viewportSize: {
-              height: 50,
-              width: 500,
-            },
-            position: {
-              x: 400,
-              y: 0,
-            },
-            anchorSize: ANCHOR_SIZE,
-          }),
-        ).toEqual({
-          direction: 'leftCenter',
-          position: { x: 300, y: 0 },
-        });
-      });
-
-      test('если поповер никуда не помещается, то используем направление spareDirection', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...params,
-            direction: 'upCenter',
-            viewportSize: {
-              height: 50,
-              width: 100,
-            },
-            position: {
-              x: 0,
-              y: 0,
-            },
-            anchorSize: ANCHOR_SIZE,
-          }),
-        ).toEqual({
-          direction: 'downStartLeft',
-          position: { x: 0, y: 50 },
-        });
-      });
-
-      test('если поповер может поместиться в любую сторону, то используем сторону из настроек', () => {
-        expect(
-          getComputedPositionAndDirection({
-            ...params,
-            direction: 'downRight',
-            viewportSize: {
-              height: 1000,
-              width: 1000,
-            },
-            position: {
-              x: 400,
-              y: 500,
-            },
-            anchorSize: ANCHOR_SIZE,
-          }),
-        ).toEqual({
-          direction: 'downRight',
-          position: { x: 450, y: 550 },
-        });
-      });
-    },
-  );
-
-  describe.concurrent(
-    'если список разрешенных сторон состоит не из всех возможных вариантов',
-    () => {
-      test('всегда отображаем элемент вниз', () => {
-        expect(
-          getComputedPositionAndDirection({
-            viewportSize: { width: 50, height: 500 },
-            contentSize: { width: 100, height: 50 },
-            direction: 'downCenter',
-            position: { x: 25, y: 500 },
-            possibleDirections: ['downCenter', 'downLeft', 'downRight'],
-            bannedDirections: [],
-            spareDirection: 'downCenter',
-          }),
-        ).toEqual({
+  describe('если список разрешенных сторон состоит не из всех возможных вариантов', () => {
+    test('всегда отображаем элемент вниз', () => {
+      expect(
+        getComputedPositionAndDirection({
+          viewportSize: { width: 50, height: 500 },
+          contentSize: { width: 100, height: 50 },
           direction: 'downCenter',
-          position: { x: -25, y: 500 },
-        });
+          position: { x: 25, y: 500 },
+          possibleDirections: ['downCenter', 'downLeft', 'downRight'],
+          bannedDirections: [],
+          spareDirection: 'downCenter',
+        }),
+      ).toEqual({
+        direction: 'downCenter',
+        position: { x: -25, y: 500 },
       });
-    },
-  );
+    });
+  });
 
-  describe.concurrent('если есть список запрещенных сторон', () => {
+  describe('если есть список запрещенных сторон', () => {
     test('если вычисленная сторона под запретом, то возвращаем следующую подходящую сторону', () => {
       expect(
         getComputedPositionAndDirection({

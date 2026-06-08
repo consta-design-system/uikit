@@ -1,9 +1,10 @@
 import { clearStack, context, sleep, top, wrap } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
-import { act, fireEvent } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
+import { userEvent } from 'vitest/browser';
 
 import { createIconMock } from '##/../__mocks__/IconMock';
 import { cnFieldArrayValueInlineControl } from '##/components/FieldComponents';
@@ -73,18 +74,12 @@ const getOutside = (ctx: TestContext) =>
   document.querySelector(`#${testOutsideId(ctx)}`) as HTMLDivElement;
 const getInput = (ctx: TestContext) =>
   getRender(ctx)?.querySelector(`input`) as HTMLInputElement;
-const inputClick = (ctx: TestContext) => {
-  fireEvent.click(getInput(ctx));
-};
 
 // const getDropdown = (ctx) => screen.queryByRole(`listbox`) as HTMLDivElement;
 const getDropdown = (ctx: TestContext) =>
   document.querySelector(
     `#${testPopoverId(ctx)} *[role="listbox"]`,
   ) as HTMLDivElement;
-const outsideClick = (ctx: TestContext) => {
-  fireEvent.mouseDown(getOutside(ctx));
-};
 const getValueControl = (ctx: TestContext) =>
   getRender(ctx)?.querySelector(
     `.${cnFieldArrayValueInlineControl()}`,
@@ -112,8 +107,7 @@ const getCreateButton = (ctx: TestContext) =>
   getDropdown(ctx).querySelector(
     `.${cnSelectCreateButton()}`,
   ) as HTMLDivElement;
-const onCreateClick = (ctx: TestContext) =>
-  fireEvent.click(getCreateButton(ctx));
+const onCreateClick = (ctx: TestContext) => getCreateButton(ctx).click();
 
 const getValueItems = (ctx: TestContext) =>
   getRender(ctx)?.querySelectorAll(
@@ -142,11 +136,10 @@ const groups: SelectGroupDefault[] = [
   { id: 2, label: 'Group 2' },
 ];
 
-describe.concurrent(`${testId}`, () => {
+describe(`${testId}`, () => {
   test('рендерится без ошибок', (ctx) =>
     context.start(async () => {
       const render = renderComponent(ctx, { items, onChange: vi.fn() });
-      await wrap(tick());
 
       expect(() => render).not.toThrow();
     }));
@@ -159,8 +152,6 @@ describe.concurrent(`${testId}`, () => {
         onChange: vi.fn(),
         placeholder,
       });
-
-      await wrap(tick());
 
       expect(getInput(ctx).placeholder).toEqual(placeholder);
     }));
@@ -175,8 +166,6 @@ describe.concurrent(`${testId}`, () => {
         inputDefaultValue,
         input: true,
       });
-
-      await wrap(tick());
 
       expect(getInput(ctx).value).toEqual(inputDefaultValue);
     }));
@@ -204,8 +193,6 @@ describe.concurrent(`${testId}`, () => {
         renderComponent(ctx, { items, ref, onChange: vi.fn() });
       });
 
-      await wrap(tick());
-
       expect(ref.current).toBeInTheDocument();
     }));
 
@@ -215,8 +202,6 @@ describe.concurrent(`${testId}`, () => {
 
       renderComponent(ctx, { items, inputRef, onChange: vi.fn() });
 
-      await wrap(tick());
-
       expect(inputRef.current).toBeInTheDocument();
     }));
 
@@ -225,8 +210,6 @@ describe.concurrent(`${testId}`, () => {
       const className = 'custom-class';
 
       renderComponent(ctx, { items, className, onChange: vi.fn() });
-
-      await wrap(tick());
 
       expect(getRender(ctx)).toHaveClass(className);
     }));
@@ -239,8 +222,6 @@ describe.concurrent(`${testId}`, () => {
         value,
         onChange: vi.fn(),
       });
-
-      await wrap(tick());
 
       expect(getValueItems(ctx).length).toEqual(value.length);
       expect(getValueControl(ctx).textContent).toEqual(
@@ -255,7 +236,6 @@ describe.concurrent(`${testId}`, () => {
         'onChange': vi.fn(),
         'aria-placeholder': 'test-autocomplete',
       });
-      await wrap(tick());
 
       expect(getRender(ctx)).toHaveAttribute(
         'aria-placeholder',
@@ -269,15 +249,12 @@ describe.concurrent(`${testId}`, () => {
       renderComponent(ctx, {
         items,
         onChange: vi.fn(),
+        input: true,
       });
-
-      await wrap(tick());
-
-      await wrap(sleep(animateTimeout));
 
       expect(getDropdown(ctx)).not.toBeInTheDocument();
 
-      inputClick(ctx);
+      await wrap(userEvent.click(getInput(ctx)));
 
       await wrap(sleep(animateTimeout));
 
@@ -291,7 +268,6 @@ describe.concurrent(`${testId}`, () => {
         onChange: vi.fn(),
         dropdownOpen: true,
       });
-      await wrap(tick());
 
       expect(getDropdown(ctx)).toBeInTheDocument();
     }));
@@ -304,29 +280,23 @@ describe.concurrent(`${testId}`, () => {
         items,
         onChange: vi.fn(),
         onDropdownOpen: handlerDropdownOpen,
+        input: true,
       });
 
-      await wrap(tick());
+      await wrap(userEvent.click(getInput(ctx)));
 
-      inputClick(ctx);
-
-      await wrap(tick());
       expect(handlerDropdownOpen).toHaveBeenCalledTimes(2);
 
-      await wrap(tick());
-      outsideClick(ctx);
+      await wrap(userEvent.click(getOutside(ctx)));
 
-      await wrap(tick());
       expect(handlerDropdownOpen).toHaveBeenCalledTimes(3);
 
-      inputClick(ctx);
+      await wrap(userEvent.click(getInput(ctx)));
 
-      await wrap(tick());
       expect(handlerDropdownOpen).toHaveBeenCalledTimes(4);
 
-      outsideClick(ctx);
+      await wrap(userEvent.click(getOutside(ctx)));
 
-      await wrap(tick());
       expect(handlerDropdownOpen).toHaveBeenCalledTimes(5);
     }));
 
@@ -337,7 +307,6 @@ describe.concurrent(`${testId}`, () => {
         onChange: vi.fn(),
         dropdownOpen: true,
       });
-      await wrap(tick());
 
       items.map((item, index) =>
         expect(getItem(ctx, index).textContent).toEqual(item.label),
@@ -346,12 +315,14 @@ describe.concurrent(`${testId}`, () => {
 
   test('не открывается по клику при disabled', (ctx) =>
     context.start(async () => {
-      renderComponent(ctx, { items, onChange: vi.fn(), disabled: true });
-      await wrap(tick());
+      renderComponent(ctx, {
+        items,
+        onChange: vi.fn(),
+        disabled: true,
+      });
 
-      inputClick(ctx);
-
-      await wrap(tick());
+      getInput(ctx).click();
+      await wrap(sleep(animateTimeout));
 
       expect(getDropdown(ctx)).not.toBeInTheDocument();
     }));
@@ -365,7 +336,6 @@ describe.concurrent(`${testId}`, () => {
         onChange: onChangeMock,
         dropdownOpen: true,
       });
-      await wrap(tick());
 
       getItem(ctx, 0).click();
 
@@ -384,13 +354,10 @@ describe.concurrent(`${testId}`, () => {
         onChange: vi.fn(),
         onFocus: handlerFocus,
       });
-      await wrap(tick());
 
       expect(handlerFocus).toHaveBeenCalledTimes(0);
 
       getInput(ctx).focus();
-
-      await wrap(tick());
 
       expect(handlerFocus).toHaveBeenCalledTimes(1);
     }));
@@ -404,8 +371,6 @@ describe.concurrent(`${testId}`, () => {
         onBlur: handlerBlur,
       });
 
-      await wrap(tick());
-
       getInput(ctx).focus();
 
       expect(handlerBlur).toHaveBeenCalledTimes(0);
@@ -418,51 +383,57 @@ describe.concurrent(`${testId}`, () => {
       const onChangeMock = vi.fn();
 
       renderComponent(ctx, { items, onChange: onChangeMock });
-      await wrap(tick());
 
       const input = getInput(ctx);
 
       input.focus();
 
-      fireEvent.keyDown(input, { key: 'ArrowDown' });
+      await wrap(userEvent.keyboard('{ArrowDown}'));
+
       await wrap(sleep(animateTimeout));
+
+      await wrap(tick());
 
       expect(getDropdown(ctx)).toBeInTheDocument();
 
-      fireEvent.keyDown(input, { key: 'ArrowUp' });
-      fireEvent.keyDown(input, { key: 'ArrowDown' });
-      fireEvent.keyDown(input, { key: 'Enter' });
+      await wrap(userEvent.keyboard('{ArrowUp}{ArrowDown}{Enter}'));
 
       expect(onChangeMock).toHaveBeenCalledWith([items[1]], {
         e: expect.any(Object),
       });
 
-      fireEvent.keyDown(input, { key: 'Escape' });
+      await wrap(userEvent.keyboard('{Escape}'));
+
+      await wrap(sleep(animateTimeout));
 
       await wrap(tick());
-      await wrap(sleep(animateTimeout));
 
       // закрытие по esc
       expect(getDropdown(ctx)).not.toBeInTheDocument();
       // await wrap(tick, frame)();
 
-      fireEvent.keyDown(input, { key: 'Enter' });
-      await wrap(tick());
+      await wrap(userEvent.keyboard('{Enter}'));
+
       await wrap(sleep(animateTimeout));
+
+      await wrap(tick());
 
       // открытие по enter
       expect(getDropdown(ctx)).toBeInTheDocument();
 
-      fireEvent.keyDown(input, { key: 'Tab' });
-      await wrap(tick());
+      await wrap(userEvent.tab());
+
       await wrap(sleep(animateTimeout));
+
+      await wrap(tick());
 
       // закрытие по tab
       expect(getDropdown(ctx)).not.toBeInTheDocument();
 
-      fireEvent.keyDown(input, { key: 'Tab' });
-      await wrap(tick());
+      await wrap(userEvent.tab());
+
       await wrap(sleep(animateTimeout));
+
       await wrap(tick());
 
       // снятие фокуса по tab
@@ -479,22 +450,17 @@ describe.concurrent(`${testId}`, () => {
         disabled: true,
       });
 
-      await wrap(tick());
-
       const input = getInput(ctx);
-      fireEvent.focus(input);
+      getInput(ctx).focus();
+      await wrap(userEvent.keyboard('{ArrowDown}'));
 
-      await wrap(tick());
-
-      fireEvent.keyDown(input, { key: 'ArrowDown' });
-      await wrap(tick());
       await wrap(sleep(animateTimeout));
 
       expect(getDropdown(ctx)).not.toBeInTheDocument();
       expect(input).not.toHaveFocus();
 
-      fireEvent.keyDown(input, { key: 'Enter' });
-      await wrap(tick());
+      await wrap(userEvent.keyboard('{Enter}'));
+
       await wrap(sleep(animateTimeout));
 
       expect(getDropdown(ctx)).not.toBeInTheDocument();
@@ -513,14 +479,9 @@ describe.concurrent(`${testId}`, () => {
         input: true,
       });
 
-      await wrap(tick());
+      await wrap(userEvent.type(getInput(ctx), 'change'));
 
-      const input = getInput(ctx);
-
-      fireEvent.change(input, { target: { value: 'change' } });
-      await wrap(tick());
-
-      expect(input.value).toEqual('change');
+      expect(getInput(ctx).value).toEqual('change');
     }));
 
   test('при вводе текста в input срабатывает onInput', (ctx) =>
@@ -534,12 +495,10 @@ describe.concurrent(`${testId}`, () => {
         onInput: onInputChangeMock,
         input: true,
       });
-      await wrap(tick());
 
-      fireEvent.change(getInput(ctx), { target: { value: 'change' } });
-      await wrap(tick());
+      await wrap(userEvent.type(getInput(ctx), 'change'));
 
-      expect(onInputChangeMock).toHaveBeenCalledTimes(1);
+      expect(onInputChangeMock).toHaveBeenCalledTimes(6);
       expect(onInputChangeMock).toHaveBeenCalledWith('change');
     }));
 
@@ -556,10 +515,7 @@ describe.concurrent(`${testId}`, () => {
         input: true,
       });
 
-      await wrap(tick());
-
-      fireEvent.change(getInput(ctx), { target: { value: 'change' } });
-      await wrap(tick());
+      await wrap(userEvent.type(getInput(ctx), 'change'));
 
       expect(onInputChangeMock).not.toHaveBeenCalled();
     }));
@@ -575,8 +531,6 @@ describe.concurrent(`${testId}`, () => {
         inputDefaultValue,
         input: true,
       });
-
-      await wrap(tick());
 
       expect(getInput(ctx).value).toEqual(inputDefaultValue);
     }));
@@ -596,13 +550,8 @@ describe.concurrent(`${testId}`, () => {
         input: true,
       });
 
-      await wrap(tick());
-
-      fireEvent.keyDown(getInput(ctx), { key: 'Backspace' });
-      fireEvent.keyDown(getInput(ctx), { key: 'Backspace' });
-      fireEvent.keyDown(getInput(ctx), { key: 'Backspace' });
-
-      await wrap(tick());
+      getInput(ctx).focus();
+      await wrap(userEvent.keyboard('{Backspace}{Backspace}{Backspace}'));
 
       expect(getInput(ctx).value).toEqual(inputValue);
     }));
@@ -615,8 +564,6 @@ describe.concurrent(`${testId}`, () => {
         onChange: vi.fn(),
         clearButton: true,
       });
-
-      await wrap(tick());
 
       const clearButton = getClearButton(ctx);
 
@@ -633,10 +580,7 @@ describe.concurrent(`${testId}`, () => {
         clearButton: true,
       });
 
-      await wrap(tick());
-
-      const clearButton = getClearButton(ctx);
-      fireEvent.click(clearButton);
+      getClearButton(ctx).click();
 
       expect(handleChange).toHaveBeenCalledWith(null, {
         e: expect.any(Object),
@@ -653,9 +597,8 @@ describe.concurrent(`${testId}`, () => {
         clearButton: true,
       });
 
-      await wrap(tick());
-
-      fireEvent.keyDown(getInput(ctx), { key: 'Backspace' });
+      getInput(ctx).focus();
+      await wrap(userEvent.keyboard('{Backspace}'));
 
       expect(handleChange).toHaveBeenCalledWith(null, {
         e: expect.any(Object),
@@ -673,10 +616,7 @@ describe.concurrent(`${testId}`, () => {
         disabled: true,
       });
 
-      await wrap(tick());
-
-      const clearButton = getClearButton(ctx);
-      fireEvent.click(clearButton);
+      getClearButton(ctx).click();
 
       expect(handleChange).not.toHaveBeenCalled();
     }));
@@ -692,9 +632,8 @@ describe.concurrent(`${testId}`, () => {
         disabled: true,
       });
 
-      await wrap(tick());
-
-      fireEvent.keyDown(getInput(ctx), { key: 'Backspace' });
+      getInput(ctx).focus();
+      await wrap(userEvent.keyboard('{Backspace}'));
 
       expect(handleChange).not.toHaveBeenCalled();
     }));
@@ -706,22 +645,28 @@ describe.concurrent(`${testId}`, () => {
         groups,
         value: [items[0]],
         onChange: vi.fn(),
+        input: true,
       });
-      await wrap(tick());
-      inputClick(ctx);
+
+      await wrap(userEvent.click(getInput(ctx)));
       await wrap(sleep(animateTimeout));
       groups.map((group, index) =>
         expect(getGroups(ctx)[index].textContent).toEqual(group.label),
       );
     }));
 
-  describe.concurrent('проверка dropdownForm', () => {
+  describe('проверка dropdownForm', () => {
     (['default', 'brick', 'round'] as const).map((dropdownForm) => {
       test(`dropdownForm = ${dropdownForm}`, (ctx) =>
         context.start(async () => {
-          renderComponent(ctx, { items, dropdownForm, onChange: vi.fn() });
-          await wrap(tick());
-          inputClick(ctx);
+          renderComponent(ctx, {
+            items,
+            dropdownForm,
+            onChange: vi.fn(),
+            input: true,
+          });
+
+          await wrap(userEvent.click(getInput(ctx)));
           await wrap(sleep(animateTimeout));
           expect(getDropdown(ctx)).toHaveClass(
             cnListBox({ form: dropdownForm }).split(' ')[1],
@@ -730,7 +675,7 @@ describe.concurrent(`${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка form', () => {
+  describe('проверка form', () => {
     (
       [
         'default',
@@ -752,7 +697,7 @@ describe.concurrent(`${testId}`, () => {
       test(`form = ${form}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items, form, onChange: vi.fn() });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(
             cnFieldControlLayout({ form }).split(' ')[1],
           );
@@ -760,12 +705,12 @@ describe.concurrent(`${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка view', () => {
+  describe('проверка view', () => {
     (['default', 'clear'] as const).map((view) => {
       test(`view = ${view}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items, view, onChange: vi.fn() });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(
             cnFieldControlLayout({ view }).split(' ')[1],
           );
@@ -773,12 +718,12 @@ describe.concurrent(`${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка status', () => {
+  describe('проверка status', () => {
     (['alert', 'success', 'warning'] as const).map((status) => {
       test(`status = ${status}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items, status, onChange: vi.fn() });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(
             cnFieldControlLayout({ status }).split(' ')[1],
           );
@@ -788,9 +733,13 @@ describe.concurrent(`${testId}`, () => {
 
   test('элементы disabled отображаются с соответствущем классом', (ctx) =>
     context.start(async () => {
-      renderComponent(ctx, { items: itemsWithDisabled, onChange: vi.fn() });
-      await wrap(tick());
-      inputClick(ctx);
+      renderComponent(ctx, {
+        items: itemsWithDisabled,
+        onChange: vi.fn(),
+        input: true,
+      });
+
+      await wrap(userEvent.click(getInput(ctx)));
 
       await wrap(sleep(animateTimeout));
 
@@ -807,7 +756,7 @@ describe.concurrent(`${testId}`, () => {
       });
     }));
 
-  describe.concurrent('по элементам disabled не отрабатывает onChange', () => {
+  describe('по элементам disabled не отрабатывает onChange', () => {
     itemsWithDisabled.map((item, index) => {
       test(`item ${index} disabled = ${item.disabled}`, (ctx) =>
         context.start(async () => {
@@ -816,13 +765,15 @@ describe.concurrent(`${testId}`, () => {
           renderComponent(ctx, {
             items: itemsWithDisabled,
             onChange: handleChange,
+            input: true,
           });
-          await wrap(tick());
 
-          inputClick(ctx);
+          await wrap(userEvent.click(getInput(ctx)));
 
           await wrap(sleep(animateTimeout));
-          fireEvent.click(getItem(ctx, index));
+
+          getItem(ctx, index).click();
+
           if (item.disabled) {
             expect(handleChange).not.toHaveBeenCalled();
           } else {
@@ -832,13 +783,17 @@ describe.concurrent(`${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка isLoading', () => {
+  describe('проверка isLoading', () => {
     test('isLoading = true', (ctx) =>
       context.start(async () => {
-        renderComponent(ctx, { items, isLoading: true, onChange: vi.fn() });
-        await wrap(tick());
+        renderComponent(ctx, {
+          items,
+          isLoading: true,
+          onChange: vi.fn(),
+          input: true,
+        });
 
-        inputClick(ctx);
+        await wrap(userEvent.click(getInput(ctx)));
 
         await wrap(sleep(animateTimeout));
 
@@ -847,10 +802,14 @@ describe.concurrent(`${testId}`, () => {
     [false, undefined].map((isLoading) => {
       test(`isLoading = ${isLoading}`, (ctx) =>
         context.start(async () => {
-          renderComponent(ctx, { items, isLoading, onChange: vi.fn() });
-          await wrap(tick());
+          renderComponent(ctx, {
+            items,
+            isLoading,
+            onChange: vi.fn(),
+            input: true,
+          });
 
-          inputClick(ctx);
+          await wrap(userEvent.click(getInput(ctx)));
 
           await wrap(sleep(animateTimeout));
 
@@ -864,10 +823,15 @@ describe.concurrent(`${testId}`, () => {
       const onCreate = vi.fn();
       const inputValue = 'test';
 
-      renderComponent(ctx, { items, onCreate, inputValue, onChange: vi.fn() });
-      await wrap(tick());
+      renderComponent(ctx, {
+        items,
+        onCreate,
+        inputValue,
+        onChange: vi.fn(),
+        input: true,
+      });
 
-      inputClick(ctx);
+      await wrap(userEvent.click(getInput(ctx)));
 
       await wrap(sleep(animateTimeout));
 
@@ -890,10 +854,10 @@ describe.concurrent(`${testId}`, () => {
         labelForCreate,
         onCreate: vi.fn(),
         onChange: vi.fn(),
+        input: true,
       });
-      await wrap(tick());
 
-      inputClick(ctx);
+      await wrap(userEvent.click(getInput(ctx)));
       await wrap(sleep(animateTimeout));
 
       expect(getCreateButton(ctx)).toBeInTheDocument();
@@ -907,16 +871,11 @@ describe.concurrent(`${testId}`, () => {
         items,
         iconClear,
         clearButton: true,
+        input: true,
         inputValue: 'test',
         onCreate: vi.fn(),
         onChange: vi.fn(),
       });
-
-      await wrap(tick());
-
-      inputClick(ctx);
-
-      await wrap(sleep(animateTimeout));
 
       expect(getClearButton(ctx).textContent).toEqual('iconClear');
     }));
@@ -931,10 +890,10 @@ describe.concurrent(`${testId}`, () => {
         items,
         renderItem,
         onChange: vi.fn(),
+        input: true,
       });
-      await wrap(tick());
 
-      inputClick(ctx);
+      await wrap(userEvent.click(getInput(ctx)));
 
       await wrap(sleep(animateTimeout));
 
@@ -951,7 +910,9 @@ describe.concurrent(`${testId}`, () => {
       }) => (
         <>
           {value.map((item) => (
-            <div className="test">{item.label}</div>
+            <div className="test" key={item.id}>
+              {item.label}
+            </div>
           ))}
         </>
       );
@@ -961,10 +922,10 @@ describe.concurrent(`${testId}`, () => {
         renderValue,
         value: [items[0]],
         onChange: vi.fn(),
+        input: true,
       });
 
-      await wrap(tick());
-      inputClick(ctx);
+      await wrap(userEvent.click(getInput(ctx)));
 
       await wrap(sleep(animateTimeout));
 
@@ -979,10 +940,10 @@ describe.concurrent(`${testId}`, () => {
         items,
         selectAll: true,
         onChange: onChangeMock,
+        input: true,
       });
-      await wrap(tick());
 
-      inputClick(ctx);
+      await wrap(userEvent.click(getInput(ctx)));
 
       await wrap(sleep(animateTimeout));
 
@@ -1002,10 +963,10 @@ describe.concurrent(`${testId}`, () => {
         groups,
         selectAll: true,
         onChange: onChangeMock,
+        input: true,
       });
 
-      await wrap(tick());
-      inputClick(ctx);
+      await wrap(userEvent.click(getInput(ctx)));
       await wrap(sleep(animateTimeout));
 
       expect(getSelectAllOptions(ctx).length).toEqual(2);
@@ -1021,10 +982,10 @@ describe.concurrent(`${testId}`, () => {
         selectAll: true,
         onChange: onChangeMock,
         selectAllLabel,
+        input: true,
       });
-      await wrap(tick());
 
-      inputClick(ctx);
+      await wrap(userEvent.click(getInput(ctx)));
       await wrap(sleep(animateTimeout));
 
       const item = getItem(ctx, 0);
@@ -1032,7 +993,7 @@ describe.concurrent(`${testId}`, () => {
       expect(item).toHaveClass(cnSelectItemAll());
     }));
 
-  describe.concurrent('проверка клика selectAll', () => {
+  describe('проверка клика selectAll', () => {
     test('если не выбрано то выбирает все', (ctx) =>
       context.start(async () => {
         const onChangeMock = vi.fn();
@@ -1041,11 +1002,10 @@ describe.concurrent(`${testId}`, () => {
           items,
           selectAll: true,
           onChange: onChangeMock,
+          input: true,
         });
 
-        await wrap(tick());
-
-        inputClick(ctx);
+        await wrap(userEvent.click(getInput(ctx)));
 
         await wrap(sleep(animateTimeout));
 
@@ -1054,7 +1014,8 @@ describe.concurrent(`${testId}`, () => {
         expect(item).toHaveTextContent('Выбрать все');
         expect(item).toHaveClass(cnSelectItemAll());
 
-        fireEvent.click(item);
+        item.click();
+
         expect(onChangeMock).toHaveBeenCalledWith(items, {
           e: expect.any(Object),
         });
@@ -1068,11 +1029,10 @@ describe.concurrent(`${testId}`, () => {
           value: [items[0]],
           selectAll: true,
           onChange: onChangeMock,
+          input: true,
         });
 
-        await wrap(tick());
-
-        inputClick(ctx);
+        await wrap(userEvent.click(getInput(ctx)));
 
         await wrap(sleep(animateTimeout));
 
@@ -1081,7 +1041,8 @@ describe.concurrent(`${testId}`, () => {
         expect(item).toHaveTextContent('Выбрать все');
         expect(item).toHaveClass(cnSelectItemAll());
 
-        fireEvent.click(item);
+        item.click();
+
         expect(onChangeMock).toHaveBeenCalledWith(items, {
           e: expect.any(Object),
         });
@@ -1095,11 +1056,10 @@ describe.concurrent(`${testId}`, () => {
           value: items,
           selectAll: true,
           onChange: onChangeMock,
+          input: true,
         });
 
-        await wrap(tick());
-
-        inputClick(ctx);
+        await wrap(userEvent.click(getInput(ctx)));
 
         await wrap(sleep(animateTimeout));
 
@@ -1108,7 +1068,7 @@ describe.concurrent(`${testId}`, () => {
         expect(item).toHaveTextContent('Выбрать все');
         expect(item).toHaveClass(cnSelectItemAll());
 
-        fireEvent.click(item);
+        item.click();
         expect(onChangeMock).toHaveBeenCalledWith([], {
           e: expect.any(Object),
         });
@@ -1123,10 +1083,10 @@ describe.concurrent(`${testId}`, () => {
           groups,
           selectAll: true,
           onChange: onChangeMock,
+          input: true,
         });
-        await wrap(tick());
 
-        inputClick(ctx);
+        await wrap(userEvent.click(getInput(ctx)));
 
         await wrap(sleep(animateTimeout));
 
@@ -1135,7 +1095,8 @@ describe.concurrent(`${testId}`, () => {
         expect(item).toHaveTextContent('Выбрать все');
         expect(item).toHaveClass(cnSelectItemAll());
 
-        fireEvent.click(item);
+        item.click();
+
         expect(onChangeMock).toHaveBeenCalledWith(
           items.filter((item) => item.groupId === groups[testingGroupIndex].id),
           {

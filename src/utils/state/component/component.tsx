@@ -1,6 +1,6 @@
-import { Computed, wrap } from '@reatom/core';
-import { reatomFactoryComponent } from '@reatom/react';
-import React, { forwardRef, useCallback } from 'react';
+import { Computed } from '@reatom/core';
+import { reatomFactoryComponent, useAction } from '@reatom/react';
+import React, { forwardRef } from 'react';
 
 import { useSendToAtom } from '../useSendToAtom';
 
@@ -28,15 +28,18 @@ export const factoryComponent = <
   name?: string,
 ) =>
   forwardRef<R, P>((props, ref) => {
-    const propsAtom = useSendToAtom({
-      ...props,
-      ref,
-    });
-    const factoryRender = useCallback(
+    const propsAtom = useSendToAtom(
+      {
+        ...props,
+        ref,
+      },
+      name,
+    );
+    const factoryRender = useAction(
       (render: FactoryCb<R, P>) => (initProps: React.PropsWithoutRef<P>) =>
         render({ ...initProps, ref }, propsAtom),
-      [],
     );
+
     return reatomFactoryComponent<
       React.PropsWithoutRef<P> & { ref: React.Ref<R> }
     >(

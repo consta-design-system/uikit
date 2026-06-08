@@ -47,7 +47,7 @@ const renderComponent = (
   });
 };
 
-describe.concurrent(`${testId}`, () => {
+describe(`${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = () =>
@@ -56,8 +56,8 @@ describe.concurrent(`${testId}`, () => {
       expect(() => render()).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка size', () => {
+  describe('проверка props', () => {
+    describe('проверка size', () => {
       (['xs', 's', 'm', 'l'] as const).forEach((size) => {
         test(`присваивает класс для size=${size}`, (ctx) =>
           context.start(async () => {
@@ -72,7 +72,7 @@ describe.concurrent(`${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка active', () => {
+    describe('проверка active', () => {
       test('присваивает класс для active=true', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -98,7 +98,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка form', () => {
+    describe('проверка form', () => {
       (['default', 'brick', 'round'] as const).forEach((form) => {
         test(`присваивает класс для form=${form}`, (ctx) =>
           context.start(async () => {
@@ -113,7 +113,7 @@ describe.concurrent(`${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка as', () => {
+    describe('проверка as', () => {
       (['div', 'span', 'button'] as const).forEach((as) => {
         test(`рендерится как <${as}>`, (ctx) =>
           context.start(async () => {
@@ -128,7 +128,7 @@ describe.concurrent(`${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка withoutColor', () => {
+    describe('проверка withoutColor', () => {
       test('присваивает класс when value is undefined', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -154,7 +154,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка цвета', () => {
+    describe('проверка цвета', () => {
       test('устанавливает CSS переменные при наличии value', (ctx) =>
         context.start(async () => {
           const value = hsvaModel.defaultColor as unknown;
@@ -191,7 +191,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test('присваивает дополнительный класс', (ctx) =>
         context.start(async () => {
           const className = 'custom-class';
@@ -205,7 +205,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка style', () => {
+    describe('проверка style', () => {
       test('присваивает дополнительные стили', (ctx) =>
         context.start(async () => {
           const style = { color: 'red' };
@@ -219,7 +219,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка ref', () => {
+    describe('проверка ref', () => {
       test('ref присваивается элементу', (ctx) =>
         context.start(async () => {
           const ref = React.createRef<HTMLDivElement>();
@@ -233,7 +233,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка модели', () => {
+    describe('проверка модели', () => {
       test('работает с разными моделями', (ctx) =>
         context.start(async () => {
           const value = '#ff0000' as unknown;

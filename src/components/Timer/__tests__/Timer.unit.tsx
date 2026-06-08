@@ -35,14 +35,14 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid=${testId}]`,
   ) as HTMLElement;
 
-describe.concurrent(`${testId}`, () => {
+describe(`${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка className', () => {
+  describe('проверка props', () => {
+    describe('проверка className', () => {
       const className = 'className';
 
       test(`присваивает className`, (ctx) =>
@@ -52,7 +52,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка seconds', () => {
+    describe('проверка seconds', () => {
       const seconds = 5;
 
       test(`секунды отображаются`, (ctx) =>

@@ -4,7 +4,6 @@ import {
   computed,
   effect,
   peek,
-  reatomBoolean,
   sleep,
   withAbort,
   wrap,
@@ -18,32 +17,36 @@ export type TransitionStatus = 'entering' | 'entered' | 'exiting' | 'exited';
 export type TransitionProps = {
   children: (status: TransitionStatus) => React.ReactNode;
   timeout: number;
-  in: boolean;
+  in?: boolean;
   unmountOnExit?: boolean;
   onEntering?: () => void;
   onEntered?: () => void;
   onExiting?: () => void;
   onExited?: () => void;
+  firstStatusAnimate?: boolean;
 };
 
 export const Transition = factoryComponent<HTMLElement, TransitionProps>(
-  ({ in: inProp }, propsAtom) => {
-    const status = atom<TransitionStatus>(inProp ? 'entered' : 'exited');
-    const transitionIn = computed(() => propsAtom().in);
-    const render = action((status: TransitionStatus) =>
-      propsAtom().children(status),
+  ({ in: inProp, firstStatusAnimate }, propsAtom) => {
+    const status = atom<TransitionStatus>(
+      !firstStatusAnimate && inProp ? 'entered' : 'exited',
     );
-    const firstTransition = reatomBoolean(true);
+
+    const transitionInAtom = computed(() => propsAtom().in);
 
     const transitionRun = action(async () => {
-      if (transitionIn()) {
+      if (transitionInAtom() && status() !== 'entered') {
         status.set('exited');
+        await wrap(sleep());
         status.set('entering');
 
         await wrap(sleep(propsAtom().timeout));
+
         status.set('entered');
-      } else {
+      }
+      if (!transitionInAtom() && status() !== 'exited') {
         status.set('entered');
+        await wrap(sleep());
         status.set('exiting');
 
         await wrap(sleep(propsAtom().timeout));
@@ -52,34 +55,32 @@ export const Transition = factoryComponent<HTMLElement, TransitionProps>(
     }).extend(withAbort());
 
     effect(() => {
-      transitionIn();
-      if (peek(firstTransition)) {
-        firstTransition.setFalse();
-        return;
-      }
+      transitionInAtom();
       transitionRun();
     });
 
     effect(() => {
       const { onEntering, onEntered, onExited, onExiting } = peek(propsAtom);
+      const transitionIn = peek(transitionInAtom);
+
       const cbMap: Record<TransitionStatus, (() => void) | undefined> = {
-        entering: onEntering,
-        entered: onEntered,
-        exiting: onExiting,
-        exited: onExited,
+        entering: transitionIn ? onEntering : undefined,
+        entered: transitionIn ? onEntered : undefined,
+        exiting: !transitionIn ? onExiting : undefined,
+        exited: !transitionIn ? onExited : undefined,
       };
 
       cbMap[status()]?.();
     });
 
-    return ({ unmountOnExit, in: inProp }) => {
+    return ({ unmountOnExit, in: inProp, children }) => {
       const statusState = status();
 
       if (inProp === false && statusState === 'exited' && unmountOnExit) {
         return null;
       }
 
-      return render(statusState);
+      return children(statusState);
     };
   },
 );

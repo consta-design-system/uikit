@@ -1,6 +1,6 @@
 import { IconComponent } from '@consta/icons/Icon';
 import { IconCamera } from '@consta/icons/IconCamera';
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -9,7 +9,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
 import { cnMixFocus } from '##/mixs/MixFocus/MixFocus';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import {
   ChoiceGroup,
@@ -172,127 +172,126 @@ const getIcon = (ctx: TestContext, index = 0) => {
   ] as HTMLSpanElement;
 };
 
-describe.concurrent('Компонент ChoiceGroup', () => {
+describe('Компонент ChoiceGroup', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка items', () => {
+  describe('проверка props', () => {
+    describe('проверка items', () => {
       test(`количество совпадает с передаваемым`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           const itemsRender = getItems(ctx);
           expect(itemsRender.length).toEqual(elements.length);
         }));
     });
 
-    describe.concurrent('проверка value', () => {
+    describe('проверка value', () => {
       test(`выбранному элементу присвоился модификатор "_checked"`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getItem(ctx)).toHaveClass(
             cnChoiceGroup('Label', { checked: true }),
           );
         }));
     });
 
-    describe.concurrent('проверка getItemLabel', () => {
+    describe('проверка getItemLabel', () => {
       test(`label у элемента верный`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getItem(ctx).textContent).toEqual(`Name-${elements[0].name}`);
         }));
     });
 
-    describe.concurrent('проверка getItemIcon', () => {
+    describe('проверка getItemIcon', () => {
       test(`иконка отображается`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getIcon(ctx)).toHaveClass('IconCamera');
         }));
     });
 
-    describe.concurrent('проверка onlyIcon', () => {
+    describe('проверка onlyIcon', () => {
       test(`текст не отображается`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { onlyIcon: true });
-          await wrap(tick());
+
           expect(getItem(ctx).textContent).toEqual('');
         }));
 
       test(`присваивает класс`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { onlyIcon: true });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnChoiceGroup({ onlyIcon: true }));
         }));
     });
 
-    describe.concurrent('проверка name', () => {
+    describe('проверка name', () => {
       test(`name у элемента верный`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getInput(ctx).name).toEqual(testId);
         }));
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test(`присвоился дополнительный класс`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(additionalClass);
         }));
     });
 
-    describe.concurrent('проверка form', () => {
+    describe('проверка form', () => {
       choiceGroupForms.forEach((form) => {
         test(`присваивает класс для form=${form}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { form });
-            await wrap(tick());
+
             expect(getRender(ctx)).toHaveClass(cnChoiceGroup({ form }));
           }));
       });
     });
 
-    describe.concurrent('проверка size', () => {
+    describe('проверка size', () => {
       choiceGroupSizes.forEach((size) => {
         test(`присваивает класс для size=${size}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { size });
-            await wrap(tick());
+
             expect(getRender(ctx)).toHaveClass(cnChoiceGroup({ size }));
           }));
       });
     });
 
-    describe.concurrent('проверка view', () => {
+    describe('проверка view', () => {
       choiceGroupViews.forEach((view) => {
         test(`присваивает класс для size=${view}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { view });
-            await wrap(tick());
+
             expect(getRender(ctx)).toHaveClass(cnChoiceGroup({ view }));
           }));
       });
     });
 
-    describe.concurrent('проверка onChange при multiple=false', () => {
+    describe('проверка onChange при multiple=false', () => {
       test(`клик по невыбранному элементу, должен вызвать callback c ожидаемыми параметрами`, (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
           const elementIndex = 1;
 
           renderComponent(ctx, { onChange: handleChange });
-          await wrap(tick());
 
           const item = getItem(ctx, elementIndex);
           fireEvent.click(item);
@@ -309,7 +308,6 @@ describe.concurrent('Компонент ChoiceGroup', () => {
           const handleChange = vi.fn();
 
           renderComponent(ctx, { onChange: handleChange });
-          await wrap(tick());
 
           const item = getItem(ctx, 0);
 
@@ -319,14 +317,13 @@ describe.concurrent('Компонент ChoiceGroup', () => {
         }));
     });
 
-    describe.concurrent('проверка onChange при multiple=true', () => {
+    describe('проверка onChange при multiple=true', () => {
       test(`клик по невыбранному элементу, должен вызвать callback c ожидаемыми параметрами`, (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
           const elementIndex = 1;
 
           renderComponentMultiple(ctx, { onChange: handleChange });
-          await wrap(tick());
 
           const item = getItem(ctx, elementIndex);
 
@@ -347,7 +344,6 @@ describe.concurrent('Компонент ChoiceGroup', () => {
           const handleChange = vi.fn();
 
           renderComponentMultiple(ctx, { onChange: handleChange });
-          await wrap(tick());
 
           const item = getItem(ctx, 0);
 
@@ -369,7 +365,6 @@ describe.concurrent('Компонент ChoiceGroup', () => {
             onChange: handleChange,
             value: [defaultValue, elements[1]],
           });
-          await wrap(tick());
 
           const item = getItem(ctx, elementIndex);
 
@@ -383,13 +378,13 @@ describe.concurrent('Компонент ChoiceGroup', () => {
         }));
     });
 
-    describe.concurrent('проверка заблокированной группы элементов', () => {
+    describe('проверка заблокированной группы элементов', () => {
       test(`группе присваивается класс ${cnChoiceGroup({
         disabled: true,
       })}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { disabled: true });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnChoiceGroup({ disabled: true }));
         }));
 
@@ -398,7 +393,7 @@ describe.concurrent('Компонент ChoiceGroup', () => {
       })}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { disabled: true });
-          await wrap(tick());
+
           getItems(ctx).forEach((label) => {
             expect(label).toHaveClass(
               cnChoiceGroup('Label', { disabled: true }),
@@ -409,7 +404,7 @@ describe.concurrent('Компонент ChoiceGroup', () => {
       test('всем полям присваивается disabled', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { disabled: true });
-          await wrap(tick());
+
           getInputs(ctx).forEach((input) => {
             expect(input).toHaveAttribute('disabled');
           });
@@ -419,7 +414,6 @@ describe.concurrent('Компонент ChoiceGroup', () => {
         context.start(async () => {
           const handleChange = vi.fn();
           renderComponent(ctx, { disabled: true, onChange: handleChange });
-          await wrap(tick());
 
           getItems(ctx).forEach((label) => {
             fireEvent.click(label);
@@ -428,7 +422,7 @@ describe.concurrent('Компонент ChoiceGroup', () => {
         }));
     });
 
-    describe.concurrent('проверка выборочных заблокированных элементов', () => {
+    describe('проверка выборочных заблокированных элементов', () => {
       const items = [
         {
           name: 'один',
@@ -454,7 +448,7 @@ describe.concurrent('Компонент ChoiceGroup', () => {
             items,
             getItemDisabled: (item) => item.disabled,
           });
-          await wrap(tick());
+
           items.forEach((el, i) => {
             if (el.disabled) {
               expect(getItem(ctx, i)).toHaveClass(
@@ -474,7 +468,7 @@ describe.concurrent('Компонент ChoiceGroup', () => {
             items,
             getItemDisabled: (item) => item.disabled,
           });
-          await wrap(tick());
+
           items.forEach((el, i) => {
             if (el.disabled) {
               expect(getInput(ctx, i)).toHaveAttribute('disabled');
@@ -492,7 +486,7 @@ describe.concurrent('Компонент ChoiceGroup', () => {
             getItemDisabled: (item) => item.disabled,
             onChange: handleChange,
           });
-          await wrap(tick());
+
           getItems(ctx).forEach((label) => {
             fireEvent.click(label);
           });
@@ -505,7 +499,7 @@ describe.concurrent('Компонент ChoiceGroup', () => {
     test(`на элементах есть миксин ${cnMixFocus()}`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {});
-        await wrap(tick());
+
         const item = getItem(ctx);
         expect(item).toHaveClass(cnMixFocus());
       }));

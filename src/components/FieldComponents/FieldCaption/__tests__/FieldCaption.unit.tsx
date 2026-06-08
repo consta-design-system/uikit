@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act } from '@testing-library/react';
 import React from 'react';
@@ -8,7 +8,7 @@ import { describe, expect, test } from 'vitest';
 import { cnText } from '##/components/Text';
 import { presetGpnDefault, Theme } from '##/components/Theme';
 import { setRef } from '##/utils/setRef';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { fieldPropStatus } from '../../__mocks__/variants';
 import { FieldCaption } from '..';
@@ -40,13 +40,13 @@ const getRender = (ctx: TestContext) => {
   ) as HTMLElement;
 };
 
-describe.concurrent(`Компонент ${testId}`, () => {
+describe(`Компонент ${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
     }));
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test(`ref присвоен`, (ctx) =>
       context.start(async () => {
         const ref = { current: null };
@@ -54,37 +54,35 @@ describe.concurrent(`Компонент ${testId}`, () => {
         renderComponent(ctx, {
           ref: (el: HTMLElement) => setRef(ref, el),
         });
-        await wrap(tick());
 
         expect(ref.current).toBeTruthy();
       }));
   });
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка className', () => {
+  describe('проверка props', () => {
+    describe('проверка className', () => {
       test(`Присваивается дополнительный className`, (ctx) =>
         context.start(async () => {
           const className = 'className';
 
           renderComponent(ctx, { className });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(className);
         }));
     });
 
-    describe.concurrent('проверка children', () => {
+    describe('проверка children', () => {
       test(`Пробрасывается children`, (ctx) =>
         context.start(async () => {
           const children = 'children';
 
           renderComponent(ctx, { children });
-          await wrap(tick());
 
           expect(getRender(ctx)).toHaveTextContent(children);
         }));
     });
 
-    describe.concurrent('проверка status', () => {
+    describe('проверка status', () => {
       const tags = [...fieldPropStatus, undefined] as const;
       tags.forEach((status) => {
         test(`Должен рендериться как ${cnText({
@@ -92,7 +90,6 @@ describe.concurrent(`Компонент ${testId}`, () => {
         })}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { status });
-            await wrap(tick());
 
             const component = getRender(ctx);
 
@@ -101,32 +98,31 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка other props', () => {
+    describe('проверка other props', () => {
       const props = ['data-attr', 'role', 'id'] as const;
 
       props.forEach((prop) => {
         test(`присваивается  ${prop}=${prop}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { [prop]: prop });
-            await wrap(tick());
 
             expect(getRender(ctx)).toHaveAttribute(prop, prop);
           }));
       });
     });
 
-    describe.concurrent('проверка Text props', () => {
+    describe('проверка Text props', () => {
       test('Присваивается size="xs"', (ctx) =>
         context.start(async () => {
           renderComponent(ctx);
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnText({ size: 'xs' }));
         }));
 
       test('Присваивается lineHeight="m"', (ctx) =>
         context.start(async () => {
           renderComponent(ctx);
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnText({ lineHeight: 'm' }));
         }));
     });

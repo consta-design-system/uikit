@@ -55,7 +55,7 @@ const getInactiveLine = (ctx: TestContext) =>
     '.SliderLine-Line:not(.SliderLine-Line_active)',
   ) as HTMLElement | null;
 
-describe.concurrent('Компонент SliderLine', () => {
+describe('Компонент SliderLine', () => {
   test('рендерится без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
@@ -78,7 +78,7 @@ describe.concurrent('Компонент SliderLine', () => {
       });
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('применяет класс для view="division"', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { view: 'division' });
@@ -108,7 +108,7 @@ describe.concurrent('Компонент SliderLine', () => {
       }));
   });
 
-  describe.concurrent('проверка onHover', () => {
+  describe('проверка onHover', () => {
     test('вызывает onHover при наведении на активный сегмент', (ctx) =>
       context.start(async () => {
         const onHover = vi.fn();

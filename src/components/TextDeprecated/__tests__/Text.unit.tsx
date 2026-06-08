@@ -35,7 +35,7 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid=${testId}]`,
   ) as HTMLElement;
 
-describe.concurrent(`${testId}`, () => {
+describe(`${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();

@@ -94,13 +94,13 @@ const getIcon = (ctx: TestContext, index = 0) => {
   return render.querySelectorAll(`.${cnIcon()}`)[index] as HTMLSpanElement;
 };
 
-describe.concurrent('Компонент Tabs', () => {
+describe('Компонент Tabs', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('количество совпадает с передаваемым', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {});
@@ -133,7 +133,7 @@ describe.concurrent('Компонент Tabs', () => {
         expect(icon).toHaveClass('IconCamera');
       }));
 
-    describe.concurrent('проверка onlyIcon', () => {
+    describe('проверка onlyIcon', () => {
       test('текст не отображается', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { onlyIcon: true });
@@ -179,7 +179,7 @@ describe.concurrent('Компонент Tabs', () => {
         }));
     });
 
-    describe.concurrent('проверка onChange', () => {
+    describe('проверка onChange', () => {
       test('клик по невыбранному элементу, должен вызвать callback c ожидаемыми параметрами', (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();

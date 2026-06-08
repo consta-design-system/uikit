@@ -66,7 +66,7 @@ const getTooltipContent = (ctx: TestContext) =>
     `*[data-testid="${tooltipContentTestId}"]`,
   ) as HTMLElement | null;
 
-describe.concurrent('Компонент Tooltip', () => {
+describe('Компонент Tooltip', () => {
   test('рендерится при isOpen=true', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { isOpen: true, children: '' });
@@ -102,7 +102,7 @@ describe.concurrent('Компонент Tooltip', () => {
       expect(getRender(ctx)).toHaveClass(className);
     }));
 
-  describe.concurrent('проверка isInteractive', () => {
+  describe('проверка isInteractive', () => {
     test('при isInteractive=true можно взаимодействовать с содержимым тултипа', (ctx) =>
       context.start(async () => {
         const onClick = vi.fn();

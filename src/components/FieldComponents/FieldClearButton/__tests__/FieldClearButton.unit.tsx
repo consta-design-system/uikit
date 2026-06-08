@@ -40,14 +40,14 @@ const getRender = (ctx: TestContext) =>
     .getElementById(testRootId(ctx))
     ?.querySelector(`[data-testid="${testId}"]`) as HTMLElement;
 
-describe.concurrent(`Компонент ${testId}`, () => {
+describe(`Компонент ${testId}`, () => {
   test('должен рендериться без ошибок', async (ctx) => {
     await context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     });
   });
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test(`ref присвоен`, async (ctx) => {
       await context.start(async () => {
         const ref: { current: HTMLButtonElement | null } = { current: null };
@@ -63,7 +63,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test(`Присваивается дополнительный className`, async (ctx) => {
       await context.start(async () => {
         const className = 'className';
@@ -77,7 +77,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка other props', () => {
+  describe('проверка other props', () => {
     const props = ['data-attr', 'role', 'id'] as const;
 
     props.forEach((prop) => {
@@ -93,7 +93,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка IconClear', () => {
+  describe('проверка IconClear', () => {
     test('Иконка рендерится', async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, {});

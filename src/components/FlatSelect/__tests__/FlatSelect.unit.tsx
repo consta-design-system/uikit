@@ -1,14 +1,18 @@
 import { clearStack, context, sleep, top, wrap } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
-import { act, fireEvent } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
+import { userEvent } from 'vitest/browser';
 
 import { IconMock, iconMockText } from '##/../__mocks__/IconMock';
 import { cnFieldControlLayout } from '##/components/FieldComponents';
 import { cnListGroupLabel, cnListItem } from '##/components/ListCanary';
+import { cnSelectCreateButton } from '##/components/SelectCanary/SelectCreateButton';
+import { cnSelectItemAll } from '##/components/SelectCanary/SelectItemAll';
 import { presetGpnDefault, Theme } from '##/components/Theme';
+import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 import {
   createRoot,
   TestContext,
@@ -27,8 +31,6 @@ import {
   FlatSelectProps,
 } from '..';
 import { groups, items } from '../__mocks__/data.mock';
-import { cnFlatSelectCreateButton } from '../FlatSelectCreateButton';
-import { cnFlatSelectItemAll } from '../FlatSelectItemAll';
 
 createRoot();
 clearStack();
@@ -40,7 +42,6 @@ const testId = 'FlatSelect';
 /**
  * Длительность анимации в миллисекундах для тестов с таймерами.
  */
-const animationDuration = 200;
 
 /**
  * Пропсы по умолчанию для компонента FlatSelect в тестах.
@@ -49,7 +50,6 @@ const defaultProps = {
   items,
   onChange: () => {},
   getItemDisabled: () => undefined,
-  getItemGroup: () => undefined,
 };
 
 /**
@@ -74,7 +74,12 @@ const ComponentWithAnchorRef: FlatSelectComponent = (props) => {
 
   return (
     <>
-      <button ref={ref} data-testid="anchor" type="button">
+      <button
+        style={{ width: '100%', height: '50px' }}
+        type="button"
+        ref={ref}
+        data-testid="anchor"
+      >
         Button
       </button>
 
@@ -105,15 +110,12 @@ const renderComponent = <
   act(() => {
     root.render(
       <reatomContext.Provider value={top()}>
-        <Theme preset={presetGpnDefault} style={{ width: 1000, height: 1000 }}>
+        <Theme preset={presetGpnDefault}>
           {anchorRef ? (
             <ComponentWithAnchorRef
               data-testid={testId}
               {...props}
               container={document.getElementById(testPopoverId(ctx))!}
-              //   viewportRef={{
-              //     current: document.getElementById(testPopoverId(ctx))!,
-              //   }}
             />
           ) : (
             <FlatSelect data-testid={testId} {...props} />
@@ -128,12 +130,16 @@ const renderComponent = <
  * Возвращает DOM-элемент отрендеренного FlatSelect.
  */
 const getRender = (ctx: TestContext) =>
-  document.querySelector(`#${testSuiteId(ctx)} [data-testid="${testId}"]`)!;
+  document.querySelector(
+    `#${testSuiteId(ctx)} [data-testid="${testId}"]`,
+  )! as HTMLDivElement;
 /**
  * Возвращает DOM-элемент кнопки-якоря.
  */
 const getAnchor = (ctx: TestContext) =>
-  document.querySelector(`#${testSuiteId(ctx)} [data-testid="anchor"]`)!;
+  document.querySelector(
+    `#${testSuiteId(ctx)} [data-testid="anchor"]`,
+  )! as HTMLButtonElement;
 // const getOutside = (ctx: TestContext) => screen.getByTestId('outside') as HTMLDivElement;
 
 /**
@@ -141,11 +147,6 @@ const getAnchor = (ctx: TestContext) =>
  */
 const getClearButton = (ctx: TestContext) =>
   getRender(ctx).querySelector(`.FieldClearButton`) as HTMLButtonElement;
-
-/**
- * Симулирует клик на кнопке-якоре.
- */
-const anchorClick = (ctx: TestContext) => fireEvent.click(getAnchor(ctx));
 
 /**
  * Возвращает все DOM-элементы элементов списка (FlatSelectItem).
@@ -187,7 +188,7 @@ const getIcon = (ctx: TestContext) =>
  */
 const getCreateButton = (ctx: TestContext) =>
   getRender(ctx).querySelector(
-    `.${cnFlatSelectCreateButton()}`,
+    `.${cnSelectCreateButton()}`,
   ) as HTMLButtonElement;
 
 /**
@@ -200,16 +201,16 @@ const getFieldControlLayout = (ctx: TestContext) =>
  * Возвращает DOM-элемент кнопки "Выбрать все" (FlatSelectItemAll).
  */
 const getSelectAll = (ctx: TestContext) =>
-  getRender(ctx).querySelector(`.${cnFlatSelectItemAll()}`) as HTMLDivElement;
+  getRender(ctx).querySelector(`.${cnSelectItemAll()}`) as HTMLDivElement;
 
-describe.concurrent(`Компонент ${testId}`, () => {
+describe(`Компонент ${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, defaultProps);
-      await wrap(tick());
+
       expect(getRender(ctx)).toBeInTheDocument();
     }));
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test('ref присвоен', (ctx) =>
       context.start(async () => {
         const ref = { current: null };
@@ -217,7 +218,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
         expect(ref.current).toBeTruthy();
       }));
   });
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test('Присваивается дополнительный className', (ctx) =>
       context.start(async () => {
         const className = 'custom-class';
@@ -229,7 +230,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
         expect(getRender(ctx)).toHaveClass(className);
       }));
   });
-  describe.concurrent('проверка other props', () => {
+  describe('проверка other props', () => {
     test('Присваиваются дополнительные атрибуты', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -242,7 +243,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
         );
       }));
   });
-  describe.concurrent('рендерит элементы items', () => {
+  describe('рендерит элементы items', () => {
     test('рендерит элементы items', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, defaultProps);
@@ -253,7 +254,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
         });
       }));
   });
-  describe.concurrent('рендерит группы', () => {
+  describe('рендерит группы', () => {
     test('рендерит группы', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { ...defaultProps, groups });
@@ -264,7 +265,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
         });
       }));
   });
-  describe.concurrent('проверка onChange', () => {
+  describe('проверка onChange', () => {
     test('проверка onChange', (ctx) =>
       context.start(async () => {
         const onChangeMock = vi.fn();
@@ -273,7 +274,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           onChange: onChangeMock,
           value: null,
         });
-        fireEvent.click(getItem(ctx, 1));
+        getItem(ctx, 1).click();
         expect(onChangeMock).toHaveBeenCalled();
         expect(onChangeMock).toHaveBeenCalledTimes(1);
         expect(onChangeMock).toHaveBeenCalledWith(items[1], {
@@ -289,7 +290,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           multiple: true,
           value: null,
         });
-        fireEvent.click(getItem(ctx, 1));
+        getItem(ctx, 1).click();
         expect(onChangeMock).toHaveBeenCalled();
         expect(onChangeMock).toHaveBeenCalledTimes(1);
         expect(onChangeMock).toHaveBeenCalledWith([items[1]], {
@@ -305,7 +306,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           multiple: true,
           value: [items[1]],
         });
-        fireEvent.click(getItem(ctx, 1));
+        getItem(ctx, 1).click();
         expect(onChangeMock).toHaveBeenCalled();
         expect(onChangeMock).toHaveBeenCalledTimes(1);
         expect(onChangeMock).toHaveBeenCalledWith(null, {
@@ -322,8 +323,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           selectAll: true,
           value: null,
         });
-        const allButton = getSelectAll(ctx);
-        fireEvent.click(allButton);
+        getSelectAll(ctx).click();
         expect(onChangeMock).toHaveBeenCalled();
         expect(onChangeMock).toHaveBeenCalledTimes(1);
         expect(onChangeMock).toHaveBeenCalledWith(items, {
@@ -340,8 +340,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           selectAll: true,
           value: items,
         });
-        const allButton = getSelectAll(ctx);
-        fireEvent.click(allButton);
+        getSelectAll(ctx).click();
         expect(onChangeMock).toHaveBeenCalled();
         expect(onChangeMock).toHaveBeenCalledTimes(1);
         expect(onChangeMock).toHaveBeenCalledWith(null, {
@@ -349,52 +348,49 @@ describe.concurrent(`Компонент ${testId}`, () => {
         });
       }));
   });
-  describe.concurrent('проверка onFocus', () => {
-    test('проверка onFocus', (ctx) =>
-      context.start(async () => {
-        const onFocusMock = vi.fn();
-        renderComponent(ctx, {
-          ...defaultProps,
-          onFocus: onFocusMock,
-        });
-        fireEvent.focus(getRender(ctx));
-        expect(onFocusMock).toHaveBeenCalled();
-        expect(onFocusMock).toHaveBeenCalledTimes(1);
-        expect(onFocusMock).toHaveBeenCalledWith(expect.any(Object));
-      }));
-  });
-  describe.concurrent('проверка onBlur', () => {
-    test('проверка onBlur', (ctx) =>
-      context.start(async () => {
-        const onBlurMock = vi.fn();
-        renderComponent(ctx, {
-          ...defaultProps,
-          onBlur: onBlurMock,
-        });
-        fireEvent.blur(getRender(ctx));
-        expect(onBlurMock).toHaveBeenCalled();
-        expect(onBlurMock).toHaveBeenCalledTimes(1);
-        expect(onBlurMock).toHaveBeenCalledWith(expect.any(Object));
-      }));
-  });
-  describe.concurrent('проверка onOpen', () => {
-    test('проверка вызова onOpen по клику на якорь', (ctx) =>
-      context.start(async () => {
-        const onOpenMock = vi.fn();
-        const anchorRef = { current: null };
-        act(() => {
-          renderComponent(ctx, {
-            ...defaultProps,
-            anchorRef,
-            onOpen: onOpenMock,
-          });
-        });
-        anchorClick(ctx);
 
-        expect(onOpenMock).toHaveBeenCalled();
-      }));
-  });
-  describe.concurrent('проверка input', () => {
+  test('проверка onFocus', (ctx) =>
+    context.start(async () => {
+      const onFocusMock = vi.fn();
+      renderComponent(ctx, {
+        ...defaultProps,
+        onFocus: onFocusMock,
+      });
+      getRender(ctx).focus();
+
+      expect(onFocusMock).toHaveBeenCalled();
+      expect(onFocusMock).toHaveBeenCalledTimes(1);
+      expect(onFocusMock).toHaveBeenCalledWith(expect.any(Object));
+    }));
+
+  test('проверка onBlur', (ctx) =>
+    context.start(async () => {
+      const onBlurMock = vi.fn();
+      renderComponent(ctx, {
+        ...defaultProps,
+        onBlur: onBlurMock,
+      });
+      getRender(ctx).focus();
+      getRender(ctx).blur();
+      expect(onBlurMock).toHaveBeenCalled();
+      expect(onBlurMock).toHaveBeenCalledTimes(1);
+      expect(onBlurMock).toHaveBeenCalledWith(expect.any(Object));
+    }));
+
+  test('проверка вызова onOpen по клику на якорь', (ctx) =>
+    context.start(async () => {
+      const onOpenMock = vi.fn();
+      const anchorRef = { current: null };
+      renderComponent(ctx, {
+        ...defaultProps,
+        anchorRef,
+        onOpen: onOpenMock,
+      });
+      await wrap(userEvent.click(getAnchor(ctx)));
+
+      expect(onOpenMock).toHaveBeenCalled();
+    }));
+  describe('проверка input', () => {
     test('проверка input', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -426,30 +422,38 @@ describe.concurrent(`Компонент ${testId}`, () => {
         expect(input).toBeInTheDocument();
         expect(input).toHaveValue('value');
       }));
+    test('проверка inputDefaultValue', (ctx) =>
+      context.start(async () => {
+        const onInput = vi.fn();
+        renderComponent(ctx, {
+          ...defaultProps,
+          input: true,
+          inputDefaultValue: 'value',
+          onInput,
+        });
+
+        expect(getInput(ctx)).toBeInTheDocument();
+        expect(getInput(ctx)).toHaveValue('value');
+      }));
     test('проверка onInput', (ctx) =>
       context.start(async () => {
         const onInput = vi.fn();
         renderComponent(ctx, {
           ...defaultProps,
           input: true,
-          inputValue: 'value',
           onInput,
         });
-        const input = getInput(ctx);
-        expect(input).toBeInTheDocument();
-        expect(input).toHaveValue('value');
-        fireEvent.change(input, { target: { value: 'value2' } });
-        expect(onInput).toHaveBeenCalledWith('value2');
+
+        await userEvent.type(getInput(ctx), 'value');
+        expect(onInput).toHaveBeenCalledWith('value');
       }));
     test('проверка clearButton c value', (ctx) =>
       context.start(async () => {
-        act(() => {
-          renderComponent(ctx, {
-            ...defaultProps,
-            input: true,
-            inputValue: 'value',
-            clearButton: true,
-          });
+        renderComponent(ctx, {
+          ...defaultProps,
+          input: true,
+          inputValue: 'value',
+          clearButton: true,
         });
 
         expect(getClearButton(ctx)).toBeInTheDocument();
@@ -464,15 +468,12 @@ describe.concurrent(`Компонент ${testId}`, () => {
 
         expect(getClearButton(ctx)).not.toBeInTheDocument();
 
-        fireEvent.change(getInput(ctx), { target: { value: 'value' } });
-
-        await wrap(tick());
-        await wrap(tick());
+        await userEvent.type(getInput(ctx), 'value');
 
         expect(getClearButton(ctx)).toBeInTheDocument();
       }));
   });
-  describe.concurrent('проверка iconLeft', () => {
+  describe('проверка iconLeft', () => {
     test('иконка отображается', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -483,7 +484,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
         expect(getIcon(ctx)).toBeInTheDocument();
       }));
   });
-  describe.concurrent('проверка view,', () => {
+  describe('проверка view,', () => {
     views.map((view) => {
       test(`проверка view=${view}, input=true`, (ctx) =>
         context.start(async () => {
@@ -507,7 +508,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
         }));
     });
   });
-  describe.concurrent('проверка size', () => {
+  describe('проверка size', () => {
     sizes.map((size) => {
       test(`проверка size=${size}`, (ctx) =>
         context.start(async () => {
@@ -519,7 +520,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
         }));
     });
   });
-  describe.concurrent('проверка bordered', () => {
+  describe('проверка bordered', () => {
     test('класс присваивается', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -537,7 +538,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
         expect(getRender(ctx)).toHaveClass(cnFlatSelect({ view: 'clear' }));
       }));
   });
-  describe.concurrent('проверка forms', () => {
+  describe('проверка forms', () => {
     forms.map((form) => {
       test(`form=${form}, bordered=true, класс присваивается`, (ctx) =>
         context.start(async () => {
@@ -561,7 +562,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
         }));
     });
   });
-  describe.concurrent('проверка onCreate', () => {
+  describe('проверка onCreate', () => {
     test('onCreate отображается и вызывается', (ctx) =>
       context.start(async () => {
         const onCreate = vi.fn();
@@ -569,13 +570,13 @@ describe.concurrent(`Компонент ${testId}`, () => {
           ...defaultProps,
           onCreate,
         });
-        const button = getCreateButton(ctx);
-        expect(button).toBeInTheDocument();
-        fireEvent.click(button);
+
+        expect(getCreateButton(ctx)).toBeInTheDocument();
+        getCreateButton(ctx).click();
         expect(onCreate).toHaveBeenCalled();
       }));
   });
-  describe.concurrent('проверка disabled', () => {
+  describe('проверка disabled', () => {
     test('FieldControlLayout получил свойство disabled', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -605,9 +606,9 @@ describe.concurrent(`Компонент ${testId}`, () => {
           disabled: true,
           onCreate,
         });
-        const button = getCreateButton(ctx);
-        expect(button).toBeInTheDocument();
-        fireEvent.click(button);
+
+        expect(getCreateButton(ctx)).toBeInTheDocument();
+        getCreateButton(ctx).click();
         expect(onCreate).not.toHaveBeenCalled();
       }));
     test('onChange не вызывается при клике на Item', (ctx) =>
@@ -619,7 +620,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
           disabled: true,
           onChange,
         });
-        fireEvent.click(getItem(ctx));
+        getItem(ctx).click();
+
         expect(onChange).not.toHaveBeenCalled();
       }));
     test('onChange не вызывается при клике на selectAll', (ctx) =>
@@ -633,57 +635,54 @@ describe.concurrent(`Компонент ${testId}`, () => {
           selectAll: true,
           onChange,
         });
-        fireEvent.click(getSelectAll(ctx));
+        getSelectAll(ctx).click();
+
         expect(onChange).not.toHaveBeenCalled();
       }));
   });
-  describe.concurrent('проверка anchorRef', () => {
+
+  describe('проверка anchorRef', () => {
     test('проверка isOpen', (ctx) =>
       context.start(async () => {
-        const anchorRef = { current: null };
-        act(() => {
-          renderComponent(ctx, {
-            ...defaultProps,
-            anchorRef,
-            isOpen: true,
-          });
+        renderComponent(ctx, {
+          ...defaultProps,
+          anchorRef: { current: null },
+          isOpen: true,
         });
-        await wrap(tick());
 
         expect(getRender(ctx)).toBeInTheDocument();
       }));
     test('проверка открытия списка по клику на якорь', (ctx) =>
       context.start(async () => {
-        act(() => {
-          renderComponent(ctx, {
-            ...defaultProps,
-            anchorRef: { current: null },
-          });
+        renderComponent(ctx, {
+          ...defaultProps,
+          anchorRef: { current: null },
         });
-        await wrap(tick());
-
-        anchorClick(ctx);
 
         await wrap(tick());
-        await wrap(sleep(animationDuration));
+
+        await wrap(userEvent.click(getAnchor(ctx)));
 
         expect(getRender(ctx)).toBeInTheDocument();
       }));
+
     test('проверка закрытия списка по клику на якорь', (ctx) =>
       context.start(async () => {
-        act(() => {
-          renderComponent(ctx, {
-            ...defaultProps,
-            anchorRef: { current: null },
-            isOpen: true,
-          });
+        renderComponent(ctx, {
+          ...defaultProps,
+          anchorRef: { current: null },
+          isOpen: true,
         });
-        await wrap(tick());
-
-        anchorClick(ctx);
 
         await wrap(tick());
-        await wrap(sleep(animationDuration));
+
+        expect(getRender(ctx)).toBeInTheDocument();
+
+        await wrap(userEvent.click(getAnchor(ctx)));
+
+        await wrap(sleep(animateTimeout));
+        await wrap(tick());
+
         expect(getRender(ctx)).not.toBeInTheDocument();
       }));
   });

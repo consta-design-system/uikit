@@ -113,7 +113,7 @@ const animateDelay = () =>
     vi.advanceTimersByTime(animationDuration);
   });
 
-describe.concurrent('Компонент Select', () => {
+describe('Компонент Select', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
@@ -353,7 +353,7 @@ describe.concurrent('Компонент Select', () => {
       expect(getIsLoading(ctx).length).toEqual(amountLoader);
     }));
 
-  describe.concurrent('проверка form', () => {
+  describe('проверка form', () => {
     propForm.forEach((form) => {
       test(`присваивает класс для form = ${form}`, (ctx) =>
         context.start(async () => {

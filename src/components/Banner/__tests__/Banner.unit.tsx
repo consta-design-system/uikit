@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act } from '@testing-library/react';
 import React from 'react';
@@ -9,7 +9,7 @@ import { createIconMock } from '##/../__mocks__/IconMock';
 import { presetGpnDefault, Theme } from '##/components/Theme';
 import { cnMixSpace, MixSpaceProps, Space } from '##/mixs/MixSpace';
 import { setRef } from '##/utils/setRef';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import {
   Banner,
@@ -52,7 +52,7 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="${testId}"]`,
   ) as HTMLDivElement;
 
-describe.concurrent('Компонент Banner', () => {
+describe('Компонент Banner', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
@@ -61,7 +61,7 @@ describe.concurrent('Компонент Banner', () => {
   test('должен рендериться без какого-либо контента', (ctx) =>
     context.start(async () => {
       renderComponent(ctx);
-      await wrap(tick());
+
       expect(getRender(ctx)).toBeInTheDocument();
       // Проверка на пустой элемент будет сложной из-за структуры компонента
     }));
@@ -69,7 +69,7 @@ describe.concurrent('Компонент Banner', () => {
   test('должен использовать default значения когда пропсы не переданы', (ctx) =>
     context.start(async () => {
       renderComponent(ctx);
-      await wrap(tick());
+
       const banner = getRender(ctx);
 
       expect(banner).toHaveClass(
@@ -84,34 +84,33 @@ describe.concurrent('Компонент Banner', () => {
       );
     }));
 
-  describe.concurrent('проверка size', () => {
+  describe('проверка size', () => {
     bannerPropSize.forEach((size) => {
       test(`присваивает класс для size=${size}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { size });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnBanner({ size }));
         }));
     });
   });
 
-  describe.concurrent('проверка view', () => {
+  describe('проверка view', () => {
     bannerPropView.forEach((view) => {
       test(`присваивает класс для view=${view}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { view });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnBanner({ view }));
         }));
     });
   });
 
-  describe.concurrent('проверка status', () => {
+  describe('проверка status', () => {
     bannerPropStatus.forEach((status) => {
       test(`устанавливает CSS переменную для status=${status}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { status });
-          await wrap(tick());
 
           expect(
             getRender(ctx).style.getPropertyValue('--banner-bg-color'),
@@ -120,18 +119,18 @@ describe.concurrent('Компонент Banner', () => {
     });
   });
 
-  describe.concurrent('проверка form', () => {
+  describe('проверка form', () => {
     bannerPropForm.forEach((form) => {
       test(`присваивает класс для form=${form}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { form });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnBanner({ form }));
         }));
     });
   });
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test('должен корректно передавать ref', (ctx) =>
       context.start(async () => {
         const ref = { current: null };
@@ -139,45 +138,45 @@ describe.concurrent('Компонент Banner', () => {
         renderComponent(ctx, {
           ref: (el: HTMLDivElement | null) => setRef(ref, el),
         });
-        await wrap(tick());
+
         expect(ref.current).toBeTruthy();
         expect(ref.current).toHaveClass(cnBanner());
       }));
   });
 
-  describe.concurrent('проверка кастомного класса', () => {
+  describe('проверка кастомного класса', () => {
     test('должен добавлять переданный className', (ctx) =>
       context.start(async () => {
         const customClass = 'custom-class';
         renderComponent(ctx, { className: customClass });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(customClass);
       }));
   });
 
-  describe.concurrent('проверка кастомного стиля', () => {
+  describe('проверка кастомного стиля', () => {
     test('должен применять переданный style', (ctx) =>
       context.start(async () => {
         const customStyle = { backgroundColor: 'red' };
         renderComponent(ctx, { style: customStyle });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveStyle(customStyle);
       }));
   });
 
-  describe.concurrent('проверка leftSide', () => {
+  describe('проверка leftSide', () => {
     test('должен отображать строку в leftSide', (ctx) =>
       context.start(async () => {
         const leftText = 'Левый текст';
         renderComponent(ctx, { leftSide: leftText });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent(leftText);
       }));
 
     test('должен отображать число в leftSide', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { leftSide: 123 });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent('123');
       }));
 
@@ -185,7 +184,7 @@ describe.concurrent('Компонент Banner', () => {
       context.start(async () => {
         const leftElement = <span data-testid="left-element">Элемент</span>;
         renderComponent(ctx, { leftSide: leftElement });
-        await wrap(tick());
+
         const element = document.querySelector('[data-testid="left-element"]');
         expect(element).toBeInTheDocument();
         expect(element).toHaveTextContent('Элемент');
@@ -195,7 +194,7 @@ describe.concurrent('Компонент Banner', () => {
       context.start(async () => {
         const leftArray = ['Текст 1', 'Текст 2', 'Текст 3'];
         renderComponent(ctx, { leftSide: leftArray });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent('Текст 1Текст 2Текст 3');
       }));
 
@@ -211,7 +210,6 @@ describe.concurrent('Компонент Banner', () => {
         ];
 
         renderComponent(ctx, { leftSide: mixedArray });
-        await wrap(tick());
 
         expect(getRender(ctx)).toHaveTextContent('Текст 1');
         const element = document.querySelector('[data-testid="mixed-element"]');
@@ -225,26 +223,25 @@ describe.concurrent('Компонент Banner', () => {
         renderComponent(ctx, {
           leftSide: ['Текст 1', null, 'Текст 2', undefined, 'Текст 3'],
         });
-        await wrap(tick());
 
         expect(getRender(ctx)).toHaveTextContent('Текст 1Текст 2Текст 3');
         // Проверка количества слотов сложна из-за структуры DOM
       }));
   });
 
-  describe.concurrent('проверка rightSide', () => {
+  describe('проверка rightSide', () => {
     test('должен отображать строку в rightSide', (ctx) =>
       context.start(async () => {
         const rightText = 'Правый текст';
         renderComponent(ctx, { rightSide: rightText });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent(rightText);
       }));
 
     test('должен отображать число в rightSide', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { rightSide: 123 });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent('123');
       }));
 
@@ -252,7 +249,7 @@ describe.concurrent('Компонент Banner', () => {
       context.start(async () => {
         const rightElement = <span data-testid="right-element">Элемент</span>;
         renderComponent(ctx, { rightSide: rightElement });
-        await wrap(tick());
+
         const element = document.querySelector('[data-testid="right-element"]');
         expect(element).toBeInTheDocument();
         expect(element).toHaveTextContent('Элемент');
@@ -262,7 +259,7 @@ describe.concurrent('Компонент Banner', () => {
       context.start(async () => {
         const rightArray = ['Текст 1', 'Текст 2', 'Текст 3'];
         renderComponent(ctx, { rightSide: rightArray });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent('Текст 1Текст 2Текст 3');
       }));
 
@@ -278,7 +275,6 @@ describe.concurrent('Компонент Banner', () => {
         ];
 
         renderComponent(ctx, { rightSide: mixedArray });
-        await wrap(tick());
 
         expect(getRender(ctx)).toHaveTextContent('Текст 1');
         const element = document.querySelector('[data-testid="mixed-element"]');
@@ -292,32 +288,31 @@ describe.concurrent('Компонент Banner', () => {
         renderComponent(ctx, {
           rightSide: ['Текст 1', null, 'Текст 2', undefined, 'Текст 3'],
         });
-        await wrap(tick());
 
         expect(getRender(ctx)).toHaveTextContent('Текст 1Текст 2Текст 3');
         // Проверка количества слотов сложна из-за структуры DOM
       }));
   });
 
-  describe.concurrent('проверка icon', () => {
+  describe('проверка icon', () => {
     test('должен отображать иконку', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { icon: IconLeftMock });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent(iconText);
       }));
 
     test('должен отображать иконку вместе с leftSide', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { icon: IconLeftMock, leftSide: 'Текст слева' });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent(`${iconText}Текст слева`);
       }));
 
     test('должен добавлять класс для иконки', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { icon: IconLeftMock });
-        await wrap(tick());
+
         const iconElement = getRender(ctx).querySelector(
           `.${cnBanner('Icon')}`,
         );
@@ -331,14 +326,14 @@ describe.concurrent('Компонент Banner', () => {
           icon: IconLeftMock,
           leftSide: ['Текст 1', 'Текст 2'],
         });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent(`${iconText}Текст 1Текст 2`);
       }));
 
     test('должен отображать только иконку когда нет leftSide', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { icon: IconLeftMock });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent(iconText);
         // Проверка количества слотов сложна из-за структуры DOM
       }));
@@ -349,18 +344,16 @@ describe.concurrent('Компонент Banner', () => {
           icon: IconLeftMock,
           leftSide: ['Первый', 'Второй'],
         });
-        await wrap(tick());
 
         // Проверка порядка элементов сложна из-за структуры DOM
       }));
   });
 
-  describe.concurrent('проверка space', () => {
+  describe('проверка space', () => {
     test('должен применять классы для отступов', (ctx) =>
       context.start(async () => {
         const space: MixSpaceProps = { m: 'm', p: 's' };
         renderComponent(ctx, { space });
-        await wrap(tick());
 
         expect(getRender(ctx)).toHaveClass(cnMixSpace(space));
       }));
@@ -374,13 +367,12 @@ describe.concurrent('Компонент Banner', () => {
           pV: 'xs',
         };
         renderComponent(ctx, { space });
-        await wrap(tick());
 
         expect(getRender(ctx)).toHaveClass(cnMixSpace(space));
       }));
   });
 
-  describe.concurrent('проверка itemsGap', () => {
+  describe('проверка itemsGap', () => {
     test('должен применять единый отступ для всех элементов', (ctx) =>
       context.start(async () => {
         const itemsGap: Space = 'm';
@@ -389,7 +381,6 @@ describe.concurrent('Компонент Banner', () => {
           leftSide: ['Текст 1', 'Текст 2'],
           rightSide: ['Текст 3', 'Текст 4'],
         });
-        await wrap(tick());
 
         // Проверка классов сложна из-за структуры DOM
       }));
@@ -402,7 +393,6 @@ describe.concurrent('Компонент Banner', () => {
           leftSide: ['Текст 1', 'Текст 2'],
           rightSide: ['Текст 3', 'Текст 4'],
         });
-        await wrap(tick());
 
         // Проверка классов сложна из-за структуры DOM
       }));
@@ -413,7 +403,6 @@ describe.concurrent('Компонент Banner', () => {
           itemsGap: 'm',
           leftSide: ['Текст 1', 'Текст 2'],
         });
-        await wrap(tick());
 
         // Проверка классов сложна из-за структуры DOM
       }));
@@ -424,7 +413,6 @@ describe.concurrent('Компонент Banner', () => {
           itemsGap: 'm',
           rightSide: ['Текст 1', 'Текст 2'],
         });
-        await wrap(tick());
 
         // Проверка классов сложна из-за структуры DOM
       }));

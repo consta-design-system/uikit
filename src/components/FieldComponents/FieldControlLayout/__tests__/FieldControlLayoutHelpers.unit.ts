@@ -252,7 +252,7 @@ const getBgColorResultMap = {
 
 const getSlotsResultMap = [['1'], [0], ['0'], [], [], ['1', '1', 0, '0']];
 
-describe.concurrent('FieldControlLayout helpers getBorderStyle', () => {
+describe('FieldControlLayout helpers getBorderStyle', () => {
   fieldPropForm.forEach((from) => {
     fieldPropView.forEach((view) => {
       test(`form = ${from}; view = ${view};`, () => {
@@ -263,7 +263,7 @@ describe.concurrent('FieldControlLayout helpers getBorderStyle', () => {
   });
 });
 
-describe.concurrent('FieldControlLayout helpers getPaddingLeft', () => {
+describe('FieldControlLayout helpers getPaddingLeft', () => {
   fieldPropForm.forEach((from) => {
     fieldPropView.forEach((view) => {
       test(`form = ${from}; view = ${view}`, () => {
@@ -275,7 +275,7 @@ describe.concurrent('FieldControlLayout helpers getPaddingLeft', () => {
   });
 });
 
-describe.concurrent('FieldControlLayout helpers getPaddingRight', () => {
+describe('FieldControlLayout helpers getPaddingRight', () => {
   fieldPropForm.forEach((from) => {
     fieldPropView.forEach((view) => {
       test(`form = ${from}; view = ${view};`, () => {
@@ -286,7 +286,7 @@ describe.concurrent('FieldControlLayout helpers getPaddingRight', () => {
   });
 });
 
-describe.concurrent('FieldControlLayout helpers getPaddingVertical', () => {
+describe('FieldControlLayout helpers getPaddingVertical', () => {
   fieldPropForm.forEach((from) => {
     fieldPropView.forEach((view) => {
       test(`form = ${from}; view = ${view};`, () => {
@@ -297,7 +297,7 @@ describe.concurrent('FieldControlLayout helpers getPaddingVertical', () => {
   });
 });
 
-describe.concurrent('FieldControlLayout helpers getBorderRadius', () => {
+describe('FieldControlLayout helpers getBorderRadius', () => {
   fieldPropForm.forEach((from) => {
     fieldPropView.forEach((view) => {
       test(`form = ${from}; view = ${view};`, () => {
@@ -308,7 +308,7 @@ describe.concurrent('FieldControlLayout helpers getBorderRadius', () => {
   });
 });
 
-describe.concurrent('FieldControlLayout helpers getBorderColor', () => {
+describe('FieldControlLayout helpers getBorderColor', () => {
   fieldPropFocused.forEach((focused) => {
     fieldPropHovered.forEach((hovered) => {
       fieldPropDisabled.forEach((disabled) => {
@@ -327,7 +327,7 @@ describe.concurrent('FieldControlLayout helpers getBorderColor', () => {
   });
 });
 
-describe.concurrent('FieldControlLayout helpers getBgColor', () => {
+describe('FieldControlLayout helpers getBgColor', () => {
   fieldPropView.forEach((view) => {
     fieldPropDisabled.forEach((disabled) => {
       test(`view = ${view}; disabled = ${disabled};`, () => {
@@ -338,7 +338,7 @@ describe.concurrent('FieldControlLayout helpers getBgColor', () => {
   });
 });
 
-describe.concurrent('FieldControlLayout helpers getSlots', () => {
+describe('FieldControlLayout helpers getSlots', () => {
   ['1', 0, '0', null, false, ['1', null, false, '1', 0, '0']].forEach(
     (side, index) => {
       test(`side = ${side}`, () => {

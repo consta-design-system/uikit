@@ -47,7 +47,7 @@ const getSelectContainer = (ctx: TestContext) =>
     `.${cnSelect('SelectContainer')}`,
   ) as Element | null;
 
-describe.concurrent('Компонент Container', () => {
+describe('Компонент Container', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();

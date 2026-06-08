@@ -36,7 +36,7 @@ const getSliderInput = (ctx: TestContext) =>
     `#${testRootId(ctx)} input[type="number"]`,
   ) as HTMLInputElement | null;
 
-describe.concurrent('Компонент SliderInput', () => {
+describe('Компонент SliderInput', () => {
   test('рендерится без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, { value: 50 })).not.toThrow();

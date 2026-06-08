@@ -102,7 +102,7 @@ const renderTestComponent = (
   });
 };
 
-describe.concurrent('Хук useStyleProps', () => {
+describe('Хук useStyleProps', () => {
   test('корректно возвращает 1 свойство', (ctx) =>
     context.start(async () => {
       renderTestComponent(ctx, SinglePropComponent);

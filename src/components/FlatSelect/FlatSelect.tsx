@@ -1,12 +1,15 @@
 import './FlatSelect.css';
 
-import { computed } from '@reatom/core';
+import { action, computed, wrap } from '@reatom/core';
 import React from 'react';
 
+import { Checkbox } from '##/components/Checkbox';
 import { FieldInput } from '##/components/FieldComponents';
-import { forkRef } from '##/hooks/useForkRef';
+import { ListItem } from '##/components/ListCanary';
+import { Radio } from '##/components/Radio';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
+import { setRefs } from '##/utils/setRef';
 import { factoryComponent } from '##/utils/state';
 
 import { withDefault } from './defaultProps';
@@ -15,11 +18,11 @@ import { FlatSelectFooter } from './FlatSelectFooter';
 import { FlatSelectList } from './FlatSelectList';
 import { FlatSelectRoot } from './FlatSelectRoot';
 import { model } from './model';
-import { renderItemAtom } from './renderItem';
 import {
   FlatSelectComponent,
   FlatSelectGroupDefault,
   FlatSelectItemDefault,
+  FlatSelectPropRenderItem,
   FlatSelectProps,
 } from './types';
 
@@ -27,7 +30,7 @@ export const cnFlatSelect = cn('FlatSelect');
 
 export const FlatSelect = factoryComponent<HTMLDivElement, FlatSelectProps>(
   (initProps, propsAtom) => {
-    const propsWithDefault = computed(() => withDefault(propsAtom()));
+    const propsWithDefaultAtom = computed(() => withDefault(propsAtom()));
 
     const {
       getOptionActions,
@@ -53,10 +56,57 @@ export const FlatSelect = factoryComponent<HTMLDivElement, FlatSelectProps>(
       groupsCounterAtom,
       rootRef,
     } = model<FlatSelectItemDefault, FlatSelectGroupDefault, false>(
-      propsWithDefault,
+      propsWithDefaultAtom,
     );
 
-    const renderItem = renderItemAtom(propsWithDefault);
+    const renderItemDefault: FlatSelectPropRenderItem<FlatSelectItemDefault> =
+      action(({ item, active, hovered, onClick, onMouseEnter, ref }) => {
+        const disabled =
+          propsWithDefaultAtom().getItemDisabled?.(item) ||
+          propsWithDefaultAtom().disabled;
+
+        const label = propsWithDefaultAtom().getItemLabel(item);
+        const { size, multiple } = propsWithDefaultAtom();
+
+        return (
+          <ListItem
+            ref={ref}
+            aria-selected={active}
+            aria-disabled={disabled}
+            role="option"
+            label={label}
+            size={size}
+            active={hovered}
+            onMouseEnter={onMouseEnter}
+            disabled={disabled}
+            onClick={onClick}
+            leftSide={
+              multiple ? (
+                <Checkbox
+                  checked={active}
+                  disabled={disabled}
+                  size={size}
+                  tabIndex={-1}
+                />
+              ) : (
+                <Radio
+                  checked={active}
+                  disabled={disabled}
+                  size={size}
+                  tabIndex={-1}
+                />
+              )
+            }
+          />
+        );
+      });
+
+    const fieldInputRef = action((el: HTMLDivElement | null) =>
+      setRefs([inputRef, propsWithDefaultAtom().inputRef], el),
+    );
+    const ref = action((el: HTMLDivElement | null) =>
+      setRefs([propsWithDefaultAtom().ref, rootRef], el),
+    );
 
     return (props) => {
       const propsWithDefault = withDefault(props);
@@ -109,17 +159,19 @@ export const FlatSelect = factoryComponent<HTMLDivElement, FlatSelectProps>(
         spareDirection,
         possibleDirections,
         container,
+        renderItem,
+        isOpen,
         ...otherProps
       } = propsWithDefault;
 
       const view = !input || anchorRef || borderedProp ? 'clear' : viewProp;
       const bordered = anchorRef ? true : borderedProp;
-      const fieldInputRef = forkRef([inputRef, inputRefProp]);
+
       return (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <FlatSelectRoot
           {...otherProps}
-          ref={forkRef([initProps.ref, rootRef])}
+          ref={wrap(ref)}
           className={cnFlatSelect(
             {
               view,
@@ -169,10 +221,10 @@ export const FlatSelect = factoryComponent<HTMLDivElement, FlatSelectProps>(
                 view={view}
               >
                 <FieldInput
-                  onFocus={handleInputFocus}
-                  onBlur={handleInputBlur}
-                  ref={fieldInputRef}
-                  onChange={handleInputChange}
+                  onFocus={wrap(handleInputFocus)}
+                  onBlur={wrap(handleInputBlur)}
+                  ref={wrap(fieldInputRef)}
+                  onChange={wrap(handleInputChange)}
                   value={inputValue}
                   defaultValue={inputDefaultValue}
                   disabled={disabled}
@@ -201,14 +253,14 @@ export const FlatSelect = factoryComponent<HTMLDivElement, FlatSelectProps>(
             getItemKeyAtom={getItemKeyAtom}
             openAtom={openAtom}
             getOptionActions={getOptionActions}
-            listRef={listRef}
-            renderItem={renderItem}
+            listRef={wrap(listRef)}
+            renderItem={renderItem || renderItemDefault}
             getGroupLabel={getGroupLabel}
             visibleItemsAtom={visibleItemsAtom}
             labelForCreate={labelForCreate}
             isLoading={isLoading}
             labelForEmptyItems={labelForEmptyItems}
-            getItemRef={getOptionRef}
+            getItemRef={wrap(getOptionRef)}
             virtualScroll={virtualScroll}
             onScrollToBottom={onScrollToBottom}
             highlightedIndexAtom={highlightedIndexAtom}

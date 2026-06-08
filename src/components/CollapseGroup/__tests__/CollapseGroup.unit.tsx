@@ -1,5 +1,5 @@
 import { IconSun } from '@consta/icons/IconSun';
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { getByMap } from '##/utils/getByMap';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { Badge } from '../../Badge/Badge';
 import { cnCollapse, sizeIconMap } from '../../Collapse/Collapse';
@@ -78,7 +78,7 @@ const getLabelText = (ctx: TestContext, index = 0) => getLabelTexts(ctx)[index];
 const selectCollapse = (ctx: TestContext) =>
   getRender(ctx).querySelectorAll(`.${cnCollapse()}`);
 
-describe.concurrent('Компонент CollapseGroup', () => {
+describe('Компонент CollapseGroup', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>
@@ -89,11 +89,10 @@ describe.concurrent('Компонент CollapseGroup', () => {
           getItemRightSide,
         }),
       ).not.toThrow();
-      await wrap(tick());
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка label', () => {
+  describe('проверка props', () => {
+    describe('проверка label', () => {
       test(`label отображается`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -101,13 +100,13 @@ describe.concurrent('Компонент CollapseGroup', () => {
             getItemLabel,
             getItemContent,
           });
-          await wrap(tick());
+
           const labelElement = getLabelText(ctx) as HTMLDivElement;
           expect(labelElement.textContent).toEqual('один');
         }));
     });
 
-    describe.concurrent('проверка количества коллапсов', () => {
+    describe('проверка количества коллапсов', () => {
       test(`3 коллапса`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -115,13 +114,13 @@ describe.concurrent('Компонент CollapseGroup', () => {
             getItemLabel,
             getItemContent,
           });
-          await wrap(tick());
+
           const elements = selectCollapse(ctx);
           expect(elements.length).toEqual(3);
         }));
     });
 
-    describe.concurrent('проверка onOpen', () => {
+    describe('проверка onOpen', () => {
       test(`клик должен вызвать callback c ожидаемыми параметрами`, (ctx) =>
         context.start(async () => {
           const handleClick = vi.fn();
@@ -133,8 +132,6 @@ describe.concurrent('Компонент CollapseGroup', () => {
             getItemLabel,
             getItemContent,
           });
-
-          await wrap(tick());
 
           const element = getLabelText(ctx, index) as HTMLDivElement;
 

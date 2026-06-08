@@ -4,9 +4,9 @@ import { action, atom, computed, effect, wrap } from '@reatom/core';
 import React from 'react';
 import { createPortal } from 'react-dom';
 
-import { forkRef } from '##/hooks/useForkRef';
 import { cn } from '##/utils/bem';
 import { deepEqual } from '##/utils/objectCompare';
+import { setRefs } from '##/utils/setRef';
 import { factoryComponent, resizeObservedAtom } from '##/utils/state';
 
 export const cnTextAreaAutoSize = cn('TextAreaAutoSize');
@@ -138,8 +138,11 @@ export const TextAreaAutoSize = factoryComponent<
     }
   });
 
+  const ref = action((el: HTMLTextAreaElement | null) =>
+    setRefs([textAreaElementAtom.set, propsAtom().ref], el),
+  );
+
   return ({
-    ref,
     minRows,
     maxRows,
     style,
@@ -150,7 +153,7 @@ export const TextAreaAutoSize = factoryComponent<
     <>
       <textarea
         {...restProps}
-        ref={forkRef([wrap(textAreaElementAtom.set), ref])}
+        ref={wrap(ref)}
         onChange={handleChange}
         style={{ ...style, ...textareaStylesAtom() }}
         className={cnTextAreaAutoSize(null, [className])}

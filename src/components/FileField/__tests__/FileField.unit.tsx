@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act } from '@testing-library/react';
 import * as React from 'react';
@@ -7,7 +7,7 @@ import { describe, expect, test } from 'vitest';
 
 import { Button } from '##/components/Button/Button';
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { cnFileField, FileField } from '../FileField';
 
@@ -31,7 +31,7 @@ const renderComponent = (ctx: TestContext, props: ComponentProps) => {
   });
 };
 
-describe.concurrent('Компонент FileField', () => {
+describe('Компонент FileField', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = () =>
@@ -41,11 +41,11 @@ describe.concurrent('Компонент FileField', () => {
             <Button data-testid={testId} label="label" {...props} />
           ),
         });
-      await wrap(tick());
+
       expect(render).not.toThrow();
     }));
 
-  describe.concurrent('проверка children', () => {
+  describe('проверка children', () => {
     test(`отображается прокинутый компонент`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -54,7 +54,6 @@ describe.concurrent('Компонент FileField', () => {
             <Button data-testid={testId} label="label" {...props} />
           ),
         });
-        await wrap(tick());
 
         const fileField = document.querySelector(
           `[data-testid="${testId}"]`,
@@ -70,7 +69,6 @@ describe.concurrent('Компонент FileField', () => {
             <Button data-testid={testId} label="label" {...props} />
           ),
         });
-        await wrap(tick());
 
         const fileField = document.querySelector(
           `[data-testid="${testId}"]`,

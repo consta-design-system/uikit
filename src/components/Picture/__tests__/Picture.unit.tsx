@@ -34,14 +34,14 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid=${testId}]`,
   ) as HTMLImageElement | null;
 
-describe.concurrent('Компонент Picture', () => {
+describe('Компонент Picture', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { src: 'https://example.com/image.jpg' });
       expect(getRender(ctx)).toBeInTheDocument();
     }));
 
-  describe.concurrent('проверка src', () => {
+  describe('проверка src', () => {
     test('должен не рендериться если src пустой', (ctx) =>
       context.start(async () => {
         const src = '';

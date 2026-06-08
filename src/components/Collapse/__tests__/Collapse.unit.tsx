@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { cnCollapse, Collapse } from '../Collapse';
 
@@ -56,22 +56,19 @@ const getRender = (ctx: TestContext) =>
 const getLabelText = (ctx: TestContext) =>
   getRender(ctx).querySelector(`.${cnCollapse('LabelText')}`);
 
-describe.concurrent('Компонент Collapse', () => {
+describe('Компонент Collapse', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
-      await wrap(tick());
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка label', () => {
+  describe('проверка props', () => {
+    describe('проверка label', () => {
       test(`label отображается`, (ctx) =>
         context.start(async () => {
           const label = 'fileName';
 
           renderComponent(ctx, { label });
-
-          await wrap(tick());
 
           const labelElement = getLabelText(ctx) as HTMLDivElement;
 
@@ -79,14 +76,12 @@ describe.concurrent('Компонент Collapse', () => {
         }));
     });
 
-    describe.concurrent('проверка onClick', () => {
+    describe('проверка onClick', () => {
       test(`клик должен вызвать callback c ожидаемыми параметрами`, (ctx) =>
         context.start(async () => {
           const handleClick = vi.fn();
 
           renderComponent(ctx, { onClick: handleClick });
-
-          await wrap(tick());
 
           const element = getLabelText(ctx) as HTMLDivElement;
 

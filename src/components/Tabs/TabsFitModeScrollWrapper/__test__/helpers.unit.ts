@@ -9,7 +9,7 @@ import { TabDimensions } from '../../types';
 createRoot();
 clearStack();
 
-describe.concurrent('getVisibleTabsRange', () => {
+describe('getVisibleTabsRange', () => {
   const tabsDimensions: TabDimensions[] = [
     {
       size: 100,

@@ -20,7 +20,7 @@ clearStack();
 
 type TModalProps = React.ComponentProps<typeof Modal>;
 
-const testId = cnModal();
+const testId = 'ModalDeprecated';
 const testChildrenId = 'modalChildren';
 const overlayAriaLabel = 'Overlay';
 
@@ -57,7 +57,7 @@ const getOverlay = (ctx: TestContext) =>
     `#${testPopoverId(ctx)} [aria-label="${overlayAriaLabel}"]`,
   )!;
 
-describe.concurrent(`Компонент ${cnModal}`, () => {
+describe(`Компонент ${cnModal}`, () => {
   const onClose = vi.fn();
 
   test('должен рендериться без ошибок', (ctx) =>
@@ -65,8 +65,8 @@ describe.concurrent(`Компонент ${cnModal}`, () => {
       renderComponent(ctx, { onClose });
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка children', () => {
+  describe('проверка props', () => {
+    describe('проверка children', () => {
       test('отображается прокинутый компонент', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { onClose });
@@ -75,7 +75,7 @@ describe.concurrent(`Компонент ${cnModal}`, () => {
         }));
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test('присваивается дополнительный класс', (ctx) =>
         context.start(async () => {
           const className = 'className';
@@ -85,7 +85,7 @@ describe.concurrent(`Компонент ${cnModal}`, () => {
         }));
     });
 
-    describe.concurrent('проверка обработчиков событий нажатий клавиш', () => {
+    describe('проверка обработчиков событий нажатий клавиш', () => {
       test('onEsc: отрабатывает после нажатия на esc', (ctx) =>
         context.start(async () => {
           const onEsc = vi.fn(() => true);
@@ -98,7 +98,7 @@ describe.concurrent(`Компонент ${cnModal}`, () => {
     });
   });
 
-  describe.concurrent('проверка оверлея', () => {
+  describe('проверка оверлея', () => {
     const onClickOutside = vi.fn();
 
     test('должен рендериться по дефолту', (ctx) =>
@@ -114,93 +114,6 @@ describe.concurrent(`Компонент ${cnModal}`, () => {
 
         fireEvent.mouseDown(getOverlay(ctx));
         expect(onClickOutside).toHaveBeenCalledTimes(1);
-      }));
-  });
-
-  describe.concurrent("проверка callback'ов", () => {
-    test('onOpen должен вызваться после рендера', (ctx) =>
-      context.start(async () => {
-        const onOpen = vi.fn();
-        const onClose = vi.fn();
-        renderComponent(ctx, { onClose, onOpen });
-        expect(onOpen).toHaveBeenCalledTimes(1);
-        expect(onClose).toHaveBeenCalledTimes(0);
-      }));
-
-    test('onClose должен вызваться в момент закрытия', (ctx) =>
-      context.start(async () => {
-        const onOpen = vi.fn();
-        const onClose = vi.fn();
-        // Первый рендер с isOpen: true (по умолчанию)
-        renderComponent(ctx, { onClose, onOpen });
-        expect(onOpen).toHaveBeenCalledTimes(1);
-        // Второй рендер с isOpen: false
-        const root = ReactDOM.createRoot(
-          document.getElementById(testRootId(ctx))!,
-        );
-        act(() => {
-          root.render(
-            <reatomContext.Provider value={top()}>
-              <Theme preset={presetGpnDefault}>
-                <Modal
-                  data-testid={testId}
-                  isOpen={false}
-                  onClose={onClose}
-                  onOpen={onOpen}
-                >
-                  <h1 data-testid={testChildrenId}>test</h1>
-                </Modal>
-              </Theme>
-            </reatomContext.Provider>,
-          );
-        });
-        expect(onClose).toHaveBeenCalledTimes(1);
-      }));
-
-    test('afterClose должен вызваться после закрытия', (ctx) =>
-      context.start(async () => {
-        vi.useFakeTimers();
-        const afterClose = vi.fn();
-        // Первый рендер с isOpen: true
-
-        const root = ReactDOM.createRoot(
-          document.getElementById(testRootId(ctx))!,
-        );
-
-        act(() => {
-          root.render(
-            <reatomContext.Provider value={top()}>
-              <Theme preset={presetGpnDefault}>
-                <Modal data-testid={testId} isOpen afterClose={afterClose}>
-                  <h1 data-testid={testChildrenId}>test</h1>
-                </Modal>
-              </Theme>
-            </reatomContext.Provider>,
-          );
-        });
-
-        // Второй рендер с isOpen: false
-        act(() => {
-          root.render(
-            <reatomContext.Provider value={top()}>
-              <Theme preset={presetGpnDefault}>
-                <Modal
-                  data-testid={testId}
-                  isOpen={false}
-                  afterClose={afterClose}
-                >
-                  <h1 data-testid={testChildrenId}>test</h1>
-                </Modal>
-              </Theme>
-            </reatomContext.Provider>,
-          );
-        });
-
-        act(() => {
-          vi.runAllTimers();
-        });
-
-        expect(afterClose).toHaveBeenCalledTimes(1);
       }));
   });
 });

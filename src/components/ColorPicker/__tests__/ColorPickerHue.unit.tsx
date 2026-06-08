@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { cnColorPickerHue, ColorPickerHue } from '../ColorPickerHue';
 
@@ -35,7 +35,7 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="${testId}"]`,
   ) as HTMLElement;
 
-describe.concurrent('Компонент ColorPickerHue', () => {
+describe('Компонент ColorPickerHue', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = () =>
@@ -43,49 +43,49 @@ describe.concurrent('Компонент ColorPickerHue', () => {
           hue: 180,
           onChange: vi.fn(),
         });
-      await wrap(tick());
+
       expect(render).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     const hue = 120;
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test('присваивает дополнительный класс', (ctx) =>
         context.start(async () => {
           const className = 'custom-class';
           renderComponent(ctx, { hue, onChange: vi.fn(), className });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(className);
         }));
     });
 
-    describe.concurrent('проверка style', () => {
+    describe('проверка style', () => {
       test('присваивает дополнительные стили', (ctx) =>
         context.start(async () => {
           const style = { color: 'red' };
           renderComponent(ctx, { hue, onChange: vi.fn(), style });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveStyle(style);
         }));
     });
 
-    describe.concurrent('проверка ref', () => {
+    describe('проверка ref', () => {
       test('ref присваивается элементу', (ctx) =>
         context.start(async () => {
           const ref = React.createRef<HTMLDivElement>();
           renderComponent(ctx, { hue, onChange: vi.fn(), ref });
-          await wrap(tick());
+
           expect(ref.current).toBe(getRender(ctx));
         }));
     });
 
-    describe.concurrent('проверка hue', () => {
+    describe('проверка hue', () => {
       test('позиция указателя корректно вычисляется', (ctx) =>
         context.start(async () => {
           const hue = 270;
           renderComponent(ctx, { hue, onChange: vi.fn() });
-          await wrap(tick());
+
           const sliders = document.querySelectorAll(
             `#${testRootId(ctx)} [role="slider"]`,
           );
@@ -96,13 +96,12 @@ describe.concurrent('Компонент ColorPickerHue', () => {
     });
   });
 
-  describe.concurrent('проверка взаимодействия', () => {
+  describe('проверка взаимодействия', () => {
     test('вызывает onChange при клике на левую кнопку', (ctx) =>
       context.start(async () => {
         const hue = 180;
         const onChange = vi.fn();
         renderComponent(ctx, { hue, onChange });
-        await wrap(tick());
 
         const buttons = document.querySelectorAll(
           `#${testRootId(ctx)} [role="button"]`,
@@ -119,7 +118,6 @@ describe.concurrent('Компонент ColorPickerHue', () => {
         const hue = 180;
         const onChange = vi.fn();
         renderComponent(ctx, { hue, onChange });
-        await wrap(tick());
 
         const buttons = document.querySelectorAll(
           `#${testRootId(ctx)} [role="button"]`,
@@ -136,7 +134,6 @@ describe.concurrent('Компонент ColorPickerHue', () => {
         const hue = 180;
         const onChange = vi.fn();
         renderComponent(ctx, { hue, onChange });
-        await wrap(tick());
 
         const sliders = document.querySelectorAll(
           `#${testRootId(ctx)} [role="slider"]`,
@@ -153,7 +150,6 @@ describe.concurrent('Компонент ColorPickerHue', () => {
         const hue = 180;
         const onChange = vi.fn();
         renderComponent(ctx, { hue, onChange });
-        await wrap(tick());
 
         const sliders = document.querySelectorAll(
           `#${testRootId(ctx)} [role="slider"]`,

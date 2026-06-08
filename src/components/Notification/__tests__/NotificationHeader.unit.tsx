@@ -11,6 +11,7 @@ import {
   TestContext,
   testPopoverId,
   testRootId,
+  tick,
 } from '##/utils/vitest';
 
 import { cnNotificationHeader, NotificationHeader } from '..';
@@ -62,13 +63,13 @@ const getContextMenu = (ctx: TestContext) =>
 const getContextMenuItems = (ctx: TestContext) =>
   getContextMenu(ctx)?.querySelectorAll(`.ListItem`);
 
-describe.concurrent('Компонент NotificationHeader', () => {
+describe('Компонент NotificationHeader', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('прокидывает className', (ctx) =>
       context.start(async () => {
         const className = 'test-class-name';
@@ -129,6 +130,7 @@ describe.concurrent('Компонент NotificationHeader', () => {
         fireEvent.click(getActionButton(ctx));
 
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         expect(getContextMenuItems(ctx)).toHaveLength(actions.length);
       }));
@@ -144,7 +146,7 @@ describe.concurrent('Компонент NotificationHeader', () => {
       }));
   });
 
-  describe.concurrent('проверка взаимодействия', () => {
+  describe('проверка взаимодействия', () => {
     test('вызывает onClose при клике на кнопку закрытия', (ctx) =>
       context.start(async () => {
         const onClose = vi.fn();

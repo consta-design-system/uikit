@@ -47,14 +47,14 @@ const getDecrementButton = (ctx: TestContext) =>
     `.${cnFieldCounter('Button', { counter: 'decrement' }).split(' ')[1]}`,
   ) as HTMLButtonElement;
 
-describe.concurrent(`Компонент ${testId}`, () => {
+describe(`Компонент ${testId}`, () => {
   test('должен рендериться без ошибок', async (ctx) => {
     await context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     });
   });
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test(`ref присвоен`, async (ctx) => {
       await context.start(async () => {
         const ref: { current: HTMLDivElement | null } = { current: null };
@@ -70,7 +70,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test(`Присваивается дополнительный className`, async (ctx) => {
       await context.start(async () => {
         const className = 'className';
@@ -84,7 +84,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка onIncrementClick', () => {
+  describe('проверка onIncrementClick', () => {
     test(`onIncrementClick отрабатывает`, async (ctx) => {
       await context.start(async () => {
         const onIncrementClick = vi.fn();
@@ -100,7 +100,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка onDecrementClick', () => {
+  describe('проверка onDecrementClick', () => {
     test(`onDecrementClick отрабатывает`, async (ctx) => {
       await context.start(async () => {
         const onDecrementClick = vi.fn();
@@ -116,7 +116,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка onIncrementFocus', () => {
+  describe('проверка onIncrementFocus', () => {
     test(`onIncrementFocus отрабатывает`, async (ctx) => {
       await context.start(async () => {
         const onIncrementFocus = vi.fn();
@@ -132,7 +132,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка onDecrementFocus', () => {
+  describe('проверка onDecrementFocus', () => {
     test(`onDecrementFocus отрабатывает`, async (ctx) => {
       await context.start(async () => {
         const onDecrementFocus = vi.fn();
@@ -148,7 +148,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка other props', () => {
+  describe('проверка other props', () => {
     const props = ['data-attr', 'role', 'id'] as const;
 
     props.forEach((prop) => {
@@ -164,7 +164,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка кнопок инкремента и декремента', () => {
+  describe('проверка кнопок инкремента и декремента', () => {
     test('Кнопка инкремента имеет корректный className', async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, {});
@@ -214,7 +214,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка иконок', () => {
+  describe('проверка иконок', () => {
     test('Иконка инкремента рендерится', async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, {});

@@ -7,6 +7,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 import { IconMock, iconMockText } from '##/../__mocks__/IconMock';
 import { presetGpnDefault, Theme } from '##/components/Theme';
+import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 import {
   createRoot,
   TestContext,
@@ -204,20 +205,20 @@ const getDropdown = (ctx: TestContext) =>
 const getOutside = (ctx: TestContext) =>
   document.querySelector(`#${testOutsideId(ctx)}`) as HTMLDivElement;
 
-describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
+describe('Компонент Breadcrumbs (Canary)', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = renderComponent(ctx, { items });
-      await wrap(tick());
+
       expect(() => render).not.toThrow();
     }));
 
-  describe.concurrent('проверка иконок', () => {
+  describe('проверка иконок', () => {
     items.forEach((item, index) => {
       test(`проверка icon у ${item.label}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items });
-          await wrap(tick());
+
           const icon = getLinkIcon(ctx, index);
           if (item.icon) {
             expect(icon).toHaveTextContent(iconMockText);
@@ -227,22 +228,22 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
         }));
     });
   });
-  describe.concurrent('проверка лейблов', () => {
+  describe('проверка лейблов', () => {
     items.forEach((item, index) => {
       test(`проверка label у ${item.label}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items });
-          await wrap(tick());
+
           expect(getLink(ctx, index)).toHaveTextContent(item.label);
         }));
     });
   });
-  describe.concurrent('проверка onClick', () => {
+  describe('проверка onClick', () => {
     items.forEach((item, index) => {
       test(`проверка onClick у ${item.label}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items });
-          await wrap(tick());
+
           getLink(ctx, index).click();
           if (item.onClick) {
             expect(item.onClick).toHaveBeenCalledTimes(1);
@@ -250,12 +251,12 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
         }));
     });
   });
-  describe.concurrent('проверка тега на ссылке', () => {
+  describe('проверка тега на ссылке', () => {
     items.forEach((item, index) => {
       test(`проверка тега у ${item.label}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items });
-          await wrap(tick());
+
           const tag = getLinkTag(ctx, index);
           if (item.href) {
             expect(tag).toEqual('a');
@@ -265,12 +266,12 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
         }));
     });
   });
-  describe.concurrent('проверка url на ссылке', () => {
+  describe('проверка url на ссылке', () => {
     items.forEach((item, index) => {
       test(`проверка url у ${item.label}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items });
-          await wrap(tick());
+
           const href = getLinkHref(ctx, index);
           if (item.href) {
             expect(href).toEqual(item.href);
@@ -280,12 +281,12 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
         }));
     });
   });
-  describe.concurrent('проверка submenu на ссылке', () => {
+  describe('проверка submenu на ссылке', () => {
     items.forEach((item, index) => {
       test(`проверка кнопки около текста у ${item.label}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items, fitMode: 'scroll' });
-          await wrap(tick());
+
           const button = getSelectButton(ctx, index);
           if (item.subMenu) {
             expect(button).toBeInTheDocument();
@@ -296,92 +297,91 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
       test(`dropdown открывается по клику на кнопку у - ${item.label}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items, fitMode: 'scroll' });
-          await wrap(tick());
-          // await wrap(sleep(200));
+
           if (item.subMenu) {
             const button = getSelectButton(ctx, index);
             fireEvent.click(button);
             await wrap(tick());
-
             expect(getDropdown(ctx)).toBeInTheDocument();
           }
         }));
       test(`dropdown закрывается по клику на кнопку у - ${item.label}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items, fitMode: 'scroll' });
-          await wrap(tick());
+
           if (item.subMenu) {
             const button = getSelectButton(ctx, index);
             fireEvent.click(button);
-            await wrap(tick());
+
             fireEvent.click(button);
             await wrap(tick());
-            await wrap(sleep(200));
+
+            await wrap(sleep(animateTimeout));
             expect(getDropdown(ctx)).not.toBeInTheDocument();
           }
         }));
     });
   });
-  describe.concurrent('проверка size', () => {
+  describe('проверка size', () => {
     (['xs', 's', 'm', 'l'] as const).map((size) => {
       test(`проверка size ${size}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items, size, fitMode: 'scroll' });
-          await wrap(tick());
+
           const link = getLink(ctx, 0);
           expect(link).toHaveClass(`Text_size_${size}`);
         }));
     });
   });
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('проверка лейблов', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { items, fitMode: 'scroll' });
-        await wrap(tick());
+
         expect(getOutside(ctx)).toBeInTheDocument();
       }));
   });
-  describe.concurrent('проверка onlyIconRoot', () => {
+  describe('проверка onlyIconRoot', () => {
     test(`Лейбл первой ссылки не должен отображаться если выставлен флаг onlyIconRoot`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { items, onlyIconRoot: true, fitMode: 'scroll' });
-        await wrap(tick());
+
         const link = getLink(ctx, 0);
         expect(link).not.toHaveTextContent(`${items[0].label}`);
       }));
     test(`Лейбл первой ссылки должен отображаться если флаг onlyIconRoot не выставлен`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { items, onlyIconRoot: false, fitMode: 'scroll' });
-        await wrap(tick());
+
         const link = getLink(ctx, 0);
         expect(link).toHaveTextContent(`${items[0].label}`);
       }));
   });
-  describe.concurrent('проверка fitMode', () => {
-    describe.concurrent('проверка fitMode = scroll', () => {
+  describe('проверка fitMode', () => {
+    describe('проверка fitMode = scroll', () => {
       test(`выбрана нужная обертка`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items, fitMode: 'scroll' });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(`BreadcrumbsFitModeScroll`);
         }));
     });
-    describe.concurrent('проверка fitMode = wrap', () => {
+    describe('проверка fitMode = wrap', () => {
       test(`выбрана нужная обертка`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { items, fitMode: 'dropdown' });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(`BreadcrumbsFitModeDropdown`);
         }));
     });
   });
-  describe.concurrent('проверка onItemClick', () => {
+  describe('проверка onItemClick', () => {
     items.forEach((item, index) => {
       test(`проверка клика по ${item.label}`, (ctx) =>
         context.start(async () => {
           const onItemClick = vi.fn();
           renderComponent(ctx, { items, fitMode: 'scroll', onItemClick });
-          await wrap(tick());
+
           const link = getLink(ctx, index);
           fireEvent.click(link);
           expect(onItemClick).toHaveBeenCalledTimes(1);
@@ -391,8 +391,8 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
         }));
     });
   });
-  describe.concurrent('проверка геттеров', () => {
-    describe.concurrent('проверка getItemLabel', () => {
+  describe('проверка геттеров', () => {
+    describe('проверка getItemLabel', () => {
       customItems.forEach((item, index) => {
         test(`проверка label у ${item.name}`, (ctx) =>
           context.start(async () => {
@@ -401,12 +401,12 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
               fitMode: 'scroll',
               getItemLabel: (item) => item.name,
             });
-            await wrap(tick());
+
             expect(getLink(ctx, index)).toHaveTextContent(item.name);
           }));
       });
     });
-    describe.concurrent('проверка getItemHref', () => {
+    describe('проверка getItemHref', () => {
       customItems.forEach((item, index) => {
         test(`проверка url у ${item.name}`, (ctx) =>
           context.start(async () => {
@@ -416,7 +416,7 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
               getItemLabel: (item) => item.name,
               getItemHref: (item) => item.link,
             });
-            await wrap(tick());
+
             const href = getLinkHref(ctx, index);
             if (item.link) {
               expect(href).toEqual(item.link);
@@ -426,7 +426,7 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
           }));
       });
     });
-    describe.concurrent('проверка getItemIcon', () => {
+    describe('проверка getItemIcon', () => {
       customItems.forEach((item, index) => {
         test(`проверка icon у ${item.name}`, (ctx) =>
           context.start(async () => {
@@ -436,7 +436,7 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
               getItemLabel: (item) => item.name,
               getItemIcon: (item) => (item.isHome ? IconMock : undefined),
             });
-            await wrap(tick());
+
             const icon = getLinkIcon(ctx, index);
             if (item.isHome) {
               expect(icon).toHaveTextContent(iconMockText);
@@ -446,7 +446,7 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
           }));
       });
     });
-    describe.concurrent('проверка getItemOnClick', () => {
+    describe('проверка getItemOnClick', () => {
       customItems.forEach((item, index) => {
         test(`проверка onClick у ${item.name}`, (ctx) =>
           context.start(async () => {
@@ -456,7 +456,7 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
               getItemLabel: (item) => item.name,
               getItemOnClick: (item) => item.handleClick,
             });
-            await wrap(tick());
+
             getLink(ctx, index).click();
             if (item.handleClick) {
               expect(item.handleClick).toHaveBeenCalledTimes(1);
@@ -464,7 +464,7 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
           }));
       });
     });
-    describe.concurrent('проверка getItemSubMenu', () => {
+    describe('проверка getItemSubMenu', () => {
       customItems.forEach((item, index) => {
         test(`проверка кнопки около текста у ${item.name}`, (ctx) =>
           context.start(async () => {
@@ -474,7 +474,7 @@ describe.concurrent('Компонент Breadcrumbs (Canary)', () => {
               getItemLabel: (item) => item.name,
               getItemSubMenu: (item) => item.menu,
             });
-            await wrap(tick());
+
             const button = getSelectButton(ctx, index);
             if (item.menu) {
               expect(button).toBeInTheDocument();

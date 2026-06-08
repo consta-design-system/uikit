@@ -21,7 +21,7 @@ import { TableColumn, TableRow } from '../Table';
 
 createRoot();
 
-describe.concurrent('getColumnsSize', () => {
+describe('getColumnsSize', () => {
   test('получение размера колонок', () => {
     const result = getColumnsSize([150, undefined]);
 
@@ -29,7 +29,7 @@ describe.concurrent('getColumnsSize', () => {
   });
 });
 
-describe.concurrent('getColumnLeftOffset', () => {
+describe('getColumnLeftOffset', () => {
   test('получение отступа слева от колонки, если размеры колонок отсутствуют', () => {
     const result = getColumnLeftOffset({
       columnIndex: 0,
@@ -77,7 +77,7 @@ type TestRow = {
   anotherField: string;
 };
 
-describe.concurrent('getNewSorting', () => {
+describe('getNewSorting', () => {
   test('устанавливает сортировку по полю, если не было сортировки', () => {
     expect(getNewSorting<TestRow>(null, 'field')).toEqual({
       by: 'field',
@@ -119,7 +119,7 @@ describe.concurrent('getNewSorting', () => {
   });
 });
 
-describe.concurrent('transformColumns', () => {
+describe('transformColumns', () => {
   test('преобразует исходный массив с любым уровнем вложенности в массив массивов 2 уровня', () => {
     const result = transformColumns(
       COLUMNS as Array<TableColumn<TableRow>>,
@@ -130,7 +130,7 @@ describe.concurrent('transformColumns', () => {
   });
 });
 
-describe.concurrent('useLazyLoadData', () => {
+describe('useLazyLoadData', () => {
   const data = generateData(500, 5);
   const { result } = renderHook(() => useLazyLoadData(210, window, true));
 

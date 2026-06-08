@@ -47,16 +47,16 @@ const getCancelButton = (ctx: TestContext) =>
 const getIcon = (ctx: TestContext) =>
   getRender(ctx).querySelector(`.${cnTagBase('Icon')}`) as HTMLElement;
 
-describe.concurrent('Компонент TagBase', () => {
+describe('Компонент TagBase', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, { label: 'label' })).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     const label = 'label';
 
-    describe.concurrent('проверка label', () => {
+    describe('проверка label', () => {
       test('отображает текст метки', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { label });
@@ -64,7 +64,7 @@ describe.concurrent('Компонент TagBase', () => {
         }));
     });
 
-    describe.concurrent('проверка size', () => {
+    describe('проверка size', () => {
       tagBasePropSize.forEach((size) => {
         test(`присваивает класс для size=${size}`, (ctx) =>
           context.start(async () => {
@@ -74,7 +74,7 @@ describe.concurrent('Компонент TagBase', () => {
       });
     });
 
-    describe.concurrent('проверка group', () => {
+    describe('проверка group', () => {
       tagBasePropGroup.forEach((group) => {
         test(`присваивает класс для group=${group}`, (ctx) =>
           context.start(async () => {
@@ -84,7 +84,7 @@ describe.concurrent('Компонент TagBase', () => {
       });
     });
 
-    describe.concurrent('проверка view', () => {
+    describe('проверка view', () => {
       tagBasePropView.forEach((view) => {
         test(`присваивает класс для view=${view}`, (ctx) =>
           context.start(async () => {
@@ -94,7 +94,7 @@ describe.concurrent('Компонент TagBase', () => {
       });
     });
 
-    describe.concurrent('проверка withAction', () => {
+    describe('проверка withAction', () => {
       test('присваивает класс для withAction', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { label, withAction: true });
@@ -102,7 +102,7 @@ describe.concurrent('Компонент TagBase', () => {
         }));
     });
 
-    describe.concurrent('проверка onCancel', () => {
+    describe('проверка onCancel', () => {
       test('отображает иконку на кнопке', (ctx) =>
         context.start(async () => {
           const handleClick = vi.fn();
@@ -119,7 +119,7 @@ describe.concurrent('Компонент TagBase', () => {
         }));
     });
 
-    describe.concurrent('проверка onClick', () => {
+    describe('проверка onClick', () => {
       test('кнопка срабатывает', (ctx) =>
         context.start(async () => {
           const handleClick = vi.fn();
@@ -129,7 +129,7 @@ describe.concurrent('Компонент TagBase', () => {
         }));
     });
 
-    describe.concurrent('проверка as', () => {
+    describe('проверка as', () => {
       const tags = ['a', 'div', 'span'] as const;
 
       tags.forEach((el) => {
@@ -141,7 +141,7 @@ describe.concurrent('Компонент TagBase', () => {
       });
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test('присваивает className', (ctx) =>
         context.start(async () => {
           const className = 'className';
@@ -150,7 +150,7 @@ describe.concurrent('Компонент TagBase', () => {
         }));
     });
 
-    describe.concurrent('проверка icon', () => {
+    describe('проверка icon', () => {
       test('отображает иконку', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { label, icon: IconAttach });

@@ -4,7 +4,6 @@ import { AtomLike } from '@reatom/core';
 import { useAtom } from '@reatom/react';
 import React, { forwardRef } from 'react';
 
-// import { Transition } from 'react-transition-group';
 import { Direction, Popover } from '##/components/Popover';
 import { Transition } from '##/components/Transition';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';

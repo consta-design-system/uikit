@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { Avatar, avatarPropForm, avatarPropSize, cnAvatar } from '../Avatar';
 import {
@@ -39,32 +39,30 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid=${testId}]`,
   ) as HTMLElement;
 
-describe.concurrent('Компонент Avatar', () => {
+describe('Компонент Avatar', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка form', () => {
+  describe('проверка props', () => {
+    describe('проверка form', () => {
       avatarPropForm.forEach((form) => {
         test(`присваивает класс для form=${form}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { form });
-
-            await wrap(tick());
 
             expect(getRender(ctx)).toHaveClass(cnAvatar({ form }));
           }));
       });
     });
 
-    describe.concurrent('проверка size', () => {
+    describe('проверка size', () => {
       avatarPropSize.forEach((size) => {
         test(`присваивает класс для size=${size}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { size });
-            await wrap(tick());
+
             const avatar = getRender(ctx);
 
             expect(avatar).toHaveClass(cnAvatar({ size }));
@@ -72,14 +70,14 @@ describe.concurrent('Компонент Avatar', () => {
       });
     });
 
-    describe.concurrent('проверка тэга', () => {
+    describe('проверка тэга', () => {
       const tags = ['a', 'div', 'span'] as const;
 
       tags.forEach((el) => {
         test(`должен рендериться как <${el}>`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { as: el });
-            await wrap(tick());
+
             const avatar = getRender(ctx);
 
             expect(avatar?.nodeName).toEqual(el.toUpperCase());
@@ -87,7 +85,7 @@ describe.concurrent('Компонент Avatar', () => {
       });
     });
 
-    describe.concurrent('проверка url', () => {
+    describe('проверка url', () => {
       test('должен добавиться указанный url', (ctx) =>
         context.start(async () => {
           const url =
@@ -95,7 +93,7 @@ describe.concurrent('Компонент Avatar', () => {
           const name = 'Вадим Матвеев';
 
           renderComponent(ctx, { url, name });
-          await wrap(tick());
+
           const avatar = getRender(ctx);
           const img = avatar?.querySelector('img') as HTMLImageElement;
 
@@ -109,7 +107,7 @@ describe.concurrent('Компонент Avatar', () => {
           const initials = getInitialsForName(name);
 
           renderComponent(ctx, { name });
-          await wrap(tick());
+
           const avatar = getRender(ctx);
           const img = avatar?.querySelector('img') as HTMLImageElement;
 
@@ -118,7 +116,7 @@ describe.concurrent('Компонент Avatar', () => {
         }));
     });
 
-    describe.concurrent('проверка name', () => {
+    describe('проверка name', () => {
       test('должен добавиться указанный name', (ctx) =>
         context.start(async () => {
           const url =
@@ -126,7 +124,7 @@ describe.concurrent('Компонент Avatar', () => {
           const name = 'Вадим Матвеев';
 
           renderComponent(ctx, { url, name });
-          await wrap(tick());
+
           const avatar = getRender(ctx);
           const img = avatar?.querySelector('img') as HTMLImageElement;
 
@@ -135,11 +133,10 @@ describe.concurrent('Компонент Avatar', () => {
         }));
     });
 
-    describe.concurrent('проверка monochrome', () => {
+    describe('проверка monochrome', () => {
       test('должен использовать monochrome цвет, если monochrome=true', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { monochrome: true });
-          await wrap(tick());
 
           expect(getRender(ctx).style.getPropertyValue('--avatar-color')).toBe(
             'var(--avatar-color-18)',
@@ -149,7 +146,6 @@ describe.concurrent('Компонент Avatar', () => {
       test('не должен использовать monochrome цвет, если monochrome=false', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { monochrome: false, name: 'Test User' });
-          await wrap(tick());
 
           expect(
             getRender(ctx).style.getPropertyValue('--avatar-color'),
@@ -157,39 +153,39 @@ describe.concurrent('Компонент Avatar', () => {
         }));
     });
 
-    describe.concurrent('проверка стилей', () => {
+    describe('проверка стилей', () => {
       test('должен добавлять кастомные стили', (ctx) =>
         context.start(async () => {
           const customStyle = { backgroundColor: 'red' };
 
           renderComponent(ctx, { style: customStyle });
-          await wrap(tick());
+
           const avatar = getRender(ctx);
 
           expect(avatar).toHaveStyle('background-color: red');
         }));
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test('должен добавлять пользовательский className', (ctx) =>
         context.start(async () => {
           const customClass = 'custom-class';
           renderComponent(ctx, { className: customClass });
-          await wrap(tick());
+
           const avatar = getRender(ctx);
 
           expect(avatar).toHaveClass(customClass);
         }));
     });
 
-    describe.concurrent('проверка отображения инициалов', () => {
+    describe('проверка отображения инициалов', () => {
       test('должен отображать инициалы, если имя указано', (ctx) =>
         context.start(async () => {
           const name = 'John Doe';
           const initials = getInitialsForName(name);
 
           renderComponent(ctx, { name });
-          await wrap(tick());
+
           const avatar = getRender(ctx);
 
           expect(avatar?.textContent).toEqual(initials);
@@ -198,21 +194,21 @@ describe.concurrent('Компонент Avatar', () => {
       test('не должен отображать инициалы, если имя не указано', (ctx) =>
         context.start(async () => {
           renderComponent(ctx);
-          await wrap(tick());
+
           const avatar = getRender(ctx);
 
           expect(avatar?.textContent).toEqual('');
         }));
     });
 
-    describe.concurrent('проверка комбинации props', () => {
+    describe('проверка комбинации props', () => {
       test('должен корректно рендериться с url и monochrome', (ctx) =>
         context.start(async () => {
           const url = 'https://example.com/avatar.png';
           const name = 'John Doe';
 
           renderComponent(ctx, { url, name, monochrome: true });
-          await wrap(tick());
+
           const avatar = getRender(ctx);
           const img = avatar?.querySelector('img') as HTMLImageElement;
 
@@ -226,7 +222,7 @@ describe.concurrent('Компонент Avatar', () => {
           const name = 'John Doe';
 
           renderComponent(ctx, { name, monochrome: true });
-          await wrap(tick());
+
           const avatar = getRender(ctx);
 
           expect(avatar?.textContent).toEqual('JD');
@@ -238,8 +234,8 @@ describe.concurrent('Компонент Avatar', () => {
     });
   });
 
-  describe.concurrent('проверка вспомогательных функций', () => {
-    describe.concurrent('проверка getInitialsForName', () => {
+  describe('проверка вспомогательных функций', () => {
+    describe('проверка getInitialsForName', () => {
       test('пустая строка', (ctx) =>
         context.start(async () => {
           const name = '';
@@ -273,7 +269,7 @@ describe.concurrent('Компонент Avatar', () => {
         }));
     });
 
-    describe.concurrent('проверка getColorIndexForName', () => {
+    describe('проверка getColorIndexForName', () => {
       const maxColorIndex = 17;
 
       test('пустая строка', (ctx) =>
@@ -314,7 +310,7 @@ describe.concurrent('Компонент Avatar', () => {
         }));
     });
 
-    describe.concurrent('проверка getRandomInt', () => {
+    describe('проверка getRandomInt', () => {
       test('должен возвращать значение в пределах max', (ctx) =>
         context.start(async () => {
           const max = 10;

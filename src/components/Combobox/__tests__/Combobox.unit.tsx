@@ -9,6 +9,7 @@ import { cnListGroupLabel, cnListItem } from '##/components/ListCanary';
 import { cnSelect } from '##/components/SelectComponents/cnSelect';
 import { cnSelectValueTag } from '##/components/SelectComponents/SelectValueTag/SelectValueTag';
 import { presetGpnDefault, Theme } from '##/components/Theme';
+import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 import { cn } from '##/utils/bem';
 import {
   createRoot,
@@ -49,8 +50,8 @@ function renderComponent<
       <reatomContext.Provider value={top()}>
         <Theme preset={presetGpnDefault}>
           <Combobox<ITEM, GROUP, MULTIPLE>
-            data-testid={testId}
             {...props}
+            data-testid={testId}
             dropdownContainer={document.getElementById(testPopoverId(ctx))!}
           />
         </Theme>
@@ -120,11 +121,10 @@ const outsideClick = (ctx: TestContext) => {
 const getClearButton = (ctx: TestContext) =>
   getRender(ctx).querySelector(`.${cnSelect('ClearIndicator')}`) as HTMLElement;
 
-describe.concurrent('Компонент Combobox', () => {
+describe('Компонент Combobox', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, defaultProps)).not.toThrow();
-      await wrap(tick());
     }));
 
   test(`Присваивается дополнительный className`, (ctx) =>
@@ -132,7 +132,7 @@ describe.concurrent('Компонент Combobox', () => {
       const className = 'className';
 
       renderComponent(ctx, { ...defaultProps, className });
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveClass(className);
     }));
 
@@ -144,14 +144,12 @@ describe.concurrent('Компонент Combobox', () => {
         ...defaultProps,
         value,
       });
-      await wrap(tick());
 
       expect(getControlValue(ctx).textContent).toEqual(
         defaultGetItemLabel(value),
       );
 
       inputClick(ctx);
-      await wrap(tick());
 
       expect(getItem(ctx, index)).toHaveClass(cnListItem({ checked: true }));
     }));
@@ -166,7 +164,6 @@ describe.concurrent('Компонент Combobox', () => {
         multiple: true,
         value,
       });
-      await wrap(tick());
 
       expect(getSelectValues(ctx).length).toEqual(value.length);
       expect(getSelectValue(ctx, 0).textContent).toEqual(
@@ -180,80 +177,27 @@ describe.concurrent('Компонент Combobox', () => {
       );
 
       inputClick(ctx);
-      await wrap(tick());
-      await wrap(sleep(200));
 
       expect(getItem(ctx, indexes[0])).toHaveAttribute('aria-selected', 'true');
       expect(getItem(ctx, indexes[1])).toHaveAttribute('aria-selected', 'true');
       expect(getItem(ctx, indexes[2])).toHaveAttribute('aria-selected', 'true');
     }));
 
-  test('открывается и закрывается по клику', (ctx) =>
-    context.start(async () => {
-      renderComponent(ctx, defaultProps);
-      await wrap(tick());
-
-      inputClick(ctx);
-
-      await wrap(tick());
-      await wrap(sleep(200));
-
-      const optionsList = getItemsList(ctx);
-
-      expect(optionsList).toBeInTheDocument();
-      inputClick(ctx);
-      await wrap(tick());
-      await wrap(sleep(200));
-
-      expect(optionsList).not.toBeInTheDocument();
-    }));
-
-  test('открывается и закрывается по клику за пределами селекта', (ctx) =>
-    context.start(async () => {
-      renderComponent(ctx, defaultProps);
-      await wrap(tick());
-
-      inputClick(ctx);
-      await wrap(tick());
-      await wrap(sleep(200));
-
-      const optionsList = getItemsList(ctx);
-
-      expect(optionsList).toBeInTheDocument();
-      outsideClick(ctx);
-      await wrap(tick());
-      await wrap(sleep(200));
-      expect(optionsList).not.toBeInTheDocument();
-    }));
-
-  test('открывается по клику на индикатор', (ctx) =>
-    context.start(async () => {
-      renderComponent(ctx, defaultProps);
-      await wrap(tick());
-
-      indicatorsDropdownClick(ctx);
-      await wrap(tick());
-      await wrap(sleep(200));
-      expect(getItemsList(ctx)).toBeInTheDocument();
-    }));
-
   test('отрисовываются опции', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, defaultProps);
-      await wrap(tick());
 
       inputClick(ctx);
-      await wrap(tick());
+
       expect(getItems(ctx).length).toEqual(items.length);
     }));
 
   test('отрисовываются группы', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { ...defaultProps, groups });
-      await wrap(tick());
 
       inputClick(ctx);
-      await wrap(tick());
+
       expect(getGroups(ctx).length).toEqual(groups.length);
     }));
 
@@ -262,10 +206,8 @@ describe.concurrent('Компонент Combobox', () => {
       const handleChange = vi.fn();
       const elementIndex = 1;
       renderComponent(ctx, { ...defaultProps, onChange: handleChange });
-      await wrap(tick());
 
       inputClick(ctx);
-      await wrap(tick());
 
       fireEvent.click(getItem(ctx, elementIndex));
 
@@ -285,10 +227,8 @@ describe.concurrent('Компонент Combobox', () => {
         multiple: true,
         onChange: handleChange,
       });
-      await wrap(tick());
 
       inputClick(ctx);
-      await wrap(tick());
 
       fireEvent.click(getItem(ctx, elementIndex));
 
@@ -297,34 +237,6 @@ describe.concurrent('Компонент Combobox', () => {
       expect(handleChange).toHaveBeenCalledWith([items[elementIndex]], {
         e: expect.any(Object),
       });
-    }));
-
-  test('вызывается onFocus', (ctx) =>
-    context.start(async () => {
-      const handlerFocus = vi.fn();
-      renderComponent(ctx, { ...defaultProps, onFocus: handlerFocus });
-      await wrap(tick());
-
-      expect(handlerFocus).toHaveBeenCalledTimes(0);
-
-      fireEvent.focus(getInput(ctx));
-
-      expect(handlerFocus).toHaveBeenCalledTimes(1);
-    }));
-
-  test('вызывается onBlur', (ctx) =>
-    context.start(async () => {
-      const handlerBlur = vi.fn();
-      renderComponent(ctx, { ...defaultProps, onBlur: handlerBlur });
-      await wrap(tick());
-
-      getInput(ctx).focus();
-
-      expect(handlerBlur).toHaveBeenCalledTimes(0);
-
-      getInput(ctx).blur();
-
-      expect(handlerBlur).toHaveBeenCalledTimes(1);
     }));
 
   test('renderValue отрабатывает верно', (ctx) =>
@@ -337,7 +249,6 @@ describe.concurrent('Компонент Combobox', () => {
           <div className={cnRenderValue()}>{defaultGetItemLabel(item)}</div>
         ),
       });
-      await wrap(tick());
 
       expect(getRenderValue(ctx).textContent).toEqual(
         defaultGetItemLabel(value),
@@ -360,10 +271,8 @@ describe.concurrent('Компонент Combobox', () => {
           </div>
         ),
       });
-      await wrap(tick());
 
       inputClick(ctx);
-      await wrap(tick());
 
       expect(getRenderItems(ctx).length).toEqual(items.length);
     }));
@@ -378,7 +287,6 @@ describe.concurrent('Компонент Combobox', () => {
         value: items,
         allSelectedAllLabel,
       });
-      await wrap(tick());
 
       const selectAllText = getRender(ctx).querySelector(
         `.${cnSelect('SelectAll')}`,
@@ -387,7 +295,7 @@ describe.concurrent('Компонент Combobox', () => {
       expect(selectAllText).toHaveTextContent(allSelectedAllLabel);
     }));
 
-  describe.concurrent('проверка кнопки очистки', () => {
+  describe('проверка кнопки очистки', () => {
     test('при клике вызывает onChange с null', (ctx) =>
       context.start(async () => {
         const handleChange = vi.fn();
@@ -397,7 +305,6 @@ describe.concurrent('Компонент Combobox', () => {
           value: items[0],
           onChange: handleChange,
         });
-        await wrap(tick());
 
         const clearButton = getClearButton(ctx);
         fireEvent.click(clearButton);
@@ -410,21 +317,21 @@ describe.concurrent('Компонент Combobox', () => {
     test('не отображается, если значение не выбрано', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, defaultProps);
-        await wrap(tick());
+
         expect(getClearButton(ctx)).not.toBeInTheDocument();
       }));
 
     test('отображается, если значение выбрано', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { ...defaultProps, value: items[0] });
-        await wrap(tick());
+
         expect(getClearButton(ctx)).toBeInTheDocument();
       }));
 
     test('не отображается, если значение не выбрано в multiple', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { ...defaultProps, multiple: true, value: [] });
-        await wrap(tick());
+
         expect(getClearButton(ctx)).not.toBeInTheDocument();
       }));
 
@@ -435,8 +342,82 @@ describe.concurrent('Компонент Combobox', () => {
           multiple: true,
           value: [items[0]],
         });
-        await wrap(tick());
+
         expect(getClearButton(ctx)).toBeInTheDocument();
       }));
   });
+
+  test('открывается и закрывается по клику', (ctx) =>
+    context.start(async () => {
+      renderComponent(ctx, defaultProps);
+      await wrap(tick());
+
+      inputClick(ctx);
+
+      await wrap(tick());
+      await wrap(sleep(animateTimeout));
+
+      const optionsList = getItemsList(ctx);
+
+      expect(optionsList).toBeInTheDocument();
+      inputClick(ctx);
+      await wrap(tick());
+      await wrap(sleep(animateTimeout));
+
+      expect(optionsList).not.toBeInTheDocument();
+    }));
+
+  test('открывается и закрывается по клику за пределами селекта', (ctx) =>
+    context.start(async () => {
+      renderComponent(ctx, defaultProps);
+      await wrap(tick());
+      inputClick(ctx);
+      await wrap(tick());
+      await wrap(sleep(animateTimeout));
+
+      const optionsList = getItemsList(ctx);
+
+      expect(optionsList).toBeInTheDocument();
+      outsideClick(ctx);
+      await wrap(tick());
+      await wrap(tick());
+
+      await wrap(sleep(animateTimeout));
+      expect(optionsList).not.toBeInTheDocument();
+    }));
+
+  test('открывается по клику на индикатор', (ctx) =>
+    context.start(async () => {
+      renderComponent(ctx, defaultProps);
+
+      indicatorsDropdownClick(ctx);
+
+      expect(getItemsList(ctx)).toBeInTheDocument();
+    }));
+
+  test('вызывается onFocus', (ctx) =>
+    context.start(async () => {
+      const handlerFocus = vi.fn();
+      renderComponent(ctx, { ...defaultProps, onFocus: handlerFocus });
+
+      expect(handlerFocus).toHaveBeenCalledTimes(0);
+
+      fireEvent.focus(getInput(ctx));
+
+      expect(handlerFocus).toHaveBeenCalledTimes(1);
+    }));
+
+  test('вызывается onBlur', (ctx) =>
+    context.start(async () => {
+      const handlerBlur = vi.fn();
+      renderComponent(ctx, { ...defaultProps, onBlur: handlerBlur });
+
+      getInput(ctx).focus();
+
+      expect(handlerBlur).toHaveBeenCalledTimes(0);
+
+      getInput(ctx).blur();
+
+      expect(handlerBlur).toHaveBeenCalledTimes(1);
+    }));
 });

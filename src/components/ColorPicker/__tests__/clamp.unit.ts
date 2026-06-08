@@ -8,7 +8,7 @@ import { clamp } from '../utils/clamp';
 createRoot();
 clearStack();
 
-describe.concurrent('clamp', () => {
+describe('clamp', () => {
   test('возвращает число в пределах [min, max]', () => {
     expect(clamp(0.5)).toBe(0.5);
     expect(clamp(1.5)).toBe(1);

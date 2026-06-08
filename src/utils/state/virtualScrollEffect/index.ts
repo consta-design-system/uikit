@@ -1,1 +1,1 @@
-export * from './useVirtualScroll';
+export * from './virtualScrollEffect';

@@ -11,6 +11,7 @@ import {
   TestContext,
   testPopoverId,
   testRootId,
+  tick,
 } from '##/utils/vitest';
 
 import { NotificationGroup } from '..';
@@ -49,7 +50,7 @@ const getActionButton = (ctx: TestContext) =>
 const buttonActionClick = (ctx: TestContext) =>
   fireEvent.click(getActionButton(ctx));
 
-describe.concurrent('Компонент NotificationGroup', () => {
+describe('Компонент NotificationGroup', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>
@@ -59,7 +60,7 @@ describe.concurrent('Компонент NotificationGroup', () => {
       ).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('прокидывает className', (ctx) =>
       context.start(async () => {
         const className = 'test-class-name';
@@ -96,6 +97,7 @@ describe.concurrent('Компонент NotificationGroup', () => {
 
         buttonActionClick(ctx);
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         expect(
           document.querySelector(`#${testPopoverId(ctx)} *`),

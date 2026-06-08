@@ -60,7 +60,7 @@ const getColorMarkers = (ctx: TestContext) =>
 const getColorMarker = (ctx: TestContext, index: number) =>
   getColorMarkers(ctx)[index];
 
-describe.concurrent(`${testId}`, () => {
+describe(`${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>
@@ -71,8 +71,8 @@ describe.concurrent(`${testId}`, () => {
       ).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка size', () => {
+  describe('проверка props', () => {
+    describe('проверка size', () => {
       (['xs', 's', 'm', 'l'] as const).forEach((size) => {
         test(`присваивает класс для size=${size}`, (ctx) =>
           context.start(async () => {
@@ -89,7 +89,7 @@ describe.concurrent(`${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка form', () => {
+    describe('проверка form', () => {
       (['default', 'brick', 'round'] as const).forEach((form) => {
         test(`присваивает класс для form=${form}`, (ctx) =>
           context.start(async () => {
@@ -106,7 +106,7 @@ describe.concurrent(`${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка items', () => {
+    describe('проверка items', () => {
       test('рендерит правильное количество ColorMarker', (ctx) =>
         context.start(async () => {
           const items = [
@@ -133,7 +133,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка value', () => {
+    describe('проверка value', () => {
       test('активный ColorMarker помечается active', (ctx) =>
         context.start(async () => {
           const items = [
@@ -170,7 +170,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test('присваивает дополнительный класс', (ctx) =>
         context.start(async () => {
           const className = 'custom-class';
@@ -184,7 +184,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка style', () => {
+    describe('проверка style', () => {
       test('присваивает дополнительные стили', (ctx) =>
         context.start(async () => {
           const style = { color: 'red' };
@@ -198,7 +198,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка ref', () => {
+    describe('проверка ref', () => {
       test('ref присваивается элементу', (ctx) =>
         context.start(async () => {
           const ref = React.createRef<HTMLDivElement>();
@@ -212,7 +212,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка модели', () => {
+    describe('проверка модели', () => {
       test('работает с разными моделями', (ctx) =>
         context.start(async () => {
           const items = ['#ff0000', '#00ff00'];
@@ -300,7 +300,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка onChange', () => {
+    describe('проверка onChange', () => {
       test('вызывает onChange при клике на ColorMarker с правильным цветом и событием', (ctx) =>
         context.start(async () => {
           const onChange = vi.fn();

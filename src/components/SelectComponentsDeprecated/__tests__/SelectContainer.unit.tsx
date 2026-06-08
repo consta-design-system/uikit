@@ -41,7 +41,7 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} .${cnSelect('SelectContainer')}`,
   ) as HTMLElement | null;
 
-describe.concurrent('Компонент Container', () => {
+describe('Компонент Container', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();

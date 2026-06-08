@@ -56,13 +56,13 @@ function getButton(ctx: TestContext) {
   return getRender(ctx).querySelector('button');
 }
 
-describe.concurrent('Компонент ProgressStepBarItem', () => {
+describe('Компонент ProgressStepBarItem', () => {
   test('рендерится без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('className применяется', (ctx) =>
       context.start(async () => {
         const className = 'test-class';
@@ -154,7 +154,7 @@ describe.concurrent('Компонент ProgressStepBarItem', () => {
         expect(pointRef.current).toBe(getButton(ctx));
       }));
 
-    describe.concurrent('проверка direction', () => {
+    describe('проверка direction', () => {
       progressStepBarPropDirection.forEach((direction) => {
         test(`присваивает класс для direction=${direction}`, (ctx) =>
           context.start(async () => {
@@ -166,7 +166,7 @@ describe.concurrent('Компонент ProgressStepBarItem', () => {
       });
     });
 
-    describe.concurrent('проверка size', () => {
+    describe('проверка size', () => {
       progressStepBarPropSize.forEach((size) => {
         test(`присваивает класс для size=${size}`, (ctx) =>
           context.start(async () => {
@@ -176,7 +176,7 @@ describe.concurrent('Компонент ProgressStepBarItem', () => {
       });
     });
 
-    describe.concurrent('проверка status', () => {
+    describe('проверка status', () => {
       progressStepBarPropStatus.forEach((status) => {
         test(`присваивает класс для status=${status}`, (ctx) =>
           context.start(async () => {
@@ -192,7 +192,7 @@ describe.concurrent('Компонент ProgressStepBarItem', () => {
       });
     });
 
-    describe.concurrent('проверка position', () => {
+    describe('проверка position', () => {
       progressStepBarPropPosition.forEach((position) => {
         test(`присваивает класс для position=${position}`, (ctx) =>
           context.start(async () => {

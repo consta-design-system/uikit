@@ -1,40 +1,54 @@
 import './SelectDropdown.css';
 
-import { AtomLike } from '@reatom/core';
-import { useAction, useAtom } from '@reatom/react';
-import React, { Fragment, memo, useMemo } from 'react';
+import { action, AtomLike, computed, wrap } from '@reatom/core';
+import React, { Fragment, memo } from 'react';
 
 import { FieldPropSize } from '##/components/FieldComponents';
 import {
+  ListGroupLabel,
   ListItem,
   ListLoader,
   mapVerticalSpace,
 } from '##/components/ListCanary';
 import { PopoverPropOffset } from '##/components/Popover';
-import {
-  GetOptionPropsResult,
-  isNotOptionForCreate,
-  isOptionForCreate,
-  isOptionForSelectAll,
-  OptionForCreate,
-  OptionProps,
-} from '##/components/SelectCanary/useSelect';
-import { forkRef, useForkRef } from '##/hooks/useForkRef';
-import { useVirtualScroll } from '##/hooks/useVirtualScroll';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cnCanary as cn } from '##/utils/bem';
 import { fabricIndex } from '##/utils/fabricIndex';
 import { SelectAllItem } from '##/utils/getGroups';
+import { setRefs } from '##/utils/setRef';
+import { factoryComponent } from '##/utils/state';
+import { virtualScrollEffect } from '##/utils/state/virtualScrollEffect';
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
+import {
+  GetOptionPropsResult,
+  isNotOptionForCreate,
+  isOptionForCreate,
+  isOptionForSelectAll,
+} from '../model';
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
-import { SelectGroupLabel } from '../SelectGroupLabel/SelectGroupLabel';
 import { SelectItemAll } from '../SelectItemAll/SelectItemAll';
 import { SelectLoader } from '../SelectLoader/SelectLoader';
 import { SelectPopover } from '../SelectPopover';
-import { SelectRenderItem } from '../SelectRenderItem';
-import { CountedGroup } from '../types';
+import {
+  SelectRenderItem,
+  SelectRenderItemComponent,
+} from '../SelectRenderItem';
+import {
+  OptionForCreate,
+  OptionProps,
+  SelectGroupDefault,
+  SelectItemDefault,
+  VisibleItem,
+} from '../types';
+
+const ListGroupLabelMemo = memo(ListGroupLabel);
+const SelectCreateButtonMemo = memo(SelectCreateButton);
+const SelectItemAllMemo = memo(SelectItemAll);
+const SelectRenderItemMemo = memo(
+  SelectRenderItem,
+) as SelectRenderItemComponent;
 
 export const selectDropdownForm = ['default', 'brick', 'round'] as const;
 export type SelectDropdownPropForm = (typeof selectDropdownForm)[number];
@@ -49,7 +63,10 @@ type RenderItemProps<ITEM> = {
   ref: React.Ref<HTMLDivElement>;
 };
 
-type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
+type Props<
+  ITEM = SelectItemDefault,
+  GROUP = SelectGroupDefault,
+> = PropsWithJsxAttributes<{
   size: FieldPropSize;
   controlElAtom: AtomLike<HTMLDivElement | null>;
   dropdownRef: React.Ref<HTMLDivElement | null>;
@@ -60,7 +77,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   isLoading?: boolean;
   renderItem: (props: RenderItemProps<ITEM>) => React.ReactNode | null;
   highlightedIndexAtom: AtomLike<number>;
-  visibleItemsAtom: AtomLike<(OptionForCreate | CountedGroup<ITEM, GROUP>)[]>;
+  visibleItemsAtom: AtomLike<VisibleItem<ITEM, GROUP>[]>;
   getGroupLabel?: (group: GROUP) => string;
   labelForCreate?:
     | ((label: string | undefined) => React.ReactNode)
@@ -83,6 +100,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   selectAllLabel: string;
   viewportRef?: React.RefObject<HTMLElement | null>;
   container?: Element;
+  disabledAtom: AtomLike<boolean>;
 }>;
 
 type SelectDropdownComponent = <ITEM, GROUP>(
@@ -118,233 +136,217 @@ const isVisible = (slice: [number, number], index: number) => {
   return index >= slice[0] && index < slice[1];
 };
 
-export const SelectDropdown: SelectDropdownComponent = memo((props) => {
-  const {
-    controlElAtom,
-    size,
-    getOptionActions: getOptionActionsAction,
-    dropdownRef: dropdownRefProp,
-    labelForCreate,
-    className,
-    labelForNotFound,
-    labelForEmptyItems,
-    hasItemsAtom,
-    form,
-    openAtom,
-    offset: offsetProp = 'none',
-    renderItem,
-    visibleItemsAtom,
-    isLoading,
-    getGroupLabel,
-    notFound,
-    getItemRef: getItemRefAction,
-    virtualScroll,
-    onScrollToBottom,
-    highlightedIndexAtom,
-    valueAtom,
-    getItemKeyAtom,
-    onCreate,
-    onChange,
-    onChangeAll,
-    inputValueAtom,
-    groupsCounterAtom,
-    dropdownZIndexAtom,
-    selectAllLabel,
-    container,
-    viewportRef,
-    ...otherProps
-  } = props;
-
-  const [visibleItems] = useAtom(visibleItemsAtom);
-
-  const [hasItems] = useAtom(hasItemsAtom);
-  const [open] = useAtom(openAtom);
-  const [isListMount, setIsListMount] = useAtom(open);
-
-  const [getItemKey] = useAtom(getItemKeyAtom);
-  const indent = form === 'round' ? 'increased' : 'normal';
-
-  const isListShowed = useMemo(() => {
-    return (
-      visibleItems.filter(
-        (group) =>
-          isOptionForCreate(group) ||
-          (Array.isArray(group.items) && group.items.length > 0),
-      ).length > 0
+export const SelectDropdown = factoryComponent<HTMLDivElement, Props>(
+  ({ visibleItemsAtom, onScrollToBottom }, propsAtom) => {
+    const isListShowedAtom = computed(
+      () =>
+        visibleItemsAtom().filter(
+          (group) =>
+            isOptionForCreate(group) ||
+            (Array.isArray(group.items) && group.items.length > 0),
+        ).length > 0,
     );
-  }, [visibleItems]);
+    const lengthForVirtualScrollAtom = computed(() =>
+      getLengthElements(visibleItemsAtom()),
+    );
 
-  const offset = offsetProp === 'none' ? undefined : offsetProp;
+    const { spaceTopAtom, sliceAtom, listElementsAtom, scrollElementAtom } =
+      virtualScrollEffect({
+        length: lengthForVirtualScrollAtom,
+        isActive: computed(() => !!propsAtom().virtualScroll),
+        onScrollToBottom,
+      });
 
-  const lengthForVirtualScroll = useMemo(
-    () => getLengthElements(visibleItems),
-    [visibleItems],
-  );
+    const scrollContainerRef = action((el: HTMLDivElement) =>
+      setRefs([scrollElementAtom.set, propsAtom().dropdownRef], el),
+    );
 
-  const {
-    spaceTop,
-    slice: sliceHookProp,
-    listRefs,
-    scrollElementRef,
-  } = useVirtualScroll({
-    length: lengthForVirtualScroll,
-    isActive: virtualScroll && open,
-    onScrollToBottom,
-  });
+    return (props) => {
+      const {
+        controlElAtom,
+        size,
+        getOptionActions,
+        dropdownRef,
+        labelForCreate,
+        className,
+        labelForNotFound,
+        labelForEmptyItems,
+        hasItemsAtom,
+        form,
+        openAtom,
+        offset: offsetProp = 'none',
+        renderItem,
+        visibleItemsAtom,
+        isLoading,
+        getGroupLabel,
+        notFound,
+        getItemRef,
+        virtualScroll,
+        onScrollToBottom,
+        highlightedIndexAtom,
+        valueAtom,
+        getItemKeyAtom,
+        onCreate,
+        onChange,
+        onChangeAll,
+        inputValueAtom,
+        groupsCounterAtom,
+        dropdownZIndexAtom,
+        selectAllLabel,
+        container,
+        viewportRef,
+        disabledAtom,
+        ...otherProps
+      } = props;
+      const getIndex = fabricIndex();
+      const getVirtualIndex = fabricIndex();
+      const indent = form === 'round' ? 'increased' : 'normal';
+      const offset = offsetProp === 'none' ? undefined : offsetProp;
+      const spaceTop = spaceTopAtom();
 
-  const scrollContainerRef = useForkRef([scrollElementRef, dropdownRefProp]);
-
-  const slice: [number, number] =
-    sliceHookProp[0] === 0 && virtualScroll ? [0, 50] : sliceHookProp;
-
-  const getIndex = fabricIndex();
-  const getVirtualIndex = fabricIndex();
-  const [zIndex] = useAtom(dropdownZIndexAtom);
-  const getItemRef = useAction(getItemRefAction);
-
-  const getOptionActions = useAction(getOptionActionsAction);
-
-  return (
-    <SelectPopover
-      {...otherProps}
-      controlElAtom={controlElAtom}
-      offset={offset}
-      role="listbox"
-      className={cnSelectDropdown()}
-      size={size}
-      openAtom={openAtom}
-      form={form}
-      onMount={setIsListMount}
-      style={{ zIndex }}
-      container={container}
-      viewportRef={viewportRef}
-    >
-      {isListMount && (
-        <div
-          className={cnSelectDropdown('ScrollContainer', [
-            cnMixSpace({
-              pV: mapVerticalSpace[size],
-            }),
-            cnMixScrollBar({ size: 'xs' }),
-          ])}
-          ref={scrollContainerRef}
+      return (
+        <SelectPopover
+          {...otherProps}
+          controlElAtom={controlElAtom}
+          offset={offset}
+          role="listbox"
+          className={cnSelectDropdown(null, [className])}
+          size={size}
+          openAtom={openAtom}
+          form={form}
+          style={{
+            zIndex: dropdownZIndexAtom(),
+          }}
+          container={container}
+          viewportRef={viewportRef}
+          key={cnSelectDropdown('Popover')}
         >
-          {isLoading && !isListShowed && <SelectLoader />}
           <div
-            className={cnSelectDropdown('List')}
-            key={cnSelectDropdown('List')}
-            style={{ marginTop: spaceTop }}
+            className={cnSelectDropdown('ScrollContainer', [
+              cnMixSpace({
+                pV: mapVerticalSpace[size],
+              }),
+              cnMixScrollBar({ size: 'xs' }),
+            ])}
+            ref={wrap(scrollContainerRef)}
           >
-            {visibleItems.map((group) => {
-              if (isOptionForCreate(group)) {
-                const index = getIndex();
+            {isLoading && !isListShowedAtom() && <SelectLoader />}
+            <div
+              className={cnSelectDropdown('List')}
+              key={cnSelectDropdown('List')}
+            >
+              {spaceTop > 0 && (
+                <div
+                  key={cnSelectDropdown('SpaceTop')}
+                  style={{ height: spaceTop }}
+                />
+              )}
+              {visibleItemsAtom().map((group) => {
+                if (isOptionForCreate(group)) {
+                  const index = getIndex();
+                  return (
+                    <SelectCreateButtonMemo
+                      size={size}
+                      key={cnSelectDropdown('List', { key: 'CreateButton' })}
+                      labelForCreate={labelForCreate}
+                      indent={indent}
+                      ref={getItemRef(index)}
+                      highlightedIndexAtom={highlightedIndexAtom}
+                      inputValueAtom={inputValueAtom}
+                      getOptionActions={getOptionActions}
+                      index={index}
+                      disabledAtom={disabledAtom}
+                    />
+                  );
+                }
+
+                const virtualIndex =
+                  visibleItemsAtom().length > 1 ? getVirtualIndex() : 0;
+
                 return (
-                  <SelectCreateButton
-                    size={size}
-                    key={cnSelectDropdown('List', { key: 'CreateButton' })}
-                    labelForCreate={labelForCreate}
-                    indent={indent}
-                    ref={getItemRef(index)}
-                    onClick={onCreate}
-                    highlightedIndexAtom={highlightedIndexAtom}
-                    inputValueAtom={inputValueAtom}
-                    index={index}
-                  />
+                  <Fragment key={group.key}>
+                    {group.group &&
+                      getGroupLabel &&
+                      isVisible(sliceAtom(), virtualIndex) && (
+                        <ListGroupLabelMemo
+                          label={getGroupLabel(group.group)}
+                          size={size}
+                          innerOffset={indent}
+                          ref={wrap(listElementsAtom()[virtualIndex].set)}
+                          key={`group-${group.key}-Label`}
+                        />
+                      )}
+                    {group.items.map((item) => {
+                      if (isOptionForSelectAll(item)) {
+                        const virtualIndex = getVirtualIndex();
+                        const index = getIndex();
+
+                        if (isVisible(sliceAtom(), virtualIndex)) {
+                          return (
+                            <SelectItemAllMemo
+                              label={selectAllLabel}
+                              groupId={group.key}
+                              highlightedIndexAtom={highlightedIndexAtom}
+                              groupsCounterAtom={groupsCounterAtom}
+                              key={cnSelectDropdown('SelectItemAll', {
+                                group: group.key,
+                              })}
+                              listElementsAtom={listElementsAtom}
+                              virtualIndex={virtualIndex}
+                              getItemRef={getItemRef}
+                              indent={indent}
+                              size={size}
+                              getOptionActions={getOptionActions}
+                              index={index}
+                              disabledAtom={disabledAtom}
+                            />
+                          );
+                        }
+                      } else {
+                        const virtualIndex = getVirtualIndex();
+                        const index = getIndex();
+                        if (isVisible(sliceAtom(), virtualIndex)) {
+                          return (
+                            <SelectRenderItemMemo
+                              key={cnSelectDropdown('SelectRenderItem', {
+                                group: group.key,
+                                item: getItemKeyAtom()(item),
+                                index,
+                              })}
+                              item={item}
+                              getItemKeyAtom={getItemKeyAtom}
+                              virtualIndex={virtualIndex}
+                              highlightedIndexAtom={highlightedIndexAtom}
+                              getItemRef={getItemRef}
+                              getOptionActions={getOptionActions}
+                              listElementsAtom={listElementsAtom}
+                              renderItem={renderItem}
+                              index={index}
+                              valueAtom={valueAtom}
+                            />
+                          );
+                        }
+                      }
+                    })}
+                  </Fragment>
                 );
-              }
-
-              const virtualIndex =
-                visibleItems.length > 1 ? getVirtualIndex() : 0;
-
-              return (
-                <Fragment key={group.key}>
-                  {group.group &&
-                    getGroupLabel &&
-                    isVisible(slice, virtualIndex) && (
-                      <SelectGroupLabel
-                        label={getGroupLabel(group.group)}
-                        size={size}
-                        indent={indent}
-                        ref={listRefs[virtualIndex]}
-                        key={`group-${group.key}-Label`}
-                      />
-                    )}
-                  {group.items.map((item) => {
-                    if (isOptionForSelectAll(item)) {
-                      const virtualIndex = getVirtualIndex();
-                      const index = getIndex();
-
-                      if (isVisible(slice, virtualIndex)) {
-                        return (
-                          <SelectItemAll
-                            label={selectAllLabel}
-                            groupId={group.key}
-                            highlightedIndexAtom={highlightedIndexAtom}
-                            groupsCounterAtom={groupsCounterAtom}
-                            key={cnSelectDropdown('SelectItemAll', {
-                              group: group.key,
-                            })}
-                            ref={forkRef([
-                              listRefs[virtualIndex],
-                              getItemRef(index),
-                            ])}
-                            indent={indent}
-                            size={size}
-                            {...getOptionActions({
-                              index,
-                              item,
-                            })}
-                            index={index}
-                          />
-                        );
-                      }
-                    } else {
-                      const virtualIndex = getVirtualIndex();
-                      const index = getIndex();
-                      if (isVisible(slice, virtualIndex)) {
-                        return (
-                          <SelectRenderItem
-                            key={cnSelectDropdown('SelectRenderItem', {
-                              group: group.key,
-                              item: getItemKey(item),
-                            })}
-                            getItemKeyAtom={getItemKeyAtom}
-                            highlightedIndexAtom={highlightedIndexAtom}
-                            ref={forkRef([
-                              listRefs[virtualIndex],
-                              getItemRef(index),
-                            ])}
-                            renderItem={renderItem}
-                            item={item}
-                            {...getOptionActions({
-                              index,
-                              item,
-                            })}
-                            index={index}
-                            valueAtom={valueAtom}
-                          />
-                        );
-                      }
-                    }
-                  })}
-                </Fragment>
-              );
-            })}
-            {isLoading && isListShowed && (
-              <ListLoader size={size} innerOffset={indent} />
+              })}
+              {isLoading && isListShowedAtom() && (
+                <ListLoader size={size} innerOffset={indent} />
+              )}
+            </div>
+            {!isLoading && !hasItemsAtom() && labelForEmptyItems && (
+              <ListItem
+                size={size}
+                label={labelForEmptyItems}
+                innerOffset={indent}
+              >
+                {labelForEmptyItems}
+              </ListItem>
             )}
           </div>
-          {!isLoading && !hasItems && labelForEmptyItems && (
-            <ListItem
-              size={size}
-              label={labelForEmptyItems}
-              innerOffset={indent}
-            >
-              {labelForEmptyItems}
-            </ListItem>
-          )}
-        </div>
-      )}
-    </SelectPopover>
-  );
-});
+        </SelectPopover>
+      );
+    };
+  },
+) as SelectDropdownComponent;

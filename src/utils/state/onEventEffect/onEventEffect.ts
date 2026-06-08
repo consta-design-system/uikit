@@ -4,6 +4,7 @@ export const onEventEffect = <T extends HTMLElement>(
   elementAtom: AtomLike<T | null>,
   type: keyof DocumentEventMap,
   listener: EventListener,
+  name?: string,
 ) => {
   effect(() => {
     const el = elementAtom();
@@ -11,5 +12,5 @@ export const onEventEffect = <T extends HTMLElement>(
     if (el) {
       onEvent(el, type, listener);
     }
-  });
+  }, name);
 };

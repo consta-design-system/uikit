@@ -1,4 +1,4 @@
-import { context, sleep, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -8,7 +8,7 @@ import { userEvent } from 'vitest/browser';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
 import { setRef } from '##/utils/setRef';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import {
   cnFieldArrayValueInlineControl,
@@ -17,7 +17,7 @@ import {
 } from '..';
 
 createRoot();
-// clearStack();
+clearStack();
 
 const testId = 'FieldArrayValueInlineControl';
 
@@ -64,7 +64,7 @@ const getValueItems = (ctx: TestContext) =>
 const getValueItem = (ctx: TestContext, index: number = 0) =>
   getValueItems(ctx)[index];
 
-describe.concurrent(`Компонент ${testId}`, () => {
+describe(`Компонент ${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = () =>
@@ -72,11 +72,11 @@ describe.concurrent(`Компонент ${testId}`, () => {
           value: defaultValue,
           renderValue: defaultRenderValue,
         });
-      await wrap(tick());
+
       expect(render).not.toThrow();
     }));
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test(`ref присвоен`, (ctx) =>
       context.start(async () => {
         const ref: React.RefObject<HTMLDivElement | null> = { current: null };
@@ -86,13 +86,12 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           ref: (el) => setRef(ref, el),
         });
-        await wrap(tick());
 
         expect(ref.current).toBeTruthy();
       }));
   });
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test(`Присваивается дополнительный className`, (ctx) =>
       context.start(async () => {
         const className = 'custom-class';
@@ -102,12 +101,12 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           className,
         });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(className);
       }));
   });
 
-  describe.concurrent('проверка inputRef', () => {
+  describe('проверка inputRef', () => {
     test(`inputRef присвоен`, (ctx) =>
       context.start(async () => {
         const ref: React.RefObject<HTMLDivElement | null> = { current: null };
@@ -117,13 +116,12 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           inputRef: (el) => setRef(ref, el),
         });
-        await wrap(tick());
 
         expect(ref.current).toBeTruthy();
       }));
   });
 
-  describe.concurrent('проверка inputMaxLength', () => {
+  describe('проверка inputMaxLength', () => {
     test(`inputMaxLength ограничивает ввод`, async (ctx) =>
       context.start(async () => {
         const inputMaxLength = 4;
@@ -133,16 +131,14 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           inputMaxLength,
         });
-        await wrap(tick());
 
-        await wrap(userEvent.type(getInput(ctx), 'hello word'));
-        await wrap(sleep(100));
+        await userEvent.type(getInput(ctx), 'hello word');
 
         expect(getInput(ctx).value).toEqual('hell');
       }));
   });
 
-  describe.concurrent('проверка inputDefaultValue', () => {
+  describe('проверка inputDefaultValue', () => {
     test(`inputDefaultValue присваивается`, async (ctx) =>
       context.start(async () => {
         const inputDefaultValue = 'hello word';
@@ -152,20 +148,18 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           inputDefaultValue,
         });
-        await wrap(tick());
 
         expect(getInput(ctx)).toHaveValue(inputDefaultValue);
       }));
   });
 
-  describe.concurrent('проверка value и renderValue', () => {
+  describe('проверка value и renderValue', () => {
     test(`количество элементов совпадает с переданным`, async (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
           value: defaultValue,
           renderValue: defaultRenderValue,
         });
-        await wrap(tick());
 
         expect(getValueItems(ctx).length).toEqual(defaultValue.length);
       }));
@@ -176,7 +170,6 @@ describe.concurrent(`Компонент ${testId}`, () => {
           value: defaultValue,
           renderValue: defaultRenderValue,
         });
-        await wrap(tick());
 
         const index = 0;
         expect(getValueItem(ctx, index)).toHaveAttribute(
@@ -187,7 +180,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       }));
   });
 
-  describe.concurrent('проверка input', () => {
+  describe('проверка input', () => {
     test('input получает корректный placeholder, если value пустое', (ctx) =>
       context.start(async () => {
         const placeholder = 'Введите значение';
@@ -197,7 +190,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           placeholder,
           value: [],
         });
-        await wrap(tick());
+
         expect(getInput(ctx)).toHaveAttribute('placeholder', placeholder);
       }));
 
@@ -210,7 +203,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           placeholder,
           value: ['значение'],
         });
-        await wrap(tick());
+
         expect(getInput(ctx)).not.toHaveAttribute('placeholder');
       }));
 
@@ -223,7 +216,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           inputTabIndex,
         });
-        await wrap(tick());
+
         expect(getInput(ctx)).toHaveAttribute('tabIndex', `${inputTabIndex}`);
       }));
 
@@ -236,7 +229,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           inputAriaLabel,
         });
-        await wrap(tick());
+
         expect(getInput(ctx)).toHaveAttribute('aria-label', inputAriaLabel);
       }));
 
@@ -247,19 +240,18 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           disabled: true,
         });
-        await wrap(tick());
+
         expect(getInput(ctx)).toBeDisabled();
       }));
   });
 
-  describe.concurrent('проверка handleChange', () => {
+  describe('проверка handleChange', () => {
     test('handleChange обновляет значение input', async (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
           value: defaultValue,
           renderValue: defaultRenderValue,
         });
-        await wrap(tick());
 
         const input = getInput(ctx);
         fireEvent.change(input, { target: { value: 'новое значение' } });
@@ -275,7 +267,6 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           onChange,
         });
-        await wrap(tick());
 
         const input = getInput(ctx);
         fireEvent.change(input, { target: { value: 'новое значение' } });
@@ -283,7 +274,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       }));
   });
 
-  describe.concurrent('проверка стилей', () => {
+  describe('проверка стилей', () => {
     test('применяются корректные стили для gap', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -291,7 +282,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           size: 'l',
         });
-        await wrap(tick());
+
         expect(
           getRender(ctx).style.getPropertyValue(
             '--field-array-value-inline-control-items-gap',
@@ -306,7 +297,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           size: 'm',
         });
-        await wrap(tick());
+
         expect(
           getRender(ctx).style.getPropertyValue(
             '--field-array-value-inline-control-vertical-padding',
@@ -321,7 +312,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           size: 's',
         });
-        await wrap(tick());
+
         expect(
           getRender(ctx).style.getPropertyValue(
             '--field-array-value-inline-control-input-height',
@@ -330,7 +321,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       }));
   });
 
-  describe.concurrent('проверка autoFocus', () => {
+  describe('проверка autoFocus', () => {
     test('input получает фокус при autoFocus=true', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -338,13 +329,12 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           autoFocus: true,
         });
-        await wrap(tick());
 
         expect(getInput(ctx)).toHaveFocus();
       }));
   });
 
-  describe.concurrent('проверка style', () => {
+  describe('проверка style', () => {
     test('применяется переданный style', (ctx) =>
       context.start(async () => {
         const customStyle = { backgroundColor: 'red', padding: '10px' };
@@ -354,7 +344,6 @@ describe.concurrent(`Компонент ${testId}`, () => {
           renderValue: defaultRenderValue,
           style: customStyle,
         });
-        await wrap(tick());
 
         expect(getRender(ctx)).toHaveStyle('background-color: red');
         expect(getRender(ctx)).toHaveStyle('padding: 10px');

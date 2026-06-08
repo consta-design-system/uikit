@@ -26,7 +26,7 @@ const Variants = () => {
   const multiple = useBoolean('multiple', false);
   const selectAll = useBoolean('selectAll', false, multiple);
   const groups = useBoolean('groups', false);
-  const withAnchor = useBoolean('withAnchor', false);
+  const withAnchor = useBoolean('withAnchor', true);
   const size = useSelect('size', fieldPropSize, fieldPropSizeDefault);
   const view = useSelect('view', fieldPropView, fieldPropViewDefault);
   const form = useSelect('form', ['default', 'brick', 'round'], 'default');

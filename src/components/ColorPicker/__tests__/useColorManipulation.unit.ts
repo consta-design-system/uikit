@@ -11,7 +11,7 @@ import { HsvaColor } from '../types';
 createRoot();
 clearStack();
 
-describe.concurrent('useColorManipulation', () => {
+describe('useColorManipulation', () => {
   test('возвращает начальное hsva и функцию обновления', () => {
     const color: HsvaColor = { h: 0, s: 0, v: 0, a: 1 };
     const { result } = renderHook(() =>

@@ -44,7 +44,7 @@ const getRender = (ctx: TestContext) =>
 const getInput = (ctx: TestContext) =>
   getRender(ctx)?.querySelector(`input`) as HTMLInputElement;
 
-describe.concurrent('Компонент DatePickerFieldTypeTime', () => {
+describe('Компонент DatePickerFieldTypeTime', () => {
   test('рендерит TextField с placeholder и value', (ctx) =>
     context.start(async () => {
       const value = new Date(2023, 0, 1, 12, 30, 45);

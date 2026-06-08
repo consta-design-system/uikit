@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
+import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 import {
   createRoot,
   TestContext,
@@ -142,7 +143,7 @@ function outsideClick(ctx: TestContext) {
   fireEvent.mouseDown(getOutside(ctx));
 }
 
-describe.concurrent('Компонент UserSelect', () => {
+describe('Компонент UserSelect', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, defaultProps)).not.toThrow();
@@ -227,14 +228,14 @@ describe.concurrent('Компонент UserSelect', () => {
 
       inputClick(ctx);
       await wrap(tick());
-      await wrap(sleep(200));
+      await wrap(sleep(animateTimeout));
 
       const optionsList = getItemsList(ctx);
 
       expect(optionsList).toBeInTheDocument();
       inputClick(ctx);
       await wrap(tick());
-      await wrap(sleep(200));
+      await wrap(sleep(animateTimeout));
 
       expect(optionsList).not.toBeInTheDocument();
     }));
@@ -247,14 +248,14 @@ describe.concurrent('Компонент UserSelect', () => {
 
       inputClick(ctx);
       await wrap(tick());
-      await wrap(sleep(200));
+      await wrap(sleep(animateTimeout));
 
       const optionsList = getItemsList(ctx);
 
       expect(optionsList).toBeInTheDocument();
       outsideClick(ctx);
       await wrap(tick());
-      await wrap(sleep(200));
+      await wrap(sleep(animateTimeout));
       expect(optionsList).not.toBeInTheDocument();
     }));
 
@@ -266,12 +267,12 @@ describe.concurrent('Компонент UserSelect', () => {
 
       indicatorsDropdownClick(ctx);
       await wrap(tick());
-      await wrap(sleep(200));
+      await wrap(sleep(animateTimeout));
 
       expect(getItemsList(ctx)).toBeInTheDocument();
       outsideClick(ctx);
       await wrap(tick());
-      await wrap(sleep(200));
+      await wrap(sleep(animateTimeout));
       expect(getItemsList(ctx)).not.toBeInTheDocument();
     }));
 

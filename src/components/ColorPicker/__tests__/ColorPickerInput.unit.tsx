@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { ColorPickerInput } from '../ColorPickerInput';
 import { hsvaModel } from '../models/hsvaModel';
@@ -37,7 +37,7 @@ const renderComponent = <T,>(
   });
 };
 
-describe.concurrent('Компонент ColorPickerInput', () => {
+describe('Компонент ColorPickerInput', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const value: HsvaColor = { h: 0, s: 0, v: 0, a: 1 };
@@ -47,14 +47,14 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           value,
           onChange: vi.fn(),
         });
-      await wrap(tick());
+
       expect(render).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     const value: HsvaColor = { h: 120, s: 50, v: 75, a: 1 };
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test('присваивает дополнительный класс', (ctx) =>
         context.start(async () => {
           const className = 'custom-class';
@@ -64,7 +64,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             onChange: vi.fn(),
             className,
           });
-          await wrap(tick());
+
           const element = document.querySelector(
             `#${testRootId(ctx)} *[data-testid="${testId}"]`,
           ) as HTMLElement;
@@ -72,7 +72,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
         }));
     });
 
-    describe.concurrent('проверка style', () => {
+    describe('проверка style', () => {
       test('присваивает дополнительные стили', (ctx) =>
         context.start(async () => {
           const style = { color: 'red' };
@@ -82,7 +82,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             onChange: vi.fn(),
             style,
           });
-          await wrap(tick());
+
           const element = document.querySelector(
             `#${testRootId(ctx)} *[data-testid="${testId}"]`,
           ) as HTMLElement;
@@ -90,7 +90,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
         }));
     });
 
-    describe.concurrent('проверка ref', () => {
+    describe('проверка ref', () => {
       test('ref присваивается элементу', (ctx) =>
         context.start(async () => {
           const ref = React.createRef<HTMLDivElement>();
@@ -100,7 +100,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             onChange: vi.fn(),
             ref,
           });
-          await wrap(tick());
+
           const element = document.querySelector(
             `#${testRootId(ctx)} *[data-testid="${testId}"]`,
           ) as HTMLElement;
@@ -108,7 +108,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
         }));
     });
 
-    describe.concurrent('проверка format и alpha', () => {
+    describe('проверка format и alpha', () => {
       test('при format="hex" и alpha=false рендерит одно поле', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -118,7 +118,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'hex',
             alpha: false,
           });
-          await wrap(tick());
+
           const inputs = document.querySelectorAll(
             `#${testRootId(ctx)} input`,
           ) as NodeListOf<HTMLInputElement>;
@@ -135,7 +135,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'hex',
             alpha: true,
           });
-          await wrap(tick());
+
           const textBoxes = document.querySelectorAll(
             `#${testRootId(ctx)} input[type="text"]`,
           ) as NodeListOf<HTMLInputElement>;
@@ -157,7 +157,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'rgb',
             alpha: false,
           });
-          await wrap(tick());
+
           const inputs = document.querySelectorAll(
             `#${testRootId(ctx)} input[type="number"]`,
           ) as NodeListOf<HTMLInputElement>;
@@ -173,7 +173,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'rgb',
             alpha: true,
           });
-          await wrap(tick());
+
           const inputs = document.querySelectorAll(
             `#${testRootId(ctx)} input[type="number"]`,
           ) as NodeListOf<HTMLInputElement>;
@@ -189,7 +189,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'hsl',
             alpha: false,
           });
-          await wrap(tick());
+
           const inputs = document.querySelectorAll(
             `#${testRootId(ctx)} input[type="number"]`,
           ) as NodeListOf<HTMLInputElement>;
@@ -205,7 +205,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'hsv',
             alpha: false,
           });
-          await wrap(tick());
+
           const inputs = document.querySelectorAll(
             `#${testRootId(ctx)} input[type="number"]`,
           ) as NodeListOf<HTMLInputElement>;
@@ -213,7 +213,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
         }));
     });
 
-    describe.concurrent('проверка значений по умолчанию', () => {
+    describe('проверка значений по умолчанию', () => {
       test('для hex формат отображает правильное значение', (ctx) =>
         context.start(async () => {
           const value: HsvaColor = { h: 0, s: 100, v: 100, a: 1 };
@@ -224,7 +224,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'hex',
             alpha: false,
           });
-          await wrap(tick());
+
           const inputs = document.querySelectorAll(
             `#${testRootId(ctx)} input`,
           ) as NodeListOf<HTMLInputElement>;
@@ -241,7 +241,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'rgb',
             alpha: false,
           });
-          await wrap(tick());
+
           const inputs = document.querySelectorAll(
             `#${testRootId(ctx)} input[type="number"]`,
           ) as NodeListOf<HTMLInputElement>;
@@ -260,7 +260,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'hsl',
             alpha: false,
           });
-          await wrap(tick());
+
           const inputs = document.querySelectorAll(
             `#${testRootId(ctx)} input[type="number"]`,
           ) as NodeListOf<HTMLInputElement>;
@@ -279,7 +279,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'hsv',
             alpha: false,
           });
-          await wrap(tick());
+
           const inputs = document.querySelectorAll(
             `#${testRootId(ctx)} input[type="number"]`,
           ) as NodeListOf<HTMLInputElement>;
@@ -298,7 +298,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
             format: 'rgb',
             alpha: true,
           });
-          await wrap(tick());
+
           const inputs = document.querySelectorAll(
             `#${testRootId(ctx)} input[type="number"]`,
           ) as NodeListOf<HTMLInputElement>;
@@ -308,7 +308,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
     });
   });
 
-  describe.concurrent('проверка взаимодействия', () => {
+  describe('проверка взаимодействия', () => {
     test('вызывает onChange при изменении hex поля', (ctx) =>
       context.start(async () => {
         const onChange = vi.fn();
@@ -320,7 +320,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hex',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input`,
@@ -344,7 +343,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'rgb',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -367,7 +365,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'rgb',
           alpha: true,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -391,7 +388,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hex',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input`,
@@ -403,7 +399,7 @@ describe.concurrent('Компонент ColorPickerInput', () => {
       }));
   });
 
-  describe.concurrent('проверка валидации', () => {
+  describe('проверка валидации', () => {
     test('исправляет некорректное hex значение', (ctx) =>
       context.start(async () => {
         const onChange = vi.fn();
@@ -415,7 +411,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hex',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input`,
@@ -437,7 +432,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'rgb',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -459,7 +453,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'rgb',
           alpha: true,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -481,7 +474,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hsv',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -502,7 +494,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hsv',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -523,7 +514,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hsv',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -544,7 +534,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hsl',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -565,7 +554,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hsl',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -586,7 +574,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hsl',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -607,7 +594,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'rgb',
           alpha: true,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -641,7 +627,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hsv',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,
@@ -670,7 +655,6 @@ describe.concurrent('Компонент ColorPickerInput', () => {
           format: 'hsl',
           alpha: false,
         });
-        await wrap(tick());
 
         const inputs = document.querySelectorAll(
           `#${testRootId(ctx)} input[type="number"]`,

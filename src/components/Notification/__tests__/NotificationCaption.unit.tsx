@@ -1,11 +1,11 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test } from 'vitest';
 
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { NotificationCaption } from '..';
 
@@ -38,7 +38,7 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="${testId}"]`,
   ) as HTMLElement;
 
-describe.concurrent('Компонент NotificationCaption', () => {
+describe('Компонент NotificationCaption', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>
@@ -49,7 +49,7 @@ describe.concurrent('Компонент NotificationCaption', () => {
       ).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('прокидывает className', (ctx) =>
       context.start(async () => {
         const className = 'test-class-name';
@@ -74,7 +74,6 @@ describe.concurrent('Компонент NotificationCaption', () => {
           ref,
           children: 'test',
         });
-        await wrap(tick());
 
         expect(ref.current).not.toBeNull();
         expect(ref.current).toBe(getRender(ctx));

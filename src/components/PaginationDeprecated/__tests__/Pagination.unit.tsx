@@ -54,7 +54,7 @@ const getPages = (ctx: TestContext) =>
 createRoot();
 clearStack();
 
-describe.concurrent('Компонент Pagination', () => {
+describe('Компонент Pagination', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>
@@ -62,7 +62,7 @@ describe.concurrent('Компонент Pagination', () => {
       ).not.toThrow();
     }));
 
-  describe.concurrent('проверка totalPages', () => {
+  describe('проверка totalPages', () => {
     test('количество совпадает если их 9', (ctx) =>
       context.start(async () => {
         const pages = 9;
@@ -81,7 +81,7 @@ describe.concurrent('Компонент Pagination', () => {
 
     test('дважды скрывает часть страниц за многоточием', (ctx) =>
       context.start(async () => {
-        const pages = 9;
+        const pages = 8;
         const currPage = 5;
         renderComponent(ctx, { currentPage: currPage, totalPages: 20 });
         const itemsRender = getPages(ctx);

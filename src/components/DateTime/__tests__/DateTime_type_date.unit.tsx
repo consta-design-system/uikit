@@ -46,8 +46,8 @@ const renderComponent = (
   });
 };
 
-describe.concurrent('Компонент DateTime_type_date', () => {
-  describe.concurrent('проверка value', () => {
+describe('Компонент DateTime_type_date', () => {
+  describe('проверка value', () => {
     dateTimePropView.forEach((view) => {
       test(`выбранная дата отображается верно для view=${view}`, (ctx) =>
         context.start(async () => {
@@ -87,7 +87,7 @@ describe.concurrent('Компонент DateTime_type_date', () => {
     });
   });
 
-  describe.concurrent('проверка currentVisibleDate', () => {
+  describe('проверка currentVisibleDate', () => {
     test(`Дата отображается верная при view='classic'`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -157,7 +157,7 @@ describe.concurrent('Компонент DateTime_type_date', () => {
       }));
   });
 
-  describe.concurrent('проверка onChangeCurrentVisibleDate', () => {
+  describe('проверка onChangeCurrentVisibleDate', () => {
     test(`верно срабатывает при view='classic`, (ctx) =>
       context.start(async () => {
         const handleClick = vi.fn();
@@ -226,7 +226,7 @@ describe.concurrent('Компонент DateTime_type_date', () => {
       }));
   });
 
-  describe.concurrent('проверка onChange', () => {
+  describe('проверка onChange', () => {
     dateTimePropView.forEach((view) => {
       test(`onChange отрабатывает при клике по дню месяца для view=${view}`, (ctx) =>
         context.start(async () => {
@@ -311,7 +311,7 @@ describe.concurrent('Компонент DateTime_type_date', () => {
     });
   });
 
-  describe.concurrent('проверка переключения месяца и года', () => {
+  describe('проверка переключения месяца и года', () => {
     dateTimePropView.forEach((view) => {
       test(`проверка изменения месяца через DateTimeToggler-Button для view=${view}`, (ctx) =>
         context.start(async () => {
@@ -407,7 +407,7 @@ describe.concurrent('Компонент DateTime_type_date', () => {
     });
   });
 
-  describe.concurrent('проверка locale', () => {
+  describe('проверка locale', () => {
     dateTimePropView.forEach((view) => {
       test(`проверка применения locale="fa-IR" при view="${view}"`, (ctx) =>
         context.start(async () => {
@@ -423,7 +423,7 @@ describe.concurrent('Компонент DateTime_type_date', () => {
     });
   });
 
-  describe.concurrent('проверка disableDates', () => {
+  describe('проверка disableDates', () => {
     dateTimePropView.forEach((view) => {
       test(`корректно отключает даты при view=${view}`, (ctx) =>
         context.start(async () => {

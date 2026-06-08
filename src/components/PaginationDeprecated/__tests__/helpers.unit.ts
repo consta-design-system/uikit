@@ -15,7 +15,7 @@ const DEFAULT_INFO = {
   pages: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 };
 
-describe.concurrent('getPaginationInfo', () => {
+describe('getPaginationInfo', () => {
   test('возвращает корректные данные в начале', (ctx) =>
     expect(getPaginationInfo(0, 10)).toEqual(DEFAULT_INFO));
 

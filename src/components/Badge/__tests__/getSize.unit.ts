@@ -20,7 +20,7 @@ const resultMap: Record<string, string> = {
   'xs-true': '10px',
 };
 
-describe.concurrent('Компонент Badge проверка getSize', () => {
+describe('Компонент Badge проверка getSize', () => {
   badgePropSize.forEach((size) => {
     [true, false].forEach((minified) => {
       test(`возвращает правильное значение для size=${size}, minified=${minified}`, () => {

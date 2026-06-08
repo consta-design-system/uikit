@@ -54,13 +54,13 @@ const clickCancelButton = (ctx: TestContext) => {
   }
 };
 
-describe.concurrent('Компонент SelectValueTag', () => {
+describe('Компонент SelectValueTag', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('проверка label', (ctx) =>
       context.start(async () => {
         const label = 'Test label';
@@ -68,7 +68,7 @@ describe.concurrent('Компонент SelectValueTag', () => {
         expect(getRender(ctx)).toHaveTextContent(label);
       }));
 
-    describe.concurrent('проверка size', () => {
+    describe('проверка size', () => {
       (['s', 'm', 'l'] as const).forEach((size) => {
         test(`присваивает класс для size = ${size}`, (ctx) =>
           context.start(async () => {

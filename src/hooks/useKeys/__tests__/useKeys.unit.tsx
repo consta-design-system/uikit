@@ -55,7 +55,7 @@ const getElement = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="${testId}"]`,
   ) as HTMLElement;
 
-describe.concurrent('Хук useKeys', () => {
+describe('Хук useKeys', () => {
   test('должен вызываться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>

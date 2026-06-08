@@ -42,13 +42,13 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} [data-testid="${testId}"]`,
   ) as HTMLElement | null;
 
-describe.concurrent('Компонент SelectCreateButton', () => {
+describe('Компонент SelectCreateButton', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, defaultProps)).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('должен отображаться labelForCreate', (ctx) =>
       context.start(async () => {
         const labelForCreate = 'Test label';

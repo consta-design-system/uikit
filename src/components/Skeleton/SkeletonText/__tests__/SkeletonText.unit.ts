@@ -8,7 +8,7 @@ import { getRowWidth } from '../SkeletonText';
 createRoot();
 clearStack();
 
-describe.concurrent('getRowWidth', () => {
+describe('getRowWidth', () => {
   test('возвращает 50%, если это единственная строка', () => {
     expect(getRowWidth(0, 1)).toBe('50%');
   });

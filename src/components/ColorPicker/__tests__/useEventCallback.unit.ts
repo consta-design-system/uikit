@@ -9,7 +9,7 @@ import { useEventCallback } from '../hooks/useEventCallback';
 createRoot();
 clearStack();
 
-describe.concurrent('useEventCallback', () => {
+describe('useEventCallback', () => {
   test('возвращает функцию, которая вызывает актуальный обработчик', () => {
     const handler1 = vi.fn();
     const { result, rerender } = renderHook(

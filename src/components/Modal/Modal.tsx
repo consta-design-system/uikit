@@ -1,12 +1,12 @@
 import './Modal.css';
 
 import React, { forwardRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import {
   PortalWithTheme,
   PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
+import { Transition } from '##/components/Transition';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
@@ -18,7 +18,7 @@ const cnModal = cn('Modal');
 
 export const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
   const {
-    isOpen,
+    isOpen = false,
     onClose,
     onOpen,
     hasOverlay = true,
@@ -64,7 +64,6 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>((props, ref) => {
     <Transition
       in={isOpen}
       unmountOnExit
-      nodeRef={portalRef}
       timeout={animateTimeout}
       onExited={afterClose}
     >

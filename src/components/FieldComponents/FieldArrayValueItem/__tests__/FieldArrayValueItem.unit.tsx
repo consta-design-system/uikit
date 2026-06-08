@@ -58,14 +58,14 @@ const getRemoveButton = (ctx: TestContext) =>
     `.${cnTagBase('CancelButton')}`,
   ) as HTMLButtonElement;
 
-describe.concurrent(`Компонент ${testId}`, () => {
+describe(`Компонент ${testId}`, () => {
   test('должен рендериться без ошибок', async (ctx) => {
     await context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     });
   });
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test(`ref присвоен`, async (ctx) => {
       await context.start(async () => {
         const ref: { current: HTMLSpanElement | null } = { current: null };
@@ -81,8 +81,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка className', () => {
+  describe('проверка props', () => {
+    describe('проверка className', () => {
       test(`Присваивается дополнительный className`, async (ctx) => {
         await context.start(async () => {
           const className = 'className';
@@ -96,7 +96,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка label', () => {
+    describe('проверка label', () => {
       test(`Пробрасывается children`, async (ctx) => {
         await context.start(async () => {
           const label = 'label';
@@ -110,7 +110,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка size', () => {
+    describe('проверка size', () => {
       const sizes = ['s', 'm', 'l', 'xs'] as const;
       sizes.forEach((size) => {
         test(`Должен рендериться как <${cnTagBase({
@@ -131,7 +131,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка disabled', () => {
+    describe('проверка disabled', () => {
       test(`Должен рендериться как <${cnFieldArrayValueItem({
         disabled: true,
       })}>`, async (ctx) => {
@@ -149,7 +149,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка onRemove', () => {
+    describe('проверка onRemove', () => {
       test(`отрабатывает onRemove`, async (ctx) => {
         await context.start(async () => {
           const handleClick = vi.fn();
@@ -167,7 +167,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    describe.concurrent('проверка other props', () => {
+    describe('проверка other props', () => {
       const props = ['data-attr', 'role', 'id'] as const;
 
       props.forEach((prop) => {

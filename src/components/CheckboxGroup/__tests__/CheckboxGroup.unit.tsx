@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { CheckboxGroup, cnCheckboxGroup } from '../CheckboxGroup';
 
@@ -84,57 +84,56 @@ const getItems = (ctx: TestContext) =>
 const getItemInput = (ctx: TestContext) =>
   getRender(ctx).querySelectorAll('.Checkbox-Input')[0] as HTMLInputElement;
 
-describe.concurrent('Компонент CheckboxGroup', () => {
+describe('Компонент CheckboxGroup', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка items', () => {
+  describe('проверка props', () => {
+    describe('проверка items', () => {
       test('количество совпадает с передаваемым', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           const itemsRender = getItems(ctx);
           expect(itemsRender.length).toEqual(items.length);
         }));
     });
 
-    describe.concurrent('проверка getLabel', () => {
+    describe('проверка getLabel', () => {
       test('label совпадает', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getItems(ctx)[0].textContent).toEqual(items[0].name);
         }));
     });
 
-    describe.concurrent('проверка name', () => {
+    describe('проверка name', () => {
       test(`name у элемента верный`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getItemInput(ctx).name).toEqual(testId);
         }));
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test(`присвоился дополнительный класс`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(additionalClass);
         }));
     });
 
-    describe.concurrent('проверка onChange', () => {
+    describe('проверка onChange', () => {
       test(`клик по элементу должен вызвать callback`, (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
 
           renderComponent(ctx, { onChange: handleChange });
-          await wrap(tick());
 
           const item = getItems(ctx)[0];
           fireEvent.click(item);
@@ -146,13 +145,12 @@ describe.concurrent('Компонент CheckboxGroup', () => {
         }));
     });
 
-    describe.concurrent('проверка getDisabled', () => {
+    describe('проверка getDisabled', () => {
       test(`клик по disabled элементу не должен вызывать handleChange`, (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
 
           renderComponent(ctx, { onChange: handleChange });
-          await wrap(tick());
 
           const item = getItems(ctx)[2];
           fireEvent.click(item);

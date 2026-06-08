@@ -1,15 +1,17 @@
-import { AtomLike } from '@reatom/core';
-import { useAtom } from '@reatom/react';
-import React, { forwardRef } from 'react';
+import { action, Atom, AtomLike, computed, wrap } from '@reatom/core';
+import React, { memo } from 'react';
 
 import { Checkbox } from '##/components/Checkbox';
 import { FieldPropSize } from '##/components/FieldComponents';
 import { ListItem } from '##/components/ListCanary';
 import { Text, TextPropSize } from '##/components/Text';
 import { cnCanary as cn } from '##/utils/bem';
+import { setRefs } from '##/utils/setRef';
+import { factoryComponent } from '##/utils/state';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 import { sizeCheckboxMap } from '../SelectItem';
+import { SelectAllItem } from '../types';
 
 export type SelectItemAllProps = PropsWithHTMLAttributesAndRef<
   {
@@ -21,11 +23,20 @@ export type SelectItemAllProps = PropsWithHTMLAttributesAndRef<
     highlightedIndexAtom: AtomLike<number>;
     index: number;
     label: string;
+    getOptionActions(props: { index: number; item: SelectAllItem }): {
+      onClick: (e: React.MouseEvent) => void;
+      onMouseEnter: (e: React.MouseEvent) => void;
+    };
+    getItemRef: (index: number) => React.Ref<HTMLDivElement>;
+    virtualIndex: number;
+    listElementsAtom: AtomLike<Atom<HTMLDivElement | null>[]>;
+    disabledAtom: AtomLike<boolean>;
   },
   HTMLDivElement
 >;
 
-export const cnSelectItemAll = cn('SelectItemAll');
+export const componentName = 'SelectItemAll';
+export const cnSelectItemAll = cn(componentName);
 
 const textSizeMap: Record<FieldPropSize, TextPropSize> = {
   xs: 's',
@@ -34,84 +45,114 @@ const textSizeMap: Record<FieldPropSize, TextPropSize> = {
   l: 'l',
 };
 
-const SelectItemAllCounter: React.FC<{
-  groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
-  groupId: string | number;
-  size: FieldPropSize;
-}> = ({ groupsCounterAtom, groupId, size }) => {
-  const [total] = useAtom(() => {
-    const counter = groupsCounterAtom();
-    return counter[groupId]?.[1] || 0;
-  });
-  const [selected] = useAtom(() => {
-    const counter = groupsCounterAtom();
-    return counter[groupId]?.[0] || 0;
-  });
-
-  return (
-    <Text
-      size={textSizeMap[size]}
-      lineHeight="xs"
-      view="ghost"
-    >{`${selected} из ${total}`}</Text>
-  );
-};
-
-const SelectItemAllCounterCheckbox: React.FC<{
-  groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
-  groupId: string | number;
-  size: FieldPropSize;
-}> = ({ groupsCounterAtom, groupId, size }) => {
-  const [checked] = useAtom(() => {
-    const counter = groupsCounterAtom();
-    if (counter[groupId] === undefined) {
-      return false;
+const SelectItemAllCounter = memo(
+  factoryComponent<
+    HTMLDivElement,
+    {
+      groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
+      groupId: string | number;
+      size: FieldPropSize;
     }
-    return counter[groupId][0] === counter[groupId][1];
-  });
-  const [intermediate] = useAtom(() => {
-    const counter = groupsCounterAtom();
-    if (counter[groupId] === undefined) {
-      return false;
+  >(({ groupsCounterAtom, groupId }) => {
+    const total = computed(() => groupsCounterAtom()[groupId]?.[1] || 0);
+    const selected = computed(() => groupsCounterAtom()[groupId]?.[0] || 0);
+    return ({ size, ref }) => {
+      return (
+        <Text
+          ref={ref}
+          size={textSizeMap[size]}
+          lineHeight="xs"
+          view="ghost"
+        >{`${selected()} из ${total()}`}</Text>
+      );
+    };
+  }),
+);
+
+const SelectItemAllCounterCheckbox = memo(
+  factoryComponent<
+    HTMLLabelElement,
+    {
+      groupsCounterAtom: AtomLike<Record<string, [number, number]>>;
+      groupId: string | number;
+      size: FieldPropSize;
+      disabledAtom: AtomLike<boolean>;
     }
-    return counter[groupId][0] > 0 && counter[groupId][0] < counter[groupId][1];
-  });
+  >(({ groupsCounterAtom, groupId, disabledAtom }) => {
+    const checked = computed(() => {
+      const counter = groupsCounterAtom();
+      if (counter[groupId] === undefined) {
+        return false;
+      }
+      return counter[groupId][0] === counter[groupId][1];
+    });
+    const intermediate = computed(() => {
+      const counter = groupsCounterAtom();
+      if (counter[groupId] === undefined) {
+        return false;
+      }
+      return (
+        counter[groupId][0] > 0 && counter[groupId][0] < counter[groupId][1]
+      );
+    });
+    return ({ size, ref }) => {
+      return (
+        <Checkbox
+          ref={ref}
+          checked={checked()}
+          intermediate={intermediate()}
+          size={sizeCheckboxMap[size]}
+          disabled={disabledAtom()}
+        />
+      );
+    };
+  }),
+);
 
-  return (
-    <Checkbox
-      checked={checked}
-      intermediate={intermediate}
-      size={sizeCheckboxMap[size]}
-    />
+export const SelectItemAll = factoryComponent<
+  HTMLDivElement,
+  SelectItemAllProps
+>(({ highlightedIndexAtom, listElementsAtom }, propsAtom) => {
+  const hovered = computed(() => highlightedIndexAtom() === propsAtom().index);
+  const ref = action((el: HTMLDivElement | null) =>
+    setRefs(
+      [
+        propsAtom().ref,
+        listElementsAtom()[propsAtom().virtualIndex]?.set,
+        propsAtom().getItemRef(propsAtom().index),
+      ],
+      el,
+    ),
   );
-};
 
-export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
-  (props, ref) => {
-    const {
-      size,
-      indent,
-      className,
-      groupsCounterAtom,
-      groupId,
-      highlightedIndexAtom,
-      index,
-      label,
-      ...otherProps
-    } = props;
-
-    const [hovered] = useAtom(() => highlightedIndexAtom() === index, [index]);
-
+  return ({
+    size,
+    indent,
+    className,
+    groupsCounterAtom,
+    groupId,
+    highlightedIndexAtom,
+    index,
+    getOptionActions,
+    listElementsAtom,
+    virtualIndex,
+    getItemRef,
+    disabledAtom,
+    ...otherProps
+  }) => {
     return (
       <ListItem
         {...otherProps}
-        ref={ref}
+        {...getOptionActions({
+          index,
+          item: { __optionSelectAll: true, groupKey: groupId },
+        })}
+        ref={wrap(ref)}
         className={cnSelectItemAll(null, [className])}
         role="option"
-        label={label}
         innerOffset={indent}
         size={size}
-        active={hovered}
+        active={hovered()}
         rightSide={
           <SelectItemAllCounter
             size={size}
@@ -123,10 +164,12 @@ export const SelectItemAll: React.FC<SelectItemAllProps> = forwardRef(
           <SelectItemAllCounterCheckbox
             size={size}
             groupsCounterAtom={groupsCounterAtom}
+            disabledAtom={disabledAtom}
             groupId={groupId}
           />
         }
+        disabled={disabledAtom()}
       />
     );
-  },
-);
+  };
+}, componentName);

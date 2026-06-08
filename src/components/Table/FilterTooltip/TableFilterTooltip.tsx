@@ -2,7 +2,8 @@ import './TableFilterTooltip.css';
 
 import { IconFunnel } from '@consta/icons/IconFunnel';
 import React, { useRef, useState } from 'react';
-import { Transition } from 'react-transition-group';
+
+import { Transition } from '##/components/Transition';
 
 import {
   animateTimeout,
@@ -44,7 +45,6 @@ export const TableFilterTooltip: React.FC<Props> = ({
   const [direction, setDirection] = useState<Direction>('downRight');
 
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const popoverRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -59,12 +59,7 @@ export const TableFilterTooltip: React.FC<Props> = ({
         className={cnTableFilterTooltip('Button', { isOpened }, [className])}
         iconLeft={IconFunnel}
       />
-      <Transition
-        in={isOpened}
-        unmountOnExit
-        nodeRef={popoverRef}
-        timeout={animateTimeout}
-      >
+      <Transition in={isOpened} unmountOnExit timeout={animateTimeout}>
         {(animate) => (
           <Popover
             anchorRef={buttonRef}
@@ -72,7 +67,6 @@ export const TableFilterTooltip: React.FC<Props> = ({
             direction="downRight"
             offset={4}
             arrowOffset={12}
-            ref={popoverRef}
             onSetDirection={setDirection}
             onClickOutside={onToggle}
             className={cnTableFilterTooltip('Popover', [

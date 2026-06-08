@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { forkRef } from '../../hooks/useForkRef/useForkRef';
+import { forkRef } from '##/hooks/useForkRef';
+
 import { Theme, ThemeProps } from '../Theme/Theme';
 import {
   PortalWithThemeProvider,

@@ -11,32 +11,29 @@ import {
 } from '@reatom/core';
 import React from 'react';
 
-import { forkRef } from '##/hooks/useForkRef';
 import { getGroups, GetGroupsResult } from '##/utils/getGroups';
 import { scrollIntoView } from '##/utils/scrollIntoView';
+import { setRefs } from '##/utils/setRef';
 import {
   clickOutsideEffect,
   computedSet,
   keysEffect,
   rangeAtom,
 } from '##/utils/state';
+import { isTouch } from '##/utils/state/isTouch';
 import { isNotNil } from '##/utils/type-guards';
 
 import { SelectGroupDefault, SelectItemDefault, SelectPropOnChange } from '..';
 import { PropsWithDefault } from '../defaultProps';
-import { CountedGroup, Group, SelectAllItem } from '../types';
+import {
+  CountedGroup,
+  Group,
+  OptionForCreate,
+  OptionProps,
+  SelectAllItem,
+} from '../types';
 
 type IndexForHighlight = number | ((oldIndex: number) => number);
-
-export type OptionForCreate = {
-  label: string;
-  __optionForCreate: boolean;
-};
-
-export type OptionProps<ITEM> = {
-  index: number;
-  item: ITEM | OptionForCreate | SelectAllItem;
-};
 
 export type GetOptionPropsResult = {
   onClick: (e: React.MouseEvent) => void;
@@ -102,29 +99,30 @@ export const model = <
 ) => {
   const openAtom = reatomBoolean(false, 'openAtom');
 
-  const inputElAtom = atom<HTMLInputElement | null>(null, 'inputElAtom');
-  const dropdownElAtom = atom<HTMLDivElement | null>(null, 'dropdownElAtom');
-  const controlElAtom = atom<HTMLDivElement | null>(null, 'controlElAtom');
+  const inputElAtom = atom<HTMLInputElement | null>(null);
 
-  const controlRef = action((el: HTMLDivElement) => {
-    forkRef([controlElAtom.set, propsAtom().ref])(el);
-  });
+  const dropdownElAtom = atom<HTMLDivElement | null>(null);
+  const controlElAtom = atom<HTMLDivElement | null>(null);
 
-  const dropdownRef = wrap(
-    action(
-      forkRef([dropdownElAtom.set, propsAtom().dropdownRef]),
-      'dropdownRef',
-    ),
+  const isTouchAtom = isTouch();
+
+  const controlRef = action((el: HTMLDivElement) =>
+    setRefs([controlElAtom.set, propsAtom().ref], el),
   );
-  const inputRef = action(
-    forkRef([inputElAtom.set, propsAtom().inputRef]),
-    'inputRef',
+
+  const dropdownRef = action((el: HTMLDivElement) =>
+    setRefs([dropdownElAtom.set, propsAtom().dropdownRef], el),
+  );
+
+  const inputRef = action((el: HTMLInputElement) =>
+    setRefs([inputElAtom.set, propsAtom().inputRef], el),
   );
 
   const itemsAtom = computed(() => propsAtom().items);
   const selectAllAtom = computed(() => propsAtom().selectAll);
   const valuePropAtom = computed(() => propsAtom().value);
-  const disabledAtom = computed(() => propsAtom().disabled);
+  const disabledAtom = computed(() => !!propsAtom().disabled);
+
   const inputValuePropAtom = computed(() => propsAtom().inputValue);
   const inputDefaultValuePropAtom = computed(
     () => propsAtom().inputDefaultValue,
@@ -158,16 +156,17 @@ export const model = <
     );
   }) as Computed<ITEM[]>;
 
-  const focusAtom = atom(false, 'focusAtom');
+  const focusAtom = reatomBoolean(false);
+  const inputActiveAtom = computed(() => focusAtom() || openAtom());
 
-  const highlightedIndexAtom = atom(0, 'highlightedIndexAtom');
+  const highlightedIndexAtom = atom(0);
 
   const clearButtonAtom = computed(() => {
     const { clearButton } = propsAtom();
     const inputValue = inputValueAtom();
     const value = valueAtom();
     return !!(clearButton && (value?.length || inputValue));
-  }, 'clearButtonAtom');
+  });
 
   const onInput = action((value: string | undefined = '') => {
     propsAtom().onInput?.(value);
@@ -177,7 +176,7 @@ export const model = <
     if (inputEl) {
       inputEl.value = value;
     }
-  }, 'onInput');
+  });
 
   const optionForCreateAtom = computed<OptionForCreate | undefined>(() => {
     const withOnCreate = withOnCreateAtom();
@@ -190,7 +189,7 @@ export const model = <
       __optionForCreate: true,
     };
     return optionForCreate;
-  }, ';optionForCreateAtom');
+  });
 
   const visibleItemsAtom = computed(() => {
     const selectAll = selectAllAtom();
@@ -213,7 +212,7 @@ export const model = <
     );
 
     return optionForCreate ? [optionForCreate, ...resultGroups] : resultGroups;
-  }, 'visibleItemsAtom');
+  });
 
   const groupsCounterAtom = computed(() => {
     const visibleItems = visibleItemsAtom();
@@ -274,36 +273,38 @@ export const model = <
     return !!items.length;
   });
 
-  const optionsElsAtom = rangeAtom<HTMLDivElement | null>(
+  const optionsElementsAtom = rangeAtom<HTMLDivElement | null>(
     maxHighlightIndexAtom,
     null,
   );
 
   const getOptionRef = action((index: number) =>
-    wrap(optionsElsAtom()[index]?.set),
+    wrap(optionsElementsAtom()[index]?.set),
   );
 
   const scrollToHighlightedIndex = action(() => {
-    scrollIntoView(optionsElsAtom()[highlightedIndexAtom()]()!);
+    scrollIntoView(optionsElementsAtom()[highlightedIndexAtom()]()!);
   });
 
-  const highlightIndex = action((indexForHighlight: IndexForHighlight) => {
-    const maxHighlightIndex = maxHighlightIndexAtom();
+  const highlightIndex = wrap(
+    action((indexForHighlight: IndexForHighlight) => {
+      const maxHighlightIndex = maxHighlightIndexAtom();
 
-    highlightedIndexAtom.set((state) => {
-      const newIndex = Math.min(
-        Math.max(
-          0,
-          typeof indexForHighlight === 'function'
-            ? indexForHighlight(state)
-            : indexForHighlight,
-        ),
-        maxHighlightIndex - 1,
-      );
+      highlightedIndexAtom.set((state) => {
+        const newIndex = Math.min(
+          Math.max(
+            0,
+            typeof indexForHighlight === 'function'
+              ? indexForHighlight(state)
+              : indexForHighlight,
+          ),
+          maxHighlightIndex - 1,
+        );
 
-      return newIndex;
-    });
-  });
+        return newIndex;
+      });
+    }),
+  );
 
   const removeValue = action((e: React.SyntheticEvent, valueItem: ITEM) => {
     e.stopPropagation();
@@ -346,6 +347,9 @@ export const model = <
       onInput('');
       openAtom.setFalse();
     }
+    if (!isTouchAtom()) {
+      inputElAtom()?.focus();
+    }
   });
 
   const onChangeAll = action((e: React.SyntheticEvent, items: ITEM[]) => {
@@ -380,15 +384,14 @@ export const model = <
         });
       }
     }
+    if (!isTouchAtom()) {
+      inputElAtom()?.focus();
+    }
   });
 
-  const onCreate = action((e: React.SyntheticEvent) => {
-    propsAtom().onCreate?.(inputValueAtom(), { e });
-    openAtom.setFalse();
-    onInput('');
-  });
-
-  // Handlers
+  const onCreate = action((e: React.SyntheticEvent) =>
+    propsAtom().onCreate?.(inputValueAtom(), { e }),
+  );
 
   const handleInputChange = action(
     (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -402,10 +405,8 @@ export const model = <
   const handleInputClick = action(() => {
     if (!disabledAtom()) {
       openAtom.toggle();
+      inputElAtom()?.focus();
     }
-
-    inputElAtom()?.focus();
-    // inputElementFocus();
   });
 
   const clearValue = action((e: React.SyntheticEvent) => {
@@ -426,6 +427,10 @@ export const model = <
       onChange(null, { e });
     }
     onInput('');
+
+    if (!isTouchAtom()) {
+      inputElAtom()?.focus();
+    }
   });
 
   const getHandleRemoveValue = action(
@@ -586,40 +591,30 @@ export const model = <
 
   const handleInputFocus = action(
     (e: React.FocusEvent<HTMLInputElement>): void => {
-      const { disabled, onFocus } = propsAtom();
-      const focused = focusAtom();
+      if (!disabledAtom()) {
+        focusAtom.setTrue();
 
-      if (!disabled) {
-        if (!focused) {
-          focusAtom.set(true);
-        }
-        if (typeof onFocus === 'function') {
-          onFocus(e);
-        }
+        propsAtom().onFocus?.(e);
       }
     },
   );
 
-  const handleInputBlur = wrap(
-    action((e: React.FocusEvent<HTMLInputElement>): void => {
-      const { onBlur } = propsAtom();
+  const handleInputBlur = action(
+    (e: React.FocusEvent<HTMLInputElement>): void => {
+      focusAtom.setFalse();
 
-      if (focusAtom()) {
-        focusAtom.set(false);
-      }
-
-      onBlur?.(e);
-    }),
+      propsAtom().onBlur?.(e);
+    },
   );
 
   const handleToggleDropdown = action(() => {
     const disabled = disabledAtom();
     if (openAtom()) {
       openAtom.setFalse();
-      focusAtom.set(false);
+      focusAtom.setFalse();
     } else if (!disabled) {
       openAtom.setTrue();
-      focusAtom.set(true);
+      focusAtom.setTrue();
       inputElAtom()?.focus();
     }
   });
@@ -650,7 +645,7 @@ export const model = <
     ]),
     handler: () => {
       openAtom.setFalse();
-      focusAtom.set(false);
+      focusAtom.setFalse();
     },
   });
 
@@ -672,7 +667,7 @@ export const model = <
 
   return {
     openAtom,
-    focusAtom,
+    focusAtom: inputActiveAtom,
     inputValueAtom,
     clearButtonAtom,
     onInput,
@@ -699,5 +694,7 @@ export const model = <
     groupsCounterAtom,
     dropdownZIndexAtom,
     controlElAtom,
+    optionsElementsAtom,
+    disabledAtom,
   };
 };

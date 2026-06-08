@@ -1,7 +1,7 @@
 import { IconAllDone } from '@consta/icons/IconAllDone';
 import { clearStack, context, top, wrap } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
-import { act, fireEvent } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
@@ -64,7 +64,8 @@ const getRender = (ctx: TestContext) =>
 const getItems = (ctx: TestContext) =>
   getRender(ctx).querySelectorAll(`.${cnListItem()}`);
 
-const getItem = (ctx: TestContext, index = 0) => getItems(ctx)[index];
+const getItem = (ctx: TestContext, index = 0) =>
+  getItems(ctx)[index] as HTMLDivElement;
 
 const getSide = (ctx: TestContext, index = 0, sideIndex = 0) =>
   getItem(ctx, index).querySelectorAll(`.${cnListItemGrid('Slot')}`)[sideIndex];
@@ -77,36 +78,38 @@ const getGroups = (ctx: TestContext) =>
 
 const getGroup = (ctx: TestContext, index = 0) => getGroups(ctx)[index];
 
-describe.concurrent('Компонент ContextMenu', () => {
+describe('Компонент ContextMenu', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
-      await wrap(tick());
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка items', () => {
+  describe('проверка props', () => {
+    describe('проверка items', () => {
       test('количество совпадает с передаваемым', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
+
           await wrap(tick());
+
           expect(getItems(ctx).length).toEqual(items.length);
         }));
     });
 
-    describe.concurrent('проверка getItemLabel', () => {
+    describe('проверка getItemLabel', () => {
       test('label совпадает', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
             getItemLeftSide: () => undefined,
             getItemRightSide: () => undefined,
           });
+
           await wrap(tick());
           expect(getItem(ctx).textContent).toEqual(items[0].label);
         }));
     });
 
-    describe.concurrent('проверка getGroupId', () => {
+    describe('проверка getGroupId', () => {
       test('количество групп совпадает', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { groups });
@@ -115,7 +118,7 @@ describe.concurrent('Компонент ContextMenu', () => {
         }));
     });
 
-    describe.concurrent('проверка getGroupLabel', () => {
+    describe('проверка getGroupLabel', () => {
       test('label совпадает', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { groups });
@@ -124,7 +127,7 @@ describe.concurrent('Компонент ContextMenu', () => {
         }));
     });
 
-    describe.concurrent('проверка getItemOnClick', () => {
+    describe('проверка getItemOnClick', () => {
       test('клик по элементу должен вызвать callback', (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
@@ -134,25 +137,23 @@ describe.concurrent('Компонент ContextMenu', () => {
             getItemSubMenu: () => undefined,
           });
           await wrap(tick());
-
-          fireEvent.click(getItem(ctx));
+          getItem(ctx).click();
 
           expect(handleChange).toHaveBeenCalled();
           expect(handleChange).toHaveBeenCalledTimes(1);
         }));
     });
 
-    describe.concurrent('проверка getItemStatus', () => {
+    describe('проверка getItemStatus', () => {
       test('элементу присвоился нужный модификатор', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
           await wrap(tick());
-
           expect(getItem(ctx)).toHaveClass(cnText({ view: items[0].status }));
         }));
     });
 
-    describe.concurrent('проверка getItemDisabled', () => {
+    describe('проверка getItemDisabled', () => {
       test('элементу присвоился нужный модификатор и onClick не отрабатывает', (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
@@ -162,15 +163,15 @@ describe.concurrent('Компонент ContextMenu', () => {
             getItemOnClick: (item) => () => handleChange(item),
           });
           await wrap(tick());
-
           expect(getItem(ctx)).toHaveClass(cnListItem({ disabled: true }));
 
-          fireEvent.click(getItem(ctx));
+          getItem(ctx).click();
+
           expect(handleChange).toHaveBeenCalledTimes(0);
         }));
     });
 
-    describe.concurrent('проверка getItemLeftSide', () => {
+    describe('проверка getItemLeftSide', () => {
       test('side слева отобразился', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -178,14 +179,13 @@ describe.concurrent('Компонент ContextMenu', () => {
             getItemLeftSide: () => 'test',
           });
           await wrap(tick());
-
           expect(getSide(ctx)).toHaveClass(
             cnListItemGrid('Slot', { position: 'left' }),
           );
         }));
     });
 
-    describe.concurrent('проверка getItemRightSide', () => {
+    describe('проверка getItemRightSide', () => {
       test('side справа отобразился', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -193,14 +193,13 @@ describe.concurrent('Компонент ContextMenu', () => {
             getItemRightSide: () => 'test',
           });
           await wrap(tick());
-
           expect(getSide(ctx, 0, 2)).toHaveClass(
             cnListItemGrid('Slot', { position: 'right' }),
           );
         }));
     });
 
-    describe.concurrent('проверка getItemLeftIcon', () => {
+    describe('проверка getItemLeftIcon', () => {
       test('icon слева отобразился', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -208,12 +207,11 @@ describe.concurrent('Компонент ContextMenu', () => {
             getItemLeftIcon: () => IconAllDone,
           });
           await wrap(tick());
-
           expect(getIcon(ctx, 0, 0)).toHaveClass('IconAllDone');
         }));
     });
 
-    describe.concurrent('проверка getItemRightIcon', () => {
+    describe('проверка getItemRightIcon', () => {
       test('icon справа отобразился', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -221,29 +219,26 @@ describe.concurrent('Компонент ContextMenu', () => {
             getItemRightIcon: () => IconAllDone,
           });
           await wrap(tick());
-
           expect(getIcon(ctx, 0, 2)).toHaveClass('IconAllDone');
         }));
     });
 
-    describe.concurrent('проверка getItemAs', () => {
+    describe('проверка getItemAs', () => {
       test('icon справа отобразился', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
             getItemAs: () => 'button',
           });
           await wrap(tick());
-
           expect(getItem(ctx).tagName).toEqual('BUTTON');
         }));
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test('дополнительный класс применяется', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
           await wrap(tick());
-
           expect(getRender(ctx)).toHaveClass(additionalClass);
         }));
     });

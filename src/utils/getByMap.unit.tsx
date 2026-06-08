@@ -11,7 +11,7 @@ const sizeMap: Record<SizeComponent, SizeIcon> = {
   s: 'xs',
 };
 
-describe.concurrent('helper getSizeByMap', () => {
+describe('helper getSizeByMap', () => {
   test('Выборка из объекта верная', (ctx) =>
     context.start(async () => {
       const result = getByMap(sizeMap, 'm');

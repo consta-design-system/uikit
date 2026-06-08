@@ -1,4 +1,4 @@
-import { action, Atom, AtomLike, Computed, computed } from '@reatom/core';
+import { Atom, AtomLike, Computed } from '@reatom/core';
 
 import { getElementSize } from '##/hooks/useResizeObserved';
 
@@ -9,7 +9,7 @@ export type UseVirtualScrollProps = {
 };
 
 export type UseVirtualScrollReturn<ITEM_ELEMENT, SCROLL_ELEMENT> = {
-  listRefs: Computed<
+  listElementsAtom: Computed<
     Atom<ITEM_ELEMENT | null, [newState: ITEM_ELEMENT | null]>[]
   >;
   scrollElementAtom: Atom<
@@ -22,26 +22,10 @@ export type UseVirtualScrollReturn<ITEM_ELEMENT, SCROLL_ELEMENT> = {
 
 export type Bounds = [[number, number], [number, number]];
 
-export const defaultItemsCalculationCount = 5;
+export const defaultItemsCalculationCount = 10;
 
 export const arraysIsEq = (arr1: number[], arr2: number[]) =>
   arr1.join('-') === arr2.join('-');
-
-// export const useScroll = (
-//   ref: RefObject<HTMLElement>,
-//   fn: () => void,
-//   isActive: boolean,
-// ) => {
-//   useEffect(() => {
-//     if (isActive) {
-//       ref.current?.addEventListener('scroll', fn);
-//     }
-
-//     return () => {
-//       ref.current?.removeEventListener('scroll', fn);
-//     };
-//   }, [ref.current, fn, isActive]);
-// };
 
 export const getElementHeight = (el: HTMLElement | SVGGraphicsElement | null) =>
   getElementSize(el).height;
@@ -80,65 +64,6 @@ export const calculateSavedSizes = (savedSizes: number[], sizes: number[]) => {
     }
   }
   return newSavedSizes;
-};
-
-// export const useCalculateVisiblePosition = (
-//   scrollElement: HTMLElement | null,
-//   set: (value: React.SetStateAction<[number, number]>) => void,
-//   elementsSizes: number[],
-// ) => {
-//   const elementMaxSizeRef = useMutableRef(Math.max.apply(null, elementsSizes));
-
-//   return useCallback(() => {
-//     if (!scrollElement) {
-//       return;
-//     }
-
-//     const visiblePosition = getVisiblePosition(
-//       scrollElement.scrollTop,
-//       getElementHeight(scrollElement),
-//       elementMaxSizeRef.current,
-//     );
-
-//     set((state) => {
-//       if (visiblePosition[0] !== state[0] || visiblePosition[1] !== state[1]) {
-//         return visiblePosition;
-//       }
-
-//       return state;
-//     });
-//   }, [scrollElement, set]);
-// };
-
-export const calculateVisiblePosition = (
-  scrollElementAtom: AtomLike<HTMLElement | null>,
-  set: (state: [number, number]) => [number, number],
-  elementsSizesAtom: AtomLike<number[]>,
-) => {
-  const elementMaxSize = computed(() =>
-    Math.max.apply(null, elementsSizesAtom()),
-  );
-
-  return action(() => {
-    const scrollElement = scrollElementAtom();
-    if (!scrollElement) {
-      return;
-    }
-
-    const visiblePosition = getVisiblePosition(
-      scrollElement.scrollTop,
-      getElementHeight(scrollElement),
-      elementMaxSize(),
-    );
-
-    set((state: [number, number]) => {
-      if (visiblePosition[0] !== state[0] || visiblePosition[1] !== state[1]) {
-        return visiblePosition;
-      }
-
-      return state;
-    });
-  });
 };
 
 const addCount = (

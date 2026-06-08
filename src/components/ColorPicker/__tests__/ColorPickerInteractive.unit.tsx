@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import {
   cnColorPickerInteractive,
@@ -45,7 +45,7 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="${testId}"]`,
   ) as HTMLElement;
 
-describe.concurrent('Компонент ColorPickerInteractive', () => {
+describe('Компонент ColorPickerInteractive', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = () =>
@@ -53,38 +53,37 @@ describe.concurrent('Компонент ColorPickerInteractive', () => {
           onMove: vi.fn(),
           onKey: vi.fn(),
         });
-      await wrap(tick());
+
       expect(render).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка className', () => {
+  describe('проверка props', () => {
+    describe('проверка className', () => {
       test('присваивает дополнительный класс', (ctx) =>
         context.start(async () => {
           const className = 'custom-class';
           renderComponent(ctx, { onMove: vi.fn(), onKey: vi.fn(), className });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(className);
         }));
     });
 
-    describe.concurrent('проверка style', () => {
+    describe('проверка style', () => {
       test('присваивает дополнительные стили', (ctx) =>
         context.start(async () => {
           const style = { color: 'red' };
           renderComponent(ctx, { onMove: vi.fn(), onKey: vi.fn(), style });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveStyle(style);
         }));
     });
   });
 
-  describe.concurrent('проверка взаимодействия', () => {
+  describe('проверка взаимодействия', () => {
     test('вызывает onMove при клике на левую кнопку', (ctx) =>
       context.start(async () => {
         const onMove = vi.fn();
         renderComponent(ctx, { onMove, onKey: vi.fn() });
-        await wrap(tick());
 
         const buttons = document.querySelectorAll(
           `#${testRootId(ctx)} [role="button"]`,
@@ -100,7 +99,6 @@ describe.concurrent('Компонент ColorPickerInteractive', () => {
       context.start(async () => {
         const onMove = vi.fn();
         renderComponent(ctx, { onMove, onKey: vi.fn() });
-        await wrap(tick());
 
         const buttons = document.querySelectorAll(
           `#${testRootId(ctx)} [role="button"]`,
@@ -116,7 +114,6 @@ describe.concurrent('Компонент ColorPickerInteractive', () => {
       context.start(async () => {
         const onKey = vi.fn();
         renderComponent(ctx, { onMove: vi.fn(), onKey });
-        await wrap(tick());
 
         const sliders = document.querySelectorAll(
           `#${testRootId(ctx)} [role="slider"]`,
@@ -132,7 +129,6 @@ describe.concurrent('Компонент ColorPickerInteractive', () => {
       context.start(async () => {
         const onKey = vi.fn();
         renderComponent(ctx, { onMove: vi.fn(), onKey });
-        await wrap(tick());
 
         const sliders = document.querySelectorAll(
           `#${testRootId(ctx)} [role="slider"]`,
@@ -148,7 +144,6 @@ describe.concurrent('Компонент ColorPickerInteractive', () => {
       context.start(async () => {
         const onMove = vi.fn();
         renderComponent(ctx, { onMove, onKey: vi.fn() });
-        await wrap(tick());
 
         const sliders = document.querySelectorAll(
           `#${testRootId(ctx)} [role="slider"]`,

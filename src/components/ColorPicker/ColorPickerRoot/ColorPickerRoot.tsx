@@ -1,9 +1,9 @@
 import './ColorPickerRoot.css';
 
 import React, { forwardRef, useCallback, useEffect, useRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import { Direction, Popover } from '##/components/Popover';
+import { Transition } from '##/components/Transition';
 import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
@@ -113,12 +113,7 @@ export const ColorPickerRoot: React.FC<ColorPickerRootProps> = forwardRef(
 
     if (withAnchor) {
       return (
-        <Transition
-          in={open}
-          unmountOnExit
-          timeout={animateTimeout}
-          nodeRef={contentRef}
-        >
+        <Transition in={open} unmountOnExit timeout={animateTimeout}>
           {(animate) => (
             <Popover
               {...otherProps}

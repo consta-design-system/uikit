@@ -9,7 +9,7 @@ import {
 } from '@reatom/core';
 import React, { memo } from 'react';
 
-import { forkRef } from '##/hooks/useForkRef';
+import { setRefs } from '##/utils/setRef';
 import { factoryComponent } from '##/utils/state/component';
 import { computedSet } from '##/utils/state/computedSet';
 import { resizeObservedAtom } from '##/utils/state/resizeObservedAtom';
@@ -122,6 +122,10 @@ export const FieldArrayValueInlineControl = factoryComponent<
     propsAtom().onChange?.(e);
   });
 
+  const inputRef = action((el: HTMLInputElement | null) =>
+    setRefs([inputElAtom.set, propsAtom().inputRef], el),
+  );
+
   effect(() => {
     const inputValueProp = inputValuePropAtom();
     const inputEl = inputElAtom();
@@ -139,7 +143,7 @@ export const FieldArrayValueInlineControl = factoryComponent<
     renderValue,
     value = [],
     disableInput = false,
-    inputRef,
+    inputRef: inputRefProp,
     inputMaxLength,
     onFocus,
     onBlur,
@@ -179,8 +183,8 @@ export const FieldArrayValueInlineControl = factoryComponent<
           className={cnFieldArrayValueInlineControl('Input', {
             disabled: disableInput,
           })}
-          onChange={handleChange}
-          ref={forkRef([inputRef, wrap(inputElAtom.set)])}
+          onChange={wrap(handleChange)}
+          ref={wrap(inputRef)}
           maxLength={inputMaxLength}
           onFocus={onFocus}
           onBlur={onBlur}

@@ -56,7 +56,7 @@ const getLabel = (ctx: TestContext) =>
 const getCaption = (ctx: TestContext) =>
   getRender(ctx)?.querySelector(`.FieldCaption`) as HTMLDivElement;
 
-describe.concurrent('Компонент DatePicker_field_typeDateTimeRange', () => {
+describe('Компонент DatePicker_field_typeDateTimeRange', () => {
   test('рендерит label, caption и оба поля с корректными value и placeholder', (ctx) =>
     context.start(async () => {
       const startDate = new Date(2023, 0, 1, 12, 0, 0);

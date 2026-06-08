@@ -22,7 +22,7 @@ const sortGroup = (a: number | string, b: number | string) => {
   return 0;
 };
 
-describe.concurrent('helper getGroups', () => {
+describe('helper getGroups', () => {
   test('группировка без getGroupId', () => {
     const result = getGroups(items, undefined, undefined, undefined, undefined);
 

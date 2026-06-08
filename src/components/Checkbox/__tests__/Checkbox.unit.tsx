@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { Checkbox, cnCheckbox } from '../Checkbox';
 
@@ -62,42 +62,39 @@ const getInput = (ctx: TestContext) =>
 const getLabel = (ctx: TestContext) =>
   getRender(ctx).querySelector(`.${cnCheckbox('Label')}`) as HTMLSpanElement;
 
-describe.concurrent('Компонент Checkbox', () => {
+describe('Компонент Checkbox', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
-      await wrap(tick());
     }));
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test(`Присваивается дополнительный className`, (ctx) =>
       context.start(async () => {
         const className = 'className';
 
         renderComponent(ctx, { className });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(className);
       }));
   });
 
-  describe.concurrent('проверка label', () => {
+  describe('проверка label', () => {
     test(`label отображается`, (ctx) =>
       context.start(async () => {
         const label = 'fileName';
         renderComponent(ctx, { label });
-        await wrap(tick());
+
         expect(getLabel(ctx).textContent).toEqual(label);
       }));
   });
 
-  describe.concurrent('проверка onChange', () => {
+  describe('проверка onChange', () => {
     test(`клик должен вызвать callback c ожидаемыми параметрами`, (ctx) =>
       context.start(async () => {
         const handleChange = vi.fn();
 
         renderComponent(ctx, { onChange: handleChange });
-
-        await wrap(tick());
 
         const element = getRender(ctx) as HTMLLabelElement;
 
@@ -108,12 +105,10 @@ describe.concurrent('Компонент Checkbox', () => {
       }));
   });
 
-  describe.concurrent('проверка checked', () => {
+  describe('проверка checked', () => {
     test(`checked должен быть true`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { checked: true });
-
-        await wrap(tick());
 
         expect(getInput(ctx).checked).toBe(true);
       }));
@@ -122,8 +117,6 @@ describe.concurrent('Компонент Checkbox', () => {
       context.start(async () => {
         renderComponent(ctx, { checked: false });
 
-        await wrap(tick());
-
         expect(getInput(ctx).checked).toBe(false);
       }));
 
@@ -131,44 +124,36 @@ describe.concurrent('Компонент Checkbox', () => {
       context.start(async () => {
         renderComponent(ctx, {});
 
-        await wrap(tick());
-
         expect(getInput(ctx).checked).toBe(false);
       }));
   });
 
-  describe.concurrent('проверка sizes', () => {
+  describe('проверка sizes', () => {
     sizes.forEach((size) => {
       test(`size ${size} должен быть отображен`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { size });
-
-          await wrap(tick());
 
           expect(getRender(ctx)).toHaveClass(cnCheckbox({ size }));
         }));
     });
   });
 
-  describe.concurrent('проверка views', () => {
+  describe('проверка views', () => {
     views.forEach((view) => {
       test(`view ${view} должен быть отображен`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { view });
-
-          await wrap(tick());
 
           expect(getRender(ctx)).toHaveClass(cnCheckbox({ view }));
         }));
     });
   });
 
-  describe.concurrent('проверка disabled', () => {
+  describe('проверка disabled', () => {
     test(`disabled должен быть отображен`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { disabled: true });
-
-        await wrap(tick());
 
         expect(getInput(ctx)).toBeDisabled();
       }));
@@ -177,18 +162,14 @@ describe.concurrent('Компонент Checkbox', () => {
       context.start(async () => {
         renderComponent(ctx, {});
 
-        await wrap(tick());
-
         expect(getInput(ctx)).not.toBeDisabled();
       }));
   });
 
-  describe.concurrent('проверка intermediate', () => {
+  describe('проверка intermediate', () => {
     test(`indeterminate должен быть отображен`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { intermediate: true });
-
-        await wrap(tick());
 
         expect(getRender(ctx)).toHaveClass(cnCheckbox({ intermediate: true }));
       }));
@@ -197,46 +178,38 @@ describe.concurrent('Компонент Checkbox', () => {
       context.start(async () => {
         renderComponent(ctx, {});
 
-        await wrap(tick());
-
         expect(getRender(ctx)).not.toHaveClass(
           cnCheckbox({ intermediate: true }),
         );
       }));
   });
 
-  describe.concurrent('проверка style', () => {
+  describe('проверка style', () => {
     test(`style должен быть отображен`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { style: { color: 'red' } });
-
-        await wrap(tick());
 
         expect(getRender(ctx)).toHaveStyle('color: red');
       }));
   });
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test(`ref должен быть отображен`, (ctx) =>
       context.start(async () => {
         const ref = { current: null };
 
         renderComponent(ctx, { ref });
 
-        await wrap(tick());
-
         expect(ref.current).toBe(getRender(ctx));
       }));
   });
 
-  describe.concurrent('проверка onFocus', () => {
+  describe('проверка onFocus', () => {
     test(`onFocus должен быть отображен`, (ctx) =>
       context.start(async () => {
         const onFocus = vi.fn();
 
         renderComponent(ctx, { onFocus });
-
-        await wrap(tick());
 
         fireEvent.focus(getInput(ctx));
 
@@ -244,14 +217,12 @@ describe.concurrent('Компонент Checkbox', () => {
       }));
   });
 
-  describe.concurrent('проверка onBlur', () => {
+  describe('проверка onBlur', () => {
     test(`onBlur должен быть отображен`, (ctx) =>
       context.start(async () => {
         const onBlur = vi.fn();
 
         renderComponent(ctx, { onBlur });
-
-        await wrap(tick());
 
         fireEvent.blur(getInput(ctx));
 
@@ -259,51 +230,43 @@ describe.concurrent('Компонент Checkbox', () => {
       }));
   });
 
-  describe.concurrent('проверка readOnly', () => {
+  describe('проверка readOnly', () => {
     test(`readOnly должен быть отображен`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { readOnly: true });
-
-        await wrap(tick());
 
         expect(getInput(ctx)).toHaveAttribute('readonly');
       }));
   });
 
-  describe.concurrent('проверка name', () => {
+  describe('проверка name', () => {
     test(`name должен быть отображен`, (ctx) =>
       context.start(async () => {
         const name = 'name';
 
         renderComponent(ctx, { name });
 
-        await wrap(tick());
-
         expect(getInput(ctx)).toHaveAttribute('name', name);
       }));
   });
 
-  describe.concurrent('проверка tabIndex', () => {
+  describe('проверка tabIndex', () => {
     test(`tabIndex должен быть отображен`, (ctx) =>
       context.start(async () => {
         const tabIndex = 0;
 
         renderComponent(ctx, { tabIndex });
 
-        await wrap(tick());
-
         expect(getInput(ctx)).toHaveAttribute('tabindex', tabIndex.toString());
       }));
   });
 
-  describe.concurrent('проверка onKeyDown', () => {
+  describe('проверка onKeyDown', () => {
     test(`onKeyDown должен быть отображен`, (ctx) =>
       context.start(async () => {
         const onKeyDown = vi.fn();
 
         renderComponent(ctx, { onKeyDown });
-
-        await wrap(tick());
 
         fireEvent.keyDown(getInput(ctx));
 
@@ -311,50 +274,42 @@ describe.concurrent('Компонент Checkbox', () => {
       }));
   });
 
-  describe.concurrent('проверка required', () => {
+  describe('проверка required', () => {
     test(`required должен быть отображен`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { required: true });
-
-        await wrap(tick());
 
         expect(getInput(ctx)).toHaveAttribute('required');
       }));
   });
 
-  describe.concurrent('проверка inputId', () => {
+  describe('проверка inputId', () => {
     test(`inputId должен быть отображен`, (ctx) =>
       context.start(async () => {
         const inputId = 'inputId';
 
         renderComponent(ctx, { inputId });
 
-        await wrap(tick());
-
         expect(getInput(ctx)).toHaveAttribute('id', inputId);
       }));
   });
 
-  describe.concurrent('проверка inputRef', () => {
+  describe('проверка inputRef', () => {
     test(`inputRef должен быть отображен`, (ctx) =>
       context.start(async () => {
         const inputRef = { current: null };
 
         renderComponent(ctx, { inputRef });
 
-        await wrap(tick());
-
         expect(inputRef.current).toBe(getInput(ctx));
       }));
   });
 
-  describe.concurrent('проверка align', () => {
+  describe('проверка align', () => {
     aligns.forEach((align) => {
       test(`align ${align} должен быть отображен`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { align });
-
-          await wrap(tick());
 
           expect(getRender(ctx)).toHaveClass(cnCheckbox({ align }));
         }));

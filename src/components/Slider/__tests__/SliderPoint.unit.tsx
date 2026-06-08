@@ -56,13 +56,13 @@ const getTooltip = (ctx: TestContext) =>
     `#${testPopoverId(ctx)} .Tooltip`,
   ) as HTMLElement | null;
 
-describe.concurrent('Компонент SliderPoint', () => {
+describe('Компонент SliderPoint', () => {
   test('рендерится без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, defaultProps)).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('применяет disabled', (ctx) =>
       context.start(async () => {
         const onFocus = vi.fn();
@@ -107,7 +107,7 @@ describe.concurrent('Компонент SliderPoint', () => {
       }));
   });
 
-  describe.concurrent("проверка callback'ов", () => {
+  describe("проверка callback'ов", () => {
     test('вызывает onHover при наведении', (ctx) =>
       context.start(async () => {
         const onHover = vi.fn();
@@ -159,7 +159,7 @@ describe.concurrent('Компонент SliderPoint', () => {
       }));
   });
 
-  describe.concurrent('проверка Tooltip', () => {
+  describe('проверка Tooltip', () => {
     beforeEach(() => {
       vi.useFakeTimers();
     });

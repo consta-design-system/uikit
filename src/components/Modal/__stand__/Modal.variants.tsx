@@ -48,9 +48,10 @@ const Variants = () => {
         width="default"
         onClick={setOpen.on}
       />
+
       <Modal
         className={cnModalVariants('Modal')}
-        isOpen={open}
+        isOpen
         hasOverlay={hasOverlay}
         onClickOutside={setOpen.off}
         onEsc={setOpen.off}

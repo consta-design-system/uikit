@@ -66,8 +66,8 @@ const getIsLoader = (ctx: TestContext) => {
   ) as Element | null;
 };
 
-describe.concurrent('Компонент SelectDropdown', () => {
-  describe.concurrent('должен рендериться без ошибок', () => {
+describe('Компонент SelectDropdown', () => {
+  describe('должен рендериться без ошибок', () => {
     selectDropdownForm.forEach((form) => {
       test(`для form = ${form}`, (ctx) =>
         context.start(async () => {
@@ -76,7 +76,7 @@ describe.concurrent('Компонент SelectDropdown', () => {
     });
   });
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('проверка isLoading', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { isLoading: true });

@@ -1,15 +1,18 @@
-import { clearStack, context, top } from '@reatom/core';
+import { clearStack, context, sleep, top, wrap } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
+import { userEvent } from 'vitest/browser';
 
+import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 import {
   createRoot,
   TestContext,
   testPopoverId,
   testRootId,
+  tick,
 } from '##/utils/vitest';
 
 import { cnListItem } from '../../ListCanary';
@@ -69,8 +72,8 @@ const getItems = (ctx: TestContext) =>
 
 const getItem = (ctx: TestContext, index = 0) => getItems(ctx)[index];
 
-describe.concurrent('Компонент ThemeToggler', () => {
-  describe.concurrent('с двумя темами', () => {
+describe('Компонент ThemeToggler', () => {
+  describe('с двумя темами', () => {
     test('должен рендериться без ошибок', async (ctx) => {
       await context.start(async () => {
         expect(() =>
@@ -95,7 +98,7 @@ describe.concurrent('Компонент ThemeToggler', () => {
     });
   });
 
-  describe.concurrent('с тремя темами', () => {
+  describe('с тремя темами', () => {
     test('должен рендериться без ошибок', async (ctx) => {
       await context.start(async () => {
         expect(() =>
@@ -109,6 +112,8 @@ describe.concurrent('Компонент ThemeToggler', () => {
         renderComponent(ctx, { items: exampleThemesThree });
 
         toggleClick(ctx);
+        await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         expect(getItems(ctx).length).toEqual(exampleThemesThree.length);
       });
@@ -119,6 +124,8 @@ describe.concurrent('Компонент ThemeToggler', () => {
         renderComponent(ctx, {});
 
         toggleClick(ctx);
+        await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         expect(getItem(ctx).textContent).toEqual(exampleThemesThree[0].label);
       });
@@ -133,7 +140,10 @@ describe.concurrent('Компонент ThemeToggler', () => {
         });
 
         toggleClick(ctx);
-        fireEvent.click(getItem(ctx));
+        await wrap(sleep(animateTimeout));
+        await wrap(tick());
+
+        await userEvent.click(getItem(ctx));
 
         expect(handleChange).toHaveBeenCalled();
         expect(handleChange).toHaveBeenCalledTimes(1);
@@ -144,7 +154,7 @@ describe.concurrent('Компонент ThemeToggler', () => {
     });
   });
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test('Присваивается дополнительный className', async (ctx) => {
       await context.start(async () => {
         const className = 'className';

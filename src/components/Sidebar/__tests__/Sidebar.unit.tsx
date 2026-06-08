@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -11,7 +11,6 @@ import {
   TestContext,
   testPopoverId,
   testRootId,
-  tick,
 } from '##/utils/vitest';
 
 import { cnSidebar, Sidebar, SidebarProps, sidebarPropSize } from '..';
@@ -63,7 +62,7 @@ const getOverlay = (ctx: TestContext) => {
   );
 };
 
-describe.concurrent('Компонент Sidebar', () => {
+describe('Компонент Sidebar', () => {
   test('рендерится без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, { isOpen: true })).not.toThrow();
@@ -76,7 +75,7 @@ describe.concurrent('Компонент Sidebar', () => {
         isOpen: true,
         children: <Sidebar.Content>{textContent}</Sidebar.Content>,
       });
-      await wrap(tick());
+
       const content = getSidebarContent(ctx);
       expect(content).toHaveTextContent(textContent);
     }));
@@ -88,12 +87,12 @@ describe.concurrent('Компонент Sidebar', () => {
         isOpen: true,
         children: <Sidebar.Actions>{textContent}</Sidebar.Actions>,
       });
-      await wrap(tick());
+
       const actions = getSidebarActions(ctx);
       expect(actions).toHaveTextContent(textContent);
     }));
 
-  describe.concurrent('проверка overlay', () => {
+  describe('проверка overlay', () => {
     test('overlay отображается при hasOverlay=true', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -101,7 +100,6 @@ describe.concurrent('Компонент Sidebar', () => {
           hasOverlay: true,
           children: <div>text</div>,
         });
-        await wrap(tick());
 
         expect(getOverlay(ctx)).toBeInTheDocument();
       }));
@@ -113,13 +111,13 @@ describe.concurrent('Компонент Sidebar', () => {
           hasOverlay: false,
           children: <div>text</div>,
         });
-        await wrap(tick());
+
         const overlay = getOverlay(ctx);
         expect(overlay).not.toBeInTheDocument();
       }));
   });
 
-  describe.concurrent("проверка callback'ов", () => {
+  describe("проверка callback'ов", () => {
     test('onOpen вызывается при открытии', (ctx) =>
       context.start(async () => {
         const handleOpen = vi.fn();
@@ -128,7 +126,7 @@ describe.concurrent('Компонент Sidebar', () => {
           onOpen: handleOpen,
           children: <div>text</div>,
         });
-        await wrap(tick());
+
         expect(handleOpen).toHaveBeenCalledTimes(1);
       }));
 
@@ -140,7 +138,7 @@ describe.concurrent('Компонент Sidebar', () => {
           onClose: handleClose,
           children: <div>text</div>,
         });
-        await wrap(tick());
+
         expect(handleClose).toHaveBeenCalledTimes(1);
       }));
 
@@ -152,7 +150,7 @@ describe.concurrent('Компонент Sidebar', () => {
           onEsc: handleEsc,
           children: <div>text</div>,
         });
-        await wrap(tick());
+
         fireEvent.keyUp(document, { key: 'Escape' });
         expect(handleEsc).toHaveBeenCalledTimes(1);
       }));
@@ -165,7 +163,7 @@ describe.concurrent('Компонент Sidebar', () => {
           onClickOutside: handleClickOutside,
           children: <div>text</div>,
         });
-        await wrap(tick());
+
         const overlay = getOverlay(ctx);
         expect(overlay).toBeInTheDocument();
         overlay && fireEvent.mouseDown(overlay);
@@ -173,12 +171,12 @@ describe.concurrent('Компонент Sidebar', () => {
       }));
   });
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('присваивает ref', (ctx) =>
       context.start(async () => {
         const ref = React.createRef<HTMLDivElement>();
         renderComponent(ctx, { isOpen: true, ref, children: '' });
-        await wrap(tick());
+
         expect(ref.current).toBe(getRender(ctx));
       }));
 
@@ -190,7 +188,7 @@ describe.concurrent('Компонент Sidebar', () => {
             size,
             children: <div>text</div>,
           });
-          await wrap(tick());
+
           const sidebarWindow = getRender(ctx);
           expect(sidebarWindow).toHaveClass(cnSidebar('Window', { size }));
         }));

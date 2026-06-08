@@ -4,12 +4,9 @@ export * from './useCreateAtom';
 export * from './useRefAtom';
 export * from './useResizeObservedAtom';
 export * from './component';
-export * from './computedPropAtom';
+
 export * from './resizeObservedAtom';
-export * from './pickAtom';
 export * from './rangeAtom';
-export * from './actionsPick';
-export * from './computedPick';
 export * from './useClickOutsideAtom';
 export * from './useElementAtomEventListener';
 export * from './useKeysAtom';
@@ -17,3 +14,4 @@ export * from './computedSet';
 export * from './onEventEffect';
 export * from './keysEffect';
 export * from './clickOutsideEffect';
+export * from './virtualScrollEffect';

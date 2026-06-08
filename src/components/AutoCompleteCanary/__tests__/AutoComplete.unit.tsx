@@ -4,6 +4,7 @@ import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
+import { userEvent } from 'vitest/browser';
 
 import { cnListGroupLabel, cnListItem } from '##/components/ListCanary';
 import { cnLoader } from '##/components/LoaderDeprecated';
@@ -97,12 +98,11 @@ const getItem = (ctx: TestContext, index: number = 0) =>
 const getGroups = (ctx: TestContext) =>
   getDropdown(ctx).querySelectorAll(`.${cnListGroupLabel()}`);
 
-const inputClick = (ctx: TestContext) => fireEvent.click(getInput(ctx));
-const outsideClick = (ctx: TestContext) => fireEvent.mouseDown(getOutside(ctx));
+const inputClick = (ctx: TestContext) => getInput(ctx).click();
 
 const getItemLabel = (item: AutoCompleteItemDefault) => item.label;
 const getGroupLabel = (group: AutoCompleteGroupDefault) => group.label;
-describe.concurrent(`Компонент ${testId}`, () => {
+describe(`Компонент ${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = renderComponent(ctx, {
@@ -110,12 +110,11 @@ describe.concurrent(`Компонент ${testId}`, () => {
         getItemLabel,
         value: '',
       });
-      await wrap(tick());
 
       expect(() => render).not.toThrow();
     }));
 
-  describe.concurrent('проверка type', () => {
+  describe('проверка type', () => {
     test('рендерит AutoCompleteTypeText по умолчанию', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -123,7 +122,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           getItemLabel,
           value: '',
         });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(cnAutoComplete({ type: 'text' }));
       }));
 
@@ -135,7 +134,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
           type: 'text',
           value: '',
         });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(cnAutoComplete({ type: 'text' }));
       }));
 
@@ -147,14 +146,14 @@ describe.concurrent(`Компонент ${testId}`, () => {
           type: 'textarray',
           value: [],
         });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(
           cnAutoComplete({ type: 'textarray' }),
         );
       }));
   });
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test('ref присвоен', (ctx) =>
       context.start(async () => {
         const ref = { current: null };
@@ -165,13 +164,12 @@ describe.concurrent(`Компонент ${testId}`, () => {
           ref: (el: HTMLDivElement | null) => setRef(ref, el),
           value: '',
         });
-        await wrap(tick());
 
         expect(ref.current).toBeTruthy();
       }));
   });
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test('Присваивается дополнительный className', (ctx) =>
       context.start(async () => {
         const className = 'custom-class';
@@ -181,12 +179,12 @@ describe.concurrent(`Компонент ${testId}`, () => {
           className,
           value: '',
         });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(className);
       }));
   });
 
-  describe.concurrent('рендерит элементы items', () => {
+  describe('рендерит элементы items', () => {
     test('рендерит элементы items для типа text', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -195,12 +193,9 @@ describe.concurrent(`Компонент ${testId}`, () => {
           type: 'text',
           value: 'item',
         });
-        await wrap(tick());
 
-        const input = getInput(ctx);
-        fireEvent.focus(input);
+        getInput(ctx).focus();
         await wrap(tick());
-        await wrap(sleep(animateTimeout));
 
         items.forEach((item) => {
           expect(getDropdown(ctx).textContent).toContain(item.label);
@@ -208,7 +203,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       }));
   });
 
-  describe.concurrent('рендерит группы', () => {
+  describe('рендерит группы', () => {
     test('рендерит группы', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -218,16 +213,15 @@ describe.concurrent(`Компонент ${testId}`, () => {
           groups,
           value: 'item',
         });
-        await wrap(tick());
 
         inputClick(ctx);
-        await wrap(tick());
         await wrap(sleep(animateTimeout));
+
         expect(getGroups(ctx).length).toEqual(groups.length);
       }));
   });
 
-  describe.concurrent('открывается по клику', () => {
+  describe('открывается по клику', () => {
     test('открывается по клику', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -235,17 +229,15 @@ describe.concurrent(`Компонент ${testId}`, () => {
           getItemLabel,
           value: 'item',
         });
-        await wrap(tick());
 
         inputClick(ctx);
-        await wrap(tick());
         await wrap(sleep(animateTimeout));
 
         expect(getDropdown(ctx)).toBeInTheDocument();
       }));
   });
 
-  describe.concurrent('закрывается по клику вне компонента', () => {
+  describe('закрывается по клику вне компонента', () => {
     test('закрывается по клику вне компонента', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -253,21 +245,23 @@ describe.concurrent(`Компонент ${testId}`, () => {
           getItemLabel,
           value: 'item',
         });
-        await wrap(tick());
 
         inputClick(ctx);
-        await wrap(tick());
+
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
+
         expect(getDropdown(ctx)).toBeInTheDocument();
 
-        outsideClick(ctx);
-        await wrap(tick());
+        await wrap(userEvent.click(getOutside(ctx)));
+
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
         expect(getDropdown(ctx)).not.toBeInTheDocument();
       }));
   });
 
-  describe.concurrent('проверка onChange', () => {
+  describe('проверка onChange', () => {
     test('проверка onChange', (ctx) =>
       context.start(async () => {
         const onChangeMock = vi.fn();
@@ -277,20 +271,17 @@ describe.concurrent(`Компонент ${testId}`, () => {
           onChange: onChangeMock,
           value: 'item',
         });
-        await wrap(tick());
 
-        const input = getInput(ctx);
-        fireEvent.focus(input);
-        await wrap(tick());
+        getInput(ctx).focus();
         await wrap(sleep(animateTimeout));
+        getItem(ctx, 0).click();
 
-        fireEvent.click(getItem(ctx, 0));
         expect(onChangeMock).toHaveBeenCalled();
         expect(onChangeMock).toHaveBeenCalledTimes(1);
       }));
   });
 
-  describe.concurrent('проверка onFocus', () => {
+  describe('проверка onFocus', () => {
     test('проверка onFocus', (ctx) =>
       context.start(async () => {
         const handlerFocus = vi.fn();
@@ -300,7 +291,6 @@ describe.concurrent(`Компонент ${testId}`, () => {
           onFocus: handlerFocus,
           value: '',
         });
-        await wrap(tick());
 
         expect(handlerFocus).toHaveBeenCalledTimes(0);
         getInput(ctx).focus();
@@ -308,7 +298,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       }));
   });
 
-  describe.concurrent('проверка onBlur', () => {
+  describe('проверка onBlur', () => {
     test('проверка onBlur', (ctx) =>
       context.start(async () => {
         const handlerBlur = vi.fn();
@@ -318,7 +308,6 @@ describe.concurrent(`Компонент ${testId}`, () => {
           onBlur: handlerBlur,
           value: '',
         });
-        await wrap(tick());
 
         getInput(ctx).focus();
         expect(handlerBlur).toHaveBeenCalledTimes(0);
@@ -327,7 +316,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
       }));
   });
 
-  describe.concurrent('проверка isLoading', () => {
+  describe('проверка isLoading', () => {
     test('проверка isLoading при пустом списке', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -336,11 +325,9 @@ describe.concurrent(`Компонент ${testId}`, () => {
           isLoading: true,
           value: 'item',
         });
-        await wrap(tick());
 
         fireEvent.focus(getInput(ctx));
-        await wrap(tick());
-        await wrap(sleep(animateTimeout));
+
         expect(getLoader(ctx)).toBeInTheDocument();
       }));
 
@@ -352,11 +339,9 @@ describe.concurrent(`Компонент ${testId}`, () => {
           isLoading: true,
           value: 'item',
         });
-        await wrap(tick());
 
         fireEvent.focus(getInput(ctx));
-        await wrap(tick());
-        await wrap(sleep(animateTimeout));
+
         expect(getLoader(ctx)).toBeInTheDocument();
       }));
   });

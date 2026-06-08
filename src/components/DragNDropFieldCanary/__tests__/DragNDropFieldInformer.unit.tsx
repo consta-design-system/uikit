@@ -43,7 +43,7 @@ const getButton = (ctx: TestContext) => getRender(ctx)?.querySelector('button');
 const getProgress = (ctx: TestContext) =>
   getRender(ctx)?.querySelector('[class*="DragNDropFieldInformer-Progress"]');
 
-describe.concurrent('Компонент DragNDropFieldInformer', () => {
+describe('Компонент DragNDropFieldInformer', () => {
   test('должен рендериться без ошибок', async (ctx) => {
     await context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
@@ -83,7 +83,7 @@ describe.concurrent('Компонент DragNDropFieldInformer', () => {
     });
   });
 
-  describe.concurrent('проверка icon', () => {
+  describe('проверка icon', () => {
     test('иконка отображается', async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, { icon: Icon });
@@ -105,7 +105,7 @@ describe.concurrent('Компонент DragNDropFieldInformer', () => {
     });
   });
 
-  describe.concurrent('проверка loading', () => {
+  describe('проверка loading', () => {
     test('отображается ProgressSpin при loading=true', async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, { loading: true });
@@ -137,7 +137,7 @@ describe.concurrent('Компонент DragNDropFieldInformer', () => {
     });
   });
 
-  describe.concurrent('проверка кнопки', () => {
+  describe('проверка кнопки', () => {
     test('кнопка не отображается по умолчанию', async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, {});

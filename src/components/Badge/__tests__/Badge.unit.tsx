@@ -1,5 +1,5 @@
 import { IconCamera } from '@consta/icons/IconCamera';
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -8,7 +8,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
 import { AsTags } from '##/utils/types/AsTags';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import {
   Badge,
@@ -61,95 +61,80 @@ const getIcon = (ctx: TestContext) => {
   return getRender(ctx).querySelector(`.${cnBadge('Icon')}`);
 };
 
-describe.concurrent('Компонент Badge', () => {
+describe('Компонент Badge', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = renderComponent(ctx, { onChange: vi.fn() });
-      await wrap(tick());
 
       expect(() => render).not.toThrow();
     }));
 
-  describe.concurrent('проверка form', () => {
+  describe('проверка form', () => {
     badgePropForm.forEach((form) => {
       test(`присваивает класс для form=${form}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { form });
-
-          await wrap(tick());
 
           expect(getRender(ctx)).toHaveClass(cnBadge({ form }));
         }));
     });
   });
 
-  describe.concurrent('проверка view', () => {
+  describe('проверка view', () => {
     badgePropView.forEach((view) => {
       test(`присваивает класс для view=${view}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { view });
-
-          await wrap(tick());
 
           expect(getRender(ctx)).toHaveClass(cnBadge({ view }));
         }));
     });
   });
 
-  describe.concurrent('проверка label', () => {
+  describe('проверка label', () => {
     test(`текст отображается`, (ctx) =>
       context.start(async () => {
         const label = 'label';
 
         renderComponent(ctx, { label });
 
-        await wrap(tick());
-
         expect(getRender(ctx).textContent).toEqual(label);
       }));
   });
 
-  describe.concurrent('проверка icon', () => {
+  describe('проверка icon', () => {
     test(`иконка отображается`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { icon: IconCamera });
 
-        await wrap(tick());
-
         expect(getIcon(ctx)).toHaveClass('IconCamera');
       }));
   });
 
-  describe.concurrent('проверка iconLeft', () => {
+  describe('проверка iconLeft', () => {
     test(`иконка отображается`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { iconLeft: IconCamera });
 
-        await wrap(tick());
-
         expect(getIcon(ctx)).toHaveClass('IconCamera');
       }));
   });
 
-  describe.concurrent('проверка iconRight', () => {
+  describe('проверка iconRight', () => {
     test(`иконка отображается`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { iconRight: IconCamera });
 
-        await wrap(tick());
-
         expect(getIcon(ctx)).toHaveClass('IconCamera');
       }));
   });
 
-  describe.concurrent('проверка size', () => {
+  describe('проверка size', () => {
     badgePropSize.forEach((size) => {
       [true, false].forEach((minified) => {
         test(`присваивает css переменная для size=${size} и minified=${minified}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { size, minified });
-
-            await wrap(tick());
 
             expect(
               getRender(ctx).style.getPropertyValue('--badge-size'),
@@ -159,49 +144,41 @@ describe.concurrent('Компонент Badge', () => {
     });
   });
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test(`присваивает класс для className`, (ctx) =>
       context.start(async () => {
         const className = 'className';
         renderComponent(ctx, { className });
 
-        await wrap(tick());
-
         expect(getRender(ctx)).toHaveClass(className);
       }));
   });
 
-  describe.concurrent('проверка style', () => {
+  describe('проверка style', () => {
     test(`присваивает стиль для style`, (ctx) =>
       context.start(async () => {
         const style = { color: 'red' };
         renderComponent(ctx, { style });
 
-        await wrap(tick());
-
         expect(getRender(ctx)).toHaveStyle(style);
       }));
   });
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test(`присваивает ref`, (ctx) =>
       context.start(async () => {
         const ref = { current: null };
         renderComponent(ctx, { ref });
 
-        await wrap(tick());
-
         expect(ref.current).toBe(getRender(ctx));
       }));
   });
 
-  describe.concurrent('проверка onClick', () => {
+  describe('проверка onClick', () => {
     test(`вызывает onClick при клике на компонент`, (ctx) =>
       context.start(async () => {
         const onClick = vi.fn();
         renderComponent(ctx, { onClick });
-
-        await wrap(tick());
 
         fireEvent.click(getRender(ctx));
 
@@ -209,13 +186,11 @@ describe.concurrent('Компонент Badge', () => {
       }));
   });
 
-  describe.concurrent('проверка status', () => {
+  describe('проверка status', () => {
     badgePropStatus.forEach((status) => {
       test(`присваивает css переменная для status=${status}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { status });
-
-          await wrap(tick());
 
           expect(
             getRender(ctx).style.getPropertyValue('--badge-bg-color'),
@@ -224,15 +199,13 @@ describe.concurrent('Компонент Badge', () => {
     });
   });
 
-  describe.concurrent('проверка --badge-border-color', () => {
+  describe('проверка --badge-border-color', () => {
     badgePropStatus.forEach((status) => {
       badgePropView.forEach((view) => {
         test(`присваивает css переменную для status=${status} и view=${view}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { status, view });
             const borderColor = getBorderColor(status, view);
-
-            await wrap(tick());
 
             if (borderColor) {
               expect(
@@ -248,7 +221,7 @@ describe.concurrent('Компонент Badge', () => {
     });
   });
 
-  describe.concurrent('проверка --badge-horizontal-padding', () => {
+  describe('проверка --badge-horizontal-padding', () => {
     badgePropSize.forEach((size) => {
       [true, false].forEach((minified) => {
         badgePropForm.forEach((form) => {
@@ -260,8 +233,6 @@ describe.concurrent('Компонент Badge', () => {
                 form,
                 minified,
               );
-
-              await wrap(tick());
 
               if (horizontalPadding) {
                 expect(
@@ -282,15 +253,13 @@ describe.concurrent('Компонент Badge', () => {
     });
   });
 
-  describe.concurrent('проверка --badge-minified-border-size', () => {
+  describe('проверка --badge-minified-border-size', () => {
     badgePropSize.forEach((size) => {
       [true, false].forEach((minified) => {
         test(`присваивает css переменную для size=${size} и minified=${minified}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { size, minified });
             const minifiedBorderSize = getMinifiedBorderSize(size, minified);
-
-            await wrap(tick());
 
             if (minifiedBorderSize) {
               expect(
@@ -310,15 +279,13 @@ describe.concurrent('Компонент Badge', () => {
     });
   });
 
-  describe.concurrent('проверка --badge-text-color', () => {
+  describe('проверка --badge-text-color', () => {
     badgePropStatus.forEach((status) => {
       badgePropView.forEach((view) => {
         test(`присваивает css переменную для status=${status} и view=${view}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { status, view });
             const textColor = getTextColor(status, view);
-
-            await wrap(tick());
 
             if (textColor) {
               expect(
@@ -334,14 +301,12 @@ describe.concurrent('Компонент Badge', () => {
     });
   });
 
-  describe.concurrent('проверка --badge-text-size', () => {
+  describe('проверка --badge-text-size', () => {
     badgePropSize.forEach((size) => {
       test(`присваивает css переменную для size=${size}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { size });
           const textSize = getTextSize(size);
-
-          await wrap(tick());
 
           if (textSize) {
             expect(
@@ -356,15 +321,13 @@ describe.concurrent('Компонент Badge', () => {
     });
   });
 
-  describe.concurrent('проверка --badge-degree-mixing', () => {
+  describe('проверка --badge-degree-mixing', () => {
     badgePropStatus.forEach((status) => {
       badgePropView.forEach((view) => {
         test(`присваивает css переменную для status=${status} и view=${view}`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { status, view });
             const degreeMixing = getDegreeMixing(status, view);
-
-            await wrap(tick());
 
             if (degreeMixing) {
               expect(
@@ -380,13 +343,11 @@ describe.concurrent('Компонент Badge', () => {
     });
   });
 
-  describe.concurrent('проверка as', () => {
+  describe('проверка as', () => {
     (['a', 'button', 'div', 'span'] as AsTags[]).forEach((el) => {
       test(`должен рендериться как <${el}>`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { as: el });
-
-          await wrap(tick());
 
           const button = document.querySelector(
             `#${testRootId(ctx)} *[data-testid=${testId}]`,
@@ -397,12 +358,10 @@ describe.concurrent('Компонент Badge', () => {
     });
   });
 
-  describe.concurrent('проверка minified', () => {
+  describe('проверка minified', () => {
     test(`модификатор применяется`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { minified: true });
-
-        await wrap(tick());
 
         expect(getRender(ctx)).toHaveClass(cnBadge({ minified: true }));
       }));
@@ -411,8 +370,6 @@ describe.concurrent('Компонент Badge', () => {
       context.start(async () => {
         const label = 'label';
         renderComponent(ctx, { minified: true, label });
-
-        await wrap(tick());
 
         expect(getRender(ctx).title).toEqual(label);
       }));
@@ -424,8 +381,6 @@ describe.concurrent('Компонент Badge', () => {
           label: 'label',
           icon: IconCamera,
         });
-
-        await wrap(tick());
 
         expect(getRender(ctx)).toBeEmptyDOMElement();
       }));

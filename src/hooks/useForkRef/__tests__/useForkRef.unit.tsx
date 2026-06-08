@@ -82,7 +82,7 @@ const getElement = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="test-element"]`,
   ) as HTMLElement;
 
-describe.concurrent('Хук useForkRef', () => {
+describe('Хук useForkRef', () => {
   test('должен корректно объединять refs', (ctx) =>
     context.start(async () => {
       TestComponentWithRefs({ ctx, useSecondRef: true });

@@ -1,4 +1,3 @@
-import { presetGpnDefault, Theme } from '@consta/uikit/Theme';
 import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
@@ -6,6 +5,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
+import { presetGpnDefault, Theme } from '##/components/Theme';
 import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { DateTime } from '../DateTime';
@@ -33,8 +33,8 @@ const renderComponent = (ctx: TestContext, props: any = {}) => {
   });
 };
 
-describe.concurrent('Компонент DateTime_type_time', () => {
-  describe.concurrent('проверка value', () => {
+describe('Компонент DateTime_type_time', () => {
+  describe('проверка value', () => {
     test(`выбранная дата отображается верно`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { value: new Date(1970, 0, 1, 10, 15, 20) });
@@ -45,7 +45,7 @@ describe.concurrent('Компонент DateTime_type_time', () => {
       }));
   });
 
-  describe.concurrent('проверка onChange', () => {
+  describe('проверка onChange', () => {
     test('onChange отрабатывает в допустимом интервале', (ctx) =>
       context.start(async () => {
         const onChange = vi.fn();
@@ -144,7 +144,7 @@ describe.concurrent('Компонент DateTime_type_time', () => {
   //  (начиная со значения 5 для multiplicityHours ожидается (0, 5, 10, 15, 20),
   //  а для multiplicityMinutes и multiplicitySeconds начиная со значения 7 ожидается (0, 7, 14, 21, 28, 35, 42, 49, 56),
   //  но последних значений нет)
-  describe.concurrent('проверка multiplicity', () => {
+  describe('проверка multiplicity', () => {
     test('проверка multiplicityHours и возможности менять часы', (ctx) =>
       context.start(async () => {
         const onChange = vi.fn((value) => new Date(value.value));
@@ -215,10 +215,10 @@ describe.concurrent('Компонент DateTime_type_time', () => {
       }));
   });
 
-  describe.concurrent('проверка timeOptions для hours/minutes/seconds', () => {
+  describe('проверка timeOptions для hours/minutes/seconds', () => {
     const baseDate = new Date(1970, 0, 1, 11, 34, 56);
 
-    describe.concurrent('проверка step (sequence from 0)', () => {
+    describe('проверка step (sequence from 0)', () => {
       const steps = [0, 1, 2, 5, 10];
 
       steps.forEach((step) => {
@@ -297,7 +297,7 @@ describe.concurrent('Компонент DateTime_type_time', () => {
       });
     });
 
-    describe.concurrent('проверка start', () => {
+    describe('проверка start', () => {
       const startValues1 = [-10, 0, 5, 10, 30];
       const startValues2 = [-10, 0, 5, 10, 30, 59, 60];
 
@@ -365,78 +365,75 @@ describe.concurrent('Компонент DateTime_type_time', () => {
       });
     });
 
-    describe.concurrent(
-      'проверка timeOptions.stop (stop to N, start=0, step=1)',
-      () => {
-        const stopValues1 = [-5, 5, 10, 20, 30];
-        const stopValues2 = [-10, 10, 20, 50, 70];
+    describe('проверка timeOptions.stop (stop to N, start=0, step=1)', () => {
+      const stopValues1 = [-5, 5, 10, 20, 30];
+      const stopValues2 = [-10, 10, 20, 50, 70];
 
-        stopValues1.forEach((stop) => {
-          test(`проверка timeOptions.hours.stop = ${stop} (start=0, step=1)`, (ctx) =>
-            context.start(async () => {
-              const onChange = vi.fn((value) => new Date(value.value));
-              renderComponent(ctx, {
-                value: baseDate,
-                onChange,
-                timeOptions: { hours: { stop } },
-              });
-              const hoursColumn = getColumnAllItem(ctx, 0);
-              const clampedStop = Math.max(0, Math.min(23, stop));
-              expect(hoursColumn.length).toEqual(clampedStop + 1);
-              const lastHour = getColumnAllItem(ctx, 0)[clampedStop];
-              fireEvent.click(lastHour);
-              const date = new Date(1970, 0, 1, clampedStop);
-              expect(onChange).toHaveBeenCalledWith(date, {
-                e: expect.any(Object),
-              });
-            }));
-        });
+      stopValues1.forEach((stop) => {
+        test(`проверка timeOptions.hours.stop = ${stop} (start=0, step=1)`, (ctx) =>
+          context.start(async () => {
+            const onChange = vi.fn((value) => new Date(value.value));
+            renderComponent(ctx, {
+              value: baseDate,
+              onChange,
+              timeOptions: { hours: { stop } },
+            });
+            const hoursColumn = getColumnAllItem(ctx, 0);
+            const clampedStop = Math.max(0, Math.min(23, stop));
+            expect(hoursColumn.length).toEqual(clampedStop + 1);
+            const lastHour = getColumnAllItem(ctx, 0)[clampedStop];
+            fireEvent.click(lastHour);
+            const date = new Date(1970, 0, 1, clampedStop);
+            expect(onChange).toHaveBeenCalledWith(date, {
+              e: expect.any(Object),
+            });
+          }));
+      });
 
-        stopValues2.forEach((stop) => {
-          test(`проверка timeOptions.minutes.stop = ${stop} (start=0, step=1)`, (ctx) =>
-            context.start(async () => {
-              const onChange = vi.fn((value) => new Date(value.value));
-              renderComponent(ctx, {
-                value: baseDate,
-                onChange,
-                timeOptions: { minutes: { stop } },
-              });
-              const minutesColumn = getColumnAllItem(ctx, 1);
-              const clampedStop = Math.max(0, Math.min(59, stop));
-              expect(minutesColumn.length).toEqual(clampedStop + 1);
-              const lastMinutes = getColumnAllItem(ctx, 1)[clampedStop];
-              fireEvent.click(lastMinutes);
-              const date = new Date(1970, 0, 1, 11, clampedStop);
-              expect(onChange).toHaveBeenCalledWith(date, {
-                e: expect.any(Object),
-              });
-            }));
-        });
+      stopValues2.forEach((stop) => {
+        test(`проверка timeOptions.minutes.stop = ${stop} (start=0, step=1)`, (ctx) =>
+          context.start(async () => {
+            const onChange = vi.fn((value) => new Date(value.value));
+            renderComponent(ctx, {
+              value: baseDate,
+              onChange,
+              timeOptions: { minutes: { stop } },
+            });
+            const minutesColumn = getColumnAllItem(ctx, 1);
+            const clampedStop = Math.max(0, Math.min(59, stop));
+            expect(minutesColumn.length).toEqual(clampedStop + 1);
+            const lastMinutes = getColumnAllItem(ctx, 1)[clampedStop];
+            fireEvent.click(lastMinutes);
+            const date = new Date(1970, 0, 1, 11, clampedStop);
+            expect(onChange).toHaveBeenCalledWith(date, {
+              e: expect.any(Object),
+            });
+          }));
+      });
 
-        stopValues2.forEach((stop) => {
-          test(`проверка timeOptions.seconds.stop = ${stop} (start=0, step=1)`, (ctx) =>
-            context.start(async () => {
-              const onChange = vi.fn((value) => new Date(value.value));
-              renderComponent(ctx, {
-                value: baseDate,
-                onChange,
-                timeOptions: { seconds: { stop } },
-              });
-              const secondsColumn = getColumnAllItem(ctx, 2);
-              const clampedStop = Math.max(0, Math.min(59, stop));
-              expect(secondsColumn.length).toEqual(clampedStop + 1);
-              const lastSeconds = getColumnAllItem(ctx, 2)[clampedStop];
-              fireEvent.click(lastSeconds);
-              const date = new Date(1970, 0, 1, 11, 34, clampedStop);
-              expect(onChange).toHaveBeenCalledWith(date, {
-                e: expect.any(Object),
-              });
-            }));
-        });
-      },
-    );
+      stopValues2.forEach((stop) => {
+        test(`проверка timeOptions.seconds.stop = ${stop} (start=0, step=1)`, (ctx) =>
+          context.start(async () => {
+            const onChange = vi.fn((value) => new Date(value.value));
+            renderComponent(ctx, {
+              value: baseDate,
+              onChange,
+              timeOptions: { seconds: { stop } },
+            });
+            const secondsColumn = getColumnAllItem(ctx, 2);
+            const clampedStop = Math.max(0, Math.min(59, stop));
+            expect(secondsColumn.length).toEqual(clampedStop + 1);
+            const lastSeconds = getColumnAllItem(ctx, 2)[clampedStop];
+            fireEvent.click(lastSeconds);
+            const date = new Date(1970, 0, 1, 11, 34, clampedStop);
+            expect(onChange).toHaveBeenCalledWith(date, {
+              e: expect.any(Object),
+            });
+          }));
+      });
+    });
 
-    describe.concurrent('проверка start/stop/step комбинации', () => {
+    describe('проверка start/stop/step комбинации', () => {
       test(`проверка timeOptions.hours.step=5, start=5, stop=15 (combination, no swap)`, (ctx) =>
         context.start(async () => {
           const onChange = vi.fn((value) => new Date(value.value));
@@ -600,164 +597,157 @@ describe.concurrent('Компонент DateTime_type_time', () => {
         }));
     });
 
-    describe.concurrent(
-      'проверка custom timeOptions (кастомный список значений)',
-      () => {
-        test('корректный custom список для hours', (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: baseDate,
-              onChange,
-              timeOptions: { hours: [0, 1, 5, 10, 15, 23] },
-            });
-            const hoursColumn = getColumnAllItem(ctx, 0);
-            expect(hoursColumn).toHaveLength(6);
-            expect(hoursColumn[0]).toHaveTextContent('00');
-            expect(hoursColumn[5]).toHaveTextContent('23');
-            fireEvent.click(hoursColumn[3]);
-            const date = new Date(1970, 0, 1, 10);
-            expect(onChange).toHaveBeenCalledWith(date, {
-              e: expect.any(Object),
-            });
-          }));
+    describe('проверка custom timeOptions (кастомный список значений)', () => {
+      test('корректный custom список для hours', (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: baseDate,
+            onChange,
+            timeOptions: { hours: [0, 1, 5, 10, 15, 23] },
+          });
+          const hoursColumn = getColumnAllItem(ctx, 0);
+          expect(hoursColumn).toHaveLength(6);
+          expect(hoursColumn[0]).toHaveTextContent('00');
+          expect(hoursColumn[5]).toHaveTextContent('23');
+          fireEvent.click(hoursColumn[3]);
+          const date = new Date(1970, 0, 1, 10);
+          expect(onChange).toHaveBeenCalledWith(date, {
+            e: expect.any(Object),
+          });
+        }));
 
-        test('повторы и числа вне диапазона для hours — фильтруются', (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: baseDate,
-              onChange,
-              timeOptions: { hours: [-5, 0, 0, 1, 10, 25, 40, 40] },
-            });
-            const hoursColumn = getColumnAllItem(ctx, 0);
-            expect(hoursColumn).toHaveLength(3);
-            const labels = Array.from(hoursColumn).map((el) => el.textContent);
-            expect(labels).toEqual(['00', '01', '10']);
-          }));
+      test('повторы и числа вне диапазона для hours — фильтруются', (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: baseDate,
+            onChange,
+            timeOptions: { hours: [-5, 0, 0, 1, 10, 25, 40, 40] },
+          });
+          const hoursColumn = getColumnAllItem(ctx, 0);
+          expect(hoursColumn).toHaveLength(3);
+          const labels = Array.from(hoursColumn).map((el) => el.textContent);
+          expect(labels).toEqual(['00', '01', '10']);
+        }));
 
-        test('пустой custom массив для hours — колонка пустая', (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: baseDate,
-              onChange,
-              timeOptions: { hours: [] },
-            });
-            const timeItems = getDateTimeItemsSelected(ctx);
-            expect(timeItems).toHaveLength(2);
-          }));
+      test('пустой custom массив для hours — колонка пустая', (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: baseDate,
+            onChange,
+            timeOptions: { hours: [] },
+          });
+          const timeItems = getDateTimeItemsSelected(ctx);
+          expect(timeItems).toHaveLength(2);
+        }));
 
-        test('корректный custom список для minutes', (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: baseDate,
-              onChange,
-              timeOptions: { minutes: [0, 5, 15, 30, 45] },
-            });
-            const minutesColumn = getColumnAllItem(ctx, 1);
-            expect(minutesColumn).toHaveLength(5);
-            expect(minutesColumn[0]).toHaveTextContent('00');
-            expect(minutesColumn[4]).toHaveTextContent('45');
-            fireEvent.click(minutesColumn[1]);
-            const date = new Date(1970, 0, 1, 11, 5);
-            expect(onChange).toHaveBeenCalledWith(date, {
-              e: expect.any(Object),
-            });
-          }));
+      test('корректный custom список для minutes', (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: baseDate,
+            onChange,
+            timeOptions: { minutes: [0, 5, 15, 30, 45] },
+          });
+          const minutesColumn = getColumnAllItem(ctx, 1);
+          expect(minutesColumn).toHaveLength(5);
+          expect(minutesColumn[0]).toHaveTextContent('00');
+          expect(minutesColumn[4]).toHaveTextContent('45');
+          fireEvent.click(minutesColumn[1]);
+          const date = new Date(1970, 0, 1, 11, 5);
+          expect(onChange).toHaveBeenCalledWith(date, {
+            e: expect.any(Object),
+          });
+        }));
 
-        test('повторы и вне диапазона minutes', (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: baseDate,
-              onChange,
-              timeOptions: { minutes: [-1, 0, 0, 30, 59, 60, 120, 60] },
-            });
-            const minutesColumn = getColumnAllItem(ctx, 1);
-            expect(minutesColumn).toHaveLength(3);
-            const labels = Array.from(minutesColumn).map(
-              (el) => el.textContent,
-            );
-            expect(labels).toEqual(['00', '30', '59']);
-          }));
+      test('повторы и вне диапазона minutes', (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: baseDate,
+            onChange,
+            timeOptions: { minutes: [-1, 0, 0, 30, 59, 60, 120, 60] },
+          });
+          const minutesColumn = getColumnAllItem(ctx, 1);
+          expect(minutesColumn).toHaveLength(3);
+          const labels = Array.from(minutesColumn).map((el) => el.textContent);
+          expect(labels).toEqual(['00', '30', '59']);
+        }));
 
-        test('пустой custom для minutes — колонка пустая', (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: baseDate,
-              onChange,
-              timeOptions: { minutes: [] },
-            });
-            const timeItems = getDateTimeItemsSelected(ctx);
-            expect(timeItems).toHaveLength(2);
-          }));
+      test('пустой custom для minutes — колонка пустая', (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: baseDate,
+            onChange,
+            timeOptions: { minutes: [] },
+          });
+          const timeItems = getDateTimeItemsSelected(ctx);
+          expect(timeItems).toHaveLength(2);
+        }));
 
-        test('корректный custom список для seconds', (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: baseDate,
-              onChange,
-              timeOptions: { seconds: [0, 10, 23, 33, 40, 50] },
-            });
-            const secondsColumn = getColumnAllItem(ctx, 2);
-            expect(secondsColumn).toHaveLength(6);
-            expect(secondsColumn[0]).toHaveTextContent('00');
-            expect(secondsColumn[5]).toHaveTextContent('50');
-            fireEvent.click(secondsColumn[2]);
-            const date = new Date(1970, 0, 1, 11, 34, 23);
-            expect(onChange).toHaveBeenCalledWith(date, {
-              e: expect.any(Object),
-            });
-          }));
+      test('корректный custom список для seconds', (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: baseDate,
+            onChange,
+            timeOptions: { seconds: [0, 10, 23, 33, 40, 50] },
+          });
+          const secondsColumn = getColumnAllItem(ctx, 2);
+          expect(secondsColumn).toHaveLength(6);
+          expect(secondsColumn[0]).toHaveTextContent('00');
+          expect(secondsColumn[5]).toHaveTextContent('50');
+          fireEvent.click(secondsColumn[2]);
+          const date = new Date(1970, 0, 1, 11, 34, 23);
+          expect(onChange).toHaveBeenCalledWith(date, {
+            e: expect.any(Object),
+          });
+        }));
 
-        test('повторы и вне диапазона seconds', (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: baseDate,
-              onChange,
-              timeOptions: { seconds: [-10, -10, 0, 0, 59, 59, 60, 100] },
-            });
-            const secondsColumn = getColumnAllItem(ctx, 2);
-            expect(secondsColumn).toHaveLength(2);
-            const labels = Array.from(secondsColumn).map(
-              (el) => el.textContent,
-            );
-            expect(labels).toEqual(['00', '59']);
-          }));
+      test('повторы и вне диапазона seconds', (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: baseDate,
+            onChange,
+            timeOptions: { seconds: [-10, -10, 0, 0, 59, 59, 60, 100] },
+          });
+          const secondsColumn = getColumnAllItem(ctx, 2);
+          expect(secondsColumn).toHaveLength(2);
+          const labels = Array.from(secondsColumn).map((el) => el.textContent);
+          expect(labels).toEqual(['00', '59']);
+        }));
 
-        test('пустой custom для seconds — колонка пустая', (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: baseDate,
-              onChange,
-              timeOptions: { seconds: [] },
-            });
-            const timeItems = getDateTimeItemsSelected(ctx);
-            expect(timeItems).toHaveLength(2);
-          }));
+      test('пустой custom для seconds — колонка пустая', (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: baseDate,
+            onChange,
+            timeOptions: { seconds: [] },
+          });
+          const timeItems = getDateTimeItemsSelected(ctx);
+          expect(timeItems).toHaveLength(2);
+        }));
 
-        test('undefined custom — fallback на стандартный диапазон', (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: baseDate,
-              onChange,
-              timeOptions: { seconds: {} },
-            });
-            const secondsColumn = getColumnAllItem(ctx, 2);
-            expect(secondsColumn).toHaveLength(60);
-          }));
-      },
-    );
+      test('undefined custom — fallback на стандартный диапазон', (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: baseDate,
+            onChange,
+            timeOptions: { seconds: {} },
+          });
+          const secondsColumn = getColumnAllItem(ctx, 2);
+          expect(secondsColumn).toHaveLength(60);
+        }));
+    });
   });
 
-  describe.concurrent('совместимость timeOptions и multiplicity', () => {
+  describe('совместимость timeOptions и multiplicity', () => {
     const baseDate = new Date(1970, 0, 1, 11, 34, 56);
 
     test('timeOptions.step имеет приоритет над multiplicity', (ctx) =>
@@ -817,104 +807,97 @@ describe.concurrent('Компонент DateTime_type_time', () => {
       }));
   });
 
-  describe.concurrent(
-    'проверка multiplicityHours, multiplicityMinutes и multiplicitySeconds',
-    () => {
-      const multiplicity = [0, 1, 2, 5, 10];
+  describe('проверка multiplicityHours, multiplicityMinutes и multiplicitySeconds', () => {
+    const multiplicity = [0, 1, 2, 5, 10];
 
-      multiplicity.forEach((multiplicityHours) => {
-        test(`проверка multiplicityHours = ${multiplicityHours} и возможности менять часы`, (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: new Date(1970, 0, 1, 11, 34, 56),
-              onChange,
-              multiplicityHours,
+    multiplicity.forEach((multiplicityHours) => {
+      test(`проверка multiplicityHours = ${multiplicityHours} и возможности менять часы`, (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: new Date(1970, 0, 1, 11, 34, 56),
+            onChange,
+            multiplicityHours,
+          });
+
+          if (multiplicityHours === 0) {
+            const timeItems = getDateTimeItemsSelected(ctx);
+            expect(timeItems[0]).not.toHaveTextContent('11');
+            expect(timeItems[1]).not.toHaveTextContent('11');
+            expect(timeItems).toHaveLength(2);
+          } else {
+            const hoursColumn = getColumnAllItem(ctx, 0).length;
+            expect(hoursColumn).toEqual(Math.ceil(24 / multiplicityHours));
+
+            const currentHour = getColumnAllItem(ctx, 0)[1];
+            fireEvent.click(currentHour);
+
+            const date = new Date(1970, 0, 1, multiplicityHours);
+            expect(onChange).toHaveBeenCalledWith(date, {
+              e: expect.any(Object),
             });
+          }
+        }));
+    });
 
-            if (multiplicityHours === 0) {
-              const timeItems = getDateTimeItemsSelected(ctx);
-              expect(timeItems[0]).not.toHaveTextContent('11');
-              expect(timeItems[1]).not.toHaveTextContent('11');
-              expect(timeItems).toHaveLength(2);
-            } else {
-              const hoursColumn = getColumnAllItem(ctx, 0).length;
-              expect(hoursColumn).toEqual(Math.ceil(24 / multiplicityHours));
+    multiplicity.forEach((multiplicityMinutes) => {
+      test(`проверка multiplicityMinutes = ${multiplicityMinutes} и возможности менять минуты`, (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: new Date(1970, 0, 1, 11, 34, 56),
+            onChange,
+            multiplicityMinutes,
+          });
 
-              const currentHour = getColumnAllItem(ctx, 0)[1];
-              fireEvent.click(currentHour);
+          if (multiplicityMinutes === 0) {
+            const timeItems = getDateTimeItemsSelected(ctx);
+            expect(timeItems[0]).not.toHaveTextContent('34');
+            expect(timeItems[1]).not.toHaveTextContent('34');
+            expect(timeItems).toHaveLength(2);
+          } else {
+            const minutesColumn = getColumnAllItem(ctx, 1).length;
+            expect(minutesColumn).toEqual(Math.ceil(60 / multiplicityMinutes));
 
-              const date = new Date(1970, 0, 1, multiplicityHours);
-              expect(onChange).toHaveBeenCalledWith(date, {
-                e: expect.any(Object),
-              });
-            }
-          }));
-      });
+            const currentMinutes = getColumnAllItem(ctx, 1)[1];
+            fireEvent.click(currentMinutes);
+            const date = new Date(1970, 0, 1, 11, multiplicityMinutes);
 
-      multiplicity.forEach((multiplicityMinutes) => {
-        test(`проверка multiplicityMinutes = ${multiplicityMinutes} и возможности менять минуты`, (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: new Date(1970, 0, 1, 11, 34, 56),
-              onChange,
-              multiplicityMinutes,
+            expect(onChange).toHaveBeenCalledWith(date, {
+              e: expect.any(Object),
             });
+          }
+        }));
+    });
 
-            if (multiplicityMinutes === 0) {
-              const timeItems = getDateTimeItemsSelected(ctx);
-              expect(timeItems[0]).not.toHaveTextContent('34');
-              expect(timeItems[1]).not.toHaveTextContent('34');
-              expect(timeItems).toHaveLength(2);
-            } else {
-              const minutesColumn = getColumnAllItem(ctx, 1).length;
-              expect(minutesColumn).toEqual(
-                Math.ceil(60 / multiplicityMinutes),
-              );
+    multiplicity.forEach((multiplicitySeconds) => {
+      test(`проверка multiplicitySeconds = ${multiplicitySeconds} и возможности менять секунды`, (ctx) =>
+        context.start(async () => {
+          const onChange = vi.fn((value) => new Date(value.value));
+          renderComponent(ctx, {
+            value: new Date(1970, 0, 1, 11, 34, 56),
+            onChange,
+            multiplicitySeconds,
+          });
 
-              const currentMinutes = getColumnAllItem(ctx, 1)[1];
-              fireEvent.click(currentMinutes);
-              const date = new Date(1970, 0, 1, 11, multiplicityMinutes);
+          if (multiplicitySeconds === 0) {
+            const timeItems = getDateTimeItemsSelected(ctx);
+            expect(timeItems[0]).not.toHaveTextContent('56');
+            expect(timeItems[1]).not.toHaveTextContent('56');
+            expect(timeItems).toHaveLength(2);
+          } else {
+            const secondsColumn = getColumnAllItem(ctx, 2).length;
+            expect(secondsColumn).toEqual(Math.ceil(60 / multiplicitySeconds));
 
-              expect(onChange).toHaveBeenCalledWith(date, {
-                e: expect.any(Object),
-              });
-            }
-          }));
-      });
+            const currentSeconds = getColumnAllItem(ctx, 2)[1];
+            fireEvent.click(currentSeconds);
 
-      multiplicity.forEach((multiplicitySeconds) => {
-        test(`проверка multiplicitySeconds = ${multiplicitySeconds} и возможности менять секунды`, (ctx) =>
-          context.start(async () => {
-            const onChange = vi.fn((value) => new Date(value.value));
-            renderComponent(ctx, {
-              value: new Date(1970, 0, 1, 11, 34, 56),
-              onChange,
-              multiplicitySeconds,
+            const date = new Date(1970, 0, 1, 11, 34, multiplicitySeconds);
+            expect(onChange).toHaveBeenCalledWith(date, {
+              e: expect.any(Object),
             });
-
-            if (multiplicitySeconds === 0) {
-              const timeItems = getDateTimeItemsSelected(ctx);
-              expect(timeItems[0]).not.toHaveTextContent('56');
-              expect(timeItems[1]).not.toHaveTextContent('56');
-              expect(timeItems).toHaveLength(2);
-            } else {
-              const secondsColumn = getColumnAllItem(ctx, 2).length;
-              expect(secondsColumn).toEqual(
-                Math.ceil(60 / multiplicitySeconds),
-              );
-
-              const currentSeconds = getColumnAllItem(ctx, 2)[1];
-              fireEvent.click(currentSeconds);
-
-              const date = new Date(1970, 0, 1, 11, 34, multiplicitySeconds);
-              expect(onChange).toHaveBeenCalledWith(date, {
-                e: expect.any(Object),
-              });
-            }
-          }));
-      });
-    },
-  );
+          }
+        }));
+    });
+  });
 });

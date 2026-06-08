@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { cnGrid, Grid } from '../Grid';
 import { gridPropGap, gridPropXAlign, gridPropYAlign } from '../types';
@@ -39,7 +39,7 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="${testId}"]`,
   ) as HTMLDivElement;
 
-describe.concurrent('Компонент Grid', () => {
+describe('Компонент Grid', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
@@ -48,7 +48,7 @@ describe.concurrent('Компонент Grid', () => {
   test('должен рендерить children', (ctx) =>
     context.start(async () => {
       renderComponent(ctx);
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveTextContent(children);
     }));
 
@@ -56,14 +56,14 @@ describe.concurrent('Компонент Grid', () => {
     context.start(async () => {
       const className = 'test-class';
       renderComponent(ctx, { className });
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveClass(className);
     }));
 
   test('должен рендериться с тегом, переданным в as', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { as: 'section' });
-      await wrap(tick());
+
       expect(getRender(ctx).tagName).toBe('SECTION');
     }));
 
@@ -71,7 +71,7 @@ describe.concurrent('Компонент Grid', () => {
     context.start(async () => {
       const cols = 3;
       renderComponent(ctx, { cols });
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveClass(cnGrid({ cols }));
       expect(getRender(ctx).style.getPropertyValue('--grid-cols')).toBe(
         `${cols}`,
@@ -82,7 +82,7 @@ describe.concurrent('Компонент Grid', () => {
     test(`присваивает класс для gap=${gap}`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { gap });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(cnGrid({ gap }));
       }));
   });
@@ -91,7 +91,7 @@ describe.concurrent('Компонент Grid', () => {
     test(`присваивает класс для colGap=${colGap}`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { colGap });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(cnGrid({ colGap }));
       }));
   });
@@ -100,7 +100,7 @@ describe.concurrent('Компонент Grid', () => {
     test(`присваивает класс для rowGap=${rowGap}`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { rowGap });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(cnGrid({ rowGap }));
       }));
   });
@@ -109,7 +109,7 @@ describe.concurrent('Компонент Grid', () => {
     test(`присваивает класс для xAlign=${xAlign}`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { xAlign });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(cnGrid({ xAlign }));
       }));
   });
@@ -118,7 +118,7 @@ describe.concurrent('Компонент Grid', () => {
     test(`присваивает класс для yAlign=${yAlign}`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { yAlign });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveClass(cnGrid({ yAlign }));
       }));
   });

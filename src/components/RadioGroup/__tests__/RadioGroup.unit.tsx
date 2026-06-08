@@ -84,14 +84,14 @@ const getItems = (ctx: TestContext) =>
 const getItemInput = (ctx: TestContext) =>
   getRender(ctx).querySelectorAll('.Radio-Input')[0] as HTMLInputElement;
 
-describe.concurrent('Компонент RadioGroup', () => {
+describe('Компонент RadioGroup', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка items', () => {
+  describe('проверка props', () => {
+    describe('проверка items', () => {
       test('количество совпадает с передаваемым', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
@@ -101,7 +101,7 @@ describe.concurrent('Компонент RadioGroup', () => {
         }));
     });
 
-    describe.concurrent('проверка getItemLabel', () => {
+    describe('проверка getItemLabel', () => {
       test('label совпадает', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
@@ -110,7 +110,7 @@ describe.concurrent('Компонент RadioGroup', () => {
         }));
     });
 
-    describe.concurrent('проверка name', () => {
+    describe('проверка name', () => {
       test(`name у элемента верный`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
@@ -119,7 +119,7 @@ describe.concurrent('Компонент RadioGroup', () => {
         }));
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test(`присвоился дополнительный класс`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
@@ -128,7 +128,7 @@ describe.concurrent('Компонент RadioGroup', () => {
         }));
     });
 
-    describe.concurrent('проверка onChange', () => {
+    describe('проверка onChange', () => {
       test(`клик по элементу должен вызвать callback`, (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
@@ -146,7 +146,7 @@ describe.concurrent('Компонент RadioGroup', () => {
         }));
     });
 
-    describe.concurrent('проверка getDisabled', () => {
+    describe('проверка getDisabled', () => {
       test(`клик по disabled элементу не должен вызывать handleChange`, (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();

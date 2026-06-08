@@ -57,13 +57,13 @@ const mocksProps = {
   style: { width: 50 },
 };
 
-describe.concurrent('Компонент Spoiler', () => {
+describe('Компонент Spoiler', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, mocksProps)).not.toThrow();
     }));
 
-  describe.concurrent('проверка присутствия кнопки', () => {
+  describe('проверка присутствия кнопки', () => {
     test('кнопка не отображается, если высота превью схожа с высотой полного текста', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { ...mocksProps, children: 'sss' });
@@ -81,8 +81,8 @@ describe.concurrent('Компонент Spoiler', () => {
       }));
   });
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка size', () => {
+  describe('проверка props', () => {
+    describe('проверка size', () => {
       spoilerPropSize.forEach((size) => {
         test(`присваивает класс для size=${size}`, (ctx) =>
           context.start(async () => {
@@ -94,7 +94,7 @@ describe.concurrent('Компонент Spoiler', () => {
       });
     });
 
-    describe.concurrent('проверка moreLabel', () => {
+    describe('проверка moreLabel', () => {
       test('проверка текста при open="false"', (ctx) =>
         context.start(async () => {
           //   setMockUseResizeObserved(defaultSizes);
@@ -105,7 +105,7 @@ describe.concurrent('Компонент Spoiler', () => {
         }));
     });
 
-    describe.concurrent('проверка lessLabel', () => {
+    describe('проверка lessLabel', () => {
       test('проверка текста при open="true"', (ctx) =>
         context.start(async () => {
           //   setMockUseResizeObserved(defaultSizes);

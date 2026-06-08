@@ -93,7 +93,7 @@ describe('NotificationActions', () => {
    * Тесты для рендера компонента с одним элементом действия
    * В этом случае компонент отображается как обычная кнопка
    */
-  describe.concurrent('рендер с одним элементом', () => {
+  describe('рендер с одним элементом', () => {
     /**
      * Проверяет, что компонент с одним элементом рендерится как кнопка с текстом
      */
@@ -216,6 +216,7 @@ describe('NotificationActions', () => {
 
         buttonClick(ctx);
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         expect(getContextMenu(ctx)).toBeInTheDocument();
       }));
@@ -294,6 +295,7 @@ describe('NotificationActions', () => {
 
         buttonClick(ctx);
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         expect(getContextMenuItems(ctx)).toHaveLength(items.length);
       }));
@@ -319,6 +321,7 @@ describe('NotificationActions', () => {
 
         buttonClick(ctx);
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         const index = 0;
 
@@ -352,6 +355,7 @@ describe('NotificationActions', () => {
 
         buttonClick(ctx);
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         const index = 0;
         expect(onClick).toHaveBeenCalledTimes(0);
@@ -377,8 +381,9 @@ describe('NotificationActions', () => {
 
         // Открываем меню
         buttonClick(ctx);
-        await wrap(tick());
+
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         // Проверяем, что меню открылось
         expect(getContextMenu(ctx)).toBeInTheDocument();
@@ -386,9 +391,9 @@ describe('NotificationActions', () => {
         // Закрываем меню кликом вне компонента
         fireEvent.mouseDown(getOutside(ctx));
         getOutside(ctx).click();
+
+        await wrap(sleep(animateTimeout));
         await wrap(tick());
-        await wrap(sleep(animateTimeout));
-        await wrap(sleep(animateTimeout));
 
         // Проверяем, что меню закрылось
         expect(getContextMenu(ctx)).not.toBeInTheDocument();
@@ -411,17 +416,17 @@ describe('NotificationActions', () => {
         renderComponent(ctx, { items });
 
         buttonClick(ctx);
-        await wrap(tick());
 
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         // Проверяем, что меню открылось
         expect(getContextMenu(ctx)).toBeInTheDocument();
 
         // Закрываем меню кликом на кнопку
         buttonClick(ctx);
-        await wrap(tick());
         await wrap(sleep(animateTimeout));
+        await wrap(tick());
 
         // Проверяем, что меню закрылось
         expect(getContextMenu(ctx)).not.toBeInTheDocument();

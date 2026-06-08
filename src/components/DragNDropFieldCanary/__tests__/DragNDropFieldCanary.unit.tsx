@@ -1,12 +1,12 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
-import { act } from '@testing-library/react';
+import { act, waitFor } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { DragNDropField } from '../DragNDropFieldCanary';
 
@@ -79,53 +79,47 @@ const dropFiles = async (ctx: TestContext, files: File[]) => {
 const file1 = new File(['file1'], 'file1.png', { type: 'image/png' });
 const file2 = new File(['file2'], 'file2.txt', { type: 'text/plain' });
 
-describe.concurrent('Компонент DragNDropFieldCanary', () => {
-  test('должен рендериться без ошибок', async (ctx) => {
-    await context.start(async () => {
+describe('Компонент DragNDropFieldCanary', () => {
+  test('должен рендериться без ошибок', (ctx) => {
+    context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     });
   });
 
-  test('ref должен быть присвоен', async (ctx) => {
-    await context.start(async () => {
+  test('ref должен быть присвоен', (ctx) => {
+    context.start(async () => {
       const ref = React.createRef<HTMLDivElement>();
       renderComponent(ctx, { ref });
-
-      await wrap(tick());
 
       expect(ref.current).toBe(getRender(ctx));
     });
   });
 
-  test('должен присваиваться дополнительный className', async (ctx) => {
-    await context.start(async () => {
+  test('должен присваиваться дополнительный className', (ctx) => {
+    context.start(async () => {
       const className = 'custom-class';
       renderComponent(ctx, { className });
-
-      await wrap(tick());
 
       expect(getRender(ctx)).toHaveClass(className);
     });
   });
 
-  test('не должен реагировать на drop в состоянии disabled', async (ctx) => {
-    await context.start(async () => {
+  test('не должен реагировать на drop в состоянии disabled', (ctx) => {
+    context.start(async () => {
       const onDrop = vi.fn();
       renderComponent(ctx, { onDrop, disabled: true });
-      await wrap(tick());
+
       await dropFiles(ctx, [file1]);
 
       expect(onDrop).not.toHaveBeenCalled();
     });
   });
 
-  describe.concurrent('проверка children', () => {
-    test('рендерит React.ReactNode', async (ctx) => {
-      await context.start(async () => {
+  describe('проверка children', () => {
+    test('рендерит React.ReactNode', (ctx) => {
+      context.start(async () => {
         const childText = 'Custom content';
         renderComponent(ctx, { children: <div>{childText}</div> });
-
-        await wrap(tick());
 
         const element = document
           .getElementById(testRootId(ctx))
@@ -134,14 +128,12 @@ describe.concurrent('Компонент DragNDropFieldCanary', () => {
       });
     });
 
-    test('рендерит с помощью render-функции', async (ctx) => {
-      await context.start(async () => {
+    test('рендерит с помощью render-функции', (ctx) => {
+      context.start(async () => {
         const childText = 'Render prop content';
         renderComponent(ctx, {
           children: () => <div>{childText}</div>,
         });
-
-        await wrap(tick());
 
         const element = document
           .getElementById(testRootId(ctx))
@@ -151,17 +143,15 @@ describe.concurrent('Компонент DragNDropFieldCanary', () => {
     });
   });
 
-  describe.concurrent('проверка callback', () => {
-    test('onDrop вызывается с принятыми и отклоненными файлами', async (ctx) => {
-      await context.start(async () => {
+  describe('проверка callback', () => {
+    test('onDrop вызывается с принятыми и отклоненными файлами', (ctx) => {
+      context.start(async () => {
         const onDrop = vi.fn();
         renderComponent(ctx, {
           onDrop,
           accept: { 'image/png': ['.png'] },
           multiple: true,
         });
-
-        await wrap(tick());
 
         await dropFiles(ctx, [file1, file2]);
 
@@ -173,15 +163,13 @@ describe.concurrent('Компонент DragNDropFieldCanary', () => {
       });
     });
 
-    test('onDropAccepted вызывается с принятыми файлами', async (ctx) => {
-      await context.start(async () => {
+    test('onDropAccepted вызывается с принятыми файлами', (ctx) => {
+      context.start(async () => {
         const onDropAccepted = vi.fn();
         renderComponent(ctx, {
           onDropAccepted,
           accept: { 'image/png': ['.png'] },
         });
-
-        await wrap(tick());
 
         await dropFiles(ctx, [file1]);
 
@@ -192,8 +180,8 @@ describe.concurrent('Компонент DragNDropFieldCanary', () => {
       });
     });
 
-    test('onDropRejected вызывается с отклоненными файлами', async (ctx) => {
-      await context.start(async () => {
+    test('onDropRejected вызывается с отклоненными файлами', (ctx) => {
+      context.start(async () => {
         const onDropRejected = vi.fn();
         const onDropAccepted = vi.fn();
         renderComponent(ctx, {
@@ -202,8 +190,6 @@ describe.concurrent('Компонент DragNDropFieldCanary', () => {
           accept: { 'image/png': ['.png'] },
           multiple: true,
         });
-
-        await wrap(tick());
 
         await dropFiles(ctx, [file2]);
 
@@ -216,9 +202,9 @@ describe.concurrent('Компонент DragNDropFieldCanary', () => {
     });
   });
 
-  describe.concurrent('проверка ограничений', () => {
-    test('`multiple=false` принимает только один файл', async (ctx) => {
-      await context.start(async () => {
+  describe('проверка ограничений', () => {
+    test('`multiple=false` принимает только один файл', (ctx) => {
+      context.start(async () => {
         const onDropAccepted = vi.fn();
         const onDropRejected = vi.fn();
         renderComponent(ctx, {
@@ -227,8 +213,6 @@ describe.concurrent('Компонент DragNDropFieldCanary', () => {
           multiple: false,
         });
 
-        await wrap(tick());
-
         await dropFiles(ctx, [file1, file2]);
 
         expect(onDropAccepted).not.toHaveBeenCalled();
@@ -236,8 +220,8 @@ describe.concurrent('Компонент DragNDropFieldCanary', () => {
       });
     });
 
-    test('`accept` фильтрует файлы по типу', async (ctx) => {
-      await context.start(async () => {
+    test('`accept` фильтрует файлы по типу', (ctx) => {
+      context.start(async () => {
         const onDropAccepted = vi.fn();
         const onDropRejected = vi.fn();
         renderComponent(ctx, {
@@ -247,22 +231,24 @@ describe.concurrent('Компонент DragNDropFieldCanary', () => {
           multiple: true,
         });
 
-        await wrap(tick());
-
         await dropFiles(ctx, [file1, file2]);
+        await waitFor(() => {
+          expect(onDropAccepted).toHaveBeenCalledWith(
+            [file1],
+            expect.any(Object),
+          );
+        });
 
-        expect(onDropAccepted).toHaveBeenCalledWith(
-          [file1],
-          expect.any(Object),
-        );
-        expect(onDropRejected).toHaveBeenCalledWith(
-          expect.arrayContaining([
-            expect.objectContaining({
-              file: file2,
-            }),
-          ]),
-          expect.any(Object),
-        );
+        await waitFor(() => {
+          expect(onDropRejected).toHaveBeenCalledWith(
+            expect.arrayContaining([
+              expect.objectContaining({
+                file: file2,
+              }),
+            ]),
+            expect.any(Object),
+          );
+        });
       });
     });
   });

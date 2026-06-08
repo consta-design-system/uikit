@@ -66,8 +66,6 @@ const Variants = () => {
       <div className={cnSelectCanaryVariants()} key="multiple">
         <Select
           {...(input ? searchProps : { items })}
-          items={items}
-          input
           size={size}
           disabled={disabled}
           view={view}
@@ -84,6 +82,7 @@ const Variants = () => {
           isLoading={isLoading}
           getItemDisabled={conditionalGetter(itemsDisabled)}
           clearButton={clearButton}
+          virtualScroll
         />
       </div>
     );
@@ -92,7 +91,6 @@ const Variants = () => {
     <div className={cnSelectCanaryVariants()} key="not-multiple">
       <Select
         {...(input ? searchProps : { items })}
-        items={items}
         input={input}
         size={size}
         disabled={disabled}
@@ -109,6 +107,7 @@ const Variants = () => {
         getItemDisabled={conditionalGetter(itemsDisabled)}
         clearButton={clearButton}
         ref={ref}
+        virtualScroll
       />
     </div>
   );

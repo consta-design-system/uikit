@@ -52,8 +52,8 @@ const renderComponent = (
   });
 };
 
-describe.concurrent('Компонент DatePicker_type_dateRange', () => {
-  describe.concurrent('проверка onChange', () => {
+describe('Компонент DatePicker_type_dateRange', () => {
+  describe('проверка onChange', () => {
     test(`при клике по календарю срабатывает`, (ctx) =>
       context.start(async () => {
         const onChange = vi.fn();
@@ -75,7 +75,7 @@ describe.concurrent('Компонент DatePicker_type_dateRange', () => {
       }));
   });
 
-  describe.concurrent('проверка value', () => {
+  describe('проверка value', () => {
     test(`верно отображается в поле ввода`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -101,7 +101,7 @@ describe.concurrent('Компонент DatePicker_type_dateRange', () => {
       }));
   });
 
-  describe.concurrent('проверка disableDates', () => {
+  describe('проверка disableDates', () => {
     test('корректно отключает даты при dateTimeView="classic"', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -119,7 +119,7 @@ describe.concurrent('Компонент DatePicker_type_dateRange', () => {
         expect(getDateTimeItemByText(ctx, '22')).toBeDisabled();
       }));
 
-    describe.concurrent('корректно отключает даты с 2 сторон', () => {
+    describe('корректно отключает даты с 2 сторон', () => {
       const viewTests: Array<'book' | 'slider'> = ['book', 'slider'];
 
       viewTests.forEach((dateTimeView) => {

@@ -31,7 +31,7 @@ const renderComponent = (ctx: TestContext, props: TagProps) => {
 const getTag = (ctx: TestContext) =>
   document.querySelector(`#${testRootId(ctx)} [data-testid="${testId}"]`)!;
 
-describe.concurrent('Компонент Tag', () => {
+describe('Компонент Tag', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>
@@ -39,10 +39,10 @@ describe.concurrent('Компонент Tag', () => {
       ).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     const label = 'label';
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       const className = 'className';
 
       test('присваивает className', (ctx) =>
@@ -52,7 +52,7 @@ describe.concurrent('Компонент Tag', () => {
         }));
     });
 
-    describe.concurrent('проверка disabled', () => {
+    describe('проверка disabled', () => {
       test('при disabled=true отключает onClick в mode=button', (ctx) =>
         context.start(async () => {
           const handleClick = vi.fn();
@@ -112,7 +112,7 @@ describe.concurrent('Компонент Tag', () => {
     });
   });
 
-  describe.concurrent('проверка getParams', () => {
+  describe('проверка getParams', () => {
     const onClick = vi.fn();
     const onCancel = vi.fn();
     const checked = true;

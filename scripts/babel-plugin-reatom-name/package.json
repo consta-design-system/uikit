@@ -1,0 +1,10 @@
+{
+  "name": "babel-plugin-reatom-name",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Babel plugin to automatically add/remove names for reatom atoms, actions, computeds, effects and factory components",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "vitest run"
+  }
+}

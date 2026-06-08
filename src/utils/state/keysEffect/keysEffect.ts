@@ -1,5 +1,6 @@
 import { action, AtomLike } from '@reatom/core';
 
+import { named } from '##/utils/state/generateAtomName';
 import { KeyCode } from '##/utils/types/KeyCode';
 
 import { onEventEffect } from '../onEventEffect';
@@ -18,13 +19,18 @@ type KeysEffectProps<E extends HTMLElement> = {
   eventType?: 'keypress' | 'keydown' | 'keyup';
 };
 
-export const keysEffect = <E extends HTMLElement>({
-  elAtom,
-  keysAtom,
-  isActiveAtom,
-  eventType = 'keydown',
-  eventHandler,
-}: KeysEffectProps<E>) => {
+export const keysEffect = <E extends HTMLElement>(
+  {
+    elAtom,
+    keysAtom,
+    isActiveAtom,
+    eventType = 'keydown',
+    eventHandler,
+  }: KeysEffectProps<E>,
+  name?: string,
+) => {
+  const n = named(name, 'keysEffect');
+
   const fn = action((e: KeyboardEvent) => {
     const keys = keysAtom?.();
     const isActive = isActiveAtom?.();
@@ -32,7 +38,12 @@ export const keysEffect = <E extends HTMLElement>({
       (keys[e.code as KeyCode] || keys[e.key as KeyCode])?.(e);
     }
     eventHandler?.(e);
-  });
+  }, n('fn'));
 
-  onEventEffect(elAtom, eventType, fn as unknown as EventListener);
+  onEventEffect(
+    elAtom,
+    eventType,
+    fn as unknown as EventListener,
+    n('onEventEffect'),
+  );
 };

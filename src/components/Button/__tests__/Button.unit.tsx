@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -8,7 +8,7 @@ import { describe, expect, test, vi } from 'vitest';
 import { createIconMock } from '##/../__mocks__/IconMock';
 import { presetGpnDefault, Theme } from '##/components/Theme';
 import { cnMixFocus } from '##/mixs/MixFocus/MixFocus';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import {
   Button,
@@ -50,78 +50,76 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="${testId}"]`,
   ) as HTMLButtonElement;
 
-describe.concurrent('Компонент Button', () => {
+describe('Компонент Button', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = () => renderComponent(ctx, {});
-      await wrap(tick());
+
       expect(render).not.toThrow();
     }));
 
-  describe.concurrent('проверка size', () => {
+  describe('проверка size', () => {
     buttonPropSize.forEach((size) => {
       test(`присваивает класс для size=${size}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { size });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnButton({ size }));
         }));
     });
   });
 
-  describe.concurrent('проверка view', () => {
+  describe('проверка view', () => {
     buttonPropView.forEach((view) => {
       test(`присваивает класс для view=${view}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { view });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnButton({ view }));
         }));
     });
   });
 
-  describe.concurrent('проверка width', () => {
+  describe('проверка width', () => {
     buttonPropWidth.forEach((width) => {
       test(`присваивает класс для width=${width}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { width });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnButton({ width }));
         }));
     });
   });
 
-  describe.concurrent('проверка form', () => {
+  describe('проверка form', () => {
     buttonPropForm.forEach((form) => {
       test(`присваивает класс для form=${form}`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { form });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(cnButton({ form }));
         }));
     });
   });
 
-  describe.concurrent('проверка тэга', () => {
+  describe('проверка тэга', () => {
     const tags = ['a', 'div', 'span'] as const;
     tags.forEach((el) => {
       test(`должен рендериться как <${el}>`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { as: el });
-          await wrap(tick());
+
           expect(getRender(ctx).tagName).toEqual(el.toUpperCase());
         }));
     });
   });
 
-  describe.concurrent('проверка disabled', () => {
+  describe('проверка disabled', () => {
     test('должен отключать <button>', (ctx) =>
       context.start(async () => {
         const handleClick = vi.fn();
 
         renderComponent(ctx, { disabled: true, onClick: handleClick });
-
-        await wrap(tick());
 
         const button = getRender(ctx);
 
@@ -138,8 +136,6 @@ describe.concurrent('Компонент Button', () => {
 
         renderComponent(ctx, { disabled: true, as: 'a', onClick: handleClick });
 
-        await wrap(tick());
-
         const button = getRender(ctx);
 
         fireEvent.click(button);
@@ -149,14 +145,12 @@ describe.concurrent('Компонент Button', () => {
       }));
   });
 
-  describe.concurrent('проверка loading', () => {
+  describe('проверка loading', () => {
     test('должен отключать <button>', (ctx) =>
       context.start(async () => {
         const handleClick = vi.fn();
 
         renderComponent(ctx, { loading: true, onClick: handleClick });
-
-        await wrap(tick());
 
         const button = getRender(ctx);
 
@@ -173,8 +167,6 @@ describe.concurrent('Компонент Button', () => {
 
         renderComponent(ctx, { loading: true, as: 'a', onClick: handleClick });
 
-        await wrap(tick());
-
         const button = getRender(ctx);
 
         fireEvent.click(button);
@@ -189,8 +181,6 @@ describe.concurrent('Компонент Button', () => {
       const label = 'Это кнопка';
       renderComponent(ctx, { label });
 
-      await wrap(tick());
-
       expect(getRender(ctx).textContent).toEqual(label);
     }));
 
@@ -200,8 +190,6 @@ describe.concurrent('Компонент Button', () => {
 
       renderComponent(ctx, { onClick: handleClick });
 
-      await wrap(tick());
-
       const button = getRender(ctx);
 
       fireEvent.click(button);
@@ -209,12 +197,12 @@ describe.concurrent('Компонент Button', () => {
       expect(handleClick).toHaveBeenCalledTimes(1);
     }));
 
-  describe.concurrent('проверка иконки', () => {
+  describe('проверка иконки', () => {
     test('должен отображать иконку слева', (ctx) =>
       context.start(async () => {
         const label = 'Текст кнопки';
         renderComponent(ctx, { label, iconLeft: IconLeftMock });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent(iconLeftText + label);
       }));
 
@@ -222,7 +210,7 @@ describe.concurrent('Компонент Button', () => {
       context.start(async () => {
         const label = 'Текст кнопки';
         renderComponent(ctx, { label, iconRight: IconRightMock });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent(label + iconRightText);
       }));
 
@@ -235,7 +223,7 @@ describe.concurrent('Компонент Button', () => {
           iconRight: IconRightMock,
           iconLeft: IconLeftMock,
         });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent(
           iconLeftText + label + iconRightText,
         );
@@ -246,23 +234,23 @@ describe.concurrent('Компонент Button', () => {
         const label = 'Текст кнопки';
 
         renderComponent(ctx, { label, iconLeft: IconLeftMock, onlyIcon: true });
-        await wrap(tick());
+
         expect(getRender(ctx)).toHaveTextContent(iconLeftText);
       }));
 
-    describe.concurrent('проверка атрибута title', () => {
+    describe('проверка атрибута title', () => {
       test('должен устанавливать title, если он передан', (ctx) =>
         context.start(async () => {
           const title = 'Тестовый title';
           renderComponent(ctx, { title });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveAttribute('title', title);
         }));
 
       test('не должен устанавливать title, если он не передан', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getRender(ctx)).not.toHaveAttribute('title');
         }));
 
@@ -274,17 +262,17 @@ describe.concurrent('Компонент Button', () => {
             label,
             iconLeft: createIconMock('Icon'),
           });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveAttribute('title', label);
         }));
     });
 
-    describe.concurrent('проверка атрибута tabIndex', () => {
+    describe('проверка атрибута tabIndex', () => {
       test('должен устанавливать tabIndex, если он передан', (ctx) =>
         context.start(async () => {
           const tabIndex = 3;
           renderComponent(ctx, { tabIndex });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveAttribute(
             'tabindex',
             tabIndex.toString(),
@@ -294,43 +282,42 @@ describe.concurrent('Компонент Button', () => {
       test('не должен устанавливать tabIndex, если он не передан', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getRender(ctx)).not.toHaveAttribute('tabindex');
         }));
     });
 
-    describe.concurrent('проверка атрибута form', () => {
+    describe('проверка атрибута form', () => {
       test('должен устанавливать form, если передан formId', (ctx) =>
         context.start(async () => {
           const formId = 'test-form';
           renderComponent(ctx, { formId });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveAttribute('form', formId);
         }));
 
       test('не должен устанавливать form, если formId не передан', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
+
           expect(getRender(ctx)).not.toHaveAttribute('form');
         }));
     });
 
-    describe.concurrent('проверка кастомного класса', () => {
+    describe('проверка кастомного класса', () => {
       test('должен добавлять переданный className', (ctx) =>
         context.start(async () => {
           const customClass = 'custom-class';
           renderComponent(ctx, { className: customClass });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(customClass);
         }));
     });
 
-    describe.concurrent('проверка состояния focus', () => {
+    describe('проверка состояния focus', () => {
       test('должен добавлять класс фокуса, если кнопка активна', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
-          await wrap(tick());
 
           const button = getRender(ctx);
 
@@ -342,7 +329,6 @@ describe.concurrent('Компонент Button', () => {
       test('не должен добавлять класс фокуса, если кнопка отключена', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { disabled: true });
-          await wrap(tick());
 
           const button = getRender(ctx);
 
@@ -354,7 +340,6 @@ describe.concurrent('Компонент Button', () => {
       test('не должен добавлять класс фокуса, если кнопка в состоянии загрузки', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { loading: true });
-          await wrap(tick());
 
           const button = getRender(ctx);
 

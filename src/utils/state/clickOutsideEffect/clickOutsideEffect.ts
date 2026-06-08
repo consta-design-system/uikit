@@ -1,4 +1,6 @@
-import { action, AtomLike, effect, onEvent, wrap } from '@reatom/core';
+import { action, AtomLike, effect, onEvent } from '@reatom/core';
+
+import { named } from '##/utils/state/generateAtomName';
 
 export type ClickOutsideHandler = (event: MouseEvent) => void;
 
@@ -8,29 +10,25 @@ type ClickOutsideProps = {
   handler?: ClickOutsideHandler;
 };
 
-export const clickOutsideEffect = ({
-  isActiveAtom,
-  ignoreClicksElementsAtom,
-  handler,
-}: ClickOutsideProps) => {
+export const clickOutsideEffect = (
+  { isActiveAtom, ignoreClicksElementsAtom, handler }: ClickOutsideProps,
+  name?: string,
+) => {
+  const n = named(name, 'clickOutsideEffect');
   effect(
     onEvent(
       document,
       'mousedown',
-      wrap(
-        action((e: MouseEvent) => {
-          const isActive = isActiveAtom?.();
-          const ignoreClicksElements = ignoreClicksElementsAtom?.();
+      action((e: MouseEvent) => {
+        const isActive = isActiveAtom?.();
+        const ignoreClicksElements = ignoreClicksElementsAtom?.();
 
-          isActive &&
-            handler &&
-            ignoreClicksElements?.length &&
-            ignoreClicksElements.every(
-              (el) => !el?.contains(e.target as Node),
-            ) &&
-            handler(e);
-        }),
-      ),
+        isActive &&
+          handler &&
+          ignoreClicksElements?.length &&
+          ignoreClicksElements.every((el) => !el?.contains(e.target as Node)) &&
+          handler(e);
+      }, n('action')),
     ),
   );
 };

@@ -81,14 +81,14 @@ const getButtons = (ctx: TestContext) =>
 const getButton = (ctx: TestContext, index = 0) =>
   getButtons(ctx)[index] as HTMLElement;
 
-describe.concurrent(`${testId}`, () => {
+describe(`${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка items', () => {
+  describe('проверка props', () => {
+    describe('проверка items', () => {
       test('количество совпадает с передаваемым', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
@@ -97,7 +97,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка getLabel', () => {
+    describe('проверка getLabel', () => {
       test('лейбл совпадает', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
@@ -108,7 +108,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test(`присвоился дополнительный класс`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
@@ -116,7 +116,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка onChange', () => {
+    describe('проверка onChange', () => {
       test(`клик по элементу должен вызвать callback`, (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
@@ -133,7 +133,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка getDisabled', () => {
+    describe('проверка getDisabled', () => {
       test(`клик по disabled элементу не должен вызывать handleChange`, (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();

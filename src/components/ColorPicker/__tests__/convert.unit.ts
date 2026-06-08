@@ -36,8 +36,8 @@ import {
 createRoot();
 clearStack();
 
-describe.concurrent('convert', () => {
-  describe.concurrent('isHex', () => {
+describe('convert', () => {
+  describe('isHex', () => {
     test('возвращает true для строк, начинающихся с #', () => {
       expect(isHex('#ff0000')).toBe(true);
       expect(isHex('#abc')).toBe(true);
@@ -51,7 +51,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hexToRgba', () => {
+  describe('hexToRgba', () => {
     test('преобразует 6-значный hex в rgba', () => {
       expect(hexToRgba('#ff0000')).toEqual({ r: 255, g: 0, b: 0, a: 1 });
       expect(hexToRgba('#00ff00')).toEqual({ r: 0, g: 255, b: 0, a: 1 });
@@ -89,7 +89,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hexToHsva', () => {
+  describe('hexToHsva', () => {
     test('преобразует hex в hsva', () => {
       expect(hexToHsva('#ff0000')).toEqual({ h: 0, s: 100, v: 100, a: 1 });
       expect(hexToHsva('#00ff00')).toEqual({ h: 120, s: 100, v: 100, a: 1 });
@@ -114,7 +114,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hexToHsvaRound', () => {
+  describe('hexToHsvaRound', () => {
     test('преобразует hex в hsva с округлением', () => {
       // Округление до целых для h, s, v и до двух знаков для a
       expect(hexToHsvaRound('#ff0000')).toEqual({ h: 0, s: 100, v: 100, a: 1 });
@@ -157,7 +157,7 @@ describe.concurrent('convert', () => {
       });
     });
   });
-  describe.concurrent('parseHue', () => {
+  describe('parseHue', () => {
     test('преобразует градусы в градусы', () => {
       expect(parseHue('180', 'deg')).toBe(180);
       expect(parseHue('180')).toBe(180);
@@ -176,7 +176,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hslaToHsva', () => {
+  describe('hslaToHsva', () => {
     test('преобразует hsla в hsva', () => {
       expect(hslaToHsva({ h: 0, s: 100, l: 50, a: 1 })).toEqual({
         h: 0,
@@ -230,7 +230,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToHsla', () => {
+  describe('hsvaToHsla', () => {
     test('преобразует hsva в hsla', () => {
       expect(hsvaToHsla({ h: 0, s: 100, v: 100, a: 1 })).toEqual({
         h: 0,
@@ -284,7 +284,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToRgba', () => {
+  describe('hsvaToRgba', () => {
     test('преобразует hsva в rgba', () => {
       expect(hsvaToRgba({ h: 0, s: 100, v: 100, a: 1 })).toEqual({
         r: 255,
@@ -344,7 +344,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('rgbaToHsva', () => {
+  describe('rgbaToHsva', () => {
     test('преобразует rgba в hsva', () => {
       expect(rgbaToHsva({ r: 255, g: 0, b: 0, a: 1 })).toEqual({
         h: 0,
@@ -404,7 +404,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToHex', () => {
+  describe('hsvaToHex', () => {
     test('преобразует hsva в hex', () => {
       expect(hsvaToHex({ h: 0, s: 100, v: 100, a: 1 })).toBe('#ff0000');
       expect(hsvaToHex({ h: 120, s: 100, v: 100, a: 1 })).toBe('#00ff00');
@@ -427,7 +427,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('rgbaToHex', () => {
+  describe('rgbaToHex', () => {
     test('преобразует rgba в hex', () => {
       expect(rgbaToHex({ r: 255, g: 0, b: 0, a: 1 })).toBe('#ff0000');
       expect(rgbaToHex({ r: 0, g: 255, b: 0, a: 1 })).toBe('#00ff00');
@@ -449,7 +449,7 @@ describe.concurrent('convert', () => {
       expect(rgbaToHex({ r: 128, g: 0, b: 128, a: 0.3 })).toBe('#8000804d');
     });
   });
-  describe.concurrent('hslaStringToHsva', () => {
+  describe('hslaStringToHsva', () => {
     test('преобразует строку hsl в hsva', () => {
       expect(hslaStringToHsva('hsl(0, 100%, 50%)')).toEqual({
         h: 0,
@@ -551,7 +551,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaStringToHsva', () => {
+  describe('hsvaStringToHsva', () => {
     test('преобразует строку hsv в hsva', () => {
       expect(hsvaStringToHsva('hsv(0, 100%, 100%)')).toEqual({
         h: 0,
@@ -621,7 +621,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('rgbaStringToHsva', () => {
+  describe('rgbaStringToHsva', () => {
     test('преобразует строку rgb в hsva', () => {
       expect(rgbaStringToHsva('rgb(255, 0, 0)')).toEqual({
         h: 0,
@@ -725,7 +725,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToHslString', () => {
+  describe('hsvaToHslString', () => {
     test('возвращает строку hsl', () => {
       expect(hsvaToHslString({ h: 0, s: 100, v: 100, a: 1 })).toBe(
         'hsl(0, 100%, 50%)',
@@ -749,7 +749,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToHslaString', () => {
+  describe('hsvaToHslaString', () => {
     test('возвращает строку hsla', () => {
       expect(hsvaToHslaString({ h: 0, s: 100, v: 100, a: 1 })).toBe(
         'hsla(0, 100%, 50%, 1)',
@@ -773,7 +773,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToHsvString', () => {
+  describe('hsvaToHsvString', () => {
     test('возвращает строку hsv', () => {
       expect(hsvaToHsvString({ h: 0, s: 100, v: 100, a: 1 })).toBe(
         'hsv(0, 100%, 100%)',
@@ -797,7 +797,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToHsvaString', () => {
+  describe('hsvaToHsvaString', () => {
     test('возвращает строку hsva', () => {
       expect(hsvaToHsvaString({ h: 0, s: 100, v: 100, a: 1 })).toBe(
         'hsva(0, 100%, 100%, 1)',
@@ -821,7 +821,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToRgbString', () => {
+  describe('hsvaToRgbString', () => {
     test('возвращает строку rgb', () => {
       expect(hsvaToRgbString({ h: 0, s: 100, v: 100, a: 1 })).toBe(
         'rgb(255, 0, 0)',
@@ -845,7 +845,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToRgbaString', () => {
+  describe('hsvaToRgbaString', () => {
     test('возвращает строку rgba', () => {
       expect(hsvaToRgbaString({ h: 0, s: 100, v: 100, a: 1 })).toBe(
         'rgba(255, 0, 0, 1)',
@@ -868,7 +868,7 @@ describe.concurrent('convert', () => {
       );
     });
   });
-  describe.concurrent('roundHsva', () => {
+  describe('roundHsva', () => {
     test('округляет компоненты hsva', () => {
       expect(roundHsva({ h: 0.4, s: 99.6, v: 100.2, a: 0.666666 })).toEqual({
         h: 0,
@@ -910,7 +910,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('rgbaToRgb', () => {
+  describe('rgbaToRgb', () => {
     test('удаляет альфа-канал', () => {
       expect(rgbaToRgb({ r: 255, g: 0, b: 0, a: 0.5 })).toEqual({
         r: 255,
@@ -920,7 +920,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hslaToHsl', () => {
+  describe('hslaToHsl', () => {
     test('удаляет альфа-канал', () => {
       expect(hslaToHsl({ h: 0, s: 100, l: 50, a: 0.5 })).toEqual({
         h: 0,
@@ -930,7 +930,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToHsv', () => {
+  describe('hsvaToHsv', () => {
     test('удаляет альфа-канал', () => {
       expect(hsvaToHsv({ h: 0, s: 100, v: 100, a: 0.5 })).toEqual({
         h: 0,
@@ -940,7 +940,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaToHsvRound', () => {
+  describe('hsvaToHsvRound', () => {
     test('удаляет альфа-канал и округляет', () => {
       expect(hsvaToHsvRound({ h: 0.4, s: 99.6, v: 100.2, a: 0.5 })).toEqual({
         h: 0,
@@ -950,7 +950,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('rgbaToHsvaRound', () => {
+  describe('rgbaToHsvaRound', () => {
     test('преобразует rgba в hsva с округлением', () => {
       expect(rgbaToHsvaRound({ r: 255, g: 0, b: 0, a: 0.5 })).toEqual({
         h: 0,
@@ -986,7 +986,7 @@ describe.concurrent('convert', () => {
     });
   });
 
-  describe.concurrent('hsvaStringToHsvaRound', () => {
+  describe('hsvaStringToHsvaRound', () => {
     test('преобразует строку hsva в hsva с округлением', () => {
       expect(
         hsvaStringToHsvaRound('hsva(0.4, 99.6%, 100.2%, 0.666666)'),

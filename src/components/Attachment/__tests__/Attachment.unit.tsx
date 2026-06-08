@@ -1,5 +1,5 @@
 import { IconSave } from '@consta/icons/IconSave';
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -9,7 +9,7 @@ import { describe, expect, test, vi } from 'vitest';
 import { createIconMock } from '##/../__mocks__/IconMock';
 import { presetGpnDefault, Theme } from '##/components/Theme';
 import { setRef } from '##/utils/setRef';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { Attachment, cnAttachment } from '../Attachment';
 
@@ -71,16 +71,15 @@ const getButton = (ctx: TestContext, index = 0) => {
   return getButtons(ctx)[index];
 };
 
-describe.concurrent('Компонент Attachment', () => {
+describe('Компонент Attachment', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = renderComponent(ctx, {});
-      await wrap(tick());
 
       expect(() => render).not.toThrow();
     }));
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test(`ref присвоен`, (ctx) =>
       context.start(async () => {
         const ref = { current: null };
@@ -89,45 +88,41 @@ describe.concurrent('Компонент Attachment', () => {
           ref: (el: HTMLElement) => setRef(ref, el),
         });
 
-        await wrap(tick());
-
         expect(ref.current).toBeTruthy();
       }));
   });
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка className', () => {
+  describe('проверка props', () => {
+    describe('проверка className', () => {
       test(`Присваивается дополнительный className`, (ctx) =>
         context.start(async () => {
           const className = 'className';
 
           renderComponent(ctx, { className });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(className);
         }));
     });
 
-    describe.concurrent('проверка as', () => {
+    describe('проверка as', () => {
       const tags = ['a', 'div', 'span'] as const;
 
       tags.forEach((el) => {
         test(`должен рендериться как <${el}>`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { as: el });
-            await wrap(tick());
+
             expect(getRender(ctx).tagName).toEqual(el.toUpperCase());
           }));
       });
     });
 
-    describe.concurrent('проверка fileName', () => {
+    describe('проверка fileName', () => {
       test(`fileName отображается`, (ctx) =>
         context.start(async () => {
           const fileName = 'fileName';
 
           renderComponent(ctx, { fileName });
-
-          await wrap(tick());
 
           const fileNameElement = getFileName(ctx) as HTMLDivElement;
 
@@ -135,14 +130,12 @@ describe.concurrent('Компонент Attachment', () => {
         }));
     });
 
-    describe.concurrent('проверка fileDescription', () => {
+    describe('проверка fileDescription', () => {
       test(`fileDescription отображается`, (ctx) =>
         context.start(async () => {
           const fileDescription = 'fileDescription';
 
           renderComponent(ctx, { fileDescription });
-
-          await wrap(tick());
 
           const fileDescriptionElement = getFileDescription(
             ctx,
@@ -152,14 +145,12 @@ describe.concurrent('Компонент Attachment', () => {
         }));
     });
 
-    describe.concurrent('проверка errorText', () => {
+    describe('проверка errorText', () => {
       test(`errorText отображается`, (ctx) =>
         context.start(async () => {
           const errorText = 'errorText';
 
           renderComponent(ctx, { errorText });
-
-          await wrap(tick());
 
           const errorTextElement = getErrorText(ctx) as HTMLDivElement;
 
@@ -167,13 +158,13 @@ describe.concurrent('Компонент Attachment', () => {
         }));
     });
 
-    describe.concurrent('проверка loading', () => {
+    describe('проверка loading', () => {
       test(`fileDescription не отображается если loading=true`, (ctx) =>
         context.start(async () => {
           const fileDescription = 'fileDescription';
 
           renderComponent(ctx, { fileDescription, loading: true });
-          await wrap(tick());
+
           expect(getFileDescription(ctx)).toEqual(null);
         }));
 
@@ -182,8 +173,6 @@ describe.concurrent('Компонент Attachment', () => {
           const loadingText = 'loadingText';
 
           renderComponent(ctx, { loadingText, loading: true });
-
-          await wrap(tick());
 
           const loadingTextElement = getLoadingText(ctx) as HTMLDivElement;
 
@@ -196,8 +185,6 @@ describe.concurrent('Компонент Attachment', () => {
           const loadingProgress = 5;
 
           renderComponent(ctx, { loadingText, loading: true, loadingProgress });
-
-          await wrap(tick());
 
           const loadingTextElement = getLoadingText(ctx) as HTMLDivElement;
 
@@ -212,13 +199,11 @@ describe.concurrent('Компонент Attachment', () => {
 
           renderComponent(ctx, { loadingText });
 
-          await wrap(tick());
-
           expect(getLoadingText(ctx)).toEqual(null);
         }));
     });
 
-    describe.concurrent('проверка onButtonClick', () => {
+    describe('проверка onButtonClick', () => {
       test(`событие на кнопке срабатывает`, (ctx) =>
         context.start(async () => {
           const handleClick = vi.fn();
@@ -228,8 +213,6 @@ describe.concurrent('Компонент Attachment', () => {
             buttonIcon: IconSave,
           });
 
-          await wrap(tick());
-
           const buttonElement = getButton(ctx) as HTMLButtonElement;
 
           fireEvent.click(buttonElement);
@@ -237,14 +220,12 @@ describe.concurrent('Компонент Attachment', () => {
         }));
     });
 
-    describe.concurrent('проверка onClick', () => {
+    describe('проверка onClick', () => {
       test(`событие срабатывает`, (ctx) =>
         context.start(async () => {
           const handleClick = vi.fn();
 
           renderComponent(ctx, { onClick: handleClick });
-
-          await wrap(tick());
 
           const renderElement = getRender(ctx) as unknown as HTMLButtonElement;
 
@@ -253,7 +234,7 @@ describe.concurrent('Компонент Attachment', () => {
         }));
     });
 
-    describe.concurrent('проверка actions', () => {
+    describe('проверка actions', () => {
       test(`Количество кнопок совпадает с actions.length`, (ctx) =>
         context.start(async () => {
           const actions = [
@@ -278,8 +259,6 @@ describe.concurrent('Компонент Attachment', () => {
             actions,
           });
 
-          await wrap(tick());
-
           const buttons = getActionsButtons(ctx);
 
           fireEvent.click(buttons[0]);
@@ -301,8 +280,6 @@ describe.concurrent('Компонент Attachment', () => {
             actions,
           });
 
-          await wrap(tick());
-
           const buttons = getActionsButtons(ctx);
 
           expect(buttons[0]).toHaveTextContent('Icon1');
@@ -322,8 +299,6 @@ describe.concurrent('Компонент Attachment', () => {
           renderComponent(ctx, {
             actions,
           });
-
-          await wrap(tick());
 
           const buttons = getActionsButtons(ctx);
 

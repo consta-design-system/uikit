@@ -8,7 +8,7 @@ import { formatClassName } from '../utils/format';
 createRoot();
 clearStack();
 
-describe.concurrent('formatClassName', () => {
+describe('formatClassName', () => {
   test('объединяет непустые строки через пробел', () => {
     expect(formatClassName(['class1', 'class2', 'class3'])).toBe(
       'class1 class2 class3',

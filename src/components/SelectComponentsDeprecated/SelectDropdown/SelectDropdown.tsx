@@ -1,13 +1,13 @@
 import './SelectDropdown.css';
 
 import React, { Fragment, useMemo, useRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import {
   cnListBox,
   ListItem,
   mapVerticalSpace,
 } from '##/components/ListCanary';
+import { Transition } from '##/components/Transition';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { SelectAllItem } from '##/utils/getGroups';
@@ -113,12 +113,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
   const offset = offsetProp === 'none' ? undefined : offsetProp;
 
   return (
-    <Transition
-      in={isOpen}
-      unmountOnExit
-      nodeRef={popoverRef}
-      timeout={animateTimeout}
-    >
+    <Transition in={isOpen} unmountOnExit timeout={animateTimeout}>
       {(animate) => {
         const getIndex = fabricIndex();
         return (
@@ -164,6 +159,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                       inputValue={group.label}
                       indent={indent}
                       {...getOptionProps({ index: getIndex(), item: group })}
+                      key="selectCreateButton"
                     />
                   );
                 }
@@ -211,6 +207,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                   size={size}
                   label={labelForNotFound}
                   innerOffset={indent}
+                  key="labelForNotFound"
                 >
                   {labelForNotFound}
                 </ListItem>
@@ -220,6 +217,7 @@ export const SelectDropdown: SelectDropdown = (props) => {
                   size={size}
                   label={labelForEmptyItems}
                   innerOffset={indent}
+                  key="labelForEmptyItems"
                 >
                   {labelForEmptyItems}
                 </ListItem>

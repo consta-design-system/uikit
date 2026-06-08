@@ -9,7 +9,7 @@ import { getMonthsOfYear } from '../helpers';
 createRoot();
 clearStack();
 
-describe.concurrent('DateTime/getMonthsOfYear', () => {
+describe('DateTime/getMonthsOfYear', () => {
   test('верный результат c date', () => {
     const result = getMonthsOfYear({
       date: new Date(1970, 0),

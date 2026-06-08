@@ -1,13 +1,13 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
-import { act, fireEvent, screen } from '@testing-library/react';
+import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { createIconMock } from '##/../__mocks__/IconMock';
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { cnList, List } from '../ListCanary';
 import { cnListGroupLabel } from '../ListGroupLabel';
@@ -65,17 +65,12 @@ const getItemLeftSlot = (ctx: TestContext, index: number) =>
 const getItemRightSlot = (ctx: TestContext, index: number) =>
   getListItem(ctx, index).querySelector(`.ListItemGrid-Slot_position_right`);
 
-const getListGroups = (ctx: TestContext) =>
-  document.querySelectorAll(
-    `#${testRootId(ctx)} *[data-testid=${testId}] > .ListGroupLabel`,
-  ) as unknown as HTMLElement[];
-
 const getListGroup = (ctx: TestContext, index: number) =>
   document.querySelectorAll(
     `#${testRootId(ctx)} *[data-testid=${testId}] > .ListGroupLabel`,
   )[index];
 
-describe.concurrent(`${testId}`, () => {
+describe(`${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = () => renderComponent(ctx, { items: [] });
@@ -98,7 +93,7 @@ describe.concurrent(`${testId}`, () => {
       });
     }));
 
-  describe.concurrent('интерактивные элементы', () => {
+  describe('интерактивные элементы', () => {
     test('рендерит список интерактивных элементов', (ctx) =>
       context.start(async () => {
         const handler1 = vi.fn();
@@ -147,7 +142,7 @@ describe.concurrent(`${testId}`, () => {
       }));
   });
 
-  describe.concurrent('дополнительные элементы', () => {
+  describe('дополнительные элементы', () => {
     const iconText = 'IconMock';
     const IconLeftMock = createIconMock(iconText);
 

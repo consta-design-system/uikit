@@ -1,13 +1,16 @@
 import { atom, computed, effect } from '@reatom/core';
 
+import { named } from '##/utils/state/generateAtomName';
+
 export const computedSet = <State>(
   cb: (() => State) | ((state?: State) => State),
   name?: string,
 ) => {
-  const computedAtom = computed(cb, name);
-  const setAtom = atom<State>(computedAtom());
+  const n = named(name, 'computedSet');
 
-  effect(() => setAtom.set(computedAtom()));
+  const computedAtom = computed(cb, n('computedAtom'));
+  const setAtom = atom<State>(computedAtom(), n('setAtom'));
+  effect(() => setAtom.set(computedAtom()), n('effect'));
 
   return setAtom;
 };

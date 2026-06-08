@@ -71,14 +71,14 @@ const getRightSide = (ctx: TestContext) => {
   return getRender(ctx).querySelector(`.TextField-Side_position_right`);
 };
 
-describe.concurrent('Компонент TextField', () => {
+describe('Компонент TextField', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка size', () => {
+  describe('проверка props', () => {
+    describe('проверка size', () => {
       textFieldPropSize.forEach((size) => {
         test(`присваивает класс для size=${size}`, (ctx) =>
           context.start(async () => {
@@ -89,7 +89,7 @@ describe.concurrent('Компонент TextField', () => {
       });
     });
 
-    describe.concurrent('проверка form', () => {
+    describe('проверка form', () => {
       textFieldPropForm.forEach((form) => {
         test(`присваивает класс для form=${form}`, (ctx) =>
           context.start(async () => {
@@ -102,7 +102,7 @@ describe.concurrent('Компонент TextField', () => {
       });
     });
 
-    describe.concurrent('проверка status', () => {
+    describe('проверка status', () => {
       textFieldPropStatus.forEach((status) => {
         test(`присваивает класс для status=${status}`, (ctx) =>
           context.start(async () => {
@@ -115,7 +115,7 @@ describe.concurrent('Компонент TextField', () => {
       });
     });
 
-    describe.concurrent('проверка view', () => {
+    describe('проверка view', () => {
       textFieldPropView.forEach((view) => {
         test(`присваивает класс для view=${view}`, (ctx) =>
           context.start(async () => {
@@ -126,7 +126,7 @@ describe.concurrent('Компонент TextField', () => {
       });
     });
 
-    describe.concurrent('проверка type', () => {
+    describe('проверка type', () => {
       test(`по умолчанию рендериться как input`, (ctx) =>
         context.start(async () => {
           renderComponent(ctx);
@@ -146,7 +146,7 @@ describe.concurrent('Компонент TextField', () => {
         }));
     });
 
-    describe.concurrent('проверка onChange', () => {
+    describe('проверка onChange', () => {
       test(`в callback попадает ожидаемое value`, (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
@@ -169,7 +169,7 @@ describe.concurrent('Компонент TextField', () => {
         }));
     });
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test(`присвоился дополнительный класс`, (ctx) =>
         context.start(async () => {
           const className = 'className';
@@ -179,7 +179,7 @@ describe.concurrent('Компонент TextField', () => {
         }));
     });
 
-    describe.concurrent('проверка leftSide', () => {
+    describe('проверка leftSide', () => {
       test(`отображается как текст`, (ctx) =>
         context.start(async () => {
           const leftSideText = 'leftSideText';
@@ -208,7 +208,7 @@ describe.concurrent('Компонент TextField', () => {
         }));
     });
 
-    describe.concurrent('проверка rightSide', () => {
+    describe('проверка rightSide', () => {
       test(`отображается как текст`, (ctx) =>
         context.start(async () => {
           const rightSideText = 'rightSideText';
@@ -240,7 +240,7 @@ describe.concurrent('Компонент TextField', () => {
     });
   });
 
-  describe.concurrent('проверка onWheel', () => {
+  describe('проверка onWheel', () => {
     test('вызывается onWheel', (ctx) =>
       context.start(async () => {
         const handleWheel = vi.fn();

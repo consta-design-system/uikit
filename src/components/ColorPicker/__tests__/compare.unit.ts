@@ -12,8 +12,8 @@ import {
 createRoot();
 clearStack();
 
-describe.concurrent('compare', () => {
-  describe.concurrent('equalColorObjects', () => {
+describe('compare', () => {
+  describe('equalColorObjects', () => {
     test('возвращает true для одинаковых объектов', () => {
       const first = { r: 255, g: 0, b: 0 };
       const second = { r: 255, g: 0, b: 0 };
@@ -44,7 +44,7 @@ describe.concurrent('compare', () => {
     });
   });
 
-  describe.concurrent('equalColorString', () => {
+  describe('equalColorString', () => {
     test('возвращает true для одинаковых строк', () => {
       expect(equalColorString('rgb(255, 0, 0)', 'rgb(255, 0, 0)')).toBe(true);
     });
@@ -59,7 +59,7 @@ describe.concurrent('compare', () => {
     });
   });
 
-  describe.concurrent('equalHex', () => {
+  describe('equalHex', () => {
     test('возвращает true для одинаковых hex в одном регистре', () => {
       expect(equalHex('#ff0000', '#ff0000')).toBe(true);
       expect(equalHex('ff0000', 'ff0000')).toBe(true);

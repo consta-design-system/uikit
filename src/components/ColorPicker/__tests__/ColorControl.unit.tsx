@@ -40,7 +40,7 @@ const renderComponent = <T,>(ctx: TestContext, props: ColorControlProps<T>) => {
   });
 };
 
-describe.concurrent(`${testId}`, () => {
+describe(`${testId}`, () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const value: HsvaColor = { h: 0, s: 0, v: 0, a: 1 };
@@ -54,10 +54,10 @@ describe.concurrent(`${testId}`, () => {
       expect(() => render()).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     const value: HsvaColor = { h: 120, s: 50, v: 75, a: 1 };
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test('присваивает дополнительный класс', (ctx) =>
         context.start(async () => {
           const className = 'custom-class';
@@ -72,7 +72,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка style', () => {
+    describe('проверка style', () => {
       test('присваивает дополнительные стили', (ctx) =>
         context.start(async () => {
           const style = { color: 'red' };
@@ -87,7 +87,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка ref', () => {
+    describe('проверка ref', () => {
       test('ref присваивается элементу', (ctx) =>
         context.start(async () => {
           const ref = React.createRef<HTMLDivElement>();
@@ -102,7 +102,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка disabled', () => {
+    describe('проверка disabled', () => {
       test('при disabled=true добавляет атрибут disabled на маркер и инпут', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -136,7 +136,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка onlyMarker', () => {
+    describe('проверка onlyMarker', () => {
       test('при onlyMarker=true не рендерит ColorPickerInput', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -165,7 +165,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка markerRef', () => {
+    describe('проверка markerRef', () => {
       test('ref присваивается кнопке маркера', (ctx) =>
         context.start(async () => {
           const markerRef = React.createRef<HTMLButtonElement>();
@@ -180,7 +180,7 @@ describe.concurrent(`${testId}`, () => {
         }));
     });
 
-    describe.concurrent('проверка формата и alpha', () => {
+    describe('проверка формата и alpha', () => {
       test('передает format и alpha в ColorPickerInput', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -198,7 +198,7 @@ describe.concurrent(`${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка взаимодействия', () => {
+  describe('проверка взаимодействия', () => {
     test('вызывает onChange при изменении значения в ColorPickerInput', (ctx) =>
       context.start(async () => {
         const onChange = vi.fn();
@@ -220,7 +220,7 @@ describe.concurrent(`${testId}`, () => {
       }));
   });
 
-  describe.concurrent('проверка маппинга size и form для ColorMarker', () => {
+  describe('проверка маппинга size и form для ColorMarker', () => {
     test('правильно маппит size xs -> xs', (ctx) =>
       context.start(async () => {
         const value: HsvaColor = { h: 0, s: 0, v: 0, a: 1 };

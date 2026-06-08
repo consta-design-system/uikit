@@ -38,13 +38,13 @@ const renderComponent = (
   });
 };
 
-describe.concurrent('Компонент DateTimeToggler', () => {
+describe('Компонент DateTimeToggler', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, { label: 'label' })).not.toThrow();
     }));
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test(`Присваивается дополнительный className`, (ctx) =>
       context.start(async () => {
         const className = 'className';
@@ -55,7 +55,7 @@ describe.concurrent('Компонент DateTimeToggler', () => {
       }));
   });
 
-  describe.concurrent('проверка label', () => {
+  describe('проверка label', () => {
     test(`label отображается`, (ctx) =>
       context.start(async () => {
         const label = 'label';
@@ -66,7 +66,7 @@ describe.concurrent('Компонент DateTimeToggler', () => {
       }));
   });
 
-  describe.concurrent('проверка onLabelClick', () => {
+  describe('проверка onLabelClick', () => {
     test(`onLabelClick отрабатывает`, (ctx) =>
       context.start(async () => {
         const onLabelClick = vi.fn();
@@ -86,7 +86,7 @@ describe.concurrent('Компонент DateTimeToggler', () => {
       }));
   });
 
-  describe.concurrent('проверка prevOnClick', () => {
+  describe('проверка prevOnClick', () => {
     test(`prevOnClick отрабатывает`, (ctx) =>
       context.start(async () => {
         const prevOnClick = vi.fn();
@@ -104,7 +104,7 @@ describe.concurrent('Компонент DateTimeToggler', () => {
       }));
   });
 
-  describe.concurrent('проверка nextOnClick', () => {
+  describe('проверка nextOnClick', () => {
     test(`nextOnClick отрабатывает`, (ctx) =>
       context.start(async () => {
         const nextOnClick = vi.fn();

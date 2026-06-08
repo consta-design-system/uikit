@@ -53,13 +53,13 @@ const getRender = (ctx: TestContext) =>
     `#${testPopoverId(ctx)} [data-testid="${testId}"]`,
   ) as HTMLElement | null;
 
-describe.concurrent('Компонент Theme', () => {
+describe('Компонент Theme', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка useTheme', () => {
+  describe('проверка useTheme', () => {
     test('возвращает ожидаемый theme', (ctx) =>
       context.start(async () => {
         const Children = () => {

@@ -1,6 +1,6 @@
 import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
-import { act, screen } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import React, { createRef } from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test } from 'vitest';
@@ -56,15 +56,15 @@ const getRender = (ctx: TestContext) =>
 const getIcon = (ctx: TestContext) =>
   document.querySelector(`#${testRootId(ctx)} [data-testid="${iconTestID}"]`);
 
-describe.concurrent('Компонент FileBase', () => {
+describe('Компонент FileBase', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       renderComponent(ctx);
       expect(getRender(ctx)).toBeInTheDocument();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка size', () => {
+  describe('проверка props', () => {
+    describe('проверка size', () => {
       filePropSize.forEach((size) => {
         test(`присваивает класс для size=${size}`, (ctx) =>
           context.start(async () => {
@@ -74,7 +74,7 @@ describe.concurrent('Компонент FileBase', () => {
       });
     });
 
-    describe.concurrent('проверка extension', () => {
+    describe('проверка extension', () => {
       test('не пустой extension', (ctx) =>
         context.start(async () => {
           const extension = 'pdf';
@@ -122,7 +122,7 @@ describe.concurrent('Компонент FileBase', () => {
       }));
   });
 
-  describe.concurrent('проверка полиморфизма as и ref', () => {
+  describe('проверка полиморфизма as и ref', () => {
     test('рендерится с тегом по умолчанию (div)', (ctx) =>
       context.start(async () => {
         renderComponent(ctx);

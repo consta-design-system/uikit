@@ -40,8 +40,8 @@ const renderComponent = (ctx: TestContext, props: any = {}) => {
   });
 };
 
-describe.concurrent('Компонент DateTime_type_month', () => {
-  describe.concurrent('проверка value', () => {
+describe('Компонент DateTime_type_month', () => {
+  describe('проверка value', () => {
     ['classic', 'book', 'slider'].forEach((view) => {
       test(`выбранная дата отображается верно для view=${view}`, (ctx) =>
         context.start(async () => {
@@ -81,7 +81,7 @@ describe.concurrent('Компонент DateTime_type_month', () => {
     });
   });
 
-  describe.concurrent('проверка currentVisibleDate', () => {
+  describe('проверка currentVisibleDate', () => {
     test(`Дата отображается верная при view='classic'`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -123,7 +123,7 @@ describe.concurrent('Компонент DateTime_type_month', () => {
       }));
   });
 
-  describe.concurrent('проверка onChangeCurrentVisibleDate', () => {
+  describe('проверка onChangeCurrentVisibleDate', () => {
     test(`верно срабатывает при view='classic`, (ctx) =>
       context.start(async () => {
         const handleClick = vi.fn();
@@ -188,7 +188,7 @@ describe.concurrent('Компонент DateTime_type_month', () => {
       }));
   });
 
-  describe.concurrent('проверка onChange', () => {
+  describe('проверка onChange', () => {
     ['classic', 'book', 'slider'].forEach((view) => {
       test(`onChange отрабатывает при клике на месяц при view="${view}"`, (ctx) =>
         context.start(async () => {
@@ -252,7 +252,7 @@ describe.concurrent('Компонент DateTime_type_month', () => {
     });
   });
 
-  describe.concurrent('проверка onChangeRange', () => {
+  describe('проверка onChangeRange', () => {
     ['classic', 'book', 'slider'].forEach((view) => {
       test(`onChangeRange отрабатывает при клике на месяц при view="${view}"`, (ctx) =>
         context.start(async () => {
@@ -292,7 +292,7 @@ describe.concurrent('Компонент DateTime_type_month', () => {
     });
   });
 
-  describe.concurrent('переключение календаря', () => {
+  describe('переключение календаря', () => {
     test('проверка смены года через DateTimeToggler-Button_direction_prev для view="classic"', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -424,7 +424,7 @@ describe.concurrent('Компонент DateTime_type_month', () => {
       }));
   });
 
-  describe.concurrent('проверка locale', () => {
+  describe('проверка locale', () => {
     ['classic', 'book', 'slider'].forEach((view) => {
       test(`проверка применения locale="fa-IR" при view="${view}"`, (ctx) =>
         context.start(async () => {
@@ -441,7 +441,7 @@ describe.concurrent('Компонент DateTime_type_month', () => {
     });
   });
 
-  describe.concurrent('проверка disableDates', () => {
+  describe('проверка disableDates', () => {
     ['classic', 'book', 'slider'].forEach((view) => {
       test(`корректно отключает даты при view=${view}`, (ctx) =>
         context.start(async () => {

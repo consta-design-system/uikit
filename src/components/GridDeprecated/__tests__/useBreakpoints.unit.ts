@@ -11,7 +11,7 @@ clearStack();
 
 const cnTest = cn('Test');
 
-describe.concurrent('generateBreakpointsCn', () => {
+describe('generateBreakpointsCn', () => {
   test('breakpoints = undefined', () => {
     const result = generateBreakpointsCn(cnTest);
     const expected = '';

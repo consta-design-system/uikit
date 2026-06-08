@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { sortBy, updateAt } from '../array';
 
-describe.concurrent('sortBy', () => {
+describe('sortBy', () => {
   test('сортирует по числовому параметру', () => {
     const arr = [
       { a: 2 },
@@ -147,7 +147,7 @@ describe.concurrent('sortBy', () => {
   });
 });
 
-describe.concurrent('updateAt', () => {
+describe('updateAt', () => {
   test('обновляет элемент по индексу', () => {
     expect(updateAt([0, 1, 2, 3], 2, 999)).toEqual([0, 1, 999, 3]);
   });

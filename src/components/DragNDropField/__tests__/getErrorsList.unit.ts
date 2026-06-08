@@ -2,6 +2,7 @@ import { clearStack } from '@reatom/core';
 import { describe, expect, test } from 'vitest';
 
 import { createRoot } from '##/utils/vitest';
+
 import { getErrorsList } from '../getErrorsList';
 import { defaultLocale } from '../locale';
 
@@ -13,7 +14,7 @@ const sizes = {
   maxSize: 512 * 1024,
 };
 
-describe.concurrent('getErrorsList', () => {
+describe('getErrorsList', () => {
   const filePng = {
     name: 'file.png',
     type: 'image/png',

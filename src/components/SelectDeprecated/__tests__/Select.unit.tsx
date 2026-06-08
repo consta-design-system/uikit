@@ -1,4 +1,4 @@
-import { clearStack, context, sleep, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -9,10 +9,8 @@ import { presetGpnDefault, Theme } from '##/components/Theme';
 import {
   createRoot,
   TestContext,
-  testOutsideId,
   testPopoverId,
   testRootId,
-  tick,
 } from '##/utils/vitest';
 
 import { cn } from '../../../utils/bem';
@@ -70,10 +68,6 @@ function getRender(ctx: TestContext) {
     ?.querySelector(`[data-testid="${testId}"]`) as HTMLElement;
 }
 
-function getOutside(ctx: TestContext) {
-  return document.getElementById(testOutsideId(ctx))!;
-}
-
 function getItemsList(ctx: TestContext) {
   return document
     .getElementById(testPopoverId(ctx))
@@ -88,16 +82,6 @@ function getControlValue(ctx: TestContext) {
 
 function getRenderValue(ctx: TestContext) {
   return getRender(ctx).querySelector(`.${cnRenderValue()}`) as HTMLDivElement;
-}
-
-function getIndicatorsDropdown(ctx: TestContext) {
-  return getRender(ctx).querySelector(
-    `.${cnSelect('IndicatorsDropdown')}`,
-  ) as HTMLElement;
-}
-
-function indicatorsDropdownClick(ctx: TestContext) {
-  fireEvent.click(getIndicatorsDropdown(ctx));
 }
 
 function getInput(ctx: TestContext) {
@@ -146,11 +130,7 @@ function inputClick(ctx: TestContext) {
   fireEvent.click(getInput(ctx));
 }
 
-function outsideClick(ctx: TestContext) {
-  fireEvent.mouseDown(getOutside(ctx));
-}
-
-describe.concurrent('Компонент Select', () => {
+describe('Компонент Select', () => {
   test('должен рендериться без ошибок', async (ctx) => {
     await context.start(async () => {
       expect(() => renderComponent(ctx, defaultProps)).not.toThrow();
@@ -346,7 +326,7 @@ describe.concurrent('Компонент Select', () => {
     });
   });
 
-  describe.concurrent('проверка form', () => {
+  describe('проверка form', () => {
     propForm.forEach((form) => {
       test(`присваивает класс для form = ${form}`, async (ctx) => {
         await context.start(async () => {

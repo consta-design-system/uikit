@@ -30,7 +30,7 @@ const resultMap: Record<string, string> = {
   'warning-tinted': 'var(--color-typo-warning)',
 };
 
-describe.concurrent('Компонент Badge проверка getTextColor', () => {
+describe('Компонент Badge проверка getTextColor', () => {
   badgePropStatus.forEach((status) => {
     badgePropView.forEach((view) => {
       test(`возвращает правильное значение для status=${status}, view=${view}`, () => {

@@ -1,7 +1,6 @@
 import './SelectDropdown.css';
 
 import React, { Fragment, useEffect, useMemo, useRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import {
   cnListBox,
@@ -10,6 +9,7 @@ import {
   mapVerticalSpace,
 } from '##/components/ListCanary';
 import { Popover, PopoverPropOffset } from '##/components/Popover';
+import { Transition } from '##/components/Transition';
 import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag';
 import { forkRef, useForkRef } from '##/hooks/useForkRef';
@@ -192,12 +192,7 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
   }, [scrollElementRef.current]);
 
   return (
-    <Transition
-      in={isOpen}
-      unmountOnExit
-      nodeRef={popoverRef}
-      timeout={animateTimeout}
-    >
+    <Transition in={isOpen} unmountOnExit timeout={animateTimeout}>
       {(animate) => {
         const getIndex = fabricIndex();
         const getVirtualIndex = fabricIndex();
@@ -252,8 +247,9 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
                         {...getOptionProps({
                           index,
                           item: group,
-                          keyPrefix: groupIndex,
+                          keyPrefix: `createButton-${groupIndex}`,
                         })}
+                        key={`createButton-${groupIndex}`}
                       />
                     );
                   }
@@ -271,7 +267,7 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
                             size={size}
                             indent={indent}
                             ref={listRefs[virtualIndex]}
-                            key={`group-${group.key}`}
+                            key={`group-label-${group.key}`}
                           />
                         )}
                       {group.items.map((item, i) => {
@@ -293,6 +289,7 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
                                   item,
                                   keyPrefix: i,
                                 })}
+                                key={`select-all-${group.key}`}
                                 intermediate={
                                   item.checkedCount && item.totalCount
                                     ? item.checkedCount !== item.totalCount
@@ -331,11 +328,12 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
                   );
                 })}
                 {isLoading && isListShowed && (
-                  <ListLoader size={size} innerOffset={indent} />
+                  <ListLoader key="loader" size={size} innerOffset={indent} />
                 )}
               </div>
               {!isLoading && hasItems && notFound && labelForNotFound && (
                 <ListItem
+                  key="not-found"
                   size={size}
                   label={labelForNotFound}
                   innerOffset={indent}
@@ -345,6 +343,7 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
               )}
               {!isLoading && !hasItems && labelForEmptyItems && (
                 <ListItem
+                  key="empty"
                   size={size}
                   label={labelForEmptyItems}
                   innerOffset={indent}

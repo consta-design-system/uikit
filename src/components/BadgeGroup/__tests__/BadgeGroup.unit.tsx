@@ -234,15 +234,15 @@ const renderComponent: Render = (ctx, props) => {
   });
 };
 
-describe.concurrent(`Компонент ${testId}`, () => {
-  test(`должен рендериться без ошибок`, async (ctx) => {
-    await context.start(async () => {
+describe(`Компонент ${testId}`, () => {
+  test(`должен рендериться без ошибок`, (ctx) => {
+    context.start(() => {
       expect(() => renderComponent(ctx, { items: itemsDefault })).not.toThrow();
     });
   });
 
-  test(`проверка className`, async (ctx) => {
-    await context.start(async () => {
+  test(`проверка className`, (ctx) => {
+    context.start(() => {
       const className = 'className';
       renderComponent(ctx, { items: itemsDefault, className });
 
@@ -250,8 +250,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  test(`проверка ref`, async (ctx) => {
-    await context.start(async () => {
+  test(`проверка ref`, (ctx) => {
+    context.start(() => {
       const ref = React.createRef<HTMLDivElement>();
       renderComponent(ctx, { items: itemsDefault, ref });
 
@@ -259,8 +259,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  test(`проверка onClick`, async (ctx) => {
-    await context.start(async () => {
+  test(`проверка onClick`, (ctx) => {
+    context.start(() => {
       const onClick = vi.fn();
       renderComponent(ctx, { items: itemsDefault, onClick });
 
@@ -269,17 +269,17 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent(`проверка fitMode = reduction`, () => {
-    test(`элемент More отобразился`, async (ctx) => {
-      await context.start(async () => {
+  describe(`проверка fitMode = reduction`, () => {
+    test(`элемент More отобразился`, (ctx) => {
+      context.start(() => {
         renderComponent(ctx, { items: itemsDefault, fitMode: 'reduction' });
 
         expect(getItems(ctx).length).toEqual(itemsDefault.length + 1);
       });
     });
 
-    test(`текст на элементе More отобразился`, async (ctx) => {
-      await context.start(async () => {
+    test(`текст на элементе More отобразился`, (ctx) => {
+      context.start(() => {
         renderComponent(ctx, {
           items: itemsDefault,
           fitMode: 'reduction',
@@ -290,9 +290,9 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent(`проверка items`, () => {
-    test(`количество должно совпадать с передаваемым`, async (ctx) => {
-      await context.start(async () => {
+  describe(`проверка items`, () => {
+    test(`количество должно совпадать с передаваемым`, (ctx) => {
+      context.start(() => {
         renderComponent(ctx, { items: itemsDefault });
 
         expect(getItems(ctx).length).toEqual(itemsDefault.length);
@@ -300,16 +300,16 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
 
     itemsDefault.forEach((item, index) => {
-      test(`проверка label у элемента -  ${index}`, async (ctx) => {
-        await context.start(async () => {
+      test(`проверка label у элемента -  ${index}`, (ctx) => {
+        context.start(() => {
           renderComponent(ctx, { items: itemsDefault });
 
           expect(getItemLabel(ctx, index)).toEqual(item.label);
         });
       });
 
-      test(`проверка --badge-bg-color у элемента - ${index}`, async (ctx) => {
-        await context.start(async () => {
+      test(`проверка --badge-bg-color у элемента - ${index}`, (ctx) => {
+        context.start(() => {
           renderComponent(ctx, { items: itemsDefault });
 
           expect(
@@ -318,8 +318,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
         });
       });
 
-      test(`проверка --badge-text-color у элемента - ${index}`, async (ctx) => {
-        await context.start(async () => {
+      test(`проверка --badge-text-color у элемента - ${index}`, (ctx) => {
+        context.start(() => {
           renderComponent(ctx, { items: itemsDefault });
 
           expect(
@@ -333,8 +333,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
         });
       });
 
-      test(`проверка --badge-border-color у элемента - ${index}`, async (ctx) => {
-        await context.start(async () => {
+      test(`проверка --badge-border-color у элемента - ${index}`, (ctx) => {
+        context.start(() => {
           renderComponent(ctx, { items: itemsDefault });
 
           const borderColor = getBorderColor(
@@ -352,8 +352,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
         });
       });
 
-      test(`проверка --badge-degree-mixing у элемента - ${index}`, async (ctx) => {
-        await context.start(async () => {
+      test(`проверка --badge-degree-mixing у элемента - ${index}`, (ctx) => {
+        context.start(() => {
           const degreeMixing = getDegreeMixing(
             itemsDefault[index].status || 'normal',
             itemsDefault[index].view || 'filled',
@@ -373,8 +373,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
     (['xs', 's', 'm', 'l'] as const).forEach((size) => {
       [true, false].forEach((minified) => {
         itemsDefault.forEach((item, index) => {
-          test(`проверка --badge-size при size = ${size}, minified = ${minified} у элемента - ${index}`, async (ctx) => {
-            await context.start(async () => {
+          test(`проверка --badge-size при size = ${size}, minified = ${minified} у элемента - ${index}`, (ctx) => {
+            context.start(() => {
               renderComponent(ctx, { items: itemsDefault, size, minified });
 
               expect(
@@ -388,8 +388,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
 
     (['xs', 's', 'm', 'l'] as const).forEach((size) => {
       itemsDefault.forEach((item, index) => {
-        test(`проверка --badge-text-size при size = ${size} у элемента - ${index}`, async (ctx) => {
-          await context.start(async () => {
+        test(`проверка --badge-text-size при size = ${size} у элемента - ${index}`, (ctx) => {
+          context.start(() => {
             renderComponent(ctx, { items: itemsDefault, size });
 
             expect(
@@ -404,8 +404,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
       (['round', 'default'] as const).forEach((form) => {
         [true, false].forEach((minified) => {
           itemsDefault.forEach((item, index) => {
-            test(`проверка --badge-horizontal-padding при size = ${size}, minified = ${minified}, form = ${form} у элемента - ${index}`, async (ctx) => {
-              await context.start(async () => {
+            test(`проверка --badge-horizontal-padding при size = ${size}, minified = ${minified}, form = ${form} у элемента - ${index}`, (ctx) => {
+              context.start(() => {
                 renderComponent(ctx, {
                   items: itemsDefault,
                   size,
@@ -435,8 +435,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
     (['xs', 's', 'm', 'l'] as const).forEach((size) => {
       [true, false].forEach((minified) => {
         itemsDefault.forEach((item, index) => {
-          test(`проверка --badge-minified-border-size при size = ${size}, minified = ${minified} у элемента - ${index}`, async (ctx) => {
-            await context.start(async () => {
+          test(`проверка --badge-minified-border-size при size = ${size}, minified = ${minified} у элемента - ${index}`, (ctx) => {
+            context.start(() => {
               renderComponent(ctx, { items: itemsDefault, size, minified });
 
               const minifiedBorderSize = getMinifiedBorderSize(size, minified);
@@ -454,8 +454,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
 
     itemsDefaultWithIcons.forEach((item, index) => {
-      test(`проверка iconLeft у элемента - ${index}`, async (ctx) => {
-        await context.start(async () => {
+      test(`проверка iconLeft у элемента - ${index}`, (ctx) => {
+        context.start(() => {
           renderComponent(ctx, { items: itemsDefaultWithIcons });
 
           const iconLeft = item?.iconLeft;
@@ -466,8 +466,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
         });
       });
 
-      test(`проверка iconRight у элемента - ${index}`, async (ctx) => {
-        await context.start(async () => {
+      test(`проверка iconRight у элемента - ${index}`, (ctx) => {
+        context.start(() => {
           renderComponent(ctx, { items: itemsDefaultWithIcons });
 
           const iconRight = itemsDefaultWithIcons[index]?.iconRight;
@@ -482,8 +482,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
 
     itemsDefaultWithTags.forEach((item, index) => {
-      test(`проверка tag у элемента - ${index}`, async (ctx) => {
-        await context.start(async () => {
+      test(`проверка tag у элемента - ${index}`, (ctx) => {
+        context.start(() => {
           renderComponent(ctx, { items: itemsDefaultWithTags });
 
           const tag = itemsDefaultWithTags[index]?.as?.toLowerCase();
@@ -494,8 +494,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
 
     itemsDefault.forEach((item, index) => {
-      test(`проверка ref у элемента - ${index}`, async (ctx) => {
-        await context.start(async () => {
+      test(`проверка ref у элемента - ${index}`, (ctx) => {
+        context.start(() => {
           renderComponent(ctx, { items: itemsDefault });
 
           expect(getItem(ctx, index)).toBe(item.ref?.current);
@@ -504,14 +504,14 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
 
     itemsDefaultWithAttributes.forEach((item, index) => {
-      describe.concurrent(`проверка attributes у элемента - ${index}`, () => {
+      describe(`проверка attributes у элемента - ${index}`, () => {
         item.attributes &&
           Object.keys(item.attributes).forEach((key) => {
             const value = item.attributes?.[
               key as keyof typeof item.attributes
             ] as string;
-            test(`${key} = ${value}`, async (ctx) => {
-              await context.start(async () => {
+            test(`${key} = ${value}`, (ctx) => {
+              context.start(() => {
                 renderComponent(ctx, { items: itemsDefaultWithAttributes });
 
                 expect(getItem(ctx, index)).toHaveAttribute(key, value);
@@ -522,9 +522,9 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка геттеров', () => {
-    test('проверка getItemAs', async (ctx) => {
-      await context.start(async () => {
+  describe('проверка геттеров', () => {
+    test('проверка getItemAs', (ctx) => {
+      context.start(() => {
         renderComponent(ctx, {
           items: customItems,
           getItemKey: getItemForComponent,
@@ -536,8 +536,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
 
     customItems.forEach((item, index) => {
-      test(`проверка getItemLabel для элемента - ${index}`, async (ctx) => {
-        await context.start(async () => {
+      test(`проверка getItemLabel для элемента - ${index}`, (ctx) => {
+        context.start(() => {
           renderComponent(ctx, {
             items: customItems,
             getItemKey: getItemForComponent,
@@ -551,8 +551,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    test(`проверка getItemIconLeft для элемента`, async (ctx) => {
-      await context.start(async () => {
+    test(`проверка getItemIconLeft для элемента`, (ctx) => {
+      context.start(() => {
         renderComponent(ctx, {
           items: customItems,
           getItemKey: getItemForComponent,
@@ -564,8 +564,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    test(`проверка getItemIconRight для элемента`, async (ctx) => {
-      await context.start(async () => {
+    test(`проверка getItemIconRight для элемента`, (ctx) => {
+      context.start(() => {
         renderComponent(ctx, {
           items: customItems,
           getItemKey: getItemForComponent,
@@ -577,8 +577,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    test(`проверка getItemStatus`, async (ctx) => {
-      await context.start(async () => {
+    test(`проверка getItemStatus`, (ctx) => {
+      context.start(() => {
         renderComponent(ctx, {
           items: customItems,
           getItemKey: getItemForComponent,
@@ -596,8 +596,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    test(`проверка getItemView`, async (ctx) => {
-      await context.start(async () => {
+    test(`проверка getItemView`, (ctx) => {
+      context.start(() => {
         renderComponent(ctx, {
           items: customItems,
           getItemKey: getItemForComponent,
@@ -615,8 +615,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    test(`проверка getItemAttributes`, async (ctx) => {
-      await context.start(async () => {
+    test(`проверка getItemAttributes`, (ctx) => {
+      context.start(() => {
         renderComponent(ctx, {
           items: customItems,
           getItemKey: getItemForComponent,
@@ -631,8 +631,8 @@ describe.concurrent(`Компонент ${testId}`, () => {
       });
     });
 
-    test(`проверка getItemRef`, async (ctx) => {
-      await context.start(async () => {
+    test(`проверка getItemRef`, (ctx) => {
+      context.start(() => {
         const refs: Record<string, React.RefObject<HTMLDivElement>> = {};
 
         customItems.forEach((item) => {

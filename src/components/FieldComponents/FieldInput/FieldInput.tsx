@@ -1,3 +1,4 @@
+import { wrap } from '@reatom/core';
 import React, { forwardRef } from 'react';
 
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';

@@ -51,8 +51,8 @@ const renderComponent = (
   });
 };
 
-describe.concurrent('Компонент DatePicker_type_yearRange', () => {
-  describe.concurrent('проверка onChange', () => {
+describe('Компонент DatePicker_type_yearRange', () => {
+  describe('проверка onChange', () => {
     test(`при клике по календарю срабатывает`, (ctx) =>
       context.start(async () => {
         const onChange = vi.fn();
@@ -74,7 +74,7 @@ describe.concurrent('Компонент DatePicker_type_yearRange', () => {
       }));
   });
 
-  describe.concurrent('проверка value', () => {
+  describe('проверка value', () => {
     test(`верно отображается в поле ввода`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {

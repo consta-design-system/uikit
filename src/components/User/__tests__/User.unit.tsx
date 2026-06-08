@@ -62,15 +62,15 @@ function getArrow(ctx: TestContext) {
   return getRender(ctx).querySelector(`.${cnUser('Icon')}`) as HTMLElement;
 }
 
-describe.concurrent('Компонент User', () => {
+describe('Компонент User', () => {
   test('должен рендериться без ошибок', async (ctx) => {
     await context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     });
   });
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка size', () => {
+  describe('проверка props', () => {
+    describe('проверка size', () => {
       userPropSize.forEach((size) => {
         test(`присваивает класс для size=${size}`, async (ctx) => {
           await context.start(async () => {
@@ -84,7 +84,7 @@ describe.concurrent('Компонент User', () => {
       });
     });
 
-    describe.concurrent('проверка status', () => {
+    describe('проверка status', () => {
       userPropStatus.forEach((status) => {
         test(`присваивает класс для status=${status}`, async (ctx) => {
           await context.start(async () => {
@@ -100,7 +100,7 @@ describe.concurrent('Компонент User', () => {
       });
     });
 
-    describe.concurrent('проверка view', () => {
+    describe('проверка view', () => {
       userPropView.forEach((view) => {
         test(`присваивает класс для view=${view}`, async (ctx) => {
           await context.start(async () => {
@@ -114,7 +114,7 @@ describe.concurrent('Компонент User', () => {
       });
     });
 
-    describe.concurrent('проверка width', () => {
+    describe('проверка width', () => {
       userPropWidth.forEach((width) => {
         test(`присваивает класс для width=${width}`, async (ctx) => {
           await context.start(async () => {
@@ -128,7 +128,7 @@ describe.concurrent('Компонент User', () => {
       });
     });
 
-    describe.concurrent('проверка name', () => {
+    describe('проверка name', () => {
       test(`текст отображается`, async (ctx) => {
         await context.start(async () => {
           const name = 'name';
@@ -141,7 +141,7 @@ describe.concurrent('Компонент User', () => {
       });
     });
 
-    describe.concurrent('проверка info', () => {
+    describe('проверка info', () => {
       test(`текст отображается`, async (ctx) => {
         await context.start(async () => {
           const info = 'info';
@@ -154,7 +154,7 @@ describe.concurrent('Компонент User', () => {
       });
     });
 
-    describe.concurrent('проверка minified', () => {
+    describe('проверка minified', () => {
       test(`если onlyAvatar, то не отображать name и info`, async (ctx) => {
         await context.start(async () => {
           const name = 'name';
@@ -190,7 +190,7 @@ describe.concurrent('Компонент User', () => {
       });
     });
 
-    describe.concurrent('проверка withArrow', () => {
+    describe('проверка withArrow', () => {
       test(`к блоку применился модификатор withArrow`, async (ctx) => {
         await context.start(async () => {
           renderComponent(ctx, { withArrow: true });

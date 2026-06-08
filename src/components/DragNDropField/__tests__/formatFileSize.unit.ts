@@ -9,7 +9,7 @@ import { defaultLocale } from '../locale';
 createRoot();
 clearStack();
 
-describe.concurrent('formatMaxFileSize', () => {
+describe('formatMaxFileSize', () => {
   test('форматирует байты', () => {
     expect(formatFileSize(1, defaultLocale)).toBe('1 байт');
     expect(formatFileSize(1023, defaultLocale)).toBe('1023 байт');

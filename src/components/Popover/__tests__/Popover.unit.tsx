@@ -69,7 +69,7 @@ const renderComponent = (
   });
 };
 
-describe.concurrent('Компонент Popover', () => {
+describe('Компонент Popover', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { isOpen: true });
@@ -102,7 +102,7 @@ describe.concurrent('Компонент Popover', () => {
       expect(ref.current).toBe(getRender(ctx));
     }));
 
-  describe.concurrent('проверка isInteractive', () => {
+  describe('проверка isInteractive', () => {
     test('при isInteractive=true можно взаимодействовать с содержимым поповера', (ctx) =>
       context.start(async () => {
         const onClick = vi.fn();

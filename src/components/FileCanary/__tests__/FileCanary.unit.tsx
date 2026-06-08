@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act } from '@testing-library/react';
 import React, { createRef } from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { defaultConfig } from '../config';
 import { File } from '../FileCanary';
@@ -37,21 +37,20 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="${testId}"]`,
   ) as HTMLElement;
 
-describe.concurrent('Компонент File', () => {
+describe('Компонент File', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = () => renderComponent(ctx, { extension: 'pdf' });
-      await wrap(tick());
+
       expect(render).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка extensions', () => {
+  describe('проверка props', () => {
+    describe('проверка extensions', () => {
       Object.entries(defaultConfig).forEach(([ext, config]) => {
         test(`для .${ext} использует правильный цвет`, (ctx) =>
           context.start(async () => {
             renderComponent(ctx, { extension: ext });
-            await wrap(tick());
 
             const element = getRender(ctx);
             expect(element.style.getPropertyValue('background-color')).toBe(
@@ -70,7 +69,6 @@ describe.concurrent('Компонент File', () => {
     test('передаёт пропс size в FileBase', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { extension: 'pdf', size: 's' });
-        await wrap(tick());
 
         const element = getRender(ctx);
         expect(element).toHaveClass(cnFileCanaryBase({ size: 's' }));
@@ -79,20 +77,18 @@ describe.concurrent('Компонент File', () => {
     test('передаёт пропс className в FileBase', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { extension: 'doc', className: 'extra-class' });
-        await wrap(tick());
 
         const element = getRender(ctx);
         expect(element).toHaveClass('extra-class');
       }));
   });
 
-  describe.concurrent('проверка полиморфизма as и ref', () => {
+  describe('проверка полиморфизма as и ref', () => {
     const extension = 'doc';
 
     test('рендерится с тегом по умолчанию (div)', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { extension });
-        await wrap(tick());
 
         const element = getRender(ctx);
         expect(element.tagName).toBe('DIV');
@@ -101,7 +97,6 @@ describe.concurrent('Компонент File', () => {
     test('рендерится с переданным тегом (span)', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { as: 'span', extension });
-        await wrap(tick());
 
         const element = getRender(ctx);
         expect(element.tagName).toBe('SPAN');
@@ -110,7 +105,6 @@ describe.concurrent('Компонент File', () => {
     test('рендерится с тегом a и принимает атрибут href', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { as: 'a', extension });
-        await wrap(tick());
 
         const element = getRender(ctx);
         expect(element.tagName).toBe('A');
@@ -120,7 +114,6 @@ describe.concurrent('Компонент File', () => {
       context.start(async () => {
         const ref = createRef<HTMLElement>();
         renderComponent(ctx, { ref, extension });
-        await wrap(tick());
 
         const element = getRender(ctx);
         expect(ref.current).toBe(element);
@@ -130,7 +123,6 @@ describe.concurrent('Компонент File', () => {
   test('использует специальный конфиг для неизвестного расширения', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { extension: 'custom' });
-      await wrap(tick());
 
       const element = getRender(ctx);
       expect(element.style.getPropertyValue('background-color')).toBe(

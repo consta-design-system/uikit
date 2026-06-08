@@ -4,6 +4,7 @@ import { act } from '@testing-library/react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { describe, expect, test } from 'vitest';
+import { userEvent } from 'vitest/browser';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
 import { animateTimeout } from '##/mixs/MixPopoverAnimate';
@@ -19,9 +20,9 @@ import { DatePicker, datePickerPropType } from '../DatePicker';
 import {
   getAdditionalControls,
   getDropdown,
+  getOutside,
   getRender,
   inputFocus,
-  outsideClick,
   testId,
 } from './helpers';
 
@@ -47,7 +48,7 @@ const renderComponent = (ctx: TestContext, props: DateTimeProps = {}) => {
   });
 };
 
-describe.concurrent('Компонент DatePicker', () => {
+describe('Компонент DatePicker', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = () => renderComponent(ctx);
@@ -90,7 +91,7 @@ describe.concurrent('Компонент DatePicker', () => {
           await wrap(sleep(animateTimeout));
           expect(getDropdown(ctx)).toBeInTheDocument();
 
-          outsideClick(ctx);
+          await wrap(userEvent.click(getOutside(ctx)));
 
           await wrap(sleep(animateTimeout));
           expect(getDropdown(ctx)).not.toBeInTheDocument();

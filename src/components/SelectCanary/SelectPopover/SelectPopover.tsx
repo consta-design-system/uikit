@@ -1,11 +1,10 @@
 import { classnames } from '@bem-react/classnames';
-import { action, AtomLike, computed, wrap } from '@reatom/core';
+import { AtomLike, computed } from '@reatom/core';
 import React from 'react';
 
 import { FieldPropSize } from '##/components/FieldComponents';
 import { cnListBox } from '##/components/ListCanary';
 import { Popover, PopoverPropOffset } from '##/components/Popover';
-// import { Transition, TransitionStatus } from 'react-transition-group';
 import { Transition, TransitionStatus } from '##/components/Transition';
 import {
   animateTimeout,
@@ -25,19 +24,16 @@ type Props = PropsWithJsxAttributes<{
   offset?: PopoverPropOffset | 'none';
   controlElAtom: AtomLike<HTMLDivElement | null>;
   children: React.ReactNode;
-  onMount: (isMount: boolean) => void;
+  onMount?: (isMount: boolean) => void;
   viewportRef?: React.RefObject<HTMLElement | null>;
   container?: Element;
 }>;
 
 export const SelectPopover = factoryComponent<HTMLDivElement, Props>(
-  ({ controlElAtom }, propsAtom) => {
+  ({ controlElAtom }) => {
     const anchorRefAtom = computed(() => ({
       current: controlElAtom(),
     }));
-
-    const onEntering = action(() => propsAtom().onMount(true));
-    const onExited = action(() => propsAtom().onMount(false));
 
     return (props) => {
       const {
@@ -56,13 +52,7 @@ export const SelectPopover = factoryComponent<HTMLDivElement, Props>(
       const offset = offsetProp === 'none' ? undefined : offsetProp;
 
       return (
-        <Transition
-          in={openAtom()}
-          timeout={animateTimeout}
-          unmountOnExit
-          onEntering={wrap(onEntering)}
-          onExited={wrap(onExited)}
-        >
+        <Transition in={openAtom()} timeout={animateTimeout} unmountOnExit>
           {(animate: TransitionStatus) => {
             return (
               <Popover
@@ -94,5 +84,4 @@ export const SelectPopover = factoryComponent<HTMLDivElement, Props>(
       );
     };
   },
-  'SelectPopover',
 );

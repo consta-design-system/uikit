@@ -98,32 +98,30 @@ const renderComponent: Render = (ctx, props) => {
   });
 };
 
-describe.concurrent('Компонент BookmarkTabs', () => {
-  test('должен рендериться без ошибок', async (ctx) => {
-    await context.start(async () => {
+describe('Компонент BookmarkTabs', () => {
+  test('должен рендериться без ошибок', (ctx) => {
+    context.start(() => {
       expect(() => renderComponent(ctx, { items: itemsDefault })).not.toThrow();
-      await wrap(tick());
     });
   });
 
-  describe.concurrent('Проверка items', () => {
-    test('все табы отображаются', async (ctx) => {
-      await context.start(async () => {
+  describe('Проверка items', () => {
+    test('все табы отображаются', (ctx) => {
+      context.start(() => {
         renderComponent(ctx, { items: itemsDefault });
-        await wrap(tick());
+
         expect(getAllTabs(ctx).length).toBe(itemsDefault.length);
       });
     });
 
-    test('fixed свойство скрывает лейбл и фиксирует таб в начале списка', async (ctx) => {
-      await context.start(async () => {
+    test('fixed свойство скрывает лейбл и фиксирует таб в начале списка', (ctx) => {
+      context.start(() => {
         const itemsWithFixed: BookmarkTabsItemDefault[] = [
           ...itemsDefault,
           { key: 6, label: 'Таб 6', fixed: true, leftIcon },
         ];
 
         renderComponent(ctx, { items: itemsWithFixed });
-        await wrap(tick());
 
         const fixedTab = getAllTabs(ctx)[0] as HTMLElement;
 
@@ -135,9 +133,9 @@ describe.concurrent('Компонент BookmarkTabs', () => {
     });
   });
 
-  describe.concurrent("проверка callback'ов", () => {
-    test('onChange меняет активный таб', async (ctx) => {
-      await context.start(async () => {
+  describe("проверка callback'ов", () => {
+    test('onChange меняет активный таб', (ctx) => {
+      context.start(() => {
         const handleChange = vi.fn();
 
         renderComponent(ctx, {
@@ -145,7 +143,6 @@ describe.concurrent('Компонент BookmarkTabs', () => {
           value: itemsDefault[0],
           onChange: handleChange,
         });
-        await wrap(tick());
 
         const tabs = getAllTabs(ctx);
 
@@ -158,8 +155,8 @@ describe.concurrent('Компонент BookmarkTabs', () => {
       });
     });
 
-    test('onCreate добавляет кнопку нового таба и создает новый таб', async (ctx) => {
-      await context.start(async () => {
+    test('onCreate добавляет кнопку нового таба и создает новый таб', (ctx) => {
+      context.start(() => {
         const handleCreate = vi.fn();
 
         renderComponent(ctx, {
@@ -167,7 +164,6 @@ describe.concurrent('Компонент BookmarkTabs', () => {
           value: itemsDefault[0],
           onCreate: handleCreate,
         });
-        await wrap(tick());
 
         const createTabButton = getCreateTabButton(ctx);
         expect(createTabButton).toBeInTheDocument();
@@ -177,8 +173,8 @@ describe.concurrent('Компонент BookmarkTabs', () => {
       });
     });
 
-    test('onRemove добавляет кнопку удаления и удаляет таб', async (ctx) => {
-      await context.start(async () => {
+    test('onRemove добавляет кнопку удаления и удаляет таб', (ctx) => {
+      context.start(() => {
         const handleRemove = vi.fn();
 
         renderComponent(ctx, {
@@ -186,7 +182,6 @@ describe.concurrent('Компонент BookmarkTabs', () => {
           value: itemsDefault[0],
           onRemove: handleRemove,
         });
-        await wrap(tick());
 
         const secondTabRemoveButton = getRemoveButtonForTab(ctx, 1);
         expect(secondTabRemoveButton).toBeInTheDocument();
@@ -202,47 +197,46 @@ describe.concurrent('Компонент BookmarkTabs', () => {
   });
 
   test('navigationButtons отображаются c withNavigationButtons=true', async (ctx) => {
-    await context.start(async () => {
+    context.start(async () => {
       renderComponent(ctx, {
         items: itemsDefault,
         withNavigationButtons: true,
       });
-      await wrap(tick());
 
-      //   expect(getNavigationButton(ctx, 0)).toEqual('d');
+      await wrap(tick());
+      await wrap(tick());
 
       expect(getNavigationButton(ctx, 0)).toBeInTheDocument();
       expect(getNavigationButton(ctx, 1)).toBeInTheDocument();
     });
   });
 
-  test('присваивает ref', async (ctx) => {
-    await context.start(async () => {
+  test('присваивает ref', (ctx) => {
+    context.start(() => {
       const ref = React.createRef<HTMLDivElement>();
       renderComponent(ctx, { ref, items: itemsDefault });
-      await wrap(tick());
+
       expect(ref.current).toBe(getRender(ctx));
     });
   });
 
-  test('должен устанавливать дополнительный класс', async (ctx) => {
-    await context.start(async () => {
+  test('должен устанавливать дополнительный класс', (ctx) => {
+    context.start(() => {
       const className = 'my-class';
       renderComponent(ctx, { items: itemsDefault, className });
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveClass(className);
     });
   });
 
-  test('renderItem отображает кастомный контент для элемента', async (ctx) => {
-    await context.start(async () => {
+  test('renderItem отображает кастомный контент для элемента', (ctx) => {
+    context.start(() => {
       renderComponent(ctx, {
         items: itemsDefault,
         renderItem: () => (
           <div data-testid="customContentTestId">custom content</div>
         ),
       });
-      await wrap(tick());
 
       const tabsWithCustomContent = within(getRender(ctx)).getAllByTestId(
         'customContentTestId',
@@ -252,14 +246,13 @@ describe.concurrent('Компонент BookmarkTabs', () => {
     });
   });
 
-  test('getItemAs должен рендерить таб как указанный тег', async (ctx) => {
-    await context.start(async () => {
+  test('getItemAs должен рендерить таб как указанный тег', (ctx) => {
+    context.start(() => {
       renderComponent(ctx, {
         items: itemsDefault,
         getItemAs: () => 'a',
         getItemAttributes: (item) => ({ href: `#${item.key}` }),
       });
-      await wrap(tick());
 
       const firstTab = getAllTabs(ctx)[0];
       expect(firstTab.tagName).toBe('A');

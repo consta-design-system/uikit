@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 import { getFirstValidDateTime } from '../DateTimeTypeTime/helpers';
 import { DateTimePropDisableDates } from '../helpers';
 
-describe.concurrent('getFirstValidDateTime', () => {
+describe('getFirstValidDateTime', () => {
   const baseDate = startOfDay(new Date(1970, 0, 1));
 
   test('возвращает первую валидную дату при полном диапазоне', () => {

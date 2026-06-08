@@ -51,8 +51,8 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} [data-testid="${testId}"]`,
   ) as HTMLElement;
 
-describe.concurrent('fileGenerator', () => {
-  describe.concurrent('использует переданный конфиг', () => {
+describe('fileGenerator', () => {
+  describe('использует переданный конфиг', () => {
     Object.entries(customConfig).forEach(([ext, config]) => {
       test(`для .${ext} отображает правильную иконку и цвет`, (ctx) =>
         context.start(async () => {

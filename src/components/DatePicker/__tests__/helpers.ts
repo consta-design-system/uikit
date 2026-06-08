@@ -1,4 +1,4 @@
-import { fireEvent, within } from '@testing-library/react';
+import { within } from '@testing-library/react';
 
 import {
   TestContext,
@@ -18,15 +18,8 @@ export const getDropdown = (ctx: TestContext) =>
     `#${testPopoverId(ctx)} *[role="listbox"]`,
   ) as HTMLDivElement;
 export const getInput = (ctx: TestContext) =>
-  getRender(ctx)?.querySelector(`input.TextField-Input`) as Element;
-export const inputFocus = (ctx: TestContext) => fireEvent.click(getInput(ctx));
-export const inputChange = (ctx: TestContext, value: string) => {
-  const input = getInput(ctx);
-  fireEvent.focus(input);
-  fireEvent.change(input, { target: { value } });
-};
-export const outsideClick = (ctx: TestContext) =>
-  fireEvent.mouseDown(getOutside(ctx));
+  getRender(ctx)?.querySelector(`input.TextField-Input`) as HTMLInputElement;
+export const inputFocus = (ctx: TestContext) => getInput(ctx).click();
 
 export const getDateTimeItems = (ctx: TestContext) =>
   getDropdown(ctx).querySelectorAll(`.DateTimeItem`);

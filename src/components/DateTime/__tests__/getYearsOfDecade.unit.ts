@@ -9,7 +9,7 @@ import { getYearsOfDecade } from '../helpers';
 createRoot();
 clearStack();
 
-describe.concurrent('DateTime/getYearsOfDecade', () => {
+describe('DateTime/getYearsOfDecade', () => {
   test('верный результат c date', () => {
     const result = getYearsOfDecade({
       date: new Date(1970, 0),

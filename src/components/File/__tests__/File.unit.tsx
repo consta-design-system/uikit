@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import {
   cnIconFile,
@@ -45,70 +45,62 @@ function getLoader(ctx: TestContext) {
   return getRender(ctx).querySelector(`.${cnFile('Loader')}`);
 }
 
-describe.concurrent('Компонент File', () => {
+describe('Компонент File', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка size', () => {
-      fileIconPropSize.forEach((size) => {
-        test(`присваивает класс для size=${size}`, (ctx) =>
-          context.start(async () => {
-            renderComponent(ctx, { size });
-            await wrap(tick());
-
-            expect(getRender(ctx)).toHaveClass(cnIconFile({ size }));
-          }));
-      });
-    });
-
-    describe.concurrent('проверка extension', () => {
-      test(`рисует верную иконку для extension=undefined`, (ctx) =>
+  describe('проверка size', () => {
+    fileIconPropSize.forEach((size) => {
+      test(`присваивает класс для size=${size}`, (ctx) =>
         context.start(async () => {
-          renderComponent(ctx, {});
-          await wrap(tick());
+          renderComponent(ctx, { size });
 
-          expect(getRender(ctx)).toHaveClass('FileIconUndefined');
-        }));
-
-      test(`рисует верную иконку для extension=doc`, (ctx) =>
-        context.start(async () => {
-          renderComponent(ctx, { extension: 'doc' });
-          await wrap(tick());
-
-          expect(getRender(ctx)).toHaveClass('FileIconDoc');
-        }));
-
-      test(`рисует верную иконку для extension=undefined`, (ctx) =>
-        context.start(async () => {
-          renderComponent(ctx, { extension: 'undefined' });
-          await wrap(tick());
-
-          expect(getRender(ctx)).toHaveClass('FileIconUndefined');
+          expect(getRender(ctx)).toHaveClass(cnIconFile({ size }));
         }));
     });
+  });
 
-    describe.concurrent('проверка loading', () => {
-      test(`рисует верную иконку для loading=true`, (ctx) =>
-        context.start(async () => {
-          renderComponent(ctx, { loading: true });
-          await wrap(tick());
+  describe('проверка extension', () => {
+    test(`рисует верную иконку для extension=undefined`, (ctx) =>
+      context.start(async () => {
+        renderComponent(ctx, {});
 
-          expect(getRender(ctx)).toHaveClass('FileIconLoading');
-        }));
+        expect(getRender(ctx)).toHaveClass('FileIconUndefined');
+      }));
 
-      test(`при loadingWithProgressSpin = true появляется ProgressSpin`, (ctx) =>
-        context.start(async () => {
-          renderComponent(ctx, {
-            loading: true,
-            loadingWithProgressSpin: true,
-          });
-          await wrap(tick());
+    test(`рисует верную иконку для extension=doc`, (ctx) =>
+      context.start(async () => {
+        renderComponent(ctx, { extension: 'doc' });
 
-          expect(getLoader(ctx)).toHaveClass(cnFile('Loader'));
-        }));
-    });
+        expect(getRender(ctx)).toHaveClass('FileIconDoc');
+      }));
+
+    test(`рисует верную иконку для extension=undefined`, (ctx) =>
+      context.start(async () => {
+        renderComponent(ctx, { extension: 'undefined' });
+
+        expect(getRender(ctx)).toHaveClass('FileIconUndefined');
+      }));
+  });
+
+  describe('проверка loading', () => {
+    test(`рисует верную иконку для loading=true`, (ctx) =>
+      context.start(async () => {
+        renderComponent(ctx, { loading: true });
+
+        expect(getRender(ctx)).toHaveClass('FileIconLoading');
+      }));
+
+    test(`при loadingWithProgressSpin = true появляется ProgressSpin`, (ctx) =>
+      context.start(async () => {
+        renderComponent(ctx, {
+          loading: true,
+          loadingWithProgressSpin: true,
+        });
+
+        expect(getLoader(ctx)).toHaveClass(cnFile('Loader'));
+      }));
   });
 });

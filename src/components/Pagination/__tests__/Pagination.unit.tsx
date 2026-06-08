@@ -75,13 +75,13 @@ const getPageInput = (ctx: TestContext) => {
   return render.querySelector('input') as HTMLInputElement;
 };
 
-describe.concurrent('Компонент Pagination', () => {
+describe('Компонент Pagination', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
     }));
 
-  describe.concurrent('проверка items', () => {
+  describe('проверка items', () => {
     test('при items=0 компонент Pagination не отображается', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { items: 0 });
@@ -129,7 +129,7 @@ describe.concurrent('Компонент Pagination', () => {
       }));
   });
 
-  describe.concurrent('проверка arrows', () => {
+  describe('проверка arrows', () => {
     test('не отображаются по-умолчанию', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { items: 5 });
@@ -203,7 +203,7 @@ describe.concurrent('Компонент Pagination', () => {
       }));
   });
 
-  describe.concurrent('проверка onChange', () => {
+  describe('проверка onChange', () => {
     test('клик по странице вызывает onChange', (ctx) =>
       context.start(async () => {
         const handleChange = vi.fn();
@@ -236,7 +236,7 @@ describe.concurrent('Компонент Pagination', () => {
       }));
   });
 
-  describe.concurrent('проверка outerMostArrows', () => {
+  describe('проверка outerMostArrows', () => {
     test('переходит на последнюю страницу при клике стрелки последней страницы', (ctx) =>
       context.start(async () => {
         const handleChange = vi.fn();
@@ -270,7 +270,7 @@ describe.concurrent('Компонент Pagination', () => {
       }));
   });
 
-  describe.concurrent('проверка type="input"', () => {
+  describe('проверка type="input"', () => {
     test('отображает инпут', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {

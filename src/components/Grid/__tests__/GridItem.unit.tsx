@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { cnGridItem, GridItem } from '../GridItem';
 
@@ -38,7 +38,7 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="${testId}"]`,
   ) as HTMLDivElement;
 
-describe.concurrent('Компонент GridItem', () => {
+describe('Компонент GridItem', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
@@ -47,7 +47,7 @@ describe.concurrent('Компонент GridItem', () => {
   test('должен рендерить children', (ctx) =>
     context.start(async () => {
       renderComponent(ctx);
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveTextContent(children);
     }));
 
@@ -55,14 +55,14 @@ describe.concurrent('Компонент GridItem', () => {
     context.start(async () => {
       const className = 'test-class';
       renderComponent(ctx, { className });
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveClass(className);
     }));
 
   test('должен рендериться с тегом, переданным в as', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { as: 'section' });
-      await wrap(tick());
+
       expect(getRender(ctx).tagName).toBe('SECTION');
     }));
 
@@ -70,7 +70,7 @@ describe.concurrent('Компонент GridItem', () => {
     context.start(async () => {
       const col = 2;
       renderComponent(ctx, { col });
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveClass(cnGridItem({ col }));
       expect(getRender(ctx).style.getPropertyValue('--grid-item-col-end')).toBe(
         `${col}`,
@@ -81,7 +81,7 @@ describe.concurrent('Компонент GridItem', () => {
     context.start(async () => {
       const colStart = 2;
       renderComponent(ctx, { colStart });
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveClass(cnGridItem({ colStart }));
       expect(
         getRender(ctx).style.getPropertyValue('--grid-item-col-start'),
@@ -92,7 +92,7 @@ describe.concurrent('Компонент GridItem', () => {
     context.start(async () => {
       const row = 2;
       renderComponent(ctx, { row });
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveClass(cnGridItem({ row }));
       expect(getRender(ctx).style.getPropertyValue('--grid-item-row-end')).toBe(
         `${row}`,
@@ -103,7 +103,7 @@ describe.concurrent('Компонент GridItem', () => {
     context.start(async () => {
       const rowStart = 2;
       renderComponent(ctx, { rowStart });
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveClass(cnGridItem({ rowStart }));
       expect(
         getRender(ctx).style.getPropertyValue('--grid-item-row-start'),
@@ -114,7 +114,7 @@ describe.concurrent('Компонент GridItem', () => {
     context.start(async () => {
       const order = 1;
       renderComponent(ctx, { order });
-      await wrap(tick());
+
       expect(getRender(ctx)).toHaveClass(cnGridItem({ order }));
       expect(getRender(ctx).style.getPropertyValue('--grid-item-order')).toBe(
         `${order}`,

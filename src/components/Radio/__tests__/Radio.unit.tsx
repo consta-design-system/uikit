@@ -61,13 +61,13 @@ const getInput = (ctx: TestContext) =>
 const getLabel = (ctx: TestContext) =>
   getRender(ctx).querySelector(`.${cnRadio('Label')}`) as HTMLSpanElement;
 
-describe.concurrent('Компонент Radio', () => {
+describe('Компонент Radio', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test(`Присваивается дополнительный className`, (ctx) =>
       context.start(async () => {
         const className = 'className';
@@ -78,7 +78,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка label', () => {
+  describe('проверка label', () => {
     test(`label отображается`, (ctx) =>
       context.start(async () => {
         const label = 'fileName';
@@ -88,7 +88,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка onChange', () => {
+  describe('проверка onChange', () => {
     test(`клик должен вызвать callback c ожидаемыми параметрами`, (ctx) =>
       context.start(async () => {
         const handleChange = vi.fn();
@@ -105,7 +105,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка checked', () => {
+  describe('проверка checked', () => {
     test(`checked должен быть true`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { checked: true });
@@ -131,7 +131,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка sizes', () => {
+  describe('проверка sizes', () => {
     sizes.forEach((size) => {
       test(`size ${size} должен быть отображен`, (ctx) =>
         context.start(async () => {
@@ -143,7 +143,7 @@ describe.concurrent('Компонент Radio', () => {
     });
   });
 
-  describe.concurrent('проверка views', () => {
+  describe('проверка views', () => {
     views.forEach((view) => {
       test(`view ${view} должен быть отображен`, (ctx) =>
         context.start(async () => {
@@ -155,7 +155,7 @@ describe.concurrent('Компонент Radio', () => {
     });
   });
 
-  describe.concurrent('проверка disabled', () => {
+  describe('проверка disabled', () => {
     test(`disabled должен быть отображен`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { disabled: true });
@@ -173,7 +173,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка style', () => {
+  describe('проверка style', () => {
     test(`style должен быть отображен`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { style: { color: 'red' } });
@@ -183,7 +183,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test(`ref должен быть отображен`, (ctx) =>
       context.start(async () => {
         const ref = React.createRef<HTMLLabelElement>();
@@ -195,7 +195,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка onFocus', () => {
+  describe('проверка onFocus', () => {
     test(`onFocus должен быть отображен`, (ctx) =>
       context.start(async () => {
         const onFocus = vi.fn();
@@ -209,7 +209,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка onBlur', () => {
+  describe('проверка onBlur', () => {
     test(`onBlur должен быть отображен`, (ctx) =>
       context.start(async () => {
         const onBlur = vi.fn();
@@ -223,7 +223,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка readOnly', () => {
+  describe('проверка readOnly', () => {
     test(`readOnly должен быть отображен`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { readOnly: true });
@@ -233,7 +233,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка name', () => {
+  describe('проверка name', () => {
     test(`name должен быть отображен`, (ctx) =>
       context.start(async () => {
         const name = 'name';
@@ -245,7 +245,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка tabIndex', () => {
+  describe('проверка tabIndex', () => {
     test(`tabIndex должен быть отображен`, (ctx) =>
       context.start(async () => {
         const tabIndex = 0;
@@ -257,7 +257,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка onKeyDown', () => {
+  describe('проверка onKeyDown', () => {
     test(`onKeyDown должен быть отображен`, (ctx) =>
       context.start(async () => {
         const onKeyDown = vi.fn();
@@ -271,7 +271,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка required', () => {
+  describe('проверка required', () => {
     test(`required должен быть отображен`, (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { required: true });
@@ -281,7 +281,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка inputId', () => {
+  describe('проверка inputId', () => {
     test(`inputId должен быть отображен`, (ctx) =>
       context.start(async () => {
         const inputId = 'inputId';
@@ -293,7 +293,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка inputRef', () => {
+  describe('проверка inputRef', () => {
     test(`inputRef должен быть отображен`, (ctx) =>
       context.start(async () => {
         const inputRef = React.createRef<HTMLInputElement>();
@@ -305,7 +305,7 @@ describe.concurrent('Компонент Radio', () => {
       }));
   });
 
-  describe.concurrent('проверка align', () => {
+  describe('проверка align', () => {
     aligns.forEach((align) => {
       test(`align ${align} должен быть отображен`, (ctx) =>
         context.start(async () => {

@@ -49,7 +49,7 @@ const getBadge = (ctx: TestContext) =>
 const getActions = (ctx: TestContext) =>
   getRender(ctx)?.querySelector(`.${cnNotificationItem('Actions')}`);
 
-describe.concurrent('Компонент NotificationItem', () => {
+describe('Компонент NotificationItem', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>
@@ -59,7 +59,7 @@ describe.concurrent('Компонент NotificationItem', () => {
       ).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('прокидывает className', (ctx) =>
       context.start(async () => {
         const className = 'test-class-name';
@@ -159,7 +159,7 @@ describe.concurrent('Компонент NotificationItem', () => {
       }));
   });
 
-  describe.concurrent('проверка взаимодействия', () => {
+  describe('проверка взаимодействия', () => {
     test('вызывает onClick при клике', (ctx) =>
       context.start(async () => {
         const onClick = vi.fn();

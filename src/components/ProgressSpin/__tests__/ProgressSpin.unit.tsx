@@ -36,13 +36,13 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} [data-testid="${testId}"]`,
   ) as SVGElement;
 
-describe.concurrent('Компонент ProgressSpin', () => {
+describe('Компонент ProgressSpin', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('дополнительный класс присваивается', (ctx) =>
       context.start(async () => {
         const className = 'className';

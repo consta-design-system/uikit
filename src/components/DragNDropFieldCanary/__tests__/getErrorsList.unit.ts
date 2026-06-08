@@ -15,7 +15,7 @@ const sizes: FileSizes = {
   maxSize: 512 * 1024,
 };
 
-describe.concurrent('getErrorsList', () => {
+describe('getErrorsList', () => {
   const filePng = new File([new ArrayBuffer(1024 * 1024)], 'file.png', {
     type: 'image/png',
   });

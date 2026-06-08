@@ -16,7 +16,7 @@ const resultMap: Record<string, string> = {
   xs: 'calc(var(--size-text-m) / 2)',
 };
 
-describe.concurrent('Компонент Badge проверка getTextSize', () => {
+describe('Компонент Badge проверка getTextSize', () => {
   badgePropSize.forEach((size) => {
     test(`возвращает правильное значение для size=${size}`, () => {
       expect(getTextSize(size)).toBe(resultMap[`${size}`]);

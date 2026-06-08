@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import {
   cnFieldControlLayout,
@@ -43,7 +43,7 @@ const getRender = (ctx: TestContext) =>
 const getSlots = (ctx: TestContext) =>
   getRender(ctx)?.querySelectorAll(`.${cnFieldControlLayout('Slot')}`) || [];
 
-describe.concurrent('Компонент FieldControlLayout', () => {
+describe('Компонент FieldControlLayout', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
@@ -54,16 +54,12 @@ describe.concurrent('Компонент FieldControlLayout', () => {
       const className = 'className';
       renderComponent(ctx, { className });
 
-      await wrap(tick());
-
       expect(getRender(ctx)).toHaveClass(className);
     }));
 
   test('Указываются все css переменные', (ctx) =>
     context.start(async () => {
       renderComponent(ctx);
-
-      await wrap(tick());
 
       const element = getRender(ctx);
       expect(
@@ -130,8 +126,6 @@ describe.concurrent('Компонент FieldControlLayout', () => {
     context.start(async () => {
       renderComponent(ctx, { leftSide: ['1', 0, false, null] });
 
-      await wrap(tick());
-
       expect(getSlots(ctx).length).toEqual(2);
     }));
 
@@ -139,16 +133,12 @@ describe.concurrent('Компонент FieldControlLayout', () => {
     context.start(async () => {
       renderComponent(ctx, { rightSide: ['1', 0, false, null] });
 
-      await wrap(tick());
-
       expect(getSlots(ctx).length).toEqual(2);
     }));
 
   test('Компонент корректно обрабатывает состояние hovered', (ctx) =>
     context.start(async () => {
       renderComponent(ctx);
-
-      await wrap(tick());
 
       const element = getRender(ctx);
       expect(
@@ -172,8 +162,6 @@ describe.concurrent('Компонент FieldControlLayout', () => {
     context.start(async () => {
       renderComponent(ctx, { disabled: true });
 
-      await wrap(tick());
-
       const element = getRender(ctx);
       expect(element).toHaveClass(cnFieldControlLayout({ disabled: true }));
       expect(
@@ -184,8 +172,6 @@ describe.concurrent('Компонент FieldControlLayout', () => {
   test('Компонент корректно обрабатывает состояние focused', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { focused: true });
-
-      await wrap(tick());
 
       expect(
         getRender(ctx).style.getPropertyValue(
@@ -198,8 +184,6 @@ describe.concurrent('Компонент FieldControlLayout', () => {
     context.start(async () => {
       renderComponent(ctx, { size: 's' });
 
-      await wrap(tick());
-
       expect(
         getRender(ctx).style.getPropertyValue('--field-control-layout-height'),
       ).toEqual(
@@ -210,8 +194,6 @@ describe.concurrent('Компонент FieldControlLayout', () => {
   test('Компонент корректно обрабатывает разные формы', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { form: 'round' });
-
-      await wrap(tick());
 
       expect(
         getRender(ctx).style.getPropertyValue(
@@ -225,8 +207,6 @@ describe.concurrent('Компонент FieldControlLayout', () => {
   test('Компонент корректно обрабатывает разные виды отображения (view)', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { view: 'clear' });
-
-      await wrap(tick());
 
       expect(
         getRender(ctx).style.getPropertyValue(

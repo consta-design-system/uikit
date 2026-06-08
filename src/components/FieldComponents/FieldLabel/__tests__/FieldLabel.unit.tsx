@@ -45,14 +45,14 @@ const getStar = (ctx: TestContext) =>
 const getIcon = (ctx: TestContext) =>
   getRender(ctx)?.querySelector(`.IconMock`);
 
-describe.concurrent(`Компонент ${testId}`, () => {
+describe(`Компонент ${testId}`, () => {
   test('должен рендериться без ошибок', async (ctx) => {
     await context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     });
   });
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     test(`ref присвоен`, async (ctx) => {
       await context.start(async () => {
         const ref: { current: HTMLElement | null } = { current: null };
@@ -68,7 +68,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     test(`Присваивается дополнительный className`, async (ctx) => {
       await context.start(async () => {
         const className = 'className';
@@ -82,7 +82,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка required', () => {
+  describe('проверка required', () => {
     test(`Отображается элемент ${cnFieldLabel('Star')}`, async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, { required: true });
@@ -94,7 +94,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка children', () => {
+  describe('проверка children', () => {
     test(`Отображается children`, async (ctx) => {
       await context.start(async () => {
         const children = 'children';
@@ -108,7 +108,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка icon', () => {
+  describe('проверка icon', () => {
     test(`Отображается icon`, async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, {
@@ -122,7 +122,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка iconRef', () => {
+  describe('проверка iconRef', () => {
     test(`iconRef присвоен`, async (ctx) => {
       await context.start(async () => {
         const ref: { current: HTMLElement | null } = { current: null };
@@ -138,7 +138,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка size', () => {
+  describe('проверка size', () => {
     const sizes = ['s', 'm', 'l', 'xs'] as const;
     sizes.forEach((size) => {
       test(`Должен рендериться как ${cnText({
@@ -155,7 +155,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка as', () => {
+  describe('проверка as', () => {
     const tags = ['a', 'div', 'span'] as const;
 
     tags.forEach((el) => {
@@ -171,7 +171,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка other props', () => {
+  describe('проверка other props', () => {
     const props = ['data-attr', 'role', 'id'] as const;
 
     props.forEach((prop) => {
@@ -187,7 +187,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка lineHeight', () => {
+  describe('проверка lineHeight', () => {
     test('Присваивается lineHeight="m"', async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, {});
@@ -199,7 +199,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка view', () => {
+  describe('проверка view', () => {
     test('Присваивается view="secondary"', async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, {});
@@ -211,7 +211,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка icon size', () => {
+  describe('проверка icon size', () => {
     const sizes = ['xs', 's', 'm', 'l'] as const;
     sizes.forEach((size) => {
       test(`Иконка имеет корректный отступ для size=${size}`, async (ctx) => {
@@ -228,7 +228,7 @@ describe.concurrent(`Компонент ${testId}`, () => {
     });
   });
 
-  describe.concurrent('проверка required', () => {
+  describe('проверка required', () => {
     test('Элемент * отображается, если required=true', async (ctx) => {
       await context.start(async () => {
         renderComponent(ctx, { required: true });

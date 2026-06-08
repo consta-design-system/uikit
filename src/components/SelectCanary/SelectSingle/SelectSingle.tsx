@@ -1,9 +1,8 @@
-import { action, computed } from '@reatom/core';
+import { action, computed, wrap } from '@reatom/core';
 import React from 'react';
 
 import { SelectDropdown } from '##/components/SelectCanary/SelectDropdown';
 import { SelectItem } from '##/components/SelectCanary/SelectItem';
-import { useForkRef } from '##/hooks/useForkRef';
 import { cnCanary as cn } from '##/utils/bem';
 import { factoryComponent } from '##/utils/state';
 
@@ -84,6 +83,7 @@ export const SelectSingle = factoryComponent<HTMLDivElement, SelectProps>(
       groupsCounterAtom,
       dropdownZIndexAtom,
       controlElAtom,
+      disabledAtom,
     } = model<SelectItemDefault, SelectGroupDefault, false>(
       propsWithDefaultAtom,
     );
@@ -140,6 +140,7 @@ export const SelectSingle = factoryComponent<HTMLDivElement, SelectProps>(
         selectAllLabel,
         dropdownViewportRef,
         dropdownContainer,
+        dropdownOpen,
         ...otherProps
       } = propsWithDefault;
 
@@ -154,21 +155,21 @@ export const SelectSingle = factoryComponent<HTMLDivElement, SelectProps>(
             size={size}
             disabled={disabled}
             separator
-            onClear={clearValue}
+            onClear={wrap(clearValue)}
             onDropdownButton={handleToggleDropdown}
             openAtom={openAtom}
             focusAtom={focusAtom}
             view={view}
             iconClear={iconClear}
             clearButtonAtom={clearButtonAtom}
-            ref={controlRef}
+            ref={wrap(controlRef)}
           >
             <SelectInput
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              ref={inputRef}
-              onClick={handleInputClick}
-              onChange={input ? handleInputChange : undefined}
+              onFocus={wrap(handleInputFocus)}
+              onBlur={wrap(handleInputBlur)}
+              ref={wrap(inputRef)}
+              onClick={wrap(handleInputClick)}
+              onChange={input ? wrap(handleInputChange) : undefined}
               value={input ? inputValue : undefined}
               defaultValue={input ? inputDefaultValue : undefined}
               readOnly={input ? undefined : true}
@@ -186,7 +187,7 @@ export const SelectSingle = factoryComponent<HTMLDivElement, SelectProps>(
             size={size}
             controlElAtom={controlElAtom}
             getOptionActions={getOptionActions}
-            dropdownRef={useForkRef([dropdownRef, dropdownRefProp])}
+            dropdownRef={dropdownRef}
             form={dropdownForm}
             className={dropdownClassName}
             renderItem={renderItem || renderItemDefault}
@@ -209,6 +210,7 @@ export const SelectSingle = factoryComponent<HTMLDivElement, SelectProps>(
             selectAllLabel={selectAllLabel}
             viewportRef={dropdownViewportRef}
             container={dropdownContainer}
+            disabledAtom={disabledAtom}
           />
         </>
       );

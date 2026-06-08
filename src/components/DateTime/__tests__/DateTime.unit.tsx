@@ -29,8 +29,8 @@ const renderComponent = (ctx: TestContext, props: DateTimeProps = {}) => {
   });
 };
 
-describe.concurrent('Компонент DateTime', () => {
-  describe.concurrent('рендериться без ошибок', () => {
+describe('Компонент DateTime', () => {
+  describe('рендериться без ошибок', () => {
     test('должен рендериться без ошибок', (ctx) =>
       context.start(async () => {
         expect(() => renderComponent(ctx, {})).not.toThrow();
@@ -46,7 +46,7 @@ describe.concurrent('Компонент DateTime', () => {
     });
   });
 
-  describe.concurrent('проверка className', () => {
+  describe('проверка className', () => {
     dateTimePropType.forEach((type) => {
       dateTimePropView.forEach((view) => {
         test(`className присваивается при type="${type}" view="${view}"`, (ctx) =>
@@ -61,7 +61,7 @@ describe.concurrent('Компонент DateTime', () => {
     });
   });
 
-  describe.concurrent('проверка ref', () => {
+  describe('проверка ref', () => {
     dateTimePropType.forEach((type) => {
       dateTimePropView.forEach((view) => {
         test(`добавление аттрибута с помощью ref при type="${type}" view="${view}"`, (ctx) =>

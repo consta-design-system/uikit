@@ -158,7 +158,7 @@ const getItemAvatar = (ctx: TestContext, index: number) =>
 const getItemActions = (ctx: TestContext, index: number) =>
   getItem(ctx, index)?.querySelector(`.${cnNotificationItem('Actions')}`);
 
-describe.concurrent('Компонент Notification', () => {
+describe('Компонент Notification', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>
@@ -168,7 +168,7 @@ describe.concurrent('Компонент Notification', () => {
       ).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('прокидывает className', (ctx) =>
       context.start(async () => {
         const className = 'test-class-name';
@@ -244,7 +244,7 @@ describe.concurrent('Компонент Notification', () => {
       }));
   });
 
-  describe.concurrent('проверка элементов', () => {
+  describe('проверка элементов', () => {
     test('рендерит заголовок', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, { items: defaultItems });
@@ -297,7 +297,7 @@ describe.concurrent('Компонент Notification', () => {
       }));
   });
 
-  describe.concurrent('проверка геттеров', () => {
+  describe('проверка геттеров', () => {
     test('проверка getItemLabel', (ctx) =>
       context.start(async () => {
         renderComponent(ctx, {
@@ -378,7 +378,7 @@ describe.concurrent('Компонент Notification', () => {
       }));
   });
 
-  describe.concurrent('проверка взаимодействия', () => {
+  describe('проверка взаимодействия', () => {
     test('вызывает onItemClick при клике на элемент', (ctx) =>
       context.start(async () => {
         const onItemClick = vi.fn();

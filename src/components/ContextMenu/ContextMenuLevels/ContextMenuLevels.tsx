@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Transition, TransitionGroup } from 'react-transition-group';
 
 import { Direction } from '##/components/Popover';
+import { Transition, TransitionGroupNode } from '##/components/Transition';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useMutableRef } from '##/hooks/useMutableRef';
 import { useRefs } from '##/hooks/useRefs';
@@ -147,22 +147,18 @@ export const ContextMenuLevels = (propsComponent: ContextMenuLevelsProps) => {
   useSize(levelsRefs, setComponentSize, isMobile);
 
   return (
-    <TransitionGroup component={Fragment}>
+    <TransitionGroupNode>
       {levels.map((level, index) => {
         const key = `${index}-${level.parent ? getItemKey(level.parent) : ''}`;
 
         const last = index !== levels.length - 1;
 
         if (isMobile && last) {
-          return <Fragment key={index} />;
+          return null;
         }
 
         return (
-          <Transition
-            key={key}
-            timeout={animateTimeout}
-            nodeRef={levelsRefs[index]}
-          >
+          <Transition key={key} timeout={animateTimeout}>
             {(animate) => (
               <ContextMenuLevel
                 {...otherProps}
@@ -200,6 +196,6 @@ export const ContextMenuLevels = (propsComponent: ContextMenuLevelsProps) => {
           </Transition>
         );
       })}
-    </TransitionGroup>
+    </TransitionGroupNode>
   );
 };

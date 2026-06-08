@@ -73,7 +73,7 @@ function getTooltip(ctx: TestContext, index = 0) {
   ) as HTMLElement;
 }
 
-describe.concurrent('HOC withTooltip', () => {
+describe('HOC withTooltip', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, { content: 'test' })).not.toThrow();

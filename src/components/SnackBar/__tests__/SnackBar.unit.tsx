@@ -6,7 +6,7 @@ import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { cnSnackBar, SnackBar } from '../SnackBar';
 import { cnSnackBarItem } from '../SnackBarItem/SnackBarItem';
@@ -111,7 +111,7 @@ const getItemActionButton = (ctx: TestContext, index: number) =>
 const getItemCloseButton = (ctx: TestContext, index: number) =>
   getItem(ctx, index)?.querySelector(`.${cnSnackBarItem('CloseButton')}`);
 
-describe.concurrent('Компонент SnackBar', () => {
+describe('Компонент SnackBar', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>
@@ -131,8 +131,8 @@ describe.concurrent('Компонент SnackBar', () => {
       expect(ref.current).toBe(getRender(ctx));
     }));
 
-  describe.concurrent('проверка items', () => {
-    describe.concurrent('массив рендериться верно', () => {
+  describe('проверка items', () => {
+    describe('массив рендериться верно', () => {
       test('количество совпадает с передаваемым', (ctx) =>
         context.start(async () => {
           const items: SnackBarItemDefault[] = [
@@ -153,7 +153,7 @@ describe.concurrent('Компонент SnackBar', () => {
         }));
     });
 
-    describe.concurrent('проверка message', () => {
+    describe('проверка message', () => {
       test('отображает текст сообщения', (ctx) =>
         context.start(async () => {
           const messageText = 'Сообщение';
@@ -170,7 +170,7 @@ describe.concurrent('Компонент SnackBar', () => {
         }));
     });
 
-    describe.concurrent('проверка icon', () => {
+    describe('проверка icon', () => {
       test('отображает иконку', (ctx) =>
         context.start(async () => {
           const items: SnackBarProps<SnackBarItemDefault>['items'] = [
@@ -186,7 +186,7 @@ describe.concurrent('Компонент SnackBar', () => {
         }));
     });
 
-    describe.concurrent('проверка actions', () => {
+    describe('проверка actions', () => {
       const actionLabel = 'Действие';
       const handleClick = vi.fn();
       const items: SnackBarProps<SnackBarItemDefault>['items'] = [
@@ -218,7 +218,7 @@ describe.concurrent('Компонент SnackBar', () => {
         }));
     });
 
-    describe.concurrent('проверка onClose', () => {
+    describe('проверка onClose', () => {
       const handleClick = vi.fn();
       const items: SnackBarProps<SnackBarItemDefault>['items'] = [
         {
@@ -244,14 +244,14 @@ describe.concurrent('Компонент SnackBar', () => {
         }));
     });
 
-    describe.concurrent('проверка autoClose', () => {
+    describe('проверка autoClose', () => {
       test('срабатывает onClose при autoClose = 1', (ctx) =>
         context.start(async () => {
           const handleClick = vi.fn();
           const items: SnackBarProps<SnackBarItemDefault>['items'] = [
             {
               key: '1',
-              autoClose: 1,
+              autoClose: 0.1,
               onClose: handleClick,
             },
           ];

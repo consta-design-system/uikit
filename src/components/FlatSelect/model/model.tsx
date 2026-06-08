@@ -5,16 +5,17 @@ import {
   computed,
   effect,
   peek,
+  reatomBoolean,
   sleep,
   withAbort,
   wrap,
 } from '@reatom/core';
 import React from 'react';
 
-import { forkRef } from '##/hooks/useForkRef';
 import { animateTimeout } from '##/mixs/MixPopoverAnimate';
 import { getGroups, GetGroupsResult } from '##/utils/getGroups';
 import { scrollIntoView } from '##/utils/scrollIntoView';
+import { setRefs } from '##/utils/setRef';
 import {
   clickOutsideEffect,
   computedSet,
@@ -112,7 +113,9 @@ export const model = <
 ) => {
   const inputElAtom = atom<HTMLInputElement | null>(null);
   const listElAtom = atom<HTMLDivElement | null>(null);
-  const listRef = wrap(action(forkRef([listElAtom.set, propsAtom().listRef])));
+  const listRef = action((el: HTMLDivElement | null) =>
+    setRefs([listElAtom.set, propsAtom().listRef], el),
+  );
 
   const rootFocusAtom = atom(false);
   const rootMouseDownAtom = atom(false);
@@ -150,7 +153,7 @@ export const model = <
     return (value && (Array.isArray(value) ? value : [value])) || [];
   }) as Computed<ITEM[]>;
   const inputFocusAtom = atom(false);
-  const openAtom = atom(false);
+  const openAtom = reatomBoolean();
   const highlightedIndexAtom = atom(-1);
 
   const clearButtonAtom = computed(() => {
@@ -283,8 +286,8 @@ export const model = <
     null,
   );
 
-  const getOptionRef = wrap(
-    action((index: number) => wrap(optionsElsAtom()[index]?.set)),
+  const getOptionRef = action((index: number) =>
+    wrap(optionsElsAtom()[index]?.set),
   );
 
   const scrollToHighlightedIndex = action(() => {
@@ -486,7 +489,7 @@ export const model = <
   const Escape = action((e: KeyboardEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    openAtom.set(false);
+    openAtom.setFalse();
 
     anchorElementAtom()?.focus();
   });
@@ -498,7 +501,7 @@ export const model = <
     if (openAtom()) {
       e.preventDefault();
       e.stopPropagation();
-      openAtom.set(false);
+      openAtom.setFalse();
     }
 
     anchorElementAtom()?.focus();
@@ -583,7 +586,7 @@ export const model = <
       ...ignoreOutsideClicksElsAtom(),
     ]),
     handler: action(() => {
-      openAtom.set(false);
+      openAtom.setFalse();
     }),
   });
 
@@ -610,6 +613,7 @@ export const model = <
   });
 
   const handleAnchorClick = action(() => {
+    console.log('handleAnchorClick');
     openAtom.set(!openAtom());
   });
 
@@ -685,7 +689,7 @@ export const model = <
     getOptionActions,
     handleInputBlur,
     getHandleRemoveValue,
-    inputRef: wrap(inputElAtom.set),
+    inputRef: inputElAtom.set,
     listRef,
     handleInputChange,
     handleInputFocus,
@@ -700,7 +704,7 @@ export const model = <
     onChange,
     hasItemsAtom,
     groupsCounterAtom,
-    rootRef: wrap(rootElementAtom.set),
+    rootRef: rootElementAtom.set,
     disabledAtom,
   };
 };

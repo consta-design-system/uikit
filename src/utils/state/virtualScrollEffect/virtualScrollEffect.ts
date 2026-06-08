@@ -1,6 +1,7 @@
 import { action, atom, computed, effect, peek } from '@reatom/core';
 
 import { onEventEffect } from '##/utils/state/onEventEffect';
+import { rangeAtom } from '##/utils/state/rangeAtom';
 import { resizeObservedAtom } from '##/utils/state/resizeObservedAtom';
 
 import {
@@ -12,6 +13,7 @@ import {
   getElementHeight,
   getVisiblePosition,
   UseVirtualScrollProps,
+  UseVirtualScrollReturn,
 } from './helpers';
 
 export const virtualScrollEffect = <
@@ -32,20 +34,22 @@ export const virtualScrollEffect = <
     [0, isActiveAtom?.() ? defaultItemsCalculationCount : lengthAtom()],
   ]);
 
-  const spaceTopAtom = computed(() => boundsAtom()[1][1]);
-  const sliceAtom = computed(() => boundsAtom()[1]);
+  const spaceTopAtom = computed(() => boundsAtom()[0][0]);
 
-  const listRefs = computed(() => {
-    return new Array(lengthAtom() as number)
-      .fill(null)
-      .map(() => atom<ITEM_ELEMENT | null>(null));
-  });
+  const sliceStartAtom = computed(() => boundsAtom()[1][0]);
+  const sliceEndAtom = computed(() => boundsAtom()[1][1]);
 
-  const subscribersElements = computed(() => listRefs().map((el) => el()));
+  const sliceAtom = computed(
+    () => [sliceStartAtom(), sliceEndAtom()] as [number, number],
+  );
+
+  const listElementsAtom = rangeAtom<ITEM_ELEMENT | null>(lengthAtom, null);
+
+  const subscribersElements = computed(() =>
+    listElementsAtom().map((el) => el()),
+  );
 
   const scrollElementAtom = atom<SCROLL_ELEMENT | null>(null);
-
-  //   resizeObservedAtom;
 
   const sizesAtom = resizeObservedAtom<
     ITEM_ELEMENT | null,
@@ -54,8 +58,6 @@ export const virtualScrollEffect = <
   >(subscribersElements, getElementHeight);
 
   const savedSizesAtom = atom<number[]>([]);
-
-  //   const onScrollToBottomRef = useMutableRef(onScrollToBottom);
 
   const scrollElementHeightAtom = resizeObservedAtom(
     scrollElementAtom,
@@ -85,7 +87,6 @@ export const virtualScrollEffect = <
 
   onEventEffect(scrollElementAtom, 'scroll', calculateVisiblePosition);
 
-  // TODO: доделать
   effect(() => {
     scrollElementHeightAtom();
 
@@ -95,16 +96,15 @@ export const virtualScrollEffect = <
   });
 
   effect(() => {
-    visiblePositionAtom();
-    const sizes = sizesAtom();
     const visiblePosition = visiblePositionAtom();
+    const sizes = peek(sizesAtom);
     const length = lengthAtom();
 
     if (isActiveAtom?.()) {
       savedSizesAtom.set(calculateSavedSizes(peek(savedSizesAtom), sizes));
 
       boundsAtom.set(
-        calculateBounds(savedSizesAtom(), sizes, visiblePosition, length),
+        calculateBounds(peek(savedSizesAtom), sizes, visiblePosition, length),
       );
     } else {
       boundsAtom.set((state) => {
@@ -126,10 +126,10 @@ export const virtualScrollEffect = <
 
   effect(() => {
     const isActive = isActiveAtom?.();
-    const boundBottom = spaceTopAtom();
+    const sliceEnd = sliceEndAtom();
     const length = peek(lengthAtom);
 
-    if (isActive && onScrollToBottom && boundBottom + 1 >= length) {
+    if (isActive && onScrollToBottom && sliceEnd === length) {
       onScrollToBottom(length);
     }
   });
@@ -156,7 +156,7 @@ export const virtualScrollEffect = <
   });
 
   return {
-    listRefs,
+    listElementsAtom,
     scrollElementAtom,
     sliceAtom,
     spaceTopAtom,

@@ -1,4 +1,4 @@
-import { AtomLike, computed, wrap } from '@reatom/core';
+import { AtomLike, computed } from '@reatom/core';
 import React, { memo } from 'react';
 
 import { FieldArrayValueInlineControl } from '##/components/FieldComponents';
@@ -34,10 +34,10 @@ export type SelectMultipleValueComponent = <
 export const SelectMultipleValue = memo(
   factoryComponent<HTMLDivElement, SelectMultipleValueProps>(
     ({ ref, rootPropsAtom }) => {
-      const value = computed(() => rootPropsAtom().value || undefined);
-      const disabled = computed(() => rootPropsAtom().disabled);
+      const value = computed(() => rootPropsAtom().value || undefined, 'value');
+      const disabled = computed(() => rootPropsAtom().disabled, 'disabled');
       const placeholder = computed(() => rootPropsAtom().placeholder);
-      const size = computed(() => rootPropsAtom().size);
+      const size = computed(() => rootPropsAtom().size, 'size');
       const disableInput = computed(() => !rootPropsAtom().input);
       const inputDefaultValue = computed(() =>
         rootPropsAtom().input ? rootPropsAtom().inputDefaultValue : undefined,

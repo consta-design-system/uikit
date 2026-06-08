@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { ColorPickerBase } from '../ColorPickerBase';
 import { hsvaModel } from '../models/hsvaModel';
@@ -40,7 +40,7 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} *[data-testid="${testId}"]`,
   ) as HTMLElement;
 
-describe.concurrent('Компонент ColorPickerBase', () => {
+describe('Компонент ColorPickerBase', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const value: HsvaColor = { h: 0, s: 0, v: 0, a: 1 };
@@ -50,14 +50,14 @@ describe.concurrent('Компонент ColorPickerBase', () => {
           value,
           onChange: vi.fn(),
         });
-      await wrap(tick());
+
       expect(render).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     const value: HsvaColor = { h: 120, s: 50, v: 75, a: 1 };
 
-    describe.concurrent('проверка className', () => {
+    describe('проверка className', () => {
       test('присваивает дополнительный класс', (ctx) =>
         context.start(async () => {
           const className = 'custom-class';
@@ -67,12 +67,12 @@ describe.concurrent('Компонент ColorPickerBase', () => {
             onChange: vi.fn(),
             className,
           });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(className);
         }));
     });
 
-    describe.concurrent('проверка style', () => {
+    describe('проверка style', () => {
       test('присваивает дополнительные стили', (ctx) =>
         context.start(async () => {
           const style = { color: 'red' };
@@ -82,12 +82,12 @@ describe.concurrent('Компонент ColorPickerBase', () => {
             onChange: vi.fn(),
             style,
           });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveStyle(style);
         }));
     });
 
-    describe.concurrent('проверка ref', () => {
+    describe('проверка ref', () => {
       test('ref присваивается элементу', (ctx) =>
         context.start(async () => {
           const ref = React.createRef<HTMLDivElement>();
@@ -97,12 +97,12 @@ describe.concurrent('Компонент ColorPickerBase', () => {
             onChange: vi.fn(),
             ref,
           });
-          await wrap(tick());
+
           expect(ref.current).toBe(getRender(ctx));
         }));
     });
 
-    describe.concurrent('проверка alpha', () => {
+    describe('проверка alpha', () => {
       test('при alpha=true рендерится ColorPickerAlpha', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {
@@ -111,9 +111,10 @@ describe.concurrent('Компонент ColorPickerBase', () => {
             onChange: vi.fn(),
             alpha: true,
           });
-          await wrap(tick());
+
           // ColorPickerAlpha имеет класс ColorPickerAlpha
-          const alphaElement = document.querySelector('.ColorPickerAlpha');
+          const alphaElement =
+            getRender(ctx).querySelector('.ColorPickerAlpha');
           expect(alphaElement).toBeInTheDocument();
         }));
 
@@ -125,14 +126,16 @@ describe.concurrent('Компонент ColorPickerBase', () => {
             onChange: vi.fn(),
             alpha: false,
           });
-          await wrap(tick());
-          const alphaElement = document.querySelector('.ColorPickerAlpha');
+
+          const alphaElement =
+            getRender(ctx).querySelector('.ColorPickerAlpha');
+
           expect(alphaElement).not.toBeInTheDocument();
         }));
     });
   });
 
-  describe.concurrent('проверка взаимодействия', () => {
+  describe('проверка взаимодействия', () => {
     test('вызывает onChange при изменении saturation', (ctx) =>
       context.start(async () => {
         const onChange = vi.fn();
@@ -142,7 +145,6 @@ describe.concurrent('Компонент ColorPickerBase', () => {
           onChange,
           alpha: false,
         });
-        await wrap(tick());
 
         // Находим слайдер saturation (первый слайдер)
         const sliders = document.querySelectorAll(
@@ -167,7 +169,6 @@ describe.concurrent('Компонент ColorPickerBase', () => {
           onChange,
           alpha: false,
         });
-        await wrap(tick());
 
         // Hue слайдер второй по порядку
         const sliders = document.querySelectorAll(
@@ -190,7 +191,6 @@ describe.concurrent('Компонент ColorPickerBase', () => {
           onChange,
           alpha: true,
         });
-        await wrap(tick());
 
         // Alpha слайдер третий
         const sliders = document.querySelectorAll(

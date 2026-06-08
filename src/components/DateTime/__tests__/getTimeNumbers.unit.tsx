@@ -2,8 +2,8 @@ import { describe, expect, test } from 'vitest';
 
 import { getTimeNumbers } from '../helpers/getTimeNumbers';
 
-describe.concurrent('getTimeNumbers', () => {
-  describe.concurrent('проверка step (sequence from 0)', () => {
+describe('getTimeNumbers', () => {
+  describe('проверка step (sequence from 0)', () => {
     const steps = [0, 1, 2, 5, 10];
 
     steps.forEach((step) => {
@@ -46,7 +46,7 @@ describe.concurrent('getTimeNumbers', () => {
     });
   });
 
-  describe.concurrent('проверка start', () => {
+  describe('проверка start', () => {
     const startValues1 = [-10, 0, 5, 10, 30];
     const startValues2 = [-10, 0, 5, 10, 30, 59, 60];
 
@@ -81,7 +81,7 @@ describe.concurrent('getTimeNumbers', () => {
     });
   });
 
-  describe.concurrent(
+  describe(
     'проверка timeOptions.stop (stop to N, start=0, step=1)',
     () => {
       const stopValues1 = [-5, 5, 10, 20, 30];
@@ -119,7 +119,7 @@ describe.concurrent('getTimeNumbers', () => {
     },
   );
 
-  describe.concurrent('проверка start/stop/step комбинации', () => {
+  describe('проверка start/stop/step комбинации', () => {
     test(`проверка timeOptions.hours.step=5, start=5, stop=15 (combination, no swap)`, () => {
       const result = getTimeNumbers('hours', { step: 5, start: 5, stop: 15 });
       expect(result).toEqual([5, 10, 15]);
@@ -190,7 +190,7 @@ describe.concurrent('getTimeNumbers', () => {
     });
   });
 
-  describe.concurrent(
+  describe(
     'проверка custom timeOptions (кастомный список значений)',
     () => {
       test('корректный custom список для hours', () => {
@@ -253,7 +253,7 @@ describe.concurrent('getTimeNumbers', () => {
     },
   );
 
-  describe.concurrent('edge cases и специальные случаи', () => {
+  describe('edge cases и специальные случаи', () => {
     test('возвращает полный диапазон при undefined options', () => {
       const result = getTimeNumbers('hours', undefined);
       expect(result.length).toBe(24);

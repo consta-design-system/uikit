@@ -28,7 +28,10 @@ export const SelectMultiple = factoryComponent<
   HTMLDivElement,
   SelectProps<SelectItemDefault, SelectGroupDefault, true>
 >((_, propsAtom) => {
-  const propsWithDefaultAtom = computed(() => withDefault(propsAtom()));
+  const propsWithDefaultAtom = computed(
+    () => withDefault(propsAtom()),
+    'propsWithDefaultAtom',
+  );
 
   const {
     getOptionActions,
@@ -58,6 +61,7 @@ export const SelectMultiple = factoryComponent<
     dropdownZIndexAtom,
     controlElAtom,
     getHandleRemoveValue,
+    disabledAtom,
   } = model<SelectItemDefault, SelectGroupDefault, true>(propsWithDefaultAtom);
 
   const renderItemDefault: SelectPropRenderItem<SelectItemDefault> = wrap(
@@ -157,9 +161,9 @@ export const SelectMultiple = factoryComponent<
       input,
       inputValue,
       inputDefaultValue,
-      inputRef: inputRefProp,
 
       // исключаем из otherProps
+      inputRef: inputRefProp,
       getGroupKey,
       getItemDisabled,
       getItemGroupKey,
@@ -181,6 +185,7 @@ export const SelectMultiple = factoryComponent<
       selectAllLabel,
       dropdownViewportRef,
       dropdownContainer,
+      dropdownOpen,
       ...otherProps
     } = propsWithDefault;
 
@@ -202,16 +207,16 @@ export const SelectMultiple = factoryComponent<
           view={view}
           iconClear={iconClear}
           clearButtonAtom={clearButtonAtom}
-          ref={controlRef}
+          ref={wrap(controlRef)}
         >
           <SelectMultipleValue
             rootPropsAtom={propsWithDefaultAtom}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
-            onClick={handleInputClick}
-            onChange={handleInputChange}
+            onFocus={wrap(handleInputFocus)}
+            onBlur={wrap(handleInputBlur)}
+            onClick={wrap(handleInputClick)}
+            onChange={wrap(handleInputChange)}
             renderValue={inlineControlRender}
-            inputRef={inputRef}
+            inputRef={wrap(inputRef)}
           />
         </SelectControlLayout>
         <SelectDropdown
@@ -230,7 +235,7 @@ export const SelectMultiple = factoryComponent<
           labelForCreate={labelForCreate}
           isLoading={isLoading}
           labelForEmptyItems={labelForEmptyItems}
-          getItemRef={getOptionRef}
+          getItemRef={wrap(getOptionRef)}
           virtualScroll={virtualScroll}
           onScrollToBottom={onScrollToBottom}
           highlightedIndexAtom={highlightedIndexAtom}
@@ -244,8 +249,9 @@ export const SelectMultiple = factoryComponent<
           selectAllLabel={selectAllLabel}
           viewportRef={dropdownViewportRef}
           container={dropdownContainer}
+          disabledAtom={disabledAtom}
         />
       </>
     );
   };
-}, 'SelectMultiple') as SelectComponent;
+}) as SelectComponent;

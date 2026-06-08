@@ -37,13 +37,13 @@ const getRender = (ctx: TestContext) =>
     `#${testRootId(ctx)} [data-testid="${testId}"]`,
   ) as HTMLElement | null;
 
-describe.concurrent('Компонент ProgressLine', () => {
+describe('Компонент ProgressLine', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('присваивает className', (ctx) =>
       context.start(async () => {
         const className = 'test-class';
@@ -58,7 +58,7 @@ describe.concurrent('Компонент ProgressLine', () => {
         expect(ref.current).toBe(getRender(ctx));
       }));
 
-    describe.concurrent('проверка size', () => {
+    describe('проверка size', () => {
       progressLinePropSize.forEach((size) => {
         test(`присваивает класс для size=${size}`, (ctx) =>
           context.start(async () => {
@@ -68,7 +68,7 @@ describe.concurrent('Компонент ProgressLine', () => {
       });
     });
 
-    describe.concurrent('проверка mode', () => {
+    describe('проверка mode', () => {
       test('устанавливает mode="indeterminate" по умолчанию', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, {});
@@ -92,7 +92,7 @@ describe.concurrent('Компонент ProgressLine', () => {
         }));
     });
 
-    describe.concurrent('проверка steps', () => {
+    describe('проверка steps', () => {
       const steps = ['Шаг 1', 'Шаг 2', 'Шаг 3'];
 
       test('отображает шаги', (ctx) =>
@@ -121,7 +121,7 @@ describe.concurrent('Компонент ProgressLine', () => {
         }));
     });
 
-    describe.concurrent('проверка value', () => {
+    describe('проверка value', () => {
       test('устанавливает CSS-переменную --progress-line-value', (ctx) =>
         context.start(async () => {
           renderComponent(ctx, { value: 30 });

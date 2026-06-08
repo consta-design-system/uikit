@@ -1,13 +1,13 @@
 import './Sidebar.css';
 
 import React, { forwardRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import { useModal } from '##/components/Modal/useModal';
 import {
   PortalWithTheme,
   PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
+import { Transition } from '##/components/Transition';
 import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
@@ -96,8 +96,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
         in={isOpen}
         unmountOnExit
         timeout={animateTimeout}
-        nodeRef={portalRef}
-        onExiting={afterClose}
+        onExited={afterClose}
       >
         {(animate) => (
           <PortalWithTheme

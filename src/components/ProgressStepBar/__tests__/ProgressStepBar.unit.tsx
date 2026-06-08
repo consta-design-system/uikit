@@ -52,13 +52,13 @@ const getRender = (ctx: TestContext) =>
 const getItems = (ctx: TestContext) =>
   getRender(ctx).querySelectorAll('.ProgressStepBarItem');
 
-describe.concurrent('Компонент ProgressStepBar', () => {
+describe('Компонент ProgressStepBar', () => {
   test('рендерится без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx)).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
+  describe('проверка props', () => {
     test('className применяется', (ctx) =>
       context.start(async () => {
         const className = 'test-class';
@@ -105,7 +105,7 @@ describe.concurrent('Компонент ProgressStepBar', () => {
       }));
   });
 
-  describe.concurrent('проверка direction', () => {
+  describe('проверка direction', () => {
     test('устанавливает горизонтальное направление по умолчанию', (ctx) =>
       context.start(async () => {
         renderComponent(ctx);

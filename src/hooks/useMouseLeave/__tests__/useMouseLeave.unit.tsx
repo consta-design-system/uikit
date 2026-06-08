@@ -84,7 +84,7 @@ const getItem = (ctx: TestContext, index: number) =>
     `#${testRootId(ctx)} *[data-testid="test-item-${index}"]`,
   ) as HTMLElement;
 
-describe.concurrent('Хук useMouseLeave', () => {
+describe('Хук useMouseLeave', () => {
   test('вызывает handler при уходе мыши с элемента', (ctx) =>
     context.start(async () => {
       const handler = vi.fn();

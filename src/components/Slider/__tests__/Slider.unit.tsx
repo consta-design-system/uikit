@@ -44,7 +44,7 @@ const getPoints = (ctx: TestContext) =>
 const getLine = (ctx: TestContext) =>
   getRender(ctx)?.querySelector('.SliderLine') as HTMLElement | null;
 
-describe.concurrent('Компонент Slider', () => {
+describe('Компонент Slider', () => {
   test('рендерится без ошибок', (ctx) =>
     context.start(async () => {
       expect(() => renderComponent(ctx, { value: 0 })).not.toThrow();
@@ -56,8 +56,8 @@ describe.concurrent('Компонент Slider', () => {
       expect(getPoints(ctx).length).toBe(2);
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка size', () => {
+  describe('проверка props', () => {
+    describe('проверка size', () => {
       sliderPropSize.forEach((size) => {
         test(`применяется класс для size=${size}`, (ctx) =>
           context.start(async () => {
@@ -67,7 +67,7 @@ describe.concurrent('Компонент Slider', () => {
       });
     });
 
-    describe.concurrent('проверка view', () => {
+    describe('проверка view', () => {
       (['default', 'division'] as SliderPropView[]).forEach((view) => {
         test(`применяется класс для view=${view}`, (ctx) =>
           context.start(async () => {
@@ -162,7 +162,7 @@ describe.concurrent('Компонент Slider', () => {
         );
       }));
 
-    describe.concurrent('проверка min/max', () => {
+    describe('проверка min/max', () => {
       test('значение не может быть меньше min', (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
@@ -222,7 +222,7 @@ describe.concurrent('Компонент Slider', () => {
     });
   });
 
-  describe.concurrent("проверка callback'ов", () => {
+  describe("проверка callback'ов", () => {
     test('onChange вызывается после изменения значения с SliderPoint', (ctx) =>
       context.start(async () => {
         const handleChange = vi.fn();

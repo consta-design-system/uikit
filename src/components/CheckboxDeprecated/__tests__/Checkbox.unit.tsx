@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { Checkbox, cnCheckbox } from '../CheckboxDeprecated';
 
@@ -56,33 +56,32 @@ function getLabel(ctx: TestContext) {
   return getRender(ctx).querySelector(`.${cnCheckbox('Label')}`);
 }
 
-describe.concurrent('Компонент Checkbox', () => {
+describe('Компонент Checkbox', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       const render = () => renderComponent(ctx, {});
-      await wrap(tick());
+
       expect(render).not.toThrow();
     }));
 
-  describe.concurrent('проверка props', () => {
-    describe.concurrent('проверка className', () => {
+  describe('проверка props', () => {
+    describe('проверка className', () => {
       test(`Присваивается дополнительный className`, (ctx) =>
         context.start(async () => {
           const className = 'className';
 
           renderComponent(ctx, { className });
-          await wrap(tick());
+
           expect(getRender(ctx)).toHaveClass(className);
         }));
     });
 
-    describe.concurrent('проверка label', () => {
+    describe('проверка label', () => {
       test(`label отображается`, (ctx) =>
         context.start(async () => {
           const label = 'fileName';
 
           renderComponent(ctx, { label });
-          await wrap(tick());
 
           const labelElement = getLabel(ctx) as HTMLSpanElement;
 
@@ -90,13 +89,12 @@ describe.concurrent('Компонент Checkbox', () => {
         }));
     });
 
-    describe.concurrent('проверка onChange', () => {
+    describe('проверка onChange', () => {
       test(`клик должен вызвать callback c ожидаемыми параметрами`, (ctx) =>
         context.start(async () => {
           const handleChange = vi.fn();
 
           renderComponent(ctx, { onChange: handleChange });
-          await wrap(tick());
 
           const element = getRender(ctx) as HTMLButtonElement;
 

@@ -1,13 +1,15 @@
 import './SelectCreateButton.css';
 
-import { AtomLike } from '@reatom/core';
-import { useAtom } from '@reatom/react';
-import React, { forwardRef } from 'react';
+import { AtomLike, computed } from '@reatom/core';
+import React from 'react';
 
 import { FieldPropSize } from '##/components/FieldComponents';
 import { ListAddItem } from '##/components/ListCanary';
 import { cnCanary as cn } from '##/utils/bem';
+import { factoryComponent } from '##/utils/state';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
+
+import { OptionForCreate } from '../types';
 
 type LabelForCreate =
   | ((label: string | undefined) => React.ReactNode)
@@ -21,6 +23,11 @@ type SelectCreateButtonProps = PropsWithHTMLAttributesAndRef<
     indent: 'normal' | 'increased';
     index: number;
     highlightedIndexAtom: AtomLike<number>;
+    getOptionActions(props: { index: number; item: OptionForCreate }): {
+      onClick: (e: React.MouseEvent) => void;
+      onMouseEnter: (e: React.MouseEvent) => void;
+    };
+    disabledAtom: AtomLike<boolean>;
   },
   HTMLDivElement
 >;
@@ -39,44 +46,54 @@ const labelForCreateDefault: LabelForCreate = (label) => (
   </span>
 );
 
-type SelectCreateButtonComponent = (
-  props: SelectCreateButtonProps,
-) => React.ReactNode | null;
+export const SelectCreateButton = factoryComponent<
+  HTMLDivElement,
+  SelectCreateButtonProps
+>(({ highlightedIndexAtom, inputValueAtom }, propsAtom) => {
+  const hovered = computed(
+    () => highlightedIndexAtom() === propsAtom().index,
+    'hovered',
+  );
 
-export const SelectCreateButton: SelectCreateButtonComponent = forwardRef(
-  (props, ref) => {
-    const {
-      className,
-      labelForCreate: labelForCreateProp = labelForCreateDefault,
-      inputValueAtom,
-      index,
-      size,
-      indent,
-      highlightedIndexAtom,
-      ...otherProps
-    } = props;
+  const labelForCreate = computed(() => {
+    const inputValue = inputValueAtom();
+    const labelForCreateProp =
+      propsAtom().labelForCreate || labelForCreateDefault;
+    return typeof labelForCreateProp === 'function'
+      ? labelForCreateProp(inputValue)
+      : labelForCreateProp;
+  }, 'labelForCreate');
 
-    const [hovered] = useAtom(() => highlightedIndexAtom() === index);
-
-    const [labelForCreate] = useAtom(() => {
-      const inputValue = inputValueAtom();
-      return typeof labelForCreateProp === 'function'
-        ? labelForCreateProp(inputValue)
-        : labelForCreateProp;
-    }, [labelForCreateProp]);
-
+  return ({
+    className,
+    labelForCreate: labelForCreateProp = labelForCreateDefault,
+    inputValueAtom,
+    index,
+    size,
+    indent,
+    highlightedIndexAtom,
+    getOptionActions,
+    ref,
+    disabledAtom,
+    ...otherProps
+  }) => {
     return (
       <ListAddItem
         {...otherProps}
+        {...getOptionActions({
+          index,
+          item: { label: '', __optionForCreate: true },
+        })}
         ref={ref}
         className={cnSelectCreateButton(null, [className])}
         role="option"
-        active={hovered}
+        active={hovered()}
         size={size}
         innerOffset={indent}
-        label={labelForCreate}
+        label={labelForCreate()}
         underLine
+        disabled={disabledAtom()}
       />
     );
-  },
-);
+  };
+});

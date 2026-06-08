@@ -1,6 +1,6 @@
 import { IconClose } from '@consta/icons/IconClose';
 import { IconDinosaur } from '@consta/icons/IconDinosaur';
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { Chips } from '../Chips';
 import { ChipsDefaultItem, ChipsProps } from '../types';
@@ -60,25 +60,22 @@ const getItem = (ctx: TestContext, index: number) =>
 const getRightIcon = (ctx: TestContext, index: number) =>
   getItem(ctx, index).querySelector('.IconClose') as HTMLDivElement;
 
-describe.concurrent('Chips', () => {
+describe('Chips', () => {
   test('Рендериться без ошибок', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, {});
-      await wrap(tick());
 
       expect(getRender(ctx)).toBeInTheDocument();
     }));
 
-  describe.concurrent('Props', () => {
-    describe.concurrent(
+  describe('Props', () => {
+    describe(
       'Обработчики onItemClick и onItemRightIconClick',
       () => {
         test('onClick вызывается', (ctx) =>
           context.start(async () => {
             const onClick = vi.fn();
             renderComponent(ctx, { onItemClick: onClick });
-
-            await wrap(tick());
 
             const item = getItem(ctx, 0);
             fireEvent.click(item);
@@ -93,8 +90,6 @@ describe.concurrent('Chips', () => {
             renderComponent(ctx, {
               onItemRightIconClick: onClick,
             });
-
-            await wrap(tick());
 
             const rightIcon = getRightIcon(ctx, 2);
             expect(rightIcon).toBeInTheDocument();
@@ -113,8 +108,6 @@ describe.concurrent('Chips', () => {
               onItemClick,
               disabled: true,
             });
-
-            await wrap(tick());
 
             const item = getItem(ctx, 0);
             fireEvent.click(item);
@@ -140,8 +133,6 @@ describe.concurrent('Chips', () => {
               onItemRightIconClick,
               onItemClick,
             });
-
-            await wrap(tick());
 
             const disabledItem = getItem(ctx, 1);
             fireEvent.click(disabledItem);

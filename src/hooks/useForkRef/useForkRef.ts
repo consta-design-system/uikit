@@ -1,9 +1,10 @@
+import { AtomLike } from '@reatom/core';
 import { LegacyRef, useMemo } from 'react';
 
 import { setRef } from '##/utils/setRef';
 
 export const forkRef =
-  <T>(refs: (LegacyRef<T> | undefined)[]): React.RefCallback<T> =>
+  <T>(refs: (LegacyRef<T> | AtomLike<T> | undefined)[]): React.RefCallback<T> =>
   (value) => {
     for (const ref of refs) {
       setRef(ref, value);

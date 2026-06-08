@@ -108,7 +108,7 @@ const animateDelay = () =>
     vi.advanceTimersByTime(animationDuration);
   });
 
-describe.concurrent('Компонент UserSelect', () => {
+describe('Компонент UserSelect', () => {
   test('должен рендериться без ошибок', (ctx) =>
     context.start(async () => {
       expect(() =>
@@ -379,7 +379,7 @@ describe.concurrent('Компонент UserSelect', () => {
       expect(getRenderItems(ctx).length).toEqual(items.length);
     }));
 
-  describe.concurrent('проверка dropdownContainer', () => {
+  describe('проверка dropdownContainer', () => {
     test('по умолчанию рендерит dropdown в document.body', (ctx) =>
       context.start(async () => {
         vi.useFakeTimers();

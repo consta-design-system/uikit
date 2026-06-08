@@ -151,7 +151,6 @@ function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
       direction,
       className: cnProgressStepBar('Item'),
       onClick: onClick || onItemClickHandler,
-      key: cnProgressStepBar({ index }),
       tooltipZIndex:
         typeof style?.zIndex === 'number' ? style.zIndex + 1 : undefined,
     };
@@ -194,6 +193,7 @@ function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
         {steps.map((step, index) => (
           <ProgressStepBarItem
             ref={refs[index] as React.RefObject<HTMLDivElement>}
+            key={cnProgressStepBar({ index })}
             {...getStepItem(step, index)}
           />
         ))}
