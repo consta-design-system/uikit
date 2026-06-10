@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.33.1 (10/06/2026)
+- [fix(deps): remove @consta/table (#4176)](https://github.com/consta-design-system/uikit/commit/b41a5aca86ef09517e7fd6a58ec4e425006f1086) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.33.0 (01/06/2026)
 - [fix(DatePicker): mask settings have been fixed for a more convenient experience (#4173)](https://github.com/consta-design-system/uikit/commit/1c87a2afb6e85379830ff4eef5b323089ec7937c) - [@gizeasy](https://github.com/gizeasy)
 - [refactor(ProgressStepBar): extract and export shared types via dedicated module](https://github.com/consta-design-system/uikit/commit/1e85f96c6c81228a633d20a0e89af50ec39ed65e) - [@baevm](https://github.com/baevm)
@@ -377,21 +382,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [docs(edit cspell) (#3845)](https://github.com/consta-design-system/uikit/commit/c74c489c6c6429d6cda5cd96b1a0a4a39d6bc551) - [@alyonurchick1](https://github.com/alyonurchick1)
 - [fix(DatePicker): fixed visited date (#3850)](https://github.com/consta-design-system/uikit/commit/71e1a1f72e0cde38a06c19b09474459aaf4722da) - [@gizeasy](https://github.com/gizeasy)
 - [feat(Tag): add disabled prop (#3841)](https://github.com/consta-design-system/uikit/commit/a1c40e61b23d836d58250d39884082fcbb01d648) - [@baevm](https://github.com/baevm)
-
---------------------
-
-## v5.15.0 (26/11/2024)
-Самое главное:
-- В `TextField` добавили поддержку onWheel и отключили его действие по умолчанию для `type="number"`.
-- В `Steps` обернули номер шага в `<span/>` для возможности стилизации.
-- Исправили опечатки по всему проекту.
-
----
-
-- [fix(Informer): fixed icon position (#3831)](https://github.com/consta-design-system/uikit/commit/f57e24a5ce1af47c5d0fb5ff3b9df97c32471853) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Switch): update onChange docs for Switch (#3829)](https://github.com/consta-design-system/uikit/commit/0b43f0f967f30f347e54ddfcad9c69cfbe84d55f) - [@vitaliidasaev](https://github.com/vitaliidasaev)
-- [fix: misprint (#3828)](https://github.com/consta-design-system/uikit/commit/1cc4e4076001461cea6d1d74615f960348416663) - [@gizeasy](https://github.com/gizeasy)
-- [feat(TextField): add wheel event handler for input[type="number"] (#3820)](https://github.com/consta-design-system/uikit/commit/7fb111e571d24a45f2204bbed0e66be1224ccf81) - [@belk1ng](https://github.com/belk1ng)
-- [feat(Steps): add wrapper to step index (#3821)](https://github.com/consta-design-system/uikit/commit/b46890555deac4530b4f82fb959482ccddd47780) - [@belk1ng](https://github.com/belk1ng)
-- [fix(Slider): fix value changing after click with disabled prop (#3822)](https://github.com/consta-design-system/uikit/commit/eb818a974a94a7294f2b12eccb646770b11b8d6e) - [@belk1ng](https://github.com/belk1ng)
-- [fix(TextFieldCanary): fixed import (#3819)](https://github.com/consta-design-system/uikit/commit/88c9a63cb5a99d700360a8a78fb45be6e4142f6c) - [@gizeasy](https://github.com/gizeasy)
