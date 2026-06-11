@@ -36,7 +36,7 @@ export const useScroll = (
     return () => {
       ref.current?.removeEventListener('scroll', fn);
     };
-  }, [ref.current, fn, isActive]);
+  }, [ref.current, isActive]);
 };
 
 export const getElementHeight = (el: HTMLElement | SVGGraphicsElement | null) =>
