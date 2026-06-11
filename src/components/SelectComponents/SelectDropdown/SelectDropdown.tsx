@@ -232,6 +232,7 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
                 }),
                 cnMixScrollBar(),
               ])}
+              key={cnSelectDropdown('ScrollContainer')}
               ref={dropdownRef}
             >
               {isLoading && !isListShowed && <SelectLoader />}

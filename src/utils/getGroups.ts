@@ -125,15 +125,17 @@ export function getCountedGroups<ITEM, GROUP>(
           checkedCount += 1;
         }
       });
-      copyGroups[index].items = [
-        {
-          __optionSelectAll: true,
-          totalCount,
-          groupKey: group.key,
-          checkedCount,
-        },
-        ...copyGroups[index].items,
-      ];
+      copyGroups[index].items = copyGroups[index].items.length
+        ? [
+            {
+              __optionSelectAll: true,
+              totalCount,
+              groupKey: group.key,
+              checkedCount,
+            },
+            ...copyGroups[index].items,
+          ]
+        : copyGroups[index].items;
     });
   }
   return copyGroups;
