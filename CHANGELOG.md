@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.33.2 (11/06/2026)
+- [fix(Combobox): fix searchLabel and virtualScroll on React 19 (#4178)](https://github.com/consta-design-system/uikit/commit/d774dd5012a83cfaa3f46dc782804c32351cd9e4) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.33.1 (10/06/2026)
 - [fix(deps): remove @consta/table (#4176)](https://github.com/consta-design-system/uikit/commit/b41a5aca86ef09517e7fd6a58ec4e425006f1086) - [@gizeasy](https://github.com/gizeasy)
 
@@ -364,21 +369,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 
 - [test(StepsCanary): edit tests](https://github.com/consta-design-system/uikit/commit/7a57287ad45afb9d066ea55b186812629cf34ed7) - [@gizeasy](https://github.com/gizeasy)
 - [feat(StepsCanary): new canary component (#3861)](https://github.com/consta-design-system/uikit/commit/a62788e19d34bc78681148bc70fb812197fa2706) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.16.0 (12/12/2024)
-Самое важное:
-- В `Attachment` добавили возможность указывать несколько кнопок с действиями.
-- В `Loader` добавили новый тип компонента и возможность указывать произвольный размер и цвет.
-- В `Tag` добавили свойство `disabled`.
-
----
-
-- [test(Attachment): fix test](https://github.com/consta-design-system/uikit/commit/3294b2115a8815e6b3f55b203ab05a57105f0398) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Attachment): add actions (#3846)](https://github.com/consta-design-system/uikit/commit/3728cab89756bd790eea304636186bf88201ebea) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Loader): add _view_circle (#3849)](https://github.com/consta-design-system/uikit/commit/8a2180b73709a30b69cb060e1b70d4f32b7cd6a5) - [@gizeasy](https://github.com/gizeasy)
-- [chore(cspell): add  --no-progress flag (#3851)](https://github.com/consta-design-system/uikit/commit/7e7004f8a830b497e433a68e17fae6d31dfefb29) - [@gizeasy](https://github.com/gizeasy)
-- [docs(edit cspell) (#3845)](https://github.com/consta-design-system/uikit/commit/c74c489c6c6429d6cda5cd96b1a0a4a39d6bc551) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [fix(DatePicker): fixed visited date (#3850)](https://github.com/consta-design-system/uikit/commit/71e1a1f72e0cde38a06c19b09474459aaf4722da) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Tag): add disabled prop (#3841)](https://github.com/consta-design-system/uikit/commit/a1c40e61b23d836d58250d39884082fcbb01d648) - [@baevm](https://github.com/baevm)
