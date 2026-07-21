@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.33.3 (21/07/2026)
+- [fix: virtual scroll on react 19 (#4180)](https://github.com/consta-design-system/uikit/commit/6a83041980eaea269403bacd612d25b794fcbd70) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.33.2 (11/06/2026)
 - [fix(Combobox): fix searchLabel and virtualScroll on React 19 (#4178)](https://github.com/consta-design-system/uikit/commit/d774dd5012a83cfaa3f46dc782804c32351cd9e4) - [@gizeasy](https://github.com/gizeasy)
 
@@ -358,14 +363,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [docs: fix docs typos (#3902)](https://github.com/consta-design-system/uikit/commit/671d545de0ebb667d4f6a3ea87c3191b2cbf46e1) - [@baevm](https://github.com/baevm)
 - [feat(Tabs, BookmarkTabs): add getItemKey for Tabs, fix empty tabs render problem for BookmarkTabs](https://github.com/consta-design-system/uikit/commit/84649da176a7e42a8c0ac5a59c2cc0516e9eaace) - [@ZettZet](https://github.com/ZettZet)
 - [test(Attachment, FieldComponents): add tests (#3910)](https://github.com/consta-design-system/uikit/commit/38e9c667edee8b7f11b926ea555de280b135f1ef) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.17.0 (09/01/2025)
-Самое важное:
-- Добавили новый `canary` компонент `Steps`. Полностью переработали дизайн компонента и добавили новые возможности.
-
----
-
-- [test(StepsCanary): edit tests](https://github.com/consta-design-system/uikit/commit/7a57287ad45afb9d066ea55b186812629cf34ed7) - [@gizeasy](https://github.com/gizeasy)
-- [feat(StepsCanary): new canary component (#3861)](https://github.com/consta-design-system/uikit/commit/a62788e19d34bc78681148bc70fb812197fa2706) - [@gizeasy](https://github.com/gizeasy)
