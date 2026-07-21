@@ -198,11 +198,13 @@ export const FlatSelectList: FlatSelectListComponent = memo((props) => {
       tabIndex={-1}
     >
       {isLoading && !isListShowed && <FlatSelectLoader />}
-      <div
-        className={cnFlatSelectList('List')}
-        key={cnFlatSelectList('List')}
-        style={{ marginTop: spaceTop }}
-      >
+      <div className={cnFlatSelectList('List')} key={cnFlatSelectList('List')}>
+        {spaceTop > 0 && (
+          <div
+            key={cnFlatSelectList('SpaceTop')}
+            style={{ height: spaceTop }}
+          />
+        )}
         {visibleItems.map((group) => {
           if (isOptionForCreate(group)) {
             const index = getIndex();

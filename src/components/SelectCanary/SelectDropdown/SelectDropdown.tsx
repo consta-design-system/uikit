@@ -229,8 +229,13 @@ export const SelectDropdown: SelectDropdownComponent = memo((props) => {
           <div
             className={cnSelectDropdown('List')}
             key={cnSelectDropdown('List')}
-            style={{ marginTop: spaceTop }}
           >
+            {spaceTop > 0 && (
+              <div
+                key={cnSelectDropdown('SpaceTop')}
+                style={{ height: spaceTop }}
+              />
+            )}
             {visibleItems.map((group) => {
               if (isOptionForCreate(group)) {
                 const index = getIndex();
