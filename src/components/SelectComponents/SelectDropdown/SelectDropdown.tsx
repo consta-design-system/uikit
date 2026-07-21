@@ -236,10 +236,13 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
               ref={dropdownRef}
             >
               {isLoading && !isListShowed && <SelectLoader />}
-              <div
-                className={cnSelectDropdown('List', { scrolled })}
-                style={{ marginTop: spaceTop }}
-              >
+              <div className={cnSelectDropdown('List', { scrolled })}>
+                {spaceTop > 0 && (
+                  <div
+                    key={cnSelectDropdown('SpaceTop')}
+                    style={{ height: spaceTop }}
+                  />
+                )}
                 {visibleItems.map((group, groupIndex) => {
                   if (isOptionForCreate(group)) {
                     const index = getIndex();

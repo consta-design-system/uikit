@@ -25,7 +25,13 @@ export const UseVirtualScrollExampleVirtual = () => {
         border
         className={cnUseVirtualScrollExample(null, [cnMixScrollBar()])}
       >
-        <div style={{ marginTop: spaceTop }}>
+        <div>
+          {spaceTop > 0 && (
+            <div
+              key={cnUseVirtualScrollExample('SpaceTop')}
+              style={{ height: spaceTop }}
+            />
+          )}
           {items.slice(...slice).map((item, index) => {
             return (
               <ListItem
@@ -66,7 +72,13 @@ export const UseVirtualScrollExampleInfinity = () => {
         border
         className={cnUseVirtualScrollExample()}
       >
-        <div style={{ marginTop: spaceTop }}>
+        <div>
+          {spaceTop > 0 && (
+            <div
+              key={cnUseVirtualScrollExample('SpaceTop')}
+              style={{ height: spaceTop }}
+            />
+          )}
           {items.slice(...slice).map((item, index) => {
             return (
               <ListItem
