@@ -1,4 +1,4 @@
-import { Atom, atom, AtomLike, Computed, computed, effect } from '@reatom/core';
+import { Atom, atom, AtomLike, Computed, effect } from '@reatom/core';
 
 import { useCreateAtom } from '../useCreateAtom';
 

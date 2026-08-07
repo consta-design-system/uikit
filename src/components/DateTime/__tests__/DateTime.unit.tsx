@@ -1,12 +1,12 @@
 import { presetGpnDefault, Theme } from '@consta/uikit/Theme';
-import { clearStack, context, sleep, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
-import { act, fireEvent } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { describe, expect, test } from 'vitest';
 
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { DateTime, dateTimePropType, dateTimePropView } from '../DateTime';
 import { getRender, testId } from './helpers';

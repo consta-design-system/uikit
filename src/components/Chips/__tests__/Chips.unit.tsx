@@ -69,87 +69,84 @@ describe('Chips', () => {
     }));
 
   describe('Props', () => {
-    describe(
-      'Обработчики onItemClick и onItemRightIconClick',
-      () => {
-        test('onClick вызывается', (ctx) =>
-          context.start(async () => {
-            const onClick = vi.fn();
-            renderComponent(ctx, { onItemClick: onClick });
+    describe('Обработчики onItemClick и onItemRightIconClick', () => {
+      test('onClick вызывается', (ctx) =>
+        context.start(async () => {
+          const onClick = vi.fn();
+          renderComponent(ctx, { onItemClick: onClick });
 
-            const item = getItem(ctx, 0);
-            fireEvent.click(item);
+          const item = getItem(ctx, 0);
+          fireEvent.click(item);
 
-            expect(onClick).toHaveBeenCalled();
-            expect(onClick.mock.calls[0][0]).toBe(defaultItems[0]);
-          }));
+          expect(onClick).toHaveBeenCalled();
+          expect(onClick.mock.calls[0][0]).toBe(defaultItems[0]);
+        }));
 
-        test('onItemRightIconClick вызывается', (ctx) =>
-          context.start(async () => {
-            const onClick = vi.fn();
-            renderComponent(ctx, {
-              onItemRightIconClick: onClick,
-            });
+      test('onItemRightIconClick вызывается', (ctx) =>
+        context.start(async () => {
+          const onClick = vi.fn();
+          renderComponent(ctx, {
+            onItemRightIconClick: onClick,
+          });
 
-            const rightIcon = getRightIcon(ctx, 2);
-            expect(rightIcon).toBeInTheDocument();
-            fireEvent.click(rightIcon);
+          const rightIcon = getRightIcon(ctx, 2);
+          expect(rightIcon).toBeInTheDocument();
+          fireEvent.click(rightIcon);
 
-            expect(onClick).toHaveBeenCalled();
-            expect(onClick.mock.calls[0][0]).toBe(defaultItems[2]);
-          }));
+          expect(onClick).toHaveBeenCalled();
+          expect(onClick.mock.calls[0][0]).toBe(defaultItems[2]);
+        }));
 
-        test('Обработчики не вызываются на глобальный disabled', (ctx) =>
-          context.start(async () => {
-            const onItemClick = vi.fn();
-            const onItemRightIconClick = vi.fn();
-            renderComponent(ctx, {
-              onItemRightIconClick,
-              onItemClick,
-              disabled: true,
-            });
+      test('Обработчики не вызываются на глобальный disabled', (ctx) =>
+        context.start(async () => {
+          const onItemClick = vi.fn();
+          const onItemRightIconClick = vi.fn();
+          renderComponent(ctx, {
+            onItemRightIconClick,
+            onItemClick,
+            disabled: true,
+          });
 
-            const item = getItem(ctx, 0);
-            fireEvent.click(item);
+          const item = getItem(ctx, 0);
+          fireEvent.click(item);
 
-            const rightIcon = getRightIcon(ctx, 2);
+          const rightIcon = getRightIcon(ctx, 2);
 
-            expect(rightIcon).toBeInTheDocument();
-            fireEvent.click(rightIcon);
+          expect(rightIcon).toBeInTheDocument();
+          fireEvent.click(rightIcon);
 
-            expect(onItemClick).not.toHaveBeenCalled();
-            expect(onItemRightIconClick).not.toHaveBeenCalled();
-          }));
+          expect(onItemClick).not.toHaveBeenCalled();
+          expect(onItemRightIconClick).not.toHaveBeenCalled();
+        }));
 
-        test('Обработчики не вызываются на disabled конкретного элемента', (ctx) =>
-          context.start(async () => {
-            const onItemClick = vi.fn();
-            const onItemRightIconClick = vi.fn();
-            const itemsWithDisabled = defaultItems.map((item) => {
-              return { ...item, disabled: !!item.iconRight || !!item.iconLeft };
-            });
-            renderComponent(ctx, {
-              items: itemsWithDisabled,
-              onItemRightIconClick,
-              onItemClick,
-            });
+      test('Обработчики не вызываются на disabled конкретного элемента', (ctx) =>
+        context.start(async () => {
+          const onItemClick = vi.fn();
+          const onItemRightIconClick = vi.fn();
+          const itemsWithDisabled = defaultItems.map((item) => {
+            return { ...item, disabled: !!item.iconRight || !!item.iconLeft };
+          });
+          renderComponent(ctx, {
+            items: itemsWithDisabled,
+            onItemRightIconClick,
+            onItemClick,
+          });
 
-            const disabledItem = getItem(ctx, 1);
-            fireEvent.click(disabledItem);
+          const disabledItem = getItem(ctx, 1);
+          fireEvent.click(disabledItem);
 
-            const rightIcon = getRightIcon(ctx, 2);
-            expect(rightIcon).toBeInTheDocument();
-            fireEvent.click(rightIcon);
+          const rightIcon = getRightIcon(ctx, 2);
+          expect(rightIcon).toBeInTheDocument();
+          fireEvent.click(rightIcon);
 
-            expect(onItemClick).not.toHaveBeenCalled();
-            expect(onItemRightIconClick).not.toHaveBeenCalled();
+          expect(onItemClick).not.toHaveBeenCalled();
+          expect(onItemRightIconClick).not.toHaveBeenCalled();
 
-            const enabledItem = getItem(ctx, 0);
-            fireEvent.click(enabledItem);
+          const enabledItem = getItem(ctx, 0);
+          fireEvent.click(enabledItem);
 
-            expect(onItemClick).toHaveBeenCalled();
-          }));
-      },
-    );
+          expect(onItemClick).toHaveBeenCalled();
+        }));
+    });
   });
 });

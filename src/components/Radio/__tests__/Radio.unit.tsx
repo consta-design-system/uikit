@@ -29,7 +29,7 @@ const renderComponent = (
   },
 ) => {
   const root = ReactDOM.createRoot(document.getElementById(testRootId(ctx))!);
-  
+
   act(() => {
     root.render(
       <reatomContext.Provider value={top()}>

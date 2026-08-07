@@ -81,43 +81,40 @@ describe('getTimeNumbers', () => {
     });
   });
 
-  describe(
-    'проверка timeOptions.stop (stop to N, start=0, step=1)',
-    () => {
-      const stopValues1 = [-5, 5, 10, 20, 30];
-      const stopValues2 = [-10, 10, 20, 50, 70];
+  describe('проверка timeOptions.stop (stop to N, start=0, step=1)', () => {
+    const stopValues1 = [-5, 5, 10, 20, 30];
+    const stopValues2 = [-10, 10, 20, 50, 70];
 
-      stopValues1.forEach((stop) => {
-        test(`проверка timeOptions.hours.stop = ${stop} (start=0, step=1)`, () => {
-          const result = getTimeNumbers('hours', { stop });
-          const clampedStop = Math.max(0, Math.min(23, stop));
-          expect(result.length).toEqual(clampedStop + 1);
-          expect(result[0]).toBe(0);
-          expect(result[result.length - 1]).toBe(clampedStop);
-        });
+    stopValues1.forEach((stop) => {
+      test(`проверка timeOptions.hours.stop = ${stop} (start=0, step=1)`, () => {
+        const result = getTimeNumbers('hours', { stop });
+        const clampedStop = Math.max(0, Math.min(23, stop));
+        expect(result.length).toEqual(clampedStop + 1);
+        expect(result[0]).toBe(0);
+        expect(result[result.length - 1]).toBe(clampedStop);
       });
+    });
 
-      stopValues2.forEach((stop) => {
-        test(`проверка timeOptions.minutes.stop = ${stop} (start=0, step=1)`, () => {
-          const result = getTimeNumbers('minutes', { stop });
-          const clampedStop = Math.max(0, Math.min(59, stop));
-          expect(result.length).toEqual(clampedStop + 1);
-          expect(result[0]).toBe(0);
-          expect(result[result.length - 1]).toBe(clampedStop);
-        });
+    stopValues2.forEach((stop) => {
+      test(`проверка timeOptions.minutes.stop = ${stop} (start=0, step=1)`, () => {
+        const result = getTimeNumbers('minutes', { stop });
+        const clampedStop = Math.max(0, Math.min(59, stop));
+        expect(result.length).toEqual(clampedStop + 1);
+        expect(result[0]).toBe(0);
+        expect(result[result.length - 1]).toBe(clampedStop);
       });
+    });
 
-      stopValues2.forEach((stop) => {
-        test(`проверка timeOptions.seconds.stop = ${stop} (start=0, step=1)`, () => {
-          const result = getTimeNumbers('seconds', { stop });
-          const clampedStop = Math.max(0, Math.min(59, stop));
-          expect(result.length).toEqual(clampedStop + 1);
-          expect(result[0]).toBe(0);
-          expect(result[result.length - 1]).toBe(clampedStop);
-        });
+    stopValues2.forEach((stop) => {
+      test(`проверка timeOptions.seconds.stop = ${stop} (start=0, step=1)`, () => {
+        const result = getTimeNumbers('seconds', { stop });
+        const clampedStop = Math.max(0, Math.min(59, stop));
+        expect(result.length).toEqual(clampedStop + 1);
+        expect(result[0]).toBe(0);
+        expect(result[result.length - 1]).toBe(clampedStop);
       });
-    },
-  );
+    });
+  });
 
   describe('проверка start/stop/step комбинации', () => {
     test(`проверка timeOptions.hours.step=5, start=5, stop=15 (combination, no swap)`, () => {
@@ -190,68 +187,62 @@ describe('getTimeNumbers', () => {
     });
   });
 
-  describe(
-    'проверка custom timeOptions (кастомный список значений)',
-    () => {
-      test('корректный custom список для hours', () => {
-        const result = getTimeNumbers('hours', [0, 1, 5, 10, 15, 23]);
-        expect(result).toEqual([0, 1, 5, 10, 15, 23]);
-      });
+  describe('проверка custom timeOptions (кастомный список значений)', () => {
+    test('корректный custom список для hours', () => {
+      const result = getTimeNumbers('hours', [0, 1, 5, 10, 15, 23]);
+      expect(result).toEqual([0, 1, 5, 10, 15, 23]);
+    });
 
-      test('повторы и числа вне диапазона для hours — фильтруются', () => {
-        const result = getTimeNumbers('hours', [-5, 0, 0, 1, 10, 25, 40, 40]);
-        expect(result).toEqual([0, 1, 10]);
-      });
+    test('повторы и числа вне диапазона для hours — фильтруются', () => {
+      const result = getTimeNumbers('hours', [-5, 0, 0, 1, 10, 25, 40, 40]);
+      expect(result).toEqual([0, 1, 10]);
+    });
 
-      test('пустой custom массив для hours — возвращает пустой массив', () => {
-        const result = getTimeNumbers('hours', []);
-        expect(result).toEqual([]);
-      });
+    test('пустой custom массив для hours — возвращает пустой массив', () => {
+      const result = getTimeNumbers('hours', []);
+      expect(result).toEqual([]);
+    });
 
-      test('корректный custom список для minutes', () => {
-        const result = getTimeNumbers('minutes', [0, 5, 15, 30, 45]);
-        expect(result).toEqual([0, 5, 15, 30, 45]);
-      });
+    test('корректный custom список для minutes', () => {
+      const result = getTimeNumbers('minutes', [0, 5, 15, 30, 45]);
+      expect(result).toEqual([0, 5, 15, 30, 45]);
+    });
 
-      test('повторы и вне диапазона minutes', () => {
-        const result = getTimeNumbers(
-          'minutes',
-          [-1, 0, 0, 30, 59, 60, 120, 60],
-        );
-        expect(result).toEqual([0, 30, 59]);
-      });
+    test('повторы и вне диапазона minutes', () => {
+      const result = getTimeNumbers('minutes', [-1, 0, 0, 30, 59, 60, 120, 60]);
+      expect(result).toEqual([0, 30, 59]);
+    });
 
-      test('пустой custom для minutes — возвращает пустой массив', () => {
-        const result = getTimeNumbers('minutes', []);
-        expect(result).toEqual([]);
-      });
+    test('пустой custom для minutes — возвращает пустой массив', () => {
+      const result = getTimeNumbers('minutes', []);
+      expect(result).toEqual([]);
+    });
 
-      test('корректный custom список для seconds', () => {
-        const result = getTimeNumbers('seconds', [0, 10, 23, 33, 40, 50]);
-        expect(result).toEqual([0, 10, 23, 33, 40, 50]);
-      });
+    test('корректный custom список для seconds', () => {
+      const result = getTimeNumbers('seconds', [0, 10, 23, 33, 40, 50]);
+      expect(result).toEqual([0, 10, 23, 33, 40, 50]);
+    });
 
-      test('повторы и вне диапазона seconds', () => {
-        const result = getTimeNumbers(
-          'seconds',
-          [-10, -10, 0, 0, 59, 59, 60, 100],
-        );
-        expect(result).toEqual([0, 59]);
-      });
+    test('повторы и вне диапазона seconds', () => {
+      const result = getTimeNumbers(
+        'seconds',
+        [-10, -10, 0, 0, 59, 59, 60, 100],
+      );
+      expect(result).toEqual([0, 59]);
+    });
 
-      test('пустой custom для seconds — возвращает пустой массив', () => {
-        const result = getTimeNumbers('seconds', []);
-        expect(result).toEqual([]);
-      });
+    test('пустой custom для seconds — возвращает пустой массив', () => {
+      const result = getTimeNumbers('seconds', []);
+      expect(result).toEqual([]);
+    });
 
-      test('undefined custom — fallback на стандартный диапазон', () => {
-        const result = getTimeNumbers('seconds', {});
-        expect(result.length).toEqual(60);
-        expect(result[0]).toBe(0);
-        expect(result[59]).toBe(59);
-      });
-    },
-  );
+    test('undefined custom — fallback на стандартный диапазон', () => {
+      const result = getTimeNumbers('seconds', {});
+      expect(result.length).toEqual(60);
+      expect(result[0]).toBe(0);
+      expect(result[59]).toBe(59);
+    });
+  });
 
   describe('edge cases и специальные случаи', () => {
     test('возвращает полный диапазон при undefined options', () => {

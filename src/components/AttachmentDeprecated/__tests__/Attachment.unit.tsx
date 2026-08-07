@@ -1,4 +1,4 @@
-import { clearStack, context, top, wrap } from '@reatom/core';
+import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
-import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
+import { createRoot, TestContext, testRootId } from '##/utils/vitest';
 
 import { Attachment, cnAttachment } from '../AttachmentDeprecated';
 

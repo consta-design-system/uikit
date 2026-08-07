@@ -7,8 +7,6 @@ import {
   withActions,
 } from '@reatom/core';
 
-import { named } from '##/utils/state/generateAtomName';
-
 export interface IsTouchAtom extends Atom<boolean> {
   check: Action<[], boolean>;
 }

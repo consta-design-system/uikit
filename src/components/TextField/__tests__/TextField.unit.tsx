@@ -1,5 +1,5 @@
 import { IconAdd } from '@consta/icons/IconAdd';
-import { clearStack, context, sleep, top, wrap } from '@reatom/core';
+import { clearStack, context, top, wrap } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
 import { act, fireEvent } from '@testing-library/react';
 import React from 'react';

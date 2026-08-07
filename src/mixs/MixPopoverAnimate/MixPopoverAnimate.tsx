@@ -3,7 +3,6 @@ import './MixPopoverAnimate.css';
 import { Direction } from '##/components/Popover/Popover';
 import { cn } from '##/utils/bem';
 import { cnForCssTransition } from '##/utils/cnForCssTransition';
-import { isTest } from '##/utils/env';
 
 export type Animate =
   | 'entered'

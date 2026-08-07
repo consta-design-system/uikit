@@ -1,8 +1,8 @@
 import { cnIcon } from '@consta/icons/Icon';
 import { IconAttach } from '@consta/icons/IconAttach';
-import { act, fireEvent } from '@testing-library/react';
 import { clearStack, context, top } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
+import { act, fireEvent } from '@testing-library/react';
 import * as React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
