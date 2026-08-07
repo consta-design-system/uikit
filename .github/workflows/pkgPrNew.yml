@@ -10,6 +10,9 @@ on:
       - reopened
       - synchronize
 
+permissions:
+  contents: read
+
 env:
   BUILD_SCRIPT: yarn build
   BUILD_SCRIPT_OUTPUT: dist
