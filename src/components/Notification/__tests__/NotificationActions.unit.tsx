@@ -4,6 +4,7 @@ import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
+import { userEvent } from 'vitest/browser';
 
 import { createIconMock } from '##/../__mocks__/IconMock';
 import { animateTimeout } from '##/mixs/MixPopoverAnimate';
@@ -145,6 +146,8 @@ describe('NotificationActions', () => {
           items: [{ label: 'test', icon: IconMock, onClick: vi.fn() }],
           onlyIcon: true,
         });
+
+        await wrap(tick());
 
         expect(getRender(ctx).querySelector(`.IconMock`)).toBeInTheDocument();
         expect(getButtonLabel(ctx)).not.toBeInTheDocument();
@@ -378,6 +381,7 @@ describe('NotificationActions', () => {
           },
         ];
         renderComponent(ctx, { items });
+        await wrap(tick());
 
         // Открываем меню
         buttonClick(ctx);
@@ -389,8 +393,8 @@ describe('NotificationActions', () => {
         expect(getContextMenu(ctx)).toBeInTheDocument();
 
         // Закрываем меню кликом вне компонента
-        fireEvent.mouseDown(getOutside(ctx));
-        getOutside(ctx).click();
+
+        await wrap(userEvent.click(getOutside(ctx)));
 
         await wrap(sleep(animateTimeout));
         await wrap(tick());

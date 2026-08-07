@@ -4,6 +4,7 @@ import { act, fireEvent } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
+import { userEvent } from 'vitest/browser';
 
 import { presetGpnDefault, Theme } from '##/components/Theme';
 import { animateTimeout } from '##/mixs/MixPopoverAnimate';
@@ -136,11 +137,7 @@ function getItem(ctx: TestContext, index = 0) {
 }
 
 function inputClick(ctx: TestContext) {
-  fireEvent.click(getInput(ctx));
-}
-
-function outsideClick(ctx: TestContext) {
-  fireEvent.mouseDown(getOutside(ctx));
+  getInput(ctx).click();
 }
 
 describe('Компонент UserSelect', () => {
@@ -250,13 +247,12 @@ describe('Компонент UserSelect', () => {
       await wrap(tick());
       await wrap(sleep(animateTimeout));
 
-      const optionsList = getItemsList(ctx);
+      expect(getItemsList(ctx)).toBeInTheDocument();
+      await wrap(userEvent.click(getOutside(ctx)));
 
-      expect(optionsList).toBeInTheDocument();
-      outsideClick(ctx);
       await wrap(tick());
       await wrap(sleep(animateTimeout));
-      expect(optionsList).not.toBeInTheDocument();
+      expect(getItemsList(ctx)).not.toBeInTheDocument();
     }));
 
   test('открывается и закрывается по клику на индикатор', async (ctx) =>
@@ -270,7 +266,7 @@ describe('Компонент UserSelect', () => {
       await wrap(sleep(animateTimeout));
 
       expect(getItemsList(ctx)).toBeInTheDocument();
-      outsideClick(ctx);
+      await wrap(userEvent.click(getOutside(ctx)));
       await wrap(tick());
       await wrap(sleep(animateTimeout));
       expect(getItemsList(ctx)).not.toBeInTheDocument();
