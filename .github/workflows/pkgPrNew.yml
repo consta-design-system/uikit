@@ -1,4 +1,4 @@
-name: Deploy
+name: Publish to pkg.pr.new
 
 on:
   push:

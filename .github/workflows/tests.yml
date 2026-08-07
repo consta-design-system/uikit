@@ -38,8 +38,6 @@ jobs:
       - name: Проверка TS
         run: yarn run tsc-dry-run
       - name: Unit тесты
-        run: yarn run unit
-      - name: Unit тесты Vite
         run: yarn run vitest
       - name: Проверка eslint & stylelint
         run: yarn run lint
