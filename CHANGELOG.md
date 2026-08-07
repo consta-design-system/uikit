@@ -1,5 +1,20 @@
 # Changelog
 
+## v5.33.3 (21/07/2026)
+- [fix: virtual scroll on react 19 (#4180)](https://github.com/consta-design-system/uikit/commit/6a83041980eaea269403bacd612d25b794fcbd70) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v5.33.2 (11/06/2026)
+- [fix(Combobox): fix searchLabel and virtualScroll on React 19 (#4178)](https://github.com/consta-design-system/uikit/commit/d774dd5012a83cfaa3f46dc782804c32351cd9e4) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
+## v5.33.1 (10/06/2026)
+- [fix(deps): remove @consta/table (#4176)](https://github.com/consta-design-system/uikit/commit/b41a5aca86ef09517e7fd6a58ec4e425006f1086) - [@gizeasy](https://github.com/gizeasy)
+
+--------------------
+
 ## v5.33.0 (01/06/2026)
 - [fix(DatePicker): mask settings have been fixed for a more convenient experience (#4173)](https://github.com/consta-design-system/uikit/commit/1c87a2afb6e85379830ff4eef5b323089ec7937c) - [@gizeasy](https://github.com/gizeasy)
 - [refactor(ProgressStepBar): extract and export shared types via dedicated module](https://github.com/consta-design-system/uikit/commit/1e85f96c6c81228a633d20a0e89af50ec39ed65e) - [@baevm](https://github.com/baevm)
@@ -348,50 +363,3 @@ BREAKING CHANGE: need to update 'compute-scroll-into-view' package
 - [docs: fix docs typos (#3902)](https://github.com/consta-design-system/uikit/commit/671d545de0ebb667d4f6a3ea87c3191b2cbf46e1) - [@baevm](https://github.com/baevm)
 - [feat(Tabs, BookmarkTabs): add getItemKey for Tabs, fix empty tabs render problem for BookmarkTabs](https://github.com/consta-design-system/uikit/commit/84649da176a7e42a8c0ac5a59c2cc0516e9eaace) - [@ZettZet](https://github.com/ZettZet)
 - [test(Attachment, FieldComponents): add tests (#3910)](https://github.com/consta-design-system/uikit/commit/38e9c667edee8b7f11b926ea555de280b135f1ef) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.17.0 (09/01/2025)
-Самое важное:
-- Добавили новый `canary` компонент `Steps`. Полностью переработали дизайн компонента и добавили новые возможности.
-
----
-
-- [test(StepsCanary): edit tests](https://github.com/consta-design-system/uikit/commit/7a57287ad45afb9d066ea55b186812629cf34ed7) - [@gizeasy](https://github.com/gizeasy)
-- [feat(StepsCanary): new canary component (#3861)](https://github.com/consta-design-system/uikit/commit/a62788e19d34bc78681148bc70fb812197fa2706) - [@gizeasy](https://github.com/gizeasy)
-
---------------------
-
-## v5.16.0 (12/12/2024)
-Самое важное:
-- В `Attachment` добавили возможность указывать несколько кнопок с действиями.
-- В `Loader` добавили новый тип компонента и возможность указывать произвольный размер и цвет.
-- В `Tag` добавили свойство `disabled`.
-
----
-
-- [test(Attachment): fix test](https://github.com/consta-design-system/uikit/commit/3294b2115a8815e6b3f55b203ab05a57105f0398) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Attachment): add actions (#3846)](https://github.com/consta-design-system/uikit/commit/3728cab89756bd790eea304636186bf88201ebea) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Loader): add _view_circle (#3849)](https://github.com/consta-design-system/uikit/commit/8a2180b73709a30b69cb060e1b70d4f32b7cd6a5) - [@gizeasy](https://github.com/gizeasy)
-- [chore(cspell): add  --no-progress flag (#3851)](https://github.com/consta-design-system/uikit/commit/7e7004f8a830b497e433a68e17fae6d31dfefb29) - [@gizeasy](https://github.com/gizeasy)
-- [docs(edit cspell) (#3845)](https://github.com/consta-design-system/uikit/commit/c74c489c6c6429d6cda5cd96b1a0a4a39d6bc551) - [@alyonurchick1](https://github.com/alyonurchick1)
-- [fix(DatePicker): fixed visited date (#3850)](https://github.com/consta-design-system/uikit/commit/71e1a1f72e0cde38a06c19b09474459aaf4722da) - [@gizeasy](https://github.com/gizeasy)
-- [feat(Tag): add disabled prop (#3841)](https://github.com/consta-design-system/uikit/commit/a1c40e61b23d836d58250d39884082fcbb01d648) - [@baevm](https://github.com/baevm)
-
---------------------
-
-## v5.15.0 (26/11/2024)
-Самое главное:
-- В `TextField` добавили поддержку onWheel и отключили его действие по умолчанию для `type="number"`.
-- В `Steps` обернули номер шага в `<span/>` для возможности стилизации.
-- Исправили опечатки по всему проекту.
-
----
-
-- [fix(Informer): fixed icon position (#3831)](https://github.com/consta-design-system/uikit/commit/f57e24a5ce1af47c5d0fb5ff3b9df97c32471853) - [@gizeasy](https://github.com/gizeasy)
-- [docs(Switch): update onChange docs for Switch (#3829)](https://github.com/consta-design-system/uikit/commit/0b43f0f967f30f347e54ddfcad9c69cfbe84d55f) - [@vitaliidasaev](https://github.com/vitaliidasaev)
-- [fix: misprint (#3828)](https://github.com/consta-design-system/uikit/commit/1cc4e4076001461cea6d1d74615f960348416663) - [@gizeasy](https://github.com/gizeasy)
-- [feat(TextField): add wheel event handler for input[type="number"] (#3820)](https://github.com/consta-design-system/uikit/commit/7fb111e571d24a45f2204bbed0e66be1224ccf81) - [@belk1ng](https://github.com/belk1ng)
-- [feat(Steps): add wrapper to step index (#3821)](https://github.com/consta-design-system/uikit/commit/b46890555deac4530b4f82fb959482ccddd47780) - [@belk1ng](https://github.com/belk1ng)
-- [fix(Slider): fix value changing after click with disabled prop (#3822)](https://github.com/consta-design-system/uikit/commit/eb818a974a94a7294f2b12eccb646770b11b8d6e) - [@belk1ng](https://github.com/belk1ng)
-- [fix(TextFieldCanary): fixed import (#3819)](https://github.com/consta-design-system/uikit/commit/88c9a63cb5a99d700360a8a78fb45be6e4142f6c) - [@gizeasy](https://github.com/gizeasy)
