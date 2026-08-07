@@ -205,6 +205,7 @@ describe('Компонент BookmarkTabs', () => {
 
       await wrap(tick());
       await wrap(tick());
+      await wrap(tick());
 
       expect(getNavigationButton(ctx, 0)).toBeInTheDocument();
       expect(getNavigationButton(ctx, 1)).toBeInTheDocument();

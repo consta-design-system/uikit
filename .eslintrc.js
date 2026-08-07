@@ -13,7 +13,6 @@ module.exports = {
     'react-app/jest',
     'prettier',
     'plugin:prettier/recommended',
-    // 'plugin:react-component-name/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -36,7 +35,6 @@ module.exports = {
     '@typescript-eslint',
     'simple-import-sort',
     'prettier',
-    'react-component-name',
   ],
   overrides: [
     {
@@ -123,13 +121,5 @@ module.exports = {
       },
     ],
     'id-match': ['error', '^[\x00-\x7F]*$'],
-    // 'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
-
-    // 'react-component-name/react-component-name': [
-    //   'error',
-    //   {
-    //     targets: ['action', 'computed', 'effect', 'reatomComponent'],
-    //   },
-    // ],
   },
 };

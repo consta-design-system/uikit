@@ -72,60 +72,64 @@ module.exports = {
     ],
     // Плагин для автоматического добавления/удаления имён
     // у atom, computed, action, effect, reatom*, factoryComponent
-    [
-      './scripts/babel-plugin-reatom-name/src/index.ts',
-      {
-        functionConfig: [
-          {
-            path: '##/utils/state',
-            functionName: 'factoryComponent',
-            argNameIndex: 1,
-          },
+    ...(!isProduction
+      ? [
+          [
+            './scripts/babel-plugin-reatom-name/src/index.ts',
+            {
+              functionConfig: [
+                {
+                  path: '##/utils/state',
+                  functionName: 'factoryComponent',
+                  argNameIndex: 1,
+                },
 
-          {
-            path: '##/utils/state',
-            functionName: 'rangeAtom',
-            argNameIndex: 2,
-          },
+                {
+                  path: '##/utils/state',
+                  functionName: 'rangeAtom',
+                  argNameIndex: 2,
+                },
 
-          {
-            path: '##/utils/state',
-            functionName: 'forkRef',
-            argNameIndex: 1,
-          },
-          {
-            path: '##/utils/state',
-            functionName: 'computedSet',
-            argNameIndex: 1,
-          },
-          {
-            path: '##/utils/state',
-            functionName: 'clickOutsideEffect',
-            argNameIndex: 1,
-          },
-          {
-            path: '##/utils/state',
-            functionName: 'isTouch',
-            argNameIndex: 0,
-          },
-          {
-            path: '##/utils/state',
-            functionName: 'onEventEffect',
-            argNameIndex: 3,
-          },
-          {
-            path: '##/utils/state',
-            functionName: 'keysEffect',
-            argNameIndex: 1,
-          },
-          {
-            path: '##/utils/state',
-            functionName: 'resizeObservedAtom',
-            argNameIndex: 2,
-          },
-        ],
-      },
-    ],
+                {
+                  path: '##/utils/state',
+                  functionName: 'forkRef',
+                  argNameIndex: 1,
+                },
+                {
+                  path: '##/utils/state',
+                  functionName: 'computedSet',
+                  argNameIndex: 1,
+                },
+                {
+                  path: '##/utils/state',
+                  functionName: 'clickOutsideEffect',
+                  argNameIndex: 1,
+                },
+                {
+                  path: '##/utils/state',
+                  functionName: 'isTouch',
+                  argNameIndex: 0,
+                },
+                {
+                  path: '##/utils/state',
+                  functionName: 'onEventEffect',
+                  argNameIndex: 3,
+                },
+                {
+                  path: '##/utils/state',
+                  functionName: 'keysEffect',
+                  argNameIndex: 1,
+                },
+                {
+                  path: '##/utils/state',
+                  functionName: 'resizeObservedAtom',
+                  argNameIndex: 2,
+                },
+              ],
+            },
+          ],
+        ]
+      : []),
     ...(isProduction
       ? [
           [
