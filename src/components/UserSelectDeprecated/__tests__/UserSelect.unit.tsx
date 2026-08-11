@@ -1,6 +1,6 @@
 import { clearStack, context, sleep, top, wrap } from '@reatom/core';
 import { reatomContext } from '@reatom/react';
-import { act, fireEvent } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { describe, expect, test, vi } from 'vitest';
@@ -107,7 +107,7 @@ function getIndicatorsDropdown(ctx: TestContext) {
 }
 
 function indicatorsDropdownClick(ctx: TestContext) {
-  fireEvent.click(getIndicatorsDropdown(ctx));
+  getIndicatorsDropdown(ctx).click();
 }
 
 function getInput(ctx: TestContext) {
@@ -117,7 +117,9 @@ function getInput(ctx: TestContext) {
 function getItems(ctx: TestContext) {
   const itemsList = getItemsList(ctx);
   if (!itemsList) return [];
-  return itemsList.querySelectorAll(`.${cnUserSelectItem()}`);
+  return itemsList.querySelectorAll(
+    `.${cnUserSelectItem()}`,
+  ) as unknown as HTMLElement[];
 }
 
 function getRenderItems(ctx: TestContext) {
@@ -133,7 +135,7 @@ function getGroups(ctx: TestContext) {
 }
 
 function getItem(ctx: TestContext, index = 0) {
-  return getItems(ctx)[index];
+  return getItems(ctx)[index]!;
 }
 
 function inputClick(ctx: TestContext) {
@@ -224,17 +226,17 @@ describe('Компонент UserSelect', () => {
       await wrap(tick());
 
       inputClick(ctx);
-      await wrap(tick());
+
       await wrap(sleep(animateTimeout));
+      await wrap(tick());
 
-      const optionsList = getItemsList(ctx);
-
-      expect(optionsList).toBeInTheDocument();
+      expect(getItemsList(ctx)).toBeInTheDocument();
       inputClick(ctx);
-      await wrap(tick());
-      await wrap(sleep(animateTimeout));
 
-      expect(optionsList).not.toBeInTheDocument();
+      await wrap(sleep(animateTimeout));
+      await wrap(tick());
+
+      expect(getItemsList(ctx)).not.toBeInTheDocument();
     }));
 
   test('открывается и закрывается по клику за пределами селекта', async (ctx) =>
@@ -307,7 +309,7 @@ describe('Компонент UserSelect', () => {
       inputClick(ctx);
       await wrap(tick());
 
-      fireEvent.click(getItem(ctx, elementIndex));
+      getItem(ctx, elementIndex).click();
 
       expect(handleChange).toHaveBeenCalled();
       expect(handleChange).toHaveBeenCalledTimes(1);
@@ -332,7 +334,7 @@ describe('Компонент UserSelect', () => {
       inputClick(ctx);
       await wrap(tick());
 
-      fireEvent.click(getItem(ctx, elementIndex));
+      getItem(ctx, elementIndex).click();
 
       expect(handleChange).toHaveBeenCalled();
       expect(handleChange).toHaveBeenCalledTimes(1);
@@ -352,8 +354,8 @@ describe('Компонент UserSelect', () => {
 
       expect(handlerFocus).toHaveBeenCalledTimes(0);
 
-      fireEvent.focus(getInput(ctx));
-      //   fireEvent.focus(getInput(ctx));
+      getInput(ctx).focus();
+
       await wrap(tick());
 
       expect(handlerFocus).toHaveBeenCalledTimes(1);
@@ -366,12 +368,12 @@ describe('Компонент UserSelect', () => {
 
       await wrap(tick());
 
-      fireEvent.focus(getInput(ctx));
+      getInput(ctx).focus();
       await wrap(tick());
 
       expect(handlerBlur).toHaveBeenCalledTimes(0);
 
-      fireEvent.blur(getInput(ctx));
+      getInput(ctx).blur();
       await wrap(tick());
 
       expect(handlerBlur).toHaveBeenCalledTimes(1);
