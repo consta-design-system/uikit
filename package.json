@@ -117,7 +117,7 @@
     "@babel/preset-typescript": "^7.28.5",
     "@bem/sdk.naming.cell.match": "^0.1.3",
     "@bem/sdk.naming.presets": "^0.2.3",
-    "@consta/stand": "^0.0.163-alpha.2",
+    "@consta/stand": "https://pkg.pr.new/consta-design-system/stand/@consta/stand@bb0eded",
     "@consta/table": "^0.8.0",
     "@consta/uikit": "5.10.0",
     "@cspell/dict-ru_ru": "^2.2.4",
