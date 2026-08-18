@@ -40,6 +40,7 @@ export const resizeObservedAtom = <
 
   effect(() => {
     const resizeObserver = resizeObserverAtom();
+
     const elements = elementsAtom();
     updateAction();
 

@@ -4,7 +4,7 @@ export * from './useCreateAtom';
 export * from './useRefAtom';
 export * from './useResizeObservedAtom';
 export * from './component';
-
+export * from './propAction';
 export * from './resizeObservedAtom';
 export * from './rangeAtom';
 export * from './useClickOutsideAtom';
