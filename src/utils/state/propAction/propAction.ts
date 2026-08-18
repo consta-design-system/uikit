@@ -1,5 +1,7 @@
 import { action, AtomLike } from '@reatom/core';
 
+import { named } from '##/utils/state/generateAtomName';
+
 type PropCallbackResult<T, K extends keyof T> =
   NonNullable<T[K]> extends (...args: infer A) => infer R
     ? (...args: A) => R | undefined
@@ -11,34 +13,40 @@ type PropCallbackTuple<T, K extends readonly (keyof T)[]> = {
 
 const propCallback = <T extends {}, K extends keyof T>(
   propsAtom: AtomLike<T>,
-  name: K,
+  key: K,
+  name?: string,
 ) =>
   action((...args) => {
-    const fn = propsAtom()[name];
+    const fn = propsAtom()[key];
     if (typeof fn === 'function') {
       fn(...args);
     }
-  }) as unknown as PropCallbackResult<T, K>;
+  }, name) as unknown as PropCallbackResult<T, K>;
 
 // Перегрузка 1: одиночный ключ -> T[K]
 export function propAction<T extends {}, K extends keyof T>(
   propsAtom: AtomLike<T>,
-  name: K,
+  key: K,
+  name?: string,
 ): PropCallbackResult<T, K>;
 
 // Перегрузка 2: кортеж ключей -> кортеж T[K1], T[K2], ...
 export function propAction<T extends {}, K extends readonly (keyof T)[]>(
   propsAtom: AtomLike<T>,
-  name: readonly [...K],
+  key: readonly [...K],
+  name?: string,
 ): PropCallbackTuple<T, K>;
 
 // Реализация (сигнатура здесь может быть широкой)
 export function propAction<T extends {}, K extends keyof T>(
   propsAtom: AtomLike<T>,
-  name: K[] | K,
+  key: K[] | K,
+  name?: string,
 ) {
-  if (Array.isArray(name)) {
-    return name.map((n) => propCallback(propsAtom, n));
+  const n = named(name, 'propAction');
+
+  if (Array.isArray(key)) {
+    return key.map((k) => propCallback(propsAtom, k, n(k as string)));
   }
-  return propCallback(propsAtom, name);
+  return propCallback(propsAtom, key, n(key as string));
 }
