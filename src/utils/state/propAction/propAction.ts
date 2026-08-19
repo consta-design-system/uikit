@@ -19,7 +19,7 @@ const propCallback = <T extends {}, K extends keyof T>(
   action((...args) => {
     const fn = propsAtom()[key];
     if (typeof fn === 'function') {
-      fn(...args);
+      return fn(...args);
     }
   }, name) as unknown as PropCallbackResult<T, K>;
 
