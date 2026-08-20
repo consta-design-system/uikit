@@ -44,12 +44,17 @@ export const getVisiblePosition = (
 ): [number, number] => {
   const gap =
     height > elementMaxSize * defaultItemsCalculationCount
-      ? height * 1.5
+      ? height
       : elementMaxSize * defaultItemsCalculationCount;
 
   const visiblePosition: [number, number] = [
-    Math.ceil(roundPositionByGap(top - gap, height)),
-    Math.ceil(roundPositionByGap(top === 0 ? gap : top + gap, height)),
+    Math.ceil(
+      roundPositionByGap(
+        height < gap ? top - (gap + height) : top - (gap + height / 2),
+        height,
+      ),
+    ),
+    Math.ceil(roundPositionByGap(top === 0 ? gap : top + gap * 1.25, height)),
   ];
 
   return visiblePosition;
@@ -75,9 +80,13 @@ const addCount = (
   const average =
     lastSavedSize.reduce((a, b) => a + b, 0) / lastSavedSize.length;
 
-  let add = defaultItemsCalculationCount;
+  let add = 0;
 
-  while (visiblePosition[1] >= pxs[1] + add * average) {
+  if (visiblePosition[1] < pxs[1] + add * average) {
+    return add;
+  }
+
+  while (visiblePosition[1] > pxs[1] + add * average) {
     add += defaultItemsCalculationCount;
   }
 
