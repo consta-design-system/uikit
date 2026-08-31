@@ -2589,20 +2589,19 @@
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-1.7.1.tgz#438d6fc7cb20ac1db67cc9502aa06eb83682ac62"
   integrity sha512-ZFngpjo9MlVyNnRU0SJqg2kbzHmh41ydqCYLOWokvhPjlgqUS7W+R38+dHSpIMyMe33wKBvF8LciSqhGwmuP9w==
 
-"@consta/stand@^0.0.163-alpha.2":
-  version "0.0.163-alpha.2"
-  resolved "https://registry.yarnpkg.com/@consta/stand/-/stand-0.0.163-alpha.2.tgz#c1f31779bee59987624bbec24b3cf2f69c794a5d"
-  integrity sha512-WBEYsa4SFWUbgapfYjL3ucN4u0j3NSGQDwbumca/kKy+Et/zVpC/pxd4DFzmdfacGsWR04IFHvrsH2dVAwjeMA==
+"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@bb0eded":
+  version "0.0.163-alpha"
+  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@bb0eded#2adff80c0bb7eed1d11ce05a4bd38eeb674d49fc"
   dependencies:
     "@consta/header" "^3.1.0"
     "@consta/icons" "^1.7.1"
-    "@consta/uikit" "^5.10.0"
+    "@consta/uikit" "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@03b690f"
     "@mdx-js/loader" "^2.3.0"
     "@mdx-js/react" "^2.3.0"
     "@oclif/command" "^1.8.22"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.5.10"
-    "@reatom/core" "^1000.15.2"
-    "@reatom/react" "^1000.2.2"
+    "@reatom/core" "^1001.3.0"
+    "@reatom/react" "^1001.0.1"
     "@svgr/core" "^6.5.1"
     "@svgr/plugin-jsx" "^6.5.1"
     "@svgr/plugin-prettier" "^6.5.1"
@@ -2670,10 +2669,9 @@
   resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.10.0.tgz#df7a7b154c9db635fd20e58c48a1c763063a852e"
   integrity sha512-/eNgVdEtaKr7OSagvmOXBV46g985pyXVASm9NRmopUjtnaL/Jba91ZxpGAOwqZrbZnYA1Iagq8kTeanvVY7pEQ==
 
-"@consta/uikit@^5.10.0":
-  version "5.32.0"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.32.0.tgz#2e39bec5388756f550e4358ddad536975d112c5d"
-  integrity sha512-mFXYkEvh4NaAvV2FUDCB0e2bu/qCB53rtXcQHdsR8AKWhQOez75rVB4bTFnZFZCBKCPn3yudN1FdvERTsgNm2A==
+"@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@03b690f":
+  version "5.34.0-alpha.1"
+  resolved "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@03b690f#e4a8b5aed51c2e37f1da3b190394edf1f90080df"
 
 "@cspell/cspell-bundled-dicts@8.16.1":
   version "8.16.1"
@@ -4035,15 +4033,6 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.29.tgz#5a40109a1ab5f84d6fd8fc928b19f367cbe7e7b1"
   integrity sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==
 
-"@reatom/core@^1000.15.2":
-  version "1000.15.2"
-  resolved "https://registry.yarnpkg.com/@reatom/core/-/core-1000.15.2.tgz#cf8300744551d9a3b6a5b87751b3be4e7861af35"
-  integrity sha512-ychH11wZaVHHYsfPuPQvgGr8YyonURggwQwiaTxy+164nRfDnXXgbvuaWePjim7K3FR3LfI6ydYNoqJnDh88Bg==
-  dependencies:
-    "@standard-schema/spec" "^1.0.0"
-  optionalDependencies:
-    idb-keyval "^6.2.2"
-
 "@reatom/core@^1001.3.0":
   version "1001.3.0"
   resolved "https://registry.yarnpkg.com/@reatom/core/-/core-1001.3.0.tgz#ffa58c1385de49eb9a7b56658e7bf16bc044bceb"
@@ -4053,10 +4042,10 @@
   optionalDependencies:
     idb-keyval "^6.2.4"
 
-"@reatom/react@^1000.2.2":
-  version "1000.2.2"
-  resolved "https://registry.yarnpkg.com/@reatom/react/-/react-1000.2.2.tgz#6cf3a1a38c25338b388e3b7f6bc20a23f872537c"
-  integrity sha512-QxNFwtmbsIK/DUtmjebfW9gmW+d+4UPZVq1f+Nb2wkiNOZ8yUh7o0i4xAs83nneZOFqcqwNiYKfDrEpBozMCvA==
+"@reatom/react@^1001.0.1":
+  version "1001.0.1"
+  resolved "https://registry.yarnpkg.com/@reatom/react/-/react-1001.0.1.tgz#a5159652b6bc2b2a32e06f02902a0a1b4ae45995"
+  integrity sha512-xU5diWeNIrVmJs5a5G6RTPOAz3OhPTtT7iqswPKJs5tGEahf2tCWo25JKEALv79pG0eqTGGJ5W/k7llweOhe3g==
 
 "@rolldown/binding-android-arm64@1.0.0-rc.16":
   version "1.0.0-rc.16"
@@ -10568,11 +10557,6 @@ icss-utils@^5.0.0, icss-utils@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/icss-utils/-/icss-utils-5.1.0.tgz#c6be6858abd013d768e98366ae47e25d5887b1ae"
   integrity sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==
-
-idb-keyval@^6.2.2:
-  version "6.2.2"
-  resolved "https://registry.yarnpkg.com/idb-keyval/-/idb-keyval-6.2.2.tgz#b0171b5f73944854a3291a5cdba8e12768c4854a"
-  integrity sha512-yjD9nARJ/jb1g+CvD0tlhUHOrJ9Sy0P8T9MF3YaLlHnSRpwPfpTX0XIvpmw3gAJUmEu3FiICLBDPXVwyEvrleg==
 
 idb-keyval@^6.2.4:
   version "6.2.5"

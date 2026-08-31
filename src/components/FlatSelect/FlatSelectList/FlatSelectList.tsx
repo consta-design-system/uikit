@@ -146,7 +146,7 @@ export const FlatSelectList = factoryComponent<HTMLDivElement, Props>(
       virtualScrollEffect({
         length: lengthForVirtualScrollAtom,
         isActive: computed(() => !!propsAtom().virtualScroll),
-        onScrollToBottom,
+        onEndReached: onScrollToBottom,
       });
 
     const scrollContainerRef = action((el: HTMLDivElement) =>
