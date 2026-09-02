@@ -126,6 +126,7 @@ const FieldArrayValueInlineControlRender = (
     onBlur,
     autoFocus,
     inputTabIndex,
+    inputInputMode,
     inputAriaLabel,
     disabled,
     size = 'm',
@@ -203,6 +204,7 @@ const FieldArrayValueInlineControlRender = (
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={autoFocus}
         tabIndex={inputTabIndex}
+        inputMode={inputInputMode}
         aria-label={inputAriaLabel}
         onKeyDown={onKeyDown}
         onKeyDownCapture={onKeyDownCapture}

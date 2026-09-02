@@ -102,6 +102,14 @@ describe('Компонент Button', () => {
         expect(getTextArea()).not.toBeNull();
       });
     });
+    describe('проверка inputMode', () => {
+      it('передает inputMode в input', () => {
+        renderComponent({ inputMode: 'numeric' });
+
+        expect(getInput()).toHaveAttribute('inputmode', 'numeric');
+        expect(getRender()).not.toHaveAttribute('inputmode');
+      });
+    });
     describe('проверка onChange', () => {
       it(`в callback попадает ожидаемое value`, () => {
         const handleChange = jest.fn();
