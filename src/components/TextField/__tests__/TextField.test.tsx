@@ -109,6 +109,13 @@ describe('Компонент Button', () => {
         expect(getInput()).toHaveAttribute('inputmode', 'numeric');
         expect(getRender()).not.toHaveAttribute('inputmode');
       });
+
+      it('передает inputMode в textarea', () => {
+        renderComponent({ type: 'textarea', inputMode: 'numeric' });
+
+        expect(getTextArea()).toHaveAttribute('inputmode', 'numeric');
+        expect(getRender()).not.toHaveAttribute('inputmode');
+      });
     });
     describe('проверка onChange', () => {
       it(`в callback попадает ожидаемое value`, () => {
