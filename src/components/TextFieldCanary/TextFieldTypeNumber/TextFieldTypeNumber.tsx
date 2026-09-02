@@ -41,6 +41,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
       leftSide,
       rightSide,
       autoComplete,
+      inputMode,
       clearButton,
       readOnly,
       type,
@@ -201,6 +202,7 @@ export const TextFieldTypeNumber: TextFieldTypeComponent<'number'> = forwardRef(
           placeholder={placeholder}
           autoFocus={autoFocus}
           autoComplete={autoComplete}
+          inputMode={inputMode}
           onBlur={handleBlur}
           onChange={handleChange}
           onFocus={handleFocus}

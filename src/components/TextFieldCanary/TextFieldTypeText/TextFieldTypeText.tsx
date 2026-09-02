@@ -35,6 +35,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
       leftSide,
       rightSide,
       autoComplete,
+      inputMode,
       clearButton,
       readOnly,
       type = 'text',
@@ -106,6 +107,7 @@ export const TextFieldTypeText: TextFieldTypeComponent<string> = forwardRef(
           placeholder={placeholder}
           autoFocus={autoFocus}
           autoComplete={autoComplete}
+          inputMode={inputMode}
           onBlur={handleBlur}
           onChange={handleChange}
           onFocus={handleFocus}

@@ -20,6 +20,7 @@ export type FieldArrayValueInlineControlProps<ITEM> =
       onChange?: React.ChangeEventHandler<HTMLInputElement>;
       autoFocus?: boolean;
       inputTabIndex?: number;
+      inputInputMode?: React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
       inputAriaLabel?: string;
       onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
       onKeyDownCapture?: React.KeyboardEventHandler<HTMLInputElement>;
