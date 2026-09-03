@@ -35,7 +35,7 @@ export const resizeObservedAtom = <
 
   const resizeObserverAtom = atom(
     () => new ResizeObserver(wrap(updateAction)),
-    n('resizeObserverAtom'),
+    n('observerAtom'),
   );
 
   effect(() => {

@@ -52,7 +52,7 @@
     "pre-commit": "yarn run lint-staged",
     "pre-build": "node scripts/preBuild.js --config=scripts/generateReExportsConfig.js",
     "test": "yarn tsc-dry-run && yarn vitest",
-    "test:babel-plugin-reatom-name": "npx vitest run scripts/babel-plugin-reatom-name/src/__tests__/plugin.unit.ts --config scripts/babel-plugin-reatom-name/vitest.config.ts --reporter verbose 2>&1",
+    "test:babel-plugin-reatom-name": "npx vitest run scripts/babel-plugin-reatom-name/src/__tests__/plugin.unit.ts --config scripts/babel-plugin-reatom-name/vitest.config.ts",
     "unit": "jest",
     "vitest": "vitest run",
     "unit:watch": "jest --watch",
