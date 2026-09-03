@@ -33,7 +33,8 @@ import { cnSelectCreateButton } from '../../SelectCreateButton';
 import { cnSelectInput } from '../../SelectInput';
 
 const testId = 'SelectSingleCanary';
-createRoot();
+
+createRoot({ concurrent: true });
 clearStack();
 
 // const rootFrame = context.start();

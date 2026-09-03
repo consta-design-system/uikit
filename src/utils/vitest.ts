@@ -33,7 +33,13 @@ const addBlock = (id: string, name: string, to: HTMLElement, as = 'div') => {
   return block;
 };
 
-export const createRoot = () => {
+export const createRoot = (
+  {
+    concurrent = false,
+  }: {
+    concurrent?: boolean;
+  } = { concurrent: false },
+) => {
   aroundEach(async (runTest, ctx) => {
     const suite = addBlock(
       testSuiteId(ctx),
@@ -47,6 +53,10 @@ export const createRoot = () => {
 
     await runTest();
 
-    document.getElementById(testSuiteId(ctx))?.remove();
+    if (concurrent) {
+      document.getElementById(testSuiteId(ctx))?.remove();
+    } else {
+      document.querySelectorAll(`body > *`).forEach((el) => el.remove());
+    }
   });
 };
