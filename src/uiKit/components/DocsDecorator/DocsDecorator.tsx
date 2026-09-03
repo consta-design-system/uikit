@@ -19,9 +19,9 @@ export const DocsDecorator: React.FC<{ children?: React.ReactNode }> = (
       {children}
     </Theme>
   );
-  if (process.env.NODE_ENV === 'development') {
-    return <React.StrictMode>{content}</React.StrictMode>;
-  }
+  // if (process.env.NODE_ENV === 'development') {
+  //   return <React.StrictMode>{content}</React.StrictMode>;
+  // }
 
   return content;
 };

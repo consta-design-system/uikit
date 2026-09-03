@@ -1,8 +1,8 @@
 import './MixPopoverAnimate.css';
 
-import { Direction } from '../../components/Popover/Popover';
-import { cn } from '../../utils/bem';
-import { cnForCssTransition } from '../../utils/cnForCssTransition';
+import { Direction } from '##/components/Popover/Popover';
+import { cn } from '##/utils/bem';
+import { cnForCssTransition } from '##/utils/cnForCssTransition';
 
 export type Animate =
   | 'entered'
@@ -32,4 +32,4 @@ const cnFn = cn('MixPopoverAnimate');
 export const cnMixPopoverAnimate: CnMixPopoverAnimate = cnFn;
 export const cnMixPopoverAnimateForCssTransition = cnForCssTransition(cnFn);
 
-export const animateTimeout = 200;
+export const animateTimeout = process.env.NODE_ENV === 'test' ? 0 : 200;

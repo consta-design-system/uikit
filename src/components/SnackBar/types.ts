@@ -32,7 +32,7 @@ export type SnackBarActionButtonProps = {
 };
 
 export type SnackBarItemProps = PropsWithHTMLAttributesAndRef<
-  Omit<SnackBarItemDefault, 'onClose' | 'onAutoClose'> & {
+  Omit<SnackBarItemDefault, 'onClose' | 'onAutoClose' | 'key'> & {
     onClose?: () => void;
     form?: SnackBarPropForm;
     onAutoClose?: () => void;

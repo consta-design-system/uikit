@@ -1,4 +1,4 @@
-import { IconComponent, IconProps } from '@consta/icons/Icon';
+import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
 import {
@@ -61,11 +61,11 @@ export type CollapseIconPropDirection =
 export type CollapseIconProps = PropsWithHTMLAttributes<
   {
     size: 'xs' | 's';
-    icon: React.FC<IconProps>;
+    icon: IconComponent;
     view: CollapsePropIconView;
     isOpen?: boolean;
     children?: never;
-    closeIcon?: React.FC<IconProps>;
+    closeIcon?: IconComponent;
     direction?: CollapseIconPropDirection;
     closeDirection?: CollapseIconPropDirection;
   },

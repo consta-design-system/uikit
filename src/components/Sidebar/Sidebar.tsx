@@ -1,17 +1,16 @@
 import './Sidebar.css';
 
 import React, { forwardRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import { useModal } from '##/components/Modal/useModal';
 import {
   PortalWithTheme,
   PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
+import { Transition } from '##/components/Transition';
 import { useForkRef } from '##/hooks/useForkRef';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
-import { withCtx } from '##/utils/state';
 
 import {
   SidebarActionsProps,
@@ -46,8 +45,8 @@ const SidebarActions: React.FC<SidebarActionsProps> = ({
   </div>
 );
 
-export const Sidebar = withCtx(
-  forwardRef<HTMLDivElement, SidebarProps>((props, ref) => {
+export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
+  (props, ref) => {
     const {
       isOpen,
       onClose,
@@ -97,8 +96,7 @@ export const Sidebar = withCtx(
         in={isOpen}
         unmountOnExit
         timeout={animateTimeout}
-        nodeRef={portalRef}
-        onExiting={afterClose}
+        onExited={afterClose}
       >
         {(animate) => (
           <PortalWithTheme
@@ -168,7 +166,7 @@ export const Sidebar = withCtx(
         )}
       </Transition>
     );
-  }),
+  },
 ) as SidebarComponent;
 /**
  * @deprecated use actions

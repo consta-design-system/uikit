@@ -1,12 +1,11 @@
 import './FlatSelectRoot.css';
 
-import { AtomMut } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
-import React, { forwardRef, useRef } from 'react';
-import { Transition } from 'react-transition-group';
+import { AtomLike } from '@reatom/core';
+import { useAtom } from '@reatom/react';
+import React, { forwardRef } from 'react';
 
 import { Direction, Popover } from '##/components/Popover';
-import { useForkRef } from '##/hooks/useForkRef';
+import { Transition } from '##/components/Transition';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
@@ -14,7 +13,7 @@ import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttri
 export type FlatSelectRootProps = PropsWithHTMLAttributesAndRef<
   {
     anchorRef?: React.RefObject<HTMLElement>;
-    openAtom: AtomMut<boolean>;
+    openAtom: AtomLike<boolean>;
     direction?: Direction;
     spareDirection?: Direction;
     possibleDirections?: Direction[];
@@ -47,19 +46,12 @@ export const FlatSelectRoot: React.FC<FlatSelectRootProps> = forwardRef(
       ...otherProps
     } = props;
 
-    const contentRef = useRef(null);
-    const contentForkedRef = useForkRef([contentRef, ref]);
     const withAnchor = !!anchorRef;
     const [open] = useAtom(openAtom);
 
     if (withAnchor) {
       return (
-        <Transition
-          in={open}
-          unmountOnExit
-          timeout={animateTimeout}
-          nodeRef={contentRef}
-        >
+        <Transition in={open} unmountOnExit timeout={animateTimeout}>
           {(animate) => (
             <Popover
               {...otherProps}
@@ -67,7 +59,7 @@ export const FlatSelectRoot: React.FC<FlatSelectRootProps> = forwardRef(
                 className,
                 cnMixPopoverAnimate({ animate }),
               ])}
-              ref={contentForkedRef}
+              ref={ref}
               anchorRef={anchorRef}
               equalAnchorWidth
               offset="2xs"

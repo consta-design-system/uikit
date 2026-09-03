@@ -10,7 +10,10 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
   testMatch: ['**/*.test.{ts,tsx}'],
-  modulePathIgnorePatterns: ['<rootDir>/dist/'],
+  modulePathIgnorePatterns: [
+    '<rootDir>/dist/',
+    '<rootDir>/src/components/.*/__mocks__/.*',
+  ],
   transformIgnorePatterns: [
     // Транспайлим библиотеки на es-модулях в commonjs-модули
     `<rootDir>/node_modules/(?!(@consta)/).+\\.(js|jsx|ts|tsx)`,
@@ -22,4 +25,13 @@ module.exports = {
   ],
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['./jest.setup.ts'],
+  haste: {
+    enableSymlinks: false,
+    throwOnModuleCollision: false,
+  },
+  roots: ['<rootDir>/src'],
+  // Дополнительные настройки для решения проблемы дублирования пакетов
+  moduleDirectories: ['node_modules', '<rootDir>/node_modules'],
+  // Игнорируем дубликаты модулей
+  watchPathIgnorePatterns: ['<rootDir>/node_modules/@reatom/core'],
 };

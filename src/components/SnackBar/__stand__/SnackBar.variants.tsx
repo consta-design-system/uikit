@@ -36,6 +36,9 @@ const progressVariantMap = {
   100: 100,
 };
 
+export const getUniqKey = () =>
+  `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+
 const Variants = () => {
   const withIcon = useBoolean('withIcon', false);
   const form = useSelect('form', snackBarPropForm, snackBarPropFormDefault);
@@ -85,9 +88,10 @@ const Variants = () => {
   }
   const [items, dispatchItems] = useReducer(reducer, []);
   const generateHandleAdd = (status: SnackBarItemStatus) => () => {
-    const key = items.length + 1;
+    const number = items.length + 1;
+    const key = getUniqKey();
 
-    const text = `Сообщение о каком-то событии - ${key}`;
+    const text = `Сообщение о каком-то событии - ${number}`;
     const message = withComponentInsteadOfText ? (
       <Text
         view="primary"

@@ -1,242 +1,287 @@
 import './FlatSelect.css';
 
-import React, { forwardRef } from 'react';
+import { action, computed, wrap } from '@reatom/core';
+import React from 'react';
 
+import { Checkbox } from '##/components/Checkbox';
 import { FieldInput } from '##/components/FieldComponents';
-import { useForkRef } from '##/hooks/useForkRef';
+import { ListItem } from '##/components/ListCanary';
+import { Radio } from '##/components/Radio';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
-import { useSendToAtom, withCtx } from '##/utils/state';
+import { setRefs } from '##/utils/setRef';
+import { factoryComponent } from '##/utils/state';
 
 import { withDefault } from './defaultProps';
 import { FlatSelectControlLayout } from './FlatSelectControlLayout';
 import { FlatSelectFooter } from './FlatSelectFooter';
 import { FlatSelectList } from './FlatSelectList';
 import { FlatSelectRoot } from './FlatSelectRoot';
+import { model } from './model';
 import {
   FlatSelectComponent,
   FlatSelectGroupDefault,
   FlatSelectItemDefault,
+  FlatSelectPropRenderItem,
   FlatSelectProps,
 } from './types';
-import { useFlatSelect } from './useFlatSelect';
-import { useRenderItem } from './useRenderItem';
 
 export const cnFlatSelect = cn('FlatSelect');
 
-const FlatSelectRender = (
-  p: FlatSelectProps,
-  ref: React.Ref<HTMLDivElement>,
-) => {
-  const props = withDefault(p);
-  const propsAtom = useSendToAtom(props);
+export const FlatSelect = factoryComponent<HTMLDivElement, FlatSelectProps>(
+  (initProps, propsAtom) => {
+    const propsWithDefaultAtom = computed(() => withDefault(propsAtom()));
 
-  const {
-    form,
-    disabled,
-    value,
-    isLoading,
-    listRef: listRefProp,
-    renderItem: renderItemProp,
-    getGroupLabel,
-    labelForCreate,
-    labelForEmptyItems,
-    virtualScroll,
-    onScrollToBottom,
-    style,
-    className,
-    placeholder,
-    iconClear,
-    input,
-    inputValue,
-    inputDefaultValue,
-    inputRef: inputRefProp,
-    size,
-    view: viewProp,
-    bordered: borderedProp,
-    getGroupKey,
-    getItemDisabled,
-    getItemGroupKey,
-    getItemKey,
-    getItemLabel,
-    items,
-    onChange: onChangeProp,
-    onCreate: onCreateProp,
-    onInput,
-    multiple,
-    groups,
-    onOpen,
-    ignoreOutsideClicksRefs,
-    clearButton,
-    selectAll,
-    selectAllLabel,
-    autoFocus,
-    footer,
-    listClassName,
-    anchorRef,
-    iconLeft: IconLeft,
-    direction,
-    spareDirection,
-    possibleDirections,
-    container,
-    ...otherProps
-  } = props;
+    const {
+      getOptionActions,
+      openAtom,
+      visibleItemsAtom,
+      inputFocusAtom,
+      handleInputFocus,
+      handleInputBlur,
+      inputRef,
+      handleInputChange,
+      clearValue,
+      getOptionRef,
+      disabledAtom,
+      listRef,
+      clearButtonAtom,
+      highlightedIndexAtom,
+      getItemKeyAtom,
+      valueAtom,
+      onChangeAll,
+      onChange,
+      inputValueAtom,
+      hasItemsAtom,
+      groupsCounterAtom,
+      rootRef,
+    } = model<FlatSelectItemDefault, FlatSelectGroupDefault, false>(
+      propsWithDefaultAtom,
+    );
 
-  const {
-    getOptionActions,
-    openAtom,
-    visibleItemsAtom,
-    inputFocusAtom,
-    handleInputFocus,
-    handleInputBlur,
-    inputRef,
-    handleInputChange,
-    clearValue,
-    optionsRefs,
-    disabledAtom,
-    listRef,
-    clearButtonAtom,
-    highlightedIndexAtom,
-    getItemKeyAtom,
-    valueAtom,
-    onChangeAll,
-    onChange,
-    inputValueAtom,
-    hasItemsAtom,
-    groupsCounterAtom,
-    dropdownZIndexAtom,
-    rootRef,
-  } = useFlatSelect<FlatSelectItemDefault, FlatSelectGroupDefault, false>({
-    propsAtom,
-  });
+    const renderItemDefault: FlatSelectPropRenderItem<FlatSelectItemDefault> =
+      action(({ item, active, hovered, onClick, onMouseEnter, ref }) => {
+        const disabled =
+          propsWithDefaultAtom().getItemDisabled?.(item) ||
+          propsWithDefaultAtom().disabled;
 
-  const renderItem = useRenderItem({
-    getItemLabel,
-    getItemDisabled,
-    multiple,
-    disabled,
-    size,
-    renderItem: renderItemProp,
-  });
+        const label = propsWithDefaultAtom().getItemLabel(item);
+        const { size, multiple } = propsWithDefaultAtom();
 
-  const view = !input || anchorRef || borderedProp ? 'clear' : viewProp;
-  const bordered = anchorRef ? true : borderedProp;
-  const fieldInputRef = useForkRef([inputRef, inputRefProp]);
-
-  return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <FlatSelectRoot
-      {...otherProps}
-      ref={useForkRef([ref, rootRef])}
-      className={cnFlatSelect(
-        {
-          view,
-          bordered: view === 'clear' ? bordered : undefined,
-          form: bordered ? form : undefined,
-          size,
-        },
-        [className],
-      )}
-      style={{
-        ...style,
-        ['--flat-select-control-height' as string]: `var(--control-height-${size})`,
-      }}
-      anchorRef={anchorRef}
-      openAtom={openAtom}
-      tabIndex={0}
-      direction={direction}
-      spareDirection={spareDirection}
-      possibleDirections={possibleDirections}
-      container={container}
-    >
-      {input && (
-        <div
-          className={cnFlatSelect(
-            'Input',
-            {
-              border: view === 'clear' ? bordered : undefined,
-              form: bordered ? form : undefined,
-            },
-            [view === 'clear' ? cnMixSpace({ pV: '2xs', pH: 's' }) : undefined],
-          )}
-        >
-          <FlatSelectControlLayout
-            form={form}
-            disabled={disabled}
-            separator
-            onClear={clearValue}
-            focusAtom={inputFocusAtom}
-            iconClear={iconClear}
-            leftSide={IconLeft && <IconLeft size="s" />}
-            clearButtonAtom={clearButtonAtom}
+        return (
+          <ListItem
+            ref={ref}
+            aria-selected={active}
+            aria-disabled={disabled}
+            role="option"
+            label={label}
             size={size}
-            view={view}
-            valueAtom={inputValueAtom}
-          >
-            <FieldInput
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              ref={fieldInputRef}
-              onChange={handleInputChange}
-              value={inputValue}
-              defaultValue={inputDefaultValue}
-              disabled={disabled}
-              placeholder={placeholder}
-            />
-          </FlatSelectControlLayout>
-        </div>
-      )}
-      <FlatSelectList
-        className={cnFlatSelect(
-          'List',
-          {
-            borderTop: view === 'clear' && !input ? bordered : undefined,
-            borderHorizontal: view === 'clear' ? bordered : undefined,
-            borderBottom: view === 'clear' && !footer ? bordered : undefined,
-            formTop: bordered && !input ? form : undefined,
-            formBottom: bordered && !footer ? form : undefined,
-          },
-          [listClassName],
-        )}
-        view={view}
-        size={size}
-        form={form}
-        valueAtom={valueAtom}
-        getItemKeyAtom={getItemKeyAtom}
-        openAtom={openAtom}
-        getOptionActions={getOptionActions}
-        listRef={useForkRef([listRef, listRefProp])}
-        renderItem={renderItem}
-        getGroupLabel={getGroupLabel}
-        visibleItemsAtom={visibleItemsAtom}
-        labelForCreate={labelForCreate}
-        isLoading={isLoading}
-        labelForEmptyItems={labelForEmptyItems}
-        itemsRefs={optionsRefs}
-        virtualScroll={virtualScroll}
-        onScrollToBottom={onScrollToBottom}
-        highlightedIndexAtom={highlightedIndexAtom}
-        onChangeAll={onChangeAll}
-        onChange={onChange}
-        inputValueAtom={inputValueAtom}
-        hasItemsAtom={hasItemsAtom}
-        groupsCounterAtom={groupsCounterAtom}
-        dropdownZIndexAtom={dropdownZIndexAtom}
-        selectAllLabel={selectAllLabel}
-        disabledAtom={disabledAtom}
-      />
-      {footer && (
-        <FlatSelectFooter
-          view={view}
-          bordered={bordered}
-          form={form}
-          footer={footer}
-        />
-      )}
-    </FlatSelectRoot>
-  );
-};
+            active={hovered}
+            onMouseEnter={onMouseEnter}
+            disabled={disabled}
+            onClick={onClick}
+            leftSide={
+              multiple ? (
+                <Checkbox
+                  checked={active}
+                  disabled={disabled}
+                  size={size}
+                  tabIndex={-1}
+                />
+              ) : (
+                <Radio
+                  checked={active}
+                  disabled={disabled}
+                  size={size}
+                  tabIndex={-1}
+                />
+              )
+            }
+          />
+        );
+      });
 
-export const FlatSelect = withCtx(
-  forwardRef(FlatSelectRender),
+    const fieldInputRef = action((el: HTMLDivElement | null) =>
+      setRefs([inputRef, propsWithDefaultAtom().inputRef], el),
+    );
+    const ref = action((el: HTMLDivElement | null) =>
+      setRefs([propsWithDefaultAtom().ref, rootRef], el),
+    );
+
+    return (props) => {
+      const propsWithDefault = withDefault(props);
+
+      const {
+        form,
+        disabled,
+        value,
+        isLoading,
+        listRef: listRefProp,
+        renderItem: renderItemProp,
+        getGroupLabel,
+        labelForCreate,
+        labelForEmptyItems,
+        virtualScroll,
+        onScrollToBottom,
+        style,
+        className,
+        placeholder,
+        iconClear,
+        input,
+        inputDefaultValue,
+        inputValue,
+        inputRef: inputRefProp,
+        size,
+        view: viewProp,
+        bordered: borderedProp,
+        getGroupKey,
+        getItemDisabled,
+        getItemGroupKey,
+        getItemKey,
+        getItemLabel,
+        items,
+        onChange: onChangeProp,
+        onCreate: onCreateProp,
+        onInput,
+        multiple,
+        groups,
+        onOpen,
+        ignoreOutsideClicksRefs,
+        clearButton,
+        selectAll,
+        selectAllLabel,
+        autoFocus,
+        footer,
+        listClassName,
+        anchorRef,
+        iconLeft: IconLeft,
+        direction,
+        spareDirection,
+        possibleDirections,
+        container,
+        renderItem,
+        isOpen,
+        ...otherProps
+      } = propsWithDefault;
+
+      const view = !input || anchorRef || borderedProp ? 'clear' : viewProp;
+      const bordered = anchorRef ? true : borderedProp;
+
+      return (
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+        <FlatSelectRoot
+          {...otherProps}
+          ref={wrap(ref)}
+          className={cnFlatSelect(
+            {
+              view,
+              bordered: view === 'clear' ? bordered : undefined,
+              form: bordered ? form : undefined,
+              size,
+            },
+            [className],
+          )}
+          style={{
+            ...style,
+            ['--flat-select-control-height' as string]: `var(--control-height-${size})`,
+          }}
+          anchorRef={anchorRef}
+          openAtom={openAtom}
+          tabIndex={0}
+          direction={direction}
+          spareDirection={spareDirection}
+          possibleDirections={possibleDirections}
+          container={container}
+        >
+          {input && (
+            <div
+              className={cnFlatSelect(
+                'Input',
+                {
+                  border: view === 'clear' ? bordered : undefined,
+                  form: bordered ? form : undefined,
+                },
+                [
+                  view === 'clear'
+                    ? cnMixSpace({ pV: '2xs', pH: 's' })
+                    : undefined,
+                ],
+              )}
+            >
+              <FlatSelectControlLayout
+                form={form}
+                disabled={disabled}
+                separator
+                onClear={clearValue}
+                focusAtom={inputFocusAtom}
+                iconClear={iconClear}
+                leftSide={IconLeft && <IconLeft size="s" />}
+                clearButtonAtom={clearButtonAtom}
+                size={size}
+                view={view}
+              >
+                <FieldInput
+                  onFocus={wrap(handleInputFocus)}
+                  onBlur={wrap(handleInputBlur)}
+                  ref={wrap(fieldInputRef)}
+                  onChange={wrap(handleInputChange)}
+                  value={inputValue}
+                  defaultValue={inputDefaultValue}
+                  disabled={disabled}
+                  placeholder={placeholder}
+                />
+              </FlatSelectControlLayout>
+            </div>
+          )}
+          <FlatSelectList<FlatSelectItemDefault, FlatSelectGroupDefault>
+            className={cnFlatSelect(
+              'List',
+              {
+                borderTop: view === 'clear' && !input ? bordered : undefined,
+                borderHorizontal: view === 'clear' ? bordered : undefined,
+                borderBottom:
+                  view === 'clear' && !footer ? bordered : undefined,
+                formTop: bordered && !input ? form : undefined,
+                formBottom: bordered && !footer ? form : undefined,
+              },
+              [listClassName],
+            )}
+            view={view}
+            size={size}
+            form={form}
+            valueAtom={valueAtom}
+            getItemKeyAtom={getItemKeyAtom}
+            openAtom={openAtom}
+            getOptionActions={getOptionActions}
+            listRef={wrap(listRef)}
+            renderItem={renderItem || renderItemDefault}
+            getGroupLabel={getGroupLabel}
+            visibleItemsAtom={visibleItemsAtom}
+            labelForCreate={labelForCreate}
+            isLoading={isLoading}
+            labelForEmptyItems={labelForEmptyItems}
+            getItemRef={wrap(getOptionRef)}
+            virtualScroll={virtualScroll}
+            onScrollToBottom={onScrollToBottom}
+            highlightedIndexAtom={highlightedIndexAtom}
+            onChangeAll={onChangeAll}
+            onChange={onChange}
+            inputValueAtom={inputValueAtom}
+            hasItemsAtom={hasItemsAtom}
+            groupsCounterAtom={groupsCounterAtom}
+            selectAllLabel={selectAllLabel}
+            disabledAtom={disabledAtom}
+          />
+          {footer && (
+            <FlatSelectFooter
+              view={view}
+              bordered={bordered}
+              form={form}
+              footer={footer}
+            />
+          )}
+        </FlatSelectRoot>
+      );
+    };
+  },
 ) as FlatSelectComponent;

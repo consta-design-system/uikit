@@ -1,10 +1,10 @@
 import './ContextMenuWrapper.css';
 
 import React, { Fragment, useCallback, useRef, useState } from 'react';
-import { Transition } from 'react-transition-group';
 
 import { cnListBox, mapVerticalSpace } from '##/components/ListCanary';
 import { Direction, Popover } from '##/components/Popover';
+import { Transition } from '##/components/Transition';
 import { useFlag } from '##/hooks/useFlag';
 import { useMutableRef } from '##/hooks/useMutableRef';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
@@ -38,6 +38,7 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
     animationBack,
     container,
     style,
+    clickOutsideSubscriber,
   } = props;
 
   const [innerAnimation, setInnerAnimation] = useFlag(isMobile);
@@ -60,9 +61,8 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
         timeout={animateTimeout}
         in={isOpen}
         unmountOnExit
-        onEntered={setInnerAnimation.on}
-        onExit={setInnerAnimation.off}
-        nodeRef={rootRef}
+        onEntering={setInnerAnimation.on}
+        onExiting={setInnerAnimation.off}
       >
         {(animate) => (
           <Popover
@@ -85,6 +85,7 @@ export const ContextMenuWrapper = (props: ContextMenuWrapperProps) => {
             onSetDirection={onSetDirection}
             container={container}
             style={style}
+            clickOutsideSubscriber={clickOutsideSubscriber}
           >
             {children}
           </Popover>
