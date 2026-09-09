@@ -1,7 +1,7 @@
 import { IconComponent } from '@consta/icons/Icon';
 import { IconSelect } from '@consta/icons/IconSelect';
-import { AtomMut } from '@reatom/framework';
-import { useAtom } from '@reatom/npm-react';
+import { AtomLike } from '@reatom/core';
+import { useAtom } from '@reatom/react';
 import React, { forwardRef } from 'react';
 
 import {
@@ -18,9 +18,9 @@ type FieldButtonProps = Omit<
   FieldControlLayoutProps,
   'leftSide' | 'rightSide'
 > & {
-  openAtom: AtomMut<boolean>;
-  focusAtom: AtomMut<boolean>;
-  clearButtonAtom: AtomMut<boolean>;
+  openAtom: AtomLike<boolean>;
+  focusAtom: AtomLike<boolean>;
+  clearButtonAtom: AtomLike<boolean>;
   separator?: boolean;
   onClear: (e: React.SyntheticEvent<Element, Event>) => void;
   onDropdownButton?: (e: React.SyntheticEvent<Element, Event>) => void;
@@ -44,6 +44,7 @@ export const SelectControlLayout = forwardRef<HTMLDivElement, FieldButtonProps>(
     ref,
   ) => {
     const [clearButton] = useAtom(clearButtonAtom);
+    const open = useAtom(openAtom)[0];
 
     return (
       <FieldControlLayout
@@ -71,7 +72,7 @@ export const SelectControlLayout = forwardRef<HTMLDivElement, FieldButtonProps>(
           <FieldButton tabIndex={-1} onClick={onDropdownButton}>
             <IconSelect
               className={cnSelectControlLayout('DropDownIcon', {
-                open: useAtom(openAtom)[0],
+                open,
               })}
               size={getFieldIconSize(size)}
             />

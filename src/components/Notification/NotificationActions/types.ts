@@ -32,6 +32,8 @@ export type NotificationActionsProps<ITEM = NotificationActionsDefaultItem> =
       onOpen?: (value: boolean) => void;
       onItemClick?: NotificationActionsOnItemClick<ITEM>;
       scrollContainerRef?: React.RefObject<HTMLDivElement>;
+      dropdownContainer?: HTMLElement;
+      clickOutsideSubscriber?: HTMLElement;
     },
     HTMLButtonElement
   > & {

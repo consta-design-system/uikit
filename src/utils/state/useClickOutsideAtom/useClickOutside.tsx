@@ -1,15 +1,13 @@
-import { AtomMut } from '@reatom/core';
-import { useAction } from '@reatom/npm-react';
+import { AtomLike } from '@reatom/core';
+import { useAction } from '@reatom/react';
 import { useEffect } from 'react';
 
-import { useSendToAtom } from '##/utils/state/useSendToAtom';
-
-export type ClickOutsideHandler = (event: MouseEvent) => void;
+export type UseClickOutsideHandler = (event: MouseEvent) => void;
 
 type UseClickOutsideProps = {
-  isActiveAtom?: AtomMut<boolean>;
-  ignoreClicksElementsAtom?: AtomMut<(HTMLElement | null)[]>;
-  handler?: ClickOutsideHandler;
+  isActiveAtom?: AtomLike<boolean>;
+  ignoreClicksElementsAtom?: AtomLike<(HTMLElement | null)[]>;
+  handler?: UseClickOutsideHandler;
 };
 
 export const useClickOutsideAtom = ({
@@ -17,13 +15,11 @@ export const useClickOutsideAtom = ({
   ignoreClicksElementsAtom,
   handler,
 }: UseClickOutsideProps) => {
-  const handlerAtom = useSendToAtom([handler]);
-
-  const fn = useAction((ctx, e: MouseEvent) => {
-    const isActive = isActiveAtom && ctx.get(isActiveAtom);
+  const fn = useAction((e: MouseEvent) => {
+    const isActive = isActiveAtom && isActiveAtom();
     const ignoreClicksElements =
-      ignoreClicksElementsAtom && ctx.get(ignoreClicksElementsAtom);
-    const handler = ctx.get(handlerAtom)[0];
+      ignoreClicksElementsAtom && ignoreClicksElementsAtom();
+
     isActive &&
       handler &&
       ignoreClicksElements?.length &&

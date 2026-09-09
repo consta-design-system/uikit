@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from 'react';
 
-import { useMutableRef } from '../useMutableRef/useMutableRef';
+import { useMutableRef } from '##/hooks/useMutableRef';
 
 export type ClickOutsideHandler = (event: MouseEvent) => void;
 
@@ -8,12 +8,14 @@ type UseClickOutsideProps = {
   isActive?: boolean | (() => boolean | undefined);
   ignoreClicksInsideRefs?: ReadonlyArray<RefObject<HTMLElement>>;
   handler?: ClickOutsideHandler;
+  subscriber?: HTMLElement;
 };
 
 export function useClickOutside({
   isActive,
   ignoreClicksInsideRefs,
   handler,
+  subscriber,
 }: UseClickOutsideProps): void {
   // Аргументы вынесены в рефки за тем, чтобы не пересоздавать подписку `mousedown` при каждом рендере.
   // Бывают случаи когда на странице несколько `useClickOutside` и один вызывает рендер,
@@ -41,9 +43,16 @@ export function useClickOutside({
       }
     };
 
-    document.addEventListener('mousedown', handleClick);
+    if (subscriber) {
+      subscriber.addEventListener('mousedown', handleClick);
+    } else {
+      document.addEventListener('mousedown', handleClick);
+    }
 
     return () => {
+      subscriber?.removeEventListener('mousedown', handleClick);
+      subscriber?.removeEventListener('mousedown', handleClick);
+      document.removeEventListener('mousedown', handleClick);
       document.removeEventListener('mousedown', handleClick);
     };
   }, []);

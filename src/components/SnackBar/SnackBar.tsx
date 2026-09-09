@@ -1,8 +1,8 @@
 import './SnackBar.css';
 
 import React, { forwardRef } from 'react';
-import { Transition, TransitionGroup } from 'react-transition-group';
 
+import { TransitionGroup } from '##/components/Transition';
 import { useRefs } from '##/hooks/useRefs';
 import { cn } from '##/utils/bem';
 
@@ -17,6 +17,7 @@ import {
 } from './types';
 
 export const cnSnackBar = cn('SnackBar');
+const SnackBarItemMemo = React.memo(SnackBarItem);
 
 const SnackBarRender = (
   propsComponent: SnackBarProps,
@@ -47,26 +48,21 @@ const SnackBarRender = (
 
   return (
     <div className={cnSnackBar(null, [className])} ref={ref} {...otherProps}>
-      <TransitionGroup component={null} appear enter exit>
-        {items.map((item, index) => (
-          <Transition
-            key={cnSnackBar('Item', { key: getItemKey(item) })}
-            unmountOnExit
-            timeout={200}
-            nodeRef={refs[index]}
-          >
-            {(animate) => (
-              <SnackBarItem
-                ref={refs[index]}
-                form={form}
-                progressView={progressView}
-                className={cnSnackBar('Item', { animate })}
-                {...getItem(item, props)}
-              />
-            )}
-          </Transition>
-        ))}
-      </TransitionGroup>
+      <TransitionGroup
+        items={items}
+        getItemKey={getItemKey}
+        unmountOnExit
+        timeout={200}
+        renderItem={(item, index, animate) => (
+          <SnackBarItemMemo
+            ref={refs[index]}
+            form={form}
+            progressView={progressView}
+            className={cnSnackBar('Item', { animate })}
+            {...getItem(item, props)}
+          />
+        )}
+      />
     </div>
   );
 };

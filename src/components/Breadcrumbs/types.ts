@@ -63,6 +63,7 @@ export type BreadcrumbsProps<ITEM = BreadcrumbsDefaultItem> =
       onlyIconRoot?: boolean;
       fitMode?: BreadcrumbPropFitMode;
       lastItemIsLink?: boolean;
+      dropdownContainer?: Element;
     },
     HTMLUListElement
   > &
@@ -84,6 +85,7 @@ export type BreadcrumbsMoreProps<ITEM> = PropsWithHTMLAttributesAndRef<
     getItemSubMenu: BreadcrumbsPropGetItemSubMenu<ITEM>;
     getItemOnClick: BreadcrumbsPropGetItemOnClick<ITEM>;
     onItemClick?: BreadcrumbsPropOnItemClick<ITEM>;
+    dropdownContainer?: Element;
   },
   HTMLLIElement
 >;
@@ -104,6 +106,7 @@ export type BreadcrumbsItemProps<ITEM> = PropsWithHTMLAttributesAndRef<
     onlyIcon?: boolean;
     delimiter?: boolean;
     onItemClick?: BreadcrumbsPropOnItemClick<ITEM>;
+    dropdownContainer?: Element;
   },
   HTMLLIElement
 >;
@@ -124,6 +127,7 @@ export type BreadcrumbsFitModeDropdownProps<ITEM> =
       onItemClick?: BreadcrumbsPropOnItemClick<ITEM>;
       renderItem: RenderItem<ITEM>;
       size: BreadcrumbPropSize;
+      dropdownContainer?: Element;
     },
     HTMLUListElement
   >;

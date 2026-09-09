@@ -1,8 +1,8 @@
 import './NotificationCaption.css';
 
-import { Text } from '@consta/uikit/Text';
 import React, { forwardRef } from 'react';
 
+import { Text } from '##/components/Text';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 

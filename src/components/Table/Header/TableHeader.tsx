@@ -1,5 +1,6 @@
 import './TableHeader.css';
 
+import { IconComponent } from '@consta/icons/Icon';
 import React from 'react';
 
 import { cn } from '../../../utils/bem';
@@ -42,7 +43,7 @@ type Props<T extends TableRow> = {
   stickyColumnsGrid: number;
   showVerticalCellShadow: boolean;
   headerVerticalAlign: HeaderVerticalAlign;
-  getSortIcon: (column: Header<T>) => React.FC;
+  getSortIcon: (column: Header<T>) => IconComponent;
   handleSortClick: (column: TableColumn<T>) => void;
   handleFilterTogglerClick: (id: string) => () => void;
   handleCellClick: onCellClick;

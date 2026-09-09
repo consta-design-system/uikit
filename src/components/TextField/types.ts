@@ -118,6 +118,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     onKeyUpCapture?: React.KeyboardEventHandler;
     onKeyDown?: React.KeyboardEventHandler;
     onClear?: React.MouseEventHandler<HTMLButtonElement>;
+    fakeElementContainer?: HTMLElement | undefined;
   },
   HTMLDivElement
 > &

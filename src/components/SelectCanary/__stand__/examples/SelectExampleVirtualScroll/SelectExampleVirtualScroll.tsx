@@ -41,6 +41,7 @@ export const SelectExampleVirtualScroll = () => {
         onChange={setValue}
         groups={groups}
         multiple
+        onDropdownOpen={(onDropdownOpen) => console.log({ onDropdownOpen })}
         selectAll
         virtualScroll
         renderValue={({ value, getRemove }) => {

@@ -94,6 +94,7 @@ export type SliderPointProps = PropsWithHTMLAttributes<
     tooltipZIndex?: number;
     tooltipDirection?: Direction;
     tooltipPossibleDirections?: Direction[];
+    tooltipContainer?: HTMLElement;
   },
   HTMLButtonElement
 >;

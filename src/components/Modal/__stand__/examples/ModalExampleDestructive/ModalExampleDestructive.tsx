@@ -4,11 +4,11 @@ import { IconComponent } from '@consta/icons/Icon';
 import { IconClear } from '@consta/icons/IconClear';
 import { IconTrash } from '@consta/icons/IconTrash';
 import { Example } from '@consta/stand';
-import { FieldLabel } from '@consta/uikit/FieldComponents';
 import React, { useRef } from 'react';
 
 import { Button, ButtonPropView } from '##/components/Button';
 import { Checkbox } from '##/components/Checkbox';
+import { FieldLabel } from '##/components/FieldComponents';
 import { Text } from '##/components/Text';
 import { TextField } from '##/components/TextFieldCanary';
 import { cnMixFlex } from '##/mixs/MixFlex';
