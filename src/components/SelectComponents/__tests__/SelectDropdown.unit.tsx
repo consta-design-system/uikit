@@ -96,6 +96,6 @@ describe('Компонент SelectDropdown', () => {
       renderComponent(ctx, { visibleItems });
 
       expect(getSelectCreateButton(ctx)).toBeInTheDocument();
-      expect(getSelectCreateButton(ctx)).toHaveTextContent(label);
+      expect(getSelectCreateButton(ctx)).toMatchTextContent(label);
     }));
 });

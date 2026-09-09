@@ -234,7 +234,7 @@ describe('Компонент Breadcrumbs (Canary)', () => {
         context.start(async () => {
           renderComponent(ctx, { items });
 
-          expect(getLink(ctx, index)).toHaveTextContent(item.label);
+          expect(getLink(ctx, index)).toMatchTextContent(item.label);
         }));
     });
   });
@@ -354,7 +354,7 @@ describe('Компонент Breadcrumbs (Canary)', () => {
         renderComponent(ctx, { items, onlyIconRoot: false, fitMode: 'scroll' });
 
         const link = getLink(ctx, 0);
-        expect(link).toHaveTextContent(`${items[0].label}`);
+        expect(link).toMatchTextContent(`${items[0].label}`);
       }));
   });
   describe('проверка fitMode', () => {

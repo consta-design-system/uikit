@@ -211,11 +211,9 @@ describe('Компонент Banner', () => {
 
         renderComponent(ctx, { leftSide: mixedArray });
 
-        expect(getRender(ctx)).toHaveTextContent('Текст 1');
+        expect(getRender(ctx)).toHaveTextContent('Текст 1Элемент123Текст 4');
         const element = document.querySelector('[data-testid="mixed-element"]');
         expect(element).toBeInTheDocument();
-        expect(getRender(ctx)).toHaveTextContent('123');
-        expect(getRender(ctx)).toHaveTextContent('Текст 4');
       }));
 
     test('должен игнорировать null и undefined в массиве leftSide', (ctx) =>
@@ -276,11 +274,9 @@ describe('Компонент Banner', () => {
 
         renderComponent(ctx, { rightSide: mixedArray });
 
-        expect(getRender(ctx)).toHaveTextContent('Текст 1');
+        expect(getRender(ctx)).toHaveTextContent('Текст 1Элемент123Текст 4');
         const element = document.querySelector('[data-testid="mixed-element"]');
         expect(element).toBeInTheDocument();
-        expect(getRender(ctx)).toHaveTextContent('123');
-        expect(getRender(ctx)).toHaveTextContent('Текст 4');
       }));
 
     test('должен игнорировать null и undefined в массиве rightSide', (ctx) =>

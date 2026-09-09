@@ -95,8 +95,8 @@ describe('Компонент DatePicker_type_monthRange', () => {
 
         await wrap(sleep(animateTimeout));
 
-        expect(getDateTimeItemSelected(ctx, 0)).toHaveTextContent('янв');
-        expect(getDateTimeItemSelected(ctx, 1)).toHaveTextContent('мар');
+        expect(getDateTimeItemSelected(ctx, 0)).toMatchTextContent('янв');
+        expect(getDateTimeItemSelected(ctx, 1)).toMatchTextContent('мар');
       }));
   });
 });

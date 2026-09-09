@@ -141,7 +141,7 @@ describe('Компонент Popover', () => {
           `#${testPopoverId(ctx)} [data-testid="popoverButton"]`,
         )!;
 
-        expect(userEvent.click(button)).rejects.toThrow();
+        await expect(userEvent.click(button)).rejects.toThrow();
 
         expect(onClick).not.toHaveBeenCalled();
       }));

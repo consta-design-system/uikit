@@ -949,7 +949,7 @@ describe(`${testId}`, () => {
 
       const item = getItem(ctx, 0);
 
-      expect(item).toHaveTextContent('Выбрать все');
+      expect(item).toMatchTextContent('Выбрать все');
       expect(item).toHaveClass(cnSelectItemAll());
     }));
 
@@ -989,7 +989,7 @@ describe(`${testId}`, () => {
       await wrap(sleep(animateTimeout));
 
       const item = getItem(ctx, 0);
-      expect(item).toHaveTextContent(selectAllLabel);
+      expect(item).toMatchTextContent(selectAllLabel);
       expect(item).toHaveClass(cnSelectItemAll());
     }));
 
@@ -1011,7 +1011,7 @@ describe(`${testId}`, () => {
 
         const item = getItem(ctx, 0);
 
-        expect(item).toHaveTextContent('Выбрать все');
+        expect(item).toMatchTextContent('Выбрать все');
         expect(item).toHaveClass(cnSelectItemAll());
 
         item.click();
@@ -1038,7 +1038,7 @@ describe(`${testId}`, () => {
 
         const item = getItem(ctx, 0);
 
-        expect(item).toHaveTextContent('Выбрать все');
+        expect(item).toMatchTextContent('Выбрать все');
         expect(item).toHaveClass(cnSelectItemAll());
 
         item.click();
@@ -1065,7 +1065,7 @@ describe(`${testId}`, () => {
 
         const item = getItem(ctx, 0);
 
-        expect(item).toHaveTextContent('Выбрать все');
+        expect(item).toMatchTextContent('Выбрать все');
         expect(item).toHaveClass(cnSelectItemAll());
 
         item.click();
@@ -1092,7 +1092,7 @@ describe(`${testId}`, () => {
 
         const item = getSelectAllOption(ctx, testingGroupIndex);
 
-        expect(item).toHaveTextContent('Выбрать все');
+        expect(item).toMatchTextContent('Выбрать все');
         expect(item).toHaveClass(cnSelectItemAll());
 
         item.click();

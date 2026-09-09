@@ -100,8 +100,8 @@ describe('Компонент Slider', () => {
         renderComponent(ctx, { value: 0, label, caption });
         const renderEl = getRender(ctx);
         if (!renderEl) throw new Error('Render not found');
-        expect(renderEl).toHaveTextContent(label);
-        expect(renderEl).toHaveTextContent(caption);
+        expect(renderEl).toMatchTextContent(label);
+        expect(renderEl).toMatchTextContent(caption);
       }));
 
     test('отображает leftSide и rightSide как input', (ctx) =>

@@ -49,10 +49,10 @@ describe('Компонент DateTime_type_dateTime', () => {
         renderComponent(ctx, { value: new Date(1970, 0, 1, 10, 15, 20) });
         const timeItems = getTimeItemsSelected(ctx);
         const dayItems = getDayItemsSelected(ctx);
-        expect(timeItems[0]).toHaveTextContent('10');
-        expect(timeItems[1]).toHaveTextContent('15');
-        expect(timeItems[2]).toHaveTextContent('20');
-        expect(dayItems[0]).toHaveTextContent('1');
+        expect(timeItems[0]).toMatchTextContent('10');
+        expect(timeItems[1]).toMatchTextContent('15');
+        expect(timeItems[2]).toMatchTextContent('20');
+        expect(dayItems[0]).toMatchTextContent('1');
       }));
   });
 
@@ -122,7 +122,7 @@ describe('Компонент DateTime_type_dateTime', () => {
         });
 
         const timeItems = getTimeItemsSelected(ctx);
-        expect(timeItems[0]).toHaveTextContent('11');
+        expect(timeItems[0]).toMatchTextContent('11');
 
         const dateHoursItem = getDateTimeColumnItem(ctx, 0, 10);
         fireEvent.click(dateHoursItem);
@@ -145,7 +145,7 @@ describe('Компонент DateTime_type_dateTime', () => {
         });
 
         const timeItems = getTimeItemsSelected(ctx);
-        expect(timeItems[1]).toHaveTextContent('10');
+        expect(timeItems[1]).toMatchTextContent('10');
 
         const dateMinutesItem = getDateTimeColumnItem(ctx, 1, 15);
         fireEvent.click(dateMinutesItem);
@@ -168,7 +168,7 @@ describe('Компонент DateTime_type_dateTime', () => {
         });
 
         const timeItems = getTimeItemsSelected(ctx);
-        expect(timeItems[2]).toHaveTextContent('20');
+        expect(timeItems[2]).toMatchTextContent('20');
 
         const dateSecondsItem = getDateTimeColumnItem(ctx, 2, 35);
         fireEvent.click(dateSecondsItem);
@@ -194,12 +194,12 @@ describe('Компонент DateTime_type_dateTime', () => {
         });
 
         const label = getDateTimeLabel(ctx);
-        expect(label).toHaveTextContent('май 2022');
+        expect(label).toMatchTextContent('май 2022');
 
         fireEvent.click(getDateTimeTogglerButtonNext(ctx));
 
         expect(label).not.toHaveTextContent('май 2022');
-        expect(label).toHaveTextContent('июнь 2022');
+        expect(label).toMatchTextContent('июнь 2022');
       }));
 
     test('проверка смены месяца и года через DateTimeToggler-Button_direction_prev', (ctx) =>
@@ -215,7 +215,7 @@ describe('Компонент DateTime_type_dateTime', () => {
         fireEvent.click(getDateTimeTogglerButtonPrev(ctx));
 
         const timeItems = getTimeItemsSelected(ctx);
-        expect(timeItems[2]).toHaveTextContent('25');
+        expect(timeItems[2]).toMatchTextContent('25');
 
         const dateSecondsItem = getDateTimeColumnItem(ctx, 2, 35);
         fireEvent.click(dateSecondsItem);
@@ -628,8 +628,8 @@ describe('Компонент DateTime_type_dateTime', () => {
           });
           const hoursColumn = getColumnAllItem(ctx, 0);
           expect(hoursColumn).toHaveLength(6);
-          expect(hoursColumn[0]).toHaveTextContent('00');
-          expect(hoursColumn[5]).toHaveTextContent('23');
+          expect(hoursColumn[0]).toMatchTextContent('00');
+          expect(hoursColumn[5]).toMatchTextContent('23');
           fireEvent.click(hoursColumn[3]);
           const date = new Date(2022, 5, 27, 10);
           expect(onChange).toHaveBeenCalledWith(date, {
@@ -673,8 +673,8 @@ describe('Компонент DateTime_type_dateTime', () => {
           });
           const minutesColumn = getColumnAllItem(ctx, 1);
           expect(minutesColumn).toHaveLength(5);
-          expect(minutesColumn[0]).toHaveTextContent('00');
-          expect(minutesColumn[4]).toHaveTextContent('45');
+          expect(minutesColumn[0]).toMatchTextContent('00');
+          expect(minutesColumn[4]).toMatchTextContent('45');
           fireEvent.click(minutesColumn[1]);
           const date = new Date(2022, 5, 27, 11, 5);
           expect(onChange).toHaveBeenCalledWith(date, {
@@ -718,8 +718,8 @@ describe('Компонент DateTime_type_dateTime', () => {
           });
           const secondsColumn = getColumnAllItem(ctx, 2);
           expect(secondsColumn).toHaveLength(6);
-          expect(secondsColumn[0]).toHaveTextContent('00');
-          expect(secondsColumn[5]).toHaveTextContent('50');
+          expect(secondsColumn[0]).toMatchTextContent('00');
+          expect(secondsColumn[5]).toMatchTextContent('50');
           fireEvent.click(secondsColumn[2]);
           const date = new Date(2022, 5, 27, 11, 34, 23);
           expect(onChange).toHaveBeenCalledWith(date, {
@@ -806,8 +806,8 @@ describe('Компонент DateTime_type_dateTime', () => {
 
         const hoursColumn = getColumnAllItem(ctx, 0);
         expect(hoursColumn).toHaveLength(4);
-        expect(hoursColumn[0]).toHaveTextContent('00');
-        expect(hoursColumn[3]).toHaveTextContent('18');
+        expect(hoursColumn[0]).toMatchTextContent('00');
+        expect(hoursColumn[3]).toMatchTextContent('18');
       }));
 
     test('частичное указание timeOptions использует multiplicity для остальных', (ctx) =>
@@ -945,7 +945,7 @@ describe('Компонент DateTime_type_dateTime', () => {
         });
 
         const label = getDateTimeLabel(ctx);
-        expect(label).toHaveTextContent('جون 2022');
+        expect(label).toMatchTextContent('جون 2022');
       }));
   });
 
@@ -1015,7 +1015,7 @@ describe('Компонент DateTime_type_dateTime', () => {
 
     test('смена даты с no valid times: fallback на 00:00:00', (ctx) =>
       context.start(async () => {
-        const minDate = new Date(1970, 0, 21, 23, 50, 0);
+        const minDate = new Date(1970, 0, 15, 23, 59, 0);
         const timeOptions = {
           hours: { step: 1 },
           minutes: { step: 5 },
@@ -1058,9 +1058,9 @@ describe('Компонент DateTime_type_dateTime', () => {
 
         const timeItems = getTimeItemsSelected(ctx);
         expect(timeItems).toHaveLength(3);
-        expect(timeItems[0]).toHaveTextContent('10');
-        expect(timeItems[1]).toHaveTextContent('30');
-        expect(timeItems[2]).toHaveTextContent('45');
+        expect(timeItems[0]).toMatchTextContent('10');
+        expect(timeItems[1]).toMatchTextContent('30');
+        expect(timeItems[2]).toMatchTextContent('45');
       }));
 
     test('корректно обрабатывает range value и показывает selected состояния timeFor=end', (ctx) =>
@@ -1079,9 +1079,9 @@ describe('Компонент DateTime_type_dateTime', () => {
 
         const timeItems = getTimeItemsSelected(ctx);
         expect(timeItems).toHaveLength(3);
-        expect(timeItems[0]).toHaveTextContent('15');
-        expect(timeItems[1]).toHaveTextContent('20');
-        expect(timeItems[2]).toHaveTextContent('10');
+        expect(timeItems[0]).toMatchTextContent('15');
+        expect(timeItems[1]).toMatchTextContent('20');
+        expect(timeItems[2]).toMatchTextContent('10');
       }));
 
     test('корректно применяет время и дату при изменении даты со временем в range для timeFor=start', (ctx) =>
@@ -1099,9 +1099,9 @@ describe('Компонент DateTime_type_dateTime', () => {
         });
         const timeItems = getTimeItemsSelected(ctx);
         expect(timeItems).toHaveLength(3);
-        expect(timeItems[0]).toHaveTextContent('10');
-        expect(timeItems[1]).toHaveTextContent('30');
-        expect(timeItems[2]).toHaveTextContent('00');
+        expect(timeItems[0]).toMatchTextContent('10');
+        expect(timeItems[1]).toMatchTextContent('30');
+        expect(timeItems[2]).toMatchTextContent('00');
 
         const targetDay = getDateTimeItemByText(ctx, '2');
         expect(targetDay).toBeDefined();
@@ -1135,9 +1135,9 @@ describe('Компонент DateTime_type_dateTime', () => {
         });
         const timeItems = getTimeItemsSelected(ctx);
         expect(timeItems).toHaveLength(3);
-        expect(timeItems[0]).toHaveTextContent('10');
-        expect(timeItems[1]).toHaveTextContent('30');
-        expect(timeItems[2]).toHaveTextContent('00');
+        expect(timeItems[0]).toMatchTextContent('10');
+        expect(timeItems[1]).toMatchTextContent('30');
+        expect(timeItems[2]).toMatchTextContent('00');
 
         const targetDay = getDateTimeItemByText(ctx, '10');
         expect(targetDay).toBeDefined();
@@ -1171,9 +1171,9 @@ describe('Компонент DateTime_type_dateTime', () => {
         });
         const timeItems = getTimeItemsSelected(ctx);
         expect(timeItems).toHaveLength(3);
-        expect(timeItems[0]).toHaveTextContent('15');
-        expect(timeItems[1]).toHaveTextContent('45');
-        expect(timeItems[2]).toHaveTextContent('00');
+        expect(timeItems[0]).toMatchTextContent('15');
+        expect(timeItems[1]).toMatchTextContent('45');
+        expect(timeItems[2]).toMatchTextContent('00');
 
         const targetDay = getDateTimeItemByText(ctx, '6');
         expect(targetDay).toBeDefined();
@@ -1207,9 +1207,9 @@ describe('Компонент DateTime_type_dateTime', () => {
         });
         const timeItems = getTimeItemsSelected(ctx);
         expect(timeItems).toHaveLength(3);
-        expect(timeItems[0]).toHaveTextContent('15');
-        expect(timeItems[1]).toHaveTextContent('45');
-        expect(timeItems[2]).toHaveTextContent('00');
+        expect(timeItems[0]).toMatchTextContent('15');
+        expect(timeItems[1]).toMatchTextContent('45');
+        expect(timeItems[2]).toMatchTextContent('00');
 
         const targetDay = getDateTimeItemByText(ctx, '2');
         expect(targetDay).toBeDefined();

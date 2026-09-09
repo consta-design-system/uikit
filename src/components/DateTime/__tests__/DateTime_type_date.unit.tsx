@@ -54,7 +54,7 @@ describe('Компонент DateTime_type_date', () => {
           renderComponent(ctx, { value: new Date(1970, 5, 1), view });
           const item = getDateTimeItem(ctx);
           expect(item).toHaveClass('DateTimeItem_selected');
-          expect(item).toHaveTextContent('1');
+          expect(item).toMatchTextContent('1');
         }));
     });
 
@@ -74,11 +74,11 @@ describe('Компонент DateTime_type_date', () => {
           const cell3 = getDateTimeCell(ctx, 9);
 
           expect(item1).toHaveClass('DateTimeItem_selected');
-          expect(item1).toHaveTextContent('1');
+          expect(item1).toMatchTextContent('1');
           expect(item2).not.toHaveClass('DateTimeItem_selected');
-          expect(item2).toHaveTextContent('2');
+          expect(item2).toMatchTextContent('2');
           expect(item3).toHaveClass('DateTimeItem_selected');
-          expect(item3).toHaveTextContent('3');
+          expect(item3).toMatchTextContent('3');
 
           expect(cell1).toHaveClass('DateTimeCell_range_first');
           expect(cell2).toHaveClass('DateTimeCell_range');
@@ -97,7 +97,7 @@ describe('Компонент DateTime_type_date', () => {
 
         const label = getDateTimeLabel(ctx);
 
-        expect(label).toHaveTextContent('январь 1970');
+        expect(label).toMatchTextContent('январь 1970');
       }));
 
     test(`Дата отображается верная при view='book'`, (ctx) =>
@@ -109,8 +109,8 @@ describe('Компонент DateTime_type_date', () => {
 
         const labels = getDateTimeViewBookLabels(ctx);
 
-        expect(labels[0]).toHaveTextContent('январь 1970');
-        expect(labels[1]).toHaveTextContent('февраль 1970');
+        expect(labels[0]).toMatchTextContent('январь 1970');
+        expect(labels[1]).toMatchTextContent('февраль 1970');
       }));
 
     test(`Дата отображается верная при view='slider'`, (ctx) =>
@@ -123,9 +123,9 @@ describe('Компонент DateTime_type_date', () => {
         const sliderLabel = getDateTimeSliderLabel(ctx);
         const labels = getDateTimeViewSliderLabels(ctx);
 
-        expect(sliderLabel).toHaveTextContent('1970');
-        expect(labels[0]).toHaveTextContent('январь 1970');
-        expect(labels[1]).toHaveTextContent('февраль 1970');
+        expect(sliderLabel).toMatchTextContent('1970');
+        expect(labels[0]).toMatchTextContent('январь 1970');
+        expect(labels[1]).toMatchTextContent('февраль 1970');
       }));
 
     test('Если текущая дата меньше минимальной, отображается минимальная', (ctx) =>
@@ -138,7 +138,7 @@ describe('Компонент DateTime_type_date', () => {
 
         const label = getDateTimeLabel(ctx);
 
-        expect(label).toHaveTextContent('январь 2001');
+        expect(label).toMatchTextContent('январь 2001');
         vi.useRealTimers();
       }));
 
@@ -152,7 +152,7 @@ describe('Компонент DateTime_type_date', () => {
 
         const label = getDateTimeLabel(ctx);
 
-        expect(label).toHaveTextContent('январь 1999');
+        expect(label).toMatchTextContent('январь 1999');
         vi.useRealTimers();
       }));
   });
@@ -320,29 +320,29 @@ describe('Компонент DateTime_type_date', () => {
             view,
           });
 
-          expect(document.body).toHaveTextContent('январь 1970');
+          expect(document.body).toMatchTextContent('январь 1970');
 
           if (view === 'slider') {
-            expect(document.body).toHaveTextContent('февраль 1970');
+            expect(document.body).toMatchTextContent('февраль 1970');
 
             const nextButton = getDateTimeSliderButtonNext(ctx);
             fireEvent.click(nextButton);
-            expect(document.body).toHaveTextContent('январь 1971');
-            expect(document.body).toHaveTextContent('февраль 1971');
+            expect(document.body).toMatchTextContent('январь 1971');
+            expect(document.body).toMatchTextContent('февраль 1971');
 
             const prevButton = getDateTimeSliderButtonPrev(ctx);
             fireEvent.click(prevButton);
-            expect(document.body).toHaveTextContent('февраль 1970');
+            expect(document.body).toMatchTextContent('февраль 1970');
           } else {
             const nextButton = getDateTimeTogglerButtonNext(ctx);
             fireEvent.click(nextButton);
-            expect(document.body).toHaveTextContent('февраль 1970');
+            expect(document.body).toMatchTextContent('февраль 1970');
 
             const prevButton = getDateTimeTogglerButtonPrev(ctx);
             fireEvent.click(prevButton);
           }
 
-          expect(document.body).toHaveTextContent('январь 1970');
+          expect(document.body).toMatchTextContent('январь 1970');
         }));
     });
 
@@ -354,7 +354,7 @@ describe('Компонент DateTime_type_date', () => {
             value: new Date(1970, 0, 3),
           });
 
-          expect(document.body).toHaveTextContent('январь 1970');
+          expect(document.body).toMatchTextContent('январь 1970');
 
           if (view === 'slider') {
             const labelButton = getDateTimeViewBookLabels(ctx)[0] as Element;
@@ -366,7 +366,7 @@ describe('Компонент DateTime_type_date', () => {
 
           const monthButton = getDateTimeItem(ctx, 1);
           fireEvent.click(monthButton);
-          expect(document.body).toHaveTextContent('февраль 1970');
+          expect(document.body).toMatchTextContent('февраль 1970');
         }));
     });
 
@@ -378,7 +378,7 @@ describe('Компонент DateTime_type_date', () => {
             value: new Date(1970, 0, 3),
           });
 
-          expect(document.body).toHaveTextContent('январь 1970');
+          expect(document.body).toMatchTextContent('январь 1970');
 
           if (view === 'slider') {
             const labelButton = getDateTimeViewBookLabels(ctx)[0] as Element;
@@ -386,22 +386,22 @@ describe('Компонент DateTime_type_date', () => {
 
             const newLabelButton = getDateTimeViewBookLabels(ctx)[0] as Element;
             fireEvent.click(newLabelButton);
-            expect(document.body).toHaveTextContent('1970 - 1979');
+            expect(document.body).toMatchTextContent('1970 - 1979');
 
             const yearButton = getDateTimeItem(ctx, 2);
             fireEvent.click(yearButton);
-            expect(document.body).toHaveTextContent('1980-1990');
+            expect(document.body).toMatchTextContent('1980-1990');
           } else {
             const labelButton = getDateTimeTogglerLabels(ctx)[0] as Element;
             fireEvent.click(labelButton);
 
             const newLabelButton = getDateTimeTogglerLabels(ctx)[0] as Element;
             fireEvent.click(newLabelButton);
-            expect(document.body).toHaveTextContent('1970 - 1979');
+            expect(document.body).toMatchTextContent('1970 - 1979');
 
             const yearButton = getDateTimeItem(ctx, 2);
             fireEvent.click(yearButton);
-            expect(document.body).toHaveTextContent('1971');
+            expect(document.body).toMatchTextContent('1971');
           }
         }));
     });
@@ -418,7 +418,7 @@ describe('Компонент DateTime_type_date', () => {
           });
 
           const label = getDateTimeLabel(ctx);
-          expect(label).toHaveTextContent('جون 2022');
+          expect(label).toMatchTextContent('جون 2022');
         }));
     });
   });

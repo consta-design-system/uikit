@@ -80,14 +80,14 @@ const file1 = new File(['file1'], 'file1.png', { type: 'image/png' });
 const file2 = new File(['file2'], 'file2.txt', { type: 'text/plain' });
 
 describe('Компонент DragNDropFieldCanary', () => {
-  test('должен рендериться без ошибок', (ctx) => {
-    context.start(async () => {
+  test('должен рендериться без ошибок', async (ctx) => {
+    await context.start(async () => {
       expect(() => renderComponent(ctx, {})).not.toThrow();
     });
   });
 
-  test('ref должен быть присвоен', (ctx) => {
-    context.start(async () => {
+  test('ref должен быть присвоен', async (ctx) => {
+    await context.start(async () => {
       const ref = React.createRef<HTMLDivElement>();
       renderComponent(ctx, { ref });
 
@@ -95,8 +95,8 @@ describe('Компонент DragNDropFieldCanary', () => {
     });
   });
 
-  test('должен присваиваться дополнительный className', (ctx) => {
-    context.start(async () => {
+  test('должен присваиваться дополнительный className', async (ctx) => {
+    await context.start(async () => {
       const className = 'custom-class';
       renderComponent(ctx, { className });
 
@@ -104,8 +104,8 @@ describe('Компонент DragNDropFieldCanary', () => {
     });
   });
 
-  test('не должен реагировать на drop в состоянии disabled', (ctx) => {
-    context.start(async () => {
+  test('не должен реагировать на drop в состоянии disabled', async (ctx) => {
+    await context.start(async () => {
       const onDrop = vi.fn();
       renderComponent(ctx, { onDrop, disabled: true });
 
@@ -116,8 +116,8 @@ describe('Компонент DragNDropFieldCanary', () => {
   });
 
   describe('проверка children', () => {
-    test('рендерит React.ReactNode', (ctx) => {
-      context.start(async () => {
+    test('рендерит React.ReactNode', async (ctx) => {
+      await context.start(async () => {
         const childText = 'Custom content';
         renderComponent(ctx, { children: <div>{childText}</div> });
 
@@ -128,8 +128,8 @@ describe('Компонент DragNDropFieldCanary', () => {
       });
     });
 
-    test('рендерит с помощью render-функции', (ctx) => {
-      context.start(async () => {
+    test('рендерит с помощью render-функции', async (ctx) => {
+      await context.start(async () => {
         const childText = 'Render prop content';
         renderComponent(ctx, {
           children: () => <div>{childText}</div>,
@@ -144,8 +144,8 @@ describe('Компонент DragNDropFieldCanary', () => {
   });
 
   describe('проверка callback', () => {
-    test('onDrop вызывается с принятыми и отклоненными файлами', (ctx) => {
-      context.start(async () => {
+    test('onDrop вызывается с принятыми и отклоненными файлами', async (ctx) => {
+      await context.start(async () => {
         const onDrop = vi.fn();
         renderComponent(ctx, {
           onDrop,
@@ -155,16 +155,18 @@ describe('Компонент DragNDropFieldCanary', () => {
 
         await dropFiles(ctx, [file1, file2]);
 
-        expect(onDrop).toHaveBeenCalledWith(
-          [file1],
-          expect.any(Array),
-          expect.any(Object),
-        );
+        await waitFor(() => {
+          expect(onDrop).toHaveBeenCalledWith(
+            [file1],
+            expect.any(Array),
+            expect.any(Object),
+          );
+        });
       });
     });
 
-    test('onDropAccepted вызывается с принятыми файлами', (ctx) => {
-      context.start(async () => {
+    test('onDropAccepted вызывается с принятыми файлами', async (ctx) => {
+      await context.start(async () => {
         const onDropAccepted = vi.fn();
         renderComponent(ctx, {
           onDropAccepted,
@@ -173,15 +175,17 @@ describe('Компонент DragNDropFieldCanary', () => {
 
         await dropFiles(ctx, [file1]);
 
-        expect(onDropAccepted).toHaveBeenCalledWith(
-          [file1],
-          expect.any(Object),
-        );
+        await waitFor(() => {
+          expect(onDropAccepted).toHaveBeenCalledWith(
+            [file1],
+            expect.any(Object),
+          );
+        });
       });
     });
 
-    test('onDropRejected вызывается с отклоненными файлами', (ctx) => {
-      context.start(async () => {
+    test('onDropRejected вызывается с отклоненными файлами', async (ctx) => {
+      await context.start(async () => {
         const onDropRejected = vi.fn();
         const onDropAccepted = vi.fn();
         renderComponent(ctx, {
@@ -193,18 +197,23 @@ describe('Компонент DragNDropFieldCanary', () => {
 
         await dropFiles(ctx, [file2]);
 
-        expect(onDropAccepted).not.toHaveBeenCalled();
-        expect(onDropRejected).toHaveBeenCalledWith(
-          expect.arrayContaining([expect.objectContaining({ file: file2 })]),
-          expect.any(Object),
-        );
+        await waitFor(() => {
+          expect(onDropAccepted).not.toHaveBeenCalled();
+        });
+
+        await waitFor(() => {
+          expect(onDropRejected).toHaveBeenCalledWith(
+            expect.arrayContaining([expect.objectContaining({ file: file2 })]),
+            expect.any(Object),
+          );
+        });
       });
     });
   });
 
   describe('проверка ограничений', () => {
-    test('`multiple=false` принимает только один файл', (ctx) => {
-      context.start(async () => {
+    test('`multiple=false` принимает только один файл', async (ctx) => {
+      await context.start(async () => {
         const onDropAccepted = vi.fn();
         const onDropRejected = vi.fn();
         renderComponent(ctx, {
@@ -215,13 +224,18 @@ describe('Компонент DragNDropFieldCanary', () => {
 
         await dropFiles(ctx, [file1, file2]);
 
-        expect(onDropAccepted).not.toHaveBeenCalled();
-        expect(onDropRejected).toHaveBeenCalled();
+        await waitFor(() => {
+          expect(onDropAccepted).not.toHaveBeenCalled();
+        });
+
+        await waitFor(() => {
+          expect(onDropRejected).toHaveBeenCalled();
+        });
       });
     });
 
-    test('`accept` фильтрует файлы по типу', (ctx) => {
-      context.start(async () => {
+    test('`accept` фильтрует файлы по типу', async (ctx) => {
+      await context.start(async () => {
         const onDropAccepted = vi.fn();
         const onDropRejected = vi.fn();
         renderComponent(ctx, {
@@ -232,6 +246,7 @@ describe('Компонент DragNDropFieldCanary', () => {
         });
 
         await dropFiles(ctx, [file1, file2]);
+
         await waitFor(() => {
           expect(onDropAccepted).toHaveBeenCalledWith(
             [file1],

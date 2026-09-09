@@ -328,7 +328,7 @@ describe('NotificationActions', () => {
 
         const index = 0;
 
-        expect(getContextMenuItem(ctx, index)).toHaveTextContent(
+        expect(getContextMenuItem(ctx, index)).toMatchTextContent(
           items[index].label,
         );
         expect(

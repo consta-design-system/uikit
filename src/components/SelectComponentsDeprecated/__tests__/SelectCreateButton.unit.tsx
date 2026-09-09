@@ -57,14 +57,14 @@ describe('Компонент SelectCreateButton', () => {
       context.start(async () => {
         const labelForCreate = 'Test label';
         renderComponent(ctx, { labelForCreate });
-        expect(getRender(ctx)).toHaveTextContent(labelForCreate);
+        expect(getRender(ctx)).toMatchTextContent(labelForCreate);
       }));
 
     test('должен отображаться inputValue', (ctx) =>
       context.start(async () => {
         const inputValue = 'Test value';
         renderComponent(ctx, { inputValue });
-        expect(getRender(ctx)).toHaveTextContent(inputValue);
+        expect(getRender(ctx)).toMatchTextContent(inputValue);
       }));
   });
 });
