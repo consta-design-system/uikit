@@ -5,7 +5,7 @@
   "import": ["@cspell/dict-ru_ru/cspell-ext.json"],
   "files": ["src/**"],
   "language": "en, ru",
-  "ignorePaths": ["*.svg"],
+  "ignorePaths": ["*.svg", ".json"],
   "words": [
     "автодополнения",
     "автозаполнения",
