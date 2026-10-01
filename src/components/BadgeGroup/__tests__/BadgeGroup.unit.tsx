@@ -283,9 +283,10 @@ describe(`Компонент ${testId}`, () => {
         renderComponent(ctx, {
           items: itemsDefault,
           fitMode: 'reduction',
+          style: { width: 200 },
         });
 
-        expect(getItem(ctx, itemsDefault.length)).toHaveTextContent('+1');
+        expect(getItem(ctx, itemsDefault.length)).toHaveTextContent('+4');
       });
     });
   });

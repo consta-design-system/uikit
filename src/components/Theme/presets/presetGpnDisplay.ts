@@ -9,7 +9,7 @@ import '../_typo/Theme_typo_default.css';
 import '../_motion/Theme_motion_default.css';
 import '../_radius/Theme_radius_default.css';
 import '../_size/Theme_size_default.css';
-import '../_bridge/Theme_bridge_default.css';
+import '../_bridge/Theme_bridge_legacy.css';
 
 import { ThemePreset } from '../Theme';
 
@@ -26,6 +26,6 @@ export const presetGpnDisplay: ThemePreset = {
   radius: 'default',
   typo: 'default',
   motion: 'default',
-  bridge: 'default',
+  bridge: 'legacy',
   base: 'default',
 };

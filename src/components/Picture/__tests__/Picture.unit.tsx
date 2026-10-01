@@ -22,7 +22,11 @@ const renderComponent = (ctx: TestContext, props: PictureProps) => {
     root.render(
       <reatomContext.Provider value={top()}>
         <Theme preset={presetGpnDefault}>
-          <Picture {...props} data-testid={testId} />
+          <Picture
+            style={{ width: '100px', height: '100px' }}
+            {...props}
+            data-testid={testId}
+          />
         </Theme>
       </reatomContext.Provider>,
     );
@@ -63,8 +67,8 @@ describe('Компонент Picture', () => {
     test('рендерит изображение из объекта с несколькими ключами', (ctx) =>
       context.start(async () => {
         const src: PicturePropSrc = {
-          'gpnDefault--0--1x': 'https://example.com/image-1x.jpg',
-          'gpnDefault--0--2x': 'https://example.com/image-2x.jpg',
+          'light--0--1x': 'https://example.com/image-1x.jpg',
+          'light--0--2x': 'https://example.com/image-2x.jpg',
         };
         renderComponent(ctx, { src });
 
