@@ -2659,19 +2659,25 @@
     webpack-manifest-plugin "^5.0.0"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/table@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@consta/table/-/table-0.8.0.tgz#a2ee8475f3209b76b6e6314dcec23284052a9a29"
-  integrity sha512-yb70qqyI0+OCmNH/05tiGvL2Sy/+tDa3uQrTaSHyudeF8MSwBT7AA8beUlPLvFU23mSPq1fjFcREThjIb2VuAg==
+"@consta/table@https://pkg.pr.new/consta-design-system/table/@consta/table@5be04f4":
+  version "0.8.1"
+  resolved "https://pkg.pr.new/consta-design-system/table/@consta/table@5be04f4#df86f05c3bbc5cf7c62f7ff2cda55c6801446e0c"
 
-"@consta/uikit@5.10.0":
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/@consta/uikit/-/uikit-5.10.0.tgz#df7a7b154c9db635fd20e58c48a1c763063a852e"
-  integrity sha512-/eNgVdEtaKr7OSagvmOXBV46g985pyXVASm9NRmopUjtnaL/Jba91ZxpGAOwqZrbZnYA1Iagq8kTeanvVY7pEQ==
+"@consta/theme@https://pkg.pr.new/consta-design-system/themes/@consta/themes@c6c2aa0":
+  version "1.0.1"
+  resolved "https://pkg.pr.new/consta-design-system/themes/@consta/themes@c6c2aa0#dd4a73cfd01320865bf114817b5b18e06d56c830"
+  dependencies:
+    "@oclif/command" "^1.8.16"
+    fs-extra "^10.0.1"
+    log-symbols "^7.0.1"
 
 "@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@03b690f":
   version "5.34.0-alpha.1"
   resolved "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@03b690f#e4a8b5aed51c2e37f1da3b190394edf1f90080df"
+
+"@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@8e91bc1":
+  version "5.34.0-alpha.2"
+  resolved "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@8e91bc1#1691d3e01a5ba8bc41d6a58ff33d070c70dbfac3"
 
 "@cspell/cspell-bundled-dicts@8.16.1":
   version "8.16.1"
@@ -11104,6 +11110,11 @@ is-unicode-supported@^0.1.0:
   resolved "https://registry.yarnpkg.com/is-unicode-supported/-/is-unicode-supported-0.1.0.tgz#3f26c76a809593b52bfa2ecb5710ed2779b522a7"
   integrity sha512-knxG2q4UC3u8stRGyAVJCOdxFmv5DZiRcdlIaAQXAbSfJya+OhopNotLQrstBhququ4ZpuKbDc/8S6mgXgPFPw==
 
+is-unicode-supported@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/is-unicode-supported/-/is-unicode-supported-2.1.0.tgz#09f0ab0de6d3744d48d265ebb98f65d11f2a9b3a"
+  integrity sha512-mE00Gnza5EEB3Ds0HfMyllZzbBrmLOX3vfWoj9A9PEnTfratQ/BcaJOuMhnkhjXvb2+FkY3VuHqtAGpTPmglFQ==
+
 is-utf8@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
@@ -12502,6 +12513,14 @@ log-symbols@^4.1.0:
   dependencies:
     chalk "^4.1.0"
     is-unicode-supported "^0.1.0"
+
+log-symbols@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-7.0.1.tgz#f52e68037d96f589fc572ff2193dc424d48c195b"
+  integrity sha512-ja1E3yCr9i/0hmBVaM0bfwDjnGy8I/s6PP4DFp+yP+a+mrHO4Rm7DtmnqROTUkHIkqffC84YY7AeqX6oFk0WFg==
+  dependencies:
+    is-unicode-supported "^2.0.0"
+    yoctocolors "^2.1.1"
 
 log-update@^4.0.0:
   version "4.0.0"
@@ -19946,6 +19965,11 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+yoctocolors@^2.1.1:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/yoctocolors/-/yoctocolors-2.2.0.tgz#c4b68ee477f3982c33e4de24a5aa4a354be506d3"
+  integrity sha512-xYqdZFUK/VYazNl/oCDYN+3WloWQwMfZxBoiNt6qNyk+xfOdi598muWE42rNZFp1kNOiqW936q5RhUdnpqElSg==
 
 zwitch@^1.0.0:
   version "1.0.5"

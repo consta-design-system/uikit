@@ -1,24 +1,31 @@
 import '../Theme.css';
-import '../_color/Theme_color_gpnDefault.css';
-import '../_color/Theme_color_gpnDark.css';
-import '../_color/Theme_color_gpnDisplay.css';
-import '../_control/Theme_control_gpnDefault.css';
-import '../_font/Theme_font_gpnDefault.css';
-import '../_size/Theme_size_gpnDefault.css';
-import '../_space/Theme_space_gpnDefault.css';
-import '../_shadow/Theme_shadow_gpnDefault.css';
+import '../_base/Theme_base_default.css';
+import '../_border/Theme_border_default.css';
+import '../_color/Theme_color_light.css';
+import '../_color/Theme_color_dark.css';
+import '../_shadow/Theme_shadow_default.css';
+import '../_space/Theme_space_default.css';
+import '../_typo/Theme_typo_default.css';
+import '../_motion/Theme_motion_default.css';
+import '../_radius/Theme_radius_default.css';
+import '../_size/Theme_size_default.css';
+import '../_bridge/Theme_bridge_default.css';
 
 import { ThemePreset } from '../Theme';
 
 export const presetGpnDisplay: ThemePreset = {
   color: {
-    primary: 'gpnDisplay',
-    accent: 'gpnDark',
-    invert: 'gpnDefault',
+    primary: 'light',
+    accent: 'dark',
+    invert: 'dark',
   },
-  control: 'gpnDefault',
-  font: 'gpnDefault',
-  size: 'gpnDefault',
-  space: 'gpnDefault',
-  shadow: 'gpnDefault',
+  size: 'default',
+  space: 'default',
+  shadow: 'default',
+  border: 'default',
+  radius: 'default',
+  typo: 'default',
+  motion: 'default',
+  bridge: 'default',
+  base: 'default',
 };
