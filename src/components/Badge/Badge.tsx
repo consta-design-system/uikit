@@ -51,9 +51,15 @@ export const Badge = forwardRefWithAs<BadgeProps>((props, ref) => {
   const Tag = as as string;
   const { themeClassNames } = useTheme();
 
+  console.log(themeClassNames);
+
   const className =
     status !== 'system' && status !== 'disabled' && view === 'filled'
-      ? classnames(props.className, themeClassNames.color.accent)
+      ? classnames(
+          props.className,
+          themeClassNames.color.accent,
+          themeClassNames.bridge,
+        )
       : props.className;
   const IconLeft = iconLeft ?? icon;
   const counter =

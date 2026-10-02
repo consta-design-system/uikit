@@ -1,8 +1,7 @@
 import './DatePickerDropdown.css';
 
 import { Locale } from 'date-fns';
-import React, { forwardRef, useCallback, useRef, useState } from 'react';
-import { Transition } from 'react-transition-group';
+import React, { forwardRef, useCallback, useState } from 'react';
 
 import {
   DateTime,
@@ -15,8 +14,8 @@ import {
   TimeOptions,
 } from '##/components/DateTime/helpers/types';
 import { Direction, Popover } from '##/components/Popover';
+import { Transition } from '##/components/Transition';
 import { useFlag } from '##/hooks/useFlag';
-import { useForkRef } from '##/hooks/useForkRef';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cn } from '##/utils/bem';
 import { DateRange } from '##/utils/types/Date';
@@ -74,7 +73,7 @@ const moveMap: Record<DateTimePropType, MoveType> = {
 const cnDatePickerDropdown = cn('DatePickerDropdown');
 
 export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef(
-  (props, componentRef) => {
+  (props, ref) => {
     const {
       form = datePickerPropDropdownFormDefault,
       anchorRef,
@@ -87,7 +86,6 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef(
       ...otherProps
     } = props;
 
-    const rootRef = useRef<HTMLDivElement>(null);
     const [direction, setDirection] = useState<Direction>();
 
     const [visibleAdditionalControls, setVisibleAdditionalControls] =
@@ -102,15 +100,8 @@ export const DatePickerDropdown: DatePickerDropdownComponent = forwardRef(
       [props.type],
     );
 
-    const ref = useForkRef([componentRef, rootRef]);
-
     return (
-      <Transition
-        in={isOpen}
-        unmountOnExit
-        timeout={animateTimeout}
-        nodeRef={rootRef}
-      >
+      <Transition in={isOpen} unmountOnExit timeout={animateTimeout}>
         {(animate) => {
           return (
             <Popover

@@ -83,6 +83,7 @@ export type SelectProps<
     labelIcon?: IconComponent;
     labelPosition?: 'top' | 'left';
     caption?: string;
+    dropdownContainer?: HTMLElement;
   },
   HTMLDivElement
 > &

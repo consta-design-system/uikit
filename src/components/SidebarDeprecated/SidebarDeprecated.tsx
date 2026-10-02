@@ -1,13 +1,13 @@
 import './SidebarDeprecated.css';
 
 import React, { useEffect, useRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import {
   PortalWithTheme,
   PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
 import { useTheme } from '##/components/Theme/Theme';
+import { Transition } from '##/components/Transition';
 import { useGlobalKeys } from '##/hooks/useGlobalKeys';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cn } from '##/utils/bem';
@@ -45,7 +45,7 @@ export type SidebarProps = PropsWithHTMLAttributes<
     size?: SidebarPropSize;
     rootClassName?: string;
     children?: React.ReactNode;
-    container?: HTMLDivElement | undefined;
+    container?: HTMLElement | undefined;
     afterClose?: () => void;
   },
   HTMLDivElement
@@ -113,8 +113,6 @@ export const Sidebar: SidebarComponent = (props) => {
 
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const portalRef = useRef<HTMLDivElement>(null);
-
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -130,17 +128,10 @@ export const Sidebar: SidebarComponent = (props) => {
   });
 
   return (
-    <Transition
-      in={isOpen}
-      unmountOnExit
-      timeout={240}
-      nodeRef={portalRef}
-      onExiting={afterClose}
-    >
+    <Transition in={isOpen} unmountOnExit timeout={240} onExited={afterClose}>
       {(animate) => (
         <PortalWithTheme
           preset={theme}
-          ref={portalRef}
           container={container}
           className={cnSidebar({ position, hasOverlay }, [rootClassName])}
           style={

@@ -1,0 +1,36 @@
+.Theme_space_default {
+  --space-control-inset-l: var(--base-space-xl);
+  --space-control-inset-m: var(--base-space-l);
+  --space-control-inset-s: var(--base-space-m);
+  --space-control-inset-xs: var(--base-space-s);
+  --space-global-gap-2xl: var(--base-space-xl);
+  --space-global-gap-2xs: var(--base-space-3xs);
+  --space-global-gap-3xl: var(--base-space-2xl);
+  --space-global-gap-3xs: var(--base-space-3xs);
+  --space-global-gap-4xl: var(--base-space-3xl);
+  --space-global-gap-5xl: var(--base-space-4xl);
+  --space-global-gap-6xl: var(--base-space-5xl);
+  --space-global-gap-l: var(--base-space-m);
+  --space-global-gap-m: var(--base-space-s);
+  --space-global-gap-s: var(--base-space-xs);
+  --space-global-gap-xl: var(--base-space-l);
+  --space-global-gap-xs: var(--base-space-2xs);
+  --space-global-inset-2xl: var(--base-space-xl);
+  --space-global-inset-2xs: var(--base-space-3xs);
+  --space-global-inset-3xl: var(--base-space-2xl);
+  --space-global-inset-3xs: var(--base-space-3xs);
+  --space-global-inset-4xl: var(--base-space-3xl);
+  --space-global-inset-5xl: var(--base-space-4xl);
+  --space-global-inset-6xl: var(--base-space-5xl);
+  --space-global-inset-l: var(--base-space-m);
+  --space-global-inset-m: var(--base-space-s);
+  --space-global-inset-s: var(--base-space-xs);
+  --space-global-inset-xl: var(--base-space-l);
+  --space-global-inset-xs: var(--base-space-2xs);
+  --space-global-section-2xl: var(--base-space-4xl);
+  --space-global-section-3xl: var(--base-space-5xl);
+  --space-global-section-l: var(--base-space-2xl);
+  --space-global-section-m: var(--base-space-xl);
+  --space-global-section-s: var(--base-space-l);
+  --space-global-section-xl: var(--base-space-3xl);
+}

@@ -88,6 +88,7 @@ export const TextFieldRender = <TYPE extends string>(
     iconSize: iconSizeProp,
     focused,
     onClick,
+    fakeElementContainer,
     // onKey props
     onKeyDown: onKeyDownProp,
     onKeyDownCapture,
@@ -253,6 +254,7 @@ export const TextFieldRender = <TYPE extends string>(
     cols,
     minRows: minRows || rows,
     maxRows: maxRows || rows,
+    portalRoot: fakeElementContainer,
     ref: useForkRef([inputRef, inputRefProp]) as (
       node: HTMLTextAreaElement,
     ) => void,

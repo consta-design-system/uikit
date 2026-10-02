@@ -194,6 +194,7 @@ export type ContextMenuProps<
     spareDirection?: Direction;
     onSetDirection?: (direction: Direction) => void;
     onClickOutside?: ClickOutsideHandler;
+    clickOutsideSubscriber?: HTMLElement;
     isOpen?: boolean;
     form?: ContextMenuForm;
     isMobile?: boolean;
@@ -298,6 +299,7 @@ export type ContextMenuWrapperProps = PropsWithHTMLAttributes<
     isMobile?: boolean;
     form?: ContextMenuForm;
     onClickOutside?: ClickOutsideHandler;
+    clickOutsideSubscriber?: HTMLElement;
     spareDirection?: Direction;
     possibleDirections?: Direction[];
     size?: ContextMenuPropSize;

@@ -22,12 +22,8 @@
           opacity 0.2s;
       }
 
+      &_entered,
       &_entering {
-        opacity: 0;
-        transform: scale(0.5);
-      }
-
-      &_entered {
         opacity: 1;
         transform: scale(1);
       }

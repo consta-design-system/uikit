@@ -1,0 +1,11 @@
+.Theme_radius_default {
+  --radius-control-default: var(--base-radius-xs);
+  --radius-control-nested: var(--base-radius-2xs);
+  --radius-global-circle: 50%;
+  --radius-global-image: var(--base-radius-s);
+  --radius-global-layer: var(--base-radius-m);
+  --radius-global-modal: var(--base-radius-l);
+  --radius-global-pill: 100em;
+  --radius-global-square: var(--base-radius-none);
+  --radius-global-surface: var(--base-radius-m);
+}

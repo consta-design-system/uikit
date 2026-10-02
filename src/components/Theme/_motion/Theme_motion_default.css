@@ -1,0 +1,13 @@
+.Theme_motion_default {
+  --motion-control-duration-default: var(--base-motion-duration-s);
+  --motion-control-easing-default: var(--base-motion-easing-default);
+  --motion-global-duration-instant: var(--base-motion-duration-xs);
+  --motion-global-duration-layer: var(--base-motion-duration-m);
+  --motion-global-duration-page: var(--base-motion-duration-l);
+  --motion-global-duration-pending: 1200ms;
+  --motion-global-easing-emphasis: var(--base-motion-easing-standard);
+  --motion-global-easing-enter: var(--base-motion-easing-enter);
+  --motion-global-easing-exit: var(--base-motion-easing-exit);
+  --motion-global-easing-pending: cubic-bezier(0, 0, 1, 1);
+  --motion-global-easing-progress: var(--base-motion-easing-linear);
+}

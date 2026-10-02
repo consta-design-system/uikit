@@ -5,11 +5,11 @@ import { IconRing } from '@consta/icons/IconRing';
 import { IconTrash } from '@consta/icons/IconTrash';
 import { Example } from '@consta/stand';
 import React, { useRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import { Button } from '##/components/Button';
 import { ModalLayout } from '##/components/Modal';
 import { Popover } from '##/components/Popover';
+import { Transition } from '##/components/Transition';
 import { useFlag } from '##/hooks/useFlag';
 import { cnMixCard } from '##/mixs/MixCard';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
@@ -86,7 +86,6 @@ const cnNotificationExamplePopover = cn('NotificationExamplePopover');
 
 export const NotificationExamplePopover = () => {
   const [isOpen, setIsOpen] = useFlag();
-  const popoverRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -98,12 +97,7 @@ export const NotificationExamplePopover = () => {
         label="Открыть уведомления"
         onClick={setIsOpen.toggle}
       />
-      <Transition
-        in={isOpen}
-        unmountOnExit
-        timeout={animateTimeout}
-        nodeRef={popoverRef}
-      >
+      <Transition in={isOpen} unmountOnExit timeout={animateTimeout}>
         {(animate) => {
           return (
             <Popover
@@ -113,7 +107,6 @@ export const NotificationExamplePopover = () => {
               ])}
               offset="xs"
               anchorRef={buttonRef}
-              ref={popoverRef}
               direction="downStartLeft"
               style={{ zIndex: 1000 }}
               onClickOutside={setIsOpen.off}

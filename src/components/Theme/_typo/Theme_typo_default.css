@@ -1,0 +1,106 @@
+.Theme_typo_default {
+  --typo-global-body-l-letter-spacing: var(--base-typo-letter-spacing-normal);
+  --typo-global-body-l-line-height: var(--base-typo-line-height-l);
+  --typo-global-body-l-size: var(--base-typo-size-l);
+  --typo-global-body-l-weight: var(--base-typo-weight-regular);
+  --typo-global-body-m-letter-spacing: var(--base-typo-letter-spacing-normal);
+  --typo-global-body-m-line-height: var(--base-typo-line-height-l);
+  --typo-global-body-m-size: var(--base-typo-size-m);
+  --typo-global-body-m-weight: var(--base-typo-weight-regular);
+  --typo-global-body-s-letter-spacing: var(--base-typo-letter-spacing-normal);
+  --typo-global-body-s-line-height: var(--base-typo-line-height-l);
+  --typo-global-body-s-size: var(--base-typo-size-s);
+  --typo-global-body-s-weight: var(--base-typo-weight-regular);
+  --typo-global-body-xs-letter-spacing: var(--base-typo-letter-spacing-normal);
+  --typo-global-body-xs-line-height: var(--base-typo-line-height-s);
+  --typo-global-body-xs-size: var(--base-typo-size-xs);
+  --typo-global-body-xs-weight: var(--base-typo-weight-regular);
+  --typo-global-caption-m-letter-spacing: var(
+    --base-typo-letter-spacing-normal
+  );
+  --typo-global-caption-m-line-height: var(--base-typo-line-height-s);
+  --typo-global-caption-m-size: var(--base-typo-size-xs);
+  --typo-global-caption-m-weight: var(--base-typo-weight-regular);
+  --typo-global-caption-s-letter-spacing: var(--base-typo-letter-spacing-wide);
+  --typo-global-caption-s-line-height: var(--base-typo-line-height-xs);
+  --typo-global-caption-s-size: var(--base-typo-size-2xs);
+  --typo-global-caption-s-weight: var(--base-typo-weight-regular);
+  --typo-global-code-m-letter-spacing: var(--base-typo-letter-spacing-normal);
+  --typo-global-code-m-line-height: var(--base-typo-line-height-m);
+  --typo-global-code-m-size: var(--base-typo-size-s);
+  --typo-global-code-m-weight: var(--base-typo-weight-regular);
+  --typo-global-code-s-letter-spacing: var(--base-typo-letter-spacing-normal);
+  --typo-global-code-s-line-height: var(--base-typo-line-height-s);
+  --typo-global-code-s-size: var(--base-typo-size-xs);
+  --typo-global-code-s-weight: var(--base-typo-weight-regular);
+  --typo-global-display-l-letter-spacing: var(
+    --base-typo-letter-spacing-tighter
+  );
+  --typo-global-display-l-line-height: var(--base-typo-line-height-2xs);
+  --typo-global-display-l-size: var(--base-typo-size-6xl);
+  --typo-global-display-l-weight: var(--base-typo-weight-bold);
+  --typo-global-display-m-letter-spacing: var(
+    --base-typo-letter-spacing-tighter
+  );
+  --typo-global-display-m-line-height: var(--base-typo-line-height-2xs);
+  --typo-global-display-m-size: var(--base-typo-size-5xl);
+  --typo-global-display-m-weight: var(--base-typo-weight-bold);
+  --typo-global-display-s-letter-spacing: var(
+    --base-typo-letter-spacing-tighter
+  );
+  --typo-global-display-s-line-height: var(--base-typo-line-height-xs);
+  --typo-global-display-s-size: var(--base-typo-size-4xl);
+  --typo-global-display-s-weight: var(--base-typo-weight-bold);
+  --typo-global-family-body: var(--base-typo-family-primary);
+  --typo-global-family-caption: var(--base-typo-family-primary);
+  --typo-global-family-code: var(--base-typo-family-mono);
+  --typo-global-family-display: var(--base-typo-family-primary);
+  --typo-global-family-heading: var(--base-typo-family-primary);
+  --typo-global-family-label: var(--base-typo-family-primary);
+  --typo-global-heading-l-letter-spacing: var(
+    --base-typo-letter-spacing-normal
+  );
+  --typo-global-heading-l-line-height: var(--base-typo-line-height-xs);
+  --typo-global-heading-l-size: var(--base-typo-size-2xl);
+  --typo-global-heading-l-weight: var(--base-typo-weight-bold);
+  --typo-global-heading-m-letter-spacing: var(
+    --base-typo-letter-spacing-normal
+  );
+  --typo-global-heading-m-line-height: var(--base-typo-line-height-s);
+  --typo-global-heading-m-size: var(--base-typo-size-xl);
+  --typo-global-heading-m-weight: var(--base-typo-weight-bold);
+  --typo-global-heading-s-letter-spacing: var(
+    --base-typo-letter-spacing-normal
+  );
+  --typo-global-heading-s-line-height: var(--base-typo-line-height-s);
+  --typo-global-heading-s-size: var(--base-typo-size-l);
+  --typo-global-heading-s-weight: var(--base-typo-weight-bold);
+  --typo-global-heading-xl-letter-spacing: var(
+    --base-typo-letter-spacing-normal
+  );
+  --typo-global-heading-xl-line-height: var(--base-typo-line-height-xs);
+  --typo-global-heading-xl-size: var(--base-typo-size-3xl);
+  --typo-global-heading-xl-weight: var(--base-typo-weight-bold);
+  --typo-global-heading-xs-letter-spacing: var(
+    --base-typo-letter-spacing-normal
+  );
+  --typo-global-heading-xs-line-height: var(--base-typo-line-height-s);
+  --typo-global-heading-xs-size: var(--base-typo-size-m);
+  --typo-global-heading-xs-weight: var(--base-typo-weight-bold);
+  --typo-global-label-l-letter-spacing: var(--base-typo-letter-spacing-normal);
+  --typo-global-label-l-line-height: var(--base-typo-line-height-xs);
+  --typo-global-label-l-size: var(--base-typo-size-l);
+  --typo-global-label-l-weight: var(--base-typo-weight-semibold);
+  --typo-global-label-m-letter-spacing: var(--base-typo-letter-spacing-normal);
+  --typo-global-label-m-line-height: var(--base-typo-line-height-xs);
+  --typo-global-label-m-size: var(--base-typo-size-m);
+  --typo-global-label-m-weight: var(--base-typo-weight-semibold);
+  --typo-global-label-s-letter-spacing: var(--base-typo-letter-spacing-normal);
+  --typo-global-label-s-line-height: var(--base-typo-line-height-xs);
+  --typo-global-label-s-size: var(--base-typo-size-s);
+  --typo-global-label-s-weight: var(--base-typo-weight-semibold);
+  --typo-global-label-xs-letter-spacing: var(--base-typo-letter-spacing-normal);
+  --typo-global-label-xs-line-height: var(--base-typo-line-height-xs);
+  --typo-global-label-xs-size: var(--base-typo-size-xs);
+  --typo-global-label-xs-weight: var(--base-typo-weight-semibold);
+}

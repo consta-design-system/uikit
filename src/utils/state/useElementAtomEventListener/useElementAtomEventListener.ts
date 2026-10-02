@@ -1,27 +1,27 @@
-import { AtomMut } from '@reatom/framework';
-import { useUpdate } from '@reatom/npm-react';
+import { AtomLike } from '@reatom/core';
 import { useEffect, useRef } from 'react';
 
 import { setRef } from '##/utils/setRef';
 
 export const useElementAtomEventListener = <T extends HTMLElement>(
-  elementAtom: AtomMut<T | null>,
+  elementAtom: AtomLike<T | null>,
   type: keyof DocumentEventMap,
   listener: EventListener,
 ) => {
   const currentRef = useRef<T | null>(null);
-  useUpdate(
-    (ctx, element, listener) => {
+
+  useEffect(() => {
+    const unsubscribe = elementAtom.subscribe((element) => {
+      // console.log(element, type, listener);
       currentRef.current?.removeEventListener(type, listener);
       element?.addEventListener(type, listener);
 
-      setRef(currentRef, element || null);
-    },
-    [elementAtom, listener],
-  );
-  useEffect(() => {
+      setRef(currentRef, element);
+    });
+
     return () => {
+      unsubscribe();
       currentRef.current?.removeEventListener(type, listener);
     };
-  }, [type, listener]);
+  }, [type, listener, elementAtom]);
 };

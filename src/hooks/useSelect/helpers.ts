@@ -50,5 +50,5 @@ export const scrollToIndex: ScrollToIndexFunctionType = (
   const elements: NodeListOf<HTMLDivElement> =
     dropdownRef.current.querySelectorAll('div[role=option]');
 
-  scrollIntoView(elements[index], dropdownRef.current);
+  scrollIntoView(elements[index]);
 };
