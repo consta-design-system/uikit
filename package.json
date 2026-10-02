@@ -115,7 +115,7 @@
     "@babel/preset-typescript": "^7.28.5",
     "@bem/sdk.naming.cell.match": "^0.1.3",
     "@bem/sdk.naming.presets": "^0.2.3",
-    "@consta/stand": "https://pkg.pr.new/consta-design-system/stand/@consta/stand@bb0eded",
+    "@consta/stand": "https://pkg.pr.new/consta-design-system/stand/@consta/stand@93cdc61",
     "@consta/table": "https://pkg.pr.new/consta-design-system/table/@consta/table@5be04f4",
     "@consta/theme": "https://pkg.pr.new/consta-design-system/themes/@consta/themes@c6c2aa0",
     "@consta/uikit": "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@8e91bc1",

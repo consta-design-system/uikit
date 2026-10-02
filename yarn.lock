@@ -2589,19 +2589,19 @@
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-1.7.1.tgz#438d6fc7cb20ac1db67cc9502aa06eb83682ac62"
   integrity sha512-ZFngpjo9MlVyNnRU0SJqg2kbzHmh41ydqCYLOWokvhPjlgqUS7W+R38+dHSpIMyMe33wKBvF8LciSqhGwmuP9w==
 
-"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@bb0eded":
-  version "0.0.163-alpha"
-  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@bb0eded#2adff80c0bb7eed1d11ce05a4bd38eeb674d49fc"
+"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@93cdc61":
+  version "0.0.162"
+  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@93cdc61#4a777b728fa094511e6749f5bab8cddf3b9dedfa"
   dependencies:
     "@consta/header" "^3.1.0"
     "@consta/icons" "^1.7.1"
-    "@consta/uikit" "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@03b690f"
+    "@consta/uikit" "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@69ca435"
     "@mdx-js/loader" "^2.3.0"
     "@mdx-js/react" "^2.3.0"
     "@oclif/command" "^1.8.22"
     "@pmmmwh/react-refresh-webpack-plugin" "^0.5.10"
     "@reatom/core" "^1001.3.0"
-    "@reatom/react" "^1001.0.1"
+    "@reatom/react" "https://pkg.pr.new/@reatom/react@1324"
     "@svgr/core" "^6.5.1"
     "@svgr/plugin-jsx" "^6.5.1"
     "@svgr/plugin-prettier" "^6.5.1"
@@ -2638,6 +2638,7 @@
     react-refresh "^0.11.0"
     react-router5 "^8.0.1"
     react-syntax-highlighter "^15.5.0"
+    reatom-router5 "^3.0.2"
     remark-gfm "^1.0.0"
     resolve "^1.20.0"
     resolve-url-loader "^4.0.0"
@@ -2671,9 +2672,9 @@
     fs-extra "^10.0.1"
     log-symbols "^7.0.1"
 
-"@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@03b690f":
-  version "5.34.0-alpha.1"
-  resolved "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@03b690f#e4a8b5aed51c2e37f1da3b190394edf1f90080df"
+"@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@69ca435":
+  version "5.34.0-alpha.2"
+  resolved "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@69ca435#a98776f33a7c3655fd675279f1078be09067f63b"
 
 "@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@8e91bc1":
   version "5.34.0-alpha.2"
@@ -4019,10 +4020,9 @@
   optionalDependencies:
     idb-keyval "^6.2.4"
 
-"@reatom/react@^1001.0.1":
+"@reatom/react@https://pkg.pr.new/@reatom/react@1324":
   version "1001.0.1"
-  resolved "https://registry.yarnpkg.com/@reatom/react/-/react-1001.0.1.tgz#a5159652b6bc2b2a32e06f02902a0a1b4ae45995"
-  integrity sha512-xU5diWeNIrVmJs5a5G6RTPOAz3OhPTtT7iqswPKJs5tGEahf2tCWo25JKEALv79pG0eqTGGJ5W/k7llweOhe3g==
+  resolved "https://pkg.pr.new/@reatom/react@1324#c117ec42f9997da2e3287f9d0e2a22512b044150"
 
 "@rolldown/binding-android-arm-eabi@1.2.7":
   version "1.2.7"
@@ -16308,6 +16308,11 @@ readdirp@~3.6.0:
   integrity sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==
   dependencies:
     picomatch "^2.2.1"
+
+reatom-router5@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/reatom-router5/-/reatom-router5-3.0.2.tgz#baf55cda3ec187a97b3b952ec9f0f4fe681cb7b8"
+  integrity sha512-zS3BROB4MfSDKNSylrRC3U00RPkQVZgzIm4QTFYAKVZWttYCIwlLNkuiTuKvHJcCcSOytUArirVp7j212lBt+w==
 
 rechoir@^0.7.0:
   version "0.7.1"
