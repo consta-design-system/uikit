@@ -39,12 +39,12 @@ import { AvatarGroup } from '@consta/uikit/AvatarGroup';
 
 ```tsx
 export const avatarGroupPropSize = ['m', 's', 'xs', 'l'] as const;
-export type AvatarGroupPropSize = typeof avatarGroupPropSize[number];
+export type AvatarGroupPropSize = (typeof avatarGroupPropSize)[number];
 export const avatarGroupPropSizeDefault: AvatarGroupPropSize =
   avatarGroupPropSize[0];
 
 export const avatarGroupPropForm = ['round', 'brick', 'default'] as const;
-export type AvatarGroupPropForm = typeof avatarGroupPropForm[number];
+export type AvatarGroupPropForm = (typeof avatarGroupPropForm)[number];
 export const avatarGroupPropFormDefault: AvatarGroupPropForm =
   avatarGroupPropForm[0];
 
@@ -56,12 +56,12 @@ export type AvatarGroupDefaultItem = {
 
 | Свойство                                        | Тип                                   | По умолчанию | Описание                                                                                                                                                                                                                                 |
 | ----------------------------------------------- | ------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`items`](#элементы)                            | `ITEM[]`                              | -            | Список элементов для отображения аватаров                                                                                                                                                                                                |
+| [`items`](#содержимое)                          | `ITEM[]`                              | -            | Список элементов для отображения аватаров                                                                                                                                                                                                |
 | [`visibleCount`](#количество-видимых-элементов) | `number` \| `'auto'`                  | `4`          | Количество отображаемых аватаров                                                                                                                                                                                                         |
 | [`size`](#размер)                               | `'xs' \| 's' \| 'm' \| 'l'`           | `'m'`        | Размер аватаров                                                                                                                                                                                                                          |
 | [`form`](#форма)                                | `'default' \| 'round' \| 'brick'`     | `'round'`    | Форма аватаров                                                                                                                                                                                                                           |
-| [`getItemUrl`](#ссылка-на-изображение)          | `(item: ITEM) => string \| undefined` | -            | Функция, которая возвращает ссылку на изображение для каждого элемента. Используется для динамического определения `url` на основе данных элемента. Если функция не указана, используется поле `url` из объекта `AvatarGroupDefaultItem` |
-| [`getItemName`](#имя-пользователя)              | `(item: ITEM) => string \| undefined` | -            | Функция, которая возвращает имя пользователя для каждого элемента. Используется для динамического определения `name` на основе данных элемента. Если функция не указана, используется поле `name` из объекта `AvatarGroupDefaultItem`.   |
+| [`getItemUrl`](#изображение-и-имя)              | `(item: ITEM) => string \| undefined` | -            | Функция, которая возвращает ссылку на изображение для каждого элемента. Используется для динамического определения `url` на основе данных элемента. Если функция не указана, используется поле `url` из объекта `AvatarGroupDefaultItem` |
+| [`getItemName`](#изображение-и-имя)             | `(item: ITEM) => string \| undefined` | -            | Функция, которая возвращает имя пользователя для каждого элемента. Используется для динамического определения `name` на основе данных элемента. Если функция не указана, используется поле `name` из объекта `AvatarGroupDefaultItem`.   |
 | [`monochrome`](#монохромный-режим)              | `boolean`                             | -            | Включение монохромного режима для аватаров                                                                                                                                                                                               |
 | `className`                                     | `string`                              | -            | Дополнительный CSS-класс для компонента                                                                                                                                                                                                  |
 | `as`                                            | `React.ElementType`                   | -            | HTML-тег, в виде которого компонент будет представлен в DOM                                                                                                                                                                              |
