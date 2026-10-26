@@ -158,7 +158,7 @@ const rows = [
 Вот так можно создать две колонки для таблицы — номер и имя.
 
 ```tsx
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -191,7 +191,7 @@ const rows = [
   },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -225,7 +225,7 @@ const App = () => {
 <Table columns={columns} rows={rows} stickyHeader />
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-зафиксированным-заголовком)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-зафиксированным-заголовком)
 
 ### Зафиксированная колонка
 
@@ -236,14 +236,14 @@ const App = () => {
 <Table columns={columns} rows={rows} stickyColumns=1 />
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-зафиксированной-колонкой)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-зафиксированной-колонкой)
 
 ### Скрытая колонка
 
 Чтобы скрыть колонку, добавьте в объект с описанием этой колонки `hidden: true`.
 
 ```tsx
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: 'Имя',
     accessor: 'fullName',
@@ -258,7 +258,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 ];
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-со-скрытыми-колонками)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-со-скрытыми-колонками)
 
 ### Объединение ячеек
 
@@ -279,7 +279,7 @@ const rows = [
   { id: '5', person: 'Кристофер Робин', food: 'Мёд' },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: 'Кто',
     accessor: 'person',
@@ -325,7 +325,7 @@ const rows = [
   },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: 'Операция подтверждена',
     accessor: 'operationConfirmed',
@@ -340,7 +340,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 const App = () => <Table columns={columns} rows={rows} />;
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-ячейками--объединёнными-кастомной-функцией)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-ячейками--объединёнными-кастомной-функцией)
 
 [Посмотреть расширенный пример на GitHub](https://github.com/consta-design-system/uikit/blob/master/src/components/Table/__stand__/variants/TableVariantWithMergedByCustomCallbackCells/TableVariantWithMergedByCustomCallbackCells.tsx) (в переменной `WithMergedByCustomCallbackCells`)
 
@@ -382,7 +382,7 @@ const rowsWithColSpan = [
   },
 ];
 
-const withColSpan: TableProps<typeof rowsWithColSpan[number]> = {
+const withColSpan: TableProps<(typeof rowsWithColSpan)[number]> = {
   columns: [
     {
       title: 'Имя',
@@ -449,7 +449,7 @@ const rows = [
   },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -685,7 +685,7 @@ const TableExampleExpandable = () => {
 В него необходимо передать `({ column }: TableControl<{}>) => ReactNode`.
 
 ```tsx
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -711,7 +711,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 ];
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-дополнительным-элементом-в-заголовке)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-дополнительным-элементом-в-заголовке)
 
 ### Изменяемая ширина колонок
 
@@ -731,7 +731,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
 
 Если нужно удалять строки или добавлять их не только в конец таблицы, можно написать свой код на основе нашего примера.
 
-[Пример в работе](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-добавлением-удалением-строк)
+[Пример в работе](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-добавлением-удалением-строк)
 
 ### Заглушка для пустой таблицы
 
@@ -753,7 +753,7 @@ import { Text } from '@consta/uikit/Text';
 
 const rows = [];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -779,7 +779,7 @@ const App = () => {
 };
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-со-своим-текстом--если-нет-данных)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-со-своим-текстом--если-нет-данных)
 
 ### Постепенная загрузка
 
@@ -796,7 +796,7 @@ const App = () => {
 />
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-большим-количеством-строк)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-большим-количеством-строк)
 
 ### Обработка клика по ячейке
 
@@ -817,7 +817,7 @@ const App = () => {
 <Table columns={columns} rows={rows} onCellClick={({ e, type, columnIdx, ref, rowId }) => ...} />
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-обработкой-клика-по-ячейке)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-обработкой-клика-по-ячейке)
 
 ## Сортировка
 
@@ -843,7 +843,7 @@ const rows = [
   },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -884,7 +884,7 @@ export function TableExampleSort() {
     { id: '3', letter: 'В' },
   ];
 
-  const columns: TableColumn<typeof rows[number]>[] = [
+  const columns: TableColumn<(typeof rows)[number]>[] = [
     {
       title: '№',
       accessor: 'id',
@@ -994,7 +994,7 @@ const rows = [
   { id: '2', name: 'Василий' },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -1005,7 +1005,7 @@ const columns: TableColumn<typeof rows[number]>[] = [
   },
 ];
 
-const filters: TableFilters<typeof rows[number]> = [
+const filters: TableFilters<(typeof rows)[number]> = [
   {
     id: 'executor',
     name: 'Антон',
@@ -1089,7 +1089,7 @@ const filters = [
 ];
 ```
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-кастомными-фильтрами)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-кастомными-фильтрами)
 
 #### Свойства кастомного компонента фильтра
 
@@ -1142,7 +1142,7 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 
 В ответ обработчик должен возвращать строку.
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-со-своей-функцией-переименования-тега-в-фильтре)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-со-своей-функцией-переименования-тега-в-фильтре)
 
 ## Внешний вид
 
@@ -1186,7 +1186,7 @@ import { TableFilterContainer } from '@consta/uikit/Table';
 Чтобы поменять выравнивание по горизонтали для всех ячеек в колонке, добавьте в объект с описанием этой колонки атрибут `align`. Варианты: `'left'`, `'center'`, `'right'`.
 
 ```tsx
-const columnsAlignLeft: TableColumn<typeof rows[number]>[] = [
+const columnsAlignLeft: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -1203,7 +1203,7 @@ const columnsAlignLeft: TableColumn<typeof rows[number]>[] = [
 <TableExampleAlignLeft />
 
 ```tsx
-const columnsAlignCenter: TableColumn<typeof rows[number]>[] = [
+const columnsAlignCenter: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -1220,7 +1220,7 @@ const columnsAlignCenter: TableColumn<typeof rows[number]>[] = [
 <TableExampleAlignCenter />
 
 ```tsx
-const columnsAlignRight: TableColumn<typeof rows[number]>[] = [
+const columnsAlignRight: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -1317,7 +1317,7 @@ const rows = [
   },
 ];
 
-const columns: TableColumn<typeof rows[number]>[] = [
+const columns: TableColumn<(typeof rows)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -1383,7 +1383,7 @@ const App = () => {
 
 Функция должна возвращать название CSS-класса типа `string`.
 
-[Посмотреть пример](##LIBS.LIB.STAND/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-дополнительным-классом)
+[Посмотреть пример](##LIBS.LIB.STAND.TAB/lib:uikit/stand:components-table-deprecated/tab:use/hash:пример-таблицы-с-дополнительным-классом)
 
 ## Адаптивность
 
@@ -1413,7 +1413,7 @@ const rowsProf = [
   },
 ];
 
-const columns: TableColumn<typeof rowsProf[number]>[] = [
+const columns: TableColumn<(typeof rowsProf)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -1487,7 +1487,7 @@ const rowsProf = [
   },
 ];
 
-const columns: TableColumn<typeof rowsProf[number]>[] = [
+const columns: TableColumn<(typeof rowsProf)[number]>[] = [
   {
     title: '№',
     accessor: 'id',
@@ -1663,7 +1663,7 @@ type LazyLoad = {
 | [`rowCreateText?`](#возможность-добавить-строку)                 | `string`                                                                                                                     | `'+ Добавить строку'`                             | Текст на кнопке для создания новой строки                                                                             |
 | [`onRowHover?`](#выделение-строк)                                | `(arg: { id: string` &#124; `undefined; e: React.MouseEvent }) => void`                                                      | -                                                 | Функция, которая сработает при наведении на строку                                                                    |
 | [`onRowClick?`](#выделение-строк)                                | `(arg: { id: string; e: React.MouseEvent }) => void`                                                                         | -                                                 | Функция, которая сработает при клике на строку                                                                        |
-| [`onCellClick?`](#клик-по-ячейке)                                | `{ e: React.SyntheticEvent, type: CellClickType, columnIdx: number, ref: React.RefObject<HTMLDivElement>, rowId?: string, }` | -                                                 | Функция, которая сработает при клике на ячейку                                                                        |
+| [`onCellClick?`](#обработка-клика-по-ячейке)                     | `{ e: React.SyntheticEvent, type: CellClickType, columnIdx: number, ref: React.RefObject<HTMLDivElement>, rowId?: string, }` | -                                                 | Функция, которая сработает при клике на ячейку                                                                        |
 | [`getAdditionalClassName`](#дополнительный-css-класс-по-условию) | `(props: {column: any, row: any, isActive: boolean}) => string`                                                              | -                                                 | Функция, которая на основе данных в строке или колонке определяет CSS-класс, который нужно применить                  |
 | [`onSortBy?`](#сортировка-не-по-алфавиту)                        | `onSortBy`                                                                                                                   | `sortByDefault`                                   | Функция, которая срабатывает при нажатии на иконку сортировки                                                         |
 | [`lazyLoad?`](#постепенная-загрузка)                             | `LazyLoad`                                                                                                                   | `{ maxVisibleRows: 210; scrollableEl: tableRef }` | Включает виртуальную прокрутку в таблице                                                                              |

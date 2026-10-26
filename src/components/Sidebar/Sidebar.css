@@ -5,7 +5,9 @@
   left: 0;
   bottom: 0;
   display: flex;
-  overflow: hidden;
+
+  /* https://github.com/consta-design-system/uikit/issues/4118 */
+  overflow: clip;
   box-sizing: border-box;
 
   &:not(.Sidebar_hasOverlay) {

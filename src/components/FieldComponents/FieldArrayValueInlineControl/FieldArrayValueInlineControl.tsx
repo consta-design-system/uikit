@@ -149,6 +149,7 @@ export const FieldArrayValueInlineControl = factoryComponent<
     onBlur,
     autoFocus,
     inputTabIndex,
+    inputInputMode,
     inputAriaLabel,
     onKeyDown,
     onKeyDownCapture,
@@ -190,6 +191,7 @@ export const FieldArrayValueInlineControl = factoryComponent<
           onBlur={onBlur}
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={autoFocus}
+          inputMode={inputInputMode}
           tabIndex={inputTabIndex}
           aria-label={inputAriaLabel}
           onKeyDown={onKeyDown}

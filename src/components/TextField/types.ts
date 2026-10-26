@@ -96,6 +96,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributes<
     rightSide?: string | IconComponent;
     withClearButton?: boolean;
     autoComplete?: AutoCompete;
+    inputMode?: React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
     max?: number | string;
     min?: number | string;
     readOnly?: boolean;
