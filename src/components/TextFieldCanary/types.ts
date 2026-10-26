@@ -105,6 +105,7 @@ export type TextFieldProps<TYPE extends string> = PropsWithHTMLAttributesAndRef<
     clearButton?: boolean;
     iconClear?: IconComponent;
     autoComplete?: AutoCompete;
+    inputMode?: React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
     readOnly?: boolean;
     tabIndex?: number;
     ariaLabel?: string;

@@ -27,7 +27,6 @@ import { SnackBarExampleGetItemProgress } from './examples/SnackBarExampleGetIte
   - [Таймер](#таймер)
   - [Прогресс](#прогресс)
 - [Адаптивность](#адаптивность)
-- [Пример использования](#пример)
 
 </MdxMenu>
 
@@ -109,7 +108,7 @@ export type SnackBarPropGetItemProgress<ITEM> = (
 ) => number | boolean | undefined;
 
 export const snackBarPropForm = ['default', 'round', 'brick'] as const;
-export type SnackBarPropForm = typeof snackBarPropForm[number];
+export type SnackBarPropForm = (typeof snackBarPropForm)[number];
 ```
 
 ## Содержимое

@@ -63,6 +63,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
       leftSide,
       rightSide,
       autoComplete,
+      inputMode,
       clearButton,
       readOnly,
       type,
@@ -264,6 +265,7 @@ export const TextFieldTypeTextArray: TextFieldTypeComponent<'textarray'> =
             onPaste={onPaste}
             onPasteCapture={onPasteCapture}
             inputTabIndex={tabIndex}
+            inputInputMode={inputMode}
             onKeyDownCapture={onKeyDownCapture}
             onKeyUp={onKeyUp}
             onKeyUpCapture={onKeyUpCapture}
