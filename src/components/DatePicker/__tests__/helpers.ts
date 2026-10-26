@@ -1,48 +1,51 @@
-import { act, fireEvent, screen, within } from '@testing-library/react';
+import { within } from '@testing-library/react';
 
-import { animateTimeout } from '../../../mixs/MixPopoverAnimate/MixPopoverAnimate';
+import {
+  TestContext,
+  testOutsideId,
+  testPopoverId,
+  testRootId,
+} from '##/utils/vitest';
 
 export const testId = 'DatePicker';
 export const outsideId = 'outside';
-export const getRender = () => screen.getByTestId(testId);
-export const getOutside = () => screen.getByTestId(outsideId);
-export const getDropdown = () => screen.getByRole('listbox');
-export const getInput = () =>
-  getRender().querySelector(`input.TextField-Input`) as Element;
-export const inputFocus = () => fireEvent.click(getInput());
-export const inputChange = (value: string) => {
-  const input = getInput();
-  fireEvent.focus(input);
-  fireEvent.change(input, { target: { value } });
-};
-export const outsideClick = () => fireEvent.mouseDown(getOutside());
-export const animateDelay = () =>
-  act(() => {
-    jest.advanceTimersByTime(animateTimeout);
-  });
-export const getDateTimeItems = () =>
-  getDropdown().querySelectorAll(`.DateTimeItem`);
-export const getDateTimeTimeItems = () =>
-  getDropdown().querySelectorAll(`.DateTimeTypeDateTime-Time .DateTimeItem`);
-export const getDateTimeItem = (item = 0) => getDateTimeItems()[item];
-export const getDateTimeTimeItem = (item = 0) => getDateTimeTimeItems()[item];
-export const getDateTimeItemByText = (dateText: string) =>
-  within(getDropdown()).getByText(dateText);
-export const getDateTimeItemsSelected = () =>
-  getDropdown().querySelectorAll(`.DateTimeItem_selected`);
-export const getDateTimeItemSelected = (item = 0) =>
-  getDateTimeItemsSelected()[item];
-export const getDateTimeDaysSelected = () =>
-  getDropdown().querySelectorAll(
+export const getRender = (ctx: TestContext) =>
+  document.querySelector(`#${testRootId(ctx)} *[data-testid=${testId}]`);
+export const getOutside = (ctx: TestContext) =>
+  document.querySelector(`#${testOutsideId(ctx)}`) as HTMLDivElement;
+export const getDropdown = (ctx: TestContext) =>
+  document.querySelector(
+    `#${testPopoverId(ctx)} *[role="listbox"]`,
+  ) as HTMLDivElement;
+export const getInput = (ctx: TestContext) =>
+  getRender(ctx)?.querySelector(`input.TextField-Input`) as HTMLInputElement;
+export const inputFocus = (ctx: TestContext) => getInput(ctx).click();
+
+export const getDateTimeItems = (ctx: TestContext) =>
+  getDropdown(ctx).querySelectorAll(`.DateTimeItem`);
+export const getDateTimeTimeItems = (ctx: TestContext) =>
+  getDropdown(ctx).querySelectorAll(`.DateTimeTypeDateTime-Time .DateTimeItem`);
+export const getDateTimeItem = (ctx: TestContext, item = 0) =>
+  getDateTimeItems(ctx)[item];
+export const getDateTimeTimeItem = (ctx: TestContext, item = 0) =>
+  getDateTimeTimeItems(ctx)[item];
+export const getDateTimeItemByText = (ctx: TestContext, dateText: string) =>
+  within(getDropdown(ctx)).getByText(dateText);
+export const getDateTimeItemsSelected = (ctx: TestContext) =>
+  getDropdown(ctx).querySelectorAll(`.DateTimeItem_selected`);
+export const getDateTimeItemSelected = (ctx: TestContext, item = 0) =>
+  getDateTimeItemsSelected(ctx)[item];
+export const getDateTimeDaysSelected = (ctx: TestContext) =>
+  getDropdown(ctx).querySelectorAll(
     `.DateTimeTypeDateTime-Date .DateTimeItem_selected`,
   );
-export const getDateTimeDaySelected = (item = 0) =>
-  getDateTimeDaysSelected()[item];
-export const getDateTimeTimesSelected = () =>
-  getDropdown().querySelectorAll(
+export const getDateTimeDaySelected = (ctx: TestContext, item = 0) =>
+  getDateTimeDaysSelected(ctx)[item];
+export const getDateTimeTimesSelected = (ctx: TestContext) =>
+  getDropdown(ctx).querySelectorAll(
     `.DateTimeTypeDateTime-Time .DateTimeItem_selected`,
   );
-export const getDateTimeTimeSelected = (item = 0) =>
-  getDateTimeTimesSelected()[item];
-export const getAdditionalControls = () =>
-  getDropdown().querySelector(`.DatePickerAdditionalControls`);
+export const getDateTimeTimeSelected = (ctx: TestContext, item = 0) =>
+  getDateTimeTimesSelected(ctx)[item];
+export const getAdditionalControls = (ctx: TestContext) =>
+  getDropdown(ctx).querySelector(`.DatePickerAdditionalControls`);

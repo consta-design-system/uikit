@@ -8,11 +8,11 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Transition } from 'react-transition-group';
 
 import { Button } from '##/components/Button';
 import { ListBox } from '##/components/ListCanary';
 import { Direction, Popover } from '##/components/Popover/Popover';
+import { Transition } from '##/components/Transition';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
@@ -29,7 +29,7 @@ const TabsMoreItemsRender = (
   const { items, renderItem, getItemKey, height, size, onChange } = props;
   const [isOpen, setIsOpen] = useFlag(false);
   const buttonRef = useRef<HTMLDivElement>(null);
-  const popoverRef = useRef<HTMLDivElement>(null);
+
   const [direction, setDirection] = useState<Direction>('downStartLeft');
   const [highlightIndex, setHighlightIndex] = useState(-1);
 
@@ -100,17 +100,11 @@ const TabsMoreItemsRender = (
           onKeyDown={handleKeyDown}
         />
       </div>
-      <Transition
-        in={isOpen}
-        unmountOnExit
-        nodeRef={popoverRef}
-        timeout={animateTimeout}
-      >
+      <Transition in={isOpen} unmountOnExit timeout={animateTimeout}>
         {(animate) => (
           <Popover
             anchorRef={buttonRef}
             offset={-1}
-            ref={popoverRef}
             direction="downStartRight"
             onClickOutside={setIsOpen.off}
             spareDirection="downStartLeft"

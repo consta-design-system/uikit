@@ -74,6 +74,7 @@ function BreadcrumbsMoreRender<ITEM>(
     getItemOnClick,
     getItemSubMenu,
     onItemClick: onItemClickProp,
+    dropdownContainer,
     ...otherProps
   } = props;
 
@@ -135,6 +136,7 @@ function BreadcrumbsMoreRender<ITEM>(
         ]}
         offset="xs"
         size={contextMenuSizeMap[size]}
+        container={dropdownContainer}
       />
     </BreadcrumbsItem>
   );

@@ -95,6 +95,7 @@ const UserSelectRender = <
     searchFunction,
     style,
     dropdownForm = 'default',
+    dropdownContainer,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -327,6 +328,7 @@ const UserSelectRender = <
         notFound={notFound}
         hasItems={hasItems}
         labelForEmptyItems={labelForEmptyItems}
+        container={dropdownContainer}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

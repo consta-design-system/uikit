@@ -14,34 +14,52 @@ const cnNotificationGroup = cn('NotificationGroup');
 export const NotificationGroup: React.FC<NotificationGroupProps> = forwardRef<
   HTMLDivElement,
   NotificationGroupProps
->(({ title, actions, className, ...otherProps }, ref) => {
-  if (!title) {
-    return null;
-  }
+>(
+  (
+    {
+      title,
+      actions,
+      className,
+      dropdownContainer,
+      clickOutsideSubscriber,
+      ...otherProps
+    },
+    ref,
+  ) => {
+    if (!title) {
+      return null;
+    }
 
-  return (
-    <div
-      {...otherProps}
-      ref={ref}
-      className={cnNotificationGroup(null, [
-        className,
-        cnMixFlex({ gap: 'xs' }),
-      ])}
-    >
-      <Text
-        className={cnNotificationGroup('Label', [
-          cnMixFlex({ align: 'center' }),
+    return (
+      <div
+        {...otherProps}
+        ref={ref}
+        className={cnNotificationGroup(null, [
+          className,
+          cnMixFlex({ gap: 'xs' }),
         ])}
-        view="secondary"
-        weight="medium"
-        size="xs"
-        lineHeight="m"
-        fontStyle="italic"
       >
-        {title}
-      </Text>
+        <Text
+          className={cnNotificationGroup('Label', [
+            cnMixFlex({ align: 'center' }),
+          ])}
+          view="secondary"
+          weight="medium"
+          size="xs"
+          lineHeight="m"
+          fontStyle="italic"
+        >
+          {title}
+        </Text>
 
-      {actions?.length && <NotificationActions items={actions} />}
-    </div>
-  );
-});
+        {actions?.length && (
+          <NotificationActions
+            items={actions}
+            dropdownContainer={dropdownContainer}
+            clickOutsideSubscriber={clickOutsideSubscriber}
+          />
+        )}
+      </div>
+    );
+  },
+);

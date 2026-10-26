@@ -13,6 +13,8 @@ export type NotificationGroupProps = PropsWithHTMLAttributesAndRef<
   {
     title?: string;
     actions?: NotificationGroupAction[];
+    dropdownContainer?: HTMLElement;
+    clickOutsideSubscriber?: HTMLElement;
   },
   HTMLDivElement
 >;

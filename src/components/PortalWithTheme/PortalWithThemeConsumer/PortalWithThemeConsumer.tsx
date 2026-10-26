@@ -11,7 +11,13 @@ export const PortalWithThemeConsumer: React.FC<{
   onClickOutside?: (event: MouseEvent) => void;
   ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
   children: React.ReactNode;
-}> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
+  clickOutsideSubscriber?: HTMLElement;
+}> = ({
+  onClickOutside,
+  children,
+  ignoreClicksInsideRefs,
+  clickOutsideSubscriber,
+}) => {
   const { refs } = usePortalContext();
 
   useClickOutside({
@@ -21,6 +27,7 @@ export const PortalWithThemeConsumer: React.FC<{
       ...(refs || []),
     ],
     handler: onClickOutside,
+    subscriber: clickOutsideSubscriber,
   });
 
   return children as React.ReactNode;

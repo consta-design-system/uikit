@@ -6,12 +6,12 @@ import React, {
   useState,
 } from 'react';
 
-import { scrollToIndex } from '##/components/SelectComponents/useSelect/helpers';
 import { useClickOutside } from '##/hooks/useClickOutside';
 import { useFlag } from '##/hooks/useFlag';
 import { KeyHandler, useKeys } from '##/hooks/useKeysDeprecated';
 import { useRefs } from '##/hooks/useRefs';
 import { getGroups } from '##/utils/getGroups';
+import { scrollIntoView } from '##/utils/scrollIntoView';
 
 type IndexForHighlight = number | ((oldIndex: number) => number);
 
@@ -273,9 +273,7 @@ export function useAutoComplete<ITEM, GROUP>(
 
   useEffect(() => {
     if (filteredOptions.length > 0) {
-      scrollToIndex(highlightedIndex, dropdownRef, optionsRefs, () =>
-        highlightIndex(0),
-      );
+      scrollIntoView(optionsRefs[highlightedIndex || 0].current!);
     }
     setIsOpen.on();
   }, [highlightedIndex]);

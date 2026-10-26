@@ -1,4 +1,4 @@
-import { useAction, useAtom, useUpdate } from '@reatom/npm-react';
+import { useAction, useAtom } from '@reatom/react';
 import React, { useEffect, useRef } from 'react';
 
 import { useTheme } from '##/components/Theme';
@@ -35,38 +35,39 @@ export const useModal = ({
   const { theme } = useTheme();
 
   const scrollTopAtom = useCreateAtom<number>(0);
-  const updateScrollTop = useAction((ctx) =>
-    scrollTopAtom(ctx, ctx.get(scrollElAtom)?.scrollTop || 0),
+  const updateScrollTop = useAction(() =>
+    scrollTopAtom.set(scrollElAtom()?.scrollTop || 0),
   );
 
-  const [shadowHeader] = useAtom<boolean>((ctx) => ctx.spy(scrollTopAtom) > 0);
+  const [shadowHeader] = useAtom<boolean>(() => scrollTopAtom() > 0);
   const elScrollDimensionsAtom = useResizeObservedAtom(
-    useCreateAtom((ctx) => [ctx.spy(scrollElAtom)]),
+    useCreateAtom(() => [scrollElAtom()]),
     (el) => [el?.scrollHeight || 0, el?.clientHeight || 0] as const,
   );
 
-  const [shadowFooter] = useAtom<boolean>((ctx) => {
-    const scrollTop = ctx.spy(scrollTopAtom);
-    const [[scrollHeight, clientHeight] = [0, 0]] = ctx.spy(
-      elScrollDimensionsAtom,
-    );
+  const [shadowFooter] = useAtom<boolean>(() => {
+    const scrollTop = scrollTopAtom();
+    const [[scrollHeight, clientHeight] = [0, 0]] = elScrollDimensionsAtom();
 
     return scrollTop < scrollHeight - clientHeight;
   });
 
   const heightAtom = useResizeObservedAtom(
-    useCreateAtom((ctx) => [ctx.spy(windowElAtom), ctx.spy(contentElAtom)]),
+    useCreateAtom(() => [windowElAtom(), contentElAtom()]),
     getElementHeight,
   );
 
-  const [scrollable] = useAtom((ctx) => {
-    const [modalHeight = 0, contentHeight = 0] = ctx.spy(heightAtom);
+  const [scrollable] = useAtom(() => {
+    const [modalHeight = 0, contentHeight = 0] = heightAtom();
     return modalHeight < contentHeight;
   });
 
   useElementAtomEventListener(scrollElAtom, 'scroll', updateScrollTop);
 
-  useUpdate(updateScrollTop, [scrollElAtom]);
+  useEffect(() => {
+    const unsubscribe = scrollElAtom.subscribe(updateScrollTop);
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     if (isOpen) {

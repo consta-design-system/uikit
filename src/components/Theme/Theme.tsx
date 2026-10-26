@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useMemo } from 'react';
 
-import { cn } from '../../utils/bem';
-import { PropsWithHTMLAttributes } from '../../utils/types/PropsWithHTMLAttributes';
+import { cn } from '##/utils/bem';
+import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
+
 import { presetGpnDefault } from './presets/presetGpnDefault';
 
 export { presetGpnDefault } from './presets/presetGpnDefault';
@@ -14,11 +15,15 @@ export type ThemePreset = {
     accent: string;
     invert: string;
   };
-  control: string;
-  font: string;
   size: string;
+  base: string;
+  border: string;
+  radius: string;
   space: string;
   shadow: string;
+  typo: string;
+  bridge: string;
+  motion: string;
 };
 
 type Props = {
@@ -29,31 +34,44 @@ export type ThemeProps = PropsWithHTMLAttributes<Props, HTMLDivElement>;
 
 export const cnTheme = cn('Theme');
 
-export const generateThemeClassNames = (preset: ThemePreset): ThemePreset => {
-  return {
-    color: {
-      primary: cnTheme({ color: preset.color.primary }),
-      accent: cnTheme({ color: preset.color.accent }),
-      invert: cnTheme({ color: preset.color.invert }),
-    },
-    control: cnTheme({ control: preset.control }),
-    font: cnTheme({ font: preset.font }),
-    size: cnTheme({ size: preset.size }),
-    space: cnTheme({ space: preset.space }),
-    shadow: cnTheme({ shadow: preset.shadow }),
-  };
+export const generateThemeClassNames = <
+  T extends Record<string, string | Record<string, string>>,
+>(
+  preset: T,
+): T => {
+  return (Object.keys(preset) as Array<keyof T>).reduce((acc, key) => {
+    const value = preset[key];
+    if (value && typeof value === 'object') {
+      const color = value as Record<string, string>;
+      acc[key] = Object.keys(color).reduce(
+        (accColor, colorKey) => {
+          accColor[colorKey] = cnTheme({ color: color[colorKey] });
+          return accColor;
+        },
+        {} as Record<string, string>,
+      ) as T[keyof T];
+    } else {
+      acc[key] = cnTheme({ [key as string]: value as string }) as T[keyof T];
+    }
+    return acc;
+  }, {} as T);
 };
 
-export const generateDeps = (preset: ThemePreset) => {
-  let deps = '';
-  Object.keys(preset).map((key) => {
-    if (key === 'color') {
-      deps += preset.color.accent + preset.color.invert + preset.color.primary;
-    } else {
-      deps += preset[key as unknown as keyof ThemePreset];
+export const generateDeps = <
+  T extends Record<string, string | Record<string, string>>,
+>(
+  preset: T,
+): string => {
+  return Object.keys(preset).reduce((deps, key) => {
+    const value: string | Record<string, string> = preset[key];
+    if (value && typeof value === 'object') {
+      return (
+        deps +
+        Object.keys(value).reduce((acc, colorKey) => acc + value[colorKey], '')
+      );
     }
-  });
-  return deps;
+    return deps + value;
+  }, '');
 };
 
 const defaultContextValue = {

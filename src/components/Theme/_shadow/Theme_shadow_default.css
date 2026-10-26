@@ -1,0 +1,16 @@
+.Theme_shadow_default {
+  --shadow-global-group: var(--shadow-global-level-1);
+  --shadow-global-layer: var(--shadow-global-level-2);
+  --shadow-global-level-0: none;
+  --shadow-global-level-1:
+    0 2px 2px var(--color-effect-shadow-group-key),
+    0 2px 8px var(--color-effect-shadow-group-ambient);
+  --shadow-global-level-2:
+    0 4px 4px var(--color-effect-shadow-layer-key),
+    0 8px 24px var(--color-effect-shadow-layer-ambient);
+  --shadow-global-level-3:
+    0 8px 8px var(--color-effect-shadow-modal-key),
+    0 12px 28px var(--color-effect-shadow-modal-ambient);
+  --shadow-global-modal: var(--shadow-global-level-3);
+  --shadow-global-none: var(--shadow-global-level-0);
+}

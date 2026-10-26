@@ -1,7 +1,4 @@
-import {
-  objectWithDefault,
-  WithDefaultReturn,
-} from '@consta/uikit/__internal__/src/utils/object';
+import { objectWithDefault, WithDefaultReturn } from '##/utils/object';
 
 import {
   FlatSelectGroupDefault,

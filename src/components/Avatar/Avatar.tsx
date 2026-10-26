@@ -53,7 +53,10 @@ export const Avatar = forwardRefWithAs<Props>((props, ref) => {
       {...otherProps}
       style={
         !url
-          ? { ...style, '--avatar-color': `var(--avatar-color-${colorIndex})` }
+          ? {
+              ...style,
+              ['--avatar-color' as string]: `var(--avatar-color-${colorIndex})`,
+            }
           : style
       }
       className={cnAvatar(

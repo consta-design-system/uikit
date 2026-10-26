@@ -1,8 +1,7 @@
 import './UserSelectItem.css';
 
 import { IconCheck } from '@consta/icons/IconCheck';
-import React, { useRef } from 'react';
-import { Transition } from 'react-transition-group';
+import React from 'react';
 
 import { Avatar } from '##/components/Avatar/Avatar';
 import {
@@ -10,6 +9,7 @@ import {
   mapHorizontalSpaceIncreased,
   mapItemVerticalPadding,
 } from '##/components/ListCanary';
+import { Transition } from '##/components/Transition';
 import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 import { PropsWithHTMLAttributes } from '##/utils/types/PropsWithHTMLAttributes';
@@ -46,8 +46,6 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
     ...otherProps
   } = props;
 
-  const iconRef = useRef<HTMLSpanElement>(null);
-
   return (
     <div
       {...otherProps}
@@ -71,11 +69,10 @@ export const UserSelectItem: React.FC<UserSelectItemProps> = (props) => {
           name={label}
         />
         {multiple && (
-          <Transition in={active} unmountOnExit timeout={200} nodeRef={iconRef}>
+          <Transition in={active} unmountOnExit timeout={200}>
             {(animate) => (
               <IconCheck
                 className={cnUserSelectItem('CheckIcon', { animate })}
-                ref={iconRef}
               />
             )}
           </Transition>
