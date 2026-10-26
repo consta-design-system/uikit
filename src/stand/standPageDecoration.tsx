@@ -13,5 +13,5 @@ export const StandPageDecoration: Lib<Group>['standPageDecoration'] = (
     return <StrictMode>{content}</StrictMode>;
   }
 
-  return <>content</>;
+  return content;
 };
