@@ -10,7 +10,6 @@ on:
       - opened
       - reopened
       - synchronize
-
 env:
   BUILD_SCRIPT: yarn stand:build
   BUILD_SCRIPT_OUTPUT: build
