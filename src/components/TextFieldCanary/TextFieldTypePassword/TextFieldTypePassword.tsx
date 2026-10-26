@@ -37,6 +37,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
       leftSide,
       rightSide,
       autoComplete,
+      inputMode,
       clearButton,
       readOnly,
       type,
@@ -121,6 +122,7 @@ export const TextFieldTypePassword: TextFieldTypeComponent<'password'> =
           placeholder={placeholder}
           autoFocus={autoFocus}
           autoComplete={autoComplete}
+          inputMode={inputMode}
           onBlur={handleBlur}
           onChange={handleChange}
           onFocus={handleFocus}
