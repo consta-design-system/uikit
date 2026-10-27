@@ -34,7 +34,7 @@ export type DatePickerDropdownPropOnChange = DateTimePropOnChange;
 
 export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
   {
-    anchorRef: React.RefObject<HTMLElement>;
+    anchorRef: React.RefObject<HTMLElement | null>;
     currentVisibleDate?: Date;
     type: DateTimePropType;
     value?: Date | DateRange;
@@ -53,7 +53,7 @@ export type DatePickerDropdownProps = PropsWithHTMLAttributesAndRef<
     timeOptions?: TimeOptions;
     timeFor?: 'start' | 'end';
     disableDates?: DateTimePropDisableDates;
-    viewportRef?: React.RefObject<HTMLElement>;
+    viewportRef?: React.RefObject<HTMLElement | null>;
     container?: Element;
   },
   HTMLDivElement

@@ -82,7 +82,7 @@ export type Position = { x: number; y: number } | undefined;
 
 export type PositioningProps =
   | {
-      anchorRef: React.RefObject<HTMLElement>;
+      anchorRef: React.RefObject<HTMLElement | null>;
       equalAnchorWidth?: boolean;
       position?: never;
     }
@@ -105,7 +105,7 @@ export type PopoverProps = PropsWithJsxAttributes<
     children?: React.ReactNode | ChildrenRenderProp;
     onClickOutside?: ClickOutsideHandler;
     onSetDirection?: (direction: Direction) => void;
-    viewportRef?: React.RefObject<HTMLElement>;
+    viewportRef?: React.RefObject<HTMLElement | null>;
     container?: Element;
   } & PositioningProps
 >;
@@ -113,7 +113,7 @@ export type PopoverProps = PropsWithJsxAttributes<
 export type Props = PopoverProps; // удалить при мажоре
 
 const getOffset = (
-  ref: React.RefObject<HTMLDivElement>,
+  ref: React.RefObject<HTMLDivElement | null>,
   propOffset: PopoverPropOffset,
 ) => {
   if (isNumber(propOffset)) {

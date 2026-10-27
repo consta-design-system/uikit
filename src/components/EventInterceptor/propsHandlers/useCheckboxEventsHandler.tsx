@@ -8,7 +8,7 @@ type CheckboxProps = Parameters<typeof Checkbox>[0];
 export const useCheckboxEventsHandler = <P extends CheckboxProps>(
   props: P,
   handler: EventInterceptorHandler,
-  ref: React.RefObject<HTMLLabelElement>,
+  ref: React.RefObject<HTMLLabelElement | null>,
 ): P => {
   const newProps: P = { ...props };
 

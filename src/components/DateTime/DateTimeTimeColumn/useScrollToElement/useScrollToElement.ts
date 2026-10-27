@@ -6,7 +6,7 @@ type ItemDimensions = { height: number; offset: number };
 
 export const useScrollToElement = (
   items: { selected?: boolean }[],
-  scrollWrapper: React.RefObject<HTMLDivElement>,
+  scrollWrapper: React.RefObject<HTMLDivElement | null>,
 ) => {
   const [itemDimensions, setItemDimensions] = useState<ItemDimensions[]>([]);
 

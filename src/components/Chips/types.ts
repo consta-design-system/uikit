@@ -36,7 +36,7 @@ export type ChipsDefaultItem = Omit<
 > & {
   attributes?: Omit<AsAttributes, 'children' | 'ref'>;
   as?: AsTags;
-  ref?: React.RefObject<HTMLElement>;
+  ref?: React.RefObject<HTMLElement | null>;
 };
 
 // export type ChipsPropGetItemKey<ITEM> = (item: ITEM) => ChipsDefaultItem['key'];

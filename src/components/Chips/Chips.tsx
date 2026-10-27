@@ -57,7 +57,7 @@ const ChipsRender = (props: ChipsProps, ref: React.Ref<HTMLDivElement>) => {
             active={getItemActive(item)}
             iconLeft={getItemIconLeft(item)}
             iconRight={getItemIconRight(item)}
-            ref={getItemRef(item)}
+            ref={getItemRef(item) as React.RefObject<HTMLElement> | undefined}
             status={getItemStatus(item)}
             interactive={!itemDisabled && interactive}
             disabled={itemDisabled}

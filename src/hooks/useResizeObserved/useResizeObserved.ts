@@ -6,7 +6,7 @@ export const useResizeObserved = <
   ELEMENT extends HTMLElement | SVGGraphicsElement,
   RETURN_TYPE,
 >(
-  refs: Array<RefObject<ELEMENT>>,
+  refs: Array<RefObject<ELEMENT | null>>,
   mapper: (el: ELEMENT | null) => RETURN_TYPE,
 ): RETURN_TYPE[] => {
   const calculateDimensionsRef = useMutableRef(() =>

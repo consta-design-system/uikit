@@ -23,10 +23,10 @@ type Props = PropsWithJsxAttributes<{
   openAtom: AtomMut<boolean>;
   size: FieldPropSize;
   offset?: PopoverPropOffset | 'none';
-  anchorRef: React.RefObject<HTMLElement> | undefined;
+  anchorRef: React.RefObject<HTMLElement | null> | undefined;
   children: React.ReactNode;
   onMount: (isMount: boolean) => void;
-  viewportRef?: React.RefObject<HTMLElement>;
+  viewportRef?: React.RefObject<HTMLElement | null>;
   container?: Element;
 }>;
 

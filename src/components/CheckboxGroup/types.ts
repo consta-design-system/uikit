@@ -12,7 +12,7 @@ export type CheckboxGroupDefaultItem = {
   label: string;
   disabled?: boolean;
   attributes?: CheckboxGroupPropAttributes;
-  ref?: React.RefObject<HTMLLabelElement>;
+  ref?: React.RefObject<HTMLLabelElement | null>;
 };
 
 export const checkboxGroupPropDirections = ['column', 'row'] as const;
@@ -48,7 +48,7 @@ export type CheckboxGroupPropGetItemAttributes<ITEM> = (
 ) => CheckboxGroupPropAttributes | undefined;
 export type CheckboxGroupPropGetItemRef<ITEM> = (
   item: ITEM,
-) => React.RefObject<HTMLLabelElement> | undefined;
+) => React.RefObject<HTMLLabelElement | null> | undefined;
 
 export type CheckboxGroupPropOnChange<ITEM> = (
   value: ITEM[] | null,

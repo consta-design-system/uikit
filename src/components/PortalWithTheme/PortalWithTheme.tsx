@@ -11,7 +11,7 @@ import {
 export { usePortalContext };
 
 type Props = {
-  container?: Element | React.RefObject<HTMLElement>;
+  container?: Element | React.RefObject<HTMLElement | null>;
 } & ThemeProps;
 
 const getZIndex = (contextZIndex?: number, propZIndex?: number | string) => {
@@ -27,10 +27,10 @@ const getZIndex = (contextZIndex?: number, propZIndex?: number | string) => {
 };
 
 const isRef = (
-  ref: React.RefObject<HTMLElement> | Element | undefined,
-): ref is React.RefObject<HTMLElement> => !!ref && 'current' in ref;
+  ref: React.RefObject<HTMLElement | null> | Element | undefined,
+): ref is React.RefObject<HTMLElement | null> => !!ref && 'current' in ref;
 
-const getElement = (ref: React.RefObject<HTMLElement> | Element) =>
+const getElement = (ref: React.RefObject<HTMLElement | null> | Element) =>
   isRef(ref) ? ref.current : ref;
 
 export const PortalWithTheme = React.forwardRef<HTMLDivElement, Props>(

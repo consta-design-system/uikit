@@ -5,7 +5,7 @@ import { scrollIntoView } from '##/utils/scrollIntoView';
 type ScrollToIndexFunctionType = (
   optionIndex: number,
   dropdownElement: HTMLDivElement | null,
-  optionsRefs: React.RefObject<HTMLDivElement>[],
+  optionsRefs: React.RefObject<HTMLDivElement | null>[],
   onFailure?: () => void,
 ) => void;
 

@@ -4,7 +4,7 @@ import { useMutableRef } from '##/hooks/useMutableRef';
 
 export type UseHoverProps = {
   isActive?: boolean | (() => boolean | undefined);
-  refs: React.RefObject<HTMLElement>[];
+  refs: React.RefObject<HTMLElement | null>[];
   onHover?: (event: MouseEvent) => void;
   onBlur?: (event: MouseEvent) => void;
   blurDelay?: number;

@@ -31,7 +31,7 @@ export type NotificationActionsProps<ITEM = NotificationActionsDefaultItem> =
       opened?: boolean;
       onOpen?: (value: boolean) => void;
       onItemClick?: NotificationActionsOnItemClick<ITEM>;
-      scrollContainerRef?: React.RefObject<HTMLDivElement>;
+      scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
     },
     HTMLButtonElement
   > & {

@@ -9,7 +9,7 @@ import { usePortalContext } from '../PortalWithTheme';
  */
 export const PortalWithThemeConsumer: React.FC<{
   onClickOutside?: (event: MouseEvent) => void;
-  ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+  ignoreClicksInsideRefs?: ReadonlyArray<React.RefObject<HTMLElement | null>>;
   children: React.ReactNode;
 }> = ({ onClickOutside, children, ignoreClicksInsideRefs }) => {
   const { refs } = usePortalContext();

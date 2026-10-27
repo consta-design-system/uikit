@@ -5,7 +5,7 @@ import { getElementSize, useResizeObserved } from '##/hooks/useResizeObserved';
 import { ComponentSize } from './types';
 
 export const useComponentSize = (
-  ref: React.RefObject<HTMLElement | SVGGraphicsElement>,
+  ref: React.RefObject<HTMLElement | SVGGraphicsElement | null>,
   deps: unknown[] = [],
 ): ComponentSize =>
   useResizeObserved(

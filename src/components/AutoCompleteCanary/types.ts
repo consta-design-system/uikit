@@ -67,7 +67,7 @@ export type AutoCompleteProps<
   dropdownForm?: AutoCompletePropDropdownForm;
   isLoading?: boolean;
   searchFunction?: AutoCompletePropSearchFunction<ITEM>;
-  dropdownRef?: React.RefObject<HTMLDivElement>;
+  dropdownRef?: React.RefObject<HTMLDivElement | null>;
   getItemLabel?: AutoCompletePropGetItemLabel<ITEM>;
   getItemKey?: AutoCompletePropGetItemKey<ITEM>;
   getItemGroupKey?: AutoCompletePropGetItemGroupId<ITEM>;
@@ -77,9 +77,9 @@ export type AutoCompleteProps<
   onScrollToBottom?: (length: number) => void;
   onDropdownOpen?: (isOpen: boolean) => void;
   dropdownOpen?: boolean;
-  dropdownViewportRef?: React.RefObject<HTMLElement>;
+  dropdownViewportRef?: React.RefObject<HTMLElement | null>;
   dropdownContainer?: Element;
-  ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+  ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement | null>>;
 } & (ITEM extends { label: AutoCompleteItemDefault['label'] }
     ? {}
     : {

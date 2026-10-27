@@ -27,7 +27,7 @@ export type BookmarkTabsItemDefault = {
   rightIcon?: IconComponent;
   fixed?: boolean;
   as?: AsTags;
-  ref?: React.RefObject<HTMLElement>;
+  ref?: React.RefObject<HTMLElement | null>;
   attributes?: AsAttributes;
 };
 
@@ -49,7 +49,7 @@ export type BookmarkTabsPropGetItemAs<ITEM> = (
 ) => AsTags | undefined;
 export type BookmarkTabsPropGetItemRef<ITEM> = (
   item: ITEM,
-) => React.RefObject<HTMLElement> | undefined;
+) => React.RefObject<HTMLElement | null> | undefined;
 export type BookmarkTabsPropGetItemAttributes<ITEM> = (
   item: ITEM,
 ) => AsAttributes | undefined;
@@ -72,7 +72,7 @@ export type BookmarkTabsRenderItemProps<ITEM> = {
   view: BookmarkTabsPropView;
   bordered?: boolean;
   tabWidth?: string;
-  tabRef?: React.RefObject<HTMLElement>;
+  tabRef?: React.RefObject<HTMLElement | null>;
 } & Omit<BookmarkTabsItemDefault, 'key' | 'ref'>;
 
 export type BookmarkTabsPropRenderItem<ITEM> = (
@@ -129,7 +129,7 @@ export type BookmarkTabsTabProps<AS extends AsTags = 'div'> =
       active?: boolean;
       tabWidth?: string;
       bordered?: boolean;
-      tabRef?: React.RefObject<HTMLElement>;
+      tabRef?: React.RefObject<HTMLElement | null>;
       fixed?: boolean;
       onClose?: React.ReactEventHandler;
     },

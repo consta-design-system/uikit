@@ -13,10 +13,10 @@ type UseSliderStationing = (
   range: boolean | undefined,
   step: number | number[] | undefined,
   buttonRefs: [
-    React.RefObject<HTMLButtonElement>,
-    React.RefObject<HTMLButtonElement>,
+    React.RefObject<HTMLButtonElement | null>,
+    React.RefObject<HTMLButtonElement | null>,
   ],
-  sliderLineRef: React.RefObject<HTMLButtonElement | HTMLDivElement>,
+  sliderLineRef: React.RefObject<HTMLButtonElement | HTMLDivElement | null>,
 ) => {
   lineSizes: Line[];
   buttonPositions: number[];

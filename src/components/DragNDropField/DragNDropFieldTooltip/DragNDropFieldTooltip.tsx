@@ -9,7 +9,7 @@ import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 
 type DragNDropFieldTooltipProps = {
-  anchorRef: React.RefObject<HTMLElement>;
+  anchorRef: React.RefObject<HTMLElement | null>;
   errors: string[];
 };
 

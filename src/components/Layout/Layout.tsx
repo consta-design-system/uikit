@@ -28,8 +28,12 @@ export type LayoutProps = {
   fixed?: boolean;
   verticalAlign?: LayoutPropVerticalAlign;
   horizontalAlign?: LayoutPropHorizontalAlign;
-  anchorRef?: React.RefObject<HTMLElement>;
-  scrollContainer?: React.RefObject<HTMLElement> | HTMLElement | null | Window;
+  anchorRef?: React.RefObject<HTMLElement | null>;
+  scrollContainer?:
+    | React.RefObject<HTMLElement | null>
+    | HTMLElement
+    | null
+    | Window;
   direction?: LayoutPropDirection;
   children?: React.ReactNode;
 };

@@ -122,7 +122,7 @@ export type ProgressStepBarItemProps = {
   direction: ProgressStepBarPropDirection;
   size: ProgressStepBarPropSize;
   onClick?: (e: React.MouseEvent) => void;
-  pointRef?: React.RefObject<HTMLButtonElement>;
+  pointRef?: React.RefObject<HTMLButtonElement | null>;
   className?: string;
 };
 

@@ -38,7 +38,7 @@ type ModalProps = PropsWithHTMLAttributes<
     children?: React.ReactNode;
     container?: HTMLDivElement | undefined;
     afterClose?: () => void;
-    refsForExcludeClickOutside?: React.RefObject<HTMLElement>[];
+    refsForExcludeClickOutside?: React.RefObject<HTMLElement | null>[];
   },
   HTMLDivElement
 >;

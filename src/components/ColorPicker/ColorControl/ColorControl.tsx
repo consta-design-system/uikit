@@ -98,7 +98,7 @@ export const ColorControlRender = <T extends AnyColor>(
           form={mapFormMarker[form]}
           onFocus={setFocusedOn}
           onBlur={setFocusedOff}
-          ref={markerRef}
+          ref={markerRef as React.RefObject<HTMLButtonElement> | undefined}
           disabled={disabled}
         />
       }
