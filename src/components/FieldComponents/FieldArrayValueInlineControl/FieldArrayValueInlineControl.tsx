@@ -126,9 +126,9 @@ export const FieldArrayValueInlineControl = factoryComponent<
     setRefs([inputElAtom.set, propsAtom().inputRef], el),
   );
 
-  const fakeInputRef = action((el: HTMLDivElement | null) =>
-    setRefs([fakeInputEl.set], el),
-  );
+  // const fakeInputRef = action((el: HTMLDivElement | null) =>
+  //   setRef(fakeInputEl.set, el),
+  // );
 
   effect(() => {
     const inputValueProp = inputValuePropAtom();
@@ -216,7 +216,7 @@ export const FieldArrayValueInlineControl = factoryComponent<
           readOnly={disableInput}
         />
         <InputFakeElement
-          ref={wrap(fakeInputRef)}
+          ref={wrap(fakeInputEl.set)}
           className={cnFieldArrayValueInlineControl('HelperInputFakeElement')}
           valueAtom={inputValueAtom}
         />
