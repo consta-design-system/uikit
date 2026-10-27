@@ -212,7 +212,7 @@ export const FieldArrayValueInlineControl = factoryComponent<
           readOnly={disableInput}
         />
         <InputFakeElement
-          ref={fakeInputEl.set}
+          ref={wrap(fakeInputEl.set)}
           className={cnFieldArrayValueInlineControl('HelperInputFakeElement')}
           valueAtom={inputValueAtom}
         />
