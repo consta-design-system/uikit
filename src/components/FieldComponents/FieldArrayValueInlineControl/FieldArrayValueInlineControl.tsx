@@ -126,10 +126,6 @@ export const FieldArrayValueInlineControl = factoryComponent<
     setRefs([inputElAtom.set, propsAtom().inputRef], el),
   );
 
-  // const fakeInputRef = action((el: HTMLDivElement | null) =>
-  //   setRef(fakeInputEl.set, el),
-  // );
-
   effect(() => {
     const inputValueProp = inputValuePropAtom();
     const inputEl = inputElAtom();
