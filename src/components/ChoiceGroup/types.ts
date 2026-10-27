@@ -8,7 +8,7 @@ export type ChoiceGroupDefaultItem = {
   icon?: IconComponent;
   disabled?: boolean;
   attributes?: Omit<
-    JSX.IntrinsicElements['label'],
+    React.JSX.IntrinsicElements['label'],
     'ref' | 'onChange' | 'children'
   >;
   ref?: React.RefObject<HTMLLabelElement>;
@@ -41,7 +41,7 @@ export type ChoiceGroupPropGetItemDisabled<ITEM> = (
 export type ChoiceGroupPropGetItemAttributes<ITEM> = (
   item: ITEM,
 ) =>
-  | Omit<JSX.IntrinsicElements['label'], 'ref' | 'onChange' | 'children'>
+  | Omit<React.JSX.IntrinsicElements['label'], 'ref' | 'onChange' | 'children'>
   | undefined;
 export type ChoiceGroupPropGetItemRef<ITEM> = (
   item: ITEM,
