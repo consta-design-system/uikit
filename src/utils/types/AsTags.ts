@@ -1,3 +1,5 @@
+import type React from 'react';
+
 export type AsTags =
   | 'a'
   | 'abbr'
@@ -117,6 +119,6 @@ export type AsTags =
   | 'wbr'
   | 'webview';
 
-export type AsAttributes = JSX.IntrinsicElements[AsTags];
+export type AsAttributes = React.JSX.IntrinsicElements[AsTags];
 
-export type AsTagAttribute<T extends AsTags> = JSX.IntrinsicElements[T];
+export type AsTagAttribute<T extends AsTags> = React.JSX.IntrinsicElements[T];

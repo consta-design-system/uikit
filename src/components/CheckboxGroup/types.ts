@@ -3,7 +3,7 @@ import React from 'react';
 import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttributes';
 
 type CheckboxGroupPropAttributes = Omit<
-  JSX.IntrinsicElements['label'],
+  React.JSX.IntrinsicElements['label'],
   'ref' | 'onChange' | 'onFocus' | 'children' | 'onBlur'
 >;
 
