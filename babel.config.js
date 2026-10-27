@@ -72,7 +72,7 @@ module.exports = {
     ],
     // Плагин для автоматического добавления/удаления имён
     // у atom, computed, action, effect, reatom*, factoryComponent
-    ...(!isProduction
+    ...(true
       ? [
           [
             './scripts/babel-plugin-reatom-name/src/index.ts',
