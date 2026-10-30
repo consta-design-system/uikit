@@ -8,13 +8,14 @@ import { useDebounce } from '##/hooks/useDebounce';
 import { useFlag } from '##/hooks/useFlag';
 import { useForkRef } from '##/hooks/useForkRef';
 import { useMutableRef } from '##/hooks/useMutableRef';
+import { isTest } from '##/utils/env';
 
 export const withTooltipPropMode = ['mouseover', 'click'] as const;
 export const withTooltipPropModeDefault = withTooltipPropMode[0];
 type WithTooltipPropMode = (typeof withTooltipPropMode)[number];
 
-export const appearTimeoutDefault = 400;
-export const exitTimeoutDefault = 200;
+export const appearTimeoutDefault = isTest ? 2 : 400;
+export const exitTimeoutDefault = isTest ? 1 : 200;
 
 type ComponentProps = {
   onClick?: React.MouseEventHandler;

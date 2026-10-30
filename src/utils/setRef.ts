@@ -1,9 +1,15 @@
-import { MutableRefObject, Ref } from 'react';
+import { LegacyRef, MutableRefObject } from 'react';
 
-export function setRef<T>(ref: Ref<T> | undefined, value: T): void {
-  if (typeof ref === 'function') {
+export const setRef = <T>(ref: LegacyRef<T> | undefined, value: T) => {
+  if (ref && typeof ref === 'function') {
     ref(value);
-  } else if (ref && 'current' in ref) {
+  } else if (ref && typeof ref === 'object' && 'current' in ref) {
     (ref as MutableRefObject<T>).current = value;
   }
-}
+};
+
+export const setRefs = <T>(refs: (LegacyRef<T> | undefined)[], value: T) => {
+  for (const ref of refs) {
+    setRef(ref, value);
+  }
+};

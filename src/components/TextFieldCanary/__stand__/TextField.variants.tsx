@@ -1,6 +1,6 @@
 import { IconPhoto } from '@consta/icons/IconPhoto';
 import { useBoolean, useNumber, useSelect, useText } from '@consta/stand';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import {
   fieldPropForm,
@@ -104,6 +104,8 @@ const Variants = () => {
     setValue(value);
   };
 
+  const ref = useRef<HTMLDivElement>(null);
+
   if (type === 'textarray') {
     return (
       <div style={{ width: '100%' }}>
@@ -125,6 +127,7 @@ const Variants = () => {
           clearButton={clearButton}
           placeholder={placeholder}
           type={type}
+          ref={ref}
         />
       </div>
     );

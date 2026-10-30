@@ -15,6 +15,8 @@ export type NotificationHeaderProps = PropsWithHTMLAttributesAndRef<
     actions?: NotificationHeaderAction[];
     onClose?: React.EventHandler<React.MouseEvent>;
     scrollContainerRef?: React.RefObject<HTMLDivElement>;
+    dropdownContainer?: HTMLElement;
+    clickOutsideSubscriber?: HTMLElement;
   },
   HTMLDivElement
 >;

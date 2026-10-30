@@ -1,19 +1,21 @@
-import { AtomMut } from '@reatom/core';
-import { useAtom } from '@reatom/npm-react';
-import React, { forwardRef, memo } from 'react';
+import { AtomLike, computed } from '@reatom/core';
+import React, { memo } from 'react';
 
 import { FieldArrayValueInlineControl } from '##/components/FieldComponents';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
 import { cnCanary as cn } from '##/utils/bem';
-import { usePickAtom } from '##/utils/state';
+import { factoryComponent } from '##/utils/state';
 
 import { PropsWithDefault } from '../defaultProps';
 import { SelectGroupDefault, SelectItemDefault } from '../types';
 
 const cnSelectMultipleValue = cn('SelectMultipleValue');
 
-type SelectMultipleValueProps<ITEM, GROUP> = {
-  propsAtom: AtomMut<PropsWithDefault<ITEM, GROUP, true>>;
+type SelectMultipleValueProps<
+  ITEM = SelectItemDefault,
+  GROUP = SelectGroupDefault,
+> = {
+  rootPropsAtom: AtomLike<PropsWithDefault<ITEM, GROUP, true>>;
   onFocus?: React.FocusEventHandler<HTMLDivElement>;
   onBlur?: React.FocusEventHandler<HTMLDivElement>;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
@@ -29,55 +31,51 @@ export type SelectMultipleValueComponent = <
   props: SelectMultipleValueProps<ITEM, GROUP>,
 ) => React.ReactNode | null;
 
-export const SelectMultipleValueRender = <
-  ITEM = SelectItemDefault,
-  GROUP = SelectGroupDefault,
->(
-  {
-    propsAtom,
-    onFocus,
-    onBlur,
-    onClick,
-    renderValue,
-    onChange,
-    inputRef,
-  }: SelectMultipleValueProps<ITEM, GROUP>,
-  ref: React.Ref<HTMLDivElement>,
-) => {
-  const [{ value, disabled, placeholder, size, input, inputDefaultValue }] =
-    useAtom(
-      usePickAtom(propsAtom, [
-        'value',
-        'disabled',
-        'placeholder',
-        'size',
-        'input',
-        'inputDefaultValue',
-      ]),
-    );
-
-  return (
-    <FieldArrayValueInlineControl
-      className={cnSelectMultipleValue(null, [
-        cnMixScrollBar({ size: 'xs', trackSize: 'auto' }),
-      ])}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      onClick={onClick}
-      value={value || undefined}
-      disabled={disabled}
-      placeholder={placeholder}
-      renderValue={renderValue}
-      size={size}
-      disableInput={input ? undefined : true}
-      inputRef={inputRef}
-      ref={ref}
-      inputDefaultValue={input ? inputDefaultValue : undefined}
-      onChange={onChange}
-    />
-  );
-};
-
 export const SelectMultipleValue = memo(
-  forwardRef(SelectMultipleValueRender),
+  factoryComponent<HTMLDivElement, SelectMultipleValueProps>(
+    ({ ref, rootPropsAtom }) => {
+      const value = computed(() => rootPropsAtom().value || undefined, 'value');
+      const disabled = computed(() => rootPropsAtom().disabled, 'disabled');
+      const placeholder = computed(() => rootPropsAtom().placeholder);
+      const size = computed(() => rootPropsAtom().size, 'size');
+      const disableInput = computed(() => !rootPropsAtom().input);
+      const inputDefaultValue = computed(() =>
+        rootPropsAtom().input ? rootPropsAtom().inputDefaultValue : undefined,
+      );
+      const inputValue = computed(() =>
+        rootPropsAtom().input ? rootPropsAtom().inputValue : undefined,
+      );
+
+      return ({
+        onFocus,
+        onBlur,
+        onClick,
+        renderValue,
+        inputRef,
+        onChange,
+      }) => {
+        return (
+          <FieldArrayValueInlineControl
+            className={cnSelectMultipleValue(null, [
+              cnMixScrollBar({ size: 'xs', trackSize: 'auto' }),
+            ])}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onClick={onClick}
+            value={value()}
+            disabled={disabled()}
+            placeholder={placeholder()}
+            renderValue={renderValue}
+            size={size()}
+            disableInput={disableInput()}
+            inputRef={inputRef}
+            ref={ref}
+            inputDefaultValue={inputDefaultValue()}
+            onChange={onChange}
+            inputValue={inputValue()}
+          />
+        );
+      };
+    },
+  ),
 ) as SelectMultipleValueComponent;

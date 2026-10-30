@@ -35,6 +35,7 @@ const BreadcrumbsRender = (
     className,
     fitMode = breadcrumbPropFitModeDefault,
     lastItemIsLink,
+    dropdownContainer,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -74,6 +75,7 @@ const BreadcrumbsRender = (
         key={cnBreadcrumbs('Item', { index })}
         size={size}
         ref={ref}
+        dropdownContainer={dropdownContainer}
       />
     );
   };
@@ -118,6 +120,7 @@ const BreadcrumbsRender = (
       onItemClick={onItemClick}
       ref={ref}
       renderItem={renderItem}
+      dropdownContainer={dropdownContainer}
     />
   );
 };

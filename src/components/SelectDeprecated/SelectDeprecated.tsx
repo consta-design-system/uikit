@@ -70,6 +70,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
     inputRef: inputRefProp,
     style,
     dropdownForm = 'default',
+    dropdownContainer,
     ...restProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), controlRef);
 
@@ -210,6 +211,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
         isLoading={isLoading}
         labelForEmptyItems={labelForEmptyItems}
         hasItems={hasItems}
+        container={dropdownContainer}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }

@@ -51,7 +51,7 @@ export const GridItem = forwardRefWithAs<GridItemProps>((props, ref) => {
         ['--grid-item-row-start' as string]: rowStart
           ? `${mods.rowStart} / span`
           : undefined,
-        ['--gird-item-order' as string]: mods.order,
+        ['--grid-item-order' as string]: mods.order,
       }}
     >
       {children}

@@ -12,7 +12,7 @@ import { ColorInputTypeChanger } from '../ColorInputTypeChanger';
 import { ColorPickerRoot } from '../ColorPickerRoot';
 import { ColorPickerComponent, ColorPickerProps } from './types';
 
-const cnColorPicker = cn('ColorPicker');
+export const cnColorPicker = cn('ColorPicker');
 
 const renderNode = (header: React.ReactNode, className?: string) => {
   if (!header) {

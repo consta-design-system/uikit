@@ -1,7 +1,4 @@
-import {
-  MixPopoverAnimateExampleRenderFn,
-  MixPopoverAnimateExampleForCssTransition,
-} from './examples/MixPopoverAnimateExample/MixPopoverAnimateExample';
+import { MixPopoverAnimateExampleRenderFn } from './examples/MixPopoverAnimateExample/MixPopoverAnimateExample';
 
 ```tsx
 import {
@@ -73,49 +70,3 @@ export const MixPopoverAnimateExampleRenderFn = () => {
 ```
 
 <MixPopoverAnimateExampleRenderFn />
-
-### Пример c CSSTransition
-
-```tsx
-import React, { useRef } from 'react';
-import { CSSTransition } from 'react-transition-group';
-
-import { Button } from '@consta/uikit/Button';
-import { Popover } from '@consta/uikit/Popover';
-import { useFlag } from '@consta/uikit/useFlag';
-
-import {
-  cnMixPopoverAnimate,
-  cnMixPopoverAnimateForCssTransition,
-} from '@consta/uikit/MixPopoverAnimate';
-
-export const MixPopoverAnimateExampleForCssTransition = () => {
-  const [open, setOpen] = useFlag();
-  const popoverRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  return (
-    <>
-      <Button label="Нажми" onClick={setOpen.toggle} ref={buttonRef} />
-      <CSSTransition
-        in={open}
-        unmountOnExit
-        classNames={cnMixPopoverAnimateForCssTransition}
-        timeout={animateTimeout}
-        nodeRef={popoverRef}
-      >
-        <Popover
-          offset={8}
-          anchorRef={buttonRef}
-          ref={popoverRef}
-          direction="downStartLeft"
-        >
-          я появился плавно <br /> c анимацией 🔥
-        </Popover>
-      </CSSTransition>
-    </>
-  );
-};
-```
-
-<MixPopoverAnimateExampleForCssTransition />

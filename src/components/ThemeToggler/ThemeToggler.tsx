@@ -37,6 +37,7 @@ const ThemeTogglerRender = (
     direction,
     possibleDirections,
     style,
+    dropdownContainer,
     view = 'clear',
     ...otherProps
   } = usePropsHandler(COMPONENT_NAME, withDefaultGetters(props), buttonRef);
@@ -119,6 +120,7 @@ const ThemeTogglerRender = (
           onClickOutside={setIsOpen.off}
           onItemClick={(item, { e }) => getOnChange(item)(e)}
           size={contextMenuSize}
+          container={dropdownContainer}
           style={
             typeof style?.zIndex === 'number'
               ? { zIndex: style.zIndex + 1 }

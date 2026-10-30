@@ -30,6 +30,16 @@ export type SelectGroupDefault = {
   id: string | number;
 };
 
+export type OptionProps<ITEM = SelectItemDefault> = {
+  index: number;
+  item: ITEM | OptionForCreate | SelectAllItem;
+};
+
+export type OptionForCreate = {
+  label: string;
+  __optionForCreate: boolean;
+};
+
 export type SelectPropGetItemLabel<ITEM> = (item: ITEM) => string;
 export type SelectPropGetItemKey<ITEM> = (item: ITEM) => string | number;
 export type SelectPropGetItemGroupKey<ITEM> = (
@@ -75,15 +85,22 @@ export type SelectAllItem = {
   __optionSelectAll: true;
 };
 
-export type Group<ITEM, GROUP> = {
+export type Group<ITEM = SelectItemDefault, GROUP = SelectGroupDefault> = {
   items: ITEM[];
   key: string | number;
   group?: GROUP;
 };
 
-export type CountedGroup<ITEM, GROUP> = Omit<Group<ITEM, GROUP>, 'items'> & {
-  items: Array<SelectAllItem | ITEM>;
+export type CountedGroup<
+  ITEM = SelectItemDefault,
+  GROUP = SelectGroupDefault,
+> = Omit<Group<ITEM, GROUP>, 'items'> & {
+  items: (SelectAllItem | ITEM)[];
 };
+
+export type VisibleItem<ITEM = SelectItemDefault, GROUP = SelectGroupDefault> =
+  | CountedGroup<ITEM, GROUP>
+  | OptionForCreate;
 
 export type SelectPropsInit<
   ITEM = SelectItemDefault,

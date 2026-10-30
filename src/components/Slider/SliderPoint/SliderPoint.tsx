@@ -62,6 +62,7 @@ export const SliderPoint = (props: SliderPointProps) => {
     tooltipDirection = 'downCenter',
     tooltipPossibleDirections = defaultPossibleDirections,
     tooltipZIndex,
+    tooltipContainer,
     ...otherProps
   } = props;
 
@@ -161,6 +162,7 @@ export const SliderPoint = (props: SliderPointProps) => {
           possibleDirections={tooltipPossibleDirections}
           style={{ zIndex: tooltipZIndex }}
           offset={10}
+          container={tooltipContainer}
         >
           {tooltipFormatter ? tooltipFormatter(value) : value}
         </Tooltip>

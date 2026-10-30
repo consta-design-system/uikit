@@ -12,6 +12,7 @@ import {
   fieldPropView,
   fieldPropViewDefault,
 } from '##/components/FieldComponents/__mocks__/variants';
+import { useSearch } from '##/components/SelectCanary';
 import { cn } from '##/utils/bem';
 
 import { Select, SelectPropOnCreate } from '..';
@@ -29,7 +30,6 @@ const Variants = () => {
   const placeholder = useText('placeholder', 'Placeholder');
   const withGroups = useBoolean('withGroups', false);
   const isLoading = useBoolean('isLoading', false);
-  const emptyList = useBoolean('emptyList', false);
   const multiple = useBoolean('multiple', false);
   const withCreateButton = useBoolean('onCreate', false);
   const clearButton = useBoolean('clearButton', false);
@@ -49,18 +49,23 @@ const Variants = () => {
   const status = useSelect('status', fieldPropStatus);
 
   const [value, setValue] = useState<Item | null>();
-  const [valueMultiple, setValueMultiple] = useState<Item[] | null>([items[8]]);
+  const [valueMultiple, setValueMultiple] = useState<Item[] | null>([
+    items[8],
+    items[7],
+  ]);
   const onCreate: SelectPropOnCreate | undefined = withCreateButton
     ? (label) => alert(label ? `Создание "${label}"` : 'Создание элемента')
     : undefined;
 
   const ref = useRef(null);
 
+  const searchProps = useSearch({ items });
+
   if (multiple) {
     return (
-      <div className={cnSelectCanaryVariants()}>
+      <div className={cnSelectCanaryVariants()} key="multiple">
         <Select
-          key="multiple"
+          {...(input ? searchProps : { items })}
           size={size}
           disabled={disabled}
           view={view}
@@ -70,7 +75,6 @@ const Variants = () => {
           status={status}
           dropdownForm={dropdownForm}
           placeholder={placeholder}
-          items={emptyList ? [] : items}
           value={valueMultiple}
           onChange={setValueMultiple}
           groups={withGroups ? groups : emptyGroup}
@@ -78,15 +82,16 @@ const Variants = () => {
           isLoading={isLoading}
           getItemDisabled={conditionalGetter(itemsDisabled)}
           clearButton={clearButton}
-          input={input}
+          virtualScroll
         />
       </div>
     );
   }
   return (
-    <div className={cnSelectCanaryVariants()}>
+    <div className={cnSelectCanaryVariants()} key="not-multiple">
       <Select
-        key="not-multiple"
+        {...(input ? searchProps : { items })}
+        input={input}
         size={size}
         disabled={disabled}
         view={view}
@@ -96,14 +101,13 @@ const Variants = () => {
         dropdownForm={dropdownForm}
         status={status || undefined}
         placeholder={placeholder}
-        items={emptyList ? [] : items}
         value={value}
         onChange={setValue}
         groups={withGroups ? groups : emptyGroup}
         getItemDisabled={conditionalGetter(itemsDisabled)}
         clearButton={clearButton}
-        input={input}
         ref={ref}
+        virtualScroll
       />
     </div>
   );

@@ -1,16 +1,16 @@
 import { classnames } from '@bem-react/classnames';
-import { AtomMut } from '@reatom/framework';
-import { reatomComponent } from '@reatom/npm-react';
-import React, { useCallback, useRef } from 'react';
-import { Transition } from 'react-transition-group';
+import { AtomLike, computed } from '@reatom/core';
+import React from 'react';
 
 import { FieldPropSize } from '##/components/FieldComponents';
 import { cnListBox } from '##/components/ListCanary';
 import { Popover, PopoverPropOffset } from '##/components/Popover';
+import { Transition, TransitionStatus } from '##/components/Transition';
 import {
   animateTimeout,
   cnMixPopoverAnimate,
 } from '##/mixs/MixPopoverAnimate/MixPopoverAnimate';
+import { factoryComponent } from '##/utils/state';
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
 export const SelectPopoverForm = ['default', 'brick', 'round'] as const;
@@ -18,74 +18,70 @@ export type SelectPopoverPropForm = (typeof SelectPopoverForm)[number];
 export const defaultSelectPopoverPropForm = SelectPopoverForm[0];
 
 type Props = PropsWithJsxAttributes<{
-  controlRef: React.MutableRefObject<HTMLDivElement | null>;
   form: SelectPopoverPropForm;
-  openAtom: AtomMut<boolean>;
+  openAtom: AtomLike<boolean>;
   size: FieldPropSize;
   offset?: PopoverPropOffset | 'none';
-  anchorRef: React.RefObject<HTMLElement> | undefined;
+  controlElAtom: AtomLike<HTMLDivElement | null>;
   children: React.ReactNode;
-  onMount: (isMount: boolean) => void;
-  viewportRef?: React.RefObject<HTMLElement>;
+  onMount?: (isMount: boolean) => void;
+  viewportRef?: React.RefObject<HTMLElement | null>;
   container?: Element;
 }>;
 
-export const SelectPopover = reatomComponent<Props>((props) => {
-  const {
-    ctx,
-    size,
-    className,
-    openAtom,
-    offset: offsetProp = 'none',
-    controlRef,
-    form,
-    anchorRef,
-    children,
-    onMount,
-    container,
-    ...otherProps
-  } = props;
+export const SelectPopover = factoryComponent<HTMLDivElement, Props>(
+  ({ controlElAtom }) => {
+    const anchorRefAtom = computed(() => ({
+      current: controlElAtom(),
+    }));
 
-  const offset = offsetProp === 'none' ? undefined : offsetProp;
+    return (props) => {
+      const {
+        size,
+        className,
+        openAtom,
+        offset: offsetProp = 'none',
+        form,
+        controlElAtom,
+        children,
+        onMount,
+        container,
+        viewportRef,
+        ...otherProps
+      } = props;
+      const offset = offsetProp === 'none' ? undefined : offsetProp;
 
-  const popoverRef = useRef<HTMLDivElement>(null);
-
-  return (
-    <Transition
-      in={ctx.spy(openAtom)}
-      nodeRef={popoverRef}
-      timeout={animateTimeout}
-      unmountOnExit
-      onEntering={useCallback(() => onMount(true), [])}
-      onExited={useCallback(() => onMount(false), [])}
-    >
-      {(animate) => {
-        return (
-          <Popover
-            {...otherProps}
-            anchorRef={anchorRef}
-            container={container}
-            direction="downStartLeft"
-            possibleDirections={[
-              'downStartLeft',
-              'upStartLeft',
-              'downStartRight',
-              'upStartRight',
-            ]}
-            offset={offset}
-            ref={popoverRef}
-            role="listbox"
-            className={classnames(
-              className,
-              cnListBox({ size, form, border: true, shadow: true }),
-              cnMixPopoverAnimate({ animate }),
-            )}
-            equalAnchorWidth
-          >
-            {children}
-          </Popover>
-        );
-      }}
-    </Transition>
-  );
-});
+      return (
+        <Transition in={openAtom()} timeout={animateTimeout} unmountOnExit>
+          {(animate: TransitionStatus) => {
+            return (
+              <Popover
+                {...otherProps}
+                viewportRef={viewportRef}
+                anchorRef={anchorRefAtom()}
+                container={container}
+                direction="downStartLeft"
+                possibleDirections={[
+                  'downStartLeft',
+                  'upStartLeft',
+                  'downStartRight',
+                  'upStartRight',
+                ]}
+                offset={offset}
+                role="listbox"
+                className={classnames(
+                  className,
+                  cnListBox({ size, form, border: true, shadow: true }),
+                  cnMixPopoverAnimate({ animate }),
+                )}
+                equalAnchorWidth
+              >
+                {children}
+              </Popover>
+            );
+          }}
+        </Transition>
+      );
+    };
+  },
+);
