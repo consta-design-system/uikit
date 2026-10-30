@@ -54,7 +54,7 @@
     "test:unit": "yarn vitest",
     "test:ts": "yarn tsc-dry-run",
     "test:cspell": "yarn cspell --no-progress",
-    "test": "yarn test:ts && yarn test:unit && yarn test:cspell && test:babel-plugin-reatom-name",
+    "test": "yarn test:ts && yarn test:unit && yarn test:cspell && yarn test:babel-plugin-reatom-name",
     "test:babel-plugin-reatom-name": "yarn vitest run scripts/babel-plugin-reatom-name/src/__tests__/plugin.unit.ts --config scripts/babel-plugin-reatom-name/vitest.config.ts",
     "vitest": "vitest run",
     "build:css": "cross-env NODE_ENV=buildProduction postcss 'src/**/*.css' --base src --dir dist/__internal__/src/",
