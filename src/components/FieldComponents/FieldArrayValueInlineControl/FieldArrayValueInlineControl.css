@@ -32,8 +32,11 @@
     &_disabled {
       position: absolute;
       width: 100%;
-      opacity: 0;
       pointer-events: none;
+
+      &:not(:placeholder-shown) {
+        opacity: 0;
+      }
     }
 
     &:-webkit-autofill,
