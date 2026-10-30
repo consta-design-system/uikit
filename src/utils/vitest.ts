@@ -1,4 +1,4 @@
-import { rAF, take, wrap } from '@reatom/core';
+import { rAF, sleep, take, wrap } from '@reatom/core';
 import { aroundEach } from 'vitest';
 
 export type TestContext = { task: { id: string } };
@@ -17,6 +17,7 @@ export const testOtherControlId = (context?: TestContext) =>
 export const tick = async () => {
   await wrap(take(rAF));
   await wrap(take(rAF));
+  await wrap(sleep());
 };
 
 const addBlock = (id: string, name: string, to: HTMLElement, as = 'div') => {

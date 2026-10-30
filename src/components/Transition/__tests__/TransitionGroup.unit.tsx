@@ -89,6 +89,7 @@ describe('Компонент TransitionGroup', () => {
       expect(getItemStatus(ctx, 'a')).toBe('entering');
 
       await wrap(sleep(timeout));
+      await wrap(sleep());
       await wrap(tick());
       expect(getItemStatus(ctx, 'a')).toBe('entered');
 
@@ -99,6 +100,7 @@ describe('Компонент TransitionGroup', () => {
       expect(getItemEl(ctx, 'b')).not.toBeNull();
 
       await wrap(sleep(timeout));
+      await wrap(sleep());
       await wrap(tick());
       expect(getItemStatus(ctx, 'b')).toBe('entered');
     }));

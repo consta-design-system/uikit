@@ -36,10 +36,12 @@ jobs:
       - name: Установка зависимостей
         run: yarn add "install-peers-cli@https://github.com/evless/install-peers-cli#fix-yarn-policies" && yarn --frozen-lockfile && yarn playwright install chromium
       - name: Проверка TS
-        run: yarn run tsc-dry-run
+        run: yarn run test:ts
       - name: Unit тесты
-        run: yarn run vitest
+        run: yarn run test:unit
       - name: Проверка eslint & stylelint
         run: yarn run lint
       - name: Проверка орфографии
-        run: yarn cspell --no-progress
+        run: yarn run test:cspell
+      - name: Проверка babel-plugin-reatom-name
+        run: yarn run test:babel-plugin-reatom-name
