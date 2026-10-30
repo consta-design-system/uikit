@@ -32,7 +32,7 @@ import {
 import { cnSelectControlLayout } from '../../SelectControlLayout';
 import { cnSelectCreateButton } from '../../SelectCreateButton';
 import { cnSelectItemAll } from '../../SelectItemAll';
-import { SelectMultiple } from '../SelectMultiple';
+import { SelectMultiple } from '..';
 
 createRoot();
 clearStack();

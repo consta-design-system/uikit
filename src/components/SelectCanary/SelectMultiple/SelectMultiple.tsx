@@ -28,10 +28,7 @@ export const SelectMultiple = factoryComponent<
   HTMLDivElement,
   SelectProps<SelectItemDefault, SelectGroupDefault, true>
 >((_, propsAtom) => {
-  const propsWithDefaultAtom = computed(
-    () => withDefault(propsAtom()),
-    'propsWithDefaultAtom',
-  );
+  const propsWithDefaultAtom = computed(() => withDefault(propsAtom()));
 
   const {
     getOptionActions,
@@ -64,35 +61,33 @@ export const SelectMultiple = factoryComponent<
     disabledAtom,
   } = model<SelectItemDefault, SelectGroupDefault, true>(propsWithDefaultAtom);
 
-  const renderItemDefault: SelectPropRenderItem<SelectItemDefault> = wrap(
-    action(
-      ({
-        item,
-        active,
-        hovered,
-        onClick,
-        onMouseEnter,
-        ref,
-      }: RenderItemProps<SelectItemDefault>) => {
-        const { getItemLabel, size, dropdownForm, getItemDisabled } =
-          propsWithDefaultAtom();
+  const renderItemDefault: SelectPropRenderItem<SelectItemDefault> = action(
+    ({
+      item,
+      active,
+      hovered,
+      onClick,
+      onMouseEnter,
+      ref,
+    }: RenderItemProps<SelectItemDefault>) => {
+      const { getItemLabel, size, dropdownForm, getItemDisabled } =
+        propsWithDefaultAtom();
 
-        return (
-          <SelectItem
-            label={getItemLabel(item)}
-            active={active}
-            hovered={hovered}
-            size={size}
-            indent={dropdownForm === 'round' ? 'increased' : 'normal'}
-            onClick={onClick}
-            onMouseEnter={onMouseEnter}
-            disabled={getItemDisabled(item)}
-            ref={ref}
-            multiple
-          />
-        );
-      },
-    ),
+      return (
+        <SelectItem
+          label={getItemLabel(item)}
+          active={active}
+          hovered={hovered}
+          size={size}
+          indent={dropdownForm === 'round' ? 'increased' : 'normal'}
+          onClick={onClick}
+          onMouseEnter={onMouseEnter}
+          disabled={getItemDisabled(item)}
+          ref={ref}
+          multiple
+        />
+      );
+    },
   );
 
   const inlineControlRender = action((value: SelectItemDefault[]) => {
