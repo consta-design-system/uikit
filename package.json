@@ -119,7 +119,7 @@
     "@bem/sdk.naming.presets": "^0.2.3",
     "@consta/stand": "https://pkg.pr.new/consta-design-system/stand/@consta/stand@e9596e1",
     "@consta/table": "https://pkg.pr.new/consta-design-system/table/@consta/table@c6b5b31",
-    "@consta/uikit": "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@c54c147",
+    "@consta/uikit": "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@4eb88d5",
     "@cspell/dict-ru_ru": "^2.2.4",
     "@mdx-js/loader": "^2.1.5",
     "@oclif/command": "^1.8.16",
