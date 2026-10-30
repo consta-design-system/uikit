@@ -5,7 +5,7 @@ import { useMutableRef } from '../useMutableRef';
 
 type Props = {
   isActive?: boolean;
-  refs: ReadonlyArray<RefObject<HTMLElement>>;
+  refs: ReadonlyArray<RefObject<HTMLElement | null>>;
   handler: (event: FocusEvent) => void;
   debounce?: number;
 };

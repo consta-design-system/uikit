@@ -1,7 +1,7 @@
 import { ColorPickerInputProps } from '../ColorPickerInput';
 
 export type ColorControlProps<T> = ColorPickerInputProps<T> & {
-  markerRef?: React.RefObject<HTMLButtonElement>;
+  markerRef?: React.RefObject<HTMLButtonElement | null>;
   onlyMarker?: boolean;
 };
 

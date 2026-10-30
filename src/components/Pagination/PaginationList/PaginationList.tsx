@@ -57,7 +57,7 @@ const PaginationListRender = <ITEM extends PaginationBaseItemDefault>(
             }}
             label={getItemLabel(item)}
             active={value ? getItemKey?.(item) === getItemKey?.(value) : false}
-            ref={getItemRef?.(item)}
+            ref={getItemRef?.(item) as React.RefObject<HTMLElement> | undefined}
             as={getItemAs?.(item)}
             clickable={getItemClickable?.(item)}
             key={getItemKey(item)}

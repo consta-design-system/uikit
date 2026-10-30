@@ -64,7 +64,9 @@ const CheckboxGroupRender = (
             size={size}
             view={view}
             name={name}
-            ref={getItemRef(item)}
+            ref={
+              getItemRef(item) as React.RefObject<HTMLLabelElement> | undefined
+            }
             disabled={disabled || getItemDisabled?.(item)}
             checked={getChecked(item)}
             onChange={getOnChange(item)}

@@ -15,12 +15,12 @@ import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttri
 
 export type ColorPickerRootProps = PropsWithHTMLAttributesAndRef<
   {
-    anchorRef?: React.RefObject<HTMLElement>;
-    controlRef?: React.RefObject<HTMLElement>;
+    anchorRef?: React.RefObject<HTMLElement | null>;
+    controlRef?: React.RefObject<HTMLElement | null>;
     direction?: Direction;
     spareDirection?: Direction;
     possibleDirections?: Direction[];
-    viewportRef?: React.RefObject<HTMLElement>;
+    viewportRef?: React.RefObject<HTMLElement | null>;
     onOpen?: (open: boolean) => void;
     open?: boolean;
   },

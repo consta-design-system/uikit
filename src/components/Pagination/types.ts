@@ -109,7 +109,7 @@ export type PaginationBaseItemDefault = {
   key: string | number;
   label?: string;
   as?: AsTags;
-  ref?: React.RefObject<HTMLElement>;
+  ref?: React.RefObject<HTMLElement | null>;
   clickable?: boolean;
   attributes?: AsAttributes;
   onClick?: React.MouseEventHandler;

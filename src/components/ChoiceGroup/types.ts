@@ -11,7 +11,7 @@ export type ChoiceGroupDefaultItem = {
     JSX.IntrinsicElements['label'],
     'ref' | 'onChange' | 'children'
   >;
-  ref?: React.RefObject<HTMLLabelElement>;
+  ref?: React.RefObject<HTMLLabelElement | null>;
 };
 
 export const choiceGroupForms = ['default', 'brick', 'round'] as const;
@@ -45,7 +45,7 @@ export type ChoiceGroupPropGetItemAttributes<ITEM> = (
   | undefined;
 export type ChoiceGroupPropGetItemRef<ITEM> = (
   item: ITEM,
-) => React.RefObject<HTMLLabelElement> | undefined;
+) => React.RefObject<HTMLLabelElement | null> | undefined;
 
 export type ChoiceGroupPropValue<ITEM, MULTIPLE extends boolean> =
   | (MULTIPLE extends true ? ITEM[] : ITEM)

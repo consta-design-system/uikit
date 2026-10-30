@@ -19,7 +19,7 @@ export type TabsItemDefault = {
   leftSide?: React.ReactNode;
   disabled?: boolean;
   as?: AsTags;
-  ref?: React.RefObject<HTMLElement>;
+  ref?: React.RefObject<HTMLElement | null>;
   attributes?: AsAttributes;
 
   /**
@@ -60,7 +60,7 @@ export type TabsPropGetItemAttributes<ITEM> = (
 ) => TabsItemDefault['attributes'];
 export type TabsPropGetItemRef<ITEM> = (
   item: ITEM,
-) => React.RefObject<HTMLElement> | undefined;
+) => React.RefObject<HTMLElement | null> | undefined;
 
 export type TabsPropGetItemDisabled<ITEM> = (item: ITEM) => boolean | undefined;
 
@@ -79,7 +79,7 @@ export type RenderItemProps<ITEM> = {
   iconSize?: IconPropSize;
   onlyIcon?: boolean;
   label: string;
-  tabRef?: React.RefObject<HTMLElement>;
+  tabRef?: React.RefObject<HTMLElement | null>;
   renderInDropdown?: boolean;
 } & Omit<TabsItemDefault, 'label' | 'ref'>;
 
@@ -95,7 +95,7 @@ export type TabsFitModeWrapperProps<ITEM> = {
   renderItem: (item: ITEM) => React.ReactNode;
   renderItemsList: RenderItemsListProp;
   onChange: TabsPropOnChange<ITEM>;
-  tabRefs: Array<React.RefObject<HTMLElement>>;
+  tabRefs: Array<React.RefObject<HTMLElement | null>>;
   size: TabsPropSize;
   withScrollButtons?: boolean;
 };
@@ -167,7 +167,7 @@ export type TabsTabProps<AS extends AsTags = 'button'> = PropsWithAsAttributes<
     onlyIcon?: boolean;
     className?: string;
     label: string;
-    tabRef?: React.RefObject<HTMLElement>;
+    tabRef?: React.RefObject<HTMLElement | null>;
     renderInDropdown?: boolean;
   } & Omit<TabsItemDefault, 'label' | 'ref' | 'attributes'>,
   AS

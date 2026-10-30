@@ -18,7 +18,7 @@ export type BadgeGroupDefaultItem = {
   iconLeft?: IconComponent;
   iconRight?: IconComponent;
   as?: AsTags;
-  ref?: React.RefObject<HTMLElement>;
+  ref?: React.RefObject<HTMLElement | null>;
   attributes?: Omit<AsAttributes, 'children' | 'ref'>;
 };
 
@@ -70,7 +70,7 @@ export type BadgeGroupProps<ITEM = BadgeGroupDefaultItem> =
       form?: BadgePropForm;
       size?: BadgePropSize;
       minified?: boolean;
-      moreRef?: React.RefObject<HTMLDivElement>;
+      moreRef?: React.RefObject<HTMLDivElement | null>;
       moreAttributes?: Omit<React.HTMLAttributes<HTMLDivElement>, 'children'>;
     },
     HTMLDivElement

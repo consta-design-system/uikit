@@ -24,7 +24,7 @@ export const arraysIsEq = (arr1: number[], arr2: number[]) =>
   arr1.join('-') === arr2.join('-');
 
 export const useScroll = (
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   fn: () => void,
   isActive: boolean,
 ) => {

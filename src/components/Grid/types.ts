@@ -36,7 +36,7 @@ export type GridPropBreakpoints = Record<number, GridBreakpoint>;
 
 export type GridProps = GridBreakpoint & {
   breakpoints?: GridPropBreakpoints;
-  breakpointsForRef?: React.RefObject<HTMLElement>;
+  breakpointsForRef?: React.RefObject<HTMLElement | null>;
 };
 
 type GridItemBreakpoint = {
@@ -51,5 +51,5 @@ export type GridItemPropBreakpoints = Record<number, GridItemBreakpoint>;
 
 export type GridItemProps = GridItemBreakpoint & {
   breakpoints?: GridItemPropBreakpoints;
-  breakpointsForRef?: React.RefObject<HTMLElement>;
+  breakpointsForRef?: React.RefObject<HTMLElement | null>;
 };

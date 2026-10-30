@@ -13,12 +13,12 @@ export type ColorPickerProps<T> = PropsWithHTMLAttributesAndRef<
     value?: T;
     onOpen?: (open: boolean) => void;
     open?: boolean;
-    anchorRef?: React.RefObject<HTMLElement>;
-    controlRef?: React.RefObject<HTMLElement>;
+    anchorRef?: React.RefObject<HTMLElement | null>;
+    controlRef?: React.RefObject<HTMLElement | null>;
     direction?: Direction;
     spareDirection?: Direction;
     possibleDirections?: Direction[];
-    viewportRef?: React.RefObject<HTMLElement>;
+    viewportRef?: React.RefObject<HTMLElement | null>;
     header?: React.ReactNode;
     onChange: (value: T) => void;
     alpha?: boolean;

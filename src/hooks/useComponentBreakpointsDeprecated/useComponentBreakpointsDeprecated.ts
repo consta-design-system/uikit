@@ -5,11 +5,12 @@ import { Map, Returned } from '##/hooks/useBreakpoints/types';
 import { useMutableRef } from '##/hooks/useMutableRef';
 import { isEq } from '##/utils/object/isEq';
 
-const getWidth = (ref: React.RefObject<HTMLElement | SVGGraphicsElement>) =>
-  ref.current?.getBoundingClientRect().width || 0;
+const getWidth = (
+  ref: React.RefObject<HTMLElement | SVGGraphicsElement | null>,
+) => ref.current?.getBoundingClientRect().width || 0;
 
 export const useComponentBreakpoints = <POINTS extends string>(
-  ref: React.RefObject<HTMLElement | SVGGraphicsElement>,
+  ref: React.RefObject<HTMLElement | SVGGraphicsElement | null>,
   map: Map<POINTS>,
 ) => {
   const [points, setSetPoints] = useState<Returned<POINTS>>(() =>

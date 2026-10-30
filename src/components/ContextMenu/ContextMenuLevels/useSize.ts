@@ -4,7 +4,7 @@ import { ComponentSize, getElementSize } from '##/hooks/useComponentSize';
 import { useMutableRef } from '##/hooks/useMutableRef';
 
 export const useSize = (
-  refs: React.RefObject<HTMLDivElement>[],
+  refs: React.RefObject<HTMLDivElement | null>[],
   setFn: React.Dispatch<React.SetStateAction<ComponentSize>>,
   isActive?: boolean,
 ) => {

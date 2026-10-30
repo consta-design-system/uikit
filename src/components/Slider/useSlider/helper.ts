@@ -21,9 +21,9 @@ export type UseSliderProps<RANGE extends boolean = false> = {
   step?: number | number[];
   onChange?: SliderPropOnChange<RANGE>;
   onAfterChange?: SliderPropOnChange<RANGE>;
-  containerRef: React.RefObject<HTMLDivElement>;
-  sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement>;
-  buttonRefs: React.RefObject<HTMLButtonElement>[];
+  containerRef: React.RefObject<HTMLDivElement | null>;
+  sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement | null>;
+  buttonRefs: React.RefObject<HTMLButtonElement | null>[];
 };
 
 export type UseSliderValues = {
@@ -78,7 +78,7 @@ export const getActiveValue = (
 
 export const detectActiveButton: (
   position: TrackPosition,
-  buttons: React.RefObject<HTMLButtonElement>[],
+  buttons: React.RefObject<HTMLButtonElement | null>[],
 ) => ActiveButton = (position, buttons) => {
   let activeButton: ActiveButton = null;
   buttons.forEach((buttonRef, index) => {
@@ -161,7 +161,7 @@ export const isValidValue = (
 
 export const getValueByPosition = (
   position: TrackPosition,
-  sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement>,
+  sliderRef: React.RefObject<HTMLDivElement | HTMLButtonElement | null>,
   min: number,
   max: number,
   step?: number | number[],

@@ -3,16 +3,16 @@ import React, { createRef, useMemo } from 'react';
 import { useDebounce } from '##/hooks/useDebounce';
 
 type UseScrollElementsResult = {
-  refs: React.RefObject<HTMLElement>[];
+  refs: React.RefObject<HTMLElement | null>[];
   scrollTo: (index: number) => void;
 };
 
 export function useScrollElements<ITEM>(
   items: ITEM[],
-  containerRef?: React.RefObject<HTMLElement>,
+  containerRef?: React.RefObject<HTMLElement | null>,
 ): UseScrollElementsResult {
   const refs = useMemo(() => {
-    const refArray: React.RefObject<HTMLElement>[] = [];
+    const refArray: React.RefObject<HTMLElement | null>[] = [];
 
     for (let i = 0; i < items.length; i++) {
       refArray[i] = createRef<HTMLElement>();

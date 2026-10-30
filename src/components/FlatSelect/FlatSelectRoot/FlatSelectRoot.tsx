@@ -13,12 +13,12 @@ import { PropsWithHTMLAttributesAndRef } from '##/utils/types/PropsWithHTMLAttri
 
 export type FlatSelectRootProps = PropsWithHTMLAttributesAndRef<
   {
-    anchorRef?: React.RefObject<HTMLElement>;
+    anchorRef?: React.RefObject<HTMLElement | null>;
     openAtom: AtomMut<boolean>;
     direction?: Direction;
     spareDirection?: Direction;
     possibleDirections?: Direction[];
-    viewportRef?: React.RefObject<HTMLElement>;
+    viewportRef?: React.RefObject<HTMLElement | null>;
     container?: Element;
   },
   HTMLDivElement

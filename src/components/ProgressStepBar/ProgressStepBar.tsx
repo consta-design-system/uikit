@@ -147,7 +147,7 @@ function ProgressStepBarRender<ITEM = ProgressStepBarItemDefault>(
       tooltipContent: getItemTooltipContent(item),
       size,
       position: getItemPosition(index, steps.length),
-      pointRef: stepsRef[index] as React.RefObject<HTMLButtonElement>,
+      pointRef: stepsRef[index] as React.RefObject<HTMLButtonElement | null>,
       direction,
       className: cnProgressStepBar('Item'),
       onClick: onClick || onItemClickHandler,

@@ -105,7 +105,11 @@ const ChoiceGroupRender = (
               iconSize={iconSize}
               multiple={multiple}
               onlyIcon={onlyIcon}
-              ref={getItemRef(item)}
+              ref={
+                getItemRef(item) as
+                  | React.RefObject<HTMLLabelElement>
+                  | undefined
+              }
               name={name}
               disabled={disabled || itemDisabled}
               title={onlyIcon || truncate ? label : undefined}

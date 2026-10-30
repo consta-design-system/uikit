@@ -132,8 +132,10 @@ export type SelectPropsInit<
     'onScrollToBottom'?: (length: number) => void;
     'onDropdownOpen'?: (isOpen: boolean) => void;
     'dropdownOpen'?: boolean;
-    'dropdownViewportRef'?: React.RefObject<HTMLElement>;
-    'ignoreOutsideClicksRefs'?: ReadonlyArray<React.RefObject<HTMLElement>>;
+    'dropdownViewportRef'?: React.RefObject<HTMLElement | null>;
+    'ignoreOutsideClicksRefs'?: ReadonlyArray<
+      React.RefObject<HTMLElement | null>
+    >;
     'clearButton'?: boolean;
     'iconClear'?: IconComponent;
     'selectAll'?: MULTIPLE extends true ? boolean : never;

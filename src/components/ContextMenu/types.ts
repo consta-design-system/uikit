@@ -128,7 +128,7 @@ export type ContextMenuPropGetGroupId<GROUP> = (group: GROUP) => number;
 
 type PositioningProps =
   | {
-      anchorRef: React.RefObject<HTMLElement>;
+      anchorRef: React.RefObject<HTMLElement | null>;
       position?: never;
     }
   | {
@@ -164,7 +164,7 @@ export type Level<ITEM> = {
   possibleDirections?: Direction[];
   offset?: PopoverPropOffset;
   parent?: ITEM;
-  anchorRef?: React.RefObject<HTMLElement>;
+  anchorRef?: React.RefObject<HTMLElement | null>;
   position?: Position;
 };
 
@@ -172,7 +172,7 @@ export type AddLevel<ITEM> = (params: {
   level: number;
   items: ITEM[];
   parent?: ITEM;
-  anchorRef?: React.RefObject<HTMLElement>;
+  anchorRef?: React.RefObject<HTMLElement | null>;
   position?: Position;
   activeItem: string;
 }) => void;
@@ -198,7 +198,7 @@ export type ContextMenuProps<
     form?: ContextMenuForm;
     isMobile?: boolean;
     onEsc?: React.KeyboardEventHandler;
-    viewportRef?: React.RefObject<HTMLElement>;
+    viewportRef?: React.RefObject<HTMLElement | null>;
     container?: Element;
   } & MappersItem<ITEM> &
     MappersGroup<GROUP> &
@@ -303,7 +303,7 @@ export type ContextMenuWrapperProps = PropsWithHTMLAttributes<
     size?: ContextMenuPropSize;
     direction?: Direction;
     offset?: PopoverPropOffset;
-    anchorRef?: React.RefObject<HTMLElement>;
+    anchorRef?: React.RefObject<HTMLElement | null>;
     position?: Position;
     onSetDirection?: (direction: Direction) => void;
     className?: string;
@@ -323,10 +323,10 @@ export type ContextMenuLevelWrapperProps = PropsWithHTMLAttributesAndRef<
     size?: ContextMenuPropSize;
     direction?: Direction;
     offset?: PopoverPropOffset;
-    anchorRef?: React.RefObject<HTMLElement>;
+    anchorRef?: React.RefObject<HTMLElement | null>;
     position?: Position;
     onSetDirection?: (direction: Direction) => void;
-    viewportRef?: React.RefObject<HTMLElement>;
+    viewportRef?: React.RefObject<HTMLElement | null>;
     container?: Element;
   },
   HTMLDivElement

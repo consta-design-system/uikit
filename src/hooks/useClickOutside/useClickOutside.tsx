@@ -6,7 +6,7 @@ export type ClickOutsideHandler = (event: MouseEvent) => void;
 
 type UseClickOutsideProps = {
   isActive?: boolean | (() => boolean | undefined);
-  ignoreClicksInsideRefs?: ReadonlyArray<RefObject<HTMLElement>>;
+  ignoreClicksInsideRefs?: ReadonlyArray<RefObject<HTMLElement | null>>;
   handler?: ClickOutsideHandler;
 };
 

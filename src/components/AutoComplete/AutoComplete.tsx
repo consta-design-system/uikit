@@ -163,7 +163,7 @@ const AutoCompleteRender = <
         disabled={disabled}
         ref={useForkRef([controlRef, ref])}
         inputRef={useForkRef([
-          inputRef as React.RefObject<HTMLInputElement>,
+          inputRef as React.RefObject<HTMLInputElement | null>,
           inputControlRef,
         ])}
         onBlur={handleInputBlur}

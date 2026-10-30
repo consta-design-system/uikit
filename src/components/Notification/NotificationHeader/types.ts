@@ -14,7 +14,7 @@ export type NotificationHeaderProps = PropsWithHTMLAttributesAndRef<
     title?: string;
     actions?: NotificationHeaderAction[];
     onClose?: React.EventHandler<React.MouseEvent>;
-    scrollContainerRef?: React.RefObject<HTMLDivElement>;
+    scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
   },
   HTMLDivElement
 >;

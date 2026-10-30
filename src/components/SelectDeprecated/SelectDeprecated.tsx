@@ -200,7 +200,7 @@ const SelectRender = <ITEM = DefaultItem, GROUP = DefaultGroup>(
         size={size}
         controlRef={controlRef}
         getOptionProps={getOptionProps}
-        dropdownRef={dropdownRef}
+        dropdownRef={dropdownRef as React.RefObject<HTMLDivElement>}
         form={dropdownForm}
         className={dropdownClassName}
         renderItem={renderItem || renderItemDefault}

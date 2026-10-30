@@ -53,7 +53,7 @@ type TextFieldProps = Parameters<typeof TextField>[0];
 export const useTextFieldEventsHandler = <P extends TextFieldProps>(
   props: P,
   handler: EventInterceptorHandler,
-  ref: React.RefObject<HTMLDivElement>,
+  ref: React.RefObject<HTMLDivElement | null>,
 ): P => {
   const [inputChanged, setInputChanged] = React.useState<boolean>(false);
   const newProps: P = { ...props };
