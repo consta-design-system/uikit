@@ -2589,9 +2589,9 @@
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-1.7.1.tgz#438d6fc7cb20ac1db67cc9502aa06eb83682ac62"
   integrity sha512-ZFngpjo9MlVyNnRU0SJqg2kbzHmh41ydqCYLOWokvhPjlgqUS7W+R38+dHSpIMyMe33wKBvF8LciSqhGwmuP9w==
 
-"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@e9596e1":
+"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@185fe99":
   version "0.0.163-alpha"
-  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@e9596e1#2b48c179286b419413e5f5c42e00bbfdf0045e2d"
+  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@185fe99#2b48c179286b419413e5f5c42e00bbfdf0045e2d"
   dependencies:
     "@consta/header" "^3.1.0"
     "@consta/icons" "^1.7.1"
@@ -2659,13 +2659,17 @@
     webpack-manifest-plugin "^5.0.0"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/table@https://pkg.pr.new/consta-design-system/table/@consta/table@c6b5b31":
+"@consta/table@https://pkg.pr.new/consta-design-system/table/@consta/table@1a34b67":
   version "0.8.1"
-  resolved "https://pkg.pr.new/consta-design-system/table/@consta/table@c6b5b31#8fb2234394a16bd8fab91ee5e5a9bc6be8bc70a4"
+  resolved "https://pkg.pr.new/consta-design-system/table/@consta/table@1a34b67#782f7623acbc69a5854822fd31a6a904281d279b"
 
 "@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@c54c147":
   version "5.34.0-alpha.2"
   resolved "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@c54c147#6a8e13fe630920daa6d3359b9dd1f5f9a0c2e371"
+
+"@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@d48dc46":
+  version "5.34.0-alpha.2"
+  resolved "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@d48dc46#d4d9937803363c4882eab9f6d0b86434b76217ea"
 
 "@cspell/cspell-bundled-dicts@8.16.1":
   version "8.16.1"
