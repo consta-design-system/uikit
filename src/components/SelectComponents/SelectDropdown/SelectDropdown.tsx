@@ -23,6 +23,7 @@ import { cnMixSpace } from '##/mixs/MixSpace';
 import { cn } from '##/utils/bem';
 import { fabricIndex } from '##/utils/fabricIndex';
 import { SelectAllItem } from '##/utils/getGroups';
+import { setRef } from '##/utils/setRef';
 import { PropsWithJsxAttributes } from '##/utils/types/PropsWithJsxAttributes';
 
 import { SelectCreateButton } from '../SelectCreateButton/SelectCreateButton';
@@ -75,6 +76,7 @@ type Props<ITEM, GROUP> = PropsWithJsxAttributes<{
   onScrollToBottom?: (length: number) => void;
   viewportRef?: React.RefObject<HTMLElement>;
   container?: Element;
+  enteredRef?: React.RefObject<boolean>;
 }>;
 
 type SelectDropdownComponent = <ITEM, GROUP>(
@@ -137,6 +139,7 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
     onScrollToBottom,
     viewportRef,
     container,
+    enteredRef,
     ...otherProps
   } = props;
 
@@ -192,7 +195,13 @@ export const SelectDropdown: SelectDropdownComponent = (props) => {
   }, [scrollElementRef.current]);
 
   return (
-    <Transition in={isOpen} unmountOnExit timeout={animateTimeout}>
+    <Transition
+      in={isOpen}
+      unmountOnExit
+      timeout={animateTimeout}
+      onEntered={() => setRef(enteredRef, true)}
+      onExited={() => setRef(enteredRef, false)}
+    >
       {(animate) => {
         const getIndex = fabricIndex();
         const getVirtualIndex = fabricIndex();
