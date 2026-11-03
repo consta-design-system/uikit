@@ -2589,9 +2589,9 @@
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-1.7.1.tgz#438d6fc7cb20ac1db67cc9502aa06eb83682ac62"
   integrity sha512-ZFngpjo9MlVyNnRU0SJqg2kbzHmh41ydqCYLOWokvhPjlgqUS7W+R38+dHSpIMyMe33wKBvF8LciSqhGwmuP9w==
 
-"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@97cff8c":
+"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@8fd3fe4":
   version "0.0.163-alpha"
-  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@97cff8c#f467b793168774cf9158687932c5e679eb1356c0"
+  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@8fd3fe4#992428e6f9bf1663da0166cb2e472e8e23c3a8a7"
   dependencies:
     "@consta/header" "^3.1.0"
     "@consta/icons" "^1.7.1"
