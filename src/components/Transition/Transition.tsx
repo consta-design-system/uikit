@@ -23,13 +23,13 @@ export type TransitionProps = {
   onEntered?: () => void;
   onExiting?: () => void;
   onExited?: () => void;
-  firstStatusAnimate?: boolean;
+  animateOnMount?: boolean;
 };
 
 export const Transition = factoryComponent<HTMLElement, TransitionProps>(
-  ({ in: inProp, firstStatusAnimate }, propsAtom) => {
+  ({ in: inProp, animateOnMount }, propsAtom) => {
     const status = atom<TransitionStatus>(
-      !firstStatusAnimate && inProp ? 'entered' : 'exited',
+      !animateOnMount && inProp ? 'entered' : 'exited',
     );
 
     const transitionInAtom = computed(() => propsAtom().in);

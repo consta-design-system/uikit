@@ -148,20 +148,20 @@ describe('Компонент TransitionGroupNode', () => {
       expect(rootEl?.textContent).toContain('текст');
     }));
 
-  test('пробрасывает in, index, onEntered, onExited и firstStatusAnimate в children', (ctx) =>
+  test('пробрасывает in, index, onEntered, onExited и animateOnMount в children', (ctx) =>
     context.start(async () => {
       const SpyChild = (props: {
         in?: boolean;
         index?: number;
         onEntered?: () => void;
         onExited?: () => void;
-        firstStatusAnimate?: boolean;
+        animateOnMount?: boolean;
       }) => (
         <div
           data-testid="spy"
           data-in={String(props.in)}
           data-index={props.index}
-          data-first-status-animate={String(props.firstStatusAnimate)}
+          data-first-status-animate={String(props.animateOnMount)}
           data-on-entered={String(typeof props.onEntered === 'function')}
           data-on-exited={String(typeof props.onExited === 'function')}
         />

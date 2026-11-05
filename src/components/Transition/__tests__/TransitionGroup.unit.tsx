@@ -27,7 +27,7 @@ const renderNode = (items: Item[]) => (
       items={items}
       timeout={timeout}
       getItemKey={(item) => item.id}
-      renderItem={(item, index, animate) => (
+      renderItem={(item, animate) => (
         <div data-testid={itemTestId(item.id)} data-status={animate}>
           {item.label}
         </div>

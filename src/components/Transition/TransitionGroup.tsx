@@ -7,7 +7,6 @@ import { Transition, TransitionProps, TransitionStatus } from './Transition';
 
 export type RenderItem<T> = (
   item: T,
-  index: number,
   animate: TransitionStatus,
 ) => React.ReactNode;
 
@@ -15,7 +14,7 @@ export type TransitionGroupProps<T> = {
   children?: never;
   items: T[];
   renderItem: RenderItem<T>;
-  getItemKey: (item: T, index: number) => React.Key;
+  getItemKey: (item: T) => React.Key;
   timeout?: TransitionProps['timeout'];
   unmountOnExit?: boolean;
 };
@@ -31,7 +30,6 @@ type ItemsMap<T> = Record<string, Item<T>>;
 
 type TransitionGroupItemProps = {
   item: unknown;
-  index: number;
   in: boolean;
   renderItem: RenderItem<unknown>;
   handleEntered: (key: React.Key) => void;
@@ -44,7 +42,6 @@ type TransitionGroupItemProps = {
 const TransitionGroupItem = memo(
   ({
     item,
-    index,
     in: inProp,
     renderItem,
     handleEntered,
@@ -60,9 +57,9 @@ const TransitionGroupItem = memo(
         unmountOnExit={unmountOnExit}
         onEntered={() => handleEntered(id)}
         onExited={() => handleExited(id)}
-        firstStatusAnimate
+        animateOnMount
       >
-        {(animate) => renderItem(item, index, animate)}
+        {(animate) => renderItem(item, animate)}
       </Transition>
     );
   },
@@ -77,14 +74,10 @@ const TransitionGroupInner = factoryComponent<
     const props = propsAtom();
 
     if (!Array.isArray(props.items) || props.items.length === 0) {
-      return 'notArray';
+      return '__empty-array';
     }
 
-    return props.items
-      ?.map(
-        (item, index) => props.getItemKey?.(item, index) ?? (item as React.Key),
-      )
-      .join('---');
+    return props.items?.map((item) => props.getItemKey?.(item)).join('---');
   });
 
   const processItems = action(() => {
@@ -94,11 +87,8 @@ const TransitionGroupInner = factoryComponent<
     const newKeys = new Set<string>();
 
     // Собираем новые ключи
-    props.items?.forEach((item, index) => {
-      const key = String(
-        props.getItemKey?.(item, index) ?? (item as React.Key),
-      );
-      newKeys.add(key);
+    props.items?.forEach((item) => {
+      newKeys.add(String(props.getItemKey?.(item)));
     });
 
     const nextItems: ItemsMap<unknown> = {};
@@ -119,10 +109,8 @@ const TransitionGroupInner = factoryComponent<
     }
 
     // Добавляем новые элементы
-    props.items?.forEach((item, index) => {
-      const key = String(
-        props.getItemKey?.(item, index) ?? (item as React.Key),
-      );
+    props.items?.forEach((item) => {
+      const key = String(props.getItemKey?.(item) ?? (item as React.Key));
       if (!currentKeys.has(key)) {
         nextItems[key] = {
           status: 'entering',
@@ -173,13 +161,12 @@ const TransitionGroupInner = factoryComponent<
   });
 
   return ({ timeout, unmountOnExit }) =>
-    Object.entries(items()).map(([key, entry], index) => {
+    Object.entries(items()).map(([key, entry]) => {
       return (
         <TransitionGroupItem
           key={key}
           id={key}
           item={entry.item}
-          index={index}
           in={entry.status !== 'exiting'}
           timeout={timeout}
           unmountOnExit={unmountOnExit}

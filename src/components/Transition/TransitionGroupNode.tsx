@@ -44,7 +44,7 @@ const TransitionGroupNodeItem = memo(
       index,
       onEntered: () => handleEntered(id),
       onExited: () => handleExited(id),
-      firstStatusAnimate: true,
+      animateOnMount: true,
     });
   },
 );

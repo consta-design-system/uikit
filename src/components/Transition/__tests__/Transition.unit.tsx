@@ -57,7 +57,7 @@ describe('Компонент Transition', () => {
       expect(render).not.toThrow();
     }));
 
-  test('при in=true и без firstStatusAnimate статус сразу entered', (ctx) =>
+  test('при in=true и без animateOnMount статус сразу entered', (ctx) =>
     context.start(async () => {
       renderComponent(ctx, { in: true, timeout });
 
@@ -71,9 +71,9 @@ describe('Компонент Transition', () => {
       expect(getStatus(ctx)).toBe('exited');
     }));
 
-  test('при in=true и firstStatusAnimate=true анимация начинается с exited', (ctx) =>
+  test('при in=true и animateOnMount=true анимация начинается с exited', (ctx) =>
     context.start(async () => {
-      renderComponent(ctx, { in: true, timeout, firstStatusAnimate: true });
+      renderComponent(ctx, { in: true, timeout, animateOnMount: true });
 
       expect(getStatus(ctx)).toBe('exited');
 

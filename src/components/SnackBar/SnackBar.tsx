@@ -3,7 +3,6 @@ import './SnackBar.css';
 import React, { forwardRef } from 'react';
 
 import { TransitionGroup } from '##/components/Transition';
-import { useRefs } from '##/hooks/useRefs';
 import { cn } from '##/utils/bem';
 
 import { usePropsHandler } from '../EventInterceptor/usePropsHandler';
@@ -44,8 +43,6 @@ const SnackBarRender = (
     ...otherProps
   } = props;
 
-  const refs = useRefs<HTMLDivElement>(items.length);
-
   return (
     <div className={cnSnackBar(null, [className])} ref={ref} {...otherProps}>
       <TransitionGroup
@@ -53,9 +50,8 @@ const SnackBarRender = (
         getItemKey={getItemKey}
         unmountOnExit
         timeout={200}
-        renderItem={(item, index, animate) => (
+        renderItem={(item, animate) => (
           <SnackBarItemMemo
-            ref={refs[index]}
             form={form}
             progressView={progressView}
             className={cnSnackBar('Item', { animate })}
