@@ -179,7 +179,7 @@ describe('Компонент TransitionGroupNode', () => {
       expect(spy?.getAttribute('data-on-exited')).toBe('true');
     }));
 
-  test('пользовательские колбеки onEntering/onEntered вызываются после клонирования элемента', (ctx) =>
+  test('пользовательские колбэки onEntering/onEntered вызываются после клонирования элемента', (ctx) =>
     context.start(async () => {
       const onEntering = vi.fn();
       const onEntered = vi.fn();
@@ -209,7 +209,7 @@ describe('Компонент TransitionGroupNode', () => {
       expect(onEntered).toHaveBeenCalledTimes(1);
     }));
 
-  test('пользовательские колбеки onExiting/onExited вызываются после клонирования, узел удаляется из DOM', (ctx) =>
+  test('пользовательские колбэки onExiting/onExited вызываются после клонирования, узел удаляется из DOM', (ctx) =>
     context.start(async () => {
       const onExiting = vi.fn();
       const onExited = vi.fn();

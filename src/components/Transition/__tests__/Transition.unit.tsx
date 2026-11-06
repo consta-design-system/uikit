@@ -278,7 +278,7 @@ describe('Компонент Transition', () => {
       expect(onExited).not.toHaveBeenCalled();
     }));
 
-  test('animateOnMount: колбеки вызываются при монтировании без переключения in', (ctx) =>
+  test('animateOnMount: колбэки вызываются при монтировании без переключения in', (ctx) =>
     context.start(async () => {
       const onEntering = vi.fn();
       const onEntered = vi.fn();
@@ -301,7 +301,7 @@ describe('Компонент Transition', () => {
       expect(onEntered).toHaveBeenCalledTimes(1);
     }));
 
-  test('использует актуальные колбеки после ререндера (без stale props)', (ctx) =>
+  test('использует актуальные колбэки после ререндера (без stale props)', (ctx) =>
     context.start(async () => {
       const firstOnEntered = vi.fn();
       const secondOnEntered = vi.fn();
