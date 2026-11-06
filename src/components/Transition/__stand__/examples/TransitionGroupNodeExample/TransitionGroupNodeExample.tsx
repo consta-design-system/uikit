@@ -62,12 +62,13 @@ export const TransitionGroupNodeExample = () => {
               {(animate) => (
                 <ListItem
                   className={cnTransitionGroupNodeExample('Item', { animate })}
-                  leftSide={
+                  rightSide={
                     <Button
                       size="xs"
                       view="ghost"
                       iconLeft={IconTrash}
                       onClick={() => handleRemove(todo.id)}
+                      form="round"
                     />
                   }
                   label={todo.text}

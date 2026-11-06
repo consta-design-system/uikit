@@ -140,7 +140,11 @@ export const TransitionGroupExample = () => {
 
   return (
     <>
-      <div className={cnMixFlex({ flex: 'flex', direction: 'row', gap: 's' })}>
+      <div
+        className={`${cnMixFlex({ flex: 'flex', direction: 'row', gap: 's' })} ${cnMixSpace(
+          { mB: 's' },
+        )}`}
+      >
         <Button label="Добавить" onClick={handleAdd} />
         <Button label="Удалить все" onClick={handleClearAll} />
       </div>
@@ -268,12 +272,13 @@ export const TransitionGroupNodeExample = () => {
             {(animate) => (
               <ListItem
                 className={cnTransitionGroupNodeExample('Item', { animate })}
-                leftSide={
+                rightSide={
                   <Button
                     size="xs"
                     view="ghost"
                     iconLeft={IconTrash}
                     onClick={() => handleRemove(todo.id)}
+                    form="round"
                   />
                 }
                 label={todo.text}
