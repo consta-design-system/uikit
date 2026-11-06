@@ -3,7 +3,7 @@ import { reatomContext } from '@reatom/react';
 import { act } from '@testing-library/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 
 import { createRoot, TestContext, testRootId, tick } from '##/utils/vitest';
 
@@ -176,5 +176,100 @@ describe('Компонент TransitionGroupNode', () => {
       expect(spy?.getAttribute('data-first-status-animate')).toBe('true');
       expect(spy?.getAttribute('data-on-entered')).toBe('true');
       expect(spy?.getAttribute('data-on-exited')).toBe('true');
+    }));
+
+  test('пользовательские колбеки onEntering/onEntered вызываются после клонирования элемента', (ctx) =>
+    context.start(async () => {
+      const onEntering = vi.fn();
+      const onEntered = vi.fn();
+
+      renderComponent(ctx, [
+        <TransitionNode
+          key="a"
+          id="a"
+          onEntering={onEntering}
+          onEntered={onEntered}
+        />,
+      ]);
+
+      expect(onEntering).not.toHaveBeenCalled();
+      expect(onEntered).not.toHaveBeenCalled();
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getNodeStatus(ctx, 'a')).toBe('entering');
+      expect(onEntering).toHaveBeenCalledTimes(1);
+      expect(onEntered).not.toHaveBeenCalled();
+
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getNodeStatus(ctx, 'a')).toBe('entered');
+      expect(onEntering).toHaveBeenCalledTimes(1);
+      expect(onEntered).toHaveBeenCalledTimes(1);
+    }));
+
+  test('пользовательские колбеки onExiting/onExited вызываются после клонирования, узел удаляется из DOM', (ctx) =>
+    context.start(async () => {
+      const onExiting = vi.fn();
+      const onExited = vi.fn();
+
+      const root = renderComponent(ctx, [
+        <TransitionNode key="a" id="a" />,
+        <TransitionNode
+          key="b"
+          id="b"
+          onExiting={onExiting}
+          onExited={onExited}
+        />,
+      ]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getNodeStatus(ctx, 'b')).toBe('entered');
+      expect(onExiting).not.toHaveBeenCalled();
+      expect(onExited).not.toHaveBeenCalled();
+
+      rerenderComponent(root, <TransitionNode key="a" id="a" />);
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getNodeStatus(ctx, 'b')).toBe('exiting');
+      expect(onExiting).toHaveBeenCalledTimes(1);
+      expect(onExited).not.toHaveBeenCalled();
+
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getNodeEl(ctx, 'b')).toBeNull();
+      expect(onExiting).toHaveBeenCalledTimes(1);
+      expect(onExited).toHaveBeenCalledTimes(1);
+    }));
+
+  test('unmountOnExit пробрасывается после клонирования, узел удаляется из DOM после выхода', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, [
+        <TransitionNode key="a" id="a" />,
+        <TransitionNode key="b" id="b" unmountOnExit />,
+      ]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getNodeEl(ctx, 'b')).not.toBeNull();
+      expect(getNodeStatus(ctx, 'b')).toBe('entered');
+
+      rerenderComponent(root, <TransitionNode key="a" id="a" />);
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getNodeStatus(ctx, 'b')).toBe('exiting');
+      expect(getNodeEl(ctx, 'b')).not.toBeNull();
+
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getNodeEl(ctx, 'b')).toBeNull();
+      expect(getNodeEl(ctx, 'a')).not.toBeNull();
     }));
 });
