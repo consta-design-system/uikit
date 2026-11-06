@@ -148,11 +148,10 @@ describe('Компонент TransitionGroupNode', () => {
       expect(rootEl?.textContent).toContain('текст');
     }));
 
-  test('пробрасывает in, index, onEntered, onExited и animateOnMount в children', (ctx) =>
+  test('пробрасывает in, onEntered, onExited и animateOnMount в children', (ctx) =>
     context.start(async () => {
       const SpyChild = (props: {
         in?: boolean;
-        index?: number;
         onEntered?: () => void;
         onExited?: () => void;
         animateOnMount?: boolean;
@@ -160,7 +159,6 @@ describe('Компонент TransitionGroupNode', () => {
         <div
           data-testid="spy"
           data-in={String(props.in)}
-          data-index={props.index}
           data-first-status-animate={String(props.animateOnMount)}
           data-on-entered={String(typeof props.onEntered === 'function')}
           data-on-exited={String(typeof props.onExited === 'function')}
@@ -175,7 +173,6 @@ describe('Компонент TransitionGroupNode', () => {
 
       expect(spy).not.toBeNull();
       expect(spy?.getAttribute('data-in')).toBe('true');
-      expect(spy?.getAttribute('data-index')).toBe('0');
       expect(spy?.getAttribute('data-first-status-animate')).toBe('true');
       expect(spy?.getAttribute('data-on-entered')).toBe('true');
       expect(spy?.getAttribute('data-on-exited')).toBe('true');

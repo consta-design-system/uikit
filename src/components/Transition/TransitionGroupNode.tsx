@@ -18,7 +18,6 @@ type ItemsMap = Record<string, Item>;
 
 type TransitionGroupNodeItemProps = {
   node: React.ReactNode;
-  index: number;
   in: boolean;
   handleEntered: (key: React.Key) => void;
   handleExited: (key: React.Key) => void;
@@ -28,7 +27,6 @@ type TransitionGroupNodeItemProps = {
 const TransitionGroupNodeItem = memo(
   ({
     node,
-    index,
     in: inProp,
     handleEntered,
     handleExited,
@@ -41,9 +39,14 @@ const TransitionGroupNodeItem = memo(
     return React.cloneElement(node, {
       ...node.props,
       in: inProp,
-      index,
-      onEntered: () => handleEntered(id),
-      onExited: () => handleExited(id),
+      onEntered: () => {
+        handleEntered(id);
+        node.props.onEntered?.();
+      },
+      onExited: () => {
+        node.props.onExited?.();
+        handleExited(id);
+      },
       animateOnMount: true,
     });
   },
@@ -60,13 +63,13 @@ const TransitionGroupNodeInner = factoryComponent<
     const nodes = React.Children.toArray(props.children);
 
     if (nodes.length === 0) {
-      return 'notArray';
+      return '__notNodes';
     }
 
     return nodes
       ?.map((node) => {
         if (React.isValidElement(node)) {
-          return node.key ?? String(node.props?.index ?? '');
+          return node.key;
         }
         return String(node);
       })
@@ -161,13 +164,12 @@ const TransitionGroupNodeInner = factoryComponent<
   });
 
   return () =>
-    Object.entries(items()).map(([key, entry], index) => {
+    Object.entries(items()).map(([key, entry]) => {
       return (
         <TransitionGroupNodeItem
           key={key}
           id={key}
           node={entry.node}
-          index={index}
           in={entry.status !== 'exiting'}
           handleEntered={handleEntered}
           handleExited={handleExited}
