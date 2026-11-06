@@ -156,4 +156,165 @@ describe('Компонент TransitionGroup', () => {
       await wrap(tick());
       expect(getItemStatus(ctx, 'b')).toBe('entered');
     }));
+
+  test('переход к пустому массиву: все элементы анимируются и удаляются', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, [itemA, itemB]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemStatus(ctx, 'a')).toBe('entered');
+      expect(getItemStatus(ctx, 'b')).toBe('entered');
+
+      rerenderComponent(root, []);
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemStatus(ctx, 'a')).toBe('exiting');
+      expect(getItemStatus(ctx, 'b')).toBe('exiting');
+      expect(getItemEl(ctx, 'a')).not.toBeNull();
+      expect(getItemEl(ctx, 'b')).not.toBeNull();
+
+      await wrap(sleep(timeout));
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemEl(ctx, 'a')).toBeNull();
+      expect(getItemEl(ctx, 'b')).toBeNull();
+    }));
+
+  test('обновление элемента с тем же ключом не запускает повторную анимацию', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, [itemA]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemStatus(ctx, 'a')).toBe('entered');
+
+      rerenderComponent(root, [{ id: 'a', label: 'A updated' }]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemEl(ctx, 'a')?.textContent).toBe('A updated');
+      expect(getItemStatus(ctx, 'a')).toBe('entered');
+    }));
+
+  test('одновременные добавление и удаление элементов', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, [itemA]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemStatus(ctx, 'a')).toBe('entered');
+
+      rerenderComponent(root, [itemB]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemStatus(ctx, 'a')).toBe('exiting');
+      expect(getItemStatus(ctx, 'b')).toBe('entering');
+      expect(getItemEl(ctx, 'a')).not.toBeNull();
+      expect(getItemEl(ctx, 'b')).not.toBeNull();
+
+      await wrap(sleep(timeout));
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemEl(ctx, 'a')).toBeNull();
+      expect(getItemEl(ctx, 'b')).not.toBeNull();
+      expect(getItemStatus(ctx, 'b')).toBe('entered');
+    }));
+
+  test('удаление элемента во время входа (entering) корректно завершает exit', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, [itemA]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemStatus(ctx, 'a')).toBe('entering');
+
+      rerenderComponent(root, []);
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemStatus(ctx, 'a')).toBe('exiting');
+      expect(getItemEl(ctx, 'a')).not.toBeNull();
+
+      await wrap(sleep(timeout));
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemEl(ctx, 'a')).toBeNull();
+    }));
+
+  test('перестановка элементов сохраняет статусы', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, [itemA, itemB]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemStatus(ctx, 'a')).toBe('entered');
+      expect(getItemStatus(ctx, 'b')).toBe('entered');
+
+      rerenderComponent(root, [itemB, itemA]);
+
+      await wrap(tick());
+      expect(getItemStatus(ctx, 'a')).toBe('entered');
+      expect(getItemStatus(ctx, 'b')).toBe('entered');
+      expect(getItemEl(ctx, 'a')).not.toBeNull();
+      expect(getItemEl(ctx, 'b')).not.toBeNull();
+    }));
+
+  test('getItemKey может возвращать число', (ctx) =>
+    context.start(async () => {
+      type NumberItem = { id: number; label: string };
+
+      const numberItems: NumberItem[] = [
+        { id: 1, label: 'A' },
+        { id: 2, label: 'B' },
+      ];
+
+      const root = ReactDOM.createRoot(
+        document.getElementById(testRootId(ctx))!,
+      );
+      act(() => {
+        root.render(
+          <reatomContext.Provider value={top()}>
+            <TransitionGroup
+              items={numberItems}
+              timeout={timeout}
+              getItemKey={(item: NumberItem) => item.id}
+              renderItem={(item: NumberItem, animate) => (
+                <div
+                  data-testid={itemTestId(String(item.id))}
+                  data-status={animate}
+                >
+                  {item.label}
+                </div>
+              )}
+            />
+          </reatomContext.Provider>,
+        );
+      });
+
+      expect(getItemEl(ctx, '1')).not.toBeNull();
+      expect(getItemEl(ctx, '2')).not.toBeNull();
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getItemStatus(ctx, '1')).toBe('entered');
+      expect(getItemStatus(ctx, '2')).toBe('entered');
+    }));
 });

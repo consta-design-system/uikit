@@ -210,4 +210,184 @@ describe('Компонент Transition', () => {
       expect(getStatus(ctx)).toBe('exited');
       expect(onEntering).not.toHaveBeenCalled();
     }));
+
+  test('прерывание анимации: переключение in=false во время entering', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, { in: false, timeout });
+
+      rerenderComponent(root, { in: true, timeout });
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('entering');
+
+      rerenderComponent(root, { in: false, timeout });
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('exiting');
+
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('exited');
+    }));
+
+  test('прерывание анимации: переключение in=true во время exiting', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, { in: true, timeout });
+      expect(getStatus(ctx)).toBe('entered');
+
+      rerenderComponent(root, { in: false, timeout });
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('exiting');
+
+      rerenderComponent(root, { in: true, timeout });
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('entering');
+
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('entered');
+    }));
+
+  test('при начальном рендере с in=true и без animateOnMount вызывается только onEntered', (ctx) =>
+    context.start(async () => {
+      const onEntering = vi.fn();
+      const onEntered = vi.fn();
+      const onExiting = vi.fn();
+      const onExited = vi.fn();
+      renderComponent(ctx, {
+        in: true,
+        timeout,
+        animateOnMount: false,
+        onEntering,
+        onEntered,
+        onExiting,
+        onExited,
+      });
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(tick());
+
+      expect(getStatus(ctx)).toBe('entered');
+      expect(onEntering).not.toHaveBeenCalled();
+      expect(onEntered).toHaveBeenCalledTimes(1);
+      expect(onExiting).not.toHaveBeenCalled();
+      expect(onExited).not.toHaveBeenCalled();
+    }));
+
+  test('animateOnMount: колбеки вызываются при монтировании без переключения in', (ctx) =>
+    context.start(async () => {
+      const onEntering = vi.fn();
+      const onEntered = vi.fn();
+      renderComponent(ctx, {
+        in: true,
+        timeout,
+        animateOnMount: true,
+        onEntering,
+        onEntered,
+      });
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(onEntering).toHaveBeenCalledTimes(1);
+      expect(onEntered).not.toHaveBeenCalled();
+
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(onEntering).toHaveBeenCalledTimes(1);
+      expect(onEntered).toHaveBeenCalledTimes(1);
+    }));
+
+  test('использует актуальные колбеки после ререндера (без stale props)', (ctx) =>
+    context.start(async () => {
+      const firstOnEntered = vi.fn();
+      const secondOnEntered = vi.fn();
+      const root = renderComponent(ctx, {
+        in: false,
+        timeout,
+        onEntered: firstOnEntered,
+      });
+
+      rerenderComponent(root, {
+        in: true,
+        timeout,
+        onEntered: secondOnEntered,
+      });
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(tick());
+
+      expect(secondOnEntered).toHaveBeenCalledTimes(1);
+      expect(firstOnEntered).not.toHaveBeenCalled();
+    }));
+
+  test('timeout изменённый во время анимации не влияет на текущий запуск', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, { in: false, timeout: 100 });
+
+      rerenderComponent(root, { in: true, timeout: 100 });
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('entering');
+
+      rerenderComponent(root, { in: true, timeout: 20 });
+      await wrap(sleep(20));
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('entering');
+
+      await wrap(sleep(100));
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('entered');
+    }));
+
+  test('unmountOnExit: элемент остаётся в DOM во время exiting', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, {
+        in: true,
+        timeout,
+        unmountOnExit: true,
+      });
+      expect(getStatus(ctx)).toBe('entered');
+
+      rerenderComponent(root, { in: false, timeout, unmountOnExit: true });
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('exiting');
+      expect(getStatusEl(ctx)).not.toBeNull();
+
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getStatusEl(ctx)).toBeNull();
+    }));
+
+  test('размонтирование во время анимации не вызывает ошибок', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, { in: false, timeout });
+
+      rerenderComponent(root, { in: true, timeout });
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getStatus(ctx)).toBe('entering');
+
+      const errorSpy = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => undefined);
+
+      act(() => {
+        root.unmount();
+      });
+
+      await wrap(sleep(timeout));
+      await wrap(tick());
+
+      expect(errorSpy).not.toHaveBeenCalled();
+
+      errorSpy.mockRestore();
+    }));
 });

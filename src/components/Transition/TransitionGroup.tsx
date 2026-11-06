@@ -80,6 +80,10 @@ const TransitionGroupInner = factoryComponent<
     return props.items?.map((item) => props.getItemKey?.(item)).join('---');
   });
 
+  // отслеживает изменение содержимого items (новую ссылку массива),
+  // чтобы обновлять item у существующих ключей без повторной анимации
+  const itemsContentHash = computed(() => propsAtom().items);
+
   const processItems = action(() => {
     const props = peek(propsAtom);
     const currentItems = peek(items);
@@ -110,7 +114,7 @@ const TransitionGroupInner = factoryComponent<
 
     // Добавляем новые элементы
     props.items?.forEach((item) => {
-      const key = String(props.getItemKey?.(item) ?? (item as React.Key));
+      const key = String(props.getItemKey(item));
       if (!currentKeys.has(key)) {
         nextItems[key] = {
           status: 'entering',
@@ -157,6 +161,7 @@ const TransitionGroupInner = factoryComponent<
   // Следим за изменением items
   effect(() => {
     itemsKeysHash();
+    itemsContentHash();
     processItems();
   });
 

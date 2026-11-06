@@ -19,12 +19,13 @@ const nodeTestId = (id: string) => `node-${id}`;
 
 const TransitionNode = ({
   id,
+  label,
   ...transitionProps
-}: { id: string } & Partial<TransitionProps>) => (
+}: { id: string; label?: string } & Partial<TransitionProps>) => (
   <Transition {...transitionProps} timeout={transitionProps.timeout ?? timeout}>
     {(status) => (
       <div data-testid={nodeTestId(id)} data-status={status}>
-        {id}
+        {label ?? id}
       </div>
     )}
   </Transition>
@@ -271,5 +272,69 @@ describe('Компонент TransitionGroupNode', () => {
       await wrap(tick());
       expect(getNodeEl(ctx, 'b')).toBeNull();
       expect(getNodeEl(ctx, 'a')).not.toBeNull();
+    }));
+
+  test('переход к пустым детям: все узлы анимируются и удаляются', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, [<TransitionNode key="a" id="a" />]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getNodeStatus(ctx, 'a')).toBe('entered');
+
+      rerenderComponent(root, null);
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getNodeStatus(ctx, 'a')).toBe('exiting');
+
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getNodeEl(ctx, 'a')).toBeNull();
+    }));
+
+  test('обновление узла с тем же key не запускает повторную анимацию', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, [<TransitionNode key="a" id="a" />]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getNodeStatus(ctx, 'a')).toBe('entered');
+
+      rerenderComponent(root, [
+        <TransitionNode key="a" id="a" label="a updated" />,
+      ]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getNodeEl(ctx, 'a')?.textContent).toBe('a updated');
+      expect(getNodeStatus(ctx, 'a')).toBe('entered');
+    }));
+
+  test('замена узла за один рендер: старый выходит, новый входит', (ctx) =>
+    context.start(async () => {
+      const root = renderComponent(ctx, [<TransitionNode key="a" id="a" />]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getNodeStatus(ctx, 'a')).toBe('entered');
+
+      rerenderComponent(root, [<TransitionNode key="b" id="b" />]);
+
+      await wrap(sleep());
+      await wrap(tick());
+      expect(getNodeStatus(ctx, 'a')).toBe('exiting');
+      expect(getNodeEl(ctx, 'b')).not.toBeNull();
+
+      await wrap(sleep(timeout));
+      await wrap(tick());
+      expect(getNodeEl(ctx, 'a')).toBeNull();
+      expect(getNodeStatus(ctx, 'b')).toBe('entered');
     }));
 });

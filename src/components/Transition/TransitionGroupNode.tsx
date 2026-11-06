@@ -76,6 +76,10 @@ const TransitionGroupNodeInner = factoryComponent<
       .join('---');
   });
 
+  // отслеживает изменение содержимого children (новую ссылку),
+  // чтобы обновлять node у существующих ключей без повторной анимации
+  const childrenContentHash = computed(() => propsAtom().children);
+
   const processItems = action(() => {
     const props = peek(propsAtom);
     const currentItems = peek(items);
@@ -86,11 +90,7 @@ const TransitionGroupNodeInner = factoryComponent<
 
     // Собираем новые ключи
     nodes.forEach((node, index) => {
-      const key = String(
-        React.isValidElement(node)
-          ? (node.key ?? node.props?.index ?? index)
-          : index,
-      );
+      const key = String(React.isValidElement(node) ? node.key : index);
       newKeys.add(key);
     });
 
@@ -160,6 +160,7 @@ const TransitionGroupNodeInner = factoryComponent<
   // Следим за изменением items
   effect(() => {
     itemsKeysHash();
+    childrenContentHash();
     processItems();
   });
 
