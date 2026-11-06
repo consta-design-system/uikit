@@ -1,8 +1,7 @@
-import { AtomMut } from '@reatom/core';
-import { useAction } from '@reatom/npm-react';
+import { AtomLike } from '@reatom/core';
+import { useAction } from '@reatom/react';
 
 import { useElementAtomEventListener } from '##/utils/state/useElementAtomEventListener';
-import { useSendToAtom } from '##/utils/state/useSendToAtom';
 import { KeyCode } from '##/utils/types/KeyCode';
 
 export type KeyHandlers = Partial<
@@ -12,9 +11,9 @@ export type KeyHandlers = Partial<
 };
 
 type UseKeysProps<E extends HTMLElement> = {
-  elAtom: AtomMut<E | null>;
-  keysAtom?: AtomMut<KeyHandlers>;
-  isActiveAtom?: AtomMut<boolean>;
+  elAtom: AtomLike<E | null>;
+  keysAtom?: AtomLike<KeyHandlers>;
+  isActiveAtom?: AtomLike<boolean>;
   eventHandler?: (e: KeyboardEvent) => void;
   eventType?: 'keypress' | 'keydown' | 'keyup';
 };
@@ -26,14 +25,13 @@ export const useKeysAtom = <E extends HTMLElement>({
   eventType = 'keydown',
   eventHandler,
 }: UseKeysProps<E>) => {
-  const eventHandlerAtom = useSendToAtom([eventHandler]);
-  const fn = useAction((ctx, e: KeyboardEvent) => {
-    const keys = keysAtom && ctx.get(keysAtom);
-    const isActive = isActiveAtom && ctx.get(isActiveAtom);
+  const fn = useAction((e: KeyboardEvent) => {
+    const keys = keysAtom && keysAtom();
+    const isActive = isActiveAtom && isActiveAtom();
     if (keys && isActive) {
       (keys[e.code as KeyCode] || keys[e.key as KeyCode])?.(e);
     }
-    ctx.get(eventHandlerAtom)[0]?.(e);
+    eventHandler?.(e);
   });
 
   useElementAtomEventListener(elAtom, eventType, fn as EventListener);

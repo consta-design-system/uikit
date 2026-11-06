@@ -23,6 +23,7 @@ export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent =
       size,
       className,
       renderItem,
+      dropdownContainer,
       ...otherProps
     } = props;
 
@@ -64,6 +65,7 @@ export const BreadcrumbsFitModeDropdown: BreadcrumbsFitModeDropdownComponent =
           className={cnBreadcrumbsFitModeDropdown('Item', {
             removed: hiddenItems.length <= 0,
           })}
+          dropdownContainer={dropdownContainer}
         />
         {readyToHideItems.map((item, index) =>
           renderItem(

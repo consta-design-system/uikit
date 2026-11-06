@@ -1,15 +1,22 @@
-import { atom, AtomMut, CtxSpy } from '@reatom/core';
-import { useCtx } from '@reatom/npm-react';
-import { useEffect, useMemo } from 'react';
+import { Atom, AtomLike, Computed } from '@reatom/core';
+import { useAtom } from '@reatom/react';
 
-const emptyFn = () => {};
-const emptyArray: [] = [];
+export const useCreateAtom: {
+  <Target extends AtomLike>(
+    target: Target,
+    deps?: Array<any>,
+    options?: { subscribe?: boolean },
+  ): Target;
 
-export const useCreateAtom = <T>(init: T | ((ctx: CtxSpy) => T)) => {
-  const ctx = useCtx();
-  const targetAtom = useMemo(() => atom(init), emptyArray) as AtomMut<T>;
+  <State>(
+    computed: () => State,
+    deps?: Array<any>,
+    options?: string | { name?: string; subscribe?: boolean },
+  ): Computed<State>;
 
-  useEffect(() => ctx.subscribe(targetAtom, emptyFn), emptyArray);
-
-  return targetAtom;
-};
+  <State>(
+    initState: State,
+    deps?: Array<any>,
+    options?: string | { name?: string; subscribe?: boolean },
+  ): Atom<State>;
+} = <T>(init: T) => useAtom<T>(init, undefined, { subscribe: false })[2];

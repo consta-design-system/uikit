@@ -42,6 +42,7 @@ function BreadcrumbsItemRender<ITEM>(
     getItemLabel,
     getItemSubMenu,
     children,
+    dropdownContainer,
     ...otherProps
   } = props;
 
@@ -151,6 +152,7 @@ function BreadcrumbsItemRender<ITEM>(
           onClickOutside={setOpen.off}
           size={contextMenuSizeMap[size]}
           role="listbox"
+          container={dropdownContainer}
         />
       )}
     </li>

@@ -1,0 +1,30 @@
+.ListItem.TransitionGroupNodeExample {
+  &-Item {
+    &:not(:last-child) {
+      margin-bottom: var(--space-s);
+    }
+
+    &_animate {
+      &_entered,
+      &_entering,
+      &_exiting,
+      &_exited {
+        transition:
+          transform 0.25s,
+          opacity 0.25s;
+      }
+
+      &_entered,
+      &_entering {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &_exiting,
+      &_exited {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    }
+  }
+}

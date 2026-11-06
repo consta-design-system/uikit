@@ -36,6 +36,7 @@ const CollapseGroupRender: CollapseGroupRenderFunction = (props, ref) => {
     closeDirectionIcon = collapsePropCloseDirectionIconDefault,
     iconView,
     isAccordion,
+    onOpen,
     ...otherProps
   } = withDefaultGetters(props);
 

@@ -11,6 +11,11 @@ export type Group = {
   id: string | number;
 };
 
+// export const items: Item[] = Array.from({ length: 100 }, (_, i) => ({
+//   label: `Item ${i + 1}`,
+//   id: i + 1,
+// }));
+
 export const items: Item[] = [
   {
     label: 'Чёрный',

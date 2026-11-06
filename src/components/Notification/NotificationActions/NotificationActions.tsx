@@ -35,6 +35,8 @@ const NotificationActionsRender = (
     onItemClick,
     scrollContainerRef,
     title,
+    dropdownContainer,
+    clickOutsideSubscriber,
     ...otherProps
   } = withDefaultGetters(props);
 
@@ -143,6 +145,8 @@ const NotificationActionsRender = (
         possibleDirections={['downStartRight', 'upStartRight']}
         direction="downStartRight"
         style={{ zIndex: elementZIndex }}
+        container={dropdownContainer}
+        clickOutsideSubscriber={clickOutsideSubscriber}
       />
     </>
   );

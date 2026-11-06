@@ -1,7 +1,6 @@
 import React, {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -177,6 +176,7 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isFocused, setIsFocused] = useState(false);
+  const dropdownEnteredRef = useRef<boolean>(false);
 
   const value = useMemo(
     () =>
@@ -393,17 +393,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     },
     [filteredOptions, setState, optionForCreate],
   );
-
-  useLayoutEffect(() => {
-    if (value !== null && !prevIsOpen && isOpen) {
-      const currentHighlightIndex = getSelectedOptionIndex();
-      if (filteredOptions.length > 0) {
-        scrollToIndex(currentHighlightIndex, dropdownRef, optionsRefs, () =>
-          highlightIndex(0, false),
-        );
-      }
-    }
-  });
 
   const removeValue = (e: React.SyntheticEvent, valueItem: ITEM) => {
     e.stopPropagation();
@@ -756,6 +745,17 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     setOpen(dropdownOpen || false);
   }, [dropdownOpen]);
 
+  useEffect(() => {
+    if (value !== null && !prevIsOpen && isOpen && dropdownEnteredRef.current) {
+      const currentHighlightIndex = getSelectedOptionIndex();
+      if (filteredOptions.length > 0) {
+        scrollToIndex(currentHighlightIndex, dropdownRef, optionsRefs, () =>
+          highlightIndex(0, false),
+        );
+      }
+    }
+  });
+
   return {
     isOpen,
     isFocused,
@@ -777,5 +777,6 @@ export function useSelect<ITEM, GROUP, MULTIPLE extends boolean>(
     hasItems,
     allItemsSelected,
     optionsRefs,
+    dropdownEnteredRef,
   };
 }
