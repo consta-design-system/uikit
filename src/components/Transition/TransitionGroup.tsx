@@ -70,19 +70,8 @@ const TransitionGroupInner = factoryComponent<
   TransitionGroupProps<unknown>
 >((_, propsAtom) => {
   const items = atom<ItemsMap<unknown>>({});
-  const itemsKeysHash = computed(() => {
-    const props = propsAtom();
 
-    if (!Array.isArray(props.items) || props.items.length === 0) {
-      return '__empty-array';
-    }
-
-    return props.items?.map((item) => props.getItemKey?.(item)).join('---');
-  });
-
-  // отслеживает изменение содержимого items (новую ссылку массива),
-  // чтобы обновлять item у существующих ключей без повторной анимации
-  const itemsContentHash = computed(() => propsAtom().items);
+  const propsItems = computed(() => propsAtom().items);
 
   const processItems = action(() => {
     const props = peek(propsAtom);
@@ -160,8 +149,7 @@ const TransitionGroupInner = factoryComponent<
 
   // Следим за изменением items
   effect(() => {
-    itemsKeysHash();
-    itemsContentHash();
+    propsItems();
     processItems();
   });
 

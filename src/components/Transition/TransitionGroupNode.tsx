@@ -57,28 +57,10 @@ const TransitionGroupNodeInner = factoryComponent<
   TransitionGroupNodeProps
 >((_, propsAtom) => {
   const items = atom<ItemsMap>({});
-  const itemsKeysHash = computed(() => {
-    const props = propsAtom();
-
-    const nodes = React.Children.toArray(props.children);
-
-    if (nodes.length === 0) {
-      return '__notNodes';
-    }
-
-    return nodes
-      ?.map((node) => {
-        if (React.isValidElement(node)) {
-          return node.key;
-        }
-        return String(node);
-      })
-      .join('---');
-  });
 
   // отслеживает изменение содержимого children (новую ссылку),
   // чтобы обновлять node у существующих ключей без повторной анимации
-  const childrenContentHash = computed(() => propsAtom().children);
+  const propsChildren = computed(() => propsAtom().children);
 
   const processItems = action(() => {
     const props = peek(propsAtom);
@@ -159,8 +141,7 @@ const TransitionGroupNodeInner = factoryComponent<
 
   // Следим за изменением items
   effect(() => {
-    itemsKeysHash();
-    childrenContentHash();
+    propsChildren();
     processItems();
   });
 
