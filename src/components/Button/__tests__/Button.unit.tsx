@@ -348,5 +348,100 @@ describe('Компонент Button', () => {
           expect(button).not.toHaveClass(cnMixFocus());
         }));
     });
+
+    describe('проверка type', () => {
+      test('должен устанавливать type=button по умолчанию', (ctx) =>
+        context.start(async () => {
+          renderComponent(ctx, {});
+
+          expect(getRender(ctx)).toHaveAttribute('type', 'button');
+        }));
+
+      test('должен устанавливать type=submit', (ctx) =>
+        context.start(async () => {
+          renderComponent(ctx, { type: 'submit' });
+
+          expect(getRender(ctx)).toHaveAttribute('type', 'submit');
+        }));
+
+      test('должен устанавливать type=reset', (ctx) =>
+        context.start(async () => {
+          renderComponent(ctx, { type: 'reset' });
+
+          expect(getRender(ctx)).toHaveAttribute('type', 'reset');
+        }));
+    });
+
+    describe('проверка iconSize', () => {
+      test('должен рендерить иконку с кастомным размером', (ctx) =>
+        context.start(async () => {
+          renderComponent(ctx, {
+            iconLeft: IconLeftMock,
+            iconSize: 'xs',
+          });
+
+          const svg = getRender(ctx).querySelector('svg');
+          expect(svg).not.toBeNull();
+        }));
+    });
+
+    describe('стабильное маппирование form', () => {
+      test('legacy defaultClear должен давать класс defaultBrick', (ctx) =>
+        context.start(async () => {
+          renderComponent(ctx, { form: 'defaultClear' as any });
+
+          expect(getRender(ctx)).toHaveClass(
+            cnButton({ form: 'defaultBrick' }),
+          );
+        }));
+
+      test('legacy brickClear должен давать класс brick', (ctx) =>
+        context.start(async () => {
+          renderComponent(ctx, { form: 'brickClear' as any });
+
+          expect(getRender(ctx)).toHaveClass(cnButton({ form: 'brick' }));
+        }));
+
+      test('legacy roundClear должен давать класс roundBrick', (ctx) =>
+        context.start(async () => {
+          renderComponent(ctx, { form: 'roundClear' as any });
+
+          expect(getRender(ctx)).toHaveClass(cnButton({ form: 'roundBrick' }));
+        }));
+    });
+
+    describe('комбинация disabled и loading', () => {
+      test('должен применять оба класса когда disabled и loading true', (ctx) =>
+        context.start(async () => {
+          renderComponent(ctx, { disabled: true, loading: true });
+
+          const button = getRender(ctx);
+          expect(button).toHaveClass(cnButton({ disabled: true }));
+          expect(button).toHaveClass(cnButton({ loading: true }));
+        }));
+
+      test('onClick не должен вызываться когда disabled и loading', (ctx) =>
+        context.start(async () => {
+          const handleClick = vi.fn();
+          renderComponent(ctx, {
+            disabled: true,
+            loading: true,
+            onClick: handleClick,
+          });
+
+          fireEvent.click(getRender(ctx));
+          expect(handleClick).not.toHaveBeenCalled();
+        }));
+    });
+
+    describe('передача ref', () => {
+      test('должен передавать ref в DOM-элемент', (ctx) =>
+        context.start(async () => {
+          const buttonRef = React.createRef<HTMLButtonElement>();
+          renderComponent(ctx, { ref: buttonRef as any });
+
+          expect(buttonRef.current).toBe(getRender(ctx));
+        }));
+    });
   });
 });
