@@ -573,7 +573,6 @@ export const useFlatSelect = <
 
       return {
         onClick: (e: React.SyntheticEvent) => {
-          console.log('onClick', item);
           highlightIndex(index);
           onChange(e, item);
         },
