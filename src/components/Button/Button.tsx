@@ -172,7 +172,7 @@ export const Button = forwardRefWithAs<Props, 'button'>((props, ref) => {
         },
         [!(disabled || loading) ? cnMixFocus() : undefined, className],
       )}
-      disabled={disabled}
+      disabled={disabled || loading}
       tabIndex={tabIndex}
       title={title}
       ref={useForkRef([ref, buttonRef])}
