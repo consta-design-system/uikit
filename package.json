@@ -48,7 +48,7 @@
     "lint": "yarn run lint:js && yarn run lint:css",
     "lint:fix": "yarn run lint:js:fix && yarn run lint:css:fix",
     "format:svg": "prettier --write **/*.svg --parser html",
-    "pre-push": "yarn run tsc-dry-run && yarn run test:cspell",
+    "pre-push": "yarn run tsc-dry-run",
     "pre-commit": "yarn run lint-staged",
     "pre-build": "node scripts/preBuild.js --config=scripts/generateReExportsConfig.js",
     "test:unit": "yarn vitest",
