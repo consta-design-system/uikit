@@ -174,6 +174,59 @@ describe('Компонент Button', () => {
         expect(handleClick).toHaveBeenCalledTimes(0);
         expect(button).toHaveClass(cnButton({ loading: true }));
       }));
+
+    test('при loading атрибут disabled должен присутствовать', (ctx) =>
+      context.start(async () => {
+        renderComponent(ctx, { loading: true });
+
+        expect(getRender(ctx)).toHaveAttribute('disabled');
+      }));
+
+    test('при loading onClick не должен срабатывать', (ctx) =>
+      context.start(async () => {
+        const handleClick = vi.fn();
+
+        renderComponent(ctx, { loading: true, onClick: handleClick });
+
+        const button = getRender(ctx);
+
+        fireEvent.click(button);
+        fireEvent.doubleClick(button);
+
+        expect(handleClick).toHaveBeenCalledTimes(0);
+      }));
+
+    test('при loading форма не должна сабмититься', (ctx) =>
+      context.start(async () => {
+        const handleSubmit = vi.fn((e) => e.preventDefault());
+
+        const root = ReactDOM.createRoot(
+          document.getElementById(testRootId(ctx))!,
+        );
+
+        act(() => {
+          root.render(
+            <reatomContext.Provider value={top()}>
+              <Theme preset={presetGpnDefault}>
+                <form onSubmit={handleSubmit}>
+                  <Button
+                    data-testid={testId}
+                    label="Текст кнопки"
+                    type="submit"
+                    loading
+                  />
+                </form>
+              </Theme>
+            </reatomContext.Provider>,
+          );
+        });
+
+        const button = getRender(ctx);
+
+        fireEvent.click(button);
+
+        expect(handleSubmit).not.toHaveBeenCalled();
+      }));
   });
 
   test('должен отображать текст в кнопке', (ctx) =>
