@@ -33,18 +33,25 @@ jobs:
       # На Node 26 playwright зависает на этапе "extracting archive" —
       # распаковка zip выполняется средствами Node (регрессия nodejs/node#64274).
       # Обёртка yarn здесь не при чём, поэтому обходим Node-распаковку
-      # полностью: скачиваем архив через curl и распаковываем системным unzip
-      # в стандартный каталог playwright (~/.cache/ms-playwright), включая
-      # маркер INSTALLATION_COMPLETE, наличие которого проверяет playwright.
-      # Ревизия берётся из node_modules/playwright-core/browsers.json, поэтому
-      # версия браузера всегда соответствует playwright из yarn.lock.
+      # полностью: URL и каталог установки получаем через `install --dry-run`
+      # (мгновенно, без скачивания и распаковки), архив скачиваем через curl
+      # и распаковываем системным unzip, включая маркер INSTALLATION_COMPLETE,
+      # наличие которого проверяет playwright при запуске.
       # (Vitest в headless-режиме требует только chrome-headless-shell,
       # см. browser.headless: true в vite.config.ts — полный chromium не нужен.)
       - name: Установка chromium (headless shell)
         run: |
-          REV=$(node -p "require('./node_modules/playwright-core/browsers.json').browsers.find(b => b.name === 'chromium-headless-shell').revision")
-          DIR="$HOME/.cache/ms-playwright/chromium_headless_shell-$REV"
-          URL="https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/$REV/chromium-headless-shell-linux.zip"
+          DRY_RUN=$(node ./node_modules/playwright/cli.js install --dry-run chromium --only-shell)
+          URL=$(echo "$DRY_RUN" | grep 'Download url:' | head -n 1 | sed 's/^.*Download url: //')
+          DIR=$(echo "$DRY_RUN" | grep 'Install location:' | head -n 1 | sed 's/^.*Install location: //')
+
+          if [ -z "$URL" ] || [ -z "$DIR" ]; then
+            echo "Не удалось получить URL/каталог из --dry-run:"
+            echo "$DRY_RUN"
+            exit 1
+          fi
+          echo "URL: $URL"
+          echo "DIR: $DIR"
 
           rm -rf "$DIR"
           mkdir -p "$DIR"
