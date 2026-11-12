@@ -104,6 +104,7 @@ export type UserSelectProps<
     labelIcon?: IconComponent;
     caption?: string;
     labelPosition?: 'top' | 'left';
+    dropdownContainer?: HTMLElement;
   },
   HTMLDivElement
 > &

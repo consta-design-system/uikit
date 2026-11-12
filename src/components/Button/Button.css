@@ -150,7 +150,7 @@
     }
   }
 
-  &:disabled {
+  &_disabled {
     --button-loader-color: var(--button-color-disable);
     --button-cursor: not-allowed;
     --button-color-hover: var(--button-color-disable);

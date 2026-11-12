@@ -61,7 +61,7 @@ export type AttachmentActions = {
 | [`fileName`](#название)                   | `string`                               | -            | Название файла                                                   |
 | [`fileDescription`](#описание)            | `string`                               | -            | Описание файла                                                   |
 | [`fileExtension`](#иконка)                | `string`                               | -            | Расширение иконки файла                                          |
-| [`withPictogram`](#иконка)                | `boolean`                              | `true`       | Отображается ли пиктограмма файла                                |
+| [`withPictogram`](#иконка)                | `boolean`                              | -            | Отображается ли пиктограмма файла                                |
 | [`loading`](#загрузка-файла)              | `boolean`                              | -            | Состояние загрузки                                               |
 | [`loadingProgress`](#индикаторы-загрузки) | `number`                               | -            | Степень загрузки файла в процентах                               |
 | [`loadingText`](#индикаторы-загрузки)     | `string`                               | `'Loading'`  | Текст, который видно во время загрузки                           |
@@ -171,7 +171,8 @@ export type AttachmentActions = {
 
 ## Иконка
 
-Чтобы отобразить пиктограмму, укажите значение свойства `withPictogram` в `true`.
+По умолчанию пиктограмма не отображается. Чтобы показать её, укажите значение свойства
+`withPictogram` в `true`.
 
 <MdxTabs>
 

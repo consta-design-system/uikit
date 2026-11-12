@@ -18,7 +18,16 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = forwardRef<
   NotificationHeaderProps
 >(
   (
-    { title, actions, className, onClose, scrollContainerRef, ...otherProps },
+    {
+      title,
+      actions,
+      className,
+      onClose,
+      scrollContainerRef,
+      dropdownContainer,
+      clickOutsideSubscriber,
+      ...otherProps
+    },
     ref,
   ) => {
     return (
@@ -46,6 +55,8 @@ export const NotificationHeader: React.FC<NotificationHeaderProps> = forwardRef<
             className={cnNotificationHeader('Action')}
             items={actions}
             scrollContainerRef={scrollContainerRef}
+            dropdownContainer={dropdownContainer}
+            clickOutsideSubscriber={clickOutsideSubscriber}
           />
         )}
         {onClose && (

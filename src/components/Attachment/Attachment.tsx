@@ -73,6 +73,7 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
   ].filter(isDefined);
 
   const withActions = Boolean(actions?.length);
+  const withPointer = Boolean(withAction || onClick);
 
   return (
     <Tag
@@ -81,8 +82,8 @@ const Attachment = forwardRefWithAs<AttachmentProps>((props, ref) => {
       className={cnAttachment(
         {
           size,
-          hoverEffect: Boolean(actions?.length || onClick),
-          cursor: onClick ? 'pointer' : undefined,
+          hoverEffect: withPointer || Boolean(actions?.length),
+          cursor: withPointer ? 'pointer' : undefined,
           withActions,
           error: Boolean(errorText),
         },

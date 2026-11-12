@@ -1,13 +1,13 @@
 import './ModalDeprecated.css';
 
 import React, { useEffect, useRef } from 'react';
-import { Transition } from 'react-transition-group';
 
 import {
   PortalWithTheme,
   PortalWithThemeConsumer,
 } from '##/components/PortalWithTheme';
 import { useTheme } from '##/components/Theme/Theme';
+import { Transition } from '##/components/Transition';
 import { useGlobalKeys } from '##/hooks/useGlobalKeys';
 import { animateTimeout, cnMixPopoverAnimate } from '##/mixs/MixPopoverAnimate';
 import { cnMixScrollBar } from '##/mixs/MixScrollBar';
@@ -36,7 +36,7 @@ type ModalProps = PropsWithHTMLAttributes<
     width?: ModalPropWidth;
     position?: ModalPropPosition;
     children?: React.ReactNode;
-    container?: HTMLDivElement | undefined;
+    container?: HTMLElement | undefined;
     afterClose?: () => void;
     refsForExcludeClickOutside?: React.RefObject<HTMLElement>[];
   },
@@ -86,7 +86,6 @@ export const Modal: React.FC<ModalProps> = (props) => {
     <Transition
       in={isOpen}
       unmountOnExit
-      nodeRef={portalRef}
       timeout={animateTimeout}
       onExited={afterClose}
     >

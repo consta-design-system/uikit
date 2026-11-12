@@ -94,6 +94,7 @@ const SelectRender = <ITEM = SelectItemDefault, GROUP = SelectGroupDefault>(
     notFound,
     hasItems,
     optionsRefs,
+    dropdownEnteredRef,
   } = useSelect<ITEM, GROUP, false>({
     items,
     groups,
@@ -227,6 +228,7 @@ const SelectRender = <ITEM = SelectItemDefault, GROUP = SelectGroupDefault>(
         onScrollToBottom={onScrollToBottom}
         viewportRef={dropdownViewportRef}
         container={dropdownContainer}
+        enteredRef={dropdownEnteredRef}
         style={
           typeof style?.zIndex === 'number'
             ? { zIndex: style.zIndex + 1 }
