@@ -40,10 +40,13 @@ jobs:
       #  3) timeout убивает зависший процесс; код 124 (убит по таймауту)
       #     считается успехом, т.к. к этому моменту установка уже прошла,
       #     но реальная ошибка установки (другой код выхода) падает как раньше.
+      #  Важно: шаги Actions выполняются с `bash -e -o pipefail`, поэтому
+      #  используется `timeout ... || code=$?` — иначе скрипт упадёт
+      #  с кодом 124, не дойдя до проверки.
       - name: Установка chromium
         run: |
-          PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 timeout 10m node ./node_modules/playwright/cli.js install chromium
-          code=$?
+          code=0
+          PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 timeout 10m node ./node_modules/playwright/cli.js install chromium || code=$?
           if [ "$code" -ne 0 ] && [ "$code" -ne 124 ]; then
             exit "$code"
           fi
