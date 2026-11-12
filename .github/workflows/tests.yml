@@ -30,32 +30,31 @@ jobs:
       - name: Установка зависимостей
         run: yarn add "install-peers-cli@https://github.com/evless/install-peers-cli#fix-yarn-policies" && yarn --frozen-lockfile
 
-      # На Node 26 установка playwright может зависать (регрессия
-      # "hang at shutdown", nodejs/node#64274), поэтому:
-      #  1) CLI запускается напрямую через node, без обёртки yarn;
-      #  2) ставится только chrome-headless-shell (--only-shell) — именно его
-      #     требует vitest в headless-режиме (см. browser.headless в vite.config.ts);
-      #  3) каждый запуск обёрнут в timeout, при зависании — повтор (до 3 раз);
-      #  4) после установки проверяем, что бинарник действительно на диске,
-      #     иначе шаг падает сразу, а не на тестах с непонятной ошибкой.
-      #  Важно: шаги Actions выполняются с `bash -e -o pipefail`, поэтому
-      #  используется `timeout ... || code=$?` — иначе скрипт упадёт
-      #  с кодом 124, не дойдя до проверки.
-      #  5) таймаут 2м с запасом: обычно установка занимает секунд 20.
+      # На Node 26 playwright зависает на этапе "extracting archive" —
+      # распаковка zip выполняется средствами Node (регрессия nodejs/node#64274).
+      # Обёртка yarn здесь не при чём, поэтому обходим Node-распаковку
+      # полностью: скачиваем архив через curl и распаковываем системным unzip
+      # в стандартный каталог playwright (~/.cache/ms-playwright), включая
+      # маркер INSTALLATION_COMPLETE, наличие которого проверяет playwright.
+      # Ревизия берётся из node_modules/playwright-core/browsers.json, поэтому
+      # версия браузера всегда соответствует playwright из yarn.lock.
+      # (Vitest в headless-режиме требует только chrome-headless-shell,
+      # см. browser.headless: true в vite.config.ts — полный chromium не нужен.)
       - name: Установка chromium (headless shell)
         run: |
-          for i in 1 2 3; do
-            code=0
-            PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 DEBUG=pw:install timeout 2m node ./node_modules/playwright/cli.js install chromium --only-shell || code=$?
-            if [ "$code" -eq 0 ]; then
-              break
-            fi
-            echo "::warning::Попытка $i не удалась (код $code), повторяем..."
-          done
+          REV=$(node -p "require('./node_modules/playwright-core/browsers.json').browsers.find(b => b.name === 'chromium-headless-shell').revision")
+          DIR="$HOME/.cache/ms-playwright/chromium_headless_shell-$REV"
+          URL="https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/$REV/chromium-headless-shell-linux.zip"
 
-          SHELL_BIN=$(find "$HOME/.cache/ms-playwright" -type f -path '*chrome-headless-shell*/chrome-headless-shell' | head -n 1)
+          rm -rf "$DIR"
+          mkdir -p "$DIR"
+          curl -fL --retry 3 --connect-timeout 30 "$URL" -o /tmp/chrome-headless-shell.zip
+          unzip -q /tmp/chrome-headless-shell.zip -d "$DIR"
+          touch "$DIR/INSTALLATION_COMPLETE"
+
+          SHELL_BIN=$(find "$DIR" -name chrome-headless-shell -type f | head -n 1)
           if [ -z "$SHELL_BIN" ] || [ ! -x "$SHELL_BIN" ]; then
-            echo "chrome-headless-shell не установлен после установки (см. логи pw:install выше)"
+            echo "chrome-headless-shell не установлен после распаковки"
             exit 1
           fi
           echo "Установлен: $SHELL_BIN"
