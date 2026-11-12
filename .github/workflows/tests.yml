@@ -42,8 +42,8 @@ jobs:
       - name: Установка chromium (headless shell)
         run: |
           DRY_RUN=$(node ./node_modules/playwright/cli.js install --dry-run chromium --only-shell)
-          URL=$(echo "$DRY_RUN" | grep 'Download url:' | head -n 1 | sed 's/^.*Download url: //')
-          DIR=$(echo "$DRY_RUN" | grep 'Install location:' | head -n 1 | sed 's/^.*Install location: //')
+          URL=$(echo "$DRY_RUN" | grep 'Download url:' | head -n 1 | awk '{print $NF}')
+          DIR=$(echo "$DRY_RUN" | grep 'Install location:' | head -n 1 | awk '{print $NF}')
 
           if [ -z "$URL" ] || [ -z "$DIR" ]; then
             echo "Не удалось получить URL/каталог из --dry-run:"
