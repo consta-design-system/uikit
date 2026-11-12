@@ -8,33 +8,46 @@ on:
       - reopened
       - synchronize
 
+# Отмена дублей запусков (замена rokroskar/workflow-run-cleanup-action)
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
 jobs:
   tests:
     runs-on: ubuntu-24.04
+    timeout-minutes: 60
     steps:
-      - uses: rokroskar/workflow-run-cleanup-action@v0.2.2
-        if: "!startsWith(github.ref, 'refs/tags/') && github.ref != 'refs/heads/master'"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 26
+          cache: yarn
 
       - name: Установка yarn
-        id: yarn-setup
-        run: |
-          yarn policies set-version 1.22.18
-          echo "::set-output name=cache_dir::$(yarn cache dir)"
-      - name: Настройка кэширования yarn
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.yarn-setup.outputs.cache_dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+        run: yarn policies set-version 1.22.22
+
       - name: Установка зависимостей
-        run: yarn add "install-peers-cli@https://github.com/evless/install-peers-cli#fix-yarn-policies" && yarn --frozen-lockfile && yarn playwright install chromium
+        run: yarn add "install-peers-cli@https://github.com/evless/install-peers-cli#fix-yarn-policies" && yarn --frozen-lockfile
+
+      # На Node 26 есть регрессия "hang at shutdown" (nodejs/node#64274):
+      # процесс не завершается после успешной установки chromium, из-за чего
+      # джоба зависала после шага `yarn playwright install chromium`.
+      # Обходные меры:
+      #  1) CLI playwright запускается напрямую через node, без обёртки yarn;
+      #  2) PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS пропускает запуск
+      #     браузера для валидации окружения после установки;
+      #  3) timeout убивает зависший процесс; код 124 (убит по таймауту)
+      #     считается успехом, т.к. к этому моменту установка уже прошла,
+      #     но реальная ошибка установки (другой код выхода) падает как раньше.
+      - name: Установка chromium
+        run: |
+          PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 timeout 10m node ./node_modules/playwright/cli.js install chromium
+          code=$?
+          if [ "$code" -ne 0 ] && [ "$code" -ne 124 ]; then
+            exit "$code"
+          fi
+
       - name: Проверка TS
         run: yarn run test:ts
       - name: Unit тесты
