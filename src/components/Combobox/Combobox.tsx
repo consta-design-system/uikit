@@ -124,6 +124,7 @@ const ComboboxRender = <
     hasItems,
     optionsRefs,
     allItemsSelected,
+    dropdownEnteredRef,
   } = useSelect({
     items,
     groups,
@@ -368,6 +369,7 @@ const ComboboxRender = <
             ? { zIndex: style.zIndex + 1 }
             : undefined
         }
+        enteredRef={dropdownEnteredRef}
       />
     </>
   );

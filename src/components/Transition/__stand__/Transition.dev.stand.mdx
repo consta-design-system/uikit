@@ -1,0 +1,330 @@
+import { MdxMenu, MdxTabs, MdxInformer } from '@consta/stand';
+import { TransitionExample } from './examples/TransitionExample/TransitionExample';
+import { TransitionGroupExample } from './examples/TransitionGroupExample/TransitionGroupExample';
+import { TransitionGroupNodeExample } from './examples/TransitionGroupNodeExample/TransitionGroupNodeExample';
+
+<MdxMenu>
+
+- [Обзор](#Обзор)
+- [Transition](#Transition)
+- [TransitionGroup](#TransitionGroup)
+- [TransitionGroupNode](#TransitionGroupNode)
+
+</MdxMenu>
+
+## Обзор
+
+Компоненты `Transition`, `TransitionGroup` и `TransitionGroupNode` управляют анимацией появления и исчезновения содержимого:
+
+- `Transition` предоставляет текущий статус анимации (`entering`, `entered`, `exiting`, `exited`) через render-prop, что позволяет применять CSS-анимации в зависимости от стадии перехода.
+- `TransitionGroup` управляет анимацией списка элементов `items`: при добавлении элемента запускается анимация появления, при удалении — анимация исчезновения.
+- `TransitionGroupNode` работает аналогично `TransitionGroup`, но принимает обычные React-элементы в `children`: переданные должны иметь API `Transition`.
+
+## Transition
+
+### Импорт
+
+```tsx
+import { Transition } from '@consta/uikit/Transition';
+```
+
+### Свойства
+
+```tsx
+export type TransitionStatus = 'entering' | 'entered' | 'exiting' | 'exited';
+```
+
+| Свойство          | Тип или варианты значения                       | По умолчанию | Описание                                                                                                                                                      |
+| ----------------- | ----------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`        | `(status: TransitionStatus) => React.ReactNode` | -            | Функция, которая получает текущий статус анимации и возвращает содержимое для рендера                                                                         |
+| `in`              | `boolean`                                       | `false`      | Управляет направлением анимации: `true` — появление (enter), `false` — исчезновение (exit)                                                                    |
+| `timeout`         | `number`                                        | -            | Длительность анимации в миллисекундах, по истечении которой статус меняется на `entered` или `exited`                                                         |
+| `unmountOnExit?`  | `boolean`                                       | -            | Полностью убирает содержимое из DOM после завершения анимации исчезновения (при `in === false` и статусе `exited`)                                            |
+| `animateOnMount?` | `boolean`                                       | -            | Запускает анимацию появления при первом монтировании компонента, если `in` изначально равен `true` (по умолчанию содержимое сразу отображается как `entered`) |
+| `onEntering?`     | `() => void`                                    | -            | Колбэк, вызываемый в начале анимации появления (статус `entering`)                                                                                            |
+| `onEntered?`      | `() => void`                                    | -            | Колбэк, вызываемый после завершения анимации появления (статус `entered`)                                                                                     |
+| `onExiting?`      | `() => void`                                    | -            | Колбэк, вызываемый в начале анимации исчезновения (статус `exiting`)                                                                                          |
+| `onExited?`       | `() => void`                                    | -            | Колбэк, вызываемый после завершения анимации исчезновения (статус `exited`)                                                                                   |
+
+<MdxTabs>
+
+```tsx
+export const TransitionExample = () => {
+  const [mount, setMount] = useState(false);
+  return (
+    <>
+      <Button
+        onClick={() => setMount(!mount)}
+        label={mount ? 'Unmount' : 'Mount'}
+      />
+      <Transition in={mount} timeout={300} unmountOnExit>
+        {(status) => (
+          <div
+            style={{
+              paddingTop: 'var(--space-l)',
+              transition: 'all 0.3s ease-in-out',
+              opacity: status === 'entered' ? 1 : 0,
+            }}
+          >
+            Hello World
+          </div>
+        )}
+      </Transition>
+    </>
+  );
+};
+```
+
+<TransitionExample />
+
+</MdxTabs>
+
+## TransitionGroup
+
+### Импорт
+
+```tsx
+import { TransitionGroup } from '@consta/uikit/Transition';
+```
+
+### Свойства
+
+```tsx
+export type RenderItem<T> = (
+  item: T,
+  index: number,
+  animate: TransitionStatus,
+) => React.ReactNode;
+```
+
+| Свойство         | Тип или варианты значения                                                | По умолчанию | Описание                                                                                                |
+| ---------------- | ------------------------------------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------- |
+| `items`          | `T[]`                                                                    | -            | Массив элементов для отображения (обязательное)                                                         |
+| `renderItem`     | `(item: T, index: number, animate: TransitionStatus) => React.ReactNode` | -            | Функция рендера элемента списка, получает элемент, его индекс и текущий статус анимации (обязательное)  |
+| `getItemKey`     | `(item: T, index: number) => React.Key`                                  | -            | Функция получения уникального ключа элемента; если не задана, используется сам элемент в качестве ключа |
+| `timeout?`       | `number`                                                                 | `0`          | Длительность анимации в миллисекундах для появления и исчезновения элементов                            |
+| `unmountOnExit?` | `boolean`                                                                | -            | Полностью убирает элемент из DOM после завершения анимации исчезновения                                 |
+
+<MdxInformer status="warning">
+
+Важно понимать что `renderItem` отрабатывает только для элемента у которого меняется статус анимации, а не для всего списка. Это увеличивает производительность компонента.
+
+</MdxInformer>
+
+<MdxTabs>
+
+```tsx
+export const TransitionGroupExample = () => {
+  const [list, setList] = useState<Todo[]>(todos);
+
+  // Из-за того что renderItem отрабатывает только при изменении статуса анимации,
+  // для минимизации количества рендеров,
+  // Нужно иметь возможность в handleRemove получать актуальный список,
+  // можно с помощью useMutableRef сохранить ссылку на актуальный список
+
+  const listRef = useMutableRef(list);
+
+  const handleAdd = () => {
+    const id = generateUniqueId();
+    setList([...list, { id, text: `Todo - ${id}` }]);
+  };
+
+  const handleRemove = (id: string) => {
+    // Используем ссылку на актуальный список
+    setList(listRef.current.filter((todo) => todo.id !== id));
+  };
+
+  const handleClearAll = () => {
+    setList([]);
+  };
+
+  return (
+    <>
+      <div
+        className={`${cnMixFlex({ flex: 'flex', direction: 'row', gap: 's' })} ${cnMixSpace(
+          { mB: 's' },
+        )}`}
+      >
+        <Button label="Добавить" onClick={handleAdd} />
+        <Button label="Удалить все" onClick={handleClearAll} />
+      </div>
+
+      <TransitionGroup
+        timeout={250}
+        getItemKey={(todo) => todo.id}
+        unmountOnExit
+        items={list}
+        renderItem={(todo, animate) => {
+          return (
+            <ListItem
+              className={cnTransitionGroupExample('Item', { animate })}
+              key={todo.id}
+              rightSide={
+                <Button
+                  size="xs"
+                  view="ghost"
+                  iconLeft={IconTrash}
+                  onClick={() => handleRemove(todo.id)}
+                  form="round"
+                />
+              }
+              label={todo.text}
+            />
+          );
+        }}
+      />
+    </>
+  );
+};
+```
+
+```css
+.ListItem.TransitionGroupExample {
+  &-Item {
+    &:not(:last-child) {
+      margin-bottom: var(--space-s);
+    }
+
+    &_animate {
+      &_entered,
+      &_entering,
+      &_exiting,
+      &_exited {
+        transition:
+          transform 0.25s,
+          opacity 0.25s;
+      }
+
+      &_entered,
+      &_entering {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &_exiting,
+      &_exited {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    }
+  }
+}
+```
+
+<TransitionGroupExample />
+
+</MdxTabs>
+
+## TransitionGroupNode
+
+### Импорт
+
+```tsx
+import { TransitionGroupNode } from '@consta/uikit/Transition';
+```
+
+### Свойства
+
+| Свойство   | Тип или варианты значения | По умолчанию | Описание                                                                                                                                                                                      |
+| ---------- | ------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children` | `React.ReactNode`         | -            | Список React-элементов. Переданные компоненты должны иметь API `Transition`. При добавлении или удалении элемента запускается анимация появления/исчезновения. Ключ элемента берётся из `key` |
+
+<MdxInformer status="warning">
+
+Важно: компоненты, переданные в `TransitionGroupNode`, не оборачиваются в `Transition` автоматически. Каждый переданный компонент должен иметь API `Transition`.
+
+</MdxInformer>
+
+<MdxTabs>
+
+```tsx
+export const TransitionGroupNodeExample = () => {
+  const [list, setList] = useState<Todo[]>(todos);
+
+  const handleAdd = () => {
+    const id = generateUniqueId();
+    setList([...list, { id, text: `Todo - ${id}` }]);
+  };
+
+  const handleRemove = (id: string) => {
+    // Используем ссылку на актуальный список
+    setList(list.filter((todo) => todo.id !== id));
+  };
+
+  const handleClearAll = () => {
+    setList([]);
+  };
+
+  return (
+    <>
+      <div
+        className={`${cnMixFlex({ flex: 'flex', direction: 'row', gap: 's' })} ${cnMixSpace(
+          { mB: 's' },
+        )}`}
+      >
+        <Button label="Добавить" onClick={handleAdd} />
+        <Button label="Удалить все" onClick={handleClearAll} />
+      </div>
+
+      <TransitionGroupNode>
+        {list.map((todo) => (
+          <Transition timeout={250} key={todo.id} unmountOnExit>
+            {(animate) => (
+              <ListItem
+                className={cnTransitionGroupNodeExample('Item', { animate })}
+                rightSide={
+                  <Button
+                    size="xs"
+                    view="ghost"
+                    iconLeft={IconTrash}
+                    onClick={() => handleRemove(todo.id)}
+                    form="round"
+                  />
+                }
+                label={todo.text}
+              />
+            )}
+          </Transition>
+        ))}
+      </TransitionGroupNode>
+    </>
+  );
+};
+```
+
+```css
+.ListItem.TransitionGroupNodeExample {
+  &-Item {
+    &:not(:last-child) {
+      margin-bottom: var(--space-s);
+    }
+
+    &_animate {
+      &_entered,
+      &_entering,
+      &_exiting,
+      &_exited {
+        transition:
+          transform 0.25s,
+          opacity 0.25s;
+      }
+
+      &_entered,
+      &_entering {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &_exiting,
+      &_exited {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    }
+  }
+}
+```
+
+<TransitionGroupNodeExample />
+
+</MdxTabs>

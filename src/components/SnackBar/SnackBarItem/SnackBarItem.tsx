@@ -68,12 +68,12 @@ export const SnackBarItemRender = (
     start: () => void;
     pause: () => void;
   } | null>(null);
-  const [hover, { on: onHover, off: offHover }] = useFlag(false);
+  const [hover, { on: handleMouseEnter, off: handleMouseLeave }] =
+    useFlag(false);
   const [timeIsOver, { on: onTimeIsOver }] = useFlag(false);
   const handleMountTimer: SnackBarTimerPropOnMount = (timerFunctions) =>
     setTimerFunctions(timerFunctions);
-  const handleMouseEnter = () => onHover();
-  const handleMouseLeave = () => offHover();
+
   const autoCloseTime = getAutoCloseTime(autoClose);
   const hideAutoCloseTimer =
     showProgress === undefined ||

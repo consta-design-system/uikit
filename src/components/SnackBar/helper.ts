@@ -70,7 +70,6 @@ export const getItem = <ITEM>(
   },
 ) => {
   const {
-    getItemKey,
     getItemActions,
     getItemAutoClose,
     getItemIcon,
@@ -84,7 +83,6 @@ export const getItem = <ITEM>(
     getItemProgress,
   } = props;
   return {
-    key: getItemKey(item),
     message: getItemMessage(item),
     status: getItemStatus(item),
     autoClose: getItemAutoClose(item),

@@ -40,6 +40,7 @@ export type ThemeTogglerProps<ITEM = ThemeTogglerItemDefault> =
       possibleDirections?: Direction[];
       children?: never;
       view?: ButtonPropView;
+      dropdownContainer?: HTMLElement;
     },
     HTMLButtonElement
   > &

@@ -104,8 +104,9 @@ export type PopoverProps = PropsWithJsxAttributes<
     isInteractive?: boolean;
     children?: React.ReactNode | ChildrenRenderProp;
     onClickOutside?: ClickOutsideHandler;
+    clickOutsideSubscriber?: HTMLElement;
     onSetDirection?: (direction: Direction) => void;
-    viewportRef?: React.RefObject<HTMLElement>;
+    viewportRef?: React.RefObject<HTMLElement | null>;
     container?: Element;
   } & PositioningProps
 >;
@@ -172,6 +173,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       onSetDirection,
       viewportRef,
       container = window.document.body,
+      clickOutsideSubscriber,
       ...otherProps
     } = props;
 
@@ -308,6 +310,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         <PortalWithThemeConsumer
           onClickOutside={onClickOutside}
           ignoreClicksInsideRefs={[ref, anchorRef || { current: null }]}
+          clickOutsideSubscriber={clickOutsideSubscriber}
         >
           {isRenderProp(children) ? children(direction) : children}
         </PortalWithThemeConsumer>

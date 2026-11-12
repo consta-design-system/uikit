@@ -1,0 +1,61 @@
+name: Publish to pkg.pr.new
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+permissions:
+  contents: read
+
+env:
+  BUILD_SCRIPT: yarn build
+  BUILD_SCRIPT_OUTPUT: dist
+  APP_NAME: uikit
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Делаем checkout текущей ветки
+      - uses: actions/checkout@master
+      # Устанавливаем Node.JS для сборки приложения
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 22
+
+      - name: Install yarn
+        id: yarn-setup
+        run: |
+          yarn policies set-version 1.22.18
+          echo "::set-output name=cache_dir::$(yarn cache dir)"
+
+      - name: Настройка кэширования yarn
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.yarn-setup.outputs.cache_dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn add "install-peers-cli@https://github.com/evless/install-peers-cli#fix-yarn-policies" && yarn --frozen-lockfile
+
+      # Записываем в переменные окружения имя текущей ветки
+      # Чтобы избежать конфиликтов с URL, меняем точки на _, а слеши на минусы
+      - name: Get branch name
+        shell: bash
+        run: |
+          echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//-/g' | sed 's/\./_/g')" >> $GITHUB_ENV
+
+      # Собираем приложение
+      - name: Build Appliction
+        run: $BUILD_SCRIPT
+      # Доставляем собранное приложение на сервер
+      - name: Publish to pkg.pr.new
+        run: yarn pkg-pr-new publish './dist'
