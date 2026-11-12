@@ -10,8 +10,8 @@ export const useFittingItems = ({
   activeIndex,
 }: {
   tabsDimensions: TabDimensions[];
-  containerRef: React.RefObject<HTMLElement>;
-  moreItemsRef: React.RefObject<HTMLElement>;
+  containerRef: React.RefObject<HTMLElement | null>;
+  moreItemsRef: React.RefObject<HTMLElement | null>;
   activeIndex?: number;
 }): {
   visibleIndexes: number[];

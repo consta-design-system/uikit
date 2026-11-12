@@ -73,7 +73,7 @@ type Props<
   labelForEmptyItems?: string;
   notFound?: boolean;
   hasItemsAtom: AtomLike<boolean>;
-  getItemRef: (index: number) => React.RefCallback<HTMLDivElement>;
+  getItemRef: (index: number) => React.RefCallback<HTMLDivElement | null>;
   virtualScroll?: boolean;
   onScrollToBottom?: (length: number) => void;
   valueAtom: AtomLike<ITEM[]>;
@@ -245,7 +245,9 @@ export const FlatSelectList = factoryComponent<HTMLDivElement, Props>(
                         label={getGroupLabel(group.group)}
                         size={size}
                         innerOffset={indent}
-                        ref={listRefs[virtualIndex].set}
+                        ref={(el) => {
+                          listRefs[virtualIndex].set(el);
+                        }}
                         key={`group-${group.key}-Label`}
                       />
                     )}

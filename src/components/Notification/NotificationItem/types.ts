@@ -19,7 +19,7 @@ export type NotificationItemProps = PropsWithHTMLAttributesAndRef<
     actions?: NotificationItemAction[];
     children?: never;
     read?: boolean;
-    scrollContainerRef?: React.RefObject<HTMLDivElement>;
+    scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
   },
   HTMLDivElement
 >;

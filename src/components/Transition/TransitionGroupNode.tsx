@@ -16,6 +16,19 @@ type Item = {
 
 type ItemsMap = Record<string, Item>;
 
+/**
+ * Props дочернего элемента, которые группа подменяет при клонировании.
+ * Тип нужен явно: в @types/react 19 `ReactElement` параметризован как
+ * `P = unknown`, без дженерика `isValidElement` даёт `props: unknown`.
+ */
+type TransitionChildProps = {
+  index?: React.Key;
+  in?: boolean;
+  animateOnMount?: boolean;
+  onEntered?: () => void;
+  onExited?: () => void;
+};
+
 type TransitionGroupNodeItemProps = {
   node: React.ReactNode;
   in: boolean;
@@ -32,7 +45,7 @@ const TransitionGroupNodeItem = memo(
     handleExited,
     id,
   }: TransitionGroupNodeItemProps) => {
-    if (!React.isValidElement(node)) {
+    if (!React.isValidElement<TransitionChildProps>(node)) {
       return node;
     }
 
@@ -72,7 +85,9 @@ const TransitionGroupNodeInner = factoryComponent<
 
     // Собираем новые ключи
     nodes.forEach((node, index) => {
-      const key = String(React.isValidElement(node) ? node.key : index);
+      const key = String(
+        React.isValidElement<TransitionChildProps>(node) ? node.key : index,
+      );
       newKeys.add(key);
     });
 
@@ -96,8 +111,8 @@ const TransitionGroupNodeInner = factoryComponent<
     // Добавляем новые элементы
     nodes.forEach((node, index) => {
       const key = String(
-        React.isValidElement(node)
-          ? (node.key ?? node.props?.index ?? index)
+        React.isValidElement<TransitionChildProps>(node)
+          ? (node.key ?? node.props.index ?? index)
           : index,
       );
       if (!currentKeys.has(key)) {

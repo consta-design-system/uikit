@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 
 import { cn } from '##/utils/bem';
 import { deepEqual } from '##/utils/objectCompare';
-import { setRefs } from '##/utils/setRef';
+import { setRef, setRefs } from '##/utils/setRef';
 import { factoryComponent, resizeObservedAtom } from '##/utils/state';
 
 export const cnTextAreaAutoSize = cn('TextAreaAutoSize');
@@ -23,6 +23,9 @@ export const TextAreaAutoSize = factoryComponent<
 >((_, propsAtom) => {
   const textAreaElementAtom = atom<HTMLTextAreaElement | null>(null);
   const fakeElementAtom = atom<HTMLTextAreaElement | null>(null);
+  const fakeRef = action((el: HTMLTextAreaElement | null) =>
+    setRef(fakeElementAtom.set, el),
+  );
   const elementsAtom = computed(() => [
     textAreaElementAtom(),
     fakeElementAtom(),
@@ -131,6 +134,7 @@ export const TextAreaAutoSize = factoryComponent<
 
   effect(() => {
     const fakeElement = fakeElementAtom();
+
     const textAreaElement = textAreaElementAtom();
     if (fakeElement && textAreaElement) {
       fakeElement.value = textAreaElement.value;
@@ -160,7 +164,7 @@ export const TextAreaAutoSize = factoryComponent<
       />
       {createPortal(
         <textarea
-          ref={fakeElementAtom.set}
+          ref={wrap(fakeRef)}
           style={fakeStylesAtom()}
           className={cnTextAreaAutoSize('Fake')}
           id={cnTextAreaAutoSize('Fake', {

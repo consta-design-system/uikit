@@ -14,7 +14,7 @@ export type ComponentWithAs<Props, DefaultTag extends AsTags = 'div'> = <
 
 type ForwardRefWithAs<Props> = <As extends AsTags>(
   props: PropsWithAsAttributes<Props, As>,
-  ref: React.Ref<HTMLElement>,
+  ref: React.Ref<HTMLElement | null>,
 ) => React.ReactNode | null;
 
 export function forwardRefWithAs<Props, As extends AsTags = 'div'>(

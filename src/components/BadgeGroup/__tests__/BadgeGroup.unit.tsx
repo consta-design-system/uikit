@@ -633,7 +633,7 @@ describe(`Компонент ${testId}`, () => {
 
     test(`проверка getItemRef`, (ctx) => {
       context.start(() => {
-        const refs: Record<string, React.RefObject<HTMLDivElement>> = {};
+        const refs: Record<string, React.RefObject<HTMLDivElement | null>> = {};
 
         customItems.forEach((item) => {
           refs[item] = React.createRef<HTMLDivElement>();

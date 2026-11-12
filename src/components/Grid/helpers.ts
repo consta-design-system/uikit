@@ -47,7 +47,7 @@ const calculateBreakpoints = <T extends {}>(
 
 export const useGridBreakpoints = <T extends {}>(
   breakpoints: Record<string, T>,
-  ref?: React.RefObject<HTMLElement>,
+  ref?: React.RefObject<HTMLElement | null>,
 ) => {
   const keys = Object.keys(breakpoints);
 

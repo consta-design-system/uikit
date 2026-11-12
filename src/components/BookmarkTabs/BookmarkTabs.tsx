@@ -95,7 +95,7 @@ const BookmarkTabsRender = (
   const renderItem = (
     item: Item,
     fixed: boolean,
-    controlRef: React.RefObject<HTMLDivElement>,
+    controlRef: React.RefObject<HTMLDivElement | null>,
     bordered: boolean,
     index: number,
     tabWidth?: string,

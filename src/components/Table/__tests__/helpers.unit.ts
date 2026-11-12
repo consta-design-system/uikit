@@ -145,7 +145,8 @@ describe('useLazyLoadData', () => {
   });
 
   test('проставляет рефы необходимым ячейкам', () => {
-    let cellRef: React.RefObject<HTMLDivElement> | undefined | null = null;
+    let cellRef: React.RefObject<HTMLDivElement | null> | undefined | null =
+      null;
 
     act(() => {
       cellRef = result.current.setBoundaryRef(0, 140);

@@ -33,7 +33,7 @@ export const useStyleProps = <
   StyleProps extends string | string[] | readonly string[] = string,
 >(
   props: StyleProps,
-): [React.RefObject<Element>, Value<StyleProps>] => {
+): [React.RefObject<Element | null>, Value<StyleProps>] => {
   const { theme } = useTheme();
   const ref = useRef<Element>(null);
   const [value, setValue] = useState<Value<StyleProps>>(

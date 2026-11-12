@@ -11,7 +11,7 @@ export type UseVirtualScrollProps = {
 
 export type UseVirtualScrollReturn<ITEM_ELEMENT, SCROLL_ELEMENT> = {
   listRefs: React.RefObject<ITEM_ELEMENT>[];
-  scrollElementRef: React.RefObject<SCROLL_ELEMENT>;
+  scrollElementRef: React.RefObject<SCROLL_ELEMENT | null>;
   slice: [number, number];
   spaceTop: number;
 };
@@ -24,7 +24,7 @@ export const arraysIsEq = (arr1: number[], arr2: number[]) =>
   arr1.join('-') === arr2.join('-');
 
 export const useScroll = (
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   fn: () => void,
   isActive: boolean,
 ) => {

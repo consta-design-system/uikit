@@ -25,7 +25,7 @@ type UseAutoCompleteProps<ITEM, GROUP> = {
   getGroupKey?: GetGroupKey<GROUP>;
   groups?: GROUP[];
   items: ITEM[];
-  dropdownRef: React.MutableRefObject<HTMLDivElement | null>;
+  dropdownRef: React.RefObject<HTMLDivElement | null>;
   disabled?: boolean;
   getItemLabel: (item: ITEM) => string;
   getItemKey: (item: ITEM) => string | number;
@@ -37,7 +37,7 @@ type UseAutoCompleteProps<ITEM, GROUP> = {
   isLoading?: boolean;
   dropdownOpen?: boolean;
   onDropdownOpen?: (isOpen: boolean) => void;
-  ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+  ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement | null>>;
 };
 
 type OptionProps<ITEM> = {

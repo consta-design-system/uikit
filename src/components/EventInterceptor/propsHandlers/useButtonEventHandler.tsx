@@ -8,7 +8,7 @@ export type ButtonProps = Props;
 export const useButtonEventHandler = <T extends ButtonProps>(
   props: T,
   handler: EventInterceptorHandler,
-  ref: React.RefObject<HTMLElement>,
+  ref: React.RefObject<HTMLElement | null>,
 ): T => {
   const newProps: T = { ...props };
 

@@ -79,7 +79,7 @@ export type SelectProps<ITEM, GROUP, MULTIPLE extends boolean> = {
   dropdownOpen?: boolean;
   onDropdownOpen?: (isOpen: boolean) => void;
   onSearchValueChange?: (value: string) => void;
-  ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+  ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement | null>>;
 };
 
 export type OptionProps<ITEM> = {

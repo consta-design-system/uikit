@@ -20,7 +20,7 @@ const cnSliderPoint = cn('SliderPoint');
 
 const getTooltipPosition = (
   popoverPosition?: TrackPosition,
-  buttonRef?: React.RefObject<HTMLButtonElement>,
+  buttonRef?: React.RefObject<HTMLButtonElement | null>,
 ) => {
   if (popoverPosition && buttonRef && buttonRef.current) {
     const { y, height } = buttonRef.current.getBoundingClientRect();

@@ -24,7 +24,7 @@ const cnTableUse = cn('TableUse');
 type ContextMenuState = {
   [key: string]: {
     isOpen: boolean;
-    ref: React.RefObject<HTMLButtonElement>;
+    ref: React.RefObject<HTMLButtonElement | null>;
   };
 };
 

@@ -101,7 +101,7 @@ export const FlatSelect = factoryComponent<HTMLDivElement, FlatSelectProps>(
         );
       });
 
-    const fieldInputRef = action((el: HTMLDivElement | null) =>
+    const fieldInputRef = action((el: HTMLInputElement | null) =>
       setRefs([inputRef, propsWithDefaultAtom().inputRef], el),
     );
     const ref = action((el: HTMLDivElement | null) =>

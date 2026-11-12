@@ -130,14 +130,14 @@ const items: Item[] = [
   },
 ];
 
-const ExampleItem: React.FC<Item> = ({
+const ExampleItem = ({
   label,
   closeButton,
   description,
   icon: Icon,
   status,
   controls,
-}) => {
+}: Item) => {
   const ref = useRef<HTMLDivElement>(null);
 
   return (

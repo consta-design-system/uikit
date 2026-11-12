@@ -272,7 +272,9 @@ export const SelectDropdown = factoryComponent<HTMLDivElement, Props>(
                           label={getGroupLabel(group.group)}
                           size={size}
                           innerOffset={indent}
-                          ref={wrap(listElementsAtom()[virtualIndex].set)}
+                          ref={wrap((el) => {
+                            listElementsAtom()[virtualIndex].set(el);
+                          })}
                           key={`group-${group.key}-Label`}
                         />
                       )}

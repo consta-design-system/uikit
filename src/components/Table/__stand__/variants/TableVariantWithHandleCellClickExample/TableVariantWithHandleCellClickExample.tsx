@@ -42,7 +42,9 @@ const menuItems: Item[] = [
 ];
 
 export const TableVariantWithHandleCellClickExample = () => {
-  const [ref, setRef] = useState<React.RefObject<HTMLDivElement> | null>(null);
+  const [ref, setRef] = useState<React.RefObject<HTMLDivElement | null> | null>(
+    null,
+  );
   const [show, setIsShow] = useState<boolean>(false);
 
   const getLabel = (item: Item) => item.name;

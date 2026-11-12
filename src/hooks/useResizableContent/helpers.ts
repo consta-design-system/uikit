@@ -9,12 +9,12 @@ import {
 } from './types';
 
 export const getRefsSizes = (
-  refs: Array<UseResizableContentRef | React.RefObject<HTMLElement>>,
+  refs: Array<UseResizableContentRef | React.RefObject<HTMLElement | null>>,
   direction: UseResizableContentPropDirection,
 ): UseResizableContentSize[] =>
   refs.map((el) => {
     const ref = Object.prototype.hasOwnProperty.call(el, 'current')
-      ? (el as React.RefObject<HTMLElement>)
+      ? (el as React.RefObject<HTMLElement | null>)
       : (el as UseResizableContentRef).ref;
     if (ref.current) {
       const { width, height } = ref.current.getBoundingClientRect();
@@ -50,7 +50,7 @@ const getNonCalculatedSize = (
     .reduce((val, a) => (val ?? 0) + (a ?? 0), 0);
 
 const getBlockMaxSizes = (
-  blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement>>,
+  blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement | null>>,
   direction: UseResizableContentPropDirection,
   index: number,
 ) => {
@@ -68,7 +68,7 @@ const getValidValues = (params: {
   value: number;
   index: number;
   direction: UseResizableContentPropDirection;
-  blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement>>;
+  blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement | null>>;
   containerWidth: number;
   containerHeight: number;
   sizes: UseResizableContentSize[];
@@ -112,8 +112,8 @@ export const getCalculatedSizes = (params: {
   event: MouseEvent | TouchEvent | Event;
   index: number;
   direction: UseResizableContentPropDirection;
-  blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement>>;
-  container: React.RefObject<HTMLElement>;
+  blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement | null>>;
+  container: React.RefObject<HTMLElement | null>;
   sizes: UseResizableContentSize[];
 }) => {
   const { event, index, sizes, container, direction, blocks } = params;

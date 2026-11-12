@@ -43,7 +43,7 @@ const renderComponent = (
   props: {
     size?: StepsProps['size'];
     onChange?: OnChange;
-    ref?: React.RefObject<HTMLDivElement>;
+    ref?: React.RefObject<HTMLDivElement | null>;
   },
 ) => {
   const handleChange = vi.fn();

@@ -29,7 +29,7 @@ export type TooltipProps = PropsWithJsxAttributes<
     className?: string;
     offset?: number;
     onSetDirection?: (direction: Direction) => void;
-    viewportRef?: React.RefObject<HTMLElement>;
+    viewportRef?: React.RefObject<HTMLElement | null>;
     container?: Element;
   } & PositioningProps
 >;

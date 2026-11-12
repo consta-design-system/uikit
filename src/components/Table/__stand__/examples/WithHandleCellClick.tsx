@@ -40,7 +40,9 @@ const menuItems: Item[] = [
 ];
 
 const WithHandleCellClick = () => {
-  const [ref, setRef] = useState<React.RefObject<HTMLDivElement> | null>(null);
+  const [ref, setRef] = useState<React.RefObject<HTMLDivElement | null> | null>(
+    null,
+  );
   const [show, setIsShow] = useState<boolean>(false);
 
   const getLabel = (item: Item) => item.name;

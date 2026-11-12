@@ -3,12 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { useComponentSize } from '../useComponentSize/useComponentSize';
 
 type Props = {
-  currentRef: React.RefObject<HTMLElement>;
-  containerRef?: React.RefObject<HTMLElement> | Document | Window;
+  currentRef: React.RefObject<HTMLElement | null>;
+  containerRef?: React.RefObject<HTMLElement | null> | Document | Window;
 };
 
 const getMaxWidth = (
-  element: React.RefObject<HTMLElement> | HTMLElement | Document | Window,
+  element:
+    | React.RefObject<HTMLElement | null>
+    | HTMLElement
+    | Document
+    | Window,
 ): number => {
   if (element instanceof Window) {
     return element.outerWidth;

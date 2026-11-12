@@ -80,7 +80,7 @@ const StepsRender = (props: StepsProps, ref: React.Ref<HTMLDivElement>) => {
         {items.map((item, index) => (
           <StepsStep
             key={index}
-            ref={refs[index] as React.RefObject<HTMLButtonElement>}
+            ref={refs[index] as React.RefObject<HTMLButtonElement | null>}
             className={cnSteps('Item')}
             label={getItemLabel(item)}
             step={index + 1}

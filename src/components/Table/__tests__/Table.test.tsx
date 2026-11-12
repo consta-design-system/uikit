@@ -299,7 +299,7 @@ describe('Компонент Table', () => {
       it('добавление аттрибута с помощью ref', () => {
         const refAttrName = 'data-test-ref';
         const refAttrValue = 'test-ref';
-        const ref = { current: null } as React.RefObject<HTMLDivElement>;
+        const ref = { current: null } as React.RefObject<HTMLDivElement | null>;
         render(<Table {...defaultProps} ref={ref} data-testid={testId} />);
         if (ref.current) {
           ref.current.setAttribute(refAttrName, refAttrValue);

@@ -149,7 +149,7 @@ const ContextMenuLevelRender = (
       .map((item) => getKey(item))
       .reduce((a, v, index) => ({ ...a, [v]: refs[index] }), {}) as Record<
       string,
-      React.RefObject<HTMLDivElement>
+      React.RefObject<HTMLDivElement | null>
     >;
   }, [groupsProp, refs]);
 

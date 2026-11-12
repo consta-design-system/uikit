@@ -130,7 +130,7 @@ export type onCellClick = ({
   e: React.SyntheticEvent;
   type: CellClickType;
   columnIdx: number;
-  ref: React.RefObject<HTMLDivElement>;
+  ref: React.RefObject<HTMLDivElement | null>;
   rowId?: string;
 }) => void;
 

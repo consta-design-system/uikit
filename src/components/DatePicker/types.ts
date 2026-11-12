@@ -165,8 +165,10 @@ export type DatePickerProps<TYPE extends DatePickerPropType = 'date'> =
       withClearButton?: boolean;
       onDropdownOpen?: (isOpen: boolean) => void;
       dropdownOpen?: boolean;
-      ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
-      dropdownViewportRef?: React.RefObject<HTMLElement>;
+      ignoreOutsideClicksRefs?: ReadonlyArray<
+        React.RefObject<HTMLElement | null>
+      >;
+      dropdownViewportRef?: React.RefObject<HTMLElement | null>;
       dropdownContainer?: Element;
     },
     HTMLDivElement

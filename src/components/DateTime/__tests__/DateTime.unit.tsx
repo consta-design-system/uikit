@@ -68,7 +68,9 @@ describe('Компонент DateTime', () => {
           context.start(async () => {
             const refAttrName = 'data-test-ref';
             const refAttrValue = 'test-ref';
-            const ref = { current: null } as React.RefObject<HTMLDivElement>;
+            const ref = {
+              current: null,
+            } as React.RefObject<HTMLDivElement | null>;
             renderComponent(ctx, { type, view, ref });
             if (ref.current) {
               ref.current.setAttribute(refAttrName, refAttrValue);
