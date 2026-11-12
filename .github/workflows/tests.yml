@@ -16,7 +16,7 @@ concurrency:
 jobs:
   tests:
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -30,26 +30,35 @@ jobs:
       - name: Установка зависимостей
         run: yarn add "install-peers-cli@https://github.com/evless/install-peers-cli#fix-yarn-policies" && yarn --frozen-lockfile
 
-      # На Node 26 есть регрессия "hang at shutdown" (nodejs/node#64274):
-      # процесс не завершается после успешной установки chromium, из-за чего
-      # джоба зависала после шага `yarn playwright install chromium`.
-      # Обходные меры:
-      #  1) CLI playwright запускается напрямую через node, без обёртки yarn;
-      #  2) PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS пропускает запуск
-      #     браузера для валидации окружения после установки;
-      #  3) timeout убивает зависший процесс; код 124 (убит по таймауту)
-      #     считается успехом, т.к. к этому моменту установка уже прошла,
-      #     но реальная ошибка установки (другой код выхода) падает как раньше.
+      # На Node 26 установка playwright может зависать (регрессия
+      # "hang at shutdown", nodejs/node#64274), поэтому:
+      #  1) CLI запускается напрямую через node, без обёртки yarn;
+      #  2) ставится только chrome-headless-shell (--only-shell) — именно его
+      #     требует vitest в headless-режиме (см. browser.headless в vite.config.ts);
+      #  3) каждый запуск обёрнут в timeout, при зависании — повтор (до 3 раз);
+      #  4) после установки проверяем, что бинарник действительно на диске,
+      #     иначе шаг падает сразу, а не на тестах с непонятной ошибкой.
       #  Важно: шаги Actions выполняются с `bash -e -o pipefail`, поэтому
       #  используется `timeout ... || code=$?` — иначе скрипт упадёт
       #  с кодом 124, не дойдя до проверки.
-      - name: Установка chromium
+      #  5) таймаут 2м с запасом: обычно установка занимает секунд 20.
+      - name: Установка chromium (headless shell)
         run: |
-          code=0
-          PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 timeout 10m node ./node_modules/playwright/cli.js install chromium || code=$?
-          if [ "$code" -ne 0 ] && [ "$code" -ne 124 ]; then
-            exit "$code"
+          for i in 1 2 3; do
+            code=0
+            PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=1 DEBUG=pw:install timeout 2m node ./node_modules/playwright/cli.js install chromium --only-shell || code=$?
+            if [ "$code" -eq 0 ]; then
+              break
+            fi
+            echo "::warning::Попытка $i не удалась (код $code), повторяем..."
+          done
+
+          SHELL_BIN=$(find "$HOME/.cache/ms-playwright" -type f -path '*chrome-headless-shell*/chrome-headless-shell' | head -n 1)
+          if [ -z "$SHELL_BIN" ] || [ ! -x "$SHELL_BIN" ]; then
+            echo "chrome-headless-shell не установлен после установки (см. логи pw:install выше)"
+            exit 1
           fi
+          echo "Установлен: $SHELL_BIN"
 
       - name: Проверка TS
         run: yarn run test:ts
