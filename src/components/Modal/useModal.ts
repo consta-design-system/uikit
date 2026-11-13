@@ -23,7 +23,7 @@ export const useModal = ({
   onOpen: (() => void) | undefined;
   onClose: (() => void) | undefined;
   ref: React.ForwardedRef<HTMLDivElement>;
-  ignoreOutsideClicksRefs: React.RefObject<HTMLElement>[] | undefined;
+  ignoreOutsideClicksRefs: React.RefObject<HTMLElement | null>[] | undefined;
 }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const portalRef = useRef<HTMLDivElement | null>(null);

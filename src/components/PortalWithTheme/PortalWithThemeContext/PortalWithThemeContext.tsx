@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const Context = createContext<{
-  refs: React.RefObject<HTMLElement>[];
-  addRefs?: (ref: React.RefObject<HTMLElement>[]) => void;
+  refs: React.RefObject<HTMLElement | null>[];
+  addRefs?: (ref: React.RefObject<HTMLElement | null>[]) => void;
   zIndex?: number;
 }>({
   refs: [],
@@ -25,14 +25,14 @@ export const PortalWithThemeProvider: React.FC<{
   zIndex?: number;
   children?: React.ReactNode;
 }> = (props) => {
-  const [refs, setRefs] = useState<React.RefObject<HTMLElement>[]>([]);
+  const [refs, setRefs] = useState<React.RefObject<HTMLElement | null>[]>([]);
   const { addRefs: contextAddRefs } = usePortalContext();
 
   /**
    * функция для добавления рефов дочерних порталов
-   * @param {React.RefObject<HTMLElement>[]} addRef массив ссылок
+   * @param {React.RefObject<HTMLElement | null>[]} addRef массив ссылок
    */
-  const addRefs = (addRef: React.RefObject<HTMLElement>[]) => {
+  const addRefs = (addRef: React.RefObject<HTMLElement | null>[]) => {
     if (addRef.length > 0) {
       const newRefs = [
         ...refs.filter((item) => item.current),

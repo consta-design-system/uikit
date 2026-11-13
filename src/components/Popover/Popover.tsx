@@ -82,7 +82,7 @@ export type Position = { x: number; y: number } | undefined;
 
 export type PositioningProps =
   | {
-      anchorRef: React.RefObject<HTMLElement>;
+      anchorRef: React.RefObject<HTMLElement | null>;
       equalAnchorWidth?: boolean;
       position?: never;
     }
@@ -114,7 +114,7 @@ export type PopoverProps = PropsWithJsxAttributes<
 export type Props = PopoverProps; // удалить при мажоре
 
 const getOffset = (
-  ref: React.RefObject<HTMLDivElement>,
+  ref: React.RefObject<HTMLDivElement | null>,
   propOffset: PopoverPropOffset,
 ) => {
   if (isNumber(propOffset)) {

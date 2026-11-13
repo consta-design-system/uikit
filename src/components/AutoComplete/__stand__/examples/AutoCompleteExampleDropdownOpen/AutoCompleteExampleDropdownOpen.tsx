@@ -39,8 +39,8 @@ const Icon = withAnimateSwitcherHOC({
 export const AutoCompleteExampleDropdownOpen = () => {
   const [value, setValue] = useState<string | null>();
   const [open, setOpen] = useFlag();
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const onDropdownOpen = useCallback((open: boolean) => {
     setOpen.set(open);
     if (open) {

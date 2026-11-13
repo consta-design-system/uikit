@@ -34,10 +34,9 @@ const mapIconByStatus: Record<SnackBarItemStatus, IconComponent | undefined> = {
   warning: undefined,
 };
 
-function reducer(
-  state: Item[],
-  action: { type: 'add' | 'remove'; item: Item },
-): Item[] {
+type Action = { type: 'add' | 'remove'; item: Item };
+
+function reducer(state: Item[], action: Action): Item[] {
   switch (action.type) {
     case 'add':
       return [...state, action.item];
@@ -50,12 +49,7 @@ const getItemIcon = (item: Item) => mapIconByStatus[item.status];
 const getItemShowProgress = (item: Item) => item.progressMode;
 
 export const SnackBarExampleTimer: React.FC = () => {
-  const [items, dispatchItems] = useReducer<
-    React.Reducer<
-      Item[],
-      { type: 'add' | 'remove'; item: Item; key?: number | string }
-    >
-  >(reducer, []);
+  const [items, dispatchItems] = useReducer(reducer, []);
 
   const generateHandleAdd =
     (status: SnackBarItemStatus, progressMode?: SnackBarItemShowProgressProp) =>

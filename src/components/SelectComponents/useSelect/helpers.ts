@@ -33,7 +33,7 @@ export function useHoistedState(
 type ScrollToIndexFunctionType = (
   optionIndex: number,
   dropdownRef: React.MutableRefObject<HTMLDivElement | null>,
-  optionsRefs: React.RefObject<HTMLDivElement>[],
+  optionsRefs: React.RefObject<HTMLDivElement | null>[],
   onFailure: () => void,
 ) => void;
 

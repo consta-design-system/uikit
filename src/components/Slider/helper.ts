@@ -80,7 +80,7 @@ export type SliderPointProps = PropsWithHTMLAttributes<
     withTooltip?: boolean;
     handlePress?: (typeButton: ActiveButton) => void;
     buttonLabel?: ActiveButton;
-    buttonRef?: React.RefObject<HTMLButtonElement>;
+    buttonRef?: React.RefObject<HTMLButtonElement | null>;
     popoverPosition?: TrackPosition;
     tooltipFormatter?: SliderPropTooltipFormatter;
     onFocus?: (

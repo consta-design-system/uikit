@@ -7,8 +7,8 @@ type UseCalendarVisibleParams = {
   onDropdownOpen?: (isOpen: boolean) => void;
   dropdownOpen?: boolean;
   disabled?: boolean;
-  startRef: React.RefObject<HTMLInputElement>;
-  endRef?: React.RefObject<HTMLInputElement>;
+  startRef: React.RefObject<HTMLInputElement | null>;
+  endRef?: React.RefObject<HTMLInputElement | null>;
 };
 type UseFlagReturn = ReturnType<typeof useFlagWithDisabled>;
 type Return = [UseFlagReturn[0], UseFlagReturn[1]];

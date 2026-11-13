@@ -19,9 +19,13 @@ type HorizontalAlign = (typeof horizontalAlign)[number];
 const horizontalAlignDefault: HorizontalAlign = horizontalAlign[0];
 
 type UseFixed = (
-  layoutRef?: React.RefObject<HTMLElement> | null,
-  scrollContainer?: React.RefObject<HTMLElement> | null | HTMLElement | Window,
-  anchorRef?: React.RefObject<HTMLElement> | null,
+  layoutRef?: React.RefObject<HTMLElement | null> | null,
+  scrollContainer?:
+    | React.RefObject<HTMLElement | null>
+    | null
+    | HTMLElement
+    | Window,
+  anchorRef?: React.RefObject<HTMLElement | null> | null,
   verticalAlign?: VerticalAlign,
   horizontalAlign?: HorizontalAlign,
 ) => UseFixedData;
@@ -38,7 +42,7 @@ export type ElementStationing = {
 };
 
 type GetHTMLFunction = (
-  element: React.RefObject<HTMLElement> | HTMLElement | Window,
+  element: React.RefObject<HTMLElement | null> | HTMLElement | Window,
 ) => HTMLElement | Window | null;
 
 type PositioningElement = (

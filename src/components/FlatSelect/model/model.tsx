@@ -287,7 +287,9 @@ export const model = <
   );
 
   const getOptionRef = action((index: number) =>
-    wrap(optionsElsAtom()[index]?.set),
+    wrap((el: HTMLDivElement | null) => {
+      optionsElsAtom()[index]?.set(el);
+    }),
   );
 
   const scrollToHighlightedIndex = action(() => {

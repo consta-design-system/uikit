@@ -87,7 +87,7 @@ export type UserSelectProps<
     ariaLabel?: string;
     dropdownClassName?: string;
     status?: PropStatus;
-    dropdownRef?: React.RefObject<HTMLDivElement>;
+    dropdownRef?: React.RefObject<HTMLDivElement | null>;
     name?: string;
     items: ITEM[];
     required?: boolean;
@@ -97,7 +97,7 @@ export type UserSelectProps<
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
     onCreate?: (label: string, props: { e: React.SyntheticEvent }) => void;
-    inputRef?: React.RefObject<HTMLInputElement>;
+    inputRef?: React.RefObject<HTMLInputElement | null>;
     labelForNotFound?: string;
     labelForCreate?: string;
     labelForEmptyItems?: string;
@@ -124,8 +124,10 @@ export type UserSelectProps<
     onSearchValueChange?: (value: string) => void;
     onDropdownOpen?: (isOpen: boolean) => void;
     dropdownOpen?: boolean;
-    ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
-    dropdownViewportRef?: React.RefObject<HTMLElement>;
+    ignoreOutsideClicksRefs?: ReadonlyArray<
+      React.RefObject<HTMLElement | null>
+    >;
+    dropdownViewportRef?: React.RefObject<HTMLElement | null>;
     dropdownContainer?: Element;
   },
   HTMLDivElement

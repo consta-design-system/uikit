@@ -24,7 +24,7 @@ export type DateTimeGridProps = PropsWithJsxAttributes<
   {
     children?: never;
     items: Item[];
-    itemsRefs?: React.RefObject<HTMLDivElement>[];
+    itemsRefs?: React.RefObject<HTMLDivElement | null>[];
   },
   'div'
 >;
@@ -34,7 +34,7 @@ export const cnDateTimeGrid = cn('DateTimeGrid');
 const renderItem = (
   item: Item,
   index: number,
-  ref?: React.RefObject<HTMLDivElement>,
+  ref?: React.RefObject<HTMLDivElement | null>,
 ) => {
   if (typeof item === 'string') {
     return (

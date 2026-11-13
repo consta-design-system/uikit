@@ -107,7 +107,7 @@ export type NotificationProps<
     sortGroups?: NotificationPropSortGroups<ITEM, GROUP> | undefined;
     itemSpace?: MixSpaceProps;
     groupSpace?: MixSpaceProps;
-    scrollContainerRef?: React.RefObject<HTMLDivElement>;
+    scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
   } & (GROUP extends { id: NotificationDefaultGroup['id'] }
     ? {}
     : { getGroupId: NotificationPropGetGroupId<GROUP> }),

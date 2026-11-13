@@ -3,8 +3,8 @@ export const defaultLabelForCreate = '';
 export const defaultLabelForEmptyItems = 'Список пуст';
 
 export const getInputWidth = (
-  controlInnerRef: React.RefObject<HTMLDivElement>,
-  helperInputFakeElement: React.RefObject<HTMLDivElement>,
+  controlInnerRef: React.RefObject<HTMLDivElement | null>,
+  helperInputFakeElement: React.RefObject<HTMLDivElement | null>,
 ): number => {
   if (!controlInnerRef.current || !helperInputFakeElement.current) {
     return 20;

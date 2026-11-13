@@ -103,7 +103,7 @@ export type FlatSelectPropsInit<
     onInputFocus?: React.FocusEventHandler<HTMLInputElement>;
     onInputBlur?: React.FocusEventHandler<HTMLInputElement>;
     onCreate?: FlatSelectPropOnCreate;
-    inputRef?: React.Ref<HTMLInputElement>;
+    inputRef?: React.Ref<HTMLInputElement | null>;
     input?: boolean;
     inputValue?: string;
     inputDefaultValue?: string;
@@ -126,7 +126,9 @@ export type FlatSelectPropsInit<
     onOpen?: (isOpen: boolean) => void;
     isOpen?: boolean;
     listClassName?: string;
-    ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
+    ignoreOutsideClicksRefs?: ReadonlyArray<
+      React.RefObject<HTMLElement | null>
+    >;
     clearButton?: boolean;
     iconClear?: IconComponent;
     iconLeft?: IconComponent;
@@ -135,11 +137,11 @@ export type FlatSelectPropsInit<
     footer?: React.ReactNode;
     view?: FieldPropView;
     bordered?: boolean;
-    anchorRef?: React.RefObject<HTMLElement>;
+    anchorRef?: React.RefObject<HTMLElement | null>;
     direction?: Direction;
     spareDirection?: Direction;
     possibleDirections?: Direction[];
-    viewportRef?: React.RefObject<HTMLElement>;
+    viewportRef?: React.RefObject<HTMLElement | null>;
     container?: Element;
   },
   HTMLDivElement

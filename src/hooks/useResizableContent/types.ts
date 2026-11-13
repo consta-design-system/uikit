@@ -3,7 +3,7 @@ import React from 'react';
 export type UseResizableContentPropDirection = 'vertical' | 'horizontal';
 
 export type UseResizableContentRef = {
-  ref: React.RefObject<HTMLElement>;
+  ref: React.RefObject<HTMLElement | null>;
   maxHeight?: number;
   minHeight?: number;
   maxWidth?: number;
@@ -13,9 +13,9 @@ export type UseResizableContentRef = {
 export type UseResizableContentSize = { width?: number; height?: number };
 
 type UseResizableContentProps = {
-  blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement>>;
+  blocks: Array<UseResizableContentRef | React.RefObject<HTMLElement | null>>;
   direction?: UseResizableContentPropDirection;
-  container: React.RefObject<HTMLElement>;
+  container: React.RefObject<HTMLElement | null>;
   isActive?: boolean;
 };
 

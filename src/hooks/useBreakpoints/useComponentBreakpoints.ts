@@ -11,7 +11,7 @@ export const useComponentBreakpoints = <POINTS extends string>({
   map,
   isActive,
 }: {
-  ref?: React.RefObject<HTMLElement | SVGGraphicsElement>;
+  ref?: React.RefObject<HTMLElement | SVGGraphicsElement | null>;
   map: Map<POINTS>;
   isActive?: boolean;
 }) => {

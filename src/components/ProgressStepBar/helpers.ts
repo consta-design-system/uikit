@@ -66,7 +66,7 @@ export const getItemPosition = (index: number, length: number) => {
   return position;
 };
 
-const getRefSize = (ref: React.RefObject<HTMLElement>) => {
+const getRefSize = (ref: React.RefObject<HTMLElement | null>) => {
   if (ref.current) {
     const { width, height } = ref.current.getBoundingClientRect();
     return [width, height];
@@ -75,7 +75,7 @@ const getRefSize = (ref: React.RefObject<HTMLElement>) => {
 };
 
 export const calculateLines = (
-  refs: React.RefObject<HTMLElement>[],
+  refs: React.RefObject<HTMLElement | null>[],
   direction: ProgressStepBarPropDirection,
 ) => {
   const sizes: number[] = [];

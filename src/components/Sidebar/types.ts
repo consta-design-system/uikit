@@ -31,11 +31,11 @@ export type SidebarProps = PropsWithHTMLAttributesAndRef<
     size?: SidebarPropSize;
     rootClassName?: string;
     children?: React.ReactNode;
-    container?: HTMLDivElement | React.RefObject<HTMLDivElement>;
+    container?: HTMLDivElement | React.RefObject<HTMLDivElement | null>;
     afterClose?: () => void;
-    ignoreOutsideClicksRefs?: React.RefObject<HTMLElement>[];
+    ignoreOutsideClicksRefs?: React.RefObject<HTMLElement | null>[];
     border?: boolean;
-    scrollContainerRef?: React.RefObject<HTMLDivElement>;
+    scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
   },
   HTMLDivElement
 >;

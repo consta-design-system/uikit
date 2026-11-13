@@ -67,7 +67,7 @@ export type SelectProps<
     placeholder?: string;
     ariaLabel?: string;
     dropdownClassName?: string;
-    dropdownRef?: React.RefObject<HTMLDivElement>;
+    dropdownRef?: React.RefObject<HTMLDivElement | null>;
     required?: boolean;
     name?: string;
     isLoading?: boolean;
@@ -77,7 +77,7 @@ export type SelectProps<
     renderValue?: PropRenderValue<ITEM>;
     onFocus?: React.FocusEventHandler<HTMLInputElement>;
     onBlur?: React.FocusEventHandler<HTMLInputElement>;
-    inputRef?: React.RefObject<HTMLInputElement>;
+    inputRef?: React.RefObject<HTMLInputElement | null>;
     groups?: GROUP[];
     getItemLabel?: SelectPropGetItemLabel<ITEM>;
     getItemKey?: SelectPropGetItemKey<ITEM>;
@@ -93,8 +93,10 @@ export type SelectProps<
     onScrollToBottom?: (length: number) => void;
     onDropdownOpen?: (isOpen: boolean) => void;
     dropdownOpen?: boolean;
-    ignoreOutsideClicksRefs?: ReadonlyArray<React.RefObject<HTMLElement>>;
-    dropdownViewportRef?: React.RefObject<HTMLElement>;
+    ignoreOutsideClicksRefs?: ReadonlyArray<
+      React.RefObject<HTMLElement | null>
+    >;
+    dropdownViewportRef?: React.RefObject<HTMLElement | null>;
     dropdownContainer?: Element;
   },
   HTMLDivElement

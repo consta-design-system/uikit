@@ -83,7 +83,9 @@ export const List: ListComponent = (props) => {
       size,
       onClick: handleClick,
       innerOffset,
-      ref: (getItemRef?.(item) as React.RefObject<HTMLDivElement>) || undefined,
+      ref:
+        (getItemRef?.(item) as React.RefObject<HTMLDivElement | null>) ||
+        undefined,
       space: itemSpace,
       className: getItemAdditionalClassName?.(item),
     };

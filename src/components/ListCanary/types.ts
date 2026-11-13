@@ -116,7 +116,7 @@ export type ListPropGetGroupRightSide<GROUP> = (
 
 export type ListPropGetItemRef<ITEM> = (
   item: ITEM,
-) => React.RefObject<HTMLElement> | undefined;
+) => React.RefObject<HTMLElement | null> | undefined;
 
 export type ListProps<ITEM = DefaultListItem, GROUP = DefaultListGroup> = {
   size?: ListPropSize;

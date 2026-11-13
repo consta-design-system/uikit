@@ -22,7 +22,7 @@ import { useVariants } from '../useVariants/useVariants';
 type ContextMenuState = {
   [key: string]: {
     isOpen: boolean;
-    ref: React.RefObject<HTMLButtonElement>;
+    ref: React.RefObject<HTMLButtonElement | null>;
   };
 };
 

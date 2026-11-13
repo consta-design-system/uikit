@@ -11,7 +11,7 @@ import { PaginationPropSize } from '../types';
 const cnPaginationSizeCalculateHelper = cn('PaginationSizeCalculateHelper');
 
 export const PaginationSizeCalculateHelper: React.FC<{
-  refs: React.RefObject<HTMLDivElement>[];
+  refs: React.RefObject<HTMLDivElement | null>[];
   size: PaginationPropSize;
 }> = ({ refs, size }) => (
   <div className={cnPaginationSizeCalculateHelper()}>
