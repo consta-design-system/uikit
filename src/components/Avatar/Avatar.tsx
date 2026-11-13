@@ -1,9 +1,13 @@
 import './Avatar.css';
 
-import React, { useMemo } from 'react';
+import { computed } from '@reatom/core';
+import React from 'react';
+
+import { factoryComponent } from '##/utils/state';
+import { AsTags } from '##/utils/types/AsTags';
+import { PropsWithAsAttributes } from '##/utils/types/PropsWithAsAttributes';
 
 import { cn } from '../../utils/bem';
-import { forwardRefWithAs } from '../../utils/types/PropsWithAsAttributes';
 import {
   getColorIndexForName,
   getInitialsForName,
@@ -18,55 +22,65 @@ export const avatarPropForm = ['round', 'brick', 'default'] as const;
 export type AvatarPropForm = (typeof avatarPropForm)[number];
 export const avatarPropFormDefault: AvatarPropForm = avatarPropForm[0];
 
-type Props = {
-  url?: string;
-  name?: string;
-  size?: AvatarPropSize;
-  form?: AvatarPropForm;
-  children?: never;
-  monochrome?: boolean;
-};
+export type AvatarProps<AS extends AsTags = 'div'> = PropsWithAsAttributes<
+  {
+    url?: string;
+    name?: string;
+    size?: AvatarPropSize;
+    form?: AvatarPropForm;
+    children?: never;
+    monochrome?: boolean;
+  },
+  AS
+>;
+
+export type AvatarComponent = <AS extends AsTags = 'div'>(
+  props: AvatarProps<AS>,
+) => React.ReactNode | null;
 
 export const cnAvatar = cn('Avatar');
 
-export const Avatar = forwardRefWithAs<Props>((props, ref) => {
-  const {
-    as = 'div',
-    className,
-    size = avatarPropSizeDefault,
-    form = avatarPropFormDefault,
-    url,
-    name,
-    monochrome,
-    style,
-    ...otherProps
-  } = props;
-  const Tag = as as string;
-  const initials = useMemo(() => getInitialsForName(name), [name]);
-  const colorIndex = useMemo(
-    () => getColorIndexForName(name, MAX_COLOR_INDEX, monochrome),
-    [name, monochrome],
-  );
+export const Avatar = factoryComponent<HTMLDivElement, AvatarProps>(
+  (_, propsAtom) => {
+    const nameAtom = computed(() => propsAtom().name);
+    const monochromeAtom = computed(() => propsAtom().monochrome);
+    const initialsAtom = computed(() => getInitialsForName(nameAtom()));
 
-  return (
-    <Tag
-      {...otherProps}
-      style={
-        !url
-          ? {
-              ...style,
-              ['--avatar-color' as string]: `var(--avatar-color-${colorIndex})`,
-            }
-          : style
-      }
-      className={cnAvatar(
-        { size, form, monochrome: url ? monochrome : undefined },
-        [className],
-      )}
-      ref={ref}
-    >
-      {url && <img className={cnAvatar('Image')} src={url} alt={name} />}
-      {!url && initials}
-    </Tag>
-  );
-});
+    const colorIndexAtom = computed(() =>
+      getColorIndexForName(nameAtom(), MAX_COLOR_INDEX, monochromeAtom()),
+    );
+
+    return ({
+      as: Tag = 'div',
+      className,
+      size = avatarPropSizeDefault,
+      form = avatarPropFormDefault,
+      url,
+      name,
+      monochrome,
+      style,
+      ref,
+      ...otherProps
+    }) => (
+      <Tag
+        {...otherProps}
+        style={
+          !url
+            ? {
+                ...style,
+                ['--avatar-color' as string]: `var(--avatar-color-${colorIndexAtom()})`,
+              }
+            : style
+        }
+        className={cnAvatar(
+          { size, form, monochrome: url ? monochrome : undefined },
+          [className],
+        )}
+        ref={ref}
+      >
+        {url && <img className={cnAvatar('Image')} src={url} alt={name} />}
+        {!url && initialsAtom()}
+      </Tag>
+    );
+  },
+) as AvatarComponent;
