@@ -2589,13 +2589,13 @@
   resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-1.7.1.tgz#438d6fc7cb20ac1db67cc9502aa06eb83682ac62"
   integrity sha512-ZFngpjo9MlVyNnRU0SJqg2kbzHmh41ydqCYLOWokvhPjlgqUS7W+R38+dHSpIMyMe33wKBvF8LciSqhGwmuP9w==
 
-"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@8fd3fe4":
+"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@73a81c3":
   version "0.0.163-alpha"
-  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@8fd3fe4#992428e6f9bf1663da0166cb2e472e8e23c3a8a7"
+  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@73a81c3#2f42112f63d3a00246fb3e21dbaaea2c72c530c0"
   dependencies:
     "@consta/header" "^3.1.0"
     "@consta/icons" "^1.7.1"
-    "@consta/uikit" "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@c54c147"
+    "@consta/uikit" "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@55b1010"
     "@mdx-js/loader" "^2.3.0"
     "@mdx-js/react" "^2.3.0"
     "@oclif/command" "^1.8.22"
@@ -2607,7 +2607,6 @@
     "@svgr/plugin-prettier" "^6.5.1"
     "@svgr/plugin-svgo" "^6.5.1"
     "@svgr/webpack" "^6.5.1"
-    "@types/react-syntax-highlighter" "^15.5.13"
     autoprefixer "^10.4.4"
     babel-jest "^27.4.2"
     babel-loader "^8.2.4"
@@ -2663,9 +2662,9 @@
   version "0.8.1"
   resolved "https://pkg.pr.new/consta-design-system/table/@consta/table@1a34b67#782f7623acbc69a5854822fd31a6a904281d279b"
 
-"@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@c54c147":
+"@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@55b1010":
   version "5.34.0-alpha.2"
-  resolved "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@c54c147#6a8e13fe630920daa6d3359b9dd1f5f9a0c2e371"
+  resolved "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@55b1010#4c8ea10bcc1cdf0252e02a9de2f5bec287c15fc1"
 
 "@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@d48dc46":
   version "5.34.0-alpha.2"
@@ -4765,19 +4764,12 @@
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-19.3.0.tgz#90294a9266efd928a5266f2110d60d5dba5015d2"
   integrity sha512-ZI7bU42mZXXKHn/qNLEw2IrbiINU7X5+vfgdixBHkCNpYWXjKgfQ/P+uyGb5CjOLB9UcnTeg3rylQtV2hym44Q==
 
-"@types/react-syntax-highlighter@^15.5.13":
-  version "15.5.13"
-  resolved "https://registry.yarnpkg.com/@types/react-syntax-highlighter/-/react-syntax-highlighter-15.5.13.tgz#c5baf62a3219b3bf28d39cfea55d0a49a263d1f2"
-  integrity sha512-uLGJ87j6Sz8UaBAooU0T6lWJ0dBmjZgN1PZTrj05TNql2/XpC6+4HhMT5syIdFUUt+FASfCeLLv4kBygNU+8qA==
-  dependencies:
-    "@types/react" "*"
-
 "@types/react-transition-group@^4.4.12":
   version "4.4.12"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.12.tgz#b5d76568485b02a307238270bfe96cb51ee2a044"
   integrity sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w==
 
-"@types/react@*", "@types/react@>=16":
+"@types/react@>=16":
   version "18.0.15"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.15.tgz#d355644c26832dc27f3e6cbf0c4f4603fc4ab7fe"
   integrity sha512-iz3BtLuIYH1uWdsv6wXYdhozhqj20oD4/Hk2DNXIn1kFsmp9x8d9QB6FnPhfkbhd2PgEONt9Q1x/ebkwjfFLow==
@@ -16149,7 +16141,7 @@ react-syntax-highlighter@^15.5.0:
     prismjs "^1.27.0"
     refractor "^3.6.0"
 
-"react@>= 19.2.7":
+react@^19.3.1:
   version "19.3.1"
   resolved "https://registry.yarnpkg.com/react/-/react-19.3.1.tgz#26e9523fc36ea06be5050ebb780249a133260ad7"
   integrity sha512-QNhWdt7nrgVWWQG58QuGsAR3jv3Hbe4mb4vz7w2csnHavciZJgda1CPNaldF6eVxv90ud3jUXpKlHL69gO38yw==
