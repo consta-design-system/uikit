@@ -10,7 +10,7 @@ import {
 
 Миксин `MixPopoverAnimate` добавляет анимацию к выпадающим элементам. Вы можете его использовать, если создаёте новый компонент, в котором есть выпадающий элемент.
 
-Миксин можно применить к компонентам из библиотеки [react-transition-group](http://reactcommunity.org/react-transition-group/).
+Миксин можно применить к компонентам из `@consta/uikit/Transition`.
 
 ## Свойства
 
@@ -25,8 +25,7 @@ import {
 
 ```tsx
 import React, { useRef, useState } from 'react';
-import { Transition } from 'react-transition-group';
-
+import { Transition } from '@consta/uikit/Transition';
 import { Button } from '@consta/uikit/Button';
 import { Direction, Popover } from '@consta/uikit/Popover';
 import { useFlag } from '@consta/uikit/useFlag';
@@ -38,25 +37,18 @@ import {
 
 export const MixPopoverAnimateExampleRenderFn = () => {
   const [open, setOpen] = useFlag();
-  const popoverRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <>
       <Button label="Нажми" onClick={setOpen.toggle} ref={buttonRef} />
-      <Transition
-        in={open}
-        unmountOnExit
-        timeout={animateTimeout}
-        nodeRef={popoverRef}
-      >
+      <Transition in={open} unmountOnExit timeout={animateTimeout}>
         {(animate) => {
           return (
             <Popover
               className={cnMixPopoverAnimate({ animate })}
               offset="xs"
               anchorRef={buttonRef}
-              ref={popoverRef}
               direction="downStartLeft"
             >
               я появился плавно <br /> c анимацией 🔥

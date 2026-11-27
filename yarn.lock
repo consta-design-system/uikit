@@ -2584,17 +2584,16 @@
   resolved "https://registry.yarnpkg.com/@consta/header/-/header-3.1.0.tgz#a2937c58af238b7453a253c81c706dc2805c6688"
   integrity sha512-wo5ayLZPa9Xthv1lWBlAYVERA7AShQ0gLUxrdpbQjnYSyqQ9lPFjKF5TRMaceIcI8xVDru40EngarHTZtPL+Qg==
 
-"@consta/icons@^1.7.1":
+"@consta/icons@https://pkg.pr.new/consta-design-system/icons/@consta/icons@894ff92":
   version "1.7.1"
-  resolved "https://registry.yarnpkg.com/@consta/icons/-/icons-1.7.1.tgz#438d6fc7cb20ac1db67cc9502aa06eb83682ac62"
-  integrity sha512-ZFngpjo9MlVyNnRU0SJqg2kbzHmh41ydqCYLOWokvhPjlgqUS7W+R38+dHSpIMyMe33wKBvF8LciSqhGwmuP9w==
+  resolved "https://pkg.pr.new/consta-design-system/icons/@consta/icons@894ff92#2fe5484814cbb108e843d4430534dddf5b165ceb"
 
-"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@73a81c3":
+"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@6fbf971":
   version "0.0.163-alpha"
-  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@73a81c3#2f42112f63d3a00246fb3e21dbaaea2c72c530c0"
+  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@6fbf971#8c37572278d5aea99b824eb1a9be06763d283b1f"
   dependencies:
     "@consta/header" "^3.1.0"
-    "@consta/icons" "^1.7.1"
+    "@consta/icons" "https://pkg.pr.new/consta-design-system/icons/@consta/icons@894ff92"
     "@consta/uikit" "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@55b1010"
     "@mdx-js/loader" "^2.3.0"
     "@mdx-js/react" "^2.3.0"
@@ -2658,9 +2657,9 @@
     webpack-manifest-plugin "^5.0.0"
     workbox-webpack-plugin "^6.4.1"
 
-"@consta/table@https://pkg.pr.new/consta-design-system/table/@consta/table@1a34b67":
+"@consta/table@https://pkg.pr.new/consta-design-system/table/@consta/table@d6eb218":
   version "0.8.1"
-  resolved "https://pkg.pr.new/consta-design-system/table/@consta/table@1a34b67#782f7623acbc69a5854822fd31a6a904281d279b"
+  resolved "https://pkg.pr.new/consta-design-system/table/@consta/table@d6eb218#3513d3a0d809161bacf3b0f63f8edecb1b784b2c"
 
 "@consta/uikit@https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@55b1010":
   version "5.34.0-alpha.2"
@@ -4763,11 +4762,6 @@
   version "19.3.0"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-19.3.0.tgz#90294a9266efd928a5266f2110d60d5dba5015d2"
   integrity sha512-ZI7bU42mZXXKHn/qNLEw2IrbiINU7X5+vfgdixBHkCNpYWXjKgfQ/P+uyGb5CjOLB9UcnTeg3rylQtV2hym44Q==
-
-"@types/react-transition-group@^4.4.12":
-  version "4.4.12"
-  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.12.tgz#b5d76568485b02a307238270bfe96cb51ee2a044"
-  integrity sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w==
 
 "@types/react@>=16":
   version "18.0.15"
