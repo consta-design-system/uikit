@@ -2584,16 +2584,16 @@
   resolved "https://registry.yarnpkg.com/@consta/header/-/header-3.1.0.tgz#a2937c58af238b7453a253c81c706dc2805c6688"
   integrity sha512-wo5ayLZPa9Xthv1lWBlAYVERA7AShQ0gLUxrdpbQjnYSyqQ9lPFjKF5TRMaceIcI8xVDru40EngarHTZtPL+Qg==
 
-"@consta/icons@https://pkg.pr.new/consta-design-system/icons/@consta/icons@894ff92":
+"@consta/icons@https://pkg.pr.new/consta-design-system/icons/@consta/icons@135cb19":
   version "1.7.1"
-  resolved "https://pkg.pr.new/consta-design-system/icons/@consta/icons@894ff92#2fe5484814cbb108e843d4430534dddf5b165ceb"
+  resolved "https://pkg.pr.new/consta-design-system/icons/@consta/icons@135cb19#2fe5484814cbb108e843d4430534dddf5b165ceb"
 
-"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@6fbf971":
+"@consta/stand@https://pkg.pr.new/consta-design-system/stand/@consta/stand@f518ce1":
   version "0.0.163-alpha"
-  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@6fbf971#8c37572278d5aea99b824eb1a9be06763d283b1f"
+  resolved "https://pkg.pr.new/consta-design-system/stand/@consta/stand@f518ce1#6eb160c87248829c0fee5a12531eb73efe649c55"
   dependencies:
     "@consta/header" "^3.1.0"
-    "@consta/icons" "https://pkg.pr.new/consta-design-system/icons/@consta/icons@894ff92"
+    "@consta/icons" "https://pkg.pr.new/consta-design-system/icons/@consta/icons@135cb19"
     "@consta/uikit" "https://pkg.pr.new/consta-design-system/uikit/@consta/uikit@55b1010"
     "@mdx-js/loader" "^2.3.0"
     "@mdx-js/react" "^2.3.0"
